@@ -1,26 +1,27 @@
 ---
 layout: classic-docs
-title: "Workflows not Starting"
-short-title: "Workflows not Starting"
-description: "Workflow doesn't appear to be building or starting"
+title: "ワークフローが起動しない"
+short-title: "ワークフローが起動しない"
+description: "ワークフローのビルドまたは起動が行われていないように見える"
 categories:
   - troubleshooting
 order: 1
 ---
-When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
 
-Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
+ワークフロー設定の作成時または修正時に、新しいジョブが表示されない場合は、`config.yml` に設定エラーが発生している可能性があります。
 
-When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
+ワークフローがトリガーされないのは、主に設定エラーによってワークフローの起動が妨げられていることが原因です。 そのため、ワークフローがジョブを開始しない事態が発生します。
 
-A project's Job page URL looks like this:
+現在、ワークフローの設定時に設定エラーを確認するには、CircleCI アプリケーションの *ジョブページではなく*、ワークフローページをチェックする必要があります。
+
+プロジェクトのジョブページの URL は、以下のとおりです。
 
 `https://circleci.com/:VCS/:ORG/:PROJECT`
 
-A Workflow page URL looks like this:
+ワークフローページの URL は、以下のとおりです。
 
 `https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
 
-Look for Workflows that have a yellow tag and "Needs Setup" for the text.
+「Needs Setup (要セットアップ)」と記載された黄色のタグが付いたワークフローを探します。
 
-![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
+![無効なワークフロー設定の例]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
