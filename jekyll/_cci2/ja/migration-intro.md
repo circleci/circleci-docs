@@ -1,29 +1,31 @@
 ---
 layout: classic-docs
-title: "Migration"
-short-title: "Migration"
-description: "CircleCI 2.0 Migration Introduction"
+title: "移行"
+short-title: "移行"
+description: "CircleCI 2.0 への移行の概要"
 categories:
   - migration
 order: 1
 ---
-Get started by reviewing tips and tricks for migration, learning about the config-translator, and getting specific tutorials for your platform.
 
-- [Migrating from Travis CI]({{ site.baseurl }}/2.0/migrating-from-travis/)
-- [Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/)
 
-<hr />
+CircleCI 2.0 に移行する前に、移行のヒントとテクニック、コンフィグの変換ツールについて学習し、お使いのプラットフォーム用のチュートリアルを参照しておきましょう。
 
-| Config Intro                                                                                                                                                                     | Scripts                                                                                                                                                                                                              |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Get an introduction to [CircleCI 2.0 Config]({{ site.baseurl }}/2.0/config-intro/) `.circleci/config.yml`.                                                                       | Get the [script to find projects still using 1.0](https://github.com/CircleCI-Public/find-circle-yml) or to [generate a 2.0 config from your project](https://github.com/CircleCI-Public/circleci-config-generator). |
-|                                                                                                                                                                                  |                                                                                                                                                                                                                      |
-| **Tips for Migrating**                                                                                                                                                           | **Config Translation**                                                                                                                                                                                               |
-| Get the list of [tips and tricks]({{ site.baseurl }}/2.0/migration/) for migrating from CircleCI 1.0 to 2.0 and check out the [FAQ]({{ site.baseurl }}/2.0/faq/).                | Use the [config-translation]({{ site.baseurl }}/2.0/config-translation/) endpoint to get started with migrating to 2.0.                                                                                              |
-|                                                                                                                                                                                  |                                                                                                                                                                                                                      |
-| **iOS Migration**                                                                                                                                                                | **Linux Migration**                                                                                                                                                                                                  |
-| Get an introduction to [migrating your iOS project]({{ site.baseurl }}/2.0/ios-migrating-from-1-2/) `circle.yml` to `.circleci/config.yml` for applications that build on macOS. | Get the basics of [migrating your Linux application]({{ site.baseurl }}/2.0/migrating-from-1-2/) `circle.yml` to `.circleci/config.yml`.                                                                             |
+- [Travis CI からの移行]({{ site.baseurl }}/2.0/migrating-from-travis/)
+- [Jenkins からの移行]({{ site.baseurl }}/2.0/migrating-from-jenkins/)
 
 <hr />
 
-![CircleCI about image]({{ site.baseurl }}/assets/img/docs/migrate.png)
+| コンフィグの概要                                                                                                                                  | スクリプト                                                                                                                                                                                |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [CircleCI 2.0 のコンフィグ]({{ site.baseurl }}/ja/2.0/config-intro/) `.circleci/config.yml` の概要                                                 | [まだ 1.0 を使用しているプロジェクトを見つけるスクリプト](https://github.com/CircleCI-Public/find-circle-yml)、[現在のプロジェクトから 2.0 コンフィグを生成するスクリプト](https://github.com/CircleCI-Public/circleci-config-generator) |
+|                                                                                                                                           |                                                                                                                                                                                      |
+| **移行のヒント**                                                                                                                                | **コンフィグの変換**                                                                                                                                                                         |
+| CircleCI 1.0 から 2.0 への移行に関するさまざまな[ヒントとテクニック]({{ site.baseurl }}/ja/2.0/migration/)、[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq/)              | [config-translation]({{ site.baseurl }}/ja/2.0/config-translation/) エンドポイントを使用して 2.0 への移行を開始する方法                                                                                     |
+|                                                                                                                                           |                                                                                                                                                                                      |
+| **iOS での移行**                                                                                                                              | **Linux での移行**                                                                                                                                                                       |
+| macOS 上でビルドしたアプリケーションの `circle.yml` を `.circleci/config.yml` に変換して [iOS プロジェクトを移行する]({{ site.baseurl }}/ja/2.0/ios-migrating-from-1-2/)方法 | `circle.yml` から `.circleci/config.yml` への [Linux アプリケーションの移行]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)に関する基本事項                                                                 |
+
+<hr />
+
+![CircleCI のコンセプトイメージ]({{ site.baseurl }}/assets/img/docs/migrate.png)
