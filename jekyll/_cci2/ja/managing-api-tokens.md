@@ -1,51 +1,52 @@
 ---
 layout: classic-docs
-title: "Managing API Tokens"
-short-title: "Managing API Tokens"
-description: "How to assign scoped tokens for using the CircleCI API"
+title: "API トークンの管理"
+short-title: "API トークンの管理"
+description: "CircleCI の API を使用するためにスコープ付きトークンを割り当てる方法"
 order: 20
 ---
-To use the CircleCI API or view details about a build, you will need API tokens with the appropriate permissions. This document describes the types of API tokens, as well as how to create and delete them.
 
-## Overview
+CircleCI のAPI を使用したり、ビルドの詳細を確認したりするには、適切な権限を持つ API トークンが必要です。 ここでは、API トークンの種類と、トークンを作成および削除する方法について説明します。
 
-There are two types of API tokens you can create within CircleCI.
+## 概要
 
-1. **Personal**: These tokens are used to interact with the CircleCI API and grant full read and write permissions.
-2. **Project**: These tokens provide information about specific projects and only grant read permissions. Project tokens have three scope options: *Status*, *Build Artifacts*, and *All*. 
-    - *Status* tokens grant read access to the project's build statuses. Useful for [embedding status badges]({{ site.baseurl }}/2.0/status-badges/).
-    - *Build Artifacts* tokens grant read access to the project's build artifacts.
-    - *All* tokens grant read access for the project's build statuses and build artifacts.
+CircleCI では 2種類の API トークンを作成できます。
 
-**Note**: API tokens cannot be modifed after they have been created. The only way to change existing tokens is to delete and recreate them.
+1. **パーソナル：**このトークンは CircleCI API とのやり取りに使用され、完全な読み取りアクセス権と書き込みアクセス権を付与します。
+2. **プロジェクト**：このトークンは、特定のプロジェクトに関する情報を提供し、読み取りアクセス権のみを付与します。 プロジェクトトークンには、*Status*、*Build Artifacts*、*All* の 3つのスコープオプションがあります。 
+    - *Status* トークン：プロジェクトのビルドステータスへの読み取りアクセス権を付与します。 [ステータスバッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)際に便利です。
+    - *Build Artifacts* トークン：プロジェクトのビルドアーティファクトへの読み取りアクセス権を付与します。
+    - *All* トークン：プロジェクトのビルドステータスおよびビルドアーティファクトへの読み取りアクセス権を付与します。
 
-### Creating a Personal API Token
+**メモ：**API トークンは、一度作成すると修正できません。 既存のトークンを変更するには、いったん削除してから再作成する必要があります。
 
-1. In the CircleCI application, go to your [User settings](https://circleci.com/account){:rel="nofollow"}.
-2. Click [Personal API Tokens](https://circleci.com/account/api){:rel="nofollow"}.
-3. Click the **Create New Token** button.
-4. In the **Token name** field, type a memorable name for the token.
-5. Click the **Add API Token** button.
-6. After the token appears, copy and paste it to another location. You will not be able to view the token again.
+### パーソナル API トークンの作成
 
-To delete a personal API token, click the X in the **Remove** column.
+1. CircleCI アプリケーションで、[ユーザー設定](https://circleci.com/account){:rel="nofollow"}に移動します。
+2. [[Personal API Tokens (パーソナル API トークン)](https://circleci.com/account/api)]{:rel="nofollow"} をクリックします。
+3. **[Create New Token (新しいトークンを作成する)]** ボタンをクリックします。
+4. **[Token name (トークン名)]** フィールドに、覚えやすいトークン名を入力します。
+5. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
+6. トークンが表示されたら、別の場所にコピー＆ペーストします。 トークンを再度表示することはできません。
 
-### Creating a Project API Token
+パーソナル API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。
 
-1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
-2. In the **Permissions** section, click on **API Permissions**.
-3. Click the **Create Token** button.
-4. Choose a scope from the dropdown menu.
-5. In the **Token Label** field, type a memorable label for the token.
-6. Click the **Add Token** button.
+### プロジェクト API トークンの作成
 
-To delete a project API token, click the X in the **Remove** column. When the confirmation window appears, click the **Remove** button.
+1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
+2. **[Permissions (権限)]** セクションで、**[API Permissions (API の権限)]** をクリックします。
+3. **[Create Token (トークンを作成する)]** ボタンをクリックします。
+4. ドロップダウンメニューからスコープを選択します。
+5. **[Token Label (トークンラベル)]** フィールドに、覚えやすいラベルを入力します。
+6. **[Add Token (トークンを追加する)]** ボタンをクリックします。
 
-## Next Steps
+プロジェクト API トークンを削除するには、**[[Remove (削除する)]** 列の [X] をクリックします。 確認ウィンドウが表示されたら、**[Remove (削除する)]** ボタンをクリックします。
 
-API tokens are not useful unless you do something with them. Here are a few ideas:
+## 次のステップ
 
-- [Embed Build Status Badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README or other external page.
-- [Trigger Conditional Jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
-- [Download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
-- [Inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-the-api) into a build.
+API トークンは何らかの作業に活用されて初めて、その効力を発揮します。 たとえば以下のような用途が考えられます。
+
+- プロジェクトの README などの外部ページに[ビルドステータスバッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)
+- [ジョブを条件付きでトリガーする]({{ site.baseurl }}/ja/2.0/api-job-trigger/)
+- [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/ja/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード)
+- ビルドに[環境変数をインジェクトする]({{ site.baseurl }}/ja/2.0/env-vars/#api-を使って環境変数をインジェクトする方法)
