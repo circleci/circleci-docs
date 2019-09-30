@@ -21,6 +21,7 @@ A collection best practices and strategies for authoring orbs. CircleCI orbs are
 - Define any prerequisites such as obtaining an API key in the description.
 - Be consistent and concise in naming your orb elements. For example, don't mix "kebab case" and "snake case."
 
+
 ### Examples
 
 - Must have at least 1 example.
@@ -37,12 +38,21 @@ A collection best practices and strategies for authoring orbs. CircleCI orbs are
 - All commands available to the user should complete a full task. Do not create a command for the sole purpose of being a “partial” to another command unless it can be used on its own.
 - It is possible not all CLI commands need to be transformed into an orb command. Single line commands with no parameters do not necessarily need to have an orb command alias.
 - Command descriptions should call out any dependencies or assumptions, particularly if you intend for the command to run outside of a provided executor in your orb.
+- It is a good idea to check for the existance of required parameters, environment variables or other dependancies as a part of your command.
+
+example:
+```
+if [ -z "$<<parameters.SECRET_API_KEY>>" ]; then
+  echo "Error: The parameter SECRET_API_KEY is empty. Please ensure the environment variable <<parameters.SECRET_API_KEY>> has been added."
+  exit 1
+fi
+```
 
 ### Parameters
 
-When possible, use defaults for parameters unless a user input is essential. Utilize the [“env_var_name” parameter type](https://circleci.com/docs/2.0/reusing-config/#environment-variable-name) to secure API keys or other sensitive data. 
-
-[Injecting steps as a parameter](https://circleci.com/docs/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
+- When possible, use defaults for parameters unless a user input is essential. 
+- Utilize the [“env_var_name” parameter type](https://circleci.com/docs/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data. 
+- [Injecting steps as a parameter](https://circleci.com/docs/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
 
 ### Jobs
 
@@ -61,7 +71,7 @@ When possible, use defaults for parameters unless a user input is essential. Uti
 
 ### Imported Orbs
 
-- Must import full semver immutable version of orb.
+- Should import full semver immutable version of orb. This protects your orb from changes to the dependancy orb (like a lock file).
 - [Partner Only] - Should only import Certified/Partnered namespaces, or Orbs of the same namespace.
 
 ### Maintainability
