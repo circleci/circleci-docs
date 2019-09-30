@@ -7,51 +7,63 @@ categories:
   - getting-started
 order: 1
 ---
-このページでは、継続的インテグレーションの概要に加えて、CircleCI がどのようにチーム開発の自動化を実現するかという点について説明しています。
+
+This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments.
 
 ## CircleCI とは
 
 私たち **CircleCI** のミッションは、世の中のテクノロジー企業が最高の成果を上げられるようにする、というものです。  
 インテリジェントな自動化ツールを用いることで、チーム開発の生産性をさらに高めてほしいと願っています。
 
-CircleCI は、大手一流企業のようなサポートとサービスに、スタートアップ企業の柔軟さをプラスして提供します。  
-Linux、macOS、Android の各プラットフォームに加え、SaaS やオンプレミスといったサービス形態にも余さず対応します。
+CircleCI provides enterprise-class support and services, with the flexibility of a startup.  
+We work where you work: Linux, macOS, Android, and Windows - SaaS or behind your firewall.
 
 ![CircleCI のシステム構成概略図]({{ site.baseurl }}/assets/img/docs/arch.png)
 
-## 概要
+## Benefits of CircleCI
 
-GitHub もしくは Bitbucket アカウントの認証が完了し、各リポジトリ内のプロジェクトが [circleci.com](https://circleci.com) に追加されると、その後はコードに変更があるたびに、まっさらな状態のコンテナや VM 上で自動的にテストが実行されます。 CircleCI は、個別の[コンテナ]({{site.baseurl}}/ja/2.0/glossary/#container)または VM でそれぞれの[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#job)を実行します。 つまりジョブを実行するたびに、CircleCI はジョブを実行するためのコンテナまたは VM をスピンアップします。
+CircleCI runs nearly one million jobs per day in support of 30,000 organizations. Organizations choose CircleCI because jobs run fast and builds can be optimized for speed. CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching]({{site.baseurl}}/2.0/caching/), [docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching/), [resource classes]({{site.baseurl}}/2.0/optimizations/#resource-class) for running on faster machines, and [performance pricing](https://circleci.com/pricing/usage/).
 
-テスト完了後にはメールで成功・失敗の通知が届くほか、 Slack、HipChat、Campfire、Flowdock、IRC などのチャットツールと連携して通知を受け取ることも可能です。 テスト通知の内容は、レポートライブラリが追加されているプロジェクトであれば、その詳細ページから確認できます。
+As a developer using [circleci.com](https://circleci.com), you can [SSH into any job]({{site.baseurl}}/2.0/ssh-access-jobs/) to debug your build issues, set up [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) file to run jobs faster, and configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
 
-AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Container Engine (GKE)、Heroku といったデプロイサービスを利用している場合、CircleCI はそれに合わせてデプロイコードを構成します。 その他のクラウド型デプロイサービスを使っている場合は、 SSH を使うか、ジョブ設定において各サービスの API クライアントを導入することで、簡単にスクリプト化できます。
+As an operator or administrator of CircleCI installed on your own servers, CircleCI provides monitoring and insights into your builds and uses Nomad Cluster for scheduling, see the [CircleCI Operations Guide]({{site.baseurl}}/2.0/circleci-ops-guide-v2-17.pdf) for complete documentation.
 
-## 継続的インテグレーションとは？
+## Summary
 
-**継続的インテグレーション** とは、Git のような共有リポジトリにおける `master` (中央の) ブランチに対して、素早く、定期的に、個々の開発者が自身のコードをマージするための手法です。 別の場所で機能追加などを行い、開発サイクルの終了間際にマージする方法とは違って、継続的インテグレーションでは、開発メンバーそれぞれが随時、自身のコードを共有リポジトリ上でマージしていく形になります。
+After a software repository on GitHub or Bitbucket is authorized and added as a project to [circleci.com](https://circleci.com), every code change triggers automated tests in a clean container or VM. CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs CircleCI spins up a container or VM to run the job in.
 
-**継続的インテグレーション** は、デジタルトランスフォーメーションに向けた大切な第一歩です。
+CircleCI then sends an email notification of success or failure after the tests complete. CircleCI also includes integrated Slack and IRC notifications. Code test coverage results are available from the details page for any project for which a reporting library is added.
 
-**導入すると？**  
-開発メンバー全員がリポジトリの共有メインラインに日々コミットできます。  
-コミットのたびにビルドとテストが自動で実行されます。  
-ビルドやテストに失敗したときは、その問題の解決を即座に図れます。
+CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Kubernetes Engine (GKE), Microsoft Azure, and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
 
-**メリットは？**  
-チーム開発の生産性、効率、満足度が向上します。 コードにおける問題の迅速な発見と解決につながります。 不具合の少ない高品質なプロダクトの提供を実現します。
+## What is Continuous Integration?
 
-## 無料トライアル
+**Continuous integration** is a practice that encourages developers to integrate their code into a `master` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
-CircleCI では以下の無料トライアルを用意しています。
+**Continuous Integration** is a key step to digital transformation.
+
+**What?**  
+Every developer commits daily to a shared mainline.  
+Every commit triggers an automated build and test.  
+If build and test fails, it’s repaired quickly - within minutes.
+
+**Why?**  
+Improve team productivity, efficiency, happiness. Find problems and solve them, quickly. Release higher quality, more stable products.
+
+## Free Trial Options
+
+CircleCI provides a free trial with the following options:
 
 - **クラウド型** : クラウドサーバー上にホスティングした CircleCI を試せるものです。登録方法は「[CircleCI を始める]({{site.baseurl}}/ja/2.0/first-steps/)」をご覧ください。
 - **サーバー型** : 自身のサーバー上で CircleCI の動作を試せるものです。詳しくは「[インストール方法]({{site.baseurl}}/ja/2.0/single-box/)」をご覧ください。
 
 ### オープンソース特典
 
-パブリックなオープンソースプロジェクトでは、4 つの Linux コンテナを無料で使うことができます。詳しくは[オープンソースプロジェクトのビルド]({{site.baseurl}}/ja/2.0/oss/)をご覧ください。
+See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects.
 
 ## See Also
 
-CircleCI は Linux、Android、macOS 上で動くアプリケーションをサポートしています。 サンプルや手順に関する詳細は「[サポートしている言語]({{site.baseurl}}/ja/2.0/demo-apps/)」をご覧ください。
+Any app that runs on Linux, Android, or macOS is supported. Refer to the
+
+- [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
+- [Core Features]({{site.baseurl}}/2.0/features/) for detailed descriptions and links to procedural documentation.
