@@ -1,20 +1,21 @@
 ---
 layout: classic-docs
-title: "Help and Support"
-short-title: "Help and Support"
-description: "A list of possible support options"
+title: "ヘルプとサポート"
+short-title: "ヘルプとサポート"
+description: "利用可能なサポートオプションの一覧"
 categories:
   - reference
 order: 3
 ---
-If you're here, it's because you couldn't find what you were looking for in the docs. Our apologies!
 
-There are two ways to request documentation or contribute to our docs:
+ドキュメントの内容に不備・不足があり、 誠に申し訳ありません。
 
-## Report an Issue
+CircleCI のドキュメントサイトでは、以下の 2つの方法で、新規ドキュメントの作成依頼や編集内容のご提案を受け付けています。
 
-Our [docs repo](https://github.com/circleci/circleci-docs/) is open source and hosted on GitHub, so you can file an issue with documentation or request new documentation by clicking the get started button for the type of docs issue you want to report [here](https://github.com/circleci/circleci-docs/issues/new/choose).
+## 問題の報告
 
-## Make a Pull Request
+CircleCI の[ドキュメントリポジトリ](https://github.com/circleci/circleci-docs/)はオープンソースとして GitHub でホスティングされているため、ドキュメントに関する問題を報告したり、新しいドキュメントの作成を依頼したりすることができます。[こちらのページ](https://github.com/circleci/circleci-docs/issues/new/choose)にアクセスし、報告するドキュメントの問題の種類に応じた [Get started] ボタンをクリックしてください。
 
-We love contributions to our documentation repo! Please suggest a change or addition by following our [Contributing Guide](https://github.com/circleci/circleci-docs/blob/master/CONTRIBUTING.md#pull-requests).
+## プルリクエストの作成
+
+CircleCI のドキュメントリポジトリでは、具体的な編集内容のご提案もお待ちしております。 [こちらのガイド](https://github.com/circleci/circleci-docs/blob/master/CONTRIBUTING.md#pull-requests)に従ってドキュメントの変更や追加をご提案ください。
