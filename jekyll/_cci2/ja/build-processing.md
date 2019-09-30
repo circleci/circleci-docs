@@ -1,43 +1,48 @@
 ---
 layout: classic-docs
-title: "Pipelines"
-short-title: "Enabling Pipelines"
-description: "How to enable pipelines"
+title: "パイプライン"
+short-title: "パイプラインの有効化"
+description: "パイプラインを有効にする方法"
 categories:
   - settings
 order: 1
 ---
-This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
 
-## Getting Started
+ここでは、CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプラインエンジンを有効にする方法を説明します。
 
-Enable pipelines at the bottom of the Advanced section of Settings page for your project in the CircleCI app.
+## はじめよう
 
-The new pipelines feature enables use of the new [API endpoint to trigger builds with workflows]({{ site.baseurl }}/api/v1-reference/#new-project-build) and the following use cases:
+Enable pipelines at the bottom of the Advanced section of Settings page for your project in the CircleCI app. **Note:** Pipelines require v2.1 configuration and are not yet supported for private CircleCI Server installations.
 
-- New API endpoint to trigger builds, including running all workflows in the build.
-- Jobs named `build` will be wrapped in a workflows stanza by the processor.
-- Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch.
-- Use of configuration version 2.1 or higher requires pipelines to be turned on.
+## Benefits of Pipelines
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
+The pipelines feature enables use of the new [API endpoint to trigger builds with workflows](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) and the following use cases:
+
+- 新しい API エンドポイントを使用してビルドをトリガーし、ビルド内のすべてのワークフローを実行します。
+- `build` という名前のジョブが、プロセッサーによって 1つのワークフロースタンザにラップされます。
+- [Advanced Settings (詳細設定)] で自動キャンセルが有効になっているプロジェクトでは、非デフォルトのブランチで新しいビルドがトリガーされると、同じブランチ上のワークフローがキャンセルされます。
+- バージョン 2.1 以上の設定を使用するには、パイプラインをオンにする必要があります。
+
+**メモ：**非デフォルトのブランチで自動デプロイジョブを設定している場合などには、自動キャンセル機能を有効にすることの影響を慎重に検討する必要があります。
 
 ## Troubleshooting
 
-Pipeline errors will appear on the Jobs page or the Workflows page. When migrating an existing project to pipelines, you may safely go back by disabling the radio button for the pipelines feature on your Advanced Settings for your project if jobs or workflows fail the new pipelines service.
+Pipeline errors will appear on the Jobs page or the Workflows page.
+
+Please note that once pipelines are enabled for a project on a usage plan, they may not be turned off without filing a ticket with CircleCI support. See `limitations` below.
 
 ## Limitations
 
 CircleCI is committed to achieving backwards compatibility in almost all cases, and most projects that enable pipelines will have no effect on existing builds. Let us know if you experience breaking builds that worked before you turned on pipelines, but broke after you turned it on.
 
-- Anchors will be processed and resolved instead of appearing in the app config.
-- If you use `<<` in your shell commands (most commonly found in use of heredocs) you will need to escape them using backslash `` as in `\<<` in order to use version 2.1 or higher of configuration.
-- Pipelines are **not** fully backwards-compatible with the 1.1 API endpoint to trigger arbitrary jobs - you may experience unexpected or inconsistent results if you use this endpoint after turning on Pipelines. Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/v1-reference/#new-project-build) introduced in September 2018. Please keep in mind that this build triggering API endpoint does **not** accept parameters or workflow or job filters. If you make heavy use of those API features and want to use Pipelines, please contact your CircleCI account team.
+- アンカーは、アプリケーションコンフィグに表示されることなく、処理されて解決されます。
+- If you use `<<` in your shell commands (most commonly found in use of heredocs) you will need to escape them using backslash `` as in `\<<` in order to use version 2.1 or higher of configuration. 2.0 configuration will not be affected.
+- パイプラインは、任意のジョブをトリガーする 1.1 API エンドポイントと完全には下位互換性が**ありません**。パイプラインをオンにした後にこのエンドポイントを使用すると、予期しない結果または不整合な結果となる可能性があります。 Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) introduced in September 2018. このビルドをトリガーする API エンドポイントは、パラメーター、ワークフロー、ジョブフィルターを受け付け**ない**ので、ご注意ください。 パイプラインと併せてこれらの API 機能を多用したいとお考えでしたら、CircleCI のアカウントチームにお問い合わせください。
 
 ## Giving Feedback
 
-1. Tweet @circleci with thoughts
-2. Vote or add to our [Ideas board](https://ideas.circleci.com/)
+1. CircleCI の Twitter アカウント (@CircleCIJapan) 宛てにツイートする
+2. [アイデアボード](https://ideas.circleci.com/)で既存の投稿に投票する、または投稿を追加する
 
 ## See Also
 
