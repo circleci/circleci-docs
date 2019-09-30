@@ -1,24 +1,24 @@
 ---
 layout: classic-docs
-title: "Reference"
-description: "CircleCI 2.0 reference documentation"
+title: "参考情報"
+description: "CircleCI 2.0 の参考ドキュメント"
 ---
-Refer to the reference materials for YAML syntax, specifications, FAQs, help, and support.
 
-| Document                                                                                 | Description                                                                                                                      |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)                  | Complete specification for `config.yml` syntax.                                                                                  |
-| [Prebuilt Images]({{ site.baseurl }}/2.0/circleci-images/)                               | Complete list of prebuilt CircleCI Docker images.                                                                                |
-| [API]({{ site.baseurl }}/api/v1-reference/)                                              | CircleCI v1.1 API reference documentation.                                                                                       |
-| [Glossary]({{ site.baseurl }}/2.0/glossary/)                                             | CircleCI terms and definitions.                                                                                                  |
-| [Help and Support]({{ site.baseurl }}/2.0/help-and-support/)                             | How to get answers to your questions from the CircleCI developer community and the CircleCI support team.                        |
-| [FAQ]({{ site.baseurl }}/2.0/faq/)                                                       | Frequently asked questions about CircleCI 2.0.                                                                                   |
-| [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)            | Information about GitHub and Bitbucket integration with a summary of permissions required and how organizations and groups work. |
-| [Security Features]({{ site.baseurl }}/2.0/security/)                                    | Description of source code, container, and encryption technology used by CircleCI.                                               |
-| [Changelog](https://circleci.com/changelog/)                                             | Log of recent changes to the hosted CircleCI 2.0 software.                                                                       |
-| [Container ID Cannot Be Mapped to Host ID Error]({{ site.baseurl }}/2.0/high-uid-error/) | Debugging the `container ID cannot be mapped to host ID` error.                                                                  |
-{: class="table table-striped"}
+YAML 構文、仕様、よくあるご質問、ヘルプ、サポートなどに関する情報は以下の各リンクからご確認いただけます。
 
-We’re thrilled to have you here. Happy building!
+| ドキュメント                                                                       | 説明                                                        |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------- |
+| [CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)            | `config.yml` 構文のすべての仕様                                    |
+| [ビルド済みイメージ]({{ site.baseurl }}/2.0/circleci-images/)                         | CircleCI が提供しているビルド済み Docker イメージの一覧                      |
+| [API]({{ site.baseurl }}/api/v1-reference/)                                  | CircleCI v1.1 の API に関するドキュメント                            |
+| [用語集]({{ site.baseurl }}/2.0/glossary/)                                      | CircleCI の用語と定義                                           |
+| [ヘルプとサポート]({{ site.baseurl }}/2.0/help-and-support/)                         | CircleCI 開発者コミュニティおよび CircleCI サポートチームに質問し、回答を得る方法        |
+| [よくあるご質問]({{ site.baseurl }}/2.0/faq/)                                       | CircleCI 2.0 に関してよく寄せられるご質問                               |
+| [GitHub および Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/) | GitHub と Bitbucket のインテグレーションに関する情報、必要な権限の概要、組織とグループの動作方法 |
+| [セキュリティ機能]({{ site.baseurl }}/2.0/security/)                                 | CircleCI が使用しているソースコード、コンテナ、暗号化テクノロジーについての説明              |
+| [更新履歴](https://circleci.com/changelog/)                                      | ホスティングされている CircleCI 2.0 ソフトウェアに最近追加された変更点のログ             |
+| [コンテナ ID をホスト ID にマップできないエラー]({{ site.baseurl }}/2.0/high-uid-error/)        | `container ID cannot be mapped to host ID` エラーのデバッグ方法     | {: class="table table-striped"} 
 
-*The CircleCI Team*
+このページをご参照くださり、ありがとうございます。 ビルド作業のお役に立てば幸いです。
+
+*CircleCI チーム*
