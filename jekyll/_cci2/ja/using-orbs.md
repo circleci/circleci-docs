@@ -1,94 +1,98 @@
 ---
 layout: classic-docs
-title: "Orbs を使う"
-short-title: "Using Orbs"
-description: "CircleCI Orbs 入門"
+title: "Orbs Concepts"
+short-title: "Concepts"
+description: "Starting point for conceptual overview of Orbs"
 categories:
   - getting-started
 order: 1
 ---
-ここでは [Orb]({{ site.baseurl }}/ja/2.0/orb-intro/) の基礎的なインポートして使用する例とそれに関連する要素について、下記の流れで解説しています。
 
-- TOC
-{:toc}
+CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors. CircleCI provides certified orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the CircleCI Orbs Registry for the complete list of certified orbs.
 
-## はじめに
+Before using orbs, you should first familiarize yourself with some basic core concepts of orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage orbs and use them easily in your own environments.
 
-Orbs は CircleCI を手早く使い始めるのに便利なコンフィグパッケージです。 Orbs はコンフィグをプロジェクト間で共有したり、標準化を行ったり、簡便にしたりするのに役立ちます。 最適なコンフィグのサンプルとして Orbs を活用することもできます。 今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。
+### Certified vs. 3rd-Party Orbs
 
-`orbs` キーを用いることで、バージョン 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-requires-version-21) ファイルのなかで Orb を使えるようになります。 下記は `circleci` という名前空間にある [`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) を呼び出している例です。
+CircleCI has available a number of individual orbs that have been tested and certified to work with the platform. These orbs will be treated as part of the platform; all other orbs are considered 3rd-party orbs. Note: The Admin of your org must opt-in to 3rd-party uncertified orb usage on the Settings > Security page for your org.
 
-```yaml
-version: 2.1
+All orbs are open, meaning that anyone can use them and see their source.
 
-orbs:
-    hello: circleci/hello-build@0.0.5
+### Design Methodology
 
-workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
-```
+Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these orbs were designed. Orbs were designed with the following considerations:
 
-**注 :** CircleCI 2.1 以前のバージョンで作成されたプロジェクトでは、[Build Processing 設定]({{ site.baseurl }}/ja/2.0/build-processing/) を有効にすることで `orbs` キーを使えるようになります。
+- Orbs are transparent - If you can execute an orb, you and anyone else can view the source of that orb.
+- Metadata is available - Every key can include a description key and an orb may include a description at the top level.
+- Production orbs are always semantic versioned (semver’d) - CircleCI allows development orbs that have versions that start with dev:.
+- Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
+- One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
+- Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
 
-Orbs は下記の要素で構成されています。
+### Orb Structure
+
+Orbs consist of the following elements:
 
 - コマンド
 - ジョブ
-- Executors 
+- Executors
 
-### Commands
-{:.no_toc}
+#### Commands
 
 steps の再利用を容易にする仕組みがコマンドです。ジョブのなかでパラメーター付きで呼び出すことができます。 下記の例のように `sayhello` というコマンドを呼び出すとき、`to` で指定したパラメーターを渡すことができます。
 
-```yaml
-version: 2.1
-jobs:
-  myjob:
-    docker:
-      - image: "circleci/node:9.6.1"
-    steps:
-      - myorb/sayhello:
-          to: "Lev"
-```
+    version: 2.1
+    jobs:
+      myjob:
+        docker:
+          - image: "circleci/node:9.6.1"
+        steps:
+          - myorb/sayhello:
+              to: "Lev"
+    
 
-### Jobs
-{:.no_toc}
+#### Jobs
 
-ジョブは 2 つのパートからなります。steps の定義と、それらを処理する実行環境の定義です。 ジョブはビルド設定もしくは orb の中で定義され、それぞれの `jobs` キーの直下、もしくは外部にある orb の中でジョブ名を定義できます。
+Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the jobs key in a configuration, or in an external orb’s configuration.
 
-その後、`config.yml` ファイル内の Workflow から、サブキーとして必要なパラメーターを渡してジョブを呼び出す形とします。
+You must invoke jobs in the workflow stanza of config.yml file, making sure to pass any necessary parameters as subkeys to the job.
 
-### Executors
-{:.no_toc}
+#### Executors
 
-Executors はジョブ内の steps を実行するための環境を定義します。 設定で `job` を宣言する際、実行環境（`docker`、`machine`、`macos` などの）の種類を定義したり、それらの環境における下記のようなパラメーターを指定したりするのに使います。
+Executors define the environment in which the steps of a job will be run. When you declare a job in CircleCI configuration, you define the type of environment (e.g. docker, machine, macos, windows etc.) to run in, in addition to any other parameters of that environment, such as:
 
 - データ保存に使う環境変数
 - 使用するシェル
-- 使用する `resource_class` のサイズ
+- what size resource_class to use
 
-特定の `jobs` 以外のところで Executor を宣言しても、その宣言のスコープ内であれば他の全てのジョブにおいて有効です。こうすることで、1 つの Executor の宣言を複数のジョブで共有することが可能になります。
+When you declare an executor in a configuration outside of jobs, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
 
-Executor を宣言し定義する際には下記のキーが使えます（このうちいくつかは `job` の宣言時にも使えます）。
+An executor definition has the following keys available (some of which are also available when using the job declaration):
 
-- `docker`、`machine`、`macos` のうちいずれか
-- `environment`
-- `working_directory`
-- `shell`
-- `resource_class`
+- docker, machine, windows, or macos
+- environment
+- working_directory
+- shell
+- resource_class
 
-下記は Executor を使った簡単なサンプルです。
+The example below shows a simple example of using an executor:
 
-```yaml version: 2.1 executors: my-executor: docker: - image: circleci/ruby:2.4.0
+    version: 2.1
+    executors:
+      my-executor:
+        docker:
+          - image: circleci/ruby:2.4.0
+    
+    jobs:
+      my-job:
+        executor: my-executor
+        steps:
+    
+          - run: echo outside the executor
+    
 
-jobs: my-job: executor: my-executor steps: - run: echo outside the executor ```
+Notice in the above example that the executor `my-executor` is passed as the single value of the key executor. Alternatively, you can pass `my-executor` as the value of a name key under executor. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
 
-Notice in the above example that the executor `my-executor` is passed as the single value of the key `executor`. Alternatively, you can pass `my-executor` as the value of a `name` key under `executor`. This method is primarily employed when passing parameters to executor invocations. An example of this method is shown in the example below.
-
-    yaml
     version: 2.1
     jobs:
       my-job:
@@ -96,39 +100,129 @@ Notice in the above example that the executor `my-executor` is passed as the sin
           name: my-executor
         steps:
           - run: echo outside the executor
+    
 
-## キーコンセプト
+### Namespaces
 
-Before using orbs, you should first familiarize yourself with some basic core concepts of orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage orbs and use them easily in your own environments.
+Namespaces are used to organize a set of orbs. Each namespace has a unique and immutable name within the registry, and each orb in a namespace has a unique name. For example, the `circleci/rails` orb may coexist in the registry with an orb called username/rails because they are in separate namespaces.
 
-### 開発版と リリース版の違い
-{:.no_toc}
+**Note:** Namespaces are owned by organizations.
 
-Orbs may be published either as ```myorbnamespace/myorb@dev:foo``` or as a semantically versioned production orb `mynamespace/myorb@0.1.3`. Development orbs are mutable and expire after 90 days. Production orbs are immutable and durable.
+Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you require more than one namespace, please contact your account team at CircleCI.
 
-### 認証済みと サードパーティ製の違い
-{:.no_toc}
+### Semantic Versioning in Orbs
 
-CircleCI has available a number of individual orbs that have been tested and certified to work with the platform. These orbs will be treated as part of the platform; all other orbs are considered 3rd-party orbs. **Note:** The Admin of your org must opt-in to 3rd-party uncertified orb usage on the Settings > Security page for your org.
+Orbs are published with the standard 3-number semantic versioning system:
 
-<aside class="notice">
-あらゆる Orbs はオープンです。つまり、誰でも利用でき、誰でもそのソースコードを参照できます。 
-</aside>
+- major
+- minor
+- patch
 
-## 設計思想
+Orb authors should adhere to semantic versioning. Within config.yml, you may specify wildcard version ranges to resolve orbs. You may also use the special string volatile to pull in whatever the highest version number is at time your build runs.
 
-Before using orbs, you may find it helpful to understand the various design decisions and methodologies that were used when these orbs were designed. Orbs were designed with the following considerations:
+For example, when mynamespace/some-orb@8.2.0 exists, and mynamespace/some-orb@8.1.24 and mynamespace/some-orb@8.0.56 are published after 8.2.0, volatile will still refer to mynamespace/some-orb@8.2.0 as the highest semantic version.
 
-- Orbsは透過的であること - Orb を実行できるということは、自分も他の誰かもそのソースを見ることができるということ。
-- 説明用のメタデータが使える - どのキーにおいても ```description``` キーを記述でき、Orb でもその一番上に `description` を記述しておける。
-- リリース版の Orbs は必ずセマンティック バージョニングされる - 開発版の Orbs については `dev:` から始まるバージョン命名規則が用いられる。
-- Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. これは、オーケストレーションツールの核となる部分における意図しない破綻や挙動の変化を防ぐ。
-- レジストリは（1 インストールにつき）1 つ限り - circleci.com も含め、CircleCI のインストールごとに所有できる Orbs のレジストリは 1 つのみとなる。
-- Org 管理者がリリース版の Orbs をパブリッシュし、 管理者ではないメンバーが開発版の Orbs をパブリッシュする - 名前空間は Org が管理するものとし、 Org の管理者だけがリリース版の Orb をパブリッシュ・運用できる。 開発版の Orbs のパブリッシュは組織内の全メンバーができるものとする。
+Examples of orb version declarations and their meaning:
+
+- circleci/python@volatile - use the highest version of the Python orb in the registry at the time a build is triggered. This is likely the most recently published and least stable Python orb.
+- circleci/python@2 - use the latest version of version 2.x.y of the Python orb.
+- circleci/python@2.4 - use the latest version of version 2.4.x of the Python orb.
+- circleci/python@3.1.4 - use exactly version 3.1.4 of the Python orb.
+
+## Orb Versions (Development vs. Production)
+
+There are two main types of orbs that you can use in your workflows: Development & Production. Depending on your workflow needs, you may choose to use either of these orbs. The sections below describe the differences between these two types of orbs so you can make a more informed decision of how best to utilize these orb types in your workflows.
+
+While all production orbs can be published securely by organization owners, development orbs provide non-owner members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable and expire after 90 days, so they are ideal for rapid iteration of an idea.
+
+A development version should be referenced by its complete, fully-qualified name, such as: mynamespace/myorb@dev:mybranch.; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
+
+Orb versions may be added to the registry either as development versions or production versions. Production versions are always a semantic version like 1.5.3; whereas development versions can be tagged with a string and are always prefixed with dev: for example `dev:myfirstorb`.
+
+**Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for org members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
+
+### Development and Production Orb Security Profiles
+
+- Only organization owners can publish production orbs.
+- Any member of an organization can publish dev orbs in namespaces.
+- Organization owners can promote any dev orb to be a semantically versioned production orb.
+
+### Development and Production Orb Retention and Mutability Characteristics
+
+Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
+
+Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the orb publish increment and/or the orb publish promote commands in the circleci CLI when publishing orbs to production.
+
+### Development and Production Orbs Versioning Semantics
+
+Development orbs are tagged with the format `dev:<< your-string >>`. Production orbs are always published using the semantic versioning (“semver”) scheme.
+
+In development orbs, the string label given by the user has the following restriction:
+
+- Up to 1023 non-whitespace characters
+
+Examples of valid development orb tags:
+
+Valid:
+
+      "dev:mybranch"
+      "dev:2018_09_01"
+      "dev:1.2.3-rc1"
+      "dev:myinitials/mybranch"
+      "dev:myVERYIMPORTANTbranch"
+    
+
+Invalid:
+
+      "dev: 1" (No spaces allowed)
+      "1.2.3-rc1" (No leading "dev:")
+    
+
+In production orbs, use the form `X.Y.Z` where `X` is a “major” version, `Y` is a “minor” version, and `Z` is a “patch” version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
+
+While not strictly enforced, it is best practice when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
+
+- Major: when you make incompatible API changes
+- Minor: when you add functionality in a backwards-compatible manner
+- Patch: when you make backwards-compatible bug fixes
+
+### Using Orbs Within Your Orb and Register-Time Resolution
+
+You may also use an orbs stanza inside an orb.
+
+Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
+
+For example, orb `foo/bar` is published at version 1.2.3 with an orbs stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
+
+If `biz/baz` is updated to 3.0.0, anyone using `foo/bar@1.2.3` will not see the change in ``biz/baz@3.0.0 until `foo/bar` is published at a higher version than 1.2.3.
+
+**Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+
+    version: 2.1
+    orbs:
+      some-orb: some-ns/some-orb@volatile
+    executors:
+      my-executor: some-orb/their-executor
+    commands:
+      my-command: some-orb/their-command
+    jobs:
+      my-job: some-orb/their-job
+      another-job:
+        executor: my-executor
+        steps:
+          - my-command:
+              param1: "hello"
+    
+
+### Deleting Production Orbs
+
+In general, CircleCI prefers to never delete production orbs that were published as world-readable because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.
+
+If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (Note: If you are deleting because of a security concern, you must practice responsible disclosure using the CircleCI Security web page.
 
 ## See Also
 {:.no_toc}
 
-- Orbs の具体的な使用方法については「[Orbs とは]({{site.baseurl}}/ja/2.0/orb-intro/)」をご覧ください。
-- 新たに Orb を作成する詳しい手順は「[Orbs を作成する]({{site.baseurl}}/ja/2.0/creating-orbs/)」をご覧ください。
-- 再利用が可能な Orbs、コマンド、パラメータ、Executors の詳しい例については「[コンフィグを再利用する]({{site.baseurl}}/ja/2.0/reusing-config/)」をご覧ください。
+- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/), for a high-level overview of using and authoring orbs.
+- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for more detailed examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
