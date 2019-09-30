@@ -1,84 +1,85 @@
 ---
 layout: classic-docs
-title: "CircleCI Server v2.16 What's New"
-short-title: "CircleCI Server v2.16 What's New"
-description: "Starting point for CircleCI Server v2.16 docs"
+title: "CircleCI Server v2.16 の新機能"
+short-title: "CircleCI Server v2.16 の新機能"
+description: "CircleCI Server v2.16 の入門ガイド"
 categories:
   - getting-started
 order: 1
 ---
-This document provides a summary of features and product notes for the release of CircleCI Server v2.16.
 
-## What's New in Release 2.16
+CircleCI Server v2.16 の機能強化や不具合修正についてまとめます。
 
-- We are excited to announce that you can now distribute your data and workload external to the Services Machine. The following services can be externalized; MongoDB, Redis, Nomad Server, RabbitMQ, Postgres and Vault. Contact your CSM for the latest documentation.
+## バージョン 2.16 の新機能
 
-- Custom Metrics can now be accomplished via a Telegraf Output Configuration File. See the Monitoring chapter of the Operations Guide.
+- Services マシンの外部にデータとワークロードを分散できるようになりました。 MongoDB、Redis、Nomad Server、RabbitMQ、Postgres、Vault を外部サービスとして使用できます。 最新ドキュメントについては、CSM にお問い合わせください。
 
-- Users can now receive email notifications about Workflows.
+- Telegraf 出力設定ファイルを通してカスタムメトリクスを取得できるようになりました。 運用ガイドの「モニタリング」の章を参照してください。
 
-- The PostgreSQL image has been updated to allow modifying the default configuration by creating the following file: `/etc/circleconfig/postgres/extra.conf` A list of configuration options can be found [here](https://github.com/circleci/postgres-docker/blob/da250f226be17afdde923c08f2af6fe63ceec99e/postgresql.conf).
+- Workflows に関するメール通知を受信できるようになりました。
 
-- PDF installation and operations documentation:
+- PostgreSQL イメージが、`/etc/circleconfig/postgres/extra.conf` ファイルを作成することによってデフォルト設定を変更できるように更新されました。設定オプションの一覧は、[こちら](https://github.com/circleci/postgres-docker/blob/da250f226be17afdde923c08f2af6fe63ceec99e/postgresql.conf)でご覧いただけます。
+
+- インストールと運用に関する PDF ドキュメントが公開されています。
    
-   - *CircleCI v2.16 Installation Guide*
-   - *CircleCI v2.16 Operations Guide*
+   - *CircleCI v2.16 インストールガイド*
+   - *CircleCI v2.16 運用ガイド*
 
-## Fixed in Release 2.16
+## バージョン 2.16 での修正点
 
-- Fix for an issue with Contexts that would break after 32 days.
+- 32日後にコンテキストが破損する問題を修正しました。
 
-- Vault auth tokens will now renew periodically to prevent expiration.
+- Vault Auth トークンが期限切れにならないよう、定期的に更新されるようになりました。
 
-- Fix for an issue where workflow listing pages would intermittently fail to render.
+- ワークフロー表示ページが断続的に描画されなくなる問題を修正しました。
 
-- We have fixed a small number of bugs affecting processing incoming web hooks from GitHub to CircleCI.
+- CircleCI が GitHub から受信する Web フックの処理に影響していた少数のバグを修正しました。
 
-- For installs that are using an HTTP or HTTPS proxy, the jobs will now ignore that proxy so that setup_remote_docker works.
+- HTTP プロキシまたは HTTPS プロキシが使用されている場合に、ジョブがプロキシを無視し、setup_remote_docker が機能するようになりました。
 
-- Reduced the number of connections 1.0 builders make to the PostgreSQL database.
+- 1.0 Builders が PostgreSQL データベースに対して作成する接続の数が削減されました。
 
-- Security fixes for potential cross-site scripting vulnerability and HTTP header injection vulnerability
+- クロスサイトスクリプティングや HTTP ヘッダーインジェクションによる潜在的なセキュリティ脆弱性を修正しました。
 
-- Forked PRs can no longer write the caches of parent projects by default for security reasons. It is possible to still write parent project caches from the fork if the "Pass secrets to builds from forked pull requests" (in Advanced settings) is enabled.
+- セキュリティ上の理由から、デフォルトでは、フォークされた PR が親プロジェクトのキャッシュに書き込むことはできなくなりました。 ただし、詳細設定の [Pass secrets to builds from forked pull requests (フォークされたプルリクエストからビルドにシークレットを渡す)] を有効にしている場合は、フォークから親プロジェクトのキャッシュに書き込むことができます。
 
-## Updated in Release 2.16
+## バージョン 2.16 での更新点
 
-- Removed EOL banner on build emails.
+- ビルドのメールから EOL バナーを削除しました。
 
-- VM Service stability improvements.
+- VM サービスの安定性を向上させました。
 
-- Improved metrics for VM provisioning for machine executor. This changed metric names, so if you are monitoring VM provisioning in your install already, you will need to reconfigure the monitoring dashboards for the following new metrics:
+- Machine Executor で VM プロビジョニングのメトリクスを強化しました。 以下のとおりメトリクス名が変更されているため、既に VM プロビジョニングをモニタリングしている場合、モニタリングダッシュボードを再設定する必要があります。
    
-   - `vm-service.gauges.available-vms` and `vm-service.gauges.running-vms` is replaced by `vm-service.gauges.vms_by_status`
-   - `vm-service.gauges.running-tasks` is replaced by `vm-service.gauges.tasks_by_status`
-   - `vm-service.gauges.oldest-unassigned-task` is replaced by `vm-service.gauges.unassigned_tasks_age`
+   - `vm-service.gauges.available-vms` と `vm-service.gauges.running-vms` を `vm-service.gauges.vms_by_status` に変更
+   - `vm-service.gauges.running-tasks` を `vm-service.gauges.tasks_by_status` に変更
+   - `vm-service.gauges.oldest-unassigned-task` を `vm-service.gauges.unassigned_tasks_age` に変更
 
-- Replicated was updated to version 2.29.0 in this release which requires Docker 17.12.1. Follow the instructions below before upgrading to CircleCI v2.16.
+- 今回のリリースで Replicated がバージョン 2.29.0 に更新されたため、Docker 17.12.1 が必要になります。CircleCI v2.16 にアップグレードする前に、以下の手順を実行してください。
 
-### Prequisites for Updating Replicated
+### Replicated を更新するための前提条件
 
-- Your installation is Ubuntu 14.04-based
-- You are running replicated version 2.10.3 on your services machine 
+- Ubuntu 14.04 ベースの環境を使用していること
+- Services マシンで Replicated バージョン 2.10.3 を実行していること 
    - `replicated --version`
-- Your installation is **not** airgapped and you can access the internet from it
-- All steps are completed on the Services machine
+- お使いの環境が孤立して**おらず**、インターネットにアクセスできること
+- Services マシン上ですべての手順が完了していること
 
-### Preparations
+### 準備
 
-Before performing a replicated version update, backup your data using the Backup section of the *CircleCI v2.16 Operations Guide*.
+Replicated バージョンの更新を行う前に、『*CircleCI v2.16 運用ガイド*』の「バックアップ」に従ってデータをバックアップしてください。
 
-- Stop the CircleCI application with
+- 以下のコマンドで CircleCI アプリケーションを停止させます。
 
         replicatedctl app stop
     
 
-Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
+アプリケーションのシャットダウンには数分かかります。 管理ダッシュボードを確認して、ステータスが [Stopped (停止)] になってから続行してください。 以下のコマンドを実行してアプリケーションのステータスを表示する方法もあります。
 
         replicatedctl app status inspect
     
 
-Example Output:
+以下のように出力されます。
 
     [
         {
@@ -94,40 +95,40 @@ Example Output:
     ]
     
 
-- For the replicated update to succeed, it’s necessary to update docker to the recommended version, 17.12.1:
+- Replicated の更新を成功させるには、Docker を推奨バージョン 17.12.1 に更新する必要があります。
 
         sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
     
 
-- Pin the Docker version using the following command:
+- 以下のコマンドを使用して Docker のバージョンを固定します。
 
         sudo apt-mark hold docker-ce
     
 
-### Update
+### 更新
 
-Perform the Replicated update by executing the update script as follows:
+以下のように更新スクリプトを実行して、Replicated の更新を実行します。
 
         curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
     
 
-Double-check your replicated and docker versions:
+Replicated と Docker の両方のバージョンをチェックしてください。
 
         replicatedctl version    # 2.29.0
         docker -v                # 17.12.1
     
 
-Restart the app with
+以下のコマンドでアプリケーションを再起動します。
 
         replicatedctl app start
     
 
-The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
+アプリケーションのスピンアップには数分かかります。 以下のコマンドを実行するか、管理ダッシュボードにアクセスして進行状況を確認できます。
 
         replicatedctl app status inspect
     
 
-Example output:
+以下のように出力されます。
 
     [
         {
