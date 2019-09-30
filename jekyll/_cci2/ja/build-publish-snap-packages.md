@@ -7,6 +7,7 @@ categories:
   - containerization
 order: 20
 ---
+
 Snap パッケージを使用すると、ソフトウェアを複数の Linux ディストリビューション (distros) 上へ迅速にパブリッシュできます。 このドキュメントでは、CircleCI を使用して Snap パッケージをビルドし、Snap Store にパブリッシュする方法を紹介します。
 
 ## Overview
@@ -134,6 +135,7 @@ jobs:
 
   publish:
     docker:
+
       - image: cibuilds/snapcraft:stable
     steps:
       - attach_workspace:
@@ -150,6 +152,7 @@ workflows:
   version: 2
   main:
     jobs:
+
       - build
       - publish:
           requires:
