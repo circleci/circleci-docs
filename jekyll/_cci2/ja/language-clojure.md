@@ -1,30 +1,31 @@
 ---
 layout: classic-docs
-title: "Language Guide: Clojure"
+title: "言語ガイド：Clojure"
 short-title: "Clojure"
-description: "Building and Testing with Clojure on CircleCI 2.0"
+description: "CircleCI 2.0 での Clojure を使用したビルドとテスト"
 categories:
   - language-guides
 order: 2
 ---
-This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-* TOC
+このガイドでは、CircleCI 2.0 で Clojure アプリケーションを作成する方法について説明します。お急ぎの場合は、以下の設定例をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) にコピーし、ビルドを開始してください。
+
+* 目次
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
-Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
+お急ぎでなければ、[設定の詳細](#config-walkthrough)に目を通すことをお勧めします。
 
-We're going to make a few assumptions here:
+ここでは、以下を前提としています。
 
-* You're using `clojure.test` with Leiningen's built-in `test` task.
-* Your application can be distributed as an all-in-one uberjar.
+* Leiningen の組み込み `test` タスクを含む `clojure.test` を使用している
+* アプリケーションをオールインワン uberjar として配布できる
 
-If you use another testing tool, you can just adjust that step to run a different `lein` task.
+他のテストツールを使用する場合は、別の `lein` タスクを実行するようにそのステップを調整するだけです。
 
-## Sample Configuration
+## 設定例
 
 {% raw %}
 
@@ -34,7 +35,7 @@ jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     working_directory: ~/cci-demo-clojure # directory where steps will run
     docker: # run the steps with Docker
-      - image: circleci/clojure:lein-2.7.1 # ...with this image as the primary container; this is where all `steps` will run
+      - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
     environment: # environment variables for primary container
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
@@ -56,25 +57,25 @@ jobs: # basic units of work in a run
 
 {% endraw %}
 
-## Get the Code
+## コードの取得
 
-The configuration above is from a demo Clojure app, which you can access at <https://github.com/CircleCI-Public/circleci-demo-clojure-luminus>.
+上記の設定は Clojure デモアプリケーションの一部です。このデモアプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
 
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
+ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカルマシンにダウンロードします。 CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
-Now we’re ready to build a `config.yml` from scratch.
+これで `config.yml` を最初からビルドする準備ができました。
 
-## Config Walkthrough
+## 設定の詳細
 
-We always start with the version.
+常にバージョンの指定から始めます。
 
 ```yaml
 version: 2
 ```
 
-Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
+次に、`jobs` キーを置きます。 それぞれのジョブは、ビルド、テスト、デプロイのプロセス内の各段階を表しています。 このサンプルアプリケーションでは 1つの `build` ジョブのみが必要なので、他の要素はそのキーの下に置きます。
 
-In each job, we have the option of specifying a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+各ジョブには、`working_directory` を指定するオプションがあります。 この例では、ホームディレクトリにあるプロジェクトから名前を付けます。
 
 ```yaml
 version: 2
@@ -83,22 +84,22 @@ jobs:
     working_directory: ~/cci-demo-clojure
 ```
 
-This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
+他のディレクトリが指定されない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとして使用されます。
 
-Directly beneath `working_directory`, we can specify container images under a `docker` key.
+`working_directory` の直下の `docker` キーで、コンテナイメージを指定できます。
 
 ```yaml
 version: 2
 ...
     docker:
-      - image: circleci/clojure:lein-2.7.1
+      - image: circleci/clojure:lein-2.9.1
 ```
 
-We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
+`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/docs/ja/2.0/circleci-images/#clojure)を使用します。
 
-We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database or queue, for example, consider those containers when you allocate memory for the main JVM heap.
+ここでは、メモリ不足エラーが発生しないように、`JVM_OPTS` を設定して最大ヒープサイズを制限します。 標準のコンテナの制限は 4 GB ですが、JVM がヒープ外に確保する分と Leiningen 自体のために、いくらかの容量を残しておきます (場合によっては、`lein trampoline ...` を使用して Leiningen のオーバーヘッドを回避できます)。たとえば、データベースまたはキューのためのバックグラウンドコンテナがある場合は、メインの JVM ヒープにメモリを割り当てる際にそれらのコンテナを考慮してください。
 
-Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case.
+通常、Leiningen は非 root ユーザーとして実行されることを前提とし、root として実行しているユーザーは例外的と見なします。 この例では、それが意図的であることを示すために `LEIN_ROOT` 環境変数を設定します。
 
 ```yaml
     environment:
@@ -106,20 +107,21 @@ Normally Leiningen expects to be run as a non-root user and will assume you're r
       LEIN_ROOT: nbd
 ```
 
-Now we’ll add several `steps` within the `build` job.
+この `build` ジョブ内にいくつかの `steps` を追加します。
 
-We start with `checkout` so we can operate on the codebase.
+コードベースで作業できるように、最初に `checkout` を置きます。
 
-Next we pull down the cache, if present. If this is your first run, or if you've changed `project.clj`, this won't do anything. We run `lein deps` next to pull down the project's dependencies. Normally you never call this task directly since it's done automatically when it's needed, but calling it directly allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
+次に、キャッシュをプルダウンします (ある場合)。 初回実行時、または `project.clj` を変更した場合、これは実行されません。 さらに `lein deps` を実行して、プロジェクトの依存関係をプルダウンします。 通常、このタスクは必要時に自動的に実行されるため、これを直接呼び出すことはありません。ただし、このタスクを直接呼び出すことで、`save_cache` ステップを挿入して依存関係を保存し、次回の処理を高速化することができます。
 
-Then `lein do test, uberjar` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
+その後、`lein do test, uberjar` によって実際のテストが実行されます。テストが正常に終了した場合は、アプリケーションソースとすべての依存関係を含む "uberjar" ファイルが作成されます。
 
-Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/build-artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
+最後に `store_artifacts` ステップを使用して、uberjar を[アーティファクト](https://circleci.com/docs/1.0/build-artifacts/)として保存します。 そこから、これを目的の継続的デプロイスキームに結び付けることができます。
 
 {% raw %}
 ```yaml
 ...
     steps:
+
       - checkout
       - restore_cache:
           key: cci-demo-clojure-{{ checksum "project.clj" }}
@@ -135,16 +137,16 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 ```
 {% endraw %}
 
-Nice! You just set up CircleCI for a Clojure app.
+完了です。 これで Clojure アプリケーション用に CircleCI を設定できました。
 
-## See Also
+## 関連項目
 {:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-### Detailed Examples
+### 詳細な例
 {:.no_toc}
 
-The app described in this guide illustrates the simplest possible setup for a Clojure web app. Real-world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:
+このガイドでは、Clojure Web アプリの最も単純な設定例を示しました。通常、実際のプロジェクトはこれよりも複雑です。このため、独自のプロジェクトを設定する際は、以下のサイトのさらに詳細な例が参考になります。
 
-* [Syme](https://github.com/technomancy/syme/blob/master/.circleci/config.yml), a site which configures disposable virtual machines for remote collaboration (uses PostgreSQL, continuously deployed to Heroku)
+* [Syme](https://github.com/technomancy/syme/blob/master/.circleci/config.yml)：リモートコラボレーション用に使い捨ての仮想マシンを設定できるサイト (PostgreSQL を使用し、Heroku に継続的デプロイ)
