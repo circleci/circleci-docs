@@ -1,76 +1,77 @@
 ---
 layout: classic-docs
-title: "Enabling GitHub Checks"
-short-title: "Enabling GitHub Checks"
-description: "How to enable GitHub Checks for CircleCI"
+title: "GitHub Checks の有効化"
+short-title: "GitHub Checks の有効化"
+description: "CircleCI で GitHub Checks を有効にする方法"
 categories:
   - getting-started
 order: 1
 ---
-This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app.
 
-## Overview
+ここでは、CircleCI の設定で GitHub Checks を有効にし、CircleCI Checks アプリがワークフローステータスを GitHub アプリに報告するのを許可する方法を説明します。
 
-GitHub Checks provides your workflow status messages on the GitHub Checks page and enables you to rerun a workflow from the GitHub Checks page.
+## 概要
 
-After checks are enabled, CircleCI workflow and job status is reported under the checks tab on GitHub.
+GitHub Checks は、GitHub の [Checks] ページにワークフローステータスに関するメッセージを表示し、GitHub の [Checks] ページからワークフローを再実行できるようにします。
+
+Checks が有効になると、CircleCI のワークフローおよびジョブのステータスが GitHub の [Checks] タブに報告されます。
 
 ![CircleCI Checks]({{ site.baseurl }}/assets/img/docs/checks_tab.png)
 
-## To Enable GitHub Checks
+## GitHub Checks を有効にする方法
 
-To use the CircleCI Check integration, you first need to navigate to the Org Setting, then authenticate the repository to use CircleCI Checks as follows:
+CircleCI Check インテグレーションを使用するには、[Org Setting (組織の設定)] に移動して、以下のように CircleCI Checks を使用するリポジトリを認証します。
 
-### Prerequisites
+### 前提条件
 
-- Your project must be using CircleCI 2.0 with [Workflows]({{ site.baseurl }}/2.0/workflows/).
-- You must be an Admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
+- プロジェクトで、[Workflows ]({{ site.baseurl }}/ja/2.0/workflows/)機能を備えた CircleCI 2.0 を使用している必要があります。
+- CircleCI Checks インテグレーションのインストールを許可するには、GitHub リポジトリの管理者でなければなりません。
 
-### Steps
+### 手順
 
-1. Click the Settings tab in the CircleCI app main menu.
-2. Select VCS. 
-3. Click the Manage GitHub Checks button. ![CircleCI VCS Settings Page]({{ site.baseurl }}/assets/img/docs/checks_setting.png)
-4. Select the repositories that should utilize checks and click the Install button. ![CircleCI VCS Settings Page]({{ site.baseurl }}/assets/img/docs/checks_install.png) After installation completes, the Checks tab in GitHub will be populated with workflow run status information. 
+1. CircleCI アプリのメインメニューで [Settings (設定)] タブをクリックします。
+2. [VCS] を選択します。 
+3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/checks_setting.png)
+4. Checks を利用するリポジトリを選択し、[Install (インストール)] ボタンをクリックします。 ![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/checks_install.png)  
+    インストールが完了すると、GitHub の [Checks] タブにワークフローの実行ステータス情報が表示されます。 
 
-## Checks Status Reporting
+## Checks によるステータスレポート
 
-CircleCI reports the status of workflows and all corresponding jobs under the Checks tab on GitHub. Additionally, Checks provides a button to rerun each workflow from GitHub Checks tab.
+CircleCI は、ワークフローとすべての対応するジョブのステータスを GitHub の [Checks] タブで報告します。 また、Checks によって、GitHub の [Checks] タブから各ワークフローを再実行するためのボタンも用意されます。
 
-After the rerun is initiated, CircleCI reruns the workflow from beginning and reposts the status on the Checks tab. To navigate to the CircleCI app from GitHub, click the View more details on CircleCI Checks link.
+再実行が開始されると、CircleCI は、ワークフローを最初から再実行し、ステータスを [Checks] タブに再送します。 GitHub から CircleCI アプリに移動するには、[View more details on CircleCI Checks (CircleCI Checks で詳細を確認する)] リンクをクリックします。
 
-**Note:** Your project will stop receiving job level status after GitHub Checks is turned on. You can change this in the GitHub Status updates section of the Project Settings > Advanced Settings page.
+**メモ：**GitHub Checks をオンにすると、その後、プロジェクトはジョブレベルのステータスを受け取らなくなります。 これは、[Project Settings (プロジェクト設定)] > [Advanced Settings (詳細設定)] ページの [GitHub Status updates (GitHub ステータスアップデート)] セクションで変更できます。
 
-## To Disable GitHub Checks for a Project
+## プロジェクトの GitHub Checks を無効にする方法
 
-To disable the CircleCI Check integration, navigate to the Org Settings Page, then remove the repositories using CircleCI Checks as follows:
+CircleCI Check インテグレーションを無効にするには、[Org Settings (組織の設定)] ページに移動した後、以下の手順に従って CircleCI Checks を使用しているリポジトリを削除します。
 
-### Steps
+### 手順
 
-1. Click the Settings tab in the CircleCI app main menu.
-2. Select VCS. 
-3. Click the Manage GitHub Checks button. The Update CircleCI Checks repository access page appears. ![CircleCI VCS Settings Page]({{ site.baseurl }}/assets/img/docs/checks_update.png)
-4. Deselect the repository to uninstall the Checks integration.
-5. Confirm the status settings on your projects: Go to CircleCI > Project Settings > Advanced Settings > Confirm that the setting `GitHub Status
-Updates` is set to `on`.
+1. CircleCI アプリのメインメニューで [Settings (設定)] タブをクリックします。
+2. [VCS] を選択します。 
+3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。 [Update CircleCI Checks repository access (CircleCI Checks のリポジトリアクセスの更新)] ページが表示されます。 ![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/checks_update.png)
+4. Checks インテグレーションをアンインストールするリポジトリの選択を解除します。
+5. プロジェクトでステータスの設定を確認します。[CircleCI] > [Project Settings (プロジェクト設定)] > [Advanced Settings (詳細設定)] に移動し、[GitHub Status Updates (GitHub ステータスアップデート)]`` が `on` に設定されていることを確認します。
 
-![Re-enable GitHub Status]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
+![GitHub ステータスの再有効化]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
 
-## To Uninstall Checks for the Organization
+## 組織の Checks をアンインストールする方法
 
-1. Click the Settings tab in the CircleCI app main menu.
-2. Select VCS.
-3. Click the Manage GitHub Checks button.
-4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
+1. CircleCI アプリのメインメニューで [Settings (設定)] タブをクリックします。
+2. [VCS] を選択します。
+3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。
+4. 下へスクロールして、[Uninstall (アンインストール)] ボタンをクリックし、GitHub Checks アプリをアンインストールします。
 
-## GitHub Checks Waiting for Status in GitHub
+## GitHub Checks が GitHub でステータスを待機している場合
 
-`ci/circleci:build — Waiting for status to be reported`
+`ci/circleci:build — ステータスの報告を待機`
 
-If you have enabled GitHub Checks in your GitHub repository, but the status check never completes on GitHub Checks tab, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci:build` status key as this check refers to the job status from CircleCI 2.0, as follows:
+GitHub リポジトリで GitHub Checks を有効にしているものの、GitHub の [Checks] タブでステータスチェックがいつまでも完了しない場合は、GitHub でいずれかのステータス設定を解除する必要がある可能性があります。 たとえば、ブランチの保護を選択している場合は、以下に示すように `ci/circleci:build` ステータスキーの選択を解除する必要があります。これは、このキーが選択されていると CircleCI 2.0 のジョブステータスが参照されるためです。
 
-![Uncheck GitHub Job Status Keys]({{ site.baseurl }}/assets/img/docs/github_job_status.png)
+![GitHub ジョブステータスキーの選択の解除]({{ site.baseurl }}/assets/img/docs/github_job_status.png)
 
-Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a workflow job level.
+GitHub Checks を使用している際に、`ci/circleci:build` チェックボックスをオンにすると、GitHub でステータスが完了と表示されなくなります。これは CircleCI が GitHub にステータスをワークフロージョブレベルではなくワークフローレベルで送信するためです。
 
-Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
+GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護されているブランチで [Edit (編集)] ボタンをクリックして、設定の選択を解除します (例：`https://github.com/your-org/project/settings/branches`)。
