@@ -1,42 +1,43 @@
 ---
 layout: classic-docs
-title: "Using Contexts"
-short-title: "Using Contexts"
-description: "Secured, cross-project resources"
+title: "コンテキストの使用"
+short-title: "コンテキストの使用"
+description: "安全なプロジェクト間リソース"
 categories:
   - configuring-jobs
 order: 41
 ---
-This document describes creating and using contexts in CircleCI in the following sections:
 
-* TOC
+ここでは、以下のセクションに沿って、CircleCI でコンテキストを作成および使用する方法について説明します。
+
+* 目次
 {:toc}
 
-Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
+コンテキストは、環境変数を保護し、プロジェクト間で共有するためのメカニズムを提供します。 環境変数は、名前・値のペアとして定義され、実行時に挿入されます。
 
-## Overview
+## 概要
 {:.no_toc}
 
-Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an organization administrator to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
+コンテキストは、CircleCI アプリケーションの [Settings (設定)] ページにある [Organization (組織)] セクションで作成します。 You must be an organization member to view, create, or edit contexts. アプリケーションでコンテキストを設定したら、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの workflows セクションでコンテキストを設定することができます。
 
-To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org.
+[Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければならず、またルールによって組織内のすべてのプロジェクトへのアクセスが許可されていなければなりません。
 
-Context names must be unique for each GitHub or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work.
+コンテキスト名は、各 GitHub 組織または Bitbucket 組織内で一意でなければなりません。 **メモ：**初期デフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
 
-### Context Naming for CircleCI Installed on Your Servers
+### CircleCI がユーザーサーバーにインストールされる場合のコンテキストの命名規則
 {:.no_toc}
 
-For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error.
+GitHub Enterprise (GHE) インストールに複数の組織が含まれる場合、コンテキスト名はそれらの組織間でも一意でなければなりません。 たとえば、Kiwi という名前の GHE があり、それに 2つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストールに存在する 2つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
 
-## Creating and Using a Context
+## コンテキストの作成と使用
 
-1. As an organization administrator, Navigate to the Settings > Contexts page in the CircleCI application.
+1. As an organization member, Navigate to the Settings > Contexts page in the CircleCI application. **Note:** Any organization member can create a context only organization administrators can restrict it with a security group.
 
-2. Click the Create Contexts button to add a unique name for your Context. After you click the Create button on the dialog box, the Context appears in a list with Security set to Public to indicate that anyone in your organization can access this context at runtime.
+2. [Create Contexts (コンテキストを作成)] ボタンをクリックして、一意のコンテキスト名を追加します。 After you click the Create button on the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this context at runtime.
 
-3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
+3. [Add Environment Variable (環境変数を追加)] ボタンをクリックし、変数名と値をコピー＆ペーストします。 [Add Variable (変数を追加)] ボタンをクリックして保存します。
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
+4. この変数を使用する各ジョブで、[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの [`workflows`]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションに `context: <context name>` キーを追加します。 以下の例では、`run-tests` ジョブが、`org-global` コンテキストに設定された変数を使用します。
 
     workflows:
       version: 2
@@ -46,36 +47,38 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
               context: org-global
     
 
-## Moving a Repository that Uses a Context
+## コンテキストを使用するリポジトリの移動
 
-If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
+リポジトリを新しい組織に移動する場合は、新しい組織でも一意のコンテキスト名を設定する必要があります。
 
-## Restricting a Context
+## コンテキストの制約
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are definied as LDAP groups or GitHub teams. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the restricted context.
+CircleCI は、コンテキストにセキュリティグループを追加することで、実行時にシークレットの環境変数の使用を制約できます。 新規または既存のコンテキストに*セキュリティグループ*を追加できるのは、組織管理者だけです。 Security groups are defined as LDAP groups or GitHub teams. コンテキストにセキュリティグループを追加すると、そのセキュリティグループのメンバーである CircleCI ユーザーのみが、制約付きコンテキストの環境変数にアクセスまたは使用できます。
+
+Note: Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
 The default security group is `All members` and enables any member of the organization who uses CircleCI to use the context.
 
-## Running Workflows with a Restricted Context
+## 制約付きコンテキストを使用したワークフローの実行
 
-To invoke a workflow that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your workflow and you are **not** a member of any of the security groups, the workflow will fail as `Unauthorized`.
+To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context or the workflow will fail with the status of `Unauthorized`. If you add a context to your job and you are **not** a member of any of the security groups, the workflow will fail as `Unauthorized`.
 
 **Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups. Restricted Contexts are also **not** yet supported in private installations of CircleCI.
 
-### Restrict a Context to a Security Group or Groups
+### コンテキストを使用できるセキュリティグループの制限
 
 You must be an organization administrator to complete the following task.
 
-1. Navigate to Organization Settings > Contexts page in the CircleCI app. The list of contexts appears. The default security group is `All members` and allows all users in the org to invoke jobs with that context.
-2. Click the Create Context button if you will use a new context or click the name of an existing context.
-3. Click the Add Group link. The Add Groups dialog box appears.
-4. Select GitHub teams or LDAP groups to add to the context and click the Add button. Use of the context is now limited to the selected groups.
-5. Click Add Environment Variables to add environment variables to the context if none exist and click the Add button. Use of the environment variables for this context is now limited to members of the security groups.
-6. Navigate to Organization Settings > Contexts in the CircleCI app. The security groups appear in the Security column for the context.
+1. CircleCI アプリケーションで [Organization Settings (組織設定)] > [Contexts (コンテキスト)] ページに移動します。コンテキストのリストが表示されます。 セキュリティグループはデフォルトで `All members` に設定され、組織内のすべてのユーザーにそのコンテキストを含むジョブの起動が許可されます。
+2. [Create Context (コンテキストを作成)] ボタンをクリックして新しいコンテキストを作成するか、既存のコンテキストの名前をクリックします。
+3. [Add Group (グループを追加)] リンクをクリックします。 [Add Group (グループを追加)] ダイアログボックスが表示されます。
+4. コンテキストに追加する GitHub チームまたは LDAP グループを選択し、[Add (追加)] ボタンをクリックします。 これで、コンテキストの使用は、選択したグループに制限されます。
+5. 環境変数がまだない場合は、[Add Environment Variables (環境変数を追加)] をクリックしてコンテキストに環境変数を追加し、[Add (追加)] ボタンをクリックします。 これで、このコンテキストに設定された環境変数の使用は、セキュリティグループのメンバーに制限されます。
+6. CircleCI アプリケーションで、[Organization Settings (組織設定)] > [Contexts (コンテキスト)] に移動します。セキュリティグループが、コンテキストの [Security (セキュリティ)] 列に表示されます。
 
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
 
-### Approving Jobs that use Restricted Contexts
+### 制約付きコンテキストを使用するジョブの承認
 
 Adding an approval job to a workflow allows a user to manually approve the use of a restricted context.
 
@@ -85,42 +88,42 @@ For example, if you want the execution of job C and job D restricted to a securi
 
 If the approver of a job is not part of the restricted context, it is possible to approve the job B, however the jobs C and D in the workflow will fail as unauthorized. That is, the Approval job will appear for every user, even for users who are not part of the group with permissions for the context. When the downstream jobs fail with Unauthorized, it indicates an approval was made by a user who is not part of the security group for the downstream jobs.
 
-## Removing Groups from Contexts
+## コンテキストからのグループの削除
 
 To make a context available only to the administrators of the organization, you may remove all of the groups associated with a context. All other users will lose access to that context.
 
-### Adding and Removing Users from Teams and Groups
+### チームおよびグループへのユーザーの追加と削除
 
 CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
 
-### Adding and Removing Environment Variables from Restricted Contexts
+### 制約付きコンテキストへの環境変数の追加と削除
 
 Addition and deletion of environment variables from a restricted context is limited to members of the context groups.
 
-## Deleting a Context
+## コンテキストの削除
 
 If the context is restricted with a group other than `All members`, you must be a member of the security group to complete this task.
 
-1. As an organization administrator, Navigate to the Settings > Contexts page in the CircleCI application.
+1. 組織管理者として、CircleCI アプリケーションの [Settings (設定)] > [Contexts (コンテキスト)] ページに移動します。
 
-2. Click the Delete Context button for the Context you want to delete. A confirmation dialog box appears.
+2. 削除するコンテキストの [Delete Context (コンテキストを削除)] ボタンをクリックします。 確認ダイアログボックスが表示されます。
 
-3. Type Delete and click Confirm. The Context and all associated environment variables will be deleted. **Note:** If the context was being used by a job in a Workflow, the job will start to fail and show an error.
+3. 「Delete」と入力し、[Confirm (確認)] をクリックすると、 コンテキストおよび関連付けられたすべての環境変数が削除されます。 **メモ：** 削除したコンテキストがいずれかのワークフロー内のジョブで使用されていた場合、そのジョブは動作しなくなり、エラーが表示されます。
 
-## Environment Variable Usage
+## 環境変数の使用方法
 
 Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key for a `run` step.
-3. Environment variables set with the `environment` key for a job.
-4. Environment variables set with the `environment` key for a container.
-5. Context environment variables (assuming the user has access to the Context).
-6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) section of this document.
+1. `FOO=bar make install` など、`run` ステップのシェルコマンド内で宣言された環境変数
+2. `run` ステップで `environment` キーを使用して宣言された環境変数
+3. ジョブで `environment` キーを使用して設定された環境変数
+4. コンテナで `environment` キーを使用して設定された環境変数
+5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
+6. [Project Settings (プロジェクト設定)] ページで設定されたプロジェクトレベルの環境変数
+7. [CircleCI 環境変数の説明]({{ site.baseurl }}/ja/2.0/env-vars/#built-in-environment-variables)ページで定義されている特殊な CircleCI 環境変数
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-## See Also
+## 関連項目
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) [Workflows]({{ site.baseurl }}/2.0/workflows/)
