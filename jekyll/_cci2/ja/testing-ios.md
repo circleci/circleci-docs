@@ -1,64 +1,67 @@
 ---
 layout: classic-docs
-title: Testing iOS Applications on macOS
-short-title: Testing iOS Applications on macOS
+title: macOS 上の iOS アプリケーションのテスト
+short-title: macOS 上の iOS アプリケーションのテスト
 categories:
   - platforms
-description: Testing iOS applications on macOS
+description: macOS 上の iOS アプリケーションのテスト
 order: 30
 ---
-This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
 
-- TOC
+ここでは、CircleCI を使用して iOS アプリケーションのテストを設定およびカスタマイズする方法について、以下のセクションに沿って説明します。
+
+- 目次
 {:toc}
 
-## Overview
+**Note:** There is also documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
+
+## 概要
 {:.no_toc}
 
 CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI macOS build images in the Using a macOS Build Image document.
 
-## macOS Build Containers
+## macOS ビルドコンテナ
 
 Each `macos` job is run a fresh container, running macOS. We build a new container each time a new version of Xcode is released by Apple. The contents of a particular build container remain unchanged (in very exceptional circumstances we might be forced to re-build a container). Our goal is to keep your builds environement stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
 We announce the availability of new macOS containers in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
-## Supported Xcode Versions
+## サポートされている Xcode のバージョン
 
 The currently available Xcode versions are:
 
-- `10.2.0`: Xcode 10.2 (Build 10P99q) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-520/index.html)
+- `11.1.0`: Xcode 11.1 (GM Seed) (Build 11A1027) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1226/index.html)
+- `11.0.0`: Xcode 11.0 (Build 11A420a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1136/index.html)
+- `10.3.0`: Xcode 10.3 (Build 10G8) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-903/index.html)
+- `10.2.1`: Xcode 10.2.1 (Build 10E1001) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
 - `10.1.0`: Xcode 10.1 (Build 10B61) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
 - `10.0.0`: Xcode 10.0 (Build 10A255) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
 - `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
-- `9.4.0`: Xcode 9.4 (Build 9F1027a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-422/index.html)
 - `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
-- `9.3.0`: Xcode 9.3 (Build 9E145) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-405/index.html)
 - `9.2.0`: Xcode 9.2.0 (Build 9C40b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
-- `9.1.0`: Xcode 9.1.0 (Build 9B55) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
-- `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
-- `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
+- `9.0.1`：Xcode 9.0.1 (ビルド 9A1004) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
+- `8.3.3`：Xcode 8.3.3 (ビルド 8E3004b) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
 
-## Getting Started
+## はじめよう
 
 Select a macOS project you would like to build on the Add Projects page of the CircleCI application. **Note:** Changing build environment is no longer needed in 2.0. If your project is not listed as macOS, choose Linux project and then select macOS in the Operating System section.
 
-## Basic Setup
+## 基本的なセットアップ
 
 After enabling macOS builds for your project, share the scheme that is going to be built on CircleCI so that CircleCI runs the correct build actions. Complete the following steps to share an existing scheme in Xcode:
 
-1. Choose Product > Scheme > Manage Schemes.
-2. Select the Shared option for the scheme to share, and click Close.
-3. Choose Source Control > Commit.
-4. Select the Shared Data folder.
-5. Enter your commit message in the text field.
-6. Select the "Push to remote" option (if your project is managed with Git).
-7. Click the Commit Files button. A new `.xcscheme` file is located in the `xcshareddata/xcschemes` folder under your Xcode project.
-8. Commit this file to your git repository so that CircleCI can access it.
+1. [Product (プロダクト)] > [Scheme (スキーム)] > [Manage Schemes (スキーム管理)] の順に選択します。
+2. 共有したいスキームの [Shared (共有する)] オプションを選択し、[Close (閉じる)] をクリックします。
+3. [Source Control (ソース管理)] > [Commit (コミットする)] の順に選択します。
+4. 共有データフォルダーを選択します。
+5. テキストフィールドにコミットメッセージを入力します。
+6. プロジェクトを Git で管理している場合は、[Push to remote (リモートにプッシュする)] オプションを設定します。
+7. [Commit Files (ファイルをコミットする)] ボタンをクリックします。 新しい `.xcscheme` ファイルが Xcode プロジェクトの下の `xcshareddata/xcschemes` フォルダーに格納されます。
+8. CircleCI からアクセスできるように、このファイルを Git リポジトリにコミットします。
 
 Simple projects should run with minimal configuration. You can find an example of a minimal config in the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
-### Best Practices
+### ベストプラクティス
 {:.no_toc}
 
 In addition to the basic setup steps, it is best practice to include downloading CocoaPods specs from the CircleCI mirror (up to 70% faster) and linting the Swift code together with the `build-and-test` job:
@@ -69,7 +72,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
     steps:
@@ -98,10 +101,11 @@ workflows:
   version: 2
   build-and-test:
     jobs:
+
       - build-and-test
 ```
 
-## Advanced Setup
+## 高度なセットアップ
 
 For advanced setup, it is possible to run a lint job together with your build and test job, and potentially also run tools like [Danger](https://github.com/danger/danger).
 
@@ -132,16 +136,17 @@ workflows:
   version: 2
   build-test-lint:
     jobs:
+
       - swiftlint
       - danger
       - build-and-test
 ```
 
-## Using Fastlane
+## fastlane の使用
 
 [Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as that allows for parity of build / deploy locally and on CircleCI, and simplifies the setup process.
 
-### Adding a Gemfile
+### Gemfile の追加
 {:.no_toc}
 
 It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI. The simplest `Gemfile` could look like this:
@@ -153,7 +158,7 @@ It is recommended to add a `Gemfile` to your repository to make sure that the sa
 
 After you have created a `Gemfile` locally, you will need to run `bundle install` and check both `Gemfile` and `Gemfile.lock` into your repository.
 
-### Setting up Fastlane for use on CircleCI
+### CircleCI 上で使用する場合の fastlane の設定
 {:.no_toc}
 
 When using Fastlane in your CircleCI project, we recommend adding the following to your `Fastfile`:
@@ -171,11 +176,11 @@ When using Fastlane in your CircleCI project, we recommend adding the following 
 
 The `setup_circle_ci` Fastlane action must be in the `before_all` block to perform the following actions:
 
-- Create a new temporary keychain for use with Fastlane Match (see the code signing section for more details).
-- Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
-- Set up log and test result paths to be easily collectible.
+- fastlane match で使用する一時的なキーチェーンを新しく作成する (詳細については、コード署名のセクションを参照してください)。
+- fastlane match を `readonly` モードに切り替えて、CI が新しいコード署名証明書やプロビジョニングプロファイルを作成しないようにする。
+- 収集しやすくなるように、ログやテスト結果のパスを設定する。
 
-### Example Configuration for Using Fastlane on CircleCI
+### CircleCI で fastlane を使用する場合の設定例
 {:.no_toc}
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
@@ -188,12 +193,12 @@ A basic Fastlane configuration that can be used on CircleCI is as follows:
         setup_circle_ci
       end
     
-      desc "Runs all the tests"
+      desc "すべてのテストを実行"
       lane :test do
         scan
       end
     
-      desc "Ad-hoc build"
+      desc "アドホックビルド"
       lane :adhoc do
         match(type: "adhoc")
         gym(export_method: "ad-hoc")
@@ -209,11 +214,10 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -227,12 +231,12 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
-    shell: /bin/bash --login -o pipefail
     steps:
+
       - checkout
       - run: bundle install
       - run:
@@ -245,6 +249,7 @@ workflows:
   version: 2
   build-test-adhoc:
     jobs:
+
       - build-and-test
       - adhoc:
           filters:
@@ -256,12 +261,16 @@ workflows:
 
 The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan.
 
+### Reducing Testing Time
+
+By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the [fastlane docs](https://docs.fastlane.tools/actions/run_tests/#parameters).
+
 ### Using CocoaPods
 {:.no_toc}
 
 If you are using CocoaPods, then we recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
 
-## Supported Build and Test Tools
+## サポートされているビルドおよびテストのツール
 
 In CircleCI 2.0 it is possible to customize your build as needed to satisfy almost any iOS build and test strategy.
 
@@ -288,14 +297,14 @@ To pre-start the simulator, add the following to your `config.yml` file, assumin
 
         steps:
           - run:
-              name: pre-start simulator
+              name: シミュレーターを事前に起動
               command: xcrun instruments -w "iPhone 7 (10.2) [" || true
     
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
 
-- `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator.
-- `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
+- iPhone シミュレーター：`iPhone 7 (10.2) [<uuid>]`
+- iPhone と Apple Watch のペア：`iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]`
 
 ### Creating a `config.yml` File
 {:.no_toc}
@@ -309,7 +318,7 @@ The most flexible means to customize your build is to add a `.circleci/config.ym
 
         steps:
           - run:
-              name: Install cowsay
+              name: cowsay をインストール
               command: brew install cowsay
           - run:
               name: cowsay hi
@@ -323,16 +332,7 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 
 Our macOS containers contain multiple versions of Ruby. The default version is the system-installed Ruby. The containers also include the latest stable versions of Ruby at the time that the container is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
-If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so. To activate `chruby`, you **must** change the `shell` parameter of your job to be a login shell (adding `--login`).
-
-```yaml
-version: 2
-jobs:
-  build:
-    macos:
-      xcode: "10.1.0"
-    shell: /bin/bash --login -eo pipefail
-```
+If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
 To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
@@ -360,6 +360,7 @@ Then you can install these using bundler:
 
 {% raw %}
 steps:
+    
           - restore_cache:
               key: 1-gems-{{ checksum "Gemfile.lock" }}
 
@@ -377,36 +378,36 @@ You can then ensure you are using those, by prefixing commands with `bundle exec
           - run: bundle exec pod install
     
 
-## Configuring Deployment
+## デプロイの設定
 
 After you have a signed app you are ready to configure deployment. Distributing the app is easy with one of the following:
 
 - [iTunes Connect](https://itunesconnect.apple.com/)
 - [HockeyApp](http://hockeyapp.net/)
-- [Beta by Crashlytics](http://try.crashlytics.com/beta/)
+- [Crashlytics (ベータ版)](http://try.crashlytics.com/beta/)
 - [TestFairy](https://testfairy.com/)
 
 Then you should set up environment variables for your service of choice:
 
-### Hockey App 
+### Hockey App
 {:.no_toc}
 
-1. Log in to Hockey app and create a new API token on the [Tokens page](https://rink.hockeyapp.net/manage/auth_tokens). Your token will need at least upload permission to upload new builds to Hockey App.
+1. HockeyApp にログインし、[トークンページ](https://rink.hockeyapp.net/manage/auth_tokens)で新しい API トークンを作成します。 新しいビルドを HockeyApp にアップロードするには、使用するトークンに少なくともアップロード権限が必要です。
 
-2. Give your new API token a name specific to CircleCI such as "CircleCI Distribution".
+2. 新しい API トークンに「CircleCI Distribution」などの CircleCI に関連する名前を付けます。
 
-3. Copy the token, and log into CircleCI and go to the Project Settings page for your app.
+3. トークンをコピーし、CircleCI にログインして、アプリケーションの [Project Settings (プロジェクト設定)] ページに移動します。
 
-4. Create a new Environment Variable with the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now access this token in any job.
+4. `HOCKEY_APP_TOKEN` という名前の新しい環境変数を作成し、その値としてトークンをペーストします。 これで、どのジョブでもこのトークンにアクセスできます。
 
 ### Beta By Crashlytics
 {:.no_toc}
 
-1. Log in to Fabric.io and visit your organization's settings page. ![Fabric.io loging image]({{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
+1. Fabric.io にログインし、組織の設定ページにアクセスします。![Fabric.io のログイン]({{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
-2. Click your organization (CircleCI in the image above), and click the API key and Build Secret links to reveal the items. ![Fabric.io org image]({{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
+2. Click your organization (CircleCI in the image above), and click the API key and Build Secret links to reveal the items. ![Fabric.io の組織設定]({{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
 
-3. Navigate to your App's Project Settings page in the CircleCI app, and under Environment Variables add two new items named `CRASHLYTICS_API_KEY` and `CRASHLYTICS_SECRET`, with the values you find on Crashlytics website.
+3. CircleCI アプリケーションで、アプリケーションの [Project Settings (プロジェクト設定)] ページに移動し、[Environment Variables (環境変数)] に新しい項目として `CRASHLYTICS_API_KEY` と`CRASHLYTICS_SECRET` を追加し、それぞれ Crashlytics のWeb サイトに表示された値を設定します。
 
 ### TestFairy
 {:.no_toc}
@@ -415,10 +416,10 @@ To set up your app on TestFairy, follow these steps:
 
 ![TestFairy preferences image]({{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
 
-1. On the TestFairy dashboard, navigate to the Preferences page.
-2. On the Preferences page, go to the API Key section.
-3. Copy your API key and go to your application's project settings within the CircleCI application.
-4. To deploy, add a job to your configuration using [fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) or `curl` (example below).
+1. TestFairy ダッシュボードで、[Preferences (設定)] ページに移動します。
+2. [Preferences (設定)] ページの [API Key (API キー)] セクションに移動します。
+3. API キーをコピーし、CircleCI アプリケーションでアプリケーションの [Project Settings (プロジェクト設定)] ページに移動します。
+4. デプロイするには、[fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) または `curl` を使用し、設定にジョブを追加します。以下の例を参照してください。
 
 
 {% raw %}
@@ -428,6 +429,7 @@ jobs:
     #  insert build code here...
   deploy:
     steps:
+
       - checkout
       - run:
           name: Deploy to TestFairy
@@ -443,6 +445,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+
       - build
       - deploy:
         requires:
@@ -456,31 +459,31 @@ workflows:
 
 For a complete list of available options, please visit the [TestFairy Upload API documentation](https://docs.testfairy.com/API/Upload_API.html)
 
-## Resolving Common Simulator Issues
+## シミュレーターに関する一般的な問題の解決方法
 {:.no_toc}
 
 A series of simulator-related issues are known to happen on some projects. Here are the most frequent of those:
 
-- **Xcode version is not available.** We install a few different versions of Xcode in each build image and keep those updated with the latest point releases. For version `10.0.0`, you must specify the full version, down to the point release number. However, to use the latest Xcode 8.3, for example, which is `8.3.3`, it is sufficient to specify `8.3` in your `config.yml`. If a newer point release of 8.3 comes out, we will make that one available under the same `8.3` version on CircleCI.
+- **Xcode のバージョンが使用できない：**各ビルドイメージにはいくつかのバージョンの Xcode がインストールされており、最新のリリースに伴い更新されていきます。 For version `10.0.0`, you must specify the full version, down to the point release number. 一方、最新の Xcode 8.3 (`8.3.3` など) を使用する場合は、`config.yml` に `8.3` のみを指定します。 CircleCI 上で `8.3` バージョンと指定してあれば、8.3 の最新ポイントリリースが公開されたときに、そのまま最新ポイントリリースが使用できるようになります。
 
-- **Dependency version mismatches.** If you see that the version of the dependencies used in a job are not the expected ones, please try rebuilding without cache — chances are an older dependency got stuck in the cache and is not allowing for the newer version to get installed.
+- **依存関係のバージョンが一致しない：**想定とは異なる依存関係のバージョンがジョブで使用されている場合は、キャッシュを使用せずにリビルドしてみてください。キャッシュ内の古い依存関係が原因となって、新しいバージョンのインストールが妨げられている可能性があります。
 
-- **Cryptic compilation errors.** If you see compile-time errors that do not really make sense, please check if the version of Xcode you are using in your build is the same one you are using locally. When the `config.yml` of the project does not specify an Xcode version, we default to an older Xcode which might not support the necessary features.
+- **Cryptic でコンパイルエラーが発生する：**コンパイル時に原因不明のエラーが発生した場合は、ビルドで使用している Xcode のバージョンが、ローカルで使用しているバージョンと一致しているかどうかを確認してください。 プロジェクトの `config.yml` で Xcode のバージョンを指定していない場合は、古い Xcode がデフォルトで使用され、必要な機能がサポートされていない可能性があります。
 
-- **Ruby segfaults.** We have seen cases where some of the Ruby gems used during a job would produce a segmentation fault in Ruby. This might happen because of the mismatch of Ruby version used to build the gem and the Ruby version used to run it. Please make sure that the Ruby version used locally is the same as the one used on CircleCI. You can install a newer version Ruby in the container by following [this guide](https://discuss.circleci.com/t/installing-a-newer-ruby-version-on-ios-os-x-containers/2466).
+- **Ruby でセグメンテーション違反が発生する：**ジョブの実行中に使用される Ruby gem の一部によって、Ruby でセグメンテーションエラーが発生するケースが確認されています。 原因としては、gem のビルドに使用された Ruby のバージョンと、その実行に使用された Ruby のバージョンが異なることが考えられます。 ローカルで使用されている Ruby のバージョンが CircleCI で使用されているバージョンと一致していることを確認してください。 コンテナに新しいバージョンの Ruby をインストールする場合は、[こちらのガイド](https://discuss.circleci.com/t/installing-a-newer-ruby-version-on-ios-os-x-containers/2466)を参照してください。
 
-- **Inconsistent timeouts during test runs.** If your UI tests are timing out, try running them [before the rest of your tests](https://stackoverflow.com/questions/44361446/ios-uitests-failed-idetestoperationsobservererrordomain-code-13/48299184#48299184). You can also try using the raw `xcodebuild` command or the `xctool` command. Some issues are only present in one of these tools.
+- **テストラン中に不規則なタイムアウトが発生する：**UI テストがタイムアウトになる場合は、[他のテストの前に](https://stackoverflow.com/questions/44361446/ios-uitests-failed-idetestoperationsobservererrordomain-code-13/48299184#48299184)実行してみてください。 また、`xcodebuild` コマンドまたは `xctool` コマンドもそのまま使用してみてください。 一部の問題は、これらのツールでのみ発生します。
 
-- **Errors while installing code signing certificates.** Please check out the iOS Code Signing document.
+- **コード署名証明書のインストール中にエラーが発生する：**iOS コード署名に関するドキュメントを参照してください。
 
-- **Many iOS app developers use tools that generate substantial amounts of code.** In such cases CircleCI may not correctly detect the Xcode workspace, project, or scheme. Instead, you can specify these through environment variables.
+- **多数の iOS アプリの開発者が、大量のコードを生成するツールを使用している：**この場合、CircleCI では Xcode のワークスペース、プロジェクト、またはスキームを正しく検出できないことがあります。 代わりに、環境変数を使用してそれらを指定できます。
 
 ### Constraints on macOS-based Builds
 {:.no_toc}
 
 Splitting tests between parallel containers on macOS is currently not supported. We suggest using a workflow with parallel jobs to build with different Xcode versions, or a workflow with parallel jobs to run different test targets. Please check [this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples) for examples of workflows with parallel jobs.
 
-## Sample Configuration with Multiple Executor Types (macOS + Docker)
+## 複数の Executor タイプを含む設定例 (macOS と Docker)
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
@@ -491,12 +494,13 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
 
     steps:
+
       - checkout
       - run:
           name: Fetch CocoaPods Specs
@@ -520,6 +524,7 @@ jobs:
 
   swiftlint:
     docker:
+
       - image: dantoml/swiftlint:latest
     steps:
       - checkout
@@ -531,6 +536,7 @@ jobs:
 
   danger:
     docker:
+
       - image: dantoml/danger:latest
     steps:
       - checkout
@@ -540,6 +546,7 @@ workflows:
   version: 2
   build-test-lint:
     jobs:
+
       - swiftlint
       - danger
       - build-and-test
@@ -547,13 +554,13 @@ workflows:
 
 {% endraw %}
 
-## React Native projects
+## React Native プロジェクト
 {:.no_toc}
 
 React Native projects can be built on CircleCI 2.0 using `macos` and `docker` executor types. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
 
-## See Also
+## 関連項目
 {:.no_toc}
 
-- See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS project using Fastlane on CircleCI 2.0.
-- See the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) for a config walkthrough.
+- CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
+- コンフィグの詳しい説明については、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」を参照してください。
