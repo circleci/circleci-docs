@@ -1,29 +1,30 @@
 ---
 layout: classic-docs
-title: "Using Shell Scripts"
-short-title: "Using Shell Scripts"
-description: "Best practices for using shell scripts for use in CircleCI configuration"
+title: "シェルスクリプトの使用"
+short-title: "シェルスクリプトの使用"
+description: "CircleCI 設定でのシェルスクリプト使用に関するベストプラクティス"
 categories:
   - getting-started
 order: 10
 ---
-This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
-+ TOC {:toc}
+[CircleCI 設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェルスクリプトを使用するうえでのベストプラクティスについて、以下のセクションに沿って説明します。
 
-## Overview
++ 目次 {:toc}
 
-Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
+## 概要
 
-## Shell Script Best Practices
+CircleCI を設定するときに、シェルスクリプトの記述が必要になることは少なくありません。 シェルスクリプトを作成すると、ビルドをきめ細かく制御できるようになりますが、些細なエラーにつながりやすいため、繊細なテクニックが求められる作業です。 以下に説明するベストプラクティスを参照すれば、これらのエラーの多くを回避することができます。
 
-### Use ShellCheck
+## シェルスクリプトのベストプラクティス
+
+### ShellCheck の使用
 
 {:.no_toc}
 
-[ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
+[ShellCheck](https://github.com/koalaman/shellcheck) は、シェルスクリプトの静的解析ツールです。bash/sh シェルスクリプトに対して警告と提案を行います。
 
-ShellCheck works best with CircleCI when you add it as a separate job in your `.circleci/config.yml` file. This allows you to run the `shellcheck` job in parallel with other jobs in a workflow.
+CircleCI で ShellCheck を最も効果的に使用するには、このツールを `.circleci/config.yml` ファイルに個別のジョブとして追加します。 こうすると、ワークフロー内で `shellcheck` ジョブを他のジョブと並列に実行できます。
 
 ```yaml
 version: 2
@@ -34,7 +35,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check Scripts
+          name: スクリプトをチェック
           command: |
             find . -type f -name '*.sh' | wc -l
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
@@ -45,6 +46,7 @@ workflows:
   version: 2
   workflow:
     jobs:
+
       - shellcheck
       - build-job:
           requires:
@@ -54,7 +56,7 @@ workflows:
               only: master
 ```
 
-**Note:** Be careful when using `set -o xtrace` / `set -x` with ShellCheck. When the shell expands secret environment variables, they will be exposed in a not-so-secret way. In the example below, observe how the `tmp.sh` script file reveals too much.
+**メモ**：ShellCheck と共に `set -o xtrace` / `set -x` を使用するときには注意が必要です。 シェルがシークレットな環境変数を展開すると、機密性の高くない方法で公開されてしまいます。 以下の例では、`tmp.sh` スクリプトファイルによって、公開すべきでない部分まで公開されています。
 
     > cat tmp.sh
     #!/bin/sh
@@ -67,6 +69,7 @@ workflows:
       echo "You must set SECRET_ENV_VAR!"
     fi
     > sh tmp.sh
+    
     + '[' -z '' ']'
     + echo 'You must set SECRET_ENV_VAR!'
     You must set SECRET_ENV_VAR!
@@ -74,25 +77,25 @@ workflows:
     + '[' -z 's3cr3t!' ']'
     
 
-### Set Error Flags
+### エラーフラグの設定
 
 {:.no_toc}
 
-There are several error flags you can set to automatically exit scripts when unfavorable conditions occur. As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
+いくつかのエラーフラグを設定することで、好ましくない状況が発生した場合にスクリプトを自動的に終了できます。 厄介なエラーを回避するために、各スクリプトの先頭に以下のフラグを追加することをお勧めします。
 
 ```bash
 #!/usr/bin/env bash
 
-# Exit script if you try to use an uninitialized variable.
+# 初期化されていない変数が使用された場合にスクリプトを終了します。
 set -o nounset
 
-# Exit script if a statement returns a non-true return value.
+# ステートメントが true 以外の戻り値を返した場合にスクリプトを終了します。
 set -o errexit
 
-# Use the error status of the first failure, rather than that of the last item in a pipeline.
+# パイプライン内の最後の項目ではなく、最初の障害のエラーステータスを使用します。
 set -o pipefail
 ```
 
-## See Also
+## 関連項目
 
-For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
+堅牢なシェルスクリプトの作成に関する詳しい説明と他のテクニックについては、[こちらのブログ記事](https://www.davidpashley.com/articles/writing-robust-shell-scripts)を参照してください。
