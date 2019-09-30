@@ -5,7 +5,6 @@ orbs:
   node: circleci/node@1.1.6
 
 
-### TODO can we replace yaml references with 2.1 feature for reusing config.
 references:
   workspace_root: &workspace_root
     /tmp/workspace
@@ -26,7 +25,7 @@ jobs:
           cache-key: "package-lock.json"
           cache-version: v9
           steps:
-            - npm install
+            - run: npm install
       - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: npm run webpack-prod
