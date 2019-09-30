@@ -1,29 +1,29 @@
 ---
 layout: classic-docs
-title: "Language Guide: Haskell"
+title: "言語ガイド：Haskell"
 short-title: "Haskell"
-description: "Building and Testing with Haskell on CircleCI 2.0"
+description: "CircleCI 2.0 での Haskell を使用したビルドとテスト"
 categories:
   - language-guides
 order: 2
 ---
-This guide will help you get started with a basic Haskell application on CircleCI 2.0. If you’re in a rush, feel free to copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-- TOC
+このガイドでは、CircleCI 2.0 で基本的な Haskell アプリケーションを作成する方法について説明します。お急ぎの場合は、以下の設定例をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) にコピーし、ビルドを開始してください。
+
+- 目次
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
-You can view an example Haskell project that build with CircleCI at the following link:
+CircleCI でビルドされた Haskell プロジェクトのサンプルは、以下のリンクから確認できます。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-haskell"
-target="_blank">Demo Haskell Project on GitHub</a>
+target="_blank">GitHub 上の Haskell デモプロジェクト</a>
 
-In the project you will find a commented CircleCI configuration file <a
-href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>.
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
-## Sample Configuration
+## 設定例
 
 {% raw %}
 
@@ -39,19 +39,20 @@ jobs:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           name: Restore Cached Dependencies
           keys:
-            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
-          command: stack setup
+          command: stack --no-terminal setup
       - run:
           name: Run tests
-          command: stack test
+          command: stack --no-terminal test
       - run:
           name: Install executable
-          command: stack install
+          command: stack --no-terminal install
       - save_cache:
           name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+          key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
           paths:
             - "/root/.stack"
             - ".stack-work"
@@ -64,23 +65,23 @@ jobs:
 
 {% endraw %}
 
-## Config Walkthrough
+## 設定の詳細
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
 version: 2.1
 ```
 
-Next, we have a `jobs` key. Each job represents a phase in your workflow. Our sample app only needs a `build` job, so all our steps and commands will live under that key.
+次に、`jobs` キーを置きます。 それぞれのジョブは、ワークフロー内の各段階を表しています。 このサンプルアプリケーションには 1つの `build` ジョブのみが必要なので、このキーの下にすべてのステップとコマンドを置きます。
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+ジョブのステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
 
-In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 リストの先頭にあるイメージがジョブの[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。
 
-All commands for a job execute in this container.
+ジョブのすべてのコマンドは、このコンテナで実行されます。
 
 ```yaml
 jobs:
@@ -89,55 +90,69 @@ jobs:
       - image: fpco/stack-build:lts
 ```
 
-We are now set to run the Haskell build tool `stack` in our environment. The remainder of our `config.yml` file all falls under the `steps` key.
+これで、この環境で Haskell ビルドツール `stack` を実行するように設定できました。 `config.yml` ファイルの残りの部分はすべて `steps` キーの下にあります。
 
-Our first step is to run `checkout` to pull our repository's code down and set it up in our environment.
+最初のステップで `checkout` を実行してリポジトリのコードをプルし、この環境に準備します。
 
-Next we check if there are any dependencies that can be restored, enabling our build to speed up. Following that, we run `stack setup` to pull in the Haskell compiler as specified in the `stack.yaml` config.
+次に、ビルド時間を短縮するために復元可能な依存関係があるかどうかを確認します。 その後 `stack setup` を実行して、`stack.yaml` コンフィグで指定された Haskell コンパイラーにプルします。
+
+For all `stack` invocations, `--no-terminal` is used to avoid the "sticky output" feature (implemented using `\b` characters) to pollute the CircleCI log with undisplayable characters.
 
 {% raw %}
 ```yaml
     steps:
+
       - checkout
       - restore_cache:
           name: Restore Cached Dependencies
           keys:
-            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
           name: Resolve/Update Dependencies
-          command: stack setup
+          command: stack --no-terminal setup
       - save_cache:
           name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+          key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
           paths:
             - ~/.stack
             - ~/.stack-work
 ```
 {% endraw %}
 
-Note: It's also possible to use a `cabal` build file for caching dependencies. `stack`, however, is commonly recommended, especially for those new to the Haskell ecosystem. Because this demo app leverages `stack.yaml` and `package.yaml`, we use these two files as the cache key for our dependencies. You can read more about the differences between `stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/).
+Note: It's also possible to use a `cabal` build file for caching dependencies. `stack`, however, is commonly recommended, especially for those new to the Haskell ecosystem. Because this demo app leverages `stack.yaml` and `package.yaml`, we use these two files as the cache key for our dependencies. `package.yaml` is more often updated than `stack.yaml` so that two keys are used to restore the cache. You can read more about the differences between `stack` and `cabal` on [The Haskell Tool Stack docs](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/).
 
 Finally, we can run our application build commands. We'll run our tests first and then move on to install our executable. Running `stack install` will create a binary and move it to `~/.local/bin`.
 
 ```yaml
       - run:
           name: Run tests
-          command: stack test
+          command: stack --no-terminal test
       - run:
           name: Install executable
-          command: stack install
+          command: stack --no-terminal install
 ```
 
 Finally, we can take the built executable and store it as an artifact.
 
 ```yaml
       - store_artifacts:
-          # Upload buildresults for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するビルド結果をアップロードします 
           path: ~/.local/bin/circleci-demo-haskell-exe 
           destination: circleci-demo-haskell-exe
 ```
 
 Excellent! You are now setup on CircleCI with a Haskell app.
+
+## Common Trouble Shooting
+
+The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the `stack test` command as seen below (Note: this will reduce test execution to one core, decreasing memory usage as well, but may also increase your test execution time).
+
+```yaml
+      - run:
+          name: Run tests
+          command: stack --no-terminal test -j1
+```
 
 ## See Also
 {:.no_toc}
