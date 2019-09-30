@@ -1,12 +1,13 @@
 ---
 layout: classic-docs
 title: "CircleCI を始める"
-short-title: "Sign Up and Try CircleCI"
+short-title: "CircleCI を始める"
 description: "CircleCI を使うための最初のステップ"
 categories:
   - getting-started
 order: 2
 ---
+
 CircleCI 2.x で初めてビルドを実行するには、次の手順に従ってください。
 
 1. [ユーザー登録](https://circleci.jp/signup/)ページにアクセスします。
