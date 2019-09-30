@@ -3,29 +3,46 @@ layout: classic-docs
 title: "Build Environments"
 description: "CircleCI 2.0 Build Environment Configuration"
 ---
+
+
 現在の状況や知りたい内容に関して、下記のドキュメントを参照してください。
 
-タイトル | 概要 \----|\---\---\----
-<a href="{{ site.baseurl }}/2.0/executor-types/">Executor タイプの種類</a> | 選択できる Executor タイプ `Docker`、`Machine`、`macOS` の違い、メリット＆デメリット、使用例。
-<a href="{{ site.baseurl }}/2.0/caching/">依存関係キャッシュ</a> | 高コストな処理が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法。 [CircleCI のコマンドラインインターフェースの使い方]({{ site.baseurl }}/2.0/local-jobs/) | ローカル環境でジョブを実行する手順。 [CircleCI における Yarn の使い方]({{ site.baseurl }}/2.0/yarn/) | Yarn のインストール方法および Yarn パッケージのキャッシュ方法。 [Snapcraft を用いた Snap パッケージのビルドとパブリッシュ]({{ site.baseurl }}/2.0/build-publish-snap-packages/) | Snapcraft の導入、および Snap パッケージのビルドからパブリッシュに至るまでのガイドマニュアル。 
+| Document                                                                                                           | Description                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/executor-types/">Choosing an Executor Type</a>                                                                                          | Comparison of the `docker`, `windows`, `machine` and `macos` executor types, trade-offs and examples of usage. |
+| <a href="{{ site.baseurl }}/2.0/caching/">Caching Dependencies</a>                                                                                          | How to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.    |
+| [Using the CircleCI Command Line Interface]({{ site.baseurl }}/2.0/local-jobs/)                                    | How to run jobs locally.                                                                                       |
+| [Using Yarn on CircleCI]({{ site.baseurl }}/2.0/yarn/)                                                             | How to install Yarn and cache Yarn packages.                                                                   |
+| [Build and Publish Snap Packages using Snapcraft on CircleCI]({{ site.baseurl }}/2.0/build-publish-snap-packages/) | Complete guide for setting up Snapcraft, building packages, and publishing them.                               |
 {: class="table table-striped"}
 
 ## Docker
 
-タイトル | 概要 \----|\---\---\----
-<a href="{{ site.baseurl }}/2.0/circleci-images/">ビルド済みイメージ</a> | CircleCI が用意しているビルド済み Docker イメージの全リスト。
-<a href="{{ site.baseurl }}/2.0/custom-images/">カスタムイメージの使い方</a> | CircleCI におけるカスタム Docker イメージの作成方法と使用方法。
-<a href="{{ site.baseurl }}/2.0/private-images/">プライベートイメージの使い方</a> | プライベートリポジトリや Amazon ECR 上にあるイメージの使用方法。
-<a href="{{ site.baseurl }}/2.0/building-docker-images/">Docker コマンドの実行手順</a> | デプロイや詳細テストを行う際の Docker イメージのビルド方法と、リモートの Docker コンテナ内のサービスを実行する方法。
-<a href="{{ site.baseurl }}/2.0/docker-compose/">Docker Compose の使い方</a> | ジョブ実行中のメインのコンテナ内における docker-compose の使用方法。
-<a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Docker レイヤーキャッシュ (DLC) の利用</a> | DLC の呼び出し方と設定ファイルにおける記述の仕方。
+| Document                  | Description                                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a> | Complete list of prebuilt CircleCI Docker images.                                                                                |
+| <a href="{{ site.baseurl }}/2.0/custom-images/">Using Custom Images</a> | How to create and use custom Docker images with CircleCI.                                                                        |
+| <a href="{{ site.baseurl }}/2.0/private-images/">Using Private Images</a> | How to use an image from a private repository or from Amazon ECR.                                                                |
+| <a href="{{ site.baseurl }}/2.0/building-docker-images/">Running Docker Commands</a> | How to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers. |
+| <a href="{{ site.baseurl }}/2.0/docker-compose/">Using Docker Compose</a> | How to use docker-compose by installing it in your primary container during the job execution.                                   |
+| <a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Docker Layer Caching (DLC)</a> | How to request the DLC feature and add it to your configuration file.                                                            |
 {: class="table table-striped"}
 
-## iOS
+## iOS and Mac
 
-タイトル | 概要 \----|\---\---\----
-<a href="{{ site.baseurl }}/2.0/testing-ios/">macOS 上での iOS アプリのテスト手順</a> | CircleCI における iOS アプリ開発の準備とテスト方法のカスタマイズ。
-<a href="{{ site.baseurl }}/2.0/ios-codesigning/">iOS プロジェクトにおけるコードサイニングの設定</a> | CircleCI 2.0 での iOS および Mac のプロジェクトにおけるコードサイニング証明書の設定に関するガイドライン。
+| Document                   | Description                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/hello-world-macos/">Hello World on MacOS</a>  | Getting started with the macOS executor and CircleCI                                              |
+| <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a>  | How to set up and customize testing for an iOS application with CircleCI.                         |
+| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0. |
+{: class="table table-striped"}
+
+
+## Windows
+
+| Document                   | Description                                            |
+| -------------------------- | ------------------------------------------------------ |
+| <a href="{{ site.baseurl }}/2.0/hello-world-windows/">Hello World on Windows</a> | Getting started with the Windows executor and CircleCI |
 {: class="table table-striped"}
 
 We’re thrilled to have you here. Happy building!
