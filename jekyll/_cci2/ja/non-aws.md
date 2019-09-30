@@ -1,131 +1,126 @@
 ---
 layout: classic-docs
-title: "Using the Static Installation Scripts"
+title: "静的インストールスクリプトの使用"
 category:
   - administration
 order: 1
-description: "Using CircleCI 2.0 static installation scripts."
+description: "CircleCI 2.0 の静的インストールスクリプトの使用"
 hide: false
 ---
-This article provides a System Administrators' overview of CircleCI's 2.0 static installation for non-AWS environments.
 
-- TOC
-{:toc}
+システム管理者を対象に、非 AWS 環境での CircleCI 2.0 の静的インストールの概要について説明します。
 
+- 目次 {:toc}
 
-## Limitations
+## 制限事項
 
-This method of installation has the following limitations:
+このインストール方法には、以下のような制限があります。
 
-- It is not possible to use `machine` executors.
-- It is not possible to use the Remote Docker Environment or Docker Layer Caching.
-- There is no first-class high-availability option.
+- `machine` Executors を使用することはできません。
+- リモート Docker 環境および Docker レイヤーキャッシュを使用することはできません。
+- 高度な高可用性オプションは提供されません。
 
-CircleCI 2.0 provides new infrastructure that includes the following improvements:
+CircleCI 2.0 では、以下の改善点を含む新しいインフラストラクチャが提供されています。
 
-- New configuration with any number of jobs and workflows to orchestrate them. 
-- Custom images for execution on a per-job basis.
-- Fine-grained performance with custom caching and per-job CPU or memory allocation. 
+- 任意の数のジョブとワークフローをオーケストレーションできる新しい設定機能 
+- ジョブごとの実行を行えるカスタムイメージ
+- カスタムキャッシュ、ジョブごとの CPU またはメモリの割り当てなど、きめ細かいパフォーマンス 
 
-## Build Environments
+## ビルド環境
 
-By default, CircleCI 2.0's Nomad Client instances automatically provision containers according to the image configured for each job in your `.circleci/config.yml` file. CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [Introduction to Nomad Cluster Operation]({{ site.baseurl }}/2.0/nomad/) to learn more about the job scheduler and how to perfom basic client and cluster operations.
+デフォルトでは、CircleCI 2.0 の Nomad クライアントインスタンスは、`.circleci/config.yml` ファイルでジョブごとに設定されたイメージに従ってコンテナを自動的にプロビジョニングします。 CircleCI は、CircleCI 2.0 のプライマリジョブスケジューラとして Nomad を使用します。ジョブスケジューラ、およびクライアントとクラスタの基本的な操作方法については、「[CircleCI での Nomad クラスタの操作ガイド]({{ site.baseurl }}/ja/2.0/nomad/)」を参照してください。
 
-## Architecture
+## アーキテクチャ
 
-A CircleCI static installation consists of two primary components: Services and Nomad Clients. Services run on a single instance that is comprised of the core application, storage, and networking functionality. Any number of Nomad Clients execute jobs and communicate back to the Services machine. Both components must access an instance of GitHub or GitHub Enterprise on the network as illustrated in the following architecture diagram.
+CircleCI の静的インストールは、Services と Nomad クライアントという 2つのプライマリコンポーネントで構成されています。 Services は、コアアプリケーション、ストレージ、ネットワーク通信機能から成る単一のインスタンス上で動作します。 任意の数の Nomad クライアントがジョブを実行し、Services マシンと通信します。 2つのコンポーネントはどちらも、以下のアーキテクチャ図に示すように、ネットワーク上で GitHub または GitHub Enterprise のインスタンスにアクセスする必要があります。
 
-![A Diagram of the CircleCI Architecture]({{site.baseurl}}/assets/img/docs/architecture-v1.png)
+![CircleCI のアーキテクチャの図]({{site.baseurl}}/assets/img/docs/architecture-v1.png)
 
 ### Services
 
-The machine on which the Services instance runs should only be restarted gracefully and may be backed up using built-in VM snapshotting. **Note:** It is possible to configure external data storage with PostgreSQL and Mongo for high availability and then use standard tooling for database backups, see [Adding External Database Hosts for High Availability]({{ site.baseurl }}/2.0/high-availability/). DNS resolution must point to the IP address of the machine on which the Services are installed. The following table describes the ports used for traffic on the Service instance:
+Services インスタンスが動作するマシンは、必ず正しい手順に沿って再起動する必要があり、組み込みの VM スナップショット機能を使用してバックアップできます。 **メモ：**高可用性を実現するには、PostgreSQL と Mongo を使用して外部データストレージを設定します。また、データベースのバックアップには、標準のツールを使用します。詳細については、[高可用性のための外部データベースホストの追加に関するドキュメント]({{ site.baseurl }}/ja/2.0/high-availability/)を参照してください。 DNS 解決は、Services がインストールされているマシンの IP アドレスを指す必要があります。 以下の表に、Service インスタンスでトラフィックに使用されるポートを示します。
 
-| Source                      | Ports                  | Use                    |
-| --------------------------- | ---------------------- | ---------------------- |
-| End Users                   | 80, 443, 7171, 8081    | HTTP/HTTPS Traffic     |
-| Administrators              | 22                     | SSH                    |
-| Administrators              | 8800                   | Admin Console          |
-| Nomad Clients               | 4647, 8585, 7171, 3001 | Internal Communication |
-| GitHub (Enterprise or .com) | 80, 443                | Incoming Webhooks      |
-{: class="table table-striped"}
+| ソース                          | ポート                 | 用途                |
+| ---------------------------- | ------------------- | ----------------- |
+| エンドユーザー                      | 80、443、7171、8081    | HTTP/HTTPS トラフィック |
+| 管理者                          | 22                  | SSH               |
+| 管理者                          | 8800                | 管理者コンソール          |
+| Nomad クライアント                 | 4647、8585、7171、3001 | 内部通信              |
+| GitHub (Enterprise または .com) | 80、443              | 受信 Web フック        | {: class="table table-striped"} 
 
-### Nomad Clients
+### Nomad クライアント
 
-The Nomad Client instances run without storing state, enabling you to increase or decrease containers as needed. To ensure that there are enough client machines running to handle all of the builds, track the queued builds, and increase the client machines as needed to balance the load.
+Nomad クライアントインスタンスは実行時に状態を保存しないため、必要に応じてコンテナ数を増減することができます。 すべてのビルドを処理できる十分な数のクライアントマシンが確実に実行されるようにするには、キューイングされているビルドを追跡し、必要に応じてクライアントマシンを増やして負荷を分散させます。
 
-Each machine on which the Nomad Clients are installed reserves two CPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the containers. Larger machines are able to run more containers and are limited by the number of available cores after two are reserved for coordination. The following table describes the ports used on the Nomad client instances:
+Nomad クライアントがインストールされているマシンには、ビルドを調整するために、それぞれ 2つの CPU と 4 GB のメモリが予約されています。 そのうえで、残りのプロセッサーとメモリでコンテナが作成されます。 マシンの規模が大きくなれば、その分多くのコンテナを実行することができますが、調整用に予約してある 2つ以外に使用できるコアの数によって制限されます。 以下の表に、Nomad クライアントインスタンスで使用されるポートを示します。
 
-| Source         | Ports                  | Use                                                                       |
-| -------------- | ---------------------- | ------------------------------------------------------------------------- |
-| End Users      | 64535-65535            | [SSH into builds feature](https://circleci.com/docs/2.0/ssh-access-jobs/) |
-| Administrators | 80 or 443              | CircleCI API Access (graceful shutdown, etc)                              |
-| Administrators | 22                     | SSH                                                                       |
-| Services VM    | 4647, 8585, 7171, 3001 | Internal Communication                                                    |
-{: class="table table-striped"}
+| ソース         | ポート                 | 用途                                                               |
+| ----------- | ------------------- | ---------------------------------------------------------------- |
+| エンドユーザー     | 64535-65535         | [ビルド機能への SSH 接続](https://circleci.com/docs/2.0/ssh-access-jobs/) |
+| 管理者         | 80 または 443          | CircleCI API アクセス (正しいシャットダウンなど)                                 |
+| 管理者         | 22                  | SSH                                                              |
+| Services VM | 4647、8585、7171、3001 | 内部通信                                                             | {: class="table table-striped"} 
 
 ### GitHub
 
-CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, in turn, may use LDAP, SAML, or SSH for access. CircleCI will inherit the authentication supported by your central SSO infrastructure. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad client instances.
+CircleCI では、認証に GitHub または GitHub Enterprise 認証情報が使用され、認証時には LDAP、SAML、または SSH を使用してアクセスできます。 また CircleCI では、一元管理された SSO インフラストラクチャでサポートされる認証が継承されます。 以下の表に、GitHub を実行するマシンで Services および Nomad クライアントインスタンスと通信する際に使用されるポートを示します。
 
-| Source       | Ports   | Use        |
-| ------------ | ------- | ---------- |
-| Services     | 22      | Git Access |
-| Services     | 80, 443 | API Access |
-| Nomad Client | 22      | Git Access |
-| Nomad Client | 80, 443 | API Access |
-{: class="table table-striped"}
+| ソース          | ポート    | 用途       |
+| ------------ | ------ | -------- |
+| Services     | 22     | Git アクセス |
+| Services     | 80、443 | API アクセス |
+| Nomad クライアント | 22     | Git アクセス |
+| Nomad クライアント | 80、443 | API アクセス | {: class="table table-striped"} 
 
+## インストール
 
-## Installation
+以下のセクションでは、Services VM と Nomad クラスタのインストールの手順について説明します。
 
-The following sections describe the steps for installation of the Services VM and the Nomad cluster.
+### 前提条件
 
-### Prerequisites
+インストールを開始する前に、以下を準備してください。
 
-Have the following available before beginning the installation procedure:
+- CircleCI の Platinum サポート契約。 まずは、CircleCI サポートまたはお客様のアカウント担当者にお問い合わせください。
+- CircleCI ライセンスファイル (.rli)。 ライセンスが必要な場合は、CircleCI サポートにお問い合わせください。
+- Services VM 用に、100 GB 以上のストレージ、32 GB 以上の RAM、4つ以上の CPU (8つを推奨) を搭載した、Ubuntu 14.04 または 16.04 を実行するマシン。
+- Nomad クライアント VM 用に、それぞれ 8 GB 以上の RAM と 4つ以上の CPU を搭載し、ビルドが必要とする Docker Registry へのネットワークアクセスを有する、Ubuntu 14.04 または 16.04 を実行するマシンのクラスタ。
 
-- A Platinum CircleCI support agreement. Contact CircleCI support or your account representative to get started.
-- A CircleCI License file (.rli). Contact CircleCI support if you need a license.
-- A machine to run Ubuntu 14.04 or 16.04 with a minimum of at least 100 GB storage, 32 GB RAM, and 4 CPUs (8 CPUs preferred) for the Services VM.
-- A cluster of machines running Ubuntu 14.04 or 16.04 with a minumum of 8 GB RAM and 4 CPUs each, as well as network access to any Docker registries that are required by your builds for the Nomad Client VMs.
+### Services マシンのインストール
 
-### Installing the Services Machine
+1. [Services の init スクリプト](https://github.com/circleci/server-static-install/blob/master/provision-services-ubuntu.sh)を Services VM マシンにコピーします。
 
-1. Copy the [Services init script](https://github.com/circleci/server-static-install/blob/master/provision-services-ubuntu.sh) to the Services VM machine.
+2. Services VM 用にプロビジョニングされたマシンにログインし、`sudo su` コマンドを実行します。
 
-2. Log in to the machine provisioned for the Services VM and run the `sudo su` command.
+3. `./provision-services-ubuntu.sh` を実行してスクリプトを起動します。
 
-3. Run `./provision-services-ubuntu.sh` to start the script.
+4. HTTPS を使用して、ポート 8800 上のホストのパブリック IP に移動します。
 
-4. Go to the public IP of the host on port 8800 using HTTPS.
+5. ライセンスを入力します。
 
-5. Enter your license.
+6. Storage セクションを完了します。 クラウドサービスを使用していない場合は、`None` を選択します (詳細については以下を参照してください)。
 
-6. Complete the Storage section. If you are not using a cloud service, then you will pick `None` (more information below).
+7. VM プロバイダーを None に設定します。
 
-7. Set the VM Provider to None.
+8. 1.0 ビルドを Off に設定します。
 
-8. Set 1.0 Builds to Off.
+9. 2.0 ビルドを Clustered に設定します。
 
-9. Set 2.0 Builds to Clustered.
+### Nomad クライアントのインストール
 
-### Installing the Nomad Clients
+1. [クライアントの init スクリプト](https://github.com/circleci/server-static-install/blob/master/provision-nomad-client-ubuntu.sh)を Nomad サーバーマシンにコピーします。
 
-1. Copy the [Client init script](https://github.com/circleci/server-static-install/blob/master/provision-nomad-client-ubuntu.sh) to the Nomad Server machine.
+2. Nomad サーバー用にプロビジョニングされたマシンにログインし、`sudo su` コマンドを実行します。
 
-2. Log in to the machine provisioned for the Nomad Server and run the `sudo su` command.
+3. スクリプトを起動するには、`NOMAD_SERVER_ADDRESS` 環境変数を Services マシンのルーティング可能な IP に設定した状態で (例：`NOMAD_SERVER_ADDRESS=0.0.0.0 ./provision-nomad-client-ubuntu.sh`)、`./provision-nomad-client-ubuntu.sh` を実行します。
 
-3. To start the script, run `./provision-nomad-client-ubuntu.sh` with the `NOMAD_SERVER_ADDRESS` environment variable set to the routable IP of the Services machine (for example, `NOMAD_SERVER_ADDRESS=0.0.0.0 ./provision-nomad-client-ubuntu.sh`).
+### ストレージ
 
-### Storage
+`None` ストレージドライバは、すべての CircleCI データをローカルに保存します。 つまり、アーティファクト、テスト結果、およびアクションログがローカルの `/data/circle/storage-fileserver` に保存されます。 ベストプラクティスとして、このストレージオプションを使用する場合は、外部ボリュームをマウントし、そのボリュームとの間にシンボリックリンクを作成することをお勧めします。 **メモ：**データの転送速度は、外部ボリュームで許容される上限に制限されてしまうため、SSD を使用することをお勧めします。
 
-The `None` storage driver saves all of your CircleCI data locally. This means that artifacts, test results, and action logs will be saved locally at `/data/circle/storage-fileserver`. It is best practice to mount an external volume and create a symbolic link between the two when using this storage option. **Note:** Data may only be transferred as quickly as the external volume will allow, so SSDs are best practice.
+### トラブルシューティング
 
-### Troubleshooting
+ここでは、システムのセットアップおよびインストールに伴って発生する可能性がある一般的な問題について、考えられる対処法を示します。
 
-This section includes some possible resolutions for common issues that may be encountered during system setup and installation.
-
-- Symptom: Jobs stay in `queued` status until they fail and never successfully run. 
-  - Check port 8585 if the nomad client logs contain the following type of error message: 
+- 症状：ジョブが `queued` ステータスにとどまった後、最終的には失敗して正常に実行されない。 
+  - Nomad クライアントのログに以下のようなエラーメッセージが含まれる場合は、ポート 8585 をチェックしてください。 
     - {"error":"rpc error: code = Unavailable desc = grpc: the connection is unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
