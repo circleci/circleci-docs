@@ -7,6 +7,7 @@ categories:
   - configuring-jobs
 order: 35
 ---
+
 このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について解説しています。
 
 * TOC
@@ -24,16 +25,17 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # すべてのコマンドの実行を担うプライマリコンテナイメージ
+    # Primary container image where all commands run
 
     docker:
+
       - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # 「host: localhost」でアクセスできるサービスコンテナイメージ
+    # Service container image available at `host: localhost`
 
       - image: circleci/postgres:9.6.2-alpine
         environment:
@@ -41,22 +43,26 @@ jobs:
           POSTGRES_DB: circle-test_test
 
     steps:
+
       - checkout
 
-      # bundle キャッシュをリストアする
+      # Restore bundle cache
+
       - restore_cache:
           keys:
             - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
-      # bundle install で依存関係をインストールする
+      # Bundle install dependencies
+
       - run:
           name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # bundle キャッシュを保存する
+      # Store bundle cache
+
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
@@ -72,7 +78,8 @@ jobs:
           name: Parallel RSpec
           command: bin/rails test
 
-      # artifacts を保存する
+      # Save artifacts
+
       - store_test_results:
           path: /tmp/test-results
 ```
@@ -134,9 +141,9 @@ version: 2
 jobs:
   build:
     docker:
-      # CircleCI の Go のイメージはこちら https://hub.docker.com/r/circleci/golang/
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
-      # CircleCI の PostgreSQL のイメージはこちら https://hub.docker.com/r/circleci/postgres/
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: circleci-demo-go
@@ -148,6 +155,7 @@ jobs:
       TEST_RESULTS: /tmp/test-results
 
     steps:
+
       - checkout
       - run: mkdir -p $TEST_RESULTS
 
@@ -155,8 +163,9 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # 通常、以下の内容はカスタムしたプライマリイメージのところに記述しますが、
-      # わかりやすくするためここに記述しています。
+      # Normally, this step would be in a custom primary image;
+      # we've added it here for the sake of explanation.
+
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
@@ -207,36 +216,75 @@ jobs:
           path: /tmp/test-results
 ```
 
-## MySQL を使った Ruby プロジェクトの設定例と、それを Docker 化する例
+## Example MYSQL project.
 
-The following example uses MySQL and dockerize, see the [sample project on GitHub](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) for additional links.
+The following example sets up MYSQL as a secondary container alongside a PHP container.
 
 ```yaml
 version: 2
 jobs:
   build:
-    working_directory: ~/test-circleci
     docker:
-      - image: circleci/ruby:2.4-node-jessie
-      - image: tkuchiki/delayed-mysql
+      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+      - image: circleci/mysql:8.0.4
         environment:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_ROOT_PASSWORD: ''
-          MYSQL_DATABASE: circleci
+          MYSQL_ROOT_PASSWORD: rootpw
+          MYSQL_DATABASE: test_db
+          MYSQL_USER: user
+          MYSQL_PASSWORD: passw0rd
+
     steps:
+
       - checkout
       - run:
-          name: Bundle install
-          command: bundle install
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
       - run:
-          name: Wait for DB
-          # circleci/* の Docker イメージにプリインストール
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
-      - run:
-          name: MySQL version
-          command: bundle exec ruby mysql_version.rb
+          name: Install MySQL CLI; Import dummy data; run an example query
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+```
+
+While it is possible to make MySQL as your primary and only container, this example does not. As a more practical use case, the example uses a PHP docker image as its primary container, and will wait until MySQL is up and running before performing any `run` commands involving the DB.
+
+Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at, `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
+
+```sql
+DROP TABLE IF EXISTS `Persons`;
+
+CREATE TABLE Persons (
+    PersonID int,
+    LastName varchar(255),
+    FirstName varchar(255),
+    Address varchar(255),
+    City varchar(255)
+);
+
+INSERT INTO Persons
+VALUES (
+    1,
+    "Foo",
+    "Baz",
+    "123 Bar Street",
+    "FooBazBar City"
+);
 ```
 
 ## 関連情報
 
-サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を「[データベースを設定する]({{ site.baseurl }}/ja/2.0/databases/)」ページで紹介しています。
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.
