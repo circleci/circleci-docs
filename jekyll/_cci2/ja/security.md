@@ -1,47 +1,67 @@
 ---
 layout: classic-docs
-title: "Security Features"
+title: "セキュリティ機能"
 category:
   - administration
 order: 5
-description: "CircleCI security features."
+description: "CircleCI のセキュリティ機能"
 ---
-This document outlines security features built into CircleCI and related integrations.
 
-- TOC 
+ここでは、CircleCI に組み込まれているセキュリティ機能と、関連するインテグレーションの概要について説明します。
+
+- 目次 
 {:toc}
 
-## Overview
+## 概要
 
-Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
+CircleCI では、セキュリティを最優先事項と考え、セキュリティ問題の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 セキュリティに関する問題が発生した場合には、CircleCI セキュリティチームの GPG キー (ID：0x4013DDA7、フィンガープリント：3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7) を使用して、<security@circleci.com> まで暗号化メッセージをお送りください。
 
-## Encryption
+## 暗号化
 
-CircleCI uses HTTPS or SSH for all networking in and out of our service including from the browser to our services application, from the services application to your builder fleet, from our builder fleet to your source control system, and all other points of communication. In short, none of your code or data travels to or from CircleCI without being encrypted unless you have code in your builds that does so at your discretion. Operators may also choose to go around our SSL configuration or not use TLS for communicating with underlying systems.
+CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 設定を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
 
-The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. The build agent pulls code via git over SSH. Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. All environment variables are encrypted using [Hashicorp Vault](https://www.vaultproject.io/). Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
+The nature of CircleCI is that our software has access to your code and whatever data that code interacts with. All jobs on CircleCI run in a sandbox (specifically, a Docker container or an ephemeral VM) that stands alone from all other builds and is not accessible from the Internet or from your own network. ビルドエージェントは、SSH によって Git からコードをプルします。 Your particular test suite or job configurations may call out to external services or integration points within your network, and the response from such calls will be pulled into your jobs and used by your code at your discretion. After a job is complete, the container that ran the job is destroyed and rebuilt. すべての環境変数は、[HashiCorp の Vault](https://www.vaultproject.io/) を使用して暗号化されます。 Environment variables are encrypted using AES256-GCM96 and are unavailable to CircleCI employees.
 
-## Sandboxing
+## サンドボックス化
 
-With CircleCI you control the resources allocated to run the builds of your code. This will be done through instances of our builder boxes that set up the containers in which your builds will run. By their nature, build containers will pull down source code and run whatever test and deployment scripts are part of the code base or your configuration. The containers are sandboxed, each created and destroyed for one build only (or one slice of a parallel build), and they are not available from outside themselves. The CircleCI service provides the ability to SSH directly to a particular build container. When doing this a user will have complete access to any files or processes being run inside that build container, so provide access to CircleCI only to those also trusted with your source code.
+CircleCI では、コードのビルドを実行するために割り当てられるリソースをユーザーが制御できます。 これは、ビルドが実行されるコンテナを設定する Builder boxes のインスタンスを介して行われます。 ビルドコンテナは性質上、ソースコードをプルダウンし、コードベースまたは設定に含まれるあらゆるテストスクリプトとデプロイスクリプトを実行します。 これらのコンテナはサンドボックス化されます。つまり、ビルド (または並列ビルドの一部分) ごとに専用のコンテナが 1つずつ作成され、破棄されます。これらのコンテナは外部から使用することはできません。 CircleCI のサービスでは、特定のビルドコンテナに直接 SSH 接続できる機能が提供されています。 これにより、そのビルドコンテナ内のすべてのファイルまたは実行中のプロセスに完全にアクセスできると共に、ソースコードを任せられるユーザーだけに CircleCI へのアクセスを許可できます。
 
-## Integrations
+## インテグレーション
 
-A few different external services and technology integration points touch CircleCI. The following list enumerates those integration points.
+CircleCI には、関連する外部のサービスやテクノロジーとのインテグレーションポイントがいくつかあります。 以下の一覧では、これらのインテグレーションポイントについて説明します。
 
-- **Web Sockets** We use [Pusher](https://pusher.com/) client libraries for WebSocket communication between the server and the browser, though for installs we use an internal server called slanger, so Pusher servers have no access to your instance of CircleCI nor your source control system. This is how we, for instance, update the builds list dynamically or show the output of a build line-by-line as it occurs. We send build status and lines of your build output through the web socket server (which unless you have configured your installation to run without SSL is done using the same certs over SSL), so it is encrypted in transit.
+- **WebSocket：**CircleCI は、サーバーとブラウザー間の WebSocket 通信に [Pusher](https://pusher.com/) クライアントライブラリを使用していますが、インストールには slanger という内部サーバーを使用しています。そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうした仕組みによって、たとえば、ビルドリストが動的に更新されたり、ビルドの出力が発生と同時に 1行ずつ表示されたりします。 ビルドステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を設定しない限り、SSL 上で同じ証明書を使用して行われます)。したがって、転送時には暗号化されます。
 
-- **Replicated** We use [Replicated](http://www.replicated.com/) to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. Your instance of CircleCI communicates with Replicated servers to send license key information and version information to check for updates. Replicated does not have access to your data or other systems, and we do not send any of your data to Replicated.
+- **Replicated** For private installations of CircleCI Server, [Replicated](http://www.replicated.com/) is used to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. Your instance of CircleCI Server communicates with Replicated servers to send license key information and version information to check for updates. Replicated does not have access to your data or other systems, and CircleCI does not send any of your data to Replicated.
 
-- **Source Control Systems** To use CircleCI you will set up a direct connection with your instance of GitHub Enterprise, GitHub.com, or other source control system. When you set up CircleCI you authorize the system to check out your private repositories. You may revoke this permission at any time through your GitHub application settings page and by removing Circle's Deploy Keys and Service Hooks from your repositories' Admin pages. While CircleCI allows you to selectively build your projects, GitHub's permissions model is "all or nothing" — CircleCI gets permission to access all of a user's repositories or none of them. Your instance of CircleCI will have access to anything hosted in those git repositories and will create webhooks for a variety of events (eg: when code is pushed, when a user is added, etc.) that will call back to CircleCI, triggering one or more git commands that will pull down code to your build fleet.
+- **ソース管理システム：**CircleCI を使用するには、GitHub Enterprise、GitHub.com などのソース管理システムのインスタンスとの直接接続を設定します。 CircleCI の設定時に、プライベートリポジトリのチェックアウトをシステムに許可します。 この権限は、GitHub アプリケーションの設定ページで、リポジトリの管理者ページから CircleCI のデプロイキーとサービスフックを削除して、いつでも取り消すことができます。 CircleCI ではプロジェクトを選択してビルドできますが、GitHub の権限モデルは極端なものであるため、CircleCI にはすべてのリポジトリへのアクセスが許可されるか、一切許可されないかのどちらかになります。 CircleCI インスタンスは、Git リポジトリでホスティングされているすべての項目にアクセスでき、コードのプッシュやユーザーの追加など、さまざまなイベントの Web フックを作成します。これが CircleCI にコールバックして、1つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプルダウンされます。
 
-- **Dependency and Source Caches** Most CircleCI customers use S3 or equivalent cloud-based storage inside their private cloud infrastructure (Amazon VPC, etc) to store their dependency and source caches. These storage servers are subject to the normal security parameters of anything stored on such services, meaning in most cases our customers prevent any outside access.
+- **依存関係とソースのキャッシュ：**ほとんどの CircleCI ユーザーは、Amazon VPC などのプライベートクラウドインフラストラクチャ内で S3 または同等のクラウドベースのストレージを使用して、依存関係やソースのキャッシュを格納しています。 これらのストレージサーバーは、このようなサービス上に格納されるすべての項目の標準的なセキュリティパラメーターの対象となります。つまり、ほとんどの場合、ユーザーは外部からのアクセスを阻止できます。
 
-- **Artifacts** It is common to use S3 or similar hosted storage for artifacts. Assuming these resources are secured per your normal policies they are as safe from any outside intrusion as any other data you store there.
+- **アーティファクト：**アーティファクトには、S3 などのホスティングされたストレージを使用するのが一般的です。 これらのリソースが、標準的なポリシーに従ってセキュリティ保護されているなら、共に保存されている他のデータと同様、アーティファクトも外部からの侵入に対して安全と言えます。
 
-- **iOS Builds** If you are paying to run iOS builds on CircleCI hardware your source code will be downloaded to a build box on our macOS fleet where it will be compiled and any tests will be run. Similar to our primary build containers that you control, the iOS builds we run are sandboxed such that they cannot be accessed.
+- **iOS ビルド：**CircleCI のハードウェア上で iOS ビルドを有料で実行している場合は、macOS フリート上のビルドボックスにソースコードがダウンロードされ、コンパイルやテストの実行もそこで行われます。 自身で制御するプライマリビルドコンテナと同様に、CircleCI で実行される iOS ビルドも、アクセスできないようにサンドボックス化されます。
 
-## Audit Logs
+- **Docker** If you are using Docker images, refer to the public Docker [seccomp (security computing mode) profile](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json) for the Docker engine. CircleCI appends the following to the Docker default `seccomp` profile: 
+
+{% raw %}
+[
+      {
+        "comment": "Allow create user namespaces",
+        "names": [
+          "clone",
+          "setns",
+          "unshare"
+        ],
+        "action": "SCMP_ACT_ALLOW",
+        "args": [],
+        "includes": {},
+        "excludes": {}
+      }
+    ]
+{% endraw %}
+
+## 監査ログ
 
 The Audit Log feature is only available for CircleCI installed on your servers or private cloud.
 
@@ -51,7 +71,7 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-### Audit Log Events
+### 監査ログイベント
 {:.no_toc}
 
 <!-- TODO: automate this from event-cataloger --> Following are the system events that are logged. See 
@@ -73,20 +93,38 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 - workflow.job.scheduled
 - workflow.job.start
 
-### Audit Log Fields
+### 監査ログフィールド
 {:.no_toc}
 
-- **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
-- **actor:** The actor who performed this event. In most cases this will be a CircleCI user. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
-- **target:** The entity instance acted upon for this event, for example, a project, an org, an account, or a build. This data is a JSON blob that will always contain `id` and and `type` and will likely contain `name`.
-- **payload:** A JSON blob of action-specific information. The schema of the payload is expected to be consistent for all events with the same `action` and `version`.
-- **occurred_at:** When the event occurred in UTC expressed in ISO-8601 format with up to nine digits of fractional precision, for example '2017-12-21T13:50:54.474Z'.
-- **metadata:** A set of key/value pairs that can be attached to any event. All keys and values are strings. This can be used to add additional information to certain types of events.
-- **id:** A UUID that uniquely identifies this event. This is intended to allow consumers of events to identify duplicate deliveries.
-- **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
-- **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
-- **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
+- **action：**実行され、イベントを生成したアクション。 ドット区切りの小文字 ASCII ワードの形式が使用され、最初に影響を受けたエンティティと最後に実行されたアクションが含まれます。 エンティティは、たとえば `workflow.job.start` のようにネストされる場合があります。
+- **actor：**対象のイベントを実行したアクター。 ほとんどの場合は CircleCI ユーザーです。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **target：**対象のイベントで影響を受けたエンティティインスタンス (プロジェクト、組織、アカウント、ビルドなど)。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **payload：**アクション固有の情報の JSON BLOB。 payload のスキーマは、同じ `action` と `version` を持つすべてのイベントで一貫していると想定されます。
+- **occurred_at：**イベントが発生した UTC 日時。時刻は、最大 9桁の小数精度の ISO-8601 形式で表されます (例：'2017-12-21T13:50:54.474Z')。
+- **metadata：**任意のイベントに付加できるキー・値のペアのセット。 キーと値はすべて文字列です。 これを使用すると、特定の種類のイベントに情報を追加できます。
+- **id：**対象のイベントを一意に識別する UUID。 イベントのコンシューマーが、重複するデリバリーを識別できるようにします。
+- **version：**イベントスキーマのバージョン。 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせて異なる値になる可能性があります。
+- **scope：**ターゲットが CircleCI ドメインモデル内のアカウントによって所有されている場合、アカウントフィールドにはアカウント名と ID が挿入されます。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
+- **success：**アクションが成功したかどうかを示すフラグ。
+- **request：**対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストに割り当てたリクエスト ID)、`ip_address` (リクエストされた元の IP アドレスであり、たとえば 127.0.0.1 など IPV4 のドット区切り表記で表される)、および `client_trace_id` (元のリクエストに HTTP ヘッダー「X-Client-Trace-Id」が存在する場合は、対応するクライアント追跡 ID ヘッダー) を含む JSON BLOB の形式で表示されます。
+
+## Checklist To Using CircleCI Securely as a Customer
+
+If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as *users* of CircleCI:
+
+- Minimise the number of secrets (private keys / environment variables) your build needs and rotate secrets regularly. 
+  - It is important to rotate secrets regularly in your organization, especially as team members come and go. 
+  - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
+  - Ensure the secrets you *do* use are of limited scope - with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or Github's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature. 
+- Sometimes user misuse of certain tools might accidentally print secrets to stdout which will land in your logs. Please be aware of: 
+  - running `env` or `printenv` which will print all your environment variables to stdout.
+  - literally printing secrets in your codebase or in your shell with `echo`.
+  - programs or debugging tools that print secrets on error.
+- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). 
+- Use Restricted Contexts with teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
+- Ensure you audit who has access to SSH keys in your organization.
+- Ensure that your team is using Two-Factor Authentication (2FA) with your VCS ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa), [Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html)). If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
+- If your project is open source and public, please make note of whether or not you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to *forked versions of your repo*. This is **not enabled** by default. You can read more about these settings and open source security in our [Open Source Projects document]({{site.baseurl}}/2.0/oss/#security).
 
 ## See Also
 {:.no_toc}
