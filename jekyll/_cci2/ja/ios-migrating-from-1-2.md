@@ -1,66 +1,66 @@
 ---
 layout: classic-docs
-title: "Migrating Your iOS Project From 1.0 to 2.0"
-short-title: "Migrating your iOS project from 1.0 to 2.0"
-description: "How to migrate your iOS project from CircleCI 1.0 to 2.0"
+title: "iOS プロジェクトの 1.0 から 2.0 への移行"
+short-title: "iOS プロジェクトの 1.0 から 2.0 への移行"
+description: "iOS プロジェクトを CircleCI 1.0 から 2.0 へ移行する方法"
 categories:
   - platforms
 order: 10
 ---
-This document will give you the guidelines for migrating your iOS project from CircleCI 1.0 to 2.0.
 
-* TOC
-{:toc}
+ここでは、iOS プロジェクトを CircleCI 1.0 から 2.0 へ移行するうえでのガイドラインについて説明します。
 
-## Overview
+* 目次 {:toc}
 
-With the release of CircleCI 2.0 for macOS, your iOS projects can now benefit from the improvements in the CircleCI 2.0 platform, including:
+## 概要
 
-* [Workflows](https://circleci.com/docs/2.0/workflows/): Orchestrate jobs and steps with great flexibility using a simple set of new keys in your configuration. Increase the development speed through faster feedback, shorter reruns, and more efficient use of resources.
+macOS 向け CircleCI 2.0 のリリースに伴い、2.0 プラットフォームで強化された以下の機能が iOS プロジェクトで利用できるようになりました。
 
-* [Advanced caching](https://circleci.com/docs/2.0/caching/): Speed up builds by caching files from run to run using keys that are easy to control with granular caching options for cache save and restore points throughout your jobs. Cache any files from run to run using keys you can control.
+* [Workflows](https://circleci.com/docs/ja/2.0/workflows/)：新しいシンプルなキーセットを設定して、ジョブやステップをきわめて柔軟にオーケストレーションできます。 迅速なフィードバック、再実行までの時間短縮、リソースの最適化が可能になるため、開発をスピードアップできます。
 
-## Example 2.0 iOS Project Configuration
+* [高度なキャッシュ](https://circleci.com/docs/ja/2.0/caching/)：実行ごとにファイルをキャッシュして、ビルドの処理を高速化します。制御しやすいキーと、ジョブ全体のキャッシュの保存・復元ポイントをきめ細かく指定できるキャッシュオプションが提供されています。 制御可能なキーを使用して、実行ごとにあらゆるファイルをキャッシュできます。
 
-This sample configuration file should work for most iOS projects on CircleCI 2.0:
+## 2.0 iOS プロジェクト設定のサンプル
+
+この設定ファイルのサンプルは、CircleCI 2.0 上のほぼすべての iOS プロジェクトで正常に動作します。
 
 ```yaml
 # .circleci/config.yml
 
-# Specify the config version - version 2 is latest.
+# コンフィグのバージョンを指定します (バージョン 2 が最新)
 version: 2
 
-# Define the jobs for the current project.
+# 現在のプロジェクトのジョブを定義します
 jobs:
   build-and-test:
 
-    # Specify the Xcode version to use.
+    # 使用する Xcode バージョンを指定します
     macos:
       xcode: "8.3.3"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output
 
-    # Define the steps required to build the project.
+    # プロジェクトのビルドに必要なステップを定義します
     steps:
 
-      # Get the code from the VCS provider.
+      # VCS プロバイダーからコードを取得します
 
       - checkout
 
-      # Download CocoaPods specs via HTTPS (faster than Git)
-      # and install CocoaPods.
+      # CocoaPods Specs を HTTPS でダウンロードし (Git よりも高速)、
+      # CocoaPods をインストールします
 
       - run:
-          name: Install CocoaPods
+          name: CocoaPods をインストール
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
             pod install
 
-      # Run tests.
+      # テストを実行します
 
       - run:
-          name: Run tests
+          name: テストを実行
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
@@ -82,27 +82,27 @@ jobs:
 
       - checkout
 
-      # Set up code signing via Fastlane Match.
+      # fastlane match を使用してコード署名を設定します
 
       - run:
-          name: Set up code signing
+          name: コード署名を設定
           command: fastlane match development --readonly
 
-      # Build the release version of the app.
+      # アプリケーションのリリースバージョンをビルドします
 
       - run:
-          name: Build IPA
+          name: IPA をビルド
           command: fastlane gym
 
-      # Store the IPA file in the job's artifacts
+      # ジョブのアーティファクトに IPA ファイルを格納します
 
       - store_artifacts:
           path: output/MyApp.ipa
 
-      # Deploy!
+      # デプロイします
 
       - run:
-          name: Deploy to App Store
+          name: App Store にデプロイ
           command: fastlane spaceship
 
 workflows:
@@ -119,16 +119,17 @@ workflows:
               only: master
 ```
 
-## Best Practices
+## ベストプラクティス
 
-To ensure a consistent build experience, it is best practice to add a Gemfile and set up code signing with the help of Fastlane Match before you push a 2.0 `.circleci/config.yml` file to your CircleCI iOS project.
+ビルドの一貫性を維持するために、2.0 の `.circleci/config.yml` ファイルを CircleCI の iOS プロジェクトにプッシュする前に、Gemfile を追加し、fastlane match を使用してコード署名を設定しておくことをお勧めします。
 
 ### Gemfile
+
 {:.no_toc}
 
-We suggest that you add a Gemfile to your iOS project if you don't have one already. Checking in a Gemfile and using Bundler to install and run gems ensures that recent versions of Fastlane and CocoaPods are available in your build.
+iOS プロジェクトに Gemfile をまだ追加していない場合は、追加することをお勧めします。 Gemfile をチェックインし、Bundler を使用して gem をインストールおよび実行することで、最新バージョンの fastlane と CocoaPodsをビルドで使用できるようになります。
 
-Following is a sample Gemfile:
+Gemfile の例を以下に示します。
 
     # Gemfile
     
@@ -137,19 +138,21 @@ Following is a sample Gemfile:
     gem 'cocoapods'
     
 
-### Setting up Code Signing With Fastlane Match
+### fastlane match によるコード署名の設定
+
 {:.no_toc}
 
-Check out our \[code signing guide\]({{ site.baseurl }}/2.0/ios-codesigning) for the exact steps for setting up code signing for your iOS project on CircleCI 2.0.
+CircleCI 2.0 で iOS プロジェクトのコード署名を設定する手順については、\[コード署名に関するガイド\]({{ site.baseurl}}/ja/2.0/ios-codesigning)を参照してください。
 
-## Creating the 2.0 Configuration File
+## 2.0 設定ファイルの作成
 
-The following sections provide examples of 2.0 configuration syntax for an iOS project. CircleCI also provides partial config translation for iOS projects, see \[Using the 1.0 to 2.0 config-translation Endpoint\]({{ site.baseurl }}/2.0/config-translation). If your 1.0 project does **not** have a `circle.yml` file, the [CircleCI Config Generator](https://github.com/CircleCI-Public/circleci-config-generator/blob/master/README.md) provides a script to generate an initial config file from your 1.0 project.
+以下のセクションでは、iOS プロジェクトの 2.0 設定構文の例を示します。 CircleCI では iOS プロジェクト向けの部分的なコンフィグ変換機能も提供しています。詳細については「\[1.0 から 2.0 への config-translation エンドポイントを使用する\]({{ site.baseurl}}/ja/2.0/config-translation)」を参照してください。 1.0 プロジェクトに `circle.yml` が**ない**場合は、1.0 プロジェクトから初期コンフィグファイルを生成するスクリプトを [CircleCI Config Generator](https://github.com/CircleCI-Public/circleci-config-generator/blob/master/README.md) から入手してください。
 
-### Job Name and Xcode Version
+### ジョブ名と Xcode バージョン
+
 {:.no_toc}
 
-In the 2.0 `.circleci/config.yml` file the first few lines specify the name of the job and the Xcode version to use:
+2.0 `.circleci/config.yml` ファイル冒頭の数行で、ジョブの名前と、使用する Xcode のバージョンを指定します。
 
     version: 2
     jobs:
@@ -163,10 +166,11 @@ In the 2.0 `.circleci/config.yml` file the first few lines specify the name of t
     ...
     
 
-### Build Steps Key
+### ビルドステップキー
+
 {:.no_toc}
 
-The top-level `steps` key contains all the build steps that will be run for a particular job:
+トップレベルの `steps` キーには、特定のジョブで実行されるすべてのビルドステップが含まれます。
 
     jobs:
       build-and-test:
@@ -175,12 +179,13 @@ The top-level `steps` key contains all the build steps that will be run for a pa
           - ...
     
 
-You can see all the available step types in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document. **Note:** Docker support is not available in the macOS builds.
+利用できるステップの種類は「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」で確認できます。 **メモ：**macOS のビルドでは Docker がサポートされていません。
 
-### Checking out the Project Code
+### プロジェクトコードのチェックアウト
+
 {:.no_toc}
 
-One of the first items under `steps` will be the code checkout step:
+コードのチェックアウトのステップは、`steps` の下に最初に記述される項目の 1つです。
 
     jobs:
       build-and-test:
@@ -188,10 +193,11 @@ One of the first items under `steps` will be the code checkout step:
           - checkout
     
 
-### Caching Ruby Gems Installed With Bundler
+### Bundler でインストールされた RubyGems のキャッシュ
+
 {:.no_toc}
 
-In CircleCI 2.0, cache save and cache restore are based on a *cache key*. Here is how you can cache the Ruby gems based on the content of `Gemfile.lock`:
+CircleCI 2.0 では、*キャッシュキー*に基づいてキャッシュの保存と復元を行います。 ここでは `Gemfile.lock` の内容に基づいて RubyGems をキャッシュする方法を示します。
 
 {% raw %}
 
@@ -199,17 +205,17 @@ In CircleCI 2.0, cache save and cache restore are based on a *cache key*. Here i
 jobs:
   build-and-deploy:
     environment:
-      BUNDLE_PATH: vendor/bundle  # path to install gems and use for caching
+      BUNDLE_PATH: vendor/bundle  # gem をインストールし、キャッシュで使用するためのパス
     steps:
-      # add other steps here
+      # 他のステップをここに追加します
       - restore_cache:
           keys:
           - v1-gems-{{ checksum "Gemfile.lock" }}
-          # Fall back to using the latest cache if no exact match is found.
+          # 完全に一致するものが見つからない場合は、フォールバックして最新のキャッシュを使用します
           - v1-gems-
-      # Install gems.
+      # gem をインストールします
       - run:
-          name: Bundle install
+          name: バンドルインストール
           command: bundle check || bundle install
           environment:
             BUNDLE_JOBS: 4
@@ -222,71 +228,77 @@ jobs:
 
 {% endraw %}
 
-Every time your Gemfile.lock changes, a new cache will be created. Please check out [this doc]({{ site.baseurl }}/2.0/caching/) for more information about cache keys and other available key options beyond `checksum`.
+Gemfile.lock の内容を変更するたびに、新しいキャッシュが作成されます。 キャッシュキーと `checksum` 以外のキーオプションの詳細については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/caching/)を参照してください。
 
-### Installing CocoaPods
+### CocoaPods のインストール
+
 {:.no_toc}
 
-If you are already checking your [CocoaPods](https://cocoapods.org/) *into* your repository, there is no need to do anything in this step—your dependencies will be picked up correctly. However, if you are *not* including the CocoaPods into the repository, you will need to install CocoaPods in your `.circleci/config.yml`.
+[CocoaPods](https://cocoapods.org/) を既にリポジトリにチェック*イン*している場合、依存関係は正しくピックアップされるため、この手順を行う必要はありません。 一方、CocoaPods がリポジトリに含まれて*いない*場合は、CocoaPods を `.circleci/config.yml` にインストールする必要があります。
 
-Installing CocoaPods with `pod install` will fetch the whole CocoaPods specs repo, and that can take some of the valuable build time. To make `pod install` faster on CircleCI and reduce your build time, CircleCI provides a cache of CocoaPods specs via HTTPS instead of Git.
+`pod install` を使用して CocoaPods をインストールすると、CocoaPods Specs リポジトリ全体がフェッチされるため、その分貴重なビルドの時間が奪われてしまいます。 CircleCI では `pod install` の実行を高速化してビルド時間を短縮できるよう、Git ではなく HTTPS で CocoaPods Specs をキャッシュする方法が利用できます。
 
-Following is an example config snippet that will fetch CocoaPods specs using HTTPS and then run `pod install`:
+HTTPS を使用して CocoaPods Specs をフェッチしてから、`pod install` を実行するコンフィグスニペットの例を以下に示します。
 
 {% raw %}
-jobs:
+
+    jobs:
       build-and-deploy:
         steps:
           ...
     
           - run:
-              name: Install CocoaPods
+              name: CocoaPods をインストール
               command: |
                 curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
                 pod install
+    
+
 {% endraw %}
 
-See [this CocoaPods guide](https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control) for more details on checking your pods into the repo instead of installing them in your config.
+Pods をコンフィグにインストールせずに、リポジトリにチェックインする方法については、[こちらの CocoaPods ガイド](https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)を参照してください。
 
-### Running Tests
+### テストの実行
+
 {:.no_toc}
 
-It is possible to use [Fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan) to run your tests as follows:
+[fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan) を使用して、以下のようにテストを実行できます。
 
 ```yaml
 jobs:
   build-and-deploy:
     steps:
-      # add other steps here
+      # 他のステップをここに追加します
       - run:
-          name: Run tests
+          name: テストを実行
           command: bundle exec fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
             SCAN_SCHEME: WebTests
 ```
 
-You can replace the `bundle exec fastlane scan` command with your custom test command, and change the environment variables passed into it. If your test command spans multiple lines, you can include multiple commands in a single step:
+`bundle exec fastlane scan` コマンドはカスタムのテストコマンドに置き換えることができます。このコマンドに渡す環境変数も変更可能です。 なお、テストコマンドが複数行にわたる場合は、1つのステップ内に複数のコマンドを記述できます。
 
     jobs:
       build-and-deploy:
         steps:
           ...
           - run:
-              name: Run tests
+              name: テストを実行
               command: |
                 make build
                 make test
     
 
-### Storing Artifacts, Test Results, and Diagnostic Files
+### アーティファクト、テスト結果、診断ファイルの保存
+
 {:.no_toc}
 
-CircleCI 2.0 does not automatically collect artifacts in your jobs, so if your {% comment %} TODO: Job {% endcomment %}build is generating files that you would like to access with the CircleCI application later on, you must explicitly collect those files with the `store_artifacts` step.
+CircleCI 2.0 ではジョブのアーティファクトが自動的に収集されません。{% comment %} TODO: Job {% endcomment %}ビルドで生成されるファイルに CircleCI アプリケーションからアクセスしたい場合は、`store_artifacts` ステップを使用して、該当のファイルを明示的に収集しておく必要があります。
 
-To view XML test results in the CircleCI application, add a `store_test_results` step in your `.circleci/config.yml` file.
+CircleCI アプリケーションで XML テストの結果を表示させるには、`.circleci/config.yml` ファイルに `store_test_results` ステップを追加します。
 
-To save logs as artifacts, use the `store_artifacts` step as shown in the following example:
+また、ログをアーティファクトとして保存するには、以下の例に示すように `store_artifacts` ステップを使用します。
 
     jobs:
       build-and-deploy:
@@ -298,16 +310,17 @@ To save logs as artifacts, use the `store_artifacts` step as shown in the follow
               path: output
     
 
-Find more details about these steps in the [Artifacts doc]({{ site.baseurl}}/2.0/artifacts/) and the [Test Metadata doc]({{ site.baseurl}}/2.0/collect-test-data/).
+上記のステップの詳細については、「[ビルドアーティファクトの保存]({{ site.baseurl}}/ja/2.0/artifacts/)」と「[テストメタデータの収集]({{ site.baseurl}}/ja/2.0/collect-test-data/)」を参照してください。
 
-### Deployment Using Workflows
+### Workflows を使用したデプロイ
+
 {:.no_toc}
 
-With the availability of Workflows in 2.0, it is best practice to extract all the commands related to the deployment of the app into its own job:
+2.0 では Workflows を利用できるため、アプリケーションのデプロイに関するすべてのコマンドを独自のジョブに抽出することをお勧めします。
 
 ```yaml
 jobs:
-  # add other jobs here
+  # 他のジョブをここに追加します
   deploy:
     macos:
       xcode: 8.3.3
@@ -319,34 +332,34 @@ jobs:
 
       - checkout
 
-      # Set up code signing via Fastlane Match.
+      # fastlane match を使用してコード署名を設定します
 
       - run:
-          name: Set up code signing
+          name: コード署名を設定
           command: fastlane match development --readonly
 
-      # Build the release version of the app.
+      # アプリケーションのリリースバージョンをビルドします
 
       - run:
-          name: Build IPA
+          name: IPA をビルド
           command: bundle exec fastlane gym
 
-      # Store the IPA file in the build artifacts
+      # ビルドアーティファクトに IPA ファイルを格納します
 
       - store_artifacts:
           path: output/MyApp.ipa
           destination: ipa
 
-      # Deploy!
+      # デプロイします
 
       - run:
-          name: Deploy to App Store
+          name: App Store にデプロイ
           command: bundle exec fastlane spaceship
 ```
 
-The previous example deployment job specifies an Xcode version, adds command to produce the release version, stores it as an artifact, and submits it to the App Store.
+上記のデプロイジョブの例では、Xcode のバージョンを指定し、リリースバージョンを生成するコマンドを追加し、それをアーティファクトとして保存した後で、App Store に送信しています。
 
-The following snippet adds a Workflows section to the `.circleci/config.yml` file to specify the conditions that run the deployment job:
+以下のスニペットでは、デプロイジョブを実行する条件を指定した Workflows セクションを `.circleci/config.yml` ファイルに追加しています。
 
     version: 2
     jobs:
@@ -364,10 +377,10 @@ The following snippet adds a Workflows section to the `.circleci/config.yml` fil
                   only: master
     
 
-In the previous example, CircleCI runs the `build-and-test` job on every push to the repository, and the deploy job will only run on the master branch after the `build-and-test` job has finished and is successful.
+上記の例では、CircleCI はリポジトリへのプッシュごとに `build-and-test` ジョブを実行し、`build-and-test` ジョブが正常に完了した後に初めて master ブランチでデプロイジョブを実行します。
 
-Refer to the [Orchestrating Workflows doc]({{ site.baseurl }}/2.0/workflows/) for more examples of using Workflows.
+Workflows の他の使用例については、「[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/ja/2.0/workflows/)」を参照してください。
 
-## Example Application on GitHub
+## GitHub 上のサンプルアプリケーション
 
-See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios) for a full example of how to build, test, sign and deploy an iOS project using Fastlane on CircleCI 2.0.
+CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
