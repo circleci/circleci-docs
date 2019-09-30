@@ -1,34 +1,35 @@
 ---
 layout: classic-docs
-title: "Status"
-short-title: "Status"
-description: "Status dashboard"
+title: "ステータス"
+short-title: "ステータス"
+description: "ステータスダッシュボード"
 categories:
   - getting-started
 order: 1
 ---
-<hr />
-
-| Badges                                                                                                       | Debugging                                                                                                                 |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
-| Integrations enable you to [include status badges in other web pages]({{ site.baseurl }}/2.0/status-badges/) | If you need to troubleshoot your build, you can [debug failed builds using SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/). |
 
 <hr />
 
-| Queuing                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------- |
-| If your builds are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |
+| バッジ                                                                                       | デバッグ                                                                                                                 |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| インテグレーションを利用して、[他の Web ページにステータスバッジを追加]({{ site.baseurl }}/ja/2.0/status-badges/)ことができます。 | If you need to troubleshoot a job, you can [debug failed builds using SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/). |
 
 <hr />
 
-![workflow illustration]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
+| キューイング                                                                                                          |
+| --------------------------------------------------------------------------------------------------------------- |
+| If your jobs are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |
 
-CircleCI provides an integrated dashboard with the status of your build jobs:
+<hr />
 
-- SUCCESS: All jobs completed
-- FAILED: One or more jobs failed
-- RUNNING: Job run is in progress
-- ON HOLD: Job is waiting for approval
-- QUEUED: Job is waiting for available container
+![ワークフローの図]({{ site.baseurl }}/assets/img/docs/job_status.png)
 
-If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may see other [workflow-specific statuses]({{ site.baseurl}}/2.0/workflows/#states).
+CircleCI provides an integrated dashboard showing job status:
+
+- SUCCESS：すべてのジョブが完了
+- FAILED：1つ以上のジョブが失敗
+- RUNNING：ジョブ実行が進行中
+- ON HOLD：ジョブが承認を待機中
+- QUEUED：ジョブが使用可能なコンテナを待機中
+
+[ワークフロー]({{ site.baseurl}}/ja/2.0/workflows/#概要)を使用している場合は、上記に加えて[ワークフロー固有のステータス]({{ site.baseurl}}/ja/2.0/workflows/#ステータス値)が表示されます。
