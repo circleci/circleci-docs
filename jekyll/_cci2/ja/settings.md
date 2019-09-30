@@ -1,27 +1,28 @@
 ---
 layout: classic-docs
-title: "Settings"
-short-title: "Settings"
-description: "Summary of project and org settings"
+title: "設定"
+short-title: "設定"
+description: "プロジェクト設定および組織設定の概要"
 categories:
   - settings
 order: 2
 ---
-CircleCI provides Project and Org settings with encrypted storage in the CircleCI app.
 
-## Project Settings Page
+CircleCI は、CircleCI アプリケーション内でプロジェクト設定と組織設定のための暗号化ストレージを提供しています。
 
-![settings]({{ site.baseurl }}/assets/img/docs/settings.png)
+## プロジェクト設定ページ
 
-## Organization Settings Page
+![設定ページ]({{ site.baseurl }}/assets/img/docs/settings.png)
 
-For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), see the Settings tab of the CircleCI app for summary data about your usage.
+## 組織設定ページ
+
+[組織のプランまたは課金設定]({{ site.baseurl }}/ja/2.0/faq/#料金支払)については、CircleCI アプリケーションの [Settings (設定)] タブで、使用状況に関するサマリーデータを参照してください。
 
 <hr />
 
-![settings]({{ site.baseurl }}/assets/img/docs/plan-settings.png)
+![設定ページ]({{ site.baseurl }}/assets/img/docs/plan-settings.png)
 
-## See Also
+## 関連項目
 
-- Plans and Billing -- For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), see the Settings tab of the CircleCI app for summary data about your usage. 
-- Contexts -- Share environment variables across projects with a Workflow key, on the [contexts page]({{ site.baseurl }}/2.0/contexts/).
+- プランと課金 -- [組織のプランまたは課金設定]({{ site.baseurl }}/ja/2.0/faq/#料金支払)については、CircleCI アプリケーションの [Settings (設定)] タブで、使用状況に関するサマリーデータを参照してください。 
+- コンテキスト -- workflow キーを使用してプロジェクト間で環境変数を共有できます。「[コンテキストの使用]({{ site.baseurl }}/ja/2.0/contexts/)」を参照してください。
