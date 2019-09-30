@@ -1,67 +1,53 @@
 ---
 layout: classic-docs
-title: "Configuring a Python Application on CircleCI"
+title: "CircleCI での Python アプリケーションの設定"
 short-title: "Python"
-description: "Continuous integration with Python on CircleCI"
+description: "CircleCI 上での Python による継続的インテグレーション"
 categories:
   - language-guides
 order: 7
 ---
-This document describes how to configure CircleCI using a sample application written in Python.
 
-- TOC {:toc}
+ここでは、Python で記述されたサンプルアプリケーションを参考に、CircleCI を設定する方法について説明します。
 
-## Overview
+- 目次 {:toc}
 
-This guide uses a sample Django application to describe configuration best practices for Python applications building on CircleCI. The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-python-django) and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
+## 概要
 
-Consider [forking the repository](https://help.github.com/articles/fork-a-repo/) and rewriting [the configuration file](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml) as you follow this guide.
+このガイドでは、Django サンプルアプリケーションを使用しながら、CircleCI 上で Python アプリケーションをビルドする場合の設定のベストプラクティスについて説明します。 このアプリケーションは [GitHub 上でホスティング](https://github.com/CircleCI-Public/circleci-demo-python-django)され、[CircleCI 上でビルド](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}されます。
 
-## Configuration Walkthrough
+このガイドに沿って、[リポジトリをフォーク](https://help.github.com/articles/fork-a-repo/)し、[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
 
-Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
+## 設定の詳細説明
 
-### Specify a Version
+すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+### バージョンの指定
+
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
 version: 2
 ```
 
-### Create a Build Job
+### ビルドジョブの作成
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
 
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
-
-```yaml
-version: 2
-jobs:
-  build:  # required for runs that don't use workflows
-    working_directory: ~/circleci-demo-python-django
-```
-
-### Choose an Executor Type
-
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
-
-In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container). All commands for a job execute in this container.
+[`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
 ```yaml
 version: 2
 jobs:
-  build:
+  build:  # Workflows を使用しない実行に必要です
     working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: circleci/python:3.6.4  # primary container for the build job
 ```
 
-**Note:** `circleci/python:3.6.4` is a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI. These images are extensions of official Docker images and include tools useful for CI/CD environments.
+### Executor タイプの選択
 
-### Add Other Services and Set Environment Variables
+ジョブのステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
 
-Specify additional containers for services like databases. Use the [`environment`]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container) key to set environment variables for all commands in a container.
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 リストの先頭にあるイメージがジョブの[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。 ジョブのすべてのコマンドは、このコンテナで実行されます。
 
 ```yaml
 version: 2
@@ -69,23 +55,38 @@ jobs:
   build:
     working_directory: ~/circleci-demo-python-django
     docker:
-      - image: circleci/python:3.6.4 # every job must define an image for the docker executor and subsequent jobs may define a different image.
+      - image: circleci/python:3.6.4  # ビルドジョブのプライマリコンテナ
+```
+
+**メモ：**`circleci/python:3.6.4` は、CircleCI が提供する[コンビニエンスイメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
+
+### 他サービスの追加と環境変数の設定
+
+データベースなどのサービス用の追加コンテナを指定します。 [`environment`]({{ site.baseurl }}/ja/2.0/env-vars/#コンテナ内で環境変数を設定する) キーを使用して、コンテナ内のすべてのコマンドで使用される環境変数を設定します。
+
+```yaml
+version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-demo-python-django
+    docker:
+      - image: circleci/python:3.6.4 # 各ジョブで Docker Executor のイメージを定義する必要があり、後続のジョブでは別のイメージを定義できます
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2 # an example of how to specify a service container
+      - image: circleci/postgres:9.6.2 # サービスコンテナの指定方法を示す例
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
 ```
 
-### Install Dependencies
+### 依存関係のインストール
 
-After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code. By default, source code is checked out to the path specified by `working_directory`.
+[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソースコードがチェックアウトされます。
 
-Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step to execute bash commands. In this example, [Pipenv](https://pipenv.readthedocs.io/en/latest/) is used to create a virtual environment and install Python packages.
+[`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#run) ステップを使用して、bash コマンドを実行します。 この例では、[Pipenv](https://pipenv.readthedocs.io/en/latest/) を使用して仮想環境を作成し、Python パッケージをインストールします。
 
 ```yaml
 version: 2
@@ -93,20 +94,20 @@ jobs:
   build:
     # ...
     steps:
-      - checkout  # checkout source code to working directory
+      - checkout  # ソースコードを作業ディレクトリにチェックアウトします
       - run:
-          command: |  # use pipenv to install dependencies
+          command: |  # Pipenv を使用して依存関係をインストールします
             sudo pip install pipenv
             pipenv install
 ```
 
-### Cache Dependencies
+### 依存関係のキャッシュ
 
-To save time between runs, consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
+実行の間隔を短縮するには、[依存関係またはソースコードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, the virtual environment and installed packages are cached.
+[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
-Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
 
@@ -119,7 +120,7 @@ jobs:
       - checkout
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:  # ensure this step occurs *before* installing dependencies
+      - restore_cache:  # このステップは依存関係をインストールする*前*に実行します
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
@@ -135,11 +136,11 @@ jobs:
 
 {% endraw %}
 
-**Note:** Use the `chown` command to grant CircleCI access to dependency locations.
+**メモ：**`chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
-### Run Tests
+### テストの実行
 
-Use the `run` step to run your test suite.
+`run` ステップを使用して、テストスイートを実行します。
 
 ```yaml
 version: 2
@@ -153,11 +154,11 @@ jobs:
           pipenv run python manage.py test
 ```
 
-### Upload And Store Test Results
+### テスト結果のアップロードおよび保存
 
-Use the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step to upload test results to CircleCI. These results will display in the **Test Summary** section of the CircleCI application.
+[`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップを使用して、テスト結果を CircleCI にアップロードします。 この結果は、CircleCI アプリケーションの**テストサマリー**セクションに表示されます。
 
-Use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step to save test results as artifacts.
+[`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) ステップを使用して、テスト結果をアーティファクトとして保存します。
 
 ```yaml
 version: 2
@@ -173,43 +174,43 @@ jobs:
           destination: tr1
 ```
 
-### Deploy Application
+### アプリケーションのデプロイ
 
-This Django application is not deployed anywhere. See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) or the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for deploy examples.
+この Django アプリケーションはどこにもデプロイされません。 デプロイの例については、[Flask を使用したプロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)または[デプロイに関するドキュメント]({{ site.baseurl }}/ja/2.0/deployment-integrations/)を参照してください。
 
-## Full Configuration File
+## 完全な設定ファイル
 
 {% raw %}
 
 ```yaml
-version: 2 # use CircleCI 2.0
-jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point 
-    # directory where steps are run
+version: 2 # CircleCI 2.0 を使用します
+jobs: # 1回の実行の基本作業単位
+  build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要 
+    # ステップが実行されるディレクトリ
     working_directory: ~/circleci-demo-python-django
-    docker: # run the steps with Docker
-      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
+    docker: # Docker でステップを実行します
+      # CircleCI Python イメージは https://hub.docker.com/r/circleci/python/ で入手できます
       - image: circleci/python:3.6.4
-        environment: # environment variables for primary container
+        environment: # プライマリコンテナの環境変数
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      # CircleCI PostgreSQL イメージは https://hub.docker.com/r/circleci/postgres/ で入手できます
       - image: circleci/postgres:9.6.2
-        environment: # environment variables for the Postgres container.
+        environment: # Postgres コンテナのための環境変数
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
+    steps: # `build` ジョブを構成するステップ
+      - checkout # ソースコードを作業ディレクトリにチェックアウトします
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
-      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
+      - save_cache: # Pipfile のチェックサムをキャッシュキーとして使用して、Python の依存関係をキャッシュします
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - ".venv"
@@ -218,15 +219,15 @@ jobs: # A basic unit of work in a run
       - run:
           command: |
             pipenv run python manage.py test
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results: # テストサマリー (https://circleci.com/docs/ja/2.0/collect-test-data/) に表示するテスト結果をアップロードします
           path: test-results
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するテストサマリーをアップロードします
           path: test-results
           destination: tr1
 ```
 
 {% endraw %}
 
-## See Also
+## 関連項目
 
-- See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.
+- 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/ja/2.0/tutorials/)」を参照してください。
