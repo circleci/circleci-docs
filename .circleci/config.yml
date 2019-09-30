@@ -47,8 +47,8 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
-      - ruby/restore_cache:
-          key: circleci-docs-{{ .Branch}}- # restore cache with both the branch and Gemfile.lock
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
