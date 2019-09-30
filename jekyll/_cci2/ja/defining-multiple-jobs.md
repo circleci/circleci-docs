@@ -1,8 +1,7 @@
 ---
 layout: classic-docs
 title: "CircleCI 2.0"
-redirect: /docs/2.0/workflows/
+redirect: /docs/ja/2.0/workflows/
 ---
 
-
-<h1>This page has moved. You should be automatically redirected, but if that didn't work you can <a href="/docs/2.0/workflows/">click here</a>.</h1>
+<h1>このページは移動しました。 自動的に新しいページに移動します。移動しない場合は、<a href="/docs/ja/2.0/workflows/">ここをクリック</a>してください。</h1>
