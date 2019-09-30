@@ -1,35 +1,33 @@
 ---
-layout: crwdns130090:0crwdne130090:0
-title: "crwdns130092:0crwdne130092:0"
+layout: crwdns161096:0crwdne161096:0
+title: "crwdns161098:0crwdne161098:0"
 category:
-  - crwdns130094:0crwdne130094:0
-order: e130096:02a0crwdns130096:0crwdne130096:0fc298.51200916crwdns130096:0crwdne130096:0
-description: "crwdns130098:0crwdne130098:0"
+  - crwdns161100:0crwdne161100:0
+order: wdne161102:04cdb46.crwdns161102:0crwdne161102:09088981crwdns161102:0crwdne161102:0
+description: "crwdns161104:0crwdne161104:0"
 ---
-crwdns135250:0crwdne135250:0 crwdns135252:0crwdne135252:0 crwdns135254:0crwdne135254:0
 
-- crwdns130104:0
-{:toc}
+crwdns161106:0crwdne161106:0 crwdns161108:0crwdne161108:0 crwdns161110:0crwdne161110:0
 
-crwdne130104:0
+- crwdns161112:0{:toc}crwdne161112:0
 
-## crwdns130106:0crwdne130106:0
+## crwdns161114:0crwdne161114:0
 
-crwdns135256:0crwdne135256:0
+crwdns161116:0crwdne161116:0
 
-- crwdns135258:0crwdne135258:0
-- crwdns135260:0%3crwdnd135260:0%2Fcrwdnd135260:0%2Fcrwdnd135260:0%2Fcrwdne135260:0
-- crwdns135262:0crwdne135262:0
-- crwdns135264:0crwdne135264:0
-- crwdns135266:0crwdne135266:0 crwdns135268:0crwdne135268:0
+- crwdns161118:0crwdne161118:0
+- crwdns161120:0%3crwdnd161120:0%2Fcrwdnd161120:0%2Fcrwdnd161120:0%2Fcrwdne161120:0
+- crwdns161122:0crwdne161122:0
+- crwdns161124:0crwdne161124:0
+- crwdns161126:0crwdne161126:0 crwdns161128:0crwdne161128:0
 
-## crwdns130120:0crwdne130120:0
+## crwdns161130:0crwdne161130:0
 
-crwdns135270:0crwdne135270:0 crwdns135272:0crwdne135272:0
+crwdns161132:0crwdne161132:0 crwdns161134:0crwdne161134:0
 
-crwdns135274:0crwdne135274:0 crwdns135276:0crwdne135276:0 crwdns135278:0crwdne135278:0
+crwdns161136:0crwdne161136:0 crwdns161138:0crwdne161138:0 crwdns161140:0crwdne161140:0
 
-### crwdns130130:0crwdne130130:0
+### crwdns161142:0crwdne161142:0
 
 <script>
   var amiIds = {
@@ -53,20 +51,20 @@ crwdns135274:0crwdne135274:0 crwdns135276:0crwdne135276:0 crwdns135278:0crwdne13
   };
   </script>
 
-<select id="ami-select" onchange="amiUpdateSelect()"> <option value="ap-northeast-1">crwdns130132:0crwdne130132:0</option> <option value="ap-northeast-2">crwdns130134:0crwdne130134:0</option> <option value="ap-southeast-1">crwdns130136:0crwdne130136:0</option> <option value="ap-southeast-2">crwdns130138:0crwdne130138:0</option> <option value="eu-central-1">crwdns130140:0crwdne130140:0</option> <option value="eu-west-1">crwdns130142:0crwdne130142:0</option> <option value="sa-east-1">crwdns130144:0crwdne130144:0</option> <option value="us-east-1" selected="selected">crwdns130146:0crwdne130146:0</option> <option value="us-east-2">crwdns130148:0crwdne130148:0</option> <option value="us-west-1">crwdns130150:0crwdne130150:0</option> <option value="us-west-2">crwdns130152:0crwdne130152:0</option> </select> <a id="ami-go" href="" class="btn btn-success" data-analytics-action="{{ site.analytics.events.go_button_clicked }}" target="_blank">crwdns130154:0crwdne130154:0</a>
+<select id="ami-select" onchange="amiUpdateSelect()"> <option value="ap-northeast-1">crwdns161144:0crwdne161144:0</option> <option value="ap-northeast-2">crwdns161146:0crwdne161146:0</option> <option value="ap-southeast-1">crwdns161148:0crwdne161148:0</option> <option value="ap-southeast-2">crwdns161150:0crwdne161150:0</option> <option value="eu-central-1">crwdns161152:0crwdne161152:0</option> <option value="eu-west-1">crwdns161154:0crwdne161154:0</option> <option value="sa-east-1">crwdns161156:0crwdne161156:0</option> <option value="us-east-1" selected="selected">crwdns161158:0crwdne161158:0</option> <option value="us-east-2">crwdns161160:0crwdne161160:0</option> <option value="us-west-1">crwdns161162:0crwdne161162:0</option> <option value="us-west-2">crwdns161164:0crwdne161164:0</option> </select> <a id="ami-go" href="" class="btn btn-success" data-analytics-action="{{ site.analytics.events.go_button_clicked }}" target="_blank">crwdns161166:0crwdne161166:0</a>
 <script>amiUpdateSelect();</script>
 
-1. crwdns135280:0crwdne135280:0
-2. crwdns135282:0crwdne135282:0 crwdns135284:0crwdne135284:0
-3. crwdns130162:0crwdne130162:0
+1. crwdns161168:0crwdne161168:0
+2. crwdns161170:0crwdne161170:0 crwdns161172:0crwdne161172:0
+3. crwdns161174:0crwdne161174:0
 
-crwdns135290:0{{site.baseurl}}crwdne135290:0 crwdns135292:0crwdne135292:0 crwdns135294:0crwdne135294:0 crwdns135296:0crwdne135296:0 crwdns135298:0crwdne135298:0 crwdns135300:0crwdne135300:0 crwdns135302:0crwdne135302:0 crwdns135304:0crwdne135304:0 crwdns135306:0crwdne135306:0 crwdns135308:0{{site.baseurl}}crwdne135308:0 crwdns135310:0crwdne135310:0 crwdns135312:0crwdne135312:0 crwdns135314:0crwdne135314:0 crwdns135316:0crwdne135316:0 crwdns135318:0crwdne135318:0 ![crwdns135288:0crwdne135288:0](crwdns135286:0{{site.baseurl}}crwdne135286:0)
+crwdns161180:0{{site.baseurl}}crwdne161180:0 crwdns161182:0crwdne161182:0 crwdns161184:0crwdne161184:0 crwdns161186:0crwdne161186:0 crwdns161188:0crwdne161188:0 crwdns161190:0crwdne161190:0 crwdns161192:0crwdne161192:0 crwdns161194:0crwdne161194:0 crwdns161196:0crwdne161196:0 crwdns161198:0{{site.baseurl}}crwdne161198:0 crwdns161200:0crwdne161200:0 crwdns161202:0crwdne161202:0 crwdns161204:0crwdne161204:0 crwdns161206:0crwdne161206:0 crwdns161208:0crwdne161208:0 ![crwdns161178:0crwdne161178:0](crwdns161176:0{{site.baseurl}}crwdne161176:0)
 
-### crwdns130176:0crwdne130176:0
+### crwdns161210:0crwdne161210:0
 
-1. crwdns135320:0crwdne135320:0 crwdns135322:0crwdne135322:0 crwdns135324:0crwdne135324:0
+1. crwdns161212:0crwdne161212:0 crwdns161214:0crwdne161214:0 crwdns161216:0crwdne161216:0
 
-crwdns130182:0{{site.baseurl}}crwdne130182:0 crwdns130184:0crwdne130184:0 crwdns135326:0crwdne135326:0 crwdns135328:0crwdne135328:0 crwdns135330:0crwdne135330:0 crwdns135332:0crwdne135332:0 crwdns135334:0crwdne135334:0 crwdns135336:0crwdne135336:0 crwdns135338:0crwdne135338:0 crwdns135340:0crwdne135340:0 crwdns135342:0crwdne135342:0 crwdns135344:0crwdne135344:0 crwdns135346:0crwdne135346:0 crwdns135348:0crwdne135348:0 crwdns135350:0crwdne135350:0 crwdns135352:0crwdne135352:0 crwdns135354:0crwdne135354:0 crwdns135356:0crwdne135356:0 crwdns135358:0crwdne135358:0 crwdns135360:0crwdne135360:0 crwdns135362:0crwdne135362:0 crwdns135364:0crwdne135364:0 crwdns135366:0crwdne135366:0 crwdns135368:0crwdne135368:0 crwdns135370:0crwdne135370:0 crwdns135372:0crwdne135372:0 crwdns135374:0crwdne135374:0
+crwdns161218:0{{site.baseurl}}crwdne161218:0 crwdns161220:0crwdne161220:0 crwdns161222:0crwdne161222:0 crwdns161224:0crwdne161224:0 crwdns161226:0crwdne161226:0 crwdns161228:0crwdne161228:0 crwdns161230:0crwdne161230:0 crwdns161232:0crwdne161232:0 crwdns161234:0crwdne161234:0 crwdns161236:0crwdne161236:0 crwdns161238:0crwdne161238:0 crwdns161240:0crwdne161240:0 crwdns161242:0crwdne161242:0 crwdns161244:0crwdne161244:0 crwdns161246:0crwdne161246:0 crwdns161248:0crwdne161248:0 crwdns161250:0crwdne161250:0 crwdns161252:0crwdne161252:0 crwdns161254:0crwdne161254:0 crwdns161256:0crwdne161256:0 crwdns161258:0crwdne161258:0 crwdns161260:0crwdne161260:0 crwdns161262:0crwdne161262:0 crwdns161264:0crwdne161264:0 crwdns161266:0crwdne161266:0 crwdns161268:0crwdne161268:0 crwdns161270:0crwdne161270:0
 
 <!---
 ## Installation in a Data Center
