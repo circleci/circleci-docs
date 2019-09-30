@@ -1,57 +1,58 @@
 ---
 layout: classic-docs
-title: Authorizing the Google Cloud SDK
-description: How to authorize the Google Cloud SDK
+title: Google Cloud SDK の承認
+description: Google Cloud SDK を承認する方法
 categories:
   - deploying
 order: 100
 ---
-This document explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
-- TOC
+ここでは、プライマリコンテナで [Google Cloud SDK](https://cloud.google.com/sdk/) をインストールおよび承認する方法を説明します。
+
+- 目次
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
-The Google Cloud SDK is a powerful set of tools that can be used to access Google Cloud Platform (GCP) services like Google Compute Engine and Google Kubernetes Engine. On CircleCI, the Google Cloud SDK is recommended to deploy your application to GCP products.
+Google Cloud SDK は、Google Cloud Platform (GCP) サービスへのアクセスに使用できる強力なツールのセットであり、Google Compute Engine や Google Kubernetes Engine などが含まれます。 CircleCI では、GCP プロダクトにアプリケーションをデプロイする場合、Google Cloud SDK が推奨されます。
 
-## Prerequisites
+## 前提条件
 {:.no_toc}
 
-- A CircleCI 2.0 project.
-- A GCP project.
+- CircleCI 2.0 プロジェクト
+- GCP プロジェクト
 
-### Installing the Google Cloud SDK
+### Google Cloud SDK のインストール
 
-If Debian is an acceptable operating system for your primary container, consider using Google's base Docker image. You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/).
+プライマリコンテナでオペレーティングシステムとして Debian を受け入れ可能な場合は、Google の基本 Docker イメージの使用を検討してください。 このイメージは、Docker Hub で [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) として提供されています。
 
-Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
+それ以外の場合は、基本イメージのオペレーティングシステムに対応する [Google Cloud SDK インストール手順](https://cloud.google.com/sdk/)に従ってください。
 
-### Creating and Storing a Service Account
+### サービスアカウントの作成と格納
 
-Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud`. Google offers two types of authorization: user accounts and service accounts. Because you are installing the Cloud SDK on CircleCI, the service account is the appropriate choice.
+Google Cloud SDK のツールを使用する前に、`gcloud` を承認する必要があります。 Google は、ユーザーアカウントとサービスアカウントの 2種類の承認を提供しています。 ここでは CircleCI に Cloud SDK をインストールするので、サービスアカウントが適切です。
 
-1. Create a service account by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). Remember to download the JSON-formatted key file.
+1. [Google の手順](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account)の 1 ～ 3 に従ってサービスアカウントを作成します。 必ず JSON 形式のキーファイルをダウンロードしてください。
 
-2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
+2. CircleCI にキーファイルを[プロジェクト環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクト内で環境変数を設定する)として追加します。 この例では、`GCLOUD_SERVICE_KEY` という変数名になっています。 同じ名前を使用する必要はありませんが、このドキュメントのサンプルでは常にこの名前を使用します。
 
-3. For convenience, add two more environment variables to your CircleCI project:
+3. 便宜上、次の 2つの環境変数を CircleCI プロジェクトに追加します。
     
-    - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
-    - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
+    - `GOOGLE_PROJECT_ID`：GCP プロジェクトの ID
+    - `GOOGLE_COMPUTE_ZONE`：デフォルトの[Compute Engine のゾーン](https://cloud.google.com/compute/docs/regions-zones/)
 
-#### Adding Granular Permissions
+#### きめ細かい権限の追加
 
-If you are having issues pushing container images to GCR you may need more granular permissions than the default `service account` provides. You can grant permission changes in the Cloud Storage [IAM Console](https://console.cloud.google.com/iam-admin/iam/project).
+GCR へのコンテナイメージのプッシュに問題が発生している場合は、デフォルトの `service account` によって提供されるものよりもきめ細かい権限が必要とされている可能性があります。 権限の変更は、Cloud Storage の [IAM コンソール](https://console.cloud.google.com/iam-admin/iam/project)で許可することができます。
 
-Refer to the Cloud Storage [permission documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions) to learn more about Identity and Access Management (IAM) permissions.
+Identity and Access Management (IAM) の権限については、Cloud Storage の[権限に関するドキュメント](https://cloud.google.com/storage/docs/access-control/iam-permissions)を参照してください。
 
-### Authenticating to Google Container Registry
+### Google Container Registry への認証
 
-Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk), you may have to authenticate to the Google Container Registry.
+[選択する基本 Docker イメージ](#installing-the-google-cloud-sdk)によっては、Google Container Registry への認証が必要になる場合があります。
 
-If you are using Google's public image (`google/cloud-sdk`), no authentication is needed.
+Google のパブリックイメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
 
 ```yaml
 version: 2
@@ -61,7 +62,7 @@ jobs:
       - image: google/cloud-sdk
 ```
 
-If you are using a custom image, you must authenticate to GCR. Use the [`auth` key](https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
+カスタムイメージを使用している場合は、GCR に対して認証が必要です。 [`auth` キー](https://circleci.com/docs/ja/2.0/configuration-reference/#docker)を使用して、認証情報を指定します。
 
 ```yaml
 version: 2
@@ -70,13 +71,13 @@ jobs:
     docker:
       - image: gcr.io/project/<image-name>
         auth:
-          username: _json_key  # default username when using a JSON key file to authenticate
-          password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
+          username: _json_key  # JSON キーファイルを使用して認証する場合のデフォルトのユーザー名
+          password: $GCLOUD_SERVICE_KEY  # 作成した JSON サービスアカウント、base64 にエンコードしない
 ```
 
-### Authorizing the Google Cloud SDK
+### Authorization
 
-Use `gcloud` to authorize the Google Cloud SDK and set several default settings.
+`gcloud` を使用して Google Cloud SDK を承認し、いくつかのデフォルト設定を設定します。
 
 ```yaml
 version: 2
@@ -91,7 +92,7 @@ jobs:
           gcloud --quiet config set compute/zone ${GOOGLE_COMPUTE_ZONE}
 ```
 
-**Note:** If you are using a custom base image, ensure that you have the most recent components by adding the following command before authorizing the SDK.
+**メモ：**カスタムの基本イメージを使用している場合は、確実に最新のコンポーネントが使用されるように、SDK を承認する前に以下のコマンドを追加してください。
 
 ```bash
 sudo gcloud --quiet components update
