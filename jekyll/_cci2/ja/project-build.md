@@ -1,40 +1,41 @@
 ---
 layout: classic-docs
-title: "Projects and Builds"
-short-title: "Projects and Builds"
-description: "Starting point for CircleCI 2.0 projects"
+title: "プロジェクトとビルド"
+short-title: "プロジェクトとビルド"
+description: "CircleCI 2.0 プロジェクトの入門ガイド"
 categories:
   - getting-started
 order: 1
 ---
-This document describes how CircleCI automates builds of your project.
 
-## Overview
+ここでは、CircleCI でプロジェクトのビルドを自動化する方法について説明します。
 
-After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{ site.baseurl }}/2.0/glossary/#project) to circleci.com, every code change triggers a [build]({{ site.baseurl }}/2.0/build) and automated tests in a clean container or VM configured for your requirements.
+## 概要
 
-## Adding Projects
+GitHub または Bitbucket 上のソフトウェアリポジトリが承認され、[プロジェクト]({{ site.baseurl }}/ja/2.0/glossary/#project)として circleci.com に追加された後は、コードを変更するたびに、クリーンコンテナ、またはユーザーの要件に合わせて設定された VM で[ビルド]({{ site.baseurl }}/ja/2.0/build)と自動化されたテストがトリガーされます。
 
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
+## プロジェクトの追加
 
-## Add Projects Page
+CircleCI プロジェクトは、関連付けられているコードリポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
 
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+## プロジェクトの追加ページ
 
-*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
+ユーザーは、プロジェクトを*フォロー*することで、プロジェクトの[ビルドステータス]({{ site.baseurl }}/ja/2.0/status/)に関する[メール通知]({{ site.baseurl }}/ja/2.0/notifications/)を受け取り、プロジェクトを自分の CircleCI ダッシュボードに追加できます。
 
-If you do not see your project and it is not currently building on CircleCI, check your Organization in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
+*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
+
+プロジェクトが表示されない場合は、CircleCI 上でビルド中でないときに CircleCI アプリケーションの左上隅で組織を確認してください。 たとえば、左上にユーザー `my-user` が表示されているなら、`my-user` に所属する GitHub プロジェクトのみが `Add Projects` の下で使用できます。 GitHub プロジェクト `your-org/project` をビルドする場合は、アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-## Viewing Builds
+## ビルドの表示
 
-Your build appears on the Jobs page of the CircleCI app when a new commit is pushed to your repository. If you do not see your jobs building on the Jobs page when you push config changes, check the Workflows tab of the CircleCI app to find out how to update your config to enable builds.
+新しいコミットがリポジトリにプッシュされると、CircleCI アプリケーションの [Jobs (ジョブ)] ページにビルドが表示されます。 コンフィグの変更をプッシュしたときに、ビルド中のジョブが [Jpbs (ジョブ)] ページに表示されない場合は、ビルドを有効にするにはコンフィグをどう更新したらよいか、CircleCI アプリケーションの [Workflows] タブで確認してください。
 
 ![Workflows]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-## See Also
+## 関連項目
 
-[Settings]({{ site.baseurl }}/2.0/settings)
+[設定]({{ site.baseurl }}/2.0/settings)
