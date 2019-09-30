@@ -1,143 +1,114 @@
 ---
-layout: crwdns132650:0crwdne132650:0
-title: "crwdns132652:0crwdne132652:0"
-short-title: "crwdns132654:0crwdne132654:0"
-description: "crwdns132656:0crwdne132656:0"
+layout: crwdns161960:0crwdne161960:0
+title: "crwdns161962:0crwdne161962:0"
+short-title: "crwdns161964:0crwdne161964:0"
+description: "crwdns161966:0crwdne161966:0"
 categories:
-  - crwdns132658:0crwdne132658:0
-order: ne132660:0a6ebcrwdns132660:0crwdne132660:003crwdns132660:0crwdne132660:0.61110403crwdns132660:0crwdne132660:0
+  - crwdns161968:0crwdne161968:0
+order: 0crwdne161970:0fd7.1098crwdns161970:0crwdne161970:0880crwdns161970:0crwdne161970:0
 ---
-crwdns132662:0{{ site.baseurl }}crwdne132662:0
 
-* crwdns132664:0
-{:toc}
+crwdns161972:0{{ site.baseurl }}crwdne161972:0
 
-crwdne132664:0
+* crwdns161974:0{:toc}crwdne161974:0
 
-## crwdns132666:0crwdne132666:0
+## crwdns161976:0crwdne161976:0
 
-crwdns132668:0
-{:.no_toc}
+crwdns161978:0{:.no_toc}crwdne161978:0
 
-crwdne132668:0
+crwdns161980:0crwdne161980:0
 
-crwdns132670:0crwdne132670:0
+crwdns161982:0crwdne161982:0
 
-crwdns132672:0crwdne132672:0
+* crwdns161984:0crwdne161984:0
+* crwdns161986:0crwdne161986:0
 
-* crwdns132674:0crwdne132674:0
-* crwdns132676:0crwdne132676:0
+crwdns161988:0crwdne161988:0
 
-crwdns132678:0crwdne132678:0
+## crwdns161990:0crwdne161990:0
 
-## crwdns132680:0crwdne132680:0
-
-crwdns132682:0
-
-{% raw %}
-
-crwdne132682:0
+crwdns161992:0{% raw %}crwdne161992:0
 
 ```yaml
-crwdns132684:0{{ checksum "project.clj" }}
-      crwdnd132684:0{{ checksum "project.clj" }}
-      crwdne132684:0     
+crwdns305202:0{{ checksum "project.clj" }}crwdnd305202:0{{ checksum "project.clj" }}crwdne305202:0     
 ```
 
-crwdns132686:0
+crwdns161996:0{% endraw %}crwdne161996:0
 
-{% endraw %}
+## crwdns161998:0crwdne161998:0
 
-crwdne132686:0
+crwdns162000:0crwdne162000:0
 
-## crwdns132688:0crwdne132688:0
+crwdns162002:0crwdne162002:0 crwdns162004:0crwdne162004:0 crwdns162006:0crwdne162006:0
 
-crwdns132690:0crwdne132690:0
+crwdns162008:0crwdne162008:0
 
-crwdns132692:0crwdne132692:0 crwdns132694:0crwdne132694:0 crwdns132696:0crwdne132696:0
+## crwdns162010:0crwdne162010:0
 
-crwdns132698:0crwdne132698:0
-
-## crwdns132700:0crwdne132700:0
-
-crwdns132702:0crwdne132702:0
+crwdns162012:0crwdne162012:0
 
 ```yaml
-crwdns132704:0crwdne132704:0
+crwdns162014:0crwdne162014:0
 ```
 
-crwdns132706:0crwdne132706:0 crwdns132708:0crwdne132708:0 crwdns132710:0crwdne132710:0
+crwdns162016:0crwdne162016:0 crwdns162018:0crwdne162018:0 crwdns162020:0crwdne162020:0
 
-crwdns132712:0crwdne132712:0 crwdns132714:0crwdne132714:0
+crwdns162022:0crwdne162022:0 crwdns162024:0crwdne162024:0
 
 ```yaml
-crwdns132716:0crwdne132716:0
+crwdns162026:0crwdne162026:0
 ```
 
-crwdns132718:0crwdne132718:0
+crwdns162028:0crwdne162028:0
 
-crwdns132720:0crwdne132720:0
+crwdns162030:0crwdne162030:0
 
 ```yaml
-crwdns132722:0crwdne132722:0
-    crwdns132724:0crwdne132724:0
+crwdns162032:0crwdne162032:0
+    crwdns305204:0crwdne305204:0
 ```
 
-crwdns132726:0crwdne132726:0
+crwdns162036:0crwdne162036:0
 
-crwdns132728:0crwdne132728:0 crwdns132730:0crwdne132730:0 crwdns132732:0crwdne132732:0
+crwdns162038:0crwdne162038:0 crwdns162040:0crwdne162040:0 crwdns162042:0crwdne162042:0
 
-crwdns132734:0crwdne132734:0 crwdns132736:0crwdne132736:0
+crwdns162044:0crwdne162044:0 crwdns162046:0crwdne162046:0
 
 ```yaml
-    crwdns132738:0crwdne132738:0
+    crwdns162048:0crwdne162048:0
 ```
 
-crwdns132740:0crwdne132740:0
+crwdns162050:0crwdne162050:0
 
-crwdns132742:0crwdne132742:0
+crwdns162052:0crwdne162052:0
 
-crwdns132744:0crwdne132744:0 crwdns132746:0crwdne132746:0 crwdns132748:0crwdne132748:0 crwdns132750:0crwdne132750:0
+crwdns162054:0crwdne162054:0 crwdns162056:0crwdne162056:0 crwdns162058:0crwdne162058:0 crwdns162060:0crwdne162060:0
 
-crwdns132752:0crwdne132752:0
+crwdns162062:0crwdne162062:0
 
-crwdns132754:0crwdne132754:0 crwdns132756:0crwdne132756:0
+crwdns162064:0crwdne162064:0 crwdns162066:0crwdne162066:0
 
-crwdns132758:0
-
-{% raw %}
-crwdne132758:0
+crwdns162068:0{% raw %}crwdne162068:0
 
 ```yaml
-crwdns132760:0crwdne132760:0
-    crwdns132762:0{{ checksum "project.clj" }}
-      crwdnd132762:0{{ checksum "project.clj" }}
-      crwdne132762:0
+crwdns162070:0crwdne162070:0
+    crwdns162072:0{{ checksum "project.clj" }}crwdnd162072:0{{ checksum "project.clj" }}crwdne162072:0
 ```
 
-crwdns132764:0
-{% endraw %}
+crwdns162074:0{% endraw %}crwdne162074:0
 
-crwdne132764:0
+crwdns162076:0crwdne162076:0 crwdns162078:0crwdne162078:0
 
-crwdns132766:0crwdne132766:0 crwdns132768:0crwdne132768:0
+## crwdns162080:0crwdne162080:0
 
-## crwdns132770:0crwdne132770:0
+crwdns162082:0{:.no_toc}crwdne162082:0
 
-crwdns132772:0
-{:.no_toc}
+crwdns162084:0{{ site.baseurl }}crwdne162084:0
 
-crwdne132772:0
+### crwdns162086:0crwdne162086:0
 
-crwdns132774:0{{ site.baseurl }}crwdne132774:0
+crwdns162088:0{:.no_toc}crwdne162088:0
 
-### crwdns132776:0crwdne132776:0
+crwdns162090:0crwdne162090:0
 
-crwdns132778:0
-{:.no_toc}
-
-crwdne132778:0
-
-crwdns132780:0crwdne132780:0
-
-* crwdns132782:0crwdne132782:0
+* crwdns162092:0crwdne162092:0
