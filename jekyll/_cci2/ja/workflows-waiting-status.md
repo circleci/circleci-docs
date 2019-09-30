@@ -1,20 +1,21 @@
 ---
 layout: classic-docs
-title: "Workflows Waiting for Status in GitHub"
-short-title: "Workflows Waiting for Status in GitHub"
-description: "Fixing Workflows Waiting for Status in GitHub"
+title: "GitHub でステータスを待機するワークフロー"
+short-title: "GitHub でステータスを待機するワークフロー"
+description: "GitHub でステータスを待機するワークフローの修正"
 categories:
   - troubleshooting
 order: 1
 ---
+
 `ci/circleci — Waiting for status to be reported`
 
-If you have implemented workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
+GitHub リポジトリでブランチにワークフローを実装しているものの、ステータスチェックがいつまでも完了しない場合は、GitHub でいずれかのステータス設定を解除する必要がある可能性があります。 たとえば、ブランチの保護を選択している場合は、以下に示すように `ci/circleci` ステータスキーの選択を解除する必要があります。このキーが選択されていると、デフォルトの CircleCI 1.0 チェックが参照されるためです。
 
-![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
+![GitHub ステータスキーの選択の解除]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
+ワークフローを使用している場合に、`ci/circleci` チェックボックスをオンにすると、GitHub でステータスが完了と表示されなくなります。これは、CircleCI が名前にジョブを含むキーを使用して GitHub にステータスを送信するためです。
 
-Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
+GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護されているブランチで [Edit (編集)] ボタンをクリックして、設定の選択を解除します (例：https://github.com/your-org/project/settings/branches)。
 
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for examples and conceptual information.
+いくつかの例と概念的な情報については、「[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
