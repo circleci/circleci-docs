@@ -1,13 +1,14 @@
 ---
 layout: classic-docs
-title: "Using Private Images"
-short-title: "Using Private Images"
-description: "How to use private images"
+title: "プライベートイメージの使用"
+short-title: "プライベートイメージの使用"
+description: "プライベートイメージを使用する方法"
 categories:
   - containerization
 order: 50
 ---
-To use private Docker images, specify the username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file. To protect the password, create an Environment Variable in the CircleCI Project Settings page, and then reference it:
+
+プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
 
 ```yaml
 jobs:
@@ -15,11 +16,11 @@ jobs:
     docker:
       - image: acme-private/private-image:321
         auth:
-          username: mydockerhub-user  # can specify string literal values
-          password: $DOCKERHUB_PASSWORD  # or project environment variable reference
+          username: mydockerhub-user  # 文字列リテラル値を指定します
+          password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ```
 
-You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io)—make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
+また、[gcr.io](https://cloud.google.com/container-registry) や [quay.io](https://quay.io) などのプライベートリポジトリにあるイメージも使用できます。`image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。
 
     - image: quay.io/project/image:tag
       auth:
@@ -27,7 +28,7 @@ You can also use images from a private repository like [gcr.io](https://cloud.go
         password: $QUAY_PASSWORD
     
 
-Alternatively, you can utilize the `machine` executor to achieve the same thing:
+または、以下のように `machine` Executor を使用する方法もあります。
 
     version: 2
     jobs:
@@ -35,21 +36,21 @@ Alternatively, you can utilize the `machine` executor to achieve the same thing:
         machine: true
         working_directory: ~/my_app
         steps:
-          # Docker is preinstalled, along with docker-compose
+          # Docker と docker-compose がプリインストールされています
           - checkout
     
-          # start proprietary DB using private Docker image
+          # プライベート Docker イメージを使用して固有の所有 DB を開始します
     
           - run: |
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker run -d --name db company/proprietary-db:1.2.3
     
 
-CircleCI now supports pulling private images from Amazon's ECR service. You can start using private images from ECR in one of three ways:
+現在 CircleCI では、Amazon の ECR サービスからのプライベートイメージのプルをサポートしています。 以下の 3つの方法のいずれかで、ECR のプライベートイメージを使用できるようになります。
 
-1. Set your AWS credentials using the CircleCI AWS Integration.
-2. Set your AWS credentials using standard CircleCI private environment variables.
-3. Specify your AWS credentials in .circleci/config.yml using aws_auth:
+1. CircleCI AWS インテグレーションを使用して、AWS 認証情報を設定する
+2. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
+3. aws_auth を使用して、.circleci/config.yml に AWS 認証情報を指定する
 
     version: 2
     jobs:
@@ -57,11 +58,11 @@ CircleCI now supports pulling private images from Amazon's ECR service. You can 
         docker:
           - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
             aws_auth:
-              aws_access_key_id: AKIAQWERVA  # can specify string literal values
-              aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
+              aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定します
+              aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
     
 
-Options 2 & 3 are virtually the same except that 3 lets you specify whatever variable name you want for the credentials. This can come in handy where you have different AWS credentials for different infrastructure. For example, lets say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag pushes, we run the full-blown test suite before deploying to production:
+3番目の方法では認証情報に対して任意の変数名を指定できますが、その点を除けば 2番目と 3番目の方法はほぼ同じと言えます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージングインフラストラクチャにデプロイして、本番にデプロイする前には本格的なテストスイートを実行します。
 
     version: 2
     jobs:
@@ -73,11 +74,11 @@ Options 2 & 3 are virtually the same except that 3 lets you specify whatever var
               aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_STAGING
         steps:
           - run:
-              name: "Every Day Tests"
-              command: "testing...."
+              name: "毎日のテスト"
+              command: ".... のテスト"
           - run:
-              name: "Deploy to Staging Infrastructure"
-              command: "something something darkside.... cli"
+              name: "ステージングインフラストラクチャにデプロイ"
+              command: "よくわからないもの.... CLI"
       deploy:
         docker:
           - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
@@ -86,11 +87,11 @@ Options 2 & 3 are virtually the same except that 3 lets you specify whatever var
               aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_STAGING
         steps:
           - run:
-              name: "Full Test Suite"
-              command: "testing...."
+              name: "全テストスイート"
+              command: ".... のテスト"
           - run:
-              name: "Deploy to Production Infrastructure"
-              command: "something something darkside.... cli"
+              name: "本番インフラストラクチャにデプロイ"
+              command: "よくわからないもの.... CLI"
     
     workflows:
       version: 2
@@ -111,6 +112,6 @@ Options 2 & 3 are virtually the same except that 3 lets you specify whatever var
                   only: /^\d{4}\.\d+$/
     
 
-## See Also
+## 関連項目
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
