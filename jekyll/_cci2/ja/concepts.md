@@ -1,47 +1,56 @@
 ---
 layout: classic-docs
-title: "Concepts"
-short-title: "Concepts"
-description: "CircleCI 2.0 concepts"
+title: "コンセプト"
+short-title: "コンセプト"
+description: "CircleCI 2.0 のコンセプト"
 categories:
   - getting-started
 order: 1
 ---
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
 
-* TOC 
+
+CircleCI プロジェクトは、関連付けられているコードリポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
+
+* 目次 
 {:toc}
 
-## Add Projects Page
+## プロジェクトの追加ページ
 
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
+ユーザーは、プロジェクトを*フォロー*することで、プロジェクトの[ビルドステータス]({{ site.baseurl }}/ja/2.0/status/)に関する[メール通知]({{ site.baseurl }}/ja/2.0/notifications/)を受け取り、プロジェクトを自分の CircleCI ダッシュボードに追加できます。
 
-The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects. Users may not view project data that is stored in environment variables.
+*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクトデータを表示することはできません。
 
-## Steps
+## ステップ
 
-Steps are actions that need to be taken to perform your job. Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
+ステップとは、ジョブを実行するために行う必要があるアクションのことです。 ステップは通常、実行可能なコマンドの集まりです。 たとえば以下の例では、`checkout` ステップが SSH コマンドでジョブのソースコードをチェックアウトします。 次に、`run` ステップが、デフォルトで非ログインシェルを使用して、`make test` コマンドを実行します。
 
 ```yaml
 #...
     steps:
-      - checkout # Special step to checkout your source code
-      - run: # Run step to execute commands, see
-      # circleci.com/docs/2.0/configuration-reference/#run
-          name: Running tests
-          command: make test # executable command run in
-          # non-login shell with /bin/bash -eo pipefail option
-          # by default.
+      - checkout # ソースコードをチェックアウトする特別なステップ
+      - run: # コマンドを実行する run ステップ。以下を参照してください。
+      # circleci.com/docs/ja/2.0/configuration-reference/#run
+          name: テストを実行
+          command: make test # 実行可能なコマンド。デフォルトでは、
+          # /bin/bash -eo pipefail オプションを使用して
+          # 非ログインシェルで実行されます。
 #...          
 ```
 
-## Image
+## イメージ
 
-An image is a packaged system that has the instructions for creating a running container. The Primary Container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed for jobs using the Docker executor.
+イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
 
-```yaml version: 2 jobs: build1: # job name docker: # Specifies the primary container image, # see circleci.com/docs/2.0/circleci-images/ for # the list of pre-built CircleCI images on dockerhub. - image: buildpack-deps:trusty
+```yaml
+ version: 2
+ jobs:
+   build1: # job name
+     docker: # Specifies the primary container image,
+     # see circleci.com/docs/2.0/circleci-images/ for
+     # the list of pre-built CircleCI images on dockerhub.
+       - image: buildpack-deps:trusty
 
        - image: postgres:9.4.1 # Specifies the database image
         # for the secondary or service container run in a common
@@ -51,23 +60,32 @@ An image is a packaged system that has the instructions for creating a running c
           # environment variable, see circleci.com/docs/2.0/env-vars/
           # for instructions about using environment variables.
            POSTGRES_USER: root
-    
+...
+   build2:
+     machine: # Docker 17.06.1-ce および docker-compose 1.14.0 と
+     # 共に Ubuntu バージョン 14.04 イメージを使用する
+     # マシンイメージを指定します。新しいイメージのリリースについては、
+     # CircleCI Discuss の「Announcements」をフォローしてください。
+       image: circleci/classic:201708-01
+...       
+   build3:
+     macos: # Specifies a macOS virtual machine with Xcode version 9.0
+       xcode: "9.0"       
+ ...          
+ ```
 
-... build2: machine: # Specifies a machine image that uses # an Ubuntu version 14.04 image with Docker 17.06.1-ce # and docker-compose 1.14.0, follow CircleCI Discuss Announcements # for new image releases. image: circleci/classic:201708-01 ...  
-build3: macos: # Specifies a macOS virtual machine with Xcode version 9.0 xcode: "9.0"  
-...  
-```
 
 ## Jobs
 
-Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
+Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. machine にイメージが指定されていない場合は、デフォルトイメージが使用されます。Docker と macOS では、イメージも宣言する必要があります。
 
-![job illustration]({{ site.baseurl }}/assets/img/docs/concepts1.png)
+![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
 ### Cache
 {:.no_toc}
 
-A cache stores a file or directory of files such as dependencies or source code in object storage. Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
+A cache stores a file or directory of files such as dependencies or source code in object storage.
+ビルドを高速化するために、以前のジョブに含まれる依存関係をキャッシュする特別なステップを各ジョブに追加できます。
 
 {% raw %}
 
@@ -92,6 +110,7 @@ jobs:
 
   build2:
     docker:
+
       - image: circleci/ruby:2.4-node
       - image: circleci/postgres:9.4.12-alpine
     steps:
@@ -101,11 +120,11 @@ jobs:
 
 {% endraw %}
 
-## Workflows
+## ワークフロー
 
-Workflows define a list of jobs and their run order. It is possible to run jobs in parallel, sequentially, on a schedule, or with a manual gate using an approval job.
+ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
 
-![workflows illustration]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+![ワークフローの図]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 {% raw %}
 ```yaml
@@ -113,6 +132,7 @@ version: 2
 jobs:
   build1:
     docker:
+
       - image: circleci/ruby:2.4-node
       - image: circleci/postgres:9.4.12-alpine
     steps:
@@ -124,49 +144,50 @@ jobs:
 
   build2:
     docker:
+
       - image: circleci/ruby:2.4-node
       - image: circleci/postgres:9.4.12-alpine
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Running tests
+          name: テストを実行
           command: make test
   build3:
     docker:
       - image: circleci/ruby:2.4-node
       - image: circleci/postgres:9.4.12-alpine
     steps:
-      - restore_cache: # Restores the cached dependency.
+      - restore_cache: # キャッシュされた依存関係を復元します。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Precompile assets
+          name: アセットのプリコンパイル
           command: bundle exec rake assets:precompile
 ...                          
 workflows:
   version: 2
-  build_and_test: # name of your workflow
+  build_and_test: # ワークフロー名
     jobs:
       - build1
       - build2:
         requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # see circleci.com/docs/2.0/workflows/ for more examples.
+           - build1 # build1 ジョブが正常に完了するのを待ってから開始します。
+           # この他の例については、circleci.com/docs/ja/2.0/workflows/ を参照してください。
       - build3:
         requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 in parallel to save time.
+           - build1 # build1 ジョブが正常に完了するのを待ってから、時間を節約するために
+           # build2 と build 3 の並列実行を開始します。
 ```
 {% endraw %}
 
-### Workspaces and Artifacts
+### ワークスペースとアーティファクト
 {:.no_toc}
 
-Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
+Workspaces は、ワークフロー対応のストレージメカニズムです。 ワークスペースには、ダウンストリームジョブで必要になる可能性がある、ジョブ固有のデータが保存されます。 アーティファクトにはワークフローが完了した後もデータが維持され、ビルドプロセス出力の長期ストレージとして使用できます。
 
-Workflows 1 つ 1 つは、それぞれに一時的な Workspace が関連付けられています。 Workspace は同じ Workflows において、ジョブの実行中にビルドしたデータを他のジョブに渡すのに使います。
+各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用されます。
 
-![workflow illustration]({{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
+![ワークフローの図]({{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
 
 {% raw %}
 ```yaml
@@ -175,39 +196,45 @@ jobs:
   build1:
 ...   
     steps:    
+
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace  for use in downstream job. Must be an absolute path,
-      # or relative path from working_directory. This is a directory on the container which is
-      # taken to be the root directory of the workspace.
+      # into the workspace  for use in downstream job. このパスは、絶対パスまたは
+      # working_directory からの相対パスでなければなりません。 これは、ワークスペースの
+      # ルートディレクトリとなる、コンテナ上のディレクトリです。
           root: workspace
-            # Must be relative path from root
+            # ルートからの相対パスでなければなりません。
           paths:
             - echo-output
 
   build2:
 ...
     steps:
+
       - attach_workspace:
         # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
   build3:
 ...
     steps:
-      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
+      - store_artifacts: # 詳細については、circleci.com/docs/ja/2.0/artifacts/ を参照してください。
           path: /tmp/artifact-1
           destination: artifact-file
 ...
 ```        
 {% endraw %}
 
-Artifacts、Workspace、キャッシュはそれぞれ下記のような違いがあることを頭に入れておいてください。
+Artifacts、Workspaces、Caches にはそれぞれ下記のような違いがあります。
 
-Type | Lifetime | Use | Example \---\---\-----|\---\---\---\---\---\---\----|\---\---\---\---\---\---\---\---\---\---\---\---|\---\----- Artifacts | Months | Preserve long-term artifacts. | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory. Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step. | `attach_workspace` を実行すると、Workspace の内容全体をコピー・再構築する。 Caches | Months | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). `restore_cache` と 適切な `key` を使ってキャッシュを復元する。
+| Type       | Lifetime             | Use                                                                                     | Example                                                                                                                                                                                                                |
+| ---------- | -------------------- | --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Artifacts  | Months               | Preserve long-term artifacts.                                                           | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.                                                                                       |
+| Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step.       | The `attach_workspace` copies and re-creates the entire workspace content when it runs.                                                                                                                                |
+| Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). `restore_cache` と 適切な `key` を使用してキャッシュを復元します。 |
 {: class="table table-striped"}
 
-Workspace や キャッシュ、artifacts に関する詳細は、「[Workflows でデータを保持する。キャッシュ、Artifacts、Workspace 活用のキモ](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+Workspace、Caches、Artifacts に関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (Workflows でデータを保持するには：Caches、Artifacts、Workspace 活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
-## See Also
+## 関連項目
 {:.no_toc}
 
-Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
+`jobs` と `steps` のキーとオプションの使用方法については、「[Orb、ジョブ、ステップ、ワークフロー]({{ site.baseurl }}/ja/2.0/jobs-steps/)」を参照してください。
