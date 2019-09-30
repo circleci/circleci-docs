@@ -1,39 +1,41 @@
 ---
 layout: classic-docs
-title: "Updating Server Replicated Version"
+title: "Server Replicated バージョンの更新"
 category:
   - administration
 order: 12
-description: "How to update server replicated and docker version"
+description: "Server Replicated バージョンおよび Docker バージョンを更新する方法"
 ---
-This document describes how to update the server replicated version for your private installation of CircleCI in the following sections:
 
-- TOC
+以下のセクションに沿って、CircleCI プライベート環境の Server Replicated バージョンを更新する方法について説明します。
+
+- 目次
 {:toc}
 
-## Assumptions
+## 前提
 
-- Your installation is Ubuntu 14.04-based
-- You are running replicated version 2.10.3 on your services machine 
+- Your installation is Ubuntu 14.04 or 16.04 based.
+- You are running replicated version 2.10.3<= on your services machine 
   - replicated --version
-- Your installation is **not** airgapped and you can access the internet from it
-- All steps are completed on the Services machine
+- お使いの環境が孤立して**おらず**、インターネットにアクセスできること
+- Services マシン上ですべての手順が完了していること
+- Verify what version of replicated you need to update to by viewing the [Server Changelog](https://circleci.com/server/changelog/)
 
-## Preparations
+## 準備
 
-Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
+Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/ja/2.0/backup/)に従ってデータをバックアップします。
 
-- Stop the CircleCI application with
+- 以下のコマンドで CircleCI アプリケーションを停止させます。
 
         replicatedctl app stop
     
 
-Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
+アプリケーションのシャットダウンには数分かかります。 管理ダッシュボードを確認して、ステータスが [Stopped (停止)] になってから続行してください。 以下のコマンドを実行してアプリケーションのステータスを表示する方法もあります。
 
         replicatedctl app status inspect
     
 
-Example Output:
+以下のように出力されます。
 
     [
         {
@@ -49,24 +51,26 @@ Example Output:
     ]
     
 
-- For the replicated update to succeed, it’s necessary to update docker to the recommended version, 17.12.1:
+- Replicated の更新を成功させるには、Docker を推奨バージョン 17.12.1 に更新する必要があります。
 
         sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
     
 
-- Pin the Docker version using the following command:
+- 以下のコマンドを使用して Docker のバージョンを固定します。
 
         sudo apt-mark hold docker-ce
     
 
-## Update
+## 更新
 
-Perform the Replicated update by executing the update script as follows:
+以下のように更新スクリプトを実行して、Replicated の更新を実行します。
 
-        curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
+        curl -sSL "https://get.replicated.com/docker?replicated_tag=<specific_replicated_version>" | sudo bash
     
 
-Double-check your replicated and docker versions:
+Replicated と Docker の両方のバージョンをチェックしてください。
+
+Example Output
 
         replicatedctl version    # 2.29.0
         docker -v                # 17.12.1
