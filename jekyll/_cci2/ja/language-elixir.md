@@ -1,99 +1,100 @@
 ---
 layout: classic-docs
-title: "Language Guide: Elixir"
+title: "言語ガイド：Elixir"
 short-title: "Elixir"
-description: "Overview and sample config for an Elixir project"
+description: "Elixir プロジェクトの概要と設定例"
 categories:
   - language-guides
 order: 2
 ---
-This is an annotated `config.yml` for a simple Phoenix web application, which you can access at <https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix>.
 
-If you're in a rush, just copy the configuration below into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory. Otherwise, we recommend reading through the whole configuration for better understanding.
+これは、単純な Phoenix Web アプリケーション用の注釈付き `config.yml` で、<https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix> から入手できます。
 
-## Sample Configuration
+お急ぎの場合は、以下の設定をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) にコピーしてください。 お急ぎでなければ、設定全体に目を通し、十分に理解を深めることをお勧めします。
+
+## 設定例
 
 {% raw %}
 
 ```yaml
-version: 2  # use CircleCI 2.0 instead of CircleCI Classic
-jobs:  # basic units of work in a run
-  build:  # runs not using Workflows must have a `build` job as entry point
-    parallelism: 1  # run only one instance of this job in parallel
-    docker:  # run the steps with Docker
-      - image: circleci/elixir:1.7.3  # ...with this image as the primary container; this is where all `steps` will run
-        environment:  # environment variables for primary container
+version: 2  # CircleCI Classic ではなく CircleCI 2.0 を使用します
+jobs:  # 1回の実行の基本作業単位
+  build:  # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
+    parallelism: 1  # このジョブのインスタンスを 1つだけ並列実行します
+    docker:  # Docker でステップを実行します
+      - image: circleci/elixir:1.7.3  # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
+        environment:  # プライマリコンテナの環境変数
           MIX_ENV: test
-      - image: circleci/postgres:10.1-alpine  # database image
-        environment:  # environment variables for database
+      - image: circleci/postgres:10.1-alpine  # データベースイメージ
+        environment:  # データベースの環境変数
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
           POSTGRES_PASSWORD:
 
-    working_directory: ~/app  # directory where steps will run
+    working_directory: ~/app  # ステップが実行されるディレクトリ
 
-    steps:  # commands that comprise the `build` job
+    steps:  # `build` ジョブを構成するコマンド
 
-      - checkout  # check out source code to working directory
+      - checkout  # ソースコードを作業ディレクトリにチェックアウトします
 
-      - run: mix local.hex --force  # install Hex locally (without prompt)
-      - run: mix local.rebar --force  # fetch a copy of rebar (without prompt)
+      - run: mix local.hex --force  # Hex をローカルにインストールします (プロンプトなし)
+      - run: mix local.rebar --force  # rebar のコピーをフェッチします (プロンプトなし)
 
-      - restore_cache:  # restores saved mix cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          keys:  # list of cache keys, in decreasing specificity
+      - restore_cache:  # 保存されているミックスキャッシュを復元します
+      # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
+          keys:  # キャッシュキーのリスト (特定性の高い順)
             - v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
             - v1-mix-cache-{{ .Branch }}
             - v1-mix-cache
-      - restore_cache:  # restores saved build cache
+      - restore_cache:  # 保存されているビルドキャッシュを復元します
           keys:
             - v1-build-cache-{{ .Branch }}
             - v1-build-cache
-      - run: mix do deps.get, compile  # get updated dependencies & compile them
-      - save_cache:  # generate and store mix cache
+      - run: mix do deps.get, compile  # 更新された依存関係を取得してコンパイルします
+      - save_cache:  # ミックスキャッシュを生成して保存します
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
-      - save_cache:  # make another, less specific cache
+      - save_cache:  # 特定性の低い別のキャッシュを作成します
           key: v1-mix-cache-{{ .Branch }}
           paths: "deps"
-      - save_cache:  # you should really save one more cache (just in case)
+      - save_cache:  # 念のためにもう 1つキャッシュを保存しておきます
           key: v1-mix-cache
           paths: "deps"
-      - save_cache: # don't forget to save a *build* cache, too
+      - save_cache: # *ビルド* キャッシュも忘れずに保存します
           key: v1-build-cache-{{ .Branch }}
           paths: "_build"
-      - save_cache: # and one more build cache for good measure
+      - save_cache: # ビルドキャッシュを 1つ余分に保存します
           key: v1-build-cache
           paths: "_build"
 
-      - run:  # special utility that stalls main process until DB is ready
-          name: Wait for DB
+      - run:  # データベースが準備できるまでメインの処理を停止する特殊なユーティリティ
+          name: DB を待機
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run: mix test  # run all tests in project
+      - run: mix test  # プロジェクトのすべてのテストを実行します
 
-      - store_test_results:  # upload junit test results for display in Test Summary
-          # Read more: https://circleci.com/docs/2.0/collect-test-data/
-          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # Replace with the name of your :app
+      - store_test_results:  # テストサマリーに表示する JUnit テスト結果をアップロードします
+          # 詳しくは https://circleci.com/docs/ja/2.0/collect-test-data/ を参照してください
+          path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME # アプリの名前に置換します
 ```
 
 {% endraw %}
 
-## Config Walkthrough
+## 設定の詳細
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
 version: 2
 ```
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
 
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+[`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+ジョブのステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
 
-In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. We use the [CircleCI-provided Elixir docker image](https://circleci.com/docs/2.0/circleci-images/#elixir).
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 [CircleCI 提供の Elixir Docker イメージ](https://circleci.com/docs/ja/2.0/circleci-images/#elixir)を使用します。
 
 ```yaml
 jobs:
@@ -112,11 +113,11 @@ jobs:
     working_directory: ~/app 
 ```
 
-After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
+ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を作成します。
 
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code. By default, source code is checked out to the path specified by `working_directory`.
+[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソースコードがチェックアウトされます。
 
-Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step to execute commands. In this example, [mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html) is used to install Elixir tooling.
+[`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#run) ステップを使用して、コマンドを実行します。 この例では [Mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html) を使用して Elixir ツールをインストールします。
 
 ```yaml
     steps:
@@ -125,13 +126,14 @@ Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step to exe
       - run: mix local.rebar --force
 ```
 
-To save time between runs, consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
+実行の間隔を短縮するには、[依存関係またはソースコードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, the virtual environment and installed packages are cached.
+[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
 
-Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
+
 ```yaml
 <br />      - restore_cache:
           keys:
@@ -159,19 +161,21 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
           key: v1-build-cache
           paths: "_build"
 ```
+
 {% endraw %}
 
-Finally, we wait for the database to come online so that we can run the test suite. Following running the tests, we upload our test results to be made available in the CircleCI web app.
+最後に、データベースがオンラインになるまで待ち、テストスイートを実行します。 テストの実行後、CircleCI Web アプリで使用できるようにテスト結果をアップロードします。
 
 ```yaml
       - run:
-          name: Wait for DB
+          name: DB を待機
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run: mix test
       - store_test_results:
           path: _build/test/lib/REPLACE_WITH_YOUR_APP_NAME
 ```
 
-## See Also
+## 関連項目
 
-[Caching Dependencies]({{ site.baseurl }}/2.0/caching/) [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
+[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)  
+[データベースの設定]({{ site.baseurl }}/ja/2.0/databases/)
