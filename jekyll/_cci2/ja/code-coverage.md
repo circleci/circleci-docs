@@ -1,24 +1,27 @@
 ---
 layout: classic-docs
-title: Generating Code Coverage Metrics
-short-title: Generating Code Coverage Metrics
+title: コードカバレッジメトリクスの生成
+short-title: コードカバレッジメトリクスの生成
 categories:
   - configuration-tasks
-description: Generating code coverage metrics
+description: コードカバレッジメトリクスの生成
 order: 50
 sitemap: false
 ---
-Code Coverage tells you how much of your application is tested.
 
-CircleCI provides a number of different options for code coverage reporting, using built-in CircleCI features combined with open source libraries, or using partners.
+コードカバレッジは、アプリケーションがどの程度テストされたかを示します。
 
-* TOC 
+CircleCI は、組み込みの CircleCI 機能をオープンソースライブラリと組み合わせて、またはパートナーのサービスを使用して、コードカバレッジレポートのさまざまなオプションを提供しています。
+
+* TOC
 {:toc}
 
 
-# Viewing Coverage on CircleCI
+# CircleCI でのカバレッジの表示
 
-You can upload your code coverage reports directly to CircleCI. First, add a coverage library to your project and configure your build to write the coverage report to CircleCI's [artifacts directory]({{ site.baseurl }}/2.0/artifacts/). CircleCI will upload coverage results and make them visible as part of your build.
+コードカバレッジレポートを直接 CircleCI にアップロードできます。 最初に、プロジェクトにカバレッジライブラリを追加し、CircleCI の[アーティファクトディレクトリ]({{ site.baseurl }}/ja/2.0/artifacts/)にカバレッジレポートを書き込むようにビルドを設定します。 Code coverage reports will then be stored as build artifacts, from where they can be viewed or downloaded. See our [build artifacts]({{ site.baseurl }}/2.0/artifacts/) guide for more on accessing coverage reports.
+
+![artifacts tab screeshot]({{ site.baseurl }}/assets/img/docs/artifacts.png)
 
 Here are a few examples to demonstrate configuring coverage libraries for different languages.
 
@@ -32,17 +35,17 @@ Here are a few examples to demonstrate configuring coverage libraries for differ
 Start `simplecov` when your test suite starts. The example below demonstrates configuring simplecov for usage with Rails.
 
 ```ruby
-require 'simplecov'        # << Require simplecov
-SimpleCov.start 'rails'    # << Start simplecov, using the "Rails" preset.
+require 'simplecov'        # << simplecov が必要です
+SimpleCov.start 'rails'    # << "Rails" プリセットを使用して simplecov を起動します
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
 
 class ActiveSupport::TestCase
-  # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
+  # すべてのテストの test/fixtures/*.yml にあるすべてのフィクスチャをアルファベット順にセットアップします
   fixtures :all
-  # Add more helper methods to be used by all tests here...
+  # すべてのテストで使用されるヘルパーメソッドをここに追加します...
 end
 ```
 
@@ -64,16 +67,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Bundle Install
+          name: バンドルインストール
           command: bundle check || bundle install
       - run:
-          name: Wait for DB
+          name: DB を待機
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: Database setup
+          name: データベースのセットアップ
           command: bin/rails db:schema:load --trace
       - run:
-          name: Run Tests
+          name: テストを実行
           command: bin/rails test
       - store_artifacts:
           path: coverage
@@ -90,10 +93,10 @@ pip install coverage
 ```
 
 ```sh
-# previously you might have run your python project like:
+# これまでは、たとえば以下のように python プロジェクトを実行していました
 python my_program.py arg1 arg2
 
-# now prefix "coverage" to your command.
+# ここでは、コマンドにプレフィックス "coverage" を付けます
 coverage run my_program.py arg1 arg2
 ```
 
@@ -102,7 +105,7 @@ In this [example](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)
 ```sh
 coverage run -m pytest
 coverage report
-coverage html  # open htmlcov/index.html in a browser
+coverage html  # ブラウザーで htmlcov/index.html を開きます
 ```
 
 The generated files will be found under `htmlcov/`, which can be uploaded in a `store_artifacts` step in your config:
@@ -116,16 +119,16 @@ jobs:
     steps:
     - checkout
     - run:
-        name: Setup testing environment
+        name: テスト環境をセットアップ
         command: |
           pip install '.[test]' --user
           echo $HOME
     - run:
-        name: Run Tests
+        name: テストを実行
         command: |
           $HOME/.local/bin/coverage run -m pytest
           $HOME/.local/bin/coverage report
-          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
+          $HOME/.local/bin/coverage html  # ブラウザーで htmlcov/index.html を開きます
     - store_artifacts:
         path: htmlcov
 workflows:
@@ -194,10 +197,10 @@ workflows:
                             <goal>report</goal>
                         </goals>
                         <configuration>
-                            <!-- Sets the path to the file which contains the execution data. -->
+                            <!-- 実行データを含むファイルのパスを設定します -->
 
                             <dataFile>target/jacoco.exec</dataFile>
-                            <!-- Sets the output directory for the code coverage report. -->
+                            <!-- コードカバレッジレポートの出力ディレクトリを設定します -->
                             <outputDirectory>target/my-reports</outputDirectory>
                         </configuration>
                     </execution>
@@ -245,7 +248,7 @@ jobs:
       - checkout
       - run: npm install
       - run:
-          name: "Run Jest and Collect Coverage Reports"
+          name: "Jest を実行し、カバレッジレポートを収集"
           command: jest --collectCoverage=true
       - store_artifacts:
           path: coverage
@@ -266,7 +269,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Run tests"
+          name: "テストを実行"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
       - store_artifacts:
           path:  build/coverage-report
@@ -278,7 +281,7 @@ Go has built-in functionality for generating code coverage reports. To generate 
 
 ```sh
 go test -cover -coverprofile=c.out
-go tool cover -html=c.out -o coverage.html 
+go tool cover -html=c.out -o coverage.html
 ```
 
 An example `.circleci/config.yml`:
@@ -289,6 +292,7 @@ version: 2.1
 jobs:
   build:
     docker:
+
       - image: circleci/golang:1.11
     steps:
       - checkout
@@ -297,7 +301,7 @@ jobs:
           name: "Create a temp directory for artifacts"
           command: |
             mkdir -p /tmp/artifacts
-      - run: 
+      - run:
           command: |
             go test -coverprofile=c.out
             go tool cover -html=c.out -o coverage.html
@@ -306,7 +310,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-# Using a Code Coverage Service
+# コードカバレッジサービスの使用
 
 ## Codecov
 
