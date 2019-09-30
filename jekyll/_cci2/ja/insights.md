@@ -1,44 +1,137 @@
 ---
 layout: classic-docs
-title: "Using Insights"
-short-title: "Using Insights"
-description: "Viewing the status of repos and test performance"
+title: "インサイトの利用"
+short-title: "インサイトの利用"
+description: "リポジトリのステータスおよびテストパフォーマンスの表示"
 categories:
   - configuring-jobs
 order: 41
 ---
-This document describes creating and using insights in CircleCI in the following sections:
 
-## Overview
+ここでは、以下のセクションに沿って、CircleCI でインサイトを作成および使用する方法について説明します。
 
-Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. **Note:** If you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
+## 概要
 
-![header]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
+CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態に関するダッシュボードが表示されます。 ここでは、デフォルトのブランチについて平均ビルド時間、平均キュー時間、最終ビルド時刻、成功率、並列処理数を確認できます。 **メモ：**ワークフローを設定している場合、デフォルトのブランチに対して実行されるすべてのジョブがグラフに表示されます。
 
-The image illustrates the following data about your builds:
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
 
-- Status of all your repos building on CircleCI in real time
+この画面では、ビルドに関する以下のデータを確認できます。
 
-- Median queue time
+- CircleCI にビルドされているすべてのリポジトリのリアルタイムステータス
 
-- Median build time
+- 平均キュー時間
 
-- Number of branches
+- 平均ビルド時間
 
-- Last build
+- ブランチ数
 
-## Project Insights
+- 最終ビルド時刻
 
-Click the Insights icon on the main navigation, then click your repo name to access per-project insights.
+## プロジェクトのインサイト
 
-The per-project insights page gives you access to the build status and build performance graphs for a selected branch.
+メインナビゲーション上の [Insights (インサイト)] アイコンをクリックしてから、リポジトリ名をクリックすると、プロジェクト別のインサイトのページにアクセスできます。
 
-![header]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
+プロジェクト別のインサイトのページでは、選択したブランチに関するビルドステータスおよびビルドパフォーマンスのグラフを確認できます。
 
-- **Build Status:** The Insights dashboard shows the last 50 builds for your default branch. Click a branch in the top right corner to access over 100 build/job statuses for the selected branch.
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
 
-- **Build Performance:** The Build Performance graph aggregates your build/job data for a particular day and plots the median for that day going back as far as 90 days. Monitor the performance of your repo by clicking a particular branch.
+- **ビルドステータス：**[Insights (インサイト)] ダッシュボードに、デフォルトブランチに関する直近 50件のビルドが表示されます。 右上隅で任意のブランチを選択すると、選択したブランチに関する 100件を超えるビルド・ジョブのステータスを表示できます。
+
+- **ビルドパフォーマンス：**[Build Performance (ビルドパフォーマンス)] グラフには、最大 90日前までのビルド・ジョブのデータが日別に集約され、各日の平均値がプロットされています。 特定のブランチをクリックすると、リポジトリのパフォーマンスをモニタリングできます。
+
+## 関連項目
+
+失敗が多いテストに対してインサイトを設定したい場合は、「[テストメタデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data/)」を参照してください。
+
+## Sumo Logic Integration
+
+Sumo Logic users may track and visualize analytical data across all of their jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app integration from the Sumo Logic partner integrations site.
+
+### The CircleCI Dashboard for Sumo Logic
+
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
+
+Included panels:
+
+- Total Job
+- Total Successful Jobs
+- Total Failed Jobs
+- Job Outcome
+- Average Runtime in Seconds (by Job)
+- Jobs By Projects
+- Recent Jobs (latest 10)
+- Top 10 Slowest Failed Jobs In Seconds
+- Top 10 Slowest Successful Jobs In Seconds
+
+Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
+
+![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+
+This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
+
+### The Sumo Logic Orb
+
+Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/orbs/registry/orb/circleci/sumologic).
+
+#### 1. Import the Sumo Logic orb.
+
+Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
+
+```yaml
+orbs:
+  sumologic: circleci/sumologic@x.y.z
+```
+
+#### 2. Add *Workflow-Collector* to Workflow.
+
+The `workflow-collector` job runs in parallel along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
+
+```yaml
+version: 2.1
+workflows:
+  build-test-and-deploy:
+    jobs:
+      - sumologic/workflow-collector # add this job to track workflow.
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
+```
+
+#### 3. Create two source collectors.
+
+You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
+
+You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
+
+To create the two source collectors:
+
+1. From the dashboard select the **Setup Wizard**.
+2. Select **Set Up Streaming Data**.
+3. Scroll to the bottom and select **All Other Sources**.
+4. Select **HTTPS Source**
+5. For the `Source Category` enter one of the two mentioned above.
+6. Save the resulting URL.
+
+#### 4. Add environment variables.
+
+For each of the URLs produce in the previous step, create the corresponding environment variable.
+
+Env vars:
+
+- `JOB_HTTP_SOURCE`
+- `WORKFLOW_HTTP_SOURCE`
+
+**[How to add an environment variable to your project.]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
+
+This will link the orb with your Sumo Logic dashboard.
+
+Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
 
 ## See Also
 
-Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
+Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
