@@ -85,11 +85,24 @@ jobs:
           name: "Create landing folder for API doc output"
           command: mkdir -p /tmp/workspace/api/v2
       - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
+          key: circleci-docs-{{ checksum "src-api/Gemfile.lock" }}
+      - restore_cache:
+          key: circleci-docs-{{ checksum "src-api/package-lock.json" }}
+      - run:
+          name: Install ruby dependencies
+          command: cd src-api; bundle install
+      - run:
+          name: Install node dependencies
+          command: cd src-api; npm install
+      - save_cache:
+          key: circleci-docs-{{ checksum "src-api/Gemfile.lock" }}
+          paths:
+            - "src-api/vendor/bundle"
+      - save_cache:
+          key: circleci-docs-{{ checksum "src-api/package-lock.json" }}
       - run:
           name: Build API 1.x documentation with Slate
           command: |
-            cd src-api; bundle install; npm install
             bundle exec middleman build --clean
             cp -R build/* /tmp/workspace/api
       - run:
