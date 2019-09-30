@@ -1,10 +1,12 @@
-version: 2
+version: 2.1 # Set your CI version.
 
+orbs:
+  ruby: circleci/ruby@0.1.2
+  node: circleci/node@1.1.6
+
+
+### TODO can we replace yaml references with 2.1 feature for reusing config.
 references:
-  js_deps_cache_key: &js_deps_cache_key
-    v8-dependency-js-deps-{{ checksum "package-lock.json" }}
-  js_deps_backup_cache_key: &js_deps_backup_cache_key
-    v8-dependency-js-deps
   workspace_root: &workspace_root
     /tmp/workspace
   attach_workspace: &attach_workspace
@@ -13,23 +15,23 @@ references:
 
 jobs:
   js_build:
-    docker:
-      - image: node:8.11.1
+    executor:
+      name: node/default
+      tag: '8.11.1'
+
     steps:
       - *attach_workspace
       - checkout
-      - restore_cache:
-          keys:
-            - *js_deps_cache_key
-            - *js_deps_backup_cache_key
+      - node/with-cache:
+          cache-key: "package-lock.json"
+          cache-version: v9
+          steps:
+            - npm install
       - run:
-          name: npm dependencies
-          command: npm install
-      - run:
-          name: Prepare JS assets
+          name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: npm run webpack-prod
       - run:
-          name: Persist JS assets
+          name: "Persist JS assets" # Moves our JS into our workspace.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
@@ -38,13 +40,13 @@ jobs:
           root: *workspace_root
           paths:
             - js
-      - save_cache:
-          key: *js_deps_cache_key
-          paths:
-            - node_modules
 
-  build:
+
+  # implement: static-documentation job: "build_api_docs"
+
+  build: # better name?
     docker:
+      # could we use an orb for this?
       - image: circleci/ruby:2.6.3-node-browsers
     working_directory: ~/circleci-docs
     environment:
@@ -56,6 +58,7 @@ jobs:
       - *attach_workspace
       - run:
           name: "Test Markdown Files"
+          # Could we cache this tool, or... could we just vendor it into our repo in a `bin` folder and call it from there.
           command: |
             wget https://github.com/felicianotech/md-proofer/releases/download/v0.1.0/md-proofer-v0.1.0-linux-amd64.tar.gz
             tar xfz md-proofer-v*.tar.gz
@@ -81,7 +84,7 @@ jobs:
             - "vendor/bundle"
       - run:
           name: Create results directory
-          command: mkdir -p $JOB_RESULTS_PATH
+          command: mkdir -p $JOB_RESULTS_PATH # why do we do this? what is it used for?
       - run:
           name: "Manage Data Files We'll Need"
           command: |
@@ -96,6 +99,7 @@ jobs:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
 
+      ### TODO: This needs to be moved into it's own job! ---------------------
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
 
@@ -118,19 +122,28 @@ jobs:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
           paths:
             - "src-api/vendor/bundle"
+      ### ----------------------------------------------------------------------
+
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+
+      ### TODO: Move this into it's own job.----------------------------------
       - run:
           name: Build PDFs for Server
           command: |
             bundle exec asciidoctor-pdf -v
             ./scripts/build_pdfs.sh
+      ### ---------------------------------------------------------------------
+
+      ### TODO: Comment why we are using --file-ignore.
       - run:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+      # This is where PDFS are stored.
       - store_artifacts:
           path: release/tmp/
+      # storing the output of the jekyll site.
       - store_artifacts:
           path: jekyll/_site/docs/
           destination: circleci-docs
@@ -144,7 +157,7 @@ jobs:
 
   reindex-search:
     docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+      - image: circleci/ruby:2.6.3-node-browsers # TODO: should use an orb as well.
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -156,6 +169,7 @@ jobs:
       - run:
           name: Install Ruby dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      # TODO: Should we be saving this cache? Or is this just the same install as the the jekyll build?
       - run:
           name: Update Algolia Index
           command: |
@@ -172,7 +186,7 @@ jobs:
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
 
 workflows:
-  version: 2
+  version: 2 # TODO does this need to be 2.1 aswell?
   build-deploy:
     jobs:
       - js_build
@@ -185,6 +199,7 @@ workflows:
           filters:
             branches:
               only: master
+      # Can we run a pdf job that only runs on master?
       - deploy:
           requires:
             - build
