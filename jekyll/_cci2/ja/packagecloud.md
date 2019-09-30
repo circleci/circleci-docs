@@ -1,53 +1,53 @@
 ---
 layout: classic-docs
-title: Publishing Packages to packagecloud
+title: packagecloud へのパッケージのパブリッシュ
 categories:
   - how-to
-description: How to publish packages to packagecloud using CircleCI
+description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
 ---
-[Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.
 
-* TOC
-{:toc}
+[packagecloud](https://packagecloud.io) は、ホスティングされているパッケージリポジトリサービスです。 packagecloud を使用すると、事前設定なしで npm、Maven (Java)、Python、apt、yum、RubyGem の各リポジトリをホスティングすることができます。
 
-## Configure Environment Variables
+* 目次 {:toc}
 
-### Set the `$PACKAGECLOUD_TOKEN`
+## 環境変数の設定
 
-Under project settings in CircleCI, create an environment variable with the name `PACKAGECLOUD_TOKEN`, containing the value of a packagecloud API token. This environment variable will be used to authenticate with the packagecloud API directly, or using the packagecloud CLI.
+### `$PACKAGECLOUD_TOKEN` の設定
 
-The packagecloud CLI will automatically read this environment variable from the system when interacting with repositories.
+CircleCI のプロジェクト設定で、packagecloud API トークンの値を含む環境変数を `PACKAGECLOUD_TOKEN` という名前で作成します。 この環境変数は、packagecloud API で直接認証する場合、または packagecloud CLI を使用して認証する場合に使用されます。
 
-Alternatively, if you prefer to keep your sensitive environment variables checked into git, but encrypted, you can follow the process outlined at [circleci/encrypted-files](https://github.com/circleci/encrypted-files).
+packagecloud CLI は、リポジトリとやり取りするときに、システムから自動的にこの環境変数を読み取ります。
+
+なお、機密性のある環境変数を Git にチェックインした状態で維持する必要があり、変数が暗号化されているという場合には、「[circleci/encrypted-files](https://github.com/circleci/encrypted-files)」に概要が記載されているプロセスに従ってください。
 
 {:.no_toc}
 
-### Set the `$PACKAGECLOUD_URL` for packagecloud:enterprise
+### packagecloud:enterprise 用の `$PACKAGECLOUD_URL` の設定
 
-***Only set the `$PACKAGECLOUD_URL` if you're a packagecloud:enterprise customer***
+***packagecloud:enterprise をお使いの方は、`$PACKAGECLOUD_URL` のみを設定してください***
 
-This setting is only for packagecloud:enterprise customers. Under project settings in CircleCI, set the `$PACKAGECLOUD_URL` environment variable to the URL of the packagecloud:enterprise installation.
+これは、packagecloud:enterprise を使用している場合にのみ行う設定です。 CircleCI のプロジェクト設定で、`$PACKAGECLOUD_URL` 環境変数に packagecloud:enterprise のインストール用 URL を設定します。
 
-## Install the packagecloud CLI
+## packagecloud CLI のインストール
 
-To use the packagecloud CLI from CircleCI, install it using RubyGems by adding the following `run` step to your `.circleci/config.yml` under the job that is configured to deploy the package:
+CircleCI で packagecloud CLI を使用するには、RubyGems を使用してインストールします。そのためには、`.circleci/config.yml` でパッケージをデプロイするように設定したジョブの下に、以下の `run` ステップを追加します。
 
     - run:
-       name: Install packagecloud CLI
+       name: packagecloud CLI をインストール
        command: gem install package_cloud
     
 
-The CLI will automatically use the `$PACKAGECLOUD_TOKEN` environment variable to authenticate against the packagecloud service.
+CLI は、自動的に `$PACKAGECLOUD_TOKEN` 環境変数を使用して、packagecloud サービスに対して認証を行います。
 
-### Using Dependency Caching
+### 依存関係のキャッシュの使用
 
-If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for [Caching Dependencies]({{ site.baseurl }}/2.0/caching/).
+後続のビルドのためにこの依存関係をキャッシュするには、`Gemfile` に `package_cloud` gem を追加して、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」に記載された CircleCI のガイダンスに従ってください。
 
-## Pushing Packages with the packagecloud CLI
+## packagecloud CLI でのパッケージのプッシュ
 
-The build processes for package types will vary, but pushing them into a packagecloud repository is quite simple. To add packages to a repository from your CircleCI builds, add a step in your `deploy` configuration that uses the packagecloud CLI.
+ビルドプロセスはパッケージのタイプによって異なりますが、パッケージを packagecloud リポジトリにプッシュする方法はきわめて単純です。 CircleCI のビルドからパッケージをリポジトリに追加するには、ユーザーの `deploy` 設定に packagecloud CLI を使用するステップを追加します。
 
-The following is a full example `.circleci/config.yml` that will checkout a git repository, run a `make` task (this command can be anything configured to build your package), then deploy the package to a packagecloud repo.
+以下に `.circleci/config.yml` ファイル全体の例を示します。ここでは、Git リポジトリをチェックアウトし、`make` タスク (パッケージをビルドするように設定した任意のコマンド) を実行してから、パッケージを packagecloud リポジトリにデプロイします。
 
 ```yaml
 version: 2
@@ -61,7 +61,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Build the package
+          name: パッケージをビルド
           command: make
       - persist_to_workspace:
           root: ~/repo
@@ -72,10 +72,10 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Install packagecloud CLI
+          name: packagecloud CLI をインストール
           command: gem install package_cloud
       - run:
-          name: Push deb package
+          name: deb パッケージをプッシュ
           command: package_cloud push example-user/example-repo/debian/jessie debs/packagecloud-test_1.1-2_amd64.deb
 workflows:
   version: 2
@@ -87,13 +87,13 @@ workflows:
             - build
 ```
 
-## Deploy `npm` Packages
+## `npm` パッケージのデプロイ
 
-CircleCI users can deploy packages directly to npm registries hosted on packagecloud.
+CircleCI ユーザーは、packagecloud でホスティングされている npm レジストリにパッケージを直接デプロイできます。
 
-### Configure the Test Job
+### テストジョブの設定
 
-This job will retrieve the project code, install it's dependencies and run any tests in the NodeJS project:
+このジョブは、NodeJS プロジェクト内でプロジェクトコードを取り出し、その依存関係をインストールし、さらにテストを実行します。
 
 ```yaml
 jobs:
@@ -105,12 +105,12 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-.
-          # fallback to using the latest cache if no exact match is found
+          # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
           - v1-dependencies-
 
       - run: npm install
       - run:
-          name: Run tests
+          name: テストを実行
           command: npm test
 
       - save_cache:
@@ -123,9 +123,9 @@ jobs:
           paths: .
 ```
 
-### Configure the Deploy Job
+### デプロイジョブの設定
 
-The next job configured is the deploy job. This job will authenticate and publish to the packagecloud npm registry:
+次にデプロイジョブを設定します。 このジョブは、packagecloud npm リポジトリに対して認証およびパブリッシュを行います。
 
 ```yaml
 jobs:
@@ -136,26 +136,26 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Set registry URL
+          name: レジストリの URL を設定
           command: npm set registry https://packagecloud.io/example-user/example-repo/npm/
       - run:
-          name: Authenticate with registry
+          name: レジストリで認証
           command: echo "//packagecloud.io/example-user/example-repo/npm/:_authToken=$PACKAGECLOUD_TOKEN" > ~/repo/.npmrc
       - run:
-          name: Publish package
+          name: パッケージをパブリッシュ
           command: npm publish
 ```
 
-* *Set registry URL* : This command sets the registry to URL that will be used by the `npm` CLI.
-* *Authenticate with the registry* : This command will set the `authToken` to be used by the `npm` CLI to the environment variable configured in the project settings.
-* *Publish package* : Publish the package to the configured npm registry on packagecloud.
+* *レジストリの URL を設定*：このコマンドで、`npm` CLI によって使用される URL をレジストリに設定します。
+* *レジストリで認証*：`npm` CLI によって使用される `authToken` に、プロジェクト設定で設定されている環境変数を設定します。
+* *パッケージをパブリッシュ*：packagecloud 上で設定された npm レジストリにパッケージをパブリッシュします。
 
-The packagecloud npm registry URL is in the following format:
+packagecloud npm レジストリの URL の形式を以下に示します。
 
     https://packagecloud.io/:username/:repo_name/npm/
     
 
-The full `.circleci/config.yml` should look something like this:
+`.circleci/config.yml` の全体は以下のようになります。
 
 ```yaml
 version: 2
@@ -172,12 +172,12 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-.
-          # fallback to using the latest cache if no exact match is found
+          # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
           - v1-dependencies-
 
       - run: npm install
       - run:
-          name: Run tests
+          name: テストを実行
           command: npm test
 
       - save_cache:
@@ -194,13 +194,13 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run:
-          name: Set registry URL
+          name: レジストリの URL を設定
           command: npm set registry https://packagecloud.io/example-user/example-repo/npm/
       - run:
-          name: Authenticate with registry
+          name: レジストリで認証
           command: echo "//packagecloud.io/example-user/example-repo/npm/:_authToken=$PACKAGECLOUD_TOKEN" > ~/repo/.npmrc
       - run:
-          name: Publish package
+          name: パッケージをパブリッシュ
           command: npm publish
 workflows:
   version: 2
@@ -212,16 +212,16 @@ workflows:
             - test
 ```
 
-The workflows section will tie together both the `test` and `deploy` jobs into sequential steps in the build process.
+workflows セクションは、`test` ジョブと `deploy` ジョブを連結して、ビルドプロセス内の連続したステップにします。
 
-You can read more about publishing npm packages to packagecloud on the CircleCI blog post: [Publishing npm Packages Using CircleCI 2.0](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)
+packagecloud への npm パッケージのパブリッシュの詳細については、CircleCI のブログ記事「[Publishing npm Packages Using CircleCI 2.0 (CircleCI 2.0 を使用した npm パッケージのパブリッシュ)](https://circleci.com/blog/publishing-npm-packages-using-circleci-2-0/)」をご覧ください。
 
-## Using the packagecloud API
+## packagecloud API の使用方法
 
-Packagecloud also provides a robust API to manage package repositories. You can read more about the [packagecloud API](https://packagecloud.io/docs/api) and how to upload, delete, and promote packages across repositories.
+packagecloud には、パッケージリポジトリを管理するための堅牢な API も用意されています。 API の詳細、パッケージをアップロードおよび削除する方法、複数のリポジトリにプロモートする方法については、[packagecloud API](https://packagecloud.io/docs/api) をご確認ください。
 
 {:.no_toc}
 
-## See Also
+## 関連項目
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)
