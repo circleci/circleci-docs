@@ -44,9 +44,14 @@ jobs:
   # implement: static-documentation job: "build_api_docs"
 
   build: # better name?
-    docker:
-      # could we use an orb for this?
-      - image: circleci/ruby:2.6.3-node-browsers
+
+    executor:
+      name: ruby/default
+      tag: '2.6.3-node-browsers'
+    # docker:
+    #   # could we use an orb for this?
+    #   - image: circleci/ruby:2.6.3-node-browsers
+
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -57,21 +62,24 @@ jobs:
       - *attach_workspace
       - run:
           name: "Test Markdown Files"
-          # Could we cache this tool, or... could we just vendor it into our repo in a `bin` folder and call it from there.
-          command: |
-            wget https://github.com/felicianotech/md-proofer/releases/download/v0.1.0/md-proofer-v0.1.0-linux-amd64.tar.gz
-            tar xfz md-proofer-v*.tar.gz
-            sudo chmod +x ./md-proofer
+          command: ./scripts/test-markdown.sh
+      # - run:
+      #     name: "Test Markdown Files"
+      #     # Could we cache this tool, or... could we just vendor it into our repo in a `bin` folder and call it from there.
+      #     command: |
+      #       wget https://github.com/felicianotech/md-proofer/releases/download/v0.1.0/md-proofer-v0.1.0-linux-amd64.tar.gz
+      #       tar xfz md-proofer-v*.tar.gz
+      #       sudo chmod +x ./md-proofer
 
-            echo "Test CircleCI 2.0 Markdown files"
-            echo "===================================================================================="
-            ./md-proofer lint jekyll/_cci2/
-            echo "\n\nTest CircleCI API Markdown files"
-            echo "===================================================================================="
-            ./md-proofer lint jekyll/_api/
-            echo "\n\nTest CircleCI 1.0 Markdown files"
-            echo "===================================================================================="
-            ./md-proofer lint jekyll/_cci1/
+      #       echo "Test CircleCI 2.0 Markdown files"
+      #       echo "===================================================================================="
+      #       ./md-proofer lint jekyll/_cci2/
+      #       echo "\n\nTest CircleCI API Markdown files"
+      #       echo "===================================================================================="
+      #       ./md-proofer .lint jekyll/_api/
+      #       echo "\n\nTest CircleCI 1.0 Markdown files"
+      #       echo "===================================================================================="
+      #       ./md-proofer lint jekyll/_cci1/
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
