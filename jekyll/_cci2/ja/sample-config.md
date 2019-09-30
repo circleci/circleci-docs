@@ -7,10 +7,11 @@ categories:
   - migration
 order: 2
 ---
+
 このページでは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの設定例を 3 つあげて解説しています。
 
-* TOC
-{:toc}
+* TOC  
+    {:toc}
 
 CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは「[ジョブとステップ]({{ site.baseurl }}/ja/2.0/jobs-steps/)」や「 [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)」ページをご覧ください。
 
@@ -66,12 +67,12 @@ jobs:
     steps:
       - checkout
       - run:
-          name: npm のアップデート
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
-          name: npm wee のインストール
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
@@ -84,10 +85,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: テスト
+          name: Test
           command: npm test
       - run:
-          name: コードカバレッジの生成
+          name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
@@ -100,6 +101,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+
       - build
       - test:
           requires:
@@ -111,7 +113,7 @@ workflows:
 
 {% endraw %}
 
-これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、あるいは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/ja/2.0/workflows) 」ページを参照してください。
+これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/2.0/workflows)」ページを参照してください。
 
 ## ファンイン・ファンアウト Workflow の設定例
 
@@ -127,6 +129,7 @@ version: 2.0
 jobs:
   checkout_code:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -139,6 +142,7 @@ jobs:
 
   bundle_dependencies:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -155,6 +159,7 @@ jobs:
 
   rake_test:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -166,11 +171,12 @@ jobs:
       - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load
       - run:
-          name: テストの実行
+          name: Run tests
           command: bundle exec rake
 
   precompile_assets:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -181,7 +187,7 @@ jobs:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run:
-          name: コンパイル済みアセット
+          name: Precompile assets
           command: bundle exec rake assets:precompile
       - save_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
@@ -195,6 +201,7 @@ jobs:
     environment:
       HEROKU_APP: still-shelf-38337
     steps:
+
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -202,7 +209,7 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: マスターから Heroku にデプロイ
+          name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
@@ -210,6 +217,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+
       - checkout_code
       - bundle_dependencies:
           requires:
@@ -242,17 +250,18 @@ jobs:
       xcode: "9.0"
 
     steps:
+
       - checkout
       - run:
-          name: CocoaPods の Specs リポジトリをフェッチ
+          name: Fetch CocoaPods Specs
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
-          name: CocoaPods のインストール
+          name: Install CocoaPods
           command: pod install --verbose
 
       - run:
-          name: ビルド、実行テスト
+          name: Build and run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -269,6 +278,7 @@ jobs:
 
   swiftlint:
     docker:
+
       - image: dantoml/swiftlint:latest
     steps:
       - checkout
@@ -280,6 +290,7 @@ jobs:
 
   danger:
     docker:
+
       - image: dantoml/danger:latest
     steps:
       - checkout
@@ -289,6 +300,7 @@ workflows:
   version: 2
   build-test-lint:
     jobs:
+
       - swiftlint
       - danger
       - build-and-test
