@@ -1,27 +1,28 @@
 ---
 layout: classic-docs
-title: "Language Guide: Go"
+title: "言語ガイド：Go"
 short-title: "Go"
-description: "Building and Testing with Go (Golang) on CircleCI 2.0"
+description: "CircleCI 2.0 での Go (Golang) を使用したビルドとテスト"
 categories:
   - language-guides
 order: 3
 ---
-CircleCI supports building Go projects using any version of Go that can be installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-- TOC
+CircleCI では、Docker イメージにインストール可能な任意のバージョンの Go を使用して、Go プロジェクトをビルドできます。 お急ぎの場合は、以下の設定例をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) にコピーし、ビルドを開始してください。
+
+- 目次
 {:toc}
 
-## Quickstart: Demo Go Reference Project
+## クイックスタート：デモ用の Goリファレンスプロジェクト
 
-We maintain a reference Go project to show how to build on CircleCI 2.0:
+CircleCI 2.0 でのビルド方法を示すために、Go リファレンスプロジェクトを提供しています。
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a>
-- [Demo Go Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
+- <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">GitHub 上の Go デモプロジェクト</a>
+- [CircleCI でビルドされた Go デモプロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>. This file shows best practice for using CircleCI 2.0 with Go projects.
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、Go プロジェクトで CircleCI 2.0 を使用するためのベストプラクティスを示しています。
 
-## Sample Configuration
+## 設定例
 
 {% raw %}
 
@@ -31,40 +32,40 @@ jobs: # basic units of work in a run
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
-      - image: circleci/golang:1.8 #
+      - image: circleci/golang:1.12 #
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment: # environment variables for primary container
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
-    # directory where steps are run. Path must conform to the Go Workspace requirements
+    # directory where steps are run. パスは Go Workspace の要件に従う必要があります
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
 
-    environment: # environment variables for the build itself
-      TEST_RESULTS: /tmp/test-results # path to where test results will be saved
+    environment: # ビルド自体のための環境変数
+      TEST_RESULTS: /tmp/test-results # テスト結果を保存する場所のパス
 
-    steps: # steps that comprise the `build` job
+    steps: # `build` ジョブを構成するステップ
 
-      - checkout # check out source code to working directory
-      - run: mkdir -p $TEST_RESULTS # create the test results directory
+      - checkout # ソースコードを作業ディレクトリにチェックアウトします
+      - run: mkdir -p $TEST_RESULTS # テスト結果を保存するディレクトリを作成します
 
-      - restore_cache: # restores saved cache if no changes are detected since last run
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      - restore_cache: # 前回の実行以降の変更が検出されなかった場合、保存されているキャッシュを復元します
+      # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
           keys:
             - v1-pkg-cache
 
-      # Normally, this step would be in a custom primary image;
-      # we've added it here for the sake of explanation.
+      # 通常、このステップはカスタムプライマリイメージにあります
+      # この例では、説明のためにここにステップを追加しました
 
       - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 
-      #  CircleCi's Go Docker image includes netcat
-      #  This allows polling the DB port to confirm it is open before proceeding
+      #  CircleCi の Go Docker イメージには netcat が含まれています
+      #  このため、DB ポートをポーリングして、ポートが開放されていることを確認してから処理を続行できます
 
       - run:
-          name: Waiting for Postgres to be ready
+          name: Postgres が準備できるまで待機
           command: |
             for i in `seq 1 10`;
             do
@@ -75,77 +76,77 @@ jobs: # basic units of work in a run
             echo Failed waiting for Postgres && exit 1
 
       - run:
-          name: Run unit tests
-          environment: # environment variables for the database url and path to migration files
+          name: 単体テストを実行
+          environment: # データベース URL と移行ファイルのパスのための環境変数
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
-          # Store the results of our tests in the $TEST_RESULTS directory
+          # テスト結果を $TEST_RESULTS ディレクトリに保存します
           command: |
             trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
             make test | tee ${TEST_RESULTS}/go-test.out
 
-      - run: make # pull and build dependencies for the project
+      - run: make # プロジェクトの依存関係をプルしてビルドします
 
-      - save_cache: # Store cache in the /go/pkg directory
+      - save_cache: # キャッシュを /go/pkg ディレクトリに保存します
           key: v1-pkg-cache
           paths:
             - "/go/pkg"
 
       - run:
-          name: Start service
+          name: サービスを開始
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
           command: ./workdir/contacts
-          background: true # keep service running and proceed to next step
+          background: true # サービスを実行したまま次のステップに進みます
 
       - run:
-          name: Validate service is working
+          name: サービスが稼働中であることをバリデーション
           command: |
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
 
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するテストサマリーをアップロードします
           path: /tmp/test-results
           destination: raw-test-output
 
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results: # テストサマリー (https://circleci.com/docs/ja/2.0/collect-test-data/) に表示するテスト結果をアップロードします
           path: /tmp/test-results
 ```
 
 {% endraw %}
 
-### Pre-Built CircleCI Docker Images
+### CircleCI のビルド済み Docker イメージ
 {:.no_toc}
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
+CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/golang/>) から必要なバージョンを選択できます。 デモプロジェクトでは、公式 CircleCI イメージを使用しています。
 
-### Build the Demo Project Yourself
+### デモプロジェクトのビルド
 {:.no_toc}
 
-A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
 
-1. Fork the project on GitHub to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
-3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
+1. Fork the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a> to your own account
+2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
+3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
+変更をローカルでテストする場合は、[CircleCI の CLI ツール](https://circleci.com/docs/ja/2.0/local-jobs/)を使用して `circleci build` を実行します。
 
 * * *
 
-## Config Walkthrough
+## 設定の詳細
 
-This section explains the commands in `.circleci/config.yml`
+このセクションでは、`.circleci/config.yml` 内のコマンドについて説明します。
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
 version: 2
 ```
 
-Next, we have a `jobs` key. Every config file must have a ‘build’ job. This is the only job that will be automatically picked up and run by CircleCI.
+次に、`jobs` キーを置きます。 どのコンフィグファイルにも「build」ジョブを含める必要があります。 これが、CircleCI によって自動的に選択され実行される唯一のジョブです。
 
-In the job, we specify a `working_directory`. Go is very strict about the structure of the [Go Workspace](https://golang.org/doc/code.html#Workspaces), so we’ll need to specify a path that satisfies those requirements.
+このジョブで、`working_directory` を指定します。 Go では、[Go Workspace](https://golang.org/doc/code.html#Workspaces) の構造が厳密に定められているため、その要件を満たすパスを指定する必要があります。
 
 ```yaml
 version: 2
@@ -154,49 +155,49 @@ jobs:
     working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
 ```
 
-This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
+他のディレクトリが指定されない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとして使用されます。
 
-Directly beneath `working_directory`, we’ll specify [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) images for this job under `docker`.
+`working_directory` のすぐ下の `docker` で、このジョブの[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)イメージを指定します。
 
 ```yaml
     docker:
-      - image: circleci/golang:1.8
+      - image: circleci/golang:1.12
 ```
 
-We'll use a custom image which is based on `golang:1.8.0` and includes also `netcat` (we'll need it later).
+We'll use a custom image which is based on `golang:1.12.0` and includes also `netcat` (we'll need it later).
 
-We're also using an image for PostgreSQL, along with 2 environment variables for initializing the database.
+さらに、PostgreSQL のイメージを使用し、データベースの初期化に使用する 2つの環境変数を指定します。
 
 ```yaml
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
 ```
 
-After setting up Docker we will set an environment variable to store the path to our test results.
+Docker を設定したら、テスト結果のパスを保存する環境変数を設定します。
 
 ```yaml
     environment:
       TEST_RESULTS: /tmp/test-results
 ```
 
-Now we need to add several `steps` within the `build` job.
+この `build` ジョブ内にいくつかの `steps` を追加する必要があります。
 
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code. By default, source code is checked out to the path specified by `working_directory`.
+[`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) ステップを使用して、ソースコードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソースコードがチェックアウトされます。
 
 ```yaml
     steps:
       - checkout
 ```
 
-Next we create a directory for collecting test results
+次に、テスト結果を収集するためのディレクトリを作成します。
 
 ```yaml
       - run: mkdir -p $TEST_RESULTS
 ```
 
-Then we pull down the cache (if present). If this is your first run, this won't do anything.
+その後、キャッシュをプルダウンします (ある場合)。 初回実行時にはこの処理は実行されません。
 
 ```yaml
       - restore_cache:
@@ -204,7 +205,7 @@ Then we pull down the cache (if present). If this is your first run, this won't 
             - v1-pkg-cache
 ```
 
-And install the Go implementation of the JUnit reporting tool and other dependencies for our application. These are good candidates to be pre-installed in primary container.
+JUnit レポート作成ツールの Go 実装とアプリケーションの他の依存関係をインストールします。 これらは、プライマリコンテナにプリインストールしておくと便利です。
 
 ```yaml
       - run: go get github.com/lib/pq
@@ -212,11 +213,11 @@ And install the Go implementation of the JUnit reporting tool and other dependen
       - run: go get github.com/jstemmer/go-junit-report
 ```
 
-Both containers (primary and postgres) start simultaneously, however Postgres may require some time to get ready and if our tests start before that the job will fail. So it's good practice to wait until dependent services are ready. Here we have only Postgres, so we add this step:
+両方のコンテナ (プライマリと Postgres) が同時に起動されます。ただし、Postgres の準備には少し時間がかかるため、その前にテストが開始するとジョブが失敗します。 このため、依存サービスが準備できるまで待機することをお勧めします。 ここでは Postgres のみを使用するため、以下のようにステップを追加します。
 
 ```yaml
       - run:
-          name: Waiting for Postgres to be ready
+          name: Postgres が準備できるまで待機
           command: |
             for i in `seq 1 10`;
             do
@@ -227,13 +228,13 @@ Both containers (primary and postgres) start simultaneously, however Postgres ma
             echo Failed waiting for Postgres && exit 1
 ```
 
-This is why `netcat` installed on the CircleCI Go image. We use it to validate that the port is open.
+`netcat` が CircleCI Go イメージにインストールされているのはこのためです。 これを使用して、このポートが開放されていることをバリデーションします。
 
-Now we run our tests. To do that, we need to set an environment variable for our database's URL and path to the DB migrations files. This step has some additional commands, we'll explain them below.
+次はテストの実行です。 そのためには、データベースの URL と DB 移行ファイルのパスを指定する環境変数を設定する必要があります。 このステップには、以下のようにいくつかの追加コマンドが必要です。
 
 ```yaml
       - run:
-          name: Run unit tests
+          name: 単体テストを実行
           environment:
             CONTACTS_DB_URL: "postgres://rot@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
@@ -242,20 +243,20 @@ Now we run our tests. To do that, we need to set an environment variable for our
             make test | tee ${TEST_RESULTS}/go-test.out
 ```
 
-Our project uses `make` for building and testing (you can see `Makefile` [here](https://github.com/CircleCI-Public/circleci-demo-go/blob/master/Makefile)), so we can just run `make test`. In order to collect test results and upload them later (read more about test results in the [Project Tutorial]({{ site.baseurl }}/2.0/project-walkthrough/)) we're using `go-junit-report`:
+このプロジェクトでは、`make` を使用してビルドとテストを行っているため、`make test` を実行するだけです (`Makefile` の内容は[こちらのページ](https://github.com/CircleCI-Public/circleci-demo-go/blob/master/Makefile)で参照)。 テスト結果を収集して後からアップロードするために、ここでは `go-junit-report` を使用します (テスト結果の詳細については[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)を参照)。
 
 ```bash
 make test | go-junit-report > ${TEST_RESULTS}/go-test-report.xml
 ```
 
-In this case all output from `make test` will go straight into `go-junit-report` without appearing in `stdout`. We can solve this by using two standard Unix commands `tee` and `trap`. The first one allows us to duplicate output into `stdout` and somewhere else ([read more](http://man7.org/linux/man-pages/man1/tee.1.html)). The second one allows us to specify some command to be executed on script exit ([read more](http://man7.org/linux/man-pages/man1/trap.1p.html)). So we can do:
+この場合、`make test` からの出力は、`stdout` に表示されることなく、すべて `go-junit-report` に直接渡されます。 その問題を解決するには、`tee` と `trap` という、2つの Unix 標準コマンドを使用します。 最初のコマンドを使用すると、出力を `stdout` または別の場所に複製することができます (詳細については[こちらのページ](http://man7.org/linux/man-pages/man1/tee.1.html)を参照)。 2つめのコマンドを使用すると、スクリプトの終了時に実行するコマンドを指定できます (詳細については<a href=」http://man7.org/linux/man-pages/man1/trap.1p.html">こちらのページ</a>を参照)。 つまり、以下のように記述できます。
 
 ```bash
 trap "go-junit-report <${TEST_RESULTS}/go-test.out > ${TEST_RESULTS}/go-test-report.xml" EXIT
 make test | tee ${TEST_RESULTS}/go-test.out
 ```
 
-Now we know that our unit tests succeeded we can start our service and validate it's running.
+単体テストが正常に終了したら、サービスを開始し、それが実行中であることをバリデーションします。
 
 ```yaml
       - run: make
@@ -266,7 +267,7 @@ Now we know that our unit tests succeeded we can start our service and validate 
             - ~/.cache/go-build
 
       - run:
-          name: Start service
+          name: サービスを開始
           environment:
             CONTACTS_DB_URL: "postgres://root@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
@@ -274,25 +275,25 @@ Now we know that our unit tests succeeded we can start our service and validate 
           background: true
 
       - run:
-          name: Validate service is working
+          name: サービスが稼働中であることをバリデーション
           command: curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-After we pull and build the project's dependencies using `make`, we store any built packages in the cache. This is the recommended way to cache dependencies for your Go project.
+`make` を使用してプロジェクトの依存関係をプルおよびビルドしたら、ビルドされたパッケージをキャッシュに保存します。 この方法で Go プロジェクトの依存関係をキャッシュすることをお勧めします。
 
-To start the service we need to build it first. After that we use the same environment variables as we did in the testing step for the service to start. We're using `background: true` to keep the service running and proceed to the next step where we use `curl` to validate it successfully started and is responding to our request.
+サービスを開始するには、最初にそれをビルドする必要があります。 その後、テストステップで使用したものと同じ環境変数を使用して、サービスを開始します。 `background: true` を使用してサービスの実行を継続し、次のステップに進みます。このステップで、`curl` を使用して、サービスが正常に開始されたことと、サービスがリクエストに応答していることをバリデーションします。
 
-Finally, let's specify a path to store the results of the tests.
+最後に、テストの結果を保存するパスを指定します。
 
 ```yaml
       - store_test_results:
           path: /tmp/test-results
 ```
 
-Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
+完了です。 これで Go アプリケーション用に CircleCI 2.0 を設定できました。CircleCI でビルドを行うとどのように表示されるかについては、[ジョブページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}を参照してください。
 
-## See Also
+## 関連項目
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-Refer to the [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) document for more caching strategies.
+キャッシュの詳細については、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
