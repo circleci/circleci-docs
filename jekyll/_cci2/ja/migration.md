@@ -1,8 +1,10 @@
 ---
 layout: classic-docs
-title: "Tips for Migrating to 2.0"
+title: "2.0移行に関するヒント"
 description: "Tips for Migrating from 1.0 to CircleCI 2.0 Config"
 ---
+
+
 CircleCI is getting closer to the end of life for v1.0. If you haven't started the migration to 2.0 yet take a look through some of the tips and best practices aggregated below.
 
 Remember **August 31st, 2018** is the last day for 1.0 builds. You need to make sure all of your projects are converted if you'd like them to continue building on CircleCI. You can read more about 1.0 end of life and find other helpful resources on our [sunsetting 1.0 page](https://circleci.com/sunset1-0/).
@@ -85,6 +87,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
     ``` scalacOptions ++= Seq( `-encoding`, `utf-8`, `-target:jvm-1.8`, `-deprecation`, `-unchecked`, `-Xlint`, `-feature`, `-Xmax-classfile-name`, `242` <= add here ),
 
     <br /><br />## Tips for Browser Testing
+    
     - Tests can sometimes be flaky and may appear to fail for no reason. You can re-run your failing browser tests automatically, however, this will corrupt the timing data.
     - Take screenshots of failed tests to make debugging easier.
     - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. Run this from one of our browsers images:
