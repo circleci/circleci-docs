@@ -1,31 +1,32 @@
 ---
 layout: classic-docs
-title: "Configuration"
-description: "Landing page for CircleCI 2.0 Config"
+title: "設定"
+description: "CircleCI 2.0 コンフィグのランディング ページ"
 ---
-The core of the CircleCI experience is creating a *deterministic build* with the `config.yml` file. A deterministic build is one that can be run live at commit time, tomorrow, or even next month and will end with the exact same results.
+
+CircleCI で作業の中心となるのは、`config.yml` ファイルを使用して*決定論的ビルド*を作成することです。 決定論的ビルドとは、コミット時にも、翌日にも、あるいは翌月であっても実行することができ、かつ、まったく同じ結果を生成して終了するビルドを指します。
 
 <hr />
 
-| イントロダクション                                                                                           | Configuration Reference                                                                                                    |
-| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| [Introduction to Config]({{ site.baseurl }}/2.0/config-intro/) in CircleCI.&nbsp;&nbsp;&nbsp;&nbsp; | [Complete specification]({{ site.baseurl }}/2.0/configuration-reference/) for `config.yml` syntax.&nbsp;&nbsp;&nbsp;&nbsp; |
+| イントロダクション                                                                                    | 設定リファレンス                                                                                                      |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| CircleCI の[コンフィグについて概説]({{ site.baseurl }}/ja/2.0/config-intro/)します。&nbsp;&nbsp;&nbsp;&nbsp; | `config.yml` 構文の[すべての仕様]({{ site.baseurl }}/ja/2.0/configuration-reference/)を掲載しています。&nbsp;&nbsp;&nbsp;&nbsp; |
 
 <hr />
 
-| Writing YAML                                                                                      | CircleCI CLI                                                                    |
-| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
-| A primer for [YAML syntax basics]({{ site.baseurl }}/2.0/writing-yaml/). &nbsp;&nbsp;&nbsp;&nbsp; | Use the [CircleCI CLI]({{ site.baseurl }}/2.0/local-jobs/) to run jobs locally. |
+| YAML の記述                                                                               | CircleCI CLI                                                                |
+| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| [YAML 基本構文]({{ site.baseurl }}/ja/2.0/writing-yaml/)の入門ガイドです。 &nbsp;&nbsp;&nbsp;&nbsp; | [CircleCI CLI]({{ site.baseurl }}/ja/2.0/local-jobs/) を使用して、ジョブをローカルで実行します。 |
 
 <hr />
 
-| Debug Config Locally                                                                                          |
-| ------------------------------------------------------------------------------------------------------------- |
-| Use a shell script to [debug your config locally]({{ site.baseurl }}/2.0/examples/). &nbsp;&nbsp;&nbsp;&nbsp; |
+| コンフィグのローカルデバッグ                                                                                    |
+| ------------------------------------------------------------------------------------------------- |
+| シェルスクリプトを使用して、[コンフィグをローカルでデバッグ]({{ site.baseurl }}/ja/2.0/examples/)します。 &nbsp;&nbsp;&nbsp;&nbsp; |
 
 <hr />
 
-## Video: Introduction to `.circleci/config.yml`
+## ビデオ: `.circleci/config.yml` 入門
 
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xOSHKNUIkjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
