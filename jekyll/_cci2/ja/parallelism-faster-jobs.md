@@ -1,20 +1,21 @@
 ---
 layout: classic-docs
-title: "Running Tests in Parallel"
-short-title: "Running Tests in Parallel"
-description: "How to run tests in parallel"
+title: "テストの並列実行"
+short-title: "テストの並列実行"
+description: "テストを並列に実行する方法"
 categories:
   - optimization
 order: 60
 ---
-If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can run tests in parallel by spreading them across multiple machines. This requires specifying a parallelism level. You can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
 
-- TOC
+If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can run tests in parallel by spreading them across multiple machines. それには、並列処理レベルを指定する必要があります。 You can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
+
+- 目次
 {:toc}
 
-## Specifying a Job's Parallelism Level
+## ジョブの並列処理レベルの指定
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
+テストスイートは通常、`.circleci/config.yml` ファイルの[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#並列ジョブの設定例)レベルで定義されます。 The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
 
@@ -28,24 +29,26 @@ jobs:
     parallelism: 4
 ```
 
+![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
+
 For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
 
-## Using the CircleCI CLI to Split Tests
+## CircleCI CLI を使用したテストの分割
 
 CircleCI supports automatic test allocation across your containers. The allocation is file-based. It requires the CircleCI CLI, which is automatically injected into your build at run-time.
 
 To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
-### Globbing Test Files
+### テストファイルのグロブ
 {:.no_toc}
 
 The CLI supports globbing test files using the following patterns:
 
-- `*` matches any sequence of characters (excluding path separators)
-- `**` matches any sequence of characters (including path separators)
-- `?` matches any single character (excluding path separators)
-- `[abc]` matches any character (excluding path separators) against characters in brackets
-- `{foo,bar,...}` matches a sequence of characters, if any of the alternatives in braces matches
+- `*` は、任意の文字シーケンスに一致します (パス区切り文字を除く)。
+- `**` は、任意の文字シーケンスに一致します (パス区切り文字を含む)。
+- `?` は、任意の 1文字に一致します (パス区切り文字を除く)。
+- `[abc]` は、角かっこ内の任意の文字に一致します (パス区切り文字を除く)。
+- `{foo,bar,...}` は、中かっこ内のいずれかの文字シーケンスに一致します。
 
 To glob test files, pass one or more patterns to the `circleci tests glob` command.
 
@@ -69,7 +72,7 @@ jobs:
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
 
-### Splitting Test Files
+### テストファイルの分割
 {:.no_toc}
 
 The CLI supports splitting tests across machines when running parallel builds. To do this, pass a list of filenames to the `circleci tests split` command.
@@ -89,7 +92,7 @@ Similarly, the current container index is automatically picked up from environme
     circleci tests split --index=0 test_filenames.txt
     
 
-#### Splitting by Name
+#### ファイル名に基づいた分割
 {:.no_toc}
 
 By default, `circleci tests split` expects a list of filenames and splits tests alphabetically by test name. There are a few ways to provide this list:
@@ -109,7 +112,7 @@ Or pipe a glob of test files.
     circleci tests glob "test/**/*.java" | circleci tests split
     
 
-#### Splitting by Filesize
+#### ファイルサイズに基づいた分割
 {:.no_toc}
 
 When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
@@ -117,7 +120,7 @@ When provided with filepaths, the CLI can also split by filesize. To do this, us
     circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
     
 
-#### Splitting by Timings Data
+#### タイミングデータに基づいた分割
 {:.no_toc}
 
 On each successful run of a test suite, CircleCI saves timings data to a directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. If you do not use `store_test_results`, there will be no timing data available for splitting your tests.
@@ -134,11 +137,11 @@ The CLI expects both filenames and classnames to be present in the timing data p
 
 If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
 
-## Using Environment Variables to Split Tests
+## 環境変数を使用したテストの分割
 
 For full control over parallelism, CircleCI provides two environment variables that you can use in lieu of the CLI to configure each container individually. `CIRCLE_NODE_TOTAL` is the total number of parallel containers being used to run your job, and `CIRCLE_NODE_INDEX` is the index of the specific container that is currently running. See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) for more details.
 
-## Running Split Tests
+## 分割テストの実行
 
 Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to an environment variable, then passing this variable to your test runner.
 
@@ -149,19 +152,21 @@ bundle exec rspec -- ${TESTFILES}
 
 The TESTFILES var will have a different value in each container, based on $CIRCLE_NODE_INDEX and $CIRCLE_NODE_TOTAL.
 
-### Video: Troubleshooting Globbing
+### ビデオ：グロブのトラブルシューティング
 {:.no_toc}
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
-## See Also
+## 関連項目
 
 [Using Containers]({{ site.baseurl }}/2.0/containers/)
 
-## Other ways to split tests
+## その他のテスト分割方法
 
 Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).
 
-- **[Knapsack Pro](https://knapsackpro.com)** - Enables allocating tests dynamically across parallel CI nodes, allowing your test suite exection to run faster. See [CI build time graph examples](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress).
+- **[Knapsack Pro](https://knapsackpro.com)**：並列 CI ノード間でテストを動的に割り当て、テストスイートの実行を高速化します。 CI のビルド時間への効果は[こちらのグラフ](https://docs.knapsackpro.com/2018/improve-circleci-parallelisation-for-rspec-minitest-cypress)でご確認ください。
 
-- **[phpunit-finder](https://github.com/previousnext/phpunit-finder)** - This is a helper CLI tool that queries `phpunit.xml` files to get a list of test filenames and print them. This is useful if you want to split tests to run them in parallel based on timings on CI tools.
+- **[PHPUnit Finder](https://github.com/previousnext/phpunit-finder)**：`phpunit.xml` ファイルに対してクエリを行い、テストファイル名の一覧を取得して印刷するヘルパー CLI ツールです。 テストを分割して CI ツールのタイミングに基づいて並列に実行する場合に、このツールを使用すると便利です。
+
+- **[go list](https://golang.org/cmd/go/#hdr-List_packages_or_modules)** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers. ```go test -v $(go list ./... | circleci tests split)```
