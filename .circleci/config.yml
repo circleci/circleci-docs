@@ -12,6 +12,22 @@ references:
     attach_workspace:
       at: *workspace_root
 
+
+commands:
+  ruby_deps:
+    description: "Runs specialized Ruby cache steps."
+    steps:
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - "vendor/bundle"
+
+
 jobs:
   js_build:
     executor:
@@ -47,15 +63,16 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - "vendor/bundle"
+      - ruby_deps
+      # - restore_cache:
+      #     key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      # - run:
+      #     name: Install Ruby dependencies
+      #     command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      # - save_cache:
+      #     key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - "vendor/bundle"
       - run:
           name: "Create landing folder for PDF output"
           command: mkdir -p /tmp/workspace/pdfs
@@ -68,6 +85,10 @@ jobs:
             - pdfs
 
 
+  build_api_v2:
+    executor:
+      name: ruby/default
+      tag: '2.6.3-node-browsers'
   # implement: static-documentation job: "build_api_docs"
 
   build: # better name?
@@ -87,15 +108,16 @@ jobs:
       - run:
           name: "Test Markdown Files"
           command: ./scripts/test-markdown.sh
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - "vendor/bundle"
+      - ruby_deps
+      # - restore_cache:
+      #     key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      # - run:
+      #     name: Install Ruby dependencies
+      #     command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      # - save_cache:
+      #     key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      #     paths:
+      #       - "vendor/bundle"
       - run:
           name: Create results directory
           command: mkdir -p $JOB_RESULTS_PATH # why do we do this? what is it used for?
