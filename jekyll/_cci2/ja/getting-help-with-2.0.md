@@ -1,6 +1,7 @@
 ---
 layout: classic-docs
-title: "Getting Help with 2.0"
-redirect: /docs/2.0/help-and-support/
+title: "2.0 ヘルプ情報"
+redirect: /docs/ja/2.0/help-and-support/
 ---
-This page has moved. You should be automatically redirected, but if you haven’t, you can [click here]({{ site.baseurl }}/2.0/help-and-support/).
+
+このページは移動しました。 自動的に新しいページに移動します。移動しない場合は、[ここをクリック]({{ site.baseurl }}/ja/2.0/help-and-support/)してください。
