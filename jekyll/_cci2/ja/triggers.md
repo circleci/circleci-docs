@@ -1,26 +1,28 @@
 ---
 layout: classic-docs
-title: "Triggers"
-short-title: "Triggers"
-description: "Description of triggers"
+title: "トリガー"
+short-title: "トリガー"
+description: "トリガーの説明"
 categories:
   - builds
 order: 2
 ---
-There are a few great tricks for triggering and scheduling builds in the following snippets!
 
-## Skip Builds
 
-By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a [ci skip] or [skip ci] tag anywhere in a commit’s title or description.
+ビルドのトリガーとスケジュールについて、役立つヒントをご紹介します。以下のスニペットを参照してください。
 
-## Trigger a Job Using curl and Your API Token
+## ビルドのスキップ
+
+CircleCI のデフォルトでは、ユーザーが変更をバージョン管理システム (VCS) にプッシュするたびに、自動的にプロジェクトがビルドされます。 この動作は、[ci skip] または [skip ci] タグをコミットのタイトルまたは説明の任意の場所に追加することで、オーバーライドできます。
+
+## curl および API トークンを使用したジョブのトリガー
 
     curl -u ${CIRCLE_API_USER_TOKEN}: \
          -d build_parameters[CIRCLE_JOB]=deploy_docker \
          https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
     
 
-## Scheduled Builds
+## ビルドのスケジュール
 
     workflows:
       version: 2
@@ -29,9 +31,9 @@ By default, CircleCI automatically builds a project whenever you push changes to
           - test
           - deploy
       nightly:
-        triggers: #use the triggers key to indicate a scheduled build
+        triggers: #triggers キーを使用して、スケジュールされたビルドであることを示します
           - schedule:
-              cron: "0 0 * * *" # use cron syntax to set the schedule
+              cron: "0 0 * * *" # cron 構文を使用してスケジュールを設定します
               filters:
                 branches:
                   only:
@@ -41,7 +43,7 @@ By default, CircleCI automatically builds a project whenever you push changes to
           - coverage
     
 
-## Manual Approval
+## 手動による承認
 
     workflows:
       version: 2
@@ -55,7 +57,7 @@ By default, CircleCI automatically builds a project whenever you push changes to
               requires:
                 - test1
           - hold:
-              type: approval # requires that an in-app button be clicked by an appropriate member of the project to continue.
+              type: approval # 続行するには、適切なプロジェクトメンバーがアプリ内のボタンをクリックする必要があります
               requires:
                - test2
           - deploy:
@@ -63,22 +65,22 @@ By default, CircleCI automatically builds a project whenever you push changes to
                 - hold
     
 
-## Trigger Docker Builds in Dockerhub
+## DockerHub にある Docker ビルドのトリガー
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0-browsers # < an arbitrarily chosen docker image.
+      - image: circleci/node:10.0-browsers # < 選択された任意の Docker イメージ
     steps:
       - checkout
       - run:
-          # example curl request from dockerhub documentation
-          name: Trigger docker remotely
+          # DockerHub ドキュメントの curl リクエストの例
+          name: リモートで Docker をトリガー
           command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
 ```
 
-## See Also
+## 関連項目
 
-[Workflows]({{ site.baseurl }}/2.0/workflows/)
+[ワークフロー]({{ site.baseurl }}/2.0/workflows/)
