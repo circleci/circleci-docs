@@ -1,22 +1,23 @@
 ---
 layout: classic-docs
-title: "Configuration"
-short-title: "Configuration"
-description: "Description of configuration"
+title: "設定"
+short-title: "設定"
+description: "設定の説明"
 categories:
   - configuration
 order: 2
 ---
-CircleCI [configuration syntax]({{ site.baseurl }}/2.0/configuration-reference/) is structured [YAML]({{ site.baseurl }}/2.0/writing-yaml/) and starts with the version, a named job, and an [executor type]({{ site.baseurl }}/2.0/executor-types/) for that job, either `docker`, `machine`, or `macos`. CircleCI provides prebuilt Docker images for your convenience as described in the following video.
+
+CircleCI [configuration syntax]({{ site.baseurl }}/2.0/configuration-reference/) is structured [YAML]({{ site.baseurl }}/2.0/writing-yaml/) and starts with the version, a named job, and an [executor type]({{ site.baseurl }}/2.0/executor-types/) for that job, either `docker`, `machine`, `windows` or `macos`. 以下のビデオでも説明されているとおり、CircleCI は便利なビルド済みの Docker イメージを提供しています。
 
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 </div>
 
-## Secrets, Private Keys, Tokens, and Scripts
+## シークレット、プライベートキー、トークン、スクリプト
 
-Encrypt and store secrets and private keys for your project by following the [environment variables]({{ site.baseurl }}/2.0/env-vars/) or [contexts]({{ site.baseurl }}/2.0/contexts/) documentation. Review the best practices for [using shell scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) to secure scripts and properly [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/) in your configuration.
+プロジェクトのシークレットとプライベートキーを暗号化して格納するには、[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)または[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)に関するドキュメントを参照してください。 設定でスクリプトを保護し、適切に [API トークンを管理]({{ site.baseurl }}/ja/2.0/managing-api-tokens/)するには、[シェル スクリプトの使用]({{ site.baseurl }}/ja/2.0/using-shell-scripts/)に関するベスト プラクティスを参照してください。
 
-## Advanced Test Configuration
+## 高度なテスト設定
 
-CircleCI enables you to [parallelize your test runs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for greatest efficiency. It is also possible to test with browsers and databases, refer to the [Browser Testing]({{ site.baseurl }}/2.0/browser-testing/) and [Database Configuration]({{ site.baseurl }}/2.0/databases/) documents for details.
+CircleCI では、[テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)を利用して、効率性を最大限に高めることができます。 ブラウザーやデータベースを使用してテストすることも可能です。詳細については、「[ブラウザーテスト]({{ site.baseurl }}/ja/2.0/browser-testing/)」および「[データベースの設定]({{ site.baseurl }}/ja/2.0/databases/)」を参照してください。
