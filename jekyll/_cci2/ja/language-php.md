@@ -1,78 +1,79 @@
 ---
 layout: classic-docs
-title: "Language Guide: PHP"
+title: "言語ガイド：PHP"
 short-title: "PHP"
-description: "Building and Testing with PHP on CircleCI 2.0"
+description: "CircleCI 2.0 での PHP を使用したビルドとテスト"
 categories:
   - language-guides
 order: 6
 ---
-This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a PHP sample application.
 
-- TOC
-{:toc}
+ここでは、PHP サンプルアプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
 
-## Quickstart: Demo PHP Laravel reference project
+- 目次 {:toc}
 
-We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
+## クイックスタート：デモ用の PHP Laravel リファレンスプロジェクト
 
-- <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">Demo PHP Laravel Project on GitHub</a>
-- [Demo PHP Laravel Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
+CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リファレンスプロジェクトが用意されています。
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
+- <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">GitHub 上の PHP Laravel デモプロジェクト</a>
+- [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
 
-## Pre-Built CircleCI Docker Images
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、PHP プロジェクトで CircleCI 2.0 を使用するためのベストプラクティスを示しています。
 
-We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
+## CircleCI のビルド済み Docker イメージ
 
-Database images for use as a secondary 'service' container are also available.
+CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 [Docker Hub](https://hub.docker.com/r/circleci/php/) から必要な PHP バージョンを選択できます。 デモプロジェクトでは、公式 CircleCI イメージを使用しています。
 
-## Build the Demo PHP project Yourself
+セカンダリ「サービス」コンテナとして使用するデータベースイメージも提供されています。
 
-A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+## PHP のデモプロジェクトのビルド
 
-1. Fork the project on GitHub to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
-3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
+CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモプロジェクトをビルドする方法を示します。
+
+1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
+2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
+3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 * * *
 
-## Sample Configuration
+## 設定例
 
-Following is the commented `.circleci/config.yml` file in the demo project.
+以下に、デモプロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
 {% raw %}
+
 ```yaml
-version: 2 # use CircleCI 2.0
+version: 2 # CircleCI 2.0 を使用します
 
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    docker: # run the steps with Docker 
+jobs: # ステップの集合
+  build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
+    docker: # Docker でステップを実行します 
 
-      - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
-    working_directory: ~/laravel # directory where steps will run
-    steps: # a set of executable commands
-      - checkout # special step to check out source code to working directory
+      - image: circleci/php:7.1-node-browsers # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
+    working_directory: ~/laravel # ステップが実行されるディレクトリ
+    steps: # 実行可能コマンドの集合
+      - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
-      - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
+      - restore_cache: # `composer.lock` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
-            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+            # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/docs/ja/2.0/caching/ を参照)
             - composer-v1-
       - run: composer install -n --prefer-dist
-      - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
+      - save_cache: # `composer.lock` キャッシュキーテンプレートを使用して依存関係キャッシュを保存する特別なステップ
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - restore_cache: # special step to restore the dependency cache if `package.json` does not change
+      - restore_cache: # `package.json` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
           keys:
             - node-v1-{{ checksum "package.json" }}
-            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
+            # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/docs/ja/2.0/caching/ を参照)
             - node-v1-
       - run: yarn install
-      - save_cache: # special step to save the dependency cache with the `package.json` cache key template
+      - save_cache: # `package.json` キャッシュキーテンプレートを使用して依存関係キャッシュを保存する特別なステップ
           key: node-v1-{{ checksum "package.json" }}
           paths:
             - node_modules
@@ -80,25 +81,26 @@ jobs: # a collection of steps
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
+      # デプロイ例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください    
 ```
+
 {% endraw %}
 
-## Config Walkthrough
+## 設定の詳細
 
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
 
 ```yaml
 version: 2
 ```
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
+1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
 
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
+[`working_directory`]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+ジョブのステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
 
-In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes browser tooling.
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 ここでは、ブラウザーツールを含む [CircleCI 提供の PHP Docker イメージ](https://circleci.com/docs/ja/2.0/circleci-images/#php)を使用します。
 
 ```yaml
 version: 2
@@ -109,9 +111,10 @@ jobs:
     working_directory: ~/laravel 
 ```
 
-Next, we'll run a series of commands under the `steps:` key. Below we install some PHP tooling allowing up to manage our dependencies.
+次に、`steps:` キーの下で、一連のコマンドを実行します。 以下のように、依存関係の管理に使用できる PHP ツールをインストールします。
 
 {% raw %}
+
 ```yaml
     steps:
 
@@ -120,16 +123,17 @@ Next, we'll run a series of commands under the `steps:` key. Below we install so
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
 ```
+
 {% endraw %}
 
-The next set of steps for the config are all related to dependency management and caching. The sample project caches both PHP dependencies and JavaScript dependencies.
+コンフィグのその後のステップはすべて、依存関係の管理とキャッシュに関連しています。 このサンプルプロジェクトでは、PHP の依存関係と JavaScript の依存関係の両方をキャッシュします。
 
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, the cache key will be based on a checksum of the `composer.lock` file, but will fall back to using a more generic cache key.
+[`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例のキャッシュキーは、`composer.lock` ファイルのチェックサムに基づいていますが、より汎用的なキャッシュキーを使用するようにフォールバックします。
 
-Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
-
+[`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
 {% raw %}
+
 ```yaml
 <br />      - restore_cache: 
           keys:
@@ -150,9 +154,10 @@ Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restor
           paths:
             - node_modules
 ```
+
 {% endraw %}
 
-Finally, we will set up a test database with Sqlite, run migrations and run tests.
+最後に、Sqlite テストデータベースを準備し、移行を実行し、テストを実行します。
 
 ```yaml
       - run: touch storage/testing.sqlite 
@@ -163,13 +168,14 @@ Finally, we will set up a test database with Sqlite, run migrations and run test
 
 * * *
 
-Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
+完了です。 これで PHP アプリケーション用に CircleCI 2.0 を設定できました。CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}を参照してください。
 
-## See Also
+## 関連項目
+
 {:.no_toc}
 
-- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-- Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) page for more configuration examples of public PHP projects.
+- その他のパブリック PHP プロジェクトの設定例については、「[設定ファイルをローカルでテストする]({{ site.baseurl }}/ja/2.0/examples/)」を参照してください。
 
-- If you're new to CircleCI 2.0, we recommend reading our [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) for a detailed explanation of our configuration using Python and Flask as an example.
+- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。ここでは、Python と Flask を使用した設定を例に詳しく解説しています。
