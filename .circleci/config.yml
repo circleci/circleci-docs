@@ -109,10 +109,10 @@ jobs:
             - src-api/node_modules
       - run:
           name: Build API 1.x documentation with Slate
-          command: ./scripts/build_api_docs -v1
+          command: ./scripts/build_api_docs.sh -v1
       - run:
           name: Build API 2.x documentation with Widdershins and Slate
-          command: ./scripts/build_api_docs -v2
+          command: ./scripts/build_api_docs.sh -v2
       - persist_to_workspace:
           root: *workspace_root
           paths:
