@@ -111,7 +111,7 @@ jobs:
       - run:
           name: Build API 1.x documentation with Slate
           command: |
-            bundle exec middleman build --clean
+            cd src-api; bundle exec middleman build --clean
             cp -R build/* /tmp/workspace/api
       - run:
           name: Build API 2.x documentation with Widdershins and Slate
