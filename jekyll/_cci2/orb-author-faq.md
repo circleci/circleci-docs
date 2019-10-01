@@ -86,13 +86,13 @@ This option is strongly discouraged when possible. Sometimes it may be necessary
 Ex: Installing Homebrew as a part of the [AWS Serverless orb](https://circleci.com/orbs/registry/orb/circleci/aws-serverless#commands-install)
 
 ```yaml
- - run:
-      command: >
-        curl -fsSL
-        "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh"
-        | bash
-        /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
-      name: Install Homebrew (for Linux)
+steps:
+  - run:
+    command: >
+      curl -fsSL
+      "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
+      /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
+    name: Install Homebrew (for Linux)
 ```
 
 
