@@ -8,7 +8,7 @@ categories:
 order: 0
 ---
 
-Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 でビルドされます。CircleCI では、さまざまな言語でいくつかのデモアプリケーションを用意しているため、お使いのアプリケーションと同じ言語で記述されているアプリケーションの例を参考にしながら学習していただけます。 以下に挙げた各言語については、GitHub のパブリックリポジトリと関連ガイドを公開しています。 それぞれをフォークし、内容を確認してみてください。
+Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve created several demo applications in various languages, so you can learn by example from an app written in the same language as your application. 以下に挙げた各言語については、GitHub のパブリックリポジトリと関連ガイドを公開しています。 それぞれをフォークし、内容を確認してみてください。
 
 | Language Guide                                                                                                        | Framework    | GitHub Repo Name                                                                                                                       |
 | --------------------------------------------------------------------------------------------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
