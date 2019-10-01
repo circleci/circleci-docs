@@ -40,14 +40,14 @@ commands:
 
 
 jobs:
-  js_build:
-    executor:
+  js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
+    executor: # we specify our executor to use the node orb.
       name: node/default
       tag: '8.11.1'
     steps:
       - *attach_workspace
-      - checkout
-      - node/with-cache:
+      - checkout # get the code from GitHub
+      - node/with-cache: # An orb command for steps to run in-between restoring and saving a cache.
           cache-key: "package-lock.json"
           cache-version: v9
           steps:
@@ -56,24 +56,24 @@ jobs:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: npm run webpack-prod
       - run:
-          name: "Persist JS assets" # Moves our JS into our workspace.
+          name: "Persist JS assets" # Move our JS into our workspace.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
             mv jekyll/assets/js/*.bundle.js /tmp/workspace/js/
-      - persist_to_workspace:
+      - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
             - js
 
-  build_server_pdfs:
+  build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     executor:
-      name: ruby/default
+      name: ruby/default # we use the same ruby orb + tag across multiple jobs
       tag: '2.6.3-node-browsers'
     steps:
       - *attach_workspace
       - checkout
-      - ruby-deps
+      - ruby-deps # a `command` that is defined above
       - run:
           name: "Create landing folder for PDF output"
           command: mkdir -p /tmp/workspace/pdfs
@@ -85,7 +85,7 @@ jobs:
           paths:
             - pdfs
 
-  build_api_docs:
+  build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
       tag: '2.6.3-node-browsers'
@@ -95,40 +95,28 @@ jobs:
       - run:
           name: "Create landing folder for API doc output"
           command: mkdir -p /tmp/workspace/api/v2
+      # Since this job has both Ruby and Node dependencies we are going
+      # to use a cache-key that combines each respective language's package-lock file.
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
       - run:
-          name: Install ruby dependencies
-          command: cd src-api; bundle install
-      - run:
-          name: Install node dependencies
-          command: cd src-api; npm install
+          name: Install Ruby + Node dependencies
+          command: cd src-api; bundle install; npm install
       - save_cache:
-          key: circleci-docs-{{ checksum "src-api/Gemfile.lock" }}
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
           paths:
             - src-api/vendor/bundle
             - src-api/node_modules
       - run:
           name: Build API 1.x documentation with Slate
-          command: |
-            cd src-api; bundle exec middleman build --clean
-            cp -R build/* /tmp/workspace/api
+          command: ./scripts/build_api_docs -v1
       - run:
           name: Build API 2.x documentation with Widdershins and Slate
-          command: |
-            cd src-api; rm -r build; rm source/index.html.md
-            curl https://circleci.com/api/v2/openapi.json > openapi.json
-            node node_modules/widdershins/widdershins.js --environment ../widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
-            bundle exec middleman build --clean
-            cp -R build/* ../jekyll/_api/v2
+          command: ./scripts/build_api_docs -v2
       - persist_to_workspace:
           root: *workspace_root
           paths:
             - api
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
-          paths:
-            - "src-api/vendor/bundle"
 
   # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
   # and puts everything in it's place for a Jekyll build.
