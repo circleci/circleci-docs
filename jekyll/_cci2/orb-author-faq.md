@@ -71,6 +71,7 @@ Bash is the preferred language as it is most commonly available among all availa
 In some use-cases an Orb may only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. We can utilize the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
 
 ```yaml
+steps:
   - run:
     shell: /usr/bin/python3
     command: |
