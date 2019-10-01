@@ -91,8 +91,12 @@ A **run queue** forms when CircleCI experiences high demand. Customer builds are
 
 In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
 
+### Why are my builds queuing even though I'm on Performance Plan?
+{:.no_toc}
+In order to keep the system stable for all CircleCI customers, we implement different soft concurrency limits on each of the [resource classes](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If you are experiencing queuing on your builds, it's possible you are hitting these limits. Please [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request raises on these limits.
+
 ### Why can't I find my project on the Add Project page?
- {:.no_toc}
+{:.no_toc}
 If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
 ### I got an error saying "You have met the maximum number of active users allowed for your plan per billing period." 
@@ -257,6 +261,10 @@ Yes, the billing is associated with the organization. You can buy while within t
 #### What is the definition of a container in the context of billing?
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+#### Why am I being charged for remote Docker spin up time? 
+{:.no_toc}
+When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
 
 ---
 

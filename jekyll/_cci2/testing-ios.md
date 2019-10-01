@@ -29,14 +29,14 @@ We announce the availability of new macOS containers in the [annoucements sectio
 
 The currently available Xcode versions are:
 
-* `11.0.0`: Xcode 11.0 (GM Seed 1) (Build 11A419c) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1136/index.html)
+* `11.1.0`: Xcode 11.1 (GM Seed) (Build 11A1027) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1226/index.html)
+* `11.0.0`: Xcode 11.0 (Build 11A420a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1136/index.html)
 * `10.3.0`: Xcode 10.3 (Build 10G8) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-903/index.html)
 * `10.2.1`: Xcode 10.2.1 (Build 10E1001) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
 * `10.1.0`: Xcode 10.1 (Build 10B61) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
 * `10.0.0`: Xcode 10.0 (Build 10A255) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
 * `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
 * `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
-* `9.2.0`: Xcode 9.2.0 (Build 9C40b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
 * `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
 * `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
 
@@ -240,7 +240,6 @@ jobs:
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -258,7 +257,6 @@ jobs:
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -281,7 +279,7 @@ workflows:
             - build-and-test
 ```
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan. 
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan.
 
 ### Reducing Testing Time
 
@@ -371,20 +369,11 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 ### Using Custom Ruby Versions
 {:.no_toc}
 
-Our macOS containers contain multiple versions of Ruby. The default version is  the system-installed Ruby. The containers also include the latest stable versions of Ruby at the time that the container is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are  installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
+Our macOS containers contain multiple versions of Ruby. The default version is the system-installed Ruby. The containers also include the latest stable versions of Ruby at the time that the container is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
-If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so. To activate `chruby`, you **must** change the `shell` parameter of your job to be a login shell (adding `--login`).
+If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
-```yaml
-version: 2
-jobs:
-  build:
-    macos:
-      xcode: "10.2.0"
-    shell: /bin/bash --login -eo pipefail
-```
-
- To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
 ```yaml
 run:
@@ -445,19 +434,19 @@ the app is easy with one of the following:
 
 Then you should set up environment variables for your service of choice:
 
-### Hockey App 
+### Hockey App
 {:.no_toc}
 
 1. Log in to Hockey app and create a new API token on the [Tokens page](
 https://rink.hockeyapp.net/manage/auth_tokens). Your token will need at
-least upload permission to upload new builds to Hockey App. 
+least upload permission to upload new builds to Hockey App.
 
 2. Give your
 new API token a name specific to CircleCI such as "CircleCI
-Distribution". 
+Distribution".
 
 3. Copy the token, and log into CircleCI and go to the
-Project Settings page for your app. 
+Project Settings page for your app.
 
 4. Create a new Environment Variable with
 the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now
@@ -469,7 +458,7 @@ access this token in any job.
 1. Log in to Fabric.io and visit your organization's settings page.
 ![Fabric.io loging image](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
-2. Click your organization (CircleCI in the image above), and click 
+2. Click your organization (CircleCI in the image above), and click
 the API key and Build Secret links to reveal the items.
 ![Fabric.io org image](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
 
@@ -533,7 +522,7 @@ projects. Here are the most frequent of those:
 
 * **Xcode version is not available.** We install
   a few different versions of Xcode in each build
-  image and keep those updated with the latest point releases. For version `10.0.0`, 
+  image and keep those updated with the latest point releases. For version `10.0.0`,
   you must specify the full version, down to the point release number. However,
   to use the latest Xcode 8.3, for example, which is `8.3.3`, it is
   sufficient to specify `8.3` in your `config.yml`. If a newer point

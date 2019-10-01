@@ -74,3 +74,7 @@
 @media screen and (max-width: 767px) {
   .screen-sm-padding-top-medium {
     padding-top: 48px; } }
+
+pre {
+  margin-bottom: 10px;
+}

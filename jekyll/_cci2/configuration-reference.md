@@ -519,7 +519,13 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
 
 ###### _Default shell options_
 
-The default value of shell option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified by default). Hence, the default shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files. Descriptions of the `-eo pipefail` options are provided below.
+For jobs that run on **Linux**, the default value of the `shell` option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified). Hence, the shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files.
+
+For jobs that run on **macOS**, the default shell is `/bin/bash --login -eo pipefail`. The shell is a non-interactive login shell. The shell will execute `/etc/profile/` followed by `~/.bash_profile` before every step.
+
+For more information about which files are executed when bash is invocated, [see the `INVOCATION` section of the `bash` manpage](https://linux.die.net/man/1/bash).
+
+Descriptions of the `-eo pipefail` options are provided below.
 
 `-e`
 
@@ -600,6 +606,19 @@ A value of `always` means that the step will run regardless of the exit status o
 step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
+
+###### Ending a Job from within a `step`
+
+A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute. 
+
+Here is an example where `halt` is used to avoid running a job on the `develop` branch:
+
+``` YAML
+run: |
+    if [ "$CIRCLE_BRANCH" = "develop" ]; then
+        circleci-agent step halt
+    fi
+```
 
 ###### Example
 
@@ -840,7 +859,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 - In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
-  > **skipping deploy**  
+  > **skipping deploy**
   > Running in SSH mode.  Avoid deploying.
 
 ###### Example

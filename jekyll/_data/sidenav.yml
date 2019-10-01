@@ -102,6 +102,8 @@ en:
           link: 2.0/orb-author/
         - name: Test and Publish Your Orb
           link: 2.0/orb-author-validate-publish/
+        - name: Orbs Best Practices
+          link: 2.0/orbs-best-practices/
     - name: Using Orbs
       link: 2.0/orbs-user-config/
       children:
