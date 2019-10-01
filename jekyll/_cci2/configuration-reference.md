@@ -607,6 +607,13 @@ step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
+``` YAML
+- run:
+    name: Cleanup cloud
+    command: # Bunch of stuff here
+    when: always # always cleanup whether job passes or fails
+```
+
 ###### Ending a Job from within a `step`
 
 A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute. 
