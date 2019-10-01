@@ -15,7 +15,7 @@ If you have implemented workflows on a branch in your GitHub repository, but the
 
 Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
 
-Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
+To resolve this, go to GitHub and navigate to **Settings** > **Branches**. Then, click the **Edit** button on the protected branch to deselect the setting. 
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for examples and conceptual information.
 
