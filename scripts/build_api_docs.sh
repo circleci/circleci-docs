@@ -15,21 +15,10 @@ build_api_v1() {
 # Fetches the latest api spec and runs widdershins with it.
 build_api_v2() {
     echo "Building API v2 documentation with Slate and Widdershins"
-    cd src-api
+    cd src-api; rm -r build; rm source/index.html.md
     curl https://circleci.com/api/v2/openapi.json > openapi.json
     node node_modules/widdershins/widdershins.js --environment ../widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
     bundle exec middleman build --clean
-    cp -R build/* /tmp/workspace/api/v2
-
-
-
-
-
-    curl https://circleci.com/api/v2/openapi.json > openapi.json
-    node node_modules/widdershins/widdershins.js --search false --language_tabs 'shell:Curl' 'ruby:Ruby' 'python:Python' 'javascript:Javascript' 'go: Go' --summary openapi.json -o source/index.html.md
-
-    bundle exec middleman build --clean
-    echo "Output bundled."
     cp -R build/* /tmp/workspace/api
     echo "Output build moved to /tmp/workspace/api/v2"
 }
