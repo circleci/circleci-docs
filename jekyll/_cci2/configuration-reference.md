@@ -609,9 +609,9 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ``` YAML
 - run:
-    name: Cleanup cloud
-    command: # Bunch of stuff here
-    when: always # always cleanup whether job passes or fails
+    name: Upload CodeCov.io Data
+    command: bash <(curl -s https://codecov.io/bash) -F unittests
+    when: always # Uploads code coverage results, pass or fail
 ```
 
 ###### Ending a Job from within a `step`
