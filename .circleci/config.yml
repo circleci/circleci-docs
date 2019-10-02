@@ -157,20 +157,16 @@ jobs:
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
-
       ### NOTE: we are ignore some files in the HTML proofer as it fails on pending translated docs.
       - run:
           name: Test with HTMLproofer
           command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
-
       - store_artifacts: # stores the built files of the Jekyll site
           path: jekyll/_site/docs/
           destination: circleci-docs
-
       - store_artifacts: # stores build log output.
           path: run-results/
           destination: run-results
-
       - persist_to_workspace:
           root: ~/circleci-docs/jekyll/_site
           paths:
@@ -208,6 +204,7 @@ jobs:
 
 workflows:
   version: 2
+
   build-deploy:
     jobs:
       - js_build
@@ -224,13 +221,13 @@ workflows:
           filters:
             branches:
               only: master
-      # Can we run a pdf job that only runs on master?
       - deploy:
           requires:
             - build
           filters:
             branches:
               only: master
+
   nightly-build:
     triggers:
       - schedule:
