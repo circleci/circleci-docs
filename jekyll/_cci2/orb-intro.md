@@ -17,7 +17,7 @@ If you have chosen to use CircleCI orbs in your workflows and jobs, there are se
 
 To import an existing orb, perform the steps listed below.
 
-1) Add a single line to to your version 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
+1) Add a single line to your version 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for each orb, for example:
 
 ```yaml
 version: 2.1
