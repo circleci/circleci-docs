@@ -10,7 +10,7 @@ order: 1
 This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
 
 ## Getting Started
-Enable pipelines at the bottom of the Advanced section of Settings page for your project in the CircleCI app. **Note:** Pipelines require v2.1 configuration and are not yet supported for private CircleCI Server installations.
+Most projects will have Pipelines enabled by default. Verify the project pipeline setting in the Advanced section of your project's Settings page in the CircleCI app. **Note:** Pipelines are compatible with v2 and v2.1 configurations and are not yet supported for private CircleCI Server installations.
 
 ## Benefits of Pipelines
 
