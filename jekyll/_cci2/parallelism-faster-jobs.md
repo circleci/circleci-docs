@@ -36,14 +36,19 @@ see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#p
 
 ## Using the CircleCI CLI to Split Tests
 
-CircleCI supports automatic test allocation across your containers. The allocation is file-based. It requires the CircleCI CLI, which is automatically injected into your build at run-time.
+CircleCI supports automatic test allocation across your containers. The allocation is filename or classname based, depending on the requirements of the test-runner you are using. It requires the CircleCI CLI, which is automatically injected into your build at run-time.
 
 To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
-### Globbing Test Files
+### Splitting Test Files
 {:.no_toc}
 
-The CLI supports globbing test files using the following patterns:
+The CLI supports splitting tests across machines when running parallel jobs. This is achieved by passing a list of either files or classnames, whichever your test-runner requires at the command line, to the `circleci tests split` command.
+
+#### Globbing Test Files
+{:.no_toc}
+
+To assist in defining your test suite, the CLI supports globbing test files using the following patterns:
 
 - `*` matches any sequence of characters (excluding path separators)
 - `**` matches any sequence of characters (including path separators)
@@ -72,18 +77,13 @@ jobs:
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
 
-### Splitting Test Files
-{:.no_toc}
-
-The CLI supports splitting tests across machines when running parallel jobs.
-
-![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
-
 #### Splitting by Timing Data
 
 The best way to optimize your test suite across a set of parallel executors is to split your tests using timing data. This will ensure the tests are split in the most even way, leading to a shorter overall test time.
 
-On each successful run of a test suite, CircleCI saves timings data to a directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname, depending on the language you are using.
+![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
+
+On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname, depending on the language you are using.
 
 Note: If you do not use `store_test_results`, there will be no timing data available for splitting your tests.
 
@@ -139,11 +139,11 @@ See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env
 
 ## Running Split Tests
 
-Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to an environment variable, then passing this variable to your test runner.
+Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to a file, then passing this file to your test runner.
 
 ```bash
-TESTFILES=$(circleci tests glob "spec/**/*.rb" | circleci tests split --split-by=timings)
-bundle exec rspec -- ${TESTFILES}
+circleci tests glob test/**/*.rb | circleci tests split > /tmp/tests-to-run
+bundle exec rspec $(cat /tmp/tests-to-run)
 ```
 
 The TESTFILES var will have a different value in each container, based on $CIRCLE_NODE_INDEX and $CIRCLE_NODE_TOTAL.
