@@ -170,7 +170,7 @@ As an author of an orb, you may wish to document examples of using it in a Circl
 
 When you have completed authoring an orb, and have published the orb, the orb will be published in the [Orb Registry](https://circleci.com/orbs/registry/). You will see your newly-created orb in the Orb Registry, which is shown below.
 
-![Orbs Registry image]({{ site.baseurl }}/assets/img/docs/Orbs-Registry.png)
+![Orbs Registry image]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
 
 ### Simple Examples
 Below is an example orb you can use:
