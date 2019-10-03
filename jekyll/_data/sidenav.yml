@@ -332,6 +332,15 @@ en:
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
+    - name: Server v2.18 PDFs
+      link: 2.0/v.2.18-overview/
+      children:
+        - name: What's New in v2.18
+          link: 2.0/v.2.18-overview/
+        - name: v2.17.3 Installation Guide
+          link: 
+        - name: v2.17.3 Operations Guide
+          link: 
     - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
       children:
@@ -646,7 +655,7 @@ ja:
           i18n_name: ヘルプとサポート
           link: ja/2.0/help-and-support/
 
-- name: Administration
+- name: Server Administration
   i18n_name: アドミニストレーション
   icon: docs/admin.svg
   children:
