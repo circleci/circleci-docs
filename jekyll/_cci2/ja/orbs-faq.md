@@ -13,7 +13,7 @@ This document describes various questions and technical issues that you may find
 - 目次
 {:toc}
 
-### Orbs のダウンロード、統合、テスト
+## Downloading, Integrating, and Testing Orbs
 {:.no_toc}
 
 - 質問：Orbs をダウンロード、統合、テストする方法を教えてください。
@@ -34,7 +34,7 @@ You may then invoke elements of the orb in your configuration by referencing ele
 
 CircleCI では Web ベースのレジストリビューアがパブリッシュされているため、Orbs に関するドキュメントを自動的に生成できます。 You can always pull the source of orbs directly as well. たとえば、`circleci orb source circleci/hello-build@0.01` を実行できます。
 
-### ローカルテストでのビルドエラー
+## Build Error When Testing Locally
 
 - 質問：ローカルでのテストで以下のエラーが表示されるのはなぜですか？
 
@@ -47,7 +47,7 @@ CircleCI では Web ベースのレジストリビューアがパブリッシュ
 
 - 回答：このエラーを解決するには、設定で `circleci config process` を実行し、その設定をディスクに保存します。 次に、処理された設定に対して `circleci local execute` を実行します。
 
-### 再実行のエラー
+## Rerun Error
 
 - 質問：同じワークフローを再実行すると以下のエラーが表示されるのはなぜですか？
 
@@ -56,7 +56,7 @@ CircleCI では Web ベースのレジストリビューアがパブリッシュ
 
 - 回答：スペースを挿入してから削除するなど、何らかの変更を加えてください。 変更が発生しない限り、設定は再コンパイルされません。 設定の処理が行われてから、コンパイルされたコードがワークフローコンダクターに渡されます。 このため、リビルドをトリガーしたワークフローコンダクターには、元の 2.1 コンフィグに関する情報は伝わっていません。
 
-### 実行時に環境変数が渡されないエラー
+## Environment Variables Not Being Passed at Runtime
 
 設定を 2.0 互換の形式に変換しようとすると、実行時に環境変数が渡されないことがあります。 たとえば、GitHub リポジトリ (`https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml` など) でシンプルな設定を作成した場合は、以下のように指定してコンフィグを呼び出します。
 
@@ -99,25 +99,25 @@ workflows:
     file directlySuccess!
     
 
-### 出力のログ
+## Logging Outputs
 
 - Question: Is there a standard way to log output? For example, Jenkins plugins provide console links to show the log output and provide hooks to log those messages. It is possible to log `stdout`, but is there a better way to log those log messages?
 
 - 回答：CircleCI では、実行されたステップはすべてログに記録されるため、ステップからの出力はコンソールに表示されます。 SSH を使用し、`echo` によって直接出力することができます。 CircleCI には、コンソールへの出力以外にログ機能はありません。
 
-### ビルドの失敗
+## Failing Builds
 
 - 質問：Orb を呼び出すジョブを Orb 内部から意図的に失敗させるには、どうしたらよいですか？
 
 - 回答：シェルから 0 以外のステータスコードを返すことで、ジョブをいつでも失敗させることができます。 また、`run: circleci-agent step halt` をステップとして使用して、ジョブを失敗させずに終了することも可能です。
 
-### CircleCI プライベート環境での Orbs 使用
+## Private Installation of CircleCI When Using Orbs
 
 - 質問：Orbs で作業する際に CircleCI Server のプライベート環境を使用できますか？
 
 - 回答：いいえ。 CircleCI Server does not currently support the use of orbs.
 
-### 他の Orbs での Orb エレメントの使用
+## Using Orb Elements For Other Orbs
 
 - 質問：Orb を独自に作成する際に、別の Orb のエレメントを使用することはできますか?
 
@@ -140,7 +140,7 @@ workflows:
             param1: "hello"
   ```
 
-### Using 3rd Party Orbs
+## Using 3rd Party Orbs
 
 * Question: Why do I receive an error message when trying to use a 3rd party orb?
 
@@ -158,7 +158,7 @@ To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" an
 
 **メモ：**承認済み Orbs (CircleCI によるレビューと承認を経てパブリッシュされた Orbs) を使用する場合、この設定は必要ありません。 サードパーティによってオーサリングされた Orbs の認証プログラムはまだ提供されていませんが、近いうちに整備される予定です。
 
-## 関連項目
+## See Also
 
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
