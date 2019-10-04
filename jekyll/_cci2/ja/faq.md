@@ -23,7 +23,7 @@ CircleCI の従業員がユーザーの許諾を得ずにコードを見るこ�
 
 ### CircleCI 1.0 から 2.0 へ移行するメリットは？
 {:.no_toc}
-- CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
+- CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle.
 - In 2.0, Jobs are broken into Steps. ジョブ内のそれぞれのステップは自由に編集でき、ビルドの方法を好きなように、柔軟にカスタマイズすることが可能になりました。  
   
 - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
@@ -69,7 +69,7 @@ CircleCI 2.0 はプロジェクトの内容から推測して変換するよう�
 
 - **オンプレミス型** - AWS などと同じようにユーザーが CircleCI のインストールと管理を行います。ファイアウォール環境におけるサーバーの初期設定とメンテナンスも、ユーザー自身がデータセンターのポリシーにしたがって実施します。 自在なカスタマイズや新バーションへのアップグレードの制御など、あらゆる管理権限があります。
 
-### どうして CircleCI Enterprise という名称をやめたのですか？ 
+### どうして CircleCI Enterprise という名称をやめたのですか？
 {:.no_toc}
 Enterprise はファイアウォールのあるオンプレミス環境で利用可能なオプションを指すものでした。 ただ、ユーザーの皆様や CircleCI のスタッフにとってまぎらわしい用語でもありました。
 
@@ -162,7 +162,7 @@ A full list of available timezone options is [available on Wikipedia](https://en
 
 ### Can I use `store_test_results` with Workflows?
 
-{:.no_toc} You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
+{:.no_toc} You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timing-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
 
 ### Can I use Workflows with CircleCI 1.0?
 
@@ -238,7 +238,7 @@ Unfortunately, Windows is not available on server installed versions of CircleCI
 
 ### Container Based Plans
 
-#### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？ 
+#### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？
 {:.no_toc}
 - Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
 
@@ -290,7 +290,7 @@ For example, the 25,000 credit package would provide 2,500 build minutes when us
 
 {:.no_toc} You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
-- マシンサイズを選べる機能などを利用するには、1 アクティブユーザーあたり $15/月が必要です。 
+- マシンサイズを選べる機能などを利用するには、1 アクティブユーザーあたり $15/月が必要です。
 - コンピューティングに対する毎月の料金は、従量課金制（クレジット）になります。クレジットの月間消費量はマシンのサイズと使用した時間で決まります。
 - Docker レイヤーキャッシュ（DLC）に対する料金は、コンピューティングに対する料金同様、使用回数による従量課金制（クレジット）になります。
 
