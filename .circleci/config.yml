@@ -118,7 +118,7 @@ jobs:
           paths:
             - api
 
-  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
+  # The main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
   # and puts everything in it's place for a Jekyll build.
   build:
     executor:
