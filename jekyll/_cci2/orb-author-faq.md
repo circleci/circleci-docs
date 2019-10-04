@@ -35,7 +35,7 @@ Read more in our [Orbs Quickstart]({{site.baseurl}}/2.0/orb-author/#orbs-quickst
 
 * Question: How do I protect a user's API tokens and other sensitive information?
 
-* Answer: Utilize the "env_var_name" parameter type for the API key parameter. This parameter type will only accept POSIX valid environment variable name strings as valid. In the parameter description it is best to mention to the user to add this environment variable. 
+* Answer: Utilize the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX  environment variable name strings as valid input. In the parameter description it is best to mention to the user to add this environment variable. 
 
 Read more:
 * [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
@@ -44,7 +44,7 @@ Read more:
 ## Environment Variables
 
 * Question: How can I require a user to add an environment variable?
-* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change, and assign it the correct default value. In the parameter description let the user know if this value should not be changed. In either event instruct the user where they can obtain their API key. 
+* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. In either event instruct the user where they can obtain their API key. 
 
 Consider validating required environment variables. [See more]({{site.baseurl}}/2.0/orbs-best-practices/#commands).
 
@@ -64,7 +64,7 @@ CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-co
 
 **Bash**
 
-Bash is the preferred language as it is most commonly available among all available executors. Bash can be (and should) easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell MacOS and Linux will be Bash.
+Bash is the preferred language as it is most commonly available among all available executors. Bash can be (and should) easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be Bash.
 
 **Interactive Interpreter (Ex: Python)**
 
