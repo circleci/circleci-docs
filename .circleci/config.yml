@@ -10,7 +10,7 @@ orbs:
 
 # Yaml References enable us to DRY our our config by sharing variables across multiple jobs.
 # In this case, we are commonly using the "workspaces" feature to share
-# build artifacts and files across jobs. For example, we build our Javascript
+# build artifacts and files across jobs. For example, we build our Javascript and
 # persist it to a workspace to be made available when the Jekyll site builds.
 references:
   workspace_root: &workspace_root
