@@ -66,7 +66,7 @@ jobs:
           paths:
             - js
 
-  build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
+  build_server_pdfs: # this job builds pdf versions of the Server Administration documentation and persists them to the workspace.
     executor:
       name: ruby/default # we use the same ruby orb + tag across multiple jobs
       tag: '2.6.3-node-browsers'
