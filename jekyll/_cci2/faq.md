@@ -22,8 +22,8 @@ See the CircleCI [security policy]({{ site.baseurl }}/2.0/security/) for more de
 
 ### Why migrate from CircleCI 1.0 to 2.0?
 {:.no_toc}
-- CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle. 
-- In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want. 
+- CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle.
+- In 2.0, Jobs are broken into Steps. Compose these Steps within a Job at your discretion, giving you greater flexibility to run your build the way you want.
 - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
 ### How do I migrate from Jenkins to CircleCI 2.0?
@@ -38,7 +38,7 @@ Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add 
             echo "Arbitrary multi-line bash"
             echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
 ```
-            
+
 Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.           
 
 ### Does CircleCI 2.0 run inference commands?
@@ -67,9 +67,9 @@ Yes, CircleCI 2.0 is now available to enterprise clients, see [Administrator's O
 
 - **Server** - You install and manage CircleCI, through a service like AWS, behind a firewall that your team sets up and maintains according to your datacenter policy. You have full administrative control for complete customization and manage upgrades as new versions are released.
 
-### Why did you change the name from CircleCI Enterprise? 
+### Why did you change the name from CircleCI Enterprise?
 {:.no_toc}
-The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees. 
+The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
 
 CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
 
@@ -99,13 +99,13 @@ In order to keep the system stable for all CircleCI customers, we implement diff
 {:.no_toc}
 If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
-### I got an error saying "You have met the maximum number of active users allowed for your plan per billing period." 
+### I got an error saying "You have met the maximum number of active users allowed for your plan per billing period."
 {:.no_toc}
 Configure your plan and add user seats to ensure your organization has enough seats for future billing periods. If you have questions or need assistance, please reach out to billing@circleci.com.
 
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {:.no_toc}
-There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased. 
+There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased.
 
 ### How do Docker image names work? Where do they come from?
 {:.no_toc}
@@ -150,45 +150,45 @@ In this example, the timezone is set for both the primary image and an additiona
 
 A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
-## Workflows 
+## Workflows
 
 ### Can I use the API with Workflows?
 {:.no_toc}
 Yes. Refer to the [Enabling Pipelines]({{ site.baseurl }}/2.0/build-processing/) document for instructions and links to the API endpoint.
- 
+
 ### Can I use the Auto-cancel feature with Workflows?
 {:.no_toc}
 Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
 
 ### Can I use `store_test_results` with Workflows?
 {:.no_toc}
-You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timings-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
- 
+You can use `store_test_results` in order to populate your Test Summary section with test results information and for [timing-based test-splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#splitting-by-timing-data). Test timings data is available for 2.0 with Workflows, using data from a job with the same name going back 50 builds.
+
 ### Can I use Workflows with CircleCI 1.0?
  {:.no_toc}
 This feature only exists on CircleCI 2.0. In order to use Workflows, you must first be building on CircleCI 2.0.
- 
+
 ### Can I use Workflows with the Installable CircleCI?
 {:.no_toc}
 Yes, Workflows are available in CircleCI as part of the 2.0 option for enterprise clients. Refer to the [Administrator's Overview]({{ site.baseurl }}/2.0/overview) for installation instructions.
- 
+
 ### How many jobs can I run at one time?
 {:.no_toc}
 The number of containers in your plan determines the number of jobs that may be run at one time. For example, if you have ten workflow jobs ready to run, but only five containers in your plan, only five jobs will run.
 Using Workflow config you can run multiple jobs at once or sequentially. You can fan-out (run multiple jobs at once) or fan-in (wait for all the jobs to complete before executing the dependent job).
- 
+
 ### Do you plan to add the ability to launch jobs on both Linux and Mac environments in the same workflow?
 {:.no_toc}
 Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker) document.
- 
+
 ### Is it possible to split the `config.yml` into different files?
 {:.no_toc}
 Splitting `config.yml` into multiple files is not yet supported.
- 
+
 ### Can I build only the jobs that changed?
 {:.no_toc}
 No.
- 
+
 ### Can I build fork PR’s using Workflows?
 {:.no_toc}
 Yes!
@@ -201,13 +201,13 @@ Yes, for the CircleCI hosted application. For example, to run a workflow at 4 PM
 {:.no_toc}
 Coordinated Universal Time (UTC) is the time zone in which schedules are interpreted.
 
-### Why didn’t my scheduled build run? 
+### Why didn’t my scheduled build run?
 {:.no_toc}
-You must specify exactly the branches on which the scheduled workflow will run and push that 'config.yml' to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch. 
+You must specify exactly the branches on which the scheduled workflow will run and push that 'config.yml' to the branch you want to build. A push on the `master` branch will only schedule a workflow for the `master` branch.
 
 ### Can I schedule multiple workflows?
 {:.no_toc}
-Yes, every workflow with a `schedule` listed in the `trigger:` key will be run on the configured schedule. 
+Yes, every workflow with a `schedule` listed in the `trigger:` key will be run on the configured schedule.
 
 ### Are scheduled workflows guaranteed to run at precisely the time scheduled?
 {:.no_toc}
@@ -246,7 +246,7 @@ Unfortunately, Windows is not available on server installed versions of CircleCI
 
 #### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
-* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
+* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
 
 * macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
 
@@ -262,7 +262,7 @@ Yes, the billing is associated with the organization. You can buy while within t
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
-#### Why am I being charged for remote Docker spin up time? 
+#### Why am I being charged for remote Docker spin up time?
 {:.no_toc}
 When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
 
@@ -272,7 +272,7 @@ When CircleCI spins up a remote docker instance, it requires the primary contain
 
 #### How do the new pricing plans affect me as a customer?
 {:.no_toc}
-For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider. 
+For the vast majority of customers, you can keep your current plan for now and this simply represents a new option you may want to consider.
 
 #### What are credits?
 {:.no_toc}
@@ -286,7 +286,7 @@ using a single machine at the default rate of 10 credits per minute. The same pa
 {:.no_toc}
 Yes, similarly with container-based plans, you can go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan. The child organizations will bill all credits and other usage to the parent org.
 
-#### If a container is used for under one minute, do I have to pay for a full minute? 
+#### If a container is used for under one minute, do I have to pay for a full minute?
 {:.no_toc}
 You pay to the next nearest credit. First we round up to the nearest second, and then up to the nearest credit.
 
@@ -298,7 +298,7 @@ Every month, you are charged for your selected credit package at the beginning o
 {:.no_toc}
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
-- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user. 
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user.
 - Compute is paid for monthly in credits for the machine size and duration you use.
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
