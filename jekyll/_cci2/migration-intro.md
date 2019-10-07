@@ -7,11 +7,17 @@ categories: [migration]
 order: 1
 ---
 
+Our migration guides cover two main areas:
 
-Get started by reviewing tips and tricks for migration, learning about the config-translator, and getting specific tutorials for your platform.
+* Migrating to CircleCI from other CI/CD providers.
+  * [Migrating from Travis CI]({{ site.baseurl }}/2.0/migrating-from-travis/)
+  * [Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/)
+  * [Migrating from GitLab]({{ site.baseurl }}/2.0/migrating-from-gitlab/)
+* Migrating your projects from our 1.0 architecture to CircleCI 2.0
 
-- [Migrating from Travis CI]({{ site.baseurl }}/2.0/migrating-from-travis/)
-- [Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/)
+
+
+If you're here to learn about migrating from CircleCI 1.0 to 2.0, get started by reviewing tips and tricks for migrating to 2.0, learning about the config-translator, and getting specific tutorials for your platform.
 
 <hr>
 
