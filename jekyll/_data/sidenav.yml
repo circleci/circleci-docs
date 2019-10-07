@@ -61,6 +61,10 @@ en:
           link: 2.0/config-translation/
         - name: Migrating from TravisCI
           link: 2.0/migrating-from-travis/
+        - name: Migrating from Jenkins
+          link: 2.0/migrating-from-jenkins/
+        - name: Migrating from GitLab
+          link: 2.0/migrating-from-gitlab/
 
 - name: Configuration
   icon: docs/config.svg
