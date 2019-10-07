@@ -53,9 +53,11 @@ For more detailed information about pipelines and how you can use them in your w
 
 ## Insights
 
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed API Reference Guide (*add link here for the API Reference Guide when ready*) for these data API endpoints has been provided in the documentation, including:
+The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed *API Reference Guide* (*add link here for the API Reference Guide when ready*) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
 
-*Add some data-specific API endpoints here*
+- `GET /{vcs_slug}/{org_name}/projects/{project_name}`
+- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
+- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
 
 ## Changes In Endpoints
 
