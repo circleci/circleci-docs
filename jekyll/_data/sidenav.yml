@@ -51,20 +51,14 @@ en:
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
-        - name: Tips for Migrating to 2.0
-          link: 2.0/migration/
-        - name: Migrating a Linux Project
-          link: 2.0/migrating-from-1-2/
-        - name: Migrating an iOS Project
-          link: 2.0/ios-migrating-from-1-2/
-        - name: Using the config-translator
-          link: 2.0/config-translation/
         - name: Migrating from TravisCI
           link: 2.0/migrating-from-travis/
         - name: Migrating from Jenkins
           link: 2.0/migrating-from-jenkins/
         - name: Migrating from GitLab
           link: 2.0/migrating-from-gitlab/
+        - name: Migrating from Buildkite
+          link: 2.0/migrating-from-buildkite/
 
 - name: Configuration
   icon: docs/config.svg

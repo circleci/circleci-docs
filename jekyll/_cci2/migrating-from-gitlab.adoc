@@ -8,14 +8,14 @@
 
 This document provides an overview of how to migrate from GitLab to CircleCI. 
 
-== Prerequisites
+== Source Control Setup
 
 If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
 * https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into BitBucket]
 
-=== Migration Tips
+=== GitHub Enterprise
 
 Following are the steps required for using the git command line tool to import your GitLab repo into GitHub Enterprise:
 
@@ -39,8 +39,9 @@ git push enterprise --mirror
 
 If you need to export other GitLab artifacts, follow the GitLab documentation on https://docs.gitlab.com/ee/user/project/settings/import_export.html#exporting-a-project-and-its-data[exporting a project].
 
-== Building projects
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
+
+== Build Configuration
 
 If you are using GitLab's CI/CD, you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 

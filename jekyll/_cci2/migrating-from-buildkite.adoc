@@ -1,0 +1,200 @@
+= Migrating from Buildkite
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+:sectanchors:
+
+This document provides an overview of how to migrate from Buildkite to CircleCI. 
+
+== Source Control Setup
+First you will need to ensure your source code is located in either to GitHub or BitBucket. See the following for details on how to import your code:
+
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+
+=== GitHub Enterprise
+
+Following are the steps required for using the git command line tool to import your code into GitHub Enterprise:
+
+. Create an empty repository on your GitHub Enterprise instance.
+. Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
++
+----
+git clone https://external-host.com/extuser/repo.git --bare
+----
+. Add your GitHub Enterprise repository as a remote reference in your local clone.
++
+----
+cd [repo-name]
+git remote add enterprise git@[hostname]:[owner]/[repo-name].git
+----
+. Push all local references (refs/*) up to your remote GitHub Enterprise repository.
++
+----
+git push enterprise --mirror
+----
+
+Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
+
+
+== Build Configuration
+
+Next, you'll need to migrate your build configuration. On Buildkite, the build configuration is either defined in the web interface or in a file called `.pipeline.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+
+First, create a CircleCI build configuration file.  In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
+
+The Buildkite and CircleCI configurations will be different. It may be helpful to have both Buildkite and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+
+* https://buildkite.com/docs/pipelines/defining-steps[Buildkite Pipeline Reference]
+
+* https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
+
+
+Some differences that are worth calling out:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| Buildkite | CircleCI
+
+2+h| Define a job that executes a single build step. 
+
+a|
+----
+steps:
+  - command: 'execute-script-for-job1.sh'
+----
+
+a|
+----
+jobs:
+  job1:
+    steps:
+      - checkout
+      - run: "execute-script-for-job1"
+----
+
+2+h| Specify a docker image to use for a job.
+
+a|
+----
+steps:
+  - label: 'job1'
+    plugins:
+      - docker#v3.2.0:
+          image: 'node:10'
+
+----
+
+a|
+----
+jobs:
+  job1:
+    docker:
+      - image: node:10
+
+----
+
+2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel.  Once they’re done, Job3 runs.  Once Job3 is done, Job4 runs.
+
+a|
+----
+steps:
+  - label: 'job1'
+    command: 'make build dependencies'
+ 
+  - label: 'job2'
+    command: 'make build artifacts'
+
+  - wait
+
+  - label: 'job3'
+    command: 'make test'
+
+  - wait
+
+  - label: 'job4'
+    command: 'make deploy'
+----
+
+a|
+----
+version: 2
+jobs:
+  job1:
+    steps:
+      - checkout
+      - run: make build dependencies
+  job2:
+    steps:
+      - run: make build artifacts
+  job3:
+    steps:
+      - run: make test
+  job4:
+    steps:
+      - run: make deploy
+
+workflows:
+  version: 2
+  jobs:
+    - job1
+    - job2
+    - job3
+        requires:
+          - job1
+          - job2
+    - job4
+        requires:
+          - job3
+----
+
+2+h| Execute jobs on multiple platforms. Buildkite uses tags to identify build agents.  CircleCI provides executors for docker, Linux and MacOS.
+
+a|
+----
+steps:
+  - label: 'ubuntuJob'
+    agents:
+      ubuntu: '16.04'
+    command: 'echo "Hello, $USER!"'
+
+  - label: 'osxJob'
+    agents:
+      osx: 'true'
+    command: 'echo "Hello, $USER!"'
+
+----
+
+a|
+----
+jobs:
+  ubuntuJob:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: echo "Hello, $USER!"
+  osxJob:
+    macos:
+      xcode: "10.1.0"
+    steps:
+      - checkout
+      - run: echo "Hello, $USER!"
+----
+|===
+
+For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
+
+. Execution of shell scripts and Docker compose files
+. Workflows
+. Artifacts
+. Caching
+. Triggers
+. Performance options
+
+
+**Tips provided by ImagineX Consulting**
