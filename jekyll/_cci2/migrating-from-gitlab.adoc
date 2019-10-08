@@ -45,9 +45,9 @@ Once you have imported your code into GitHub or BitBucket, you can start creatin
 
 If you are using GitLab's CI/CD, you will need to migrate your build configuration. On GitLab, the build configuration is defined in a file called `.gitlab-ci.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file.  In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`.  Next, follow the CircleCI documentation https://circleci.com/docs/2.0/config-intro/[here] to learn how to configure the `.config.yml` file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation https://circleci.com/docs/2.0/config-intro/[here] to learn how to configure the `.config.yml` file.
 
-The GitLab and CircleCI configurations will be different.  It may be helpful to have both GitLab and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+The GitLab and CircleCI configurations will be different. It may be helpful to have both GitLab and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
 * https://docs.gitlab.com/ee/ci/yaml/[GitLab YML Reference]
 
@@ -227,7 +227,7 @@ jobs:
 ----
 |===
 
-For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform.  We recommend this order:
+For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
 . https://circleci.com/docs/2.0/executor-types/[Pick your executor]
 . https://circleci.com/docs/2.0/configuration-reference/#checkout[Checkout code]

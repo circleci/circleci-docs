@@ -59,6 +59,8 @@ en:
           link: 2.0/migrating-from-gitlab/
         - name: Migrating from Buildkite
           link: 2.0/migrating-from-buildkite/
+        - name: Migrating from Buildkite
+          link: 2.0/migrating-from-azuredevops/
 
 - name: Configuration
   icon: docs/config.svg
