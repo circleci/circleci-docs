@@ -12,7 +12,7 @@ This document describes various questions and technical issues that you may find
 * TOC
 {:toc}
 
-### Downloading, Integrating, and Testing Orbs
+## Downloading, Integrating, and Testing Orbs
 {:.no_toc}
 
 * Question: How do I download, integrate and test orbs?
@@ -35,7 +35,7 @@ workflows:
 
 CircleCI publishes a web-based registry viewer so orbs documentation can be auto-generated. You can always pull the source of orbs directly as well. For example, you can run `circleci orb source circleci/hello-build@0.01`
 
-### Build Error When Testing Locally
+## Build Error When Testing Locally
 
 * Question: Why do I get the following error when testing locally:
 
@@ -50,7 +50,7 @@ You attempted to run a local build with version 2.1 of configuration.
 
 * Answer: To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
 
-### Rerun Error
+## Rerun Error
 
 * Question: Why do I get the following error when re-running the same workflow:
 
@@ -60,7 +60,7 @@ only certified orbs are permitted in this project.
 
 * Answer: Try making a whitespace change or similar. Your configuration will not recompile until you have made a change. Configuration processing occurs before the compiled code is passed into the workflows conductor. Because of that, the workflows conductor (where you trigger the rebuild) knows nothing of the original 2.1 config.
 
-### Environment Variables Not Being Passed at Runtime
+## Environment Variables Not Being Passed at Runtime
 
 Occasionally, when you try to convert a configuration to a 2.0 compatible format, environment variables may not be passed at runtime. For example, if you create a simple configuration in your GitHub repository (for example `https://github.com/yourusername/circle-auto/blob/master/.circleci/echo.yml`) and then call the config using:
 
@@ -105,25 +105,25 @@ echo file $(AUTO_FILE) dir $(AUTO_DIR)
 file directlySuccess!
 ```
 
-### Logging Outputs
+## Logging Outputs
 
 * Question: Is there a standard way to log output? For example, Jenkins plugins provide console links to show the log output and provide hooks to log those messages. It is possible to log `stdout`, but is there a better way to log those log messages?
 
 * Answer: In CircleCI, all steps that run are logged, so any output from those steps will appear in the console. You can use SSH to `echo` things directly. CircleCI does not have a separate logging facility outside the console output.
 
-### Failing Builds
+## Failing Builds
 
 * Question: How can I intentionally fail a job that invokes an orb from within an orb?
 
 * Answer: You can always return a non-zero status code from the shell to fail the job. You can also use `run: circleci-agent step halt` as a step to exit the job without failing.
 
-### Private Installation of CircleCI When Using Orbs
+## Private Installation of CircleCI When Using Orbs
 
 * Question: May I use a private installation of CircleCI Server when using working with orbs?
 
 * Answer: No. CircleCI Server does not currently support the use of orbs.
 
-### Using Orb Elements For Other Orbs
+## Using Orb Elements For Other Orbs
 
 * Question: May I use elements from a different orb when creating my own orb?
 
@@ -146,7 +146,7 @@ file directlySuccess!
             param1: "hello"
   ```
 
-### Using 3rd Party Orbs
+## Using 3rd Party Orbs
 
 * Question: Why do I receive an error message when trying to use a 3rd party orb?
 
