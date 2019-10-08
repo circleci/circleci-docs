@@ -6,13 +6,15 @@ categories:
 description: CircleCI コンテナの使用方法
 ---
 
-This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs. For more information on what containers are and why they are useful, see this [Docker overview](https://www.docker.com/resources/what-container).
+This document describes the basics of containers and how to leverage the containers in your plan to speed up your job and workflow runs. Please note: container-based plans will soon be deprecated in favor of using CircleCI's new [usage plans](https://circleci.com/pricing/usage/). If your builds are queuing with a Container-based plan, consider signing up for a CircleCI usage-based plan to mitigate queuing and to enjoy other benefits.
+
+You can read about the new usage-based plans in detail [in this document]({{ site.baseurl }}/2.0/credits/).
 
 ## 概要
 
 Every change committed to your version control system triggers CircleCI to checkout your code and run your job workflow inside a fresh, on-demand, isolated container with access to the following, depending on your plan:
 
-- **同時処理** - 複数のコンテナを使用して、複数のビルドを同時に実行できます。 同時処理を行うには、[ジョブの実行を Workflow で制御する]({{ site.baseurl }}/ja/2.0/workflows/)のページを参考に開発 Workflows を設定し、[2.0 コンフィグファイルのサンプル]({{ site.baseurl }}/ja/2.0/sample-config/#sample-configuration-with-parallel-jobs)のページに示す方法でジョブを並列実行してください。
+- **同時処理** - 複数のコンテナを使用して、複数のビルドを同時に実行できます。 To take advantage of concurrency, configure your development workflow using the [Orchestrating Workflows document]({{ site.baseurl }}/2.0/workflows/) and run your jobs in parallel as shown in the [Sample 2.0 Config Files document]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-parallel-jobs).
 
 - **並列処理** - テストを複数のコンテナに分割することで、テスト全体のスピードを大幅に向上できます。 Update your `.circleci/config.yml` file to run your tests in parallel as described in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document. コンフィグファイルを変更してテストの分割と並列処理を行い、ビルド時間を短縮する方法については、[テストを並列実行する]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)のページをご覧ください。
 
