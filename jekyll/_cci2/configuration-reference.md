@@ -404,11 +404,13 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. If this config is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below. 
+The `resource_class` feature allows configuring CPU and RAM resources for each job. If this config is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
 **Note:** This feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
+
+\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
 
 ##### Docker Executor
 
@@ -477,14 +479,18 @@ Class             | vCPUs | RAM
 ------------------|-------|-----
 medium (default)  | 4     | 15GB
 
+There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
+
 ###### Example Usage
 ```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
 jobs:
   build:
-    machine:
-      image: windows-server-2019-vs2019:201908-06
-    resource_class: windows.medium
-    shell: powershell.exe -ExecutionPolicy Bypass
+    executor: win/vs2019
     steps:
       ... // other config
 ```
@@ -493,24 +499,14 @@ jobs:
 
 Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
 -----------------|-------|--------------|------|-----------------
-gpu.small\*      | 16    | 122GiB        | 1    | 8
-gpu.medium\*     | 32    | 244GiB       | 2    | 16
-gpu.large\*      | 64    | 488GiB       | 4    | 32
+1GPU\*           | 16    | 122GiB       | 1    | 8
+2GPU\*           | 32    | 244GiB       | 2    | 16
+4GPU\*           | 64    | 488GiB       | 4    | 32
 {: class="table table-striped"}
 
-###### Example Usage
-```yaml
-jobs:
-  build:
-    machine: true
-    resource_class: gpu.small
-    steps:
-      ... // other config
-```
-
-\*_Requires review by support team. Open a support ticket [here](https://support.circleci.com/hc/en-us/requests/new)._
-
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+
+If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 #### **`steps`**
 
@@ -686,7 +682,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ###### Ending a Job from within a `step`
 
-A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute. 
+A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
