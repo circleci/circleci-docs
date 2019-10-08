@@ -9,7 +9,7 @@ NOTE: CircleCI Server v2.17.x uses the CircleCI 2.0 architecture.
 
 The following sections provide planning information, system requirements and step-by-step instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 
-Refer to the https://circleci.com/server/changelog[changelog] for what's new and fixed in this release.
+Refer to the https://https://circleci.com/docs/2.0/v.2.18-overview[What's New] page for full details of what's new and fixed in this release.
 
 If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation,Upgrading a Server Installation>>.
 
