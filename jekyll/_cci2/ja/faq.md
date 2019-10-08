@@ -25,7 +25,7 @@ CircleCI の従業員がユーザーの許諾を得ずにコードを見るこ�
 {:.no_toc}
 - CircleCI 2.0 includes a significant rewrite of container utilization to run more jobs faster and to prevent available containers from sitting idle.
 - In 2.0, Jobs are broken into Steps. ジョブ内のそれぞれのステップは自由に編集でき、ビルドの方法を好きなように、柔軟にカスタマイズすることが可能になりました。  
-  
+    
 - 2.0 Jobs support almost all public Docker images and custom images with your own dependencies specified.
 
 ### Jenkins から CircleCI 2.0 へ移行するには？
@@ -236,32 +236,6 @@ Unfortunately, Windows is not available on server installed versions of CircleCI
 
 ## Billing
 
-### Container Based Plans
-
-#### ビルドがキューに入らないようコンテナ数を増やしたい。現在の契約プランからアップグレードするには？
-{:.no_toc}
-- Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. 表示される入力欄に増やしたい数をタイプしたら、[Pay Now] ボタンをクリックして支払方法の設定画面へと進みます。
-
-- macOS プランの変更 : CircleCI で [Settings] → [Plan Overview] 画面を表示し、[Change Plan] ボタンをクリックします。 [Startup] もしくは [Growth] を選び、[Pay Now] ボタンをクリックして支払い方法の設定画面へと進みます。
-
-#### 異なる Org 間で契約プランを共有できますか？ その場合、請求を 1 箇所にまとめることは？
-
-{:.no_toc} Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
-
-#### 個人アカウントではなく Org 宛に請求されるよう設定できますか？
-
-{:.no_toc} Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
-
-#### 課金におけるコンテナの定義は？
-
-{:.no_toc} A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
-
-#### Why am I being charged for remote Docker spin up time?
-
-{:.no_toc} When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
-
-* * *
-
 ### Credit Usage Plans
 
 #### How do the new pricing plans affect me as a customer?
@@ -290,19 +264,19 @@ For example, the 25,000 credit package would provide 2,500 build minutes when us
 
 {:.no_toc} You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
-- マシンサイズを選べる機能などを利用するには、1 アクティブユーザーあたり $15/月が必要です。
-- コンピューティングに対する毎月の料金は、従量課金制（クレジット）になります。クレジットの月間消費量はマシンのサイズと使用した時間で決まります。
-- Docker レイヤーキャッシュ（DLC）に対する料金は、コンピューティングに対する料金同様、使用回数による従量課金制（クレジット）になります。
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user.
+- Compute is paid for monthly in credits for the machine size and duration you use.
+- Docker Layer Caching (DLC) is paid for with credits per usage, similar to compute credits.
 
 #### What constitutes an *Active User*?
 {:.no_toc}
 An `active user` is any user who triggers the use of compute resources on non-OSS projects. This includes activities such as:
 
 - Commits from users that trigger builds, including PR Merge commits.
-- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs). 
-  - Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
-  - Using scheduled workflows
-  - Machine users
+- Re-running jobs in the CircleCI web application, including [SSH debug]({{ site.baseurl }}/2.0/ssh-access-jobs).
+- Approving [manual jobs]({{ site.baseurl }}/2.0/workflows/#holding-a-workflow-for-a-manual-approval) (approver will be considered the actor of all downstream jobs).
+- Using scheduled workflows
+- Machine users
 
 **Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
@@ -330,6 +304,38 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 - On the annual renewal date if your team is on the annual plan.
 - On the last day of the month if your team is on the annual plan and there is an outstanding balance from adding new users or utilizing more credits.
 - If you are on the Performance plan, anytime your team’s credit balance drops below your preset limit, another credit purchase will be processed.
+
+#### Are there credit plans for open source projects?
+{:.no_toc}
+Open source organizations receive 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of 4 concurrent jobs running.
+
+* * *
+
+### Container Based Plans
+
+#### How do I upgrade my plan with more containers to prevent queuing?
+{:.no_toc}
+- Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
+
+- macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
+
+#### Is there a way to share plans across organizations and have them billed centrally?
+
+{:.no_toc} Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
+
+#### Can I set up billing for an organization, without binding it to my personal account?
+
+{:.no_toc} Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
+
+#### What is the definition of a container in the context of billing?
+
+{:.no_toc} A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
+
+#### Why am I being charged for remote Docker spin up time?
+
+{:.no_toc} When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
+
+* * *
 
 ## Architecture
 
@@ -371,5 +377,5 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 - **Windows:** We are currently offering Early Access to Windows. Please take a look at [this Discuss post](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) for details on how to get access.
 
 ### Which CPU architectures does CircleCI support?
-{:.no_toc}
+ {:.no_toc}
 `amd64` is the only supported CPU architecture.
