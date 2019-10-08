@@ -86,7 +86,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
@@ -139,7 +139,7 @@ working_directory | N | String | In which directory to run the steps. Default: `
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -404,43 +404,109 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-**Note:** The `resource_class` feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. If this config is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below.
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-Class       | vCPUs       | RAM
-------------|-----------|------
-small       | 1 | 2GB
-medium (default) | 2 | 4GB
-medium+     | 3 | 6GB
-large       | 4 | 8GB
-xlarge      | 8 | 16GB
-2XL         | 16 | 32GB
-2XL+        | 20 | 40GB
-1GPU        | 16 | 122GiB
-2GPU        | 32 | 244GiB
-4GPU        | 64 | 488GiB
+**Note:** This feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
+
+\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
+
+##### Docker Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+small            | 1     | 2GB
+medium (default) | 2     | 4GB
+medium+          | 3     | 6GB
+large            | 4     | 8GB
+xlarge           | 8     | 16GB
+2xlarge\*        | 16    | 32GB
+2xlarge+\*       | 20    | 40GB
 {: class="table table-striped"}
 
-**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.
-
-Below is an example of specifying the `large` `resource_class`.
-
+###### Example Usage
 ```yaml
 jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 3
-    resource_class: large
+    resource_class: xlarge
     steps:
-      - run: make test
-      - run: make
+      ... // other config
 ```
 
+##### Machine Executor (Linux)
+
+Class            | vCPUs | RAM
+-----------------|-------|-------
+medium (default) | 2     | 7.5GB
+large            | 4     | 15GB
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: large
+    steps:
+      ... // other config
+```
+
+##### macOS Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+medium (default) | 4     | 8GB
+large\*          | 8     | 16GB
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    macos:
+      xcode: "11.0.0"
+    resource_class: large
+    steps:
+      ... // other config
+```
+
+##### Windows Executor
+
+Class             | vCPUs | RAM
+------------------|-------|-----
+medium (default)  | 4     | 15GB
+
+There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
+
+###### Example Usage
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor: win/vs2019
+    steps:
+      ... // other config
+```
+
+##### GPU Executor (Linux)
+
+Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
+-----------------|-------|--------------|------|-----------------
+1GPU\*           | 16    | 122GiB       | 1    | 8
+2GPU\*           | 32    | 244GiB       | 2    | 16
+4GPU\*           | 64    | 488GiB       | 4    | 32
+{: class="table table-striped"}
+
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+
+If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 #### **`steps`**
 
@@ -616,7 +682,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ###### Ending a Job from within a `step`
 
-A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute. 
+A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
