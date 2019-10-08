@@ -84,16 +84,16 @@ commands:
 
 Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
 
-| Key               | Required         | Type   | Description                                                                                                                                                                                                                                                          |
-| ----------------- | ---------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | Y <sup>(1)</sup> | List   | Options for [docker executor](#docker)                                                                                                                                                                                                                               |
-| resource_class    | N                | String | Amount of CPU and RAM allocated to each container in a job. （`docker` Executor でのみ有効）。**注 :** この機能を利用するには有償アカウントが必要です。 Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). |
-| machine           | Y <sup>(1)</sup> | Map    | Options for [machine executor](#machine)                                                                                                                                                                                                                             |
-| macos             | Y <sup>(1)</sup> | Map    | Options for [macOS executor](#macos)                                                                                                                                                                                                                                 |
-| windows           | Y <sup>(1)</sup> | Map    | Options for [windows executor](#windows)                                                                                                                                                                                                                             |
-| shell             | N                | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                            |
-| working_directory | N                | String | In which directory to run the steps.                                                                                                                                                                                                                                 |
-| environment       | N                | Map    | A map of environment variable names and values.                                                                                                                                                                                                                      |
+| Key               | Required         | Type   | Description                                                                                                                                                                                                                                                            |
+| ----------------- | ---------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | Y <sup>(1)</sup> | List   | Options for [docker executor](#docker)                                                                                                                                                                                                                                 |
+| resource_class    | N                | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). |
+| machine           | Y <sup>(1)</sup> | Map    | Options for [machine executor](#machine)                                                                                                                                                                                                                               |
+| macos             | Y <sup>(1)</sup> | Map    | Options for [macOS executor](#macos)                                                                                                                                                                                                                                   |
+| windows           | Y <sup>(1)</sup> | Map    | Options for [windows executor](#windows)                                                                                                                                                                                                                               |
+| shell             | N                | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                              |
+| working_directory | N                | String | In which directory to run the steps.                                                                                                                                                                                                                                   |
+| environment       | N                | Map    | A map of environment variable names and values.                                                                                                                                                                                                                        |
 {: class="table table-striped"}
 
 Example:
@@ -140,7 +140,7 @@ Workflows を **使わない** 場合は、`jobs` マップ内に `build` とい
 | parallelism       | N                | Integer | Number of parallel instances of this job to run (default: 1)                                                                                                                                                                                                                                                                                                                                     |
 | environment       | N                | Map     | 環境変数の名前と値のマップです。                                                                                                                                                                                                                                                                                                                                                                                 |
 | branches          | N                | Map     | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。                                                                                                                                                  |
-| resource_class    | N                | String  | Amount of CPU and RAM allocated to each container in a job. （`docker` Executor でのみ有効）。**注 :** この機能を利用するには有償アカウントが必要です。 Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).                                                                                                                             |
+| resource_class    | N                | String  | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).                                                                                                                           |
 {: class="table table-striped"}
 
 <sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
@@ -406,43 +406,114 @@ A job that was not executed due to configured rules will show up in the list of 
 
 #### **`resource_class`**
 
-**Note:** The `resource_class` feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. If this config is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below.
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-| Class            | vCPUs | RAM    |
-| ---------------- | ----- | ------ |
-| small            | 1     | 2GB    |
-| medium (default) | 2     | 4GB    |
-| medium+          | 3     | 6GB    |
-| large            | 4     | 8GB    |
-| xlarge           | 8     | 16GB   |
-| 2XL              | 16    | 32GB   |
-| 2XL+             | 20    | 40GB   |
-| 1GPU             | 16    | 122GiB |
-| 2GPU             | 32    | 244GiB |
-| 4GPU             | 64    | 488GiB |
+**Note:** This feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
+
+\* *Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access.*
+
+##### Docker Executor
+
+| Class            | vCPUs | RAM  |
+| ---------------- | ----- | ---- |
+| small            | 1     | 2GB  |
+| medium (default) | 2     | 4GB  |
+| medium+          | 3     | 6GB  |
+| large            | 4     | 8GB  |
+| xlarge           | 8     | 16GB |
+| 2xlarge\*      | 16    | 32GB |
+| 2xlarge+\*     | 20    | 40GB |
 {: class="table table-striped"}
 
-**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.
-
-Below is an example of specifying the `large` `resource_class`.
+###### Example Usage
 
 ```yaml
 jobs:
   build:
     docker:
+
       - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 3
-    resource_class: large
+    resource_class: xlarge
     steps:
-      - run: make test
-      - run: make
+      ... // other config
 ```
 
+##### Machine Executor (Linux)
+
+| Class            | vCPUs | RAM   |
+| ---------------- | ----- | ----- |
+| medium (default) | 2     | 7.5GB |
+| large            | 4     | 15GB  |
+{: class="table table-striped"}
+
+###### Example Usage
+
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: large
+    steps:
+      ... // other config
+```
+
+##### macOS Executor
+
+| Class            | vCPUs | RAM  |
+| ---------------- | ----- | ---- |
+| medium (default) | 4     | 8GB  |
+| large\*        | 8     | 16GB |
+{: class="table table-striped"}
+
+###### Example Usage
+
+```yaml
+jobs:
+  build:
+    macos:
+      xcode: "11.0.0"
+    resource_class: large
+    steps:
+      ... // other config
+```
+
+##### Windows Executor
+
+| Class            | vCPUs | RAM  |
+| ---------------- | ----- | ---- |
+| medium (default) | 4     | 15GB |
+
+There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
+
+###### Example Usage
+
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor: win/vs2019
+    steps:
+      ... // other config
+```
+
+##### GPU Executor (Linux)
+
+| Class    | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB) |
+| -------- | ----- | ------------ | ---- | ----------------- |
+| 1GPU\* | 16    | 122GiB       | 1    | 8                 |
+| 2GPU\* | 32    | 244GiB       | 2    | 16                |
+| 4GPU\* | 64    | 488GiB       | 4    | 32                |
+{: class="table table-striped"}
+
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+
+If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 #### **`steps`**
 
@@ -517,7 +588,7 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       make test
 ```
 
-###### *デフォルトのシェルオプション*
+###### *Default shell options*
 
 For jobs that run on **Linux**, the default value of the `shell` option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified). Hence, the shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files.
 
@@ -569,7 +640,7 @@ In general, we recommend using the default options (`-eo pipefail`) because they
 
 For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
 
-###### *background コマンド*
+###### *Background commands*
 
 The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
@@ -582,7 +653,7 @@ The `background` attribute enables you to configure commands to run in the backg
 - run: make test
 ```
 
-###### *簡略化した構文*
+###### *Shorthand syntax*
 
 `run` has a very convenient shorthand syntax:
 
@@ -598,7 +669,7 @@ The `background` attribute enables you to configure commands to run in the backg
 
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
-###### `when` 属性
+###### The `when` Attribute
 
 By default, CircleCI will execute job steps one at a time, in the order that they are defined in `config.yml`, until a step fails (returns a non-zero exit code). After a command fails, no further job steps will be executed.
 
@@ -758,16 +829,16 @@ The cache for a specific `key` is immutable and cannot be changed once written.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
-| Template                                               | Description                                                                                                                                                                                                                                                                                                                                       |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| {% raw %}`{{ .Branch }}`{% endraw %}                   | The VCS branch currently being built.                                                                                                                                                                                                                                                                                                             |
-| {% raw %}`{{ .BuildNum }}`{% endraw %}                 | The CircleCI build number for this build.                                                                                                                                                                                                                                                                                                         |
-| {% raw %}`{{ .Revision }}`{% endraw %}                 | The VCS revision currently being built.                                                                                                                                                                                                                                                                                                           |
-| {% raw %}`{{ .CheckoutKey }}`{% endraw %}              | The SSH key used to checkout the repo.                                                                                                                                                                                                                                                                                                            |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).                                           |
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}       | A base64 encoded SHA256 hash of the given filename's contents. このファイルはリポジトリでコミットしたものであり、かつ現在の作業ディレクトリからの絶対・相対パスで指定する必要があります。 `package.json` や `pom.xml`、`project.clj` のような依存関係を記したマニフェストファイルをここで指定すると便利です。 `restore_cache` と `save_cache` の間でこのファイルが変化しないのが重要なポイントです。ファイル内容が変化すると、`restore_cache` のタイミングで使われるファイルとは異なるキャッシュキーを元にしてキャッシュを保存するためです。 |
-| {% raw %}`{{ epoch }}`{% endraw %}                     | The current time in seconds since the unix epoch.                                                                                                                                                                                                                                                                                                 |
-| {% raw %}`{{ arch }}`{% endraw %}                      | The OS and CPU information. OS や CPU アーキテクチャに合わせてコンパイル済みバイナリをキャッシュするような場合に用います。`darwin amd64` あるいは `linux i386/32-bit` のような文字列になります。                                                                                                                                                                                                              |
+| Template                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {% raw %}`{{ .Branch }}`{% endraw %}                   | The VCS branch currently being built.                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| {% raw %}`{{ .BuildNum }}`{% endraw %}                 | The CircleCI build number for this build.                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| {% raw %}`{{ .Revision }}`{% endraw %}                 | The VCS revision currently being built.                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| {% raw %}`{{ .CheckoutKey }}`{% endraw %}              | The SSH key used to checkout the repo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).                                                                                                                                                                                                          |
+| {% raw %}`{{ checksum "filename" }}`{% endraw %}       | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. |
+| {% raw %}`{{ epoch }}`{% endraw %}                     | The current time in seconds since the unix epoch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| {% raw %}`{{ arch }}`{% endraw %}                      | The OS and CPU information. Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.                                                                                                                                                                                                                                                                                                                                                |
 {: class="table table-striped"}
 
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
@@ -810,11 +881,11 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
-| Key  | Required         | Type   | Description                                                                   |
-| ---- | ---------------- | ------ | ----------------------------------------------------------------------------- |
-| key  | Y <sup>(1)</sup> | String | Single cache key to restore                                                   |
-| keys | Y <sup>(1)</sup> | List   | List of cache keys to lookup for a cache to restore. ただし最初にマッチしたキーのみが復元されます。  |
-| name | N                | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache") |
+| Key  | Required         | Type   | Description                                                                                    |
+| ---- | ---------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| key  | Y <sup>(1)</sup> | String | Single cache key to restore                                                                    |
+| keys | Y <sup>(1)</sup> | List   | List of cache keys to lookup for a cache to restore. Only first existing key will be restored. |
+| name | N                | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")                  |
 {: class="table table-striped"}
 
 <sup>(1)</sup> at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
@@ -951,10 +1022,10 @@ Special step used to persist a temporary file to be used by another job in the w
 
 **Note:** Workspaces are stored for up to 30 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
 
-| Key   | Required | Type   | Description                                                                                                                                                       |
-| ----- | -------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| root  | Y        | String | Either an absolute path or a path relative to `working_directory`                                                                                                 |
-| paths | Y        | List   | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Workspace のルートディレクトリへの相対パスと見なされ、 Workspace のルートディレクトリそのものにすることはできません。 |
+| Key   | Required | Type   | Description                                                                                                                                                                       |
+| ----- | -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| root  | Y        | String | Either an absolute path or a path relative to `working_directory`                                                                                                                 |
+| paths | Y        | List   | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself. |
 {: class="table table-striped"}
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
@@ -1154,19 +1225,19 @@ A job name that exists in your `config.yml`.
 
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
 
-| Key      | Required | Type   | Description                                                                                                                 |
-| -------- | -------- | ------ | --------------------------------------------------------------------------------------------------------------------------- |
-| requires | N        | List   | A list of jobs that must succeed for the job to start                                                                       |
-| name     | N        | String | A replacement for the job name. 何度もジョブを実行する際に都合の良い名前を指定することが可能です。 同じジョブを複数回呼び出したいとき、あるジョブで同じ内容のジョブが必要なときなどに有効です。 (2.1 only) |
+| Key      | Required | Type   | Description                                                                                                                                                                                            |
+| -------- | -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| requires | N        | List   | A list of jobs that must succeed for the job to start                                                                                                                                                  |
+| name     | N        | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only) |
 {: class="table table-striped"}
 
 ###### **`context`**
 
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
 
-| Key     | Required | Type   | Description                                                                                   |
-| ------- | -------- | ------ | --------------------------------------------------------------------------------------------- |
-| context | N        | String | The name of the context. デフォルトのコンテキスト名は `org-global` となります。 Each context name must be unique. |
+| Key     | Required | Type   | Description                                                                                           |
+| ------- | -------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| context | N        | String | The name of the context. The initial default name was `org-global`. Each context name must be unique. |
 {: class="table table-striped"}
 
 ###### **`type`**
