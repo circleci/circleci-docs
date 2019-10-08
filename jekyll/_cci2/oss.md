@@ -16,21 +16,7 @@ for building your open source project on CircleCI in the following sections:
 ## Overview
 {:.no_toc}
 
-To support the open source community,
-projects that are public on GitHub or Bitbucket
-receive three free build containers,
-for a total of four containers.
-Multiple build containers allow you
-to build a single pull request (PR) faster with parallelism,
-or build multiple PRs at once.
-
-These additional containers are automatically enabled,
-as long as the project is public and running on Linux.
-If you do not want to use the additional containers
-or do not want your CircleCI project to be public,
-you can change this setting.
-In the **Advanced Settings** of your project,
-set the **Free and Open Source** option to _Off_.
+To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
 
 **Note:**
 If you are building an open source project on macOS,
