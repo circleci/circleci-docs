@@ -8,6 +8,8 @@
 
 This document provides an overview of how to migrate from GitLab to CircleCI. 
 
+NOTE: **Tips provided by ImagineX Consulting**
+
 == Source Control Setup
 
 If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
@@ -241,4 +243,4 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/2.0/collect-test-data/[Test results] / test splitting / https://circleci.com/docs/2.0/parallelism-faster-jobs/[parallelism]
 . https://circleci.com/docs/2.0/artifacts/[Artifacts]
 
-**Tips provided by ImagineX Consulting**
+

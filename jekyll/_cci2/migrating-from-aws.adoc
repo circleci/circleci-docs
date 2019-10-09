@@ -8,6 +8,8 @@
 
 This document provides an overview of how to migrate from AWS CodeCommit to CircleCI. 
 
+NOTE: **Tips provided by ImagineX Consulting**
+
 == Source Control Setup
 If you are using AWS Code Commit, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
 
@@ -161,8 +163,9 @@ workflows:
 
 a|
 ----
-# Environments are selected in the CodeBuild web console or defined in a project configuration file:
-
+# Environments are selected in the CodeBuild 
+# web console or defined in a project  
+# configuration file:
 {
   "name": "linux project",
   "environment": {
@@ -199,7 +202,10 @@ jobs:
 
 a|
 ----
-# If custom cache is enabled in the web console, CLI or CloudFormation, cache locations can be specified in the buildspec.yml file:
+# If custom cache is enabled in the web 
+# console, CLI or CloudFormation, cache 
+# locations can be specified in the 
+# buildspec.yml file:
 
 phases:
   build:
@@ -226,18 +232,15 @@ jobs:
           key: source-v1-< .Revision >
           paths:
             - "node_modules"
-
 ----
 |===
 
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
 . Execution of shell scripts and Docker compose files
-. Workflows
-. Artifacts
-. Caching
-. Triggers
-. Performance options
+. https://circleci.com/docs/2.0/workflows/[Workflows]
+. https://circleci.com/docs/2.0/artifacts/[Artifacts]
+. https://circleci.com/docs/2.0/caching/[Caching]
+. https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
 
-
-**Tips provided by ImagineX Consulting**

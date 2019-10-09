@@ -6,7 +6,9 @@
 :toc-title:
 :sectanchors:
 
-This document provides an overview of how to migrate from Azure DevOps to CircleCI. 
+This document provides an overview of how to migrate from Azure DevOps to CircleCI.
+
+NOTE: **Tips provided by ImagineX Consulting**
 
 == Source Control Setup
 If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or BitBucket. For Azure DevOps Git repos, here are links on how to import into GitHub or BitBucket:
@@ -201,11 +203,9 @@ jobs:
 For larger and more complex build files, we recommend moving over the build steps in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
 . Execution of shell scripts and Docker compose files
-. Workflows
-. Artifacts
-. Caching
-. Triggers
-. Performance options
+. https://circleci.com/docs/2.0/workflows/[Workflows]
+. https://circleci.com/docs/2.0/artifacts/[Artifacts]
+. https://circleci.com/docs/2.0/caching/[Caching]
+. https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
 
-
-**Tips provided by ImagineX Consulting**
