@@ -34,7 +34,7 @@ One of the most common tasks you may encounter when using the CircleCI platform 
 
 To better optimize builds and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed a single-threading (queueing) orb that specifically addresses these performance issues. By invoking this orb, you can greatly improve overall job and build performance and prevent concurrency.
 
-**Note**For more detailed information about the CircleCI Queueing orb, refer to the following CircleCI pages:
+**Note:** For more detailed information about the CircleCI Queueing orb, refer to the following CircleCI pages:
 - Queueing and Single Threading Overview - https://github.com/eddiewebb/circleci-queue
 - CircleCI Queueing Orb - https://circleci.com/orbs/registry/orb/eddiewebb/queue#quick-start
 
