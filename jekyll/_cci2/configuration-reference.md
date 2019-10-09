@@ -934,6 +934,11 @@ In general `deploy` step behaves just like `run` with two exceptions:
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
   > **skipping deploy**
   > Running in SSH mode.  Avoid deploying.
+  
+When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
+
+- [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
+- [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### Example
 
@@ -944,6 +949,10 @@ In general `deploy` step behaves just like `run` with two exceptions:
         ansible-playbook site.yml
       fi
 ```
+
+**Note:** The `run` step allows you to use a shortcut like `run: my command`; however, if you try to use a similar shortcut for the `deploy` step like `deploy: my command`, then you will receive the following error message in CircleCI:
+
+`In step 3 definition: This type of step does not support compressed syntax`
 
 ##### **`store_artifacts`**
 
