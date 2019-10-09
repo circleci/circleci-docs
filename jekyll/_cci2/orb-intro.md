@@ -72,18 +72,18 @@ Partner Orb Registry Link | Orb Reference String
 [Azure ACR](https://circleci.com/orbs/registry/orb/circleci/azure-acr) | `acr: circleci/azure-acr@0.1.1`
 [Azure AKS](https://circleci.com/orbs/registry/orb/circleci/azure-aks) | `aks: circleci/azure-aks@0.1.0`
 [Azure CLI](https://circleci.com/orbs/registry/orb/circleci/azure-cli) | `cli: circleci/azure-cli@1.1.0`
-[Cloudsmith](https://circleci.com/orbs/registry/orb/cloudsmith/cloudsmith) | `cloudsmith/cloudsmith@1.0.3`
+[Cloudsmith](https://circleci.com/orbs/registry/orb/cloudsmith/cloudsmith) | `cloudsmith: cloudsmith/cloudsmith@1.0.3`
 [Codecov](https://circleci.com/orbs/registry/orb/codecov/codecov) | `codecov: codecov/codecov@1.0.1`
 [CodeScene](https://circleci.com/orbs/registry/orb/empear/codescene-ci-cd) | `codescene: empear/codescene-ci-cd@1.0.0`
-[ConfigCat](https://circleci.com/orbs/registry/orb/configcat/flag_reference_validator) | `configcat/flag_reference_validator@1.0.3`
+[ConfigCat](https://circleci.com/orbs/registry/orb/configcat/flag_reference_validator) | `configcat: configcat/flag_reference_validator@1.0.3`
 [Contrast Security](https://circleci.com/orbs/registry/orb/contrastsecurity/verify) | `contrastsecurity: contrastsecurity/verify@0.1.2`
 [Convox](https://circleci.com/orbs/registry/orb/convox/orb) | `convox: convox/orb@1.4.1`
 [Cypress-io](https://circleci.com/orbs/registry/orb/cypress-io/cypress) | `cypress-io: cypress-io/cypress@1.0.0`
 [Datree](https://circleci.com/orbs/registry/orb/datree/policy) | `datree: datree/policy@1.0.6`
 [DeployHub](https://circleci.com/orbs/registry/orb/deployhub/deployhub-orb) | `deployhub: deployhub/deployhub-orb@1.2.0`
 [Docker Hub](https://circleci.com/orbs/registry/orb/circleci/docker) | `dockerhub: circleci/docker@0.1.0`
-[F0cal](https://circleci.com/orbs/registry/orb/f0cal/farm) | `f0cal/farm@1.0.0`
-[Fairwinds](https://circleci.com/orbs/registry/orb/fairwinds/rok8s-scripts) | `fairwinds/rok8s-scripts@9.4.0`
+[F0cal](https://circleci.com/orbs/registry/orb/f0cal/farm) | `f0cal: f0cal/farm@1.0.0`
+[Fairwinds](https://circleci.com/orbs/registry/orb/fairwinds/rok8s-scripts) | `fairwinds: fairwinds/rok8s-scripts@9.4.0`
 [Fortanix](https://circleci.com/orbs/registry/orb/fortanix/sdkms-cli) | `fortanix: fortanix/sdkms-cli@1.0.0`
 [Fossa](https://circleci.com/orbs/registry/orb/fossa/cli) | `fossa: fossa/cli@0.0.3`
 [Ghost Inspector](https://circleci.com/orbs/registry/orb/ghostinspector/test-runner) | `ghostinspector: ghostinspector/test-runner@1.0.0`
@@ -100,34 +100,34 @@ Partner Orb Registry Link | Orb Reference String
 [LambdaTest](https://circleci.com/orbs/registry/orb/lambdatest/lambda-tunnel) | `lambdatest: lambdatest/lambda-tunnel@0.0.1`
 [LaunchDarkly](https://circleci.com/orbs/registry/orb/launchdarkly/ld-find-code-refs) | `launchdarkly: launchdarkly/ld-find-code-refs@1.2.0`
 [LogDNA](https://circleci.com/orbs/registry/orb/logdna/logdna) | `logdna: logdna/logdna@0.0.1`
-[Neocortix](https://circleci.com/orbs/registry/orb/neocortix/loadtest) | `neocortix/loadtest@0.4.0`
+[Neocortix](https://circleci.com/orbs/registry/orb/neocortix/loadtest) | `neocortix: neocortix/loadtest@0.4.0`
 [NeuVector](https://circleci.com/orbs/registry/orb/neuvector/neuvector-orb) | `neuvector: neuvector/neuvector-orb@1.0.0`
 [Nirmata](https://circleci.com/orbs/registry/orb/nirmata/nirmata) | `nirmata: nirmata/nirmata@1.1.0`
 [Nowsecure](https://circleci.com/orbs/registry/orb/nowsecure/ci-auto-orb) | `nowsecure: nowsecure/ci-auto-orb@1.0.5`
 [Oxygen](https://circleci.com/orbs/registry/orb/cloudbeat/oxygen) | `oxygen: cloudbeat/oxygen@1.0.0`
 [Packagecloud](https://circleci.com/orbs/registry/orb/packagecloud/packagecloud) | `packagecloud: packagecloud/packagecloud@0.1.0`
-[Packtracker](https://circleci.com/orbs/registry/orb/packtracker/report) | `packtracker/report@2.2.2`
+[Packtracker](https://circleci.com/orbs/registry/orb/packtracker/report) | `packtracker: packtracker/report@2.2.2`
 [Pantheon](https://circleci.com/orbs/registry/orb/pantheon-systems/pantheon) | `pantheon: pantheon-systems/pantheon@0.1.0`
 [Percy](https://circleci.com/orbs/registry/orb/percy/agent) | `percy: percy/agent@0.1.2`
 [Postman](https://circleci.com/orbs/registry/orb/postman/newman) | `postman: postman/newman@0.0.1`
 [Probely](https://circleci.com/orbs/registry/orb/probely/security-scan) | `probely: probely/security-scan@1.0.0`
 [Provar](https://circleci.com/orbs/registry/orb/provartesting/provar) | `provar: provartesting/provar@1.9.10`
 [Pulumi](https://circleci.com/orbs/registry/orb/pulumi/pulumi) | `pulumi: pulumi/pulumi@1.0.0`
-[Quali](https://circleci.com/orbs/registry/orb/quali/cloudshell-colony) | `quali/cloudshell-colony@1.0.4`
+[Quali](https://circleci.com/orbs/registry/orb/quali/cloudshell-colony) | `quali: quali/cloudshell-colony@1.0.4`
 [realMethods](https://circleci.com/orbs/registry/orb/realmethods/appgen) | `realmethods: realmethods/appgen@1.0.1`
 [Red Hat OpenShift](https://circleci.com/orbs/registry/orb/circleci/redhat-openshift) | `redhat: circleci/redhat-openshift@0.1.0`
 [Rocro](https://circleci.com/orbs/registry/orb/rocro/inspecode) | `rocro: rocro/inspecode@1.0.0`
-[Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar/deploy@1.0.1`
+[Rollbar](https://circleci.com/orbs/registry/orb/rollbar/deploy) | `rollbar: rollbar/deploy@1.0.1`
 [Rookout](https://circleci.com/orbs/registry/orb/rookout/rookout-node) | `rookout: rookout/rookout-node@0.0.2`
 [Sauce Labs](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) | `saucelabs: saucelabs/sauce-connect@1.0.1`
 [Snyk](https://circleci.com/orbs/registry/orb/snyk/snyk) | `snyk: snyk/snyk@0.0.8`
 [Sonatype](https://circleci.com/orbs/registry/orb/sonatype/nexus-platform-orb) | `sonatype: sonatype/nexus-platform-orb@1.0.2`
 [Styra](https://circleci.com/orbs/registry/orb/styra/cli) | `styra: styra/cli@0.0.7`
-[Sumo Logic](https://circleci.com/orbs/registry/orb/circleci/sumologic) | `circleci/sumologic@1.0.0`
+[Sumo Logic](https://circleci.com/orbs/registry/orb/circleci/sumologic) | `sumologic: circleci/sumologic@1.0.0`
 [Testim](https://circleci.com/orbs/registry/orb/testimio/runner) | `testim: testimio/runner@1.1.1`
 [Twistlock](https://circleci.com/orbs/registry/orb/twistlock/twistcli-scan) | `twistlock: twistlock/twistcli-scan@1.0.4`
-[Unmock](https://circleci.com/orbs/registry/orb/unmock/unmock) | `unmock/unmock@0.0.10`
-[VMware Code Stream](https://circleci.com/orbs/registry/orb/vmware/codestream) | `vmware/codestream@1.0.0`
+[Unmock](https://circleci.com/orbs/registry/orb/unmock/unmock) | `unmock: unmock/unmock@0.0.10`
+[VMware Code Stream](https://circleci.com/orbs/registry/orb/vmware/codestream) | `vmware: vmware/codestream@1.0.0`
 [WhiteSource](https://circleci.com/orbs/registry/orb/whitesource/whitesource-scan) | `whitesource: whitesource/whitesource-scan@18.10.2`
 [WhiteSource Vulnerability Checker](https://circleci.com/orbs/registry/orb/whitesource/vulnerability-checker) | `whitesource: whitesource/vulnerability-checker@19.7.2`
 [xMatters](https://circleci.com/orbs/registry/orb/xmatters/xmatters-orb) | `xmatters: xmatters/xmatters-orb@0.0.1`
