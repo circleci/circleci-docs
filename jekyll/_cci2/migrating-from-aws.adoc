@@ -1,4 +1,4 @@
-= Migrating from Azure DevOps
+= Migrating from AWS
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -6,18 +6,13 @@
 :toc-title:
 :sectanchors:
 
-This document provides an overview of how to migrate from Azure DevOps to CircleCI. 
+This document provides an overview of how to migrate from AWS CodeCommit to CircleCI. 
 
 == Source Control Setup
-If you are using Azure DevOps Git or TFVC repositories, you will first need to migrate your source code to GitHub or BitBucket. For Azure DevOps Git repos, here are links on how to import into GitHub or BitBucket:
+If you are using AWS Code Commit, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
-
-For TFVC repositories, we recommend using the git-tfs tool.  Here’s a link to the tool and steps for using it:
-
-* https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
-* https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
 
 === GitHub Enterprise
 
@@ -41,20 +36,18 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ----
 
-If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets.  Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
-
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
 
 == Build Configuration
 
-If you're using Azure DevOps Pipelines or TFS Build and Release, you'll need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+Next, you will need to migrate your build configuration. On AWS CodeBuild, the build configuration is either defined in the web interface or in a file called `buildspec.yml` in the root directory of your source code repository.  If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
 
-The Azure DevOps Pipelines and CircleCI configurations will be different.  It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+The AWS CodeBuild and CircleCI configurations will be different.  It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
-* https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
+* https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild Build Spec Reference]
 
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
@@ -64,17 +57,16 @@ Some differences that are worth calling out:
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
-| Azure DevOps | CircleCI
+| AWS | CircleCI
 
 2+h| Define a job that executes a single build step. 
 
 a|
 ----
-jobs:
-  - job: job1
-    steps:
-      - script: chmod +x ./script.sh
-      - script: ./script.sh
+phases:  
+  build:
+    commands:
+       - ./execute-script-for-job1.sh
 ----
 
 a|
@@ -90,10 +82,10 @@ jobs:
 
 a|
 ----
-jobs:
-  - job: job1
-    container:
-      image: node:10
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
 ----
 
 a|
@@ -104,29 +96,33 @@ jobs:
       - image: node:10
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel.  Once they’re done, Job3 runs.  Once Job3 is done, Job4 runs.
+2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel.  Once they’re done, Job3 runs.  Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially.  If you are running commands in parallel, you’re probably using CodePipeline and multiple CodeBuild projects.
 
 a|
 ----
-stages:
-  - stage: build
-    jobs:
-    - job: job1
-      steps:
-        - script: make build dependencies
-    - job: job2
-      steps:
-        - script: make build artifacts
-  - stage: test
-    jobs:
-    - job: job3
-      steps:
-        - script: make test
-  - stage: deploy
-    jobs:
-    - job: job4
-      steps:
-        - script: make deploy
+# CodePipeline Project 1
+phases:
+  build:
+    commands:
+      - make build dependencies
+
+# CodePipeline Project 2
+phases:
+  build:
+    commands:
+      - make build artifacts
+
+# CodePipeline Project 3
+phases:
+  build:
+    commands:
+      - make test
+
+# CodePipeline Project 4
+phases:
+  build:
+    commands:
+      - make deploy
 ----
 
 a|
@@ -161,23 +157,25 @@ workflows:
           - job3
 ----
 
-2+h| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners.  CircleCI provides executors for docker, Linux and MacOS.
+2+h| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only.  If you are targeting multiple platforms, you’re probably using CodePipeline and multiple CodeBuild projects.  CircleCI provides executors for docker, Linux and MacOS that can be combined in a single build definition.
 
 a|
 ----
-jobs:
-  - job: ubuntuJob
-    pool:
-      vmImage: ubuntu-16.04
-    steps:
-      - script: echo "Hello, $USER!"
-  - job: osxJob
-    pool:
-      vmImage: macOS-10.14
-    steps:
-      - script: echo "Hello, $USER!"
+# Environments are selected in the CodeBuild web console or defined in a project configuration file:
 
+{
+  "name": "linux project",
+  "environment": {
+    "type": "LINUX_CONTAINER"
+  }
+}
 
+{
+  "name": "windows project",
+  "environment": {
+    "type": "WINDOWS_CONTAINER"
+  }
+}
 ----
 
 a|
@@ -195,6 +193,40 @@ jobs:
     steps:
       - checkout
       - run: echo "Hello, $USER!"
+----
+
+2+h| Cache dependencies.
+
+a|
+----
+# If custom cache is enabled in the web console, CLI or CloudFormation, cache locations can be specified in the buildspec.yml file:
+
+phases:
+  build:
+    commands:
+npm install
+cache:
+  paths:
+    - 'node_modules/**/*'
+----
+
+a|
+----
+jobs:
+  job1:
+    steps:
+      - restore_cache:
+          key: source-v1-< .Revision >
+
+      - checkout
+
+      - run: npm install
+
+      - save_cache:
+          key: source-v1-< .Revision >
+          paths:
+            - "node_modules"
+
 ----
 |===
 
