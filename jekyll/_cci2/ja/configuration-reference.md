@@ -953,6 +953,11 @@ In general `deploy` step behaves just like `run` with two exceptions:
 - In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead: > **skipping deploy** > Running in SSH mode. Avoid deploying.
 
+When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
+
+- [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
+- [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
+
 ###### Example
 
 ```YAML
@@ -962,6 +967,10 @@ In general `deploy` step behaves just like `run` with two exceptions:
         ansible-playbook site.yml
       fi
 ```
+
+**Note:** The `run` step allows you to use a shortcut like `run: my command`; however, if you try to use a similar shortcut for the `deploy` step like `deploy: my command`, then you will receive the following error message in CircleCI:
+
+`In step 3 definition: This type of step does not support compressed syntax`
 
 ##### **`store_artifacts`**
 
@@ -1196,9 +1205,9 @@ The `branches` key controls whether the *current* branch should have a schedule 
 
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
 
-- `only` の値にマッチするブランチはすべてジョブを実行します。
-- `ignore` の値にマッチするブランチはすべてジョブを実行しません。
-- `only` と `ignore` のどちらも指定していない場合、全てのブランチでジョブを実行します。
+- Any branches that match `only` will run the job.
+- Any branches that match `ignore` will not run the job.
+- If neither `only` nor `ignore` are specified then all branches will run the job.
 - `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
 
 | Key      | Required | Type                       | Description                                                      |
@@ -1272,7 +1281,7 @@ Filters can have the key `branches` or `tags`. **Note** Workflows will ignore jo
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then all branches will run the job.
-- `only` と `ignore` の両方を指定した場合は、`only` を処理してから `ignore` の処理に移ります。
+- If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
 | Key      | Required | Type                       | Description                                                      |
 | -------- | -------- | -------------------------- | ---------------------------------------------------------------- |
