@@ -5,7 +5,7 @@ short-title: "crwdns180440:0crwdne180440:0"
 description: "crwdns180442:0crwdne180442:0"
 categories:
   - crwdns180444:0crwdne180444:0
-order: 6:0crwdne180446:06.80606950crwdns180446:0crwdne180446:0
+order: crwdns180446:0crwdne180446:0
 ---
 
 crwdns180448:0{{ site.baseurl }}crwdne180448:0
@@ -37,7 +37,7 @@ crwdns180478:0{% raw %}crwdne180478:0
 ```yaml
 crwdns180480:0crwdne180480:0 crwdns180482:0crwdne180482:0
     crwdns180484:0crwdne180484:0
-      crwdns180486:0{{ checksum "package.json" }}crwdnd180486:0{{ checksum "package.json" }}crwdne180486:0
+      crwdns315940:0{{ checksum "package-lock.json" }}crwdnd315940:0{{ checksum "package-lock.json" }}crwdne315940:0
 ```
 
 crwdns180488:0{% endraw %}crwdne180488:0
