@@ -53,7 +53,7 @@ crwdns300456:0crwdne300456:0 crwdns300458:0crwdne300458:0
 crwdns300460:0crwdne300460:0 crwdns300462:0{% raw %}crwdne300462:0
 
     crwdns300464:0crwdne300464:0
-        crwdns300466:0{your_lambdatest_username}crwdnd300466:0$BASH_ENVcrwdnd300466:0{your_lambda_access_key}crwdnd300466:0$BASH_ENVcrwdnd300466:0${LT_USERNAME}crwdnd300466:0{{ checksum "package.json" }}crwdne300466:0
+        crwdns315908:0{your_lambdatest_username}crwdnd315908:0$BASH_ENVcrwdnd315908:0{your_lambda_access_key}crwdnd315908:0$BASH_ENVcrwdnd315908:0${LT_USERNAME}crwdnd315908:0{{ checksum "package-lock.json" }}crwdne315908:0
           crwdns300468:0crwdne300468:0
      crwdns300470:0{% endraw %}crwdne300470:0 crwdns300472:0crwdne300472:0 crwdns300474:0crwdne300474:0
     
@@ -79,7 +79,7 @@ crwdns300484:0crwdne300484:0
 
 # crwdns300494:0crwdne300494:0
 
-# crwdns300496:0{{ checksum "package.json" }}crwdne300496:0
+# crwdns315910:0{{ checksum "package-lock.json" }}crwdne315910:0
 
         crwdns300498:0crwdne300498:0
     
@@ -90,7 +90,7 @@ crwdns300484:0crwdne300484:0
 
 # crwdns300504:0crwdne300504:0
 
-# crwdns300506:0{{ checksum "package.json" }}crwdne300506:0
+# crwdns315912:0{{ checksum "package-lock.json" }}crwdne315912:0
 
     crwdns300508:0crwdne300508:0
     
