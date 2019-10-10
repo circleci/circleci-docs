@@ -96,7 +96,7 @@ Below is a sample config file for integrating CircleCI with LambdaTest.
           # Download and cache dependencies
           - restore_cache:
               keys:
-                - v1-dependencies-{{ checksum "package.json" }}
+                - v1-dependencies-{{ checksum "package-lock.json" }}
             # fallback to using the latest cache if no exact match is found
           - run: npm install
           # run tests!
@@ -159,7 +159,7 @@ Below is a sample config file for integrating CircleCI with LambdaTest.
 
 # keys:
 
-# - v1-dependencies-{{ checksum "package.json" }}
+# - v1-dependencies-{{ checksum "package-lock.json" }}
   
     # fallback to using the latest cache if no exact match is found
     
@@ -172,7 +172,7 @@ Below is a sample config file for integrating CircleCI with LambdaTest.
 
 # - node_modules
 
-# key: v1-dependencies-{{ checksum "package.json" }}
+# key: v1-dependencies-{{ checksum "package-lock.json" }}
 
     # run tests!
     
