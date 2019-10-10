@@ -29,7 +29,7 @@ We announce the availability of new macOS containers in the [annoucements sectio
 
 The currently available Xcode versions are:
 
-* `11.1.0`: Xcode 11.1 (GM Seed) (Build 11A1027) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1226/index.html)
+* `11.1.0`: Xcode 11.1 (Build 11A1027) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1226/index.html)
 * `11.0.0`: Xcode 11.0 (Build 11A420a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1136/index.html)
 * `10.3.0`: Xcode 10.3 (Build 10G8) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-903/index.html)
 * `10.2.1`: Xcode 10.2.1 (Build 10E1001) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
