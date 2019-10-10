@@ -48,7 +48,13 @@ export function init () {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
-      queryHook: debounce(function (query, searchFunction) { searchFunction(query); setTimeout(renderResults, 100); }, 500, { 'leading': true, 'trailing': true, 'maxWait': 1000 }) // method to throttle search requests
+      queryHook: debounce(function (query, searchFunction) {
+          searchFunction(query);
+          setTimeout(renderResults, 100);
+        },
+        500,
+       { 'leading': true, 'trailing': true, 'maxWait': 1000 }
+      ) // method to throttle search requests
     })
   );
 
@@ -86,15 +92,12 @@ export function init () {
     if (searchBox.value.length > 0) {
       template.querySelector('#search-term-display').innerText = searchBox.value;
       var results = template.cloneNode(true);
-
       resultDisplay.appendChild(results);
       window.scrollTo(0, 0);
-
       pageBody.style.display = "none";
       resultDisplay.style.display = "block";
     } else {
       resultDisplay.appendChild(stateHolder);
-
       pageBody.style.display = "flex";
       resultDisplay.style.display = "none";
     }
