@@ -85,12 +85,12 @@ jobs:
           name: update-npm
           command: 'sudo npm install -g npm@5'
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm-wee
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
@@ -103,7 +103,7 @@ jobs:
 
 ### 依存関係のキャッシュ
 
-CircleCI では、依存関係をキャッシュおよび復元するタイミングとその方法をコンフィグで制御できます。 上記の例において CircleCI の `.circleci/config.yml` は、特に `package.json` ファイルのチェックサムに基づいて依存関係のキャッシュを検査します。 `package.json` に限らず任意のキーに基づいてキャッシュを設定したり、一連のキャッシュパスが宣言された順序に従うように設定したりすることができます。 ビルドでキャッシュを作成および復元する方法のカスタマイズについては「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
+CircleCI では、依存関係をキャッシュおよび復元するタイミングとその方法をコンフィグで制御できます。 In the above example, the CircleCI `.circleci/config.yml` checks for a dependency cache based specifically on a checksum of the `package-lock.json` file. You can set your cache based on any key (not just `package-lock.json`) as well as set a group of cache paths to defer to in the declared order. ビルドでキャッシュを作成および復元する方法のカスタマイズについては「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
 
 Travis 設定の場合、[依存関係のキャッシュ](https://docs.travis-ci.com/user/caching/)は、ビルド内で `script` フェーズの後に発生し、使用している言語に関連付けられています。 このドキュメントの例の場合、`.travis.yml` で `cache: npm` キーを使用すると、依存関係はデフォルトで `node_modules` をキャッシュするようになります。
 
