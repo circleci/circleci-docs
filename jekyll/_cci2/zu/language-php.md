@@ -5,7 +5,7 @@ short-title: "crwdns180178:0crwdne180178:0"
 description: "crwdns180180:0crwdne180180:0"
 categories:
   - crwdns180182:0crwdne180182:0
-order: dns180184:0crwdne180184:051crwdns180184:0crwdne180184:0
+order: crwdns180184:0crwdne180184:0
 ---
 
 crwdns180186:0{{ site.baseurl }}crwdne180186:0
@@ -44,7 +44,7 @@ crwdns180230:0crwdne180230:0
 crwdns180232:0{% raw %}crwdne180232:0
 
 ```yaml
-crwdns180234:0{{ checksum "composer.lock" }}crwdnd180234:0{{ checksum "composer.lock" }}crwdnd180234:0{{ checksum "package.json" }}crwdnd180234:0{{ checksum "package.json" }}crwdne180234:0    
+crwdns315930:0{{ checksum "composer.lock" }}crwdnd315930:0{{ checksum "composer.lock" }}crwdnd315930:0{{ checksum "package-lock.json" }}crwdnd315930:0{{ checksum "package-lock.json" }}crwdne315930:0    
 ```
 
 crwdns180236:0{% endraw %}crwdne180236:0
@@ -88,7 +88,7 @@ crwdns180280:0{{ site.baseurl }}crwdne180280:0
 crwdns180282:0{% raw %}crwdne180282:0
 
 ```yaml
-<br />      crwdns180284:0{{ checksum "composer.lock" }}crwdnd180284:0{{ checksum "composer.lock" }}crwdnd180284:0{{ checksum "package.json" }}crwdnd180284:0{{ checksum "package.json" }}crwdne180284:0
+<br />      crwdns315932:0{{ checksum "composer.lock" }}crwdnd315932:0{{ checksum "composer.lock" }}crwdnd315932:0{{ checksum "package-lock.json" }}crwdnd315932:0{{ checksum "package-lock.json" }}crwdne315932:0
 ```
 
 crwdns180286:0{% endraw %}crwdne180286:0
