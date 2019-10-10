@@ -18,7 +18,7 @@ crwdns178200:0{% raw %}crwdne178200:0
 ```yaml
 crwdns178202:0crwdne178202:0 crwdns178204:0crwdne178204:0
     crwdns178206:0crwdne178206:0
-      crwdns178208:0{{ checksum "package.json" }}crwdnd178208:0{{ checksum "package.json" }}crwdne178208:0
+      crwdns315924:0{{ checksum "package-lock.json" }}crwdnd315924:0{{ checksum "package-lock.json" }}crwdne315924:0
 ```
 
 crwdns178210:0{% endraw %}crwdne178210:0
