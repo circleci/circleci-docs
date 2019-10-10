@@ -65,7 +65,7 @@ crwdns178418:0crwdne178418:0
 crwdns178420:0{% raw %}crwdne178420:0
 
 ```yaml
-crwdns178422:0{{ checksum "package.json" }}crwdnd178422:0{{ checksum "package.json" }}crwdne178422:0
+crwdns315934:0{{ checksum "package-lock.json" }}crwdnd315934:0{{ checksum "package-lock.json" }}crwdne315934:0
 ```
 
 crwdns178424:0{% endraw %}crwdne178424:0
@@ -74,7 +74,7 @@ crwdns178426:0crwdne178426:0 crwdns178428:0crwdne178428:0
 
 ### crwdns178430:0crwdne178430:0
 
-crwdns178432:0crwdne178432:0 crwdns178434:0crwdne178434:0 crwdns178436:0crwdne178436:0 crwdns178438:0{{ site.baseurl }}crwdne178438:0
+crwdns178432:0crwdne178432:0 crwdns315936:0crwdne315936:0 crwdns315938:0crwdne315938:0 crwdns178438:0{{ site.baseurl }}crwdne178438:0
 
 crwdns178440:0crwdne178440:0 crwdns178442:0crwdne178442:0
 
