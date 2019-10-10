@@ -115,7 +115,7 @@ steps:
 
 One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
 
-If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build. The example below shows how you can use a package manager for caching.
+If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build. The example below shows how you can use caching for a package manager.
 
 {% raw %}
 ```yaml
@@ -138,9 +138,9 @@ jobs:
 ```
 {% endraw %}
 
-Notice in the above example that you can use a `checksum` in the cache key. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) changes and so the cache will be updated accordingly. Also note that the `restore_cache` example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
+Notice in the above example that you can use a `checksum` in the cache key. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) changes so the cache will be updated accordingly. Also note that the `restore_cache` example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
-**Note:** Before adding any chaching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache. 
+**Note:** Before adding any caching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache. 
 
 Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be optimized:
 
