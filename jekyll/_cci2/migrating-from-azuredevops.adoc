@@ -16,7 +16,7 @@ If you are using Azure DevOps Git or TFVC repositories, you will first need to m
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
 
-For TFVC repositories, we recommend using the git-tfs tool.  Here’s a link to the tool and steps for using it:
+For TFVC repositories, we recommend using the git-tfs tool. Here’s a link to the tool and steps for using it:
 
 * https://github.com/git-tfs/git-tfs[Git-tfs migration tool]
 * https://github.com/git-tfs/git-tfs/blob/master/doc/usecases/migrate_tfs_to_git.md[Git-tfs migration steps]
@@ -43,7 +43,7 @@ git remote add enterprise git@[hostname]:[owner]/[repo-name].git
 git push enterprise --mirror
 ----
 
-If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets.  Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
+If you need to export other Azure DevOps artifacts, you can download most of the data into Excel spreadsheets. Follow the Azure DevOps documentation on https://docs.microsoft.com/en-us/azure/devops/organizations/projects/save-project-data?view=azure-devops[saving project data].
 
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
@@ -54,7 +54,7 @@ If you're using Azure DevOps Pipelines or TFS Build and Release, you'll need to 
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
 
-The Azure DevOps Pipelines and CircleCI configurations will be different.  It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+The Azure DevOps Pipelines and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
 * https://docs.microsoft.com/en-us/azure/devops/pipelines/yaml-schema?view=azure-devops&tabs=schema[Azure DevOps YML Reference]
 
@@ -106,7 +106,7 @@ jobs:
       - image: node:10
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel.  Once they’re done, Job3 runs.  Once Job3 is done, Job4 runs.
+2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
 ----
@@ -163,7 +163,7 @@ workflows:
           - job3
 ----
 
-2+h| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners.  CircleCI provides executors for docker, Linux and MacOS.
+2+h| Execute jobs on multiple platforms. Azure DevOps uses pools and demands to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
 
 a|
 ----

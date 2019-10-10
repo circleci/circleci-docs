@@ -43,11 +43,11 @@ Once you have imported your code into GitHub or BitBucket, you can start creatin
 
 == Build Configuration
 
-Next, you will need to migrate your build configuration. On AWS CodeBuild, the build configuration is either defined in the web interface or in a file called `buildspec.yml` in the root directory of your source code repository.  If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
+Next, you will need to migrate your build configuration. On AWS CodeBuild, the build configuration is either defined in the web interface or in a file called `buildspec.yml` in the root directory of your source code repository. If you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
 
-The AWS CodeBuild and CircleCI configurations will be different.  It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+The AWS CodeBuild and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
 * https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild Build Spec Reference]
 
@@ -98,7 +98,7 @@ jobs:
       - image: node:10
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel.  Once they’re done, Job3 runs.  Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially.  If you are running commands in parallel, you’re probably using CodePipeline and multiple CodeBuild projects.
+2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially. If you are running commands in parallel, you’re probably using CodePipeline and multiple CodeBuild projects.
 
 a|
 ----
@@ -159,7 +159,7 @@ workflows:
           - job3
 ----
 
-2+h| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only.  If you are targeting multiple platforms, you’re probably using CodePipeline and multiple CodeBuild projects.  CircleCI provides executors for docker, Linux and MacOS that can be combined in a single build definition.
+2+h| Execute jobs on multiple platforms. An AWS CodePipeline project can target a single platform only. If you are targeting multiple platforms, you’re probably using CodePipeline and multiple CodeBuild projects. CircleCI provides executors for docker, Linux and MacOS that can be combined in a single build definition.
 
 a|
 ----
