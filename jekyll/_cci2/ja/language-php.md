@@ -10,7 +10,8 @@ order: 6
 
 ここでは、PHP サンプルアプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## クイックスタート：デモ用の PHP Laravel リファレンスプロジェクト
 
@@ -42,48 +43,46 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 以下に、デモプロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
 {% raw %}
-
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
+version: 2 # use CircleCI 2.0
 
-jobs: # ステップの集合
-  build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
-    docker: # Docker でステップを実行します 
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker 
 
-      - image: circleci/php:7.1-node-browsers # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
-    working_directory: ~/laravel # ステップが実行されるディレクトリ
-    steps: # 実行可能コマンドの集合
-      - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
+      - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
+    working_directory: ~/laravel # directory where steps will run
+    steps: # a set of executable commands
+      - checkout # special step to check out source code to working directory
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
-      - restore_cache: # `composer.lock` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
+      - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
-            # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/docs/ja/2.0/caching/ を参照)
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - composer-v1-
       - run: composer install -n --prefer-dist
-      - save_cache: # `composer.lock` キャッシュキーテンプレートを使用して依存関係キャッシュを保存する特別なステップ
+      - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - restore_cache: # `package.json` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
+      - restore_cache: # special step to restore the dependency cache if `package-lock.json` does not change
           keys:
-            - node-v1-{{ checksum "package.json" }}
-            # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/docs/ja/2.0/caching/ を参照)
+            - node-v1-{{ checksum "package-lock.json" }}
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - node-v1-
       - run: yarn install
-      - save_cache: # `package.json` キャッシュキーテンプレートを使用して依存関係キャッシュを保存する特別なステップ
-          key: node-v1-{{ checksum "package.json" }}
+      - save_cache: # special step to save the dependency cache with the `package-lock.json` cache key template
+          key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - run: touch storage/testing.sqlite 
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # デプロイ例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
-
 {% endraw %}
 
 ## 設定の詳細
@@ -114,7 +113,6 @@ jobs:
 次に、`steps:` キーの下で、一連のコマンドを実行します。 以下のように、依存関係の管理に使用できる PHP ツールをインストールします。
 
 {% raw %}
-
 ```yaml
     steps:
 
@@ -123,7 +121,6 @@ jobs:
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
 ```
-
 {% endraw %}
 
 コンフィグのその後のステップはすべて、依存関係の管理とキャッシュに関連しています。 このサンプルプロジェクトでは、PHP の依存関係と JavaScript の依存関係の両方をキャッシュします。
@@ -132,8 +129,8 @@ jobs:
 
 [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
 
-{% raw %}
 
+{% raw %}
 ```yaml
 <br />      - restore_cache: 
           keys:
@@ -146,15 +143,14 @@ jobs:
             - vendor
       - restore_cache:
           keys:
-            - node-v1-{{ checksum "package.json" }}
+            - node-v1-{{ checksum "package-lock.json" }}
             - node-v1-
       - run: yarn install
       - save_cache: 
-          key: node-v1-{{ checksum "package.json" }}
+          key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
 ```
-
 {% endraw %}
 
 最後に、Sqlite テストデータベースを準備し、移行を実行し、テストを実行します。
@@ -171,7 +167,6 @@ jobs:
 完了です。 これで PHP アプリケーション用に CircleCI 2.0 を設定できました。CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}を参照してください。
 
 ## 関連項目
-
 {:.no_toc}
 
 - デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
