@@ -199,7 +199,7 @@ version: 2
                 # 依存関係をダウンロードしてキャッシュします
                 - restore_cache:
                     keys:
-                        - v1-dependencies-{{ checksum "package.json" }}
+                        - v1-dependencies-{{ checksum "package-lock.json" }}
                     # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
                         - v1-dependencies-
 
@@ -210,7 +210,7 @@ version: 2
                 - save_cache:
                     paths:
                         - node_modules
-                    key: v1-dependencies-{{ checksum "package.json" }}
+                    key: v1-dependencies-{{ checksum "package-lock.json" }}
 
             - run: mkdir reports
 
