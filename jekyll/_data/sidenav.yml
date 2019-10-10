@@ -207,6 +207,8 @@ en:
       children:
         - name: Status Overview
           link: 2.0/status/
+        - name: Using Credits
+          link: 2.0/credits/
         - name: Using Containers
           link: 2.0/containers/
         - name: Adding Status Badges
