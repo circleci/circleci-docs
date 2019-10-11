@@ -971,9 +971,12 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 ###### Example
 
 ``` YAML
+- run:
+    name: Build the Jekyll site
+    command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
 - store_artifacts:
-    path: /code/test-results
-    destination: prefix
+    path: jekyll/_site/docs/
+    destination: circleci-docs
 ```
 
 ##### **`store_test_results`**
