@@ -402,6 +402,8 @@ If both `ignore` and `only` are present in config, only `ignore` will be taken i
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
+To ensure the job runs for **all** branches, either don't use the `branches` key, or use the `only` key along with the regular expression: `/.*/` to catch all branches.
+
 #### **`resource_class`**
 
 **Note:** The `resource_class` feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
