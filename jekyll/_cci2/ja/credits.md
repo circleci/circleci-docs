@@ -1,65 +1,65 @@
 ---
 layout: classic-docs
-title: Using Credits
+title: クレジットの使用
 categories:
   - how-to
-description: How to leverage CircleCI credits
+description: CircleCI のクレジットの使用方法
 ---
 
-This document describes the basics of using credits with CircleCI. If you are on the legacy CircleCI container-based plan you may want to consider consulting the document on [using containers]({{site.baseurl}}/2.0/containers). If you want to switch from using containers to using credits, please [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) requesting so.
+このドキュメントでは、CircleCI でのクレジット使用の基本事項について説明します。 CircleCI の従来のコンテナベースのプランを利用している場合は、「[コンテナを使用する]({{site.baseurl}}/2.0/containers)」をご覧ください。 コンテナ使用からクレジット使用への切り替えを希望される場合は、[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
 
-## Overview
+## 概要
 
-The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's CI solution. Credits are consumed by the second at varying rates according to what build configuration you use.
+CircleCI のクレジットベースの従量課金制プランでは、チームの CI ソリューションを柔軟にカスタマイズおよびスケールでき、使用量に応じた料金のみが請求されます。 クレジットは分単位で消費され、レートは選択したビルドの構成によって異なります。
 
-The right plan for you and your team will depend on several factors:
+チームに最適なプランを検討するときには、以下のような要素を考慮する必要があります。
 
-- How many users are on your team
-- How much support you need (community support, standard support, or premium support)
-- If you want access to different machine-types
-- If you need features such as Docker Layer Caching, concurrent builds, or build history
+- チームのユーザー数
+- 必要なサポートのレベル (コミュニティによるサポート、標準サポート、プレミアム サポート)
+- 複数のマシン タイプへのアクセスの要否
+- Docker レイヤー キャッシュ、ビルドの同時処理、ビルド履歴といった機能の要否
 
-Let's look at how a Performance plan might use credits. With the Performance plan you have:
+例として、Performance プランでクレジットを使用する場合を考えてみましょう。 Performance プランでは以下を利用できます。
 
-- At least one credit block (25,000 credits)
-- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user.)
-- A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
-- The MacOS machine type
+- 1 つ以上のクレジット ブロック (25,000 クレジット)
+- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
+- Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
+- macOS のマシン タイプ
 
-In this example, your team is divided into several groups working on different projects; some projects are larger while others are smaller and need less resources from a CI configuration. With credits it's possible to specify exactly where and when you need to maximize machine resources. For example, your team might use a `large` `resource_class` (with 4 vCPUs and 8gb of memory at a rate of 20 credits/minute) to speed up a build for a bigger project, while only using the `small` `resource_class` (1 vCPU, 2gb Memory, 5 credits/minute) for a smaller project that may not ship code as frequently, or where build time is inconsequential.
+この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。大規模なプロジェクトもあれば、CI の設定で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。 たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU × 4、RAM 8 GB、20 クレジット/分) を使用できます。一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU × 1、RAM 2 GB、5 クレジット/分) を使用できます。
 
-Consider taking a moment to look at the CircleCI [Usage](https://circleci.com/pricing/usage/) page to learn about what each CircleCI plan offers and how credits are distributed across different machine types.
+CircleCI の各プランで提供される内容や、マシン タイプ別の消費クレジットについては、CircleCI の[従量課金制プラン](https://circleci.com/ja/pricing/usage/)のページをご確認ください。
 
-## Configuring Your Credit Plan
+## クレジットベース プランの設定
 
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
+ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
 
-## Free Plan
+## Free プラン
 
-As with the CircleCI legacy container plan, CircleCI also supports a free-tier with the usage-based plan. You can still make use of many key features offered by CircleCI:
+従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
 
-- Using Orbs
-- Workspaces
-- Dependency Caching
-- Windows/Linux builds
+- Orbs の使用
+- ワークスペース
+- 依存関係のキャッシュ
+- Windows/Linux でのビルド
 
-The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute. On the free plan, you are given a maximum of 3 user seats.
+従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU × 2、RAM 4 GB) で利用することができます。この構成では、10 クレジット/分のレートでクレジットが消費されます。 Free プランで提供されるユーザー シート数は最大 3 です。
 
-## Performance Plan
+## Performance プラン
 
-Upgrading to a performance plan offers several improvements over the free plan:
+Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
-- Access to all machine sizes for Docker/Linux based machines.
-- Access to medium sized MacOS machines (4 CPUs, 8gb Ram at 50 credits/minute)
-- Unlimited user seat count (at $15/seat)
-- Access to Docker Layer Caching
-- No queuing
-- Support
+- すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
+- Medium サイズの macOS マシン (vCPU × 4、RAM 8 GB、50 クレジット/分) へのアクセス
+- 無制限のユーザー シート数 (15 ドル/シート)
+- Docker レイヤー キャッシュへのアクセス
+- キューイングなし
+- サポート
 
-## Docker Layer Caching
+## Docker レイヤー キャッシュ
 
-Docker Layer Caching (DLC) is available for 200 credits per job run. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)をご覧ください。
 
-## Questions And Comments
+## ご意見・ご質問
 
-Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/2.0/faq/#billing)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
