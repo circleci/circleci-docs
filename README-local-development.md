@@ -5,7 +5,7 @@ There are two ways to work on CircleCI docs locally: with Docker and with Ruby/B
 
 ## 1. Local Development with Docker (recommended)
 
-1. Install Docker for your platform: <https://docs.docker.com/engine/installation/>
+1. Install Docker for your platform: [Docker-Installation](https://docs.docker.com/engine/installation/)
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
 3. Download this file: https://circleci.com/docs/assets/app.bundle-576b5ac91166f5b87d5f6254b647c9182e3468eeea4717c8cdc7ff7304cac0c9.js
 4. Rename the file from Step 3 to `app.bundle.js` and save it in the `jekyll/assets/js` directory.
