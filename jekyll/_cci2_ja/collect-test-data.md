@@ -449,7 +449,7 @@ steps:
       name: JUnit をレポーターとしてテストを実行
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
-        JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+        JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
 ```
 
 全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。
