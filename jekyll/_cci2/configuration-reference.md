@@ -406,7 +406,7 @@ To ensure the job runs for **all** branches, either don't use the `branches` key
 
 #### **`resource_class`**
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. If this config is not specified, or an invalid class is specified, the default `resource_class: medium` will be used. Different resource classes are available for different executors, as described in the tables below.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
