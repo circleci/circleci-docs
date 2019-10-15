@@ -293,8 +293,8 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 #### What happens when I run out of credits?
 {:.no_toc}
 
-On the Performance plan, when you reach 5% of your remaining credits, you will
-be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+On the Performance plan, when you reach 10% of your remaining credits, you will
+be refilled 25% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits when you reach 2,500 remaining credits.
 
 #### Do credits expire?
 {:.no_toc}
@@ -307,7 +307,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 #### When do I pay?
 {:.no_toc}
 
-On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling on reaching 5% of credits available) will be paid _at the time of the refill_.
+On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling back to 25% on reaching 10% of credits available) will be paid _at the time of the refill_.
 
 #### What are the other renewal dates?
 {:.no_toc}
