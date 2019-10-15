@@ -7,12 +7,16 @@ categories: [migration]
 order: 2
 ---
 
-This document provides three sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:
+This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:
 
 * TOC
 {:toc}
 
-The CircleCI 2.0 configuration introduces a new key for `version: 2`. This new key enables you to try 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. New keys for `jobs` and `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
+The CircleCI 2.0 configuration introduced a new key for `version: 2`. This new key enables you to use 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. Keys for `jobs`, `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
+
+<!-- Unsure this paragraph should still and mention 1.0 builders ... also should probably mention 2.1-->
+
+See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
 
 ## Sample Configuration with Parallel Jobs
 
@@ -301,5 +305,6 @@ workflows:
 {% endraw %}
 
 ## See Also
+{:.no_toc}
 
 See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
