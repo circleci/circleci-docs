@@ -75,6 +75,7 @@ The table below describes each element that makes up an orb.
 | orbs      | N        | Map  | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. |
 | executors | N        | Map  | A map of strings to executor definitions.                                                                                                                  |
 | commands  | N        | Map  | A map of command names to command definitions.                                                                                                             |
+{: class="table table-striped"}
 
 ### Orb Configuration Example
 
