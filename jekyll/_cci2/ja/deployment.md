@@ -105,4 +105,14 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
                 ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # artifactory 内のビルドに ^^ を付加します
     
 
+## NuGet (via .NET Core CLI)
+
+        steps:
+          - run:
+              name: Push to NuGet
+              command: |
+                dotnet pack --output <output-directory> --configuration Release
+                dotnet nuget push --source "${NUGET_FEED_URL}" --api-key="${NUGET_KEY}" <output-directory>/*.nupkg
+    
+
 これらの例を使用して、目的のターゲットに対してグリーンビルドを自動的にデプロイしてみましょう。
