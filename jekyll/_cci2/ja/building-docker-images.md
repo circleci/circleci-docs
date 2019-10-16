@@ -43,7 +43,7 @@ When `setup_remote_docker` executes, a remote environment will be created, and y
 ### Example
 {:.no_toc}
 
-`machine` とデフォルトイメージを使って Docker イメージをビルドする際の設定例は下記の通りです。
+The example below shows how you can build a Docker image using `machine` with the default image:
 
 ```yaml
 version: 2
@@ -67,7 +67,7 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-下記の例は、[Docker デモ用アプリ](https://github.com/CircleCI-Public/circleci-demo-docker)で使われているものと同じものです。
+The example below shows how you can build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
 ```yaml
 version: 2
@@ -179,7 +179,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 ### フォルダのマウント
 {:.no_toc}
 
-ジョブスペースからリモート Docker 内のコンテナに (もしくはその反対でも) フォルダをマウントすることは**できません**。 そのような 2 つの環境間でファイルをやりとりするには、`docker cp` コマンドを使うことができます。 例えば、ソースコード内の設定ファイルを使ってリモート Docker のコンテナを起動するには、下記のように記述します。
+It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). そのような 2 つの環境間でファイルをやりとりするには、`docker cp` コマンドを使うことができます。 例えば、ソースコード内の設定ファイルを使ってリモート Docker のコンテナを起動するには、下記のように記述します。
 
 ```yaml
 - run: |
@@ -260,7 +260,9 @@ https://github.com/outstand/docker-dockup や、下記で示したようなコ�
 ```
 {% endraw %}
 
-これらのサンプルコードは ryansch 氏より提供していただきました。
+**Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work.
+
+Thanks to ryansch for contributing this example.
 
 ## See Also
 
