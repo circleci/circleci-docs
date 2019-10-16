@@ -480,6 +480,7 @@ jobs:
 Class             | vCPUs | RAM
 ------------------|-------|-----
 medium (default)  | 4     | 15GB
+{: class="table table-striped"}
 
 There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
 
