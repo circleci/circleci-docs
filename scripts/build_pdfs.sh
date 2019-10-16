@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OUT_DIR="release/tmp"
+OUT_DIR="tmp/workspace/"
 
 DATE=$(date +"%m/%d/%Y")
 
