@@ -22,6 +22,7 @@ The `orb-tools` orb provides a simple and easy way for you to structure and vali
 | orb-tools/validate  | This command enables you to use the CircleCI CLI to validate a given orb yml.                                                                                    |
 | orb-tools/increment | This command enables you to use the CircleCI CLI to increment the version of an orb in the registry. If the orb does not have a version yet, it starts at 0.0.0. |
 | orb-tools/publish   | This command uses the CLI to publish an orb to the registry.                                                                                                     |
+{: class="table table-striped"}
 
 ### orb-tools/pack
 
@@ -35,6 +36,7 @@ This CLI command enables you to pack the content of an orb prior to publishing. 
 | workspace-root       | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)                                                                          |
 | workspace-path       | Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided, then this job will not persist to a workspace. |
 | artifact-path        | Path to the directory that should be saved as a job artifact. If the default value of blank is provided, then this job will not save any artifacts.                                                               |
+{: class="table table-striped"}
 
 ### orb-tools/validate
 
@@ -48,6 +50,7 @@ This CLI command enables you to validate a given orb to ensure that the orb can 
 | workspace-root   | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)                                                                          |
 | workspace-path   | Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided, then this job will not persist to a workspace. |
 | artifact-path    | Path to the directory that should be saved as a job artifact. If the default value of blank is provided, then this job will not save any artifacts.                                                               |
+{: class="table table-striped"}
 
 ### orb-tools/increment
 
@@ -63,6 +66,7 @@ This command uses the CLI to increment the version of an orb in the registry. If
 | checkout               | Boolean for whether or not to checkout as a first step. Default is true.                                                                                                                                                            |
 | attach-workspace       | Boolean for whether or not to attach to an existing workspace. Default is false.                                                                                                                                                    |
 | workspace-root         | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)                                                                                            |
+{: class="table table-striped"}
 
 ### orb-tools/publish
 
@@ -77,6 +81,7 @@ This command is used to publish an orb. The following parameters may be passed w
 | checkout               | Boolean for whether or not to checkout as a first step. Default is true.                                                                                                                                                                    |
 | attach-workspace       | Boolean for whether or not to attach to an existing workspace. Default is false.                                                                                                                                                            |
 | workspace-root         | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)                                                                                                    |
+{: class="table table-striped"}
 
 ### Validate and Publish Example
 
