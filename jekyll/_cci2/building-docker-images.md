@@ -27,9 +27,7 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-**Note:** The use of the `setup_remote_docker` key is reserved for configs in
-which your primary executor _is_ a docker container. If your executor is
-`machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
+**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
 
 ### Specifications
 {:.no_toc}
@@ -44,7 +42,7 @@ CPUs | Processor                 | RAM | HD
 ### Example
 {:.no_toc}
 
-Following is an example of building a Docker image using `machine` with the default image:
+The example below shows how you can build a Docker image using `machine` with the default image:
 
 ```yaml
 version: 2
@@ -66,8 +64,7 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-
-Following is an example where we build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
+The example below shows how you can build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
 ```yaml
 version: 2
@@ -176,7 +173,7 @@ A different way to do this is to use another container running in the same netwo
 ### Mounting Folders
 {:.no_toc}
 
-It is **not** possible to mount a folder from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
+It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
 ``` yaml
 - run: |
@@ -255,6 +252,8 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       - ~/bundler-cache
 ```
 {% endraw %}
+
+**Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work.
 
 Thanks to ryansch for contributing this example.
 
