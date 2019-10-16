@@ -338,7 +338,7 @@ Overages are as follows:
 
 Users will be alerted in-app as they approach the limit and upon passing their respective limit.
 
-Reach out to [billing@circleci.com](billing@circleci.com) with any additional questions.
+Reach out to billing@circleci.com with any additional questions.
 
 #### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
