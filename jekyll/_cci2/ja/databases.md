@@ -22,7 +22,7 @@ CircleCI provides pre-built images for languages and services like databases wit
 
 ## PostgreSQL データベースのテスト例
 
-プライマリイメージでは、コンフィグに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルトポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 The username is `postgres` and database is `circletest`. このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。自身でユーザー名とデータベースを設定する必要はありません。
+プライマリイメージでは、コンフィグに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルトポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 The username is `postgres` and database is `circle_test`. このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。自身でユーザー名とデータベースを設定する必要はありません。
 
 Set the POSTGRES_USER environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
