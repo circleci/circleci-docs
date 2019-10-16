@@ -253,7 +253,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
 ```
 {% endraw %}
 
-**Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work
+**Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work.
 
 Thanks to ryansch for contributing this example.
 
