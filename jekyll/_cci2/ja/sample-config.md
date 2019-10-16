@@ -8,16 +8,20 @@ categories:
 order: 2
 ---
 
-このページでは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの設定例を 3 つあげて解説しています。
+This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:
 
 * TOC
 {:toc}
 
-CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。 このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。 その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。 詳しくは「[ジョブとステップ]({{ site.baseurl }}/ja/2.0/jobs-steps/)」や「 [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)」ページをご覧ください。
+The CircleCI 2.0 configuration introduced a new key for `version: 2`. This new key enables you to use 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. Keys for `jobs`, `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. 詳しくは「[ジョブとステップ]({{ site.baseurl }}/ja/2.0/jobs-steps/)」や「 [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)」ページをご覧ください。
+
+<!-- Unsure this paragraph should still and mention 1.0 builders ... also should probably mention 2.1-->
+
+See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
 
 ## パラレルジョブの設定例
 
-下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
+Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
 
@@ -46,11 +50,11 @@ workflows:
 
 {% endraw %}
 
-これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/2.0/workflows)」ページを参照してください。
+This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
 ## シーケンシャル Workflow の設定例
 
-下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
+Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
 
@@ -113,13 +117,13 @@ workflows:
 
 {% endraw %}
 
-これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。 ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/2.0/workflows)」ページを参照してください。
+This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
 
 ## ファンイン・ファンアウト Workflow の設定例
 
-下記は複数の依存関係を元にビルドを行うファンイン・ファンアウト Workflow のサンプルです。 この設定ファイルを含むデモプロジェクトは [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) で確認できます。
+Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
-なお、依存関係が解決しない限りジョブは実行されないことから、事前に実行されるアップストリームジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
+Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 {% raw %}
 
@@ -238,7 +242,7 @@ workflows:
 
 ## 複数の Executor タイプ (macOS ＋ Docker) を利用する設定例
 
-1 つの Workflow のなかで複数の [Executor タイプ](https://circleci.com/docs/ja/2.0/executor-types/)を利用できます。 下記の例では、iOS アプリのプロジェクトに関する部分を macOS でビルドし、それ以外の iOS ツール（[SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)）は Docker でビルドします。
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
 {% raw %}
 
@@ -309,5 +313,6 @@ workflows:
 {% endraw %}
 
 ## See Also
+{:.no_toc}
 
-CircleCI を使用するパブリックプロジェクトのリストについては、「[パブリックリポジトリの例]({{ site.baseurl }}/ja/2.0/example-configs/)」ページを参照してください。
+See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
