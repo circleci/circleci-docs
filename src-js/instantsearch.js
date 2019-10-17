@@ -95,7 +95,7 @@ export function init () {
       resultDisplay.appendChild(template.cloneNode(true););
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
-      resultDisplay.style.display = "block";
+      resultDisplayStyle = "block";
     } else {
       resultDisplay.appendChild(stateHolder);
       pageBody.style.display = "flex";
