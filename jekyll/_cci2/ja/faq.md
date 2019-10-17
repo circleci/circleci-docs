@@ -313,27 +313,40 @@ CircleCI からの請求が発生する以下の日付に加え、有料プラ�
 
 ### コンテナベース プラン
 
-#### コンテナ数を増やし、ビルドの待ち時間を解消するには、どのようにプランをアップグレードしたらよいですか？
+#### What if I go over the minutes allotted for a Container-based macOS plan?
+
+Minutes and overages ensure we can stabilize capacity while offering as much power as possible which should hopefully lead to the greatest possible utility all around.
+
+Overages are as follows:
+
+- Seed & Startup: .08/minute
+- Growth: .05/minute
+
+Users will be alerted in-app as they approach the limit and upon passing their respective limit.
+
+Reach out to billing@circleci.com with any additional questions.
+
+#### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}
-- Linux プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、[Add Containers (コンテナの追加)] ボタンをクリックします。 Linux プランのボックスに必要なコンテナの数を入力したら、[Pay Now (今すぐ支払う)] ボタンをクリックして、支払い方法の設定画面へと進みます。
+- Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
 
-- macOS プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、右上の macOS タブをクリックします。 [Startup]、[Growth]、[Mobile Focused] のいずれかの [Pay Now (今すぐ支払う)] ボタンをクリックして、支払い方法の設定画面へと進みます。
+- macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
 
-#### 組織内でプランを共有し、請求をまとめることは可能ですか？
+#### Is there a way to share plans across organizations and have them billed centrally?
 
-{:.no_toc} はい。CircleCI アプリケーションで [Settings (設定)] > [Share & Transfer (共有 & 転送)] > [Share Plan (プランの共有)] を開き、プランに追加したい組織を選択してください。
+{:.no_toc} Yes, go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan.
 
-#### 請求先を個人アカウントから組織アカウントに変更できますか？
+#### Can I set up billing for an organization, without binding it to my personal account?
 
-{:.no_toc} はい、請求は組織全体に関連付けられています。 組織の管理者は、組織の設定ページから組織アカウントで料金の支払いを行えます。 しかし、そのユーザーがすべてのプロジェクトから外れる場合、それらを引き継ぐ別の GitHub 組織の管理者を立てる必要があります。 この件については、よりスムーズに対応いただけるよう、今後のアップデートで方針を見直す予定です。
+{:.no_toc} Yes, the billing is associated with the organization. You can buy while within that org's context from that org's settings page. But, you must have another GitHub Org Admin who will take over if you unfollow all projects. We are working on a better solution for this in a future update.
 
-#### 課金に関連してコンテナはどのように定義されますか？
+#### What is the definition of a container in the context of billing?
 
-{:.no_toc} ここでのコンテナとは、CPU 2 基と 4 GB の RAM を搭載したマシンを指し、ご利用には料金が発生します。 コンテナは、タスクの同時実行 (例: 5 つの異なるジョブを実行する) や並列実行 (例: 1 つのジョブを 5 つの異なるタスクに分解して一度に実行する) を行うために使用されます。 どちらの例でも 5 つのコンテナが必要になります。
+{:.no_toc} A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
-#### リモート Docker の起動処理時間に料金が発生するのはなぜですか？
+#### Why am I being charged for remote Docker spin up time?
 
-{:.no_toc} CircleCI がリモート Docker インスタンスを起動するとき、プライマリ コンテナを実行する必要があり、コンピューティング リソースを消費します。 リモート Docker インスタンスそのものは無料ですが、プライマリ コンテナの起動処理時間に対して料金が発生することになります。
+{:.no_toc} When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
 
 * * *
 
@@ -341,11 +354,11 @@ CircleCI からの請求が発生する以下の日付に加え、有料プラ�
 
 ### テストで IPv6 を利用できますか？
 
-{:.no_toc} IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/2.0/executor-types) を利用できます。 CircleCI が使用しているすべてのクラウド サービスが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポート対象外となります。
+{:.no_toc} You can use the [machine executor]({{ site.baseurl }}/2.0/executor-types) for testing local IPv6 traffic. Unfortunately, we do not support IPv6 internet traffic, as not all of our cloud providers offer IPv6 support.
 
-Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワーク インターフェイスに対して IPv6 アドレスを割り当てられます。
+Hosts running with machine executor are configured with IPv6 addresses for `eth0` and `lo` network interfaces.
 
-IPv6 環境のサービスをテストするために、コンテナに IPv6 アドレスを割り当てるように Docker を設定することも可能です。 以下のように Docker デーモンを設定することで、グローバル設定を有効にすることができます。
+You can also configure Docker to assign IPv6 address to containers, to test services with IPv6 setup. You can enable it globally by configuring docker daemon like the following:
 
 ```yaml
    ipv6_tests:
@@ -364,18 +377,18 @@ IPv6 環境のサービスをテストするために、コンテナに IPv6 ア
            sudo service docker restart
 ```
 
-Docker に IPv6 アドレスを割り当てる方法は複数あり、上記のように [Docker デーモンを設定する方法](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/)、[`docker network create` コマンドを使用する方法](https://docs.docker.com/engine/reference/commandline/network_create/)、そして [`docker-compose` を使用する方法](https://docs.docker.com/compose/compose-file/#enable_ipv6)が挙げられます。
+Docker allows enabling IPv6 at different levels: [globally via daemon config like above](https://docs.docker.com/engine/userguide/networking/default_network/ipv6/), with [`docker network create` command](https://docs.docker.com/engine/reference/commandline/network_create/), and with [`docker-compose`](https://docs.docker.com/compose/compose-file/#enable_ipv6).
 
 ### CircleCI 2.0 ではどの OS をサポートしていますか？
 {:.no_toc}
-- **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも対応します。
+- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **Android:** 詳細は「[言語ガイド: Android]({{ site.baseurl }}/2.0/language-android/)」をご覧ください。
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **iOS:** 「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial)」でビルド方法を確認できます。
+- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
-- **Windows:** 現在、Windows では早期アクセス版のみご利用いただけます。 早期アクセス版のお申し込みについては、[CircleCI Discuss](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) をご参照ください。
+- **Windows:** We are currently offering Early Access to Windows. Please take a look at [this Discuss post](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) for details on how to get access.
 
 ### CircleCI ではどの CPU アーキテクチャをサポートしていますか？
-
-{:.no_toc} サポートしている CPU アーキテクチャは、`amd64` のみとなります。
+{:.no_toc}
+`amd64` is the only supported CPU architecture.
