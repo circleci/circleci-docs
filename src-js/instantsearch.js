@@ -92,7 +92,7 @@ export function init () {
     var resultDisplayStyle = "none";
     if (searchBox.value.length > 0) {
       template.querySelector('#search-term-display').innerText = searchBox.value;
-      resultDisplay.appendChild(template.cloneNode(true););
+      resultDisplay.appendChild(template.cloneNode(true));
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
       resultDisplayStyle = "block";
