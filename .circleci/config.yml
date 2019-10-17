@@ -152,7 +152,7 @@ jobs:
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
             mkdir -p /tmp/workspace/pdfs
-            cp -r /tmp/workspace/api/**/* jekyll/_api/
+            cp -r /tmp/workspace/api/* jekyll/_api/
       - run:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja

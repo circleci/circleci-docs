@@ -19,7 +19,7 @@ build_api_v2() {
     curl https://circleci.com/api/v2/openapi.json > openapi.json
     node node_modules/widdershins/widdershins.js --environment ../widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
     bundle exec middleman build --clean
-    cp -R build/* /tmp/workspace/api
+    cp -R build/* /tmp/workspace/api/v2
     echo "Output build moved to /tmp/workspace/api/v2"
 }
 
