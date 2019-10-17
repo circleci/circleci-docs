@@ -89,18 +89,18 @@ export function init () {
 
   function renderResults (e) {
     resultDisplay.innerHTML = "";
+    var resultDisplayStyle = "none";
     if (searchBox.value.length > 0) {
       template.querySelector('#search-term-display').innerText = searchBox.value;
-      var results = template.cloneNode(true);
-      resultDisplay.appendChild(results);
+      resultDisplay.appendChild(template.cloneNode(true););
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
       resultDisplay.style.display = "block";
     } else {
       resultDisplay.appendChild(stateHolder);
       pageBody.style.display = "flex";
-      resultDisplay.style.display = "none";
     }
+    resultDisplay.style.display = resultDisplayStyle;
   };
 
   searchBox.addEventListener('keyup', renderResults);
