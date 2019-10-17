@@ -135,7 +135,7 @@ If you cannot access the CircleCI Management Console, but the Services machine s
 ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_machine>
 ```
 
-==== Repl times out
+==== REPL time out
 If you experience a timeout when connecting to the REPL, you will need to allow access, through your corporate proxy, to the domains of any Clojure library repositories that are required to download dependencies for running the REPL:
 ```
 sudo su
