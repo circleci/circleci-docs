@@ -47,7 +47,7 @@ Next, you will need to migrate your build configuration. On AWS CodeBuild, the b
 
 First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
-The AWS CodeBuild and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
+The AWS CodeBuild and CircleCI configurations will be different. It may be helpful to have both AWS DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
 * https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html[AWS CodeBuild Build Spec Reference]
 
