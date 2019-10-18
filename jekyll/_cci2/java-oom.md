@@ -92,7 +92,7 @@ to pass memory limits to the JVM.
 `JVM_OPTS` does not affect the memory of `lein` itself,
 nor can it directly pass memory limits to Java.
 To affect `lein`'s available memory,
-use `LEIN_JVM_OPTIONS`.
+use `LEIN_JVM_OPTS`.
 To directly pass memory limits to Java,
 use [`_JAVA_OPTIONS`](#_java_options) or [`JAVA_TOOL_OPTIONS`](#java_tool_options).
 
