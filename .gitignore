@@ -13,3 +13,4 @@ run-results/
 node_modules/
 
 src-api/build/
+thumbs.db
