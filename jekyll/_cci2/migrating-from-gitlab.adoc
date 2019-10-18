@@ -150,7 +150,7 @@ workflows:
         requires:
           - job1
           - job2
-    - job4
+    - job4:
         requires:
           - job3
 ----
