@@ -52,7 +52,7 @@ Once you have imported your code into GitHub or BitBucket, you can start creatin
 
 If you're using Azure DevOps Pipelines or TFS Build and Release, you'll need to migrate your build configuration. In Azure DevOps Pipelines, the build configuration is defined in a file called `azure-pipelines.yml` in the root directory of your source code repository. In TFS Build and Release, the build configuration is done through the web interface and can be exported to a json file. In either case, if you use shell scripts to perform your build, you can reuse those scripts in CircleCI.
 
-First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named .circleci and create a file in that folder named config.yml. Next, follow the CircleCI documentation here to learn how to configure the .config.yml file.
+First, create a CircleCI build configuration file. In the root directory of your source code repository, create a folder named `.circleci` and create a file in that folder named `config.yml`. Next, follow the CircleCI documentation here to learn how to configure the `config.yml` file.
 
 The Azure DevOps Pipelines and CircleCI configurations will be different. It may be helpful to have both Azure DevOps and CircleCI reference documentation open side-by-side to help with the conversion of the build steps:
 
