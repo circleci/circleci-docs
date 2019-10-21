@@ -1,7 +1,7 @@
 # Local Development Instructions
 
 
-There are two ways to work on CircleCI docs locally: with Docker and with Ruby/Bundler.
+There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](http://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
 
