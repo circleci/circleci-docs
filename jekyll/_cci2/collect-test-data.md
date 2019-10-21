@@ -416,6 +416,7 @@ A working `.circleci/config.yml` section might look like this:
       - run: dotnet test --no-build --logger "trx"
       - run:
           name: test results
+          when: always
           command: |
               dotnet tool install -g trx2junit
               export PATH="$PATH:/root/.dotnet/tools"
