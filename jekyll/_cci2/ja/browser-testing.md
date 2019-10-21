@@ -78,7 +78,7 @@ Below is a sample config file for integrating CircleCI with LambdaTest.
           # CircleCI maintains a library of pre-built images
           # documented at https://circleci.com/docs/2.0/circleci-images/
           # the working dir is github repo that you need to fork to become owner.
-        working_directory: ~/nightwatch-saple-for-circleci
+        working_directory: ~/nightwatch-sample-for-circleci
         steps:
           - checkout
     
