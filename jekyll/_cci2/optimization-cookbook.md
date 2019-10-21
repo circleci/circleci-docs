@@ -14,7 +14,10 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 ## Introduction
 
-When work with the CircleCI platform, one of the most critical tasks you will want to complete is to optimize your jobs, builds, workflows, and other tasks to prevent performance degradation, latency, and concurrency. Optimizing your tasks is not simply a function of lessening the workload or number of tasks, but rather, reviewing your optimization and caching strategies to ensure you are meeting your business and technical requirements while also maintaining stability and reliability.
+When working with the CircleCI platform, you'll want to optimize your pipeline to ensure it is doing what you need it to & is easy to understand - while keeping the time from start to finish as low as you can manage. Optimizing your tasks is not simply a function of lessening the workload or number of tasks, but rather, reviewing your optimization and caching strategies to ensure you are meeting your business and technical requirements while also maintaining stability and reliability. After you are up and running on the CircleCI platform, optimization becomes an important part of your workflow because:
+
+- You are a business and decreasing minutes/resources means savings.
+- For anyone, less complex, more efficient builds means saving time.
 
 CircleCI has developed several different approaches you may wish to use to better optimize these tasks while also leveraging the power of the CircleCI platform and its associated resources (e.g. orbs). The sections below describe various strategies and methodologies you can use to optimize your organization tasks.
 
@@ -48,7 +51,7 @@ To configure your environment for the CircleCI platform and CircleCI orbs, follo
 
 2) If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** to enable pipelines.
 
-3) Add the `orbs` stanza below your version, invoking the orb:
+3) Add the `orbs` stanza below your version, invoking the orb. For example:
 
 `orbs:
   queue: eddiewebb/queue@1.1.2`
