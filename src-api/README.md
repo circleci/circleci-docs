@@ -25,3 +25,6 @@ You can now see the docs at http://localhost:4567.
 ### Updating Slate
 
 Slate isn't exactly a library that you can `npm install` or `npm update`. If Slate releases an update that we need, currently, it will require us to download their repo again, and replace the src files (but don't delete our index.html.md!)
+
+### License Information
+Everything in this repository and not covered above has been Llicensed under the Apache License, Version 2.0. For more licensing information, check out [LICENSE](LICENSE).
