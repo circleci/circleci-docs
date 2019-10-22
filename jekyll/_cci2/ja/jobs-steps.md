@@ -15,7 +15,7 @@ order: 2
 
 ## Orbs の概要
 
-Orbs は、名前に基づいてインポートするか、インラインで設定するコンフィグのパッケージです。コンフィグを簡略化し、プロジェクト内またはプロジェクト間でコンフィグを共有および再利用するために使用されます。 コンフィグで Orbs を使用する方法と Orb 設計の概要については、「[Orbs を使う]({{ site.baseurl }}/ja/2.0/using-orbs/)」を参照してください。
+Orbs は、名前に基づいてインポートするか、インラインで設定するコンフィグのパッケージです。コンフィグを簡略化し、プロジェクト内またはプロジェクト間でコンフィグを共有および再利用するために使用されます。 コンフィグで Orbs を使用する方法と Orb 設計の概要については、「[Orbs を使う]({{ site.baseurl }}/ja/2.0/using-orbs/)」を参照してください。 Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
 
 ## ジョブの概要
 
