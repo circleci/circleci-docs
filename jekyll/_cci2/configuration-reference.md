@@ -404,6 +404,8 @@ A job that was not executed due to configured rules will show up in the list of 
 
 To ensure the job runs for **all** branches, either don't use the `branches` key, or use the `only` key along with the regular expression: `/.*/` to catch all branches.
 
+To catch branches, and allow variations use case-insensitive matching rules. E.g. `/(?i)fix/` would match both `my-fix`,`theFIX` and `a-Fix`. The best practice is to align on casing, but for situations, that is not possible, this is an option.   
+
 #### **`resource_class`**
 
 The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below.
