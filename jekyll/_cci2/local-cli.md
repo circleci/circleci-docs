@@ -302,7 +302,7 @@ You cannot use the machine executor in local jobs. This is because the machine e
 
 **Add SSH Keys
 
-The `add_ssh_keys` cli command is not currently supported.
+It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
 
 **Workflows**
 
