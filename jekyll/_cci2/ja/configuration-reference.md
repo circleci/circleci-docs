@@ -119,7 +119,7 @@ jobs:
 
 実行処理は 1 つ以上の名前の付いたジョブで構成され、 それらのジョブの指定は `jobs` マップで行います。「[config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)」では `job` マップの 2 通りの例を紹介しています。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
 
-[Workflows]({{ site.baseurl }}/ja/2.0/workflows/) を利用する際は、`.circleci/config.yml` ファイル内でユニークなジョブ名を設定してください。
+If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
 Workflows を **使わない** 場合は、`jobs` マップ内に `build` という名前のジョブを用意します。 `build` ジョブは GitHub など VCS によるプッシュをトリガーとして実行する際のデフォルトのエントリーポイントとなります。 あるいは、CircleCI API を利用して別のジョブを実行することも可能です。
 
@@ -151,7 +151,7 @@ Workflows を **使わない** 場合は、`jobs` マップ内に `build` とい
 
 #### `parallelism`
 
-`parallelism` の値を 2 以上に設定すると、Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 ただし、並列処理するように設定していても 1 つの Executor でしか実行されない場合もあります（[`deploy` ステップ](#deploy) がその一例です）。 詳しくは[パラレルジョブ]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/)を参照してください。
+`parallelism` の値を 2 以上に設定すると、Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` で指定したディレクトリが存在しないときは自動で作成されます。
 
@@ -167,13 +167,8 @@ jobs:
     parallelism: 3
     resource_class: large
     working_directory: ~/my-app
-    branches:
-      only:
-        - master
-        - /rc-.*/
     steps:
-      - run: make test
-      - run: make
+      - run: go test -v $(go list ./... | circleci tests split)
 ```
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (*executor*)
