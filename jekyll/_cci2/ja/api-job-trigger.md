@@ -8,10 +8,9 @@ categories:
 order: 80
 ---
 
-
 This document describes how to trigger jobs using the CircleCI API.
 
-**Note:** Triggering jobs from the API is **not** supported with v2.1.
+**Note:** You cannot currently trigger jobs that use 2.1 config from the API.
 
 - 目次
 {:toc}
