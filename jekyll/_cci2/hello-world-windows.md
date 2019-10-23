@@ -18,7 +18,7 @@ This document describes how to get started with continuous integration on **Wind
 To follow along with this document you will need:
 
 * An [account](https://circleci.com/signup/) on CircleCI.
-* A [performance plan](https://circleci.com/pricing/usage/) subscription.
+* Either the Free plan (default) or a [performance plan](https://circleci.com/pricing/usage/).
 * Pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
 
 # Overview of the Windows executor

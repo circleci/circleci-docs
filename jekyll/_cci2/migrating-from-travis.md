@@ -106,12 +106,12 @@ jobs:
           name: update-npm
           command: 'sudo npm install -g npm@5'
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm-wee
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
@@ -129,7 +129,7 @@ MongoDB versions are made available in each `command` that gets run.
 
 With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml`
 checks for a dependency cache based specifically on a checksum of the
-`package.json` file. You can set your cache based on any key (not just `package.json`) as well as set a
+`package-lock.json` file. You can set your cache based on any key (not just `package-lock.json`) as well as set a
 group of cache paths to defer to in the declared order. Refer to the [caching
 dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build
 creates and restores caches.

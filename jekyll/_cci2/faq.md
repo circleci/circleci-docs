@@ -293,8 +293,8 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 #### What happens when I run out of credits?
 {:.no_toc}
 
-On the Performance plan, when you reach 5% of your remaining credits, you will
-be refilled 10% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 2,500 credits when you reach 1,250 remaining credits.
+On the Performance plan, when you reach 10% of your remaining credits, you will
+be refilled 25% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits when you reach 2,500 remaining credits.
 
 #### Do credits expire?
 {:.no_toc}
@@ -307,7 +307,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 #### When do I pay?
 {:.no_toc}
 
-On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling on reaching 5% of credits available) will be paid _at the time of the refill_.
+On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling back to 25% on reaching 10% of credits available) will be paid _at the time of the refill_.
 
 #### What are the other renewal dates?
 {:.no_toc}
@@ -327,6 +327,18 @@ Open source organizations receive 100,000 free credits per week that can be spen
 ---
 
 ### Container Based Plans
+
+#### What if I go over the minutes allotted for a Container-based macOS plan?
+
+Minutes and overages ensure we can stabilize capacity while offering as much power as possible which should hopefully lead to the greatest possible utility all around.
+
+Overages are as follows:
+- Seed & Startup: .08/minute
+- Growth: .05/minute
+
+Users will be alerted in-app as they approach the limit and upon passing their respective limit.
+
+Reach out to billing@circleci.com with any additional questions.
 
 #### How do I upgrade my plan with more containers to prevent queuing?
 {:.no_toc}

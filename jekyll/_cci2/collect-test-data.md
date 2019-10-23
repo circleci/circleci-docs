@@ -203,7 +203,7 @@ jobs:
             # Download and cache dependencies
             - restore_cache:
                 keys:
-                    - v1-dependencies-{{ checksum "package.json" }}
+                    - v1-dependencies-{{ checksum "package-lock.json" }}
                     # fallback to using the latest cache if no exact match is found
                     - v1-dependencies-
 
@@ -214,7 +214,7 @@ jobs:
             - save_cache:
                 paths:
                     - node_modules
-                key: v1-dependencies-{{ checksum "package.json" }}
+                key: v1-dependencies-{{ checksum "package-lock.json" }}
 
             - run: mkdir reports
 
@@ -490,7 +490,7 @@ steps:
       name: Run tests with JUnit as reporter
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
-        JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+        JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
 ```
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).

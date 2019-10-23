@@ -79,7 +79,7 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       # the working dir is github repo that you need to fork to become owner.
-    working_directory: ~/nightwatch-saple-for-circleci
+    working_directory: ~/nightwatch-sample-for-circleci
     steps:
       - checkout
       
@@ -97,7 +97,7 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-{{ checksum "package-lock.json" }}
             # fallback to using the latest cache if no exact match is found
       - run: npm install
       # run tests!
@@ -157,14 +157,14 @@ build:
 # Download and cache dependencies
 #    - restore_cache:
 #        keys:
-#          - v1-dependencies-{{ checksum "package.json" }}       	
+#          - v1-dependencies-{{ checksum "package-lock.json" }}       	
         # fallback to using the latest cache if no exact match is found
    	
         - run: npm install
 #      - save_cache:
 #        paths:
 #      - node_modules
-#        key: v1-dependencies-{{ checksum "package.json" }}
+#        key: v1-dependencies-{{ checksum "package-lock.json" }}
   
     # run tests!
       - run: node_modules/.bin/nightwatch -e chrome

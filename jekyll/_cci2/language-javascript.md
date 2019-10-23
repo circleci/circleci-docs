@@ -127,7 +127,7 @@ To save time between runs, consider [caching dependencies or source code]({{ sit
 Use the [`save_cache`]({{ site.baseurl
 }}/2.0/configuration-reference/#save_cache) step to cache certain files or
 directories. In this example, we cache `node_modules` using a checksum of the
-`package.json` as the cache-key.
+`package-lock.json` as the cache-key.
 
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
 to restore cached files or directories.
@@ -140,12 +140,12 @@ to restore cached files or directories.
           name: update-npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
           name: install-npm-wee
           command: npm install
       - save_cache:
-          key: dependency-cache-{{ checksum "package.json" }}
+          key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
 ```
