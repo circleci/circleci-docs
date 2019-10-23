@@ -9,7 +9,7 @@ order: 70
 
 This document offers an overview of Docker Layer Caching (DLC), which can reduce
 Docker image build times on CircleCI. Docker Layer Caching is only available on
-the Performance usage plan. DLC is available on the Premium usage plan, on all server-installations.
+the Performance and Custom usage plans. DLC is available on the Premium usage plan, on all server-installations.
 
 **Note:** Docker Layer caching is only available on select plans:
 
@@ -86,7 +86,6 @@ Docker Layer Caching can also reduce job runtimes when building Docker images us
 machine:
   docker_layer_caching: true    # default - false
 ```
-
 
 ## Examples
 
