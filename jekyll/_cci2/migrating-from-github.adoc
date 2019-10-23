@@ -1,0 +1,245 @@
+= Migrating from Github Actions
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+:sectanchors:
+
+This document provides an overview of how to migrate from Github Actions to CircleCI.
+
+== Why Migrate From Github Actions to CircleCI?
+
+Given that Github Actions is directly built into Github, why would developers want to use CircleCI?
+
+The reason is because CircleCI is a first-class CI tool. CI/CD is what we specialize in, and we have been doing it for over 8 years since the company's founding. On top of normal features you'd expect from any CI/CD tool, what sets us apart from others are the various additional features that boost productivity:
+
+1. **Test Parallelism** - CircleCI offers not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by splitting workloads between different containers. https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[Examples of that here].
+2. **Resource Classes** - CircleCI offers various different sizes of executors, great for adjusting according to lighter or heavier workloads on a node. https://circleci.com/docs/2.0/optimizations/#resource-class)[Documentation here].
+3. **SSH Into Builds** - CircleCI offers the ability to securely SSH into a build environment to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds. https://circleci.com/docs/2.0/ssh-access-jobs/[Documentation here].
+4. **Docker Layer Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to Docker image layers. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows. http://circleci.com/docs/2.0/docker-layer-caching/[Documentation here].
+
+We have a number of other features that set our system apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you're interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+
+== Concepts
+
+=== Jobs and Workflows
+
+Both Github Actions and CircleCI share similar functionality around "jobs" and "workflows". A workflow is an end-to-end flow of jobs, which in turn consist of individual commands to achieve an atomic task (e.g. "run unit tests" or "build a Docker image").
+
+CircleCI differs primarily in the configuration syntax, setting up the workflow and job dependencies in a separate section as opposed to inline in the job.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| Github | CircleCI
+
+a|
+----
+name: My GitHub Actions Workflow
+
+on: [push]
+
+jobs:
+  job_1:
+    name: Job 1
+    // ... job 1 config
+  job_2:
+    name: Job 2
+    needs: job_1
+    // ... job 2 config
+----
+
+a|
+----
+jobs:
+  job_1:
+    // ... job 1 config
+  job_2:
+    // ... job 2 config
+
+workflows:
+  my_circleci_workflow:
+    jobs:
+      - job_1
+      - job_2:
+          requires:
+            - job_1
+----
+|===
+
+=== Actions and Orbs
+"Actions" in Github are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
+
+CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orbs]. The primary difference is that CircleCI Orbs are just packaged, reusable YAML: subsequently you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
+
+Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/orbs/registry/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community Orbs / Integrations.
+
+=== Executors
+In GitHub, you can specify your builds to run in Linux, macOS, and Windows environments via a `runs-on` key in the YAML, and if you want to run anything in a container, you specify an additional `container` key.
+
+In CircleCI, you have the same choice of environments (called Executors), except that Docker containers are their own class of executor. This eliminates redundancy in declaring a Linux environment when you only plan to run commands in containers.
+
+For each of the executor types, you have a choice of different versions which will subsequently have various versions of base software installed. https://circleci.com/docs/2.0/executor-types/[Documentation here].
+
+See the table in the next section to compare configuration.
+
+== Configuration Comparison
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| Github Config | CircleCI Config
+
+2+h| Specifying execution environment. While container execution is specified separately in Github, `docker` is its own class of executor in CircleCI. https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor[Documentation here].
+
+a|
+----
+# Choosing an Operating System
+runs-on: ubuntu-latest # or windows, etc.
+
+# If running steps on a container
+container:
+  image: openjdk:11.0.3-jdk-stretch
+----
+
+a|
+----
+# Docker (container) Executor
+docker:
+  - image: circleci/openjdk:11.0.3-jdk-stretch
+
+# Linux Ubuntu Executor
+machine: true
+
+# macOS
+macos:
+  xcode: "11.0.0"
+
+# Windows
+executor: win/vs2019
+----
+
+2+h| Specifying dependencies/services. All images specified after the first in CircleCI are treated as dependencies. https://circleci.com/docs/2.0/configuration-reference/#docker[Documentation here].
+
+a|
+----
+services:
+  postgres:
+    image: postgres:10.8
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+----
+
+a|
+----
+docker:
+  # Primary Executor
+  - image: circleci/openjdk:11.0.3-jdk-stretch
+  # Dependency Service(s)
+  - image: postgres:10.8
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+----
+
+2+h| Specifying steps to run in a job. Similar functionality, different syntax. https://circleci.com/docs/2.0/configuration-reference/#run[Documentation here].
+
+a|
+----
+steps:
+  - name: Build with Gradle
+    run: ./gradlew build
+----
+
+a|
+----
+steps:
+  - run:
+      name: Build with Gradle
+      command: ./gradlew build
+----
+
+2+h| Using pre-packaged config (Actions for Github, Orbs for CircleCI). In CircleCI, you declare the Orbs at the top level and then refer to them by name in config, similar in concept to Python or JavaScript imports https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Documentation here].
+
+a|
+----
+jobs:
+  build:
+    // other config here
+    steps:
+      - name: Slack Notify
+        uses: rtCamp/action-slack-notify@v1.0.0
+        env:
+          SLACK_COLOR: '#32788D'
+          SLACK_MESSAGE: 'Tests ran successfully'
+          SLACK_TITLE: Testing Slack Notification GA
+          SLACK_USERNAME: Vinny
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+----
+
+a|
+----
+orbs:
+  slack-orb: circleci/slack@3.4.0
+
+jobs:
+  build:
+    // other config here
+    steps:
+      - slack-orb/notify:
+          color: '#32788D'
+          message: Tests ran successfully
+          title: Testing Slack Notification CircleCI Orb
+          author_name: Vinny
+          webhook: '${SLACK_WEBHOOK}'
+----
+
+2+h| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], on_success, on_failure) as well as https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21[fully conditional steps based on parameters]. We also have https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration[conditional jobs based on parameter], and currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
+
+a|
+----
+jobs:
+  build:
+    // other config here
+    steps:
+      - name: Slack Notify
+        uses: rtCamp/action-slack-notify@v1.0.0
+        env:
+          SLACK_COLOR: '#32788D'
+          SLACK_MESSAGE: 'Tests ran successfully'
+          SLACK_TITLE: Testing Slack Notification GA
+          SLACK_USERNAME: Vinny
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+----
+
+a|
+----
+orbs:
+  slack-orb: circleci/slack@3.4.0
+
+jobs:
+  build:
+    // other config here
+    steps:
+      - slack-orb/notify:
+          color: '#32788D'
+          message: Tests ran successfully
+          title: Testing Slack Notification CircleCI Orb
+          author_name: Vinny
+          webhook: '${SLACK_WEBHOOK}'
+----
+|===
+
+For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials] and https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] pages.
+
+Since the configuration between Github Actions and CircleCI is similar, it should be fairly trivial to migrate your jobs and workflows. However, for best chances of success, we recommend migrating over items in the following order:
+
+. https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
+. https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Actions to Orbs]. Our registry can be found https://circleci.com/orbs/registry/?filterBy=all[here].
+. https://circleci.com/docs/2.0/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]
