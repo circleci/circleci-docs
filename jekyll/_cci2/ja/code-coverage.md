@@ -236,7 +236,7 @@ jobs:
 
 ## JavaScript
 
-[Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for JavaScript projects. Another popular testing tool, Jest, uses Istanbul to generage reports. Consider this example:
+[Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for JavaScript projects. Another popular testing tool, Jest, uses Istanbul to generate reports. Consider this example:
 
 ```yaml
 version: 2
