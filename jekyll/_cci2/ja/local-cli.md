@@ -17,7 +17,7 @@ CircleCI CLI は、CircleCI の高度で便利なツールの多くを使い慣�
 - CircleCI API のクエリ
 - Orbs の作成、パブリッシュ、表示、管理
 
-ここでは、CLI ツールのインストールと使用方法について説明します。 **メモ：**現在、最新の CLI は、サーバー上にインストールした CircleCI では利用できません。 旧バージョンの CLI であればサーバー上でも動作するため、インストールが可能です。 詳細については、以下を参照してください。
+ここでは、CLI ツールのインストールと使用方法について説明します。 **メモ：**現在、最新の CLI は、サーバー上にインストールした CircleCI では利用できません。 旧バージョンの CLI であればサーバー上でも動作するため、インストールが可能です。
 
 - 目次
 {:toc}
@@ -303,20 +303,24 @@ CLI ツールでは、ワークフローの実行がサポートされていま�
 
 セキュリティ上の理由から、UI で設定した暗号化環境変数は、ローカルのビルドにはインポートされません。 代わりに、`-e` フラグを使用して CLI に環境変数を指定できます。 詳細については、`circleci help build` の出力結果を参照してください。 なお、環境変数を複数指定する場合は、このフラグを変数ごとに使用する必要があります (例：`circleci build -e VAR1=FOO -e VAR2=BAR`)。
 
-## CircleCI Server での CLI の使用
+## Test Splitting
 
-現在、サーバーにインストールした CircleCI 上で実行できるのは、旧バージョンの CircleCI CLI のみです。 macOS や他の Linux ディストリビューションに旧バージョンの CLI をインストールする場合は、以下の手順を実施します。
+The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
+
+## Using the CLI on CircleCI Server
+
+Currently, only the legacy CircleCI CLI is available to run on server installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
 
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、設定します。
 2. 以下のコマンドを実行して、CLI をインストールします。
 
 `$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
 
-CLI (`circleci`) は `/usr/local/bin` ディレクトリにダウンロードされます。 `/usr/local/bin` への書き込みアクセス権を持っていない場合は、上記のコマンドを `sudo` で実行する必要があります。 CLI はアップデートの有無を自動的に確認し、アップデートがあった場合はメッセージが表示されます。
+The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
-## アンインストール
+## Uninstallation
 
-CircleCI CLI のアンインストールに使用するコマンドは、インストール方法によって異なります。
+Commands for uninstalling the CircleCI CLI will vary depending on what your installation method was using respectively:
 
 - **curl インストールコマンドを使用した場合**：`usr/local/bin` から `circleci` 実行可能ファイルを削除します。
 - **Mac で Homebrew を使用してインストールした場合**：`brew uninstall circleci` を実行します。
