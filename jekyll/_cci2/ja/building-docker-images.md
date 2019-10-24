@@ -108,7 +108,7 @@ jobs:
 
 1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 2. `setup_remote_docker` が呼ばれると、新たなリモート環境が作成され、プライマリコンテナはそのリモート環境用に設定されます。 Docker に関わるコマンドは全てプライマリコンテナ内で実行されますが、イメージのビルド・プッシュおよびコンテナの実行はリモート Docker エンジン内で処理されます。
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) here to speed up image building.
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI Server installations).
 4. Docker Hub のログイン情報の保管にはプロジェクト環境変数を使用します。
 
 ## 使用する Docker のバージョン変更
