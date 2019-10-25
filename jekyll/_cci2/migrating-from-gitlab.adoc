@@ -22,7 +22,7 @@ If you are using GitLab's SCM, you will first need to migrate your source code t
 Following are the steps required for using the git command line tool to import your GitLab repo into GitHub Enterprise:
 
 . Create an empty repository on your GitHub Enterprise instance.
-. Create a bare clone of your GitHub.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
+. Create a bare clone of your GitLab.com repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads:
 +
 ```
 git clone git@gitlab.com:[owner]/[repo-name].git --bare
@@ -61,7 +61,7 @@ Some differences that are worth calling out:
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
-| Gitlab | CircleCI
+| GitLab | CircleCI
 
 2+h| Define a job that executes a single build step. 
 
