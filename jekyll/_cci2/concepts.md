@@ -78,7 +78,7 @@ An image is a packaged system that has the instructions for creating a running c
 
 ## Jobs
 
-Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
+Jobs are collections of [steps](#steps). Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
