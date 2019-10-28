@@ -77,7 +77,7 @@ CircleCI プロジェクトは、関連付けられているコードリポジ�
 
 ## Jobs
 
-Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. machine にイメージが指定されていない場合は、デフォルトイメージが使用されます。Docker と macOS では、イメージも宣言する必要があります。
+Jobs are collections of [steps](#steps). Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
@@ -85,7 +85,7 @@ Jobs are a collection of steps and each job must declare an executor that is eit
 {:.no_toc}
 
 A cache stores a file or directory of files such as dependencies or source code in object storage.
-ビルドを高速化するために、以前のジョブに含まれる依存関係をキャッシュする特別なステップを各ジョブに追加できます。
+Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
 
 {% raw %}
 
