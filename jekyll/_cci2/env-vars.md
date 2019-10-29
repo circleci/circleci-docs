@@ -283,6 +283,8 @@ Build parameters are environment variables, therefore their names have to meet t
 
 Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
+**Note** When using build parameters, do **not** use these parameters to store secret data.
+
 For example, when you pass the parameters:
 
 ```
