@@ -346,18 +346,18 @@ en:
         - name: What's New in v2.18
           link: 2.0/v.2.18-overview/
         - name: v2.17.3 Installation Guide
-          link: 
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.17.3 Operations Guide
-          link: 
+          link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
       children:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
         - name: v2.17.3 Installation Guide
-          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
-          link: 2.0/CircleCI-Server-Operations-Guide.pdf
+          link: 2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
     - name: Server v2.16 PDFs
       link: 2.0/v.2.16-overview/
       children:
