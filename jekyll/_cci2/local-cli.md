@@ -300,6 +300,10 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
+**Add SSH Keys
+
+It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
+
 **Workflows**
 
 The CLI tool does not provide support for running workflows. By nature, workflows leverage running builds in parallel on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single **jobs** (which make up parts of a workflow).
