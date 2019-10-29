@@ -171,9 +171,6 @@ Custom Metrics using a Telegraf configuration file may be configured in addition
 
 // Should this be "in addition to" or "instead of" ^^ This sentence doesn't make sense to me - After chatting withe George at the docs meeting I think customers can either get all metrics we provide to Cloudwatch or Datadog - OR they can enable Custom metrics and edit the configuration file to ONLY add the metrcis they want to see... ?
 
-.Custom Metrics
-image::metrics-custom.png[Custom Metrics]
-
 === Customizing Metrics
 
 Following are the steps required to customize which of these metrics you wish to receive:
@@ -181,7 +178,7 @@ Following are the steps required to customize which of these metrics you wish to
 . Check to enable Use Custom Telegraf Metrics from the Management Console settings
 +
 .Custom Metrics
-image::metrics-custom.png[Custom Metrics]
+image::custom_metrics.png[Custom Metrics]
 . SSH into the Services machine
 . Add the following to `/etc/circleconfig/telegraf/statsd.conf`
 +
