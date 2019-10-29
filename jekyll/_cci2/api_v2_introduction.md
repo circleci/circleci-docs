@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-The CircleCI API v2 is a significant update to the existing CircleCI API v1.1 that is currently being used by internal and external audiences.
+The CircleCI API v2 is a new API that may be used by internal and external users to make API calls to retrieve detailed information about workflows and pipelines.
 
 ## Introduction to API v2
 
@@ -51,13 +51,7 @@ The CircleCI API v2 includes the use of pipelines to assist you in triggering wo
 
 For more detailed information about pipelines and how you can use them in your workflows and builds, please see the [Build Processing](https://circleci.com/docs/2.0/build-processing/)page.
 
-## Insights
-
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed *API Reference Guide* (*add link here for the API Reference Guide when ready*) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
-
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}`
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
-- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
+**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used by customers for sensitive values.
 
 ## Changes In Endpoints
 
@@ -96,6 +90,14 @@ Endpoint       | Description
 With the release of API v2, there will be two different versions of the CircleCi API that you can use. Although CircleCI recommends you use API v2, you may still use API v1.1 if you wish; however, please note that API v2 includes several powerful features (e.g. support for pipelines) that are unavailable in API v1.1.
 
 For a short period of time, both versions of the CircleCI API (v1.1 & v2) will be available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 and discontinue support for this API version in the near future. Guidance on when the CircleCI API v1.1 will be discontinued will be communicated at a future date.
+
+## Insights
+
+The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed *API Reference Guide* (*add link here for the API Reference Guide when ready*) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
+
+- `GET /{vcs_slug}/{org_name}/projects/{project_name}`
+- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
+- `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
 
 ## See Also
 {:.no_toc}
