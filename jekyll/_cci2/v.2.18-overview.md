@@ -29,23 +29,23 @@ This document provides a summary of features and product notes for the release o
 
 Metric | Description
 --- | ---
-`Circle.backend.action.upload-artifact-error` | Tracks how many times an artifact has failed to upload.
-`Circle.build-queue.runnable.builds` | Track how many builds flowing through the system are considered runnable
-`Circle.dispatcher.find-containers-failed` | Track how many 1.0 builds 
-`Circle.github.api_call` | Tracks how many api calls CircleCI is making to github
-`Circle.http.request` | Tracks the response codes to CircleCi requests
+`circle.backend.action.upload-artifact-error` | Tracks how many times an artifact has failed to upload.
+`circle.build-queue.runnable.builds` | Track how many builds flowing through the system are considered runnable
+`circle.dispatcher.find-containers-failed` | Track how many 1.0 builds 
+`circle.github.api_call` | Tracks how many api calls CircleCI is making to github
+`circle.http.request` | Tracks the response codes to CircleCi requests
 `circle.nomad.client_agent.*` | Tracks nomad client metrics
 `circle.nomad.server_agent.*` | Tracks how many nomad servers there are. 
-`Circle.run-queue.latency` | Tracks how long it takes for a runnable build to be accepted. 
-`Circle.state.container-builder-ratio` | Keeps track of how many containers exist per builder ( 1.0 only ) 
-`Circle.state.lxc-available` | Tracks how many containers are available ( 1.0 only ) 
-`Circle.state.lxc-reserved` | Tracks how many containers are reserved/in use ( 1.0 only )
-`Circle.vm-service.vm.assigned-vm` | Tracks how many vm’s are in use
-`Circle.vm-service.vms.delete.status` | Tracks how many vm’s we’re deleting at a given moment
-`Circle.vm-service.vms.get.status` |  Tracks how many vm’s we have? ( not sure)
-`Circle.vm-service.vms.post.status` | TBD
-`Circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
-`Circleci.grpc-response` | Tracks latency over the system grpc system calls. 
+`circle.run-queue.latency` | Tracks how long it takes for a runnable build to be accepted. 
+`circle.state.container-builder-ratio` | Keeps track of how many containers exist per builder ( 1.0 only ) 
+`circle.state.lxc-available` | Tracks how many containers are available ( 1.0 only ) 
+`circle.state.lxc-reserved` | Tracks how many containers are reserved/in use ( 1.0 only )
+`circle.vm-service.vm.assigned-vm` | Tracks how many vm’s are in use
+`circle.vm-service.vms.delete.status` | Tracks how many vm’s we’re deleting at a given moment
+`circle.vm-service.vms.get.status` |  Tracks how many vm’s we have? ( not sure)
+`circle.vm-service.vms.post.status` | TBD
+`circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
+`circleci.grpc-response` | Tracks latency over the system grpc system calls. 
 
 
 * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)

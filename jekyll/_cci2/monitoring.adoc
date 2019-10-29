@@ -61,19 +61,19 @@ When the Nomad metrics container is running normally, no output will be written 
 [cols=2*, stripes=even]
 [cols="5,6"]
 |===
-| `Circle.backend.action.upload-artifact-error`
+| `circle.backend.action.upload-artifact-error`
 | Tracks how many times an artifact has failed to upload.
 
-| `Circle.build-queue.runnable.builds`
+| `circle.build-queue.runnable.builds`
 | Tracks how many builds flowing through the system are considered runnable.
 
-| `Circle.dispatcher.find-containers-failed`
+| `circle.dispatcher.find-containers-failed`
 | Tracks how many 1.0 builds
 
-| `Circle.github.api_call`
+| `circle.github.api_call`
 | Tracks how many api calls CircleCI is making to github
 
-| `Circle.http.request`
+| `circle.http.request`
 | Tracks the response codes to CircleCi requests
 
 | `circle.nomad.client_agent.*``
@@ -82,22 +82,22 @@ When the Nomad metrics container is running normally, no output will be written 
 | `circle.nomad.server_agent.*`
 | Tracks how many nomad servers there are.
 
-| `Circle.run-queue.latency`
+| `circle.run-queue.latency`
 | Tracks how long it takes for a runnable build to be accepted.
 
-| `Circle.state.container-builder-ratio`
+| `circle.state.container-builder-ratio`
 | Keeps track of how many containers exist per builder ( 1.0 only ).
 
-| `Circle.state.lxc-available`
+| `circle.state.lxc-available`
 | Tracks how many containers are available ( 1.0 only )
 
-| `Circle.state.lxc-reserved`
+| `circle.state.lxc-reserved`
 | Tracks how many containers are reserved/in use ( 1.0 only ).
 
-| `Circleci.cron-service.messaging.handle-message`
+| `circleci.cron-service.messaging.handle-message`
 | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
 
-| `Circleci.grpc-response`
+| `circleci.grpc-response`
 | Tracks latency over the system grpc system calls.
 |===
 
@@ -167,9 +167,7 @@ image::metrics_datadog2.png[DataDog API Key]
 
 == Custom Metrics
 
-Custom Metrics using a Telegraf configuration file may be configured in addition to the predefined CloudWatch and Datadog metrics described above. Telegraph can also be used instead of CloudWatch and Datadog for more fine grained control.
-
-// Should this be "in addition to" or "instead of" ^^ This sentence doesn't make sense to me - After chatting withe George at the docs meeting I think customers can either get all metrics we provide to Cloudwatch or Datadog - OR they can enable Custom metrics and edit the configuration file to ONLY add the metrcis they want to see... ?
+Custom Metrics using a Telegraf configuration file may be use as an alternative to DataDog or AWS Cloudwatch. Using Telegraf allows for more fine grained control.
 
 === Customizing Metrics
 
@@ -189,7 +187,7 @@ image::custom_metrics.png[Custom Metrics]
         metric_separator = "."
         namepass = []
 ```
-. Under `namepass` add any metrics you wish to receive, for example, if you are only interested in metics for VM service, your cofnfig should resemble:
+. Under `namepass` add any metrics you wish to receive, the example below shows choosing to configure just the first 4 from the list above:
 +
 ```
 [[inputs.statsd]]
@@ -197,10 +195,10 @@ image::custom_metrics.png[Custom Metrics]
         parse_data_dog_tags = true
         metric_separator = "."
         namepass = [
-          "circle.vm-service.vm.assigned-vm",
-            "circle.vm-service.vms.delete.status",
-            "circle.vm-service.vms.get.status",
-            "circle.vm-service.vms.post.status"
+            "circle.backend.action.upload-artifact-error",
+            "circle.build-queue.runnable.builds",
+            "circle.dispatcher.find-containers-failed",
+            "circle.github.api_call"
           ]
 ```
 . Restart the telegraf container by running: `sudo docker restart telegraf`
