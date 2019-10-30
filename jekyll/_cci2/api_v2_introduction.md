@@ -51,7 +51,7 @@ The CircleCI API v2 includes the use of pipelines to assist you in triggering wo
 
 For more detailed information about pipelines and how you can use them in your workflows and builds, please see the [Build Processing](https://circleci.com/docs/2.0/build-processing/)page.
 
-**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used by customers for sensitive values.
+**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used by customers for sensitive values (secrets). You can find this sensitive information in the [Project Settings] page(https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context)
 
 ## Changes In Endpoints
 
