@@ -156,7 +156,7 @@ file directlySuccess!
 "Orb {orb@version} not loaded. To use this orb, an organization admin must opt-in to using third party orbs in Organization Security settings."
 ```
 
-Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the Code Sharing Terms of Service. CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
+Users are blocked from using orbs from the registry until they have turned on the ability to use orbs for their organization and accepted the [Code Sharing Terms of Service] (https://circleci.com/legal/code-sharing-terms/). CircleCI requires organizations to do so, since by using orbs, an organization is asking CircleCI to inject configuration into its build that was authored by a 3rd party.
 
 To resolve this issue, go to "Settings -> Security -> Allow uncertified orbs" and enable this setting.
 
