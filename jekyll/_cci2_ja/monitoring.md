@@ -74,7 +74,7 @@ Datadog API キーを入力します。
 
 上記で紹介した CloudWatch や Datadog の定義済みメトリクスのほか、Telegraf の設定ファイルを使用したカスタムメトリクスも使用できます。 カスタムメトリクスを使用すると、より詳細な制御設定が可能になります。
 
-![カスタム]({{ site.baseurl }}/assets/img/docs/metrics-custom.png)
+![カスタム]({{ site.baseurl }}/assets/img/docs/custom_metrics.png)
 
 ##### 設定
 
