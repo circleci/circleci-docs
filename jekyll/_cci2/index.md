@@ -8,7 +8,16 @@ permalink: /2.0/
 Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
 
 <hr class="hidden-xs" />
-
+<!-- from here -->
+ <style>
+    a{
+        color:  #4c6ca0;
+    }
+    a:visited{
+        color:  #446190;
+    }
+    </style>
+    <!--till here-->
 <div class="row">
   <div class="col-xs-12 col-sm-6">
     <h2>Get Started</h2>
