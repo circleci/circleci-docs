@@ -24,11 +24,10 @@ A collection best practices and strategies for authoring orbs. CircleCI orbs are
 
 ### Examples
 
-- Must have at least 1 example.
-- Show orb version as `x.y` (patch version may not need to be included).
+- Must have at least 1 [usage example](https://circleci.com/docs/2.0/orb-author/#providing-usage-examples-of-orbs).
+- Show orb version as `x.y` (patch version may not need to be included) in the example.
 - Example should include most common/simplest use case calling a top-level job or other base-case elements if no job is present.
 - If applicable, you may want to showcase the use of [pre and post steps](https://circleci.com/docs/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job. 
-- Example(s) should demonstrate common use case scenerios.
 
 ### Commands
 
