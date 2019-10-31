@@ -36,7 +36,7 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 - Anchors will be processed and resolved instead of appearing in the app config.
 - If you use `<<` in your shell commands (most commonly found in use of heredocs) you will need to escape them using backslash `\` as in `\<<` in order to use version 2.1 or higher of configuration. 2.0 configuration will not be affected.
 - Pipelines are **not** fully backwards-compatible with the 1.1 API endpoint to trigger arbitrary jobs - you may experience unexpected or inconsistent results if you use this endpoint after turning on Pipelines. Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) introduced in September 2018. Please keep in mind that this build triggering API endpoint does **not** accept parameters or workflow or job filters. If you make heavy use of those API features and want to use Pipelines, please contact your CircleCI account team.
-- Configuration version 2.0 will have the `CIRCLE_COMPARE_URL` environment injected into all jobs for backwards compatibility.
+- Configuration version 2.0 will have the `CIRCLE_COMPARE_URL` environment variable injected into all jobs for backwards compatibility.
 
 ## Giving Feedback
 1. Tweet @circleci with thoughts
