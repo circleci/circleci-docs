@@ -70,7 +70,7 @@ example of a minimal config in the
 ### Best Practices
 {:.no_toc}
 
-In addition to the basic setup steps, it is best practice to include
+In addition to the basic setup steps, if you are using Cocoapods 1.7 and lower, it is best practice to include
 downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
 and linting the Swift code together with the `build-and-test` job:
 
@@ -110,6 +110,14 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
+```
+
+As of Cocoapods 1.8, cloning the Cocoapods Specs repo is no longer required and has been superseeded by using a CDN. This has the advantage of speeding up job execution times.
+
+To enable the Cocoapods CDN, remove the `Fetch CocoaPods Specs` step from your CircleCI config and replace the `source` directive (which points to the Specs repo) in the Podfile with the following:
+
+```
+source 'https://cdn.cocoapods.org/'
 ```
 
 ## Advanced Setup
