@@ -101,4 +101,4 @@ workflows:
           validate: true
 ```
 
-In the above example, the Build-Test-Depoly (BTD) workflow runs the `orb-tools/validate` job first. If the orb is deemed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+In the above example, the Build-Test-Deploy (BTD) workflow runs the `orb-tools/validate` job first. If the orb is deemed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
