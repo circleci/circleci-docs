@@ -38,6 +38,7 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 - アンカーは、アプリケーションコンフィグに表示されることなく、処理されて解決されます。
 - If you use `<<` in your shell commands (most commonly found in use of heredocs) you will need to escape them using backslash `` as in `\<<` in order to use version 2.1 or higher of configuration. 2.0 configuration will not be affected.
 - パイプラインは、任意のジョブをトリガーする 1.1 API エンドポイントと完全には下位互換性が**ありません**。パイプラインをオンにした後にこのエンドポイントを使用すると、予期しない結果または不整合な結果となる可能性があります。 Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) introduced in September 2018. このビルドをトリガーする API エンドポイントは、パラメーター、ワークフロー、ジョブフィルターを受け付け**ない**ので、ご注意ください。 パイプラインと併せてこれらの API 機能を多用したいとお考えでしたら、CircleCI のアカウントチームにお問い合わせください。
+- Configuration version 2.0 will have the `CIRCLE_COMPARE_URL` environment variable injected into all jobs for backwards compatibility.
 
 ## Giving Feedback
 
