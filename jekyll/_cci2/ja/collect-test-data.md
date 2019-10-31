@@ -406,6 +406,7 @@ Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure t
       - run: dotnet test --no-build --logger "trx"
       - run:
           name: test results
+          when: always
           command: |
               dotnet tool install -g trx2junit
               export PATH="$PATH:/root/.dotnet/tools"
