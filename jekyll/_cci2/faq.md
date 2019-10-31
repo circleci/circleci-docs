@@ -322,7 +322,7 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 #### Are there credit plans for open source projects?
 {:.no_toc}
 
-Open source organizations receive 400,000 free credits per month that can be
+Open source organizations **on our free plan** receive 400,000 free credits per month that can be
 spent on Linux open source projects, using a maximum of 4 concurrent jobs. 
 
 If you build on macOS, we also offer organizations on our free plan 25,000 free
