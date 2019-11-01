@@ -10,7 +10,8 @@ order: 10
 
 [CircleCI 設定]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェルスクリプトを使用するうえでのベストプラクティスについて、以下のセクションに沿って説明します。
 
-+ 目次 {:toc}
++ 目次
+{:toc}
 
 ## 概要
 
@@ -19,12 +20,11 @@ CircleCI を設定するときに、シェルスクリプトの記述が必要�
 ## シェルスクリプトのベストプラクティス
 
 ### ShellCheck の使用
-
 {:.no_toc}
 
-[ShellCheck](https://github.com/koalaman/shellcheck) は、シェルスクリプトの静的解析ツールです。bash/sh シェルスクリプトに対して警告と提案を行います。
+[ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
 
-CircleCI で ShellCheck を最も効果的に使用するには、このツールを `.circleci/config.yml` ファイルに個別のジョブとして追加します。 こうすると、ワークフロー内で `shellcheck` ジョブを他のジョブと並列に実行できます。
+ShellCheck works best with CircleCI when you add it as a separate job in your `.circleci/config.yml` file. This allows you to run the `shellcheck` job in parallel with other jobs in a workflow, as shown below. If you are using configuration `version: 2.1`, consider using the [Shellcheck orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck#usage-shellcheck-workflow) to simplify your config file.
 
 ```yaml
 version: 2
@@ -78,7 +78,6 @@ workflows:
     
 
 ### エラーフラグの設定
-
 {:.no_toc}
 
 いくつかのエラーフラグを設定することで、好ましくない状況が発生した場合にスクリプトを自動的に終了できます。 厄介なエラーを回避するために、各スクリプトの先頭に以下のフラグを追加することをお勧めします。
