@@ -1013,7 +1013,7 @@ test-results
 
 Special step used to persist a temporary file to be used by another job in the workflow.
 
-**Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+**Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 15 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
