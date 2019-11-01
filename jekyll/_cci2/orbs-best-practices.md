@@ -57,10 +57,10 @@ fi
 **Installing binaries and tools**
   - Set an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and ensure to install the binary to this parameterized location. This may often avoid the issue of needing `root` privledges in environments where the user may not have root.
   - If `root`is required for your use case, it is recommended to add pre-flight checks to determine if the user has root permissions and gracefully fail with a descriptive error message alerting the user they need proper permissions.
-  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run](https://circleci.com/docs/2.0/configuration-reference/#run) statement.
+  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run](https://circleci.com/docs/2.0/configuration-reference/#run) statement. This is required when installing to a non-default path.
   example:
 ```
-echo `export PATH="$PATH:/path/to/dir"` >> $BASH_ENV
+echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 ```
 
 
