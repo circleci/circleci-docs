@@ -158,7 +158,7 @@ Available Commands:
   validate    Validate an orb.yml
 ```
 
-**Note** When authoring an orb, you will agree to CircleCI's [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/)when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+**Note** When authoring an orb, you will agree to CircleCI's [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/) when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
 
 ## See Also
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
