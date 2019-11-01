@@ -27,7 +27,7 @@ Where you once saw the term `Jobs` in the sidebar, you will now see `Pipelines`.
 
 ## Jobs, Tests, Artifacts
 
-A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifact results through several tabs.
+A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
