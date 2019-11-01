@@ -53,6 +53,16 @@ fi
 - Utilize the [“env_var_name” parameter type](https://circleci.com/docs/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data. 
 - [Injecting steps as a parameter](https://circleci.com/docs/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
 
+**Installing binaries and tools**
+  - Set an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and ensure to install the binary to this parameterized location. This may often avoid the issue of needing `root` privledges in environments where the user may not have root.
+  - If `root`is required for your use case, it is recommended to add pre-flight checks to determine if the user has root permissions and gracefully fail with a descriptive error message alerting the user they need proper permissions.
+  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run](https://circleci.com/docs/2.0/configuration-reference/#run) statement. This is required when installing to a non-default path.
+  example:
+```
+echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
+```
+
+
 ### Jobs
 
  - Jobs should utilize Commands defined within the orb to orchestrate common use cases for this orb.
