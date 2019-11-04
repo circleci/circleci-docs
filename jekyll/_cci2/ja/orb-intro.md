@@ -156,7 +156,7 @@ If you find that there are no existing orbs that meet your needs, you may author
       validate    Validate an orb.yml
     
 
-**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+**Note** When authoring an orb, you will agree to CircleCI's [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/) when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
 
 ## See Also
 
