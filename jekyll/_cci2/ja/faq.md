@@ -307,7 +307,13 @@ CircleCI からの請求が発生する以下の日付に加え、有料プラ�
 
 #### オープンソース プロジェクト向けのクレジットベース プランはありますか？
  {:.no_toc}
-オープンソースの組織には、オープンソース プロジェクト用として 1 週間あたり 100,000 クレジットが無料で提供されます。 これらのクレジットは、Linux ベースのリソースで使用可能です。 各組織で最大 4 件のジョブを同時実行できます。
+Open source organizations **on our free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs.
+
+If you build on macOS, we also offer organizations on our free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
+
+#### I currently get free credits for open source projects on my container plan. How do I get discounts for open source on the Performance plan?
+{:.no_toc}
+We still offer discounts for open source on our paid usage plans! Please [open a support ticket](https://support.circleci.com/hc/en-us) to talk to our team about customizing your plan for open source projects.
 
 * * *
 
