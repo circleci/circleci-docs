@@ -29,7 +29,7 @@ After validating your build configuration, bump the version property to 2.1 so i
 
 ### Step 4 - Create a New Orb Using Inline Template
 
-Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using inline orbs can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
+Using inline orbs are the easiest way to get started with orbs because you can reference them from your existing configuration. Although not required for orb authoring, using [inline orbs](https://circleci.com/docs/2.0/orb-author/#writing-inline-orbs) can simplify the process and is a reasonable approach to authoring orbs quickly and easily.
 
 ### Step 5 - Design Your Orb
 Depending on whether you use an inline template or author your orb independent of this inline template, you will want to add elements (Jobs, Commands, and Executors) to your orb. For more information on these orb elements, refer to the [Commands](https://circleci.com/docs/2.0/using-orbs/#commands), [Jobs](https://circleci.com/docs/2.0/using-orbs/#jobs), and [Executors](https://circleci.com/docs/2.0/using-orbs/#executors) sections found in the [Using Orbs](https://circleci.com/docs/2.0/using-orbs/#section=configuration) page.

@@ -65,14 +65,14 @@ jobs: # a collection of steps
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - restore_cache: # special step to restore the dependency cache if `package.json` does not change
+      - restore_cache: # special step to restore the dependency cache if `package-lock.json` does not change
           keys:
-            - node-v1-{{ checksum "package.json" }}
+            - node-v1-{{ checksum "package-lock.json" }}
             # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - node-v1-
       - run: yarn install
-      - save_cache: # special step to save the dependency cache with the `package.json` cache key template
-          key: node-v1-{{ checksum "package.json" }}
+      - save_cache: # special step to save the dependency cache with the `package-lock.json` cache key template
+          key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
       - run: touch storage/testing.sqlite 
@@ -152,11 +152,11 @@ to restore cached files or directories.
             - vendor
       - restore_cache:
           keys:
-            - node-v1-{{ checksum "package.json" }}
+            - node-v1-{{ checksum "package-lock.json" }}
             - node-v1-
       - run: yarn install
       - save_cache: 
-          key: node-v1-{{ checksum "package.json" }}
+          key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
 ```

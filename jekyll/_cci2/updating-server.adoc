@@ -1,58 +1,207 @@
-= Updating a Server Installation
+= Upgrading a Server Installation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This section describes the Server update process.
+This section describes the process for upgrading your CircleCI Server installation from v2.17 to v2.18.
 
 toc::[]
 
-== Update Steps
+== Org Rename Script
 
-. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended) - steps below
-. Check you are running Docker v17.12.1 and update if necessary
-. Update Replicated to install the new version of CircleCI Server - steps below
+WARNING: Before upgrading please read and follow the steps below if you have **ever had issues with renaming an organization within CircleCI**
+or you suspect that an **organization rename might have happened at any point**.
 
-== Snapshot for Rollback
+. SSH into your Services machine
+. REPL into `workflows-conductor` by running the following: `sudo docker exec -it workflows-conductor lein repl :connect 6005`
+. Copy/paste this script into the REPL session. It will run migration and output current progress.
++
+```
+
+(def domain-client @workflows-conductor.domain.contexts/*domain-connection*)
+(def permissions-client @workflows-conductor.domain.contexts/*permissions-connection*)
+​
+;; Syncing orgs
+(require '[circleci.domain.client.orgs :as domain-orgs])
+​
+(defn get-domain-org
+  "Pass-through fn that actually makes API call to domain-service"
+  [org-id]
+  (domain-orgs/org-by-id domain-client org-id))
+​
+(defn new-domain-org
+  "Pass-through fn that actually makes API call to domain-service"
+  [org-data]
+  (domain-orgs/new-org domain-client org-data))
+​
+(defn sync-org
+  [org]
+  (when org
+    (let [domain-org (try
+                       (get-domain-org (:analytics-id org))
+                       (catch Exception e
+                         (println "ERROR: Exception while fetching org from domain-service" (:analytics-id org))
+                         (throw e)))
+          mongo-ids {:id (:analytics-id org)
+                     :external-id (str (or (:github-id org) (:bitbucket-id org)))}
+          domain-ids (select-keys domain-org [:id :external-id])]
+      (when-not (= mongo-ids domain-ids)
+        (let [new-domain-org (try
+                               (new-domain-org {:id (:analytics-id org)
+                                                :name (:name org)
+                                                :provider-id (:id (circle.services.domain/provider-by-type (:vcs-type org)))
+                                                :external-id (some-> (or (:github-id org) (:bitbucket-id org))
+                                                                     str)})
+                               (catch Exception e
+                                 (println "ERROR: Exception while creating an org" (:analytics-id org))
+                                 (throw e)))
+              new-domain-ids (select-keys new-domain-org [:id :external-id])]
+          (when-not (= mongo-ids new-domain-ids)
+            (println "ERROR: Orgs doesn't match after sync.\nMongo org:" mongo-ids "\ndomain-service org:" domain-ids)))))))
+​
+(defn sync-all-orgs
+  [last-id]
+  (loop [prev-id last-id]
+    (let [org (first (circle.model.organization/find-active :where (when prev-id {:_id {:$gt prev-id}})
+                                                            :only [:github-id :bitbucket-id :analytics-id :name :vcs-type]
+                                                            :limit 1
+                                                            :sort {:_id 1}))]
+      (when org
+        (println "Syncing org" (select-keys org [:_id :name]))
+        (try
+          (sync-org org)
+          (catch Exception e
+            (println e)))
+        (recur (:_id org))))))
+​
+;; Syncing contexts
+(require '[circleci.permissions.client.actors :as actors])
+(require '[circleci.permissions.client.permissions :as permissions])
+(require '[circleci.permissions.shared.permissions :as permissions-names])
+​
+(defn context-to-permission [{:contexts-service-client.context.response/keys [id name organization-ref] :as context}]
+  (println (format "\tCreating permissions for context '%s' (%s)" name id))
+  (try
+    (if-not (circleci.domain.client.contexts/context-by-id domain-client id)
+      (println (format "ERROR: context '%s' (%s) doesn't exist in domain-service") name id)
+      (when (empty? (actors/actors-allowed-to-run-contexts permissions-client [id]))
+        (permissions/new-permission permissions-client organization-ref permissions-names/run-context id)
+        (permissions/new-permission permissions-client organization-ref permissions-names/execute-context id)
+        (permissions/new-permission permissions-client organization-ref permissions-names/view-context id)
+        (permissions/new-permission permissions-client organization-ref permissions-names/edit-context-vars id)))
+​
+    (catch Exception e
+      (println (format "\tERROR: Unexpected error while creating permissions: '%s'" (.getMessage e))))))
+​
+(defn context-to-domain
+  [{:contexts-service-client.context.response/keys [id name organization-ref] :as context}]
+  (try
+    (println (format "\tMigrating context '%s' (%s)" name id))
+    (circleci.domain.client.contexts/new-context domain-client id name organization-ref nil)
+​
+    (catch clojure.lang.ExceptionInfo e
+      (let [{:keys [status body]} (ex-data e)
+            {:keys [errors]} (cheshire.core/parse-string body true)]
+        (cond
+          ;; context already migrated
+          (and (= status 400)
+               (= 1 (count errors))
+               (= "key_duplication" (some-> errors first :type)))
+          nil
+​
+          ;; org not found
+          (and (= status 400)
+               (= 1 (count errors))
+               (= "bad_argument" (some-> errors first :type))
+               (= "org_id" (some-> errors first :value)))
+          (println "\tERROR: domain-service doesn't know org with id" organization-ref)
+​
+          :else
+          (println "\tERROR: Failed to create a context in domain-service:" (ex-data e)))))
+​
+    (catch Exception e
+      (println (format "\tERROR: Unexpected error while creating context in domain-service: '%s'" (.getMessage e))))))
+​
+(defn migrate-contexts
+  []
+  (doseq [org (circle.model.organization/find-active :where {} :only [:analytics-id :name])]
+    (println (format "Migrating contexts for org '%s' (%s)" (:name org) (:analytics-id org)))
+    (doseq [context (contexts-service-client.core/list-contexts @workflows-conductor.domain.contexts/*contexts-connection* (:analytics-id org))]
+      (context-to-domain context)
+      (context-to-permission context))))
+​
+(defn migrate
+  []
+  (println "===== Syncing orgs =====\n")
+  (sync-all-orgs nil)
+  (println "\n==== Syncing contexts =====\n")
+  (migrate-contexts))
+​
+(migrate)
+```
+
+. If any `ERROR` messages are present in the output please report back to your CSM or reach out to support.
+
+== Upgrade Steps Overview
+
+Following is an overview of the CircleCI Server upgrade steps. Each stage is described in detail below.
+
+* Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
+* Update Replicated and check you are running Docker v17.12.1, update if necessary
+* Install the latest version of CircleCI Server
+
+=== 1. Snapshot for Rollback
 
 To take a snapshot of your installation:
 
-. Go to the Management Console (e.g. your-circleci-hostname.com:8800) and click Stop Now to stop the CircleCI Services machine from running
-. Ensure no jobs are running on the nomad clients – check by running `nomad status`
+. Go to the Management Console (e.g. `your-circleci-hostname.com:8800`) and click Stop Now to stop the CircleCI service.
++
+.Stop CircleCI
+image::stop_replicated_update_available.png[Stop CircleCI]
+. Ensure no jobs are running on the nomad clients – you can check this by running `nomad status`
 . Navigate to the AWS EC2 management console and select your Services machine instance
 . Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.
++
+.Snapshot Image Creation
+image::create_snapshot.png[Snapshot Image Creation]
 
 NOTE: It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
 Once you have the snapshot you are free to make changes on the Services machine.
 
 If you do need to rollback at any point, see our https://circleci.com/docs/2.0/backup/#restoring-from-backup[guide to restoring from a backup].
 
-== Updating Replicated
+=== 2. Updating Replicated
 
-=== Prerequisites
+==== Prerequisites
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
-* You are running replicated version 2.10.3<= on your services machine. Check by running the following:
+* Your installation is **not** airgapped and you can access the internet from it.
+* You are running replicated version >=2.10.3 on your services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
 ```
-* Your installation is **not** airgapped and you can access the internet from it
-* All steps are completed on the Services machine
++
+If you are running a version of Replicated pre 2.10.3 please reach out to support@circleci.com.
 
-=== Preparations
+==== Preparations
 
 CAUTION: Remember to take a snapshot (described above) before starting the Replicated update process
 
-. Stop the CircleCI application:
+. Stop the CircleCI application by clicking the Stop Now button on the Dashboard. Application shutdown takes a few minutes. Wait for the status to become “Stopped” before continuing.
++
+.Stop the CircleCI Application
+image::stop_replicated_update_available.png[Stop the CircleCI Application]
++
+Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
 +
 ```shell
 replicatedctl app stop
 ```
 +
-Application shutdown takes a few minutes. Please check the administration dashboard and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
+You can check the status using the followng:
 +
 ```shell
 replicatedctl app status inspect
@@ -75,7 +224,7 @@ Example Output:
 ]
 ```
 
-. For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1:
+. For the replicated update to succeed, it is necessary to update docker to the recommended version, 17.12.1. Check which version you are running with `docker version` and if you need to update, follow these steps:
 +
 ```shell
 sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
@@ -87,18 +236,18 @@ sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 sudo apt-mark hold docker-ce
 ```
 
-=== Perform Update
+==== Perform Update
 
 . Perform the Replicated update by executing the update script as follows:
 +
 ```shell
-curl -sSL "https://get.replicated.com/docker?replicated_tag=2.34.1" | sudo bash
+curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.0" | sudo bash
 ```
 +
 Double-check your replicated and docker versions:
 +
 ```shell
-replicatedctl version    # 2.34.1
+replicatedctl version    # 2.38.0
 docker -v                # 17.12.1
 ```
 
@@ -130,5 +279,19 @@ Example output:
     }
 ]
 ```
+
+=== 3. Upgrade CircleCI Server Version
+
+. Once you are running the latest version of Replicated, click the View Update button in the Management Console dashboard.
 +
-You will now be running the latest version of CircleCI Server.
+.View Available Updates
+image::view_update.png[View Available Updates]
+. Click Install next to the version you wish to install.
++
+TIP: Please refresh your screen intermittently during the install process to avoid unnecessary waiting.
++
+.View Available Releases
+image::release_history.png[View Available Releases]
++
+The install process may take several minutes and the install status will be displayed both on the Releases page and the main Dashboard.
+. Once the installation is finished, navigate to the Dashboard to start your installation - Note the middle box on the Dashboard will read "CircleCI is up to date" when you are running the latest version.

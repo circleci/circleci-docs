@@ -68,11 +68,12 @@ The table below describes each element that makes up an orb.
 
 **Note** Orbs require CircleCI version 2.1.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config.
-executors | N | Map | A map of strings to executor definitions.
-commands | N | Map | A map of command names to command definitions. 
+Key       | Required | Type | Description
+----------|----------|------|------------
+orbs      | N        | Map  | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config.
+executors | N        | Map  | A map of strings to executor definitions.
+commands  | N        | Map  | A map of command names to command definitions. 
+{: class="table table-striped"}
 
 ### Orb Configuration Example
 
