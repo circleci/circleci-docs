@@ -103,7 +103,7 @@ Let’s break down what’s happening during this build’s execution:
 
 1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) here to speed up image building.
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI Server installations).
 4. We use project environment variables to store credentials for Docker Hub.
 
 ## Docker Version

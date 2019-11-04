@@ -363,3 +363,4 @@ You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 
 Coveralls will automatically handle the merging of coverage stats in
 parallel builds.
+
