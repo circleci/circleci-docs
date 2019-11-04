@@ -209,6 +209,8 @@ en:
       children:
         - name: Status Overview
           link: 2.0/status/
+        - name: Viewing Pipelines
+          link: 2.0/pipelines/
         - name: Using Credits
           link: 2.0/credits/
         - name: Using Containers
