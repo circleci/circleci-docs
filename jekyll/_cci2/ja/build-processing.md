@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "パイプライン"
+title: "Enabling Pipelines"
 short-title: "パイプラインの有効化"
 description: "パイプラインを有効にする方法"
 categories:
@@ -42,8 +42,8 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 
 ## Giving Feedback
 
-1. CircleCI の Twitter アカウント (@CircleCIJapan) 宛てにツイートする
-2. [アイデアボード](https://ideas.circleci.com/)で既存の投稿に投票する、または投稿を追加する
+- Tweet @circleci with thoughts
+- Vote or add to our [Ideas board](https://ideas.circleci.com/)
 
 ## See Also
 
