@@ -8,30 +8,25 @@ categories:
 order: 70
 ---
 
-This document offers an overview of Docker Layer Caching (DLC), which can reduce Docker image build times on CircleCI. Docker Layer Caching is only available on the Performance usage plan. DLC is available on the Premium usage plan, on all server-installations.
-
-**Note:** Docker Layer caching is only available on select plans:
-
-- The Performance usage plan, at 200 credits per build.
-- On [enterprise](https://circleci.com/enterprise/) installations of CircleCI
+Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 credits per build) and on installations of [CircleCI Server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 - TOC
 {:toc}
 
 ## 概要
 
-Docker レイヤーキャッシュ (DLC) は、CI/CD プロセスの一環として Docker イメージのビルドが定期的に行われる場合に役立つすばらしい機能です。 DLC では、作成されるイメージレイヤーがジョブ内に保存されるため、ジョブの実行に使用される実際のコンテナには影響が及びません。
+Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
 
-DLC では、CircleCI のジョブ中にビルドされた Docker イメージの各レイヤーがキャッシュされます。その後で CircleCI を実行すると、イメージ全体が毎回リビルドされるのではなく、未変更のイメージレイヤーが再利用されます。 つまり、コミット間で Dockerfile の変更が少ないほど、イメージビルドステップが短時間で完了します。
+DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
 
-Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#using-machine) と[リモート Docker 環境]({{ site.baseurl }}/ja/2.0/building-docker-images) (`setup_remote_docker`) のどちらでも使用できます。
+Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
 
 ### 制限について
 {:.no_toc}
 
-**メモ：** DLC は、ビルドコンテナとして使用される Docker イメージには影響を**及ぼしません**。 そのため、ジョブを*実行*するために使用されるコンテナは、[`docker` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker) を使用している場合、`image` キーで指定され、[Jobs (ジョブ)] ページの Spin up Environment ステップに表示されます。
+**Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to *run* your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-DLC は、docker build、docker compose などの Docker コマンドを使用して独自の Docker イメージを作成する場合にのみ有効です。すべてのビルドが初期環境をスピンアップするのにかかる実測時間は短縮されません。
+DLC is only useful when creating your own Docker image with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
 ```YAML
 version: 2 
@@ -50,15 +45,15 @@ jobs:
 
 ## DLC の仕組み
 
-DLC は、外部ボリュームを作成し、それを `machine` やリモート Docker のジョブを実行するインスタンスにアタッチすることで、Docker イメージレイヤーをキャッシュします。 ボリュームのアタッチは、アタッチされるボリュームに Docker がイメージレイヤーを保存するような方法で実行されます。 ジョブが終了すると、ボリュームは切断され、その後のジョブで再利用されます。 つまり、DLC を使用して前のジョブでダウンロードされたレイヤーは、同じ DLC ボリュームを使用する次のジョブで使用できます。
+DLC caches your Docker image layers by creating an external volume and attaching it to the instances that execute the `machine` and Remote Docker jobs. The volume is attached in a way that makes Docker save the image layers on the attached volume. When the job finishes, the volume is disconnected and re-used in a future job. This means that the layers downloaded in a previous job with DLC will be available in the next job that uses the same DLC volume.
 
-1つの DLC ボリュームをアタッチできるのは、一度に 1つの `machine` またはリモート Docker ジョブだけです。 存在する DLC ボリュームが 1つだけで、DLC を要求するジョブが 2つローンチされる場合、CircleCI は新しい DLC ボリュームを作成し、それを 2番目のジョブにアタッチします。 プロジェクトでは、その時点以降、2つの DLC ボリュームが関連付けられることになります。 これは、並列ジョブにも適用されます。2つの `machine` ジョブを並列実行している場合、これらのジョブは異なる DLC ボリュームを取得します。
+One DLC volume can only be attached to one `machine` or Remote Docker job at a time. If one DLC volume exists but two jobs that request DLC are launched, CircleCI will create a new DLC volume and attach it to the second job. From that point on the project will have two DLC volumes associated with it. This applies to parallel jobs as well: if two `machine` jobs are run in parallel, they will get different DLC volumes.
 
-ボリュームがどのジョブで使用されるかに応じて、ボリューム上に異なるレイヤーが保存される場合があります。 使用頻度が低いボリュームには、古いレイヤーが保存されている可能性があります。
+Depending on which jobs the volumes are used in, they might end up with different layers saved on them. The volumes that are used less frequently might have older layers saved on them.
 
-DLC ボリュームは、ジョブで 14日間使用されないと、削除されます。
+The DLC volumes are deleted after 14 days of not being used in a job.
 
-CircleCI で 1つのプロジェクトに作成される DLC ボリュームの上限は 50個です。プロジェクトごとに最大 50個の同時 `machine` またはリモート Docker ジョブが DLC にアクセスできます。 これはジョブの並列処理を考慮するため、各プロジェクトで DLC にアクセスできるジョブの最大数は、50個の並列処理があるジョブの場合は 1つ、25個の並列処理があるジョブの場合は 2つとなります。
+CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50 concurrent `machine` or Remote Docker jobs per project can have access to DLC. This takes into account the parallelism of the jobs, so a maximum of 1 job with 50x parallelism will have access to DLC per project, or 2 jobs with 25x parallelism, and so on.
 
 ![Docker Layer Caching]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
