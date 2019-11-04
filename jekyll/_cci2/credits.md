@@ -55,6 +55,12 @@ Upgrading to a performance plan offers several improvements over the free plan:
 - No queuing
 - Support
 
+## Open Source Credit Usage
+
+Organizations on our free plan get 400,000 free credits per month for Linux open source builds. Using our free plan and keeping your repository public will enable this for you.
+
+If you build on macOS, we also offer organizations on our free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
+
 ## Docker Layer Caching
 
 Docker Layer Caching (DLC) is available for 200 credits per job run. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
