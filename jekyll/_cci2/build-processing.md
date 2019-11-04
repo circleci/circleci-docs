@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Pipelines"
+title: "Enabling Pipelines"
 short-title: "Enabling Pipelines"
 description: "How to enable pipelines"
 categories: [settings]
@@ -10,6 +10,7 @@ order: 1
 This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
 
 ## Getting Started
+
 Most projects will have Pipelines enabled by default. Verify the project pipeline setting in the Advanced section of your project's Settings page in the CircleCI app. **Note:** Pipelines are compatible with v2 and v2.1 configurations of CircleCI. Currently, Pipelines are not yet supported for private CircleCI Server installations.
 
 ## Benefits of Pipelines
@@ -39,8 +40,9 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 - Configuration version 2.0 will have the `CIRCLE_COMPARE_URL` environment variable injected into all jobs for backwards compatibility.
 
 ## Giving Feedback
-1. Tweet @circleci with thoughts
-2. Vote or add to our [Ideas board](https://ideas.circleci.com/)
+
+- Tweet @circleci with thoughts
+- Vote or add to our [Ideas board](https://ideas.circleci.com/)
 
 ## See Also
 
