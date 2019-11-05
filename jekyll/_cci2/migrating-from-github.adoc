@@ -17,7 +17,7 @@ CircleCI is a first-class CI tool. CI/CD has been our specialization since the c
 3. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into a build environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
 4. **Docker Layer Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to http://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
 
-We have a number of other features that set our system apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you're interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+We have a number of other features that set our system apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
 
 == Concepts
 
