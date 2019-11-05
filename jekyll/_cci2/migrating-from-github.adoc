@@ -81,7 +81,7 @@ In GitHub, you can specify your builds to run in Linux, macOS, and Windows envir
 
 In CircleCI, you have the same choice of environments (called Executors), except that Docker containers are their own class of executor. This eliminates redundancy in declaring a Linux environment when you only plan to run commands in containers.
 
-For each of the executor types, you have a choice of different versions which will subsequently have various versions of base software installed. https://circleci.com/docs/2.0/executor-types/[Documentation here].
+For each of the https://circleci.com/docs/2.0/executor-types/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
 
 See the table in the next section to compare configuration.
 
