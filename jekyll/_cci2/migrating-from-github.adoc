@@ -72,7 +72,7 @@ workflows:
 === Actions and Orbs
 "Actions" in Github are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
 
-CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orbs]. The primary difference is that CircleCI Orbs are just packaged, reusable YAML: subsequently you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
+CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orbs]. The primary difference is that CircleCI Orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
 Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/orbs/registry/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community Orbs / Integrations.
 
