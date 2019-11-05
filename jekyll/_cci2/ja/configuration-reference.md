@@ -509,9 +509,21 @@ jobs:
 | 4GPU\* | 64    | 488GiB       | 4    | 32                |
 {: class="table table-striped"}
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources. If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
-If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+#### **`project_slug`**
+
+**What is a Project Slug?**
+
+The CircleCI v2 API is backwards compatible with previous API versions in the way it identifies your projects using repository name. For example, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type, the name of your "organization", and the name of the repository.
+
+For the project type you can use github or bitbucket as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The organization is your username or organization name in your version control system.
+
+With API v2, CircleCI has introduced a string representation of the triplet called the `project_slug`, and takes the following form:
+
+`<project_type>/<org_name>/<repo_name>`
+
+The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. It is important to note that the `project_slug` is just a new name for the existing format, and not a new shape of the URLS that can then be used to retrieve information about a project. It is possible in the future CircleCI may change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
 
 #### **`steps`**
 
@@ -1311,6 +1323,50 @@ Tags can have the keys `only` and `ignore` keys. You may also use regular expres
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
+##### **`when` in Workflows**
+
+## Using 'when' in Workflows
+
+When using CircleCI API v2, you may use a `when` clause (the inverse clause is also supported) under a workflow declaration with a boolean value to determine whether or not to run that workflow. The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
+
+The example below shows an example configuration using two different pipeline parameters. You may use one of the parameters to drive a particular workflow, while you may use the other parameter to determine whether a particular step will run.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+  deploy:
+    type: boolean
+    default: false
+
+workflows:
+  version: 2
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+
+      - mytestjob
+      - when:
+          condition: << pipeline.parameters.deploy >>
+          steps:
+            - deploy
+
+jobs:
+...
+```
+
+This example prevents the workflow `integration_tests` from being triggered unless the tests were invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+
+    {
+        "parameters": {
+            "run_integration_tests": true
+        }
+    }
+    
+
 ###### *Example*
 
     workflows:
@@ -1331,7 +1387,7 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
 
-## サンプルコード
+## Full Example
 {:.no_toc}
 
 
