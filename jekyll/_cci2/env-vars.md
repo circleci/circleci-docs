@@ -116,8 +116,7 @@ In every step, CircleCI uses `bash` to source `BASH_ENV`. This means that `BASH_
 allowing you to use interpolation and share environment variables across `run` steps.
 
 **Note:**
-The `$BASH_ENV` workaround only works with `bash`. 
-Other shells probably won't work.
+The `$BASH_ENV` workaround only works with `bash`. Other shells probably won't work.
 
 ### Alpine Linux
 
@@ -283,7 +282,7 @@ Build parameters are environment variables, therefore their names have to meet t
 
 Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
-**Note** When using build parameters, do **not** use these parameters to store secret data.
+**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings](https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context).
 
 For example, when you pass the parameters:
 
