@@ -10,7 +10,7 @@ This document provides an overview of how to migrate from Github Actions to Circ
 
 == Why Migrate From Github Actions to CircleCI?
 
-CircleCI is a first-class CI tool. CI/CD is what we specialize in, and we have been doing it for over 8 years since the company's founding. On top of normal features you'd expect from any CI/CD tool, what sets us apart from others are the various additional features that boost productivity:
+CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
 
 1. **Test Parallelism** - CircleCI offers not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by splitting workloads between different containers. https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[Examples of that here].
 2. **Resource Classes** - CircleCI offers various different sizes of executors, great for adjusting according to lighter or heavier workloads on a node. https://circleci.com/docs/2.0/optimizations/#resource-class)[Documentation here].
