@@ -165,7 +165,7 @@ jobs:
           POSTGRES_DB: postgres
 ----
 
-2+h| Specifying steps to run in a job. Similar functionality, different syntax. https://circleci.com/docs/2.0/configuration-reference/#run[Documentation here].
+2+h| Specifying steps to https://circleci.com/docs/2.0/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
 
 a|
 [source, yaml]
