@@ -10,58 +10,52 @@ order: 1
 
 ここでは、以下のセクションに沿って、CircleCI 上でのオープンソースプロジェクトのビルドに関するヒントとベストプラクティスについて説明します。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## 概要
-
 {:.no_toc}
 
-オープンソースコミュニティをサポートする目的で、GitHub または Bitbucket 上のパブリックプロジェクトには 3つの無料のビルドコンテナが提供され、コンテナ数は合計 4つになります。 複数のビルドコンテナを使用することで、単一のプルリクエスト (PR) を並列処理で高速に、または複数の PR を一斉にビルドできます。
+To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
 
-Linux 上で動作するパブリックプロジェクトの場合、これらの追加コンテナは自動的に有効になります。 追加コンテナを使用しない場合、または CircleCI プロジェクトをパブリックにしない場合には、この設定を変更できます。 プロジェクトの **[Advanced Settings (詳細設定)]** で **[Free and Open Source (無料オープンソース)]** オプションを*オフ*に設定します。
-
-**メモ：**macOS 上のオープンソースプロジェクトをビルドする場合は、これらの追加コンテナを有効にする方法について billing@circleci.com にお問い合わせください。
+**Note:** If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
 ## セキュリティ
 
-オープンソースは開放型の活動であり、機密情報を「開放」しないように注意が必要です。
+While open source can be a liberating practice, take care not to liberate sensitive information.
 
 - リポジトリをパブリックにすると、CircleCI プロジェクトとそのビルドログもパブリックになります。 表示対象として選択する情報に注意してください。
 - CircleCI アプリケーション内に設定される環境変数は、一般には公開されず、明示的に有効にされない限り[フォークされた PR](#pass-secrets-to-builds-from-forked-pull-requests) に共有されることもありません。
 
 ## オープンソースプロジェクトの機能と設定
 
-以下の機能と設定は、オープンソースプロジェクトにおいて特に便利です。
+The following features and settings are especially useful for open source projects.
 
 ### プライベート環境変数
-
 {:.no_toc}
 
-多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 詳細については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクト内で環境変数を設定する)」を参照してください。
+Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public. For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
 ### プルリクエストのみをビルドする
-
 {:.no_toc}
 
-CircleCI はデフォルトですべてのブランチのすべてのコミットをビルドします。 この動作は、オープンソースプロジェクトで使用するには活動的すぎることがあり、場合によってはプライベートプロジェクトよりもきわめて多くのコミットが存在することになります。 この設定を変更するには、プロジェクトの **[Advanced Settings (詳細設定)]** に移動して、**[Only build pull requests (プルリクエストのみビルド)]** オプションを*オン*に設定します。
+By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects. To change this setting, go to the **Advanced Settings** of your project and set the **Only build pull requests** option to *On*.
 
-**メモ：**このオプションが有効であっても、CircleCI はプロジェクトのデフォルトのブランチからはすべてのコミットをビルドします。
+**Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch.
 
 ### フォークされたリポジトリからプルリクエストをビルドする
-
 {:.no_toc}
 
-多くのオープンソースプロジェクトは、フォークされたリポジトリから PR を受け入れます。 これらの PR をビルドすると、手動で変更をレビューする前にバグを捕捉することができるので、効果的な方法と言えます。
+Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
-CircleCI はデフォルトで、フォークされたリポジトリからの PR をビルドしません。 この設定を変更するには、ユーザープロジェクトの **[Advanced Settings (詳細設定)]** に移動して、**[Build forked pull requests (フォークされたプルリクエストをビルド)]** オプションを*オン*に設定します。
+By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Advanced Settings** of your project and set the **Build forked pull requests** option to *On*.
 
 ### フォークされたプルリクエストからのビルドにシークレットを渡す
-
 {:.no_toc}
 
-制限を設定していないビルドを親リポジトリ内で実行することは、場合によっては危険です。 プロジェクトにはしばしば機密情報が含まれており、ビルドをトリガーするコードをプッシュするユーザーならだれでも、この情報を自由に入手できます。
+Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
-オープンソースプロジェクトの場合、CircleCI のデフォルトでは、フォークされた PR からのビルドにシークレットを渡さず、以下の 4種類の設定データを隠します。
+By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
 
 - アプリケーションを通して設定される[環境変数](#private-environment-variables)
 
@@ -71,22 +65,22 @@ CircleCI はデフォルトで、フォークされたリポジトリからの P
 
 - [AWS 権限]({{ site.baseurl }}/ja/2.0/deployment-integrations/#aws)および設定ファイル
 
-**メモ：**シークレットを必要とするオープンソースプロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
+**Note:** Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
-プロジェクトをフォークし、PR をオープンする任意のユーザーとシークレットを共有しても問題がない場合は、**[Pass secrets to builds from forked pull requests (フォークされたプルリクエストからのビルドにシークレットを渡す)]** オプションを有効にできます。 プロジェクトの **[Advanced Settings (詳細設定)]** で **[Pass secrets to builds from forked pull requests (フォークされたプルリクエストからビルドにシークレットを渡す)]** オプションを*オン*に設定します。
+If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Advanced Settings** of your project, set the **Pass secrets to builds from forked pull requests** option to *On*.
 
 ### キャッシュ
 
-キャッシュは、PR の GitHub リポジトリに基づいて分離されます。 CircleCI は、フォーク PR の生成元の GitHub リポジトリ ID を使用してキャッシュを識別します。
+Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
 
 - 同じフォークリポジトリからの PR は、キャッシュを共有します (前述のように、これにはマスターリポジトリ内の PR とマスターによるキャッシュの共有が含まれます)。
 - それぞれ異なるフォークリポジトリ内にある 2つの PR は、別々のキャッシュを持ちます。
 
-現在、キャッシュの自動入力は行われていません。この最適化がまだ優先順位リストの上位に入っていないためです。
+Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
 
 ## オープンソースプロジェクトの例
 
-CircleCI 上でビルドされたさまざまな規模のプロジェクトを以下にいくつかご紹介します。
+Following are a few examples of projects (big and small) that build on CircleCI:
 
 - **[React](https://github.com/facebook/react)** - Facebook の JavaScript ベースの React は、CircleCI (および他の CI ツール) でビルドされています。 
 - **[React Native](https://github.com/facebook/react-native/)** - JavaScript と React を使用してネイティブモバイルアプリケーションをビルドします。
@@ -103,7 +97,6 @@ CircleCI 上でビルドされたさまざまな規模のプロジェクトを�
 - **[Yarn](https://github.com/yarnpkg/yarn)** - [npm に代わるツール](https://circleci.com/blog/why-are-developers-moving-to-yarn/)。
 
 ## 関連項目
-
 {:.no_toc}
 
-「[パブリックリポジトリの例]({{ site.baseurl }}/ja/2.0/example-configs/)」では、パブリックおよびオープンソースのプロジェクトの設定に関する各種のリンクが、CircleCI の機能とプログラミング言語ごとに紹介されています。
+Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
