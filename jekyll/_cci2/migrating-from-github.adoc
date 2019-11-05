@@ -93,7 +93,7 @@ See the table in the next section to compare configuration.
 |===
 | Github Config | CircleCI Config
 
-2+h| Specifying execution environment. While container execution is specified separately in Github, `docker` is its own class of executor in CircleCI. https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor[Documentation here].
+2+h| Specifying execution environment. While container execution is specified separately in Github, `docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor[own class of executor] in CircleCI.
 
 a|
 [source, yaml]
