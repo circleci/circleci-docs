@@ -21,6 +21,8 @@ en:
       children:
         - name: Getting Started Introduction
           link: 2.0/getting-started/
+        - name: What is CircleCI?
+          link: 2.0/about-circleci/
         - name: Sign Up & Try CircleCI
           link: 2.0/first-steps/
         - name: Hello World
