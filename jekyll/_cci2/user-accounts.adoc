@@ -6,7 +6,7 @@
 :toc: macro
 :toc-title:
 
-This section provides information to help system administrators manage accounts for their users. For an overview of user accounts, view the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin. This overview provides the active user count and the total number of licensed users.
+This section provides information to help system administrators of self-hosted CircleCI instances manage accounts for their users. For an overview of user accounts, view the Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin. This overview provides the active user count and the total number of licensed users.
 
 toc::[]
 
