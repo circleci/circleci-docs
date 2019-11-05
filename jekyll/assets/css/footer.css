@@ -9,72 +9,107 @@
   color: #F3F3F3;
   background-color: #161616;
   border-top: 1px solid #343434; }
-  .footer.fixed {
-    position: fixed;
-    bottom: 0;
-    width: 100%; }
-  .footer a {
-    color: #F3F3F3;
-    font-family: "Roboto"; }
-    .footer a:focus, .footer a:hover {
-      text-decoration: none;
-      color: #F3F3F3; }
-  .footer p.lead {
-    font-weight: 700;
-    color: #cccccc; }
+.footer.fixed {
+  position: fixed;
+  bottom: 0;
+  width: 100%; }
+.footer a {
+  color: #F3F3F3;
+  font-family: "Roboto"; }
+.footer a:focus, .footer a:hover {
+  text-decoration: none;
+  color: #F3F3F3; }
+.footer p.lead {
+  font-weight: 700;
+  color: #cccccc; }
+.footer nav h6 {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2;
+  margin: 0 0 12px;
+  color: #F3F3F3;
+  text-transform: uppercase; }
+@media (max-width: 991px) {
   .footer nav h6 {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 2;
-    margin: 0 0 12px;
-    color: #F3F3F3;
-    text-transform: uppercase; }
-    @media (max-width: 991px) {
-      .footer nav h6 {
-        margin-top: 30px; } }
-  .footer nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-    .footer nav ul li {
-      margin-bottom: 5px; }
+    margin-top: 30px; } }
+.footer nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+.footer nav ul li {
+  margin-bottom: 5px; }
+.footer .additional-links {
+  font-size: 14px;
+  padding-top: 16px;
+  color: #F3F3F3;
+  border-top: 1px solid #D8D8D8; }
+@media (max-width: 991px) {
   .footer .additional-links {
-    font-size: 14px;
-    padding-top: 16px;
-    color: #F3F3F3;
-    border-top: 1px solid #D8D8D8; }
-    @media (max-width: 991px) {
-      .footer .additional-links {
-        margin-top: 17px;
-        margin-bottom: 0; } }
-    .footer .additional-links a {
-      margin-right: 10px; }
-  .footer .social-container {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-        -ms-flex-align: center;
-            align-items: center;
-    -webkit-box-pack: justify;
-    -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-            justify-content: space-between; }
-    .footer .social-container .social-btns {
-      margin: 25px 0; }
-    .footer .social-container .hiring {
-      text-transform: uppercase;
-      vertical-align: -webkit-baseline-middle;
-      font-weight: 600; }
-  @media (max-width: 991px) {
-    .footer {
-      padding-top: 35px;
-      padding-bottom: 35px; }
-      .footer nav .col-sm-2 {
-        width: 100%;
-        margin-top: 30px;
-        margin-left: 0; }
-      .footer .col-sm-6 {
-        margin-bottom: 20px; } }
+    margin-top: 17px;
+    margin-bottom: 0; } }
+.footer .additional-links a {
+  margin-right: 10px; }
+.footer .social-container {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between; }
+.footer .social-container .social-btns {
+  margin: 25px 0; }
+.footer .social-container .hiring {
+  text-transform: uppercase;
+  vertical-align: -webkit-baseline-middle;
+  font-weight: 600; }
+@media (max-width: 991px) {
+  .footer {
+    padding-top: 35px;
+    padding-bottom: 35px; }
+  .footer nav .col-sm-2 {
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 0; }
+  .footer .col-sm-6 {
+    margin-bottom: 20px; } }
+
+
+/* Footer language select styles  */
+.footer .language-select .dropdown-toggle {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+.footer .language-select .dropdown-toggle img {
+  margin-right: 6px;
+  margin-top: -4px;
+}
+.footer .language-select .dropdown-toggle i {
+  font-size: 23px;
+  margin-left: 6px;
+}
+.footer .language-select .dropdown-item {
+  display: block;
+  color: #555555;
+  padding: 4px 12px;
+}
+.footer .language-select .dropdown-item.active {
+  background: #36D4ED;
+  color: #FFFFFF;
+}
+
+
+.footer .language-select .hidden {
+  display: none;
+}
+
+.footer .language-select .dropdown-menu {
+  display: block;
+  position: absolute;
+}

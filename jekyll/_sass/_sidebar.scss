@@ -51,6 +51,12 @@ $sidebar-spacing-base: 5px;
   &.fixed {
     position: fixed;
     top: 118px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-item-group {
+    flex: 1;
   }
 
   .main-nav-item {
@@ -114,6 +120,14 @@ $sidebar-spacing-base: 5px;
         margin-left: 30px;
         display: inline-block;
       }
+    }
+  }
+
+  .lang-picker {
+    padding: 16px 0;
+    border-top: 1px solid gainsboro;
+    select {
+      width: 100%;
     }
   }
 }
