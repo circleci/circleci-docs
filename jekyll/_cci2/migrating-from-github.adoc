@@ -192,7 +192,7 @@ jobs:
           command: ./gradlew build
 ----
 
-2+h| Using pre-packaged config (Actions for Github, Orbs for CircleCI). In CircleCI, you declare the Orbs at the top level and then refer to them by name in config, similar in concept to Python or JavaScript imports https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Documentation here]. This example uses Slack.
+2+h| Using pre-packaged config (Actions for Github, Orbs for CircleCI). In CircleCI, you declare orbs at the top level and then refer to them by name in config, similar in concept to Python or JavaScript imports https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Documentation here]. This example uses Slack.
 
 a|
 [source, yaml]
