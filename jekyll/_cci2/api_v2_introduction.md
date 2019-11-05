@@ -91,6 +91,10 @@ With the release of API v2, there will be two different versions of the CircleCi
 
 For a short period of time, both versions of the CircleCI API (v1.1 & v2) will be available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 and discontinue support for this API version in the near future. Guidance on when the CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
+## API v2 and Server Customers
+
+Existing CircleCI Server customers will be unable to use API v2. Sometime in the future, support for Server customers may be added.
+
 ## Insights
 
 The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed *API Reference Guide* (*add link here for the API Reference Guide when ready*) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
