@@ -42,7 +42,7 @@ When you have finished authoring your orb, simply run the `validate` command fro
 
 ### Step 7 - Publish Your Orb
 
-The final step in the orb publishing process is for you to simply publish your orb using the `orb-tools/publish` CLI command in the `circleci/orb-tools` orb. Note that `dev` orb versions make it possible to publish multiple versions of an orb name (`dev` orbs are mutable).
+The final step in the orb publishing process is for you to simply publish your orb using the `orb-tools/publish` CLI command in the `circleci/orb-tools` orb. Note that `dev` orb versions make it possible to publish multiple versions of an orb name (`dev` orbs are mutable). You must be also be an administrator for the organization where the orb will reside in order to publish the orb.
 
 **Note** For detailed information about this command, refer to the [orb-tools/publish](https://circleci.com/docs/2.0/creating-orbs/#orb-toolspublish) section on this page.
 
@@ -56,7 +56,7 @@ After you have finished authoring your orb, you will then want to publish your o
 
 This section covers the tooling and flow of authoring and publishing your own orbs to the CircleCI Orb Registry.
 
-Orbs may be authored inline in your `config.yml` file or authored separately and then published to to the orb registry for reuse across projects.
+Orbs may be authored inline in your `config.yml` file or authored separately and then published to to the orb registry for reuse across projects. You must also be an administrator for the organization where your orb will be published in order to complete this task.
 
 [WARNING] Orbs are always world-readable. All published orbs (production and development) can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.
 
