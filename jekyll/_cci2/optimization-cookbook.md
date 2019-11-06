@@ -27,11 +27,11 @@ The table below lists the different optimization tasks that can be performed usi
 
 Recipe | Description 
 ------------|-----------
-Single-Threading Builds (Queueing) | This section describes how you can use a specific single-threading (queueing) orb to ensure proper job and build completion without concurrency (queueing subsequent builds or jobs).
+Running Jobs Sequentially | This section describes how you can use the queue orb to run jobs sequentially without concurrency.
 Caching |  This section describes how you can use different caching strategies in your implemenations to optimize your builds and workflows.
 Test Performance | This section describes a specific use case where test performance was significantly improved on the CircleCI platform.
 
-## Single-Threading Builds (Queuing)
+## Running Jobs Sequentially
 
 One of the most common tasks you may encounter when using the CircleCI platform is managing multiple jobs simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for a previous job to be completed before the new job can be initiated, and the system timeout is set too low. In this case, one job will be completed, and other jobs may fail due to this timeout setting.
 
@@ -62,7 +62,7 @@ To configure your environment for the CircleCI platform and CircleCI orbs, follo
 
 ### Blocking Workflows
 
-One of the easiest ways to prevent workflow concurrency using the CircleCI Single-Threading orb is to enable "blocking" of any workflows with an earlier timestamp. By setting the `block-workflow` parameter value to `true`, all workflows will be forced to run consecutively, not concurrently, thereby limiting the number of workflows in the queue. In turn, this will also improve overall performance while making sure no workflows are discarded.
+One of the easiest ways to prevent workflow concurrency using the queueing orb is to enable "blocking" of any workflows with an earlier timestamp. By setting the `block-workflow` parameter value to `true`, all workflows will be forced to run consecutively, not concurrently. This limits the number of workflows in the queue. In turn, this also improves overall performance while making sure no workflows are discarded.
 
 {% raw %}
 
@@ -114,7 +114,7 @@ steps:
 ```
 {% endraw %}
 
-## Caching
+## Caching Dependencies
 
 One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
 
