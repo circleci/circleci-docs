@@ -157,11 +157,11 @@ Because caching is a such a critical aspect of optimizing builds and workflows, 
 
 When running tests on the CircleCI platform, one of the primary considerations you will want to make is how you can optimize the testing process to minimize credit usage and improve overall testing performance and results. Testing can sometimes be a time and performance-intensive process; therefore, the ability to reduce testing time can be a significant boost to your organizational goals.
 
-There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below illustrates an example of how you could optimize testing using Django and the CircleCI platform.
+There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below (adapted with permission from the developer who wrote about this test optimization use case in his [blog post](https://www.brautaset.org/articles/2019/speed-up-circleci.html)) describes how you can optimize testing using Django and the CircleCI platform.
 
 ### Testing Optmization on the CircleCI Platform For a Python Django Project
 
-Some organizations use CircleCI to run tests for each change before merging to the main branch. Faster tests means faster feedback cycles, which in turn means you can confidently ship code more often. For example, if you perform testing for a Python Django's application workflow, it might take as long as 13-15 minutes to complete the testing on the CircleCI platform. Most organizations would deem this testing to be too expensive and look at ways to reduce this time to preserve credit usage and improve overall testing performance.
+Some organizations use CircleCI to run tests for each change before merging to the main branch. Faster tests means faster feedback cycles, which in turn means you can confidently ship code more often. Let's take a look at a case study for a Python Django application's workflow, that took more than 13 minutes to complete testing on the CircleCI platform.
 
 An example of what the testing process might look like is shown below.
 
@@ -193,7 +193,7 @@ Knowing that ~13 minutes was too long to perform the steps in this workflow, the
 
 #### Changing the CI Test Workflow
 
-The CI test workflow was changed to no longer depend on building the base image. The test jobs were also changed to lauch auxiliary services using CircleCI's docker executor native service container support instead of using `docker-compose`. Finally,`tox` was run from the main container to install dependencies and run tests, which eliminates minutes used to save and then restore the image from the workspace. This also eliminated the extra start-up costs of the machine executor.
+The CI test workflow was changed to no longer depend on building the base image. The test jobs were also changed to launch auxiliary services using CircleCI's docker executor native service container support instead of using `docker-compose`. Finally,`tox` was run from the main container to install dependencies and run tests, which eliminates minutes used to save and then restore the image from the workspace. This also eliminated the extra start-up costs of the machine executor.
 
 #### Dependency Changes
 
@@ -207,4 +207,4 @@ The figure below illustrates how overall these changes can reduce the total work
 
 ![Test Optimization Process After Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
 
-As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to the run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time. 
+As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time. 
