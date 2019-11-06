@@ -1,11 +1,11 @@
 # Local Development Instructions
 
 
-There are two ways to work on CircleCI docs locally: with Docker and with Ruby/Bundler.
+There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](http://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
 
-1. Install Docker for you platform: <https://docs.docker.com/engine/installation/>
+1. Install Docker for your platform: <https://docs.docker.com/engine/installation/>
 2. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
 3. Download this file: https://circleci.com/docs/assets/app.bundle-576b5ac91166f5b87d5f6254b647c9182e3468eeea4717c8cdc7ff7304cac0c9.js
 4. Rename the file from Step 3 to `app.bundle.js` and save it in the `jekyll/assets/js` directory.
@@ -28,7 +28,7 @@ You're welcome to use [Bundler](http://bundler.io/) to install these gems.
 
 ## Building js assets
 
-Our js assets are compiled by webpack and put into a place that the jekyll build can find them.
+Our js assets are compiled by webpack and put into a place where the jekyll build can find them.
 
 Anytime you are working on js be sure to run:
 
@@ -53,13 +53,13 @@ For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/
 
 ## Editing Docs Locally
 
-The docs site includes Bootstrap 3 JS and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
+The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
 All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`. These correspond to CircleCI Classic and CircleCI 2.0, respectively.
 
 1. Create a branch and switch to it:
 
-    `git checkout -b <branch-name`
+    `git checkout -b <branch-name>`
 
 2. Add or modify Markdown files in these directories according to our [style guide](CONTRIBUTING#style-guide).
 

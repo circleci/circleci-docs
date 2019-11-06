@@ -21,6 +21,7 @@ orb-tools/pack | This command enables you to use the CircleCI CLI to pack an orb
 orb-tools/validate | This command enables you to use the CircleCI CLI to validate a given orb yml.
 orb-tools/increment | This command enables you to use the CircleCI CLI to increment the version of an orb in the registry. If the orb does not have a version yet, it starts at 0.0.0.
 orb-tools/publish | This command uses the CLI to publish an orb to the registry.
+{: class="table table-striped"}
 
 ### orb-tools/pack
 
@@ -34,6 +35,7 @@ attach-workspace | Boolean for whether or not to attach to an existing workspace
 workspace-root | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)
 workspace-path | Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided, then this job will not persist to a workspace.
 artifact-path | Path to the directory that should be saved as a job artifact. If the default value of blank is provided, then this job will not save any artifacts.
+{: class="table table-striped"}
 
 ### orb-tools/validate
 
@@ -47,6 +49,7 @@ attach-workspace | Boolean for whether or not to attach to an existing workspace
 workspace-root | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)
 workspace-path | Path of the workspace to persist to relative to workspace-root. Typically this is the same as the destination-orb-path. If the default value of blank is provided, then this job will not persist to a workspace.
 artifact-path | Path to the directory that should be saved as a job artifact. If the default value of blank is provided, then this job will not save any artifacts.
+{: class="table table-striped"}
 
 ### orb-tools/increment
 
@@ -62,6 +65,7 @@ validate | Boolean for whether or not to do validation on the orb. Default is fa
 checkout | Boolean for whether or not to checkout as a first step. Default is true.
 attach-workspace | Boolean for whether or not to attach to an existing workspace. Default is false.
 workspace-root | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)
+{: class="table table-striped"}
 
 ### orb-tools/publish
 
@@ -76,6 +80,7 @@ validate | Boolean for whether or not to do validation on the orb. Default is fa
 checkout | Boolean for whether or not to checkout as a first step. Default is true.
 attach-workspace | Boolean for whether or not to attach to an existing workspace. Default is false.
 workspace-root | Workspace root path that is either an absolute path or a path relative to the working directory. Defaults to ‘.’ (the working directory)
+{: class="table table-striped"}
 
 ### Validate and Publish Example
 
@@ -96,4 +101,4 @@ workflows:
           validate: true
 ```
 
-In the above example, the Build-Test-Depoly (BTD) workflow runs the `orb-tools/validate` job first. If the orb is deemed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+In the above example, the Build-Test-Deploy (BTD) workflow runs the `orb-tools/validate` job first. If the orb is deemed valid, the next step will execute, and `orb-tools/publish` will execute. When `orb-tools/publish` succeeds, the job input will contain a success message that the new orb has been published to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).

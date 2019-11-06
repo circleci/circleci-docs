@@ -5,48 +5,62 @@
 :toc: macro
 :toc-title:
 
-This document describes how to enable, configure, and test CircleCI to authenticate users with OpenLDAP or Active Directory credentials.
-
-NOTE: LDAP is not supported with existing installations, only clean installations may use LDAP.
+This document describes the various ways users of your CircleCI Server installation can get access and authenticate their accounts. Currently OAuth and LDAP are supported as authentication methods.
 
 toc::[]
 
-== Prerequisites
+== OAuth with Github/GHE
 
-* Install and configure your LDAP server and Active Directory.
-* GitHub Enterprise must be configured and is the source of organizations and projects to which users have access.
-* Install a new instance of CircleCI 2.0 with no existing users.
-* Contact https://support.circleci.com[CircleCI support] and file a feature request for CircleCI Server.
-// still required?
+The default method for user account authentication in CircleCI Server is through GitHub.com/GitHub Enterprise OAuth.
 
-NOTE: After completing this configuration, all users must log in to CircleCI with their LDAP credentials. After logging in to CircleCI, each user will then click the Connect button on the Accounts page to connect and authenticate their GitHub account.
+Once your installation is up and running, you can simply provide users with a link to access the application - for example `<your-circleci-hostname>.com` – and from there they will be prompted to set up an account by running through the GitHub/GitHub Enterprise OAuth flow and then redirected to the CircleCI login screen.
 
-== Configure LDAP Authentication
+.CircleCI Server Login Screen
+image::server_login.png[Server Login]
+
+== LDAP
+As an alternative to the OAuth/GitHub option described above, you can choose LDAP authentication. This section describes how to enable, configure, and test CircleCI to authenticate users with OpenLDAP or Active Directory credentials.
+
+CAUTION: Enabling LDAP will mean it is the **only** way for users to authenticate their account for your installation. Turning on LDAP Authentication is **not recommended for existing installations that previously had users authenticating with GitHub**. Please contact your account team if you need to switch to LDAP for an existing installation.
+
+=== Prerequisites
+
+* Install and configure your OpenLDAP server or Active Directory.
+* GitHub Enterprise or GitHub.com must be configured and be the source of organizations and projects to which users have access.
+* Install a new instance of CircleCI Server with no existing users.
+
+NOTE: After setting up LDAP, all users must log in to CircleCI with their LDAP credentials. After logging in, each user will then click the Connect button on the Accounts page to connect and authenticate their GitHub account.
+
+=== Configure LDAP Authentication
+
+Below is an example configuration to give an idea of the information types required. The example shows OpenLDAP in use but settings will be comparable to what is required when using Active Directory:
+
+.LDAP Config Example
+image::LDAP_example.png[LDAP Example]
 
 This section provides the steps to configure LDAP in the CircleCI Server Management Console:
 
 . Verify access over the LDAP/AD ports to your LDAP/AD servers.
-. Log in as administrator to the Management Console for your newly installed CircleCI 2.0 instance.
-. Navigate to the Settings page and check the Enable LDAP-only Authentication button. Select either OpenLDAP or Active Directory.
-+
-.Enable LDAP
-image::LDAP.png[Enable LDAP]
+. Log in as administrator to the Management Console for your newly installed CircleCI instance.
+. Navigate to the Settings page (for example `<your-circleci-hostname>.com:8800`) and scroll down to check the Enable LDAP-only Authentication button. Select either OpenLDAP or Active Directory.
 . Fill in your LDAP instance Hostname and port number.
 . Select the encryption type (plain text is not recommended).
-. Fill in the Search user field with the LDAP admin username using the format `cn=<admin>,dc=<example>,dc=<org>` replacing `admin`, `example`, and `org` with appropriate values for your datacenter.
-. Fill in the Search password field with the LDAP admin password.
-. Fill in the User search DN field with an approrpiate value using the format `ou=<users>` replacing `users` with the value used in your LDAP instance.
-. Fill in the Username field with an approriate unique identifier used for your users, for example, `mail`.
-. Fill in the Group Membership field with an appropriate value. By default, the value is `uniqueMember` for OpenLDAP and `member` for Active Directory. This field will list member `dn` for a group.
-. Fill in the Group Object Class field with an approrpiate value. By default, the value is `groupOfUniqueNames` for OpenLDAP and `group` for Active Directory. The value of the `objectClass` field indicates a `dn` is a group.
-. (Optional) Fill in the Test username and Test password fields with a test email and password for an LDAP user you want to test.
+. Fill in the Search user field with the Fully Distinguished Name for a user who is authorized to perform search queries over a LDAP database. Example:  `cn=<admin>,dc=<example>,dc=<org>`.
+. Fill in the Search password field with the LDAP password for a user from the previous step.
+. Fill in the Base DN field with a Distinguished Name for a point in the directory from where CircleCI will be looking for users/groups. Example: `ou=company,dc=example,dc=org`
+. Fill in the User search DN field with a Relative Distinguished Name for a point in a directory where CircleCI will find users. Should be relative to the Base DN provided above. Example: `ou=users`.
+. Fill in the Username field with a name of an attribute that will be used as a source of usernames for Logging In. Example: `uid` (in this case users will have to use their UID for logging in) or `mail` (in this case users will be using emails for logging in).
+. Fill in the Email field with the name of an attribute that will be used as a source of a user email. Example: `mail`
+. Fill in the Group Membership field with a name of an attribute that will be used for user membership in a particular group. Example: `uniqueMember`.
+. Fill in the Group Object Class field with a name of an Object Class that will identify DN as a group. Example: `groupOfUniqueNames`
+. (Optional) Fill in the Test username and Test password fields with a test email and password for an LDAP user you want to test - this is a 3rd party infrastructure and this test option is not always reliable.
 . Save the settings.
 
 A user who logs in will be redirected to the Accounts page of the CircleCI application with a Connect button that they must use to connect their GitHub account. After they click Connect, an LDAP section with their user information (for example, their email) on the page will appear and they will be directed to authenticate their GitHub account. After authenticating their GitHub account users are directed to the **Job page** to use CircleCI.
 
 NOTE: A user who has authenticated with LDAP and is then removed from LDAP/AD will be able to access CircleCI as long as they stay logged in (because of cookies). As soon as the user logs out or the cookie expires, they will not be able to log back in. A users' ability to see projects or to run builds is defined by their GitHub permissions. Therefore, if GitHub permissions are synced with LDAP/AD permissions, a removed LDAP/AD user will automatically lose authorization to view or access CircleCI as well.
 
-== Troubleshooting
+=== Troubleshooting
 
 Troubleshoot LDAP server settings with LDAP search as follows:
 

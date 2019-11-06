@@ -27,7 +27,7 @@ echo "This is 2.0 config."
 ````
 
 After the string `codetab` you'll see the integer `1`.
-This is how tabbed code blocks are group.
+This is how tabbed code blocks are grouped.
 Everything with `1` appears together in a group.
 Everything with `2` will appear in a separate group of tabs, and so on.
 

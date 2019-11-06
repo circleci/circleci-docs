@@ -263,4 +263,4 @@ The top level `examples` key is optional. Usage example maps nested below it can
 ## Next Steps
 {:.no_toc}
 
-- Refer to [Test and Publish Your Orb]({{site.baseurl}}/2.0/orb-author-validate-publish/) for next steps.
+- Refer to [Validate and Publish Your Orb]({{site.baseurl}}/2.0/orb-author-validate-publish/) for next steps.

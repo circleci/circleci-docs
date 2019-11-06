@@ -7,9 +7,8 @@ categories: [optimization]
 order: 70
 ---
 
-{% include beta-premium-feature.html feature='Docker Layer Caching' %}
-
-This document offers an overview of Docker Layer Caching (DLC), which can reduce Docker image build times on CircleCI.
+Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
+the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 credits per build) and on installations of [CircleCI Server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 * TOC
 {:toc}
@@ -56,9 +55,7 @@ The DLC volumes are deleted after 14 days of not being used in a job.
 
 CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50 concurrent `machine` or Remote Docker jobs per project can have access to DLC. This takes into account the parallelism of the jobs, so a maximum of 1 job with 50x parallelism will have access to DLC per project, or 2 jobs with 25x parallelism, and so on.
 
-## Enabling DLC
-
-**Note:** You must [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative enable Docker Layer Caching on your circleci.com account for an additional fee. DLC is available by default for CircleCI installations hosted in your own datacenter or private cloud.
+![Docker Layer Caching]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
 ### Remote Docker Environment
 {:.no_toc}
@@ -85,7 +82,6 @@ Docker Layer Caching can also reduce job runtimes when building Docker images us
 machine:
   docker_layer_caching: true    # default - false
 ```
-
 
 ## Examples
 

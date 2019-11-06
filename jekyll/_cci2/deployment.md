@@ -116,7 +116,16 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 ```            
 
+## NuGet (via .NET Core CLI)
 
+```
+    steps:
+      - run:
+          name: Push to NuGet
+          command: |
+            dotnet pack --output <output-directory> --configuration Release
+            dotnet nuget push --source "${NUGET_FEED_URL}" --api-key="${NUGET_KEY}" <output-directory>/*.nupkg
+```
 
 Use the above examples to get started with automating deployment of green builds to your desired targets.
 

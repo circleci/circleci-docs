@@ -86,7 +86,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
@@ -117,7 +117,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
+If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
 If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
@@ -138,8 +138,8 @@ steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
-branches | N | Map | A map defining rules for allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. (Only available with the `docker` executor) **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
 
 <sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
@@ -149,7 +149,7 @@ A map of environment variable names and values. These will override any environm
 
 #### `parallelism`
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
 
@@ -165,13 +165,8 @@ jobs:
     parallelism: 3
     resource_class: large
     working_directory: ~/my-app
-    branches:
-      only:
-        - master
-        - /rc-.*/
     steps:
-      - run: make test
-      - run: make
+      - run: go test -v $(go list ./... | circleci tests split)
 ```
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
@@ -402,45 +397,129 @@ If both `ignore` and `only` are present in config, only `ignore` will be taken i
 
 A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
 
+To ensure the job runs for **all** branches, either don't use the `branches` key, or use the `only` key along with the regular expression: `/.*/` to catch all branches.
+
 #### **`resource_class`**
 
-**Note:** The `resource_class` feature is automatically enabled on Performance Plans. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to have a CircleCI Sales representative contact you about enabling this feature on your account.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below.
 
-It is possible to configure CPU and RAM resources for each job as described in the following table. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-Class       | vCPUs       | RAM
-------------|-----------|------
-small       | 1 | 2GB
-medium (default) | 2 | 4GB
-medium+     | 3 | 6GB
-large       | 4 | 8GB
-xlarge      | 8 | 16GB
-2XL         | 16 | 32GB
-2XL+        | 20 | 40GB
-1GPU        | 16 | 122GiB
-2GPU        | 32 | 244GiB
-4GPU        | 64 | 488GiB
+**Note:** This feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
+
+\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
+
+##### Docker Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+small            | 1     | 2GB
+medium (default) | 2     | 4GB
+medium+          | 3     | 6GB
+large            | 4     | 8GB
+xlarge           | 8     | 16GB
+2xlarge\*        | 16    | 32GB
+2xlarge+\*       | 20    | 40GB
 {: class="table table-striped"}
 
-**Note:** Approval from the CircleCI support team is required to gain access to the 2XL, 2XL+, and GPU resource classes.
-
-Below is an example of specifying the `large` `resource_class`.
-
+###### Example Usage
 ```yaml
 jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 3
-    resource_class: large
+    resource_class: xlarge
     steps:
-      - run: make test
-      - run: make
+      ... // other config
 ```
 
+##### Machine Executor (Linux)
+
+Class            | vCPUs | RAM
+-----------------|-------|-------
+medium (default) | 2     | 7.5GB
+large            | 4     | 15GB
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: large
+    steps:
+      ... // other config
+```
+
+##### macOS Executor
+
+Class            | vCPUs | RAM
+-----------------|-------|-----
+medium (default) | 4     | 8GB
+large\*          | 8     | 16GB
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    macos:
+      xcode: "11.0.0"
+    resource_class: large
+    steps:
+      ... // other config
+```
+
+##### Windows Executor
+
+Class             | vCPUs | RAM
+------------------|-------|-----
+medium (default)  | 4     | 15GB
+{: class="table table-striped"}
+
+There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
+
+###### Example Usage
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor: win/vs2019
+    steps:
+      ... // other config
+```
+
+##### GPU Executor (Linux)
+
+Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
+-----------------|-------|--------------|------|-----------------
+1GPU\*           | 16    | 122GiB       | 1    | 8
+2GPU\*           | 32    | 244GiB       | 2    | 16
+4GPU\*           | 64    | 488GiB       | 4    | 32
+{: class="table table-striped"}
+
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+
+
+#### **`project_slug`**
+
+**What is a Project Slug?**
+
+The CircleCI v2 API is backwards compatible with previous API versions in the way it identifies your projects using repository name. For example, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type, the name of your "organization", and the name of the repository.
+
+For the project type you can use github or bitbucket as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The organization is your username or organization name in your version control system.
+
+With API v2, CircleCI has introduced a string representation of the triplet called the `project_slug`, and takes the following form:
+
+`<project_type>/<org_name>/<repo_name>`
+
+The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. It is important to note that the `project_slug` is just a new name for the existing format, and not a new shape of the URLS that can then be used to retrieve information about a project. It is possible in the future CircleCI may change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
+
 
 #### **`steps`**
 
@@ -607,9 +686,16 @@ step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
+``` YAML
+- run:
+    name: Upload CodeCov.io Data
+    command: bash <(curl -s https://codecov.io/bash) -F unittests
+    when: always # Uploads code coverage results, pass or fail
+```
+
 ###### Ending a Job from within a `step`
 
-A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute. 
+A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
@@ -729,7 +815,6 @@ version | N        | String | Version string of Docker you would like to use (de
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
-
 ##### **`save_cache`**
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
@@ -755,7 +840,7 @@ Template | Description
 {% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
 {% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
 {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
 {% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
 {% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
 {: class="table table-striped"}
@@ -763,8 +848,8 @@ Template | Description
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
 
 Template examples:
- * {% raw %}`myapp-{{ checksum "package.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package.json` file, different branches of this project will generate the same cache key.
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
 
 While choosing suitable templates for your cache `key`, keep in mind that cache saving is not a free operation, because it will take some time to upload the cache to our storage. So it make sense to have a `key` that generates a new cache only if something actually changed and avoid generating a new one every run of a job.
@@ -825,7 +910,7 @@ In this case cache `v1-myapp-cache-new` will be restored because it's the most r
 
 For more information on key formatting, see the `key` section of [`save_cache` step](#save_cache).
 
-When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
 
 A path is not required here because the cache will be restored to the location from which it was originally saved.
 
@@ -861,6 +946,11 @@ In general `deploy` step behaves just like `run` with two exceptions:
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
   > **skipping deploy**
   > Running in SSH mode.  Avoid deploying.
+  
+When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
+
+- [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
+- [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### Example
 
@@ -871,6 +961,10 @@ In general `deploy` step behaves just like `run` with two exceptions:
         ansible-playbook site.yml
       fi
 ```
+
+**Note:** The `run` step allows you to use a shortcut like `run: my command`; however, if you try to use a similar shortcut for the `deploy` step like `deploy: my command`, then you will receive the following error message in CircleCI:
+
+`In step 3 definition: This type of step does not support compressed syntax`
 
 ##### **`store_artifacts`**
 
@@ -887,9 +981,12 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 ###### Example
 
 ``` YAML
+- run:
+    name: Build the Jekyll site
+    command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
 - store_artifacts:
-    path: /code/test-results
-    destination: prefix
+    path: jekyll/_site/docs/
+    destination: circleci-docs
 ```
 
 ##### **`store_test_results`**
@@ -930,7 +1027,7 @@ test-results
 
 Special step used to persist a temporary file to be used by another job in the workflow.
 
-**Note:** Workspaces are stored for up to 30 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+**Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 15 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1206,6 +1303,50 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 {: class="table table-striped"}
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
+
+##### **`when` in Workflows**
+
+## Using 'when' in Workflows
+
+When using CircleCI API v2, you may use a `when` clause (the inverse clause is also supported) under a workflow declaration with a boolean value to determine whether or not to run that workflow. The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
+
+The example below shows an example configuration using two different pipeline parameters. You may use one of the parameters to drive a particular workflow, while you may use the other parameter to determine whether a particular step will run.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+  deploy:
+    type: boolean
+    default: false
+
+workflows:
+  version: 2
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+      - when:
+          condition: << pipeline.parameters.deploy >>
+          steps:
+            - deploy
+
+jobs:
+...
+```
+ 
+This example prevents the workflow `integration_tests` from being triggered unless the tests were invoked explicitly when the pipeline is triggered with the following in the `POST` body:
+
+```
+{
+    "parameters": {
+        "run_integration_tests": true
+    }
+}
+```
 
 ###### *Example*
 

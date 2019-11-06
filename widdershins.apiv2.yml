@@ -5,19 +5,19 @@ language_tabs:
   - javascript: JavaScript
   - go: Go
 tagGroups:
-- title: User
+- title: User (Preview)
   tags:
   - User
-- title: Project
+- title: Project (Preview)
   tags:
   - Project
-- title: Pipeline
+- title: Pipeline (Preview)
   tags:
   - Pipeline
-- title: Job
+- title: Job (Preview)
   tags:
   - Job
-- title: Workflow
+- title: Workflow (Preview)
   tags:
   - Workflow
 search: false
