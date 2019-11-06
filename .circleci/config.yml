@@ -135,11 +135,23 @@ jobs:
       - *attach_workspace
       - run:
           name: "Test Markdown Files"
-          command: ./scripts/test-markdown.sh
-      - ruby-deps
+          command: |
+            wget https://github.com/felicianotech/md-proofer/releases/download/v0.3.0/md-proofer--v0.3.0--linux-amd64.tar.gz
+            tar xfz md-proofer--v*.tar.gz
+            sudo chmod +x ./md-proofer
+            ./md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - "vendor/bundle"
       - run:
           name: Create results directory
-          command: mkdir -p $JOB_RESULTS_PATH # why do we do this? what is it used for?
+          command: mkdir -p $JOB_RESULTS_PATH
       - run:
           name: "Manage Data Files We'll Need"
           command: ./scripts/pull-docker-image-tags.sh
