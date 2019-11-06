@@ -197,7 +197,7 @@ The CI test workflow was changed to no longer depend on building the base image.
 
 #### Dependency Changes
 
-Installing dependencies in the primary container on CircleCI, rather than relying on a Dockerfile, may enable you to use CircleCI's caching to speed up `virtualenv` creation. Even if you do not have access to this shared cache when installing dependencies, you may save around **90** seconds when building the virtualenvs.
+Installing dependencies in the primary container on CircleCI, rather than relying on a Dockerfile, may enable you to use CircleCI's caching to speed up `virtualenv` creation.
 
 ### Test Execution Optimization
 
