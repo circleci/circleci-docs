@@ -43,7 +43,7 @@ To better optimize builds and jobs and prevent concurrency and subsequent jobs f
 
 ### Setting Up and Configuring Your Environment to use the CircleCI Platform and CircleCI Orbs
 
-To configure your environment for the CircleCI platform and CircleCI orbs, follow the steps listed below.
+To configure the environment for the CircleCI platform and CircleCI orbs, follow the steps listed below.
 
 1) Use CircleCI `version 2.1` at the top of your `.circleci/config.yml` file.
 
