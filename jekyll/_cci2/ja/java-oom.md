@@ -27,7 +27,8 @@ JVM によるメモリ使用量を制御するには、[Java 環境変数を使�
 | [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | ×    | ×      | ×     | ×      | 1    |
 | [`GRADLE_OPTS`](#gradle_opts)             | ×    | 1      | ×     | ×      | ×    |
 | [`MAVEN_OPTS`](#maven_opts)               | ×    | ×      | 1     | ×      | ×    |
-| CLI 引数                                    | 1    | ×      | ×     | ×      | ×    | {:class="table table-striped"} 
+| CLI 引数                                    | 1    | ×      | ×     | ×      | ×    |
+{:class="table table-striped"}
 
 上記の各環境変数が優先される条件について説明します。
 
@@ -49,7 +50,7 @@ JVM はこの環境変数を読み取りません。 代わりに Java ベース
 
 この環境変数は Clojure 専用です。 `lein` は `JVM_OPTS` を使用して JVM にメモリ制限を渡します。
 
-**メモ：**`JVM_OPTS` は `lein` 自体のメモリには影響しません。また、メモリ制限を Java に直接渡すこともできません。 `lein` の使用可能なメモリに影響を与えるには、`LEIN_JVM_OPTIONS` を使用します。 メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
+**メモ：**`JVM_OPTS` は `lein` 自体のメモリには影響しません。また、メモリ制限を Java に直接渡すこともできません。 To affect `lein`'s available memory, use `LEIN_JVM_OPTS`. メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
 
 ### `LEIN_JVM_OPTS`
 
