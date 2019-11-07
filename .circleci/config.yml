@@ -39,6 +39,55 @@ commands:
             - "vendor/bundle"
 
 
+# Workflows orchestrate a set of jobs to be run;
+# the jobs for this pipeline are # configured below
+workflows:
+  version: 2
+
+  build-deploy:
+    jobs:
+      - js_build
+      - build_server_pdfs
+      - build_api_docs
+      - build:
+          requires:
+            - js_build
+            - build_server_pdfs
+            - build_api_docs
+      - reindex-search:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+
+  # We run a nightly build for running build/maintenance tasks
+  # such as pulling in docker image tags or automating our api documentation
+  nightly-build:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - js_build
+      - build_api_docs
+      - build:
+          requires:
+            - js_build
+            - build_api_docs
+      - deploy:
+          requires:
+            - build
+
+
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
@@ -217,46 +266,3 @@ jobs:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
 
-workflows:
-  version: 2
-
-  build-deploy:
-    jobs:
-      - js_build
-      - build_server_pdfs
-      - build_api_docs
-      - build:
-          requires:
-            - js_build
-            - build_server_pdfs
-            - build_api_docs
-      - reindex-search:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-
-  nightly-build:
-    triggers:
-      - schedule:
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only: master
-    jobs:
-      - js_build
-      - build_api_docs
-      - build:
-          requires:
-            - js_build
-            - build_api_docs
-      - deploy:
-          requires:
-            - build
