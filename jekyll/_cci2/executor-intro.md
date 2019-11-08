@@ -41,6 +41,8 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 
+_Available on CircleCI Cloud - not currently available on self-hosted installations_
+
 ```
 jobs:
   build: # name of your job
@@ -55,6 +57,8 @@ jobs:
 Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
 
 ## Windows
+
+_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations_
 
 Note: The Windows executor requires a 2.1 version configuration as well as having Pipelines enabled. Go to "Project" > "Settings" > "Advanced Settings" to enable Pipelines.
 
