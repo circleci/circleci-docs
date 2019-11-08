@@ -89,11 +89,13 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
+windows* | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
+
+* _the windows executor either uses a machine executor or an orb, and is not a standalone executor_
 
 Example:
 
@@ -489,6 +491,20 @@ orbs:
 jobs:
   build:
     executor: win/vs2019
+    steps:
+      ... // other config
+```
+
+The Orb is a wrapper around the `machine` executor to make configuration easier. This is the recommended
+way of handling it, but it can be directly defined as well.
+
+```yaml
+jobs:
+  build:
+    machine:
+      image: windows-server-2019-vs2019:201908-06
+      resource_class: windows.medium
+      shell: bash
     steps:
       ... // other config
 ```
