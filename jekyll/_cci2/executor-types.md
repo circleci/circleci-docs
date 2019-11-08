@@ -152,6 +152,8 @@ jobs:
 
 ## Using macOS
 
+_Available on CircleCI Cloud - not currently available on self-hosted installations_
+
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
 
 ```
@@ -167,6 +169,8 @@ jobs:
 ```
 
 ## Using Windows
+
+_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations_
 
 Using the `windows` executor allows you to run your job in a Windows environment. Building on Windows requires that your organization or account is on our [Performance Plan](https://circleci.com/pricing/usage/). The following is an example configuration that will run a simple windows job.
 
@@ -187,8 +191,6 @@ jobs:
 ```
 
 We recommend using the [windows](https://circleci.com/orbs/registry/orb/circleci/windows) orb for setting  the executor and shell in your build.
-
-Building on Windows is not available on installed versions of CircleCI.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
