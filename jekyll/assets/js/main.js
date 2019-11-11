@@ -85,80 +85,79 @@ function getUrlVars(url) {
 	* Used to enable viewing different versions of a sub html element.
  */
 function renderTabbedImages() {
+  var tabEls = $(".tab").toArray();
+  var tabData = {};
 
-		var tabEls = $(".tab").toArray();
-		var tabData = {};
+  /**
+    * Loop over all the tab elements found in the DOM and push them into tabData
+    */
+  tabEls.reduce(function (acc, curr) {
+    // collect the tab elements ---
+    let tabGroup = curr.classList[1]
+    let tabName = curr.classList[2]
+    if (tabData[tabGroup] === undefined) {
+      tabData[tabGroup] = {
+        els: [curr],
+        selector: "." + tabGroup,
+        tabGroup: tabGroup
+      }
+    } else {
+      tabData[tabGroup].els = tabData[tabGroup].els.concat([curr])
+    }
 
-		/**
-			* Loop over all the tab elements found in the DOM and push them into tabData
-			*/
-		tabEls.reduce(function(acc, curr) {
-				// collect the tab elements ---
-				let tabGroup = curr.classList[1]
-				let tabName = curr.classList[2]
-				if (tabData[tabGroup] === undefined) {
-						tabData[tabGroup] = {
-								els: [curr],
-								selector: "." + tabGroup,
-								tabGroup: tabGroup
-						}
-				} else {
-						tabData[tabGroup].els = tabData[tabGroup].els.concat([curr])
-				}
-
-				return tabData
-		}, tabData)
+    return tabData
+  }, tabData)
 
 
-		/**
-			* Loop through the collected dom Tabs and handle:
-			* 1) Building the actual tabs with HTML and setting their css styles
-			* 2) Building the 'tab-switching behaviour.
-			*
-			* All tab switching is handled by css classes.
-			*/
-		$.each(tabData, function(key, val) {
-				var tabWrapperName  = "tabWrapper-" + key;         // The wrapper for the entire switchable-content
-				var tabGroupName    = "tabGroup-" + key;           // Name for the group of tabs
+  /**
+    * Loop through the collected dom Tabs and handle:
+    * 1) Building the actual tabs with HTML and setting their css styles
+    * 2) Building the 'tab-switching behaviour.
+    *
+    * All tab switching is handled by css classes.
+    */
+  $.each(tabData, function (key, val) {
+    var tabWrapperName = "tabWrapper-" + key;         // The wrapper for the entire switchable-content
+    var tabGroupName = "tabGroup-" + key;           // Name for the group of tabs
 
-				// Hide all tab content that doesn't belong to the first tab.
-				$.each(val.els, function(idx, el) {
-						if (idx !== 0) {$(el).hide()}
-				})
+    // Hide all tab content that doesn't belong to the first tab.
+    $.each(val.els, function (idx, el) {
+      if (idx !== 0) { $(el).hide() }
+    })
 
-				// build HTML: create wrapper for each tab block and tab sub element
-				$(val.selector).wrapAll($("<div>").addClass("tabWrapper " + tabWrapperName))
-				// Build HTML: the tab group to hold multiple tabs
-				$("." + tabWrapperName).append($("<div>").addClass("tabGroup " + tabGroupName))
+    // build HTML: create wrapper for each tab block and tab sub element
+    $(val.selector).wrapAll($("<div>").addClass("tabWrapper " + tabWrapperName))
+    // Build HTML: the tab group to hold multiple tabs
+    $("." + tabWrapperName).append($("<div>").addClass("tabGroup " + tabGroupName))
 
-				// Build the tabs for each tab-wrapper
-				$.each(val.els, function(i, tabContent) {
-						// Default the first value to be the "active tab"
-						if (i === 0) {
-								tabClass = "realtab " + tabContent.className + " realtab-active"
-						} else {
-								var tabClass = "realtab " + tabContent.className  // Derive the class for the tab.
-						}
+    // Build the tabs for each tab-wrapper
+    $.each(val.els, function (i, tabContent) {
+      // Default the first value to be the "active tab"
+      if (i === 0) {
+        tabClass = "realtab " + tabContent.className + " realtab-active"
+      } else {
+        var tabClass = "realtab " + tabContent.className  // Derive the class for the tab.
+      }
 
-						// Build the tabs: the tab name is determined by the third css-class.
-						var tabContentClasses = tabContent.className.split(" ")
-						var tabName = tabContentClasses[2]
-						$("." + tabGroupName)
-								.append($("<div>")
-								.addClass(tabClass)
-								.text(tabName))
-				})
+      // Build the tabs: the tab name is determined by the third css-class.
+      var tabContentClasses = tabContent.className.split(" ")
+      var tabName = tabContentClasses[2]
+      $("." + tabGroupName)
+        .append($("<div>")
+          .addClass(tabClass)
+          .text(tabName))
+    })
 
-				// Handle tab toggling (styling active tab and finding content to show)
-				$(".realtab").click(function(e) {
-						$(e.target).siblings().removeClass("realtab-active")
-						$(e.target).addClass("realtab-active")
-						var tabsToHide = ".tab." + key
-						var tabToShow = ".tab." + e.target.className.split(" ").slice(2,4).join(".")
-						$(tabsToHide).not(".realtab").hide()
-						$(tabToShow).not(".realtab").show()
-				})
-		})
+    // Handle tab toggling (styling active tab and finding content to show)
+    $(".realtab").click(function (e) {
+      $(e.target).siblings().removeClass("realtab-active")
+      $(e.target).addClass("realtab-active")
+      var tabsToHide = ".tab." + key
+      var tabToShow = ".tab." + e.target.className.split(" ").slice(2, 4).join(".")
+      $(tabsToHide).not(".realtab").hide()
+      $(tabToShow).not(".realtab").show()
+    })
+  })
 }
 
 function renderTabbedCodeFences(){
