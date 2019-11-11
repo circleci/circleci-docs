@@ -91,7 +91,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows).
+Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See Also
 
