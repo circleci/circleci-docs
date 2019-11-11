@@ -58,11 +58,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 
 ## Windows
 
-<<<<<<< HEAD
-_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations of CircleCI Server_
-=======
 The syntax for using the Windows executor differs depending on whether config v2.1 or v2.0 is in use. If you are using v2.1, you will also need to enable Pipelines: Go to "Project" > "Settings" > "Advanced Settings".
->>>>>>> add tabs and 2.0 syntax
 
 {:.codetab.1.v2_1}
 ```yaml
@@ -81,24 +77,20 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-<<<<<<< HEAD
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
-=======
 {:.codetab.1.v2_0}
 ```yaml
 version: 2
 jobs:
   build: # name of your job
     machine:
-      image: windows-server-2019-vs2019:stable # Windows machine image
+      image: windows-default # Windows machine image
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows).
->>>>>>> add tabs and 2.0 syntax
+Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See Also
 
