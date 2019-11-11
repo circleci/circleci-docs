@@ -222,7 +222,7 @@ $( document ).ready(function() {
 	});
 
 	// renderTabbedCodeFences();
-		renderTabbedImages();
+  renderTabbedImages();
 
 	$.getJSON("/api/v1/me").done(function (userData) {
 		analytics.identify(userData['analytics_id']);
