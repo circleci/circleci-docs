@@ -1306,7 +1306,7 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ##### **Using `when` in Workflows**
 
-With CircleCI API v2, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a boolean value to determine whether or not to run that workflow. The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
+With CircleCI API v2, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
