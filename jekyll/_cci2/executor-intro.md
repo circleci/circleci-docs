@@ -80,6 +80,7 @@ jobs:
 {:.codetab.1.v2_0}
 ```yaml
 version: 2
+
 jobs:
   build: # name of your job
     machine:
