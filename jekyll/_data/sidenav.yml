@@ -285,6 +285,8 @@ en:
       children:
         - name: Overview
           link: 2.0/install-overview/
+        - name: What's New in v2.18
+          link: 2.0/v.2.18-overview/
         - name: Upgrade to v2.18.x
           link: 2.0/updating-server/
         - name: System Requirements
