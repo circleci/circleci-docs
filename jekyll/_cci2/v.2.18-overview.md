@@ -20,6 +20,16 @@ This document provides a summary of features and product notes for the release o
 * We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
 * We have also made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to 2.18.
 
+## Known Issues
+
+Nomad garbage collection only runs every 4 hours. This could prevent nomad jobs from running in environments with heavy usage. If you hit this bug please follow this work around:
+
+1. Create `/etc/circleconfig/schedulerer/customizations` on the services machine
+2. Inside `/etc/circleconfig/schedulerer/customizations` enter the following:
+
+      export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
+      export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
+
 ## What's New in Release 2.18
 
 * It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context](https://circleci.com/docs/2.0/contexts/#restricting-a-context).
