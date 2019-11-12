@@ -82,19 +82,40 @@ function getUrlVars(url) {
 };
 
 /**
-	* Used to enable viewing different versions of a sub html element.
+	* renderTabbed Images implements a "tabbing" behaviour on html elements.
+  * Tabs are implemented using css classes. Proper usage looks like so:
+  * <div class="tab $tab-group $tab-name", or kramdown: {:.tab.$tab-group.$tab-name}
+  *
+  * The function performs the following:
+  * * Find all tabs in the DOM and group them into a datastructure
+  * * Loop through the collected tabs and wrap them in a HTML tab structure.
+  * * Apply click behaviour to toggle hide/showing of the tab's content.
+  * *
+  *
+  *
  */
 function renderTabbedImages() {
-  var tabEls = $(".tab").toArray();
+  // var tabEls = $(".tab").toArray(); // FIXME: remove
   var tabData = {};
 
-  /**
-    * Loop over all the tab elements found in the DOM and push them into tabData
-    */
-  tabEls.reduce(function (acc, curr) {
-    // collect the tab elements ---
-    let tabGroup = curr.classList[1]
-    let tabName = curr.classList[2]
+  $(".tab").toArray().reduce(function (acc, curr) {
+
+    /**
+     * First, we sort each tab's classes to be reliable.
+     * Unfortunately, other javascript can alter a tab element (ahem, highlight-js)
+     * so, we split up the tab class name, sort it by what we need, and reassemble:
+     * "language-javascript.tab.hello.some_code.highlighter-rouge"
+     *                          ↓↓↓
+     * "tab.hello.tabname.highlighter-rouge.language-javascript"
+     */
+    var currentClassList = [].slice.call(curr.classList)
+    var indexOfTab = currentClassList.indexOf("tab")
+    var newClassList = currentClassList.splice(indexOfTab, 3).concat(currentClassList)
+    var tabGroup = newClassList[1]
+    $(curr).removeClass().addClass(newClassList.join(" "))
+
+
+    // Assign the formatted tabs into the datastructure.
     if (tabData[tabGroup] === undefined) {
       tabData[tabGroup] = {
         els: [curr],

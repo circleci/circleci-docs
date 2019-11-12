@@ -354,32 +354,47 @@ div.codetab-parent{
 // --- custom Tabs
 
 .tabWrapper {
- padding: 64px 16px 32px;
- position: relative;
- border: 1px solid #dfdfdf;
+  padding: 50px 0 0 0;
+  position: relative;
+  border: 1px solid #dfdfdf;
+  margin: 16px 0;
 }
 
 .tabGroup {
- position: absolute;
- display: flex;
- top: 0;
- left: 0;
- width: 100%;
- background: white;
- box-shadow: inset 0 -2px 0 #dfdfdf;
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: inset 0 -2px 0 #dfdfdf;
+  overflow-x: scroll;
+}
+
+.tab {
+  margin: 0;
+  padding: 8px;
+}
+
+.tab img {
+  margin: 0;
+}
+
+.tab pre {
+  margin-bottom: 0px;
 }
 
 
 .realtab {
- background: white;
- color: #999;
- cursor: pointer;
- padding: 12px 24px;
- border-bottom: 2px solid #dfdfdf;
+  background: white;
+  color: #999;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-bottom: 2px solid #dfdfdf;
 }
 
 .realtab-active {
- border-bottom: 2px solid #4091F7;
+  border-bottom: 2px solid #4091F7;
 }
 
 /***** End - Widgets **********************************************************/
