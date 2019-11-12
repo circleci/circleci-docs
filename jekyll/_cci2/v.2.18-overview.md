@@ -27,8 +27,10 @@ Nomad garbage collection only runs every 4 hours. This could prevent nomad jobs 
 1. Create `/etc/circleconfig/schedulerer/customizations` on the services machine
 2. Inside `/etc/circleconfig/schedulerer/customizations` enter the following:
 
-      export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
-      export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
+```shell
+export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
+export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
+```
 
 ## What's New in Release 2.18
 
