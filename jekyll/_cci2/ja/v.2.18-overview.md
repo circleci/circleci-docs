@@ -33,6 +33,11 @@ Nomad のガレージ コレクションが 4 時間ごとにしか実行され�
 export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
 export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
 ```
+3. Restart the `picard-scheduler` container:
+
+```shell
+sudo docker restart picard-scheduler
+```
 
 ## バージョン 2.18 の新機能
 
