@@ -31,6 +31,11 @@ Nomad garbage collection only runs every 4 hours. This could prevent nomad jobs 
 export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
 export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
 ```
+3. Restart the `picard-scheduler` container:
+
+```shell
+sudo docker restart picard-scheduler
+```
 
 ## What's New in Release 2.18
 
