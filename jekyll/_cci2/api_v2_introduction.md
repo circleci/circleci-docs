@@ -11,30 +11,28 @@ The CircleCI API v2 is a new API that may be used by internal and external users
 
 ## Introduction to API v2
 
-CircleCI API v2 enables you to use a brand-new API with a set of endpoints and several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. Some of these features include the ability to:
+CircleCI API v2 enables you to use a new API with a set of endpoints and several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development; therefore, the stability of the API is referred to as "mixed."
 
-- Retrieve a workflow by ID
-- Trigger pipelines with parameters
-- Trigger particular workflows within pipelines
-- Retrieve a pipeline by ID
-- Retrieve recent pipelines for an organization or for a project (ideally with branch filtering)
+The current categories of the API v2 endpoints are:
+
+- Authentication
+- User (Preview)
+- Pipeline (Preview)
+- Project (Preview)
+- Job (Preview)
+- Workflows (Preview)
+
+**Note** The CircleCI API v2 is currently in "Preview" release. You may use it at will, but this evaluation product is not yet fully supported or considered generally available. There are no current plans to change any live endpoints in API v2, and we are treating it as production software, but the risk of disruption or breaking changes is higher than our generally available features.
 
 ## Getting Started with the API v2
 
-The v2 API is very similar to the current v1.1 API with some notable exceptions.
+The CircleCI API v2 is backwards compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type, the name of your "organization", and the name of the repository. For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The `organization` is your username or organization name in your version control system.
 
-Here is a simple example using `curl` to trigger a pipeline with parameters: 
+With API v2 we are introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
-```
-curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
-  "parameters": {
-    "myparam": "./myspecialdir",
-    "myspecialversion": "4.8.2"
-  }
-}' https://circleci.com/api/v2/project/${project_slug}/pipeline
-```
+`<project_type>/<org_name>/<repo_name>`
 
-In the above example the `project_slug` would take the form :vcs/:org/:project. For example, the project slug `gh/CircleCI-Public/circleci-cli` tells `CircleCI` to use the project found in the GitHub organization CircleCI-Public in the repository named `circleci-cli`.
+The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
 
 ### Authentication
 
@@ -51,7 +49,22 @@ The CircleCI API v2 includes the use of pipelines to assist you in triggering wo
 
 For more detailed information about pipelines and how you can use them in your workflows and builds, please see the [Build Processing](https://circleci.com/docs/2.0/build-processing/)page.
 
-**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used by customers for sensitive values (secrets). You can find this sensitive information in the [Project Settings] page(https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context)
+#### Triggering a Pipeline with Parameters Example
+
+Here is a simple example using `curl` to trigger a pipeline with parameters:
+
+```
+curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {
+    "myparam": "./myspecialdir",
+    "myspecialversion": "4.8.2"
+  }
+}' https://circleci.com/api/v2/project/${project_slug}/pipeline
+```
+
+In the above example the `project_slug` would take the form `:vcs/:org/:project`. For example, the project slug `gh/CircleCI-Public/circleci-cli` tells `CircleCI` to use the project found in the GitHub organization CircleCI-Public in the repository named `circleci-cli`.
+
+**IMPORTANT** Pipeline parameters are **not** treated as sensitive data and **must not** be used for sensitive values (secrets). You can find this sensitive information in the [Project Settings] page(https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context)
 
 ## Changes In Endpoints
 
@@ -89,7 +102,7 @@ Endpoint       | Description
 
 With the release of API v2, there will be two different versions of the CircleCi API that you can use. Although CircleCI recommends you use API v2, you may still use API v1.1 if you wish; however, please note that API v2 includes several powerful features (e.g. support for pipelines) that are unavailable in API v1.1.
 
-For a short period of time, both versions of the CircleCI API (v1.1 & v2) will be available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 and discontinue support for this API version in the near future. Guidance on when the CircleCI API v1.1 will be discontinued will be communicated at a future date.
+For a period of time, both versions of the CircleCI API (v1.1 & v2) will be available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 and discontinue support for this API version in the near future. Guidance on when the CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
 ## API v2 and Server Customers
 
