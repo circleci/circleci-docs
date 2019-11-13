@@ -121,21 +121,9 @@ The value of FOO will take precedence over the default values set in the default
 /etc/circleconfig/workflows-conductor/customizations
 ```
 
-=== Login Screen
-You can add a banner to your login screen as follows:
-
-. Access the file: `/etc/circleconfig/frontend/customizations` on the Services machine
-. Add the following line, substituting the text you wish to display in the banner:
-+
-```
-export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
-```
-. Restart CircleCI from the Management Console (your-circleci-hostname.com:8800)
-
-.Login Screen Banner Example
-image::banner.png[]
-
 === Resource Classes
+_Introduced in CircleCI Server v2.18_
+
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
 TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
@@ -196,7 +184,9 @@ Let's take a look at one of the options in more detail
 CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to allocate the resources required. If not, the job will be queued. See our <<nomad-metrics#configuring-nomad-client-metrics,Nomad metrics guide>> for information on monitoring the capacity of your Nomad cluster.
 
 ==== Enable the Large Resource Class for Machine Executor
-A second machine type (`large` in the example above) was introduced in CircleCI v2.18. A further step is required to enable this for your organization. Following are the required steps:
+_Introduced in CircleCI Server v2.18_
+
+To use second machine type (`large` in the example above), a further step is required to enable this for your organization. Following are the required steps:
 
 . SSH into the Services .achine
 . Run the following:
@@ -211,3 +201,21 @@ circleci dev-console
 ```
 (admin/set-project-feature-by-url "<github_url_of_project>" :picard-allowed-resource-classes #{"l1.large"})
 ```
+
+
+=== Login Screen
+_Introduced in CircleCI Server v2.17.3_
+
+You can add a banner to your login screen as follows:
+
+. Access the file: `/etc/circleconfig/frontend/customizations` on the Services machine
+. Add the following line, substituting the text you wish to display in the banner:
++
+```
+export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
+```
+. Restart CircleCI from the Management Console (your-circleci-hostname.com:8800)
+
+.Login Screen Banner Example
+image::banner.png[]
+
