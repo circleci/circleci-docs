@@ -53,13 +53,13 @@ If you do need to rollback at any point, see our https://circleci.com/docs/2.0/b
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * Your installation is **not** airgapped and you can access the internet from it.
-* You are running Replicated version >=2.34.1 on your Services machine. To check this, SSH into the Services machine and run the following:
+* You are running Replicated version >=2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
 ```
 +
-If you are running a version of Replicated pre 2.34.1 please reach out to support@circleci.com.
+If you are running a version of Replicated pre 2.10.3 please reach out to support@circleci.com.
 
 ==== Preparations
 
