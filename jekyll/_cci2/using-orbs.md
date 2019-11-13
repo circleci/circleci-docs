@@ -26,7 +26,7 @@ Before using orbs, you may find it helpful to understand the various design deci
 - Production orbs are always semantic versioned (semver’d) - CircleCI allows development orbs that have versions that start with dev:.
 - Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
 - One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
-- Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
+- The ability to create and modify orbs are scoped. Only Organization admin(s) can publish/promote production orbs. Once an initial orb is created, organization members can publish development orbs against it. Note that all orb namespaces are owned by an organization.
 
 ### Orb Structure
 

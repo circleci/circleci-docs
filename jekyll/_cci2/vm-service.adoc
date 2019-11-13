@@ -48,7 +48,7 @@ You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.
 
 Customizing the VM service images for your installation of CircleCI will allow you to specify versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker or  the `machine` executor. If you choose not to use custom images, you will likely need to run additional install and update steps on every commit as part of your `config.yml` file.
 
-You can provide a single custom AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each.
+From v2.18, you can provide a single custom AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each.
 
 .Custom VM Service Images
 image::vm-service-custom.png[Custom VM Service Images]

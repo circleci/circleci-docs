@@ -56,6 +56,7 @@ https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad job me
 When the Nomad metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
 
 === CircleCI Metrics
+_Introduced in CircleCI Server v2.18_
 
 [.table.table-striped]
 [cols=2*, stripes=even]
