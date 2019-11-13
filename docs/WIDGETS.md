@@ -7,7 +7,7 @@ The widgets available in CircleCI.com/docs/ are:
 
 ## Tabbed HTML Elements
 
-![Tabbed Code Blocks Widget Screenshot](img/widget-tabbed-code-blocks.gif)
+![Tabbed Code Blocks Widget Screenshot](./assets/widget-tabbed-code-blocks.gif)
 
 This allows you to create tabs in a code block to display alternate versions of something.
 The example from the screenshot shows how you can use tabbed code blocks to display a CircleCI v2.1 and v2.0 config.
@@ -37,7 +37,7 @@ Instead, use an underscore (`_`) and dash (`-`) respectively and they'll be rend
 
 ## OS Version Matrix
 
-![OS Version Matrix Widget Screenshot](img/widget-os-matrix.png)
+![OS Version Matrix Widget Screenshot](./assets/widget-os-matrix.png)
 
 Use this widget to display which version (if any) of some software is available on a given operating system (OS) supported by CircleCI. This only applies to CircleCI 1.0.
 
