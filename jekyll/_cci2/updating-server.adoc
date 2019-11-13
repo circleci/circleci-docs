@@ -53,7 +53,7 @@ If you do need to rollback at any point, see our https://circleci.com/docs/2.0/b
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * Your installation is **not** airgapped and you can access the internet from it.
-* You are running replicated version >=2.10.3 on your services machine. To check this, SSH into the Services machine and run the following:
+* You are running Replicated version >=2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
@@ -70,7 +70,7 @@ CAUTION: Remember to take a snapshot (described above) before starting the Repli
 .Stop the CircleCI Application
 image::stop_replicated_update_available.png[Stop the CircleCI Application]
 +
-Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
+Alternatively you can SSH into the Services machine and stop the CircleCI application from the command line:
 +
 ```shell
 replicatedctl app stop
