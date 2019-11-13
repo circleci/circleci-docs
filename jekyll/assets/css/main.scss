@@ -312,46 +312,8 @@ code {
 	font-weight: bold;
 }
 
-div.codetab-parent{
-	width: 100%;
 
-	ul{
-		display: flex;
-		justify-content: flex-end;
-		margin: 0 0 -21px;
-		padding: 0 10px 0 0;
-		list-style: none;
-		font-family: monospace;
-
-		li{
-			border: 1px solid #CCC;
-			border-radius: 5px 5px 0 0;
-			background-color: #F5F5F5;
-			padding: 0 10px;
-			height: 34px;
-			line-height: 34px;
-			text-align: center;
-			cursor: pointer;
-
-			&.active{
-				/*border-top: 2px solid #27A0B6;*/
-				font-weight: bold;
-				border-bottom: 2px solid #F5F5F5;
-			}
-
-			&:first-child{
-				border-radius: 5px 5px 0 0;
-			}
-		}
-	}
-
-	pre{
-		padding-top: 15px;
-		padding-bottom: 15px;
-	}
-}
-
-// --- custom Tabs
+// --- custom Tabs -- see `renderTabbedHtml` in `assets/js/main.js`
 
 .tabWrapper {
   padding: 50px 0 0 0;

@@ -94,8 +94,7 @@ function getUrlVars(url) {
   *
   *
  */
-function renderTabbedImages() {
-  // var tabEls = $(".tab").toArray(); // FIXME: remove
+function renderTabbedHtml() {
   var tabData = {};
 
   $(".tab").toArray().reduce(function (acc, curr) {
@@ -138,15 +137,15 @@ function renderTabbedImages() {
     * All tab switching is handled by css classes.
     */
   $.each(tabData, function (key, val) {
-    var tabWrapperName = "tabWrapper-" + key;         // The wrapper for the entire switchable-content
-    var tabGroupName = "tabGroup-" + key;           // Name for the group of tabs
+    var tabWrapperName = "tabWrapper-" + key;     // The wrapper for the entire switchable-content
+    var tabGroupName = "tabGroup-" + key;         // Name for the group of tabs
 
     // Hide all tab content that doesn't belong to the first tab.
     $.each(val.els, function (idx, el) {
       if (idx !== 0) { $(el).hide() }
     })
 
-    // build HTML: create wrapper for each tab block and tab sub element
+    // Build HTML: create wrapper for each tab block and tab sub element
     $(val.selector).wrapAll($("<div>").addClass("tabWrapper " + tabWrapperName))
     // Build HTML: the tab group to hold multiple tabs
     $("." + tabWrapperName).append($("<div>").addClass("tabGroup " + tabGroupName))
@@ -168,60 +167,19 @@ function renderTabbedImages() {
           .addClass(tabClass)
           .text(tabName))
     })
-
-    // Handle tab toggling (styling active tab and finding content to show)
-    $(".realtab").click(function (e) {
-      $(e.target).siblings().removeClass("realtab-active")
-      $(e.target).addClass("realtab-active")
-      var tabsToHide = ".tab." + key
-      var tabToShow = ".tab." + e.target.className.split(" ").slice(2, 4).join(".")
-      $(tabsToHide).not(".realtab").hide()
-      $(tabToShow).not(".realtab").show()
-    })
   })
-}
 
-function renderTabbedCodeFences(){
-
-	var tabGroupIndex = 0;
-
-	while( true ){
-
-		tabGroupIndex++;
-
-		if( $( "div.highlighter-rouge.codetab." + tabGroupIndex ).length == 0 ){
-			break;
-		}
-
-		var tabs = "";
-
-		$( "div.highlighter-rouge.codetab." + tabGroupIndex ).each( function( index ){
-
-			tabName = $( this )[0].classList.item(3);
-			tabNameFixed = tabName.replace( /_/g, "." );
-			tabNameFixed = tabNameFixed.replace( /-/g, " " );
-
-			if( index != 0 ){
-				$( this ).hide();
-				$( this ).appendTo( "div.codetab-parent." + tabGroupIndex );
-				tabs += "<li>" + tabNameFixed  + "</li>";
-			}else{
-				$( this ).wrap( '<div class="codetab-parent ' + tabGroupIndex + '"></div>' );
-				tabs += '<li class="active">' + tabNameFixed  + '</li>';
-			}
-		});
-
-		$( "div.codetab-parent." + tabGroupIndex ).prepend( "<ul>" + tabs  + "</ul>" );
-		$( "div.codetab-parent." + tabGroupIndex + " li" ).click(function(){
-
-			curIndex = $( this ).parent().parent()[0].classList.item(1);
-			which = $( "div.codetab-parent." + curIndex + " li" ).index( $( this ) );
-			$( "div.codetab-parent." + curIndex + " li" ).removeClass( "active" );
-			$( this ).addClass( "active" );
-			$( "div.highlighter-rouge.codetab." + curIndex ).hide();
-			$( "div.highlighter-rouge.codetab." + curIndex ).eq( which ).show();
-		});
-	}
+  // Handle tab toggling (styling active tab and finding content to show)
+  $(".realtab").click(function (e) {
+    $(e.target).siblings().removeClass("realtab-active")
+    $(e.target).addClass("realtab-active")
+    console.log("tab target it", e.target)
+    var tabGroup = e.target.classList[2];
+    var tabsToHide = ".tab." + tabGroup
+    var tabToShow = ".tab." + e.target.className.split(" ").slice(2, 4).join(".")
+    $(tabsToHide).not(".realtab").hide()
+    $(tabToShow).not(".realtab").show()
+  })
 }
 
 $( document ).ready(function() {
@@ -242,8 +200,7 @@ $( document ).ready(function() {
 		$(this).find("i").toggle();
 	});
 
-	// renderTabbedCodeFences();
-  renderTabbedImages();
+  renderTabbedHtml();
 
 	$.getJSON("/api/v1/me").done(function (userData) {
 		analytics.identify(userData['analytics_id']);
