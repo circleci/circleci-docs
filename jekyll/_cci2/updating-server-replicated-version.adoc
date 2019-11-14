@@ -11,7 +11,7 @@ To update your CircleCI Server installation, see our https://circleci.com/docs/2
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * Your installation is **not** airgapped and you can access the internet from it.
-* You are running replicated version >=2.10.3 on your services machine. To check this, SSH into the Services machine and run the following:
+* We will be updating to Replicated v2.38, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
