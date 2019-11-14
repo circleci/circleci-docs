@@ -22,24 +22,7 @@ CircleCI Server v2.18 の機能強化や不具合修正についてまとめま�
 * Redis の構成を一部変更しました。 Redis を外部処理化している場合は、構成を更新する必要があります。 担当のカスタマー サクセス マネージャーまでお問い合わせください。
 * 対応する Postgres バージョンを変更したため、postgreSQL v9.5.16 以降が必要です。 PostgreSQL を外部処理化している場合は、バージョン 2.17.x のうちに更新してから、2.18 にアップグレードしてください。
 
-## 既知の問題
-
-Nomad のガレージ コレクションが 4 時間ごとにしか実行されません。 これにより、使用率の高い環境内で Nomad ジョブが実行されない場合があります。 このバグが発生したときには、以下の回避策にてご対応ください。
-
-1. Services マシン上で `/etc/circleconfig/schedulerer/customizations` を作成する
-2. `/etc/circleconfig/schedulerer/customizations` 内に以下を入力する
-
-```shell
-export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
-export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
-```
-3. Restart the `picard-scheduler` container:
-
-```shell
-sudo docker restart picard-scheduler
-```
-
-## バージョン 2.18 の新機能
+## What's New in Release 2.18
 
 * コンテキストにセキュリティ グループを追加することで、実行時に環境変数の使用を制約できるようになりました。 セキュリティ グループは、GitHub チームまたは LDAP グループとして定義されます。 コンテキストにセキュリティ グループを追加すると、そのセキュリティ グループのメンバーである CircleCI ユーザーのみが、コンテキストの環境変数にアクセスまたは環境変数を使用できます。 詳細については、[コンテキストの制約に関するガイド](https://circleci.com/ja/docs/2.0/contexts/#コンテキストの制約)をご覧ください。
 * AWS の外部でストレージ ドライバーを実行しているお客様は、ビルド アーティファクトを検索する際のルーティング時間が改善されます。
@@ -64,11 +47,11 @@ sudo docker restart picard-scheduler
 
 * Server でリソース クラス サイズをカスタマイズできるようになりました。 ユーザーは、デフォルトのリソース クラスを変更したり、新しいリソース クラス定義したりできます。 詳細は、[カスタマイズに関するガイド](https://circleci.com/ja/docs/2.0/customizations/#resource-classes)をご覧ください。
 
-Server のインストールでは、large のリソース クラスに対して新しいマシン タイプを有効化できます。  方法については、[カスタマイズに関するガイド](https://circleci.com/ja/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor)をご覧ください。
+Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor)
 
 * リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 詳細は、[VM サービスのガイド](https://circleci.com/ja/docs/2.0/vm-service/#section=server-administration)をご覧ください。
 
-## バージョン 2.18 での修正点
+## Fixed in Release 2.18
 
 * コンテキストと組織の名前変更に関して、追加の修正を行いました。
 * ボリュームのアタッチに失敗してリモート Docker/`machine` インスタンスをスピンアップできないことがある問題を修正しました。
