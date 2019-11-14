@@ -46,26 +46,21 @@ sudo docker restart picard-scheduler
 * CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 手順とオプションについては、[カスタム メトリクスに関するガイド](https://circleci.com/ja/docs/2.0/monitoring/#カスタム-メトリクス)をご覧ください。 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
 
 
-| メトリクス名                                           | 説明                                              |
-| ------------------------------------------------ | ----------------------------------------------- |
-| `circle.backend.action.upload-artifact-error`    | アーティファクトのアップロードに失敗した回数                          |
-| `circle.build-queue.runnable.builds`             | システムを移動するビルドのうち実行可能と見なされるものの数                   |
-| `circle.dispatcher.find-containers-failed`       | 1.0 のビルドの数                                      |
-| `circle.github.api_call`                         | CircleCI が GitHub に対して実行している API 呼び出しの回数        |
-| `circle.http.request`                            | CircleCi のリクエストへの応答コード                          |
-| `circle.nomad.client_agent.*`                    | Nomad クライアントのメトリクス                              |
-| `circle.nomad.server_agent.*`                    | 存在する Nomad サーバーの数                               |
-| `circle.run-queue.latency`                       | 実行可能なビルドが待機している時間                               |
-| `circle.state.container-builder-ratio`           | Builder ごとのコンテナの数 (1.0 のみ)                      |
-| `circle.state.lxc-available`                     | 利用可能なコンテナの数 (1.0 のみ)                            |
-| `circle.state.lxc-reserved`                      | 予約/使用中のコンテナの数 (1.0 のみ)                          |
-| `circle.vm-service.vm.assigned-vm`               | 使用中の VM の数                                      |
-| `circle.vm-service.vms.delete.status`            | 任意の時点で削除する VM の数                                |
-| `circle.vm-service.vms.get.status`               | 所有している VM の数 (不明)                               |
-| `circle.vm-service.vms.post.status`              | 未確定                                             |
-| `circleci.cron-service.messaging.handle-message` | `cron-service` によって処理される RabbitMQ メッセージのタイミングと数 |
-| `circleci.grpc-response`                         | grpc システムが呼び出すシステムの待機時間                         |
-
+| メトリクス名                                           | 説明                                                                               |
+| ------------------------------------------------ | -------------------------------------------------------------------------------- |
+| `circle.backend.action.upload-artifact-error`    | Tracks how many times an artifact has failed to upload                           |
+| `circle.build-queue.runnable.builds`             | システムを移動するビルドのうち実行可能と見なされるものの数                                                    |
+| `circle.dispatcher.find-containers-failed`       | 1.0 のビルドの数                                                                       |
+| `circle.github.api_call`                         | CircleCI が GitHub に対して実行している API 呼び出しの回数                                         |
+| `circle.http.request`                            | CircleCi のリクエストへの応答コード                                                           |
+| `circle.nomad.client_agent.*`                    | Nomad クライアントのメトリクス                                                               |
+| `circle.nomad.server_agent.*`                    | Tracks how many nomad servers there are                                          |
+| `circle.run-queue.latency`                       | Tracks how long it takes for a runnable build to be accepted                     |
+| `circle.state.container-builder-ratio`           | Builder ごとのコンテナの数 (1.0 のみ)                                                       |
+| `circle.state.lxc-available`                     | 利用可能なコンテナの数 (1.0 のみ)                                                             |
+| `circle.state.lxc-reserved`                      | 予約/使用中のコンテナの数 (1.0 のみ)                                                           |
+| `circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service` |
+| `circleci.grpc-response`                         | Tracks latency over the system grpc system calls                                 |
 
 * Server でリソース クラス サイズをカスタマイズできるようになりました。 ユーザーは、デフォルトのリソース クラスを変更したり、新しいリソース クラス定義したりできます。 詳細は、[カスタマイズに関するガイド](https://circleci.com/ja/docs/2.0/customizations/#resource-classes)をご覧ください。
 
