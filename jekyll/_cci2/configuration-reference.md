@@ -943,7 +943,7 @@ Special step for deploying artifacts.
 In general `deploy` step behaves just like `run` with two exceptions:
 
 - In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
-- In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
+- In a job that is run with SSH, the `deploy` step will not execute, and the following action will show instead:
   > **skipping deploy**
   > Running in SSH mode.  Avoid deploying.
   
