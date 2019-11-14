@@ -280,6 +280,13 @@ The CLI allows you to run a single job from CircleCI on your desktop using Docke
 $ circleci local execute --job JOB_NAME
 ```
 
+If your CircleCI config is set to version 2.1 or greater, you must first export your config to `process.yml`, and specify it when executing:
+
+```sh
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
 Let's run an example build on our local machine on one of CircleCI's demo applications:
 
 ```sh
