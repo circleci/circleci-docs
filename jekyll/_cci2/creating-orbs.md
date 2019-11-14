@@ -56,6 +56,18 @@ Orbs may be authored inline in your `config.yml` file or authored separately and
 
 [WARNING] Orbs are always world-readable. All published orbs (production and development) can be read and used by anyone. They are not limited to just the members of your organization. In general, CircleCI strongly recommends that you do not put secrets or other sensitive variables into your configuration. Instead, use contexts or project environment variables and reference the names of those environment variables in your orbs.
 
+### Describing your Orb
+
+Before publishing your orb, we recommend specifying `description` and `home_url` in your orb YAML, like in the below example. `description` allows you to describe what your orb does and increases the discoverability of the published orb. `home_url` allows you to specify a link to the homepage of the orb.
+
+``` YAML
+version: 2.1
+description: |
+  An orb for working with Amazon Elastic Container Service for Kubernetes (Amazon EKS).
+display:
+  home_url: https://github.com/CircleCI-Public/aws-eks-orb
+``` 
+
 ## Using the CLI to Publish Orbs
 
 The `circleci` CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run `circleci help`. Refer to [Using the CircleCI CLI]( {{ site.baseurl }}/2.0/local-cli/#configuring-the-cli) for details. Listed below are some of the most pertinent commands for publishing orbs:
