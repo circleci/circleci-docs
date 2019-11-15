@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "2.0 API のドキュメント"
-short-title: "2.0 API のドキュメント"
+title: "2.0 API ドキュメント"
+short-title: "2.0 API ドキュメント"
 categories:
   - api
 order: 100
