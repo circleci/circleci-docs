@@ -361,12 +361,12 @@ jobs:
 
 #### **`branches`**
 
-Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Defines rules for allowing/blocking execution of jobs on specified branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-only | N | List | List of branches that only will be executed
-ignore | N | List | List of branches to ignore
+only | N | String, List of Strings, Regex | Branch or list of branches for which the job will be executed
+ignore | N | String, List of Strings, Regex | Branch or list of branches on which to skip the job
 {: class="table table-striped"}
 
 Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
@@ -1201,7 +1201,7 @@ filters | Y | Map | A map defining rules for execution on specific branches
 
 The `branches` key controls whether the *current* branch should have a schedule trigger created for it, where *current* branch is the branch containing the `config.yml` file with the `trigger` stanza. That is, a push on the `master` branch will only schedule a [workflow]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for the `master` branch.
 
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with `/`'s, or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which map to branch names: either single strings, a list of strings, or a range using a regular expression. Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -1211,8 +1211,8 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 Key | Required | Type | Description
 ----|-----------|------|------------
 branches | Y | Map | A map defining rules for execution on specific branches
-only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
-ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+only | Y | String, or List of Strings, Regex | Either a single branch specifier, or a list of branch specifiers
+ignore | N | String, or List of Strings, Regex | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
 #### **`jobs`**
@@ -1269,7 +1269,7 @@ filters | N | Map | A map defining rules for execution on specific branches
 
 ###### **`branches`**
 {:.no_toc}
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which map to branch names: either single strings, a list of strings, or a range using a regular expression. Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
@@ -1279,8 +1279,8 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 Key | Required | Type | Description
 ----|-----------|------|------------
 branches | N | Map | A map defining rules for execution on specific branches
-only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
-ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+only | N | String, List of Strings, Regex | Either a single branch specifier, or a list of branch specifiers
+ignore | N | String, List of Strings, Regex | Either a single branch specifier, or a list of branch specifiers
 {: class="table table-striped"}
 
 ###### **`tags`**
@@ -1298,8 +1298,8 @@ Tags can have the keys `only` and `ignore` keys. You may also use regular expres
 Key | Required | Type | Description
 ----|-----------|------|------------
 tags | N | Map | A map defining rules for execution on specific tags
-only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
-ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
+only | N | String, List of Strings, Regex | Either a single tag specifier, or a list of tag specifiers
+ignore | N | String, List of Strings, Regex | Either a single tag specifier, or a list of tag specifiers
 {: class="table table-striped"}
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
