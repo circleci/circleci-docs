@@ -11,6 +11,7 @@ docs@circleci.com
 :idprefix:
 :idseparator: -
 :sectanchors:
+:autofit-option:
 
 :leveloffset: +1
 
