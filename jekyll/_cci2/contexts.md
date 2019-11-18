@@ -124,6 +124,17 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
+## Secrets Masking
+
+Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
+
+The value of the context will not be masked in the build output if:
+
+* the value of the contex is less than 4 characaters
+* the value of the context is equal to one of `true`, `True`, `false` or `False`
+
+**Note:** secret masking will only prevent the value of the context from appearing in your build output. The value of the context is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
+
 ## See Also
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
