@@ -359,7 +359,7 @@ Variable                    | Type    | Value
 `CIRCLE_BRANCH`             | String  | The name of the Git branch currently being built.
 `CIRCLE_BUILD_NUM`          | Integer | The number of the CircleCI build.
 `CIRCLE_BUILD_URL`          | String  | The URL for the current build.
-`CIRCLE_COMPARE_URL`        | String  | The GitHub or Bitbucket URL to compare commits of a build.
+`CIRCLE_COMPARE_URL`        | String  | The GitHub or Bitbucket URL to compare commits of a build. Available in config v2 and below. For v2.1 we will introduce "pipeline values" as an alternative.
 `CIRCLE_INTERNAL_TASK_DATA` | String  | The directory where test timing data is saved.
 `CIRCLE_JOB`                | String  | The name of the current job.
 `CIRCLE_NODE_INDEX`         | Integer | The index of the specific build instance. A value between 0 and (`CIRCLECI_NODE_TOTAL` - 1)

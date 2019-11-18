@@ -20,18 +20,6 @@ This document provides a summary of features and product notes for the release o
 * We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
 * We have also made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to 2.18.
 
-## Known Issues
-
-Nomad garbage collection only runs every 4 hours. This could prevent nomad jobs from running in environments with heavy usage. If you hit this bug please follow this work around:
-
-1. Create `/etc/circleconfig/schedulerer/customizations` on the services machine
-2. Inside `/etc/circleconfig/schedulerer/customizations` enter the following:
-
-```shell
-export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_PENDING_JOBS=500
-export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
-```
-
 ## What's New in Release 2.18
 
 * It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context](https://circleci.com/docs/2.0/contexts/#restricting-a-context).
@@ -41,24 +29,19 @@ export SCHEDULERER_NOMAD_BACKPRESSURE_MAX_DEAD_JOBS=100000
 
 Metric | Description
 --- | ---
-`circle.backend.action.upload-artifact-error` | Tracks how many times an artifact has failed to upload.
+`circle.backend.action.upload-artifact-error` | Tracks how many times an artifact has failed to upload
 `circle.build-queue.runnable.builds` | Track how many builds flowing through the system are considered runnable
 `circle.dispatcher.find-containers-failed` | Track how many 1.0 builds 
 `circle.github.api_call` | Tracks how many api calls CircleCI is making to github
 `circle.http.request` | Tracks the response codes to CircleCi requests
 `circle.nomad.client_agent.*` | Tracks nomad client metrics
-`circle.nomad.server_agent.*` | Tracks how many nomad servers there are. 
-`circle.run-queue.latency` | Tracks how long it takes for a runnable build to be accepted. 
+`circle.nomad.server_agent.*` | Tracks how many nomad servers there are 
+`circle.run-queue.latency` | Tracks how long it takes for a runnable build to be accepted
 `circle.state.container-builder-ratio` | Keeps track of how many containers exist per builder ( 1.0 only ) 
 `circle.state.lxc-available` | Tracks how many containers are available ( 1.0 only ) 
 `circle.state.lxc-reserved` | Tracks how many containers are reserved/in use ( 1.0 only )
-`circle.vm-service.vm.assigned-vm` | Tracks how many vm’s are in use
-`circle.vm-service.vms.delete.status` | Tracks how many vm’s we’re deleting at a given moment
-`circle.vm-service.vms.get.status` |  Tracks how many vm’s we have? ( not sure)
-`circle.vm-service.vms.post.status` | TBD
 `circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
-`circleci.grpc-response` | Tracks latency over the system grpc system calls. 
-
+`circleci.grpc-response` | Tracks latency over the system grpc system calls
 
 * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)
 
