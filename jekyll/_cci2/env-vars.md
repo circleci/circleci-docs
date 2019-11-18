@@ -400,3 +400,4 @@ Variable                    | Type    | Value
 {:.no_toc}
 
 [Contexts]( {{ site.baseurl }}/2.0/contexts/)
+[Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
