@@ -25,11 +25,8 @@ If your jobs are queuing, you can upgrade your plan for [using containers]({{ si
 
 CircleCI provides an integrated dashboard showing job status:
 
-- SUCCESS: All jobs completed
+- PASSED: All jobs passed successfully
 - FAILED: One or more jobs failed
-- RUNNING: Job run is in progress
-- ON HOLD: Job is waiting for approval
-- QUEUED: Job is waiting for available container
 
 If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may
 see other [workflow-specific statuses]({{ site.baseurl}}/2.0/workflows/#states).
