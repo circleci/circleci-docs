@@ -1,13 +1,20 @@
 ---
 layout: classic-docs
-title: "API v2 Introduction"
-short-title: "Introduction"
-description: "introduction to the CircleCI API v2"
+title: "API Reference"
+short-title: "API Reference"
+description: "Introduction to the CircleCI API"
 categories: [getting-started]
 order: 1
 ---
 
-The CircleCI API v2 is a new API that may be used by internal and external users to make API calls to retrieve detailed information about workflows and pipelines.
+The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions: 
+
+* [API v1.1 Documentation](https://circleci.com/docs/api/#api-overview)
+* [API v2 Documentation](https://circleci.com/docs/api/v2/)
+
+API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that users migrate their scripts to API v2 stable endpoints as soon as possible. 
+
+For a period of time, both versions of the CircleCI API (v1.1 & v2) will be supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
 ## Introduction to API v2
 
@@ -16,11 +23,12 @@ CircleCI API v2 enables you to use a new API with a set of endpoints and several
 The current categories of the API v2 endpoints are:
 
 - Authentication
+- Pipeline
+- Workflows
 - User (Preview)
-- Pipeline (Preview)
 - Project (Preview)
 - Job (Preview)
-- Workflows (Preview)
+
 
 **Note** The CircleCI API v2 is currently in "Preview" release. You may use it at will, but this evaluation product is not yet fully supported or considered generally available. There are no current plans to change any live endpoints in API v2, and we are treating it as production software, but the risk of disruption or breaking changes is higher than our generally available features.
 
@@ -97,12 +105,6 @@ Endpoint       | Description
 `POST /project/:vcs-type/:username/:project/build` | This endpoint enables users to trigger a new build by project.
 `DELETE /project/:vcs-type/:username/:project/build-cache` | This endpoint enabled users to clear the project cache for a specific project.
 `GET /recent-builds` | This endpoint enabled users to retrieve an array of recent builds.
-
-## API v1.1 Support and EOL
-
-With the release of API v2, there will be two different versions of the CircleCi API that you can use. Although CircleCI recommends you use API v2, you may still use API v1.1 if you wish; however, please note that API v2 includes several powerful features (e.g. support for pipelines) that are unavailable in API v1.1.
-
-For a period of time, both versions of the CircleCI API (v1.1 & v2) will be available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 and discontinue support for this API version in the near future. Guidance on when the CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
 ## API v2 and Server Customers
 
