@@ -15,7 +15,19 @@ This document describes using environment variables in CircleCI in the following
 ## Overview
 {:.no_toc}
 
-To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information. Use Contexts to further restrict access to environment variables from within the build, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation. 
+To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information. Use Contexts to further restrict access to environment variables from within the build, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
+
+### Secrets Masking
+{:.no_toc}
+
+Environment variables may hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of environment variables and contexts.
+
+The value of the environment variable will not be masked in the build output if:
+
+* the value of the environment variable is less than 4 characaters
+* the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
+
+**Note:** secret masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ### Environment Variable Usage Options
 {:.no_toc}
@@ -24,13 +36,22 @@ CircleCI uses Bash, which follows the POSIX naming convention for environment va
 
 Secrets and private keys that are securely stored in the CircleCI app may be referenced with the variable in a `run` key, `environment` key, or a Workflows `context` key in your configuration. Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
-3. Environment variables set with the `environment` key [for a job](#setting-an-environment-variable-in-a-job).
-4. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
-5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
-6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables](#built-in-environment-variables) section of this document.
+- [Overview](#overview)
+  - [Secrets Masking](#secrets-masking)
+  - [Environment Variable Usage Options](#environment-variable-usage-options)
+  - [Example Configuration of Environment Variables](#example-configuration-of-environment-variables)
+  - [Using `BASH_ENV` to Set Environment Variables](#using-bashenv-to-set-environment-variables)
+  - [Alpine Linux](#alpine-linux)
+- [Setting an Environment Variable in a Shell Command](#setting-an-environment-variable-in-a-shell-command)
+- [Setting an Environment Variable in a Step](#setting-an-environment-variable-in-a-step)
+- [Setting an Environment Variable in a Job](#setting-an-environment-variable-in-a-job)
+- [Setting an Environment Variable in a Container](#setting-an-environment-variable-in-a-container)
+- [Setting an Environment Variable in a Context](#setting-an-environment-variable-in-a-context)
+- [Setting an Environment Variable in a Project](#setting-an-environment-variable-in-a-project)
+  - [Encoding Multi-Line Environment Variables](#encoding-multi-line-environment-variables)
+- [Injecting Environment Variables with the API](#injecting-environment-variables-with-the-api)
+- [Built-in Environment Variables](#built-in-environment-variables)
+- [See Also](#see-also)
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
@@ -66,12 +87,13 @@ jobs: # basic units of work in a run
           command: echo ${CIRCLE_BRANCH}
       # Run another step, the same as above; note that you can
       # invoke environment variable without curly braces.
+      # prints: XXXXXXX
       - run:
           name: "What branch am I on now?"
-          command: echo $CIRCLE_BRANCH
+          command: echo $CIRCLE_BRANCH # prints: XXXXXXX
       - run:
           name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
+          command: echo ${MY_ENV_VAR}  # prints: XXXXXXX
 ```
 
 The above `config.yml` demonstrates the following: 
@@ -79,6 +101,7 @@ The above `config.yml` demonstrates the following:
 - Setting custom environment variables
 - Reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
 - How variables are used (or interpolated) in your `config.yml`
+- Masking of printed environment variables (secrets masking)
 
 When the above config runs, the output looks like this:
 
