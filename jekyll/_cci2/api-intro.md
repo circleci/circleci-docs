@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions: 
+The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
 
 * [API v1.1 Documentation](https://circleci.com/docs/api/#api-overview)
 * [API v2 Documentation](https://circleci.com/docs/api/v2/)
@@ -18,7 +18,7 @@ CircleCI API v1.1 and portions of API v2 are supported and generally available. 
 
 ## Introduction to API v2
 
-CircleCI API v2 enables you to use a new API with a set of endpoints and several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development; therefore, the stability of the API is referred to as "mixed."
+CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development; therefore, the stability of the API is referred to as "mixed."
 
 The current categories of the API v2 endpoints are:
 
@@ -30,7 +30,7 @@ The current categories of the API v2 endpoints are:
 - Job (Preview)
 
 
-**Note** The CircleCI API v2 is currently in "Preview" release. You may use it at will, but this evaluation product is not yet fully supported or considered generally available. There are no current plans to change any live endpoints in API v2, and we are treating it as production software, but the risk of disruption or breaking changes is higher than our generally available features.
+**Note:** Portions of the CircleCI API v2 remain under "Preview". Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the [API v2 breaking changes log](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md).
 
 ## Getting Started with the API v2
 
