@@ -18,12 +18,24 @@ order: 40
 
 プロジェクトへのプライベート環境変数の追加は、CircleCI 上のプロジェクトごとの設定ページにある、**Environment Variables** で行えます。 環境変数にセットした実際の値は、ここでいったん設定すると、CircleCI 上では参照も編集もできません。 環境変数の値を変えたいときは、現在の環境変数を削除してから改めて別の値で作成し直してください。 環境変数は個別に追加したり、あるいは他のプロジェクトで定義している変数をインポートして追加できます。 また、プライベート環境変数は公開プロジェクトでも隠しておくことが可能です。これに関連する設定については[オープンソースプロジェクトのビルド方法]({{ site.baseurl }}/2.0/oss/)をご覧ください。 Use Contexts to further restrict access to environment variables from within the build, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
 
-### 環境変数使用時のオプション
+### Secrets Masking
 {:.no_toc}
 
-CircleCI uses Bash, which follows the POSIX naming convention for environment variables. 大文字・小文字のアルファベット、数字、アンダースコアが使用でき、 環境変数の頭文字はアルファベットとします。
+Environment variables may hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of environment variables and contexts.
 
-CircleCI にセキュアに格納されるシークレットキー・プライベートキーは、設定ファイル内の `run` キーや `environment` キー、あるいは Workflow の `context` キーから変数として参照されることがあります。 環境変数は次の優先順位で使用されます。
+The value of the environment variable will not be masked in the build output if:
+
+- the value of the environment variable is less than 4 characaters
+- the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
+
+**Note:** secret masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
+
+### Environment Variable Usage Options
+{:.no_toc}
+
+CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable must be a letter.
+
+Secrets and private keys that are securely stored in the CircleCI app may be referenced with the variable in a `run` key, `environment` key, or a Workflows `context` key in your configuration. Environment variables are used according to a specific precedence order, as follows:
 
 1. `run` ステップ内で指定している[シェルコマンド](#setting-an-environment-variable-in-a-shell-command)で宣言されたもの (例：`FOO=bar make install`)。
 2. [`run` ステップ内](#setting-an-environment-variable-in-a-step) で `environment` キーを使って宣言されたもの。
@@ -33,9 +45,9 @@ CircleCI にセキュアに格納されるシークレットキー・プライ�
 6. プロジェクト設定ページで設定した[プロジェクトレベル環境変数](#setting-an-environment-variable-in-a-project)。
 7. [CircleCI の定義済み環境変数](#built-in-environment-variables)で解説している特殊な環境変数。
 
-`FOO=bar make install` のような形で `run step` 内のシェルコマンドで宣言された環境変数は、`environment` キーや `contexts` キーで宣言された環境変数を上書きします。 コンテキストページで追加された環境変数はプロジェクト設定ページで追加されたものより優先して使われます。 一番最後に参照されるのは CircleCI の特殊な定義済み環境変数です。
+Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
-**注：**`.circleci/config.yml` ファイルでは隠したい環境変数を宣言しないようにしてください。 The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings in the CircleCI app.
+**Note**: Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings in the CircleCI app.
 
 For more information, see the [Encryption section]({{ site.baseurl }}/2.0/security/#encryption) of the "Security" document.
 
@@ -65,12 +77,13 @@ jobs: # basic units of work in a run
           command: echo ${CIRCLE_BRANCH}
       # Run another step, the same as above; note that you can
       # invoke environment variable without curly braces.
+      # prints: XXXXXXX
       - run:
           name: "What branch am I on now?"
-          command: echo $CIRCLE_BRANCH
+          command: echo $CIRCLE_BRANCH # prints: XXXXXXX
       - run:
           name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
+          command: echo ${MY_ENV_VAR}  # prints: XXXXXXX
 ```
 
 The above `config.yml` demonstrates the following:
@@ -78,6 +91,7 @@ The above `config.yml` demonstrates the following:
 - Setting custom environment variables
 - Reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
 - How variables are used (or interpolated) in your `config.yml`
+- Masking of printed environment variables (secrets masking)
 
 When the above config runs, the output looks like this:
 
@@ -85,7 +99,7 @@ When the above config runs, the output looks like this:
 
 You may have noticed that there are two similar steps in the above image and config - "What branch am I on?". These steps illustrate two different methods to read environment variables. Note that both `${VAR}` and `$VAR` syntaxes are supported. You can read more about shell parameter expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
-### `BASH_ENV` で環境変数を定義する
+### Using `BASH_ENV` to Set Environment Variables
 {:.no_toc}
 
 CircleCI does not support interpolation when setting environment variables. All defined values are treated literally. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
@@ -268,9 +282,9 @@ Login Succeeded
 
 Build parameters are environment variables, therefore their names have to meet the following restrictions:
 
-- 変数名に使えるのは ASCII 文字列、数字、アンダースコアのみです
-- 数字から始まる変数は使えません
-- 少なくとも 1 文字以上の変数でなければなりません
+- They must contain only ASCII letters, digits and the underscore character.
+- They must not begin with a number.
+- They must contain at least one character.
 
 Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
@@ -369,4 +383,4 @@ For more details, see [Setting an Environment Variable in a Shell Command](#sett
 ## See Also
 {:.no_toc}
 
-[Contexts]({{ site.baseurl }}/2.0/contexts/)
+[Contexts]({{ site.baseurl }}/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
