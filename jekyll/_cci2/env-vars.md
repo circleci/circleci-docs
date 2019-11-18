@@ -36,22 +36,13 @@ CircleCI uses Bash, which follows the POSIX naming convention for environment va
 
 Secrets and private keys that are securely stored in the CircleCI app may be referenced with the variable in a `run` key, `environment` key, or a Workflows `context` key in your configuration. Environment variables are used according to a specific precedence order, as follows:
 
-- [Overview](#overview)
-  - [Secrets Masking](#secrets-masking)
-  - [Environment Variable Usage Options](#environment-variable-usage-options)
-  - [Example Configuration of Environment Variables](#example-configuration-of-environment-variables)
-  - [Using `BASH_ENV` to Set Environment Variables](#using-bashenv-to-set-environment-variables)
-  - [Alpine Linux](#alpine-linux)
-- [Setting an Environment Variable in a Shell Command](#setting-an-environment-variable-in-a-shell-command)
-- [Setting an Environment Variable in a Step](#setting-an-environment-variable-in-a-step)
-- [Setting an Environment Variable in a Job](#setting-an-environment-variable-in-a-job)
-- [Setting an Environment Variable in a Container](#setting-an-environment-variable-in-a-container)
-- [Setting an Environment Variable in a Context](#setting-an-environment-variable-in-a-context)
-- [Setting an Environment Variable in a Project](#setting-an-environment-variable-in-a-project)
-  - [Encoding Multi-Line Environment Variables](#encoding-multi-line-environment-variables)
-- [Injecting Environment Variables with the API](#injecting-environment-variables-with-the-api)
-- [Built-in Environment Variables](#built-in-environment-variables)
-- [See Also](#see-also)
+1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
+2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
+3. Environment variables set with the `environment` key [for a job](#setting-an-environment-variable-in-a-job).
+4. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
+5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
+6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
+7. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables](#built-in-environment-variables) section of this document.
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
