@@ -170,7 +170,7 @@ jobs:
 
 ## Using Windows
 
-_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations_
+_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations of CircleCI Server_
 
 Using the `windows` executor allows you to run your job in a Windows environment. Building on Windows requires that your organization or account is on our [Performance Plan](https://circleci.com/pricing/usage/). The following is an example configuration that will run a simple windows job.
 
@@ -183,7 +183,7 @@ orbs:
 jobs:
   build:
     executor:
-      name: win/vs2019
+      name: win/vs2019:stable
       shell: bash.exe
     steps:
       - checkout
