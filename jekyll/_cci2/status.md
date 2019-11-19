@@ -17,7 +17,7 @@ Integrations enable you to [include status badges in other web pages]({{ site.ba
 
 Queuing |
 ------------------------|------------------
-If your jobs are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |  
+If your jobs are queuing, you can switch to either a [performance or custom plan](https://circleci.com/pricing/). For further infomration see our guide to [using credits]({{ site.baseurl }}/2.0/credits/). |  
 
 <hr>
 
@@ -25,7 +25,7 @@ If your jobs are queuing, you can upgrade your plan for [using containers]({{ si
 
 CircleCI provides an integrated dashboard showing job status:
 
-- PASSED: All jobs passed successfully
+- SUCCESS: All jobs passed successfully
 - FAILED: One or more jobs failed
 
 If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may
