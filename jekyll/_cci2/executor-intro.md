@@ -58,7 +58,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 
 ## Windows
 
-_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations_
+_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations of CircleCI Server_
 
 Note: The Windows executor requires a 2.1 version configuration as well as having Pipelines enabled. Go to "Project" > "Settings" > "Advanced Settings" to enable Pipelines.
 
@@ -66,11 +66,11 @@ Note: The Windows executor requires a 2.1 version configuration as well as havin
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@1.0.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
-    executor: win/vs2019 # executor type
+    executor: win/default # executor type
 
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -78,7 +78,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows).
+Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See Also
 
