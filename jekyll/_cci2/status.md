@@ -23,7 +23,7 @@ If your jobs are queuing, you can upgrade your plan for [using containers]({{ si
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/job_status.png)
 
-CircleCI provides an integrated dashboard showing job status:
+CircleCI provides an integrated dashboard showing status of the last completed job run:
 
 - SUCCESS: All jobs passed successfully
 - FAILED: One or more jobs failed
