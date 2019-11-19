@@ -26,10 +26,7 @@ order: 1
 
 CircleCI provides an integrated dashboard showing job status:
 
-- SUCCESS：すべてのジョブが完了
+- PASSED: All jobs passed successfully
 - FAILED：1つ以上のジョブが失敗
-- RUNNING：ジョブ実行が進行中
-- ON HOLD：ジョブが承認を待機中
-- QUEUED：ジョブが使用可能なコンテナを待機中
 
 [ワークフロー]({{ site.baseurl}}/ja/2.0/workflows/#概要)を使用している場合は、上記に加えて[ワークフロー固有のステータス]({{ site.baseurl}}/ja/2.0/workflows/#ステータス値)が表示されます。
