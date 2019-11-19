@@ -1,23 +1,21 @@
 ---
 layout: classic-docs
-title: "API v2 Pipelines, Parameters and Scopes"
-short-title: "API v2 Miscellaneous"
-description: "detailed information about API v2 pipelines, parameters, and scopes"
+title: "Pipelines Parameters and Values"
+short-title: "Pipeline Parameters and Values"
+description: "Detailed information about Pipeline parameters and variables"
 categories: [getting-started]
 order: 1
 ---
 
-The CircleCI API v2 was designed to utilize pipelines, parameters, and scopes so you can work with API v2 more efficiently.
+Pipeline parameters and values can be used to create reusable pipeline configurations. To use pipeline parameters and values you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher.
 
-## Pipeline Parameters
+## Pipeline Parameters in Configuration
 
-Pipeline parameters are new with API v2. To use pipeline parameters you must use configuration version 2.1 or higher.
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. The list of allowed `parameter` types can be found in the [Pipelines Syntax](2.0/reusing-config/#parameter-syntax) reference. 
 
-### Declaring and using pipeline parameters in configuration
+Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`. 
 
-Pipeline parameters are declared using a `parameters` stanza in the top level keys of your `.circleci/config.yml` file. You can then reference the value of the parameter as a config variable in the scope `pipeline.parameters`.
-
-The example belows shows a configuration with two pipeline parameters, `image-tag` and `workingdir` both used on the subsequent config stanzas:
+The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
 
 ```yaml
 version: 2.1
@@ -41,11 +39,11 @@ jobs:
       - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
 ```
 
-### Passing Parameters When Triggering Pipelines Via the API
+### Passing Parameters When Triggering Pipelines via the API
 
-Use the API v2 endpoint to trigger a pipeline, passing the `parameters` key in the JSON packet in your `POST` body.
+A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
-The example below triggers a pipeline with the parameters in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
+The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
 ```
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -56,7 +54,39 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-### The Scope of Pipeline Parameters
+## Pipeline Values
+
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+
+Value                       | Description
+----------------------------|--------------------------------------------------------
+pipeline.id                 | A globally unique id representing for the pipeline
+pipeline.number             | A project unique integer id for the pipelin
+pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
+pipeline.project.type       | E.g. "github"
+pipeline.git.tag            | The tag triggering the pipeline
+pipeline.git.branch         | The branch triggering the pipeline
+pipeline.git.revision       | The current git revision
+pipeline.git.base_revision  | The previous git revision
+{: class="table table-striped"}
+
+For example:
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    environment:
+      IMAGETAG: latest
+    working_directory: ~/main
+    steps:
+      - run: echo "This is pipeline ID << pipeline.id >>"
+```
+
+## The Scope of Pipeline Parameters
 
 Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability. 
 
@@ -82,27 +112,27 @@ version: 2.1
 
 commands:
     print:
-    parameters:
-        message:
-        type: string
-    steps:
-        - run: echo << parameters.message >>
+      parameters:
+          message:
+          type: string
+      steps:
+          - run: echo << parameters.message >>
 
 jobs:
     cat-file:
-    parameters:
-        file:
-        type: string
-    steps:
-        - print:
-            message: Printing << parameters.file >>
-        - run: cat << parameters.file >>
+      parameters:
+          file:
+          type: string
+      steps:
+          - print:
+              message: Printing << parameters.file >>
+          - run: cat << parameters.file >>
 
 workflows:
     my-workflow:
-    jobs:
-        - cat-file:
-            file: test.txt
+      jobs:
+          - cat-file:
+              file: test.txt
 ```
 
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
