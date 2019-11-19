@@ -14,12 +14,15 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 ## Introduction
 
-When working with the CircleCI platform, you'll want to optimize your pipeline to ensure it is doing what you need it to & is easy to understand - while keeping the time from start to finish as low as you can manage. Optimizing your tasks is not simply a function of lessening the workload or number of tasks, but rather, reviewing your optimization and caching strategies to ensure you are meeting your business and technical requirements while also maintaining stability and reliability. After you are up and running on the CircleCI platform, optimization becomes an important part of your workflow because:
+Sometimes when you are using the CircleCI platform, you may encounter unexpected lags in pipeline performance, which can negatively affect your ability to perform critical organizational functions. These performance bottlenecks can not only impact overall performance, but also cause workflow and build failures. These "hiccups" can end cost you money in terms of credit usage, resources, and individual time spent reducing these bottlenecks.
 
-- You are a business and decreasing minutes/resources means savings.
-- For anyone, less complex, more efficient builds means saving time.
+This guide provides you with the following optimization strategies that you can utilize to minimize any potential performance bottlenecks and ensure that you are getting the best performance possible when using CircleCI:
 
-CircleCI has developed several different approaches you may wish to use to better optimize these tasks while also leveraging the power of the CircleCI platform and its associated resources (e.g. orbs). The sections below describe various strategies and methodologies you can use to optimize your organization tasks.
+- Running jobs sequentially to prevent concurrency
+- Implementing caching strategies to optimize builds and workflows
+- Improving text performance
+
+**Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
 
 ### Optimization Recipes
 
@@ -27,17 +30,18 @@ The table below lists the different optimization tasks that can be performed usi
 
 Recipe | Description 
 ------------|-----------
-Running Jobs Sequentially | This section describes how you can use the queue orb to run jobs sequentially without concurrency.
-Caching |  This section describes how you can use different caching strategies in your implemenations to optimize your builds and workflows.
-Test Performance | This section describes a specific use case where test performance was significantly improved on the CircleCI platform.
+Running Jobs Sequentially To Prevent Concurrency | This section describes how you can use the queue orb to run jobs sequentially without concurrency.
+Using Caching to Optimizae Builds and Workflows |  This section describes how you can use different caching strategies in your implemenations to optimize your builds and workflows.
+Improving Test Performance | This section describes a specific use case where test performance was significantly improved on the CircleCI platform.
 
-## Running Jobs Sequentially
+## Running Jobs Sequentially To Prevent Concurrency
 
 One of the most common tasks you may encounter when using the CircleCI platform is managing multiple jobs simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for a previous job to be completed before the new job can be initiated, and the system timeout is set too low. In this case, one job will be completed, and other jobs may fail due to this timeout setting.
 
 To better optimize builds and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed a single-threading (queueing) orb that specifically addresses these performance issues. By invoking this orb, you can greatly improve overall job and build performance and prevent concurrency.
 
 **Note:** For more detailed information about the CircleCI Queueing orb, refer to the following CircleCI pages:
+
 - Queueing and Single Threading Overview - https://github.com/eddiewebb/circleci-queue
 - CircleCI Queueing Orb - https://circleci.com/orbs/registry/orb/eddiewebb/queue#quick-start
 
@@ -114,7 +118,7 @@ steps:
 ```
 {% endraw %}
 
-## Caching Dependencies
+## Using Caching to Optimizae Builds and Workflows
 
 One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
 
@@ -149,11 +153,7 @@ Because caching is a such a critical aspect of optimizing builds and workflows, 
 
 - Caching - https://circleci.com/docs/2.0/caching/
 
-### Caching Example
-
-<Example needed here>
-
-## Testing Optimization
+## Improving Test Performance
 
 When running tests on the CircleCI platform, one of the primary considerations you will want to make is how you can optimize the testing process to minimize credit usage and improve overall testing performance and results. Testing can sometimes be a time and performance-intensive process; therefore, the ability to reduce testing time can be a significant boost to your organizational goals.
 
@@ -207,4 +207,9 @@ The figure below illustrates how overall these changes can reduce the total work
 
 ![Test Optimization Process After Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
 
-As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time. 
+As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time.
+
+## See Also
+
+- Refer to [Optimizations]({{site.baseurl}}/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
+- Refer to [Caching]({{site.baseurl}}/2.0/caching/#introduction) for high-level information about caching.
