@@ -36,7 +36,7 @@ Improving Test Performance | This section describes a specific use case where te
 
 ## Running Jobs Sequentially To Prevent Concurrency
 
-One of the most common tasks you may encounter when using the CircleCI platform is managing multiple jobs simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for a previous job to be completed before the new job can be initiated, and the system timeout is set too low. In this case, one job will be completed, and other jobs may fail due to this timeout setting.
+One of the most common tasks you may encounter when using the CircleCI platform is managing multiple jobs simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for a previous job to be completed before the new job can be initiated, and the user has set the system timeout is too low. In this case, one job will be completed, and other jobs will fail due to this timeout setting.
 
 To better optimize builds and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed a single-threading (queueing) orb that specifically addresses these performance issues. By invoking this orb, you can greatly improve overall job and build performance and prevent concurrency.
 
@@ -66,7 +66,7 @@ To configure the environment for the CircleCI platform and CircleCI orbs, follow
 
 ### Blocking Workflows
 
-One of the easiest ways to prevent workflow concurrency using the queueing orb is to enable "blocking" of any workflows with an earlier timestamp. By setting the `block-workflow` parameter value to `true`, all workflows will be forced to run consecutively, not concurrently. This limits the number of workflows in the queue. In turn, this also improves overall performance while making sure no workflows are discarded.
+Occasionally, you may experience the problem of having one of your workflows "blocked" due to workflow concurrency. This happens when there is a workflow already being run while there are other workflows queued. Because CircleCI wants to provide optimal performance for all of your workflows, if there are workflows in the queue that will have to wait a long period of time before they are run, the CircleCI platform will "block" a workflow from being run until the other workflow has completed. One of the easiest ways to prevent workflow concurrency using the queueing orb is to enable "blocking" of any workflows with an earlier timestamp. By setting the `block-workflow` parameter value to `true`, all workflows will be forced to run consecutively, not concurrently. This limits the number of workflows in the queue. In turn, this also improves overall performance while making sure no workflows are discarded.
 
 {% raw %}
 
