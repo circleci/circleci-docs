@@ -25,7 +25,7 @@ If your jobs are queuing, you can upgrade your plan for [using containers]({{ si
 
 CircleCI provides an integrated dashboard showing job status:
 
-- PASSED: All jobs passed successfully
+- SUCCESS: All jobs passed successfully
 - FAILED: One or more jobs failed
 
 If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may
