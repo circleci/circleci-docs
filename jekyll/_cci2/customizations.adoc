@@ -147,7 +147,7 @@ WARNING: It is important to use the IDs listed in the example below for both `ma
 . Run:
 +
 ```shell
-echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
+echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/etc/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
 ```
 . Restart the CircleCI Server application. The application can be stopped and started again from the Management Console Dashboard (for example, `<circleci-hostname>.com:8800`).
 
