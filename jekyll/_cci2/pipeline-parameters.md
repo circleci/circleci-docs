@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Pipelines Parameters and Values"
-short-title: "Pipeline Parameters and Values"
-description: "Detailed information about Pipeline parameters and variables"
+title: "Pipeline Variables"
+short-title: "Pipeline Variables"
+description: "Detailed information about Pipeline variables, parameters and values"
 categories: [getting-started]
 order: 1
 ---
@@ -107,39 +107,39 @@ The remaining configuration is processed, element parameters are resolved, type-
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
-```
+```yml
 version: 2.1
 
 commands:
-    print:
-      parameters:
-          message:
-          type: string
-      steps:
-          - run: echo << parameters.message >>
+  print:
+    parameters:
+        message:
+        type: string
+    steps:
+        - run: echo << parameters.message >>
 
 jobs:
-    cat-file:
-      parameters:
-          file:
-          type: string
-      steps:
-          - print:
-              message: Printing << parameters.file >>
-          - run: cat << parameters.file >>
+  cat-file:
+    parameters:
+        file:
+        type: string
+    steps:
+        - print:
+            message: Printing << parameters.file >>
+        - run: cat << parameters.file >>
 
 workflows:
-    my-workflow:
-      jobs:
-          - cat-file:
-              file: test.txt
+  my-workflow:
+    jobs:
+        - cat-file:
+            file: test.txt
 ```
 
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
 
 ## Pipeline Value Scope
 
-Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. << pipeline.number >>) are always in scope.
+Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
 ### Pipeline Parameter Scope
 
@@ -150,13 +150,13 @@ Pipeline parameters which are defined in configuration are always in scope, with
 
 ## Conditional Workflows
 
-New as of June 2019, you can use a when clause (we also support the inverse clause unless) under a workflow declaration with a boolean value to decide whether or not to run that workflow.
+New as of June 2019, you can use a `when` clause (we also support the inverse clause `unless`) under a workflow declaration with a boolean value to decide whether or not to run that workflow.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
 Below is an example configuration using two different pipeline parameters, one used to drive whether a particular workflow will run and another to determine if a particular step will run.
 
-```
+```yaml
 version: 2.1
 
 parameters:
@@ -173,18 +173,20 @@ workflows:
     when: << pipeline.parameters.run_integration_tests >>
     jobs:
       - mytestjob
+
+jobs:
+  mytestjob:
+    steps:
+      - checkout
       - when:
           condition: << pipeline.parameters.deploy >>
           steps:
-            - deploy
-
-jobs:
-  ...
+            - run: echo "deploying"
 ```
 
 The example shown above prevents the workflow `integration_tests` from being triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
 
-```
+```json
 {
     "parameters": {
         "run_integration_tests": true
