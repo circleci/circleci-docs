@@ -270,7 +270,14 @@ CLI では、Docker を使用してデスクトップ上の CircleCI から単�
 $ circleci local execute --job JOB_NAME
 ```
 
-CircleCI のデモアプリケーションで、ローカルのマシンからビルドのサンプルを実行してみましょう。
+If your CircleCI config is set to version 2.1 or greater, you must first export your config to `process.yml`, and specify it when executing:
+
+```sh
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
+Let's run an example build on our local machine on one of CircleCI's demo applications:
 
 ```sh
 git clone https://github.com/CircleCI-Public/circleci-demo-go.git
@@ -278,16 +285,16 @@ cd circleci-demo-go
 circleci local execute --job build
 ```
 
-上記のコマンドは、*build* ジョブ全体を実行します (ローカルではジョブのみを実行でき、ワークフローは実行できません)。 CLI は、Docker を使用してビルドの要件をプルダウンしてから、CI ステップをローカルで実行します。 この例では、Golang および Postgres の Docker イメージをプルダウンして、ビルド中に依存関係のインストール、単体テストの実行、サービスの実行テストなどを行えるようにしています。
+The commands above will run the entire *build* job (only jobs, not workflows, can be run locally). The CLI will use Docker to pull down the requirements for the build and will then execute your CI steps locally. In this case, Golang and Postgres docker images are pulled down, allowing the build to install dependencies, run the unit tests, test the service is running and so on.
 
 ### ローカルでのジョブ実行時の制約
 {:.no_toc}
 
-`circleci` を使用してジョブをローカルで実行できるのは非常に便利ですが、いくつかの制約があります。
+Although running jobs locally with `circleci` is very helpful, there are some limitations.
 
 **Machine Executor**
 
-ローカルジョブでは Machine Executor を使用できません。 Machine Executor でジョブを実行するには、別の VM が必要になるためです。
+You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
 **Add SSH Keys
 
