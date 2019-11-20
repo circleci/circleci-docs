@@ -4,9 +4,10 @@
   window.addEventListener('load', function () {
     var footer = document.querySelector('.footer');
     var sidebar = document.querySelector('.sidebar');
+    var defaultSectionName = 'welcome';
     var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
     var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
-    var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="welcome"]');
+    var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
     var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
 
     // get hash, if it exists
@@ -14,6 +15,9 @@
       var section = getUrlVars(window.location.hash);
       localStorage.sidenavActive = section['section']
     }
+
+    // activate default section, if nothing else is selected
+    localStorage.sidenavActive = localStorage.sidenavActive || defaultSectionName;
 
     if (localStorage.sidenavActive) {
       // fullscreen sidenav expansion
