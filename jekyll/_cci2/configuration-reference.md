@@ -495,8 +495,7 @@ jobs:
       ... // other config
 ```
 
-The Orb is a wrapper around the `machine` executor to make configuration easier. This is the recommended
-way of handling it, but it can be directly defined as well.
+This is the recommended way to set up the Windows executor. It is also possible to directly define a Windows `machine` image as seen below.
 
 ```yaml
 jobs:
