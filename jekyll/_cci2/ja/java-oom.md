@@ -66,13 +66,15 @@ JVM はこの環境変数を読み取りません。 代わりに Java ベース
 
 ## Java OOM エラーのデバッグ
 
-Java OOM エラーのデバッグを行っても、たいていの場合 `exit code 137` のエラーしか見つかりません。
+Unfortunately, debugging Java OOM errors often comes down to finding an `exit
+code 137` in your error output.
 
-最大サイズ `-Xmxn` がアプリケーションのビルドを完了できる程度に大きく、かつ他のプロセスが CircleCI ビルドコンテナの残りのメモリを使用できる程度に小さくなるように設定してください。
+Ensure that your `-Xmxn` maximum size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
 
-それでも引き続きメモリ制限に達する場合は、[プロジェクトの RAM を増やす](https://circleci.com/docs/ja/2.0/configuration-reference/#resource_class)ことを検討してください。
+Please also note that +UseContainerSupport is currently not supported.
+
+If you are still consistently hitting memory limits, consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
 ## 関連項目
 
-[Java 言語ガイド]({{ site.baseurl }}/ja/2.0/language-java/)  
-[Android チュートリアル]({{ site.baseurl }}/ja/2.0/language-android/)
+[Java Language Guide]({{ site.baseurl }}/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
