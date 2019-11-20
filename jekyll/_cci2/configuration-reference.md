@@ -79,6 +79,14 @@ commands:
       - run: echo << parameters.to >>
 ```
 
+## **`parameters`** (requires version: 2.1)
+Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details. 
+
+Key | Required  | Type | Description
+----|-----------|------|------------
+parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+{: class="table table-striped"}
+
 ## **`executors`** (requires version: 2.1)
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.

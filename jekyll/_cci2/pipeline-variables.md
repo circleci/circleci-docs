@@ -7,11 +7,56 @@ categories: [getting-started]
 order: 1
 ---
 
-Pipeline parameters and values can be used to create reusable pipeline configurations. To use pipeline parameters and values you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher.
+Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher. 
+
+There are two types of pipeline variables: 
+
+* **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
+* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API. 
+
+## Pipeline Values
+
+Pipeline values are available to all pipeline configurations and can be used without previous declaration.
+
+Value                       | Description
+----------------------------|--------------------------------------------------------
+pipeline.id                 | A globally unique id representing for the pipeline
+pipeline.number             | A project unique integer id for the pipelin
+pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
+pipeline.project.type       | E.g. "github"
+pipeline.git.tag            | The tag triggering the pipeline
+pipeline.git.branch         | The branch triggering the pipeline
+pipeline.git.revision       | The current git revision
+pipeline.git.base_revision  | The previous git revision
+{: class="table table-striped"}
+
+For example:
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    environment:
+      IMAGETAG: latest
+    working_directory: ~/main
+    steps:
+      - run: echo "This is pipeline ID << pipeline.id >>"
+```
 
 ## Pipeline Parameters in Configuration
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. The list of allowed `parameter` types can be found in the [Pipelines Syntax](2.0/reusing-config/#parameter-syntax) reference. 
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. 
+
+Pipeline parameters support the following types:
+* string
+* boolean
+* integer
+* enum
+
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details. 
 
 Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`. 
 
@@ -52,38 +97,6 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
     "image-tag": "4.8.2"
   }
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
-```
-
-## Pipeline Values
-
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
-
-Value                       | Description
-----------------------------|--------------------------------------------------------
-pipeline.id                 | A globally unique id representing for the pipeline
-pipeline.number             | A project unique integer id for the pipelin
-pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
-pipeline.project.type       | E.g. "github"
-pipeline.git.tag            | The tag triggering the pipeline
-pipeline.git.branch         | The branch triggering the pipeline
-pipeline.git.revision       | The current git revision
-pipeline.git.base_revision  | The previous git revision
-{: class="table table-striped"}
-
-For example:
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: circleci/node:latest
-    environment:
-      IMAGETAG: latest
-    working_directory: ~/main
-    steps:
-      - run: echo "This is pipeline ID << pipeline.id >>"
 ```
 
 ## The Scope of Pipeline Parameters

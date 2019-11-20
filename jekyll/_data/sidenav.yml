@@ -152,8 +152,8 @@ en:
       children:
         - name: Advanced Config Introduction
           link: 2.0/adv-config/
-        - name: Pipeline Parameters
-          link: 2.0/pipeline-parameters
+        - name: Pipeline Variables
+          link: 2.0/pipeline-variables
         - name: Using Shell Scripts
           link: 2.0/using-shell-scripts/
         - name: Setting up Browser Testing
