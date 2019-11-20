@@ -165,7 +165,7 @@ Some organizations use CircleCI to run tests for each change before merging to t
 
 An example of what the testing process might look like is shown below.
 
-![Test Optimization Process Before Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_1.png)
+[Test Optimization Process Before Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_1.png)
 
 Let's take a closer look at the testing process in the figure above to better understand the time it took to complete the tests.
 
@@ -205,7 +205,7 @@ Now that the test preparation time has been reduced, you may also wish to speed 
 
 The figure below illustrates how overall these changes can reduce the total workflow time.
 
-![Test Optimization Process After Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
+[Test Optimization Process After Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
 
 As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time.
 
