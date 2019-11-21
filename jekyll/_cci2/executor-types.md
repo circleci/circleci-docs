@@ -157,19 +157,19 @@ Using the `windows` executor allows you to run your job in a Windows environment
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 
 jobs:
   build:
     executor:
-      name: win/vs2019
+      name: win/default
       shell: bash.exe
     steps:
       - checkout
       - run: echo 'Hello, Windows'
 ```
 
-We recommend using the [windows](https://circleci.com/orbs/registry/orb/circleci/windows) orb for setting  the executor and shell in your build.
+You can find all the available options for the Windows executor on [the Windows orb page](https://circleci.com/orbs/registry/orb/circleci/windows).
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).

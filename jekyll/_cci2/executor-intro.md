@@ -65,11 +65,11 @@ The syntax for using the Windows executor in your config differs depending on wh
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@1.0.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
-    executor: win/vs2019 # executor type
+    executor: win/default # executor type
 
     steps:
       # Commands are run in a Windows virtual machine environment
@@ -77,7 +77,6 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.codetab.1.Server}
 ```yaml
 version: 2
 
@@ -91,7 +90,8 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows).
+Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
+
 
 ## See Also
 

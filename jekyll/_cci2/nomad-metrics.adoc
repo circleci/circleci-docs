@@ -179,7 +179,11 @@ docker run -d --name $CONTAINER_NAME \
 
 == StatsD Metrics
 
+NOTE: Metrics sent via StatsD will be updated every 10s.
+
 === --server
+
+NOTE: The number of jobs in a terminal state (`complete` and `dead`) will typically increase until Nomad garbage-collects the jobs from its state.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -209,8 +213,6 @@ docker run -d --name $CONTAINER_NAME \
 | Gauge
 | Total number of dead jobs across the cluster.
 |===
-
-NOTE: The number of jobs in a terminal state (`complete` and `dead`) will typically increase until Nomad garbage-collects the jobs from its state.
 
 === --client
 

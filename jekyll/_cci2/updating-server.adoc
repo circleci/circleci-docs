@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-This section describes the process for upgrading your CircleCI Server installation from v2.17 to v2.18.
+This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v2.18.1. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v2.18.1, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
 
 toc::[]
 
@@ -23,9 +23,9 @@ or you suspect that an **organization rename might have happened at any point**.
 
 Following is an overview of the CircleCI Server upgrade steps. Each stage is described in detail below.
 
-* Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
-* Update Replicated and check you are running Docker v17.12.1, update if necessary
-* Install the latest version of CircleCI Server
+* Take a <<1-snapshot-for-rollback,snapshot>> of your installation so you can rollback later if necessary (optional but recommended)
+* Update <<2-updating-replicated,Replicated>> and check you are running Docker v17.12.1, update if necessary
+* <<3-upgrade-circleci-server,Install the latest version of CircleCI Server>>
 
 === 1. Snapshot for Rollback
 
@@ -49,19 +49,20 @@ If you do need to rollback at any point, see our https://circleci.com/docs/2.0/b
 
 === 2. Updating Replicated
 
-==== Prerequisites
+==== a. Prerequisites
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * Your installation is **not** airgapped and you can access the internet from it.
-* You are running replicated version >=2.10.3 on your services machine. To check this, SSH into the Services machine and run the following:
+* We will be updating to Replicated v2.38, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
 ```
 +
-If you are running a version of Replicated pre 2.10.3 please reach out to support@circleci.com.
+If you are running a version of Replicated pre v2.10.3 please reach out to support@circleci.com.
+If you are already on v2.38 you can skip the next step and move to <<3-upgrade-circleci-server,upgrade the CircleCI application>>
 
-==== Preparations
+==== b. Preparations
 
 CAUTION: Remember to take a snapshot (described above) before starting the Replicated update process
 
@@ -70,7 +71,7 @@ CAUTION: Remember to take a snapshot (described above) before starting the Repli
 .Stop the CircleCI Application
 image::stop_replicated_update_available.png[Stop the CircleCI Application]
 +
-Alternatively you can SSH into the services machine and stop the CircleCI application from the command line:
+Alternatively you can SSH into the Services machine and stop the CircleCI application from the command line:
 +
 ```shell
 replicatedctl app stop
@@ -111,7 +112,7 @@ sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 sudo apt-mark hold docker-ce
 ```
 
-==== Perform Update
+==== c. Perform Update
 
 . Perform the Replicated update by executing the update script as follows:
 +
@@ -155,7 +156,7 @@ Example output:
 ]
 ```
 
-=== 3. Upgrade CircleCI Server Version
+=== 3. Upgrade CircleCI Server
 
 . Once you are running the latest version of Replicated, click the View Update button in the Management Console dashboard.
 +

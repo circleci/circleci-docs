@@ -15,7 +15,19 @@ This document describes using environment variables in CircleCI in the following
 ## Overview
 {:.no_toc}
 
-To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information. Use Contexts to further restrict access to environment variables from within the build, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation. 
+To add private keys or secret environment variables to your private project, use the Environment Variables page of the Build > Project > Settings in the CircleCI application. The value of the variables are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value. It is possible to add individual variables or to import variables from another project. Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information. Use Contexts to further restrict access to environment variables from within the build, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
+
+### Secrets Masking
+{:.no_toc}
+
+Environment variables may hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of environment variables and contexts.
+
+The value of the environment variable will not be masked in the build output if:
+
+* the value of the environment variable is less than 4 characaters
+* the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
+
+**Note:** secret masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ### Environment Variable Usage Options
 {:.no_toc}
@@ -66,12 +78,13 @@ jobs: # basic units of work in a run
           command: echo ${CIRCLE_BRANCH}
       # Run another step, the same as above; note that you can
       # invoke environment variable without curly braces.
+      # prints: XXXXXXX
       - run:
           name: "What branch am I on now?"
-          command: echo $CIRCLE_BRANCH
+          command: echo $CIRCLE_BRANCH # prints: XXXXXXX
       - run:
           name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
+          command: echo ${MY_ENV_VAR}  # prints: XXXXXXX
 ```
 
 The above `config.yml` demonstrates the following: 
@@ -79,6 +92,7 @@ The above `config.yml` demonstrates the following:
 - Setting custom environment variables
 - Reading a built-in environment variable that CircleCI provides (`CIRCLE_BRANCH`)
 - How variables are used (or interpolated) in your `config.yml`
+- Masking of printed environment variables (secrets masking)
 
 When the above config runs, the output looks like this:
 
@@ -359,7 +373,7 @@ Variable                    | Type    | Value
 `CIRCLE_BRANCH`             | String  | The name of the Git branch currently being built.
 `CIRCLE_BUILD_NUM`          | Integer | The number of the CircleCI build.
 `CIRCLE_BUILD_URL`          | String  | The URL for the current build.
-`CIRCLE_COMPARE_URL`        | String  | The GitHub or Bitbucket URL to compare commits of a build.
+`CIRCLE_COMPARE_URL`        | String  | The GitHub or Bitbucket URL to compare commits of a build. Available in config v2 and below. For v2.1 we will introduce "pipeline values" as an alternative.
 `CIRCLE_INTERNAL_TASK_DATA` | String  | The directory where test timing data is saved.
 `CIRCLE_JOB`                | String  | The name of the current job.
 `CIRCLE_NODE_INDEX`         | Integer | The index of the specific build instance. A value between 0 and (`CIRCLECI_NODE_TOTAL` - 1)
@@ -386,3 +400,4 @@ Variable                    | Type    | Value
 {:.no_toc}
 
 [Contexts]( {{ site.baseurl }}/2.0/contexts/)
+[Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
