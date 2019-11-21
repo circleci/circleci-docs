@@ -21,7 +21,7 @@ Pipeline values are available to all pipeline configurations and can be used wit
 Value                       | Description
 ----------------------------|--------------------------------------------------------
 pipeline.id                 | A globally unique id representing for the pipeline
-pipeline.number             | A project unique integer id for the pipelin
+pipeline.number             | A project unique integer id for the pipeline
 pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
 pipeline.project.type       | E.g. "github"
 pipeline.git.tag            | The tag triggering the pipeline
