@@ -170,6 +170,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
+{:.codetab.1.Server}
 ```yaml
 version: 2
 
