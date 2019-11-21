@@ -44,7 +44,7 @@ The `project_slug` is included in the payload when pulling information about a p
 
 ### Authentication
 
-The CircleCI API v2 enables users to be authenticated by simply sending your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, then you could then use `curl` with that token like the example shown below:
+The CircleCI API v2 enables users to be authenticated by simply sending your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
 
 `curl -user ${CIRCLECI_TOKEN} https://circleci.com/api/v2/me`
 
