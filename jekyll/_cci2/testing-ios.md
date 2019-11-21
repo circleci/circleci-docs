@@ -72,46 +72,18 @@ example of a minimal config in the
 ### Best Practices
 {:.no_toc}
 
-In addition to the basic setup steps, it is best practice to include
-downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
-and linting the Swift code together with the `build-and-test` job:
+In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
 
-```yaml
-# .circleci/config.yml
-version: 2
-jobs:
-  build-and-test:
-    macos:
-      xcode: "10.2.0"
-    environment:
-      FL_OUTPUT_DIR: output
-    steps:
-      - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-      - run:
-          name: Install CocoaPods
-          command: pod install --verbose
+To enable this, ensure the first line in your Podfile is as follows:
 
-      - run:
-          name: Build and run tests
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: WebTests
+```
+source 'https://cdn.cocoapods.org/'
+```
 
-      - store_test_results:
-          path: output/scan
-      - store_artifacts:
-          path: output
+If upgrading from Cocoapods 1.7 or older, additionally ensure the following line is removed from your Podfile, along with removing the "Fetch CocoaPods Specs" step in your CircleCI Configuration:
 
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build-and-test
+```
+source 'https://github.com/CocoaPods/Specs.git'
 ```
 
 ## Advanced Setup
