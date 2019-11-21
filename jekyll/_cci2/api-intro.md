@@ -18,7 +18,7 @@ CircleCI API v1.1 and portions of API v2 are supported and generally available. 
 
 ## Introduction to API v2
 
-CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development; therefore, the stability of the API is referred to as "mixed."
+CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. API v2 is currently in active development, therefore, the stability of the API is referred to as "mixed".
 
 The current categories of the API v2 endpoints are:
 
