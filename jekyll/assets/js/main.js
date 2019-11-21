@@ -81,6 +81,13 @@ function getUrlVars(url) {
   return myJson;
 };
 
+function detectScrollbar( element ){
+
+	if( element.prop( 'scrollWidth' ) > element.prop( 'offsetWidth' )){
+		element.siblings( '.tab' ).css("margin-top", "15px");
+	}
+}
+
 /**
 	* renderTabbed Images implements a "tabbing" behaviour on html elements.
   * Tabs are implemented using css classes. Proper usage looks like so:
@@ -180,6 +187,10 @@ function renderTabbedHtml() {
     $(tabsToHide).not(".realtab").hide()
     $(tabToShow).not(".realtab").show()
   })
+
+	$( ".tabGroup" ).each( function(){
+		detectScrollbar( $(this) );
+	});
 }
 
 $( document ).ready(function() {
