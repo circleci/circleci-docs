@@ -385,7 +385,7 @@ run:
   command: echo 'chruby ruby-2.6' >> ~/.bash_profile  # Replace 2.6 with the specific version of Ruby here.
 ```
 
-Alternatively, you can choose to [enable auto-switching](https://github.com/postmodern/chruby#auto-switching) if you would like to use it be following [these steps](https://github.com/postmodern/chruby#auto-switching).
+Alternatively, you can choose to [enable auto-switching](https://github.com/postmodern/chruby#auto-switching) if you would like to use it by following [these steps](https://github.com/postmodern/chruby#auto-switching).
 
 #### Images using macOS 10.14 (Mojave) / Xcode 11.1 and earlier
 
