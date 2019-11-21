@@ -55,7 +55,7 @@ The CircleCI API v2 includes the use of pipelines to assist you in triggering wo
 - Jobs named `build` will be wrapped in a workflows stanza by the processor.
 - Projects for which auto-cancel is enabled in the **Advanced Settings** will have workflows on non-default branches cancelled when a newer build is triggered on that same branch.
 
-For more detailed information about pipelines and how you can use them in your workflows and builds, please see the [Build Processing](https://circleci.com/docs/2.0/build-processing/)page.
+For more detailed information about pipelines and how you can use them in your workflows and builds, please see the [Pipelines](https://circleci.com/docs/2.0/build-processing/) guide.
 
 #### Triggering a Pipeline with Parameters Example
 
