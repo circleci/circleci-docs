@@ -76,7 +76,7 @@ In the above example the `project_slug` would take the form `:vcs/:org/:project`
 
 ## Changes In Endpoints
 
-The CircleCI API v2 release includes several new endpoints, as well as some other endpoints that have been deprecated. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
+The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
 For a complete list of all API v2 enpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/#circleci-api), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
