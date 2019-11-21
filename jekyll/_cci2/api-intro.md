@@ -108,7 +108,7 @@ Endpoint       | Description
 
 ## API v2 and Server Customers
 
-Existing CircleCI Server customers will be unable to use API v2. Sometime in the future, support for Server customers may be added.
+API v2 is not currently supported for self-hosted installations of CircleCI Server.
 
 ## Insights
 
