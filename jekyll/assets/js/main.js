@@ -89,7 +89,7 @@ function detectScrollbar( element ){
 }
 
 /**
-	* renderTabbed Images implements a "tabbing" behaviour on html elements.
+  * renderTabbedHtml implements a "tabbing" behaviour on html elements.
   * Tabs are implemented using css classes. Proper usage looks like so:
   * <div class="tab $tab-group $tab-name", or kramdown: {:.tab.$tab-group.$tab-name}
   *
@@ -110,9 +110,10 @@ function renderTabbedHtml() {
      * First, we sort each tab's classes to be reliable.
      * Unfortunately, other javascript can alter a tab element (ahem, highlight-js)
      * so, we split up the tab class name, sort it by what we need, and reassemble:
-     * "language-javascript.tab.hello.some_code.highlighter-rouge"
+     *
+     * "language-javascript.tab.tabgroup.tabname.highlighter-rouge"
      *                          ↓↓↓
-     * "tab.hello.tabname.highlighter-rouge.language-javascript"
+     * "tab.tabgroup.tabname.highlighter-rouge.language-javascript"
      */
     var currentClassList = [].slice.call(curr.classList)
     var indexOfTab = currentClassList.indexOf("tab")
@@ -180,7 +181,6 @@ function renderTabbedHtml() {
   $(".realtab").click(function (e) {
     $(e.target).siblings().removeClass("realtab-active")
     $(e.target).addClass("realtab-active")
-    console.log("tab target it", e.target)
     var tabGroup = e.target.classList[2];
     var tabsToHide = ".tab." + tabGroup
     var tabToShow = ".tab." + e.target.className.split(" ").slice(2, 4).join(".")
