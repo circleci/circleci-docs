@@ -26,7 +26,7 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 - Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
 - macOS のマシン タイプ
 
-この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。大規模なプロジェクトもあれば、CI の設定で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。 たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU × 4、RAM 8 GB、20 クレジット/分) を使用できます。一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU × 1、RAM 2 GB、5 クレジット/分) を使用できます。
+この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。大規模なプロジェクトもあれば、CI の構成で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。 たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU 4 基、RAM 8 GB、20 クレジット/分) を使用できます。一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU 1 基、RAM 2 GB、5 クレジット/分) を使用できます。
 
 CircleCI の各プランで提供される内容や、マシン タイプ別の消費クレジットについては、CircleCI の[従量課金制プラン](https://circleci.com/ja/pricing/usage/)のページをご確認ください。
 
@@ -43,29 +43,29 @@ CircleCI の各プランで提供される内容や、マシン タイプ別の�
 - 依存関係のキャッシュ
 - Windows/Linux でのビルド
 
-従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU × 2、RAM 4 GB) で利用することができます。この構成では、10 クレジット/分のレートでクレジットが消費されます。 Free プランで提供されるユーザー シート数は最大 3 です。
+従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。この構成では、10 クレジット/分のレートでクレジットが消費されます。 Free プランで提供されるユーザー シート数は最大 3 です。
 
 ## Performance プラン
 
 Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
 - すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
-- Medium サイズの macOS マシン (vCPU × 4、RAM 8 GB、50 クレジット/分) へのアクセス
+- Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
 - 無制限のユーザー シート数 (15 ドル/シート)
 - Docker レイヤー キャッシュへのアクセス
 - キューイングなし
 - サポート
 
-## Open Source Credit Usage
+## オープンソース プロジェクトでのクレジット使用
 
-Organizations on our free plan get 400,000 free credits per month for Linux open source builds. Using our free plan and keeping your repository public will enable this for you.
+Free プランの組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソース プロジェクトのビルドに利用できます。 この特典を受け取るには、Free プランを利用し、リポジトリをパブリックにする必要があります。
 
-If you build on macOS, we also offer organizations on our free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
+CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
-## Docker Layer Caching
+## Docker レイヤー キャッシュ
 
-Docker Layer Caching (DLC) is available for 200 credits per job run. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)をご覧ください。
 
-## Questions And Comments
+## ご意見・ご質問
 
-Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/2.0/faq/#料金支払)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
