@@ -41,7 +41,7 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
+_Available on CircleCI Cloud - not currently available on self-hosted installations of CircleCI Server._
 
 ```
 jobs:
