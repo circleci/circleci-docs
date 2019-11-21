@@ -58,9 +58,9 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 
 ## Windows
 
-The syntax for using the Windows executor differs depending on whether config v2.1 or v2.0 is in use. If you are using v2.1, you will also need to enable Pipelines: Go to "Project" > "Settings" > "Advanced Settings".
+The syntax for using the Windows executor in your config differs depending on whether you are using CircleCI Cloud – config version 2.1 – or a self-hosted installation of CircleCI Server with config version 2.0. If you are using v2.1, you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
 
-{:.codetab.1.v2_1}
+{:.codetab.1.Cloud}
 ```yaml
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
@@ -77,14 +77,14 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.codetab.1.v2_0}
+{:.codetab.1.Server}
 ```yaml
 version: 2
 
 jobs:
   build: # name of your job
     machine:
-      image: windows-server-2019-vs2019:stable # Windows machine image
+      image: <your-windows-server-image> # Windows machine image
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
