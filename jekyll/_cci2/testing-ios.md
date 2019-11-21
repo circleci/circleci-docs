@@ -348,6 +348,22 @@ Our macOS containers contain multiple versions of Ruby. The default version is t
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
+#### Images using macOS 10.15 (Catalina) / Xcode 11.2 and later
+
+The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switing feature is not enabled by default. To select a version of Ruby to use, call the `chruby` function in `~/.bash_profile`:
+
+```yaml
+run:
+  name: Set Ruby Version
+  command: echo 'chruby ruby-2.6' >> ~/.bash_profile  # Replace 2.6 with the specific version of Ruby here.
+```
+
+Alternatively, you can choose to [enable auto-switching](https://github.com/postmodern/chruby#auto-switching) if you would like to use it be following [these steps](https://github.com/postmodern/chruby#auto-switching).
+
+#### Images using macOS 10.14 (Mojave) / Xcode 11.1 and earlier
+
+The build images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
+
 To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
 ```yaml
