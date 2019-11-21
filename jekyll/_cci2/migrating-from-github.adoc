@@ -93,7 +93,7 @@ See the table in the next section to compare configuration.
 |===
 | Github Config | CircleCI Config
 
-2+h| Specifying execution environment. While container execution is specified separately in Github, `docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor[own class of executor] in CircleCI.
+2+| Specifying execution environment. While container execution is specified separately in Github, `docker` is its https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor[own class of executor] in CircleCI.
 
 a|
 [source, yaml]
@@ -125,7 +125,7 @@ macos:
 executor: win/vs2019
 ----
 
-2+h| Specifying dependencies/services. All images specified after the first in CircleCI are treated as dependencies. https://circleci.com/docs/2.0/configuration-reference/#docker[Documentation here].
+2+| Specifying dependencies/services. All images specified after the first in CircleCI are treated as dependencies. https://circleci.com/docs/2.0/configuration-reference/#docker[Documentation here].
 
 a|
 [source, yaml]
@@ -165,7 +165,7 @@ jobs:
           POSTGRES_DB: postgres
 ----
 
-2+h| Specifying steps to https://circleci.com/docs/2.0/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
+2+| Specifying steps to https://circleci.com/docs/2.0/configuration-reference/#run[run] in a job. Similar functionality, different syntax.
 
 a|
 [source, yaml]
@@ -192,7 +192,7 @@ jobs:
           command: ./gradlew build
 ----
 
-2+h| Using pre-packaged config (Actions for Github, Orbs for CircleCI). In CircleCI, you declare orbs at the top level and then refer to them by name in config, similar in concept to Python or JavaScript imports https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Documentation here]. This example uses Slack.
+2+| Using pre-packaged config (Actions for Github, Orbs for CircleCI). In CircleCI, you declare orbs at the top level and then refer to them by name in config, similar in concept to Python or JavaScript imports https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Documentation here]. This example uses Slack.
 
 a|
 [source, yaml]
@@ -231,7 +231,7 @@ jobs:
           webhook: '${SLACK_WEBHOOK}'
 ----
 
-2+h| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], on_success, on_failure) as well as https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21[fully conditional steps based on parameters]. We also have https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration[conditional jobs based on parameter], and currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
+2+| Using conditional steps in the workflow. CircleCI offers https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute[basic conditions on steps] (e.g., on_success [default], on_success, on_failure) as well as https://circleci.com/docs/2.0/configuration-reference/#the-when-step-requires-version-21[fully conditional steps based on parameters]. We also have https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration[conditional jobs based on parameter], and currently conditional, parameterized workflows and pipelines https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/conditional-workflows.md[are in preview].
 
 a|
 [source, yaml]
