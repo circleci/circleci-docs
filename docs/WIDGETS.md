@@ -1,35 +1,32 @@
 # CircleCI Docs: Widgets
 
-Many documentation pages will have widgets. These are discrete page elements that provide advanced functionality within Markdown.
-
-The widgets available in CircleCI.com/docs/ are:
-
+Some documentation pages will have widgets. These are page elements that provide advanced functionality within Markdown.
 
 ## Tabbed HTML Elements
 
 ![Tabbed Code Blocks Widget Screenshot](./assets/widget-tabbed-code-blocks.gif)
 
-This allows you to create tabs in a code block to display alternate versions of something.
-The example from the screenshot shows how you can use tabbed code blocks to display a CircleCI v2.1 and v2.0 config.
+Tabbed HTML elements allow you to create tabs to display alternate versions of something. The example gif above shows how you can use tabbed  blocks to display different version of a screenshot between CircleCI Cloud and Server.
 
 Here's how this would look in Jekyll's Markdown:
 
-````
-{:.codetab.1.v2_1}
-```bash
-echo "This is brand new CircleCI v2.1 config!"
+```md
+{:.tab.jobscreenshot.Cloud}
+![]({{ site.baseurl }}/assets/img/docs/new-job-page.png)
+
+{:.tab.jobscreenshot.Server}
+![]({{ site.baseurl }}/assets/img/docs/old-job-page.png)
 ```
 
-{:.codetab.1.v2_0}
-```bash
-echo "This is 2.0 config."
-```
-````
+Using the example line `{:.tab.jobscreenshot.Cloud}`, let's look at how usage of tabs is broken down.
 
-After the string `codetab` you'll see the integer `1`.
-This is how tabbed code blocks are grouped.
-Everything with `1` appears together in a group.
-Everything with `2` will appear in a separate group of tabs, and so on.
+`.tab` creates a class called "tab"; it must be the first class.
+
+Next, you have a string that can be (almost) anything. In this case it is `jobscreenshot`. It could just as easily be `my_code_sample`. All tabs that share this group name will be grouped together.
+
+Finally, you have the third part of the tab classes: `Cloud`. This is the _name_ of the tab as it will appear in the UI. 
+
+### Limitations:
 
 Periods (`.`) and spaces (` `) aren't supported in tab names.
 Instead, use an underscore (`_`) and dash (`-`) respectively and they'll be rendered correctly.
