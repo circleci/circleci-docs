@@ -415,7 +415,9 @@ A parameter can have the following keys as immediate children:
 ### Parameter Types
 {:.no_toc}
 
-This section describes the types of parameters and their usage. The parameter types supported are:
+This section describes the types of parameters and their usage.
+
+The parameter types supported by orbs are:
 
 - 文字列
 - ブール値
@@ -424,6 +426,13 @@ This section describes the types of parameters and their usage. The parameter ty
 - Executor
 - ステップ
 - 環境変数名
+
+The parameter types supported by pipeline parameters are:
+
+- string
+- boolean
+- integer
+- enum
 
 #### 文字列
 {:.no_toc}
@@ -465,8 +474,8 @@ commands:
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
 
-- True：`y`、`yes`、`true`、`on`
-- False：`n`、`no`、`false`、`off`
+- True: `y` `yes` `true` `on`
+- False: `n` `no` `false` `off`
 
 Capitalized and uppercase versions of the above values are also valid.
 
