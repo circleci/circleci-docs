@@ -28,6 +28,7 @@ CircleCI Server v2.18 の機能強化や不具合修正についてまとめま�
 * AWS の外部でストレージ ドライバーを実行しているお客様は、ビルド アーティファクトを検索する際のルーティング時間が改善されます。
 * CircleCI からの出力を取得するメトリクスをカスタマイズできるようになりました。 手順とオプションについては、[カスタム メトリクスに関するガイド](https://circleci.com/ja/docs/2.0/monitoring/#カスタム-メトリクス)をご覧ください。 以下は、カスタム メトリクスを有効にしている場合にデフォルトで含まれるメトリクスの一覧です。
 
+<br>
 
 | メトリクス名                                           | 説明                                              |
 | ------------------------------------------------ | ----------------------------------------------- |
@@ -45,18 +46,21 @@ CircleCI Server v2.18 の機能強化や不具合修正についてまとめま�
 | `circleci.cron-service.messaging.handle-message` | `cron-service` によって処理される RabbitMQ メッセージのタイミングと数 |
 | `circleci.grpc-response`                         | grpc システムが呼び出すシステムの待機時間                         |
 
-* Server でリソース クラス サイズをカスタマイズできるようになりました。 ユーザーは、デフォルトのリソース クラスを変更したり、新しいリソース クラス定義したりできます。 詳細は、[カスタマイズに関するガイド](https://circleci.com/ja/docs/2.0/customizations/#resource-classes)をご覧ください。
 
-Server のインストールでは、large のリソース クラスに対して新しいマシン タイプを有効化できます。  方法については、[カスタマイズに関するガイド](https://circleci.com/ja/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor)をご覧ください。
+<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)
 
-* リモート Docker と machine Executor のジョブに個別の AMI を利用できるようになりました。 以前は、両方で 1 つのカスタム AMI を使用するオプションを提供していましたが、v2.18 ではカスタマイズを拡張し、ユーザーがバージョンや依存関係をより細かく制御して、個々の CI/CD ニーズを満たせるようになりました。 詳細は、[VM サービスのガイド](https://circleci.com/ja/docs/2.0/vm-service/#section=server-administration)をご覧ください。
+* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
+
+<br>
+
+* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [our VM Service guide](https://circleci.com/docs/2.0/vm-service/#section=server-administration)  for more information.
 
 ## バージョン 2.18 での修正点
 
-* コンテキストと組織の名前変更に関して、追加の修正を行いました。
-* ボリュームのアタッチに失敗してリモート Docker/`machine` インスタンスをスピンアップできないことがある問題を修正しました。
-* jira.com サブドメインを持つ JIRA インスタンスに CircleCI インテグレーションをインストールできない問題を修正しました。
-* 組織の名前を変更した後でもワークフローのページが古いリポジトリを指す問題を修正しました。
-* ワークフローの UI がデータを自動的に更新できない問題を修正しました。
-* UI でタイム アウトが発生する場合のコンテキストの読み込み時間を改善しました。
-* コンテキストによってビルドが CIRCLE_BUG を返すことがある問題を修正しました。
+* Additional fixes around contexts and org renames.
+* Fixed an issue where occasionally volumes would fail to attach to spun up Remote Docker/`machine` instances.
+* Fixed an issue where the CircleCI integration could not be installed on JIRA instances with the jira.com subdomain.
+* Fixed an issue where the Workflows page would still point to an old repo after renaming an organization.
+* Fixed an issue where the Workflows UI would fail to refresh data automatically.
+* Improved context loading times in cases when they could cause timeouts in the UI.
+* Fixed an issue where contexts would cause builds to return CIRCLE_BUG .
