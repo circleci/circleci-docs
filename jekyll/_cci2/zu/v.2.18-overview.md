@@ -5,7 +5,7 @@ short-title: "crwdns332480:0crwdne332480:0"
 description: "crwdns332482:0crwdne332482:0"
 categories:
   - crwdns332484:0crwdne332484:0
-order: wdne332486:0bdcrwdns332486:0crwdne332486:0e94.crwdns332486:0crwdne332486:0045crwdns332486:0crwdne332486:0270crwdns332486:0crwdne332486:0
+order: crwdne332486:026a4.50894crwdns332486:0crwdne332486:009crwdns332486:0crwdne332486:0
 ---
 
 crwdns332488:0crwdne332488:0 crwdns332490:0crwdne332490:0 crwdns332492:0crwdne332492:0
@@ -28,6 +28,7 @@ crwdns332496:0crwdne332496:0
 * crwdns332522:0crwdne332522:0
 * crwdns332524:0crwdne332524:0 crwdns332526:0crwdne332526:0 crwdns332528:0crwdne332528:0
 
+<br>
 
 | crwdns332530:0crwdne332530:0   | crwdns332532:0crwdne332532:0 |
 | ------------------------------ | ---------------------------- |
@@ -45,18 +46,21 @@ crwdns332496:0crwdne332496:0
 | `crwdns333144:0crwdne333144:0` | crwdns333146:0crwdne333146:0 |
 | `crwdns333148:0crwdne333148:0` | crwdns333150:0crwdne333150:0 |
 
-* crwdns332604:0crwdne332604:0 crwdns332606:0crwdne332606:0 crwdns332608:0crwdne332608:0
 
-crwdns333154:0crwdne333154:0  crwdns333156:0crwdne333156:0
+<!-- * You can now customize your resource class sizes in Server! This means you can change your default resource class as well as define new ones! For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#resource-classes)
 
-* crwdns332614:0crwdne332614:0 crwdns332616:0crwdne332616:0 crwdns332618:0crwdne332618:0
+* Server installations can now have a new machine type enabled for the Large resource class.  For information on how, see our [customizations guide](https://circleci.com/docs/2.0/customizations/#enable-the-large-resource-class-for-machine-executor) -->
+
+<br>
+
+* crwdns338008:0crwdne338008:0 crwdns338010:0crwdne338010:0 crwdns338012:0crwdne338012:0
 
 ## crwdns333158:0crwdne333158:0
 
-* crwdns332622:0crwdne332622:0
-* crwdns332624:0crwdne332624:0
-* crwdns332626:0crwdne332626:0
-* crwdns332628:0crwdne332628:0
-* crwdns332630:0crwdne332630:0
-* crwdns332632:0crwdne332632:0
-* crwdns332634:0crwdne332634:0
+* crwdns338014:0crwdne338014:0
+* crwdns338016:0crwdne338016:0
+* crwdns338018:0crwdne338018:0
+* crwdns338020:0crwdne338020:0
+* crwdns338022:0crwdne338022:0
+* crwdns338024:0crwdne338024:0
+* crwdns338026:0crwdne338026:0
