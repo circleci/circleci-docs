@@ -9,7 +9,11 @@ order: 1
 
 This document describes how to enable the pipelines engine if you need to trigger workflows from the CircleCI API or auto-cancel workflows.
 
+* TOC
+{:toc}
+
 ## Getting Started
+{:.no_toc}
 
 Most projects will have Pipelines enabled by default. Verify the project pipeline setting in the Advanced section of your project's Settings page in the CircleCI app. **Note:** Pipelines are compatible with v2 and v2.1 configurations of CircleCI. Currently, Pipelines are not yet supported for private CircleCI Server installations.
 
@@ -39,11 +43,47 @@ CircleCI is committed to achieving backwards compatibility in almost all cases, 
 - Pipelines are **not** fully backwards-compatible with the 1.1 API endpoint to trigger arbitrary jobs - you may experience unexpected or inconsistent results if you use this endpoint after turning on Pipelines. Alternatively, you can use the [build-triggering endpoint in the 1.1 API](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) introduced in September 2018. Please keep in mind that this build triggering API endpoint does **not** accept parameters or workflow or job filters. If you make heavy use of those API features and want to use Pipelines, please contact your CircleCI account team.
 - Configuration version 2.0 will have the `CIRCLE_COMPARE_URL` environment variable injected into all jobs for backwards compatibility.
 
+## Transitioning to Pipelines
+
+The following sections outline the process of transitioning to pipelines.
+
+### Pipelines with 2.0 Configuration
+{:.no_toc}
+
+When using 2.0 configuration in combination with pipelines, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility. This environment variable is generated in a different way than the one that is available in legacy jobs, and is not always available.
+
+It is not injected when there is no meaningful previous revision, which includes the first push of commits to an empty repository, and when a new branch is created/pushed without any additional commits.
+
+## Opting In to Pipelines on a Branch
+
+There are two main ways of trying out pipelines on a branch without committing by changing the project-wide setting. One of them is by using version 2.1 configuration, the other is by including the `experimental` stanza.
+
+Note that these methods currently apply to webhooks as well as the version 2 "pipeline trigger" API, but not the version 1.1 "job trigger" API yet. We will announce support for using the version 1.1 API with pipelines soon.
+
+### Using Version 2.1 Configuration
+{:.no_toc}
+
+Configuration version 2.1 has always depended on pipelines. We are now enabling pipelines for build requests with version 2.1 configuration automatically, so trying out pipelines on a branch this way only requires upgrading the configuration version.
+
+This also allows use of the 2.1-exclusive features, like pipeline values.
+
+### Using the `experimental` Stanza
+{:.no_toc}
+
+Alternatively there is a configuration stanza which enables pipelines using a version 2.0 configuration:
+
+```yaml
+experimental:
+  pipelines: true
+```
+
 ## Giving Feedback
+{:.no_toc}
 
 - Tweet @circleci with thoughts
 - Vote or add to our [Ideas board](https://ideas.circleci.com/)
 
 ## See Also
+{:.no_toc}
 
 Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build) document for more details.
