@@ -120,32 +120,32 @@ The remaining configuration is processed, element parameters are resolved, type-
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
-```yml
+```yaml
 version: 2.1
 
 commands:
   print:
     parameters:
-        message:
+      message:
         type: string
     steps:
-        - run: echo << parameters.message >>
+      - run: echo << parameters.message >>
 
 jobs:
   cat-file:
     parameters:
-        file:
+      file:
         type: string
     steps:
-        - print:
-            message: Printing << parameters.file >>
-        - run: cat << parameters.file >>
+      - print:
+          message: Printing << parameters.file >>
+      - run: cat << parameters.file >>
 
 workflows:
   my-workflow:
     jobs:
-        - cat-file:
-            file: test.txt
+      - cat-file:
+          file: test.txt
 ```
 
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
