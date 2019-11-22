@@ -80,9 +80,18 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`executors`**（version：2.1 が必須）
+## **`parameters`** (requires version: 2.1)
 
-Executors は、ジョブステップの実行環境を定義するものです。executor を 1 つ定義するだけで複数のジョブで再利用できます。
+Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+
+| Key        | Required | Type | Description                                                                                                                                                                     |
+| ---------- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| parameters | N        | Map  | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details. |
+{: class="table table-striped"}
+
+## **`executors`** (requires version: 2.1)
+
+Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
 | Key               | Required         | Type   | Description                                                                                                                                                                                                                                                            |
 | ----------------- | ---------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -93,7 +102,7 @@ Executors は、ジョブステップの実行環境を定義するものです�
 | windows           | Y <sup>(1)</sup> | Map    | Options for [windows executor](#windows)                                                                                                                                                                                                                               |
 | shell             | N                | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                              |
 | working_directory | N                | String | In which directory to run the steps.                                                                                                                                                                                                                                   |
-| environment       | N                | Map    | A map of environment variable names and values.                                                                                                                                                                                                                        |
+| environment       | N                | Map    | 環境変数の名前と値のマップです。                                                                                                                                                                                                                                                       |
 {: class="table table-striped"}
 
 Example:
@@ -113,47 +122,47 @@ jobs:
       - run: echo outside the executor
 ```
 
-パラメーター付き Executor の例は「[コンフィグを再利用する]({{ site.baseurl }}/ja/2.0/reusing-config/)」の「[Executor でパラメーターを使う](https://circleci.com/docs/ja/2.0/reusing-config/#using-parameters-in-executors)」をご覧ください。
+See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
 
 ## **`jobs`**
 
-実行処理は 1 つ以上の名前の付いたジョブで構成され、 それらのジョブの指定は `jobs` マップで行います。「[config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)」では `job` マップの 2 通りの例を紹介しています。 マップにおけるキーがジョブの名前となり、値はジョブの中身を記述するマップとします。
+A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
-Workflows を **使わない** 場合は、`jobs` マップ内に `build` という名前のジョブを用意します。 `build` ジョブは GitHub など VCS によるプッシュをトリガーとして実行する際のデフォルトのエントリーポイントとなります。 あるいは、CircleCI API を利用して別のジョブを実行することも可能です。
+If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
-**注 :** ジョブの実行可能時間は最大 5 時間となります。 ジョブがタイムアウトするようなら、ジョブを並列処理させることも検討してください。
+**Note:** Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
 
 ### **<`job_name`>**
 
-1 つ 1 つのジョブはそれぞれ名前となるキーと、値となるマップからなります。 ジョブの名前は現在ある `jobs` リスト内でユニークでなければなりません。 値となるマップでは下記の属性を使用できます。
+Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
-| Key               | Required         | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| docker            | Y <sup>(1)</sup> | List    | Options for [docker executor](#docker)                                                                                                                                                                                                                                                                                                                                                           |
-| machine           | Y <sup>(1)</sup> | Map     | Options for [machine executor](#machine)                                                                                                                                                                                                                                                                                                                                                         |
-| macos             | Y <sup>(1)</sup> | Map     | Options for [macOS executor](#macos)                                                                                                                                                                                                                                                                                                                                                             |
-| shell             | N                | String  | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                                                                                                                                                        |
-| steps             | Y                | List    | A list of [steps](#steps) to be performed                                                                                                                                                                                                                                                                                                                                                        |
-| working_directory | N                | String  | In which directory to run the steps. デフォルトは `~/project` となります（この `project` は文字列リテラルで、特定のプロジェクト名ではありません）。 ジョブ内の実行プロセスは、このディレクトリを参照するために環境変数 `$CIRCLE_WORKING_DIRECTORY` を使えます。 **注 :** YAML ファイルに記述したパスは展開 *されません*。仮に `store_test_results.path` が `$CIRCLE_WORKING_DIRECTORY/tests` と設定されていたとしても、CircleCI はそのまま `$CIRCLE_WORKING_DIRECTORY` という `$` 記号付きの文字列のディレクトリ内に、サブディレクトリ `test` を格納しようとします。 |
-| parallelism       | N                | Integer | Number of parallel instances of this job to run (default: 1)                                                                                                                                                                                                                                                                                                                                     |
-| environment       | N                | Map     | 環境変数の名前と値のマップです。                                                                                                                                                                                                                                                                                                                                                                                 |
-| branches          | N                | Map     | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). Workflows やバージョン 2.1 のコンフィグにおけるジョブやブランチに関する設定については [Workflows](#workflows) を参照してください。                                                                                                                                                  |
-| resource_class    | N                | String  | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).                                                                                                                           |
+| Key               | Required         | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ----------------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| docker            | Y <sup>(1)</sup> | List    | Options for [docker executor](#docker)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| machine           | Y <sup>(1)</sup> | Map     | Options for [machine executor](#machine)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| macos             | Y <sup>(1)</sup> | Map     | Options for [macOS executor](#macos)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| shell             | N                | String  | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                                                                                                                                                                                                                                                                                                                                |
+| steps             | Y                | List    | A list of [steps](#steps) to be performed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| working_directory | N                | String  | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will *not* be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. |
+| parallelism       | N                | Integer | Number of parallel instances of this job to run (default: 1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| environment       | N                | Map     | A map of environment variable names and values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| branches          | N                | Map     | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.                                                                                                                                                                                                                                                                                                             |
+| resource_class    | N                | String  | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).                                                                                                                                                                                                                                                                                                   |
 {: class="table table-striped"}
 
-<sup>(1)</sup> 指定できるのはこれらのうちいずれか 1 つです。 2 つ以上指定した場合はエラーとなります。
+<sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
 #### `environment`
 
-環境変数の名前と値のマップです。 CircleCI の設定画面でセットした環境変数を上書きするのに使えます。
+A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
 
 #### `parallelism`
 
-`parallelism` の値を 2 以上に設定すると、Executor が設定した数だけ起動し、そのジョブのステップを並列実行します。 This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
-`working_directory` で指定したディレクトリが存在しないときは自動で作成されます。
+`working_directory` will be created automatically if it doesn't exist.
 
 Example:
 
@@ -173,12 +182,12 @@ jobs:
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (*executor*)
 
-「Executor」は、端的に言えば「ステップを処理する場所」です。 CircleCI 2.0 では Executor として一度に必要な分の Docker コンテナを起動するか、仮想マシンを利用することで、最適な環境を構築できます。 詳しくは「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
+An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {:.no_toc}
 
-`docker` キーは下記の要素を用いて設定します。
+Configured by `docker` key which takes a list of maps:
 
 | Key         | Required | Type           | Description                                                                                               |
 | ----------- | -------- | -------------- | --------------------------------------------------------------------------------------------------------- |
@@ -192,19 +201,19 @@ jobs:
 | aws_auth    | N        | Map            | Authentication for AWS EC2 Container Registry (ECR)                                                       |
 {: class="table table-striped"}
 
-一番最初に記述した `image` は、すべてのステップを実行するプライマリコンテナとなります。
+The first `image` listed in the file defines the primary container image where all steps will run.
 
-`entrypoint` は Dockerfile のデフォルトのエントリーポイントを上書きします。
+`entrypoint` overrides default entrypoint from Dockerfile.
 
-`command` は、（Dockerfile で指定していれば）イメージのエントリーポイントに対する引数として使われます。もしくは、（このスコープや Dockerfile 内にエントリーポイントがない場合は）実行形式として扱われます。
+`command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
 
-[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)（最初に宣言されたもの）において `command` の指定がない場合は、`command` とイメージエントリーポイントは無視されます。これは、エントリーポイントの実行可能ファイルがリソースを過大に消費したり、予期せず終了したりするのを防ぐためです。 現在のところは、`steps` は常にプライマリコンテナ内でのみ実行されます。
+For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time all `steps` run in the primary container only.
 
-`name` では、セカンダリサービスコンテナにアクセスする際の名前を定義します。  デフォルトはどのサービスも `localhost` 上で直接見える状態になっています。 これは、例えば同じサービスのバージョン違いを複数立ち上げるときなど、localhost とは別のホスト名を使いたい場合に役立ちます。
+`name` defines the name for reaching the secondary service containers. By default, all services are exposed directly on `localhost`. The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
 
-`environment` の設定は、初期化用の `command` も含め、この Executor におけるすべてのコマンド実行で有効です。 `environment` による設定はジョブのマップにおいて何よりも優先されます。
+The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
 
-タグやハッシュ値でイメージのバージョンを指定することもできます。 公式の Docker レジストリ（デフォルトは Docker Hub）のパブリックイメージはどんなものでも自由に使えます。 詳しくは 「[Executor タイプ]({{ site.baseurl }}/ja/2.0/executor-types)」を参照してください。
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
 Example:
 
@@ -226,7 +235,7 @@ obs:
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-プライベートな Docker イメージを利用するときは、`auth` を使ってユーザー名とパスワードを指定できます。 パスワード保護を目的に、下記のようにプロジェクトの設定値としてセットしておくこともできます。
+If you are using a private image, you can specify the username and password in the `auth` field. To protect the password, you can set it as a project setting which you reference here:
 
 ```yaml
 jobs:
@@ -238,7 +247,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # プロジェクト設定の環境変数を指定する
 ```
 
-[AWS ECR](https://aws.amazon.com/ecr/) にホストしているイメージを使うには AWS 認証情報での認証が必要です。 デフォルトでは CircleCI のプロジェクト設定画面にある「AWS Permissions」に追加した AWS 認証情報、またはプロジェクト環境変数 `AWS_ACCESS_KEY_ID` と `AWS_SECRET_ACCESS_KEY` を使います。 下記のように `aws_auth` フィールドを用いて認証情報をセットすることも可能です。
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
 
     jobs:
       build:
@@ -249,7 +258,7 @@ jobs:
               aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # プロジェクト設定の環境変数を指定する
     
 
-バージョン 2.1 のコンフィグでは、ジョブにおいて[宣言済みコマンド]({{ site.baseurl }}/ja/2.0/reusing-config/)の再利用が可能です。下記の例では `sayhello` コマンドを呼び出しています。
+It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
 
     jobs:
       myjob:
@@ -263,7 +272,7 @@ jobs:
 #### **`machine`**
 {:.no_toc}
 
-[machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) は `machine` キーとともに下記の要素を用いて設定します。
+The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
 
 | Key                    | Required | Type    | Description                                                                                                                                                                                                                                                                                                             |
 | ---------------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
