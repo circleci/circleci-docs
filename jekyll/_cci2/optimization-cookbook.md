@@ -165,7 +165,7 @@ Some organizations use CircleCI to run tests for each change before merging to t
 
 An example of what the testing process might look like is shown below.
 
-[Test Optimization Process Before Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_1.png)
+![Test Optimization Process Before Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_1.png)
 
 Let's take a closer look at the testing process in the figure above to better understand the time it took to complete the tests.
 
