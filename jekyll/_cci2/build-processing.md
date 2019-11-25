@@ -63,7 +63,7 @@ Note that these methods currently apply to webhooks as well as the version 2 "pi
 ### Using Version 2.1 Configuration
 {:.no_toc}
 
-Configuration version 2.1 has always depended on pipelines. We are now enabling pipelines for build requests with version 2.1 configuration automatically, so trying out pipelines on a branch this way only requires upgrading the configuration version.
+Using configuration version `2.1` will automatically enable the use of pipelines. Further, this allows the use of `2.1`-exclusive features, like pipeline values.
 
 This also allows use of the 2.1-exclusive features, like pipeline values.
 
