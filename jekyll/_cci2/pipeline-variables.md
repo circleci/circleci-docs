@@ -40,10 +40,11 @@ jobs:
     docker:
       - image: circleci/node:latest
     environment:
-      IMAGETAG: latest
+      CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
     steps:
       - run: echo "This is pipeline ID << pipeline.id >>"
+      - run: echo $CIRCLE_COMPARE_URL
 ```
 
 ## Pipeline Parameters in Configuration
