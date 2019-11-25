@@ -84,7 +84,7 @@ version: 2
 jobs:
   build: # name of your job
     machine:
-      image: <your-windows-server-image> # Windows machine image
+      image: windows-default # Windows machine image
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
