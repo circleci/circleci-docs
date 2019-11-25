@@ -58,19 +58,17 @@ It is not injected when there is no meaningful previous revision, which includes
 
 There are two main ways of trying out pipelines on a branch without committing by changing the project-wide setting. One of them is by using version 2.1 configuration, the other is by including the `experimental` stanza.
 
-Note that these methods currently apply to webhooks as well as the version 2 "pipeline trigger" API, but not the version 1.1 "job trigger" API yet. We will announce support for using the version 1.1 API with pipelines soon.
+Note that these methods currently apply to webhooks as well as the version 2 "pipeline trigger" API, but not the version 1.1 "job trigger" API yet. Support for using the version 1.1 API with pipelines will be announced soon.
 
 ### Using Version 2.1 Configuration
 {:.no_toc}
 
-Using configuration version `2.1` will automatically enable the use of pipelines. Further, this allows the use of `2.1`-exclusive features, like [pipeline values](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values).
-
-This also allows use of the 2.1-exclusive features, like pipeline values.
+Using configuration version `2.1` will automatically enable the use of pipelines and allow the use of `2.1`-exclusive features, like [pipeline values](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values).
 
 ### Using the `experimental` Stanza
 {:.no_toc}
 
-Alternatively there is a configuration stanza which enables pipelines using a version 2.0 configuration:
+Alternatively there is a configuration stanza to enable pipelines using a version 2.0 configuration:
 
 ```yaml
 experimental:
