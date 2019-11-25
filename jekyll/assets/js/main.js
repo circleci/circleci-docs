@@ -81,47 +81,116 @@ function getUrlVars(url) {
   return myJson;
 };
 
-function renderTabbedCodeFences(){
+function detectScrollbar( element ){
 
-	var tabGroupIndex = 0;
-
-	while( true ){
-
-		tabGroupIndex++;
-
-		if( $( "div.highlighter-rouge.codetab." + tabGroupIndex ).length == 0 ){
-			break;
-		}
-
-		var tabs = "";
-
-		$( "div.highlighter-rouge.codetab." + tabGroupIndex ).each( function( index ){
-
-			tabName = $( this )[0].classList.item(3);
-			tabNameFixed = tabName.replace( /_/g, "." );
-			tabNameFixed = tabNameFixed.replace( /-/g, " " );
-
-			if( index != 0 ){
-				$( this ).hide();
-				$( this ).appendTo( "div.codetab-parent." + tabGroupIndex );
-				tabs += "<li>" + tabNameFixed  + "</li>";
-			}else{
-				$( this ).wrap( '<div class="codetab-parent ' + tabGroupIndex + '"></div>' );
-				tabs += '<li class="active">' + tabNameFixed  + '</li>';
-			}
-		});
-
-		$( "div.codetab-parent." + tabGroupIndex ).prepend( "<ul>" + tabs  + "</ul>" );
-		$( "div.codetab-parent." + tabGroupIndex + " li" ).click(function(){
-
-			curIndex = $( this ).parent().parent()[0].classList.item(1);
-			which = $( "div.codetab-parent." + curIndex + " li" ).index( $( this ) );
-			$( "div.codetab-parent." + curIndex + " li" ).removeClass( "active" );
-			$( this ).addClass( "active" );
-			$( "div.highlighter-rouge.codetab." + curIndex ).hide();
-			$( "div.highlighter-rouge.codetab." + curIndex ).eq( which ).show();
-		});
+	if( element.prop( 'scrollWidth' ) > element.prop( 'offsetWidth' )){
+		element.siblings( '.tab' ).css("margin-top", "15px");
 	}
+}
+
+/**
+  * renderTabbedHtml implements a "tabbing" behaviour on html elements.
+  * Tabs are implemented using css classes. Proper usage looks like so:
+  * <div class="tab $tab-group $tab-name", or kramdown: {:.tab.$tab-group.$tab-name}
+  *
+  * The function performs the following:
+  * * Find all tabs in the DOM and group them into a datastructure
+  * * Loop through the collected tabs and wrap them in a HTML tab structure.
+  * * Apply click behaviour to toggle hide/showing of the tab's content.
+  * *
+  *
+  *
+ */
+function renderTabbedHtml() {
+  var tabData = {};
+
+  $(".tab").toArray().reduce(function (acc, curr) {
+
+    /**
+     * First, we sort each tab's classes to be reliable.
+     * Unfortunately, other javascript can alter a tab element (ahem, highlight-js)
+     * so, we split up the tab class name, sort it by what we need, and reassemble:
+     *
+     * "language-javascript.tab.tabgroup.tabname.highlighter-rouge"
+     *                          ↓↓↓
+     * "tab.tabgroup.tabname.highlighter-rouge.language-javascript"
+     */
+    var currentClassList = [].slice.call(curr.classList)
+    var indexOfTab = currentClassList.indexOf("tab")
+    var newClassList = currentClassList.splice(indexOfTab, 3).concat(currentClassList)
+    var tabGroup = newClassList[1]
+    $(curr).removeClass().addClass(newClassList.join(" "))
+
+
+    // Assign the formatted tabs into the datastructure.
+    if (tabData[tabGroup] === undefined) {
+      tabData[tabGroup] = {
+        els: [curr],
+        selector: "." + tabGroup,
+        tabGroup: tabGroup
+      }
+    } else {
+      tabData[tabGroup].els = tabData[tabGroup].els.concat([curr])
+    }
+
+    return tabData
+  }, tabData)
+
+
+  /**
+    * Loop through the collected dom Tabs and handle:
+    * 1) Building the actual tabs with HTML and setting their css styles
+    * 2) Building the 'tab-switching behaviour.
+    *
+    * All tab switching is handled by css classes.
+    */
+  $.each(tabData, function (key, val) {
+    var tabWrapperName = "tabWrapper-" + key;     // The wrapper for the entire switchable-content
+    var tabGroupName = "tabGroup-" + key;         // Name for the group of tabs
+
+    // Hide all tab content that doesn't belong to the first tab.
+    $.each(val.els, function (idx, el) {
+      if (idx !== 0) { $(el).hide() }
+    })
+
+    // Build HTML: create wrapper for each tab block and tab sub element
+    $(val.selector).wrapAll($("<div>").addClass("tabWrapper " + tabWrapperName))
+    // Build HTML: the tab group to hold multiple tabs
+    $("." + tabWrapperName).append($("<div>").addClass("tabGroup " + tabGroupName))
+
+    // Build the tabs for each tab-wrapper
+    $.each(val.els, function (i, tabContent) {
+      // Default the first value to be the "active tab"
+      if (i === 0) {
+        tabClass = "realtab " + tabContent.className + " realtab-active"
+      } else {
+        var tabClass = "realtab " + tabContent.className  // Derive the class for the tab.
+      }
+
+      // Build the tabs: the tab name is determined by the third css-class.
+      var tabContentClasses = tabContent.className.split(" ")
+      var tabName = tabContentClasses[2]
+      $("." + tabGroupName)
+        .append($("<div>")
+          .addClass(tabClass)
+          .text(tabName))
+    })
+  })
+
+  // Handle tab toggling (styling active tab and finding content to show)
+  $(".realtab").click(function (e) {
+    $(e.target).siblings().removeClass("realtab-active")
+    $(e.target).addClass("realtab-active")
+    var tabGroup = e.target.classList[2];
+    var tabsToHide = ".tab." + tabGroup
+    var tabToShow = ".tab." + e.target.className.split(" ").slice(2, 4).join(".")
+    $(tabsToHide).not(".realtab").hide()
+    $(tabToShow).not(".realtab").show()
+  })
+
+	$( ".tabGroup" ).each( function(){
+		detectScrollbar( $(this) );
+	});
 }
 
 $( document ).ready(function() {
@@ -142,7 +211,7 @@ $( document ).ready(function() {
 		$(this).find("i").toggle();
 	});
 
-	renderTabbedCodeFences();
+  renderTabbedHtml();
 
 	$.getJSON("/api/v1/me").done(function (userData) {
 		analytics.identify(userData['analytics_id']);

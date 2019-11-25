@@ -312,44 +312,52 @@ code {
 	font-weight: bold;
 }
 
-div.codetab-parent{
-	width: 100%;
 
-	ul{
-		display: flex;
-		justify-content: flex-end;
-		margin: 0;
-		padding: 0 10px 0 0;
-		list-style: none;
-		font-family: monospace;
-
-		li{
-			border: 1px solid #CCC;
-			border-radius: 5px 5px 0 0;
-			background-color: #F5F5F5;
-			padding: 0 10px;
-			height: 34px;
-			line-height: 34px;
-			text-align: center;
-			cursor: pointer;
-
-			&.active{
-				/*border-top: 2px solid #27A0B6;*/
-				font-weight: bold;
-				border-bottom: 2px solid #F5F5F5;
-			}
-
-			&:first-child{
-				border-radius: 5px 5px 0 0;
-			}
-		}
-	}
-
-	pre{
-		padding-top: 15px;
-		padding-bottom: 15px;
-	}
+// --- custom Tabs -- see `renderTabbedHtml` in `assets/js/main.js`
+.tabWrapper {
+  padding: 50px 0 0 0;
+  position: relative;
+  border: 1px solid #dfdfdf;
+  margin: 16px 0;
 }
+
+.tabGroup {
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: inset 0 -2px 0 #dfdfdf;
+  overflow-x: auto;
+}
+
+.tab {
+  margin: 0;
+  padding: 8px;
+}
+
+.tab img {
+  margin: 0;
+}
+
+.tab pre {
+  margin-bottom: 0px;
+}
+
+
+.realtab {
+  background: white;
+  color: #999;
+  cursor: pointer;
+  padding: 12px 24px;
+  border-bottom: 2px solid #dfdfdf;
+}
+
+.realtab-active {
+  border-bottom: 2px solid #4091F7;
+}
+
 /***** End - Widgets **********************************************************/
 //
 //*****************************************************************************/
