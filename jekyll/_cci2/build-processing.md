@@ -63,7 +63,7 @@ Note that these methods currently apply to webhooks as well as the version 2 "pi
 ### Using Version 2.1 Configuration
 {:.no_toc}
 
-Using configuration version `2.1` will automatically enable the use of pipelines. Further, this allows the use of `2.1`-exclusive features, like pipeline values.
+Using configuration version `2.1` will automatically enable the use of pipelines. Further, this allows the use of `2.1`-exclusive features, like [pipeline values](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values).
 
 This also allows use of the 2.1-exclusive features, like pipeline values.
 
