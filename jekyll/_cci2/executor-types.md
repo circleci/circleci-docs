@@ -96,6 +96,7 @@ Using `machine` may require additional fees in a future pricing update.
 
 To use the `machine` executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
 
+{:.tab.machineblock.Cloud}
 ```yaml
 version: 2
 jobs:
@@ -104,13 +105,17 @@ jobs:
       image: ubuntu-1604:201903-01    # pins image to specific version
 ```
 
+{:.tab.machineblock.Server}
+```yaml
+version: 2
+jobs:
+  build:
+    machine:
+```
+
 The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
 
-You can specify other images using the `image` key.
-
-**Note:**
-The `image` key is not supported on private installations of CircleCI.
-See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
+Cloud users can specify other images using the `image` key. **Note:** The `image` key is not supported on private installations of CircleCI.
 
 The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
 
@@ -151,9 +156,11 @@ jobs:
 
 ## Using Windows
 
-Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple windows job. The syntax for using the Windows executor in your config differs depending on whether you are using CircleCI Cloud – config version 2.1 – or a self-hosted installation of CircleCI Server with config version 2.0. If you are using v2.1, you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
+Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
+* CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
+* Self-hosted installation of CircleCI Server with config version 2.0. 
 
-{:.codetab.1.Cloud}
+{:.tab.windowsblock.Cloud}
 ```yaml
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
@@ -170,21 +177,21 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.codetab.1.Server}
+{:.tab.windowsblock.Server}
 ```yaml
 version: 2
 
 jobs:
   build: # name of your job
     machine:
-      image: <your-windows-server-image> # Windows machine image
+      image: windows-default # Windows machine image
     steps:
       # Commands are run in a Windows virtual machine environment
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
 
-See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
+Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) page for more details.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
