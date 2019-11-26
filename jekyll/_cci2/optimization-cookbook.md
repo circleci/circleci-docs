@@ -189,7 +189,7 @@ As you can see, there is a a significant amount of time being spent setting up t
 
 ### Test Preparation Optimization
 
-Knowing that ~13 minutes was too long to perform the steps in this workflow, the following approaches were taken to optimize and reduce the time it took to run this workflow.
+Knowing that ~13 minutes was too long to perform the steps in this workflow, the following approaches were taken to optimize and reduce this time.
 
 #### Changing the CI Test Workflow
 
