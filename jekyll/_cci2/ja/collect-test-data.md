@@ -490,7 +490,7 @@ steps:
 
 ## API
 
-実行時のテスト メタデータに API からアクセスするには、[テスト メタデータ API ドキュメント](https://circleci.com/ja/docs/api/#get-build-test-metadata)を参照してください。
+実行時のテスト メタデータに API からアクセスするには、[テスト メタデータ API ドキュメント](https://circleci.com/docs/api/#get-build-test-metadata)を参照してください。
 
 ## 関連項目
 {:.no_toc}
