@@ -155,7 +155,7 @@ Because caching is a such a critical aspect of optimizing builds and workflows, 
 
 ## Improving Test Performance
 
-When running tests on the CircleCI platform, one of the primary considerations you will want to make is how you can optimize the testing process to minimize credit usage and improve overall testing performance and results. Testing can sometimes be a time and performance-intensive process; therefore, the ability to reduce testing time can be a significant boost to your organizational goals.
+When running tests on the CircleCI platform, one of the primary considerations you will want to make is how you can optimize the testing process to minimize credit usage and improve overall testing performance and results. Testing can sometimes be a time and performance-intensive process, therefore, the ability to reduce testing time can be a significant boost to your organizational goals.
 
 There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below (adapted with permission from the developer who wrote about this test optimization use case in his [blog post](https://www.brautaset.org/articles/2019/speed-up-circleci.html)) describes how you can optimize testing using Django and the CircleCI platform.
 
