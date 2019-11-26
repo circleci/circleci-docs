@@ -153,11 +153,12 @@ Usage:
 
 Available Commands:
   create      Create an orb in the specified namespace
+  info        Show the meta-data of an orb
   list        List orbs
   process     Validate an orb and print its form after all pre-registration processing
   publish     Publish an orb to the registry
   source      Show the source of an orb
-  validate    Validate an orb.yml
+  validate    Validate an orb.yml  
 ```
 
 **Note** When authoring an orb, you will agree to CircleCI's [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/) when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
