@@ -21,7 +21,7 @@ The right plan for you and your team will depend on several factors:
 Let's look at how a Performance plan might use credits. With the Performance plan you have:
 
 - At least one credit block (25,000 credits)
-- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user.)
+- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user)
 - A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
 - The MacOS machine type
 
@@ -48,9 +48,9 @@ The free usage-based plan offers 2,500 build credits across medium-type machines
 
 Upgrading to a performance plan offers several improvements over the free plan:
 
-- Access to all machine sizes for Docker/Linux based machines.
+- Access to all machine sizes for Docker/Linux based machines
 - Access to medium sized MacOS machines (4 CPUs, 8gb Ram at 50 credits/minute)
-- Unlimited user seat count (at $15/seat)
+- Unlimited user seat count (at $15 for the first three users and $15 for each additional user)
 - Access to Docker Layer Caching
 - No queuing
 - Support
@@ -63,7 +63,7 @@ If you build on macOS, we also offer organizations on our free plan 25,000 free 
 
 ## Docker Layer Caching
 
-Docker Layer Caching (DLC) is available for 200 credits per job run. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker Layer Caching (DLC) is available for 200 credits per job run. DLC is only available on the Performance Plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
 
 ## Questions And Comments
 
