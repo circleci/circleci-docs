@@ -118,7 +118,7 @@ steps:
 ```
 {% endraw %}
 
-## Using Caching to Optimizae Builds and Workflows
+## Using Caching to Optimize Builds and Workflows
 
 One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
 
