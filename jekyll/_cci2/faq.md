@@ -276,6 +276,11 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Compute is paid for monthly in credits for the machine size and duration you use.
 - Docker Layer Caching (DLC) is paid for with credits per job, similar to
   compute credits.
+  
+#### Why does CircleCI have per-active-user pricing? 
+{:.no_toc}
+
+Credit usage covers access to compute. We prefer to keep usage costs as low as possible to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost. Our per-active-user charge also allows us to provide support to all customers and deliver additional features like insights and orbs. 
 
 #### What constitutes an _Active User_?
 {:.no_toc}
@@ -330,14 +335,38 @@ credits per month to use on macOS open source builds. For access to this,
 contact our team at billing@circleci.com. Free credits for macOS open source
 builds can be used on a maximum of 2 concurrent jobs per organization.
 
-
 #### I currently get free credits for open source projects on my container plan. How do I get discounts for open source on the Performance plan?
 {:.no_toc}
 
 We still offer discounts for open source on our paid usage plans! Please [open a
 support ticket](https://support.circleci.com/hc/en-us) to talk to our team about customizing your plan for open source projects.
 
+#### Why does CircleCI charge for Docker layer caching? 
+{:.no_toc}
+ 
+Docker layer caching (DLC) reduces build times on pipelines where Docker images are
+built by only rebuilding Docker layers that have changed (read more about DLC
+[here]({{site.baseurl}})/2.0/docker-layer-caching). DLC costs 200 credits per
+job run.
 
+There are a few things that CircleCI does to ensure DLC is available to
+customers. We use solid-state drives and replicate the cache across zones to
+make sure DLC is available. We will also increase the cache as needed in order
+to manage concurrent requests and make DLC available for your jobs. All of these
+optimizations incur additional cost for CircleCI with our compute providers,
+which pass along to customers when they use DLC.
+
+To estimate your DLC cost, look at the jobs in your config file with Docker
+layer caching enabled, and the number of Docker images you are building in those
+jobs. There are cases where a job can be written once in a config file but the
+job runs multiple times in a pipeline, for example, with parallelism enabled.
+
+Note that the benefits of Docker layer caching are only apparent on pipelines
+that are building Docker images, and reduces image build times by reusing the
+unchanged layers of the application image built during your job. If your
+pipeline does not include a job where Docker images are built, Docker layer
+caching will provide no benefit.
+ 
 ---
 
 ### Container Based Plans
