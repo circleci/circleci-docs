@@ -60,7 +60,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 
 The syntax for using the Windows executor in your config differs depending on whether you are using CircleCI Cloud – config version 2.1 – or a self-hosted installation of CircleCI Server with config version 2.0. If you are using v2.1, you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
 
-{:.codetab.1.Cloud}
+{:.tab.windowsblock.Cloud}
 ```yaml
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
@@ -77,7 +77,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.codetab.1.Server}
+{:.tab.windowsblock.Server}
 ```yaml
 version: 2
 
