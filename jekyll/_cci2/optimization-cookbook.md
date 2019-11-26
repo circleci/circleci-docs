@@ -20,7 +20,7 @@ This guide provides you with the following optimization strategies that you can 
 
 - Running jobs sequentially to prevent concurrency
 - Implementing caching strategies to optimize builds and workflows
-- Improving text performance
+- Improving test performance
 
 **Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
 
