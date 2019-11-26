@@ -204,6 +204,8 @@ en:
           link: 2.0/parallelism-faster-jobs/
         - name: Using Docker Layer Caching
           link: 2.0/docker-layer-caching/
+        - name: Optimizations Cookbook
+          link: 2.0/optimization-cookbook/
 
 - name: Jobs
   icon: docs/builds.svg
