@@ -14,7 +14,7 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 ## Introduction
 
-Sometimes when you are using the CircleCI platform, you may encounter unexpected lags in pipeline performance, which can negatively affect your ability to perform critical organizational functions. These performance bottlenecks can not only impact overall performance, but also cause workflow and build failures. These "hiccups" can cost you money in terms of credit usage, resources, and individual time spent reducing these bottlenecks.
+Sometimes when you are using the CircleCI platform, you may encounter unexpected lags in pipeline performance, which can negatively affect your ability to perform critical organizational functions. These performance bottlenecks can not only impact overall performance, but also cause workflow and build failures. These "hiccups" can cost you money in terms of credit usage, resources, and individual time spent reducing bottlenecks.
 
 This guide provides you with the following optimization strategies that you can utilize to minimize any potential performance bottlenecks and ensure that you are getting the best performance possible when using CircleCI:
 
