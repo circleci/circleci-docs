@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Integrations"
-short-title: "Integrations"
+title: "インテグレーション"
+short-title: "インテグレーション"
 categories:
   - configuring-jobs
 order: 100
