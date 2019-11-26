@@ -31,7 +31,7 @@ The table below lists the different optimization tasks that can be performed usi
 Recipe | Description 
 ------------|-----------
 Running Jobs Sequentially To Prevent Concurrency | This section describes how you can use the queue orb to run jobs sequentially without concurrency.
-Using Caching to Optimizae Builds and Workflows |  This section describes how you can use different caching strategies in your implemenations to optimize your builds and workflows.
+Using Caching to Optimize Builds and Workflows |  This section describes how you can use different caching strategies in your implementations to optimize your builds and workflows.
 Improving Test Performance | This section describes a specific use case where test performance was significantly improved on the CircleCI platform.
 
 ## Running Jobs Sequentially To Prevent Concurrency
