@@ -354,7 +354,7 @@ Users will be alerted in-app as they approach the limit and upon passing their r
 
 Reach out to billing@circleci.com with any additional questions.
 
-#### How do I upgrade my plan with more containers to prevent queuing?
+#### How do I upgrade my container plan with more containers to prevent queuing?
 {:.no_toc}
 * Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
 
