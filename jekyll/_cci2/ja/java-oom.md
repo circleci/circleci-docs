@@ -8,15 +8,27 @@ CircleCI で Java メモリエラーを回避およびデバッグする方法�
 
 ## 概要
 
-[Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 メモリ制限が設定されていないと、JVM は大量のメモリを事前に割り当てます。 これが原因でメモリ不足 (OOM) エラーが発生することがありますが、エラーメッセージには詳細が示されないため、このエラーをデバッグすることは困難です。
+[Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 Without any memory limits, the JVM pre-allocates a fraction of the total memory available in the system. CircleCI runs container based builds on large machines with lots of memory. Each container has a smaller memory limit than the total amount available on the machine. This can lead to the JVM seeing a large amount of memory being available to it, and trying to use more than is allocated to the container.
 
-JVM によるメモリ使用量を制御するには、[Java 環境変数を使用](#using-java-environment-variables-to-set-memory-limits)してメモリ制限を宣言します。 OOM エラーをデバッグするには、[該当する終了コード](#debugging-java-oom-errors)を確認します。
+This pre-allocation can produce Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail.
 
-## Java 環境変数を使用したメモリ制限の設定
+You can see how much memory your container is allowed to use by reading the file `/sys/fs/cgroup/memory/memory.max_usage_in_bytes`.
 
-複数の Java 環境変数を使用して、JVM のメモリ使用量を管理できます。 これらの変数は名前が似ており、互いに複雑に影響し合っています。
+## UseContainerSupport
 
-さまざまなビルドツールでの各環境変数の優先レベルを以下の表に示します。 数値が小さいほど優先レベルが高く、0 が最も高い優先レベルとなります。
+Recent versions of Java (JDK 8u191, and JDK 10 and up) include a flag `UseContainerSupport` which defaults on. This flag enables the JVM to use the CGroup memory constraints available to the container, rather than the much larger amount of memory on the machine. Under Docker and other container runtimes, this will let the JVM more accurately detect memory constraints, and set a default memory usage within those constraints. You can use the `MaxRAMPercentage` flag to customise the fraction of available RAM that is used, e.g. `-XX:MaxRAMPercentage=90.0`.
+
+In CircleCI, containers are run using [Nomad](https://www.nomadproject.io). Nomad does set CGroup memory limits, but doesn't provide enough CGroup memory information to the container for the JVM to detect the container memory constraints. This means the JVM will set it's memory as a fraction of the total amount of RAM on the system. Nomad currently has an [enhancement request](https://github.com/hashicorp/nomad/issues/5376) open to provide this information. Once that is added, container builds in CircleCI will automatically pick up their container memory limits.
+
+## Manual memory limits
+
+To prevent the JVM from pre-allocating too much memory, declare memory limits [using Java environment variables](#using-java-environment-variables-to-set-memory-limits). To debug OOM errors, look for the [appropriate exit code](#debugging-java-oom-errors).
+
+## Using Java Environment Variables to Set Memory Limits
+
+You can set several Java environment variables to manage JVM memory usage. These variables have similar names and interact with each other in complicated ways.
+
+The table below shows these environment variables, along with the precedence levels they take when using different build tools. The lower the number, the higher the precedence level, with 0 being the highest.
 
 | Java 環境変数                                 | Java | Gradle | Maven | Kotlin | Lein |
 | ----------------------------------------- | ---- | ------ | ----- | ------ | ---- |
@@ -30,51 +42,49 @@ JVM によるメモリ使用量を制御するには、[Java 環境変数を使�
 | CLI 引数                                    | 1    | ×      | ×     | ×      | ×    |
 {:class="table table-striped"}
 
-上記の各環境変数が優先される条件について説明します。
+The above environment variables are listed below, along with details on why to choose one over another.
 
 ### `_JAVA_OPTIONS`
 
-この環境変数は、他のどの環境変数よりも優先されます。 JVM で直接読み取られ、コマンドライン引数を含む他のすべての Java 環境変数を上書きします。 強力な変数であるため、より限定的な Java 環境変数を使用することを検討してください。
+This environment variable takes precedence over all others. It is read directly by the JVM and overwrites all other Java environment variables, including command-line arguments. Because of this power, consider using a more specific Java environment variable.
 
-**メモ：**`_JAVA_OPTIONS` は Oracle 専用の変数です。 別のランタイムを使用している場合は、対応する変数名を確認してください。 たとえば、IBM Java ランタイムを使用している場合は、`IBM_JAVA_OPTIONS` を使用します。
+**Note:** `_JAVA_OPTIONS` is exclusive to Oracle. If you are using a different runtime, ensure that you check the name of this variable. For example, if you are using the IBM Java runtime, then you would use `IBM_JAVA_OPTIONS`.
 
 ### `JAVA_TOOL_OPTIONS`
 
-Java メモリ制限の設定には、この環境変数を使用するのが[無難な選択](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions)と言えます。 `JAVA_TOOL_OPTIONS` はあらゆる Java 仮想マシンで読み取ることができ、より限定的な環境変数やコマンドライン引数で簡単に上書きすることもできます。
+This environment variable is [a safe choice](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions) for setting Java memory limits. `JAVA_TOOL_OPTIONS` can be read by all Java virtual machines, and you can easily override it with command-line arguments or more specific environment variables.
 
 ### `JAVA_OPTS`
 
-JVM はこの環境変数を読み取りません。 代わりに Java ベースのツールや言語がこの変数を使用して JVM にメモリ制限を渡します。
+This environment variable is not read by the JVM. Instead, several Java-based tools and languages use it to pass memory limits to the JVM.
 
 ### `JVM_OPTS`
 
-この環境変数は Clojure 専用です。 `lein` は `JVM_OPTS` を使用して JVM にメモリ制限を渡します。
+This environment variable is exclusive to Clojure. `lein` uses `JVM_OPTS` to pass memory limits to the JVM.
 
-**メモ：**`JVM_OPTS` は `lein` 自体のメモリには影響しません。また、メモリ制限を Java に直接渡すこともできません。 To affect `lein`'s available memory, use `LEIN_JVM_OPTS`. メモリ制限を Java に直接渡すには、[`_JAVA_OPTIONS`](#_java_options) または [`JAVA_TOOL_OPTIONS`](#java_tool_options) を使用します。
+**Note:** `JVM_OPTS` does not affect the memory of `lein` itself, nor can it directly pass memory limits to Java. To affect `lein`'s available memory, use `LEIN_JVM_OPTS`. To directly pass memory limits to Java, use [`_JAVA_OPTIONS`](#_java_options) or [`JAVA_TOOL_OPTIONS`](#java_tool_options).
 
 ### `LEIN_JVM_OPTS`
 
-この環境変数は `lein` 専用です。
+This environment variable is exclusive to `lein`.
 
 ### `GRADLE_OPTS`
 
-この環境変数は Gradle プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
+This environment variable is exclusive to Gradle projects. Use it to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
 ### `MAVEN_OPTS`
 
-この環境変数は Apache Maven プロジェクト専用です。 この変数を使用して、`JAVA_TOOL_OPTIONS` で設定されているメモリ制限を上書きできます。
+This environment variable is exclusive to Apache Maven projects. Use it to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
-## Java OOM エラーのデバッグ
+## Debugging Java OOM Errors
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
 code 137` in your error output.
 
 Ensure that your `-Xmxn` maximum size is large enough for your applications to completely build, while small enough that other processes can share the remaining memory of your CircleCI build container.
 
-Please also note that +UseContainerSupport is currently not supported.
-
 If you are still consistently hitting memory limits, consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
-## 関連項目
+## See Also
 
 [Java Language Guide]({{ site.baseurl }}/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
