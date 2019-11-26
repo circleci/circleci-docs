@@ -26,19 +26,16 @@ This guide provides you with the following optimization strategies that you can 
 
 ### Optimization Recipes
 
-The table below lists the different optimization tasks that can be performed using the CircleCI platform.
+The sections below lists the different optimization tasks that can be performed using the CircleCI platform.
 
-Recipe | Description 
-------------|-----------
-Running Jobs Sequentially To Prevent Concurrency | This section describes how you can use the queue orb to run jobs sequentially without concurrency.
-Using Caching to Optimize Builds and Workflows |  This section describes how you can use different caching strategies in your implementations to optimize your builds and workflows.
-Improving Test Performance | This section describes a specific use case where test performance was significantly improved on the CircleCI platform.
+* TOC
+{:toc}
 
 ## Running Jobs Sequentially To Prevent Concurrency
 
-One of the most common tasks you may encounter when using the CircleCI platform is managing multiple jobs simultaneously to ensure your operations do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for previous jobs to be completed before new jobs can be initiated, and system timeout is set too low. In this case, one job will be completed, and other jobs will fail due to this timeout setting.
+One of the most common tasks you may encounter when using the CircleCI platform is managing multiple jobs simultaneously to ensure your workflows do not fail because of system timeouts. This becomes especially important when you have multiple contributors and committers working in the same environment. Because the CircleCI platform was designed to handle multiple tasks simultaneously without encountering performance degradation or latency, concurrency may sometimes become an issue if there are a large number of jobs being queued, waiting for previous jobs to be completed before new jobs can be initiated, and system timeouts are set too low. In this case, one job will be completed, and other jobs will fail due to this timeout setting.
 
-To better optimize builds and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed a single-threading (queueing) orb that specifically addresses these performance issues. By invoking this orb, you can greatly improve overall job and build performance and prevent concurrency.
+To better optimize workflows and jobs and prevent concurrency and subsequent jobs failing because of timeout, CircleCI has developed a single-threading (queueing) orb that specifically addresses these performance issues. By invoking this orb, you can greatly improve overall job and build performance and prevent concurrency.
 
 **Note:** For more detailed information about the CircleCI Queueing orb, refer to the following CircleCI pages:
 
@@ -53,7 +50,7 @@ To configure the environment for the CircleCI platform and CircleCI orbs, follow
 
 `version: 2.1`
 
-2) If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** to enable pipelines.
+2) If you do not already have pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** to enable pipelines.
 
 3) Add the `orbs` stanza below your version, invoking the orb. For example:
 
