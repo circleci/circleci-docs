@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various optimization tasks using CircleCI resources. This guide, and it associated sections, will enable you to quickly and easily perform easily repeatable optimization tasks on the CircleCI platform.
+The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various optimization tasks using CircleCI resources. This guide, and it associated sections, will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
 
 * TOC
 {:toc}
