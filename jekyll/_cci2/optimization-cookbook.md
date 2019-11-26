@@ -173,7 +173,7 @@ The following steps were performed during testing:
 
 1) The build job created a Docker image, which contained only runtime dependencies. 
 2) The build job dumped the image to a file with `docker save`, and then persisted it in the workspace. 
-3) Two tests jobs were run to restore the base image from the workspace.
+3) Two test jobs were run to restore the base image from the workspace.
 4) The test jobs built on this base image to create an image with all the extra modules required to run the tests. 
 5) The test jobs started dependencies, and the tests were finally initiated.
 
