@@ -92,7 +92,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `domain-service`
 | Stores and provides information about our domain model.
-| Workflows will fail to start and some REST API calls may fail causing `500` errors in the CircleCI UI.
+| Workflows will fail to start and some REST API calls may fail causing `500` errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
 | icon:fire-extinguisher[]
 | `postgres`, `frontend`, `domain-service-migrator`
 
@@ -116,7 +116,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `federation-service-migrator`
 | Runs postgresql migrations for the `federations-service`.
-| Only runs at statup.
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
