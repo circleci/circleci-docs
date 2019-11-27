@@ -71,11 +71,14 @@ You will need to associate the `circleci` user with the image you want to use as
 To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings accessible from the Management console (for example, `<your-circleci-id>.com:8800`).
 
 === Creating a Windows AMI
+_Introduced in CircleCI Server v2.18.3_
 
-. Create a new repository in GitHub of GitHub Enterprise.
+Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows machines. To create your Windows image run through the following steps:
+
+. Create a new repository under your GitHub or GitHub Enterprise account.
 . Copy the contents of <INSERT WINDOWS IMAGE BUILDER REPO LINK> into your new repo.
-. Open your installation of CircleCI Server and connect your new repo by clicking Follow Project from the Add Projects page
-. ADD STEP TO RUN JOB
+. Open up your installation of CircleCI Server and connect your new repo by clicking Follow Project from the Add Projects page
+. Click Start Building to run the Windows image buider.
 . ADD STEP TO FIND AMI IN LOGS
 . ADD STEP TO ADD AMI TO REPLICATED
 

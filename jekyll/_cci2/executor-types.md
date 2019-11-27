@@ -111,12 +111,14 @@ jobs:
 version: 2
 jobs:
   build:
-    machine:
+    machine: true
 ```
 
 The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
 
-Cloud users can specify other images using the `image` key. **Note:** The `image` key is not supported on private installations of CircleCI.
+**Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
+
+Cloud users can specify other images using the `image` key.
 
 The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
 
@@ -159,7 +161,7 @@ jobs:
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
 * CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
-* Self-hosted installation of CircleCI Server with config version 2.0. 
+* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -193,6 +195,8 @@ jobs:
 ```
 
 Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) page for more details.
+
+CircleCI Server users should contact their system administrator for specific information about the image used for Windows `machine` executors. the `windows-default` image should always be used regardless of the image set by the system administrator.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).

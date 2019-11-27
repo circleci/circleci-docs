@@ -194,12 +194,9 @@ NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Au
 
 . Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, see our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
 +
-.Configure VM Service
-image::vmprovider.png[]
-+
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
 +
-CAUTION: If Docker Layer Caching (DLC) is to be used VM preallocation must be set to `0` – on-demand – for both Remote Docker and `machine` executor.
+CAUTION: If Docker Layer Caching (DLC) is to be used VM preallocation must either be set to `0` – on-demand, or all preallocated instances must be in use fro DLC to work.
 
 . If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more information see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
