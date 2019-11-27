@@ -13,7 +13,7 @@ An **executor** defines the underlying technology or environment in which to run
 
 ## Docker
 
-```
+```yaml
 jobs:
   build: # name of your job
     docker: # executor type
@@ -27,7 +27,7 @@ Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/ex
 
 ## Machine
 
-```
+```yaml
 jobs:
   build: # name of your job
     machine: # executor type
@@ -59,8 +59,8 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 ## Windows
 
 The syntax for using the Windows executor in your config differs depending on whether you are using: 
-* CircleCI Cloud – config version 2.1 – you also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing)
-* Self-hosted installation of CircleCI Server with config version 2.0
+* CircleCI Cloud, using config version 2.1 and the Windows orb. You also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing)
+* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
 ```yaml
