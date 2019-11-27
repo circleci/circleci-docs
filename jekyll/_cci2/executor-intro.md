@@ -12,6 +12,7 @@ An **executor** defines the underlying technology or environment in which to run
 ![Executor Overview](  {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
 ## Docker
+{% raw %}
 
 ```yaml
 jobs:
@@ -23,9 +24,13 @@ jobs:
         # Commands run in the primary container
 ```
 
+{% endraw %}
+
 Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-docker).
 
 ## Machine
+
+{% raw %}
 
 ```yaml
 jobs:
@@ -37,13 +42,17 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ```
 
+{% endraw %}
+
 Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
 
 ## macOS
 
 _Available on CircleCI Cloud - not currently available on self-hosted installations of CircleCI Server._
 
-```
+{% raw %}
+
+```yaml
 jobs:
   build: # name of your job
     macos: # executor type
@@ -54,6 +63,8 @@ jobs:
       # with Xcode 9.0 installed
 ```
 
+{% endraw %}
+
 Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
 
 ## Windows
@@ -63,6 +74,8 @@ The syntax for using the Windows executor in your config differs depending on wh
 * Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
 {:.tab.windowsblock.Cloud}
+{% raw %}
+
 ```yaml
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
@@ -78,8 +91,11 @@ jobs:
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
+{% endraw %}
 
 {:.tab.windowsblock.Server}
+{% raw %}
+
 ```yaml
 version: 2
 
@@ -92,6 +108,8 @@ jobs:
         - checkout
         - run: Write-Host 'Hello, Windows'
 ```
+
+{% endraw %}
 
 Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
 
