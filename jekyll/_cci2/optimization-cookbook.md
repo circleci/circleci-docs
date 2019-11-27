@@ -16,20 +16,15 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 Sometimes when you are using the CircleCI platform, you may encounter unexpected lags in pipeline performance, which can negatively affect your ability to perform critical organizational functions. These performance bottlenecks can not only impact overall performance, but also cause workflow and build failures. These "hiccups" can cost you money in terms of credit usage, resources, and individual time spent reducing bottlenecks.
 
-This guide provides you with the following optimization strategies that you can utilize to minimize any potential performance bottlenecks and ensure that you are getting the best performance possible when using CircleCI:
-
-- Running jobs sequentially to prevent concurrency
-- Implementing caching strategies to optimize builds and workflows
-- Improving test performance
-
-**Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
-
 ### Optimization Recipes
 
-The sections below lists the different optimization tasks that can be performed using the CircleCI platform.
+This guide provides you with the following optimization strategies that you can utilize to minimize any potential performance bottlenecks and ensure that you are getting the best performance possible when using CircleCI:
 
-* TOC
-{:toc}
+- [Running jobs sequentially to prevent concurrency](#running-jobs-sequentially-to-prevent-concurrency)
+- [Implementing caching strategies to optimize builds and workflows](#using-caching-to-optimize-builds-and-workflows)
+- [Improving test performance](#improving-test-performance)
+
+**Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
 
 ## Running Jobs Sequentially To Prevent Concurrency
 
@@ -39,8 +34,8 @@ To better optimize workflows and jobs and prevent concurrency and subsequent job
 
 **Note:** For more detailed information about the CircleCI Queueing orb, refer to the following CircleCI pages:
 
-- Queueing and Single Threading Overview - https://github.com/eddiewebb/circleci-queue
-- CircleCI Queueing Orb - https://circleci.com/orbs/registry/orb/eddiewebb/queue#quick-start
+- [Queueing and Single Threading Overview](https://github.com/eddiewebb/circleci-queue)
+- [CircleCI Queueing Orb](https://circleci.com/orbs/registry/orb/eddiewebb/queue#quick-start)
 
 ### Setting Up and Configuring Your Environment to use the CircleCI Platform and CircleCI Orbs
 
@@ -48,16 +43,22 @@ To configure the environment for the CircleCI platform and CircleCI orbs, follow
 
 1) Use CircleCI `version 2.1` at the top of your `.circleci/config.yml` file.
 
-`version: 2.1`
+```
+version: 2.1
+```
 
 2) If you do not already have pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** to enable pipelines.
 
 3) Add the `orbs` stanza below your version, invoking the orb. For example:
 
-`orbs:
-  queue: eddiewebb/queue@1.1.2`
+```
+version: 2.1
 
-4) Use `queue` elements in your existing workflows and jobs.
+orbs:
+  queue: eddiewebb/queue@1.1.2
+```
+
+4) Use [`queue` elements](https://circleci.com/orbs/registry/orb/eddiewebb/queue#usage-examples) in your existing workflows and jobs.
 
 5) Opt-in to use of third-party orbs on your organization’s **Security Settings** page.
 
@@ -146,9 +147,9 @@ Notice in the above example that you can use a `checksum` in the cache key. This
 
 **Note:** Before adding any caching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache. 
 
-Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be optimized:
+Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be used to optimize your config:
 
-- Caching - https://circleci.com/docs/2.0/caching/
+- [Caching](https://circleci.com/docs/2.0/caching/)
 
 ## Improving Test Performance
 
