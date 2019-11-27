@@ -1,6 +1,6 @@
 ---
 layout: category-page
-title: "Language Guides"
+title: "言語ガイド"
 category:
   - language-guides
 ---
