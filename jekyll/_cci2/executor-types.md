@@ -83,22 +83,15 @@ More details on the Docker Executor are available in the [Configuring CircleCI](
 The `machine` option runs your jobs in a dedicated, ephemeral VM
 that has the following specifications:
 
-CPUs | Processor                 | RAM | HD
------|---------------------------|------------
-2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
+Class            | vCPUs | RAM
+-----------------|-------|-------
+medium (default) | 2     | 7.5GB
+large            | 4     | 15GB
 {: class="table table-striped"}
 
-Using the `machine` executor
-gives your application full access to OS resources
-and provides you with full control over the job environment.
-This control can be useful in situations
-where you need to use `ping`
-or modify the system with `sysctl` commands.
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need to use `ping` or modify the system with `sysctl` commands.
 
-Using the `machine` executor also enables you
-to build a Docker image
-without downloading additional packages
-for languages like Ruby and PHP.
+Using the `machine` executor also enables you to build a Docker image without downloading additional packages for languages like Ruby and PHP.
 
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
@@ -117,8 +110,7 @@ jobs:
 The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
 
 
-You can specify other images
-by using the `image` key.
+You can specify other images by using the `image` key.
 
 **Note:**
 The `image` key is not supported on private installations of CircleCI.
