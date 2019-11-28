@@ -24,7 +24,7 @@ Before you create your first orb, please see the following notes:
 * To use the orbs you create, you will need to enable the "Allow Uncertified Orbs" setting in the Security section of CircleCI's Organization Settings page for your organization (`https://circleci.com/[vcs]/organizations/[org-name]/settings#security`).
 * If you are creating an orb, you can use development versions to avoid having your orb publicly/permanently listed in CircleCI's orb registry before it is ready.
 
-The following high-level steps will enable you to publish your first orb:
+### The following high-level steps will enable you to publish your first orb:
 
 1) Claim a namespace (assuming you don't yet have one). For example:
 
