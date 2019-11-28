@@ -48,9 +48,7 @@ You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.
 
 Customizing the VM service images for your installation of CircleCI will allow you to specify versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker or the `machine` executor, and for `machine` you can specify separate AMIs for Linux and Windows. If you choose not to use a custom Linux image, you will likely need to run additional install and update steps on every commit as part of your `config.yml` file.
 
-From v2.18, you can either provide a single custom Linux AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each.
-
-**TODO: Add in option to add Windows AMI here when I have the info**
+From v2.18, you can either provide a single custom Linux AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each
 
 .Custom VM Service Images
 image::vm-service-custom.png[Custom VM Service Images]
@@ -73,16 +71,14 @@ To enable the use of these custom images for your installation, you will need to
 === Creating a Windows AMI
 _Introduced in CircleCI Server v2.18.3_
 
-Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows machines. To create your Windows image run through the following steps:
+Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows VMs. To create your Windows image run through the following steps. Windows images are built on CircleCI, so we suggest you run through this process once your installation is up and running. Alternatively you can use any other CircleCI account – including on our managed Cloud service – to generate the image:
 
 . Create a new repository under your GitHub or GitHub Enterprise account.
 . Copy the contents of **<INSERT WINDOWS IMAGE BUILDER REPO LINK>** into your new repo.
-. Open up your installation of CircleCI Server and connect your new repo by clicking Follow Project from the Add Projects page.
+. Open up your installation of CircleCI Server and https://circleci.com/docs/2.0/getting-started/#setting-up-your-build-on-circleci[connect your new repo] by clicking Follow Project from the Add Projects page.
 . Click Start Building to run the Windows image buider.
 . Your will find your new Windows AMI at the end of the `Summarize results` step in the job output.
 . Copy the AMI and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
-
-**TODO: insert screenshot**
 
 == Defining Instance Types
 There are two fields for defining the instance types you wish to use. The first is for the default instance type, and the second is to set the instance type to use when a Job specifies the `large` resource class.
