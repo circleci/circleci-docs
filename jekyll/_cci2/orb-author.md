@@ -34,7 +34,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
-2) Create the orb inside your namespace. For example:
+2) Create the orb inside your namespace. This doesn't generate any content, but rather reserves the naming for when the orb is published. For example:
 
 `circleci orb create sandbox/hello-world`
 
