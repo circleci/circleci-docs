@@ -88,9 +88,11 @@ medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
 {: class="table table-striped"}
 
-Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need to use `ping` or modify the system with `sysctl` commands.
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands.
 
-Using the `machine` executor also enables you to build a Docker image without downloading additional packages for languages like Ruby and PHP.
+Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
+
+NOTE: you can run Docker containers using the docker executor, but the `machine` executor is currently the only supported way to build new Docker images on CircleCI.
 
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
@@ -157,7 +159,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-## Using Windows
+## Using the Windows Executor
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
 * CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
@@ -196,7 +198,7 @@ jobs:
 
 Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) page for more details.
 
-CircleCI Server users should contact their system administrator for specific information about the image used for Windows `machine` executors. the `windows-default` image should always be used regardless of the image set by the system administrator.
+CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
