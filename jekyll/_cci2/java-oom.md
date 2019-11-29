@@ -9,11 +9,40 @@ How to avoid and debug Java memory errors on CircleCI.
 ## Overview
 
 The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) provides a portable execution environment for Java-based applications.
-Without any memory limits,
-the JVM pre-allocates a significant amount of memory.
+Without any memory limits, the JVM pre-allocates a fraction of
+the total memory available in the system.
+CircleCI runs container based builds on large machines with lots of memory.
+Each container has a smaller memory limit than the total amount available
+on the machine. This can lead to the JVM seeing a large amount of memory
+being available to it, and trying to use more than is allocated to the
+container.
+
 This pre-allocation can produce Out of Memory (OOM) errors,
-which are difficult
-to debug because the error messages lack detail.
+which are difficult to debug because the error messages lack detail.
+
+You can see how much memory your container is allowed to use by reading the file
+`/sys/fs/cgroup/memory/memory.max_usage_in_bytes`.
+
+## UseContainerSupport
+
+Recent versions of Java (JDK 8u191, and JDK 10 and up) include
+a flag `UseContainerSupport` which defaults on. This flag enables
+the JVM to use the CGroup memory constraints available to the container,
+rather than the much larger amount of memory on the machine.
+Under Docker and other container runtimes, this will let the JVM more accurately
+detect memory constraints, and set a default memory usage within those constraints.
+You can use the `MaxRAMPercentage` flag to customise the fraction of available RAM that is used,
+e.g. `-XX:MaxRAMPercentage=90.0`.
+
+In CircleCI, containers are run using [Nomad](https://www.nomadproject.io).
+Nomad does set CGroup memory limits, but doesn't provide enough
+CGroup memory information to the container for the JVM to detect the container memory constraints.
+This means the JVM will set it's memory as a fraction of the total amount of RAM on the system.
+Nomad currently has an [enhancement request](https://github.com/hashicorp/nomad/issues/5376)
+open to provide this information. Once that is added, container builds in CircleCI will
+automatically pick up their container memory limits.
+
+## Manual memory limits
 
 To prevent the JVM from pre-allocating too much memory,
 declare memory limits
@@ -120,8 +149,6 @@ code 137` in your error output.
 Ensure that your `-Xmxn` maximum size is large enough for your applications to
 completely build, while small enough that other processes can share the
 remaining  memory of your CircleCI build container.
-
-Please also note that +UseContainerSupport is currently not supported.
 
 If you are still consistently hitting memory limits,
 consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
