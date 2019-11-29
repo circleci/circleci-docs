@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "プライベートイメージの使用"
-short-title: "プライベートイメージの使用"
-description: "プライベートイメージを使用する方法"
+title: "プライベート イメージの使用"
+short-title: "プライベート イメージの使用"
+description: "プライベート イメージを使用する方法"
 categories:
   - containerization
 order: 50
 ---
 
-プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
+プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
 
 ```yaml
 jobs:
@@ -20,7 +20,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ```
 
-また、[gcr.io](https://cloud.google.com/container-registry) や [quay.io](https://quay.io) などのプライベートリポジトリにあるイメージも使用できます。`image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。
+また、[gcr.io](https://cloud.google.com/container-registry) や [quay.io](https://quay.io) などのプライベート リポジトリにあるイメージも使用できます。`image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。
 
     - image: quay.io/project/image:tag
       auth:
@@ -46,7 +46,7 @@ jobs:
               docker run -d --name db company/proprietary-db:1.2.3
     
 
-現在 CircleCI では、Amazon の ECR サービスからのプライベートイメージのプルをサポートしています。 以下の 3つの方法のいずれかで、ECR のプライベートイメージを使用できるようになります。
+現在 CircleCI では、Amazon の ECR サービスからのプライベート イメージのプルをサポートしています。 以下の 3 つの方法のいずれかで、ECR のプライベート イメージを使用できるようになります。
 
 1. CircleCI AWS インテグレーションを使用して、AWS 認証情報を設定する
 2. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
@@ -62,7 +62,7 @@ jobs:
               aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
     
 
-3番目の方法では認証情報に対して任意の変数名を指定できますが、その点を除けば 2番目と 3番目の方法はほぼ同じと言えます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージングインフラストラクチャにデプロイして、本番にデプロイする前には本格的なテストスイートを実行します。
+3 番目の方法では認証情報に対して任意の変数名を指定できますが、その点を除けば 2 番目と 3 番目の方法はほぼ同じと言えます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番にデプロイする前には本格的なテスト スイートを実行します。
 
     version: 2
     jobs:
@@ -77,7 +77,7 @@ jobs:
               name: "毎日のテスト"
               command: ".... のテスト"
           - run:
-              name: "ステージングインフラストラクチャにデプロイ"
+              name: "ステージング インフラストラクチャへのデプロイ"
               command: "よくわからないもの.... CLI"
       deploy:
         docker:
@@ -87,10 +87,10 @@ jobs:
               aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_STAGING
         steps:
           - run:
-              name: "全テストスイート"
+              name: "フル テスト スイート"
               command: ".... のテスト"
           - run:
-              name: "本番インフラストラクチャにデプロイ"
+              name: "本番インフラストラクチャへのデプロイ"
               command: "よくわからないもの.... CLI"
     
     workflows:
