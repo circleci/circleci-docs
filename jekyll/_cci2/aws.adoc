@@ -172,8 +172,7 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 .Enter Github Enterprise Token
 image::ghe_token.png[Github Integration]
 
-. If you wish to use LDAP authentication for your installation, enter the required details in the LDAP section.
-//<!--insert LDAP instrucitons once I have more detail from Anton-->
+. If you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, see our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
 
 . We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
 +
@@ -196,7 +195,7 @@ NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Au
 +
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
 +
-CAUTION: If Docker Layer Caching (DLC) is to be used VM preallocation must either be set to `0` – on-demand, or all preallocated instances must be in use fro DLC to work.
+CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be set to `0`, forcing containers to be spun up on-demand for both `machine` and Remote Docker. It is worth noting here that if these fields are **not** set to `0` but all preallocated instances are in use, DLC will work correctly, as if preallocation was set to `0`.
 
 . If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more information see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
