@@ -67,12 +67,11 @@ jobs:
 The example below shows how you can build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      - image: golang:1.6.4-jessie   # (1)
-    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
+      - image: circleci/golang:1.13-alpine   # (1)
     steps:
       - checkout
       # ... steps for building/testing app ...
@@ -80,23 +79,21 @@ jobs:
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
 
-      # use a primary image that already has Docker (recommended)
-      # or install it during a build like we do here
-      - run:
-          name: Install Docker client
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
-
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .     
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin  # (4)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
+```
+
+If the primary container you are using doesn't already have the docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) somehow.
+
+```yaml
+      # Install via apk on alpine based images
+      - run:
+          name: Install Docker client
+          command: apk add docker-cli
 ```
 
 Let’s break down what’s happening during this build’s execution:
@@ -223,7 +220,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
     keys:
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}
-      - v4-bundler-cache-{{ arch }}      
+      - v4-bundler-cache-{{ arch }}
 - run:
     name: Restoring bundler cache into docker volumes
     command: |
@@ -245,7 +242,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       set -x
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml run --name $NAME $NAME backup
       docker cp $NAME:/backup/. $CACHE_PATH
-      docker rm -f $NAME  
+      docker rm -f $NAME
 - save_cache:
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
