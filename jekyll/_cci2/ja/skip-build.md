@@ -8,7 +8,7 @@ categories:
 order: 100
 ---
 
-ここでは、以下のセクションに沿って、ビルドをスキップまたはキャンセルする方法について説明します。
+以下のセクションに沿って、ビルドをスキップまたはキャンセルする方法について説明します。
 
 - 目次
 {:toc}
@@ -17,7 +17,7 @@ order: 100
 
 CircleCI のデフォルトでは、ユーザーが変更をバージョン管理システム (VCS) にプッシュするたびに、自動的にプロジェクトがビルドされます。 この動作は、`[ci skip]` または `[skip ci]` タグをコミットのタイトルまたは説明の任意の場所に追加することで、オーバーライドできます。 これにより、マークされたコミットだけでなく、そのプッシュに含まれる**他のすべてのコミット**もスキップされます。
 
-**Note:** This feature is not supported for fork PRs.
+**メモ:** この機能は、フォークされた PR ではサポートされていません。
 
 ### コミットのタイトルの例
 {:.no_toc}
@@ -32,7 +32,7 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
     fix misspelling [ci skip]
 ```
 
-When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit title.
+このコミットはタイトルに `[ci skip]` が含まれているため、VCS にプッシュされても CircleCI でビルドされません。
 
 ### コミットの説明の例
 {:.no_toc}
@@ -52,17 +52,17 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
     First attempt at feature [ci skip]
 ```
 
-When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit description.
+このコミットは説明に `[ci skip]` が含まれているため、VCS にプッシュされても CircleCI でビルドされません。
 
-**Note:** If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
+**メモ:** 一度に複数のコミットをプッシュした場合、1 つの `[ci skip]` または `[skip ci]` で**すべてのコミット**のビルドがスキップされます。
 
 ## 冗長ビルドの自動キャンセル
 
-If you are frequently pushing changes to a branch, you increase the chances of builds queueing. This means you might have to wait for an older version of a branch to finish building before the most recent version builds.
+変更を頻繁にブランチにプッシュすると、ビルド キューイングが発生する可能性が高まります。 したがって、古いバージョンのブランチでビルドが終了するまで、最新バージョンでビルドを実行できないことがあります。
 
-To save time, you can configure CircleCI to automatically cancel any queued or running builds when a newer build is triggered on that same branch.
+時間を節約するために、新しいビルドがトリガーされたときに、その同じブランチ上のキューイングされたビルドまたは実行中のビルドを自動的にキャンセルするように CircleCI を構成することができます。
 
-**Note:** Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new pipelines feature.
+**メモ:** プロジェクトのデフォルト ブランチでは、ビルドの自動キャンセルは行われません。 この機能が適用されるのは、ワークフロー以外のビルド、GitHub へのプッシュによってトリガーされたビルド、および新しいパイプライン機能を使用しているワークフロー ビルドだけです。
 
 ### GitHub へのプッシュによってトリガーされたワークフロー以外の新しいビルドの自動キャンセルを有効にする手順
 {:.no_toc}
@@ -71,25 +71,25 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 
 2. **[Build Settings (ビルド設定)]** セクションで、**[Advanced Settings (詳細設定)]** をクリックします。
 
-3. In the **Enable Pipelines** section, click the **On** button.
+3. **[Enable Pipelines (パイプラインを有効にする)]** セクションで **[On (オン)]** ボタンをクリックします。
 
 ### GitHub または API へのプッシュによってトリガーされたワークフローの自動キャンセルを有効にする手順
 {:.no_toc}
 
-Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch.
+[Advanced Settings (詳細設定)] で自動キャンセルが有効になっているプロジェクトでは、非デフォルトのブランチで新しいビルドがトリガーされると、同じブランチ上のワークフローがキャンセルされます。
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview feature.
+**メモ:** 非デフォルトのブランチで自動デプロイ ジョブを構成している場合などには、自動キャンセル機能を有効化することの影響を慎重に検討する必要があります。 ワークフローを自動キャンセルする場合は、プレビュー機能を有効にする必要があります。
 
 1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
 2. **[Build Settings (ビルド設定)]** セクションで、**[Advanced Settings (詳細設定)]** をクリックします。
 
-3. In the **Enable Pipelines** section, click the **On** button.
+3. **[Enable Pipelines (パイプラインを有効にする)]** セクションで **[On (オン)]** ボタンをクリックします。
 
 4. 変更をコミットしてビルドをトリガーし、新しいパイプラインを使用して正常に実行されることを確認します。
 
 5. **[Auto-cancel redundant builds (冗長ビルドを自動キャンセルする)]** セクションで **[On (オン)]** ボタンをクリックします。
 
-Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
+[Advanced Settings (詳細設定)] で自動キャンセルが有効になっているプロジェクトでは、非デフォルトのブランチで新しいビルドがトリガーされると、同じブランチ上のワークフローがキャンセルされます。ただし、以下の例外があります。
 
 - スケジュールされたワークフローおよび再実行されたワークフローはキャンセルされません。
