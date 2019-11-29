@@ -87,7 +87,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-If the primary container you're using doesn't already have the docker CLI installed, then [you'll need to install it](https://docs.docker.com/install/#supported-platforms) somehow.
+If the primary container you are using doesn't already have the docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) somehow.
 
 ```yaml
       # Install via apk on alpine based images
