@@ -70,12 +70,11 @@ jobs:
 以下に、[Docker のデモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)用の Docker イメージをビルドしてプッシュする例を示します。
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
-      - image: golang:1.6.4-jessie   # (1)
-    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-docker
+      - image: circleci/golang:1.13-alpine   # (1)
     steps:
       - checkout
       # ... アプリのビルド・テストに関する記述 ...
@@ -83,28 +82,25 @@ jobs:
       - setup_remote_docker:   # (2)
           docker_layer_caching: true # (3)
 
-      # 既に Docker が存在するプライマリ イメージを使用するか (推奨)、
-      # ここで行うようにビルド中にインストールします
-
-      - run:
-          name: Docker クライアントのインストール
-          command: |
-            set -x
-            VER="17.03.0-ce"
-            curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-            mv /tmp/docker/* /usr/bin
-
-      # Docker イメージをビルドしてプッシュします
+      # build and push Docker image
 
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
-          docker build -t   CircleCI-Public/circleci-demo-docker:$TAG .     
-          docker login -u $DOCKER_USER -p $DOCKER_PASS         # (4)
+          docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin  # (4)
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 ```
 
-ビルド中に何が行われているのか詳しく見てみましょう。
+If the primary container you are using doesn't already have the docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) somehow.
+
+```yaml
+      # Install via apk on alpine based images
+      - run:
+          name: Install Docker client
+          command: apk add docker-cli
+```
+
+Let’s break down what’s happening during this build’s execution:
 
 1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)で実行されます。
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker Engine で行われます。
@@ -113,14 +109,14 @@ jobs:
 
 ## Docker のバージョン
 
-ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
+If your job requires a specific docker version, you can set it as a `version` attribute:
 
 ```yaml
       - setup_remote_docker:
           version: 18.06.0-ce
 ```
 
-CircleCI は複数の Docker バージョンをサポートしており、デフォルトでは `17.09.0-ce` を使用します。 以下に、サポートされている安定版とエッジ版を示します。
+CircleCI supports multiple versions of Docker and defaults to using `17.09.0-ce`. Following are the supported stable and edge versions:
 
 - `17.03.0-ce`
 - `17.05.0-ce`
@@ -145,28 +141,28 @@ CircleCI は複数の Docker バージョンをサポートしており、デフ
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**メモ:** 現在、プライベート クラウドまたはデータセンターにインストールされている CircleCI では、`version` キーがサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## 環境の分離
 
-ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#リモート-docker) は、独立した環境で実行されます。 したがって、Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
 
 ### サービスへのアクセス
 {:.no_toc}
 
-リモート Docker でサービスを開始してプライマリ コンテナから直接 ping することや、リモート Docker 内のサービスに ping できるプライマリ コンテナを開始することは**できません**。 これを解決するには、リモート Docker から同じコンテナを通してサービスとやり取りする必要があります。
+It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```yaml
 #...
       - run:
-          name: "サービスの開始および実行チェック"
+          name: "Start Service and Check That it’s Running"
           command: |
             docker run -d --name my-app my-app
             docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
 #...
 ```
 
-同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
+A different way to do this is to use another container running in the same network as the target container:
 
 ```yaml
 #...
@@ -179,32 +175,32 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 ### フォルダーのマウント
 {:.no_toc}
 
-ジョブ空間からリモート Docker 内のコンテナにボリュームをマウントすること (およびその逆) は**できません**。 `docker cp` コマンドを使用して、この 2 つの環境間でファイルを転送することは可能です。 たとえば以下のように、ソース コードから設定ファイルを使用してリモート Docker でコンテナを開始します。
+It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
 ```yaml
 - run: |
-    # 設定ファイルとボリュームを保持するダミー コンテナを作成します
+    # create a dummy container which will hold a volume with config
     docker create -v /cfg --name configs alpine:3.4 /bin/true
-    # このボリュームに設定ファイルをコピーします
+    # copy a config file into this volume
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
-    # このボリュームを使用してアプリケーション コンテナを開始します
+    # start an application container using this volume
     docker run --volumes-from configs app-image:1.2.3
 ```
 
-同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
+In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
 
 ```yaml
 - run: |
-    # アプリケーションとコンテナを開始します
-    # `--rm` オプションは使用しません (使用すると、終了時にコンテナが強制終了されます)
+    # start container with the application
+    # make sure you're not using `--rm` option otherwise the container will be killed after finish
     docker run --name app app-image:1.2.3
 
 - run: |
-    # アプリケーション コンテナの終了後、そこからアーティファクトを直接コピーします
+    # after application container finishes, copy artifacts directly from it
     docker cp app:/output /path/in/your/job/space
 ```
 
-以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
+It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
 
     version: '2'
     services:
@@ -219,19 +215,19 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
          - bundler-data:/source/bundler-data
     
 
-次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
+Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
 
 {% raw %}
 ```yaml
-# CircleCI キャッシュから bundler-data コンテナにデータを挿入します
+# Populate bundler-data container from circleci cache
 
 - restore_cache:
     keys:
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - v4-bundler-cache-{{ arch }}-{{ .Branch }}
-      - v4-bundler-cache-{{ arch }}      
+      - v4-bundler-cache-{{ arch }}
 - run:
-    name: Docker ボリュームへの Bundler キャッシュの復元
+    name: Restoring bundler cache into docker volumes
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
@@ -242,17 +238,17 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
       docker rm -f $NAME
 
-# 同じボリュームを CircleCI キャッシュにバックアップします
+# Back up the same volume to circle cache
 
 - run:
-    name: Docker ボリュームからの Bundler キャッシュのバックアップ
+    name: Backing up bundler cache from docker volumes
     command: |
       NAME=bundler-cache
       CACHE_PATH=~/bundler-cache
       set -x
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml run --name $NAME $NAME backup
       docker cp $NAME:/backup/. $CACHE_PATH
-      docker rm -f $NAME  
+      docker rm -f $NAME
 - save_cache:
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
@@ -260,16 +256,16 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 ```
 {% endraw %}
 
-**メモ:** 上記の例は、`docker` Executor で動作しないボリューム マウントを使用する方法を示しています。 この他に、ボリューム マウントが動作する `machine` Executor を使用する方法もあります。
+**Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work.
 
-この例は、ryansch のご協力によって作成されました。
+Thanks to ryansch for contributing this example.
 
 ## 関連項目
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
-[ジョブ空間]({{ site.baseurl }}/2.0/glossary/#ジョブ空間)
+[job-space]({{ site.baseurl }}/2.0/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)
+[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-レイヤー-キャッシュ)
+[docker-layer-caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
