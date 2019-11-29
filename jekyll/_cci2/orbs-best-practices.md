@@ -7,9 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-# Orb Best Practices Guidelines
-
-A collection best practices and strategies for authoring orbs. CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors.
+A collection of best practices and strategies for authoring orbs. CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors.
 
 ## Guidelines
 

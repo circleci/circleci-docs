@@ -82,9 +82,10 @@ More details on the Docker Executor are available in the [Configuring CircleCI](
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
-CPUs | Processor                 | RAM | HD
------|---------------------------|------------
-2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
+Class            | vCPUs | RAM
+-----------------|-------|-------
+medium (default) | 2     | 7.5GB
+large            | 4     | 15GB
 {: class="table table-striped"}
 
 Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands.
