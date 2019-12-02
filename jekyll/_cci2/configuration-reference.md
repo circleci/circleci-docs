@@ -805,7 +805,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule update --init
 ```
 
-This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further here: [Authenticity of a host can't be established]({{ site.baseurl }}/2.0/gh-bb-integration/#authenticity-of-a-host-cant-be-established). This is helpful for implementing a custom checkout command as well.
+This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide]({{ site.baseurl }}/2.0/gh-bb-integration/#authenticity-of-a-host-cant-be-established) – this guide will also be helpful if you wish to implement a custom checkout command.
 
 **Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
