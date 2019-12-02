@@ -201,13 +201,14 @@ Some things to keep in mind when using manual approval in a workflow:
 - All jobs that are to run after a manually approved job _must_ `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshots show a workflow on hold waiting for approval of the `request-testing` job: 
+The following screenshot demonstrates a workflow on hold. 
 
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-The following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
+By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears
+requesting that you approve or cancel the holding job.
 
-![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+After approving, the rest of the workflow runs as directed.
 
 ## Scheduling a Workflow
 
