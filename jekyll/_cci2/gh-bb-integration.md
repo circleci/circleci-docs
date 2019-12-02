@@ -329,7 +329,7 @@ separate from the user associated with them.
 
 To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
-## Authenticity of a host can't be established
+## Establishing the authenticity of an SSH host
 
 When using SSH keys to checkout repositories, it may be neccesary to add the 
 fingerprints for GitHub or BitBucket to a "known hosts" file 
