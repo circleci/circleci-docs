@@ -196,7 +196,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) page for more details.
+Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/orbs/registry/orb/circleci/windows) for more details.
 
 CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
@@ -258,7 +258,6 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 ## See Also
 
 [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-
 
 
 
