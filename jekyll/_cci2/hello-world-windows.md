@@ -35,8 +35,6 @@ Note: the Windows executor does not have have support for [Docker Layer Caching]
 
 Note: the Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
 
-The Windows executor is only available on the CircleCI Performance Plan. Please see the [CircleCI Plans page](https://circleci.com/pricing/usage/) for more details on the cost of Windows compute.
-
 ## Windows executor images
 
 Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document.
