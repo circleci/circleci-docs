@@ -55,11 +55,11 @@ Get started with Windows on CircleCI with the following configuration snippet th
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 
 jobs:
   build:
-    executor: win/vs2019
+    executor: win/default
     steps:
       - checkout
       - run: Write-Host 'Hello, Windows'
@@ -79,13 +79,12 @@ You can configure the shell at the job level or at the step level. It is possibl
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 
 jobs:
   build:
     executor:
-      name: win/vs2019
-      shell: bash.exe
+      name: win/default
     steps:
       - checkout
       - run: ls -lah
@@ -111,7 +110,7 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 ```
 
 Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/orbs/registry/orb/circleci/windows) to help us get started.
@@ -120,7 +119,7 @@ Next, we declare orbs that we will be using in our build. We will only use the [
 jobs:
   build:
     executor:
-      name: win/vs2019
+      name: win/default
       shell: powershell.exe
 ```
 
