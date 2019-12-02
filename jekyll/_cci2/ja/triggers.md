@@ -31,7 +31,7 @@ CircleCI のデフォルトでは、ユーザーが変更をバージョン管�
           - test
           - deploy
       nightly:
-        triggers: #triggers キーを使用して、スケジュールされたビルドであることを示します
+        triggers: # triggers キーを使用して、スケジュールされたビルドであることを示します
           - schedule:
               cron: "0 0 * * *" # cron 構文を使用してスケジュールを設定します
               filters:
@@ -57,7 +57,7 @@ CircleCI のデフォルトでは、ユーザーが変更をバージョン管�
               requires:
                 - test1
           - hold:
-              type: approval # 続行するには、適切なプロジェクトメンバーがアプリ内のボタンをクリックする必要があります
+              type: approval # 続行するには、適切なプロジェクト メンバーがアプリ内のボタンをクリックする必要があります
               requires:
                - test2
           - deploy:
@@ -77,7 +77,7 @@ jobs:
       - checkout
       - run:
           # DockerHub ドキュメントの curl リクエストの例
-          name: リモートで Docker をトリガー
+          name: リモートでの Docker のトリガー
           command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
 ```
 
