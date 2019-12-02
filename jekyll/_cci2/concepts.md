@@ -124,6 +124,10 @@ jobs:
 
 Workflows define a list of jobs and their run order. It is possible to run jobs in parallel, sequentially, on a schedule, or with a manual gate using an approval job.
 
+{:.tab.workflows.Cloud}
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 {% raw %}

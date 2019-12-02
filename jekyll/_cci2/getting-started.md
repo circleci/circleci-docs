@@ -194,19 +194,23 @@ If you are comfortable with the terminal, you can SSH directly into your CircleC
 *Note that you will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
 
-![]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
-![]( {{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
+{:.tab.switcher.Cloud}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+
 
 Copy the `ssh` string from the enabling SSH section of your build. Open a terminal and paste in the `ssh` string.
 
 Using some of the following commands, see if you can find and view the contents of the file you created using workspaces:
 
 ```
-pwd     #  print what directory, find out where you are in the file system
-ls -al   # list what files and directories are in the current directory
-cd <directory_name>    # change directory to the <directory_name> directory
-cat <file_name>    # show me the contents of the file <file_name>
+pwd                  #  print what directory, find out where you are in the file system
+ls -al               # list what files and directories are in the current directory
+cd <directory_name>  # change directory to the <directory_name> directory
+cat <file_name>      # show me the contents of the file <file_name>
 ```
 
 ## See Also
