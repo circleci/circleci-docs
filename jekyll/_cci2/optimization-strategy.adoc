@@ -1,0 +1,122 @@
+= Optimization Strategies
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+:sectanchors:
+
+This paper provides concrete examples of optimizing **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs.
+
+According to The Forrester Wave: Cloud-Native Continuous Integration Tools, Q3 2019, **Cloud-native CI products with exceptional build speed, on-demand scale, and secure configurations will lead the market and enable customers to accelerate delivery speed and lower management costs, all while meeting corporate compliance needs.**
+
+The following examples will describe, though comparisons, how to achieve exceptional build speed using secure configurations for your teams.
+
+toc::[]
+
+.Deployment Frequency
+image::deploy.png[Deployment Frequency]
+
+==Deployment Frequency
+
+Providing value to your customers is the top goal for any organization, and one can measure the performance of an organization by how often (frequency) value is delivered (deployment). High-performing teams deploy value to customers multiple times per day according to the DevOps Research and Assessment Report, 2019.
+
+While many organizations deploy value to customer once per quarter or once per month, the basics of decreasing this frequency to once per week or once per day is represented by the same type of orchestration added to an organization's value *pipeline*.
+
+To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
+
+.Workflows
+Image::workflows-no-deploy.png[Workflows]
+
+When you provide developers with workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
+
+.Workflows
+Image::workflows-yes-deploy.png[Workflows]
+
+A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers. 
+
+A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed. 
+
+For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
+
+[source,yaml]
+----
+- deploy:
+    requires:
+      - build
+    filters:
+      branches:
+        only: master
+----
+
+The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break. 
+
+For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
+
+[source,yaml]
+----
+nightly-build:
+  triggers:
+    - schedule:
+        cron: '0 8 ***'
+        filters:
+          branches:
+            only: master
+----
+
+The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
+
+== Lead time for changes (code commit to running in production)
+Optimizing the time taken between developers making critical changes and those changes emerging through pipelines into production, means minimizing the portion of that time in which developers are not active participants – creating environments, loading dependencies, testing code. Spinning up more compute to widen this pipeline leads to faster builds, but compute comes at a price. Developers need intelligent solutions for fine-tuning the orchestration of their pipelines to meet a healthy speed cost balance. This section presents intelligent solutions for these challenges.
+
+Choosing Resources
+Caching
+Parallelism and test splitting
+
+=== Splitting Tests to Run in Parallel
+On every code commit, tests will be run. Tests take time, so this is a optimization opportunity. Often tests don't need to happen sequentially, they can be split over a range of test environments and run concurrently – in parallel. The intelligence comes in how the test suite is split: by name, by size etc. Using timings-based test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power.
+
+INSERT TEST SPLIT IMAGE
+
+To illustrate this with CI config, take a sequentially running test suite
+
+[source,yaml]
+----
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: bar
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test
+----
+
+And to split these tests, using timing data, across 10 parallel environments, we just need a few simple changes
+
+[source,yaml,highlight=7,11]
+----
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: bar
+    parallelism: 10
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+----
+
+To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run for the CircleCI application actually decreased the test time from 26:11 down to 3:55.
+
+Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen.
+
+== Summary
+
+-Time to restore service (how long it takes to restore service when a defect impacts users)--and fewer defects in general
+-Change failure rate (what % of merges lead to degraded service and need to be rolled back)
+

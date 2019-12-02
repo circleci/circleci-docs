@@ -48,7 +48,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
   </div>
   <div class="col-xs-12 col-sm-6">
     <h2>Workflows</h2>
-    <p>CircleCI Workflows are used to schedule and sequence jobs.</p>
+    <p>Use workflows to schedule and sequence jobs.</p>
     <ul>
       <li><a href="/docs/2.0/workflows/">Using Workflows to Schedule Jobs</a></li>
       <li><a href="/docs/2.0/workflows/#workflows-configuration-examples">Example Configs</a></li>
