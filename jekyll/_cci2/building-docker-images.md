@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 55
 ---
 
-This document explains how to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers in the following sections:
+This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote docker environment.
 
 * TOC
 {:toc}
@@ -27,12 +27,12 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do not need to use the `setup_remote_docker` key.
+**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
 
 ### Specifications
 {:.no_toc}
 
-The Remote Docker Environment has the following technical specifications:
+The Remote Docker Environment has the following technical specifications (for CircleCI Server installations, contact the systems administrator for specifications):
 
 CPUs | Processor                 | RAM | HD
 -----|---------------------------|-----|------
@@ -42,7 +42,7 @@ CPUs | Processor                 | RAM | HD
 ### Example
 {:.no_toc}
 
-The example below shows how you can build a Docker image using `machine` with the default image:
+The example below shows how you can build a Docker image using the `machine` executor with the default image - this does not require the use of remote Docker:
 
 ```yaml
 version: 2
@@ -64,30 +64,30 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-The example below shows how you can build and push a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker):
+The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) usind the Docker executor, with remote Docker:
 
-```yaml
+{% highlight yaml linenos %}
 version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.13-alpine   # (1)
+      - image: circleci/golang:1.13-alpine
     steps:
       - checkout
       # ... steps for building/testing app ...
 
-      - setup_remote_docker:   # (2)
-          docker_layer_caching: true # (3)
+      - setup_remote_docker:
+          docker_layer_caching: true
 
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
-          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin  # (4)
+          echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
           docker push CircleCI-Public/circleci-demo-docker:$TAG
-```
+{% endhighlight %}
 
-If the primary container you are using doesn't already have the docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) somehow.
+If the primary container you are using doesn't already have the docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms).
 
 ```yaml
       # Install via apk on alpine based images
@@ -98,10 +98,10 @@ If the primary container you are using doesn't already have the docker CLI insta
 
 Let’s break down what’s happening during this build’s execution:
 
-1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container).
-2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine.
-3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI Server installations).
-4. We use project environment variables to store credentials for Docker Hub.
+1. All commands are executed in the [primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container). (line 5)
+2. Once `setup_remote_docker` is called, a new remote environment is created, and your primary container is configured to use it. All docker-related commands are also executed in your primary container, but building/pushing images and running containers happens in the remote Docker Engine. (line 10)
+3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI Server installations). (line 11)
+4. We use project environment variables to store credentials for Docker Hub. (line 17)
 
 ## Docker Version
 
@@ -137,10 +137,10 @@ CircleCI supports multiple versions of Docker and defaults to using `17.09.0-ce`
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
 ## Separation of Environments
-The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers cannot directly communicate with the containers running in remote docker.
+The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
 
 ### Accessing Services
 {:.no_toc}
@@ -249,6 +249,14 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       - ~/bundler-cache
 ```
 {% endraw %}
+
+### Accessing the Remote Docker environment
+
+When a remote Docker environment is spun up, an SSH alias is created for you so you can SSH into the remote Docker virtual machine. This may be helpful for debugging your builds, or modifying the Docker or VM filesystem configuration. To SSH into the remote Docker VM, run the following within your project configuration job steps, or during a SSH rerun:
+
+```
+ssh remote-docker
+```
 
 **Note:** The example shown above provides a way for you to utilize volume mounts since they don't work in the `docker` executor. An alternative to this approach is to use the `machine` executor where volume mounts do work.
 
