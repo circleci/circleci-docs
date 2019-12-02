@@ -16,7 +16,7 @@ YAML 構文、仕様、よくあるご質問、ヘルプ、サポートなどに
 | [よくあるご質問]({{ site.baseurl }}/2.0/faq/)                                     | CircleCI 2.0 に関してよく寄せられるご質問                               |
 | [GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/) | GitHub と Bitbucket のインテグレーションに関する情報、必要な権限の概要、組織とグループの動作方法 |
 | [セキュリティ機能]({{ site.baseurl }}/2.0/security/)                               | CircleCI が使用しているソース コード、コンテナ、暗号化テクノロジーについての説明             |
-| [更新履歴](https://circleci.com/changelog/)                                    | ホスティングされている CircleCI 2.0 ソフトウェアに最近追加された変更点のログ             |
+| [更新履歴](https://circleci.com/ja/changelog/)                                 | ホスティングされている CircleCI 2.0 ソフトウェアに最近追加された変更点のログ             |
 | [コンテナ ID をホスト ID にマップできないエラー]({{ site.baseurl }}/2.0/high-uid-error/)      | `container ID cannot be mapped to host ID` エラーのデバッグ方法     | {: class="table table-striped"} 
 
 このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。
