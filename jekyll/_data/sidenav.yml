@@ -198,6 +198,8 @@ en:
       children:
         - name: Optimization Overview
           link: 2.0/optimizations/
+        - name: Optimization Strategies
+          link: 2.0/optimization-strategy/
         - name: Caching Dependencies
           link: 2.0/caching/
         - name: Running Tests in Parallel
