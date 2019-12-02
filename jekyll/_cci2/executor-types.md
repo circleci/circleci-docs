@@ -161,7 +161,7 @@ jobs:
 
 ## Using the Windows Executor
 
-Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
+Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
 * CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
 * Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
@@ -258,7 +258,6 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 ## See Also
 
 [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-
 
 
 
