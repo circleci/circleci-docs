@@ -205,7 +205,7 @@ en:
         - name: Using Docker Layer Caching
           link: 2.0/docker-layer-caching/
 
-- name: Jobs
+- name: Pipelines
   icon: docs/builds.svg
   children:
     - name: Status
