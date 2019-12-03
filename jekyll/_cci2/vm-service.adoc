@@ -77,9 +77,9 @@ NOTE: Windows images are built on CircleCI, so we suggest you run through this p
 
 . Create a new repository under your GitHub or GitHub Enterprise account.
 . Copy the contents of https://github.com/CircleCI-Public/circleci-server-windows-image-builder into your new repo.
-. Open up your installation of CircleCI Server and set up your AWS keys as described in the image builder https://github.com/CircleCI-Public/circleci-server-windows-image-builder#setting-up-on-circleci[README].
-. Next, https://circleci.com/docs/2.0/getting-started/#setting-up-your-build-on-circleci[connect your new repo] by clicking Follow Project from the Add Projects page.
-. Click Start Building to run the Windows image buider.
+. Open up your installation of CircleCI Server and  https://circleci.com/docs/2.0/getting-started/#setting-up-your-build-on-circleci[connect your new repo] by clicking Follow Project from the Add Projects page. Once you set up the project, the first build will get triggered automatically. It will fail because the AWS credentials are not configured yet — feel free to cancel the first build that gets created automatically.
+. Next, set up your AWS keys as described in the image builder https://github.com/CircleCI-Public/circleci-server-windows-image-builder#setting-up-on-circleci[README].
+. Click Rerun Workflow from the job details page to rerun the Windows image buider.
 . Your will find your new Windows AMI ID at the end of the `Summarize results` step in the job output.
 . Copy the AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
 
