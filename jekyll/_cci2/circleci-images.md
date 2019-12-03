@@ -252,6 +252,14 @@ The following packages are installed via `curl` or other means.
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
 
+
+## What Isn't Available
+
+1. If an image isn't listed above, it isn't available. As the Convenience Image program is revamped, proposals for new images aren't currently being accepted.
+1. Old versions of software won't be rebuilt. Once an upstream image stops building the tag for a specific release, say Node.js v8.1.0, then we stop building it too. This means other tools in that image, such as `npm` in this example, will no longer be updated either.
+1. We don't support building preview, beta, or release candidate images tags. On occasion they'll be available but these tags tend to cause our build system for Convenience Images to fail. If you need a non-stable release of of language, we suggest installing it via [an orb](https://circleci.com/orbs/) or a custom Docker image instead.
+
+
 ## Latest Image Tags by Language
 
 Below is a list of the latest convenience images, sorted by language.
