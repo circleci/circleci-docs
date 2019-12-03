@@ -89,7 +89,7 @@ jobs:
 
 If the primary container you are using doesn't already have the docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms).
 
-```yaml
+```
       # Install via apk on alpine based images
       - run:
           name: Install Docker client
@@ -107,7 +107,7 @@ Let’s break down what’s happening during this build’s execution:
 
 If your job requires a specific docker version, you can set it as a `version` attribute:
 
-```yaml
+```
       - setup_remote_docker:
           version: 18.06.0-ce
 ```
@@ -147,7 +147,7 @@ The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run 
 
 It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
-```yaml
+```
 #...
       - run:
           name: "Start Service and Check That it’s Running"
@@ -159,7 +159,7 @@ It is **not** possible to start a service in remote docker and ping it directly 
 
 A different way to do this is to use another container running in the same network as the target container:
 
-```yaml
+```
 #...
       - run: |
           docker run -d --name my-app my-app
@@ -172,7 +172,7 @@ A different way to do this is to use another container running in the same netwo
 
 It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
 
-``` yaml
+```
 - run: |
     # create a dummy container which will hold a volume with config
     docker create -v /cfg --name configs alpine:3.4 /bin/true
@@ -184,7 +184,7 @@ It is **not** possible to mount a volume from your job space into a container in
 
 In the same way, if your application produces some artifacts that need to be stored, you can copy them from Remote Docker:
 
-``` yaml
+```
 - run: |
     # start container with the application
     # make sure you're not using `--rm` option otherwise the container will be killed after finish
