@@ -17,7 +17,7 @@ To include a snippet within a page, use the following syntax:
 Site variables are defined within `jekyll/_config.yml` as key value pairs: 
 
 ```yaml
-key: value
+my-variable-name: my-variable-value
 ```
 
 To use the variable within a docs page, use the following syntax:
@@ -25,4 +25,3 @@ To use the variable within a docs page, use the following syntax:
 ```
 {{site.<my_variable_name>}}
 ```
-
