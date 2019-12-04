@@ -253,7 +253,7 @@ The following packages are installed via `curl` or other means.
 - [jq](https://stedolan.github.io/jq/)
 
 
-## What Isn't Available
+## Out of Scope
 
 1. If an image isn't listed above, it isn't available. As the Convenience Image program is revamped, proposals for new images aren't currently being accepted.
 1. Old versions of software won't be rebuilt. Once an upstream image stops building the tag for a specific release, say Node.js v8.1.0, then we stop building it too. This means other tools in that image, such as `npm` in this example, will no longer be updated either.
