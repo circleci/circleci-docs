@@ -6,7 +6,7 @@
 :toc: macro
 :toc-title:
 
-Following is a step by step guide to installing CircleCI Server v2.18 with Terraform.
+Following is a step by step guide to installing CircleCI Server v{{site.server_version}} with Terraform.
 
 toc::[]
 

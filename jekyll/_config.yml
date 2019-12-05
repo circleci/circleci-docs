@@ -135,3 +135,5 @@ analytics:
   events:
     go_button_clicked: go-button-clicked
 rollbar_env: development
+
+server_version: "2.18.2"
