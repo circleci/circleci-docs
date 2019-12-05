@@ -18,8 +18,8 @@ This document describes how to get started with continuous integration on **Wind
 To follow along with this document you will need:
 
 * An [account](https://circleci.com/signup/) on CircleCI.
-* Either the Free plan (default) or a [performance plan](https://circleci.com/pricing/usage/).
-* Pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
+* Either the Free plan (default) or a [performance plan](https://circleci.com/pricing/usage/). If you are running CircleCI Server there are alternative code examples below.
+* For the cloud version, pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
 
 # Overview of the Windows executor
 
@@ -37,7 +37,7 @@ Note: the Windows executor currently only supports Windows containers. Running L
 
 ## Windows executor images
 
-Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document.
+Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
 ## Known issues
 
@@ -49,19 +49,38 @@ These are the issues with the Windows executor that we are aware of and will add
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
+{:.tab.windowsblock.Cloud}
 ```yaml
-version: 2.1
+version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  build:
-    executor: win/default
+  build: # name of your job
+    executor: win/default # executor type
+
     steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
 # Specifying a Shell with the Windows Executor
 
