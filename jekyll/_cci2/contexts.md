@@ -130,7 +130,7 @@ Contexts hold project secrets or keys that perform crucial functions for your ap
 
 The value of the context will not be masked in the build output if:
 
-* the value of the contex is less than 4 characaters
+* the value of the context is less than 4 characters
 * the value of the context is equal to one of `true`, `True`, `false` or `False`
 
 **Note:** secret masking will only prevent the value of the context from appearing in your build output. The value of the context is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
