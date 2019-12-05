@@ -1,0 +1,20 @@
+= Server docs release process
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+== List of jobs to complete before releasing
+
+* Update version under the `server_version` key in `jekyll/_config.yml`.
+* Make operational changes required for the release.
+* If anyth
+* If it's a feature release:
+** Create a new What's New in vx.y.z page.
+** If anything has changes about the installation or upgrade process, point these out in the relevant docs.
+**follow these steps to create PDFs:
+*** Update the `Version` in `scripts/build_pdfs_local.sh` and check the comment is `FINAL` once all changes are made.
+*** Run `./scripts/build_pdfs_local.sh` to generate the PDFs. 
+*** The PDFs will be located in the `release/tmp` folder - move them to the `jekyll/_cci2` folder.
+*** Add a new PDF section in `jekyll/_data/sidenav.yml`.

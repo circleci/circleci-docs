@@ -20,6 +20,10 @@ This document provides a summary of features and product notes for the release o
 * We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
 * We have also made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to 2.18.
 
+## What's New in Release 2.18.3
+
+* You can now generate a Windows-based image to make available for running using the `machine` executor. See our VM Service guide for [instructions on building the image and making it available](https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview](https://circleci.com/docs/2.0/executor-intro/#windows).
+
 ## What's New in Release 2.18
 
 * It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context](https://circleci.com/docs/2.0/contexts/#restricting-a-context).
