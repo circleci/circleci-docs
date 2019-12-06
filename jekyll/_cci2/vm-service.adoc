@@ -71,17 +71,9 @@ To enable the use of these custom images for your installation, you will need to
 === Creating a Windows AMI
 _Introduced in CircleCI Server v2.18.3_
 
-Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows VMs. To create your Windows image run through these steps. 
+Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows VMs. To create your Windows image run through the steps listed in our [image builder repo](https://github.com/CircleCI-Public/circleci-server-windows-image-builder), then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
 
-NOTE: Windows images are built on CircleCI, so we suggest you run through this process once your installation is up and running. Alternatively you can use any other CircleCI account – including on our managed Cloud service – to generate the image:
-
-. Create a new repository under your GitHub or GitHub Enterprise account.
-. Copy the contents of https://github.com/CircleCI-Public/circleci-server-windows-image-builder into your new repo.
-. Open up your installation of CircleCI Server and  https://circleci.com/docs/2.0/getting-started/#setting-up-your-build-on-circleci[connect your new repo] by clicking Follow Project from the Add Projects page. Once you set up the project, the first build will get triggered automatically. It will fail because the AWS credentials are not configured yet — feel free to cancel the first build that gets created automatically.
-. Next, set up your AWS keys as described in the image builder https://github.com/CircleCI-Public/circleci-server-windows-image-builder#setting-up-on-circleci[README].
-. Click Rerun Workflow from the job details page to rerun the Windows image buider.
-. Your will find your new Windows AMI ID at the end of the `Summarize results` step in the job output.
-. Copy the AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
+NOTE: Windows images are built on CircleCI, so we suggest you run through this process once your installation is up and running. Alternatively you can use any other CircleCI account – including on our managed Cloud service – to generate the image.
 
 == Defining Instance Types
 There are two fields for defining the instance types you wish to use. The first is for the default instance type, and the second is to set the instance type to use when a Job specifies the `large` resource class.
