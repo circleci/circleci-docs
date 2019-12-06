@@ -71,7 +71,7 @@ To enable the use of these custom images for your installation, you will need to
 === Creating a Windows AMI
 _Introduced in CircleCI Server v2.18.3_
 
-Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows VMs. To create your Windows image run through the steps listed in our [image builder repo](https://github.com/CircleCI-Public/circleci-server-windows-image-builder), then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
+Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows VMs. To create your Windows image run through the steps listed in our https://github.com/CircleCI-Public/circleci-server-windows-image-builder[image builder repo], then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
 
 NOTE: Windows images are built on CircleCI, so we suggest you run through this process once your installation is up and running. Alternatively you can use any other CircleCI account – including on our managed Cloud service – to generate the image.
 
