@@ -78,14 +78,14 @@ workflows:
 === Actions vs. Orbs
 "Actions" in Github are reusable commands or tasks to run inside a job. However, they are written for execution inside a Docker container or coded as individual steps using JavaScript. This adds additional work and limits the scope in which they can be applied.
 
-CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[Orbs]. The primary difference is that CircleCI Orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
+CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
-Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/orbs/registry/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community Orbs / Integrations.
+Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/orbs/registry/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
 === Runners vs. Executors
 In GitHub, you can specify your builds to run in Linux, macOS, and Windows environments via a `runs-on` key in the YAML, and if you want to run anything in a container, you specify an additional `container` key.
 
-In CircleCI, you have the same choice of environments (called Executors), except that Docker containers are their own class of executor.
+In CircleCI, you have the same choice of environments (called Executors), with additional options and features for Docker.
 
 For each of the https://circleci.com/docs/2.0/executor-types/[executor types], you have a choice of different versions which will subsequently have various versions of base software installed.
 
@@ -199,7 +199,7 @@ jobs:
           command: ./gradlew build
 ----
 
-2+| Using shared tasks (Actions for Github, Orbs for CircleCI). In CircleCI, you declare orbs at the top level +
+2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
 and then https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
