@@ -1,5 +1,5 @@
 # Reusable Content 
-If content is to be used in multiple locations throughout the documentation, it may be benefitial to convert the content to either of the following:
+If content is to be used in multiple locations throughout the documentation, it may be beneficial to convert the content to either of the following:
 
 * A snippet - suitable for a section of text or code block that needs to appear in more than one location. 
 * A site variable - suitable for a small amount of information, for example a version number or single word.
