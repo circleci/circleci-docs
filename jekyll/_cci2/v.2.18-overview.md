@@ -6,7 +6,7 @@ description: "Starting point for CircleCI Server v2.18 docs"
 categories: [getting-started]
 order: 1
 ---
-This document provides a summary of features and product notes for the release of CircleCI Server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/#section=server-administration).
+This document provides a summary of features and product notes for the release of CircleCI Server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
 ## Requirements for Upgrading
 
@@ -22,7 +22,7 @@ This document provides a summary of features and product notes for the release o
 
 ## What's New in Release 2.18.3
 
-* You can now generate a Windows-based image to make available for running using the `machine` executor. See our VM Service guide for [instructions on building the image and making it available](h{{ site.baseurl }}/2.0/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/2.0/executor-intro/#windows).
+* You can now generate a Windows-based image to make available for running using the `machine` executor. See the VM Service guide for [instructions on building the image and making it available]({{ site.baseurl }}/2.0/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/2.0/executor-intro/#windows).
 
 ## What's New in Release 2.18
 
@@ -54,7 +54,7 @@ Metric | Description
 
 <br>
 
-* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [our VM Service guide]({{ site.baseurl }}/2.0/vm-service/#section=server-administration)  for more information.  
+* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.  
 
 ## Fixed in Release 2.18
 
