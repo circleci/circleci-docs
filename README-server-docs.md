@@ -21,7 +21,7 @@ Then, from the top of the circleci-docs directory, run:
 
 You will then find the PDFs in: `releases/tmp`
 
-This script is run as part of the CCI build everytime you push a commit, then the PDFs can be found in the build artifacts, accessible from the CircleCI UI.
+This script is run as part of the CCI build every time you push a commit, then the PDFs can be found in the build artifacts, accessible from the CircleCI UI.
 
 ## Some notes about formatting
 
