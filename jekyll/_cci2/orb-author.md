@@ -24,7 +24,7 @@ Before you create your first orb, please see the following notes:
 * To use the orbs you create, you will need to enable the "Allow Uncertified Orbs" setting in the Security section of CircleCI's Organization Settings page for your organization (`https://circleci.com/[vcs]/organizations/[org-name]/settings#security`).
 * If you are creating an orb, you can use development versions to avoid having your orb publicly/permanently listed in CircleCI's orb registry before it is ready.
 
-The following high-level steps will enable you to publish your first orb:
+### The following high-level steps are needed to publish your first orb:
 
 1) Claim a namespace (assuming you don't yet have one). For example:
 
@@ -34,7 +34,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
-2) Create the orb inside your namespace. For example:
+2) Create the orb inside your namespace. This doesn't generate any content, but rather reserves the naming for when the orb is published. For example:
 
 `circleci orb create sandbox/hello-world`
 
