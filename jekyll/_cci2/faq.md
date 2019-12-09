@@ -305,7 +305,7 @@ To find a list of your Active User's, Log in to the CircleCI web app > click `Se
 {:.no_toc}
 
 On the Performance plan, when you reach 10% of your remaining credits, you will
-be refilled 25% of your credit subscription. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits when you reach 2,500 remaining credits.
+be refilled 25% of your credit subscription (at 25% the cost of your plan). For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits when you reach 2,500 remaining credits.
 
 If you notice that your account is receiving repeated refills, you can review your credit usage by navigating to the settings tab of your account and clicking on “Plan Usage."
 
