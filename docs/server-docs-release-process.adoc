@@ -12,8 +12,8 @@
 * If anyth
 * If it's a feature release:
 ** Create a new What's New in vx.y.z page.
-** If anything has changes about the installation or upgrade process, point these out in the relevant docs.
-**follow these steps to create PDFs:
+** If anything has changed about the installation or upgrade process, point these out in the relevant docs.
+** follow these steps to create PDFs:
 *** Update the `Version` in `scripts/build_pdfs_local.sh` and check the comment is `FINAL` once all changes are made.
 *** Run `./scripts/build_pdfs_local.sh` to generate the PDFs. 
 *** The PDFs will be located in the `release/tmp` folder - move them to the `jekyll/_cci2` folder.
