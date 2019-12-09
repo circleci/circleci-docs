@@ -309,10 +309,6 @@ be refilled 25% of your credit subscription (at 25% the cost of your plan). For 
 
 If you notice that your account is receiving repeated refills, you can review your credit usage by navigating to the settings tab of your account and clicking on “Plan Usage."
 
-
-
-
-
 #### Do credits expire?
 {:.no_toc}
 **Performance Plan**: Credits expire one year after purchase. Unused credits will be forfeited when the account subscription is canceled.
