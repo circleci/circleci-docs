@@ -4,7 +4,7 @@ title: "Configuring Deploys"
 short-title: "Configuring Deploys"
 ---
 
-CircleCI can be configured to deploy to virtually any service. This document provides an overview of the deployment process with CircleCI, along with best practices using examples of deploying to a variety of popular platforms.
+CircleCI can be configured to deploy to virtually any service. This document provides an overview of the deployment process, along with best practices, presented using deployment examples for a variety of popular platforms.
 
 * TOC
 {:toc}
@@ -12,8 +12,17 @@ CircleCI can be configured to deploy to virtually any service. This document pro
 ## Overview
 {:.no_toc}
 
-To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file.
-You will also need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and [add SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/).
+Once a software application has been developed and tested, it needs to be deployed and made available to its intended audience. CircleCI can be configured to deploy to any platform, including integration with UI QA/testing, feature management tools or staging/production environments – allowing for a fully customizable deployment strategy, whether that strategy needs to be fully automated or require manual approval.
+
+Orbs for many common deployment targets are available, which can help to simplify and streamline your config
+
+To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file and configure the job to run the steps required to deploy your application.
+
+To fulfill the deploy steps you will need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and/or [SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/) for your deployment target.
+
+To simplify your configuration you can choose to use orbs. There are certified orbs available for most commonly-used deployment targets. Orbs include preconfigured jobs to run your deployments, once the relevant environment variables are defined within your project. To find out if there is an orb available
+
+## Heroku
 
 Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the [Sequential Job branch of the CircleCI Demo Workflows repository](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter).
 
