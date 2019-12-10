@@ -105,7 +105,7 @@ orbs:
 
 jobs:
   build:
-    executor: win/vs2019
+    executor: win/default
     steps:
       - checkout
       - run: dotnet tool install --global PowerShell
