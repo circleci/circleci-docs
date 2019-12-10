@@ -47,8 +47,6 @@ workflows:
       - hello/hello-build
 ```
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable pipelines to use the `orbs` key.
-
 ## Next Steps
 
 {:.no_toc}
