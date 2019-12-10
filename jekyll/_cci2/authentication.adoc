@@ -5,11 +5,13 @@
 :toc: macro
 :toc-title:
 
+{% include snippets/server-only.adoc %}
+
 This document describes the various ways users of your CircleCI Server installation can get access and authenticate their accounts. Currently OAuth and LDAP are supported as authentication methods.
 
 toc::[]
 
-== OAuth with Github/GHE
+== OAuth with GitHub/GHE
 
 The default method for user account authentication in CircleCI Server is through GitHub.com/GitHub Enterprise OAuth.
 

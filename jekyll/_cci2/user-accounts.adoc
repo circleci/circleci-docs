@@ -41,7 +41,7 @@ image::activate_user.png[Reactivate existing users]
 
 == Controlling Account Access
 
-Any user associated with your GitHub.com or Github Enterprise organization can create a user account for your CircleCI installation. In order to control who has access, you can automatically suspend **all** new users, requiring an administrator to activate them before they can log in. To access this feature:
+Any user associated with your GitHub.com or GitHub Enterprise organization can create a user account for your CircleCI installation. In order to control who has access, you can automatically suspend **all** new users, requiring an administrator to activate them before they can log in. To access this feature:
 
 1. Navigate to your CircleCI Admin Settings
 2. Select System Settings from the Admin Settings menu
@@ -62,9 +62,9 @@ To activate an **new** account that was automatically suspended, and allow the a
 .Activate a Suspended New User
 image::unsuspend.png[Activate New Users]
 
-=== Limit User Registrations by Github Organization
+=== Limit User Registrations by GitHub Organization
 
-When using Github.com, you can limit who can register with your CircleCI install to people with *some* connection to your approved organizations list. To access this feature:
+When using github.com, you can limit who can register with your CircleCI install to people with *some* connection to your approved organizations list. To access this feature:
 
 1. Navigate to your CircleCI Admin Settings page
 2. Select System Settings from the Admin Setting menu
@@ -87,7 +87,7 @@ circleci dev-console
 
 === Deleting a User
 
-If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's github username:
+If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's GitHub username:
 
 ```shell
 circleci dev-console

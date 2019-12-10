@@ -18,7 +18,7 @@ The Nomad Metrics container is run on the services host using the server flag an
 
 The Nomad Metrics client is installed and run on all Nomad client instances. You will need to update your AWS Launch Configuration in order to install and configure it.  Additionally, you will need to modify the AWS security group to ensure that UDP port 8125 is open on the Services machine. Steps for both configuration changes are explained below.
 
-NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console.  Make sure that you logged into the region you use to run CircleCI Server.
+NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. Make sure that you logged into the region you use to run CircleCI Server.
 
 === Updating the Services machine Security Group
 
