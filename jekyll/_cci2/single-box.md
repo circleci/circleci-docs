@@ -101,7 +101,7 @@ The steps in this section walk you through installing CircleCI on a single EC2 V
 - Enter your hostname, or IP address if you didn't set one, and click Test Hostname Resolution.
 - Under Execution Engines, if you do not need 1.0 build functionality, leave the box for it unchecked. Most users should check the box for 2.0 functionality.
 - Under 2.0 Builders Configuration, select "Single Box".
-- Follow the Github integration instructions. **Note:** If you get an *"Unknown error authenticating via GitHub. Try again, or contact us."* message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
+- Follow the GitHub integration instructions. **Note:** If you get an *"Unknown error authenticating via GitHub. Try again, or contact us."* message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
 - Ensure that "None" is selected in the "Storage" section. In production installations, other object stores may be used but will require corresponding IAM permissions.
 - Ensure that the "VM Provider" is set to "None". If you would like to allow CircleCI to dynamically provision VMs (e.g. to support doing Docker builds) you may change this setting, but it will require additional IAM permissions. [Contact us](https://support.circleci.com/hc/en-us) if you have questions.
 - Agree to the license agreement, save and head to your Dashboard. The application start up process begins by downloading the ~160 MB Docker image, so it may take some time to complete.

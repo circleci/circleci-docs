@@ -118,7 +118,7 @@ The following table describes the ports used on Nomad clients:
 === GitHub
 CircleCI uses GitHub or GitHub Enterprise credentials for authentication which, in turn, may use LDAP, SAML, or SSH for access. This means CircleCI will inherit the authentication supported by your central SSO infrastructure.
 
-NOTE: CircleCI does not support changing the URL or backend Github instance after it has been set up. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad Client instances.
+NOTE: CircleCI does not support changing the URL or backend GitHub instance after it has been set up. The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad Client instances.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]

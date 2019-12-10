@@ -306,7 +306,7 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | TCP
 | Outbound
 | GitHub Enterprise / GitHub.com (whichever applies)
-| Download Code From Github.
+| Download Code From GitHub.
 |
 
 | 4647

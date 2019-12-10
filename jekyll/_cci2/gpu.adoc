@@ -5,6 +5,8 @@
 :toc: macro
 :toc-title:
 
+{% include snippets/server-only.adoc %}
+
 This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
 
 toc::[]

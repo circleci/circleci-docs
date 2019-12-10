@@ -30,7 +30,7 @@ This document provides a summary of features and product notes for the release o
 * Fixed a bug causing Workflows to get stuck when infrastructure_failure happens after a job fails.
 * Fixed a bug causing duplicate docker networks on same nomad client (if running build using machine:true AND vm-provider=on_host).
 * Improved performance when using local storage. Previously, caching issues had been experienced when local storage was used rather than the default option of using S3 (selecting None under * Storage Driver options from the Management Console).
-* We have added more error checking and validation around Github’s API so the existing list commit endpoint no longer causes issues.
+* We have added more error checking and validation around GitHub’s API so the existing list commit endpoint no longer causes issues.
 * Datadog API token field was stored in plaintext, now set as a password field.
 * Fixed issue where workflows were constrained from fanning out to large number of jobs.
 

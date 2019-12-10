@@ -33,7 +33,7 @@ Metric | Description
 `circle.backend.action.upload-artifact-error` | Tracks how many times an artifact has failed to upload
 `circle.build-queue.runnable.builds` | Track how many builds flowing through the system are considered runnable
 `circle.dispatcher.find-containers-failed` | Track how many 1.0 builds 
-`circle.github.api_call` | Tracks how many api calls CircleCI is making to github
+`circle.github.api_call` | Tracks how many api calls CircleCI is making to GitHub
 `circle.http.request` | Tracks the response codes to CircleCi requests
 `circle.nomad.client_agent.*` | Tracks nomad client metrics
 `circle.nomad.server_agent.*` | Tracks how many nomad servers there are 
