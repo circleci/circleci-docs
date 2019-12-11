@@ -703,7 +703,7 @@ CircleCI sends personalized notifications by email.
 In addition to these per-user emails, CircleCI sends notifications on a per-project basis.
 
 CircleCI supports sending webhooks when your build completes.
-CircleCI also supports Slack, HipChat, Campfire, Flowdock and IRC notifications; you configure these notifications from your project's **Project Settings > Notifications** page.
+CircleCI also supports Slack, Flowdock and IRC notifications; you configure these notifications from your project's **Project Settings > Notifications** page.
 
 This example will POST a JSON packet to the specified URL.
 

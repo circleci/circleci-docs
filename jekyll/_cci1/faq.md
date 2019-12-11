@@ -71,7 +71,7 @@ will automatically stop building it.
 
 ### Can I get notifications to team chat applications?
 
-CircleCI supports Slack, HipChat, Campfire, Flowdock and IRC notifications; you configure these notifications from your project’s **Project Settings > Notifications** page.
+CircleCI supports Slack, Flowdock and IRC notifications; you configure these notifications from your project’s **Project Settings > Notifications** page.
 
 ### Can I send Slack / HipChat / IRC notifications for specific branches only?
 
