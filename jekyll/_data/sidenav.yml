@@ -65,6 +65,8 @@ en:
           link: 2.0/migrating-from-azuredevops/
         - name: Migrating from AWS
           link: 2.0/migrating-from-aws/
+        - name: Migrating from GitHub
+          link: 2.0/migrating-from-github/
 
 - name: Configuration
   icon: docs/config.svg

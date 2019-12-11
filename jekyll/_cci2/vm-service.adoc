@@ -6,6 +6,8 @@
 :toc-title:
 :sectanchors:
 
+{% include snippets/server-only.adoc %}
+
 This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Winows images) and remote Docker jobs.
 
 NOTE: This is only available for installations on AWS, please contact your CircleCI account representative to request this for a static installation.
