@@ -549,20 +549,6 @@ Some issues are only present in one of these tools.
 
 * **Errors while installing code signing certificates.** Please check out the iOS Code Signing document.
 
-* **Many iOS app developers use tools that generate substantial amounts of code.** In such
-cases CircleCI may not correctly detect the Xcode workspace, project, or
-scheme. Instead, you can specify these through environment variables.
-
-### Constraints on macOS-based Builds
-{:.no_toc}
-
-Splitting tests between parallel containers on macOS is currently not supported.
-We suggest using a workflow with parallel jobs to build with different
-Xcode versions, or a workflow with parallel jobs to run different
-test targets. Please check
-[this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples)
-for examples of workflows with parallel jobs.
-
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)

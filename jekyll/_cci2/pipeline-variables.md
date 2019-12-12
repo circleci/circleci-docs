@@ -89,6 +89,8 @@ jobs:
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
+**Note:** Please note that the `parameters` key passed in this `POST` request is **NOT** secret.
+
 The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
 ```

@@ -117,6 +117,24 @@ Next we pull down the cache, if present. If this is your first run, or if you've
 project build. If this is the case, consider using the <a href="https://github.com/qaware/go-offline-maven-plugin">go-offline-maven-plugin</a>.
 </div>
 
+Multi-module cache should depend on pom.xml in every module, it could be achieved with this additional step:
+
+{% raw %}
+```yaml
+...
+    steps:
+      - checkout
+      - run:
+          name: Generate cumulative pom.xml checksum
+          command: |
+            find . -type f -name "pom.xml" -exec sh -c "sha256sum {} >> ~/pom-checksum.tmp" \;
+            sort -o ~/pom-checksum ~/pom-checksum.tmp
+          when: always
+      - restore_cache:
+          key: circleci-demo-java-spring-{{ checksum "~/pom-checksum" }}
+```
+{% endraw %}
+
 Then `mvn package` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
 
 Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
