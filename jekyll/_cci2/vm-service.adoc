@@ -8,7 +8,7 @@
 
 {% include snippets/server-only.adoc %}
 
-This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor and remote Docker jobs.
+This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Winows images) and remote Docker jobs.
 
 NOTE: This is only available for installations on AWS, please contact your CircleCI account representative to request this for a static installation.
 
@@ -27,9 +27,9 @@ CAUTION: Any changes to management console settings require downtime while the C
 
 To configure VM service, it is best practice to select the AWS EC2 option in the Management Console Settings. This will allow CircleCI to run remote Docker and `machine` executor jobs using dedicated EC2 instances.
 
-You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMIs) for VM service, as described in the sections below. If you do not provide any custom images, all `machine` executor and remote Docker jobs will be run on instances built with one of our default AMIs, which have Ubuntu 16.04, Docker version 18.06.3 and a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details.
+You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMIs) for VM service, as described in the sections below. If you do not provide any custom images, all `machine` executor and remote Docker jobs will be run on instances built with one of our default AMIs, which have Ubuntu 16.04, Docker version 18.06.3 and a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details. To run Windows jobs you must supply a Windows AMI, without this Windows jobs will fail to run.
 
-=== Default VM service AMIs
+=== Default VM service Linux AMIs
 
 * Ap-northeast-1:ami-0e49af0659db9fc5d
 * Ap-northeast-2:ami-03e485694bc2da249
@@ -46,14 +46,16 @@ You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.
 * Us-west-1:ami-06f6efb13d9ccf93d
 * Us-west-2:ami-0b5b8ad02f405a909
 
-== Customizing VM Service Images
+== Customizing and Creating VM Service Images
 
-Customizing the VM service images for your installation of CircleCI will allow you to specify versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker or  the `machine` executor. If you choose not to use custom images, you will likely need to run additional install and update steps on every commit as part of your `config.yml` file.
+Customizing the VM service images for your installation of CircleCI will allow you to specify versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker or the `machine` executor, and for `machine` you can specify separate AMIs for Linux and Windows. If you choose not to use a custom Linux image, you will likely need to run additional install and update steps on every commit as part of your `config.yml` file.
 
-From v2.18, you can provide a single custom AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each.
+From v2.18, you can either provide a single custom Linux AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each
 
 .Custom VM Service Images
 image::vm-service-custom.png[Custom VM Service Images]
+
+=== Custom Linux AMI
 
 To build custom VM service images:
 
@@ -67,6 +69,13 @@ and see https://github.com/circleci/image-builder/blob/picard-vm-image/provision
 You will need to associate the `circleci` user with the image you want to use as shown in https://github.com/circleci/image-builder/blob/picard-vm-image/aws_user_data[this] example.
 
 To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings accessible from the Management console (for example, `<your-circleci-id>.com:8800`).
+
+=== Creating a Windows AMI
+_Introduced in CircleCI Server v2.18.3_
+
+Creating a Windows image and specifying it under the VM Service settings lets your users run jobs on dedicated Windows VMs. To create your Windows image run through the steps listed in our https://github.com/CircleCI-Public/circleci-server-windows-image-builder[image builder repo], then copy the generated AMI ID and paste into the Custom Windows VM AMI field in your Management Console settings, under VM Provider (for example, `<your-hostname.com:8800/settings>`).
+
+NOTE: Windows images are built on CircleCI, so we suggest you run through this process once your installation is up and running. Alternatively you can use any other CircleCI account – including on our managed Cloud service – to generate the image.
 
 == Defining Instance Types
 There are two fields for defining the instance types you wish to use. The first is for the default instance type, and the second is to set the instance type to use when a Job specifies the `large` resource class.

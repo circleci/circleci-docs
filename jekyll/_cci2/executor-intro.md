@@ -41,7 +41,7 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
+_Available on CircleCI Cloud - not currently available on self-hosted installations of CircleCI Server._
 
 ```
 jobs:
@@ -58,12 +58,13 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 
 ## Windows
 
-_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations of CircleCI Server_
+The syntax for using the Windows executor in your config differs depending on whether you are using: 
+* The cloud version of CircleCI, using config version 2.1 and the Windows orb. You also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing)
+* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
-Note: The Windows executor requires a 2.1 version configuration as well as having Pipelines enabled. Go to "Project" > "Settings" > "Advanced Settings" to enable Pipelines.
-
+{:.tab.windowsblock.Cloud}
 ```
-version: 2.1 # Use version 2.1 to enable Orb usage.
+version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
   win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
@@ -78,7 +79,21 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-windows). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
+{:.tab.windowsblock.Server}
+```
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor). See [the Windows orb details](https://circleci.com/orbs/registry/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See Also
 
