@@ -106,7 +106,7 @@ The next key does not have a dynamic component to it, it simply is a static stri
 
 ### Using Caching in Monorepos
 
-There are many different approaches to utilizing caching in monorepos. The customer-provided example below shows how a user can create and then build a concatenated `package-lock` file that can be used as a checksum for the caching key. 
+There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to managed a shared cache based on multiple files in different parts of your monorepo. 
 
 #### Creating and Building a Concatenated `package-lock` file
 
@@ -135,7 +135,7 @@ There are many different approaches to utilizing caching in monorepos. The custo
         - checkout
         - create_concatenated_package_lock:
           filename: combined-package-lock.txt
-    Use combined-package-lock.text in cache key
+    ## Use combined-package-lock.text in cache key
         - restore_cache:
           keys:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
