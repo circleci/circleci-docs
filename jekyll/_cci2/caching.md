@@ -104,6 +104,45 @@ Here, the first key concatenates the checksum of `package-lock.json` file into t
 
 The next key does not have a dynamic component to it, it simply is a static string: `v1-npm-deps-`. If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which will trigger the storing of a new cache.
 
+### Using Caching in Monorepos
+
+There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to managed a shared cache based on multiple files in different parts of your monorepo. 
+
+#### Creating and Building a Concatenated `package-lock` file
+
+1) Add custom command to config:
+
+{% raw %}
+```yaml
+    commands:
+        create_concatenated_package_lock:
+        description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+    parameters:
+      filename:
+        type: string
+    steps:
+      - run:
+          name: Combine package-lock.json files to single file
+          command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+```
+{% endraw %}
+
+2) Use custom command in build to generate the concatenated `package-lock` file
+
+{% raw %}
+```yaml
+    steps:
+        - checkout
+        - create_concatenated_package_lock:
+          filename: combined-package-lock.txt
+    ## Use combined-package-lock.text in cache key
+        - restore_cache:
+          keys:
+            - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
+            - v3-deps
+```
+{% endraw %}
+
 ## Managing Caches
 
 ### Cache Expiration
