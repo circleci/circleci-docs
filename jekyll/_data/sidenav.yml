@@ -348,7 +348,7 @@ en:
           link: 2.0/admin-faq/
         - name: Customization & Config
           link: 2.0/customizations/
-        - name: Architechture
+        - name: Architecture
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
