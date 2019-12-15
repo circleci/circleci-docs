@@ -112,7 +112,7 @@ jobs:
     steps:
       - restore_cache: # キャッシュされた依存関係を復元します。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          ```
+```
 
 {% endraw %}
 
