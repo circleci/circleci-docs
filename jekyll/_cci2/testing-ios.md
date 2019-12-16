@@ -29,19 +29,22 @@ We announce the availability of new macOS containers in the [annoucements sectio
 
 The currently available Xcode versions are:
 
-* `11.3.0`: Xcode 11.3 Beta 1 (Build 11C24b), macOS 10.15 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1657/index.html)
-* `11.2.1`: Xcode 11.2.1 (Build 11B500), macOS 10.15 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1532/index.html)
-* `11.2.0`: Xcode 11.2.1  (!) (Build 11B500), macOS 10.15 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1532/index.html)
-* `11.1.0`: Xcode 11.1 (Build 11A1027), macOS 10.14 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1226/index.html)
-* `11.0.0`: Xcode 11.0 (Build 11A420a), macOS 10.14 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1136/index.html)
-* `10.3.0`: Xcode 10.3 (Build 10G8), macOS 10.14 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-903/index.html)
-* `10.2.1`: Xcode 10.2.1 (Build 10E1001), macOS 10.14 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
-* `10.1.0`: Xcode 10.1 (Build 10B61), macOS 10.13 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
-* `10.0.0`: Xcode 10.0 (Build 10A255), macOS 10.13 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
-* `9.4.1`:  Xcode 9.4.1 (Build 9F2000), macOS 10.13 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
-* `9.3.1`:  Xcode 9.3.1 (Build 9E501), macOS 10.13 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
-* `9.0.1`:  Xcode 9.0.1 (Build 9A1004), macOS 10.12[installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
-* `8.3.3`:  Xcode 8.3.3 (Build 8E3004b), macOS 10.12 [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
+ Config   | Xcode Version                   | macOS Version | Software Manifest
+----------|---------------------------------|---------------|-------------------
+ `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
+ `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.2.0` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.1.0` | Xcode 11.1 (Build 11A1027)      | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
+ `11.0.0` | Xcode 11.0 (Build 11A420a)      | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
+ `10.3.0` | Xcode 10.3 (Build 10G8)         | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
+ `10.2.1` | Xcode 10.2.1 (Build 10E1001)    | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
+ `10.1.0` | Xcode 10.1 (Build 10B61)        | macOS 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html)
+ `10.0.0` | Xcode 10.0 (Build 10A255)       | macOS 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html)
+ `9.4.1`  | Xcode 9.4.1 (Build 9F2000)      | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
+ `9.3.1`  | Xcode 9.3.1 (Build 9E501)       | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
+ `9.0.1`  | Xcode 9.0.1 (Build 9A1004)      | macOS 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
+ `8.3.3`  | Xcode 8.3.3 (Build 8E3004b)     | macOS 10.12.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2098/index.html)
+{: class="table table-striped"}
 
 ## Getting Started
 
