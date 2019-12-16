@@ -24,7 +24,8 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
 3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
-   
+
+{% raw %}   
 ```yaml
 version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
 
@@ -61,6 +62,7 @@ jobs:
             --cache-control "max-age=86400"
           overwrite: true # default is false
 ```
+{% endraw %} 
 
 ### Deploy to AWS S3 Without Orbs
 
