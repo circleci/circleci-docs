@@ -65,7 +65,8 @@ version: 2
       machine: # Docker 17.06.1-ce および docker-compose 1.14.0 と
       # 共に Ubuntu バージョン 14.04 イメージを使用する
       # マシンイメージを指定します。新しいイメージのリリースについては、
-      # CircleCI Discuss の「Announcements」をフォローしてください。 image: circleci/classic:201708-01
+      # CircleCI Discuss の「Announcements」をフォローしてください。
+        image: circleci/classic:201708-01
 ...
     build3:
       macos: # Xcode バージョン 9.0 の macOS 仮想マシンを指定します
