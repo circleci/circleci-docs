@@ -415,7 +415,9 @@ A parameter can have the following keys as immediate children:
 ### Parameter Types
 {:.no_toc}
 
-This section describes the types of parameters and their usage. The parameter types supported are:
+This section describes the types of parameters and their usage. 
+
+The parameter types supported by orbs are:
 * string
 * boolean
 * integer
@@ -423,6 +425,12 @@ This section describes the types of parameters and their usage. The parameter ty
 * executor
 * steps
 * environment variable name
+
+The parameter types supported by pipeline parameters are:
+* string
+* boolean
+* integer
+* enum
 
 #### String
 {:.no_toc}

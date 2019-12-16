@@ -280,6 +280,13 @@ The CLI allows you to run a single job from CircleCI on your desktop using Docke
 $ circleci local execute --job JOB_NAME
 ```
 
+If your CircleCI config is set to version 2.1 or greater, you must first export your config to `process.yml`, and specify it when executing:
+
+```sh
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
 Let's run an example build on our local machine on one of CircleCI's demo applications:
 
 ```sh
@@ -300,7 +307,7 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
-**Add SSH Keys
+**Add SSH Keys**
 
 It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
 

@@ -297,8 +297,8 @@ API の呼び出しは POST リクエストで実行します。詳細は API �
 `CIRCLE_PR_REPONAME` | String | プルリクエストが作成された GitHub または Bitbucket リポジトリの名前。 フォークしたプルリクエストのみで使用可能です。
 `CIRCLE_PR_USERNAME` | String | プルリクエストを作成したユーザーの GitHub または Bitbucket ユーザー名。 フォークしたプルリクエストのみで使用可能です。
 `CIRCLE_PREVIOUS_BUILD_NUM` | Integer | 現在のブランチにおける前回までのビルド回数。
-`CIRCLE_PROJECT_REPONAME` | String | 現在のブランチのリポジトリ名。
-`CIRCLE_PROJECT_USERNAME` | String | 現在のプロジェクトの名称。
+`CIRCLE_PROJECT_REPONAME` | String | 現在のプロジェクトのリポジトリ名。
+`CIRCLE_PROJECT_USERNAME` | String | 現在のプロジェクトの GitHub または Bitbucket ユーザー名。
 `CIRCLE_PULL_REQUEST` | String | プルリクエストにひもづく URL。 ひも付けられたプルリクエストが複数ある時は、そのうちの 1 つがランダムで選ばれます。
 `CIRCLE_PULL_REQUESTS` | List | 現在のビルドのプルリクエストにひもづけられたカンマ区切りの URL リスト。
 `CIRCLE_REPOSITORY_URL` | String | GitHub または Bitbucket の リポジトリ URL。

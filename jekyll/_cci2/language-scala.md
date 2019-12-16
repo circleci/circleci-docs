@@ -185,7 +185,7 @@ The following keys represent actions performed after the multi-line command is e
 ```
 
 Below is an explanation of the preceding example:
-- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from github into the container 
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container 
 - [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
 - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
 - [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.

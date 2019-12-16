@@ -24,6 +24,13 @@ Docker Layer Caching can be used with both the [`machine` executor]({{ site.base
 ### Limitations
 {:.no_toc}
 
+Please note that high usage of [parallelism]({{site.baseurl}}/2.0/configuration-reference/#parallelism) (that is, a parallelism of 30 or above) in your configuration may cause issues with DLC, notably pulling a stale cache or no cache. For example:
+
+- A single job with 30 parallelism will work if only a single workflow is running, however, having more than one workflow will result in cache misses.
+- any job with `parallelism` beyond 30 will experience cache misses regardless of number of workflows runing.
+
+If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/orbs/registry/orb/cci-x/docker-registry-image-cache) orb.
+
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
 DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment. 

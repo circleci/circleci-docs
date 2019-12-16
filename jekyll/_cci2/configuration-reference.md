@@ -79,6 +79,14 @@ commands:
       - run: echo << parameters.to >>
 ```
 
+## **`parameters`** (requires version: 2.1)
+Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details. 
+
+Key | Required  | Type | Description
+----|-----------|------|------------
+parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+{: class="table table-striped"}
+
 ## **`executors`** (requires version: 2.1)
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
@@ -772,7 +780,7 @@ workflows:
 
 ##### **`checkout`**
 
-Special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -796,6 +804,8 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule sync
 - run: git submodule update --init
 ```
+
+This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide]({{ site.baseurl }}/2.0/gh-bb-integration/#establishing-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
 
 **Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
@@ -1139,6 +1149,37 @@ steps:
 **Note:**
 Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
+##### Using `pipeline.` Values
+
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+
+Value                       | Description
+----------------------------|--------------------------------------------------------
+pipeline.id                 | A globally unique id representing for the pipeline
+pipeline.number             | A project unique integer id for the pipelin
+pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
+pipeline.project.type       | E.g. "github"
+pipeline.git.tag            | The tag triggering the pipeline
+pipeline.git.branch         | The branch triggering the pipeline
+pipeline.git.revision       | The current git revision
+pipeline.git.base_revision  | The previous git revision
+{: class="table table-striped"}
+
+For example:
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    environment:
+      IMAGETAG: latest
+    working_directory: ~/main
+    steps:
+      - run: echo "This is pipeline ID << pipeline.id >>"
+```
+
 ## **`workflows`**
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
 
@@ -1306,7 +1347,7 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ##### **Using `when` in Workflows**
 
-With CircleCI API v2, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` in API v2 is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
+With CircleCI configuration v2.1, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with CircleCI API v2 pipeline triggering with parameters.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
