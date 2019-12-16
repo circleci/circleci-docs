@@ -517,27 +517,6 @@ This section describes common problems and solutions for Workflows.
 
 It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
-### Workflows Not Starting
-{:.no_toc}
-
-When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
-
-Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
-
-When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
-
-A project's Job page URL looks like this:
-
-`https://circleci.com/:VCS/:ORG/:PROJECT`
-
-A Workflow page URL looks like this:
-
-`https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
-
-Look for Workflows that have a yellow tag and "Needs Setup" for the text.
-
-![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
-
 ### Workflows Waiting for Status in GitHub
 {:.no_toc}
 
