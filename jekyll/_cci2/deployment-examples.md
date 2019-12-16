@@ -24,9 +24,8 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
 3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
-
-{% raw %}   
-```yaml
+  
+```
 version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
 
 orbs:
@@ -62,7 +61,6 @@ jobs:
             --cache-control "max-age=86400"
           overwrite: true # default is false
 ```
-{% endraw %} 
 
 ### Deploy to AWS S3 Without Orbs
 
@@ -76,7 +74,7 @@ jobs:
 
 5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
 
-```yaml
+```
 version: 2
 
 workflows: # Define a Workflow running the build job, then the deploy job
@@ -165,7 +163,7 @@ workflows:
 
 The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
 
-```yaml
+```
 version: 2.1 # We must use 2.1 to make use of orbs.
 orbs: # specify all orbs you want to use.
   aws-code-deploy: circleci/aws-code-deploy@1.0.0
@@ -191,7 +189,7 @@ To deploy to Azure, use a similar job to the above example that uses an appropri
 
 ## Capistrano
 
-```yaml
+```
 version: 2
 jobs:
   #  build and test jobs go here
@@ -514,7 +512,7 @@ See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) for inst
 
 5. Checkout your code and add a command to deploy the master branch to Heroku using git.
 
-```yaml
+```
 version: 2
 jobs:
   build:
@@ -549,7 +547,7 @@ If you would like to simplify your Heroku configuration workflows, including dep
 
 #### Deploying Heroku
 
-```yaml
+```
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.0
@@ -561,7 +559,7 @@ workflows:
 
 #### Customizing Heroku Workflows
 
-```yaml
+```
 version: 2.1
 orbs:
   heroku: circleci/heroku@1.0.0
@@ -599,7 +597,7 @@ You can do that by logging in to npm (`npm login`). This will save the authToken
 
 3.  Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and only for versioned tags:
 
-```yaml
+```
 version: 2
 jobs:
   publish:
@@ -646,7 +644,7 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
 
 3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the master branch.
 
-```yaml
+```
 version: 2
 jobs:
   build:
