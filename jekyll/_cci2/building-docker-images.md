@@ -64,7 +64,7 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) usind the Docker executor, with remote Docker:
+The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
 
 {% highlight yaml linenos %}
 version: 2.1
