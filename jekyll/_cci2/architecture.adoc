@@ -8,6 +8,8 @@
 //:circle-warning: image:circle-warning.png[]
 //:circle-failure: image:circle-failure.png[]
 
+{% include snippets/server-only.adoc %}
+
 This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
 toc::[]
@@ -92,7 +94,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `domain-service`
 | Stores and provides information about our domain model.
-| Workflows will fail to start and some REST API calls may fail causing `500` errors in the CircleCI UI.
+| Workflows will fail to start and some REST API calls may fail causing `500` errors in the CircleCI UI. If LDAP authentication is in use, all logins will fail.
 | icon:fire-extinguisher[]
 | `postgres`, `frontend`, `domain-service-migrator`
 
@@ -116,7 +118,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `federation-service-migrator`
 | Runs postgresql migrations for the `federations-service`.
-| Only runs at statup.
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -128,7 +130,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `frontend`
 | CircleCI web app and www-api proxy.
-| The UI and REST API will be unavailable and no jobs will be triggered by Github/Enterprise. Running builds will be OK but no updates will be seen.
+| The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK but no updates will be seen.
 | icon:exclamation-triangle[]
 | `postgres`
 
@@ -182,7 +184,7 @@ WARNING: If migrator services are down at startup connected services will fail.
 
 | `outputRunningRedis` / `redis` *
 | The Redis key/value store.
-| Lose output from currently-running job steps. API calls out to github may also fail.
+| Lose output from currently-running job steps. API calls out to GitHub may also fail.
 | icon:exclamation-triangle[]
 | None
 

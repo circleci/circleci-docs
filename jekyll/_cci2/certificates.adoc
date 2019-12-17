@@ -5,6 +5,8 @@
 :toc: macro
 :toc-title:
 
+{% include snippets/server-only.adoc %}
+
 This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing certificate.
 
 toc::[]
@@ -129,7 +131,7 @@ NOTE: The sources below are left open so that anybody can access the instance ov
 
 . Next, in the management console for CircleCI, upload a valid certificate and key file to the `Privacy` Section. These don't need to be externally signed or even current certs as the actual cert management is done at the ELB. But, to use HTTPS requests, CircleCI requires a certificate and key in which the "Common Name (FQDN)" matches the hostname configured in the admin console.
 
-. It is now possible to set your Github Authorization Callback to `https` rather than `http`.
+. It is now possible to set your GitHub Authorization Callback to `https` rather than `http`.
 
 === Using Self-Signed Certificates
 
@@ -190,4 +192,4 @@ More information is available https://letsencrypt.readthedocs.io/en/latest/using
 
 Ensure the hostname is properly configured from the Management Console (`http://<circleci-hostname>.com:8800`) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
-Make sure the Auth Callback URL in Github/Github Enterprise matches the domain name pointing to the Services machine, including the protocol used, for example `**https**://info-tech.io/`.
+Make sure the Auth Callback URL in GitHub/GHE matches the domain name pointing to the Services machine, including the protocol used, for example `**https**://info-tech.io/`.

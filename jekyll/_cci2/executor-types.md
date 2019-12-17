@@ -80,32 +80,26 @@ More details on the Docker Executor are available in the [Configuring CircleCI](
 
 ## Using Machine
 
-The `machine` option runs your jobs in a dedicated, ephemeral VM
-that has the following specifications:
+The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
-CPUs | Processor                 | RAM | HD
------|---------------------------|------------
-2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
+Class            | vCPUs | RAM
+-----------------|-------|-------
+medium (default) | 2     | 7.5GB
+large            | 4     | 15GB
 {: class="table table-striped"}
 
-Using the `machine` executor
-gives your application full access to OS resources
-and provides you with full control over the job environment.
-This control can be useful in situations
-where you need to use `ping`
-or modify the system with `sysctl` commands.
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands.
 
-Using the `machine` executor also enables you
-to build a Docker image
-without downloading additional packages
-for languages like Ruby and PHP.
+Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
+
+NOTE: you can run Docker containers using the docker executor, but the `machine` executor is currently the only supported way to build new Docker images on CircleCI.
 
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
 
-To use the machine executor,
-set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
+To use the `machine` executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
 
+{:.tab.machineblock.Cloud}
 ```yaml
 version: 2
 jobs:
@@ -114,30 +108,27 @@ jobs:
       image: ubuntu-1604:201903-01    # pins image to specific version
 ```
 
+{:.tab.machineblock.Server}
+```yaml
+version: 2
+jobs:
+  build:
+    machine: true
+```
+
 The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
 
+**Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
 
-You can specify other images
-by using the `image` key.
-
-**Note:**
-The `image` key is not supported on private installations of CircleCI.
-See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
+Cloud users can specify other images using the `image` key.
 
 The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
 
-- `circleci/classic:latest`:
-This is the default image.
-Changes to this image are announced at least one week in advance.
-- `circleci/classic:edge`:
-This image receives the latest updates.
-Changes to this image occur frequently.
-- `circleci/classic:{YYYY-MM}`:
-This image is pinned to a specific version
-to prevent breaking changes.
+- `circleci/classic:latest`: This is the default image. Changes to this image are announced at least one week in advance.
+- `circleci/classic:edge`: This image receives the latest updates. Changes to this image occur frequently.
+- `circleci/classic:{YYYY-MM}`: This image is pinned to a specific version to prevent breaking changes.
 
-All images have common language tools preinstalled.
-Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
+All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
 
 The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
@@ -156,7 +147,7 @@ _Available on CircleCI Cloud - not currently available on self-hosted installati
 
 Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
 
-```
+```yaml
 jobs:
   build:
     macos:
@@ -168,34 +159,52 @@ jobs:
       - run: xcodebuild -version
 ```
 
-## Using Windows
+## Using the Windows Executor
 
-_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations of CircleCI Server_
+Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
+* CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
+* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
-Using the `windows` executor allows you to run your job in a Windows environment. Building on Windows requires that your organization or account is using either a Free plan or a [Performance Plan](https://circleci.com/pricing/). The following is an example configuration that will run a simple Windows job.
-
+{:.tab.windowsblock.Cloud}
 ```yaml
-version: 2.1
+version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  build:
-    executor:
-      name: win/default
-      shell: bash.exe
+  build: # name of your job
+    executor: win/default # executor type
+
     steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
-      - run: echo 'Hello, Windows'
+      - run: Write-Host 'Hello, Windows'
 ```
 
-You can find all the available options for the Windows executor on [the Windows orb page](https://circleci.com/orbs/registry/orb/circleci/windows).
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+      resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/orbs/registry/orb/circleci/windows) for more details.
+
+CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
 ## Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
-```
+```yaml
 jobs:
   build:
     docker:
@@ -250,8 +259,6 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 ## See Also
 
 [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-
-
 
 
 

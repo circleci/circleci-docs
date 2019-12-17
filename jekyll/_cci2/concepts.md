@@ -179,13 +179,13 @@ workflows:
     jobs:
       - build1
       - build2:
-        requires:
-          - build1 # wait for build1 job to complete successfully before starting
-          # see circleci.com/docs/2.0/workflows/ for more examples.
+          requires:
+             - build1 # wait for build1 job to complete successfully before starting
+             # see circleci.com/docs/2.0/workflows/ for more examples.
       - build3:
-        requires:
-          - build1 # wait for build1 job to complete successfully before starting
-          # run build2 and build3 in parallel to save time.
+          requires:
+             - build1 # wait for build1 job to complete successfully before starting
+             # run build2 and build3 in parallel to save time.
 ```
 
 {% endraw %}
