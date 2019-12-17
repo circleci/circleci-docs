@@ -30,7 +30,15 @@ export function init () {
     apiKey:    ALGOLIA_API_KEY,
     indexName: ALGOLIA_INDEX_NAME,
     routing: true,
-    searchParameters: { hitsPerPage: 25 }
+    searchParameters: { hitsPerPage: 25 },
+    searchFunction: function(helper) {
+      // don't run search for blank query, including on initial page load
+      // https://stackoverflow.com/a/42321947
+      if (helper.state.query === '') {
+        return;
+      }
+      helper.search();
+    }
   });
 
   // adding conditions to filter search
