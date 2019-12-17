@@ -31,12 +31,17 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 ## Viewing Builds
 
-Your build appears on the Pipelines page of the CircleCI app when a new commit is pushed to your repository.
+Your build appears on the [Pipelines page]({{site.baseurl}}/2.0/pipelines) of the CircleCI app when a new commit is pushed to your repository.
 
 You can view workflows or single jobs by clicking in on the workflow or job in
 each pipeline.
 
-![Workflows]({{ site.baseurl }}/assets/img/docs/navigating_pipelines.png)
+![Navigating Pipelines]({{ site.baseurl }}/assets/img/docs/navigating_pipelines.png)
+
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top
+of the page to navigate back to a job's respective workflow or pipeline.
+
+![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
 
 ## See Also
 
