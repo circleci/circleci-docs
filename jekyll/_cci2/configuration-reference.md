@@ -513,22 +513,6 @@ Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
-
-#### **`project_slug`**
-
-**What is a Project Slug?**
-
-The CircleCI v2 API is backwards compatible with previous API versions in the way it identifies your projects using repository name. For example, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a "triplet" of the project type, the name of your "organization", and the name of the repository.
-
-For the project type you can use github or bitbucket as well as the shorter forms `gh` or `bb`, which are now supported in API v2. The organization is your username or organization name in your version control system.
-
-With API v2, CircleCI has introduced a string representation of the triplet called the `project_slug`, and takes the following form:
-
-`<project_type>/<org_name>/<repo_name>`
-
-The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. It is important to note that the `project_slug` is just a new name for the existing format, and not a new shape of the URLS that can then be used to retrieve information about a project. It is possible in the future CircleCI may change the shape of a `project_slug`, but in all cases it would be usable as a human-readable identifier for a given project.
-
-
 #### **`steps`**
 
 The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
