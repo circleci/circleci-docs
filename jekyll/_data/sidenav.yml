@@ -275,7 +275,7 @@ en:
         - name: API Reference
           link: api/
         - name: API V2 Introduction
-          link: 2.0/api-intro
+          link: 2.0/api-intro/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary
