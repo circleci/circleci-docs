@@ -1029,14 +1029,14 @@ Now that you have configured your environment to work with the CircleCI platform
 ```yaml
 version: 2.1
 orbs:
-  heroku: circleci/heroku@1.0.0
+  heroku: circleci/heroku@0.0.10
 workflows:
   heroku_deploy:
     jobs:
       - heroku/deploy-via-git
 ```
 
-Notice in the above example, when the CircleCI Heroku orb (`circleci/heroku@1.0.0`) is invoked, the `heroku-deploy` workflow is initiated, enabling the `deploy-via-git` job to run.
+Notice in the above example, when the CircleCI Heroku orb (`circleci/heroku@0.0.10`) is invoked, the `heroku-deploy` workflow is initiated, enabling the `deploy-via-git` job to run.
 
 For more detailed information about the CircleCI Heroku orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/heroku).
 
