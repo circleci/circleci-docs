@@ -121,6 +121,3 @@ The CircleCI API v2 enables you to call a specific set of endpoints to retrieve 
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
 -->
-
-## See Also
-{:.no_toc}
