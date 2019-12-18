@@ -54,7 +54,7 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 2. Next, you will be given the option of *following* any projects you have access to that are already building on CircleCI (this would typically apply to developers connected to a company or organization's GitHub account). On the next screen, you'll be able to add the repo you just created as a new project on CircleCI.
 
-3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list (you can also search for it), then click the **Set Up project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list (you can also search for it), then click the **Set Up Project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
 4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. If the language you are using is not in the list, click the "Use Hello World" button at the bottom of the list. Copy the YAML configuration that appears and save it as a file called "config.yml" in a folder named `.circleci` in the root of your repository's directory.
 
