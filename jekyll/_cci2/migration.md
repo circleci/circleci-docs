@@ -37,7 +37,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Conditionally halt the build at that step with `circleci-agent step halt`
 	- Allows you to use `setup_remote_docker` conditionally by halting
 - The Timezone can be changed just by defining an environment variable
-	- `TZ: /usr/share/zoneinfo/America/New_York`
+	- `TZ: America/New_York`
 - Running the build out of `/dev/shm` (for example, `/dev/shm/project`) can speed up certain projects
 	- Some things like Ruby gems can't be loaded out of shared memory. They can be installed elsewhere in the system (for example, `~/vendor`) and symlinked in.
 - Instead of prefixing a lot of commands with sudo, consider setting the shell to sudo for that `run`
@@ -60,7 +60,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Note that `$CIRCLE_ARTIFACTS` and `$CIRCLE_TEST_REPORTS` are not defined in 2.0
 	- You can define them yourself, but be sure to `mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS` if you do.
 - Migrating Linux & macOS in one repository (like React Native) should involve opening one branch for each Linux & macOS before combining the two configs into one workflow.
-- You can't `sudo echo` - pipe it like this: `echo `192.168.44.44 git.example.com` | sudo tee -a /etc/hosts`
+- You can't `sudo echo` - pipe it like this: `echo 192.168.44.44 git.example.com | sudo tee -a /etc/hosts`
 - Fonts are different between Ubuntu and Debian systems.
 - Apache 2.2 and 2.4 configs are fairly different - make sure to upgrade your 2.2 configs.
 - Don't forget to migrate all of the commands inferred automatically by 1.0 and commands that were manually stored in the UI.

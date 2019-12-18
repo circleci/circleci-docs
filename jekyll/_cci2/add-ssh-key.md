@@ -18,11 +18,13 @@ to add SSH keys to CircleCI:
 2. To enable running processes to access other services.
 
 If you are adding an SSH key for the first reason,
-refer to the [GitHub and Bitbucket Integration](https://circleci.com/docs/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
 Otherwise,
 follow the steps below to add an SSH key to your project.
 
 ## Steps
+
+1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
 
 1. In the CircleCI application,
 go to your project's settings
@@ -47,8 +49,12 @@ you are adding.
 **Note:**
 Since CircleCI cannot decrypt SSH keys,
 every new key must have an empty passphrase.
+CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key. 
 
-## Advanced Usage
+**Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
+
+
+## Adding SSH Keys to a Job
 
 Even though all CircleCI jobs use `ssh-agent`
 to automatically sign all added SSH keys,
@@ -74,6 +80,10 @@ jobs:
 All fingerprints in the `fingerprints` list
 must correspond to keys
 that have been added through the CircleCI application.
+
+## Adding multiple keys with blank hostnames
+
+If you need to add multiple SSH keys with blank hostnames to your project you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hostss, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
 
 ## See Also
 

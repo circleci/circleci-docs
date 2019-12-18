@@ -7,22 +7,18 @@ categories: [configuring-jobs]
 order: 80
 ---
 
+This document describes how to trigger jobs using the CircleCI API.
 
-This document describes
-how to trigger jobs using the CircleCI API.
+**Note:** You cannot currently trigger jobs that use 2.1 config from the API.
 
 * TOC
 {:toc}
 
 ## Overview
 
-Use the [CircleCI API]({{ site.baseurl }}/api/v1-reference/)
-to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview)
-that you have defined in `.circleci/config.yml`.
+Use the [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
 
-The following example shows
-how to trigger the `deploy_docker` job
-by using `curl`.
+The following example shows how to trigger the `deploy_docker` job by using `curl`.
 
 ```bash
 curl -u ${CIRCLE_API_USER_TOKEN}: \
@@ -30,30 +26,23 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-Some notes on the variables
-used in this example:
+Some notes on the variables used in this example:
 - `CIRCLE_API_USER_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
-- `<vcs-type>` is a placeholder variable
-and refers to your chosen VCS (either `github` or `bitbucket`).
-- `<org>` is a placeholder variable
-and refers to the name of your CircleCI organization.
-- `<repo>` is a placeholder variable
-and refers to the name of your repository.
-- `<branch>` is a placeholder variable
-and refers to the name of your branch.
+- `<vcs-type>` is a placeholder variable and refers to your chosen VCS (either `github` or `bitbucket`).
+- `<org>` is a placeholder variable and refers to the name of your CircleCI organization.
+- `<repo>` is a placeholder variable and refers to the name of your repository.
+- `<branch>` is a placeholder variable and refers to the name of your branch.
 
-For a complete reference of the API,
-see the [CircleCI API Documentation]({{ site.baseurl }}/api/v1-reference/).
+For a complete reference of the API, see the [CircleCI API Documentation](https://circleci.com/docs/api/#section=reference).
 
-**Note:**
-It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using a new endpoint, see the Trigger a Build by Project section of the [CircleCI API Projects Documentation]({{ site.baseurl }}/api/v1-reference/#projects).
+**Important Considerations When Triggering A Job Via The API**
 
-Jobs triggered with the API may contain a `workflows` section.
-These workflows do **not** have to reference the job
-you trigger with the API.
-Jobs triggered with the API do **not** have access to environment variables
-created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/).
-Instead, define these variables at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+- Jobs triggered with the API may contain a `workflows` section
+- Your workflow does **not** have to reference the job you triggered with the API
+- Jobs that are triggered via the API do **not** have access to environment variables created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/)
+- If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
+- It is currently not possible to trigger a single job if you are using CircleCI 2.1 and Workflows
+- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using the [Trigger a Build by Project](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) endpoint
 
 ## Conditionally Running Jobs With the API
 
@@ -79,7 +68,7 @@ jobs:
           command: |
             # replace this with your build/deploy check (i.e. current branch is "release")
             if [[ true ]]; then
-              curl --user ${CIRCLE_API_PROJECT_TOKEN}: \
+              curl --user ${CIRCLE_API_USER_TOKEN}: \
                 --data build_parameters[CIRCLE_JOB]=deploy_docker \
                 --data revision=$CIRCLE_SHA1 \
                 https://circleci.com/api/v1.1/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/tree/$CIRCLE_BRANCH

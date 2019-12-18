@@ -29,14 +29,14 @@ Currently we support authentication with GitHub and Bitbucket. Please vote on re
 
 ### What if I don’t want to include so many orgs when I am authorizing CircleCI?
  
-You can change the org access using OAuth App Restrictions on Github, see the [GitHub Help OAuth documentation](https://help.github.com/articles/about-oauth-app-access-restrictions/) for instructions.
+You can change the org access using OAuth App Restrictions on GitHub, see the [GitHub Help OAuth documentation](https://help.github.com/articles/about-oauth-app-access-restrictions/) for instructions.
  
 ### I can’t give CircleCI the access to all my private repositories. What do I do?
 GitHub has only recently added the fine-grained permissions options, and we are still working on supporting them.
 
 In the meantime, the [suggested workaround]( {{ site.baseurl }}/1.0/github-security-ssh-keys/) is to create an additional user on GitHub with a limited set of permissions and use that account to perform the builds on CircleCI.
 
-To limit CircleCI from accessing your private repositories, select Public Repos Only from the Start with Github menu on the Sign Up page and on every subsequent login.
+To limit CircleCI from accessing your private repositories, select Public Repos Only from the Start with GitHub menu on the Sign Up page and on every subsequent login.
  
 CircleCI does not yet support limiting access to only public Bitbucket repositories.
  

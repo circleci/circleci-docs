@@ -16,21 +16,7 @@ for building your open source project on CircleCI in the following sections:
 ## Overview
 {:.no_toc}
 
-To support the open source community,
-projects that are public on GitHub or Bitbucket
-receive three free build containers,
-for a total of four containers.
-Multiple build containers allow you
-to build a single pull request (PR) faster with parallelism,
-or build multiple PRs at once.
-
-These additional containers are automatically enabled,
-as long as the project is public and running on Linux.
-If you do not want to use the additional containers
-or do not want your CircleCI project to be public,
-you can change this setting.
-In the **Advanced Settings** of your project,
-set the **Free and Open Source** option to _Off_.
+To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
 
 **Note:**
 If you are building an open source project on macOS,
@@ -44,9 +30,9 @@ take care not to liberate sensitive information.
 - If your repository is public,
 your CircleCI project and its build logs are also public.
 Pay attention to the information you choose to print.
-- While environment variables set in the CircleCI application are hidden from the public,
-these variables will be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests)
-unless explicitly blocked.
+- Environment variables set in the CircleCI application are hidden from the public,
+these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests)
+unless explicitly enabled.
 
 ## Features and Settings for Open Source Projects
 
@@ -117,19 +103,33 @@ you can enable the **Pass secrets to builds from forked pull requests** option.
 In the **Advanced Settings** of your project,
 set the **Pass secrets to builds from forked pull requests** option to _On_.
 
+### Caching
+
+Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
+- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master).
+- Two PRs in different Fork Repos will have different caches.
+
+Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
+
 ## Example Open Source Projects 
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-- **React** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). <https://github.com/facebook/react>
-- **Calypso** - The next generation webapp powering WordPress.com. <https://github.com/Automattic/wp-calypso>
-- **Angular** - Another JavaScript framework built on multiple providers including CircleCI. <https://github.com/angular/angular>
-- **fastlane** - A build automatically tool for Android and iOS. <https://github.com/fastlane/fastlane>
-- **Atom** - The extensible text editor by GitHub is built with CircleCI (and other CI tools). <https://github.com/atom/atom>
-- **Yarn** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/). <https://github.com/yarnpkg/yarn>
-- **Hype** - Spotify’s tool that lets you execute arbitrary JVM code in a distributed environment. <https://github.com/spotify/hype>
+- **[React](https://github.com/facebook/react)** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). 
+- **[React Native](https://github.com/facebook/react-native/)** - Build native mobile apps using JavaScript and React.
+- **[Flow](https://github.com/facebook/flow/)** - Adds static typing to JavaScript to improve developer productivity and code quality.
+- **[Relay](https://github.com/facebook/relay)** - JavaScript framework for building data-driven React applications. 
+- **[Vue](https://github.com/vuejs/vue)** -  Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
+- **[StoryBook](https://github.com/storybooks/storybook)** - Interactive UI component dev & test: React, React Native, Vue, Angular, Ember.
+- **[Electron](https://github.com/electron/electron)** - Build cross-platform desktop apps with JavaScript, HTML, and CSS.
+- **[Angular](https://github.com/angular/angular)** - Framework for building browser and desktop web applications.
+- **[Apollo](https://github.com/apollographql)** - A community building flexible open source tools for GraphQL.
+- **[PyTorch](https://github.com/pytorch/pytorch)** - Data manipulation and Machine Learning platform.
+- **[Calypso](https://github.com/Automattic/wp-calypso)** - The next generation webapp powering WordPress.com.
+- **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
+- **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
 ## See Also
 {:.no_toc}
 
-Refer to the [Examples]({{ site.baseurl }}/2.0/examples/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
+Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.

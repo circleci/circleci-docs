@@ -12,10 +12,25 @@ gh_url: "https://github.com/circleci/circleci-docs"
 plugins:
   - jekyll-assets
   - jekyll-sitemap
+  - jekyll-asciidoc
 
 algolia:
-  application_id: 06F2EYGKB6
+  application_id: U0RXNGRK45
+  api_key: dd49f5b81d238d474b49645a4daed322 # search-only API Key; safe for front-end code
   index_name: documentation
+  settings:
+    highlightPreTag: '<strong>'
+    highlightPostTag: '</strong>'
+    attributesToSnippet: [
+      'content:80',
+      'headings',
+      'title'
+    ]
+    attributesToHighlight: [
+      'content:80',
+      'headings',
+      'title'
+    ]
 
 sass:
   sass_dir: _sass
@@ -26,6 +41,16 @@ kramdown:
 
 liquid:
   error_mode: strict
+
+asciidoc:
+  attributes:
+      source-highlighter: rouge
+
+asciidoctor:
+  attributes:
+    imagesdir: /docs/assets/img/docs/
+    relfileprefix: ../
+    outfilesuffix: /index.html 
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -67,6 +92,13 @@ collections:
     permalink: /api/:path/
     prefix: "/api"
     selectorName: "API"
+  cci2_ja:
+    name: "2.0 Docs"
+    site_section: true
+    output: true
+    permalink: /ja/2.0/:path/
+    prefix: "/ja/2.0"
+    selectorName: "2.0"
 
 twitter_username: circleci
 github_username: circleci
@@ -75,9 +107,27 @@ defaults:
   -
     scope:
       path: ""
+      type: "cci2"
+    values:
+      lang: "en"
+
+  -
+    scope:
+      path: ""
+      type: "cci2_ja"
+    values:
+      lang: "ja"
+
+  -
+    scope:
+      path: ""
     values:
       hide: false
       search: true
+
+t:
+    translation_in_progress:
+        ja: "このページはただいま翻訳中です"
 
 segment: 'mAJ9W2SwLHgmJtFkpaXWCbwEeNk9D8CZ'
 
@@ -85,3 +135,5 @@ analytics:
   events:
     go_button_clicked: go-button-clicked
 rollbar_env: development
+
+server_version: "2.18.3"

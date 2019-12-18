@@ -12,24 +12,39 @@ This document describes how to set up and customize testing for an iOS applicati
 * TOC
 {:toc}
 
+**Note:** There is also documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
+
 ## Overview
 {:.no_toc}
 
 CircleCI offers support for building and testing iOS and macOS projects. Refer to the manifest of the software installed on CircleCI macOS build images in the Using a macOS Build Image document.
 
+## macOS Build Containers
+
+Each `macos` job is run a fresh container, running macOS. We build a new container each time a new version of Xcode is released by Apple. The contents of a particular build container remain unchanged (in very exceptional circumstances we might be forced to re-build a container). Our goal is to keep your builds environement stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+
+We announce the availability of new macOS containers in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
+
 ## Supported Xcode Versions
 
 The currently available Xcode versions are:
 
-* `10.0.0`: Xcode 10.0 (Build 10A254a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-449/index.html)
-* `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
-* `9.4.0`: Xcode 9.4 (Build 9F1027a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-422/index.html)
-* `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
-* `9.3.0`: Xcode 9.3 (Build 9E145) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-405/index.html)
-* `9.2.0`: Xcode 9.2.0 (Build 9C40b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
-* `9.1.0`: Xcode 9.1.0 (Build 9B55) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
-* `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
-* `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
+ Config   | Xcode Version                   | macOS Version | Software Manifest
+----------|---------------------------------|---------------|-------------------
+ `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
+ `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.2.0` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.1.0` | Xcode 11.1 (Build 11A1027)      | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
+ `11.0.0` | Xcode 11.0 (Build 11A420a)      | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
+ `10.3.0` | Xcode 10.3 (Build 10G8)         | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
+ `10.2.1` | Xcode 10.2.1 (Build 10E1001)    | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
+ `10.1.0` | Xcode 10.1 (Build 10B61)        | macOS 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html)
+ `10.0.0` | Xcode 10.0 (Build 10A255)       | macOS 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html)
+ `9.4.1`  | Xcode 9.4.1 (Build 9F2000)      | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
+ `9.3.1`  | Xcode 9.3.1 (Build 9E501)       | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
+ `9.0.1`  | Xcode 9.0.1 (Build 9A1004)      | macOS 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
+ `8.3.3`  | Xcode 8.3.3 (Build 8E3004b)     | macOS 10.12.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2098/index.html)
+{: class="table table-striped"}
 
 ## Getting Started
 
@@ -60,48 +75,18 @@ example of a minimal config in the
 ### Best Practices
 {:.no_toc}
 
-In addition to the basic setup steps, it is best practice to include
-downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
-and linting the Swift code together with the `build-and-test` job:
+In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
 
-```yaml
-# .circleci/config.yml
-version: 2
-jobs:
-  build-and-test:
-    macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
-    environment:
-      FL_OUTPUT_DIR: output
+To enable this, ensure the first line in your Podfile is as follows:
 
-    steps:
-      - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-      - run:
-          name: Install CocoaPods
-          command: pod install --verbose
+```
+source 'https://cdn.cocoapods.org/'
+```
 
-      - run:
-          name: Build and run tests
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: WebTests
+If upgrading from Cocoapods 1.7 or older, additionally ensure the following line is removed from your Podfile, along with removing the "Fetch CocoaPods Specs" step in your CircleCI Configuration:
 
-      - store_test_results:
-          path: output/scan
-      - store_artifacts:
-          path: output
-
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build-and-test
+```
+source 'https://github.com/CocoaPods/Specs.git'
 ```
 
 ## Advanced Setup
@@ -229,12 +214,10 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -248,12 +231,10 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
+      xcode: "10.2.0"
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -275,6 +256,12 @@ workflows:
           requires:
             - build-and-test
 ```
+
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs such as Gym and Scan.
+
+### Reducing Testing Time
+
+By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the [fastlane docs](https://docs.fastlane.tools/actions/run_tests/#parameters).
 
 ### Using CocoaPods
 {:.no_toc}
@@ -360,32 +347,37 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 ### Using Custom Ruby Versions
 {:.no_toc}
 
-The macOS container ships with the system-installed Ruby, as well as the
-latest stable versions of Ruby as provided by [Ruby-Lang.org](https://www.ruby-lang.org/en/downloads/).
-To allow you to manage custom versions of Ruby, we install
-[ruby-install](https://github.com/postmodern/ruby-install) and [chruby](https://github.com/postmodern/chruby).
-To select a custom version of ruby you should [create a file named
-`.ruby-version` and commit it to your
-repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
-You will also need to change the default shell that commands are executed with
-to be a login shell, so that `chruby` is correctly invoked.
+Our macOS containers contain multiple versions of Ruby. The default version is the system-installed Ruby. The containers also include the latest stable versions of Ruby at the time that the container is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
-```yaml
-version: 2
-jobs:
-  build:
-    macos:
-      xcode: "9.0"
-    shell: /bin/bash --login -eo pipefail
-```
+If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
-If you do not want to commit a `.ruby-version` file to source control, then
-you can create the file from a job step:
+#### Images using macOS 10.15 (Catalina) / Xcode 11.2 and later
+
+The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switing feature is not enabled by default. To select a version of Ruby to use, call the `chruby` function in `~/.bash_profile`:
+
 ```yaml
 run:
   name: Set Ruby Version
-  command:  echo "ruby-2.4" > ~/.ruby-version
+  command: echo 'chruby ruby-2.6' >> ~/.bash_profile  # Replace 2.6 with the specific version of Ruby here.
 ```
+
+Alternatively, you can choose to [enable auto-switching](https://github.com/postmodern/chruby#auto-switching) if you would like to use it by following [these steps](https://github.com/postmodern/chruby#auto-switching).
+
+#### Images using macOS 10.14 (Mojave) / Xcode 11.1 and earlier
+
+The build images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
+
+To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
+
+```yaml
+run:
+  name: Set Ruby Version
+  command:  echo "ruby-2.4" > ~/.ruby-version # Replace 2.4 with the specific version of Ruby here.
+```
+
+**Note:** The version of Ruby that you select must be one of the versions listed in the [software manifests of your macOS container](#supported-xcode-versions).
+
+To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the technique above.
 
 ### Using Custom Versions of CocoaPods and Other Ruby Gems
 {:.no_toc}
@@ -436,19 +428,19 @@ the app is easy with one of the following:
 
 Then you should set up environment variables for your service of choice:
 
-### Hockey App 
+### Hockey App
 {:.no_toc}
 
 1. Log in to Hockey app and create a new API token on the [Tokens page](
 https://rink.hockeyapp.net/manage/auth_tokens). Your token will need at
-least upload permission to upload new builds to Hockey App. 
+least upload permission to upload new builds to Hockey App.
 
 2. Give your
 new API token a name specific to CircleCI such as "CircleCI
-Distribution". 
+Distribution".
 
 3. Copy the token, and log into CircleCI and go to the
-Project Settings page for your app. 
+Project Settings page for your app.
 
 4. Create a new Environment Variable with
 the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now
@@ -460,7 +452,7 @@ access this token in any job.
 1. Log in to Fabric.io and visit your organization's settings page.
 ![Fabric.io loging image](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
 
-2. Click your organization (CircleCI in the image above), and click 
+2. Click your organization (CircleCI in the image above), and click
 the API key and Build Secret links to reveal the items.
 ![Fabric.io org image](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
 
@@ -524,7 +516,7 @@ projects. Here are the most frequent of those:
 
 * **Xcode version is not available.** We install
   a few different versions of Xcode in each build
-  image and keep those updated with the latest point releases. For version `10.0.0`, 
+  image and keep those updated with the latest point releases. For version `10.0.0`,
   you must specify the full version, down to the point release number. However,
   to use the latest Xcode 8.3, for example, which is `8.3.3`, it is
   sufficient to specify `8.3` in your `config.yml`. If a newer point
@@ -560,20 +552,6 @@ Some issues are only present in one of these tools.
 
 * **Errors while installing code signing certificates.** Please check out the iOS Code Signing document.
 
-* **Many iOS app developers use tools that generate substantial amounts of code.** In such
-cases CircleCI may not correctly detect the Xcode workspace, project, or
-scheme. Instead, you can specify these through environment variables.
-
-### Constraints on macOS-based Builds
-{:.no_toc}
-
-Splitting tests between parallel containers on macOS is currently not supported.
-We suggest using a workflow with parallel jobs to build with different
-Xcode versions, or a workflow with parallel jobs to run different
-test targets. Please check
-[this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples)
-for examples of workflows with parallel jobs.
-
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
@@ -590,7 +568,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: "10.2.0"
     working_directory: /Users/distiller/project
     environment:
       FL_OUTPUT_DIR: output

@@ -620,6 +620,13 @@ ssh_key:
   body: '{"hostname":"hostname","private_key":"RSA private key"}'
   response: " "
 
+delete_ssh_key:
+  url: "/api/v1.1/project/:vcs-type/:username/:project/ssh-key"
+  description: "Delete an ssh key that will be used to access the external system identified by fingerprint. Hostname is optional."
+  method: "DELETE"
+  body: '{"fingerprint":"Fingerprint", "hostname":"Hostname"}'
+  response: " "
+
 project_post:
   url: "/api/v1.1/project/:vcs-type/:username/:project"
   description: "Triggers a new build, returns a summary of the build."

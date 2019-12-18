@@ -57,4 +57,4 @@ Following a project subscribes you to email notifications and adds the project i
 
 ### I can't find my project to add
 
-If you're not seeing a project you'd like to build and it's not currently building on CircleCI, you should check your org in the top left corner of the CircleCI UI.  For instance, if the top left shows your user `myUser`, only Github projects belonging to `myUser` will be available under `Add Projects`.  If you want to build the Github project `myOrg/orgProject`, you would have to change your org on the UI to `myOrg`.
+If you're not seeing a project you'd like to build and it's not currently building on CircleCI, you should check your org in the top left corner of the CircleCI UI.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you would have to change your org on the UI to `your-org`.

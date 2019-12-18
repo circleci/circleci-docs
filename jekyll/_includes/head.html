@@ -22,6 +22,11 @@
 	<link rel='stylesheet' href="{{ "/assets/css/mobile.css" | prepend: site.baseurl }}" media="screen and (max-width: 800px)" />
 	<link rel="stylesheet" href="{{ "/assets/css/footer.css" | prepend: site.baseurl }}" type="text/css" media="screen" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
+	<link rel="stylesheet" href="{{ "/assets/css/asciidoc.css" | prepend: site.baseurl }}">
+	<!--link rel="stylesheet" href="{{ "/assets/css/asciidoc-pygments.css" | prepend: site.baseurl }}"-->
+	<!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script-->
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
 	{% include segment.html %}
 

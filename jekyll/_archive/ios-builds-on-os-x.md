@@ -233,7 +233,7 @@ which allows you to run arbitrary bash commands instead of or in addition to the
 at various points in the build process. See the [configuration doc]( {{ site.baseurl }}/1.0/configuration/) for
 a detailed discussion of the structure of the `circle.yml` file. Note, however, that
 a number of options discussed in that doc will not work for macOS builds.
-Please see the [the Constraints section](#Constraints-on-macos-based-builds) for the
+Please see the [the Constraints section](#constraints-on-macos-based-builds) for the
 exact commands that are not supported.
 
 ### Custom packages

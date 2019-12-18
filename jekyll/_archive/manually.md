@@ -6,7 +6,7 @@ description: Overview of manual build setup
 order: 1
 sitemap: false
 ---
- 
+
 CircleCI is designed to set up most tests automatically because we infer your settings from your code.
 However, if you have an unusual setup or work in a framework that has no idiomatic way to set up your project, you'll need to set it up manually.
 
@@ -42,7 +42,7 @@ We have provided a
 but you won't need that for now&mdash;
 we'll guide you through a simple setup and you can check out the comprehensive docs later.
 
-<h2 id="overview">The anatomy of a CircleCI build</h2>
+<h2 id="build-overview">The anatomy of a CircleCI build</h2>
 
 For testing purposes, most applications and libraries require five to six standard phases that are run sequentially:
 

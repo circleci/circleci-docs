@@ -21,8 +21,10 @@ Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repo.
 
 **Note:** Setting up code signing on
-CircleCI 2.0 using Fastlane Match requires *adding a User key* to your
+CircleCI 2.0 using Fastlane Match requires *adding a User key** to your
 CircleCI project. Setting up code signing is quite different than it was in CircleCI 1.0. The 2.0 documentation has been updated to reflect that the CircleCI app is not used, only the config instructions below are used for code signing in 2.0.
+
+**Note**: If you would like to proceed without using Fastlane Match, [this blog post](https://medium.com/@m4rr/circleci-2-0-and-the-ios-code-signing-df434d0086e2) provides an overview of how you can do this with CircleCI.
 
 If you have not yet configured your iOS or Mac project on CircleCI 2.0,
 you can find the configuration instructions in the [Testing iOS Applications on macOS document]({{ site.baseurl }}/2.0/testing-ios/).
@@ -105,6 +107,14 @@ Keys -> Add user key** and click *Authorize with GitHub*.
 **Note:** This action will give the CircleCI project the
 same GitHub permissions as the user who will be clicking the *Authorize
 with GitHub* button.
+
+In your `Matchfile`, the `git_url` should be an **SSH** URL ( in the `git@github.com:...` format), rather than a **HTTPS** URL. Otherwise you may see authentication errors when you attempt to use match. For example:
+
+```
+git_url("git@github.com:fastlane/certificates")
+app_identifier("tools.fastlane.app")
+username("user@fastlane.tools")
+```
 
 It is best practice to create a machine user with access to just the
 project repo and the keys repo, and use that machine user to create a
@@ -244,6 +254,8 @@ workflows:
           requires:
             - build-and-test
 ```
+
+By setting the `FL_OUTPUT_DIR:` env, that will tell Fastlane to output the XCode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
 
 ## Example Application on GitHub
 

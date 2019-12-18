@@ -68,16 +68,17 @@ jobs: # a collection of steps
           command: bundle -v
 
       # Restore bundle cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
       - restore_cache:
           keys:
             - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
             - rails-demo-bundle-v2-
 
-      - run:
+      - run: # Install Ruby dependencies
           name: Bundle Install
-          command: bundle check || bundle install
+          command: bundle check --path vendor/bundle || bundle install --deployment
 
-      # Store bundle cache
+      # Store bundle cache for Ruby dependencies
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
@@ -117,9 +118,9 @@ jobs: # a collection of steps
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
       # Save test results for timing analysis
-      - store_test_results:
+      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
 ```
 
 {% endraw %}
@@ -138,7 +139,8 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
-Start with the version.
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
+This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
@@ -201,7 +203,7 @@ steps:
 
 This step tells CircleCI to checkout the project code into the working directory.
 
-Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.
+Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.  Using the `--deployment` flag for `bundle install` installs into `./vendor/bundle` rather than a system location. 
 
 {% raw %}
 ```yaml
@@ -216,7 +218,7 @@ steps:
 
   - run:
       name: Bundle Install
-      command: bundle check || bundle install
+      command: bundle check --path vendor/bundle || bundle install --deployment
 
   # Store bundle cache
   - save_cache:

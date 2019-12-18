@@ -6,7 +6,7 @@ categories: [migration]
 Order: 60
 ---
 
-This document provides an overview of using GitHub or Bitbucket with CircleCI in the following sections:
+This document provides an overview of using GitHub, GitHub Enterprise, or Bitbucket Cloud with CircleCI in the following sections:
 
 * TOC
 {:toc}
@@ -14,24 +14,24 @@ This document provides an overview of using GitHub or Bitbucket with CircleCI in
 ## Overview
 {:.no_toc}
 
-When you add a project to CircleCI, the following GitHub or Bitbucket settings are added to the repository using the permissions you gave CircleCI when you signed up:
-- A **deploy key** that is used to check out your project from GitHub or Bitbucket.
-- A **service hook** that is used to notify CircleCI when you push to GitHub or Bitbucket.
+When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
+- A **deploy key** that is used to check out your project from GitHub or Bitbucket Cloud.
+- A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket Cloud.
 
 CircleCI builds push hooks by default. So, builds are triggered for all push hooks for the repository and PUSH is the most common case of triggering a build.
 
 There are some additional, less common cases where CircleCI uses hooks, as follows:
-- CircleCI processes PR hooks to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
+- CircleCI processes PR hooks (Pull Request Hooks) to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
-It is possible to edit the webhooks in GitHub or Bitbucket to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
+It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
 ### Add a .circleci/config.yml File
 {:.no_toc}
 
-After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
+After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
 
 ```yaml
 jobs:
@@ -46,7 +46,7 @@ jobs:
           bundle exec cucumber
 ```
         
-CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard){:rel="nofollow"} or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket as shown in the following screenshot for a commit from user keybits:
+CircleCI runs your tests on a clean container every time so that your code is never accessible to other users and the tests are fresh each time you push. Watch your tests update in real-time on [your dashboard](https://circleci.com/dashboard){:rel="nofollow"} or get status when CircleCI sends you a notification email after the job finishes. Status badges also appear on GitHub or Bitbucket Cloud as shown in the following screenshot for a commit from user keybits:
 
 ![Status Badge After Commit]({{ site.baseurl }}/assets/img/docs/status_badge.png)
 
@@ -54,9 +54,24 @@ Integrated status also appears on the pull request screen, to show that all test
 
 ![Status Badge After PR]({{ site.baseurl }}/assets/img/docs/status_check.png)
 
+## Best Practices for Keys
+
+- Use Deploy Keys whenever possible.
+- When Deploy Keys cannot be used, Machine User Keys must be used, and have their access restricted to the most limited set of repos and permissions necessary.
+- Never use non-Machine user keys (keys should be associated with the build, not with a specific person).
+- You must rotate the Deploy or User key as part of revoking user access to that repo.
+    1. After revoking the user’s access in github, delete keys in GitHub.
+    2. Delete the keys in the CircleCI project.
+    3. Regenerate the keys in CircleCI project.
+- Ensure no developer has access to a build in a repo with a User Key that requires more access than they have.
+
+
 ## Enable Your Project to Check Out Additional Private Repositories
 
-If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only _one_ repository while a GitHub user key has access to _all_ of your GitHub repositories.
+If your testing process refers to multiple repositories, CircleCI will need a
+GitHub user key in addition to the deploy key because each deploy key is valid
+for only _one_ repository while a GitHub user key has access to _all_ of your
+GitHub repositories. Refer to the [adding ssh keys]({{ site.baseurl }}/2.0/add-ssh-key) document to learn more.
 
 Provide CircleCI with a GitHub user key on your project's
 **Project Settings > Checkout SSH keys** page.
@@ -86,10 +101,10 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
-## Creating a Machine User
+## Controlling Access Via a Machine User
 
 For fine-grained access to multiple repositories,
-consider creating a machine user
+it is best practice to create a machine user
 for your CircleCI projects.
 A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user
 that you create for running automated tasks.
@@ -193,16 +208,21 @@ The account and permissions system we use is not as clear as we would like and a
 
 ## Deployment Keys and User Keys
 
-When you add a new project,
-CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project.
-To prevent CircleCI from pushing to your repository,
-this deployment key is read-only.
+**What is a deploy key?**
 
-If you want to push to the repository from your builds,
-you will need a deployment key with write access (user key).
-The steps to create a user key depend on your VCS.
+When you add a new project, CircleCI creates a deployment key on the web-based
+VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH
+key. If you are using GitHub as your VCS then GitHub has the public key, and
+CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
+To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
-### Creating a GitHub User Key
+If you want to push to the repository from your builds, you will need a deployment key with write access (user key). The steps to create a user key depend on your VCS.
+
+**What is a user key?**
+
+A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
+
+### Creating a GitHub Deploy Key
 {:.no_toc}
 
 In this example,
@@ -212,6 +232,8 @@ and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circ
 1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 When prompted to enter a passphrase,
 do **not** enter one.
+
+**Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
 
 2. Go to `https://github.com/you/test-repo/settings/keys`,
 and click "Add deploy key".
@@ -281,5 +303,58 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-When you push to your Bitbucket project from a job,
-CircleCI will use the SSH key you added.
+### How are these keys used?
+
+When CircleCI builds your project, the private key is installed into the `.ssh`
+directory and SSH is subsequently configured to communicate with your version
+control provider. Therefore, the private key is used for:
+
+- checking out the main project
+- checking out any GitHub-hosted submodules
+- checking out any GitHub-hosted private dependencies
+- automatic git merging/tagging/etc.
+
+For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
+
+### What about security?
+
+The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
+
+**Isn't there a difference between deploy keys and user keys?**
+
+Deploy keys and user keys are the only key types that GitHub supports. Deploy
+keys are globally unique (for example, no mechanism exists to make a deploy key with
+access to multiple repositories) and user keys have no notion of _scope_
+separate from the user associated with them.
+
+To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
+
+## Establishing the authenticity of an SSH host
+
+When using SSH keys to checkout repositories, it may be neccesary to add the 
+fingerprints for GitHub or BitBucket to a "known hosts" file 
+(`~/.ssh/known_hosts`) so that the executor can verify that the host it's
+connecting to is authentic. The `checkout`job step does this automatically, so 
+the following command will need to be used if you opt to use a custom checkout
+command.
+
+```
+mkdir -p ~/.ssh
+
+echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+' >> ~/.ssh/known_hosts
+```
+
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then 
+adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your
+job. You can see this in action here:
+
+```
+➜  ~ ssh-keyscan github.com           
+# github.com:22 SSH-2.0-babeld-2e9d163d
+github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+# github.com:22 SSH-2.0-babeld-2e9d163d
+# github.com:22 SSH-2.0-babeld-2e9d163d
+➜  ~ ✗ 
+```

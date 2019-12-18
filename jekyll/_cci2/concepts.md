@@ -42,10 +42,10 @@ Steps are actions that need to be taken to perform your job. Steps are usually a
 ## Image
 
 An image is a packaged system that has the instructions for creating a running container. 
- The Primary Container is defined by the first image listed in `.circleci/config.yml` file. This is where commands are executed for jobs using the Docker executor.
+ The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
 
  ```yaml
- version 2
+ version: 2
  jobs:
    build1: # job name
      docker: # Specifies the primary container image,
@@ -78,7 +78,7 @@ An image is a packaged system that has the instructions for creating a running c
 
 ## Jobs
 
-Jobs are a collection of steps and each job must declare an executor that is either `docker`, `machine`, or `macos`. Machine includes a default image if not specified, for Docker and macOS, you must also declare an image.
+Jobs are collections of [steps](#steps). Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
 
@@ -168,13 +168,13 @@ workflows:
     jobs:
       - build1
       - build2:
-        requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # see circleci.com/docs/2.0/workflows/ for more examples.
+          requires:
+             - build1 # wait for build1 job to complete successfully before starting
+             # see circleci.com/docs/2.0/workflows/ for more examples.
       - build3:
-        requires:
-           - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 in parallel to save time.
+          requires:
+             - build1 # wait for build1 job to complete successfully before starting
+             # run build2 and build3 in parallel to save time.
 ```
 {% endraw %}
 
