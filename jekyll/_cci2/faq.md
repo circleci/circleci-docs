@@ -89,7 +89,7 @@ A **usage queue** forms when an organization lacks the containers to run a build
 
 A **run queue** forms when CircleCI experiences high demand. Customer builds are placed in a run queue and processed as machines become available.
 
-In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
+In other words, you can reduce time spent in a **usage queue** by [purchasing more containers](#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing), but time spent in a **run queue** is unavoidable (though CircleCI aims to keep this as low as possible).
 
 ### Why are my builds queuing even though I'm on Performance Plan?
 {:.no_toc}
@@ -272,10 +272,19 @@ Every month, you are charged for your selected credit package at the beginning o
 {:.no_toc}
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
+
 - Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user.
-- Compute is paid for monthly in credits for the machine size and duration you use.
+- Compute is paid for monthly in credits for the machine size and duration you use:
+  - Credits are sold in packages of 25,000 at $15 each.
+  - Credits rollover each month and expire after one year.
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
+
+  
+#### Why does CircleCI have per-active-user pricing? 
+{:.no_toc}
+
+Credit usage covers access to compute. We prefer to keep usage costs as low as possible to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost.
 
 #### What constitutes an _Active User_?
 {:.no_toc}
@@ -290,11 +299,15 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 
 **Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
+To find a list of your Active User's, Log in to the CircleCI web app > click `Settings` > click `Plan Usage` > click on the `Users` tab.
+
 #### What happens when I run out of credits?
 {:.no_toc}
 
 On the Performance plan, when you reach 10% of your remaining credits, you will
-be refilled 25% of your credits. For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits when you reach 2,500 remaining credits.
+be refilled 25% of your credit subscription (at 25% the cost of your plan). For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits (at $.0006 each) when you reach 2,500 remaining credits.
+
+If you notice that your account is receiving repeated refills, you can review your credit usage by navigating to the settings tab of your account and clicking on “Plan Usage."
 
 #### Do credits expire?
 {:.no_toc}
@@ -330,14 +343,38 @@ credits per month to use on macOS open source builds. For access to this,
 contact our team at billing@circleci.com. Free credits for macOS open source
 builds can be used on a maximum of 2 concurrent jobs per organization.
 
-
 #### I currently get free credits for open source projects on my container plan. How do I get discounts for open source on the Performance plan?
 {:.no_toc}
 
 We still offer discounts for open source on our paid usage plans! Please [open a
 support ticket](https://support.circleci.com/hc/en-us) to talk to our team about customizing your plan for open source projects.
 
+#### Why does CircleCI charge for Docker layer caching? 
+{:.no_toc}
+ 
+Docker layer caching (DLC) reduces build times on pipelines where Docker images are
+built by only rebuilding Docker layers that have changed (read more about DLC
+[here]({{site.baseurl}})/2.0/docker-layer-caching). DLC costs 200 credits per
+job run.
 
+There are a few things that CircleCI does to ensure DLC is available to
+customers. We use solid-state drives and replicate the cache across zones to
+make sure DLC is available. We will also increase the cache as needed in order
+to manage concurrent requests and make DLC available for your jobs. All of these
+optimizations incur additional cost for CircleCI with our compute providers,
+which pass along to customers when they use DLC.
+
+To estimate your DLC cost, look at the jobs in your config file with Docker
+layer caching enabled, and the number of Docker images you are building in those
+jobs. There are cases where a job can be written once in a config file but the
+job runs multiple times in a pipeline, for example, with parallelism enabled.
+
+Note that the benefits of Docker layer caching are only apparent on pipelines
+that are building Docker images, and reduces image build times by reusing the
+unchanged layers of the application image built during your job. If your
+pipeline does not include a job where Docker images are built, Docker layer
+caching will provide no benefit.
+ 
 ---
 
 ### Container Based Plans
@@ -354,7 +391,7 @@ Users will be alerted in-app as they approach the limit and upon passing their r
 
 Reach out to billing@circleci.com with any additional questions.
 
-#### How do I upgrade my plan with more containers to prevent queuing?
+#### How do I upgrade my container plan with more containers to prevent queuing?
 {:.no_toc}
 * Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
 

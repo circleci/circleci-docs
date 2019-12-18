@@ -8,7 +8,7 @@ order: 70
 ---
 
 Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
-the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 credits per build) and on installations of [CircleCI Server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
+the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 credits per job run) and on installations of [CircleCI Server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 * TOC
 {:toc}

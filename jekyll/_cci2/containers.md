@@ -27,4 +27,4 @@ Open source projects include three additional free containers to run jobs in par
 
 ## Upgrading
 
-Refer to the [FAQ about upgrading]({{ site.baseurl }}/2.0/faq/#how-do-i-upgrade-my-plan-with-more-containers-to-prevent-queuing) for step-by-step instructions to upgrade your plan.
+Refer to the [FAQ about upgrading]({{ site.baseurl }}/2.0/faq/#how-do-i-upgrade-my-container-plan-with-more-containers-to-prevent-queuing) for step-by-step instructions to upgrade your plan.
