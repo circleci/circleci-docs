@@ -274,7 +274,7 @@ en:
           link: 2.0/configuration-reference/
         - name: API Reference
           link: api/
-        - name: API V2 Introduction
+        - name: API v2 Introduction
           link: 2.0/api-intro/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
