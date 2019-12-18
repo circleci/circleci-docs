@@ -1,331 +1,14 @@
----
-layout: classic-docs
-title: "Configuring CircleCI"
-short-title: "Configuring CircleCI"
-description: "Reference for .circleci/config.yml"
-categories: [configuring-jobs]
-order: 20
----
-
-This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
-
-You can see a complete `config.yml` in our [full example](#full-example).
-
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
-
----
-
-## Table of Contents
-{:.no_toc}
-
-* TOC
-{:toc}
-
----
-
-## **`version`**
-
-Key | Required | Type | Description
-----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
-{: class="table table-striped"}
-
-The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
-
-## **`orbs`** (requires version: 2.1)
-
-Key | Required | Type | Description
-----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
-commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
-{: class="table table-striped"}
-
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
-
-```
-version: 2.1
-orbs:
-    hello: circleci/hello-build@0.0.5
-workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
-```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
-
-## **`commands`** (requires version: 2.1)
-
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
-
-Key | Required | Type | Description
-----|-----------|------|------------
-steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details.
-description | N | String | A string that describes the purpose of the command.
-{: class="table table-striped"}
-
-Example:
-
-```yaml
-commands:
-  sayhello:
-    description: "A very simple command for demonstration purposes"
-    parameters:
-      to:
-        type: string
-        default: "Hello World"
-    steps:
-      - run: echo << parameters.to >>
-```
-
-## **`parameters`** (requires version: 2.1)
-Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details. 
-
-Key | Required  | Type | Description
-----|-----------|------|------------
-parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
-{: class="table table-striped"}
-
-## **`executors`** (requires version: 2.1)
-
-Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
-
-Key | Required | Type | Description
-----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
-macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
-shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-working_directory | N | String | In which directory to run the steps.
-environment | N | Map | A map of environment variable names and values.
-{: class="table table-striped"}
-
-Example:
-
-```yaml
-version: 2.1
-executors:
-  my-executor:
-    docker:
-      - image: circleci/ruby:2.5.1-node-browsers
-
-jobs:
-  my-job:
-    executor: my-executor
-    steps:
-      - run: echo outside the executor
-```
-
-See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
-
-## **`jobs`**
-
-A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
-
-If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
-
-If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
-
-**Note:**
-Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
-
-### **<`job_name`>**
-
-Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
-
-Key | Required | Type | Description
-----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
-macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-steps | Y | List | A list of [steps](#steps) to be performed
-working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
-parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
-environment | N | Map | A map of environment variable names and values.
-branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
-{: class="table table-striped"}
-
-<sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
-
-#### `environment`
-A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
-
-#### `parallelism`
-
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
-
-`working_directory` will be created automatically if it doesn't exist.
-
-Example:
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 3
-    resource_class: large
-    working_directory: ~/my-app
-    steps:
-      - run: go test -v $(go list ./... | circleci tests split)
-```
-
-#### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
-
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
-
-#### `docker`
-{:.no_toc}
-
-Configured by `docker` key which takes a list of maps:
-
-Key | Required | Type | Description
-----|-----------|------|------------
-image | Y | String | The name of a custom docker image to use
-name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
-entrypoint | N | String or List | The command used as executable when launching the container
-command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
-user | N | String | Which user to run commands as within the Docker container
-environment | N | Map | A map of environment variable names and values
-auth | N | Map | Authentication for registries using standard `docker login` credentials
-aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
-{: class="table table-striped"}
-
-The first `image` listed in the file defines the primary container image where all steps will run.
-
-`entrypoint` overrides default entrypoint from Dockerfile.
-
-`command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
-
-For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time all `steps` run in the primary container only.
-
-`name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
-
-The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
-
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
-
-Example:
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty # primary container
-        environment:
-          ENV: CI
-
-      - image: mongo:2.6.8
-        command: [--smallfiles]
-
-      - image: postgres:9.4.1
-        environment:
-          POSTGRES_USER: root
-
-      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-```
-
-If you are using a private image, you can specify the username and password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
-
-```yaml
-jobs:
-  build:
-    docker:
-      - image: acme-private/private-image:321
-        auth:
-          username: mydockerhub-user  # can specify string literal values
-          password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
-```
-
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
-
-```
-jobs:
-  build:
-    docker:
-      - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
-        aws_auth:
-          aws_access_key_id: AKIAQWERVA  # can specify string literal values
-          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
-```
-
-It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
-
-```
-jobs:
-  myjob:
-    docker:
-      - image: "circleci/node:9.6.1"
-    steps:
-      - sayhello:
-          to: "Lev"
-```
-
-#### **`machine`**
-{:.no_toc}
-
-The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
-
-Key | Required | Type | Description
-----|-----------|------|------------
-image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
-{: class="table table-striped"}
-
-
-Example:
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    machine:
-      image: ubuntu-1604:201903-01
-    steps:
-      - checkout
-      - run:
-          name: "Testing"
-          command: echo "Hi"
-```
-
-##### Available `machine` images
-CircleCI supports multiple machine images that can be specified in the `image` field:
-
-* `ubuntu-1604:201903-01` - Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
-* `circleci/classic:latest` (old default) - an Ubuntu version `14.04` image that includes Docker version `17.09.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image. Changes to the `latest` image are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance. Ubuntu 14.04 is now End-of-Life'd. We suggest using the Ubuntu 16.04 image.
-* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.10.0-ce` and docker-compose version `1.16.1`, along with common language tools found in CircleCI 1.0 build image.
-* `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
-* `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
-* `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
-* `circleci/classic:201709-01` – docker 17.07.0-ce, docker-compose 1.14.0
-* `circleci/classic:201710-01` – docker 17.09.0-ce, docker-compose 1.14.0
-* `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
-* `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
-* `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
-
-The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
-
-**Example**
-
-```yaml
-version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
-jobs:
-  build:
+build:
     machine:
       image: ubuntu-1604:201903-01
       docker_layer_caching: true    # default - false
 ```
+
+##### Available Linux GPU executor images
+When using the [GPU executor]({{ site.baseurl }}/2.0/configuration-reference/#gpu-executor-linux), the available images are:
+
+* `ubuntu-1604-cuda-10.1:201909-23` - CUDA 10.1, docker 19.03.0-ce, nvidia-docker 2.2.2
+* `ubuntu-1604-cuda-9.2:201909-23` - CUDA 9.2, docker 19.03.0-ce, nvidia-docker 2.2.2
 
 #### **`macos`**
 {:.no_toc}
@@ -351,7 +34,6 @@ jobs:
 
 CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
 
-
 **Example:** Use a windows executor to run a simple job.
 
 ```yaml
@@ -367,6 +49,11 @@ jobs:
       - checkout
       - run: echo 'Hello, Windows'
 ```
+
+##### Available Windows GPU executor image
+When using the [Windows GPU executor]({{ site.baseurl }}/2.0/configuration-reference/#gpu-executor-windows), the available image is:
+
+* `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1
 
 #### **`branches`**
 
@@ -504,12 +191,41 @@ jobs:
 
 ##### GPU Executor (Linux)
 
-Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
------------------|-------|--------------|------|-----------------
-1GPU\*           | 16    | 122GiB       | 1    | 8
-2GPU\*           | 32    | 244GiB       | 2    | 16
-4GPU\*           | 64    | 488GiB       | 4    | 32
+Class               | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+--------------------|-------|-----|------|-----------------|------------------
+gpu.nvidia.small\*  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
+gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: gpu.nvidia.small
+    steps:
+      ... // other config
+```
+
+##### GPU Executor (Windows)
+
+Class                       | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+----------------------------|-------|-----|------|-----------------|------------------
+windows.gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: windows.gpu.nvidia.small
+    image: windows-server-2019-nvidia:stable
+    steps:
+      ... // other config
+```
+
+\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
