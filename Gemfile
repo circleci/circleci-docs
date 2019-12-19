@@ -4,7 +4,7 @@ ruby '2.6.3'
 
 gem 'jekyll', "3.8.6"
 gem 'html-proofer', '>= 3.11.1'
-gem "rack", ">= 2.0.6"
+gem "rack", ">= 2.0.8"
 gem 'asciidoctor'
 gem 'asciidoctor-pdf', '~> 1.5.0.beta.5'
 gem 'pygments.rb', '~> 1.1.2'
