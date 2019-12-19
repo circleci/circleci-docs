@@ -7,4 +7,4 @@
 For more detailed information on pipelines and how you can use their properties in your workflows and jobs, please see the following guides: 
 * [Transitioning to Pipelines]({{ site.baseurl }}/2.0/build-processing/#transitioning-to-pipelines)
 * [Viewing Pipelines in the UI]({{ site.baseurl }}/2.0/pipelines/#overview)
-* [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/#section=configuration)
+* [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/)
