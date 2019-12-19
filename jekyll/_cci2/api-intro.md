@@ -50,7 +50,7 @@ The CircleCI API v2 enables users to be authenticated by simply sending your API
 
 ### Pipelines
 
-The CircleCI API v2 includes the use of pipelines to assist you in triggering workflows from the CircleCI API. By enabling pipelines, you can take advantage of specific API use cases such as:
+The CircleCI API v2 includes the use of pipelines to assist you in triggering workflows from the CircleCI API. By enabling pipelines, you can take advantage of the following:
 
 {% include snippets/pipelines-benefits.adoc %}
 
