@@ -21,10 +21,9 @@ Most projects will have Pipelines enabled by default. Verify the project pipelin
 
 The pipelines feature enables use of the new [API endpoint to trigger builds with workflows](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) and the following use cases:
 
-- New API endpoint to trigger builds, including running all workflows in the build.
-- Jobs named `build` will be wrapped in a workflows stanza by the processor.
-- Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch.
-- Use of configuration version 2.1 or higher requires pipelines to be turned on.
+- Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/2.0/pipeline-variables/#conditional-workflows).
+- Include [resuable config]({{ site.baseurl }}/2.0/reusing-config/) elements, including executors, commands, jobs, as well as packaged resuable config, known as [orbs](https://circleci.com/orbs/).
+- You can now enable auto-cancel, within **Advanced Settings**, to abort workflows when new builds are triggered on non-default branches.
 
 **Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
