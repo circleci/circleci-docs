@@ -50,16 +50,9 @@ The CircleCI API v2 enables users to be authenticated by simply sending your API
 
 ### Pipelines
 
-The CircleCI API v2 includes the use of pipelines to assist you in triggering workflows from the CircleCI API. By enabling pipelines, you can take advantage of specific API use cases such as:
+The CircleCI API v2 requires you to enable pipelines on your project. By enabling pipelines, you can also take advantage of the following:
 
-- Use Pipeline parameters to trigger [conditional workflows](https://circleci.com/docs/2.0/pipeline-variables/#conditional-workflows).
-- API v2 triggering works with v2.1 config, allowing use of reusable config elements, including orbs.
-- You can now enable auto-cancel, within **Advanced Settings**, to abort workflows when new builds are triggered on non-default branches.
-
-For more detailed information on pipelines and how you can use them in your workflows and jobs, please see the following guides: 
-* [Enabling and Transitioning to Pipelines](https://circleci.com/docs/2.0/build-processing/) guide.
-* [Viewing Pipelines in the UI](https://circleci.com/docs/2.0/pipelines/#overview)
-* [Pipeline Variables](https://circleci.com/docs/2.0/pipeline-variables/#section=configuration)
+{% include snippets/pipelines-benefits.adoc %}
 
 #### Triggering a Pipeline with Parameters Example
 
