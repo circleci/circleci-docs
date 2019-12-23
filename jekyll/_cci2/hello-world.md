@@ -75,7 +75,7 @@ Using the basics from the Linux, Android, and macOS examples above, you can add 
 
 ```
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.3.0
 
 jobs:
   build-windows:

@@ -162,7 +162,7 @@ Using the `windows` executor allows you to run your job in a Windows environment
 version: 2.1 # Use version 2.1 to enable Orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.3.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job

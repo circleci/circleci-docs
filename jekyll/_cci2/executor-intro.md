@@ -78,7 +78,7 @@ The syntax for using the Windows executor in your config differs depending on wh
 version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+  win: circleci/windows@2.3.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job
