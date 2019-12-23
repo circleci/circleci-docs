@@ -40,7 +40,7 @@ CircleCI supports running jobs on Windows. To run a job on a Windows machine, yo
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 
 jobs:
   build:
@@ -129,6 +129,9 @@ jobs:
       ... // other config
 ```
 
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the Docker resource classes. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
+
 ##### Machine Executor (Linux)
 
 Class            | vCPUs | RAM
@@ -171,16 +174,16 @@ jobs:
 Class             | vCPUs | RAM
 ------------------|-------|-----
 medium (default)  | 4     | 15GB
+large             | 8     | 30GB
+xlarge            | 16    | 60GB
 {: class="table table-striped"}
-
-There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
 
 ###### Example Usage
 ```yaml
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 
 jobs:
   build:
@@ -216,13 +219,17 @@ windows.gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 
 ###### Example Usage
 ```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
 jobs:
   build:
-    machine: true
-    resource_class: windows.gpu.nvidia.small
-    image: windows-server-2019-nvidia:stable
+    executor: win/gpu-nvidia
     steps:
-      ... // other config
+      - checkout
+      - run: echo 'Hello, Nvidia GPU on Windows'
 ```
 
 \* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
