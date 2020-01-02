@@ -1,7 +1,7 @@
 * Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/2.0/pipeline-variables/#conditional-workflows).
 * Access to `version 2.1` config, which provides:
-    * [Resuable config]({{ site.baseurl }}/2.0/reusing-config/) elements, including executors, commands and jobs.
-    * Packaged resuable config, known as [orbs](https://circleci.com/orbs/).
+    * [Reusable config]({{ site.baseurl }}/2.0/reusing-config/) elements, including executors, commands and jobs.
+    * Packaged reusable config, known as [orbs](https://circleci.com/orbs/).
     * Improved config validation error messages.
 - You can now enable auto-cancel, within **Advanced Settings**, to abort workflows when new builds are triggered on non-default branches.
 
