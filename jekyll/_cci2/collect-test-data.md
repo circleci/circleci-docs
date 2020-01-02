@@ -340,14 +340,14 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
           name: run tests
           command: |
             . venv/bin/activate
-            mkdir test-reports
-            pytest --junitxml=test-reports/junit.xml
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml
 
       - store_test_results:
-          path: test-reports
+          path: test-results
 
       - store_artifacts:
-          path: test-reports    
+          path: test-results    
 ```
 
 
