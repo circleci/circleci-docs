@@ -11,6 +11,8 @@ This document describes the basics of using credits with CircleCI. If you are on
 
 The CircleCI credit-based usage plans enable you to only pay for what you use, while also providing flexibility in customizing and scaling your team's CI solution. Credits are consumed by the second at varying rates according to what build configuration you use.
 
+**NOTE:** Any prices referenced in this document do not include applicable taxes.
+
 The right plan for you and your team will depend on several factors:
 
 - How many users are on your team

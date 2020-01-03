@@ -9,6 +9,8 @@ This document describes the basics of containers and how to leverage the contain
 
 You can read about the new usage-based plans in detail [in this document]({{ site.baseurl }}/2.0/credits/).
 
+**NOTE:** Any prices referenced in this document do not include applicable taxes.
+
 ## Overview
 
 Every change committed to your version control system triggers CircleCI to checkout your code and run your job workflow inside a fresh, on-demand, isolated container with access to the following, depending on your plan:
