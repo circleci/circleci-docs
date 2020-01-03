@@ -43,7 +43,6 @@ The currently available Xcode versions are:
  `9.4.1`  | Xcode 9.4.1 (Build 9F2000)      | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
  `9.3.1`  | Xcode 9.3.1 (Build 9E501)       | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
  `9.0.1`  | Xcode 9.0.1 (Build 9A1004)      | macOS 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
- `8.3.3`  | Xcode 8.3.3 (Build 8E3004b)     | macOS 10.12.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2098/index.html)
 {: class="table table-striped"}
 
 ## Getting Started
@@ -518,10 +517,10 @@ projects. Here are the most frequent of those:
   a few different versions of Xcode in each build
   image and keep those updated with the latest point releases. For version `10.0.0`,
   you must specify the full version, down to the point release number. However,
-  to use the latest Xcode 8.3, for example, which is `8.3.3`, it is
-  sufficient to specify `8.3` in your `config.yml`. If a newer point
-  release of 8.3 comes out, we will make that one available under the same
-  `8.3` version on CircleCI.
+  to use the latest Xcode 11.3.0, for example, which is `11.3.0`, it is
+  sufficient to specify `11.3` in your `config.yml`. If a newer point
+  release of 11.3 comes out, we will make that one available under the same
+  `11.3` version on CircleCI.
 
 * **Dependency version mismatches.** If you see that the version of the
   dependencies used in a job are not the expected ones, please try
