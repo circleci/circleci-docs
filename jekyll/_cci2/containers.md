@@ -9,7 +9,6 @@ This document describes the basics of containers and how to leverage the contain
 
 You can read about the new usage-based plans in detail [in this document]({{ site.baseurl }}/2.0/credits/).
 
-**NOTE:** Any prices referenced in this document do not include applicable taxes.
 
 ## Overview
 

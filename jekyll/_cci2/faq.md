@@ -273,9 +273,9 @@ Every month, you are charged for your selected credit package at the beginning o
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
 
-- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user.
+- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user (not including applicable taxes).
 - Compute is paid for monthly in credits for the machine size and duration you use:
-  - Credits are sold in packages of 25,000 at $15 each.
+  - Credits are sold in packages of 25,000 at $15 each (not including applicable taxes).
   - Credits rollover each month and expire after one year.
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
@@ -305,7 +305,10 @@ To find a list of your Active User's, Log in to the CircleCI web app > click `Se
 {:.no_toc}
 
 On the Performance plan, when you reach 10% of your remaining credits, you will
-be refilled 25% of your credit subscription (at 25% the cost of your plan). For example, If your monthly package size is 25,000 credits, you will automatically be refilled 6,250 credits (at $.0006 each) when you reach 2,500 remaining credits.
+be refilled 25% of your credit subscription (at 25% the cost of your plan). For
+example, If your monthly package size is 25,000 credits, you will automatically
+be refilled 6,250 credits (at $.0006 each, not including applicable taxes) when
+you reach 2,500 remaining credits.
 
 If you notice that your account is receiving repeated refills, you can review your credit usage by navigating to the settings tab of your account and clicking on “Plan Usage."
 
