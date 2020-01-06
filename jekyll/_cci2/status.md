@@ -17,7 +17,7 @@ Integrations enable you to [include status badges in other web pages]({{ site.ba
 
 Queuing |
 ------------------------|------------------
-If your jobs are queuing, you can switch to either a [performance or custom plan](https://circleci.com/pricing/). For further infomration see our guide to [using credits]({{ site.baseurl }}/2.0/credits/). |  
+If your jobs are queuing, you can switch to either a [performance or custom plan](https://circleci.com/pricing/). For further information see our guide to [using credits]({{ site.baseurl }}/2.0/credits/). |
 
 <hr>
 
