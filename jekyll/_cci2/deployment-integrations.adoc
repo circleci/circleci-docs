@@ -5,51 +5,62 @@
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is treated just the same as any other job configuration, meaning you can configure your project to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+Deployment at CircleCI is treated just the same as any other job configuration, meaning you can create a deployment job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
 [discrete]
 == Overview
 
-Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. CircleCI can be configured to deploy to any target, and can be easily configured to integrate with other services for processes such as UI QA/testing, feature management tools, multiple deployment targets (for example, staging/production). Quickly and easily customize your config to match your deployment strategy, whether a fully automated process or elements of manual approval are required.
-
+Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. CircleCI can be configured to deploy to any target, and can be easily configured to integrate with other services for processes such as UI QA/testing, feature management tools, multiple deployment targets. Quickly and easily customize your config to match your deployment strategy, whether a fully automated process or elements of manual approval are required.
+//// 
 .Deployment
 image::pipeline-to-deployment.png[Deployment]
+////
+=== Using Orbs to Simplify Deploys
 
-=== Simple Deployments Using Orbs
+https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any requires environment variables/SSH keys within your project, will get you the results you need with no further configuration. 
 
-Orbs are available for many common deployment targets to help simplify and streamline your config. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any requires environment variables/SSH keys within your project, will get you the results you need with no further configuration. 
+As an example, consider the https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
+
+```yaml
+version: 2.1
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@0.0.11
+workflows:
+  deploy_application:
+    jobs:
+      - aws-code-deploy/deploy:
+          application-name: myApplication
+          deployment-group: myDeploymentGroup
+          service-role-arn: myDeploymentGroupRoleARN
+          bundle-bucket: myApplicationS3Bucket
+          bundle-key: myS3BucketKey
+```
+
+Under the hood, this orb creates, bundles and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
 === A Simple Example Using Heroku
 
-Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository].
+Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
 ```yaml
-version: 2
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: sequential-branch-filter
+version: 2.0
 
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4-node-jessie
+      - image: circleci/ruby:2.4-node
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
-      - run: bundle install --path vendor/bundle  # install dependencies
-      - run: bundle exec rake db:create db:schema:load  # setup database
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+
+      # Database setup
+      - run: bundle exec rake db:create db:schema:load
+
       - run:
           name: Run tests
           command: rake
@@ -63,24 +74,39 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
-```
+          name: Setup Heroku
+          command: bash .circleci/setup-heroku.sh
 
-The configuration uses {{ site.baseurl }}/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by [using workspaces]({{ site.baseurl }}/2.0/workflows/#using-workspaces-to-share-data-among-jobs). For more information on conditional deploys, see [Using Contexts and Filtering in your Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows).
+      - run:
+          command: |
+            git push heroku sequential-branch-filter:master
+            heroku run rake db:migrate
+            sleep 5 # sleep for 5 seconds to wait for dynos
+            heroku restart
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: sequential-branch-filter
+```
 
 Below is the same Heroku Deployment example but using the Heroku orb to simplify the configuration:
 
 ```yaml
 version: 2.1
 orbs:
-  heroku: circleci/heroku@0.0.10. # We, CPE should get a major 1.0 release out before docs go live
+  heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
 workflows:
   heroku_deploy:
     jobs:
       - build
-      - heroku/deploy-via-git:
+      - heroku/deploy-via-git: # Use the pre-built deploy-via-git job
           requires:
             - build
           filters:
@@ -117,39 +143,6 @@ environment:
 ```
 +
 Alternatively, the `HEROKU_APP` variable could be defined within you project, via the **Project Settings** page in the UI.
-
-* Another example, using the Heroku orb example above, looking at the [orb's page in the registry](https://circleci.com/orbs/registry/orb/circleci/heroku) we can see that within the orb the `HEROKU_APP_NAME` env var is used, and the single line deployment shown above – `- heroku/deploy-via-git:` – relies on the env var being defined within the project already, but it could also be defined within the config if required, as an orb parameter, using the following customization:
-+
-```yaml
-version: 2.1
-orbs:
-  heroku: circleci/heroku@0.0.10. # We, CPE should get a major 1.0 release out before docs go live
-workflows:
-  heroku_deploy:
-    jobs:
-      - build
-      - deploy_heroku:
-          requires:
-            - build
-          filters:
-            branches:
-              only: sequential-branch-filter
-jobs:
-  build: 
-    docker:
-      - image: circleci/ruby:2.4-node
-      - image: circleci/postgres:9.4.12-alpine
-    working_directory: ~/circleci-demo-workflows
-    steps: # Steps ommitted for brevity
-  deploy_heroku:
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - heroku/deploy-via-git:
-          app-name: "sleepy-refuge-55486"
-```
-
 
 
 
