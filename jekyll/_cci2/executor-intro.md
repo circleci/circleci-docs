@@ -32,7 +32,7 @@ Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/ex
 jobs:
   build: # name of your job
     machine: # executor type
-      image: ubuntu-1604:201903-01 # image includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+      image: ubuntu-1604:201903-01 # # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
 
       steps:
         # Commands run in a Linux virtual machine environment
