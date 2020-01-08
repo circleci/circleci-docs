@@ -27,7 +27,7 @@ You can generate code for the following formats:
 To generate your own status badge, you will need to know and substitute the
 following variables in the code snippets below:
 
-- `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`
+- `<PROJECT_NAME>` - Your project's name. Example: `circleci-docs`.
 - `<ORG_NAME>` - The organization or user name the project in question belongs to.
 - `<VCS>` - your VCS provider (`gh` for "github" and `bb` for BitBucket).
 - `<LINK>` - The link you want the status badge to go to
