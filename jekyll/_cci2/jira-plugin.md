@@ -47,9 +47,9 @@ You're all set to creating quick tickets from your job output page!
 # Viewing Build and Deploy Statuses in Jira 
 
 With CircleCI orbs it is also possible to display your build and deploy status
-in Jira. To do this, you will need to: 
+in Jira Cloud. To do this, you will need to: 
 
-1. Make sure you followed the steps above to connect Jira with CircleCI.
+1. Make sure you followed the steps above to connect Jira Cloud with CircleCI.
 1. Make sure that you are using version `2.1` at the top of your `.circleci/config.yml` file.
 1. If you do not already have pipelines enabled, go to **Project Settings -> Build Settings -> Advanced Settings** and enable them.
 1. To get an API token for build information retrieval, go to **Project Settings -> Permissions -> API Permissions** and create a token with **Scope: all**. Copy the token.
@@ -61,19 +61,19 @@ The example config below provides a bare `config.yml` illustrating the use of th
 
 
 ```yaml
-jobs:
-  build:
-    docker:
-      - image: 'circleci/node:10'
-    steps:
-      - run: echo "hello"
+version: 2.1
 orbs:
   jira: circleci/jira@1.0.5
-version: 2.1
 workflows:
   build:
     jobs:
       - build:
           post-steps:
             - jira/notify
+jobs:
+  build:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - run: echo "hello"
 ```
