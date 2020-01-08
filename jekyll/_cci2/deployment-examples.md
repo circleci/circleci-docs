@@ -23,7 +23,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
-3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
+3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
   
 ```
 version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
@@ -184,6 +184,51 @@ For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs,
 - [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ## Azure
+
+For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page.
+
+1. As a best security practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+
+3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
+  
+```
+version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
+
+orbs:
+  aws-s3: circleci/aws-s3@1.0.12
+
+workflows: # Define a Workflow running the build job, then the deploy job
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master # Only deploys when the commit is on the Master branch
+
+jobs:
+  build:
+    docker:
+      - image: 'circleci/<image-name>'
+  ... # build job steps omitted for brevity
+  deploy:
+    docker:
+      - image: 'circleci/<image-name>'
+  steps:
+      - checkout
+      - aws-s3/sync:
+          from: bucket
+          to: 's3://my-s3-bucket-name/prefix'
+          arguments: | # Optional arguments
+            --acl public-read \
+            --cache-control "max-age=86400"
+          overwrite: true # default is false
+```
 
 To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
