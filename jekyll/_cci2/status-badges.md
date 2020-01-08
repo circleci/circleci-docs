@@ -35,7 +35,7 @@ following variables in the code snippets below:
 - optional: an API token (to create badges for private projects.)
 
 The following examples demonstrate how to generate a status badge for various
-template languages. Each sample also provides an example of a status badge code
+template languages. Each sample also provides an example of status badge code
 for a specific branch.
 
 
