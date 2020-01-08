@@ -105,7 +105,7 @@ version: 2
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01    # pins image to specific version
+      image: ubuntu-1604:201903-01    # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
 ```
 
 {:.tab.machineblock.Server}
@@ -113,22 +113,14 @@ jobs:
 version: 2
 jobs:
   build:
-    machine: true
+    machine: true # uses default image
 ```
 
-The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
-
-**Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
-
-Cloud users can specify other images using the `image` key.
-
-The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
-
-- `circleci/classic:latest`: This is the default image. Changes to this image are announced at least one week in advance.
-- `circleci/classic:edge`: This image receives the latest updates. Changes to this image occur frequently.
-- `circleci/classic:{YYYY-MM}`: This image is pinned to a specific version to prevent breaking changes.
+**Note:** The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
 
 All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
+
+**Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
 
 The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 

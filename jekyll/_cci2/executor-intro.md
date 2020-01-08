@@ -27,11 +27,22 @@ Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/ex
 
 ## Machine
 
+{:.tab.windowsblock.Cloud}
 ```
 jobs:
   build: # name of your job
     machine: # executor type
-      image: circleci/classic:201708-01 # VM will run Ubuntu 14.04 for this release date
+      image: ubuntu-1604:201903-01 # # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+
+      steps:
+        # Commands run in a Linux virtual machine environment
+```
+
+{:.tab.windowsblock.Server}
+```
+jobs:
+  build: # name of your job
+    machine: true # executor type
 
       steps:
         # Commands run in a Linux virtual machine environment
@@ -41,7 +52,7 @@ Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/e
 
 ## macOS
 
-_Available on CircleCI Cloud - not currently available on self-hosted installations of CircleCI Server._
+_Available on CircleCI.com - not currently available on self-hosted installations of CircleCI Server._
 
 ```
 jobs:
