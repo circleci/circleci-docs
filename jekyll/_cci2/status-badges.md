@@ -31,7 +31,7 @@ following variables in the code snippets below:
 - `<ORG_NAME>` - The organization or user name the project in question belongs to.
 - `<VCS>` - your VCS provider (`gh` for "github" and `bb` for BitBucket).
 - `<LINK>` - The link you want the status badge to go to
-  when clicked. Most users will link to their CircleCI build's page.
+  when clicked (example: the pipeline overview page).
 - optional: an API token (to create badges for private projects).
 
 The following examples demonstrate how to generate a status badge for various
