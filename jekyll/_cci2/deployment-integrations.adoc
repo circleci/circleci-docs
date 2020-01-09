@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is treated just the same as any other job configuration, meaning you can create a deployment job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+Deployment at CircleCI is just the same as any other job configuration; you can create a deployment job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
@@ -144,6 +144,5 @@ environment:
 ```
 +
 Alternatively, the `HEROKU_APP` variable could be defined within you project, via the **Project Settings** page in the UI.
-
 
 
