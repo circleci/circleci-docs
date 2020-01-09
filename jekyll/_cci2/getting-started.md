@@ -56,9 +56,7 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list (you can also search for it), then click the **Set Up Project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
-4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. If the language you are using is not in the list, click the "Use Hello World" button at the bottom of the list. Copy the YAML configuration that appears and save it as a file called "config.yml" in a folder named `.circleci` in the root of your repository's directory.
-
-![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
+4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. If the language you are using is not in the list, click the "Use Hello World" button at the bottom of the list. Copy the YAML configuration that appears and save it as a file called "config.yml" in a folder named `.circleci` in the root of your repository's directory. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
 
 5. Git push your new  `config.yml` file to your VCS. You are ready to start building! Click the button "Start Building" and confirm in the modal that your repository is ready to build.
 
