@@ -12,11 +12,12 @@ toc::[]
 [discrete]
 == Overview
 
-Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. CircleCI can be configured to deploy to any target, and can be easily configured to integrate with other services for processes such as UI QA/testing, feature management tools, multiple deployment targets. Quickly and easily customize your config to match your deployment strategy, whether a fully automated process or elements of manual approval are required.
+Once a software application has been developed and tested, it needs to be deployed and made available for its intended audience. CircleCI can be configured to deploy to any target, and can be easily configured to integrate with other services for QA/testing, feature management, deployment strategies such as blue-green or canary deployment. Quickly and easily customize your config to match your deployment strategy, whether a fully automated process or elements of manual approval are required.
 //// 
 .Deployment
 image::pipeline-to-deployment.png[Deployment]
 ////
+
 === Using Orbs to Simplify Deploys
 
 https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any requires environment variables/SSH keys within your project, will get you the results you need with no further configuration. 

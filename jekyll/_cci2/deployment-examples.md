@@ -9,15 +9,15 @@ short-title: "Deployment Examples"
 
 ## Using Orbs for Deployment
 
-CircleCI and its partners have developed several many orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+CircleCI and its partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## AWS
 
-To deploy to AWS S3, follow the steps below. There are two versions of the example configuration, one using `version: 2.1` and orbs, and one without orbs using `version: 2`. Alternatively, to deploy to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
+This section covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy. For an in-depth look at deploying to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
 
-### Deploy to AWS S3 Using Orbs
+### Deploy Using the AWS S3 Orb
 
-For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page.
+For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page. This section details the use of the AWS S3 orb and `version: 2.1` config for simple deployment, below we will look at the same example without orbs and using using `version: 2` config.
 
 1. As a best security practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
@@ -133,9 +133,9 @@ workflows:
           tag: myECRRepoTag
 ```
 
-##### AWS ECS
+### Update an AWS ECS Instance
 
-This orb enables you to update an existing AWS ECS instance.
+Use the AWS ECR and ECS orbs to easily update an existing AWS ECS instance.
 
 ```
 version: 2.1
@@ -158,8 +158,7 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-
-##### AWS CodeDeploy
+### AWS CodeDeploy
 
 The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
 
@@ -183,57 +182,42 @@ For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs,
 - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
 - [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
-## Azure
+## Azure Container Registry
 
-For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page.
+This section describes a simple deployment to the Azure container registry (ACR) using the ACR Orb and version 2.1 CircleCI configuration.
 
-1. As a best security practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+For detailed information about the Azure ACR orb, including all options, refer to the [CircleCI ACR Orb Reference](https://circleci.com/orbs/registry/orb/circleci/azure-acr) page.
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`.
 
-3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
+2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the current branch is `master`.
   
 ```
 version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.12
+  azure-acr: circleci/azure-acr@0.1.4
 
-workflows: # Define a Workflow running the build job, then the deploy job
+workflows: 
   version: 2
   build-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+      - azure/build-and-push-image:
+          dockerfile: <name-of-your-dockerfile> # defaults to `Dockerfile`
+          path: <path-to-your-dockerfile> # Defaults to working directory
+          login-server-name: <your-login-server-name> # e.g. {yourregistryname}.azure.io
+          registry-name: <your-ACR-registry-name>
+          repo: <URI-to-your-login-server-name>
           filters:
             branches:
               only: master # Only deploys when the commit is on the Master branch
-
-jobs:
-  build:
-    docker:
-      - image: 'circleci/<image-name>'
-  ... # build job steps omitted for brevity
-  deploy:
-    docker:
-      - image: 'circleci/<image-name>'
-  steps:
-      - checkout
-      - aws-s3/sync:
-          from: bucket
-          to: 's3://my-s3-bucket-name/prefix'
-          arguments: | # Optional arguments
-            --acl public-read \
-            --cache-control "max-age=86400"
-          overwrite: true # default is false
 ```
 
-To deploy to Azure, use a similar job to the above example that uses an appropriate command. If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
+If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
 ## Capistrano
 
+Integrating CircleCI with Capistrano is simple. Once your project is set up to use Capistrano, just run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
 ```
 version: 2
 jobs:
@@ -248,7 +232,7 @@ jobs:
           name: Bundle Install
           command: bundle check || bundle install
       - run:
-          name: Deploy to AWS if tests pass and branch is Master
+          name: Deploy if tests pass and branch is Master
           command: bundle exec cap production deploy
 workflows:
   version: 2
@@ -257,10 +241,10 @@ workflows:
       - build-job
       - deploy-job:
           requires:
-            - build-job
+            - build-job # Only run deploy job once build job has completed
           filters:
             branches:
-              only: master
+              only: master # Only run deploy job when commit is on the master branch
 ```
 
 ## Cloud Foundry
@@ -392,7 +376,7 @@ If you would like more detailed information about various CloudFoundry orb examp
 
 ## Firebase
 
-Add firebase-tools to the project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
+In order to deploy to Firebase you will need to add `firebase-tools` to your project's devDependencies since attempting to install firebase-tools globally in CircleCI will not work.
 
 ```
 npm install --save-dev firebase-tools
@@ -439,31 +423,6 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 ```
    - run: cd functions && npm install
 ```
-
-### Firebase Orb Example
-
-If you would like to simplify your Firebase configuration workflow, you may use a pre-configured package of configurations (referred to as an "orb") to deploy your application to Firebase. The example below shows this Firebase orb.
-
-```
-version: 2.1
-description: Orb for firebase deploy.
-commands:
-  deploy:
-    description: Deploy to firebase
-    parameters:
-      token:
-        type: string
-        description: Firebase Deploy Token
-    steps:
-      - run:
-          name: Install Firebase Tools
-          command: npm install --prefix=./firebase-deploy firebase-tools
-      - run:
-          name: Deploy to Firebase
-          command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
-```
-
-For more detailed information about how you can use the Firebase orb to deploy your application, refer to the [Firebase Orb Deploy](https://circleci.com/orbs/registry/orb/cloudliner/firebase-deploy) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Google Cloud
 
