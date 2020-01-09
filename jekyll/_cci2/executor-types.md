@@ -45,7 +45,7 @@ Virtual Environment | `docker` | `machine`
  Layer caching | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
- [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | No
+ [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
 {: class="table table-striped"}
 
 <sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
