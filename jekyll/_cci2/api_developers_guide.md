@@ -18,7 +18,9 @@ The CircleCI platform provides a powerful API that enables users to retrieve det
 
 CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. Please note that CircleCI API v2 is currently in active development, therefore, the stability of the API is referred to as “mixed”.
 
-The current categories of the API v2 endpoints are:
+## API Classes
+
+The current classes of the API v2 endpoints are:
 
 - Authentication
 - Pipeline
@@ -37,10 +39,16 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 
 ### Add an API Token
 
+To add an API token, perform the steps listed below.
+
+1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
+2.  To test it, [View it in your browser](https://circleci.com/api/v1.1/me) or call the API using the command below.
+
 ```sh
 $ curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
 
+3.  You should see a response similar to the example shown below.
 
 ```json
 {
@@ -50,37 +58,27 @@ $ curl https://circleci.com/api/v1.1/me?circle-token=:token
   "trial_end" : "2011-12-28T22:02:15Z",
   "basic_email_prefs" : "smart",
   "admin" : true,
-  "login" : "pbiggar"
+  "login" : "someuser"
  }
 ```
 
-To add an API token, perform the steps listed below.
-
-1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
-2.  To test it, [View it in your browser](https://circleci.com/api/v1.1/me) or call the API using
-3.  You should see a response similar to the example shown in the right pane.
-
-<aside class="notice">
-All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
-</aside>
+**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
 
 ### Get Authenticated
+
+To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the `circle-token` query param:
 
 ```sh
 curl "https://circleci.com/api/v1.1/me?circle-token=:token"
 ```
 
+Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
+
 ```sh 
 curl -u <circle-token>: "https://circleci.com/api/..."
 ```
 
-To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the `circle-token` query param:
-
-Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
-
-<aside class="notice">
-the colon ":" tells curl that there's no password.
-</aside>
+**Note:** The colon ":" notifies `curl` that there is no password being passed.
 
 ## API Endpoints
 
@@ -106,13 +104,13 @@ When making an API request, make sure you follow standard REST API syntax and fo
 
 Where:
 
-`https://circleci.com` is the resource URL for the API being called.
-`api` is the class being called.
-`v2` is the API version.
+- `https://circleci.com` is the resource URL for the API being called.
+- `api` is the class being called.
+- `v2` is the API version.
 
 # Getting Started with the API
 
-The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as gh/CircleCI-Public/circleci-cli, which is a “triplet” of the project type, the name of your “organization”, and the name of the repository. For the project type you can use github or bitbucket as well as the shorter forms gh or bb, which are now supported in API v2. The organization is your username or organization name in your version control system.
+The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as gh/CircleCI-Public/circleci-cli, which is a “triplet” of the project type, the name of your “organization”, and the name of the repository. For the project type you can use `  github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which is supported in API v2. The `organization` is your username or organization name in your version control system.
 
 With API v2, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
@@ -140,7 +138,7 @@ If you receive a 200 HTTP status code, your API request is successful and the re
 
 ## 400 Status Codes
 
-If you receive a 400 HTTP status code, there is a problem with the request and the server is unable to successfully process the request. The 400 HTTP status codes that could be potentially returned with your request include:
+If you receive a 400 HTTP status code, there is a problem with the request and the server is unable to successfully process the request. The following status codes may be returned with your request:
 
 `401 - Unauthorized`
 `403 - Forbidden`
@@ -148,7 +146,7 @@ If you receive a 400 HTTP status code, there is a problem with the request and t
 
 ## 500 Status Code
 
-If you receive a 500 HTTP status code, there is a problem with the server and the request cannot be processed.  If you encounter a 500 response, the error will be logged and Fox Engineering will work to resolve the error. The following 500 HTTP status codes could potentially be returned with your request:
+If you receive a 500 HTTP status code, there is a problem with the server and the request cannot be processed. If you encounter a 500 response, the error will be logged and CircleCI will work to resolve the error. The following 500 HTTP status codes could potentially be returned with your request:
 
 `500 - Internal Server Error`
 
@@ -166,9 +164,12 @@ This section includes several different example API use cases that you can use t
 
 ## Get a List of Pipelines for a Project
 
+
 ## Trigger a Pipeline
 
+
 ## Get a Workflow or Job
+
 
 ## Download Artifacts
 
