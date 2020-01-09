@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "CircleCI API Developer's Guide"
 short-title: "Developer's Guide"
-description: "API "cookbook" for internal and external CircleCI developers"
+description: "API cookbook for internal and external CircleCI developers"
 categories: [getting-started]
 order: 1
 ---
