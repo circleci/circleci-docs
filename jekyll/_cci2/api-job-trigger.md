@@ -85,7 +85,7 @@ jobs:
 
 Notes on the above example:
 
-- Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value.
+- Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value - `deploy` is a special step that will only run on one container, even when the job parallelism is set greater that one.
 - We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
 
 ## See Also

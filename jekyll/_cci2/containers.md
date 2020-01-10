@@ -20,11 +20,11 @@ Every change committed to your version control system triggers CircleCI to check
 
 ## Getting Started
 
-Linux plans start with the ability to run one workflow, without parallelism, at no charge. Purchasing a Linux plan enables you to use additional containers when you need them. Choose a paid or free plan during the signup process and change your plan in the CircleCI app Settings page later to meet changing business requirements.
+Linux plans start with the ability to run one workflow, without concurrency, at no charge. Purchasing a Linux plan enables you to use additional containers when you need them. Choose a paid or free plan during the signup process and change your plan in the CircleCI app Settings page later to meet changing business requirements.
 
 Most CircleCI customers use two to three containers per full-time developer. Increase the number of containers to any level of parallelism and concurrency as your team or the complexity of your workflow grows.
 
-Open source projects include three additional free containers to run jobs in parallel.
+Open source projects include three additional free containers to run jobs concurrently.
 
 ## Upgrading
 

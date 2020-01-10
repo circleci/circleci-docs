@@ -199,7 +199,7 @@ Installing dependencies in the primary container on CircleCI, rather than relyin
 
 ### Test Execution Optimization
 
-Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an in-memory Postgres image that does not save to disk. Another method you may wish to take is to run your tests in parallel instead of one-test-at-a-time. 
+Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0//parallelism-faster-jobs/)/ instead of one-test-at-a-time. 
 
 The figure below illustrates how overall these changes can reduce the total workflow time.
 

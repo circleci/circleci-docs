@@ -48,7 +48,7 @@ root of your repository.
 | deploy:           | [deploy:](https://circleci.com/docs/2.0/configuration-reference/#deploy)           | Use the deploy: step to deploy build artifacts                                                       |
 | env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment) | Use the environment: element to specify environment variables                                        |
 | matrix:           | [workflows:](https://circleci.com/docs/2.0/configuration-reference/#workflows)     | Workflows are used on CircleCI to orchestrate multiple jobs                                          |
-| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control parallel builds in workflows        |
+| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)       | Use the requires: element to define job dependencies and control concurrent jobs in workflows        |
 {: class="table table-striped"}
 
 ### On Using Containers
@@ -189,11 +189,11 @@ documentation on [artifact uploading]({{site.baseurl}}/2.0/artifacts/) to learn 
 ## Advanced Tooling
 
 More advanced configuration on Travis might make use of a *Build Matrix*
-(a configuration that specifies running multiple parallel jobs) or *Build Stages*
-(grouping jobs into stages that can run in parallel as well as having sequential
+(a configuration that specifies running multiple concurrent jobs) or *Build Stages*
+(grouping jobs into stages that can run concurrently as well as having sequential
 jobs rely on the success of previous jobs.)
 
 With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.circleci/config.yml` to define a collection of jobs and their
-run order, whether leveraging parallelism, fan-in or fan-out builds, or
+run order, whether leveraging concurrency, fan-in or fan-out builds, or
 sequentially-dependant builds. Workflows allow complex and fine-grained control
 over your build configuration. 

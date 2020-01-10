@@ -6,7 +6,7 @@ description: "Description of workflows"
 categories: [workflows]
 order: 2
 ---
-CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to sequence and parallelize your job runs with great flexibility for faster feedback when jobs fail.
+CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to introduce concurrency and sequence your job runs with great flexibility for faster feedback when jobs fail.
 
 <hr>
 
