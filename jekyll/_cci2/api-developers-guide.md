@@ -156,7 +156,37 @@ http://www.restapitutorial.com/httpstatuscodes.html
 
 ## Example End-to-End API Request
 
-*Content here will include a sample end-to-end API request, including a high-level diagram/illustration that is a visual representation of the actual API request workflow from beginning to end*
+The following section details the steps you would need, from start to finish, to
+make an API call. This section includes creating a "demo repository" called
+"hello-world", however, you can use a pre-existing repository to follow along if
+you choose.
+
+**Prerequisites**
+
+- A GitHub or BitBucket account with a repository to setup with CircleCI.
+- Completion of the CircleCI onboarding and you have a project setup.
+
+**Steps**
+
+1. On your VCS provider, create a repository. The repo for this example will be
+   called `hello-world`.
+1. Follow the onboarding for a new project on CircleCI. You can access
+   onboarding  by visiting the application and clicking on "Add Projects" in the
+   sidebar or by going to the link:
+   https://onboarding.circleci.com/project-dashboard/<VCS>/<ORG_NAME> where
+   `VCS` is either `github` or `bitbucket` and `ORG_NAME` is your organization
+   or personal VCS username. Find your project in the onboarding list and click
+   `Setup Project`. After completing an onboarding, you should have a valid
+   `config.yml` file in a `.circleci` folder at the root of your repository. 
+1.  Add an API token from your [account
+   dashboard](https://circleci.com/account/api). Be sure to write down and store your API
+   token in a secure place once you generate it.
+1. 
+   
+
+
+
+
 
 # API Use Cases
 
