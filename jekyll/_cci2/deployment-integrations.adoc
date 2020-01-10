@@ -18,6 +18,24 @@ Once a software application has been developed and tested, it needs to be deploy
 image::pipeline-to-deployment.png[Deployment]
 ////
 
+== Deployment: The Basics
+
+* **Deployment Job**: To deploy your application, add a <<job-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps required to deploy your application.
+
+* **Deployment Parameters**: To fulfill the deploy steps you will need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and/or [SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/) for your specific deployment target. These can be added to the project itself, or defined within your configuration.
+** For an example of defining environment variables within your configuration see the non-orbs example above, within the deploy job configuration we have:
++
+```
+environment:
+      HEROKU_APP: "sleepy-refuge-55486"
+```
++
+Alternatively, the `HEROKU_APP` environment variable could be defined within you project, via the **Project Settings** page in the UI.
+
+* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<configuration-reference#type,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI UI.
+
+INSERT SCREENSHOT
+
 === Using Orbs to Simplify Deploys
 
 https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any requires environment variables/SSH keys within your project, will get you the results you need with no further configuration. 
@@ -130,19 +148,8 @@ jobs:
           command: rake
 ```
 
-== Deployment: The Basics
 
-* To deploy your application, add a [job]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) to your `.circleci/config.yml` file and configure the job to run the steps required to deploy your application.
 
-* To fulfill the deploy steps you will need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and/or [SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/) for your specific deployment target. These can be added to the project itself, or defined within your configuration.
-
-* For an example of defining environment variables within your configuration see the non-orbs example above, within the deploy job configuration we have:
-+
-```
-environment:
-      HEROKU_APP: "sleepy-refuge-55486"
-```
-+
-Alternatively, the `HEROKU_APP` variable could be defined within you project, via the **Project Settings** page in the UI.
+== Deployment Security Considerations
 
 
