@@ -82,7 +82,7 @@ curl -u <circle-token>: "https://circleci.com/api/..."
 
 ## API Endpoints
 
-The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These APIs provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
+The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
 
 Before working with the API and making calls, you should first have an undestanding of the endpoints currently available. The table below lists the endpoints currently available. 
 
@@ -172,4 +172,3 @@ This section includes several different example API use cases that you can use t
 
 
 ## Download Artifacts
-
