@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is just the same as any other job configuration; you can create a deployment job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+Deployment at CircleCI is just the same as any other job configuration; you can create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
@@ -59,7 +59,7 @@ workflows:
 
 Under the hood, this orb creates, bundles and deploys your application using your specified parameters set under the `aws-code-deploy/deploy` job declaration.
 
-=== A Simple Example Using Heroku
+== A Simple Example Using Heroku
 
 Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
@@ -147,9 +147,8 @@ jobs:
           name: Run tests
           command: rake
 ```
-
-
-
+////
 == Deployment Security Considerations
+////
 
 
