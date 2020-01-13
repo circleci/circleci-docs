@@ -18,6 +18,10 @@ The CircleCI platform provides a powerful API that enables users to retrieve det
 
 CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. Please note that CircleCI API v2 is currently in active development, therefore, the stability of the API is referred to as “mixed”.
 
+**Note:** Whenever you see a term prefixed with a colon (:), please note that this value must be replaced by a user-input value. For example `:token` in the above call must be replaced by the token string generated in your account:
+
+curl https://circleci.com/api/v1.1/me?circle-token=dkanmbowk34iajdkl3iakdthisisarandomtoken
+
 ## API Classes
 
 The current classes of the API v2 endpoints are:
@@ -47,6 +51,10 @@ To add an API token, perform the steps listed below.
 ```sh
 $ curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
+
+**Note:** Whenever you see a term prefixed with a colon (:), please note that this value must be replaced by a user-input value. For example `:token` in the above call must be replaced by the token string generated in your account:
+
+`curl https://circleci.com/api/v1.1/me?circle-token=dkanmbowk34iajdkl3iakdthisisarandomtoken`
 
 3.  You should see a response similar to the example shown below.
 
@@ -118,10 +126,6 @@ With API v2, CircleCI is introducing a string representation of the triplet call
 
 The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a project_slug may change, but in all cases it would be usable as a human-readable identifier for a given project.
 
-## Rate Limiting/Throttling
-
-CircleCI does not currently perform any throttling or rate limiting. In the future, CircleCI may institute rate limiting or throttling or both to monitor the number of API calls made to the service and ensure that the system is more stable and has higher overall performance
-
 # HTTP Status Codes and Response Handling
 
 When you make an API request to the server, an HTTP status code is returned along with the JSON body response. The CircleCI API v2 adheres to standard HTTP response codes, which include the following status code definitions:
@@ -150,20 +154,21 @@ If you receive a 500 HTTP status code, there is a problem with the server and th
 
 `500 - Internal Server Error`
 
-For more detailed information about HTTP status codes, refer to the following resource:
+# REST API Tutorial
 
-http://www.restapitutorial.com/httpstatuscodes.html
+For more detailed information about HTTP status codes, refer to the [rest api tutorial](http://www.restapitutorial.com/httpstatuscodes.html).
 
 ## Example End-to-End API Request
 
 *Content here will include a sample end-to-end API request, including a high-level diagram/illustration that is a visual representation of the actual API request workflow from beginning to end*
 
+*This use case will be:*
+
+*Get a List of Pipelines for a Project*
+
 # API Use Cases
 
 This section includes several different example API use cases that you can use to better understand how the CircleCI API works, and how you can leverage the API in your own day-to-day work to take advantage of the numerous features and functions of the API.
-
-## Get a List of Pipelines for a Project
-
 
 ## Trigger a Pipeline
 
