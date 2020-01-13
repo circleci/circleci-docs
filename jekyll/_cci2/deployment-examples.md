@@ -3,13 +3,12 @@ layout: classic-docs
 title: "Deployment Examples"
 short-title: "Deployment Examples"
 ---
+This document presents example config for a variately of popular deployment targets. Many of the examples use orbs: CircleCI and partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+
+**Note**: In order to use orbs you must use `version 2.1` config, and enable pipelines for your project. If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the jobs are built.
 
 * TOC
 {:toc}
-
-## Using Orbs for Deployment
-
-CircleCI and its partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## AWS
 
@@ -19,7 +18,7 @@ This section covers deployment to S3, ECR/ECS (Elastic Container Registry/Elasti
 
 For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page. This section details the use of the AWS S3 orb and `version: 2.1` config for simple deployment, below we will look at the same example without orbs and using using `version: 2` config.
 
-1. As a best security practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
@@ -64,7 +63,7 @@ jobs:
 
 ### Deploy to AWS S3 Without Orbs
 
-1. As a best security practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
+1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
 
@@ -388,15 +387,15 @@ Generate a Firebase CLI token using the following command:
 firebase login:ci
 ```
 
-Add the generated token to the CircleCI project's environment variables as $FIREBASE_DEPLOY_TOKEN.
+Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`.
 
-Add the below to the project's `config.yml` file
+The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the master branch.
 
 ```
 
      deploy-job:
        docker:
-         - image: my-image-version-tag
+         - image: <my-image-version-tag>
        working_directory: /tmp/my-project
        steps:
          - run:
@@ -426,7 +425,7 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 
 ## Google Cloud
 
-Before deploying to Google Cloud Platform, you will have to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
+Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
 
 In the following example, if `build-job` passes and the current branch was the master branch, CircleCI runs `deploy.sh` to do the actual deployment work.
 
