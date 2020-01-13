@@ -91,7 +91,7 @@ orbs:
     executors:
       specialthingsexecutor:
         docker:
-          - image: circleci/ruby:1.4.2
+          - image: circleci/ruby:2.7.0
     commands:
       dospecialthings:
         steps:
