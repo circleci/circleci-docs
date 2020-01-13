@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-Deployment at CircleCI is just the same as any other job configuration; you can create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
+Deployment at CircleCI is just the same as any other job configuration; you create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
 toc::[]
 
@@ -20,25 +20,24 @@ image::pipeline-to-deployment.png[Deployment]
 
 == Deployment: The Basics
 
-* **Deployment Job**: To deploy your application, add a <<job-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps required to deploy your application.
+* **Deployment Job**: To deploy your application, add a <<job-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
 
-* **Deployment Parameters**: To fulfill the deploy steps you will need to [add environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) and/or [SSH keys]({{ site.baseurl }}/2.0/add-ssh-key/) for your specific deployment target. These can be added to the project itself, or defined within your configuration.
-** For an example of defining environment variables within your configuration see the non-orbs example above, within the deploy job configuration we have:
+* **Deployment Parameters**: You will need to add environment variables/SSH keys to fulfill your deployment steps and provide autorisation details and parameters.
++
+These can be added to the project itself (follow links below for detailed instructions), or defined within your configuration. For an example of defining environment variables within your configuration see the non-orb Heroku example below – within the deploy job configuration we have:
 +
 ```
 environment:
       HEROKU_APP: "sleepy-refuge-55486"
 ```
-+
-Alternatively, the `HEROKU_APP` environment variable could be defined within you project, via the **Project Settings** page in the UI.
+** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
+** Add project-level <<add-ssh-key#,SSH keys>> 
 
 * **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<configuration-reference#type,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI UI.
 
-INSERT SCREENSHOT
+== Using Orbs to Simplify Deployment
 
-=== Using Orbs to Simplify Deploys
-
-https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any requires environment variables/SSH keys within your project, will get you the results you need with no further configuration. 
+https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any required environment variables/SSH keys within your project will get you the results you need with no further configuration. 
 
 As an example, consider the https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
 
@@ -61,7 +60,11 @@ Under the hood, this orb creates, bundles and deploys your application using you
 
 == A Simple Example Using Heroku
 
-Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
+Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]. 
+
+==== 2.0 config
+
+The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
 ```yaml
 version: 2.0
@@ -69,8 +72,8 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4-node
-      - image: circleci/postgres:9.4.12-alpine
+      - image: circleci/ruby:2.4-node # primary container - where job steps are run
+      - image: circleci/postgres:9.4.12-alpine # services container
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
@@ -89,12 +92,12 @@ jobs:
         enabled: true
     working_directory: ~/circleci-demo-workflows
     environment:
-      HEROKU_APP: "sleepy-refuge-55486"
+      HEROKU_APP: "sleepy-refuge-55486" # define env vae $HEROKU_APP
     steps:
       - checkout
       - run:
           name: Setup Heroku
-          command: bash .circleci/setup-heroku.sh
+          command: bash .circleci/setup-heroku.sh # run a script to set up Heroku
 
       - run:
           command: |
@@ -115,7 +118,9 @@ workflows:
               only: sequential-branch-filter
 ```
 
-Below is the same Heroku Deployment example but using the Heroku orb to simplify the configuration:
+==== Using the Heroku Orb
+
+Below is the same Heroku Deployment example but this time using the https://circleci.com/orbs/registry/orb/circleci/heroku[Heroku orb] to simplify the configuration. Looking at the `deploy-via-git` command source in the Orbs Registry, we can see this succinct config requires that the following environment variables <<env-vars#setting-an-environment-variable-in-a-project,are set at the project level>>: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`.
 
 ```yaml
 version: 2.1
@@ -150,5 +155,8 @@ jobs:
 ////
 == Deployment Security Considerations
 ////
+
+== Next Steps
+Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/orbs/registry/[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!
 
 
