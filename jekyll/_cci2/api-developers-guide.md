@@ -16,8 +16,6 @@ This *API Developer's Guide* was written to assist developers in quickly and eas
 
 The CircleCI platform provides a powerful API that enables users to retrieve detailed information about users, jobs, workflows and pipelines.
 
-CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. Please note that CircleCI API v2 is currently in active development, therefore, the stability of the API is referred to as “mixed”.
-
 **Note:** Whenever you see a term prefixed with a colon (:), please note that this value must be replaced by a user-input value. For example `:token` in the above call must be replaced by the token string generated in your account:
 
 curl https://circleci.com/api/v1.1/me?circle-token=dkanmbowk34iajdkl3iakdthisisarandomtoken
@@ -70,7 +68,7 @@ $ curl https://circleci.com/api/v1.1/me?circle-token=:token
  }
 ```
 
-**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
+**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
 
 ### Get Authenticated
 
