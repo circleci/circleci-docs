@@ -99,6 +99,11 @@ You automatically *follow* any new project that you push to, subscribing you to 
 
 In the top left, you will find the Org switcher.
 
+
+{:.tab.switcher.Cloud}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.

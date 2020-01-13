@@ -209,7 +209,7 @@ en:
         - name: Optimizations Cookbook
           link: 2.0/optimization-cookbook/
 
-- name: Jobs
+- name: Pipelines
   icon: docs/builds.svg
   children:
     - name: Status

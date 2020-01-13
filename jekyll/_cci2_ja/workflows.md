@@ -201,11 +201,14 @@ Workflow で手動承認を選択する場合は、下記の点に注意が必�
 
 スクリーンショット： `request-testing` ジョブの承認を待つ Workflow。
 
-![待機状態の Workflow で承認されたジョブ]({{ site.baseurl }}/assets/img/docs/approval_job.png)
-
 スクリーンショット：`request-testing` ジョブをクリックすると現れる承認ダイアログ。
 
-![Workflow が待機状態の時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+{:.tab.switcher.Cloud}
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+
+{:.tab.switcher.Server}
+![Workflow が待機状態の時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+
 
 ## Workflow をスケジュール実行する
 
