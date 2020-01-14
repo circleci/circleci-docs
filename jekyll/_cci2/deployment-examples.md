@@ -14,7 +14,10 @@ This document presents example config for a variately of popular deployment targ
 
 This section covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy. For an in-depth look at deploying to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
 
-### Deploy Using the AWS S3 Orb
+### Deploy to S3
+
+#### Using the AWS S3 Orb
+{:.no_toc}
 
 For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb Reference](https://circleci.com/orbs/registry/orb/circleci/aws-s3) page. This section details the use of the AWS S3 orb and `version: 2.1` config for simple deployment, below we will look at the same example without orbs and using using `version: 2` config.
 
@@ -61,7 +64,8 @@ jobs:
           overwrite: true # default is false
 ```
 
-### Deploy to AWS S3 Without Orbs
+#### Deploy to AWS S3 Without Orbs
+{:.no_toc}
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
@@ -430,7 +434,6 @@ Before deploying to Google Cloud Platform, you will need to authorize the Google
 In the following example, if `build-job` passes and the current branch was the master branch, CircleCI runs `deploy.sh` to do the actual deployment work.
 
 ```
-
      deploy-job:
        docker:
          - image: my-image-version-tag
@@ -438,13 +441,20 @@ In the following example, if `build-job` passes and the current branch was the m
        steps:
          - run:
              name: Deploy Master to GKE
-             command: ./deploy.sh
+             command: |
+             # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
+             sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello 
+             # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
+             sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+             # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image. 
+             # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
+             kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
 
     workflows:
       version: 2
       build-deploy:
         jobs:
-          - build-job
+          - build-job # job declaration ommitted for brevity
           - deploy-job:
               requires:
                 - build-job
@@ -454,48 +464,28 @@ In the following example, if `build-job` passes and the current branch was the m
 
 ```
 
-The deployment script pushes the newly created Docker image out to the registry, then updates the K8s deployment to use the
-new image with a `gcloud` command to handle authentication and push the image all at once:
+For another example, see our [CircleCI Google Cloud deployment example project](https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app).
+
+### Using Google Cloud Orbs to Simplify your Config
+
+There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/orbs/registry/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
 
 ```
-sudo /opt/google-cloud-sdk/bin/gcloud docker -- push us.gcr.io/${PROJECT_NAME}/hello
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z # orb stanza - replace x.y.z with version required
+
+workflows:
+  main:
+    jobs:
+      - gke/publish-and-rollout-image:
+          cluster: your-GKE-cluster # name of GKE cluster to be created
+          container: your-K8-container-name # name of your Kubernetes container
+          deployment: your-K8-deployment-name # name of your Kubernetes deployment
+          image: your-image # name of your Docker image
+          tag: $CIRCLE_SHA1 # Docker image tag - optional
 ```
-
-The new image is now available in GCR for the GCP infrastructure to access. Then, change permissions:
-
-```
-sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-```
-
-Finally, utilize the patch subcommand of `kubectl` to find the line that specifies the image to use for our container, and replaces it with the image tag of the image just built. The K8s deployment then intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
-
-```
-kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
-```
-
-The full `deploy.sh` file is available on [GitHub](https://github.com/circleci/docker-hello-google/blob/master/deploy.sh).
-A CircleCI 2.0 Google Cloud deployment example project is also available [here](https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app).
-
-### Google Cloud Orb Example
-
-If you would like to simplify your configuration workflows using a CircleCI orb (a package of configurations that you can use that includes job, commands and executors), the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different orb examples for Google Cloud, including the example shown below.
-
-```
-      version: 2.1
-      orbs:
-        gcp-cli: circleci/gcp-cli@1.0.0
-      workflows:
-        install_and_configure_cli:
-          # optionally determine executor to use
-          executor: default
-          jobs:
-            - gcp-cli/install_and_initialize_cli:
-                context: myContext # store your gCloud service key via Contexts, or project-level environment variables
-                google-project-id: myGoogleProjectId
-                google-compute-zone: myGoogleComputeZone
-```
-
-For more detailed information about this orb, refer to the [CircleCI Google Cloud Orbs](https://circleci.com/orbs/registry/orb/circleci/gcp-cli) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Heroku
 
@@ -509,20 +499,19 @@ to set up a project in your chosen language.
 See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) for instructions.
 In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
 
-4. In your `.circleci/config.yml`, create a `deploy` job and add an executor type.
+1. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-types/).
 
-See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) for instructions.
-
-5. Checkout your code and add a command to deploy the master branch to Heroku using git.
+2. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
 
 ```
 version: 2
+
 jobs:
   build:
     ...
   deploy:
     docker:
-      - image: buildpack-deps:trusty
+      - image: <specify-docker-image>
     steps:
       - checkout
       - run:
@@ -537,50 +526,36 @@ workflows:
       - build
       - deploy:
           requires:
-            - build
+            - build # only run deploy-via-git job if the build job has completed
           filters:
             branches:
-              only: master
+              only: master # only run deploy-via-git job on master branch
 ```
 **Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
 
-### Heroku Orb Examples
+### Deploy with the Heroku Orb
 
-If you would like to simplify your Heroku configuration workflows, including deploying Heroku, or customizing your Heroku workflow, you can use the Heroku orb, which is shown below.
-
-#### Deploying Heroku
+If you would like to simplify your Heroku configuration, you can use config `version 2.1` and invoke the Heroku orb:
 
 ```
 version: 2.1
+
 orbs:
-  heroku: circleci/heroku@1.0.0
+  heroku: circleci/heroku@x.y # specify orb version
+
 workflows:
   heroku_deploy:
     jobs:
+      - build
       - heroku/deploy-via-git
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+            branches:
+              only: master # only run deploy-via-git job on master branch
 ```
 
-#### Customizing Heroku Workflows
-
-```
-version: 2.1
-orbs:
-  heroku: circleci/heroku@1.0.0
-workflows:
-  heroku_deploy:
-    jobs:
-      - deploy
-jobs:
-  deploy:
-    executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
-    steps:
-      - checkout
-      - heroku/install # Runs the heroku install command, if necessary.
-      - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
-          only-branch: master # If you specify an only-branch, the deploy will not occur for any other branch.
-```
-
-For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku) page in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/).
+For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
 
 ## NPM
 
