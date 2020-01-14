@@ -312,6 +312,20 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
+##### Available Linux GPU images
+
+When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
+
+* `ubuntu-1604-cuda-10.1:201909-23` - CUDA 10.1, docker 19.03.0-ce, nvidia-docker 2.2.2
+* `ubuntu-1604-cuda-9.2:201909-23` - CUDA 9.2, docker 19.03.0-ce, nvidia-docker 2.2.2
+
+##### Available Windows GPU image
+
+When using the [Windows GPU executor](#gpu-executor-windows), the available image is:
+
+* `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1.
+  This image is the default.
+
 **Example**
 
 ```yaml
@@ -484,9 +498,9 @@ jobs:
 Class             | vCPUs | RAM
 ------------------|-------|-----
 medium (default)  | 4     | 15GB
+large             | 8     | 30GB
+xlarge            | 16    | 60GB
 {: class="table table-striped"}
-
-There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
 
 ###### Example Usage
 ```yaml
@@ -502,14 +516,47 @@ jobs:
       ... // other config
 ```
 
+See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
+
 ##### GPU Executor (Linux)
 
-Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
------------------|-------|--------------|------|-----------------
-1GPU\*           | 16    | 122GiB       | 1    | 8
-2GPU\*           | 32    | 244GiB       | 2    | 16
-4GPU\*           | 64    | 488GiB       | 4    | 32
+Class               | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+--------------------|-------|-----|------|-----------------|------------------
+gpu.nvidia.small\*  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
+gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
+
+###### Example Usage
+```yaml
+jobs:
+  build:
+    machine: true
+    resource_class: gpu.nvidia.small
+    steps:
+      ... // other config
+```
+
+##### GPU Executor (Windows)
+
+Class                       | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+----------------------------|-------|-----|------|-----------------|------------------
+windows.gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+version: 2.1
+orbs:
+  win: circleci/windows@2.3.0
+jobs:
+  build:
+    executor: win/gpu-nvidia
+    steps:
+      - checkout
+      - run: echo 'Hello, Nvidia GPU on Windows'
+```
+
+\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
