@@ -74,6 +74,8 @@ example of a minimal config in the
 ### Best Practices
 {:.no_toc}
 
+#### Cocoapods
+
 In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
 
 To enable this, ensure the first line in your Podfile is as follows:
@@ -86,6 +88,18 @@ If upgrading from Cocoapods 1.7 or older, additionally ensure the following line
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
+```
+
+#### Homebrew
+
+Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that the step execution can take some extra time to complete.
+
+If build speed, or bugs introduced by new Homebrew updates, are of a concern, this can be disabled. On average, this can save 2-5 minutes per job.
+
+To disable this feature, add the following line to your config.yml before calling Homebrew:
+
+```yaml
+- run: echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $BASH_ENV
 ```
 
 ## Advanced Setup
