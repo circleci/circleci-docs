@@ -102,6 +102,15 @@ To disable this feature, add the following line to your config.yml before callin
 - run: echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $BASH_ENV
 ```
 
+#### iOS Simulator Crash Reports
+
+If your iOS app crashes in the Simulator during a test run, the crash report is useful for diagnosing the exact cause of the crash. These can be uploaded as artifacts to assist with debugging the app crash:
+
+```yaml
+- store_artifacts:
+    path: ~/Library/Logs/DiagnosticReports
+```
+
 ## Advanced Setup
 
 For advanced setup, it is possible to run a lint job together with your
