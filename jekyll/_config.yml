@@ -18,6 +18,7 @@ algolia:
   application_id: U0RXNGRK45
   api_key: dd49f5b81d238d474b49645a4daed322 # search-only API Key; safe for front-end code
   index_name: documentation
+  nodes_to_index: 'p,table' # example: 'p,blockquote,li,div.paragraph'
   settings:
     highlightPreTag: '<strong>'
     highlightPostTag: '</strong>'
