@@ -528,13 +528,18 @@ gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 
 ###### Example Usage
 ```yaml
+version: 2.1
+
 jobs:
   build:
-    machine: true
-    resource_class: gpu.nvidia.small
+    machine:
+      resource_class: gpu.nvidia.small
+      image: ubuntu-1604-cuda-10.1:201909-23
     steps:
       ... // other config
 ```
+
+See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
 
 ##### GPU Executor (Windows)
 
@@ -548,6 +553,7 @@ windows.gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 version: 2.1
 orbs:
   win: circleci/windows@2.3.0
+
 jobs:
   build:
     executor: win/gpu-nvidia
