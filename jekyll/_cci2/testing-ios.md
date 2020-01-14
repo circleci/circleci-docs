@@ -96,10 +96,19 @@ Homebrew, by default, will check for updates at the start of any operation. As H
 
 If build speed, or bugs introduced by new Homebrew updates, are of a concern, this can be disabled. On average, this can save 2-5 minutes per job.
 
-To disable this feature, add the following line to your config.yml before calling Homebrew:
+To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable config.yml in your job:
 
 ```yaml
-- run: echo "HOMEBREW_NO_AUTO_UPDATE=1" >> $BASH_ENV
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode: "11.3.0"
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - checkout
+      - run: brew install wget
 ```
 
 #### iOS Simulator Crash Reports
