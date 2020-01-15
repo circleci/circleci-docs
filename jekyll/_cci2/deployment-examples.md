@@ -422,7 +422,7 @@ workflows:
 
 ```
 
-If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to `config.yml`:
+If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `config.yml`:
 
 ```
    - run: cd functions && npm install
