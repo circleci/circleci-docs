@@ -258,11 +258,19 @@ curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world
 }
 ```
 
-While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this `POST` request. By including a body parameter in the `curl` request, we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag.
+While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this `POST` request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
 ```sh
-# todo: example.
+curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H "Circle-Token: $CIRCLE_TOKEN" \
+  -H 'x-attribution-login: string' \
+  -H 'x-attribution-actor-id: string' 
+  -d "branch=my-branch"
 ```
+
+> Todo: an example with a pipeline parameter.
 
 # API Use Cases
 
