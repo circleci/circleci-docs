@@ -31,6 +31,7 @@ The currently available Xcode versions are:
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
+ `11.3.1` | Xcode 11.3.1 (Build 11C505)     | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
  `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
  `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
  `11.2.0` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
