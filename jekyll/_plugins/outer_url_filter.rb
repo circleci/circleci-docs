@@ -1,24 +1,14 @@
+require_relative 'language_url_prefix.rb'
+
 module OuterUrlFilter
   include Liquid::StandardFilters
-
-  DEFAULT_LANG = 'en'.freeze
+  include LanguageUrlPrefix
 
   def outer_url(input)
-    "#{config['url']}#{language_prefix}#{input}"
+    "#{config['url']}#{language_url_prefix(@context)}#{input}"
   end
 
   private
-
-  def language_prefix
-    return unless page_language
-    return if page_language == DEFAULT_LANG
-
-    "/#{page_language}"
-  end
-
-  def page_language
-    @context.registers[:page]['lang']
-  end
 
   def config
     @context.registers[:site].config
