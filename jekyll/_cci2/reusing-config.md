@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Orbs Reference Guide"
-short-title: "Orbs Reference"
-description: "Reference guide for CircleCI 2.1 orbs"
+title: "Reusable Config Reference Guide"
+short-title: "Reusable Config Reference"
+description: "Reference guide for CircleCI 2.1 Configuration"
 categories: [configuration]
 order: 1
 ---
 
-This Orbs Reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
+This reusable config reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable, commands, jobs, and executors and orbs.
 
 * TOC
 {:toc}
