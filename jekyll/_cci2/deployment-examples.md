@@ -113,12 +113,14 @@ For a complete list of AWS CLI commands and options, see the [AWS CLI Command Re
 
 ### Deploy Docker Image to AWS ECR
 
-The `aws-ecr` orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config.
+The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) for a full list of parameters, built-in jobs and commands.
 
 ```
+version: 2.1
+
 orbs:
   aws-ecr: circleci/aws-ecr@0.0.10
-version: 2.1
+
 workflows:
   build_and_push_image:
     jobs:
@@ -138,13 +140,15 @@ workflows:
 
 ### Update an AWS ECS Instance
 
-Use the AWS ECR and ECS orbs to easily update an existing AWS ECS instance.
+Use the [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) and [ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
 
 ```
 version: 2.1
+
 orbs:
   aws-ecr: circleci/aws-ecr@0.0.4
   aws-ecs: circleci/aws-ecs@0.0.3
+
 workflows:
   build-and-deploy:
     jobs:
@@ -155,7 +159,7 @@ workflows:
           tag: '${CIRCLE_SHA1}'
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build_and_push_image
+            - aws-ecr/build_and_push_image # only run the deployment job once the build and push image job has completed
           family: '${MY_APP_PREFIX}-service'
           cluster-name: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
@@ -163,12 +167,14 @@ workflows:
 
 ### AWS CodeDeploy
 
-The `aws-code-deploy` orb enables you to run deployments through AWS CodeDeploy.
+The [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy) orb enables you to run deployments through AWS CodeDeploy.
 
 ```
-version: 2.1 # We must use 2.1 to make use of orbs.
+version: 2.1 # use 2.1 to make use of orbs
+
 orbs: # specify all orbs you want to use.
   aws-code-deploy: circleci/aws-code-deploy@1.0.0
+
 workflows:
   deploy_application:
     jobs:
