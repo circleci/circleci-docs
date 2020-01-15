@@ -19,6 +19,11 @@ This document presents example config for a variately of popular deployment targ
 
 This section covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy. For an in-depth look at deploying to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
 
+For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
+- [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
+- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
+- [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
+
 ### Deploy to S3
 
 #### Using the AWS S3 Orb
@@ -28,7 +33,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
 
 3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
   
@@ -74,7 +79,7 @@ jobs: # Define the build and deploy jobs
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
 
-2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). Store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`.
+2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
 
 3. In your `.circleci/config.yml` file, create a new `deploy` job. In the `deploy` job, add a step to install `awscli` in your primary container.
 
@@ -100,11 +105,11 @@ workflows: # Define a Workflow running the build job, then the deploy job
 jobs:
   build:
     docker: # Specify executor for running build job - this example uses a Docker container
-      - image: circleci/<image-name> # Specify docker image to use
+      - image: <docker-image-name-tag> # Specify docker image to use
   ... # build job steps omitted for brevity
   deploy:
     docker: # Specify executor for running deploy job
-      - image: circleci/<image-name> # Specify docker image to use
+      - image: <docker-image-name-tag> # Specify docker image to use
     steps:
       - run: # Install the AWS CLI if it is not already included in the docker image
           name: Install awscli 
@@ -120,7 +125,7 @@ For a complete list of AWS CLI commands and options, see the [AWS CLI Command Re
 
 The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) for a full list of parameters, built-in jobs and commands.
 
-Using the `build_and_push` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. It is best practice to set environment variables at the [project level](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or within a [context](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context) to help minimize config.
+Using the `build_and_push` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
 
 ```
 version: 2.1
@@ -132,7 +137,6 @@ workflows:
   build_and_push_image: 
     jobs:
       - aws-ecr/build_and_push_image: # Use the pre-defined `build_and_push_image` job
-          context: myContext
           create-repo: true # Default is false
           dockerfile: myDockerfile
           path: pathToMyDockerfile
@@ -146,7 +150,7 @@ workflows:
 Use the [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) and [ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
 
 ```
-version: 2.1
+version: 2.1 # use 2.1 to make use of orbs and pipelines
 
 orbs:
   aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your config
@@ -189,23 +193,18 @@ workflows:
           bundle-key: myS3BucketKey # A key under the s3 bucket where an application revision will be stored.
 ```
 
-For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
-- [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
-- [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
-- [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
-
 ## Azure Container Registry
 
-This section describes a simple deployment to the Azure container registry (ACR) using the ACR Orb and version 2.1 CircleCI configuration.
+This section describes a simple deployment to the Azure container registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
 
 For detailed information about the Azure ACR orb, including all options, refer to the [CircleCI ACR Orb Reference](https://circleci.com/orbs/registry/orb/circleci/azure-acr) page.
 
-1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI as either [project environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project) or [context environment variables](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-context). For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`.
+1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`. {% include snippets/env-var-or-context.md %}
 
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the current branch is `master`.
   
 ```
-version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
+version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
 
 orbs:
   azure-acr: circleci/azure-acr@x.y.z # Use the Azure ACR orb in your config
@@ -232,21 +231,6 @@ Integrating CircleCI with Capistrano is simple. Once your project is set up to u
 ```
 version: 2
 
-jobs:
-  #  build and test jobs go here
-  deploy-job:
-    docker:
-      - image: image pinned to a version and tag
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - run:
-          name: Bundle Install
-          command: bundle check || bundle install
-      - run:
-          name: Deploy if tests pass and branch is Master
-          command: bundle exec cap production deploy
-
 workflows:
   version: 2
   build-deploy:
@@ -258,11 +242,26 @@ workflows:
           filters:
             branches:
               only: master # Only run deploy job when commit is on the master branch
+
+jobs:
+  #  build and test jobs go here - not included for brevity
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Deploy if tests pass and branch is Master
+          command: bundle exec cap production deploy
 ```
 
 ## Cloud Foundry
 
-Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image).  This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
+Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
 ### Install the CLI
 {:.no_toc}
@@ -394,7 +393,7 @@ Generate a Firebase CLI token using the following command:
 firebase login:ci
 ```
 
-Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`.
+Add the generated token to the CircleCI project's environment variables as `$FIREBASE_DEPLOY_TOKEN`. {% include snippets/env-var-or-context.md %}
 
 The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the master branch.
 
