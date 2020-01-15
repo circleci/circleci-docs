@@ -168,25 +168,101 @@ you choose.
 
 **Steps**
 
-1. On your VCS provider, create a repository. The repo for this example will be
-   called `hello-world`.
-1. Follow the onboarding for a new project on CircleCI. You can access
-   onboarding  by visiting the application and clicking on "Add Projects" in the
-   sidebar or by going to the link:
-   https://onboarding.circleci.com/project-dashboard/<VCS>/<ORG_NAME> where
-   `VCS` is either `github` or `bitbucket` and `ORG_NAME` is your organization
-   or personal VCS username. Find your project in the onboarding list and click
-   `Setup Project`. After completing an onboarding, you should have a valid
-   `config.yml` file in a `.circleci` folder at the root of your repository. 
-1.  Add an API token from your [account
-   dashboard](https://circleci.com/account/api). Be sure to write down and store your API
-   token in a secure place once you generate it.
-1. 
-   
+On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
+
+Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{ORG_NAME} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `ORG_NAME` is your organization or personal VCS username. Find your project in the onboarding list and click `Setup Project`. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
+
+```sh
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
+workflows:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
+    jobs:
+      - welcome/run
+```
 
 
+Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
 
+It's time to test our your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
+```sh
+# First: set your CircleCI token as an environment variable
+export CIRCLECI_TOKEN={your_api_token}
+
+curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+     --header 'Accept: application/json'    \
+     --header 'Content-Type: application/json' \
+     https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
+```
+
+You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
+
+```sh
+{
+  "next_page_token": null,
+  "items": [
+    {
+      "id": "03fcbba0-d847-4c8b-a553-6fdd7854b893",
+      "errors": [],
+      "project_slug": "gh/{YOUR_USER_NAME}/hello-world",
+      "updated_at": "2020-01-10T19:45:58.517Z",
+      "number": 1,
+      "state": "created",
+      "created_at": "2020-01-10T19:45:58.517Z",
+      "trigger": {
+        "received_at": "2020-01-10T19:45:58.489Z",
+        "type": "api",
+        "actor": {
+          "login": "teesloane",
+          "avatar_url": "https://avatars0.githubusercontent.com/u/12987958?v=4"
+        }
+      },
+      "vcs": {
+        "origin_repository_url": "https://github.com/{YOUR_USER_NAME}/hello-world",
+        "target_repository_url": "https://github.com/{YOUR_USER_NAME}/hello-world",
+        "revision": "ca67134f650e362133e51a9ffdb8e5ddc7fa53a5",
+        "provider_name": "GitHub",
+        "branch": "master"
+      }
+    }
+  ]
+}
+```
+
+**NOTE**: You can format the incoming JSON by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`.
+
+That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
+
+One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
+
+```sh
+curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H "Circle-Token: $CIRCLE_TOKEN" \
+  
+# Which returns:
+{
+  "number": 2,
+  "state": "pending",
+  "id": "e411ea74-c64a-4d60-9292-115e782802ed",
+  "created_at": "2020-01-15T15:32:36.605Z"
+}
+```
+
+While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this `POST` request. By including a body parameter in the `curl` request, we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag.
+
+```sh
+# todo: example.
+```
 
 # API Use Cases
 
