@@ -247,7 +247,7 @@ One of the benefits of the CircleCI API v2 is the ability to remotely trigger pi
 curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H "Circle-Token: $CIRCLE_TOKEN" \
+  -H "Circle-Token: $CIRCLECI_TOKEN" \
   
 # Which returns:
 {
@@ -264,13 +264,45 @@ While this alone can be useful, we want to be able to customize parameters of th
 curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
   -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
-  -H "Circle-Token: $CIRCLE_TOKEN" \
+  -H "Circle-Token: $CIRCLECI_TOKEN" \
   -H 'x-attribution-login: string' \
   -H 'x-attribution-actor-id: string' 
   -d "branch=my-branch"
 ```
 
-> Todo: an example with a pipeline parameter.
+Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
+
+```yaml
+version: 2.1
+parameters:
+  image-tag:
+    type: string
+    default: "latest"
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:<< pipeline.parameters.image-tag >>
+    environment:
+      IMAGETAG: << pipeline.parameters.image-tag >>
+    working_directory: << pipeline.parameters.workingdir >>
+    steps:
+      - run: echo "Image tag used was ${IMAGETAG}"
+```
+
+You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the json payload of a POST request to the _Trigger New Pipeline_ endpoint.
+
+Now we can run a `curl` request that passes variables in a POST request, as so:
+
+```sh
+curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {
+    "image-tag": "4.8.2"
+  }
+}' https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline
+```
+
+This concludes the end-to-end example of using the V2 API. Consider reading the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currentl available.
 
 # API Use Cases
 
