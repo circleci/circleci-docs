@@ -58,11 +58,11 @@ _Available on CircleCI.com - not currently available on self-hosted installation
 jobs:
   build: # name of your job
     macos: # executor type
-      xcode: "9.0"
+      xcode: 11.3.0
 
     steps:
       # Commands run in a macOS virtual machine environment
-      # with Xcode 9.0 installed
+      # with Xcode 11.3 installed
 ```
 
 Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).

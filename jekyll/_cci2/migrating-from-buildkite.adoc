@@ -182,7 +182,7 @@ jobs:
       - run: echo "Hello, $USER!"
   osxJob:
     macos:
-      xcode: "10.1.0"
+      xcode: 11.3.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
