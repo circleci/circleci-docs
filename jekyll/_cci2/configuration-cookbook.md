@@ -44,9 +44,7 @@ For more detailed information about CircleCI orbs, please refer to the [Orbs Int
 
 `version: 2.1`
 
-**Note:** If you do not already have pipelines enabled, go to **Settings > Project**, select settings for the project you are currently working on by clicking its cog icon, select **Advanced Settings** and scroll down to use the radio button to enable pipelines.
-
-![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
+**NOTE:** {% include snippets/enable-pipelines.md %}
 
 2) Add the orbs stanza below your version, which in turn imports the orb:
 
