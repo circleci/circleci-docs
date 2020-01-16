@@ -232,7 +232,7 @@ If pushing to your repo is required, see the [Adding Read/Write Deployment Keys 
 
 ## Capistrano
 
-Integrating CircleCI with Capistrano is simple. Once your project is set up to use Capistrano, just run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
+Once your project is set up to use Capistrano, just run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
 ```
 version: 2
 
@@ -334,7 +334,7 @@ For additional control or validation, you can add a manual "hold" step between t
 
 ```
 workflows:
-  version: 2 # Not required for `version 2.2` config
+  version: 2 # Not required for `version 2.1` config
   build-deploy:
     jobs:
       - test
@@ -427,7 +427,7 @@ workflows:
 
 ```
 
-If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run npm install by adding the below to `config.yml`:
+If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `config.yml`:
 
 ```
    - run: cd functions && npm install
