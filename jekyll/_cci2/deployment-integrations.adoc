@@ -37,7 +37,7 @@ environment:
 
 == Using Orbs to Simplify Deployment
 
-https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration, and often, for simple pipelines, simply invoking an orb, including a pre-configured job, and setting any required environment variables/SSH keys within your project will get you the results you need with no further configuration. 
+https://circleci.com/docs/2.0/orb-intro/[Orbs] are available for many common deployment targets to help simplify and streamline your config – check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. Orbs are packages of reusable configuration. For simple pipelines, simply invoking an orb, including a pre-configured job, and setting any required environment variables/SSH keys within your project will get you the results you need with no further configuration. 
 
 As an example, consider the https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
 
@@ -158,4 +158,3 @@ jobs:
 
 == Next Steps
 Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/orbs/registry/[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!
-
