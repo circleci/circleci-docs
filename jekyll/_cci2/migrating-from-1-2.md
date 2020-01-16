@@ -58,7 +58,7 @@ The `config-translation` endpoint can help you quickly get started with converti
      See the Using Machine section of the [Choosing an Executor Type](https://circleci.com/docs/2.0/executor-types/#using-machine) document for details about the available VM images.
      ```yaml
          macos: 
-           xcode: "9.0"
+           xcode: 11.3.0
      ```
 See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2.0/ios-migrating-from-1-2/) document for details.
 

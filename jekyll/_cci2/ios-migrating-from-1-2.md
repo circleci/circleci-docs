@@ -37,8 +37,8 @@ CircleCI 2.0:
 ```yaml
 # .circleci/config.yml
 
-# Specify the config version - version 2 is latest.
-version: 2
+# Specify the config version - version 2.1 is latest.
+version: 2.1
 
 # Define the jobs for the current project.
 jobs:
@@ -46,8 +46,7 @@ jobs:
 
     # Specify the Xcode version to use.
     macos:
-      xcode: "8.3.3"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
@@ -57,13 +56,9 @@ jobs:
       # Get the code from the VCS provider.
       - checkout
 
-      # Download CocoaPods specs via HTTPS (faster than Git)
-      # and install CocoaPods.
       - run:
           name: Install CocoaPods
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install
+          command: pod install
 
       # Run tests.
       - run:
@@ -80,8 +75,7 @@ jobs:
 
   deploy:
     macos:
-      xcode: "8.3.3"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
@@ -108,7 +102,6 @@ jobs:
           command: fastlane spaceship
 
 workflows:
-  version: 2
   build-and-deploy:
     jobs:
       - build-and-test
@@ -160,19 +153,19 @@ The following sections provide examples of 2.0 configuration syntax for an iOS p
 ### Job Name and Xcode Version
 {:.no_toc}
 
-In the 2.0 `.circleci/config.yml` file the first few lines specify the
+In the 2.1 `.circleci/config.yml` file the first few lines specify the
 name of the job and the Xcode version to use:
 
 ```
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "8.3.3"
+      xcode: 11.3.0
 ...
   deploy:
     macos:
-      xcode: "8.3.3"
+      xcode: 11.3.0
 ...
 ```
 
@@ -360,8 +353,7 @@ jobs:
   # add other jobs here
   deploy:
     macos:
-      xcode: 8.3.3
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 

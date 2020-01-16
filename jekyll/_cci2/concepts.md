@@ -83,8 +83,8 @@ An image is a packaged system that has the instructions for creating a running c
        image: circleci/classic:201708-01
 #...       
    build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 9.0
-       xcode: "9.0"       
+     macos: # Specifies a macOS virtual machine with Xcode version 11.3
+       xcode: "11.3.0"
 # ...          
  ```
 
