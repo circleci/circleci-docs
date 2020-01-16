@@ -227,7 +227,7 @@ If pushing to your repo is required, see the [Adding Read/Write Deployment Keys 
 
 ## Capistrano
 
-Integrating CircleCI with Capistrano is simple. Once your project is set up to use Capistrano, just run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
+Once your project is set up to use Capistrano, just run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
 ```
 version: 2
 
