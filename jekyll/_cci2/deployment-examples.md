@@ -232,7 +232,7 @@ If pushing to your repo is required, see the [Adding Read/Write Deployment Keys 
 
 ## Capistrano
 
-Once your project is set up to use Capistrano, just run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
+Once your project is set up to use Capistrano, you can run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
 ```
 version: 2
 
@@ -266,9 +266,41 @@ jobs:
 
 ## Cloud Foundry
 
+CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the [Orbs Registry](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job - in this example `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
+
+```
+version: 2.1
+
+orbs:
+  cloudfoundry: circleci/cloudfoundry@x.y.z # Use the Cloud Foundry orb in your config
+  
+workflows:
+  build_deploy:
+    jobs:
+      - cloudfoundry/blue_green:
+          appname: <your-app-name>
+          build_steps:
+            - run: echo 'your build steps'
+            - run: echo 'you can have more, too'
+            - run: echo 'or provide a workspace'
+          context: your-context
+          domain: your-domain
+          manifest: null
+          org: your-org
+          package: null
+          space: your-space
+          validate_steps:
+            - run: echo 'your validation steps'
+            - run: echo 'you can also have more of these'
+```
+
+If you would like more detailed information about various CloudFoundry orb examples that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+
+### Deploy to Cloud Foundry without Orbs
+
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
-### Install the CLI
+#### Install the CLI
 {:.no_toc}
 
 ```
@@ -283,7 +315,7 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
       cf target -o "$CF_ORG" -s "$CF_SPACE"
 ```
 
-### Dark Deployment
+#### Dark Deployment
 {:.no_toc}
 
 This is the first step in a Blue-Green deployment, pushing the application to non-production routes.
@@ -306,7 +338,7 @@ This is the first step in a Blue-Green deployment, pushing the application to no
       cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
 ```
 
-### Live Deployment
+#### Live Deployment
 {:.no_toc}
 
 Until now, the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
@@ -327,7 +359,7 @@ Until now, the previously pushed "app-name" has not changed.  The final step is 
       cf rename app-name-dark app-name
 ```
 
-### Manual Approval
+#### Manual Approval
 {:.no_toc}
 
 For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
@@ -358,31 +390,6 @@ workflows:
             branches:
               only: master
 ```
-
-### Orb Deployment Example
-
-CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) contains several different examples of how you can perform certain tasks with CloudFoundry, including the example below that shows how you can build and deploy your CloudFoundry application in a single job.
-
-```
-version: 2.1
-
-orbs:
-  cloudfoundry: circleci/cloudfoundry@x.y.z # Use the Cloud Foundry orb in your config
-  
-workflows:
-  build-deploy:
-    jobs:
-      - cloudfoundry/push:
-          appname: your-app
-          org: your-org
-          space: your-space
-          build_steps:
-            - run: # your build steps
-            - run: # you can have more, too
-          manifest: # path to manifest.yml file
-          package: # path to application package
-```
-If you would like more detailed information about various CloudFoundry orb examples that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ## Firebase
 
@@ -437,9 +444,37 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 
 Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
 
-In the following example, if `build-job` passes and the current branch was the master branch, CircleCI runs runs deployment commands.
+### Using Google Cloud Orbs
+
+There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/orbs/registry/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
 
 ```
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z # Use the GCP GKE orb in your config
+
+workflows:
+  main:
+    jobs:
+      - gke/publish-and-rollout-image:
+          cluster: <your-GKE-cluster> # name of GKE cluster to be created
+          container: <your-K8-container-name> # name of your Kubernetes container
+          deployment: <your-K8-deployment-name> # name of your Kubernetes deployment
+          image: <your-image> # name of your Docker image
+          tag: $CIRCLE_SHA1 # Docker image tag - optional
+```
+### Deployment to GKE without Orbs
+
+In the following example, if the `build-job` passes and the current branch is `master`, CircleCI runs the deployment job.
+
+{% raw %}
+```
+version: 2
+
+jobs:
+ build-job:
+  # steps ommitted for brevity
  deploy-job:
    docker:
      - image: my-image-version-tag
@@ -460,7 +495,7 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job # job declaration ommitted for brevity
+      - build-job 
       - deploy-job:
           requires:
             - build-job # Only deploy once the build job has completed
@@ -469,29 +504,9 @@ workflows:
               only: master # Only deploy on the master branch
 
 ```
+{% endraw %}
 
 For another example, see our [CircleCI Google Cloud deployment example project](https://github.com/CircleCI-Public/circleci-demo-k8s-gcp-hello-app).
-
-### Using Google Cloud Orbs to Simplify your Config
-
-There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/orbs/registry/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
-
-```
-version: 2.1
-
-orbs:
-  gke: circleci/gcp-gke@x.y.z # Use the GCP GKE orb in your config
-
-workflows:
-  main:
-    jobs:
-      - gke/publish-and-rollout-image:
-          cluster: your-GKE-cluster # name of GKE cluster to be created
-          container: your-K8-container-name # name of your Kubernetes container
-          deployment: your-K8-deployment-name # name of your Kubernetes deployment
-          image: your-image # name of your Docker image
-          tag: $CIRCLE_SHA1 # Docker image tag - optional
-```
 
 ## Heroku
 
