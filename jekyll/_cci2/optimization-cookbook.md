@@ -47,7 +47,8 @@ To configure the environment for the CircleCI platform and CircleCI orbs, follow
 version: 2.1
 ```
 
-2) If you do not already have pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** to enable pipelines.
+2) {% include snippets/enable-pipelines.md %}
+
 
 3) Add the `orbs` stanza below your version, invoking the orb. For example:
 

@@ -44,9 +44,7 @@ For more detailed information about CircleCI orbs, please refer to the [Orbs Int
 
 `version: 2.1`
 
-**Note:** If you do not already have pipelines enabled, go to **Settings > Project**, select settings for the project you are currently working on by clicking its cog icon, select **Advanced Settings** and scroll down to use the radio button to enable pipelines.
-
-![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
+**NOTE:** {% include snippets/enable-pipelines.md %}
 
 2) Add the orbs stanza below your version, which in turn imports the orb:
 
@@ -456,12 +454,11 @@ To configure your environment to use CircleCI and orbs, perform the following st
 
 `version: 2.1`
 
-2) If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and turn enable pipelines.
+2) {% include snippets/enable-pipelines.md %}
 
 Add the orbs stanza below your version, invoking the orb:
 
-`orbs:
-  aws-eks: circleci/aws-eks@0.2.1`
+`orbs: aws-eks: circleci/aws-eks@0.2.1`
 
 3) Use `aws-eks` elements in your existing workflows and jobs.
 

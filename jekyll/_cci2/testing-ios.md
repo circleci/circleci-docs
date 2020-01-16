@@ -243,11 +243,11 @@ This configuration can be used with the following CircleCI config file:
 
 ```yaml
 # .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -264,7 +264,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -278,7 +278,6 @@ jobs:
           path: output
 
 workflows:
-  version: 2
   build-test-adhoc:
     jobs:
       - build-and-test
@@ -597,21 +596,16 @@ will be run in Docker.
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
     steps:
       - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install CocoaPods
           command: pod install --verbose
@@ -647,7 +641,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint
