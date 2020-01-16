@@ -99,11 +99,11 @@ If build speed, or bugs introduced by new Homebrew updates, are of a concern, th
 To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable config.yml in your job:
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "11.3.0"
+      xcode: 11.3.0
     environment:
       HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
@@ -132,7 +132,7 @@ job as follows:
 
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
   swiftlint:
@@ -332,22 +332,22 @@ Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
 To pre-start the simulator, add the following to your
-`config.yml` file, assuming that you are running your tests on an iPhone 7
-simulator with iOS 10.2:
+`config.yml` file, assuming that you are running your tests on an iPhone 11 Pro
+simulator with iOS 13.2:
 
 ```
     steps:
       - run:
           name: pre-start simulator
-          command: xcrun instruments -w "iPhone 7 (10.2) [" || true
+          command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7
 simulator, as the phone + watch simulator is also present in the build
 image:
 
-* `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator.
-* `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
+* `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
+* `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
 
 ### Creating a `config.yml` File
 {:.no_toc}
