@@ -329,7 +329,7 @@ For additional control or validation, you can add a manual "hold" step between t
 
 ```
 workflows:
-  version: 2 # Not required for `version 2.2` config
+  version: 2 # Not required for `version 2.1` config
   build-deploy:
     jobs:
       - test
