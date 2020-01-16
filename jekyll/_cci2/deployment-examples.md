@@ -77,7 +77,7 @@ jobs: # Define the build and deploy jobs
 ```
 {% endraw %}
 
-#### Deploy to AWS S3 Without Orbs
+#### Deploy to AWS S3 with 2.0 Config
 {:.no_toc}
 
 1. For security best practice, create a new [IAM user](https://aws.amazon.com/iam/details/manage-users/) specifically for CircleCI.
@@ -296,7 +296,7 @@ workflows:
 
 If you would like more detailed information about various CloudFoundry orb examples that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
-### Deploy to Cloud Foundry without Orbs
+### Deploy to Cloud Foundry with 2.0 Config
 
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
@@ -440,7 +440,7 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
    - run: cd functions && npm install
 ```
 
-## Google Cloud
+## Google Cloud Platform
 
 Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
 
@@ -464,7 +464,7 @@ workflows:
           image: <your-image> # name of your Docker image
           tag: $CIRCLE_SHA1 # Docker image tag - optional
 ```
-### Deployment to GKE without Orbs
+### Deployment to GKE with 2.0 Config
 
 In the following example, if the `build-job` passes and the current branch is `master`, CircleCI runs the deployment job.
 
