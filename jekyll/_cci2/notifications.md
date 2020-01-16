@@ -91,7 +91,10 @@ You can use Orbs to integrate various kinds of notifications into your configura
 
 ### Prerequisites
 
-Before integrating an orb into your configuration, you will need to perform two steps: increment the `version` key in your config to `2.1` and enable `pipelines` under `Project Settings` > `Advanced Settings` in the CircleCI web application.
+Before integrating an orb into your configuration, you will need to perform two steps: 
+
+1. Increment the `version` key in your config to `2.1` and; 
+2. {% include snippets/enable-pipelines.md %}
 
 ### Using the Slack Orb
 

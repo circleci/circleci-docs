@@ -88,7 +88,7 @@ jobs:
 jobs:
   build-and-test:
     macos:
-      xcode: "9.3.0"
+      xcode: "11.3.0"
     steps:
       ...
       - run:

@@ -21,7 +21,7 @@ Setting your platform version to work with orbs is a very simple process, requir
 
 `version: 2.1`
 
-**Note** If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and turn it on.
+**NOTE:** {% include snippets/enable-pipelines.md %}
 
 2) Add the `orbs` stanza below your version, thereby invoking the orb. The example below shows how you can invoke the `aws-cli` orb.
 
@@ -39,17 +39,16 @@ The example below demonstrates how you can invoke the `hello-build` orb in the `
 ```yaml
 version: 2.1
 orbs:
-    hello: circleci/hello-build@0.0.5
+  hello: circleci/hello-build@0.0.5
 
 workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+  "Hello Workflow":
+    jobs:
+      - hello/hello-build
 ```
 
-**Note:** If your project was added to CircleCI prior to 2.1, you must enable pipelines to use the `orbs` key.
-
 ## Next Steps
+
 {:.no_toc}
 
 - Refer to [Selecting and Using an Orb]({{site.baseurl}}/2.0/orbs-user-select-orb/) for next steps.

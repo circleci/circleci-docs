@@ -337,13 +337,13 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version `9.0`:
+**Example:** Use a macOS virtual machine with Xcode version 11.3:
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "9.0"
+      xcode: "11.3.0"
 ```
 
 #### **`windows`**
@@ -473,7 +473,7 @@ large\*          | 8     | 16GB
 jobs:
   build:
     macos:
-      xcode: "11.0.0"
+      xcode: "11.3.0"
     resource_class: large
     steps:
       ... // other config
