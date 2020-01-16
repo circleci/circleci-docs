@@ -60,9 +60,50 @@ Under the hood, this orb creates, bundles and deploys your application using you
 
 == A Simple Example Using Heroku
 
-Below is a simple example of deploying a Rails application to Heroku. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]. 
+Below is a simple example of deploying a Rails application to Heroku. 
+
+==== Using the Heroku Orb
+
+Below is a Heroku Deployment example using the https://circleci.com/orbs/registry/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
+
+Looking at the `deploy-via-git` command source in the https://circleci.com/orbs/registry/orb/circleci/heroku[Orbs Registry], we can see this succinct config requires that the following environment variables are set: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`. {% include snippets/env-var-or-context.md %}.
+
+```yaml
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
+
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - build
+          filters:
+            branches:
+              only: sequential-branch-filter
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    working_directory: ~/circleci-demo-workflows
+    steps:
+      - checkout
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+      # Database setup
+      - run: bundle exec rake db:create db:schema:load
+      - run:
+          name: Run tests
+          command: rake
+```
 
 ==== 2.0 config
+
+This version shows the same pipeline, but without using the orb. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]
 
 The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run. If your deploy job uses any output from previous jobs, you can share that data by https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[using workspaces]. For more information on conditional deploys, see https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[Using Contexts and Filtering in your Workflows].
 
@@ -118,40 +159,7 @@ workflows:
               only: sequential-branch-filter
 ```
 
-==== Using the Heroku Orb
 
-Below is the same Heroku Deployment example but this time using the https://circleci.com/orbs/registry/orb/circleci/heroku[Heroku orb] to simplify the configuration. Looking at the `deploy-via-git` command source in the Orbs Registry, we can see this succinct config requires that the following environment variables <<env-vars#setting-an-environment-variable-in-a-project,are set at the project level>>: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`.
-
-```yaml
-version: 2.1
-orbs:
-  heroku: circleci/heroku@0.0.10. # Invoke the Heroku orb
-workflows:
-  heroku_deploy:
-    jobs:
-      - build
-      - heroku/deploy-via-git: # Use the pre-built deploy-via-git job
-          requires:
-            - build
-          filters:
-            branches:
-              only: sequential-branch-filter
-jobs:
-  build:
-    docker:
-      - image: circleci/ruby:2.4-node
-      - image: circleci/postgres:9.4.12-alpine
-    working_directory: ~/circleci-demo-workflows
-    steps:
-      - checkout
-      # Bundle install dependencies
-      - run: bundle install --path vendor/bundle
-      # Database setup
-      - run: bundle exec rake db:create db:schema:load
-      - run:
-          name: Run tests
-          command: rake
-```
 ////
 == Deployment Security Considerations
 ////
