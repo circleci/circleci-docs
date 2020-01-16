@@ -116,7 +116,9 @@ jobs:
 If your iOS app crashes in the Simulator during a test run, the crash report is useful for diagnosing the exact cause of the crash. These can be uploaded as artifacts to assist with debugging the app crash:
 
 ```yaml
-- store_artifacts:
+steps:
+  # ...
+  - store_artifacts:
     path: ~/Library/Logs/DiagnosticReports
 ```
 
