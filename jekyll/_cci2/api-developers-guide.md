@@ -164,13 +164,13 @@ you choose.
 **Prerequisites**
 
 - A GitHub or BitBucket account with a repository to setup with CircleCI.
-- Completion of the CircleCI onboarding and you have a project setup.
+- Completion of the CircleCI onboarding.
 
 **Steps**
 
-On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
+1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
 
-Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{ORG_NAME} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `ORG_NAME` is your organization or personal VCS username. Find your project in the onboarding list and click `Setup Project`. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
+2. Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{ORG_NAME} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `ORG_NAME` is your organization or personal VCS username. Find your project in the onboarding list and click `Setup Project`. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
 
 ```sh
 # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
@@ -189,9 +189,9 @@ workflows:
 ```
 
 
-Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
+3. Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
 
-It's time to test our your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
+4. It's time to test our your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
 ```sh
 # First: set your CircleCI token as an environment variable
@@ -241,7 +241,7 @@ You will likely receive a long string of unformatted JSON. After formatting, it 
 
 That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
 
-One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
+5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
 ```sh
 curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
@@ -270,7 +270,7 @@ curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world
   -d "branch=my-branch"
 ```
 
-Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
+6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
 ```yaml
 version: 2.1
@@ -292,7 +292,7 @@ jobs:
 
 You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the json payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
-Now we can run a `curl` request that passes variables in a POST request, as so:
+7. Now we can run a `curl` request that passes variables in a POST request, as so:
 
 ```sh
 curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
@@ -302,7 +302,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline
 ```
 
-This concludes the end-to-end example of using the V2 API. Consider reading the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currentl available.
+This concludes the end-to-end example of using the V2 API. Consider reading the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currently available.
 
 # API Use Cases
 
