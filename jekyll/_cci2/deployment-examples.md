@@ -14,6 +14,7 @@ This document presents example config for a variately of popular deployment targ
 * In order to use orbs you must use `version 2.1` config, and enable pipelines for your project. 
 * If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the jobs are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags at the end of the orbs stanza, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You will find the available versions listed on the orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+* Any items in these examples that appear within `< >` should be replaced with your own parameters.
 
 ## AWS
 
@@ -36,9 +37,10 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
 
 3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
-  
+
+{% raw %}  
 ```
-version: 2.1 # Specify version 2.1 config to get access to orbs, pipelines
+version: 2.1 
 
 orbs:
   aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your config
@@ -73,6 +75,7 @@ jobs: # Define the build and deploy jobs
             --cache-control "max-age=86400"
           overwrite: true # default is false
 ```
+{% endraw %}
 
 #### Deploy to AWS S3 Without Orbs
 {:.no_toc}
@@ -116,16 +119,16 @@ jobs:
           command: sudo pip install awscli
       - run: # Deploy to S3 using the sync command
           name: Deploy to S3
-          command: aws s3 sync path/to/bucket s3://location/in/S3-to-deploy-to 
+          command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
 ```
 
 For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
 ### Deploy Docker Image to AWS ECR
 
-The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) for a full list of parameters, built-in jobs and commands.
+The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) for a full list of parameters, jobs, commands and options.
 
-Using the `build_and_push` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
+Using the `build_and_push_image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
 
 ```
 version: 2.1
@@ -137,20 +140,21 @@ workflows:
   build_and_push_image: 
     jobs:
       - aws-ecr/build_and_push_image: # Use the pre-defined `build_and_push_image` job
-          create-repo: true # Default is false
-          dockerfile: myDockerfile
-          path: pathToMyDockerfile
-          profile-name: myProfileName
-          repo: myECRRepository
-          tag: myECRRepoTag
+          dockerfile: <my-Docker-file>
+          path: <path-to-my-Docker-file>
+          profile-name: <my-profile-name>
+          repo: <my-ECR-repo>
+          tag: <my-ECR-repo-tag> # default - latest
 ```
 
 ### Update an AWS ECS Instance
 
 Use the [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) and [ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
 
+Using the `build_and_push_image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
+
 ```
-version: 2.1 # use 2.1 to make use of orbs and pipelines
+version: 2.1 
 
 orbs:
   aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your config
@@ -160,10 +164,11 @@ workflows:
   build-and-deploy:
     jobs:
       - aws-ecr/build_and_push_image:
-          account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
-          repo: '${MY_APP_PREFIX}'
-          region: '${AWS_REGION}'
-          tag: '${CIRCLE_SHA1}'
+          dockerfile: <my-Docker-file>
+          path: <path-to-my-Docker-file>
+          profile-name: <my-profile-name>
+          repo: ${MY_APP_PREFIX}
+          tag: '${CIRCLE_SHA1}' 
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build_and_push_image # only run the deployment job once the build and push image job has completed
@@ -186,11 +191,11 @@ workflows:
   deploy_application:
     jobs:
       - aws-code-deploy/deploy:
-          application-name: myApplication # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
-          deployment-group: myDeploymentGroup # The name of a new deployment group for the specified application.
-          service-role-arn: myDeploymentGroupRoleARN # The service role for a deployment group.
-          bundle-bucket: myApplicationS3Bucket # The s3 bucket where an application revision will be stored.
-          bundle-key: myS3BucketKey # A key under the s3 bucket where an application revision will be stored.
+          application-name: <my-application> # The name of an AWS CodeDeploy application associated with the applicable IAM user or AWS account.
+          deployment-group: <my-deployment-group> # The name of a new deployment group for the specified application.
+          service-role-arn: <my-deployment-group-role-ARN> # The service role for a deployment group.
+          bundle-bucket: <my-application-S3-bucket> # The s3 bucket where an application revision will be stored.
+          bundle-key: <my-S3-bucket-key> # A key under the s3 bucket where an application revision will be stored.
 ```
 
 ## Azure Container Registry
