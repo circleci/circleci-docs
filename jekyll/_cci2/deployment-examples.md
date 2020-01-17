@@ -289,16 +289,16 @@ workflows:
           org: your-org
           package: null
           space: your-space
-          validate_steps:
-            - run: echo 'your validation steps'
-            - run: echo 'you can also have more of these'
+          validate_steps: 
+            # Call any orbs or custom commands that validate the health of deployed application before letting Green deploy/reroute proceed.
+            # For example,  hitting a /health endpoint with curl and making sure the dark URL returns a 200.
 ```
 
-If you would like more detailed information about various CloudFoundry orb examples that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ### Deploy to Cloud Foundry with 2.0 Config
 
-Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you're using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
+Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you are using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
 #### Install the CLI
 {:.no_toc}
@@ -325,17 +325,17 @@ This is the first step in a Blue-Green deployment, pushing the application to no
     name: CF Deploy
     command: |
       # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-      cf push --no-start app-name-dark -f manifest.yml -p application.jar -n dark -d example.com
+      cf push --no-start <app-name-dark> -f manifest.yml -p application.jar -n dark -d <example.com>
       # Pass CircleCI variables to Cloud Foundry (optional)
-      cf set-env app-name-dark circle_build_num ${CIRCLE_BUILD_NUM}
-      cf set-env app-name-dark circle_commit ${CIRCLE_SHA1}
-      cf set-env app-name-dark circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
-      cf set-env app-name-dark circle_user ${CIRCLE_PROJECT_USERNAME}
-      cf set-env app-name-dark circle_repo ${CIRCLE_PROJECT_REPONAME}
+      cf set-env <app-name-dark> circle_build_num ${CIRCLE_BUILD_NUM}
+      cf set-env <app-name-dark> circle_commit ${CIRCLE_SHA1}
+      cf set-env <app-name-dark> circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
+      cf set-env <app-name-dark> circle_user ${CIRCLE_PROJECT_USERNAME}
+      cf set-env <app-name-dark> circle_repo ${CIRCLE_PROJECT_REPONAME}
       # Start the application
-      cf start app-name-dark
+      cf start <app-name-dark>
       # Ensure dark route is exclusive to dark app
-      cf unmap-route app-name example.com -n dark || echo "Dark Route Already exclusive"
+      cf unmap-route <app-name> <example.com> -n dark || echo "Dark Route Already exclusive"
 ```
 
 #### Live Deployment
@@ -366,7 +366,7 @@ For additional control or validation, you can add a manual "hold" step between t
 
 ```
 workflows:
-  version: 2 # Not required for `version 2.1` config
+  version: 2 # only requires if using `version: 2` config.
   build-deploy:
     jobs:
       - test
@@ -385,7 +385,7 @@ workflows:
               only: master
       - live-deploy:
           requires:
-            - hold
+            - hold # manual approval required via the CircleCI UI to run the live-deploy job
           filters:
             branches:
               only: master
@@ -513,16 +513,45 @@ For another example, see our [CircleCI Google Cloud deployment example project](
 [Heroku](https://www.heroku.com/) is a popular platform for hosting applications in the cloud. To configure CircleCI
 to deploy your application to Heroku, follow the steps below.
 
+### Deploy with the Heroku Orb
+
 1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
 to set up a project in your chosen language.
 
-2. Add the name of your Heroku application and your Heroku API key as environment variables.
-See [Adding Project Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) for instructions.
-In this example, these variables are defined as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively.
+2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
 
-1. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-types/).
+3. Use the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the [orbs registry](https://circleci.com/orbs/registry/orb/circleci/heroku) for full details of parameters and options:
 
-2. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
+```
+version: 2.1
+
+orbs:
+  heroku: circleci/heroku@x.y # Use the Heroku orb in your config
+
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+            branches:
+              only: master # only run deploy-via-git job on master branch
+```
+
+For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
+
+### Heroku Deployment with 2.0 Config
+
+1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
+to set up a project in your chosen language.
+
+2. Add the name of your Heroku application and your Heroku API key as environment variables as `HEROKU_APP_NAME` and `HEROKU_API_KEY`, respectively. {% include snippets/env-var-or-context.md %}
+
+3. In your `.circleci/config.yml`, create a deployment job and add an [executor type]({{ site.baseurl }}/2.0/executor-types/).
+
+4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
 
 ```
 version: 2
@@ -553,30 +582,6 @@ workflows:
               only: master # only run deploy-via-git job on master branch
 ```
 **Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
-
-### Deploy with the Heroku Orb
-
-If you would like to simplify your Heroku configuration, you can use config `version 2.1` and invoke the Heroku orb:
-
-```
-version: 2.1
-
-orbs:
-  heroku: circleci/heroku@x.y # Use the Heroku orb in your config
-
-workflows:
-  heroku_deploy:
-    jobs:
-      - build
-      - heroku/deploy-via-git
-          requires:
-            - build # only run deploy-via-git job if the build job has completed
-          filters:
-            branches:
-              only: master # only run deploy-via-git job on master branch
-```
-
-For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
 
 ## NPM
 
