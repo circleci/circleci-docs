@@ -16,7 +16,9 @@ This *API Developer's Guide* was written to assist developers in quickly and eas
 
 The CircleCI platform provides a powerful API that enables users to retrieve detailed information about users, jobs, workflows and pipelines.
 
-CircleCI API v2 enables you to use endpoints with several new features that improve the API experience, in addition to optimizing how you use the API for your jobs. Please note that CircleCI API v2 is currently in active development, therefore, the stability of the API is referred to as “mixed”.
+**Note:** Whenever you see a term prefixed with a colon (:), please note that this value must be replaced by a user-input value. For example `:token` in the above call must be replaced by the token string generated in your account:
+
+curl https://circleci.com/api/v1.1/me?circle-token=dkanmbowk34iajdkl3iakdthisisarandomtoken
 
 ## API Classes
 
@@ -42,11 +44,15 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 To add an API token, perform the steps listed below.
 
 1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
-2.  To test it, [View it in your browser](https://circleci.com/api/v1.1/me) or call the API using the command below.
+2.  To test it, [view it in your browser](https://circleci.com/api/v1.1/me) or call the API using the command below.
 
 ```sh
 $ curl https://circleci.com/api/v1.1/me?circle-token=:token
 ```
+
+**Note:** Whenever you see a term prefixed with a colon (:), please note that this value must be replaced by a user-input value. For example `:token` in the above call must be replaced by the token string generated in your account:
+
+`curl https://circleci.com/api/v1.1/me?circle-token=dkanmbowk34iajdkl3iakdthisisarandomtoken`
 
 3.  You should see a response similar to the example shown below.
 
@@ -62,7 +68,7 @@ $ curl https://circleci.com/api/v1.1/me?circle-token=:token
  }
 ```
 
-**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token.
+**Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
 
 ### Get Authenticated
 
@@ -82,7 +88,7 @@ curl -u <circle-token>: "https://circleci.com/api/..."
 
 ## API Endpoints
 
-The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These APIs provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
+The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
 
 Before working with the API and making calls, you should first have an undestanding of the endpoints currently available. The table below lists the endpoints currently available. 
 
@@ -118,10 +124,6 @@ With API v2, CircleCI is introducing a string representation of the triplet call
 
 The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a project_slug may change, but in all cases it would be usable as a human-readable identifier for a given project.
 
-## Rate Limiting/Throttling
-
-CircleCI does not currently perform any throttling or rate limiting. In the future, CircleCI may institute rate limiting or throttling or both to monitor the number of API calls made to the service and ensure that the system is more stable and has higher overall performance
-
 # HTTP Status Codes and Response Handling
 
 When you make an API request to the server, an HTTP status code is returned along with the JSON body response. The CircleCI API v2 adheres to standard HTTP response codes, which include the following status code definitions:
@@ -150,9 +152,9 @@ If you receive a 500 HTTP status code, there is a problem with the server and th
 
 `500 - Internal Server Error`
 
-For more detailed information about HTTP status codes, refer to the following resource:
+# REST API Tutorial
 
-http://www.restapitutorial.com/httpstatuscodes.html
+For more detailed information about HTTP status codes, refer to the [rest api tutorial](http://www.restapitutorial.com/httpstatuscodes.html).
 
 # Example End-to-End API Request
 
@@ -166,7 +168,6 @@ you choose.
 - A GitHub or BitBucket account with a repository to setup with CircleCI.
 - Completion of the CircleCI onboarding.
 - **Optional**: You can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`.
-
 
 **Steps**
 
@@ -308,15 +309,48 @@ you choose.
 
 This section includes several different example API use cases that you can use to better understand how the CircleCI API works, and how you can leverage the API in your own day-to-day work to take advantage of the numerous features and functions of the API.
 
-## Get a List of Pipelines for a Project
+## Get Job Details
+
+The following section details the steps you need to perform to retrieve detailed information about a job using a `GET` API call. Returning details about a specific job can be very helpful in better understanding job performance and what changes, if any, you may wish to make to ensure even better job performance in your future tests.
+
+**Prerequisites**
+
+Before making an API call, make sure you have met the following prerequisites:
+
+- You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
+- You have completed CircleCI onboarding and you have a project setup.
+- You have a personal API token.
+- You are authenticated to make API calls to the server.
+
+**Steps**
+
+Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call, `GET /project/{project-slug}/job/{job-number}`, enables you to return information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
+
+**Note** In this example, please note that whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+
+To return job details, perform the folling steps:
+
+1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project slug` and `job number` parameters you want returned in the JSON payload in your `curl` request as follows:
+
+```sh
+curl -X GET https://circleci.com/api/v2/project/{project-slug}/job/{job-number} \ 
+-H 'Accept: application/json'```
 
 
-## Trigger a Pipeline
 
+You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we define an "image-tag" to be expected in the json payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
-## Get a Workflow or Job
+Now we can run a `curl` request that passes variables in a POST request, as so:
+
+```sh
+curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {
+    "image-tag": "4.8.2"
+  }
+}' https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline
+```
+
+This concludes the end-to-end example of using the V2 API. Consider reading the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currentl available.
 
 
 ## Download Artifacts
-
-
