@@ -33,7 +33,7 @@ environment:
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>> 
 
-* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<configuration-reference#type,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI UI.
+* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI UI.
 
 == Using Orbs to Simplify Deployment
 
@@ -43,8 +43,10 @@ As an example, consider the https://circleci.com/orbs/registry/orb/circleci/aws-
 
 ```yaml
 version: 2.1
+
 orbs:
   aws-code-deploy: circleci/aws-code-deploy@0.0.11
+
 workflows:
   deploy_application:
     jobs:
@@ -146,6 +148,7 @@ jobs:
             heroku run rake db:migrate
             sleep 5 # sleep for 5 seconds to wait for dynos
             heroku restart
+            
 workflows:
   version: 2
   build-and-deploy:

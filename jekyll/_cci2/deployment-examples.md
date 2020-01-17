@@ -12,6 +12,7 @@ This document presents example config for a variately of popular deployment targ
 {:.no_toc}
 
 * In order to use orbs you must use `version 2.1` config, and enable pipelines for your project. 
+* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
 * If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the jobs are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags at the end of the orbs stanza, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You will find the available versions listed on the orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 * Any items in these examples that appear within `< >` should be replaced with your own parameters.
@@ -26,7 +27,7 @@ For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs,
 - [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
 
 ### Deploy to S3
-
+{:.no_toc}
 #### Using the AWS S3 Orb
 {:.no_toc}
 
@@ -38,44 +39,44 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
 
-{% raw %}  
-```
-version: 2.1 
+    {% raw %}  
+    ```
+    version: 2.1 
 
-orbs:
-  aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your config
+    orbs:
+      aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your config
 
-workflows: # Define a Workflow running the build job, then the deploy job
-  version: 2
-  build-deploy: # Make a workflow to build and deploy your project
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build # Only run deploy job once the build job has completed
-          filters:
-            branches:
-              only: master # Only deploy when the commit is on the Master branch
+    workflows: # Define a Workflow running the build job, then the deploy job
+      version: 2
+      build-deploy: # Make a workflow to build and deploy your project
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build # Only run deploy job once the build job has completed
+              filters:
+                branches:
+                  only: master # Only deploy when the commit is on the Master branch
 
-jobs: # Define the build and deploy jobs
-  build:
-    docker: # Use the Docker executor for the build job
-      - image: <image-name-and-tag> # Specify the Docker image to use for the build job
-  ... # build job steps omitted for brevity
-  deploy:
-    docker: # Use the Docker executor for the deploy job
-      - image: <image-name-and-tag>  Specify the Docker image to use for the deploy job
-  steps:
-      - checkout
-      - aws-s3/sync:
-          from: bucket
-          to: 's3://my-s3-bucket-name/prefix'
-          arguments: | # Optional arguments
-            --acl public-read \
-            --cache-control "max-age=86400"
-          overwrite: true # default is false
-```
-{% endraw %}
+    jobs: # Define the build and deploy jobs
+      build:
+        docker: # Use the Docker executor for the build job
+          - image: <image-name-and-tag> # Specify the Docker image to use for the build job
+      ... # build job steps omitted for brevity
+      deploy:
+        docker: # Use the Docker executor for the deploy job
+          - image: <image-name-and-tag>  Specify the Docker image to use for the deploy job
+      steps:
+          - checkout
+          - aws-s3/sync:
+              from: bucket
+              to: 's3://my-s3-bucket-name/prefix'
+              arguments: | # Optional arguments
+                --acl public-read \
+                --cache-control "max-age=86400"
+              overwrite: true # default is false
+    ```
+    {% endraw %}
 
 #### Deploy to AWS S3 with 2.0 Config
 {:.no_toc}
@@ -90,42 +91,42 @@ jobs: # Define the build and deploy jobs
 
 5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
 
-```
-version: 2
+    ```
+    version: 2
 
-workflows: # Define a Workflow running the build job, then the deploy job
-  version: 2
-  build-deploy:
+    workflows: # Define a Workflow running the build job, then the deploy job
+      version: 2
+      build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build
+              filters:
+                branches:
+                  only: master # Only deploys when the commit is on the Master branch
+
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master # Only deploys when the commit is on the Master branch
-
-jobs:
-  build:
-    docker: # Specify executor for running build job - this example uses a Docker container
-      - image: <docker-image-name-tag> # Specify docker image to use
-  ... # build job steps omitted for brevity
-  deploy:
-    docker: # Specify executor for running deploy job
-      - image: <docker-image-name-tag> # Specify docker image to use
-    steps:
-      - run: # Install the AWS CLI if it is not already included in the docker image
-          name: Install awscli 
-          command: sudo pip install awscli
-      - run: # Deploy to S3 using the sync command
-          name: Deploy to S3
-          command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
-```
+      build:
+        docker: # Specify executor for running build job - this example uses a Docker container
+          - image: <docker-image-name-tag> # Specify docker image to use
+      ... # build job steps omitted for brevity
+      deploy:
+        docker: # Specify executor for running deploy job
+          - image: <docker-image-name-tag> # Specify docker image to use
+        steps:
+          - run: # Install the AWS CLI if it is not already included in the docker image
+              name: Install awscli 
+              command: sudo pip install awscli
+          - run: # Deploy to S3 using the sync command
+              name: Deploy to S3
+              command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
+    ```
 
 For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
 ### Deploy Docker Image to AWS ECR
-
+{:.no_toc}
 The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) for a full list of parameters, jobs, commands and options.
 
 Using the `build_and_push_image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
@@ -148,6 +149,7 @@ workflows:
 ```
 
 ### Update an AWS ECS Instance
+{:.no_toc}
 
 Use the [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) and [ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
 
@@ -178,6 +180,7 @@ workflows:
 ```
 
 ### AWS CodeDeploy
+{:.no_toc}
 
 The [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy) orb enables you to run deployments through AWS CodeDeploy.
 
@@ -208,25 +211,25 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the current branch is `master`.
   
-```
-version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
+    ```
+    version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
 
-orbs:
-  azure-acr: circleci/azure-acr@x.y.z # Use the Azure ACR orb in your config
+    orbs:
+      azure-acr: circleci/azure-acr@x.y.z # Use the Azure ACR orb in your config
 
-workflows: 
-  build-deploy:
-    jobs:
-      - azure/build-and-push-image:
-          dockerfile: <name-of-your-dockerfile> # defaults to `Dockerfile`
-          path: <path-to-your-dockerfile> # Defaults to working directory
-          login-server-name: <your-login-server-name> # e.g. {yourregistryname}.azure.io
-          registry-name: <your-ACR-registry-name>
-          repo: <URI-to-your-login-server-name>
-          filters:
-            branches:
-              only: master # Only deploys when the commit is on the Master branch
-```
+    workflows: 
+      build-deploy:
+        jobs:
+          - azure/build-and-push-image:
+              dockerfile: <name-of-your-dockerfile> # defaults to `Dockerfile`
+              path: <path-to-your-dockerfile> # Defaults to working directory
+              login-server-name: <your-login-server-name> # e.g. {yourregistryname}.azure.io
+              registry-name: <your-ACR-registry-name>
+              repo: <URI-to-your-login-server-name>
+              filters:
+                branches:
+                  only: master # Only deploys when the commit is on the Master branch
+    ```
 
 If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
@@ -297,6 +300,7 @@ workflows:
 If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 ### Deploy to Cloud Foundry with 2.0 Config
+{:.no_toc}
 
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you are using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
@@ -445,6 +449,7 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
 
 ### Using Google Cloud Orbs
+{:.no_toc}
 
 There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/orbs/registry/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
 
@@ -465,6 +470,7 @@ workflows:
           tag: $CIRCLE_SHA1 # Docker image tag - optional
 ```
 ### Deployment to GKE with 2.0 Config
+{:.no_toc}
 
 In the following example, if the `build-job` passes and the current branch is `master`, CircleCI runs the deployment job.
 
@@ -477,7 +483,7 @@ jobs:
   # steps ommitted for brevity
  deploy-job:
    docker:
-     - image: my-image-version-tag
+     - image: <docker-image-name-tag>
    working_directory: /tmp/my-project  
    steps:
      - run:
@@ -514,7 +520,7 @@ For another example, see our [CircleCI Google Cloud deployment example project](
 to deploy your application to Heroku, follow the steps below.
 
 ### Deploy with the Heroku Orb
-
+{:.no_toc}
 1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
 to set up a project in your chosen language.
 
@@ -522,27 +528,28 @@ to set up a project in your chosen language.
 
 3. Use the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the [orbs registry](https://circleci.com/orbs/registry/orb/circleci/heroku) for full details of parameters and options:
 
-```
-version: 2.1
+    ```
+    version: 2.1
 
-orbs:
-  heroku: circleci/heroku@x.y # Use the Heroku orb in your config
+    orbs:
+      heroku: circleci/heroku@x.y # Use the Heroku orb in your config
 
-workflows:
-  heroku_deploy:
-    jobs:
-      - build
-      - heroku/deploy-via-git
-          requires:
-            - build # only run deploy-via-git job if the build job has completed
-          filters:
-            branches:
-              only: master # only run deploy-via-git job on master branch
-```
+    workflows:
+      heroku_deploy:
+        jobs:
+          - build
+          - heroku/deploy-via-git
+              requires:
+                - build # only run deploy-via-git job if the build job has completed
+              filters:
+                branches:
+                  only: master # only run deploy-via-git job on master branch
+    ```
 
 For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
 
 ### Heroku Deployment with 2.0 Config
+{:.no_toc}
 
 1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
 to set up a project in your chosen language.
@@ -553,34 +560,34 @@ to set up a project in your chosen language.
 
 4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
 
-```
-version: 2
+    ```
+    version: 2
 
-jobs:
-  build:
-    ...
-  deploy:
-    docker:
-      - image: <docker-image-name-tag>
-    steps:
-      - checkout
-      - run:
-          name: Deploy Master to Heroku
-          command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-
-workflows:
-  version: 2
-  build-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build # only run deploy-via-git job if the build job has completed
-          filters:
-            branches:
-              only: master # only run deploy-via-git job on master branch
-```
+      build:
+        ...
+      deploy:
+        docker:
+          - image: <docker-image-name-tag>
+        steps:
+          - checkout
+          - run:
+              name: Deploy Master to Heroku
+              command: |
+                git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+
+    workflows:
+      version: 2
+      build-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build # only run deploy-via-git job if the build job has completed
+              filters:
+                branches:
+                  only: master # only run deploy-via-git job on master branch
+    ```
 **Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
 
 ## NPM
@@ -589,7 +596,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
 1.  Obtain the npm authToken for the account that you wish to use to publish the package.
 
-You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. Look for the following line:
+    You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. Look for the following line:
 
     ```
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
@@ -601,30 +608,30 @@ You can do that by logging in to npm (`npm login`). This will save the authToken
 
 3.  Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and only for versioned tags:
 
-```
-version: 2
+    ```
+    version: 2
 
-jobs:
-  publish:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
-      - checkout
-      - run:
-          name: Publish to NPM
-          command: | 
-            npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-            npm publish
-
-workflows:
-  version: 2
-  tagged-build:
     jobs:
-      - publish:
-          filters:
-            tags:
-              only: /v[0-9]+(\.[0-9]+)*/
-```
+      publish:
+        docker:
+          - image: <docker-image-name-tag>
+        steps:
+          - checkout
+          - run:
+              name: Publish to NPM
+              command: | 
+                npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+                npm publish
+
+    workflows:
+      version: 2
+      tagged-build:
+        jobs:
+          - publish:
+              filters:
+                tags:
+                  only: /v[0-9]+(\.[0-9]+)*/
+    ```
 
 4.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
@@ -649,30 +656,30 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
 
 3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the master branch.
 
-```
-version: 2
+    ```
+    version: 2
 
-jobs:
-  build:
-    #...
-  deploy:
-    machine:
-      enabled: true
-    steps:
-      - run:
-          name: Deploy Over SSH
-          command: |
-            ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
-
-workflows:
-  version: 2
-  build-and-deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-```
+      build:
+        #...
+      deploy:
+        machine:
+          enabled: true
+        steps:
+          - run:
+              name: Deploy Over SSH
+              command: |
+                ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
+
+    workflows:
+      version: 2
+      build-and-deploy:
+        jobs:
+          - build
+          - deploy:
+              requires:
+                - build # only deploy once build job has completed
+              filters:
+                branches:
+                  only: master # only deploy on the master branch
+    ```
