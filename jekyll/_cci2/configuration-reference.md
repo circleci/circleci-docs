@@ -80,7 +80,7 @@ commands:
 ```
 
 ## **`parameters`** (requires version: 2.1)
-Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details. 
+Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
 ----|-----------|------|------------
@@ -102,6 +102,8 @@ shell | N | String | Shell to use for execution command in all steps. Can be ove
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
+
+<sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
 
 Example:
 
@@ -941,7 +943,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
   > **skipping deploy**
   > Running in SSH mode.  Avoid deploying.
-  
+
 When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
 
 - [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
@@ -1354,7 +1356,7 @@ workflows:
 jobs:
 ...
 ```
- 
+
 This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
 ```
