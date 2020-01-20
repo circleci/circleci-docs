@@ -558,7 +558,7 @@ jobs:
     executor: win/gpu-nvidia
     steps:
       - checkout
-      - run: echo 'Hello, Nvidia GPU on Windows'
+      - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
 <sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
