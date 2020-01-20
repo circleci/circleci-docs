@@ -286,7 +286,6 @@ you choose.
           - image: circleci/node:<< pipeline.parameters.image-tag >>
         environment:
           IMAGETAG: << pipeline.parameters.image-tag >>
-        working_directory: << pipeline.parameters.workingdir >>
         steps:
           - run: echo "Image tag used was ${IMAGETAG}"
     ```
