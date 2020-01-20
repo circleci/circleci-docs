@@ -430,19 +430,17 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 **Note:** This feature is automatically enabled on free and Performance plans. Available resources classes are restricted for customers on the free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the free plan. If you are on a container plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
 
-\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
-
 ##### Docker Executor
 
-Class            | vCPUs | RAM
------------------|-------|-----
-small            | 1     | 2GB
-medium (default) | 2     | 4GB
-medium+          | 3     | 6GB
-large            | 4     | 8GB
-xlarge           | 8     | 16GB
-2xlarge\*        | 16    | 32GB
-2xlarge+\*       | 20    | 40GB
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+small                 | 1     | 2GB
+medium (default)      | 2     | 4GB
+medium+               | 3     | 6GB
+large                 | 4     | 8GB
+xlarge                | 8     | 16GB
+2xlarge<sup>(2)</sup> | 16    | 32GB
+2xlarge+<sup>(2)</sup>| 20    | 40GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -476,10 +474,10 @@ jobs:
 
 ##### macOS Executor
 
-Class            | vCPUs | RAM
------------------|-------|-----
-medium (default) | 4     | 8GB
-large\*          | 8     | 16GB
+Class              | vCPUs | RAM
+-------------------|-------|-----
+medium (default)   | 4     | 8GB
+large<sup>(2)</sup>| 8     | 16GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -513,17 +511,17 @@ jobs:
   build:
     executor: win/default
     steps:
-      ... // other config
+      - run: Write-Host 'Hello, Windows'
 ```
 
 See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
 ##### GPU Executor (Linux)
 
-Class               | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
---------------------|-------|-----|------|-----------------|------------------
-gpu.nvidia.small\*  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
-gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+--------------------------------|-------|-----|------|-----------------|------------------
+gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
+gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -536,16 +534,17 @@ jobs:
       resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
     steps:
-      ... // other config
+      - run: nvidia-smi
+      - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
 ```
 
 See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
 
 ##### GPU Executor (Windows)
 
-Class                       | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
-----------------------------|-------|-----|------|-----------------|------------------
-windows.gpu.nvidia.medium\* |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+----------------------------------------|-------|-----|------|-----------------|------------------
+windows.gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -562,7 +561,7 @@ jobs:
       - run: echo 'Hello, Nvidia GPU on Windows'
 ```
 
-\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
+<sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
