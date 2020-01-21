@@ -46,7 +46,9 @@ The `project_slug` is included in the payload when pulling information about a p
 
 The CircleCI API v2 enables users to be authenticated by simply sending your API token as the username of the HTTP request. For example, if you have set `CIRCLECI_TOKEN` in your shell's environment, you could then use `curl` with that token like the example shown below:
 
-`curl -user ${CIRCLECI_TOKEN} https://circleci.com/api/v2/me`
+`curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
+
+**Note**, the `:` is included to indicate there is no password.
 
 ### Pipelines
 
@@ -64,7 +66,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
     "myparam": "./myspecialdir",
     "myspecialversion": "4.8.2"
   }
-}' https://circleci.com/api/v2/project/${project_slug}/pipeline
+}' https://circleci.com/api/v2/project/{project_slug}/pipeline
 ```
 
 In the above example the `project_slug` would take the form `:vcs/:org/:project`. For example, the project slug `gh/CircleCI-Public/circleci-cli` tells `CircleCI` to use the project found in the GitHub organization CircleCI-Public in the repository named `circleci-cli`.
