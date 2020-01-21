@@ -17,11 +17,11 @@
 
 ### Find the Launch Configuration and Service Box IP address
 
-1. Select `Auto Scaling Group` located near the bottom of the left navigation pane
+1. Select `Auto Scaling Groups` located near the bottom of the left navigation pane
 2. Select the auto scaling group configuration associated with your Server installation.  Typically resembles `*-ghe_nomad_clients_asg`
 3. Make note of the name of `Launch Configuration` under the `Details` tab.  Typically resembles `terraform-20200114212820082700000001`
 4. In the left navigation pane, select `Launch Configurations`
-5. Locate the launch configuration that matches the one found in step 6.
+5. Locate the launch configuration that matches the one found in step 3.
 6. In the bottom pane, select the `View User Data ` link
 7. Scroll down or search for the `Creating config.hcl` section.  
 8. Write down or copy the service box private IP address located in the client portion of the config located next to `servers = ["IP_ADDRESS:4647"]` You will need this in the next step.
@@ -48,7 +48,7 @@ client {
 3. Update the name to something meaningful and easy to identify IE `nomad-client-lc-20200117`
 4. Select the `Advanced Details` dropdown
 5. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.  
-6. **IMPORTANT:** Locate the section of code you found in step 7 above and replace the IP address with that of your services box. 
+6. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box. 
 7. Select the `Skip to review` button at the bottom right of the screen
 8. Select the `Create Launch Configuration` Button
 9. Verify that the SSH key-pair name is correct and select `Create launch configuration` button
@@ -80,7 +80,7 @@ Please use whatever works best with your existing methods of auto scaling group 
 
 1. SSH into the CircleCI Services Box
 
-2. Enter the following command: `sudo docker exec -it nomad nomad node-status. The output should resemble the following:
+2. Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
 
    ```
    ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
