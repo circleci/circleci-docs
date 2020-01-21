@@ -116,7 +116,7 @@ Where:
 
 # Getting Started with the API
 
-The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as gh/CircleCI-Public/circleci-cli, which is a “triplet” of the project type, the name of your “organization”, and the name of the repository. For the project type you can use `  github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which is supported in API v2. The `organization` is your username or organization name in your version control system.
+The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as gh/CircleCI-Public/circleci-cli, which is a “triplet” of the project type, the name of your “organization”, and the name of the repository. For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are supported in API v2. The `organization` is your username or organization name in your version control system.
 
 With API v2, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
