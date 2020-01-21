@@ -94,7 +94,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that the step execution can take some extra time to complete.
 
-If build speed, or bugs introduced by new Homebrew updates, are of a concern, this can be disabled. On average, this can save 2-5 minutes per job.
+If build speed or bugs introduced by new Homebrew updates are a concern, this update-check feature can be disabled. On average, this can save 2-5 minutes per job.
 
 To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
 
