@@ -153,7 +153,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint
