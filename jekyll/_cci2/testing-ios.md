@@ -113,7 +113,7 @@ jobs:
 
 #### iOS Simulator Crash Reports
 
-If your iOS app crashes in the Simulator during a test run, the crash report is useful for diagnosing the exact cause of the crash. These can be uploaded as artifacts to assist with debugging the app crash:
+If your iOS app crashes in the Simulator during a test run, the crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
 
 ```yaml
 steps:
