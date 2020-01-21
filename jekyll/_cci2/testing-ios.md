@@ -96,7 +96,7 @@ Homebrew, by default, will check for updates at the start of any operation. As H
 
 If build speed, or bugs introduced by new Homebrew updates, are of a concern, this can be disabled. On average, this can save 2-5 minutes per job.
 
-To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable config.yml in your job:
+To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
 
 ```yaml
 version: 2.1
