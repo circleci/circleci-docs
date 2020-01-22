@@ -102,7 +102,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           name: Save test results
           command: |
             mkdir -p ~/cucumber
-            bundle exec cucumber pretty --format json --out ~/cucumber/tests.cucumber
+            bundle exec cucumber --format pretty --format json --out ~/cucumber/tests.cucumber
           when: always
       - store_test_results:
           path: ~/cucumber
