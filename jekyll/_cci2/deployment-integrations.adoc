@@ -62,7 +62,7 @@ Under the hood, this orb creates, bundles and deploys your application using you
 
 == A Simple Example Using Heroku
 
-Below is a simple example of deploying a Rails application to Heroku. 
+In this section we will look at a simple example of deploying a Rails application to Heroku. 
 
 ==== Using the Heroku Orb
 
