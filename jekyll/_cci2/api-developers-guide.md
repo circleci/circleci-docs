@@ -254,13 +254,11 @@ That's great! Hopefully everything is working for you up to this point. Let's mo
 While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
       -H 'Content-Type: application/json' \
       -H 'Accept: application/json' \
-      -H "Circle-Token: $CIRCLECI_TOKEN" \
-      -H 'x-attribution-login: string' \
-      -H 'x-attribution-actor-id: string' 
-      -d "branch=my-branch"
+      -H "Circle-Token: $CIRCLE_TOKEN" \
+      -d '{ "branch": "bar" }' 
     ```
 
 6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
