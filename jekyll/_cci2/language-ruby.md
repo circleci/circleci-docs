@@ -26,7 +26,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 The application uses the latest stable Rails version 5.1, `rspec-rails`, and [RspecJunitFormatter][rspec-junit-formatter] with PostgreSQL as the database.
 
-This application build also uses one of the pre-built [CircleCI Docker Images](http://circleci.com/docs/2.0/circleci-images).
+This application build also uses one of the pre-built [CircleCI Docker Images](https://circleci.com/docs/2.0/circleci-images/).
 
 ## Pre-Built CircleCI Docker Images
 
