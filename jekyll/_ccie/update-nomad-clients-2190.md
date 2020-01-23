@@ -5,6 +5,8 @@
 * **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.  
 * This change is only compatible with CircleCI Server versions greater than or equal to 2.19.0 
 
+* If you are using the Static version of CircleCI Server, you will need to recreate your builders manually.  Refer to the guide linked [here](https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients) for the updated scripts and further instruction.
+
 
 
 ### Sign in to AWS
