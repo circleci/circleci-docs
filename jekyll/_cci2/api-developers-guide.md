@@ -431,3 +431,73 @@ For a more detailed breakdown of each value returned in this request, please ref
 
 
 ## Download Artifacts
+
+The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looing for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+
+### Prerequisites
+
+Before making an API call, make sure you have met the following prerequisites:
+
+* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
+* You have completed CircleCI onboarding and you have a project setup.
+* You have a [personal API token](https://circleci.com/account/api).
+* You have been [authenticated](#get-authenticated) to make API calls to the server.
+
+### Steps
+
+1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following substituting your personal api token:
+
+    ```
+    export CIRCLECI_TOKEN={your_api_token}
+    ```
+
+2.  Next we need the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
+
+    INSERT SCREENSHOT HIGHLIGHTING JOB NUMBER
+
+3.  Next we can use `curl` to return a list of artifacts for a specific job. Note, you can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`:
+
+    ```sh
+    curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -H "Circle-Token: $CIRCLECI_TOKEN" | jq\
+    ```
+
+    Check the table below for help with formatting your API call correctly
+
+    Parameter | Description
+    --- | ---
+    `VCS` | Version Control System - either `github`/`gh` or `bitbucket`/`bb`
+    `org-name` | Organization name, or your personal username to your VCS
+    `repo-name` | Name of your project repo
+    `job-number` | The number for the job you want to download artifacts from - see step 2
+    
+    <BR>
+    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the outut when requesting artifacts for a job that builds these docs:
+
+    ```
+    {
+      "path": "circleci-docs/assets/img/docs/walkthrough6.png",
+      "node_index": 0,
+      "url": "https://53936-48750547-gh.circle-artifacts.com/0/circleci-docs/assets/img/docs/walkthrough6.png"
+    },
+    {
+      "path": "circleci-docs/assets/img/docs/walkthrough7.png",
+      "node_index": 0,
+      "url": "https://53936-48750547-gh.circle-artifacts.com/0/circleci-docs/assets/img/docs/walkthrough7.png"
+    },
+    {
+      "path": "circleci-docs/assets/img/docs/walkthrough8.png",
+      "node_index": 0,
+      "url": "https://53936-48750547-gh.circle-artifacts.com/0/circleci-docs/assets/img/docs/walkthrough8.png"
+    },
+    ```
+
+    CHECK ITS OK TO INCLUDE THIS
+
+4. Next we can add to this API call to download the artifacts into our current location.
+
+    ADD INSTRUCITONS WHEN I'VE CONFIRMED THEM
+
+
