@@ -21,7 +21,7 @@ The CircleCI platform provides a powerful API that enables users to retrieve det
 The current classes of the API v2 endpoints are:
 
 * Authentication
-* Pipelines
+* Pipeline
 * Workflows
 * User (Preview)
 * Project (Preview)
@@ -132,21 +132,21 @@ When you make an API request to the server, an HTTP status code is returned alon
 
 If you receive a 200 HTTP status code, your API request is successful and the requested resource will be returned. The following 200 HTTP status codes could potentially be returned with your request:
 
-* `200 - OK`
+* 200 - OK
 
 ## 400 Status Codes
 
 If you receive a 400 HTTP status code, there is a problem with the request and the server is unable to successfully process the request. The following status codes may be returned with your request:
 
-* `401 - Unauthorized`
-* `403 - Forbidden`
-* `404 - Not Found`
+* 401 - Unauthorized
+* 403 - Forbidden
+* 404 - Not Found
 
 ## 500 Status Code
 
 If you receive a 500 HTTP status code, there is a problem with the server and the request cannot be processed. If you encounter a 500 response, the error will be logged and CircleCI will work to resolve the error. The following 500 HTTP status codes could potentially be returned with your request:
 
-* `500 - Internal Server Error`
+* 500 - Internal Server Error
 
 # REST API Tutorial
 
