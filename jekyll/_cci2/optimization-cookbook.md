@@ -7,7 +7,12 @@ categories: [getting-started]
 order: 1
 ---
 
-The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various optimization tasks using CircleCI resources. This guide, and it associated sections, will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
+The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to optimize your **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs. 
+
+According to [The Forrester Wave: Cloud-Native Continuous Integration Tools, Q3 2019](https://circleci.com/blog/why-circleci-is-a-leader-in-the-forrester-wave-cloud-native-continuous-integration-tools-q3-2019-speed-scale-security-and-compliance/), **Cloud-native CI products with exceptional build speed, on-demand scale, and secure configurations will lead the market and enable customers to accelerate delivery speed and lower management costs, all while meeting corporate compliance needs.**
+
+This guide, and it associated sections, will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
+
 
 * TOC
 {:toc}
@@ -23,6 +28,7 @@ This guide provides you with the following optimization strategies that you can 
 - [Running jobs sequentially to prevent concurrency](#running-jobs-sequentially-to-prevent-concurrency)
 - [Implementing caching strategies to optimize builds and workflows](#using-caching-to-optimize-builds-and-workflows)
 - [Improving test performance](#improving-test-performance)
+- [Use test splitting to speed up a test cycle](#test-splitting)
 
 **Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
 
@@ -207,6 +213,47 @@ The figure below illustrates how overall these changes can reduce the total work
 ![Test Optimization Process After Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
 
 As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time.
+
+## Test Splitting
+
+Each time code is committed, tests will be run. Test splitting is a great way to speed up this portion of your CICD pipeline. Tests don't always need to happen sequentially, they can be split over a range of test environments and run in parallel. Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power in use.
+
+![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
+
+To illustrate this with CI config, take a sequentially running test suite
+
+```
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: bar
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test
+```
+
+And to split these tests, using timing data, across 10 parallel environments, we just need a few simple changes
+
+```
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    environment:
+      FOO: bar
+    parallelism: 10
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+```
+
+To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run for the CircleCI application actually decreased the test time from 26:11 down to 3:55.
+
+Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
 
 ## See Also
 
