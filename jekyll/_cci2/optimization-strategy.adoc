@@ -74,7 +74,11 @@ Caching
 Parallelism and test splitting
 
 === Splitting Tests to Run in Parallel
+<<<<<<< HEAD
 Every time code is committed, tests will be run. Test splitting is a great way to speed up this portion of your CICD pipeline. Tests don't always need to happen sequentially, they can be split over a range of test environments and run in parallel. Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power in use.
+=======
+On every code commit, tests will be run. Tests take time, so this is a optimization opportunity. Often tests don't need to happen sequentially, they can be split over a range of test environments and run concurrently – in parallel. The intelligence comes in how the test suite is split: by name, by size etc. Using timings-based test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power.
+>>>>>>> db31a9252753606612cfc4801010dfbabe46a057
 
 INSERT TEST SPLIT IMAGE
 
