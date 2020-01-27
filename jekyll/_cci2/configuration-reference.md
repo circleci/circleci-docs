@@ -733,12 +733,16 @@ step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
+**Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a step has failed previously.
+
 ``` YAML
 - run:
     name: Upload CodeCov.io Data
     command: bash <(curl -s https://codecov.io/bash) -F unittests
     when: always # Uploads code coverage results, pass or fail
 ```
+
+
 
 ###### Ending a Job from within a `step`
 
