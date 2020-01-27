@@ -391,7 +391,7 @@ Before making an API call, make sure you have met the following prerequisites:
     `job-number` | The number for the job you want to download artifacts from - see step 2
     
     <BR>
-    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the outut when requesting artifacts for a job that builds these docs:
+    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's an excerpt from the output when requesting artifacts for a job that builds the CircleCI documentation:
 
     ```
     {
