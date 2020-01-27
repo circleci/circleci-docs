@@ -362,7 +362,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
 ### Steps
 
-1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following substituting your personal api token:
+1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal api token:
 
     ```
     export CIRCLECI_TOKEN={your_api_token}
@@ -416,4 +416,3 @@ Before making an API call, make sure you have met the following prerequisites:
 4. Next we can add to this API call to download the artifacts into our current location.
 
     ADD INSTRUCITONS WHEN I'VE CONFIRMED THEM
-
