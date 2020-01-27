@@ -17,7 +17,7 @@ CircleCI is a modern continuous integration and continuous delivery (CI/CD) plat
 
 ## Basic Features
 
-After a software repository in GitHub or GitHub Enterprise is added as a project to the CircleCI Enterprise application, every new commit triggers a build and notification of success or failure through webhooks with integrations for Slack, HipChat, Campfire, Flowdock, or IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
+After a software repository in GitHub or GitHub Enterprise is added as a project to the CircleCI Enterprise application, every new commit triggers a build and notification of success or failure through webhooks with integrations for Slack, Flowdock, or IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
 
 CircleCI may also be configured to deploy code to various environments, including the following:
 
