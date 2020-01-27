@@ -6,13 +6,7 @@
 :toc-title:
 :sectanchors:
 
-This paper provides concrete examples of optimizing **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs.
-
-According to The Forrester Wave: Cloud-Native Continuous Integration Tools, Q3 2019, **Cloud-native CI products with exceptional build speed, on-demand scale, and secure configurations will lead the market and enable customers to accelerate delivery speed and lower management costs, all while meeting corporate compliance needs.**
-
-The following examples will describe, though comparisons, how to achieve exceptional build speed using secure configurations for your teams.
-
-toc::[]
+**TO DO: THIS SECTION IS GOING TO END UP AS A RECIPE IN THE OPTIMIZATION COOKBOOK:**
 
 .Deployment Frequency
 image::deploy.png[Deployment Frequency]
@@ -66,61 +60,4 @@ nightly-build:
 
 The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
 
-== Lead time for changes (code commit to running in production)
-Optimizing the time taken between developers making critical changes and those changes emerging through pipelines into production, means minimizing the portion of that time in which developers are not active participants – creating environments, loading dependencies, testing code. Spinning up more compute to widen this pipeline leads to faster builds, but compute comes at a price. Developers need intelligent solutions for fine-tuning the orchestration of their pipelines to meet a healthy speed cost balance. This section presents intelligent solutions for these challenges.
-
-Choosing Resources
-Caching
-Parallelism and test splitting
-
-=== Splitting Tests to Run in Parallel
-<<<<<<< HEAD
-Every time code is committed, tests will be run. Test splitting is a great way to speed up this portion of your CICD pipeline. Tests don't always need to happen sequentially, they can be split over a range of test environments and run in parallel. Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power in use.
-=======
-On every code commit, tests will be run. Tests take time, so this is a optimization opportunity. Often tests don't need to happen sequentially, they can be split over a range of test environments and run concurrently – in parallel. The intelligence comes in how the test suite is split: by name, by size etc. Using timings-based test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power.
->>>>>>> db31a9252753606612cfc4801010dfbabe46a057
-
-INSERT TEST SPLIT IMAGE
-
-To illustrate this with CI config, take a sequentially running test suite
-
-[source,yaml]
-----
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    resource_class: large
-    working_directory: ~/my-app
-    steps:
-      - run: go test
-----
-
-And to split these tests, using timing data, across 10 parallel environments, we just need a few simple changes
-
-[source,yaml,highlight=7,11]
-----
-jobs:
-  build:
-    docker:
-      - image: buildpack-deps:trusty
-    environment:
-      FOO: bar
-    parallelism: 10
-    resource_class: large
-    working_directory: ~/my-app
-    steps:
-      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
-----
-
-To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run for the CircleCI application actually decreased the test time from 26:11 down to 3:55.
-
-Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen.
-
-== Summary
-
--Time to restore service (how long it takes to restore service when a defect impacts users)--and fewer defects in general
--Change failure rate (what % of merges lead to degraded service and need to be rolled back)
 
