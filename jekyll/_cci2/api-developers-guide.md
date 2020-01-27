@@ -349,7 +349,7 @@ job -
 
 ## Download Artifacts
 
-The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looing for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looking for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 ### Prerequisites
 
@@ -416,5 +416,4 @@ Before making an API call, make sure you have met the following prerequisites:
 4. Next we can add to this API call to download the artifacts into our current location.
 
     ADD INSTRUCITONS WHEN I'VE CONFIRMED THEM
-
 
