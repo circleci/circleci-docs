@@ -70,7 +70,8 @@ platform :ios do
   lane :upload_testflight do
     # Get the version number from the project and check against
     # the latest build already available on TestFlight, then
-    # increase the build number by 1
+    # increase the build number by 1. If no build is available
+    # for that version, then start at 1
     increment_build_number(
       build_number: latest_testflight_build_number(
         initial_build_number: 1,
@@ -102,8 +103,61 @@ app_identifier "com.example.HelloWorld"
 
 ## Deploying to Visual Studio App Center
 
-Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft.
+Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
+
+### Fastlane Plugin Setup
+
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin appcenter`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`. 
+
+**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+
+### App Center Setup
+
+First, the app needs to be created in VS App Center.
+
+1. Log in, or sign up, to [Visual Studio App Center](https://appcenter.ms/)
+2. At the top-right of the page, click on "Add New", then select "Add New App"
+3. Fill out the required information in the form as required
+
+Once this is complete you will need to generate an API token to allow Fastlane to upload to App Center. 
+
+1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
+2. Click on "New API Token"
+3. Enter a description for the token, then set the access to "Full Access"
+
+When the token is generated, make sure to copy it somewhere safe.
+
+### Fastlane Configuration
+
+Below is an example of a lane that distributes beta app builds to Visual Studio App Center. Both the username of your App Center account and an API Token with "Full Access" is required to upload the binary to App Center.
 
 ```ruby
+# fastlane/Fastfile
+default_platform :ios
 
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+desc "Upload to VS App Center"
+  lane :upload_appcenter do
+    # Here we are using the CircleCI job number
+    # for the build number
+    increment_build_number(
+      build_number: "$CIRCLE_BUILD_NUM"
+    )
+    # Set up Adhoc code signing and build  the app
+    match(type: "adhoc")
+    gym(scheme: "HelloWorld")
+    # Set up the required information to upload the
+    # app binary to VS App Center
+    appcenter_upload(
+      api_token: "YOUR_API_TOKEN",
+      owner_name: "YOUR_VS_APPCENTER_USERNAME",
+      owner_type: "user",
+      app_name: "HelloWorld"
+    )
+  end
+end
 ```
