@@ -24,7 +24,7 @@ image::pipeline-to-deployment.png[Deployment]
 
 * **Deployment Parameters**: You will need to add environment variables/SSH keys to fulfill your deployment steps and provide authorization details and parameters.
 +
-Environment variables can be added to the project itself (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables *within* your configuration can be seen below within the deploy job config for the non-orb Heroku example:
+Environment variables can be added to the project itself (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen below within the deploy job config for the non-orb Heroku example:
 +
 ```
 environment:
@@ -68,7 +68,7 @@ In this section we will look at a simple example of deploying a Rails applicatio
 
 Below is a Heroku Deployment example using the https://circleci.com/orbs/registry/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
-Looking at the `deploy-via-git` command source in the https://circleci.com/orbs/registry/orb/circleci/heroku[Orbs Registry], we can see this succinct config requires that the following environment variables are set: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`. {% include snippets/env-var-or-context.md %}.
+Looking at the `deploy-via-git` command source in the https://circleci.com/orbs/registry/orb/circleci/heroku[Orbs Registry], we can see this succinct config requires that the following environment variables are set: `$HEROKU_APP_NAME` and `$HEROKU_API_KEY`. {% include snippets/env-var-or-context.adoc %}.
 
 ```yaml
 version: 2.1
