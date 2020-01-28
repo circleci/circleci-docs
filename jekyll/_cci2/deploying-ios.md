@@ -43,14 +43,22 @@ increment_build_number(
 
 ### Setting up
 
-TODO: Describe creating a new user for ASC and setting Fastlane envars
+To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account. For ease of use and security, it is advisable to create a new user, with limited privileges, in App Store Connect that will only be used for your CI jobs.
 
+1. Head over to the [Users and Access](https://appstoreconnect.apple.com/access/users) section of App Store Connect
+2. Click on the `+` to add a new user
+3. Fill out the form, giving the user a unique email (such as `ci@yourcompany.com`) and select the "App Manager" role along with selecting the app to provide access to.
+4. Check the email inbox for the user you just created and click on the confirmation link
+
+**Note:** If this is a new Apple ID, you may need to log in to [Apple ID](https://appleid.apple.com/) and App Store Connect/Developer Portal at least once to agree to any privacy policies before being able to use the account for Fastlane
+
+Next, the password for the App Store Connect user needs to be added to the CircleCI project as an environment variable. In the project settings on CircleCI, navigate to **Build Settings -> Environment Variables** and add the `FASTLANE_PASSWORD` variable, and set its value to the password for the App Store Connect account. The password will be stored encrypted at rest.
 
 Finally, Fastlane requires some information from us in order to know which Apple ID to use and which app identifier we are targeting. These can be set in the `fastlane/Appfile` as follows:
 
 ```ruby
 # fastlane/Appfile
-apple_id "ci@example.com"
+apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
 
