@@ -22,7 +22,7 @@ image::pipeline-to-deployment.png[Deployment]
 
 * **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
 
-* **Deployment Parameters**: You will need to add environment variables/SSH keys to fulfill your deployment steps and provide autorization details and parameters.
+* **Deployment Parameters**: You will need to add environment variables/SSH keys to fulfill your deployment steps and provide authorization details and parameters.
 +
 Environment variables can be added to the project itself (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables *within* your configuration can be seen below within the deploy job config for the non-orb Heroku example:
 +
@@ -62,7 +62,7 @@ Under the hood, this orb creates, bundles and deploys your application using you
 
 == A Simple Example Using Heroku
 
-Below is a simple example of deploying a Rails application to Heroku. 
+In this section we will look at a simple example of deploying a Rails application to Heroku. 
 
 ==== Using the Heroku Orb
 
