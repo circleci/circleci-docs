@@ -276,6 +276,8 @@ en:
           link: 2.0/configuration-reference/
         - name: API v1.1 Reference
           link: api/
+        - name: API v2 Reference
+          link: api/v2
         - name: API v2 Introduction
           link: 2.0/api-intro/
         - name: Prebuilt Images
