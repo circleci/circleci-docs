@@ -45,17 +45,60 @@ increment_build_number(
 
 TODO: Describe creating a new user for ASC and setting Fastlane envars
 
-### Deploying to the App Store
+
+Finally, Fastlane requires some information from us in order to know which Apple ID to use and which app identifier we are targeting. These can be set in the `fastlane/Appfile` as follows:
 
 ```ruby
+# fastlane/Appfile
+apple_id "ci@example.com"
+app_identifier "com.example.HelloWorld"
+```
 
+### Deploying to the App Store
+
+The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The `deliver` action provided by Fastlane is a powerful tool that automates the App Store submission process. 
+
+Deliver also allows various options such as automatic uploading of metadata and screenshots (which can be generated with the [screenshot](https://docs.fastlane.tools/actions/snapshot/) and [frameit](https://docs.fastlane.tools/actions/frameit/) actions). For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
+
+```ruby
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Upload Release to App Store"
+  lane :upload_release do
+    # Get the version number from the project and check against
+    # the latest build already available on App Store Connect, then
+    # increase the build number by 1. If no build is available
+    # for that version, then start at 1
+    increment_build_number(
+      build_number: app_store_build_number(
+        initial_build_number: 1,
+        version: get_version_number(xcodeproj: "HelloCircle.xcodeproj"),
+        live: false
+      ) + 1,
+    )
+    # Set up Distribution code signing and build the app
+    match(type: "appstore")
+    gym(scheme: "HelloCircle")
+    # Upload the binary to App Store Connect
+    deliver(
+      submit_for_review: false,
+      force: true
+    )
+  end
+end
 ```
 
 ### Deploying to TestFlight
 
-TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the `pilot` [action](https://docs.fastlane.tools/actions/pilot/) to make managing TestFlight distribution simple.
+TestFlight is Apple's beta distribution service which is tied into App Store Connect. Fastlane provides the `pilot` action to make managing TestFlight distribution simple.
 
-The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary:
+The example below shows how Fastlane can be configured to automatically build, sign and upload an iOS binary. Pilot has lots of customisation options to help deliver apps to TestFlight, so it is highly recommended to check out the [pilot documentation](https://docs.fastlane.tools/actions/pilot/) for further information.
 
 ```ruby
 # fastlane/Fastfile
@@ -91,14 +134,6 @@ platform :ios do
     )
   end
 end
-```
-
-Fastlane requires some information from us in order to know which Apple ID to use and which app identifier we are targeting. These can be set in the `fastlane/Appfile` as follows:
-
-```ruby
-# fastlane/Appfile
-apple_id "ci@example.com"
-app_identifier "com.example.HelloWorld"
 ```
 
 ## Deploying to Visual Studio App Center
