@@ -86,17 +86,54 @@ curl -u <circle-token>: "https://circleci.com/api/..."
 
 The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
 
-Before working with the API and making calls, you should first have an understanding of the endpoints that are currently available, as detailed in the table below:
+Before working with the API and making calls, you should first have an understanding of the endpoints that are currently available, as detailed in the tables below:
+
+### User Endpoints
 
 Endpoint       | Description                       
 -----------|-------------------------------------------------------
-`GET /workflow/:id ` | This endpoint enables users to return an individual Workflow based on the `id` parameter being passed in the request
-`GET /workflow/:id/jobs` | This endoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.
-`GET /project/:project_slug`  | This endpoint enables users to retrieve a specific Project by its unique slug.
-`POST /project/:project_slug/pipeline` | This endpoint enables users to add an individual project by its unique slug.
-`GET /pipeline/:id` | This endpoint enables users to retrieve an individual pipeline, based on the `id` passed in the request.
-`GET /pipeline/:id/config`  | This endpoint enables users to retrieve the configuration of a specific pipeline, based on the `id` passed in the request.
-`GET /project/:project_slug/pipelines/[:filter]`  | This endpoint enables users to retrieve the most recent set of pipelines for a Project.
+`/user/{id} ` | This endpoint enables you to return information about a specific user by making a GET request and passing the `id` parameter in the request
+`/me/collaborations` | This endoint enables you to return a list of organizations that the user is a member of, or is a collaborator by making a GET request and passing the `collaborations` parameter in the request. 
+
+### Pipeline Endpoints
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+`/pipeline/{pipeline-id}` | This endpoint enables you to retrieve an individual pipeline by making a GET request and passing the `id` parameter in the request.
+`/pipeline/{pipeline-id}/config`  | This endpoint enables you to retrieve the configuration of a specific pipeline by making a GET request and passing the `pipeline-id` parameter in the request.
+`/pipeline/{pipeline-id}/workflow`  | This endpoint enables you to return a list of workflows for a specific pipeline by making a GET request and passing the `pipeline-id` parameter in the request.
+`/project/{project-slug}/pipeline` | This endpoint enables you to trigger a pipeline by making a POST request and passing the `project-slug` parameter in the request.
+`/project/{project-slug}/pipeline`  | This endpoint enables you to return an array of all pipelines associated with a specific project by making a GET request and passing the `project-slug` parameter in the request.
+`/project/{project-slug}/pipeline/mine` | This endpoint enables you to return all pipelines for the project that you have triggered by making a GET request and passing the `project-slug` parameter in the request.
+
+### Project Endpoints
+
+`/project/{project-slug}` | This endpoint enables users to retrieve an individual project by making a GET request and passing the `id` parameter in the request.
+`/project/{project-slug}/checkout-key`  | This endpoint enables you to retrieve all checkout keys for a specific project by making a GET request and passing the `project-slug` parameter in the request. 
+`/project/{project-slug}/checkout-key`  | This endpoint enables create a new checkout key for a project by making a POST request and passing the `project-slug` parameter in the request.
+`/project/{project-slug}/checkout-key/{fingerprint}` | This endpoint enables you to delete a checkout key for a specific project by making a DELETE request and passing the `checkout-key` and `fingerprint` parameters in the request.
+`/project/{project-slug}/checkout-key/{fingerprint}`  | This endpoint enables you to return an individual checkout key for a specific project by making a GET request and passing the `fingerprint` parameter in the request.
+`/project/{project-slug}/pipeline/mine` | This endpoint enables you to return all pipelines for the project that you have triggered by making a GET request and passing the `project-slug` parameter in the request..
+`/project/{project-slug}/envvar` | This endpoint enables you to list all current environment variables for a specific project by making a GET request and passing the `project-slug` parameter in the request.
+`/project/{project-slug}/envvar` | This endpoint enables you to create an environment variable for a project by making a POST request and passing the `project-slug` parameter in the request.
+`/project/{project-slug}/envvar/{name}` | This endpoint enables you to delete an existing environment variable from a project by making a DELETE request and passing the `project-slug` and `name` parameters in the request.
+`/project/{project-slug}/envvar/{name}` | This endpoint enables you to retrieve a masked value for an environment variable for a project by making a GET request and passing the `project-slug` and `name` parameters in the request.
+
+### Job Endpoints
+
+`/project/{project-slug}/job/{job-number}` | This endpoint enables you to retrieve job details by making a GET request and passing the project-slug and job-number parameters in the request.
+`/project/{project-slug}/job/{job-number}/cancel` | This endoint enables users to cancel a job by making a POST request and passing the `project-slug` and `job-number` parameters in the request.
+`/project/{project-slug}/{job-number}/artifacts`  | This endpoint enables users to retrieve artifacts for a job by making a GET request and passing the project-slug and job-number parameters in the request.
+`/project/{project-slug}/{job-number}/tests` | This endpoint enables you to retrieve test metadata for a job by making a GET request and passing the `project-slug` and `job-number` parameters in the request.
+
+### Workflow Endpoints
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+`/workflow/{id}` | This endpoint enables users to you to return a workflow by making a GET request and passing the `id` parameter in the request.
+`/workflow/{id}/cancel` | This endoint enables you to cancel a workflow by making a POST request and passing the `id` parameter in the request.
+`/workflow/{id}/job`  | This endpoint enables you to return the jobs associated with a workflow by making a GET request and passing the `id` parameter in the request.
+`/workflow/{id}/rerun` | This endpoint enables you to rerun a workflow by making a POST request and passing the `id` parameter in the request.
 
 ## API Syntax
 
@@ -133,6 +170,8 @@ When you make an API request to the server, an HTTP status code is returned alon
 If you receive a 200 HTTP status code, your API request is successful and the requested resource will be returned. The following 200 HTTP status codes could potentially be returned with your request:
 
 * 200 - OK
+* 201 - Created
+* 202 - Accepted
 
 ## 400 Status Codes
 
