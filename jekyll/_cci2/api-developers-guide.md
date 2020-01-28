@@ -108,6 +108,8 @@ Endpoint       | Description
 
 ### Project Endpoints
 
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
 `/project/{project-slug}` | This endpoint enables users to retrieve an individual project by making a GET request and passing the `id` parameter in the request.
 `/project/{project-slug}/checkout-key`  | This endpoint enables you to retrieve all checkout keys for a specific project by making a GET request and passing the `project-slug` parameter in the request. 
 `/project/{project-slug}/checkout-key`  | This endpoint enables create a new checkout key for a project by making a POST request and passing the `project-slug` parameter in the request.
@@ -121,6 +123,8 @@ Endpoint       | Description
 
 ### Job Endpoints
 
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
 `/project/{project-slug}/job/{job-number}` | This endpoint enables you to retrieve job details by making a GET request and passing the project-slug and job-number parameters in the request.
 `/project/{project-slug}/job/{job-number}/cancel` | This endoint enables users to cancel a job by making a POST request and passing the `project-slug` and `job-number` parameters in the request.
 `/project/{project-slug}/{job-number}/artifacts`  | This endpoint enables users to retrieve artifacts for a job by making a GET request and passing the project-slug and job-number parameters in the request.
