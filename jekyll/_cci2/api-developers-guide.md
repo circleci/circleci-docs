@@ -464,17 +464,17 @@ Before making an API call, make sure you have met the following prerequisites:
     -H "Circle-Token: $CIRCLECI_TOKEN" | jq\
     ```
 
-    Check the table below for help with formatting your API call correctly
+    Check the table below for help with formatting your API call correctly.
 
-    Parameter | Description
-    --- | ---
-    `VCS` | Version Control System - either `github`/`gh` or `bitbucket`/`bb`
-    `org-name` | Organization name, or your personal username to your VCS
-    `repo-name` | Name of your project repo
-    `job-number` | The number for the job you want to download artifacts from - see step 2
+    | Parameter    | Description                                                             |
+    | ------------ | ----------------------------------------------------------------------- |
+    | `VCS`        | Version Control System - either `github`/`gh` or `bitbucket`/`bb`       |
+    | `org-name`   | Organization name, or your personal username to your VCS                |
+    | `repo-name`  | Name of your project repo                                               |
+    | `job-number` | The number for the job you want to download artifacts from - see step 2 |
+    {: class="table table-striped"}
     
-    <BR>
-    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the outut when requesting artifacts for a job that builds these docs:
+    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the output when requesting artifacts for a job that builds these docs:
 
     ```
     {
@@ -496,8 +496,17 @@ Before making an API call, make sure you have met the following prerequisites:
 
     CHECK ITS OK TO INCLUDE THIS
 
-4. Next we can add to this API call to download the artifacts into our current location.
+4. Next we can extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following, remembering to substitute your values:
 
-    ADD INSTRUCITONS WHEN I'VE CONFIRMED THEM
+     ```sh
+    curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -H "Circle-Token: $CIRCLECI_TOKEN" \
+    | grep -o 'https://[^"]*' \
+    | wget -v -i -
+    ```
+
+  `grep` is used to locate all the URLs for downloading the job artifacts, and `wget` is used to perform the download.
 
 
