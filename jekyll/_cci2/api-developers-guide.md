@@ -432,7 +432,11 @@ For a more detailed breakdown of each value returned in this request, please ref
 
 ## Download Artifacts
 
+<<<<<<< HEAD
 The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looing for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+=======
+The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looking for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+>>>>>>> fcb2099e702077063500f021e24a526306bea534
 
 ### Prerequisites
 
@@ -445,7 +449,11 @@ Before making an API call, make sure you have met the following prerequisites:
 
 ### Steps
 
+<<<<<<< HEAD
 1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following substituting your personal api token:
+=======
+1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal api token:
+>>>>>>> fcb2099e702077063500f021e24a526306bea534
 
     ```
     export CIRCLECI_TOKEN={your_api_token}
@@ -464,6 +472,7 @@ Before making an API call, make sure you have met the following prerequisites:
     -H "Circle-Token: $CIRCLECI_TOKEN" | jq\
     ```
 
+<<<<<<< HEAD
     Check the table below for help with formatting your API call correctly.
 
     | Parameter    | Description                                                             |
@@ -475,6 +484,19 @@ Before making an API call, make sure you have met the following prerequisites:
     {: class="table table-striped"}
     
     You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the output when requesting artifacts for a job that builds these docs:
+=======
+    Check the table below for help with formatting your API call correctly
+
+    Parameter | Description
+    --- | ---
+    `VCS` | Version Control System - either `github`/`gh` or `bitbucket`/`bb`
+    `org-name` | Organization name, or your personal username to your VCS
+    `repo-name` | Name of your project repo
+    `job-number` | The number for the job you want to download artifacts from - see step 2
+    
+    <BR>
+    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's an excerpt from the output when requesting artifacts for a job that builds the CircleCI documentation:
+>>>>>>> fcb2099e702077063500f021e24a526306bea534
 
     ```
     {
@@ -496,6 +518,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
     CHECK ITS OK TO INCLUDE THIS
 
+<<<<<<< HEAD
 4. Next we can extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following, remembering to substitute your values:
 
      ```sh
@@ -510,3 +533,8 @@ Before making an API call, make sure you have met the following prerequisites:
   `grep` is used to locate all the URLs for downloading the job artifacts, and `wget` is used to perform the download.
 
 
+=======
+4. Next we can add to this API call to download the artifacts into our current location.
+
+    ADD INSTRUCITONS WHEN I'VE CONFIRMED THEM
+>>>>>>> fcb2099e702077063500f021e24a526306bea534
