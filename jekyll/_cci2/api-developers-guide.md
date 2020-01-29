@@ -40,15 +40,11 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 To add an API token, perform the steps listed below.
 
 1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
-2.  To test it, [view it in your browser](https://circleci.com/api/v1.1/me) or call the API using the command below.
+2.  To test it, [view it in your browser](https://circleci.com/api/v2/me) or call the API using the command below.
 
 ```sh
-$ curl https://circleci.com/api/v1.1/me?circle-token=:token
+$ curl https://circleci.com/api/v2/me
 ```
-
-**Note:** Whenever you see a term prefixed with a colon (:), please note that this value must be replaced by a user-input value. For example `:token` in the above call must be replaced by the token string generated in your account:
-
-`curl https://circleci.com/api/v1.1/me?circle-token=dkanmbowk34iajdkl3iakdthisisarandomtoken`
 
 3.  You should see a JSON response similar to the example shown below.
 
@@ -82,22 +78,7 @@ curl -u <circle-token>: "https://circleci.com/api/..."
 
 **Note:** The colon ":" notifies `curl` that there is no password being passed.
 
-## API Endpoints
-
-The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
-
-Before working with the API and making calls, you should first have an understanding of the endpoints that are currently available, as detailed in the table below:
-
-Endpoint       | Description                       
------------|-------------------------------------------------------
-`GET /workflow/:id ` | This endpoint enables users to return an individual Workflow based on the `id` parameter being passed in the request
-`GET /workflow/:id/jobs` | This endoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.
-`GET /project/:project_slug`  | This endpoint enables users to retrieve a specific Project by its unique slug.
-`POST /project/:project_slug/pipeline` | This endpoint enables users to add an individual project by its unique slug.
-`GET /pipeline/:id` | This endpoint enables users to retrieve an individual pipeline, based on the `id` passed in the request.
-`GET /pipeline/:id/config`  | This endpoint enables users to retrieve the configuration of a specific pipeline, based on the `id` passed in the request.
-`GET /project/:project_slug/pipelines/[:filter]`  | This endpoint enables users to retrieve the most recent set of pipelines for a Project.
-
+<!---
 ## API Syntax
 
 When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures the API server can properly process your request and return a valid JSON response. To make a request to the CircleCI API, use the following format:
@@ -109,6 +90,7 @@ Where:
 - `https://circleci.com` is the resource URL for the API being called.
 - `api` is the service being called.
 - `v2` is the API version.
+-->
 
 # Getting Started with the API
 
@@ -133,6 +115,8 @@ When you make an API request to the server, an HTTP status code is returned alon
 If you receive a 200 HTTP status code, your API request is successful and the requested resource will be returned. The following 200 HTTP status codes could potentially be returned with your request:
 
 * 200 - OK
+* 201 - Created
+* 202 - Accepted
 
 ## 400 Status Codes
 
@@ -168,53 +152,53 @@ The following section details the steps you would need, from start to finish, to
 
 2. Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{ORG_NAME} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `ORG_NAME` is your organization or personal VCS username. Find your project in the onboarding list and click `Setup Project`. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
 
-    ```sh
-    # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-    version: 2.1
-    # Use a package of configuration called an orb.
-    orbs:
-      # Declare a dependency on the welcome-orb
-      welcome: circleci/welcome-orb@0.4.1
-    # Orchestrate or schedule a set of jobs
-    workflows:
-      # Name the workflow "welcome"
-      welcome:
-        # Run the welcome/run job in its own container
-        jobs:
-          - welcome/run
-    ```
+```yaml
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+version: 2.1
+# Use a package of configuration called an orb.
+orbs:
+ # Declare a dependency on the welcome-orb
+   welcome: circleci/welcome-orb@0.4.1
+ # Orchestrate or schedule a set of jobs
+   workflows:
+   # Name the workflow "welcome"
+   welcome:
+   # Run the welcome/run job in its own container
+     jobs:
+     - welcome/run
+```
 
 3. Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
-    ```sh
-    # First: set your CircleCI token as an environment variable
-    export CIRCLECI_TOKEN={your_api_token}
+```sh
+# First: set your CircleCI token as an environment variable
+export CIRCLECI_TOKEN={your_api_token}
     
-    curl --header "Circle-Token: $CIRCLECI_TOKEN" \
-         --header 'Accept: application/json'    \
-         --header 'Content-Type: application/json' \
-         https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
-    ```
+curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+  --header 'Accept: application/json'    \
+  --header 'Content-Type: application/json' \
+  https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
+```
 
-    You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
+You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
 
-    ```sh
-    {
-      "next_page_token": null,
-      "items": [
-        {
-          "id": "03fcbba0-d847-4c8b-a553-6fdd7854b893",
-          "errors": [],
-          "project_slug": "gh/{YOUR_USER_NAME}/hello-world",
-          "updated_at": "2020-01-10T19:45:58.517Z",
-          "number": 1,
-          "state": "created",
-          "created_at": "2020-01-10T19:45:58.517Z",
-          "trigger": {
-            "received_at": "2020-01-10T19:45:58.489Z",
-            "type": "api",
+```sh
+ {
+  "next_page_token": null,
+  "items": [
+   {
+    "id": "03fcbba0-d847-4c8b-a553-6fdd7854b893",
+    "errors": [],
+    "project_slug": "gh/{YOUR_USER_NAME}/hello-world",
+    "updated_at": "2020-01-10T19:45:58.517Z",
+    "number": 1,
+    "state": "created",
+    "created_at": "2020-01-10T19:45:58.517Z",
+    "trigger": {
+     "received_at": "2020-01-10T19:45:58.489Z",
+       "type": "api",
             "actor": {
               "login": "teesloane",
               "avatar_url": "https://avatars0.githubusercontent.com/u/12987958?v=4"
@@ -226,59 +210,60 @@ The following section details the steps you would need, from start to finish, to
             "revision": "ca67134f650e362133e51a9ffdb8e5ddc7fa53a5",
             "provider_name": "GitHub",
             "branch": "master"
-          }
-        }
-      ]
-    }
-    ```
+      }
+     }
+    ]
+  }
+```
     
 That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
 
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
-    ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
-      -H 'Content-Type: application/json' \
-      -H 'Accept: application/json' \
-      -H "Circle-Token: $CIRCLECI_TOKEN" \
+```sh
+ curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+ -H 'Content-Type: application/json' \
+ -H 'Accept: application/json' \
+ -H "Circle-Token: $CIRCLECI_TOKEN" \
       
-    # Which returns:
-    {
-      "number": 2,
-      "state": "pending",
-      "id": "e411ea74-c64a-4d60-9292-115e782802ed",
-      "created_at": "2020-01-15T15:32:36.605Z"
-    }
-    ```
+# Which returns:
+{
+  "number": 2,
+  "state": "pending",
+  "id": "e411ea74-c64a-4d60-9292-115e782802ed",
+  "created_at": "2020-01-15T15:32:36.605Z"
+}
+```
 
 While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
-    ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
-      -H 'Content-Type: application/json' \
-      -H 'Accept: application/json' \
-      -H "Circle-Token: $CIRCLE_TOKEN" \
-      -d '{ "branch": "bar" }' 
-    ```
+```sh
+curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
+-H 'Content-Type: application/json' \
+-H 'Accept: application/json' \
+-H "Circle-Token: $CIRCLE_TOKEN" \
+-d '{ "branch": "bar" }' 
+```
 
 6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
-    ```yaml
-    version: 2.1
-    parameters:
-      image-tag:
-        type: string
-        default: "latest"
-    
-    jobs:
-      build:
-        docker:
-          - image: circleci/node:<< pipeline.parameters.image-tag >>
-        environment:
-          IMAGETAG: << pipeline.parameters.image-tag >>
-        steps:
-          - run: echo "Image tag used was ${IMAGETAG}"
-    ```
+```yaml
+version: 2.1
+jobs: 
+  build: 
+    docker: 
+      - 
+        image: "circleci/node:<< pipeline.parameters.image-tag >>"
+    environment: 
+      IMAGETAG: "<< pipeline.parameters.image-tag >>"
+    steps: 
+      - 
+        run: "echo \"Image tag used was ${IMAGETAG}\""
+parameters: 
+  image-tag: 
+    default: latest
+    type: string
+```
 
 You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
@@ -294,7 +279,7 @@ You will need to declare the parameters you expect to receive from the API. In t
 
 This concludes the end-to-end example of using the V2 API. For more detailed information about other endpoints you may wish to call, please refer to the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currently available.
 
-# Example API Use Cases
+# Additional API Use Cases
 
 Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Whether you wish to return information about a job or project, or retrieve more detailed information about a project by reviewing its artifacts, the examples shown below should assist you in gaining a better understanding of how to make some API requests to the server so you can perform a deep dive into the specifics of your work.
 
@@ -306,7 +291,9 @@ This section provides detailed information on how you can perform the following 
 
 ## Get Project Details
 
-You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint. 
+You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
+
+**Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects](https://circleci.com/docs/2.0/projects/) page.
 
 ### Prerequisites
 
@@ -345,13 +332,15 @@ To return project details, perform the following steps:
 		"provider": "Bitbucket",
 		"default_branch": "master"
 	}
-} 
+}
 ```
 Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, please refer to the [Get Project Details](https://circleci.com/docs/api/v2/#get-a-project)section of the *CircleCI API v2 Reference Guide*.
 
 ## Get Job Details
 
 Much like the Get Project Details API request described in the previous example, the Get Job Details API request enables you to return specific job information from the CircleCI API by making a single API request. Retrieving job information can be very useful when you want information about how your job performed, what resources were used (e.g. pipeline, executor type, etc.), and the time it took for the job to finish.
+
+Please remember, jobs are collections of steps. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a default image if not specified, for `docker` you must specify an image to use for the primary container, for `macos` you must specify an Xcode version, and for `windows` you must use the Windows orb.
 
 ### Prerequisites
 
@@ -427,16 +416,12 @@ To return job details, perform the following steps:
 ```
 Notice in the example above that you will receive very specific information about your job, including specific project and workflow details for the job, the date and time the job started and then finished, and job-specific information such as the executor type used, current status of the job, and the duration of the job.
 
-For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details)section of the *CircleCI API v2 Reference Guide*.
+For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the *CircleCI API v2 Reference Guide*.
 
 
 ## Download Artifacts
 
-<<<<<<< HEAD
-The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looing for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
-=======
 The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looking for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
->>>>>>> fcb2099e702077063500f021e24a526306bea534
 
 ### Prerequisites
 
@@ -449,11 +434,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
 ### Steps
 
-<<<<<<< HEAD
-1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following substituting your personal api token:
-=======
 1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal api token:
->>>>>>> fcb2099e702077063500f021e24a526306bea534
 
     ```
     export CIRCLECI_TOKEN={your_api_token}
@@ -472,7 +453,6 @@ Before making an API call, make sure you have met the following prerequisites:
     -H "Circle-Token: $CIRCLECI_TOKEN" | jq\
     ```
 
-<<<<<<< HEAD
     Check the table below for help with formatting your API call correctly.
 
     | Parameter    | Description                                                             |
@@ -484,19 +464,6 @@ Before making an API call, make sure you have met the following prerequisites:
     {: class="table table-striped"}
     
     You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the output when requesting artifacts for a job that builds these docs:
-=======
-    Check the table below for help with formatting your API call correctly
-
-    Parameter | Description
-    --- | ---
-    `VCS` | Version Control System - either `github`/`gh` or `bitbucket`/`bb`
-    `org-name` | Organization name, or your personal username to your VCS
-    `repo-name` | Name of your project repo
-    `job-number` | The number for the job you want to download artifacts from - see step 2
-    
-    <BR>
-    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's an excerpt from the output when requesting artifacts for a job that builds the CircleCI documentation:
->>>>>>> fcb2099e702077063500f021e24a526306bea534
 
     ```
     {
@@ -518,7 +485,6 @@ Before making an API call, make sure you have met the following prerequisites:
 
     CHECK ITS OK TO INCLUDE THIS
 
-<<<<<<< HEAD
 4. Next we can extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following, remembering to substitute your values:
 
      ```sh
@@ -533,8 +499,61 @@ Before making an API call, make sure you have met the following prerequisites:
   `grep` is used to locate all the URLs for downloading the job artifacts, and `wget` is used to perform the download.
 
 
-=======
-4. Next we can add to this API call to download the artifacts into our current location.
+# Reference
 
-    ADD INSTRUCITONS WHEN I'VE CONFIRMED THEM
->>>>>>> fcb2099e702077063500f021e24a526306bea534
+## API Endpoints
+
+The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
+
+Before working with the API and making calls, you should first have an understanding of the various API requests you can make to API v2 endpoints. The sections below describe these API requests.
+
+### User Endpoints
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+/user/{id}  | This endpoint enables you to return information about a specific user by making a GET request and passing the `id` parameter in the request
+/me/collaborations | This endoint enables you to return a list of organizations that the user is a member of, or is a collaborator by making a GET request and passing the `collaborations` parameter in the request. 
+
+### Pipeline API Requests
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+GET /pipeline/{pipeline-id} | Returns an individual pipeline.
+GET /pipeline/{pipeline-id}/config  | Returns the configuration of a specific pipeline.
+GET /pipeline/{pipeline-id}/workflow  | Returns a list of workflows for a specific pipeline. 
+POST /project/{project-slug}/pipeline | Triggers a pipeline.
+GET /project/{project-slug}/pipeline  | Returns a list of all pipelines associated with a specific project.
+GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.
+
+### Project API Requests
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+GET /project/{project-slug} | Returns an individual project.
+GET /project/{project-slug}/checkout-key  | Returns all checkout keys for a specific project. 
+POST /project/{project-slug}/checkout-key  | Creates a new checkout key for a project.
+DELETE /project/{project-slug}/checkout-key/{fingerprint} | Deletes a checkout key for a specific project.
+GET /project/{project-slug}/checkout-key/{fingerprint}  | Returns an individual checkout key for a specific project.
+GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.
+GET /project/{project-slug}/envvar | Lists all current environment variables for a specific project.
+POST /project/{project-slug}/envvar | Creates an environment variable for a project.
+DELETE /project/{project-slug}/envvar/{name} | Deletes an existing environment variable from a project.
+GET /project/{project-slug}/envvar/{name} | Returns a masked value for an environment variable for a project.
+
+### Job API Requests
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+GET /project/{project-slug}/job/{job-number} | Returns details of a job.
+POST /project/{project-slug}/job/{job-number}/cancel | Cancels a job.
+GET /project/{project-slug}/{job-number}/artifacts  | Returns artifacts for a job.
+GET /project/{project-slug}/{job-number}/tests | Returns test metadata for a job.
+
+### Workflow API Requests
+
+Endpoint       | Description                       
+-----------|-------------------------------------------------------
+GET /workflow/{id} | Returns a workflow.
+POST /workflow/{id}/cancel | Cancels a workflow.
+GET workflow/{id}/job | Returns all jobs associated with a workflow.
+POST /workflow/{id}/rerun | Reruns a workflow.
