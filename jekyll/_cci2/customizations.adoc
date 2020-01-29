@@ -122,10 +122,9 @@ The value of FOO will take precedence over the default values set in the default
 /etc/circleconfig/vm-service/customizations
 /etc/circleconfig/workflows-conductor/customizations
 ```
-
-//// 
+ 
 === Resource Classes
-_Introduced in CircleCI Server v2.18_
+_Introduced in CircleCI Server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
@@ -188,11 +187,11 @@ CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to al
 
 
 ==== Enable the Large Resource Class for Machine Executor
-_Introduced in CircleCI Server v2.18_
+_Introduced in CircleCI Server v2.19_
 
 To use second machine type (`large` in the example above), a further step is required to enable this for your organization. Following are the required steps:
 
-. SSH into the Services .achine
+. SSH into the Services machine
 . Run the following:
 ```
 circleci dev-console
@@ -205,7 +204,6 @@ circleci dev-console
 ```
 (admin/set-project-feature-by-url "<github_url_of_project>" :picard-allowed-resource-classes #{"l1.large"})
 ```
-////
 
 === Login Screen
 _Introduced in CircleCI Server v2.17.3_
