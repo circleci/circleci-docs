@@ -236,7 +236,7 @@ If pushing to your repo is required, see the [Adding Read/Write Deployment Keys 
 ## Capistrano
 
 Once your project is set up to use Capistrano, you can run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
-```
+```yaml
 version: 2
 
 workflows:
