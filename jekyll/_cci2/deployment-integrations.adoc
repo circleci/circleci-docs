@@ -22,14 +22,9 @@ image::pipeline-to-deployment.png[Deployment]
 
 * **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
 
-* **Deployment Parameters**: You will need to add environment variables/SSH keys to fulfill your deployment steps and provide authorization details and parameters.
+* **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 +
-Environment variables can be added to the project itself (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen below within the deploy job config for the non-orb Heroku example:
-+
-```
-environment:
-      HEROKU_APP: "sleepy-refuge-55486"
-```
+Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen <<#2.0-config,further down this page within the deploy job config for the non-orb Heroku example>>.
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>> 
 
@@ -37,7 +32,7 @@ environment:
 
 == Using Orbs to Simplify Deployment
 
-At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your config. Check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. For simple pipelines simply invoking an orb, including a pre-configured job, and setting any required environment variables/SSH keys within your project, will get you the results you need with no further configuration. 
+At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your config. Check out the full range of available orbs in the https://circleci.com/orbs/registry/[Orbs Registry]. For simple deployment pipelines, using orbs will get you the results you need with minimal configuration. 
 
 As an example, consider the https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
 
