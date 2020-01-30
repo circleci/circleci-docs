@@ -413,7 +413,7 @@ Add the generated token to the CircleCI project's environment variables as `$FIR
 
 The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the master branch.
 
-```
+```yaml
 
  deploy-job:
    docker:
