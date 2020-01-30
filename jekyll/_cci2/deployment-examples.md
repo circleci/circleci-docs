@@ -184,7 +184,7 @@ workflows:
 
 The [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy) orb enables you to run deployments through AWS CodeDeploy.
 
-```
+```yaml
 version: 2.1 # use 2.1 to make use of orbs and pipelines
 
 orbs:
