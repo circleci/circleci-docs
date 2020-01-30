@@ -347,7 +347,7 @@ This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/
 
 Until now, the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
 
-```
+```yaml
 - run:
     name: Re-route live Domain to latest
     command: |
