@@ -368,7 +368,7 @@ Until now, the previously pushed "app-name" has not changed.  The final step is 
 
 For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
 
-```
+```yaml
 workflows:
   version: 2 # only requires if using `version: 2` config.
   build-deploy:
