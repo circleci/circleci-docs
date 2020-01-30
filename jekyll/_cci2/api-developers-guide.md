@@ -61,7 +61,7 @@ To add an API token, perform the steps listed below.
 
 ### Get Authenticated
 
-To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the `circle-token` query param:
+To be authenticated by the API server, add an API token using the [Personal API Tokens page](https://account.circleci.com/tokens). To use the API token, add it to the `circle-token` query param:
 
 ```sh
 curl "https://circleci.com/api/v1.1/me?circle-token=:token"
@@ -166,7 +166,7 @@ The following section details the steps you would need, from start to finish, to
         - welcome/run
     ```
 
-3. Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
+3. Add an API token from the [Personal API Tokens page](https://account.circleci.com/tokens). Be sure to write down and store your API token in a secure place once you generate it.
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
@@ -431,7 +431,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
 * You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
 * You have completed CircleCI onboarding and you have a project setup.
-* You have a [personal API token](https://circleci.com/account/api).
+* You have a [personal api token](https://account.circleci.com/tokens).
 * You have been [authenticated](#get-authenticated) to make API calls to the server.
 
 ### Steps
