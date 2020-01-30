@@ -496,7 +496,7 @@ Before making an API call, make sure you have met the following prerequisites:
     | wget -v -i -
     ```
 
-  `grep` is used to locate all the URLs for downloading the job artifacts, and `wget` is used to perform the download.
+  `Note: `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
 
 
 # Reference
