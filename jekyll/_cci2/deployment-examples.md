@@ -453,7 +453,7 @@ Before deploying to Google Cloud Platform, you will need to authorize the Google
 
 There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/orbs/registry/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
 
-```
+```yaml
 version: 2.1
 
 orbs:
