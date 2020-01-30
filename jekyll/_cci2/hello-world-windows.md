@@ -270,6 +270,8 @@ Also, consider reading documentation on some of CircleCI’s features:
 * NVM (Node Version Manager)
 * Ruby 2.6.3
 * Go 1.12.7
+* Python 3.7.3
+* Miniconda 3
 * Text editors
     * nano 2.5.3
     * vim 8.0.604
