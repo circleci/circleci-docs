@@ -4,7 +4,7 @@ title: Deploying iOS Applications
 short-title: Deploying iOS Applications
 categories: [platforms]
 description: Deploying iOS Applications
-order: /?
+order: 1
 ---
 
 This document describes how to configure Fastlane to automatically deploy iOS apps from CircleCI to a distribution service.
