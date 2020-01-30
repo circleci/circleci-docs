@@ -143,7 +143,6 @@ The following section details the steps you would need, from start to finish, to
 
 * A GitHub or BitBucket account with a repository to setup with CircleCI.
 * Completion of the CircleCI onboarding.
-* **Optional**: You can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`.
 
 ## Steps
 
@@ -447,13 +446,13 @@ Before making an API call, make sure you have met the following prerequisites:
 
     INSERT SCREENSHOT HIGHLIGHTING JOB NUMBER
 
-3.  Next, use the `curl` command to return a list of artifacts for a specific job. Note, you can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`:
+3.  Next, use the `curl` command to return a list of artifacts for a specific job. 
 
     ```sh
     curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLECI_TOKEN" | jq\
+    -H "Circle-Token: $CIRCLECI_TOKEN" 
     ```
 
     Check the table below for help with formatting your API call correctly.
