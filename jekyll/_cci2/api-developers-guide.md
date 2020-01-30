@@ -155,9 +155,9 @@ The following section details the steps you would need, from start to finish, to
     version: 2.1
     # Use a package of configuration called an orb.
     orbs:
-    # Declare a dependency on the welcome-orb
+      # Declare a dependency on the welcome-orb
       welcome: circleci/welcome-orb@0.4.1
-    # Orchestrate or schedule a set of jobs
+      # Orchestrate or schedule a set of jobs
       workflows:
       # Name the workflow "welcome"
       welcome:
@@ -177,12 +177,12 @@ The following section details the steps you would need, from start to finish, to
     curl --header "Circle-Token: $CIRCLECI_TOKEN" \
       --header 'Accept: application/json'    \
       --header 'Content-Type: application/json' \
-      https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
+      https://circleci.com/api/v2/project/{VCS}/{USER_NAME}/hello-world/pipeline 
     ```
 
     You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
 
-    ```sh
+    ```json
     {
       "next_page_token": null,
       "items": [
@@ -219,7 +219,7 @@ The following section details the steps you would need, from start to finish, to
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     -H "Circle-Token: $CIRCLECI_TOKEN" \
@@ -236,7 +236,7 @@ The following section details the steps you would need, from start to finish, to
     While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     -H "Circle-Token: $CIRCLE_TOKEN" \
@@ -250,13 +250,11 @@ The following section details the steps you would need, from start to finish, to
     jobs: 
       build: 
         docker: 
-          - 
-            image: "circleci/node:<< pipeline.parameters.image-tag >>"
+          - image: "circleci/node:<< pipeline.parameters.image-tag >>"
         environment: 
           IMAGETAG: "<< pipeline.parameters.image-tag >>"
         steps: 
-          - 
-            run: "echo \"Image tag used was ${IMAGETAG}\""
+          - run: echo "Image tag used was ${IMAGETAG}"
     parameters: 
       image-tag: 
         default: latest
