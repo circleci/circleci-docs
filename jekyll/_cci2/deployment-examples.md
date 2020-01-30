@@ -40,7 +40,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the `build` job passes and the current branch is `master`.
 
     {% raw %}  
-    ```
+    ```yaml
     version: 2.1 
 
     orbs:
