@@ -463,7 +463,7 @@ Before making an API call, make sure you have met the following prerequisites:
     | `job-number` | The number for the job you want to download artifacts from - see step 2 |
     {: class="table table-striped"}
     
-    You should get a list of artifacts back - if the job you chose has artifacts associated with it. Here's and extract from the output when requesting artifacts for a job that builds these docs:
+    You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
 
     ```
     {
