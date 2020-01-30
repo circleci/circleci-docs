@@ -42,23 +42,23 @@ To add an API token, perform the steps listed below.
 1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
 2.  To test it, [view it in your browser](https://circleci.com/api/v2/me) or call the API using the command below.
 
-```sh
-$ curl https://circleci.com/api/v2/me
-```
+    ```sh
+    $ curl https://circleci.com/api/v2/me
+    ```
 
 3.  You should see a JSON response similar to the example shown below.
 
-```json
-{
-  "user_key_fingerprint" : null,
-  "days_left_in_trial" : -238,
-  "plan" : "p16",
-  "trial_end" : "2011-12-28T22:02:15Z",
-  "basic_email_prefs" : "smart",
-  "admin" : true,
-  "login" : "someuser"
- }
-```
+    ```json
+    {
+      "user_key_fingerprint" : null,
+      "days_left_in_trial" : -238,
+      "plan" : "p16",
+      "trial_end" : "2011-12-28T22:02:15Z",
+      "basic_email_prefs" : "smart",
+      "admin" : true,
+      "login" : "someuser"
+    }
+    ```
 
 **Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
 
@@ -152,120 +152,120 @@ The following section details the steps you would need, from start to finish, to
 
 2. Next, follow the onboarding for a new project on CircleCI. You can access onboarding by visiting the application and clicking on "Add Projects" in the sidebar or by going to the link: https://onboarding.circleci.com/project-dashboard/{VCS}/{ORG_NAME} where `VCS` is either `github` (or `gh`) or `bitbucket` (or `bb`) and `ORG_NAME` is your organization or personal VCS username. Find your project in the onboarding list and click `Setup Project`. After completing an onboarding, you should have a valid `config.yml` file in a `.circleci` folder at the root of your repository. In this example, the `config.yml` contains the following:
 
-```yaml
-# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
-version: 2.1
-# Use a package of configuration called an orb.
-orbs:
- # Declare a dependency on the welcome-orb
-   welcome: circleci/welcome-orb@0.4.1
- # Orchestrate or schedule a set of jobs
-   workflows:
-   # Name the workflow "welcome"
-   welcome:
-   # Run the welcome/run job in its own container
-     jobs:
-     - welcome/run
-```
+    ```yaml
+    # Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
+    version: 2.1
+    # Use a package of configuration called an orb.
+    orbs:
+    # Declare a dependency on the welcome-orb
+      welcome: circleci/welcome-orb@0.4.1
+    # Orchestrate or schedule a set of jobs
+      workflows:
+      # Name the workflow "welcome"
+      welcome:
+      # Run the welcome/run job in its own container
+        jobs:
+        - welcome/run
+    ```
 
 3. Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
-```sh
-# First: set your CircleCI token as an environment variable
-export CIRCLECI_TOKEN={your_api_token}
-    
-curl --header "Circle-Token: $CIRCLECI_TOKEN" \
-  --header 'Accept: application/json'    \
-  --header 'Content-Type: application/json' \
-  https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
-```
+    ```sh
+    # First: set your CircleCI token as an environment variable
+    export CIRCLECI_TOKEN={your_api_token}
+        
+    curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+      --header 'Accept: application/json'    \
+      --header 'Content-Type: application/json' \
+      https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
+    ```
 
-You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
+    You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
 
-```sh
- {
-  "next_page_token": null,
-  "items": [
-   {
-    "id": "03fcbba0-d847-4c8b-a553-6fdd7854b893",
-    "errors": [],
-    "project_slug": "gh/{YOUR_USER_NAME}/hello-world",
-    "updated_at": "2020-01-10T19:45:58.517Z",
-    "number": 1,
-    "state": "created",
-    "created_at": "2020-01-10T19:45:58.517Z",
-    "trigger": {
-     "received_at": "2020-01-10T19:45:58.489Z",
-       "type": "api",
-            "actor": {
-              "login": "teesloane",
-              "avatar_url": "https://avatars0.githubusercontent.com/u/12987958?v=4"
-            }
-          },
-          "vcs": {
-            "origin_repository_url": "https://github.com/{YOUR_USER_NAME}/hello-world",
-            "target_repository_url": "https://github.com/{YOUR_USER_NAME}/hello-world",
-            "revision": "ca67134f650e362133e51a9ffdb8e5ddc7fa53a5",
-            "provider_name": "GitHub",
-            "branch": "master"
+    ```sh
+    {
+      "next_page_token": null,
+      "items": [
+      {
+        "id": "03fcbba0-d847-4c8b-a553-6fdd7854b893",
+        "errors": [],
+        "project_slug": "gh/{YOUR_USER_NAME}/hello-world",
+        "updated_at": "2020-01-10T19:45:58.517Z",
+        "number": 1,
+        "state": "created",
+        "created_at": "2020-01-10T19:45:58.517Z",
+        "trigger": {
+        "received_at": "2020-01-10T19:45:58.489Z",
+          "type": "api",
+                "actor": {
+                  "login": "teesloane",
+                  "avatar_url": "https://avatars0.githubusercontent.com/u/12987958?v=4"
+                }
+              },
+              "vcs": {
+                "origin_repository_url": "https://github.com/{YOUR_USER_NAME}/hello-world",
+                "target_repository_url": "https://github.com/{YOUR_USER_NAME}/hello-world",
+                "revision": "ca67134f650e362133e51a9ffdb8e5ddc7fa53a5",
+                "provider_name": "GitHub",
+                "branch": "master"
+          }
+        }
+        ]
       }
-     }
-    ]
-  }
-```
-    
-That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
+    ```
+        
+    That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
 
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
-```sh
- curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
- -H 'Content-Type: application/json' \
- -H 'Accept: application/json' \
- -H "Circle-Token: $CIRCLECI_TOKEN" \
-      
-# Which returns:
-{
-  "number": 2,
-  "state": "pending",
-  "id": "e411ea74-c64a-4d60-9292-115e782802ed",
-  "created_at": "2020-01-15T15:32:36.605Z"
-}
-```
+    ```sh
+    curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -H "Circle-Token: $CIRCLECI_TOKEN" \
+          
+    # Which returns:
+    {
+      "number": 2,
+      "state": "pending",
+      "id": "e411ea74-c64a-4d60-9292-115e782802ed",
+      "created_at": "2020-01-15T15:32:36.605Z"
+    }
+    ```
 
-While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
+    While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
-```sh
-curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
--H 'Content-Type: application/json' \
--H 'Accept: application/json' \
--H "Circle-Token: $CIRCLE_TOKEN" \
--d '{ "branch": "bar" }' 
-```
+    ```sh
+    curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -H "Circle-Token: $CIRCLE_TOKEN" \
+    -d '{ "branch": "bar" }' 
+    ```
 
 6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
-```yaml
-version: 2.1
-jobs: 
-  build: 
-    docker: 
-      - 
-        image: "circleci/node:<< pipeline.parameters.image-tag >>"
-    environment: 
-      IMAGETAG: "<< pipeline.parameters.image-tag >>"
-    steps: 
-      - 
-        run: "echo \"Image tag used was ${IMAGETAG}\""
-parameters: 
-  image-tag: 
-    default: latest
-    type: string
-```
+    ```yaml
+    version: 2.1
+    jobs: 
+      build: 
+        docker: 
+          - 
+            image: "circleci/node:<< pipeline.parameters.image-tag >>"
+        environment: 
+          IMAGETAG: "<< pipeline.parameters.image-tag >>"
+        steps: 
+          - 
+            run: "echo \"Image tag used was ${IMAGETAG}\""
+    parameters: 
+      image-tag: 
+        default: latest
+        type: string
+    ```
 
-You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
@@ -285,9 +285,9 @@ Now that you have a general understanding of how the CircleCI API v2 service wor
 
 This section provides detailed information on how you can perform the following tasks and operations:
 
-* Get project details
-* Get job details
-* Download artifacts
+* [Get project details](#get-project-details)
+* [Get job details](#get-job-details)
+* [Download artifacts](#download-artifacts)
 
 ## Get Project Details
 
@@ -314,26 +314,28 @@ To return project details, perform the following steps:
 
 1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project slug` parameter you want returned in the JSON payload in your `curl` request as follows:
 
-```sh
-   curl -X GET https://circleci.com/api/v2/project/{project-slug} \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLE_TOKEN" \
-```
+    ```sh
+      curl -X GET https://circleci.com/api/v2/project/{project-slug} \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
+        -H "Circle-Token: $CIRCLE_TOKEN" \
+    ```
+
 2. After passing the `project-slug` parameter and making the API request, you will receive unformatted JSON text similar to the example shown below.
 
-```json
- {
-	"slug": "gh/CircleCI-Public/api-preview-docs",
-	"name": "api-preview-docs",
-	"organization_name": "CircleCI-Public",
-	"vcs_info": {
-		"vcs_url": "https://github.com/CircleCI-Public/api-preview-docs",
-		"provider": "Bitbucket",
-		"default_branch": "master"
-	}
-}
-```
+    ```json
+    {
+      "slug": "gh/CircleCI-Public/api-preview-docs",
+      "name": "api-preview-docs",
+      "organization_name": "CircleCI-Public",
+      "vcs_info": {
+        "vcs_url": "https://github.com/CircleCI-Public/api-preview-docs",
+        "provider": "Bitbucket",
+        "default_branch": "master"
+      }
+    }
+    ```
+
 Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, please refer to the [Get Project Details](https://circleci.com/docs/api/v2/#get-a-project)section of the *CircleCI API v2 Reference Guide*.
 
 ## Get Job Details
@@ -361,59 +363,61 @@ To return job details, perform the following steps:
 
 1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project slug` and `job number` parameters you want returned in the JSON payload in your `curl` request as follows:
 
-```sh
-   curl -X GET https://circleci.com/api/v2/project/{project-slug}/job/{job-number} \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLE_TOKEN" \
-```
+    ```sh
+      curl -X GET https://circleci.com/api/v2/project/{project-slug}/job/{job-number} \
+        -H 'Content-Type: application/json' \
+        -H 'Accept: application/json' \
+        -H "Circle-Token: $CIRCLE_TOKEN" \
+    ```
+
 2. After passing the parameters and making the API request, you will receive unformatted JSON text similar to the example shown below.
 
-```json
-  {
-	"web_url": "string",
-	"project": {
-		"slug": "gh/CircleCI-Public/api-preview-docs",
-		"name": "api-preview-docs",
-		"external_url": "https://github.com/CircleCI-Public/api-preview-docs"
-	},
-	"parallel_runs": [{
-		"index": 0,
-		"status": "string"
-	}],
-	"started_at": "2020-01-24T11:33:40Z",
-	"latest_workflow": {
-		"id": "string",
-		"name": "build-and-test"
-	},
-	"name": "string",
-	"executor": {
-		"type": "string",
-		"resource_class": "string"
-	},
-	"parallelism": 0,
-	"status": null,
-	"number": 0,
-	"pipeline": {
-		"id": "string"
-	},
-	"duration": 0,
-	"created_at": "2020-01-13T18:51:40Z",
-	"messages": [{
-		"type": "string",
-		"message": "string",
-		"reason": "string"
-	}],
-	"contexts": [{
-		"name": "string"
-	}],
-	"organization": {
-		"name": "string"
-	},
-	"queued_at": "2020-01-13T18:51:40Z",
-	"stopped_at": "2020-01-13T18:51:40Z"
-}
-```
+    ```json
+      {
+      "web_url": "string",
+      "project": {
+        "slug": "gh/CircleCI-Public/api-preview-docs",
+        "name": "api-preview-docs",
+        "external_url": "https://github.com/CircleCI-Public/api-preview-docs"
+      },
+      "parallel_runs": [{
+        "index": 0,
+        "status": "string"
+      }],
+      "started_at": "2020-01-24T11:33:40Z",
+      "latest_workflow": {
+        "id": "string",
+        "name": "build-and-test"
+      },
+      "name": "string",
+      "executor": {
+        "type": "string",
+        "resource_class": "string"
+      },
+      "parallelism": 0,
+      "status": null,
+      "number": 0,
+      "pipeline": {
+        "id": "string"
+      },
+      "duration": 0,
+      "created_at": "2020-01-13T18:51:40Z",
+      "messages": [{
+        "type": "string",
+        "message": "string",
+        "reason": "string"
+      }],
+      "contexts": [{
+        "name": "string"
+      }],
+      "organization": {
+        "name": "string"
+      },
+      "queued_at": "2020-01-13T18:51:40Z",
+      "stopped_at": "2020-01-13T18:51:40Z"
+    }
+    ```
+
 Notice in the example above that you will receive very specific information about your job, including specific project and workflow details for the job, the date and time the job started and then finished, and job-specific information such as the executor type used, current status of the job, and the duration of the job.
 
 For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the *CircleCI API v2 Reference Guide*.
@@ -421,7 +425,7 @@ For a more detailed breakdown of each value returned in this request, please ref
 
 ## Download Artifacts
 
-The following section details the steps you need to follow to download artifacts generated when a job is run. We will go through the steps of returning a list of artifacts for a job, and then changing the command we run to download the full set of artifacts. If you are looking for instructions to download the latest artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
+The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 ### Prerequisites
 
@@ -496,7 +500,7 @@ Before making an API call, make sure you have met the following prerequisites:
     | wget -v -i -
     ```
 
-  `Note: `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
+    `Note: `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
 
 
 # Reference
