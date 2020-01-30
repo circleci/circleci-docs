@@ -211,7 +211,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the current branch is `master`.
   
-    ```
+    ```yaml
     version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
 
     orbs:
