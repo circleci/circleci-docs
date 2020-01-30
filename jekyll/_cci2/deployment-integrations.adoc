@@ -24,7 +24,7 @@ image::pipeline-to-deployment.png[Deployment]
 
 * **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
 +
-Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen <<#2.0-config,further down this page within the deploy job config for the non-orb Heroku example>>.
+Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen <<2.0-config,further down this page within the deploy job config for the non-orb Heroku example>>.
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>> 
 
