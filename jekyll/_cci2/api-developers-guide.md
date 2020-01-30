@@ -434,7 +434,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
 ### Steps
 
-1. First we will ensure your api token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal api token:
+1. First, we will ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
 
     ```
     export CIRCLECI_TOKEN={your_api_token}
