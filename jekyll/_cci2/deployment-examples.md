@@ -65,7 +65,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
       ... # build job steps omitted for brevity
       deploy:
         docker: # Use the Docker executor for the deploy job
-          - image: <image-name-and-tag>  Specify the Docker image to use for the deploy job
+          - image: <image-name-and-tag>  # Specify the Docker image to use for the deploy job
       steps:
           - checkout
           - aws-s3/sync:
