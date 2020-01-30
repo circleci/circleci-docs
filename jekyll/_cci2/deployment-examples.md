@@ -155,7 +155,7 @@ Use the [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) and [
 
 Using the `build_and_push_image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
 
-```
+```yaml
 version: 2.1 
 
 orbs:
