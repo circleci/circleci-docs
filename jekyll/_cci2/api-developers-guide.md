@@ -84,7 +84,7 @@ When making an API request, make sure you follow standard REST API syntax and fo
 
 Where:
 
-- `https://circleci.com` is the resource URL for the API being called.
+- `https://circleci.com/api/` is the resource URL for the API being called.
 - `api` is the service being called.
 - `v2` is the API version.
 -->
