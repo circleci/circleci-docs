@@ -440,7 +440,7 @@ Before making an API call, make sure you have met the following prerequisites:
     export CIRCLECI_TOKEN={your_api_token}
     ```
 
-2.  Next we need the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
+2.  Next, retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
 
     INSERT SCREENSHOT HIGHLIGHTING JOB NUMBER
 
