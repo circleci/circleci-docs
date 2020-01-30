@@ -322,7 +322,7 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
 #### Dark Deployment
 {:.no_toc}
 
-This is the first step in a Blue-Green deployment, pushing the application to non-production routes.
+This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) deployment, pushing the application to non-production routes.
 
 ```
 - run:
