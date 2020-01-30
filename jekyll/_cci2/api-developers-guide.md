@@ -485,7 +485,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
     CHECK ITS OK TO INCLUDE THIS
 
-4. Next we can extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following, remembering to substitute your values:
+4. Next, you may extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following command, remembering to substitute your own values in the request:
 
      ```sh
     curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
