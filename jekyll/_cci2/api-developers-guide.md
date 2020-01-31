@@ -39,24 +39,21 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 
 To add an API token, perform the steps listed below.
 
-1.  Add an API token from your [account dashboard](https://circleci.com/account/api).
-2.  To test it, [view it in your browser](https://circleci.com/api/v2/me) or call the API using the command below.
+1.  Add an API token from the [Personal API Tokens page](https://account.circleci.com/tokens). 
+2.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
     ```sh
-    $ curl https://circleci.com/api/v2/me
+    export CIRCLE_TOKEN=<your_token>
+    curl https://circleci.com/api/v2/me -H "Circle-Token: $CIRCLE_TOKEN"
     ```
 
 3.  You should see a JSON response similar to the example shown below.
 
     ```json
     {
-      "user_key_fingerprint" : null,
-      "days_left_in_trial" : -238,
-      "plan" : "p16",
-      "trial_end" : "2011-12-28T22:02:15Z",
-      "basic_email_prefs" : "smart",
-      "admin" : true,
-      "login" : "someuser"
+      "id": "string",
+      "login": "string",
+      "name": "string"
     }
     ```
 
@@ -64,7 +61,7 @@ To add an API token, perform the steps listed below.
 
 ### Get Authenticated
 
-To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the `circle-token` query param:
+To be authenticated by the API server, add an API token using the [Personal API Tokens page](https://account.circleci.com/tokens). To use the API token, add it to the `circle-token` query param:
 
 ```sh
 curl "https://circleci.com/api/v1.1/me?circle-token=:token"
@@ -87,14 +84,16 @@ When making an API request, make sure you follow standard REST API syntax and fo
 
 Where:
 
-- `https://circleci.com` is the resource URL for the API being called.
+- `https://circleci.com/api/` is the resource URL for the API being called.
 - `api` is the service being called.
 - `v2` is the API version.
 -->
 
 # Getting Started with the API
 
-The CircleCI API v2 is backwards-compatible with previous API versions in the way it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type, the name of your “organization”, and the name of the repository. For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are supported in API v2. The `organization` is your username or organization name in your version control system.
+The CircleCI API v2 shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (or, VCS provider), the name of your “organization”, and the name of the repository. 
+
+For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are supported in API v2. The `organization` is your username or organization name in your version control system.
 
 With API v2, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
@@ -144,7 +143,6 @@ The following section details the steps you would need, from start to finish, to
 
 * A GitHub or BitBucket account with a repository to setup with CircleCI.
 * Completion of the CircleCI onboarding.
-* **Optional**: You can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`.
 
 ## Steps
 
@@ -157,9 +155,9 @@ The following section details the steps you would need, from start to finish, to
     version: 2.1
     # Use a package of configuration called an orb.
     orbs:
-    # Declare a dependency on the welcome-orb
+      # Declare a dependency on the welcome-orb
       welcome: circleci/welcome-orb@0.4.1
-    # Orchestrate or schedule a set of jobs
+      # Orchestrate or schedule a set of jobs
       workflows:
       # Name the workflow "welcome"
       welcome:
@@ -168,7 +166,7 @@ The following section details the steps you would need, from start to finish, to
         - welcome/run
     ```
 
-3. Add an API token from your [account dashboard](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
+3. Add an API token from the [Personal API Tokens page](https://account.circleci.com/tokens). Be sure to write down and store your API token in a secure place once you generate it.
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
@@ -179,12 +177,12 @@ The following section details the steps you would need, from start to finish, to
     curl --header "Circle-Token: $CIRCLECI_TOKEN" \
       --header 'Accept: application/json'    \
       --header 'Content-Type: application/json' \
-      https://circleci.com/api/v2/project/gh/{USER_NAME}/hello-world/pipeline 
+      https://circleci.com/api/v2/project/{VCS}/{USER_NAME}/hello-world/pipeline 
     ```
 
     You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
 
-    ```sh
+    ```json
     {
       "next_page_token": null,
       "items": [
@@ -221,7 +219,7 @@ The following section details the steps you would need, from start to finish, to
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/{YOUR_USER_NAME}/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     -H "Circle-Token: $CIRCLECI_TOKEN" \
@@ -238,7 +236,7 @@ The following section details the steps you would need, from start to finish, to
     While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/gh/teesloane/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
     -H "Circle-Token: $CIRCLE_TOKEN" \
@@ -252,13 +250,11 @@ The following section details the steps you would need, from start to finish, to
     jobs: 
       build: 
         docker: 
-          - 
-            image: "circleci/node:<< pipeline.parameters.image-tag >>"
+          - image: "circleci/node:<< pipeline.parameters.image-tag >>"
         environment: 
           IMAGETAG: "<< pipeline.parameters.image-tag >>"
         steps: 
-          - 
-            run: "echo \"Image tag used was ${IMAGETAG}\""
+          - run: echo "Image tag used was ${IMAGETAG}"
     parameters: 
       image-tag: 
         default: latest
@@ -433,7 +429,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
 * You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
 * You have completed CircleCI onboarding and you have a project setup.
-* You have a [personal API token](https://circleci.com/account/api).
+* You have a [personal api token](https://account.circleci.com/tokens).
 * You have been [authenticated](#get-authenticated) to make API calls to the server.
 
 ### Steps
@@ -448,13 +444,13 @@ Before making an API call, make sure you have met the following prerequisites:
 
     ![Job Number]({{ site.baseurl }}/assets/img/docs/job-number.png)
 
-3.  Next, use the `curl` command to return a list of artifacts for a specific job. Note, you can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`:
+3.  Next, use the `curl` command to return a list of artifacts for a specific job. 
 
     ```sh
     curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
     -H 'Content-Type: application/json' \
     -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLECI_TOKEN" | jq\
+    -H "Circle-Token: $CIRCLECI_TOKEN" 
     ```
 
     Check the table below for help with formatting your API call correctly.
