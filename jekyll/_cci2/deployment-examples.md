@@ -327,21 +327,21 @@ This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/
 {% raw $}
 
 ```yaml
-- run:
-    name: CF Deploy
-    command: |
-      # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
-      cf push --no-start <app-name-dark> -f manifest.yml -p application.jar -n dark -d <example.com>
-      # Pass CircleCI variables to Cloud Foundry (optional)
-      cf set-env <app-name-dark> circle_build_num ${CIRCLE_BUILD_NUM}
-      cf set-env <app-name-dark> circle_commit ${CIRCLE_SHA1}
-      cf set-env <app-name-dark> circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
-      cf set-env <app-name-dark> circle_user ${CIRCLE_PROJECT_USERNAME}
-      cf set-env <app-name-dark> circle_repo ${CIRCLE_PROJECT_REPONAME}
-      # Start the application
-      cf start <app-name-dark>
-      # Ensure dark route is exclusive to dark app
-      cf unmap-route <app-name> <example.com> -n dark || echo "Dark Route Already exclusive"
+      - run:
+          name: CF Deploy
+          command: |
+            # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
+            cf push --no-start <app-name-dark> -f manifest.yml -p application.jar -n dark -d <example.com>
+            # Pass CircleCI variables to Cloud Foundry (optional)
+            cf set-env <app-name-dark> circle_build_num ${CIRCLE_BUILD_NUM}
+            cf set-env <app-name-dark> circle_commit ${CIRCLE_SHA1}
+            cf set-env <app-name-dark> circle_workflow_guid ${CIRCLE_WORKFLOW_ID}
+            cf set-env <app-name-dark> circle_user ${CIRCLE_PROJECT_USERNAME}
+            cf set-env <app-name-dark> circle_repo ${CIRCLE_PROJECT_REPONAME}
+            # Start the application
+            cf start <app-name-dark>
+            # Ensure dark route is exclusive to dark app
+            cf unmap-route <app-name> <example.com> -n dark || echo "Dark Route Already exclusive"
 ```
 
 {% endraw $}
