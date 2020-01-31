@@ -351,7 +351,7 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
 
 This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/deploy-apps/blue-green.html) deployment, pushing the application to non-production routes.
 
-{% raw $}
+{% raw %}
 
 ```yaml
       - run:
@@ -371,7 +371,7 @@ This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/
             cf unmap-route <app-name> <example.com> -n dark || echo "Dark Route Already exclusive"
 ```
 
-{% endraw $}
+{% endraw %}
 
 #### Live Deployment
 {:.no_toc}
