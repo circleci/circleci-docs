@@ -459,9 +459,11 @@ jobs:
 ##### Machine Executor (Linux)
 
 Class            | vCPUs | RAM
------------------|-------|-------
+-----------------|-------|------
 medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
+xlarge           | 8     | 32GB
+2xlarge          | 16    | 64GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -496,10 +498,11 @@ jobs:
 ##### Windows Executor
 
 Class             | vCPUs | RAM
-------------------|-------|-----
+------------------|-------|------
 medium (default)  | 4     | 15GB
 large             | 8     | 30GB
 xlarge            | 16    | 60GB
+2xlarge           | 32    | 128GB
 {: class="table table-striped"}
 
 ###### Example Usage
