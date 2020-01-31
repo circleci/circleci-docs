@@ -453,14 +453,14 @@ The following example shows how you can add a deploy to Firebase job to your pro
 
 ```yaml
 
- deploy-job:
-   docker:
-     - image: <docker-image-name-tag>
-   working_directory: /tmp/my-project
-   steps:
-     - run:
-         name: Deploy Master to Firebase
-         command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Deploy Master to Firebase
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
 
 workflows:
   version: 2
@@ -480,9 +480,13 @@ workflows:
 
 If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `config.yml`:
 
+{% raw %}
+
 ```yaml
       - run: cd functions && npm install
 ```
+
+{% endraw %}
 
 ## Google Cloud Platform
 
@@ -492,6 +496,8 @@ Before deploying to Google Cloud Platform, you will need to authorize the Google
 {:.no_toc}
 
 There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/orbs/registry/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
+
+{% raw %}
 
 ```yaml
 version: 2.1
@@ -509,6 +515,9 @@ workflows:
           image: <your-image> # name of your Docker image
           tag: $CIRCLE_SHA1 # Docker image tag - optional
 ```
+
+{% endraw %}
+
 ### Deployment to GKE with 2.0 Config
 {:.no_toc}
 
@@ -520,23 +529,23 @@ In the following example, if the `build-job` passes and the current branch is `m
 version: 2
 
 jobs:
- build-job:
+  build-job:
   # steps ommitted for brevity
- deploy-job:
-   docker:
-     - image: <docker-image-name-tag>
-   working_directory: /tmp/my-project  
-   steps:
-     - run:
-         name: Deploy Master to GKE
-         command: |
-         # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
-         sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello 
-         # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
-         sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-         # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image. 
-         # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
-         kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
+  deploy-job:
+    docker:
+      - image: <docker-image-name-tag>
+    working_directory: /tmp/my-project  
+    steps:
+      - run:
+          name: Deploy Master to GKE
+          command: |
+          # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
+          sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello 
+          # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
+          sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
+          # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image. 
+          # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
+          kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
 
 workflows:
   version: 2
