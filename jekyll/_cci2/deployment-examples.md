@@ -91,7 +91,8 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 5. [Use the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-using.html) to deploy your application to S3 or perform other AWS operations. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the build job passes and the current branch is `master`.
 
-    ```
+    {% raw %}
+    ```yaml
     version: 2
 
     workflows: # Define a Workflow running the build job, then the deploy job
@@ -122,6 +123,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
               name: Deploy to S3
               command: aws s3 sync <path/to/bucket> <s3://location/in/S3-to-deploy-to>
     ```
+    {% endraw %}
 
 For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
@@ -131,7 +133,9 @@ The AWS ECR orb enables you to log into AWS, build, and then push a Docker image
 
 Using the `build_and_push_image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
 
-```
+{% raw %}
+
+```yaml
 version: 2.1
 
 orbs:
@@ -148,12 +152,16 @@ workflows:
           tag: <my-ECR-repo-tag> # default - latest
 ```
 
+{% endraw %}
+
 ### Update an AWS ECS Instance
 {:.no_toc}
 
 Use the [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) and [ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
 
 Using the `build_and_push_image` job, as shown below requires the following env vars to be set: `AWS_ECR_ACCOUNT_URL`, `ACCESS_KEY_ID`, `SECRET_ACCESS_KEY`, `AWS_REGION`. {% include snippets/env-var-or-context.md %}
+
+{% raw %}
 
 ```yaml
 version: 2.1 
@@ -179,10 +187,14 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
+{% endraw %}
+
 ### AWS CodeDeploy
 {:.no_toc}
 
 The [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy) orb enables you to run deployments through AWS CodeDeploy.
+
+{% raw %}
 
 ```yaml
 version: 2.1 # use 2.1 to make use of orbs and pipelines
@@ -201,6 +213,8 @@ workflows:
           bundle-key: <my-S3-bucket-key> # A key under the s3 bucket where an application revision will be stored.
 ```
 
+{% raw %}
+
 ## Azure Container Registry
 
 This section describes a simple deployment to the Azure container registry (ACR) using the CircleCI ACR orb and `version 2.1` configuration.
@@ -211,6 +225,8 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the current branch is `master`.
   
+    {% raw %}
+
     ```yaml
     version: 2.1 # Use version 2.1 config to get access to orbs, pipelines
 
@@ -231,11 +247,16 @@ For detailed information about the Azure ACR orb, including all options, refer t
                   only: master # Only deploys when the commit is on the Master branch
     ```
 
+    {% endraw %}
+
 If pushing to your repo is required, see the [Adding Read/Write Deployment Keys to GitHub or Bitbucket]( {{ site.baseurl }}/2.0/gh-bb-integration/) section of the GitHub and Bitbucket Integration document for instructions. Then, configure the Azure Web App to use your production branch.
 
 ## Capistrano
 
 Once your project is set up to use Capistrano, you can run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
+
+{% raw %}
+ 
 ```yaml
 version: 2
 
@@ -267,9 +288,13 @@ jobs:
           command: bundle exec cap production deploy
 ```
 
+{% endraw %}
+
 ## Cloud Foundry
 
 CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the [Orbs Registry](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job - in this example `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
+
+{% raw %}
 
 ```yaml
 version: 2.1
@@ -296,6 +321,8 @@ workflows:
             # Call any orbs or custom commands that validate the health of deployed application before letting Green deploy/reroute proceed.
             # For example,  hitting a /health endpoint with curl and making sure the dark URL returns a 200.
 ```
+
+{% endraw %}
 
 If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/orbs/registry/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
@@ -422,6 +449,8 @@ Add the generated token to the CircleCI project's environment variables as `$FIR
 
 The following example shows how you can add a deploy to Firebase job to your project's `config.yml` file. This snippet assumes you already have a job to build your application, called `build-job`, and introduces a deployment workflow that only runs the deployment job once the build job has completed **and** you're on the master branch.
 
+{% raw %}
+
 ```yaml
 
  deploy-job:
@@ -447,10 +476,12 @@ workflows:
 
 ```
 
+{% endraw %}
+
 If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to the folder where the Google Cloud Functions are held (in this case 'functions') and run `npm install` by adding the below to `config.yml`:
 
-```
-   - run: cd functions && npm install
+```yaml
+      - run: cd functions && npm install
 ```
 
 ## Google Cloud Platform
@@ -484,7 +515,8 @@ workflows:
 In the following example, if the `build-job` passes and the current branch is `master`, CircleCI runs the deployment job.
 
 {% raw %}
-```
+
+```yaml
 version: 2
 
 jobs:
@@ -537,7 +569,9 @@ to set up a project in your chosen language.
 
 3. Use the [Heroku orb](https://circleci.com/orbs/registry/orb/circleci/heroku) to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the [orbs registry](https://circleci.com/orbs/registry/orb/circleci/heroku) for full details of parameters and options:
 
-    ```
+    {% raw %}
+    
+    ```yaml
     version: 2.1
 
     orbs:
@@ -555,6 +589,8 @@ to set up a project in your chosen language.
                   only: master # only run deploy-via-git job on master branch
     ```
 
+    {% endraw %}
+
 For more detailed information about these Heroku orbs, refer to the [CircleCI Heroku Orb](https://circleci.com/orbs/registry/orb/circleci/heroku).
 
 ### Heroku Deployment with 2.0 Config
@@ -569,7 +605,9 @@ to set up a project in your chosen language.
 
 4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
 
-    ```
+    {% raw %}
+    
+    ```yaml
     version: 2
 
     jobs:
@@ -597,6 +635,9 @@ to set up a project in your chosen language.
                 branches:
                   only: master # only run deploy-via-git job on master branch
     ```
+
+    {% endraw %}
+
 **Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
 
 ## NPM
@@ -607,7 +648,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
     You can do that by logging in to npm (`npm login`). This will save the authToken to the `~/.npmrc` file. Look for the following line:
 
-    ```
+    ```sh
     //registry.npmjs.org/:_authToken=00000000-0000-0000-0000-000000000000
     ```
 
@@ -617,7 +658,9 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
 
 3.  Configure CircleCI to add the authToken to `~/.npmrc`, run `npm publish` and only for versioned tags:
 
-    ```
+    {% raw %}
+
+    ```yaml
     version: 2
 
     jobs:
@@ -642,15 +685,17 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
                   only: /v[0-9]+(\.[0-9]+)*/
     ```
 
+    {% endraw %}
+
 4.  When you want to publish a new version to npm, run `npm version` to create a new version:
 
-    ```
+    ```sh
     npm version 10.0.1
     ```
 
     This will update the `package.json` file and creates a tagged Git commit. Next, push the commit with tags:
 
-    ```
+    ```sh
     git push --follow-tags
     ```
 5.  If tests passed, CircleCI will publish the package to npm automatically.
@@ -665,7 +710,9 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
 
 3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the master branch.
 
-    ```
+    {% raw %}
+    
+    ```yaml
     version: 2
 
     jobs:
@@ -692,3 +739,5 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
                 branches:
                   only: master # only deploy on the master branch
     ```
+
+    {% endraw %}
