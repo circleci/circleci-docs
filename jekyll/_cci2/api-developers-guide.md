@@ -263,6 +263,14 @@ This concludes the end-to-end example of using the V2 API. For more detailed inf
 
 Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Whether you wish to return information about a job or project, or retrieve more detailed information about a project by reviewing its artifacts, the examples shown below should assist you in gaining a better understanding of how to make some API requests to the server so you can perform a deep dive into the specifics of your work.
 
+### Prerequisites
+
+Before trying any of the API calls in this section, make sure you have met the following prerequisites:
+
+* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
+* You have completed CircleCI onboarding and you have a project setup.
+* You have a personal API token and have been authenticated to make calls to the server.
+
 This section provides detailed information on how you can perform the following tasks and operations:
 
 * [Get project details](#get-project-details)
@@ -274,15 +282,6 @@ This section provides detailed information on how you can perform the following 
 You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
 
 **Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects](https://circleci.com/docs/2.0/projects/) page.
-
-### Prerequisites
-
-Before you make this API call, make sure you have met the following prerequisites:
-
-* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
-* You have completed CircleCI onboarding and you have a project setup.
-* You have a personal API token.
-* You have been authenticated to make API calls to the server.
 
 ### Steps
 
@@ -323,15 +322,6 @@ Notice in the example above that you will receive very specific information abou
 Much like the Get Project Details API request described in the previous example, the Get Job Details API request enables you to return specific job information from the CircleCI API by making a single API request. Retrieving job information can be very useful when you want information about how your job performed, what resources were used (e.g. pipeline, executor type, etc.), and the time it took for the job to finish.
 
 Please remember, jobs are collections of steps. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a default image if not specified, for `docker` you must specify an image to use for the primary container, for `macos` you must specify an Xcode version, and for `windows` you must use the Windows orb.
-
-### Prerequisites
-
-Before making the API call, make sure you have met the following prerequisites:
-
-* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
-* You have completed CircleCI onboarding and you have a project setup.
-* You have a personal API token.
-* You have been authenticated to make API calls to the server.
 
 ### Steps
 
@@ -402,19 +392,9 @@ Notice in the example above that you will receive very specific information abou
 
 For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the *CircleCI API v2 Reference Guide*.
 
-
 ## Download Artifacts
 
 The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
-
-### Prerequisites
-
-Before making an API call, make sure you have met the following prerequisites:
-
-* You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
-* You have completed CircleCI onboarding and you have a project setup.
-* You have a [personal api token](https://account.circleci.com/tokens).
-* You have been authenticated to make API calls to the server.
 
 ### Steps
 
