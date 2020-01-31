@@ -446,7 +446,7 @@ Before making an API call, make sure you have met the following prerequisites:
 
 2.  Next, retrieve the job number for the job you want to get artifacts for. You can find job numbers in the UI - either in the breadcrumbs on the Job Details page, or in the URL.
 
-    INSERT SCREENSHOT HIGHLIGHTING JOB NUMBER
+    ![Job Number]({{ site.baseurl }}/assets/img/docs/job-number.png)
 
 3.  Next, use the `curl` command to return a list of artifacts for a specific job. Note, you can format JSON responses by piping the `curl` command into the `jq` utility if you have it installed: `curl ... | jq`:
 
@@ -487,8 +487,6 @@ Before making an API call, make sure you have met the following prerequisites:
     },
     ```
 
-    CHECK ITS OK TO INCLUDE THIS
-
 4. Next, you may extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following command, remembering to substitute your own values in the request:
 
      ```sh
@@ -513,51 +511,56 @@ Before working with the API and making calls, you should first have an understan
 
 ### User Endpoints
 
-Endpoint       | Description                       
------------|-------------------------------------------------------
-/user/{id}  | This endpoint enables you to return information about a specific user by making a GET request and passing the `id` parameter in the request
-/me/collaborations | This endoint enables you to return a list of organizations that the user is a member of, or is a collaborator by making a GET request and passing the `collaborations` parameter in the request. 
+| Endpoint               | Description                       
+|------------------------|-------------------------------------------------------
+| GET /user/{id}         | This endpoint enables you to return information about a specific user by making a GET request and passing the `id` parameter in the request |
+| GET /me/collaborations | This endoint enables you to return a list of organizations that the user is a member of, or is a collaborator by making a GET request and passing the `collaborations` parameter in the request. |
+{: class="table table-striped"}
 
 ### Pipeline API Requests
 
-Endpoint       | Description                       
------------|-------------------------------------------------------
-GET /pipeline/{pipeline-id} | Returns an individual pipeline.
-GET /pipeline/{pipeline-id}/config  | Returns the configuration of a specific pipeline.
-GET /pipeline/{pipeline-id}/workflow  | Returns a list of workflows for a specific pipeline. 
-POST /project/{project-slug}/pipeline | Triggers a pipeline.
-GET /project/{project-slug}/pipeline  | Returns a list of all pipelines associated with a specific project.
-GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.
+| Endpoint                                  | Description                                                         | 
+|-------------------------------------------|---------------------------------------------------------------------|
+| GET /pipeline/{pipeline-id}               | Returns an individual pipeline.                                     |
+| GET /pipeline/{pipeline-id}/config        | Returns the configuration of a specific pipeline.                   |
+| GET /pipeline/{pipeline-id}/workflow      | Returns a list of workflows for a specific pipeline.                |
+| POST /project/{project-slug}/pipeline     | Triggers a pipeline.                                                |
+| GET /project/{project-slug}/pipeline      | Returns a list of all pipelines associated with a specific project. |
+| GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.      |
+{: class="table table-striped"}
 
 ### Project API Requests
 
-Endpoint       | Description                       
------------|-------------------------------------------------------
-GET /project/{project-slug} | Returns an individual project.
-GET /project/{project-slug}/checkout-key  | Returns all checkout keys for a specific project. 
-POST /project/{project-slug}/checkout-key  | Creates a new checkout key for a project.
-DELETE /project/{project-slug}/checkout-key/{fingerprint} | Deletes a checkout key for a specific project.
-GET /project/{project-slug}/checkout-key/{fingerprint}  | Returns an individual checkout key for a specific project.
-GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.
-GET /project/{project-slug}/envvar | Lists all current environment variables for a specific project.
-POST /project/{project-slug}/envvar | Creates an environment variable for a project.
-DELETE /project/{project-slug}/envvar/{name} | Deletes an existing environment variable from a project.
-GET /project/{project-slug}/envvar/{name} | Returns a masked value for an environment variable for a project.
+| Endpoint                                                  | Description                                                       |
+|-----------------------------------------------------------|-------------------------------------------------------------------|
+| GET /project/{project-slug}                               | Returns an individual project.                                    |
+| GET /project/{project-slug}/checkout-key                  | Returns all checkout keys for a specific project.                 | 
+| POST /project/{project-slug}/checkout-key                 | Creates a new checkout key for a project.                         |
+| DELETE /project/{project-slug}/checkout-key/{fingerprint} | Deletes a checkout key for a specific project.                    |
+| GET /project/{project-slug}/checkout-key/{fingerprint}    | Returns an individual checkout key for a specific project.        |
+| GET /project/{project-slug}/pipeline/mine                 | Returns all pipelines for the project that you have triggered.    |
+| GET /project/{project-slug}/envvar                        | Lists all current environment variables for a specific project.   |
+| POST /project/{project-slug}/envvar                       | Creates an environment variable for a project.                    | 
+| DELETE /project/{project-slug}/envvar/{name}              | Deletes an existing environment variable from a project.          |
+| GET /project/{project-slug}/envvar/{name}                 | Returns a masked value for an environment variable for a project. |
+{: class="table table-striped"}
 
 ### Job API Requests
 
-Endpoint       | Description                       
------------|-------------------------------------------------------
-GET /project/{project-slug}/job/{job-number} | Returns details of a job.
-POST /project/{project-slug}/job/{job-number}/cancel | Cancels a job.
-GET /project/{project-slug}/{job-number}/artifacts  | Returns artifacts for a job.
-GET /project/{project-slug}/{job-number}/tests | Returns test metadata for a job.
+| Endpoint                                             | Description                      |        
+|------------------------------------------------------|----------------------------------|
+| GET /project/{project-slug}/job/{job-number}         | Returns details of a job.        |
+| POST /project/{project-slug}/job/{job-number}/cancel | Cancels a job.                   |
+| GET /project/{project-slug}/{job-number}/artifacts   | Returns artifacts for a job.     |
+| GET /project/{project-slug}/{job-number}/tests       | Returns test metadata for a job. |
+{: class="table table-striped"}
 
 ### Workflow API Requests
 
-Endpoint       | Description                       
------------|-------------------------------------------------------
-GET /workflow/{id} | Returns a workflow.
-POST /workflow/{id}/cancel | Cancels a workflow.
-GET workflow/{id}/job | Returns all jobs associated with a workflow.
-POST /workflow/{id}/rerun | Reruns a workflow.
+| Endpoint                   | Description                                  |
+|----------------------------|----------------------------------------------|
+| GET /workflow/{id}         | Returns a workflow.                          |
+| POST /workflow/{id}/cancel | Cancels a workflow.                          |
+| GET workflow/{id}/job      | Returns all jobs associated with a workflow. |
+| POST /workflow/{id}/rerun  | Reruns a workflow.                           |
+{: class="table table-striped"}
