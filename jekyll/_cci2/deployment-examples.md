@@ -307,16 +307,16 @@ Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the ar
 #### Install the CLI
 {:.no_toc}
 
-```
-- run:
-    name: Setup CF CLI
-    command: |
-      curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
-      sudo dpkg -i cf-cli_amd64.deb
-      cf -v
-      cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
-      cf auth "$CF_USER" "$CF_PASSWORD"
-      cf target -o "$CF_ORG" -s "$CF_SPACE"
+```yaml
+      - run:
+          name: Setup CF CLI
+          command: |
+            curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
+            sudo dpkg -i cf-cli_amd64.deb
+            cf -v
+            cf api https://api.run.pivotal.io  # alternately target your private Cloud Foundry deployment
+            cf auth "$CF_USER" "$CF_PASSWORD"
+            cf target -o "$CF_ORG" -s "$CF_SPACE"
 ```
 
 #### Dark Deployment
@@ -352,19 +352,19 @@ This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/
 Until now, the previously pushed "app-name" has not changed.  The final step is to route the production URL to our dark application, stop traffic to the previous version, and rename the applications.
 
 ```yaml
-- run:
-    name: Re-route live Domain to latest
-    command: |
-      # Send "real" url to new version
-      cf map-route app-name-dark example.com -n www
-      # Stop sending traffic to previous version
-      cf unmap-route app-name example.com -n www
-      # stop previous version
-      cf stop app-name
-      # delete previous version
-      cf delete app-name -f
-      # Switch name of "dark" version to claim correct name
-      cf rename app-name-dark app-name
+      - run:
+          name: Re-route live Domain to latest
+          command: |
+            # Send "real" url to new version
+            cf map-route app-name-dark example.com -n www
+            # Stop sending traffic to previous version
+            cf unmap-route app-name example.com -n www
+            # stop previous version
+            cf stop app-name
+            # delete previous version
+            cf delete app-name -f
+            # Switch name of "dark" version to claim correct name
+            cf rename app-name-dark app-name
 ```
 
 #### Manual Approval
@@ -372,9 +372,12 @@ Until now, the previously pushed "app-name" has not changed.  The final step is 
 
 For additional control or validation, you can add a manual "hold" step between the dark and live steps as shown in the sample workflow below.
 
+{% raw %}
+
 ```yaml
 workflows:
-  version: 2 # only requires if using `version: 2` config.
+  version: 2 # only required if using `version: 2` config.
+
   build-deploy:
     jobs:
       - test
@@ -398,6 +401,8 @@ workflows:
             branches:
               only: master
 ```
+
+{% endraw %}
 
 ## Firebase
 
