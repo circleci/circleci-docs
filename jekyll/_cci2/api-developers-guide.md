@@ -198,7 +198,7 @@ The following section details the steps you would need, from start to finish, to
       }
     ```
         
-    That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
+That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
 
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
@@ -217,7 +217,7 @@ The following section details the steps you would need, from start to finish, to
     }
     ```
 
-    While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
+While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
@@ -245,7 +245,7 @@ The following section details the steps you would need, from start to finish, to
         type: string
     ```
 
-    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
@@ -414,7 +414,7 @@ Before making an API call, make sure you have met the following prerequisites:
 * You have set up a GitHub or BitBucket account with a repository to use with CircleCI.
 * You have completed CircleCI onboarding and you have a project setup.
 * You have a [personal api token](https://account.circleci.com/tokens).
-* You have been [authenticated](#get-authenticated) to make API calls to the server.
+* You have been authenticated to make API calls to the server.
 
 ### Steps
 
@@ -479,7 +479,6 @@ Before making an API call, make sure you have met the following prerequisites:
     ```
 
     `Note: `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
-
 
 # Reference
 
