@@ -18,7 +18,7 @@ The CircleCI platform provides a powerful API that enables users to retrieve det
 
 ## API Classes
 
-The current classes of the API v2 endpoints are:
+The current categories of API v2 endpoints are:
 
 * Authentication
 * Pipeline
@@ -58,22 +58,6 @@ To add an API token, perform the steps listed below.
     ```
 
 **Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
-
-### Get Authenticated
-
-To be authenticated by the API server, add an API token using the [Personal API Tokens page](https://account.circleci.com/tokens). To use the API token, add it to the `circle-token` query param:
-
-```sh
-curl "https://circleci.com/api/v1.1/me?circle-token=:token"
-```
-
-Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
-
-```sh 
-curl -u <circle-token>: "https://circleci.com/api/..."
-```
-
-**Note:** The colon ":" notifies `curl` that there is no password being passed.
 
 <!---
 ## API Syntax
