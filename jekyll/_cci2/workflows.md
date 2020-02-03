@@ -437,7 +437,7 @@ For full details on pattern-matching rules, see the [java.util.regex documentati
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses.
 The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
 
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers. 
 
