@@ -357,7 +357,7 @@ This is the first step in a [Blue-Green](https://docs.cloudfoundry.org/devguide/
       - run:
           name: CF Deploy
           command: |
-            # push artifacts on "dark" subdomain, not yet starting so we can attach environment variables
+            # push artifacts on "dark" subdomain, and set environment variables before running `cf start`.
             cf push --no-start <app-name-dark> -f manifest.yml -p application.jar -n dark -d <example.com>
             # Pass CircleCI variables to Cloud Foundry (optional)
             cf set-env <app-name-dark> circle_build_num ${CIRCLE_BUILD_NUM}
