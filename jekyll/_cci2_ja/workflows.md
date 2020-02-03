@@ -115,7 +115,7 @@ workflows:
 
 図示している例では、Workflow は最初に build ジョブを普通に実行し、並列動作する一連の `acceptance_test` ジョブを実行するファンアウトを行います。最終的には `deploy` ジョブを走らせるファンインで処理を終えます。
 
-![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
 
 下記で示した `config.yml` のコードは、ファンイン・ファンアウトジョブで構成した Workflow の例です。
 

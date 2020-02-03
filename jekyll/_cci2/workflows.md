@@ -123,7 +123,7 @@ See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/c
 
 The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs in parallel, and finally fans-in to run a common deploy job.
 
-![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
 
 The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
