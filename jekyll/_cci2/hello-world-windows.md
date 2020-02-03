@@ -104,14 +104,16 @@ jobs:
     executor:
       name: win/default
     steps:
-      - checkout
-      - run: ls -lah
+      # default shell is Powershell
+      - run:            
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
       - run:
-          command: ping circleci.com
-          shell: cmd.exe
+         command: echo hello && echo world
+         shell: bash.exe
       - run:
-          command: echo 'This is powershell'
-          shell: powershell.exe
+         command: echo hello & echo world
+         shell: cmd.exe
 ```
 
 **Note** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
@@ -268,6 +270,8 @@ Also, consider reading documentation on some of CircleCI’s features:
 * NVM (Node Version Manager)
 * Ruby 2.6.3
 * Go 1.12.7
+* Python 3.7.3
+* Miniconda 3
 * Text editors
     * nano 2.5.3
     * vim 8.0.604

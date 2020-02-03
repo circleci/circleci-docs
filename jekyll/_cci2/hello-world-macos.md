@@ -49,11 +49,11 @@ have a fairly simple `.circleci/config.yml` file. Below, each line is commented
 to indicate what is happening at each step.
 
 ```yaml
-version: 2 # use version 2.0 of CircleCI
+version: 2.1
 jobs: # a basic unit of work in a run
   build: # runs not using `Workflows` must have a `build` job as entry point
     macos:  # indicate that we are using the macOS executor
-      xcode: "10.0.0" # indicate our selected version of Xcode
+      xcode: 11.3.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:

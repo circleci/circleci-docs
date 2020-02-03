@@ -143,11 +143,11 @@ Using the `macos` executor allows you to run your job in a macOS environment on 
 jobs:
   build:
     macos:
-      xcode: "9.0"
+      xcode: 11.3.0
       
     steps:
       # Commands will execute in macOS container
-      # with Xcode 9.0 installed
+      # with Xcode 11.3 installed
       - run: xcodebuild -version
 ```
 
@@ -251,6 +251,3 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 ## See Also
 
 [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-
-
-

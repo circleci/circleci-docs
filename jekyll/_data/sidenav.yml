@@ -78,6 +78,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Reusable Config Reference
+          link: 2.0/reusing-config/
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
@@ -91,7 +93,7 @@ en:
           link: 2.0/orbs-faq/
         - name: Orbs Concepts
           link: 2.0/using-orbs/
-        - name: Orbs Reference
+        - name: Reusable Config Reference
           link: 2.0/reusing-config/
         - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
@@ -209,7 +211,7 @@ en:
         - name: Optimizations Cookbook
           link: 2.0/optimization-cookbook/
 
-- name: Jobs
+- name: Pipelines
   icon: docs/builds.svg
   children:
     - name: Status
@@ -274,6 +276,8 @@ en:
           link: 2.0/configuration-reference/
         - name: API v1.1 Reference
           link: api/
+        - name: API v2 Reference
+          link: api/v2
         - name: API v2 Introduction
           link: 2.0/api-intro/
         - name: Prebuilt Images

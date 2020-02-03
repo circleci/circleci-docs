@@ -31,6 +31,7 @@ The currently available Xcode versions are:
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
+ `11.3.1` | Xcode 11.3.1 (Build 11C505)     | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
  `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
  `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
  `11.2.0` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
@@ -74,6 +75,8 @@ example of a minimal config in the
 ### Best Practices
 {:.no_toc}
 
+#### Cocoapods
+
 In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
 
 To enable this, ensure the first line in your Podfile is as follows:
@@ -88,6 +91,38 @@ If upgrading from Cocoapods 1.7 or older, additionally ensure the following line
 source 'https://github.com/CocoaPods/Specs.git'
 ```
 
+#### Homebrew
+
+Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that the step execution can take some extra time to complete.
+
+If build speed or bugs introduced by new Homebrew updates are a concern, this update-check feature can be disabled. On average, this can save 2-5 minutes per job.
+
+To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
+
+```yaml
+version: 2.1
+jobs:
+  build-and-test:
+    macos:
+      xcode: 11.3.0
+    environment:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+    steps:
+      - checkout
+      - run: brew install wget
+```
+
+#### iOS Simulator Crash Reports
+
+If your iOS app crashes in the Simulator during a test run, the crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
+
+```yaml
+steps:
+  # ...
+  - store_artifacts:
+    path: ~/Library/Logs/DiagnosticReports
+```
+
 ## Advanced Setup
 
 For advanced setup, it is possible to run a lint job together with your
@@ -98,7 +133,7 @@ job as follows:
 
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
   swiftlint:
@@ -119,7 +154,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint
@@ -209,11 +243,11 @@ This configuration can be used with the following CircleCI config file:
 
 ```yaml
 # .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -230,7 +264,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -244,7 +278,6 @@ jobs:
           path: output
 
 workflows:
-  version: 2
   build-test-adhoc:
     jobs:
       - build-and-test
@@ -299,22 +332,22 @@ Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
 To pre-start the simulator, add the following to your
-`config.yml` file, assuming that you are running your tests on an iPhone 7
-simulator with iOS 10.2:
+`config.yml` file, assuming that you are running your tests on an iPhone 11 Pro
+simulator with iOS 13.2:
 
 ```
     steps:
       - run:
           name: pre-start simulator
-          command: xcrun instruments -w "iPhone 7 (10.2) [" || true
+          command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7
 simulator, as the phone + watch simulator is also present in the build
 image:
 
-* `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator.
-* `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
+* `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
+* `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
 
 ### Creating a `config.yml` File
 {:.no_toc}
@@ -563,21 +596,16 @@ will be run in Docker.
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
     steps:
       - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install CocoaPods
           command: pod install --verbose
@@ -613,7 +641,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint

@@ -201,13 +201,19 @@ Some things to keep in mind when using manual approval in a workflow:
 - All jobs that are to run after a manually approved job _must_ `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshots show a workflow on hold waiting for approval of the `request-testing` job: 
+The following screenshot demonstrates a workflow on hold. 
 
-![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+{:.tab.switcher.Cloud}
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-The following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
+{:.tab.switcher.Server}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+
+By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears
+requesting that you approve or cancel the holding job.
+
+After approving, the rest of the workflow runs as directed.
 
 ## Scheduling a Workflow
 
@@ -515,27 +521,6 @@ This section describes common problems and solutions for Workflows.
 {:.no_toc}
 
 It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
-
-### Workflows Not Starting
-{:.no_toc}
-
-When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
-
-Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
-
-When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
-
-A project's Job page URL looks like this:
-
-`https://circleci.com/:VCS/:ORG/:PROJECT`
-
-A Workflow page URL looks like this:
-
-`https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
-
-Look for Workflows that have a yellow tag and "Needs Setup" for the text.
-
-![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
 
 ### Workflows Waiting for Status in GitHub
 {:.no_toc}

@@ -1,13 +1,13 @@
 ---
 layout: classic-docs
-title: "Orbs Reference Guide"
-short-title: "Orbs Reference"
-description: "Reference guide for CircleCI 2.1 orbs"
+title: "Reusable Config Reference Guide"
+short-title: "Reusable Config Reference"
+description: "Reference guide for CircleCI 2.1 Configuration"
 categories: [configuration]
 order: 1
 ---
 
-This Orbs Reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable orbs, commands, jobs, and executors.
+This reusable config reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable, commands, jobs, and executors and orbs.
 
 * TOC
 {:toc}
@@ -15,7 +15,9 @@ This Orbs Reference page describes how to version your [.circleci/config.yml]({{
 ## Getting Started with Config Reuse
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project. For an existing Project, select **Settings > Projects**, click the cog icon for the project, then select **Advanced Settings** and enable "pipelines" with the radio button. ![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png) If this radio button is not available, your project is already using pipelines.
+1. Add your project on the **Add Projects** page if it is a new project.
+   Existing projects will need to enable Pipelines. {% include
+   snippets/enable-pipelines.md %}
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking reusable config.
 

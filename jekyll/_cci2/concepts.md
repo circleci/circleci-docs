@@ -13,18 +13,31 @@ A CircleCI project shares the name of the associated code repository and is visi
 * TOC 
 {:toc}
 
+A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
+
+On the "Add Projects" page, you can either _Set Up_ any project that you are
+the owner of on your VCS, or, _Follow_ any project in your organization to gain
+access to its pipelines and to subscribe to [email notifications]({{
+site.baseurl }}/2.0/notifications/) for the project's status.
+
 ## Add Projects Page
 
+{:.tab.addprojectpage.Cloud}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+
+{:.tab.addprojectpage.Server}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
-
-The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects.  Users may not view project data that is stored in environment variables.
+The *Project Administrator* is the user who adds a GitHub or Bitbucket
+repository to CircleCI as a Project. A *User* is an individual user within an
+org. A CircleCI user is anyone who can log in to the CircleCI platform with a
+username and password. Users must be added to a [GitHub or Bitbucket org]({{
+site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
+projects.  Users may not view project data that is stored in environment variables.
 
 ## Steps
 
 Steps are actions that need to be taken to perform your job. Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
-
 
 ```yaml
 #...
@@ -37,7 +50,7 @@ Steps are actions that need to be taken to perform your job. Steps are usually a
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
 #...          
-```          
+```
 
 ## Image
 
@@ -61,18 +74,18 @@ An image is a packaged system that has the instructions for creating a running c
           # environment variable, see circleci.com/docs/2.0/env-vars/
           # for instructions about using environment variables.
            POSTGRES_USER: root
-...
+#...
    build2:
      machine: # Specifies a machine image that uses
      # an Ubuntu version 14.04 image with Docker 17.06.1-ce
      # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
      # for new image releases.
        image: circleci/classic:201708-01
-...       
+#...       
    build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 9.0
-       xcode: "9.0"       
- ...          
+     macos: # Specifies a macOS virtual machine with Xcode version 11.3
+       xcode: "11.3.0"
+# ...          
  ```
 
 
@@ -124,6 +137,10 @@ jobs:
 
 Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
+{:.tab.workflows.Cloud}
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
 {% raw %}
@@ -161,7 +178,7 @@ jobs:
       - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
-...                          
+#...                          
 workflows:
   version: 2
   build_and_test: # name of your workflow
@@ -169,12 +186,12 @@ workflows:
       - build1
       - build2:
           requires:
-             - build1 # wait for build1 job to complete successfully before starting
-             # see circleci.com/docs/2.0/workflows/ for more examples.
+           - build1 # wait for build1 job to complete successfully before starting
+           # see circleci.com/docs/2.0/workflows/ for more examples.
       - build3:
           requires:
-             - build1 # wait for build1 job to complete successfully before starting
-             # run build2 and build3 concurrently to save time.
+           - build1 # wait for build1 job to complete successfully before starting
+           # run build2 and build3 concurrently to save time.
 ```
 {% endraw %}
 
@@ -192,7 +209,7 @@ Each workflow has a temporary workspace associated with it. The workspace can be
 version: 2
 jobs:
   build1:
-...   
+#...   
     steps:    
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
       # into the workspace  for use in downstream job. Must be an absolute path,
@@ -204,18 +221,18 @@ jobs:
             - echo-output
 
   build2:
-...
+#...
     steps:
       - attach_workspace:
         # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
   build3:
-...
+#...
     steps:
       - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
           path: /tmp/artifact-1
           destination: artifact-file
-...
+#...
 ```        
 {% endraw %}
 
@@ -233,4 +250,4 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 ## See Also
 {:.no_toc}
 
-Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options. 
+Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.

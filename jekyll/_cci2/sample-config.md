@@ -243,18 +243,14 @@ will be run in Docker.
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: 11.3.0
 
     steps:
       - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install CocoaPods
           command: pod install --verbose
@@ -294,7 +290,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint

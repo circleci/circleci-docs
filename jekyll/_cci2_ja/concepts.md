@@ -121,7 +121,14 @@ jobs:
 
 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
 
-![ワークフローの図]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+
+{:.tab.workflows.Cloud}
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server}
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+
+<!-- ![ワークフローの図]({{ site.baseurl }}/assets/img/docs/workflow_detail.png) -->
 
 {% raw %}
 ```yaml
