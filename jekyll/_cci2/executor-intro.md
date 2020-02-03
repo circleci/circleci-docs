@@ -9,7 +9,7 @@ order: 1
 
 An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
 
-![Executor Overview](  {{ site.baseurl }}/assets/img/docs/executor_types.png)
+![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
 ## Docker
 
