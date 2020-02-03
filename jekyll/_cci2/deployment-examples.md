@@ -37,7 +37,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 2. Add your [AWS access keys](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) to CircleCI – store your Access Key ID in a variable called `AWS_ACCESS_KEY_ID` and your Secret Access Key in a variable called `AWS_SECRET_ACCESS_KEY`. {% include snippets/env-var-or-context.md %}
 
-3. Use the orb's `sync` command to deploy. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/#sequential-job-execution-example) to deploy only if the `build` job passes and the current branch is `master`.
+3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `master`.
 
     {% raw %}  
     ```yaml
