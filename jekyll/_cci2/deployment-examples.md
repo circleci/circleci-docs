@@ -223,7 +223,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 
 1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`. {% include snippets/env-var-or-context.md %}
 
-2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of [workflows]({{ site.baseurl }}/2.0/workflows/) to deploy only if the current branch is `master`.
+2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `master`.
   
     {% raw %}
 
