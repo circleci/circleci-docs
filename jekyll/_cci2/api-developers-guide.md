@@ -14,7 +14,7 @@ This *API Developer's Guide* was written to assist developers in quickly and eas
 
 # API Overview
 
-The CircleCI platform provides a powerful API that enables users to retrieve detailed information about users, jobs, workflows and pipelines.
+The CircleCI platform provides an API that enables users to interact with the CircleCI platform (e.g. triggering pipelines, updating settings etc, in addition to retrieving detailed information about users, jobs, workflows and pipelines.
 
 ## API Classes
 
@@ -44,7 +44,7 @@ To add an API token, perform the steps listed below.
 
     ```sh
     export CIRCLE_TOKEN={your-token}
-    curl https://circleci.com/api/v2/me -H "Circle-Token: $CIRCLE_TOKEN"
+    curl https://circleci.com/api/v2/me --header "Circle-Token: $CIRCLE_TOKEN"
     ```
 
 3.  You should see a JSON response similar to the example shown below.
@@ -75,11 +75,11 @@ Where:
 
 # Getting Started with the API
 
-The CircleCI API v2 shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (or, VCS provider), the name of your “organization”, and the name of the repository. 
+The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (or, VCS provider), the name of your “organization”, and the name of the repository. 
 
-For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are supported in API v2. The `organization` is your username or organization name in your version control system.
+For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`, which are supported. The `organization` is your username or organization name in your version control system.
 
-With API v2, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
+With this API, CircleCI is introducing a string representation of the triplet called the `project_slug`, which takes the following form:
 
 `<project_type>/<org_name>/<repo_name>`
 
@@ -204,9 +204,9 @@ The following section details the steps you would need, from start to finish, to
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLECI_TOKEN" \
+    --header 'Content-Type: application/json' \
+    --header 'Accept: application/json' \
+    --header "Circle-Token: $CIRCLECI_TOKEN" \
           
     # Which returns:
     {
@@ -217,13 +217,13 @@ The following section details the steps you would need, from start to finish, to
     }
     ```
 
-    While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
+While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{VCS}/{YOUR_USER_NAME}/hello-world/pipeline \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLE_TOKEN" \
+    --header 'Content-Type: application/json' \
+    --header 'Accept: application/json' \
+    --header "Circle-Token: $CIRCLE_TOKEN" \
     -d '{ "branch": "bar" }' 
     ```
 
@@ -245,7 +245,7 @@ The following section details the steps you would need, from start to finish, to
         type: string
     ```
 
-    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
@@ -295,9 +295,9 @@ To return project details, perform the following steps:
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project-slug} \
-        -H 'Content-Type: application/json' \
-        -H 'Accept: application/json' \
-        -H "Circle-Token: $CIRCLE_TOKEN" \
+        --header 'Content-Type: application/json' \
+        --header 'Accept: application/json' \
+        --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
 2. After passing the `project-slug` parameter and making the API request, you will receive unformatted JSON text similar to the example shown below.
@@ -335,9 +335,9 @@ To return job details, perform the following steps:
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project-slug}/job/{job-number} \
-        -H 'Content-Type: application/json' \
-        -H 'Accept: application/json' \
-        -H "Circle-Token: $CIRCLE_TOKEN" \
+        --header 'Content-Type: application/json' \
+        --header 'Accept: application/json' \
+        --header "Circle-Token: $CIRCLE_TOKEN" \
     ```
 
 2. After passing the parameters and making the API request, you will receive unformatted JSON text similar to the example shown below.
@@ -412,9 +412,9 @@ The following section details the steps you need to follow to download artifacts
 
     ```sh
     curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLECI_TOKEN" 
+    --header 'Content-Type: application/json' \
+    --header 'Accept: application/json' \
+    --header "Circle-Token: $CIRCLECI_TOKEN" 
     ```
 
     Check the table below for help with formatting your API call correctly.
@@ -451,9 +451,9 @@ The following section details the steps you need to follow to download artifacts
 
      ```sh
     curl -X GET https://circleci.com/api/v2/project/{VCS}/{org-name}/{repo-name}/{job-number}/artifacts \
-    -H 'Content-Type: application/json' \
-    -H 'Accept: application/json' \
-    -H "Circle-Token: $CIRCLECI_TOKEN" \
+    --header 'Content-Type: application/json' \
+    --header 'Accept: application/json' \
+    --header "Circle-Token: $CIRCLECI_TOKEN" \
     | grep -o 'https://[^"]*' \
     | wget -v -i -
     ```
