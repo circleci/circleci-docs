@@ -213,6 +213,8 @@ end
 2. On the Preferences page, go to the API Key section and copy your API Key.
 3. Go to your project settings within the CircleCI application and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
 
+### Using Fastlane
+
 To configure uploading to TestFairy within Fastlane, see the following example:
 
 ```ruby
@@ -244,6 +246,8 @@ desc "Upload to TestFairy"
   end
 end
 ```
+
+### Using curl
 
 Alternatively, you can upload binaries to TestFairy with `curl`
 
