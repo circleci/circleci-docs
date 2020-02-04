@@ -144,6 +144,58 @@ platform :ios do
 end
 ```
 
+## Deploying to Firebase
+
+Firebase is a distribution service from Google. Deploying to Firebase is simplified by installing the [Firebase app distribution plugin](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution).
+
+### Fastlane Plugin Setup
+
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`. 
+
+**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+
+### Generating a CLI Token
+
+Firebase requires a token to used during authentication. To generate the token, we need to use the Firebase CLI and a browser - as CircleCI is a headless environment, we will need to generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
+
+1. Download and install the Firebase CLI locally with the command `curl -sL https://firebase.tools | bash`
+2. Trigger a login by using the command `firebase login:ci`
+3. Complete the sign in via the browser window, then copy the token provided in the Terminal output
+4. Go to your project settings in CircleCI and create a new environment variable named `FIREBASE_TOKEN` with the value of the token.
+
+### Fastlane Configuration
+
+The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to `Settings -> General`. Under "Your apps", you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
+
+For more configuration options, see the [Firebase Fastlane plugin documentation](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app).
+
+```ruby
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Upload to Firebase"
+  lane :upload_firebase do
+    increment_build_number(
+      build_number: "$CIRCLE_BUILD_NUM"
+    )
+    match(type: "adhoc")
+    gym(scheme: "HelloWorld")
+    firebase_app_distribution(
+      app: "1:123456789012:ios:abcd1234abcd1234567890",
+      release_notes: "This is a test release!"
+    )
+  end
+end
+```
+
+To use the Firebase Fastlane plugin, the Firebase CLI must be installed as part of the job via the `curl -sL https://firebase.tools | bash` command:
+
+```yaml
 version: 2.1
 jobs:
   adhoc:
