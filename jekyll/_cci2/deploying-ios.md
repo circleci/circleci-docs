@@ -204,3 +204,76 @@ desc "Upload to VS App Center"
   end
 end
 ```
+
+## Uploading to TestFairy
+
+![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
+
+1. On the TestFairy dashboard, navigate to the Preferences page.
+2. On the Preferences page, go to the API Key section and copy your API Key.
+3. Go to your project settings within the CircleCI application and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
+
+To configure uploading to TestFairy within Fastlane, see the following example:
+
+```ruby
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+desc "Upload to TestFairy"
+  lane :upload_testfairy do
+    # Here we are using the CircleCI job number
+    # for the build number
+    increment_build_number(
+      build_number: "$CIRCLE_BUILD_NUM"
+    )
+    # Set up Adhoc code signing and build  the app
+    match(type: "adhoc")
+    gym(scheme: "HelloWorld")
+    # Set up the required information to upload the
+    # app binary to VS App Center
+    testfairy(
+      api_key: ENV[TESTFAIRY_API_KEY],
+      ipa: 'path/to/ipafile.ipa',
+      comment: ENV[CIRCLE_BUILD_URL]
+    )
+  end
+end
+```
+
+Alternatively, you can upload binaries to TestFairy with `curl`
+
+```yaml
+# .circleci/config.yml
+version: 2.1
+jobs:
+  build:
+    #  insert build code here...
+  deploy:
+    steps:
+      - checkout
+      - run:
+          name: Deploy to TestFairy
+          command: |
+            curl \
+              -A "CircleCI 2.0" \
+              -F api_key="$TESTFAIRY_API_KEY" \
+              -F comment="CircleCI build $CIRCLE_BUILD_URL" \
+              -F file=@path/to/ipafile.ipa \
+              https://upload.testfairy.com/api/upload/
+
+workflows:
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+        requires:
+          - build
+        filters:
+          branches:
+            only: master
+```
