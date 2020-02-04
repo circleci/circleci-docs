@@ -8,7 +8,7 @@ description: "CircleCI security features."
 
 This document outlines security features built into CircleCI and related integrations.
 
-* TOC 
+* TOC
 {:toc}
 
 ## Overview
@@ -37,7 +37,7 @@ A few different external services and technology integration points touch Circle
 
 - **iOS Builds** If you are paying to run iOS builds on CircleCI hardware your source code will be downloaded to a build box on our macOS fleet where it will be compiled and any tests will be run. Similar to our primary build containers that you control, the iOS builds we run are sandboxed such that they cannot be accessed.
 
-- **Docker** If you are using Docker images, refer to the public Docker [seccomp (security computing mode) profile](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json) for the Docker engine. CircleCI appends the following to the Docker default `seccomp` profile: 
+- **Docker** If you are using Docker images, refer to the public Docker [seccomp (security computing mode) profile](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json) for the Docker engine. CircleCI appends the following to the Docker default `seccomp` profile:
 
 {% raw %}
 ```
@@ -59,9 +59,10 @@ A few different external services and technology integration points touch Circle
 {% endraw %}
 
 ## Audit Logs
-The Audit Log feature is only available for CircleCI installed on your servers or private cloud. 
+Server customers who installed CircleCI on your environments are able to use the audit log feature on UI.
+※ Cloud customer needs to [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request Audit log, and only an admin user of your organization is able to request this.
 
-CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separarate from system logs that track performance and network metrics. 
+CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separarate from system logs that track performance and network metrics.
 
 Complete Audit logs may be downloaded from the Audit Log page within the Admin section of the application as a CSV file.  Audit log fields with nested data contain JSON blobs.
 
@@ -110,14 +111,14 @@ If you are getting started with CircleCI there are some things you can ask your 
 
 - Minimise the number of secrets (private keys / environment variables) your
   build needs and rotate secrets regularly.
-  - It is important to rotate secrets regularly in your organization, especially as team members come and go. 
+  - It is important to rotate secrets regularly in your organization, especially as team members come and go.
   - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
-  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or Github's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature. 
+  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or Github's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature.
 - Sometimes user misuse of certain tools might accidentally print secrets to stdout which will land in your logs. Please be aware of:
   - running `env` or `printenv` which will print all your environment variables to stdout.
   - literally printing secrets in your codebase or in your shell with `echo`.
   - programs or debugging tools that print secrets on error.
-- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). 
+- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
 - Use Restricted Contexts with teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
 - Ensure you audit who has access to SSH keys in your organization.
 - Ensure that your team is using Two-Factor Authentication (2FA) with your VCS ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa), [Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html)). If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
