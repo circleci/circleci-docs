@@ -283,6 +283,12 @@ This section provides detailed information on how you can perform the following 
 
 You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
 
+You may notice a new concept called a `project-slug` when making this API call. A `project-slug` is a "triplet" that takes the following form:
+
+`<project_type>/<org_name>/<repo_name>`
+
+The `project_slug` is included in the payload when you pull information about a project, which enables you to retrieve detailed information about a specific project.
+
 **Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects](https://circleci.com/docs/2.0/projects/) page.
 
 ### Steps
@@ -293,7 +299,7 @@ Of the several project-related API endpoints available with CircleCI API v2, mak
 
 To return project details, perform the following steps:
 
-1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project_slug` parameter you want returned in the JSON payload in your `curl` request as follows:
+1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project_slug` (<project_type>/<org_name>/<repo_name>) parameter you want returned in the JSON payload in your `curl` request as follows:
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
