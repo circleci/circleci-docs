@@ -242,7 +242,7 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 2. Click on "New API Token"
 3. Enter a description for the token, then set the access to "Full Access"
 4. When the token is generated, make sure to copy it somewhere safe.
-5. GGo to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
+5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
 
 ### Fastlane Configuration
 
