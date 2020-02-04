@@ -168,7 +168,7 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 2. Click on "New API Token"
 3. Enter a description for the token, then set the access to "Full Access"
 4. When the token is generated, make sure to copy it somewhere safe.
-5. Go to your project settings within the CircleCI application and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
+5. GGo to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
 
 ### Fastlane Configuration
 
@@ -211,7 +211,7 @@ end
 
 1. On the TestFairy dashboard, navigate to the Preferences page.
 2. On the Preferences page, go to the API Key section and copy your API Key.
-3. Go to your project settings within the CircleCI application and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
+3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
 
 ### Using Fastlane
 
