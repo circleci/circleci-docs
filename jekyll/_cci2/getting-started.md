@@ -132,7 +132,7 @@ Edit your `config.yml` file in the GitHub editor for simplicity and replace `ech
 
 4. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
-5. Click on the link for your workflow to see that these two jobs run in parallel. ![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
+5. Click on the link for your workflow to see that these two jobs run concurrently. ![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
 Read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 

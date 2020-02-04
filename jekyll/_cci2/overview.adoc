@@ -32,7 +32,7 @@ Within the CircleCI UI is the Insights page, which acts as a dashboard showing t
 * median queue time
 * last build time
 * success rate
-* parallelism.
+* parallelism
 
 // Add screenshot of insights page
 

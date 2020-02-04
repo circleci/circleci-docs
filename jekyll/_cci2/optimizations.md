@@ -62,7 +62,7 @@ Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows/).
 
-**Note**: Workflows are available to all plans, but running parallel jobs assumes that your plan provides multiple machines to execute on.
+**Note**: Workflows are available to all plans, but running jobs concurrently assumes that your plan provides multiple machines to execute on.
 
 ```yaml
 version: 2.1
@@ -82,7 +82,7 @@ jobs: # here we define two jobs: "build" and "test"
 workflows: # Here we can orchestrate our jobs into a workflow
   version: 2
   build_and_test: # A single workflow named "build_and_test"
-    jobs: # we run our `build` job and `test` job in parallel.
+    jobs: # we run our `build` job and `test` job concurrently.
       - build
       - test
 ```
@@ -104,7 +104,7 @@ Read more about how to use workspaces in the [workflows document]({{site.baseurl
 
 **Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
 
-If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)
 to split your tests across multiple machines. CircleCI supports automatic test
 allocation across machines on a file-basis, however, you can also manually
 customize how tests are allocated.

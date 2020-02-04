@@ -98,7 +98,7 @@ jobs:
       - image: node:10
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run in parallel. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially. If you are running commands in parallel, you’re probably using CodePipeline and multiple CodeBuild projects.
+2+h| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially. If you are running concurrent commands, you’re probably using CodePipeline and multiple CodeBuild projects.
 
 a|
 ----

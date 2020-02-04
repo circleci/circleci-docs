@@ -19,7 +19,7 @@ If you're in a rush, just copy the configuration below into [`.circleci/config.y
 version: 2  # use CircleCI 2.0 instead of CircleCI Classic
 jobs:  # basic units of work in a run
   build:  # runs not using Workflows must have a `build` job as entry point
-    parallelism: 1  # run only one instance of this job in parallel
+    parallelism: 1  # run only one instance of this job
     docker:  # run the steps with Docker
       - image: circleci/elixir:1.7.3  # ...with this image as the primary container; this is where all `steps` will run
         environment:  # environment variables for primary container

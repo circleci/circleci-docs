@@ -53,7 +53,7 @@ workflows:
                 overwrite: true
 ```
 
-## Sample Configuration with Parallel Jobs
+## Sample Configuration with Concurrent Jobs
 
 Following is a sample 2.0 `.circleci/config.yml` file.
 
@@ -81,7 +81,7 @@ workflows:
       - test
 ```
 {% endraw %}
-This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 
 ## See Also
