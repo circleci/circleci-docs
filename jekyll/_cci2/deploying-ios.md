@@ -144,6 +144,28 @@ platform :ios do
 end
 ```
 
+version: 2.1
+jobs:
+  adhoc:
+    macos:
+      xcode: "11.3.1"
+    environment:
+      FL_OUTPUT_DIR: output
+    steps:
+      - checkout
+      - run: echo 'chruby ruby-2.6' >> ~/.bash_profile
+      - run: bundle install
+      - run: curl -sL https://firebase.tools | bash
+      - run: bundle exec fastlane upload_firebase
+
+workflows:
+  adhoc-build:
+    jobs:
+      - adhoc
+```
+
+**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version][({{ site.baseurl }}/2.0/testing-ios/#using-custom-ruby-versions)
+
 ## Deploying to Visual Studio App Center
 
 Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
