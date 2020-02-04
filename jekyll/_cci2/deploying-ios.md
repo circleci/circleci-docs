@@ -167,8 +167,8 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
 2. Click on "New API Token"
 3. Enter a description for the token, then set the access to "Full Access"
-
-When the token is generated, make sure to copy it somewhere safe.
+4. When the token is generated, make sure to copy it somewhere safe.
+5. Go to your project settings within the CircleCI application and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
 
 ### Fastlane Configuration
 
@@ -196,7 +196,7 @@ desc "Upload to VS App Center"
     # Set up the required information to upload the
     # app binary to VS App Center
     appcenter_upload(
-      api_token: "YOUR_API_TOKEN",
+      api_token: ENV[VS_API_TOKEN],
       owner_name: "YOUR_VS_APPCENTER_USERNAME",
       owner_type: "user",
       app_name: "HelloWorld"
