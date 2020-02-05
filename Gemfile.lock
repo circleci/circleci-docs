@@ -181,7 +181,7 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor
-  asciidoctor-pdf (~> 1.5.0.beta.8)
+  asciidoctor-pdf (~> 1.5.0.rc.3)
   html-proofer
   jekyll (= 3.8.6)
   jekyll-algolia (~> 1.0)

@@ -7,7 +7,7 @@
 
 == List of jobs to complete before releasing
 
-* Search for latest version (e.g 2.18.3) and update as required.
+* Set the release version within the PDF build script (`$VERSION`) and also within the Jekyll `_config.yml` under both asciidoc attributes called `serverversion`.
 * Make operational changes required for the release.
 * If anything has changed about the installation or upgrade process, point these out in the relevant docs.
 * If it's a feature release:

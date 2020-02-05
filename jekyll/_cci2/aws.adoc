@@ -8,7 +8,7 @@
 
 include::../_includes/snippets/server-only.adoc[]
 
-Following is a step by step guide to installing CircleCI Server v2.18.3 with Terraform.
+Following is a step by step guide to installing CircleCI Server v{serverversion} with Terraform.
 
 toc::[]
 

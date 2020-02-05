@@ -11,6 +11,7 @@ jekyll/_includes/app.html
 jekyll/assets/js/*.bundle.js
 run-results/
 node_modules/
-release/tmp/
+release/tmp/CircleCI-Server-AWS-Installation-Guide.pdf
+release/tmp/CircleCI-Server-Operations-Guide.pdf
 
 src-api/build/
