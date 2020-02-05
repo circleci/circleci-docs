@@ -233,7 +233,10 @@ and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circ
 When prompted to enter a passphrase,
 do **not** enter one.
 
-**Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
+    **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM
+    format by default. If your private key does not start with `-----BEGIN RSA
+    PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen
+    -m PEM -t rsa -C "your_email@example.com"`
 
 2. Go to `https://github.com/you/test-repo/settings/keys`,
 and click "Add deploy key".
