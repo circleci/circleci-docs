@@ -1,3 +1,3 @@
-NOTE: CircleCI Server v{{site.server_version}} uses the CircleCI 2.0 architecture. +
+NOTE: CircleCI Server v2.18.3 uses the CircleCI 2.0 architecture. +
 `version: 2.0` should be used in all `.circleci/config.yml` files. +
 Currently not supported for Server: https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs], https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-commands[reusable commands], https://circleci.com/docs/2.0/build-processing/[pipelines].

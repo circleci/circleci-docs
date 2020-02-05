@@ -4,9 +4,9 @@ OUT_DIR="release/tmp"
 
 DATE=$(date +"%m/%d/%Y")
 
-VERSION="2.18"
+VERSION="2.18.3"
 
-COMMENT="FINAL"
+COMMENT="DRAFT"
 
 echo "Building Ops Guide"
 

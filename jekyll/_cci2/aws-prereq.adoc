@@ -7,6 +7,8 @@
 :toc: macro
 :toc-title:
 
+include::../_includes/snippets/server-only.adoc[]
+
 CircleCI uses Terraform to automate parts of the infrastructure for your CircleCI Server install, so you will need to install this first:
 
 * Visit https://www.terraform.io/downloads.html[Download Terraform] and choose the correct package for your architecture.
