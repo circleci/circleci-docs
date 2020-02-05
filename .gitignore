@@ -11,5 +11,6 @@ jekyll/_includes/app.html
 jekyll/assets/js/*.bundle.js
 run-results/
 node_modules/
+release/tmp
 
 src-api/build/
