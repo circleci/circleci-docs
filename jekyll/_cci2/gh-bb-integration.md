@@ -216,7 +216,7 @@ key. If you are using GitHub as your VCS then GitHub has the public key, and
 CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
 To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
-If you want to push to the repository from your builds, you will need a deployment key with write access (user key). The steps to create a user key depend on your VCS.
+If you want to push to the repository from your builds, you will need a deployment key with write access. The steps to create a deployment key with write access depend on your VCS. See below for GitHub-specific instructions.
 
 **What is a user key?**
 
