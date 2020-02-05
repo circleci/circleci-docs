@@ -59,7 +59,7 @@ A few different external services and technology integration points touch Circle
 {% endraw %}
 
 ## Audit Logs
-CircleCI Server customers can access the audit log feature from UI.
+CircleCI Server customers can access the audit log feature from the UI.
 Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
 
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separarate from system logs that track performance and network metrics.
