@@ -16,15 +16,15 @@ This article provides a System Administrators' overview of CircleCI's 2.0 static
 
 This method of installation has the following limitations:
 
-- It is not possible to use `machine` executors.
-- It is not possible to use the Remote Docker Environment or Docker Layer Caching.
+- It is not possible to use `machine` executors (Linux, Windows, macOS)
+- It is not possible to use the Remote Docker Environment or Docker Layer Caching (in other words, you can't build Docker images).
 - There is no first-class high-availability option.
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
 
 * New configuration with any number of jobs and workflows to orchestrate them. 
 * Custom images for execution on a per-job basis.
-* Fine-grained performance with custom caching and per-job CPU or memory allocation. 
+* Fine-grained performance with dependency caching and per-job CPU or memory allocation. 
 
 ## Build Environments
 
