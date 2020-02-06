@@ -18,7 +18,7 @@ The CircleCI 2.0 configuration introduced a new key for `version: 2`. This new k
 
 See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
 
-## Sample Configuration with Parallel Jobs
+## Sample Configuration with Concurrent Jobs
 
 Following is a sample 2.0 `.circleci/config.yml` file.
 
@@ -49,7 +49,7 @@ workflows:
 
 {% endraw %}
 
-This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 ## Sample Configuration with Sequential Workflow
 
@@ -115,7 +115,7 @@ workflows:
 
 {% endraw %}
 
-This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 ## Sample Configuration with Fan-in/Fan-out Workflow
 Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
@@ -243,18 +243,14 @@ will be run in Docker.
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: 11.3.0
 
     steps:
       - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install CocoaPods
           command: pod install --verbose
@@ -294,7 +290,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint

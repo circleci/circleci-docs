@@ -5,6 +5,8 @@
 :toc: macro
 :toc-title:
 
+include::../_includes/snippets/server-only.adoc[]
+
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, please https://help.replicated.com/docs/native/packaging-an-application/support-bundle/[generate a support bundle] and contact our Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
 
 toc::[]
@@ -145,7 +147,7 @@ If a `restore_cache` step is failing for one of your jobs, it is worth checking 
 
 Disable cache warming by completing the following steps:
 
-1. Add the export `DOMAIN_SERVICE_REFRESH_USERS=false` flag to the ``/etc/circleconfig/api-service/customizations` file on the Services machine. For more information on configuration overrides, see <server-config-overrides#_server_config_overrides,Server Config Overrides>.
+1. Add the export `DOMAIN_SERVICE_REFRESH_USERS=false` flag to the ``/etc/circleconfig/api-service/customizations` file on the Services machine. For more information on configuration overrides, see the guide to <<customizations#service-configuration-overrides,Service Configuration Overrides>>.
 2. Restart CircleCI:
     a. Navigate to the Management Console
     b. Click Stop Now and wait for it to stop

@@ -6,7 +6,9 @@
 :toc: macro
 :toc-title:
 
-Following is a step by step guide to installing CircleCI Server v2.17 with Terraform.
+include::../_includes/snippets/server-only.adoc[]
+
+Following is a step by step guide to installing CircleCI Server v{serverversion} with Terraform.
 
 toc::[]
 
@@ -172,8 +174,7 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 .Enter Github Enterprise Token
 image::ghe_token.png[Github Integration]
 
-. If you wish to use LDAP authentication for your installation, enter the required details in the LDAP section.
-//<!--insert LDAP instrucitons once I have more detail from Anton-->
+. If you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, see our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
 
 . We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
 +
@@ -192,19 +193,18 @@ image::storage.png[]
 +
 NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Authentication button is not currently working
 
-. Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor.
-+
-.Configure VM Service
-image::vmprovider.png[]
+. Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, see our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
 +
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
 +
-CAUTION: If Docker Layer Caching (DLC) is to be used VM preallocation must be set to `0` – on-demand – for both Remote Docker and `machine` executor.
+CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be set to `0`, forcing containers to be spun up on-demand for both `machine` and Remote Docker. It is worth noting here that if these fields are **not** set to `0` but all preallocated instances are in use, DLC will work correctly, as if preallocation was set to `0`.
 
-. If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more infomration see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
+. If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more information see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
 .Metrics
 image::metrics_setup.png[]
++
+You can also customize the metrics received through Telegraf. For more on this see our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
 
 . Artifacts persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types see our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
 

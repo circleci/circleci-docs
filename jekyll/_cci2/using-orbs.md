@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors. CircleCI provides certified orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the CircleCI Orbs Registry for the complete list of certified orbs.
+CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors. CircleCI provides certified orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of certified orbs.
 
 Before using orbs, you should first familiarize yourself with some basic core concepts of orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to leverage orbs and use them easily in your own environments.
 
@@ -26,7 +26,7 @@ Before using orbs, you may find it helpful to understand the various design deci
 - Production orbs are always semantic versioned (semver’d) - CircleCI allows development orbs that have versions that start with dev:.
 - Production orbs are immutable - Once an orb has been published to a semantic version, the orb cannot be changed. This prevents unexpected breakage or changing behaviors in core orchestration.
 - One registry (per install) - Each installation of CircleCI, including circleci.com, has only one registry where orbs can be kept.
-- Organization Admins publish production orbs. Organization members publish development orbs - All namespaces are owned by an organization. Only the admin(s) of that organization can publish/promote a production orb. All organization members can publish development orbs.
+- The ability to create and modify orbs are scoped. Only Organization admin(s) can publish/promote production orbs. Once an initial orb is created, organization members can publish development orbs against it. Note that all orb namespaces are owned by an organization.
 
 ### Orb Structure
 

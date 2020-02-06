@@ -5,6 +5,8 @@
 :toc: macro
 :toc-title:
 
+include::../_includes/snippets/server-only.adoc[]
+
 This section describes how to configure CircleCI to use an HTTP proxy.
 
 toc::[]
@@ -128,14 +130,30 @@ You will also need to follow https://docs.docker.com/network/proxy/[the Docker i
 
 === Troubleshooting
 
+==== Can't access the Management Console
 If you cannot access the CircleCI Management Console, but the Services machine seems to be running, try to SSH tunnel into the machine by running the following, substituting your proxy address and the IP address of your Services machine:
 
 ```shell
 ssh -L 8800:<address you want to proxy through>:8800 ubuntu@<ip_of_services_machine>
 ```
 
+==== REPL time out
+If you experience a timeout when connecting to the REPL, you will need to allow access, through your corporate proxy, to the domains of any Clojure library repositories that are required to download dependencies for running the REPL.
+```
+sudo su
+docker exec -it frontend /bin/bash
+lein repl :connect 6005
+```
+
+Refer to the error output for guidance on which repositories need to be granted access. The list will be different for each corporate proxy, but following is an example list:
+
+- repo1.maven.org
+- build.clojure.org
+- clojars.org
+- repo.clojars.org
+
 == Data Persistence
-Contact support@circleci.com to discuss externalizing services for data persistence.
+Contact  https://support.circleci.com/hc/en-us[CircleCI Support] to discuss externalizing services for data persistence.
 // Refer to the "Adding External Services to CircleCI Server v2.17" document for instructions to configure your installation for data persistence.
 
 // <!--but this is an internal doc... should this say 'contact support for guidance on configuring for data persistance?-->

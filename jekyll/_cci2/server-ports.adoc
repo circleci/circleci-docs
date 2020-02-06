@@ -5,7 +5,9 @@
 :toc: macro
 :toc-title:
 
-This section defines the system and port access requirements for installing CircleCI v2.17.
+include::../_includes/snippets/server-only.adoc[]
+
+This section defines the system and port access requirements for installing CircleCI v{serverversion}.
 
 toc::[]
 
@@ -306,7 +308,7 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | TCP
 | Outbound
 | GitHub Enterprise / GitHub.com (whichever applies)
-| Download Code From Github.
+| Download Code From GitHub.
 |
 
 | 4647

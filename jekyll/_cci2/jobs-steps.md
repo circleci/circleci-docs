@@ -14,7 +14,7 @@ The document provides an overview of Jobs, Steps, Workflows and new [`.circleci/
 
 ## Orbs Overview
 
-Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design.
+Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
 
 ## Jobs Overview
 
@@ -22,7 +22,7 @@ Jobs are a collection of Steps. All of the steps in the job are executed in a si
 
 Jobs and Steps enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
 
-![header]( {{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
+![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
 In 2.0 Jobs can be run using the `machine` executor which enables reuse of recently used `machine` executor runs, or the `docker` executor which can compose Docker containers to run your tests and any services they require, such as databases, or the `macos` executor.
 
@@ -53,7 +53,7 @@ workflows:
                 overwrite: true
 ```
 
-## Sample Configuration with Parallel Jobs
+## Sample Configuration with Concurrent Jobs
 
 Following is a sample 2.0 `.circleci/config.yml` file.
 
@@ -81,7 +81,7 @@ workflows:
       - test
 ```
 {% endraw %}
-This example shows a parallel job workflow where the `build` and `test` jobs run in parallel to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with parallel, sequential, and manual approval workflows.
+This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 
 ## See Also

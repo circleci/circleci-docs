@@ -29,13 +29,9 @@ explained below.
 ### Use ShellCheck
 {:.no_toc}
 
-[ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool
-that gives warnings and suggestions for bash/sh shell scripts.
+[ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
 
-ShellCheck works best with CircleCI
-when you add it as a separate job in your `.circleci/config.yml` file.
-This allows you
-to run the `shellcheck` job in parallel with other jobs in a workflow.
+ShellCheck works best with CircleCI when you add it as a separate job in your `.circleci/config.yml` file. This allows you to run the `shellcheck` job concurrently with other jobs in a workflow, as shown below. If you are using configuration `version: 2.1`, consider using the [Shellcheck orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck#usage-shellcheck-workflow) to simplify your config file.
 
 ```yaml
 version: 2

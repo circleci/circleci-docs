@@ -172,10 +172,8 @@ To use these variants,
 add one of the following suffixes to the end of an image tag.
 
 - `-node` includes Node.js for polyglot applications
-- `-browsers` includes Chrome, Firefox, Java 8, and Geckodriver
-- `-browsers-legacy` includes Chrome, Firefox, Java 8, and PhantomJS
+- `-browsers` includes Chrome, Firefox, OpenJDK v11, and Geckodriver
 - `-node-browsers` combines the `-node` and `-browsers` variants
-- `-node-browsers-legacy` combines the `-node` and `-browsers-legacy` variants
 
 For example,
 if you want
@@ -251,6 +249,14 @@ The following packages are installed via `curl` or other means.
 - [Docker Compose](https://docs.docker.com/compose/overview/)
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
+
+
+## Out of Scope
+
+1. If an image isn't listed above, it is not available. As the Convenience Image program is revamped, proposals for new images are not currently being accepted.
+1. Old versions of software will not be rebuilt. Once an upstream image stops building the tag for a specific release, say Node.js v8.1.0, then we stop building it too. This means other tools in that image, such as `npm` in this example, will no longer be updated either.
+1. We don't support building preview, beta, or release candidate images tags. On occasion they'll be available but these tags tend to cause our build system for Convenience Images to fail. If you need a non-stable release of a language, we suggest installing it via [an orb](https://circleci.com/orbs/) or a custom Docker image instead.
+
 
 ## Latest Image Tags by Language
 

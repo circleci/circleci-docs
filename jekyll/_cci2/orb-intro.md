@@ -7,11 +7,13 @@ categories: [getting-started]
 order: 1
 ---
 
+_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations_
+
 CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors. CircleCI provides certified orbs, along with 3rd-party orbs authored by CircleCI partners. It is best practice to first evaluate whether any of these existing orbs will help you in your configuration workflow. Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of certified orbs.
 
 ## Using CircleCI Orbs
 
-If you have chosen to use CircleCI orbs in your workflows and jobs, there are several different ways that you use orbs. You may choose to either import an existing orb (CircleCI and partner-certified orbs) from the CircleCI Orb Registry, or author your own orb for your specific workflow. Each of these approaches is described below.
+If you have chosen to use CircleCI orbs in your workflows and jobs, there are several different ways that you use orbs. You may choose to either import an existing orb (CircleCI and partner-certified orbs) from the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), or author your own orb for your specific workflow. Each of these approaches is described below.
 
 ### Importing an Existing Orb
 
@@ -151,14 +153,15 @@ Usage:
 
 Available Commands:
   create      Create an orb in the specified namespace
+  info        Show the meta-data of an orb
   list        List orbs
   process     Validate an orb and print its form after all pre-registration processing
   publish     Publish an orb to the registry
   source      Show the source of an orb
-  validate    Validate an orb.yml
+  validate    Validate an orb.yml  
 ```
 
-**Note** When authoring an orb, you will agree to CircleCI's Code Sharing Terms of Service when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
+**Note** When authoring an orb, you will agree to CircleCI's [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/) when your organization opts-in to 3rd party orb use and authoring. CircleCI thereby licenses all orbs back to users under the MIT License agreement.
 
 ## See Also
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.

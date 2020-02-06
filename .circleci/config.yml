@@ -1,51 +1,182 @@
-version: 2
+version: 2.1 # Set the CI version.
 
+
+# We use orbs to provide some common ruby and node tasks and shorten our config.
+# Learn more about orbs: https://circleci.com/orbs/
+orbs:
+  ruby: circleci/ruby@0.1.2
+  node: circleci/node@1.1.6
+
+
+# Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
+# In this case, we are commonly using the "workspaces" feature to share
+# build artifacts and files across jobs. For example, we build our Javascript
+# persist it to a workspace to be made available when the Jekyll site builds.
 references:
-  js_deps_cache_key: &js_deps_cache_key
-    v8-dependency-js-deps-{{ checksum "package-lock.json" }}
-  js_deps_backup_cache_key: &js_deps_backup_cache_key
-    v8-dependency-js-deps
   workspace_root: &workspace_root
     /tmp/workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
 
+
+# Several steps in this config use the same, specialized ruby-caching steps.
+# Commands can be used to extract a common set of steps into a reusable-block.
+# In this case, whenever you see `- ruby-deps` as a "step" in the config below,
+# It is executing a command to restore_cache, install deps if needed, and save_cache.
+commands:
+  ruby-deps:
+    description: "Runs specialized Ruby cache steps."
+    steps:
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - "vendor/bundle"
+
+
+# Workflows orchestrate a set of jobs to be run;
+# the jobs for this pipeline are # configured below
+workflows:
+  version: 2
+
+  build-deploy:
+    jobs:
+      - js_build
+      - build_server_pdfs:
+          filters:
+            branches:
+              only: /server\/*/
+      - build_api_docs
+      - build:
+          requires:
+            - js_build
+            - build_server_pdfs
+            - build_api_docs
+      - reindex-search:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+
+  # We run a nightly build for running build/maintenance tasks
+  # such as pulling in docker image tags or automating our api documentation
+  nightly-build:
+    triggers:
+      - schedule:
+          cron: "0 8 * * *"
+          filters:
+            branches:
+              only: master
+    jobs:
+      - js_build
+      - build_api_docs
+      - build:
+          requires:
+            - js_build
+            - build_api_docs
+      - deploy:
+          requires:
+            - build
+
+
 jobs:
-  js_build:
-    docker:
-      - image: node:8.11.1
+  js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
+    executor: # we specify our executor to use the node orb.
+      name: node/default
+      tag: '8.11.1'
     steps:
       - *attach_workspace
-      - checkout
-      - restore_cache:
-          keys:
-            - *js_deps_cache_key
-            - *js_deps_backup_cache_key
+      - checkout # get the code from GitHub
+      - node/with-cache: # An orb command for steps to run in-between restoring and saving a cache.
+          cache-key: "package-lock.json"
+          cache-version: v9
+          steps:
+            - run: npm install
       - run:
-          name: npm dependencies
-          command: npm install
-      - run:
-          name: Prepare JS assets
+          name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: npm run webpack-prod
       - run:
-          name: Persist JS assets
+          name: "Persist JS assets" # Move our JS into our workspace.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
             mv jekyll/assets/js/*.bundle.js /tmp/workspace/js/
-      - persist_to_workspace:
+      - persist_to_workspace: # store the built files into the workspace for other jobs.
           root: *workspace_root
           paths:
             - js
-      - save_cache:
-          key: *js_deps_cache_key
-          paths:
-            - node_modules
 
+  build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
+    executor:
+      name: ruby/default # we use the same ruby orb + tag across multiple jobs
+      tag: '2.6.3-node-browsers'
+    steps:
+      - *attach_workspace
+      - checkout
+      - ruby-deps # a `command` that is defined above
+      - run:
+          name: "Create landing folder for PDF output"
+          command: mkdir -p /tmp/workspace/pdfs
+      - run:
+          name: Build PDFs for Server
+          command: ./scripts/build_pdfs.sh
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - pdfs
+
+  build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
+    executor:
+      name: ruby/default
+      tag: '2.6.3-node-browsers'
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: "Create landing folder for API doc output"
+          command: mkdir -p /tmp/workspace/api/v2
+      # Since this job has both Ruby and Node dependencies we are going
+      # to use a cache-key that combines each respective language's package-lock file.
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
+      - run:
+          name: Install Ruby + Node dependencies
+          command: cd src-api; bundle install; npm install
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
+          paths:
+            - src-api/vendor/bundle
+            - src-api/node_modules
+      - run:
+          name: Build API 1.x documentation with Slate
+          command: ./scripts/build_api_docs.sh -v1
+      - run:
+          name: Build API 2.x documentation with Widdershins and Slate
+          command: ./scripts/build_api_docs.sh -v2
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - api
+
+  # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
+  # and puts everything in it's place for a Jekyll build.
   build:
-    docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+    executor:
+      name: ruby/default
+      tag: '2.6.3-node-browsers'
+
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -57,19 +188,10 @@ jobs:
       - run:
           name: "Test Markdown Files"
           command: |
-            wget https://github.com/felicianotech/md-proofer/releases/download/v0.1.0/md-proofer-v0.1.0-linux-amd64.tar.gz
-            tar xfz md-proofer-v*.tar.gz
+            wget https://github.com/felicianotech/md-proofer/releases/download/v0.3.0/md-proofer--v0.3.0--linux-amd64.tar.gz
+            tar xfz md-proofer--v*.tar.gz
             sudo chmod +x ./md-proofer
-
-            echo "Test CircleCI 2.0 Markdown files"
-            echo "===================================================================================="
-            ./md-proofer lint jekyll/_cci2/
-            echo "\n\nTest CircleCI API Markdown files"
-            echo "===================================================================================="
-            ./md-proofer lint jekyll/_api/
-            echo "\n\nTest CircleCI 1.0 Markdown files"
-            echo "===================================================================================="
-            ./md-proofer lint jekyll/_cci1/
+            ./md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
       - run:
@@ -84,57 +206,32 @@ jobs:
           command: mkdir -p $JOB_RESULTS_PATH
       - run:
           name: "Manage Data Files We'll Need"
-          command: |
-            ./scripts/pull-docker-image-tags.sh
+          command: ./scripts/pull-docker-image-tags.sh
       - run:
-          name: Restore js
+          name: Restore Previous Job Assets (Javascript, API docs) to Jekyll directory.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
             mv /tmp/workspace/js/* jekyll/assets/js/
+            mkdir -p /tmp/workspace/api
+            cp -r /tmp/workspace/api/**/* jekyll/_api/
+            mkdir -p /tmp/workspace/pdfs
+            cp -r /tmp/workspace/api/* jekyll/_api/
       - run:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
-
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
-
-      - run:
-          name: Build API 1.x documentation with Slate
-          command: |
-            cd src-api; bundle install; npm install
-            bundle exec middleman build --clean
-            cp -R build/* ../jekyll/_api
-      - run:
-          name: Build API 2.x documentation with Widdershins and Slate
-          command: |
-            cd src-api; rm -r build; rm source/index.html.md
-            curl https://circleci.com/api/v2/openapi.json > openapi.json
-            node node_modules/widdershins/widdershins.js --environment ../widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
-            bundle exec middleman build --clean
-            cp -R build/* ../jekyll/_api/v2
-
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}
-          paths:
-            - "src-api/vendor/bundle"
       - run:
           name: Build the Jekyll site
           command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml --source jekyll --destination jekyll/_site/docs/ 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
-      - run:
-          name: Build PDFs for Server
-          command: |
-            bundle exec asciidoctor-pdf -v
-            ./scripts/build_pdfs.sh
+      ### NOTE: we are ignore some files in the HTML proofer as it fails on pending translated docs.
       - run:
           name: Test with HTMLproofer
-          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
-      - store_artifacts:
-          path: release/tmp/
-      - store_artifacts:
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+
+      - store_artifacts: # stores the built files of the Jekyll site
           path: jekyll/_site/docs/
           destination: circleci-docs
-      - store_artifacts:
+      - store_artifacts: # stores build log output.
           path: run-results/
           destination: run-results
       - persist_to_workspace:
@@ -143,8 +240,9 @@ jobs:
             - docs
 
   reindex-search:
-    docker:
-      - image: circleci/ruby:2.6.3-node-browsers
+    executor:
+      name: ruby/default
+      tag: '2.6.3-node-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -171,38 +269,3 @@ jobs:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
 
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - js_build
-      - build:
-          requires:
-            - js_build
-      - reindex-search:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-  nightly-build:
-    triggers:
-      - schedule:
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only: master
-    jobs:
-      - js_build
-      - build:
-          requires:
-            - js_build
-      - deploy:
-          requires:
-            - build

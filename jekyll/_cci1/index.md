@@ -14,7 +14,7 @@ CircleCI automates build, test, and deployment of software for mobile, enterpris
 
 ![CircleCI Example Flow with GitHub]({{ site.baseurl }}/assets/img/docs/how_it_works.png)
 
-For example, after a software repository on GitHub or Bitbucket is authorized and added as a project to the circleci.com SaaS application, every new commit triggers a build and notification of success or failure through webhooks. CircleCI also supports Slack, HipChat, Campfire, Flowdock, and IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
+For example, after a software repository on GitHub or Bitbucket is authorized and added as a project to the circleci.com SaaS application, every new commit triggers a build and notification of success or failure through webhooks. CircleCI also supports Slack, Flowdock, and IRC notifications. Code coverage results are available from the details page for any project for which a reporting library is added.
 
 ## Programming Language Support
 

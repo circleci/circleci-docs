@@ -7,10 +7,9 @@ categories: [configuring-jobs]
 order: 80
 ---
 
-
 This document describes how to trigger jobs using the CircleCI API.
 
-**Note:** Triggering jobs from the API is **not** supported with v2.1.
+**Note:** You cannot currently trigger jobs that use 2.1 config from the API.
 
 * TOC
 {:toc}
@@ -86,7 +85,7 @@ jobs:
 
 Notes on the above example:
 
-- Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value.
+- Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value - `deploy` is a special step that will only run on one container, even when the job parallelism is set greater that one.
 - We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
 
 ## See Also

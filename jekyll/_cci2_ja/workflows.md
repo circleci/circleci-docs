@@ -115,7 +115,7 @@ workflows:
 
 図示している例では、Workflow は最初に build ジョブを普通に実行し、並列動作する一連の `acceptance_test` ジョブを実行するファンアウトを行います。最終的には `deploy` ジョブを走らせるファンインで処理を終えます。
 
-![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
 
 下記で示した `config.yml` のコードは、ファンイン・ファンアウトジョブで構成した Workflow の例です。
 
@@ -201,11 +201,14 @@ Workflow で手動承認を選択する場合は、下記の点に注意が必�
 
 スクリーンショット： `request-testing` ジョブの承認を待つ Workflow。
 
-![待機状態の Workflow で承認されたジョブ]({{ site.baseurl }}/assets/img/docs/approval_job.png)
-
 スクリーンショット：`request-testing` ジョブをクリックすると現れる承認ダイアログ。
 
-![Workflow が待機状態の時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+{:.tab.switcher.Cloud}
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+
+{:.tab.switcher.Server}
+![Workflow が待機状態の時の承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+
 
 ## Workflow をスケジュール実行する
 
@@ -459,7 +462,7 @@ CircleCI は厳密な正規表現で照合します。
 各 Workflow には Workspace が割り当てられています。Workspace は、Workflow の進行につれてダウンストリームのジョブにファイルを転送するために使用されます。
 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を用いるとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできることになります。 下記は、Workspace に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を解説したものです。
 
-![Workspaces のデータフロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![Workspaces のデータフロー]({{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspaces を使います。 複数のブランチでジョブを実行するような Workflows では、Workspaces を利用してデータを共有したくなることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspaces は役立ちます。
 

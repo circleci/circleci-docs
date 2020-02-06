@@ -23,7 +23,7 @@ There are a few steps required to run builds for every Phabricator diff that is 
 1. Create a CircleCI project for the repo you would like to start building. You can do
 so on the **Add Projects** page on the CircleCI dashboard.
 1. Create a new API token on CircleCI by going to **Project Settings -> API Permissions**.
-1. In Phabricator, create a new build plan in **Harbomaster ->
+1. In Phabricator, create a new build plan in **Harbormaster ->
 Manage Build Plans -> Create Build Plan**.
 1. Give the build plan a good name, for example "CircleCI", optionally add
 the project name.

@@ -17,16 +17,16 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines: 
 
-     ```yaml
-     version: 2.1
-     jobs:
-       build:
-         docker: 
-           - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
-         steps:
-           - checkout # check out the code in the project directory
-           - run: echo "hello world" # run the `echo` command
-     ```
+   ```yaml
+   version: 2.1
+   jobs:
+     build:
+       docker: 
+         - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+       steps:
+         - checkout # check out the code in the project directory
+         - run: echo "hello world" # run the `echo` command
+   ```
 
 1. Commit and push the changes. 
 
@@ -64,7 +64,7 @@ Using the basics from the Linux and Android examples above, you can add a job th
 jobs: 
   build-macos: 
     macos:  
-      xcode: "10.0.0" 
+      xcode: 11.3.0
 ```      
 
 Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
@@ -99,6 +99,11 @@ You automatically *follow* any new project that you push to, subscribing you to 
 
 In the top left, you will find the Org switcher.
 
+
+{:.tab.switcher.Cloud}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
@@ -107,6 +112,6 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 - See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 
-- Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
+- Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 
 - Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.

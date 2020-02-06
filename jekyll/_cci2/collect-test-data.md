@@ -102,7 +102,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           name: Save test results
           command: |
             mkdir -p ~/cucumber
-            bundle exec cucumber pretty --format json --out ~/cucumber/tests.cucumber
+            bundle exec cucumber --format pretty --format json --out ~/cucumber/tests.cucumber
           when: always
       - store_test_results:
           path: ~/cucumber
@@ -340,14 +340,14 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
           name: run tests
           command: |
             . venv/bin/activate
-            mkdir test-reports
-            pytest --junitxml=test-reports/junit.xml
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml
 
       - store_test_results:
-          path: test-reports
+          path: test-results
 
       - store_artifacts:
-          path: test-reports    
+          path: test-results    
 ```
 
 
@@ -416,6 +416,7 @@ A working `.circleci/config.yml` section might look like this:
       - run: dotnet test --no-build --logger "trx"
       - run:
           name: test results
+          when: always
           command: |
               dotnet tool install -g trx2junit
               export PATH="$PATH:/root/.dotnet/tools"

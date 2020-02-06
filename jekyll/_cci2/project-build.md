@@ -17,8 +17,17 @@ After a software repository on GitHub or Bitbucket is authorized and added as a 
 
 A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
 
+On the "Add Projects" page, you can either _Set Up_ any project that you are
+the owner of on your VCS, or, _Follow_ any project in your organization to gain
+access to its pipelines and to subscribe to [email notifications]({{
+site.baseurl }}/2.0/notifications/) for the project's status.
+
 ## Add Projects Page
 
+{:.tab.addprojectpage.Cloud}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
+
+{:.tab.addprojectpage.Server}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
 *Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
@@ -27,13 +36,25 @@ The *Project Administrator* is the user who adds a GitHub or Bitbucket repositor
 
 If you do not see your project and it is not currently building on CircleCI, check your Organization in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
+{:.tab.switcher.Cloud}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+
+{:.tab.switcher.Server}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 ## Viewing Builds
 
-Your build appears on the Jobs page of the CircleCI app when a new commit is pushed to your repository. If you do not see your jobs building on the Jobs page when you push config changes, check the Workflows tab of the CircleCI app to find out how to update your config to enable builds.
+Your build appears on the [Pipelines page]({{site.baseurl}}/2.0/pipelines) of the CircleCI app when a new commit is pushed to your repository.
 
-![Workflows]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+You can view workflows or single jobs by clicking in on the workflow or job in
+each pipeline.
+
+![Navigating Pipelines]({{ site.baseurl }}/assets/img/docs/navigating_pipelines.png)
+
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top
+of the page to navigate back to a job's respective workflow or pipeline.
+
+![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
 
 ## See Also
 

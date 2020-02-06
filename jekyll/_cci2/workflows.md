@@ -22,7 +22,7 @@ With workflows, you can:
 
 - Run and troubleshoot jobs independently with real-time status feedback.
 - Schedule workflows for jobs that should only run periodically.
-- Fan-out to run multiple jobs in parallel for efficient version testing.
+- Fan-out to run multiple jobs concurrently for efficient version testing.
 - Fan-in to quickly deploy to multiple platforms.
 
 For example, if only one job in a workflow fails, you will know it is failing in real-time. Instead of wasting time waiting for the entire build to fail and rerunning the entire job set, you can rerun *just the failed job*.
@@ -54,7 +54,7 @@ _For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.
 
 **Note:** Projects configured with Workflows often include multiple jobs that share syntax for Docker images, environment variables, or `run` steps. Refer the [YAML Anchors/Aliases](http://yaml.org/spec/1.2/spec.html#id2765878) documentation for information about how to alias and reuse syntax to keep your `.circleci/config.yml` file small. See the [Reuse YAML in the CircleCI Config](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/) blog post for a summary.
 
-To run a set of parallel jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two parallel jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run in parallel.
+To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run concurrently.
 
 ```yaml
 jobs:
@@ -121,9 +121,9 @@ See the [Sample Sequential Workflow config](https://github.com/CircleCI-Public/c
 ### Fan-Out/Fan-In Workflow Example
 {:.no_toc}
 
-The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs in parallel, and finally fans-in to run a common deploy job.
+The illustrated example workflow runs a common build job, then fans-out to run a set of acceptance test jobs concurrently, and finally fans-in to run a common deploy job.
 
-![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
 
 The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
@@ -201,13 +201,19 @@ Some things to keep in mind when using manual approval in a workflow:
 - All jobs that are to run after a manually approved job _must_ `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshots show a workflow on hold waiting for approval of the `request-testing` job: 
+The following screenshot demonstrates a workflow on hold. 
 
-![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+{:.tab.switcher.Cloud}
+![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-The following is a screenshot of the Approval dialog box that appears when you click the `request-testing` job:
+{:.tab.switcher.Server}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-![Approval Dialog in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+
+By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears
+requesting that you approve or cancel the holding job.
+
+After approving, the rest of the workflow runs as directed.
 
 ## Scheduling a Workflow
 
@@ -431,13 +437,13 @@ For full details on pattern-matching rules, see the [java.util.regex documentati
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses.
 The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
 
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers. 
 
 For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job. 
 
-A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests in parallel using the jar.
+A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
 
 To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use. 
 
@@ -515,27 +521,6 @@ This section describes common problems and solutions for Workflows.
 {:.no_toc}
 
 It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
-
-### Workflows Not Starting
-{:.no_toc}
-
-When creating or modifying workflow configuration, if you don't see new jobs, you may have a configuration error in `config.yml`.
-
-Oftentimes if you do not see your workflows triggering, a configuration error is preventing the workflow from starting. As a result, the workflow does not start any jobs.
-
-When setting up workflows, you currently have to check your Workflows page of the CircleCI app (*not* the Job page) to view the configuration errors.
-
-A project's Job page URL looks like this:
-
-`https://circleci.com/:VCS/:ORG/:PROJECT`
-
-A Workflow page URL looks like this:
-
-`https://circleci.com/:VCS/:ORG/workflows/:PROJECT`
-
-Look for Workflows that have a yellow tag and "Needs Setup" for the text.
-
-![Invalid workflow configuration example]({{ site.baseurl }}/assets/img/docs/workflow-config-error.png)
 
 ### Workflows Waiting for Status in GitHub
 {:.no_toc}

@@ -123,6 +123,8 @@ Orb authors should adhere to semantic versioning. Within config.yml, you may spe
 
 For example, when mynamespace/some-orb@8.2.0 exists, and mynamespace/some-orb@8.1.24 and mynamespace/some-orb@8.0.56 are published after 8.2.0, volatile will still refer to mynamespace/some-orb@8.2.0 as the highest semantic version.
 
+**Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
+
 Examples of orb version declarations and their meaning:
 
 * circleci/python@volatile - use the highest version of the Python orb in the registry at the time a build is triggered. This is likely the most recently published and least stable Python orb.

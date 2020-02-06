@@ -6,6 +6,8 @@
 :toc-title:
 :sectanchors:
 
+include::../_includes/snippets/server-only.adoc[]
+
 Nomad Metrics is a helper service used to collect metrics data from the <<nomad#basic-terminology-and-architecture,Nomad server and clients>> running on the Services and Nomad instances respectively.  Metrics are collected and sent using the https://docs.datadoghq.com/developers/dogstatsd/[DogStatsD] protocol and sent to the Services machine.
 
 == Nomad Metrics Server
@@ -16,7 +18,7 @@ The Nomad Metrics container is run on the services host using the server flag an
 
 The Nomad Metrics client is installed and run on all Nomad client instances. You will need to update your AWS Launch Configuration in order to install and configure it.  Additionally, you will need to modify the AWS security group to ensure that UDP port 8125 is open on the Services machine. Steps for both configuration changes are explained below.
 
-NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console.  Make sure that you logged into the region you use to run CircleCI Server.
+NOTE: Before proceeding, you should be logged into the EC2 Service section of the AWS Console. Make sure that you logged into the region you use to run CircleCI Server.
 
 === Updating the Services machine Security Group
 
@@ -179,7 +181,11 @@ docker run -d --name $CONTAINER_NAME \
 
 == StatsD Metrics
 
+NOTE: Metrics sent via StatsD will be updated every 10s.
+
 === --server
+
+NOTE: The number of jobs in a terminal state (`complete` and `dead`) will typically increase until Nomad garbage-collects the jobs from its state.
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -209,8 +215,6 @@ docker run -d --name $CONTAINER_NAME \
 | Gauge
 | Total number of dead jobs across the cluster.
 |===
-
-NOTE: The number of jobs in a terminal state (`complete` and `dead`) will typically increase until Nomad garbage-collects the jobs from its state.
 
 === --client
 

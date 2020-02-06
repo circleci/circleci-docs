@@ -1,7 +1,7 @@
 # Local Development Instructions
 
 
-There are two ways to work on CircleCI docs locally: with Docker and with Ruby/Bundler.
+There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](http://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
 
@@ -53,7 +53,7 @@ For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/
 
 ## Editing Docs Locally
 
-The docs site includes Bootstrap 3 JS and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
+The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).
 
 All docs live in folders named after the version of CircleCI. The only two you need to worry about are `jekyll/_cci1` and `jekyll/_cci2`. These correspond to CircleCI Classic and CircleCI 2.0, respectively.
 

@@ -21,6 +21,8 @@ en:
       children:
         - name: Getting Started Introduction
           link: 2.0/getting-started/
+        - name: What is CircleCI?
+          link: 2.0/about-circleci/
         - name: Sign Up & Try CircleCI
           link: 2.0/first-steps/
         - name: Hello World
@@ -51,16 +53,20 @@ en:
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
-        - name: Tips for Migrating to 2.0
-          link: 2.0/migration/
-        - name: Migrating a Linux Project
-          link: 2.0/migrating-from-1-2/
-        - name: Migrating an iOS Project
-          link: 2.0/ios-migrating-from-1-2/
-        - name: Using the config-translator
-          link: 2.0/config-translation/
         - name: Migrating from TravisCI
           link: 2.0/migrating-from-travis/
+        - name: Migrating from Jenkins
+          link: 2.0/migrating-from-jenkins/
+        - name: Migrating from GitLab
+          link: 2.0/migrating-from-gitlab/
+        - name: Migrating from Buildkite
+          link: 2.0/migrating-from-buildkite/
+        - name: Migrating from Azure DevOps
+          link: 2.0/migrating-from-azuredevops/
+        - name: Migrating from AWS
+          link: 2.0/migrating-from-aws/
+        - name: Migrating from GitHub
+          link: 2.0/migrating-from-github/
 
 - name: Configuration
   icon: docs/config.svg
@@ -72,6 +78,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Reusable Config Reference
+          link: 2.0/reusing-config/
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
@@ -85,7 +93,7 @@ en:
           link: 2.0/orbs-faq/
         - name: Orbs Concepts
           link: 2.0/using-orbs/
-        - name: Orbs Reference
+        - name: Reusable Config Reference
           link: 2.0/reusing-config/
         - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
@@ -148,6 +156,8 @@ en:
       children:
         - name: Advanced Config Introduction
           link: 2.0/adv-config/
+        - name: Pipeline Variables
+          link: 2.0/pipeline-variables
         - name: Using Shell Scripts
           link: 2.0/using-shell-scripts/
         - name: Setting up Browser Testing
@@ -198,8 +208,10 @@ en:
           link: 2.0/parallelism-faster-jobs/
         - name: Using Docker Layer Caching
           link: 2.0/docker-layer-caching/
+        - name: Optimizations Cookbook
+          link: 2.0/optimization-cookbook/
 
-- name: Jobs
+- name: Pipelines
   icon: docs/builds.svg
   children:
     - name: Status
@@ -207,6 +219,8 @@ en:
       children:
         - name: Status Overview
           link: 2.0/status/
+        - name: Viewing Pipelines
+          link: 2.0/pipelines/
         - name: Using Credits
           link: 2.0/credits/
         - name: Using Containers
@@ -245,6 +259,8 @@ en:
       children:
         - name: Deployment Overview
           link: 2.0/deployment-integrations/
+        - name: Deployment Examples
+          link: 2.0/deployment-examples/
         - name: Deploying to AWS ECR/ECS
           link: 2.0/ecs-ecr/
         - name: Publishing Snap Packages
@@ -260,8 +276,12 @@ en:
     - children:
         - name: Configuration Reference
           link: 2.0/configuration-reference/
-        - name: API Reference
+        - name: API v1.1 Reference
           link: api/
+        - name: API v2 Reference
+          link: api/v2
+        - name: API v2 Introduction
+          link: 2.0/api-intro/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary
@@ -274,11 +294,15 @@ en:
 - name: Server Administration
   icon: docs/admin.svg
   children:
-    - name: Server v2.17.x Install
+    - name: Server v2.18.3 Install
       link: 2.0/install-overview/
       children:
         - name: Overview
           link: 2.0/install-overview/
+        - name: What's New in v2.18
+          link: 2.0/v.2.18-overview/
+        - name: Upgrade to v2.18.3
+          link: 2.0/updating-server/
         - name: System Requirements
           link: 2.0/server-ports/
         - name: Prerequisites and Planning
@@ -287,13 +311,11 @@ en:
           link: 2.0/aws/
         - name: Teardown
           link: 2.0/aws-teardown/
-        - name: Updating
-          link: 2.0/updating-server/
         - name: Upgrades from 1.0 to 2.0
           link: 2.0/upgrading/
         - name: Trial Single-box Install
           link: 2.0/single-box/
-    - name: Server v2.17.x Operations
+    - name: Server v2.18.3 Operations
       link: 2.0/overview/
       children:
         - name: Overview
@@ -334,20 +356,29 @@ en:
           link: 2.0/admin-faq/
         - name: Customization & Config
           link: 2.0/customizations/
-        - name: Architechture
+        - name: Architecture
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
-    - name: CircleCI Server v2.17 PDFs
+    - name: Server v2.18.3 PDFs
+      link: 2.0/v.2.18-overview/
+      children:
+        - name: What's New in v2.18
+          link: 2.0/v.2.18-overview/
+        - name: v2.18.3 Installation Guide
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+        - name: v2.18.3 Operations Guide
+          link: 2.0/CircleCI-Server-Operations-Guide.pdf
+    - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
       children:
         - name: What's New in v2.17
           link: 2.0/v.2.17-overview/
         - name: v2.17.3 Installation Guide
-          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
-          link: 2.0/CircleCI-Server-Operations-Guide.pdf
-    - name: CircleCI Server v2.16 PDFs
+          link: 2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
+    - name: Server v2.16 PDFs
       link: 2.0/v.2.16-overview/
       children:
         - name: What's New in v2.16
@@ -652,7 +683,7 @@ ja:
           i18n_name: ヘルプとサポート
           link: ja/2.0/help-and-support/
 
-- name: Administration
+- name: Server Administration
   i18n_name: アドミニストレーション
   icon: docs/admin.svg
   children:

@@ -71,7 +71,7 @@ Integrated status also appears on the pull request screen, to show that all test
 If your testing process refers to multiple repositories, CircleCI will need a
 GitHub user key in addition to the deploy key because each deploy key is valid
 for only _one_ repository while a GitHub user key has access to _all_ of your
-GitHub repositories. Refer to the [adding ssh keys]({{ site.baseurl }}/2.0/add-ssh-key) document to learn more.
+GitHub repositories.
 
 Provide CircleCI with a GitHub user key on your project's
 **Project Settings > Checkout SSH keys** page.
@@ -216,7 +216,7 @@ key. If you are using GitHub as your VCS then GitHub has the public key, and
 CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
 To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
-If you want to push to the repository from your builds, you will need a deployment key with write access (user key). The steps to create a user key depend on your VCS.
+If you want to push to the repository from your builds, you will need a deployment key with write access. The steps to create a deployment key with write access depend on your VCS. See below for GitHub-specific instructions.
 
 **What is a user key?**
 
@@ -233,7 +233,10 @@ and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circ
 When prompted to enter a passphrase,
 do **not** enter one.
 
-**Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
+    **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM
+    format by default. If your private key does not start with `-----BEGIN RSA
+    PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen
+    -m PEM -t rsa -C "your_email@example.com"`
 
 2. Go to `https://github.com/you/test-repo/settings/keys`,
 and click "Add deploy key".
@@ -328,3 +331,33 @@ access to multiple repositories) and user keys have no notion of _scope_
 separate from the user associated with them.
 
 To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
+
+## Establishing the authenticity of an SSH host
+
+When using SSH keys to checkout repositories, it may be neccesary to add the 
+fingerprints for GitHub or BitBucket to a "known hosts" file 
+(`~/.ssh/known_hosts`) so that the executor can verify that the host it's
+connecting to is authentic. The `checkout`job step does this automatically, so 
+the following command will need to be used if you opt to use a custom checkout
+command.
+
+```
+mkdir -p ~/.ssh
+
+echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+' >> ~/.ssh/known_hosts
+```
+
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then 
+adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your
+job. You can see this in action here:
+
+```
+➜  ~ ssh-keyscan github.com           
+# github.com:22 SSH-2.0-babeld-2e9d163d
+github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+# github.com:22 SSH-2.0-babeld-2e9d163d
+# github.com:22 SSH-2.0-babeld-2e9d163d
+➜  ~ ✗ 
+```

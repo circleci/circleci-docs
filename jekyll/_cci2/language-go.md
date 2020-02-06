@@ -39,8 +39,6 @@ jobs: # basic units of work in a run
         environment: # environment variables for primary container
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
-    # directory where steps are run. Path must conform to the Go Workspace requirements
-    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
 
     environment: # environment variables for the build itself
       TEST_RESULTS: /tmp/test-results # path to where test results will be saved

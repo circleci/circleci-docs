@@ -44,9 +44,7 @@ For more detailed information about CircleCI orbs, please refer to the [Orbs Int
 
 `version: 2.1`
 
-**Note:** If you do not already have pipelines enabled, go to **Settings > Project**, select settings for the project you are currently working on by clicking its cog icon, select **Advanced Settings** and scroll down to use the radio button to enable pipelines.
-
-![Enable Pipelines]( {{ site.baseurl }}/assets/img/docs/enable_pipelines.png))
+**NOTE:** {% include snippets/enable-pipelines.md %}
 
 2) Add the orbs stanza below your version, which in turn imports the orb:
 
@@ -456,12 +454,11 @@ To configure your environment to use CircleCI and orbs, perform the following st
 
 `version: 2.1`
 
-2) If you do not already have Pipelines enabled, you'll need to go to **Project Settings -> Advanced Settings** and turn enable pipelines.
+2) {% include snippets/enable-pipelines.md %}
 
 Add the orbs stanza below your version, invoking the orb:
 
-`orbs:
-  aws-eks: circleci/aws-eks@0.2.1`
+`orbs: aws-eks: circleci/aws-eks@0.2.1`
 
 3) Use `aws-eks` elements in your existing workflows and jobs.
 
@@ -1029,14 +1026,14 @@ Now that you have configured your environment to work with the CircleCI platform
 ```yaml
 version: 2.1
 orbs:
-  heroku: circleci/heroku@1.0.0
+  heroku: circleci/heroku@0.0.10
 workflows:
   heroku_deploy:
     jobs:
       - heroku/deploy-via-git
 ```
 
-Notice in the above example, when the CircleCI Heroku orb (`circleci/heroku@1.0.0`) is invoked, the `heroku-deploy` workflow is initiated, enabling the `deploy-via-git` job to run.
+Notice in the above example, when the CircleCI Heroku orb (`circleci/heroku@0.0.10`) is invoked, the `heroku-deploy` workflow is initiated, enabling the `deploy-via-git` job to run.
 
 For more detailed information about the CircleCI Heroku orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/heroku).
 

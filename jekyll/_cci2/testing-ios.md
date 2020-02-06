@@ -29,16 +29,22 @@ We announce the availability of new macOS containers in the [annoucements sectio
 
 The currently available Xcode versions are:
 
-* `11.1.0`: Xcode 11.1 (Build 11A1027) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1226/index.html)
-* `11.0.0`: Xcode 11.0 (Build 11A420a) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1136/index.html)
-* `10.3.0`: Xcode 10.3 (Build 10G8) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-903/index.html)
-* `10.2.1`: Xcode 10.2.1 (Build 10E1001) [installed software]( https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-594/index.html)
-* `10.1.0`: Xcode 10.1 (Build 10B61) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
-* `10.0.0`: Xcode 10.0 (Build 10A255) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
-* `9.4.1`: Xcode 9.4.1 (Build 9F2000) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
-* `9.3.1`: Xcode 9.3.1 (Build 9E501) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-419/index.html)
-* `9.0.1`: Xcode 9.0.1 (Build 9A1004) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
-* `8.3.3`: Xcode 8.3.3 (Build 8E3004b) [installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
+ Config   | Xcode Version                   | macOS Version | Software Manifest
+----------|---------------------------------|---------------|-------------------
+ `11.3.1` | Xcode 11.3.1 (Build 11C505)     | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
+ `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
+ `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.2.0` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.1.0` | Xcode 11.1 (Build 11A1027)      | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
+ `11.0.0` | Xcode 11.0 (Build 11A420a)      | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
+ `10.3.0` | Xcode 10.3 (Build 10G8)         | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
+ `10.2.1` | Xcode 10.2.1 (Build 10E1001)    | macOS 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
+ `10.1.0` | Xcode 10.1 (Build 10B61)        | macOS 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html)
+ `10.0.0` | Xcode 10.0 (Build 10A255)       | macOS 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html)
+ `9.4.1`  | Xcode 9.4.1 (Build 9F2000)      | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
+ `9.3.1`  | Xcode 9.3.1 (Build 9E501)       | macOS 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
+ `9.0.1`  | Xcode 9.0.1 (Build 9A1004)      | macOS 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
+{: class="table table-striped"}
 
 ## Getting Started
 
@@ -69,46 +75,52 @@ example of a minimal config in the
 ### Best Practices
 {:.no_toc}
 
-In addition to the basic setup steps, it is best practice to include
-downloading CocoaPods specs from the CircleCI mirror (up to 70% faster)
-and linting the Swift code together with the `build-and-test` job:
+#### Cocoapods
+
+In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
+
+To enable this, ensure the first line in your Podfile is as follows:
+
+```
+source 'https://cdn.cocoapods.org/'
+```
+
+If upgrading from Cocoapods 1.7 or older, additionally ensure the following line is removed from your Podfile, along with removing the "Fetch CocoaPods Specs" step in your CircleCI Configuration:
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+```
+
+#### Homebrew
+
+Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that the step execution can take some extra time to complete.
+
+If build speed or bugs introduced by new Homebrew updates are a concern, this update-check feature can be disabled. On average, this can save 2-5 minutes per job.
+
+To disable this feature, define the `HOMEBREW_NO_AUTO_UPDATE` environment variable within your job:
 
 ```yaml
-# .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
-      FL_OUTPUT_DIR: output
+      HOMEBREW_NO_AUTO_UPDATE: 1
     steps:
       - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-      - run:
-          name: Install CocoaPods
-          command: pod install --verbose
+      - run: brew install wget
+```
 
-      - run:
-          name: Build and run tests
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: WebTests
+#### iOS Simulator Crash Reports
 
-      - store_test_results:
-          path: output/scan
-      - store_artifacts:
-          path: output
+If your iOS app crashes in the Simulator during a test run, the crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
 
-workflows:
-  version: 2
-  build-and-test:
-    jobs:
-      - build-and-test
+```yaml
+steps:
+  # ...
+  - store_artifacts:
+    path: ~/Library/Logs/DiagnosticReports
 ```
 
 ## Advanced Setup
@@ -121,7 +133,7 @@ job as follows:
 
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
   swiftlint:
@@ -142,7 +154,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint
@@ -232,11 +243,11 @@ This configuration can be used with the following CircleCI config file:
 
 ```yaml
 # .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
@@ -253,7 +264,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "10.2.0"
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
@@ -267,7 +278,6 @@ jobs:
           path: output
 
 workflows:
-  version: 2
   build-test-adhoc:
     jobs:
       - build-and-test
@@ -322,22 +332,22 @@ Doing so generally reduces the number of simulator
 timeouts observed in builds.
 
 To pre-start the simulator, add the following to your
-`config.yml` file, assuming that you are running your tests on an iPhone 7
-simulator with iOS 10.2:
+`config.yml` file, assuming that you are running your tests on an iPhone 11 Pro
+simulator with iOS 13.2:
 
 ```
     steps:
       - run:
           name: pre-start simulator
-          command: xcrun instruments -w "iPhone 7 (10.2) [" || true
+          command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7
 simulator, as the phone + watch simulator is also present in the build
 image:
 
-* `iPhone 7 (10.2) [<uuid>]` for the iPhone simulator.
-* `iPhone 7 Plus (10.2) + Apple Watch Series 2 - 42mm (3.1) [<uuid>]` for the phone + watch pair.
+* `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
+* `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
 
 ### Creating a `config.yml` File
 {:.no_toc}
@@ -372,6 +382,22 @@ It is also possible to use the `sudo` command if necessary to perform customizat
 Our macOS containers contain multiple versions of Ruby. The default version is the system-installed Ruby. The containers also include the latest stable versions of Ruby at the time that the container is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
+
+#### Images using macOS 10.15 (Catalina) / Xcode 11.2 and later
+
+The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switing feature is not enabled by default. To select a version of Ruby to use, call the `chruby` function in `~/.bash_profile`:
+
+```yaml
+run:
+  name: Set Ruby Version
+  command: echo 'chruby ruby-2.6' >> ~/.bash_profile  # Replace 2.6 with the specific version of Ruby here.
+```
+
+Alternatively, you can choose to [enable auto-switching](https://github.com/postmodern/chruby#auto-switching) if you would like to use it by following [these steps](https://github.com/postmodern/chruby#auto-switching).
+
+#### Images using macOS 10.14 (Mojave) / Xcode 11.1 and earlier
+
+The build images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
 
 To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
@@ -524,10 +550,10 @@ projects. Here are the most frequent of those:
   a few different versions of Xcode in each build
   image and keep those updated with the latest point releases. For version `10.0.0`,
   you must specify the full version, down to the point release number. However,
-  to use the latest Xcode 8.3, for example, which is `8.3.3`, it is
-  sufficient to specify `8.3` in your `config.yml`. If a newer point
-  release of 8.3 comes out, we will make that one available under the same
-  `8.3` version on CircleCI.
+  to use the latest Xcode 11.3.0, for example, which is `11.3.0`, it is
+  sufficient to specify `11.3` in your `config.yml`. If a newer point
+  release of 11.3 comes out, we will make that one available under the same
+  `11.3` version on CircleCI.
 
 * **Dependency version mismatches.** If you see that the version of the
   dependencies used in a job are not the expected ones, please try
@@ -558,20 +584,6 @@ Some issues are only present in one of these tools.
 
 * **Errors while installing code signing certificates.** Please check out the iOS Code Signing document.
 
-* **Many iOS app developers use tools that generate substantial amounts of code.** In such
-cases CircleCI may not correctly detect the Xcode workspace, project, or
-scheme. Instead, you can specify these through environment variables.
-
-### Constraints on macOS-based Builds
-{:.no_toc}
-
-Splitting tests between parallel containers on macOS is currently not supported.
-We suggest using a workflow with parallel jobs to build with different
-Xcode versions, or a workflow with parallel jobs to run different
-test targets. Please check
-[this doc]({{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples)
-for examples of workflows with parallel jobs.
-
 ## Sample Configuration with Multiple Executor Types (macOS + Docker)
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
@@ -584,21 +596,16 @@ will be run in Docker.
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "10.2.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
     steps:
       - checkout
-      - run:
-          name: Fetch CocoaPods Specs
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
           name: Install CocoaPods
           command: pod install --verbose
@@ -634,7 +641,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
       - swiftlint

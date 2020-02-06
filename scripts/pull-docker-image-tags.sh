@@ -25,7 +25,7 @@ echo "{" > jekyll/_data/docker-image-tags.json
 i=1
 
 for image in "${ordered[@]}"; do
-	tags=$(curl -X GET "https://registry.hub.docker.com/v1/repositories/circleci/$image/tags" | jq ".[].name")
+	tags=$(curl -X GET "https://registry.hub.docker.com/v1/repositories/circleci/${image}/tags" | jq '.[] | select( .name | contains("-browsers-legacy") | not) | .name')
 	numTags=$( echo $tags | wc -w)
 
 	echo -e "\t\"$image\": {" >> jekyll/_data/docker-image-tags.json

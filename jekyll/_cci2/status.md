@@ -17,19 +17,16 @@ Integrations enable you to [include status badges in other web pages]({{ site.ba
 
 Queuing |
 ------------------------|------------------
-If your jobs are queuing, you can upgrade your plan for [using containers]({{ site.baseurl }}/2.0/containers/). |  
+If your jobs are queuing, you can switch to either a [performance or custom plan](https://circleci.com/pricing/). For further information see our guide to [using credits]({{ site.baseurl }}/2.0/credits/). |
 
 <hr>
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/job_status.png)
 
-CircleCI provides an integrated dashboard showing job status:
+CircleCI provides an integrated dashboard showing status of the last completed job run:
 
-- SUCCESS: All jobs completed
+- SUCCESS: All jobs passed successfully
 - FAILED: One or more jobs failed
-- RUNNING: Job run is in progress
-- ON HOLD: Job is waiting for approval
-- QUEUED: Job is waiting for available container
 
 If you are using [workflows]({{ site.baseurl}}/2.0/workflows/#overview) you may
 see other [workflow-specific statuses]({{ site.baseurl}}/2.0/workflows/#states).

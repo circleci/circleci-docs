@@ -18,8 +18,8 @@ This document describes how to get started with continuous integration on **Wind
 To follow along with this document you will need:
 
 * An [account](https://circleci.com/signup/) on CircleCI.
-* Either the Free plan (default) or a [performance plan](https://circleci.com/pricing/usage/).
-* Pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
+* Either the Free plan (default) or a [performance plan](https://circleci.com/pricing/usage/). If you are running CircleCI Server there are alternative code examples below.
+* For the cloud version, pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
 
 # Overview of the Windows executor
 
@@ -35,11 +35,9 @@ Note: the Windows executor does not have have support for [Docker Layer Caching]
 
 Note: the Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
 
-The Windows executor is only available on the CircleCI Performance Plan. Please see the [CircleCI Plans page](https://circleci.com/pricing/usage/) for more details on the cost of Windows compute.
-
 ## Windows executor images
 
-Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document.
+Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
 ## Known issues
 
@@ -51,19 +49,39 @@ These are the issues with the Windows executor that we are aware of and will add
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
+{:.tab.windowsblock.Cloud}
 ```yaml
-version: 2.1
+version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  build:
-    executor: win/vs2019
+  build: # name of your job
+    executor: win/default # executor type
+
     steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
 # Specifying a Shell with the Windows Executor
 
@@ -79,22 +97,42 @@ You can configure the shell at the job level or at the step level. It is possibl
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 
 jobs:
   build:
     executor:
-      name: win/vs2019
-      shell: bash.exe
+      name: win/default
+    steps:
+      # default shell is Powershell
+      - run:            
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
+**Note** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
+
+```YAML
+
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+jobs:
+  build:
+    executor: win/default
     steps:
       - checkout
-      - run: ls -lah
-      - run:
-          command: ping circleci.com
-          shell: cmd.exe
-      - run:
-          command: echo 'This is powershell'
-          shell: powershell.exe
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+
 ```
 
 # Example Application
@@ -111,7 +149,7 @@ Above, we start by declaring that we will use version `2.1` of CircleCI, giving 
 
 ```yaml
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0
 ```
 
 Next, we declare orbs that we will be using in our build. We will only use the [windows orb](https://circleci.com/orbs/registry/orb/circleci/windows) to help us get started.
@@ -120,7 +158,7 @@ Next, we declare orbs that we will be using in our build. We will only use the [
 jobs:
   build:
     executor:
-      name: win/vs2019
+      name: win/default
       shell: powershell.exe
 ```
 
@@ -193,7 +231,7 @@ You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh
 Also, consider reading documentation on some of CircleCI’s features:
 
 * See the [Concepts]({{site.baseurl}}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a .circleci/config.yml file.
-* Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
+* Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
 
 # Software pre-installed in the Windows image
@@ -232,6 +270,8 @@ Also, consider reading documentation on some of CircleCI’s features:
 * NVM (Node Version Manager)
 * Ruby 2.6.3
 * Go 1.12.7
+* Python 3.7.3
+* Miniconda 3
 * Text editors
     * nano 2.5.3
     * vim 8.0.604

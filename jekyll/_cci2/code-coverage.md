@@ -255,7 +255,7 @@ jobs:
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for
 JavaScript projects. Another popular testing tool, Jest, uses Istanbul to
-generage reports. Consider this example:
+generate reports. Consider this example:
 
 ```yaml
 version: 2
@@ -362,4 +362,5 @@ You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 [environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
-parallel builds.
+concurrent jobs.
+

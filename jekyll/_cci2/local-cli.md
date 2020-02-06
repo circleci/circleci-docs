@@ -20,7 +20,7 @@ things you can do with the CircleCI CLI include:
 
 This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
-legacy CLI does work in Server and can be installed. Read more below: 
+legacy CLI does work in Server and can be installed. 
 
 * TOC
 {:toc}
@@ -280,6 +280,13 @@ The CLI allows you to run a single job from CircleCI on your desktop using Docke
 $ circleci local execute --job JOB_NAME
 ```
 
+If your CircleCI config is set to version 2.1 or greater, you must first export your config to `process.yml`, and specify it when executing:
+
+```sh
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
 Let's run an example build on our local machine on one of CircleCI's demo applications:
 
 ```sh
@@ -300,9 +307,13 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
+**Add SSH Keys**
+
+It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
+
 **Workflows**
 
-The CLI tool does not provide support for running workflows. By nature, workflows leverage running builds in parallel on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single **jobs** (which make up parts of a workflow).
+The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single **jobs** (which make up parts of a workflow).
 
 **Caching and Online-only Commands**
 
@@ -313,6 +324,10 @@ Further, not all commands may work on your local machine as they do online. For 
 **Environment Variables**
 
 For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
+
+## Test Splitting
+
+The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
 ## Using the CLI on CircleCI Server
 

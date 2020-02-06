@@ -54,9 +54,11 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 2. Next, you will be given the option of *following* any projects you have access to that are already building on CircleCI (this would typically apply to developers connected to a company or organization's GitHub account). On the next screen, you'll be able to add the repo you just created as a new project on CircleCI.
 
-3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list, then click the **Set Up project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list (you can also search for it), then click the **Set Up Project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
-4. On the next screen, you're given some options for configuring your project on CircleCI. Leave everything as-is for now and just click the **Start building** button a bit down the page on the right. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png) ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-2.0-start-building.png)
+4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. If the language you are using is not in the list, click the "Use Hello World" button at the bottom of the list. Copy the YAML configuration that appears and save it as a file called "config.yml" in a folder named `.circleci` in the root of your repository's directory. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
+
+5. Git push your new  `config.yml` file to your VCS. You are ready to start building! Click the button "Start Building" and confirm in the modal that your repository is ready to build.
 
 ## Running Your First CircleCI Build!
 
@@ -130,7 +132,7 @@ Edit your `config.yml` file in the GitHub editor for simplicity and replace `ech
 
 4. Commit these changes to your repository and navigate back over to the CircleCI dashboard. ![]( {{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
 
-5. Click on the link for your workflow to see that these two jobs run in parallel. ![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
+5. Click on the link for your workflow to see that these two jobs run concurrently. ![]( {{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
 
 Read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
@@ -194,19 +196,23 @@ If you are comfortable with the terminal, you can SSH directly into your CircleC
 *Note that you will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
 
-![]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
-![]( {{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
+{:.tab.switcher.Cloud}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+
 
 Copy the `ssh` string from the enabling SSH section of your build. Open a terminal and paste in the `ssh` string.
 
 Using some of the following commands, see if you can find and view the contents of the file you created using workspaces:
 
 ```
-pwd     #  print what directory, find out where you are in the file system
-ls -al   # list what files and directories are in the current directory
-cd <directory_name>    # change directory to the <directory_name> directory
-cat <file_name>    # show me the contents of the file <file_name>
+pwd                  #  print what directory, find out where you are in the file system
+ls -al               # list what files and directories are in the current directory
+cd <directory_name>  # change directory to the <directory_name> directory
+cat <file_name>      # show me the contents of the file <file_name>
 ```
 
 ## See Also

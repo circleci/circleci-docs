@@ -79,6 +79,14 @@ commands:
       - run: echo << parameters.to >>
 ```
 
+## **`parameters`** (requires version: 2.1)
+Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+
+Key | Required  | Type | Description
+----|-----------|------|------------
+parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+{: class="table table-striped"}
+
 ## **`executors`** (requires version: 2.1)
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
@@ -94,6 +102,8 @@ shell | N | String | Shell to use for execution command in all steps. Can be ove
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
+
+<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will recieve an error.
 
 Example:
 
@@ -117,12 +127,12 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
-If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have a name that is unique within the `.circleci/config.yml` file.
+If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
 If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
 **Note:**
-Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
+Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 
@@ -142,14 +152,14 @@ branches | N | Map | A map defining rules to allow/block execution of specific b
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
 
-<sup>(1)</sup> exactly one of them should be specified. It is an error to set more than one.
+<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will recieve an error.
 
 #### `environment`
 A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
 
 #### `parallelism`
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
 
@@ -165,13 +175,8 @@ jobs:
     parallelism: 3
     resource_class: large
     working_directory: ~/my-app
-    branches:
-      only:
-        - master
-        - /rc-.*/
     steps:
-      - run: make test
-      - run: make
+      - run: go test -v $(go list ./... | circleci tests split)
 ```
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
@@ -309,6 +314,20 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
+##### Available Linux GPU images
+
+When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
+
+* `ubuntu-1604-cuda-10.1:201909-23` - CUDA 10.1, docker 19.03.0-ce, nvidia-docker 2.2.2
+* `ubuntu-1604-cuda-9.2:201909-23` - CUDA 9.2, docker 19.03.0-ce, nvidia-docker 2.2.2
+
+##### Available Windows GPU image
+
+When using the [Windows GPU executor](#gpu-executor-windows), the available image is:
+
+* `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1.
+  This image is the default.
+
 **Example**
 
 ```yaml
@@ -334,19 +353,20 @@ Key | Required | Type | Description
 xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 {: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version `9.0`:
+**Example:** Use a macOS virtual machine with Xcode version 11.3:
 
 ```yaml
 jobs:
   build:
     macos:
-      xcode: "9.0"
+      xcode: "11.3.0"
 ```
 
 #### **`windows`**
 {:.no_toc}
 
-CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]() document.
+CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
+
 
 **Example:** Use a windows executor to run a simple job.
 
@@ -354,11 +374,11 @@ CircleCI supports running jobs on Windows. To run a job on a Windows machine, yo
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.3.0
 
 jobs:
   build:
-    executor: win/vs2019
+    executor: win/default
     steps:
       - checkout
       - run: echo 'Hello, Windows'
@@ -406,25 +426,23 @@ To ensure the job runs for **all** branches, either don't use the `branches` key
 
 #### **`resource_class`**
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below. **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**.
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on Performance Plan. If you are on a container or unpaid plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
-
-\* _Items marked with an asterisk require review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you'd like to request access._
+**Note:** This feature is automatically enabled on free and Performance plans. Available resources classes are restricted for customers on the free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the free plan. If you are on a container plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) and speak with a CircleCI Sales representative about enabling this feature.
 
 ##### Docker Executor
 
-Class            | vCPUs | RAM
------------------|-------|-----
-small            | 1     | 2GB
-medium (default) | 2     | 4GB
-medium+          | 3     | 6GB
-large            | 4     | 8GB
-xlarge           | 8     | 16GB
-2xlarge\*        | 16    | 32GB
-2xlarge+\*       | 20    | 40GB
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+small                 | 1     | 2GB
+medium (default)      | 2     | 4GB
+medium+               | 3     | 6GB
+large                 | 4     | 8GB
+xlarge                | 8     | 16GB
+2xlarge<sup>(2)</sup> | 16    | 32GB
+2xlarge+<sup>(2)</sup>| 20    | 40GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -441,9 +459,11 @@ jobs:
 ##### Machine Executor (Linux)
 
 Class            | vCPUs | RAM
------------------|-------|-------
+-----------------|-------|------
 medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
+xlarge           | 8     | 32GB
+2xlarge          | 16    | 64GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -458,10 +478,10 @@ jobs:
 
 ##### macOS Executor
 
-Class            | vCPUs | RAM
------------------|-------|-----
-medium (default) | 4     | 8GB
-large\*          | 8     | 16GB
+Class              | vCPUs | RAM
+-------------------|-------|-----
+medium (default)   | 4     | 8GB
+large<sup>(2)</sup>| 8     | 16GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -469,7 +489,7 @@ large\*          | 8     | 16GB
 jobs:
   build:
     macos:
-      xcode: "11.0.0"
+      xcode: "11.3.0"
     resource_class: large
     steps:
       ... // other config
@@ -478,37 +498,77 @@ jobs:
 ##### Windows Executor
 
 Class             | vCPUs | RAM
-------------------|-------|-----
+------------------|-------|------
 medium (default)  | 4     | 15GB
+large             | 8     | 30GB
+xlarge            | 16    | 60GB
+2xlarge           | 32    | 128GB
 {: class="table table-striped"}
-
-There is currently only one size of Windows Machine available, please let us know if you find yourself needing more.
 
 ###### Example Usage
 ```yaml
 version: 2.1
 
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.3.0
 
 jobs:
   build:
-    executor: win/vs2019
+    executor: win/default
     steps:
-      ... // other config
+      - run: Write-Host 'Hello, Windows'
 ```
+
+See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
 ##### GPU Executor (Linux)
 
-Class            | vCPUs | Memory (GiB) | GPUs | GPU Memory (*GiB)
------------------|-------|--------------|------|-----------------
-1GPU\*           | 16    | 122GiB       | 1    | 8
-2GPU\*           | 32    | 244GiB       | 2    | 16
-4GPU\*           | 64    | 488GiB       | 4    | 32
+Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+--------------------------------|-------|-----|------|-----------------|------------------
+gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
+gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+###### Example Usage
+```yaml
+version: 2.1
 
+jobs:
+  build:
+    machine:
+      resource_class: gpu.nvidia.small
+      image: ubuntu-1604-cuda-10.1:201909-23
+    steps:
+      - run: nvidia-smi
+      - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
+```
+
+See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
+
+##### GPU Executor (Windows)
+
+Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
+----------------------------------------|-------|-----|------|-----------------|------------------
+windows.gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+{: class="table table-striped"}
+
+###### Example Usage
+```yaml
+version: 2.1
+orbs:
+  win: circleci/windows@2.3.0
+
+jobs:
+  build:
+    executor: win/gpu-nvidia
+    steps:
+      - checkout
+      - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
+```
+
+<sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
+
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 #### **`steps`**
@@ -676,12 +736,16 @@ step that needs to upload logs or code-coverage data somewhere.
 
 A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
 
+**Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a step has failed previously.
+
 ``` YAML
 - run:
     name: Upload CodeCov.io Data
     command: bash <(curl -s https://codecov.io/bash) -F unittests
     when: always # Uploads code coverage results, pass or fail
 ```
+
+
 
 ###### Ending a Job from within a `step`
 
@@ -762,7 +826,7 @@ workflows:
 
 ##### **`checkout`**
 
-Special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -787,6 +851,8 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule update --init
 ```
 
+This command will automatically add the required authenticity keys for interacting with GitHub and Bitbucket over SSH, which is detailed further in our [integration guide]({{ site.baseurl }}/2.0/gh-bb-integration/#establishing-the-authenticity-of-an-ssh-host) – this guide will also be helpful if you wish to implement a custom checkout command.
+
 **Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
 ##### **`setup_remote_docker`**
@@ -804,7 +870,6 @@ version | N        | String | Version string of Docker you would like to use (de
 - A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
-
 
 ##### **`save_cache`**
 
@@ -937,7 +1002,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead:
   > **skipping deploy**
   > Running in SSH mode.  Avoid deploying.
-  
+
 When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
 
 - [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
@@ -1018,7 +1083,7 @@ test-results
 
 Special step used to persist a temporary file to be used by another job in the workflow.
 
-**Note:** Workspaces are stored for up to 30 days after being created. All jobs that try to use a Workspace older than 30 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+**Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 15 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1129,6 +1194,37 @@ steps:
 
 **Note:**
 Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
+
+##### Using `pipeline.` Values
+
+Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+
+Value                       | Description
+----------------------------|--------------------------------------------------------
+pipeline.id                 | A globally unique id representing for the pipeline
+pipeline.number             | A project unique integer id for the pipelin
+pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
+pipeline.project.type       | E.g. "github"
+pipeline.git.tag            | The tag triggering the pipeline
+pipeline.git.branch         | The branch triggering the pipeline
+pipeline.git.revision       | The current git revision
+pipeline.git.base_revision  | The previous git revision
+{: class="table table-striped"}
+
+For example:
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+    environment:
+      IMAGETAG: latest
+    working_directory: ~/main
+    steps:
+      - run: echo "This is pipeline ID << pipeline.id >>"
+```
 
 ## **`workflows`**
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
@@ -1295,23 +1391,39 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
-###### *Example*
+##### **Using `when` in Workflows**
+
+With CircleCI configuration v2.1, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with CircleCI API v2 pipeline triggering with parameters.
+
+The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+
+```yaml
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
+workflows:
+  version: 2
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+
+jobs:
+...
+```
+
+This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
 ```
-workflows:
-  version: 2
-
-  build_test_deploy:
-    jobs:
-      - flow
-      - downstream:
-          requires:
-            - flow
-          filters:
-            branches:
-              only: master
-            tags:
-              only: /v.*/
+{
+    "parameters": {
+        "run_integration_tests": true
+    }
+}
 ```
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.

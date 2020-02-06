@@ -13,7 +13,7 @@ order: 50
 
 初回のジョブを実行すると、その後のジョブインスタンスでは前回と同じ処理が不要になるため、その分高速化される仕組みです。
 
-![データフローのキャッシュ]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
+![データフローのキャッシュ]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
 わかりやすい例としては、Yarn や Bundler、Pip といった依存関係管理ツールが挙げられます。 キャッシュから依存関係を読み込むことで、複数のモジュールからなるパッケージであっても、`yarn install` などのコマンドは新たに必要になった依存ファイルのみダウンロードするだけでよくなります。
 

@@ -1,5 +1,5 @@
 = INSTALLATION GUIDE: A guide for installing and upgrading CircleCI Server on AWS.
-Docs Team
+docs@circleci.com
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/
 :doctype: book
@@ -11,6 +11,7 @@ Docs Team
 :idprefix:
 :idseparator: -
 :sectanchors:
+:autofit-option:
 
 :leveloffset: +1
 

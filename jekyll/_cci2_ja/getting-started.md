@@ -194,9 +194,13 @@ Workspaces の詳細については、[こちら](https://circleci.com/docs/ja/2
 *この場合、GitHub アカウントに SSH キーを追加する必要があることに注意してください。詳細については下記のリンクを参照してください。
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*
 
-![]({{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
-![]({{ site.baseurl }}/assets/img/docs/SSH-build-terminal-string.png)
+{:.tab.switcher.Cloud}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
+
+{:.tab.switcher.Server}
+![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
+
 
 ビルドの SSH の有効化セクションから、`ssh` の接続先をコピーします。 ターミナルを開き、`ssh` の接続先を貼り付けます。
 

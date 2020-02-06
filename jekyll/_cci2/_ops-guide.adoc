@@ -1,5 +1,5 @@
 = OPERATIONS GUIDE: A guide for administrators of CircleCI Server installations on AWS and private infrastructure.
-Docs Team
+docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/
@@ -12,6 +12,7 @@ Docs Team
 :idprefix:
 :idseparator: -
 :sectanchors:
+:autofit-option:
 
 :leveloffset: +1
 

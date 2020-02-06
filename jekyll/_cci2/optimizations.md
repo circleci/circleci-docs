@@ -19,7 +19,7 @@ application, go to `Settings > Plan Settings` to make adjustments to your plan.
 
 ## Docker Image Choice
 
-Choosing the right docker image for your project can have huge impact on built time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
+Choosing the right docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI provides a range of [convenience images](https://circleci.com/docs/2.0/circleci-images/#section=configuration), typically based on official Docker images, but with a range of useful language tools pre-installed.
 * You can [create your own images](https://circleci.com/docs/2.0/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide both a [Docker image build wizard](https://github.com/circleci-public/dockerfile-wizard), and [guidance for building images manually](https://circleci.com/docs/2.0/custom-images/#creating-a-custom-image-manually).
@@ -62,7 +62,7 @@ Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows/).
 
-**Note**: Workflows are available to all plans, but running parallel jobs assumes that your plan provides multiple machines to execute on.
+**Note**: Workflows are available to all plans, but running jobs concurrently assumes that your plan provides multiple machines to execute on.
 
 ```yaml
 version: 2.1
@@ -82,7 +82,7 @@ jobs: # here we define two jobs: "build" and "test"
 workflows: # Here we can orchestrate our jobs into a workflow
   version: 2
   build_and_test: # A single workflow named "build_and_test"
-    jobs: # we run our `build` job and `test` job in parallel.
+    jobs: # we run our `build` job and `test` job concurrently.
       - build
       - test
 ```
@@ -104,7 +104,7 @@ Read more about how to use workspaces in the [workflows document]({{site.baseurl
 
 **Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
 
-If your project has a large test suite, you can configure your build to use  [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests)
 to split your tests across multiple machines. CircleCI supports automatic test
 allocation across machines on a file-basis, however, you can also manually
 customize how tests are allocated.
@@ -123,9 +123,9 @@ Read more in-depth about splitting tests in our [document on parallelism]({{site
 
 ## Resource Class
 
-**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account.
+**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job as described in [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class). If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. The `resource_class` key is currently only available for use with the `docker` executor.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class) for a list of available classes, and for self hosted installations contact your system administrator for a list. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
 
 Below is an example use case of the `resource_class` feature.
 
