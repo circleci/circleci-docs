@@ -16,7 +16,7 @@ Once you have configured your platform to work with CircleCI orbs, you are ready
 Before you create your first orb, please see the following notes:
 
 * Orbs exist in namespaces.
-* Each organization or username can claim one unique namespace.
+* Each organization or username can claim one unique namespace, and **namespaces cannot be deleted.**
 * Namespaces are global within the CircleCI orb registry, so pick a unique name!
 * Only users with "owner"/"administrator" privileges within a given GitHub/Bitbucket organization can create a namespace linked to that organization.
 * Once an orb has been created by an org admin, any org member can publish `dev` orbs. When ready, `dev` orbs can be promoted into production by org admins.
