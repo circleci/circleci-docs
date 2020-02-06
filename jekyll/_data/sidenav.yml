@@ -294,14 +294,14 @@ en:
 - name: Server Administration
   icon: docs/admin.svg
   children:
-    - name: Server v2.18.3 Install
+    - name: Server v2.19 Install
       link: 2.0/install-overview/
       children:
         - name: Overview
           link: 2.0/install-overview/
-        - name: What's New in v2.18
-          link: 2.0/v.2.18-overview/
-        - name: Upgrade to v2.18.3
+        - name: What's New in v2.19
+          link: 2.0/v.2.19-overview/
+        - name: Upgrade to v2.19
           link: 2.0/updating-server/
         - name: System Requirements
           link: 2.0/server-ports/
@@ -315,7 +315,7 @@ en:
           link: 2.0/upgrading/
         - name: Trial Single-box Install
           link: 2.0/single-box/
-    - name: Server v2.18.3 Operations
+    - name: Server v2.19 Operations
       link: 2.0/overview/
       children:
         - name: Overview
@@ -360,15 +360,24 @@ en:
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
+    - name: Server v2.19 PDFs
+      link: 2.0/v.2.19-overview/
+      children:
+        - name: What's New in v2.19
+          link: 2.0/v.2.19-overview/
+        - name: v2.19 Installation Guide
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+        - name: v2.19 Operations Guide
+          link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.18 PDFs
       link: 2.0/v.2.18-overview/
       children:
         - name: What's New in v2.18
           link: 2.0/v.2.18-overview/
         - name: v2.18 Installation Guide
-          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
         - name: v2.18 Operations Guide
-          link: 2.0/CircleCI-Server-Operations-Guide.pdf
+          link: 2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
     - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
       children:
