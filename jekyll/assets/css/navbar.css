@@ -23,12 +23,13 @@
       width: auto;
       height: auto;
       overflow: visible; }
-  .nav-toggle.two .widescreen .logo {
+  .nav-toggle.two .widescreen a.logo {
     position: absolute;
-    height: 35px;
     top: 18px;
     left: 0;
     z-index: 3; }
+  .nav-toggle.two .widescreen img.logo {
+    height: 35px; }
   .nav-toggle.two .widescreen a:not(.btn):not(.btn-primary):not(.btn-secondary):not(.btn-primary-enterprise):not(.btn-secondary-enterprise):not(.btn-secondary-enterprise-ico) {
     color: inherit;
     text-decoration: none; }
