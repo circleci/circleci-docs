@@ -20,7 +20,7 @@
   <div class="hits-target"></div>
 	<div class="main-body">
 		{% include sidebar.html %}
-		<div class="article-container docs">
+		<div class="article-container docs" id="main">
 			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
 			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
