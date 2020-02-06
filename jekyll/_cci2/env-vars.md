@@ -147,7 +147,6 @@ jobs:
       - BASH_ENV: /etc/profile
 ```
 
-
 ## Setting an Environment Variable in a Shell Command
 
 While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-bash_env-to-set-environment-variables). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
@@ -275,8 +274,7 @@ $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
-Decode the variable in any commands
-that use the variable.
+Decode the variable in any commands that use the variable.
 
 ```bash
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
@@ -389,7 +387,7 @@ Variable                    | Type    | Value
 `CIRCLE_REPOSITORY_URL`     | String  | The URL of your GitHub or Bitbucket repository.
 `CIRCLE_SHA1`               | String  | The SHA1 hash of the last commit of the current build.
 `CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag).
-`CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the build.
+`CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who committed the build.
 `CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 `CIRCLE_WORKING_DIRECTORY`  | String  | The value of the `working_directory` key of the current job.
 `CIRCLECI`                  | Boolean | `true` (represents whether the current environment is a CircleCI environment)
