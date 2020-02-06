@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This section describes how to configure CircleCI to use an HTTP proxy.
 

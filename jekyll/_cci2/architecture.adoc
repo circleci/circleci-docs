@@ -8,7 +8,7 @@
 //:circle-warning: image:circle-warning.png[]
 //:circle-failure: image:circle-failure.png[]
 
-include::../_includes/snippets/server-only.adoc[]
+include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This document outlines the containerized services that run on the Services machine within a CircleCI Server installation. This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 

@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This document outlines security features built into CircleCI and related integrations.
 

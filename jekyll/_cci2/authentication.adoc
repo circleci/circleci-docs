@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This document describes the various ways users of your CircleCI Server installation can get access and authenticate their accounts. Currently OAuth and LDAP are supported as authentication methods.
 

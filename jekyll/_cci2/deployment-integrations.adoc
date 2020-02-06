@@ -57,7 +57,7 @@ Under the hood, this orb creates, bundles and deploys your application using you
 
 In this section we will look at a simple example of deploying a Rails application to Heroku. 
 
-==== Using the Heroku Orb
+=== Using the Heroku Orb
 
 Below is a Heroku Deployment example using the https://circleci.com/orbs/registry/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
@@ -96,7 +96,7 @@ jobs:
           command: rake
 ```
 
-==== 2.0 config
+=== 2.0 config
 
 This version shows the same pipeline, but without using the orb. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]
 

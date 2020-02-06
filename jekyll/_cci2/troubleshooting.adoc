@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, please https://help.replicated.com/docs/native/packaging-an-application/support-bundle/[generate a support bundle] and contact our Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
 
