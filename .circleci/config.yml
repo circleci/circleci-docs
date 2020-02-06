@@ -47,7 +47,10 @@ workflows:
   build-deploy:
     jobs:
       - js_build
-      - build_server_pdfs
+      - build_server_pdfs:
+          filters:
+            branches:
+              only: /server\/*/
       - build_api_docs
       - build:
           requires:

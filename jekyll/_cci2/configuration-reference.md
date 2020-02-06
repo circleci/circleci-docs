@@ -132,7 +132,7 @@ If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have 
 If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
 **Note:**
-Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them in parallel.
+Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 
@@ -459,9 +459,11 @@ jobs:
 ##### Machine Executor (Linux)
 
 Class            | vCPUs | RAM
------------------|-------|-------
+-----------------|-------|------
 medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
+xlarge           | 8     | 32GB
+2xlarge          | 16    | 64GB
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -496,10 +498,11 @@ jobs:
 ##### Windows Executor
 
 Class             | vCPUs | RAM
-------------------|-------|-----
+------------------|-------|------
 medium (default)  | 4     | 15GB
 large             | 8     | 30GB
 xlarge            | 16    | 60GB
+2xlarge           | 32    | 128GB
 {: class="table table-striped"}
 
 ###### Example Usage

@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-{% include snippets/server-only.adoc %}
+include::../_includes/snippets/server-only.adoc[]
 
 The following sections summarize the key files and variables that impact CircleCI Server behavior, and configuration options for your Server installation.
 
@@ -149,7 +149,7 @@ WARNING: It is important to use the IDs listed in the example below for both `ma
 . Run:
 +
 ```shell
-echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/etc/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
+echo 'export CIRCLE_DISPATCHER_RESOURCE_DEF=/circleconfig/picard-dispatcher/resource-definitions.edn' | sudo tee /etc/circleconfig/picard-dispatcher/customizations
 ```
 . Restart the CircleCI Server application. The application can be stopped and started again from the Management Console Dashboard (for example, `<circleci-hostname>.com:8800`).
 
@@ -162,13 +162,13 @@ Example config:
 
  :resource-classes
  {:docker
-  {:small {:id "d1.small" :ga true :ui {:cpu 2.0 :ram 4096 :class :small} :outer {:cpu 2.0 :ram 4096}}
-   :medium {:id "d1.medium" :ga true :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}}
-   :massive {:id "d1.massive" :ga true :ui {:cpu 7.0 :ram 28000 :class :massive} :outer {:cpu 7.0 :ram 28000}}}
+  {:small {:id "d1.small" :availability :general :ui {:cpu 2.0 :ram 4096 :class :small} :outer {:cpu 2.0 :ram 4096}}
+   :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}}
+   :massive {:id "d1.massive" :availability :general :ui {:cpu 7.0 :ram 28000 :class :massive} :outer {:cpu 7.0 :ram 28000}}}
 
   :machine
-  {:medium {:id "l1.medium" :ga true :ui {:cpu 2.0 :ram 7680 :class :medium} :outer {:cpu 2.0 :ram 256}}
-   :large {:id "l1.large" :ga true :ui {:cpu 4.0 :ram 16000 :class :large} :outer {:cpu 2.0 :ram 256}}}}}
+  {:medium {:id "l1.medium" :availability :general :ui {:cpu 2.0 :ram 7680 :class :medium} :outer {:cpu 2.0 :ram 256}}
+   :large {:id "l1.large" :availability :general :ui {:cpu 4.0 :ram 16000 :class :large} :outer {:cpu 2.0 :ram 256}}}}}
 ```
 
 Let's take a look at one of the options in more detail

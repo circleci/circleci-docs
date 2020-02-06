@@ -84,7 +84,7 @@ orbs:
 ```
 
 #### 2. Add _Workflow-Collector_ to Workflow.
-The `workflow-collector` job runs in parallel along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
+The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
 
 ```yaml
 version: 2.1

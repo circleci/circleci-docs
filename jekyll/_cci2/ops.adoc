@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-{% include snippets/server-only.adoc %}
+include::../_includes/snippets/server-only.adoc[]
 
 This chapter describes system checks and the basics of user management.
 

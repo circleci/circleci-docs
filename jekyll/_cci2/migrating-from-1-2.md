@@ -115,7 +115,7 @@ To increase the speed of your software development through faster feedback, shor
        version: 2
        <workflow_name>:
      ```  
-3. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run in parallel.
+3. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run concurrently.
  
      ```
      workflows:

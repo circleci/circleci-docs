@@ -6,7 +6,7 @@
 :toc-title:
 :sectanchors:
 
-{% include snippets/server-only.adoc %}
+include::../_includes/snippets/server-only.adoc[]
 
 This section includes information on metrics for monitoring your CircleCI Server installation.
 
