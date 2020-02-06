@@ -6,7 +6,7 @@
 :toc-title:
 :sectanchors:
 
-include::../jekyll/_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Winows images) and remote Docker jobs.
 

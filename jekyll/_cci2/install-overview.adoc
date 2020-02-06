@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../jekyll/_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 The following sections provide planning information, system requirements and step-by-step instructions for installing CircleCI Server on Amazon Web Services (AWS) with Terraform.
 
