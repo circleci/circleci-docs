@@ -133,7 +133,7 @@ When GitHub prompts you
 to authorize CircleCI,
 click the **Authorize application** button.
 
-4. On the [Add Projects](https://circleci.com/add-projects/gh){:rel="nofollow"} page,
+4. From the Add Projects page,
 follow all projects
 you want the machine user to have access to.
 
