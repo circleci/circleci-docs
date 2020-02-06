@@ -360,14 +360,14 @@ en:
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
-    - name: Server v2.18 PDFs
+    - name: Server v2.18.3 PDFs
       link: 2.0/v.2.18-overview/
       children:
         - name: What's New in v2.18
           link: 2.0/v.2.18-overview/
-        - name: v2.18 Installation Guide
+        - name: v2.18.3 Installation Guide
           link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
-        - name: v2.18 Operations Guide
+        - name: v2.18.3 Operations Guide
           link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
