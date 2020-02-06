@@ -21,15 +21,15 @@ or you suspect that an **organization rename might have happened at any point**.
 . Go to this link for the https://gist.githubusercontent.com/BoVice/49a5a98e93508e7913b7d62d6e5de68b/raw/e354eb42a97ca509809eaafe7b28052481702b9e/org-rename.cjl[org rename script]. Copy/paste this script into the REPL session. It will run migration and output current progress.
 . If any `ERROR` messages are present in the output please report back to your CSM or reach out to support.
 
+== Nomad Launch Configuration
+
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients-2190#,this guide>> to update your nomad launch configuration.
+
 == Upgrade Steps Overview
 
-Following is an overview of the CircleCI Server upgrade steps. Each stage is described in detail below.
+Follow these stept to upgrade your CircleCI Server version.
 
-* Take a <<1-snapshot-for-rollback,snapshot>> of your installation so you can rollback later if necessary (optional but recommended)
-* Update <<2-updating-replicated,Replicated>> and check you are running Docker v17.12.1, update if necessary
-* <<3-upgrade-circleci-server,Install the latest version of CircleCI Server>>
-
-=== 1. Snapshot for Rollback
+=== 1. Snapshot for Rollback (optional but recommended)
 
 To take a snapshot of your installation:
 
