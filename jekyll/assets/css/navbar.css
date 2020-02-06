@@ -6,6 +6,23 @@
   top: 0;
   color: #FFFFFF;
   height: 70px; }
+  /* https://www.bignerdranch.com/blog/web-accessibility-skip-navigation-links/ */
+  .nav-toggle.two a.nav-skip-button {
+    position: absolute;
+    top: -1000px;
+    left: -1000px;
+    height: 1px;
+    width: 1px;
+    text-align: left;
+    overflow: hidden; }
+    .nav-toggle.two a.nav-skip-button:active,
+    .nav-toggle.two a.nav-skip-button:focus,
+    .nav-toggle.two a.nav-skip-button:hover {
+      left: 0;
+      top: 0;
+      width: auto;
+      height: auto;
+      overflow: visible; }
   .nav-toggle.two .widescreen .logo {
     position: absolute;
     height: 35px;
