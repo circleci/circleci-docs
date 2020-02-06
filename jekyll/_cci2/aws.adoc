@@ -6,7 +6,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 Following is a step by step guide to installing CircleCI Server v{serverversion} with Terraform.
 

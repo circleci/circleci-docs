@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 To update your CircleCI Server installation, see our https://circleci.com/docs/2.0/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
 
