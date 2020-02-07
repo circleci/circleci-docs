@@ -40,7 +40,9 @@ NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled 
 .Example tfvars
 image::tfvars.png[terraform.tfvars]
 
-Above is an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory.
+Above is an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory. 
+
+TIP: If you require your installation to work on AWS GovCloud, you can enable this by setting `enable_govcloud` to `true`.
 
 Optional vars:
 
@@ -83,6 +85,10 @@ Optional vars:
 | enable_route
 | Enable creating a Route53 route for the Services box
 | 0
+
+| enable_govcloud
+| Allows deployment into AWS GovCloud
+| false
 
 | services_user_data_enabled
 | Set to 0 to disable automated installation on Services Box
