@@ -48,7 +48,8 @@ asciidoc:
       serverversion: 2.18.3
 
 asciidoctor:
-  safe: 0
+  base_dir: _cci2/
+  safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
