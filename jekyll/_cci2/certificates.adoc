@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::_snippet-server-only.adoc[]
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing certificate.
 

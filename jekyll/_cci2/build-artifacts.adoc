@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::_snippet-server-only.adoc[]
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 Build artifacts persist data after a job is completed. They can be used for longer-term storage of your build process outputs. For example, when a Java build/test process finishes, the output of the process is saved as a `.jar` file. CircleCI can store this file as an artifact, keeping it available long after the process has finished.
 

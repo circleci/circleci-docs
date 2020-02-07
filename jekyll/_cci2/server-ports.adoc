@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::_snippet-server-only.adoc[]
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This section defines the system and port access requirements for installing CircleCI v{serverversion}.
 

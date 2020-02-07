@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::_snippet-server-only.adoc[]
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 To update your CircleCI Server installation, see our https://circleci.com/docs/2.0/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
 

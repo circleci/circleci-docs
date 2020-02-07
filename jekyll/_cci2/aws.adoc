@@ -6,7 +6,7 @@
 :toc: macro
 :toc-title:
 
-include::_snippet-server-only.adoc[]
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 Following is a step by step guide to installing CircleCI Server v{serverversion} with Terraform.
 
