@@ -27,7 +27,7 @@ or you suspect that an **organization rename might have happened at any point**.
 
 == Upgrade Steps Overview
 
-Follow these stept to upgrade your CircleCI Server version.
+Follow these steps to upgrade your CircleCI Server version.
 
 === 1. Snapshot for Rollback
 
