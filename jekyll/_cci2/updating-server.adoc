@@ -5,11 +5,15 @@
 :toc: macro
 :toc-title:
 
-inclu[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v{serverversion}. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v2.18.3, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
 
 toc::[]
+
+== Nomad Launch Configuration
+
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
 
 == Org Rename Script
 
@@ -20,10 +24,6 @@ or you suspect that an **organization rename might have happened at any point**.
 . REPL into `workflows-conductor` by running the following: `sudo docker exec -it workflows-conductor lein repl :connect 6005`
 . Go to this link for the https://gist.githubusercontent.com/BoVice/49a5a98e93508e7913b7d62d6e5de68b/raw/e354eb42a97ca509809eaafe7b28052481702b9e/org-rename.cjl[org rename script]. Copy/paste this script into the REPL session. It will run migration and output current progress.
 . If any `ERROR` messages are present in the output please report back to your CSM or reach out to support.
-
-== Nomad Launch Configuration
-
-WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients-2190#,this guide>> to update your nomad launch configuration.
 
 == Upgrade Steps Overview
 

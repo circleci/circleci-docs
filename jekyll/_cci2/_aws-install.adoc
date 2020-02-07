@@ -27,4 +27,6 @@ include::aws-teardown.adoc[]
 
 include::updating-server.adoc[]
 
+include::update-nomad-clients.adoc[]
+
 :leveloffset: -1

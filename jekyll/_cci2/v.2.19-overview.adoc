@@ -9,7 +9,7 @@ This document provides a summary of features and product notes for the release o
 
 ## Requirements for Upgrading
 
-WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients-2190#,this guide>> to update your nomad launch configuration.
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
 
 CAUTION: If at any time your organization name has been changed, there is a <<updating-server#org-rename-script,script>> that *must* be run before stating the upgrade process. If you are already running v2.18.x, you will have run this already.
 

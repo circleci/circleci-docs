@@ -1,33 +1,39 @@
-# 2.19.0 Nomad Client Launch Configuration Update
+= Nomad Client Launch Configuration Update
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
 
 ## IMPORTANT
 
+WARNING: This update must be run before upgrading to Server v2.19
+
 * **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.  
 * This change is only compatible with CircleCI Server versions greater than or equal to 2.19.0 
-
-* If you are using the Static version of CircleCI Server, you will need to recreate your builders manually.  Refer to the guide linked [here](https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients) for the updated scripts and further instruction.
+* If you are using the Static version of CircleCI Server, you will need to recreate your builders manually. Refer to the guide linked https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[here] for the updated scripts and further instruction.
 
 
 
 ### Sign in to AWS
 
-1. Login to the AWS
-2. Select the region that your CircleCI Server (Server) resides in
-3. Select the `Services` tab and select `EC2`
+. Login to the AWS
+. Select the region that your CircleCI Server (Server) resides in
+. Select the `Services` tab and select `EC2`
 
 
 
 ### Find the Launch Configuration and Service Box IP address
 
-1. Select `Auto Scaling Groups` located near the bottom of the left navigation pane
-2. Select the auto scaling group configuration associated with your Server installation.  Typically resembles `*-ghe_nomad_clients_asg`
-3. Make note of the name of `Launch Configuration` under the `Details` tab.  Typically resembles `terraform-20200114212820082700000001`
-4. In the left navigation pane, select `Launch Configurations`
-5. Locate the launch configuration that matches the one found in step 3.
-6. In the bottom pane, select the `View User Data ` link
-7. Scroll down or search for the `Creating config.hcl` section.  
-8. Write down or copy the service box private IP address located in the client portion of the config located next to `servers = ["IP_ADDRESS:4647"]` You will need this in the next step.
-
+. Select `Auto Scaling Groups` located near the bottom of the left navigation pane
+. Select the auto scaling group configuration associated with your Server installation. Typically resembles `*-ghe_nomad_clients_asg`
+. Make note of the name of `Launch Configuration` under the `Details` tab. Typically resembles `terraform-20200114212820082700000001`
+. In the left navigation pane, select `Launch Configurations`
+. Locate the launch configuration that matches the one found in step 3.
+. In the bottom pane, select the `View User Data ` link
+. Scroll down or search for the `Creating config.hcl` section.  
+. Write down or copy the service box private IP address located in the client portion of the config located next to `servers = ["IP_ADDRESS:4647"]` You will need this in the next step.
++
 ```
 ...
 ...
@@ -45,25 +51,25 @@ client {
 
 ### Create a New Launch Configuration 
 
-1. Right-click the launch configuration and select `Copy Launch Configuration` 
-2. At the top of the screen, select `3. Configure details `
-3. Update the name to something meaningful and easy to identify IE `nomad-client-lc-20200117`
-4. Select the `Advanced Details` dropdown
-5. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.  
-6. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box. 
-7. Select the `Skip to review` button at the bottom right of the screen
-8. Select the `Create Launch Configuration` Button
-9. Verify that the SSH key-pair name is correct and select `Create launch configuration` button
+. Right-click the launch configuration and select `Copy Launch Configuration` 
+. At the top of the screen, select `3. Configure details `
+. Update the name to something meaningful and easy to identify IE `nomad-client-lc-20200117`
+. Select the `Advanced Details` dropdown
+. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.  
+. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box. 
+. Select the `Skip to review` button at the bottom right of the screen
+. Select the `Create Launch Configuration` Button
+. Verify that the SSH key-pair name is correct and select `Create launch configuration` button
 
 
 
 ### Update the Auto Scaling group 
 
-1. Return the `Auto Scaling Groups` page
-2. Locate the auto scaling group we identified in the `Find the Launch Configuration and Service Box IP address` section above
-3. Right-click the auto scaling group and select `Edit` from the menu
-4. Select the launch configuration created in the previous section from the `Launch Configuration` drop-down menu.
-5. Press the `Save` button
+. Return the `Auto Scaling Groups` page
+. Locate the auto scaling group we identified in the `Find the Launch Configuration and Service Box IP address` section above
+. Right-click the auto scaling group and select `Edit` from the menu
+. Select the launch configuration created in the previous section from the `Launch Configuration` drop-down menu.
+. Press the `Save` button
 
 
 
@@ -80,19 +86,19 @@ Please use whatever works best with your existing methods of auto scaling group 
 
 ### Verify the New Nomad Clients are Communicating with Nomad Server
 
-1. SSH into the CircleCI Services Box
+. SSH into the CircleCI Services Box
 
-2. Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
+. Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
++
+```
+ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
+sudo: unable to resolve host govcloud-service-box
+ID        DC         Name                 Class        Drain  Eligibility  Status
+0cf07b07  default    i-070fdad5f0edef4c8  linux-64bit  false  eligible     ready
+ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
+```
 
-   ```
-   ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
-   sudo: unable to resolve host govcloud-service-box
-   ID        DC         Name                 Class        Drain  Eligibility  Status
-   0cf07b07  default    i-070fdad5f0edef4c8  linux-64bit  false  eligible     ready
-   ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
-   ```
-
-3. Verify that there are new builders containing the `default` DC name and they are in a `ready` state.
+. Verify that there are new builders containing the `default` DC name and they are in a `ready` state.
 
 
 
