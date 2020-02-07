@@ -22,3 +22,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 ## What's New in Release 2.19
 
 ADD IN ONCE CHANGELOG IS READY
+
+## Known Issues
+
+* The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow <<authentication#grant-admin-access-to-user,this guide>> for a workaround.

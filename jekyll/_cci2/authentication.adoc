@@ -62,6 +62,43 @@ A user who logs in will be redirected to the Accounts page of the CircleCI appli
 
 NOTE: A user who has authenticated with LDAP and is then removed from LDAP/AD will be able to access CircleCI as long as they stay logged in (because of cookies). As soon as the user logs out or the cookie expires, they will not be able to log back in. A users' ability to see projects or to run builds is defined by their GitHub permissions. Therefore, if GitHub permissions are synced with LDAP/AD permissions, a removed LDAP/AD user will automatically lose authorization to view or access CircleCI as well.
 
+=== Known Issue
+
+The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. See the steps below for a workaround.
+
+==== Grant Admin Access to User
+
+NOTE: If you are unfamiliar with using REPL please contact customer support before running these steps.
+
+*For a given user by LDAP user name (prior to GitHub account connection, or if they have no GitHub account):*
+
+```sh
+(-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-ldap-username" :first_vcs_authorized_client_id nil} :limit 1)
+    (first)
+    (circle.model.user/set-fields! {:admin "all"})
+    (:analytics-id)
+    (circle.services.domain/delete-user-cache))
+```
+
+*By GitHub user name (after to GitHub account connection, which replaces prior :login value):*
+
+```sh
+(-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-github-username"} :limit 1)
+    (first)
+    (circle.model.user/set-fields! {:admin "all"})
+    (:analytics-id)
+    (circle.services.domain/delete-user-cache))
+```
+
+*By analytics ID*
+
+```sh
+(-> (circle.model.user/find-one-by-analytics-id "3b35037c-6eb3-4e41-88e2-3913b2f43d96")
+    (circle.model.user/set-fields! {:admin "all"})
+    (:analytics-id)
+    (circle.services.domain/delete-user-cache))
+```
+
 === Troubleshooting
 
 Troubleshoot LDAP server settings with LDAP search as follows:
