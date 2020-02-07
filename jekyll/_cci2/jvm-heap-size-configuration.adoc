@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-//include::../jekyll/_includes/snippets/server-only.adoc[]
+include::_snippet-server-only.adoc[]
 
 The JVM heap size is configurable for the following containers: `frontend`, `test-results`, `output-processing` and `contexts-service`. You might want to consider increasing the heap size if you see "out of memory" errors, such as: `Terminating due to java.lang.OutOfMemoryError: Java heap space`.
 

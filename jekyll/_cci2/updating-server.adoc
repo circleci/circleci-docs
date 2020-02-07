@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-//include::../jekyll/_includes/snippets/server-only.adoc[]
+include::_snippet-server-only.adoc[]
 
 This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v{serverversion}. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v2.18.3, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
 
