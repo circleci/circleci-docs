@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This section defines the system and port access requirements for installing CircleCI v{serverversion}.
 

@@ -7,6 +7,7 @@
 
 == List of jobs to complete before releasing
 
+* Make sure the latest version PDFs contain the most up to date content and display the latest patch release number.
 * Set the release version within the PDF build script (`$VERSION`) and also within the Jekyll `_config.yml` under both asciidoc attributes called `serverversion`.
 * Make operational changes required for the release.
 * If anything has changed about the installation or upgrade process, point these out in the relevant docs.

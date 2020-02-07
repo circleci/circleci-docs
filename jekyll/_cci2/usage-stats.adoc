@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 This chapter is for System Administrators who want to automatically send some aggregate usage statistics to CircleCI. Usage statistics data enhances visibility into CircleCI installations and is used to better support you and ensure a smooth transition from CircleCI 1.0 to CircleCI 2.0.
 

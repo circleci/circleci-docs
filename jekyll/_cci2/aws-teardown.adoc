@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-include::../_includes/snippets/server-only.adoc[]
+//include::../jekyll/_includes/snippets/server-only.adoc[]
 
 If you wish to delete your installation of CircleCI Server, please let us know first in case there are any specific, supplementary steps required for your installation. Below is our basic step by step guide to tearing down an installation of CircleCI Server that was made with Terraform:
 
