@@ -18,6 +18,8 @@ docs@circleci.com
 
 include::overview.adoc[]
 
+include::v.2.19-overview[]
+
 include::nomad.adoc[]
 
 include::monitoring.adoc[]
