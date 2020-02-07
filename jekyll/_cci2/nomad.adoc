@@ -6,7 +6,7 @@
 :toc-title:
 :sectanchors:
 
-//include::../jekyll/_includes/snippets/server-only.adoc[]
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 
