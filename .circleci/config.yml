@@ -50,7 +50,7 @@ workflows:
       - build_server_pdfs:
           filters:
             branches:
-              only: /server\/*/
+              only: server/*
       - build_api_docs
       - build:
           requires:
