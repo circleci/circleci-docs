@@ -226,7 +226,7 @@ jobs:
       ### NOTE: we are ignore some files in the HTML proofer as it fails on pending translated docs.
       - run:
           name: Test with HTMLproofer
-          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/v.19-overview/,/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
       - store_artifacts: # stores the built files of the Jekyll site
           path: jekyll/_site/docs/
