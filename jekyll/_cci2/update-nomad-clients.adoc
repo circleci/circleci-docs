@@ -92,7 +92,6 @@ Please use whatever works best with your existing methods of auto scaling group 
 +
 ```
 ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
-sudo: unable to resolve host govcloud-service-box
 ID        DC         Name                 Class        Drain  Eligibility  Status
 0cf07b07  default    i-070fdad5f0edef4c8  linux-64bit  false  eligible     ready
 ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
