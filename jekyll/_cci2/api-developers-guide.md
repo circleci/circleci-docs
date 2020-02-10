@@ -125,6 +125,8 @@ For more detailed information about HTTP status codes, refer to the [rest api tu
 
 The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a "demo repository" called "hello-world", however, you can use a pre-existing repository to follow along if you choose.
 
+**NOTE:** Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api). 
+
 ## Prerequisites
 
 * A GitHub or BitBucket account with a repository to setup with CircleCI.
@@ -163,7 +165,7 @@ The following section details the steps you would need, from start to finish, to
     curl --header "Circle-Token: $CIRCLECI_TOKEN" \
       --header 'Accept: application/json'    \
       --header 'Content-Type: application/json' \
-      https://circleci.com/api/v2/project/{VCS}/{user_name}/hello-world/pipeline 
+      https://circleci.com/api/v2/project/{project-slug}/pipeline 
     ```
 
     You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
@@ -205,7 +207,7 @@ The following section details the steps you would need, from start to finish, to
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/{VCS}/{user_name}/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
@@ -222,7 +224,7 @@ The following section details the steps you would need, from start to finish, to
     While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
-    curl -X POST https://circleci.com/api/v2/project/{VCS}/{user_name}/hello-world/pipeline \
+    curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLE_TOKEN" \
@@ -256,7 +258,7 @@ The following section details the steps you would need, from start to finish, to
       "parameters": {
         "image-tag": "4.8.2"
       }
-    }' https://circleci.com/api/v2/project/{VCS}/{user_name}/hello-world/pipeline
+    }' https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
 This concludes the end-to-end example of using the V2 API. For more detailed information about other endpoints you may wish to call, please refer to the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currently available.
@@ -419,7 +421,7 @@ The following section details the steps you need to follow to download artifacts
 3.  Next, use the `curl` command to return a list of artifacts for a specific job. 
 
     ```sh
-    curl -X GET https://circleci.com/api/v2/project/{VCS}/{org_name}/{repo_name}/{job_number}/artifacts \
+    curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" 
@@ -458,7 +460,7 @@ The following section details the steps you need to follow to download artifacts
 4. Next, you may extend this API call to download the artifacts. Navigate to the location you would like to download the artifacts to, and run the following command, remembering to substitute your own values in the request:
 
      ```sh
-    curl -X GET https://circleci.com/api/v2/project/{VCS}/{org_name}/{repo_name}/{job_number}/artifacts \
+    curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
