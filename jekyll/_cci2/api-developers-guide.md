@@ -490,7 +490,7 @@ Before working with the API and making calls, you should first have an understan
 
 | Endpoint                                  | Description                                                         | 
 |-------------------------------------------|---------------------------------------------------------------------|
-| GET /pipeline/{pipeline-id}               | Returns an individual pipeline.                                     |
+| GET /project/{project-slug}/pipeline/{pipeline-number}  | Returns an individual pipeline.                       |
 | GET /pipeline/{pipeline-id}/config        | Returns the configuration of a specific pipeline.                   |
 | GET /pipeline/{pipeline-id}/workflow      | Returns a list of workflows for a specific pipeline.                |
 | POST /project/{project-slug}/pipeline     | Triggers a pipeline.                                                |
