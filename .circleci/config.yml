@@ -186,6 +186,9 @@ jobs:
       - checkout
       - *attach_workspace
       - run:
+          name: check bundler version
+          command: bundler --version
+      - run:
           name: "Test Markdown Files"
           command: |
             wget https://github.com/felicianotech/md-proofer/releases/download/v0.3.0/md-proofer--v0.3.0--linux-amd64.tar.gz
