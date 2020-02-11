@@ -5,11 +5,11 @@
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI Server v{serverversion}. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v{serverversion}, see our <<updating-server#,upgrade guide>>.
+This document provides a summary of features and product notes for the release of CircleCI Server v{serverversion}. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v{serverversion}, see our <<updating-server#upgrade,upgrade guide>>.
 
 ## Requirements for Upgrading
 
-WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
+WARNING: For AWS installs, *before upgrading* to v{serverversion}, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
 
 CAUTION: If at any time your organization name has been changed, there is a <<updating-server#org-rename-script,script>> that *must* be run before stating the upgrade process. If you are already running v2.18.x, you will have run this already.
 
@@ -17,12 +17,28 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 * We now require a minimum 32GB of RAM for the Services Machine. 
 * We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
-* We have also made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to 2.18.
+* We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to {serverversion}.
 
 ## What's New in Release 2.19
 
-ADD IN ONCE CHANGELOG IS READY
+* You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in Server v2.19].
+
+* CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
+
+* The image used to run the RabbitMQ server has been updated to fix vulnerabilities.
 
 ## Known Issues
 
-* The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow <<authentication#grant-admin-access-to-user,this guide>> for a workaround.
+* Github API call integration has been improved to reduce the chances of getting rate-limited errors.
+
+* Auto Cancel setting (project settings > advanced settings) does not work when workflows are in use.
+
+* New branches do not show up in UI branch pickers without a hard refresh.
+
+* Deleting branches on GitHub repo does not remove the branch from the UI branch picker.
+
+* When a workflow is cancelled, the cancelled status does not show up on the UI for a long time or until refreshed.
+
+* The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
+
+* Occasionally, when using SSO and GitHub Enterprise, users can experience issues running jobs that contain contexts. Contact Support for reauthorization steps if you experience this issue.

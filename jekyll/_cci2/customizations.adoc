@@ -145,7 +145,7 @@ sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
 +
-WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resources classes. 
+WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resource classes. 
 . Run:
 +
 ```shell
@@ -185,7 +185,7 @@ Let's take a look at one of the options in more detail
 
 CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to allocate the resources required. If not, the job will be queued. See our <<nomad-metrics#configuring-nomad-client-metrics,Nomad metrics guide>> for information on monitoring the capacity of your Nomad cluster.
 
-
+////
 ==== Enable the Large Resource Class for Machine Executor
 _Introduced in CircleCI Server v2.19_
 
@@ -204,6 +204,7 @@ circleci dev-console
 ```
 (admin/set-project-feature-by-url "<github_url_of_project>" :picard-allowed-resource-classes #{"l1.large"})
 ```
+////
 
 === Login Screen
 _Introduced in CircleCI Server v2.17.3_

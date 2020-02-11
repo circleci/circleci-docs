@@ -1,3 +1,4 @@
+[#upgrade]
 = Upgrading a Server Installation
 :page-layout: classic-docs
 :page-liquid:

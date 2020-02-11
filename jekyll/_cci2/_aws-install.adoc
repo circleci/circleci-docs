@@ -17,6 +17,10 @@ docs@circleci.com
 
 include::install-overview.adoc[]
 
+include::v.2.19-overview.adoc[]
+
+include::update-nomad-clients.adoc[]
+
 include::server-ports.adoc[]
 
 include::aws-prereq.adoc[]
@@ -26,7 +30,5 @@ include::aws.adoc[]
 include::aws-teardown.adoc[]
 
 include::updating-server.adoc[]
-
-include::update-nomad-clients.adoc[]
 
 :leveloffset: -1
