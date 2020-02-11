@@ -14,7 +14,7 @@ A collection of best practices and strategies for authoring orbs. CircleCI orbs 
 ### Metadata
 
 - Ensure all commands, jobs, executors, and parameters have detailed descriptions.
-- Provide a `source_url` and if available, `home_url` [via the `display` key]({{ site.baseurl }}2.0/orb-author/#describing-your-orb).
+- Provide a `source_url` and if available, `home_url` [via the `display` key]({{ site.baseurl }}/2.0/orb-author/#describing-your-orb).
 - Define any prerequisites such as obtaining an API key in the description.
 - Be consistent and concise in naming your orb elements. For example, don't mix "kebab case" and "snake case."
 
