@@ -4,7 +4,7 @@ version: 2.1 # Set the CI version.
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
-  ruby: circleci/ruby@0.1.2
+  ruby: circleci/ruby@0.2.1
   node: circleci/node@1.1.6
 
 
