@@ -16,7 +16,7 @@ This *API Developer's Guide* was written to assist developers in quickly and eas
 
 The CircleCI platform provides an API that enables users to interact with the CircleCI platform (e.g. triggering pipelines, updating settings etc, in addition to retrieving detailed information about users, jobs, workflows and pipelines.
 
-## API Classes
+## API Categories
 
 The current categories of API v2 endpoints are:
 
@@ -58,20 +58,6 @@ To add an API token, perform the steps listed below.
     ```
 
 **Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
-
-<!---
-## API Syntax
-
-When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures the API server can properly process your request and return a valid JSON response. To make a request to the CircleCI API, use the following format:
-
-`https://circleci.com/api/v2`
-
-Where:
-
-- `https://circleci.com/api/` is the resource URL for the API being called.
-- `api` is the service being called.
-- `v2` is the API version.
--->
 
 # Getting Started with the API
 
@@ -223,7 +209,7 @@ The following section details the steps you would need, from start to finish, to
     }
     ```
 
-    While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
+While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -251,7 +237,7 @@ The following section details the steps you would need, from start to finish, to
         type: string
     ```
 
-    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
