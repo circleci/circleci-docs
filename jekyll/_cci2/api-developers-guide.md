@@ -87,6 +87,8 @@ With this API, CircleCI is introducing a string representation of the triplet ca
 
 The `project_slug` is included in the payload when pulling information about a project as well as when looking up a pipeline or workflow by ID. The `project_slug` can then be used to get information about the project. It is possible in the future the shape of a `project_slug` may change, but in all cases it would be usable as a human-readable identifier for a given project.
 
+![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
+
 # HTTP Status Codes and Response Handling
 
 When you make an API request to the server, an HTTP status code is returned along with the JSON body response. The CircleCI API v2 adheres to standard HTTP response codes, which include the following status code definitions:
@@ -426,16 +428,6 @@ The following section details the steps you need to follow to download artifacts
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" 
     ```
-
-    Check the table below for help with formatting your API call correctly.
-
-    | Parameter    | Description                                                             |
-    | ------------ | ----------------------------------------------------------------------- |
-    | `VCS`        | Version Control System - either `github`/`gh` or `bitbucket`/`bb`       |
-    | `org_name`   | Organization name, or your personal username to your VCS                |
-    | `repo_name`  | Name of your project repo                                               |
-    | `job_number` | The number for the job you want to download artifacts from - see step 2 |
-    {: class="table table-striped"}
     
     You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
 
