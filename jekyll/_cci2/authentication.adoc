@@ -80,7 +80,7 @@ NOTE: Only one of the following methods should be necessary to grant admin acces
     (circle.services.domain/delete-user-cache))
 ```
 
-*By GitHub user name (after to GitHub account connection, which replaces prior :login value):*
+*By GitHub user name (after GitHub account connection, which replaces prior :login value):*
 
 ```sh
 (-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-github-username"} :limit 1)
