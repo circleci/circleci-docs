@@ -164,7 +164,7 @@ workflows:
 
 ### Describing your Orb
 
-Before publishing your orb, it is recommended you add meta data to your orb to aid in the discoverability and documentation of your orb. We recommend adding a top-level `description` that informs users of the purpose of your orb and is indexed in search.
+Before publishing your orb, it is recommended you add metadata to your orb to aid in the discoverability and documentation of your orb. We recommend adding a top-level `description` that informs users of the purpose of your orb and is indexed in search.
 
 Under the `display` key,  add a link to the git repository via the `source_url`. If your orb relates to a specific product or service, you may optionally include a link to the homepage or documentation for said product or service via the `home_url` key.
 
