@@ -68,7 +68,7 @@ The first user to access a CircleCI Server installation should be granted admin 
 
 ==== Grant Admin Access to User
 
-NOTE: If you are unfamiliar with using REPL please contact customer support before running these steps.
+NOTE: Only one of the following methods should be necessary to grant admin access. If you are unfamiliar with using the REPL, please contact customer support before running these steps.
 
 *For a given user by LDAP user name (prior to GitHub account connection, or if they have no GitHub account):*
 
