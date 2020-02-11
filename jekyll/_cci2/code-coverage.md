@@ -362,5 +362,5 @@ You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 [environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
-parallel builds.
+concurrent jobs.
 

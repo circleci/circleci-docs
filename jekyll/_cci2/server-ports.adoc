@@ -5,7 +5,9 @@
 :toc: macro
 :toc-title:
 
-This section defines the system and port access requirements for installing CircleCI v{{site.server_version}}.
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+
+This section defines the system and port access requirements for installing CircleCI v{serverversion}.
 
 toc::[]
 

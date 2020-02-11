@@ -135,7 +135,7 @@ jobs:
 
 ## Workflows
 
-Workflows define a list of jobs and their run order. It is possible to run jobs in parallel, sequentially, on a schedule, or with a manual gate using an approval job.
+Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
 {:.tab.workflows.Cloud}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
@@ -191,7 +191,7 @@ workflows:
       - build3:
           requires:
            - build1 # wait for build1 job to complete successfully before starting
-           # run build2 and build3 in parallel to save time.
+           # run build2 and build3 concurrently to save time.
 ```
 {% endraw %}
 

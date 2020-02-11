@@ -14,7 +14,7 @@ Caching is one of the most effective ways to make jobs faster on CircleCI by reu
 
 After an initial job run, future instances of the job will run faster by not redoing work.
 
-![caching data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
+![caching data flow]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
 Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload everything on every build.
 

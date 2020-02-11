@@ -259,6 +259,8 @@ en:
       children:
         - name: Deployment Overview
           link: 2.0/deployment-integrations/
+        - name: Deployment Examples
+          link: 2.0/deployment-examples/
         - name: Deploying to AWS ECR/ECS
           link: 2.0/ecs-ecr/
         - name: Publishing Snap Packages
@@ -276,6 +278,8 @@ en:
           link: 2.0/configuration-reference/
         - name: API v1.1 Reference
           link: api/
+        - name: API v2 Reference
+          link: api/v2
         - name: API v2 Introduction
           link: 2.0/api-intro/
         - name: Prebuilt Images
@@ -356,14 +360,14 @@ en:
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
-    - name: Server v2.18 PDFs
+    - name: Server v2.18.3 PDFs
       link: 2.0/v.2.18-overview/
       children:
         - name: What's New in v2.18
           link: 2.0/v.2.18-overview/
-        - name: v2.18 Installation Guide
+        - name: v2.18.3 Installation Guide
           link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
-        - name: v2.18 Operations Guide
+        - name: v2.18.3 Operations Guide
           link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/

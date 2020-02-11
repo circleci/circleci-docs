@@ -336,3 +336,7 @@ footer:
       content: $footer_recto_right_content
     #center:
     #  content: '{page-number}'
+
+role:
+  serveronly:
+    font-color: #4e9eb3

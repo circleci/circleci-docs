@@ -92,7 +92,7 @@ and hides four types of configuration data:
 - Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key)
 to access arbitrary hosts during a build.
 
-- [AWS permissions]({{ site.baseurl }}/2.0/deployment-integrations/#aws) and configuration files.
+- [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
 
 **Note:**
 Forked PR builds of open source projects that require secrets
