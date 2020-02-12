@@ -6,7 +6,9 @@ description: "Overviews of the docker, machine, and executor types"
 categories: [containerization]
 order: 10
 ---
+[custom-images]: {{ site.baseurl }}/2.0/custom-images/
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
+[server-gpu]: {{ site.baseurl }}/2.0/gpu/
 
 This document describes the available executor types (`docker`, `machine`, `windows` and `macos`) in the following sections:
 
@@ -32,25 +34,27 @@ It is possible to specify a different executor type for every job in your ['.cir
 For building software on Linux,
 there are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
 
-Virtual Environment | `docker` | `machine`
+Capability | `docker` | `machine`
 ----------|----------|----------
  Start time | Instant | 30-60 sec
  Clean environment | Yes | Yes
- Custom images | Yes | No
- Build Docker images | Yes <sup>(1)</sup> | Yes
+ Custom images | Yes <sup>(1)</sup> | No
+ Build Docker images | Yes <sup>(2)</sup> | Yes
  Full control over job environment | No | Yes
  Full root access | No | Yes
- Run multiple databases | Yes <sup>(2)</sup> | Yes
+ Run multiple databases | Yes <sup>(3)</sup> | Yes
  Run multiple versions of the same software | No | Yes
- Layer caching | Yes | Yes
+ [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
  Run privileged containers | No | Yes
  Use docker compose with volumes | No | Yes
  [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
 {: class="table table-striped"}
 
-<sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
+<sup>(1)</sup> See [Using Custom Docker Images][custom-images].
 
-<sup>(2)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
+<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
+
+<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
 
 It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
 
@@ -78,7 +82,62 @@ In this example, all steps run in the container created by the first image liste
 
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-## Using Machine
+### Using Multiple Docker Images
+It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+
+```yaml
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run.
+     - image: buildpack-deps:trusty
+    # Secondary container image on common network. 
+     - image: mongo:2.6.8-jessie
+       command: [mongod, --smallfiles]
+
+    working_directory: ~/
+
+    steps:
+      # command will execute in trusty container
+      # and can access mongo on localhost
+      - run: sleep 5 && nc -vz localhost 27017
+```
+Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
+
+#### Public Convenience Images on Docker Hub
+{:.no_toc}
+  - `name:tag`
+    - `circleci/node:7.10-jessie-browsers`
+  - `name@digest`
+    - `redis@sha256:34057dd7e135ca41...`
+
+#### Public Images on Docker Hub
+{:.no_toc}
+  - `name:tag`
+    - `alpine:3.4`
+  - `name@digest`
+    - `redis@sha256:54057dd7e125ca41...`
+
+#### Public Docker Registries
+{:.no_toc}
+  - `image_full_url:tag`
+    - `gcr.io/google-containers/busybox:1.24`
+  - `image_full_url@digest`
+    - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
+
+Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Private Images]({{ site.baseurl }}/2.0/private-images).
+
+### Docker Benefits and Limitations
+Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
+ 
+- Your application is self-sufficient
+- Your application requires additional services to be tested
+- Your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
+- You want to use `docker-compose` (requires using [Remote Docker][building-docker-images])
+
+Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
+
+## Using Machine (Linux VM)
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
@@ -151,7 +210,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-## Using the Windows Executor
+## Using Windows
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
 * CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
@@ -193,61 +252,39 @@ Cloud users will notice the Windows Orb is used to set up the Windows executor t
 
 CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
-## Using Multiple Docker Images
-It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
+## Using GPUs
 
+CircleCI Cloud has execution environments with Nvidia GPUs for specialized workloads. The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
+
+{:.tab.gpublock.Linux}
 ```yaml
+version: 2.1
+
 jobs:
   build:
-    docker:
-    # Primary container image where all steps run.
-     - image: buildpack-deps:trusty
-    # Secondary container image on common network. 
-     - image: mongo:2.6.8-jessie
-       command: [mongod, --smallfiles]
-
-    working_directory: ~/
-
+    machine:
+      resource_class: gpu.nvidia.small 
+      image: ubuntu-1604-cuda-10.1:201909-23
     steps:
-      # command will execute in trusty container
-      # and can access mongo on localhost
-      - run: sleep 5 && nc -vz localhost 27017
+      - run: nvidia-smi
 ```
-Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
-### Public Convenience Images on Docker Hub
-{:.no_toc}
-  - `name:tag`
-    - `circleci/node:7.10-jessie-browsers`
-  - `name@digest`
-    - `redis@sha256:34057dd7e135ca41...`
+{:.tab.gpublock.Windows}
+```yaml
+version: 2.1
 
-### Public Images on Docker Hub
-{:.no_toc}
-  - `name:tag`
-    - `alpine:3.4`
-  - `name@digest`
-    - `redis@sha256:54057dd7e125ca41...`
+orbs:
+  win: circleci/windows@2.3.0
 
-### Public Docker Registries
-{:.no_toc}
-  - `image_full_url:tag`
-    - `gcr.io/google-containers/busybox:1.24`
-  - `image_full_url@digest`
-    - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
+jobs:
+  build:
+    executor: win/gpu-nvidia
+    steps:
+      - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
+```
 
-Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Private Images]({{ site.baseurl }}/2.0/private-images).
-
-## Docker Benefits and Limitations
-Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
- 
-- Your application is self-sufficient
-- Your application requires additional services to be tested
-- Your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
-- You want to use `docker-compose` (requires using [Remote Docker][building-docker-images])
-
-Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
+Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server][server-gpu].
 
 ## See Also
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)
