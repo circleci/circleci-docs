@@ -16,7 +16,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 ## Notes and Best Practices
 
 * We now require a minimum 32GB of RAM for the Services Machine. 
-* We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
+* We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
 * We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to {serverversion}.
 
 ## What's New in Release 2.19
@@ -29,16 +29,4 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 ## Known Issues
 
-* Github API call integration has been improved to reduce the chances of getting rate-limited errors.
-
-* Auto Cancel setting (project settings > advanced settings) does not work when workflows are in use.
-
-* New branches do not show up in UI branch pickers without a hard refresh.
-
-* Deleting branches on GitHub repo does not remove the branch from the UI branch picker.
-
-* When a workflow is cancelled, the cancelled status does not show up on the UI for a long time or until refreshed.
-
 * The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
-
-* Occasionally, when using SSO and GitHub Enterprise, users can experience issues running jobs that contain contexts. Contact Support for reauthorization steps if you experience this issue.
