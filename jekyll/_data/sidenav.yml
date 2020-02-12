@@ -53,20 +53,22 @@ en:
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
-        - name: Migrating from TravisCI
-          link: 2.0/migrating-from-travis/
-        - name: Migrating from Jenkins
-          link: 2.0/migrating-from-jenkins/
-        - name: Migrating from GitLab
-          link: 2.0/migrating-from-gitlab/
-        - name: Migrating from Buildkite
-          link: 2.0/migrating-from-buildkite/
-        - name: Migrating from Azure DevOps
-          link: 2.0/migrating-from-azuredevops/
         - name: Migrating from AWS
           link: 2.0/migrating-from-aws/
+        - name: Migrating from Azure DevOps
+          link: 2.0/migrating-from-azuredevops/
+        - name: Migrating from Buildkite
+          link: 2.0/migrating-from-buildkite/
         - name: Migrating from GitHub
           link: 2.0/migrating-from-github/
+        - name: Migrating from GitLab
+          link: 2.0/migrating-from-gitlab/
+        - name: Migrating from Jenkins
+          link: 2.0/migrating-from-jenkins/
+        - name: Migrating from TeamCity
+          link: 2.0/migrating-from-teamcity/
+        - name: Migrating from TravisCI
+          link: 2.0/migrating-from-travis/
 
 - name: Configuration
   icon: docs/config.svg
