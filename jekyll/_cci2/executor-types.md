@@ -137,7 +137,7 @@ Docker also has built-in image caching and enables you to build, run, and publis
 
 Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
 
-## Using Machine (Linux VM)
+## Using Machine
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
@@ -210,7 +210,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-## Using Windows
+## Using the Windows Executor
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
 * CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
