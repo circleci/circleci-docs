@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI Server v{serverversion}. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v{serverversion}, see our <<updating-server#upgrade,upgrade guide>>.
+This document provides a summary of features and product notes for the release of CircleCI Server v{serverversion}. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v{serverversion}, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
 
 ## Requirements for Upgrading
 
