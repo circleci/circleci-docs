@@ -45,7 +45,7 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 2.18.3
+      serverversion: 2.19
 
 asciidoctor:
   base_dir: _cci2/
@@ -54,7 +54,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html 
-    serverversion: 2.18.3
+    serverversion: 2.19
 
 collections:
   # this is named with an underscore because it needs to be processed
