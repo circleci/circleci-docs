@@ -206,26 +206,23 @@ before_script:
 
 test_async:
   script:
-    - node ./specs/start.js ./specs/async.spec.js
+    - node ./specs/start.js
 ----
 
 a|
 ----
 jobs:
-  job1:
+  test_async:
     steps:
       - restore_cache:
-          key: source-v1-< .Revision >
-
+          key: source-v1-{{ checksum "package.json" }}
       - checkout
-
       - run: npm install
-
       - save_cache:
-          key: source-v1-< .Revision >
+          key: source-v1-{{ checksum "package.json" }}
           paths:
-            - "node_modules"
-
+            - node_modules
+      - run: node ./specs/start.js
 ----
 |===
 
