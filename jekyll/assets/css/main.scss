@@ -390,3 +390,10 @@ pre {
 .serveronly{
 	color: #4e9eb3; 
   }
+
+.table-migrate td, .table-migrate th {
+  width: 50%;
+  display: inline-block;
+  height: 100%;
+}
+
