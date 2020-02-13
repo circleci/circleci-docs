@@ -254,6 +254,7 @@ test_async:
 a|
 [source, yaml]
 ----
+{% raw %}
 jobs:
   test_async:
     steps:
@@ -266,6 +267,7 @@ jobs:
           paths:
             - node_modules
       - run: node ./specs/start.js
+{% raw %}
 ----
 |===
 
