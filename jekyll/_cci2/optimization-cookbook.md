@@ -11,7 +11,7 @@ The *CircleCI Optimizations Cookbook* is a collection of individual use cases (r
 
 According to [The Forrester Wave: Cloud-Native Continuous Integration Tools, Q3 2019](https://circleci.com/blog/why-circleci-is-a-leader-in-the-forrester-wave-cloud-native-continuous-integration-tools-q3-2019-speed-scale-security-and-compliance/), **Cloud-native CI products with exceptional build speed, on-demand scale, and secure configurations will lead the market and enable customers to accelerate delivery speed and lower management costs, all while meeting corporate compliance needs.**
 
-This guide, and it associated sections, will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
+This guide, and its associated sections, will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
 
 
 * TOC
@@ -29,6 +29,7 @@ This guide provides you with the following optimization strategies that you can 
 - [Implementing caching strategies to optimize builds and workflows](#using-caching-to-optimize-builds-and-workflows)
 - [Improving test performance](#improving-test-performance)
 - [Use test splitting to speed up a test cycle](#test-splitting)
+- [Use Workflows to increase deployment frequency]()
 
 **Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
 
@@ -176,11 +177,11 @@ Let's take a closer look at the testing process in the figure above to better un
 
 The following steps were performed during testing:
 
-1) The build job created a Docker image, which contained only runtime dependencies. 
-2) The build job dumped the image to a file with `docker save`, and then persisted it in the workspace. 
-3) Two test jobs were run to restore the base image from the workspace.
-4) The test jobs built on this base image to create an image with all the extra modules required to run the tests. 
-5) The test jobs started dependencies, and the tests were finally initiated.
+1. The build job created a Docker image, which contained only runtime dependencies. 
+2. The build job dumped the image to a file with `docker save`, and then persisted it in the workspace. 
+3. Two test jobs were run to restore the base image from the workspace.
+4. The test jobs built on this base image to create an image with all the extra modules required to run the tests. 
+5. The test jobs started dependencies, and the tests were finally initiated.
 
 Typically, performing setup once, and then performing `fan out` steps, is a traditional way to reduce resource usage; however, in this example, the `fan out` steps proved to be very expensive in the following ways:
 
@@ -214,15 +215,19 @@ The figure below illustrates how overall these changes can reduce the total work
 
 As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time.
 
-## Test Splitting
+## Test Splitting to Speed Up Pipelines
 
-Each time code is committed, tests will be run. Test splitting is a great way to speed up this portion of your CICD pipeline. Tests don't always need to happen sequentially, they can be split over a range of test environments and run in parallel. Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power in use.
+Most pipelines are set so that each time code is committed, tests are run. Test splitting is a great way to speed up this portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments and run in parallel.
+
+Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power in use.
 
 ![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-To illustrate this with CI config, take a sequentially running test suite
+### Parallelism and Test Splitting
 
-```
+To illustrate this with CI config, take a sequentially running test suite – all tests run in a single test environment (docker container):
+
+```yaml
 jobs:
   build:
     docker:
@@ -235,9 +240,9 @@ jobs:
       - run: go test
 ```
 
-And to split these tests, using timing data, across 10 parallel environments, we just need a few simple changes
+To split these tests, using timing data, we first intoduce parallelism to spin up a number (10 in this case) of identical test environments. THen use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
 
-```
+```yaml
 jobs:
   build:
     docker:
@@ -251,11 +256,62 @@ jobs:
       - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
 ```
 
-To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run for the CircleCI application actually decreased the test time from 26:11 down to 3:55.
+**Note:** The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
+
+### Is it worth it?
+
+To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run across the CircleCI application project actually decreased the test time **from 26:11 down to 3:55**.
 
 Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
 
+## Workflows Increase Deployment Frequency
+
+Providing value to your customers is the top goal for any organization, and one can measure the performance of an organization by how often (frequency) value is delivered (deployment). High-performing teams deploy value to customers multiple times per day according to the DevOps Research and Assessment Report, 2019.
+
+While many organizations deploy value to customer once per quarter or once per month, the basics of raising this frequency to once per week or once per day is represented by the same type of orchestration added to an organization's value *pipeline*.
+
+To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
+
+![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png)
+
+When you provide developers with a workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
+
+![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png)
+
+A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers. 
+
+A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed. 
+
+For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
+
+```yaml
+- deploy:
+    requires:
+      - build
+    filters:
+      branches:
+        only: master
+```
+
+The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break. 
+
+For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
+
+```yaml
+nightly-build:
+  triggers:
+    - schedule:
+        cron: '0 8 ***'
+        filters:
+          branches:
+            only: master
+```
+
+The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
+
+
 ## See Also
+{:.no_toc}
 
 - Refer to [Optimizations]({{site.baseurl}}/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
 - Refer to [Caching]({{site.baseurl}}/2.0/caching/#introduction) for high-level information about caching.
