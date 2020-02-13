@@ -1,0 +1,227 @@
+= Nomad Client Launch Configuration Update
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+## IMPORTANT
+
+WARNING: This update must be run before upgrading to Server v2.19
+
+* **THIS WILL REQUIRE DOWNTIME**.  Please schedule a maintenance window before proceeding.  
+* This change is only compatible with CircleCI Server versions greater than or equal to 2.19.0 
+* If you are using the Static version of CircleCI Server, you will need to recreate your builders manually. Refer to the guide linked https://circleci.com/docs/2.0/non-aws/#installing-the-nomad-clients[here] for the updated scripts and further instruction.
+
+
+
+### Sign in to AWS
+
+. Login to the AWS
+. Select the region that your CircleCI Server (Server) resides in
+. Select the `Services` tab and select `EC2`
+
+
+
+### Find the Launch Configuration and Service Box IP address
+
+. Select `Auto Scaling Groups` located near the bottom of the left navigation pane
+. Select the auto scaling group configuration associated with your Server installation. Typically resembles `*-ghe_nomad_clients_asg`
+. Make note of the name of `Launch Configuration` under the `Details` tab. Typically resembles `terraform-20200114212820082700000001`
+. In the left navigation pane, select `Launch Configurations`
+. Locate the launch configuration that matches the one found in step 3.
+. In the bottom pane, select the `View User Data ` link
+. Scroll down or search for the `Creating config.hcl` section.  
+. Write down or copy the service box private IP address located in the client portion of the config located next to `servers = ["IP_ADDRESS:4647"]` You will need this in the next step.
++
+```
+...
+...
+client {
+    enabled = true
+    # Expecting to have DNS record for nomad server(s)
+    servers = ["YOUR_SERVICES_BOX_IP_ADDRESS:4647"]  <==== YOU WILL NEED THIS IP ADDRESS
+    node_class = "linux-64bit"
+    options = {"driver.raw_exec.enable" = "1"}
+}
+...
+```
+
+
+
+### Create a New Launch Configuration 
+
+. Right-click the launch configuration and select `Copy Launch Configuration` 
+. At the top of the screen, select `3. Configure details `
+. Update the name to something meaningful and easy to identify IE `nomad-client-lc-20200117`
+. Select the `Advanced Details` dropdown
+. Below you will find the updated Nomad client configuration.  Replace the contents of the `User data` pane with the script below.  
+. **IMPORTANT:** Locate the section of code you found in step 8 above and replace the IP address with that of your services box. 
+. Select the `Skip to review` button at the bottom right of the screen
+. Select the `Create Launch Configuration` Button
+. Verify that the SSH key-pair name is correct and select `Create launch configuration` button
+
+
+
+### Update the Auto Scaling group 
+
+. Return the `Auto Scaling Groups` page
+. Locate the auto scaling group we identified in the `Find the Launch Configuration and Service Box IP address` section above
+. Right-click the auto scaling group and select `Edit` from the menu
+. Select the launch configuration created in the previous section from the `Launch Configuration` drop-down menu.
+. Press the `Save` button
+
+
+
+### Rolling the Nomad Client Instances
+
+There are many strategies you can use the update the builders.  Some ideas include but are not limited to:
+
+* Terminate all of the existing nomad client instances and allow the auto scaler to recreate them.
+* Edit the auto scaling configuration and set the `Desired Capacity`  to 0.  Once the existing instances have terminated, set the `Desired Capacity` to the original number.
+
+Please use whatever works best with your existing methods of auto scaling group management. 
+
+
+
+### Verify the New Nomad Clients are Communicating with Nomad Server
+
+. SSH into the CircleCI Services Box
+
+. Enter the following command: `sudo docker exec -it nomad nomad node-status`. The output should resemble the following:
++
+```
+ubuntu@govcloud-service-box:~$ sudo docker exec -it nomad nomad node-status
+ID        DC         Name                 Class        Drain  Eligibility  Status
+0cf07b07  default    i-070fdad5f0edef4c8  linux-64bit  false  eligible     ready
+ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
+```
+
+. Verify that there are new builders containing the `default` DC name and they are in a `ready` state.
+
+
+
+## Updated Nomad Client Launch Configuration Script
+
+```bash
+#!/bin/bash
+
+set -exu
+
+export http_proxy=""
+export https_proxy=""
+export no_proxy=""
+export aws_instance_metadata_url="http://169.254.169.254"
+export DEBIAN_FRONTEND=noninteractive
+UNAME="$(uname -r)"
+
+echo "-------------------------------------------"
+echo "     Performing System Updates"
+echo "-------------------------------------------"
+apt-get update && apt-get -y upgrade
+
+echo "--------------------------------------"
+echo "        Installing NTP"
+echo "--------------------------------------"
+apt-get install -y ntp
+
+# Use AWS NTP config for EC2 instances and default for non-AWS
+if [ -f /sys/hypervisor/uuid ] && [ `head -c 3 /sys/hypervisor/uuid` == ec2 ]; then
+cat <<EOT > /etc/ntp.conf
+driftfile /var/lib/ntp/ntp.drift
+disable monitor
+restrict default ignore
+restrict 127.0.0.1 mask 255.0.0.0
+restrict 169.254.169.123 nomodify notrap
+server 169.254.169.123 prefer iburst
+EOT
+else
+  echo "USING DEFAULT NTP CONFIGURATION"
+fi
+
+service ntp restart
+
+echo "--------------------------------------"
+echo "        Installing Docker"
+echo "--------------------------------------"
+apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt-get install -y "linux-image-$UNAME"
+apt-get update
+apt-get -y install docker-ce=5:18.09.9~3-0~ubuntu-xenial
+
+# force docker to use userns-remap to mitigate CVE 2019-5736
+apt-get -y install jq
+mkdir -p /etc/docker
+[ -f /etc/docker/daemon.json ] || echo '{}' > /etc/docker/daemon.json
+tmp=$(mktemp)
+cp /etc/docker/daemon.json /etc/docker/daemon.json.orig
+jq '.["userns-remap"]="default"' /etc/docker/daemon.json > "$tmp" && mv "$tmp" /etc/docker/daemon.json
+
+sudo echo 'export http_proxy=""' >> /etc/default/docker
+sudo echo 'export https_proxy=""' >> /etc/default/docker
+sudo echo 'export no_proxy=""' >> /etc/default/docker
+sudo service docker restart
+sleep 5
+
+echo "--------------------------------------"
+echo "         Installing nomad"
+echo "--------------------------------------"
+apt-get install -y zip
+curl -o nomad.zip https://releases.hashicorp.com/nomad/0.9.3/nomad_0.9.3_linux_amd64.zip
+unzip nomad.zip
+mv nomad /usr/bin
+
+echo "--------------------------------------"
+echo "      Creating config.hcl"
+echo "--------------------------------------"
+export PRIVATE_IP="$(/sbin/ifconfig ens3 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}')"
+export INSTANCE_ID="$(curl $aws_instance_metadata_url/latest/meta-data/instance-id)"
+mkdir -p /etc/nomad
+cat <<EOT > /etc/nomad/config.hcl
+log_level = "DEBUG"
+name = "$INSTANCE_ID"
+data_dir = "/opt/nomad"
+datacenter = "default"
+advertise {
+    http = "$PRIVATE_IP"
+    rpc = "$PRIVATE_IP"
+    serf = "$PRIVATE_IP"
+}
+client {
+    enabled = true
+    # Expecting to have DNS record for nomad server(s)
+    servers = ["REPLACE_ME_WITH_SERVICE_BOX_IP:4647"]
+    node_class = "linux-64bit"
+    options = {"driver.raw_exec.enable" = "1"}
+}
+EOT
+
+echo "--------------------------------------"
+echo "      Creating nomad.conf"
+echo "--------------------------------------"
+cat <<EOT > /etc/systemd/system/nomad.service
+[Unit]
+Description="nomad"
+[Service]
+Restart=always
+RestartSec=30
+TimeoutStartSec=1m
+ExecStart=/usr/bin/nomad agent -config /etc/nomad/config.hcl
+[Install]
+WantedBy=multi-user.target
+EOT
+
+echo "--------------------------------------"
+echo "   Creating ci-privileged network"
+echo "--------------------------------------"
+docker network create --driver=bridge --opt com.docker.network.bridge.name=ci-privileged ci-privileged
+
+echo "--------------------------------------"
+echo "      Starting Nomad service"
+echo "--------------------------------------"
+service nomad restart
+```
+
+
