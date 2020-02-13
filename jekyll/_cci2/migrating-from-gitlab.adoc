@@ -57,21 +57,23 @@ The GitLab and CircleCI configurations will be different. It may be helpful to h
 
 Some differences that are worth calling out:
 
-[.table.table-striped]
+==== Defining a job that executes a single build step
+
+[.table.table-striped.table-migrate]
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
 | GitLab | CircleCI
 
-2+h| Define a job that executes a single build step. 
-
 a|
+[source, yaml]
 ----
 job1:
   script: "execute-script-for-job1"
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -79,16 +81,25 @@ jobs:
       - checkout
       - run: "execute-script-for-job1"
 ----
+|===
 
-2+h| Specify a docker image to use for a job.
+==== Specify a Docker image to use for a job
+
+[.table.table-striped.table-migrate]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| GitLab | CircleCI
 
 a|
+[source, yaml]
 ----
 job1:
   image: node:10
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -96,10 +107,21 @@ jobs:
       - image: node:10
 
 ----
+|===
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+
+==== Define a multi-stage build pipeline
+
+Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+
+[.table.table-striped.table-migrate]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| GitLab | CircleCI
 
 a|
+[source, yaml]
 ----
 job1:
   stage: build
@@ -124,6 +146,7 @@ stages:
 ----
 
 a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -154,10 +177,20 @@ workflows:
         requires:
           - job3
 ----
+|===
 
-2+h| Execute jobs on multiple platforms. GitLab uses tags to identify build runners. CircleCI provides executors for docker, Linux and MacOS.
+==== Execute jobs on multiple platforms
+
+GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/2.0/executor-types/#section=configuration[Executors documentation] for more information.
+
+[.table.table-striped.table-migrate]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| GitLab | CircleCI
 
 a|
+[source, yaml]
 ----
 ubuntu job:
   tags:
@@ -173,25 +206,34 @@ osx job:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
-  ubuntuJob:
+  ubuntu-job:
     machine:
       image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run: echo "Hello, $USER!"
-  osxJob:
+  osx-job:
     macos:
       xcode: 11.3.0
     steps:
       - checkout
       - run: echo "Hello, $USER!"
 ----
+|===
 
-2+h| Cache dependencies.
+==== Cache dependencies
+
+[.table.table-striped.table-migrate]
+[cols=2*, options="header", stripes=even]
+[cols="5,5"]
+|===
+| GitLab | CircleCI
 
 a|
+[source, yaml]
 ----
 image: node:latest
 
@@ -210,6 +252,7 @@ test_async:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   test_async:
