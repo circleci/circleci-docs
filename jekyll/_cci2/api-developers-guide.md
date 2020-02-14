@@ -517,4 +517,4 @@ Before working with the API and making calls, you should first have an understan
 ## See Also
 
 - Refer to [API V2 Introduction]({{site.baseurl}}/2.0/api-intro/) for high-level information about the CircleCI V2 API.
-- Refer to [API V2 Reference Guide]({{site.baseurl}}docs/api/v2/#section=reference) for a detailed list of all endpoints that make up the CircleCI V2 API.
+- Refer to [API V2 Reference Guide]({{site.baseurl}}/api/v2/#section=reference) for a detailed list of all endpoints that make up the CircleCI V2 API.
