@@ -138,6 +138,15 @@ Permissions** and create a token scoped to `Status`.
 If you find the default status badge too minimal, you can use the [shield style](https://shields.io/).
 To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
 
+![Passed `svg` version]({{ site.baseurl }}/assets/img/docs/svg-passed.png) 
+
+![Failed `svg` version]({{ site.baseurl }}/assets/img/docs/svg-failed.png)
+
+![Passing shield version]({{ site.baseurl }}/assets/img/docs/shield-passing.png) 
+
+![Failing shield version]({{ site.baseurl }}/assets/img/docs/shield-failing.png)
+
+ 
 ## See Also
 
 [Status]({{ site.baseurl }}/2.0/status/)
