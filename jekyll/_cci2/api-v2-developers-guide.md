@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "CircleCI API Developer's Guide"
-short-title: "Developer's Guide"
+title: "CircleCI API V2 Developer's Guide"
+short-title: "API V2 Developer's Guide"
 description: "API cookbook for internal and external CircleCI developers"
 categories: [getting-started]
 order: 1
@@ -513,3 +513,8 @@ Before working with the API and making calls, you should first have an understan
 | GET workflow/{id}/job      | Returns all jobs associated with a workflow. |
 | POST /workflow/{id}/rerun  | Reruns a workflow.                           |
 {: class="table table-striped"}
+
+## See Also
+
+- Refer to [API V2 Introduction]({{site.baseurl}}/2.0/api-intro/) for high-level information about the CircleCI v2 API.
+- Refer to [API V2 Reference Guide]({{site.baseurl}}/2.0/api/v2/) for a detailed list of all endpoints that make up the CircleCI V2 API.
