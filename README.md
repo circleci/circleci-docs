@@ -1,6 +1,5 @@
 # CircleCI Documentation 
-[![CircleCI Build Status](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs) 
-[![CircleCI Build Status](https://circleci.com/gh/circleci/circleci-docs/tree/rosie%2Fadd-status-badge-images.svg?style=svg)](https://app.circleci.com/github/circleci/circleci-docs/pipelines) 
+[![CircleCI Build Status](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs)  
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/circleci/circleci-docs/master/LICENSE) 
 [![CircleCi Community](https://img.shields.io/badge/community-CircleCI%20Discuss-343434.svg)](https://discuss.circleci.com)
 
