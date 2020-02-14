@@ -209,7 +209,7 @@ The following section details the steps you would need, from start to finish, to
     }
     ```
 
-While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
+    While this alone can be useful, we want to be able to customize parameters of the pipeline when we send this POST request. By including a body parameter in the `curl` request (via the `-d` flag), we can customize specific attributes of the pipeline when it runs: pipeline parameters, the branch, or the git tag. Below, we are telling the pipelines to trigger for "my-branch"
 
     ```sh
     curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -237,7 +237,7 @@ While this alone can be useful, we want to be able to customize parameters of th
         type: string
     ```
 
-You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
+    You will need to declare the parameters you expect to receive from the API. In this case, under the `parameters` key, we definte an "image-tag" to be expected in the JSON payload of a POST request to the _Trigger New Pipeline_ endpoint.
 
 7. Now we can run a `curl` request that passes variables in a POST request, similar to the following:
 
@@ -275,7 +275,9 @@ You may often find that it would be helpful to retrieve information about a spec
 
 You may notice a new concept called a `project-slug` when making this API call. A `project-slug` is a "triplet" that takes the following form:
 
-`<project_type>/<org_name>/<repo_name>`
+```
+{project_type}/{org_name}/{repo_name}
+```
 
 The `project_slug` is included in the payload when you pull information about a project, which enables you to retrieve detailed information about a specific project.
 
@@ -283,9 +285,9 @@ The `project_slug` is included in the payload when you pull information about a 
 
 ### Steps
 
-Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `/project/{project-slug}`endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
+Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `/project/{project-slug}` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
 
-**Note** In this example, please note that whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+**Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 
 To return project details, perform the following steps:
 
