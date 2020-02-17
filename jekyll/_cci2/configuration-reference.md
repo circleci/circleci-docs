@@ -459,19 +459,14 @@ jobs:
 
 ##### Machine Executor (Linux)
 
-Class            | vCPUs | RAM
------------------|-------|------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-xlarge           | 8     | 32GB
-2xlarge          | 16    | 64GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
 ###### Example Usage
 ```yaml
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-1604:201903-01 # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
     resource_class: large
     steps:
       ... // other config

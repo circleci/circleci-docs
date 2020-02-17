@@ -140,11 +140,7 @@ For more information on `machine`, see the next section below.
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
-Class            | vCPUs | RAM
------------------|-------|-------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
 Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands.
 
