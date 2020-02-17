@@ -112,20 +112,20 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
 
-Capability | `docker` | `machine`
-----------|----------|----------
- Start time | Instant | 30-60 sec
- Clean environment | Yes | Yes
- Custom images | Yes <sup>(1)</sup> | No
- Build Docker images | Yes <sup>(2)</sup> | Yes
- Full control over job environment | No | Yes
- Full root access | No | Yes
- Run multiple databases | Yes <sup>(3)</sup> | Yes
- Run multiple versions of the same software | No | Yes
- [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
- Run privileged containers | No | Yes
- Use docker compose with volumes | No | Yes
- [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
+| Capability                                                                                         | `docker`           | `machine` |
+| -------------------------------------------------------------------------------------------------- | ------------------ | --------- |
+| Start time                                                                                         | Instant            | 30-60 sec |
+| Clean environment                                                                                  | Yes                | Yes       |
+| Custom images                                                                                      | Yes <sup>(1)</sup> | No        |
+| Build Docker images                                                                                | Yes <sup>(2)</sup> | Yes       |
+| Full control over job environment                                                                  | No                 | Yes       |
+| Full root access                                                                                   | No                 | Yes       |
+| Run multiple databases                                                                             | Yes <sup>(3)</sup> | Yes       |
+| Run multiple versions of the same software                                                         | No                 | Yes       |
+| [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)                               | Yes                | Yes       |
+| Run privileged containers                                                                          | No                 | Yes       |
+| Use docker compose with volumes                                                                    | No                 | Yes       |
+| [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes                | Yes       |
 {: class="table table-striped"}
 
 <sup>(1)</sup> See [Using Custom Docker Images][custom-images].
@@ -140,11 +140,7 @@ For more information on `machine`, see the next section below.
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
-Class            | vCPUs | RAM
------------------|-------|-------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
 Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands.
 

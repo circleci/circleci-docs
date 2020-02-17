@@ -25,20 +25,20 @@ You can see a complete `config.yml` in our [full example](#full-example).
 
 ## **`version`**
 
-Key | Required | Type | Description
-----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+| Key     | Required | Type   | Description                                                                                                                                                                                                      |
+| ------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| version | Y        | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs. |
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
 ## **`orbs`** (requires version: 2.1)
 
-Key | Required | Type | Description
-----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
-commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
+| Key       | Required | Type | Description                                                                                                                                                                                                                                          |
+| --------- | -------- | ---- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orbs      | N        | Map  | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details. |
+| executors | N        | Map  | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.                                                                                          |
+| commands  | N        | Map  | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.                                                                                       |
 {: class="table table-striped"}
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
@@ -58,11 +58,11 @@ In the above example, `hello` is considered the orbs reference; whereas `circlec
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details.
-description | N | String | A string that describes the purpose of the command.
+| Key         | Required | Type     | Description                                                                                                                                                                                                |
+| ----------- | -------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| steps       | Y        | Sequence | A sequence of steps run inside the calling job of the command.                                                                                                                                             |
+| parameters  | N        | Map      | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details. |
+| description | N        | String   | A string that describes the purpose of the command.                                                                                                                                                        |
 {: class="table table-striped"}
 
 Example:
@@ -82,25 +82,25 @@ commands:
 ## **`parameters`** (requires version: 2.1)
 Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
-Key | Required  | Type | Description
-----|-----------|------|------------
-parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+| Key        | Required | Type | Description                                                                                                                                                                     |
+| ---------- | -------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| parameters | N        | Map  | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details. |
 {: class="table table-striped"}
 
 ## **`executors`** (requires version: 2.1)
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
-macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
-shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-working_directory | N | String | In which directory to run the steps.
-environment | N | Map | A map of environment variable names and values.
+| Key               | Required         | Type   | Description                                                                                                                                                                                                                                                            |
+| ----------------- | ---------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | Y <sup>(1)</sup> | List   | Options for [docker executor](#docker)                                                                                                                                                                                                                                 |
+| resource_class    | N                | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). |
+| machine           | Y <sup>(1)</sup> | Map    | Options for [machine executor](#machine)                                                                                                                                                                                                                               |
+| macos             | Y <sup>(1)</sup> | Map    | Options for [macOS executor](#macos)                                                                                                                                                                                                                                   |
+| windows           | Y <sup>(1)</sup> | Map    | Options for [windows executor](#windows)                                                                                                                                                                                                                               |
+| shell             | N                | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                              |
+| working_directory | N                | String | In which directory to run the steps.                                                                                                                                                                                                                                   |
+| environment       | N                | Map    | A map of environment variable names and values.                                                                                                                                                                                                                        |
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -138,19 +138,19 @@ Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider ru
 
 Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
-Key | Required | Type | Description
-----|-----------|------|------------
-docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
-macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-parameters | N | List | A list of parameters that need to be passed as part of the request when performing this operation
-steps | Y | List | A list of [steps](#steps) to be performed
-working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
-parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
-environment | N | Map | A map of environment variable names and values.
-branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+| Key               | Required         | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ----------------- | ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| docker            | Y <sup>(1)</sup> | List    | Options for [docker executor](#docker)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| machine           | Y <sup>(1)</sup> | Map     | Options for [machine executor](#machine)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| macos             | Y <sup>(1)</sup> | Map     | Options for [macOS executor](#macos)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| shell             | N                | String  | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))                                                                                                                                                                                                                                                                                                                                                                                                                |
+| parameters        | N                | List    | A list of parameters that need to be passed as part of the request when performing this operation                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| steps             | Y                | List    | A list of [steps](#steps) to be performed                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| working_directory | N                | String  | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. |
+| parallelism       | N                | Integer | Number of parallel instances of this job to run (default: 1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| environment       | N                | Map     | A map of environment variable names and values.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| branches          | N                | Map     | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.                                                                                                                                                                                                                                                                                                             |
+| resource_class    | N                | String  | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).                                                                                                                                                                                                                                                                                                   |
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -189,16 +189,16 @@ An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the
 
 Configured by `docker` key which takes a list of maps:
 
-Key | Required | Type | Description
-----|-----------|------|------------
-image | Y | String | The name of a custom docker image to use
-name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
-entrypoint | N | String or List | The command used as executable when launching the container
-command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
-user | N | String | Which user to run commands as within the Docker container
-environment | N | Map | A map of environment variable names and values
-auth | N | Map | Authentication for registries using standard `docker login` credentials
-aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
+| Key         | Required | Type           | Description                                                                                                |
+| ----------- | -------- | -------------- | ---------------------------------------------------------------------------------------------------------- |
+| image       | Y        | String         | The name of a custom docker image to use                                                                   |
+| name        | N        | String         | The name the container is reachable by.  By default, container services are accessible through `localhost` |
+| entrypoint  | N        | String or List | The command used as executable when launching the container                                                |
+| command     | N        | String or List | The command used as pid 1 (or args for entrypoint) when launching the container                            |
+| user        | N        | String         | Which user to run commands as within the Docker container                                                  |
+| environment | N        | Map            | A map of environment variable names and values                                                             |
+| auth        | N        | Map            | Authentication for registries using standard `docker login` credentials                                    |
+| aws_auth    | N        | Map            | Authentication for AWS EC2 Container Registry (ECR)                                                        |
 {: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
@@ -276,10 +276,10 @@ jobs:
 
 The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
 
-Key | Required | Type | Description
-----|-----------|------|------------
-image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+| Key                  | Required | Type    | Description                                                                                                                                                                                                                                                                                                             |
+| -------------------- | -------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| image                | Y        | String  | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service). |
+| docker_layer_caching | N        | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.                                                            |
 {: class="table table-striped"}
 
 
@@ -349,9 +349,9 @@ jobs:
 
 CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test, and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job in a macOS virtual machine, you must add the `macos` key to the top-level configuration for the job and specify the version of Xcode you would like to use.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-xcode | Y | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
+| Key   | Required | Type   | Description                                                                                                                                                                                                                |
+| ----- | -------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| xcode | Y        | String | The version of Xcode that is installed on the virtual machine, see the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list. |
 {: class="table table-striped"}
 
 **Example:** Use a macOS virtual machine with Xcode version 11.3:
@@ -389,10 +389,10 @@ jobs:
 
 Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
-Key | Required | Type | Description
-----|-----------|------|------------
-only | N | List | List of branches that only will be executed
-ignore | N | List | List of branches to ignore
+| Key    | Required | Type | Description                                 |
+| ------ | -------- | ---- | ------------------------------------------- |
+| only   | N        | List | List of branches that only will be executed |
+| ignore | N        | List | List of branches to ignore                  |
 {: class="table table-striped"}
 
 Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
@@ -435,15 +435,15 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 ##### Docker Executor
 
-Class                 | vCPUs | RAM
-----------------------|-------|-----
-small                 | 1     | 2GB
-medium (default)      | 2     | 4GB
-medium+               | 3     | 6GB
-large                 | 4     | 8GB
-xlarge                | 8     | 16GB
-2xlarge<sup>(2)</sup> | 16    | 32GB
-2xlarge+<sup>(2)</sup>| 20    | 40GB
+| Class                  | vCPUs | RAM  |
+| ---------------------- | ----- | ---- |
+| small                  | 1     | 2GB  |
+| medium (default)       | 2     | 4GB  |
+| medium+                | 3     | 6GB  |
+| large                  | 4     | 8GB  |
+| xlarge                 | 8     | 16GB |
+| 2xlarge<sup>(2)</sup>  | 16    | 32GB |
+| 2xlarge+<sup>(2)</sup> | 20    | 40GB |
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -459,30 +459,25 @@ jobs:
 
 ##### Machine Executor (Linux)
 
-Class            | vCPUs | RAM
------------------|-------|------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-xlarge           | 8     | 32GB
-2xlarge          | 16    | 64GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
 ###### Example Usage
 ```yaml
+
 jobs:
   build:
-    machine: true
-    resource_class: large
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       ... // other config
 ```
 
 ##### macOS Executor
 
-Class              | vCPUs | RAM
--------------------|-------|-----
-medium (default)   | 4     | 8GB
-large<sup>(2)</sup>| 8     | 16GB
+| Class               | vCPUs | RAM  |
+| ------------------- | ----- | ---- |
+| medium (default)    | 4     | 8GB  |
+| large<sup>(2)</sup> | 8     | 16GB |
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -498,12 +493,12 @@ jobs:
 
 ##### Windows Executor
 
-Class             | vCPUs | RAM
-------------------|-------|------
-medium (default)  | 4     | 15GB
-large             | 8     | 30GB
-xlarge            | 16    | 60GB
-2xlarge           | 32    | 128GB
+| Class            | vCPUs | RAM   |
+| ---------------- | ----- | ----- |
+| medium (default) | 4     | 15GB  |
+| large            | 8     | 30GB  |
+| xlarge           | 16    | 60GB  |
+| 2xlarge          | 32    | 128GB |
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -524,10 +519,10 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 
 ##### GPU Executor (Linux)
 
-Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
---------------------------------|-------|-----|------|-----------------|------------------
-gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
-gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+| Class                           | vCPUs | RAM | GPUs | GPU model       | GPU Memory (GiB) |
+| ------------------------------- | ----- | --- | ---- | --------------- | ---------------- |
+| gpu.nvidia.small<sup>(2)</sup>  | 4     | 15  | 1    | Nvidia Tesla P4 | 8                |
+| gpu.nvidia.medium<sup>(2)</sup> | 8     | 30  | 1    | Nvidia Tesla T4 | 16               |
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -548,9 +543,9 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 
 ##### GPU Executor (Windows)
 
-Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
-----------------------------------------|-------|-----|------|-----------------|------------------
-windows.gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+| Class                                   | vCPUs | RAM | GPUs | GPU model       | GPU Memory (GiB) |
+| --------------------------------------- | ----- | --- | ---- | --------------- | ---------------- |
+| windows.gpu.nvidia.medium<sup>(2)</sup> | 8     | 30  | 1    | Nvidia Tesla T4 | 16               |
 {: class="table table-striped"}
 
 ###### Example Usage
@@ -614,9 +609,9 @@ In this case, the `checkout` step will checkout project source code into the job
 
 In general all steps can be described as:
 
-Key | Required | Type | Description
-----|-----------|------|------------
-&lt;step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
+| Key            | Required | Type          | Description                                                                              |
+| -------------- | -------- | ------------- | ---------------------------------------------------------------------------------------- |
+| &lt;step_type> | Y        | Map or String | A configuration map for the step or some string whose semantics are defined by the step. |
 {: class="table table-striped"}
 
 Each built-in step is described in detail below.
@@ -625,16 +620,16 @@ Each built-in step is described in detail below.
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-command | Y | String | Command to run via the shell
-name | N | String | Title of the step to be shown in the CircleCI UI (default: full `command`)
-shell | N | String | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))
-environment | N | Map | Additional environmental variables, locally scoped to command
-background | N | Boolean | Whether or not this step should run in the background (default: false)
-working_directory | N | String | In which directory to run this step (default:  [`working_directory`](#jobs) of the job)
-no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
-when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+| Key               | Required | Type    | Description                                                                                                                                              |
+| ----------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| command           | Y        | String  | Command to run via the shell                                                                                                                             |
+| name              | N        | String  | Title of the step to be shown in the CircleCI UI (default: full `command`)                                                                               |
+| shell             | N        | String  | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))                                                        |
+| environment       | N        | Map     | Additional environmental variables, locally scoped to command                                                                                            |
+| background        | N        | Boolean | Whether or not this step should run in the background (default: false)                                                                                   |
+| working_directory | N        | String  | In which directory to run this step (default:  [`working_directory`](#jobs) of the job)                                                                  |
+| no_output_timeout | N        | String  | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)            |
+| when              | N        | String  | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`) |
 {: class="table table-striped"}
 
 Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
@@ -790,10 +785,10 @@ steps:
 
 A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps) for more details.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-condition | Y | String | A parameter value
-steps |	Y |	Sequence |	A list of steps to execute when the condition is true
+| Key       | Required | Type     | Description                                           |
+| --------- | -------- | -------- | ----------------------------------------------------- |
+| condition | Y        | String   | A parameter value                                     |
+| steps     | Y        | Sequence | A list of steps to execute when the condition is true |
 {: class="table table-striped"}
 
 ###### *Example*
@@ -829,9 +824,9 @@ workflows:
 
 A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-path | N | String | Checkout directory (default: job's [`working_directory`](#jobs))
+| Key  | Required | Type   | Description                                                      |
+| ---- | -------- | ------ | ---------------------------------------------------------------- |
+| path | N        | String | Checkout directory (default: job's [`working_directory`](#jobs)) |
 {: class="table table-striped"}
 
 If `path` already exists and is:
@@ -860,10 +855,10 @@ This command will automatically add the required authenticity keys for interacti
 
 Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
-version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
+| Key                  | Required | Type    | Description                                                                                                                                                                             |
+| -------------------- | -------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker_layer_caching | N        | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)                                   |
+| version              | N        | String  | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version). |
 {: class="table table-striped"}
 
 **Notes**:
@@ -876,12 +871,12 @@ version | N        | String | Version string of Docker you would like to use (de
 
 Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
-Key | Required | Type | Description
-----|-----------|------|------------
-paths | Y | List | List of directories which should be added to the cache
-key | Y | String | Unique identifier for this cache
-name | N | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache")
-when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
+| Key   | Required | Type   | Description                                                                                                                                              |
+| ----- | -------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| paths | Y        | List   | List of directories which should be added to the cache                                                                                                   |
+| key   | Y        | String | Unique identifier for this cache                                                                                                                         |
+| name  | N        | String | Title of the step to be shown in the CircleCI UI (default: "Saving Cache")                                                                               |
+| when  | N        | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`) |
 {: class="table table-striped"}
 
 The cache for a specific `key` is immutable and cannot be changed once written.
@@ -890,16 +885,16 @@ The cache for a specific `key` is immutable and cannot be changed once written.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
-Template | Description
-----|----------
-{% raw %}`{{ .Branch }}`{% endraw %} | The VCS branch currently being built.
-{% raw %}`{{ .BuildNum }}`{% endraw %} | The CircleCI build number for this build.
-{% raw %}`{{ .Revision }}`{% endraw %} | The VCS revision currently being built.
-{% raw %}`{{ .CheckoutKey }}`{% endraw %} | The SSH key used to checkout the repo.
-{% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).
-{% raw %}`{{ checksum "filename" }}`{% endraw %} | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time.
-{% raw %}`{{ epoch }}`{% endraw %} | The current time in seconds since the unix epoch.
-{% raw %}`{{ arch }}`{% endraw %} | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.
+| Template                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {% raw %}`{{ .Branch }}`{% endraw %}                   | The VCS branch currently being built.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| {% raw %}`{{ .BuildNum }}`{% endraw %}                 | The CircleCI build number for this build.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| {% raw %}`{{ .Revision }}`{% endraw %}                 | The VCS revision currently being built.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| {% raw %}`{{ .CheckoutKey }}`{% endraw %}              | The SSH key used to checkout the repo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).                                                                                                                                                                                                               |
+| {% raw %}`{{ checksum "filename" }}`{% endraw %}       | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. |
+| {% raw %}`{{ epoch }}`{% endraw %}                     | The current time in seconds since the unix epoch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| {% raw %}`{{ arch }}`{% endraw %}                      | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.                                                                                                                                                                                                                                                                                                                                                    |
 {: class="table table-striped"}
 
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
@@ -930,11 +925,11 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
-Key | Required | Type | Description
-----|-----------|------|------------
-key | Y <sup>(1)</sup> | String | Single cache key to restore
-keys | Y <sup>(1)</sup> | List | List of cache keys to lookup for a cache to restore. Only first existing key will be restored.
-name | N | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")
+| Key  | Required         | Type   | Description                                                                                    |
+| ---- | ---------------- | ------ | ---------------------------------------------------------------------------------------------- |
+| key  | Y <sup>(1)</sup> | String | Single cache key to restore                                                                    |
+| keys | Y <sup>(1)</sup> | List   | List of cache keys to lookup for a cache to restore. Only first existing key will be restored. |
+| name | N                | String | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")                  |
 {: class="table table-striped"}
 
 <sup>(1)</sup> at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
@@ -1027,10 +1022,10 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-path | Y | String | Directory in the primary container to save as job artifacts
-destination | N | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`)
+| Key         | Required | Type   | Description                                                                                                      |
+| ----------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| path        | Y        | String | Directory in the primary container to save as job artifacts                                                      |
+| destination | N        | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`) |
 {: class="table table-striped"}
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
@@ -1052,9 +1047,9 @@ Special step used to upload and store test results for a build. Test results are
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
-Key | Required | Type | Description
-----|-----------|------|------------
-path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
+| Key  | Required | Type   | Description                                                                                                                                       |
+| ---- | -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| path | Y        | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files |
 {: class="table table-striped"}
 
 **Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
@@ -1086,10 +1081,10 @@ Special step used to persist a temporary file to be used by another job in the w
 
 **Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 15 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-root | Y | String | Either an absolute path or a path relative to `working_directory`
-paths | Y | List | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself.
+| Key   | Required | Type   | Description                                                                                                                                                                       |
+| ----- | -------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| root  | Y        | String | Either an absolute path or a path relative to `working_directory`                                                                                                                 |
+| paths | Y        | List   | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself. |
 {: class="table table-striped"}
 
 The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
@@ -1147,9 +1142,9 @@ The Go documentation states that the pattern may describe hierarchical names suc
 
 Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-at | Y | String | Directory to attach the workspace to.
+| Key | Required | Type   | Description                           |
+| --- | -------- | ------ | ------------------------------------- |
+| at  | Y        | String | Directory to attach the workspace to. |
 {: class="table table-striped"}
 
 ###### _Example_
@@ -1168,11 +1163,11 @@ If a workflow is re-run it inherits the same workspace as the original workflow.
 
 Note the following distinctions between Artifacts, Workspaces, and Caches:
 
-| Type      | lifetime        | Use                      | Example |
-|-----------|-----------------|------------------------------------|---------
-| Artifacts | Months          | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
-| Workspaces | Duration of workflow        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
-| Caches    | Months          | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+| Type       | lifetime             | Use                                                                                     | Example                                                                                                                                                                                                                                      |
+| ---------- | -------------------- | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Artifacts  | Months               | Preserve long-term artifacts.                                                           | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.                                                                                                                 |
+| Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step.       | The `attach_workspace` copies and re-creates the entire workspace content when it runs.                                                                                                                                                      |
+| Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
@@ -1181,9 +1176,9 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 
 Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-fingerprints | N | List | List of fingerprints corresponding to the keys to be added (default: all keys added)
+| Key          | Required | Type | Description                                                                          |
+| ------------ | -------- | ---- | ------------------------------------------------------------------------------------ |
+| fingerprints | N        | List | List of fingerprints corresponding to the keys to be added (default: all keys added) |
 {: class="table table-striped"}
 
 ```yaml
@@ -1200,16 +1195,16 @@ Even though CircleCI uses `ssh-agent` to sign all added SSH keys, you **must** u
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
 
-Value                       | Description
-----------------------------|--------------------------------------------------------
-pipeline.id                 | A globally unique id representing for the pipeline
-pipeline.number             | A project unique integer id for the pipelin
-pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
-pipeline.project.type       | E.g. "github"
-pipeline.git.tag            | The tag triggering the pipeline
-pipeline.git.branch         | The branch triggering the pipeline
-pipeline.git.revision       | The current git revision
-pipeline.git.base_revision  | The previous git revision
+| Value                      | Description                                        |
+| -------------------------- | -------------------------------------------------- |
+| pipeline.id                | A globally unique id representing for the pipeline |
+| pipeline.number            | A project unique integer id for the pipelin        |
+| pipeline.project.git_url   | E.g. https://github.com/circleci/circleci-docs     |
+| pipeline.project.type      | E.g. "github"                                      |
+| pipeline.git.tag           | The tag triggering the pipeline                    |
+| pipeline.git.branch        | The branch triggering the pipeline                 |
+| pipeline.git.revision      | The current git revision                           |
+| pipeline.git.base_revision | The previous git revision                          |
 {: class="table table-striped"}
 
 For example:
@@ -1233,9 +1228,9 @@ Used for orchestrating all jobs. Each workflow consists of the workflow name as 
 ### **`version`**
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-version | Y | String | Should currently be `2`
+| Key     | Required | Type   | Description             |
+| ------- | -------- | ------ | ----------------------- |
+| version | Y        | String | Should currently be `2` |
 {: class="table table-striped"}
 
 ### **<`workflow_name`>**
@@ -1245,9 +1240,9 @@ A unique name for your workflow.
 #### **`triggers`**
 Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-triggers | N | Array | Should currently be `schedule`.
+| Key      | Required | Type  | Description                     |
+| -------- | -------- | ----- | ------------------------------- |
+| triggers | N        | Array | Should currently be `schedule`. |
 {: class="table table-striped"}
 
 ##### **`schedule`**
@@ -1271,17 +1266,17 @@ workflows:
 ###### **`cron`**
 The `cron` key is defined using POSIX `crontab` syntax.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-cron | Y | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html).
+| Key  | Required | Type   | Description                                                                                |
+| ---- | -------- | ------ | ------------------------------------------------------------------------------------------ |
+| cron | Y        | String | See the [crontab man page](http://pubs.opengroup.org/onlinepubs/7908799/xcu/crontab.html). |
 {: class="table table-striped"}
 
 ###### **`filters`**
 Filters can have the key `branches`.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-filters | Y | Map | A map defining rules for execution on specific branches
+| Key     | Required | Type | Description                                             |
+| ------- | -------- | ---- | ------------------------------------------------------- |
+| filters | Y        | Map  | A map defining rules for execution on specific branches |
 {: class="table table-striped"}
 
 ###### **`branches`**
@@ -1296,19 +1291,19 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 - If neither `only` nor `ignore` are specified then all branches will run the job.
 - If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-branches | Y | Map | A map defining rules for execution on specific branches
-only | Y | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
-ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+| Key      | Required | Type                       | Description                                                      |
+| -------- | -------- | -------------------------- | ---------------------------------------------------------------- |
+| branches | Y        | Map                        | A map defining rules for execution on specific branches          |
+| only     | Y        | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers |
+| ignore   | N        | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers |
 {: class="table table-striped"}
 
 #### **`jobs`**
 A job can have the keys `requires`, `context`, `type`, and `filters`.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-jobs | Y | List | A list of jobs to run with their dependencies
+| Key  | Required | Type | Description                                   |
+| ---- | -------- | ---- | --------------------------------------------- |
+| jobs | Y        | List | A list of jobs to run with their dependencies |
 {: class="table table-striped"}
 
 ##### **<`job_name`>**
@@ -1318,18 +1313,18 @@ A job name that exists in your `config.yml`.
 ###### **`requires`**
 Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-requires | N | List | A list of jobs that must succeed for the job to start
-name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
+| Key      | Required | Type   | Description                                                                                                                                                                                            |
+| -------- | -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| requires | N        | List   | A list of jobs that must succeed for the job to start                                                                                                                                                  |
+| name     | N        | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only) |
 {: class="table table-striped"}
 
 ###### **`context`**
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-context | N | String | The name of the context. The initial default name was `org-global`. Each context name must be unique.
+| Key     | Required | Type   | Description                                                                                           |
+| ------- | -------- | ------ | ----------------------------------------------------------------------------------------------------- |
+| context | N        | String | The name of the context. The initial default name was `org-global`. Each context name must be unique. |
 {: class="table table-striped"}
 
 ###### **`type`**
@@ -1350,9 +1345,9 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 ###### **`filters`**
 Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
-Key | Required | Type | Description
-----|-----------|------|------------
-filters | N | Map | A map defining rules for execution on specific branches
+| Key     | Required | Type | Description                                             |
+| ------- | -------- | ---- | ------------------------------------------------------- |
+| filters | N        | Map  | A map defining rules for execution on specific branches |
 {: class="table table-striped"}
 
 ###### **`branches`**
@@ -1364,11 +1359,11 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 - If neither `only` nor `ignore` are specified then all branches will run the job.
 - If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-branches | N | Map | A map defining rules for execution on specific branches
-only | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
-ignore | N | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers
+| Key      | Required | Type                       | Description                                                      |
+| -------- | -------- | -------------------------- | ---------------------------------------------------------------- |
+| branches | N        | Map                        | A map defining rules for execution on specific branches          |
+| only     | N        | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers |
+| ignore   | N        | String, or List of Strings | Either a single branch specifier, or a list of branch specifiers |
 {: class="table table-striped"}
 
 ###### **`tags`**
@@ -1383,11 +1378,11 @@ Tags can have the keys `only` and `ignore` keys. You may also use regular expres
 - If neither `only` nor `ignore` are specified then the job is skipped for all tags.
 - If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-Key | Required | Type | Description
-----|-----------|------|------------
-tags | N | Map | A map defining rules for execution on specific tags
-only | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
-ignore | N | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers
+| Key    | Required | Type                       | Description                                                |
+| ------ | -------- | -------------------------- | ---------------------------------------------------------- |
+| tags   | N        | Map                        | A map defining rules for execution on specific tags        |
+| only   | N        | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers |
+| ignore | N        | String, or List of Strings | Either a single tag specifier, or a list of tag specifiers |
 {: class="table table-striped"}
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
