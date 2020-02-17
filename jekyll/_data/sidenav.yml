@@ -282,6 +282,8 @@ en:
           link: api/v2
         - name: API v2 Introduction
           link: 2.0/api-intro/
+        - name: API v2 Developer's Guide
+          link: 2.0/api-developers-guide
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary
