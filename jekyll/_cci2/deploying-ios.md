@@ -144,7 +144,7 @@ platform :ios do
 end
 ```
 
-## Deploying to Firebase
+## Deploying to Firebase
 
 Firebase is a distribution service from Google. Deploying to Firebase is simplified by installing the [Firebase app distribution plugin](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution).
 
