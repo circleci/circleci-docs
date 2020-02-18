@@ -96,5 +96,5 @@ Use the Hello World document and sample `config.yml` files to start configuring 
 Document | Description
 ----|----------
 <a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.
-<a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using parallel Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file.
+<a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file.
 {: class="table table-striped"}

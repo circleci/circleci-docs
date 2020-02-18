@@ -45,12 +45,16 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
+      serverversion: 2.19
 
 asciidoctor:
+  base_dir: _cci2/
+  safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html 
+    serverversion: 2.19
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -136,4 +140,4 @@ analytics:
     go_button_clicked: go-button-clicked
 rollbar_env: development
 
-server_version: "2.18.3"
+# server_version: "2.18.4"

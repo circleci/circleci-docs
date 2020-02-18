@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-{% include snippets/server-only.adoc %}
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 The following sections summarize the key files and variables that impact CircleCI Server behavior, and configuration options for your Server installation.
 
@@ -122,10 +122,9 @@ The value of FOO will take precedence over the default values set in the default
 /etc/circleconfig/vm-service/customizations
 /etc/circleconfig/workflows-conductor/customizations
 ```
-
-//// 
+ 
 === Resource Classes
-_Introduced in CircleCI Server v2.18_
+_Introduced in CircleCI Server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
@@ -146,7 +145,7 @@ sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
 +
-WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resources classes. 
+WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resource classes. 
 . Run:
 +
 ```shell
@@ -186,13 +185,13 @@ Let's take a look at one of the options in more detail
 
 CAUTION: Jobs can only run if the Nomad client has enough CPU/RAM in order to allocate the resources required. If not, the job will be queued. See our <<nomad-metrics#configuring-nomad-client-metrics,Nomad metrics guide>> for information on monitoring the capacity of your Nomad cluster.
 
-
+////
 ==== Enable the Large Resource Class for Machine Executor
-_Introduced in CircleCI Server v2.18_
+_Introduced in CircleCI Server v2.19_
 
 To use second machine type (`large` in the example above), a further step is required to enable this for your organization. Following are the required steps:
 
-. SSH into the Services .achine
+. SSH into the Services machine
 . Run the following:
 ```
 circleci dev-console

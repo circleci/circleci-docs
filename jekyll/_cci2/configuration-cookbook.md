@@ -233,6 +233,8 @@ commands:
           kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
 ```
 
+**Note:** When running these steps, please note that you should use your cluster name in GKE, in addition to separating the cluster and deployment parameters.
+
 ### Publishing and Rolling Out The Image to the GKE Cluster
 
 Now that you have installed (if necessary) and initialized `gcloud` and updated the docker image, you may then publish and roll out this updated image to the GKE cluster for later use.

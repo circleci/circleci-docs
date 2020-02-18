@@ -22,9 +22,7 @@ image::pipeline-to-deployment.png[Deployment]
 
 * **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
 
-* **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps.
-+
-Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
+* **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>> 
 
@@ -59,7 +57,7 @@ Under the hood, this orb creates, bundles and deploys your application using you
 
 In this section we will look at a simple example of deploying a Rails application to Heroku. 
 
-==== Using the Heroku Orb
+=== Using the Heroku Orb
 
 Below is a Heroku Deployment example using the https://circleci.com/orbs/registry/orb/circleci/heroku[Heroku orb] to simplify the configuration. The configuration uses https://circleci.com/docs/2.0/workflows/[workflows] to deploy only if the `sequential-branch-filter` branch is checked out and the `build` job has run.
 
@@ -98,7 +96,7 @@ jobs:
           command: rake
 ```
 
-==== 2.0 config
+=== 2.0 config
 
 This version shows the same pipeline, but without using the orb. The full application can be found in the https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[Sequential Job branch of the CircleCI Demo Workflows repository]
 

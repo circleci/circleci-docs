@@ -1,3 +1,4 @@
+[#upgrade]
 = Upgrading a Server Installation
 :page-layout: classic-docs
 :page-liquid:
@@ -5,9 +6,15 @@
 :toc: macro
 :toc-title:
 
-This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v{{site.server_version}}. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v{{site.server_version}}, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+
+This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v{serverversion}. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v2.18.3, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
 
 toc::[]
+
+== Nomad Launch Configuration
+
+WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
 
 == Org Rename Script
 
@@ -21,13 +28,11 @@ or you suspect that an **organization rename might have happened at any point**.
 
 == Upgrade Steps Overview
 
-Following is an overview of the CircleCI Server upgrade steps. Each stage is described in detail below.
-
-* Take a <<1-snapshot-for-rollback,snapshot>> of your installation so you can rollback later if necessary (optional but recommended)
-* Update <<2-updating-replicated,Replicated>> and check you are running Docker v17.12.1, update if necessary
-* <<3-upgrade-circleci-server,Install the latest version of CircleCI Server>>
+Follow these steps to upgrade your CircleCI Server version.
 
 === 1. Snapshot for Rollback
+
+NOTE: This step is optional but recommended
 
 To take a snapshot of your installation:
 

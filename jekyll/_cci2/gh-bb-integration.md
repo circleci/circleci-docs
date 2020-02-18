@@ -133,7 +133,7 @@ When GitHub prompts you
 to authorize CircleCI,
 click the **Authorize application** button.
 
-4. On the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page,
+4. From the Add Projects page,
 follow all projects
 you want the machine user to have access to.
 
@@ -216,7 +216,7 @@ key. If you are using GitHub as your VCS then GitHub has the public key, and
 CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
 To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
-If you want to push to the repository from your builds, you will need a deployment key with write access (user key). The steps to create a user key depend on your VCS.
+If you want to push to the repository from your builds, you will need a deployment key with write access. The steps to create a deployment key with write access depend on your VCS. See below for GitHub-specific instructions.
 
 **What is a user key?**
 
@@ -233,7 +233,10 @@ and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circ
 When prompted to enter a passphrase,
 do **not** enter one.
 
-**Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
+    **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM
+    format by default. If your private key does not start with `-----BEGIN RSA
+    PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen
+    -m PEM -t rsa -C "your_email@example.com"`
 
 2. Go to `https://github.com/you/test-repo/settings/keys`,
 and click "Add deploy key".

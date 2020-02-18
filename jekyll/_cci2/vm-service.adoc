@@ -6,7 +6,7 @@
 :toc-title:
 :sectanchors:
 
-{% include snippets/server-only.adoc %}
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Winows images) and remote Docker jobs.
 
@@ -19,7 +19,7 @@ toc::[]
 VM service enables users of CircleCI Server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
 
 .VM Service Settings
-image::vm-service.png[Configuring VM Service on CircleCI Server]
+image::vm-service.png[Configuring VM Service on CircleCI Server,width=50%]
 
 == Configuration
 

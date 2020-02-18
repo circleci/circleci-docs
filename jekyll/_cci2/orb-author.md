@@ -16,7 +16,7 @@ Once you have configured your platform to work with CircleCI orbs, you are ready
 Before you create your first orb, please see the following notes:
 
 * Orbs exist in namespaces.
-* Each organization or username can claim one unique namespace.
+* Each organization or username can claim one unique namespace, and **namespaces cannot be deleted.**
 * Namespaces are global within the CircleCI orb registry, so pick a unique name!
 * Only users with "owner"/"administrator" privileges within a given GitHub/Bitbucket organization can create a namespace linked to that organization.
 * Once an orb has been created by an org admin, any org member can publish `dev` orbs. When ready, `dev` orbs can be promoted into production by org admins.
@@ -162,6 +162,24 @@ workflows:
 ```
 {% endraw %}
 
+### Describing your Orb
+
+Before publishing your orb, it is recommended you add metadata to your orb to aid in the discoverability and documentation of your orb. We recommend adding a top-level `description` that informs users of the purpose of your orb and is indexed in search.
+
+Under the `display` key,  add a link to the git repository via the `source_url`. If your orb relates to a specific product or service, you may optionally include a link to the homepage or documentation for said product or service via the `home_url` key.
+
+``` YAML
+version: 2.1
+description: >
+  Integrate Amazon AWS S3 with your CircleCI CI/CD pipeline easily with the aws-s3 orb.
+display:
+  home_url: https://aws.amazon.com/s3/
+  source_url: https://github.com/CircleCI-Public/aws-s3-orb
+``` 
+
+The `description` and contents of the `display` key will be featured in the header of the orb's registry page.
+
+
 ## Providing Usage Examples of Orbs
 
 _The `examples` stanza is available in configuration version 2.1 and later_
@@ -259,6 +277,7 @@ The top level `examples` key is optional. Usage example maps nested below it can
 - **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
 - **usage:** (required) A full, valid config map that includes an example of using the orb.
 - **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
+
 
 ## Next Steps
 {:.no_toc}

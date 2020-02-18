@@ -158,7 +158,7 @@ When running tests on the CircleCI platform, one of the primary considerations y
 
 There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below (adapted with permission from the developer who wrote about this test optimization use case in his [blog post](https://www.brautaset.org/articles/2019/speed-up-circleci.html)) describes how you can optimize testing using Django and the CircleCI platform.
 
-### Testing Optmization on the CircleCI Platform For a Python Django Project
+### Testing Optimization on the CircleCI Platform For a Python Django Project
 
 Some organizations use CircleCI to run tests for each change before merging to the main branch. Faster tests means faster feedback cycles, which in turn means you can confidently ship code more often. Let's take a look at a case study for a Python Django application's workflow, that took more than 13 minutes to complete testing on the CircleCI platform.
 
@@ -200,7 +200,7 @@ Installing dependencies in the primary container on CircleCI, rather than relyin
 
 ### Test Execution Optimization
 
-Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an in-memory Postgres image that does not save to disk. Another method you may wish to take is to run your tests in parallel instead of one-test-at-a-time. 
+Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0//parallelism-faster-jobs/)/ instead of one-test-at-a-time. 
 
 The figure below illustrates how overall these changes can reduce the total workflow time.
 

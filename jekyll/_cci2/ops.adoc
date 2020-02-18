@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-{% include snippets/server-only.adoc %}
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This chapter describes system checks and the basics of user management.
 
