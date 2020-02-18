@@ -281,13 +281,15 @@ end
 
 ## Uploading to TestFairy
 
+[TestFairy](https://www.testfairy.com) is another popular Enterprise App distribution and testing service. Fastlane has built in support for TestFairy making it quick and easy to upload new builds to the service.
+
 ![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
 
 1. On the TestFairy dashboard, navigate to the Preferences page.
 2. On the Preferences page, go to the API Key section and copy your API Key.
 3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
 
-### Using Fastlane
+### Fastlane Configuration
 
 To configure uploading to TestFairy within Fastlane, see the following example:
 
@@ -319,39 +321,4 @@ desc "Upload to TestFairy"
     )
   end
 end
-```
-
-### Using curl
-
-Alternatively, you can upload binaries to TestFairy with `curl`
-
-```yaml
-# .circleci/config.yml
-version: 2.1
-jobs:
-  build:
-    #  insert build code here...
-  deploy:
-    steps:
-      - checkout
-      - run:
-          name: Deploy to TestFairy
-          command: |
-            curl \
-              -A "CircleCI 2.0" \
-              -F api_key="$TESTFAIRY_API_KEY" \
-              -F comment="CircleCI build $CIRCLE_BUILD_URL" \
-              -F file=@path/to/ipafile.ipa \
-              https://upload.testfairy.com/api/upload/
-
-workflows:
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
 ```
