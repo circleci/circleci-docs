@@ -144,6 +144,80 @@ platform :ios do
 end
 ```
 
+## Deploying to Firebase
+
+Firebase is a distribution service from Google. Deploying to Firebase is simplified by installing the [Firebase app distribution plugin](https://github.com/fastlane/fastlane-plugin-firebase_app_distribution).
+
+### Fastlane Plugin Setup
+
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`. 
+
+**Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
+
+### Generating a CLI Token
+
+Firebase requires a token to used during authentication. To generate the token, we need to use the Firebase CLI and a browser - as CircleCI is a headless environment, we will need to generate this token locally, rather than at runtime, then add it to CircleCI as an environment variable.
+
+1. Download and install the Firebase CLI locally with the command `curl -sL https://firebase.tools | bash`
+2. Trigger a login by using the command `firebase login:ci`
+3. Complete the sign in via the browser window, then copy the token provided in the Terminal output
+4. Go to your project settings in CircleCI and create a new environment variable named `FIREBASE_TOKEN` with the value of the token.
+
+### Fastlane Configuration
+
+The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to `Settings -> General`. Under "Your apps", you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
+
+For more configuration options, see the [Firebase Fastlane plugin documentation](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app).
+
+```ruby
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+  desc "Upload to Firebase"
+  lane :upload_firebase do
+    increment_build_number(
+      build_number: "$CIRCLE_BUILD_NUM"
+    )
+    match(type: "adhoc")
+    gym(scheme: "HelloWorld")
+    firebase_app_distribution(
+      app: "1:123456789012:ios:abcd1234abcd1234567890",
+      release_notes: "This is a test release!"
+    )
+  end
+end
+```
+
+To use the Firebase Fastlane plugin, the Firebase CLI must be installed as part of the job via the `curl -sL https://firebase.tools | bash` command:
+
+```yaml
+version: 2.1
+jobs:
+  adhoc:
+    macos:
+      xcode: "11.3.1"
+    environment:
+      FL_OUTPUT_DIR: output
+    steps:
+      - checkout
+      - run: echo 'chruby ruby-2.6' >> ~/.bash_profile
+      - run: bundle install
+      - run: curl -sL https://firebase.tools | bash
+      - run: bundle exec fastlane upload_firebase
+
+workflows:
+  adhoc-build:
+    jobs:
+      - adhoc
+```
+
+**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version][({{ site.baseurl }}/2.0/testing-ios/#using-custom-ruby-versions)
+
 ## Deploying to Visual Studio App Center
 
 Visual Studio App Center, formally HockeyApp, is a distribution service from Microsoft. App Center integration with Fastlane is enabled by installing the [App Center plugin](https://github.com/microsoft/fastlane-plugin-appcenter).
@@ -167,8 +241,8 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
 2. Click on "New API Token"
 3. Enter a description for the token, then set the access to "Full Access"
-
-When the token is generated, make sure to copy it somewhere safe.
+4. When the token is generated, make sure to copy it somewhere safe.
+5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
 
 ### Fastlane Configuration
 
@@ -196,10 +270,54 @@ desc "Upload to VS App Center"
     # Set up the required information to upload the
     # app binary to VS App Center
     appcenter_upload(
-      api_token: "YOUR_API_TOKEN",
+      api_token: ENV[VS_API_TOKEN],
       owner_name: "YOUR_VS_APPCENTER_USERNAME",
       owner_type: "user",
       app_name: "HelloWorld"
+    )
+  end
+end
+```
+
+## Uploading to TestFairy
+
+[TestFairy](https://www.testfairy.com) is another popular Enterprise App distribution and testing service. Fastlane has built in support for TestFairy making it quick and easy to upload new builds to the service.
+
+![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
+
+1. On the TestFairy dashboard, navigate to the Preferences page.
+2. On the Preferences page, go to the API Key section and copy your API Key.
+3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
+
+### Fastlane Configuration
+
+To configure uploading to TestFairy within Fastlane, see the following example:
+
+```ruby
+# fastlane/Fastfile
+default_platform :ios
+
+platform :ios do
+  before_all do
+    setup_circle_ci
+  end
+
+desc "Upload to TestFairy"
+  lane :upload_testfairy do
+    # Here we are using the CircleCI job number
+    # for the build number
+    increment_build_number(
+      build_number: "$CIRCLE_BUILD_NUM"
+    )
+    # Set up Adhoc code signing and build  the app
+    match(type: "adhoc")
+    gym(scheme: "HelloWorld")
+    # Set up the required information to upload the
+    # app binary to VS App Center
+    testfairy(
+      api_key: ENV[TESTFAIRY_API_KEY],
+      ipa: 'path/to/ipafile.ipa',
+      comment: ENV[CIRCLE_BUILD_URL]
     )
   end
 end
