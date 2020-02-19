@@ -31,6 +31,7 @@ The currently available Xcode versions are:
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
+`11.4.0` | Xcode 11.4 Beta 1 (Build 11N111s)     | macOS 10.15.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2378/index.html)
  `11.3.1` | Xcode 11.3.1 (Build 11C505)     | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
  `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
  `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
@@ -450,95 +451,7 @@ You can then ensure you are using those, by prefixing commands with `bundle exec
 
 ## Configuring Deployment
 
-After you have a signed app you are ready to configure deployment. Distributing
-the app is easy with one of the following:
-
-* [iTunes Connect](https://itunesconnect.apple.com/)
-* [HockeyApp](http://hockeyapp.net/)
-* [Beta by Crashlytics](http://try.crashlytics.com/beta/)
-* [TestFairy](https://testfairy.com/)
-
-Then you should set up environment variables for your service of choice:
-
-### Hockey App
-{:.no_toc}
-
-1. Log in to Hockey app and create a new API token on the [Tokens page](
-https://rink.hockeyapp.net/manage/auth_tokens). Your token will need at
-least upload permission to upload new builds to Hockey App.
-
-2. Give your
-new API token a name specific to CircleCI such as "CircleCI
-Distribution".
-
-3. Copy the token, and log into CircleCI and go to the
-Project Settings page for your app.
-
-4. Create a new Environment Variable with
-the name `HOCKEY_APP_TOKEN` and paste the token as the value. You can now
-access this token in any job.
-
-### Beta By Crashlytics
-{:.no_toc}
-
-1. Log in to Fabric.io and visit your organization's settings page.
-![Fabric.io loging image](  {{ site.baseurl }}/assets/img/docs/fabric-org-settings-page.png)
-
-2. Click your organization (CircleCI in the image above), and click
-the API key and Build Secret links to reveal the items.
-![Fabric.io org image](  {{ site.baseurl }}/assets/img/docs/fabric-api-creds-page.png)
-
-3. Navigate to your App's Project Settings page in the CircleCI app, and under
-Environment Variables add two new items named `CRASHLYTICS_API_KEY` and
-`CRASHLYTICS_SECRET`, with the values you find on Crashlytics website.
-
-### TestFairy
-{:.no_toc}
-
-To set up your app on TestFairy, follow these steps:
-
-![TestFairy preferences image](  {{ site.baseurl }}/assets/img/docs/testfairy-open-preferences.png)
-
-1. On the TestFairy dashboard, navigate to the Preferences page.
-2. On the Preferences page, go to the API Key section.
-3. Copy your API key and go to your application's project settings within the CircleCI application.
-4. To deploy, add a job to your configuration using [fastlane](https://docs.fastlane.tools/getting-started/ios/beta-deployment/) or `curl` (example below).
-
-
-{% raw %}
-```yaml
-jobs:
-  build:
-    #  insert build code here...
-  deploy:
-    steps:
-      - checkout
-      - run:
-          name: Deploy to TestFairy
-          command: |
-            curl \
-              -A "CircleCI 2.0" \
-              -F api_key="$TESTFAIRY_API_KEY" \
-              -F comment="CircleCI build $CIRCLE_BUILD_URL" \
-              -F file=@path/to/ipafile.ipa \
-              https://upload.testfairy.com/api/upload/
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-        requires:
-          - build
-        filters:
-          branches:
-            only: master
-
-```
-{% endraw %}
-
-For a complete list of available options, please visit the [TestFairy Upload API documentation](https://docs.testfairy.com/API/Upload_API.html)
+After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/2.0/deploying-ios/)
 
 ## Resolving Common Simulator Issues
 {:.no_toc}

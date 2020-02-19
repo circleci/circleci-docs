@@ -14,18 +14,17 @@ A collection of best practices and strategies for authoring orbs. CircleCI orbs 
 ### Metadata
 
 - Ensure all commands, jobs, executors, and parameters have detailed descriptions.
-- Include the code repo link in the orb description.
-- Include link to website in description.
+- Provide a `source_url`, and if available, `home_url` [via the `display` key]({{ site.baseurl }}/2.0/orb-author/#describing-your-orb).
 - Define any prerequisites such as obtaining an API key in the description.
 - Be consistent and concise in naming your orb elements. For example, don't mix "kebab case" and "snake case."
 
 
 ### Examples
 
-- Must have at least 1 [usage example](https://circleci.com/docs/2.0/orb-author/#providing-usage-examples-of-orbs).
+- Must have at least 1 [usage example]({{ site.baseurl }}/2.0/orb-author/#providing-usage-examples-of-orbs).
 - Show orb version as `x.y` (patch version may not need to be included) in the example.
 - Example should include most common/simplest use case calling a top-level job or other base-case elements if no job is present.
-- If applicable, you may want to showcase the use of [pre and post steps](https://circleci.com/docs/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job. 
+- If applicable, you may want to showcase the use of [pre and post steps]({{ site.baseurl }}/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job. 
 
 ### Commands
 
@@ -35,7 +34,7 @@ A collection of best practices and strategies for authoring orbs. CircleCI orbs 
 - All commands available to the user should complete a full task. Do not create a command for the sole purpose of being a “partial” to another command unless it can be used on its own.
 - It is possible not all CLI commands need to be transformed into an orb command. Single line commands with no parameters do not necessarily need to have an orb command alias.
 - Command descriptions should call out any dependencies or assumptions, particularly if you intend for the command to run outside of a provided executor in your orb.
-- It is a good idea to check for the existance of required parameters, environment variables or other dependancies as a part of your command.
+- It is a good idea to check for the existence of required parameters, environment variables or other dependancies as a part of your command.
 
 example:
 ```
@@ -48,13 +47,13 @@ fi
 ### Parameters
 
 - When possible, use defaults for parameters unless a user input is essential. 
-- Utilize the [“env_var_name” parameter type](https://circleci.com/docs/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data. 
-- [Injecting steps as a parameter](https://circleci.com/docs/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
+- Utilize the [“env_var_name” parameter type]({{ site.baseurl }}/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data. 
+- [Injecting steps as a parameter]({{ site.baseurl }}/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
 
 **Installing binaries and tools**
-  - Set an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and ensure to install the binary to this parameterized location. This may often avoid the issue of needing `root` privledges in environments where the user may not have root.
+  - Set an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and ensure to install the binary to this parameterized location. This may often avoid the issue of needing `root` privileges in environments where the user may not have root.
   - If `root`is required for your use case, it is recommended to add pre-flight checks to determine if the user has root permissions and gracefully fail with a descriptive error message alerting the user they need proper permissions.
-  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run](https://circleci.com/docs/2.0/configuration-reference/#run) statement. This is required when installing to a non-default path.
+  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run]({{ site.baseurl }}/2.0/configuration-reference/#run) statement. This is required when installing to a non-default path.
   example:
 ```
 echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
