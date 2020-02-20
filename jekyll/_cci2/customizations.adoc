@@ -122,7 +122,7 @@ The value of FOO will take precedence over the default values set in the default
 /etc/circleconfig/vm-service/customizations
 /etc/circleconfig/workflows-conductor/customizations
 ```
- 
+
 === Resource Classes
 _Introduced in CircleCI Server v2.19_
 
@@ -145,7 +145,7 @@ sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
 +
-WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resource classes. 
+WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resource classes.
 . Run:
 +
 ```shell
@@ -174,12 +174,12 @@ Example config:
 Let's take a look at one of the options in more detail
 
 ```
-:medium {:id "d1.medium" :ga true :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
+:medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
 * `:medium`  - this is the name that your developers will use to refer to the resource class in their config.yml and the is the external facing name of the resource class.
 * `:id "d1.medium"`` - this is the internal name for the resource class. You can customize this ID for Docker resource classes but you will need to use the listed IDs for `machine` resources.
-* `:ga true` - required field
+* `:availability :general` - required field
 * `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. This this should be kept in parity with :outer - see below.
 * `:outer {:cpu 4.0 :ram 8192}` - This defines the CPU and RAM for the resource class.
 
@@ -221,4 +221,3 @@ export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
 
 .Login Screen Banner Example
 image::banner.png[]
-
