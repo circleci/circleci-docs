@@ -32,7 +32,7 @@ Database images for use as a secondary 'service' container are also available.
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. Fork the project on GitHub to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
+2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Set Up Project button next to the project you just forked
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 
