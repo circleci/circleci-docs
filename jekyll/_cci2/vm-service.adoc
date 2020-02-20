@@ -57,18 +57,24 @@ image::vm-service-custom.png[Custom VM Service Images]
 
 === Custom Linux AMI
 
-To build custom VM service images:
+==== Prerequisites
+* Packer (https://packer.io/intro/getting-started/install.html)
+* AWS Access Key ID and Secret Access Key
+
+==== Creating a Custom AMI
 
 1. Clone our image builder repo: https://github.com/circleci/image-builder/tree/picard-vm-image
-2. Open `aws-vm.json` in your editor and fill in the required groups. An access key and secret key are required to upload. Handle the key and secret process according to your requirements, but consider restricting the `ami_groups` to only within your organization
-3. Run `packer build aws-vm.json`
+2. Open `aws-vm.json` in your editor. This provides a baseline template for building an AMI with Packer. An AWS access key ID and secret access key are required to upload. You can find more information about managing AWS authentication with Packer https://packer.io/docs/builders/amazon.html#authentication[here].  If the baseline template is too limited, you can find additional AWS configuration options https://packer.io/docs/builders/amazon.html[here].
+3. (Optional) Consider restricting the `ami_groups` to only within your organization [1]
+4. We provide a list of pre-configured dependencies [2].  You can customize the provision.sh script to meet the needs of your environment.
+5. Run `packer build aws-vm.json`
 
-Refer to https://packer.io/docs/builders/amazon-ebs.html#ami_groups for more information
-and see https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh for details about settings.
+[1] https://packer.io/docs/builders/amazon-ebs.html#ami_groups
 
-You will need to associate the `circleci` user with the image you want to use as shown in https://github.com/circleci/image-builder/blob/picard-vm-image/aws_user_data[this] example.
+[2] https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh
 
-To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings accessible from the Management console (for example, `<your-circleci-id>.com:8800`).
+==== Using the Custom Images
+To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings tab of the Management console (for example, `<your-circleci-id>.com:8800`). The fields are located in the *VM Service* section.
 
 === Creating a Windows AMI
 _Introduced in CircleCI Server v2.18.3_
