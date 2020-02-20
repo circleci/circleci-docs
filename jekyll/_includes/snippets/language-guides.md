@@ -35,7 +35,7 @@
 [iOS - React]: https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md
 [macOS]: {{ site.baseurl }}/2.0/hello-world-macos
 [Java]: {{ site.baseurl }}/2.0/language-java/
-[Java - Maven]: ({{ site.baseurl }}/2.0/language-java-maven/)
+[Java - Maven]: {{ site.baseurl }}/2.0/language-java-maven/
 [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [NodeJS - JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
 [PHP]: {{ site.baseurl }}/2.0/language-php/
@@ -44,7 +44,7 @@
 [React Native]: https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md
 [Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
 [Scala]: {{ site.baseurl }}/2.0/language-scala/
-[Windows]: ({{ site.baseurl }}/2.0/hello-world-windows/)
+[Windows]: {{ site.baseurl }}/2.0/hello-world-windows/
 
 [android-image]: https://github.com/circleci/circleci-images/tree/master/android
 [circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
