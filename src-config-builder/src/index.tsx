@@ -14,17 +14,6 @@ const Wrapper = styled.div`
   flex: 1;
 `;
 
-const HeaderPlaceholder = styled.div`
-  height: 64px;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background: white;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
-  z-index: 1;
-
-`;
-
 const Content = styled.div`
   display: flex;
   flex: 1;
