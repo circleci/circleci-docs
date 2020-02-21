@@ -1,46 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> CircleCI Config Builder
+
+`src-config-builder` is a React application that creates a front-end-only
+application that can generate a `.circleci/config.yml` file for users.
+
+This tool was originally intended to provider user's with tools to quickly prototype a
+config and has been built with the possibility of being expanded (following some
+of the patterns and tooling of our larger front-end applications.)
+
+For now, the config builder is transplanted and run within the docs and is not
+used as a part of onboarding, nor is part of any other in-app functionality.
+
+## Regarding Development.
+
+This project was bootstrapped with [Create React
+App](https://github.com/facebook/create-react-app). The project uses typescript
+and styled-components via emotion.
 
 ## Available Scripts
 
-In the project directory, you can run:
+``` sh
+npm install     # install all dependencies.
+npm start       # boot the app into localhost:3000
+npm build       # created a build of the app, which can be hosted in the docs.
+```
 
-### `npm start`
+Because this is a CRA app, there is an eject script. I'd recommend not touching
+that button.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Regarding Deployment.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+`npm run build` creates an output folder. Based on our `package.json`'s
+`homepage`  key, the app will build out relatively links as expected. Because
+this is being hosted at `circleci.com/docs/config-builder` we set the homepage
+to `.`.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The `build` output is moved into the `jekyll` subfolder at CI time.
 
