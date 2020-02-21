@@ -82,6 +82,7 @@ workflows:
   build-and-deploy:
     jobs:
       - aws-ecr/build_and_push_image:
+          aws-region: ${AWS_DEFAULT_REGION}
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           tag: "${CIRCLE_SHA1}"
 ```
