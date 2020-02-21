@@ -162,7 +162,7 @@ jobs:
             - src-config-builder/node_modules
       - run:
           name: Build Config Builder
-          command: npm run build
+          command: cd src-config-builder; npm run build
       - run:
           name: Copy build output to temporary workspace
           command: cp -R build/* /tmp/workspace/api
