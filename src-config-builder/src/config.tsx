@@ -1,4 +1,4 @@
 export default {
-  SHOW_HEADER: false,
-  SHOW_DOCBAR: false
+  SHOW_HEADER: true,
+  SHOW_DOCBAR: true
 };

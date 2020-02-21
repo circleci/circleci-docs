@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import styled from '@emotion/styled';
-import { Icon } from '.';
+import { Icon, Link } from '.';
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
   background-color: #ffffff;
@@ -14,7 +14,6 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   border-left: 1px solid #efefef;
   display: flex;
   flex-direction: column;
-  height: 100%;
   transition: margin-right 0.4s ease;
 `;
 
@@ -84,15 +83,6 @@ const DocsSubtitle = styled.div`
   margin: 16px 0;
 `;
 
-const DocsLink = styled.a`
-  color: #3aa3f2;
-  font-family: Roboto;
-  font-size: 14px;
-  margin: 12px 0;
-  letter-spacing: 0.08px;
-  line-height: 21px;
-  text-decoration: none;
-`;
 
 const buildDocLink = (link: string) => `https://circleci.com/docs/2.0/${link}/`;
 
@@ -119,7 +109,7 @@ export const Docsbar = ({ sidebarOpen, setSidebarOpen }: DocsbarProps) => {
       <SectionLearnMore>
         <Title>Learn more</Title>
         <CollapseWrapper onClick={() => setSidebarOpen(toggleBar)}>
-          <Icon width={10} img={collapseIcon} />
+          <Icon width={16} img={collapseIcon} />
         </CollapseWrapper>
       </SectionLearnMore>
       <Separator />
@@ -127,13 +117,13 @@ export const Docsbar = ({ sidebarOpen, setSidebarOpen }: DocsbarProps) => {
       <SectionDocs>
         <DocsTitle>Documentation</DocsTitle>
         <DocsSubtitle>
-          Our most popular docs on hwo to set up and debug your build
+          Our most popular docs on how to set up and debug your build
           configuration.
         </DocsSubtitle>
         {docLinks.map(l => (
-          <DocsLink key={l.name} target="_blank" href={l.link}>
+          <Link key={l.name} target="_blank" href={l.link}>
             {l.name}
-          </DocsLink>
+          </Link>
         ))}
       </SectionDocs>
 

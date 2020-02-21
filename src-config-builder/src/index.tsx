@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styled from "@emotion/styled";
-import {Sidebar, Docsbar, ConfigContent} from "./components";
+import {Sidebar, Docsbar, ConfigContent, Navbar} from "./components";
 import baseImg from './data/baseConfigs'
 import appConfig from './config';
 import "./styles.css";
@@ -41,7 +41,7 @@ const App: React.FC = () => {
 
   return (
     <Wrapper>
-      {appConfig.SHOW_HEADER && ( <HeaderPlaceholder />)}
+      {appConfig.SHOW_HEADER && ( <Navbar/>)}
       <Content>
         <Sidebar setConfig={setConfig} setCurrentStep={setCurrentStep} />
         <ConfigContent

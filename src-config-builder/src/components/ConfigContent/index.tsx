@@ -9,7 +9,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import emptyStateImage from './assets/empty-state.svg'
 import {sidebarWidth} from '../constants';
-import {Codemirror, H1, H3, P, Icon} from '../index'
+import {Codemirror, H1, H3, P, Icon, Link} from '../index'
 import yaml from 'js-yaml'
 
 const Wrapper = styled.div`
@@ -104,7 +104,7 @@ export const ConfigContent = ({sidebarOpen, config, currentStep}: ConfigContentP
              <Content style={{flexDirection: "row"}}>
                <H1>View your starting config below.</H1>
                <H3>The snippet below can get your project started and building.</H3>
-               <P>Visit the CircleCI docs to learn about different executors, images, caching, and other features that enable you to do more.</P>
+               <P>Visit the <Link target="_blank" href="https://circleci.com/docs/2.0">CircleCI Documentation</Link> to learn about different executors, images, caching, and other features that enable you to do more.</P>
              </Content>
 
              <FileAndDownload>
