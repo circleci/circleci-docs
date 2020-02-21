@@ -53,7 +53,7 @@ Variable                 | Description
 -------------------------|------------
 AWS_ACCESS_KEY_ID        | Security credentials for AWS.
 AWS_SECRET_ACCESS_KEY    | Security credentials for AWS.
-AWS_DEFAULT_REGION       | Used by the AWS CLI.
+AWS_REGION               | Used by the AWS CLI.
 AWS_ACCOUNT_ID           | Required for deployment. [Find your AWS Account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId).
 AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should correspond to the value of `aws_resource_prefix` in `terraform_setup/terraform.tfvars`.
 AWS_ECR_ACCOUNT_URL      | Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com
@@ -82,7 +82,6 @@ workflows:
   build-and-deploy:
     jobs:
       - aws-ecr/build_and_push_image:
-          aws-region: ${AWS_DEFAULT_REGION}
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           tag: "${CIRCLE_SHA1}"
 ```
@@ -108,7 +107,6 @@ workflows:
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build_and_push_image # only run this job once aws-ecr/build_and_push_image has completed
-          aws-region: ${AWS_DEFAULT_REGION}
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
