@@ -39,17 +39,17 @@ We have various other features that set our solution apart. https://circleci.com
 * TeamCity's Build Configurations are equivalent to https://circleci.com/docs/2.0/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve some sort of goal (e.g. run unit tests).
 * TeamCity has traditionally used the UI to configure most builds, with Kotlin Script configuration being a newer, recent feature. CircleCI uses YAML to configure the majority of pipeline functionality.
 
-[.table.table-striped.table-migrate]
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
-| TeamCity _settings.kts_ | CircleCI _config.yml_
+| TeamCity _settings.kts_ | Equivalent CircleCI _config.yml_
 
 a|
 [source, kotlin]
 ----
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
-import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 
 version: "2019.2"
 
@@ -83,6 +83,64 @@ jobs:
     docker:
       - image: cimg/base:stable
 
+    # Define steps for job
+    steps:
+      - checkout
+      - run: echo "Hello World!"
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| TeamCity _settings.kts_
+
+a|
+[source, kotlin]
+----
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+
+version: "2019.2"
+
+project {
+  buildType(HelloWorld)
+}
+
+object HelloWorld: BuildType({
+  name = "Hello World"
+  steps {
+    script {
+      scriptContent = "echo 'Hello World!'"
+    }
+  }
+})
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| Equivalent CircleCI _config.yml_
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  hello-workflow:
+    jobs:
+      - hello-job
+
+jobs:
+  # Define job
+  hello-job:
+    # Define environment
+    docker:
+      - image: cimg/base:stable
+
     # Define steps for job 
     steps:
       - checkout
@@ -93,11 +151,62 @@ jobs:
 * Instead of Build Chains, CircleCI has https://circleci.com/docs/2.0/workflows/[Workflows], which define dependencies and flow between jobs.
 * A https://circleci.com/docs/2.0/pipelines/[Pipeline] refers to all configuration, workflows, and jobs for a project. This multi-layer structure allows for strong flexibility and separation of concerns for different workloads.
 
-[.table.table-striped.table-migrate]
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
-| TeamCity Build Chain | CircleCI Workflow
+| TeamCity Build Chain | Equivalent CircleCI Workflow
+
+a|
+[source, kotlin]
+----
+project {
+  sequence {
+    build(Compile)
+    parallel {
+        build(Test1)
+        build(Test2)
+    }
+    build(Package)
+    build(Publish)
+  }
+}
+
+/* BuildType definitions assumed
+
+----
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  build-deploy:
+    jobs:
+      - Compile
+      - Test1:
+          requires:
+            - Compile
+      - Test2:
+          requires:
+            - Compile
+      - Package:
+          requires:
+            - Test1
+            - Test2
+      - Publish:
+          requires:
+            - Package
+
+# Job definitions assumed
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| TeamCity Build Chain
 
 a|
 [source, kotlin]
@@ -114,8 +223,16 @@ project {
   }
 }
 
-// BuildType definitions assumed
+/* BuildType definitions assumed
+
 ----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| Equivalent CircleCI Workflow
 
 a|
 [source, yaml]
@@ -173,11 +290,11 @@ In TeamCity, build steps are chosen from a list of defined Runner Types (e.g. Vi
 
 Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/2.0/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials Page] for various language and framework examples.
 
-[.table.table-striped.table-migrate]
+[.table.table-striped.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
-| TeamCity Steps | CircleCI Steps 
+| TeamCity Steps | Equivalent CircleCI Steps
 
 a|
 [source, kotlin]
@@ -241,6 +358,86 @@ jobs:
 ----
 |===
 
+[.table.table-striped.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| TeamCity Steps
+
+a|
+[source, kotlin]
+----
+project {
+  parallel {
+    build(Gradle) # Assume agent configured
+    build(Maven)  # Assume agent configured
+  }
+}
+
+object Gradle: BuildType({
+  name = "Gradle"
+
+  steps {
+    gradle {
+      tasks = "clean build"
+    }
+  }
+})
+
+object Maven: BuildType({
+  name = "Maven"
+
+  steps {
+    maven {
+      goals = "clean package"
+    }
+  }
+})
+----
+|===
+
+[.table.table-striped.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| Equivalent CircleCi Steps
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  parallel-workflow:
+    jobs:
+      - Gradle
+      - Maven
+
+jobs:
+  Gradle:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Build
+          command: ./gradlew clean build
+
+  Maven:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Package
+          command: mvn clean package
+----
+|===
+
+=== Build Templates
+
+CircleCI's equivalent of Build Templates is orbs, which are templatizable, shareable configuration. Read more about them in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs documentation].
+
+=== Complex Builds
 
 For larger and more complex builds, we recommend moving over in phases until you get comfortable with the CircleCI platform. We recommend this order:
 
