@@ -15,7 +15,7 @@ toc::[]
 
 The default method for user account authentication in CircleCI Server is through GitHub.com/GitHub Enterprise OAuth.
 
-Once your installation is up and running, you can simply provide users with a link to access the application - for example `<your-circleci-hostname>.com` – and it will prompt them to set up an account by running through the GitHub/GitHub Enterprise OAuth flow. It will then redirect them to the CircleCI login screen.
+After your installation is up and running, you can simply provide users with a link to access the application - for example `<your-circleci-hostname>.com` – and it will prompt them to set up an account by running through the GitHub/GitHub Enterprise OAuth flow. It will then redirect them to the CircleCI login screen.
 
 .CircleCI Server Login Screen
 image::server_login.png[Server Login]
