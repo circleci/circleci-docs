@@ -23,7 +23,7 @@ image::server_login.png[Server Login]
 == LDAP
 As an alternative to the OAuth/GitHub option, you can choose LDAP authentication. This section describes how to enable, configure, and test CircleCI to authenticate users with OpenLDAP or Active Directory credentials.
 
-CAUTION: Enabling LDAP will mean it is the **only** way for users to authenticate their account for your installation. CircleCI **does not recommmend to turn on LDAP Authentication for existing installations that previously had users authenticating with GitHub**. Please contact your account team if you need to switch to LDAP for an existing installation.
+CAUTION: Enabling LDAP will mean it is the **only** way for users to authenticate their account for your installation. CircleCI **does not recommmend to turn on LDAP Authentication for existing installations that previously had users authenticating with GitHub**. Consider contacting your account team if you need to switch to LDAP for an existing installation.
 
 === Prerequisites
 
@@ -68,7 +68,7 @@ You should grant admin access to the first user accessing a CircleCI Server inst
 
 ==== Grant Admin Access to User
 
-NOTE: Only one of the following methods should be necessary to grant admin access. If you are unfamiliar with using the REPL, please contact customer support before running these steps.
+NOTE: Only one of the following methods should be necessary to grant admin access. If you are unfamiliar with using the REPL, consider contacting customer support before running these steps.
 
 *For a given user by LDAP user name (prior to GitHub account connection, or if they have no GitHub account):*
 
