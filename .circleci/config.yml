@@ -165,7 +165,7 @@ jobs:
           command: cd src-config-builder; npm run build
       - run:
           name: Copy build output to temporary workspace
-          command: cd src-config-builder; cp -R build/**/* /tmp/workspace/config-builder
+          command: cd src-config-builder; cp -R build/**/* /tmp/workspace/config-builder/
       - persist_to_workspace:
           root: *workspace_root
           paths:
