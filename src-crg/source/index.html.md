@@ -11,12 +11,7 @@ search: true
 
 ## Overview
 
-This document is a reference for the CircleCI 2.1 configuration keys used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates you want to use the 2.1 infrastructure.
-
-You can see a complete `config.yml` example in our [full example](#full-example).
-
-**Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file enables you to test 2.1 builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
-
+This document is a reference for the CircleCI 2.1 configuration keys used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates you want to use the 2.x infrastructure.
 
 ## **`version`**
 
@@ -121,7 +116,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 ## **`jobs`**
 
-A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
+A run is comprised of one or more named jobs. The name of the job is the key in the map, and the value is a map describing the job.
 
 If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
@@ -145,7 +140,6 @@ steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | The directory used to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
-branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
 
@@ -826,13 +820,6 @@ parameters:
   run_integration_tests:
     type: boolean
     default: false
-
-workflows:
-  version: 2
-  integration_tests:
-    when: << pipeline.parameters.run_integration_tests >>
-    jobs:
-      - mytestjob
 
 jobs:
 ...
