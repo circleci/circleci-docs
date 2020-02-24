@@ -121,8 +121,7 @@ export function init () {
 
   window.addEventListener('load', renderResults);
   searchResetButton.addEventListener('click', function () {
-    setTimeout(function () {
-      renderResults();
-    }, 100);
+    searchBox.value = ''
+    renderResults();
   });
 };
