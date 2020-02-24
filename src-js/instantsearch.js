@@ -56,6 +56,7 @@ export function init () {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
+      autofocus: false,
       queryHook: debounce(function (query, searchFunction) {
           searchFunction(query);
           setTimeout(renderResults, 100);

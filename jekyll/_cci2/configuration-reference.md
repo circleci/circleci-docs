@@ -103,7 +103,7 @@ working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
 
-<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will recieve an error.
+<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
 Example:
 
@@ -153,7 +153,7 @@ branches | N | Map | A map defining rules to allow/block execution of specific b
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 {: class="table table-striped"}
 
-<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will recieve an error.
+<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
 #### `environment`
 A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
@@ -459,19 +459,14 @@ jobs:
 
 ##### Machine Executor (Linux)
 
-Class            | vCPUs | RAM
------------------|-------|------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-xlarge           | 8     | 32GB
-2xlarge          | 16    | 64GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
 ###### Example Usage
 ```yaml
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-1604:201903-01 # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
     resource_class: large
     steps:
       ... // other config

@@ -29,9 +29,42 @@ _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs o
 
 Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
+## Next-generation Convenience Images
+
+The next-generation convenience images in this section were built from the ground up with CI, efficiency, and determinism in mind. Here are some of the highlights:
+
+**Faster spin-up time** - In Docker terminology, these next-gen images will generally have fewer and smaller layers. Using these new images will lead to faster image downloads when a build starts, and a higher likelihood that the image is already cached on the host.
+
+**Improved reliability and stability** - The current images are rebuilt practically every day with potential changes from upstream that we can't always test fast enough. This leads to frequent breaking changes, which is not the best environment for stable, deterministic builds. Next-gen images will only be rebuilt for security and critical-bugs, leading to more stable and deterministic images.
+
+### CircleCI Base Image
+
+```yaml
+image: cimg/base:2020.01
+```
+
+This is a brand new Ubuntu-based image designed to install the very bare minimum. All of the next-generation convenience images that we will be releasing in the coming weeks are based on this image.
+
+**When to use it?**
+
+If you need a generic image to run on CircleCI, to use with orbs, or to use as a base for your own custom Docker image, this image is for you.
+
+**Resources**
+
+You can find this image on [Docker Hub](https://hub.docker.com/r/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
+
+## Next-gen CircleCI Go Image
+
+```yaml
+image: cimg/go:1.13
+```
+
+This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). It brings with it better documentation, more determinism, and benefits from the highly efficient infrastructure it’s built on.
+
+
 ## Best Practices
 
-Convenience images are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
+The convenience images in the following sections are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
 CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container. Using `circleci/ruby:2.4-node` is similar to using `:latest`. It is best practice to lock down aspects of your build container by specifying an additional tag to pin down the image in your configuration.
 
