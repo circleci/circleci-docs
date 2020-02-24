@@ -28,7 +28,7 @@ CircleCI is a very different product from Jenkins with a lot of different concep
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ```
 
-Some programs and utilities are [pre-installed on CircleCI Images]( {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools), but anything else required by your build must be installed a `run` `step`. Your project’s dependencies may be [cached]( {{ site.baseurl }}/2.0/caching/) for the next build using the `save_cache` and `restore_cache` `steps`, so that they only need to be fully downloaded and installed once.
+Some programs and utilities are [pre-installed on CircleCI Images]( {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools), but anything else required by your build must be installed with a `run` `step`. Your project’s dependencies may be [cached]( {{ site.baseurl }}/2.0/caching/) for the next build using the `save_cache` and `restore_cache` `steps`, so that they only need to be fully downloaded and installed once.
 
 **Manual configuration:** If you were using plugins or options other than Execute Shell in Jenkins to run your build steps, you may need to manually port your build from Jenkins. Use the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) document as a guide to the complete set of CircleCI configuration keys.
 
