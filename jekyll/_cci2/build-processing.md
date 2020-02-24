@@ -21,11 +21,19 @@ Most projects will have Pipelines enabled by default. Verify the project pipelin
 
 Pipelines are our name for the full set of configurations you run when you trigger work on your projects in CircleCI. Pipelines contain your workflows, which coordinate jobs.
 
-## Benefits of Pipelines
+## Benefits of Using Pipelines
 
 The pipelines feature enables use of the new [API endpoint to trigger builds with workflows](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) and the following use cases:
 
 {% include snippets/pipelines-benefits.adoc %}
+
+## Implications of Using Pipelines
+
+When using pipelines, please note the following implications of pipelines:
+
+- Both 2.0 and 2.1 configurations wrap the 'build' job in a workflow if no 'workflows' are defined.
+- API 1.1 job triggering works via the Access Control List (ACL) for both 2.0 and 2.1 configurations.
+- If no builds or workflows are defined, you will receive an error.
 
 ## Transitioning to Pipelines
 
