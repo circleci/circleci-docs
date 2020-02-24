@@ -405,7 +405,7 @@ jobs:
 
 In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
 
-``` YAML
+```yaml
 jobs:
   build:
     branches:
