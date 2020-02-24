@@ -146,7 +146,7 @@ circleci tests glob test/**/*.rb | circleci tests split > /tmp/tests-to-run
 bundle exec rspec $(cat /tmp/tests-to-run)
 ```
 
-The file `/tmp/tests-to-run` will have different contents in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
+The contents of the file `/tmp/tests-to-run` will be different for each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
 ### Video: Troubleshooting Globbing
 {:.no_toc}
