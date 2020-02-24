@@ -29,10 +29,8 @@ The pipelines feature enables use of the new [API endpoint to trigger builds wit
 
 ## Implications of Using Pipelines
 
-When using pipelines, please note the following implications of pipelines:
+When using pipelines, please note the following:
 
-- Both 2.0 and 2.1 configurations wrap the 'build' job in a workflow if no 'workflows' are defined.
-- API 1.1 job triggering works via the Access Control List (ACL) for both 2.0 and 2.1 configurations.
 - If no builds or workflows are defined, you will receive an error.
 
 ## Transitioning to Pipelines
