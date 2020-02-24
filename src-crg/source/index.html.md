@@ -394,7 +394,7 @@ ignore | N | List | List of branches to ignore
 
 Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
 
-``` YAML
+```yaml
 jobs:
   build:
     branches:
