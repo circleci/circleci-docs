@@ -274,6 +274,7 @@ jobs:
           root: ~/circleci-docs/jekyll/_site
           paths:
             - docs
+            - config-builder
 
   reindex-search:
     executor:
