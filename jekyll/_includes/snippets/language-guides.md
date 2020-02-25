@@ -13,7 +13,7 @@
 | [macOS]{:target="_blank"}               | MacOS        | [circleci-demo-macos]{:target="_blank"}                  |
 | [Java]{:target="_blank"}                | Spring       | [circleci-demo-java-spring]{:target="_blank"}            |
 | [Java - Maven]{:target="_blank"}        | Maven        | [circleci-demo-java-spring-tree-maven]{:target="_blank"} |
-| [JavaScript]{:target="_blank"}          | React Native | [circleci-demo-react-native]{:target="_blank"}           |
+| [JavaScript]{:target="_blank"}          | React        | [circleci-demo-javascript-react-app]{:target="_blank"}   |
 | [NodeJS - JavaScript]{:target="_blank"} | React        | [circleci-demo-javascript-express]{:target="_blank"}     |
 | [PHP]{:target="_blank"}                 | Laravel      | [circleci-demo-php-laravel]{:target="_blank"}            |
 | [Python]{:target="_blank"}              | Django       | [circleci-demo-python-django]{:target="_blank"}          |
