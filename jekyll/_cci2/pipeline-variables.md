@@ -117,7 +117,7 @@ Configuration processing happens in the following stages:
 - Pipeline parameters are replaced in the orb statement
 - Orbs are imported
 
-The remaining configuration is processed, element parameters are resolved, type-checked, and substituted,
+The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
 ## Element Parameter Scope
 
