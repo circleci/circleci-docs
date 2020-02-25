@@ -250,7 +250,8 @@ jobs:
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
             mkdir -p /tmp/workspace/config-builder
-            cp -R /tmp/workspace/config-builder/* jekyll/config-builder/
+            mkdir -p jekyll/config-builder
+            cp -R /tmp/workspace/config-builder/ jekyll/config-builder/
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run:
