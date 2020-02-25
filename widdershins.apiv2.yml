@@ -23,4 +23,4 @@ tagGroups:
 - title: Insights (Preview)
   tags:
   - Insights
-search: false
+search: true
