@@ -67,6 +67,8 @@ Every CircleCI project requires a configuration file called [`.circleci/config.y
  - [AWS-ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
  - [AWS-ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
 
+Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+
 ### Build and Push the Docker image to AWS ECR
 
 The `build_and_push_image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
@@ -75,8 +77,8 @@ The `build_and_push_image` job builds a Docker image from a Dockerfile in the de
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.0
-  aws-ecs: circleci/aws-ecs@01.1.0
+  aws-ecr: circleci/aws-ecr@x.y.z
+  aws-ecs: circleci/aws-ecs@0x.y.z
 
 workflows:
   build-and-deploy:
@@ -95,8 +97,8 @@ The `deploy-service-update` job of the aws-ecs orb creates a new task definition
 version: 2.1
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.7.0
-  aws-ecs: circleci/aws-ecs@01.1.0
+  aws-ecr: circleci/aws-ecr@x.y.z
+  aws-ecs: circleci/aws-ecs@0x.y.z
 
 workflows:
   build-and-deploy:
