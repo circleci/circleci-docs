@@ -261,8 +261,6 @@ en:
           link: 2.0/deployment-integrations/
         - name: Deployment Examples
           link: 2.0/deployment-examples/
-        - name: Deploying to AWS ECR/ECS
-          link: 2.0/ecs-ecr/
         - name: Publishing Snap Packages
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
