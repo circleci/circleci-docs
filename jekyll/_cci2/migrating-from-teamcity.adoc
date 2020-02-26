@@ -18,7 +18,7 @@ CircleCI has various differences in setup and configuration from TeamCity. For t
 . **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials page] for various examples in different languages and frameworks.
 . **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/2.0/workflows/[configure a workflow]**. This would essentially migrate your Build Chain.
 . **Next, https://circleci.com/docs/2.0/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
-. **Throughout this process, consult our https://circleci.com/docs/2.0/configuration-reference/#section=configuration[Config Reference]** for a list of all available configuration on our platform.
+. **Throughout this process, consult the https://circleci.com/docs/2.0/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
 
 == Why Migrate to CircleCI?
 
