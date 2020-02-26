@@ -266,7 +266,7 @@ For more information on CircleCI Concepts, visit our https://circleci.com/docs/2
 
 === Environment
 
-TeamCity requires setting up a build agent with the required O.S. & tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/2.0/executor-types/[available executors].
+TeamCity requires setting up a build agent with the required OS and tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/2.0/executor-types/[available executors].
 
 ..circleci/config.yml
 [source,yaml]
