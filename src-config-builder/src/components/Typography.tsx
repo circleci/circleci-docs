@@ -1,5 +1,6 @@
 // import React from "react";
 import styled from '@emotion/styled';
+import {screens} from "../config"
 
 export const H1 = styled.div`
   color: #161616;
@@ -9,6 +10,11 @@ export const H1 = styled.div`
   letter-spacing: 0.2px;
   line-height: 52px;
   margin-bottom: 16px;
+  @media(max-width: ${screens.med}px) {
+    font-size: 32px;
+  }
+
+
 `;
 
 export const H3 = styled.h3`

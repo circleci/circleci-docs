@@ -3,12 +3,12 @@ import ReactDOM from "react-dom";
 import styled from "@emotion/styled";
 import {Sidebar, Docsbar, ConfigContent, Navbar} from "./components";
 import baseImg from './data/baseConfigs'
-import appConfig from './config';
+import appConfig, {screens} from './config';
 import "./styles.css";
+
 
 const Wrapper = styled.div`
   min-height: 100vh;
-  // max-height: 100%;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -20,6 +20,9 @@ const Content = styled.div`
   justify-content: center;
   align-items: stretch;
   overflow-x: hidden;
+  @media (max-width: ${screens.med}px ) {
+    flex-direction: column;
+  }
 `;
 
 

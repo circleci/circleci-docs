@@ -8,7 +8,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import emptyStateImage from './assets/empty-state.svg'
-import {sidebarWidth} from '../constants';
+import {sidebarWidth, screens} from '../../config';
 import {Codemirror, H1, H3, P, Icon, Link} from '../index'
 import yaml from 'js-yaml'
 
@@ -19,11 +19,15 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: stretch;
   min-height: 100%;
+
 `;
 
 const EmptyStateImage = styled.img`
   max-width: 300px;
   align-self: center;
+  @media(max-width: ${screens.med}px) {
+    margin: 64px 0 96px;
+  }
 `
 
 const TopSection = styled.section`
@@ -32,11 +36,12 @@ const TopSection = styled.section`
 
 const Content = styled.div`
   padding: 0 40px;
+
 `
 
 const Row = styled.div`
   display: flex;
-    flex-direction: row;
+  flex-direction: row;
 `
 
 const FileName = styled.div`
@@ -63,20 +68,10 @@ const FileAndDownload = styled.div`
   padding: 20px 0;
 `
 
-const calculateCodeMirrorWidth = (sidebarOpen: boolean) => {
-  let pixWidth;
-  if (sidebarOpen) {
-    pixWidth = (sidebarWidth * 2) + 48
-  } else {
-    pixWidth = sidebarWidth + 48
-  }
-  return `calc(100vw - ${(pixWidth)}px)`
-}
-
 const CodeMirrorWrapper = styled.div<{sideBarOpen: boolean}>`
   display: flex;
   height: 100%;
-  max-width: ${({sideBarOpen}) => calculateCodeMirrorWidth(sideBarOpen)};
+  max-width: ${sidebarWidth}px
   transition: max-width 0.4s ease;
   overflow-x: scroll;
 `

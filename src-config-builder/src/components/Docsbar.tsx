@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import styled from '@emotion/styled';
+import {screens} from '../config'
 import { Icon, Link } from '.';
 
 const Wrapper = styled.div<{ isOpen: boolean }>`
@@ -15,6 +16,12 @@ const Wrapper = styled.div<{ isOpen: boolean }>`
   display: flex;
   flex-direction: column;
   transition: margin-right 0.4s ease;
+
+  @media(max-width: ${screens.med}px) {
+    width: 100%;
+    box-shadow: 4px 0 2px 2px rgba(0, 0, 0, 0.04);
+
+  }
 `;
 
 const SectionLearnMore = styled.div`

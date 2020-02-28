@@ -2,8 +2,9 @@ import React from 'react';
 import styled from '@emotion/styled';
 import Select, { ValueType } from 'react-select';
 import { H1, P } from './index';
-import { sidebarWidth } from './constants';
 import { executorOptions, buildConfig, baseImg } from '../data/';
+import {screens, sidebarWidth} from '../config';
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -12,11 +13,29 @@ const Wrapper = styled.div`
   max-width: ${sidebarWidth}px;
   min-width: ${sidebarWidth}px;
   background: white; // #f5f5f5;
-  padding: 24px 24px 0 24px;
   min-height: 100%;
   order-right: 1px solid #d8d8d8;
   border-right: 1px solid rgb(227, 227, 227);
+  border-bottom: none;
+  @media(max-width: ${screens.med}px) {
+    width: 100%;
+    max-width: none;
+    border-right: none;
+    border-bottom: 1px solid rgb(227, 227, 227);
+  }
 `;
+
+const Content = styled.div`
+  padding: 24px;
+`
+
+const SidebarHeading = styled.div`
+  max-width: 288px;
+  @media(max-width: ${screens.med}px) {
+    max-width: 100%;
+  }
+
+`
 
 const SelectHeading = styled.div`
   height: 20px;
@@ -28,6 +47,7 @@ const SelectHeading = styled.div`
   letter-spacing: 0.1px;
   line-height: 20px;
   margin-bottom: 8px;
+
 `;
 
 const FormValues = styled.div`
@@ -112,7 +132,8 @@ export const Sidebar = ({ setCurrentStep, setConfig }: SidebarProps) => {
 
   return (
     <Wrapper>
-      <H1 style={{ maxWidth: '288px' }}>Tell us about your project</H1>
+      <Content>
+      <SidebarHeading><H1>Tell us about your project</H1></SidebarHeading>
       <P>
         This will help us give you the right configuration template for you to
         customize.
@@ -151,6 +172,7 @@ export const Sidebar = ({ setCurrentStep, setConfig }: SidebarProps) => {
       >
         Generate Configuration
       </GenerateConfig>
+      </Content>
     </Wrapper>
   );
 };
