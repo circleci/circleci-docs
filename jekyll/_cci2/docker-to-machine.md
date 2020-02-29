@@ -1,15 +1,25 @@
+---
+layout: classic-docs
+title: "Migrating Executor from Docker to machine"
+short-title: "Migrating Executor from Docker to `machine`"
+description: "Best practices and considerations when migrating executor"
+categories: [migration]
+order:  1
+---
+
 This document contains some general guidelines and considerations to
 make when moving from the Docker executor to machine, or vice versa.
 
--   TOC {:toc}
+* TOC 
+{:toc}
 
 Overview
 --------
 
-{:.no\_toc}
+{:.no_toc}
 
 Occiasonally, the Docker executor isn't quite the right fit for your
-builds - this can include a lack of memory or requiring more dedicated
+builds. This can include a lack of memory or requiring more dedicated
 CPU power. Moving to a dedicated virtual machine can help alleviate some
 of these issues, but changing out an executor is not as easy as
 replacing a few lines of configuration. There are some other
@@ -21,8 +31,8 @@ Pre-installed software
 
 By default, the machine executor images come installed with useful
 utilities, but application specific requirements will need to be
-installed - if the dependency is not installed within Ubuntu 16.04 by
-default or is not found on this list, it will need to be manually
+installed. If a dependency is not installed within Ubuntu 16.04 by
+default, or is not found on this list, it will need to be manually
 installed (note the most up to date list can be found
 [here](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh)):
 
@@ -64,19 +74,19 @@ Additional packages can be installed with
 `sudo apt-get install <package>`. If the package in question is not
 found, `sudo apt-get update` may be required before installing it.
 
-Can I run Docker containers on machine?
+Running Docker containers on machine
 ---------------------------------------
 
-Yes! Machine executors come installed with Docker, which can be utilized
+Machine executors come installed with Docker, which can be used
 to run your application within a container rather than installing
 additional dependencies. Note, it is recommended this is done with a
 customer Docker image rather than a CircleCI convenience image, which
 are built under the assumption they will be used with the Docker
 executor and may be tricky to work around. Since each machine executor
 enviornment is a dedicated virtual machine, commands to run background
-containers can be used is normal as well.
+containers can be used is normal.
 
-**Note:** that if you have Docker Layer Caching (DLC) enabled for your
+**Note:** if you have Docker Layer Caching (DLC) enabled for your
 account, machine executors can utilize this to cache your image layers
 for subsequent runs.
 
