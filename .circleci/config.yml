@@ -1,3 +1,18 @@
+jobs:
+  build:
+    docker:
+    # Primary container image where all steps run.
+     - image: buildpack-deps:trusty
+    # Secondary container image on common network. 
+     - image: mongo:2.6.8-jessie
+       command: [mongod, --smallfiles]
+
+    working_directory: ~/
+
+    steps:
+      # command will execute in trusty container
+      # and can access mongo on localhost
+      - run: sleep 5 && nc -vz localhost 27017
 version: 2.1 # Set the CI version.
 
 
