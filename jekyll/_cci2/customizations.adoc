@@ -128,6 +128,8 @@ _Introduced in CircleCI Server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
+WARNING: The resources for the `machine` executor can't be changed from this setting. To change the CPU and memory size, change the `AWS Instance Type` from the VM Provider section in the Management Console. See the <<vm-service#,VM Service>> guide for more details.
+
 TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
 
 Following are the steps required to customize resource classes for the Docker executors:
@@ -144,8 +146,6 @@ sudo mkdir /etc/circleconfig/picard-dispatcher
 sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
-+
-WARNING: The resources for the `machine` executor can't be changed from this setting. To change the CPU and memory size, change the `AWS Instance Type` on the `VM Provider` section of the Replicated Management Console.
 . Run:
 +
 ```shell
