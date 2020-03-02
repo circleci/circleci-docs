@@ -18,7 +18,7 @@ Overview
 
 {:.no_toc}
 
-Occiasonally, the Docker executor isn't quite the right fit for your
+Occasionally, the Docker executor isn't quite the right fit for your
 builds. This can include a lack of memory or requiring more dedicated
 CPU power. Moving to a dedicated virtual machine can help alleviate some
 of these issues, but changing out an executor is not as easy as
