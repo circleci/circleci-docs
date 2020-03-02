@@ -21,6 +21,8 @@ WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-cl
 WARNING: Before upgrading please read and follow the steps below if you have **ever had issues with renaming an organization within CircleCI**
 or you suspect that an **organization rename might have happened at any point**.
 
+WARNING: This is necessary when you upgrade from 2.17 or previous version. If you're using 2.18 already, please skip this step.
+
 . SSH into your Services machine
 . REPL into `workflows-conductor` by running the following: `sudo docker exec -it workflows-conductor lein repl :connect 6005`
 . Go to this link for the https://gist.githubusercontent.com/BoVice/49a5a98e93508e7913b7d62d6e5de68b/raw/e354eb42a97ca509809eaafe7b28052481702b9e/org-rename.cjl[org rename script]. Copy/paste this script into the REPL session. It will run migration and output current progress.
