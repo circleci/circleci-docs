@@ -18,7 +18,6 @@ This document is a reference for the CircleCI 2.1 configuration keys used in the
 Key | Required | Type | Description
 ----|-----------|------|------------
 version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
-{: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
@@ -29,12 +28,10 @@ Key | Required | Type | Description
 orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
 executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
 commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
-{: class="table table-striped"}
-
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
 
 ```yaml
 version: 2.1
+
 orbs:
     hello: circleci/hello-build@0.0.5
 workflows:
@@ -42,7 +39,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
+In this example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
 
 ## **`commands`**
 
@@ -53,12 +50,10 @@ Key | Required | Type | Description
 steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
 parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details.
 description | N | String | A string that describes the purpose of the command.
-{: class="table table-striped"}
-
-Example:
 
 ```yaml
-Version: 2.1
+version: 2.1
+
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -76,7 +71,6 @@ Pipeline parameters declared for use in the configuration. See [Pipeline Variabl
 Key | Required  | Type | Description
 ----|-----------|------|------------
 parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
-{: class="table table-striped"}
 
 ## **`executors`**
 
@@ -92,14 +86,12 @@ windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
-{: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
-Example:
-
 ```yaml
 version: 2.1
+
 executors:
   my-executor:
     docker:
@@ -141,7 +133,6 @@ working_directory | N | String | The directory used to run the steps. Default: `
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
-{: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
@@ -154,9 +145,9 @@ If `parallelism` is set to N > 1, then N independent executors will be set up an
 
 Note that `working_directory` will be created automatically if it does not exist.
 
-Example:
-
 ```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -169,7 +160,6 @@ jobs:
     steps:
       - run: go test -v $(go list ./... | circleci tests split)
 ```
-
 
 ### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
@@ -190,7 +180,6 @@ user | N | String | Which user to run commands as within the Docker container
 environment | N | Map | A map of environment variable names and values
 auth | N | Map | Authentication for registries using standard `docker login` credentials
 aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
-{: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
 
@@ -206,9 +195,9 @@ The `environment` settings apply to all commands run in this executor, not just 
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
-Example:
-
 ```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -226,9 +215,11 @@ jobs:
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
 ```
 
-If you are using a private image, you can specify the username and password in the `auth` field. To protect the password, you can set it as a project setting which you reference here:
+If you are using a private image, you can specify the username and password in the `auth` field. To protect the password, you can set it as a project setting.
 
 ```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -238,9 +229,11 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
 ```
 
-Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application, or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
+Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application, or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field.
 
-```
+```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -250,9 +243,11 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
-It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
+It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. This example invokes the `sayhello` command.
 
-```
+```yaml
+version: 2.1
+
 jobs:
   myjob:
     docker:
@@ -271,13 +266,10 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
 docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
-{: class="table table-striped"}
-
-
-Example:
 
 ```yaml
 version: 2.1
+
 jobs:
   build:
     machine:
@@ -320,10 +312,9 @@ When using the [Windows GPU executor](#gpu-executor-windows), the available imag
 * `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1.
   This image is the default.
 
-**Example**
-
 ```yaml
 version: 2.1
+
 workflows:
   main:
     jobs:
@@ -343,11 +334,12 @@ CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), t
 Key | Required | Type | Description
 ----|-----------|------|------------
 xcode | Y | String | The version of Xcode installed on the virtual machine. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
-{: class="table table-striped"}
 
-**Example:** Use a macOS virtual machine with Xcode version 11.3:
+Use a macOS virtual machine with Xcode version 11.3:
 
 ```yaml
+version: 2.1
+
 jobs:
   build:
     macos:
@@ -359,8 +351,7 @@ jobs:
 
 CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
 
-
-**Example:** Use a windows executor to run a simple job.
+Use a windows executor to run a simple job.
 
 ```yaml
 version: 2.1
@@ -384,11 +375,12 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 only | N | List | List of branches that only will be executed
 ignore | N | List | List of branches to ignore
-{: class="table table-striped"}
 
-Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
+Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string.
 
 ```yaml
+version: 2.1
+
 jobs:
   build:
     branches:
@@ -400,6 +392,8 @@ jobs:
 In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
 
 ```yaml
+version: 2.1
+
 jobs:
   build:
     branches:
@@ -435,10 +429,10 @@ large                 | 4     | 8GB
 xlarge                | 8     | 16GB
 2xlarge<sup>(2)</sup> | 16    | 32GB
 2xlarge+<sup>(2)</sup>| 20    | 40GB
-{: class="table table-striped"}
 
-###### Example Usage
 ```yaml
+version: 2.1
+
 jobs:
   build:
     docker:
@@ -456,10 +450,10 @@ medium (default) | 2     | 7.5GB
 large            | 4     | 15GB
 xlarge           | 8     | 32GB
 2xlarge          | 16    | 64GB
-{: class="table table-striped"}
 
-###### Example Usage
 ```yaml
+version: 2.1
+
 jobs:
   build:
     machine: true
@@ -474,10 +468,10 @@ Class              | vCPUs | RAM
 -------------------|-------|-----
 medium (default)   | 4     | 8GB
 large<sup>(2)</sup>| 8     | 16GB
-{: class="table table-striped"}
 
-###### Example Usage
 ```yaml
+version: 2.1
+
 jobs:
   build:
     macos:
@@ -495,9 +489,7 @@ medium (default)  | 4     | 15GB
 large             | 8     | 30GB
 xlarge            | 16    | 60GB
 2xlarge           | 32    | 128GB
-{: class="table table-striped"}
 
-###### Example Usage
 ```yaml
 version: 2.1
 
@@ -519,9 +511,7 @@ Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Mem
 --------------------------------|-------|-----|------|-----------------|------------------
 gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
 gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
-{: class="table table-striped"}
 
-###### Example Usage
 ```yaml
 version: 2.1
 
@@ -542,11 +532,10 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
 ----------------------------------------|-------|-----|------|-----------------|------------------
 windows.gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
-{: class="table table-striped"}
 
-###### Example Usage
 ```yaml
 version: 2.1
+
 orbs:
   win: circleci/windows@2.3.0
 
@@ -565,9 +554,11 @@ If you want to confirm how much memory you have been allocated, you can check th
 
 #### **`steps`**
 
-The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
+The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires).
 
 ```yaml
+version: 2.1
+
 jobs:
   build:
     working_directory: ~/canary-python
@@ -583,7 +574,9 @@ In this example, `run` is a step type. The `name` attribute is used by the UI fo
 
 Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
 
-```
+```yaml
+version: 2.1
+
 jobs:
   build:
     steps:
@@ -594,7 +587,9 @@ In its short form, the `run` step allows us to directly specify which `command` 
 
 Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
 
-```
+```yaml
+version: 2.1
+
 jobs:
   build:
     steps:
@@ -608,7 +603,6 @@ In general all steps can be described as:
 Key | Required | Type | Description
 ----|-----------|------|------------
 &lt;step_type> | Y | Map or String | A configuration map for the step or some string whose semantics are defined by the step.
-{: class="table table-striped"}
 
 Each built-in step is described in detail below.
 
@@ -626,11 +620,12 @@ background | N | Boolean | Whether or not this step should run in the background
 working_directory | N | String | In which directory to run this step (default:  [`working_directory`](#jobs) of the job)
 no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
-{: class="table table-striped"}
 
 Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
 
-``` YAML
+``` yaml
+version: 2.1
+
 - run:
     command: |
       echo Running test
@@ -646,14 +641,17 @@ For jobs that run on **macOS**, the default shell is `/bin/bash --login -eo pipe
 
 For more information about which files are executed when bash is invocated, [see the `INVOCATION` section of the `bash` manpage](https://linux.die.net/man/1/bash).
 
-Descriptions of the `-eo pipefail` options are provided below.
+Descriptions of the `-eo pipefail` options are provided in the right pane.
 
 `-e`
 
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
-So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
-``` YAML
+So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`.
+
+``` yaml
+version: 2.1
+
 - run:
     command: |
       echo Running test
@@ -673,8 +671,9 @@ So if in the previous example `mkdir` failed to create a directory and returned 
 
 > If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
-For example:
-``` YAML
+``` yaml
+version: 2.1
+
 - run: make test | tee test-output.log
 ```
 
@@ -690,9 +689,11 @@ For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using
 
 ###### _Background commands_
 
-The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
+The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. This example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
-``` YAML
+``` yaml
+version: 2.1
+
 - run:
     name: Running X virtual framebuffer
     command: Xvfb :99 -screen 0 1280x1024x24
@@ -705,7 +706,9 @@ The `background` attribute enables you to configure commands to run in the backg
 
 `run` has a very convenient shorthand syntax:
 
-``` YAML
+``` yaml
+version: 2.1
+
 - run: make test
 
 # shorthanded command can also have multiple lines
@@ -713,6 +716,7 @@ The `background` attribute enables you to configure commands to run in the backg
     mkdir -p /tmp/test-results
     make test
 ```
+
 In this case, `command` and `name` become the string value of `run`, and the rest of the config map for that `run` have their default values.
 
 ###### The `when` Attribute
@@ -730,7 +734,9 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 **Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a step has failed previously.
 
-``` YAML
+``` yaml
+version: 2.1
+
 - run:
     name: Upload CodeCov.io Data
     command: bash <(curl -s https://codecov.io/bash) -F unittests
@@ -745,11 +751,8 @@ Key | Required | Type | Description
 ----|-----------|------|------------
 condition | Y | String | A parameter value
 steps |	Y |	Sequence |	A list of steps to execute when the condition is true
-{: class="table table-striped"}
 
-###### *Example*
-
-```
+```yaml
 version: 2.1
 
 jobs: # conditional steps may also be defined in `commands:`
@@ -790,12 +793,10 @@ pipeline.git.tag            | The tag triggering the pipeline
 pipeline.git.branch         | The branch triggering the pipeline
 pipeline.git.revision       | The current git revision
 pipeline.git.base_revision  | The previous git revision
-{: class="table table-striped"}
-
-For example:
 
 ```yaml
 version: 2.1
+
 jobs:
   build:
     docker:
@@ -811,7 +812,7 @@ jobs:
 
 With CircleCI configuration v2.1, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with CircleCI API v2 pipeline triggering with parameters.
 
-The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+This example configuration uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
 ```yaml
 version: 2.1
@@ -827,7 +828,9 @@ jobs:
 
 This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
-```
+```yaml
+version: 2.1
+
 {
     "parameters": {
         "run_integration_tests": true
