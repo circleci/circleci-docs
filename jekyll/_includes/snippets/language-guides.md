@@ -65,3 +65,4 @@
 [sample-scala]: https://github.com/ariv3ra/samplescala
 [circleci-demo-windows]: https://github.com/CircleCI-Public/circleci-demo-windows/
 [parallel-compile-circleci]: https://github.com/eddiewebb/parallel-compile-circleci/blob/master/.circleci/config.yml
+[circleci-demo-javascript-react-app]: https://github.com/CircleCI-Public/circleci-demo-javascript-react-app
