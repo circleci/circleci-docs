@@ -146,8 +146,6 @@ Using the `machine` executor gives your application full access to OS resources 
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
 
-NOTE: you can run Docker containers using the docker executor, but the `machine` executor is currently the only supported way to build new Docker images on CircleCI.
-
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
 
