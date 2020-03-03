@@ -201,6 +201,7 @@ Sauce Connect allows you to run a test server within the CircleCI build containe
 
 This example `config.yml` file shows how to run browser tests through Sauce Labs against a test server running within a CircleCI build container.
 
+{% raw %}
 ```yaml
 version: 2
 
@@ -226,15 +227,19 @@ jobs:
           command: |
             kill -9 `cat /tmp/sc_client.pid`          
 ```
+{% endraw %}
 
 ### Sauce Labs Browser Testing Orb Example
 
-CircleCI has developed a Sauce labs browser testing orb that enables you to open a Sauce Labs tunnel before performing any browser testing. This orb (a package of configurations that you can use in your workflow) has been developed and certified for use and can simplify your configuration workflows. An example of the orb is shown below.
+CircleCI has developed a Sauce Labs browser testing orb that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
 
-```
+{% raw %}
+```yaml
 version: 2.1
+
 orbs:
   sauce-connect: saucelabs/sauce-connect@1.0.1
+
 workflows:
   browser_tests:
     jobs:
@@ -249,6 +254,7 @@ workflows:
             - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
           tunnel_identifier: safari
 ```
+{% endraw %}
 
 For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
@@ -262,15 +268,19 @@ For mobile applications, it is possible to use Appium or an equivalent platform 
 
 Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
 
-```
+{% raw %}
+```yaml
 version: 2.1
+
 orbs:
   cypress: cypress-io/cypress@1.1.0
+
 workflows:
   build:
     jobs:
       - cypress/run
 ```
+{% endraw %}
 
 There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/orbs/registry/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
