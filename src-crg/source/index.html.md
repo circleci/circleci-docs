@@ -839,8 +839,3 @@ version: 2.1
 ```
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
-
-## See Also
-{:.no_toc}
-
-[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
