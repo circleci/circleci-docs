@@ -7,12 +7,29 @@ categories: [migration]
 order: 2
 ---
 
-CircleCI supports many advanced configuration options and features, check out the snippets below to get an idea of what is possible, as well as tips for optimizing advanced configurations.
+CircleCI supports many advanced configuration options and features, check out the snippets below to get an idea of what is possible, and get tips for optimizing your advanced configurations.
 
 ## Check Your Scripts
 
-``` yaml
+Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/orbs/registry/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
+
+```yaml
+version: 2.1
+
+orbs:
+  shellcheck: circleci/shellcheck@x.y.z
+
+workflows:
+  shellcheck:
+    jobs:
+      - shellcheck/check
+```
+
+You can also use shellcheck with version 2 config, without using the orb, as follows:
+
+```yaml
 version: 2
+
 jobs:
   shellcheck:
     docker:
@@ -26,10 +43,15 @@ jobs:
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
 ```
 
-## Test in the Browser
+For more information on using shell scripts in your config, see the [Using Shell Scripts]({{site.baseurl}}/2.0/using-shell-scripts/) guide.
 
-``` yaml
+## Browser Testing
+
+Use Selenium to manage in-browser tesing:
+
+```yaml
 version: 2
+
 jobs:
   build:
     docker:
@@ -46,7 +68,11 @@ jobs:
           background: true
 ```
 
-## Test Databases
+For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/2.0/browser-testing/) guide.
+
+## Database Testing
+
+Use a service container to run database testing:
 
 ``` yaml
 version: 2
@@ -54,14 +80,12 @@ jobs:
   build:
 
     # Primary container image where all commands run
-
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
-
       - image: circleci/postgres:9.6.5-alpine-ram
 
     steps:
@@ -83,15 +107,23 @@ jobs:
           -c "SELECT * from test"
 ```
 
+For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/2.0/databases/) guide.
+
 ## Run Docker Commands to Build Your Docker Images
 
+Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
+
 ``` yaml
+version: 2
+
 jobs:
   build:
+    docker:
+      - image: <primary-container-image>
     steps:
       # ... steps for building/testing app ...
 
-      - setup_remote_docker
+      - setup_remote_docker # sets up remote docker container in which all docker commands will be run
 
       - run:
           name: Start container and verify it's working
@@ -102,6 +134,8 @@ jobs:
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 
 ```
+
+For more information on building Docker images, see the [Building Docker Images]({{site.baseurl}}/2.0/building-docker-images/) guide.
 
 ## Tips for Advanced Configuration
 
@@ -116,3 +150,4 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 ## See Also
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)
+[Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/)
