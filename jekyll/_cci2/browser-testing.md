@@ -54,7 +54,7 @@ For more information about working with Headless Chrome,
 see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)
 and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112).
 
-As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a readymade infrastructure on the cloud so you don’t have to waste time on configuring a Selenium environment on your own. 
+As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment. 
 
 ## LambdaTest
 
@@ -65,10 +65,12 @@ You can analyse detailed test reports of your automation scripts including netwo
 To integrate CircleCI with LambdaTest you need to make minor tweaks in the .circleci/config.yml which is the configuration file for your CircleCI instance. The changes you need to make will revolve around the environment variables such as access key, username, grid config and so on. 
 
 Below is a sample config file for integrating CircleCI with LambdaTest.
+
 {% raw %}
-```
+```yaml
 # Javascript Node CircleCI 2.0 configuration file
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
 version: 2
 jobs:
   build:
@@ -107,13 +109,13 @@ jobs:
 
 ### Testing Locally Hosted or Privately Hosted Projects
  
-To help you perform cross browser testing of your locally stored web pages, LambdaTest provides an SSH(Secure Shell) tunnel connection with the name Lambda Tunnel. With Lambda Tunnel, you can execute a test server inside your CircleCI build container to perform automated cross browser testing on browsers offered by Selenium Grid on LambdaTest. That way, you could realize how fantastic your website would look in front of your audience, even before you make it live!
+LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live, by executing a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
-The below example of config.yml file would demonstrate you on how to leverage LambdaTest’s Selenium Grid by performing a browser test through your testing server contained in your CircleCI build.
+The example config.yml below demonstrates how to leverage LambdaTest’s Selenium Grid by performing a browser test through your testing server within your CircleCI build environment.
+
 {% raw %}
-```
+```yaml
 # Javascript Node CircleCI 2.0 configuration file
-#
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
@@ -173,78 +175,20 @@ build:
 
 ### LambdaTest Browser Testing Orb Example
 
-LambdaTest has developed a CircleCI orb for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing. Also, to ease the process of integration between LambdaTest & CircleCI. This orb (a package of configurations that you can use in your workflow) has been developed and certified for use and can simplify your configuration workflows. An example of the orb is shown below.
-{% raw %}
-```
-# This code is licensed from CircleCI to the user under the MIT license. See
-# https://circleci.com/orbs/registry/licensing for details.
-version: 2.1
-description: >
-  Encapsulates interactions with Lambdatest tunnel
+LambdaTest has developed a [CircleCI orb](https://circleci.com/orbs/registry/orb/lambdatest/lambda-tunnel) for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps
 
-commands:
-  install:
-    steps:
-      - run: 
-          name: "Downloading tunnel binary"
-          command: |
-            wget http://downloads.lambdatest.com/tunnel/linux/64bit/LT_Linux.zip
-      
-      - run: 
-          name: "Extracting tunnel binary"
-          description: "Installing dependencies - unzip, wget and ucommon-utils"
-          command: |
-            sudo apt-get update && sudo apt-get install -y wget unzip ucommon-utils
-            if [ "$(md5sum LT_Linux.zip | awk '{print $1}')" == "0279d9a29b2346e90ba237fc5b12d254" ]; then  echo "match";  else echo "Lambda tunnel binary has corrupted. Please rerun this workflow."; exit 1; fi 
-            unzip LT_Linux.zip
-    
-  open_tunnel:
-    parameters:
-      tunnel_name:
-        description: This feature will help you use the available tunnels from the selected head account which is the main account for performing parallel tunnel testing. While using this feature you are required to select both tunnel name and head tunnel.
-        type: string
-        default: ""
-    steps:
-      - run: 
-          name: "Executing tunnel binary"
-          background: true
-          command: |
-            : ${LAMBDATEST_EMAIL:?"Required Env Variable - LAMBDATEST_EMAIL not found!"}
-            : ${LAMBDATEST_USERNAME:?"Required Env Variable - LAMBDATEST_USERNAME not found!"}
-            : ${LAMBDATEST_KEY:?"Required Env Variable - LAMBDATEST_KEY not found!"}
-            ./LT -user ${LAMBDATEST_EMAIL} -key ${LAMBDATEST_KEY} <<# parameters.tunnel_name >> -tunnelName <<parameters.tunnel_name>> <</ parameters.tunnel_name>>
-            #wait for Lambda tunnel to be up
-            sleep 40
-  
-  close_tunnel:
-    steps:
-      - run:
-          name: Close Lambdatest Tunnel
-          command: killall LT
+{% raw %}
+```yaml
+version: 2.1
+
+orbs:
+  lambda-tunnel: lambdatest/lambda-tunnel@0.0.1
    
 jobs:
-  with_tunnel:
-    description: Use Lambdatest Tunnel
-    parameters:
-      docker:
-        type: string
-        default: "circleci/node:8.9.4"
-      tunnel_name:
-        description: Name your lambda tunnel and make sure to use this tunnel_name desired capability in your test
-        type: string
-        default: ""
-      steps:
-        type: steps
-        description: Steps to execute once the Lambdatest Tunnel is available
-    docker: 
-      - image: <<parameters.docker>>
+  lambdatest/with_tunnel
+    tunnel_name: <your-tunnel-name>
     steps:
-      - checkout
-      - install
-      - open_tunnel:
-          tunnel_name: <<parameters.tunnel_name>>
-      - steps: << parameters.steps >>
-      - close_tunnel
+      - <your-test-steps>
 ```
 {% endraw %}
 
@@ -259,6 +203,7 @@ This example `config.yml` file shows how to run browser tests through Sauce Labs
 
 ```yaml
 version: 2
+
 jobs:
   build:
     docker:
