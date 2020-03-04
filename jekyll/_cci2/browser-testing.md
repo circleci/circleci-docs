@@ -56,124 +56,9 @@ and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-
 
 As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment. 
 
-## LambdaTest
+## LambdaTest Browser Testing
 
-LambdaTest now integrates with CircleCI to boost your go-to-market delivery. Perform automated cross browser testing with LambdaTest to ensure your development code renders seamlessly through an online Selenium grid providing 2000+ real browsers running through machines, on the cloud. Perform automation testing in parallel with LambdaTest’s Selenium grid to drastically trim down your test cycles.
-
-You can analyse detailed test reports of your automation scripts including network logs, command logs, Selenium logs, step-by-step screenshots for every command, entire video of your test execution, metadata, and more.
-
-To integrate CircleCI with LambdaTest you need to make minor tweaks in the .circleci/config.yml which is the configuration file for your CircleCI instance. The changes you need to make will revolve around the environment variables such as access key, username, grid config and so on. 
-
-Below is a sample config file for integrating CircleCI with LambdaTest.
-
-{% raw %}
-```yaml
-# Javascript Node CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # the working dir is github repo that you need to fork to become owner.
-    working_directory: ~/nightwatch-sample-for-circleci
-    steps:
-      - checkout
-      
-      - run:
-          name: "Setup custom environment variables // its your workflow step"
-          command: |
-            echo 'export LT_USERNAME="{your_lambdatest_username}"' >> $BASH_ENV
-      - run:
-          name: "Setup custom environment variables"
-          command: |
-            echo 'export LT_ACCESS_KEY="{your_lambda_access_key}"' >> $BASH_ENV
-      - run: # Validating your above mentioned environment variables
-          name: "Here is the LT_Username : "
-          command: echo ${LT_USERNAME}      
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-            # fallback to using the latest cache if no exact match is found
-      - run: npm install
-      # run tests!
-      - run: node_modules/.bin/nightwatch -e chrome // Executing test in bash.
- ```
-{% endraw %}
-
-### Testing Locally Hosted or Privately Hosted Projects
- 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live, by executing a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
-
-The example config.yml below demonstrates how to leverage LambdaTest’s Selenium Grid by performing a browser test through your testing server within your CircleCI build environment.
-
-{% raw %}
-```yaml
-# Javascript Node CircleCI 2.0 configuration file
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
-jobs:
-build:
-   docker:
- 	# specify the version you desire here
- 	- image: circleci/node:7.10
- 	# Specify service dependencies here if necessary
- 	working_directory: ~/Nightwatch-circleci-selenium
- 	
- 	steps:
-      - checkout
-      - run:
-       	name: "Downloading tunnel binary"
-          command: |
-          wget http://downloads.lambdatest.com/tunnel/linux/64bit/LT_Linux.zip
-      - run:
-       	name: "Extracting tunnel binary"
-          command: |
-          sudo apt-get install unzip
-          unzip LT_Linux.zip
-      - run:
-       	name: "Executing tunnel binary"
-          background: true
-          command: |
-            ./LT -user ${LAMBDATEST_EMAIL} -key ${LAMBDATEST_KEY}
-            sleep 40
-      - run:
-       	name: "Setup custom environment variables"
-          command: |
-            echo 'export LT_USERNAME="${LAMBDATEST_USERNAME}"' >> $BASH_ENV
-      - run:
-          name: "Setup custom environment variables"
-          command: |
-            echo 'export LT_ACCESS_KEY="${LAMBDATEST_ACCESS_KEY}"' >> $BASH_ENV
-      - run: # test what branch we're on.
-          name: "Here is the LT_Username : "
-          command: echo ${LT_USERNAME}      
-   	
-# Download and cache dependencies
-#    - restore_cache:
-#        keys:
-#          - v1-dependencies-{{ checksum "package-lock.json" }}       	
-        # fallback to using the latest cache if no exact match is found
-   	
-        - run: npm install
-#      - save_cache:
-#        paths:
-#      - node_modules
-#        key: v1-dependencies-{{ checksum "package-lock.json" }}
-  
-    # run tests!
-      - run: node_modules/.bin/nightwatch -e chrome
-```
-{% endraw %}
-
-### LambdaTest Browser Testing Orb Example
 
 LambdaTest has developed a [CircleCI orb](https://circleci.com/orbs/registry/orb/lambdatest/lambda-tunnel) for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps
 
@@ -231,7 +116,7 @@ jobs:
 
 ### Sauce Labs Browser Testing Orb Example
 
-CircleCI has developed a Sauce Labs browser testing orb that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
+Sauce Labs provide a browser testing orb for use with CircleCI that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
 
 {% raw %}
 ```yaml
