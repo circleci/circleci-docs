@@ -134,7 +134,7 @@ parallelism | N | Integer | Number of parallel instances of this job to run (def
 environment | N | Map | A map of environment variable names and values.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
-<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
+One executor type should be specified per job. If more than one is set you will receive an error.
 
 #### `environment`
 A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
@@ -166,7 +166,6 @@ jobs:
 An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
-{:.no_toc}
 
 Configured by the `docker` key which takes a list of maps:
 
@@ -258,7 +257,6 @@ jobs:
 ```
 
 #### **`machine`**
-{:.no_toc}
 
 The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
 
@@ -327,7 +325,6 @@ jobs:
 ```
 
 #### **`macos`**
-{:.no_toc}
 
 CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), to allow you to build, test, and deploy apps for macOS, [iOS](https://developer.apple.com/ios/), [tvOS](https://developer.apple.com/tvos/) and [watchOS](https://developer.apple.com/watchos/). To run a job in a macOS virtual machine, you must add the `macos` key to the top-level configuration for the job and specify the version of Xcode you would like to use.
 
@@ -347,7 +344,6 @@ jobs:
 ```
 
 #### **`windows`**
-{:.no_toc}
 
 CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
 
@@ -547,7 +543,7 @@ jobs:
       - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
 ```
 
-<sup>(2)</sup> _This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
+_This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access._
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
@@ -837,5 +833,3 @@ version: 2.1
     }
 }
 ```
-
-Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
