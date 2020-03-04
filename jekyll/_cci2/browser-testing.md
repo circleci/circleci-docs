@@ -56,7 +56,9 @@ and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-
 
 As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment. 
 
-## LambdaTest Browser Testing
+## LambdaTest
+
+LambdaTest now integrates with CircleCI to boost your go-to-market delivery. Perform automated cross browser testing with LambdaTest to ensure your development code renders seamlessly through an online Selenium grid providing 2000+ real browsers running through machines, on the cloud. Perform automation testing in parallel with LambdaTest’s Selenium grid to drastically trim down your test cycles.
 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live, by executing a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
