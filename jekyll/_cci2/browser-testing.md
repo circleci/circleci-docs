@@ -72,7 +72,7 @@ orbs:
   lambda-tunnel: lambdatest/lambda-tunnel@0.0.1
    
 jobs:
-  lambdatest/with_tunnel
+  lambdatest/with_tunnel:
     tunnel_name: <your-tunnel-name>
     steps:
       - <your-test-steps>
