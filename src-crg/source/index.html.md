@@ -134,9 +134,10 @@ parallelism | N | Integer | Number of parallel instances of this job to run (def
 environment | N | Map | A map of environment variable names and values.
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
-One executor type should be specified per job. If more than one is set you will receive an error.
+One executor type should be specified per job. If more than one is set, you will receive an error.
 
 #### `environment`
+
 A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
 
 #### `parallelism`
