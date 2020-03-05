@@ -28,7 +28,7 @@ Use Contexts to further restrict access to environment variables. Contexts are s
 ### Secrets Masking
 {:.no_toc}
 
-Environment variables may hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of environment variables and contexts.
+Environment variables may hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of environment variables set within Project Settings or Contexts.
 
 The value of the environment variable will not be masked in the build output if:
 
@@ -42,7 +42,53 @@ The value of the environment variable will not be masked in the build output if:
 
 CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable must be a letter.
 
-Secrets and private keys that are securely stored in the CircleCI app may be referenced with the variable in a `run` key, `environment` key, or a Workflows `context` key in your configuration. Environment variables are used according to a specific precedence order, as follows:
+Secrets and private keys that are securely stored in the CircleCI app may be referenced with the variable in the following ways:
+
+* A `run` key
+
+  ```yaml
+  version: 2.1
+
+  workflows:
+    env-var-workflow:
+      jobs:
+        - env-var
+        
+  jobs:
+    env-var:
+      docker:
+        - image: cimg/base:2020.01
+      steps:
+        - checkout
+        - run: 
+            name: "Echo custom environment variable"
+            command: echo $MY_ENV_VAR
+    ```
+
+* Workflows `context` key
+
+    ```yaml
+    version: 2.1
+
+    workflows:
+      env-var-workflow:
+        jobs:
+          - env-var:
+              context: Testing-Env-Vars # Use all env vars associated with this Context
+              
+          
+    jobs:
+      env-var:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: echo $MY_ENV_VAR
+    ```
+
+#### Order of Precedence
+
+Environment variables are used according to a specific precedence order, as follows:
 
 1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
 2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
