@@ -15,7 +15,9 @@ This document describes using environment variables in CircleCI in the following
 ## Overview
 {:.no_toc}
 
-To add **private keys** or **secret environment variables** to your private project, use the Environment Variables page under Project Settings in the CircleCI application. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
+There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an order of precedence, depending on how they are set, allowing control at each level in your configuration. 
+
+To add **private keys** or **secret environment variables** for use throughout your private project, use the Environment Variables page under Project Settings in the CircleCI application. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
 
 ![Environment Variables]({{ site.baseurl }}/assets/img/docs/project-settings-env-var-v2.png)
 
@@ -25,10 +27,9 @@ Use Contexts to further restrict access to environment variables. Contexts are s
 
 ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
-### Secrets Masking
-{:.no_toc}
+## Secrets Masking
 
-Environment variables may hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of environment variables set within Project Settings or Contexts.
+Secrets Masking is applied to environment variables set within Project Settings or under Contexts. Environment variables may hold project secrets or keys that perform crucial functions for your applications. Secrets masking provides added security within CircleCI by obscuring environment variables in the job output when `echo` or `print` are used.
 
 The value of the environment variable will not be masked in the build output if:
 
@@ -37,8 +38,7 @@ The value of the environment variable will not be masked in the build output if:
 
 **Note:** secret masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
-### Environment Variable Usage Options
-{:.no_toc}
+## Environment Variable Usage Options
 
 CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable must be a letter.
 
@@ -60,9 +60,7 @@ Secrets and private keys that are securely stored in the CircleCI app may be ref
         - image: cimg/base:2020.01
       steps:
         - checkout
-        - run: 
-            name: "Echo custom environment variable"
-            command: echo $MY_ENV_VAR
+        - run: echo $MY_ENV_VAR # env var MY_ENV_VAR must be defined under Project Settings
     ```
 
 * Workflows `context` key
@@ -83,21 +81,23 @@ Secrets and private keys that are securely stored in the CircleCI app may be ref
           - image: cimg/base:2020.01
         steps:
           - checkout
-          - run: echo $MY_ENV_VAR
+          - run: echo $MY_ENV_VAR # env var MY_ENV_VAR must be defined under the context specified above
     ```
 
-#### Order of Precedence
+### Order of Precedence
+{:.no_toc}
 
 Environment variables are used according to a specific precedence order, as follows:
 
 1. Environment variables declared [inside a shell command](#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
 2. Environment variables declared with the `environment` key [for a `run` step](#setting-an-environment-variable-in-a-step).
 3. Environment variables set with the `environment` key [for a job](#setting-an-environment-variable-in-a-job).
-4. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
+4. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables](#built-in-environment-variables) section of this document.
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables](#built-in-environment-variables) section of this document.
+7. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
 
+**TODO CHECK TEXT BELOW ONCE ORDER LIST IS FINALISED**
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
 
 **Note**:
@@ -109,6 +109,7 @@ Running scripts within configuration may expose secret environment variables. Se
 
 
 ### Example Configuration of Environment Variables
+{:.no_toc}
 
 Consider the example `config.yml` below:
 
@@ -164,6 +165,8 @@ In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
 ```yaml
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ```
+
+**TODO: SWITCH THIS SECTION ROUND TO SHOW 2.1 AS THE BEST PRACTICE EXAMPLE**
 
 There are several workarounds to interpolate values into your config.
 
