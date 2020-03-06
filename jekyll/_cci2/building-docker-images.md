@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Building Docker Images"
+title: "Running Docker Commands"
 short-title: "Building Docker Images"
 description: "How to build Docker images and access remote services"
 categories: [configuring-jobs]
