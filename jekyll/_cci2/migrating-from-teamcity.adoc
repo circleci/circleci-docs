@@ -15,10 +15,10 @@ CircleCI has various differences in setup and configuration from TeamCity. For t
 
 . **Read (or at least browse) this document** to solidify conceptual differences.
 . **Quickly build and run a simple https://circleci.com/docs/2.0/hello-world/#section=getting-started[Hello World job] in any repository**. This configuration demonstrates the simplicity of our YAML setup, and it showcases how to define both an execution environment and the steps to run within it. All jobs on CircleCI share this format.
-. **Once you understand the config, modify the executor and the individual steps to your needs.** For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. Consult our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials page] for various examples in different languages and frameworks.
+. **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials page] for various examples in different languages and frameworks.
 . **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/2.0/workflows/[configure a workflow]**. This would essentially migrate your Build Chain.
-. **Next, https://circleci.com/docs/2.0/optimizations/[optimize your jobs] with our advanced features** to see how much faster your builds could run on our platform.
-. **Throughout this process, consult our https://circleci.com/docs/2.0/configuration-reference/#section=configuration[Config Reference]** for a list of all available configuration on our platform.
+. **Next, https://circleci.com/docs/2.0/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
+. **Throughout this process, consult the https://circleci.com/docs/2.0/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
 
 == Why Migrate to CircleCI?
 
@@ -36,7 +36,7 @@ We have various other features that set our solution apart. https://circleci.com
 === High-Level Differences
 
 * CircleCI and TeamCity share the concept of projects.
-* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/2.0/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve some sort of goal (e.g. run unit tests).
+* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/2.0/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (e.g. run unit tests).
 * TeamCity has traditionally used the UI to configure most builds, with Kotlin Script configuration being a newer, recent feature. CircleCI uses YAML to configure the majority of pipeline functionality.
 
 [.table.table-striped.cf.table-migrate-desktop]
@@ -266,7 +266,7 @@ For more information on CircleCI Concepts, visit our https://circleci.com/docs/2
 
 === Environment
 
-TeamCity requires setting up a build agent with the required O.S. & tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/2.0/executor-types/[available executors].
+TeamCity requires setting up a build agent with the required OS and tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/2.0/executor-types/[available executors].
 
 ..circleci/config.yml
 [source,yaml]
@@ -451,4 +451,3 @@ For larger and more complex builds, we recommend moving over in phases until you
 === Resources
 * For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] and https://circleci.com/docs/2.0/configuration-cookbook/#section=configuration[Configuration Cookbook] pages.
 * For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].
-
