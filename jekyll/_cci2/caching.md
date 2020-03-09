@@ -508,11 +508,11 @@ steps:
       key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
 
-We recommend using `yarn --frozen-lockfile --cache-folder=.cache/yarn` for two reasons.
+We recommend using `yarn --frozen-lockfile --cache-folder ~/.cache/yarn` for two reasons.
 
 1) `--frozen-lockfile` ensures that a whole new lockfile is created and it also ensures your lockfile isn't altered. This allows for the checksum to stay relevant and your dependencies should identically match what you use in development.
 
-2) The default cache location depends on OS: https://github.com/yarnpkg/yarn/blob/25d5526c8995443b03c113c44f9c8e9a79c2c074/src/util/user-dirs.js#L26 `--cache-folder=.cache/yarn` ensures we're explitly matching our cache save location.
+2) The default cache location depends on OS: https://github.com/yarnpkg/yarn/blob/25d5526c8995443b03c113c44f9c8e9a79c2c074/src/util/user-dirs.js#L26 `--cache-folder ~.cache/yarn` ensures we're explitly matching our cache save location.
 
 {% endraw %}
 
