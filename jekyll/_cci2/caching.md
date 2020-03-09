@@ -505,7 +505,6 @@ steps:
   - save_cache:
       paths:
         - ~/.cache/yarn
-        - node_modules
       key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
 
