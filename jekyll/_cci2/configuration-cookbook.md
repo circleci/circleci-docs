@@ -60,13 +60,13 @@ The table below lists the different build configuration "recipes" you can perfor
 
 Configuration Recipe | Description
 ------------|-----------
-[Deploying Software Changes to Amazon Elastic Container Service (ECS)](#header1) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
-[Deploying Software Changes to Google Kubernetes Engine (GKE)](#header2) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
-[Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#header3) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
-[Deploying Applications to Heroku](#header4) | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
-[Enabling Custom Slack Notifications in CircleCI Jobs](#header5) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
+[Deploying Software Changes to Amazon Elastic Container Service (ECS)](#deploying-software-changes-to-amazon-ecs) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
+[Deploying Software Changes to Google Kubernetes Engine (GKE)](#deploying-software-changes-to-google-kubernetes-engine-gke) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
+[Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#using-amazon-elastic-container-service-for-kubernetes-amazon-eks) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
+[Deploying Applications to Heroku](#deploying-applications-to-heroku) | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
+[Enabling Custom Slack Notifications in CircleCI Jobs](#enabling-custom-slack-notifications-in-circleci-jobs) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
 
-## Deploying Software Changes to Amazon ECS {#header1}
+## Deploying Software Changes to Amazon ECS
 
 The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
 
@@ -176,7 +176,7 @@ This example illustrates how you can use the orb to install and configure the AW
 
 For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
 
-## Deploying Software Changes to Google Kubernetes Engine (GKE) {#header2}
+## Deploying Software Changes to Google Kubernetes Engine (GKE)
 
 The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using the GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
@@ -429,7 +429,7 @@ example:
                 tag: "2"
 ```
 
-## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS) {#header3}
+## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
 
 CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Container Service (ECS) to perform the following tasks:
 
@@ -991,7 +991,7 @@ steps:
       watch-timeout: << parameters.watch-timeout >>
 ```
 
-## Deploying Applications to Heroku {#header4}
+## Deploying Applications to Heroku
 
 The Heroku platform is a cloud-based, fully-scalable platform that enables you to quickly and easily deliver and deploy applications. Using CircleCI builds and orbs, you can simplify the deployment process in a few simple steps by following the steps described in the sections below.
 
@@ -1039,7 +1039,7 @@ Notice in the above example, when the CircleCI Heroku orb (`circleci/heroku@0.0.
 
 For more detailed information about the CircleCI Heroku orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/heroku).
 
-## Enabling Custom Slack Notifications in CircleCI Jobs {#header5}
+## Enabling Custom Slack Notifications in CircleCI Jobs
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
 
