@@ -17,7 +17,7 @@ This document is a reference for the CircleCI 2.1 configuration keys used in the
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
+version | Y | String | `2`, `2.0`, or `2.1` See the [Reusing Config](https://circleci.com/docs/2.0/reusing-config/#section=configuration) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs.
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
@@ -25,9 +25,9 @@ The `version` field is intended to be used in order to issue warnings for deprec
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details.
-executors | N | Map | A map of strings to executor definitions. See the [Executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) section below.
-commands | N | Map | A map of command names to command definitions. See the [Commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21) section below.
+orbs | N | Map | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config. See the [Authoring Orbs](https://circleci.com/docs/2.0/orb-author/#section=configuration) documentation for details.
+executors | N | Map | A map of strings to executor definitions. See the [Executors](https://circleci.com/docs/2.0/configuration-reference/#executors-requires-version-21) section below.
+commands | N | Map | A map of command names to command definitions. See the [Commands](https://circleci.com/docs/2.0/configuration-reference/#commands-requires-version-21) section below.
 
 ```yaml
 version: 2.1
@@ -43,12 +43,12 @@ In this example, `hello` is considered the orbs reference; whereas `circleci/hel
 
 ## **`commands`**
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
+A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
 steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
-parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for details.
+parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax](https://circleci.com/docs/2.0/reusing-config/#parameter-syntax) section of the [Reusing Config](https://circleci.com/docs/2.0/reusing-config/#section=configuration) document for details.
 description | N | String | A string that describes the purpose of the command.
 
 ```yaml
@@ -66,11 +66,11 @@ commands:
 ```
 
 ## **`parameters`**
-Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
+Pipeline parameters declared for use in the configuration. See [Pipeline Variables](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) for usage details.
 
 Key | Required  | Type | Description
 ----|-----------|------|------------
-parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details.
+parameters | N  | Map | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax](https://circleci.com/docs/2.0/reusing-config/#parameter-syntax) for details.
 
 ## **`executors`**
 
@@ -104,18 +104,18 @@ jobs:
       - run: echo outside the executor
 ```
 
-See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) document for examples of parameterized executors.
+See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-config/#using-parameters-in-executors) section of the [Reusing Config](https://circleci.com/docs/2.0/reusing-config/#section=configuration) document for examples of parameterized executors.
 
 ## **`jobs`**
 
 A run is comprised of one or more named jobs. The name of the job is the key in the map, and the value is a map describing the job.
 
-If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
+If you are using [Workflows]({{ https://circleci.com/docs/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
 If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
 **Note:**
-Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows](https://circleci.com/docs/2.0/workflows/).
 
 ### **<`job_name`>**
 
@@ -142,7 +142,7 @@ A map of environment variable names and values. These will override any environm
 
 #### `parallelism`
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy)). Learn more about [parallel jobs](https://circleci.com/docs/2.0/parallelism-faster-jobs/#section=projects).
 
 Note that `working_directory` will be created automatically if it does not exist.
 
@@ -164,7 +164,7 @@ jobs:
 
 ### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors](https://circleci.com/docs/2.0/executor-types/).
 
 #### `docker`
 
@@ -193,7 +193,7 @@ The `name` string defines the name for reaching the secondary service containers
 
 The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` has higher precedence over setting it in the job map above.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
+You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images](https://circleci.com/docs/2.0/executor-types).
 
 ```yaml
 version: 2.1
@@ -243,7 +243,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
-It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. This example invokes the `sayhello` command.
+It is possible to reuse [declared commands](https://circleci.com/docs/2.0/reusing-config/) in a job when using version 2.1. This example invokes the `sayhello` command.
 
 ```yaml
 version: 2.1
@@ -259,12 +259,12 @@ jobs:
 
 #### **`machine`**
 
-The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by using the `machine` key, which takes a map:
+The [machine executor](https://circleci.com/docs/2.0/executor-types) is configured by using the `machine` key, which takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
-docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation](https://circleci.com/docs/2.0/vm-service).
+docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching](https://circleci.com/docs/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
 ```yaml
 version: 2.1
@@ -295,7 +295,7 @@ CircleCI supports multiple machine images that can be specified in the `image` f
 * `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
 * `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
 
-The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
+The machine executor supports [Docker Layer Caching](https://circleci.com/docs/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
 ##### Available Linux GPU images
 
@@ -331,7 +331,7 @@ CircleCI supports running jobs on [macOS](https://developer.apple.com/macos/), t
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-xcode | Y | String | The version of Xcode installed on the virtual machine. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
+xcode | Y | String | The version of Xcode installed on the virtual machine. See the [Supported Xcode Versions section of the Testing iOS](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions) document for the complete list.
 
 Use a macOS virtual machine with Xcode version 11.3:
 
@@ -346,7 +346,7 @@ jobs:
 
 #### **`windows`**
 
-CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
+CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows](https://circleci.com/docs/2.0/hello-world-windows) document.
 
 Use a windows executor to run a simple job.
 
@@ -366,7 +366,7 @@ jobs:
 
 #### **`branches`**
 
-Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows](https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -500,7 +500,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
+See the [Windows Getting Started document](https://circleci.com/docs/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
 ##### GPU Executor (Linux)
 
@@ -742,7 +742,7 @@ version: 2.1
 
 ##### **The `when` Step** (requires version: 2.1)
 
-A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps) for more details.
+A conditional step consists of a step with the key `when` or `unless`. Under the `when` key are the subkeys `condition` and `steps`. The purpose of the `when` step is customizing commands and job configuration to run on custom conditions (determined at config-compile time) that are checked before a workflow runs. See the [Conditional Steps section of the Reusing Config document](https://circleci.com/docs/2.0/reusing-config/#defining-conditional-steps) for more details.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
