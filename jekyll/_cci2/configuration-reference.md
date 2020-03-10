@@ -510,7 +510,8 @@ orbs:
 
 jobs:
   build:
-    executor: win/default
+    executor:
+      name: win/default
       size: "medium" # can be "medium", "large", "xlarge", "2xlarge"
     steps:
       - run: Write-Host 'Hello, Windows'

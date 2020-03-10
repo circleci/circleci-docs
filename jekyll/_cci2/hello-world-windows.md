@@ -58,7 +58,8 @@ orbs:
 
 jobs:
   build: # name of your job
-    executor: win/default # executor type
+    executor:
+      name: win/default # executor type
       size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
 
     steps:
