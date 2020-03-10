@@ -510,10 +510,14 @@ orbs:
 
 jobs:
   build:
-    executor: win/default
+    executor:
+      name: win/default
+      size: "medium" # can be "medium", "large", "xlarge", "2xlarge"
     steps:
       - run: Write-Host 'Hello, Windows'
 ```
+
+Note the way resource class is set is different for `windows` because the executor is defined within the windows orb.
 
 See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
