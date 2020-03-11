@@ -8,19 +8,17 @@ order: 1
 ---
 
 
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
+A CircleCI project shares the name of the associated code repository. Select Add Project from the CircleCI application to enter the Projects dashboard, from here you can set up or follow projects you have access to.
 
 * TOC 
 {:toc}
 
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
+## Add Projects
 
 On the "Add Projects" page, you can either _Set Up_ any project that you are
 the owner of on your VCS, or, _Follow_ any project in your organization to gain
 access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
-
-## Add Projects Page
 
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
@@ -28,12 +26,29 @@ site.baseurl }}/2.0/notifications/) for the project's status.
 {:.tab.addprojectpage.Server}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
+## User Types
+
 The *Project Administrator* is the user who adds a GitHub or Bitbucket
 repository to CircleCI as a Project. A *User* is an individual user within an
 org. A CircleCI user is anyone who can log in to the CircleCI platform with a
 username and password. Users must be added to a [GitHub or Bitbucket org]({{
 site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
 projects.  Users may not view project data that is stored in environment variables.
+
+## Config
+
+CircleCI believes in *configuration as code*. The entire pipeline process, from build to deploy, is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the top of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
+
+```sh
+├── .circleci
+│   ├── config.yml
+├── README
+└── all-your-projects-other-files-and-folders
+```
+
+`config.yml` is a powerful yaml file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
+
+Put very simply, you will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). [Caches](#cache) are available to optimize and speed up pipelines, and [workspaces/artifacts](#workspaces-and-artifacts) can be used to share data across your pipeline.
 
 ## Steps
 
@@ -52,7 +67,7 @@ Steps are actions that need to be taken to perform your job. Steps are usually a
 #...          
 ```
 
-## Image
+## Executors and Images
 
 An image is a packaged system that has the instructions for creating a running container. 
  The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
