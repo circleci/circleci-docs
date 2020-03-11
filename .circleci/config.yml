@@ -187,17 +187,16 @@ jobs:
       # Since this job has both Ruby and Node dependencies we are going
       # to use a cache-key that combines each respective language's package-lock file.
       - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}-{{ checksum "src-crg/package-lock.json"}}
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
       - run:
-          name: Install Ruby + Node dependencies
-          command: cd src-crg; bundle install; npm install
+          name: Install Ruby dependencies
+          command: cd src-crg; bundle install
       - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}-{{ checksum "src-crg/package-lock.json"}}
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
           paths:
             - src-crg/vendor/bundle
-            - src-crg/node_modules
       - run:
-          name: Build CRG documentation with Widdershins and Slate
+          name: Build CRG documentation with Slate
           command: ./scripts/build_api_docs.sh -crg
       - persist_to_workspace:
           root: *workspace_root

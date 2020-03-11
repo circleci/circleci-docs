@@ -26,12 +26,12 @@ build_api_v2() {
 
 # build the Config Reference from slate.
 build_crg() {
-    echo "Building Configuration Reference with Slate and Widdershins"
+    echo "Building Configuration Reference with Slate "
     cd src-crg;
     bundle exec middleman build --clean
     echo "CRG bundled built."
     cp -R build/* /tmp/workspace/crg
-    echo "Output build moved to /tmp/workspace/api/v2"
+    echo "CRG Output build moved to /tmp/workspace/crg"
 }
 
 
@@ -43,7 +43,7 @@ then
 	build_api_v2
 elif [ "$1" == "-crg" ]
 then
-	build_api_v2
+	build_crg
 else
 	echo "Invalid command"
 fi
