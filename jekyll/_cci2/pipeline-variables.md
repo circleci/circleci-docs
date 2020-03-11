@@ -194,10 +194,7 @@ jobs:
   mytestjob:
     steps:
       - checkout
-      - when:
-          condition: << pipeline.parameters.deploy >>
-          steps:
-            - run: echo "deploying"
+      - ... # job steps
 ```
 
 The example shown above prevents the workflow `integration_tests` from being triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:
