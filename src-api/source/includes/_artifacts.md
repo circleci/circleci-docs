@@ -36,7 +36,10 @@ Request Type: `GET`
 https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
 ```
 
-You can download an individual artifact file via the API by appending a query string to its URL. Note that `:token` is an API token with 'view-builds' scope.
+You can download an individual artifact file via the API by appending a query
+string to its URL. Note that `:token` is an API token with 'view-builds' scope.
+**NOTE:** please make sure your HTTP client is configured to follow redirects as
+artifact URLs may respond with an `HTTP 3xx` status code.
 
 ## Artifacts of the latest Build
 
