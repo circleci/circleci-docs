@@ -387,6 +387,30 @@ pre {
 	margin-bottom: 10px;
 }
 
-.serveronly{
+.serveronly {
 	color: #4e9eb3; 
+}
+
+/* Shows when screen > $screen-md, hides when smaller */
+.table-migrate-desktop td, .table-migrate-desktop th {
+  @media screen and (min-width: $screen-md) {
+    width: 50%;
+    display: inline-block;
+    height: 100%;
   }
+  @media screen and (max-width: $screen-md - 1px) {
+    display: none;
+  }
+}
+
+.table-migrate-mobile {
+  table-layout: fixed;
+}
+
+/* Hides when screen is larger than $screen-md */
+.table-migrate-mobile td, .table-migrate-mobile th {
+  @media screen and (min-width: $screen-md) {
+    display: none;
+  }
+}
+
