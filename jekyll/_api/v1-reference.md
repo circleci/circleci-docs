@@ -171,13 +171,16 @@ The branch name should be url-encoded.
 
 <h2 id="download-artifact">Download an artifact file</h2>
 
-You can download an individual artifact file via the API by appending a query string to its URL:
+You can download an individual artifact file via the API with an API-token authenticated HTTP request.
 
-```
-https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
+```sh
+curl -L -H'Circle-Token: :token' https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt
 ```
 
-':token' is an API token with 'view-builds' scope.
+**Notes:**
+- Make sure your HTTP client is configured to follow follow redirects as the artifact URLs can respond with
+an HTTP `3xx` status code (the `-L` switch in `curl` will achieve this).
+- `:token` is an API token with 'view-builds' scope.
 
 <h2 id="build-artifacts-latest">Artifacts of the latest Build</h2>
 
