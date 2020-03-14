@@ -56,13 +56,13 @@ The `- image: circleci/ruby:2.4.1` text tells CircleCI what Docker image to use 
 
 3. To add your new repo, ensure that your GitHub account is selected in the dropdown in the upper-left, Select the Add Projects page, and find the repository you just created in the list (you can also search for it), then click the **Set Up Project** button next to it. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
 
-4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. If the language you are using is not in the list, click the "Use Hello World" button at the bottom of the list. Copy the YAML configuration that appears and save it as a file called "config.yml" in a folder named `.circleci` in the root of your repository's directory. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
+4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. If the language you are using is not in the list, use the default “Hello World” configuration. Copy the YAML configuration that appears and save it as a file called “config.yml” in a folder named `.circleci` in the root of your repository’s directory. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
 
-5. Git push your new  `config.yml` file to your VCS. You are ready to start building! Click the button "Start Building" and confirm in the modal that your repository is ready to build.
+5. Git pushes your new  `config.yml` file to your VCS. You are ready to start building! Click the button “Start Building” and then in pop-up window Click the button “Add Config” to confirm that your repository is ready to build.
 
 ## Running Your First CircleCI Build!
 
-You should see your build start to run automatically—and pass! So, what just happened? Click on the green Success button on the CircleCI dashboard to investigate the following parts of the run:
+You should see your build start to run automatically—and pass! So, what just happened? Click on the green Success button on the CircleCI dashboard and then click on the welcome/run button to investigate the following parts of the run:
 
 1. **Spin up environment:** CircleCI used the `circleci/ruby:2.4.1` Docker image to launch a virtual computing environment.
 
@@ -70,6 +70,7 @@ You should see your build start to run automatically—and pass! So, what just h
 
 3. **echo:** This was the only other instruction in your `config.yml` file: CircleCI ran the echo command with the input "A first hello" ([echo](https://linux.die.net/man/1/echo), does exactly what you'd think it would do).
 
+For more information on the results of each step expand the steps using the little triangle on the left. ![]( {{ site.baseurl }}/assets/img/docs/CircleCI-project-setup-success-steps.png)
 Even though there was no actual source code in your repo, and no actual tests configured in your `config.yml`, CircleCI considers your build to have "succeeded" because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests. You can learn more about all the possible steps one may put in a `config.yml` file in the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference).
 
 ### Breaking Your Build!
@@ -100,9 +101,9 @@ Edit your `config.yml` file in the GitHub editor for simplicity and replace `ech
           - run: echo "A first hello"
     ```
 
-2. Next, rename your two jobs so that they have different names. In this example they are named `one` and `two`. Change the contents of the echo statements to something different. To make the {% comment %} TODO: Job {% endcomment %}build take a longer period of time we can add a system `sleep` command.
+2. Next, rename your two jobs so that they have different names. In this example, they are named `one` and `two`. Change the contents of the echo statements to something different. To make the {% comment %} TODO: Job {% endcomment %}build take a longer period of time we can add a system `sleep` command.
 
-3. Add a `workflows` section to your `config.yml` file. The workflows section can be placed anywhere in the file. Typically it is found either at the top or the bottom of the file.
+3. Add a `workflows` section to your `config.yml` file. The workflows section can be placed anywhere in the file. Typically, it is found either at the top or the bottom of the file.
 
 
     ```yml
@@ -153,9 +154,9 @@ jobs:
       - run: mkdir -p my_workspace
       - run: echo "Trying out workspaces" > my_workspace/echo-output
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory
+          # Must be an absolute path or a relative path from working_directory
           root: my_workspace
-          # Must be relative path from root
+          # Must be a relative path from root
           paths:
             - echo-output      
   two:
@@ -165,7 +166,7 @@ jobs:
       - checkout
       - run: echo "A more familiar hi"  
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+          # Must be an absolute path or a relative path from working_directory
           at: my_workspace
 
       - run: |
@@ -193,7 +194,7 @@ Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using
 
 If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 
-*Note that you will need to add your SSH keys to your GitHub account:
+**Note:** You will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
 
 
