@@ -28,8 +28,15 @@ CircleCI では、iOS プロジェクトと macOS プロジェクトをビルド
 ## サポートされている Xcode のバージョン
 
 現時点では以下の Xcode バージョンが使用可能です。
-
-- `10.2.0`：Xcode 10.2 (ビルド 10P99q) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-520/index.html)
+- `11.4.0`：Xcode 11.4 Beta 3 (ビルド 11N132i) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2462/index.html)
+- `11.3.1`：Xcode 11.3.1 (ビルド 11C505) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
+- `11.3.0`：Xcode 11.3 (ビルド 11C29) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
+- `11.2.1`：Xcode 11.2.1 (ビルド 11B500) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+- `11.2.0`：Xcode 11.2.1 (ビルド 11B500) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+- `11.1.0`：Xcode 11.1 (ビルド 11A1027) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
+- `11.0.0`：Xcode 11.0 (ビルド 11A420a) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
+- `10.3.0`：Xcode 10.3 (ビルド 10G8) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
+- `10.2.1`：Xcode 10.2.1 (ビルド 10E1001) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
 - `10.1.0`：Xcode 10.1 (ビルド 10B61) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
 - `10.0.0`：Xcode 10.0 (ビルド 10A255) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
 - `9.4.1`：Xcode 9.4.1 (ビルド 9F2000) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
