@@ -23,7 +23,7 @@ Pipelines are our name for the full set of configurations you run when you trigg
 
 ## Benefits of Using Pipelines
 
-The pipelines feature enables use of the new [API endpoint to trigger builds with workflows](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) and the following use cases:
+Pipelines offer the following benefits:
 
 {% include snippets/pipelines-benefits.adoc %}
 

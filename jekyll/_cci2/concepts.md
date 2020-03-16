@@ -12,7 +12,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 * TOC 
 {:toc}
 
-## Add Projects
+## Projects
 
 A CircleCI project shares the name of the associated code repository. Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
 
@@ -35,6 +35,14 @@ org. A CircleCI user is anyone who can log in to the CircleCI platform with a
 username and password. Users must be added to a [GitHub or Bitbucket org]({{
 site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
 projects. Users may not view project data that is stored in environment variables.
+
+## Pipelines
+
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines contain your workflows, which coordinate jobs. This is all defined in your project [config](#config).
+
+Using pipelines offers the following benefits:
+
+{% include snippets/pipelines-benefits.adoc %}
 
 ## Config
 
