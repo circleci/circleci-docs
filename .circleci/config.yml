@@ -52,11 +52,14 @@ workflows:
             branches:
               only: /server\/.*/
       - build_api_docs
+      - build_config_ref
+
       - build:
           requires:
             - js_build
             - build_server_pdfs
             - build_api_docs
+            - build_config_ref
       - reindex-search:
           requires:
             - build
@@ -170,6 +173,36 @@ jobs:
           paths:
             - api
 
+
+  build_config_ref: # a job to manage building our config-reference documentation and persisting it to the workspace
+    executor:
+      name: ruby/default
+      tag: '2.6.3-node-browsers'
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: "Create landing folder for crg output"
+          command: mkdir -p /tmp/workspace/crg
+      # Since this job has both Ruby and Node dependencies we are going
+      # to use a cache-key that combines each respective language's package-lock file.
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
+      - run:
+          name: Install Ruby dependencies
+          command: cd src-crg; bundle install
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
+          paths:
+            - src-crg/vendor/bundle
+      - run:
+          name: Build CRG documentation with Slate
+          command: ./scripts/build_api_docs.sh -crg
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - crg
+
   # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
   # and puts everything in it's place for a Jekyll build.
   build:
@@ -215,6 +248,10 @@ jobs:
             mv /tmp/workspace/js/* jekyll/assets/js/
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
+
+            mkdir -p /tmp/workspace/crg
+            cp -r /tmp/workspace/crg/**/* jekyll/_crg/
+
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run:
