@@ -149,6 +149,8 @@ workflows:
       - build
 ```
 
-## Notification with RGB hardware
+## Third Party Tools
+
+### Chroma Feedback
 
 [Chroma Feedback](https://github.com/redaxmedia/chroma-feedback) is a command line tool in Python to turn your RGB powered hardware into an build indicator. The idea of such extreme visibility is to encourage developers to instantly repair their builds.
