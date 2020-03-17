@@ -52,14 +52,14 @@ workflows:
             branches:
               only: /server\/.*/
       - build_api_docs
-#       - build_config_ref
+      - build_config_ref
 
       - build:
           requires:
             - js_build
             - build_server_pdfs
             - build_api_docs
-#             - build_config_ref
+            - build_config_ref
       - reindex-search:
           requires:
             - build
@@ -247,9 +247,16 @@ jobs:
             set -exu
             mkdir -p /tmp/workspace/js
             mv /tmp/workspace/js/* jekyll/assets/js/
+
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
 
+            echo "------------------------"
+            mkdir -p /tmp/workspace/crg
+            ls /tmp/workspace/crg/
+
+            echo "------------------------"
+            cp -r /tmp/workspace/crg/**/* jekyll/_crg/
 
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
