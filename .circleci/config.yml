@@ -250,8 +250,6 @@ jobs:
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
 
-#            mkdir -p /tmp/workspace/crg
-#            cp -r /tmp/workspace/crg/**/* jekyll/_crg/
 
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
