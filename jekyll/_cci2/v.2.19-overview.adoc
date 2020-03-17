@@ -1,4 +1,4 @@
-= CircleCI Server v2.19 What's New
+= CircleCI Server v2.19.x What's New
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -9,7 +9,7 @@ This document provides a summary of features and product notes for the release o
 
 ## Requirements for Upgrading
 
-WARNING: For AWS installs, *before upgrading* to v{serverversion}, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
+WARNING: For AWS installs, *before upgrading* to v2.19.x, follow <<update-nomad-clients#important,this guide>> to update your nomad launch configuration.
 
 CAUTION: If at any time your organization name has been changed, there is a <<updating-server#org-rename-script,script>> that *must* be run before stating the upgrade process. If you are already running v2.18.x, you will have run this already.
 
@@ -19,7 +19,13 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 * We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
 * We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to {serverversion}.
 
-## What's New in Release 2.19
+## What's New in v2.19.1
+
+* Fixed a bug that was preventing some customers from upgrading due to a schema change in one of our library dependencies.
+
+* Fixed a bug that was preventing some customers from inspecting builds via SSH due to a logic change in our build agent.
+
+## What's New in v2.19
 
 * You can now customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations#resource-class[CPU/RAM options] for the Jobs they configure. For more information https://circleci.com/docs/2.0/customizations#resource-classes[see our guide to customizing resource classes in Server v2.19].
 
