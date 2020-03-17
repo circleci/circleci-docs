@@ -257,6 +257,7 @@ jobs:
 
             echo "------------------------"
             cp -r /tmp/workspace/crg/**/* jekyll/_crg/
+            ls  jekyll/_crg
 
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
