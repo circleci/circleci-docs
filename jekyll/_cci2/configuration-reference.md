@@ -1391,6 +1391,181 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
+###### **`matrix`**
+A matrix job allows you to run a parameterized job multiple times with different
+arguments.
+
+Key | Required | Type | Description
+----|----------|------|------------
+parameters | Y | Map  | A map of parameter names to every value the job should be called with
+exclude | N | Map | A list of argument maps that should be excluded from the matrix
+alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
+
+The following is a basic example of using matrix jobs. All features are
+explained in more detail below.
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          # In the invocation of a matrix job, you may use the special
+          # template variables `<< matrix.* >>`. These will expand to
+          # the value of the parameter for _each_ job within the matrix.
+
+          # Naming each job in the matrix can be useful if you want to
+          # require a particular matrix job from another job. The name
+          # defaults to the job name ("build" here) concatenated with
+          # all of the matrix values, sorted by their names in
+          # alphabetical order.
+
+          # The default name for this example would be:
+          # name: "build-<< matrix.platform >>-<< matrix.version >>"
+
+          name: "build-v<< matrix.version >>-for-<< matrix.platform >>"
+
+          # You may also require jobs. You can even use this to require a
+          # particular matrix job from another matrix job!
+          requires:
+            - lint
+            - "prepare-v<< matrix.version >>-for-<< matrix.platform >>"
+
+          matrix:
+            # The job will be invoked once for each combination of parameters.
+            # In this case, the job would be invoked 9 times, once for each
+            # version/platform combination.
+            parameters:
+              version: ["0.1", "0.2", "1.0"]
+              platform: ["windows", "linux", "macos"]
+
+            # You may provide a matrix alias in order to require the entire
+            # matrix later. The default alias is the name of the job being
+            # invoked, which in this case would be:
+            # alias: build
+            alias: my-matrix
+
+            # You may `exclude` some sets of parameters from the matrix.
+            exclude:
+              - version: 0.2
+                platform: linux
+              - version: 1.0
+                platform: macos
+```
+
+###### Matrix parameters
+{:.no_toc}
+When running a job in a matrix, other job arguments (such as `requires` or
+`name`) can contain matrix parameters, in the form `<< matrix.[parameter-name] >>`
+For example:
+```
+- deploy:
+    matrix:
+      parameters:
+        version: ["0.1", "0.2"]
+    name: "deploy-<< matrix.version >>"
+    requires:
+      - "build-<< matrix.version >>"
+```
+
+This matrix result in two jobs being run. One, called `deploy-0.1`,
+would require the `build-0.1` job. The other, called `deploy-0.2`, would require
+the `build-0.2` job.
+
+###### Excluding sets of parameters from a matrix
+{:.no_toc}
+Sometimes you may wish to run a job with every combination of arguments _except_
+some value or values. You can use an `exclude` stanza to achieve this:
+
+```
+- build:
+    matrix:
+      parameters:
+        a: [1, 2, 3]
+        b: [4, 5, 6]
+      exclude:
+        - a: 3
+          b: 5
+```
+
+The matrix above would result in 8 jobs being run: every combination of the
+parameters `a` and `b`, excluding `{a: 3, b: 5}`
+
+###### Requiring an entire matrix
+{:.no_toc}
+Another job can `require` an entire matrix (that is, every job in the matrix)
+using its `alias`. The `alias` defaults to the name of the job being invoked.
+```
+- deploy:
+    matrix:
+      parameters:
+        version: ["0.1", "0.2"]
+- another-job:
+    requires:
+      - deploy
+```
+
+This means that `another-job` will require both `deploy-0.1` and `deploy-0.2` to
+finish before it runs. 
+
+You can also manually set the `alias` to a custom value. For example:
+
+```
+- deploy:
+    matrix:
+      parameters:
+        version: ["0.1", "0.2"]
+      # setting a custom alias
+      alias: my-deploy-matrix
+- another-job:
+    requires:
+      # using a custom alias
+      - my-deploy-matrix
+```
+
+###### Requiring a single job from a matrix
+{:.no_toc}
+Every job in a matrix has a name. By default, the name will be the job's name,
+concatenated with the value of each matrix parameter alphabetized by the
+*parameter name*, separated by hyphens. These names can be used to `require` a
+job, including from within another matrix:
+
+```
+- build:
+    matrix:
+      parameters:
+        version: ["0.1", "0.2"]
+        os: ["windows", "linux"]
+- deploy:
+    matrix:
+      parameters:
+        version: ["0.1", "0.2"]
+        os: ["windows", "linux"]
+    requires:
+      # using matrix parameters to require the matching `build` job
+      - "build-<< matrix.os >>-<< matrix.version >>"
+```
+
+The `name` of each job within the matrix can also be set manually. It's best to
+use matrix parameters here so that each job gets a user-friendly name:
+
+```
+- build:
+    matrix:
+      # set a custom name, using matrix parameters
+      name: "build-v<< matrix.version >>-for-<<matrix.os >>"
+      parameters:
+        version: ["0.1", "0.2"]
+        os: ["windows", "linux"]
+- deploy:
+    matrix:
+      parameters:
+        version: ["0.1", "0.2"]
+        os: ["windows", "linux"]
+    requires:
+      # using matrix parameters to require the matching `build` job
+      - "build-v<< matrix.version >>-for-<<matrix.os >>"
+```
+
 ##### **Using `when` in Workflows**
 
 With CircleCI configuration v2.1, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with CircleCI API v2 pipeline triggering with parameters.
