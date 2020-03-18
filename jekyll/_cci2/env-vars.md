@@ -97,13 +97,12 @@ Environment variables are used according to a specific precedence order, as foll
 6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
 7. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
 
-**TODO CHECK TEXT BELOW ONCE ORDER LIST IS FINALISED**
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
+Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 **Note**:
 Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context]({{ site.baseurl }}/2.0/contexts/) settings in the CircleCI app.
 
-For more information, see the [Encryption section]({{ site.baseurl }}/2.0/security/#encryption) of the "Security" document.
+For more information, see the [Encryption]({{ site.baseurl }}/2.0/security/#encryption) section of the Security document.
 
 Running scripts within configuration may expose secret environment variables. See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
@@ -114,9 +113,10 @@ Running scripts within configuration may expose secret environment variables. Se
 Consider the example `config.yml` below:
 
 ```yaml
-version: 2  # use CircleCI 2.0
+version: 2.1  # use CircleCI 2.1
+
 jobs: # basic units of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point
+  build: 
     docker: # run the steps with Docker
       # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
       - image: circleci/node:10.0-browsers
@@ -140,6 +140,11 @@ jobs: # basic units of work in a run
       - run:
           name: "What was my custom environment variable?"
           command: echo ${MY_ENV_VAR}  # prints: XXXXXXX
+
+workflows:
+  build:
+    jobs:
+      - build
 ```
 
 The above `config.yml` demonstrates the following: 
