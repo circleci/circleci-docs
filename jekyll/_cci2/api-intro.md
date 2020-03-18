@@ -29,7 +29,6 @@ The current categories of the API v2 endpoints are:
 - Project (Preview)
 - Job (Preview)
 
-
 **Note:** Portions of the CircleCI API v2 remain under "Preview". Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the [API v2 breaking changes log](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md).
 
 ## Getting Started with the API v2
@@ -109,10 +108,10 @@ Endpoint       | Description
 
 API v2 is not currently supported for self-hosted installations of CircleCI Server.
 
-<!---
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed *API Reference Guide* (*add link here for the API Reference Guide when ready*) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
+## Data Insights (Preview)
+
+The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed [API Reference Guide](https://circleci.com/docs/api/v2/#section=reference) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
 
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
--->
