@@ -92,6 +92,12 @@ If upgrading from Cocoapods 1.7 or older, additionally ensure the following line
 source 'https://github.com/CocoaPods/Specs.git'
 ```
 
+To update Cocoapods to the latest stable version, simply update the Ruby gem with the following command:
+
+```
+sudo gem install cocoapods
+```
+
 #### Homebrew
 
 Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that the step execution can take some extra time to complete.
