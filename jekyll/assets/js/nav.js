@@ -39,4 +39,19 @@
       document.removeEventListener('touchmove', preventDefaultTouch, { passive: false });
     }
   });
+
+  // Open dropdowns on keyboard focus
+  $(document).ready(function () {
+    $('.nav-item').each(function () {
+      var wrapper = $(this);
+      wrapper.find('a').on('focus', function () {
+        wrapper.addClass('submenu-open');
+        wrapper.attr('aria-expanded', true);
+      });
+      wrapper.on('focusout', function () {
+        wrapper.removeClass('submenu-open');
+        wrapper.attr('aria-expanded', false);
+      });
+    });
+  });
 }());

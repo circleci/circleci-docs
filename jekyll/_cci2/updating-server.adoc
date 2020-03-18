@@ -8,18 +8,17 @@
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
-This section describes the process for upgrading your CircleCI Server installation from v2.17.x to v{serverversion}. If you have already upgraded to v2.18 and would like steps to upgrade to patch release v2.18.3, first take a <<1-snapshot-for-rollback,snapshot>> and then follow the <<3-upgrade-circleci-server,application upgrade steps>>.
+This document describes the process for upgrading your CircleCI Server installation to v{serverversion}. 
 
 toc::[]
 
 == Nomad Launch Configuration
 
-WARNING: For AWS installs, *before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
+WARNING: *Before upgrading* to v2.19, follow <<update-nomad-clients#,this guide>> to update your nomad launch configuration.
 
 == Org Rename Script
 
-WARNING: Before upgrading please read and follow the steps below if you have **ever had issues with renaming an organization within CircleCI**
-or you suspect that an **organization rename might have happened at any point**.
+CAUTION: If upgrading directly from v2.17 (or below) and you have **ever had issues with renaming an organization within CircleCI** or you suspect that an **organization rename might have happened at any point** follow the steps below. If you are running Server v2.18.x already you can skip these steps.
 
 . SSH into your Services machine
 . REPL into `workflows-conductor` by running the following: `sudo docker exec -it workflows-conductor lein repl :connect 6005`

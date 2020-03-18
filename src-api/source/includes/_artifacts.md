@@ -3,7 +3,7 @@
 ## Artifacts Of A Build
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts?circle-token=:token
+curl -H'Circle-Token: :token' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts
 ```
 
 ```json
@@ -32,17 +32,21 @@ Request Type: `GET`
 
 ## Download an artifact file
 
-```
-https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
+You can download an individual artifact file via the API with an API-token authenticated HTTP request.
+
+```sh
+curl -L -H'Circle-Token: :token' https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt
 ```
 
-You can download an individual artifact file via the API by appending a query string to its URL. Note that `:token` is an API token with 'view-builds' scope.
+### Notes
+* Make sure your HTTP client is configured to follow redirects as the artifact URLs can respond with
+an HTTP `3xx` status code (the `-L` switch in `curl` will achieve this).
+* `:token` is an API token with 'view-builds' scope.
 
 ## Artifacts of the latest Build
 
-
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:token&branch=:branch&filter=:filter
+curl -H'Circle-Token: :token' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?branch=:branch&filter=:filter
 ```
 
 ```json
@@ -73,4 +77,3 @@ filter | Restricts which builds are returned. Set to "completed", "successful", 
 
 * the value of path is relative to the project root (the working_directory)
 * pretty_path returns the same value as path. It is included in the response for backwards compatibility
-

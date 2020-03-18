@@ -144,7 +144,7 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-parameters | N | List | A list of parameters that need to be passed as part of the request when performing this operation
+parameters | N | Map | A map of parameters that need to be passed as part of the request when performing this operation
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -459,19 +459,14 @@ jobs:
 
 ##### Machine Executor (Linux)
 
-Class            | vCPUs | RAM
------------------|-------|------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-xlarge           | 8     | 32GB
-2xlarge          | 16    | 64GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
 ###### Example Usage
 ```yaml
 jobs:
   build:
-    machine: true
+    machine:
+      image: ubuntu-1604:201903-01 # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
     resource_class: large
     steps:
       ... // other config
@@ -515,10 +510,14 @@ orbs:
 
 jobs:
   build:
-    executor: win/default
+    executor:
+      name: win/default
+      size: "medium" # can be "medium", "large", "xlarge", "2xlarge"
     steps:
       - run: Write-Host 'Hello, Windows'
 ```
+
+Note the way resource class is set is different for `windows` because the executor is defined within the windows orb.
 
 See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
@@ -550,7 +549,7 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 
 Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
 ----------------------------------------|-------|-----|------|-----------------|------------------
-windows.gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
+windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
 ###### Example Usage

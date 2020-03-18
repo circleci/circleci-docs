@@ -19,9 +19,10 @@ This document presents example config for a variately of popular deployment targ
 
 ## AWS
 
-This section covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy. For an in-depth look at deploying to AWS ECS from ECR, see the [Deploying to AWS ECS/ECR document]({{ site.baseurl }}/2.0/ecs-ecr/).
+This section covers deployment to S3, ECR/ECS (Elastic Container Registry/Elastic Container Service), as well as application deployment using AWS Code Deploy.
 
-For more detailed information about the AWS ECS, AWS ECR, & AWS CodeDeploy orbs, refer to the following Orb registry pages:
+For more detailed information about the AWS S3, ECS, ECR, and CodeDeploy orbs, refer to the following Orb registry pages:
+- [AWS S3](https://circleci.com/orbs/registry/orb/circleci/aws-s3)
 - [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
 - [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
 - [AWS CodeDeploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy)
@@ -589,7 +590,7 @@ to set up a project in your chosen language.
       heroku_deploy:
         jobs:
           - build
-          - heroku/deploy-via-git
+          - heroku/deploy-via-git:
               requires:
                 - build # only run deploy-via-git job if the build job has completed
               filters:

@@ -2,9 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <a href="#main" class="nav-skip-button">
+          Skip to content
+        </a>
 
         <div class="widescreen">
-          <a href="{{ '/' | outer_url }}"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
+          <a href="{{ '/' | outer_url }}" class="logo"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
 
 
           <ul class="left-links main-nav">
@@ -23,14 +26,17 @@
 
             <li class="nav-item"><a href="{{ '/pricing/' | outer_url }}">Pricing</a></li>
             <li class="nav-item"><a href="{{ '/enterprise/' | outer_url }}">Enterprise</a></li>
-            <li class="nav-item">Developers
+            <li class="nav-item">
+              <a href="#">
+                Developers
+              </a>
               <div class="submenu">
                 <ul class="subnav">
                   <li class="subnav-item"><a href="{{ '/2.0/hello-world/' | language_relative_url }}">Hello World</a></li>
                   <li class="subnav-item"><a href="{{ '/' | language_relative_url }}">Documentation</a></li>
                   <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">Community Forum</a></li>
                   <li class="subnav-item" ><a href="https://circleci.com/orbs/">Orbs</a></li>
-                  <li class="subnav-item"><a href="https://circleci.com/docs/api/">API</a></li>
+                  <li class="subnav-item"><a href="https://circleci.com/docs/api/v2/#circleci-api">API</a></li>
                   <li class="subnav-item"><a href="{{ '/open-source/' | outer_url }}">Open Source</a></li>
                 </ul>
               </div>
@@ -55,13 +61,16 @@
                 Contact Us
               </a>
             </li>
-            <li class="default-item nav-item">Support
+            <li class="default-item nav-item">
+              <a href="#">
+                Support
+              </a>
               <div class="submenu">
                 <ul class="subnav">
                   <li class="subnav-item"><a href="https://academy.circleci.com/?access_code=public-2020" target="_blank">Training</a></li>
                   <li class="subnav-item"><a href="https://support.circleci.com/hc/en-us" target="_blank">Get Support</a></li>
                   <li class="subnav-item"><a href="https://status.circleci.com/" target="_blank">System Status</a></li>
-                  <li class="subnav-item"><a href="https://ideas.circleci.com/">Feature Requests</a></li>
+                  <li class="subnav-item"><a href="https://ideas.circleci.com/" target="_blank">Feature Requests</a></li>
                   <li class="subnav-item"><a href="{{ '/support/premium-support/' | outer_url }}">Premium Support</a></li>
                 </ul>
               </div>
@@ -118,7 +127,7 @@
                 <li class="subnav-item"><a href="{{ '/' | language_relative_url }}">Documentation</a></li>
                 <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">Community Forum</a></li>
                 <li class="subnav-item"><a href="https://circleci.com/orbs/">Orbs</a></li>
-                <li class="subnav-item"><a href="https://circleci.com/docs/api/v1-reference/">API</a></li>
+                <li class="subnav-item"><a href="https://circleci.com/docs/api/v2/#circleci-api">API</a></li>
                 <li class="subnav-item"><a href="{{ '/open-source/' | outer_url }}">Open Source</a></li>
               </ul>
             </li>
@@ -143,7 +152,7 @@
                 <li class="subnav-item"><a href="https://academy.circleci.com/?access_code=public-2020" target="_blank">Training</a></li>
                 <li class="subnav-item"><a href="https://support.circleci.com/hc/en-us" target="_blank">Get Support</a></li>
                 <li class="subnav-item"><a href="https://status.circleci.com/" target="_blank">System Status</a></li>
-                <li class="subnav-item"><a href="https://ideas.circleci.com/">Feature Requests</a></li>
+                <li class="subnav-item"><a href="https://ideas.circleci.com/" target="_blank">Feature Requests</a></li>
                 <li class="subnav-item"><a href="{{ '/support/premium-support/' | outer_url }}">Premium Support</a></li>
               </ul>
             </li>
