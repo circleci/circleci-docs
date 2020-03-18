@@ -52,7 +52,7 @@ Email notifications will look like the following:
 
 ## Enable Web Notifications
 
-Perform the following to enable web notifications:
+Perform the following steps to enable web notifications:
 
 1. Go to your [CircleCI user settings](https://circleci.com/account/notifications){:rel="nofollow"}. Enable the toggle for "Web Notifications" at the bottom of the document.
 
@@ -61,7 +61,7 @@ Perform the following to enable web notifications:
 ![]({{ site.baseurl }}/assets/img/docs/notifications-enable-web.png)
 
 If you've previously denied CircleCI permission to send you web notifications
-you will need to manually turn those permissions on in your browser, as CircleCI can't
+you will need to manually turn those permissions on in your browser, as CircleCI cannot
 request permission in this case. Use your browser settings to control notifications. In Google Chrome you can do this by clicking the lock icon in the URL bar and re-enabling notifications from the Permissions Settings.
 
 While the process is similar for other browsers, please refer to their individual
