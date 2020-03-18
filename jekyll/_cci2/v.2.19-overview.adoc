@@ -35,4 +35,6 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 ## Known Issues
 
+* **If you are using an HTTP proxy for your installation, do not upgrade to v2.19.x until further notice**. We have known issues around job step logging and docker commands customization that make the current 2.19.x releases incompatable with an HTTP proxy setup of CircleCI Server. This issue will be fixed in a future 2.19.x patch release and the 'safe' version will be flagged up clearly for affected customers.
+
 * The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
