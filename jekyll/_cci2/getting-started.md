@@ -15,10 +15,21 @@ This document provides a step-by-step tutorial for getting your first successful
 ## Prerequisites for Running Your First Build
 {:.no_toc}
 
-* Some basic knowledge of Git and an existing GitHub.com account or the ability to create one. This procedure uses a new GitHub repository, but CircleCI also supports the use of Bitbucket.
+* Some basic knowledge of Git.
+* A GitHub account, of which you are logged into.
+* An account on CircleCI.
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
 
 ## Creating a Repository
+
+Begin by creating a new repository on GitHub. Skip this section if you intend to use an existing repository.
+
+1. Navigate to GitHub and [create a new repository](https://github.com/new), or;
+1. Alternatively, on GitHub, create a new repository by clicking on the `+` button on the header and clicking "New repository".
+1. Input the name of your repository, in this case "hello-world", then click `Initialize this repository with a README`. Finally, click `Create repository`.
+
+<!-- INSERT IMAGE HERE. -->
+
 1. Navigate to your account on GitHub.com
   * Go to the **Repositories** tab and then select **New** or navigate directly to [https://github.com/new](https://github.com/new). ![]( {{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
