@@ -29,7 +29,7 @@ Another example of an artifact is a project that is packaged as an Android app w
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
 
-![artifacts tab screeshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
+![artifacts tab screenshot]( {{ site.baseurl }}/assets/img/docs/artifacts.png)
 
 Find links to the artifacts under the "Artifacts" tab on the **Job page**.
 Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
