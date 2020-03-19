@@ -15,12 +15,12 @@ This document describes how to work with Artifacts in the following sections:
 ## Artifacts Overview
 
 Artifacts persist data after a job is completed
-and may be used for longer-term storage of the outputs of your build process.
+and may be used for storage of the outputs of your build process.
 
 For example, when a Java build/test process finishes,
 the output of the process is saved as a `.jar` file.
 CircleCI can store this file as an artifact,
-keeping it available long after the process has finished.
+keeping it available after the process has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
@@ -33,11 +33,8 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 Find links to the artifacts under the "Artifacts" tab on the **Job page**.
 Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
-There is a 3GB `curl` file size limit.
-Artifacts are designed
-to be useful around the time of the build.
-It is best practice
-not to rely on artifacts as a software distribution mechanism with long term future guarantees.
+There is a 3GB `curl` file size limit. Artifacts will be accessible for thirty
+days after creation.
 
 **Note:**
 Uploaded artifact filenames are encoded
