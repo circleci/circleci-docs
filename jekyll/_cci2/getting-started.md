@@ -223,22 +223,17 @@ cat <file_name>      # show me the contents of the file <file_name>
 ### CircleCI
 {:.no_toc}
 
-* The CircleCI blog and how to follow it
-  * <https://circleci.com/blog/>
-* Relevant blog post  
-  * <https://circleci.com/blog/what-is-continuous-integration/>
-* Our other social media and GitHub
-  * <https://github.com/circleci>
-  * <https://twitter.com/circleci>
-  * <https://www.facebook.com/circleci>
+* The [CircleCI blog](https://circleci.com/blog/).
+* [What is continuous integration?](https://circleci.com/blog/what-is-continuous-integration/)
+* CircleCI on [GitHub](https://github.com/circleci), [Twitter](https://twitter.com/circleci) and [Facebook](https://www.facebook.com/circleci)
 
 ### Continuous Integration
 {:.no_toc}
 
-* <https://martinfowler.com/articles/continuousIntegration.html>
-* <https://en.wikipedia.org/wiki/Continuous_integration#Best_practices>
+* [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
+* [Best Practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices) 
 
 ### YAML
 {:.no_toc}
 
-* <https://en.wikipedia.org/wiki/YAML#Advanced_components>
+* [Advanced Concepts](https://en.wikipedia.org/wiki/YAML#Advanced_components)
