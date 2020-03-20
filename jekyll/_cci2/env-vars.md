@@ -15,13 +15,13 @@ This document describes using environment variables in CircleCI in the following
 ## Overview
 {:.no_toc}
 
-There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an order of precedence, depending on how they are set, allowing control at each level in your configuration. 
+There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration. 
 
-To add **private keys** or **secret environment variables** for use throughout your private project, use the Environment Variables page under Project Settings in the CircleCI application. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
+To add **private keys** or **secret environment variables** for use throughout your private project, use the [Environment Variables page under Project Settings](#setting-an-environment-variable-in-a-project) in the CircleCI application. The variable values are neither readable nor editable in the app after they are set. To change the value of an environment variable, delete the current variable and add it again with the new value.
 
 Private environment variables enable you to store secrets safely even when your project is public, see [Building Open Source Projects]({{ site.baseurl }}/2.0/oss/) for associated settings information. 
 
-Use Contexts to further restrict access to environment variables. Contexts are set from the Organization Settings in the CircleCI application. For more information refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
+Use Contexts to [further restrict access to environment variables](#setting-an-environment-variable-in-a-context). Contexts are set from the Organization Settings in the CircleCI application. For more information refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
 
 ## Secrets Masking
 
@@ -32,7 +32,7 @@ The value of the environment variable will not be masked in the build output if:
 * the value of the environment variable is less than 4 characaters
 * the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
 
-**Note:** secret masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
+**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ## Environment Variable Usage Options
 
@@ -121,6 +121,7 @@ When the above config runs, the output looks like this, notice the env var store
 Notice there are two similar steps in the above image and config - "What branch am I on?". These steps illustrate two different methods to read environment variables. Note that both `${VAR}` and `$VAR` syntaxes are supported. You can read more about shell parameter expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
 ### Using Parameters and BASH_ENV
+{:.no_toc}
 
 CircleCI does not support interpolation when setting environment variables. All defined values are treated literally. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
 
@@ -378,27 +379,24 @@ Not all command-line programs take credentials in the same way that `docker` doe
 
 ## Injecting Environment Variables with API v2
 
-Pipeline parameters can be used to inject environment variables using the CircleCI API v2. 
+Pipeline parameters can be used to pass variables using the CircleCI API v2. 
+
+A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
+
+The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
 ```sh
-"parameters": {
-    "foo": "bar",
-    "baz": 5,
-    "qux": {"quux": 1},
-    "list": ["a", "list", "of", "strings"]
-   }
+curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d '{
+  "parameters": {
+    "workingdir": "./myspecialdir",
+    "image-tag": "4.8.2"
+  }
+}' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-Your pipeline will see the environment variables:
+**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
-```sh
-export foo="bar"
-export baz="5"
-export qux="{\"quux\": 1}"
-export list="[\"a\", \"list\", \"of\", \"strings\"]"
-```
-
-**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings](https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context).
+Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
 
 ## Injecting Environment Variables with API v1
 
@@ -410,7 +408,7 @@ Build parameters are environment variables, therefore their names have to meet t
 
 Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
-**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings](https://circleci.com/docs/2.0/settings/) and [Contexts](https://circleci.com/docs/2.0/glossary/#context).
+**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
 For example, when you pass the parameters:
 
