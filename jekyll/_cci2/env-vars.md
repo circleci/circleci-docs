@@ -103,7 +103,7 @@ jobs: # basic units of work in a run
 workflows: # a single workflow with a single job called build
   build:
     jobs:
-      - build
+      - build:
           context: Testing-Env-Vars
 ```
 
@@ -414,7 +414,7 @@ Aside from the usual constraints for environment variables there are no restrict
 
 For example, when you pass the parameters:
 
-```
+```sh
 {
   "build_parameters": {
     "foo": "bar",
@@ -427,7 +427,7 @@ For example, when you pass the parameters:
 
 Your build will see the environment variables:
 
-```
+```sh
 export foo="bar"
 export baz="5"
 export qux="{\"quux\": 1}"
@@ -438,7 +438,7 @@ Build parameters are exported as environment variables inside each job's contain
 
 You might want to inject environment variables with the `build_parameters` key to enable your functional tests to build against different targets on each run. For example, a run with a deploy step to a staging environment that requires functional testing against different hosts. It is possible to include `build_parameters` by sending a JSON body with `Content-type: application/json` as in the following example that uses `bash` and `curl` (though you may also use an HTTP library in your language of choice).
 
-```
+```sh
 {
   "build_parameters": {
     "param1": "value1",
@@ -449,7 +449,7 @@ You might want to inject environment variables with the `build_parameters` key t
 
 For example using `curl`
 
-```
+```sh
 curl \
   --header "Content-Type: application/json" \
   --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
@@ -462,7 +462,7 @@ In the above example,
 
 The build will see the environment variables:
 
-```
+```sh
 export param1="value1"
 export param2="500"
 ```
