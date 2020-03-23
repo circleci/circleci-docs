@@ -1425,7 +1425,7 @@ workflows:
           name: "build-v<< matrix.version >>-for-<< matrix.platform >>"
 
           # You may also require jobs. You can even use this to require a
-          # particular matrix job from another matrix job!
+          # particular job in another matrix job!
           requires:
             - lint
             - "prepare-v<< matrix.version >>-for-<< matrix.platform >>"
