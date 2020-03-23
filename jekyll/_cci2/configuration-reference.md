@@ -1409,71 +1409,11 @@ workflows:
   workflow:
     jobs:
       - build:
-          # In the invocation of a matrix job, you may use the special
-          # template variables `<< matrix.* >>`. These will expand to
-          # the value of the parameter for _each_ job within the matrix.
-
-          # Naming each job in the matrix can be useful if you want to
-          # require a particular matrix job from another job. The name
-          # defaults to the job name ("build" here) concatenated with
-          # all of the matrix values, sorted by their names in
-          # alphabetical order.
-
-          # The default name for this example would be:
-          # name: "build-<< matrix.platform >>-<< matrix.version >>"
-
-          name: "build-v<< matrix.version >>-for-<< matrix.platform >>"
-
-          # You may also require jobs. You can even use this to require a
-          # particular job in another matrix job!
-          requires:
-            - lint
-            - "prepare-v<< matrix.version >>-for-<< matrix.platform >>"
-
-          matrix:
-            # The job will be invoked once for each combination of parameters.
-            # In this case, the job would be invoked 9 times, once for each
-            # version/platform combination. (Though the `exclude` below means
-            # the total will be reduced by 2.)
-            parameters:
-              version: ["0.1", "0.2", "1.0"]
-              platform: ["windows", "linux", "macos"]
-
-            # You may provide a matrix alias in order to require the entire
-            # matrix later. The default alias is the name of the job being
-            # invoked, which in this case would be:
-            # alias: build
-            alias: my-matrix
-
-            # You may `exclude` some sets of parameters from the matrix.
-            exclude:
-              - version: 0.2
-                platform: linux
-              - version: 1.0
-                platform: macos
+        matrix:
+          parameters:
+            version: ["0.1", "0.2", "0.3"]
+            platform: ["macos", "windows", "linux"]
 ```
-
-###### Matrix parameters
-{:.no_toc}
-When running a job in a matrix, other job arguments (such as `requires` or
-`name`) can contain matrix parameters, in the form `<< matrix.[parameter-name] >>`
-For example:
-```yaml
-workflows:
-  workflow:
-    jobs:
-      - deploy:
-          matrix:
-            parameters:
-              version: ["0.1", "0.2"]
-          name: "deploy-<< matrix.version >>"
-          requires:
-            - "build-<< matrix.version >>"
-```
-
-This matrix results in two jobs being run. One, called `deploy-0.1`,
-would require the `build-0.1` job. The other, called `deploy-0.2`, would require
-the `build-0.2` job.
 
 ###### Excluding sets of parameters from a matrix
 {:.no_toc}
@@ -1535,43 +1475,42 @@ workflows:
             - my-deploy-matrix
 ```
 
-###### Requiring a single job from a matrix
+###### Matrix parameters
 {:.no_toc}
-Every job in a matrix has a name. By default, the name will be the job's name,
-concatenated with the value of each matrix parameter alphabetized by the
-*parameter name*, separated by hyphens. These names can be used to `require` a
-job, including from within another matrix:
-
+When running a job in a matrix, other job arguments (such as `requires` or
+`name`) can contain matrix parameters, in the form `<< matrix.[parameter-name] >>`
+For example:
 ```yaml
 workflows:
   workflow:
     jobs:
-      - build:
-          matrix:
-            parameters:
-              version: ["0.1", "0.2"]
-              os: ["windows", "linux"]
+      - build-0.1: ...
+      - build-0.2: ...
       - deploy:
           matrix:
             parameters:
               version: ["0.1", "0.2"]
-              os: ["windows", "linux"]
+          name: "deploy-<< matrix.version >>"
           requires:
-            # using matrix parameters to require the matching `build` job
-            - "build-<< matrix.os >>-<< matrix.version >>"
+            - "build-<< matrix.version >>"
 ```
 
-The `name` of each job within the matrix can also be set manually. It is best to
-use matrix parameters here so that each job gets a user-friendly name:
+This matrix results in two jobs being run. One, called `deploy-0.1`,
+would require the `build-0.1` job. The other, called `deploy-0.2`, would require
+the `build-0.2` job.
+
+In a typical use case, you may wish to require a single job from a matrix from
+within another matrix. To do so, use matrix parameters to set the `name` of the
+required job, and the `requires` stanza of the dependent job:
 
 ```yaml
 workflows:
   workflow:
     jobs:
       - build:
+          # provide a name to each job in this matrix
+          name: "build-<< matrix.os >>-<< matrix.version >>"
           matrix:
-            # set a custom name, using matrix parameters
-            name: "build-v<< matrix.version >>-for-<<matrix.os >>"
             parameters:
               version: ["0.1", "0.2"]
               os: ["windows", "linux"]
@@ -1581,8 +1520,8 @@ workflows:
               version: ["0.1", "0.2"]
               os: ["windows", "linux"]
           requires:
-            # using matrix parameters to require the matching `build` job
-            - "build-v<< matrix.version >>-for-<<matrix.os >>"
+            # require the above name in each job in this matrix
+            - "build-<< matrix.os >>-<< matrix.version >>"
 ```
 
 ##### **Using `when` in Workflows**
