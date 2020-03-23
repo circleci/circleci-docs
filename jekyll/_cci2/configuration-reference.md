@@ -1545,7 +1545,7 @@ job, including from within another matrix:
       - "build-<< matrix.os >>-<< matrix.version >>"
 ```
 
-The `name` of each job within the matrix can also be set manually. It's best to
+The `name` of each job within the matrix can also be set manually. It is best to
 use matrix parameters here so that each job gets a user-friendly name:
 
 ```
