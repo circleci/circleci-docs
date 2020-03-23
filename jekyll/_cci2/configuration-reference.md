@@ -1467,7 +1467,7 @@ For example:
       - "build-<< matrix.version >>"
 ```
 
-This matrix result in two jobs being run. One, called `deploy-0.1`,
+This matrix results in two jobs being run. One, called `deploy-0.1`,
 would require the `build-0.1` job. The other, called `deploy-0.2`, would require
 the `build-0.2` job.
 
