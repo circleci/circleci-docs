@@ -86,7 +86,7 @@ the following parts of the run:
 
 1. **Views step results:** Every job is made up of a series of steps - some
    steps, like
-   [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout}}) are
+   [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are
    built-in commands in CircleCI. Other steps are specified by a user to achieve
    a specific purpose. Because we are using the `welcome` orb, we don't see
    custom steps; they are configured in the orb. But no problem! We can view the
