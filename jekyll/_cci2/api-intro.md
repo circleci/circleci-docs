@@ -94,7 +94,7 @@ Endpoint       | Description
 `GET /project/:project_slug/pipelines/[:filter]`  | This endpoint enables users to retrieve the most recent set of pipelines for a Project.
 `GET /insights/:project-slug/workflows` | This endpoint enables you to retrieve summary metrics for an individual project's workflow.
 `GET /insights/:project-slug/workflows/:workflow-name` | This endpoint enables you to retrieve recent runs for a workflow.
-`GET /insights/:project-slug/workflows/:workflow-name/jobs` | This endpoint enables you to retrieve summary metrics for an project workflow's jobs.
+`GET /insights/:project-slug/workflows/:workflow-name/jobs` | This endpoint enables you to retrieve summary metrics for a project workflow's jobs.
 `GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | This endpoint enables you to retrieve recent runs of a job within a workflow.
 
 ### Deprecated Endpoints
