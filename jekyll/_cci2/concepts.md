@@ -16,9 +16,9 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 
 A CircleCI project shares the name of the associated code repository. Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
 
-On the Projects Dashboard, you can either _Set Up_ any project that you are
-the owner of on your VCS, or, _Follow_ any project in your organization to gain
-access to its pipelines and to subscribe to [email notifications]({{
+On the Projects Dashboard, you can either:
+* _Set Up_ any project that you are the owner of on your VCS 
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
 
 {:.tab.addprojectpage.Cloud}
@@ -27,11 +27,15 @@ site.baseurl }}/2.0/notifications/) for the project's status.
 {:.tab.addprojectpage.Server}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-### User Types
+## User Types
 
-The *Project Administrator* is the user who adds a GitHub or Bitbucket
-repository to CircleCI as a Project. A *User* is an individual user within an
-org. A CircleCI user is anyone who can log in to the CircleCI platform with a
+* The *Organization Administrator* is a permission level inherited from your VCS:
+  * GitHub: **Owner** and following at least one project building on CircleCI
+  * Bitbucket: **Admin** and following at least one project building on CircleCI
+* The *Project Administrator* is the user who adds a GitHub or Bitbucket
+repository to CircleCI as a Project. 
+* A *User* is an individual user within an organization, inherited from your VCS. 
+* A CircleCI user is anyone who can log in to the CircleCI platform with a
 username and password. Users must be added to a [GitHub or Bitbucket org]({{
 site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
 projects. Users may not view project data that is stored in environment variables.
@@ -43,6 +47,9 @@ A CircleCI pipeline is the full set of processes you run when you trigger work o
 Using pipelines offers the following benefits:
 
 {% include snippets/pipelines-benefits.adoc %}
+
+## Orbs
+Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
 
 ## Config
 
@@ -66,6 +73,7 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
 #### Executors and Images
+{:.no_toc}
 
 Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, windows, or macOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
@@ -107,6 +115,7 @@ The Primary Container is defined by the first image listed in [`.circleci/config
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
 #### Steps
+{:.no_toc}
 
 Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}//2.0/configuration-reference/#checkout) step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
@@ -186,7 +195,6 @@ workflows:
 {% endraw %}
 
 ### Caches, Workspaces and Artifacts
-{:.no_toc}
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
