@@ -1457,7 +1457,8 @@ workflows:
 This means that `another-job` will require both `deploy-0.1` and `deploy-0.2` to
 finish before it runs. 
 
-You can also manually set the `alias` to a custom value. For example:
+You can also manually set the `alias` to a custom value, to clear up any ambiguity between job names.
+For example:
 
 ```yaml
 workflows:
