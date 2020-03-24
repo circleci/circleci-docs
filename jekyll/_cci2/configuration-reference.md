@@ -1409,10 +1409,10 @@ workflows:
   workflow:
     jobs:
       - build:
-        matrix:
-          parameters:
-            version: ["0.1", "0.2", "0.3"]
-            platform: ["macos", "windows", "linux"]
+          matrix:
+            parameters:
+              version: ["0.1", "0.2", "0.3"]
+              platform: ["macos", "windows", "linux"]
 ```
 
 ###### Excluding sets of parameters from a matrix
