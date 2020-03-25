@@ -1415,6 +1415,43 @@ workflows:
               platform: ["macos", "windows", "linux"]
 ```
 
+Note that defining a matrix is generally equivalent to passing parameters to
+each of N jobs manually. For example, the above config snippet could be
+equivalently written as:
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          version: 0.1
+          platform: macos
+      - build:
+          version: 0.2
+          platform: macos
+      - build:
+          version: 0.3
+          platform: macos
+      - build:
+          version: 0.1
+          platform: windows
+      - build:
+          version: 0.2
+          platform: windows
+      - build:
+          version: 0.3
+          platform: windows
+      - build:
+          version: 0.1
+          platform: linux
+      - build:
+          version: 0.2
+          platform: linux
+      - build:
+          version: 0.3
+          platform: linux
+```
+
 ###### Excluding sets of parameters from a matrix
 {:.no_toc}
 Sometimes you may wish to run a job with every combination of arguments _except_
@@ -1437,10 +1474,15 @@ workflows:
 The matrix above would result in 8 jobs being run: every combination of the
 parameters `a` and `b`, excluding `{a: 3, b: 5}`
 
-###### Requiring an entire matrix
+###### Dependencies and matrix jobs
 {:.no_toc}
-Another job can `require` an entire matrix (that is, every job in the matrix)
-using its `alias`. The `alias` defaults to the name of the job being invoked.
+
+Jobs and matrixes can depend on each other. A job, or a matrix, may depend on an
+entire matrix, or depend on a particular job within that matrix.
+
+To `require` an entire matrix (every job within the matrix), use its `alias`.
+The `alias` defaults to the name of the job being invoked.
+
 ```yaml
 workflows:
   workflow:
@@ -1454,11 +1496,11 @@ workflows:
             - deploy
 ```
 
-This means that `another-job` will require both `deploy-0.1` and `deploy-0.2` to
-finish before it runs. 
+This means that `another-job` will require both deploy jobs in the matrix to
+finish before it runs.
 
-You can also manually set the `alias` to a custom value, to clear up any ambiguity between job names.
-For example:
+You can also manually set the `alias` to a custom value, to clear up any
+ambiguity between job names. For example:
 
 ```yaml
 workflows:
@@ -1476,53 +1518,71 @@ workflows:
             - my-deploy-matrix
 ```
 
-###### Matrix parameters
-{:.no_toc}
-When running a job in a matrix, other job arguments (such as `requires` or
-`name`) can contain matrix parameters, in the form `<< matrix.[parameter-name] >>`
-For example:
-```yaml
-workflows:
-  workflow:
-    jobs:
-      - build-0.1: ...
-      - build-0.2: ...
-      - deploy:
-          matrix:
-            parameters:
-              version: ["0.1", "0.2"]
-          name: "deploy-<< matrix.version >>"
-          requires:
-            - "build-<< matrix.version >>"
-```
+Alternatively, to depend on a single job from within another matrix, so that
+each job depends on just one "cell" from another matrix, you can use matrix
+parameters (like `<< matrix.* >>`) to set the `name` of the required jobs. Then
+use matrix parameters in the `requires` statement of your matrix, to match the
+`name` you just created.
 
-This matrix results in two jobs being run. One, called `deploy-0.1`,
-would require the `build-0.1` job. The other, called `deploy-0.2`, would require
-the `build-0.2` job.
-
-In a typical use case, you may wish to require a single job from a matrix from
-within another matrix. To do so, use matrix parameters to set the `name` of the
-required job, and the `requires` stanza of the dependent job:
+For example, imagine you have the following build job:
 
 ```yaml
 workflows:
   workflow:
     jobs:
       - build:
-          # provide a name to each job in this matrix
-          name: "build-<< matrix.os >>-<< matrix.version >>"
           matrix:
             parameters:
               version: ["0.1", "0.2"]
-              os: ["windows", "linux"]
+          name: build-<< matrix.version >>
+```
+
+This matrix results in two jobs being run. One, will be named `build-0.1` and
+the other will be called `build-0.2`.
+
+Now you just need to `require` those job names from another job. If you're doing
+so from within a matrix, you can use matrix parameters:
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+          name: build-<< matrix.version >>
       - deploy:
           matrix:
             parameters:
               version: ["0.1", "0.2"]
-              os: ["windows", "linux"]
           requires:
-            # require the above name in each job in this matrix
-            - "build-<< matrix.os >>-<< matrix.version >>"
+            - build-<< matrix.version >>
+```
+
+Since a matrix is functionally equivalent to its expansion, this is the
+equivalent of:
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          name: build-0.1
+          version: 0.1
+      - build:
+          name: build-0.2
+          version: 0.2
+      - deploy:
+          name: deploy-0.1
+          version: 0.1
+          requires:
+            - build-0.1
+      - deploy:
+          name: deploy-0.2
+          version: 0.2
+          requires:
+            - build-0.2
 ```
 
 ##### **Using `when` in Workflows**
