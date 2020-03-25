@@ -120,7 +120,7 @@ When the above config runs, the output looks like this. Notice the env var store
 
 Notice there are two similar steps in the above image and config - "What branch am I on?". These steps illustrate two different methods to read environment variables. Note that both `${VAR}` and `$VAR` syntaxes are supported. You can read more about shell parameter expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
-### Using Parameters and BASH_ENV
+### Using Parameters and Bash Environment
 {:.no_toc}
 
 CircleCI does not support interpolation when setting environment variables. All defined values are treated literally. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
@@ -188,7 +188,7 @@ jobs:
 
 ## Setting an Environment Variable in a Shell Command
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-parameters-and-bash_env). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-parameters-and-bash-environment). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
 ```yaml
 version: 2.1 
@@ -234,7 +234,7 @@ jobs:
 
 **Note:**
 Since every `run` step is a new shell, environment variables are not shared across steps. If you need an environment variable
-to be accessible in more than one step, export the value [using `BASH_ENV`](#using-parameters-and-bashenv).
+to be accessible in more than one step, export the value [using `BASH_ENV`](#using-parameters-and-bash-environment).
 
 ## Setting an Environment Variable in a Job
 
