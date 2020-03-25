@@ -151,7 +151,7 @@ to create a custom configuration that also uses the [workflow
 feature]({{site.baseurl}}/2.0/workflows) of CircleCI. 
 
 1. Take a moment and read the comments in the code block below. Of course, we
-don't want to be copying and pasting code without understanding what we're
+do not want to be copying and pasting code without understanding what we are
 doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file
 and copy and paste the following text into it.  
 
