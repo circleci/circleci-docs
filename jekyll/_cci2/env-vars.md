@@ -188,7 +188,7 @@ jobs:
 
 ## Setting an Environment Variable in a Shell Command
 
-While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-parameters-and-bashenv). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
+While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-parameters-and-bash_env). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
 ```yaml
 version: 2.1 
