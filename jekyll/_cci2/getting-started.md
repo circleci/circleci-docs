@@ -37,7 +37,7 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 
 1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
 1. If you are part of any organizations, you will need to select the
-   organization you are part in order to setup your repository with CircleCI.
+   organization you wish to work under in order to setup your repository with CircleCI.
 1. Once on the Project page, find the project you are using, in our case
   `hello-world`, and click "Set Up Project". 
   
@@ -146,12 +146,12 @@ setting up CircleCI with various languages and frameworks.
 ## Using the Workflows Functionality
 {:.no_toc}
 
-You do not have to use Orbs to use CircleCI. The following example details how
+You do not have to use orbs to use CircleCI. The following example details how
 to create a custom configuration that also uses the [workflow
 feature]({{site.baseurl}}/2.0/workflows) of CircleCI. 
 
 1. Take a moment and read the comments in the code block below. Of course, we
-don't want to be copying and pasting code without understanding what we're
+do not want to be copying and pasting code without understanding what we are
 doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file
 and copy and paste the following text into it.  
 
