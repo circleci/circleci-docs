@@ -114,7 +114,7 @@ The above `config.yml` demonstrates the following:
 - How variables are used (or interpolated) in your `config.yml`
 - Secrets masking, applied to environment variable set in the project or within a Context.
 
-When the above config runs, the output looks like this, notice the env var stored in the Project is masked, and displays as `****`:
+When the above config runs, the output looks like this. Notice the env var stored in the Project is masked, and displays as `****`:
 
 ![Env Vars Interpolation Example]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
 
