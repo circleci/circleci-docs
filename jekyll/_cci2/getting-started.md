@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 41
 ---
 
-This document provides a step-by-step tutorial for getting your first successful (green) build on CircleCI 2.0.
+This document provides a step-by-step tutorial for getting your first successful (green) build on CircleCI.
 
 * TOC
 {:toc}
@@ -26,14 +26,14 @@ Begin by creating a new repository on GitHub. You may skip this section if you i
 
 1. Navigate to GitHub and [create a new repository](https://github.com/new). 
 1. Input the name of your repository, in this case "hello-world", then click
-`Initialize this repository with a README`. Finally, click `Create repository`.
+**Initialize this repository with a README**. Finally, click **Create repository**.
 
 ![Creating a Repository]( {{ site.baseurl }}/assets/img/docs/getting-started--new-repo.png){:.img--bordered}
 
 ## Setting up CircleCI
 
 If you have not yet, create an account on CircleCI by navigating to [the signup
-page](https://circleci.com/signup/) and clicking on `Sign Up with GitHub`.
+page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 
 1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
 1. If you are part of any organizations, you will need to select the
@@ -69,13 +69,13 @@ the following parts of the run:
 
 ![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png){:.img--bordered}
 
-1. **What workflows ran?**: After clicking "Success", we are taken to a page
+1. **Which workflows ran?**: After clicking "Success", we are taken to a page
    listing the jobs that ran. If this is your first build, you probably only ran
    **one job**  (which automatically runs inside **one workflow**).  In our
-   case, we only ran one job, called `Build`. Click on `Build` and let's
+   case, we only ran one job, called `welcome/run`. Click on `welcome/run` and let's
    investigate the steps of our job. 
 
-  ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png){:.img--bordered}
+   ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png){:.img--bordered}
 
 
 1. **Spin up environment:** CircleCI used an [orb](https://circleci.com/orbs) to
@@ -87,7 +87,7 @@ the following parts of the run:
 1. **Views step results:** Every job is made up of a series of steps - some
    steps, like
    [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are
-   built-in commands in CircleCI. Other steps are specified by a user to achieve
+   special, reserved commands in CircleCI. Other steps are specified by a user to achieve
    a specific purpose. Because we are using the `welcome` orb, we don't see
    custom steps; they are configured in the orb. But no problem! We can view the
    [source of an
@@ -184,7 +184,7 @@ and copy and paste the following text into it.
 
 
 1. Commit these changes to your repository and navigate back over to the
-    CircleCI. You should see your CircleCI pipeline running.
+    CircleCI Pipelines page. You should see your CircleCI pipeline running.
 
 1. Click on the running pipeline to view the workflow you have created. You
     should see that two jobs ran (or are currently running!) concurrently.
