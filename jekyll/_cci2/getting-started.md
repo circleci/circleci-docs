@@ -37,7 +37,7 @@ page](https://circleci.com/signup/) and clicking on `Sign Up with GitHub`.
 
 1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
 1. If you are part of any organizations, you will need to select the
-   organization you are part in order to setup your repository with CircleCI.
+   organization you wish to work under in order to setup your repository with CircleCI.
 1. Once on the Project page, find the project you are using, in our case
   `hello-world`, and click "Set Up Project". 
   
