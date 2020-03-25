@@ -146,7 +146,7 @@ setting up CircleCI with various languages and frameworks.
 ## Using the Workflows Functionality
 {:.no_toc}
 
-You do not have to use Orbs to use CircleCI. The following example details how
+You do not have to use orbs to use CircleCI. The following example details how
 to create a custom configuration that also uses the [workflow
 feature]({{site.baseurl}}/2.0/workflows) of CircleCI. 
 
