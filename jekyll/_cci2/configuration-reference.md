@@ -1464,9 +1464,6 @@ The matrix above would expand into 8 jobs: every combination of the parameters
 ###### Dependencies and matrix jobs
 {:.no_toc}
 
-Jobs and matrixes can depend on each other. A job, or a matrix, may depend on an
-entire matrix, or depend on a particular job within that matrix.
-
 To `require` an entire matrix (every job within the matrix), use its `alias`.
 The `alias` defaults to the name of the job being invoked.
 
@@ -1485,25 +1482,6 @@ workflows:
 
 This means that `another-job` will require both deploy jobs in the matrix to
 finish before it runs.
-
-You can also manually set the `alias` to a custom value, to clear up any
-ambiguity between job names. For example:
-
-```yaml
-workflows:
-  workflow:
-    jobs:
-      - deploy:
-          matrix:
-            parameters:
-              version: ["0.1", "0.2"]
-            # setting a custom alias
-            alias: my-deploy-matrix
-      - another-job:
-          requires:
-            # using a custom alias
-            - my-deploy-matrix
-```
 
 Alternatively, to depend on a single job from within another matrix, so that
 each job depends on just one "cell" from another matrix, you can use matrix
