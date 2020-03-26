@@ -1414,39 +1414,29 @@ workflows:
               platform: ["macos", "windows", "linux"]
 ```
 
-This could be equivalently written as:
+This expands to 9 different `build` jobs, and could be equivalently written as:
 
 ```yaml
 workflows:
   workflow:
     jobs:
       - build:
+          name: build-macos-0.1
           version: 0.1
           platform: macos
       - build:
+          name: build-macos-0.2
           version: 0.2
           platform: macos
       - build:
+          name: build-macos-0.3
           version: 0.3
           platform: macos
       - build:
+          name: build-windows-0.1
           version: 0.1
           platform: windows
-      - build:
-          version: 0.2
-          platform: windows
-      - build:
-          version: 0.3
-          platform: windows
-      - build:
-          version: 0.1
-          platform: linux
-      - build:
-          version: 0.2
-          platform: linux
-      - build:
-          version: 0.3
-          platform: linux
+      - ...
 ```
 
 ###### Excluding sets of parameters from a matrix
