@@ -1400,6 +1400,7 @@ Key | Required | Type | Description
 parameters | Y | Map  | A map of parameter names to every value the job should be called with
 exclude | N | List | A list of argument maps that should be excluded from the matrix
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
+{: class="table table-striped"}
 
 The following is a basic example of using matrix jobs.
 
