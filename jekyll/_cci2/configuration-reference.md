@@ -1483,71 +1483,51 @@ workflows:
 This means that `another-job` will require both deploy jobs in the matrix to
 finish before it runs.
 
-Alternatively, to depend on a single job from within another matrix, so that
-each job depends on just one "cell" from another matrix, you can use matrix
-parameters (like `<< matrix.* >>`) to set the `name` of the required jobs. Then
-use matrix parameters in the `requires` statement of your matrix, to match the
-`name` you just created.
-
-For example, imagine you have the following build job:
+Additionally, matrix jobs expose their parameter values via `<< matrix.* >>`
+which can be used to generate more complex workflows. For example, here is a
+`deploy` matrix where each job waits for its respective `build` job in another
+matrix.
 
 ```yaml
 workflows:
   workflow:
     jobs:
       - build:
+          name: build-v<< matrix.version >>
           matrix:
             parameters:
               version: ["0.1", "0.2"]
-          name: build-<< matrix.version >>
+      - deploy:
+          name: deploy-v<< matrix.version >>
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+          requires:
+            - build-v<< matrix.version >>
 ```
 
-This matrix results in two jobs being run. One, will be named `build-0.1` and
-the other will be called `build-0.2`.
-
-Now you just need to `require` those job names from another job. If you're doing
-so from within a matrix, you can use matrix parameters:
+This workflow will expand to:
 
 ```yaml
 workflows:
   workflow:
     jobs:
       - build:
-          matrix:
-            parameters:
-              version: ["0.1", "0.2"]
-          name: build-<< matrix.version >>
-      - deploy:
-          matrix:
-            parameters:
-              version: ["0.1", "0.2"]
-          requires:
-            - build-<< matrix.version >>
-```
-
-Since a matrix is functionally equivalent to its expansion, this is the
-equivalent of:
-
-```yaml
-workflows:
-  workflow:
-    jobs:
-      - build:
-          name: build-0.1
+          name: build-v0.1
           version: 0.1
       - build:
-          name: build-0.2
+          name: build-v0.2
           version: 0.2
       - deploy:
-          name: deploy-0.1
+          name: deploy-v0.1
           version: 0.1
           requires:
-            - build-0.1
+            - build-v0.1
       - deploy:
-          name: deploy-0.2
+          name: deploy-v0.2
           version: 0.2
           requires:
-            - build-0.2
+            - build-v0.2
 ```
 
 ##### **Using `when` in Workflows**
