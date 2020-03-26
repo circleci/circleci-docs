@@ -39,7 +39,7 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 1. If you are part of any organizations, you will need to select the
    organization you wish to work under in order to setup your repository with CircleCI.
 1. Once on the Project page, find the project you are using, in our case
-  `hello-world`, and click "Set Up Project". 
+  `hello-world`, and click **Set Up Project**. 
   
 1. On the following screen, choose a language from the dropdown to get a
   pre-populated config.yml file with suggested best-practices for your project.
@@ -51,7 +51,7 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
     **Note:** Based on which language you choose you can view related 
     documentation in the sidebar on the right of the screen 
 
-1. Click `Start Building` and follow the prompt to add your config to a new
+1. Click **Start Building** and follow the prompt to add your config to a new
    branch and start your first pipeline. **Note:** You can also manually add a
    `config.yml` to your project root under a `.circleci` folder and push this to
    your VCS provider. 
@@ -64,12 +64,12 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 ## Digging Into Your First Pipeline
 
 You should see your pipeline start to run automatically—and pass! So, what just
-happened? Click on the green `Success` button on your pipeline to investigate
+happened? Click on the green **Success** button on your pipeline to investigate
 the following parts of the run: 
 
 ![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png){:.img--bordered}
 
-1. **Which workflows ran?**: After clicking "Success", we are taken to a page
+1. **Which workflows ran?**: After clicking **Success**, we are taken to a page
    listing the jobs that ran. If this is your first build, you probably only ran
    **one job**  (which automatically runs inside **one workflow**).  In our
    case, we only ran one job, called `welcome/run`. Click on `welcome/run` and let's
