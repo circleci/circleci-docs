@@ -1392,7 +1392,7 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
 ###### **`matrix`**
-A matrix job allows you to run a parameterized job multiple times with different
+The `matrix` stanza allows you to run a parameterized job multiple times with different
 arguments.
 
 Key | Required | Type | Description
@@ -1401,8 +1401,7 @@ parameters | Y | Map  | A map of parameter names to every value the job should b
 exclude | N | Map | A list of argument maps that should be excluded from the matrix
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 
-The following is a basic example of using matrix jobs. All features are
-explained in more detail below.
+The following is a basic example of using matrix jobs.
 
 ```yaml
 workflows:
@@ -1415,9 +1414,7 @@ workflows:
               platform: ["macos", "windows", "linux"]
 ```
 
-Note that defining a matrix is generally equivalent to passing parameters to
-each of N jobs manually. For example, the above config snippet could be
-equivalently written as:
+This could be equivalently written as:
 
 ```yaml
 workflows:
@@ -1471,8 +1468,8 @@ workflows:
                 b: 5
 ```
 
-The matrix above would result in 8 jobs being run: every combination of the
-parameters `a` and `b`, excluding `{a: 3, b: 5}`
+The matrix above would expand into 8 jobs: every combination of the parameters
+`a` and `b`, excluding `{a: 3, b: 5}`
 
 ###### Dependencies and matrix jobs
 {:.no_toc}
