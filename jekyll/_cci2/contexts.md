@@ -19,6 +19,8 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 
 Contexts are created on the Settings page of the CircleCI application, in the Organization section. You must be an organization member to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a project.
 
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
+
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
 
 Context names must be unique for each GitHub or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
