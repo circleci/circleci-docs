@@ -122,15 +122,17 @@ The value of FOO will take precedence over the default values set in the default
 /etc/circleconfig/vm-service/customizations
 /etc/circleconfig/workflows-conductor/customizations
 ```
- 
+
 === Resource Classes
 _Introduced in CircleCI Server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
+WARNING: The resources for the `machine` executor can't be changed from this setting. To change the CPU and memory size, change the `AWS Instance Type` from the VM Provider section in the Management Console. See the <<vm-service#,VM Service>> guide for more details.
+
 TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
 
-Following are the steps required to customize resource classes for the Docker and `machine` executors:
+Following are the steps required to customize resource classes for the Docker executors:
 
 . SSH into the Services machine.
 . Run the following:
@@ -144,8 +146,6 @@ sudo mkdir /etc/circleconfig/picard-dispatcher
 sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
-+
-WARNING: It is important to use the IDs listed in the example below for both `machine` and Docker resource classes. 
 . Run:
 +
 ```shell
@@ -164,22 +164,18 @@ Example config:
  {:docker
   {:small {:id "d1.small" :availability :general :ui {:cpu 2.0 :ram 4096 :class :small} :outer {:cpu 2.0 :ram 4096}}
    :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}}
-   :massive {:id "d1.massive" :availability :general :ui {:cpu 7.0 :ram 28000 :class :massive} :outer {:cpu 7.0 :ram 28000}}}
-
-  :machine
-  {:medium {:id "l1.medium" :availability :general :ui {:cpu 2.0 :ram 7680 :class :medium} :outer {:cpu 2.0 :ram 256}}
-   :large {:id "l1.large" :availability :general :ui {:cpu 4.0 :ram 16000 :class :large} :outer {:cpu 2.0 :ram 256}}}}}
+   :massive {:id "d1.massive" :availability :general :ui {:cpu 7.0 :ram 28000 :class :massive} :outer {:cpu 7.0 :ram 28000}}}}}
 ```
 
 Let's take a look at one of the options in more detail
 
 ```
-:medium {:id "d1.medium" :ga true :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
+:medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}
 ```
 
 * `:medium`  - this is the name that your developers will use to refer to the resource class in their config.yml and the is the external facing name of the resource class.
-* `:id "d1.medium"`` - this is the internal name for the resource class. You can customize this ID for Docker resource classes but you will need to use the listed IDs for `machine` resources.
-* `:ga true` - required field
+* `:id "d1.medium"`` - this is the internal name for the resource class. You can customize this ID for Docker resource classes.
+* `:availability :general` - required field
 * `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. This this should be kept in parity with :outer - see below.
 * `:outer {:cpu 4.0 :ram 8192}` - This defines the CPU and RAM for the resource class.
 
@@ -221,4 +217,3 @@ export CIRCLE__OUTER__LOGIN_BANNER_MESSAGE="<insert-your-message-here>
 
 .Login Screen Banner Example
 image::banner.png[]
-

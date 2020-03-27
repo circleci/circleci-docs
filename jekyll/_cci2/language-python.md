@@ -261,9 +261,7 @@ jobs: # A basic unit of work in a run
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
           key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
+            - "venv"
       - run:
           command: |
             pipenv run python manage.py test
