@@ -140,17 +140,11 @@ For more information on `machine`, see the next section below.
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
-Class            | vCPUs | RAM
------------------|-------|-------
-medium (default) | 2     | 7.5GB
-large            | 4     | 15GB
-{: class="table table-striped"}
+{% include snippets/machine-resource-table.md %}
 
-Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands.
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands. To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
 
 Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
-
-NOTE: you can run Docker containers using the docker executor, but the `machine` executor is currently the only supported way to build new Docker images on CircleCI.
 
 **Note**:
 Using `machine` may require additional fees in a future pricing update.

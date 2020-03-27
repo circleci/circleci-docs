@@ -38,13 +38,13 @@ For the majority of installations, the following commands will get you up and ru
 **Mac and Linux:**
 
 ```sh
-curl -fLSs https://circle.ci/cli | bash
+curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
 ```
 
 By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` directory. If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo`. Alternatively, you can install to an alternate location by defining the `DESTDIR` environment variable when invoking bash:
 
 ```sh
-curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash
+curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
 
 ### Alternative Installation Methods

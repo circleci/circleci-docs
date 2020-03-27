@@ -18,30 +18,7 @@ Platform Guide | Description
 
 Refer to the Sample Projects to get help with building the language and framework in which your application is written.
 
-Language in which your App is written | Framework | GitHub Repo Name
- ---------|-----------|-----------------
- [Android] | Gradle | [android-image](https://github.com/circleci/circleci-images/tree/master/android)
- [Android](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [Clojure] | Luminus | [circleci-demo-clojure-luminus]
- [Crystal]({{ site.baseurl }}/2.0/language-crystal/) | Kemal | [circleci-demo-crystal](https://github.com/CircleCI-Public/circleci-demo-crystal)
- [Elixir] | Phoenix | [circleci-demo-elixir-phoenix]
- [Go] | Go | [circleci-demo-go]
- [Haskell]({{ site.baseurl }}/2.0/language-haskell/) | Scotty | [circleci-demo-haskell](https://github.com/CircleCI-Public/circleci-demo-haskell)
- [iOS] | Xcode | [circleci-demo-ios]
- [iOS](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [macOS](https://github.com/CircleCI-Public/circleci-demo-macos) | MacOS | [circleci-demo-macos](https://github.com/CircleCI-Public/circleci-demo-macos)
- [Java] | Spring | [circleci-demo-java-spring]
-  [Java]({{ site.baseurl }}/2.0/language-java-maven/){:target="_blank"} | Maven | [circleci-demo-java-spring-tree-maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven){:target="_blank"}
- [JavaScript](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [NodeJS - JavaScript] | React | [circleci-demo-javascript-express]
- [PHP] | Laravel | [circleci-demo-php-laravel]
- [Python] | Django | [circleci-demo-python-django]
- [Python]({{ site.baseurl }}/2.0/project-walkthrough/) | Flask | [circleci-demo-python-flask]
- [React Native](https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md) | React Native | [circleci-demo-react-native]
- [Ruby and Rails] | Rails | [circleci-demo-ruby-rails]
- [Scala] | sbt | [sample-scala]
- [Windows]({{ site.baseurl }}/2.0/hello-world-windows/){:target="_blank"} | .NET | [circleci-demo-windows](https://github.com/CircleCI-Public/circleci-demo-windows/){:target="_blank"}
-{: class="table table-striped"}
+{% include snippets/language-guides.md %}
 
 ## Sample Workflows
 
@@ -62,32 +39,6 @@ circleci frontend | Mirror of the code that is running CircleCI's frontend. | [.
 circleci-images | Contains the official set of images that CircleCI maintains. | [.circleci/config.yml](https://github.com/circleci/circleci-images/blob/master/.circleci/config.yml)
 circleci image-builder | Uses Docker for building container images. | [.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
-
-[Android]: {{ site.baseurl }}/2.0/language-android/
-[Clojure]: {{ site.baseurl }}/2.0/language-clojure/
-[Elixir]: {{ site.baseurl }}/2.0/language-elixir/
-[Go]: {{ site.baseurl }}/2.0/language-go/
-[iOS]: {{ site.baseurl }}/2.0/ios-tutorial/
-[Java]: {{ site.baseurl }}/2.0/language-java/
-[NodeJS - JavaScript]: {{ site.baseurl }}/2.0/language-javascript/
-[PHP]: {{ site.baseurl }}/2.0/language-php/
-[Python]: {{ site.baseurl }}/2.0/language-python/
-[Ruby and Rails]: {{ site.baseurl }}/2.0/language-ruby/
-[Scala]: {{ site.baseurl }}/2.0/language-scala/
-
-[circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
-[circleci-demo-elixir-phoenix]: https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix
-[circleci-demo-go]: https://github.com/CircleCI-Public/circleci-demo-go
-[circleci-demo-java-spring]: https://github.com/CircleCI-Public/circleci-demo-java-spring
-[circleci-demo-javascript-express]: https://github.com/CircleCI-Public/circleci-demo-javascript-express
-[circleci-demo-ios]: https://github.com/CircleCI-Public/circleci-demo-ios
-[circleci-demo-php-laravel]: https://github.com/CircleCI-Public/circleci-demo-php-laravel
-[circleci-demo-python-django]: https://github.com/CircleCI-Public/circleci-demo-python-django
-[circleci-demo-python-flask]: https://github.com/CircleCI-Public/circleci-demo-python-flask
-[circleci-demo-react-native]: https://github.com/CircleCI-Public/circleci-demo-react-native
-[circleci-demo-ruby-rails]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails
-[sample-scala]: https://github.com/ariv3ra/samplescala
-
 
 ## See Also
 

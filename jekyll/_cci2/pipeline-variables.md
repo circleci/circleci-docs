@@ -117,7 +117,7 @@ Configuration processing happens in the following stages:
 - Pipeline parameters are replaced in the orb statement
 - Orbs are imported
 
-The remaining configuration is processed, element parameters are resolved, type-checked, and substituted,
+The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
 ## Element Parameter Scope
 
@@ -194,10 +194,7 @@ jobs:
   mytestjob:
     steps:
       - checkout
-      - when:
-          condition: << pipeline.parameters.deploy >>
-          steps:
-            - run: echo "deploying"
+      - ... # job steps
 ```
 
 The example shown above prevents the workflow `integration_tests` from being triggered unless it is explicitly invoked when the pipeline is triggered with the following in the `POST` body:

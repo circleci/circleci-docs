@@ -31,7 +31,7 @@ The currently available Xcode versions are:
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
-`11.4.0` | Xcode 11.4 Beta 1 (Build 11N111s)     | macOS 10.15.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2378/index.html)
+ `11.4.0` | Xcode 11.4 (Build 11E146) | macOS 10.15.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2649/index.html)
  `11.3.1` | Xcode 11.3.1 (Build 11C505)     | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
  `11.3.0` | Xcode 11.3 (Build 11C29)        | macOS 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
  `11.2.1` | Xcode 11.2.1 (Build 11B500)     | macOS 10.15   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
@@ -90,6 +90,12 @@ If upgrading from Cocoapods 1.7 or older, additionally ensure the following line
 
 ```
 source 'https://github.com/CocoaPods/Specs.git'
+```
+
+To update Cocoapods to the latest stable version, simply update the Ruby gem with the following command:
+
+```
+sudo gem install cocoapods
 ```
 
 #### Homebrew
