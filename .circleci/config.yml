@@ -53,14 +53,14 @@ workflows:
               only: /server\/.*/
       - build_api_docs
       - build_config_builder
-#       - build_config_ref
+      - build_config_ref
       - build:
           requires:
             - js_build
             - build_config_builder
             - build_server_pdfs
             - build_api_docs
-#             - build_config_ref
+            - build_config_ref
       - reindex-search:
           requires:
             - build
@@ -86,10 +86,14 @@ workflows:
     jobs:
       - js_build
       - build_api_docs
+      - build_config_builder
+      - build_config_ref
       - build:
           requires:
             - js_build
             - build_api_docs
+            - build_config_builder
+            - build_config_ref
       - deploy:
           requires:
             - build
@@ -286,6 +290,9 @@ jobs:
             mkdir -p /tmp/workspace/config-builder
             mkdir -p jekyll/config-builder
             cp -R /tmp/workspace/config-builder/* jekyll/config-builder/
+            
+            mkdir -p /tmp/workspace/crg	
+            cp -r /tmp/workspace/crg/**/* jekyll/_crg/
             
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
