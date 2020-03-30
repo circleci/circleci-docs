@@ -450,6 +450,162 @@ The following section details the steps you need to follow to download artifacts
 
     **Note:** `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
 
+## Gather Insights
+
+The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual builds. By making API calls to these endpoints, you can better understand how to optimize your workflows and builds so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containg informaiton about metrics and credit usage.
+
+### Steps
+
+To return aggregated data for an individual workflow, perform the steps listed below.
+
+**Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
+
+1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project_slug` in your `curl` request as follows:
+
+    ```sh
+    curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
+    -H 'Accept: application/json'
+    ```
+2. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
+
+```
+json
+{
+	"next_page_token": null,
+	"items": [{
+		"name": "build",
+		"metrics": {
+			"success_rate": 0.5975609756097561,
+			"total_runs": 82,
+			"failed_runs": 33,
+			"successful_runs": 49,
+			"throughput": 11.714285714285714,
+			"mttr": 46466,
+			"duration_metrics": {
+				"min": 8796,
+				"max": 20707,
+				"median": 11656,
+				"mean": 12847,
+				"p95": 18856,
+				"standard_deviation": 3489.0
+			},
+			"total_credits_used": 16216608
+		},
+		"window_start": "2020-01-15T03:20:24.927Z",
+		"window_end": "2020-01-21T23:23:04.390Z"
+	}, {
+		"name": "docker_build",
+		"metrics": {
+			"success_rate": 1.0,
+			"total_runs": 1,
+			"failed_runs": 0,
+			"successful_runs": 1,
+			"throughput": 1.0,
+			"mttr": 0,
+			"duration_metrics": {
+				"min": 1570,
+				"max": 1570,
+				"median": 1570,
+				"mean": 1570,
+				"p95": 1570,
+				"standard_deviation": 0.0
+			},
+			"total_credits_used": 5154
+		},
+		"window_start": "2020-01-19T15:00:16.032Z",
+		"window_end": "2020-01-19T15:26:26.648Z"
+	}, {
+		"name": "ecr_gc",
+		"metrics": {
+			"success_rate": 1.0,
+			"total_runs": 167,
+			"failed_runs": 0,
+			"successful_runs": 167,
+			"throughput": 23.857142857142858,
+			"mttr": 0,
+			"duration_metrics": {
+				"min": 31,
+				"max": 96,
+				"median": 46,
+				"mean": 49,
+				"p95": 72,
+				"standard_deviation": 11.0
+			},
+			"total_credits_used": 3482
+		},
+		"window_start": "2020-01-15T01:45:03.613Z",
+		"window_end": "2020-01-21T23:46:25.970Z"
+	}]
+}
+```
+
+**Note** The above exmample only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+
+Now that you have retrieved aggregated data for up to 250 different builds, you will most likely want to review specific information about a single build, or smaller number of builds, to ensure that your builds are running efficiently. To review an individual build, follow the steps below.
+
+3. Using your project-slug from the previous API call you made, make a GET API call to the following insights endpoint:
+
+    ```sh
+    curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
+    -H 'Accept: application/json'
+    ```
+4. Once you call this insights endpoint, you will receive a JSON output similar to the example shown below.
+
+```
+{
+  "items" : [ {
+    "id" : "08863cb6-3185-4c2f-a44e-b517b7f695a6",
+    "status" : "failed",
+    "duration" : 9263,
+    "created_at" : "2020-01-21T20:34:50.223Z",
+    "stopped_at" : "2020-01-21T23:09:13.953Z",
+    "credits_used" : 198981
+  }, {
+    "id" : "2705482b-40ae-47fd-9032-4113e976510f",
+    "status" : "failed",
+    "duration" : 9075,
+    "created_at" : "2020-01-21T20:14:00.247Z",
+    "stopped_at" : "2020-01-21T22:45:15.614Z",
+    "credits_used" : 148394
+  }, {
+    "id" : "65e049ee-5949-4c30-a5c6-9433ed83f96f",
+    "status" : "failed",
+    "duration" : 11697,
+    "created_at" : "2020-01-21T20:08:06.950Z",
+    "stopped_at" : "2020-01-21T23:23:04.390Z",
+    "credits_used" : 122255
+  }, {
+    "id" : "b7354945-32ee-4cb5-b8bf-a2f8c115b955",
+    "status" : "success",
+    "duration" : 9230,
+    "created_at" : "2020-01-21T19:31:11.081Z",
+    "stopped_at" : "2020-01-21T22:05:02.072Z",
+    "credits_used" : 195050
+  }, {
+    "id" : "7e843b39-d979-4152-9868-ba5dacebafc9",
+    "status" : "failed",
+    "duration" : 9441,
+    "created_at" : "2020-01-21T18:39:42.662Z",
+    "stopped_at" : "2020-01-21T21:17:04.417Z",
+    "credits_used" : 192854
+  }, {
+    "id" : "8d3ce265-e91e-48d5-bb3d-681cb0e748d7",
+    "status" : "failed",
+    "duration" : 9362,
+    "created_at" : "2020-01-21T18:38:28.225Z",
+    "stopped_at" : "2020-01-21T21:14:30.330Z",
+    "credits_used" : 194079
+  }, {
+    "id" : "188fcf84-4879-4dd3-8bf2-4f6ea724c692",
+    "status" : "failed",
+    "duration" : 8910,
+    "created_at" : "2020-01-20T03:09:50.448Z",
+    "stopped_at" : "2020-01-20T05:38:21.392Z",
+    "credits_used" : 193056
+  },
+```
+With this detailed information about each individual build, you can review the status, duration, the start and stop dates for the build, in addition to the number of credits that were used in the build, so you can make changes to your build as needed.
+
 # Reference
 
 ## API Endpoints
@@ -512,6 +668,16 @@ Before working with the API and making calls, you should first have an understan
 | POST /workflow/{id}/cancel | Cancels a workflow.                          |
 | GET workflow/{id}/job      | Returns all jobs associated with a workflow. |
 | POST /workflow/{id}/rerun  | Reruns a workflow.                           |
+{: class="table table-striped"}
+
+### Insights Requests
+
+| Endpoint                                                               | Description                                       |
+|------------------------------------------------------------------------|---------------------------------------------------|
+| GET /insights/{project-slug}/workflows                                 | Get summary metrics for a project's workflows.    |
+| GET /insights/{project-slug}/workflows/{workflow-name}                 | Get recent runs of a workflow                     |
+| GET /insights/{project-slug}/workflows/{workflow-name}/jobs            | Get summary metrics for a project workflow's jobs.|
+| GET /insights/{project-slug}/workflows/{workflow-name}/jobs/{job-name} | Get recent runs of a job within a workflow.       |
 {: class="table table-striped"}
 
 ## See Also
