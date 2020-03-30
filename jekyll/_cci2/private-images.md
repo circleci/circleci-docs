@@ -21,8 +21,7 @@ jobs:
 
 You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io). Make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
 
-```yaml
-version: 2
+```
 - image: quay.io/project/image:tag
   auth:
     username: $QUAY_USERNAME
