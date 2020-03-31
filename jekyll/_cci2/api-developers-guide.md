@@ -464,12 +464,13 @@ To return aggregated data for an individual workflow, perform the steps listed b
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
+    --header 'Content-Type: application/json'
     --header 'Accept: application/json'
+    --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
 2. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
 
-```
-json
+```json
 {
 	"next_page_token": null,
 	"items": [{
@@ -541,15 +542,15 @@ json
 
 Notice that in this JSON response, you will receive detailed metrics for the set of workflows that were run, including:
 
-- `success_rate` - the rate of success
-- `total_runs` - the total number of runs that were performed
-- `failed_runs` - the number of runs that failed
-- `successful_runs` - the number of runs that were successful
-- `throughput` - 
-- `mttr` - 
-- `duration_metrics` - an array of specific metrics that detail the duration of the workflow, which includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`
-- `total credits used` - the total number of credits used
-- `windows_start & windows_end` - the time the window was first started, and then ended
+- `success_rate` - The ratio of successful runs (only those with a "success" status) over the total number of runs (any status) in the aggregation window.
+- `total_runs` - The total number of runs that were performed.
+- `failed_runs` - The number of runs that failed.
+- `successful_runs` - The number of runs that were successful.
+- `throughput` - The average number of builds per day.
+- `mttr` - The Mean Time to Recovery (MTTR). This is the average time it takes, when a CI build fails, to get it back to a "success" status.
+- `duration_metrics` - A collection of specific metrics and measurements that provide the duration of the workflow, which includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`.
+- `total credits used` - The total number of credits taht were used during the build.
+- `windows_start & windows_end` - The time the build was initiated, and then completed.
 
 **Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
 
@@ -561,11 +562,13 @@ Now that you have retrieved aggregated data for up to 250 different builds, you 
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
-    -H 'Accept: application/json'
+    --header 'Content-Type: application/json'
+    --header 'Accept: application/json'
+    --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
 4. Once you call this insights endpoint, you will receive a JSON output similar to the example shown below.
 
-```
+```json
 {
   "items" : [ {
     "id" : "08863cb6-3185-4c2f-a44e-b517b7f695a6",
@@ -619,7 +622,7 @@ Now that you have retrieved aggregated data for up to 250 different builds, you 
   },
 ```
 
-When reviewing each individual review build, please note that the following information is returned for each build, which is listed below.
+When reviewing each individual review build, please note that the following information returned for each build:
 
 - `id` - the ID associated with the individual build
 - `status` - the status of the build
