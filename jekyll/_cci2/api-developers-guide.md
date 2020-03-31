@@ -454,7 +454,7 @@ The following section details the steps you need to follow to download artifacts
 
 The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual builds. By making API calls to these endpoints, you can better understand how to optimize your workflows and builds so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containg informaiton about metrics and credit usage.
 
-### Steps
+### Returning Workflow Metrics
 
 To return aggregated data for an individual workflow, perform the steps listed below.
 
@@ -539,11 +539,25 @@ json
 }
 ```
 
-**Note** The above exmample only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+Notice that in this JSON response, you will receive detailed metrics for the set of workflows that were run, including:
+
+- `success_rate` - the rate of success
+- `total_runs` - the total number of runs that were performed
+- `failed_runs` - the number of runs that failed
+- `successful_runs` - the number of runs that were successful
+- `throughput` - 
+- `mttr` - 
+- `duration_metrics` - an array of specific metrics that detail the duration of the workflow, which includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`
+- `total credits used` - the total number of credits used
+- `windows_start & windows_end` - the time the window was first started, and then ended
+
+**Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
+
+### Reviewing Individual Build Metrics
 
 Now that you have retrieved aggregated data for up to 250 different builds, you will most likely want to review specific information about a single build, or smaller number of builds, to ensure that your builds are running efficiently. To review an individual build, follow the steps below.
 
-3. Using your project-slug from the previous API call you made, make a GET API call to the following insights endpoint:
+1. Using your project-slug from the previous API call you made to return workflow data, make a GET API call to the following insights endpoint:
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
@@ -604,7 +618,15 @@ Now that you have retrieved aggregated data for up to 250 different builds, you 
     "credits_used" : 193056
   },
 ```
-With this detailed information about each individual build, you can review the status, duration, the start and stop dates for the build, in addition to the number of credits that were used in the build, so you can make changes to your build as needed.
+
+When reviewing each individual review build, please note that the following information is returned for each build, which is listed below.
+
+- `id` - the ID associated with the individual build
+- `status` - the status of the build
+- `duration` - the total time of the build, in seconds
+- `created_at` - the time the build started
+- `stopped_at` - the time the build ended
+- `credits_used` - The number of credits used during the build
 
 # Reference
 
