@@ -464,7 +464,7 @@ To return aggregated data for an individual workflow, perform the steps listed b
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
-    -H 'Accept: application/json'
+    --header 'Accept: application/json'
     ```
 2. After you have defined the `project-slug` and made the API request, you will receive unformatted JSON text similar to the example shown below.
 
