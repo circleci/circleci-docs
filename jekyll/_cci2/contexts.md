@@ -89,7 +89,7 @@ Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) t
 
 ```yaml
 workflows:
-  build-test-deploy
+  build-test-deploy:
       - build
       - hold:
           type: approval
