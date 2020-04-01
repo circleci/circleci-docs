@@ -452,7 +452,7 @@ The following section details the steps you need to follow to download artifacts
 
 ## Gather Insights
 
-The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual builds. By making API calls to these endpoints, you can better understand how to optimize your workflows and builds so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containg informaiton about metrics and credit usage.
+The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. By making API calls to these endpoints, you can better understand how to optimize your workflows and jobs so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containg information about metrics and credit usage.
 
 ### Returning Workflow Metrics
 
@@ -554,11 +554,11 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 
 **Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
 
-### Reviewing Individual Build Metrics
+### Reviewing Individual Job Metrics
 
-Now that you have retrieved aggregated data for up to 250 different builds, you will most likely want to review specific information about a single build, or smaller number of builds, to ensure that your builds are running efficiently. To review an individual build, follow the steps below.
+Now that you have retrieved aggregated data for up to 250 different jobs, you will most likely want to review specific information about a single job, or smaller number of jobs, to ensure that your jobs are running efficiently. To review an individual job, follow the steps below.
 
-1. Using your project-slug from the previous API call you made to return workflow data, make a GET API call to the following insights endpoint:
+1. Using your `project-slug` from the previous API call you made to return workflow data, make a GET API call to the following insights endpoint:
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows/builds
@@ -622,14 +622,14 @@ Now that you have retrieved aggregated data for up to 250 different builds, you 
   },
 ```
 
-When reviewing each individual review build, please note that the following information returned for each build:
+When reviewing each individual review job, please note that the following information returned for each job:
 
-- `id` - the ID associated with the individual build
-- `status` - the status of the build
-- `duration` - the total time of the build, in seconds
-- `created_at` - the time the build started
-- `stopped_at` - the time the build ended
-- `credits_used` - The number of credits used during the build
+- `id` - The ID associated with the individual job.
+- `status` - The status of the job.
+- `duration` - The total time of the job, in seconds.
+- `created_at` - The time the job started.
+- `stopped_at` - The time the job ended.
+- `credits_used` - The number of credits used during the job.
 
 # Reference
 
