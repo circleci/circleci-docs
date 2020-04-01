@@ -7,25 +7,23 @@ categories: [configuring-jobs]
 order: 41
 ---
 
-This document describes creating and using contexts in CircleCI in the following sections:
+Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
 
 * TOC
 {:toc}
 
-Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime.
-
 ## Overview
 {:.no_toc}
 
-Contexts are created on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context is set in the application it may be configured in the workflows section of the [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file for a project.
+Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file, to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
 
-To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set and the rule must allow access to all projects in the org. 
+To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set. 
 
 Context names must be unique for each GitHub or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work. 
 
-### Context Naming for CircleCI Installed on Your Servers
+### Context Naming for CircleCI Server
 {:.no_toc}
 
 For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error. 
@@ -38,9 +36,9 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 
 2. Click the Create Context button and add a unique name for your Context. After you click the Create Context button in the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this Context at runtime.
 
-3. Click the Add Environment Variable button and copy/paste in the variable name and value. Click the Add Variable button to save it.
+3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will use the variables set in the `org-global` context.
+4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
 
     ```yaml
     version 2.1
@@ -52,13 +50,13 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
               context: org-global
     ```
 
-## Moving a Repository that Uses a Context
+### Moving a Repository that Uses a Context
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
 ## Restricting a Context
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are defined by GitHub teams. If you are using CircleCI Server, LDAP groups can also be used to define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access or use the environment variables of the restricted context. 
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are defined by GitHub teams. If you are using CircleCI Server with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables. 
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
@@ -71,6 +69,7 @@ The default security group is `All members` and enables any member of the organi
 To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
 ### Restrict a Context to a Security Group or Groups
+{:.no_toc}
 
 You must be an organization administrator to complete the following task.
 
@@ -84,10 +83,30 @@ You must be an organization administrator to complete the following task.
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context. 
 
 ### Approving Jobs that use Restricted Contexts
+{:.no_toc}
 
-Adding an approval job to a workflow allows a user to manually approve the use of a restricted context. 
+Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. 
 
 To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs. 
+
+```yaml
+workflows:
+  build-test-deploy
+      - build
+      - hold:
+          type: approval
+          requires:
+            - build
+      - test
+          context: my-restricted-context
+          requires:
+            - build
+            - hold
+      - deploy:
+          context: my-restricted-context
+          requires:
+            - hold
+```
 
 For example, if you want the execution of job C and job D restricted to a security group, you need to add an approval job B before the jobs C and D to that use a context with a security group. That is, you can have four jobs in a workflow, job A can run unrestricted, the approval job B may be approved by any member, but the jobs C and D after the approval may only be executed by someone in the security group for the context used on jobs C and D. 
 
@@ -97,19 +116,19 @@ If the approver of a job is not part of the restricted context, it is possible t
 
 To make a context available only to the administrators of the organization, you may remove all of the groups associated with a context. All other users will lose access to that context.
 
-### Adding and Removing Users from Teams and Groups
+## Adding and Removing Users from Teams and Groups
 
 CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
 
-### Adding and Removing Environment Variables from Restricted Contexts
+## Adding and Removing Environment Variables from Restricted Contexts
 
 Addition and deletion of environment variables from a restricted context is limited to members of the context groups.
 
 ## Deleting a Context
 
-If the context is restricted with a group other than `All members`, you must be a member of the security group to complete this task.
+If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task:
 
-1. As an organization administrator, Navigate to the Settings > Contexts page in the CircleCI application.
+1. As an organization administrator, navigate to the Organization Settings > Contexts page in the CircleCI application.
 
 2. Click the Delete Context button for the Context you want to delete. A confirmation dialog box appears.
 
@@ -119,15 +138,15 @@ If the context is restricted with a group other than `All members`, you must be 
 
 Environment variables are used according to a specific precedence order, as follows:
 
-1. Environment variables declared inside a shell command in a `run` step, for example `FOO=bar make install`.
-2. Environment variables declared with the `environment` key for a `run` step.
-3. Environment variables set with the `environment` key for a job.
-4. Environment variables set with the `environment` key for a container.
+1. Environment variables declared [inside a shell command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command) in a `run` step, for example `FOO=bar make install`.
+2. Environment variables declared with the `environment` key [for a `run` step]({{ site.baseurl }}/2.0/workflows/#setting-an-environment-variable-in-a-step).
+3. Environment variables set with the `environment` key [for a job]({{ site.baseurl }}/2.0/workflows/#setting-an-environment-variable-in-a-job).
+4. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables]({{ site.baseurl }}/2.0/workflows/#built-in-environment-variables) section of this document.
 5. Context environment variables (assuming the user has access to the Context).
-6. Project-level environment variables set on the Project Settings page.
-7. Special CircleCI environment variables defined in the [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) section of this document.
+6. [Project-level environment variables]({{ site.baseurl }}/2.0/workflows/#setting-an-environment-variable-in-a-project) set on the Project Settings page.
+7. Environment variables set with the `environment` key [for a container]({{ site.baseurl }}/2.0/workflows/#setting-an-environment-variable-in-a-container).
 
-Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page. Finally, special CircleCI environment variables are loaded.
+Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
 
