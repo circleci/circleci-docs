@@ -268,6 +268,7 @@ This section provides detailed information on how you can perform the following 
 * [Get project details](#get-project-details)
 * [Get job details](#get-job-details)
 * [Download artifacts](#download-artifacts)
+* [Gather Insights](#gather-insights)
 
 ## Get Project Details
 
@@ -291,7 +292,7 @@ Of the several project-related API endpoints available with CircleCI API v2, mak
 
 To return project details, perform the following steps:
 
-1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project_slug` (<project_type>/<org_name>/<repo_name>) parameter you want returned in the JSON payload in your `curl` request as follows:
+1. For this GET API call, under the `parameters` key, define the `project_slug` (<project_type>/<org_name>/<repo_name>) parameter you want returned in the JSON payload in your `curl` request as follows:
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug} \
@@ -331,7 +332,7 @@ Of the several Jobs-related API endpoints available with CircleCI API v2, there 
 
 To return job details, perform the following steps:
 
-1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project_slug` and `job_number` parameters you want returned in the JSON payload in your `curl` request as follows:
+1. For this GET API call, under the `parameters` key, define the `project_slug` and `job_number` parameters you want returned in the JSON payload in your `curl` request as follows:
 
     ```sh
       curl -X GET https://circleci.com/api/v2/project/{project_slug}/job/{job_number} \
@@ -460,7 +461,7 @@ To return aggregated data for an individual workflow, perform the steps listed b
 
 **Note:** whenever you see curly brackets `{}`, this represents a variable that you must manually enter in the request.
 
-1. Declare the parameters you expect to receive from the API. For this GET API call, under the `parameters` key, define the `project_slug` in your `curl` request as follows:
+1. For this GET API call, under the `parameters` key, define the `project_slug` in your `curl` request as follows:
 
     ```sh
     curl -X GET https://circleci.com/api/v2/insights/{project-slug}/workflows
