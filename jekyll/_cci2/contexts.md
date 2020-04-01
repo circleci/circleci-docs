@@ -75,7 +75,7 @@ You must be an organization administrator to complete the following task.
 
 1. Navigate to Organization Settings > Contexts page in the CircleCI app. The list of contexts appears. The default security group is `All members` and allows all users in the org to invoke jobs with that context.
 2. Click the Create Context button if you wish to use a new context, or click the name of an existing context.
-3. Click the Add Secutrity Group button to view the dialog bo.
+3. Click the Add Security Group button to view the dialog box.
 4. Select GitHub teams or LDAP groups to add to the context and click the Add button. Use of the context is now limited to the selected groups.
 5. Click Add Environment Variables to add environment variables to the context if none exist and click the Add button. Use of the environment variables for this context is now limited to members of the security groups.
 6. Navigate to Organization Settings > Contexts in the CircleCI app. The security groups appear in the Security column for the context.
@@ -160,5 +160,4 @@ The value of the context will not be masked in the build output if:
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
 [Workflows]({{ site.baseurl }}/2.0/workflows/) 
-
 
