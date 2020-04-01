@@ -85,9 +85,7 @@ Only members of the selected groups may now use the context in their workflows o
 ### Approving Jobs that use Restricted Contexts
 {:.no_toc}
 
-Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. 
-
-To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs. 
+Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
 
 ```yaml
 workflows:
@@ -97,7 +95,7 @@ workflows:
           type: approval
           requires:
             - build
-      - test
+      - test:
           context: my-restricted-context
           requires:
             - build
@@ -108,9 +106,7 @@ workflows:
             - hold
 ```
 
-For example, if you want the execution of job C and job D restricted to a security group, you need to add an approval job B before the jobs C and D to that use a context with a security group. That is, you can have four jobs in a workflow, job A can run unrestricted, the approval job B may be approved by any member, but the jobs C and D after the approval may only be executed by someone in the security group for the context used on jobs C and D. 
-
-If the approver of a job is not part of the restricted context, it is possible to approve the job B, however the jobs C and D in the workflow will fail as unauthorized. That is, the Approval job will appear for every user, even for users who are not part of the group with permissions for the context. When the downstream jobs fail with Unauthorized, it indicates an approval was made by a user who is not part of the security group for the downstream jobs. 
+In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `my-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing Groups from Contexts
 
