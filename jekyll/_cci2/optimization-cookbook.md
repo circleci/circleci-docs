@@ -240,7 +240,7 @@ jobs:
       - run: go test
 ```
 
-To split these tests, using timing data, we first intoduce parallelism to spin up a number (10 in this case) of identical test environments. THen use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
+To split these tests, using timing data, we first intoduce parallelism to spin up a number (10 in this case) of identical test environments. Then use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
 
 ```yaml
 jobs:
