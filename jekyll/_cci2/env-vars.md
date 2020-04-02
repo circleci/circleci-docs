@@ -253,7 +253,7 @@ jobs:
 
 ## Setting an Environment Variable in a Container
 
-To set an environment variable in a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor).
+To set an environment variable for a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor).
 
 ```yaml
 version: 2.1 
@@ -262,11 +262,12 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
-      - image: circleci/postgres:9.6-jessie
-      # environment variables for all commands executed in the primary container
-        environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
+      # environment variables available for entrypoint/command run by docker container
+      environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      
+        
 ```
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
@@ -278,11 +279,14 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-jessie
-       # environment variables for all commands executed in the primary container
-        environment:
+      environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6
+      environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+      
 ```
 
 ## Setting an Environment Variable in a Context
