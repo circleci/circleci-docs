@@ -15,7 +15,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 ## Overview
 {:.no_toc}
 
-Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file, to give any job(s) access to the environment variables associated with the context, as shown in the image below.
+Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
 ![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
 
@@ -160,4 +160,3 @@ The value of the context will not be masked in the build output if:
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
 [Workflows]({{ site.baseurl }}/2.0/workflows/) 
-
