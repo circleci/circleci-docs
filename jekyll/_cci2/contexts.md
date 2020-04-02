@@ -47,7 +47,17 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
       my-workflow:
         jobs:
           - run-tests:
-              context: org-global
+              context: org-global        
+      
+    jobs:
+      run-tests:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: 
+              name: "echo environment variables from org-global context"
+              command: echo $MY_ENV_VAR  
     ```
 
 ### Moving a Repository that Uses a Context
