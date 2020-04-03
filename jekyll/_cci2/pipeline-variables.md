@@ -166,7 +166,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 
 ## Conditional Workflows
 
-Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy calues can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, nil, and NaN. Everything else would be truthy.
+Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy values can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, nil, and NaN. Everything else would be truthy.
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
