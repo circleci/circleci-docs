@@ -1533,14 +1533,7 @@ workflows:
 
 ##### **Using `when` in Workflows**
 
-With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with [CircleCI API v2 pipeline triggering](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) with parameters. Truthy/falsy calues can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, nil, and NaN. Everything else would be truthy.
-
-Key | Required | Type | Description
-----|----------|------|------------
-name | N | ???? | A map of parameter names to every value the job should be called with
-condition | Y | ???? | An map defining whether a workflow can run, most commonly a pipeline parameters.
-steps | N | ???? | Steps to run before the workflow runs
-{: class="table table-striped"}
+With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with [CircleCI API v2 pipeline triggering](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) with parameters. Truthy/falsy calues can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
