@@ -49,7 +49,6 @@ Environment variables are used according to a specific precedence order, as foll
 4. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables](#built-in-environment-variables) section of this document.
 5. Context environment variables (assuming the user has access to the Context). See the [Contexts]( {{ site.baseurl }}/2.0/contexts/) documentation for instructions.
 6. [Project-level environment variables](#setting-an-environment-variable-in-a-project) set on the Project Settings page.
-7. Environment variables set with the `environment` key [for a container](#setting-an-environment-variable-in-a-container).
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
@@ -251,44 +250,6 @@ jobs:
       FOO: bar
 ```
 
-## Setting an Environment Variable in a Container
-
-To set an environment variable for a container, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor).
-
-```yaml
-version: 2.1 
-
-jobs:
-  build:
-    docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
-      # environment variables available for entrypoint/command run by docker container
-      environment:
-          FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      
-        
-```
-
-The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
-
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-      - image: circleci/python:3.6.2-jessie
-      environment:
-          FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6
-      environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
-      
-```
-
 ## Setting an Environment Variable in a Context
 
 1. In the CircleCI application, go to your organization settings by clicking the link in the left hand navigation.
@@ -353,6 +314,44 @@ jobs:
 ```
 
 Once created, environment variables are hidden and uneditable in the application. Changing an environment variable is only possible by deleting and recreating it.
+
+## Setting an Environment Variable in a Container
+
+Environment variable can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor). **Note**: environment variables set in this way are not available to steps run within the container, these env vars are only available for the entrypoint/command run by the container.
+
+```yaml
+version: 2.1 
+
+jobs:
+  build:
+    docker:
+      - image: smaant/lein-flyway:2.7.1-4.0.3
+      # environment variables available for entrypoint/command run by docker container
+      environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      
+        
+```
+
+The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.6.2-jessie
+      environment:
+          FLASK_CONFIG: testing
+          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6
+      environment:
+          POSTGRES_USER: conductor
+          POSTGRES_DB: conductor_test
+      
+```
 
 ### Encoding Multi-Line Environment Variables
 {:.no_toc}
