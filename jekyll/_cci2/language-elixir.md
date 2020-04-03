@@ -52,17 +52,8 @@ jobs:  # basic units of work in a run
       - save_cache:  # generate and store mix cache
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
-      - save_cache:  # make another, less specific cache
-          key: v1-mix-cache-{{ .Branch }}
-          paths: "deps"
-      - save_cache:  # you should really save one more cache (just in case)
-          key: v1-mix-cache
-          paths: "deps"
       - save_cache: # don't forget to save a *build* cache, too
           key: v1-build-cache-{{ .Branch }}
-          paths: "_build"
-      - save_cache: # and one more build cache for good measure
-          key: v1-build-cache
           paths: "_build"
 
       - run:  # special utility that stalls main process until DB is ready
@@ -159,16 +150,7 @@ to restore cached files or directories.
           key: v1-mix-cache-{{ .Branch }}-{{ checksum "mix.lock" }}
           paths: "deps"
       - save_cache:
-          key: v1-mix-cache-{{ .Branch }}
-          paths: "deps"
-      - save_cache:
-          key: v1-mix-cache
-          paths: "deps"
-      - save_cache:
           key: v1-build-cache-{{ .Branch }}
-          paths: "_build"
-      - save_cache:
-          key: v1-build-cache
           paths: "_build"
 ```
 {% endraw %}
