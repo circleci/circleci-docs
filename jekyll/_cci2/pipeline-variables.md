@@ -170,7 +170,7 @@ Use the `when` clause (or the inverse clause `unless`) under a workflow declarat
 
 The most common use of this construct is to use a pipeline parameter as the value, allowing an API trigger to pass that parameter to determine which workflows to run.
 
-Below is an example configuration using a pipeline parameter `run_integration_tests` to drive whether the workflow `integration_tests` will run.
+Below is an example configuration using the pipeline parameter `run_integration_tests` to drive whether the workflow `integration_tests` will run.
 
 ```yaml
 version: 2.1
