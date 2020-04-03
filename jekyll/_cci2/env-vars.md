@@ -317,20 +317,19 @@ Once created, environment variables are hidden and uneditable in the application
 
 ## Setting an Environment Variable in a Container
 
-Environment variable can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor). **Note**: environment variables set in this way are not available to steps run within the container, these env vars are only available for the entrypoint/command run by the container.
+Environment variables can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor). **Note**: Environment variables set in this way are not available to _steps_ run within the container. These environment variables are only available to the entrypoint/command run by the container.
 
 ```yaml
-version: 2.1 
+version: 2.1
 
 jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
-      # environment variables available for entrypoint/command run by docker container
-      environment:
+        # environment variables available for entrypoint/command run by docker container
+        environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-        
 ```
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
@@ -342,14 +341,13 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-jessie
-      environment:
+        environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6
-      environment:
+        environment:
           POSTGRES_USER: conductor
           POSTGRES_DB: conductor_test
-      
 ```
 
 ### Encoding Multi-Line Environment Variables
