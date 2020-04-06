@@ -57,12 +57,15 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       <li><a href="{{ site.baseurl }}/2.0/creating-orbs/">Creating Orbs</a></li>
     </ul>
   </div>
+   <div class="col-xs-12">
+    <hr />
+  </div>
    <div class="col-xs-12 col-sm-6">
     <h2>Cookbooks</h2>
     <p>Recipes to assist and inspire your pipeline config.</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/2.0/optimization-cookbook/">Discover a variety of ways to optimize your pipelines</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">Get inspired by viewing some best practices for a range of use cases</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/optimization-cookbook/">Discover ways to optimize your pipelines</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">View best practices for a range of use cases</a></li>
     </ul>
   </div>
 </div>

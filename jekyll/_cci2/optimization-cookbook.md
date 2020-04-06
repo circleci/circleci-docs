@@ -217,9 +217,9 @@ As you can see, there was no single step performed to reduce overall workflow ti
 
 ## Test Splitting to Speed Up Pipelines
 
-Most pipelines are set so that each time code is committed, tests are run. Test splitting is a great way to speed up this portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments and run in parallel.
+Most pipelines are configures so that every time code is committed, tests are run. Test splitting is a great way to speed up the testing portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments running in parallel.
 
-Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of parallel-running test environments, to give the lowest possible test time for the compute power in use.
+Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of test environments running in parallel, to give the lowest possible test time for the compute power in use.
 
 ![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
@@ -272,11 +272,15 @@ While many organizations deploy value to customer once per quarter or once per m
 
 To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
 
-![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png)
+{%
+comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
+endcomment %}
 
 When you provide developers with a workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
 
-![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png)
+{%
+comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
+endcomment %}
 
 A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers. 
 
