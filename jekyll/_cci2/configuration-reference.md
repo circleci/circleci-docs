@@ -97,7 +97,7 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A paid account is required to access this feature. Customers on paid container-based plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
-windows | Y <sup>(1)</sup> | Map | Options for [windows executor](#windows)
+windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/orbs/registry/orb/circleci/windows).
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 working_directory | N | String | In which directory to run the steps.
 environment | N | Map | A map of environment variable names and values.
@@ -1391,9 +1391,149 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
+###### **`matrix`**
+The `matrix` stanza allows you to run a parameterized job multiple times with different
+arguments.
+
+Key | Required | Type | Description
+----|----------|------|------------
+parameters | Y | Map  | A map of parameter names to every value the job should be called with
+exclude | N | List | A list of argument maps that should be excluded from the matrix
+alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
+{: class="table table-striped"}
+
+The following is a basic example of using matrix jobs.
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              version: ["0.1", "0.2", "0.3"]
+              platform: ["macos", "windows", "linux"]
+```
+
+This expands to 9 different `build` jobs, and could be equivalently written as:
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          name: build-macos-0.1
+          version: 0.1
+          platform: macos
+      - build:
+          name: build-macos-0.2
+          version: 0.2
+          platform: macos
+      - build:
+          name: build-macos-0.3
+          version: 0.3
+          platform: macos
+      - build:
+          name: build-windows-0.1
+          version: 0.1
+          platform: windows
+      - ...
+```
+
+###### Excluding sets of parameters from a matrix
+{:.no_toc}
+Sometimes you may wish to run a job with every combination of arguments _except_
+some value or values. You can use an `exclude` stanza to achieve this:
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          matrix:
+            parameters:
+              a: [1, 2, 3]
+              b: [4, 5, 6]
+            exclude:
+              - a: 3
+                b: 5
+```
+
+The matrix above would expand into 8 jobs: every combination of the parameters
+`a` and `b`, excluding `{a: 3, b: 5}`
+
+###### Dependencies and matrix jobs
+{:.no_toc}
+
+To `require` an entire matrix (every job within the matrix), use its `alias`.
+The `alias` defaults to the name of the job being invoked.
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - deploy:
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+      - another-job:
+          requires:
+            - deploy
+```
+
+This means that `another-job` will require both deploy jobs in the matrix to
+finish before it runs.
+
+Additionally, matrix jobs expose their parameter values via `<< matrix.* >>`
+which can be used to generate more complex workflows. For example, here is a
+`deploy` matrix where each job waits for its respective `build` job in another
+matrix.
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          name: build-v<< matrix.version >>
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+      - deploy:
+          name: deploy-v<< matrix.version >>
+          matrix:
+            parameters:
+              version: ["0.1", "0.2"]
+          requires:
+            - build-v<< matrix.version >>
+```
+
+This workflow will expand to:
+
+```yaml
+workflows:
+  workflow:
+    jobs:
+      - build:
+          name: build-v0.1
+          version: 0.1
+      - build:
+          name: build-v0.2
+          version: 0.2
+      - deploy:
+          name: deploy-v0.1
+          version: 0.1
+          requires:
+            - build-v0.1
+      - deploy:
+          name: deploy-v0.2
+          version: 0.2
+          requires:
+            - build-v0.2
+```
+
 ##### **Using `when` in Workflows**
 
-With CircleCI configuration v2.1, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with CircleCI API v2 pipeline triggering with parameters.
+With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with [CircleCI API v2 pipeline triggering](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) with parameters. Truthy/falsy calues can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -1418,7 +1558,7 @@ jobs:
 
 This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
-```
+```sh
 {
     "parameters": {
         "run_integration_tests": true

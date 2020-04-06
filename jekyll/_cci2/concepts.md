@@ -13,8 +13,6 @@ A CircleCI project shares the name of the associated code repository and is visi
 * TOC 
 {:toc}
 
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
-
 On the "Add Projects" page, you can either _Set Up_ any project that you are
 the owner of on your VCS, or, _Follow_ any project in your organization to gain
 access to its pipelines and to subscribe to [email notifications]({{

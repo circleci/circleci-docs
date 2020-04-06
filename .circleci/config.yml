@@ -52,11 +52,12 @@ workflows:
             branches:
               only: /server\/.*/
       - build_api_docs
+      - build_config_builder
       - build_config_ref
-
       - build:
           requires:
             - js_build
+            - build_config_builder
             - build_server_pdfs
             - build_api_docs
             - build_config_ref
@@ -85,10 +86,14 @@ workflows:
     jobs:
       - js_build
       - build_api_docs
+      - build_config_builder
+      - build_config_ref
       - build:
           requires:
             - js_build
             - build_api_docs
+            - build_config_builder
+            - build_config_ref
       - deploy:
           requires:
             - build
@@ -121,6 +126,8 @@ jobs:
           paths:
             - js
 
+
+
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     executor:
       name: ruby/default # we use the same ruby orb + tag across multiple jobs
@@ -139,6 +146,36 @@ jobs:
           root: *workspace_root
           paths:
             - pdfs
+
+  build_config_builder: # this job runs the src-config-builder build process and moves the output into jekyll.
+    executor:
+      name: node/default
+      tag: '8.11.1'
+    steps:
+      - checkout
+      - *attach_workspace
+      - run:
+          name: "Create landing folder for config-builder-output"
+          command: mkdir -p /tmp/workspace/config-builder/
+      - restore_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
+      - run:
+          name: Install Ruby + Node dependencies
+          command: cd src-config-builder; npm install;
+      - save_cache:
+          key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
+          paths:
+            - src-config-builder/node_modules
+      - run:
+          name: Build Config Builder
+          command: cd src-config-builder; npm run build ; cd build; ls
+      - run:
+          name: Copy build output to temporary workspace
+          command: cd src-config-builder; mv build/* /tmp/workspace/config-builder
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - config-builder
 
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
@@ -184,8 +221,7 @@ jobs:
       - *attach_workspace
       - run:
           name: "Create landing folder for crg output"
-          command: mkdir -p /tmp/workspace/crg
-      # Since this job has both Ruby and Node dependencies we are going
+          command: mkdir -p /tmp/workspace/crg/
       # to use a cache-key that combines each respective language's package-lock file.
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
@@ -242,7 +278,7 @@ jobs:
           name: "Manage Data Files We'll Need"
           command: ./scripts/pull-docker-image-tags.sh
       - run:
-          name: Restore Previous Job Assets (Javascript, API docs) to Jekyll directory.
+          name: Restore Previous Job Assets (Javascript, API docs, config-builder) to Jekyll directory.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
@@ -251,14 +287,14 @@ jobs:
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
 
-            echo "------------------------"
+            mkdir -p /tmp/workspace/config-builder
+            mkdir -p jekyll/config-builder
+            cp -R /tmp/workspace/config-builder/* jekyll/config-builder/
+            
             mkdir -p /tmp/workspace/crg
-            ls /tmp/workspace/crg/
-
-            echo "------------------------"
+            mkdir -p jekyll/_crg
             cp -r /tmp/workspace/crg/**/* jekyll/_crg/
-            ls  jekyll/_crg
-
+            
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run:
