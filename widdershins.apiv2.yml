@@ -20,7 +20,7 @@ tagGroups:
 - title: Job (Preview)
   tags:
   - Job
-- title: Insights (Preview)
+- title: Insights
   tags:
   - Insights
-search: false
+search: true

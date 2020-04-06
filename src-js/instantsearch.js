@@ -56,6 +56,7 @@ export function init () {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
+      autofocus: false,
       queryHook: debounce(function (query, searchFunction) {
           searchFunction(query);
           setTimeout(renderResults, 100);
@@ -120,8 +121,7 @@ export function init () {
 
   window.addEventListener('load', renderResults);
   searchResetButton.addEventListener('click', function () {
-    setTimeout(function () {
-      renderResults();
-    }, 100);
+    searchBox.value = ''
+    renderResults();
   });
 };

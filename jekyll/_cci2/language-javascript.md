@@ -14,12 +14,12 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 
 ## Quickstart: Demo JavaScript Node.js Reference Project
 
-We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI 2.1:
+We maintain a reference JavaScript Node.js project to show how to build an Express.js app on CircleCI with `version: 2.1` configuration:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express" target="_blank">Demo JavaScript Node Project on GitHub</a>
 - [Demo JavaScript Node Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
-In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.1 with Node projects.
+In the project you will find a CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using version 2.1 config with Node projects.
 
 ## Pre-Built CircleCI Docker Images
 
@@ -31,8 +31,8 @@ Database images for use as a secondary 'service' container are also available.
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
-1. Fork the project on GitHub to your own account
-2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked
+1. Fork the project on GitHub to your own account.
+2. Go to the Add Projects page in the CircleCI application and click the Set Up Project button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 
@@ -171,7 +171,7 @@ and upload the test results as an artifact (made available on the CircleCI web a
           path: test-results.xml
 ```
 
-Success! You just set up CircleCI 2.1 for a Node.js app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up a Node.js app to build on CircleCI with `version: 2.1` configuration. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See Also
 {:.no_toc}
