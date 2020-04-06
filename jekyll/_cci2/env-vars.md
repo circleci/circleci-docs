@@ -317,7 +317,7 @@ Once created, environment variables are hidden and uneditable in the application
 
 ## Setting an Environment Variable in a Container
 
-Environment variables can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor). **Note**: Environment variables set in this way are not available to _steps_ run within the container. These environment variables are only available to the entrypoint/command run by the container.
+Environment variables can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor). **Note**: Environment variables set in this way are not available to _steps_ run within the container. These environment variables are only available to the entrypoint/command run by the container. See the [Custom Images]({{ site.baseurl }}/2.0/custom-images/#adding-an-entrypoint) guide for further information about using a container's entrypoint.
 
 ```yaml
 version: 2.1
@@ -325,11 +325,11 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: smaant/lein-flyway:2.7.1-4.0.3
+      - image: <image>:<tag>
         # environment variables available for entrypoint/command run by docker container
         environment:
-          FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
+          MY_ENV_VAR_1: my-value-1
+          MY_ENV_VAR_2: my-value-2
 ```
 
 The following example shows separate environment variable settings for the primary container image (listed first) and the secondary or service container image.
@@ -340,14 +340,14 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/python:3.6.2-jessie
+      - image: <image>:<tag>
         environment:
-          FLASK_CONFIG: testing
-          TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6
+          MY_ENV_VAR_1: my-value-1
+          MY_ENV_VAR_2: my-value-2
+      - image: <image>:<tag>
         environment:
-          POSTGRES_USER: conductor
-          POSTGRES_DB: conductor_test
+          MY_ENV_VAR_3: my-value-3
+          MY_ENV_VAR_4: my-value-4
 ```
 
 ### Encoding Multi-Line Environment Variables
