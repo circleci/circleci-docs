@@ -102,7 +102,7 @@ Nearly all of the public images on Docker Hub and Docker Registry are supported 
 
 ### RAM disks
 
-A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`.
+A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
 
 The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
 
