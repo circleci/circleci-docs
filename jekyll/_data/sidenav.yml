@@ -35,6 +35,8 @@ en:
           link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
+        - name: Config Builder
+          link: config-builder
     - name: Concepts
       link: 2.0/concepts/
       children:
