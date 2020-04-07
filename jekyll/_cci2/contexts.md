@@ -98,18 +98,22 @@ Only members of the selected groups may now use the context in their workflows o
 Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
 
 ```yaml
+version: 2.1
+
+# jobs declaration from build, test and deploy not displayed for brevity
+
 workflows:
   build-test-deploy:
       - build
       - hold:
-          type: approval
+          type: approval # presents manual approval button in the UI
           requires:
             - build
       - test:
           context: my-restricted-context
           requires:
             - build
-            - hold
+            - hold 
       - deploy:
           context: my-restricted-context
           requires:
@@ -152,7 +156,6 @@ Environment variables are used according to a specific precedence order, as foll
 4. Special CircleCI environment variables defined in the [CircleCI Built-in Environment Variables]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) section of this document.
 5. Context environment variables (assuming the user has access to the Context).
 6. [Project-level environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) set on the Project Settings page.
-7. Environment variables set with the `environment` key [for a container]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container).
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
