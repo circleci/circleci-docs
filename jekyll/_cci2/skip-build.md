@@ -52,7 +52,7 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
     First attempt at feature 
 ```
 
-When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci] in the commit description.
+When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci]` in the commit description.
 
 **Note:**
 If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
