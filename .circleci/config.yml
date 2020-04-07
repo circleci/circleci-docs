@@ -293,7 +293,7 @@ jobs:
             
             mkdir -p /tmp/workspace/crg
             mkdir -p jekyll/reference-2-1
-            cp -R /tmp/workspace/crg/**/* jekyll/reference-2-1/
+            cp -R /tmp/workspace/crg/* jekyll/reference-2-1/
             
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
