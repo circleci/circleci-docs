@@ -1391,7 +1391,7 @@ ignore | N | String, or List of Strings | Either a single tag specifier, or a li
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
 
-###### **`matrix`**
+###### **`matrix`** (requires version: 2.1)
 The `matrix` stanza allows you to run a parameterized job multiple times with different
 arguments.
 
