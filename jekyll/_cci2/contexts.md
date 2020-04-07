@@ -100,7 +100,7 @@ Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) t
 ```yaml
 version: 2.1
 
-# jobs declaration from build, test and deploy not displayed for brevity
+# jobs declaration for build, test and deploy not displayed
 
 workflows:
   build-test-deploy:
