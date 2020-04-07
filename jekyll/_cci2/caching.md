@@ -110,20 +110,22 @@ There are many different approaches to utilizing caching in monorepos. This type
 
 #### Creating and Building a Concatenated `package-lock` file
 
+ **Note:** You must use CircleCI version 2.1 or higher for custom commands.
+
 1) Add custom command to config:
 
 {% raw %}
 ```yaml
     commands:
         create_concatenated_package_lock:
-        description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
-    parameters:
-      filename:
-        type: string
-    steps:
-      - run:
-          name: Combine package-lock.json files to single file
-          command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+            description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+            parameters:
+              filename:
+                type: string
+            steps:
+              - run:
+                  name: Combine package-lock.json files to single file
+                  command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
 ```
 {% endraw %}
 
@@ -134,12 +136,12 @@ There are many different approaches to utilizing caching in monorepos. This type
     steps:
         - checkout
         - create_concatenated_package_lock:
-          filename: combined-package-lock.txt
+            filename: combined-package-lock.txt
     ## Use combined-package-lock.text in cache key
         - restore_cache:
-          keys:
-            - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
-            - v3-deps
+              keys:
+                - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
+                - v3-deps
 ```
 {% endraw %}
 
