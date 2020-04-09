@@ -80,6 +80,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Configuration Reference 2.1
+          link: reference-2-1/
         - name: Reusable Config Reference
           link: 2.0/reusing-config/
         - name: Writing YAML
@@ -276,6 +278,8 @@ en:
     - children:
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Configuration Reference 2.1
+          link: reference-2-1/
         - name: API v1.1 Reference
           link: api/
         - name: API v2 Reference
