@@ -203,15 +203,23 @@ aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
 
 The first `image` listed in the file defines the primary container image where all steps will run.
 
-`entrypoint` overrides default entrypoint from Dockerfile.
+`entrypoint` overrides the image's `ENTRYPOINT`.
 
-`command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
+`command` overrides the image's `COMMAND`; it will be used as arguments to the
+image `ENTRYPOINT` if it has one, or as the executable if the image has no `ENTRYPOINT`.
 
-For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time all `steps` run in the primary container only.
+For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+(the first container in the list), if neither `command` nor `entrypoint` is
+specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are
+ignored. This is because the primary container is typically used only for
+running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely. ([A custom image may disable
+this behavior and force the `ENTRYPOINT` to run.]({{ site.baseurl
+}}/2.0/custom-images/#adding-an-entrypoint)) The job `steps` run in the primary
+container only.
 
 `name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
 
-The `environment` settings apply to all commands run in this executor, not just the initial `command`. The `environment` here has higher precedence over setting it in the job map above.
+The `environment` settings apply to entrypoint/command run by the docker container, not the job steps.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
