@@ -14,10 +14,10 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 
 ## Projects
 
-A CircleCI project shares the name of the associated code repository. Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
+A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
 
 On the Projects Dashboard, you can either:
-* _Set Up_ any project that you are the owner of on your VCS 
+* _Set Up_ any project that you are the owner of in your VCS 
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
 
@@ -28,6 +28,8 @@ site.baseurl }}/2.0/notifications/) for the project's status.
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
 ## User Types
+
+It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
 
 * The *Organization Administrator* is a permission level inherited from your VCS:
   * GitHub: **Owner** and following at least one project building on CircleCI
@@ -42,9 +44,9 @@ projects. Users may not view project data that is stored in environment variable
 
 ## Pipelines
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines contain your workflows, which coordinate jobs. This is all defined in your project [config](#config).
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#config).
 
-Using pipelines offers the following benefits:
+Pipelines offer the following benefits:
 
 {% include snippets/pipelines-benefits.adoc %}
 
@@ -65,6 +67,8 @@ CircleCI believes in *configuration as code*. The entire pipeline process, from 
 `config.yml` is a powerful yaml file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
 
 Put very simply, you will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). [Caches](#cache) are available to optimize and speed up pipelines, and [workspaces/artifacts](#workspaces-and-artifacts) can be used to share data across your pipeline.
+
+![config elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
 ### Jobs
 
