@@ -319,7 +319,7 @@ Once created, environment variables are hidden and uneditable in the application
 
 Environment variables can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor). 
 
-**Note**: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. If you wish to use container environment variables, you will need to preserve the entrypoint. For more information, see the _adding an entrypoint_ section of the [Custom Images]({{ site.baseurl }}/2.0/custom-images/#adding-an-entrypoint) guide.
+**Note**: Environment variables set in this way are not available to _steps_ run within the container, they are only available to the entrypoint/command run _by_ the container. By default, CircleCI will ignore the entrypoint for a job's primary container. For the primary container's environment variables to be useful, you will need to preserve the entrypoint. For more information, see the _adding an entrypoint_ section of the [Custom Images]({{ site.baseurl }}/2.0/custom-images/#adding-an-entrypoint) guide.
 
 ```yaml
 version: 2.1
