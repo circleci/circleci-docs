@@ -68,7 +68,13 @@ CircleCI believes in *configuration as code*. The entire pipeline process, from 
 
 Put very simply, you will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). [Caches](#cache) are available to optimize and speed up pipelines, and [workspaces/artifacts](#workspaces-and-artifacts) can be used to share data across your pipeline.
 
+The following image uses an [exammple Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements:
+
 ![config elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
+
+And now the [same example using the Maven orb](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-orbs-config) illustrates how orbs can be used to simplify your project configuration:
+
+![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
 ### Jobs
 
