@@ -35,6 +35,8 @@ en:
           link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
+        - name: Config Builder
+          link: config-builder
     - name: Concepts
       link: 2.0/concepts/
       children:
@@ -53,20 +55,22 @@ en:
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
-        - name: Migrating from TravisCI
-          link: 2.0/migrating-from-travis/
-        - name: Migrating from Jenkins
-          link: 2.0/migrating-from-jenkins/
-        - name: Migrating from GitLab
-          link: 2.0/migrating-from-gitlab/
-        - name: Migrating from Buildkite
-          link: 2.0/migrating-from-buildkite/
-        - name: Migrating from Azure DevOps
-          link: 2.0/migrating-from-azuredevops/
         - name: Migrating from AWS
           link: 2.0/migrating-from-aws/
+        - name: Migrating from Azure DevOps
+          link: 2.0/migrating-from-azuredevops/
+        - name: Migrating from Buildkite
+          link: 2.0/migrating-from-buildkite/
         - name: Migrating from GitHub
           link: 2.0/migrating-from-github/
+        - name: Migrating from GitLab
+          link: 2.0/migrating-from-gitlab/
+        - name: Migrating from Jenkins
+          link: 2.0/migrating-from-jenkins/
+        - name: Migrating from TeamCity
+          link: 2.0/migrating-from-teamcity/
+        - name: Migrating from TravisCI
+          link: 2.0/migrating-from-travis/
 
 - name: Configuration
   icon: docs/config.svg
@@ -78,6 +82,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Configuration Reference 2.1
+          link: reference-2-1/
         - name: Reusable Config Reference
           link: 2.0/reusing-config/
         - name: Writing YAML
@@ -274,6 +280,8 @@ en:
     - children:
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Configuration Reference 2.1
+          link: reference-2-1/
         - name: API v1.1 Reference
           link: api/
         - name: API v2 Reference
@@ -294,14 +302,14 @@ en:
 - name: Server Administration
   icon: docs/admin.svg
   children:
-    - name: Server v2.19 Install
+    - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
         - name: Overview
           link: 2.0/install-overview/
-        - name: What's New in v2.19
+        - name: What's New in v2.19.x
           link: 2.0/v.2.19-overview/
-        - name: Upgrade to v2.19
+        - name: Upgrade to v2.19.x
           link: 2.0/updating-server/
         - name: System Requirements
           link: 2.0/server-ports/
@@ -315,7 +323,7 @@ en:
           link: 2.0/upgrading/
         - name: Trial Single-box Install
           link: 2.0/single-box/
-    - name: Server v2.19 Operations
+    - name: Server v2.19.x Operations
       link: 2.0/overview/
       children:
         - name: Overview

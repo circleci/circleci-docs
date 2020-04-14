@@ -376,7 +376,7 @@ https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?
 **`POST` Request:** Triggers a new build and then returns a summary of the build.
 
 <aside class="notice">
-For more about build parameters, see 2.0 build parameters <a href="https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-the-api">for environment variables</a>. The response for “failed” should be a boolean true or null.
+For more about build parameters, see 2.0 build parameters <a href="https://circleci.com/docs/2.0/env-vars/#injecting-environment-variables-with-api-v1">for environment variables</a>. The response for “failed” should be a boolean `true` or `null`.
 </aside>
 
 **Parameter** | **Description**

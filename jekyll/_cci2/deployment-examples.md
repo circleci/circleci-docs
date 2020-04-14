@@ -590,7 +590,7 @@ to set up a project in your chosen language.
       heroku_deploy:
         jobs:
           - build
-          - heroku/deploy-via-git
+          - heroku/deploy-via-git:
               requires:
                 - build # only run deploy-via-git job if the build job has completed
               filters:

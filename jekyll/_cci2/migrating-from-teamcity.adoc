@@ -1,0 +1,453 @@
+= Migrating from TeamCity 
+:page-layout: classic-docs
+:page-liquid:
+:source-highlighter: pygments.rb
+:icons: font
+:toc: macro
+:toc-title:
+:sectanchors:
+
+This document provides an overview of how to migrate from TeamCity to CircleCI.
+
+== Quick Start
+
+CircleCI has various differences in setup and configuration from TeamCity. For the best experience of trying CircleCI, we recommend getting started with the following:
+
+. **Read (or at least browse) this document** to solidify conceptual differences.
+. **Quickly build and run a simple https://circleci.com/docs/2.0/hello-world/#section=getting-started[Hello World job] in any repository**. This configuration demonstrates the simplicity of our YAML setup, and it showcases how to define both an execution environment and the steps to run within it. All jobs on CircleCI share this format.
+. **Once you understand the config, modify the executor and the individual steps to meet your needs.** For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container image and run `bundler` commands. Consult our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials page] for various examples in different languages and frameworks.
+. **After finishing one job, setup your other jobs on CircleCI and then https://circleci.com/docs/2.0/workflows/[configure a workflow]**. This would essentially migrate your Build Chain.
+. **Next, https://circleci.com/docs/2.0/optimizations/[optimize your jobs] with advanced features** to see how much faster your builds could run on the CircleCI platform.
+. **Throughout this process, consult the https://circleci.com/docs/2.0/configuration-reference/#section=configuration[Configuration Reference]** for a list of all available configuration on the CircleCI platform.
+
+== Why Migrate to CircleCI?
+
+CircleCI is a modern CI/CD tool aimed at performance and developer productivity. With a flexible system for configuration, you can define complex workflows and jobs for your application's specific needs.
+
+**Configuration As Code**:: The majority of CircleCI's configuration is done via YAML. It is easy to maintain and trivial to learn, and your CI/CD pipeline can be tracked and versioned like the rest of your source code.
+**Auto-Scaling Architecture**:: All build environments are dynamically created according to your config and terminated on completion of tasks. You can run one - or hundreds - of jobs concurrently without any hassle or overhead.
+**Flexibility**:: CircleCI is vendor and tool-agnostic. Our config allows integration with any platform or cloud provider that has an API. See our https://circleci.com/integrations/[integrations page] for existing partnerships. Dependencies and libraries can be installed ad-hoc in your job, and we offer https://circleci.com/docs/2.0/caching/[dependency caching] to speed up subsequent builds.
+**Shareable, Reusable Configuration**:: Steps, execution environments, and jobs can be templated, parameterized, shared, and reused across different projects and teams using https://circleci.com/docs/2.0/orb-intro/#section=configuration[CircleCI orbs]. Take advantage of the https://circleci.com/orbs/registry/[numerous integrations and orbs] already written for you.
+
+We have various other features that set our solution apart. https://circleci.com/signup/[Sign up for a free account today] and try us out, or if you are interested in CircleCI for your team, https://circleci.com/talk-to-us/?source-button=MigratingFromGithubActionsDoc[contact our sales team] to set up a trial.
+
+== Concepts
+
+=== High-Level Differences
+
+* CircleCI and TeamCity share the concept of projects.
+* TeamCity's Build Configurations are equivalent to https://circleci.com/docs/2.0/concepts/#jobs[CircleCI's jobs], which are atomic elements of work consisting of many steps or commands to achieve a goal (e.g. run unit tests).
+* TeamCity has traditionally used the UI to configure most builds, with Kotlin Script configuration being a newer, recent feature. CircleCI uses YAML to configure the majority of pipeline functionality.
+
+[.table.table-striped.cf.table-migrate-desktop]
+[cols=2*, options="header", stripes=even]
+[cols="50%,50%"]
+|===
+| TeamCity _settings.kts_ | Equivalent CircleCI _config.yml_
+
+a|
+[source, kotlin]
+----
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+
+version: "2019.2"
+
+project {
+  buildType(HelloWorld)
+}
+
+object HelloWorld: BuildType({
+  name = "Hello World"
+  steps {
+    script {
+      scriptContent = "echo 'Hello World!'"
+    }
+  }
+})
+----
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  hello-workflow:
+    jobs:
+      - hello-job
+
+jobs:
+  # Define job
+  hello-job:
+    # Define environment
+    docker:
+      - image: cimg/base:stable
+
+    # Define steps for job
+    steps:
+      - checkout
+      - run: echo "Hello World!"
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| TeamCity _settings.kts_
+
+a|
+[source, kotlin]
+----
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script 
+
+version: "2019.2"
+
+project {
+  buildType(HelloWorld)
+}
+
+object HelloWorld: BuildType({
+  name = "Hello World"
+  steps {
+    script {
+      scriptContent = "echo 'Hello World!'"
+    }
+  }
+})
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| Equivalent CircleCI _config.yml_
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  hello-workflow:
+    jobs:
+      - hello-job
+
+jobs:
+  # Define job
+  hello-job:
+    # Define environment
+    docker:
+      - image: cimg/base:stable
+
+    # Define steps for job 
+    steps:
+      - checkout
+      - run: echo "Hello World!"
+----
+|===
+
+* Instead of Build Chains, CircleCI has https://circleci.com/docs/2.0/workflows/[Workflows], which define dependencies and flow between jobs.
+* A https://circleci.com/docs/2.0/pipelines/[Pipeline] refers to all configuration, workflows, and jobs for a project. This multi-layer structure allows for strong flexibility and separation of concerns for different workloads.
+
+[.table.table-striped.cf.table-migrate-desktop]
+[cols=2*, options="header", stripes=even]
+[cols="50%,50%"]
+|===
+| TeamCity Build Chain | Equivalent CircleCI Workflow
+
+a|
+[source, kotlin]
+----
+project {
+  sequence {
+    build(Compile)
+    parallel {
+        build(Test1)
+        build(Test2)
+    }
+    build(Package)
+    build(Publish)
+  }
+}
+
+/* BuildType definitions assumed
+
+----
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  build-deploy:
+    jobs:
+      - Compile
+      - Test1:
+          requires:
+            - Compile
+      - Test2:
+          requires:
+            - Compile
+      - Package:
+          requires:
+            - Test1
+            - Test2
+      - Publish:
+          requires:
+            - Package
+
+# Job definitions assumed
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| TeamCity Build Chain
+
+a|
+[source, kotlin]
+----
+project {
+  sequence {
+    build(Compile)
+    parallel {
+        build(Test1)
+        build(Test2)
+    } 
+    build(Package)
+    build(Publish)
+  }
+}
+
+/* BuildType definitions assumed
+
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| Equivalent CircleCI Workflow
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  build-deploy:
+    jobs:
+      - Compile
+      - Test1:
+          requires:
+            - Compile
+      - Test2:
+          requires:
+            - Compile
+      - Package:
+          requires:
+            - Test1
+            - Test2
+      - Publish:
+          requires:
+            - Package
+
+# Job definitions assumed
+----
+|===
+
+For more information on CircleCI Concepts, visit our https://circleci.com/docs/2.0/concepts/[Concepts] and https://circleci.com/docs/2.0/pipelines/#section=pipelines[Pipelines] documentation pages.
+
+== Configuration
+
+=== Environment
+
+TeamCity requires setting up a build agent with the required OS and tools installed and a corresponding Build Configuration. In CircleCI, all job configurations have an Executor definition, and CircleCI handles spinning up said agents for you. See our list of https://circleci.com/docs/2.0/executor-types/[available executors].
+
+..circleci/config.yml
+[source,yaml]
+----
+version: 2.1
+jobs:
+  my-mac-job:
+    # Executor definition
+    macos:
+      xcode: "11.3.0"
+
+    # Steps definition
+    steps:
+      - checkout
+      # ...etc.
+----
+
+=== Steps
+
+In TeamCity, build steps are chosen from a list of defined Runner Types (e.g. Visual Studio, Maven, Gradle, etc.). On CircleCI, step definition can flexibly take any commands you would run in a Terminal or Command Prompt.
+
+Subsequently, this flexibility allows steps to be adapted to any language, framework, and tool. For example, a https://circleci.com/docs/2.0/language-ruby/[Rails project] may use a Ruby container and run `bundler` commands. A https://circleci.com/docs/2.0/language-javascript/[Node.js project] may use a node container and `npm` commands. Visit our https://circleci.com/docs/2.0/tutorials/#section=configuration[Tutorials Page] for various language and framework examples.
+
+[.table.table-striped.table-migrate-desktop]
+[cols=2*, options="header", stripes=even]
+[cols="50%,50%"]
+|===
+| TeamCity Steps | Equivalent CircleCI Steps
+
+a|
+[source, kotlin]
+----
+project {
+  parallel {
+    build(Gradle) # Assume agent configured
+    build(Maven)  # Assume agent configured
+  }
+}
+
+object Gradle: BuildType({
+  name = "Gradle"
+
+  steps {
+    gradle {
+      tasks = "clean build"
+    }
+  }
+})
+
+object Maven: BuildType({
+  name = "Maven"
+
+  steps {
+    maven {
+      goals = "clean package"
+    }
+  }
+})
+----
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  parallel-workflow:
+    jobs:
+      - Gradle
+      - Maven
+
+jobs:
+  Gradle:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Build
+          command: ./gradlew clean build
+
+  Maven:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Package
+          command: mvn clean package
+----
+|===
+
+[.table.table-striped.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| TeamCity Steps
+
+a|
+[source, kotlin]
+----
+project {
+  parallel {
+    build(Gradle) # Assume agent configured
+    build(Maven)  # Assume agent configured
+  }
+}
+
+object Gradle: BuildType({
+  name = "Gradle"
+
+  steps {
+    gradle {
+      tasks = "clean build"
+    }
+  }
+})
+
+object Maven: BuildType({
+  name = "Maven"
+
+  steps {
+    maven {
+      goals = "clean package"
+    }
+  }
+})
+----
+|===
+
+[.table.table-striped.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| Equivalent CircleCi Steps
+
+a|
+[source, yaml]
+----
+version: 2.1
+workflows:
+  parallel-workflow:
+    jobs:
+      - Gradle
+      - Maven
+
+jobs:
+  Gradle:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Build
+          command: ./gradlew clean build
+
+  Maven:
+    docker:
+      - image: circleci/openjdk:11.0.3-jdk-stretch
+    steps:
+      - checkout # Checks out source code
+      - run:
+          name: Clean and Package
+          command: mvn clean package
+----
+|===
+
+=== Build Templates
+
+CircleCI's equivalent of Build Templates is orbs, which are templatizable, shareable configuration. Read more about them in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs documentation].
+
+=== Complex Builds
+
+For larger and more complex builds, we recommend moving over in phases until you get comfortable with the CircleCI platform. We recommend this order:
+
+. Execution of shell scripts and Docker compose files
+. https://circleci.com/docs/2.0/workflows/[Workflows]
+. https://circleci.com/docs/2.0/artifacts/[Artifacts]
+. https://circleci.com/docs/2.0/caching/[Caching]
+. https://circleci.com/docs/2.0/triggers/#section=jobs[Triggers]
+. https://circleci.com/docs/2.0/optimizations/#section=projects[Performance options]
+
+=== Resources
+* For more configuration examples on CircleCI, visit our https://circleci.com/docs/2.0/example-configs/#section=configuration[Example Projects] and https://circleci.com/docs/2.0/configuration-cookbook/#section=configuration[Configuration Cookbook] pages.
+* For support, submit a ticket to our https://support.circleci.com/hc/en-us[Support Forum].
