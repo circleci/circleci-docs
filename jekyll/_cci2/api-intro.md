@@ -25,10 +25,10 @@ The current categories of the API v2 endpoints are:
 - Authentication
 - Pipeline
 - Workflows
-- User (Preview)
-- Project (Preview)
+- User
+- Project
 - Job (Preview)
-
+- Insights
 
 **Note:** Portions of the CircleCI API v2 remain under "Preview". Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the [API v2 breaking changes log](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/breaking.md).
 
@@ -92,6 +92,10 @@ Endpoint       | Description
 `GET /pipeline/:id` | This endpoint enables users to retrieve an individual pipeline, based on the `id` passed in the request.
 `GET /pipeline/:id/config`  | This endpoint enables users to retrieve the configuration of a specific pipeline.
 `GET /project/:project_slug/pipelines/[:filter]`  | This endpoint enables users to retrieve the most recent set of pipelines for a Project.
+`GET /insights/:project-slug/workflows` | This endpoint enables you to retrieve summary metrics for an individual project's workflow.
+`GET /insights/:project-slug/workflows/:workflow-name` | This endpoint enables you to retrieve recent runs for a workflow.
+`GET /insights/:project-slug/workflows/:workflow-name/jobs` | This endpoint enables you to retrieve summary metrics for a project workflow's jobs.
+`GET /insights/:project-slug/workflows/:workflow-name/jobs/:job-name` | This endpoint enables you to retrieve recent runs of a job within a workflow.
 
 ### Deprecated Endpoints
 {:.no_toc}
@@ -109,10 +113,10 @@ Endpoint       | Description
 
 API v2 is not currently supported for self-hosted installations of CircleCI Server.
 
-<!---
-The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed *API Reference Guide* (*add link here for the API Reference Guide when ready*) for these API endpoints has been provided in the documentation. Some examples of Insights API endpoints include:
+## Data Insights
+
+The CircleCI API v2 enables you to call a specific set of endpoints to retrieve detailed insights and data about your jobs and workflows. This information can be very useful in better understanding how your jobs and workflows are performing while also providing you with data points that you can use to optimize your workflows and builds. A detailed [API Reference Guide](https://circleci.com/docs/api/v2/#section=reference) for these API endpoints has been provided in the documentation. Some examples of insights endpoints include:
 
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows`
 - `GET /{vcs_slug}/{org_name}/projects/{project_name}/workflows/{workflow_name}/jobs`
--->

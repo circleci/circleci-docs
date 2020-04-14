@@ -953,9 +953,15 @@ This is also the payload for the notification webhooks, in which case this objec
 <li>the value of path is relative to the project root (the working_directory)</li>
 <li>pretty_path returns the same value as path. It is included in the response for backwards compatibility</li>
 </ul>
-<h2 id='download-an-artifact-file'>Download an artifact file</h2><pre class="highlight plaintext"><code>https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt?circle-token=:token
-</code></pre>
-<p>You can download an individual artifact file via the API by appending a query string to its URL. Note that <code>:token</code> is an API token with &#39;view-builds&#39; scope.</p>
+<h2 id='download-an-artifact-file'>Download an artifact file</h2>
+<p>You can download an individual artifact file via the API with an API-token authenticated HTTP request.</p>
+</code></pre><h3 id='notes'>Notes</h3>
+<ul>
+  <li>Make sure your HTTP client is configured to follow follow redirects as the artifact URLs can respond with
+      an HTTP <code>3xx</code> status code (the <code>-L</code> switch in <code>curl</code> will achieve this).</li>
+  <li><code>:token</code> is an API token with &#39;view-builds&#39; scope.</li>
+</ul>
+<pre class="highlight plaintext"><code>curl -L -H'Circle-Token: :token' 'https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt'</code></pre>
 <h2 id='artifacts-of-the-latest-build'>Artifacts of the latest Build</h2>
 <p>Returns an array of artifacts produced by the latest build on a given branch.</p>
 
