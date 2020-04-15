@@ -470,17 +470,9 @@ A working `.circleci/config.yml` section might look like this:
 #### Jest
 {:.no_toc}
 
-To collect Jest data, first create a Jest config file called `jest.config.js` with the following:
+To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
 
-```javascript
-// jest.config.js
-{
-  reporters: ["default", "jest-junit"],
-}
-```
-
-In your `.circleci/config.yml`,
-add the following `run` steps:
+A working `.circleci/config.yml` section might look like this:
 
 ```yaml
 steps:
