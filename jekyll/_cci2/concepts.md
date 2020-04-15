@@ -66,9 +66,15 @@ CircleCI believes in *configuration as code*. The entire pipeline process, from 
 
 `config.yml` is a powerful yaml file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
 
-Put very simply, you will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). [Caches](#caches-workspaces-and-artifacts) are available to optimize and speed up pipelines, and [workspaces/artifacts](#caches-workspaces-and-artifacts) can be used to share data across your pipeline.
+Put very simply: 
 
-The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements (**Note:** The `test` job used in the example has been removed fro the image for the purposes of keeping the image a reasonable size):
+* You will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). 
+* Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. 
+* Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). 
+* [Caches](#caches-workspaces-and-artifacts) are available to optimize and speed up pipelines. 
+* [Workspaces/artifacts](#caches-workspaces-and-artifacts) can be used to share data across your pipeline.
+
+The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements (**Note:** The `test` job used in the example repo has been removed here to keep the image a reasonable size):
 
 ![config elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
