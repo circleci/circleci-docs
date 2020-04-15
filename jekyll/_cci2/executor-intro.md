@@ -27,7 +27,7 @@ Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/ex
 
 ## Machine
 
-{:.tab.windowsblock.Cloud}
+{:.tab.machine.Cloud}
 ```
 jobs:
   build: # name of your job
@@ -38,7 +38,7 @@ jobs:
         # Commands run in a Linux virtual machine environment
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.machine.Server}
 ```
 jobs:
   build: # name of your job

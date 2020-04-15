@@ -39,11 +39,36 @@ Note: the Windows executor currently only supports Windows containers. Running L
 
 Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
+Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
+
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+jobs:
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
 ## Known issues
 
 These are the issues with the Windows executor that we are aware of and will address as soon as we can:
 
 * Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
+* It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
 # Example configuration file
 
@@ -58,7 +83,9 @@ orbs:
 
 jobs:
   build: # name of your job
-    executor: win/default # executor type
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
 
     steps:
       # Commands are run in a Windows virtual machine environment
