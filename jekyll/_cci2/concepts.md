@@ -85,7 +85,7 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 #### Executors and Images
 {:.no_toc}
 
-Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, windows, or macOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
+Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
