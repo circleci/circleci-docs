@@ -66,9 +66,9 @@ CircleCI believes in *configuration as code*. The entire pipeline process, from 
 
 `config.yml` is a powerful yaml file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
 
-Put very simply, you will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). [Caches](#cache) are available to optimize and speed up pipelines, and [workspaces/artifacts](#workspaces-and-artifacts) can be used to share data across your pipeline.
+Put very simply, you will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). [Caches](#cache) are available to optimize and speed up pipelines, and [caches/workspaces/artifacts](#caches-workspaces-and-artifacts) can be used to share data across your pipeline.
 
-The following image uses an [exammple Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements:
+The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements (**Note:** The `test` job used in the example has been removed fro the image for the purposes of keeping the image a reasonable size):
 
 ![config elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
@@ -89,7 +89,7 @@ Each separate job defined within your config will run in a unique executor. An e
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
 
-You can define an image for each executor. An image is a packaged system that has the instructions for creating a running container or virtual machine. CircleCI provide a range of images for use with the Docker executor. For more information see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/#section=configuration) guide.
+You can define an image for each executor. An image is a packaged system that has the instructions for creating a running container or virtual machine. CircleCI provide a range of images for use with the Docker executor. For more information see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
 
  ```yaml
  version: 2
