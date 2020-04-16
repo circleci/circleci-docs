@@ -433,9 +433,9 @@ jobs:
 ----
 |===
 
-=== Build Templates
+=== Build Templates/Meta-Runners
 
-CircleCI's equivalent of Build Templates is orbs, which are templatizable, shareable configuration. Read more about them in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs documentation].
+CircleCI's equivalent of Meta-Runners and Build Templates is orbs, which are templatizable, shareable configuration. Read more about them in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs documentation].
 
 === Complex Builds
 

@@ -56,7 +56,7 @@ jobs:
                     dpkg -i sbt-$SBT_VERSION.deb
                     rm sbt-$SBT_VERSION.deb
                     apt-get update
-                    apt-get install -y sbt python-pip git
+                    apt-get install -y python-pip git
                     pip install awscli
                     apt-get clean && apt-get autoclean
       - checkout
@@ -125,7 +125,7 @@ jobs:
             dpkg -i sbt-$SBT_VERSION.deb
             rm sbt-$SBT_VERSION.deb
             apt-get update
-            apt-get install -y sbt python-pip git
+            apt-get install -y python-pip git
             pip install awscli
             apt-get clean && apt-get autoclean
 ```
@@ -148,7 +148,7 @@ steps/run キーは、実行するアクションのタイプを指定します�
             dpkg -i sbt-$SBT_VERSION.deb
             rm sbt-$SBT_VERSION.deb
             apt-get update
-            apt-get install -y sbt python-pip git
+            apt-get install -y python-pip git
             pip install awscli
             apt-get clean && apt-get autoclean
 ```
