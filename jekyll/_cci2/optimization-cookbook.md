@@ -290,11 +290,11 @@ For an organization deploying multiple times per day, that configuration may be 
 
 ```yaml
 - deploy:
-  requires:
-    - build
-  filters:
-    branches:
-      only: master
+    requires:
+      - build
+    filters:
+      branches:
+        only: master
 ```
 
 The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break. 
