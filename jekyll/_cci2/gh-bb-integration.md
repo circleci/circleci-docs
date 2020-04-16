@@ -14,7 +14,7 @@ This document provides an overview of using GitHub, GitHub Enterprise, or Bitbuc
 ## Overview
 {:.no_toc}
 
-When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
+To use CircleCI you need to be using either GitHub and Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket Cloud.
 - A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket Cloud.
 
@@ -25,8 +25,6 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
 It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
-
-**Note** Currently, CircleCI only supports GitHub and Bitbucket for git. If you wish to use AWS CodeDeploy in your git integrations, you may use the [AWS Code Deploy](https://circleci.com/orbs/registry/orb/circleci/aws-code-deploy) orb in the Orbs Registry. You may also add a manual `git clone` into your job if so desired.
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
