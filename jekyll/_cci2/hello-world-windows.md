@@ -42,14 +42,18 @@ Currently CircleCI supports a single Windows image: Windows Server 2019 with Vis
 Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
 
 ```yaml
-    # ...
-    parameters:
-      exec:
-        type: executor
-        default: win/default
-    parallelism: 2
-    working_directory: c:\\cache
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.2.0
+
+jobs:
+  build:
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
+      - checkout
       - run: systeminfo
       - run:
           name: "Check docker"
@@ -57,7 +61,6 @@ Please note that it is possible to run Windows Docker Containers on the Windows 
           command: |
             docker info
             docker run hello-world:nanoserver-1809
-    # ...
 ```
 
 ## Known issues

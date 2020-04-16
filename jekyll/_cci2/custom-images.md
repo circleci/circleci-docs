@@ -134,7 +134,8 @@ ADD ./db/migrations /migrations
 
 To run the container as an executable,
 use the [`ENTRYPOINT` instruction](https://docs.docker.com/engine/reference/builder/#entrypoint).
-Since CircleCI does not preserve entrypoints by default,
+By default, CircleCI will ignore the entrypoint for a job's primary container.
+To preserve the entrypoint even when the image is used for a primary container,
 use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label)
 as shown below.
 

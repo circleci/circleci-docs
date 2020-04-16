@@ -7,18 +7,19 @@ categories: [getting-started]
 order: 1
 ---
 
-
-A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.
+This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.
 
 * TOC 
 {:toc}
 
-On the "Add Projects" page, you can either _Set Up_ any project that you are
-the owner of on your VCS, or, _Follow_ any project in your organization to gain
-access to its pipelines and to subscribe to [email notifications]({{
-site.baseurl }}/2.0/notifications/) for the project's status.
+## Projects
 
-## Add Projects Page
+A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
+
+On the Projects Dashboard, you can either:
+* _Set Up_ any project that you are the owner of in your VCS 
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{
+site.baseurl }}/2.0/notifications/) for the project's status.
 
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
@@ -26,42 +27,81 @@ site.baseurl }}/2.0/notifications/) for the project's status.
 {:.tab.addprojectpage.Server}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-The *Project Administrator* is the user who adds a GitHub or Bitbucket
-repository to CircleCI as a Project. A *User* is an individual user within an
-org. A CircleCI user is anyone who can log in to the CircleCI platform with a
+## User Types
+
+It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
+
+* The *Organization Administrator* is a permission level inherited from your VCS:
+  * GitHub: **Owner** and following at least one project building on CircleCI
+  * Bitbucket: **Admin** and following at least one project building on CircleCI
+* The *Project Administrator* is the user who adds a GitHub or Bitbucket
+repository to CircleCI as a Project. 
+* A *User* is an individual user within an organization, inherited from your VCS. 
+* A CircleCI user is anyone who can log in to the CircleCI platform with a
 username and password. Users must be added to a [GitHub or Bitbucket org]({{
 site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
-projects.  Users may not view project data that is stored in environment variables.
+projects. Users may not view project data that is stored in environment variables.
 
-## Steps
+## Pipelines
 
-Steps are actions that need to be taken to perform your job. Steps are usually a collection of executable commands. For example, the `checkout` step checks out the source code for a job over SSH. Then, the `run` step executes the `make test` command using a non-login shell by default.
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#config).
 
-```yaml
-#...
-    steps:
-      - checkout # Special step to checkout your source code
-      - run: # Run step to execute commands, see
-      # circleci.com/docs/2.0/configuration-reference/#run
-          name: Running tests
-          command: make test # executable command run in
-          # non-login shell with /bin/bash -eo pipefail option
-          # by default.
-#...          
+Pipelines offer the following benefits:
+
+{% include snippets/pipelines-benefits.adoc %}
+
+## Orbs
+Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
+
+## Config
+
+CircleCI believes in *configuration as code*. The entire pipeline process, from build to deploy, is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
+
+```sh
+├── .circleci
+│   ├── config.yml
+├── README
+└── all-your-projects-other-files-and-folders
 ```
 
-## Image
+`config.yml` is a powerful yaml file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
 
-An image is a packaged system that has the instructions for creating a running container. 
- The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
+Put very simply: 
+
+* You will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). 
+* Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. 
+* Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). 
+* [Caches](#caches-workspaces-and-artifacts) are available to optimize and speed up pipelines. 
+* [Workspaces/artifacts](#caches-workspaces-and-artifacts) can be used to share data across your pipeline.
+
+The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements (**Note:** The `test` job used in the example repo has been removed here to keep the image a reasonable size):
+
+![config elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
+
+And now the [same example using the Maven orb](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-orbs-config) illustrates how orbs can be used to simplify your project configuration:
+
+![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
+
+### Jobs
+
+Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
+
+![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
+
+#### Executors and Images
+{:.no_toc}
+
+Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
+
+![job illustration]( {{ site.baseurl }}/assets/img/docs/executor_types.png)
+
+You can define an image for each executor. An image is a packaged system that has the instructions for creating a running container or virtual machine. CircleCI provide a range of images for use with the Docker executor. For more information see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
 
  ```yaml
  version: 2
  jobs:
    build1: # job name
      docker: # Specifies the primary container image,
-     # see circleci.com/docs/2.0/circleci-images/ for
-     # the list of pre-built CircleCI images on dockerhub.
        - image: buildpack-deps:trusty
 
        - image: postgres:9.4.1 # Specifies the database image
@@ -78,7 +118,7 @@ An image is a packaged system that has the instructions for creating a running c
      # an Ubuntu version 14.04 image with Docker 17.06.1-ce
      # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
      # for new image releases.
-       image: circleci/classic:201708-01
+       image: ubuntu-1604:201903-01
 #...       
    build3:
      macos: # Specifies a macOS virtual machine with Xcode version 11.3
@@ -86,52 +126,29 @@ An image is a packaged system that has the instructions for creating a running c
 # ...          
  ```
 
+The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Subsequent images can be added to spin up Secondary/Service Containers.
 
-## Jobs
+When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
-Jobs are collections of [steps](#steps). Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
-
-![job illustration]( {{ site.baseurl }}/assets/img/docs/concepts1.png)
-
-### Cache
+#### Steps
 {:.no_toc}
 
-A cache stores a file or directory of files such as dependencies or source code in object storage.
-Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
-
-{% raw %}
+Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}//2.0/configuration-reference/#checkout) step, which is a _built-in_ step available across all CircleCI projects, checks out the source code for a job over SSH. Then, the `run` step allows you to run custom commands, such as executing the command `make test`  using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
 ```yaml
-version: 2
-jobs:
-  build1:
-    docker: # Each job requires specifying an executor
-    # (either docker, macos, or machine), see
-    # circleci.com/docs/2.0/executor-types/ for a comparison
-    # and more examples.
-      - image: circleci/ruby:2.4-node
-      - image: circleci/postgres:9.4.12-alpine
+#...
     steps:
-      - checkout
-      - save_cache: # Caches dependencies with a cache key
-      # template for an environment variable,
-      # see circleci.com/docs/2.0/caching/
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/circleci-demo-workflows
-
-  build2:
-    docker:
-      - image: circleci/ruby:2.4-node
-      - image: circleci/postgres:9.4.12-alpine
-    steps:
-      - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+      - checkout # Special step to checkout your source code
+      - run: # Run step to execute commands, see
+      # circleci.com/docs/2.0/configuration-reference/#run
+          name: Running tests
+          command: make test # executable command run in
+          # non-login shell with /bin/bash -eo pipefail option
+          # by default.
+#...          
 ```
 
-{% endraw %}
-
-## Workflows
+### Workflows
 
 Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
@@ -193,14 +210,48 @@ workflows:
 ```
 {% endraw %}
 
-### Workspaces and Artifacts
-{:.no_toc}
+### Caches, Workspaces and Artifacts
 
-Workspaces are a workflows-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
+![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
+A cache stores a file or directory of files such as dependencies or source code in object storage.
+Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
 
-![workflow illustration]( {{ site.baseurl }}/assets/img/docs/concepts_workflow.png)
+{% raw %}
+
+```yaml
+version: 2
+jobs:
+  build1:
+    docker: # Each job requires specifying an executor
+    # (either docker, macos, or machine), see
+    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # and more examples.
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+      # template for an environment variable,
+      # see circleci.com/docs/2.0/caching/
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+```
+
+{% endraw %}
+
+Workspaces are a workflow-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
+
+Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
 {% raw %}
 ```yaml

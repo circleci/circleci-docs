@@ -221,8 +221,7 @@ jobs:
       - *attach_workspace
       - run:
           name: "Create landing folder for crg output"
-          command: mkdir -p /tmp/workspace/crg
-      # Since this job has both Ruby and Node dependencies we are going
+          command: mkdir -p /tmp/workspace/crg/
       # to use a cache-key that combines each respective language's package-lock file.
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
@@ -284,6 +283,7 @@ jobs:
             set -exu
             mkdir -p /tmp/workspace/js
             mv /tmp/workspace/js/* jekyll/assets/js/
+
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
 
@@ -291,8 +291,9 @@ jobs:
             mkdir -p jekyll/config-builder
             cp -R /tmp/workspace/config-builder/* jekyll/config-builder/
             
-            mkdir -p /tmp/workspace/crg	
-            cp -r /tmp/workspace/crg/**/* jekyll/_crg/
+            mkdir -p /tmp/workspace/crg
+            mkdir -p jekyll/reference-2-1
+            cp -R /tmp/workspace/crg/* jekyll/reference-2-1/
             
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
@@ -305,7 +306,7 @@ jobs:
       ### NOTE: we are ignore some files in the HTML proofer as it fails on pending translated docs.
       - run:
           name: Test with HTMLproofer
-          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/v.2.19-overview/,/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "/docs/ja/2.0/v.2.19-overview/,/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/,/docs/reference-2-1/" --empty-alt-ignore | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
       - store_artifacts: # stores the built files of the Jekyll site
           path: jekyll/_site/docs/
