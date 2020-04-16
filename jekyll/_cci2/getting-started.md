@@ -16,7 +16,7 @@ This document provides a step-by-step tutorial for getting your first successful
 {:.no_toc}
 
 * Some basic knowledge of Git.
-* A GitHub account, of which you are logged into.
+* A GitHub or Bitbucket account, of which you are logged into. We will use GitHub for this guide but you can follow the equivalent processes for Bitbucket if required.
 * An account on CircleCI.
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
 
