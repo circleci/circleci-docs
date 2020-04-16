@@ -31,7 +31,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 * Fixed an issue that was causing intermittent failures to spin up VMs with DLC in use.
 
-* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the [Nomad Client Proxy](https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup) and [Service Configuration Overrides](https://circleci.com/docs/2.0/customizations/#service-configuration-overrides) guides for more infomation.
+* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
 
 * Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
 
@@ -39,7 +39,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 * Fixed a `statsd` configuration issue that meant some services were not emitting Telegraf metrics.
 
-## What's New in v2.19.1
+## What's New in v2.19.01
 
 * Fixed a bug that was preventing some customers from upgrading due to a schema change in one of our library dependencies.
 
