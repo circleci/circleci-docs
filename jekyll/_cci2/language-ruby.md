@@ -41,6 +41,155 @@ Database images for use as a secondary 'service' container are also available on
 {% raw %}
 
 ```yaml
+version: 2.1 # Use CircleCI 2.1 
+
+orbs: # use orbs to help shorten and reduce repitition in our config.
+  ruby: circleci/ruby@0.1.2 
+
+
+# Yaml anchors and aliases enable reusing yaml in multiple places of out config.
+# read more about yaml: https://circleci.com/docs/2.0/writing-yaml/#section=configuration
+references:
+  default_ruby_version: &default_ruby_version 2.6.3-stretch-node
+  default_postgress_version: &default_postgress_version 9.5-alpine
+  ruby_envs: &ruby_envs # yaml reference:  environment variables for primary container
+    environment:
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      BUNDLE_PATH: vendor/bundle
+      PGHOST: 127.0.0.1
+      PGUSER: circleci-demo-ruby
+      PGPASSWORD: ""
+      RAILS_ENV: test
+  postgres_envs: &postgres_envs # yaml reference: environment varaibles for the postgres-executor
+    environment:
+      POSTGRES_USER: circleci-demo-ruby
+      POSTGRES_DB: rails_blog_test
+      POSTGRES_PASSWORD: ""
+
+# We create two executors that get used in two separate jobs.
+# this yaml block is used for creating reusable configuration.
+# read more: https://circleci.com/docs/2.0/reusing-config/#executors
+executors:
+  default: # our first executor is used for later in the "build" job.
+    parameters:
+      ruby_tag:
+        description: "The `circleci/ruby` Docker image version tag."
+        type: string
+        default: *default_ruby_version
+    docker:
+      - image: circleci/ruby:<< parameters.ruby_tag >>
+        <<: *ruby_envs # invoke the yaml references so that we have environment variables.
+  ruby_with_postgres: # our next executor is used in the "test" job.
+    parameters:
+      ruby_tag:
+        description: "The `circleci/postgres` Docker image version tag."
+        type: string
+        default: *default_ruby_version
+      postgres_tag:
+        description: "The `circleci/postgres` Docker image version tag."
+        type: string
+        default: *default_postgress_version
+    docker:
+      - image: circleci/ruby:<< parameters.ruby_tag >>
+        <<: *ruby_envs
+      - image: circleci/postgres:<< parameters.postgres_tag >>
+        <<: *postgres_envs
+
+# A Command definition defines a sequence of steps as a map to be executed in a job, 
+# enabling you to reuse a single command definition across multiple jobs.
+commands:
+  yarn-install:
+    description: "Install node_modules in your build."
+    parameters:
+      cache-folder-path:
+        description: "The path of cache-folder"
+        type: string
+        default: "~/.cache/yarn"
+    steps:
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder << parameters.cache-folder-path >>
+  yarn-load-cache:
+    description: "Load node_modules cached"
+    parameters:
+      key:
+        description: "The cache key to use. The key is immutable."
+        type: string
+        default: "rails-demo-yarn-v1"
+    steps:
+      - restore_cache:
+          keys:
+            - << parameters.key >>-{{ checksum "yarn.lock"  }}
+  yarn-save-cache:
+    description: "Save node_modules to cache."
+    parameters:
+      key:
+        description: "The cache key to use. The key is immutable."
+        type: string
+        default: "rails-demo-yarn-v1"
+    steps:
+      - save_cache:
+          key: << parameters.key >>-{{ checksum "yarn.lock"  }}
+          paths:
+            - ~/.cache/yarn
+
+jobs: # our map of jobs, here we have `build` and `test`
+  build:
+    executor: default # use the `default` declared executor above.
+    steps:
+      - checkout # get our code from our VCS
+      # A sample step that checks which versio nof bundler we are using.
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      # Invoke the ruby orb to load our cache (if it exists)
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      - ruby/load-cache:
+          key: rails-demo-bundle
+      # using the ruby orb, install our dependencies.
+      - ruby/bundle-install
+      # using the ruby orb, save our cahce
+      - ruby/save-cache:
+          key: rails-demo-bundle # the key we are saving our cache under.
+      # Using our custom commands, we restore, install and save node_packages.
+      - yarn-load-cache
+      - yarn-install
+      - yarn-save-cache
+  # our test job makes use of postgres, which is defined in our separate executor.
+  test:
+    parallelism: 3 # run parallel jobs to speed up our job when we do testing.
+    executor: ruby_with_postgres
+    steps:
+      - checkout # pull down code from our VCS
+      - ruby/load-cache: # use the ruby orb, as above.
+          key: rails-demo-bundle
+      - ruby/bundle-install
+      - yarn-load-cache # re-use our yarn-load-cache command, declared in the `commands` block
+      # Check DB status
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # Setup database
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      - ruby/test
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+
+
+```
+
+```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
