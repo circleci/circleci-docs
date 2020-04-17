@@ -6,7 +6,7 @@ description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
 categories: [language-guides]
 order: 8
 ---
-
+    
 This guide will help you get started with a Ruby on Rails application on CircleCI. 
 
 * TOC
@@ -38,14 +38,13 @@ Database images for use as a secondary 'service' container are also available on
 
 ## Sample Configuration
 
+{:.tab.rubyconf.Config_2__1}
 {% raw %}
 
 ```yaml
 version: 2.1 # Use CircleCI 2.1 
-
 orbs: # use orbs to help shorten and reduce repitition in our config.
   ruby: circleci/ruby@0.1.2 
-
 
 # Yaml anchors and aliases enable reusing yaml in multiple places of out config.
 # read more about yaml: https://circleci.com/docs/2.0/writing-yaml/#section=configuration
@@ -188,7 +187,10 @@ workflows:
 
 
 ```
+{% endraw %}
 
+{:.tab.rubyconf.Config_2__0}
+{% raw %}
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of steps
@@ -271,13 +273,13 @@ jobs: # a collection of steps
           path: test_results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
 ```
-
 {% endraw %}
+
 
 ---
 
 ## Build the Demo Ruby on Rails Project Yourself
-
+  
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. [Fork the project][fork-demo-project] on GitHub to your own account.
