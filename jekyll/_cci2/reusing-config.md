@@ -636,6 +636,8 @@ The environment variable name (``env_var_name``) parameter is a string that must
 The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a re-usable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a re-usable command that uses the needed authentication, but deploys to a custom bucket.
 
 {% raw %}
+
+Original `config.yml` file:
 ```yaml
 version: 2.1
 jobs:
@@ -655,7 +657,7 @@ workflows:
   version: 2
 ```
 
-Original `config.yml` file:
+New `config.yml` file:
 
 ```yaml
 version: 2.1
