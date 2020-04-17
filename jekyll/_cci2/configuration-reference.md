@@ -644,7 +644,7 @@ no_output_timeout | N | String | Elapsed time the command can run without output
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
-Each `run` declaration represents a new shell. It's possible to specify a multi-line `command`, each line of which will be run in the same shell:
+Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell:
 
 ``` YAML
 - run:
@@ -653,6 +653,8 @@ Each `run` declaration represents a new shell. It's possible to specify a multi-
       mkdir -p /tmp/test-results
       make test
 ```
+
+You can also configure commands to run [in the background](#background-commands) if you don't want to wait for the step to complete before moving on to subsequent run steps.
 
 ###### _Default shell options_
 
