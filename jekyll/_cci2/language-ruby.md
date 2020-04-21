@@ -468,11 +468,11 @@ for Ruby (known as the "primary container") and the second for Postgres.
 Next, because we are executing tests in this job, we have the option to build
 this job in parallel - meaning we can split our tests across multiple containers
 to increase our build time. You can consult the [job parallelism
-document]({{site.baseurl/2.0/parallelism-faster-jobs}}) for more information
+document]({{site.baseurl}}/2.0/parallelism-faster-jobs) for more information
 about splitting test files. The `ruby/test` command enables us to automatically
 split our tests.
 
-Finally, we set up [workflows]({{site.baseurlr/2.0/workflows}}). Workflows
+Finally, we set up [workflows]({{site.baseurl}}/2.0/workflows). Workflows
 enable us to sequence our jobs and the data that may flow between them. 
 
 ```yaml
