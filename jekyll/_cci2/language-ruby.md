@@ -43,7 +43,7 @@ Database images for use as a secondary 'service' container are also available on
 
 ```yaml
 version: 2.1 # Use CircleCI 2.1 
-orbs: # use orbs to help shorten and reduce repitition in our config.
+orbs: # use orbs to help shorten and reduce repetition in our config.
   ruby: circleci/ruby@0.1.2 
 
 # Yaml anchors and aliases enable reusing yaml in multiple places of out config.
@@ -138,7 +138,7 @@ jobs: # our map of jobs, here we have `build` and `test`
     executor: default # use the `default` declared executor above.
     steps:
       - checkout # get our code from our VCS
-      # A sample step that checks which versio nof bundler we are using.
+      # A sample step that checks which version of bundler we are using.
       - run:
           name: Which bundler?
           command: bundle -v
@@ -148,7 +148,7 @@ jobs: # our map of jobs, here we have `build` and `test`
           key: rails-demo-bundle
       # using the ruby orb, install our dependencies.
       - ruby/bundle-install
-      # using the ruby orb, save our cahce
+      # using the ruby orb, save our cache
       - ruby/save-cache:
           key: rails-demo-bundle # the key we are saving our cache under.
       # Using our custom commands, we restore, install and save node_packages.
@@ -275,7 +275,6 @@ jobs: # a collection of steps
 ```
 {% endraw %}
 
-
 ---
 
 ## Build the Demo Ruby on Rails Project Yourself
@@ -290,180 +289,214 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 
 ## Config Walkthrough
 
+Let's walk through the [2.1 configuration](https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/2.1-orbs-config/.circleci/config.yml) of the Ruby sample project.
+
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
 
 ```yaml
-version: 2
+version: 2.1
 ```
 
-Next, add a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. The sample app only needs a `build` job, so all other options are nested under that key.
+The bulk of our config exists in creating *reusable configuration*. This means
+using orbs, commands, executors, and commands. Your configuration does not have
+to use tools, but as projects get more complex it can help to organize your
+configuration into blocks that can be reusable throughout your config (and other
+configurations).
 
-In each job, you have the option of specifying a `working_directory`. In this sample config, it is named after the project in the home directory.
+We will start by creating a few yaml references. [Yaml anchors and aliases]({{site.baseurl}}/2.0/writing-yaml/#section=configuration) enable reusing yaml in multiple places of our config. 
 
 ```yaml
-version: 2
-jobs:
-  build:
-    parallelism: 3
-    working_directory: ~/circleci-demo-ruby-rails
+references:
+  default_ruby_version: &default_ruby_version 2.6.3-stretch-node
+  default_postgress_version: &default_postgress_version 9.5-alpine
+  ruby_envs: &ruby_envs 
+    environment:
+      BUNDLE_JOBS: 3
+      BUNDLE_RETRY: 3
+      BUNDLE_PATH: vendor/bundle
+      PGHOST: 127.0.0.1
+      PGUSER: circleci-demo-ruby
+      PGPASSWORD: ""
+      RAILS_ENV: test
+  postgres_envs: &postgres_envs
+    environment:
+      POSTGRES_USER: circleci-demo-ruby
+      POSTGRES_DB: rails_blog_test
+      POSTGRES_PASSWORD: ""
 ```
 
-This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
-
-Directly beneath `working_directory`, you can specify container images under a `docker` key.
+Now, let's create some reusable [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) under the `executors` key. We will see these executors used later under the `jobs` key.
 
 ```yaml
+executors:
+  default: # our first executor is used for later in the "build" job.
+    parameters:
+      ruby_tag:
+        description: "The `circleci/ruby` Docker image version tag."
+        type: string
+        default: *default_ruby_version
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node  # language image
-        environment:
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
-          BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
-          PGUSER: circleci-demo-ruby
-          RAILS_ENV: test
-      - image: circleci/postgres:9.5-alpine  # service image
-        environment:
-          POSTGRES_USER: circleci-demo-ruby
-          POSTGRES_DB: rails_blog
-          POSTGRES_PASSWORD: ""
+      - image: circleci/ruby:<< parameters.ruby_tag >>
+        <<: *ruby_envs # invoke the yaml references so that we have environment variables.
+  ruby_with_postgres: # our next executor is used in the "test" job.
+    parameters:
+      ruby_tag:
+        description: "The `circleci/postgres` Docker image version tag."
+        type: string
+        default: *default_ruby_version
+      postgres_tag:
+        description: "The `circleci/postgres` Docker image version tag."
+        type: string
+        default: *default_postgress_version
+    docker:
+      - image: circleci/ruby:<< parameters.ruby_tag >>
+        <<: *ruby_envs
+      - image: circleci/postgres:<< parameters.postgres_tag >>
+        <<: *postgres_envs
 ```
 
-In this example,
-two [CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/#image-types) are used:
-
-- A language image
-that runs on Debian Jessie
-and installs both Ruby 2.4.2 and Node.js.
-
-- A service image
-that runs on Alpine Linux
-and installs PostgreSQL 9.5.
-
-Then, several environment variables are added to connect the application container with the database for testing purposes. The `BUNDLE_*` environment variables are there to ensure proper caching and improve performance and reliability for installing dependencies with Bundler.
-
-Finally, add several `steps` within the `build` job.
-
-Start with `checkout` so CircleCI can operate on the codebase.
+Now we'll move on to creating some reusable
+[commands]({{site.baseurl}}/2.0/configuration-reference/#commands-requires-version-21).
 
 ```yaml
-steps:
-  - checkout
+commands:
+  yarn-install:
+    description: "Install node_modules in your build."
+    parameters:
+      cache-folder-path:
+        description: "The path of cache-folder"
+        type: string
+        default: "~/.cache/yarn"
+    steps:
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder << parameters.cache-folder-path >>
+  yarn-load-cache:
+    description: "Load node_modules cached"
+    parameters:
+      key:
+        description: "The cache key to use. The key is immutable."
+        type: string
+        default: "rails-demo-yarn-v1"
+    steps:
+      - restore_cache:
+          keys:
+            - << parameters.key >>-{{ checksum "yarn.lock"  }}
+  yarn-save-cache:
+    description: "Save node_modules to cache."
+    parameters:
+      key:
+        description: "The cache key to use. The key is immutable."
+        type: string
+        default: "rails-demo-yarn-v1"
+    steps:
+      - save_cache:
+          key: << parameters.key >>-{{ checksum "yarn.lock"  }}
+          paths:
+            - ~/.cache/yarn
 ```
 
-This step tells CircleCI to checkout the project code into the working directory.
+This block might seem a bit intimidating, but if you look
+closely you will see that every command follows the same structure. Here, we are
+creating commands that are responsible for handling dependencies and caching for
+JavaScript assets with Yarn. These commands can be used across any job.
 
-Next CircleCI pulls down the cache, if present. If this is your first run, or if you've changed `Gemfile.lock`, this won't do anything. The `bundle install` command runs next to pull down the project's dependencies. Normally, you never call this task directly since it's done automatically when it's needed, but calling it directly allows a `save_cache` step that will store the dependencies to speed things up for next time.  Using the `--deployment` flag for `bundle install` installs into `./vendor/bundle` rather than a system location. 
-
-{% raw %}
-```yaml
-steps:
-  # ...
-
-  # Restore bundle cache
-  - restore_cache:
-      keys:
-        - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-        - rails-demo-bundle-v2-
-
-  - run:
-      name: Bundle Install
-      command: bundle check --path vendor/bundle || bundle install --deployment
-
-  # Store bundle cache
-  - save_cache:
-      key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-      paths:
-        - vendor/bundle
-```
-{% endraw %}
-
-If your application is using Webpack or Yarn for JavaScript dependencies, you should also add the following to your config.
-
-{% raw %}
-```yaml
-steps:
-  # ...
-
-  # Only necessary if app uses webpacker or yarn in some other way
-  - restore_cache:
-      keys:
-        - rails-demo-yarn-{{ checksum "yarn.lock" }}
-        - rails-demo-yarn-
-
-  - run:
-      name: Yarn Install
-      command: yarn install --cache-folder ~/.cache/yarn
-
-  # Store yarn / webpacker cache
-  - save_cache:
-      key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-      paths:
-        - ~/.cache/yarn
-```
-{% endraw %}
-
-The next section sets up the test database. It uses the `dockerize` [utility](https://github.com/jwilder/dockerize) to delay starting the main process of the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) until after the database service is available.
+Now then, it's time to look at how our jobs are constructed. The sample
+application has two jobs: `build` and `test`. Let's look at each one individually.
 
 ```yaml
-steps:
-  # ...
-
-  # Database setup
-  - run:
-      name: Wait for DB
-      command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-  - run:
-      name: Database setup
-      command: bin/rails db:schema:load --trace
+jobs: 
+  build:
+    executor: default
+    steps:
+      - checkout 
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      - ruby/load-cache:
+          key: rails-demo-bundle
+      - ruby/bundle-install
+      - ruby/save-cache:
+          key: rails-demo-bundle 
+      - yarn-load-cache
+      - yarn-install
+      - yarn-save-cache
 ```
 
-Then `bundle exec rspec` runs the actual tests in parallel.
+Our first job is `build`. This job is responsible for building the rails
+application and makes use of the several Yarn commands we established above. You
+can also see that we are making use of the [Ruby
+orb](https://circleci.com/orbs/registry/orb/circleci/ruby) which abstracts away
+the mechanism for installing our dependencies. 
 
-If they succeed, it stores the test results using `store_test_results` so CircleCI will quickly show the build failures in the Test Summary section of the app. This is the benefit of adding [RspecJunitFormatter][rspec-junit-formatter] to the Gemfile.
+Let's move on to the `test` job. 
 
-From there this can be tied into a continuous deployment scheme of your choice.
-
-{% raw %}
 ```yaml
-steps:
-  # ...
+#...
+  test:
+    parallelism: 3 # run parallel jobs to speed up our job when we do testing.
+    executor: ruby_with_postgres
+    steps:
+      - checkout # pull down code from our VCS
+      - ruby/load-cache: # use the ruby orb, as above.
+          key: rails-demo-bundle
+      - ruby/bundle-install
+      - yarn-load-cache # re-use our yarn-load-cache command, declared in the `commands` block
+      # Check DB status
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      # Setup database
+      - run:
+          name: Database setup
+          command: bundle exec rails db:schema:load --trace
+      # Run rspec in parallel
+      - ruby/test
 
-  # Run rspec in parallel
-  - run: |
-      bundle exec rspec --profile 10 \
-                        --format RspecJunitFormatter \
-                        --out test_results/rspec.xml \
-                        --format progress \
-                        $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-
-  # Save test results for timing analysis
-  - store_test_results:
-      path: test_results
 ```
-{% endraw %}
 
-Two formatters are specified for the RSpec test suite:
+This job is quite different from the `build` job for two reasons. Firstly, we
+are using a new executor, one of which makes use of *two* docker images - one
+for Ruby (known as the "primary container") and the second for Postgres.
 
-* `RspecJunitFormatter` outputs JUnit style test results
-* `progress` displays the running build output
+Next, because we are executing tests in this job, we have the option to build
+this job in parallel - meaning we can split our tests across multiple containers
+to increase our build time. You can consult the [job parallelism
+document]({{site.baseurl/2.0/parallelism-faster-jobs}}) for more information
+about splitting test files. The `ruby/test` command enables us to automatically
+split our tests.
 
-The `--profile` option reports the slowest examples of each run.
+Finally, we set up [workflows]({{site.baseurlr/2.0/workflows}}). Workflows
+enable us to sequence our jobs and the data that may flow between them. 
 
-For more on `circleci tests glob` and `circleci tests split` commands, please refer to our documentation on [Parallelism with CircleCI CLI](https://circleci.com/docs/2.0/parallelism-faster-jobs).
+```yaml
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
 
+Here we are declaring a workflow called `build_and_test` which is responsible 
+for running the `build` and `test` job. Here we are declaring that the `test`
+job *requires* the `build` job to pass - it will not run if it fails.
+
+And that's it! We covered a lot of ground, but this is just a start with what is
+possible using CircleCI.
 
 ## See Also
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
-This app illustrates the simplest possible setup for a Ruby on Rails web app. Real world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
+This app illustrates the simplest possible setup for a Ruby on Rails web app. Real-world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
 
-* [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open source discussion platform.
+* [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open-source discussion platform.
 * [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
 
-[fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork
+[fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/tree/2.1-orbs-config
 [rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
