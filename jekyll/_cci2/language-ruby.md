@@ -47,7 +47,7 @@ orbs: # use orbs to help shorten and reduce repetition in our config.
   ruby: circleci/ruby@0.1.2 
 
 # Yaml anchors and aliases enable reusing yaml in multiple places of out config.
-# read more about yaml: https://circleci.com/docs/2.0/writing-yaml/#section=configuration
+# read more about yaml: https://circleci.com/docs/2.0/writing-yaml/#section-configuration
 references:
   default_ruby_version: &default_ruby_version 2.6.3-stretch-node
   default_postgress_version: &default_postgress_version 9.5-alpine
