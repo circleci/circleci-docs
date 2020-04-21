@@ -304,7 +304,7 @@ to use tools, but as projects get more complex it can help to organize your
 configuration into blocks that can be reusable throughout your config (and other
 configurations).
 
-We will start by creating a few yaml references. [Yaml anchors and aliases]({{site.baseurl}}/2.0/writing-yaml/#section=configuration) enable reusing yaml in multiple places of our config. 
+We will start by creating a few yaml references. [Yaml anchors and aliases]({{site.baseurl}}/2.0/writing-yaml/#anchors-and-aliases) enable reusing yaml in multiple places of our config. 
 
 ```yaml
 references:
