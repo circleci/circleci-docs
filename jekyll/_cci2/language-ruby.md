@@ -328,6 +328,8 @@ references:
 
 Now, let's create some reusable [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-requires-version-21) under the `executors` key. We will see these executors used later under the `jobs` key.
 
+{% raw %}
+
 ```yaml
 executors:
   default: # our first executor is used for later in the "build" job.
@@ -355,10 +357,12 @@ executors:
       - image: circleci/postgres:<< parameters.postgres_tag >>
         <<: *postgres_envs
 ```
+{% endraw %}
 
 Now we'll move on to creating some reusable
 [commands]({{site.baseurl}}/2.0/configuration-reference/#commands-requires-version-21).
 
+{% raw %}
 ```yaml
 commands:
   yarn-install:
@@ -396,6 +400,7 @@ commands:
           paths:
             - ~/.cache/yarn
 ```
+{% endraw %}
 
 This block might seem a bit intimidating, but if you look
 closely you will see that every command follows the same structure. Here, we are
