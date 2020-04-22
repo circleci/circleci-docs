@@ -299,7 +299,7 @@ version: 2.1
 ```
 
 The bulk of our config exists in creating *reusable configuration*. This means
-using orbs, commands, executors, and commands. Your configuration does not have
+using orbs, commands, executors, and Yaml anchors and aliases. Your configuration does not have
 to use tools, but as projects get more complex it can help to organize your
 configuration into blocks that can be reusable throughout your config (and other
 configurations).
