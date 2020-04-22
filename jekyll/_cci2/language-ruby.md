@@ -44,7 +44,7 @@ Database images for use as a secondary 'service' container are also available on
 ```yaml
 version: 2.1 # Use CircleCI 2.1 
 orbs: # use orbs to help shorten and reduce repetition in our config.
-  ruby: circleci/ruby@0.1.2 
+  ruby: circleci/ruby@0.2.1
 
 # Yaml anchors and aliases enable reusing yaml in multiple places of out config.
 # read more about yaml: https://circleci.com/docs/2.0/writing-yaml/#section-configuration
