@@ -58,3 +58,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 * **If you are using an HTTP proxy for your installation, upgrade to v2.19.02**. We had a known issue around job step logging and docker commands customization that made pre-2.19.2 releases incompatible with an HTTP proxy setup of CircleCI Server.
 
 * The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
+
+* If any changes have been made to your networking configuration you may need to run the following steps to ensure you can use SSH to inspect your builds:
+** On the Services Machine, create /etc/circleci/public-ipv4
+** This file should contain the private IP of the nomad client
