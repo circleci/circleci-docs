@@ -131,7 +131,7 @@ jobs:
 <a name="setting-an-environment-variable-in-a-container"></a>
 ## コンテナ内で環境変数を設定する
 
-コンテナの中で環境変数を設定するには [`environment` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macosexecutor)を使います。
+コンテナの中で環境変数を設定するには [`environment` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker)を使います。
 
 ```yaml
 version: 2

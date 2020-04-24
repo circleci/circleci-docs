@@ -67,7 +67,7 @@ jobs: # 1回の実行の基本作業単位
 
 macOS でのビルドの基礎について説明しているため、上記のサンプルの `config.yml` には以下の内容が含まれています。
 
-- 使用する [`executor`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macosexecutor) の選択
+- 使用する [`executor`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) の選択
 - [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout) キーによるコードのプル
 - Xcode でのテストの実行
 - アプリケーションのビルド
