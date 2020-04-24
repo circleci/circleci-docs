@@ -13,6 +13,7 @@ plugins:
   - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
+  - jekyll-target-blank
 
 algolia:
   application_id: U0RXNGRK45

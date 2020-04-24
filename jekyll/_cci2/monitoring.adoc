@@ -25,7 +25,7 @@ Following are the enabled metrics:
 * https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements[CPU]
 * https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics[Disk]
 * https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics[Memory]
-* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields[Networking]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md[Networking]
 * https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics[Docker]
 
 === Nomad Job Metrics

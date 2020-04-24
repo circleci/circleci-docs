@@ -366,7 +366,7 @@ https://www.replicated.com/docs/kb/supporting-your-customers/resetting-console-p
 
 . SSH into the services box
 . Use the following command: `replicated auth reset` to remove the password
-. Visit `https://<server>:8800/create-password` to create a new password or connect LDAP.
+. Visit `<server>:8800/create-password` to create a new password or connect LDAP.
 
 === How do I resolve the case of VM spin-up / spin-down issues?
 

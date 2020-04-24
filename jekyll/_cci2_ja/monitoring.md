@@ -23,7 +23,7 @@ Services VM ホストと Docker のメトリクスは、メトリクスを収集
 * [CPU](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements)
 * [ディスク](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics)
 * [メモリ](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics)
-* [ネットワーク通信](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md#measurements--fields)
+* [ネットワーク通信](https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md)
 * [Docker](https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics)
 
 #### Nomad ジョブのメトリクス
