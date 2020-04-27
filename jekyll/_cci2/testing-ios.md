@@ -322,7 +322,7 @@ image:
 ### Collecting iOS Simulator Crash Reports
 {:.no_toc}
 
-Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. If your app has crashed in the Simulator during a test run, then collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
+Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
 
 ```yaml
 steps:
