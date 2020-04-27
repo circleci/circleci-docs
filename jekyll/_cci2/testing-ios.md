@@ -251,6 +251,7 @@ gem 'cocoapods', '= 1.3.0'
 
 Then you can install these using bundler:
 
+{% raw %}
 ```yaml
 steps:
   - restore_cache:
@@ -261,6 +262,7 @@ steps:
       paths:
         - vendor/bundle
 ```
+{% endraw %}
 
 You can then ensure you are using those, by prefixing commands with `bundle exec`:
 
