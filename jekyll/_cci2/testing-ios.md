@@ -76,7 +76,7 @@ example of a minimal config in the
 
 It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI and that all dependencies are installed. Below is a sample of a simple `Gemfile`:
 
-```
+```ruby
 # Gemfile
 source "https://rubygems.org"
 gem 'fastlane'
@@ -89,7 +89,7 @@ After you have created a `Gemfile` locally, you will need to run `bundle install
 
 When using Fastlane in your CircleCI project, we recommend adding the following to beginning of your `Fastfile`:
 
-```
+```ruby
 # fastlane/Fastfile
 
 ...
@@ -114,7 +114,7 @@ new code signing certificates or provisioning profiles.
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
 
-```
+```ruby
 # fastlane/Fastfile
 default_platform :ios
 
@@ -207,6 +207,7 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
 ```yaml
+# ...
 run:
   name: Set Ruby Version
   command: echo 'chruby ruby-2.6' >> ~/.bash_profile
@@ -223,6 +224,7 @@ To specify a version of Ruby to use, there are two options. You can [create a fi
 If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
 ```yaml
+# ...
 run:
   name: Set Ruby Version
   command:  echo "ruby-2.4" > ~/.ruby-version
@@ -241,7 +243,7 @@ To make sure the version of CocoaPods that you use locally is also used
 in your CircleCI builds, we suggest creating a Gemfile in your iOS
 project and adding the CocoaPods version to it:
 
-```
+```ruby
 source 'https://rubygems.org'
 
 gem 'cocoapods', '= 1.3.0'
@@ -249,40 +251,38 @@ gem 'cocoapods', '= 1.3.0'
 
 Then you can install these using bundler:
 
-{% raw %}
+```yaml
+steps:
+  - restore_cache:
+      key: 1-gems-{{ checksum "Gemfile.lock" }}
+  - run: bundle check || bundle install --path vendor/bundle
+  - save_cache:
+      key: 1-gems-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
 ```
-    steps:
-      - restore_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
-
-      - run: bundle check || bundle install --path vendor/bundle
-
-      - save_cache:
-          key: 1-gems-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-```
-{% endraw %}
 
 You can then ensure you are using those, by prefixing commands with `bundle exec`:
 
-```
-    steps:
-      - run: bundle exec pod install
+```yaml
+# ...
+steps:
+  - run: bundle exec pod install
 ```
 
 ## Using Homebrew
 
 [Homebrew](http://brew.sh/) is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency you require to complete your build. For example:
 
-```
-    steps:
-      - run:
-          name: Install cowsay
-          command: brew install cowsay
-      - run:
-          name: cowsay hi
-          command: cowsay Hi!
+```yaml
+# ...
+steps:
+  - run:
+      name: Install cowsay
+      command: brew install cowsay
+  - run:
+      name: cowsay hi
+      command: cowsay Hi!
 ```
 
 It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
@@ -306,10 +306,11 @@ To pre-start the simulator, add the following to your
 simulator with iOS 13.2:
 
 ```yaml
-    steps:
-      - run:
-          name: pre-start simulator
-          command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+# ...
+steps:
+  - run:
+      name: pre-start simulator
+      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7
@@ -326,9 +327,9 @@ Often if your `scan` step fails, for example due to a test runner timeout, it is
 
 ```yaml
 steps:
-  # ...
-  - store_artifacts:
-    path: ~/Library/Logs/DiagnosticReports
+# ...
+- store_artifacts:
+  path: ~/Library/Logs/DiagnosticReports
 ```
 
 ### Optimzing Fastlane
