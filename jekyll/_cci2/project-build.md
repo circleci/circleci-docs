@@ -15,7 +15,7 @@ After a software repository on GitHub or Bitbucket is authorized and added as a 
 
 ## Adding Projects
 
-A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow any projects you have access to.
+A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select **Add Project** from the CircleCI application to enter the Projects dashboard, from where you can set up and follow any projects you have access to.
 
 On the Projects Dashboard, you can either:
 * _Set Up_ any project that you are the owner of in your VCS 
