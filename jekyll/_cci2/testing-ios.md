@@ -23,7 +23,7 @@ There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tu
 
 Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environement stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
-Periodically, we will update the version of macOS the image includes to ensure the build environment is as update to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the build environment is kept stable.
+Periodically, we will update the version of macOS each image includes to ensure the build environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the build environment is kept stable.
 
 We announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
@@ -51,13 +51,13 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
 ## Getting Started
 
-Select a macOS project repository you would like to build on the Add Projects page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
+Select a macOS project repository you would like to build from the **Add Projects** page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
 
 We highly recommend using [Fastlane](https://fastlane.tools) to build and sign your apps in CircleCI. Fastlane requires minimal configuration in most cases and simplifies the build-test-deploy process.
 
 ### Setting Up Your Xcode Project
 
-After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already by marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
+After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already be marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
 
 1. In Xcode, choose Product -> Scheme -> Manage Schemes
 2. Select the "Shared" option for the scheme to share, and click Close
@@ -69,7 +69,7 @@ example of a minimal config in the
 
 ## Using Fastlane
 
-[Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as it simplifies the setup and automation of the build, test and deploy process. Additionally, it also allows parity between local and CircleCI builds.
+[Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as it simplifies the setup and automation of the build, test and deploy process. Additionally, it allows parity between local and CircleCI builds.
 
 ### Adding a Gemfile
 {:.no_toc}
@@ -196,7 +196,7 @@ For more information on how to get started with Fastlane Match, please see our [
 
 ## Using Ruby
 
-Our macOS images contain multiple versions of Ruby. The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The version of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
+Our macOS images contain multiple versions of Ruby. The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The versions of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
 If you want to run steps with a version of Ruby that is listed as "available to chruby" in the manifest, then you can use [`chruby`](https://github.com/postmodern/chruby) to do so.
 
@@ -216,7 +216,7 @@ Replace `2.6` with the version of Ruby required - you do not need to specify the
 
 ### Images using macOS 10.14 (Xcode 11.1) and earlier
 
-The images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
+Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
 
 To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). 
 
@@ -322,7 +322,7 @@ image:
 ### Collecting iOS Simulator Crash Reports
 {:.no_toc}
 
-Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. If your app has crashed in the Simulator during a test run, then collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
+Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
 
 ```yaml
 steps:
