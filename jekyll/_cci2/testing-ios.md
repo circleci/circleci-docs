@@ -33,7 +33,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
  `11.4.1` | Xcode 11.4.1 (Build 11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)
- `11.4.0` | Xcode 11.4 (Build 11E146)       | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2701/index.html)
+ `11.4.0` | Xcode 11.4 (Build 11E146)       | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2796/index.html)
  `11.3.1` | Xcode 11.3.1 (Build 11C505)     | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
  `11.3.0` | Xcode 11.3 (Build 11C29)        | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
  `11.2.1` | Xcode 11.2.1 (Build 11B500)     | 10.15.0   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
@@ -59,7 +59,7 @@ We highly recommend using [Fastlane](https://fastlane.tools) to build and sign y
 
 After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already by marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
 
-1. Choose Product -> Scheme -> Manage Schemes
+1. In Xcode, choose Product -> Scheme -> Manage Schemes
 2. Select the "Shared" option for the scheme to share, and click Close
 3. Ensure the `myproject.xcodeproj/xcshareddata/xcschemes` directory is checked into your Git repository and push the changes
 
@@ -186,7 +186,7 @@ workflows:
             - build-and-test
 ```
 
-The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs, and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
+The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 
 ### Code Signing with Fastlane Match
 
@@ -305,7 +305,7 @@ To pre-start the simulator, add the following to your
 `config.yml` file, assuming that you are running your tests on an iPhone 11 Pro
 simulator with iOS 13.2:
 
-```
+```yaml
     steps:
       - run:
           name: pre-start simulator
