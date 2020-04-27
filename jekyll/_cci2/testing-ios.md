@@ -51,7 +51,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
 ## Getting Started
 
-Select a macOS project repository you would like to build on the Add Projects page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
+Select a macOS project repository you would like to build from the **Add Projects** page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
 
 We highly recommend using [Fastlane](https://fastlane.tools) to build and sign your apps in CircleCI. Fastlane requires minimal configuration in most cases and simplifies the build-test-deploy process.
 
