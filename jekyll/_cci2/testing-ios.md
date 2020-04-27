@@ -69,7 +69,7 @@ example of a minimal config in the
 
 ## Using Fastlane
 
-[Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as it simplifies the setup and automation of the build, test and deploy process. Additionally, it also allows parity between local and CircleCI builds.
+[Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as it simplifies the setup and automation of the build, test and deploy process. Additionally, it allows parity between local and CircleCI builds.
 
 ### Adding a Gemfile
 {:.no_toc}
