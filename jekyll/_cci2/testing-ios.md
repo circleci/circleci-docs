@@ -57,7 +57,7 @@ We highly recommend using [Fastlane](https://fastlane.tools) to build and sign y
 
 ### Setting Up Your Xcode Project
 
-After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already by marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
+After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already be marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
 
 1. Choose Product -> Scheme -> Manage Schemes
 2. Select the "Shared" option for the scheme to share, and click Close
