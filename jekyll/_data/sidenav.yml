@@ -269,6 +269,8 @@ en:
           link: 2.0/deployment-integrations/
         - name: Deployment Examples
           link: 2.0/deployment-examples/
+        - name: Deploying iOS Apps
+          link: 2.0/deploying-ios/
         - name: Publishing Snap Packages
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
