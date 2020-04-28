@@ -32,7 +32,7 @@ cp $temp_dir/$source_relative_path/* $target_relative_path/
 # - 目時
 # {:toc}
 function fix_broken_toc () {
-    perl -p -e 's/(^.+)({:toc})/\1\n\2/' $target_relative_path/*
+    perl -p -i -e 's/(^.+)({:toc})/\1\n\2/' $target_relative_path/*
 }
 
 fix_broken_toc
