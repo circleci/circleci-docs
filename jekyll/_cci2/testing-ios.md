@@ -478,4 +478,4 @@ If you are facing build failures while executing your jobs, check out our [suppo
 for a full example of how to build, test, sign and deploy an iOS project
 using Fastlane on CircleCI.
 - See the [iOS Project Tutorial]( {{ site.baseurl }}/2.0/ios-tutorial/) for a config walkthrough.
-- See the [iOS code signing documentation][({{ site.baseurl}}/2.0/ios-codesigning/) to learn how to configure Fastlane Match for your project.
+- See the [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/) to learn how to configure Fastlane Match for your project.
