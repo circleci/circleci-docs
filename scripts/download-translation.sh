@@ -17,8 +17,22 @@ echo $(pwd)
 unzip $file_name
 popd
 
-
 target_relative_path="../jekyll/_cci2_ja/"
 source_relative_path="master/jekyll/_cci2/ja/"
 
 cp $temp_dir/$source_relative_path/* $target_relative_path/
+
+# Fixing broken TOC
+# Crowding sometimes squashes new line preceeded by {:toc}
+# e.g.
+# Bad:
+# - 目次 {:toc}
+#
+# Good:
+# - 目時
+# {:toc}
+function fix_broken_toc () {
+    perl -p -e 's/(^.+)({:toc})/\1\n\2/' $target_relative_path/*
+}
+
+fix_broken_toc
