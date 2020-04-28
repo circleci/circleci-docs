@@ -192,7 +192,7 @@ The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLan
 
 We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment. 
 
-For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation][({{ site.baseurl}}/2.0/ios-codesigning/).
+For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/).
 
 ## Using Ruby
 
