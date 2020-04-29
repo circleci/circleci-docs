@@ -198,7 +198,7 @@ command | N | String or List | The command used as pid 1 (or args for entrypoint
 user | N | String | Which user to run commands as within the Docker container
 environment | N | Map | A map of environment variable names and values
 auth | N | Map | Authentication for registries using standard `docker login` credentials
-aws_auth | N | Map | Authentication for AWS EC2 Container Registry (ECR)
+aws_auth | N | Map | Authentication for AWS Elastic Container Registry (ECR)
 {: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
