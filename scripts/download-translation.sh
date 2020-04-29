@@ -24,7 +24,7 @@ cp $temp_dir/$source_relative_path/* $target_relative_path/
 
 # Fixing broken TOC
 # Crowding sometimes squashes new line preceeded by {:toc}
-# e.g.
+#
 # Bad:
 # - 目次 {:toc}
 #
@@ -35,4 +35,18 @@ function fix_broken_toc () {
     perl -p -i -e 's/(^.+)({:toc})/\1\n\2/' $target_relative_path/*
 }
 
+# Fixing broken no TOC
+# Crowding sometimes squashes new line followed by {:.no_toc}
+#
+# Bad:
+# {:.no_toc} キャッシュ サイズは...
+#
+# Good:
+# {:.no_toc}
+# キャッシュ サイズは...
+function fix_broken_no_toc () {
+    perl -p -i -e 's/\{:.no_toc\}(.+)/{:.no_toc}\n\1/' $target_relative_path/*
+}
+
 fix_broken_toc
+fix_broken_no_toc
