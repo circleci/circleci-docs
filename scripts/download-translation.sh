@@ -48,5 +48,20 @@ function fix_broken_no_toc () {
     perl -p -i -e 's/\{:.no_toc\}(.+)/{:.no_toc}\n\1/' $target_relative_path/*
 }
 
+# Fixing broken table with table-striped
+# Crowding sometimes squashes new line followed by {: class="table table-striped"}
+#
+# Bad:
+# | Nomad クライアント | 80、443 | API アクセス | {: class="table table-striped"}
+#
+# Good:
+# | Nomad クライアント | 80、443 | API アクセス |
+# {: class="table table-striped"}
+#
+function fix_bad_table-striped_tag () {
+    perl -p -i -e 's/(.+){: class=\"table table-striped\"}/\1\n{: class=\"table table-striped\"}/' $target_relative_path/*
+}
+
 fix_broken_toc
 fix_broken_no_toc
+fix_bad_table-striped_tag
