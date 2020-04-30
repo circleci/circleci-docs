@@ -71,7 +71,7 @@ Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr
 
 ### Build and Push the Docker image to AWS ECR
 
-The `build_and_push_image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
+The `build-and-push-image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
 
 ```yaml
 version: 2.1
@@ -83,7 +83,7 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           tag: "${CIRCLE_SHA1}"
 ```
@@ -91,7 +91,7 @@ workflows:
 ### Deploy the new Docker image to an existing AWS ECS service
 The `deploy-service-update` job of the aws-ecs orb creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions, and deploys the new task definition to the specified ECS service. If you would like more information about the CircleCI AWS-ECS orb, go to: https://circleci.com/orbs/registry/orb/circleci/aws-ecs
 
-**Note** The `deploy-service-update` job depends on `build_and_push_image` because of the `requires` key.
+**Note** The `deploy-service-update` job depends on `build-and-push-image` because of the `requires` key.
 
 ```yaml
 version: 2.1
@@ -103,12 +103,12 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build_and_push_image # only run this job once aws-ecr/build_and_push_image has completed
+            - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"

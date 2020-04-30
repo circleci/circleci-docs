@@ -90,14 +90,14 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
           repo: '${MY_APP_PREFIX}'
           region: '${AWS_REGION}'
           tag: '${CIRCLE_SHA1}'
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build_and_push_image
+            - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
           cluster-name: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
