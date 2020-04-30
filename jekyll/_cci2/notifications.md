@@ -103,7 +103,7 @@ workflows:
       - build
 ```
 
-To get started with enabling notifications in Slac *for a specific project*, head to your *Settings* page for your project. Click on *Slack Integration* in the sidebar and follow the steps to setup Slack.
+To get started with enabling notifications in Slack *for a specific project*, head to the *Settings* page for your project. Click on *Slack Integration* in the sidebar and follow the steps to setup Slack.
 
 ![]({{ site.baseurl }}/assets/img/docs/notification-page-slack.png)
 
