@@ -153,7 +153,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
     workflows:
       build_and_push_image:
         jobs:
-          - aws-ecr/build_and_push_image:
+          - aws-ecr/build-and-push-image:
               account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
               aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
               aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
@@ -178,7 +178,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
     workflows:
       build-and-deploy:
         jobs:
-          - aws-ecr/build_and_push_image:
+          - aws-ecr/build-and-push-image:
               account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
               repo: '${MY_APP_PREFIX}'
               region: '${AWS_REGION}'
@@ -186,7 +186,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
       '
           - aws-ecs/deploy-service-update:
               requires:
-                - aws-ecr/build_and_push_image
+                - aws-ecr/build-and-push-image
               family: '${MY_APP_PREFIX}-service'
               cluster-name: '${MY_APP_PREFIX}-cluster'
               container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
