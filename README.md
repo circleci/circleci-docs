@@ -27,8 +27,8 @@ out.
 ## Documentation Components
 
 This repository houses and manages several arms of documentation for CircleCI.
-This section will provide a brief overview of each section and how to get
-started.
+This section will provide a brief overview of each "component" and how to get 
+started with making changes.
 
 ### `/Jekyll` - Main Site
 
@@ -36,7 +36,8 @@ This is the main [CircleCI documentation site](https://circleci.com/docs/2.0/).
 This is built with Jekyll and houses the majority of our documentation. Other
 branches of documentation (`src-api`, `src-crg`, etc) eventually get moved into
 this folder (in our build process) and integrated into the Jekyll Site. Follow
-the [local development guide](./docs/local-development.md).
+the [local development guide](./docs/local-development.md) to get started with
+building the Jekyll site.
 
 ### `/src-api` - API V2 Build Tooling
 
@@ -60,22 +61,24 @@ compiled and moved into the Jekyll site.
 
 ### `/src-js` - Javascript Files
 
-Some JavaScript files that make use of webpack to build a bundled Javascript
+Some JavaScript files that make use of Webpack  and bundles a Javascript
 file that eventually gets loaded into Jekyll. Our JavaScript files are
 splintered between Jekyll's assets folder and here. We should be navigating
-toward one solution that will eventually solve this.
+toward one solution that will eventually aggregate all JS source code in one place.
 
 ### `/src-shared` - Shared Assets with circleci.com
 
-This is a git sub-module for shared content with the main [CircleCI
-website.](https://circleci.com/docs/). The `js` folder within is symlinked into
-Jekyll's assets folder for JavaScript. Eventually, the JS here could be
-integrated with a better JS bundle solution per above.
+This is a *git sub-module* for shared content with the main [CircleCI
+website](https://circleci.com/docs/). The `js` folder within is symlinked into
+Jekyll's assets folder for JavaScript. Eventually, the JS here could/should be
+integrated with a better JS bundle solution per above. Please see the [local
+development](./docs/local-development.md) guide for more information about
+pulling in the updates for the sub-module.
 
 ### Server Documentation
 
 Docs for CircleCI Server Administration are built in a slightly different way;
-please refer to the [server built documentation](./docs/server-docs.md).
+please refer to the [server built documentation](./docs/server-docs.md)
 
 ## License Information
 Documentation (guides, references, and associated images) is licensed as

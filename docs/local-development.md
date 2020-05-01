@@ -43,7 +43,9 @@ To get a local copy of our docs, run the following commands:
 ```bash
 git clone https://github.com/circleci/circleci-docs.git
 cd circleci-docs/jekyll
-jekyll serve -Iw
+# update the submodule we use for shared assets:
+git submodule update --init src-shared
+JEKYLL serve -Iw
 ```
 
 Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>. `-w` tells Jekyll to watch for changes and rebuild, while `-I` enables an incremental rebuild to keep things efficient.
