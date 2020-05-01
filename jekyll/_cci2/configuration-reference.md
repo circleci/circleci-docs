@@ -43,7 +43,7 @@ commands | N | Map | A map of command names to command definitions. See the [Com
 
 The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
 
-```
+```yaml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -68,6 +68,7 @@ description | N | String | A string that describes the purpose of the command.
 Example:
 
 ```yaml
+version: 2.1
 commands:
   sayhello:
     description: "A very simple command for demonstration purposes"
@@ -167,6 +168,7 @@ If `parallelism` is set to N > 1, then N independent executors will be set up an
 Example:
 
 ```yaml
+version: 2.1
 jobs:
   build:
     docker:
@@ -226,6 +228,7 @@ You can specify image versions using tags or digest. You can use any public imag
 Example:
 
 ```yaml
+version: 2.1
 jobs:
   build:
     docker:
@@ -246,6 +249,7 @@ jobs:
 If you are using a private image, you can specify the username and password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
 
 ```yaml
+version: 2.1
 jobs:
   build:
     docker:
@@ -257,7 +261,8 @@ jobs:
 
 Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
 
-```
+```yaml
+version: 2.1
 jobs:
   build:
     docker:
@@ -269,7 +274,8 @@ jobs:
 
 It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
 
-```
+```yaml
+version: 2.1
 jobs:
   myjob:
     docker:
@@ -289,7 +295,6 @@ Key | Required | Type | Description
 image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
 docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 {: class="table table-striped"}
-
 
 Example:
 
@@ -366,6 +371,7 @@ xcode | Y | String | The version of Xcode that is installed on the virtual machi
 **Example:** Use a macOS virtual machine with Xcode version 11.3:
 
 ```yaml
+version: 2.1
 jobs:
   build:
     macos:
@@ -377,15 +383,12 @@ jobs:
 
 CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
 
-
 **Example:** Use a windows executor to run a simple job.
 
 ```yaml
 version: 2.1
-
 orbs:
   win: circleci/windows@2.3.0
-
 jobs:
   build:
     executor: win/default
@@ -406,7 +409,8 @@ ignore | N | List | List of branches to ignore
 
 Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
 
-``` YAML
+``` yaml
+version: 2.1
 jobs:
   build:
     branches:
@@ -417,7 +421,8 @@ jobs:
 
 In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
 
-``` YAML
+``` yaml
+version: 2.1
 jobs:
   build:
     branches:
@@ -458,6 +463,7 @@ xlarge                | 8     | 16GB
 ###### Example Usage
 
 ```yaml
+version: 2.1
 jobs:
   build:
     docker:
@@ -472,7 +478,9 @@ jobs:
 {% include snippets/machine-resource-table.md %}
 
 ###### Example Usage
+
 ```yaml
+version: 2.1
 jobs:
   build:
     machine:
@@ -491,7 +499,9 @@ large<sup>(2)</sup>| 8     | 16GB
 {: class="table table-striped"}
 
 ###### Example Usage
+
 ```yaml
+version: 2.1
 jobs:
   build:
     macos:
@@ -512,12 +522,11 @@ xlarge            | 16    | 60GB
 {: class="table table-striped"}
 
 ###### Example Usage
+
 ```yaml
 version: 2.1
-
 orbs:
   win: circleci/windows@2.3.0
-
 jobs:
   build:
     executor:
@@ -540,9 +549,9 @@ gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
 ###### Example Usage
+
 ```yaml
 version: 2.1
-
 jobs:
   build:
     machine:
@@ -563,11 +572,11 @@ windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 |
 {: class="table table-striped"}
 
 ###### Example Usage
+
 ```yaml
 version: 2.1
 orbs:
   win: circleci/windows@2.3.0
-
 jobs:
   build:
     executor: win/gpu-nvidia
@@ -586,6 +595,7 @@ If you want to confirm how much memory you have been allocated, you can check th
 The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
 
 ```yaml
+version: 2.1
 jobs:
   build:
     working_directory: ~/canary-python
@@ -601,7 +611,8 @@ Here `run` is a step type. The `name` attribute is used by the UI for display pu
 
 Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
 
-```
+```yaml
+version: 2.1
 jobs:
   build:
     steps:
@@ -612,7 +623,8 @@ In its short form, the `run` step allows us to directly specify which `command` 
 
 Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
 
-```
+```yaml
+version: 2.1
 jobs:
   build:
     steps:
@@ -648,7 +660,8 @@ when | N | String | [Specify when to enable or disable the step](#the-when-attri
 
 Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell:
 
-``` YAML
+``` yaml
+version: 2.1
 - run:
     command: |
       echo Running test
@@ -673,14 +686,15 @@ Descriptions of the `-eo pipefail` options are provided below.
 > Exit immediately if a pipeline (which may consist of a single simple command), a subshell command enclosed in parentheses, or one of the commands executed as part of a command list enclosed by braces exits with a non-zero status.
 
 So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
-``` YAML
+
+``` yaml
+version: 2.1
 - run:
     command: |
       echo Running test
       set +e
       mkdir -p /tmp/test-results
       make test
-
 - run:
     shell: /bin/sh
     command: |
@@ -694,7 +708,9 @@ So if in the previous example `mkdir` failed to create a directory and returned 
 > If pipefail is enabled, the pipeline’s return status is the value of the last (rightmost) command to exit with a non-zero status, or zero if all commands exit successfully. The shell waits for all commands in the pipeline to terminate before returning a value.
 
 For example:
-``` YAML
+
+``` yaml
+version: 2.1
 - run: make test | tee test-output.log
 ```
 
@@ -712,7 +728,8 @@ For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using
 
 The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
 
-``` YAML
+``` yaml
+version: 2.1
 - run:
     name: Running X virtual framebuffer
     command: Xvfb :99 -screen 0 1280x1024x24
@@ -725,9 +742,9 @@ The `background` attribute enables you to configure commands to run in the backg
 
 `run` has a very convenient shorthand syntax:
 
-``` YAML
+``` yaml
+version: 2.1
 - run: make test
-
 # shorthanded command can also have multiple lines
 - run: |
     mkdir -p /tmp/test-results
@@ -750,14 +767,13 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 **Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a step has failed previously.
 
-``` YAML
+``` yaml
+version: 2.1
 - run:
     name: Upload CodeCov.io Data
     command: bash <(curl -s https://codecov.io/bash) -F unittests
     when: always # Uploads code coverage results, pass or fail
 ```
-
-
 
 ###### Ending a Job from within a `step`
 
@@ -765,7 +781,8 @@ A job can exit without failing by using using `run: circleci-agent step halt`. T
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
-``` YAML
+``` yaml
+version: 2.1
 run: |
     if [ "$CIRCLE_BRANCH" = "develop" ]; then
         circleci-agent step halt
@@ -775,6 +792,7 @@ run: |
 ###### Example
 
 ```yaml
+version: 2.1
 steps:
   - run:
       name: Testing application
@@ -809,7 +827,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 
 ###### *Example*
 
-```
+```yaml
 version: 2.1
 
 jobs: # conditional steps may also be defined in `commands:`
@@ -851,13 +869,15 @@ If `path` already exists and is:
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
 
-``` YAML
+``` yaml
+version: 2.1
 - checkout
 ```
 
 **Note:** CircleCI does not check out submodules. If your project requires submodules, add `run` steps with appropriate commands as shown in the following example:
 
-``` YAML
+``` yaml
+version: 2.1
 - checkout
 - run: git submodule sync
 - run: git submodule update --init
@@ -879,7 +899,7 @@ version | N        | String | Version string of Docker you would like to use (de
 
 **Notes**:
 
-- A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.
+- A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI with your request.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -929,7 +949,8 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 ###### _Example_
 
 {% raw %}
-``` YAML
+``` yaml
+version: 2.1
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
     paths:
@@ -956,20 +977,18 @@ A key is searched against existing keys as a prefix.
 
 For example:
 
-``` YAML
+``` yaml
+version: 2.1
 steps:
   - save_cache:
       key: v1-myapp-cache
       paths:
         - ~/d1
-
   - save_cache:
       key: v1-myapp-cache-new
       paths:
         - ~/d2
-
   - run: rm -f ~/d1 ~/d2
-
   - restore_cache:
       key: v1-myapp-cache
 ```
@@ -985,7 +1004,8 @@ A path is not required here because the cache will be restored to the location f
 ###### Example
 
 {% raw %}
-``` YAML
+``` yaml
+version: 2.1
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
@@ -1022,7 +1042,8 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 ###### Example
 
-``` YAML
+``` yaml
+version: 2.1
 - deploy:
     command: |
       if [ "${CIRCLE_BRANCH}" == "master" ]; then
@@ -1048,7 +1069,8 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ###### Example
 
-``` YAML
+``` yaml
+version: 2.1
 - run:
     name: Build the Jekyll site
     command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
@@ -1086,7 +1108,8 @@ test-results
 
 `config.yml` syntax:
 
-``` YAML
+``` yaml
+version: 2.1
 - store_test_results:
     path: test-results
 ```
@@ -1109,7 +1132,8 @@ The root key is a directory on the container which is taken to be the root direc
 
 For example, the following step syntax persists the specified paths from `/tmp/dir` into the workspace, relative to the directory `/tmp/dir`.
 
-``` YAML
+``` yaml
+version: 2.1
 - persist_to_workspace:
     root: /tmp/dir
     paths:
@@ -1126,7 +1150,8 @@ After this step completes, the following directories are added to the workspace:
 
 ###### _Example for paths Key_
 
-``` YAML
+``` yaml
+version: 2.1
 - persist_to_workspace:
     root: /tmp/workspace
     paths:
@@ -1165,7 +1190,8 @@ at | Y | String | Directory to attach the workspace to.
 
 ###### _Example_
 
-``` YAML
+``` yaml
+version: 2.1
 - attach_workspace:
     at: /tmp/workspace
 ```
@@ -1198,6 +1224,7 @@ fingerprints | N | List | List of fingerprints corresponding to the keys to be a
 {: class="table table-striped"}
 
 ```yaml
+version: 2.1
 steps:
   - add_ssh_keys:
       fingerprints:
@@ -1264,7 +1291,8 @@ triggers | N | Array | Should currently be `schedule`.
 ##### **`schedule`**
 A workflow may have a `schedule` indicating it runs at a certain time, for example a nightly build that runs every day at 12am UTC:
 
-```
+```yaml
+version: 2.1
 workflows:
    version: 2
    nightly:
@@ -1417,6 +1445,7 @@ alias | N | String | An alias for the matrix, usable from another job's `require
 The following is a basic example of using matrix jobs.
 
 ```yaml
+version: 2.1
 workflows:
   workflow:
     jobs:
@@ -1430,6 +1459,7 @@ workflows:
 This expands to 9 different `build` jobs, and could be equivalently written as:
 
 ```yaml
+version: 2.1
 workflows:
   workflow:
     jobs:
@@ -1458,6 +1488,7 @@ Sometimes you may wish to run a job with every combination of arguments _except_
 some value or values. You can use an `exclude` stanza to achieve this:
 
 ```yaml
+version: 2.1
 workflows:
   workflow:
     jobs:
@@ -1481,6 +1512,7 @@ To `require` an entire matrix (every job within the matrix), use its `alias`.
 The `alias` defaults to the name of the job being invoked.
 
 ```yaml
+version: 2.1
 workflows:
   workflow:
     jobs:
@@ -1502,6 +1534,7 @@ which can be used to generate more complex workflows. For example, here is a
 matrix.
 
 ```yaml
+version: 2.1
 workflows:
   workflow:
     jobs:
@@ -1522,6 +1555,7 @@ workflows:
 This workflow will expand to:
 
 ```yaml
+version: 2.1
 workflows:
   workflow:
     jobs:
@@ -1551,19 +1585,16 @@ The example configuration below uses a pipeline parameter, `run_integration_test
 
 ```yaml
 version: 2.1
-
 parameters:
   run_integration_tests:
     type: boolean
     default: false
-
 workflows:
   version: 2
   integration_tests:
     when: << pipeline.parameters.run_integration_tests >>
     jobs:
       - mytestjob
-
 jobs:
 ...
 ```
@@ -1585,7 +1616,7 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 {% raw %}
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     docker:
