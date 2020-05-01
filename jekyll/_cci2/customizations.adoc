@@ -128,7 +128,7 @@ _Introduced in CircleCI Server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
-NOTE: The resources for the `machine` executor can't be changed from this setting. To change the CPU and memory size, change the `AWS Instance Type` from the VM Provider section in the Management Console. See the <<vm-service#,VM Service>> guide for more details.
+NOTE: The resources for the `machine` executor can't be changed using the method described on this page. To change the CPU and memory size, change the `AWS Instance Type` from the VM Provider section in the Management Console. See the <<vm-service#,VM Service>> guide for more details.
 
 TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
 
