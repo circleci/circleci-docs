@@ -67,3 +67,4 @@ The description adds context
 that is critical for reviewers when giving feedback.
 
 For more tips, see GitHub's blog entry on [how to write the perfect pull request](https://github.com/blog/1943-how-to-write-the-perfect-pull-request).
+##
