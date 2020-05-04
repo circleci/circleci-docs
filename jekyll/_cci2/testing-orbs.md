@@ -131,7 +131,7 @@ orbs:
 ```
 {% endraw %}
 
-The result shown above may now be used in a custom script that tests for its structure relative to what is expected. This form of testing is useful for ensuring you do not break any contracts your orb interface has established with users of the orb, while also enabling you to test different parameter inputs to determine how these parameter imputs impact what is generated during config processing.
+The result shown above may now be used in a custom script that tests for its structure relative to what is expected. This form of testing is useful for ensuring you do not break any contracts your orb interface has established with users of the orb, while also enabling you to test different parameter inputs to determine how these parameter inputs impact what is generated during config processing.
 
 ### Runtime Testing
 
