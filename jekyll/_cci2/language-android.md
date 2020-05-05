@@ -17,7 +17,7 @@ following sections.
 
 This guide provides an introduction to Android development on CircleCI. If you
 are looking for a `.circleci/config.yml` template for Android, see the [Sample
-Configuration](#sample-configuration) section of this document.
+Configuration](#sample-configuration) section of this sample application.
 
 **Note:** Running the Android emulator is not supported by the type of
 virtualization CircleCI uses on Linux. To run emulator tests from a job,
@@ -41,37 +41,23 @@ Studio](https://developer.android.com/studio).
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1 # set the version of your config to enable use of orbs.
+
+orbs: # orbs provide lots of bundled functionality for your specific config.
+ android: circleci/android@0.2.0
+
 jobs:
-  build:
-    working_directory: ~/code
-    docker:
-      - image: circleci/android:api-25-alpha
-    environment:
-      JVM_OPTS: -Xmx3200m
+  build: # setup a "build job
+    executor: android/android # set our executor using the `android` orb declared above
     steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-#      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-#         command: sudo chmod +x ./gradlew
+      - checkout # download your code from your VCS
       - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: app/build/reports
-          destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+          command: ./gradlew lint test # run a test run.
+
+workflows: 
+  build:
+    jobs:
+      - build 
 ```
 
 {% endraw %}
@@ -81,54 +67,34 @@ jobs:
 We always start with the version.
 
 ```yaml
-version: 2
+version: 2.1
 ```
 
-Next, we have a `jobs` key. Each job represents a phase in your
-Build-Test-Deploy process. Our sample app only needs a `build` job, so
-everything else is going to live under that key.
+In this sample application, we use the [Android
+orb](https://circleci.com/orbs/registry/orb/circleci/android). Next, we have a
+jobs key. Each job represents a phase in your Build-Test-Deploy process. Our
+sample app only needs a build job, so everything else is going to live under
+that key.
+ 
+For the Android orb, you can pull in the recommended CircleCI `cimg` base docker
+image for [android](https://hub.docker.com/r/cimg/android) simply by calling
+`android/android` under the `executor` key.
 
-In each job, we have the option of specifying a `working_directory`. This is the
-directory into which our code will be checked out, and this path will be used as
-the default working directory for the rest of the `job` unless otherwise
-specified.
 
 ```yaml
 jobs:
   build:
-    working_directory: ~/code
+    executor: android/android
 ```
 
-Directly beneath `working_directory`, we can specify container images under a
-`docker` key.
-
-```yaml
-    docker:
-      - image: circleci/android:api-25-alpha
-```
-
-We use the CircleCI-provided Android image with the `api-25-alpha` tag. See
-[Docker Images](#docker-images) below for more information about what images are
-available.
-
-Now we’ll add several `steps` within the `build` job.
-
-We start with `checkout` so we can operate on the codebase.
-
-Next we pull down the cache, if present. If this is your first run, or if you've
-changed either of your `build.gradle` files, this won't do anything. We run
-`./gradlew androidDependencies` next to pull down the project's dependencies.
-Normally you never call this task directly since it's done automatically when
-it's needed, but calling it directly allows us to insert a `save_cache` step
-that will store the dependencies in order to speed things up for next time.
 
 Then `./gradlew lint test` runs the unit tests, and runs the built in linting
 tools to check your code for style issues.
 
-We then upload the build reports as job artifacts, and we upload the test
-metadata (XML) for CircleCI to process.
-
 ## Docker Images
+
+While you can use the android orb to get a default executor, docker images can
+provide more granulate control over what you need for your project.
 
 For convenience, CircleCI provides a set of Docker images for building Android
 apps. These pre-built images are available in the [CircleCI org on Docker
@@ -222,7 +188,7 @@ bucket to the CircleCI artifacts folder. Be sure to replace `BUCKET_NAME` and
 `OBJECT_NAME` with project-specific names.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   test:
     docker:
@@ -258,14 +224,14 @@ jobs:
 For more details on using `gcloud` to run Firebase, see the [official
 documentation](https://firebase.google.com/docs/test-lab/android/command-line).
 
-
+  
 ## Deployment
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for
 examples of deploy target configurations.
-
+    
 ## Troubleshooting
-
+    
 ### Handling Out Of Memory Errors
 
 You might run into out of memory (oom) errors with your build. To get acquainted
@@ -273,7 +239,7 @@ with the basics of customizing the JVM's memory usage, consider reading the
 [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document.
 
 If you are using [Robolectric](http://robolectric.org/) for testing you may need
-to make tweaks to gradle's use of memory. When the gradle vm is forked for tests
+to make tweaks to Gradle's use of memory. When the gradle vm is forked for tests
 it does not receive previously customized JVM memory parameters. You will need
 to supply Gradle with additional JVM heap for tests in your `build.gradle` file
 by adding `android.testOptions.unitTests.all { maxHeapSize = "1024m" }`. You can
