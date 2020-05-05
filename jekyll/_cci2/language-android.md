@@ -38,58 +38,43 @@ Studio](https://developer.android.com/studio).
 
 ## Sample Configuration
 
+The below is a sample configuration for an [Android sample application](https://github.com/CircleCI-Public/MoodTracker/blob/master/.circleci/config.yml).
+
 {% raw %}
 
 ```yaml
 version: 2.1 # set the version of your config to enable use of orbs.
 
 orbs: # orbs provide lots of bundled functionality for your specific config.
- android: circleci/android@0.2.0
+ android: circleci/android@0.2.1
 
 jobs:
   build: # setup a "build job
     executor: android/android # set our executor using the `android` orb declared above
     steps:
       - checkout # download your code from your VCS
+      - android/restore-build-cache # restore dependency cache if it exists.
       - run:
-          command: ./gradlew lint test # run a test run.
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - android/save-build-cache # Cache our dependencies
+      - run:
+          command: ./gradlew lint test
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 
-workflows: 
+workflows:
   build:
     jobs:
       - build 
+
 ```
 
 {% endraw %}
-
-## Config Walkthrough
-
-We always start with the version.
-
-```yaml
-version: 2.1
-```
-
-In this sample application, we use the [Android
-orb](https://circleci.com/orbs/registry/orb/circleci/android). Next, we have a
-jobs key. Each job represents a phase in your Build-Test-Deploy process. Our
-sample app only needs a build job, so everything else is going to live under
-that key.
- 
-For the Android orb, you can pull in the recommended CircleCI `cimg` base docker
-image for [android](https://hub.docker.com/r/cimg/android) simply by calling
-`android/android` under the `executor` key.
-
-
-```yaml
-jobs:
-  build:
-    executor: android/android
-```
-
-
-Then `./gradlew lint test` runs the unit tests, and runs the built in linting
-tools to check your code for style issues.
 
 ## Docker Images
 
