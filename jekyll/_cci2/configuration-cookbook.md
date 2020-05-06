@@ -14,7 +14,7 @@ The *CircleCI Configuration Cookbook* is a collection of individual use cases (r
 
 ## Introduction
 
-This page, and its associated "recipes," describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. Whenever possible, CircleCI orbs will be used in these recipes since this will simplify the steps required to perform these tasks.
+This page, and its associated recipes, describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. Whenever possible, CircleCI orbs will be used in these recipes since this will simplify the steps required to perform these tasks.
 
 ### What Are CircleCI Orbs?
 
@@ -36,23 +36,25 @@ workflows:
       - hello/hello-build
 ```
 
-For more detailed information about CircleCI orbs, please refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
+For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
 #### Configuring Your Environment for the CircleCI Platform and Orbs
 
 1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
-
-`version: 2.1`
+  
+```yml
+version: 2.1
+```
 
 **NOTE:** {% include snippets/enable-pipelines.md %}
 
-2) Add the orbs stanza below your version, which in turn imports the orb:
+1) Add the orbs stanza below your version, which in turn imports the orb (AWS EXS orb shown here as an example):
 
-```yaml
+```yml
 aws-ecs: circleci/aws-ecs@0.0.10
 ```
 
-3) Invoke the orbs element (e.g. `aws-ecs elements`) in your existing workflows and jobs.
+3) Invoke the orbs elements (e.g. commands, jobs) in your existing workflows and jobs. The available orb elements are listed on the relevant pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), along with usage examples.
 
 ### Configuration Recipes
 
@@ -65,6 +67,7 @@ Configuration Recipe | Description
 [Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#using-amazon-elastic-container-service-for-kubernetes-amazon-eks) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
 [Deploying Applications to Heroku](#deploying-applications-to-heroku) | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
 [Enabling Custom Slack Notifications in CircleCI Jobs](#enabling-custom-slack-notifications-in-circleci-jobs) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
+{: class="table table-striped"}
 
 ## Deploying Software Changes to Amazon ECS
 
