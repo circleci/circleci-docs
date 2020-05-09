@@ -6,9 +6,10 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 ## 1. Local Development with Docker (recommended)
 
 1. Install Docker for your platform: <https://docs.docker.com/engine/installation/>
-1. Clone the CircleCI docs repo: `git clone https://github.com/circleci/circleci-docs.git`
+1. Clone the CircleCI docs repo: `git clone --recurse-submodules https://github.com/circleci/circleci-docs.git`   
+_(If you already cloned the project and forgot `--recurse-submodules`, run `git submodule update --init`)_
 1. Run `npm install` to fetch dependencies
-1. Run `webpack-dev` to create needed js assets
+1. Run `npm run webpack-dev` to create needed js assets
 1. Run `docker-compose up`
 1. The docs site will now be running on <http://localhost:4000/docs/>
 
