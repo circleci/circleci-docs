@@ -54,4 +54,4 @@ For example, if we had software that was only compatible with Ubuntu 14.04 “Tr
 
 ## Unused Image cleanup
 
-This is a Jekyll plugin that can detect what images aren't being used in our docs anymore and moves them to `assets/imgs/docs/_unused/`. You can find the source code for the script in `jekyll/_plugins/find_unused_images.rb`. The plugin hooks into Jekyll's build process and is turned off by default. 
+This is a Jekyll plugin that can detect what images aren't being used in our docs anymore and moves them to `assets/img/docs/_unused/`. You can find the source code for the script in `jekyll/_plugins/find_unused_images.rb`. The plugin hooks into Jekyll's build process and is turned off by default. 
