@@ -143,8 +143,8 @@ jobs:
     steps:
       - *attach_workspace
       - checkout
-      - install-shared-assets
-      - ruby-deps # a `command` that is defined above
+      #- install-shared-assets
+      #- ruby-deps # a `command` that is defined above
       #- run:
       #    name: "Create landing folder for PDF output"
       #    command: mkdir -p /tmp/workspace/pdfs
