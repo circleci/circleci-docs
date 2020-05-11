@@ -139,8 +139,7 @@ jobs:
     #  name: ruby/default # we use the same ruby orb + tag across multiple jobs
     #  tag: '2.6.3-node-browsers'
     docker:
-      docker:
-        - image: asciidoctor/docker-asciidoctor
+      - image: asciidoctor/docker-asciidoctor
     steps:
       - *attach_workspace
       - checkout
