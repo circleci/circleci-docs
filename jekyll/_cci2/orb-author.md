@@ -40,7 +40,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 3) Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
 
-`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
+`echo 'version: "2.1"\ndescription: "a sample orb"' > /tmp/orb.yml`
 
 4) Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
 
