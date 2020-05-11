@@ -66,7 +66,7 @@ AWS_RESOURCE_NAME_PREFIX | 必須の AWS リソースのプレフィックスで
 
 ### Docker イメージをビルドして AWS ECR にプッシュする
 
-`build_and_push_image` ジョブは、デフォルトの場所 (チェックアウトディレクトリのルート) に Dockerfile から Docker イメージをビルドし、それを指定された ECR リポジトリにプッシュします。
+`build-and-push-image` ジョブは、デフォルトの場所 (チェックアウトディレクトリのルート) に Dockerfile から Docker イメージをビルドし、それを指定された ECR リポジトリにプッシュします。
 
 ```yaml
 version: 2.1
@@ -76,7 +76,7 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}
           .amazonaws.com"
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
@@ -89,7 +89,7 @@ workflows:
 
 aws-ecs Orb の `deploy-service-update` ジョブは、現在のタスク定義に基づきつつ、タスク定義のコンテナ定義で指定された新しい Docker イメージを使用して新しいタスク定義を作成し、この新しいタスク定義を指定された ECS サービスにデプロイします。 CircleCI AWS-ECS Orb の詳細については、https://circleci.com/orbs/registry/orb/circleci/aws-ecs を参照してください。
 
-**メモ：**`deploy-service-update` ジョブは、`requires` キーがあるため、`build_and_push_image` に依存します。
+**メモ：**`deploy-service-update` ジョブは、`requires` キーがあるため、`build-and-push-image` に依存します。
 
 ```yaml
 version: 2.1
@@ -102,7 +102,7 @@ workflows:
       - ...
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build_and_push_image
+            - aws-ecr/build-and-push-image
           aws-region: ${AWS_DEFAULT_REGION}
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
@@ -111,7 +111,7 @@ workflows:
 
 ### ワークフローを準備する
 
-ワークフローを使用して、`build_and_push_image` ジョブと `deploy-service-update` ジョブをリンクします。
+ワークフローを使用して、`build-and-push-image` ジョブと `deploy-service-update` ジョブをリンクします。
 
 ```yaml
 version: 2.1
@@ -121,7 +121,7 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}
           .amazonaws.com"
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
@@ -129,7 +129,7 @@ workflows:
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build_and_push_image
+            - aws-ecr/build-and-push-image
           aws-region: ${AWS_DEFAULT_REGION}
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
@@ -148,14 +148,14 @@ orbs:
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build_and_push_image:
+      - aws-ecr/build-and-push-image:
           account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
           region: ${AWS_DEFAULT_REGION}
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build_and_push_image
+            - aws-ecr/build-and-push-image
           aws-region: ${AWS_DEFAULT_REGION}
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
