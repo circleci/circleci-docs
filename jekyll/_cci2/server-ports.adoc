@@ -58,12 +58,16 @@ The following table defines the Services machine CPU, RAM, and disk space requir
 
 == Nomad Clients
 
-Nomad client machines run the CircleCI jobs that are scheduled by the Nomad Server on the Services machine. Following are the Minimum CPU, RAM, and disk space requirements per client:
+Nomad client machines run CircleCI jobs that are scheduled by the Nomad Server. The Minimum CPU, RAM, and disk space requirements per client are as follows:
 
 - CPU: 4 cores
 - RAM: 32GB
 - Disk space: 100GB
 - NIC speed: 1Gbps
+
+For an AWS install of CircleCI Server, the recommended instance type for Nomad clients is `m4.2xlarge` (8 vCPUs @ 2.4GHz, 32GB RAM). 
+
+You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m4.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will researve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run.
 
 The following table defines the number of Nomad clients to make available as a best practice. Scale up and down according to demand on your system:
 

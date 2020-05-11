@@ -9,8 +9,6 @@ order: 80
 
 This document describes how to trigger jobs using the CircleCI API.
 
-**Note:** You cannot currently trigger jobs that use 2.1 config from the API.
-
 * TOC
 {:toc}
 
