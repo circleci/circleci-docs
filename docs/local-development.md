@@ -43,9 +43,8 @@ To get a local copy of our docs, run the following commands:
 
 ```bash
 git clone https://github.com/circleci/circleci-docs.git
+git clone --recurse-submodules https://github.com/circleci/circleci-docs.git
 cd circleci-docs/jekyll
-# update the submodule we use for shared assets:
-git submodule update --init src-shared
 JEKYLL serve -Iw
 ```
 
