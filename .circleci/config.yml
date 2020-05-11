@@ -48,7 +48,6 @@ commands:
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
-  version: 2
 
   build-deploy:
     jobs:
@@ -149,11 +148,13 @@ jobs:
           command: mkdir -p /tmp/workspace/pdfs
       - run:
           name: Build PDFs for Server
-          command: ./scripts/build_pdfs.sh
-      - persist_to_workspace:
-          root: *workspace_root
-          paths:
-            - pdfs
+          command: ./scripts/build_pdfs_local.sh
+      - store_artifacts: 
+          path: release/tmp/
+     # - persist_to_workspace:
+          #root: *workspace_root
+          #paths:
+            #- pdfs
 
   build_config_builder: # this job runs the src-config-builder build process and moves the output into jekyll.
     executor:
