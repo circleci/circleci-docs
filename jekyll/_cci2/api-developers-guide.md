@@ -142,7 +142,7 @@ The following section details the steps you would need, from start to finish, to
         - welcome/run
     ```
 
-3. Add an API token from the [Personal API Tokens page](https://account.circleci.com/tokens). Be sure to write down and store your API token in a secure place once you generate it.
+3. Add an API token from the [Personal API Tokens page](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
