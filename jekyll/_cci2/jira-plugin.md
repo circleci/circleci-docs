@@ -31,10 +31,10 @@ in Jira Cloud. To do this, you will need to:
 1. Make sure you followed the steps above to connect Jira Cloud with CircleCI.
 1. Make sure that you are using version `2.1` at the top of your `.circleci/config.yml` file.
 1. {% include snippets/enable-pipelines.md %}
-2. To get an API token for build information retrieval, go to **Project Settings -> API Permissions** and create a token with **Scope: all**. Copy the token.
-3. To allow the integration to then use that key, go to **Project Settings -> Environment Variables** and add a variable named _CIRCLE_TOKEN_ with the value being the token you just made.
-4. Add the orb stanza, invoking the Jira orb.
-5. Use the Jira orb in a step.
+1. To get an API token for build information retrieval, go to [User Settings > Tokens](https://app.circleci.com/settings/user/tokens) and create a token. Copy the token. (*Note*: older versions of the JIRA orb may require you to retrieve a _Project API Token_, which is accessible from **Project Settings > API Permissions**)
+1. To allow the integration to then use that key, go to **Project Settings -> Environment Variables** and add a variable named _CIRCLE_TOKEN_ with the value being the token you just made.
+1. Add the orb stanza, invoking the Jira orb.
+1. Use the Jira orb in a step.
 
 The example config below provides a bare `config.yml` illustrating the use of the Jira Orb.
 
