@@ -7,20 +7,17 @@ categories: [language-guides]
 order: 7
 ---
 
-This document describes
-how to configure CircleCI
-using a sample application written in Python.
+This document describes how to configure CircleCI using a sample application
+written in Python.
 
-* TOC
-{:toc}
+* TOC {:toc}
 
 ## Overview
 
-This guide uses a sample Django application
-to describe configuration best practices
-for Python applications building on CircleCI.
-The application is [hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-python-django)
-and is [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
+This guide uses a sample Django application to describe configuration best
+practices for Python applications building on CircleCI. The application is
+[hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-python-django) and is
+[building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
 
 Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
 and rewriting [the configuration file](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml)
@@ -28,9 +25,12 @@ as you follow this guide.
 
 ## Configuration Walkthrough
 
-Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
-Follow the steps below
-to create a complete `config.yml` file.
+Let's walk through each piece of configuration for a Python application. At any
+time, feel free to consult the complete configuration, as it available in the
+[sample application repository](https://github.com/CircleCI-Public/my-first-blog/blob/master/.circleci/config.yml). Every CircleCI project requires a configuration
+file called [`.circleci/config.yml`]({{ site.baseurl
+}}/2.0/configuration-reference/). Follow the steps below to create a complete
+`config.yml` file.
 
 ### Specify a Version
 
@@ -39,93 +39,69 @@ This key is used
 to issue warnings about breaking changes.
 
 ```yaml
-version: 2
+version: 2.1
 ```
 
-### Create a Build Job
 
-A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
-Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
-it must have a `build` job.
+### Add the Python Orb and Create a Workflow
 
-Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key
-to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run.
-By default,
-the value of `working_directory` is `~/project`,
-where `project` is a literal string.
+In a `2.1` configuration, the certified [Python Orb](https://circleci.com/orbs/registry/orb/circleci/python) 
+provides simple commands that will allow you to set up a simple workflow for
+your Python project, such as:
+
+- loading your cache 
+- installing dependencies
+- saving your cache. 
+
+For these steps, the Python Orb also provides a default python executor
+docker image environment that you can define in an executor key at the top of
+your job definition. This default python executor pulls from the officially
+maintained [CircleCI images](https://hub.docker.com/r/cimg/python) and provides 
+a highly available container environment with a lean set of tools you
+can then utilize in your workflow.
+
+Let's look at how you would define a job:
 
 ```yaml
-version: 2
 jobs:
-  build:  # required for runs that don't use workflows
-    working_directory: ~/circleci-demo-python-django
+  build-and-test: # our job name.
+    executor: python/default # use the default python executor; this can be customized.
+    steps:
+      - checkout # pull source code into the container.
+      - python/load-cache  # load from the python cache, if it exists
+      - python/install-deps # install dependencies if necessary
+      - python/save-cache # Save dependency cache.
+      - run: 
+          command: ./manage.py test
+          name: Test
 ```
 
-### Choose an Executor Type
+Learn more about customizing your use of the Python Orb on the [orb
+registry](https://circleci.com/orbs/registry/orb/circleci/python).
 
-The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
+In the above example, we exercise [caching]({{site.baseurl}}/2.0/caching/) to speed up our build.
 
-In this example,
-the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used
-to specify a custom Docker image.
-The first image listed becomes the job's [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
-All commands for a job execute in this container.
+Next up, we set up our workflows.
 
 ```yaml
-version: 2
-jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: circleci/python:3.6.4  # primary container for the build job
+workflows:
+  main: # our workflow name
+    jobs: # the jobs this workflow runs.
+      - build-and-test
 ```
 
-**Note:**
-`circleci/python:3.6.4` is a [convenience image]({{ site.baseurl }}/2.0/circleci-images/) provided by CircleCI.
-These images are extensions of official Docker images
-and include tools useful for CI/CD environments.
+If our application had multiple jobs, they would be orchestrated in the above Workflow yaml block. 
 
-### Add Other Services and Set Environment Variables
+## Customization beyond Orbs
 
-Specify additional containers for services like databases.
-Use the [`environment`]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container) key
-to set environment variables for all commands in a container.
-
-```yaml
-version: 2
-jobs:
-  build:
-    working_directory: ~/circleci-demo-python-django
-    docker:
-      - image: circleci/python:3.6.4 # every job must define an image for the docker executor and subsequent jobs may define a different image.
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2 # an example of how to specify a service container
-        environment:
-          POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-```
-
-### Install Dependencies
-
-After choosing containers for a job,
-create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
-
-Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
-to check out source code.
-By default,
-source code is checked out to the path specified by `working_directory`.
-
-Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step
-to execute bash commands.
-In this example,
-[Pipenv](https://pipenv.readthedocs.io/en/latest/) is used
-to create a virtual environment
-and install Python packages.
+You can always add extra customization beyond orbs. Use the `run` step to execute
+bash commands. In the orb, we use the official default Python executor that
+provides many tools needed for your environment. If you need to add other tools,
+check out this example - Pipenv is used to create a virtual environment and
+install Python packages.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     # ...
@@ -137,143 +113,13 @@ jobs:
             pipenv install
 ```
 
-### Cache Dependencies
 
-To save time between runs,
-consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
-
-Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
-to cache certain files or directories.
-In this example,
-the virtual environment and installed packages are cached.
-
-Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
-to restore cached files or directories.
-
-{% raw %}
-
-```yaml
-version: 2
-jobs:
-  build:
-    # ...
-    steps:
-      - checkout
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:  # ensure this step occurs *before* installing dependencies
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-      - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache:
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
-```
-
-{% endraw %}
-
-**Note:**
-Use the `chown` command
-to grant CircleCI access to dependency locations.
-
-### Run Tests
-
-Use the `run` step
-to run your test suite.
-
-```yaml
-version: 2
-jobs:
-  build:
-    # ...
-    steps:
-      # ...
-      - run:
-        command: |
-          pipenv run python manage.py test
-```
-
-### Upload And Store Test Results
-
-Use the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step
-to upload test results to CircleCI.
-These results will display in the **Test Summary** section of the CircleCI application.
-
-Use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step
-to save test results as artifacts.
-
-```yaml
-version: 2
-jobs:
-  build:
-    # ...
-    steps:
-      # ...
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
-          destination: tr1
-```
-
-### Deploy Application
-
-This Django application is not deployed anywhere.
-See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) or the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for deploy examples.
-
-## Full Configuration File
-
-{% raw %}
-
-```yaml
-version: 2 # use CircleCI 2.0
-jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point 
-    # directory where steps are run
-    working_directory: ~/circleci-demo-python-django
-    docker: # run the steps with Docker
-      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
-      - image: circleci/python:3.6.4
-        environment: # environment variables for primary container
-          PIPENV_VENV_IN_PROJECT: true
-          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
-      - image: circleci/postgres:9.6.2
-        environment: # environment variables for the Postgres container.
-          POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-      - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-          paths:
-            - "venv"
-      - run:
-          command: |
-            pipenv run python manage.py test
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test-results
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: test-results
-          destination: tr1
-```
-
-{% endraw %}
 
 ## See Also
 
 - See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+- Further refine and improve your configuration by learning about:
+  - Storing [artifacts]({{ site.baseurl }}/2.0/artifacts/) and [test results]({{site.baseurl}}/2.0/collect-test-data/)
+  - Using [workflows]({{ site.baseurl }}/2.0/workflows/)
+  
