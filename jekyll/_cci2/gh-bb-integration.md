@@ -245,7 +245,7 @@ then copy and paste the key you created in step 1.
 Check "Allow write access",
 then click "Add key".
 
-3. Go to [https://circleci.com/gh/you/test-repo/edit#ssh](https://circleci.com/gh/you/test-repo/edit#ssh){:rel="nofollow"},
+3. Go to [https://app.circleci.com/settings/project/github/you/test-repo/ssh](https://app.circleci.com/settings/project/github/you/test-repo/ssh){:rel="nofollow"},
 and add the key you created in step 1.
 In the "Hostname" field,
 enter "github.com",
