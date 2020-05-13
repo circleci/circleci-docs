@@ -66,7 +66,7 @@ jobs:
 If you are using a custom image, you must authenticate to GCR. Use the [`auth` key](https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   deploy:
     docker:
@@ -76,12 +76,18 @@ jobs:
           password: $GCLOUD_SERVICE_KEY  # JSON service account you created, do not encode to base64
 ```
 
+**Note:** If base64 encoding is required for your particular workflow, use the following command:
+
+```
+cat <file> | base64 -w 0
+```
+
 ### Authorization
 
 Use `gcloud` to authorize the Google Cloud SDK and set several default settings. Before executing this command, make sure to write the key to a file before running this command, otherwise, the key file will be interpreted as a .p12 file.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   deploy:
     docker:
