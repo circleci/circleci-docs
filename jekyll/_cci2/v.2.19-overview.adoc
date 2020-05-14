@@ -61,4 +61,4 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 * If any changes have been made to your networking configuration you may need to run the following steps to ensure you can use SSH to inspect your builds:
 ** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
-** This file should contain the public or private IP of the nomad client
+** This file should contain the public (if applicable) or private IP of the nomad client
