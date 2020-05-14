@@ -6,8 +6,7 @@ categories: [deploying]
 order: 100
 ---
 
-This document explains
-how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
+This document explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
 * TOC
 {:toc}
@@ -56,14 +55,14 @@ Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk)
 If you are using Google's public image (`google/cloud-sdk`), no authentication is needed.
 
 ```yaml
-version: 2
+version: 2.1
 jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
 ```
 
-If you are using a custom image, you must authenticate to GCR. Use the [`auth` key](https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
+If you are using a custom image, you must authenticate to GCR. Use the [`auth` key (https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
 
 ```yaml
 version: 2.1
@@ -78,7 +77,7 @@ jobs:
 
 **Note:** If base64 encoding is required for your particular workflow, use the following command:
 
-```
+```bash
 cat <file> | base64 -w 0
 ```
 
