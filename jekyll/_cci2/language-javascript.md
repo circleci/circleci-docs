@@ -19,7 +19,7 @@ We maintain a reference JavaScript project to show how to build a React.js app o
 - [Demo JavaScript Node Project on GitHub](https://github.com/CircleCI-Public/circleci-demo-javascript-express)
 - [Demo JavaScript Node Project building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
-In the project you will find a CircleCI configuration file [`.circleci/config.yml`](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app/blob/2.1-orb-example/.circleci/config.yml). This file shows best practice for using version 2.1 config with Node projects.
+In the project you will find a CircleCI configuration file [`.circleci/config.yml`](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app/blob/master/.circleci/config.yml). This file shows best practice for using version 2.1 config with Node projects.
 
 ## Build the Demo JavaScript Node Project Yourself
 
@@ -38,7 +38,7 @@ Below is the `.circleci/config.yml` file in the demo project.
 
 ```yaml
 orbs: # declare what orbs we are going to use
-  node: circleci/node@2.0.2 # the node orb provdies common node-related configuration 
+  node: circleci/node@2.0.2 # the node orb provides common node-related configuration 
 
 version: 2.1 # using 2.1 provides access to orbs and other features
 
@@ -54,9 +54,10 @@ workflows:
 ```
 {% endraw %}
 
+
 ## Config Walkthrough
 
-By using the  [2.1 Node orb](https://circleci.com/orbs/registry/orb/circleci/node#jobs-test), it sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
+By using the [2.1 Node orb](https://circleci.com/orbs/registry/orb/circleci/node#jobs-test), it sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
  
 The Node Orb `test` command will test your code with a one-line command, with optional parameters.
 
