@@ -44,6 +44,9 @@ Docker Hub in the `circleci` directory.
 
 ## Sample Configuration
 
+The following code block is commented to describe each part of the configuration
+for the sample application.
+
 {% raw %}
 
 ```yaml
@@ -81,7 +84,7 @@ jobs:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog_test
           POSTGRES_PASSWORD: ""
-    # environment variables for the primary container.
+    # environment variables specific to Ruby/Rails, applied to the primary container.
     environment:
       BUNDLE_JOBS: "3"
       BUNDLE_RETRY: "3"
@@ -89,7 +92,7 @@ jobs:
       PGUSER: circleci-demo-ruby
       PGPASSWORD: ""
       RAILS_ENV: test
-    # a series of steps to run, some are similar to those in "build".
+    # A series of steps to run, some are similar to those in "build".
     steps:
       - checkout 
       - ruby/install-deps 
