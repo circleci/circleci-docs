@@ -16,7 +16,7 @@ written in Python.
 
 This guide uses a sample Django application to describe configuration best
 practices for Python applications building on CircleCI. The application is
-[hosted on GitHub](https://github.com/CircleCI-Public/circleci-demo-python-django) and is
+[hosted on GitHub](https://github.com/CircleCI-Public/my-first-blog/blob/master/.circleci/config.yml) and is
 [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-django){:rel="nofollow"}.
 
 Consider [forking the repository](https://help.github.com/articles/fork-a-repo/)
@@ -25,80 +25,57 @@ as you follow this guide.
 
 ## Configuration Walkthrough
 
-Let's walk through each piece of configuration for a Python application. At any
-time, feel free to consult the complete configuration, as it available in the
-[sample application repository](https://github.com/CircleCI-Public/my-first-blog/blob/master/.circleci/config.yml). Every CircleCI project requires a configuration
-file called [`.circleci/config.yml`]({{ site.baseurl
-}}/2.0/configuration-reference/). Follow the steps below to create a complete
-`config.yml` file.
+The sample codeblock below, which is also found in the sample app [repository](https://github.com/CircleCI-Public/my-first-blog/blob/master/.circleci/config.yml), is commented to provide a walkthrough of each piece of configuration.
 
-### Specify a Version
-
-Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
-This key is used
-to issue warnings about breaking changes.
 
 ```yaml
-version: 2.1
-```
+# Specify which configuration version we want to use
+# 2.1 enables using pipelines and orbs, among other features.
+version: 2.1 
+
+# Here we are declaring the orbs that are configuration will use.
+# The python orb makes it easier to get started with a Python project;
+# it includes common steps for caching, testing, and more.
+# You can learn more here: https://circleci.com/orbs/registry/orb/circleci/python
+orbs:
+  python: circleci/python@0.2.1
 
 
-### Add the Python Orb and Create a Workflow
-
-In a `2.1` configuration, the certified [Python Orb](https://circleci.com/orbs/registry/orb/circleci/python) 
-provides simple commands that will allow you to set up a simple workflow for
-your Python project, such as:
-
-- loading your cache 
-- installing dependencies
-- saving your cache. 
-
-For these steps, the Python Orb also provides a default python executor
-docker image environment that you can define in an executor key at the top of
-your job definition. This default python executor pulls from the officially
-maintained [CircleCI images](https://hub.docker.com/r/cimg/python) and provides 
-a highly available container environment with a lean set of tools you
-can then utilize in your workflow.
-
-Let's look at how you would define a job:
-
-```yaml
+# Declare the jobs we want to run
 jobs:
-  build-and-test: # our job name.
-    executor: python/default # use the default python executor; this can be customized.
+  # we have only one job, named "build-and-test"
+  build-and-test:
+    # using the python orb, we can can set a "default" executor
+    # this can be customized, if you want to specify which version of the language
+    # used, for example. Refer to the python orb documentation linked above.
+    executor: python/default
+    
+    # Steps run a series of commands.
     steps:
-      - checkout # pull source code into the container.
-      - python/load-cache  # load from the python cache, if it exists
-      - python/install-deps # install dependencies if necessary
-      - python/save-cache # Save dependency cache.
-      - run: 
-          command: ./manage.py test
+      - checkout              # pull down code from our VCS repo.
+      - python/load-cache     # load the cache, if it exists.
+      - python/install-deps   # install our dependencies
+      - python/save-cache     # save our dependency cache, if necessary
+      - run:                  # run a custom command
           name: Test
-```
+          command: ./manage.py test 
 
-Learn more about customizing your use of the Python Orb on the [orb
-registry](https://circleci.com/orbs/registry/orb/circleci/python).
-
-In the above example, we exercise [caching]({{site.baseurl}}/2.0/caching/) to speed up our build.
-
-Next up, we set up our workflows.
-
-```yaml
+# Workflows are used to orchestrate jobs.
+# We are only running one job; we aren't using the full power of workflows.
+# Read more about workflows here: https://circleci.com/docs/2.0/workflows/
 workflows:
-  main: # our workflow name
-    jobs: # the jobs this workflow runs.
-      - build-and-test
+  main:                       # "main" is the name of our workflow.
+    jobs:                     # the job(s) to run
+      - build-and-test        # runs the job.
 ```
-
-If our application had multiple jobs, they would be orchestrated in the above Workflow yaml block. 
 
 ## Customization beyond Orbs
 
-You can always add extra customization beyond orbs. Use the `run` step to execute
-bash commands. In the orb, we use the official default Python executor that
-provides many tools needed for your environment. If you need to add other tools,
-check out this example - Pipenv is used to create a virtual environment and
-install Python packages.
+You can always add extra customization beyond orbs. Use the `run` step to
+execute bash commands. In the orb, we use the official default Python executor
+that provides many tools needed for your environment. If you need to add other
+tools, you may do so. In the following example Pipenv is used to create a
+virtual environment and install Python packages.
 
 ```yaml
 version: 2.1
@@ -112,8 +89,6 @@ jobs:
             sudo pip install pipenv
             pipenv install
 ```
-
-
 
 ## See Also
 
