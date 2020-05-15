@@ -8,7 +8,7 @@
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
-This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Winows images) and remote Docker jobs.
+This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Windows images) and remote Docker jobs.
 
 NOTE: This is only available for installations on AWS, please contact your CircleCI account representative to request this for a static installation.
 
