@@ -41,13 +41,13 @@ The example config below provides a bare `config.yml` illustrating the use of th
 ```yaml
 version: 2.1
 orbs: # adds orbs to your configuration
-  jira: circleci/jira@1.0.5 # invokes the Jira orb, making it's commands accessible
+  jira: circleci/jira@1.0.5 # invokes the Jira orb, making its commands accessible
 workflows:
   build:
     jobs:
       - build:
           post-steps:
-            - jira/notify # Runs the Jira's "notify" commands after a build has finished it's steps.
+            - jira/notify # Runs the Jira's "notify" commands after a build has finished its steps.
 jobs:
   build:
     docker:

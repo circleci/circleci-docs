@@ -94,7 +94,7 @@ CircleCI users can deploy packages directly to npm registries hosted on packagec
 
 ### Configure the Test Job
 
-This job will retrieve the project code, install it's dependencies and run any tests in the NodeJS project:
+This job will retrieve the project code, install its dependencies and run any tests in the NodeJS project:
 
 ```yaml
 jobs:
