@@ -56,7 +56,7 @@ class ActiveSupport::TestCase
 end
 ```
 
-Now configure your `.circleci/config.yaml` for uploading your coverage report.
+Now configure your `.circleci/config.yml` for uploading your coverage report.
 
 ```yaml
 version: 2
