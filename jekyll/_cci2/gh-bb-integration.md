@@ -159,10 +159,12 @@ and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket
 - Get a user's email address
 
 **Write Permissions**
-- Add deploy keys to a repo
-- Add service hooks to a repo
 - Get a list of a user's repos
 - Add an SSH key to a user's account
+
+**Admin Permissions**, needed for setting up a project
+- Add deploy keys to a repo
+- Add service hooks to a repo
 
 **Note:**
 CircleCI only asks for
