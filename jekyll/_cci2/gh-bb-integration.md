@@ -166,13 +166,14 @@ and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket
 - Add deploy keys to a repo
 - Add service hooks to a repo
 
-**Note:**
-CircleCI only asks for
-permissions that are absolutely necessary.
-However, CircleCI is constrained
-by the specific permissions each VCS provider chooses to supply.
-For example, getting a list of a user's repos from GitHub requires write access
-because GitHub does not provide a read-only permission.
+**Note:** CircleCI only asks for permissions that are absolutely
+necessary. However, CircleCI is constrained by the specific
+permissions each VCS provider chooses to supply. For example, getting
+a list of all user's repos -- public and private -- from GitHub
+requires the [`repo`
+scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes),
+which is write-level access. GitHub does not provide a read-only
+permission for listing all a user's repositories.
 
 If you feel strongly about reducing the number of permissions CircleCI uses,
 consider contacting your VCS provider to communicate your concerns.
