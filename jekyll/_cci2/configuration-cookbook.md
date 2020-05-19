@@ -39,24 +39,25 @@ workflows:
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
 #### Configuring Your Environment for the CircleCI Platform and Orbs
+{:.no_toc}
 
-1) Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+1. Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
   
-```yml
-version: 2.1
-```
+    ```yml
+    version: 2.1
+    ```
 
-**NOTE:** {% include snippets/enable-pipelines.md %}
+    **NOTE:** {% include snippets/enable-pipelines.md %}
 
-1) Add the orbs stanza below your version, which in turn imports the orb (AWS EXS orb shown here as an example):
+2. Add the orbs stanza below your version, which in turn imports the orb (AWS EXS orb shown here as an example):
 
-```yml
-aws-ecs: circleci/aws-ecs@0.0.10
-```
+    ```yml
+    aws-ecs: circleci/aws-ecs@0.0.10
+    ```
 
-3) Invoke the orbs elements (e.g. commands, jobs) in your existing workflows and jobs. The available orb elements – commands and jobs – are listed on the relevant pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), along with usage examples.
+3. Invoke the orbs elements (e.g. commands, jobs) in your existing workflows and jobs. The available orb elements – commands and jobs – are listed on the relevant pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), along with usage examples.
 
-### Configuration Recipes
+## Configuration Recipes
 
 The table below lists the different build configuration "recipes" you can perform using CircleCI orbs.
 
@@ -68,6 +69,15 @@ Configuration Recipe | Description
 [Deploying Applications to Heroku](#deploying-applications-to-heroku) | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
 [Enabling Custom Slack Notifications in CircleCI Jobs](#enabling-custom-slack-notifications-in-circleci-jobs) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
 {: class="table table-striped"}
+
+### Notes on Examples
+{:.no_toc}
+
+* In order to use orbs you must use `version 2.1` config, and enable pipelines for your project. 
+* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
+* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the jobs are built.
+* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+* Any items in these examples that appear within `< >` should be replaced with your own parameters.
 
 ## Deploying Software Changes to Amazon ECS
 
@@ -183,13 +193,15 @@ This example illustrates how you can use the orb to install and configure the AW
 
 For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
 
-## Deploying Software Changes to Google Kubernetes Engine (GKE)
+## Interacting with Google Kubernetes Engine (GKE)
 
-The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using the GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
+The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
 ### Prerequisites
 
-The sections below list the prerequisites that must be met before deploying any software changes to the Google Kubernetes Engine (GKE).
+* Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required.
+* Ensure you use `version: 2.1` config. This is required to use orbs.
+* {% include snippets/enable-pipelines.md %}
 
 #### Setting Environment Variables
 The following environment variables need to be set in CircleCI either directly or through a context:
@@ -200,113 +212,53 @@ The following environment variables need to be set in CircleCI either directly o
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
 
-### Managing GKE Actions
+### Crating and Deleting Clusters
+Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
-The CircleCI GKE orb enables you to perform several different actions within the orb while working with a GKE cluster, including:
-
-- installing `gcloud` and `kubectl` if it is not already installed
-- initialize the `gcloud` CLI
-- update an existing deployment's docker image
-
-The code example below shows how you can perform these actions while also rolling out the docker image to the GKE cluster.
-
-```yaml
+```yml
 version: 2.1
-commands:
-  install:
-    description: "Install `gcloud` and `kubectl` if not already installed."
-    steps:
-      - gcloud/install
-      - k8s/install
-  init:
-    description: "Initialize the `gcloud` CLI."
-    steps:
-      - gcloud/initialize
-  rollout-image:
-    description: "Update a deployment's Docker image."
-    parameters:
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      image:
-        description: A name for your docker image
-        type: string
-    steps:
-      - run: |
-          gcloud container clusters get-credentials <<parameters.deployment>>
-          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+
+workflows:
+  main:
+    jobs:
+      - gke/create-cluster:
+          cluster: gcp-testing
 ```
 
-**Note:** When running these steps, please note that you should use your cluster name in GKE, in addition to separating the cluster and deployment parameters.
+To delete a cluster, all you need is:
+
+```yml
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+version: 2.1
+workflows:
+  main:
+    jobs:
+      - gke/delete-cluster:
+          cluster: gcp-testing
+```
 
 ### Publishing and Rolling Out The Image to the GKE Cluster
 
-Now that you have installed (if necessary) and initialized `gcloud` and updated the docker image, you may then publish and roll out this updated image to the GKE cluster for later use.
+Using the CircleCI GKE orb makes publishing and rolling out a docker image to your GKE cluster very simple, as shown in the example below. All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/orbs/registry/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
 
 ```yaml
 version: 2.1
-jobs:
-  publish-and-rollout-image:
-    description: "Update cluster with new Docker image."
-    machine: true
-    parameters:
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      gcloud-service-key:
-        description: The gcloud service key
-        type: env_var_name
-        default: GCLOUD_SERVICE_KEY
-      google-project-id:
-        description: The Google project ID to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_PROJECT_ID
-      google-compute-zone:
-        description: The Google compute zone to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_COMPUTE_ZONE
-      registry-url:
-        description: The GCR registry URL from ['', us, eu, asia].gcr.io
-        type: string
-        default: gcr.io
-      image:
-        description: A name for your docker image
-        type: string
-      tag:
-        description: A docker image tag
-        type: string
-        default: "latest"
-      path-to-dockerfile:
-        description: The relative path to the Dockerfile to use when building image
-        type: string
-        default: "."
-    steps:
-      - checkout
-      - gcr/gcr-auth:
-          google-project-id: <<parameters.google-project-id>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-      - install
-      - gcr/build-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: << parameters.tag >>
-          path-to-dockerfile: <<parameters.path-to-dockerfile>>
-      - gcr/push-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: <<parameters.tag>>
-      - rollout-image:
-          deployment: "<<parameters.deployment>>"
-          container: "<<parameters.container>>"
-          image: "<<parameters.image>>"
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+
+workflows:
+  my-workflow:
+    jobs:
+      - gke/publish-and-rollout-image:
+          cluster: <my-cluster-name>
+          container: <my-kubernetes-container-name>
+          deployment: <my-kubernetes-deployment-name>
+          image: <my-docker-image-name>
 ```
 
 ## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
