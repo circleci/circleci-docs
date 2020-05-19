@@ -74,7 +74,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-**Note**: If these steps are not followed, it is possible, although rare that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+**Note**: If these steps are not followed, it is possible, that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
 
 ## Enable Your Project to Check Out Additional Private Repositories
