@@ -136,7 +136,7 @@ Our API is handled in two possible places currently:
 **What is Slate?**
 
 Slate is a tool for generating API documentation. Slate works by having a user
-clone or fork it's Github Repo, having the user fill in the API spec into a
+clone or fork its Github Repo, having the user fill in the API spec into a
 `index.html.md` file, and then generating the static documentation using Ruby
 (via `bundler`).
 
