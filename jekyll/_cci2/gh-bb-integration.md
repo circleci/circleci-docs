@@ -76,7 +76,6 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 **Note**: If these steps are not followed, it is possible, that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
-
 ## Enable Your Project to Check Out Additional Private Repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a
