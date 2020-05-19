@@ -65,6 +65,7 @@ Configuration Recipe | Description
 [Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#using-amazon-elastic-container-service-for-kubernetes-amazon-eks) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
 [Deploying Applications to Heroku](#deploying-applications-to-heroku) | This section describes how you can deploy application to the Heroku platform using the CircleCI Heroku orb.
 [Enabling Custom Slack Notifications in CircleCI Jobs](#enabling-custom-slack-notifications-in-circleci-jobs) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
+[Selecting a Workflow With a Pipeline Parameter](#selecting-a-workflow-with-a-pipeline-parameter) | This section describes how you can use pipeline parameters to run different workflows.
 
 ## Deploying Software Changes to Amazon ECS
 
@@ -1129,3 +1130,45 @@ version: 2.1
 Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
 
 For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
+
+## Selecting a Workflow With a Pipeline Parameter
+
+If you want to be able to trigger custom workflows manually via the API, but still run a workflow on every push, you can use pipeline parameters to decide which workflows to run.
+
+```yaml
+version: 2.1
+
+parameters:
+  action:
+    type: enum
+    enum: [build, report]
+    default: build
+
+jobs:
+  build:
+    machine: true
+    steps:
+      - checkout
+      - run: ./run-tests.sh
+
+  report:
+    machine: true
+    steps:
+      - checkout
+      - run: ./create-report.sh
+
+workflows:
+  build:
+    when:
+      equal: [ build, << pipeline.parameters.action >> ]
+    jobs:
+      - build
+
+  report:
+    when:
+      equal: [ report, << pipeline.parameters.action >> ]
+    jobs:
+      - report
+```
+
+The `action` parameter will default to `build` on pushes, but you can supply a different value to select a different workflow to run, like `report`.
