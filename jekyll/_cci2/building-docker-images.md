@@ -27,7 +27,7 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` or `macos` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
+**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
 
 ### Specifications
 {:.no_toc}
