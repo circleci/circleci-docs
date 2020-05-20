@@ -805,7 +805,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | String | A parameter value
+condition | Y | Logic | [A logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is true
 {: class="table table-striped"}
 
@@ -1547,7 +1547,7 @@ workflows:
 
 ##### **Using `when` in Workflows**
 
-With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a truthy or falsy value to determine whether or not to run that workflow. The most common use of `when` is with [CircleCI API v2 pipeline triggering](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) with parameters. Truthy/falsy calues can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
+With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
 
 The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
@@ -1581,6 +1581,39 @@ This example prevents the workflow `integration_tests` from running unless the t
 ```
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
+
+## Logic Statements
+
+Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, so before the workflow is run. The group of logic statements includes:
+
+Type               | Arguments          | `true` if                              | Example
+-------------------|--------------------|----------------------------------------|----------------------------------------
+YAML literal       | None               | is truthy                              | `true`/`42`/`"a string"`
+[Pipeline Value](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values) | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`
+[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameter.my-parameter >>`
+and                | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`
+or                 | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`
+not                | 1 logic statement  | the argument is not truthy             | `not: true`
+equal              | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`
+{: class="table table-striped"}
+
+Truthiness rules are as follows:
+
+`false`, `null`, `0`, the empty string, and `NaN` are falsy. Any other value is truthy.
+
+Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
+
+### Example
+
+```yaml
+when:
+  and:
+    - not:
+        equal: [ master, << pipeline.git.branch >> ]
+    - or:
+        - equal: [ canary, << pipeline.git.tag >> ]
+        - << pipeline.parameter.deploy-canary >>
+```
 
 ## Full Example
 {:.no_toc}
