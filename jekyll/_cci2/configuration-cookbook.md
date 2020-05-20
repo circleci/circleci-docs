@@ -7,18 +7,18 @@ categories: [getting-started]
 order: 1
 ---
 
-The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including CircleCI and partner-certified orbs. This guide, and its associated sections, will enable you to quickly and easily perform repeatable tasks on the CircleCI platform.
+The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
 
 * TOC
 {:toc}
 
 ## Introduction
 
-This page, and its associated recipes, describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each "recipe" in this "cookbook" relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. 
+This page, and its associated recipes, describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each recipe in this cookbook relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. 
 
 ### What Are CircleCI Orbs?
 
-CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share,  standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
+CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
 
 Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
