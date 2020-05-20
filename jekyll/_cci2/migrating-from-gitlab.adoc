@@ -277,7 +277,7 @@ For larger and more complex build files, we recommend moving over the build step
 . https://circleci.com/docs/2.0/configuration-reference/#checkout[Checkout code]
 . https://circleci.com/docs/2.0/env-vars/[Environment variables] and https://circleci.com/docs/2.0/contexts/[Contexts]
 . Install dependencies, also see https://circleci.com/docs/2.0/caching/[Cache dependencies]
-. https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macosexecutor[Service containers]
+. https://circleci.com/docs/2.0/configuration-reference/#docker[Service containers]
 . Run testing commands
 . https://circleci.com/docs/2.0/custom-images/[Custom convenience images]
 . https://circleci.com/docs/2.0/configuration-reference/#resource_class[Resource classes]

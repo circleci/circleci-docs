@@ -33,8 +33,9 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 Find links to the artifacts under the "Artifacts" tab on the **Job page**.
 Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
-There is a 3GB `curl` file size limit. Artifacts will be accessible for thirty
-days after creation.
+There is a 3GB `curl` file size limit. 
+
+**Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
 
 **Note:**
 Uploaded artifact filenames are encoded

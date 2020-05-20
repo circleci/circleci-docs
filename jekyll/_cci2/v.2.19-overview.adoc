@@ -31,7 +31,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 * Fixed an issue that was causing intermittent failures to spin up VMs with DLC in use.
 
-* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the [Nomad Client Proxy](https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup) and [Service Configuration Overrides](https://circleci.com/docs/2.0/customizations/#service-configuration-overrides) guides for more infomation.
+* Fixed an issue that was preventing the customization of proxy settings for Docker containers. See the https://circleci.com/docs/2.0/proxy/#nomad-client-proxy-setup[Nomad Client Proxy] and https://circleci.com/docs/2.0/customizations/#service-configuration-overrides[Service Configuration Overrides] guides for more infomation.
 
 * Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
 
@@ -39,7 +39,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 
 * Fixed a `statsd` configuration issue that meant some services were not emitting Telegraf metrics.
 
-## What's New in v2.19.1
+## What's New in v2.19.01
 
 * Fixed a bug that was preventing some customers from upgrading due to a schema change in one of our library dependencies.
 
@@ -58,3 +58,7 @@ CAUTION: If at any time your organization name has been changed, there is a <<up
 * **If you are using an HTTP proxy for your installation, upgrade to v2.19.02**. We had a known issue around job step logging and docker commands customization that made pre-2.19.2 releases incompatible with an HTTP proxy setup of CircleCI Server.
 
 * The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
+
+* If any changes have been made to your networking configuration you may need to run the following steps to ensure you can use SSH to inspect your builds:
+** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
+** This file should contain the public (if applicable) or private IP of the nomad client

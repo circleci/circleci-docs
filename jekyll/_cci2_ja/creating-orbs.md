@@ -49,7 +49,7 @@ Orbs を使用する前に、Orbs パブリッシュプロセス全体につい�
 
 - [CircleCI CLI のダウンロードとインストール](https://circleci.com/docs/ja/2.0/creating-orbs/#installing-the-cli-for-the-first-time)
 - [CLI の更新](https://circleci.com/docs/ja/2.0/creating-orbs/#updating-the-circleci-cli-after-installation)
-- [CLI の設定](https://circleci.com/docs/ja/2.0/creating-orbs/#circleci-cli-の設定)
+- [CLI の設定](https://circleci.com/docs/ja/2.0/creating-orbs)
 
 #### ステップ 2 - CLI が正しくインストールされていることを検証する
 

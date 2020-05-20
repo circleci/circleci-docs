@@ -142,7 +142,7 @@ The following section details the steps you would need, from start to finish, to
         - welcome/run
     ```
 
-3. Add an API token from the [Personal API Tokens page](https://account.circleci.com/tokens). Be sure to write down and store your API token in a secure place once you generate it.
+3. Add an API token from the [Personal API Tokens page](https://circleci.com/account/api). Be sure to write down and store your API token in a secure place once you generate it.
 
 4. It's time to test out your API token using `curl` to make sure everything works. The following code snippets demonstrate querying all pipelines on a project. Please note that in the example below, the values within curly braces (`{}`) need to be replaced with values specific to your username/orgname.
 
@@ -550,7 +550,7 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 - `throughput` - The average number of builds per day.
 - `mttr` - The Mean Time to Recovery (MTTR). This is the average time it takes, when a CI build fails, to get it back to a "success" status.
 - `duration_metrics` - A collection of specific metrics and measurements that provide the duration of the workflow, which includes `min`, `max`, `median`, `mean`, `p95`, and `standard_deviation`.
-- `total credits used` - The total number of credits taht were used during the build.
+- `total credits used` - The total number of credits that were used during the build.
 - `windows_start & windows_end` - The time the build was initiated, and then completed.
 
 **Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.

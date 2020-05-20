@@ -104,14 +104,16 @@ sudo systemctl restart replicated
 sudo systemctl restart replicated-operator
 ```
 
-Then try restarting the CircleCi app: go to your services box admin (for example, `https://<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
+Then try restarting the CircleCi app: go to your services box admin (for example, `<your-circleci-hostname>.com:8800`) and try restarting with "Stop Now" and "Start Now".
 
 // add screenshot showing StopNow and StartNow -->
 
 [discrete]
 ==== 3. Try to log into Replicated
 
-Try logging in to Replicated. You can do this by running the following command on the service box. You will be asked to enter your password - the same one used to unlock the Management Console (i.e. `https://<your-circleci-hostname>.com:8800`).
+Try logging in to Replicated. You can do this by running the following command
+on the service box. You will be asked to enter your password - the same one used
+to unlock the Management Console (i.e.  `<your-circleci-hostname>.com:8800` ).
 
 ```shell
 replicated login

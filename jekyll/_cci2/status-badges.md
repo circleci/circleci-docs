@@ -129,7 +129,7 @@ above; it has a url parameter for a token added.
 [![CircleCI](https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg&circle-token=<YOUR_STATUS_API_TOKEN>)](<LINK>)
 ```
 
-To create a status api token, go to your project's **settings** > **API
+To create a status api token, go to your **Project's Settings** (present on the top right corner) > **API
 Permissions** and create a token scoped to `Status`.
 
 
