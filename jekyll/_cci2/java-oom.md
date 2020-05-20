@@ -37,7 +37,7 @@ e.g. `-XX:MaxRAMPercentage=90.0`.
 In CircleCI, containers are run using [Nomad](https://www.nomadproject.io).
 Nomad does set CGroup memory limits, but doesn't provide enough
 CGroup memory information to the container for the JVM to detect the container memory constraints.
-This means the JVM will set it's memory as a fraction of the total amount of RAM on the system.
+This means the JVM will set its memory as a fraction of the total amount of RAM on the system.
 Nomad currently has an [enhancement request](https://github.com/hashicorp/nomad/issues/5376)
 open to provide this information. Once that is added, container builds in CircleCI will
 automatically pick up their container memory limits.

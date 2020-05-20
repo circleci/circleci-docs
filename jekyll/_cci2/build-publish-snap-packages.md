@@ -46,7 +46,7 @@ The `docker` executor is used here with the [`cibuilds/snapcraft`](https://githu
 ...
 ```
 
-On CircleCI, this single command is needed to actually build your snap. This will run Snapcraft, which will then go through all of it's build steps and generate a `.snap` file for you. This file will typically be in the format of `<snap-name>-<snap-version>-<system-arch>.snap`.
+On CircleCI, this single command is needed to actually build your snap. This will run Snapcraft, which will then go through all of its build steps and generate a `.snap` file for you. This file will typically be in the format of `<snap-name>-<snap-version>-<system-arch>.snap`.
 
 ## Testing
 

@@ -10,6 +10,7 @@ order: 50
 # Overview
 
 For those who prefer to spend most of their development time in the terminal, consider installing the [CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) to interact with your projects on CircleCI. This document provides a step-by-step guide on intializing and working with a CircleCI project primarily from within the terminal. 
+Please note that our server offering only supports a legacy version of the CLI. You can find more information on how to install that here: https://circleci.com/docs/2.0/local-cli/#using-the-cli-on-circleci-server.
 
 # Prerequisites
 

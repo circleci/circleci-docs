@@ -72,7 +72,7 @@ echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 ### Executors
 
 - At least one executor per supported OS (MacOs, Windows, Docker, VM).
-- Must include a “default” executor.
+- Must include one executor named `default`.
 - Executor should be parameterized to allow the user to overwrite the version/tag in the event an issue arises with the included image.
 
 ### Imported Orbs

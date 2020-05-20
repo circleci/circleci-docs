@@ -32,7 +32,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
- `11.5.0` | Xcode 11.5 Beta 1 (Build 11N605c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2866/index.html)
+ `11.5.0` | Xcode 11.5 Beta 2 (Build 11N605f)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2925/index.html)
  `11.4.1` | Xcode 11.4.1 (Build 11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)
  `11.4.0` | Xcode 11.4 (Build 11E146)       | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2796/index.html)
  `11.3.1` | Xcode 11.3.1 (Build 11C505)     | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
@@ -335,12 +335,12 @@ steps:
   path: ~/Library/Logs/DiagnosticReports
 ```
 
-### Optimzing Fastlane
+### Optimizing Fastlane
 {:.no_toc}
 
 By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the [fastlane docs](https://docs.fastlane.tools/actions/run_tests/#parameters).
 
-### Optimzing Cocoapods
+### Optimizing Cocoapods
 {:.no_toc}
 
 In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
@@ -365,7 +365,7 @@ sudo gem install cocoapods
 
 We also recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
 
-### Optimzing Homebrew
+### Optimizing Homebrew
 {:.no_toc}
 
 Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that any step which calls `brew` can take some extra time to complete.

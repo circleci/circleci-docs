@@ -28,6 +28,17 @@ Context names must be unique for each GitHub or Bitbucket organization. **Note:*
 
 For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error. 
 
+### Renaming Orgs and Repositories
+
+If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+
+1. Rename org/repo in VCS.
+2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
+3. Confirm that your plan, projects and settings have been transferred successfully.
+4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
+
+**Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+
 ## Creating and Using a Context
 
 1. As an organization member, navigate to the Organization Settings page in the CircleCI application, by clicking on the link in the sidebar. **Note:** Any organization member can create a context, but only organization administrators can restrict it with a security group.
