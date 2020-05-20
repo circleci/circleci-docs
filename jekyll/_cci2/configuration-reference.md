@@ -1615,7 +1615,7 @@ when:
         - << pipeline.parameter.deploy-canary >>
 ```
 
-## Full Example
+## Example Full Configuration
 {:.no_toc}
 
 {% raw %}
