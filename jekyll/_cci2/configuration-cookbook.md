@@ -17,6 +17,7 @@ The *CircleCI Configuration Cookbook* is a collection of individual use cases (r
 This page, and its associated recipes, describes how you can perform specific tasks using a set of steps and instructions, including code snippets and examples, to ensure your CircleCI pipeline is properly configured. Each recipe in this cookbook relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. 
 
 ### What Are CircleCI Orbs?
+{:.no_toc}
 
 CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
 
@@ -38,10 +39,19 @@ workflows:
 
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-#### Configuring Your Environment for the CircleCI Platform and Orbs
-{:.no_toc}
+### Prerequisites: Configure Your Environment for CircleCI Pipelines and Orbs
 
-1. Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
+Most recipies in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided it's worth checking that you're all set up for these features. The following notes and steps will get you where you need to be.
+
+* In order to use pipelines features and orbs you must use `version 2.1` config, and enable pipelines for your project. 
+* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
+* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the individual jobs and commands are built.
+* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+* Any items that appear within `< >` should be replaced with your own parameters.
+
+1. Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required. 
+  
+2. Use CircleCI version 2.1 at the top of your `.circleci/config.yml` file.
   
     ```yml
     version: 2.1
@@ -49,17 +59,17 @@ For more detailed information about CircleCI orbs, refer to the [Orbs Introducti
 
     **NOTE:** {% include snippets/enable-pipelines.md %}
 
-2. Add the orbs stanza below your version, which in turn imports the orb (AWS EXS orb shown here as an example):
+3. If you want to use an orb in your configuration, add the orbs stanza below your version, which in turn imports the orb (AWS EXS orb shown here as an example). You can import as many orbs as you want this way:
 
     ```yml
-    aws-ecs: circleci/aws-ecs@0.0.10
+    aws-ecs: circleci/aws-ecs@x.y.z
     ```
 
-3. Invoke the orbs elements (e.g. commands, jobs) in your existing workflows and jobs. The available orb elements – commands and jobs – are listed on the relevant pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), along with usage examples.
+4. Invoke the orbs elements (commands, jobs, executors) in your existing configuration. The available orb elements are listed on the relevant pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), along with usage examples.
 
 ## Configuration Recipes
 
-The table below lists the different build configuration "recipes" you can perform using CircleCI orbs.
+The table below lists some recipes to help and inspire your projects.
 
 Configuration Recipe | Description
 ------------|-----------
@@ -71,47 +81,34 @@ Configuration Recipe | Description
 [Using Logic in Configuration](#using-logic-in-configuration) | This section describes how you can use pipeline values & parameters to select the work to perform.
 {: class="table table-striped"}
 
-### Notes on Examples
-{:.no_toc}
+## Deploy changes to Amazon ECS
 
-* In order to use orbs you must use `version 2.1` config, and enable pipelines for your project. 
-* We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, the examples shown here are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the jobs are built.
-* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
-* Any items in these examples that appear within `< >` should be replaced with your own parameters.
-
-## Deploying Software Changes to Amazon ECS
-
-The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to the Amazon ECS service using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
-
-### Prerequisites
-
-* Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required.
-* Ensure you use `version: 2.1` config. This is required to use orbs.
-* {% include snippets/enable-pipelines.md %}
+The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. Although this documentation enables you to quickly and easily deploy software changes to Amazon ECS using CircleCI orbs, if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
   
 ### Build, Push and Deploy a Service Update
 
-#Need to finalise make sure I understand this use case fully#
+To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to update a Service to use a newly built image from AWS ECR, you can use two orbs to keep your configuration as simple as possible: the `AWS-ECR` orb to build and push an updated image to ECR, and the `AWS-ECS` orb to deploy you service update.
 
-In the CircleCI Orbs Registry use the search function to locate the ECS orb. Scroll down to find the `deploy-service-update` usage example. See the example below with added comments, but always check the Orbs Registry for the most up to date version and usage becuase orbs are updated regularaly:
+The configuration of these orbs uses a few environment variables, so you will first need to ensure they are set for your project or organisation. For more information see our guides to [using Environment Variables guide]({{ site.baseurl }}/2.0/env-vars/) and [using Contexts]({{ site.baseurl }}/2.0/contexts/). ensure you have the following environment variables set: `AWS_ECR_ACCOUNT_URL`, `MY_APP_PREFIX`, `AWS_REGION`. Note the `CIRCLE_SHA1` variable is a built-in env var, and so is always available.
 
+The following example shows building and pushing an image to ECR and pushing that image as a service update to ECS:
+ 
 ```yml
 version: 2.1 # 2.1 config required to use orbs
 
 orbs:
-  aws-ecr: circleci/aws-ecr@6.5.0 # invoke the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@0.0.10 # invoke the AWS ECS orb
+  aws-ecr: circleci/aws-ecr@x.y.z # invoke the AWS ECR orb
+  aws-ecs: circleci/aws-ecs@x.y.z # invoke the AWS ECS orb
 
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image: # built-in job
+      - aws-ecr/build-and-push-image: # orb built-in job
           account-url: AWS_ECR_ACCOUNT_URL
           repo: '${MY_APP_PREFIX}'
           region: AWS_REGION
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update: # built-in job
+      - aws-ecs/deploy-service-update: # orb built-in job
           requires:
             - aws-ecr/build-and-push-image
           family: '${MY_APP_PREFIX}-service'
@@ -119,39 +116,7 @@ workflows:
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-Once you have your project set up you can copy this config in your project `.circleci/config.yml`, giving you a really simple way to build, push and deploy a service update. Notice the built-in jobs used here. Orbs have both jobs and commands. Using built-in jobs really simplifies your  
-
-Notice that this example uses two AWS orbs: `aws-ecs` and `aws-ecr`, to first build and push your image, and then deploy the new image to ECS.
-
-#### Updating the Amazon Web Services CLI and Amazon ECS
-
-To update both the AWS CLI and ECS Service simultaneously, use the orb shown below to simplify the process of updating these services.
-
-```yaml
-version: 2.1
-orbs:
-  aws-cli: circleci/aws-cli@0.1.4
-  aws-ecs: circleci/aws-ecs@0.0.3
-jobs:
-  update-tag:
-    docker:
-      - image: 'circleci/python:3.7.1'
-    steps:
-      - aws-cli/install
-      - aws-cli/configure:
-          aws-access-key-id: $AWS_ACCESS_KEY_ID
-          aws-region: $AWS_REGION
-      - aws-ecs/update-service:
-          family: '${MY_APP_PREFIX}-service'
-          cluster-name: '${MY_APP_PREFIX}-cluster'
-          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=stable'
-workflows:
-  deploy:
-    jobs:
-      - update-tag
-```
-
-Notice in this above example that you instantiate two different orbs, `aws-cli: circleci/aws-cli@0.1.4` and `aws-ecs: circleci/aws-ecs@0.0.3` to perform a number of sequential steps to ensure that the Amazon CLI is installed and configured before updating the Amazon ECS service.
+For a full list of usage options and orb elements see the [AWS-ECS orb page](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) in the CircleCI Orbs Registry.
 
 #### Verifying the Amazon ECS Service Update
 
@@ -446,7 +411,7 @@ The [CircleCI Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) 
 version: 2.1
 
 orbs:
-  slack: circleci/slackx.y.z
+  slack: circleci/slack@x.y.z
 
 workflows:
   your-workflow:
@@ -474,7 +439,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: <docker image>
+      - image: <docker-image-name-tag>
     steps:
       - slack/notify:
           color: '#42e2f4'
