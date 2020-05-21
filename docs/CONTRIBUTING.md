@@ -42,7 +42,7 @@ This will take you to the source file on GitHub,
 where you can submit a pull request for your changes.
 
 For larger edits or new documents,
-[set up a local environment](README-local-development.md).
+[set up a local environment](local-development.md).
 When you are satisfied with your changes,
 create a pull request from your branch
 by following [GitHub's guide](https://help.github.com/articles/creating-a-pull-request-from-a-fork/).
