@@ -39,7 +39,7 @@ workflows:
 
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-### Prerequisites: Configure Your Environment for CircleCI Pipelines and Orbs
+## Configure Your Environment for CircleCI Pipelines and Orbs
 
 Most recipies in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided it's worth checking that you're all set up for these features. The following notes and steps will get you where you need to be.
 
@@ -87,11 +87,11 @@ The Amazon Elastic Container Service (ECS) is a scalable container orchestration
   
 ### Build, Push and Deploy a Service Update
 
-To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to update a Service to use a newly built image from AWS ECR, you can use two orbs to keep your configuration as simple as possible: the `AWS-ECR` orb to build and push an updated image to ECR, and the `AWS-ECS` orb to deploy you service update.
+To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to deploy a newly built image from AWS ECR, you can use two orbs to keep your configuration as simple as possible: the `AWS-ECR` orb to build and push an updated image to ECR, and the `AWS-ECS` orb to deploy you service update.
 
-The configuration of these orbs uses a few environment variables, so you will first need to ensure they are set for your project or organisation. For more information see our guides to [using Environment Variables guide]({{ site.baseurl }}/2.0/env-vars/) and [using Contexts]({{ site.baseurl }}/2.0/contexts/). ensure you have the following environment variables set: `AWS_ECR_ACCOUNT_URL`, `MY_APP_PREFIX`, `AWS_REGION`. Note the `CIRCLE_SHA1` variable is a built-in env var, and so is always available.
+The configuration of these orbs uses some environment variables, so you should first ensure these are set for your project or organisation. For more information see our guides to [using Environment Variables guide]({{ site.baseurl }}/2.0/env-vars/) and [using Contexts]({{ site.baseurl }}/2.0/contexts/). Set the following environment variables: `AWS_ECR_ACCOUNT_URL`, `MY_APP_PREFIX`, `AWS_REGION`. **Note:** the `CIRCLE_SHA1` variable is a built-in env var, and so is always available.
 
-The following example shows building and pushing an image to ECR and pushing that image as a service update to ECS:
+The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
  
 ```yml
 version: 2.1 # 2.1 config required to use orbs
@@ -118,15 +118,17 @@ workflows:
 
 For a full list of usage options and orb elements see the [AWS-ECS orb page](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) in the CircleCI Orbs Registry.
 
-#### Verifying the Amazon ECS Service Update
+### Verifying the Amazon ECS Service Update
 
-Once you have updated the Amazon ECS service, verify the update was properly applied using the CircleCI Amazon ECR/ECS orb. This orb example is shown below.
+Once you have updated the Amazon ECS service, verify the update was properly applied using the CircleCI AWS CLI and ECS orbs. This orb example is shown below, this time, rather than using a built-in job to perform the required process, commands from the orbs are used as steps in the job definition for a job called `verify-deployment`. An addiitonal environment variable is needed this time: `AWS_ACCESS_KEY_ID`
 
 ```yaml
 version: 2.1
+
 orbs:
-  aws-cli: circleci/aws-cli@0.1.4
-  aws-ecs: circleci/aws-ecs@0.0.3
+  aws-cli: circleci/aws-cli@x.y.z
+  aws-ecs: circleci/aws-ecs@x.y.z
+
 jobs:
   verify-deployment:
     docker:
@@ -155,19 +157,13 @@ workflows:
       - verify-deployment
 ```
 
-This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the task definition, and then verify the revision has been deployed. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
+This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the [task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
 
-For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
+Find more detailed information in the CircleCI Orb Registry for the CircleCI [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) and [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) orbs.
 
 ## Interacting with Google Kubernetes Engine (GKE)
 
-The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
-
-### Prerequisites
-
-* Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required.
-* Ensure you use `version: 2.1` config. This is required to use orbs.
-* {% include snippets/enable-pipelines.md %}
+The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
 #### Setting Environment Variables
 The following environment variables need to be set in CircleCI either directly or through a context:
