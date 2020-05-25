@@ -34,7 +34,7 @@ commands:
            command: git submodule update --init src-shared
   ruby-deps:
     description: "Runs specialized Ruby cache steps."
-    paramters:
+    parameters:
       dir:
         description: |
           The directory relative to the root of the repo to run bundle for. 
@@ -48,8 +48,8 @@ commands:
           name: Install Ruby dependencies
           command: 
             |
-            if [[ "<< paramters.dir >>" != "" ]]; then
-              cd << paramters.dir >>
+            if [[ "<< parameters.dir >>" != "" ]]; then
+              cd << parameters.dir >>
             fi 
             bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
