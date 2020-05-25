@@ -1,6 +1,5 @@
 version: 2.1 # Set the CI version.
 
-
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
@@ -8,18 +7,15 @@ orbs:
   node: circleci/node@1.1.6
   md-proofer: hubci/md-proofer@0.1
 
-
 # Yaml References enable us to DRY out our config by sharing variables across multiple jobs.
 # In this case, we are commonly using the "workspaces" feature to share
 # build artifacts and files across jobs. For example, we build our Javascript
 # persist it to a workspace to be made available when the Jekyll site builds.
 references:
-  workspace_root: &workspace_root
-    /tmp/workspace
+  workspace_root: &workspace_root /tmp/workspace
   attach_workspace: &attach_workspace
     attach_workspace:
       at: *workspace_root
-
 
 # Several steps in this config use the same, specialized ruby-caching steps.
 # Commands can be used to extract a common set of steps into a reusable-block.
@@ -27,11 +23,11 @@ references:
 # It is executing a command to restore_cache, install deps if needed, and save_cache.
 commands:
   install-shared-assets:
-     description: "Updates the shared-code between outer and docs."
-     steps:
-       - run:
-           name: update submodules
-           command: git submodule update --init src-shared
+    description: "Updates the shared-code between outer and docs."
+    steps:
+      - run:
+          name: update submodules
+          command: git submodule update --init src-shared
   ruby-deps:
     description: "Runs specialized Ruby cache steps."
     steps:
@@ -45,11 +41,9 @@ commands:
           paths:
             - "vendor/bundle"
 
-
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
-
   build-deploy:
     jobs:
       - js_build
@@ -104,12 +98,11 @@ workflows:
           requires:
             - build
 
-
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
       name: node/default
-      tag: '8.11.1'
+      tag: "8.11.1"
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
@@ -133,8 +126,6 @@ jobs:
           paths:
             - js
 
-
-
   build_server_pdfs: # this job builds server-related pdf documentation, persisting it to the workspace as well.
     docker:
       - image: asciidoctor/docker-asciidoctor
@@ -144,13 +135,13 @@ jobs:
       - run:
           name: Build PDFs for Server
           command: ./scripts/build_pdfs_local.sh
-      - store_artifacts: 
+      - store_artifacts:
           path: release/tmp/
 
   build_config_builder: # this job runs the src-config-builder build process and moves the output into jekyll.
     executor:
       name: node/default
-      tag: '8.11.1'
+      tag: "8.11.1"
     steps:
       - checkout
       - install-shared-assets
@@ -181,7 +172,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.6.3-node-browsers'
+      tag: "2.6.3-node-browsers"
     steps:
       - checkout
       - install-shared-assets
@@ -201,6 +192,7 @@ jobs:
           paths:
             - src-api/vendor/bundle
             - src-api/node_modules
+            - /usr/local/bundle
       - run:
           name: Build API 1.x documentation with Slate
           command: ./scripts/build_api_docs.sh -v1
@@ -212,12 +204,11 @@ jobs:
           paths:
             - api
 
-
   # TODO: fix copying of build artifacts.
   build_config_ref: # a job to manage building our config-reference documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.6.3-node-browsers'
+      tag: "2.6.3-node-browsers"
     steps:
       - checkout
       - install-shared-assets
@@ -235,6 +226,7 @@ jobs:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
           paths:
             - src-crg/vendor/bundle
+            - /usr/local/bundle
       - run:
           name: Build CRG documentation with Slate
           command: ./scripts/build_api_docs.sh -crg
@@ -248,7 +240,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.6.3-node-browsers'
+      tag: "2.6.3-node-browsers"
 
     working_directory: ~/circleci-docs
     environment:
@@ -292,11 +284,11 @@ jobs:
             mkdir -p /tmp/workspace/config-builder
             mkdir -p jekyll/config-builder
             cp -R /tmp/workspace/config-builder/* jekyll/config-builder/
-            
+
             mkdir -p /tmp/workspace/crg
             mkdir -p jekyll/reference-2-1
             cp -R /tmp/workspace/crg/* jekyll/reference-2-1/
-            
+
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run:
@@ -324,7 +316,7 @@ jobs:
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.6.3-node-browsers'
+      tag: "2.6.3-node-browsers"
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -351,4 +343,3 @@ jobs:
       - run:
           name: Deploy to S3 if tests pass and branch is Master
           command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
-
