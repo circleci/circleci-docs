@@ -192,12 +192,12 @@ jobs:
       # Since this job has both Ruby and Node dependencies we are going
       # to use a cache-key that combines each respective language's package-lock file.
       - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
       - run:
           name: Install Ruby + Node dependencies
           command: cd src-api; bundle install; npm install
       - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
           paths:
             - src-api/vendor/bundle
             - src-api/node_modules
@@ -228,12 +228,12 @@ jobs:
           command: mkdir -p /tmp/workspace/crg/
       # to use a cache-key that combines each respective language's package-lock file.
       - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
+          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
           command: cd src-crg; bundle install
       - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
+          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
           paths:
             - src-crg/vendor/bundle
             - /usr/local/bundle
