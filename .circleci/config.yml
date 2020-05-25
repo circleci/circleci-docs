@@ -174,7 +174,7 @@ jobs:
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
       - run:
-          name: Install Node dependencies
+          name: Install node dependencies
           command: cd src-config-builder; npm install;
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
