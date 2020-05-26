@@ -15,6 +15,10 @@ Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not curr
 Access to billing functions is only available from the CircleCI application.
 </aside>
 
+<aside class="notice">
+Our v1.1 API enforces that same rate limits as the V2 API. The API will return HTTP status 429 in some cases. You can read more about the limit <a href="https://circleci.com/docs/2.0/api-developers-guide/#rate-limits">here.</a>
+</aside>
+
 ## API Syntax
 
 When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown in the pane to the right:
