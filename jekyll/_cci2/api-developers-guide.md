@@ -98,12 +98,23 @@ If you receive a 400 HTTP status code, there is a problem with the request and t
 * 401 - Unauthorized
 * 403 - Forbidden
 * 404 - Not Found
+* 429 - Too Many Requests (see [rate limits](#rate-limits)).
 
 ## 500 Status Code
 
 If you receive a 500 HTTP status code, there is a problem with the server and the request cannot be processed. If you encounter a 500 response, the error will be logged and CircleCI will work to resolve the error. The following 500 HTTP status codes could potentially be returned with your request:
 
 * 500 - Internal Server Error
+
+# Rate Limits
+
+The CircleCI API is protected by a number of rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+
+As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure.
+There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
+
+For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
+In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
 # REST API Tutorial
 
