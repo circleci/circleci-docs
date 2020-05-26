@@ -34,16 +34,29 @@ commands:
            command: git submodule update --init src-shared
   ruby-deps:
     description: "Runs specialized Ruby cache steps."
+    parameters:
+      dir:
+        description: |
+          The directory relative to the root of the repo to run bundle for. 
+          Leave empty for root directory.
+        type: string
+        default: ""
     steps:
       - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
       - run:
           name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+          command: 
+            |
+            if [[ "<< parameters.dir >>" != "" ]]; then
+              cd << parameters.dir >>
+            fi 
+            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
           paths:
             - "vendor/bundle"
+            - "<< parameters.dir >>/vendor/bundle"
 
 
 # Workflows orchestrate a set of jobs to be run;
@@ -161,7 +174,7 @@ jobs:
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
       - run:
-          name: Install Ruby + Node dependencies
+          name: Install node dependencies
           command: cd src-config-builder; npm install;
       - save_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
@@ -189,17 +202,16 @@ jobs:
       - run:
           name: "Create landing folder for API doc output"
           command: mkdir -p /tmp/workspace/api/v2
-      # Since this job has both Ruby and Node dependencies we are going
-      # to use a cache-key that combines each respective language's package-lock file.
+      - ruby-deps:
+          dir: src-api
       - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
       - run:
-          name: Install Ruby + Node dependencies
-          command: cd src-api; bundle install; npm install
+          name: Install Node dependencies
+          command: cd src-api; npm install
       - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-api/Gemfile.lock" }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
           paths:
-            - src-api/vendor/bundle
             - src-api/node_modules
       - run:
           name: Build API 1.x documentation with Slate
@@ -225,16 +237,8 @@ jobs:
       - run:
           name: "Create landing folder for crg output"
           command: mkdir -p /tmp/workspace/crg/
-      # to use a cache-key that combines each respective language's package-lock file.
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
-      - run:
-          name: Install Ruby dependencies
-          command: cd src-crg; bundle install
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-crg/Gemfile.lock" }}
-          paths:
-            - src-crg/vendor/bundle
+      - ruby-deps:
+          dir: src-crg
       - run:
           name: Build CRG documentation with Slate
           command: ./scripts/build_api_docs.sh -crg
@@ -264,15 +268,7 @@ jobs:
       - run:
           name: "Test Markdown Files"
           command: md-proofer lint jekyll/_cci2/ jekyll/_api/ jekyll/_cci1/
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - "vendor/bundle"
+      - ruby-deps
       - run:
           name: Create results directory
           command: mkdir -p $JOB_RESULTS_PATH
@@ -334,9 +330,7 @@ jobs:
       - *attach_workspace
       - restore_cache:
           key: circleci-docs-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-      - run:
-          name: Install Ruby dependencies
-          command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - ruby-deps
       - run:
           name: Update Algolia Index
           command: |
