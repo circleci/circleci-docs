@@ -444,7 +444,7 @@ jobs:
 
   swiftlint:
     docker:
-      - image: dantoml/swiftlint:latest
+      - image: bytesguy/swiftlint:latest
     steps:
       - checkout
       - run: swiftlint lint --reporter junit | tee result.xml
