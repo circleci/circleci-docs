@@ -107,7 +107,7 @@ Reference](https://circleci.com/docs/2.0/configuration-reference).
 
 Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
 GitHub, it is possible to edit files directly. Use the URL below and substitute
-the name of your repository and username (replace the text within `{brackets}`) and
+the name of your repository and username (replace the text with `{brackets}`) and
 then paste it in your browser. If you are already familiar with Git, use your
 text-editor and push your changes with git. 
 
