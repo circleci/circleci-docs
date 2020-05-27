@@ -455,7 +455,7 @@ jobs:
 
   danger:
     docker:
-      - image: dantoml/danger:latest
+      - image: bytesguy/danger:latest
     steps:
       - checkout
       - run: danger
