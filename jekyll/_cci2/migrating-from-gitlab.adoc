@@ -57,9 +57,9 @@ The GitLab and CircleCI configurations will be different. It may be helpful to h
 
 Some differences that are worth calling out:
 
-==== Defining a job that executes a single build step
+=== Defining a job that executes a single build step
 
-[.table.table-striped.table-migrate]
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
@@ -83,9 +83,41 @@ jobs:
 ----
 |===
 
-==== Specify a Docker image to use for a job
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| GitLab
 
-[.table.table-striped.table-migrate]
+a|
+[source, yaml]
+----
+job1:
+  script: "execute-script-for-job1"
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| CircleCI
+
+a|
+[source, yaml]
+----
+jobs:
+  job1:
+    steps:
+      - checkout
+      - run: "execute-script-for-job1"
+----
+|===
+
+
+=== Specify a Docker image to use for a job
+
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
@@ -105,16 +137,44 @@ jobs:
   job1:
     docker:
       - image: node:10
-
 ----
 |===
 
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| GitLab
 
-==== Define a multi-stage build pipeline
+a|
+[source, yaml]
+----
+job1:
+  image: node:10
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| CircleCI
+
+a|
+[source, yaml]
+----
+jobs:
+  job1:
+    docker:
+      - image: node:10
+----
+|===
+
+=== Define a multi-stage build pipeline
 
 Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
-[.table.table-striped.table-migrate]
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
@@ -179,11 +239,83 @@ workflows:
 ----
 |===
 
-==== Execute jobs on multiple platforms
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| GitLab
+
+a|
+[source, yaml]
+----
+job1:
+  stage: build
+  script: make build dependencies
+
+job2:
+  stage: build
+  script: make build artifacts
+
+job3:
+  stage: test
+  script: make test
+
+job4:
+  stage: deploy
+  script: make deploy
+
+stages:
+  - build
+  - test
+  - deploy
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| CircleCI
+
+a|
+[source, yaml]
+----
+version: 2
+jobs:
+  job1:
+    steps:
+      - checkout
+      - run: make build dependencies
+  job2:
+    steps:
+      - run: make build artifacts
+  job3:
+    steps:
+      - run: make test
+  job4:
+    steps:
+      - run: make deploy
+
+workflows:
+  version: 2
+  jobs:
+    - job1
+    - job2
+    - job3:
+        requires:
+          - job1
+          - job2
+    - job4:
+        requires:
+          - job3
+----
+|===
+
+=== Execute jobs on multiple platforms
 
 GitLab uses tags to identify build runners. CircleCI provides all major OSes and Docker and must explicitly set in config. See our https://circleci.com/docs/2.0/executor-types/#section=configuration[Executors documentation] for more information.
 
-[.table.table-striped.table-migrate]
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
@@ -224,9 +356,57 @@ jobs:
 ----
 |===
 
-==== Cache dependencies
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| GitLab
 
-[.table.table-striped.table-migrate]
+a|
+[source, yaml]
+----
+ubuntu job:
+  tags:
+    - ubuntu
+  script:
+    - echo "Hello, $USER!"
+
+osx job:
+  tags:
+    - osx
+  script:
+    - echo "Hello, $USER!"
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| CircleCI
+
+a|
+[source, yaml]
+----
+jobs:
+  ubuntu-job:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run: echo "Hello, $USER!"
+  osx-job:
+    macos:
+      xcode: 11.3.0
+    steps:
+      - checkout
+      - run: echo "Hello, $USER!"
+----
+|===
+
+=== Cache Dependencies
+
+[.table.table-striped.cf.table-migrate-desktop]
 [cols=2*, options="header", stripes=even]
 [cols="5,5"]
 |===
@@ -267,7 +447,59 @@ jobs:
           paths:
             - node_modules
       - run: node ./specs/start.js
+{% endraw %}
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| GitLab
+
+a|
+[source, yaml]
+----
+image: node:latest
+
+# Cache modules in between jobs
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+before_script:
+  - npm install
+
+test_async:
+  script:
+    - node ./specs/start.js
+----
+|===
+
+[.table.table-striped.cf.table-migrate-mobile]
+[cols=1*, options="header", stripes=even]
+[cols="100%"]
+|===
+| CircleCI
+
+a|
+[source, yaml]
+----
 {% raw %}
+jobs:
+  test_async:
+    steps:
+      - restore_cache:
+          key: source-v1-{{ checksum "package.json" }}
+      - checkout
+      - run: npm install
+      - save_cache:
+          key: source-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: node ./specs/start.js
+{% endraw %}
 ----
 |===
 
