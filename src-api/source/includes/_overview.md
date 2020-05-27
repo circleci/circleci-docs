@@ -16,7 +16,7 @@ Access to billing functions is only available from the CircleCI application.
 </aside>
 
 <aside class="notice">
-Our v1.1 API enforces that same rate limits as the V2 API. The API will return HTTP status 429 in some cases. You can read more about the limit <a href="https://circleci.com/docs/2.0/api-developers-guide/#rate-limits">here.</a>
+The CircleCI v1.1 API enforces the same rate limits as the V2 API. The API will return HTTP status 429 in some cases. You can read more about the limit <a href="https://circleci.com/docs/2.0/api-developers-guide/#rate-limits">here.</a>
 </aside>
 
 ## API Syntax
@@ -167,4 +167,3 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.
 /project/:vcs-type/:username/:project/build-cache | Clears the cache for a project.
 /project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.
-
