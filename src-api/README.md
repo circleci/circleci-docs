@@ -17,7 +17,7 @@ changes and the CI build will generate the new documentation.
 You can't make direct changes to the API v2 from within this repo because it is
 build from a **spec** (Using Open API). The spec is generated from a backend
 service, from within the code; you will need to speak with a team member who
-manages/works on our API's and ask them to make a change.
+manages/works on our APIs and ask them to make a change.
 
 ### I want to see V1 changes locally.
 
