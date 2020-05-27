@@ -144,7 +144,7 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-parameters | N | Map | A map of parameters that need to be passed as part of the request when performing this operation
+parameters | N | Map | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`. 
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -157,6 +157,7 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 #### `environment`
 A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
+
 
 #### `parallelism`
 
@@ -179,6 +180,15 @@ jobs:
     steps:
       - run: go test -v $(go list ./... | circleci tests split)
 ```
+
+#### `parameters`
+The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-1). Reserved parameter-names:
+
+* `name`: for aliasing that `job`-name in the specific `workflow`.
+<!-- Others? -->
+
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
+
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
