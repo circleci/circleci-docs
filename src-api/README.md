@@ -31,7 +31,7 @@ is parroted from their docs. You will need:
 
 **NOTE:** The original Slate repository requires that you _fork_ the repo to
 build your docs. Instead, we have vendored the repo into _our_ docs. To develop
-_our_ API locally, execute the following:
+_our_ API locally, execute the following command:
 
 ```shell
 bundle install
