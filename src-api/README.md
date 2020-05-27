@@ -26,7 +26,7 @@ is parroted from their docs. You're going to need:
 
  - **Linux or macOS**
  - **Ruby, version 2.3.1 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't
+ - **Bundler** — If Ruby is already installed, but the `bundle` command does not
    work, just run `gem install bundler` in a terminal.
 
 **NOTE:** The original Slate repository requires that you _fork_ the repo to
