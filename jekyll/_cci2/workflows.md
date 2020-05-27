@@ -7,8 +7,6 @@ categories: [configuring-jobs]
 order: 30
 ---
 
-![header](  {{ site.baseurl }}/assets/img/docs/wf-header.png)
-
 To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
