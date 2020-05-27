@@ -30,7 +30,7 @@ is parroted from their docs. You will need:
    work, just run `gem install bundler` in a terminal.
 
 **NOTE:** The original Slate repository requires that you _fork_ the repo to
-build your docs. Instead, we've vendored the repo into _our_ docs. To develop
+build your docs. Instead, we have vendored the repo into _our_ docs. To develop
 _our_ API locally, execute the following:
 
 ```shell
