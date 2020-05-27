@@ -22,7 +22,7 @@ manages/works on our APIs and ask them to make a change.
 ### I want to see V1 changes locally.
 
 You will need to follow Slate's local development process. Most of the following content
-is parroted from their docs. You're going to need:
+is parroted from their docs. You will need:
 
  - **Linux or macOS**
  - **Ruby, version 2.3.1 or newer**
