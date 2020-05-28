@@ -46,7 +46,7 @@ include::ops.adoc[]
 
 include::backup.adoc[]
 
-include::security.adoc[]
+include::security-server.adoc[]
 
 include::troubleshooting.adoc[]
 

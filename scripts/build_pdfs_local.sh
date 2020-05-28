@@ -6,7 +6,7 @@ DATE=$(date +"%m/%d/%Y")
 
 VERSION="2.19.3"
 
-COMMENT="DRAFT"
+COMMENT="FINAL"
 
 echo "Building Ops Guide"
 

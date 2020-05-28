@@ -361,7 +361,7 @@ en:
         - name: Backup and Recovery
           link: 2.0/backup/
         - name: Security
-          link: 2.0/security/
+          link: 2.0/security-server/
         - name: Troubleshooting
           link: 2.0/troubleshooting/
         - name: Faq
