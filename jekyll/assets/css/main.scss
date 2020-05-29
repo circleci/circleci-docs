@@ -151,6 +151,7 @@ div.article-container{
 	width: calc(100% - 260px);
 }
 	article{
+    h1,
 		h2,
 		h3,
 		h4,
@@ -422,4 +423,9 @@ pre {
 
 h6{
 	font-size: 16px;
+}
+
+.heading-link {
+    font-size: 12px;
+    padding: 0 0 0 4px;
 }

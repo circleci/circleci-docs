@@ -209,12 +209,16 @@ $( document ).ready(function() {
 	});
 
 	// Give article headings direct links to anchors
-	$("article h2, article h3, article h4, article h5, article h6").filter("[id]").each(function () {
+	$("article h1, article h2, article h3, article h4, article h5, article h6").filter("[id]").each(function () {
 		$(this).append('<a href="#' + $(this).attr("id") + '"><i class="fa fa-link"></i></a>');
 	});
-	$("article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
+	$("article h1, article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
 		$(this).find("i").toggle();
 	});
+
+	// $("article h1").filter("[id]").hover(function () {
+	// 	$(this).find("i").toggle();
+	// });
 
   renderTabbedHtml();
 
