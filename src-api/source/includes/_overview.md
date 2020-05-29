@@ -25,7 +25,6 @@ There are different protections and limits in place for different parts of the A
 For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
 In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
-
 ## API Syntax
 
 When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown in the pane to the right:
@@ -174,4 +173,3 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.
 /project/:vcs-type/:username/:project/build-cache | Clears the cache for a project.
 /project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.
-

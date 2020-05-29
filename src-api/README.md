@@ -17,21 +17,21 @@ changes and the CI build will generate the new documentation.
 You can't make direct changes to the API v2 from within this repo because it is
 build from a **spec** (Using Open API). The spec is generated from a backend
 service, from within the code; you will need to speak with a team member who
-manages/works on our API's and ask them to make a change.
+manages/works on our APIs and ask them to make a change.
 
 ### I want to see V1 changes locally.
 
-You'll need to follow Slate's local development process. Most of the following
-is parroted from their docs. You're going to need:
+You will need to follow Slate's local development process. Most of the following content
+is parroted from their docs. You will need:
 
  - **Linux or macOS**
  - **Ruby, version 2.3.1 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't
-   work, just run `gem install bundler` in a terminal.
+ - **Bundler** — If Ruby is already installed, but the `bundle` command does not
+   work, run `gem install bundler` in a terminal window.
 
 **NOTE:** The original Slate repository requires that you _fork_ the repo to
-build your docs. Instead, we've vendored the repo into _our_ docs. To develop
-_our_ API locally, execute the following:
+build your docs. Instead, we have vendored the repo into _our_ docs. To develop
+_our_ API locally, execute the following command:
 
 ```shell
 bundle install
@@ -42,7 +42,7 @@ You can now see the docs at http://localhost:4567.
 
 ### Updating Slate
 
-Slate isn't exactly a library that you can `npm install` or `npm update`. If
+Slate is not exactly a library where you can run the `npm install` or `npm update` commands. If
 Slate releases an update that we need, currently, it will require us to download
 their repo again, and replace the src files (but don't delete our
 index.html.md!)
