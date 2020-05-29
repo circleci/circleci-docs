@@ -216,10 +216,6 @@ $( document ).ready(function() {
 		$(this).find("i").toggle();
 	});
 
-	// $("article h1").filter("[id]").hover(function () {
-	// 	$(this).find("i").toggle();
-	// });
-
   renderTabbedHtml();
 
 	$.getJSON("/api/v1/me").done(function (userData) {
