@@ -182,10 +182,17 @@ jobs:
 ```
 
 #### `parameters`
-The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-1). Reserved parameter-names:
+The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-1).
 
-* `name`: for aliasing that `job`-name in the specific `workflow`.
+Reserved parameter-names:
+
+* `name`
+* `requires`
+* `context`
+* `type`
+* `filters`
 <!-- Others? -->
+<!-- branches, matrix & type pass `circleci config validate`. Strange --> 
 
 See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
