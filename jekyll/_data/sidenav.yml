@@ -438,8 +438,6 @@ server:
           link: 2.0/first-steps/
         - name: Hello World
           link: 2.0/hello-world/
-        - name: Hello World MacOS
-          link: 2.0/hello-world-macos/
         - name: Hello World Windows
           link: 2.0/hello-world-windows/
         - name: Get Started with the CLI

@@ -4,6 +4,12 @@
 				{% assign lang = page.lang %}
 				{% assign sidenav = site.data.sidenav[lang] %}
 				{% assign current_url = page.url | slice: 1, page.url.size %}
+	<div class="lang-picker">
+		<select id="sidebarProdSelect">
+			<option value="en">English</option>
+			<option value="server">Server v2.x</option>
+		</select>
+		</div>
 
     <div class="sidebar-item-group">
 						{% for main-item in sidenav %}
