@@ -1046,17 +1046,20 @@ Slack is a real-time collaboration application where team members can work toget
 
 ### Prerequisites
 
-Before enabling custom notifications in Slack while using the CircleCI platform, ensure your environment is properly configured and setup to leverage the CircleCI platform and orbs.
+* Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required.
+* Ensure you use `version: 2.1` config. This is required to use orbs.
+* {% include snippets/enable-pipelines.md %}
 
 ### Notifying a Slack Channel of Pending Approval
 
-The CircleCI Slack orb enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
+The [CircleCI Slack orb](https://circleci.com/orbs/registry/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
 
 ```yaml
 version: 2.1
+
 orbs:
-  slack: circleci/slack@1.0.0
-version: 2.1
+  slack: circleci/slack@x.y.z
+
 workflows:
   your-workflow:
     jobs:
@@ -1064,9 +1067,9 @@ workflows:
           message: Pending approval
           webhook: webhook
 ```
-In the above example, note that you first need to invoke the `circleci/slack@1.0.0` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
+In the above example, note that you first need to invoke the `circleci/slack@x.y.z` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
 
-For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
+There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
 
 ### Notifying a Slack Channel With Custom Messages
 
@@ -1076,33 +1079,33 @@ The example shown below details how you can create a custom message that will be
 
 ```yaml
 version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
 jobs:
   build:
     docker:
-      - image: <docker image>
+      - image: <docker-image-name-tag>
     steps:
       - slack/notify:
           color: '#42e2f4'
           mentions: 'USERID1,USERID2,'
           message: This is a custom message notification
           webhook: webhook
-orbs:
-  slack: circleci/slack@1.0.0
-version: 2.1
+
 workflows:
   your-workflow:
     jobs:
       - build
 ```
 
-After building a Docker image, perform the following steps to create your custom notification:
+In this example, the Slack orb command `notify` is used, along with the following parameters to create a custom notification:
 
 1. Specify the `color` of the text in the message.
 2. Identify the recipients (`mentions`) of the message.
 3. Provide the text in the `message` you want delivered.
 4. Specify the `webhook` for the message – see this [guide](https://api.slack.com/incoming-webhooks) for more on creating Slack webhooks.
-
-Once you have performed these steps, invoke the CircleCI Slack orb (`circleci/slack@1.0.0`) to initiate the workflow to deliver your notification.
 
 ### Sending a Status Alert at the End of a Job Based on Success or Failure
 
@@ -1112,6 +1115,10 @@ The example below shows how you can send a status alert at the end of a job.
 
 ```yaml
 version: 2.1
+
+orbs:
+  slack: circleci/slack@x.y.z
+
 jobs:
   build:
     docker:
@@ -1121,12 +1128,10 @@ jobs:
       - slack/status:
           fail_only: 'true'
           mentions: 'USERID1,USERID2'
-          only_for_branch: only_for_branch
+          only_for_branch: your-branch-name
           webhook: webhook
-orbs:
-  slack: circleci/slack@1.0.0
-version: 2.1
 ```
+
 Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
 
 For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
