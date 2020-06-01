@@ -193,7 +193,7 @@ If you need more information on how to set these environment variables, refer to
 ### Creating and Deleting Clusters
 Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
-```yml
+```yaml
 version: 2.1
 
 orbs:
