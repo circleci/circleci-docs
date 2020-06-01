@@ -451,7 +451,7 @@ Before using the AWS EKS orb, make sure you meet the following requirements:
 
 ### Create an EKS Cluster
 
-Once you meet the requirements for using the CircleCI `aws-eks` orb, you can create, teat and teardown an EKS cluster using the code sample shown below.
+Once you meet the requirements for using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
 
 ```yaml
 version: 2.1
