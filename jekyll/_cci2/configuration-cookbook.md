@@ -177,13 +177,9 @@ This example illustrates how you can use the orb to install and configure the AW
 
 For more detailed information about the CircleCI Amazon ECS/ECR orb, refer to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/aws-ecs).
 
-## Deploying Software Changes to Google Kubernetes Engine (GKE)
+## Interacting with Google Kubernetes Engine (GKE)
 
-The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly and easily deploy code and application updates to your customers without requiring significant time to deliver these updates. Using the GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
-
-### Prerequisites
-
-The sections below list the prerequisites that must be met before deploying any software changes to the Google Kubernetes Engine (GKE).
+The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
 #### Setting Environment Variables
 The following environment variables need to be set in CircleCI either directly or through a context:
@@ -194,240 +190,55 @@ The following environment variables need to be set in CircleCI either directly o
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
 
-### Managing GKE Actions
+### Creating and Deleting Clusters
+Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
-The CircleCI GKE orb enables you to perform several different actions within the orb while working with a GKE cluster, including:
-
-- installing `gcloud` and `kubectl` if it is not already installed
-- initialize the `gcloud` CLI
-- update an existing deployment's docker image
-
-The code example below shows how you can perform these actions while also rolling out the docker image to the GKE cluster.
-
-```yaml
+```yml
 version: 2.1
-commands:
-  install:
-    description: "Install `gcloud` and `kubectl` if not already installed."
-    steps:
-      - gcloud/install
-      - k8s/install
-  init:
-    description: "Initialize the `gcloud` CLI."
-    steps:
-      - gcloud/initialize
-  rollout-image:
-    description: "Update a deployment's Docker image."
-    parameters:
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      image:
-        description: A name for your docker image
-        type: string
-    steps:
-      - run: |
-          gcloud container clusters get-credentials <<parameters.deployment>>
-          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+
+workflows:
+  main:
+    jobs:
+      - gke/create-cluster:
+          cluster: gcp-testing
 ```
 
-**Note:** When running these steps, please note that you should use your cluster name in GKE, in addition to separating the cluster and deployment parameters.
+To delete a cluster, all you need is:
+
+```yml
+version: 2.1
+
+orbs:
+  gke: circleci/gcp-gke@x.y.z
+
+workflows:
+  main:
+    jobs:
+      - gke/delete-cluster:
+          cluster: gcp-testing
+```
 
 ### Publishing and Rolling Out The Image to the GKE Cluster
 
-Now that you have installed (if necessary) and initialized `gcloud` and updated the docker image, you may then publish and roll out this updated image to the GKE cluster for later use.
-
-```yaml
-version: 2.1
-jobs:
-  publish-and-rollout-image:
-    description: "Update cluster with new Docker image."
-    machine: true
-    parameters:
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      gcloud-service-key:
-        description: The gcloud service key
-        type: env_var_name
-        default: GCLOUD_SERVICE_KEY
-      google-project-id:
-        description: The Google project ID to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_PROJECT_ID
-      google-compute-zone:
-        description: The Google compute zone to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_COMPUTE_ZONE
-      registry-url:
-        description: The GCR registry URL from ['', us, eu, asia].gcr.io
-        type: string
-        default: gcr.io
-      image:
-        description: A name for your docker image
-        type: string
-      tag:
-        description: A docker image tag
-        type: string
-        default: "latest"
-      path-to-dockerfile:
-        description: The relative path to the Dockerfile to use when building image
-        type: string
-        default: "."
-    steps:
-      - checkout
-      - gcr/gcr-auth:
-          google-project-id: <<parameters.google-project-id>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-      - install
-      - gcr/build-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: << parameters.tag >>
-          path-to-dockerfile: <<parameters.path-to-dockerfile>>
-      - gcr/push-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: <<parameters.tag>>
-      - rollout-image:
-          deployment: "<<parameters.deployment>>"
-          container: "<<parameters.container>>"
-          image: "<<parameters.image>>"
-```
-
-### Example GKE Orb
-
-The example below shows how you can use the CircleCI GKE orb to log into the Google Cloud Platform (GCP), build and publish a docker image, and then roll the image out to the GKE cluster.
+Using the CircleCI GKE orb makes publishing and rolling out a docker image to your GKE cluster very simple, as shown in the example below. All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/orbs/registry/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
 
 ```yaml
 version: 2.1
 
-# Orb Dependencies
 orbs:
-  gcloud: circleci/gcp-cli@1.0.6
-  gcr: circleci/gcp-gcr@0.0.2
-  k8s: circleci/kubernetes@0.1.0
+  gke: circleci/gcp-gke@x.y.z
 
-commands:
-  install:
-    description: "Install `gcloud` and `kubectl` if not already installed."
-    steps:
-      - gcloud/install
-      - k8s/install
-  init:
-    description: "Initialize the `gcloud` CLI."
-    steps:
-      - gcloud/initialize
-  rollout-image:
-    description: "Update a deployment's Docker image."
-    parameters:
-      cluster:
-        description: "The Kubernetes cluster name."
-        type: string
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      image:
-        description: A name for your docker image
-        type: string
-    steps:
-      - run: |
-          gcloud container clusters get-credentials <<parameters.cluster>>
-          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
-
-jobs:
-  publish-and-rollout-image:
-    description: "Update cluster with new Docker image."
-    machine: true
-    parameters:
-      cluster:
-        description: "The Kubernetes cluster name."
-        type: string
-      deployment:
-        description: "The Kubernetes deployment name."
-        type: string
-      container:
-        description: "The Kubernetes container name."
-        type: string
-      gcloud-service-key:
-        description: The gcloud service key
-        type: env_var_name
-        default: GCLOUD_SERVICE_KEY
-      google-project-id:
-        description: The Google project ID to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_PROJECT_ID
-      google-compute-zone:
-        description: The Google compute zone to connect with via the gcloud CLI
-        type: env_var_name
-        default: GOOGLE_COMPUTE_ZONE
-      registry-url:
-        description: The GCR registry URL from ['', us, eu, asia].gcr.io
-        type: string
-        default: gcr.io
-      image:
-        description: A name for your docker image
-        type: string
-      tag:
-        description: A docker image tag
-        type: string
-        default: "latest"
-      path-to-dockerfile:
-        description: The relative path to the Dockerfile to use when building image
-        type: string
-        default: "."
-    steps:
-      - checkout
-      - gcr/gcr-auth:
-          google-project-id: <<parameters.google-project-id>>
-          google-compute-zone: <<parameters.google-compute-zone>>
-      - install
-      - gcr/build-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: << parameters.tag >>
-          path-to-dockerfile: <<parameters.path-to-dockerfile>>
-      - gcr/push-image:
-          registry-url: <<parameters.registry-url>>
-          google-project-id: <<parameters.google-project-id>>
-          image: <<parameters.image>>
-          tag: <<parameters.tag>>
-      - rollout-image:
-          cluster: "<<parameters.cluster>>"
-          deployment: "<<parameters.deployment>>"
-          container: "<<parameters.container>>"
-          image: "<<parameters.image>>"
-
-example:
-  publish-and-rollout-image:
-    description: |
-      "The simplest example of using this Orb. Logs into GCP, builds and 
-      publishes a Docker image, and then rolls the image out to a GKE cluster."
-    usage:
-      version: 2.1
-      orbs:
-        gke: felicianotech/test-gke@dev:testing-3
-      workflows:
-        main:
-          jobs:
-            - build
-            - gke/publish-and-rollout-image:
-                context: gcp-testing
-                deployment: orb-badge-server
-                image: orb-badge-server
-                tag: "2"
+workflows:
+  my-workflow:
+    jobs:
+      - gke/publish-and-rollout-image:
+          cluster: <my-cluster-name>
+          container: <my-kubernetes-container-name>
+          deployment: <my-kubernetes-deployment-name>
+          image: <my-docker-image-name>
 ```
 
 ## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
