@@ -153,7 +153,7 @@ The following environment variables need to be set in CircleCI either directly o
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
 
-### Crating and Deleting Clusters
+### Creating and Deleting Clusters
 Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
 ```yml
@@ -172,9 +172,11 @@ workflows:
 To delete a cluster, all you need is:
 
 ```yml
+version: 2.1
+
 orbs:
   gke: circleci/gcp-gke@x.y.z
-version: 2.1
+
 workflows:
   main:
     jobs:
