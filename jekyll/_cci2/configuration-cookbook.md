@@ -208,7 +208,7 @@ workflows:
 
 To delete a cluster, all you need is:
 
-```yml
+```yaml
 version: 2.1
 
 orbs:
