@@ -1,0 +1,21 @@
+---
+layout: classic-docs
+title: "Glossary"
+short-title: "Glossary"
+description: "Glossary for terms used within CircleCI"
+categories: [reference]
+order: 2
+---
+
+<a href="https://circleci.com/docs/2.0/reference/">Reference</a> > Glossary
+
+{% assign sorted_terms = site._glossary | sort: 'term' %}
+{% for term in sorted_terms %}
+    <h3 id="{{ term.term | slugify }}">{{ term.term }}</h3>
+    {{ term.output }}
+{% endfor %}
+
+
+
+
+
