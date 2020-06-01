@@ -184,7 +184,7 @@ The `$BASH_ENV` workaround only works with `bash`. Other shells probably won't w
 
 An image that's based on [Alpine Linux](https://alpinelinux.org/) (like [docker](https://hub.docker.com/_/docker)), uses the `ash` shell. 
 
-To use environment variables with `ash`, just add these 2 parameters to your job.
+To use environment variables with `bash`, just add these 2 parameters to your job.
 
 ```yaml
 version: 2.1
