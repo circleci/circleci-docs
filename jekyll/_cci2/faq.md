@@ -325,6 +325,13 @@ You can pay from inside the CircleCI app for monthly pricing.
 
 On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling back to 25% on reaching 10% of credits available) will be paid _at the time of the refill_.
 
+#### Am I charged if my build is "Queued" or "Preparing"?
+
+No. If you are notified that a job is "queued", it indicates that your job is
+waiting due to a **plan** or **concurrency** limit. If your job indicates that
+it is "preparing", it means that CircleCI is setting up or _dispatching_ your
+job so that it may run.
+
 #### What are the other renewal dates?
 {:.no_toc}
 
