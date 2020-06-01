@@ -32,7 +32,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
- `11.5.0` | Xcode 11.5 Beta 2 (Build 11N605f)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2925/index.html)
+ `11.5.0` | Xcode 11.5 GM (Build 11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html)
  `11.4.1` | Xcode 11.4.1 (Build 11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)
  `11.4.0` | Xcode 11.4 (Build 11E146)       | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2796/index.html)
  `11.3.1` | Xcode 11.3.1 (Build 11C505)     | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
@@ -444,7 +444,7 @@ jobs:
 
   swiftlint:
     docker:
-      - image: dantoml/swiftlint:latest
+      - image: bytesguy/swiftlint:latest
     steps:
       - checkout
       - run: swiftlint lint --reporter junit | tee result.xml
@@ -455,7 +455,7 @@ jobs:
 
   danger:
     docker:
-      - image: dantoml/danger:latest
+      - image: bytesguy/danger:latest
     steps:
       - checkout
       - run: danger

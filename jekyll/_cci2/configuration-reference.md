@@ -9,7 +9,7 @@ order: 20
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
 
-You can see a complete `config.yml` in our [full example](#full-example).
+You can see a complete `config.yml` in our [full example](#example-full-configuration).
 
 **Note:** If you already have a CircleCI 1.0 configuration, the `config.yml` file allows you to test 2.x builds on a separate branch, leaving any existing configuration in the old `circle.yml` style unaffected and running on the CircleCI 1.0 infrastructure in branches that do not contain `.circleci/config.yml`.
 
@@ -1368,6 +1368,24 @@ Key | Required | Type | Description
 filters | N | Map | A map defining rules for execution on specific branches
 {: class="table table-striped"}
 
+The following is an example of how the CircleCI documentation uses a regex to filter running a workflow for building PDF documentation:
+
+```yaml
+# ...
+workflows:
+  build-deploy:
+    jobs:
+      - js_build
+      - build_server_pdfs: # << the job to conditionally run based on the filter-by-branch-name.
+          filters:
+            branches:
+              only: /server\/.*/
+```
+
+The above snippet causes the job  `build_server_pdfs` to only be run when the branch being built contains the word "server/" in it.
+
+You can read more about using regex in your config in the [Workflows document]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches).
+
 ###### **`branches`**
 {:.no_toc}
 Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string.
@@ -1615,7 +1633,7 @@ when:
         - << pipeline.parameter.deploy-canary >>
 ```
 
-## Full Example
+## Example Full Configuration
 {:.no_toc}
 
 {% raw %}

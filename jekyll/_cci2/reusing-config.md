@@ -958,7 +958,7 @@ Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps`
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | String | A parameter value.
+condition | Y | Logic | [A logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is truthy.
 {: class="table table-striped"}
 
@@ -968,7 +968,7 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-condition | Y | String | A parameter value.
+condition | Y | Logic | [A logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is falsy.
 {: class="table table-striped"}
 

@@ -147,7 +147,7 @@ There are many different approaches to utilizing caching in monorepos. This type
 
 ### Cache Expiration
 {:.no_toc}
-Caches created via the `save_cache` step are stored for up to 30 days.
+Caches created via the `save_cache` step are stored for up to 15 days.
 
 ### Clearing Cache
 {:.no_toc}

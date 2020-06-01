@@ -128,7 +128,7 @@ _Introduced in CircleCI Server v2.19_
 
 You can customize resource classes for your installation to provide developers with https://circleci.com/docs/2.0/optimizations/#resource-class[CPU/RAM options] for the Jobs they configure.
 
-NOTE: The resources for the `machine` executor can't be changed using the method described on this page. To change the CPU and memory size, change the `AWS Instance Type` from the VM Provider section in the Management Console. See the <<vm-service#,VM Service>> guide for more details.
+NOTE: The resources for `machine` executors can't be configured using the method described on this page. To change CPU and memory size for VMs, change `AWS Instance Type` in the VM Provider section of the Management Console. See the <<vm-service#,VM Service>> guide for more details.
 
 TIP: Once resource classes are set using the steps below, make these options available to developers so they can ensure correct usage.
 
@@ -162,9 +162,17 @@ Example config:
 
  :resource-classes
  {:docker
+  ;; Modify below
   {:small {:id "d1.small" :availability :general :ui {:cpu 2.0 :ram 4096 :class :small} :outer {:cpu 2.0 :ram 4096}}
    :medium {:id "d1.medium" :availability :general :ui {:cpu 4.0 :ram 8192 :class :medium} :outer {:cpu 4.0 :ram 8192}}
-   :massive {:id "d1.massive" :availability :general :ui {:cpu 7.0 :ram 28000 :class :massive} :outer {:cpu 7.0 :ram 28000}}}}}
+   :massive {:id "d1.massive" :availability :general :ui {:cpu 7.0 :ram 28000 :class :massive} :outer {:cpu 7.0 :ram 28000}}}
+  ;; Modify above
+
+  ;; NOTE: Do not delete or modify the following block: Such attempts will break machine builds.
+  :machine
+  {:medium {:id "l1.medium" :availability :general :ui {:cpu 2.0 :ram 4096 :class :medium} :outer {:cpu 1 :ram 512}}
+   :large {:id "l1.large" :availability :general :ui {:cpu 4.0 :ram 16384 :class :medium} :outer {:cpu 1 :ram 512}}
+   :windows.medium {:id "windows.medium" :availability :general :ui {:cpu 2.0 :ram 8192 :class :windows.medium} :outer {:cpu 1 :ram 512}}}}}
 ```
 
 Let's take a look at one of the options in more detail

@@ -445,7 +445,7 @@ The example below shows how you can send a status alert at the end of a job.
 version: 2.1
 
 orbs:
-  slack: circleci/slack@1.0.0
+  slack: circleci/slack@x.y.z
 
 jobs:
   build:

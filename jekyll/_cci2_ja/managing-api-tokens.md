@@ -23,7 +23,7 @@ CircleCI では 2種類の API トークンを作成できます。
 ### パーソナル API トークンの作成
 
 1. CircleCI アプリケーションで、[ユーザー設定](https://circleci.com/account){:rel="nofollow"}に移動します。
-2. [[Personal API Tokens (パーソナル API トークン)](https://circleci.com/account/api)]{:rel="nofollow"} をクリックします。
+2. [Personal API Tokens (パーソナル API トークン)](https://circleci.com/account/api)]{:rel="nofollow"} をクリックします。
 3. **[Create New Token (新しいトークンを作成する)]** ボタンをクリックします。
 4. **[Token name (トークン名)]** フィールドに、覚えやすいトークン名を入力します。
 5. **[Add API Token (API トークンを追加する)]** ボタンをクリックします。
