@@ -90,12 +90,12 @@ collections:
     permalink: /2.0/:path/
     prefix: "/2.0"
     selectorName: "2.0"
-  ccis2:
-    name: "Server v2.x Docs"
+  server:
+    name: "Server v2.19 Docs"
     site_section: true
     output: true
-    permalink: server/2.x/:path/
-    prefix: "/server/2.x"
+    permalink: server/:path/
+    prefix: "/server/"
     selectorName: "server"
   api:
     name: "API Docs"

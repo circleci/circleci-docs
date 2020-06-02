@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Welcome to CircleCI Documentation"
 description: "Welcome to CircleCI Documentation"
-permalink: /2.0/
+permalink: /server/
 ---
 
 Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
