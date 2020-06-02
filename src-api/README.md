@@ -9,7 +9,7 @@ base.
 
 ### I want to change something in API v1.
 
-Go to source/includes/* and select the file you want to change. Then push your
+Go to source/includes/* and select the file you want to change. Push your
 changes, and then the CI build will generate the new documentation.
 
 ### I want to change something in API v2?
