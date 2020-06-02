@@ -44,5 +44,5 @@ You can now see the docs at http://localhost:4567.
 
 Slate is not exactly a library where you can run the `npm install` or `npm update` commands. If
 Slate releases an update that we need, currently, it will require us to download
-their repo again, and replace the src files (but don't delete our
+their repo again, and replace the `src` files (but don't delete our
 index.html.md!)
