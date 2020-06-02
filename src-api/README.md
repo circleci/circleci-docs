@@ -14,7 +14,7 @@ changes and the CI build will generate the new documentation.
 
 ### I want to change something in API v2?
 
-You can't make direct changes to the API v2 from within this repo because it is
+You cannot make direct changes to the API v2 from within this repo because it is
 built from a **spec** (Using Open API). The specification is generated from a backend
 service, from within the code; you will need to speak with a team member who
 manages/works on our APIs and ask them to make a change.
