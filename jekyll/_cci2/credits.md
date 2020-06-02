@@ -75,6 +75,10 @@ waiting due to a **plan** or **concurrency** limit. If your job indicates that
 it is "preparing", it means that CircleCI is setting up or _dispatching_ your
 job so that it may run.
 
+If you find that jobs are "preparing" for quite some time, you may be able to
+reduce it if your jobs use the docker executor; try using more recent docker
+images to decrease preparation time.
+
 ## Questions And Comments
 
 Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).
