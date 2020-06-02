@@ -511,10 +511,10 @@ Variable                    | Type    | Value
 `CIRCLE_REPOSITORY_URL`     | String  | The URL of your GitHub or Bitbucket repository.
 `CIRCLE_SHA1`               | String  | The SHA1 hash of the last commit of the current build.
 `CIRCLE_TAG`                | String  | The name of the git tag, if the current build is tagged. For more information, see the [Git Tag Job Execution]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag).
-`CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who committed the build.
+`CIRCLE_USERNAME`           | String  | The GitHub or Bitbucket username of the user who triggered the pipeline.
 `CIRCLE_WORKFLOW_ID`        | String  | A unique identifier for the workflow instance of the current job. This identifier is the same for every job in a given workflow instance.
 `CIRCLE_WORKING_DIRECTORY`  | String  | The value of the `working_directory` key of the current job.
-`CIRCLE_INTERNAL_TASK_DATA` | String  | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of contents of this directory; the data schema is subject to change.
+`CIRCLE_INTERNAL_TASK_DATA` | String  | **Internal**. A directory where internal data related to the job is stored. We do not document the contents of this directory; the data schema is subject to change.
 `CIRCLE_COMPARE_URL`        | String  | **Deprecated**. The GitHub or Bitbucket URL to compare commits of a build. Available in config v2 and below. For v2.1 we will introduce ["pipeline values"]({{ site.baseurl }}/2.0/pipeline-variables/) as an alternative.
 `CI_PULL_REQUEST`           | String  | **Deprecated**. Kept for backward compatibility with CircleCI 1.0. Use `CIRCLE_PULL_REQUEST` instead.
 `CI_PULL_REQUESTS`          | List    | **Deprecated**. Kept for backward compatibility with CircleCI 1.0. Use `CIRCLE_PULL_REQUESTS` instead.
