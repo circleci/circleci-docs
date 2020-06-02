@@ -43,7 +43,7 @@ As with the CircleCI legacy container plan, CircleCI also supports a free-tier w
 - Dependency Caching
 - Windows/Linux builds
 
-The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute. On the free plan, you are given a maximum of 3 user seats.
+The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats.
 
 ## Performance Plan
 
