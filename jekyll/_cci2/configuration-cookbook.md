@@ -109,7 +109,7 @@ For a full list of usage options and orb elements see the [AWS-ECS orb page](htt
 
 ### Verifying the Amazon ECS Service Update
 
-Once you have updated the Amazon ECS service, verify the update was properly applied using the CircleCI AWS CLI and ECS orbs. This orb example is shown below, this time, rather than using a built-in job to perform the required process, commands from the orbs are used as steps in the job definition for a job called `verify-deployment`. 
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`. 
 
 ```yaml
 version: 2.1
