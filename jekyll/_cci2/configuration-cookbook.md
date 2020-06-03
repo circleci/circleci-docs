@@ -227,7 +227,7 @@ Before working with the CircleCI AWS-EKS orb, you may wish to review the specifi
 
 ### Create an EKS Cluster
 
-Once you meet the requirements for using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
+Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
 
 ```yaml
 version: 2.1
@@ -333,7 +333,7 @@ workflows:
             - aws-eks/update-container-image
 ```
 
-#### Install a Helm Chart in Your Cluster
+### Install a Helm Chart in Your Cluster
 
 Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
 
