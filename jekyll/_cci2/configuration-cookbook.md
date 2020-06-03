@@ -111,7 +111,7 @@ orbs:
 jobs:
   verify-deployment:
     docker:
-      - image: 'circleci/python:3.7.1'
+      - image: <docker-image-name-tag>
     steps:
       - aws-cli/install
       - aws-cli/configure:
