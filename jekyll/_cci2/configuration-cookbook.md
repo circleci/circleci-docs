@@ -150,7 +150,7 @@ This example illustrates how you can use the orb to install and configure the AW
 
 Find more detailed information in the CircleCI Orb Registry for the CircleCI [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) and [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) orbs.
 
-## Interacting with Google Kubernetes Engine (GKE)
+## Interact with Google Kubernetes Engine (GKE)
 
 The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
