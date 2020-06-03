@@ -54,7 +54,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
 
     ```yaml
-    version 2.1
+    version: 2.1
 
     workflows:
       my-workflow:
