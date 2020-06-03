@@ -41,7 +41,7 @@ For more detailed information about CircleCI orbs, refer to the [Orbs Introducti
 
 ## Configure Your Environment for CircleCI Pipelines and Orbs
 
-Most recipies in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided it's worth checking that you're all set up for these features. The following notes and steps will get you where you need to be.
+Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
 * In order to use pipelines features and orbs you must use `version 2.1` config, and enable pipelines for your project. 
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
