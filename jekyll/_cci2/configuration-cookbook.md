@@ -76,7 +76,7 @@ The following environment variables need to be set in CircleCI either directly o
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
 
-**Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so is always available.
+**Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
 
 ### Build, Push and Deploy a Service Update
 
