@@ -154,7 +154,7 @@ Find more detailed information in the CircleCI Orb Registry for the CircleCI [AW
 
 The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
-### Setting Environment Variables
+### Set Environment Variables
 The following environment variables need to be set in CircleCI either directly or through a context:
 
 - `GCLOUD_SERVICE_KEY` (required)
