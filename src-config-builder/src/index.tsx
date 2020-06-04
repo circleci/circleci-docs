@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import styled from "@emotion/styled";
+import TagManager from 'react-gtm-module'
 import {Sidebar, Docsbar, ConfigContent, Navbar} from "./components";
 import baseImg from './data/baseConfigs'
 import appConfig, {screens} from './config';
@@ -48,5 +49,9 @@ const App: React.FC = () => {
     </Wrapper>
   );
 };
+
+// Add google analyitcs.
+const tagManagerArgs = {gtmId: 'GTM-W9HDVK'}
+TagManager.initialize(tagManagerArgs)
 
 ReactDOM.render(<App />, document.getElementById("root"));

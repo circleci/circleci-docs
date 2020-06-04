@@ -29,7 +29,7 @@ To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2
 version: 2.1
 
 orbs:
-  hello: circleci/hello-build@0.0.5
+  hello: circleci/hello-build@x.y.z
 
 workflows:
   "Hello Workflow":
@@ -41,7 +41,7 @@ For more detailed information about CircleCI orbs, refer to the [Orbs Introducti
 
 ## Configure Your Environment for CircleCI Pipelines and Orbs
 
-Most recipies in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided it's worth checking that you're all set up for these features. The following notes and steps will get you where you need to be.
+Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
 * In order to use pipelines features and orbs you must use `version 2.1` config, and enable pipelines for your project. 
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
@@ -55,8 +55,8 @@ The table below lists some recipes to help and inspire your projects.
 
 Configuration Recipe | Description
 ------------|-----------
-[Deploying Software Changes to Amazon Elastic Container Service (ECS)](#deploying-software-changes-to-amazon-ecs) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
-[Interacting with Google Kubernetes Engine (GKE)](#interacting-with-google-kubernetes-engine-gke) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
+[Deploy Changes to Amazon Elastic Container Service (ECS)](#deploy-changes-to-amazon-ecs) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
+[Interact with Google Kubernetes Engine (GKE)](#interact-with-google-kubernetes-engine-gke) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
 [Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#using-amazon-elastic-container-service-for-kubernetes-amazon-eks) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
 [Enabling Custom Slack Notifications in CircleCI Jobs](#enabling-custom-slack-notifications-in-circleci-jobs) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
 [Using Logic in Configuration](#using-logic-in-configuration) | This section describes how you can use pipeline values & parameters to select the work to perform.
@@ -65,12 +65,22 @@ Configuration Recipe | Description
 ## Deploy changes to Amazon ECS
 
 The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. This recipe shows you how to quickly deploy software changes to Amazon ECS using CircleCI orbs, but if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS]( https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
-  
+
+### Setting Environment Variables
+The following environment variables need to be set in CircleCI either directly or through a context:
+
+* `AWS_ECR_ACCOUNT_URL` 
+* `MY_APP_PREFIX` 
+* `AWS_REGION` 
+* `AWS_ACCESS_KEY_ID`
+
+If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
+
+**Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
+
 ### Build, Push and Deploy a Service Update
 
 To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible: the `aws-ecr` orb to build and push an updated image to ECR, and the `aws-ecs` orb to deploy you service update.
-
-The orb configuration requires some environment variables, so you should first ensure these are set for your project or organisation. For more information see our guides to [using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) and [using Contexts]({{ site.baseurl }}/2.0/contexts/). Set the following environment variables: `AWS_ECR_ACCOUNT_URL`, `MY_APP_PREFIX`, `AWS_REGION`. **Note:** the `CIRCLE_SHA1` variable is built-in, so is always available.
 
 The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
  
@@ -97,9 +107,9 @@ workflows:
 
 For a full list of usage options and orb elements see the [AWS-ECS orb page](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) in the CircleCI Orbs Registry.
 
-### Verifying the Amazon ECS Service Update
+### Verify the Amazon ECS Service Update
 
-Once you have updated the Amazon ECS service, verify the update was properly applied using the CircleCI AWS CLI and ECS orbs. This orb example is shown below, this time, rather than using a built-in job to perform the required process, commands from the orbs are used as steps in the job definition for a job called `verify-deployment`. An addiitonal environment variable is needed this time: `AWS_ACCESS_KEY_ID`
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`. 
 
 ```yaml
 version: 2.1
@@ -140,11 +150,11 @@ This example illustrates how you can use the orb to install and configure the AW
 
 Find more detailed information in the CircleCI Orb Registry for the CircleCI [AWS ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs) and [AWS ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr) orbs.
 
-## Interacting with Google Kubernetes Engine (GKE)
+## Interact with Google Kubernetes Engine (GKE)
 
 The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
 
-#### Setting Environment Variables
+### Set Environment Variables
 The following environment variables need to be set in CircleCI either directly or through a context:
 
 - `GCLOUD_SERVICE_KEY` (required)
@@ -206,7 +216,7 @@ workflows:
 
 ## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
 
-CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Container Service (ECS) to perform the following tasks:
+CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Kubernetes Service (EKS) to perform the following tasks:
 
 * Create an EKS cluster
 * Create a Kubernetes deployment
@@ -215,24 +225,16 @@ CircleCI has developed a Kubernetes orb you can use in coordination with the Ama
 
 Before working with the CircleCI AWS-EKS orb, you may wish to review the specifics of the [AWS-EKS](https://circleci.com/orbs/registry/orb/circleci/aws-eks#quick-start) orb in the CircleCI Orb Registry page.
 
-### Prerequisites
-
-Before using the AWS EKS orb, make sure you meet the following requirements:
-
-* Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required.
-* Ensure you use `version: 2.1` config. This is required to use orbs.
-* {% include snippets/enable-pipelines.md %}
-
 ### Create an EKS Cluster
 
-Once you meet the requirements for using the CircleCI AWS-EKS orb, you can create, teat and teardown an EKS cluster using the code sample shown below.
+Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
 
 ```yaml
 version: 2.1
 
 orbs:
-  aws-eks: circleci/aws-eks@0.2.3
-  kubernetes: circleci/kubernetes@0.4.0
+  aws-eks: circleci/aws-eks@x.y.z
+  kubernetes: circleci/kubernetes@x.y.z
 
 jobs:
   test-cluster:
@@ -331,11 +333,11 @@ workflows:
             - aws-eks/update-container-image
 ```
 
-#### Install a Helm Chart in Your Cluster
+### Install a Helm Chart in Your Cluster
 
 Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
 
-Once Helm is installed in your Kubernetes cluster, you can then install Helm charts simply using the `aws-eks` orb's built-in jobs. Below is a code example for this use case:
+Using the `aws-eks` orb you can install Helm on your Kubernetes cluster, then install a Helm chart just using the orb's built-in jobs. Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
 
 ```yaml
 version: 2.1
@@ -373,12 +375,6 @@ workflows:
 ## Enabling Custom Slack Notifications in CircleCI Jobs
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
-
-### Prerequisites
-
-* Set up your project (repo) to build on CircleCI. See our [Getting Started guide]({{ site.baseurl }}/2.0/getting-started) for help with this if required.
-* Ensure you use `version: 2.1` config. This is required to use orbs.
-* {% include snippets/enable-pipelines.md %}
 
 ### Notifying a Slack Channel of Pending Approval
 
