@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "CircleCI CLI"
 redirect: /docs/2.0/local-cli/
 ---

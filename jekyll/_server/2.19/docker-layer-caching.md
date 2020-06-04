@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Enabling Docker Layer Caching"
 short-title: "Enabling Docker Layer Caching"
 description: "How to reuse unchanged cache layers in images you build to reduce overall run time"

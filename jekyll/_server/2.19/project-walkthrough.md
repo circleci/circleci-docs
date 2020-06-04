@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "2.0 Project Tutorial"
 short-title: "Project Tutorial"
 description: "Tutorial and sample config for a Flask project in CircleCI 2.0"

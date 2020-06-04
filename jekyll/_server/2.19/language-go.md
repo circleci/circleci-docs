@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Go"
 short-title: "Go"
 description: "Building and Testing with Go (Golang) on CircleCI 2.0"

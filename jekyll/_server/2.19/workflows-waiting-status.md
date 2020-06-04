@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Workflows Waiting for Status in GitHub"
 short-title: "Workflows Waiting for Status in GitHub"
 description: "Fixing Workflows Waiting for Status in GitHub"

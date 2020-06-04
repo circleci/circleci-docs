@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orbs Concepts"
 short-title: "Concepts"
 description: "Starting point for conceptual overview of Orbs"

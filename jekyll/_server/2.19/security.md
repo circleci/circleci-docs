@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Security Features"
 category: [administration]
 order: 5

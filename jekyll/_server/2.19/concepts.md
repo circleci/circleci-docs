@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Concepts"
 short-title: "Concepts"
 description: "CircleCI 2.0 concepts"

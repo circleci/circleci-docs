@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Migrating from Cloud to Server"
 short-title: "Migrating from Cloud to Server"
 description: "Migrating 2.0 Cloud projects to a 2.0 server installation"

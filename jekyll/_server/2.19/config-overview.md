@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Configuration"
 short-title: "Configuration"
 description: "Description of configuration"

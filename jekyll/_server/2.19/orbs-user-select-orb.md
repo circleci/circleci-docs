@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orb User - Selecting an Orb"
 short-title: "Orb Registry Selection"
 description: "Selectiing an orb to use with your configuration"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orb Testing Methodologies"
 short-title: "Testing Methodologies"
 description: "Starting point for Testing CircleCI Orbs"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "CircleCI Optimizations Cookbook"
 short-title: "Optimizations Cookbook"
 description: "Starting point for Optimizations Cookbook"

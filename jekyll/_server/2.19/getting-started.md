@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Getting Started Introduction"
 short-title: "Getting Started Introduction"
 description: "A tutorial for getting your first green CircleCI build"

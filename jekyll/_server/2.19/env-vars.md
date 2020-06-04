@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Environment Variables"
 short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Adding External Database Hosts for High Availability"
 category: [administration]
 order: 20

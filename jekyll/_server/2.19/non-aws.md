@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using the Static Installation Scripts"
 category: [administration]
 order: 1

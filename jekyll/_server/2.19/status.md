@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Status"
 short-title: "Status"
 description: "Status dashboard"

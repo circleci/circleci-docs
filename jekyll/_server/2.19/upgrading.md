@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Upgrading from CircleCI 1.0 Server Installation to 2.0"
 category: [administration]
 order: 11

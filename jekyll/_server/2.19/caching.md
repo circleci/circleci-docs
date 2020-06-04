@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Caching Dependencies"
 short-title: "Caching Dependencies"
 description: "Caching Dependencies"

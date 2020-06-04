@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Workflows not Starting"
 short-title: "Workflows not Starting"
 description: "Workflow doesn't appear to be building or starting"

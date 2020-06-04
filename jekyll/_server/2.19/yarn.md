@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Yarn (an NPM alternative) on CircleCI"
 short-title: "Yarn Package Manager"
 categories: [how-to]

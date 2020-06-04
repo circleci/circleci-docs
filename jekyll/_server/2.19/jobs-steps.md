@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orbs, Jobs, Steps, and Workflows"
 short-title: "Orbs, Jobs, Steps, and Workflows"
 description: "Description of Jobs and Steps"

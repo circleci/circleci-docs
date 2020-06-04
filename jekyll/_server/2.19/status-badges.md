@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Adding Status Badges
 description: How to embed a CircleCI status badge in any web page or document
 ---

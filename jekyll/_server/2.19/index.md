@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Welcome to CircleCI Documentation"
 description: "Welcome to CircleCI Documentation"
 permalink: /server/

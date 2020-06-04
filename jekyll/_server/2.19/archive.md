@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "archive Archive"
 short-title: "archive Archive"
 description: "Archive of EOL"

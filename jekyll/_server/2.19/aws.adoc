@@ -1,6 +1,6 @@
 [#install]
 = Installation on AWS with Terraform
-:page-layout: classic-docs
+:page-layout: server-docs
 :page-liquid:
 :icons: font
 :toc: macro

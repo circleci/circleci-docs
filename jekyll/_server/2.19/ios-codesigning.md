@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Setting Up Code Signing for iOS Projects"
 short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS or Mac app"

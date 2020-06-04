@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Browser Testing
 description: Browser Testing on CircleCI
 category: [test]

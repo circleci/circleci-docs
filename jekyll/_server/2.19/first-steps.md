@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Sign Up and Try CircleCI"
 short-title: "Sign Up and Try CircleCI"
 description: "First step for using CircleCI"

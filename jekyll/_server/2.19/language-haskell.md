@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Haskell"
 short-title: "Haskell"
 description: "Building and Testing with Haskell on CircleCI 2.0"

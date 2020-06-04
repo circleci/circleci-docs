@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using the 1.0 to 2.0 config-translation Endpoint"
 short-title: "Using the 1.0 to 2.0 config-translation Endpoint"
 description: "Instructions for using the experimental Translator to translate CircleCI 1.0 configuration to the 2.0 format."

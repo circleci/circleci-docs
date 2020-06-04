@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "CircleCI Trial Installation"
 category: [administration]
 order: 3

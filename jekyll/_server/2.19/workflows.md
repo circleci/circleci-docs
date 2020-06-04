@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Workflows to Schedule Jobs"
 short-title: "Using Workflows to Schedule Jobs"
 description: "Using Workflows to Schedule Jobs"

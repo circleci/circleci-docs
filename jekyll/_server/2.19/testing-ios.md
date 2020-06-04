@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Testing iOS Applications on macOS
 short-title: Testing iOS Applications on macOS
 categories: [platforms]

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Projects and Pipelines"
 short-title: "Projects and Pipelines"
 description: "Starting point for CircleCI 2.0 projects"

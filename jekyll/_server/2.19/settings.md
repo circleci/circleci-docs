@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Settings"
 short-title: "Settings"
 description: "Summary of project and org settings"

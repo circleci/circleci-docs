@@ -1,5 +1,5 @@
 = Installation Prerequisites
-:page-layout: classic-docs
+:page-layout: server-docs
 :page-liquid:
 :source-highlighter: rouge
 :rouge-linenums-mode: inline

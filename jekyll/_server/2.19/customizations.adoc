@@ -1,5 +1,5 @@
 = Customization and Configuration
-:page-layout: classic-docs
+:page-layout: server-docs
 :page-liquid:
 :icons: font
 :toc: macro

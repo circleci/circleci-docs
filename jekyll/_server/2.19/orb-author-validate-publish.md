@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orb Author - Validate and Publish Orbs"
 short-title: "Testing and Publishing Orbs"
 description: "Starting point for tesing and publishing orbs"

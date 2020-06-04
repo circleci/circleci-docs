@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "CircleCI 2.0"
 redirect: /docs/2.0/deployment-integrations/
 ---

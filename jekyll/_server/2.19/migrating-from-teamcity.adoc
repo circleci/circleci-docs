@@ -1,5 +1,5 @@
 = Migrating from TeamCity 
-:page-layout: classic-docs
+:page-layout: server-docs
 :page-liquid:
 :source-highlighter: pygments.rb
 :icons: font

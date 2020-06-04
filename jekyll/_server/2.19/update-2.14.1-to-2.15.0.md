@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Upgrading MongoDB when using externalized MongoDB"
 category: [administration]
 order: 12

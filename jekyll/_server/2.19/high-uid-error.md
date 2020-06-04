@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Debugging Container ID Cannot Be Mapped to Host ID Error"
 short-title: "Debugging Container ID Cannot Be Mapped to Host ID Error"
 description: "Debugging 'Container ID XXX cannot be mapped to a host ID' error when starting a container"

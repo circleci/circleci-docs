@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Example Public Repos"
 short-title: "Example Public Repos"
 description: "Starting point for CircleCI 2.0 docs"

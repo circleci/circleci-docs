@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Viewing Pipelines"
 short-title: "Viewing Pipelines"
 description: "Introduction to Pipelines"

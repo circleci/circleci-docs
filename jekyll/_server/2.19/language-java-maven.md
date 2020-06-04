@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Java (with Maven)"
 short-title: "Java with Maven"
 description: "Building and Testing with Java and Maven on CircleCI 2.0"

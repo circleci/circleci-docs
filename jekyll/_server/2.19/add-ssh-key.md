@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Adding an SSH Key to CircleCI"
 short-title: "Adding an SSH Key"
 description: "How to Add an SSH Key to CircleCI"

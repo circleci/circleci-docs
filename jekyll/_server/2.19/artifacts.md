@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Storing Build Artifacts"
 short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Deployment Examples"
 short-title: "Deployment Examples"
 ---

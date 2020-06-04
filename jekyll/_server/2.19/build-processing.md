@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Enabling Pipelines"
 short-title: "Enabling Pipelines"
 description: "How to enable pipelines"

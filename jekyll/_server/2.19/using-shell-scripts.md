@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Shell Scripts"
 short-title: "Using Shell Scripts"
 description: "Best practices for using shell scripts for use in CircleCI configuration"

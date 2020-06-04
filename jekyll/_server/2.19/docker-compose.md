@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Installing and Using docker-compose"
 short-title: "Installing and Using docker-compose"
 description: "How to enable docker-compose in your primary container"

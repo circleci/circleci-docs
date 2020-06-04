@@ -1,6 +1,6 @@
 [#upgrade]
 = Upgrading a Server Installation
-:page-layout: classic-docs
+:page-layout: server-docs
 :page-liquid:
 :icons: font
 :toc: macro

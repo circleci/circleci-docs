@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Build Environments"
 description: "CircleCI 2.0 Build Environment Configuration"
 ---

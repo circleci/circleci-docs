@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Triggers"
 short-title: "Triggers"
 description: "Description of triggers"

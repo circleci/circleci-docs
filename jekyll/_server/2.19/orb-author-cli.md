@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Authoring an Orb - Setting Up the CircleCI CLI"
 short-title: "Setting up the CLI"
 description: "Setting Up the CircleCI ClI for Orb Authors"

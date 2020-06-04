@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"

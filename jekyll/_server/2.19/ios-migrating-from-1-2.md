@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Migrating Your iOS Project From 1.0 to 2.0"
 short-title: "Migrating your iOS project from 1.0 to 2.0"
 description: "How to migrate your iOS project from CircleCI 1.0 to 2.0"

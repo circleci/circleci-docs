@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Differences from Jenkins
 categories: [migration]
 description: Differences from Jenkins

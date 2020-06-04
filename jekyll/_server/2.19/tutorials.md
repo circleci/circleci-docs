@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Tutorials"
 description: "Tutorials and 2.0 Sample Apps with Guides"
 ---

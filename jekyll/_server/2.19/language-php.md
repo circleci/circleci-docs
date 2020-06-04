@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: PHP"
 short-title: "PHP"
 description: "Building and Testing with PHP on CircleCI 2.0"

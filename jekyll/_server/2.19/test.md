@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Test"
 description: "CircleCI 2.0 test automation setup"
 ---

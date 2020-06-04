@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Android"
 short-title: "Android"
 description: "Building and Testing an Android App on CircleCI 2.0"

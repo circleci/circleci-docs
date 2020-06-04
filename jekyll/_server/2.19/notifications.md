@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Notifications"
 short-title: "Using Notifications"
 categories: [configuring-jobs]

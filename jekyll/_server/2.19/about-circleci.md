@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Overview"
 short-title: "Overview"
 description: "Starting point for CircleCI 2.0 docs"

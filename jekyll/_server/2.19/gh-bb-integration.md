@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: GitHub and Bitbucket Integration
 description: Using GitHub or Bitbucket
 categories: [migration]

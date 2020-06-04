@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Open Source Acknowledgments"
 category: [administration]
 order: 70

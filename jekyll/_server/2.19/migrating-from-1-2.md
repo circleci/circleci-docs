@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Migrating a Linux Project from 1.0 to 2.0"
 short-title: "Migrating a Linux Project from 1.0 to 2.0"
 description: "Why and how to migrate from CircleCI 1.0 to 2.0"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Enabling Usage Statistics"
 category: [administration]
 order: 1

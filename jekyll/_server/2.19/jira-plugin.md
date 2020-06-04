@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Connecting JIRA with CircleCI"
 categories: [how-to]
 description: "Connecting JIRA with CircleCI"

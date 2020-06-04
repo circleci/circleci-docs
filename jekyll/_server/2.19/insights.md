@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Insights"
 short-title: "Using Insights"
 description: "Viewing the status of repos and test performance"

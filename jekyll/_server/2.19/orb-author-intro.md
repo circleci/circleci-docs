@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Introduction to Authoring an Orb"
 short-title: "Authoring Orbs Introduction"
 description: "Starting point for how to authoring an orb"

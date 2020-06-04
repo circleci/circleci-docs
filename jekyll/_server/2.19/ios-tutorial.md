@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: iOS Project Tutorial
 short-title: iOS Project Tutorial
 categories: [platforms]

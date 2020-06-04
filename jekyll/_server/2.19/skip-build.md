@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Skip and Cancel Builds
 short-title: Skip and Cancel Builds
 description: How to Prevent CircleCI From Automatically Building

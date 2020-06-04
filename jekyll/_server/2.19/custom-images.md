@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Custom-Built Docker Images"
 short-title: "Using Custom-Built Docker Images"
 description: "Why and how to create custom Docker images"

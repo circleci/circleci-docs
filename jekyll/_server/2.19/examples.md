@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "CircleCI Config Examples"
 description: "Examples Documentation"
 ---

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Reference"
 description: "CircleCI 2.0 reference documentation"
 ---

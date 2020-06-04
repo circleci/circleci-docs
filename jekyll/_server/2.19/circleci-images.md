@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Pre-Built CircleCI Docker Images"
 short-title: "Pre-Built CircleCI Docker Images"
 description: "Listing of available images maintained by CircleCI"

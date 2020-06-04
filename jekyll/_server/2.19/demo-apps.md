@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Supported Languages Guide"
 short-title: "Supported Languages"
 description: "A list of sample CircleCI applications for several popular languages"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Examples"
 short-title: "Examples"
 description: "CircleCI 2.0 Examples Introduction"

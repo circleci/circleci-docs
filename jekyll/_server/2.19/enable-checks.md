@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Enabling GitHub Checks"
 short-title: "Enabling GitHub Checks"
 description: "How to enable GitHub Checks for CircleCI"

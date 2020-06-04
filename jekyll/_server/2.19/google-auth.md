@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Authorizing the Google Cloud SDK
 description: How to authorize the Google Cloud SDK
 categories: [deploying]

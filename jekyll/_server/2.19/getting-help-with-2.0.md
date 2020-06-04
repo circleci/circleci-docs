@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Getting Help with 2.0"
 redirect: /docs/2.0/help-and-support/
 ---

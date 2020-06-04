@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Projects"
 short-title: "Projects"
 description: "Description of projects"

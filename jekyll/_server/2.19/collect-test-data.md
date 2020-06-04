@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Collecting Test Metadata"
 short-title: "Collecting Test Metadata"
 categories: [configuring-jobs]

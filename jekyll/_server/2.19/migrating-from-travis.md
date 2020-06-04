@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Migrating From Travis CI"
 categories: [migration]
 description: "Migrating from Travis CI"

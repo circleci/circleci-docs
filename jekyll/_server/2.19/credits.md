@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Using Credits
 categories: [how-to]
 description: How to leverage CircleCI credits

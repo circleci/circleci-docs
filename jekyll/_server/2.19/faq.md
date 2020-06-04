@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "FAQ"
 short-title: "FAQ"
 description: "Frequently asked questions about CircleCI 2.0"

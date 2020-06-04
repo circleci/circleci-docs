@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Writing YAML"
 short-title: "Writing YAML"
 description: "How to Write YAML on CircleCI"

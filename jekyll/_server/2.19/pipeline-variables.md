@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Pipeline Variables"
 short-title: "Pipeline Variables"
 description: "Detailed information about Pipeline variables, parameters and values"

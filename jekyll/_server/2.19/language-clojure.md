@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Clojure"
 short-title: "Clojure"
 description: "Building and Testing with Clojure on CircleCI 2.0"

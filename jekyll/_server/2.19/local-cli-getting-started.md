@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Getting Started with the CircleCI CLI"
 short-title: "Getting Started with the CircleCI CLI"
 description: "An introduction to interfacing with CircleCI from the command line"

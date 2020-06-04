@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Hello World On MacOS"
 short-title: "Hello World On MacOS"
 description: "First macOS project on CircleCI 2.0"

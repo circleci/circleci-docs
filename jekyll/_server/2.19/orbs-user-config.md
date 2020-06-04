@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Setting Your Platform Version to Work With Orbs"
 short-title: "Setting Your Platform Version for Orbs"
 description: "How to set your platform version so you can work with CircleCI and Partner orbs"

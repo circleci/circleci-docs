@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orbs Best Practices"
 short-title: "Best Practices for Orbs"
 description: "a guide to best practices for orbs"

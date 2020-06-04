@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orb Author FAQ"
 short-title: "Orb Author FAQ"
 description: "Frequently asked questions from orb authors."

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Core Features"
 short-title: "Core Features"
 description: "Starting point for learning core features of CircleCI 2.0"

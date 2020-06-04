@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Sample 2.0 config.yml Files"
 short-title: "Sample 2.0 config.yml File"
 description: "Sample 2.0 config.yml File"

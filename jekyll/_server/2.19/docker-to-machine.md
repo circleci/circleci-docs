@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Executor Migration from Docker to Machine"
 short-title: "Migrating Executor from Docker to `machine`"
 description: "Best practices and considerations when migrating executor"

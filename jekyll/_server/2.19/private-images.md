@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using Private Images"
 short-title: "Using Private Images"
 description: "How to use private images"

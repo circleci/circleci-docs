@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Help and Support"
 short-title: "Help and Support"
 description: "A list of possible support options"

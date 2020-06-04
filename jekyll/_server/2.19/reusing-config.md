@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Reusable Config Reference Guide"
 short-title: "Reusable Config Reference"
 description: "Reference guide for CircleCI 2.1 Configuration"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Running Docker Commands"
 short-title: "Running Docker Commands"
 description: "How to build Docker images and access remote services"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Scala"
 short-title: "Language Guide: Scala"
 description: "CircleCI 2.0 Language Guide: Scala"

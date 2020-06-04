@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Generating Code Coverage Metrics
 short-title: Generating Code Coverage Metrics
 categories: [configuration-tasks]

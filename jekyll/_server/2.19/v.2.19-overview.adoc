@@ -1,5 +1,5 @@
 = CircleCI Server v2.19.x What's New
-:page-layout: classic-docs
+:page-layout: server-docs
 :page-liquid:
 :icons: font
 :toc: macro

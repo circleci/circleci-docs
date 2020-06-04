@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Hello World"
 short-title: "Hello World"
 description: "First project on CircleCI 2.0"

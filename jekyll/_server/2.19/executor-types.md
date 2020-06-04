@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Choosing an Executor Type"
 short-title: "Choosing an Executor Type"
 description: "Overviews of the docker, machine, and executor types"

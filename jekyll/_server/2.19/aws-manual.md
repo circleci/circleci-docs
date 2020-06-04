@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Installing CircleCI 2.0 on Amazon Web Services Manually"
 category: [administration]
 order: 11

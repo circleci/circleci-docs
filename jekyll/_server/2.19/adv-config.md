@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Advanced Config"
 short-title: "Advanced Config"
 description: "Summary of advanced config options and features"

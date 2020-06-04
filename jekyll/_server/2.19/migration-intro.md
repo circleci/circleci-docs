@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Migration"
 short-title: "Migration"
 description: "CircleCI 2.0 Migration Introduction"

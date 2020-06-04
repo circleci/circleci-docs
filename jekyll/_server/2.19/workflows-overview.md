@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Workflows"
 short-title: "Workflows"
 description: "Description of workflows"

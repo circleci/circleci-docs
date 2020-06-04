@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Java"
 short-title: "Java"
 description: "Building and Testing with Java on CircleCI 2.0"

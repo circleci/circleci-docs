@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using the CircleCI Local CLI"
 short-title: "Using the CircleCI Local CLI"
 description: "How to run local jobs with the CLI"

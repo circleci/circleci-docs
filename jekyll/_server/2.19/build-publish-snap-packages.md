@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Build and Publish Snap Packages using Snapcraft on CircleCI"
 short-title: "Build & Publish Snap Packages"
 description: "How to build and publish Snap packages on CircleCI using Snapcraft."

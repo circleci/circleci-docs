@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Configuring CircleCI"
 short-title: "Configuring CircleCI"
 description: "Reference for .circleci/config.yml"

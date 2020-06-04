@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orbs Introduction"
 short-title: "Orbs Introduction"
 description: "Starting point for CircleCI Orbs"

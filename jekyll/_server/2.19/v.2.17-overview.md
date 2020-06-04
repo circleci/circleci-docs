@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "CircleCI Server v2.17 What's New"
 short-title: "CircleCI Server v2.17 What's New"
 description: "Starting point for CircleCI Server v2.17 docs"

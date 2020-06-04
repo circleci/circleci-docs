@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Executors and Images"
 short-title: "Executors and Images"
 description: "CircleCI 2.0 executors and images"

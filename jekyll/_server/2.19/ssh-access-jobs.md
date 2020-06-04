@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Debugging with SSH"
 short-title: "Debugging with SSH"
 description: "How to access a build container using SSH on CircleCI 2.0"

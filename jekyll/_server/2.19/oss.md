@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Building Open Source Projects"
 short-title: "Building Open Source Projects"
 description: "Best practices for building open source projects"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Optimizations"
 short-title: "Optimizations"
 description: "CircleCI 2.0 build optimizations"

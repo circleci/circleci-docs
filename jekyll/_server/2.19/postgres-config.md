@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
 description: "Example of Configuring PostgreSQL"

@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Using the API to Trigger Jobs"
 short-title: "Using the API to Trigger Jobs"
 description: "How to define and trigger non-build jobs"

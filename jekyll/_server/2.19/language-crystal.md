@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Language Guide: Crystal"
 short-title: "Crystal"
 description: "Building and Testing with Crystal on CircleCI 2.0"

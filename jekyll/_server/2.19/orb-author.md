@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Orb Authoring Process"
 short-title: "Authoring Orbs"
 description: "Starting point for authoring CircleCI orbs"

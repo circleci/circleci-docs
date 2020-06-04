@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Running Tests in Parallel"
 short-title: "Running Tests in Parallel"
 description: "How to run tests in parallel"

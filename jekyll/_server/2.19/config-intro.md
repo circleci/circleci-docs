@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Configuration Introduction"
 description: "Landing page for CircleCI 2.0 Config"
 ---

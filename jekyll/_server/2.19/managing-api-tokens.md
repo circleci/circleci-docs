@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: "Managing API Tokens"
 short-title: "Managing API Tokens"
 description: "How to assign scoped tokens for using the CircleCI API"

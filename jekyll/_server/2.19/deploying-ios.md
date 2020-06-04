@@ -1,5 +1,5 @@
 ---
-layout: classic-docs
+layout: server-docs
 title: Deploying iOS Applications
 short-title: Deploying iOS Applications
 categories: [platforms]
