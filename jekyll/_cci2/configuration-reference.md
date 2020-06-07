@@ -1625,12 +1625,13 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 
 ```yaml
 when:
-  and:
-    - not:
-        equal: [ master, << pipeline.git.branch >> ]
-    - or:
-        - equal: [ canary, << pipeline.git.tag >> ]
-        - << pipeline.parameter.deploy-canary >>
+  condition:
+    and:
+      - not:
+          equal: [ master, << pipeline.git.branch >> ]
+      - or:
+          - equal: [ canary, << pipeline.git.tag >> ]
+          - << pipeline.parameter.deploy-canary >>
 ```
 
 ## Example Full Configuration
