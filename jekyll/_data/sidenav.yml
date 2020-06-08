@@ -219,7 +219,7 @@ en:
         - name: Optimizations Cookbook
           link: 2.0/optimization-cookbook/
 
-- name: "Orbs & Images"
+- name: "CircleCI Orbs"
   icon: docs/builds.svg
   children:
     - name: Orbs
@@ -244,6 +244,9 @@ en:
           link: 2.0/orbs/dev/best-practices/
         - name: FAQs
           link: 2.0/orbs/dev/faq/
+- name: "CircleCI Images"
+  icon: docs/builds.svg
+  children:
     - name: Convenience Images
       link: 2.0/convenience-images/
       children:
@@ -259,6 +262,17 @@ en:
           link: 2.0/circleci-images/custom/
         - name: FAQs
           link: 2.0/convenience-images/faq/
+    - name: Machine Images (VM)
+      link: 2.0/convenience-images/
+      children:
+        - name: Introduction
+          link: 2.0/convenience-images/introduction/
+        - name: Linux Images
+          link: 2.0/convenience-images/introduction/
+        - name: macOS Images
+          link: 2.0/convenience-images/introduction/
+        - name: Windows Images
+          link: 2.0/convenience-images/introduction/
 
 - name: Pipelines
   icon: docs/builds.svg
