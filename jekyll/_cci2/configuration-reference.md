@@ -1578,7 +1578,6 @@ parameters:
     default: false
 
 workflows:
-  version: 2
   integration_tests:
     when: << pipeline.parameters.run_integration_tests >>
     jobs:
@@ -1624,13 +1623,15 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 ### Example
 
 ```yaml
-when:
-  and:
-    - not:
-        equal: [ master, << pipeline.git.branch >> ]
-    - or:
-        - equal: [ canary, << pipeline.git.tag >> ]
-        - << pipeline.parameter.deploy-canary >>
+workflows:
+  my-workflow:
+    when:
+      and:
+        - not:
+            equal: [ master, << pipeline.git.branch >> ]
+        - or:
+            - equal: [ canary, << pipeline.git.tag >> ]
+            - << pipeline.parameter.deploy-canary >>
 ```
 
 ## Example Full Configuration
