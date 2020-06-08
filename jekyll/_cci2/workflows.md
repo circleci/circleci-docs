@@ -6,8 +6,7 @@ description: "Using Workflows to Schedule Jobs"
 categories: [configuring-jobs]
 order: 30
 ---
-
-To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. This document describes the Workflows feature and provides example configurations in the following sections:
+Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
 {:toc}
@@ -42,9 +41,11 @@ Workflows may appear with one of the following states:
 ### Limitations
 {:.no_toc}
 
-Projects that have pipelines enabled may use the CircleCI API to trigger workflows. Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
+* Projects that have pipelines enabled may use the CircleCI API to trigger workflows. 
+* Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. 
+* Config without workflows requires a job called `build`.
 
-Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
+Refer to the [Workflows]({{ site.baseurl }}/2.0/faq/#workflows) section of the FAQ for additional information and limitations.
 
 ## Workflows Configuration Examples
 
