@@ -257,7 +257,7 @@ Then you can install these using bundler:
 steps:
   - restore_cache:
       key: 1-gems-{{ checksum "Gemfile.lock" }}
-  - run: bundle check || bundle install --path vendor/bundle
+  - run: bundle check || bundle install --path vendor/bundle --clean
   - save_cache:
       key: 1-gems-{{ checksum "Gemfile.lock" }}
       paths:
