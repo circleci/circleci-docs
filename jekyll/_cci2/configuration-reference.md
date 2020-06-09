@@ -1607,7 +1607,7 @@ Type               | Arguments          | `true` if                             
 -------------------|--------------------|----------------------------------------|----------------------------------------
 YAML literal       | None               | is truthy                              | `true`/`42`/`"a string"`
 [Pipeline Value](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values) | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`
-[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameter.my-parameter >>`
+[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`
 and                | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`
 or                 | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`
 not                | 1 logic statement  | the argument is not truthy             | `not: true`
@@ -1631,7 +1631,7 @@ workflows:
             equal: [ master, << pipeline.git.branch >> ]
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
-            - << pipeline.parameter.deploy-canary >>
+            - << pipeline.parameters.deploy-canary >>
 ```
 
 ## Example Full Configuration
