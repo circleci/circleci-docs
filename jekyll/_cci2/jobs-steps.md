@@ -18,7 +18,7 @@ Orbs are packages of config that you either import by name or configure inline t
 
 ## Jobs Overview
 
-Jobs are collections of steps. All of the steps in the job are executed in a single unit, either within a fresh container of VM.
+Jobs are collections of steps. All of the steps in the job are executed in a single unit, either within a fresh container or VM.
 
 The following diagram illustrates how data flows between jobs: 
 * Workspaces persist data between jobs in a single workflow. 
