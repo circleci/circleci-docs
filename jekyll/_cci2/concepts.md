@@ -89,7 +89,6 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
 #### Executors and Images
-{:.no_toc}
 
 Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
@@ -97,46 +96,82 @@ Each separate job defined within your config will run in a unique executor. An e
 
 You can define an image for each executor. An image is a packaged system that has the instructions for creating a running container or virtual machine. CircleCI provide a range of images for use with the Docker executor. For more information see the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) guide.
 
- ```yaml
- version: 2
- jobs:
-   build1: # job name
-     docker: # Specifies the primary container image,
-       - image: buildpack-deps:trusty
+{:.tab.executors.Cloud}
+```yaml
+version: 2.1
 
-       - image: postgres:9.4.1 # Specifies the database image
-        # for the secondary or service container run in a common
-        # network where ports exposed on the primary container are
-        # available on localhost.
-         environment: # Specifies the POSTGRES_USER authentication
-          # environment variable, see circleci.com/docs/2.0/env-vars/
-          # for instructions about using environment variables.
-           POSTGRES_USER: root
+jobs:
+ build1: # job name
+   docker: # Specifies the primary container image,
+     - image: buildpack-deps:trusty
+     - image: postgres:9.4.1 # Specifies the database image
+      # for the secondary or service container run in a common
+      # network where ports exposed on the primary container are
+      # available on localhost.
+       environment: # Specifies the POSTGRES_USER authentication
+        # environment variable, see circleci.com/docs/2.0/env-vars/
+        # for instructions about using environment variables.
+         POSTGRES_USER: root
 #...
-   build2:
-     machine: # Specifies a machine image that uses
-     # an Ubuntu version 14.04 image with Docker 17.06.1-ce
-     # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
-     # for new image releases.
-       image: ubuntu-1604:201903-01
+ build2:
+   machine: # Specifies a machine image that uses
+   # an Ubuntu version 14.04 image with Docker 17.06.1-ce
+   # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
+   # for new image releases.
+     image: ubuntu-1604:201903-01
 #...       
-   build3:
-     macos: # Specifies a macOS virtual machine with Xcode version 11.3
-       xcode: "11.3.0"
+ build3:
+   macos: # Specifies a macOS virtual machine with Xcode version 11.3
+     xcode: "11.3.0"
 # ...          
- ```
+```
+
+{:.tab.executors.Server}
+```yaml
+version: 2.0
+
+jobs:
+ build1: # job name
+   docker: # Specifies the primary container image,
+     - image: buildpack-deps:trusty
+     - image: postgres:9.4.1 # Specifies the database image
+      # for the secondary or service container run in a common
+      # network where ports exposed on the primary container are
+      # available on localhost.
+       environment: # Specifies the POSTGRES_USER authentication
+        # environment variable, see circleci.com/docs/2.0/env-vars/
+        # for instructions about using environment variables.
+         POSTGRES_USER: root
+#...
+ build2:
+   machine: # Specifies a machine image that uses
+   # an Ubuntu version 14.04 image with Docker 17.06.1-ce
+   # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
+   # for new image releases.
+     image: ubuntu-1604:201903-01
+#...       
+ build3:
+   macos: # Specifies a macOS virtual machine with Xcode version 11.3
+     xcode: "11.3.0"
+# ...          
+```
+
+
 
 The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Subsequent images can be added to spin up Secondary/Service Containers.
 
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
 #### Steps
-{:.no_toc}
 
 Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}//2.0/configuration-reference/#checkout) step, which is a _built-in_ step available across all CircleCI projects, checks out the source code for a job over SSH. Then, the `run` step allows you to run custom commands, such as executing the command `make test`  using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
 ```yaml
 #...
+jobs:
+  build:
+    docker:
+      - image: <image-name-tag>
     steps:
       - checkout # Special step to checkout your source code
       - run: # Run step to execute commands, see
@@ -158,6 +193,61 @@ Workflows define a list of jobs and their run order. It is possible to run jobs 
 {:.tab.workflows.Server}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
 
+The following config example shows a workflow called `build_and_test` in which the job `build1` runs and then jobs `build2` and `build3` run concurrently:
+
+{:.tab.workflows-example.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+jobs:
+  build1:
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+      
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Running tests
+          command: make test
+  build3:
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
+          name: Precompile assets
+          command: bundle exec rake assets:precompile
+#...                          
+workflows:
+  build_and_test: # name of your workflow
+    jobs:
+      - build1
+      - build2:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # see circleci.com/docs/2.0/workflows/ for more examples.
+      - build3:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # run build2 and build3 concurrently to save time.
+```
+{% endraw %}
+
+{:.tab.workflows-example.Server}
 {% raw %}
 ```yaml
 version: 2
@@ -195,7 +285,7 @@ jobs:
           command: bundle exec rake assets:precompile
 #...                          
 workflows:
-  version: 2
+version: 2
   build_and_test: # name of your workflow
     jobs:
       - build1
@@ -217,10 +307,11 @@ workflows:
 A cache stores a file or directory of files such as dependencies or source code in object storage.
 Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
 
+{:.tab.cache.Cloud}
 {% raw %}
-
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build1:
     docker: # Each job requires specifying an executor
@@ -246,16 +337,83 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
 ```
+{% endraw %}
 
+{:.tab.cache.Server}
+{% raw %}
+```yaml
+version: 2
+
+jobs:
+  build1:
+    docker: # Each job requires specifying an executor
+    # (either docker, macos, or machine), see
+    # circleci.com/docs/2.0/executor-types/ for a comparison
+    # and more examples.
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - checkout
+      - save_cache: # Caches dependencies with a cache key
+      # template for an environment variable,
+      # see circleci.com/docs/2.0/caching/
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/circleci-demo-workflows
+
+  build2:
+    docker:
+      - image: circleci/ruby:2.4-node
+      - image: circleci/postgres:9.4.12-alpine
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+```
 {% endraw %}
 
 Workspaces are a workflow-aware storage mechanism. A workspace stores data unique to the job, which may be needed in downstream jobs. Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow.
 
 Artifacts persist data after a workflow is completed and may be used for longer-term storage of the outputs of your build process.
 
+{:.tab.workspace.Cloud}
+{% raw %}
+```yaml
+version: 2.1
+
+jobs:
+  build1:
+#...   
+    steps:    
+      - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
+      # into the workspace  for use in downstream job. Must be an absolute path,
+      # or relative path from working_directory. This is a directory on the container which is
+      # taken to be the root directory of the workspace.
+          root: workspace
+            # Must be relative path from root
+          paths:
+            - echo-output
+
+  build2:
+#...
+    steps:
+      - attach_workspace:
+        # Must be absolute path or relative path from working_directory
+          at: /tmp/workspace
+  build3:
+#...
+    steps:
+      - store_artifacts: # See circleci.com/docs/2.0/artifacts/ for more details.
+          path: /tmp/artifact-1
+          destination: artifact-file
+#...
+```        
+{% endraw %}
+
+{:.tab.workspace.Server}
 {% raw %}
 ```yaml
 version: 2
+
 jobs:
   build1:
 #...   
