@@ -39,21 +39,28 @@ Steps are a collection of executable commands which are run during a job, the `c
 
 ## Sample Configuration with Imported Orb
 
+Find full details of the AWS S3 orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands-sync).
+
 ```yaml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
+  aws-s3: circleci/aws-s3@x.y.z #imports the s3 orb in the circleci namespace
+  # x.y.z should be replaced with the orb version you wish to use
+jobs:
+  deploy2s3: 
+    docker: 
+      - image: cimg/<language>:<version TAG>
+    steps:
+      - aws-s3/sync: #invokes the sync command declared in the s3 orb
+          from: .
+          to: "s3://mybucket_uri"
+          overwrite: true
 
 workflows:
   build-test-deploy:
     jobs:
-      - deploy2s3: # a sample job that would be defined above.
-          steps:
-            - aws-s3/sync: #invokes the sync command declared in the s3 orb
-                from: .
-                to: "s3://mybucket_uri"
-                overwrite: true
+      - deploy2s3
 ```
 
 ## Sample Configuration with Concurrent Jobs
@@ -61,18 +68,19 @@ workflows:
 Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
-```
+```yaml
 version: 2
+
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
     steps:
       - checkout
       - run: <command>
@@ -84,6 +92,7 @@ workflows:
       - test
 ```
 {% endraw %}
+
 This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 
