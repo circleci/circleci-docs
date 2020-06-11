@@ -13,15 +13,27 @@ Without any memory limits, the JVM pre-allocates a fraction of
 the total memory available in the system.
 CircleCI runs container based builds on large machines with lots of memory.
 Each container has a smaller memory limit than the total amount available
-on the machine. This can lead to the JVM seeing a large amount of memory
-being available to it, and trying to use more than is allocated to the
-container.
+on the machine.
 
-This pre-allocation can produce Out of Memory (OOM) errors,
-which are difficult to debug because the error messages lack detail.
+By default, Java's is configured so that it will use:
+- More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
+- Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
 
-You can see how much memory your container is allowed to use by reading the file
-`/sys/fs/cgroup/memory/memory.max_usage_in_bytes`.
+As of [June 03, 2020](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)
+these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
+detect the number of CPUs and amount of RAM available to the job.
+
+For older versions of Java, This can lead to the JVM seeing a large amount of memory and CPUs
+being available to it, and trying to use more than is allocated to the container. This pre-allocation can produce
+Out of Memory (OOM) errors, which are difficult to debug because the error messages lack detail. Usually you will
+see a `137` exit code, which means the process has been `SIGKILL`ed by the OOM killer (`137 = 128 + "kill -9"`).
+
+You can see how much memory your container is allocated, and how much it has used, by looking at the following files:
+```
+/sys/fs/cgroup/memory/memory.limit_in_bytes
+/sys/fs/cgroup/memory/memory.max_usage_in_bytes
+```
+
 
 ## UseContainerSupport
 
@@ -34,18 +46,10 @@ detect memory constraints, and set a default memory usage within those constrain
 You can use the `MaxRAMPercentage` flag to customise the fraction of available RAM that is used,
 e.g. `-XX:MaxRAMPercentage=90.0`.
 
-In CircleCI, containers are run using [Nomad](https://www.nomadproject.io).
-Nomad does set CGroup memory limits, but doesn't provide enough
-CGroup memory information to the container for the JVM to detect the container memory constraints.
-This means the JVM will set its memory as a fraction of the total amount of RAM on the system.
-Nomad currently has an [enhancement request](https://github.com/hashicorp/nomad/issues/5376)
-open to provide this information. Once that is added, container builds in CircleCI will
-automatically pick up their container memory limits.
-
 ## Manual memory limits
 
-To prevent the JVM from pre-allocating too much memory,
-declare memory limits
+Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool.
+To prevent the JVM from pre-allocating too much memory, declare memory limits
 [using Java environment variables](#using-java-environment-variables-to-set-memory-limits).
 To debug OOM errors,
 look for the [appropriate exit code](#debugging-java-oom-errors).
@@ -131,11 +135,15 @@ This environment variable is exclusive to `lein`.
 
 ### `GRADLE_OPTS`
 
+See the Gradle documentation for [memory settings](https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory).
+
 This environment variable is exclusive to Gradle projects.
 Use it
 to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
 ### `MAVEN_OPTS`
+
+See the Maven documentation for [memory settings](http://maven.apache.org/configure.html).
 
 This environment variable is exclusive to Apache Maven projects.
 Use it
@@ -146,12 +154,19 @@ to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
 code 137` in your error output. 
 
-Ensure that your `-Xmxn` maximum size is large enough for your applications to
-completely build, while small enough that other processes can share the
-remaining  memory of your CircleCI build container.
+Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to
+completely build, while small enough that other processes can share the remaining memory of your CircleCI
+build container.
 
+If your job has the maximum Java heap size configured equal to your container's total memory allocation,
+you may find that the garbage collector is unable to keep the heap from reaching this limit, triggering the OOM killer.
+The number of GC threads that are allocated is influenced by the number of CPUs Java thinks is allocated to it. When
+the new cgroups visibility is enabled for your project, you may find this number is reduced, and will hit the max heap
+size. The best fix for this is to follow the above instructions and set the maximum RAM usage to below that of your
+container.
+  
 If you are still consistently hitting memory limits,
-consider [increasing your project's RAM](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
+consider [increasing your project's RAM allocation](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
 ## See Also
 
