@@ -387,7 +387,7 @@ jobs:
 #...   
     steps:    
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
-      # into the workspace  for use in downstream job. Must be an absolute path,
+      # into the workspace for use in downstream job. Must be an absolute path,
       # or relative path from working_directory. This is a directory on the container which is
       # taken to be the root directory of the workspace.
           root: workspace
