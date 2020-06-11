@@ -199,6 +199,7 @@ The following config example shows a workflow called `build_and_test` in which t
 {% raw %}
 ```yaml
 version: 2.1
+
 jobs:
   build1:
     docker:
@@ -251,6 +252,7 @@ workflows:
 {% raw %}
 ```yaml
 version: 2
+
 jobs:
   build1:
     docker:
@@ -285,7 +287,7 @@ jobs:
           command: bundle exec rake assets:precompile
 #...                          
 workflows:
-version: 2
+  version: 2
   build_and_test: # name of your workflow
     jobs:
       - build1
