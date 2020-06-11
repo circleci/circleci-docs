@@ -96,3 +96,10 @@ If you run builds on your own hardware with [CircleCI](https://circleci.com/ente
 It is possible to run multiple tests in parallel on a Jenkins build using techniques like multithreading, but this can cause subtle issues related to shared resources like databases and filesystems.
 
 CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]( {{ site.baseurl }}/2.0/parallelism-faster-jobs/) document.
+
+## Jenkinsfile Converter (preview)
+CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you get started on building on CircleCI quickly and easily. It can be accessed at https://jenkinsto.cc/i.
+
+Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, we hope that this tool gets you started at least 50% of the way, and makes it easier for you to get started on building on CircleCI.
+
+Instructions on how to use the tool, features, and limitations are located in the [project repo](https://github.com/circleci/jenkinsfile-converter). The [companion guide](https://github.com/circleci/jenkinsfile-converter/blob/dev/docs/GUIDE.md) is highly recommended reading after you’ve created a config.yml through the converter.
