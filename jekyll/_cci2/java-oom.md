@@ -19,7 +19,7 @@ By default, Java's is configured so that it will use:
 - More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
 - Less than `1/4th` of your total memory (for Docker Medium with 4GiB of RAM this will be 1GiB).
 
-As of [June 03, 2020](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)
+As of [June 3rd 2020](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor)
 these limits are visible when using the Docker executor. This means that the recent versions of Java will correctly
 detect the number of CPUs and amount of RAM available to the job.
 
@@ -152,21 +152,16 @@ to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 ## Debugging Java OOM Errors
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
-code 137` in your error output. 
+code 137` in your error output.
 
 Ensure that your `-XX:MaxRAMPercentage=NN` or `-Xmx=NN` size is large enough for your applications to
 completely build, while small enough that other processes can share the remaining memory of your CircleCI
 build container.
 
-If your job has the maximum Java heap size configured equal to your container's total memory allocation,
-you may find that the garbage collector is unable to keep the heap from reaching this limit, triggering the OOM killer.
-The number of GC threads that are allocated is influenced by the number of CPUs Java thinks is allocated to it. When
-the new cgroups visibility is enabled for your project, you may find this number is reduced, and will hit the max heap
-size. The best fix for this is to follow the above instructions and set the maximum RAM usage to below that of your
-container.
-  
+Even if the JVM's maximum heap size is larger than the job's limit, the garbage collector may be able to keep up with the allocation rate and avoid your process using too much memory and being killed. The default number of threads allocated to the garbage collector is based on the number of CPUs available, so the [cgroup visibility change](https://circleci.com/changelog/#container-cgroup-limits-now-visible-inside-the-docker-executor) made on June 3rd 2020 may cause your application to consume more memory than before and be OOM killed. The best fix for this is to configure the maximum heap size within the job's available RAM, which will cause a full GC to be triggered soon enough to avoid breaching any limits.
+
 If you are still consistently hitting memory limits,
-consider [increasing your project's RAM allocation](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
+consider [increasing your jobs's RAM allocation](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
 ## See Also
 
