@@ -7,7 +7,7 @@ categories: [migration]
 order: 2
 ---
 
-The document provides an overview of Jobs, Steps, Workflows and new [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) keys for Orbs.
+The document provides an overview of orbs, jobs, steps and workflows.
 
 * TOC
 {:toc}
@@ -18,39 +18,49 @@ Orbs are packages of config that you either import by name or configure inline t
 
 ## Jobs Overview
 
-Jobs are a collection of Steps. All of the steps in the job are executed in a single unit which consumes a CircleCI container from your plan while it's running.
+Jobs are collections of steps. All of the steps in the job are executed in a single unit, either within a fresh container or VM.
 
-Jobs and Steps enable greater control and provide a framework for workflows and status on each phase of a run to report more frequent feedback. The following diagram illustrates how data flows between jobs. Workspaces persist data between jobs in a single Workflow. Caching persists data between the same job in different Workflow builds. Artifacts persist data after a Workflow has finished.
+The following diagram illustrates how data flows between jobs: 
+* Workspaces persist data between jobs in a single workflow. 
+* Caching persists data between the same job in different workflows runs. 
+* Artifacts persist data after a workflow has finished.
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-In 2.0 Jobs can be run using the `machine` executor which enables reuse of recently used `machine` executor runs, or the `docker` executor which can compose Docker containers to run your tests and any services they require, such as databases, or the `macos` executor.
+Jobs can be run using the `machine` (linux), macOS or Windows executors, or the `docker` executor, which can compose Docker containers to run your jobs and any services they require, such as databases.
 
-When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start.  Any public Docker images can be used with the `docker` executor.
+When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start. Any public Docker images can be used with the `docker` executor.
 
-See the [Specifying Container Images]({{ site.baseurl }}/2.0/executor-types/) document for more information about `docker` versus `machine` use cases and comparisons.
-
+See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for use cases and comparisons of the different executor types.
+ 
 ## Steps Overview
 
 Steps are a collection of executable commands which are run during a job, the `checkout:` key is required to checkout your code and a key for `run:` enables addition of arbitrary, multi-line shell command scripting.  In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`,  `deploy:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps.
 
 ## Sample Configuration with Imported Orb
 
+Find full details of the AWS S3 orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands-sync).
+
 ```yaml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0 #imports the s3 orb in the circleci namespace
+  aws-s3: circleci/aws-s3@x.y.z #imports the s3 orb in the circleci namespace
+  # x.y.z should be replaced with the orb version you wish to use
+jobs:
+  deploy2s3: 
+    docker: 
+      - image: cimg/<language>:<version TAG>
+    steps:
+      - aws-s3/sync: #invokes the sync command declared in the s3 orb
+          from: .
+          to: "s3://mybucket_uri"
+          overwrite: true
 
 workflows:
   build-test-deploy:
     jobs:
-      - deploy2s3: # a sample job that would be defined above.
-          steps:
-            - aws-s3/sync: #invokes the sync command declared in the s3 orb
-                from: .
-                to: "s3://mybucket_uri"
-                overwrite: true
+      - deploy2s3
 ```
 
 ## Sample Configuration with Concurrent Jobs
@@ -58,18 +68,19 @@ workflows:
 Following is a sample 2.0 `.circleci/config.yml` file.
 
 {% raw %}
-```
+```yaml
 version: 2
+
 jobs:
   build:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
     steps:
       - checkout
       - run: <command>
   test:
     docker:
-      - image: circleci/<language>:<version TAG>
+      - image: cimg/<language>:<version TAG>
     steps:
       - checkout
       - run: <command>
@@ -81,6 +92,7 @@ workflows:
       - test
 ```
 {% endraw %}
+
 This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 

@@ -42,7 +42,7 @@ en:
       children:
         - name: Getting Started Concepts
           link: 2.0/concepts/
-        - name: Projects and Builds
+        - name: Projects and Pipelines
           link: 2.0/project-build/
         - name: Orbs, Jobs, Steps, and Workflows
           link: 2.0/jobs-steps/
