@@ -48,7 +48,7 @@ To configure the environment for the CircleCI platform and CircleCI orbs, follow
 
 1) Use CircleCI `version 2.1` at the top of your `.circleci/config.yml` file.
 
-```
+```yaml
 version: 2.1
 ```
 
@@ -57,7 +57,7 @@ version: 2.1
 
 3) Add the `orbs` stanza below your version, invoking the orb. For example:
 
-```
+```yaml
 version: 2.1
 
 orbs:
@@ -76,6 +76,7 @@ Occasionally, you may experience the problem of having one of your workflows "bl
 
 ```yaml
 Version: 2.1
+
 docker:
   - image: 'circleci/node:10'
 parameters:
