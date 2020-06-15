@@ -181,6 +181,32 @@ jobs:
 Use the `chown` command
 to grant CircleCI access to dependency locations.
 
+Alternatively, the following example avoids using `pipenv` and installs all dependencies
+into the user's home directory, negating the need for a set of `sudo chown` commands.
+
+{% raw %}
+
+```yaml
+version: 2
+jobs:
+  build:
+    # ...
+    steps:
+      - checkout
+      - restore_cache:  # ensure this step occurs *before* installing dependencies
+          key: deps9-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          command: pip install --user -r requirements.txt
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "~/.cache/pip"
+            - "~/.local"
+```
+
+{% endraw %}
+
+
 ### Run Tests
 
 Use the `run` step
