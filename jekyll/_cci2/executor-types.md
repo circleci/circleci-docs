@@ -158,6 +158,35 @@ Capability | `docker` | `machine`
 
 For more information on `machine`, see the next section below.
 
+
+### Available Docker Resource Classes
+
+The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
+job. In Docker, the following resources classes are available:
+
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+small                 | 1     | 2GB
+medium (default)      | 2     | 4GB
+medium+               | 3     | 6GB
+large                 | 4     | 8GB
+xlarge                | 8     | 16GB
+2xlarge<sup>(2)</sup> | 16    | 32GB
+2xlarge+<sup>(2)</sup>| 20    | 40GB
+{: class="table table-striped"}
+
+Where example usage looks like the following:
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    resource_class: xlarge
+    steps:
+    #  ...  other config
+```
+
 ## Using Machine
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
@@ -196,7 +225,7 @@ All images have common language tools preinstalled. Refer to the [specification 
 
 **Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
 
-The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow.
 
 ```yaml
 version: 2

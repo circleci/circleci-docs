@@ -15,6 +15,16 @@ Although RESTful APIs include these 4 HTTP verbs, the CircleCI API does not curr
 Access to billing functions is only available from the CircleCI application.
 </aside>
 
+## Rate Limiting
+
+The CircleCI API is protected by a number of rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+
+As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure.
+There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
+
+For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
+In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
+
 ## API Syntax
 
 When making an API request, make sure you follow standard REST API syntax and formatting. Adhering to proper REST API syntax ensures that the API server can properly process your request and return a JSON response. To make a request to the CircleCI API, use the format shown in the pane to the right:
@@ -163,4 +173,3 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.
 /project/:vcs-type/:username/:project/build-cache | Clears the cache for a project.
 /project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.
-

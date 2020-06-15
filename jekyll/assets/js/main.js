@@ -103,6 +103,11 @@ function detectScrollbar( element ){
  */
 function renderTabbedHtml() {
   var tabData = {};
+  // Turns __ into `.` in tab names useful for turning say `config_2__1` into `config 2.1`
+  var deSlugTabName = function(name) {
+    console.log("about to deslug", name.replace(/__/g, ".").replace(/_/g, " "))
+    return name.replace(/__/g, ".").replace(/_/g, " ");
+  }
 
   $(".tab").toArray().reduce(function (acc, curr) {
 
@@ -173,7 +178,7 @@ function renderTabbedHtml() {
       $("." + tabGroupName)
         .append($("<div>")
           .addClass(tabClass)
-          .text(tabName))
+          .text(deSlugTabName(tabName)))
     })
   })
 

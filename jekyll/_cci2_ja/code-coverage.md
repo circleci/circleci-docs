@@ -46,7 +46,7 @@ class ActiveSupport::TestCase
 end
 ```
 
-次に、カバレッジレポートをアップロードするために `.circleci/config.yaml` を設定します。
+次に、カバレッジレポートをアップロードするために `.circleci/config.yml` を設定します。
 
 ```yaml
 version: 2

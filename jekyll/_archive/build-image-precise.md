@@ -8,7 +8,7 @@ sitemap: false
 ---
 
 <div class="alert alert-danger" markdown="1">
-  <strong>Warning: </strong>Ubuntu 12.04 has been End-of-Life'd (EOL) by it's maintainer Canonical. Neither Canonical nor CircleCI are maintaining this image. We strongly suggest switching to CircleCI 2.0, or at the very least the [Ubuntu 14.04 image](https://circleci.com/docs/1.0/build-image-trusty/) for CircleCI 1.0. Read our announcement [here](https://circleci.com/blog/ubuntu-12-04-precise-build-image-end-of-life-warning/).
+  <strong>Warning: </strong>Ubuntu 12.04 has been End-of-Life'd (EOL) by its maintainer Canonical. Neither Canonical nor CircleCI are maintaining this image. We strongly suggest switching to CircleCI 2.0, or at the very least the [Ubuntu 14.04 image](https://circleci.com/docs/1.0/build-image-trusty/) for CircleCI 1.0. Read our announcement [here](https://circleci.com/blog/ubuntu-12-04-precise-build-image-end-of-life-warning/).
 </div>
 
 Occasionally, bugs in tests arise because CircleCI's environment differs slightly from your local environment.

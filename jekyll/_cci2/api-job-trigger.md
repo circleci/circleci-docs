@@ -7,9 +7,14 @@ categories: [configuring-jobs]
 order: 80
 ---
 
+
 This document describes how to trigger jobs using the CircleCI API.
 
-**Note:** You cannot currently trigger jobs that use 2.1 config from the API.
+<div class="alert alert-warning" role="alert">
+  <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
+  <span> This document refers to using the legacy CircleCI API 1.0, a service that will be eventually be deprecated in favour of the <a href="https://circleci.com/docs/api/v2/#circleci-api">V2 API</a>. Consider using the <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">Pipelines</a> endpoints to trigger pipelines.</span>
+</div>
+
 
 * TOC
 {:toc}

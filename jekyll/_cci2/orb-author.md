@@ -40,7 +40,7 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 3) Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
 
-`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
+`echo 'version: "2.1"\ndescription: "a sample orb"' > /tmp/orb.yml`
 
 4) Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
 
@@ -66,7 +66,7 @@ When designing your own orbs, make sure your orbs meet the following requirement
 * Match commands to executors - If you are providing commands, try to provide one or more executors in which they will run.
 * Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your orb, so you can use general names like "run-tests" in most cases.
 * Required vs. optional parameters - Provide sound default values of parameters whenever possible.
-* Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
+* Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to be unable to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
 * Parameter `steps` are powerful - Wrapping steps provided by the user allows you to encapsulate and sugar things like caching strategies and other more complex tasks, providing a lot of value to users.
 
 Refer to [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) for details and examples of commands, executors and parameters in orbs.

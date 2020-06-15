@@ -6,10 +6,7 @@ description: "Using Workflows to Schedule Jobs"
 categories: [configuring-jobs]
 order: 30
 ---
-
-![header](  {{ site.baseurl }}/assets/img/docs/wf-header.png)
-
-To increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources, configure Workflows. This document describes the Workflows feature and provides example configurations in the following sections:
+Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
 {:toc}
@@ -44,9 +41,11 @@ Workflows may appear with one of the following states:
 ### Limitations
 {:.no_toc}
 
-Projects that have pipelines enabled may use the CircleCI API to trigger workflows. Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. **Note:** Builds without workflows require a `build` job.
+* Projects that have pipelines enabled may use the CircleCI API to trigger workflows. 
+* Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. 
+* Config without workflows requires a job called `build`.
 
-Refer to the [Workflows]({{ site.baseurl }}/2.0/faq) section of the FAQ for additional information and limitations.
+Refer to the [Workflows]({{ site.baseurl }}/2.0/faq/#workflows) section of the FAQ for additional information and limitations.
 
 ## Workflows Configuration Examples
 
@@ -190,7 +189,11 @@ workflows:
             - hold
 ```
 
-The outcome of the above example is that the `deploy:` job will not run until you click the `hold` job in the Workflows page of the CircleCI app and then click Approve. In this example the purpose of the `hold` job is to wait for approval to begin deployment.
+The outcome of the above example is that the `deploy:` job will not run until
+you click the `hold` job in the Workflows page of the CircleCI app and then
+click Approve. In this example the purpose of the `hold` job is to wait for
+approval to begin deployment. A job can be approved for up to 15 days after
+being issued.
 
 Some things to keep in mind when using manual approval in a workflow:
 

@@ -66,6 +66,7 @@ const GenerateConfig = styled.button`
   font-weight: bold;
   letter-spacing: 0.3px;
   line-height: 24px;
+  border: none;
   margin-bottom: 32px;
   cursor: pointer;
   text-align: center;
@@ -74,7 +75,10 @@ const GenerateConfig = styled.button`
   &:disabled {
     cursor: not-allowed;
   }
-`;
+  &:hover:enabled {
+    background-color: #218AD9;
+  }
+  `;
 
 const SelectWrapper = styled.div`
   display: flex;

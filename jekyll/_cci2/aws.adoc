@@ -126,7 +126,7 @@ You will be asked to confirm if you wish to go ahead by typing `yes`.
 .SSL Security
 image::browser-warning.png[SSL Security]
 
-. Enter your hostname – this can be your domain name or public IP of the Services Machine instance. At this time you can also upload your SSL public key and certificate if you have them. To proceed without providing these click Use Self-Signed Cert – choosing this option will mean you will see security warnings each time you visit the Management Console.
+. Enter your hostname. This can be your domain name or public IP of the Services Machine instance. At this time you can also upload your SSL public key and certificate if you have them. To proceed without providing these click Use Self-Signed Cert – choosing this option will mean you will see security warnings each time you visit the Management Console.
 +
 .Hostname
 image::secure-management-console.png[Hostname]
@@ -152,67 +152,69 @@ You should now be on the Management Console settings page (your-circleci-hostnam
 
 WARNING: You can make changes to the settings on this page at any time but changes here will require *downtime* while the service is restarted. Some settings are covered in more detail in out Operations Guide.
 
-. The Hostname field should be pre-populated from earlier in the install process, but if you skipped that step, enter your domain or public IP of the Services machine instance. You can check this has been entered correctly by clicking Test Hostname Resolution.
+. **Hostname** – The Hostname field should be pre-populated from earlier in the install process, but if you skipped that step, enter your domain or public IP of the Services machine instance. You can check this has been entered correctly by clicking Test Hostname Resolution.
 
-. The Services section is only used when externalizing services. Externalization is available with a Platinum service contract. Contact support@circleci.com if you would like to find out more.
+. **Services** – The Services section is only used when externalizing services. Externalization is available with a Platinum service contract. Contact support@circleci.com if you would like to find out more.
 +
 .External Services
 image::hostname-services.png[Hostname and Services Settings]
 
-. Under Execution Engines, only select 1.0 Builders if you require them for a legacy project – most users will leave this unchecked.
+. **Execution Engines** – only select 1.0 Builders if you require them for a legacy project – most users will leave this unchecked.
 
-. Select Cluster in the 2.0 Builders Configuration section. The Single box option will run jobs on the Services machine, rather than a dedicated instance, so is only suitable for trialling the system, or for some small teams.
+. **Builders Configuration** – select Cluster in the 2.0 section. The Single box option will run jobs on the Services machine, rather than a dedicated instance, so is only suitable for trialling the system, or for some small teams.
 +
 .1.0 and 2.0 Builders
 image::builders.png[Execution Engine]
 
-. Register CircleCI as a new OAuth application in GitHub.com or GitHub Enterprise by following the instructions provided onscreen.
+. **GitHub Integration** – register CircleCI as a new OAuth application in GitHub.com or GitHub Enterprise by following the instructions provided on the page.
 +
 NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or contact us." message, try using `http:` instead of `https:` for the Homepage URL and callback URL.
 
-. Copy the Client ID and Secret from GitHub and paste it into the relevant fields, then click Test Authentication.
+.. Copy the Client ID and Secret from GitHub and paste it into the relevant fields, then click Test Authentication.
 
-. If you are using GitHub.com, move on to the next step. If using Github Enterprise, you will also need to supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
-.. Navigate to Personal Settings (top right) > Developer Settings > Personal Access Tokens.
-.. Click “generate new token”. Name the token appropriately to prevent accidental deletion. Do not tick any of the checkboxes, we only require the default public read-level access so no extra permissions are required. We recommend this token should be shared across your organization rather than being owned by a single user.
-.. Copy the new token and paste it into the GitHub Enterprise Default API Token field.
+.. If you are using GitHub.com, move on to step 6. If using Github Enterprise, you will also need to follow some suplementary steps and supply an API Token so we can verify your organization. To provide this, complete the following from your GitHub Enterprise dashboard:
+... Navigate to Personal Settings (top right) > Developer Settings > Personal Access Tokens.
+... Click “generate new token”. Name the token appropriately to prevent accidental deletion. Do not tick any of the checkboxes, we only require the default public read-level access so no extra permissions are required. We recommend this token should be shared across your organization rather than being owned by a single user.
+... Copy the new token and paste it into the GitHub Enterprise Default API Token field.
 +
 .Enter Github Enterprise Token
 image::ghe_token.png[Github Integration]
 
-. If you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, see our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
+. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, see our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
 
-. We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
+. **Privacy** – We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
 +
 .Privacy Settings
 image::privacy.png[]
 
-. We recommend using S3 for storage and all required fields for Storage are pre-populated. The IAM user, as referred to in the <<aws-prereq#planning,planning>> section of this document, is used here.
+. **Storage** – We recommend using S3 for storage and all required fields for Storage are pre-populated. The IAM user, as referred to in the <<aws-prereq#planning,planning>> section of this document, is used here.
 +
 .Storage Options
 image::storage.png[]
 
-. Complete enhanced AWS Integration options.
+. **Enhanced AWS Integration** – Complete this section if you are using 1.0 builders.
 // explain enhanced AWS integration 1.0 or just say ignore
 
-. Complete the Email section if you wish to configure your own email server for sending build update emails. Leave this section is you wish to use our default email server.
+. **Email** Complete the Email section if you wish to configure your own email server for sending build update emails. Leave this section is you wish to use our default email server.
 +
 NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Authentication button is not currently working
 
-. Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, see our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
+. **VM Provider** – Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, see our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
 +
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
 +
 CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be set to `0`, forcing containers to be spun up on-demand for both `machine` and Remote Docker. It is worth noting here that if these fields are **not** set to `0` but all preallocated instances are in use, DLC will work correctly, as if preallocation was set to `0`.
 
-. If you wish to use AWS Cloudwatch or Datadog for collating metrics for your installation, set this up here. For more information see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
+. **AWS Cloudwatch or Datadog Metrics** can be configured for your installation. Set either of these up in the relevant sections. For more information see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
 .Metrics
 image::metrics_setup.png[]
-+
-You can also customize the metrics received through Telegraf. For more on this see our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
 
-. Artifacts persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types see our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
+. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you recieve through Telegraf. For more on this see our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
+
+. **Distributed Tracing** is used in our support bundles, and settings should remain set to default unless a change is requested by CircleCI Support.
+
+. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types see our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
 
 . After agreeing to the License Agreement and saving your settings, select Restart Now from the popup. You will then be redirected to start CircleCI and view the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers.
 

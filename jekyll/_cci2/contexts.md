@@ -28,11 +28,24 @@ Context names must be unique for each GitHub or Bitbucket organization. **Note:*
 
 For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error. 
 
+### Renaming Orgs and Repositories
+
+If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+
+1. Rename org/repo in VCS.
+2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
+3. Confirm that your plan, projects and settings have been transferred successfully.
+4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
+
+**Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+
 ## Creating and Using a Context
 
-1. As an organization member, navigate to the Organization Settings page in the CircleCI application, by clicking on the link in the sidebar. **Note:** Any organization member can create a context, but only organization administrators can restrict it with a security group.
+1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. **Note:** Any organization member can create a context, but only organization administrators can restrict it with a security group.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
+
+    **Note: If you are using the old version of the CircleCI application**, you can access the Organization Settings using the following URL format: `https://circleci.com/gh/organizations/<org>/settings#contexts`, substituting your organization/GitHub username. If you are using CircleCI Server, Organization Settings can still be accessed as normal from the main navigation.
 
 2. Click the Create Context button and add a unique name for your Context. After you click the Create Context button in the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this Context at runtime.
 
@@ -41,7 +54,7 @@ For any GitHub Enterprise (GHE) installation that includes multiple organization
 4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
 
     ```yaml
-    version 2.1
+    version: 2.1
 
     workflows:
       my-workflow:

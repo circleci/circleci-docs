@@ -93,13 +93,13 @@ Steps to update to CircleCI Server v2.17 are as follows:
 1. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
 2. Check you are running Docker v17.12.1 and update if necessary
 3. Update Replicated to v2.34.1 (steps in section below)
-4. Navigate to your Management Console dashboard (e.g. `https://<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
+4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
 
 ### Snapshot for Rollback
 
 To take a snapshot of your installation:
 
-1. Go to the Management Console (`http://<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
+1. Go to the Management Console (`<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
 2. Ensure no jobs are running on the nomad clients – check by running `nomad status`
 3. Navigate to the AWS EC2 management console and select your Services machine instance
 4. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.

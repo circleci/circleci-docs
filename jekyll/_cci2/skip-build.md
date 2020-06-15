@@ -64,7 +64,7 @@ If you are frequently pushing changes to a branch, you increase the chances of b
 To save time, you can configure CircleCI to automatically cancel any queued or running builds when a newer build is triggered on that same branch.
 
 **Note:**
-Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new pipelines feature.
+Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use pipelines.
 
 ### Steps to Enable Auto-Cancel for New Builds Triggered by Pushes to GitHub without Workflows
 {:.no_toc}
@@ -80,7 +80,7 @@ Your project's default branch will never auto-cancel builds. This feature only a
 
 Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview feature.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling pipelines.
 
 1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
 

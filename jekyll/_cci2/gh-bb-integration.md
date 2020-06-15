@@ -14,7 +14,7 @@ This document provides an overview of using GitHub, GitHub Enterprise, or Bitbuc
 ## Overview
 {:.no_toc}
 
-To use CircleCI you need to be using either GitHub and Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
+To use CircleCI you need to be using either GitHub or Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
 - A **deploy key** that is used to check out your project from GitHub or Bitbucket Cloud.
 - A **service hook (or "push hook")** that is used to notify CircleCI when you push to GitHub or Bitbucket Cloud.
 
@@ -65,6 +65,16 @@ Integrated status also appears on the pull request screen, to show that all test
     3. Regenerate the keys in CircleCI project.
 - Ensure no developer has access to a build in a repo with a User Key that requires more access than they have.
 
+## Renaming Orgs and Repositories
+
+If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+
+1. Rename org/repo in VCS.
+2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
+3. Confirm that your plan, projects and settings have been transferred successfully.
+4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
+
+**Note**: If these steps are not followed, it is possible, that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
 ## Enable Your Project to Check Out Additional Private Repositories
 
@@ -159,18 +169,21 @@ and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket
 - Get a user's email address
 
 **Write Permissions**
-- Add deploy keys to a repo
-- Add service hooks to a repo
 - Get a list of a user's repos
 - Add an SSH key to a user's account
 
-**Note:**
-CircleCI only asks for
-permissions that are absolutely necessary.
-However, CircleCI is constrained
-by the specific permissions each VCS provider chooses to supply.
-For example, getting a list of a user's repos from GitHub requires write access
-because GitHub does not provide a read-only permission.
+**Admin Permissions**, needed for setting up a project
+- Add deploy keys to a repo
+- Add service hooks to a repo
+
+**Note:** CircleCI only asks for permissions that are absolutely
+necessary. However, CircleCI is constrained by the specific
+permissions each VCS provider chooses to supply. For example, getting
+a list of all user's repos -- public and private -- from GitHub
+requires the [`repo`
+scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes),
+which is write-level access. GitHub does not provide a read-only
+permission for listing all a user's repositories.
 
 If you feel strongly about reducing the number of permissions CircleCI uses,
 consider contacting your VCS provider to communicate your concerns.
@@ -245,7 +258,7 @@ then copy and paste the key you created in step 1.
 Check "Allow write access",
 then click "Add key".
 
-3. Go to [https://circleci.com/gh/you/test-repo/edit#ssh](https://circleci.com/gh/you/test-repo/edit#ssh){:rel="nofollow"},
+3. Go to your project settings, click on SSH Keys, and "Add SSH key",
 and add the key you created in step 1.
 In the "Hostname" field,
 enter "github.com",

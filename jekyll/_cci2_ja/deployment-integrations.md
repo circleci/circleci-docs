@@ -68,7 +68,10 @@ ECR から AWS ECS にデプロイする方法については、「[AWS ECR/ECS 
 
 1. セキュリティ上のベストプラクティスとして、CircleCI 専用の新しい [IAM ユーザー](https://aws.amazon.com/jp/iam/details/manage-users/)を作成します。
 
-2. [AWS アクセスキー](https://docs.aws.amazon.com/ja_jp/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)を[プロジェクト環境変数](https://circleci.com/docs/ja/2.0/env-vars/#プロジェクト内で環境変数を設定する)または[コンテキスト環境変数](https://circleci.com/docs/ja/2.0/env-vars/#context内で環境変数を設定する)として CircleCI に追加します。 アクセスキー ID を `AWS_ACCESS_KEY_ID` という変数に、またシークレットアクセスキーを `AWS_SECRET_ACCESS_KEY` という変数に格納します。
+2. [AWS アクセス
+   キー
+   ](https://docs.aws.amazon.com/ja_jp/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)
+   を[プロジェクト環境変数](https://circleci.com/docs/ja/2.0/env-vars/#) または [コンテキスト環境変 数](https://circleci.com/docs/ja/2.0/env-vars/) として CircleCI に追加します。 アクセスキー ID を `AWS_ACCESS_KEY_ID` という変数に、またシークレットアクセスキーを `AWS_SECRET_ACCESS_KEY` という変数に格納します。
 
 3. `.circleci/config.yml` ファイルで、新しい `deploy` ジョブを作成します。 `deploy` ジョブで、プライマリコンテナに `awscli` をインストールするステップを追加します。
 
@@ -150,7 +153,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
     workflows:
       build_and_push_image:
         jobs:
-          - aws-ecr/build_and_push_image:
+          - aws-ecr/build-and-push-image:
               account-url: AWS_ECR_ACCOUNT_URL_ENV_VAR_NAME
               aws-access-key-id: ACCESS_KEY_ID_ENV_VAR_NAME
               aws-secret-access-key: SECRET_ACCESS_KEY_ENV_VAR_NAME
@@ -175,7 +178,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
     workflows:
       build-and-deploy:
         jobs:
-          - aws-ecr/build_and_push_image:
+          - aws-ecr/build-and-push-image:
               account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
               repo: '${MY_APP_PREFIX}'
               region: '${AWS_REGION}'
@@ -183,7 +186,7 @@ AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb リファレンス](h
       '
           - aws-ecs/deploy-service-update:
               requires:
-                - aws-ecr/build_and_push_image
+                - aws-ecr/build-and-push-image
               family: '${MY_APP_PREFIX}-service'
               cluster-name: '${MY_APP_PREFIX}-cluster'
               container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
