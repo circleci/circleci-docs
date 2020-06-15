@@ -9,8 +9,6 @@ order: 1
 
 The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to optimize your **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs. 
 
-According to [The Forrester Wave: Cloud-Native Continuous Integration Tools, Q3 2019](https://circleci.com/blog/why-circleci-is-a-leader-in-the-forrester-wave-cloud-native-continuous-integration-tools-q3-2019-speed-scale-security-and-compliance/), **Cloud-native CI products with exceptional build speed, on-demand scale, and secure configurations will lead the market and enable customers to accelerate delivery speed and lower management costs, all while meeting corporate compliance needs.**
-
 This guide, and its associated sections, will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
 
 
@@ -272,14 +270,12 @@ While many organizations deploy value to customer once per quarter or once per m
 
 To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
 
-{%
-comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
+{%comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
 endcomment %}
 
 When you provide developers with a workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
 
-{%
-comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
+{%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
 endcomment %}
 
 A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers. 
