@@ -19,7 +19,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # or project environment variable reference
 ```
 
-You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io)—make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
+You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io). Make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
 
 ```
 - image: quay.io/project/image:tag
@@ -28,9 +28,9 @@ You can also use images from a private repository like [gcr.io](https://cloud.go
     password: $QUAY_PASSWORD
 ```
 
-Alternatively, you can utilize the `machine` executor to achieve the same thing:
+Alternatively, you can utilize the `machine` executor to achieve the same result:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -46,14 +46,12 @@ jobs:
           docker run -d --name db company/proprietary-db:1.2.3
 ```          
 
-CircleCI now supports pulling private images from Amazon's ECR service.
-You can start using private images from ECR in one of three ways:
+CircleCI now supports pulling private images from Amazon's ECR service. You can start using private images from ECR in one of two ways:
 
-1. Set your AWS credentials using the CircleCI AWS Integration.
-2. Set your AWS credentials using standard CircleCI private environment variables.
-3. Specify your AWS credentials in .circleci/config.yml using aws_auth:
+1. Set your AWS credentials using standard CircleCI private environment variables.
+2. Specify your AWS credentials in `.circleci/config.yml` using `aws_auth`:
 
-```
+```yaml
 version: 2
 jobs:
   build:
@@ -64,10 +62,9 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
+Both options are virtually the same, however, the second option enables you to specify the variable name you want for the credentials. This can come in handy where you have different AWS credentials for different infrastructure. For example, let's say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag pushes, we run the full-blown test suite before deploying to production:
 
-Options 2 & 3 are virtually the same except that 3 lets you specify whatever variable name you want for the credentials. This can come in handy where you have different AWS credentials for different infrastructure. For example, lets say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag pushes, we run the full-blown test suite before deploying to production:
-
-```
+```yaml
 version: 2
 jobs:
   build:

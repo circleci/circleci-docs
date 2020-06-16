@@ -38,13 +38,13 @@ For the majority of installations, the following commands will get you up and ru
 **Mac and Linux:**
 
 ```sh
-curl -fLSs https://circle.ci/cli | bash
+curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
 ```
 
 By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` directory. If you do not have write permissions to `/usr/local/bin`, you may need to run the above command with `sudo`. Alternatively, you can install to an alternate location by defining the `DESTDIR` environment variable when invoking bash:
 
 ```sh
-curl -fLSs https://circle.ci/cli | DESTDIR=/opt/bin bash
+curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
 
 ### Alternative Installation Methods
@@ -280,6 +280,13 @@ The CLI allows you to run a single job from CircleCI on your desktop using Docke
 $ circleci local execute --job JOB_NAME
 ```
 
+If your CircleCI config is set to version 2.1 or greater, you must first export your config to `process.yml`, and specify it when executing:
+
+```sh
+circleci config process .circleci/config.yml > process.yml
+circleci local execute -c process.yml --job JOB_NAME
+```
+
 Let's run an example build on our local machine on one of CircleCI's demo applications:
 
 ```sh
@@ -300,13 +307,13 @@ Although running jobs locally with `circleci` is very helpful, there are some li
 
 You cannot use the machine executor in local jobs. This is because the machine executor requires an extra VM to run its jobs.
 
-**Add SSH Keys
+**Add SSH Keys**
 
 It is currently not possible to add SSH keys using the `add_ssh_keys` CLI command.
 
 **Workflows**
 
-The CLI tool does not provide support for running workflows. By nature, workflows leverage running builds in parallel on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single **jobs** (which make up parts of a workflow).
+The CLI tool does not provide support for running workflows. By nature, workflows leverage running jobs concurrently on multiple machines allowing you to achieve faster, more complex builds. Because the CLI is only running on your machine, it can only run single **jobs** (which make up parts of a workflow).
 
 **Caching and Online-only Commands**
 

@@ -102,7 +102,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
           name: Save test results
           command: |
             mkdir -p ~/cucumber
-            bundle exec cucumber pretty --format json --out ~/cucumber/tests.cucumber
+            bundle exec cucumber --format pretty --format json --out ~/cucumber/tests.cucumber
           when: always
       - store_test_results:
           path: ~/cucumber
@@ -340,14 +340,14 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
           name: run tests
           command: |
             . venv/bin/activate
-            mkdir test-reports
-            pytest --junitxml=test-reports/junit.xml
+            mkdir test-results
+            pytest --junitxml=test-results/junit.xml
 
       - store_test_results:
-          path: test-reports
+          path: test-results
 
       - store_artifacts:
-          path: test-reports    
+          path: test-results    
 ```
 
 
@@ -470,17 +470,9 @@ A working `.circleci/config.yml` section might look like this:
 #### Jest
 {:.no_toc}
 
-To collect Jest data, first create a Jest config file called `jest.config.js` with the following:
+To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
 
-```javascript
-// jest.config.js
-{
-  reporters: ["default", "jest-junit"],
-}
-```
-
-In your `.circleci/config.yml`,
-add the following `run` steps:
+A working `.circleci/config.yml` section might look like this:
 
 ```yaml
 steps:
@@ -491,10 +483,14 @@ steps:
       name: Run tests with JUnit as reporter
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
-        JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+        JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+  - store_test_results:
+      path: ./reports/junit/
+  - store_artifacts:
+      path: ./reports/junit
 ```
 
-For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint).
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
 **Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 

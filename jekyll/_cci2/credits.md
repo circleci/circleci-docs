@@ -21,13 +21,14 @@ The right plan for you and your team will depend on several factors:
 Let's look at how a Performance plan might use credits. With the Performance plan you have:
 
 - At least one credit block (25,000 credits)
-- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user.)
+- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user)
 - A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
 - The MacOS machine type
+- The Windows machine type
 
 In this example, your team is divided into several groups working on different projects; some projects are larger while others are smaller and need less resources from a CI configuration. With credits it's possible to specify exactly where and when you need to maximize machine resources. For example, your team might use a `large` `resource_class` (with 4 vCPUs and 8gb of memory at a rate of 20 credits/minute) to speed up a build for a bigger project, while only using the `small` `resource_class` (1 vCPU, 2gb Memory, 5 credits/minute) for a smaller project that may not ship code as frequently, or where build time is inconsequential.
 
-Consider taking a moment to look at the CircleCI [Usage](https://circleci.com/pricing/usage/) page to learn about what each CircleCI plan offers and how credits are distributed across different machine types.
+Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn about what each CircleCI plan offers and how credits are distributed across different machine types.
 
 ## Configuring Your Credit Plan
 
@@ -42,15 +43,15 @@ As with the CircleCI legacy container plan, CircleCI also supports a free-tier w
 - Dependency Caching
 - Windows/Linux builds
 
-The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute. On the free plan, you are given a maximum of 3 user seats.
+The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats.
 
 ## Performance Plan
 
 Upgrading to a performance plan offers several improvements over the free plan:
 
-- Access to all machine sizes for Docker/Linux based machines.
+- Access to all machine sizes for Docker/Linux based machines
 - Access to medium sized MacOS machines (4 CPUs, 8gb Ram at 50 credits/minute)
-- Unlimited user seat count (at $15/seat)
+- Unlimited user seat count (at $15 for the first three users and $15 for each additional user)
 - Access to Docker Layer Caching
 - No queuing
 - Support
@@ -63,7 +64,7 @@ If you build on macOS, we also offer organizations on our free plan 25,000 free 
 
 ## Docker Layer Caching
 
-Docker Layer Caching (DLC) is available for 200 credits per job run. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker Layer Caching (DLC) is available for 200 credits per job run. DLC is only available on the Performance Plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
 
 ## Questions And Comments
 

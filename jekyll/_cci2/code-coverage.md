@@ -56,7 +56,7 @@ class ActiveSupport::TestCase
 end
 ```
 
-Now configure your `.circleci/config.yaml` for uploading your coverage report.
+Now configure your `.circleci/config.yml` for uploading your coverage report.
 
 ```yaml
 version: 2
@@ -362,5 +362,5 @@ You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 [environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in
-parallel builds.
+concurrent jobs.
 

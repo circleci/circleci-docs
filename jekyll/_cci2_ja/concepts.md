@@ -65,7 +65,8 @@ version: 2
       machine: # Docker 17.06.1-ce および docker-compose 1.14.0 と
       # 共に Ubuntu バージョン 14.04 イメージを使用する
       # マシンイメージを指定します。新しいイメージのリリースについては、
-      # CircleCI Discuss の「Announcements」をフォローしてください。 image: circleci/classic:201708-01
+      # CircleCI Discuss の「Announcements」をフォローしてください。
+        image: circleci/classic:201708-01
 ...
     build3:
       macos: # Xcode バージョン 9.0 の macOS 仮想マシンを指定します
@@ -112,7 +113,7 @@ jobs:
     steps:
       - restore_cache: # キャッシュされた依存関係を復元します。
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
-          ```
+```
 
 {% endraw %}
 
@@ -120,7 +121,14 @@ jobs:
 
 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
 
-![ワークフローの図]({{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+
+{:.tab.workflows.Cloud}
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+
+{:.tab.workflows.Server}
+![ワークフローの図]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
+
+<!-- ![ワークフローの図]({{ site.baseurl }}/assets/img/docs/workflow_detail.png) -->
 
 {% raw %}
 ```yaml

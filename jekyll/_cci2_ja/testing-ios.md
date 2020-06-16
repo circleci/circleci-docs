@@ -28,8 +28,15 @@ CircleCI では、iOS プロジェクトと macOS プロジェクトをビルド
 ## サポートされている Xcode のバージョン
 
 現時点では以下の Xcode バージョンが使用可能です。
-
-- `10.2.0`：Xcode 10.2 (ビルド 10P99q) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-520/index.html)
+- `11.4.0`：Xcode 11.4 Beta 3 (ビルド 11N132i) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2462/index.html)
+- `11.3.1`：Xcode 11.3.1 (ビルド 11C505) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
+- `11.3.0`：Xcode 11.3 (ビルド 11C29) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
+- `11.2.1`：Xcode 11.2.1 (ビルド 11B500) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+- `11.2.0`：Xcode 11.2.1 (ビルド 11B500) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+- `11.1.0`：Xcode 11.1 (ビルド 11A1027) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
+- `11.0.0`：Xcode 11.0 (ビルド 11A420a) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
+- `10.3.0`：Xcode 10.3 (ビルド 10G8) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
+- `10.2.1`：Xcode 10.2.1 (ビルド 10E1001) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
 - `10.1.0`：Xcode 10.1 (ビルド 10B61) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-474/index.html)
 - `10.0.0`：Xcode 10.0 (ビルド 10A255) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-456/index.html)
 - `9.4.1`：Xcode 9.4.1 (ビルド 9F2000) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-430/index.html)
@@ -39,7 +46,6 @@ CircleCI では、iOS プロジェクトと macOS プロジェクトをビルド
 - `9.2.0`：Xcode 9.2.0 (ビルド 9C40b) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-298/index.html)
 - `9.1.0`：Xcode 9.1.0 (ビルド 9B55) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-290/index.html)
 - `9.0.1`：Xcode 9.0.1 (ビルド 9A1004) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-282/index.html)
-- `8.3.3`：Xcode 8.3.3 (ビルド 8E3004b) [インストールされているソフトウェア](https://circle-macos-docs.s3.amazonaws.com/image-manifest/build-146/index.html)
 
 ## はじめよう
 
@@ -490,7 +496,7 @@ workflows:
 
 一部のプロジェクトでは、シミュレーター関連の問題が発生することがわかっています。 特に頻繁に発生する問題について説明します。
 
-- **Xcode のバージョンが使用できない：**各ビルドイメージにはいくつかのバージョンの Xcode がインストールされており、最新のリリースに伴い更新されていきます。 バージョン `10.0.0` を使用する場合は、ポイントリリース番号まで含めたフルバージョンを指定する必要があります。 一方、最新の Xcode 8.3 (`8.3.3` など) を使用する場合は、`config.yml` に `8.3` のみを指定します。 CircleCI 上で `8.3` バージョンと指定してあれば、8.3 の最新ポイントリリースが公開されたときに、そのまま最新ポイントリリースが使用できるようになります。
+- **Xcode のバージョンが使用できない：**各ビルドイメージにはいくつかのバージョンの Xcode がインストールされており、最新のリリースに伴い更新されていきます。 バージョン `10.0.0` を使用する場合は、ポイントリリース番号まで含めたフルバージョンを指定する必要があります。 一方、最新の Xcode 11.3.0 (`11.3.0` など) を使用する場合は、`config.yml` に `11.3` のみを指定します。 CircleCI 上で `11.3` バージョンと指定してあれば、11.3 の最新ポイントリリースが公開されたときに、そのまま最新ポイントリリースが使用できるようになります。
 
 - **依存関係のバージョンが一致しない：**想定とは異なる依存関係のバージョンがジョブで使用されている場合は、キャッシュを使用せずにリビルドしてみてください。キャッシュ内の古い依存関係が原因となって、新しいバージョンのインストールが妨げられている可能性があります。
 

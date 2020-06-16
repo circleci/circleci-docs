@@ -11,10 +11,15 @@ docs@circleci.com
 :idprefix:
 :idseparator: -
 :sectanchors:
+:autofit-option:
 
 :leveloffset: +1
 
 include::install-overview.adoc[]
+
+include::v.2.19-overview.adoc[]
+
+include::update-nomad-clients.adoc[]
 
 include::server-ports.adoc[]
 

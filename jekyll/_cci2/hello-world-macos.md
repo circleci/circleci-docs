@@ -49,11 +49,11 @@ have a fairly simple `.circleci/config.yml` file. Below, each line is commented
 to indicate what is happening at each step.
 
 ```yaml
-version: 2 # use version 2.0 of CircleCI
+version: 2.1
 jobs: # a basic unit of work in a run
   build: # runs not using `Workflows` must have a `build` job as entry point
     macos:  # indicate that we are using the macOS executor
-      xcode: "10.0.0" # indicate our selected version of Xcode
+      xcode: 11.3.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
@@ -79,7 +79,7 @@ provide a more in-depth overview of how a `config.yml` works.
 
 Since this is a general introduction to building on MacOs, the `config.yml` above example covers the following:
 
-- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor) to use 
+- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use 
 - Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
 - Running tests with Xcode
 - Building our application
@@ -103,6 +103,6 @@ Also, consider reading documentation on some of CircleCI's features:
 
 - See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 
-- Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with parallel, sequential, scheduled, and manual approval workflows.
+- Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 
 - Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.

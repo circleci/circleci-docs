@@ -5,13 +5,15 @@
 :toc: macro
 :toc-title:
 
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+
 To update your CircleCI Server installation, see our https://circleci.com/docs/2.0/updating-server/#section=server-administration[Upgrade Guide]. This guide only runs through the steps required to update Replicated, not the CircleCI application.
 
 == Prerequisites
 
 * Your installation is Ubuntu 14.04 or 16.04 based.
 * Your installation is **not** airgapped and you can access the internet from it.
-* You are running replicated version >=2.10.3 on your services machine. To check this, SSH into the Services machine and run the following:
+* We will be updating to Replicated v2.38, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
 replicated --version
@@ -75,13 +77,13 @@ sudo apt-mark hold docker-ce
 . Perform the Replicated update by executing the update script as follows:
 +
 ```shell
-curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.0" | sudo bash
+curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.6" | sudo bash
 ```
 +
 Double-check your replicated and docker versions:
 +
 ```shell
-replicatedctl version    # 2.38.0
+replicatedctl version    # 2.38.6
 docker -v                # 17.12.1
 ```
 

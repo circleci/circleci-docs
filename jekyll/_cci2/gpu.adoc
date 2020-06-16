@@ -5,6 +5,8 @@
 :toc: macro
 :toc-title:
 
+[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
+
 This document outlines how to run GPU (graphics processing unit) machine executors using CircleCI Server.
 
 toc::[]

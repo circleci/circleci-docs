@@ -16,15 +16,15 @@ This article provides a System Administrators' overview of CircleCI's 2.0 static
 
 This method of installation has the following limitations:
 
-- It is not possible to use `machine` executors.
-- It is not possible to use the Remote Docker Environment or Docker Layer Caching.
+- It is not possible to use `machine` executors (Linux, Windows, macOS)
+- It is not possible to use the Remote Docker Environment or Docker Layer Caching (in other words, you can't build Docker images).
 - There is no first-class high-availability option.
 
 CircleCI 2.0 provides new infrastructure that includes the following improvements:
 
 * New configuration with any number of jobs and workflows to orchestrate them. 
 * Custom images for execution on a per-job basis.
-* Fine-grained performance with custom caching and per-job CPU or memory allocation. 
+* Fine-grained performance with dependency caching and per-job CPU or memory allocation. 
 
 ## Build Environments
 
@@ -101,17 +101,24 @@ Have the following available before beginning the installation procedure:
 
 3. Run `./provision-services-ubuntu.sh` to start the script. 
 
-4. Go to the public IP of the host on port 8800 using HTTPS.
+4. Go to the public IP of the host on port 8800 using HTTPS. You may need to configure a firewall rule or other public Internet gateway to enable access to the services host.
 
-5. Enter your license.
+5. You will see a page about bypassing the browser's TLS warning. If you'd like, you can copy the command below that into your terminal to verify the certificate's authenticity.
 
-6. Complete the Storage section. If you are not using a cloud service, then you will pick `None` (more information below).
+6. Enter your license.
 
-7. Set the VM Provider to None.
+7. On the Replicated settings page, enter the following information:
+  - Hostname: either an IP address or your hostname if you've configured DNS records for a domain.
+  - Services: make sure all boxes are checked.
+  - Execution Engines: make sure 1.0 is unchecked and 2.0 is checked.
+  - 2.0 Builders: make sure this is set to "Cluster".
+  - GitHub Integration: Follow the instructions in the description and fill in the details.
+  - Storage: if you're running this installation in Amazon, you can configure an S3 bucket to store build artifacts and files. If not, set to "None".
+  - VM Provider: set to "None".
 
-8. Set 1.0 Builds to Off.
+8. Any sections not explicitly mentioned above can be configured or left alone per your needs.
 
-9. Set 2.0 Builds to Clustered.
+9. Accept the License Agreement, and click "Save".
 
 ### Installing the Nomad Clients
 
@@ -119,7 +126,7 @@ Have the following available before beginning the installation procedure:
 
 2. Log in to the machine provisioned for the Nomad Server and run the `sudo su` command.
 
-3. To start the script, run `./provision-nomad-client-ubuntu.sh` with the `NOMAD_SERVER_ADDRESS` environment variable set to the routable IP of the Services machine (for example, `NOMAD_SERVER_ADDRESS=0.0.0.0 ./provision-nomad-client-ubuntu.sh`).
+3. To start the script, set the `NOMAD_SERVER_ADDRESS` environment variable to the routable IP of the Services machine you set up in the last section. Then, run `./provision-nomad-client-ubuntu.sh` (for example, `NOMAD_SERVER_ADDRESS=1.2.3.4 ./provision-nomad-client-ubuntu.sh`).
 
 ### Storage
 

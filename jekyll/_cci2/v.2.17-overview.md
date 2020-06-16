@@ -30,7 +30,7 @@ This document provides a summary of features and product notes for the release o
 * Fixed a bug causing Workflows to get stuck when infrastructure_failure happens after a job fails.
 * Fixed a bug causing duplicate docker networks on same nomad client (if running build using machine:true AND vm-provider=on_host).
 * Improved performance when using local storage. Previously, caching issues had been experienced when local storage was used rather than the default option of using S3 (selecting None under * Storage Driver options from the Management Console).
-* We have added more error checking and validation around Github’s API so the existing list commit endpoint no longer causes issues.
+* We have added more error checking and validation around GitHub’s API so the existing list commit endpoint no longer causes issues.
 * Datadog API token field was stored in plaintext, now set as a password field.
 * Fixed issue where workflows were constrained from fanning out to large number of jobs.
 
@@ -93,13 +93,13 @@ Steps to update to CircleCI Server v2.17 are as follows:
 1. Take a snapshot of your installation so you can rollback later if necessary (optional but recommended)
 2. Check you are running Docker v17.12.1 and update if necessary
 3. Update Replicated to v2.34.1 (steps in section below)
-4. Navigate to your Management Console dashboard (e.g. `https://<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
+4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
 
 ### Snapshot for Rollback
 
 To take a snapshot of your installation:
 
-1. Go to the Management Console (`http://<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
+1. Go to the Management Console (`<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
 2. Ensure no jobs are running on the nomad clients – check by running `nomad status`
 3. Navigate to the AWS EC2 management console and select your Services machine instance
 4. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.

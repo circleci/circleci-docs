@@ -149,7 +149,7 @@ version: 2
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
+      xcode: 11.3.0
     steps:
       ...
       - run: bundle exec fastlane test
@@ -157,7 +157,7 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
+      xcode: 11.3.0
     steps:
       ...
       - run: bundle exec fastlane adhoc
@@ -204,16 +204,14 @@ end
 
 ```yaml
 # .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -227,12 +225,10 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -243,7 +239,6 @@ jobs:
           path: output
 
 workflows:
-  version: 2
   build-test-adhoc:
     jobs:
       - build-and-test

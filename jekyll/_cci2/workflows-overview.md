@@ -6,7 +6,7 @@ description: "Description of workflows"
 categories: [workflows]
 order: 2
 ---
-CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to sequence and parallelize your job runs with great flexibility for faster feedback when jobs fail.
+CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to introduce concurrency and sequence your job runs with great flexibility for faster feedback when jobs fail.
 
 <hr>
 
@@ -31,7 +31,7 @@ The following video shows you how to configure workflows in your `.circleci/conf
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
 
-## Possible Workflow Statuses
+## Possible Workflow States
 
 Workflows may appear with one of the following states:
 

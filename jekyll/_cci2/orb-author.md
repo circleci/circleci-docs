@@ -16,7 +16,7 @@ Once you have configured your platform to work with CircleCI orbs, you are ready
 Before you create your first orb, please see the following notes:
 
 * Orbs exist in namespaces.
-* Each organization or username can claim one unique namespace.
+* Each organization or username can claim one unique namespace, and **namespaces cannot be deleted.**
 * Namespaces are global within the CircleCI orb registry, so pick a unique name!
 * Only users with "owner"/"administrator" privileges within a given GitHub/Bitbucket organization can create a namespace linked to that organization.
 * Once an orb has been created by an org admin, any org member can publish `dev` orbs. When ready, `dev` orbs can be promoted into production by org admins.
@@ -24,7 +24,7 @@ Before you create your first orb, please see the following notes:
 * To use the orbs you create, you will need to enable the "Allow Uncertified Orbs" setting in the Security section of CircleCI's Organization Settings page for your organization (`https://circleci.com/[vcs]/organizations/[org-name]/settings#security`).
 * If you are creating an orb, you can use development versions to avoid having your orb publicly/permanently listed in CircleCI's orb registry before it is ready.
 
-The following high-level steps will enable you to publish your first orb:
+### The following high-level steps are needed to publish your first orb:
 
 1) Claim a namespace (assuming you don't yet have one). For example:
 
@@ -34,13 +34,13 @@ In this example we are creating the `sandbox` namespace, which will be linked to
 
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
-2) Create the orb inside your namespace. For example:
+2) Create the orb inside your namespace. This doesn't generate any content, but rather reserves the naming for when the orb is published. For example:
 
 `circleci orb create sandbox/hello-world`
 
 3) Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
 
-`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
+`echo 'version: "2.1"\ndescription: "a sample orb"' > /tmp/orb.yml`
 
 4) Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
 
@@ -66,7 +66,7 @@ When designing your own orbs, make sure your orbs meet the following requirement
 * Match commands to executors - If you are providing commands, try to provide one or more executors in which they will run.
 * Use concise naming for your orb - Remember that use of your commands and jobs is always contextual to your orb, so you can use general names like "run-tests" in most cases.
 * Required vs. optional parameters - Provide sound default values of parameters whenever possible.
-* Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to not be able to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
+* Avoid job-only orbs - Job-only orbs are inflexible. While these orbs are sometimes appropriate, it can be frustrating for users to be unable to use the commands in their own jobs. Pre and post steps when invoking jobs are a workaround for users.
 * Parameter `steps` are powerful - Wrapping steps provided by the user allows you to encapsulate and sugar things like caching strategies and other more complex tasks, providing a lot of value to users.
 
 Refer to [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) for details and examples of commands, executors and parameters in orbs.
@@ -91,7 +91,7 @@ orbs:
     executors:
       specialthingsexecutor:
         docker:
-          - image: circleci/ruby:1.4.2
+          - image: circleci/ruby:2.7.0
     commands:
       dospecialthings:
         steps:
@@ -161,6 +161,24 @@ workflows:
           greeting_name: world
 ```
 {% endraw %}
+
+### Describing your Orb
+
+Before publishing your orb, it is recommended you add metadata to your orb to aid in the discoverability and documentation of your orb. We recommend adding a top-level `description` that informs users of the purpose of your orb and is indexed in search.
+
+Under the `display` key,  add a link to the git repository via the `source_url`. If your orb relates to a specific product or service, you may optionally include a link to the homepage or documentation for said product or service via the `home_url` key.
+
+``` YAML
+version: 2.1
+description: >
+  Integrate Amazon AWS S3 with your CircleCI CI/CD pipeline easily with the aws-s3 orb.
+display:
+  home_url: https://aws.amazon.com/s3/
+  source_url: https://github.com/CircleCI-Public/aws-s3-orb
+``` 
+
+The `description` and contents of the `display` key will be featured in the header of the orb's registry page.
+
 
 ## Providing Usage Examples of Orbs
 
@@ -259,6 +277,7 @@ The top level `examples` key is optional. Usage example maps nested below it can
 - **description:** (optional) A string that explains the example's purpose, making it easier for users to understand it.
 - **usage:** (required) A full, valid config map that includes an example of using the orb.
 - **result:** (optional) A full, valid config map demonstrating the result of expanding the orb with supplied parameters.
+
 
 ## Next Steps
 {:.no_toc}

@@ -40,7 +40,7 @@ For iOS projects, it is possible to run your tests with Fastlane Scan as follows
 jobs:
   build-and-test:
     macos:
-      xcode: "9.3.0"
+      xcode: 11.3.0
     steps:
       ...
       - run:
@@ -89,17 +89,17 @@ The `run` step is also used to run your tests as in the following example of the
 To deploy your application with CircleCI using [Gym](https://github.com/fastlane/fastlane/tree/master/gym) and [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver) from [Fastlane](https://fastlane.tools) specify an identifier, a branch or pattern that the release should run on, and a set of commands to run the release.
 
 ```
-version: 2
+version: 2.1
 jobs:
   test:
     macos:
-      xcode: "9.3.0"
+      xcode: 11.3.0
     steps:
       - checkout
       - run: fastlane scan
   deploy:
     macos:
-      xcode: "9.3.0"
+      xcode: 11.3.0
     steps:
       - checkout
       - deploy:
@@ -107,7 +107,6 @@ jobs:
           command: fastlane release_appstore
 
 workflows:
-  version: 2
   test_release:
     jobs:
       - test

@@ -14,7 +14,7 @@ This document describes how to skip or cancel builds in the following sections.
 
 ## Skipping a Build
 
-By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag anywhere in a commit's title or description. This not only skips the marked commit, but also **all other commits** in the push.
+By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag in the first line of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
 
 **Note:**
 This feature is not supported for fork PRs.
@@ -47,12 +47,12 @@ Date:   Tue Apr 25 15:56:42 2016 -0800
 
     A large feature with squashed commits
 
-    Fix bug in feature
+    [skip ci] Fix bug in feature
     Refactor feature code
-    First attempt at feature [ci skip]
+    First attempt at feature 
 ```
 
-When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit description.
+When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` or `[skip ci]` in the commit description.
 
 **Note:**
 If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
@@ -64,7 +64,7 @@ If you are frequently pushing changes to a branch, you increase the chances of b
 To save time, you can configure CircleCI to automatically cancel any queued or running builds when a newer build is triggered on that same branch.
 
 **Note:**
-Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use the new pipelines feature.
+Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use pipelines.
 
 ### Steps to Enable Auto-Cancel for New Builds Triggered by Pushes to GitHub without Workflows
 {:.no_toc}
@@ -80,7 +80,7 @@ Your project's default branch will never auto-cancel builds. This feature only a
 
 Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch. 
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling the preview feature.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling pipelines.
 
 1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
 

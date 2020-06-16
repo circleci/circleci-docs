@@ -6,7 +6,9 @@ description: "Overviews of the docker, machine, and executor types"
 categories: [containerization]
 order: 10
 ---
+[custom-images]: {{ site.baseurl }}/2.0/custom-images/
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
+[server-gpu]: {{ site.baseurl }}/2.0/gpu/
 
 This document describes the available executor types (`docker`, `machine`, `windows` and `macos`) in the following sections:
 
@@ -28,31 +30,6 @@ It is possible to specify a different executor type for every job in your ['.cir
 - Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient. 
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version such as 16.04.
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
-
-For building software on Linux,
-there are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
-
-Virtual Environment | `docker` | `machine`
-----------|----------|----------
- Start time | Instant | 30-60 sec
- Clean environment | Yes | Yes
- Custom images | Yes | No
- Build Docker images | Yes <sup>(1)</sup> | Yes
- Full control over job environment | No | Yes
- Full root access | No | Yes
- Run multiple databases | Yes <sup>(2)</sup> | Yes
- Run multiple versions of the same software | No | Yes
- Layer caching | Yes | Yes
- Run privileged containers | No | Yes
- Use docker compose with volumes | No | Yes
- [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | No
-{: class="table table-striped"}
-
-<sup>(1)</sup> Requires using [Remote Docker][building-docker-images].
-
-<sup>(2)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
-
-It is also possible to use the `macos` executor type with `xcode`, see the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/) to get started.
 
 ## Using Docker
 
@@ -78,124 +55,10 @@ In this example, all steps run in the container created by the first image liste
 
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-## Using Machine
-
-The `machine` option runs your jobs in a dedicated, ephemeral VM
-that has the following specifications:
-
-CPUs | Processor                 | RAM | HD
------|---------------------------|------------
-2    | Intel(R) Xeon(R) @ 2.3GHz | 8GB | 100GB
-{: class="table table-striped"}
-
-Using the `machine` executor
-gives your application full access to OS resources
-and provides you with full control over the job environment.
-This control can be useful in situations
-where you need to use `ping`
-or modify the system with `sysctl` commands.
-
-Using the `machine` executor also enables you
-to build a Docker image
-without downloading additional packages
-for languages like Ruby and PHP.
-
-**Note**:
-Using `machine` may require additional fees in a future pricing update.
-
-To use the machine executor,
-set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
-
-```yaml
-version: 2
-jobs:
-  build:
-    machine:
-      image: ubuntu-1604:201903-01    # pins image to specific version
-```
-
-The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
-
-
-You can specify other images
-by using the `image` key.
-
-**Note:**
-The `image` key is not supported on private installations of CircleCI.
-See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
-
-The `image` key accepts one of three image types, refer to the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#machine) for additional details about classic versions:
-
-- `circleci/classic:latest`:
-This is the default image.
-Changes to this image are announced at least one week in advance.
-- `circleci/classic:edge`:
-This image receives the latest updates.
-Changes to this image occur frequently.
-- `circleci/classic:{YYYY-MM}`:
-This image is pinned to a specific version
-to prevent breaking changes.
-
-All images have common language tools preinstalled.
-Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
-
-The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
-
-```yaml
-version: 2
-jobs:
-  build:
-    machine:
-      image: ubuntu-1604:201903-01
-      docker_layer_caching: true    # default - false
-```
-
-## Using macOS
-
-_Available on CircleCI Cloud - not currently available on self-hosted installations_
-
-Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
-
-```
-jobs:
-  build:
-    macos:
-      xcode: "9.0"
-      
-    steps:
-      # Commands will execute in macOS container
-      # with Xcode 9.0 installed
-      - run: xcodebuild -version
-```
-
-## Using Windows
-
-_Available on CircleCI Cloud with `version 2.1` config - not currently available on self-hosted installations_
-
-Using the `windows` executor allows you to run your job in a Windows environment. Building on Windows requires that your organization or account is on our [Performance Plan](https://circleci.com/pricing/usage/). The following is an example configuration that will run a simple windows job.
-
-```yaml
-version: 2.1
-
-orbs:
-  win: circleci/windows@1.0.0
-
-jobs:
-  build:
-    executor:
-      name: win/vs2019
-      shell: bash.exe
-    steps:
-      - checkout
-      - run: echo 'Hello, Windows'
-```
-
-We recommend using the [windows](https://circleci.com/orbs/registry/orb/circleci/windows) orb for setting  the executor and shell in your build.
-
-## Using Multiple Docker Images
+### Using Multiple Docker Images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
-```
+```yaml
 jobs:
   build:
     docker:
@@ -214,21 +77,21 @@ jobs:
 ```
 Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
-### Public Convenience Images on Docker Hub
+#### Public Convenience Images on Docker Hub
 {:.no_toc}
   - `name:tag`
     - `circleci/node:7.10-jessie-browsers`
   - `name@digest`
     - `redis@sha256:34057dd7e135ca41...`
 
-### Public Images on Docker Hub
+#### Public Images on Docker Hub
 {:.no_toc}
   - `name:tag`
     - `alpine:3.4`
   - `name@digest`
     - `redis@sha256:54057dd7e125ca41...`
 
-### Public Docker Registries
+#### Public Docker Registries
 {:.no_toc}
   - `image_full_url:tag`
     - `gcr.io/google-containers/busybox:1.24`
@@ -237,7 +100,29 @@ Docker Images may be specified in three ways, by the image name and version tag 
 
 Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Private Images]({{ site.baseurl }}/2.0/private-images).
 
-## Docker Benefits and Limitations
+### RAM disks
+
+A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
+
+The simplest way to use this RAM disk is to configure the `working_directory` of a job to be `/mnt/ramdisk`:
+
+```yaml
+jobs:
+  build:
+    docker:
+     - image: alpine
+
+    working_directory: /mnt/ramdisk
+
+    steps:
+      - run: |
+          echo '#!/bin/sh' > run.sh
+          echo 'echo Hello world!' >> run.sh
+          chmod +x run.sh
+      - run: ./run.sh
+```
+
+### Docker Benefits and Limitations
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
  
 - Your application is self-sufficient
@@ -247,11 +132,203 @@ Docker also has built-in image caching and enables you to build, run, and publis
 
 Choosing Docker limits your runs to what is possible from within a Docker container (including our [Remote Docker][building-docker-images] feature). For instance, if you require low-level access to the network or need to mount external volumes consider using `machine`.
 
+There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
+
+Capability | `docker` | `machine`
+----------|----------|----------
+ Start time | Instant | 30-60 sec
+ Clean environment | Yes | Yes
+ Custom images | Yes <sup>(1)</sup> | No
+ Build Docker images | Yes <sup>(2)</sup> | Yes
+ Full control over job environment | No | Yes
+ Full root access | No | Yes
+ Run multiple databases | Yes <sup>(3)</sup> | Yes
+ Run multiple versions of the same software | No | Yes
+ [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) | Yes | Yes
+ Run privileged containers | No | Yes
+ Use docker compose with volumes | No | Yes
+ [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes | Yes
+{: class="table table-striped"}
+
+<sup>(1)</sup> See [Using Custom Docker Images][custom-images].
+
+<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
+
+<sup>(3)</sup> While you can run multiple databases with Docker, all images (primary and secondary) share the underlying resource limits. Performance in this regard will be dictated by the compute capacities of your container plan.
+
+For more information on `machine`, see the next section below.
+
+
+### Available Docker Resource Classes
+
+The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
+job. In Docker, the following resources classes are available:
+
+Class                 | vCPUs | RAM
+----------------------|-------|-----
+small                 | 1     | 2GB
+medium (default)      | 2     | 4GB
+medium+               | 3     | 6GB
+large                 | 4     | 8GB
+xlarge                | 8     | 16GB
+2xlarge<sup>(2)</sup> | 16    | 32GB
+2xlarge+<sup>(2)</sup>| 20    | 40GB
+{: class="table table-striped"}
+
+Where example usage looks like the following:
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    resource_class: xlarge
+    steps:
+    #  ...  other config
+```
+
+## Using Machine
+
+The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
+
+{% include snippets/machine-resource-table.md %}
+
+Using the `machine` executor gives your application full access to OS resources and provides you with full control over the job environment. This control can be useful in situations where you need full access to the network stack, for example to listen on a network interface, or to modify the system with `sysctl` commands. To find out about migrating a project from using the Docker executor to using `machine`, see the [Executor Migration from Docker to Machine]({{ site.baseurl }}/2.0/docker-to-machine) document.
+
+Using the `machine` executor also means that you get full access to the Docker process. This allows you to run privileged Docker containers and build new Docker images.
+
+**Note**:
+Using `machine` may require additional fees in a future pricing update.
+
+To use the `machine` executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
+
+{:.tab.machineblock.Cloud}
+```yaml
+version: 2
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01    # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+```
+
+{:.tab.machineblock.Server}
+```yaml
+version: 2
+jobs:
+  build:
+    machine: true # uses default image
+```
+
+**Note:** The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
+
+All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
+
+**Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
+
+The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow.
+
+```yaml
+version: 2
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:201903-01
+      docker_layer_caching: true    # default - false
+```
+
+## Using macOS
+
+_Available on CircleCI Cloud - not currently available on self-hosted installations_
+
+Using the `macos` executor allows you to run your job in a macOS environment on a VM. You can also specify which version of Xcode should be used. See the [Supported Xcode Versions section of the Testing iOS]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) document for the complete list of version numbers and information about technical specifications for the VMs running each particular version of Xcode.
+
+```yaml
+jobs:
+  build:
+    macos:
+      xcode: 11.3.0
+      
+    steps:
+      # Commands will execute in macOS container
+      # with Xcode 11.3 installed
+      - run: xcodebuild -version
+```
+
+## Using the Windows Executor
+
+Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
+* CircleCI Cloud – config version 2.1 – you will also need to [enable Pipelines]({{ site.baseurl }}/2.0/build-processing).
+* Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
+
+{:.tab.windowsblock.Cloud}
+```yaml
+version: 2.1 # Use version 2.1 to enable Orb usage.
+
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor: win/default # executor type
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+Cloud users will notice the Windows Orb is used to set up the Windows executor to simplify the configuration. See [the Windows orb details page](https://circleci.com/orbs/registry/orb/circleci/windows) for more details.
+
+CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
+
+## Using GPUs
+
+CircleCI Cloud has execution environments with Nvidia GPUs for specialized workloads. The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
+
+{:.tab.gpublock.Linux}
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    machine:
+      resource_class: gpu.nvidia.small 
+      image: ubuntu-1604-cuda-10.1:201909-23
+    steps:
+      - run: nvidia-smi
+```
+
+{:.tab.gpublock.Windows}
+```yaml
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.3.0
+
+jobs:
+  build:
+    executor: win/gpu-nvidia
+    steps:
+      - run: '&"C:\Program Files\NVIDIA Corporation\NVSMI\nvidia-smi.exe"'
+```
+
+Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server][server-gpu].
+
 ## See Also
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-
-
-
-
-
+[Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)

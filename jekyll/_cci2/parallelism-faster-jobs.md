@@ -7,14 +7,14 @@ categories: [optimization]
 order: 60
 ---
 
-The more tests your project has, the longer it will take for them to complete on a single machine machine. To reduce this time, you can run tests in parallel by spreading them across multiple separate executors. This requires specifying a parallelism level to define how many separate executors get spun up for the test job. Then, you can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
+The more tests your project has, the longer it will take for them to complete on a single machine. To reduce this time, you can run tests in parallel by spreading them across multiple separate executors. This requires specifying a parallelism level to define how many separate executors get spun up for the test job. Then, you can use either the CircleCI CLI to split test files, or use environment variables to configure each parallel machine individually.
 
 * TOC
 {:toc}
 
 ## Specifying a Job's Parallelism Level
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-parallel-jobs) level in your `.circleci/config.yml` file.
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file.
 The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
@@ -146,7 +146,7 @@ circleci tests glob test/**/*.rb | circleci tests split > /tmp/tests-to-run
 bundle exec rspec $(cat /tmp/tests-to-run)
 ```
 
-The TESTFILES var will have a different value in each container, based on $CIRCLE_NODE_INDEX and $CIRCLE_NODE_TOTAL.
+The contents of the file `/tmp/tests-to-run` will be different in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
 ### Video: Troubleshooting Globbing
 {:.no_toc}

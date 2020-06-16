@@ -19,7 +19,7 @@ en:
     - name: Introduction
       link: 2.0/getting-started/
       children:
-        - name: Getting Started Introduction
+        - name: Getting Started
           link: 2.0/getting-started/
         - name: What is CircleCI?
           link: 2.0/about-circleci/
@@ -31,16 +31,18 @@ en:
           link: 2.0/hello-world-macos/
         - name: Hello World Windows
           link: 2.0/hello-world-windows/
-        - name: Getting Started with the CircleCI CLI
+        - name: Get Started with the CLI
           link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
+        - name: Config Builder
+          link: config-builder
     - name: Concepts
       link: 2.0/concepts/
       children:
         - name: Getting Started Concepts
           link: 2.0/concepts/
-        - name: Projects and Builds
+        - name: Projects and Pipelines
           link: 2.0/project-build/
         - name: Orbs, Jobs, Steps, and Workflows
           link: 2.0/jobs-steps/
@@ -53,18 +55,22 @@ en:
       children:
         - name: Migration Introduction
           link: 2.0/migration-intro/
-        - name: Migrating from TravisCI
-          link: 2.0/migrating-from-travis/
-        - name: Migrating from Jenkins
-          link: 2.0/migrating-from-jenkins/
-        - name: Migrating from GitLab
-          link: 2.0/migrating-from-gitlab/
-        - name: Migrating from Buildkite
-          link: 2.0/migrating-from-buildkite/
-        - name: Migrating from Azure DevOps
-          link: 2.0/migrating-from-azuredevops/
         - name: Migrating from AWS
           link: 2.0/migrating-from-aws/
+        - name: Migrating from Azure
+          link: 2.0/migrating-from-azuredevops/
+        - name: Migrating from Buildkite
+          link: 2.0/migrating-from-buildkite/
+        - name: Migrating from GitHub
+          link: 2.0/migrating-from-github/
+        - name: Migrating from GitLab
+          link: 2.0/migrating-from-gitlab/
+        - name: Migrating from Jenkins
+          link: 2.0/migrating-from-jenkins/
+        - name: Migrating from TeamCity
+          link: 2.0/migrating-from-teamcity/
+        - name: Migrating from TravisCI
+          link: 2.0/migrating-from-travis/
 
 - name: Configuration
   icon: docs/config.svg
@@ -74,8 +80,14 @@ en:
       children:
         - name: Configuration Introduction
           link: 2.0/config-intro/
-        - name: Configuration Reference
+        - name: Config Reference Full
           link: 2.0/configuration-reference/
+        - name: Config Reference 2.1
+          link: reference-2-1/
+        - name: Reusable Config Reference
+          link: 2.0/reusing-config/
+        - name: Config Builder
+          link: config-builder
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
@@ -89,7 +101,7 @@ en:
           link: 2.0/orbs-faq/
         - name: Orbs Concepts
           link: 2.0/using-orbs/
-        - name: Orbs Reference
+        - name: Reusable Config Reference
           link: 2.0/reusing-config/
         - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
@@ -98,7 +110,7 @@ en:
     - name: Authoring Orbs
       link: 2.0/orb-author-intro/
       children:
-        - name: Introduction to Authoring an Orb
+        - name: Intro to Authoring an Orb
           link: 2.0/orb-author-intro/
         - name: Set up the CircleCI CLI
           link: 2.0/orb-author-cli/
@@ -113,7 +125,7 @@ en:
     - name: Using Orbs
       link: 2.0/orbs-user-config/
       children:
-        - name: Set Your Version to Work With Orbs
+        - name: Get Set Up For Orbs
           link: 2.0/orbs-user-config/
         - name: Selecting and Using an Orb
           link: 2.0/orbs-user-select-orb/
@@ -137,7 +149,7 @@ en:
     - name: EXECUTORS & IMAGES
       link: 2.0/executor-intro/
       children:
-        - name: Executor & Image Introduction
+        - name: Executor & Image Intro
           link: 2.0/executor-intro/
         - name: Choosing an Executor Type
           link: 2.0/executor-types/
@@ -150,15 +162,17 @@ en:
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
-        - name: Advanced Config Introduction
+        - name: Advanced Config Intro
           link: 2.0/adv-config/
+        - name: Pipeline Variables
+          link: 2.0/pipeline-variables
         - name: Using Shell Scripts
           link: 2.0/using-shell-scripts/
         - name: Setting up Browser Testing
           link: 2.0/browser-testing/
         - name: Configuring Databases
           link: 2.0/databases/
-        - name: Running Docker Commands
+        - name: Run Docker Commands
           link: 2.0/building-docker-images/
         - name: Using Docker Compose
           link: 2.0/docker-compose/
@@ -175,21 +189,21 @@ en:
           link: 2.0/gh-bb-integration/
         - name: Enabling GitHub Checks
           link: 2.0/enable-checks/
-        - name: Building Open Source Projects
+        - name: Open Source Projects
           link: 2.0/oss/
         - name: Using Notifications
           link: 2.0/notifications/
-        - name: Connecting JIRA with CircleCI
+        - name: Connect with JIRA
           link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
-        - name: Using Environment Variables
+        - name: Environment Variables
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
         - name: Enabling Pipelines
           link: 2.0/build-processing/
-        - name: Setting Up iOS Code Signing
+        - name: iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
       link: 2.0/optimizations/
@@ -200,10 +214,12 @@ en:
           link: 2.0/caching/
         - name: Running Tests in Parallel
           link: 2.0/parallelism-faster-jobs/
-        - name: Using Docker Layer Caching
+        - name: Docker Layer Caching
           link: 2.0/docker-layer-caching/
+        - name: Optimizations Cookbook
+          link: 2.0/optimization-cookbook/
 
-- name: Jobs
+- name: Pipelines
   icon: docs/builds.svg
   children:
     - name: Status
@@ -223,11 +239,11 @@ en:
           link: 2.0/artifacts/
         - name: Debugging with SSH
           link: 2.0/ssh-access-jobs/
-        - name: Debugging Java Memory Errors
+        - name: Debug Java Memory Errors
           link: 2.0/java-oom/
         - name: Collecting Test Metadata
           link: 2.0/collect-test-data/
-        - name: Generating Code Coverage Metrics
+        - name: Code Coverage Metrics
           link: 2.0/code-coverage/
         - name: Using Insights
           link: 2.0/insights/
@@ -238,9 +254,9 @@ en:
           link: 2.0/triggers/
         - name: Skip and Cancel Builds
           link: 2.0/skip-build/
-        - name: Using the API to Trigger Jobs
+        - name: Trigger Jobs with the API
           link: 2.0/api-job-trigger/
-        - name: Using Workflows to Schedule Jobs
+        - name: Workflows
           link: 2.0/workflows/
 
 - name: Deployment
@@ -251,22 +267,32 @@ en:
       children:
         - name: Deployment Overview
           link: 2.0/deployment-integrations/
-        - name: Deploying to AWS ECR/ECS
-          link: 2.0/ecs-ecr/
+        - name: Deployment Examples
+          link: 2.0/deployment-examples/
+        - name: Deploying iOS Apps
+          link: 2.0/deploying-ios/
         - name: Publishing Snap Packages
           link: 2.0/build-publish-snap-packages/
         - name: Using Artifactory
           link: 2.0/artifactory/
-        - name: Publishing Packages to packagecloud
+        - name: Publishing to packagecloud
           link: 2.0/packagecloud/
 
 - name: Reference
   icon: docs/reference.svg
   children:
     - children:
-        - name: Configuration Reference
+        - name: Config Reference Full
           link: 2.0/configuration-reference/
-        - name: API Reference
+        - name: Config Reference 2.1
+          link: reference-2-1/
+        - name: API v2 Reference
+          link: api/v2
+        - name: API v2 Introduction
+          link: 2.0/api-intro/
+        - name: API v2 Developer's Guide
+          link: 2.0/api-developers-guide
+        - name: API v1.1 Reference
           link: api/
         - name: Prebuilt Images
           link: 2.0/circleci-images/
@@ -280,14 +306,14 @@ en:
 - name: Server Administration
   icon: docs/admin.svg
   children:
-    - name: Server v2.18.x Install
+    - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
         - name: Overview
           link: 2.0/install-overview/
-        - name: What's New in v2.18
-          link: 2.0/v.2.18-overview/
-        - name: Upgrade to v2.18.x
+        - name: What's New in v2.19.x
+          link: 2.0/v.2.19-overview/
+        - name: Upgrade to v2.19.x
           link: 2.0/updating-server/
         - name: System Requirements
           link: 2.0/server-ports/
@@ -301,7 +327,7 @@ en:
           link: 2.0/upgrading/
         - name: Trial Single-box Install
           link: 2.0/single-box/
-    - name: Server v2.18.x Operations
+    - name: Server v2.19.x Operations
       link: 2.0/overview/
       children:
         - name: Overview
@@ -335,26 +361,35 @@ en:
         - name: Backup and Recovery
           link: 2.0/backup/
         - name: Security
-          link: 2.0/security/
+          link: 2.0/security-server/
         - name: Troubleshooting
           link: 2.0/troubleshooting/
         - name: Faq
           link: 2.0/admin-faq/
         - name: Customization & Config
           link: 2.0/customizations/
-        - name: Architechture
+        - name: Architecture
           link: 2.0/architecture/
         - name: Acknowledgments
           link: 2.0/open-source/
+    - name: Server v2.19 PDFs
+      link: 2.0/v.2.19-overview/
+      children:
+        - name: What's New in v2.19
+          link: 2.0/v.2.19-overview/
+        - name: v2.19 Installation Guide
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
+        - name: v2.19 Operations Guide
+          link: 2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.18 PDFs
       link: 2.0/v.2.18-overview/
       children:
         - name: What's New in v2.18
           link: 2.0/v.2.18-overview/
-        - name: v2.17.3 Installation Guide
-          link: 2.0/CircleCI-Server-AWS-Installation-Guide.pdf
-        - name: v2.17.3 Operations Guide
-          link: 2.0/CircleCI-Server-Operations-Guide.pdf
+        - name: v2.18.3 Installation Guide
+          link: 2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
+        - name: v2.18.3 Operations Guide
+          link: 2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
     - name: Server v2.17.3 PDFs
       link: 2.0/v.2.17-overview/
       children:

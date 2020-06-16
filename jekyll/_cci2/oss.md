@@ -16,7 +16,7 @@ for building your open source project on CircleCI in the following sections:
 ## Overview
 {:.no_toc}
 
-To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
+To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
 
 **Note:**
 If you are building an open source project on macOS,
@@ -92,7 +92,7 @@ and hides four types of configuration data:
 - Passphraseless private SSH keys you have [added to CircleCI]({{ site.baseurl }}/2.0/add-ssh-key)
 to access arbitrary hosts during a build.
 
-- [AWS permissions]({{ site.baseurl }}/2.0/deployment-integrations/#aws) and configuration files.
+- [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
 
 **Note:**
 Forked PR builds of open source projects that require secrets

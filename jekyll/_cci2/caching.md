@@ -14,7 +14,7 @@ Caching is one of the most effective ways to make jobs faster on CircleCI by reu
 
 After an initial job run, future instances of the job will run faster by not redoing work.
 
-![caching data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Cache.png)
+![caching data flow]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
 Caching is particularly useful with **package dependency managers** such as Yarn, Bundler, or Pip. With dependencies restored from a cache, commands like `yarn install` will only need to download new dependencies, if any, and not redownload everything on every build.
 
@@ -98,17 +98,56 @@ Because the second key is less specific than the first, it is more likely that t
 
 Let's walk through how the above cache keys are used in more detail:
 
-Each line in the `keys:` list all manage _one cache_ (each line does **not** correspond to it's own cache). The list of keys {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} and `v1-npm-deps-`), in this example, represent a **single** cache. When it comes time to restore the cache, CircleCI first validates the cache based on the first (and most specific) key, and then steps through the other keys looking for any other cache-key changes. 
+Each line in the `keys:` list all manage _one cache_ (each line does **not** correspond to its own cache). The list of keys {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} and `v1-npm-deps-`), in this example, represent a **single** cache. When it comes time to restore the cache, CircleCI first validates the cache based on the first (and most specific) key, and then steps through the other keys looking for any other cache-key changes.
 
 Here, the first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`; if this file was to change in your commit, CircleCI would see a new cache-key. 
 
 The next key does not have a dynamic component to it, it simply is a static string: `v1-npm-deps-`. If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which will trigger the storing of a new cache.
 
+### Using Caching in Monorepos
+
+There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to managed a shared cache based on multiple files in different parts of your monorepo. 
+
+#### Creating and Building a Concatenated `package-lock` file
+
+1) Add custom command to config:
+
+{% raw %}
+```yaml
+    commands:
+        create_concatenated_package_lock:
+        description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+    parameters:
+      filename:
+        type: string
+    steps:
+      - run:
+          name: Combine package-lock.json files to single file
+          command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+```
+{% endraw %}
+
+2) Use custom command in build to generate the concatenated `package-lock` file
+
+{% raw %}
+```yaml
+    steps:
+        - checkout
+        - create_concatenated_package_lock:
+          filename: combined-package-lock.txt
+    ## Use combined-package-lock.text in cache key
+        - restore_cache:
+          keys:
+            - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
+            - v3-deps
+```
+{% endraw %}
+
 ## Managing Caches
 
 ### Cache Expiration
 {:.no_toc}
-Caches created via the `save_cache` step are stored for up to 30 days.
+Caches created via the `save_cache` step are stored for up to 15 days.
 
 ### Clearing Cache
 {:.no_toc}
@@ -468,6 +507,12 @@ steps:
         - ~/.cache/yarn
       key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
 ```
+
+We recommend using `yarn --frozen-lockfile --cache-folder ~/.cache/yarn` for two reasons.
+
+1) `--frozen-lockfile` ensures that a whole new lockfile is created and it also ensures your lockfile isn't altered. This allows for the checksum to stay relevant and your dependencies should identically match what you use in development.
+
+2) The default cache location depends on OS. `--cache-folder ~.cache/yarn` ensures we're explitly matching our cache save location.
 
 {% endraw %}
 
