@@ -341,6 +341,42 @@ installations of CircleCI. To install the legacy CLI on macOS and other Linux Di
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
+## Context Management
+
+**Contexts** provide a mechanism for securing and sharing environment variables
+across projects. While contexts have been traditionally managed on the CircleCI
+web application, the CircleCI CLI provides an alternative method for managing
+the usage of [contexts]({{site.baseurl}}/2.0/contexts) in your projects. With
+the CLI, you can execute several context-oriented commands:
+
+- *create* - Create a new context
+- *delete* - Delete the named context
+- *list* - List all contexts
+- *remove-secret* - Remove an environment variable from the named context
+- *show* - Show a context
+- *store-secret* - Store a new environment variable in the named context. The
+  value is read from stdin.
+
+The above list are "sub-commands" in the CLI, which would be executed like so:
+
+```sh
+circleci context create
+
+# returns the following:
+List all contexts
+
+Usage:
+  circleci context list <vcs-type> <org-name> [flags]
+```
+
+Many commands will require that you include additional information as indicated
+by the parameters delimited by `< >`.
+
+
+As with most of the CLI's commands, you will need to have properly authenticated
+your version of the CLI with a token to enable performing context related
+actions.
+
 ## Uninstallation
 
 Commands for uninstalling the CircleCI CLI will vary depending on what your
