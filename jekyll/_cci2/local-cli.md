@@ -344,10 +344,10 @@ The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do 
 
 ## Context Management
 
-**Contexts** provide a mechanism for securing and sharing environment variables
-across projects. While contexts have been traditionally managed on the CircleCI
-web application, the CircleCI CLI provides an alternative method for managing
-the usage of [contexts]({{site.baseurl}}/2.0/contexts) in your projects. With
+[Contexts](({{site.baseurl}}/2.0/contexts)) provide a mechanism for securing and
+sharing environment variables across projects. While contexts have been
+traditionally managed on the CircleCI web application, the CircleCI CLI provides
+an alternative method for managing the usage of contexts in your projects. With
 the CLI, you can execute several context-oriented commands:
 
 - *create* - Create a new context
@@ -372,7 +372,6 @@ Usage:
 
 Many commands will require that you include additional information as indicated
 by the parameters delimited by `< >`.
-
 
 As with most of the CLI's commands, you will need to have properly authenticated
 your version of the CLI with a token to enable performing context related
