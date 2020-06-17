@@ -12,20 +12,20 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 * TOC
 {:toc}
 
-The CircleCI 2.0 configuration introduced a new key for `version: 2`. This new key enables you to use 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. Keys for `jobs`, `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
-
-<!-- Unsure this paragraph should still and mention 1.0 builders ... also should probably mention 2.1-->
+See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#config) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
 
 See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
 
-## Sample Configuration with Concurrent Jobs
+## Simple Configuration Examples
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+### Concurrent Jobs
 
-{% raw %}
+The example below shows a concurrent job workflow where the `build` and `test` jobs run concurrently, saving time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
+{:.tab.basic-concurrent.Cloud}
 ```yaml
-version: 2
+version: 2.1
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
@@ -39,6 +39,32 @@ jobs:
     steps:
       - checkout
       - run: <command>
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+
+{:.tab.basic-concurrent.Server}
+```yaml
+version: 2
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+# Orchestrate our job run sequence
 workflows:
   version: 2
   build_and_test:
@@ -47,9 +73,64 @@ workflows:
       - test
 ```
 
-{% endraw %}
+### Sequential Jobs
 
-This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The example below shows a sequential job workflow where the `build` runs and the `test` job runs once it has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+{:.tab.basic-sequential.Cloud}
+```yaml
+version: 2.1
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.basic-sequential.Server}
+```yaml
+version: 2
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: <command>
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
 
 ## Sample Configuration with Sequential Workflow
 
