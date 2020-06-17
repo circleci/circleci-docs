@@ -1,0 +1,110 @@
+---
+layout: classic-docs
+---
+<style>
+	video{
+		float: right;
+		margin-left: 50px;
+		width: 49%
+	}
+
+	img.orb-logo{
+		width: 80px;
+	}
+
+	.section-group{
+		display: flex;
+		flex-wrap: wrap;
+		width: 100%;
+	}
+		.section-group h2,
+		.section-group h3{
+			width: 100%;
+		}
+
+	.section-list{
+		width: 50%;
+	}
+		.section-list:first-child{
+			padding-right: 10px;
+		}
+		.section-list:last-child{
+			padding-left: 10px;
+		}
+
+	.section-list.s3{
+		padding-top: 20px;
+		width: 33%;
+	}
+
+		img.orb-registry{
+			display: block;
+			margin: 0 auto;
+			width: 100px;
+			text-align: center;
+		}
+
+	.section-list.s4{
+		width: 66%;
+	}
+</style>
+
+<video autoplay="" loop="" muted="" playsinline="" class="hero--video">
+	<source src="https://circleci.com/video/orbs-hero.mp4" type="video/mp4">
+</video>
+
+<br />
+
+<p style="text-align:center"><img class="orb-logo" src="/assets/img/logos/community-orbs-logo.svg" /></p>
+
+<p>Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools.</p>
+
+<div class="section-group">
+	<h2>Guides</h2>
+	<div class="section-list s1">
+		<h3>Learn Orbs</h3>
+		<p>Learn about the basics of CircleCI Orbs. What they are and how you can use them.</p>
+		<ul>
+			<li><a href="#">Overview</a></li>
+			<li><a href="#">Concepts</a></li>
+			<li><a href="#">FAQs</a></li>
+		</ul>
+	</div>
+	<div class="section-list s2">
+		<h3>Orb Development</h3>
+		<p>How to create orbs for use in your own projects or the general community.</p>
+		<ul>
+			<li><a href="#">Getting Started</a></li>
+			<li><a href="#">Publishing</a></li>
+			<li><a href="#">Testing an Orb</a></li>
+			<li><a href="#">Best Practices</a></li>
+			<li><a href="#">FAQs</a></li>
+		</ul>
+	</div>
+</div>
+<div class="section-group">
+	<h2>External Resources</h2>
+	<div class="section-list s3">
+		<p style="text-align:center">
+			<img class="orb-registry" src="/assets/img/docs/orb-registry-thumbnail.jpg" />
+			Browse orbs at their official home, the Orb Registry.
+		</p>
+		<p style="text-align:center">
+			<img class="orb-registry" src="/assets/img/docs/orb-registry-thumbnail.jpg" />
+			The CircleCI CLI can be used to browse as well as create and publish orbs.
+		</p>
+	</div>
+	<div class="section-list s4">
+		<h3>Blog Posts</h3>
+		<p>Articles from the CircleCI Blog that talk about orbs.</p>
+		<ul>
+			<li><a href="#">Continuous deployment with CircleCI orbs: automate deploys to AWS, GCP, K8s, and more</a> - 01/22</li>
+			<li><a href="#">How Bolt optimized their CI pipeline to reduce their test run time by over 3x</a> - 12/18</li>
+			<li><a href="#">Optimizing open source project builds on CircleCI</a> - 12/11</li>
+			<li><a href="#">CircleCI for AWS: Deep integration, security, and flexibility</a> - 12/02</li>
+			<li><a href="#">Growing a community: one year of CircleCI orbs</a> - 11/07</li>
+		</ul>
+	</div>
+</div>
+
+{{ content }}
