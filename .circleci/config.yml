@@ -62,7 +62,6 @@ commands:
 # Workflows orchestrate a set of jobs to be run;
 # the jobs for this pipeline are # configured below
 workflows:
-
   build-deploy:
     jobs:
       - js_build
@@ -80,43 +79,12 @@ workflows:
             - build_server_pdfs
             - build_api_docs
             - build_config_ref
-      - reindex-search:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
       - deploy:
           requires:
             - build
           filters:
             branches:
-              only: master
-
-  # We run a nightly build for running build/maintenance tasks
-  # such as pulling in docker image tags or automating our api documentation
-  nightly-build:
-    triggers:
-      - schedule:
-          cron: "0 8 * * *"
-          filters:
-            branches:
-              only: master
-    jobs:
-      - js_build
-      - build_api_docs
-      - build_config_builder
-      - build_config_ref
-      - build:
-          requires:
-            - js_build
-            - build_api_docs
-            - build_config_builder
-            - build_config_ref
-      - deploy:
-          requires:
-            - build
-
+              only: eco-docs
 
 jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
@@ -338,11 +306,14 @@ jobs:
 
   deploy:
     docker:
-      - image: cibuilds/aws:1.16.185
+      - image: cimg/base:stable
     steps:
       - attach_workspace:
           at: ./generated-site
+      - add_ssh_keys
       - run:
-          name: Deploy to S3 if tests pass and branch is Master
-          command: aws s3 sync generated-site/docs s3://circle-production-static-site/docs/ --delete
-
+          name: Deploy to CircleCI.io Demo Site
+          command: |
+            sudo apt-get update && sudo apt-get install -y rsync
+            echo 'sweb0.revidian.net ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBHyIA/VJN9GHUeYUvauk+sGsQcvk8FpXErixwvgqQmW1pdje/Vo4RyAAskzdgoR+HUYOWM1gLW7ZFZHL8F//sqw=' >> ~/.ssh/known_hosts
+            rsync -va --delete generated-site/docs/ root@sweb0.revidian.net:/static-websites/circleci/eco-docs/public_html
