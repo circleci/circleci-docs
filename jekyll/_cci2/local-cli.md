@@ -17,6 +17,7 @@ things you can do with the CircleCI CLI include:
 - Run jobs locally 
 - Query CircleCI's API
 - Create, publish, view and manage Orbs
+- Managing contexts
 
 This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
