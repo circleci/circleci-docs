@@ -344,7 +344,7 @@ The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do 
 
 ## Context Management
 
-[Contexts](({{site.baseurl}}/2.0/contexts)) provide a mechanism for securing and
+[Contexts]({{site.baseurl}}/2.0/contexts) provide a mechanism for securing and
 sharing environment variables across projects. While contexts have been
 traditionally managed on the CircleCI web application, the CircleCI CLI provides
 an alternative method for managing the usage of contexts in your projects. With
