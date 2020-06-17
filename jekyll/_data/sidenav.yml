@@ -274,6 +274,62 @@ en:
           link: 2.0/security-supply-chain/
         - name: IP Ranges
           link: 2.0/ip-ranges/
+
+- name: "CircleCI Orbs"
+  icon: docs/builds.svg
+  children:
+    - name: Orbs
+      link: 2.0/orbs/
+      children:
+        - name: Overview
+          link: 2.0/orbs/overview/
+        - name: Concepts
+          link: 2.0/orbs/concepts/
+        - name: FAQs
+          link: 2.0/orbs/faq/
+    - name: Orb Development
+      link: 2.0/orbs/dev/
+      children:
+        - name: Getting Started
+          link: 2.0/orbs/dev/getting-started/
+        - name: Publishing
+          link: 2.0/orbs/dev/publishing/
+        - name: Testing an Orb
+          link: 2.0/orbs/dev/testing/
+        - name: Best Practices
+          link: 2.0/orbs/dev/best-practices/
+        - name: FAQs
+          link: 2.0/orbs/dev/faq/
+- name: "CircleCI Images"
+  icon: docs/builds.svg
+  children:
+    - name: Convenience Images
+      link: 2.0/convenience-images/
+      children:
+        - name: Introduction
+          link: 2.0/convenience-images/introduction/
+        - name: Browse Images (next-gen)
+          link: 2.0/circleci-images/
+        - name: Legacy Images
+          link: 2.0/circleci-images/
+        - name: Migration Guide
+          link: 2.0/circleci-images/
+        - name: Creating Custom Images
+          link: 2.0/circleci-images/custom/
+        - name: FAQs
+          link: 2.0/convenience-images/faq/
+    - name: Machine Images (VM)
+      link: 2.0/convenience-images/
+      children:
+        - name: Introduction
+          link: 2.0/convenience-images/introduction/
+        - name: Linux Images
+          link: 2.0/convenience-images/introduction/
+        - name: macOS Images
+          link: 2.0/convenience-images/introduction/
+        - name: Windows Images
+          link: 2.0/convenience-images/introduction/
+
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
