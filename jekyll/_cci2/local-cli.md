@@ -360,7 +360,7 @@ the CLI, you can execute several context-oriented commands:
 
 The above list are "sub-commands" in the CLI, which would be executed like so:
 
-```sh
+```bash
 circleci context create
 
 # returns the following:
