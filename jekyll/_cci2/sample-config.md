@@ -21,6 +21,7 @@ The example below shows a concurrent job workflow where the `build` and `test` j
 {:.tab.basic-concurrent.Cloud}
 ```yaml
 version: 2.1
+
 # Define the jobs we want to run for this project
 jobs:
   build:
@@ -35,6 +36,7 @@ jobs:
     steps:
       - checkout
       - run: my-command
+
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
@@ -46,6 +48,7 @@ workflows:
 {:.tab.basic-concurrent.Server}
 ```yaml
 version: 2
+
 # Define the jobs we want to run for this project
 jobs:
   build:
@@ -60,6 +63,7 @@ jobs:
     steps:
       - checkout
       - run: my-command
+
 # Orchestrate our job run sequence
 workflows:
   version: 2
@@ -76,6 +80,7 @@ The example below shows a sequential job workflow where the `build` runs and the
 {:.tab.basic-sequential.Cloud}
 ```yaml
 version: 2.1
+
 # Define the jobs we want to run for this project
 jobs:
   build:
@@ -83,13 +88,14 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
+
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
@@ -110,13 +116,14 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
+
 # Orchestrate our job run sequence
 workflows:
   version: 2
@@ -129,6 +136,8 @@ workflows:
 ```
 
 ### Approval Job
+
+To Do
 
 ## Sample Configuration with Sequential Workflow
 
@@ -204,8 +213,10 @@ workflows:
 ```
 
 {:.tab.complex-sequential.Server}
+{% raw %}
 ```yaml
 version: 2
+
 jobs:
   build:
     working_directory: ~/mern-starter
@@ -259,6 +270,7 @@ workflows:
             branches:
               only: master
 ```
+{% endraw %}
 
 This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
@@ -389,24 +401,22 @@ will be run in Docker.
 
 ```yaml
 version: 2.1
+
 jobs:
   build-and-test:
     macos:
       xcode: 11.3.0
-
     steps:
       - checkout
       - run:
           name: Install CocoaPods
           command: pod install --verbose
-
       - run:
           name: Build and run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
-
       - store_test_results:
           path: test_output/report.xml
       - store_artifacts:
