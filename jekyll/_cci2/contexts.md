@@ -87,12 +87,11 @@ The default security group is `All members` and enables any member of the organi
 
 **Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups.
 
-## Running Workflows with a Restricted Context
+### Running Workflows with a Restricted Context
 
 To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
 ### Restrict a Context to a Security Group or Groups
-{:.no_toc}
 
 You must be an organization administrator to complete the following task.
 
@@ -104,6 +103,11 @@ You must be an organization administrator to complete the following task.
 6. Navigate to Organization Settings > Contexts in the CircleCI app. The security groups appear in the Security column for the context.
 
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context. 
+
+### Making Changes to Context Restrictions
+Changes to security group restrictions for Contexts might not take effect immediately due to caching. To make sure setting are applied straight away it is best practive for the Org Administrator to refresh permissions once the change has been made. The **Refresh Permissions** button can be found on the User Settings > Account Integrations page: https://app.circleci.com/settings/user.
+
+Administrators of CircleCI Server installations can find this button at `<circleci-hostname>/account`.
 
 ### Approving Jobs that use Restricted Contexts
 {:.no_toc}
