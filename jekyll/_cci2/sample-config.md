@@ -12,10 +12,6 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 * TOC
 {:toc}
 
-See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#config) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
-
-See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
-
 ## Simple Configuration Examples
 
 ### Concurrent Jobs
@@ -32,13 +28,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
 # Orchestrate our job run sequence
 workflows:
   build_and_test:
@@ -57,13 +53,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
 # Orchestrate our job run sequence
 workflows:
   version: 2
@@ -132,12 +128,82 @@ workflows:
             - build
 ```
 
+### Approval Job
+
 ## Sample Configuration with Sequential Workflow
 
 Following is a sample 2.0 `.circleci/config.yml` file.
 
-{% raw %}
+{:.tab.complex-sequential.Cloud}
+```yaml
+version: 2.1
 
+orbs:
+  node: circleci/node@3.0.0
+
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      - checkout
+      # Install the lates npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      - node/install-packages:
+          app-dir: ~/mern-starter
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    docker:
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      - image: cimg/node:current
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:4.2
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Demonstrate that Mongo DB is available as localhost
+          command: |
+            curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt update
+            sudo apt install mongodb-org
+            mongo localhost --eval 'db.serverStatus()'
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.complex-sequential.Server}
 ```yaml
 version: 2
 jobs:
@@ -193,8 +259,6 @@ workflows:
             branches:
               only: master
 ```
-
-{% endraw %}
 
 This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
@@ -383,4 +447,6 @@ workflows:
 ## See Also
 {:.no_toc}
 
-See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
+* See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#config) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details of the concepts covered in this example.
+* See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
+* See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
