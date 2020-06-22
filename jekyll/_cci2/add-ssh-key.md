@@ -59,7 +59,7 @@ CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m
 Even though all CircleCI jobs use `ssh-agent`
 to automatically sign all added SSH keys,
 you **must** use the `add_ssh_keys` key
-to actually add keys to a container.
+to actually add keys to a container. Note that `~/.ssh/config` file is what the `add_ssh_keys` step creates or appends to along with adding the key to ~/.ssh/.
 
 To add a set of SSH keys to a container,
 use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)
