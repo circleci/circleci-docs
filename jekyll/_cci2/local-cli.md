@@ -30,11 +30,35 @@ legacy CLI does work in Server and can be installed.
 
 There are multiple installation options for the CLI.
 
-### Quick Installation
-
 **Note**: If you have already installed the CLI prior to October 2018 you may need to do an extra one-time step to switch to the new CLI. See [upgrading instructions below](#updating-the-legacy-cli).
 
-For the majority of installations, the following commands will get you up and running with the CircleCI CLI:
+For the majority of installations, we recommend one of the following package managers to install the CircleCI CLI:
+
+### Install with Snap
+{:.no_toc}
+
+The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
+
+```sh
+sudo snap install docker circleci
+sudo snap connect circleci:docker docker
+```
+
+**Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
+
+### Install With Homebrew
+{:.no_toc}
+
+If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
+
+```sh
+brew install circleci
+```
+
+**Note**: If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
+
+### Alternative Installation Method
+{:.no_toc}
 
 **Mac and Linux:**
 
@@ -47,33 +71,6 @@ By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` dire
 ```sh
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
-
-### Alternative Installation Methods
-
-There are several alternative installation methods for the CircleCI CLI. Read on if you need to customize your installation, or are running into issues with the quick installation above.
-
-#### Install with Snap
-{:.no_toc}
-
-The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
-
-```sh
-sudo snap install docker circleci
-sudo snap connect circleci:docker docker
-```
-
-**Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
-
-#### Install With Homebrew
-{:.no_toc}
-
-If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
-
-```sh
-brew install circleci
-```
-
-**Note**: If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
 
 ### Manual Download
 
