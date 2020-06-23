@@ -153,8 +153,9 @@ html, body {
 
   // This is the currently selected ToC entry
   .toc-link.active {
-    background-color: $nav-active-bg;
+    // background-color: $nav-active-bg;
     color: $nav-active-text;
+    border-left: 3px solid #19639A;
   }
 
   // this is parent links of the currently selected ToC entry
@@ -170,10 +171,8 @@ html, body {
   .toc-list-h2 {
     padding: 8px 0;
     display: none;
-    background-color: $nav-subitem-bg;
+    // background-color: $nav-subitem-bg;
     font-weight: 500;
-    border-bottom: 1px solid darken($nav-subitem-bg, 5%);
-    border-top: 1px solid darken($nav-subitem-bg, 5%);
   }
 
   .toc-h1 {
@@ -191,9 +190,12 @@ html, body {
   }
 
   .toc-h2 {
-    padding: 2px 0;
-    padding-left: $nav-padding + $nav-indent;
+    // padding-left: $nav-padding + $nav-indent;
     font-size: $toc-h2-size;
+
+    padding: 2px 0;
+    padding-left: (($nav-padding + $nav-indent) / 2);
+    margin-left: (($nav-padding + $nav-indent) / 2);
   }
 
   .toc-footer {
@@ -216,6 +218,10 @@ html, body {
       text-decoration: none;
     }
   }
+}
+
+.toc-link {
+  border-left: 3px solid $nav-bg;
 }
 
 .toc-link, .toc-footer li {

@@ -29,7 +29,7 @@ $circle-blue: #19639A;
 $nav-bg: #F3F3F3 !default;
 $nav-subitem-bg: darken($nav-bg, 3%) !default;
 $nav-active-parent-bg: #F3F3F3 !default; // parent links of the current section
-$nav-active-bg: $circle-blue !default;
+$nav-active-bg: #F3F3F3 !default;
 $examples-bg: #2E3336 !default;
 $code-bg: #1E2224 !default;
 $code-annotation-bg: #191D1F !default;
@@ -48,7 +48,7 @@ $search-notice-bg: #c97a7e !default;
 ////////////////////
 $main-text: #333 !default; // main content text color
 $nav-text: #000000 !default;
-$nav-active-text: #fff !default;
+$nav-active-text: $circle-blue !default;
 $nav-active-parent-text: #19639A !default; // parent links of the current section
 $lang-select-text: #fff !default; // color of unselected language tab text
 $lang-select-active-text: #fff !default; // color of selected language tab text
