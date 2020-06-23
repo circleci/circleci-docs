@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Sample 2.0 config.yml Files"
-short-title: "Sample 2.0 config.yml File"
-description: "Sample 2.0 config.yml File"
+title: "Sample config.yml Files"
+short-title: "Sample config.yml File"
+description: "Sample config.yml File"
 categories: [migration]
 order: 2
 ---
@@ -16,7 +16,7 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 
 ### Concurrent Jobs
 
-The example below shows a concurrent job workflow where the `build` and `test` jobs run concurrently, saving time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The example below shows a concurrent job workflow where the `build` and `test` jobs run at the same time, saving time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 {:.tab.basic-concurrent.Cloud}
 ```yaml
@@ -73,7 +73,7 @@ workflows:
       - test
 ```
 
-{:.tab.basic-concurrent.Workflow Map}
+The following image shows the workflow view for this configurations example:
 ![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 ### Sequential Jobs
@@ -138,7 +138,7 @@ workflows:
             - build
 ```
 
-{:.tab.basic-sequential.Workflow Map}
+The following image shows the workflow view for this configurations example, in which jobs run one after the other:
 ![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
 
@@ -233,13 +233,18 @@ workflows:
             - hold
 ```
 
-{:.tab.approval.Workflow Map}
+The following image shows the workflow view for this configurations example:
 ![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
-
 
 ## Sample Configuration with Sequential Workflow
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+Following is a sample `.circleci/config.yml` file using the following configuration features: 
+
+* A sequential workflow
+* An orb (`version: 2.1`/Cloud config only) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server example
+* A secondary, services container
+* Workspaces
+* Storing artifacts
 
 {:.tab.complex-sequential.Cloud}
 ```yaml
