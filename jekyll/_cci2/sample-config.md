@@ -73,6 +73,9 @@ workflows:
       - test
 ```
 
+{:.tab.basic-concurrent.Workflow Map}
+![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
+
 ### Sequential Jobs
 
 The example below shows a sequential job workflow where the `build` runs and the `test` job runs once it has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
@@ -135,9 +138,104 @@ workflows:
             - build
 ```
 
+{:.tab.basic-sequential.Workflow Map}
+![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
+
+
 ### Approval Job
 
-To Do
+The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the deploy job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+{:.tab.approval.Cloud}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
+
+{:.tab.approval.Server}
+```yaml
+version: 2
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
+
+{:.tab.approval.Workflow Map}
+![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+
 
 ## Sample Configuration with Sequential Workflow
 
@@ -157,7 +255,7 @@ jobs:
     executor: node/default
     steps:
       - checkout
-      # Install the lates npm - the node Orb takes care of it
+      # Install the latest npm - the node Orb takes care of it
       - node/install-npm
       # Install dependencies - the node Orb take care of installation and dependency caching
       - node/install-packages:
