@@ -60,7 +60,7 @@ brew install circleci
 ### Install with Chocolatey (Windows)
 {:.no_toc}
 
-For Windows users, we support [Chocolatey](https://chocolatey.org/):
+For Windows users, we provide a [Chocolatey](https://chocolatey.org/) package:
 
 ```sh
 choco install circleci-cli -y
