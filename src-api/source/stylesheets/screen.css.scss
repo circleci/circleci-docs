@@ -354,6 +354,34 @@ html, body {
     clear: both;
   }
 
+
+
+  .header-links,  {
+    margin-right: 50%;
+    padding: 24px 28px;
+    box-sizing: border-box;
+    display: flex;
+
+  }
+  .content-link {
+    color: #7F7F7F;
+    display: flex;
+    text-decoration: none;
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 14px;
+    &:first-child {
+      padding-right: 32px;
+    }
+  }
+
+  .new-window {
+    color: grey;
+    width: 12px;
+    padding-left: 8px;
+  }
+
+
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
     margin-right: $examples-width;
     padding: 0 $main-padding;
