@@ -58,8 +58,13 @@ brew install circleci
 **Note**: If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
 
 ### Install with Chocolatey (Windows)
+{:.no_toc}
 
+For Windows users, we support [Chocolatey](https://chocolatey.org/):
+
+```sh
 choco install circleci-cli -y
+```
 
 ### Alternative Installation Method
 {:.no_toc}
