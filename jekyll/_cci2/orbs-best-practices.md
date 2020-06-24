@@ -88,7 +88,7 @@ echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 ### Sample Data
 
 - Sample data neccesary for testing your Orb in CI/CD pipelines should be kept as small as possible, e.g a single `composer.json` or `package.json` file with minimal dependencies.
-- Sample data should live under the `sample/` directory in the Orb's repository, when possible.
+- Sample data should live under the `sample/` directory in the orb's repository, when possible.
 
 ### Deployment
 
