@@ -213,19 +213,19 @@ The following screenshot demonstrates a workflow on hold.
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
-By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears
-requesting that you approve or cancel the holding job.
+By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears requesting that you approve or cancel the holding job.
 
 After approving, the rest of the workflow runs as directed.
 
 ## Scheduling a Workflow
 
-It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow
-to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
+It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
 Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
 
 **Note:** In CircleCI v2.1, when no workflow is provided in config, an implicit one is used. However, if you declare a workflow to run a scheduled build, the implicit workflow is no longer run. You must add the job workflow to your config in order for CircleCI to also build on every commit.
+
+**Note:** Please note that when you schedule a workflow, the workflow will be counted as an individual user seat.
 
 ### Nightly Example
 {:.no_toc}
