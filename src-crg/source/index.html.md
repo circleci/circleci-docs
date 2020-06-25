@@ -187,7 +187,7 @@ The first `image` listed in the file defines the primary container image where a
 
 `command` will be used as arguments to image entrypoint (if specified in Dockerfile) or as executable (if no entrypoint is provided here or in the Dockerfile).
 
-For [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time, all `steps` are run in the primary container only.
+For [primary container](https://circleci.com/docs/2.0/glossary/#primary-container) (listed first in the list) if no `command` is specified then `command` and image entrypoint will be ignored, to avoid errors caused by the entrypoint executable consuming significant resources or exiting prematurely. At this time, all `steps` are run in the primary container only.
 
 The `name` string defines the name for reaching the secondary service containers. By default, all services are exposed directly on `localhost`. The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
 
@@ -682,7 +682,7 @@ If you want to avoid this behaviour, you can specify `set +o pipefail` in the co
 
 In general, we recommend using the default options (`-eo pipefail`) because they show errors in intermediate commands and simplify debugging job failures. For convenience, the UI displays the used shell and all active options for each `run` step.
 
-For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) document.
+For more information, see the [Using Shell Scripts](https://circleci.com/docs/2.0/using-shell-scripts/) document.
 
 ###### _Background commands_
 
