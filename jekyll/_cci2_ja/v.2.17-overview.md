@@ -30,7 +30,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 * メッセージに [ci skip] を含むコミットの一部がいまだにビルドされていたバグを修正しました。
 * ジョブが失敗した後に infrastructure_failure が発生するとワークフローがスタックするバグを修正しました。
 * 同じ Nomad クライアントでの Docker ネットワークの重複が引き起こされるバグを修正しました (machine: true かつ vm-provider=on_host を使用してビルドを実行している場合)。
-* ローカル ストレージを使用する際のパフォーマンスを改善しました。 Previously, caching issues had been experienced when local storage was used rather than the default option of using S3 (selecting None under * Storage Driver options from the Management Console).
+* ローカル ストレージを使用する際のパフォーマンスを改善しました。 以前は、デフォルト オプションの S3 ではなくローカル ストレージを使用すると、キャッシュの問題が発生していました (管理コンソールのストレージ ドライバー オプションで [None (なし)] を選択）。
 * Github の API にエラー チェックおよびバリデーション処理を追加して、既存のリスト コミット エンドポイントで問題が発生しないようにしました。
 * Datadog API トークン フィールドはプレーン テキストで保存されていましたが、パスワード フィールドとして設定されるようになりました。
 * ワークフローの多数のジョブへのファンアウトが制限されていた問題を修正しました。
