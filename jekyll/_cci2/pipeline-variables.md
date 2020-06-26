@@ -20,13 +20,13 @@ Pipeline values are available to all pipeline configurations and can be used wit
 
 Value                       | Description
 ----------------------------|--------------------------------------------------------
-pipeline.id                 | A globally unique id representing for the pipeline
+pipeline.id                 | A [globally unique id](https://en.wikipedia.org/wiki/Universally_unique_identifier) representing for the pipeline
 pipeline.number             | A project unique integer id for the pipeline
-pipeline.project.git_url    | E.g. https://github.com/circleci/circleci-docs
-pipeline.project.type       | E.g. "github"
-pipeline.git.tag            | The tag triggering the pipeline
-pipeline.git.branch         | The branch triggering the pipeline
-pipeline.git.revision       | The current git revision
+pipeline.project.git_url    | The URL where the current project is hosted. E.g. https://github.com/circleci/circleci-docs
+pipeline.project.type       | The lower-case name of the VCS provider, E.g. “github”, “bitbucket”.
+pipeline.git.tag            | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
+pipeline.git.branch         | The name of the git branch that was pushed to trigger the pipeline.
+pipeline.git.revision       | The long (40-character) git SHA that is being built.
 pipeline.git.base_revision  | The previous git revision
 {: class="table table-striped"}
 
