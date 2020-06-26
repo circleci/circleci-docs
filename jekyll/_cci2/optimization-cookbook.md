@@ -26,7 +26,7 @@ This guide provides you with the following optimization strategies that you can 
 - [Implementing caching strategies to optimize builds and workflows](#using-caching-to-optimize-builds-and-workflows)
 - [Improving test performance](#improving-test-performance)
 - [Use test splitting to speed up a test cycle](#test-splitting)
-- [Use Workflows to increase deployment frequency]()
+- [Use Workflows to increase deployment frequency](#workflows-increase-deployment-frequency)
 
 **Note:** This guide will be updated with new optimization strategies on a continual basis, so please feel free to refer to this page for new and updated content.
 
@@ -192,6 +192,7 @@ A simple example would configure deployment to run *only* if a change is merged 
 
 For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
 
+{% raw %}
 ```yaml
 - deploy:
     requires:
@@ -200,11 +201,13 @@ For an organization deploying multiple times per day, that configuration may be 
       branches:
         only: master
 ```
+{% endraw %}
 
 The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break. 
 
 For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
 
+{% raw %}
 ```yaml
 nightly-build:
   triggers:
@@ -214,6 +217,7 @@ nightly-build:
           branches:
             only: master
 ```
+{% endraw %}
 
 The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
 
