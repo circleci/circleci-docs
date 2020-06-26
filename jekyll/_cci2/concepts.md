@@ -36,7 +36,7 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 
 `config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
 
-While your CircleCI configuration can be adapted to fit many different needs, the following terms, sorted in order of granularity and dependence, describe the anatomy of most common CircleCI projects:
+Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
 - **[Pipeline](#pipelines)**: Represents the entirety of your configuration. 
 - **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
