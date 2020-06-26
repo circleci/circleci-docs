@@ -34,7 +34,7 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 └── all-other-project-files-and-folders
 ```
 
-`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
+`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that are used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
 
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
