@@ -9,7 +9,8 @@ description: "CircleCI での Nomad クラスタの操作ガイド"
 
 CircleCI では、CircleCI 2.0 のプライマリジョブスケジューラとして [Nomad](https://www.hashicorp.com/blog/nomad-announcement/) を使用しています。ここでは、CircleCI 2.0 での Nomad クラスタの操作方法について理解を深めていただくために、以下のセクションに沿って Nomad の概要を説明します。
 
-- 目次 {:toc}
+- 目次 
+{:toc}
 
 ## 基本的な用語とアーキテクチャ
 
