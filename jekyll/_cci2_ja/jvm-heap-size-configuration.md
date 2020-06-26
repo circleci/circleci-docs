@@ -58,5 +58,5 @@ JVM_HEAP_SIZE の値が変更されていることを確認します。
 ```
 
 ```clojure
-(-> (java.lang.Runtime/getRuntime) (.totalMemory)) ;; 戻り値は JVM_HEAP_SIZE の値と一致します
+(-> (java.lang.Runtime/getRuntime) (.maxMemory)) ;; 戻り値は JVM_HEAP_SIZE の値と一致します
 ```
