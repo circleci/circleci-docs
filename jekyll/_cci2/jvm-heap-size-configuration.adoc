@@ -57,5 +57,5 @@ And following are the outputs you should see:
 (System/getenv "JVM_HEAP_SIZE") ;; should return what you have set above
 ```
 ```clojure
-(-> (java.lang.Runtime/getRuntime) (.totalMemory)) ;; return value should match with JVM_HEAP_SIZE
+(-> (java.lang.Runtime/getRuntime) (.maxMemory)) ;; return value should match with JVM_HEAP_SIZE
 ```
