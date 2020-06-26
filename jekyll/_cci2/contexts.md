@@ -120,7 +120,8 @@ version: 2.1
 # jobs declaration for build, test and deploy not displayed
 
 workflows:
-  build-test-deploy:
+  jobs:
+    build-test-deploy:
       - build
       - hold:
           type: approval # presents manual approval button in the UI
