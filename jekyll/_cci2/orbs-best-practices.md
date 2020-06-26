@@ -85,6 +85,11 @@ echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 - Deploy full CI/CD for your orb with a fully automated build > test > deploy workflow using the [Orb Starter Kit (Beta)](https://github.com/CircleCI-Public/orb-starter-kit). This handles all of the below.
 - Optional: Utilize a destructured orb pattern to more easily maintain individual orb components.
 
+### Sample Data
+
+- Sample data neccesary for testing your Orb in CI/CD pipelines should be kept as small as possible, e.g a single `composer.json` or `package.json` file with minimal dependencies.
+- Sample data should live under the `sample/` directory in the orb's repository, when possible.
+
 ### Deployment
 
 #### Versioning

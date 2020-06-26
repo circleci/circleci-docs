@@ -35,6 +35,8 @@ A few different external services and technology integration points touch Circle
 
 - **Artifacts** It is common to use S3 or similar hosted storage for artifacts. Assuming these resources are secured per your normal policies they are as safe from any outside intrusion as any other data you store there.
 
+- **Support Bundles** We use https://www.honeycomb.io/[Honeycomb] to process and analyze distributed tracing data from Support Bundles that are sent to us. The traces contain metadata about activity in your instance but no secrets, source code, or build output are included. Data is retained for a maximum of 60 days.
+
 == Audit Logs
 The Audit Log feature is only available for CircleCI installed on your servers or private cloud.
 
@@ -97,4 +99,3 @@ If you are getting started with CircleCI there are some things you can ask your 
 - Ensure you audit who has access to SSH keys in your organization.
 - Ensure that your team is using Two-Factor Authentication (2FA) with your VCS (https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa[Github 2FA], https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html[Bitbucket]). If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
 - If your project is open source and public, please make note of whether or not you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our <<oss#security,Open Source Projects document>>.
-

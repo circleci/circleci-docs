@@ -17,6 +17,7 @@ things you can do with the CircleCI CLI include:
 - Run jobs locally 
 - Query CircleCI's API
 - Create, publish, view and manage Orbs
+- Managing contexts
 
 This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
@@ -29,11 +30,44 @@ legacy CLI does work in Server and can be installed.
 
 There are multiple installation options for the CLI.
 
-### Quick Installation
-
 **Note**: If you have already installed the CLI prior to October 2018 you may need to do an extra one-time step to switch to the new CLI. See [upgrading instructions below](#updating-the-legacy-cli).
 
-For the majority of installations, the following commands will get you up and running with the CircleCI CLI:
+For the majority of installations, we recommend one of the following package managers to install the CircleCI CLI:
+
+### Install with Snap (Linux)
+{:.no_toc}
+
+The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
+
+```sh
+sudo snap install docker circleci
+sudo snap connect circleci:docker docker
+```
+
+**Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
+
+### Install With Homebrew (macOS)
+{:.no_toc}
+
+If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
+
+```sh
+brew install circleci
+```
+
+**Note**: If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
+
+### Install with Chocolatey (Windows)
+{:.no_toc}
+
+For Windows users, we provide a [Chocolatey](https://chocolatey.org/) package:
+
+```sh
+choco install circleci-cli -y
+```
+
+### Alternative Installation Method
+{:.no_toc}
 
 **Mac and Linux:**
 
@@ -46,33 +80,6 @@ By default, the CircleCI CLI tool will be installed to the `/usr/local/bin` dire
 ```sh
 curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | DESTDIR=/opt/bin bash
 ```
-
-### Alternative Installation Methods
-
-There are several alternative installation methods for the CircleCI CLI. Read on if you need to customize your installation, or are running into issues with the quick installation above.
-
-#### Install with Snap
-{:.no_toc}
-
-The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
-
-```sh
-sudo snap install docker circleci
-sudo snap connect circleci:docker docker
-```
-
-**Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
-
-#### Install With Homebrew
-{:.no_toc}
-
-If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
-
-```sh
-brew install circleci
-```
-
-**Note**: If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
 
 ### Manual Download
 
@@ -340,6 +347,41 @@ installations of CircleCI. To install the legacy CLI on macOS and other Linux Di
 `$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
+
+## Context Management
+
+[Contexts]({{site.baseurl}}/2.0/contexts) provide a mechanism for securing and
+sharing environment variables across projects. While contexts have been
+traditionally managed on the CircleCI web application, the CircleCI CLI provides
+an alternative method for managing the usage of contexts in your projects. With
+the CLI, you can execute several context-oriented commands:
+
+- *create* - Create a new context
+- *delete* - Delete the named context
+- *list* - List all contexts
+- *remove-secret* - Remove an environment variable from the named context
+- *show* - Show a context
+- *store-secret* - Store a new environment variable in the named context. The
+  value is read from stdin.
+
+The above list are "sub-commands" in the CLI, which would be executed like so:
+
+```bash
+circleci context create
+
+# returns the following:
+List all contexts
+
+Usage:
+  circleci context list <vcs-type> <org-name> [flags]
+```
+
+Many commands will require that you include additional information as indicated
+by the parameters delimited by `< >`.
+
+As with most of the CLI's commands, you will need to have properly authenticated
+your version of the CLI with a token to enable performing context related
+actions.
 
 ## Uninstallation
 

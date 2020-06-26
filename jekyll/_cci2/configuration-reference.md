@@ -883,7 +883,7 @@ version | N        | String | Version string of Docker you would like to use (de
 
 **Notes**:
 
-- A paid account is required to access Docker Layer Caching. Customers on paid plans can request access by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new). Please include a link to the project on CircleCI) with your request.
+- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching. 
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -1611,7 +1611,7 @@ Type               | Arguments          | `true` if                             
 -------------------|--------------------|----------------------------------------|----------------------------------------
 YAML literal       | None               | is truthy                              | `true`/`42`/`"a string"`
 [Pipeline Value](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values) | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`
-[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameter.my-parameter >>`
+[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`
 and                | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`
 or                 | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`
 not                | 1 logic statement  | the argument is not truthy             | `not: true`
@@ -1635,7 +1635,7 @@ workflows:
             equal: [ master, << pipeline.git.branch >> ]
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
-            - << pipeline.parameter.deploy-canary >>
+            - << pipeline.parameters.deploy-canary >>
 ```
 
 ## Example Full Configuration

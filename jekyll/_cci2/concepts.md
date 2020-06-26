@@ -21,14 +21,34 @@ On the Projects Dashboard, you can either:
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
 
-{:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-{:.tab.addprojectpage.Server}
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+## Configuration
+
+CircleCI believes in *configuration as code*. Your entire continuous integration and deployment process is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
+
+```bash
+├── .circleci
+│   ├── config.yml
+├── README
+└── all-other-project-files-and-folders
+```
+
+`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that are used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
+
+Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
+
+- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. 
+- **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
+- **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
+- **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project. 
+
+The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements:
+
+![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
 ## User Types
-
+  
 It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
 
 * The *Organization Administrator* is a permission level inherited from your VCS:
@@ -42,53 +62,30 @@ username and password. Users must be added to a [GitHub or Bitbucket org]({{
 site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
 projects. Users may not view project data that is stored in environment variables.
 
+
 ## Pipelines
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#config).
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration).
 
-Pipelines offer the following benefits:
+Pipelines represent methods for interacting with your configuration:
 
 {% include snippets/pipelines-benefits.adoc %}
 
 ## Orbs
+
 Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
 
-## Config
-
-CircleCI believes in *configuration as code*. The entire pipeline process, from build to deploy, is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
-
-```sh
-├── .circleci
-│   ├── config.yml
-├── README
-└── all-your-projects-other-files-and-folders
-```
-
-`config.yml` is a powerful yaml file that defines the entire pipeline for your project. For a full overview of the various keys that can be used see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/). 
-
-Put very simply: 
-
-* You will define [workflows](#workflows) that orchestrate a series of [jobs](#jobs). 
-* Each job will contain a number of [steps](#steps) to run commands and shell scripts to do the work required for your project. 
-* Each job runs in an independent [executor](#executors-and-images) (container or virtual machine). 
-* [Caches](#caches-workspaces-and-artifacts) are available to optimize and speed up pipelines. 
-* [Workspaces/artifacts](#caches-workspaces-and-artifacts) can be used to share data across your pipeline.
-
-The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements (**Note:** The `test` job used in the example repo has been removed here to keep the image a reasonable size):
-
-![config elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
-
-And now the [same example using the Maven orb](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-orbs-config) illustrates how orbs can be used to simplify your project configuration:
+The graphic above illustrating an example Java configuration can be greatly simplified using orbs. The following illustration re-creates the same configuration with [the Maven orb](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-orbs-config).
 
 ![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
-### Jobs
+## Jobs
 
 Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
-#### Executors and Images
+## Executors and Images
 
 Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
@@ -162,9 +159,9 @@ The Primary Container is defined by the first image listed in [`.circleci/config
 
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
-#### Steps
+## Steps
 
-Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}//2.0/configuration-reference/#checkout) step, which is a _built-in_ step available across all CircleCI projects, checks out the source code for a job over SSH. Then, the `run` step allows you to run custom commands, such as executing the command `make test`  using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
+Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step, which is a _built-in_ step available across all CircleCI projects, checks out the source code for a job over SSH. Then, the `run` step allows you to run custom commands, such as executing the command `make test`  using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
 ```yaml
 #...
@@ -183,7 +180,7 @@ jobs:
 #...          
 ```
 
-### Workflows
+## Workflows
 
 Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
@@ -302,7 +299,7 @@ workflows:
 ```
 {% endraw %}
 
-### Caches, Workspaces and Artifacts
+## Caches, Workspaces and Artifacts
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
