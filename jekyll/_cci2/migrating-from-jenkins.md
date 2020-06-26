@@ -102,4 +102,4 @@ CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily c
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will   be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 
-Instructions on how to use the tool, features, and limitations are located in the [project repo](https://github.com/circleci/jenkinsfile-converter). The [companion guide](https://github.com/circleci/jenkinsfile-converter/blob/dev/docs/GUIDE.md) is highly recommended reading after you’ve created a config.yml through the converter.
+Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Jenkinsfile Converter project repo](https://github.com/circleci/jenkinsfile-converter). The [companion guide](https://github.com/circleci/jenkinsfile-converter/blob/dev/docs/GUIDE.md) is highly recommended reading after you’ve created a ```config.yml``` file by using the converter.
