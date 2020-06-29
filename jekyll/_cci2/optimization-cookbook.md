@@ -116,7 +116,7 @@ As you can see, there was no single step performed to reduce overall workflow ti
 
 ## Test Splitting to Speed Up Pipelines
 
-Most pipelines are configures so that every time code is committed, tests are run. Test splitting is a great way to speed up the testing portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments running in parallel.
+Pipelines are often configured so that each time code is committed a set of tests are run. Test splitting is a great way to speed up the testing portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments running in parallel.
 
 Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of test environments running in parallel, to give the lowest possible test time for the compute power in use.
 
