@@ -45,20 +45,22 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 - **Docker:** Docker イメージを使用している場合は、Docker Engine について、Docker 公式の [seccomp (セキュリティ コンピューティング モード) プロファイル](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json)を参照してください。 CircleCI は、Docker のデフォルトの `seccomp` プロファイルに以下のように付加します。 
 
 {% raw %}
+```yaml
 [
-      {
-        "comment": "ユーザー名前空間の作成を許可",
-        "names": [
-          "clone",
-          "setns",
-          "unshare"
-        ],
-        "action": "SCMP_ACT_ALLOW",
-        "args": [],
-        "includes": {},
-        "excludes": {}
-      }
-    ]
+  {
+    "comment": "ユーザー名前空間の作成を許可",
+    "names": [
+      "clone",
+      "setns",
+      "unshare"
+    ],
+    "action": "SCMP_ACT_ALLOW",
+    "args": [],
+    "includes": {},
+    "excludes": {}
+  }
+]
+```
 {% endraw %}
 
 ## 監査ログ
