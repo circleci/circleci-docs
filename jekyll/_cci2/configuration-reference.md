@@ -191,8 +191,9 @@ Reserved parameter-names:
 * `context`
 * `type`
 * `filters`
+* `matrix`
 <!-- Others? -->
-<!-- branches, matrix & type pass `circleci config validate`. Strange --> 
+<!-- branches & type pass `circleci config validate`. Strange --> 
 
 See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
