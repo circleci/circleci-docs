@@ -56,9 +56,9 @@ These are the steps to configure LDAP in the CircleCI Server Management Console:
 . (Optional) Fill in the Test username and Test password fields with a test email and password for an LDAP user you want to test. This is a 3rd party infrastructure and this test option is not always reliable.
 . Save the settings.
 
-=== Know Issue: Grant Admin Access to User
+=== Known Issue: Grant Admin Access to User
 
-You should grant admin access to the first user accessing a CircleCI Server installation. Currently, there is a known issue preventing this from happening when LDAP authentication is in use.
+If you are using LDAP authentication, use one of the following methods to grant admin privileges to a user. Admin privileges should be automatically granted to the first user accessing a project, but currently there is a known issue preventing this from happening when LDAP authentication is in use.
 
 NOTE: Only one of the following methods should be necessary to grant admin access. If you are unfamiliar with using the REPL, consider contacting customer support before running these steps.
 
