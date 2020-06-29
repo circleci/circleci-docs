@@ -192,32 +192,39 @@ A simple example would configure deployment to run *only* if a change is merged 
 
 For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
 
-{% raw %}
 ```yaml
-- deploy:
-    requires:
+workflows:
+  build-test-deploy:
+    jobs:
       - build
-    filters:
-      branches:
-        only: master
+      - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
-{% endraw %}
+
 
 The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break. 
 
 For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
 
-{% raw %}
 ```yaml
-nightly-build:
-  triggers:
-    - schedule:
-        cron: '0 8 ***'
-        filters:
-          branches:
-            only: master
+workflows:
+  nightly-build:
+    triggers:
+      - schedule:
+          cron: '0 8 ***'
+          filters:
+            branches:
+              only: master
+    jobs:
+      - build
+      - test
+      - deploy
 ```
-{% endraw %}
 
 The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
 
