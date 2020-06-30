@@ -19,19 +19,14 @@ for building your open source project on CircleCI in the following sections:
 To support the open source community, organizations on Github or Bitbucket will be given 100,000 free credits per week that can be spent on open source projects. These credits can be spent on Linux-medium resources. Each organization can have a maximum of four concurrent jobs running.
 
 **Note:**
-If you are building an open source project on macOS,
-contact billing@circleci.com to enable these additional containers.
+If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
 ## Security
 
-While open source can be a liberating practice,
-take care not to liberate sensitive information.
+While open source can be a liberating practice, take care not to liberate sensitive information.
 
-- If your repository is public,
-your CircleCI project and its build logs are also public.
-Pay attention to the information you choose to print.
-- Environment variables set in the CircleCI application are hidden from the public,
-these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests)
+- If your repository is public, your CircleCI project and its build logs are also public. Pay attention to the information you choose to print.
+- Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests)
 unless explicitly enabled.
 
 ## Features and Settings for Open Source Projects
@@ -41,49 +36,34 @@ The following features and settings are especially useful for open source projec
 ### Private Environment Variables
 {:.no_toc}
 
-Many projects require API tokens, SSH keys, or passwords.
-Private environment variables allow you
-to safely store secrets,
-even if your project is public.
-For more information,
-see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
+Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
+
+For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
 ### Only Build Pull Requests
 {:.no_toc}
 
-By default, CircleCI builds every commit from every branch.
-This behavior may be too aggressive for open source projects,
-which often have significantly more commits than private projects.
-To change this setting,
-go to the **Advanced Settings** of your project
-and set the **Only build pull requests** option to _On_.
+By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 
-**Note:**
-Even if this option is enabled,
-CircleCI will still build all commits from your project's default branch.
+To change this setting, go to the **Advanced Settings** of your project and set the **Only build pull requests** option to _On_.
+
+**Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch.
 
 ### Build Pull Requests From Forked Repositories
 {:.no_toc}
 
-Many open source projects accept PRs from forked repositories.
-Building these PRs is an effective way
-to catch bugs before manually reviewing changes.
+Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
-By default, CircleCI does not build PRs from forked repositories.
-To change this setting,
-go to the **Advanced Settings** of your project
-and set the **Build forked pull requests** option to _On_.
+By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Advanced Settings** of your project and set the **Build forked pull requests** option to _On_.
+
+**Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
 ### Pass Secrets to Builds From Forked Pull Requests
 {:.no_toc}
 
-Running an unrestricted build in a parent repository can be dangerous.
-Projects often contain sensitive information,
-and this information is freely available to anyone
-who can push code that triggers a build.
+Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
 
-By default, CircleCI does not pass secrets to builds from forked PRs for open source projects
-and hides four types of configuration data:
+By default, CircleCI does not pass secrets to builds from forked PRs for open source projects and hides four types of configuration data:
 
 - [Environment variables](#private-environment-variables) set through the application.
 
@@ -95,13 +75,9 @@ to access arbitrary hosts during a build.
 - [AWS permissions]({{ site.baseurl }}/2.0/deployment-examples/#aws) and configuration files.
 
 **Note:**
-Forked PR builds of open source projects that require secrets
-will not run successfully on CircleCI until you enable this setting.
+Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
-If you are comfortable sharing secrets with anyone who forks your project and opens a PR,
-you can enable the **Pass secrets to builds from forked pull requests** option.
-In the **Advanced Settings** of your project,
-set the **Pass secrets to builds from forked pull requests** option to _On_.
+If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Advanced Settings** of your project, set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ### Caching
 
