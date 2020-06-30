@@ -101,29 +101,29 @@ CircleCI と LambdaTest を統合するには、CircleCI インスタンスの�
           - run: npm をインストール
           # テストを実行します！
           - run: node_modules/.bin/nightwatch -e chrome // bash でテストを実行
-     ```
 {% endraw %}
 
 ### ローカルまたはプライベートにホスティングされたプロジェクトのテスト
-    
-    LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
-    
-    以下の config.yml ファイルの例では、LambdaTest の Selenium Grid を活用する方法を具体的に示します。ここでは、CircleCI ビルドに含まれるテスト サーバーを通してブラウザー テストを実行しています。
+
+LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
+
+以下の config.yml ファイルの例では、LambdaTest の Selenium Grid を活用する方法を具体的に示します。ここでは、CircleCI ビルドに含まれるテスト サーバーを通してブラウザー テストを実行しています。
+
 {% raw %}
+```
 # JavaScript Node CircleCI 2.0 設定ファイル
 
-#
+詳細は https://circleci.com/ja/docs/2.0/language-javascript/ を参照
 
-# 詳細は https://circleci.com/ja/docs/2.0/language-javascript/ を参照
-
-# version: 2 jobs: build: docker: # ここで必要なバージョンを指定します
-
+version: 2
+jobs:
+  build: docker: # ここで必要なバージョンを指定します
     - image: circleci/node:7.10
     # 必要に応じて、ここでサービスの依存関係を指定します
     working_directory: ~/Nightwatch-circleci-selenium
-    
+
     steps:
-    
+
       - checkout
       - run:
         name: "トンネル バイナリのダウンロード"
@@ -151,38 +151,31 @@ CircleCI と LambdaTest を統合するには、CircleCI インスタンスの�
       - run: # 現在のブランチをテストします
           name: "LT_Username: "
           command: echo ${LT_USERNAME}      
-    
 
-# 依存関係をダウンロードしてキャッシュします
+      # 依存関係をダウンロードしてキャッシュします
+      - restore_cache:
+        keys:
+          - v1-dependencies-{{ checksum "package-lock.json" }}
+      # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
 
-# - restore_cache:
+      - run: npm をインストール
 
-# keys:
+      - save_cache:
+          paths:
+            - node_modules
+                key: v1-dependencies-{{ checksum "package-lock.json" }}
 
-# - v1-dependencies-{{ checksum "package-lock.json" }}
-  
-    # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
-    
-        - run: npm をインストール
-    
+        # テストを実行します！
 
-# - save_cache:
-
-# paths:
-
-# - node_modules
-
-# key: v1-dependencies-{{ checksum "package-lock.json" }}
-
-    # テストを実行します！
-    
       - run: node_modules/.bin/nightwatch -e chrome
+```
 {% endraw %}
 
 ### LambdaTest ブラウザー テスト Orb の例
-    
-    LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 また、LambdaTest と CircleCI のインテグレーション プロセスも簡単になります。 この Orb (ワークフローで使用できる構成パッケージ) が開発され、使用が承認されたことで、構成ワークフローを単純化することができます。 Orb の例を以下に示します。
+
+LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 また、LambdaTest と CircleCI のインテグレーション プロセスも簡単になります。 この Orb (ワークフローで使用できる構成パッケージ) が開発され、使用が承認されたことで、構成ワークフローを単純化することができます。 Orb の例を以下に示します。
 {% raw %}
+```yaml
 # このコードは、MIT ライセンスに基づいて CircleCI からユーザーに使用許諾されています。 詳細については、
 
 # https://circleci.com/orbs/registry/licensing をご覧ください。
@@ -236,62 +229,68 @@ jobs: with_tunnel: description: Lambda Tunnel を使用します parameters: doc
           tunnel_name: <<parameters.tunnel_name>>
       - steps: << parameters.steps >>
       - close_tunnel
+```
 {% endraw %}
 
 ## Sauce Labs
-    
-    Sauce Labs は、CircleCI ビルド コンテナから独立したネットワーク上にあるブラウザーを操作します。 ブラウザーからテスト対象の Web アプリケーションにアクセスするには、Sauce Labs のセキュア トンネル [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy) を使用して、CircleCI 上の Sauce Labs で Selenium WebDriver テストを実行します。
-    
-    Sauce Connect を使用すると、CircleCI ビルド コンテナ内でテスト サーバーを実行でき、(`localhost:8080` などの URL を使用して) それを Sauce Labs のブラウザーに公開することができます。 パブリックにアクセス可能なステージング環境にデプロイした後にブラウザー テストを実行する場合は、Sauce Connect には関係なく通常の方法で Sauce Labs を使用できます。
-    
-    この例の `config.yml` ファイルは、CircleCI ビルド コンテナ内で実行されているテスト サーバーに対して、Sauce Labs を通してブラウザー テストを実行する方法を示しています。
-    
-    ```yaml
-    version: 2
-    jobs:
-      build:
-        docker:
-          - image: circleci/python:jessie-node-browsers
-        steps:
-          - checkout
-          - run:
-              name: Sauce Labs のインストールとトンネルのセットアップ
-              background: true
-              command: |
-                curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
-                tar -xzf saucelabs.tar.gz
-                cd sc-*
-                bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
-            wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # アプリが準備できるまで待機します
-          - run: # 基本イメージは python のため、`unittest` の拡張版である `nosetests` を実行します
-              command: nosetests
-          - run:
-              name: Sauce Connect のトンネルのシャットダウン
-              command: |
-                kill -9 `cat /tmp/sc_client.pid`          
-    
+
+Sauce Labs は、CircleCI ビルド コンテナから独立したネットワーク上にあるブラウザーを操作します。 ブラウザーからテスト対象の Web アプリケーションにアクセスするには、Sauce Labs のセキュア トンネル [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy) を使用して、CircleCI 上の Sauce Labs で Selenium WebDriver テストを実行します。
+
+Sauce Connect を使用すると、CircleCI ビルド コンテナ内でテスト サーバーを実行でき、(`localhost:8080` などの URL を使用して) それを Sauce Labs のブラウザーに公開することができます。 パブリックにアクセス可能なステージング環境にデプロイした後にブラウザー テストを実行する場合は、Sauce Connect には関係なく通常の方法で Sauce Labs を使用できます。
+
+この例の `config.yml` ファイルは、CircleCI ビルド コンテナ内で実行されているテスト サーバーに対して、Sauce Labs を通してブラウザー テストを実行する方法を示しています。
+
+{% raw %}
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:jessie-node-browsers
+    steps:
+      - checkout
+      - run:
+          name: Sauce Labs のインストールとトンネルのセットアップ
+          background: true
+          command: |
+            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
+            tar -xzf saucelabs.tar.gz
+            cd sc-*
+            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
+        wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # アプリが準備できるまで待機します
+      - run: # 基本イメージは python のため、`unittest` の拡張版である `nosetests` を実行します
+          command: nosetests
+      - run:
+          name: Sauce Connect のトンネルのシャットダウン
+          command: |
+            kill -9 `cat /tmp/sc_client.pid`
+```
+{% endraw %}
 
 ### Sauce Labs ブラウザー テスト Orb の例
 
 CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 この Orb (ワークフローで使用できる構成パッケージ) が開発され、使用が承認されたことで、構成ワークフローを単純化することができます。 Orb の例を以下に示します。
 
-    version: 2.1
-    orbs:
-      sauce-connect: saucelabs/sauce-connect@1.0.1
-    workflows:
-      browser_tests:
-        jobs:
-          - sauce-connect/with_proxy:
-              name: Chrome テスト
-              steps:
-                - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
-              tunnel_identifier: chrome
-          - sauce-connect/with_proxy:
-              name: Safari テスト
-              steps:
-                - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
-              tunnel_identifier: safari
-    
+{% raw %}
+```
+version: 2.1
+orbs:
+  sauce-connect: saucelabs/sauce-connect@1.0.1
+workflows:
+  browser_tests:
+    jobs:
+      - sauce-connect/with_proxy:
+          name: Chrome テスト
+          steps:
+            - run: mvn verify -B -Dsauce.browser=chrome  -Dsauce.tunnel="chrome"
+          tunnel_identifier: chrome
+      - sauce-connect/with_proxy:
+          name: Safari テスト
+          steps:
+            - run: mvn verify -B -Dsauce.browser=safari  -Dsauce.tunnel="safari"
+          tunnel_identifier: safari
+```
+{% endraw %}
 
 Sauce Labs Orb の詳細と、この Orb をワークフローに使用する方法については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)にある [Sauce Labs Orb のページ](https://circleci.com/orbs/registry/orb/saucelabs/sauce-connect)を参照してください。
 
