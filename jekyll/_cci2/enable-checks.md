@@ -17,6 +17,8 @@ After checks are enabled, CircleCI workflow and job status is reported under the
 
 ![CircleCI Checks]( {{ site.baseurl }}/assets/img/docs/checks_tab.png)
 
+**Note:** GitHub does not currently provide a granular way for you to rerun workflows. Because CircleCI uses checks that are mapped to workflows (e.g. a single configuration may have one or more workflows), when you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button. 
+
 ## To Enable GitHub Checks
 
 To use the CircleCI Check integration, you first need to navigate to the Org Setting, then authenticate the repository to use CircleCI Checks as follows:
@@ -33,7 +35,6 @@ To use the CircleCI Check integration, you first need to navigate to the Org Set
 3. Click the Manage GitHub Checks button. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_setting.png)
 4. Select the repositories that should utilize checks and click the Install button. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_install.png)
 After installation completes, the Checks tab in GitHub will be populated with workflow run status information. 
-
 
 ## Checks Status Reporting
 
