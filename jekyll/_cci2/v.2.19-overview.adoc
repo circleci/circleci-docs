@@ -31,6 +31,8 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 ** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
 ** This file should contain the public (if applicable) or private IP of the nomad client
 
+* Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
 ## What's New in v2.19.04
 
 * Fixed a bug that was leading to support bundle creation timing out before the Services machine logs had been created, leaving only Replicated logs.
@@ -69,7 +71,8 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 * Fixed a bug that was preventing job steps for non-failing builds being logged when proxy settings were used for the job container.
 
-* Removed legacy TLS versions 1.0 and 1.1.
+* Removed legacy TLS versions 1.0 and 1.1, in addition, enabled 1.2 and 1.3 TLS, and specified the following ciphersuites
+**  ECDHE-RSA-AES256-GCM-SHA512:DHE-RSA-AES256-GCM-SHA512:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-SHA384
 
 * Fixed a `statsd` configuration issue that meant some services were not emitting Telegraf metrics.
 
