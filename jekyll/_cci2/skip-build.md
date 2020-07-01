@@ -68,7 +68,7 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 ### Steps to Enable Auto-Cancel for Pipelines Triggered by Pushes to GitHub or the API
 {:.no_toc}
 
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling pipelines.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
 1. In the CircleCI application, go to your Project Settings.
 
@@ -91,5 +91,4 @@ CircleCI Server does not currently use the pipelines feature, and as a result th
 2. In the **Build Settings** section, click on **Advanced Settings**.
 
 3. In the **Auto-cancel redundant builds** section, click the **On** button.
-
 
