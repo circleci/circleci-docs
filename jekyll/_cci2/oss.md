@@ -45,7 +45,7 @@ For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env
 
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
 
-To change this setting, go to the **Advanced Settings** of your project and set the **Only build pull requests** option to _On_.
+To change this setting, go to the **Project Settings>Advanced** of your project and set the **Only build pull requests** option to _On_.
 
 **Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch.
 
@@ -54,7 +54,7 @@ To change this setting, go to the **Advanced Settings** of your project and set 
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
 
-By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Advanced Settings** of your project and set the **Build forked pull requests** option to _On_.
+By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Project Settings>Advanced** of your project and set the **Build forked pull requests** option to _On_.
 
 **Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
@@ -77,7 +77,7 @@ to access arbitrary hosts during a build.
 **Note:**
 Forked PR builds of open source projects that require secrets will not run successfully on CircleCI until you enable this setting.
 
-If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Advanced Settings** of your project, set the **Pass secrets to builds from forked pull requests** option to _On_.
+If you are comfortable sharing secrets with anyone who forks your project and opens a PR, you can enable the **Pass secrets to builds from forked pull requests** option. In the **Project Settings>Advanced** of your project, set the **Pass secrets to builds from forked pull requests** option to _On_.
 
 ### Caching
 
