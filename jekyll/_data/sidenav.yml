@@ -97,16 +97,10 @@ en:
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
-        - name: Orbs FAQ
-          link: 2.0/orbs-faq/
         - name: Orbs Concepts
           link: 2.0/using-orbs/
-        - name: Reusable Config Reference
-          link: 2.0/reusing-config/
-        - name: Orb Testing Methodologies
-          link: 2.0/testing-orbs/
-        - name: Orb Publishing Process
-          link: 2.0/creating-orbs/
+        - name: Orbs FAQ
+          link: 2.0/orbs-faq/
     - name: Authoring Orbs
       link: 2.0/orb-author-intro/
       children:
@@ -122,13 +116,10 @@ en:
           link: 2.0/orb-author-faq/
         - name: Orbs Best Practices
           link: 2.0/orbs-best-practices/
-    - name: Using Orbs
-      link: 2.0/orbs-user-config/
-      children:
-        - name: Get Set Up For Orbs
-          link: 2.0/orbs-user-config/
-        - name: Selecting and Using an Orb
-          link: 2.0/orbs-user-select-orb/
+        - name: Orb Testing Methodologies
+          link: 2.0/testing-orbs/
+        - name: Orb Publishing Process
+          link: 2.0/creating-orbs/
     - name: Examples
       link: 2.0/examples-intro/
       children:
