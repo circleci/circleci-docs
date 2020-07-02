@@ -37,17 +37,17 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully.
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-**Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+    **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and     **contexts**.
 
 ## Creating and Using a Context
 
 1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
 
-**Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workkspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
-**Note: If you are using the old version of the CircleCI application**, you can access the Organization Settings using the following URL format: `https://circleci.com/gh/organizations/<org>/settings#contexts`, substituting your organization/GitHub username. If you are using CircleCI Server, Organization Settings can still be accessed as normal from the main navigation.
+    **Note: If you are using the old version of the CircleCI application**, you can access the Organization Settings using the following URL format: `https://circleci.com/gh/organizations/<org>/settings#contexts`, substituting your organization/GitHub username. If you are using CircleCI Server, Organization Settings can still be accessed as normal from the main navigation.
 
 2. Click the Create Context button and add a unique name for your Context. After you click the Create Context button in the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this Context at runtime.
 
