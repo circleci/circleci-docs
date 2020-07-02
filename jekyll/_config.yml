@@ -23,7 +23,7 @@ algolia:
     - html
     - md
     - adoc
-  nodes_to_index: 'p,li,td,pre,h1,h2,h3'
+  nodes_to_index: 'p,li,h1,h2,h3'
   settings:
     highlightPreTag: '<strong>'
     highlightPostTag: '</strong>'
