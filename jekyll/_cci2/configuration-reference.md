@@ -1585,6 +1585,38 @@ workflows:
             - build-v0.2
 ```
 
+###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
+Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`. 
+
+Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
+
+Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
+
+```yaml
+version: 2.1
+
+jobs:
+  bar:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          command: echo "building"
+      - run:
+          command: echo "testing"
+
+workflows:
+  build:
+    jobs:
+      - bar:
+          pre-steps: # steps to run before steps defined in the job bar
+            - run:
+                command: echo "install custom dependency"
+          post-steps: # steps to run after steps defined in the job bar
+            - run:
+                command: echo "upload artifact to s3"
+```
+
 ##### **Using `when` in Workflows**
 
 With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
