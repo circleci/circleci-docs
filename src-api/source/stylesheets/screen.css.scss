@@ -73,7 +73,11 @@ html, body {
 
   // This is the logo at the top of the ToC
   .logo {
-    margin: 24px 32px 24px 12px;
+    align-self: center;
+    max-width: 80%;
+    margin: 24px auto;
+    text-align: center;
+    display: flex;
   }
 
   &>.search {
@@ -83,13 +87,14 @@ html, body {
       background: $nav-bg;
       border-width: 0 0 1px 0;
       border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      padding: 6px 0 6px 24px;
       box-sizing: border-box;
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - ($nav-padding*2);
       outline: none;
       color: $nav-text;
       border-radius: 0; /* ios has a default border radius */
+      font-size: 16px;
     }
 
     &:before {
@@ -97,6 +102,7 @@ html, body {
       top: 17px;
       left: $nav-padding;
       color: $nav-text;
+      font-size: 16px;
       @extend %icon-search;
     }
   }
