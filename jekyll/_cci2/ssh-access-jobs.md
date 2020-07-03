@@ -23,17 +23,16 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 2. To start a job with SSH enabled, select the 'Rerun job with SSH' option from the 'Rerun Workflow' dropdown menu.
 
+     **Note:** The `Rerun job with SSH` feature is intended for debugging purposes; therefore, these jobs will not be reflected in your pipelines. When you rerun a job with SSH, a new pipeline is not triggered; a job is just rerun. If needed, you can access the running jobs via the legacy jobs view.
+
 3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect.
 
      The details are displayed again in the 'Wait for SSH' section at the end of the job.
 
 4. SSH to the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 
-If you are using the Windows executor you will need to pass in the shell you
-want to use when using SSH. For example, To run  `powershell` in your build you
-would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello
-World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
-
+If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, To run  `powershell` in your build you
+would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
 
 The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down. (Or you can cancel it.) After you SSH into the build, the connection will remain open for **two hours**.
 
