@@ -14,9 +14,12 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 
 ## Simple Configuration Examples
 
-### Concurrent Jobs
+### Concurrent Workflow
 
 The example below shows a concurrent job workflow where the `build` and `test` jobs run at the same time, saving time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+This image shows the workflow view for this configuration example:
+![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 {:.tab.basic-concurrent.Cloud}
 ```yaml
@@ -73,12 +76,12 @@ workflows:
       - test
 ```
 
-The following image shows the workflow view for this configurations example:
-![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
-
-### Sequential Jobs
+### Sequential Workflow
 
 The example below shows a sequential job workflow where the `build` runs and the `test` job runs once it has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+This image shows the workflow view for this configuration example, in which jobs run sequentially; one after the other:
+![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
 {:.tab.basic-sequential.Cloud}
 ```yaml
@@ -138,13 +141,13 @@ workflows:
             - build
 ```
 
-The following image shows the workflow view for this configurations example, in which jobs run one after the other:
-![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
-
-
 ### Approval Job
 
-The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the deploy job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the `deploy` job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+The following image shows the workflow view for this configuration example. This image has three parts to show the approval popup that appears when you click on a hold step, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
+
+![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
 
 {:.tab.approval.Cloud}
 ```yaml
@@ -233,16 +236,13 @@ workflows:
             - hold
 ```
 
-The following image shows the workflow view for this configurations example:
-![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
-
 ## Sample Configuration with Sequential Workflow
 
 Following is a sample `.circleci/config.yml` file using the following configuration features: 
 
 * A sequential workflow
 * An orb (`version: 2.1`/Cloud config only) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server example
-* A secondary, services container
+* A secondary services container
 * Workspaces
 * Storing artifacts
 
