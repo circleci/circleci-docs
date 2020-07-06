@@ -46,12 +46,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - node-deps-v1-{{.Branch }}-{{checksum "package-lock.json"}}
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
       - run:
           name: install packages
           command: npm ci
       - save_cache:
-          key: node-deps-v1-{{.Branch }}-{{checksum "package-lock.json"}}
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
           paths:
             - ~/.npm
       - run:
