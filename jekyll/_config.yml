@@ -37,6 +37,7 @@ algolia:
       'headings',
       'title'
     ]
+    minProximity: 3
 
 sass:
   sass_dir: _sass
