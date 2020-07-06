@@ -15,7 +15,7 @@ Orbs can drastically reduce configuration complexity and help developers integra
 
 Published orbs can be found on our [Orb Registry]({{site.baseurl}}/orbs/registry/), or you can [author your own]()!
 
-An orb is identified by its "slug" which contains the "namespace" and orb name. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version](https://semver.org/) string, identifying which version of the orb is being used.
+An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version](https://semver.org/) string, identifying which version of the orb is being used.
 
 Example orb slug: `<namespace>/<orb-name>@1.2.3`
 
