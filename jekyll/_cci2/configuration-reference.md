@@ -1655,7 +1655,7 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 ## Logic Statements
 
-Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, so before the workflow is run. The group of logic statements includes:
+Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
 Type               | Arguments          | `true` if                              | Example
 -------------------|--------------------|----------------------------------------|----------------------------------------
@@ -1674,7 +1674,17 @@ Truthiness rules are as follows:
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
-### Example
+### Logic Statement Examples
+
+```yaml
+workflows:
+  my-workflow:
+      when:
+        condition:
+          or:
+            - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ staging, << pipeline.git.branch >> ]
+```
 
 ```yaml
 workflows:
