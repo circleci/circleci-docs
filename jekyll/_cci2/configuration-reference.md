@@ -144,7 +144,7 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-parameters | N | Map | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`. 
+parameters | N | Map | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`.
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -193,7 +193,7 @@ Reserved parameter-names:
 * `filters`
 * `matrix`
 <!-- Others? -->
-<!-- branches & type pass `circleci config validate`. Strange --> 
+<!-- branches & type pass `circleci config validate`. Strange -->
 
 See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
@@ -901,7 +901,7 @@ version | N        | String | Version string of Docker you would like to use (de
 
 **Notes**:
 
-- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching. 
+- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -1205,9 +1205,9 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 
 | Type      | lifetime        | Use                      | Example |
 |-----------|-----------------|------------------------------------|---------
-| Artifacts | Months          | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
+| Artifacts | 1 Month         | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
 | Workspaces | Duration of workflow        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
-| Caches    | Months          | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+| Caches    | 15 Days         | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
@@ -1586,7 +1586,7 @@ workflows:
 ```
 
 ###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
-Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`. 
+Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
 Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
