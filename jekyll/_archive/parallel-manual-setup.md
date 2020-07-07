@@ -96,7 +96,7 @@ Obviously, this is slightly limited because it's hard-coded to
 only work with two nodes, and the test time might not balance
 across all nodes equally.
 
-### <a name="auto-balancing"></a>Automatic balancing with manual parallel setup
+### Automatic balancing with manual parallel setup
 
 With some of the inferred test commands, we [automatically
 balance](https://circleci.com/blog/announcing-automatic-test-balancing/)

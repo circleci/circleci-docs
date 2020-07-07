@@ -7,8 +7,6 @@ categories: [migration]
 order: 1
 ---
 
-* TOC
-{:toc}
 
 ## General
 
