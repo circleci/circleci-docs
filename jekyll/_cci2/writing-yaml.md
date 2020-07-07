@@ -9,9 +9,6 @@ order: 20
 
 This document describes the most important features of YAML for use in CircleCI configuration.
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

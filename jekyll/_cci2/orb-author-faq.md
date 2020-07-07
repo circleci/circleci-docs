@@ -9,11 +9,6 @@ order: 20
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.
 
-* TOC
-{:toc}
-
-
-
 ## Errors Claiming Namespace Or Publishing Orbs
 
 * Question: I receive an error when attempting to claim a namespace or publish a production orb.

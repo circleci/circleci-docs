@@ -9,9 +9,6 @@ order: 10
 
 This document describes best practices for using shell scripts in your [CircleCI configuration]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

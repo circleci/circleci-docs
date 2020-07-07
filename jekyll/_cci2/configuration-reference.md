@@ -15,14 +15,6 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
-## Table of Contents
-{:.no_toc}
-
-* TOC
-{:toc}
-
----
-
 ## **`version`**
 
 Key | Required | Type | Description

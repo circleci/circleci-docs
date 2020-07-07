@@ -12,9 +12,6 @@ order: 10
 
 This document describes the available executor types (`docker`, `machine`, `windows` and `macos`) in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

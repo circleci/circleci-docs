@@ -10,9 +10,6 @@ order: 3
 The demo application in this tutorial uses Python and Flask for the backend.
 PostgreSQL is used for the database.
 
-* TOC
-{:toc}
-
 The following sections walk through how Jobs and Steps are configured for this application, how to run unit tests and integration tests with Selenium and Chrome in the CircleCI environment, and how to deploy the demo application to Heroku.
 
 The source for the demo application is available on GitHub: <https://github.com/CircleCI-Public/circleci-demo-python-flask>.

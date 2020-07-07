@@ -10,9 +10,6 @@ description: "How to install CircleCI on Amazon Web Services (AWS) manually."
 
 This document provides step-by-step instructions for installing CircleCI 2.0 on Amazon Web Services (AWS) manually in the following sections:
 
-* TOC
-{:toc}
-
 If you have CircleCI Enterprise installed you may access CircleCI 2.0 features on your current installation with no restrictions under your current agreement and support level. Contact your CircleCI account representative for assistance with upgrading.
 
 * CircleCI 2.0 is only available on AWS.

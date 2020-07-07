@@ -9,9 +9,6 @@ order: 2
 
 This guide will help you get started with a Clojure application on CircleCI 2.0. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

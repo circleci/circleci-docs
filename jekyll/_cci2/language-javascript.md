@@ -9,9 +9,6 @@ order: 5
 
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a Node.js sample application.
 
-* TOC
-{:toc}
-
 ## Quickstart: Demo JavaScript Node.js Reference Project
 
 We maintain a reference JavaScript project to show how to build a React.js app on CircleCI with `version: 2.1` configuration:

@@ -9,9 +9,6 @@ order: 1
 
 This page describes various testing methodologies you can test use to test orbs.
 
-* TOC
-{:toc}
-
 ## Introduction
 
 CircleCI orbs are packages of configuration that you can use in your configurations to simplify your workflows and quickly and easily deploy application and orbs in your workflow. When creating orbs for your workflow, you will want to perform testing to ensure your orb meets your specific needs before deploying and publishing the orb.

@@ -9,9 +9,6 @@ order: 100
 
 This document describes how to skip or cancel builds in the following sections.
 
-* TOC
-{:toc}
-
 ## Skipping a Build
 
 By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag in the first line of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.

@@ -10,9 +10,6 @@ sitemap: false
 
 This article provides an overview of CircleCI Enterprise features, environments, and architecture in the following sections:
 
-* TOC
-{:toc}
-
 CircleCI is a modern continuous integration and continuous delivery (CI/CD) platform. The CircleCI Enterprise solution is installable inside your private cloud or data center and is free to try for a limited time. CircleCI automates build, test, and deployment of software.
 
 ## Basic Features

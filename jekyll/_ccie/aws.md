@@ -10,9 +10,6 @@ sitemap: false
 
 This document provides step-by-step instructions for installing CircleCI Enterprise on Amazon Web Services (AWS) with Terraform in the following sections:
 
-* TOC
-{:toc}
-
 **Note:** This installation only supports AWS instance types with attached SSD storage (M3, C3, or R3). EBS-only volumes (C4 or M4) will not work with an installation managed by Terraform. 
 
 ## Prerequisites

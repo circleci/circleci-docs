@@ -9,9 +9,6 @@ order: 1
 
 ここでは [Orb]({{ site.baseurl }}/ja/2.0/orb-intro/) の基礎的なインポートして使用する例とそれに関連する要素について、下記の流れで解説しています。
 
-* TOC
-{:toc}
-
 ## はじめに
 
 Orbs は CircleCI を手早く使い始めるのに便利なコンフィグパッケージです。Orbs はコンフィグをプロジェクト間で共有したり、標準化を行ったり、簡便にしたりするのに役立ちます。最適なコンフィグのサンプルとして Orbs を活用することもできます。今すぐに使える Orbs を [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/) でご覧ください。

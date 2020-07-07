@@ -9,9 +9,6 @@ order: 20
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.
 
-* TOC
-{:toc}
-
 ## Downloading, Integrating, and Testing Orbs
 {:.no_toc}
 

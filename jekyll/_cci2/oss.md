@@ -10,9 +10,6 @@ order: 1
 This document provides tips and best practices
 for building your open source project on CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

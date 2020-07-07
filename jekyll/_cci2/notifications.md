@@ -7,9 +7,6 @@ order: 100
 published: true
 ---
 
-* TOC
-{:toc}
-
 
 CircleCI has integrated chat, email, and web notifications. Slack and Email notifications are delivered on the success or failure of a [workflow]({{ site.baseurl }}/2.0/workflows/). IRC notifications are delivered for each job. Consider the minimal CircleCI config below:
 

@@ -23,9 +23,6 @@ This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
 legacy CLI does work in Server and can be installed. 
 
-* TOC
-{:toc}
-
 ## Installation
 
 There are multiple installation options for the CLI.

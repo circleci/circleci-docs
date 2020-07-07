@@ -8,10 +8,6 @@ hide: false
 ---
 This article provides a System Administrators' overview of CircleCI's 2.0 static installation for non-AWS environments.
 
-* TOC
-{:toc}
-
-
 ## Limitations 
 
 This method of installation has the following limitations:

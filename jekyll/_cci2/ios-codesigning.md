@@ -10,9 +10,6 @@ order: 40
 This document describes the guidelines for setting up code signing
 for your iOS or Mac project on CircleCI 2.0.
 
-* TOC
-{:toc}
-
 ## Basic Configuration of iOS Projects
 
 This document assumes that you already have an iOS or Mac project building

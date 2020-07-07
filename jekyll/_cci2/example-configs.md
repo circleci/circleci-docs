@@ -9,9 +9,6 @@ order: 1
 
 Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI 2.0.
 
-* TOC
-{:toc}
-
 ## Example CircleCI Files and Public Repos
 
 Example Name | Description | Link

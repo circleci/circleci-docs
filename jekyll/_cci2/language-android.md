@@ -11,9 +11,6 @@ This document describes
 how to set up an Android project on CircleCI
 in the following sections.
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

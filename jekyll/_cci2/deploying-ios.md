@@ -9,9 +9,6 @@ order: 1
 
 This document describes how to configure Fastlane to automatically deploy iOS apps from CircleCI to a distribution service.
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

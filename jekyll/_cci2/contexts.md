@@ -9,9 +9,6 @@ order: 41
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

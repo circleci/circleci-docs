@@ -11,9 +11,6 @@ This document describes
 how to configure CircleCI
 using a sample application written in Python.
 
-* TOC
-{:toc}
-
 ## Overview
 
 This guide uses a sample Django application

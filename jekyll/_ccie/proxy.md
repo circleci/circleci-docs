@@ -10,9 +10,6 @@ sitemap: false
 
 This document describes how to configure CircleCI to use an HTTP proxy in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 
 If you are setting up your proxy through Amazon, read this before proceeding: http://docs.aws.amazon.com/cli/latest/userguide/cli-http-proxy.html. Avoid proxying internal requests, especially for the Services machine. Run `export NO_PROXY=<services_box_ip>` to add it to the `NO_PROXY` rules. In an ideal case, traffic to S3 will not be proxied, and instead be bypassed by adding `s3.amazonaws.com,*.s3.amazonaws.com` to the `NO_PROXY` rule.

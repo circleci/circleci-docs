@@ -6,9 +6,6 @@ description: "Landing page for CircleCI 2.0 Config"
 
 This guide focuses on getting you started with the core of the CircleCI experience - `config.yml` in the following simple steps:
 
-* TOC
-{:toc}
-
 ## Getting Started with CircleCI Config
 {:.no_toc}
 

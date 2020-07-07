@@ -9,9 +9,6 @@ order: 8
     
 This guide will help you get started with a Ruby on Rails application on CircleCI. 
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

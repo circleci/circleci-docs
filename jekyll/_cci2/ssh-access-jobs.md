@@ -9,9 +9,6 @@ order: 20
 
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 

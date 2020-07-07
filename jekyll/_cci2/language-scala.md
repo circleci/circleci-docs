@@ -9,9 +9,6 @@ order: 1
 
 This document will walk you through a Scala application [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

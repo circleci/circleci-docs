@@ -13,9 +13,6 @@ sitemap: false
 Use the following step-by-step instructions to complete the process of
 installing CircleCI on any server running a Linux distribution that supports Docker.  
 
-* TOC
-{:toc}
-
 ## Installation Overview
 
 CircleCI installation requires provisioning two types of machines:

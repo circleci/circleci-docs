@@ -10,9 +10,6 @@ sitemap: false
 
 This document outlines security features built into CircleCI Enterprise and related integrations.
 
-* TOC 
-{:toc}
-
 ## Overview
 Security is our top priority at CircleCI, we are proactive and we act on security issues immediately. Report security issues to <security@circleci.com> with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 

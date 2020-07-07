@@ -9,9 +9,6 @@ order: 30
 
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

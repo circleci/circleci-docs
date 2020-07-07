@@ -6,9 +6,6 @@ description: How to use CircleCI to deploy to AWS ECS from ECR
 
 This document describes how to use CircleCI to deploy to Amazon Elastic Container Service (ECS) from Amazon Elastic Container Registry (ECR).
 
-* TOC
-{:toc}
-
 ## Overview
 
 This guide has two phases:

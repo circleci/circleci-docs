@@ -11,8 +11,6 @@ CircleCI インストール環境で外部 MongoDB を実行している場合�
 
 <!---
 
-* TOC
-{:toc}
 
 
 ## Prerequisite

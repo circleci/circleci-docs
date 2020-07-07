@@ -7,9 +7,6 @@ category: [test]
 
 This document describes common methods for running and debugging browser testing in your CircleCI config in the following sections:
 
-* TOC
-{:toc}
-
 ## Prerequisites
 {:.no_toc}
 

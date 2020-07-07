@@ -9,9 +9,6 @@ sitemap: false
 
 The CircleCI API v1.x is a JSON API that allows you to access information and trigger actions in CircleCI. **Note:** Access to billing functions is only available from the CircleCI application.
 
-* TOC
-{:toc}
-
 ## Endpoint Summary
 
 All CircleCI API endpoints begin with `"https://circleci.com/api/v1.1/"`.

@@ -8,9 +8,6 @@ order: 100
 
 This document explains how to install and authorize the [Google Cloud SDK](https://cloud.google.com/sdk/) in your primary container.
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

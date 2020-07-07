@@ -14,10 +14,6 @@ CircleCI provides a number of different options for code coverage reporting,
 using built-in CircleCI features combined with open source libraries,
 or using partners.
 
-* TOC
-{:toc}
-
-
 # Viewing Coverage on CircleCI 
 
 You can upload your code coverage reports directly to CircleCI. First, add a

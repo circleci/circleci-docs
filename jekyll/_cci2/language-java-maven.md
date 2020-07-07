@@ -9,9 +9,6 @@ order: 4
 
 This guide will help you get started with a Java application building with Maven on CircleCI. 
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

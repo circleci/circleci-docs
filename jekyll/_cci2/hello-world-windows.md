@@ -9,10 +9,6 @@ order: 4
 
 This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide]({{ site.baseurl}}/2.0/getting-started/).
 
-* TOC
-{:toc}
-
-
 # Prerequisites
 
 To follow along with this document you will need:

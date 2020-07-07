@@ -9,9 +9,6 @@ order: 1
 
 This document provides an overview of several methods for optimizing your CircleCI configuration. Each optimization method will be described briefly, will present possible use cases, and will provide an example optimization for speeding up your jobs.
 
-* TOC
-{:toc}
-
 **Note**: Some of the features discussed in this document may require a specific pricing
 plan. Visit our [pricing usage page](https://circleci.com/pricing/usage/) to get an
 overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web

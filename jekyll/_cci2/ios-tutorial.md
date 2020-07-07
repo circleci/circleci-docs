@@ -9,9 +9,6 @@ order: 20
 
 This document describes how to automate builds, testing, and deployment of an iOS application project with CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 **Note:** There is also documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
 
 ## Overview

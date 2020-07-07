@@ -9,9 +9,6 @@ order: 35
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

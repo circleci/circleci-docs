@@ -9,9 +9,6 @@ order: 20
 
 This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

@@ -9,9 +9,6 @@ order: 1
 
 This reusable config reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable commands, jobs, executors and orbs.
 
-* TOC
-{:toc}
-
 ## Getting Started with Config Reuse
 {:.no_toc}
 

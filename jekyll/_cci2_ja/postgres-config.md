@@ -9,9 +9,6 @@ order: 35
 
 このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について解説しています。
 
-* TOC
-{:toc}
-
 ## structure.sql を使う Rails アプリケーション用の設定例
 
 `structure.sql` ファイルを用いて設定する Rails アプリケーションを移行するときは、

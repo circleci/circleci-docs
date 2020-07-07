@@ -7,9 +7,6 @@ description: How to upload Artifacts to Artifactory in CircleCI
 
 CircleCI supports uploading directly to Artifactory.
 
-* TOC 
-{:toc}
-
 ## Deploy
 
 Artifactory has great documentation explaining how to leverage their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).

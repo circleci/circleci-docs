@@ -9,9 +9,6 @@ CircleCI is getting closer to the end of life for v1.0. If you haven't started t
 
 Remember **August 31st, 2018** is the last day for 1.0 builds. You need to make sure all of your projects are converted if you'd like them to continue building on CircleCI. You can read more about 1.0 end of life and find other helpful resources on our [sunsetting 1.0 page](https://circleci.com/sunset1-0/).
 
-* TOC
-{:toc}
-
 ## You Can Build the Same Project on Both CircleCI 1.0 and 2.0!
 
 When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:

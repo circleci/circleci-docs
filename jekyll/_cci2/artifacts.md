@@ -9,9 +9,6 @@ order: 70
 
 This document describes how to work with Artifacts in the following sections:
 
-* TOC
-{:toc}
-
 ## Artifacts Overview
 
 Artifacts persist data after a job is completed

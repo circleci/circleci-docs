@@ -9,9 +9,6 @@ order: 30
 
 This document describes how to create and use custom Docker images with CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 
 CircleCI supports Docker,

@@ -10,9 +10,6 @@ sitemap: false
 
 This document provides step-by-step instructions for installing CircleCI Enterprise on Amazon Web Services (AWS) without using separate orchestration software in the following sections:
 
-* TOC
-{:toc}
-
 ## Prerequisites
 
 Have the following information available before beginning the installation procedure:

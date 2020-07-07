@@ -9,9 +9,6 @@ order: 6
 
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a PHP sample application.
 
-* TOC
-{:toc}
-
 ## Quickstart: Demo PHP Laravel reference project
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:

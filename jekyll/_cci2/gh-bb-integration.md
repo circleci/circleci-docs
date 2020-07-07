@@ -8,9 +8,6 @@ Order: 60
 
 This document provides an overview of using GitHub, GitHub Enterprise, or Bitbucket Cloud with CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

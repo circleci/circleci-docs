@@ -7,9 +7,6 @@ categories: [getting-started]
 order: 1
 ---
 
-* TOC 
-{:toc}
-
 ## Introduction to the CircleCI CLI
 
 The CircleCI CLI has several commands for managing your orb publishing pipeline. The simplest way to learn the CLI is to install it and run circleci help. Refer to Using the CircleCI CLI for details. Listed below are some of the most pertinent commands for creating, validating, and publishing orbs:

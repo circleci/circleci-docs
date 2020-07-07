@@ -13,9 +13,6 @@ logs provide audit trails as well as debugging information for infrastructure
 failures.  This document describes how you can integrate CircleCI Enterprise
 with your logging solution in the following sections:
 
-* TOC
-{:toc}
-
 ## Installing Logging Appliance Agents
 
 CircleCI Builders store logs in `/var/log/**/*.log` except for Docker, which stores logs in 

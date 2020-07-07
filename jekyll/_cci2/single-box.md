@@ -8,9 +8,6 @@ description: "How to install CircleCI on a single VM"
 
 CircleCI is a scalable CI/CD platform that supports clusters of tens or hundreds of build machines. This document provides instructions for installing and running the CircleCI platform on a single virtual machine. This is intended as a simple mechanism for getting started with a small trial in any environment:
 
-* TOC
-{:toc}
-
 ## Prerequisites
 
 The following requirements must be met for a successful trial installation:

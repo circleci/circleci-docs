@@ -10,9 +10,6 @@ order: 3
 CircleCI supports building Go projects using any version of Go that can be
 installed in a Docker image. If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-* TOC
-{:toc}
-
 ## Quickstart: Demo Go Reference Project
 
 We maintain a reference Go project to show how to build on CircleCI 2.0:

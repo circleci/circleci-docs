@@ -11,9 +11,6 @@ sitemap: false
 CircleCI Enterprise is a scalable CI/CD platform that supports clusters
 of tens or hundreds of build machines. This document provides instructions for installing and running the platform on a single virtual machine to provide a simple mechanism for getting started with a small trial in any environment:
 
-* TOC
-{:toc}
-
 ## Prerequisites
 
 The following requirements must be met for successful trial installation:

@@ -9,9 +9,6 @@ order: 40
 
 This document describes using environment variables in CircleCI in the following sections:
 
-* TOC
-{:toc}
-
 ## Overview
 {:.no_toc}
 

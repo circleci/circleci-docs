@@ -10,9 +10,6 @@ sitemap: false
 
 This document describes how to back up your CircleCI Enterprise application so that you can recover from accidental or unexpected loss of CircleCI data attached to the Services machine:
 
-* TOC 
-{:toc}
-
 **Note:** If you are running CircleCI in an HA configuration, you must use standard backup mechanisms for the external datastores. See the [High Availability]({{site.baseurl}}/enterprise/high-availability/) document for more information.
 
 ## Backing up the Database

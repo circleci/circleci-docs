@@ -9,9 +9,6 @@ order: 35
 
 This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:
 
-* TOC
-{:toc}
-
 ## Example CircleCI Configuration for a Rails App With structure.sql
 
 If you are migrating a Rails app configured with a `structure.sql` file make

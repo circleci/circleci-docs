@@ -9,9 +9,6 @@ published: true
 sitemap: false
 ---
 
-* TOC
-{:toc}
-
 #### Can I monitor available build containers?
 
 Yes, basic reporting on the state of your build fleet is available in the CircleCI Admin application. Refer to the  [CloudWatch Monitoring]({{site.baseurl}}/enterprise/cloudwatch/) document for how to enable additional container monitoring for AWS.

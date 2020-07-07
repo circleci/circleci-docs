@@ -9,9 +9,6 @@ order: 1
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.
 
-* TOC 
-{:toc}
-
 ## Projects
 
 A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.

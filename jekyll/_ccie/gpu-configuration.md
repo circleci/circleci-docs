@@ -10,9 +10,6 @@ sitemap: false
 
 This document list the various commands you can use to install GPUs that may be accessed by containers running in your fleet in the following sections:
 
-* TOC 
-{:toc}
-
 ## Steps
 
 Complete the following steps on an LXC-based builder or a Docker-based builder. 

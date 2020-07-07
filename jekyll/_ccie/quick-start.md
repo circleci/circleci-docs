@@ -10,9 +10,6 @@ sitemap: false
 
 This guide describes how to set up a project and provides a primer on configuration troubleshooting in CircleCI Enterprise for developers, as follows:
 
-* TOC
-{:toc}
-
 ## Prerequisites
 
 To add a project, you must have a GitHub or GitHub Enterprise account.

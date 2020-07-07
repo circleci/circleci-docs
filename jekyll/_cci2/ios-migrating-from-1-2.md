@@ -10,9 +10,6 @@ order: 10
 This document will give you the guidelines for migrating your iOS
 project from CircleCI 1.0 to 2.0.
 
-* TOC
-{:toc}
-
 ## Overview
 
 With the release of CircleCI 2.0 for macOS, your iOS projects can now

@@ -9,9 +9,6 @@ order: 41
 
 This document provides a step-by-step tutorial for getting your first successful (green) build on CircleCI.
 
-* TOC
-{:toc}
-
 ## Prerequisites for Running Your First Build
 {:.no_toc}
 

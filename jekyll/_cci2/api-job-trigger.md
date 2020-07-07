@@ -16,9 +16,6 @@ This document describes how to trigger jobs using the CircleCI API.
 </div>
 
 
-* TOC
-{:toc}
-
 ## Overview
 
 Use the [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
