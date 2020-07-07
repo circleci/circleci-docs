@@ -17,3 +17,7 @@ release/tmp/CircleCI-Server-Operations-Guide.pdf
 src-api/build/
 src-config-builder/node_modules
 src-config-builder/build
+
+# jekyll/_algolia_api_key can be used to store an algolia API key for
+# indexing the content. Useful for local development.
+*_algolia_api_key
