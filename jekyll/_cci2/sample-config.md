@@ -80,7 +80,7 @@ workflows:
 
 The configuration example below shows a sequential job workflow where the `build` job runs and then the `test` job runs once `build` has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
-This image shows the workflow view for this configuration example, in which jobs run sequentially; one after the other:
+This image shows the workflow view for the following configuration example, in which jobs run sequentially; one after the other:
 ![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
 {:.tab.basic-sequential.Cloud}
