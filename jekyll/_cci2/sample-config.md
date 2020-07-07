@@ -145,7 +145,7 @@ workflows:
 
 The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the `deploy` job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
-The following image shows the workflow view for this configuration example. This image has three parts to show the approval popup that appears when you click on a hold step, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
+This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
 
 ![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
 
