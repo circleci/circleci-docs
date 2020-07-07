@@ -16,7 +16,7 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 
 ### Concurrent Workflow
 
-The example below shows a concurrent job workflow where the `build` and `test` jobs run at the same time, saving time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 This image shows the workflow view for this configuration example:
 ![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
