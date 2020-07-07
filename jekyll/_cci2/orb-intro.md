@@ -11,7 +11,7 @@ _Available on CircleCI with `version 2.1` config. Not currently available on sel
 
 CircleCI orbs are open-source, shareable packages of parameterizable _[reusable configuration]({{site.baseurl}}/2.0/reusing-config/)_ elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Orbs can drastically reduce configuration complexity and help developers integrate with their software and services stack quickly and easily across many projects.
 
-Published orbs can be found on our [Orb Registry]({{site.baseurl}}/orbs/registry/), or you can [author your own]()!
+Published orbs can be found on our [Orb Registry](https://circleci.com/orbs/registry/), or you can [author your own]()!
 
 An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version](https://semver.org/) string, identifying which version of the orb is being used.
 
@@ -70,7 +70,7 @@ workflows:
 
 ## Orb Registry
 
-The [Orb Registry]({{site.baseurl}}/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and publishing your own.
+The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and publishing your own.
 
 [picture]
 
