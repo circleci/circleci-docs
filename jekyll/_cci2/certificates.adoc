@@ -7,7 +7,7 @@
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
-This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing certificate.
+This document provides a script for using a custom Root Certificate Authority and the process for using an Elastic Load Balancing (ELB) certificate.
 
 toc::[]
 
@@ -15,9 +15,9 @@ toc::[]
 
 Any valid certificates added to the following path will be trusted by CircleCI services: `usr/local/share/ca-certificates/`
 
-The following example `openssl` command is one way of placing the certificate.  It is also possible to pull a certificate from a vault/PKI solution within your company.
+The following example `openssl` command is one way of placing the certificate. It is also possible to pull a certificate from a vault/PKI solution within your company.
 
-Some installation environments use internal Root Certificate Authorities for encrypting and establishing trust between servers.  If you are using a customer Root certificate, you will need to import and mark it as a trusted certificate at CircleCI GitHub Enterprise instances. CircleCI will respect such trust when communicating with GitHub and webhook API calls.
+Some installation environments use internal Root Certificate Authorities (RCAs) for encrypting and establishing trust between servers. If you are using a customer Root certificate, you will need to import and mark it as a trusted certificate at CircleCI GitHub Enterprise instances. CircleCI will respect such trust when communicating with GitHub and webhook API calls.
 
 CA Certificates must be in a format understood by Java Keystore, and include the entire chain.
 
@@ -34,9 +34,11 @@ Then, navigate to the system console at port 8800 and change the protocol to upg
 
 == Setting up ELB Certificates
 
-CircleCI requires the following steps to get ELB (Elastic Load Balancing) certificates working as your primary certs. The steps to accomplish this are below. You will need certificates for the ELB and CircleCI Server as described in the following sections.
+CircleCI requires the following steps to get ELB certificates working as your primary certs. The steps to accomplish this are below. You will need certificates for the ELB and CircleCI Server as described in the following sections.
 
 NOTE: Opening the port for HTTP requests will allow CircleCI to return a HTTPS redirect.
+
+NOTE: From Server v2.19.02 and up, Classic Load Balancer (CLB) is no longer supported.
 
 <<<
 
