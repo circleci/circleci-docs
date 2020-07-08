@@ -6,6 +6,7 @@ description: "Starting point for how to authoring an orb"
 categories: [getting-started]
 order: 1
 ---
+
 ## Introduction to Orb Authoring
 
 [Orbs]({{site.baseurl}}/2.0/orb-intro/) are [reusable packages of CircleCI configuration]({{site.baseurl}}/2.0/reusing-config/), enabling you to create parameterized commands, jobs, and executors that can be [used across multiple projects]({{site.baseurl}}/2.0/using-orbs/).
@@ -37,17 +38,16 @@ With these three components, users will be able to replace hand-written config w
 
 ## Getting Started
 
-To begin creating orbs, you will need to [setup the CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens).
+To begin creating orbs, you will need to [setup the CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). For a full list of orb-related commands inside the CircleCI CLI, visit [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
-
-**Register a namespace**
+### Register a Namespace
 
 Every organization registered on CircleCI is able to claim **one** unique [namespace](). This includes your personal organization and any organization you are a member of. In order to register the namespace for an organization you must be the owner of the organization.
 
 Enter the following command to claim your namespace, if you have not yet claimed one.
 - `circleci namespace create <name> <vcs-type> <org-name> [flags]`
 
-**Create an orb**
+### Create an Orb 
 
 Within our namespace we must create an orb, where we will eventually push our orb source to.
 
