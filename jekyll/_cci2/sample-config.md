@@ -560,6 +560,6 @@ workflows:
 ## See Also
 {:.no_toc}
 
-* See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#config) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details of the concepts covered in this example.
+* See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#configuration) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details of the concepts covered in this example.
 * See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
 * See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
