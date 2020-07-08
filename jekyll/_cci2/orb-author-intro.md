@@ -17,7 +17,7 @@ If you want to join the community and author your own orb, the documents in this
 
 Practice with [inline orbs](https://circleci.com/docs/2.0/orb-author/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
 
-Orb Authors agree to our [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All published orbs are made publicly available on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT).
+Orb Authors agree to our [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All published orbs are made available publicly on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT).
 
 _See [Orb Licensing](https://circleci.com/orbs/registry/licensing)_
 
