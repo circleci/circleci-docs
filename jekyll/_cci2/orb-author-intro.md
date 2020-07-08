@@ -11,7 +11,7 @@ order: 1
 
 [Orbs]({{site.baseurl}}/2.0/orb-intro/) are [reusable packages of CircleCI configuration]({{site.baseurl}}/2.0/reusing-config/), enabling you to create parameterized commands, jobs, and executors that can be [used across multiple projects]({{site.baseurl}}/2.0/using-orbs/).
 
-Hundreds of orbs are already available on the [Orb Registry]({{site.baseurl}}/orbs/registry/), written by CircleCI, our technology partners, and the open-source community. Search the registry for the technology or service you would like to integrate with for existing orbs.
+Hundreds of orbs are available from the [Orb Registry]({{site.baseurl}}/orbs/registry/). Existing orbs are developed and maintained by a variety of authors: CircleCI, our technology partners, and the open-source community. Search the registry for the technology or service you would like to integrate with your projects.
 
 Want to join the community any author your own orb? If you manage multiple similar projects, consider abstracting out your config with orbs!
 
