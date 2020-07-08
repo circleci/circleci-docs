@@ -13,7 +13,7 @@ order: 1
 
 Hundreds of orbs are available from the [Orb Registry]({{site.baseurl}}/orbs/registry/). Existing orbs are developed and maintained by a variety of authors: CircleCI, our technology partners, and the open-source community. Search the registry for the technology or service you would like to integrate with your projects.
 
-Want to join the community any author your own orb? If you manage multiple similar projects, consider abstracting out your config with orbs!
+If you want to join the community and author your own orb, the documents in this section are for you. If you manage multiple similar projects, consider abstracting out your config with orbs.
 
 Practice with [inline orbs](https://circleci.com/docs/2.0/orb-author/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
 
