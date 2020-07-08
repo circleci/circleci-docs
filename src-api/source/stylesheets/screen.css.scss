@@ -75,7 +75,6 @@ html, body {
   .logo {
     align-self: center;
     max-width: 80%;
-    margin: 24px auto;
     text-align: center;
     display: flex;
   }
@@ -201,7 +200,7 @@ html, body {
 
     padding: 2px 0;
     padding-left: (($nav-padding + $nav-indent) / 2);
-    margin-left: (($nav-padding + $nav-indent) / 2);
+    margin-left: ($nav-padding + $nav-indent);
   }
 
   .toc-footer {
@@ -227,6 +226,7 @@ html, body {
 }
 
 .toc-link {
+  margin-left: 8px;
   border-left: 3px solid $nav-bg;
 }
 
