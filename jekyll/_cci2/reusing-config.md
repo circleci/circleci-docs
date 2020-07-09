@@ -40,7 +40,6 @@ Command, job, executor, and parameter names must start with a letter and can onl
 
 ### **The `commands` Key** 
 
-
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 Key | Required | Type | Description
@@ -315,7 +314,6 @@ jobs:
 ```
 
 **Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
-
 
 ### Overriding Keys When Invoking an Executor
 {:.no_toc}
@@ -717,7 +715,7 @@ workflows:
 ```
 {% endraw %}
 
-**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
+**Note:** The ability to invoke jobs multiple times in a single workflow and parameters in jobs is available in configuration version 2.1. When invoking the same job multiple times with parameters passed in the job, the build name will be changed (i.e. `build-1` , `build-2`, etc.). To ensure build numbers are not appended, utilize the `name` key.
 
 ### Jobs Defined in an Orb
 
