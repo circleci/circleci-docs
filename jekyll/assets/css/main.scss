@@ -140,7 +140,6 @@ nav.nav-toggle.two {
 }
 
 // Table of Contents Sidebar
-//
 .table-of-contents {
     position: fixed;
     right: 0;
@@ -152,6 +151,16 @@ nav.nav-toggle.two {
     border-left: 1px solid #e2e0e0;
     top: 118px;
     font-size: 14px;
+    transition: all 0.5s ease-in-out;
+
+    @media(max-width: $toc-breakpoint) {
+        right: -500px;
+
+        &.open {
+            right: 0px;
+        }
+    }
+
 
     .toc-heading {
         padding-left: 24px;
@@ -175,8 +184,15 @@ div.article-container{
 		width: 100%;
 	}
 	padding: 60px 48px;
-  width: calc(100% - 260px - 330px)
+  width: calc(100% - 260px - 330px);
+
+  // we hide the toc on mobile, so recalc the width.
+  @media (max-width: $toc-breakpoint) {
+    width: calc(100% - 260px);
+  }
+
 }
+
 	article{
 		h2,
 		h3,
@@ -451,4 +467,21 @@ pre {
 
 h6{
 	font-size: 16px;
+}
+
+
+/* Icons */
+.icon-base {
+    width: 24px;
+    height: 24px;
+    background-repeat: no-repeat;
+}
+
+.icon-chevron-left {
+    background-image: url('/docs/assets/img/icons/chevron-left.svg');
+    @extend .icon-base;
+}
+.icon-chevron-right {
+    background-image: url('/docs/assets/img/icons/chevron-right.svg');
+    @extend .icon-base;
 }

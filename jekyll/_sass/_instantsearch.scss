@@ -13,11 +13,36 @@
   background: white;
   z-index: 2;
   top: 70px;
+  display: flex;
+
+  .searchbar-form {
+    flex: 1;
+  }
+
+  #mobile-table-of-contents {
+    display: none;
+  }
+
+  @media (max-width: $toc-breakpoint) {
+    #mobile-table-of-contents {
+      align-items: center;
+      background: white;
+      border: none;
+      border-left: 1px solid #e2e0e0;
+      color: #777;
+      display: flex;
+      font-size: 12px;
+      outline: none;
+      padding: 0 24px 0 12px;
+    }
+  }
+
 
   #search-box {
     max-width: 1200px;
     margin: 0 auto;
     display: block;
+
 
     .ais-search-box {
       max-width: 400px;
