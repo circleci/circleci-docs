@@ -21,7 +21,7 @@ Orb Authors agree to our [Code Sharing Terms of Service](https://circleci.com/le
 
 ## Key Concepts
 
-Orbs take [reusable configuration](({{site.baseurl}}/2.0/reusing-config/)) and package it in a way that can be published to the [Orb Registry]() so that they may be imported in multiple configuration files.
+Orbs take [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) and package it in a way that can be published to the [Orb Registry]() so that they may be imported in multiple configuration files.
 
 Before authoring an orb, it is recommended to become familiar with authoring parameterized reusable config elements.
 
