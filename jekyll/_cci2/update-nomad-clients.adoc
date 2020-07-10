@@ -101,7 +101,7 @@ ec2ccc9d  us-east-1  i-0895ee505ec7e692c  linux-64bit  false  eligible     down
 
 
 
-## Updated Nomad Client Launch Configuration Script
+## Updated Nomad Client Launch Configuration Script (Last Update: July 10, 2020)
 
 ```bash
 #!/bin/bash
