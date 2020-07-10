@@ -26,7 +26,7 @@ jobs:
       auth:
         username: $QUAY_USERNAME
         password: $QUAY_PASSWORD
-    
+
 
 または、以下のように `machine` Executor を使用する方法もあります。
 
@@ -38,13 +38,13 @@ jobs:
         steps:
           # Docker と docker-compose がプリインストールされています
           - checkout
-    
+
           # プライベート Docker イメージを使用して固有の所有 DB を開始します
-    
+
           - run: |
               docker login -u $DOCKER_USER -p $DOCKER_PASS
               docker run -d --name db company/proprietary-db:1.2.3
-    
+
 
 現在 CircleCI では、Amazon の ECR サービスからのプライベート イメージのプルをサポートしています。 以下の 3 つの方法のいずれかで、ECR のプライベート イメージを使用できるようになります。
 
@@ -52,15 +52,17 @@ jobs:
 2. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
 3. aws_auth を使用して、.circleci/config.yml に AWS 認証情報を指定する
 
-    version: 2
-    jobs:
-      build:
-        docker:
-          - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
-            aws_auth:
-              aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定します
+```yaml
+version: 2
+jobs:
+  build:
+    docker:
+      - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
+        aws_auth:
+          aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定します
               aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
-    
+```
+
 
 3 番目の方法では認証情報に対して任意の変数名を指定できますが、その点を除けば 2 番目と 3 番目の方法はほぼ同じと言えます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番にデプロイする前には本格的なテスト スイートを実行します。
 
@@ -92,12 +94,12 @@ jobs:
           - run:
               name: "本番インフラストラクチャへのデプロイ"
               command: "よくわからないもの.... CLI"
-    
+
     workflows:
       version: 2
       main:
         jobs:
-    
+
           - build:
               filters:
                 tags:
@@ -110,7 +112,7 @@ jobs:
                   ignore: /.*/
                 tags:
                   only: /^\d{4}\.\d+$/
-    
+
 
 ## 関連項目
 
