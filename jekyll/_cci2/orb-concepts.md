@@ -48,7 +48,7 @@ _[See Example: Node Orb Executor](https://circleci.com/orbs/registry/orb/circlec
 Jobs are a definition of a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given executor. Users ultimately compose [Workflows]() which are comprised of one or many jobs.
 
 
-_[See: Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-jobs)._
+_[See: Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)._
 _[See Example: Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing)._
 
 ## Namespaces
