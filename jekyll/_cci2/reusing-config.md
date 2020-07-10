@@ -715,7 +715,21 @@ workflows:
 ```
 {% endraw %}
 
-**Note:** The ability to invoke jobs multiple times in a single workflow and parameters in jobs is available in configuration version 2.1. When invoking the same job multiple times with parameters passed in the job, the build name will be changed (i.e. `build-1` , `build-2`, etc.). To ensure build numbers are not appended, utilize the `name` key.
+**Note:** The ability to invoke jobs multiple times in a single workflow with parameters is available in configuration version 2.1. When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (i.e. `sayhello-1` , `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. As an example:
+
+```yaml
+workflows:
+  build:
+    jobs:
+      - sayhello:
+          name: build-sayhello
+          saywhat: Everyone
+  deploy:
+    jobs:
+      - sayhello:
+          name: deploy-sayhello
+          saywhat: All
+```
 
 ### Jobs Defined in an Orb
 
