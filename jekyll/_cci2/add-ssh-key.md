@@ -26,25 +26,27 @@ follow the steps below to add an SSH key to your project.
 
 1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
 
-1. In the CircleCI application,
+2. In the CircleCI application,
 go to your project's settings
-by clicking the gear icon next to your project.
+by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
-2. In the **Permissions** section,
-click on **SSH Permissions**.
+3. On the **Project Settings** page,
+click on **SSH Keys** (vertical menu on the left).
 
-3. Click the **Add SSH Key** button.
+4. Scroll down to the **Additional SSH Keys** section.
 
-4. In the **Hostname** field,
+5. Click the **Add SSH Key** button.
+
+6. In the **Hostname** field,
 enter the key's associated host (for example, "git.heroku.com").
 If you don't specify a hostname,
 the key will be used for all hosts.
 
-5. In the **Private Key** field,
+7. In the **Private Key** field,
 paste the SSH key
 you are adding.
 
-6. Click the **Add SSH Key** button.
+8. Click the **Add SSH Key** button.
 
 **Note:**
 Since CircleCI cannot decrypt SSH keys,
