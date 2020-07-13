@@ -8,9 +8,9 @@ order: 1
 ---
 ## Introduction to Orb Authoring
 
-Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be [used across multiple projects]({{ site.baseurl }}/2.0/using-orbs/). 
+Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be [used across multiple projects]({{ site.baseurl }}/2.0/using-orbs/).
 
-[Orbs]({{ site.baseurl }}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
+[Orbs]({{site.baseurl}}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
 If you have determined that using an existing CircleCI or partner-certified orb will not address your specific workflow or job, then you may choose to author your own orb. Although more time-consuming than using an existing orb from the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), authoring your own orb will enable you to create a pre-packaged configuration that suits your particular workflow. These pages will walk you through the steps required to author an orb, validate its configuration, and then publish this newly-created orb to the CircleCI Orb Registry.
 
@@ -72,7 +72,7 @@ Key       | Required | Type | Description
 ----------|----------|------|------------
 orbs      | N        | Map  | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config.
 executors | N        | Map  | A map of strings to executor definitions.
-commands  | N        | Map  | A map of command names to command definitions. 
+commands  | N        | Map  | A map of command names to command definitions.
 {: class="table table-striped"}
 
 ### Orb Configuration Example

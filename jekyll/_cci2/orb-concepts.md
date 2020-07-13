@@ -23,7 +23,7 @@ _[See: Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authori
 
 ### Executors
 
-Executors define the environment in which commands are run. CircleCI provides multiple [execution platforms](https://circleci.com/docs/2.0/configuration-reference/#docker--machine--macos--windows-executor) including:
+Executors define the environment in which commands are run. CircleCI provides multiple [execution platforms]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor) including:
   - Docker
   - macOS
   - Windows
