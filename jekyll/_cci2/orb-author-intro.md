@@ -6,90 +6,59 @@ description: "Starting point for how to authoring an orb"
 categories: [getting-started]
 order: 1
 ---
+
 ## Introduction to Orb Authoring
 
-Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be [used across multiple projects]({{ site.baseurl }}/2.0/using-orbs/). 
+[Orbs]({{site.baseurl}}/2.0/orb-intro/) are [reusable packages of CircleCI configuration]({{site.baseurl}}/2.0/reusing-config/), enabling you to create parameterized commands, jobs, and executors that can be [used across multiple projects]({{site.baseurl}}/2.0/orb-concepts/).
 
-[Orbs]({{ site.baseurl }}/2.0/orb-intro/) are made available for use in a configuration through the `orbs` key in the top level of your 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.
+Hundreds of orbs are available from the [Orb Registry](https://circleci.com/orbs/registry/). Existing orbs are developed and maintained by a variety of authors: CircleCI, our technology partners, and the open-source community. Search the registry for the technology or service you would like to integrate with your projects.
 
-If you have determined that using an existing CircleCI or partner-certified orb will not address your specific workflow or job, then you may choose to author your own orb. Although more time-consuming than using an existing orb from the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/), authoring your own orb will enable you to create a pre-packaged configuration that suits your particular workflow. These pages will walk you through the steps required to author an orb, validate its configuration, and then publish this newly-created orb to the CircleCI Orb Registry.
+If you want to join the community and author your own orb, the documents in this section are for you. If you manage multiple similar projects, consider abstracting out your config with orbs.
+
+Practice with [inline orbs](https://circleci.com/docs/2.0/orb-author/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
+
+Orb Authors agree to our [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All published orbs are made available publicly on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT). For more information, see [Orb Licensing](https://circleci.com/orbs/registry/licensing).
 
 ## Key Concepts
 
-Before authoring an orb, you should first familiarize yourself with some basic core concepts of orbs and how they are structured and operate. Gaining a basic understanding of these core concepts will enable you to write fully-featured orbs you can leverage and use in your workflows.
+Orbs take [reusable configuration](({{site.baseurl}}/2.0/reusing-config/)) and package it in a way that can be published to the [Orb Registry](https://circleci.com/orbs/registry/) so that they may be imported in multiple configuration files.
 
-Orbs consist of the following three elements:
+Before authoring an orb, it is recommended to become familiar with authoring parameterized reusable config elements.
 
-- Commands
-- Jobs
-- Executors
+Orbs consist of three main elements:
 
-### Commands
+* [Commands]()
+* [Jobs]()
+* [Executors]()
 
-Commands are reusable sets of steps that you can invoke with specific parameters within an existing job. For example, if you want to invoke the command `sayhello`, you would pass the parameter `to` as follows:
+With these three components, users will be able to replace hand-written config with the appropriate provided elements in the orb.
 
-```yaml
-version: 2.1
-jobs:
-  myjob:
-    docker:
-      - image: "circleci/node:9.6.1"
-    steps:
-      - myorb/sayhello:
-          to: "Lev"
-```
-### Jobs
+## Getting Started
 
-Jobs are comprised of two parts: a set of steps, and the environment they should be executed within. Jobs are defined in your build configuration or in an orb and enable you to define a job name in a map under the jobs key in a configuration, or in an external orb’s configuration.
+To begin creating orbs, you will need to [setup the CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). For a full list of orb-related commands inside the CircleCI CLI, visit [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
-You must invoke jobs in the workflow stanza of `config.yml file`, making sure to pass any necessary parameters as subkeys to the job.
+### Register a Namespace
 
-### Executors
+Every organization registered on CircleCI is able to claim **one** unique [namespace](). This includes your personal organization and any organization you are a member of. In order to register the namespace for an organization you must be the owner of the organization.
 
-Executors define the environment in which the steps of a job will be run. When you declare a job in CircleCI configuration, you define the type of environment (e.g. docker, machine, macos, etc.) to run in, in addition to any other parameters of that environment, such as:
+Enter the following command to claim your namespace, if you have not yet claimed one.
+- `circleci namespace create <name> <vcs-type> <org-name> [flags]`
 
-- environment variables to populate
-- which shell to use
-- what size `resource_class` to use
+### Create an Orb 
 
-When you declare an executor in a configuration outside of jobs, you can use these declarations for all jobs in the scope of that declaration, enabling you to reuse a single executor definition across multiple jobs.
+Within our namespace we must create an orb, where we will eventually push our orb source to.
 
-An executor definition has the following keys available (some of which are also available when using the job declaration):
+Enter the following command to create an empty orb within the namespace.
 
-- docker, machine, or macos
-- environment
-- working_directory
-- shell
-- resource_class
+- `circleci orb create <namespace>/<orb> [flags]`
 
-## Orbs Configuration
+### Next Steps
 
-The table below describes each element that makes up an orb.
+- Continue on to [Orb authoring]({{site.baseurl}}/2.0/orb-author/) for details on writing your orb.
 
-**Note** Orbs require CircleCI version 2.1.
 
-Key       | Required | Type | Description
-----------|----------|------|------------
-orbs      | N        | Map  | A map of user-selected names to either: orb references (strings) or orb definitions (maps). Orb definitions must be the orb-relevant subset of 2.1 config.
-executors | N        | Map  | A map of strings to executor definitions.
-commands  | N        | Map  | A map of command names to command definitions. 
-{: class="table table-striped"}
+## See Also
+{:.no_toc}
 
-### Orb Configuration Example
-
-The following example calls an Orb named `hello-build` that exists in the certified `circleci` namespace.
-
-```yaml
-version: 2.1
-orbs:
-    hello: circleci/hello-build@0.0.5
-workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
-```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
-
-## Next Steps
-
-Refer to [Set Up the CircleCI CLI]({{site.baseurl}}/2.0/orb-author-cli/) for next steps.
+- [Orb authoring]({{site.baseurl}}/2.0/orb-author/)
+- [Orb author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)
