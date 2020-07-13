@@ -60,17 +60,16 @@ version: 2.1
 jobs: 
   build: 
     docker: 
-        image: "circleci/<language>:<version TAG>"
+      - image: "circleci/<language>:<version TAG>"
     steps: 
       - checkout
         run: <command>
   test: 
     docker: 
-        image: "circleci/<language>:<version TAG>"
+      - image: "circleci/<language>:<version TAG>"
     steps: 
       - checkout
         run: <command>
-version: 2.1
 workflows: 
   build_and_test: 
     jobs: 
@@ -102,7 +101,7 @@ version: 2.1
 workflows: 
   build-test-and-deploy: 
     jobs: 
-      - build
+      - build:
         test1: 
           requires: 
             - build
