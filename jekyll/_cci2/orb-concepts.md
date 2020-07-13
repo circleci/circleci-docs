@@ -14,7 +14,7 @@ Ensure you have first read the [orb introduction]({{site.baseurl}}/2.0/reusing-c
 
 ## Reusable Configuration
 
-[Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) on CircleCI allows you to define parametrizable CircleCI configuration elements and re-use those elements. It is recommended to become familiar with our full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/#section=configuration) before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+[Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) on CircleCI allows you to define parametrizable CircleCI configuration elements and re-use those elements. It is recommended to become familiar with our full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ### Commands
 Commands contain one or more [steps]() which can use [parameters]() to modify behavior. Commands are the logic of our orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code such as running BASH or running CLI tools.
