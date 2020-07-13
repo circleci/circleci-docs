@@ -256,7 +256,11 @@ using a single machine at the default rate of 10 credits per minute. The same pa
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
-Yes, similarly with container-based plans, you can go to the Settings > Share & Transfer > Share Plan page of the CircleCI app to select the Orgs you want to add to your plan. The child organizations will bill all credits and other usage to the parent org.
+Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
+
+On non-free plans, you can share your plan with other users and organizations using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+
+On non-free plans, you can transfer your plan to another organization using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
 
 #### If a container is used for under one minute, do I have to pay for a full minute?
 {:.no_toc}
@@ -297,7 +301,7 @@ An `active user` is any user who triggers the use of compute resources on non-OS
 
 **Note:** If your project is [open-source]({{ site.baseurl }}/2.0/oss) you will **not** be considered an active user.
 
-To find a list of your Active User's, Log in to the CircleCI web app > click `Settings` > click `Plan Usage` > click on the `Users` tab.
+To find a list of your Active Users, log in to the CircleCI web app > click `Plan` > click `Plan Usage` > click on the `Users` tab.
 
 #### What happens when I run out of credits?
 {:.no_toc}
@@ -308,7 +312,7 @@ example, If your monthly package size is 25,000 credits, you will automatically
 be refilled 6,250 credits (at $.0006 each, not including applicable taxes) when
 you reach 2,500 remaining credits.
 
-If you notice that your account is receiving repeated refills, you can review your credit usage by navigating to the settings tab of your account and clicking on “Plan Usage."
+If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`.
 
 #### Do credits expire?
 {:.no_toc}
