@@ -56,23 +56,24 @@ _For a full specification of the_ `workflows` _key, see the [Workflows]({{ site.
 To run a set of concurrent jobs, add a new `workflows:` section to the end of your existing `.circleci/config.yml` file with the version and a unique name for the workflow. The following sample `.circleci/config.yml` file shows the default workflow orchestration with two concurrent jobs. It is defined by using the `workflows:` key named `build_and_test` and by nesting the `jobs:` key with a list of job names. The jobs have no dependencies defined, therefore they will run concurrently.
 
 ```yaml
-jobs:
-  build:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
+version: 2.1
+jobs: 
+  build: 
+    docker: 
+        image: "circleci/<language>:<version TAG>"
+    steps: 
       - checkout
-      - run: <command>
-  test:
-    docker:
-      - image: circleci/<language>:<version TAG>
-    steps:
+        run: <command>
+  test: 
+    docker: 
+        image: "circleci/<language>:<version TAG>"
+    steps: 
       - checkout
-      - run: <command>
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
+        run: <command>
+version: 2.1
+workflows: 
+  build_and_test: 
+    jobs: 
       - build
       - test
 ```
@@ -97,19 +98,19 @@ The following example shows a workflow with four sequential jobs. The jobs run a
 The following `config.yml` snippet is an example of a workflow configured for sequential job execution:
 
 ```yaml
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
+version: 2.1
+workflows: 
+  build-test-and-deploy: 
+    jobs: 
       - build
-      - test1:
-          requires:
+        test1: 
+          requires: 
             - build
-      - test2:
-          requires:
+        test2: 
+          requires: 
             - test1
-      - deploy:
-          requires:
+        deploy: 
+          requires: 
             - test2
 ```
 
@@ -127,25 +128,25 @@ The illustrated example workflow runs a common build job, then fans-out to run a
 The following `config.yml` snippet is an example of a workflow configured for fan-out/fan-in job execution:
 
 ```yaml
-workflows:
-  version: 2
-  build_accept_deploy:
-    jobs:
+version: 2.1
+workflows: 
+  build_accept_deploy: 
+    jobs: 
       - build
-      - acceptance_test_1:
-          requires:
+        acceptance_test_1: 
+          requires: 
             - build
-      - acceptance_test_2:
-          requires:
+        acceptance_test_2: 
+          requires: 
             - build
-      - acceptance_test_3:
-          requires:
+        acceptance_test_3: 
+          requires: 
             - build
-      - acceptance_test_4:
-          requires:
+        acceptance_test_4: 
+          requires: 
             - build
-      - deploy:
-          requires:
+        deploy: 
+          requires: 
             - acceptance_test_1
             - acceptance_test_2
             - acceptance_test_3
@@ -167,25 +168,23 @@ key `type: approval`. Let's look at a commented config example.
 # << Your config for the build, test1, test2, and deploy jobs >>
 # ...
 
-workflows:
-  version: 2
-  build-test-and-approval-deploy:
-    jobs:
-      - build  # your custom job from your config, that builds your code
-      - test1: # your custom job; runs test suite 1
-          requires: # test1 will not run until the `build` job is completed.
+version: 2.1
+workflows: 
+  build-test-and-approval-deploy: 
+    jobs: 
+      - build
+        test1: 
+          requires: 
             - build
-      - test2: # another custom job; runs test suite 2,
-          requires: # test2 is dependent on the succes of job `test1`
+        test2: 
+          requires: 
             - test1
-      - hold: # <<< A job that will require manual approval in the CircleCI web application.
-          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
-          requires: # We only run the "hold" job when test2 has succeeded
-           - test2
-      # On approval of the `hold` job, any successive job that requires the `hold` job will run. 
-      # In this case, a user is manually triggering the deploy job.
-      - deploy:
-          requires:
+        hold: 
+          requires: 
+            - test2
+          type: approval
+        deploy: 
+          requires: 
             - hold
 ```
 
@@ -212,7 +211,6 @@ The following screenshot demonstrates a workflow on hold.
 {:.tab.switcher.Server}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-
 By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears requesting that you approve or cancel the holding job.
 
 After approving, the rest of the workflow runs as directed.
@@ -237,23 +235,23 @@ In the example below, the `nightly` workflow is configured to run every day at 1
 **Note:** Scheduled workflows may be delayed by up to 15 minutes. This is done to maintain reliability during busy times such as 12:00am UTC. Scheduled workflows should not assume they are started with to-the-minute accuracy.
 
 ```yaml
-workflows:
-  version: 2
-  commit:
-    jobs:
+version: 2.1
+workflows: 
+  commit: 
+    jobs: 
       - test
       - deploy
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-                - beta
-    jobs:
+  nightly: 
+    jobs: 
       - coverage
+    triggers: 
+      schedule: 
+        cron: "0 0 * * *"
+        filters: 
+          branches: 
+            only: 
+              - master
+              - beta
 ```
 
 In the above example, the `commit` workflow has no `triggers` key and will run on every `git push`. The `nightly` workflow has a `triggers` key and will run on the specified `schedule`.
@@ -286,21 +284,21 @@ The following example shows a workflow with four sequential jobs that use a cont
 The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
 ```yaml
-workflows:
-  version: 2
-  build-test-and-deploy:
-    jobs:
+version: 2.1
+workflows: 
+  build-test-and-deploy: 
+    jobs: 
       - build
-      - test1:
-          requires:
+        test1: 
+          context: org-global
+          requires: 
             - build
-          context: org-global  
-      - test2:
-          requires:
+        test2: 
+          context: org-global
+          requires: 
             - test1
-          context: org-global  
-      - deploy:
-          requires:
+        deploy: 
+          requires: 
             - test2
 ```
 
@@ -316,24 +314,24 @@ The following example shows a workflow configured with jobs on three branches: D
 The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
 
 ```yaml
-workflows:
-  version: 2
-  dev_stage_pre-prod:
-    jobs:
-      - test_dev:
-          filters:  # using regex filters requires the entire branch to match
-            branches:
-              only:  # only branches matching the below regex filters will run
+version: 2.1
+workflows: 
+  dev_stage_pre-prod: 
+    jobs: 
+        test_dev: 
+          filters: 
+            branches: 
+              only: 
                 - dev
                 - /user-.*/
-      - test_stage:
-          filters:
-            branches:
+        test_stage: 
+          filters: 
+            branches: 
               only: stage
-      - test_pre-prod:
-          filters:
-            branches:
-              only: /pre-prod(?:-.+)?$/
+        test_pre-prod: 
+          filters: 
+            branches: 
+              only: "/pre-prod(?:-.+)?$/"
 ```
 
 For more information on regular expressions, see the [Using Regular Expressions to Filter Tags And Branches](#using-regular-expressions-to-filter-tags-and-branches) section below.
@@ -352,17 +350,17 @@ In the example below, two workflows are defined:
 - `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
 
 ```yaml
-workflows:
-  version: 2
-  untagged-build:
-    jobs:
-      - build
-  tagged-build:
-    jobs:
-      - build:
-          filters:
-            tags:
+version: 2.1
+workflows: 
+  tagged-build: 
+    jobs: 
+        build: 
+          filters: 
+            tags: 
               only: /^v.*/
+  untagged-build: 
+    jobs: 
+      - build
 ```
 
 In the example below, two jobs are defined within the `build-n-deploy` workflow:
@@ -371,22 +369,22 @@ In the example below, two jobs are defined within the `build-n-deploy` workflow:
 - The `deploy` job runs for no branches and only for tags starting with 'v'.
 
 ```yaml
-workflows:
-  version: 2
-  build-n-deploy:
-    jobs:
-      - build:
-          filters:  # required since `deploy` has tag filters AND requires `build`
-            tags:
+version: 2.1
+workflows: 
+  build-n-deploy: 
+    jobs: 
+        build: 
+          filters: 
+            tags: 
               only: /.*/
-      - deploy:
-          requires:
-            - build
-          filters:
-            tags:
-              only: /^v.*/
-            branches:
+        deploy: 
+          filters: 
+            branches: 
               ignore: /.*/
+            tags: 
+              only: /^v.*/
+          requires: 
+            - build
 ```
 
 In the example below, three jobs are defined with the `build-test-deploy` workflow:
@@ -396,28 +394,28 @@ In the example below, three jobs are defined with the `build-test-deploy` workfl
 - The `deploy` job runs for no branches and only tags starting with 'config-test'.
 
 ```yaml
-workflows:
-  version: 2
-  build-test-deploy:
+version: 2.1
+workflows: 
+  build-test-deploy: 
     jobs:
-      - build:
-          filters:  # required since `test` has tag filters AND requires `build`
-            tags:
+        build: 
+          filters: 
+            tags: 
               only: /^config-test.*/
-      - test:
-          requires:
+        test: 
+          filters: 
+            tags: 
+              only: /^config-test.*/
+          requires: 
             - build
-          filters:  # required since `deploy` has tag filters AND requires `test`
-            tags:
-              only: /^config-test.*/
-      - deploy:
-          requires:
-            - test
-          filters:
-            tags:
-              only: /^config-test.*/
-            branches:
+        deploy: 
+          filters: 
+            branches: 
               ignore: /.*/
+            tags: 
+              only: /^config-test.*/
+          requires: 
+            - test
 ```
 
 **Note:**
@@ -453,56 +451,44 @@ To persist data from a job and make it available to other jobs, configure the jo
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
 
 ```yaml
+
 # Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
 # This allows defining a docker image to reuse across jobs.
 # visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
 
-version: 2.1
-
-executors:
-  my-executor:
-    docker:
-      - image: buildpack-deps:jessie
+executors: 
+  my-executor: 
+    docker: 
+        image: "buildpack-deps:jessie"
     working_directory: /tmp
-
-jobs:
-  flow:
+jobs: 
+  downstream: 
     executor: my-executor
-    steps:
-      - run: mkdir -p workspace
-      - run: echo "Hello, world!" > workspace/echo-output
-      
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
-      - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
-          # taken to be the root directory of the workspace.
-          root: workspace
-          # Must be relative path from root
-          paths:
-            - echo-output
-
-  downstream:
-    executor: my-executor
-    steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+    steps: 
+        attach_workspace: 
           at: /tmp/workspace
-
-      - run: |
-          if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
-            echo "It worked!";
-          else
-            echo "Nope!"; exit 1
-          fi
-
-workflows:
-  version: 2
-
-  btd:
-    jobs:
+        run: |
+            if [[ `cat /tmp/workspace/echo-output` == "Hello, world!" ]]; then
+              echo "It worked!";
+            else
+              echo "Nope!"; exit 1
+            fi
+  flow: 
+    executor: my-executor
+    steps: 
+        run: "mkdir -p workspace"
+        run: "echo \"Hello, world!\" > workspace/echo-output"
+        persist_to_workspace: 
+          paths: 
+            - echo-output
+          root: workspace
+version: 2.1
+workflows: 
+  btd: 
+    jobs: 
       - flow
-      - downstream:
-          requires:
+        downstream: 
+          requires: 
             - flow
 ```
 
@@ -535,7 +521,6 @@ If you have implemented Workflows on a branch in your GitHub repository, but the
 Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
-
 
 ## See Also
 {:.no_toc}
