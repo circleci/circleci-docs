@@ -64,6 +64,32 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 ### Jobs
 Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given executor. [Workflows]() are then used to orchestrate one or many jobs.
 
+{:.tab.orbJob.Job}
+```yaml
+version: 2.1	version: 2.1
+orbs:
+  <orb>: <orb>/<namespace>@x.y #orb version
+workflows:
+  use-orb-job:
+    jobs:
+      - <orb>/<job-name>
+```
+
+{:.tab.orbJob.Source}
+{% raw %}
+```yaml
+executor: <executor> # Select an executor for your job
+parameters:
+  greeting:
+    type: string
+    default: "Hello"
+    description: "Select a proper greeting"
+steps:
+  - checkout
+  - <orb-command>
+```
+orbs:	{% endraw %}
+
 _[See: Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)._
 _[See Example: Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing)._
 
@@ -108,21 +134,41 @@ To avoid negatively impacting a user's CI process, all orb authors should strict
 **Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
 
 
-## Orb Versions (Development vs. Production)
+## Orb Versions (Development vs. Production vs Inline)
 
 ### Production Orbs
+
+Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/orbs/registry/).
 
   - Production orbs are immutable. They can not be deleted or edited. Updates must be provided in a new semver release.
   - Version string must be in semver format. `<namespace>/<orb>@1.2.3`
   - Production orbs may only be published by an owner of the namespace organization.
-  - Published to the Orb Registry
+  - Published to the Orb Registry.
+  - Open source, released under [MIT license](https://circleci.com/orbs/registry/licensing).
+  - Available via CircleCI CLI
 
 ### Development Orbs
+
+Development orbs are temporary overwrite-able orb tag versions, useful for rapid development and testing prior to deploying a semver deployed production change.
 
  - Development orbs automatically expire 90 days after they are published. Mutable and can be overwritten.
  - Version string must begin with `dev:` followed by any string. `<namespace>/<orb>@dev:my-feature-branch`
  - May be published by any member of the namespace organization.
- - Will not appear on the Orb Registry
+ - Will not appear on the Orb Registry.
+ - Open source, released under [MIT license](https://circleci.com/orbs/registry/licensing).
+ - Available via CircleCI CLI (if the development tag name is known)
+
+### Inline Orbs
+
+Inline orbs are defined directly within the user's config are completely local and scoped to the individual project.
+_[See: inline orbs](# Fix this later) for more information on types of namespaces._
+
+  - Not published to the orb service.
+  - No versioning.
+  - Exist only locally within the user's config.
+  - Not accessible outside of the repository.
+  - Not public.
+  - Not accessible via CLI
 
 
 ## Using Orbs Within Your Orb and Register-Time Resolution
