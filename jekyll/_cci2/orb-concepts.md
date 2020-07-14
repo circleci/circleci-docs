@@ -75,7 +75,7 @@ For example, the `circleci/rails` orb may coexist in the registry with an orb ca
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact your account team at CircleCI.
 
-By default, any created namespaces will appear as a "community" namespace on the [Orb Registry](https://circleci.com/orbs/registry/).
+By default, created namespaces appear as a "community" namespace in the [Orb Registry](https://circleci.com/orbs/registry/).
 
 _[See: Orb-Intro](https://circleci.com/orbs/registry/orb/circleci/node#executors-default) for more information on types of namespaces._
 
