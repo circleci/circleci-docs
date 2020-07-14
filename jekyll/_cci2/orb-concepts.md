@@ -7,19 +7,38 @@ categories: [getting-started]
 order: 1
 ---
 
-[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including jobs, commands, and executors. Orbs make writing and customizing CircleCI config simple.
-
-Ensure you have first read the [orb introduction]({{site.baseurl}}/2.0/reusing-config/).
-
+[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including jobs, commands, and executors. Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ## Reusable Configuration
 
-[Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) on CircleCI allows you to define parametrizable CircleCI configuration elements and re-use those elements. It is recommended to become familiar with our full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) features allow you to define parametrizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ### Commands
-Commands contain one or more [steps]() which can use [parameters]() to modify behavior. Commands are the logic of our orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code such as running BASH or running CLI tools.
+Commands contain one or more [steps]() in which [parameters]() can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example running BASH or running CLI tools.
 
-_[See: Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)._
+For more information see our guide to [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands).
+
+As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location. If your AWS authentication details are pre-stored as environment variables the syntax to use this command in your config is simply:
+
+```yaml
+version: 2.1
+
+orbs:
+  aws-s3: circleci/aws-s3€x.y.z
+
+jobs:
+  build:
+    docker:
+      - image: 'cimg/python:3.6'
+    steps:
+      - checkout
+      - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
+      - aws-s3/copy:
+          from: bucket/build_asset.txt
+          to: 's3://my-s3-bucket-name'
+
+... # workflows , other jobs etc.
+```
 
 ### Executors
 
@@ -29,7 +48,7 @@ Executors define the environment in which commands are run. CircleCI provides mu
   - Windows
   - Machine (Linux VM)
 
-In our [Node orb](https://circleci.com/orbs/registry/orb/circleci/node) for example, we provide users with a parameterized Docker based executor where the user may set the Docker tag. This allows the user to easily test their application against many version of Node.js when utilized by the Node orb's _[test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing)_.
+In the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which users can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing).
 
 ```yaml
 docker:
@@ -40,13 +59,10 @@ parameters:
     type: string
 ```
 
-_[See: Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors)._
-_[See Example: Node Orb Executor](https://circleci.com/orbs/registry/orb/circleci/node#executors-default)._
-
+For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/orbs/registry/orb/circleci/node#executors-default).
 
 ### Jobs
-Jobs are a definition of a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given executor. Users ultimately compose [Workflows]() which are comprised of one or many jobs.
-
+Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given executor. [Workflows]() are then used to orchestrate one or many jobs.
 
 _[See: Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)._
 _[See Example: Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing)._
