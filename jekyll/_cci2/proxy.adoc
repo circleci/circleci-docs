@@ -89,7 +89,7 @@ WARNING: When our instructions ask if you use a proxy, you will also be prompted
 
 ==== External Network Calls
 
-CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, along with jars from Amazon S3. Both `curl` and `awscli` respect environment settings, but if you have whitelisted traffic from Amazon S3 you should not have any problems.
+CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, along with jars from Amazon S3. Both `curl` and `awscli` respect environment settings, but if you have allowed traffic from Amazon S3 you should not have any problems.
 
 ==== Internal Network Calls
 
