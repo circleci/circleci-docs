@@ -69,7 +69,7 @@ _[See Example: Using Node Test Job](https://circleci.com/orbs/registry/orb/circl
 
 ## Namespaces
 
-A _namespace_ is a unique identifier claimed by a user or organization to group a set of orbs by author. Each user and organization may claim _one_ unique and immutable namespace name. Each namespace my contain main uniquely named orbs.
+A _namespace_ is a unique identifier claimed by a user or organization to group a set of orbs by author. Each user or organization can claim _one_ unique and immutable namespace. Each namespace can contain many uniquely named orbs.
 
 For example, the `circleci/rails` orb may coexist in the registry with an orb called `<username>/rails` because they are in separate namespaces.
 
