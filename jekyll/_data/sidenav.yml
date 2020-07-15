@@ -98,7 +98,7 @@ en:
         - name: Orb Introduction
           link: 2.0/orb-intro/
         - name: Orbs Concepts
-          link: 2.0/using-orbs/
+          link: 2.0/orb-concepts/
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
     - name: Authoring Orbs
