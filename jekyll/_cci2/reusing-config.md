@@ -38,7 +38,7 @@ A reusable command may have the following immediate child keys as a map:
 Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
 
 
-### **The `commands` Key** 
+### **The `commands` Key**
 
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
@@ -198,7 +198,7 @@ jobs:
 
 **Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
 
-## **`executors`** 
+## **`executors`**
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -266,7 +266,7 @@ jobs:
     executor: lein_exec
     steps:
       - checkout
-      - run: echo "hello world"  
+      - run: echo "hello world"
   test:
     executor: lein_exec
     environment:
@@ -334,7 +334,7 @@ executors:
     environment:
       ENV: ci
       TESTS: all
-    shell: /bin/bash    
+    shell: /bin/bash
     working_directory: ~/project
 jobs:
   build:
@@ -417,7 +417,7 @@ A parameter can have the following keys as immediate children:
 ### Parameter Types
 {:.no_toc}
 
-This section describes the types of parameters and their usage. 
+This section describes the types of parameters and their usage.
 
 The parameter types supported by orbs are:
 * `string`
@@ -791,7 +791,7 @@ jobs:
     executor:
       name: python
       tag: "2.7"
-      myspecialvar: "myspecialvalue"  
+      myspecialvar: "myspecialvalue"
 ```
 
 The above would resolve to the following:
@@ -971,6 +971,39 @@ Key | Required | Type | Description
 condition | Y | Logic | [A logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)
 steps |	Y |	Sequence |	A list of steps to execute when the condition is falsy.
 {: class="table table-striped"}
+
+## Writing Inline Orbs
+
+Similar to defining reusable configuration elements directly within your config, you may always wrap those elements within an inline orb. Inline orbs may be useful for development or for name-spacing elements that share names in a local config.
+
+To write inline orbs, place the orb elements under that orb’s key in the orbs declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
+
+```yaml
+version: 2.1
+
+orbs:
+  my-orb:
+    orbs:
+      node: circleci/node@3.0
+    commands:
+      my_command:
+        steps:
+          - run: echo "Run my tests"
+    jobs:
+      my_job:
+        executor: node/default # Node orb executor
+        steps:
+          - checkout
+          - my_command
+          - store_test_results:
+              path: test-results
+
+workflows:
+  main:
+    jobs:
+      - my-orb/my_job
+
+```
 
 ## See Also
 
