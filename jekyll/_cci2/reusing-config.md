@@ -974,7 +974,7 @@ steps |	Y |	Sequence |	A list of steps to execute when the condition is falsy.
 
 ## Writing Inline Orbs
 
-Similar to defining reusable configuration elements directly within your config, you may always wrap those elements within an inline orb. Inline orbs may be useful for development or for name-spacing elements that share names in a local config.
+When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
 
 To write inline orbs, place the orb elements under that orb’s key in the orbs declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
