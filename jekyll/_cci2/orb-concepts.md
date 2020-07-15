@@ -64,34 +64,19 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 ### Jobs
 Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given executor. [Workflows]() are then used to orchestrate one or many jobs.
 
-{:.tab.orbJob.Job}
 ```yaml
-version: 2.1	version: 2.1
+version: 2.1
+
 orbs:
   <orb>: <orb>/<namespace>@x.y #orb version
+
 workflows:
   use-orb-job:
     jobs:
       - <orb>/<job-name>
 ```
 
-{:.tab.orbJob.Source}
-{% raw %}
-```yaml
-executor: <executor> # Select an executor for your job
-parameters:
-  greeting:
-    type: string
-    default: "Hello"
-    description: "Select a proper greeting"
-steps:
-  - checkout
-  - <orb-command>
-```
-orbs:	{% endraw %}
-
-_[See: Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)._
-_[See Example: Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing)._
+See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
 
 ## Namespaces
 
@@ -101,7 +86,7 @@ For example, the `circleci/rails` orb may coexist in the registry with an orb ca
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact your account team at CircleCI.
 
-By default, created namespaces appear as a "community" namespace in the [Orb Registry](https://circleci.com/orbs/registry/).
+By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/orbs/registry/).
 
 _[See: Orb-Intro](https://circleci.com/orbs/registry/orb/circleci/node#executors-default) for more information on types of namespaces._
 
