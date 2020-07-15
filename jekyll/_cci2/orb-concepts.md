@@ -85,13 +85,16 @@ Orbs utilize the [semver](https://semver.org/) release process, in which each or
 
 In Semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
 
-`[Major].[Minor].[Patch]`
+```
+[Major].[Minor].[Patch]
+```
 
 | Semver  | Description |
 | ------------- | ------------- |
 | Major | Breaking changes.  |
 | Minor  | Backwards compatible additional features.  |
 | Patch  | Bug fixes |
+{: class="table table-striped"}
 
 When users import an orb, they may pin to a particular semver component.
 
@@ -101,35 +104,31 @@ When users import an orb, they may pin to a particular semver component.
 | 1.2  | Locked to major version `1`, minor version `2`, will receive all patch updates.  |
 | 1 | Locked to major version `1`. Will receive all minor and patch updates. Major version will not change automatically.|
 | volatile | **Not Recommended** Will pull the last published version of the orb, may be useful in testing. Not a part of semver versioning.|
+{: class="table table-striped"}
 
 To avoid negatively impacting a user's CI process, all orb authors should strictly adhere to semver versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
 
-
 **Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
-
 
 ## Orb Versions (Development vs. Production)
 
 ### Production Orbs
 
-  - Production orbs are immutable. They can not be deleted or edited. Updates must be provided in a new semver release.
-  - Version string must be in semver format. `<namespace>/<orb>@1.2.3`
-  - Production orbs may only be published by an owner of the namespace organization.
-  - Published to the Orb Registry
+- Production orbs are immutable. They cannot be deleted or edited. Updates must be provided in a new semver release
+- Version string must be in semver format, for example, `<namespace>/<orb>@1.2.3`
+- Production orbs can only be published by an owner of the namespace organization
+- Published to the Orb Registry
 
 ### Development Orbs
 
- - Development orbs automatically expire 90 days after they are published. Mutable and can be overwritten.
- - Version string must begin with `dev:` followed by any string. `<namespace>/<orb>@dev:my-feature-branch`
- - May be published by any member of the namespace organization.
- - Will not appear on the Orb Registry
-
+- Development orbs are mutable, can be overwritten, and automatically expire 90 days after they are published
+- Version string must begin with `dev:` followed by any string, for example, `<namespace>/<orb>@dev:my-feature-branch`
+- May be published by any member of the namespace organization
+- Will not appear on the Orb Registry
 
 ## Using Orbs Within Your Orb and Register-Time Resolution
 
-You may also use an orbs stanza inside an orb.
-
-Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
+An orbs stanza can be used inside an orb. Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
 
 For example, orb `foo/bar` is published at version 1.2.3 with an orbs stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
 
