@@ -79,7 +79,7 @@ version: 2.1
 jobs:
   myjob:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: "cimg/base:stable"
     steps:
       - sayhello:
           to: "Lev"
@@ -246,34 +246,48 @@ jobs:
 
 It is also possible to allow an orb to define the executor used by all of its commands. This allows users to execute the commands of that orb in the execution environment defined by the orb's author.
 
-### Example of Using an Executor Declared in config.yml in Multiple Jobs
+### Example of Using an Executor Declared in `config.yml` with Matrix Jobs.
 {:.no_toc}
 
-The following example declares and invokes an executor in two jobs that need to run in the same Docker image and working directory with a common set of environment variables. Each job has distinct steps, but runs in the same environment.
+The following example declares a Docker executor with a node image. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in our `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
+
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js
+
 
 ```yaml
 version: 2.1
 executors:
-  lein_exec: # declares a reusable executor
+  node-docker: # declares a reusable executor
+    parameters:
+      version:
+        description: "version tag"
+        default: "lts"
+        type: string
     docker:
-      - image: clojure:lein-2.8.1
-    working_directory: ~/project
-    environment:
-      MYSPECIALVAR: "my-special-value"
-      MYOTHERVAR: "my-other-value"
+      - image: cimg/node:<<parameters.version>>
 jobs:
-  build:
-    executor: lein_exec
-    steps:
-      - checkout
-      - run: echo "hello world"
   test:
-    executor: lein_exec
-    environment:
-      TESTS: unit
+    parameters:
+      version:
+        description: "version tag"
+        default: "lts"
+        type: string
+    executor:
+      name: node-docker
+      version: <<parameters.version>>
     steps:
       - checkout
       - run: echo "how are ya?"
+workflows:
+  matrix-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              version:
+                - 13.11.0
+                - 12.16.0
+                - 10.19.0
 ```
 
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
@@ -296,7 +310,7 @@ version: 2.1
 executors:
   bar:
     docker:
-      - image: clojure:lein-2.8.1
+      - image: cimg/base:stable
 ```
 
 You may use either executor from your configuration file with:
@@ -322,29 +336,24 @@ jobs:
 
 When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. For example, if you had the following configuration:
+**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used.
 
 ```yaml
 version: 2.1
 executors:
-  python:
+  node:
     docker:
-      - image: python:3.7.0
-      - image: rabbitmq:3.6-management-alpine
+      - image: cimg/node:lts
     environment:
-      ENV: ci
-      TESTS: all
-    shell: /bin/bash
-    working_directory: ~/project
+     ENV: ci
 jobs:
   build:
     docker:
-      - image: python:2.7.15
-      - image: postgres:9.6
-    executor: python
-    environment:
-      TESTS: unit
-    working_directory: ~/tests
+      - image: cimg/base:stable
+    # The test executor below will be overwritten by the more explicit "docker" executor. Any env vars will be added.
+    executor: node
+    steps:
+      - run: echo "Node will not be installed."
 ```
 
 The above config would resolve to the following:
@@ -352,52 +361,43 @@ The above config would resolve to the following:
 ```yaml
 version: 2.1
 jobs:
- build:
-   steps: []
-   docker:
-     - image: python:2.7.15    # From job
-     - image: postgres:9.6     # From job
-   environment:                # Merged:
-     ENV: ci                     # From executor
-     TESTS: unit                 # From job
-   shell: /bin/bash            # From executor
-   working_directory: ~/tests  # From job
+  build:
+    docker:
+      - image: cimg/base:stable
+    environment:
+     ENV: ci       # From executor.
+    steps:
+      - run: echo "Node will not be installed."
 ```
 
 ## Using the `parameters` Declaration
 
 Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map.
 
-The following example defines a command called `sync`:
+In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo _Hello_ back to the user.
 
 ```yaml
 version: 2.1
 commands: # a reusable command with parameters
-  sync:
-    parameters:
-      from:
-        type: string
-      to:
-        type: string
-      overwrite:
-        default: false
-        type: boolean
-    steps:
-      - run: # a parameterized run step
-          name: Deploy to S3
-          command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
-executors: # a reusable executor
-  aws:
-    docker:
-      - image: cibuilds/aws:1.15
-jobs: # a job that invokes the `aws` executor and the `sync` command
-  deploy2s3:
-    executor: aws
-    steps:
-      - sync:
-          from: .
-          to: "s3://mybucket_uri"
-          overwrite: true
+   greeting:
+      parameters:
+         to:
+           default: "world"
+           type: string
+      steps:
+         - run: echo "Hello <<parameters.to>>"
+jobs:
+   my-job:
+      docker:
+         - image: cimg/base:stable
+      steps:
+         - greeting:
+            to: "My-Name"
+workflows:
+   my-workflow:
+      jobs:
+         - my-job        
+         
 ```
 
 **Note:** The `parameters` declaration is available in configuration version 2.1 and later.
@@ -783,7 +783,7 @@ executors:
       myspecialvar:
         type: string
     docker:
-      - image: circleci/python:<< parameters.tag >>
+      - image: cimg/python:<< parameters.tag >>
     environment:
       MYPRECIOUS: << parameters.myspecialvar >>
 jobs:
@@ -802,7 +802,7 @@ jobs:
   build:
     steps: []
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:3.8
     environment:
       MYPRECIOUS: "myspecialvalue"
 ```
