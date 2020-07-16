@@ -251,7 +251,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 
 The following example declares a Docker executor with a node image. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in our `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job from the workflow, we can take advantage of [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) to run your job multiple times in parallel with a different set of parameters. In this instance, we may test our node application against many version of Node.js
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js
 
 
 ```yaml
