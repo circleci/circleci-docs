@@ -10,7 +10,7 @@ This section describes how SSH reruns work within installations of CircleCI Serv
 == Rerunning a Job with SSH
 For an overview of the purpose of SSH reruns in CircleCI, see the <<ssh-access-jobs#,Debugging with SSH guide>>. The image below describes the IP addresses and ports used to restart jobs within VMs and containers when a rerun with SSH is requested.
 
-The default situation for a Server installation with no customizations is for the IP address to correctly configure the rerun to be taken from AWS metadata. If any networking customizations are made to the installation from the default `/etc/circleci/public-ipv4` should be created on each Nomad Client and this should be populated with the public (if applicable) or private IP of the Nomad Client.
+The default situation for a Server installation with no customizations is for the IP address to correctly configure the rerun to be taken from AWS metadata. If any networking customizations are made to the installation from the default, then `/etc/circleci/public-ipv4` should be created on each Nomad Client and this should be populated with the public (if applicable) or private IP of the Nomad Client.
 
 .SSH Rerun Architecture
 image::SSH-server.png[SSH Rerun Architecture]
