@@ -249,7 +249,7 @@ It is also possible to allow an orb to define the executor used by all of its co
 ### Example of Using an Executor Declared in `config.yml` with Matrix Jobs.
 {:.no_toc}
 
-The following example declares a docker based executor which contains a node image with the tag portion of the image string parameterized with a `version` parameter. Further, in our `test` job, we similarly included a version parameter so that it may be "passed through" the job into the executor when we call it from a workflow.
+The following example declares a Docker executor with a node image. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in our `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
 When calling the `test` job from the workflow, we can take advantage of [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) to run your job multiple times in parallel with a different set of parameters. In this instance, we may test our node application against many version of Node.js
 
