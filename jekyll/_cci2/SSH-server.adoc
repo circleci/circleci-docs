@@ -4,6 +4,7 @@
 :icons: font
 :toc: macro
 :toc-title:
+:sectanchors:
 
 This section describes how SSH reruns work within installations of CircleCI Server. This information is designed to help system administrators have an overview of the processes involved to help with considerations when customizations are made to an installation, and to help with debugging in the event of a problem.
 
