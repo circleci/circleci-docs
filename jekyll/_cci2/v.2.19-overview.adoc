@@ -31,7 +31,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 ** On all Nomad Client machine, create `/etc/circleci/public-ipv4`
 ** This file should contain the public (if applicable) or private IP of the nomad client
 +
-For more information on SSH reruns in Server installations, see <<ssh-server#,SSH Rerun Architecture in Server>> guide.
+For more information on SSH reruns in Server installations, see <<ssh-server#rerunning-a-job-with-ssh,SSH Rerun Architecture in Server>> guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
 
