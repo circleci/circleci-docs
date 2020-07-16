@@ -68,11 +68,15 @@ If you find you need to rename an org or repo that you have previously hooked up
       run-tests:
         docker:
           - image: cimg/base:2020.01
+          - image: ${ECR_ENDPOINT}/company/image:2020.01
         steps:
           - checkout
           - run: 
               name: "echo environment variables from org-global context"
               command: echo $MY_ENV_VAR  
+          - run: 
+              name: "variables from org-global context can be also interpolated"
+              command: echo ${ECR_ENDPOINT}  
     ```
 
 ### Moving a Repository that Uses a Context
