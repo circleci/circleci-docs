@@ -374,7 +374,7 @@ jobs:
 
 Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map.
 
-The following example a command named `greeting` is designed with a single parameter named `to`. the `to` parameter is used within the steps to echo _"hello"_ back to the user.
+In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo _Hello_ back to the user.
 
 ```yaml
 version: 2.1
