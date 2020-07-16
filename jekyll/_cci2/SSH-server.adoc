@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-This section describes how SSH reruns work within installations of CircleCI Server. This information is designed to help system administrators have an overview of the processes involved to help with considerations when customizations are made to an installation, and to help with debugging in the event of a problem.
+This section describes how SSH reruns work within installations of CircleCI Server. This information is designed to help system administrators have an overview to help with considerations when customizations are made to an installation. This guide is also here to help with debugging in the event of a problem with SSH reruns in an installation.
 
 == Rerunning a Job with SSH
 For an overview of the purpose of SSH reruns in CircleCI, see the <<ssh-access-jobs#,Debugging with SSH guide>>. The image below describes the IP addresses and ports used to restart jobs within VMs and containers when a rerun with SSH is requested.
