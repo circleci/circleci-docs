@@ -25,7 +25,7 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** Can orbs be used on a private installation of CircleCI server?
 
-* **Answer:** CircleCI Server does not yet support orbs natively. However, if you process your config prior to committing, orbs can be translated and used. We have put together a guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264)
+* **Answer:** CircleCI Server does not yet support orbs natively. However, if you process your config prior to committing, orbs can be translated and used. Follow this guide on using git pre-commit hooks to [use orbs on server](https://discuss.circleci.com/t/orbs-on-server-solution/36264).
 
 ## Report an issue with an orb
 
