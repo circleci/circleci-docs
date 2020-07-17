@@ -260,9 +260,9 @@ using a single machine at the default rate of 10 credits per minute. The same pa
 {:.no_toc}
 Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
 
-On non-free plans, you can share your plan with other users and organizations using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
+On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. All orgs you have shared your plan with will then be listed on the Share & Transfer page and child organizations will bill all credits and other usage to the parent org.
 
-On non-free plans, you can transfer your plan to another organization using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
+On non-free plans, you can transfer your plan to another free organization for which you have admin access using the `Transfer Plan` option. When you transfer a paid plan to another org, your org will be downgraded to the free plan.
 
 #### If a container is used for under one minute, do I have to pay for a full minute?
 {:.no_toc}
@@ -314,7 +314,7 @@ example, If your monthly package size is 25,000 credits, you will automatically
 be refilled 6,250 credits (at $.0006 each, not including applicable taxes) when
 you reach 2,500 remaining credits.
 
-If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`.
+If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
 
 #### Do credits expire?
 {:.no_toc}
