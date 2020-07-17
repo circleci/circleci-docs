@@ -72,26 +72,26 @@ workflows:
 
 The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and publishing your own.
 
-[picture]
+![Orb Registry]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
 
-Orbs on the registry will appear with one of three different namespace designations:
+Orbs in the registry will appear with one of three different namespace designations:
 
-| Certified   | Written and tested by the CircleCI team  |
-| Partner  | Written by our technology partners  |
-| Community | Written by the community  |
+| Certified | Written and tested by the CircleCI team |
+| Partner | Written by our technology partners |
+| Community | Written by the community |
 {: class="table table-striped"}
 
 **Note:** _In order to use uncertified orbs, your organization’s administrator must opt-in to allow 3rd-party uncertified orb usage on the **Organization Settings > Security** page for your org._
 
-Each orb will contain its own description and documentation listed in the orb registry. Orbs may also have a set of usage examples to get you started.
+Each orb contains its own description and documentation listed in the orb registry. Often, orbs will have a set of usage examples to get you started.
 
-If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link
+If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
 
 ## How to use orbs
 
-Each orb within the orb registry will provide a sample code snippet for importing that specific orb, with its most recent version.
+Each orb within the registry provides a sample code snippet for importing that specific orb, with its most recent version.
 
-To import an orb within your `version: 2.1` config file, create an `orbs` key and under this a key to reference the orb you wish to import. This will be the name we will later reference in the config to use the orb's elements. Enter the orb slug containing the version string for the value of the orb name.
+To import an orb within your `version: 2.1` config file, create an `orbs` key followed by the key to reference the orb you wish to import, the orb name. Enter the orb slug containing the version string for the value of the orb name key.
 
 ```yaml
 version: 2.1
@@ -100,10 +100,10 @@ orbs:
   orb-name: <namespace>/<orb-name>@1.2.3
 ```
 
-Once imported, the config elements provided by the orb will be available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/).
+Once imported into the configuration, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements.
 
-**Example:**
-The Node orb provides a command, [`install-packages`](https://circleci.com/orbs/registry/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, you can reference it in your list of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
+### Node Example
+The Node orb provides a command, [`install-packages`](https://circleci.com/orbs/registry/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
 
 ```yaml
 version: 2.1
