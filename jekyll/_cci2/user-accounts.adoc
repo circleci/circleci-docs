@@ -1,8 +1,7 @@
-= Managing User Accounts
+= Managing User Accounts in Server Installations
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
-:source-highlighter: pygments.rb
 :toc: macro
 :toc-title:
 

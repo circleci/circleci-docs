@@ -356,6 +356,8 @@ en:
           link: 2.0/usage-stats/
         - name: JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
+        - name: SSH Reruns
+          link: 2.0/ssh-server/
         - name: Maintenance
           link: 2.0/ops/
         - name: Backup and Recovery
