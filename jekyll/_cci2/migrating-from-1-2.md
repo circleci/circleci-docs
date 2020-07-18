@@ -92,7 +92,9 @@ See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2
      
 7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) document for details.
 
-8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
+8.Convert your YAML to JSON :<https://www.yamlonline.com/> 
+
+9. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
 ## Environment Variables
 
