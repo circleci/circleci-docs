@@ -163,7 +163,7 @@ and copy and paste the following text into it.
           - image: circleci/ruby:2.4.1 # specifically, a docker image with ruby 2.4.1
         # Steps are a list of commands to run inside the docker container above.
         steps:
-          - checkout # this pulls pulls code down from GitHub
+          - checkout # this pulls code down from GitHub
           - run: echo "A first hello" # This prints "A first hello" to stdout.
           - run: sleep 25 # a command telling the job to "sleep" for 25 seconds.
       two: # This is our second job.
