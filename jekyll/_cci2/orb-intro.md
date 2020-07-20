@@ -13,10 +13,6 @@ CircleCI orbs are open-source, shareable packages of parameterizable _[reusable 
 
 Published orbs can be found on our [Orb Registry](https://circleci.com/orbs/registry/), or you can [author your own]()!
 
-An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version](https://semver.org/) string, identifying which version of the orb is being used.
-
-Example orb slug: `<namespace>/<orb-name>@1.2.3`
-
 ## Why use Orbs?
 
 Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows how we may typically test a Node.js application by defining a job ourselves with the required steps for testing our application, versus using the `test` job provided by the [`circleci/node`](https://circleci.com/orbs/registry/orb/circleci/node) orb.
@@ -68,7 +64,7 @@ workflows:
 ```
 {% endraw %}
 
-## Orb Registry
+## The Orb Registry
 
 The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and publishing your own.
 
@@ -87,7 +83,12 @@ Each orb contains its own description and documentation listed in the orb regist
 
 If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
 
-## How to use orbs
+## Identifying Orbs
+An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version](https://semver.org/) string, identifying which version of the orb is being used.
+
+Example orb slug: `<namespace>/<orb-name>@1.2.3`
+
+## Using orbs
 
 Each orb within the registry provides a sample code snippet for importing that specific orb, with its most recent version.
 
