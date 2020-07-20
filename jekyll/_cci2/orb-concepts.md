@@ -16,7 +16,7 @@ CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) featur
 ### Commands
 Commands contain one or more [steps]() in which [parameters]() can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running BASH or running CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
 
-As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
+As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
 
 ```yaml
 version: 2.1
