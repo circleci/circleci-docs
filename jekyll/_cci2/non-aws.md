@@ -1,9 +1,9 @@
 ---
 layout: classic-docs
-title: "Using the Static Installation Scripts"
+title: "CircleCI Server Static Installation"
 category: [administration]
 order: 1
-description: "Using CircleCI 2.0 static installation scripts."
+description: "Using CircleCI Server in non-AWS environments."
 hide: false
 ---
 
