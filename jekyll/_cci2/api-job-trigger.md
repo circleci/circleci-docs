@@ -21,7 +21,7 @@ This document describes how to trigger jobs using the CircleCI API.
 
 ## Overview
 
-Use the [CircleCI API](https://circleci.com/docs/api/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
+Use the [CircleCI API](https://circleci.com/docs/api/v1/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
 
 The following example shows how to trigger the `deploy_docker` job by using `curl`.
 
@@ -38,7 +38,7 @@ Some notes on the variables used in this example:
 - `<repo>` is a placeholder variable and refers to the name of your repository.
 - `<branch>` is a placeholder variable and refers to the name of your branch.
 
-For a complete reference of the API, see the [CircleCI API Documentation](https://circleci.com/docs/api/#section=reference).
+For a complete reference of the API, see the [CircleCI API Documentation](https://circleci.com/docs/api/v2/#section=reference).
 
 **Important Considerations When Triggering A Job Via The API**
 
@@ -47,7 +47,7 @@ For a complete reference of the API, see the [CircleCI API Documentation](https:
 - Jobs that are triggered via the API do **not** have access to environment variables created for [a CircleCI Context]({{ site.baseurl }}/2.0/contexts/)
 - If you wish to use environment variables they have to be defined at the [Project level]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)
 - It is currently not possible to trigger a single job if you are using CircleCI 2.1 and Workflows
-- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API, using the [Trigger a Build by Project](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview) endpoint
+- It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API: a [singular workflow can be re-run](https://circleci.com/docs/api/v2/#rerun-a-workflow), or you may [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) which will run its subsequent workflows. 
 
 ## Conditionally Running Jobs With the API
 

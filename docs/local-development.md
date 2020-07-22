@@ -140,7 +140,7 @@ Note that you'll need the command-line tool [jq](https://stedolan.github.io/jq/)
 Our API is handled in two possible places currently:
 - [Old version](https://circleci.com/docs/api/v1-reference/) - This currently
   accessible via the CircleCI landing page > Developers Dropdown > "Api"
-- [New Version using Slate](https://circleci.com/docs/api/#section=reference) -
+- [New Version using Slate](https://circleci.com/docs/api/v1/#section=reference) -
   A newer API guide, built with [Slate](https://github.com/lord/slate)
   
 **What is Slate?**
