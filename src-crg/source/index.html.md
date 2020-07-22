@@ -1,13 +1,13 @@
 ---
-title: CircleCI 2.1 Configuration Reference Guide
+title: CircleCI 2.1 Reference
 
 language_tabs:
-  - shell
+  - yaml
 
 search: true
 ---
 
-# CircleCI 2.1 Configuration Reference Guide
+# CircleCI 2.1 Reference
 
 ## Overview
 
