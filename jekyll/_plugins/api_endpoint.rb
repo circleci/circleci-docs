@@ -45,12 +45,12 @@ module Jekyll
     def curl_params(endpoint)
       params = endpoint['params']
       if params and (endpoint['method'] == 'GET')
-        '&' + params.map {|param| "#{param['name']}=#{param['example']}"}.join('&')
+        '?' + params.map {|param| "#{param['name']}=#{param['example']}"}.join('&')
       end
     end
 
     def api_curl(endpoint)
-      "curl #{curl_args_padded(endpoint)}https://circleci.com#{endpoint['url']}?circle-token=:token#{curl_params(endpoint)}"
+      "curl -u <circle-token>: #{curl_args_padded(endpoint)}https://circleci.com#{endpoint['url']}#{curl_params(endpoint)}"
     end
 
     def params(params)

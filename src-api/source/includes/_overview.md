@@ -48,7 +48,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 ## Add an API Token
 
 ```sh
-$ curl https://circleci.com/api/v1.1/me?circle-token=:token
+$ curl -u <circle-token>: https://circleci.com/api/v1.1/me
 ```
 
 
@@ -76,21 +76,22 @@ All API calls are made in the same way, by making standard HTTP calls, using JSO
 
 ## Get Authenticated
 
-```sh
-curl "https://circleci.com/api/v1.1/me?circle-token=:token"
-```
-
 ```sh 
 curl -u <circle-token>: "https://circleci.com/api/..."
 ```
 
-To be authenticated by the API server, add an API token using your [account dashboard](https://circleci.com/account/api). To use the API token, add it to the `circle-token` query param:
+```sh
+curl -u <circle-token>: "https://circleci.com/api/v1.1/me
+```
+You can add the API token using your [account dashboard](https://circleci.com/account/api).
 
-Alternatively, you can use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
+To be authenticated by the API server, use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command:
 
 <aside class="notice">
 the colon ":" tells curl that there's no password.
 </aside>
+
+DEPRECATED (this option will be removed in the future): The API token can be added to the `circle-token` query param instead:
 
 ## Version Control Systems (:vcs-type)
 
@@ -122,7 +123,7 @@ In both cases, builds are returned in the order that they were created. For all 
 ## Accept Header
 
 ```sh
-curl https://circleci.com/api/v1.1/me?circle-token=:token -H "Accept: application/json"
+curl -u <circle-token>: https://circleci.com/api/v1.1/me -H "Accept: application/json"
 ```
 
 If no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To recieve the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.

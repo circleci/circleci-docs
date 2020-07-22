@@ -7,7 +7,7 @@ The sections below describe the endpoints you may call to return Project informa
 ## Get All Followed Projects
 
 ```sh
-curl https://circleci.com/api/v1.1/projects?circle-token=:token
+curl -u <circle-token>: https://circleci.com/api/v1.1/projects
 ```
 
 ```json
@@ -56,7 +56,7 @@ Returns an array of all projects you are currently following on CircleCI, with b
 ## Follow a New Project on CircleCI
 
 ```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/follow?circle-token=:token
+curl -u <circle-token>: -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/follow
 ```
 
 ```json
@@ -177,7 +177,7 @@ shallow | An optional boolean parameter that may be sent to improve performance 
 ## Recent Builds For A Single Project
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token&limit=20&offset=5&filter=completed
+curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?limit=20&offset=5&filter=completed
 ```
 
 >**Note:** You can narrow the builds to a single branch by appending /tree/:branch to the url. Note that the branch name should be url-encoded.
@@ -294,7 +294,7 @@ The example to the right shows a user request for recent build information. Noti
 **`DELETE` Request:** Clears the cache for a project.
 
 ```sh
-curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build-cache?circle-token=:token
+curl -u <circle-token>: -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build-cache
 ```
 
 ```json

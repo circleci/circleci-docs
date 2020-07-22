@@ -2,7 +2,7 @@
 
 
 ```sh
-curl https://circleci.com/api/v1.1/me?circle-token=:token
+curl -u <circle-token>: https://circleci.com/api/v1.1/me
 ```
 
 ```json

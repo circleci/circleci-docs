@@ -3,7 +3,7 @@
 ## Single Job
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num?circle-token=:token
+curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num
 ```
 
 ```json
@@ -94,7 +94,7 @@ This is also the payload for the notification webhooks, in which case this objec
 ## Retry a Build
 
 ```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry?circle-token=:token
+curl -u <circle-token>: -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/retry
 
 ```
 
@@ -136,7 +136,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 
 
 ```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users?circle-token=:token
+curl -u <circle-token>: -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/ssh-users
 ```
 
 ```text
@@ -149,7 +149,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 ## Cancel a Build
 
 ```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/cancel?circle-token=:token
+curl -u <circle-token>: -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/cancel
 ```
 
 ```json
@@ -188,7 +188,7 @@ curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/
 
 ## Trigger a new Job
 ```sh
-curl -X POST --header "Content-Type: application/json" -d '{
+curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{
   "tag": "v0.1", // optional
   "parallel": 2, //optional, default null
   "build_parameters": { // optional
@@ -196,7 +196,7 @@ curl -X POST --header "Content-Type: application/json" -d '{
   }
 }
 
-https://circleci.com/api/v1.1/project/:vcs-type/:username/:project?circle-token=:token
+https://circleci.com/api/v1.1/project/:vcs-type/:username/:project
 ```
 
 ```json
@@ -289,7 +289,7 @@ build_parameters | Additional environment variables to inject into the build env
 ## Trigger a new Job with a Branch
 
 ```sh
-curl -X POST --header "Content-Type: application/json" -d '{
+curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{
   "parallel": 2, //optional, default null
   "revision": "f1baeb913288519dd9a942499cef2873f5b1c2bf" // optional
   "build_parameters": { // optional
@@ -297,7 +297,7 @@ curl -X POST --header "Content-Type: application/json" -d '{
   }
 }
 
-https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch?circle-token=:token
+https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 ```
 
 ```json
@@ -390,7 +390,7 @@ build_parameters | Additional environment variables to inject into the build env
 ## Trigger a new Build by Project (preview)
 
 ```sh
-curl -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build?circle-token=:token
+curl -u <circle-token>: -X POST https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build
 ```
 
 ```json
@@ -418,7 +418,7 @@ tag | The git tag to build. Cannot be used with branch and revision parameters.
 ## Get Build Test Metadata
 
 ```sh
-curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/tests?circle-token=:token
+curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/tests
 ```
 
 ```json
