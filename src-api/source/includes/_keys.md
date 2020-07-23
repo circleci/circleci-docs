@@ -3,7 +3,7 @@
 ## List Checkout Keys
 
 ```sh
-curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -20,7 +20,7 @@ curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:usernam
 ## New Checkout Key
 
 ```sh
-curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"type":"github-user-key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key
+curl -X POST --header "Content-Type: application/json" -d '{"type":"github-user-key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -42,7 +42,7 @@ type | The type of key to create. Can be 'deploy-key' or 'github-user-key'.
 ## Get Checkout Key
 
 ```sh
-curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -61,7 +61,7 @@ curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:usernam
 **`DELETE` Request:** Deletes the checkout key.
 
 ```sh
-curl -u <circle-token>: -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint
+curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/checkout-key/:fingerprint -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -73,7 +73,7 @@ curl -u <circle-token>: -X DELETE https://circleci.com/api/v1.1/project/:vcs-typ
 **`POST` Request:** Creates an SSH key that will be used to access the external system identified by the hostname parameter for SSH key-based authentication.
 
 ```sh
-curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname","private_key":"RSA private key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key
+curl -X POST --header "Content-Type: application/json" -d '{"hostname":"hostname","private_key":"RSA private key"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key -H 'Circle-Token: <circle-token>'
 ```
 
 ```
@@ -83,7 +83,7 @@ curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"
 ## Delete SSH Key
 
 ```sh
-curl -u <circle-token>: -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fingerprint", "hostname":"Hostname"} https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key
+curl -X DELETE --header "Content-Type: application/json" -d {"fingerprint":"Fingerprint", "hostname":"Hostname"} https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/ssh-key -H 'Circle-Token: <circle-token>'
 ```
 
 ```
@@ -98,7 +98,7 @@ curl -u <circle-token>: -X DELETE --header "Content-Type: application/json" -d {
 **`POST` Request:** Adds your Heroku API key to CircleCI and then takes `apikey` as form param name.
 
 ```sh
-curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"apikey":"Heroku key"}' https://circleci.com/user/heroku-key
+curl -X POST --header "Content-Type: application/json" -d '{"apikey":"Heroku key"}' https://circleci.com/user/heroku-key -H 'Circle-Token: <circle-token>'
 ```
 
 ```

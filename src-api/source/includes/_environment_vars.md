@@ -3,7 +3,7 @@
 ## List Environment Variables
 
 ```sh 
-curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar -H 'Circle-Token: <circle-token>'
 ```
 
 ```json 
@@ -15,7 +15,7 @@ curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:usernam
 ## Add Environment Variables
 
 ```sh 
-curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value":"bar"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
+curl -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value":"bar"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -27,7 +27,7 @@ curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"
 ## Get Single Environment Variable
 
 ```sh 
-curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -39,7 +39,7 @@ curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:usernam
 ## Delete Environment Variables
 
 ```sh
-curl -u <circle-token>: -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
+curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name -H 'Circle-Token: <circle-token>'
 ```
 
 ```json

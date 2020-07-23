@@ -3,7 +3,7 @@
 ## Artifacts Of A Build
 
 ```sh
-curl -H'Circle-Token: :token' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
@@ -35,7 +35,7 @@ Request Type: `GET`
 You can download an individual artifact file via the API with an API-token authenticated HTTP request.
 
 ```sh
-curl -L -H'Circle-Token: :token' https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt
+curl -L https://132-55688803-gh.circle-artifacts.com/0//tmp/circle-artifacts.7wgAaIU/file.txt -H 'Circle-Token: <circle-token>' 
 ```
 
 ### Notes
@@ -46,7 +46,7 @@ an HTTP `3xx` status code (the `-L` switch in `curl` will achieve this).
 ## Artifacts of the latest Build
 
 ```sh
-curl -H'Circle-Token: :token' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?branch=:branch&filter=:filter
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?branch=:branch&filter=:filter -H 'Circle-Token: <circle-token>'
 ```
 
 ```json
