@@ -71,11 +71,12 @@ version: 2.1
 
 orbs:
   # import development version of orb
-  my-orb: my-namespace/my-orb@dev:my-dev-version 
+  my-orb: my-namespace/my-orb@dev:my-dev-version
 
-jobs: # create jobs for each test
+jobs:
+  # create jobs for each test
   test-my_command:
-    docker:
+      docker:
       - image: cimg/base:stable
     steps:
       - my-orb/my_command:  # Invoking the orb command from the development orb
@@ -86,7 +87,7 @@ jobs: # create jobs for each test
             if [ "$ITWORKED" != "yes" ]; then
             echo "error" && exit 1
             fi
-
+            
 workflows:
   main:
     jobs:
