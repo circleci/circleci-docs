@@ -22,8 +22,9 @@ build_api_v2() {
     node node_modules/widdershins/widdershins.js --environment widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
     bundle exec middleman build --clean --verbose
     cp -R build/* /tmp/workspace/api/v2
-    cp -R build/* /tmp/workspace/api/
     echo "Output build moved to /tmp/workspace/api/v2"
+    cp -R build/* /tmp/workspace/api/
+    echo "Also - Moved output build moved to /tmp/workspace/api/ so default root displays latest api."
 }
 
 # build the Config Reference from slate.
