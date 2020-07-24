@@ -67,23 +67,26 @@ Integrations tests validate the usage of your orb and its parameters in a live e
 ### Test a command
 
 ```yaml
+version: 2.1
+
 orbs:
   # import development version of orb
-  my-orb: my-namespace/my-orb@dev:my-dev-version
-    jobs:
-      # create jobs for each test
-      test-my_command:
-        docker:
-          - image: cimg/base:stable
-        steps:
-          - my-orb/my_command:  # Invoking the orb command from the development orb
-              my_parameter: "value"
-          - run:
-              name: Validate my_command
-              command: |
-                if [ "$ITWORKED" != "yes" ]; then
-                echo "error" && exit 1
-                fi
+  my-orb: my-namespace/my-orb@dev:my-dev-version 
+
+jobs: # create jobs for each test
+  test-my_command:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - my-orb/my_command:  # Invoking the orb command from the development orb
+          my_parameter: "value"
+      - run:
+          name: Validate my_command
+          command: |
+            if [ "$ITWORKED" != "yes" ]; then
+            echo "error" && exit 1
+            fi
+
 workflows:
   main:
     jobs:
@@ -93,6 +96,8 @@ workflows:
 ### Test a job
 
 ```yaml
+version: 2.1
+
 orbs:
   # import development version of orb
   my-orb: my-namespace/my-orb@dev:my-dev-version
@@ -111,6 +116,8 @@ workflows:
                     echo "error" && exit 1
                   fi
 ```
+
+
 
 
 ## Automated Testing and Deployment
