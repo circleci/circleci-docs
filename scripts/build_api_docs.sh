@@ -10,8 +10,8 @@ build_api_v1() {
     cd src-api
     bundle exec middleman build --clean --verbose
     echo "Output bundled."
-    cp -R build/* /tmp/workspace/api
-    echo "Output build moved to /tmp/workspace/api"
+    cp -R build/* /tmp/workspace/api/v1
+    echo "Output build moved to /tmp/workspace/api/v1"
 }
 
 # Fetches the latest api spec and runs widdershins with it.
