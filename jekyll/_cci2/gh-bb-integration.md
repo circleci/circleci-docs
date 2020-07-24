@@ -84,7 +84,7 @@ for only _one_ repository while a GitHub user key has access to _all_ of your
 GitHub repositories.
 
 Provide CircleCI with a GitHub user key in your project's **Project Settings** >
-**SSH keys**. Scroll down the page to **User Key** and click **Add User Key**.
+**SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**.
 CircleCI creates and associates this new SSH key with your GitHub user account
 for access to all your repositories.
 
