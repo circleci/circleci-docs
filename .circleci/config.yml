@@ -201,7 +201,9 @@ jobs:
       - *attach_workspace
       - run:
           name: "Create landing folder for API doc output"
-          command: mkdir -p /tmp/workspace/api/v2
+          command: |
+            mkdir -p /tmp/workspace/api/v1
+            mkdir -p /tmp/workspace/api/v2
       - ruby-deps:
           dir: src-api
       - restore_cache:
