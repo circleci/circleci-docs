@@ -286,6 +286,7 @@ jobs:
 
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/**/* jekyll/_api/
+            cp -r jekyll/_api/v2/ jekyll/_api
 
             mkdir -p /tmp/workspace/config-builder
             mkdir -p jekyll/config-builder
