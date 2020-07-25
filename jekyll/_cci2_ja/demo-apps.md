@@ -29,6 +29,6 @@ C、C#、C++、Clojure、Elixir、Erlang、Go、Groovy、Haskell、Haxe、Java�
 
 ## 関連項目
 
-最初のビルドを実行する手順については、「[はじめに]({{ site.baseurl }}/2.0/getting-started/)」を参照してください。
+最初のビルドを実行する手順については、「[はじめに]({{ site.baseurl }}/ja/2.0/getting-started/)」を参照してください。
 
-[Android]: {{ site.baseurl }}/2.0/language-android/ [Clojure]: {{ site.baseurl }}/2.0/language-clojure/ [Elixir]: {{ site.baseurl }}/2.0/language-elixir/ [Go]: {{ site.baseurl }}/2.0/language-go/ [iOS]: {{ site.baseurl }}/2.0/ios-tutorial/ [Java]: {{ site.baseurl }}/2.0/language-java/ [JavaScript]: {{ site.baseurl }}/2.0/language-javascript/ [PHP]: {{ site.baseurl }}/2.0/language-php/ [Python]: {{ site.baseurl }}/2.0/language-python/ [Ruby on Rails]: {{ site.baseurl }}/2.0/language-ruby/
+[Android]: {{ site.baseurl }}/ja/2.0/language-android/ [Clojure]: {{ site.baseurl }}/ja/2.0/language-clojure/ [Elixir]: {{ site.baseurl }}/ja/2.0/language-elixir/ [Go]: {{ site.baseurl }}/ja/2.0/language-go/ [iOS]: {{ site.baseurl }}/ja/2.0/ios-tutorial/ [Java]: {{ site.baseurl }}/ja/2.0/language-java/ [JavaScript]: {{ site.baseurl }}/ja/2.0/language-javascript/ [PHP]: {{ site.baseurl }}/ja/2.0/language-php/ [Python]: {{ site.baseurl }}/ja/2.0/language-python/ [Ruby on Rails]: {{ site.baseurl }}/ja/2.0/language-ruby/

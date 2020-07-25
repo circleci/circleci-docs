@@ -126,7 +126,7 @@ HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成�
 - `JOB_HTTP_SOURCE`
 - `WORKFLOW_HTTP_SOURCE`
 
-**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
+**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
 
 これにより、Orb が Sumo Logic ダッシュボードにリンクされます。
 
@@ -134,4 +134,4 @@ HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成�
 
 ## 関連項目
 
-Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
+Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro/)」を参照してください。

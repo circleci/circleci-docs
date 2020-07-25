@@ -57,19 +57,19 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 
 このセクションでは、以下のテスト ランナーの例を示します。
 
-* [Cucumber]({{ site.baseurl }}/2.0/collect-test-data/#cucumber)
-* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
-* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-のテスト結果)
-* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-mocha)
-* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-ava)
-* [ESLint]({{ site.baseurl }}/2.0/collect-test-data/#eslint)
-* [PHPUnit]({{ site.baseurl }}/2.0/collect-test-data/#phpunit)
-* [pytest]({{ site.baseurl }}/2.0/collect-test-data/#pytest)
-* [RSpec]({{ site.baseurl }}/2.0/collect-test-data/#rspec)
-* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#clojure-テスト用の-test2junit)
-* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#visual-studio/net-core-テスト用の-trx2junit)
-* [Karma]({{ site.baseurl }}/2.0/collect-test-data/#karma)
-* [Jest]({{ site.baseurl }}/2.0/collect-test-data/#jest)
+* [Cucumber]({{ site.baseurl }}/ja/2.0/collect-test-data/#cucumber)
+* [Maven Surefire]({{ site.baseurl }}/ja/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
+* [Gradle]({{ site.baseurl }}/ja/2.0/collect-test-data/#gradle-junit-のテスト結果)
+* [Mocha]({{ site.baseurl }}/ja/2.0/collect-test-data/#nodejs-用の-mocha)
+* [AVA]({{ site.baseurl }}/ja/2.0/collect-test-data/#nodejs-用の-ava)
+* [ESLint]({{ site.baseurl }}/ja/2.0/collect-test-data/#eslint)
+* [PHPUnit]({{ site.baseurl }}/ja/2.0/collect-test-data/#phpunit)
+* [pytest]({{ site.baseurl }}/ja/2.0/collect-test-data/#pytest)
+* [RSpec]({{ site.baseurl }}/ja/2.0/collect-test-data/#rspec)
+* [test2junit]({{ site.baseurl }}/ja/2.0/collect-test-data/#clojure-テスト用の-test2junit)
+* [trx2junit]({{ site.baseurl }}/ja/2.0/collect-test-data/#visual-studio/net-core-テスト用の-trx2junit)
+* [Karma]({{ site.baseurl }}/ja/2.0/collect-test-data/#karma)
+* [Jest]({{ site.baseurl }}/ja/2.0/collect-test-data/#jest)
 
 #### Cucumber
 {:.no_toc}
@@ -496,7 +496,7 @@ steps:
 ## 関連項目
 {:.no_toc}
 
-[インサイトの使用]({{ site.baseurl }}/2.0/insights/)
+[インサイトの使用]({{ site.baseurl }}/ja/2.0/insights/)
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {:.no_toc}

@@ -20,7 +20,7 @@ CircleCI Orbs は、ジョブ、コマンド、Executor などの構成要素を
 
 既存の Orb をインポートするには、以下の手順を行います。
 
-1) 各 Orb のバージョン 2.1 [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに以下の 1 行を追加します。
+1) 各 Orb のバージョン 2.1 [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに以下の 1 行を追加します。
 
 ```yaml
 version: 2.1
@@ -139,7 +139,7 @@ CircleCI Orb レジストリから入手できる数多くの Orb の中から�
 
 ## 独自の Orb をオーサリングする
 
-既存の Orb ではニーズを満たせない場合、以下の `circleci orb help` の出力に示されている [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/#概要) を使用して、特定の環境や構成要件に合った独自の Orb をオーサリングできます。 インポート機能を使用する場合に比べて時間はかかりますが、独自 Orb をオーサリングすると、グローバルに読み取り可能な Orb を作成して自身の構成を共有することが可能です。 詳細については、[Orbs の作成に関するドキュメント]({{ site.baseurl }}/2.0/creating-orbs/)を参照してください。
+既存の Orb ではニーズを満たせない場合、以下の `circleci orb help` の出力に示されている [CircleCI CLI]({{ site.baseurl }}/ja/2.0/local-cli/#概要) を使用して、特定の環境や構成要件に合った独自の Orb をオーサリングできます。 インポート機能を使用する場合に比べて時間はかかりますが、独自 Orb をオーサリングすると、グローバルに読み取り可能な Orb を作成して自身の構成を共有することが可能です。 詳細については、[Orbs の作成に関するドキュメント]({{ site.baseurl }}/ja/2.0/creating-orbs/)を参照してください。
 
 **メモ:** パブリッシュ済みの Orb をレジストリのリストから除外するには、`circleci orb unlist` CLI コマンドを使用します。 詳細については、[ヘルプ ページ](https://circleci-public.github.io/circleci-cli/circleci_orb_unlist.html)を参照してください。 リストから除外した Orb は、名前で参照すれば引き続きグローバルに読み取り可能ですが、Orb レジストリの検索結果には表示されません。 リストから除外した後も、`circleci orb unlist <namespace/orb> false` コマンドを使用して再度リストに戻すことができます。
 
@@ -163,9 +163,9 @@ CircleCI Orb レジストリから入手できる数多くの Orb の中から�
 
 ## 関連項目
 
-- [Orb のコンセプト]({{site.baseurl}}/2.0/using-orbs/): CircleCI Orbs の基本的な概念
-- [Orbs に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
-- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
+- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/using-orbs/): CircleCI Orbs の基本的な概念
+- [Orbs に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
+- [Orbs リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
 - [Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/): 独自に作成した Orbs のテスト方法
-- [Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
-- [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ
+- [Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
+- [構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ

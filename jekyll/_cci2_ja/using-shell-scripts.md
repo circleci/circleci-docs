@@ -8,7 +8,7 @@ categories:
 order: 10
 ---
 
-[CircleCI 設定ファイル]({{ site.baseurl }}/2.0/configuration-reference/)でシェル スクリプトを使用するうえでのベスト プラクティスについて、以下のセクションに沿って説明します。
+[CircleCI 設定ファイル]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェル スクリプトを使用するうえでのベスト プラクティスについて、以下のセクションに沿って説明します。
 
 + 目次
 {:toc}

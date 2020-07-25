@@ -117,7 +117,7 @@ CircleCI Server v2.17 に更新する手順は次のとおりです。
 
 #### Replicated を更新するための準備
 
-Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/2.0/backup/)に従ってデータをバックアップします。
+Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/ja/2.0/backup/)に従ってデータをバックアップします。
 
 - 以下のコマンドで CircleCI アプリケーションを停止させます。
 

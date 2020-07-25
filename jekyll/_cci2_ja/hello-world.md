@@ -8,15 +8,15 @@ categories:
 order: 4
 ---
 
-[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
+[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
 
 ## Linux での Hello World
 
-この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 まずは以下の手順を行います。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成します。
+2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します。
 
    ```yaml
    version: 2.1
@@ -39,9 +39,9 @@ order: 4
 
 **メモ:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
-CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#コンテナ)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピン アップし、そこでジョブを実行します。
+CircleCI は、各[ジョブ]({{site.baseurl}}/ja/2.0/glossary/#ジョブ)をそれぞれ独立した[コンテナ]({{site.baseurl}}/ja/2.0/glossary/#コンテナ)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピン アップし、そこでジョブを実行します。
 
-サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/2.0/language-javascript/)を参照してください。
+サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/2.0/language-javascript/)を参照してください。
 
 ## Android での Hello World
 
@@ -53,7 +53,7 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれ
           - image: circleci/android:api-25-alpha
     
 
-詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/2.0/language-android/)を参照してください。
+詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
 
 ## macOS での Hello World
 
@@ -65,7 +65,7 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
           xcode: 11.3.0
     
 
-詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/2.0/hello-world-macos)」を参照してください。
+詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
 
 ## Windows での Hello World
 
@@ -83,7 +83,7 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
           - run: Write-Host 'Hello, Windows'
     
 
-**メモ:** Windows ビルドでは、セットアップと前提条件が多少異なります。 詳しくは「[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows)」を参照してください。
+**メモ:** Windows ビルドでは、セットアップと前提条件が多少異なります。 詳しくは「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows)」を参照してください。
 
 ### Orbs の使用とオーサリングの詳細
 
@@ -108,8 +108,8 @@ CircleCI アプリケーションの左上で組織を切り替えられます�
 
 ## 次のステップ
 
-- 2.0 構成の概要、および `.circleci/config.yml` ファイルにおけるトップ レベル キーの階層については「[コンセプト]({{ site.baseurl }}/2.0/concepts/)」を参照してください。
+- 2.0 構成の概要、および `.circleci/config.yml` ファイルにおけるトップ レベル キーの階層については「[コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)」を参照してください。
 
-- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/2.0/workflows)」を参照してください。
+- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
 
-- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。
+- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)」を参照してください。

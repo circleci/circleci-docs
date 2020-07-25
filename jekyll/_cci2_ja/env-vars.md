@@ -16,7 +16,7 @@ order: 40
 ## 概要
 {:.no_toc}
 
-プライベート キーまたはシークレット環境変数をプライベート プロジェクトに追加するには、CircleCI アプリケーションで [Build (ビルド)] > [Project (プロジェクト)] > [Settings (設定)] の [Environment Variables (環境変数)] ページに移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。 変数を個々に追加することも、別のプロジェクトからインポートすることも可能です。 プライベート環境変数を使用すると、パブリック プロジェクトにもシークレットを安全に格納できます。関連する設定情報については、「[オープンソース プロジェクトの構築]({{ site.baseurl }}/2.0/oss/)」を参照してください。 ビルド内から環境変数へのアクセスをさらに制限するには、コンテキストを使用します。「[コンテキストの制限]({{ site.baseurl }}/2.0/contexts/#コンテキストの制限)」を参照してください。
+プライベート キーまたはシークレット環境変数をプライベート プロジェクトに追加するには、CircleCI アプリケーションで [Build (ビルド)] > [Project (プロジェクト)] > [Settings (設定)] の [Environment Variables (環境変数)] ページに移動します。 設定された後の変数の値は、アプリで読み取ることも編集することもできません。 環境変数の値を変更するには、現在の変数を削除し、新しい値を設定して再度追加します。 変数を個々に追加することも、別のプロジェクトからインポートすることも可能です。 プライベート環境変数を使用すると、パブリック プロジェクトにもシークレットを安全に格納できます。関連する設定情報については、「[オープンソース プロジェクトの構築]({{ site.baseurl }}/ja/2.0/oss/)」を参照してください。 ビルド内から環境変数へのアクセスをさらに制限するには、コンテキストを使用します。「[コンテキストの制限]({{ site.baseurl }}/ja/2.0/contexts/#コンテキストの制限)」を参照してください。
 
 ### シークレットのマスキング
 {:.no_toc}
@@ -28,7 +28,7 @@ order: 40
 - 環境変数の値が 4 文字未満
 - 環境変数の値が `true`、`True`、`false`、`False` のいずれか
 
-**メモ:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 環境変数の値には、[SSH を使用したデバッグ]({{ site.baseurl }}/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**メモ:** シークレットのマスキングは、ビルドの出力で環境変数の値が表示されないようにするだけの機能です。 環境変数の値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ### 環境変数の使用オプション
 {:.no_toc}
@@ -41,17 +41,17 @@ CircleCI アプリケーションに安全に格納されているシークレ�
 2. [`run` ステップ](#ステップでの環境変数の設定)で `environment` キーを使用して宣言された環境変数。
 3. [ジョブ](#ジョブでの環境変数の設定)で `environment` キーを使用して設定された環境変数。
 4. [コンテナ](#コンテナでの環境変数の設定)で `environment` キーを使用して設定された環境変数。
-5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)。 手順については、[コンテキストに関するドキュメント]({{ site.baseurl }}/2.0/contexts)を参照してください。
+5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)。 手順については、[コンテキストに関するドキュメント]({{ site.baseurl }}/ja/2.0/contexts)を参照してください。
 6. [Project Settings (プロジェクト設定)] ページで設定された[プロジェクトレベルの環境変数](#プロジェクトでの環境変数の設定)。
 7. このドキュメントの [CircleCI 定義済み環境変数](#定義済み環境変数)セクションで解説されている特別な CircleCI 環境変数。
 
 `FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 [Contexts (コンテキスト)] ページで追加された環境変数は、[Project Settings (プロジェクト設定)] ページで追加された変数よりも優先されます。 最後に、特別な CircleCI 環境変数がロードされます。
 
-**メモ:** `.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 シークレットやキーは、CircleCI アプリケーションの[プロジェクト設定](#プロジェクトでの環境変数の設定)または[コンテキスト設定]({{ site.baseurl }}/2.0/contexts/)に格納してください。
+**メモ:** `.circleci/config.yml` ファイル内にシークレットやキーを追加しないでください。 CircleCI 上のプロジェクトにアクセスできる開発者には、`config.yml` の全文が表示されます。 シークレットやキーは、CircleCI アプリケーションの[プロジェクト設定](#プロジェクトでの環境変数の設定)または[コンテキスト設定]({{ site.baseurl }}/ja/2.0/contexts/)に格納してください。
 
-詳細については、「セキュリティ」の「[暗号化]({{ site.baseurl }}/2.0/security/#暗号化)」セクションで説明しています。
+詳細については、「セキュリティ」の「[暗号化]({{ site.baseurl }}/ja/2.0/security/#暗号化)」セクションで説明しています。
 
-構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 安全なスクリプトのベスト プラクティスについては、「[シェル スクリプトの使用]({{ site.baseurl }}/2.0/using-shell-scripts/#シェル-スクリプトのベスト-プラクティス)」を参照してください。
+構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 安全なスクリプトのベスト プラクティスについては、「[シェル スクリプトの使用]({{ site.baseurl }}/ja/2.0/using-shell-scripts/#シェル-スクリプトのベスト-プラクティス)」を参照してください。
 
 ### 環境変数の構成例
 
@@ -112,7 +112,7 @@ working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 
 設定ファイルに値を挿入するには、いくつかの回避策があります。
 
-**CircleCI 2.1** を使用している場合は、`config.yml` 全体の構成の一部を再利用できます。 `parameters` 宣言を使用することで、再利用可能な `commands` `jobs` や `executors` に挿入を行う (値を渡す) ことができます。 「[parameters 宣言の使用]({{ site.baseurl }}/2.0/reusing-config/#parameters-宣言の使用)」をご一読ください。
+**CircleCI 2.1** を使用している場合は、`config.yml` 全体の構成の一部を再利用できます。 `parameters` 宣言を使用することで、再利用可能な `commands` `jobs` や `executors` に挿入を行う (値を渡す) ことができます。 「[parameters 宣言の使用]({{ site.baseurl }}/ja/2.0/reusing-config/#parameters-宣言の使用)」をご一読ください。
 
 設定ファイルに値を挿入する方法として、以下のように、`run` ステップを使用して環境変数を `BASH_ENV` にエクスポートすることもできます。
 
@@ -170,7 +170,7 @@ jobs:
 
 ## ステップでの環境変数の設定
 
-1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
+1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#run)を使用します。
 
 ```yaml
 version: 2
@@ -192,7 +192,7 @@ jobs:
 
 ## ジョブでの環境変数の設定
 
-1 つのジョブで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#job_name)を使用します。
+1 つのジョブで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#job_name)を使用します。
 
 ```yaml
 version: 2
@@ -206,7 +206,7 @@ jobs:
 
 ## コンテナでの環境変数の設定
 
-1 つのコンテナで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor)を使用します。
+1 つのコンテナで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker--machine--macos--windows-executor)を使用します。
 
 ```yaml
 version: 2
@@ -238,7 +238,7 @@ jobs:
 
 ## コンテキストでの環境変数の設定
 
-コンテキストを作成すると、複数のプロジェクト間で環境変数を共有できるようになります。 コンテキストに環境変数を設定する方法については、[コンテキストに関するドキュメント]({{ site.baseurl }}/2.0/contexts/)を参照してください。
+コンテキストを作成すると、複数のプロジェクト間で環境変数を共有できるようになります。 コンテキストに環境変数を設定する方法については、[コンテキストに関するドキュメント]({{ site.baseurl }}/ja/2.0/contexts/)を参照してください。
 
 ## プロジェクトでの環境変数の設定
 
@@ -248,7 +248,7 @@ jobs:
 
 3. **[Import Variable(s) (変数のインポート)]** ボタンをクリックして、別のプロジェクトから変数をインポートします。 **[Add Variable (変数の追加)]** ボタンをクリックして、新しい変数を追加します (**メモ:** 現在、プライベート クラウドまたはデータセンターにインストールされている CircleCI では、現在 **[Import Variable(s) (変数のインポート)]** ボタンは使用できません)。
 
-4. `.circleci/config.yml` ファイルで新しい環境変数を使用します。 例については、[Heroku デプロイの詳細説明]({{ site.baseurl }}/2.0/deployment-integrations/#heroku)を参照してください。
+4. `.circleci/config.yml` ファイルで新しい環境変数を使用します。 例については、[Heroku デプロイの詳細説明]({{ site.baseurl }}/ja/2.0/deployment-integrations/#heroku)を参照してください。
 
 作成された環境変数は、アプリケーションに表示されず、編集することはできません。 環境変数を変更するには、削除して作成し直すしかありません。
 
@@ -331,7 +331,7 @@ Login Succeeded
       https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
     
 
-上の例の `$CIRCLE_TOKEN` は[パーソナル API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)です。
+上の例の `$CIRCLE_TOKEN` は[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)です。
 
 このビルドは、以下の環境変数を受け取ります。
 
@@ -372,7 +372,7 @@ POST API 呼び出しを使用して実行を開始します。詳細につい�
 | `CIRCLE_PULL_REQUESTS`      | リスト  | 現在のビルドに関連付けられたプル リクエストの URL の一覧 (カンマ区切り)。                                                                                              |
 | `CIRCLE_REPOSITORY_URL`     | 文字列  | GitHub または Bitbucket リポジトリ URL。                                                                                                        |
 | `CIRCLE_SHA1`               | 文字列  | 現在のビルドの前回のコミットの SHA1 ハッシュ。                                                                                                             |
-| `CIRCLE_TAG`                | 文字列  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「[Git タグに対応するワークフローを実行する]({{ site.baseurl }}/2.0/workflows/#git-タグに対応するワークフローを実行する)」を参照してください。 |
+| `CIRCLE_TAG`                | 文字列  | git タグの名前 (現在のビルドがタグ付けされている場合)。 詳細については、「[Git タグに対応するワークフローを実行する]({{ site.baseurl }}/ja/2.0/workflows/#git-タグに対応するワークフローを実行する)」を参照してください。 |
 | `CIRCLE_USERNAME`           | 文字列  | ビルドをトリガーしたユーザーの GitHub または Bitbucket ユーザー名。                                                                                            |
 | `CIRCLE_WORKFLOW_ID`        | 文字列  | 現在のジョブのワークフロー インスタンスの一意の識別子。 この識別子は、特定のワークフロー インスタンス内のすべてのジョブで同じです。                                                                    |
 | `CIRCLE_WORKING_DIRECTORY`  | 文字列  | 現在のジョブの `working_directory` キーの値。                                                                                                      |
@@ -383,5 +383,5 @@ POST API 呼び出しを使用して実行を開始します。詳細につい�
 ## 関連項目
 {:.no_toc}
 
-[コンテキスト]({{ site.baseurl }}/2.0/contexts/)  
+[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)  
 ブログ記事「[Keep environment variables private with secret masking (シークレットのマスキングによって環境変数を非公開に保つ)](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)」

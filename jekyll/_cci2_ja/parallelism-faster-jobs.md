@@ -15,7 +15,7 @@ order: 60
 
 ## ジョブの並列処理レベルの指定
 
-テスト スイートは通常、`.circleci/config.yml` ファイルの[ジョブ レベルで定義]({{ site.baseurl }}/2.0/jobs-steps/#並列ジョブを使用した設定ファイルの例)します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
+テスト スイートは通常、`.circleci/config.yml` ファイルの[ジョブ レベルで定義]({{ site.baseurl }}/ja/2.0/jobs-steps/#並列ジョブを使用した設定ファイルの例)します。 `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
 ジョブのステップを並列に実行するには、`parallelism` キーに 1 よりも大きい値を設定します。
 
@@ -31,13 +31,13 @@ jobs:
 
 ![並列処理]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#parallelism)」を参照してください。
+詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/#parallelism)」を参照してください。
 
 ## CircleCI CLI を使用したテストの分割
 
 CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテスト ランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 割り当てには CircleCI CLI が必要で、実行時にビルドに自動挿入されます。
 
-CLI をローカルにインストールするには、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」の説明を参照してください。
+CLI をローカルにインストールするには、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/)」の説明を参照してください。
 
 ### テスト ファイルの分割
 {:.no_toc}
@@ -83,7 +83,7 @@ jobs:
 
 ![テストの分割]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-CircleCI は、テスト スイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミング データを保存しています。 このタイミング データには、使用している言語に応じて、ファイル名またはクラス名ごとに各テストが完了するのにかかった時間が記録されます。
+CircleCI は、テスト スイートの実行が成功するたびに、[`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) ステップでパスを指定しているディレクトリからタイミング データを保存しています。 このタイミング データには、使用している言語に応じて、ファイル名またはクラス名ごとに各テストが完了するのにかかった時間が記録されます。
 
 メモ: `store_test_results` を使用しないと、テストの分割に使用できるタイミング データは生成されません。
 
@@ -97,7 +97,7 @@ CLI は、テスト スイートによって生成されたタイミング デ�
     cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
     
 
-手動でタイミング データを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) ステップを使用します。
+手動でタイミング データを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) ステップを使用します。
 
 #### ファイル名に基づいた分割
 {:.no_toc}
@@ -141,7 +141,7 @@ CLI は、使用可能なコンテナ数と現在のコンテナ インデック
 
 ## 環境変数を使用したテストの分割
 
-CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
+CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)」を参照してください。
 
 ## 分割テストの実行
 
@@ -161,7 +161,7 @@ TESTFILES 変数は、$CIRCLE_NODE_INDEX と $CIRCLE_NODE_TOTAL に応じて、�
 
 ## 関連項目
 
-[コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
+[コンテナを使用する]({{ site.baseurl }}/ja/2.0/containers/)
 
 ## その他のテスト分割方法
 

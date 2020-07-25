@@ -13,7 +13,7 @@ order: 40
 - 目次 
 {:toc}
 
-`docker-compose` ユーティリティは、Machine Executors と \[CircleCI コンビニエンス イメージにプリインストール\]\[pre-installed\]されています。 別のイメージを使用している場合は、以下のコードを [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルに追加することでアクティブ化されるリモート Docker 環境を使用して、ジョブ実行時に\[プライマリ コンテナ\]\[primary-container\]にインストールできます。
+`docker-compose` ユーティリティは、Machine Executors と \[CircleCI コンビニエンス イメージにプリインストール\]\[pre-installed\]されています。 別のイメージを使用している場合は、以下のコードを [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに追加することでアクティブ化されるリモート Docker 環境を使用して、ジョブ実行時に\[プライマリ コンテナ\]\[primary-container\]にインストールできます。
 
     - run:
         name: Docker Compose のインストール
@@ -23,7 +23,7 @@ order: 40
           sudo mv ~/docker-compose /usr/local/bin/docker-compose
     
 
-[pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ
+[pre-installed]: {{ site.baseurl }}/ja/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/ja/2.0/glossary/#プライマリ-コンテナ
 
 次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 
@@ -72,4 +72,4 @@ Docker Compose を使用して docker-compose ファイルを含むマルチコ�
 
 {:.no_toc}
 
-例と詳細については、「Docker コマンドの実行手順」の「[フォルダーのマウント]({{ site.baseurl }}/2.0/building-docker-images/#フォルダーのマウント)」セクションを参照してください。
+例と詳細については、「Docker コマンドの実行手順」の「[フォルダーのマウント]({{ site.baseurl }}/ja/2.0/building-docker-images/#フォルダーのマウント)」セクションを参照してください。

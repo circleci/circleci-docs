@@ -175,7 +175,7 @@ Orb と CircleCI プラットフォームの互換性が維持されるように
 
 Orbs をローカルでテストするなら、インライン Orb を作成すると簡単です。 インライン Orb を作成することで、アクティブな開発中でも Orb をテストできます。 インライン Orbs は、Orb の開発時や、長い設定に含まれるジョブやコマンドの名前空間を作成するときに使用すると便利です。
 
-インライン Orb の作成方法の詳細については、CircleCI ドキュメントの「[Orbs の作成]({{site.baseurl}}/2.0/creating-orbs/)」ページを参照してください。
+インライン Orb の作成方法の詳細については、CircleCI ドキュメントの「[Orbs の作成]({{site.baseurl}}/ja/2.0/creating-orbs/)」ページを参照してください。
 
 ### Orbs テストの自動化
 
@@ -187,7 +187,7 @@ Orbs テストは、複数のレベルから選択して実行できます。 �
 
 ## 関連項目
 
-- [Orb のコンセプト]({{site.baseurl}}/2.0/using-orbs/): CircleCI Orbs の基本的な概念
-- [Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
-- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
-- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/#構成レシピ): CircleCI Orbs のレシピを構成に使用する詳しい方法
+- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/using-orbs/): CircleCI Orbs の基本的な概念
+- [Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
+- [Orbs リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
+- [CircleCI 構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/#構成レシピ): CircleCI Orbs のレシピを構成に使用する詳しい方法

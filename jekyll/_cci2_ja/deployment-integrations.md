@@ -12,7 +12,7 @@ CircleCI は、ほぼすべてのサービスにデプロイできるように�
 ## 概要
 {:.no_toc}
 
-アプリケーションをデプロイするには、[ジョブ]({{ site.baseurl }}/2.0/jobs-steps/#ジョブの概要)を `.circleci/config.yml` ファイルに追加します。 また、[環境変数]({{ site.baseurl }}/2.0/env-vars/#プロジェクトでの環境変数の設定)と [SSH キー]({{ site.baseurl }}/2.0/add-ssh-key/)を追加する必要があります。
+アプリケーションをデプロイするには、[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/#ジョブの概要)を `.circleci/config.yml` ファイルに追加します。 また、[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)と [SSH キー]({{ site.baseurl }}/ja/2.0/add-ssh-key/)を追加する必要があります。
 
 以下に、Rails アプリケーションを Heroku にデプロイする場合の簡単な例を示します。 アプリケーション全体は、[CircleCI デモ ワークフロー リポジトリの連続ジョブのブランチ](https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter)で確認できます。
 
@@ -60,13 +60,13 @@ workflows:
               only: sequential-branch-filter
 ```
 
-`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるように、[ワークフロー]({{ site.baseurl }}/2.0/workflows/)を使用して構成されています。 デプロイ ジョブで前のジョブからの出力を使用する場合は、[ワークスペースを使用する]({{ site.baseurl }}/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)ことでそのデータを共有できます。 条件付きデプロイについては、「[ワークフローにおけるコンテキストとフィルターの使用]({{ site.baseurl }}/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
+`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるように、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を使用して構成されています。 デプロイ ジョブで前のジョブからの出力を使用する場合は、[ワークスペースを使用する]({{ site.baseurl }}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)ことでそのデータを共有できます。 条件付きデプロイについては、「[ワークフローにおけるコンテキストとフィルターの使用]({{ site.baseurl }}/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
 
 ## AWS
 
 AWS S3 にデプロイするには、以下の手順を行います。
 
-AWS ECR から AWS ECS にデプロイする方法については、「[AWS ECR/ECS へのデプロイ]({{ site.baseurl }}/2.0/ecs-ecr/)」を参照してください。
+AWS ECR から AWS ECS にデプロイする方法については、「[AWS ECR/ECS へのデプロイ]({{ site.baseurl }}/ja/2.0/ecs-ecr/)」を参照してください。
 
 1. セキュリティ上のベスト プラクティスとして、CircleCI 専用の新しい [IAM ユーザー](https://aws.amazon.com/jp/iam/details/manage-users/)を作成します。
 
@@ -76,7 +76,7 @@ AWS ECR から AWS ECS にデプロイする方法については、「[AWS ECR/
 
 4. [AWS CLI に関するドキュメント](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-install.html)に従って、プライマリ コンテナに `awscli` をインストールします。
 
-5. [AWS CLI を使用](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-using.html)して、アプリケーションを S3 にデプロイするか、他の AWS 操作を実行します。 以下の例は、CircleCI で[このドキュメント サイト](https://github.com/circleci/circleci-docs)を S3 にデプロイする方法を示しています。 ビルド ジョブが終了し、現在のブランチが `master` である場合にのみ、[ワークフロー]({{ site.baseurl }}/2.0/workflows/)を使用してデプロイしてください。
+5. [AWS CLI を使用](https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-using.html)して、アプリケーションを S3 にデプロイするか、他の AWS 操作を実行します。 以下の例は、CircleCI で[このドキュメント サイト](https://github.com/circleci/circleci-docs)を S3 にデプロイする方法を示しています。 ビルド ジョブが終了し、現在のブランチが `master` である場合にのみ、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)を使用してデプロイしてください。
 
 ```yaml
 version: 2
@@ -219,7 +219,7 @@ AWS ECS、AWS ECR、AWS CodeDeploy Orb の詳細については、Orb レジス�
 
 ## Azure
 
-Azure にデプロイするには、上記の例と同様のジョブで適切なコマンドを使用します。 リポジトリにプッシュする必要がある場合は、「[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)」の GitHub または Bitbucket への読み取り/書き込みデプロイ キーの追加に関するセクションで手順を確認してください。 次に、production ブランチを使用するように Azure Web App を構成します。
+Azure にデプロイするには、上記の例と同様のジョブで適切なコマンドを使用します。 リポジトリにプッシュする必要がある場合は、「[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)」の GitHub または Bitbucket への読み取り/書き込みデプロイ キーの追加に関するセクションで手順を確認してください。 次に、production ブランチを使用するように Azure Web App を構成します。
 
 ## Capistrano
 
@@ -449,7 +449,7 @@ Firebase Orb を使用してアプリケーションをデプロイする方法�
 
 ## Google Cloud
 
-Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの構成設定を行う必要があります。 詳細については、「[Google Cloud SDK の承認]({{ site.baseurl }}/2.0/google-auth/)」を参照してください。
+Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認して、デフォルトの構成設定を行う必要があります。 詳細については、「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/2.0/google-auth/)」を参照してください。
 
 以下の例では、`build-job` が終了し、現在のブランチが master ブランチである場合に、`deploy.sh` が実行され、実際のデプロイ処理が行われます。
 
@@ -521,11 +521,11 @@ CircleCI Orb (ジョブ、コマンド、Executor を含む構成パッケージ
 
 1. Heroku アカウントを作成し、[Heroku の Web ページ](https://devcenter.heroku.com/start)に記載された手順に従って、選択した言語でプロジェクトをセットアップします。
 
-2. Heroku アプリケーションの名前と Heroku API キーを環境変数として追加します。 手順については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/2.0/env-vars/#プロジェクトでの環境変数の設定)」を参照してください。 以下の例では、これらの変数はそれぞれ `HEROKU_APP_NAME` および `HEROKU_API_KEY` として定義されています。
+2. Heroku アプリケーションの名前と Heroku API キーを環境変数として追加します。 手順については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)」を参照してください。 以下の例では、これらの変数はそれぞれ `HEROKU_APP_NAME` および `HEROKU_API_KEY` として定義されています。
 
 3. `.circleci/config.yml` で、`deploy` ジョブを作成し、Executor タイプを追加します。
 
-手順については、[Executor タイプに関するドキュメント]({{ site.baseurl }}/2.0/executor-types/)を参照してください。
+手順については、[Executor タイプに関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
 5. コードをチェック アウトし、git を使用して master ブランチを Heroku にデプロイするコマンドを追加します。
 
@@ -661,9 +661,9 @@ workflows:
 
 SSH を介してアプリケーションをデプロイするように CircleCI を構成するには、以下の手順を行います。
 
-1. デプロイ先のサーバー用の SSH キーを追加します。 手順については、「[CircleCI に SSH キーを登録する]({{ site.baseurl }}/2.0/add-ssh-key/)」を参照してください。
+1. デプロイ先のサーバー用の SSH キーを追加します。 手順については、「[CircleCI に SSH キーを登録する]({{ site.baseurl }}/ja/2.0/add-ssh-key/)」を参照してください。
 
-2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/2.0/env-vars/#プロジェクトでの環境変数の設定)」を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
+2. ビルド VM の SSH ユーザー名と SSH ホスト名を環境変数として追加します。 手順については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)」を参照してください。 以下の例では、これらの変数はそれぞれ `SSH_USER` および `SSH_HOST` として定義されています。
 
 3. `.circleci/config.yml` で、`deploy` ジョブを作成し、master ブランチをデプロイするコマンドを追加します。
 

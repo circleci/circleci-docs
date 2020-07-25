@@ -46,7 +46,7 @@ Orb パブリッシュ プロセスの最終ステップは、`circleci/orb-tool
 
 **メモ:** このコマンドの詳細については、このページの [orb-tools/publish](https://circleci.com/ja/docs/2.0/creating-orbs/#orb-toolspublish) セクションを参照してください。
 
-[Orbs]({{ site.baseurl }}/2.0/orb-intro/) は、2.1 の [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルのトップレベルにある `orbs` キーを通して構成内で利用できるようになります。
+[Orbs]({{ site.baseurl }}/ja/2.0/orb-intro/) は、2.1 の [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのトップレベルにある `orbs` キーを通して構成内で利用できるようになります。
 
 ## Orb のパブリッシュ プロセス
 
@@ -62,7 +62,7 @@ Orb は、`config.yml` ファイルにインラインでオーサリングする
 
 ## CLI を使用した Orb のパブリッシュ
 
-`circleci` CLI には、Orb パブリッシュ パイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI ローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/#cli-の構成)」を参照してください。 以下に、Orb のパブリッシュに特に関連するコマンドをいくつか示します。
+`circleci` CLI には、Orb パブリッシュ パイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI ローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/#cli-の構成)」を参照してください。 以下に、Orb のパブリッシュに特に関連するコマンドをいくつか示します。
 
 - `circleci namespace create <name> <vcs-type> <org-name> [flags]`
 - `circleci orb create <namespace>/<orb> [flags]`
@@ -236,8 +236,8 @@ CircleCI CLI ツールが正しくインストールされていることを確�
 
 ## 関連項目
 
-- [Orb の概要]({{site.baseurl}}/2.0/orb-intro/): Orb の利用に関する概要
-- [Orb のコンセプト]({{site.baseurl}}/2.0/using-orbs/): Orbs の基本的な概念
-- [Orbs に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): Orbs の使用に際して発生している既知の問題や不明点
-- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
-- [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ
+- [Orb の概要]({{site.baseurl}}/ja/2.0/orb-intro/): Orb の利用に関する概要
+- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/using-orbs/): Orbs の基本的な概念
+- [Orbs に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orbs-faq/): Orbs の使用に際して発生している既知の問題や不明点
+- [Orbs リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
+- [構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ

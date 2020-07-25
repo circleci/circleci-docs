@@ -12,7 +12,7 @@ published: true
 {:toc}
 
 
-CircleCI にチャット通知、自動メール通知、および Web 通知機能が統合されました。 Slack 通知とメール通知は、[ワークフロー]({{ site.baseurl }}/2.0/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
+CircleCI にチャット通知、自動メール通知、および Web 通知機能が統合されました。 Slack 通知とメール通知は、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
 
 ```yaml
 version: 2

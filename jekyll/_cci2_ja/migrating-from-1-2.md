@@ -15,19 +15,19 @@ order: 15
 
 ここで説明する手順だけでは移行プロセスは完了しないこともありますが、このドキュメントの目的は、大部分のキーを同等のネスト構文に置き換えてから新しい機能を追加できるよう支援することです。
 
-`circle.yml` ファイルがない場合は、最初から [2.0 `config.yml` のサンプル ファイル]({{ site.baseurl }}/2.0/sample-config)を参考にしてください。
+`circle.yml` ファイルがない場合は、最初から [2.0 `config.yml` のサンプル ファイル]({{ site.baseurl }}/ja/2.0/sample-config)を参考にしてください。
 
 ## 概要
 {:.no_toc}
 
-CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **メモ:** 並列処理は `.circleci/config.yml` ファイルでのみ設定できます。CircleCI アプリケーションでの並列処理設定は無視されます。
+CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **メモ:** 並列処理は `.circleci/config.yml` ファイルでのみ設定できます。CircleCI アプリケーションでの並列処理設定は無視されます。
 
 既に `circle.yml` ファイルがある場合は、以降の各セクションの手順に従って、既存のファイルをコピーし、新しい必須キーを記述し、1.0 のキーを検索して 2.0 のキーに置き換えます。
 
 ### 1.0 から 2.0 への `config-translation` エンドポイントを使用する
 {:.no_toc}
 
-`config-translation` エンドポイントを使用すると、1.0 の設定ファイルから 2.0 の設定ファイルへの変換をすぐに始めることができます。詳細については、「[1.0 から 2.0 への config-translation エンドポイントを使用する]({{ site.baseurl }}/2.0/config-translation)」を参照してください。
+`config-translation` エンドポイントを使用すると、1.0 の設定ファイルから 2.0 の設定ファイルへの変換をすぐに始めることができます。詳細については、「[1.0 から 2.0 への config-translation エンドポイントを使用する]({{ site.baseurl }}/ja/2.0/config-translation)」を参照してください。
 
 ## 必須キーを構成する手順
 
@@ -116,7 +116,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
      `checkout` ステップを使わない場合でも、このステップを `config.yml` ファイルに追加する必要があります。
     
 
-7. (オプション) ビルドへの SSH 接続を有効化するには、`add_ssh_keys` ステップとフィンガープリントを追加します。詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#ssh_キーの追加)」を参照してください。
+7. (オプション) ビルドへの SSH 接続を有効化するには、`add_ssh_keys` ステップとフィンガープリントを追加します。詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/#ssh_キーの追加)」を参照してください。
 
 8. <http://codebeautify.org/yaml-validator> で YAML をバリデーションして、変更をチェックします。
 
@@ -124,7 +124,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
 
 CircleCI 2.0 では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
-詳細については、「[環境変数を使用する]({{ site.baseurl }}/2.0/env-vars/)」を参照してください。
+詳細については、「[環境変数を使用する]({{ site.baseurl }}/ja/2.0/env-vars/)」を参照してください。
 
 ## ワークフローを構成する手順
 
@@ -254,12 +254,12 @@ dependencies:
 
 ## YAML のバリデーション
 
-`.circleci/config.yml` にすべてのセクションを記述したら、<http://codebeautify.org/yaml-validator> などのツールを使用して、YAML 構文が正しい形式かどうかをチェックすることをお勧めします。 次に、`circleci` CLI を使用して、新しい構成が CircleCI 2.0 スキーマに照らして正しいかどうかをバリデーションします。 手順については、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-jobs/)」を参照してください。 すべての問題を修正したら、更新した `.circleci/config.yml` ファイルをコミットします。 コミットをプッシュすると、ジョブが自動的に開始され、それを CircleCI アプリケーションでモニタリングできます。
+`.circleci/config.yml` にすべてのセクションを記述したら、<http://codebeautify.org/yaml-validator> などのツールを使用して、YAML 構文が正しい形式かどうかをチェックすることをお勧めします。 次に、`circleci` CLI を使用して、新しい構成が CircleCI 2.0 スキーマに照らして正しいかどうかをバリデーションします。 手順については、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-jobs/)」を参照してください。 すべての問題を修正したら、更新した `.circleci/config.yml` ファイルをコミットします。 コミットをプッシュすると、ジョブが自動的に開始され、それを CircleCI アプリケーションでモニタリングできます。
 
 ## 次のステップ
 {:.no_toc}
 
-- 「[2.0 への移行のヒント]({{ site.baseurl }}/2.0/migration/)」を参照してください。
-- デプロイの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
-- CircleCI 2.0 の Docker イメージおよび machine イメージの詳細については、「[Executor タイプを選択する]({{ site.baseurl }}/2.0/executor-types/)」を参照してください。
-- CircleCI 2.0 の `jobs` と `steps` の正確な構文と使用可能なすべてのオプションについては、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」を参照してください。
+- 「[2.0 への移行のヒント]({{ site.baseurl }}/ja/2.0/migration/)」を参照してください。
+- デプロイの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+- CircleCI 2.0 の Docker イメージおよび machine イメージの詳細については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
+- CircleCI 2.0 の `jobs` と `steps` の正確な構文と使用可能なすべてのオプションについては、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。

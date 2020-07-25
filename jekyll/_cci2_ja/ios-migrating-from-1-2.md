@@ -180,7 +180,7 @@ CircleCI 2.0 で iOS プロジェクトのコード署名をセットアップ�
           - ...
     
 
-利用できるステップの種類は「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」で確認できます。 **メモ:** macOS のビルドでは Docker がサポートされていません。
+利用できるステップの種類は「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」で確認できます。 **メモ:** macOS のビルドでは Docker がサポートされていません。
 
 ### プロジェクト コードのチェック アウト
 
@@ -229,7 +229,7 @@ jobs:
 
 {% endraw %}
 
-Gemfile.lock の内容を変更するたびに、新しいキャッシュが作成されます。 キャッシュ キーと `checksum` 以外のキー オプションの詳細については、[こちらのドキュメント]({{ site.baseurl }}/2.0/caching/)を参照してください。
+Gemfile.lock の内容を変更するたびに、新しいキャッシュが作成されます。 キャッシュ キーと `checksum` 以外のキー オプションの詳細については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/caching/)を参照してください。
 
 ### CocoaPods のインストール
 
@@ -380,7 +380,7 @@ jobs:
 
 上記の例では、CircleCI はリポジトリへのプッシュごとに `build-and-test` ジョブを実行し、`build-and-test` ジョブが正常に完了した後に初めて master ブランチでデプロイ ジョブを実行します。
 
-ワークフローの他の使用例については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows/)を参照してください。
+ワークフローの他の使用例については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows/)を参照してください。
 
 ## GitHub 上のサンプル アプリケーション
 

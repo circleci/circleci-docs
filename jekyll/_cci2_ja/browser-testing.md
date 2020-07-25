@@ -14,7 +14,7 @@ category:
 ## 前提条件
 {:.no_toc}
 
-「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
+「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
 
 ## 概要
 {:.no_toc}
@@ -49,7 +49,7 @@ jobs:
           background: true
 ```
 
-サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome ヘッドレス CircleCI 2.0 設定ファイルの例については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
+サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome ヘッドレス CircleCI 2.0 設定ファイルの例については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
 
 ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザー テスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する[ディスカッション スレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
 
@@ -296,9 +296,9 @@ Sauce Labs Orb の詳細と、この Orb をワークフローに使用する方
 
 ## BrowserStack と Appium
 
-上の Sauce Labs の例の Sauce Labs のインストールを、BrowserStack などの別のクロスブラウザー テスト プラットフォームのインストールに置き換えることができます。 次に、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/2.0/env-vars/)を自分の BrowserStack アカウントに関連付けられた値に設定します。
+上の Sauce Labs の例の Sauce Labs のインストールを、BrowserStack などの別のクロスブラウザー テスト プラットフォームのインストールに置き換えることができます。 次に、USERNAME および ACCESS_KEY [環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)を自分の BrowserStack アカウントに関連付けられた値に設定します。
 
-モバイル アプリケーションの場合は、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用できます。それには、ジョブに Appium をインストールし、USERNAME と ACCESS_KEY に CircleCI の[環境変数]({{ site.baseurl }}/2.0/env-vars/)を使用します。
+モバイル アプリケーションの場合は、Appium、または WebDriver プロトコルを使用する同等のプラットフォームを使用できます。それには、ジョブに Appium をインストールし、USERNAME と ACCESS_KEY に CircleCI の[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)を使用します。
 
 ## Cypress
 
@@ -322,7 +322,7 @@ JavaScript エンドツーエンド テストに使用できるブラウザー �
 ### スクリーンショットとアーティファクトの使用
 {:.no_toc}
 
-[ビルド アーティファクト]({{ site.baseurl }}/2.0/artifacts/)を収集してビルドから使用できるように CircleCI を構成できます。 たとえば、アーティファクトを使用し、ジョブの一部としてスクリーンショットを保存して、ジョブの終了時に表示することができます。 `store_artifacts` ステップでそれらのファイルを明示的に収集し、`path` と `destination` を指定する必要があります。 例については、「CircleCI を設定する」の [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) セクションを参照してください。
+[ビルド アーティファクト]({{ site.baseurl }}/ja/2.0/artifacts/)を収集してビルドから使用できるように CircleCI を構成できます。 たとえば、アーティファクトを使用し、ジョブの一部としてスクリーンショットを保存して、ジョブの終了時に表示することができます。 `store_artifacts` ステップでそれらのファイルを明示的に収集し、`path` と `destination` を指定する必要があります。 例については、「CircleCI を設定する」の [store_artifacts]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) セクションを参照してください。
 
 スクリーンショットの保存は簡単です。WebKit と Selenium では組み込み機能として提供されており、大半のテスト スイートでサポートされています。
 
@@ -356,7 +356,7 @@ VNC を使用して、テストを実行しているブラウザーを表示し�
 
 1. VNC ビューアをインストールします。 macOS を使用している場合は、[Chicken of the VNC](http://sourceforge.net/projects/chicken/) の使用を検討してください。 [RealVNC](http://www.realvnc.com/download/viewer/) もほとんどのプラットフォームで使用できます。
 
-2. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
+2. ターミナル ウィンドウを開き、CircleCI コンテナへの [SSH 実行を開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)し、リモート ポート 5901 をローカル ポート 5902 に転送します。
 
 ```bash
 ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
@@ -416,7 +416,7 @@ VNC サーバーを頻繁にセットアップしているなら、そのプロ�
           background: true
     
 
-2. これで、[SSH ビルドを開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
+2. これで、[SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)すると、デフォルトのテスト ステップの実行中に VNC サーバーに接続できます。 SSH トンネルの機能を持つ VNC ビューアを使用するか、独自のトンネルをセットアップできます。
 
     $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
     
@@ -427,7 +427,7 @@ CircleCI は、SSH からの X11 転送もサポートしています。 X11 転
 
 1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、\[XQuartz\] (http://xquartz.macosforge.org/landing/) の使用を検討してください。
 
-2. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/2.0/ssh-access-jobs/)します。`-X` フラグを使用して転送をセットアップします。
+2. システムで X をセットアップしたら、CircleCI VM に対して [SSH ビルドを開始]({{ site.baseurl }}/ja/2.0/ssh-access-jobs/)します。`-X` フラグを使用して転送をセットアップします。
 
     daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
     
@@ -450,4 +450,4 @@ xclock がデスクトップに表示された後は、`Ctrl+c` で強制終了�
 
 ## 関連項目
 
-[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)
+[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)

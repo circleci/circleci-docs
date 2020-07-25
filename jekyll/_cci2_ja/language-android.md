@@ -127,7 +127,7 @@ CircleCI Android イメージは、公式の [`openjdk:8-jdk`](https://hub.docke
 
 CircleCI では、[Android イメージの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)へのご協力をお待ちしております。 CircleCI の目標は、ユーザーが必要とするツールの*大半*に対応した基本イメージを提供することです。ユーザーが必要とする*すべて*のツールに対応することは計画していません。
 
-イメージをカスタマイズするには、ベースにする `circleci/android` イメージを `FROM` で指定した Dockerfile を作成します。 手順については、「[カスタム ビルドの Docker イメージの使用]({{ site.baseurl }}/2.0/custom-images/)」を参照してください。
+イメージをカスタマイズするには、ベースにする `circleci/android` イメージを `FROM` で指定した Dockerfile を作成します。 手順については、「[カスタム ビルドの Docker イメージの使用]({{ site.baseurl }}/ja/2.0/custom-images/)」を参照してください。
 
 [CircleCI Android Orb](https://circleci.com/orbs/registry/orb/circleci/android) を使用して目的の Android SDK と NDK を選択することも可能です。
 
@@ -142,9 +142,9 @@ CircleCI で Firebase Test Lab を使用するには、最初に以下の手順�
 
 1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
-2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/2.0/google-auth/)」の手順に従います。
+2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/ja/2.0/google-auth/)」の手順に従います。
     
-    **メモ:** `google/cloud-sdk` の代わりに、[Android コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/#android)の使用を検討してください。このイメージには、`gcloud` と Android に特化したツールが含まれています。
+    **メモ:** `google/cloud-sdk` の代わりに、[Android コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#android)の使用を検討してください。このイメージには、`gcloud` と Android に特化したツールが含まれています。
 
 3. **必要な API を有効にする:** 作成したサービス アカウントを使用して Google にログインし、[Google Developers Console の API ライブラリ ページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **[有効にする]** をクリックします。
 
@@ -198,13 +198,13 @@ jobs:
 
 ## デプロイ
 
-デプロイに関する構成の例は、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
+デプロイに関する構成の例は、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 ## トラブルシューティング
 
 ### メモリ不足エラーへの対処
 
-ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 JVM のメモリ使用をカスタマイズする基本的な方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/2.0/java-oom/)」を参照してください。
+ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 JVM のメモリ使用をカスタマイズする基本的な方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/ja/2.0/java-oom/)」を参照してください。
 
 テストに [Robolectric](http://robolectric.org/) を使用している場合は、Gradle のメモリ使用を微調整する必要があります。 Gradle VM を複数のテストにフォークする場合、VM は事前にカスタマイズされた JVM メモリ パラメーターを受け取りません。 `build.gradle` ファイル内に `android.testOptions.unitTests.all { maxHeapSize = "1024m" }` を追加して、テスト用の追加 JVM ヒープを Gradle に提供する必要があります。 `all { maxHeapSize = "1024m" }` を既存の Android 構成ブロックに追加してもかまいません。その場合は以下のようになります。
 

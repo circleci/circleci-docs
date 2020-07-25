@@ -8,14 +8,14 @@ categories:
 order: 2
 ---
 
-ジョブ、ステップ、ワークフローに加え、Orbs に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) キーについて概説します。
+ジョブ、ステップ、ワークフローに加え、Orbs に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) キーについて概説します。
 
 - 目次
 {:toc}
 
 ## Orbs の概要
 
-Orbs は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orbs を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)では、構成作業の簡素化に役立つ Orb を検索できます。
+Orbs は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orbs を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)では、構成作業の簡素化に役立つ Orb を検索できます。
 
 ## ジョブの概要
 
@@ -29,7 +29,7 @@ Orbs は、名前に基づいてインポートするかインラインで構成
 
 `docker` Executor を使用する場合、起動するコンテナのイメージを `docker:` キーの下に指定します。 `docker` Executor には任意のパブリック Docker イメージを使用できます。
 
-`docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/2.0/executor-types/)を参照してください。
+`docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
 ## ステップの概要
 
@@ -83,7 +83,7 @@ version: 2
           - test
     
 
-{% endraw %} 上記は並列ジョブ ワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows)を参照してください。
+{% endraw %} 上記は並列ジョブ ワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows)を参照してください。
 
 ## 関連項目
 

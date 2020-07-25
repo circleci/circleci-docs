@@ -10,9 +10,9 @@ order: 1
 
 ## Orb オーサリングの概要
 
-Orb は、複数のプロジェクト間で共有できる CircleCI 構成の再利用可能パッケージです。カプセル化およびパラメーター化されたコマンド、ジョブ、および Executor を作成して、[複数のプロジェクトで使用]({{ site.baseurl }}/2.0/using-orbs/)できます。
+Orb は、複数のプロジェクト間で共有できる CircleCI 構成の再利用可能パッケージです。カプセル化およびパラメーター化されたコマンド、ジョブ、および Executor を作成して、[複数のプロジェクトで使用]({{ site.baseurl }}/ja/2.0/using-orbs/)できます。
 
-[Orbs]({{ site.baseurl }}/2.0/orb-intro/) は、2.1 の [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルのトップレベルにある `orbs` キーを通して構成内で利用できるようになります。
+[Orbs]({{ site.baseurl }}/ja/2.0/orb-intro/) は、2.1 の [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのトップレベルにある `orbs` キーを通して構成内で利用できるようになります。
 
 既存の CircleCI Orb またはパートナー承認済みの Orb では特定のワークフローまたはジョブに対応できない場合、独自の Orb をオーサリングすることも可能です。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)にある既存の Orb を使用する場合に比べて時間はかかりますが、独自の Orb をオーサリングすれば、特定のワークフローに合わせて構成を作成し、事前にパッケージ化できます。 Orb のオーサリングと構成のバリデーションを行ってから、新たに作成した Orb を CircleCI Orb レジストリにパブリッシュするためのプロセスについて、順を追って説明していきます。
 
@@ -94,4 +94,4 @@ workflows:
 
 ## 次のステップ
 
-次に行うべき手順については、「[Orb のオーサリング – CircleCI CLI のセットアップ]({{site.baseurl}}/2.0/orb-author-cli/)」を参照してください。
+次に行うべき手順については、「[Orb のオーサリング – CircleCI CLI のセットアップ]({{site.baseurl}}/ja/2.0/orb-author-cli/)」を参照してください。

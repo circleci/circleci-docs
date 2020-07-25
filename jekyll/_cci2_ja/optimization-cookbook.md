@@ -206,5 +206,5 @@ Dockerfile を使用するのではなく、CircleCI のプライマリ コン�
 
 ## 関連項目
 
-- [最適化]({{site.baseurl}}/2.0/optimizations): キャッシュ、ワークフロー、ビルドに対して実践できるその他の最適化戦略
-- [依存関係のキャッシュ]({{site.baseurl}}/2.0/caching/#はじめに): キャッシュの概要
+- [最適化]({{site.baseurl}}/ja/2.0/optimizations): キャッシュ、ワークフロー、ビルドに対して実践できるその他の最適化戦略
+- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching/#はじめに): キャッシュの概要

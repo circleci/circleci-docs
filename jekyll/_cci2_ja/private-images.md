@@ -8,7 +8,7 @@ categories:
 order: 50
 ---
 
-プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
+プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
 
 ```yaml
 jobs:
@@ -116,4 +116,4 @@ jobs:
 
 ## 関連項目
 
-[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)
