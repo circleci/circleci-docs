@@ -32,8 +32,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
- `12.0.0-UA` | Xcode 12.0 for macOS Universal Apps Beta 2 (12A8161k) | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3265/index.html)
- `12.0.0` | Xcode 12.0 Beta 2 (12A6163b) | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3255/index.html)
+ `12.0.0` | Xcode 12.0 Beta 3 (12A8169g) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3358/index.html)
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html)
  `11.5.0` | Xcode 11.5 GM (11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html)
  `11.4.1` | Xcode 11.4.1 (11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)
