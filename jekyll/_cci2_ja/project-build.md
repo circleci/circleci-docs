@@ -12,7 +12,7 @@ order: 1
 
 ## 概要
 
-GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、[プロジェクト]({{ site.baseurl }}/ja/2.0/glossary/#プロジェクト)として circleci.com に追加された後は、コードを変更するたびに、クリーン コンテナ、またはユーザーの要件に合わせて構成された VM で[ビルド]({{ site.baseurl }}/ja/2.0/build)と自動化されたテストがトリガーされます。
+GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、[プロジェクト]({{ site.baseurl }}/2.0/glossary/#project)として circleci.com に追加された後は、コードを変更するたびに、クリーン コンテナ、またはユーザーの要件に合わせて構成された VM で[ビルド]({{ site.baseurl }}/ja/2.0/build)と自動化されたテストがトリガーされます。
 
 ## プロジェクトの追加
 

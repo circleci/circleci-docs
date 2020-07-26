@@ -72,7 +72,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 上記の例では、`project_slug` の形式は `:vcs/:org/:project` になります。 たとえば、プロジェクト スラッグが `gh/CircleCI-Public/circleci-cli` とすると、`CircleCI` に対して、GitHub の組織「CircleCI-Public」のリポジトリ「`circleci-cli`」にあるプロジェクトを使用するよう指示します。
 
-**重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定](https://circleci.com/ja/docs/2.0/settings/)や[コンテキスト](https://circleci.com/ja/docs/2.0/glossary/#コンテキスト)の説明を参照してください。
+**重要:** パイプライン パラメーターは機密データとしては**扱われない**ため、機密の値 (シークレット) には**使用しないでください**。 機密データの正しい使い方については、[プロジェクト設定](https://circleci.com/ja/docs/2.0/settings/)や[コンテキスト](https://circleci.com/docs/2.0/glossary/#context)の説明を参照してください。
 
 ## エンドポイントの変更
 

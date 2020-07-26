@@ -11,7 +11,7 @@ YAML 構文、仕様、よくあるご質問、ヘルプ、サポートなどに
 | [CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)          | `config.yml` 構文のすべての仕様                                    |
 | [ビルド済みイメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)                       | CircleCI が提供しているビルド済み Docker イメージの一覧                      |
 | [API]({{ site.baseurl }}/api/v1-reference/)                                | CircleCI v1.1 の API に関するドキュメント                            |
-| [用語集]({{ site.baseurl }}/ja/2.0/glossary/)                                    | CircleCI の用語と定義                                           |
+| [用語集]({{ site.baseurl }}/2.0/glossary/)                                    | CircleCI の用語と定義                                           |
 | [ヘルプとサポート]({{ site.baseurl }}/ja/2.0/help-and-support/)                       | CircleCI 開発者コミュニティおよび CircleCI サポート チームに質問し、回答を得る方法       |
 | [よくあるご質問]({{ site.baseurl }}/ja/2.0/faq/)                                     | CircleCI 2.0 に関してよく寄せられるご質問                               |
 | [GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/) | GitHub と Bitbucket のインテグレーションに関する情報、必要な権限の概要、組織とグループの動作方法 |

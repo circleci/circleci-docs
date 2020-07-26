@@ -48,7 +48,7 @@ jobs:
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#プライマリ-コンテナ)になります。 ジョブのすべてのコマンドがこのコンテナで実行されます。
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。 ジョブのすべてのコマンドがこのコンテナで実行されます。
 
 ```yaml
 version: 2

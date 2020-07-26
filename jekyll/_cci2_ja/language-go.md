@@ -157,7 +157,7 @@ jobs:
 
 他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
 
-`working_directory` のすぐ下の `docker` で、このジョブの[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#プライマリ-コンテナ)のイメージを指定します。
+`working_directory` のすぐ下の `docker` で、このジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)のイメージを指定します。
 
 ```yaml
     docker:

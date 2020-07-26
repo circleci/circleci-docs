@@ -23,7 +23,7 @@ order: 40
           sudo mv ~/docker-compose /usr/local/bin/docker-compose
     
 
-[pre-installed]: {{ site.baseurl }}/ja/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/ja/2.0/glossary/#プライマリ-コンテナ
+[pre-installed]: {{ site.baseurl }}/ja/2.0/circleci-images/#プリインストール-ツール [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
 
 次に、リモート Docker 環境をアクティブ化するために、`setup_remote_docker` ステップを追加します。
 

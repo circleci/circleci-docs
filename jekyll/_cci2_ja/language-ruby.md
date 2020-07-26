@@ -258,7 +258,7 @@ steps:
 ```
 {% endraw %}
 
-次のセクションでは、テスト データベースを設定します。 ここでは、`dockerize` [ユーティリティ](https://github.com/jwilder/dockerize)を使用して、データベース サービスが使用可能になるまで[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#プライマリ-コンテナ)のメイン処理の開始を遅らせています。
+次のセクションでは、テスト データベースを設定します。 ここでは、`dockerize` [ユーティリティ](https://github.com/jwilder/dockerize)を使用して、データベース サービスが使用可能になるまで[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)のメイン処理の開始を遅らせています。
 
 ```yaml
 steps:
