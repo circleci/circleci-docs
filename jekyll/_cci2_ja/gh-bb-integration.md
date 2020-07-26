@@ -62,13 +62,13 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
 - 可能な限り、デプロイ キーを使用します。
 - デプロイ キーを使用できない場合は、マシン ユーザー キーを使用し、必要最低限のリポジトリと権限にのみアクセスできるように制限します。
 - マシン ユーザー キー以外のユーザー キーは使用しないでください (キーは特定のユーザーではなく、ビルドに関連付ける必要があります)。
-- リポジトリへのユーザー アクセスを取り消す場合、デプロイ キーまたはユーザー キーを交換する必要があります。 
+- リポジトリへのユーザー アクセスを取り消す場合、デプロイ キーまたはユーザー キーを交換する必要があります。
     1. GitHub へのユーザー アクセスを取り消した後、GitHub でキーを削除します。
     2. CircleCI プロジェクトでキーを削除します。
     3. CircleCI プロジェクトでキーを再生成します。
 - 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザー キーを使用してアクセスできないようにします。
 
-## プロジェクトでの追加のプライベート リポジトリのチェックアウトの有効化
+## プロジェクトで追加のプライベート リポジトリのチェックアウトの有効化
 
 テスト プロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイ キーに加えて GitHub ユーザー キーも必要となります。デプロイ キーは *1 つ*のリポジトリに対してのみ有効であるのに対して、GitHub ユーザー キーはユーザーの*すべて*の GitHub リポジトリに対してアクセス権を持つためです。
 
@@ -87,12 +87,12 @@ SSH 鍵は信頼するユーザーとのみ共有してください。また、�
 **Python**: `pip install` ステップ実行中
 
     ERROR: Repository not found.
-    
+
 
 **Ruby**: `bundle install` ステップ実行中
 
     Permission denied (publickey).
-    
+
 
 ## マシン ユーザーを介したアクセスの制御
 
@@ -260,15 +260,15 @@ GitHub がサポートするキーの種類は、デプロイ キーとユーザ
 SSH キーを使用してレポジトリをチェックアウトするとき、既知のホスト ファイル (`~/.ssh/known_hosts`) に GitHub または Bitbucket のフィンガープリントを追加する必要があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブ ステップによって自動的に処理されます。カスタムのチェックアウト コマンドを使用したい場合には、以下のコマンドを使用する必要があります。
 
     mkdir -p ~/.ssh
-    
+
     echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
     bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
     ' >> ~/.ssh/known_hosts
-    
+
 
 `ssh-keyscan <host>` を実行し、サーバーの SSH キーをフェッチします。次に、このキーに `ssh-rsa` をプレフィックスして、ジョブの `known_hosts` ファイルに追加します。 たとえば、以下のようになります。
 
-    ➜  ~ ssh-keyscan github.com           
+    ➜  ~ ssh-keyscan github.com
     # github.com:22 SSH-2.0-babeld-2e9d163d
     github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
     # github.com:22 SSH-2.0-babeld-2e9d163d

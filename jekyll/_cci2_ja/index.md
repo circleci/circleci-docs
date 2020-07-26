@@ -50,10 +50,10 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <h2>ワークフロー</h2>
     <p>CircleCI のワークフロー機能によってジョブのスケジュール実行と順次実行が構成できます。</p>
     <ul>
-      <li><a href="/docs/2.0/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
-      <li><a href="/docs/2.0/workflows/#ワークフローの構成例">ワークフローの構成例</a></li>
-      <li><a href="/docs/2.0/workflows/#ワークフローのスケジュール実行">ワークフローのスケジュール実行</a></li>
-      <li><a href="/docs/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用">ワークフローにおけるコンテキストとフィルターの使用</a></li>
+      <li><a href="/docs/2.0/ja/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
+      <li><a href="/docs/2.0/ja/workflows/#ワークフローの構成例">ワークフローの構成例</a></li>
+      <li><a href="/docs/2.0/ja/workflows/#ワークフローのスケジュール実行">ワークフローのスケジュール実行</a></li>
+      <li><a href="/docs/2.0/ja/workflows/#ワークフローにおけるコンテキストとフィルターの使用">ワークフローにおけるコンテキストとフィルターの使用</a></li>
       <li><a href="/docs/2.0/creating-orbs/">Orbs の作成</a></li>
     </ul>
   </div>
