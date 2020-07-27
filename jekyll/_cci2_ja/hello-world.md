@@ -7,60 +7,95 @@ categories:
   - getting-started
 order: 4
 ---
-このページでは、[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後に CircleCI 2.x で Linux、Android、macOS プロジェクトの基本的なビルドを実行するための方法について解説しています。
 
-## Hello-Build Orb を使う
+[ユーザー登録]({{ site.baseurl }}/ja/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
 
-1. GitHub または Bitbucket のローカルリポジトリのルートディレクトリに `.circleci` ディレクトリを作成します。
+## Linux での Hello World
 
-2. `.circleci` ディレクトリに以下の内容を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを追加し、[`hello-build` orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) をインポートします。
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
-```yaml
-version: 2.1
+1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-orbs:
-    hello: circleci/hello-build@0.0.7 # circleci/buildpack-deps Docker イメージを使います
+2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します。
 
-workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
-```
+   ```yaml
+   version: 2.1
+     jobs:
+       build:
+         docker: 
+           - image: circleci/node:4.8.2 # ジョブのコマンドが実行されるプライマリ コンテナ
+         steps:
+           - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
+           - run: echo "hello world" # `echo` コマンドを実行します
+   ```
 
-変更のコミットやプッシュは、ビルド実行のトリガーになります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**[Add Project]** ボタンをクリックします。その後プロジェクト名の横にある **[Bulid Project]** ボタンをクリックしてください。
+1. 変更をコミットし、プッシュします。
 
-## Echo Hello World を実行する `build` ジョブ
+2. CircleCI アプリケーションの [Projects (プロジェクト)] ページで **[Add Projects (プロジェクトの追加)]** ボタンをクリックし、プロジェクトの横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
 
-Docker executor を使い Node コンテナをスピンアップし、シンプルな `echo` コマンドを実行する `build` ジョブを追加します。
+3. **[Start Building (ビルドの開始)]** ボタンをクリックすると、最初のビルドがトリガーされます。
 
-1. 以下の内容を `.circleci/config.yml` ファイルに追加します。 Docker executors は、`node:4.8.2` の部分を希望の [Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)に置き換えます。
+[Workflows (ワークフロー)] ページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
 
-```yaml
-version: 2
-jobs:
-  build:
-    docker: # Executor タイプです。他に machine、macOS という実行タイプを指定できます
-      - image: circleci/node:4.8.2 # プライマリコンテナです。このなかでジョブコマンドが実行されます
-    steps:
-      - checkout # プロジェクトのディレクトリにあるコードをチェックアウトします
-      - run: echo "hello world" # 「echo」コマンドを実行します
-```
+**メモ:** `No Config Found` エラーが発生した場合、`.yaml` ファイル拡張子を使用している可能性が考えられます。 このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
-**注**： `macOS` executors では、一部の設定が異なります。 iOS のプロジェクトを立ち上げる方法は、[iOS チュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)にアクセスし、`macOS` の設定例を参考にしてください。
+CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピン アップし、そこでジョブを実行します。
 
-変更のコミットやプッシュは、ビルド実行のトリガーになります。 CircleCI で初めてプロジェクトを作成する場合は、プロジェクトページにアクセスし、**[Add Project]** ボタンをクリックします。その後プロジェクト名の横にある **[Bulid Project]** ボタンをクリックしてください。
+サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/ja/2.0/language-javascript/)を参照してください。
 
-CircleCI はソースコードを取得 (チェックアウト) して "Hello World" と出力し、ジョブページにビルド成功を意味する緑色のマークが付いた項目を残します。GitHub や Bitbucket のコミットページにも緑色のチェックマークを追加します。
+## Android での Hello World
 
-**注：** ファイルの拡張子に `.yaml` を使うと、`No Config Found` エラーが発生します。 ファイルの拡張子で `.yml` を使うことで、このエラーは解消されます。
+前述の Linux の例と基本的な考え方は同じです。ビルド済みの Android イメージを同じ `config.yml` ファイルで使用して、`docker` executor を使用するジョブを追加します。
 
-## プロジェクトをフォローする
+    jobs:
+      build-android:
+        docker:
+          - image: circleci/android:api-25-alpha
+    
 
-自身がリポジトリにプッシュした新しいプロジェクトは自動的に*フォロー*し、メール通知が有効になると同時にダッシュボードにはそのプロジェクトが表示されるようになります。 CircleCI のプロジェクトページでは、選択した Org の各プロジェクトについて、手動でフォローとフォロー解除もできます。[Add Project] を選び、プロジェクト名の横にある [Follow Project] ボタンもしくは [Unfollow Project] ボタンをクリックしてください。
+詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
 
-## Org の切り替え
+## macOS での Hello World
 
-画面左上に、Org を切り替えるメニューがあります。
+Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
+
+    jobs: 
+      build-macos: 
+        macos:  
+          xcode: 11.3.0
+    
+
+詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
+
+## Windows での Hello World
+
+ここにも Linux、Android、macOS の例における基礎を流用できます。同じ `.circleci/config.yml` ファイルに `orb:` キーを追加して、`win/vs2019` Executor (Windows Server 2019) を使用するジョブを追加します。
+
+    orbs:
+      win: circleci/windows@1.0.0
+    
+    jobs:
+      build-windows:
+        executor: win/vs2019
+        steps:
+    
+          - checkout
+          - run: Write-Host 'Hello, Windows'
+    
+
+**メモ:** Windows ビルドでは、セットアップと前提条件が多少異なります。 詳しくは「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows)」を参照してください。
+
+### Orbs の使用とオーサリングの詳細
+
+Orbs は、構成を簡略化したりプロジェクト間で再利用したりできる、便利な構成パッケージです。[CircleCI Orb レジストリ](https://circleci.com/orbs/registry)で参照できます。
+
+## プロジェクトのフォロー
+
+プッシュする新しいプロジェクトを自動的に*フォロー*することで、メール通知が届き、プロジェクトがダッシュボードに追加されます。 また、手動でプロジェクトのフォローを開始または停止できます。それには、CircleCI アプリケーションの [Projects (プロジェクト)] ページで組織を選択し、[Add Projects (プロジェクトの追加)] ボタンをクリックし、フォローを開始または停止するプロジェクトの横にあるボタンをクリックします。
+
+## 組織の切り替え
+
+CircleCI アプリケーションの左上で組織を切り替えられます。
 
 
 {:.tab.switcher.Cloud}
@@ -69,12 +104,12 @@ CircleCI はソースコードを取得 (チェックアウト) して "Hello Wo
 {:.tab.switcher.Server}
 ![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-プロジェクトが表示されなかったり、目的のビルドではないものが表示される場合は、画面左上にある Org を確認してください。 もし左上に見えるのがあなたのユーザー名 `my-user` だったとすると、`my-user` に属する GitHub プロジェクトだけが `[Add Projects]` の下に表示されることになります。 GitHub のプロジェクト名 `your-org/project` をビルドしたいということであれば、画面左上のエリアをクリックすると表示される [SWITCH ORGANIZATION] メニューから目的の `your-org` に切り替えます。
+表示したいプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。 `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 
-## 次のステップは？
+## 次のステップ
 
-- CircleCI 2.0 の設定方法や `.circleci/config.yml` ファイルにおける重要度の高い要素についての説明は[コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)ページで確認できます。
+- 2.0 構成の概要、および `.circleci/config.yml` ファイルにおけるトップ レベル キーの階層については「[コンセプト]({{ site.baseurl }}/ja/2.0/concepts/)」を参照してください。
 
-- パラレルジョブ、シーケンシャルジョブ、スケジューリングされたジョブ、あるいは承認して処理を続行する Workflows の例については、[Workflows]({{ site.baseurl }}/ja/2.0/workflows) ページを参考にしてください。
+- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
 
-- [CircleCI の設定方法]({{ site.baseurl }}/ja/2.0/configuration-reference/)や [CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)のページでは、設定ファイルにおけるキーやビルド済みイメージについて具体的に説明しています。
+- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)」を参照してください。

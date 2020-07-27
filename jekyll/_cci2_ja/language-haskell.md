@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "言語ガイド：Haskell"
+title: "言語ガイド: Haskell"
 short-title: "Haskell"
 description: "CircleCI 2.0 での Haskell を使用したビルドとテスト"
 categories:
@@ -8,23 +8,22 @@ categories:
 order: 2
 ---
 
-このガイドでは、CircleCI 2.0 で基本的な Haskell アプリケーションを作成する方法について説明します。お急ぎの場合は、以下の設定例をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) にコピーし、ビルドを開始してください。
+このガイドでは、CircleCI 2.0 で基本的な Haskell アプリケーションをビルドする方法について説明します。お急ぎの場合は、以下の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 - 目次
 {:toc}
 
 ## 概要
-
 {:.no_toc}
 
-CircleCI でビルドされた Haskell プロジェクトのサンプルは、以下のリンクから確認できます。
+CircleCI でビルドを行う Haskell プロジェクトのサンプルは、以下のリンクから確認できます。
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-haskell"
-target="_blank">GitHub 上の Haskell デモプロジェクト</a>
+target="_blank">GitHub 上の Haskell デモ プロジェクト</a>
 
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
-## 設定例
+## 設定ファイルの例
 
 {% raw %}
 
@@ -37,27 +36,28 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
-          name: キャッシュされた依存関係を復元
+          # 依存関係のキャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
+          name: キャッシュされた依存関係の復元
           keys:
-            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
-          name: 依存関係を解決・更新
-          command: stack setup
+          name: 依存関係の解決・更新
+          command: stack --no-terminal setup
       - run:
-          name: テストを実行
-          command: stack test
+          name: テストの実行
+          command: stack --no-terminal test
       - run:
-          name: 実行可能ファイルをインストール
-          command: stack install
+          name: 実行可能ファイルのインストール
+          command: stack --no-terminal install
       - save_cache:
-          name: 依存関係をキャッシュ
-          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+          name: 依存関係のキャッシュ
+          key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
           paths:
             - "/root/.stack"
             - ".stack-work"
       - store_artifacts:
-          # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するテストサマリーをアップロードします
+          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するためにテスト サマリーをアップロードします
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -65,23 +65,23 @@ jobs:
 
 {% endraw %}
 
-## 設定の詳細
+## 設定ファイルの詳細
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始まります。 このキーは、互換性を損なう変更に関する警告を表示するために使用されます。
+`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 ```yaml
 version: 2.1
 ```
 
-次に、`jobs` キーを置きます。 それぞれのジョブは、ワークフロー内の各段階を表しています。 このサンプルアプリケーションには 1つの `build` ジョブのみが必要なので、このキーの下にすべてのステップとコマンドを置きます。
+次に、`jobs` キーを記述します。 1 つひとつのジョブがワークフロー内の各段階を表します。 このサンプル アプリケーションには 1 つの `build` ジョブのみが必要なので、このキーの下にすべてのステップとコマンドを記述します。
 
-1回の実行は 1つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [Workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) を使用していないため、`build` ジョブを持つ必要があります。
+実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
 
-ジョブのステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という名前の仮想環境で実行されます。
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
-この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 リストの先頭にあるイメージがジョブの[プライマリコンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)になります。
+この例では [`docker`]({{ site.baseurl }}/ja/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 最初に記述したイメージが、ジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。
 
-ジョブのすべてのコマンドは、このコンテナで実行されます。
+ジョブのすべてのコマンドがこのコンテナで実行されます。
 
 ```yaml
 jobs:
@@ -90,63 +90,73 @@ jobs:
       - image: fpco/stack-build:lts
 ```
 
-これで、この環境で Haskell ビルドツール `stack` を実行するように設定できました。 `config.yml` ファイルの残りの部分はすべて `steps` キーの下にあります。
+これで、この環境で Haskell ビルド ツール `stack` を実行するように設定できました。 `config.yml` ファイルの残りの部分はすべて `steps` キーのブロックです。
 
 最初のステップで `checkout` を実行してリポジトリのコードをプルし、この環境に準備します。
 
-次に、ビルド時間を短縮するために復元可能な依存関係があるかどうかを確認します。 その後 `stack setup` を実行して、`stack.yaml` コンフィグで指定された Haskell コンパイラーにプルします。
+次に、ビルド時間を短縮するために復元可能な依存関係があるかどうかを確認します。 続いて `stack setup` を実行し、`stack.yaml` 設定ファイルで指定した Haskell コンパイラーをプルします。
+
+`stack` 呼び出しのすべてで `--no-terminal` を指定して、表示できない文字で CircleCI ログが汚れてしまう「厄介な」出力機能 (`\b` 文字で実装) を回避します。
 
 {% raw %}
-
 ```yaml
     steps:
 
       - checkout
       - restore_cache:
-          name: Restore Cached Dependencies
+          name: キャッシュされた依存関係の復元
           keys:
-            - cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
+            - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
-          name: Resolve/Update Dependencies
-          command: stack setup
+          name: 依存関係の解決・更新
+          command: stack --no-terminal setup
       - save_cache:
-          name: Cache Dependencies
-          key: cci-demo-haskell-v1-{{ checksum "package.yaml" }}-{{ checksum "stack.yaml" }}
+          name: 依存関係のキャッシュ
+          key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
           paths:
             - ~/.stack
             - ~/.stack-work
 ```
-
 {% endraw %}
 
-メモ：`cabal` ビルドファイルを使用して、依存関係をキャッシュすることも可能です。 ただし、特に Haskell エコシステムに慣れていない場合は、一般に `stack` を使用することをお勧めします。 このデモアプリでは `stack.yaml` と `package.yaml` を利用しているため、この 2つのファイルを依存関係のキャッシュキーとして使用します。 `stack` と `cabal` の違いについては、[Haskell ツールスタックに関するドキュメント](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/)を参照してください。
+メモ: `cabal` ビルド ファイルを使用して、依存関係をキャッシュすることも可能です。 ただし、特に Haskell エコシステムに慣れていない場合は、一般に `stack` を使用することをお勧めします。 このデモ アプリでは `stack.yaml` と `package.yaml` を利用しているため、この 2 つのファイルを依存関係のキャッシュ キーとして使用します。 `package.yaml` は `stack.yaml` よりも頻繁に更新されるため、この 2 つのキーをキャッシュの復元に使用します。 `stack` と `cabal` の違いについては、[Haskell ツール スタックに関するドキュメント](https://docs.haskellstack.org/en/stable/stack_yaml_vs_cabal_package_file/)を参照してください。
 
-さらに、アプリケーションのビルドコマンドを実行します。 まずテストを実行し、次に実行可能ファイルをインストールします。 `stack install` を実行すると、バイナリが作成されて `~/.local/bin` に置かれます。
+さらに、アプリケーションのビルド コマンドを実行します。 先にテストを実行してから、実行可能ファイルをインストールします。 `stack install` を実行すると、バイナリが作成されて `~/.local/bin` に配置されます。
 
 ```yaml
       - run:
-          name: テストを実行
-          command: stack test
+          name: テストの実行
+          command: stack --no-terminal test
       - run:
-          name: 実行可能ファイルをインストール
-          command: stack install
+          name: 実行可能ファイルのインストール
+          command: stack --no-terminal install
 ```
 
 最後に、ビルドされた実行可能ファイルを取得し、アーティファクトとして保存します。
 
 ```yaml
       - store_artifacts:
-          # アーティファクト (https://circleci.com/docs/ja/2.0/artifacts/) に表示するビルド結果をアップロードします
-          path: ~/.local/bin/circleci-demo-haskell-exe
+          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するためにビルド結果をアップロードします
+          path: ~/.local/bin/circleci-demo-haskell-exe 
           destination: circleci-demo-haskell-exe
 ```
 
-完了です。 これで Haskell アプリケーション用に CircleCI を設定できました。
+完了です。 これで Haskell アプリケーション用に CircleCI を構成できました。
+
+## 一般的なトラブルシューティング
+
+`stack test` コマンドは、メモリ不足エラーで失敗する場合があります。 以下に示すように、`stack test` コマンドに `-j1` フラグを追加することを検討してみてください (メモ: これにより、テストを実行するコア数を 1 に減らして、メモリ使用量を抑えられますが、テストの実行時間が長くなる可能性があります)。
+
+```yaml
+      - run:
+          name: テストの実行
+          command: stack --no-terminal test -j1
+```
 
 ## 関連項目
-
 {:.no_toc}
 
-デプロイターゲットの設定例については、「[デプロイの設定]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
-このガイドでは、Haskell Web アプリの最も単純な設定例を示しました。通常、実際のプロジェクトはこれよりも複雑です。場合によっては、この例で示されている設定をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルドツールなど)。 ぜひお試しください。
+このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。通常、実際のプロジェクトはこれよりも複雑です。場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 自由に構成して試してみてください。
