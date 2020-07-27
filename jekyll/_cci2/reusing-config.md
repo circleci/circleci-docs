@@ -16,8 +16,6 @@ This reusable config reference page describes how to version your [.circleci/con
 {:.no_toc}
 
 1. Add your project on the **Add Projects** page if it is a new project.
-   Existing projects will need to enable Pipelines. {% include
-   snippets/enable-pipelines.md %}
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking a reusable config.
 
