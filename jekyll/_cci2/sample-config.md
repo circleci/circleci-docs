@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Sample 2.0 config.yml Files"
-short-title: "Sample 2.0 config.yml File"
-description: "Sample 2.0 config.yml File"
+title: "Sample config.yml Files"
+short-title: "Sample config.yml File"
+description: "Sample config.yml File"
 categories: [migration]
 order: 2
 ---
@@ -12,33 +12,62 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 * TOC
 {:toc}
 
-The CircleCI 2.0 configuration introduced a new key for `version: 2`. This new key enables you to use 2.0 while continuing to build on 1.0. That is, you can still use 1.0 on some projects while using 2.0 on others. Keys for `jobs`, `steps` and `workflows` enable greater control and status on each phase of a run to report more frequent feedback. See [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details.
+## Simple Configuration Examples
 
-<!-- Unsure this paragraph should still and mention 1.0 builders ... also should probably mention 2.1-->
+### Concurrent Workflow
 
-See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
+The configuration example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
-## Sample Configuration with Concurrent Jobs
+This image shows the workflow view for the following configuration example:
+![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
-Following is a sample 2.0 `.circleci/config.yml` file.
-
-{% raw %}
-
+{:.tab.basic-concurrent.Cloud}
 ```yaml
-version: 2
+version: 2.1
+
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
+```
+
+{:.tab.basic-concurrent.Server}
+```yaml
+version: 2
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+
+# Orchestrate our job run sequence
 workflows:
   version: 2
   build_and_test:
@@ -47,18 +76,250 @@ workflows:
       - test
 ```
 
-{% endraw %}
+### Sequential Workflow
 
-This example shows a concurrent job workflow where the `build` and `test` jobs run concurrently to save time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+The configuration example below shows a sequential job workflow where the `build` job runs and then the `test` job runs once `build` has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+This image shows the workflow view for the following configuration example, in which jobs run sequentially; one after the other:
+![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
+
+{:.tab.basic-sequential.Cloud}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.basic-sequential.Server}
+```yaml
+version: 2
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+### Approval Job
+
+The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the `deploy` job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
+
+![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+
+{:.tab.approval.Cloud}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
+
+{:.tab.approval.Server}
+```yaml
+version: 2
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
 
 ## Sample Configuration with Sequential Workflow
 
-Following is a sample 2.0 `.circleci/config.yml` file.
+Following is a sample `.circleci/config.yml` file using the following configuration features: 
 
+* A sequential workflow
+* An orb (`version: 2.1`/Cloud config only) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server example
+* A secondary services container
+* Workspaces
+* Storing artifacts
+
+{:.tab.complex-sequential.Cloud}
+```yaml
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+      - checkout
+      # Install the latest npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      - node/install-packages:
+          app-dir: ~/mern-starter
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
+    docker:
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
+      - image: cimg/node:current
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:4.2
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Demonstrate that Mongo DB is available as localhost
+          command: |
+            curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt update
+            sudo apt install mongodb-org
+            mongo localhost --eval 'db.serverStatus()'
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.complex-sequential.Server}
 {% raw %}
-
 ```yaml
 version: 2
+
 jobs:
   build:
     working_directory: ~/mern-starter
@@ -112,7 +373,6 @@ workflows:
             branches:
               only: master
 ```
-
 {% endraw %}
 
 This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
@@ -244,24 +504,22 @@ will be run in Docker.
 
 ```yaml
 version: 2.1
+
 jobs:
   build-and-test:
     macos:
       xcode: 11.3.0
-
     steps:
       - checkout
       - run:
           name: Install CocoaPods
           command: pod install --verbose
-
       - run:
           name: Build and run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
-
       - store_test_results:
           path: test_output/report.xml
       - store_artifacts:
@@ -302,4 +560,6 @@ workflows:
 ## See Also
 {:.no_toc}
 
-See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
+* See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#configuration) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details of the concepts covered in this example.
+* See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
+* See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.

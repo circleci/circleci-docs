@@ -52,6 +52,16 @@ Jekyll will build the site and start a web server, which can be viewed in your b
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
 
+## Working on search
+
+If you want to work on the way search works on docs, follow the below instructions.
+
+1. Create your own [algolia](https://www.algolia.com/) account to use for development
+1. Either take your admin API key for your account, or create an API key with write permissions. Create a file `./jekyll/_algolia_api_key` with the API key as its content.
+1. Update the `application_id` and `api_key` fields in the algolia section of `./jekyll/_config.yml` to match your own account. Do not commit these changes.
+1. Index the blog content to your own account via `bundle exec jekyll algolia`. If you have docs running in a container via docker compose, you can run `docker exec -it circleci-docs_jekyll_1 /bin/bash` to SSH into the container, cd into `./jekyll` and run the aforementioned command. You will see an error regarding the number of records being too high - this shouldn't matter for development, just be aware the search index you're using locally is incomplete.
+1. You should now be able to search your own index via the locally running docs.
+
 ## Editing Docs Locally
 
 The docs site includes Bootstrap 3, JS, and CSS, so you'll have access to all of its [reusable components](https://v4-alpha.getbootstrap.com/components/alerts/).

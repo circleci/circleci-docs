@@ -37,11 +37,13 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully.
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-**Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+    **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and     **contexts**.
 
 ## Creating and Using a Context
 
-1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. **Note:** Any organization member can create a context, but only organization administrators can restrict it with a security group.
+1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
+
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -120,7 +122,8 @@ version: 2.1
 # jobs declaration for build, test and deploy not displayed
 
 workflows:
-  build-test-deploy:
+  jobs:
+    build-test-deploy:
       - build
       - hold:
           type: approval # presents manual approval button in the UI

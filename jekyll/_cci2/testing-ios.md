@@ -32,22 +32,21 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
  Config   | Xcode Version                   | macOS Version | Software Manifest
 ----------|---------------------------------|---------------|-------------------
- `11.5.0` | Xcode 11.5 GM (Build 11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html)
- `11.4.1` | Xcode 11.4.1 (Build 11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)
- `11.4.0` | Xcode 11.4 (Build 11E146)       | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2796/index.html)
- `11.3.1` | Xcode 11.3.1 (Build 11C505)     | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
- `11.3.0` | Xcode 11.3 (Build 11C29)        | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2134/index.html)
- `11.2.1` | Xcode 11.2.1 (Build 11B500)     | 10.15.0   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
- `11.2.0` | Xcode 11.2.1 (Build 11B500)     | 10.15.0   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
- `11.1.0` | Xcode 11.1 (Build 11A1027)      | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
- `11.0.0` | Xcode 11.0 (Build 11A420a)      | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
- `10.3.0` | Xcode 10.3 (Build 10G8)         | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
- `10.2.1` | Xcode 10.2.1 (Build 10E1001)    | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
- `10.1.0` | Xcode 10.1 (Build 10B61)        | 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html)
- `10.0.0` | Xcode 10.0 (Build 10A255)       | 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html)
- `9.4.1`  | Xcode 9.4.1 (Build 9F2000)      | 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
- `9.3.1`  | Xcode 9.3.1 (Build 9E501)       | 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
- `9.0.1`  | Xcode 9.0.1 (Build 9A1004)      | 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
+ `12.0.0` | Xcode 12.0 Beta 3 (12A8169g) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3358/index.html)
+ `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html)
+ `11.5.0` | Xcode 11.5 GM (11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html)
+ `11.4.1` | Xcode 11.4.1 (11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html)
+ `11.3.1` | Xcode 11.3.1 (11C505)     | 10.15.1 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html)
+ `11.2.1` | Xcode 11.2.1 (11B500)     | 10.15.0   | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html)
+ `11.1.0` | Xcode 11.1 (11A1027)      | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html)
+ `11.0.0` | Xcode 11.0 (11A420a)      | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html)
+ `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html)
+ `10.2.1` | Xcode 10.2.1 (10E1001)    | 10.14.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html)
+ `10.1.0` | Xcode 10.1 (10B61)        | 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html)
+ `10.0.0` | Xcode 10.0 (10A255)       | 10.13.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html)
+ `9.4.1`  | Xcode 9.4.1 (9F2000)      | 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
+ `9.3.1`  | Xcode 9.3.1 (9E501)       | 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
+ `9.0.1`  | Xcode 9.0.1 (9A1004)      | 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
 {: class="table table-striped"}
 
 ## Getting Started

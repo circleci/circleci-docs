@@ -15,7 +15,9 @@ This document describes how to access a build container using SSH on CircleCI 2.
 ## Overview
 Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
-When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
+When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, **or** you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run (you may wish to execute `pwd` or `ls` to ensure that you are in the correct directory).
+
+Please note that a default CircleCI pipeline executes steps in a non-interactive shell and hence, there is the possibility that running steps using an interactive login may succeed, while failing in non-interactive mode.
 
 ## Steps
 
@@ -23,17 +25,16 @@ When you log in with SSH, you are running an interactive login shell. You are al
 
 2. To start a job with SSH enabled, select the 'Rerun job with SSH' option from the 'Rerun Workflow' dropdown menu.
 
+     **Note:** The `Rerun job with SSH` feature is intended for debugging purposes; therefore, these jobs will not be reflected in your pipelines. When you rerun a job with SSH, a new pipeline is not triggered; a job is just rerun. If needed, you can access the running jobs via the legacy jobs view.
+
 3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect.
 
      The details are displayed again in the 'Wait for SSH' section at the end of the job.
 
 4. SSH to the running job (using the same SSH key that you use for GitHub or Bitbucket) to perform whatever troubleshooting you need to.
 
-If you are using the Windows executor you will need to pass in the shell you
-want to use when using SSH. For example, To run  `powershell` in your build you
-would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello
-World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
-
+If you are using the Windows executor you will need to pass in the shell you want to use when using SSH. For example, To run  `powershell` in your build you
+would run: `ssh -p <remote_ip> -- powershell.exe`. Consider reading the [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows) document to learn more.
 
 The build VM will remain available for an SSH connection for **10 minutes after the build finishes running** and then automatically shut down. (Or you can cancel it.) After you SSH into the build, the connection will remain open for **two hours**.
 

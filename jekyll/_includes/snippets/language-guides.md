@@ -22,6 +22,7 @@
 | [Ruby and Rails]{:target="_blank"}      | Rails        | [circleci-demo-ruby-rails]{:target="_blank"}             |
 | [Scala]{:target="_blank"}               | sbt          | [sample-scala]{:target="_blank"}                         |
 | [Windows]{:target="_blank"}             | .NET         | [circleci-demo-windows]{:target="_blank"}                |
+| [Windows]{:target="_blank"}             | Visual C++   | [HelloVCSuite-Cloud]{:target="_blank"} for circleci.com<br>[HelloVCSuite-Server]{:target="_blank"} for on-premises |
 {: class="table table-striped"}
 
 [Android]: {{ site.baseurl }}/2.0/language-android/
@@ -66,3 +67,5 @@
 [circleci-demo-windows]: https://github.com/CircleCI-Public/circleci-demo-windows/
 [parallel-compile-circleci]: https://github.com/eddiewebb/parallel-compile-circleci/blob/master/.circleci/config.yml
 [circleci-demo-javascript-react-app]: https://github.com/CircleCI-Public/circleci-demo-javascript-react-app
+[HelloVCSuite-Cloud]: https://github.com/CircleCI-Public/HelloVCSuite-Cloud
+[HelloVCSuite-Server]: https://github.com/CircleCI-Public/HelloVCSuite-Server

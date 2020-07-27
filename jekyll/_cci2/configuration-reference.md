@@ -144,7 +144,7 @@ docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-parameters | N | Map | A map of parameters that need to be passed as part of the request when performing this operation
+parameters | N | Map | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`.
 steps | Y | List | A list of [steps](#steps) to be performed
 working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
@@ -157,6 +157,7 @@ resource_class | N | String | Amount of CPU and RAM allocated to each container 
 
 #### `environment`
 A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
+
 
 #### `parallelism`
 
@@ -179,6 +180,23 @@ jobs:
     steps:
       - run: go test -v $(go list ./... | circleci tests split)
 ```
+
+#### `parameters`
+The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-1).
+
+Reserved parameter-names:
+
+* `name`
+* `requires`
+* `context`
+* `type`
+* `filters`
+* `matrix`
+<!-- Others? -->
+<!-- branches & type pass `circleci config validate`. Strange -->
+
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
+
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
@@ -298,7 +316,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202007-01
     steps:
       - checkout
       - run:
@@ -309,8 +327,9 @@ jobs:
 ##### Available `machine` images
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
-* `ubuntu-1604:202004-01` - Ubuntu 16.04, docker 19.03.8, docker-compose 1.25.5
-* `ubuntu-1604:201903-01` - Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+* `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
+* `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
+* `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
 * `circleci/classic:latest` (old default) - an Ubuntu version `14.04` image that includes Docker version `17.09.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image. Changes to the `latest` image are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance. Ubuntu 14.04 is now End-of-Life'd. We suggest using the Ubuntu 16.04 image.
 * `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.10.0-ce` and docker-compose version `1.16.1`, along with common language tools found in CircleCI 1.0 build image.
 * `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
@@ -883,7 +902,7 @@ version | N        | String | Version string of Docker you would like to use (de
 
 **Notes**:
 
-- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching. 
+- A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
 - The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
@@ -1187,9 +1206,9 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 
 | Type      | lifetime        | Use                      | Example |
 |-----------|-----------------|------------------------------------|---------
-| Artifacts | Months          | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
+| Artifacts | 1 Month         | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
 | Workspaces | Duration of workflow        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
-| Caches    | Months          | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+| Caches    | 15 Days         | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
@@ -1567,6 +1586,38 @@ workflows:
             - build-v0.2
 ```
 
+###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
+Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
+
+Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
+
+Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
+
+```yaml
+version: 2.1
+
+jobs:
+  bar:
+    machine: true
+    steps:
+      - checkout
+      - run:
+          command: echo "building"
+      - run:
+          command: echo "testing"
+
+workflows:
+  build:
+    jobs:
+      - bar:
+          pre-steps: # steps to run before steps defined in the job bar
+            - run:
+                command: echo "install custom dependency"
+          post-steps: # steps to run after steps defined in the job bar
+            - run:
+                command: echo "upload artifact to s3"
+```
+
 ##### **Using `when` in Workflows**
 
 With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
@@ -1605,7 +1656,7 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 ## Logic Statements
 
-Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, so before the workflow is run. The group of logic statements includes:
+Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
 Type               | Arguments          | `true` if                              | Example
 -------------------|--------------------|----------------------------------------|----------------------------------------
@@ -1624,7 +1675,17 @@ Truthiness rules are as follows:
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
-### Example
+### Logic Statement Examples
+
+```yaml
+workflows:
+  my-workflow:
+      when:
+        condition:
+          or:
+            - equal: [ master, << pipeline.git.branch >> ]
+            - equal: [ staging, << pipeline.git.branch >> ]
+```
 
 ```yaml
 workflows:

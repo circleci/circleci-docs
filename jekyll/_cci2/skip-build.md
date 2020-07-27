@@ -59,38 +59,36 @@ If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will s
 
 ## Auto Cancelling a Redundant Build
 
-If you are frequently pushing changes to a branch, you increase the chances of builds queueing. This means you might have to wait for an older version of a branch to finish building before the most recent version builds.
+If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to finish building before the most recent version starts.
 
-To save time, you can configure CircleCI to automatically cancel any queued or running builds when a newer build is triggered on that same branch.
+To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
 
-**Note:**
-Your project's default branch will never auto-cancel builds. This feature only applies to non-workflow builds, builds triggered by pushes to GitHub, or workflow builds that use pipelines.
+**Note:** Your project's default branch (usually `master`) will never auto-cancel builds. 
 
-### Steps to Enable Auto-Cancel for New Builds Triggered by Pushes to GitHub without Workflows
+### Steps to Enable Auto-Cancel for Pipelines Triggered by Pushes to GitHub or the API
 {:.no_toc}
 
-1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
+**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
 
-2. In the **Build Settings** section, click on **Advanced Settings**.
+1. In the CircleCI application, go to your Project Settings.
 
-3. In the **Enable Pipelines** section, click the **On** button.
+2. Click on **Advanced Settings**.
 
-### Steps to Enable Auto-Cancel for Workflows Triggered by Pushes to GitHub or the API
-{:.no_toc}
+3. In the **Auto-cancel redundant builds** section, enable the feature by switching the toggle switch to the **On** position.
 
-Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch.
-
-**Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches. Auto-cancelling workflows requires enabling pipelines.
-
-1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
-
-2. In the **Build Settings** section, click on **Advanced Settings**.
-
-3. In the **Enable Pipelines** section, click the **On** button.
-
-4. Commit a change to trigger a build and ensure it runs successfully with the new pipelines.
-
-5. In the **Auto-cancel redundant builds** section, click the **On** button.
-
-Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
+Projects for which auto-cancel is enabled in the Advanced Settings will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 - Scheduled workflows and Re-run workflows will not be cancelled.
+
+## Auto Cancel for CircleCI Server installations
+
+CircleCI Server does not currently use the pipelines feature, and as a result the Auto Cancel Builds feature only works for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
+
+### Steps to Enable Auto-Cancel for CircleCI Server Installations
+{:.no_toc}
+
+1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
+
+2. In the **Build Settings** section, click on **Advanced Settings**.
+
+3. In the **Auto-cancel redundant builds** section, click the **On** button.
+
