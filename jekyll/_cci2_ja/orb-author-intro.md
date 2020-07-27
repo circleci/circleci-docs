@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orb オーサリングの概要"
-short-title: "Orb オーサリングの概要"
-description: "Orb のオーサリング方法に関する入門ガイド"
+title: "Orbオーサリングの概要"
+short-title: "Orbオーサリングの概要"
+description: "Orbのオーサリング方法に関する入門ガイド"
 categories:
   - getting-started
 order: 1
