@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orb オーサリングに関するよくあるご質問"
-short-title: "Orb オーサリングに関するよくあるご質問"
-description: "Orb オーサリングに関するよくあるご質問"
+title: "Orbオーサリングに関するよくあるご質問"
+short-title: "Orbオーサリングに関するよくあるご質問"
+description: "Orbオーサリングに関するよくあるご質問"
 categories:
   - configuring-jobs
 order: 20

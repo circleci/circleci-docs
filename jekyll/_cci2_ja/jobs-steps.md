@@ -23,7 +23,7 @@ Orbs は、名前に基づいてインポートするかインラインで構成
 
 ジョブとステップはきめ細かく制御できます。ワークフローのフレームワークが提供され、各フェーズでのステータスを確認できるため、高頻度のフィードバックが可能になります。 下図はジョブ間のデータ フローを表したものです。 ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。 キャッシュは、異なるワークフロー ビルドにある同じジョブ間でデータを維持します。 アーティファクトは、ワークフローの終了後にデータを維持します。
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
 2.0 のジョブは、最近使用した `machine` Executor の実行を再利用できる `machine` Executor、テストや必要なサービス (データベースなど) を実行するように Docker コンテナを構成できる `docker` Executor、または `macos` Executor を使用して実行できます。
 
@@ -64,7 +64,7 @@ version: 2
     jobs:
       build:
         docker:
-    
+
           - image: circleci/<language>:<version TAG>
         steps:
           - checkout
@@ -81,7 +81,7 @@ version: 2
         jobs:
           - build
           - test
-    
+
 
 {% endraw %} 上記は並列ジョブ ワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows)を参照してください。
 

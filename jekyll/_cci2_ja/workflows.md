@@ -125,7 +125,7 @@ workflows:
 
 ここに示すワークフローの例では、共通のビルド ジョブを実行し、次にファンアウトして一連の受け入れテスト ジョブを並列に実行し、最後にファンインして共通のデプロイ ジョブを実行します。
 
-![ファンアウトとファンインのワークフロー]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
+![ファンアウトとファンインのワークフロー]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
 
 以下の `config.yml` スニペットは、ファンアウトとファンインのジョブ実行を構成するワークフローの例を示しています。
 
@@ -184,7 +184,7 @@ workflows:
           type: approval # <<< このキー・値のペアにより、ワークフローのステータスが "On Hold" に設定されます。
           requires: # test2 が成功した場合にのみ "hold" ジョブを実行します。
            - test2
-      # `hold` ジョブが承認されると、`hold` ジョブを必要とする後続のジョブが実行されます。 
+      # `hold` ジョブが承認されると、`hold` ジョブを必要とする後続のジョブが実行されます。
       # この例では、ユーザーが手動でデプロイ ジョブをトリガーしています。
       - deploy:
           requires:
@@ -208,7 +208,7 @@ workflows:
 
 下図は、`request-testing` ジョブをクリックしたときに表示される承認ダイアログ ボックスのスクリーンショットです。
 
-![保留中のワークフローの承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
+![保留中のワークフローの承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
 ## ワークフローのスケジュール実行
 
@@ -284,11 +284,11 @@ workflows:
       - test1:
           requires:
             - build
-          context: org-global  
+          context: org-global
       - test2:
           requires:
             - test1
-          context: org-global  
+          context: org-global
       - deploy:
           requires:
             - test2
@@ -426,7 +426,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 
 各ワークフローには 1 つのワークスペースが関連付けられ、ワークフローの進行に伴ってダウンストリーム ジョブにファイルを転送するために使用されます。 ワークスペースは、追加専用のデータ ストレージです。 ジョブは、ワークスペースにデータを維持できます。 この構成は、データをアーカイブし、コンテナ外のストアに新しいレイヤーを作成します。 ダウンストリーム ジョブは、そのコンテナ ファイル システムにワークスペースをアタッチできます。 ワークスペースをアタッチすると、ワークフロー グラフ内のアップストリーム ジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
 
-![ワークスペースのデータ フロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
+![ワークスペースのデータ フロー]({{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 ワークスペースを使用して実行ごとに固有のデータを渡しますが、これはダウンストリーム ジョブに必要です。 複数のブランチで実行されるジョブを含むワークフローでは、ワークスペースを使用してデータを共有しなければならない場合があります。 ワークスペースは、コンパイルされたデータがテスト コンテナによって使用されるプロジェクトでも便利です。
 
@@ -460,7 +460,7 @@ jobs:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をワークスペースに維持します。 
+      # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をワークスペースに維持します。
 
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。 これは、ワークスペースの
@@ -560,7 +560,7 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 ## ビデオ: ワークフローに複数のジョブを構成する
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {:.no_toc}

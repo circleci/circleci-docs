@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Orb のパブリッシュ"
-short-title: "Orb のパブリッシュ"
+title: "Orbのパブリッシュ"
+short-title: "Orbのパブリッシュ"
 description: "CircleCI Orbs のパブリッシュに関する入門ガイド"
 categories:
   - getting-started
@@ -227,12 +227,12 @@ workflows:
 CircleCI CLI ツールが正しくインストールされていることを確認するには、CLI ツールを使用して以下のコマンドを実行し、ビルド設定ファイルをバリデーションします。
 
     $ circleci config validate
-    
+
 
 以下のような応答が表示されます。
 
     Config file at .circleci/config.yml is valid
-    
+
 
 ## 関連項目
 

@@ -22,7 +22,7 @@ CircleCI 2.0 で初めてのビルドを成功させるためのステップに�
 ## リポジトリを作成する
 
 1. GitHub.com でお使いのアカウントに移動します。
-  
+
   * **[Repositories (リポジトリ)]** タブに移動し、**[New (新規)]** を選択するか、直接 <https://github.com/new> に移動します。 ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
 
 2. [Initialize this repository with a README (リポジトリを初期化し、README を添付する)] を選択し、[Create repository (リポジトリの作成)] ボタンをクリックします。![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
@@ -56,7 +56,7 @@ CircleCI は、テスト環境のセットアップ方法や実行するテス�
 
 2. 次に、既に CircleCI でビルド中のプロジェクトがあり、自分がアクセスできる場合は、それらを*フォロー*するためのオプションが表示されます (通常、会社または組織の GitHub アカウントに接続している開発者が該当します)。 次の画面では、先ほど作成したリポジトリを CircleCI の新しいプロジェクトとして追加できます。
 
-3. 新しいリポジトリを追加する前に、左上のドロップダウンで自分の GitHub アカウントが選択されていることを確認します。[Add Projects (プロジェクトの追加)] ページを選択し、先ほど作成したリポジトリをリストで見つけたら (検索もできます)、その横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list.png)
+3. 新しいリポジトリを追加する前に、左上のドロップダウンで自分の GitHub アカウントが選択されていることを確認します。[Add Projects (プロジェクトの追加)] ページを選択し、先ほど作成したリポジトリをリストで見つけたら (検索もできます)、その横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 ![]({{ site.baseurl }}/assets/img/docs/getting-started--sample-config.png)
 
 4. 次の画面で、ドロップダウンから言語を選択して、プロジェクト向けに推奨されるベスト プラクティスがあらかじめ記述されている config.yml ファイルを取得します。 使用している言語がリストにない場合は、リスト下部にある [Use Hello World] ボタンをクリックします。 表示される YAML 構成をコピーし、リポジトリのディレクトリのルートにある `.circleci` というフォルダーに「config.yml」という名前で保存します。 ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
 
@@ -157,13 +157,13 @@ jobs:
           root: my_workspace
           # ルートからの相対パスでなければなりません
           paths:
-            - echo-output      
+            - echo-output
   two:
     docker:
       - image: circleci/ruby:2.4.1
     steps:
       - checkout
-      - run: echo "A more familiar hi"  
+      - run: echo "A more familiar hi"
       - attach_workspace:
           # 絶対パスであるか、working_directory からの相対パスでなければなりません
           at: my_workspace
@@ -210,7 +210,7 @@ workflows:
     ls -al               # 現在のディレクトリに含まれるファイルとディレクトリを一覧表示します
     cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します
     cat <file_name>      # ファイル <file_name> の内容を表示します
-    
+
 
 ## 関連項目
 {:.no_toc}
@@ -220,11 +220,11 @@ Git フックを使用してコミットごとに CircleCI `config.yml` をバ�
 ### CircleCI
 {:.no_toc}
 
-* CircleCI ブログ (購読できます) 
+* CircleCI ブログ (購読できます)
   * <https://circleci.com/blog/>
-* CircleCI ブログの関連記事  
+* CircleCI ブログの関連記事
   * <https://circleci.com/blog/what-is-continuous-integration/>
-* CircleCI に関する他のソーシャル メディアと GitHub 
+* CircleCI に関する他のソーシャル メディアと GitHub
   * <https://github.com/circleci>
   * <https://twitter.com/circlecijapan>
   * <https://www.facebook.com/groups/CircleCIJP/>
