@@ -28,7 +28,7 @@ module Jekyll
     end
 
     def curl_args_padded(endpoint)
-      args = ['--header "Circle-Token: <circle-token>"']
+      args = ['--header "Circle-Token: &lt;circle-token&gt;"']
       args << "-X #{endpoint['method']}" if not endpoint['method'] == 'GET'
       args << '--header "Content-Type: application/json"' if endpoint['body']
       if endpoint['body']
