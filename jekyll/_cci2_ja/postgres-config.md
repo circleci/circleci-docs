@@ -1,21 +1,23 @@
 ---
 layout: classic-docs
-title: "データベースの構成例"
-short-title: "データベースの構成例"
-description: "PostgreSQL の構成例"
-categories:
-  - configuring-jobs
+title: "データベースの設定例"
+short-title: "データベースの設定例"
+description: "PostgreSQL を使う際の設定例"
+categories: [configuring-jobs]
 order: 35
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
+このページでは、PostgreSQL/Rails あるいは MySQL/Ruby という組み合わせのデータベース設定を含む、[config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について解説しています。
 
 * TOC
 {:toc}
 
-## structure.sql を使用した Rails アプリケーション用の CircleCI 構成例
+## structure.sql を使う Rails アプリケーション用の設定例
 
-`structure.sql` ファイルを使用して構成した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、circleci/ruby:2.4.1-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
+`structure.sql` ファイルを用いて設定する Rails アプリケーションを移行するときは、
+`psql` が PATH の通っている場所にインストールされていること、psql に対するアクセス権限が正しく設定されていることを確認してください。
+circleci/ruby:2.4.1-node というイメージには psql がデフォルトでインストールされておらず、
+データベースアクセスに `pg` gem を使うためです。
 
 {% raw %}
 
@@ -25,17 +27,16 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
+    # すべてのコマンドの実行を担うプライマリコンテナイメージ
 
     docker:
-
       - image: circleci/ruby:2.4.1-node
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # `host: localhost` でアクセスできるサービス コンテナ イメージ
+    # 「host: localhost」でアクセスできるサービスコンテナイメージ
 
       - image: circleci/postgres:9.6.2-alpine
         environment:
@@ -43,60 +44,57 @@ jobs:
           POSTGRES_DB: circle-test_test
 
     steps:
-
       - checkout
 
-      # バンドル キャッシュを復元します
-
+      # bundle キャッシュをリストアする
       - restore_cache:
           keys:
             - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
-      # 依存関係をバンドル インストールします
-
+      # bundle install で依存関係をインストールする
       - run:
-          name: 依存関係のインストール
+          name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # バンドル キャッシュを保存します
-
+      # bundle キャッシュを保存する
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
       - run:
-          name: データベースのセットアップ
+          name: Database Setup
           command: |
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
       - run:
-          name: RSpec の並列実行
+          name: Parallel RSpec
           command: bin/rails test
 
-      # アーティファクトを保存します
-
+      # artifacts を保存する
       - store_test_results:
           path: /tmp/test-results
 ```
 
 {% endraw %}
 
-**メモ:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker Hub などのレジストリにプッシュしてください。
+**注 :** 上記の方法以外にも、既存のイメージに手を入れて独自のイメージとしてビルドし、
+必要なパッケージを組み合わせて Docker Hub やレジストリにコミット、プッシュする、
+という方法もあります。
 
-### 環境のセットアップ例
+### 環境設定の例
 {:.no_toc}
 
-CircleCI 2.0 では、複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベース構成は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
+CircleCI 2.0 では複数のビルド済みイメージやカスタムイメージが使われることがあります。そのため、データベース設定は明示的に宣言しておかなければなりません。例えば Rails は下記の優先順位で使用するデータベース URL を特定します。
 
-1. DATABASE_URL 環境変数 (設定されている場合)
-2. `config.yml` ファイル内の該当する環境の test セクションの構成 (通常、テスト スイートでは `test`)。
+1. 定義済みの環境変数 DATABASE_URL の値
+2. `config.yml` ファイル内の該当する環境の test セクションにおける設定（Rails のテストスイートでは通常は `test` と記述しています）
 
-この順序の具体例を以下に示します。ここでは、イメージの `environment` 設定を組み合わせると共に、シェル コマンドに `environment` 設定を追加してデータベース接続を有効にしています。
+下記では、このデータベース URL の設定の仕方について、イメージの定義に `environment` を組み合わせる例と、データベース接続を有効にするシェルコマンドを用いた `environment` の例を示しています。
 
 ```yaml
 version: 2
@@ -110,8 +108,8 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # この例では PostgresSQL 9.6 公式イメージを使用しています。
-      # circleci/postgres:9.6 も使用可能で、いくつかの機能強化とカスタマイズが加えられています。 いずれかのイメージを使用できます。
+      # この例では postgres 9.6 の公式イメージを使っています。もしくは circleci/postgres:9.6 と指定することもできます。
+      # 後者には多少の機能改善やカスタマイズが加わっていますが、どちらのイメージを指定しても問題ありません。
       - image: postgres:9.6-jessie
         environment:
           POSTGRES_USER: ubuntu
@@ -119,10 +117,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Ruby の依存関係のインストール
+          name: Install Ruby Dependencies
           command: bundle install
-      - run: 
-          name: データベースのセットアップ
+      - run:
+          name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
             bundle exec rake db:migrate
@@ -130,20 +128,20 @@ jobs:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
 
-この例では、PostgreSQL 9.6 のデフォルトのユーザーとポートとして `$DATABASE_URL` が指定されています。バージョン 9.5 の場合、デフォルトのポートは 5432 ではなく 5433 になります。 他のポートを指定するには、`$DATABASE_URL` と `psql` の呼び出し箇所をすべて変更します。
+これは PostgreSQL 9.6 で、デフォルトのユーザーとポートを使用するように `$DATABASE_URL` を設定した例となります。バージョンが 9.5 の場合はポート番号を 5432 ではなく 5433 とします。他のポートを使うときは、`$DATABASE_URL` と `psql` を呼び出しているすべての箇所を変更してください。
 
-## Go アプリケーションと PostgreSQL の構成例
+## PostgreSQL と Go 言語を使ったアプリケーションの設定例
 
-以下の構成例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)を参照してください。
+下記の設定に関する全体像やアプリケーションのパブリックリポジトリのソースは、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)で確認できます。
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go イメージは https://hub.docker.com/r/circleci/golang/ で入手できます
+      # CircleCI の Go のイメージはこちら https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
-      # CircleCI PostgreSQL イメージは https://hub.docker.com/r/circleci/postgres/ で入手できます
+      # CircleCI の PostgreSQL のイメージはこちら https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
         environment:
           POSTGRES_USER: circleci-demo-go
@@ -155,7 +153,6 @@ jobs:
       TEST_RESULTS: /tmp/test-results
 
     steps:
-
       - checkout
       - run: mkdir -p $TEST_RESULTS
 
@@ -163,15 +160,14 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # 通常、このステップはカスタム プライマリ イメージに記述されています
-      # この例では、説明のためにここにステップを追加しました
-
-      run: go get github.com/lib/pq
+      # 通常、以下の内容はカスタムしたプライマリイメージのところに記述しますが、
+      # わかりやすくするためここに記述しています。
+      - run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 
       - run:
-          name: Postgres が準備できるまで待機
+          name: Waiting for Postgres to be ready
           command: |
             for i in `seq 1 10`;
             do
@@ -179,9 +175,9 @@ jobs:
               echo -n .
               sleep 1
             done
-            echo Failed waiting for Postgres && exit 1
+            echo Failed waiting for Postgres &amp;&amp; exit 1
       - run:
-          name: 単体テストの実行
+          name: Run unit tests
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
@@ -196,7 +192,7 @@ jobs:
             - "/go/pkg"
 
       - run:
-          name: サービスの開始
+          name: Start service
           environment:
             CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
             CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
@@ -204,7 +200,7 @@ jobs:
           background: true
 
       - run:
-          name: サービスが稼働していることのバリデーション
+          name: Validate service is working
           command: |
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
@@ -216,75 +212,37 @@ jobs:
           path: /tmp/test-results
 ```
 
-## MYSQL プロジェクトの例
+## MySQL を使った Ruby プロジェクトの設定例と、それを Docker 化する例
 
-以下の例では、PHP コンテナと共に、MYSQL をセカンダリ コンテナとしてセットアップしています。
+下記は MySQL と dockerize コマンドを使った例です。補足情報は [sample project on Github](https://github.com/tkuchiki/wait-for-mysql-circleci-2.0) でご確認ください。
 
 ```yaml
 version: 2
 jobs:
   build:
+    working_directory: ~/test-circleci
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # ステップが実行される場所となるプライマリ コンテナ
-      - image: circleci/mysql:8.0.4
+      - image: circleci/ruby:2.4-node-jessie
+      - image: tkuchiki/delayed-mysql
         environment:
-          MYSQL_ROOT_PASSWORD: rootpw
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: user
-          MYSQL_PASSWORD: passw0rd
-
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: circleci
     steps:
-
       - checkout
       - run:
-      # プライマリ コンテナは MySQL ではないため、準備が完了するまで sleep コマンドを実行します。
-          name: MySQL が準備できるまで待機
-          command: |
-            for i in `seq 1 10`;
-            do
-              nc -z 127.0.0.1 3306 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for MySQL && exit 1
+          name: Bundle install
+          command: bundle install
       - run:
-          name: MySQL CLI のインストール; ダミー データのインポート; サンプル クエリの実行
-          command: |
-            sudo apt-get install default-mysql-client
-            mysql -h 127.0.0.1 -u user -ppassw0rd test_db < sql-data/dummy.sql
-            mysql -h 127.0.0.1 -u user -ppassw0rd --execute="SELECT * FROM test_db.Persons"
-workflows:
-  version: 2
-  build-deploy:
-    jobs:
-      - build
+          name: Wait for DB
+          # circleci/* の Docker イメージにプリインストール
+          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
+      - run:
+          name: MySQL version
+          command: bundle exec ruby mysql_version.rb
 ```
 
-MySQL をプライマリかつ唯一のコンテナにすることもできますが、この例ではそのようにしていません。 より実践的なユース ケースとして、この例では PHP Docker イメージをプライマリ コンテナとして使用し、MySQL が起動してから、データベースに関連する `run` コマンドを実行しています。
+## 関連情報
 
-データベースが起動したら、`mysql` クライアントをプライマリ コンテナにインストールします。これで、プロジェクトのルートにあるとしたダミー データ `sql-data/dummy.sql` に接続してインポートするコマンドを実行できます。 このダミー データには、例として一連の SQL コマンドが格納されています。
 
-```sql
-DROP TABLE IF EXISTS `Persons`;
-
-CREATE TABLE Persons (
-    PersonID int,
-    LastName varchar(255),
-    FirstName varchar(255),
-    Address varchar(255),
-    City varchar(255)
-);
-
-INSERT INTO Persons
-VALUES (
-    1,
-    "Foo",
-    "Baz",
-    "123 Bar Street",
-    "FooBazBar City"
-);
-```
-
-## 関連項目
-
-サービス イメージの使用とデータベースのテスト手順に関する概念的な情報については、「[データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)」を参照してください。
+サービスイメージやデータベースのテストステップの使用に関するひと通りの知識を「[データベースを設定する]({{ site.baseurl }}/ja/2.0/databases/)」ページで紹介しています。
