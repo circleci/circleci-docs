@@ -256,9 +256,10 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 ```
 curl \
   --header "Content-Type: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
   --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
   --request POST \
-  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
+  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
 ```
 
 ここで使われている `$CIRCLE_TOKEN` は [パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)です。

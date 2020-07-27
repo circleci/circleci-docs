@@ -5,7 +5,7 @@
 Returns a list of all environment variables.
 
 ```sh
-curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
+curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
 ``
 
 ```json
@@ -22,7 +22,7 @@ curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:usernam
 Creates a new environment variable.
 
 ```sh
-curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value":"bar"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
+curl -H "Circle-Token: <circle-token>" -X POST --header "Content-Type: application/json" -d '{"name":"foo", "value":"bar"}' https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar
 ```
 
 ```json
@@ -38,7 +38,7 @@ curl -u <circle-token>: -X POST --header "Content-Type: application/json" -d '{"
 Gets the hidden value of environment variable :name
 
 ```sh
-curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
+curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
 ```
 
 ```json
@@ -53,7 +53,7 @@ curl -u <circle-token>: https://circleci.com/api/v1.1/project/:vcs-type/:usernam
 ## Delete Environment Variables
 
 ```sh
-curl -u <circle-token>: -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
+curl -H "Circle-Token: <circle-token>" -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/envvar/:name
 ```
 
 ```json

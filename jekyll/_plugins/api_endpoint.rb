@@ -28,7 +28,7 @@ module Jekyll
     end
 
     def curl_args_padded(endpoint)
-      args = []
+      args = ['--header "Circle-Token: <circle-token>"']
       args << "-X #{endpoint['method']}" if not endpoint['method'] == 'GET'
       args << '--header "Content-Type: application/json"' if endpoint['body']
       if endpoint['body']
@@ -50,7 +50,7 @@ module Jekyll
     end
 
     def api_curl(endpoint)
-      "curl -u <circle-token>: #{curl_args_padded(endpoint)}https://circleci.com#{endpoint['url']}#{curl_params(endpoint)}"
+      "curl #{curl_args_padded(endpoint)}https://circleci.com#{endpoint['url']}#{curl_params(endpoint)}"
     end
 
     def params(params)
