@@ -67,7 +67,7 @@ jobs: # 1 回の実行の基本作業単位
     steps: # `build` ジョブを構成するステップ
       - checkout # ソース コードを作業ディレクトリにチェックアウトします
       # 環境変数をセットアップするステップを実行します
-      - run: 
+      - run:
           name: "カスタム環境変数のセットアップ"
           command: |
             echo 'export MY_ENV_VAR="FOO"' >> $BASH_ENV # MY_ENV_VAR を $BASH_ENV にリダイレクトします
@@ -137,7 +137,7 @@ steps:
 
 ```yaml
 jobs:
-  build:    
+  build:
 
     shell: /bin/sh -leo pipefail
     environment:
@@ -300,7 +300,7 @@ Login Succeeded
         "list": ["a", "list", "of", "strings"]
       }
     }
-    
+
 
 このビルドは、以下の環境変数を受け取ります。
 
@@ -308,7 +308,7 @@ Login Succeeded
     export baz="5"
     export qux="{\"quux\": 1}"
     export list="[\"a\", \"list\", \"of\", \"strings\"]"
-    
+
 
 ビルド パラメーターは、ジョブのコンテナ内の環境変数としてエクスポートされ、`config.yml` 内のスクリプトまたはプログラム、コマンドで使用できます。 挿入された環境変数を使用して、ジョブの中で実行されるステップに影響を与えることができます。 挿入された環境変数よりも `config.yml` やプロジェクト設定で定義された値が優先されるので、注意が重要です。
 
@@ -320,7 +320,7 @@ Login Succeeded
         "param2": 500
       }
     }
-    
+
 
 たとえば、以下のように `curl` を使用します。
 
@@ -329,7 +329,7 @@ Login Succeeded
       --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
       --request POST \
       https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
-    
+
 
 上の例の `$CIRCLE_TOKEN` は[パーソナル API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)です。
 
@@ -337,7 +337,7 @@ Login Succeeded
 
     export param1="value1"
     export param2="500"
-    
+
 
 POST API 呼び出しを使用して実行を開始します。詳細については、API ドキュメントで[新しいビルドのセクション](https://circleci.com/docs/api/#trigger-a-new-build-with-a-branch)を参照してください。 本体が空の POST は、指定されたブランチの新しい実行を開始します。
 
@@ -383,5 +383,5 @@ POST API 呼び出しを使用して実行を開始します。詳細につい�
 ## 関連項目
 {:.no_toc}
 
-[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)  
+[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts/)
 ブログ記事「[Keep environment variables private with secret masking (シークレットのマスキングによって環境変数を非公開に保つ)](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)」

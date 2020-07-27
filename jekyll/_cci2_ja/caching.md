@@ -251,7 +251,7 @@ CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限�
 | {% raw %}`{{ .Revision }}`{% endraw %}                 | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                              |
 | {% raw %}`{{ .Environment.variableName }}`{% endraw %} | 環境変数 `variableName` ([CircleCI からエクスポートされる環境変数](https://circleci.com/ja/docs/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト](https://circleci.com/ja/docs/2.0/contexts)に追加した環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                              |
 | {% raw %}`{{ epoch }}`{% endraw %}                     | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や Unix エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                          |
-| {% raw %}`{{ arch }}`{% endraw %}                      | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに依存するコンパイル済みバイナリをキャッシュする場合に便利です (`darwin-amd64-6_58`、`linux-amd64-6_62` など)。 See [サポートされている CPU アーキテクチャ]({{ site.baseurl }}/ja/2.0/faq/#circleci-がサポートしている-cpu-アーキテクチャは)を参照してください。                                                                                                          |
+| {% raw %}`{{ arch }}`{% endraw %}                      | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに依存するコンパイル済みバイナリをキャッシュする場合に便利です (`darwin-amd64-6_58`、`linux-amd64-6_62` など)。 See [サポートされている CPU アーキテクチャ]({{ site.baseurl }}/ja/2.0/faq/#circleci-ではどの-cpu-アーキテクチャをサポートしていますか)を参照してください。                                                                                                                                         |
 {: class="table table-striped"}
 
 ### キーとテンプレートの使用に関する補足説明
@@ -259,7 +259,7 @@ CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限�
 - キャッシュに一意の識別子を定義するときは、
 {% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。
 {% raw %}`{{ .Branch }}`{% endraw %} や
-{% raw %}`{{ checksum "filename" }}`{% endraw %} などの特定度の低いテンプレート キーを使用すると、キャッシュが使用される可能性が高くなります。 
+{% raw %}`{{ checksum "filename" }}`{% endraw %} などの特定度の低いテンプレート キーを使用すると、キャッシュが使用される可能性が高くなります。
 - キャッシュ変数には、ビルドで使用している[パラメーター]({{site.baseurl}}/ja/2.0/reusing-config/#executor-でのパラメーターの使用)も使用できます。たとえば、
 {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} のように指定します。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。

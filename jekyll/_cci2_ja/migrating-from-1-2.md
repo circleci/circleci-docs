@@ -52,25 +52,25 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
 
      上記を以下の 2 行に置き換えます。
-    
+
 
      ```
          docker:
            - image: circleci/ruby:2.3-jessie
      ```
 
-     最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。ジョブごとにコマンドを宣言します。 Docker コンテナを初めて使用する場合は、「[Docker 入門](https://docs.docker.com/get-started/#docker-concepts)」を参照してください。 
-    
+     最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。ジョブごとにコマンドを宣言します。 Docker コンテナを初めて使用する場合は、「[Docker 入門](https://docs.docker.com/get-started/#docker-concepts)」を参照してください。
+
 
      ```yaml
          machine: true
      ```
 
      使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
-    
+
 
      ```yaml
-         macos: 
+         macos:
            xcode: "9.0"
      ```
 
@@ -84,7 +84,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
 
      上記を以下のように置き換えます。
-    
+
 
      ```
          steps:
@@ -93,7 +93,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
 
      以下に例を示します。
-    
+
 
      ```
      checkout:
@@ -104,7 +104,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
 
      上の例は次のようになります。
-    
+
 
      ```
          steps:
@@ -114,9 +114,9 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
 
      `checkout` ステップを使わない場合でも、このステップを `config.yml` ファイルに追加する必要があります。
-    
 
-7. (オプション) ビルドへの SSH 接続を有効化するには、`add_ssh_keys` ステップとフィンガープリントを追加します。詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/#ssh_キーの追加)」を参照してください。
+
+7. (オプション) ビルドへの SSH 接続を有効化するには、`add_ssh_keys` ステップとフィンガープリントを追加します。詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys)」を参照してください。
 
 8. <http://codebeautify.org/yaml-validator> で YAML をバリデーションして、変更をチェックします。
 
@@ -183,7 +183,7 @@ CircleCI 2.0 では、定義されたすべての環境変数はリテラルと�
       TZ: "America/Los_Angeles"
 ```
 
-- $PATH を変更している場合は、`.bashrc` ファイルにパスを追加し、以下の部分を 
+- $PATH を変更している場合は、`.bashrc` ファイルにパスを追加し、以下の部分を
 
 ```yaml
     environment:
@@ -194,7 +194,7 @@ CircleCI 2.0 では、定義されたすべての環境変数はリテラルと�
 
 ```yaml
     steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
       - run: some_program_inside_bin
 ```
 

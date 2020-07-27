@@ -42,7 +42,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 ## 関連項目
 
-失敗が多いテストに対してインサイトを使用したい場合は、「[テスト メタデータの収集]({{ site.baseurl }}/j2.0/collect-test-data/)」を参照してください。
+失敗が多いテストに対してインサイトを使用したい場合は、「[テスト メタデータの収集]({{ site.baseurl }}/ja/2.0/collect-test-data/)」を参照してください。
 
 ## Sumo Logic とのインテグレーション
 
@@ -126,7 +126,7 @@ HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成�
 - `JOB_HTTP_SOURCE`
 - `WORKFLOW_HTTP_SOURCE`
 
-**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/ja/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
+**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)**
 
 これにより、Orb が Sumo Logic ダッシュボードにリンクされます。
 

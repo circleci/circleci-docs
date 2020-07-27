@@ -29,4 +29,4 @@ CircleCI の統合ダッシュボードでは、最後に完了したジョブ�
 - SUCCESS: すべてのジョブが成功
 - FAILED: 1 つ以上のジョブが失敗
 
-[ワークフロー]({{ site.baseurl}}/2.0/workflows/#概要)を使用している場合は、上記に加えて[ワークフロー固有のステータス]({{ site.baseurl}}/2.0/workflows/#ステータス)が表示されます。
+[ワークフロー]({{ site.baseurl}}/ja/2.0/workflows/#概要)を使用している場合は、上記に加えて[ワークフロー固有のステータス]({{ site.baseurl}}/ja/2.0/workflows/#ステータス)が表示されます。

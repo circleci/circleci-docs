@@ -16,7 +16,7 @@ Jenkins を長年使用されていた方向けに、CircleCI に移行するう
 
 CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD の管理方法についても多くの相違点が見られます。ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 すばやく移行に取り掛かれるよう、以下のいずれかをお試しください。
 
-1. **入門用資料を確認する:** [入門用のビデオや手順]({{ site.baseurl }}/ja/2.0/)を参照しながら、CircleCI 2.0 で最初のビルドを実行し、成功させましょう。
+1. **入門用資料を確認する:** [入門用のビデオや手順]({{ site.baseurl }}/ja/)を参照しながら、CircleCI 2.0 で最初のビルドを実行し、成功させましょう。
 
 2. **Execute Shell のコマンドをコピー & ペーストする:** Jenkins 内のプロジェクトをそのまま複製して使用できる場合は、以下の内容のファイルを `config.yml` という名前でプロジェクトの `.circleci/` ディレクトリに追加します。
 
@@ -29,7 +29,7 @@ CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD
             echo "Copy-paste from 'Execute Shell' in Jenkins"
 ```
 
-いくつかのプログラムとユーティリティは [CircleCI イメージにプリインストール]({{ site.baseurl }}/ja/2.0/circleci-images/#プリインストールツール)されていますが、他にビルドに必要な項目があれば `run` `step` でインストールする必要があります。 プロジェクトの依存関係は、次回のビルドに備え、`save_cache` と `restore_cache` `steps` を使用して[キャッシュ]({{ site.baseurl }}/ja/2.0/caching/)することができます。こうしておくと、全体のダウンロードとインストールが一度だけで済むようになります。
+いくつかのプログラムとユーティリティは [CircleCI イメージにプリインストール]({{ site.baseurl }}/ja/2.0/circleci-images/#プリインストール-ツール)されていますが、他にビルドに必要な項目があれば `run` `step` でインストールする必要があります。 プロジェクトの依存関係は、次回のビルドに備え、`save_cache` と `restore_cache` `steps` を使用して[キャッシュ]({{ site.baseurl }}/ja/2.0/caching/)することができます。こうしておくと、全体のダウンロードとインストールが一度だけで済むようになります。
 
 **手動構成:** Jenkins の Execute Shell 以外のプラグインまたはオプションを使用してビルド ステップを実行していた場合は、Jenkins からビルドを手動で移植する必要があります。 すべての CircleCI 構成キーの詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。
 

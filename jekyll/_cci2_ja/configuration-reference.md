@@ -51,7 +51,7 @@ order: 20
         "Hello Workflow":
             jobs:
               - hello/hello-build
-    
+
 
 上の例で、`hello` は Orb の参照名と見なされます。`circleci/hello-build@0.0.5` は完全修飾の Orb 参照です。
 
@@ -258,7 +258,7 @@ jobs:
             aws_auth:
               aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定するか
               aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # UI から設定したプロジェクトの環境変数を参照するように指定します
-    
+
 
 バージョン 2.1 を使用している場合、[宣言済みのコマンド]({{ site.baseurl }}/ja/2.0/reusing-config/)をジョブで再利用できます。以下の例では `sayhello` コマンドを呼び出しています。
 
@@ -269,7 +269,7 @@ jobs:
         steps:
           - sayhello:
               to: "Lev"
-    
+
 
 #### **`machine`**
 {:.no_toc}
@@ -549,7 +549,7 @@ jobs:
       - run: docker run --gpus all nvidia/cuda:9.0-base nvidia-smi
 ```
 
-使用可能なイメージの一覧は、[こちらのセクション](#使用可能な-Linux-GPU-イメージ)を参照してください。
+使用可能なイメージの一覧は、[こちらのセクション](#使用可能な-linux-gpu-イメージ)を参照してください。
 
 ##### GPU Executor (Windows)
 
@@ -602,7 +602,7 @@ jobs:
       build:
         steps:
           - run: make test
-    
+
 
 省略形式の `run` ステップでは、どの `command` を実行するかを文字列値で直接指定できます。 この場合、他の属性に対しては、自動的に適切なデフォルト値が設定されます (たとえば、`name` は `command` と同じ値になります)。
 
@@ -612,7 +612,7 @@ jobs:
       build:
         steps:
           - checkout
-    
+
 
 この例の `checkout` ステップは、プロジェクトのソース コードをジョブの [`working_directory`](#jobs) にチェックアウトします。
 
@@ -804,7 +804,7 @@ steps:
 ###### *例*
 
     version: 2.1
-    
+
     jobs: # 条件付きステップは `commands:` でも定義できます
       job_with_optional_custom_checkout:
         parameters:
@@ -813,7 +813,7 @@ steps:
             default: ""
         machine: true
         steps:
-    
+
           - when:
               condition: <<parameters.custom_checkout>>
               steps:
@@ -828,7 +828,7 @@ steps:
           - job_with_optional_custom_checkout:
               custom_checkout: "any non-empty string is truthy"
           - job_with_optional_custom_checkout
-    
+
 
 ##### **`checkout`**
 
@@ -1086,7 +1086,7 @@ Web アプリまたは API からアクセスできるアーティファクト (
     │   └── results.xml
     └── rspec
         └── results.xml
-    
+
 
 `config.yml` 構文
 
@@ -1125,7 +1125,7 @@ root キーは、ワークスペースのルート ディレクトリとなる�
 
     /tmp/dir/foo/bar
     /tmp/dir/baz
-    
+
 
 ###### *paths キーの例*
 
@@ -1147,13 +1147,13 @@ term:
             '[' [ '^' ] { character-range }
         ']'
                         文字クラス (空白は不可)
-            c           文字 c に一致します ('*'、'?'、'\\'、'[' 以外) 
+            c           文字 c に一致します ('*'、'?'、'\\'、'[' 以外)
             '\\' c      文字 c に一致します
     character-range:
             c           文字 c に一致します ('\\'、'-'、']' 以外)
             '\\' c      文字 c に一致します
             lo '-' hi   lo <= c <= hi の範囲にある文字 c に一致します
-    
+
 
 Go のドキュメントによると、パターンには `/usr/*/bin/ed` ('/' は区切り文字) などの階層的な名前を記述できます。 **メモ:** すべての要素はワークスペースのルート ディレクトリからの相対パスです。
 
@@ -1280,7 +1280,7 @@ jobs:
                      - beta
          jobs:
            - test
-    
+
 
 ###### **`cron`**
 
@@ -1363,7 +1363,7 @@ branches では `only` キーと `ignore` キーを使用でき、どちらに�
           - deploy:
               requires:
                 - hold
-    
+
 
 **メモ:** このジョブ名 `hold` がメインの構成に存在してはなりません。
 
@@ -1446,7 +1446,7 @@ jobs:
             "run_integration_tests": true
         }
     }
-    
+
 
 いくつかの例と概念的な情報については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows)を参照してください。
 
