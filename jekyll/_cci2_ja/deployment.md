@@ -1,19 +1,19 @@
 ---
 layout: classic-docs
-title: "デプロイ"
-short-title: "デプロイ"
+title: "Deployment"
+short-title: "Deployment"
 ---
 
-CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)するように構成できます。
+CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)するように設定できます。
 
 ## Amazon Web Services
 
         steps:
           - run:
-              name: awscli のインストール
+              name: awscli をインストール
               command: sudo pip install awscli
           - run:
-              name: S3 へのデプロイ
+              name: S3 にデプロイ
               command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
     
 
@@ -21,7 +21,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
         steps:
           - run:
-              name: CF CLI のセットアップ
+              name: CF CLI をセットアップ
               command: |
                 curl -v -L -o cf-cli_amd64.deb 'https://cli.run.pivotal.io/stable?release=debian64&source=github'
                 sudo dpkg -i cf-cli_amd64.deb
@@ -30,7 +30,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
                 cf auth "$CF_USER" "$CF_PASSWORD"
                 cf target -o "$CF_ORG" -s "$CF_SPACE"
           - run:
-              name: 最新の live ドメインへの再ルーティング
+              name: live ドメインを最新に再ルーティングする
               command: |
                 # "実際の" URL を新バージョンに送信します
                 cf map-route app-name-dark example.com -n www
@@ -48,7 +48,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
         steps:
           - run:
-              name: Firebase への master のデプロイ
+              name: Master を Firebase にデプロイ
               command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
     
 
@@ -57,7 +57,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
         steps:
           - checkout
           - run:
-              name: Heroku への master のデプロイ
+              name: Master を Heroku にデプロイ
               command: |
                 git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
     
@@ -66,18 +66,15 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
         steps:
           - checkout
-          - run: 
-              name: NPM へのパブリッシュ
-              command: | 
-                npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-                npm publish
+          - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+          - run: npm publish
     
 
 ## SSH
 
         steps:
           - run:
-              name: SSH 経由のデプロイ
+              name: SSH を介してデプロイ
               command: |
                 ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
     
@@ -86,7 +83,7 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
         steps:
           - run:
-              name: "ストアへのパブリッシュ"
+              name: "ストアにパブリッシュ"
               command: |
                 mkdir .snapcraft
                 echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
@@ -97,22 +94,12 @@ CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }
 
         steps:
           - run:
-              name: Artifactory へのプッシュ
+              name: Artifactory にプッシュ
               command: |
                 ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
                 ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
                 ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # エージェント上のすべての環境変数を収集します
-                ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # Artifactory 内のビルドに ^^ を付加します
+                ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # artifactory 内のビルドに ^^ を付加します
     
 
-## NuGet (.NET Core CLI 経由)
-
-        steps:
-          - run:
-              name: NuGet へのプッシュ
-              command: |
-                dotnet pack --output <output-directory> --configuration Release
-                dotnet nuget push --source "${NUGET_FEED_URL}" --api-key="${NUGET_KEY}" <output-directory>/*.nupkg
-    
-
-ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。
+これらの例を使用して、目的のターゲットに対してグリーンビルドを自動的にデプロイしてみましょう。
