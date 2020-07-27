@@ -48,7 +48,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 ## Add an API Token
 
 ```sh
-$ curl -H 'Circle-Token: <circle-token>' https://circleci.com/api/v1.1/me
+$ curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/me
 ```
 
 
@@ -78,7 +78,7 @@ All API calls are made in the same way, by making standard HTTP calls, using JSO
 
 
 ```sh 
-curl -H 'Circle-Token: <circle-token>' "https://circleci.com/api/..."
+curl -H "Circle-Token: <circle-token>" "https://circleci.com/api/..."
 ```
 
 ```sh 
@@ -130,7 +130,7 @@ In both cases, builds are returned in the order that they were created. For all 
 ## Accept Header
 
 ```sh
-curl https://circleci.com/api/v1.1/me -H "Accept: application/json" -H 'Circle-Token: <circle-token>'
+curl https://circleci.com/api/v1.1/me -H "Accept: application/json" -H "Circle-Token: <circle-token>"
 ```
 
 If no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To recieve the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.
