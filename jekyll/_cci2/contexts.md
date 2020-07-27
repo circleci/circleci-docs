@@ -181,6 +181,8 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 ## Secrets Masking
 
+_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
+
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
 
 The value of the context will not be masked in the build output if:
