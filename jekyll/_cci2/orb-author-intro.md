@@ -50,7 +50,7 @@ Different commands within the Orb CLI carry different permission scopes. If you 
 
 ## Getting Started
 
-To begin creating orbs, you will need to [setup the CircleCI CLI]({{site.baseurl}}/2.0//2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). For a full list of orb-related commands inside the CircleCI CLI, visit [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+To begin creating orbs, you will need to [setup the CircleCI CLI]({{site.baseurl}}/2.0/2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). For a full list of orb-related commands inside the CircleCI CLI, visit [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
 
 _See Also: [Orbs Concepts]({{site.baseurl}}/2.0//orb-concepts/)_
 
