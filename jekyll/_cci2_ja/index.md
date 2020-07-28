@@ -54,7 +54,7 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="/docs/ja/2.0/workflows/#ワークフローの構成例">ワークフローの構成例</a></li>
       <li><a href="/docs/ja/2.0/workflows/#ワークフローのスケジュール実行">ワークフローのスケジュール実行</a></li>
       <li><a href="/docs/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用">ワークフローにおけるコンテキストとフィルターの使用</a></li>
-      <li><a href="/docs/2.0/creating-orbs/">Orbs の作成</a></li>
+      <li><a href="/docs/ja/2.0/creating-orbs/">Orbs の作成</a></li>
     </ul>
   </div>
 </div>
