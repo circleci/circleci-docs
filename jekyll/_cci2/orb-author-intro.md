@@ -1,13 +1,11 @@
 ---
 layout: classic-docs
-title: "Introduction to Authoring an Orb"
+title: "Introduction to Authoring Orbs"
 short-title: "Authoring Orbs Introduction"
 description: "Starting point for how to authoring an orb"
 categories: [getting-started]
 order: 1
 ---
-
-## Introduction to Orb Authoring
 
 [Orbs]({{site.baseurl}}/2.0/orb-intro/) are [reusable packages of CircleCI configuration]({{site.baseurl}}/2.0/reusing-config/), enabling you to create parameterized commands, jobs, and executors that can be [used across multiple projects]({{site.baseurl}}/2.0/orb-concepts/).
 
@@ -44,7 +42,7 @@ Every organization registered on CircleCI is able to claim **one** unique [names
 Enter the following command to claim your namespace, if you have not yet claimed one.
 - `circleci namespace create <name> <vcs-type> <org-name> [flags]`
 
-### Create an Orb 
+### Create an Orb
 
 Within your namespace create an orb to which you will eventually push your orb source code.
 
