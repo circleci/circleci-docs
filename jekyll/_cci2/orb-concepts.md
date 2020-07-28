@@ -12,7 +12,7 @@ order: 1
 
 ## Quick Start
 
-[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/2.0/reusing-config/#authoring-reusable-commands), and [executors]({site.baseurl}}/2.0/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ## Reusable Configuration
 
@@ -114,7 +114,7 @@ When users import an orb, they may pin to a particular semver component.
 
 | Imported Version  | Description |
 | ------------- | ------------- |
-| 1.2.3 | Will match full semver version. No changes will be introduced  |
+| 1.2.3 | Will match full semver version. No changes will be introduced.  |
 | 1.2  | Locked to major version `1`, minor version `2`, will receive all patch updates.  |
 | 1 | Locked to major version `1`. Will receive all minor and patch updates. Major version will not change automatically.|
 | volatile | **Not Recommended** Will pull the last published version of the orb, may be useful in testing. Not a part of semver versioning.|
@@ -152,7 +152,7 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 ### Inline Orbs
 
 Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
-_[See: inline orbs](# Fix this later) for more information on types of namespaces._
+_[See: inline orbs]({site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on types of namespaces._
 
 - Not published to the orb service
 - No versioning
