@@ -1,22 +1,27 @@
 ---
 layout: classic-docs
-title: "2.0 config.yml の設定例"
-short-title: "2.0 config.yml の設定例"
-description: "2.0 config.yml の設定例"
-categories: [migration]
+title: "2.0 config.yml のサンプル ファイル"
+short-title: "2.0 config.yml のサンプル ファイル"
+description: "2.0 config.yml のサンプル ファイル"
+categories:
+  - migration
 order: 2
 ---
 
-このページでは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの設定例を 3 つあげて解説しています。
+[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) のサンプル ファイルをご紹介します。
 
-* TOC
+* 目次
 {:toc}
 
-CircleCI 2.0 の設定ファイルは `version: 2` というキーから始まります。このキーは古い CircleCI 1.0 でビルドしているプロジェクトを CircleCI 2.0 で使えるようにします。言い換えると、他のプロジェクトでは 2.0 を使いながら 1.0 のプロジェクトも引き続き利用できるということです。その後に続く `jobs`、`steps`、`workflows` という 3 つのキーは、ビルド実行時にあらゆる箇所における詳細なフィードバックレポートを確認できるようにします。詳しくは「[ジョブとステップ]({{ site.baseurl }}/ja/2.0/jobs-steps/)」や「 [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)」ページをご覧ください。
+CircleCI 2.0 の設定ファイルには、`version: 2` の新しいキーが導入されました。 この新しいキーにより、1.0 でのビルドを継続しながら 2.0 を使用できます。つまり、あるプロジェクトでは 1.0 をそのまま使用し、別のプロジェクトでは 2.0 を使用できます。 `jobs`、`steps`、`workflows` のキーによって、制御性が向上し、実行の各段階でのステータス取得が可能になることで、フィードバックの報告頻度を高められます。 詳細については、[ジョブとステップ]({{ site.baseurl }}/ja/2.0/jobs-steps/)、および[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)に関する各ドキュメントを参照してください。
 
-## パラレルジョブの設定例
+<!-- Unsure this paragraph should still and mention 1.0 builders ... also should probably mention 2.1-->
 
-下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
+個々の構成キーの詳細については、[構成のリファレンス ]({{ site.baseurl }}/ja/2.0/configuration-reference/)を参照してください。
+
+## 並列ジョブの構成例
+
+2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
 {% raw %}
 
@@ -45,11 +50,11 @@ workflows:
 
 {% endraw %}
 
-これは、並行処理によって実行時間を短縮する、`build` と `test` の 2 つのパラレルジョブで構成される Workflow の例となります。ジョブ制御のパラレル化、シーケンシャル化、もしくは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/2.0/workflows)」ページを参照してください。
+上記は並列ジョブワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows)を参照してください。
 
-## シーケンシャル Workflow の設定例
+## 順次実行ワークフローの構成例
 
-下記は CircleCI 2.0 の `.circleci/config.yml` ファイルの内容です。
+2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
 {% raw %}
 
@@ -58,15 +63,15 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # 最初の1行目に指定されたイメージがプライマリコンテナのインスタンスとなります。 ジョブのコマンドはこのコンテナ内で実行されます。
+    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
-    # 2 番目に指定されたイメージがセカンダリコンテナのインスタンスとなります。このインスタンスは、ローカルホスト上のプライマリコンテナのポートを通じて共通ネットワークで動作します。
+    # セカンダリ コンテナは、2 番目にリストしたイメージのインスタンスです。プライマリ コンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
       - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run:
-          name: npm のアップデート
+          name: npm の更新
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -87,7 +92,7 @@ jobs:
           name: テスト
           command: npm test
       - run:
-          name: コードカバレッジの生成
+          name: コード カバレッジの生成
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
@@ -100,6 +105,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
+
       - build
       - test:
           requires:
@@ -111,12 +117,13 @@ workflows:
 
 {% endraw %}
 
-これは、マスターブランチでのみ実行するよう設定された `test` ジョブを含むシーケンシャル Workflow の例となります。ジョブ制御のパラレル化、シーケンシャル化、あるいは承認して処理を続行する Workflows について、詳しくは「[Workflows]({{ site.baseurl }}/ja/2.0/workflows) 」ページを参照してください。
+上記は、`test` ジョブが master ブランチでのみ実行されるように構成された順次実行ワークフローの例です。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows)を参照してください。
 
-## ファンイン・ファンアウト Workflow の設定例
-下記は複数の依存関係を元にビルドを行うファンイン・ファンアウト Workflow のサンプルです。この設定ファイルを含むデモプロジェクトは [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) で確認できます。
+## ファンイン・ファンアウト ワークフローの構成例
 
-なお、依存関係が解決しない限りジョブは実行されないことから、事前に実行されるアップストリームジョブの依存関係が一時的に必要となります。そのため、`requires:` キーのブロックで必要な直近の依存関係を指定する形にします。
+ファンイン/ファンアウト ワークフローの構成例を以下に示します。 詳細については、[GitHub での完全なデモ リポジトリ](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)を参照してください。
+
+ジョブはその依存関係が満たされている場合にのみ実行できるため、波及するすべてのアップストリーム ジョブの依存関係が必要になることに注意してください。また、そのため、`requires:` ブロック内に指定する必要があるのは隣接するアップストリーム依存関係だけです。
 
 {% raw %}
 
@@ -126,6 +133,7 @@ version: 2.0
 jobs:
   checkout_code:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -138,6 +146,7 @@ jobs:
 
   bundle_dependencies:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -154,6 +163,7 @@ jobs:
 
   rake_test:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -170,6 +180,7 @@ jobs:
 
   precompile_assets:
     docker:
+
       - image: circleci/ruby:2.4-node-jessie
       - image: circleci/postgres:9.4.12-alpine
     working_directory: ~/circleci-demo-workflows
@@ -180,7 +191,7 @@ jobs:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run:
-          name: コンパイル済みアセット
+          name: アセットのプリコンパイル
           command: bundle exec rake assets:precompile
       - save_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
@@ -194,6 +205,7 @@ jobs:
     environment:
       HEROKU_APP: still-shelf-38337
     steps:
+
       - restore_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
@@ -201,7 +213,7 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: マスターから Heroku にデプロイ
+          name: Heroku への master のデプロイ
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
@@ -209,6 +221,7 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
+
       - checkout_code
       - bundle_dependencies:
           requires:
@@ -227,14 +240,9 @@ workflows:
 
 {% endraw %}
 
-## 複数の Executor タイプ (macOS ＋ Docker) を利用する設定例
+## 複数の Executor タイプを含む構成例 (macOS と Docker)
 
-1 つの Workflow のなかで複数の [Executor タイプ](https://circleci.com/docs/ja/2.0/executor-types/)
-を利用できます。 下記の例では、iOS アプリの
-プロジェクトに関する部分を macOS でビルドし、
-それ以外の iOS ツール
-（[SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)）
-は Docker でビルドします。
+同じワークフロー内で、複数の [Executor タイプ](https://circleci.com/ja/docs/2.0/executor-types/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
 
 {% raw %}
 
@@ -246,9 +254,10 @@ jobs:
       xcode: "9.0"
 
     steps:
+
       - checkout
       - run:
-          name: CocoaPods の Specs リポジトリをフェッチ
+          name: CocoaPods Spec のフェッチ
           command: |
             curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
       - run:
@@ -256,7 +265,7 @@ jobs:
           command: pod install --verbose
 
       - run:
-          name: ビルド、実行テスト
+          name: テストのビルドと実行
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
@@ -273,6 +282,7 @@ jobs:
 
   swiftlint:
     docker:
+
       - image: dantoml/swiftlint:latest
     steps:
       - checkout
@@ -284,6 +294,7 @@ jobs:
 
   danger:
     docker:
+
       - image: dantoml/danger:latest
     steps:
       - checkout
@@ -293,6 +304,7 @@ workflows:
   version: 2
   build-test-lint:
     jobs:
+
       - swiftlint
       - danger
       - build-and-test
@@ -300,6 +312,7 @@ workflows:
 
 {% endraw %}
 
-## 関連情報
+## 関連項目
+{:.no_toc}
 
-CircleCI を使用するパブリックプロジェクトのリストについては、「[パブリックリポジトリの例]({{ site.baseurl }}/ja/2.0/example-configs/)」ページを参照してください。
+CircleCI を使用するパブリックのプロジェクトの一覧については、[パブリック リポジトリの例]({{ site.baseurl }}/ja/2.0/example-configs/)を参照してください。

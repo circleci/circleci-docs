@@ -7,7 +7,7 @@ order: 12
 description: "外部 MongoDB の使用時に MongoDB を 3.2 から 3.6 にアップグレードする方法"
 ---
 
-CircleCI インストール環境で外部 MongoDB を実行している場合、CircleCI v2.15.0 で使用するには、複数の MongoDB アップグレードが推奨されます。カスタム HA 設定に対する推奨アップグレードについては、CircleCI ソリューションエンジニアがサポートします (Platinum サポート契約が必要です)。 まずは[サポートチケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+CircleCI インストール環境で外部 MongoDB を実行している場合、CircleCI v2.15.0 で使用するには、複数の MongoDB アップグレードが推奨されます。カスタム HA 構成に対する推奨アップグレードについては、CircleCI ソリューション エンジニアがサポートします (プラチナ サポート契約が必要です)。 まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
 
 <!---
 
