@@ -85,7 +85,7 @@ See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring
 
 A _namespace_ is a unique identifier claimed by a user or organization to group a set of orbs by author. Each user or organization can claim _one_ unique and immutable namespace. Each namespace can contain many uniquely named orbs.
 
-For example, the `circleci/rails` orb may coexist in the registry with an orb called `<username>/rails` because they are in separate namespaces.
+For example, the `circleci/rails` orb may coexist in the registry with an orb called `<other-namespace>/rails` because they are in separate namespaces.
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact your account team at CircleCI.
 
