@@ -465,9 +465,10 @@ For example using `curl`
 ```sh
 curl \
   --header "Content-Type: application/json" \
+  --header "Circle-Token: $CIRCLE_TOKEN" \
   --data '{"build_parameters": {"param1": "value1", "param2": 500}}' \
   --request POST \
-  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master?circle-token=$CIRCLE_TOKEN
+  https://circleci.com/api/v1.1/project/github/circleci/mongofinil/tree/master
 ```
 
 In the above example,
