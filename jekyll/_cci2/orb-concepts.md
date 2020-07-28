@@ -7,7 +7,12 @@ categories: [getting-started]
 order: 1
 ---
 
-[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including jobs, commands, and executors. Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+* TOC
+{:toc}
+
+## Quick Start
+
+[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/2.0/reusing-config/#authoring-reusable-commands), and [executors]({site.baseurl}}/2.0/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ## Reusable Configuration
 

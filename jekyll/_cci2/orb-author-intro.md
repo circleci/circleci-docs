@@ -7,6 +7,9 @@ categories: [getting-started]
 order: 1
 ---
 
+* TOC
+{:toc}
+
 [Orbs]({{site.baseurl}}/2.0/orb-intro/) are [reusable packages of CircleCI configuration]({{site.baseurl}}/2.0/reusing-config/), enabling you to create parameterized commands, jobs, and executors that can be [used across multiple projects]({{site.baseurl}}/2.0/orb-concepts/).
 
 Hundreds of orbs are available from the [Orb Registry](https://circleci.com/orbs/registry/). Existing orbs are developed and maintained by a variety of authors: CircleCI, our technology partners, and the open-source community. Search the registry for the technology or service you would like to integrate with your projects.
@@ -37,7 +40,7 @@ To begin creating orbs, you will need to [setup the CircleCI CLI](https://circle
 
 ### Register a Namespace
 
-Every organization registered on CircleCI is able to claim **one** unique [namespace](). This includes your personal organization and any organization you are a member of. In order to register the namespace for an organization you must be the owner of the organization.
+Every organization registered on CircleCI is able to claim **one** unique [namespace](). This includes your personal organization and any organization you are a member of. As each organization is limited to a single namespace, In order to register the namespace for an organization you must be the _owner_ of the organization.
 
 Enter the following command to claim your namespace, if you have not yet claimed one.
 - `circleci namespace create <name> <vcs-type> <org-name> [flags]`
