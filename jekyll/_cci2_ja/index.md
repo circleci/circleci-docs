@@ -26,11 +26,11 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <p>人気のサンプルをチェックしましょう。</p>
     <ul>
       <li><a href="{{ site.baseurl }}/ja/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
-        <li><a href="{{ site.baseurl }}/ja/2.0/using-orbs/">Orbs の使用</a></li>
-      </ul>
+      <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/using-orbs/">Orbs の使用</a></li>
+    </ul>
   </div>
   <div class="col-xs-12">
     <hr />
