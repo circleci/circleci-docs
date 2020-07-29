@@ -14,7 +14,7 @@ order: 9
 
 - LDAPサーバーとActive Directoryをインストールし、構成します。
 - GitHub Enterpriseが構成済みで、組織およびプロジェクトのソースとしてユーザーからアクセス可能なことを確認します。
-- [『TerraformのあるAmazon WebサービスにCircleCI 2.0をインストールする』]({{ site.baseurl }}/2.0/aws/)ドキュメントに従い、CircleCI 2.0の新しいインスタンスを、既存ユーザーなしでインストールします。 **注: **既存のインストールではLDAPはサポートされません。クリーンインストールでのみLDAPを使用できます。 
+- [『TerraformのあるAmazon WebサービスにCircleCI 2.0をインストールする』]({{ site.baseurl }}/ja/2.0/aws/)ドキュメントに従い、CircleCI 2.0の新しいインスタンスを、既存ユーザーなしでインストールします。 **注: **既存のインストールではLDAPはサポートされません。クリーンインストールでのみLDAPを使用できます。 
 - [CircleCIサポート](https://support.circleci.com)に連絡して、自分のサーバーにCircleCIをインストールする機能要求を提出します。
 
 **注: **この構成の完了後、すべてのユーザーはLDAP資格情報でCircleCIにログインする必要があります。 各ユーザーは、CircleCIにログインした後で、[アカウント] ページの [接続] ボタンをクリックし、自分のGitHubアカウントに接続して認証を受けます。
