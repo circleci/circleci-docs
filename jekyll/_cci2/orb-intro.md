@@ -9,9 +9,14 @@ order: 1
 
 _Available on CircleCI with `version 2.1` config. Not currently available on self-hosted installations of CircleCI Server_
 
+* TOC
+{:toc}
+
+## Quick Start
+
 CircleCI orbs are open-source, shareable packages of parameterizable _[reusable configuration]({{site.baseurl}}/2.0/reusing-config/)_ elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Orbs can drastically reduce configuration complexity and help developers integrate with their software and services stack quickly and easily across many projects.
 
-Published orbs can be found on our [Orb Registry](https://circleci.com/orbs/registry/), or you can [author your own]()!
+Published orbs can be found on our [Orb Registry](https://circleci.com/orbs/registry/), or you can [author your own]({{site.baseurl}}/2.0/orb-author-intro/#section=configuration)!
 
 ## Why use Orbs?
 
@@ -64,11 +69,13 @@ workflows:
 ```
 {% endraw %}
 
+With orbs it is possible to write parameterized configuration once and utilize it across multiple similar projects.
+
 ## The Orb Registry
 
 The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and publishing your own.
 
-![Orb Registry]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
+![Orb Registry]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
 Orbs in the registry will appear with one of three different namespace designations:
 
@@ -84,7 +91,7 @@ Each orb contains its own description and documentation listed in the orb regist
 If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
 
 ## Identifying Orbs
-An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version](https://semver.org/) string, identifying which version of the orb is being used.
+An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
 
 Example orb slug: `<namespace>/<orb-name>@1.2.3`
 

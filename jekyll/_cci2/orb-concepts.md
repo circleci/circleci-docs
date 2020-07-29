@@ -14,7 +14,7 @@ order: 1
 
 [CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
-## Reusable Configuration
+## Orb Configuration Elements
 
 CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) features allow you to define parametrizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
@@ -22,6 +22,8 @@ CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) featur
 Commands contain one or more [steps]() in which [parameters]() can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running BASH or running CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
 
 As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
+
+**Command Usage Example:**
 
 ```yaml
 version: 2.1
@@ -36,36 +38,70 @@ jobs:
     steps:
       - checkout
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
+      # using the aws-s3 orb's "copy" command.
       - aws-s3/copy:
           from: bucket/build_asset.txt
           to: 's3://my-s3-bucket-name'
 
-... # workflows , other jobs etc.
+  #... workflows , other jobs etc.
 ```
+
+_See: [AWS-S3 Orb](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands)_
 
 ### Executors
 
-Executors define the environment in which commands are run. CircleCI provides multiple [execution platforms]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor) including:
+Executors are parameterized execution environments that may be utilized by [jobs]({{site.baseurl}}/2.0/orb-concepts/#jobs). CircleCI provides multiple [execution platforms]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor) including:
   - Docker
   - macOS
   - Windows
   - Machine (Linux VM)
 
-In the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which users can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing).
+  Executors defined within orbs can be used within your configuration for custom jobs, or may be used within the jobs contained in an orb.
 
+**Executor Definition Example:**
+
+{:.tab.executor.Node-Docker}
 ```yaml
+description: >
+  Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
+  images built for CI.
 docker:
-  - image: '<org>/<image>:<<parameters.tag>>'
+  - image: 'cimg/node:<<parameters.tag>>'
 parameters:
   tag:
     default: '13.11'
+    description: >
+      Pick a specific cimg/node image version tag:
+      https://hub.docker.com/r/cimg/node
     type: string
 ```
+
+{:.tab.executor.Ruby-Docker}
+{% raw %}
+```yaml
+description: >
+  Select the version of Ruby to use. Uses CircleCI's highly cached convenience
+  images built for CI.
+
+  Any available tag from this list can be used:
+  https://hub.docker.com/r/cimg/ruby/tags
+docker:
+  - image: 'cimg/ruby:<< parameters.tag >>'
+parameters:
+  tag:
+    default: '2.7'
+    description: The `circleci/ruby` Docker image version tag.
+    type: string
+```
+{% endraw %}
+
+In the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which users can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing).
 
 For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/orbs/registry/orb/circleci/node#executors-default).
 
 ### Jobs
-Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given executor. [Workflows]() are then used to orchestrate one or many jobs.
+
+Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are invoked via [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
 
 ```yaml
 version: 2.1
@@ -107,7 +143,7 @@ In Semantic versioning, release versions are represented by three integers separ
 | ------------- | ------------- |
 | Major | Breaking changes.  |
 | Minor  | Backwards compatible additional features.  |
-| Patch  | Bug fixes |
+| Patch  | Bug fixes. |
 {: class="table table-striped"}
 
 When users import an orb, they may pin to a particular semver component.
@@ -123,6 +159,8 @@ When users import an orb, they may pin to a particular semver component.
 To avoid negatively impacting a user's CI process, all orb authors should strictly adhere to semver versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
 
 **Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
+{: class="alert alert-warning"}
+
 
 
 ## Orb Versions (Development vs. Production vs Inline)
@@ -144,7 +182,7 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 
 - Development orbs are mutable, can be overwritten, and automatically expire 90 days after they are published
 - Version string must begin with `dev:` followed by any string, for example, `<namespace>/<orb>@dev:my-feature-branch`
-- May be published by any member of the namespace organization
+- Development orbs may be published by any member of the namespace organization
 - Will not appear on the Orb Registry
 - Open source, released under [MIT license](https://circleci.com/orbs/registry/licensing).
 - Available via CircleCI CLI (if the development tag name is known)
@@ -167,9 +205,10 @@ An orbs stanza can be used inside an orb. Because production orb releases are im
 
 For example, orb `foo/bar` is published at version 1.2.3 with an orbs stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
 
-If `biz/baz` is updated to `3.0.0`, anyone using `foo/bar@1.2.3` will not see the change in `biz/baz@3.0.0` until `foo/bar` is published at a higher version than `1.2.3`.
+If `biz/baz` is updated to `3.0.0`, anyone using `foo/bar@1.2.3` will not see the change from `biz/baz@3.0.0` until `foo/bar` is published at a higher version than `1.2.3`.
 
-**Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+
 
 ```yaml
 version: 2.1

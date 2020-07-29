@@ -50,6 +50,7 @@ This document describes various questions and technical issues that you may find
 * **Answer:** Orbs utilize [semantic versioning](), meaning if you set the _major_ version (example: `3`), you will receive all _minor_ and _patch_ updates, where if you statically set the version (example: `3.0.0`), no updates will apply, this is the most deterministic and recommended method.
 
 _**Note:** NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. This is not recommended as breaking changes are expected._
+{: class="alert alert-danger"}
 
 ## Build error when testing locally
 
