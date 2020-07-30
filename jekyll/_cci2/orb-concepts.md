@@ -230,5 +230,5 @@ jobs:
 {:.no_toc}
 
 - Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/) for a high-level overview of CircleCI orbs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for a detailed reference information about Orbs, including descriptions of commands, jobs and executors.
+- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for detailed reference information about Orbs, including descriptions of commands, jobs and executors.
 - Refer to [Orbs FAQs]({{site.baseurl}}/2.0/orbs-faq/) for information on frequent issues encountered when using orbs.
