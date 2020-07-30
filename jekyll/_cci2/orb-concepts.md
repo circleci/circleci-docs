@@ -123,11 +123,10 @@ A _namespace_ is a unique identifier claimed by a user or organization to group 
 
 For example, the `circleci/rails` orb may coexist in the registry with an orb called `<other-namespace>/rails` because they are in separate namespaces.
 
-Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact your account team at CircleCI.
+Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact support.
 
 By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/orbs/registry/).
 
-_[See: Orb-Intro](https://circleci.com/orbs/registry/orb/circleci/node#executors-default) for more information on types of namespaces._
 
 ## Semantic Versioning
 
