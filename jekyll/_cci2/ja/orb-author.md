@@ -17,7 +17,7 @@ CircleCI Orb を使用するようにプラットフォームを構成したら�
 最初の Orb 作成を開始する前に、以下の注意事項をお読みください。
 
 * Orb は名前空間に存在します。
-* 各組織またはユーザー名は、一意の名前空間を 1 つ要求できます。
+* Each organization or username can claim one unique namespace, and **namespaces cannot be deleted.**
 * 名前空間は CircleCI Orb レジストリ内でグローバルであるため、必ず一意の名前にしてください。
 * 特定の GitHub または Bitbucket 組織内で、オーナーまたは管理者の権限を持つユーザーだけが、その組織にリンクされる名前空間を作成できます。
 * 組織管理者が Orb を作成すると、その組織のメンバーはだれでも `dev` Orb としてパブリッシュできます。 準備が整ったら、組織管理者はその `dev` Orb を安定版 Orb にプロモートできます。
@@ -25,65 +25,65 @@ CircleCI Orb を使用するようにプラットフォームを構成したら�
 * 作成した Orb を使用するには、組織の CircleCI 組織設定ページの [Security (セキュリティ)] セクション (`https://circleci.com/[vcs]/organizations/[org-name]/settings#security`) で、[Allow Uncertified Orbs (未承認 Orbs の使用を許可)] を有効にする必要があります。
 * Orb 作成中は、作成中の Orb の準備が整う前に CircleCI Orb レジストリに公開される、または永続的に掲載されてしまう事態を回避するために、開発バージョンを使用することができます。
 
-最初の Orbs をパブリッシュする手順を以下に簡単に説明します。
+### The following high-level steps are needed to publish your first orb:
 
-1) 名前空間を要求します (まだ持っていない場合)。 以下に例を示します。
+1) Claim a namespace (assuming you don't yet have one). For example:
 
 `circleci namespace create sandbox github CircleCI-Public`
 
-上記の例では、GitHub 組織 `CircleCI-Public` にリンクされる名前空間 `sandbox` を作成しています。
+In this example we are creating the `sandbox` namespace, which will be linked to the GitHub organization `CircleCI-Public`.
 
-**メモ: **CircleCI CLI を通して名前空間を作成する場合は、VCS プロバイダーを指定してください。
+**Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
-2) 名前空間内に Orb を作成します。 以下に例を示します。
+2) Create the orb inside your namespace. This doesn't generate any content, but rather reserves the naming for when the orb is published. For example:
 
 `circleci orb create sandbox/hello-world`
 
-3) ファイルに Orb のコンテンツを作成します。 通常、これは、Orb 用に作成された Git リポジトリでコード エディタを使用して行います。ただしここでは例として、以下のような最小限の Orb で `/tmp/orb.yml` ファイルを作成することにします。
+3) Create the content of your orb in a file. You will generally do this in your code editor in a git repo made for your orb, but, for the sake of an example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
 
-`echo '{version: "2.1", description: "a sample orb"}' > /tmp/orb.yml`
+`echo 'version: "2.1"\ndescription: "a sample orb"' > /tmp/orb.yml`
 
-4) CLI を使用して、このコードが有効な Orb であることをバリデーションします。 たとえば、上記のパスの場合は以下のようになります。
+4) Validate that your code is a valid orb using the CLI. For example, using the path above you could use:
 
 `circleci orb validate /tmp/orb.yml`
 
-5) 開発版の Orb をパブリッシュします。 上記の Orb の場合は以下のようになります。
+5) Publish a dev version of your orb. Assuming the above orb, it would look like this:
 
 `circleci orb publish /tmp/orb.yml sandbox/hello-world@dev:first`
 
-6) Orb を本番にプッシュする準備が整ったら、`circleci orb publish` を使用して手動でパブリッシュするか、開発バージョンから直接プロモートすることができます。 この Orb をパブリッシュする場合、新しい開発バージョンが 0.0.1 になるようにインクリメントするには、以下のコマンドを使用します。
+6) Once you are ready to push your orb to production, you can publish it manually using `circleci orb publish` or promote it directly from the dev version. In the case where you want to publish the orb, assuming you wanted to increment the new dev version to become 0.0.1, you can use:
 
 `circleci orb publish promote sandbox/hello-world@dev:first patch`
 
-7) 安定版の Orb が変更不可形式でパブリッシュされました。これをビルドで安全に使用できます。 以下のコマンドを使用して、Orb のソースをプルすることができます。
+7) Your orb is now published in an immutable form as a production version and can be used safely in builds. You can then pull the source of your orb using:
 
 `circleci orb source sandbox/hello-world@0.0.1`
 
 ## Orbs の設計
 
-独自の Orbs を設計する際は、以下の要件を満たしてください。
+When designing your own orbs, make sure your orbs meet the following requirements:
 
 * Orbs は常に `description` を使用する - ジョブ、コマンド、Executors、およびパラメーターの `description` キーで、使用方法、前提、および技術を説明してください。
 * コマンドを Executors に合わせる - コマンドを提供する場合は、それらを実行する Executors を 1 つ以上提供します。
 * Orb には簡潔な名前を使用する - コマンドやジョブの使用は常に Orb のコンテキストに依存するため、ほとんどの場合 "run-tests" のような一般的な名前を使用できます。
 * 必須パラメーターと オプション パラメーター - 可能な限り、パラメーターに安全なデフォルト値を指定してください。
-* ジョブのみの Orbs を使用しない - ジョブのみの Orbs は柔軟性に欠けます。 そうした Orbs が適切な場合もありますが、独自のジョブでコマンドを使用できないとユーザーの不満につながる可能性があります。 ジョブを起動する前後のステップはユーザーにとって 1 つの回避策になります。
+* ジョブのみの Orbs を使用しない - ジョブのみの Orbs は柔軟性に欠けます。 While these orbs are sometimes appropriate, it can be frustrating for users to be unable to use the commands in their own jobs. ジョブを起動する前後のステップはユーザーにとって 1 つの回避策になります。
 * `steps` パラメーターは強力 - ユーザーから提供されるステップをラップすることで、キャッシュ戦略やさらに複雑なタスクなどをカプセル化および容易化することができ、ユーザーに大きな価値をもたらします。
 
-Orbs 内のコマンド、Executors、パラメーターの詳細と例については、「[Orbs リファレンス ガイド]({{ site.baseurl }}/2.0/reusing-config/)」を参照してください。
+Refer to [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) for details and examples of commands, executors and parameters in orbs.
 
-独自の Orb を開発するときは、インライン Orb を作成すると便利です。 次のセクションでは、独自のインライン Orb の記述方法について説明します。
+When developing your own orb, you may find it useful to write an inline orb. The section below describes how you can write your own inline orb.
 
-### インライン Orbs の作成
+### Writing Inline Orbs
 
-インライン Orbs は、Orb の開発中に手軽に使用できます。特に、後から他のユーザーと Orb を共有する場合に、長い設定ファイル内のジョブやコマンドの名前空間を作成するために便利です。
+Inline orbs can be handy during development of an orb or as a convenience for name-spacing jobs and commands in lengthy configurations, particularly if you later intend to share the orb with others.
 
-インライン Orbs を記述するには、設定ファイル内の `orbs` 宣言にその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、1 つの Orb をインポートしたうえで、別の Orb をインラインでオーサリングする場合、Orb は以下のようになります。
+To write inline orbs, place the orb elements under that orb's key in the `orbs` declaration in the configuration. For example, if you want to import one orb and then author inline for another, the orb might look like the example shown below:
 
 {% raw %}
 ```yaml
 version: 2.1
-description: # この Orb の目的
+description: # The purpose of this orb
 
 orbs:
   my-orb:
@@ -92,7 +92,7 @@ orbs:
     executors:
       specialthingsexecutor:
         docker:
-          - image: circleci/ruby:1.4.2
+          - image: circleci/ruby:2.7.0
     commands:
       dospecialthings:
         steps:
@@ -112,11 +112,11 @@ workflows:
 ```
 {% endraw %}
 
-上記の例では、`my-orb` の中身はマップなので、`my-orb` の内容はインライン Orb として解決されます。一方、`codecov` の中身はスカラー値なので、これは Orb URI と見なされます。
+In the example above, note that the contents of `my-orb` are resolved as an inline orb because the contents of `my-orb` are a map; whereas the contents of `codecov` are a scalar value, and thus assumed to be an orb URI.
 
-### インライン テンプレートの例
+### Example Inline Template
 
-Orb をオーサリングする場合、このサンプル テンプレートを使用すると、必要なすべてのコンポーネントを持つ新しい Orb をすばやく簡単に作成できます。 この例には、Orbs の 3 つのトップレベル コンセプトが含まれています。 どのような Orb もインライン Orb 定義で表現できますが、一般的には 1 つのインライン Orb を繰り返し使用し、`circleci config process .circleci/config.yml` によって Orb の使用方法が目的に合うかをチェックすると簡単です。
+When you want to author an orb, you may wish to use this example template to quickly and easily create a new orb with all of the required components. This example includes each of the three top-level concepts of orbs. While any orb can be equally expressed as an inline orb definition, it will generally be simpler to iterate on an inline orb and use `circleci config process .circleci/config.yml` to check whether your orb usage matches your expectation.
 
 {% raw %}
 ```yaml
@@ -163,18 +163,36 @@ workflows:
 ```
 {% endraw %}
 
+### Describing your Orb
+
+Before publishing your orb, it is recommended you add metadata to your orb to aid in the discoverability and documentation of your orb. We recommend adding a top-level `description` that informs users of the purpose of your orb and is indexed in search.
+
+Under the `display` key,  add a link to the git repository via the `source_url`. If your orb relates to a specific product or service, you may optionally include a link to the homepage or documentation for said product or service via the `home_url` key.
+
+``` YAML
+version: 2.1
+description: >
+  Integrate Amazon AWS S3 with your CircleCI CI/CD pipeline easily with the aws-s3 orb.
+display:
+  home_url: https://aws.amazon.com/s3/
+  source_url: https://github.com/CircleCI-Public/aws-s3-orb
+```
+
+The `description` and contents of the `display` key will be featured in the header of the orb's registry page.
+
+
 ## Orbs の使用例
 
-_`examples` スタンザは、バージョン 2.1 以上の構成で使用可能です。_
+_The `examples` stanza is available in configuration version 2.1 and later_
 
-Orb のオーサーとして、CircleCI の設定ファイルで Orb を使用する例をドキュメント化できます。これにより、新しいユーザーに入門ガイドを提供できるだけでなく、より複雑なユースケースの具体例を示すことができます。
+As an author of an orb, you may wish to document examples of using it in a CircleCI configuration file, not only to provide a starting point for new users, but also to demonstrate more complicated use cases.
 
-Orb のオーサリングを完了し、パブリッシュすると、その Orb は [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)にパブリッシュされます。 以下のように、新しく作成された Orb が Orb レジストリに表示されます。
+When you have completed authoring an orb, and have published the orb, the orb will be published in the [Orb Registry](https://circleci.com/orbs/registry/). You will see your newly-created orb in the Orb Registry, which is shown below.
 
-![Orbs レジストリの画像]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
+![Orbs Registry image]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
 
-### シンプルな例
-以下は、使用可能な Orb の例です。
+### Simple Examples
+Below is an example orb you can use:
 
 {% raw %}
 ```yaml
@@ -183,17 +201,17 @@ description: A foo orb
 
 commands:
   hello:
-    description: ユーザーに丁寧にあいさつします
+    description: Greet the user politely
     parameters:
       username:
         type: string
-        description: あいさつするユーザーの名前
+        description: A name of the user to greet
     steps:
       - run: "echo Hello << parameters.username >>"
 ```
 {% endraw %}
 
-必要に応じて、以下に示す例のように、この Orb に `examples` スタンザを追加することができます。
+If you would like, you may also supply an additional `examples` stanza in the orb like the example shown below:
 
 {% raw %}
 ```yaml
@@ -201,7 +219,7 @@ version: 2.1
 
 examples:
   simple_greeting:
-    description: Anna という名前のユーザーにあいさつします
+    description: Greeting a user named Anna
     usage:
       version: 2.1
       orbs:
@@ -215,11 +233,11 @@ examples:
 ```
 {% endraw %}
 
-`examples` は、`simple_greeting` と同じレベルに複数のキーを持つことができ、複数の例を追加できることに注意してください。
+Please note that `examples` can contain multiple keys at the same level as `simple_greeting`, allowing for multiple examples.
 
-### 期待される使用結果
+### Expected Usage Results
 
-オプションの `result` キーを使用して、上記の使用例を補完することができます。このキーは、これらのパラメーターで Orb を拡張した後の構成がどのようになるかを示します。
+The above usage example can be optionally supplemented with a `result` key, demonstrating what the configuration will look like after expanding the orb with its parameters:
 
 {% raw %}
 ```yaml
@@ -227,7 +245,7 @@ version: 2.1
 
 examples:
   simple_greeting:
-    description: Anna という名前のユーザーにあいさつします
+    description: Greeting a user named Anna
     usage:
       version: 2.1
       orbs:
@@ -254,12 +272,13 @@ examples:
 ```
 {% endraw %}
 
-### 使用例の構文
-トップレベルの `examples` キーはオプションです。 その下にネストされた使用例マップは、以下のキーを持つことができます。
+### Usage Examples Syntax
+The top level `examples` key is optional. Usage example maps nested below it can have the following keys:
 
 - **description:** 例の目的をユーザーにわかりやすく説明する文字列 (オプション)
 - **usage:** Orb の使用例を含む有効な設定ファイルのマップ全体 (必須)
 - **result:** 指定されたパラメーターで Orb を拡張した結果を具体的に示す有効な設定ファイルのマップ全体 (オプション)
+
 
 ## 次のステップ
 {:.no_toc}
