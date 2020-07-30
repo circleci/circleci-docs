@@ -38,7 +38,7 @@ match をセットアップする前に、ユーザーの Xcode プロジェク�
 
 * **[Build Settings (ビルド設定)] -> [Code Signing Style (コード署名スタイル)]** を *[Manual (手動)]* に設定
 * **[Build Settings (ビルド設定)] -> [Development Team (開発チーム)]** を開発チーム ID に設定
-* **[Build Settings (ビルド設定)] -> [Code Signing Identity (コード署名 ID)] ** を以下のように設定 
+* **[Build Settings (ビルド設定)] -> [Code Signing Identity (コード署名 ID)]** を以下のように設定 
   * デバッグ設定: *[iOS Developer (iOS 開発者)]*
   * リリース設定: *[iOS Distribution (iOS ディストリビューション)]*
 
@@ -110,7 +110,7 @@ match を構成して、その呼び出しをアドホック レーンに追加�
     jobs:
       build-and-test:
         macos:
-          xcode: "9.0"
+          xcode: 11.3.0
         steps:
           ...
           - run: bundle exec fastlane test
@@ -118,7 +118,7 @@ match を構成して、その呼び出しをアドホック レーンに追加�
     
       adhoc:
         macos:
-          xcode: "9.0"
+          xcode: 11.3.0
         steps:
           ...
     
@@ -165,16 +165,14 @@ iOS プロジェクトおよび Mac プロジェクトに対してコード署�
 
 ```yaml
 # .circleci/config.yml
-version: 2
+version: 2.1
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: test
-    shell: /bin/bash --login -o pipefail
     steps:
       - checkout
       - run: bundle install
@@ -188,12 +186,10 @@ jobs:
 
   adhoc:
     macos:
-      xcode: "9.0"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
       FASTLANE_LANE: adhoc
-    shell: /bin/bash --login -o pipefail
     steps:
 
       - checkout
@@ -205,7 +201,6 @@ jobs:
           path: output
 
 workflows:
-  version: 2
   build-test-adhoc:
     jobs:
 
