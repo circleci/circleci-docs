@@ -124,7 +124,9 @@ Orb オーサーは、セマンティック バージョニングに従う必要
 
 たとえば、mynamespace/some-orb@8.2.0 が存在すると、8.2.0 の後に mynamespace/some-orb@8.1.24 や mynamespace/some-orb@8.0.56 がパブリッシュされても、volatile は引き続き mynamespace/some-orb@8.2.0 を最大のセマンティック バージョンとして参照します。
 
-以下に Orb バージョン宣言の例を挙げ、その意味を説明します。
+**Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
+
+Examples of orb version declarations and their meaning:
 
 * circleci/python@volatile - ビルドがトリガーされた時点でレジストリにある最大の Python Orb バージョンを使用します。 通常、これは最も最近パブリッシュされ、最も安定性が低い Python Orb です。
 * circleci/python@2 - Python Orb バージョン 2.x.y のうち、最新のバージョンを使用します。
@@ -133,15 +135,15 @@ Orb オーサーは、セマンティック バージョニングに従う必要
 
 ## Orb のバージョン (開発版と 安定版)
 
-ワークフローで使用できる Orb には、主に開発版 Orb と安定版 Orb の 2 種類があります。 ワークフローのニーズに応じて、これらの Orb のいずれかを選んで使用できます。 以下の各セクションでは、ワークフローに使用するにはどちらの種類が適切か、十分な理解に基づいて判断していただけるよう、これらの 2 種類の Orb の違いについて説明します。
+There are two main types of orbs that you can use in your workflows: Development & Production. Depending on your workflow needs, you may choose to use either of these orbs. The sections below describe the differences between these two types of orbs so you can make a more informed decision of how best to utilize these orb types in your workflows.
 
-すべての安定版 Orbs は組織オーナーによって安全にパブリッシュできますが、開発版 Orbs はチームのオーナー以外のメンバーでもパブリッシュできます。 安定版 Orb とは異なり、開発版 Orb は変更可能で 90 日後に有効期限が切れるため、アイデアをすばやく繰り返し組み込みたいときには理想的です。
+While all production orbs can be published securely by organization owners, development orbs provide non-owner members of the team with a way to publish orbs. Unlike production orbs, development orbs are also mutable and expire after 90 days, so they are ideal for rapid iteration of an idea.
 
-安定版 Orbs ではワイルドカードによるセマンティック バージョン参照を使用できますが、開発版は mynamespace/myorb@dev:mybranch のように完全修飾名で参照する必要があります。 開発版には便利な省略表記がありません。
+A development version should be referenced by its complete, fully-qualified name, such as: mynamespace/myorb@dev:mybranch.; whereas production orbs allow wildcard semantic version references. Note that there are no shorthand conveniences for development versions.
 
-Orb の各バージョンは、開発版または安定版としてレジストリに追加されます。 安定版は、1.5.3 のように常にセマンティック バージョンです。一方、開発版には文字列タグを付加でき、`dev:myfirstorb` のように常に「dev:」プレフィックスが付きます。
+Orb versions may be added to the registry either as development versions or production versions. Production versions are always a semantic version like 1.5.3; whereas development versions can be tagged with a string and are always prefixed with dev: for example `dev:myfirstorb`.
 
-**メモ: ** 開発版は変更可能で、有効期限があり、90 日後に削除されます。したがって、本番ソフトウェアを開発版 Orb に依存させないこと、また、開発版は Orb 開発を集中的に進めている間にのみ使用することを強くお勧めします。 チームの組織メンバーは、別のメンバーの設定ファイルをコピー & ペーストするのではなく、開発版 Orb を基に Orb のセマンティック バージョンをパブリッシュできます。
+**Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on a development versions in any production software, and use them only while actively developing your orb. It is possible for org members of a team to publish a semantic version of an orb based off of a dev orb instead of copy-pasting some config from another teammate.
 
 ### 開発版および安定版 Orb のセキュリティ プロファイル
 
@@ -151,21 +153,21 @@ Orb の各バージョンは、開発版または安定版としてレジスト�
 
 ### 開発版および安定版 Orb の維持特性と可変特性
 
-開発版 Orbs は変更可能で、有効期限があります。 Orb がパブリッシュされた名前空間を所有する組織のメンバーは、だれでも開発版 Orb を上書きできます。
+Dev orbs are mutable and expire. Anyone can overwrite any development orb who is a member of the organization that owns the namespace in which that orb is published.
 
-安定版 Orbs は変更不可で、永続的です。 特定のセマンティック バージョンで安定版 Orb をパブリッシュすると、そのバージョンの Orb の内容は変更できません。 安定版 Orb の内容を変更するには、一意のバージョン番号で新しいバージョンをパブリッシュする必要があります。 Orb を安定版としてパブリッシュする際は、circleci CLI で orb publish increment コマンドや orb publish promote コマンドを使用することをお勧めします。
+Production orbs are immutable and long-lived. Once you publish a production orb at a given semantic version you may not change the content of that orb at that version. To change the content of a production orb you must publish a new version with a unique version number. It is best practice to use the orb publish increment and/or the orb publish promote commands in the circleci CLI when publishing orbs to production.
 
 ### 開発版および安定版 Orbs のバージョニング セマンティック
 
-開発版 Orbs には、`dev:<< your-string >>` 形式のタグが付きます。 安定版 Orbs は常にセマンティック バージョニング (semver) スキームを使用してパブリッシュされます。
+Development orbs are tagged with the format `dev:<< your-string >>`. Production orbs are always published using the semantic versioning (“semver”) scheme.
 
-開発版 Orbs に指定できる文字列ラベルには以下の制限があります。
+In development orbs, the string label given by the user has the following restriction:
 
 - 空白文字以外の最大 1,023 文字
 
-開発版 Orb タグの例
+Examples of valid development orb tags:
 
-有効な例
+Valid:
 
 ```
   "dev:mybranch"
@@ -175,16 +177,16 @@ Orb の各バージョンは、開発版または安定版としてレジスト�
   "dev:myVERYIMPORTANTbranch"
 ```
 
-無効な例
+Invalid:
 
 ```
   "dev: 1" (スペースは使用不可)
   "1.2.3-rc1" (先頭に "dev:" が含まれていない)
 ```
 
-安定版 Orb では `X.Y.Z` 形式を使用します。ここで、`X` は「メジャー」バージョン、`Y` は「マイナー」バージョン、`Z` は「パッチ」バージョンです。 たとえば、2.4.0 は、メジャーバージョン 2、マイナーバージョン 4、パッチバージョン 0 を意味します。
+In production orbs, use the form `X.Y.Z` where `X` is a “major” version, `Y` is a “minor” version, and `Z` is a “patch” version. For example, 2.4.0 implies the major version 2, minor version 4, and the patch version of 0.
 
-厳密に強制されているわけではありませんが、安定版 Orbs のバージョニングには、メジャー、マイナー、パッチの標準セマンティック バージョニング規則を使用することをお勧めします。
+While not strictly enforced, it is best practice when versioning your production orbs to use the standard semantic versioning convention for major, minor, and patch:
 
 - メジャー: 互換性がない API の変更を行う場合
 - マイナー: 下位互換性を維持しながら機能を追加する場合
@@ -192,15 +194,15 @@ Orb の各バージョンは、開発版または安定版としてレジスト�
 
 ### Orb 内での Orbs の使用と登録時解決
 
-Orb 内で orbs スタンザを使用することも可能です。
+You may also use an orbs stanza inside an orb.
 
-安定版 Orb リリースは変更不可なので、Orb 依存関係の解決は、ビルドの実行時ではなく Orb の登録時にすべて行われます。
+Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
 
-たとえば、`biz/baz@volatile` をインポートする orbs スタンザを含んだ Orb `foo/bar` が、バージョン 1.2.3 でパブリッシュされるとします。 `foo/bar@1.2.3` を登録する時点で、`biz/baz@volatile` が最新バージョンとして解決され、その要素がパッケージ バージョンの `foo/bar@1.2.3` に直接インクルードされます。
+For example, orb `foo/bar` is published at version 1.2.3 with an orbs stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
 
-`biz/baz` が 3.0.0 に更新されても、`foo/bar` が 1.2.3 より上のバージョンでパブリッシュされるまで、`foo/bar@1.2.3` を使用しているユーザーには ``biz/baz@3.0.0 の変更が反映されません。
+If `biz/baz` is updated to 3.0.0, anyone using `foo/bar@1.2.3` will not see the change in ``biz/baz@3.0.0 until `foo/bar` is published at a higher version than 1.2.3.
 
-**メモ:** Orb の要素は、他の Orb の要素を使用して直接構成できます。 たとえば、以下の例のような Orb を使用できます。
+**Note:** Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
 
 ```
 version: 2.1
@@ -221,13 +223,13 @@ jobs:
 
 ### 安定版 Orbs の削除
 
-CircleCI は通常、グローバルに読み取り可能としてパブリッシュされた安定版 Orbs を削除しないように要請しています。構成のソースとしての Orb レジストリの信頼性およびすべての Orb ユーザーからの信頼を損なうおそれがあるためです。
+In general, CircleCI prefers to never delete production orbs that were published as world-readable because it harms the reliability of the orb registry as a source of configuration and the trust of all orb users.
 
-緊急の理由で Orb を削除する必要がある事態が発生した場合は、CircleCI にご連絡ください (メモ セキュリティ上の懸念から削除を行う場合は、CircleCI Security の Web ページを使用して、情報開示の責任を果たす必要があります)。
+If the case arises where you need to delete an orb for emergency reasons, please contact CircleCI (Note: If you are deleting because of a security concern, you must practice responsible disclosure using the CircleCI Security web page.
 
 ## 関連項目
 {:.no_toc}
 
-- \[Orb の概要\] ({{site.baseurl}}/2.0/orb-intro/): CircleCI Orbs についての基本情報
-- \[Orbs リファレンス ガイド\] ({{site.baseurl}}/2.0/reusing-config/): コマンド、ジョブ、Executor の説明など、Orb に関する詳細な参考情報
-- \[Orbs に関するよくあるご質問\] ({{site.baseurl}}/2.0/orb-faq/): Orbs 使用に際してよく発生している問題についての情報
+- \[Orb の概要\]({{site.baseurl}}/2.0/orb-intro/): CircleCI Orbs についての基本情報
+- \[Orbs リファレンス ガイド\]({{site.baseurl}}/2.0/reusing-config/): コマンド、ジョブ、Executor の説明など、Orb に関する詳細な参考情報
+- \[Orbs に関するよくあるご質問\]({{site.baseurl}}/2.0/orb-faq/): Orbs 使用に際してよく発生している問題についての情報
