@@ -1,22 +1,25 @@
 ---
 layout: classic-docs
-title: "インサイトを使用する"
-short-title: "インサイトを使用する"
+title: "インサイトの使用"
+short-title: "インサイトの使用"
 description: "リポジトリのステータスおよびテスト パフォーマンスを表示する方法"
 categories:
   - configuring-jobs
 order: 41
 ---
 
-CircleCI でインサイトを作成および使用する方法について説明します。
+<div class="alert alert-warning" role="alert">
+  <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
+  <span> This document refers to using the Insights page on the CircleCI <i>Server</i> product. If you are interested in accessing insights and analytics for your usage, please consider exploring the <a href="https://circleci.com/docs/api/v2/#circleci-api-insights">Insights endpoints</a> of the CircleCI V2 API.</span>
+</div>
 
 ## 概要
 
-CircleCI アプリケーションで [Insights (インサイト)] メニュー項目をクリックすると、フォローしているすべてのリポジトリのヘルス状態に関するダッシュボードが表示されます。 ここでは、デフォルト ブランチの平均ビルド時間、平均キュー時間、最終ビルド時刻、成功率、並列処理数を確認できます。 **メモ:** ワークフローを構成している場合、デフォルト ブランチに対して実行されるすべてのジョブがグラフに表示されます。
+Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. **Note:** If you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
+![header]({{ site.baseurl }}/assets/img/docs/insights-1.0.gif)
 
-この画面では、ビルドに関する以下のデータを確認できます。
+The image illustrates the following data about your builds:
 
 - CircleCI でビルドされているすべてのリポジトリのリアルタイム ステータス
 
@@ -30,11 +33,11 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 ## プロジェクトのインサイト
 
-メイン ナビゲーション上の [Insights (インサイト)] アイコンをクリックしてから、リポジトリ名をクリックすると、プロジェクト別のインサイトのページにアクセスできます。
+Click the Insights icon on the main navigation, then click your repo name to access per-project insights.
 
-プロジェクト別のインサイトのページでは、選択したブランチにおけるビルド ステータスおよびビルド パフォーマンスのグラフを確認できます。
+The per-project insights page gives you access to the build status and build performance graphs for a selected branch.
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
+![header]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
 
 - **ビルド ステータス:** デフォルト ブランチに関する直近 50 件のビルドが表示されます。 右上隅でブランチを選択すると、そのブランチに関する 100 件を超えるビルド・ジョブのステータスを確認できます。
 
@@ -42,17 +45,17 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 ## 関連項目
 
-失敗が多いテストに対してインサイトを使用したい場合は、「[テスト メタデータの収集]({{ site.baseurl }}/j2.0/collect-test-data/)」を参照してください。
+Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
 
 ## Sumo Logic とのインテグレーション
 
-Sumo Logic を使用すると、CircleCI 上のすべてのジョブを追跡し、その分析データを可視化できます。 そのためには、Sumo Logic パートナー インテグレーション サイトから、Sumo Logic Orb と Sumo Logic アプリケーション インテグレーションを使用します。
+Sumo Logic users may track and visualize analytical data across all of their jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app integration from the Sumo Logic partner integrations site.
 
 ### Sumo Logic の CircleCI ダッシュボード
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
-以下の情報が表示されます。
+Included panels:
 
 - 合計ジョブ数
 - 合計成功ジョブ数
@@ -64,19 +67,19 @@ Sumo Logic を使用すると、CircleCI 上のすべてのジョブを追跡し
 - 時間のかかった失敗ジョブ上位 10 個 (秒単位)
 - 時間のかかった成功ジョブ上位 10 個 (秒単位)
 
-CircleCI ダッシュボードは、ダッシュボードのホームページからアプリケーション カタログを使用してインストールできます。
+Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
-ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。この Orb は、追跡するプロジェクトに含まれている必要があります。
+This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
 ### Sumo Logic Orb
 
-Sumo Logic Orb の最新版は、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/orb/circleci/sumologic)で提供されています。
+Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/orbs/registry/orb/circleci/sumologic).
 
 #### 1. Sumo Logic Orb をインポートする
 
-トップ レベルの `orbs` キーを含めることで Sumo Logic Orb をプロジェクトに追加し、以下のように `circleci/sumologic@x.y.z` をインポートします (`x.y.z` は上記リンクの最新バージョンの番号で置き換えてください)。
+Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
 
 ```yaml
 orbs:
@@ -85,7 +88,7 @@ orbs:
 
 #### 2. ワークフローに *Workflow-Collector* を追加する
 
-`workflow-collector` ジョブはワークフローと並列で実行され、ワークフロー内のすべてのジョブが完了するまで Sumo Logic に分析データを送信します。
+The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
 
 ```yaml
 version: 2.1
@@ -104,11 +107,11 @@ workflows:
 
 #### 3. ソース コレクターを 2 つ作成する
 
-HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成する必要があります。 この HTTPS URL にジョブ データが送信されます。
+You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
 
-作成する必要があるのは、`circleci/job-collector` と `circleci/workflow-collector` という名前のコレクターです。
+You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
 
-以下の手順で 2 つのソース コレクターを作成します。
+To create the two source collectors:
 
 1. ダッシュボードから **[Setup Wizard (セットアップ ウィザード)]** を選択します。
 2. **[Set Up Streaming Data (ストリーミング データのセットアップ)]** を選択します。
@@ -119,19 +122,19 @@ HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成�
 
 #### 4. 環境変数を追加する
 
-ステップ 3 で生成された各 URL に対して、対応する環境変数を作成します。
+For each of the URLs produce in the previous step, create the corresponding environment variable.
 
-対応する環境変数は以下の 2 つです。
+Env vars:
 
 - `JOB_HTTP_SOURCE`
 - `WORKFLOW_HTTP_SOURCE`
 
-**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
+**[How to add an environment variable to your project.]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
 
-これにより、Orb が Sumo Logic ダッシュボードにリンクされます。
+This will link the orb with your Sumo Logic dashboard.
 
-各ジョブが CircleCI で実行されると、Sumo Logic ダッシュボードはデータの入力を開始します。
+Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
 
 ## 関連項目
 
-Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
+Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
