@@ -10,10 +10,10 @@ order: 1
 
 以下のセクションに沿って、Scala アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) の作成方法について説明します。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## 概要
-
 {:.no_toc}
 
 このドキュメントは、[プロジェクトの AWS 権限](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws)に、S3 バケットの読み取りと書き込みが許可される有効な AWS キーが構成されていることを前提としています。 このドキュメントの例では、指定された S3 バケットにビルド パッケージがアップロードされます。
@@ -48,24 +48,24 @@ jobs:
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run:
-          name: sbt バイナリの取得
+          name: Get sbt binary
           command: |
                     apt update && apt install -y curl
                     curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
                     dpkg -i sbt-$SBT_VERSION.deb
                     rm sbt-$SBT_VERSION.deb
                     apt-get update
-                    apt-get install -y sbt python-pip git
+                    apt-get install -y python-pip git
                     pip install awscli
                     apt-get clean && apt-get autoclean
       - checkout
       - restore_cache:
-          # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: sbt-cache
       - run:
-          name: samplescala dist パッケージのコンパイル
+          name: Compile samplescala dist package
           command: cat /dev/null | sbt clean update dist
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するため
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: target/universal/samplescala.zip
           destination: samplescala
       - save_cache:
@@ -117,14 +117,14 @@ jobs:
     steps:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run:
-          name: sbt バイナリの取得
+          name: Get sbt binary
           command: |
             apt update && apt install -y curl
             curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
             dpkg -i sbt-$SBT_VERSION.deb
             rm sbt-$SBT_VERSION.deb
             apt-get update
-            apt-get install -y sbt python-pip git
+            apt-get install -y python-pip git
             pip install awscli
             apt-get clean && apt-get autoclean
 ```
@@ -147,7 +147,7 @@ steps/run キーは、実行するアクションのタイプを指定します�
             dpkg -i sbt-$SBT_VERSION.deb
             rm sbt-$SBT_VERSION.deb
             apt-get update
-            apt-get install -y sbt python-pip git
+            apt-get install -y python-pip git
             pip install awscli
             apt-get clean && apt-get autoclean
 ```
@@ -186,7 +186,7 @@ steps/run キーは、実行するアクションのタイプを指定します�
 
 上記の例について以下に説明します。
 
-- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): 基本的に、git は GitHub から取得したプロジェクト リポジトリをコンテナにクローンします。 
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container 
 - [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) キー: 復元するキャッシュ ファイルの名前を指定します。 キー名は、このスキーマの後方にある save_cache キーで指定されます。 指定されたキーが見つからない場合は、何も復元されず、処理が続行されます。
 - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) コマンドの `cat /dev/null | sbt clean update dist`: パッケージの .zip ファイルを生成する sbt コンパイル コマンドを実行します。
 - [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) パス: イメージの ARTIFACT ゾーンにコピーするソース ファイルのパスを指定します。
@@ -204,8 +204,7 @@ steps:
 
 この deploy コマンドも複数行実行コマンドです。
 
-## 関連項目
-
+## 関連項目 
 {:.no_toc}
 
 - 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
