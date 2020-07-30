@@ -69,7 +69,7 @@ workflows:
 ```
 {% endraw %}
 
-With orbs it is possible to write parameterized configuration once and utilize it across multiple similar projects.
+With orbs, it is possible to write a parameterized configuration once and utilize it across multiple similar projects.
 
 ## The Orb Registry
 
