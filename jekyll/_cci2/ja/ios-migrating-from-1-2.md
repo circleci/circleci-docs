@@ -10,7 +10,8 @@ order: 10
 
 ここでは、iOS プロジェクトを CircleCI 1.0 から 2.0 へ移行するうえでのガイドラインについて説明します。
 
-* 目次 {:toc}
+* 目次
+{:toc}
 
 ## 概要
 
@@ -27,40 +28,34 @@ macOS 向け CircleCI 2.0 のリリースに伴い、2.0 プラットフォー�
 ```yaml
 # .circleci/config.yml
 
-# 設定ファイルのバージョンを指定します (バージョン 2 が最新)
-version: 2
+# Specify the config version - version 2.1 is latest.
+version: 2.1
 
-# 現在のプロジェクトのジョブを定義します
+# Define the jobs for the current project.
 jobs:
   build-and-test:
 
     # 使用する Xcode バージョンを指定します
     macos:
-      xcode: "8.3.3"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
-    # プロジェクトのビルドに必要なステップを定義します
+    # Define the steps required to build the project.
     steps:
 
       # VCS プロバイダーからコードを取得します
 
       - checkout
 
-      # CocoaPods Specs を HTTPS でダウンロードし (Git よりも高速)、
-      # CocoaPods をインストールします
+      - run:
+          name: Install CocoaPods
+          command: pod install
+
+      # Run tests.
 
       - run:
-          name: CocoaPods のインストール
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install
-
-      # テストを実行します
-
-      - run:
-          name: テストの実行
+          name: Run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 6
@@ -73,8 +68,7 @@ jobs:
 
   deploy:
     macos:
-      xcode: "8.3.3"
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
@@ -82,31 +76,30 @@ jobs:
 
       - checkout
 
-      # fastlane match を使用してコード署名を設定します
+      # Set up code signing via Fastlane Match.
 
       - run:
-          name: コード署名のセットアップ
+          name: Set up code signing
           command: fastlane match development --readonly
 
-      # アプリケーションのリリース バージョンをビルドします
+      # Build the release version of the app.
 
       - run:
-          name: IPA のビルド
+          name: Build IPA
           command: fastlane gym
 
-      # ジョブのアーティファクトに IPA ファイルを格納します
+      # Store the IPA file in the job's artifacts
 
       - store_artifacts:
           path: output/MyApp.ipa
 
-      # デプロイします
+      # Deploy!
 
       - run:
-          name: App Store へのデプロイ
+          name: Deploy to App Store
           command: fastlane spaceship
 
 workflows:
-  version: 2
   build-and-deploy:
     jobs:
 
@@ -124,7 +117,6 @@ workflows:
 ビルドの一貫性を維持するために、2.0 の `.circleci/config.yml` ファイルを CircleCI の iOS プロジェクトにプッシュする前に、Gemfile を追加し、fastlane match を使用してコード署名をセットアップしておくことをお勧めします。
 
 ### Gemfile
-
 {:.no_toc}
 
 iOS プロジェクトに Gemfile をまだ追加していない場合は、追加することをお勧めします。 Gemfile をチェックインし、Bundler を使用して gem をインストールおよび実行することで、最新バージョンの fastlane と CocoaPodsをビルドで使用できるようになります。
@@ -139,7 +131,6 @@ Gemfile の例を以下に示します。
     
 
 ### fastlane match によるコード署名のセットアップ
-
 {:.no_toc}
 
 CircleCI 2.0 で iOS プロジェクトのコード署名をセットアップする手順については、\[コード署名に関するガイド\]({{ site.baseurl}}/2.0/ios-codesigning)を参照してください。
@@ -149,25 +140,23 @@ CircleCI 2.0 で iOS プロジェクトのコード署名をセットアップ�
 以下のセクションでは、iOS プロジェクトの 2.0 設定ファイル構文の例を示します。 CircleCI では iOS プロジェクト向けの部分的な設定ファイル変換機能も提供しています。詳細については「\[1.0 から 2.0 への config-translation エンドポイントを使用する\]({{ site.baseurl}}/2.0/config-translation)」を参照してください。 1.0 プロジェクトに `circle.yml` が**ない**場合は、1.0 プロジェクトから初期設定ファイルを生成するスクリプトを [CircleCI Config Generator](https://github.com/CircleCI-Public/circleci-config-generator/blob/master/README.md) から入手してください。
 
 ### ジョブ名と Xcode バージョン
-
 {:.no_toc}
 
-2.0 `.circleci/config.yml` ファイル冒頭の数行で、ジョブの名前と、使用する Xcode のバージョンを指定します。
+In the 2.1 `.circleci/config.yml` file the first few lines specify the name of the job and the Xcode version to use:
 
-    version: 2
+    version: 2.1
     jobs:
       build-and-test:
         macos:
-          xcode: "8.3.3"
+          xcode: 11.3.0
     ...
       deploy:
         macos:
-          xcode: "8.3.3"
+          xcode: 11.3.0
     ...
     
 
 ### ビルド ステップ キー
-
 {:.no_toc}
 
 トップレベルの `steps` キーには、特定のジョブで実行されるすべてのビルド ステップが含まれます。
@@ -182,7 +171,6 @@ CircleCI 2.0 で iOS プロジェクトのコード署名をセットアップ�
 利用できるステップの種類は「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」で確認できます。 **メモ:** macOS のビルドでは Docker がサポートされていません。
 
 ### プロジェクト コードのチェック アウト
-
 {:.no_toc}
 
 コードのチェック アウトのステップは、`steps` の下に最初に記述される項目の 1 つです。
@@ -194,7 +182,6 @@ CircleCI 2.0 で iOS プロジェクトのコード署名をセットアップ�
     
 
 ### Bundler でインストールされた RubyGems のキャッシュ
-
 {:.no_toc}
 
 CircleCI 2.0 では、*キャッシュ キー*に基づいてキャッシュの保存と復元を行います。 ここでは `Gemfile.lock` の内容に基づいて RubyGems をキャッシュする方法を示します。
@@ -231,7 +218,6 @@ jobs:
 Gemfile.lock の内容を変更するたびに、新しいキャッシュが作成されます。 キャッシュ キーと `checksum` 以外のキー オプションの詳細については、[こちらのドキュメント]({{ site.baseurl }}/2.0/caching/)を参照してください。
 
 ### CocoaPods のインストール
-
 {:.no_toc}
 
 [CocoaPods](https://cocoapods.org/) を既にリポジトリに*チェック イン*している場合、依存関係は正しくピック アップされるため、この手順を行う必要はありません。 一方、CocoaPods がリポジトリに*含まれていない*場合は、CocoaPods を `.circleci/config.yml` にインストールする必要があります。
@@ -241,8 +227,7 @@ Gemfile.lock の内容を変更するたびに、新しいキャッシュが作�
 HTTPS を使用して CocoaPods Specs をフェッチしてから、`pod install` を実行する設定ファイルのスニペットの例を以下に示します。
 
 {% raw %}
-
-    jobs:
+jobs:
       build-and-deploy:
         steps:
           ...
@@ -252,14 +237,11 @@ HTTPS を使用して CocoaPods Specs をフェッチしてから、`pod install
               command: |
                 curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
                 pod install
-    
-
 {% endraw %}
 
 Pods を設定ファイルにインストールせずに、リポジトリにチェックインする方法については、[こちらの CocoaPods ガイド](https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control)を参照してください。
 
 ### テストの実行
-
 {:.no_toc}
 
 [fastlane Scan](https://github.com/fastlane/fastlane/tree/master/scan) を使用して、以下のようにテストを実行できます。
@@ -291,7 +273,6 @@ jobs:
     
 
 ### アーティファクト、テスト結果、診断ファイルの保存
-
 {:.no_toc}
 
 CircleCI 2.0 ではジョブのアーティファクトが自動的に収集されません。{% comment %} TODO: Job {% endcomment %}ビルドで生成されるファイルに CircleCI アプリケーションからアクセスしたい場合は、`store_artifacts` ステップを使用して、該当のファイルを明示的に収集しておく必要があります。
@@ -313,18 +294,16 @@ CircleCI アプリケーションで XML テストの結果を表示させるに
 上記のステップの詳細については、「[ビルド アーティファクトの保存]({{ site.baseurl}}/2.0/artifacts/)」と「[テスト メタデータの収集]({{ site.baseurl}}/2.0/collect-test-data/)」を参照してください。
 
 ### ワークフローを使用したデプロイ
-
 {:.no_toc}
 
 2.0 ではワークフローを利用できるため、アプリケーションのデプロイに関するすべてのコマンドを独自のジョブに抽出することをお勧めします。
 
 ```yaml
 jobs:
-  # 他のジョブをここに追加します
+  # add other jobs here
   deploy:
     macos:
-      xcode: 8.3.3
-    working_directory: /Users/distiller/project
+      xcode: 11.3.0
     environment:
       FL_OUTPUT_DIR: output
 
@@ -332,7 +311,7 @@ jobs:
 
       - checkout
 
-      # fastlane match を使用してコード署名を設定します
+      # Set up code signing via Fastlane Match.
 
       - run:
           name: コード署名のセットアップ
