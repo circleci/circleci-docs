@@ -10,14 +10,14 @@ order: 3
 
 このチュートリアルのデモ アプリケーションでは、バックエンド用に Python と Flask を使用し、 データベース用に PostgreSQL を使用します。
 
-- 目次 {:toc}
+- 目次
+{:toc}
 
 以下の各セクションでは、デモ アプリケーション用にジョブとステップを構成する方法、CircleCI 環境で Selenium と Chrome を使用して単体テストおよびインテグレーション テストを実行する方法、デモ アプリケーションを Heroku にデプロイする方法について詳しく説明します。
 
 デモ アプリケーションのソースは、GitHub の <https://github.com/CircleCI-Public/circleci-demo-python-flask> で入手できます。 また、このサンプル アプリケーションは、<https://circleci-demo-python-flask.herokuapp.com/> で入手できます。
 
-## 基本的なセットアップ
-
+## 基本的なセットアップ 
 {:.no_toc}
 
 通常、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
@@ -105,7 +105,6 @@ jobs:
 ```
 
 ### 依存関係のキャッシュ
-
 {:.no_toc}
 
 ジョブを高速化するために、デモの構成では、Python virtualenv を CircleCI キャッシュに置き、`pip install` を実行する前にそのキャッシュを復元します。 先に virtualenv をキャッシュに置いておけば、依存関係が既に存在するため、`pip install` コマンドは依存関係を virtualenv にダウンロードする必要がありません。 virtualenv をキャッシュに保存するには、`pip install` コマンドの後に実行される `save_cache` ステップを使用して実行します。
@@ -257,7 +256,7 @@ jobs:
 - Heroku アプリケーションが作成されている
 - `HEROKU_APP_NAME` と `HEROKU_API_KEY` の環境変数が設定されている
 
-上記のいずれか 1 つでも満たしていない場合には、デプロイに関するドキュメントの「[Heroku]({{ site.baseurl }}/2.0/deployment-integrations/#heroku)」セクションの手順を実行してください。
+If you have not completed any or all of these steps, follow the [instructions]({{ site.baseurl }}/2.0/deployment-examples/#heroku) in the Heroku section of the Deployment document.
 
 **メモ:** このデモ プロジェクトをフォークする場合は、Heroku プロジェクトの名前を変更すると、このチュートリアルで使用する名前空間と干渉しないように Heroku をデプロイできます。
 
@@ -310,7 +309,6 @@ jobs:
 <<https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23>{:rel="nofollow"}> でデモ アプリケーションをビルドしてデプロイするまでのプロセスを確認できます。
 
 ### Heroku に関するその他の構成
-
 {:.no_toc}
 
 デモ アプリケーションは、`config.py` と `manage.py` の設定内容に基づき、Heroku 上で実行されるように構成されています。 この 2 つのファイルはアプリケーションに対して、本番設定を使用し、PostgreSQL データベースを移行し、Heroku 上で SSL を使用するように指示します。
@@ -397,7 +395,6 @@ jobs:
 ```
 
 ## 関連項目
-
 {:.no_toc}
 
 ワークフローの詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/2.0/workflows)」を参照してください。
