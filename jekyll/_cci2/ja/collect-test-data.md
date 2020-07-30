@@ -58,16 +58,16 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 このセクションでは、以下のテスト ランナーの例を示します。
 
 * [Cucumber]({{ site.baseurl }}/2.0/collect-test-data/#cucumber)
-* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
-* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-results)
-* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#mochajs)
-* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#ava)
+* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
+* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-のテスト結果)
+* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-mocha)
+* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-ava)
 * [ESLint]({{ site.baseurl }}/2.0/collect-test-data/#eslint)
 * [PHPUnit]({{ site.baseurl }}/2.0/collect-test-data/#phpunit)
 * [pytest]({{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]({{ site.baseurl }}/2.0/collect-test-data/#rspec)
-* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
-* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-visual-studio--net-core-tests)
+* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#clojure-テスト用の-test2junit)
+* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#visual-studionet-core-テスト用の-trx2junit)
 * [Karma]({{ site.baseurl }}/2.0/collect-test-data/#karma)
 * [Jest]({{ site.baseurl }}/2.0/collect-test-data/#jest)
 
@@ -97,7 +97,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 ```yaml
     steps:
       - run:
-          name: Save test results
+          name: テスト結果の保存
           command: |
             mkdir -p ~/cucumber
             bundle exec cucumber --format pretty --format json --out ~/cucumber/tests.cucumber
@@ -459,30 +459,27 @@ Karma テスト ランナーで JUnit テストを出力するには、[karma-ju
 #### Jest
 {:.no_toc}
 
-Jest データを収集するには、まず `jest.config.js` という名前の Jest 設定ファイルを以下のように作成します。
+To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
 
-```javascript
-// jest.config.js
-{
-  reporters: ["default", "jest-junit"],
-}
-```
-
-`.circleci/config.yml` に、以下の `run` ステップを追加します。
+A working `.circleci/config.yml` section might look like this:
 
 ```yaml
 steps:
   - run:
-      name: JUnit カバレッジ レポーターのインストール
+      name: Install JUnit coverage reporter
       command: yarn add --dev jest-junit
   - run:
-      name: JUnit をレポーターとして使用したテストの実行
+      name: Run tests with JUnit as reporter
       command: jest --ci --runInBand --reporters=default --reporters=jest-junit
       environment:
-        JEST_JUNIT_OUTPUT_DIR: "reports/junit/js-test-results.xml"
+        JEST_JUNIT_OUTPUT_DIR: ./reports/junit/
+  - store_test_results:
+      path: ./reports/junit/
+  - store_artifacts:
+      path: ./reports/junit
 ```
 
-全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。
+For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
 **メモ:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
 
@@ -495,7 +492,7 @@ steps:
 ## 関連項目
 {:.no_toc}
 
-[インサイトの利用]({{ site.baseurl }}/2.0/insights/)
+[インサイトの使用]({{ site.baseurl }}/2.0/insights/)
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {:.no_toc}
