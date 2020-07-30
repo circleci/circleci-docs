@@ -22,14 +22,14 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 例として、Performance プランでクレジットを使用する場合を考えてみましょう。 Performance プランでは以下を利用できます。
 
 - 1 つ以上のクレジット ブロック (25,000 クレジット)
-- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user)
+- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
 - Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
 - macOS のマシン タイプ
-- The Windows machine type
+- Windows のマシン タイプ
 
 この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。大規模なプロジェクトもあれば、CI の構成で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。 たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU 4 基、RAM 8 GB、20 クレジット/分) を使用できます。一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU 1 基、RAM 2 GB、5 クレジット/分) を使用できます。
 
-Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/pricing/) page to learn about what each CircleCI plan offers and how credits are distributed across different machine types.
+CircleCI の各プランで提供される内容や、マシン タイプ別の消費クレジットについては、CircleCI の[料金プラン](https://circleci.com/ja/pricing/)のページをご確認ください。
 
 ## クレジットベース プランの設定
 
@@ -44,15 +44,15 @@ Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/
 - 依存関係のキャッシュ
 - Windows/Linux でのビルド
 
-従量課金制の Free プランでは、週に 2,500 クレジットが提供され、Medium タイプのマシン (vCPU 2 基、RAM 4 GB) で利用することができます。この構成では、10 クレジット/分のレートでクレジットが消費されます。 Free プランで提供されるユーザー シート数は最大 3 です。
+The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats.
 
 ## Performance プラン
 
 Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
-- Access to all machine sizes for Docker/Linux based machines
+- すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
 - Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
-- Unlimited user seat count (at $15 for the first three users and $15 for each additional user)
+- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
 - Docker レイヤー キャッシュへのアクセス
 - キューイングなし
 - サポート
@@ -65,8 +65,16 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 
 ## Docker レイヤー キャッシュ
 
-Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC is only available on the Performance Plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC は Performance プランでのみ提供されます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)をご覧ください。
 
-## ご意見・ご質問
+## Troubleshooting
 
-ご不明な点がございましたら、まずは「よくあるご質問」の「[料金・支払]({{site.baseurl}}/2.0/faq/#料金支払)」セクションをご確認ください。 解決しない場合は、お気軽に[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
+### Am I charged if my build is "Queued" or "Preparing"?
+
+No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
+
+If you find that jobs are "preparing" for quite some time, you may be able to reduce it if your jobs use the docker executor; try using more recent docker images to decrease preparation time.
+
+## Questions And Comments
+
+Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).
