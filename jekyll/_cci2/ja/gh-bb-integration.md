@@ -15,7 +15,7 @@ Order: 60
 ## 概要
 {:.no_toc}
 
-プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の GitHub または Bitbucket Cloud の設定がリポジトリに追加されます。
+To use CircleCI you need to be using either GitHub or Bitbucket for your VCS. When you add a project to CircleCI, the following GitHub or Bitbucket Cloud settings are added to the repository using the permissions you gave CircleCI when you signed up:
 
 - **デプロイ キー**: GitHub または Bitbucket Cloud からプロジェクトをチェックアウトするために使用されます。
 - **サービス フック**: GitHub または Bitbucket Cloud にプッシュしたときに CircleCI に通知を送信するために使用されます。
@@ -68,130 +68,146 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
     3. CircleCI プロジェクトでキーを再生成します。
 - 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザー キーを使用してアクセスできないようにします。
 
-## プロジェクトでの追加のプライベート リポジトリのチェックアウトの有効化
+## Renaming Orgs and Repositories
 
-テスト プロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイ キーに加えて GitHub ユーザー キーも必要となります。デプロイ キーは *1 つ*のリポジトリに対してのみ有効であるのに対して、GitHub ユーザー キーはユーザーの*すべて*の GitHub リポジトリに対してアクセス権を持つためです。 詳細については、「[CircleCI に SSH 鍵を登録する]({{ site.baseurl }}/2.0/add-ssh-key)」を参照してください。
+If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
 
-プロジェクトの **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH 鍵のチェック アウト)]** ページで、CircleCI に渡す GitHub のユーザー キーを指定します。 CircleCI は、この新しい SSH 鍵を作成し、それを GitHub のユーザー アカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
+1. Rename org/repo in VCS.
+2. Head to the CircleCI application, using the new org/repo name, for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
+3. Confirm that your plan, projects and settings have been transferred successfully.
+4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-<h2 id="security">ユーザー キーのセキュリティ</h2>
+**Note**: If these steps are not followed, it is possible, that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
-CircleCI が SSH 鍵を公開することはありません。
+## Enable Your Project to Check Out Additional Private Repositories
 
-SSH 鍵は信頼するユーザーとのみ共有してください。また、ユーザー キーを使用するプロジェクトの場合、すべての GitHub コラボレーターがリポジトリにアクセスできるため、ソース コードを任せられる人にのみユーザー キーを共有してください。
+If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only *one* repository while a GitHub user key has access to *all* of your GitHub repositories.
 
-<h2 id="error-messages">ユーザー キー アクセスに関するエラー メッセージ</h2>
+Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
 
-ユーザー キーを追加する必要があることを示す一般的なエラーとしては、以下のものが挙げられます。
+<h2 id="security">User key security</h2>
 
-**Python**: `pip install` ステップ実行中
+CircleCI will never make your SSH keys public.
+
+Remember that SSH keys should be shared only with trusted users and that anyone that is a GitHub collaborator on a project employing user keys can access your repositories, so only entrust a user key to someone with whom you would entrust your source code.
+
+<h2 id="error-messages">User key access-related error messages</h2>
+
+Here are common errors that indicate you need to add a user key.
+
+**Python**: During the `pip install` step:
 
     ERROR: Repository not found.
     
 
-**Ruby**: `bundle install` ステップ実行中
+**Ruby**: During the `bundle install` step:
 
     Permission denied (publickey).
     
 
-## マシン ユーザーを介したアクセスの制御
+## Controlling Access Via a Machine User
 
-複数のリポジトリへのアクセス権をきめ細かく設定するには、CircleCI プロジェクト用にマシン ユーザーを作成することをお勧めします。 [マシン ユーザー](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users)とは、自動化タスクを実行するために作成する GitHub ユーザーです。 マシン ユーザーの SSH 鍵を使用すれば、リポジトリへのアクセス権を持つ任意のユーザーにプロジェクトのビルド、テスト、デプロイを許可することができます。 マシン ユーザーを作成することにより、単一ユーザーにリンクされた認証情報を紛失するリスクも緩和できます。
+For fine-grained access to multiple repositories, it is best practice to create a machine user for your CircleCI projects. A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
 
-マシン ユーザーの SSH 鍵を使用するには、以下の手順を行います。
+To use the SSH key of a machine user, follow the steps below.
 
-**メモ:** これらの手順を実行するには、マシン ユーザーが管理者アクセス権を持っている必要があります。 プロジェクトの追加が終了したら、マシン ユーザーのアクセス権を読み取り専用に戻すとよいでしょう。
+**Note:** To perform these steps, the machine user must have admin access. When you have finished adding projects, you can revert the machine user to read-only access.
 
-1. [GitHub の説明](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users)に従ってマシン ユーザーを作成します。
+1. Create a machine user by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
 
-2. GitHub にマシン ユーザーとしてログインします。
+2. Log in to GitHub as the machine user.
 
-3. [CircleCI にログイン](https://circleci.com/login)します。 CircleCI を承認するよう GitHub から要求されたら、[**Authorize application (アプリケーションを承認)**] ボタンをクリックします。
+3. [Log in to CircleCI](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
 
-4. [[Add Projects (プロジェクトの追加)] ページ](https://circleci.com/add-projects){:rel="nofollow"}で、マシン ユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
+4. From the Add Projects page, follow all projects you want the machine user to have access to.
 
-5. **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH 鍵のチェック アウト)]** ページで、[**Authorize With GitHub (GitHub で承認)**] ボタンをクリックします。 これで、マシン ユーザーの代わりに SSH 鍵を作成して GitHub にアップロードする権限が CircleCI に付与されます。
+5. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
-6. **[Create and add XXXX user key (XXXX ユーザー キーを作成して追加)]** ボタンをクリックします。
+6. Click the **Create and add XXXX user key** button.
 
-これで、CircleCI は開発中に実行されるすべての Git コマンドに対して、マシン ユーザーの SSH 鍵を使用するようになります。
+Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
 
-## 権限の概要
+## Permissions Overview
 
-CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](http://developer.github.com/v3/oauth/#scopes)や [Bitbucket の権限モデル](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes)で定義されている以下の権限を要求します。
+CircleCI requests the following permissions from your VCS provider, as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes) and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
 
-**読み取りアクセス権**
+**Read Permission**
 
 - ユーザーのメール アドレスを取得する
 
-**書き込みアクセス権**
+**Write Permissions**
 
-- リポジトリにデプロイ キーを追加する
-- リポジトリにサービス フックを追加する
-- ユーザーのリポジトリ リストを取得する
-- ユーザー アカウントへの SSH 鍵の追加
+- Get a list of a user's repos
+- Add an SSH key to a user's account
 
-**メモ:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、GitHub は読み取り専用のアクセス権を提供していないため、ユーザーのリポジトリ リストを GitHub から取得するには、書き込みアクセス権が必要です。
+**Admin Permissions**, needed for setting up a project
 
-CircleCI が使用する権限の数をどうしても減らしたい場合は、VCS プロバイダーに連絡して、その旨を伝えてください。
+- Add deploy keys to a repo
+- Add service hooks to a repo
+
+**Note:** CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions each VCS provider chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub requires the [`repo` scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes), which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
+
+If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting your VCS provider to communicate your concerns.
 
 ### チーム アカウントの権限
 {:.no_toc}
 
-このセクションでは、さまざまなビジネス ニーズに応じて選択できるチーム アカウントと個人アカウントについて概説します。
+This section provides an overview of the possible team and individual account choices available to meet various business needs:
 
-1. 個人用 GitHub アカウントを持っている個人ユーザーは、それを使用して CircleCI にログインし、CircleCI 上のプロジェクトをフォローします。 GitHub 内のそのリポジトリの各「コラボレーター」も、そのプロジェクトをフォローでき、コミットをプッシュして CircleCI でビルドを実行できます。 GitHub と Bitbucket でコラボレーターをどのように保存するかによって、CircleCI の [Team (チーム)] ページにコラボレーターの一覧が完全に表示されない場合があります。 正確なコラボレーター一覧は、GitHub または Bitbucket のプロジェクト ページで確認してください。
+1. If an individual has a personal GitHub account, they will use it to log in to CircleCI and follow the project on CircleCI. Each 'collaborator' on that repository in GitHub is also able to follow the project and build on CircleCI when they push commits. Due to how GitHub and Bitbucket store collaborators, the CircleCI Team page may not show a complete list. For an accurate list of contributors, please refer to your GitHub or Bitbucket project page.
 
-2. 個人ユーザーが GitHub チーム アカウントにアップグレードすると、チーム メンバーを追加したり、ビルドを実行するメンバーにリポジトリの管理者権限を与えたりできるようになります。 組織のメンバーが各自のアカウントからプロジェクトをフォローできるようにするには、GitHub チーム アカウント (組織) のオーナーが CircleCI の [[Add Project (プロジェクトの追加)] ページ](https://circleci.com/add-projects){:rel="nofollow"}にアクセスして GitHub のアプリケーション権限画面へのリンクをクリックし、[Authorize CircleCI (CircleCI を承認)] を選択する必要があります。 個人アカウントの料金は月額 7 ドル、チーム アカウントの料金はメンバーが 2 人の場合で月額 25 ドルです。
+2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects){:rel="nofollow"}, click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
 
-3. Bitbucket の個人アカウントでは、最大 5 人のチームでプライベート リポジトリを無料で作成できます。 個人ユーザーは、Bitbucket チームの作成、メンバーの追加を行えるほか、ビルドを実行する必要があるメンバーに対して必要に応じてリポジトリの管理者権限を与えることもできます。 このプロジェクトは、CircleCI 上でプロジェクトをフォローするメンバーに表示されます。追加料金はかかりません。
+3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
 ### GitHub 組織で CircleCI を再有効化する方法
 {:.no_toc}
 
-このセクションでは、GitHub 組織に対してサードパーティ製アプリケーションの制限を有効にしてから CircleCI を再有効化する方法を説明します。 [GitHub の設定](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb)に移動し、[Organization access (組織のアクセス)] セクションで以下のいずれかを行います。
+This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
 
-- その組織の管理者でない場合は、[Request access (アクセスをリクエスト)] をクリックします (管理者にリクエストを承認してもらう必要があります)。
-- 管理者の場合は、[Grant access (アクセスを許可)] をクリックします。
+- "Request access" if you are not an admin for the organization in question (an admin will have to approve the request) or
+- "Grant access" if you are an admin
 
-アクセスが許可されると、CircleCI は再度正常に動作するようになります。
+After access is granted, CircleCI should behave normally again.
 
-GitHub では、最近[サードパーティ製アプリケーションのアクセスを組織レベルで許可](https://help.github.com/articles/about-third-party-application-restrictions/)できるようになりました。 この変更前は、組織のメンバーはだれでも (GitHub のユーザー アカウントに関連付けられる OAuth トークンを生成して) アプリケーションを承認できました。また、アプリケーションは、その OAuth トークンを使用して、OAuth フローで付与された権限の範囲内で API 経由でユーザーのための処理を実行しました。
+GitHub recently added the ability to approve [third party application access on a per-organization level](https://help.github.com/articles/about-third-party-application-restrictions/). Before this change, any member of an organization could authorize an application (generating an OAuth token associated with their GitHub user account), and the application could use that OAuth token to act on behalf of the user via the API with whatever permissions were granted during the OAuth flow.
 
-現在のデフォルトでは、サードパーティのアクセス制限が有効になっている場合、OAuth トークンは組織のデータにアクセスできません。 ユーザーは、OAuth 処理中またはそれ以降に、組織単位でアクセス許可を明確にリクエストする必要があり、組織の管理者はそのリクエストを承認する必要があります。
+Now OAuth tokens will, by default, not have access to organization data when third party access restrictions are enabled. You must specifically request access on a per organization basis, either during the OAuth process or later, and an organization admin must approve the request.
 
-サードパーティのアクセス制限を有効にするには、GitHub で組織の設定ページにアクセスし、[Third-party application access policy (サードパーティ製アプリケーションのアクセス ポリシー)] セクションにある [Setup application access restrictions (アプリケーションのアクセス制限をセットアップ)] ボタンをクリックします。
+You can enable third party access restrictions by visiting the organization settings page on GitHub, and clicking "Setup application access restrictions" button in the "Third-party application access policy" section.
 
-CircleCI がビルドを実行している組織でこの制限を有効にすると、CircleCI は GitHub からプッシュ イベント フックを受け取らなくなり (新しいプッシュのビルドを行わなくなり)、API 呼び出しが拒否されます (これにより、たとえば古いビルドをリビルドしたときに、ソースのチェック アウトが失敗します)。CircleCI を再度動作させるには、CircleCI アプリケーションへのアクセスを許可する必要があります。
+If you enable these restrictions on an organization for which CircleCI has been running builds then we will stop receiving push event hooks from GitHub (thus not building new pushes), and API calls will be denied (causing, for instance, re-builds of old builds to fail the source checkout.) To get CircleCI working again you have to grant access to the CircleCI application.
 
-CircleCI が使用しているアカウントと権限のシステムは、まだ十分に明確と言えません。前述のとおり、CircleCI ではユーザーの皆様を第一に考えて、さらに改良したシステムを現在開発中です。
+The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## デプロイ キーとユーザー キー
+## Deployment Keys and User Keys
 
-**デプロイ キーとは**
+**What is a deploy key?**
 
-新しいプロジェクトを追加するとき、CircleCI ではプロジェクトの Web ベース VCS (GitHub または Bitbucket) に対するデプロイ キーを作成します。 デプロイ キーは、リポジトリ固有の SSH 鍵です。 VCS として GitHub を使用している場合、GitHub に公開鍵を持たせ、CircleCI に秘密鍵を格納します。 デプロイ キーは、CircleCI に単一のリポジトリへのアクセス権を提供します。 CircleCI によるリポジトリへのプッシュを防止するには、このデプロイ キーを読み取り専用に設定します。
+When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH key. If you are using GitHub as your VCS then GitHub has the public key, and CircleCI stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
-ビルドからリポジトリにプッシュするには、書き込みアクセス権のあるデプロイ キー (ユーザー キー) が必要です。 ユーザー キーの作成手順は、VCS によって異なります。
+If you want to push to the repository from your builds, you will need a deployment key with write access. The steps to create a deployment key with write access depend on your VCS. See below for GitHub-specific instructions.
 
-**ユーザー キーとは**
+**What is a user key?**
 
-ユーザー キーは、ユーザーに固有の SSH 鍵です。 VCS に公開鍵を持たせ、CircleCI に秘密鍵を格納します。 秘密鍵を持っていると、プロジェクトへの「Git」アクセスの目的で、そのユーザーとして行動することができます。
+A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
 ### GitHub のデプロイ キーの作成
 {:.no_toc}
 
-この例では、GitHub リポジトリは `https://github.com/you/test-repo`、CircleCI のプロジェクトは <https://circleci.com/gh/you/test-repo>{:rel="nofollow"} です。
+In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is <https://circleci.com/gh/you/test-repo>{:rel="nofollow"}.
 
-1. [GitHub の説明](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)に従って、SSH 鍵ペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
+1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). When prompted to enter a passphrase, do **not** enter one.
+    
+    **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA
+PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen
+-m PEM -t rsa -C "your_email@example.com"`
 
-**注意:** 最近 `ssh-keygen` は、デフォルトで PEM 形式の鍵を生成しないように更新されました。 秘密鍵が `-----BEGIN RSA PRIVATE KEY-----` で始まらない場合、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドで鍵を生成すると、強制的に PEM 形式で生成できます。
+2. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy key". Enter a title in the "Title" field, then copy and paste the key you created in step 1. Check "Allow write access", then click "Add key".
 
-2. `https://github.com/you/test-repo/settings/keys` に移動し、[Add deploy key (デプロイ キーを追加)] をクリックします。 [Title (タイトル)] フィールドにタイトルを入力し、手順 1 で作成した鍵をコピーして貼り付けます。 [Allow write access (書き込みアクセスを許可)] をオンにし、[Add key (キーを追加)] をクリックします。
+3. Go to your project settings, click on SSH Keys, and "Add SSH key", and add the key you created in step 1. In the "Hostname" field, enter "github.com", and press the submit button.
 
-3. <https://circleci.com/gh/you/test-repo/edit#ssh>{:rel="nofollow"} に移動し、手順 1 で作成した鍵を追加します。 [Hostname (ホスト名)] フィールドに「github.com」と入力し、送信ボタンを押します。
-
-4. config.yml で `add_ssh_keys` キーを使用して、以下のようにフィンガープリントを追加します。
+4. In your config.yml, add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml
 version: 2
@@ -203,12 +219,12 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-ジョブから GitHub リポジトリにプッシュすると、CircleCI は追加された SSH 鍵を使用します。
+When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
 
 ### Bitbucket ユーザー キーの作成
 {:.no_toc}
 
-現在、Bitbucket は、ユーザー キーを作成する API を CircleCI に提供していません。 しかし、以下の回避策でユーザー キーを作成できます。
+Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following this workaround:
 
 1. CircleCI アプリケーションで、プロジェクトの設定に移動します。
 
@@ -236,28 +252,28 @@ jobs:
 
 ### これらのキーの使用方法
 
-CircleCI がプロジェクトをビルドするときには、秘密鍵が `.ssh` ディレクトリにインストールされ、それに続いて SSH がバージョン管理プロバイダーと通信するように設定されます。 したがって、秘密鍵は以下の用途で使用されます。
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
-- 主プロジェクトのチェックアウト
-- GitHub でホスティングされるサブモジュールのチェックアウト
-- GitHub でホスティングされるプライベートな依存関係のチェックアウト
-- Git の自動マージ、タグ付けなど
+- checking out the main project
+- checking out any GitHub-hosted submodules
+- checking out any GitHub-hosted private dependencies
+- automatic git merging/tagging/etc.
 
-そのため、デプロイ キーは、追加のプライベートな依存関係を持つプロジェクトに対しては十分に強力ではありません。
+For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
 
 ### これらのキーのセキュリティ
 
-CircleCI が生成するチェックアウト キー ペアの秘密鍵は CircleCI システムを出ることはなく (公開鍵のみ GitHub に転送)、また、ストレージ上では安全に暗号化されています。 しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH 鍵を使用できる開発者は、この鍵に直接アクセスできます。
+The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
 
-**デプロイ キーとユーザー キーの違い**
+**Isn't there a difference between deploy keys and user keys?**
 
-GitHub がサポートするキーの種類は、デプロイ キーとユーザー キーだけです。 デプロイ キーはグローバルに一意であり (たとえば、複数のリポジトリへのアクセス権を持つデプロイ キーを作成するメカニズムはありません)、またユーザー キーには、それに関連付けられているユーザーとは別の*スコープ*の概念はありません。
+Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with access to multiple repositories) and user keys have no notion of *scope* separate from the user associated with them.
 
-複数のリポジトリへのアクセス権をきめ細かく設定するには、GitHub でマシン ユーザーと呼ばれるアカウントの作成を検討してください。 このユーザーにビルドが必要とする権限を正確に付与し、次にそのユーザー キーを CircleCI 上のプロジェクトに関連付けます。
+To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
-## SSH ホストの信頼性の確立
+## Establishing the authenticity of an SSH host
 
-SSH キーを使用してレポジトリをチェックアウトするとき、既知のホスト ファイル (`~/.ssh/known_hosts`) に GitHub または Bitbucket のフィンガープリントを追加する必要があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブ ステップによって自動的に処理されます。カスタムのチェックアウト コマンドを使用したい場合には、以下のコマンドを使用する必要があります。
+When using SSH keys to checkout repositories, it may be neccesary to add the fingerprints for GitHub or BitBucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it's connecting to is authentic. The `checkout`job step does this automatically, so the following command will need to be used if you opt to use a custom checkout command.
 
     mkdir -p ~/.ssh
     
@@ -266,7 +282,7 @@ SSH キーを使用してレポジトリをチェックアウトするとき、�
     ' >> ~/.ssh/known_hosts
     
 
-`ssh-keyscan <host>` を実行し、サーバーの SSH キーをフェッチします。次に、このキーに `ssh-rsa` をプレフィックスして、ジョブの `known_hosts` ファイルに追加します。 たとえば、以下のようになります。
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your job. You can see this in action here:
 
     ➜  ~ ssh-keyscan github.com           
     # github.com:22 SSH-2.0-babeld-2e9d163d
