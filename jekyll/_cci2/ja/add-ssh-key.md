@@ -15,23 +15,25 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトを有効にする)を参照してください。 2 つ目が目的のときは、以下の手順でプロジェクトに SSH 鍵を登録します。
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトを有効にする)を参照してください。 2 つ目が目的のときは、以下の手順でプロジェクトに SSH 鍵を登録します。
 
 ## 手順
 
 1. ターミナルから、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドを入力して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
+2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
-3. **[Permissions (権限)]** セクションで、**[SSH Permissions (SSH の権限)]** をクリックします。
+3. On the **Project Settings** page, click on **SSH Keys** (vertical menu on the left).
 
-4. **[Add SSH Key (SSH 鍵を追加する)]** ボタンをクリックします。
+4. Scroll down to the **Additional SSH Keys** section.
 
-5. **[Hostname (ホスト名)]** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
+5. Click the **Add SSH Key** button.
 
-6. **[Private Key (非公開鍵)]** フィールドに登録する SSH 鍵を貼り付けます。
+6. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you don't specify a hostname, the key will be used for all hosts.
 
-7. **[Add SSH Key (SSH 鍵を追加する)]** ボタンをクリックします。
+7. In the **Private Key** field, paste the SSH key you are adding.
+
+8. Click the **Add SSH Key** button.
 
 **メモ:** CircleCI が SSH 鍵を復号化できるよう、鍵には常に空のパスフレーズを設定してください。 また、CircleCI は OpenSSH のデフォルトのファイル形式をサポートしていません。OpenSSH を使用して鍵を生成する場合は、`ssh-keygen -m pem` コマンドを使用します。
 
