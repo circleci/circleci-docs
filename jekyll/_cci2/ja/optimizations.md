@@ -17,7 +17,7 @@ order: 1
 
 ## Docker イメージの選択
 
-プロジェクトに最適な Docker イメージを選択すると、ビルド時間が大幅に短縮されます。 たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを構成し、イメージを指定するときには、以下の点を考慮してください。
+Choosing the right docker image for your project can have huge impact on build time. たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを構成し、イメージを指定するときには、以下の点を考慮してください。
 
 - CircleCI には多数の[コンビニエンス イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#section=configuration)が用意されています。多くは公式の Docker イメージに基づいていますが、便利な言語ツールもプリインストールされています。
 - プロジェクトに特化した[独自のイメージを作成](https://circleci.com/ja/docs/2.0/custom-images/#section=configuration)することも可能です。 それが容易になるよう、[Docker イメージ ビルド ウィザード](https://github.com/circleci-public/dockerfile-wizard)と、[イメージを手動で作成するためのガイダンス](https://circleci.com/ja/docs/2.0/custom-images/#カスタム-イメージの手動作成)が用意されています。
@@ -59,7 +59,7 @@ jobs:
 
 ワークフローは、一連のジョブとその実行順序を定義する機能です。 ビルド中の任意の時点で 2 つのジョブを互いに独立して実行してかまわないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、ビルド構成を強化するための機能もいくつか用意されています。 詳細については、[ワークフローのドキュメント]({{site.baseurl}}/2.0/workflows/)を参照してください。
 
-**メモ:** ワークフローはすべてのプランでご利用いただけます。ただし、ジョブを並列実行するには、ジョブを実行するための複数のマシンがお使いのプランで提供されている必要があります。
+**Note**: Workflows are available to all plans, but running jobs concurrently assumes that your plan provides multiple machines to execute on.
 
 ```yaml
 version: 2.1
@@ -72,14 +72,14 @@ jobs: # ここで、"build" と "test" の 2 つのジョブを定義します
       - run: <コマンド> # コマンドを実行します
   test:
     docker: # 上記の Docker キーと同じです
-      - image: circleci/<言語>:<バージョン タグ>
+      - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <コマンド>
-workflows: # ここで、ジョブを 1 つのワークフローとしてオーケストレーションできます
+      - run: <command>
+workflows: # Here we can orchestrate our jobs into a workflow
   version: 2
-  build_and_test: # "build_and_test" という名前の 1 つのワークフロー
-    jobs: # `build` ジョブと `test` ジョブを並列で実行します
+  build_and_test: # A single workflow named "build_and_test"
+    jobs: # we run our `build` job and `test` job concurrently.
       - build
       - test
 ```
@@ -100,7 +100,7 @@ workflows: # ここで、ジョブを 1 つのワークフローとしてオー�
 
 **メモ:** ビルドで使用できる並列処理のレベル (1、2、4 など) は、お使いの CircleCI プランによって決まります。
 
-プロジェクトに大規模なテスト スイートがある場合は、CircleCI の[テストの並列処理機能](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割)で [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) を設定するか、[サードパーティのアプリケーションまたはライブラリ](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#その他のテスト分割方法)を利用するようにビルドを構成して、テストを複数のマシンに分割できます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
 ```yaml
 # ~/.circleci/config.yml
