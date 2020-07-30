@@ -15,18 +15,17 @@ Orb のオーサリングに関するベスト プラクティスと戦略につ
 ### メタデータ
 
 - すべてのコマンド、ジョブ、Executor、パラメーターに詳細な説明文を付記します。
-- 説明文にコード リポジトリへのリンクを挿入します。
-- 説明文に Web サイトへのリンクを挿入します。
-- 説明文に API キーの取得などの前提条件を明記します。
-- Orb 要素には、一貫性がある簡潔な名前を付けます。 たとえば、単語をつなぐのにアンダーバーとハイフンを混在させないでください。
+- Provide a `source_url`, and if available, `home_url` [via the `display` key]({{ site.baseurl }}/2.0/orb-author/#describing-your-orb).
+- Define any prerequisites such as obtaining an API key in the description.
+- Be consistent and concise in naming your orb elements. For example, don't mix "kebab case" and "snake case."
 
 
 ### 例
 
-- 少なくとも 1 つの[使用例](https://circleci.com/ja/docs/2.0/orb-author/#orbs-の使用例)を示します。
+- Must have at least 1 [usage example]({{ site.baseurl }}/2.0/orb-author/#providing-usage-examples-of-orbs).
 - 例の中で Orb のバージョンは `x.y` と表記します (パッチ バージョンは省略可能)。
 - 例には、ジョブが含まれない場合に最上位のジョブや他の基本的な要素を呼び出す、最も汎用的でシンプルなユースケースを使用します。
-- 必要な場合には、Orb のジョブと共に[事前・事後ステップの使用方法](https://circleci.com/ja/docs/2.0/reusing-config/#事前事後ステップの使用)も紹介します。
+- If applicable, you may want to showcase the use of [pre and post steps]({{ site.baseurl }}/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job.
 
 ### コマンド
 
@@ -36,7 +35,7 @@ Orb のオーサリングに関するベスト プラクティスと戦略につ
 - ユーザーは 1 つのタスクを完了するコマンドのみを使用できます。 単独では実行できない、他のコマンドの一部として実行することのみを目的としたコマンドは作成しないでください。
 - すべての CLI コマンドを Orb コマンドに変換する必要はありません。 また、パラメーターを持たない 1 行のコマンドに必ずしも Orb コマンド エイリアスを指定する必要はありません。
 - Orb で指定された Executor 以外でコマンドを実行する場合は特に、コマンドの説明文に依存関係や前提条件を明記する必要があります。
-- コマンドに必要なパラメーター、環境変数などの依存関係がないかどうかチェックすることをお勧めします。
+- It is a good idea to check for the existence of required parameters, environment variables or other dependancies as a part of your command.
 
 以下に例を示します。
 ```
@@ -49,13 +48,13 @@ fi
 ### パラメーター
 
 - ユーザー入力が必要な場合を除き、パラメーターには可能な限りデフォルト値を使用します。
-- [env_var_name パラメーター型](https://circleci.com/ja/docs/2.0/reusing-config/#環境変数名)を使用して、API キー、Web フック URL などの機密情報を保護します。
-- [ステップをパラメーターとして挿入](https://circleci.com/ja/docs/2.0/reusing-config/#ステップ)すると、Orb で定義されたステップの間にユーザー定義のステップをジョブ内で実行できるので便利です。たとえば、コマンド内のキャッシュ ロジックの間にユーザーが提供したステップを実行するなど、ユーザー定義のタスクの前後にアクションを実行する必要がある場合に使用できます。
+- Utilize the [“env_var_name” parameter type]({{ site.baseurl }}/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data.
+- [Injecting steps as a parameter]({{ site.baseurl }}/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
 
 **バイナリとツールのインストール**
-  - install-path パラメーターを設定し (/usr/local/bin のデフォルト値が理想的)、このパラメーター化された場所にバイナリをインストールします。 これにより、ユーザーが root 権限を持たない環境において root 権限が要求される問題を回避できる可能性が高くなります。
+  - install-path パラメーターを設定し (/usr/local/bin のデフォルト値が理想的)、このパラメーター化された場所にバイナリをインストールします。 This may often avoid the issue of needing `root` privileges in environments where the user may not have root.
   - `root` が必要なユースケースでは、事前チェックを追加して、ユーザーが root 権限を持っているかどうかを確認し、ユーザーに適切な権限が必要な場合にはその旨を明確なエラー メッセージでユーザーに警告します。
-  - `$BASH_ENV` を介してユーザーのパスにバイナリを追加すると、ユーザーは別の [run](https://circleci.com/ja/docs/2.0/configuration-reference/#run) ステートメントからバイナリを呼び出せるようになります。 デフォルト以外のパスにインストールするときにはこの方法で実行する必要があります。 以下に例を示します。
+  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run]({{ site.baseurl }}/2.0/configuration-reference/#run) statement. デフォルト以外のパスにインストールするときにはこの方法で実行する必要があります。 以下に例を示します。
 ```
 echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 ```
@@ -73,7 +72,7 @@ echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 ### Executor
 
 - サポートされている OS (MacOs、Windows、Docker、VM) ごとに少なくとも 1 つの Executor が必要です。
-- デフォルトの Executor を含める必要があります。
+- Must include one executor named `default`.
 - 含まれているイメージに問題が発生した場合に、ユーザーがバージョンやタグを上書きできるよう、Executor をパラメーター化する必要があります。
 
 ### インポートする Orb
@@ -86,20 +85,25 @@ echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
 - [Orb スターター キット (ベータ版)](https://github.com/CircleCI-Public/orb-starter-kit) を使用して、完全に自動化されたビルド > テスト > デプロイのワークフローで Orb の CI/CD をデプロイします。 これで、以降のすべてが処理されます。
 - オプション: Orb をパターンに分解して使用すると、個別の Orb コンポーネントのメンテナンスがさらに簡単になります。
 
-### デプロイ
+### Sample Data
+
+- Sample data neccesary for testing your Orb in CI/CD pipelines should be kept as small as possible, e.g a single `composer.json` or `package.json` file with minimal dependencies.
+- Sample data should live under the `sample/` directory in the orb's repository, when possible.
+
+### Deployment
 
 #### バージョニング
 
-- [セマンティック バージョニング](https://semver.org/) (x.y.z) を使用します。
-- メジャー: 互換性がない変更
-- マイナー: 下位互換性を維持した新機能の追加
-- パッチ: 小さなバグの修正やメタデータの更新などの安全なアクション
+- Utilize [semver versioning](https://semver.org/) (x.y.z)
+- Major: Incompatible changes
+- Minor: Add new features (backwards compatible)
+- Patch: Minor bug fixes, metadata updates, or other safe actions.
 
 Orb のデプロイに関するベスト プラクティス ガイドを参照してください (近日追加予定)。
 
 このセクションは、Orb スターター キットによって自動的に処理されます。
 
-### GitHub および Bitbucket
+### GitHub/Bitbucket
 
 GitHub では、"_topics_" でリポジトリにタグ付けできます。 トピックは GitHub 検索でデータポイントとして使用されます。さらに、GitHub の [Explore] ページでは、このタグを使用してリポジトリがグループ化されます。 Orb を格納するリポジトリには、`circleci-orbs` のトピックを使用することをお勧めします。 CircleCI Orb、パートナー Orb、コミュニティ Orb のどれであっても、このトピックを使用することで、Orb レポジトリが[こちらのページ](https://github.com/topics/circleci-orbs)に掲載されます。
 
