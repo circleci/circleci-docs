@@ -56,7 +56,7 @@ Enter the following command to claim your namespace, if you have not yet claimed
 
 ### Create an Orb
 
-Within your namespace create an orb to which you will eventually push your orb source code.
+Within your namespace, create an orb which you will eventually push your orb source code.
 
 Run the following command to create an empty orb within your namespace:
 
