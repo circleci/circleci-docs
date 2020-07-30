@@ -22,7 +22,7 @@ Orbs を使用できるようにプラットフォームのバージョンを設
 
 `version: 2.1`
 
-**メモ:** パイプラインをまだ有効化していない場合は、**[Project Settings (プロジェクト設定)] -> [Advanced Settings (詳細設定)]** に移動し、有効化する必要があります。
+**NOTE:** {% include snippets/enable-pipelines.md %}
 
 2) バージョンの下に `orbs` スタンザを追加し、そこで Orbs を呼び出します。 以下の例では、`aws-cli` Orb を呼び出しています。
 
@@ -40,17 +40,16 @@ orbs:
 ```yaml
 version: 2.1
 orbs:
-    hello: circleci/hello-build@0.0.5
+  hello: circleci/hello-build@0.0.5
 
 workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+  "Hello Workflow":
+    jobs:
+      - hello/hello-build
 ```
 
-**メモ:** 2.1 よりも前のバージョンで CircleCI に追加されていたプロジェクトでは、パイプラインを有効化して `orbs` キーを使用できるようにする必要があります。
-
 ## 次のステップ
+
 {:.no_toc}
 
 - 次の手順については、[Orbs の選択に関するドキュメント]({{site.baseurl}}/2.0/orbs-user-select-orb/)を参照してください。
