@@ -12,11 +12,9 @@ order: 1
 
 ## CircleCI の概要
 
-**CircleCI**- CircleCI のミッションは、テクノロジー主導型の組織が最高の成果を上げられるようにサポートすることです。  
-インテリジェントな自動化を通して、エンジニアリング チームの生産性を向上させます。
+**CircleCI** - Our mission is to empower technology-driven organizations to do their best work. We want to make engineering teams more productive through intelligent automation.
 
-CircleCI は、エンタープライズ クラスのサポートとサービスを提供すると共に、高い柔軟性によってスタートアップにも対応しています。  
-Linux、macOS、Android、Windows、さらに SaaS やファイアウォールの内側など、必要な場所で動作します。
+CircleCI provides enterprise-class support and services, with the flexibility of a startup. We work where you work: Linux, macOS, Android, and Windows - SaaS or behind your firewall.
 
 ![CircleCI のコンセプト イメージ]({{ site.baseurl }}/assets/img/docs/arch.png)
 
@@ -32,7 +30,7 @@ CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジ
 
 GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、プロジェクトとして [circleci.com](https://circleci.com/ja) に追加された後は、コードを変更するたびに、クリーン コンテナまたは VM で自動化されたテストがトリガーされます。 CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#コンテナ)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
 
-その後 CircleCI は、テストが完了すると、成功または失敗のメール通知を送信します。 CircleCI には Slack 通知と IRC 通知も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから提供されます。
+その後 CircleCI は、テストが完了すると、成功または失敗のメール通知を送信します。 CircleCI also includes integrated [Slack and IRC notifications]({{ site.baseurl }}/2.0/notifications). コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから提供されます。
 
 CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Kubernetes Engine (GKE)、Microsoft Azure、Heroku などのさまざまな環境にコードをデプロイするように構成できます。 他のクラウド サービスへのデプロイには、SSH を使用するか、ジョブの構成でサービスの API クライアントをインストールすることで、簡単にスクリプト化できます。
 
@@ -47,8 +45,10 @@ CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Googl
 コミットされるたびに、自動化されたビルドとテストがトリガーされます。  
 ビルドやテストが失敗しても、数分以内にすばやく修復できます。
 
-**メリット**  
-チームの生産性、効率、満足度を向上させます。 問題をすばやく検出して解決できます。 より高品質で安定したプロダクトをリリースできます。
+**Why?**  
+Improve team productivity, efficiency, happiness.  
+Find problems and solve them, quickly.  
+Release higher quality, more stable products.
 
 ## 無料トライアル
 
