@@ -43,12 +43,12 @@ macOS ビルド環境についての理解を深めていただければ、Circl
 
 ```yaml
 version: 2.1
-jobs: # a basic unit of work in a run
-  build: # runs not using `Workflows` must have a `build` job as entry point
-    macos:  # indicate that we are using the macOS executor
-      xcode: 11.3.0 # indicate our selected version of Xcode
-    steps: # a series of commands to run
-      - checkout  # pull down code from your version control system.
+jobs: # 1 回の実行の基本作業単位
+  build: # 「ワークフロー」を使用しない実行では、エントリポイントとして `build` ジョブが必要です
+    macos:  # macOS Executor を使用していることを示します
+      xcode: 11.3.0 # 選択された Xcode のバージョン
+    steps: # 実行する一連のコマンド
+      - checkout  # ユーザーのバージョン管理システムからコードをプル ダウンします
       - run:
           # Xcode の CLI ツール「xcodebuild」を使用してテストを実行します
           name: 単体テストの実行
@@ -70,7 +70,7 @@ jobs: # a basic unit of work in a run
 
 macOS でのビルドの基礎について説明しているため、上記のサンプルの `config.yml` には以下の内容が含まれています。
 
-- 使用する [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker--machine--macos--windows-executor) の指定 
+- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use 
 - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) キーによるコードのプル
 - Xcode でのテストの実行
 - アプリケーションのビルド
@@ -90,6 +90,6 @@ macOS Executor は iOS アプリケーションのテストとビルドに広く
 
 - 2.0 設定ファイルの概要、および `.circleci/config.yml` ファイルにおけるトップレベル キーの階層については「[コンセプト]({{ site.baseurl }}/2.0/concepts/)」を参照してください。
 
-- 並列実行、順次実行、スケジュール実行、手動承認のワークフローによるジョブのオーケストレーションの例については「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/2.0/workflows)」を参照してください。
+- Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 
 - すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。
