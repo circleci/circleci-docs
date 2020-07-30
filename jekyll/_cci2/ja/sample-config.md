@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "2.0 config.yml のサンプル ファイル"
-short-title: "2.0 config.yml のサンプル ファイル"
-description: "2.0 config.yml のサンプル ファイル"
+title: "Sample config.yml Files"
+short-title: "Sample config.yml File"
+description: "Sample config.yml File"
 categories:
   - migration
 order: 2
@@ -13,70 +13,345 @@ order: 2
 * 目次
 {:toc}
 
-CircleCI 2.0 の設定ファイルには、`version: 2` の新しいキーが導入されました。 この新しいキーにより、1.0 でのビルドを継続しながら 2.0 を使用できます。つまり、あるプロジェクトでは 1.0 をそのまま使用し、別のプロジェクトでは 2.0 を使用できます。 `jobs`、`steps`、`workflows` のキーによって、制御性が向上し、実行の各段階でのステータス取得が可能になることで、フィードバックの報告頻度を高められます。 詳細については、[ジョブとステップ]({{ site.baseurl }}/2.0/jobs-steps/)、および[ワークフロー]({{ site.baseurl }}/2.0/workflows/)に関する各ドキュメントを参照してください。
+## Simple Configuration Examples
 
-<!-- Unsure this paragraph should still and mention 1.0 builders ... also should probably mention 2.1-->
+### Concurrent Workflow
 
-個々の構成キーの詳細については、[構成のリファレンス ]({{ site.baseurl }}/2.0/configuration-reference/)を参照してください。
+The configuration example below shows a concurrent workflow in which the `build` and `test` jobs run at the same time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
-## 並列ジョブの構成例
+This image shows the workflow view for the following configuration example: ![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
-2.0 `.circleci/config.yml` ファイルの例を以下に示します。
-
-{% raw %}
-
+{:.tab.basic-concurrent.Cloud}
 ```yaml
-version: 2
+version: 2.1
+
+# Define the jobs we want to run for this project
 jobs:
   build:
     docker:
+
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: <command>
+      - run: my-command
+
+# Orchestrate our job run sequence
 workflows:
-  version: 2
   build_and_test:
     jobs:
+
       - build
       - test
 ```
 
-{% endraw %}
+{:.tab.basic-concurrent.Server}
+```yaml
+version: 2
 
-上記は並列ジョブワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows)を参照してください。
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+
+      - build
+      - test
+```
+
+### Sequential Workflow
+
+The configuration example below shows a sequential job workflow where the `build` job runs and then the `test` job runs once `build` has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+This image shows the workflow view for the following configuration example, in which jobs run sequentially; one after the other: ![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
+
+{:.tab.basic-sequential.Cloud}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.basic-sequential.Server}
+```yaml
+version: 2
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-command
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+```
+
+### Approval Job
+
+The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the `deploy` job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
+
+This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
+
+![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+
+{:.tab.approval.Cloud}
+```yaml
+version: 2.1
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  build_and_test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
+
+{:.tab.approval.Server}
+```yaml
+version: 2
+
+# Define the jobs we want to run for this project
+jobs:
+  build:
+    docker:
+
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-build-commands
+  test:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-test-commands
+  deploy:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - checkout
+      - run: my-deploy-commands
+
+# Orchestrate our job run sequence
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+      - hold:
+          type: approval
+          requires:
+            - build
+            - test
+      - deploy:
+          requires:
+            - hold
+```
 
 ## 順次実行ワークフローの構成例
 
-2.0 `.circleci/config.yml` ファイルの例を以下に示します。
+Following is a sample `.circleci/config.yml` file using the following configuration features:
 
-{% raw %}
+* A sequential workflow
+* An orb (`version: 2.1`/Cloud config only) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server example
+* A secondary services container
+* Workspaces
+* Storing artifacts
 
+{:.tab.complex-sequential.Cloud}
 ```yaml
-version: 2
+version: 2.1
+
+orbs:
+  node: circleci/node@3.0.0
+
 jobs:
   build:
     working_directory: ~/mern-starter
-    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
+    # Reuse Docker container specification given by the node Orb
+    executor: node/default
+    steps:
+
+      - checkout
+      # Install the latest npm - the node Orb takes care of it
+      - node/install-npm
+      # Install dependencies - the node Orb take care of installation and dependency caching
+      - node/install-packages:
+          app-dir: ~/mern-starter
+          cache-path: node_modules
+          override-ci-command: npm i
+      # Save workspace for subsequent jobs (i.e. test)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
+  test:
     docker:
+      # The primary container is an instance of the first image listed. The job's commands run in this container.
+
+      - image: cimg/node:current
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+      - image: mongo:4.2
+    steps:
+      # Reuse the workspace from the build job
+      - attach_workspace:
+          at: .
+      - run:
+          name: Demonstrate that Mongo DB is available as localhost
+          command: |
+            curl -sSJL https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+            echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+            sudo apt update
+            sudo apt install mongodb-org
+            mongo localhost --eval 'db.serverStatus()'
+      - run:
+          name: Test
+          command: npm test
+      - run:
+          name: Generate code coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      # You can specify either a single file or a directory to store as artifacts
+      - store_artifacts:
+          path: test-results.xml
+          destination: deliverable.xml
+      - store_artifacts:
+          path: coverage
+          destination: coverage
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{:.tab.complex-sequential.Server}
+{% raw %}
+```yaml
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/mern-starter
+    # The primary container is an instance of the first image listed. The job's commands run in this container.
+    docker:
+
       - image: circleci/node:4.8.2-jessie
-    # セカンダリ コンテナは、2 番目にリストしたイメージのインスタンスです。プライマリ コンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4-jessie
     steps:
       - checkout
       - run:
-          name: npm の更新
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: npm wee のインストール
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -89,10 +364,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: テスト
+          name: Test
           command: npm test
       - run:
-          name: コード カバレッジの生成
+          name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
@@ -114,16 +389,15 @@ workflows:
             branches:
               only: master
 ```
-
 {% endraw %}
 
-上記は、`test` ジョブが master ブランチでのみ実行されるように構成された順次実行ワークフローの例です。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows)を参照してください。
+This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 ## ファンイン・ファンアウト ワークフローの構成例
 
-ファンイン/ファンアウト ワークフローの構成例を以下に示します。 詳細については、[GitHub での完全なデモ リポジトリ](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml)を参照してください。
+Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
-ジョブはその依存関係が満たされている場合にのみ実行できるため、波及するすべてのアップストリーム ジョブの依存関係が必要になることに注意してください。また、そのため、`requires:` ブロック内に指定する必要があるのは隣接するアップストリーム依存関係だけです。
+Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 {% raw %}
 
@@ -175,7 +449,7 @@ jobs:
       - run: bundle --path vendor/bundle
       - run: bundle exec rake db:create db:schema:load
       - run:
-          name: テストの実行
+          name: Run tests
           command: bundle exec rake
 
   precompile_assets:
@@ -191,7 +465,7 @@ jobs:
           key: v1-bundle-{{ checksum "Gemfile.lock" }}
       - run: bundle --path vendor/bundle
       - run:
-          name: アセットのプリコンパイル
+          name: Precompile assets
           command: bundle exec rake assets:precompile
       - save_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
@@ -213,7 +487,7 @@ jobs:
       - restore_cache:
           key: v1-assets-{{ .Environment.CIRCLE_SHA1 }}
       - run:
-          name: Heroku への master のデプロイ
+          name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 
@@ -242,35 +516,29 @@ workflows:
 
 ## 複数の Executor タイプを含む構成例 (macOS と Docker)
 
-同じワークフロー内で、複数の [Executor タイプ](https://circleci.com/ja/docs/2.0/executor-types/)を使用することができます。 以下の例では、プッシュされる iOS プロジェクトは macOS 上でビルドされ、その他の iOS ツール ([SwiftLint](https://github.com/realm/SwiftLint) と [Danger](https://github.com/danger/danger)) は Docker で実行されます。
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
 {% raw %}
 
 ```yaml
-version: 2
+version: 2.1
+
 jobs:
   build-and-test:
     macos:
-      xcode: "9.0"
-
+      xcode: 11.3.0
     steps:
 
       - checkout
       - run:
-          name: CocoaPods Spec のフェッチ
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-      - run:
-          name: CocoaPods のインストール
+          name: Install CocoaPods
           command: pod install --verbose
-
       - run:
-          name: テストのビルドと実行
+          name: Build and run tests
           command: fastlane scan
           environment:
             SCAN_DEVICE: iPhone 8
             SCAN_SCHEME: WebTests
-
       - store_test_results:
           path: test_output/report.xml
       - store_artifacts:
@@ -301,7 +569,6 @@ jobs:
       - run: danger
 
 workflows:
-  version: 2
   build-test-lint:
     jobs:
 
@@ -315,4 +582,6 @@ workflows:
 ## 関連項目
 {:.no_toc}
 
-CircleCI を使用するパブリックのプロジェクトの一覧については、[パブリック リポジトリの例]({{ site.baseurl }}/2.0/example-configs/)を参照してください。
+* See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#configuration) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details of the concepts covered in this example.
+* See the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) document for full details of each individual configuration key.
+* See the [Example Public Repos]({{ site.baseurl }}/2.0/example-configs/) document for a list of public projects that use CircleCI.
