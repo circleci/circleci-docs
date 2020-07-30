@@ -14,11 +14,11 @@ order: 1
 
 Orbs take [reusable configuration]({{site.baseurl}}/2.0/orb-concepts/#reusable-configuration) and package it in a way that can be published to the [Orb Registry](https://circleci.com/orbs/registry/) and imported into multiple configuration files. If you manage multiple similar projects, consider abstracting out your config with orbs.
 
-Before authoring an orb, it is recommended to become familiar with [CircleCI config]({{site.baseurl}}/2.0/configuration-reference/#section=configuration) and authoring [parameterized reusable config elements]({{site.baseurl}}/2.0/reusing-config/#section=configuration).
+Before authoring an orb, it is recommended to become familiar with [CircleCI config]({{site.baseurl}}/2.0/config-intro/#section=configuration) and authoring [parameterized reusable config elements]({{site.baseurl}}/2.0/reusing-config/#section=configuration).
 
 Orbs consist of three main elements:
 
-* [Commands]({{site.baseurl}}/2.0/reusing-config/orb-concepts/#commands)
+* [Commands]({{site.baseurl}}/2.0/orb-concepts/#commands)
 * [Jobs]({{site.baseurl}}/2.0/orb-concepts/#executors)
 * [Executors]({{site.baseurl}}/2.0/orb-concepts/#jobs)
 
@@ -37,7 +37,7 @@ To begin creating orbs, you will need to [setup the CircleCI CLI]({{site.baseurl
 ### Permissions Matrix
 
 
-Different commands within the Orb CLI carry different permission scopes. If you are authoring an orb within an organization besides your own personal account, these permission scopes may effect you.
+Orb CLI commands are scoped to different user permission levels set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
 
 | Orb Command                                | Permission Scope |
 |--------------------------------------------|------------------|
@@ -47,14 +47,12 @@ Different commands within the Orb CLI carry different permission scopes. If you 
 | `circleci orb publish` production version  | Owner            |
 {: class="table table-striped"}
 
-_See Also: [Orbs Concepts]({{site.baseurl}}/2.0//orb-concepts/)_
-
 ### Register a Namespace
 
 Every organization registered on CircleCI is able to claim **one** unique [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces). This includes your personal organization and any organization you are a member of. As each organization is limited to a single namespace, In order to register the namespace for an organization you must be the _owner_ of the organization.
 
 Enter the following command to claim your namespace, if you have not yet claimed one.
-- `circleci namespace create <name> <vcs-type> <org-name> [flags]`
+`circleci namespace create <name> <vcs-type> <org-name> [flags]`
 
 ### Create an Orb
 
@@ -62,15 +60,16 @@ Within your namespace create an orb to which you will eventually push your orb s
 
 Run the following command to create an empty orb within your namespace.
 
-- `circleci orb create <namespace>/<orb> [flags]`
+`circleci orb create <namespace>/<orb> [flags]`
 
 ### Next Steps
 
-- Continue on to [Orb authoring]({{site.baseurl}}/2.0/orb-author/) for details on writing your orb.
+Continue on to [Orb authoring]({{site.baseurl}}/2.0/orb-author/) for details on writing your orb.
 
 
 ## See Also
 {:.no_toc}
 
-- [Orb authoring]({{site.baseurl}}/2.0/orb-author/)
-- [Orb author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)
+- [Orb Authoring]({{site.baseurl}}/2.0/orb-author/)
+- [Orb Concepts]({{site.baseurl}}/2.0//orb-concepts/)
+- [Orb Author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)

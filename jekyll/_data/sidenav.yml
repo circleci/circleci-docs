@@ -108,8 +108,6 @@ en:
           link: 2.0/orb-author-intro/
         - name: Author an Orb
           link: 2.0/orb-author/
-        - name: Test and Publish Your Orb
-          link: 2.0/orb-author-validate-publish/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orbs Best Practices

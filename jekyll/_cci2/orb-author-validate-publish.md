@@ -2,14 +2,15 @@
 layout: classic-docs
 title: "Orb Author - Validate and Publish Orbs"
 short-title: "Testing and Publishing Orbs"
-description: "Starting point for tesing and publishing orbs"
+description: "Starting point for testing and publishing orbs"
 categories: [getting-started]
 order: 1
+sitemap: false
 ---
 
 ## Introduction
 
-When you have finished authoring your orb, you may then test your orb to ensure it will work in your configuration. After testing has been completed, you may then publish the orb to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/). CircleCI recommends you use the CircleCI CLI to validate and publish your orb since the the CLI provides the `orb-tools` orb, with its associated commands, that simplify the validation and publication process. 
+When you have finished authoring your orb, you may then test your orb to ensure it will work in your configuration. After testing has been completed, you may then publish the orb to the [CircleCI Orb Registry](https://circleci.com/orbs/registry/). CircleCI recommends you use the CircleCI CLI to validate and publish your orb since the the CLI provides the `orb-tools` orb, with its associated commands, that simplify the validation and publication process.
 
 ## orb-tools
 
