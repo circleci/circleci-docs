@@ -58,7 +58,7 @@ Enter the following command to claim your namespace, if you have not yet claimed
 
 Within your namespace create an orb to which you will eventually push your orb source code.
 
-Run the following command to create an empty orb within your namespace.
+Run the following command to create an empty orb within your namespace:
 
 `circleci orb create <namespace>/<orb> [flags]`
 
