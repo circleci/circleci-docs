@@ -9,7 +9,7 @@ order: 1
 ---
 
 
-CircleCI を使用して、Linux、Android、iOS 上で動作するアプリケーションをビルド、テスト、およびデプロイすることができます。 以下のスニペットでは、各プラットフォーム用にジョブの構成をカスタマイズする方法に重点を置いて解説しています。 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
+It is possible to build, test, and deploy applications that run on Linux, Android, iOS and Windows with CircleCI. 以下のスニペットでは、各プラットフォーム用にジョブの構成をカスタマイズする方法に重点を置いて解説しています。 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
 
 ## Linux と Docker
 
@@ -100,6 +100,44 @@ jobs:
     
     
 
-## 関連項目
+## Windows
 
-上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/2.0/executor-types/)を参照してください。
+{:.tab.windowsblock.Cloud}
+```yaml
+version: 2.1 # Use version 2.1 to enable orb usage.
+
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+## See Also
+
+Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
