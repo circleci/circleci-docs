@@ -33,7 +33,7 @@ The CI config for CircleCI docs is configured to build the Operator and Installa
 == Some Notes on Formatting in Asciidoc
 See the Asciidoctor user manual for all available features: https://asciidoctor.org/docs/user-manual/. 
 
-In the next few sections I've highlighted some of the main formatting differences to markdown:
+In the next few sections, note some of the main formatting differences to markdown:
 
 === Using code blocks in numbered steps
 
