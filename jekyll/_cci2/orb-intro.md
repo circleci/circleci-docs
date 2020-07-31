@@ -73,7 +73,7 @@ With orbs, it is possible to write a parameterized configuration once and utiliz
 
 ## The Orb Registry
 
-The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/#section=configuration).
+The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
