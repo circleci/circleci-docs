@@ -156,7 +156,7 @@ jobs:
       - checkout
       - run:
           name: Build PDFs for Server
-          command: ./scripts/build_pdfs_local.sh
+          command: ./scripts/build_pdfs_asciidoc.sh
       - store_artifacts: 
           path: release/tmp/
 
