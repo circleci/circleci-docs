@@ -35,7 +35,7 @@ Orb のオーサリングに関するベスト プラクティスと戦略につ
 - ユーザーは 1 つのタスクを完了するコマンドのみを使用できます。 単独では実行できない、他のコマンドの一部として実行することのみを目的としたコマンドは作成しないでください。
 - すべての CLI コマンドを Orb コマンドに変換する必要はありません。 また、パラメーターを持たない 1 行のコマンドに必ずしも Orb コマンド エイリアスを指定する必要はありません。
 - Orb で指定された Executor 以外でコマンドを実行する場合は特に、コマンドの説明文に依存関係や前提条件を明記する必要があります。
-- It is a good idea to check for the existence of required parameters, environment variables or other dependancies as a part of your command.
+- It is a good idea to check for the existence of required parameters, environment variables or other dependencies as a part of your command.
 
 以下に例を示します。
 ```
