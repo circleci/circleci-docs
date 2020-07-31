@@ -11,19 +11,22 @@ order: 1
 {:toc}
 
 ## Quick Start
+{:.no_toc}
 
 [CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ## Orb Configuration Elements
 
-CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) features allow you to define parametrizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) features allow you to define parameterizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ### Commands
-Commands contain one or more [steps]() in which [parameters]() can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running BASH or running CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
+
+Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running BASH or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
 
 As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
 
-**Command Usage Example:**
+#### Usage Example
+{:.no_toc}
 
 ```yaml
 version: 2.1
@@ -46,19 +49,21 @@ jobs:
   #... workflows , other jobs etc.
 ```
 
-_See: [AWS-S3 Orb](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands)_
+See the [AWS-S3 Orb](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands) page in the registry for more information.
 
 ### Executors
 
-Executors are parameterized execution environments that may be utilized by [jobs]({{site.baseurl}}/2.0/orb-concepts/#jobs). CircleCI provides multiple [execution platforms]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor) including:
-  - Docker
-  - macOS
-  - Windows
-  - Machine (Linux VM)
+Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/2.0/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor):
 
-  Executors defined within orbs can be used within your configuration for custom jobs, or may be used within the jobs contained in an orb.
+- Docker
+- macOS
+- Windows
+- Machine (Linux VM)
 
-**Executor Definition Example:**
+Executors defined within orbs can be used to run jobs within your project configuration, or within the jobs defined in the orb.
+
+#### Executor Definition Example
+{:.no_toc}
 
 {:.tab.executor.Node-Docker}
 ```yaml
@@ -95,13 +100,13 @@ parameters:
 ```
 {% endraw %}
 
-In the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which users can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing).
+In the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing).
 
 For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/orbs/registry/orb/circleci/node#executors-default).
 
 ### Jobs
 
-Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are invoked via [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
+Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
 
 ```yaml
 version: 2.1
@@ -130,7 +135,7 @@ By default, created namespaces appear as "community" namespaces in the [Orb Regi
 
 ## Semantic Versioning
 
-Orbs utilize the [semver](https://semver.org/) release process, in which each orb update follows a standardized versioning pattern that users should take advantage of.
+Orbs utilize the [semver](https://semver.org/) release process, in which each orb update follows a standardized versioning pattern that orb authors and users should take advantage of.
 
 In Semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
 
@@ -145,7 +150,7 @@ In Semantic versioning, release versions are represented by three integers separ
 | Patch  | Bug fixes. |
 {: class="table table-striped"}
 
-When users import an orb, they may pin to a particular semver component.
+When you import an orb, you can pin it to a particular semver component.
 
 | Imported Version  | Description |
 | ------------- | ------------- |
@@ -155,7 +160,7 @@ When users import an orb, they may pin to a particular semver component.
 | volatile | **Not Recommended** Will pull the last published version of the orb, may be useful in testing. Not a part of semver versioning.|
 {: class="table table-striped"}
 
-To avoid negatively impacting a user's CI process, all orb authors should strictly adhere to semver versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
+To avoid negatively impacting a user's CI process, orb authors should strictly adhere to semver versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
 
 **Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
 {: class="alert alert-warning"}
@@ -165,6 +170,7 @@ To avoid negatively impacting a user's CI process, all orb authors should strict
 ## Orb Versions (Development vs. Production vs Inline)
 
 ### Production Orbs
+{:.no_toc}
 
 Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/orbs/registry/).
 
@@ -176,6 +182,7 @@ Production orbs are immutable and can be found on the [Orb Registry](https://cir
 - Available via CircleCI CLI
 
 ### Development Orbs
+{:.no_toc}
 
 Development orbs are temporary overwrite-able orb tag versions, useful for rapid development and testing prior to deploying a semver deployed production change.
 
@@ -187,6 +194,7 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 - Available via CircleCI CLI (if the development tag name is known)
 
 ### Inline Orbs
+{:.no_toc}
 
 Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
 _[See: inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on types of namespaces._
