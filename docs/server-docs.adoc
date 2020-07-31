@@ -91,3 +91,35 @@ This process is a little trickier when cross referencing between the install and
 ```
 https://circleci.com/[The CircleCI Website]
 ```
+
+== Document Attributes
+
+Each individual doc should begin like this:
+
+```
+= Overview                  // top level heading
+:page-layout: classic-docs  // page layout to use
+:page-liquid:               // apply Liquid template preprocessor to file prior to content being passed to AsciiDoc processor
+:icons: font                // use font awesome icons for admonitions
+:toc: macro                 // allows you to place the TOC wherever you like in the doc using toc::[]
+:toc-title:                 // gives the option to customise the TOC heading
+:sectanchors:               // adds anchors in front of section titles 
+```
+== Attributes for Master Docs
+
+```
+= OPERATIONS GUIDE: A guide for administrators of CircleCI Server installations. // main title 
+docs@circleci.com                                                                // author           
+:media: screen                                                                   // destination media type       
+:title-page-background-image: image:pdf-header.png[]                             // image overlay for front page 
+:imagesdir: ../assets/img/docs/                                                  // where to find images included in content
+:doctype: book                                                                   // https://asciidoctor.org/docs/user-manual/#document-types
+:toc:                                                                            // default places TOC right after front page
+:toc-title: Contents                                                             // heading to appear above TOC
+:icons: font                                                                     // use font awesome icons for admonitions
+:source-highlighter: rouge                                                       // use rouge syntax highlighter for PDF output
+:pagenums:                                                                       // print page numbers in PDF output
+:idprefix:                                                                       // by default IDs generated from section titles start with _ ... this removes it
+:idseparator: -                                                                  // use - between words for IDs generated from section titles
+:sectanchors:                                                                    // adds anchors in front of section titles 
+:autofit-option:                                                                 // auto-fit code blocks to the page width                                                  
