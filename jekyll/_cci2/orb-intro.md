@@ -13,14 +13,15 @@ _Available on CircleCI with `version 2.1` config. Not currently available on sel
 {:toc}
 
 ## Quick Start
+{:.no_toc}
 
-CircleCI orbs are open-source, shareable packages of parameterizable _[reusable configuration]({{site.baseurl}}/2.0/reusing-config/)_ elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.
+CircleCI orbs are open-source, shareable packages of parameterizable [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.
 
 Published orbs can be found on our [Orb Registry](https://circleci.com/orbs/registry/), or you can [author your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
 ## Benefits of Using Orbs
 
-Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows how we may typically test a Node.js application by defining a job ourselves with the required steps for testing our application, versus using the `test` job provided by the [`circleci/node`](https://circleci.com/orbs/registry/orb/circleci/node) orb.
+Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application – defining a job with the required steps for testing the application – versus using the `test` job provided by the [`circleci/node`](https://circleci.com/orbs/registry/orb/circleci/node) orb. With orbs, it is possible to write a parameterized configuration once and utilize it across multiple similar projects.
 
 {:.tab.nodeTest.Orbs}
 ```yaml
@@ -69,8 +70,6 @@ workflows:
 ```
 {% endraw %}
 
-With orbs, it is possible to write a parameterized configuration once and utilize it across multiple similar projects.
-
 ## The Orb Registry
 
 The [Orb Registry](https://circleci.com/orbs/registry/) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
@@ -98,9 +97,9 @@ Example orb slug: `<namespace>/<orb-name>@1.2.3`
 
 ## Using Orbs
 
-Each orb within the registry provides a sample code snippet for importing that specific orb, with its most recent version.
+Each orb within the registry provides a sample code snippet for importing that specific orb with its most recent version.
 
-To import an orb within your `version: 2.1` config file, create an `orbs` key followed by the key to reference the orb you wish to import, the orb name. Enter the orb slug containing the version string for the value of the orb name key.
+The example below shows how to import an orb into your `version: 2.1` config file. Create an `orbs` key followed by the orb-name key to reference which orb you want to import. The value for the orb-name key should then be the orb slug and version.
 
 ```yaml
 version: 2.1
@@ -109,9 +108,11 @@ orbs:
   orb-name: <namespace>/<orb-name>@1.2.3
 ```
 
-After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements.
+After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements. The Node example below shows how to use an orb command.
 
 ### Node Example
+{:.no_toc}
+
 The Node orb provides a command, [`install-packages`](https://circleci.com/orbs/registry/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
 
 ```yaml
@@ -131,6 +132,8 @@ jobs:
 
 
 ## See Also
+{:.no_toc}
+
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
 - Refer to [Orbs FAQ]({{site.baseurl}}/2.0/orbs-faq/) for information on known issues and questions that have been addressed when using CircleCI orbs.
 - Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
