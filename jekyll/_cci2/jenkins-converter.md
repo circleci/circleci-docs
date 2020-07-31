@@ -61,8 +61,6 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 
 While the Jenkinsfile Converter does its best to directly translate steps, we're still short of full coverage. To address this, we've added the `JFC_STACK_TRACE` key to specific steps within the output YAML to provide some guidance on how to proceed with unsupported step directives.
 
-[Bug reports and feature requests](./.github/CONTRIBUTING.md) are always welcome!
-
 ## Supported Syntax
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
@@ -81,7 +79,7 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 ## Supported Jenkins plugins
 
-**Important Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (e.g. `options`), otherwise <u>you will see an error message saying something is "Unknown" or "Invalid"</u>. If there is a request to add a plugin to the list, please feel free to open an issue!
+**Important Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (e.g. `options`), otherwise <u>you will see an error message saying something is "Unknown" or "Invalid"</u>. Please submit a ticket with our support center if you have a request to add a plugin to the list.
 
 - Trilead API Plugin (`trilead-api`)
 - Folders Plugin (`cloudbees-folder`)
