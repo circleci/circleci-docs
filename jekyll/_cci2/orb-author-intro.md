@@ -14,7 +14,7 @@ order: 1
 
 Orbs take [reusable configuration]({{site.baseurl}}/2.0/orb-concepts/#reusable-configuration) and package it in a way that can be published to the [Orb Registry](https://circleci.com/orbs/registry/) and imported into multiple configuration files. If you manage multiple similar projects, consider abstracting out your config with orbs.
 
-Before authoring an orb, it is recommended that you become familiar with the [CircleCI config]({{site.baseurl}}/2.0/config-intro/#section=configuration) and authoring [parameterized reusable config elements]({{site.baseurl}}/2.0/reusing-config/#section=configuration) pages.
+Before authoring an orb, it is recommended that you become familiar with the [CircleCI config]({{site.baseurl}}/2.0/config-intro/) and authoring [parameterized reusable config elements]({{site.baseurl}}/2.0/reusing-config/) pages.
 
 Orbs consist of three main elements:
 
