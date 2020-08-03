@@ -80,7 +80,11 @@ To display tables correctly in the web version of Server docs, assign them with 
 ```
 
 ### Inter-document cross refs
-Cross references should be made in the form: `<<overview#services-machine,Services Machine>>` where: 
+Cross references should be made in the form: 
+
+```
+<<overview#services-machine,Services Machine>> 
+```
 
 * `overview` is the name of the file the destination is in
 * `services-machine` is the anchor heading for the section you are linking to (this can also be left blank)
