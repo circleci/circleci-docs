@@ -114,6 +114,7 @@ If your job requires a specific docker version, you can set it as a `version` at
 
 CircleCI supports multiple versions of Docker and defaults to using `17.09.0-ce`. Following are the supported stable and edge versions:
 
+- `19.03.12`
 - `19.03.8`
 - `18.09.3`
 - `18.06.0-ce`

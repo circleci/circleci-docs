@@ -13,13 +13,15 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** Currently, all orbs published to the [Orb Registry]() are open source. Please subscribe to this feature request for updates: [Feature Request: private orbs](https://ideas.circleci.com/ideas/CCI-I-606)
+* **Answer:** Currently, all orbs published to the [Orb Registry]() are open source. Please subscribe to this feature request for updates: [Feature Request: private orbs](https://ideas.circleci.com/ideas/CCI-I-606).
+
+  Consider using orbs for importing code hosted on private package registries such as [npm](https://docs.npmjs.com/about-private-packages), or [GitHub](https://github.com/features/packages).
 
 ## Difference between commands and jobs
 
 * **Question:** What is the difference between commands and jobs?
 
-* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run and within what [executor]({{site.baseurl}}/2.0/reusing-config/#executors) to run them. _Commands_ are invoked at the job level. _Jobs_ are invoked at the _[Workflow]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_ level.
+* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#executors) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
 
 ## Using Orbs on CircleCI Server
 
@@ -50,6 +52,7 @@ This document describes various questions and technical issues that you may find
 * **Answer:** Orbs utilize [semantic versioning](), meaning if you set the _major_ version (example: `3`), you will receive all _minor_ and _patch_ updates, where if you statically set the version (example: `3.0.0`), no updates will apply, this is the most deterministic and recommended method.
 
 _**Note:** NOT RECOMMENDED - It is possible to use `@volatile` to receive the last published version of an orb. This is not recommended as breaking changes are expected._
+{: class="alert alert-danger"}
 
 ## Build error when testing locally
 

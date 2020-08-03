@@ -1,64 +1,75 @@
 ---
 layout: classic-docs
-title: "Introduction to Authoring an Orb"
+title: "Introduction to Authoring Orbs"
 short-title: "Authoring Orbs Introduction"
-description: "Starting point for how to authoring an orb"
+description: "Starting point for how to author an orb"
 categories: [getting-started]
 order: 1
 ---
 
-## Introduction to Orb Authoring
+* TOC
+{:toc}
 
-[Orbs]({{site.baseurl}}/2.0/orb-intro/) are [reusable packages of CircleCI configuration]({{site.baseurl}}/2.0/reusing-config/), enabling you to create parameterized commands, jobs, and executors that can be [used across multiple projects]({{site.baseurl}}/2.0/orb-concepts/).
+## Quick Start
 
-Hundreds of orbs are available from the [Orb Registry](https://circleci.com/orbs/registry/). Existing orbs are developed and maintained by a variety of authors: CircleCI, our technology partners, and the open-source community. Search the registry for the technology or service you would like to integrate with your projects.
+Orbs take [reusable configuration]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements) and package it in a way that can be published to the [Orb Registry](https://circleci.com/orbs/registry/) and imported into multiple configuration files. If you manage multiple similar projects, consider abstracting out your config with orbs.
 
-If you want to join the community and author your own orb, the documents in this section are for you. If you manage multiple similar projects, consider abstracting out your config with orbs.
-
-Practice with [inline orbs](https://circleci.com/docs/2.0/orb-author/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
-
-Orb Authors agree to the CircleCI [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All published orbs are made available publicly on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT). For more information, see [Orb Licensing](https://circleci.com/orbs/registry/licensing).
-
-## Key Concepts
-
-Orbs take [reusable configuration](({{site.baseurl}}/2.0/reusing-config/)) and package it in a way that can be published to the [Orb Registry](https://circleci.com/orbs/registry/) so that they may be imported in multiple configuration files.
-
-Before authoring an orb, it is recommended to become familiar with authoring parameterized reusable config elements.
+Before authoring an orb, it is recommended that you become familiar with the [CircleCI config]({{site.baseurl}}/2.0/config-intro/) and authoring [parameterized reusable config elements]({{site.baseurl}}/2.0/reusing-config/) pages.
 
 Orbs consist of three main elements:
 
-* [Commands]()
-* [Jobs]()
-* [Executors]()
+* [Commands]({{site.baseurl}}/2.0/orb-concepts/#commands)
+* [Jobs]({{site.baseurl}}/2.0/orb-concepts/#executors)
+* [Executors]({{site.baseurl}}/2.0/orb-concepts/#jobs)
 
-With these three components, users will be able to replace hand-written config with the appropriate provided elements in the orb.
+Practice with [inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs). Inline orbs can be defined within a single config file for easy and quick testing.
+
+Orb Authors agree to the CircleCI [Code Sharing Terms of Service](https://circleci.com/legal/code-sharing-terms/). All published orbs are made available publicly on the Orb Registry under the [MIT License agreement](https://opensource.org/licenses/MIT). For more information, see [Orb Licensing](https://circleci.com/orbs/registry/licensing).
+{: class="alert alert-success"}
+
 
 ## Getting Started
 
-To begin creating orbs, you will need to [setup the CircleCI CLI](https://circleci.com/docs/2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). For a full list of orb-related commands inside the CircleCI CLI, visit [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+### Orb CLI
+
+To begin creating orbs, you will need to [setup the CircleCI CLI]({{site.baseurl}}/2.0/local-cli/#installation) on your local machine, with a [personal access token](https://app.circleci.com/settings/user/tokens). For a full list of orb-related commands inside the CircleCI CLI, visit [CircleCI CLI help](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+
+### Permissions Matrix
+
+
+Orb CLI commands are scoped to different user permission levels set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
+
+| Orb Command                                | Permission Scope |
+|--------------------------------------------|------------------|
+| `circleci namespace create`                | Owner            |
+| `circleci orb create`                      | Owner            |
+| `circleci orb publish` development version | Member           |
+| `circleci orb publish` production version  | Owner            |
+{: class="table table-striped"}
 
 ### Register a Namespace
 
-Every organization registered on CircleCI is able to claim **one** unique [namespace](). This includes your personal organization and any organization you are a member of. In order to register the namespace for an organization you must be the owner of the organization.
+Every organization registered on CircleCI is able to claim **one** unique [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces). This includes your personal organization and any organization you are a member of. As each organization is limited to a single namespace, In order to register the namespace for an organization you must be the _owner_ of the organization.
 
 Enter the following command to claim your namespace, if you have not yet claimed one.
-- `circleci namespace create <name> <vcs-type> <org-name> [flags]`
+`circleci namespace create <name> <vcs-type> <org-name> [flags]`
 
-### Create an Orb 
+### Create an Orb
 
-Within your namespace create an orb to which you will eventually push your orb source code.
+Within your namespace, create an orb which you will eventually push your orb source code.
 
-Run the following command to create an empty orb within your namespace.
+Run the following command to create an empty orb within your namespace:
 
-- `circleci orb create <namespace>/<orb> [flags]`
+`circleci orb create <namespace>/<orb> [flags]`
 
 ### Next Steps
 
-- Continue on to [Orb authoring]({{site.baseurl}}/2.0/orb-author/) for details on writing your orb.
+Continue on to [Orb authoring]({{site.baseurl}}/2.0/orb-author/) for details on writing your orb.
 
 
 ## See Also
 {:.no_toc}
 
-- [Orb authoring]({{site.baseurl}}/2.0/orb-author/)
-- [Orb author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)
+- [Orb Authoring]({{site.baseurl}}/2.0/orb-author/)
+- [Orb Concepts]({{site.baseurl}}/2.0//orb-concepts/)
+- [Orb Author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)

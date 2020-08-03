@@ -1,6 +1,7 @@
 ---
 layout: category-page
-title: "Configuring Jobs"
-category: [configuring-jobs]
+title: "ジョブの構成"
+category:
+  - configuring-jobs
 ---
 

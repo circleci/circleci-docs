@@ -1,11 +1,15 @@
 ---
 layout: classic-docs
-title: "Using the Static Installation Scripts"
+title: "CircleCI Server Static Installation"
 category: [administration]
 order: 1
-description: "Using CircleCI 2.0 static installation scripts."
+description: "Using CircleCI Server in non-AWS environments."
 hide: false
 ---
+
+If you would like to work with a CircleCI Solutions Engineer on setting up CircleCI Server in a non-AWS environment, get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
+
+<!---
 This article provides a System Administrators' overview of CircleCI's 2.0 static installation for non-AWS environments.
 
 * TOC
@@ -139,3 +143,4 @@ This section includes some possible resolutions for common issues that may be en
 - Symptom: Jobs stay in `queued` status until they fail and never successfully run.
   - Check port 8585 if the nomad client logs contain the following type of error message:
     - {"error":"rpc error: code = Unavailable desc = grpc: the connection is unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
+--->

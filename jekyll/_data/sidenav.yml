@@ -108,8 +108,6 @@ en:
           link: 2.0/orb-author-intro/
         - name: Author an Orb
           link: 2.0/orb-author/
-        - name: Test and Publish Your Orb
-          link: 2.0/orb-author-validate-publish/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orbs Best Practices
@@ -345,6 +343,8 @@ en:
           link: 2.0/usage-stats/
         - name: JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
+        - name: SSH Reruns
+          link: 2.0/ssh-server/
         - name: Maintenance
           link: 2.0/ops/
         - name: Backup and Recovery

@@ -16,8 +16,6 @@ This reusable config reference page describes how to version your [.circleci/con
 {:.no_toc}
 
 1. Add your project on the **Add Projects** page if it is a new project.
-   Existing projects will need to enable Pipelines. {% include
-   snippets/enable-pipelines.md %}
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking a reusable config.
 
@@ -39,7 +37,6 @@ Command, job, executor, and parameter names must start with a letter and can onl
 
 
 ### **The `commands` Key**
-
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
@@ -329,7 +326,6 @@ jobs:
 ```
 
 **Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
-
 
 ### Overriding Keys When Invoking an Executor
 {:.no_toc}
@@ -717,7 +713,21 @@ workflows:
 ```
 {% endraw %}
 
-**Note:** Invoking jobs multiple times in a single workflow and parameters in jobs are available in configuration version 2.1 and later.
+**Note:** The ability to invoke jobs multiple times in a single workflow with parameters is available in configuration version 2.1. When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (i.e. `sayhello-1` , `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
+
+```yaml
+workflows:
+  build:
+    jobs:
+      - sayhello:
+          name: build-sayhello
+          saywhat: Everyone
+  deploy:
+    jobs:
+      - sayhello:
+          name: deploy-sayhello
+          saywhat: All
+```
 
 ### Jobs Defined in an Orb
 

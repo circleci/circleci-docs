@@ -66,6 +66,19 @@ If you build on macOS, we also offer organizations on our free plan 25,000 free 
 
 Docker Layer Caching (DLC) is available for 200 credits per job run. DLC is only available on the Performance Plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
 
+## Troubleshooting
+
+### Am I charged if my build is "Queued" or "Preparing"?
+
+No. If you are notified that a job is "queued", it indicates that your job is
+waiting due to a **plan** or **concurrency** limit. If your job indicates that
+it is "preparing", it means that CircleCI is setting up or _dispatching_ your
+job so that it may run.
+
+If you find that jobs are "preparing" for quite some time, you may be able to
+reduce it if your jobs use the docker executor; try using more recent docker
+images to decrease preparation time.
+
 ## Questions And Comments
 
 Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).

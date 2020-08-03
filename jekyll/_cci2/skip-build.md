@@ -76,7 +76,7 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 
 3. In the **Auto-cancel redundant builds** section, enable the feature by switching the toggle switch to the **On** position.
 
-Projects for which auto-cancel is enabled in the Advanced Settings will have workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
+Projects for which auto-cancel is enabled in the Advanced Settings will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 - Scheduled workflows and Re-run workflows will not be cancelled.
 
 ## Auto Cancel for CircleCI Server installations

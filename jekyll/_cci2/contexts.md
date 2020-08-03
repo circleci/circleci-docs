@@ -37,11 +37,13 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully.
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-**Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+    **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and     **contexts**.
 
 ## Creating and Using a Context
 
-1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. **Note:** Any organization member can create a context, but only organization administrators can restrict it with a security group.
+1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
+
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -89,7 +91,7 @@ The default security group is `All members` and enables any member of the organi
 
 ### Running Workflows with a Restricted Context
 
-To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context and must sign up for CircleCI. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
 ### Restrict a Context to a Security Group or Groups
 
@@ -178,6 +180,8 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
+
+_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
 

@@ -42,6 +42,8 @@ include::usage-stats.adoc[]
 
 include::jvm-heap-size-configuration.adoc[]
 
+include::ssh-server.adoc[]
+
 include::ops.adoc[]
 
 include::backup.adoc[]
