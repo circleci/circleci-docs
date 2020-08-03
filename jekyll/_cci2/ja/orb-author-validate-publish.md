@@ -2,10 +2,11 @@
 layout: classic-docs
 title: "Orb のオーサリング – Orb のバリデーションとパブリッシュ"
 short-title: "Orb のテストとパブリッシュ"
-description: "Orb のテストとパブリッシュに関する入門ガイド"
+description: "Starting point for testing and publishing orbs"
 categories:
   - getting-started
 order: 1
+sitemap: false
 ---
 
 ## はじめに
