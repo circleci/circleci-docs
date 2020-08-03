@@ -58,7 +58,7 @@ order: 20
 * 質問: Orb の記述にはどの言語を使用できますか。
 * 回答: Orb は [CircleCI 構成の YAML ファイル]({{site.baseurl}}/2.0/configuration-reference/)の言語パッケージです。
 
-CircleCI Orbs は、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/2.0/reusing-config/)をパッケージ化します。たとえば、[コマンド]({{site.baseurl}}/2.0/reusing-config/#再利用可能なコマンドのオーサリング)は、特定の [Executor]({{site.baseurl}}/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタム ジョブ内で _command_ を使用する場合はユーザー、[再利用可能ジョブ]({{site.baseurl}}/2.0/orb-author-intro/#ジョブ)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
+CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [Executor]({{site.baseurl}}/2.0/executor-intro/) defined by either the user if using a _command_ within a custom job, or by the orb author if using a [Reusable Job]({{site.baseurl}}/2.0/orb-concepts/#jobs). ロジックが実行される環境に応じて、使用する言語を決定してください。
 
 * 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
 * 回答: 移植可能性と汎用性に最も優れているのは、POSIX 準拠の Bash です。 Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールでも自由に実行できます。
