@@ -118,9 +118,6 @@ workflows:
                   fi
 ```
 
-
-
-
 ## Automated Testing and Deployment
 
 The [orb-tools orb](https://circleci.com/orbs/registry/orb/circleci/orb-tools) can be used to construct pipelines for creating, testing and publishing orbs.
