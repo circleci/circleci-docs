@@ -33,7 +33,7 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 7. In the **Private Key** field, paste the SSH key you are adding.
 
-8. Click the **Add SSH Key** button.
+8. **Add SSH Key** ボタンをクリックします
 
 **メモ:** CircleCI が SSH 鍵を復号化できるよう、鍵には常に空のパスフレーズを設定してください。 また、CircleCI は OpenSSH のデフォルトのファイル形式をサポートしていません。OpenSSH を使用して鍵を生成する場合は、`ssh-keygen -m pem` コマンドを使用します。
 
