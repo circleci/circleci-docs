@@ -76,7 +76,7 @@ version: 2.1
 jobs:
   myjob:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: "cimg/base:stable"
     steps:
       - sayhello:
           to: "Lev"
@@ -245,37 +245,50 @@ jobs:
 
 Orb のすべてのコマンドが使用する Executor を Orb で定義することも可能です。 これにより、Orb のオーサーが定義した実行環境内で、その Orb のコマンドを実行できます。
 
-### config.yml で宣言した Executor を複数のジョブで使用する例
+### Example of Using an Executor Declared in `config.yml` with Matrix Jobs.
 {:.no_toc}
 
-以下の例では、1 つの Executor を宣言し、2 つのジョブで呼び出しています。これらのジョブは、共通の環境変数を使用し、同じ Docker イメージと作業ディレクトリで実行されます。 各ジョブのステップは異なりますが、同じ環境で実行されます。
+The following example declares a Docker executor with a node image. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
+
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js
 
 ```yaml
 version: 2.1
 executors:
-  lein_exec: # 再利用可能な Executor を宣言します
+  node-docker: # declares a reusable executor
+    parameters:
+      version:
+        description: "version tag"
+        default: "lts"
+        type: string
     docker:
-      - image: clojure:lein-2.8.1
-    working_directory: ~/project
-    environment:
-      MYSPECIALVAR: "my-special-value"
-      MYOTHERVAR: "my-other-value"
+      - image: cimg/node:<<parameters.version>>
 jobs:
-  build:
-    executor: lein_exec
-    steps:
-      - checkout
-      - run: echo "hello world"  
   test:
-    executor: lein_exec
-    environment:
-      TESTS: unit
+    parameters:
+      version:
+        description: "version tag"
+        default: "lts"
+        type: string
+    executor:
+      name: node-docker
+      version: <<parameters.version>>
     steps:
       - checkout
       - run: echo "how are ya?"
+workflows:
+  matrix-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              version:
+                - 13.11.0
+                - 12.16.0
+                - 10.19.0
 ```
 
-他の Orb の Executor も参照できます。 Orb のユーザーは、その Orb の Executor を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義できます。
+You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
 ```yaml
 version: 2.1
@@ -287,18 +300,18 @@ executors:
       RUN_TESTS: foobar
 ```
 
-`baz-orb` でも `bar` Executor を定義できます。
+`baz-orb` could define the `bar` executor too:
 
 ```yaml
 version: 2.1
-# baz-orb の yaml
+# yaml from baz-orb
 executors:
   bar:
     docker:
-      - image: clojure:lein-2.8.1
+      - image: cimg/base:stable
 ```
 
-以下の設定ファイルでは、両方の Executor を使用しています。
+You may use either executor from your configuration file with:
 
 ```yaml
 version: 2.1
@@ -313,97 +326,83 @@ jobs:
     executor: baz-orb/bar  # プレフィックス付き Executor
 ```
 
-**メモ:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orb に対して相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orb で定義されています。
+**Note:** The `foo-orb/bar` and `baz-orb/bar` are different executors. They both have the local name `bar` relative to their orbs, but they are independent executors defined in different orbs.
 
 ### Executor 呼び出し時のキーのオーバーライド
 {:.no_toc}
 
-`job` で Executor を呼び出すと、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、その Docker が Executor の Docker の代わりにジョブ全体で使用されます。
+When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-**メモ:** `environment` 変数のマップは付加的です。 `executor` に `job` と同じ `environment` 変数がある場合は、ジョブの値が使用されます。 以下の構成を例に考えます。
+**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used.
 
 ```yaml
 version: 2.1
 executors:
-  python:
+  node:
     docker:
-      - image: python:3.7.0
-      - image: rabbitmq:3.6-management-alpine
+      - image: cimg/node:lts
     environment:
-      ENV: ci
-      TESTS: all
-    shell: /bin/bash    
-    working_directory: ~/project
+     ENV: ci
 jobs:
   build:
     docker:
-      - image: python:2.7.15
-      - image: postgres:9.6
-    executor: python
-    environment:
-      TESTS: unit
-    working_directory: ~/tests
+      - image: cimg/base:stable
+    # The test executor below will be overwritten by the more explicit "docker" executor. Any env vars will be added.
+    executor: node
+    steps:
+      - run: echo "Node will not be installed."
 ```
 
-上記の設定ファイルは以下のとおり解決されます。
+The above config would resolve to the following:
 
 ```yaml
 version: 2.1
 jobs:
- build:
-   steps: []
-   docker:
-     - image: python:2.7.15    # ジョブの値を使用
-     - image: postgres:9.6     # ジョブの値を使用
-   environment:                # 以下のとおりマージされる
-     ENV: ci                     # Executor の値を使用
-     TESTS: unit                 # ジョブの値を使用
-   shell: /bin/bash            # Executor の値を使用
-   working_directory: ~/tests  # ジョブの値を使用
+  build:
+    docker:
+      - image: cimg/base:stable
+    environment:
+     ENV: ci       # From executor.
+    steps:
+      - run: echo "Node will not be installed."
 ```
 
 ## `parameters` 宣言の使用
 
-パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下の子は、マップ内のキー セットです。
+Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map.
 
-以下の例では、`sync` というコマンドを定義しています。
+In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo *Hello* back to the user.
 
 ```yaml
 version: 2.1
-commands: # パラメーター付きの再利用可能コマンド
-  sync:
-    parameters:
-      from:
-        type: string
-      to:
-        type: string
-      overwrite:
-        default: false
-        type: boolean
-    steps:
-      - run: # パラメーター化された run ステップ
-          name: S3 へのデプロイ
-          command: "aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
-executors: # 再利用可能な Executor
-  aws:
-    docker:
-      - image: cibuilds/aws:1.15
-jobs: # `aws` Executor と `sync` コマンドを呼び出すジョブ
-  deploy2s3:
-    executor: aws
-    steps:
-      - sync:
-          from: .
-          to: "s3://mybucket_uri"
-          overwrite: true
+commands: # a reusable command with parameters
+   greeting:
+      parameters:
+         to:
+           default: "world"
+           type: string
+      steps:
+         - run: echo "Hello <<parameters.to>>"
+jobs:
+   my-job:
+      docker:
+         - image: cimg/base:stable
+      steps:
+         - greeting:
+            to: "My-Name"
+workflows:
+   my-workflow:
+      jobs:
+         - my-job        
+
 ```
 
-**メモ:** `parameters` 宣言は、バージョン 2.1 以上の構成で使用可能です。
+**Note:** The `parameters` declaration is available in configuration version 2.1 and later.
 
 ### パラメーターの構文
 {:.no_toc}
 
-パラメーターは、以下のキーを直下の子として持つことができます。
+A parameter can have the following keys as immediate children:
 
 | キー名         | 説明                                              | デフォルト値 |
 | ----------- | ----------------------------------------------- | ------ |
@@ -415,9 +414,9 @@ jobs: # `aws` Executor と `sync` コマンドを呼び出すジョブ
 ### パラメーター型
 {:.no_toc}
 
-このセクションでは、パラメーターの型と使用方法について説明します。
+This section describes the types of parameters and their usage.
 
-Orb では以下のパラメーター型がサポートされます。
+The parameter types supported by orbs are:
 
 - `string`
 - `boolean`
@@ -427,7 +426,7 @@ Orb では以下のパラメーター型がサポートされます。
 - `steps`
 - 環境変数名
 
-パイプライン パラメーターでは以下のパラメーター型がサポートされます。
+The parameter types supported by pipeline parameters are:
 
 - `string`
 - `boolean`
@@ -437,7 +436,7 @@ Orb では以下のパラメーター型がサポートされます。
 #### 文字列
 {:.no_toc}
 
-基本的な文字列パラメーターについて、以下で説明します。
+Basic string parameters are described below:
 
 ```yaml
 version: 2.1
@@ -452,12 +451,12 @@ commands:
       - run: cp *.md << parameters.destination >>
 ```
 
-Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. その他の文字列インスタンスでは、引用符の使用は任意です。 空文字列は、`when` 節を評価するときに false 値として扱われます。その他の文字列はすべて true 値として扱われます。 なお、YAML がブール値として解釈する文字列値を引用符なしで使用すると、型エラーが発生します。
+Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
 
 #### ブール値
 {:.no_toc}
 
-ブール値パラメーターは、条件文で使用すると便利です。
+Boolean parameters are useful for conditionals:
 
 ```yaml
 version: 2.1
@@ -472,17 +471,17 @@ commands:
       - run: ls <<# parameters.all >> -a <</ parameters.all >>
 ```
 
-ブール値パラメーターの評価は、[YAML の 1.1 で指定している値](http://yaml.org/type/bool.html)に基づいています。
+Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
 
 - True: `y`、`yes`、`true`、`on`
 - False: `n`、`no`、`false`、`off`
 
-上記の値は、語頭のみ大文字、またはすべて大文字で表記しても有効です。
+Capitalized and uppercase versions of the above values are also valid.
 
 #### 整数
 {:.no_toc}
 
-整数値を渡すには、パラメーター型 `integer` を使用します。 以下の例では、`integer` 型を使用して、ジョブで `parallelism` の値を指定しています。
+Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
 
 ```yaml
 version: 2.1
@@ -506,7 +505,7 @@ workflows:
 #### 列挙
 {:.no_toc}
 
-`enum` パラメーターには、任意の値のリストを指定できます。 特定の文字列値のセットに含まれる値だけを使用するように制限したい場合は、`enum` パラメーターを使用します。 以下の例では、`enum` パラメーターを使用して、バイナリのターゲット オペレーティング システムを宣言しています。
+The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
 
 ```yaml
 version: 2.1
@@ -520,7 +519,7 @@ commands:
         enum: ["linux", "darwin", "win32"]
 ```
 
-以下の `enum` 型の宣言は、デフォルト値が列挙リスト内に宣言されていないため、無効です。
+The following `enum` type declaration is invalid because the default is not declared in the enum list.
 
 {% raw %}
 ```yaml
@@ -538,7 +537,7 @@ commands:
 #### Executor
 {:.no_toc}
 
-`executor` パラメーター型を使用すると、ジョブの呼び出し元が、実行する Executor を決定できるようになります。
+Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
 
 {% raw %}
 ```yaml
@@ -584,7 +583,7 @@ workflows:
 #### ステップ
 {:.no_toc}
 
-ステップ型は、ジョブまたはコマンドに、定義済みのステップとユーザー定義のステップを混在させる必要がある場合に使用します。 コマンドまたはジョブの呼び出しに渡すとき、パラメーターとして渡すステップは、提供されるステップが 1 つだけでも必ずシーケンスとして定義します。
+Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
 
 {% raw %}
 ```yaml
@@ -604,7 +603,7 @@ commands:
 ```
 {% endraw %}
 
-以下の例では、パラメーターとして渡されるステップが、ジョブの `steps` の下の `steps` 宣言の値として指定されています。
+The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
 
 {% raw %}
 ```yaml
@@ -621,7 +620,7 @@ jobs:
 ```
 {% endraw %}
 
-上記は以下のとおり解決されます。
+The above will resolve to the following:
 
 {% raw %}
 ```yaml
@@ -639,11 +638,11 @@ steps:
 
 The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables additional checks to be performed. See [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) for details.
 
-The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. この例では、`AWS_ACCESS_KEY` および `AWS_SECRET_KEY` 環境変数に `access-key` および `secret-key` パラメーターを指定して使用しています。 So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
+The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
 
 {% raw %}
 
-元の `config.yml` ファイル
+Original `config.yml` file:
 
 ```yaml
 version: 2.1
@@ -806,7 +805,7 @@ executors:
       myspecialvar:
         type: string
     docker:
-      - image: circleci/python:<< parameters.tag >>
+      - image: cimg/python:<< parameters.tag >>
     environment:
       MYPRECIOUS: << parameters.myspecialvar >>
 jobs:
@@ -814,7 +813,7 @@ jobs:
     executor:
       name: python
       tag: "2.7"
-      myspecialvar: "myspecialvalue"  
+      myspecialvar: "myspecialvalue"
 ```
 
 The above would resolve to the following:
@@ -825,7 +824,7 @@ jobs:
   build:
     steps: []
     docker:
-      - image: circleci/python:2.7
+      - image: cimg/python:3.8
     environment:
       MYPRECIOUS: "myspecialvalue"
 ```
@@ -993,7 +992,42 @@ Under the `unless` key are the subkeys `condition` and `steps`. The subkey `step
 | steps     | Y        | Sequence | A list of steps to execute when the condition is falsy.                                      |
 {: class="table table-striped"}
 
-## 関連項目
+## Writing Inline Orbs
+
+When defining reusable configuration elements directly within your config, you can also wrap those elements within an inline orb. You may find inline orbs useful for development or for name-spacing elements that share names in a local config.
+
+To write an inline orb, place the orb elements under that orb’s key in the orbs declaration section of the configuration. For example, if you want to import one orb to use inside another, inline orb, the config could look like the example shown below, in which the inline orb `my-orb` imports the `node` orb:
+
+```yaml
+version: 2.1
+
+orbs:
+  my-orb:
+    orbs:
+      node: circleci/node@3.0
+    commands:
+      my_command:
+        steps:
+
+          - run: echo "Run my tests"
+    jobs:
+      my_job:
+        executor: node/default # Node orb executor
+        steps:
+          - checkout
+          - my_command
+          - store_test_results:
+              path: test-results
+
+workflows:
+  main:
+    jobs:
+
+      - my-orb/my_job
+
+```
+
+## See Also
 
 - CircleCI で使用できる構成例は、「[2.0 config.yml のサンプル ファイル]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
 - 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
