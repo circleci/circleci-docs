@@ -23,8 +23,8 @@ build_api_v2() {
     bundle exec middleman build --clean --verbose
     cp -R build/* /tmp/workspace/api/v2
     echo "Output build moved to /tmp/workspace/api/v2"
-    cp -R build/* /tmp/workspace/api/
-    echo "Also - Moved output build moved to /tmp/workspace/api/ so default root  (api/) displays latest api."
+    cp -R /tmp/workspace/api/v2/* /tmp/workspace/api
+    echo "Also - Move /tmp/workspace/api/v2 so default root (api/) displays latest api."
 }
 
 # build the Config Reference from slate.
