@@ -91,7 +91,7 @@ The default security group is `All members` and enables any member of the organi
 
 ### Running Workflows with a Restricted Context
 
-To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context and must sign up for CircleCI. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
 ### Restrict a Context to a Security Group or Groups
 
@@ -180,6 +180,8 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
+
+_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
 

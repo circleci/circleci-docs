@@ -34,7 +34,7 @@ A collection of best practices and strategies for authoring orbs. CircleCI orbs 
 - All commands available to the user should complete a full task. Do not create a command for the sole purpose of being a “partial” to another command unless it can be used on its own.
 - It is possible not all CLI commands need to be transformed into an orb command. Single line commands with no parameters do not necessarily need to have an orb command alias.
 - Command descriptions should call out any dependencies or assumptions, particularly if you intend for the command to run outside of a provided executor in your orb.
-- It is a good idea to check for the existence of required parameters, environment variables or other dependancies as a part of your command.
+- It is a good idea to check for the existence of required parameters, environment variables or other dependencies as a part of your command.
 
 example:
 ```

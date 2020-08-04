@@ -5,6 +5,7 @@ categories:
   - how-to
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
 ---
+
 CircleCI では Artifactory への直接アップロードがサポートされています。
 
 - 目次 
@@ -14,13 +15,13 @@ CircleCI では Artifactory への直接アップロードがサポートされ�
 
 Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API) を活用する方法については、Artifactory からわかりやすいドキュメントが提供されています。
 
-ここでは、いくつかのサンプルプロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
+ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
 
 このサンプルを実行する前に、リポジトリが作成されていることを確認してください。リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
 
 ## Artifactory プラグイン
 
-Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイコマンドを使用して Artifactory にデプロイできます。
+Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
 
 - [Maven でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
 - [Gradle でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin)
@@ -30,7 +31,7 @@ Maven や Gradle といった人気の高いツールでは Artifactory プラ�
 JFrog CLI を使用する場合は、`.circleci/config.yml` に以下のコードを追加して JFrog CLI をインストールできます。
 
     - run:
-        name: jFrog CLI をインストール
+        name: jFrog CLI のインストール
         command: curl -fL https://getcli.jfrog.io | sh
     
     

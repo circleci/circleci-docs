@@ -42,7 +42,6 @@ Workflows may appear with one of the following states:
 {:.no_toc}
 
 * Projects that have pipelines enabled may use the CircleCI API to trigger workflows. 
-* Projects that do not enable pipelines will run as if the workflows did not exist when triggered by the API. 
 * Config without workflows requires a job called `build`.
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq/#workflows) section of the FAQ for additional information and limitations.

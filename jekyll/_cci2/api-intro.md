@@ -50,12 +50,6 @@ The CircleCI API v2 enables users to be authenticated by simply sending your API
 
 **Note**, the `:` is included to indicate there is no password.
 
-### Pipelines
-
-The CircleCI API v2 requires you to enable pipelines on your project. By enabling pipelines, you can also take advantage of the following:
-
-{% include snippets/pipelines-benefits.adoc %}
-
 #### Triggering a Pipeline with Parameters Example
 
 Here is a simple example using `curl` to trigger a pipeline with parameters:

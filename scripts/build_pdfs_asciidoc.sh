@@ -8,7 +8,7 @@ VERSION="2.19.5"
 
 COMMENT="FINAL"
 
-echo "Building Ops Guide"
+echo "Building AWS Ops Guide"
 
 ### -- Build the Ops Guide --
 asciidoctor-pdf -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=${COMMENT} -a serverversion=${VERSION} -D ${OUT_DIR} -o CircleCI-Server-Operations-Guide.pdf jekyll/_cci2/_ops-guide.adoc
