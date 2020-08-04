@@ -12,7 +12,7 @@ This guide describes how to get started with reusable commands, jobs, executors 
 * TOC
 {:toc}
 
-## Some Notes on Reusable Configuration
+## Notes on Reusable Configuration
 {:.no_toc}
 
 * Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation for installation instructions and tips.
