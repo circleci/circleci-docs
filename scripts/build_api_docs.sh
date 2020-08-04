@@ -24,7 +24,7 @@ build_api_v2() {
     cp -R build/* /tmp/workspace/api/v2
     echo "Output build moved to /tmp/workspace/api/v2"
     cp -R build/* /tmp/workspace/api/
-    echo "Also - Moved output build moved to /tmp/workspace/api/ so default root displays latest api."
+    echo "Also - Moved output build moved to /tmp/workspace/api/ so default root  (api/) displays latest api."
 }
 
 # build the Config Reference from slate.
