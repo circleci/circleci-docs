@@ -201,7 +201,9 @@ jobs:
       - *attach_workspace
       - run:
           name: "Create landing folder for API doc output"
-          command: mkdir -p /tmp/workspace/api/v2
+          command: |
+            mkdir -p /tmp/workspace/api/v1
+            mkdir -p /tmp/workspace/api/v2
       - ruby-deps:
           dir: src-api
       - restore_cache:
@@ -283,7 +285,9 @@ jobs:
             mv /tmp/workspace/js/* jekyll/assets/js/
 
             mkdir -p /tmp/workspace/api
-            cp -r /tmp/workspace/api/**/* jekyll/_api/
+            cp -r /tmp/workspace/api/v2 jekyll/_api/v2
+            cp -r /tmp/workspace/api/v1 jekyll/_api/v1
+            # cp -r jekyll/_api/v2/ jekyll/_api
 
             mkdir -p /tmp/workspace/config-builder
             mkdir -p jekyll/config-builder
