@@ -7,66 +7,55 @@ categories: [configuration]
 order: 1
 ---
 
-This reusable config reference page describes how to version your [.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file and get started with reusable commands, jobs, executors and orbs.
+This guide describes how to get started with reusable commands, jobs, executors and orbs.
 
 * TOC
 {:toc}
 
-## Getting Started with Config Reuse
+## Some Notes on Reusable Configuration
 {:.no_toc}
 
-1. Add your project on the **Add Projects** page if it is a new project.
+* Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation for installation instructions and tips.
 
-2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking a reusable config.
+* CircleCI reusable configuration elements require a `version: 2.1` `.circleci/config.yml` file.
 
-3. Use `version: 2.1` in your `.circleci/config.yml` file.
-
-4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo. The Pipelines page displays all pipelines for your organization/username, and you can filter this page by Project or Branch.
-
-Once your project is configured using `version 2.1` in the `.circleci/config.yml` file, you can use the keys covered in this guide to reuse config, for example, run the same job more than once with different parameters.
+* Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
 
 ## Authoring Reusable Commands
 
-A reusable command may have the following immediate child keys as a map:
+Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`, which accepts a string parameter `to`:
 
-- **Description:** (optional) A string that describes the purpose of the command, used for generating documentation.
-- **Parameters:** (optional) A map of parameter keys, each of which adheres to the `parameter` spec.
-- **Steps:** (required) A sequence of steps run inside the calling job of the command.
+```yaml
+version: 2.1
 
-Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "World"
+    steps:
+      - run: echo Hello << parameters.to >>
+```
 
-### **The `commands` Key**
+### The `commands` Key
+
 
 A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-steps | Y | Sequence | A sequence of steps run inside the calling job of the command.
+steps | Y | Sequence | A sequence of steps that run inside the job that calls the command.
 parameters | N  | Map | A map of parameter keys. See the [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) section for details.
-description | N | String | A string that describes the purpose of the command.
+description | N | String | A string that describes the purpose of the command. Used for generating documentation.
 {: class="table table-striped"}
 
-Commands are declared under the `commands` key of a `config.yml` file. The following example defines a command called `sayhello`:
-
-```yaml
-version: 2.1
-commands:
-  sayhello:
-    description: "A very simple command for demonstration purposes"
-    parameters:
-      to:
-        type: string
-        default: "Hello World"
-    steps:
-      - run: echo << parameters.to >>
-```
-
 ### Invoking Reusable Commands
-{:.no_toc}
 
-Reusable commands are invoked with specific parameters as steps inside a job. When using a command, the steps of that command are inserted in the location where the command is invoked. Commands may only be used as part of the sequence under `steps` in a job.
+Reusable commands are invoked with specific parameters as steps inside a job. When using a command, the steps of that command are inserted at the location where the command is invoked. Commands may only be used as part of the sequence under `steps` in a job.
 
-The following example uses the same command from the previous example – `sayhello` – and invokes it in the job `myjob`, passing it a parameter `to`:
+The following example uses the same command from the previous example – `sayhello` – and invokes it in the job `myjob`, passing it a value for the `to` parameter:
 
 ```yaml
 version: 2.1
@@ -77,9 +66,9 @@ commands:
     parameters:
       to:
         type: string
-        default: "Hello World"
+        default: "World"
     steps:
-      - run: echo << parameters.to >>
+      - run: echo Hello << parameters.to >>
 
 jobs:
   myjob:
@@ -90,14 +79,11 @@ jobs:
           to: "Lev"
 ```
 
-### Invoking Other Commands in Your Command
-{:.no_toc}
+### Invoking Other Commands in a Command
 
-Commands can use other commands in the scope of execution.
+Commands can use other commands in the scope of execution. For instance, if a command is declared inside an orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
 
-For instance, if a command is declared inside your orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
-
-## Special Keys
+### Special Keys
 
 CircleCI has several special keys available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of these keys are:
 
@@ -107,7 +93,7 @@ CircleCI has several special keys available to all [circleci.com](http://circlec
 
 **Note:** It is possible to override the special keys with a custom command.
 
-## Examples
+### Commands Usage Examples
 
 The following is an example of part of the `aws-s3` orb where a command called `sync` is defined:
 
@@ -139,15 +125,20 @@ version: 2.1
 orbs:
   aws-s3: circleci/aws-s3@1.0.0
 
+jobs:
+  deploy2s3:
+    docker:
+      - image: circleci/<language>:<version TAG>
+    steps:
+      - aws-s3/sync:
+          from: .
+          to: "s3://mybucket_uri"
+          overwrite: true
+
 workflows:
   build-test-deploy:
     jobs:
-      - deploy2s3: # a sample job that would be defined above.
-        steps:
-          - aws-s3/sync:
-              from: .
-              to: "s3://mybucket_uri"
-              overwrite: true
+      - deploy2s3
 ```
 
 Defining a `build` job:
