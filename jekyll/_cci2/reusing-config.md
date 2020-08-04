@@ -19,11 +19,11 @@ This reusable config reference page describes how to version your [.circleci/con
 
 2. (Optional) Install the CircleCI-Public CLI by following the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation. The `circleci config process` command is helpful for checking a reusable config.
 
-3. Change the `version` key to 2.1 in your `.circleci/config.yml` file and commit the changes to test your build. Ensure that your project build succeeds with the new pipelines before adding any new 2.1 keys to your config.
+3. Use `version: 2.1` in your `.circleci/config.yml` file.
 
-4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo. The Jobs page displays runs using the new pipelines service.
+4. Run builds with your new configuration by pushing to your GitHub or Bitbucket repo. The Pipelines page displays all pipelines for your organization/username, and you can filter this page by Project or Branch.
 
-After your build is running successfully with pipelines enabled and version 2.1 in the `.circleci/config.yml` file, it is possible to add new keys to reuse config and run the same job more than once with different parameters (re-use jobs).
+Once your project is configured using `version 2.1` in the `.circleci/config.yml` file, you can use the keys covered in this guide to reuse config, for example, run the same job more than once with different parameters.
 
 ## Authoring Reusable Commands
 
@@ -35,10 +35,9 @@ A reusable command may have the following immediate child keys as a map:
 
 Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
 
-
 ### **The `commands` Key**
 
-A command definition defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -62,23 +61,32 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-**Note:** The `commands` stanza is available in configuration version 2.1 and later.
-
-## Invoking Reusable Commands
+### Invoking Reusable Commands
 {:.no_toc}
 
 Reusable commands are invoked with specific parameters as steps inside a job. When using a command, the steps of that command are inserted in the location where the command is invoked. Commands may only be used as part of the sequence under `steps` in a job.
 
-The following example invokes the command `sayhello` and passes it a parameter `to`:
+The following example uses the same command from the previous example – `sayhello` – and invokes it in the job `myjob`, passing it a parameter `to`:
 
 ```yaml
 version: 2.1
+
+commands:
+  sayhello:
+    description: "A very simple command for demonstration purposes"
+    parameters:
+      to:
+        type: string
+        default: "Hello World"
+    steps:
+      - run: echo << parameters.to >>
+
 jobs:
   myjob:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - sayhello:
+      - sayhello: // invoke command "sayhello"
           to: "Lev"
 ```
 
@@ -87,7 +95,7 @@ jobs:
 
 Commands can use other commands in the scope of execution.
 
-For instance, if a command is declared inside your Orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
+For instance, if a command is declared inside your orb it can use other commands in that orb. It can also use commands defined in other orbs that you have imported (for example `some-orb/some-command`).
 
 ## Special Keys
 
@@ -101,7 +109,7 @@ CircleCI has several special keys available to all [circleci.com](http://circlec
 
 ## Examples
 
-The following is an example of part of an `aws-s3` orb defining a command called `sync`:
+The following is an example of part of the `aws-s3` orb where a command called `sync` is defined:
 
 ```yaml
 version: 2.1
@@ -123,10 +131,11 @@ commands:
           command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
 ```
 
-Defining a command called `sync` is invoked in a 2.1 `.circleci/config.yml` file as:
+To invoke this `sync` command in your 2.1 `.circleci/config.yml` file, see the following example:
 
 ```yaml
 version: 2.1
+
 orbs:
   aws-s3: circleci/aws-s3@1.0.0
 
@@ -145,9 +154,11 @@ Defining a `build` job:
 
 ```yaml
 version: 2.1
+
 orbs:
   aws-cli: circleci/aws-cli@0.1.2
   aws-s3: circleci/aws-s3@1.0.0
+
 jobs:
   build:
     executor: aws-cli/default
@@ -166,9 +177,9 @@ jobs:
 
 ## Authoring Reusable Executors
 
-Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters of that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
+Executors define the environment in which the steps of a job will be run. When declaring a `job` in CircleCI configuration, you define the type of execution environment (`docker`, `machine`, `macos`. etc.) to run in, as well as any other parameters for that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
 
-Executor declarations in a config outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
+Executor declarations outside of `jobs` can be used by all jobs in the scope of that declaration, allowing you to reuse a single executor definition across multiple jobs.
 
 An executor definition includes one or more of the following keys:
 
@@ -178,7 +189,7 @@ An executor definition includes one or more of the following keys:
 - `shell`
 - `resource_class`
 
-In the following example `my-executor` is passed as the single value of the key `executor`.
+In the following example `my-executor` is used for running the job `my-job`.
 
 ```yaml
 version: 2.1
@@ -193,9 +204,7 @@ jobs:
       - run: echo outside the executor
 ```
 
-**Note:** Reusable `executor` declarations are available in configuration version 2.1 and later.
-
-## **`executors`**
+### The `executors` Key
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
@@ -226,13 +235,19 @@ jobs:
       - run: echo outside the executor
 ```
 
-## Invoking Reusable Executors
+### Invoking Reusable Executors
 {:.no_toc}
 
 The following example passes `my-executor` as the value of a `name` key under `executor` -- this method is primarily employed when passing parameters to executor invocations:
 
 ```yaml
 version: 2.1
+
+executors:
+  my-executor:
+    docker:
+      - image: circleci/ruby:2.5.1-node-browsers
+
 jobs:
   my-job:
     executor:
@@ -246,13 +261,14 @@ It is also possible to allow an orb to define the executor used by all of its co
 ### Example of Using an Executor Declared in `config.yml` with Matrix Jobs.
 {:.no_toc}
 
-The following example declares a Docker executor with a node image. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
+The following example declares a Docker executor with a node image, `node-docker`. The tag portion of the image string is parameterized with a `version` parameter. A `version` parameter is also included in the `test` job so that it can be passed through the job into the executor when the job is called from a workflow.
 
-When calling the `test` job in the `matrix-tests` workflow, [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js
+When calling the `test` job in the `matrix-tests` workflow, [matrix jobs](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21) are used to run the job multiple times, concurrently, each with a different set of parameters. The node application is tested against many versions of Node.js:
 
 
 ```yaml
 version: 2.1
+
 executors:
   node-docker: # declares a reusable executor
     parameters:
@@ -262,6 +278,7 @@ executors:
         type: string
     docker:
       - image: cimg/node:<<parameters.version>>
+
 jobs:
   test:
     parameters:
@@ -275,6 +292,7 @@ jobs:
     steps:
       - checkout
       - run: echo "how are ya?"
+
 workflows:
   matrix-tests:
     jobs:
@@ -286,6 +304,9 @@ workflows:
                 - 12.16.0
                 - 10.19.0
 ```
+
+### Using Executors Defined in an Orb
+{:.no_toc}
 
 You can also refer to executors from other orbs. Users of an orb can invoke its executors. For example, `foo-orb` could define the `bar` executor:
 
@@ -332,16 +353,18 @@ jobs:
 
 When invoking an executor in a `job` any keys in the job itself will override those of the executor invoked. For example, if your job declares a `docker` stanza, it will be used, in its entirety, instead of the one in your executor.
 
-**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used.
+**Note:** The `environment` variable maps are additive. If an `executor` has one of the same `environment` variables as the `job`, the value in the job will be used. See the [Using Environment Variables guide]({{ site.baseurl }}/2.0/env-vars/#order-of-precedence) for more information.
 
 ```yaml
 version: 2.1
+
 executors:
   node:
     docker:
       - image: cimg/node:lts
     environment:
      ENV: ci
+
 jobs:
   build:
     docker:
@@ -627,7 +650,7 @@ steps:
 
 #### Environment Variable Name
 
-The environment variable name (``env_var_name``) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables additional checks to be performed. See [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/) for details.
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on using environment variables, the the guide to [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
 
@@ -636,6 +659,7 @@ The example below shows you how to use the `env_var_name` parameter type for dep
 Original `config.yml` file:
 ```yaml
 version: 2.1
+
 jobs:
   build:
     docker:
@@ -650,13 +674,13 @@ workflows:
   workflow:
     jobs:
     - build
-  version: 2
 ```
 
 New `config.yml` file:
 
 ```yaml
 version: 2.1
+
 jobs:
    build:
      parameters:
@@ -694,6 +718,7 @@ Example of defining and invoking a parameterized job in a `config.yml`:
 {% raw %}
 ```yaml
 version: 2.1
+
 jobs:
   sayhello: # defines a parameterized job
     description: A job that does very little other than demonstrate what a parameterized job looks like
@@ -705,6 +730,7 @@ jobs:
     machine: true
     steps:
       - run: echo "Hello << parameters.saywhat >>"
+
 workflows:
   build:
     jobs:
@@ -713,7 +739,7 @@ workflows:
 ```
 {% endraw %}
 
-**Note:** The ability to invoke jobs multiple times in a single workflow with parameters is available in configuration version 2.1. When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (i.e. `sayhello-1` , `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
+**Note:** When invoking the same job multiple times with parameters across any number of workflows, the build name will be changed (i.e. `sayhello-1` , `sayhello-2`, etc.). To ensure build numbers are not appended, utilize the `name` key. The name you assign needs to be unique, otherwise the numbers will still be appended to the job name. As an example:
 
 ```yaml
 workflows:
