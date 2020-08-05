@@ -158,6 +158,7 @@ The `enum` parameter may be a list of any values. Use the `enum` parameter type 
 
 ```yaml
 version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -173,6 +174,7 @@ The following `enum` type declaration is invalid because the default is not decl
 {% raw %}
 ```yaml
 version: 2.1
+
 commands:
   list-files:
     parameters:
@@ -191,6 +193,7 @@ Use an `executor` parameter type to allow the invoker of a job to decide what ex
 {% raw %}
 ```yaml
 version: 2.1
+
 executors:
   xenial:
     parameters:
@@ -234,6 +237,7 @@ Steps are used when you have a job or command that needs to mix predefined and u
 {% raw %}
 ```yaml
 version: 2.1
+
 commands:
   run-tests:
     parameters:
@@ -242,9 +246,9 @@ commands:
         type: steps
         default: []
     steps:
-    - run: make deps
-    - steps: << parameters.after-deps >>
-    - run: make test
+      - run: make deps
+      - steps: << parameters.after-deps >>
+      - run: make test
 ```
 {% endraw %}
 
@@ -253,14 +257,27 @@ The following example demonstrates that steps passed as parameters are given as 
 {% raw %}
 ```yaml
 version: 2.1
+
+commands:
+  run-tests:
+    parameters:
+      after-deps:
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
+        type: steps
+        default: []
+    steps:
+      - run: make deps
+      - steps: << parameters.after-deps >>
+      - run: make test
+
 jobs:
   build:
     machine: true
     steps:
-    - run-tests:
-        after-deps:
-          - run: echo "The dependencies are installed"
-          - run: echo "And now I'm going to run the tests"
+      - run-tests:
+          after-deps:
+            - run: echo "The dependencies are installed"
+            - run: echo "And now I'm going to run the tests"
 ```
 {% endraw %}
 
