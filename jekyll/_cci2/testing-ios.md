@@ -39,7 +39,7 @@ To read about our customer support policy regarding beta images, please check ou
 
  Config   | Xcode Version                   | macOS Version | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|-------------------|--------------
- `12.0.0` | Xcode 12.0 Beta 4 (12A8179i) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3417/index.html) | |
+ `12.0.0` | Xcode 12.0 Beta 4 (12A8179i) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3417/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-beta-4-released/36956) |
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)
  `11.5.0` | Xcode 11.5 GM (11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)
  `11.4.1` | Xcode 11.4.1 (11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)
