@@ -7,7 +7,7 @@ categories: [configuration]
 order: 1
 ---
 
-This guide describes how to get started with reusable commands, jobs, executors and orbs.
+This guide describes how to get started with reusable commands, jobs, executors and orbs. This guide also covers the use of parameters for creating parameterized reusable elements.
 
 * TOC
 {:toc}
@@ -20,6 +20,324 @@ This guide describes how to get started with reusable commands, jobs, executors 
 * CircleCI reusable configuration elements require a `version: 2.1` `.circleci/config.yml` file.
 
 * Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
+
+## Using the `parameters` Declaration
+
+Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map. Pipeline parameters are defined at the top level of a project configuration. See the [Pipeline Variables guide]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) for more information on Pipeline Parameters.
+
+In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo _Hello_ back to the user.
+
+```yaml
+version: 2.1
+commands: # a reusable command with parameters
+   greeting:
+      parameters:
+         to:
+           default: "world"
+           type: string
+      steps:
+         - run: echo "Hello <<parameters.to>>"
+jobs:
+   my-job:
+      docker:
+         - image: cimg/base:stable
+      steps:
+         - greeting:
+            to: "My-Name"
+workflows:
+   my-workflow:
+      jobs:
+         - my-job        
+         
+```
+
+### Parameter Syntax
+{:.no_toc}
+
+A parameter can have the following keys as immediate children:
+
+Key Name | Description | Default value 
+---|---|---
+description | Optional. Used to generate documentation for your orb. | N/A 
+type | Required. See **Parameter Types** in the section below for details. | N/A
+default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A
+{: class="table table-striped"}
+
+### Parameter Types
+
+This section describes the types of parameters and their usage.
+
+The parameter types supported by orbs are:
+* `string`
+* `boolean`
+* `integer`
+* `enum`
+* `executor`
+* `steps`
+* environment variable name
+
+The parameter types supported by pipeline parameters are:
+* `string`
+* `boolean`
+* `integer`
+* `enum`
+
+#### String
+{:.no_toc}
+
+Basic string parameters are described below:
+
+```yaml
+version: 2.1
+commands:
+  copy-markdown:
+    parameters:
+      destination:
+        description: destination directory
+        type: string
+        default: docs
+    steps:
+      - run: cp *.md << parameters.destination >>
+```
+
+Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
+
+#### Boolean
+{:.no_toc}
+
+Boolean parameters are useful for conditionals:
+
+```yaml
+version: 2.1
+commands:
+  list-files:
+    parameters:
+      all:
+        description: include all files
+        type: boolean
+        default: false
+    steps:
+      - run: ls <<# parameters.all >> -a <</ parameters.all >>
+```
+
+Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
+
+* True: `y` `yes` `true` `on`
+* False: `n` `no` `false` `off`
+
+Capitalized and uppercase versions of the above values are also valid.
+
+#### Integer
+{:.no_toc}
+
+Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
+
+```yaml
+version: 2.1
+jobs:
+  build:
+    parameters:
+      p:
+        type: integer
+        default: 1
+    parallelism: << parameters.p >>
+    machine: true
+    steps:
+      - checkout
+workflows:
+  workflow:
+    jobs:
+      - build:
+          p: 2
+```
+
+#### Enum
+{:.no_toc}
+
+The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
+
+```yaml
+version: 2.1
+commands:
+  list-files:
+    parameters:
+      os:
+        default: "linux"
+        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
+        type: enum
+        enum: ["linux", "darwin", "win32"]
+```
+
+The following `enum` type declaration is invalid because the default is not declared in the enum list.
+
+{% raw %}
+```yaml
+version: 2.1
+commands:
+  list-files:
+    parameters:
+      os:
+        type: enum
+        default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
+        enum: ["darwin", "linux"]
+```
+ {% endraw %}
+
+#### Executor
+{:.no_toc}
+
+Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
+
+{% raw %}
+```yaml
+version: 2.1
+executors:
+  xenial:
+    parameters:
+      some-value:
+        type: string
+        default: foo
+    environment:
+      SOME_VAR: << parameters.some-value >>
+    docker:
+      - image: ubuntu:xenial
+  bionic:
+    docker:
+      - image: ubuntu:bionic
+
+jobs:
+  test:
+    parameters:
+      e:
+        type: executor
+    executor: << parameters.e >>
+    steps:
+      - run: some-tests
+
+workflows:
+  workflow:
+    jobs:
+      - test:
+          e: bionic
+      - test:
+          e:
+            name: xenial
+            some-value: foobar
+```
+{% endraw %}
+
+#### Steps
+{:.no_toc}
+
+Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
+
+{% raw %}
+```yaml
+version: 2.1
+commands:
+  run-tests:
+    parameters:
+      after-deps:
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
+        type: steps
+        default: []
+    steps:
+    - run: make deps
+    - steps: << parameters.after-deps >>
+    - run: make test
+```
+{% endraw %}
+
+The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
+
+{% raw %}
+```yaml
+version: 2.1
+jobs:
+  build:
+    machine: true
+    steps:
+    - run-tests:
+        after-deps:
+          - run: echo "The dependencies are installed"
+          - run: echo "And now I'm going to run the tests"
+```
+{% endraw %}
+
+The above will resolve to the following:
+
+{% raw %}
+```yaml
+version: 2.1
+steps:
+  - run: make deps
+  - run: echo "The dependencies are installed"
+  - run: echo "And now I'm going to run the tests"
+  - run: make test
+```
+{% endraw %}
+
+#### Environment Variable Name
+{:.no_toc}
+
+The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
+
+The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
+
+{% raw %}
+
+Original `config.yml` file:
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    docker:
+    - image: ubuntu:latest
+    steps:
+    - run:
+        command: |
+          s3cmd --access_key ${FOO_BAR} \
+                --secret_key ${BIN_BAZ} \
+                ls s3://some/where
+workflows:
+  workflow:
+    jobs:
+    - build
+```
+
+New `config.yml` file:
+
+```yaml
+version: 2.1
+
+jobs:
+   build:
+     parameters:
+       access-key:
+         type: env_var_name
+         default: AWS_ACCESS_KEY
+       secret-key:
+         type: env_var_name
+         default: AWS_SECRET_KEY
+       command:
+         type: string
+     docker:
+       - image: ubuntu:latest
+     steps:
+       - run: |
+           s3cmd --access_key ${<< parameters.access-key >>} \\
+                 --secret_key ${<< parameters.secret-key >>} \\
+                 << parameters.command >>
+workflows:
+  workflow:
+    jobs:
+      - build:
+          access-key: FOO_BAR
+          secret-key: BIN_BAZ
+          command: ls s3://some/where
+```
+{% endraw %}
 
 ## Authoring Reusable Commands
 
@@ -379,326 +697,6 @@ jobs:
     steps:
       - run: echo "Node will not be installed."
 ```
-
-## Using the `parameters` Declaration
-
-Parameters are declared by name under a job, command, or executor. The immediate children of the `parameters` key are a set of keys in a map.
-
-In the following example, a command named `greeting` is designed with a single parameter named `to`. The `to` parameter is used within the steps to echo _Hello_ back to the user.
-
-```yaml
-version: 2.1
-commands: # a reusable command with parameters
-   greeting:
-      parameters:
-         to:
-           default: "world"
-           type: string
-      steps:
-         - run: echo "Hello <<parameters.to>>"
-jobs:
-   my-job:
-      docker:
-         - image: cimg/base:stable
-      steps:
-         - greeting:
-            to: "My-Name"
-workflows:
-   my-workflow:
-      jobs:
-         - my-job        
-         
-```
-
-**Note:** The `parameters` declaration is available in configuration version 2.1 and later.
-
-### Parameter Syntax
-{:.no_toc}
-
-A parameter can have the following keys as immediate children:
-
-| Key Name    | Description                                                                                   | Default value |
-|-------------|-----------------------------------------------------------------------------------------------|---------------|
-| description | Optional. Used to generate documentation for your orb.                                        | N/A           |
-| type        | Required. See **Parameter Types** in the section below for details.                           | N/A           |
-| default     | The default value for the parameter. If not present, the parameter is implied to be required. | N/A           |
-{: class="table table-striped"}
-
-### Parameter Types
-{:.no_toc}
-
-This section describes the types of parameters and their usage.
-
-The parameter types supported by orbs are:
-* `string`
-* `boolean`
-* `integer`
-* `enum`
-* `executor`
-* `steps`
-* environment variable name
-
-The parameter types supported by pipeline parameters are:
-* `string`
-* `boolean`
-* `integer`
-* `enum`
-
-#### String
-{:.no_toc}
-
-Basic string parameters are described below:
-
-```yaml
-version: 2.1
-commands:
-  copy-markdown:
-    parameters:
-      destination:
-        description: destination directory
-        type: string
-        default: docs
-    steps:
-      - run: cp *.md << parameters.destination >>
-```
-
-Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. Empty strings are treated as a falsy value in evaluation of `when` clauses, and all other strings are treated as truthy. Using an unquoted string value that YAML interprets as a boolean will result in a type error.
-
-#### Boolean
-{:.no_toc}
-
-Boolean parameters are useful for conditionals:
-
-```yaml
-version: 2.1
-commands:
-  list-files:
-    parameters:
-      all:
-        description: include all files
-        type: boolean
-        default: false
-    steps:
-      - run: ls <<# parameters.all >> -a <</ parameters.all >>
-```
-
-Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
-
-* True: `y` `yes` `true` `on`
-* False: `n` `no` `false` `off`
-
-Capitalized and uppercase versions of the above values are also valid.
-
-#### Integer
-{:.no_toc}
-
-Use the parameter type `integer` to pass a numeric integer value. The following example uses the `integer` type to populate the value of `parallelism` in a job.
-
-```yaml
-version: 2.1
-jobs:
-  build:
-    parameters:
-      p:
-        type: integer
-        default: 1
-    parallelism: << parameters.p >>
-    machine: true
-    steps:
-      - checkout
-workflows:
-  workflow:
-    jobs:
-      - build:
-          p: 2
-```
-
-#### Enum
-{:.no_toc}
-
-The `enum` parameter may be a list of any values. Use the `enum` parameter type when you want to enforce that the value must be one from a specific set of string values. The following example uses the `enum` parameter to declare the target operating system for a binary.
-
-```yaml
-version: 2.1
-commands:
-  list-files:
-    parameters:
-      os:
-        default: "linux"
-        description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
-        type: enum
-        enum: ["linux", "darwin", "win32"]
-```
-
-The following `enum` type declaration is invalid because the default is not declared in the enum list.
-
-{% raw %}
-```yaml
-version: 2.1
-commands:
-  list-files:
-    parameters:
-      os:
-        type: enum
-        default: "windows" #invalid declaration of default that does not appear in the comma-separated enum list
-        enum: ["darwin", "linux"]
-```
- {% endraw %}
-
-#### Executor
-{:.no_toc}
-
-Use an `executor` parameter type to allow the invoker of a job to decide what executor it will run on.
-
-{% raw %}
-```yaml
-version: 2.1
-executors:
-  xenial:
-    parameters:
-      some-value:
-        type: string
-        default: foo
-    environment:
-      SOME_VAR: << parameters.some-value >>
-    docker:
-      - image: ubuntu:xenial
-  bionic:
-    docker:
-      - image: ubuntu:bionic
-
-jobs:
-  test:
-    parameters:
-      e:
-        type: executor
-    executor: << parameters.e >>
-    steps:
-      - run: some-tests
-
-workflows:
-  workflow:
-    jobs:
-      - test:
-          e: bionic
-      - test:
-          e:
-            name: xenial
-            some-value: foobar
-```
-{% endraw %}
-
-#### Steps
-{:.no_toc}
-
-Steps are used when you have a job or command that needs to mix predefined and user-defined steps. When passed in to a command or job invocation, the steps passed as parameters are always defined as a sequence, even if only one step is provided.
-
-{% raw %}
-```yaml
-version: 2.1
-commands:
-  run-tests:
-    parameters:
-      after-deps:
-        description: "Steps that will be executed after dependencies are installed, but before tests are run"
-        type: steps
-        default: []
-    steps:
-    - run: make deps
-    - steps: << parameters.after-deps >>
-    - run: make test
-```
-{% endraw %}
-
-The following example demonstrates that steps passed as parameters are given as the value of a `steps` declaration under the job's `steps`.
-
-{% raw %}
-```yaml
-version: 2.1
-jobs:
-  build:
-    machine: true
-    steps:
-    - run-tests:
-        after-deps:
-          - run: echo "The dependencies are installed"
-          - run: echo "And now I'm going to run the tests"
-```
-{% endraw %}
-
-The above will resolve to the following:
-
-{% raw %}
-```yaml
-version: 2.1
-steps:
-  - run: make deps
-  - run: echo "The dependencies are installed"
-  - run: echo "And now I'm going to run the tests"
-  - run: make test
-```
-{% endraw %}
-
-#### Environment Variable Name
-
-The environment variable name (`env_var_name`) parameter is a string that must match a POSIX_NAME regexp (for example, there can be no spaces or special characters). The `env_var_name` parameter is a more meaningful parameter type that enables CircleCI to check that the string that has been passed can be used as an environment variable name. For more information on environment variables, see the guide to [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
-
-The example below shows you how to use the `env_var_name` parameter type for deploying to AWS S3 with a reusable `build` job. This example shows using the `AWS_ACCESS_KEY` and `AWS_SECRET_KEY` environment variables with the `access-key` and `secret-key` parameters. So, if you have a deploy job that runs the `s3cmd`, it is possible to create a reusable command that uses the needed authentication, but deploys to a custom bucket.
-
-{% raw %}
-
-Original `config.yml` file:
-```yaml
-version: 2.1
-
-jobs:
-  build:
-    docker:
-    - image: ubuntu:latest
-    steps:
-    - run:
-        command: |
-          s3cmd --access_key ${FOO_BAR} \
-                --secret_key ${BIN_BAZ} \
-                ls s3://some/where
-workflows:
-  workflow:
-    jobs:
-    - build
-```
-
-New `config.yml` file:
-
-```yaml
-version: 2.1
-
-jobs:
-   build:
-     parameters:
-       access-key:
-         type: env_var_name
-         default: AWS_ACCESS_KEY
-       secret-key:
-         type: env_var_name
-         default: AWS_SECRET_KEY
-       command:
-         type: string
-     docker:
-       - image: ubuntu:latest
-     steps:
-       - run: |
-           s3cmd --access_key ${<< parameters.access-key >>} \\
-                 --secret_key ${<< parameters.secret-key >>} \\
-                 << parameters.command >>
-workflows:
-  workflow:
-    jobs:
-      - build:
-          access-key: FOO_BAR
-          secret-key: BIN_BAZ
-          command: ls s3://some/where
-```
-{% endraw %}
 
 ## Authoring Parameterized Jobs
 
