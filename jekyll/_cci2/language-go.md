@@ -176,11 +176,13 @@ Next we create a directory for collecting test results
 
 Then we pull down the cache (if present). If this is your first run, this won't do anything.
 
+{% raw %}
 ```yaml
       - restore_cache: # restores saved cache if no changes are detected since last run
           keys:
             - go-mod-v4-{{ checksum "go.sum" }}
 ```
+{% endraw %}
 
 And install the Go implementation of the JUnit reporting tool and other dependencies for our application. These are good candidates to be pre-installed in primary container.
 
@@ -194,6 +196,7 @@ Both containers (primary and postgres) start simultaneously. Postgres, however, 
 
 Now we run our tests. To do that, we need to set an environment variable for our database's URL and path to the DB migrations files. This step has some additional commands, we'll explain them below.
 
+{% raw %}
 ```yaml
       - run:
           name: Run unit tests
@@ -204,6 +207,7 @@ Now we run our tests. To do that, we need to set an environment variable for our
             PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
             gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
 ```
+{% endraw %}
 
 The command for running unit tests is more complicated than some of our other
 steps. Here we are using [test splitting]({{ site.baseurl
@@ -223,6 +227,7 @@ Next we run our actual build command using `make` - the Go sample project uses m
 
 Now we will start the Postgres dependent service, using `curl` to ping it to validate that the service is up and running.
 
+{% raw %}
 ```yaml
       - run:
           name: Start service
@@ -238,6 +243,7 @@ Now we will start the Postgres dependent service, using `curl` to ping it to val
             sleep 5
             curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
 ```
+{% endraw %}
 
 If all went well, the service ran and successfully responded to the post request at `localhost:8080`.
 
