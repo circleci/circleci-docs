@@ -75,7 +75,7 @@ jobs:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - sayhello: // invoke command "sayhello"
+      - sayhello: # invoke command "sayhello"
           to: "Lev"
 ```
 
