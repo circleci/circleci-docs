@@ -17,7 +17,7 @@ This guide describes how to get started with reusable commands, jobs, executors 
 
 * Install the CircleCI CLI so that you have access to the `circleci config process` command (optional). This command lets you see the expanded configuration with all reusable keys processed. Follow the [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) documentation for installation instructions and tips.
 
-* CircleCI reusable configuration elements require a `version: 2.1` `.circleci/config.yml` file.
+* CircleCI reusable configuration elements require a **`version: 2.1`** `.circleci/config.yml` file.
 
 * Command, job, executor, and parameter names must start with a letter and can only contain lowercase letters (`a`-`z`), digits (`0`-`9`), underscores (`_`) and hyphens (`-`).
 

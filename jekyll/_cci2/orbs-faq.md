@@ -21,7 +21,7 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** What is the difference between commands and jobs?
 
-* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#executors) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
+* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
 
 ## Using Orbs on CircleCI Server
 
