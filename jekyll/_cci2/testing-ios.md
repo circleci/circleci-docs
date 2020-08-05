@@ -31,7 +31,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
 We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release. 
 
-Unlike our stable images (which are frozen and will not change), as beta images are released they are replaced in situ until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
+Unlike our stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
 
 To read about our customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
