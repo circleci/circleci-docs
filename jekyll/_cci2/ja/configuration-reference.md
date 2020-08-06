@@ -784,7 +784,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ###### `step` 内からのジョブの終了
 
-A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
+A job can exit without failing by using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
