@@ -1,0 +1,95 @@
+service: myserverlessproject3
+
+provider:
+    name: aws
+    runtime: nodejs12.x
+    profile: serverlessUser
+    region: eu-west-1
+    environment:
+        tableName: ${self:custom.tableName}
+        bucketName: ${self:custom.bucketName}
+    iamRoleStatements:
+        - Effect: Allow
+          Action:
+              - dynamodb:*
+              - s3:*
+              - ses:*
+          Resource: '*'
+
+plugins:
+    - serverless-webpack
+    - serverless-offline
+    - serverless-dynamodb-local
+
+package:
+    individually: true
+
+custom:
+    tableName: player-points-table
+    bucketName: myserverlessprojectuploadbucket-123123
+    dynamodb:
+        stages:
+            - dev
+        start:
+            port: 8000
+            inMemory: true
+            migrate: true
+        migration:
+            dir: offline/migrations
+
+functions:
+    getPlayerScore:
+        handler: lambdas/endpoints/getPlayerScore.handler
+        events:
+            - http:
+                  path: get-player-score/{ID}
+                  method: GET
+                  cors: true
+    createPlayerScore:
+        handler: lambdas/endpoints/createPlayerScore.handler
+        events:
+            - http:
+                  path: create-player-score/{ID}
+                  method: POST
+                  cors: true
+
+    createFile:
+        handler: lambdas/endpoints/createFile.handler
+        events:
+            - http:
+                  path: create-file/{fileName}
+                  method: POST
+                  cors: true
+    getFile:
+        handler: lambdas/endpoints/getFile.handler
+        events:
+            - http:
+                  path: get-file/{fileName}
+                  method: GET
+                  cors: true
+
+    sendEmail:
+        handler: lambdas/endpoints/sendEmail.handler
+        events:
+            - http:
+                  path: send-email
+                  method: POST
+                  cors: true
+
+resources:
+    Resources:
+        DemoBucketUpload:
+            Type: AWS::S3::Bucket
+            Properties:
+                BucketName: ${self:custom.bucketName}
+        MyDynamoDbTable:
+            Type: AWS::DynamoDB::Table
+            Properties:
+                TableName: ${self:custom.tableName}
+                AttributeDefinitions:
+                    - AttributeName: ID
+                      AttributeType: S
+                KeySchema:
+                    - AttributeName: ID
+                      KeyType: HASH
+                BillingMode: PAY_PER_REQUEST

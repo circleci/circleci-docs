@@ -1,0 +1,32 @@
+{
+  "name": "myserverlessproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "serverless-jest-plugin": "^0.3.0"
+  },
+  "devDependencies": {
+    "@shelf/jest-dynamodb": "^1.7.0",
+    "aws-sdk": "^2.616.0",
+    "jest": "^25.1.0",
+    "serverless": "^1.63.0",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^5.12.1",
+    "serverless-webpack": "^5.3.1",
+    "webpack": "^4.41.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamWSoftware/ServerlessYoutubeSeries.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SamWSoftware/ServerlessYoutubeSeries/issues"
+  },
+  "homepage": "https://github.com/SamWSoftware/ServerlessYoutubeSeries#readme"
+}
