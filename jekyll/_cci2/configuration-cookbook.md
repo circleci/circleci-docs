@@ -466,7 +466,7 @@ For more detailed information about this orb and its functionality, refer to the
 
 ### Selecting a Workflow With a Pipeline Parameter
 
-If you want to be able to trigger custom workflows manually via the API, but still run a workflow on every push, you can use pipeline parameters to decide which workflows to run. For more information see the [API Reference Documentation](https://circleci.com/docs/2.0/configuration-cookbook/#selecting-a-workflow-with-a-pipeline-parameter) and the [API Developers Guide Example](https://circleci.com/docs/2.0/api-developers-guide/#example-end-to-end-api-request)
+If you want to be able to trigger custom workflows manually via the API, but still run a workflow on every push, you can use pipeline parameters to decide which workflows to run. For more information see the [API Reference Documentation]({{ site.baseurl }}/2.0/configuration-cookbook/#selecting-a-workflow-with-a-pipeline-parameter) and the [API Developers Guide Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request)
 
 ```yaml
 version: 2.1
@@ -504,7 +504,7 @@ workflows:
       - report
 ```
 
-The `action` parameter will default to `build` on pushes. Below is an example of supplying a different value using API v2 Trigger a New Pipeline endpoint and Pipeline Parameters to select a different workflow to run, in this case, `report`.  
+The `action` parameter will default to `build` on pushes. Below is an example of supplying a different value using API v2 Trigger a New Pipeline endpoint and Pipeline Parameters to select a different workflow to run, in this case, `report`. Remember to substitute [`project-slug`({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) for your values.
 
 ```sh
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
