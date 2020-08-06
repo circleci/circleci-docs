@@ -504,7 +504,7 @@ workflows:
       - report
 ```
 
-The `action` parameter will default to `build` on pushes. Below is an example of supplying a different value using API v2 Trigger a New Pipeline endpoint and Pipeline Parameters to select a different workflow to run, in this case, `report`. Remember to substitute [`project-slug`({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) for your values.
+The `action` parameter will default to `build` on pushes. Below is an example of supplying a different value using the API v2 Trigger a New Pipeline endpoint and Pipeline Parameters to select a different workflow to run, in this case, `report`. Remember to substitute [`project-slug`({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) for your values.
 
 ```sh
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
