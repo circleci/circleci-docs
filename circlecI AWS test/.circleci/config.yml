@@ -1,0 +1,27 @@
+version: 2.1
+orbs:
+    node: circleci/node@1.1.6
+jobs:
+    build-and-deploy:
+        docker:
+            - image: circleci/node:10.16.3
+        steps:
+            - checkout
+            - run:
+                  command: sudo npm i -g serverless npm@latest
+            - run:
+                  command: npm install
+            - run:
+                  command: ./.circleci/install-credentials.sh
+            - run:
+                  command: sls deploy
+
+workflows:
+    build-and-deploy:
+        jobs:
+            - build-and-deploy:
+                  context: serverlessProject
+                  filters:
+                      branches:
+                          only:
+                              - l23-CI
