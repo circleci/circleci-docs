@@ -9,7 +9,7 @@ order: 1
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
 
-* [API v1.1 Reference](https://circleci.com/docs/api/#api-overview)
+* [API v1.1 Reference](https://circleci.com/docs/api/v1/)
 * [API v2 Reference](https://circleci.com/docs/api/v2/)
 
 API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that users migrate their scripts to API v2 stable endpoints as soon as possible. 

@@ -498,7 +498,7 @@ For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.gith
 
 ## API
 
-To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/#get-build-test-metadata).
+To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v1/#get-build-test-metadata).
 
 ## See Also
 {:.no_toc}

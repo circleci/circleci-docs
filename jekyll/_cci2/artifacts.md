@@ -170,7 +170,7 @@ Similarly, if you want to download the _latest_ artifacts of a build, replace th
 curl -H "Circle-Token: <circle-token>" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts
 ```
 
-You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/#artifacts).
+You can read more about using CircleCI's API to interact with artifacts in our [API reference guide](https://circleci.com/docs/api/v1/#artifacts).
 
 Placeholder   | Meaning                                                                       |
 --------------|-------------------------------------------------------------------------------|

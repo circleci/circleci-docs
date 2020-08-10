@@ -25,7 +25,7 @@ By default, CircleCI 2.0 Nomad clients automatically provision containers accord
 
 == Architecture
 
-Figure 1.1 illustrates CircleCI core components, build orchestration services, and executors. The CircleCI https://circleci.com/docs/api/#section=reference[API] is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI.
+Figure 1.1 illustrates CircleCI core components, build orchestration services, and executors. The CircleCI https://circleci.com/docs/api/v1/#section=reference[API] is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI.
 
 Within the CircleCI UI is the Insights page, which acts as a dashboard showing the health of all repositories you are following including:
 // I feel like the insights page info needs to move somewhere else
