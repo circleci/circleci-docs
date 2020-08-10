@@ -487,7 +487,7 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 ## API
 
-実行時のテスト メタデータに API からアクセスするには、[テスト メタデータ API ドキュメント](https://circleci.com/docs/api/#get-build-test-metadata)を参照してください。
+To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v1/#get-build-test-metadata).
 
 ## 関連項目
 {:.no_toc}
