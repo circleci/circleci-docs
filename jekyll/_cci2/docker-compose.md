@@ -73,9 +73,9 @@ Using `docker` combined with `setup_remote_docker` provides a remote engine simi
 
 This combination is required if you want to build docker images for deployment. 
 
-## Using Docker Compose with macOS Executor (not supported)
+## Limitations
 
-At the moment we [don't support utilizing docker](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-) within the `macos` executor.
+Using `docker-compose` with the `macos` executor is not supported, see [the support article for more information](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-).
 
 ## See Also
 {:.no_toc}
