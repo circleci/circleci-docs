@@ -68,7 +68,11 @@ Docker Compose を使用して docker-compose ファイルを含むマルチコ�
 
 デプロイ用の Docker イメージをビルドする場合は、この組み合わせが必要です。
 
-## 関連項目
+## Limitations
+
+Using `docker-compose` with the `macos` executor is not supported, see [the support article for more information](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-).
+
+## See Also
 {:.no_toc}
 
-例と詳細については、「Docker コマンドの実行手順」の「[フォルダーのマウント]({{ site.baseurl }}/2.0/building-docker-images/#フォルダーのマウント)」セクションを参照してください。
+See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
