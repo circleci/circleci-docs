@@ -42,7 +42,7 @@ git commit -m "Initial commit" # 最初のコミットを実行します
 
 ## Git リポジトリを VCS に接続する
 
-前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 ローカルの Git リポジトリは、バージョン管理システム (GitHub または BitBucket) に接続する必要があります。 やってみましょう。
+前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 We need to connect our local git repository to a Version Control System - either GitHub or BitBucket. やってみましょう。
 
 Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
