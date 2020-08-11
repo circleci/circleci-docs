@@ -83,11 +83,16 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 
 ### Caching
 
-Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
-- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master).
+Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub
+repository-id of the originator of the fork PR to identify the cache.
+- PRs from the same fork repo will share a cache (this includes, as previously
+  stated, that PRs in the master repo share a cache with master).
 - Two PRs in different Fork Repos will have different caches.
+- enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
+  with forked builds will enable cache sharing.
 
-Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
+Currently there is no pre-population of caches because this optimization hasn't
+made it to the top of the priority list yet.
 
 ## Example Open Source Projects 
 
