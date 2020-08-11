@@ -128,17 +128,13 @@ jobs:
 
 ## **`jobs`**
 
-実行処理は 1 つ以上の名前付きジョブで構成し、 それらのジョブは `jobs` マップで指定します。[2.0 config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)で `jobs` マップの例を紹介しています。 ジョブの名前がマップのキーとなり、ジョブを記述するマップが値となります。
+A Workflow is comprised of one or more uniquely named jobs. それらのジョブは `jobs` マップで指定します。[2.0 config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)で `jobs` マップの例を紹介しています。 ジョブの名前がマップのキーとなり、ジョブを記述するマップが値となります。
 
-[ワークフロー]({{ site.baseurl }}/2.0/workflows/)を使用している場合は、`.circleci/config.yml` ファイル内でジョブの名前が一意である必要があります。
-
-ワークフローを**使用しない**場合は、`jobs` マップに `build` という名前のジョブを含める必要があります。 この `build` ジョブは、VCS プロバイダーへのプッシュによってトリガーされる実行のデフォルトのエントリポイントです。 さらにその他のジョブを指定したり、CircleCI API からジョブを実行したりできます。
-
-**メモ:** ジョブの最大実行時間は 5 時間です。 If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
+**Note:** Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
 
 ### **<`job_name`>**
 
-各ジョブは、キーとなるジョブ名と、値となるマップで構成されます。 名前は、その `jobs` リスト内で一意である必要があります。 値となるマップでは以下の属性を使用できます。
+Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
 
 | キー                | 必須               | 型       | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | ----------------- | ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -155,19 +151,19 @@ jobs:
 | resource_class    | N                | String  | Amount of CPU and RAM allocated to each container in a job. **Note:** A performance plan is required to access this feature.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 {: class="table table-striped"}
 
-<sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 If more than one is set you will receive an error.
+<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
 
 #### `environment`
 
-環境変数の名前と値のマップです。 これらは、CircleCI アプリケーションで設定した環境変数をオーバーライドします。
+A map of environment variable names and values. These will override any environment variables you set in the CircleCI application.
 
 #### `parallelism`
 
-`parallelism` を 2 以上に設定すると、設定した数の Executor がそれぞれセットアップされ、そのジョブのステップを並列に実行します。 これにより、テスト ステップを最適化できます。CircleCI CLI を使用して並列コンテナにテスト スイートを分割すると、ジョブの実行時間を短縮できます。 Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). 詳細については、[並列ジョブのドキュメント]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を参照してください。
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
-`working_directory` で指定したディレクトリが存在しない場合は、自動的に作成されます。
+`working_directory` will be created automatically if it doesn't exist.
 
-例
+Example:
 
 ```yaml
 jobs:
