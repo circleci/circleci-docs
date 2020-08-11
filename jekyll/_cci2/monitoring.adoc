@@ -329,7 +329,7 @@ CAUTION: This scenario leads to very large amounts of data.
 
 ===== Scenario 3: Send limited metrics to CloudWatch
 
-AWS charges fees for CloudWatch per series of scalar (i.e. at the level of "mean" or "sum"). Since multiple fields (e.g. mean, max, min and sum) are calculated for each metrics key (e.g. `circle.run-queue.latency`) and some fields can be redundant, you might want to select which fields are send to CloudWatch. This can be achieved by configuring `[[outputs.cloudwatch]]` with `fieldpass`. You also may declare `[[outputs.cloudwatch]]` multiple times to pick up multiple metrics, as illustrated below.
+AWS charges fees for CloudWatch per series of scalar (i.e. at the level of "mean" or "sum"). Since multiple fields (e.g. mean, max, min and sum) are calculated for each metrics key (e.g. `circle.run-queue.latency`) and some fields can be redundant, you might want to select which fields are send to CloudWatch. This can be achieved by configuring `\[[outputs.cloudwatch]]` with `fieldpass`. You also may declare `\[[outputs.cloudwatch]]` multiple times to pick up multiple metrics, as illustrated below.
 
 ```
 [[inputs.statsd]]
