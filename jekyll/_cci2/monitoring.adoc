@@ -238,6 +238,9 @@ image::custom_metrics.png[Custom Metrics]
 NOTE: There will be a downtime along with a service restart. After disabling it you will have to manually configure outputs to Datadog and/or CloudWatch, regardless of configurations on Replicated.
 
 === 2. Create your Customized Config
+
+Now you are ready to do anything Telegraf supports! All you need to provide is a valid Telegraf config file.
+
 . SSH into the Services machine
 . Add the following to `/etc/circleconfig/telegraf/statsd.conf`
 +
@@ -248,7 +251,7 @@ NOTE: There will be a downtime along with a service restart. After disabling it 
         metric_separator = "."
         namepass = []
 ```
-. Under `namepass` add any metrics you wish to receive, the example below shows choosing to configure just the first 4 from the list above:
+. Under `namepass` add any metrics you wish to receive, the example below shows choosing to configure just the first 4 from the list above. (See below for some additional example configs):
 +
 ```
 [[inputs.statsd]]
@@ -263,7 +266,110 @@ NOTE: There will be a downtime along with a service restart. After disabling it 
           ]
 ```
 . Restart the telegraf container by running: `sudo docker restart telegraf`
-. Navigate to your Management Console settings page, scroll down to save and restart your installation.
+
+NOTE: See the https://github.com/influxdata/telegraf/blob/master/README.md[Telegraf README] for further config syntax details.
+
+==== Sample Telegraph Configuration
+
+===== Scenario 1: Record standard metrics to two InfluxDB instances
+
+The example below records default metrics to two InfluxDB instances: One is your on-premises InfluxDB server (`your-influx-db-instance.example.com`), and the other is https://cloud2.influxdata.com/[InfluxDB Cloud 2].
+
+```
+[[inputs.statsd]]
+  service_address = ":8125"
+  parse_data_dog_tags = true
+  metric_separator = "."
+  namepass = [
+    "circle.backend.action.upload-artifact-error",
+    "circle.build-queue.runnable.builds",
+    "circle.dispatcher.find-containers-failed",
+    "circle.github.api_call",
+    "circle.http.request",
+    "circle.nomad.client_agent.*",
+    "circle.nomad.server_agent.*",
+    "circle.run-queue.latency",
+    "circle.state.container-builder-ratio",
+    "circle.state.lxc-available",
+    "circle.state.lxc-reserved",
+    "circle.vm-service.vm.assigned-vm",
+    "circle.vm-service.vms.delete.status",
+    "circle.vm-service.vms.get.status",
+    "circle.vm-service.vms.post.status",
+    "circleci.cron-service.messaging.handle-message",
+    "circleci.grpc-response"
+  ]
+
+[[outputs.influxdb]]
+  url = "http://your-influx-db-instance.example.com:8086"
+  database = "circleci"
+
+[[outputs.influxdb_v2]]
+  urls = ["https://us-central1-1.gcp.cloud2.influxdata.com"]
+  token = "YOUR_TOKEN_HERE"
+  organization = "circle@example.com"
+  bucket = "circleci"
+```
+
+===== Scenario 2: Record all metrics to Datadog
+
+The standard configuration handles only selected metrics, and there are many metrics discarded by Telegraf. If you want to receive this discarded, sophisticated data, such as JVM stats and per-container CPU usage, you can keep all received metrics by removing namepass filter. This example also illustrates how to configure metrics emission to Datadog. As discussed above, you need manual configuration for outputs to Datadog regardless of configurations on Replicated.
+
+CAUTION: This scenario leads to very large amounts of data.
+
+```
+[[inputs.statsd]]
+  service_address = ":8125"
+  parse_data_dog_tags = true
+  metric_separator = "."
+
+[[outputs.datadog]]
+  apikey = 'YOUR_API_KEY_HERE'
+```
+
+===== Scenario 3: Send limited metrics to CloudWatch
+
+AWS charges fees for CloudWatch per series of scalar (i.e. at the level of "mean" or "sum"). Since multiple fields (e.g. mean, max, min and sum) are calculated for each metrics key (e.g. `circle.run-queue.latency`) and some fields can be redundant, you might want to select which fields are send to CloudWatch. This can be achieved by configuring `[[outputs.cloudwatch]]` with `fieldpass`. You also may declare `[[outputs.cloudwatch]]` multiple times to pick up multiple metrics, as illustrated below.
+
+```
+[[inputs.statsd]]
+  # Accept all metrics at input level to 1) enable output configurations without thinking of inputs, and to 2) dump discarded metrics to stdout just in case.
+  service_address = ":8125"
+  parse_data_dog_tags = true
+  metric_separator = "."
+
+[[outputs.cloudwatch]]
+    # Fill in these two variables if you need to access CloudWatch with an IAM User, not an IAM Role attached to your Services box
+    # access_key = 'ACCESS'
+    # secret_key = 'SECRET'
+
+    # Specify region for CloudWatch
+    region = 'ap-northeast-1'
+    # Specify namespace for easier monitoring
+    namespace = 'my-circleci-server'
+
+    # Name of metrics key to record
+    namepass = ['circle.run-queue.latency']
+    # Name of metrics field to record; key and field are delimited by an underscore (_)
+    fieldpass = ['mean']
+
+[[outputs.cloudwatch]]
+    # Outputs can be specified multiple times.
+
+    # Fill in these two variables if you need to access CloudWatch with an IAM User, not an IAM Role attached to your Services box
+    # access_key = 'ACCESS'
+    # secret_key = 'SECRET'
+
+    # Specify region for CloudWatch
+    region = 'ap-northeast-1'
+    # Specify namespace for easier monitoring
+    namespace = 'my-circleci-server'
+
+    # Name of metrics key to record
+    namepass = ['mem']
+    # Name of metrics field to record; key and field are delimited by an underscore (_)
+    fieldpass = ['available_percent']
+```
 
 === Configuring Custom Metrics
 
