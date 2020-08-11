@@ -12,8 +12,41 @@ en:
           link: 2.0/demo-apps/
         - name: Core Features
           link: 2.0/features/
-
-- name: Getting Started
+        - name: Security
+          link: 2.0/security/
+        - name: Migration
+          link: 2.0/migration-intro/
+        - name: FAQ
+          link: 2.0/faq/
+    - name: Examples
+      link: 2.0/examples-intro/
+      children:
+        - name: Examples Introduction
+          link: 2.0/examples-intro/
+        - name: Sample config.yml Files
+          link: 2.0/sample-config/
+        - name: Tutorials
+          link: 2.0/tutorials/
+        - name: Configuration Cookbook
+          link: 2.0/configuration-cookbook/
+        - name: Database Config Examples
+          link: 2.0/postgres-config/
+        - name: Example Public Repos
+          link: 2.0/example-configs/
+        - name: Deployment Examples
+          link: 2.0/deployment-examples/
+    - name: API
+      link: api/v2/
+      children:
+        - name: API v2 Reference
+          link: api/v2/
+        - name: API v2 Introduction
+          link: 2.0/api-intro/
+        - name: API v2 Developer's Guide
+          link: 2.0/api-developers-guide/
+        - name: Managing API tokens
+          link: 2.0/managing-api-tokens/
+- name: Get Started
   icon: docs/start.svg
   children:
     - name: Introduction
@@ -24,19 +57,29 @@ en:
         - name: What is CircleCI?
           link: 2.0/about-circleci/
         - name: Sign Up & Try CircleCI
-          link: 2.0/first-steps/
+          link: 2.0/first-steps
+        - name: Config Builder
+          link: config-builder
+    - name: Basic Project Setup
+      link: 2.0/hello-world/
+      children:
         - name: Hello World
           link: 2.0/hello-world/
-        - name: Hello World MacOS
+        - name: Hello World macOS
           link: 2.0/hello-world-macos/
         - name: Hello World Windows
           link: 2.0/hello-world-windows/
         - name: Get Started with the CLI
           link: 2.0/local-cli-getting-started/
-        - name: FAQ
-          link: 2.0/faq/
-        - name: Config Builder
-          link: config-builder
+    - name: Source Code Management
+      link: 2.0/gh-bb-integration/
+      children:
+        - name: GitHub and Bitbucket
+          link: 2.0/gh-bb-integration/
+        - name: Enabling GitHub Checks
+          link: 2.0/enable-checks/
+        - name: Open Source Projects
+          link: 2.0/oss/
     - name: Concepts
       link: 2.0/concepts/
       children:
@@ -50,48 +93,41 @@ en:
           link: 2.0/migrating-from-jenkins/
         - name: Security
           link: 2.0/security/
-    - name: Migration
-      link: 2.0/migration-intro/
-      children:
-        - name: Migration Introduction
-          link: 2.0/migration-intro/
-        - name: Migrating from AWS
-          link: 2.0/migrating-from-aws/
-        - name: Migrating from Azure
-          link: 2.0/migrating-from-azuredevops/
-        - name: Migrating from Buildkite
-          link: 2.0/migrating-from-buildkite/
-        - name: Migrating from GitHub
-          link: 2.0/migrating-from-github/
-        - name: Migrating from GitLab
-          link: 2.0/migrating-from-gitlab/
-        - name: Migrating from Jenkins
-          link: 2.0/migrating-from-jenkins/
-        - name: Migrating from TeamCity
-          link: 2.0/migrating-from-teamcity/
-        - name: Migrating from TravisCI
-          link: 2.0/migrating-from-travis/
-
-- name: Configuration
-  icon: docs/config.svg
+- name: Optimize Pipelines
+  icon: docs/container-nav-icon.png
   children:
-    - name: Introduction
-      link: 2.0/config-intro/
+    - name: Optimizations
+      link: 2.0/optimizations/
       children:
-        - name: Configuration Introduction
-          link: 2.0/config-intro/
-        - name: Config Reference Full
-          link: 2.0/configuration-reference/
-        - name: Config Reference 2.1
-          link: reference-2-1/
-        - name: Reusable Config Reference
-          link: 2.0/reusing-config/
-        - name: Config Builder
-          link: config-builder
-        - name: Writing YAML
-          link: 2.0/writing-yaml/
-        - name: Using the CircleCI CLI
-          link: 2.0/local-cli/
+        - name: Optimization Overview
+          link: 2.0/optimizations/
+        - name: Caching Dependencies
+          link: 2.0/caching/
+        - name: Running Tests in Parallel
+          link: 2.0/parallelism-faster-jobs/
+        - name: Docker Layer Caching
+          link: 2.0/docker-layer-caching/
+        - name: Optimizations Cookbook
+          link: 2.0/optimization-cookbook/
+- name: Set Up Images & Executors
+  icon: docs/builds.svg
+  children:
+    - name: EXECUTORS & IMAGES
+      link: 2.0/executor-intro/
+      children:
+        - name: Executor & Image Intro
+          link: 2.0/executor-intro/
+        - name: Choosing an Executor Type
+          link: 2.0/executor-types/
+        - name: CircleCI Docker Images
+          link: 2.0/circleci-images/
+        - name: Using Custom Images
+          link: 2.0/custom-images/
+        - name: Using Private Images
+          link: 2.0/private-images/
+- name: Reuse Config With Orbs
+  icon: docs/orbs-nav-icon.png
+  children:
     - name: Orbs
       link: 2.0/orb-intro/
       children:
@@ -116,36 +152,37 @@ en:
           link: 2.0/testing-orbs/
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
-    - name: Examples
-      link: 2.0/examples-intro/
+- name: Configure Jobs
+  icon: docs/config.svg
+  children:
+    - name: Introduction
+      link: 2.0/config-intro/
       children:
-        - name: Examples Introduction
-          link: 2.0/examples-intro/
-        - name: Sample config.yml Files
-          link: 2.0/sample-config/
-        - name: Tutorials
-          link: 2.0/tutorials/
-        - name: Configuration Cookbook
-          link: 2.0/configuration-cookbook/
-        - name: Database Config Examples
-          link: 2.0/postgres-config/
-        - name: Example Public Repos
-          link: 2.0/example-configs/
-        - name: Testing iOS Applications
-          link: 2.0/testing-ios/
-    - name: EXECUTORS & IMAGES
-      link: 2.0/executor-intro/
+        - name: Configuration Introduction
+          link: 2.0/config-intro/
+        - name: Config Reference Full
+          link: 2.0/configuration-reference/
+        - name: Config Reference 2.1
+          link: reference-2-1/
+        - name: Reusable Config Reference
+          link: 2.0/reusing-config/
+        - name: Config Builder
+          link: config-builder
+        - name: Writing YAML
+          link: 2.0/writing-yaml/
+        - name: Using the CircleCI CLI
+          link: 2.0/local-cli/
+    - name: Triggers
+      link: 2.0/triggers/
       children:
-        - name: Executor & Image Intro
-          link: 2.0/executor-intro/
-        - name: Choosing an Executor Type
-          link: 2.0/executor-types/
-        - name: CircleCI Docker Images
-          link: 2.0/circleci-images/
-        - name: Using Custom Images
-          link: 2.0/custom-images/
-        - name: Using Private Images
-          link: 2.0/private-images/
+        - name: Introduction to Triggers
+          link: 2.0/triggers/
+        - name: Skip and Cancel Builds
+          link: 2.0/skip-build/
+        - name: Trigger Jobs with the API
+          link: 2.0/api-job-trigger/
+        - name: Workflows
+          link: 2.0/workflows/
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
@@ -163,8 +200,22 @@ en:
           link: 2.0/building-docker-images/
         - name: Using Docker Compose
           link: 2.0/docker-compose/
-
-- name: Projects
+        - name: Storing Build Artifacts
+          link: 2.0/artifacts/
+    - name: Debugging and Testing
+      link: 2.0/examples-intro/
+      children:
+        - name: Debugging with SSH
+          link: 2.0/ssh-access-jobs/
+        - name: Debug Java Memory Errors
+          link: 2.0/java-oom/
+        - name: Collecting Test Metadata
+          link: 2.0/collect-test-data/
+        - name: Code Coverage Metrics
+          link: 2.0/code-coverage/
+        - name: Testing iOS Applications
+          link: 2.0/testing-ios/
+- name: Manage Projects
   icon: docs/project.svg
   children:
     - name: settings
@@ -172,16 +223,6 @@ en:
       children:
         - name: Settings Overview
           link: 2.0/settings/
-        - name: GitHub and Bitbucket
-          link: 2.0/gh-bb-integration/
-        - name: Enabling GitHub Checks
-          link: 2.0/enable-checks/
-        - name: Open Source Projects
-          link: 2.0/oss/
-        - name: Using Notifications
-          link: 2.0/notifications/
-        - name: Connect with JIRA
-          link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
         - name: Environment Variables
@@ -192,61 +233,29 @@ en:
           link: 2.0/build-processing/
         - name: iOS Code Signing
           link: 2.0/ios-codesigning/
-    - name: Optimizations
-      link: 2.0/optimizations/
-      children:
-        - name: Optimization Overview
-          link: 2.0/optimizations/
-        - name: Caching Dependencies
-          link: 2.0/caching/
-        - name: Running Tests in Parallel
-          link: 2.0/parallelism-faster-jobs/
-        - name: Docker Layer Caching
-          link: 2.0/docker-layer-caching/
-        - name: Optimizations Cookbook
-          link: 2.0/optimization-cookbook/
-
-- name: Pipelines
-  icon: docs/builds.svg
-  children:
     - name: Status
       link: 2.0/status/
       children:
         - name: Status Overview
-          link: 2.0/status/
+          link: 2.0/status
+        - name: Using Notifications
+          link: 2.0/notifications/
+        - name: Connect with JIRA
+          link: 2.0/jira-plugin/
         - name: Viewing Pipelines
           link: 2.0/pipelines/
+        - name: Adding Status Badges
+          link: 2.0/status-badges/
+        - name: Using Insights
+          link: 2.0/insights/
+    - name: Plans
+      link: 2.0/credits/
+      children:
         - name: Using Credits
           link: 2.0/credits/
         - name: Using Containers
           link: 2.0/containers/
-        - name: Adding Status Badges
-          link: 2.0/status-badges/
-        - name: Storing Build Artifacts
-          link: 2.0/artifacts/
-        - name: Debugging with SSH
-          link: 2.0/ssh-access-jobs/
-        - name: Debug Java Memory Errors
-          link: 2.0/java-oom/
-        - name: Collecting Test Metadata
-          link: 2.0/collect-test-data/
-        - name: Code Coverage Metrics
-          link: 2.0/code-coverage/
-        - name: Using Insights
-          link: 2.0/insights/
-    - name: Triggers
-      link: 2.0/triggers/
-      children:
-        - name: Introduction to Triggers
-          link: 2.0/triggers/
-        - name: Skip and Cancel Builds
-          link: 2.0/skip-build/
-        - name: Trigger Jobs with the API
-          link: 2.0/api-job-trigger/
-        - name: Workflows
-          link: 2.0/workflows/
-
-- name: Deployment
+- name: Configure Deployment
   icon: docs/deploy.svg
   children:
     - name: Configuring Deploys
@@ -264,7 +273,6 @@ en:
           link: 2.0/artifactory/
         - name: Publishing to packagecloud
           link: 2.0/packagecloud/
-
 - name: Reference
   icon: docs/reference.svg
   children:
@@ -275,13 +283,9 @@ en:
           link: reference-2-1/
         - name: API v2 Reference
           link: api/v2
-        - name: API v2 Introduction
-          link: 2.0/api-intro/
-        - name: API v2 Developer's Guide
-          link: 2.0/api-developers-guide
         - name: API v1.1 Reference
           link: api/
-        - name: Prebuilt Images
+        - name: Prebuilt Images Reference
           link: 2.0/circleci-images/
         - name: Glossary
           link: 2.0/glossary/
@@ -289,7 +293,6 @@ en:
           link: 2.0/help-and-support/
         - name: Archive of 1.0 Docs
           link: 2.0/archive/
-
 - name: Server Administration
   icon: docs/admin.svg
   children:
@@ -343,8 +346,6 @@ en:
           link: 2.0/usage-stats/
         - name: JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
-        - name: SSH Reruns
-          link: 2.0/ssh-server/
         - name: Maintenance
           link: 2.0/ops/
         - name: Backup and Recovery
@@ -397,7 +398,6 @@ en:
           link: 2.0/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
-
 ja:
 - name: Welcome
   i18n_name: ようこそ
