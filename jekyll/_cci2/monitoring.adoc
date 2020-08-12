@@ -24,6 +24,9 @@ Metrics are technical statistical data collected for monitoring and analytics pu
 
 Telegraf is the main component used for metrics collection in CircleCI Server. Telegraf is server software that brokers metrics data emitted by CircleCI services to data monitoring platforms such as Datadog or AWS CloudWatch.
 
+.Metrics
+image::metrics.png[Metrics]
+
 Metrics collection in CircleCI Server works as follows:
 
 * Each component of a Server installation sends metrics data to the telegraf container running on the Services box.
