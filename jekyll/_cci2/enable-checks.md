@@ -48,7 +48,7 @@ After the rerun is initiated, CircleCI reruns the workflow from beginning and re
 
 ## To Disable GitHub Checks for a Project
 
-To disable the CircleCI Check integration, navigate to the Organization Settings Page, then remove the repositories using CircleCI Checks as follows:
+To disable the CircleCI Check integration, navigate to the "Organization Settings" page, then remove the repositories using CircleCI Checks as follows:
 
 ### Steps
 
@@ -80,5 +80,4 @@ If you have enabled GitHub Checks in your GitHub repository, but the status chec
 Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a workflow job level.
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
-
 
