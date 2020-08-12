@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-ここでは、CircleCI の設定で GitHub Checks を有効化し、CircleCI Checks アプリがワークフロー ステータスを GitHub アプリに報告するのを許可する方法を説明します。
+This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app. This document applies only to the cloud-hosted version of CircleCI
 
 ## 概要
 
@@ -26,17 +26,18 @@ To use the CircleCI Check integration, you first need to navigate to the Org Set
 
 ### 前提条件
 
-- You must be using the cloud-hosted version of Circle CI.
+- You must be using the cloud-hosted version of CircleCI.
 - Your project must be using CircleCI 2.0 with [Workflows]({{ site.baseurl }}/2.0/workflows/).
 - You must be an Admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
 
 ### 手順
 
-1. CircleCI アプリのメイン メニューで [Settings (設定)] タブをクリックします。
+1. In the CircleCI sidebar, select "Organization Settings"
 2. [VCS] を選択します。 
-3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/checks_setting.png)
-4. Checks を利用するリポジトリを選択し、[Install (インストール)] ボタンをクリックします。 ![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/checks_install.png)  
-    インストールが完了すると、GitHub の [Checks] タブにワークフローの実行ステータス情報が表示されます。 
+3. Click the **Manage GitHub Checks** button. ![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/screen_github_checks_new_ui.png)
+4. Select the repositories that should utilize checks and click the Install button. 
+
+After installation completes, the Checks tab in GitHub will be populated with workflow run status information.
 
 ## Checks によるステータス レポート
 
@@ -48,17 +49,17 @@ After the rerun is initiated, CircleCI reruns the workflow from beginning and re
 
 ## プロジェクトの GitHub Checks を無効化する方法
 
-To disable the CircleCI Check integration, navigate to the Org Settings Page, then remove the repositories using CircleCI Checks as follows:
+To disable the CircleCI Check integration, navigate to the "Organization Settings" page, then remove the repositories using CircleCI Checks as follows:
 
 ### 手順
 
-1. CircleCI アプリのメイン メニューで [Settings (設定)] タブをクリックします。
+1. Click the "Organization Settings" option in the CircleCI sidebar
 2. [VCS] を選択します。 
-3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。 [Update CircleCI Checks repository access (CircleCI Checks のリポジト リアクセスの更新)] ページが表示されます。 ![CircleCI の VCS 設定ページ]({{ site.baseurl }}/assets/img/docs/checks_update.png)
+3. [Manage GitHub Checks (GitHub Checks を管理)] ボタンをクリックします。 [Update CircleCI Checks repository access (CircleCI Checks のリポジト リアクセスの更新)] ページが表示されます。 
 4. Checks インテグレーションをアンインストールするリポジトリの選択を解除します。
 5. プロジェクトでステータスの設定を確認します。[CircleCI] > [Project Settings (プロジェクト設定)] > [Advanced Settings (詳細設定)] に移動し、[GitHub Status Updates (GitHub ステータス アップデート)]`` が `on` に設定されていることを確認します。
 
-![Re-enable GitHub Status]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
+![CircleCI VCS Settings Page]({{ site.baseurl }}/assets/img/docs/screen_github_checks_disable_new_ui.png)
 
 ## 組織の Checks をアンインストールする方法
 
