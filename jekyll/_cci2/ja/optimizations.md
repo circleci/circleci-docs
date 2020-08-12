@@ -138,7 +138,7 @@ jobs:
 
 ## Docker レイヤー キャッシュ
 
-**メモ:** Docker レイヤー キャッシュ (DLC) を使用するには、その機能を含むプランが必要です。 コンテナ ベースのプランをお使いの場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)して、アカウントの DLC を有効にしてください。
+**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrate to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
 DLC は、ビルド内の Docker イメージの*ビルド時間*を短縮するのに役立つ機能です。 日常的な CI/CD プロセスの中で頻繁に Docker イメージをビルドする場合に便利に活用できます。
 
