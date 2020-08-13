@@ -26,7 +26,8 @@
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 			<article>
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
-        {% if page.untranslated %}
+				{% if page.foo == true %}<h2>!!!!!</h2>{% endif %}
+		{% if page.untranslated %}
           {% include translation_in_progress.html %}
         {% endif %}
 				{{ content }}
