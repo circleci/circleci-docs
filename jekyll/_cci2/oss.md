@@ -89,7 +89,7 @@ repository-id of the originator of the fork PR to identify the cache.
   stated, that PRs in the master repo share a cache with master).
 - Two PRs in different Fork Repos will have different caches.
 - enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
-  will enable cache sharing between origin and all forked builds.
+  will enable cache sharing between the original repo and all forked builds.
 
 Currently there is no pre-population of caches because this optimization hasn't
 made it to the top of the priority list yet.

@@ -64,7 +64,7 @@ contributors, please make note of the following:
   stated, that PRs in the master repo share a cache with master).
 - Two PRs in different Fork Repos will have different caches.
 - enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
-  will enable cache sharing between origin and all forked builds.
+  will enable cache sharing between the original repo and all forked builds.
 
 
 ## Caching Libraries
