@@ -24,9 +24,18 @@
 			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
 			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
+
+
 			<article>
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
-				{% if page.version == Server %}{% include server-219-badge.html %}{% endif %}
+
+        {% if page.version %}
+          This document is applicable to the following versions of CircleCI:
+          {% for version in page.version %}
+            <span class="badge badge-primary"> {{ version }} </span>
+          {% endfor %}
+        {% endif %}
+
 		{% if page.untranslated %}
           {% include translation_in_progress.html %}
         {% endif %}
