@@ -81,8 +81,9 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 
 Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
 
-- 同じフォーク リポジトリからの PR は、キャッシュを共有します (前述のように、これには master リポジトリ内の PR と master によるキャッシュの共有が含まれます)。
+- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master).
 - それぞれ異なるフォーク リポジトリ内にある 2 つの PR は、別々のキャッシュを持ちます。
+- enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars) will enable cache sharing between the original repo and all forked builds.
 
 Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
 
