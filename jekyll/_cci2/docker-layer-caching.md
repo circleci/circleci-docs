@@ -6,8 +6,8 @@ description: "How to reuse unchanged cache layers in images you build to reduce 
 categories: [optimization]
 order: 70
 version: 
- - "Cloud"
- - "Server 2.19"
+ - Cloud
+ - Server 2.19
 ---
 
 Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
