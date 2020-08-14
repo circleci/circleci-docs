@@ -15,6 +15,8 @@ This guide is intended to help system administrators of CircleCI Server installa
 
 == Lifecycle Policy Configuration for S3 Buckets
 
+NOTE: Scroll table to the right to view all content.
+
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
@@ -28,7 +30,7 @@ This guide is intended to help system administrators of CircleCI Server installa
 | (null) 
 | 30 
 | General artifacts (deliverables from `store_artifacts` and `store_test_results`) 
-| Artifacts will disappear from the list of artifacts in job results. URLs will return 404. |
+| Artifacts will disappear from the list of artifacts in job results. URLs will return 404. 
 
 | `artifacts` 
 | `"circleci.object_type" === "project.cache"` 
