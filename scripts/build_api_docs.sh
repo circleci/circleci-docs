@@ -12,6 +12,8 @@ build_api_v1() {
     echo "Output bundled."
     cp -R build/* /tmp/workspace/api/v1
     echo "Output build moved to /tmp/workspace/api/v1"
+    cp -R /tmp/workspace/api/v1/* /tmp/workspace/api
+    echo "Also - Move /tmp/workspace/api/v1 so default root (api/) displays api v1."
 }
 
 # Fetches the latest api spec and runs widdershins with it.
@@ -23,8 +25,6 @@ build_api_v2() {
     bundle exec middleman build --clean --verbose
     cp -R build/* /tmp/workspace/api/v2
     echo "Output build moved to /tmp/workspace/api/v2"
-    cp -R /tmp/workspace/api/v2/* /tmp/workspace/api
-    echo "Also - Move /tmp/workspace/api/v2 so default root (api/) displays latest api."
 }
 
 # build the Config Reference from slate.
