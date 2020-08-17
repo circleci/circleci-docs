@@ -11,7 +11,9 @@
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
-This guide is intended to help system administrators of CircleCI Server installations on AWS better understand how S3 storage is used. This can help to cut compute resource costs and avoid issues for service users when removing resources. S3 Lifecycle policies are not configured automatically. The figures provided in this guide are examples to help you create a lifecycle policy for your installation. For more information on the steps required to add policy rules, see the https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide].
+This guide is intended to help system administrators of CircleCI Server installations on AWS better understand how S3 storage is used. This can help to cut compute resource costs and avoid issues for service users when removing resources. 
+
+In CircleCI Server, S3 Lifecycle policies are not configured automatically. The figures provided in this guide are examples to help you create a lifecycle policy for your installation. For more information on the steps required to add policy rules, see the https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide].
 
 == Example Lifecycle Policy Configuration for S3 Buckets
 
