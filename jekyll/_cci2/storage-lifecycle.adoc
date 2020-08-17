@@ -24,7 +24,7 @@ NOTE: Scroll table to the right to view all content.
 |===
 | **Prefix**
 | **Tag**
-| **Days**
+| **Suggested Number of Days**
 | **Description of files**
 | **Side effects of deletion**
 
