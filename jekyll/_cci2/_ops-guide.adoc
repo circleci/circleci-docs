@@ -59,4 +59,6 @@ include::customizations.adoc[]
 
 include::architecture.adoc[]
 
+include::storage-lifecycle.adoc[]
+
 :leveloffset: -1
