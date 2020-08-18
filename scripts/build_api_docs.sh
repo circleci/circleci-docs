@@ -16,9 +16,11 @@ build_api_v1() {
     echo "Also - Move /tmp/workspace/api/v1 so default root (api/) displays api v1."
 }
 
-# Fetches the latest api spec
-# TODO: merges in custom code samples if needed
-# runs redoc-cli to build api documentation.
+# We build our API v2 documentation from an openAPI spec. After fetching the spec we:
+# a) augment the spec using "snippet-enricher-cli" to add code-samples to the spec.
+# b) TODO: merge in any custom code samples we need to alter, using jq.
+# b) run the spec through redoc-cli, outputting a single html file.
+# c) move the file into our temporary workspace, created in .circleci/config.yml
 build_api_v2() {
     echo "Building API v2 documentation with Redoc"
     cd src-api;
