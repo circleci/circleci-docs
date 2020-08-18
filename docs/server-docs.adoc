@@ -138,7 +138,7 @@ docs@circleci.com                                                               
 
 == Liquid Tags and Other Content you Don't Want in the PDFs
 
-Liquid, used for the Jekyll content, is not rendered during the PDF conversion process. If `{% raw %}` tags etc. are used in Server docs pages they need to be removed from the PDF content. This can be done using the https://asciidoctor.org/docs/user-manual/#ifndef-directive[`ifndef` directive], as follows:
+Liquid, used for the Jekyll content, is not rendered during the PDF conversion process. If `{% raw %}` tags etc. are used in Server docs pages they need to be removed from the PDF content, so that they don't appear as text in the PDF. This can be done using the https://asciidoctor.org/docs/user-manual/#ifndef-directive[`ifndef` directive], as follows:
 
 ```
 \ifndef::pdf[{% raw %}]
