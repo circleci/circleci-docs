@@ -207,12 +207,12 @@ jobs:
       - ruby-deps:
           dir: src-api
       - restore_cache:
-          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
       - run:
           name: Install Node dependencies
           command: cd src-api; npm install
       - save_cache:
-          key: circleci-docs-v1-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
+          key: circleci-docs-v2-{{ .Branch }}-{{ checksum "src-api/package-lock.json"}}
           paths:
             - src-api/node_modules
       - run:
