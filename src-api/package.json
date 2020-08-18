@@ -16,6 +16,8 @@
     "widdershins": "^3.6.7"
   },
   "dependencies": {
-    "redoc-cli": "^0.9.10"
+    "openapi-snippet": "^0.9.1",
+    "redoc-cli": "^0.9.10",
+    "snippet-enricher-cli": "0.0.8"
   }
 }

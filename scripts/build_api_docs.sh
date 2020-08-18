@@ -21,13 +21,15 @@ build_api_v1() {
 # runs redoc-cli to build api documentation.
 build_api_v2() {
     echo "Building API v2 documentation with Redoc"
-    cd src-api; # rm -r build; rm source/index.html.md
+    cd src-api;
+    echo "Fetching OpenAPI spec."
     curl https://circleci.com/api/v2/openapi.json > openapi.json
-    redoc-cli bundle openapi.json
-    # node node_modules/widdershins/widdershins.js --environment widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
-    # bundle exec middleman build --clean --verbose
-    cp -R build/* /tmp/workspace/api/v2
-    echo "Output build moved to /tmp/workspace/api/v2"
+    echo "Adding code samples to openapi.json spec."
+    ./node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl,ruby_native,php_curl" --input=openapi.json  > openapi-with-examples.json
+    echo "Bundling with redoc cli."
+    redoc-cli bundle openapi-with-examples.json
+    echop "Moving build redoc file to api/v2"
+    cp redoc-static.html /tmp/workspace/api/v2
 }
 
 # build the Config Reference from slate.
