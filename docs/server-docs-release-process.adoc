@@ -15,7 +15,7 @@
 * Check the comment is `FINAL` in the build script once all changes are made.
 * Commit and push your changes up to open a PR. New PDFs will be built in the job `build_server_pdfs` and the new docs appear as artifacts.
 * Locally, rename the current PDFs with the previous version name so they do not get overridden.
-* Download new PDF versions to the `jekyll/_cci2` folder. The
+* Download the new PDF versions to the `jekyll/_cci2` folder.
 * Add a new PDF section for the version in `jekyll/_data/sidenav.yml`.
 
 == Patch Release
