@@ -30,9 +30,9 @@
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
 
         {% if page.version %}
-          This document is applicable to the following versions of CircleCI:
+          <i>This document is applicable to the following versions of CircleCI:</i>
           {% for version in page.version %}
-            <span class="badge badge-primary"> <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png"> </span>
+            <span class="badge badge-primary"> <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="20"> </span>
           {% endfor %}
         {% endif %}
 
