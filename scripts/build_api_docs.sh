@@ -30,8 +30,10 @@ build_api_v2() {
     ./node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl,ruby_native,php_curl" --input=openapi.json  > openapi-with-examples.json
     echo "Bundling with redoc cli."
     ./node_modules/.bin/redoc-cli bundle openapi-with-examples.json
+
     echo "Moving build redoc file to api/v2"
-    cp redoc-static.html /tmp/workspace/api/v2
+    mv redoc-static.html index.html
+    cp index.html /tmp/workspace/api/v2
 }
 
 # build the Config Reference from slate.
