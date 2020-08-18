@@ -126,4 +126,12 @@ docs@circleci.com                                                               
 :idprefix:                                                                       // by default IDs generated from section titles start with _ ... this removes it
 :idseparator: -                                                                  // use - between words for IDs generated from section titles
 :sectanchors:                                                                    // adds anchors in front of section titles 
-:autofit-option:                                                                 // auto-fit code blocks to the page width                                                  
+:autofit-option:                                                                 // auto-fit code blocks to the page width  
+```     
+
+== Prevent Heading from Appearing in TOC
+
+```
+[discrete]
+== Heading
+```

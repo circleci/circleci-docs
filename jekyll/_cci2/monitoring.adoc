@@ -40,11 +40,11 @@ It is worth noting that Telegraf can accept multiple input and output types at t
 
 Review your metrics configuration file using the following command:
 
-{% raw %}
+ifndef::pdf[{% raw %}]
 ```sh
 sudo docker inspect --format='{{range .Mounts}}{{println .Source "->" .Destination}}{{end}}' telegraf | grep telegraf.conf | awk '{ print $1 }' | xargs cat
 ```
-{% endraw %}
+ifndef::pdf[{% endraw %}]
 
 There are four notable blocks in the file (some blocks might not be there depending on your configuration in the Management Console):
 
