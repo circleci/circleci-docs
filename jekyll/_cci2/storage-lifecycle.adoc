@@ -17,7 +17,7 @@ In CircleCI Server, S3 Lifecycle policies are not configured automatically. The 
 
 == Example Lifecycle Policy Configuration for S3 Buckets
 
-NOTE: Scroll table to the right to view all content.
+ifndef::pdf[NOTE: Scroll table to the right to view all content.]
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
