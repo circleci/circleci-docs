@@ -146,6 +146,4 @@ code example
 \ifndef::pdf[{% endraw %}]
 ```
 
-The script that builds the PDFs applies an attribute called `pdf` during the build - so any content that uses `ifndef::pdf` will **not** be included in the generated PDFs. For further information on usage and the inverse `ifdef::pdf` see the https://asciidoctor.org/docs/user-manual/#conditional-preprocessor-directives[Conditional Preprocessor Directives] section of the Asciidoctor user manual.
-
-This same process can be used to create any type of content for just one platform, rememberi
+The script that builds the PDFs applies an attribute called `pdf` during the build - so any content that uses `ifndef::pdf` will **not** be included in the generated PDFs. For further information on usage and the inverse `ifdef::pdf` see the https://asciidoctor.org/docs/user-manual/#conditional-preprocessor-directives[Conditional Preprocessor Directives] section of the Asciidoctor user manual. **This same process can be used to create any type of content to appear on just one of our platforms.**
