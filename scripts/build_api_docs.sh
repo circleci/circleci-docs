@@ -16,13 +16,16 @@ build_api_v1() {
     echo "Also - Move /tmp/workspace/api/v1 so default root (api/) displays api v1."
 }
 
-# Fetches the latest api spec and runs widdershins with it.
+# Fetches the latest api spec
+# TODO: merges in custom code samples if needed
+# runs redoc-cli to build api documentation.
 build_api_v2() {
-    echo "Building API v2 documentation with Slate and Widdershins"
-    cd src-api; rm -r build; rm source/index.html.md
+    echo "Building API v2 documentation with Redoc"
+    cd src-api; # rm -r build; rm source/index.html.md
     curl https://circleci.com/api/v2/openapi.json > openapi.json
-    node node_modules/widdershins/widdershins.js --environment widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
-    bundle exec middleman build --clean --verbose
+    redoc-cli bundle openapi.json
+    # node node_modules/widdershins/widdershins.js --environment widdershins.apiv2.yml --summary openapi.json -o source/index.html.md
+    # bundle exec middleman build --clean --verbose
     cp -R build/* /tmp/workspace/api/v2
     echo "Output build moved to /tmp/workspace/api/v2"
 }

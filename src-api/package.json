@@ -14,5 +14,8 @@
   "license": "ISC",
   "devDependencies": {
     "widdershins": "^3.6.7"
+  },
+  "dependencies": {
+    "redoc-cli": "^0.9.10"
   }
 }
