@@ -85,6 +85,8 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - project.env_var.create
 - project.env_var.delete
 - project.settings.update
+- project.ssh_key.create
+- project.ssh_key.delete
 - user.create
 - user.logged_in
 - user.logged_out
