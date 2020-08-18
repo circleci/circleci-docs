@@ -32,7 +32,7 @@ The installation process assumes that the following utilities are installed on t
 
 Installation also requires permissions to create a user, and create directories under ```/opt```.
 
-===Job Running Requirements
+=== Job Running Requirements
 
 Running jobs requires that the following tools are available on the machine:
 
@@ -121,30 +121,42 @@ This value allows you to control the default working directory used by each job.
 
 === Create the circleci user & working directory
 
-These values will be used when executing task-agent.
+These values will be used when executing task-agent:
 
-```id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci```
+```sh
+id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
+```
 
-```mkdir -p /opt/circleci/workdir```
+```sh
+mkdir -p /opt/circleci/workdir
+```
 
-```chown -R circleci /opt/circleci/workdir```
+```sh
+chown -R circleci /opt/circleci/workdir
+```
 
 === Create the Launch script
 
 This wrapper script will be used by Launch Agent to execute the Task Agent, while ensuring appropriate sandboxing and a clean shutdown.
 Create /opt/circleci/launch-task owned by root with permissions 755
 
-```#!/bin/bash```
+```sh
+#!/bin/bash
+```
 
-```set -euo pipefail```
+```sh
+set -euo pipefail
+```
 
-```## This script launches the build-agent using systemd-run in order to create a cgroup which will capture all child processes so they're cleaned up correctly on exit.```
+This script launches the build-agent using ```systemd-run`` in order to create a ```cgroup``` which will capture all child processes so they are cleaned up correctly on exit.
 
-```# The user to run the build-agent as - must be numeric USER_ID=$(id -u circleci)```
+* The user to run the build-agent as - must be numeric USER_ID=$(id -u circleci)
 
-```# Give the transient systemd unit an inteligible name unit="circleci-$CIRCLECI_LAUNCH_ID"```
+* Give the transient ```systemd``` unit an inteligible name unit="circleci-$CIRCLECI_LAUNCH_ID"
 
-```# When this process exits, tell the systemd unit to shut down
+* When this process exits, tell the ```systemd``` unit to shut down:
+
+```sh
 abort() {
   systemctl stop "$unit"
 }
@@ -167,32 +179,32 @@ The wait times in the environment variables should be used to tune how long you 
 #!/bin/bash
 ``
 
-* Perform an orderly shutdown of agents
+* Perform an orderly shutdown of agents:
 
 ```sh
 set -uo pipefail
 ```
 
-* How long to wait for draining to complete
+* Specify how long to wait for draining to complete:
 
 ```sh
 DRAIN_TIMEOUT=5m
 ```
 
-* How long to wait for cancellation to complete
+* Specify how long to wait for cancellation to complete:
 
 ```sh
 CANCEL_TIMEOUT=1m
 ``
 
-* First send a SIGINT, this tells the launch-agent to stop accepting new tasks
+* First send a SIGINT, this tells the launch-agent to stop accepting new tasks:
 
 ```sh
 kill -s SIGINT $MAINPID
 timeout $DRAIN_TIMEOUT tail --pid=$MAINPID -f /dev/null
 ```
 
-* If the process is still running, then SIGTERM to cancel the running task
+* If the process is still running, then execute the SIGTERM command to cancel the running task:
 
 ```shif [ $? -eq 124 ]; then
     kill -SIGTERM $MAINPID
@@ -200,7 +212,7 @@ timeout $DRAIN_TIMEOUT tail --pid=$MAINPID -f /dev/null
 fi
 ```
 
-* If the process is _still_ running at this point, we'll leave ```systemd``` to perform a SIGKILL and forcibly shut down the process
+* If the process is _still_ running at this point, leave ```systemd``` to perform a SIGKILL and forcibly shut down the process:
 
 == Starting Launch Agent with Systemd
 
