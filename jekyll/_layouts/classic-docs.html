@@ -29,11 +29,16 @@
 			<article>
 				{% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
 
-        {% if page.version %}
+		{% if page.version %}
+		<div class="server-version-wrapper">
           <i>This document is applicable to the following versions of CircleCI:</i>
           {% for version in page.version %}
-			<span class="badge badge-primary"> <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24"> </span>
-          {% endfor %}
+			<span class="badge badge-primary"> 
+				<div class="server-version-badge">{{ version }}</div>
+				<!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
+			</span>
+		  {% endfor %}
+		  </div>
         {% endif %}
 
 		{% if page.untranslated %}

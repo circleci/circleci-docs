@@ -391,6 +391,23 @@ pre {
 	color: #4e9eb3; 
 }
 
+.server-version-badge {
+	background-color: #171717;
+	padding: 2px 8px;
+	border-radius: 8px;
+	color: #efefef;
+	margin: 0px 6px;
+	font-weight: bold;
+	min-width: 110px;
+	text-align: center;
+}
+
+.server-version-wrapper {
+	display: flex;
+	align-items: center;
+	padding: 10px 0px 25px 0px;
+}
+
 /* Shows when screen > $screen-md, hides when smaller */
 .table-migrate-desktop td, .table-migrate-desktop th {
   @media screen and (min-width: $screen-md) {
