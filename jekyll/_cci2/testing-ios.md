@@ -39,7 +39,7 @@ To read about our customer support policy regarding beta images, please check ou
 
  Config   | Xcode Version                   | macOS Version | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|-------------------|--------------
- `12.0.0` | Xcode 12.0 Beta 5 (12A8189h) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3499/index.html) | [Release Notes]() |
+ `12.0.0` | Xcode 12.0 Beta 5 (12A8189h) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3499/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-beta-5-released/37157) |
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)
  `11.5.0` | Xcode 11.5 GM (11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)
  `11.4.1` | Xcode 11.4.1 (11E503a)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)
@@ -215,7 +215,7 @@ As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible 
 
 This allows for greater compatibility and reliability out of the box with gems moving forward. For the vast majority of users using Ruby 2.7 will feel transparent as common gems, such as Fastlane, run without any issues.
 
-To switch to another Ruby version see [our chruby documentation]({{ site.baseurl }}/2.0/testing-ios/#images-using-macos-1015-xcode-112-and-later), or to revert back to the system Ruby, add the following to the beginning of your job:
+To switch to another Ruby version see [our chruby documentation](#images-using-macos-1015-xcode-112-and-later), or to revert back to the system Ruby, add the following to the beginning of your job:
 
 ```yaml
 # ...
