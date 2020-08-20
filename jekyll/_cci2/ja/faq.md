@@ -177,7 +177,7 @@ jobs:
 
 ### 単一のワークフロー内で Linux 環境と Mac 環境の両方のジョブを実行できるような機能をサポートする予定はありますか?
 
-{:.no_toc} 既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
+{:.no_toc} 既にサポートしています。 See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) document.
 
 ### `config.yml` を複数のファイルに分割することは可能ですか?
 
