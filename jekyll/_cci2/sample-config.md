@@ -32,13 +32,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -59,13 +59,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -94,13 +94,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -122,13 +122,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
