@@ -1657,7 +1657,7 @@ Certain dynamic configuration features accept logic statements as arguments. Log
 Type | Arguments | `true` if | Example
 ---|---|---|---
 YAML literal | None | is truthy | `true`/`42`/`"a string"`
-YAML alias | ? | ? | &my-alias
+YAML alias | None | Resolves to a truthy value | *my-alias
 [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values) | None | resolves to a truthy value | `<< pipeline.git.branch >>`
 [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None | resolves to a truthy value | `<< pipeline.parameters.my-parameter >>`
 and | N logic statements | all arguments are truthy | `and: [ true, true, false ]`
