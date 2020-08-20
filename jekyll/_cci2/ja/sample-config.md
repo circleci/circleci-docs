@@ -33,13 +33,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -62,13 +62,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -98,13 +98,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -128,13 +128,13 @@ jobs:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the build job"
   test:
     docker:
       - image: circleci/<language>:<version TAG>
     steps:
       - checkout
-      - run: my-command
+      - run: echo "this is the test job"
 
 # Orchestrate our job run sequence
 workflows:
@@ -395,12 +395,157 @@ This example shows a sequential workflow with the `test` job configured to run o
 
 ## ファンイン・ファンアウト ワークフローの構成例
 
-Following is a sample configuration for a Fan-in/Fan-out workflow. Refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
+Below are two sample configurations for a Fan-in/Fan-out workflow.
 
-Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
+For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
+For the Cloud/`2.1` example, see the following workflow map:
+
+![Fan-in-out]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
+
+{:.tab.fan-in-our.Cloud}
 {% raw %}
+```yaml
+version: 2.1
 
+orbs:
+    docker: circleci/docker@1.0.1
+
+jobs:
+    prepare-dependencies:
+        docker:
+
+            - image: node:current-alpine
+        steps:
+            - checkout
+            - run:
+                  name: Compute version number
+                  command: echo "0.0.${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}" | tee version.txt
+            - restore_cache:
+                  keys:
+                      - yarn-deps-{{ checksum "yarn.lock" }}
+                      - yarn-deps
+            - run:
+                  name: yarn install
+                  command: yarn install
+            - save_cache:
+                  paths:
+                      - node_modules
+                  key: yarn-deps-{{ checksum "yarn.lock" }}-{{ epoch }}
+            - store_artifacts:
+                  path: yarn.lock
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-production:
+        docker:
+
+            - image: node:current-alpine
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Production build
+                  command: |
+                      export __BUILD_VERSION="$(cat version.txt)"
+                      yarn build
+            - store_artifacts:
+                  path: dist/server.js
+            - persist_to_workspace:
+                  root: .
+                  paths:
+                      - .
+
+    build-docker-image:
+        machine:
+            image: ubuntu-1604:202004-01
+        steps:
+
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/build:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: $__BUILD_VERSION
+                  registry: $DOCKER_REGISTRY
+
+    test:
+        docker:
+
+            - image: node:current-alpine
+        parallelism: 2
+        steps:
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Run tests
+                  command: |
+                      circleci tests glob '**/*.test.ts' | circleci tests split --split-by timings | xargs yarn test:ci
+            - store_artifacts:
+                  path: test-results
+            - store_test_results:
+                  path: test-results
+
+    deploy-docker-image:
+        machine:
+            image: ubuntu-1604:202004-01
+        steps:
+
+            - attach_workspace:
+                  at: .
+            - run:
+                  name: Setup __BUILD_VERSION envvar
+                  command: |
+                      echo "export __BUILD_VERSION=\"$(cat version.txt)\"" >> $BASH_ENV
+            - docker/check:
+                  registry: $DOCKER_REGISTRY
+            - docker/pull:
+                  images: $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION
+            - run:
+                  name: Tag the image as latest
+                  command: docker tag $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:$__BUILD_VERSION $DOCKER_REGISTRY/$DOCKER_IMAGE_NAME:latest
+            - docker/push:
+                  image: $DOCKER_IMAGE_NAME
+                  tag: latest
+                  registry: $DOCKER_REGISTRY
+
+workflows:
+    version: 2
+    build-test-deploy:
+        jobs:
+
+            - prepare-dependencies
+            - build-production:
+                  requires:
+                      - prepare-dependencies
+            - build-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-production
+            - test:
+                  requires:
+                      - prepare-dependencies
+            - deploy-docker-image:
+                  context: docker-hub
+                  requires:
+                      - build-docker-image
+                      - test
+```
+{% endraw %}
+
+{:.tab.fan-in-our.Server}
+{% raw %}
 ```yaml
 version: 2.0
 
@@ -511,15 +656,292 @@ workflows:
             - rake_test
             - precompile_assets
 ```
-
 {% endraw %}
 
-## 複数の Executor タイプを含む構成例 (macOS と Docker)
+**Note:** a job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
-It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+## Sample Configuration with Multiple Executor Types
 
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow.
+
+In `Example-1` each push will build and test the project on Linux, Windows and macOS.
+
+In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+
+{:.tab.multiple-executors.Example-1}
+```yaml
+version: 2.1
+
+orbs:
+  github-release: haskell-works/github-release@1.3.3
+
+parameters:
+  src-repo-url:
+    type: string
+    default: https://github.com/esnet/iperf.git
+  branch-name:
+    type: string
+    default: "3.8.1"
+  common-build-params:
+    type: string
+    default: "--disable-shared --disable-static"
+
+jobs:
+  build-linux:
+    docker:
+
+      - image: archlinux/base
+    parameters:
+      label:
+        type: string
+        default: iperf3-linux
+    steps:
+      - run:
+          name: Install dependencies
+          command: pacman -Syu --noconfirm openssl git gcc make awk tar
+      - run:
+          name: Clone iperf3
+          command: git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
+      - run:
+          name: Build iperf3
+          working_directory: iperf
+          command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
+            IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
+            ./configure --prefix=$IPERF3_MAKE_PREFIX << pipeline.parameters.common-build-params >>
+            make
+            mkdir -p $IPERF3_MAKE_PREFIX
+            make install
+      - run:
+          name: Create a tarball
+          command: tar -cJf << parameters.label >>.tar.xz << parameters.label >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.tar.xz
+      - store_artifacts:
+          path: << parameters.label >>.tar.xz
+
+  build-windows:
+    machine:
+      image: windows-server-2019-vs2019:stable
+      shell: powershell.exe
+    resource_class: windows.medium
+    parameters:
+      label:
+        type: string
+        default: iperf3-cygwin64
+    steps:
+
+      - run:
+          name: Download Cygwin installer
+          shell: bash.exe
+          command: |
+            curl -sSJOL https://cygwin.com/setup-x86_64.exe
+      - run:
+          name: Install Cygwin and required packages
+          command: .\setup-x86_64.exe -q -s https://mirrors.kernel.org/sourceware/cygwin/ -P libssl-devel,git,gcc-core,make
+      - run:
+          name: Build iperf3 with Cygwin
+          shell: C:\\cygwin64\\bin\\bash.exe --login -eo pipefail
+          command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
+            IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
+            cd $CIRCLE_WORKING_DIRECTORY
+            git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
+            cd iperf
+            ./configure --prefix=$IPERF3_MAKE_PREFIX << pipeline.parameters.common-build-params >>
+            make
+            mkdir -p $IPERF3_MAKE_PREFIX
+            make install
+            cp /usr/bin/cygwin1.dll /usr/bin/cygcrypto-1.1.dll /usr/bin/cygz.dll -t $IPERF3_MAKE_PREFIX/bin
+      - run:
+          name: Create a Zip file
+          command: |
+            $ProgressPreference = "SilentlyContinue"
+            Compress-Archive .\\<< parameters.label >> .\\<< parameters.label >>.zip
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.zip
+      - store_artifacts:
+          path: << parameters.label >>.zip
+
+  build-macos:
+    macos:
+      xcode: 11.5.0
+    parameters:
+      label:
+        type: string
+        default: iperf3-macos
+    steps:
+
+      - run:
+          name: Clone iperf3
+          command: git clone << pipeline.parameters.src-repo-url >> -b << pipeline.parameters.branch-name >>
+      - run:
+          name: Build iperf3
+          working_directory: iperf
+          command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
+            IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
+            ./configure --prefix=$IPERF3_MAKE_PREFIX --with-openssl=$(brew --prefix openssl) << pipeline.parameters.common-build-params >>
+            make
+            mkdir -p $IPERF3_MAKE_PREFIX
+            make install
+            # Postruns
+            cd $IPERF3_MAKE_PREFIX/bin
+            # Copy linked OpenSSL libraris to the current directory
+            # and tell the linker to refer to them
+            otool -L iperf3 | grep openssl | awk '{ print $1 }' | while read dylib
+            do
+              name=$(basename $dylib)
+              cp $dylib ./
+              chmod u+w $name
+              install_name_tool -change $dylib @executable_path/$name iperf3
+            done
+            # Modify libssl as well
+            otool -L libssl.1.1.dylib | grep openssl | awk '{ print $1 }' | while read dylib
+            do
+              install_name_tool -change $dylib @executable_path/$(basename $dylib) libssl.1.1.dylib
+            done
+      - run:
+          name: Create a Zip file
+          command: zip -r << parameters.label >>.zip << parameters.label >>
+      - persist_to_workspace:
+          root: .
+          paths:
+            - << parameters.label >>.zip
+      - store_artifacts:
+          path: << parameters.label >>.zip
+
+  test-linux:
+    docker:
+
+      - image: cimg/base:stable
+    parameters:
+      label:
+        type: string
+        default: iperf3-linux
+    steps:
+      - attach_workspace:
+          at: ./
+      - run:
+          name: Extract << parameters.label >>.tar.xz
+          command: tar -xf << parameters.label >>.tar.xz
+      - run:
+          name: Test executable
+          command: << parameters.label >>/bin/iperf3 -v
+      - run:
+          name: Run as a server
+          command: << parameters.label >>/bin/iperf3 -s
+          background: true
+      - run:
+          name: Run as a client
+          command: << parameters.label >>/bin/iperf3 -c localhost -R
+
+  test-windows:
+    machine:
+      image: windows-server-2019-vs2019:stable
+      shell: powershell.exe
+    resource_class: windows.medium
+    parameters:
+      label:
+        type: string
+        default: iperf3-cygwin64
+    steps:
+
+      - attach_workspace:
+          at: .
+      - run:
+          name: Extract iperf3-cygwin64.zip
+          command: |
+            $ProgressPreference = "SilentlyContinue"
+            Expand-Archive .\\<< parameters.label >>.zip .
+      - run:
+          name: Test executable
+          command: .\\<< parameters.label >>\bin\iperf3.exe -v
+      - run:
+          name: Run as a server
+          command: .\\<< parameters.label >>\bin\iperf3.exe -s
+          background: true
+      - run:
+          name: Run as a client
+          command: .\\<< parameters.label >>\bin\iperf3.exe -c localhost -R
+
+  test-macos:
+    macos:
+      xcode: 11.5.0
+    parameters:
+      label:
+        type: string
+        default: iperf3-macos
+    steps:
+
+      - attach_workspace:
+          at: .
+      - run:
+          name: Uninstall pre-installed OpenSSL
+          command: brew uninstall --ignore-dependencies openssl
+      - run:
+          name: Extract << parameters.label >>
+          command: unzip << parameters.label >>
+      - run:
+          name: Test executable
+          command: << parameters.label >>/bin/iperf3 -v
+      - run:
+          name: Run as a server
+          command: << parameters.label >>/bin/iperf3 -s
+          background: true
+      - run:
+          name: Run as a client
+          command: << parameters.label >>/bin/iperf3 -c localhost -R
+
+  release:
+    executor: github-release/default
+    steps:
+
+      - attach_workspace:
+          at: .
+      - run:
+          name: Compute version number
+          command: |
+            echo "export IPERF3_BUILD_VERSION=\"<< pipeline.parameters.branch-name>>-${CIRCLE_BUILD_NUM}-${CIRCLE_SHA1:0:7}\"" | tee -a $BASH_ENV
+      - github-release/release:
+          tag: v$IPERF3_BUILD_VERSION
+          title: $IPERF3_BUILD_VERSION
+          artefacts-folder: .
+
+workflows:
+  version: 2
+  build-test-release:
+    jobs:
+
+      - build-linux
+      - build-windows
+      - build-macos
+      - test-linux:
+          requires:
+            - build-linux
+      - test-windows:
+          requires:
+            - build-windows
+      - test-macos:
+          requires:
+            - build-macos
+      - release:
+          requires:
+            - test-linux
+            - test-windows
+            - test-macos
+          context: github
+          filters:
+            branches:
+              only: master
+```
+
+{:.tab.multiple-executors.Example-2}
 {% raw %}
-
 ```yaml
 version: 2.1
 
@@ -576,7 +998,6 @@ workflows:
       - danger
       - build-and-test
 ```
-
 {% endraw %}
 
 ## 関連項目
