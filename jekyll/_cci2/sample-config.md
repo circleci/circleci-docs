@@ -380,7 +380,11 @@ This example shows a sequential workflow with the `test` job configured to run o
 ## Sample Configuration with Fan-in/Fan-out Workflow
 Below are two sample configurations for a Fan-in/Fan-out workflow. 
 
-For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details. Note that since a job can only run when its dependencies are satisfied it transitively requires the dependencies of all upstream jobs, this means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
+For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details. 
+
+For the Cloud/`2.1` example, see the following workflow map:
+
+![Fan-in-out]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
 
 {:.tab.fan-in-our.Cloud}
 {% raw %}
@@ -625,10 +629,14 @@ workflows:
 ```
 {% endraw %}
 
+**Note:** a job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
+
 ## Sample Configuration with Multiple Executor Types
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
 in the same workflow. 
+
+In `Example-1` each push will build and test the project on Linux, Windows and macOS.
 
 In `Example-2` each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
