@@ -1,9 +1,14 @@
+---
+version:
+- Server v2.19
+---
 = Frequently Asked Questions
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
+:version: Server v2.19
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
