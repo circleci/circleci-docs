@@ -5,6 +5,9 @@ short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
 order: 70
+version:
+- Cloud
+- Server v2.19
 ---
 
 This document describes how to work with Artifacts in the following sections:

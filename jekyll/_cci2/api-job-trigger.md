@@ -5,6 +5,9 @@ short-title: "Using the API to Trigger Jobs"
 description: "How to define and trigger non-build jobs"
 categories: [configuring-jobs]
 order: 80
+version:
+- Cloud
+- Server v2.19
 ---
 
 
