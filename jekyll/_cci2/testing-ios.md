@@ -39,7 +39,7 @@ To read about our customer support policy regarding beta images, please check ou
 
 It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel. 
 
-Running/testing Apple Silicon apps natively is currently not possible as our build hosts are Intel based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) and tested on locally. CircleCI is planning to support Apple Silicon hosts in the future.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. 
 
 ## Supported Xcode Versions
 
