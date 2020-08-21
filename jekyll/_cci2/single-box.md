@@ -7,4 +7,4 @@ description: "How to install CircleCI on a single VM"
 sitemap: false
 ---
 
-The trial installation option of CircleCI Server is no longer available. Contact [support](https://support.circleci.com/hc/en-us) to arrange a trial Server environment if you are interested in evaluating the Server platform on AWS or GCP.
+The trial installation option of CircleCI Server is no longer available. Contact [support](https://support.circleci.com/hc/en-us) to arrange a trial Server environment if you are interested in evaluating the Server platform on AWS.
