@@ -36,11 +36,17 @@ Unlike our stable images (which are frozen and will not change), once a new beta
 
 To read about our customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
+### Apple Silicon Support
+
+It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
+
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
+
 ## サポートされている Xcode のバージョン
 
 | Config   | Xcode Version                | macOS Version | Software Manifest                                                                                | Release Notes                                                                            |
 | -------- | ---------------------------- | ------------- | ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `12.0.0` | Xcode 12.0 Beta 4 (12A8179i) | 10.15.5       | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3417/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-beta-4-released/36956)           |
+| `12.0.0` | Xcode 12.0 Beta 5 (12A8189h) | 10.15.5       | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3499/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-beta-5-released/37157)           |
 | `11.6.0` | Xcode 11.6 (11E708)          | 10.15.5       | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)              |
 | `11.5.0` | Xcode 11.5 GM (11E608c)      | 10.15.4       | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)           |
 | `11.4.1` | Xcode 11.4.1 (11E503a)       | 10.15.4       | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)            |
@@ -208,7 +214,22 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 
 **Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
 
-### Images using macOS 10.15 (Xcode 11.2) and later
+### Images using Xcode 12 and later
+
+As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 12 and later iamges default to Ruby 2.7 via `chruby`.
+
+Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
+
+To switch to another Ruby version, see [our chruby documentation](#images-using-xcode-112-and-later). To revert back to the system Ruby, add the following to the beginning of your job:
+
+```yaml
+# ...
+run:
+  name: Set Ruby Version
+  command: echo 'chruby system' >> ~/.bash_profile
+```
+
+### Images using Xcode 11.2 and later
 
 The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
@@ -221,7 +242,7 @@ run:
 
 Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
-### Images using macOS 10.14 (Xcode 11.1) and earlier
+### Images using Xcode 11.1 and earlier
 
 Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
 
