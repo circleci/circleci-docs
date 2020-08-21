@@ -1654,20 +1654,19 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
-Type               | Arguments          | `true` if                              | Example
--------------------|--------------------|----------------------------------------|----------------------------------------
-YAML literal       | None               | is truthy                              | `true`/`42`/`"a string"`
-[Pipeline Value](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values) | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`
-[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`
-and                | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`
-or                 | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`
-not                | 1 logic statement  | the argument is not truthy             | `not: true`
-equal              | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`
+Type | Arguments | `true` if | Example
+---|---|---|---
+YAML literal | None | is truthy | `true`/`42`/`"a string"`
+YAML alias | None | resolves to a truthy value | *my-alias
+[Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values) | None | resolves to a truthy value | `<< pipeline.git.branch >>`
+[Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None | resolves to a truthy value | `<< pipeline.parameters.my-parameter >>`
+and | N logic statements | all arguments are truthy | `and: [ true, true, false ]`
+or | N logic statements | any argument is truthy | `or: [ false, true, false ]`
+not | 1 logic statement | the argument is not truthy | `not: true`
+equal | N values | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`
 {: class="table table-striped"}
 
-Truthiness rules are as follows:
-
-`false`, `null`, `0`, the empty string, and `NaN` are falsy. Any other value is truthy.
+Truthiness rules are as follows: `false`, `null`, `0`, the empty string, and `NaN` are falsy. Any other value is truthy.
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
@@ -1695,8 +1694,43 @@ workflows:
             - << pipeline.parameters.deploy-canary >>
 ```
 
+```yaml
+version: 2.1
+
+executors:
+  linux-13:
+    docker:
+      - image: cimg/node:13.13
+  macos: &macos-executor
+    macos:
+      xcode: 11.4
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ *macos-executor, << parameters.os >> ]
+          steps:
+            - run: echo << parameters.node-version >>
+      - run: echo 0
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          os: macos
+          node-version: "13.13.0"
+```
+
 ## Example Full Configuration
-{:.no_toc}
 
 {% raw %}
 ```yaml
