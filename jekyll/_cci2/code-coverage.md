@@ -6,6 +6,9 @@ categories: [configuration-tasks]
 description: Generating code coverage metrics
 order: 50
 sitemap: false
+version:
+- Cloud
+- Server v2.19
 ---
 
 Code Coverage tells you how much of your application is tested.

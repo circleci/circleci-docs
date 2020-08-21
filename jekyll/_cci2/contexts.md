@@ -5,6 +5,9 @@ short-title: "Using Contexts"
 description: "Secured, cross-project resources"
 categories: [configuring-jobs]
 order: 41
+version:
+- Cloud
+- Server v2.19
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
@@ -180,8 +183,7 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
-
-_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
+{% include feature-cloud.html %}
 
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
 
@@ -195,5 +197,5 @@ The value of the context will not be masked in the build output if:
 ## See Also
 {:.no_toc}
 
-[CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
-[Workflows]({{ site.baseurl }}/2.0/workflows/) 
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
+* [Workflows]({{ site.baseurl }}/2.0/workflows/) 
