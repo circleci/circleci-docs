@@ -35,6 +35,12 @@ Unlike our stable images (which are frozen and will not change), once a new beta
 
 To read about our customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
+### Apple Silicon Support
+
+It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel. 
+
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. 
+
 ## Supported Xcode Versions
 
  Config   | Xcode Version                   | macOS Version | Software Manifest | Release Notes
