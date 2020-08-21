@@ -135,7 +135,9 @@ Notice there are two similar steps in the above image and config - "What branch 
 ### Using Parameters and Bash Environment
 {:.no_toc}
 
-CircleCI does not support interpolation when setting environment variables. All defined values are treated literally. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
+In general, CircleCI does not support interpolating environment variable into build config. Values used are treated as literals. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
+
+An exception to this rule is the docker image section in order to support [Private Images]({{ site.baseurl }}/2.0/private-images/).
 
 In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
 

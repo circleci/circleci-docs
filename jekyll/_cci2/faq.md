@@ -179,7 +179,7 @@ Using Workflow config you can run multiple jobs at once or sequentially. You can
 
 ### Do you plan to add the ability to launch jobs on both Linux and Mac environments in the same workflow?
 {:.no_toc}
-Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker) document.
+Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) document.
 
 ### Is it possible to split the `config.yml` into different files?
 {:.no_toc}
