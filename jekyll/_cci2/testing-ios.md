@@ -213,7 +213,7 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 
 As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 12 and later iamges default to Ruby 2.7 via `chruby`. 
 
-This allows for greater compatibility and reliability out of the box with gems moving forward. For the vast majority of users using Ruby 2.7 will feel transparent as common gems, such as Fastlane, run without any issues.
+Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
 To switch to another Ruby version see [our chruby documentation](#images-using-macos-1015-xcode-112-and-later), or to revert back to the system Ruby, add the following to the beginning of your job:
 
