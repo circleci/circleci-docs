@@ -5,6 +5,8 @@ short-title: "Publishing Orbs"
 description: "Starting point for publishing CircleCI orbs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 ## High-Level Orb Publishing Process

@@ -5,6 +5,9 @@ short-title: "Configuring Databases"
 description: "Example of Configuring PostgreSQL"
 categories: [configuring-jobs]
 order: 35
+version:
+- Cloud
+- Server v2.19
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 
