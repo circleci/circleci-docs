@@ -20,7 +20,7 @@ CircleCI maintains several Docker images.
 These images are typically extensions of official Docker images
 and include tools especially useful for CI/CD.
 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
-Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/circleci/circleci-images).
+Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/cimg/circleci-images).
 Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the CircleCI Docker images](https://github.com/circleci-public/circleci-dockerfiles).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
@@ -51,26 +51,26 @@ If you need a generic image to run on CircleCI, to use with orbs, or to use as a
 
 **Resources**
 
-You can find this image on [Docker Hub](https://hub.docker.com/r/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
+You can find more config examples for this image on the [Developer Hub](https://circleci.com/developer/images/image/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
 
-## Next-gen CircleCI Go Image
+## Next-gen CircleCI Images
+
+CircleCI is moving to a new image repository that brings better documentation and more determinism. Below is an example image definition for the next-gen Go image.
 
 ```yaml
 image: cimg/go:1.13
 ```
 
-This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). It brings with it better documentation, more determinism, and benefits from the highly efficient infrastructure it’s built on.
+This is a direct replacement for the legacy CircleCI Go image (`cimg/golang`).
 
 
 ## Best Practices
 
-The convenience images in the following sections are based on the most recently built versions of upstream images, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
+The next-gen convenience images in the following sections are based on the most recent LTS Ubuntu docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
-CircleCI bases pre-built images off of upstream, for example, `circleci/ruby:2.4-node` is based off the most up to date version of the Ruby 2.4-node container. Using `circleci/ruby:2.4-node` is similar to using `:latest`. It is best practice to lock down aspects of your build container by specifying an additional tag to pin down the image in your configuration.
+That is, to prevent unintended changes that come from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
-That is, to prevent unintended changes that come from upstream, instead of using `circleci/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
-
-For example, add `-jessie` or `-stretch` to the end of each of those containers to ensure you’re only using that version of the Debian base OS. Pin down those images to a specific point version, like `circleci/ruby:2.3.7-jessie`, or specify the OS version with `circleci/ruby:2.3-jessie`. Specifying the version is possible for any of the CircleCI images.
+For example, pin down those images to a specific point version, like `cimg/ruby:2.3.7-jessie`, or specify the OS version with `cimg/ruby:2.3-jessie`. Specifying the version is possible for any of the CircleCI images.
 
 It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes.
 
@@ -91,11 +91,12 @@ version: 2.0
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.4.2-jessie-node
+      - image: cimg/ruby:2.7.1-node
     steps:
       - checkout
       - run:
           name: "Update Node.js and npm"
+          # what should I do
           command: |
             curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
             curl https://www.npmjs.com/install.sh | sudo bash
@@ -104,17 +105,17 @@ jobs:
           command: node -v
 ```
 
-### Using an Image Tag to Pin an Image Version or OS
+### Using an Image Tag to Pin an Image Version
 {:.no_toc}
 
 You can pin aspects of a Docker image
 by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
 
 For example,
-instead of `circleci/golang`,
-specify the version and OS
-by using `circleci/golang:1.8.6-jessie`.
-Because the second image specifies a version and OS,
+instead of `cimg/go:1.14`,
+specify the version
+by using `cimg/golang:1.14.3`.
+Because the second image specifies a specific version
 it is less likely
 to change unexpectedly.
 
@@ -128,6 +129,7 @@ However,
 since this tag may change unexpectedly,
 it is best practice
 to add an explicit image tag.
+Only legacy images from the `circleci` support the `latest` tag.
 
 ### Using a Docker Image ID to Pin an Image to a Fixed Version
 {:.no_toc}
@@ -156,7 +158,7 @@ locate the digest for the image.
 4. Add the image ID to the image name as shown below.
 
 ```
-circleci/ruby@sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
+cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b0182cf
 ```
 
 ## Image Types
@@ -171,15 +173,15 @@ Because the most recent images are more likely to change,
 it is [best practice](#best-practices)
 to use a more specific tag.
 
-### Language Images
+### Legacy Language Images
 {:.no_toc}
 
-Language images are convenience images for common programming languages.
+The legacy language images are convenience images for common programming languages.
 These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
 A language image should be listed first under the `docker` key in your configuration,
 making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
 
-CircleCI maintains images for the languages below.
+CircleCI maintains legacy images for the languages below.
 
 - [Android](#android)
 - [Clojure](#clojure)
@@ -213,6 +215,39 @@ if you want
 to add browsers to the `circleci/golang:1.9` image,
 use the `circleci/golang:1.9-browsers` image.
 
+### Next-Gen Language Images
+{:.no_toc}
+
+Like the legacy images, the next-gen language images are convenience images for common programming languages.
+These images include both the same relevant language and [commonly-used tools](#pre-installed-tools).
+A language image should be listed first under the `docker` key in your configuration,
+making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+
+CircleCI is developing next-gen images for the languages below.
+
+- Android
+- Clojure
+- [Elixir](https://circleci.com/developer/images/image/cimg/elixir)
+- [Go (Golang)](https://circleci.com/developer/images/image/cimg/go)
+- [Node.js](https://circleci.com/developer/images/image/cimg/node)
+- [OpenJDK (Java)](https://circleci.com/developer/images/image/cimg/openjdk)
+- [PHP](https://circleci.com/developer/images/image/cimg/php)
+- [Python](https://circleci.com/developer/images/image/cimg/python)
+- [Ruby](https://circleci.com/developer/images/image/cimg/ruby)
+- [Rust](https://circleci.com/developer/images/image/cimg/rust)
+
+Is there a next-gen equivalent for this?
+If your language is not listed,
+CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
+you can use to create a custom image.
+
+#### Next-Gen Language Image Variants
+{:.no_toc}
+
+CircleCI maintains several variants for the next-gen language image.
+For next-gen images be sure to check each image listing for information on each variant. The `-browsers` variant for next-gen images is still in progress.
+See each image listing on the [Developer Hub](https://circleci.com/developer/images/) for details on which variants it supports.
+
 ### Service Images
 {:.no_toc}
 
@@ -220,7 +255,7 @@ Service images are convenience images for services like databases.
 These images should be listed **after** language images
 so they become secondary service containers.
 
-CircleCI maintains images for the services below.
+CircleCI maintains legacy images for the services below.
 
 - [buildpack-deps](#buildpack-deps)
 - [DynamoDB](#dynamodb)
@@ -242,6 +277,12 @@ For example,
 if you want the `circleci/postgres:9.5-postgis` image
 to use RAM volume,
 use the `circleci/postgres:9.5-postgis-ram` image.
+
+### Next-Gen Service Images
+{:.no_toc}
+
+Circleci is working on adding next-gen service images as well.
+Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for available services.
 
 ## Pre-installed Tools
 
@@ -270,11 +311,12 @@ The specific version of a particular package
 that gets installed in a particular CircleCI image variant
 depends on the default version included in the package directory
 for the Linux distribution/version installed in that variant's base image.
-Most CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
+The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
 or [Stretch](https://packages.debian.org/stretch/)-based images,
-however some extend [Ubuntu](https://packages.ubuntu.com)-based images.
-For details on individual variants of CircleCI images, see the
+however the Next-gen images, `cimg` extend the official [Ubuntu](https://packages.ubuntu.com) image.
+For details on individual variants of legacy CircleCI images, see the
 [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
+For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
 
 The following packages are installed via `curl` or other means.
 
@@ -293,9 +335,12 @@ The following packages are installed via `curl` or other means.
 
 ## Latest Image Tags by Language
 
-Below is a list of the latest convenience images, sorted by language.
+Below is a list of the latest legacy convenience images, sorted by language.
 For details about the contents of each image,
 refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
+
+<div class="alert alert-warning" role="alert">
+For list of the latest next-gen convenience images, visit the [Developer Hub](https://circleci.com/developer/images/image/cimg/base).
 
 **Note:**
 Excluding [language image variants](#language-image-variants) and [the service image variant](#service-image-variant),
@@ -315,7 +360,7 @@ that a given tag has the same meaning across images!
 - [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
 - [Dockerfiles](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/{{ image[0] }}/images) - the Dockerfiles this image was built from.
 
-**Usage:** Add the following under `docker:` in your config.yml:  
+**Usage:** Add the following under `docker:` in your config.yml:
 
 `- image: circleci/{{ image[0] }}:[TAG]`
 
@@ -345,5 +390,5 @@ Note: Any variants available for this image can be used by appending the variant
 {:.no_toc}
 
 - See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
-- For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/). 
+- For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/).
 - See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for information about how to build Docker images.
