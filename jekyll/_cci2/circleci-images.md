@@ -20,7 +20,8 @@ CircleCI maintains several Docker images.
 These images are typically extensions of official Docker images
 and include tools especially useful for CI/CD.
 All of these pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
-Visit the `circleci-images` GitHub repo for the [source code for the CircleCI Docker images](https://github.com/cimg/circleci-images).
+Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
+Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
 Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the CircleCI Docker images](https://github.com/circleci-public/circleci-dockerfiles).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
@@ -114,7 +115,7 @@ by adding an [image tag](https://docs.docker.com/engine/reference/commandline/ta
 For example,
 instead of `cimg/go:1.14`,
 specify the version
-by using `cimg/golang:1.14.3`.
+by using `cimg/go:1.14.3`.
 Because the second image specifies a specific version
 it is less likely
 to change unexpectedly.
@@ -313,7 +314,7 @@ depends on the default version included in the package directory
 for the Linux distribution/version installed in that variant's base image.
 The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
 or [Stretch](https://packages.debian.org/stretch/)-based images,
-however the Next-gen images, `cimg` extend the official [Ubuntu](https://packages.ubuntu.com) image.
+however the Next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
 For details on individual variants of legacy CircleCI images, see the
 [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
 For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
