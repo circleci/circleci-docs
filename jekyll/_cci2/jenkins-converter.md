@@ -10,13 +10,13 @@ order: 1
 
 The Jenkins Converter is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you get started on building on CircleCI quickly and easily. It can be accessed at https://circleci.com/developer/tools/jenkins-converter.
 
-Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, we hope that this tool gets you started at least 50% of the way, and makes it easier for you to get started on building on CircleCI.
+Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started on building on CircleCI.
 
 ## Limitations
 
-* Limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
+* A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
 
-* Only `Default` is supported as a tool name for `maven`, `jdk` and `gradle` in the [`tools` block](https://www.jenkins.io/doc/book/pipeline/syntax/#tools), and other names will cause conversion failures. Please configure them appropriately or remove them manually.
+* Only `Default` is supported as a tool name for `maven`, `jdk` and `gradle` in the [`tools` block](https://www.jenkins.io/doc/book/pipeline/syntax/#tools), and other names will cause conversion failures. Please configure them as follows or remove them manually.
 
   For example, the following stanza:
   ```
@@ -37,19 +37,19 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 
 ### Executors
 
-For the time being, a static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor](https://circleci.com/docs/reference-2-1/#executors) regardless of the one defined within the Jenkinsfile input.
+A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor](https://circleci.com/docs/reference-2-1/#executors) regardless of the one defined within the Jenkinsfile input.
 
-Given that this is a very lean image, it's highly likely that your project will require a different executor. [CircleCI's convenience images](https://circleci.com/docs/2.0/circleci-images/) are a good place to get started, while more advanced users may be ready to base their project off a [custom Docker image](https://circleci.com/docs/2.0/custom-images/).
+Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different executor. [CircleCI's convenience images](https://circleci.com/docs/2.0/circleci-images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
 
 Depending on the use case, you may require the usage of a [machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) when your application requires full access to OS resources and the job environment, or the [macOS executor](https://circleci.com/docs/2.0/executor-types/#using-macos).
 
 ### Workflows
 
-[CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) should be fully transferred from your Jenkinsfile to config.yml, including branch filters. We've made a conscious decision to not transfer over any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
+[CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) should be fully transferred from your Jenkinsfile to config.yml, including branch filters. The converter will not transfer over any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
 ### Jobs
 
-Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. We recommend starting with the following features to get a richer experience from CircleCI:
+Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
 
 - [Checkout code](https://circleci.com/docs/2.0/configuration-reference/#checkout)
 - [Resource class](https://circleci.com/docs/2.0/configuration-reference/#resource_class)
@@ -59,7 +59,7 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 
 ### Steps
 
-While the Jenkinsfile Converter does its best to directly translate steps, we're still short of full coverage. To address this, we've added the `JFC_STACK_TRACE` key to specific steps within the output YAML to provide some guidance on how to proceed with unsupported step directives.
+While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
 
 ## Supported Syntax
 
@@ -79,7 +79,7 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 ## Supported Jenkins plugins
 
-**Important Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (e.g. `options`), otherwise <u>you will see an error message saying something is "Unknown" or "Invalid"</u>. Please submit a ticket with our support center if you have a request to add a plugin to the list.
+**Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise <u>you will see an error message saying something is "Unknown" or "Invalid"</u>. Please submit a ticket with our support center if you have a request to add a plugin to the list.
 
 - Trilead API Plugin (`trilead-api`)
 - Folders Plugin (`cloudbees-folder`)
@@ -162,4 +162,4 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 ## Feedback
 
-To share any general feedback regarding this project with the CircleCI team, please submit a ticket with our Support team (TODO: link with proper ticket tagging).
+To share any general feedback regarding this project, submit a ticket with our CircleCI Support team.
