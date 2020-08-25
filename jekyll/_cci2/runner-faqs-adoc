@@ -1,0 +1,51 @@
+= CircleCI Runner FAQs
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This page answers frequently asked questions for the CircleCI Runner product.
+
+toc::[]
+
+=== How do I get customers on to the preview?
+
+See How to run a CircleCI Runner preview
+
+=== Can I try runner out for myself?
+
+Internal users are welcome to give runner a try.
+
+The install docs can be found here:
+https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/docs/install.html
+
+Give @ask-execution a nudge with your desired `resource_clas`s name and which org you would use it on. The execution team will provide a token (during their working hours, expect up to a 2 day delay depending on what else is going on).
+
+CircleCI is interested to know what sorts of things you want to achieve with this (or whether you just want to see it in action).
+
+=== Do runners support macOS?
+
+Runners do not fully support macOS for now. The basics have been successfully tested on macOS, and we expect to support this properly in future.
+
+=== Do runners support Windows?
+
+Runners do not fully support Windows for now. The basics have been successfully tested on Windows, and we expect to support this properly in future.
+
+=== Do runners support ARM on Linux?
+
+Runners do not fully support ARM on Linux for now. The basics have been successfully tested on ARM on Linux, and we expect to support this properly in future.
+
+=== Do runners support DLC?
+
+Runners do not support DLC for now; however, in the runner environments, there should not be a need for DLC:
+
+- DLC is a workaround for not having persistent runner machines to execute on.
+
+- When using a runner, the customer can set up a fleet of machines that persist between jobs. The Docker volumes that have been downloaded in a previous job will still be accessible.
+
+NOTE: In the runner case, the customer is responsible for setting up the runner machines. So if a customer chooses to use persistent machines, they can retrieve the volumes caches on those machines, but the customer needs to clean up the volumes periodically to prevent the machine’s disk from filling up.
+
+=== Do runners support a longer max runtime?
+
+Runners do not support extending the maximum runtime for now. There is no fundamental reason this could not be supported in future, if there is a sufficient demand or reasons.
