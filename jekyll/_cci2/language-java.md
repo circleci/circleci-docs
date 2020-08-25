@@ -60,7 +60,7 @@ jobs:
 Version 2.0 configs without workflows will look for a job named `build`. A job
 is a essentially a series of commands run in a clean execution environment.
 Notice the two primary parts of a job: the executor and steps. In this case, we
-are using the docker executor and passing in a CircleCI  convenience image.
+are using the docker executor and passing in a CircleCI convenience image.
 
 ### Using a workflow to build then test
 
