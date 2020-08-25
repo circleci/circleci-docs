@@ -13,26 +13,15 @@ This guide will help you get started with a Java application building with Gradl
 {:toc}
 
 ## Overview
-{:.no_toc}
-If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
-
-## Sample Configuration
 
 This is an example application showcasing how to run a Java app on CircleCI 2.1.
-This application uses the Spring PetClinic sample project. This readme includes
-pared down sample configs for different CircleCI features, including workspace,
+This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes
+pared down sample configurations demonstrating different CircleCI features including workspaces,
 dependency caching, and parallelism.
 
-To see how these steps would be configured in a 2.0 config, please check out the
-master branch.
+## Sample configuration: version 2.1:
 
-To see these features in a version 2.1 config with reusable commands and running
-on different executors, please see the 2.1-simplified-config branch.
-
-## Sample configurations: version 2.1
-
-
-A basic build with an orb:"
+### A basic build with an orb:
 
 ```yaml
 version: 2.1
@@ -54,7 +43,7 @@ command checks out the code, builds, tests, and uploads the test result. The
 parameters of this command can be customized. See the maven orb docs for more
 information.
 
-## For 2.0 configuration recommended for CircleCI Server only
+## For 2.0 configuration (recommended for CircleCI Server only):
 
 ```yaml
 version: 2.0
@@ -71,9 +60,9 @@ jobs:
 Version 2.0 configs without workflows will look for a job named `build`. A job
 is a essentially a series of commands run in a clean execution environment.
 Notice the two primary parts of a job: the executor and steps. In this case, we
-are using the docker executor and passing in a CCI convenience image.
+are using the docker executor and passing in a CircleCI  convenience image.
 
-## Using a workflow to build then test
+### Using a workflow to build then test
 
 A workflow is a dependency graph of jobs. This basic workflow runs a build job
 followed by a test job. The test job will not run unless the build job exits
@@ -108,10 +97,11 @@ workflows:
             - build
 ```
 
-## Caching dependencies
+### Caching dependencies
 
 The following code sample details the use of **caching**.
 
+{% raw %}
 ```yaml
 version: 2.0
 
@@ -131,6 +121,7 @@ jobs:
               - ~/.m2
             key: v1-dependencies-{{ checksum "pom.xml" }}
 ```
+{% endraw %}
 
 The first time this build ran without any dependencies cached, it took 2m14s.
 Once the dependencies were restored, the build took 39 seconds.
@@ -141,7 +132,7 @@ changes, you can still restore the previous cache. This means the job will only
 have to fetch the dependencies that have changed between the new `pom.xml` and the
 previous cache.
 
-## Persisting build artifacts to workspace
+### Persisting build artifacts to workspace
 
 The following configuration sample details persisting a build artifact to a workspace.
 
@@ -184,8 +175,10 @@ This `persist_to_workspace` step allows you to persist files or directories to b
 downstream jobs in the workflow. In this case, the target directory produced by
 the build step is persisted for use by the test step.
 
-## Splitting tests across parallel containers
+### Splitting tests across parallel containers
 
+
+{% raw %}
 ```yaml
 version: 2.0
 
@@ -225,6 +218,8 @@ workflows:
             - build
 ```
 
+{% endraw %}
+
 Splitting tests by timings is a great way to divide time-consuming tests across
 multiple parallel containers. You might think of splitting by timings as requiring 4
 parts:
@@ -243,7 +238,7 @@ Adding `store_test_results` enables CircleCI to access the historical timing dat
 for previous executions of these tests, so the platform knows how to split tests
 to achieve the fastest overall runtime.
 
-## Storing code coverage artifacts
+### Storing code coverage artifacts
 
 ```yaml
 version: 2.0
@@ -270,9 +265,12 @@ The Maven test runner with the [JaCoCo](https://www.eclemma.org/jacoco/) plugin
 generates a code coverage report during the build. To save that report as a
 build artifact, use the `store_artifacts` step.
 
-## A Configuration
+### A Configuration
 
 The following code sample is the entirety of a configuration file combining the features described above.
+
+
+{% raw %}
 
 ```yaml
 version: 2.0
@@ -332,6 +330,7 @@ workflows:
           requires:
             - build
 ```
+{% endraw %}
 
 The configuration above is from a demo Java app, which you can access
 [here](https://github.com/CircleCI-Public/circleci-demo-java-spring). If you
