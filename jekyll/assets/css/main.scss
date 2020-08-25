@@ -3,6 +3,7 @@
 @import 'variables';
 @import 'sidebar';
 @import 'instantsearch';
+@import 'tooltip';
 
 // General
 body{
@@ -28,6 +29,15 @@ a {
 		color: $link-hover-color;
 		text-decoration: none;
 	}
+}
+
+.title-and-badges {
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (max-width: 1068px;) {
+    flex-direction: column;
+  }
 }
 
 div.main-body{
@@ -392,20 +402,33 @@ pre {
 }
 
 .server-version-badge {
-	background-color: #171717;
-	padding: 2px 8px;
-	border-radius: 8px;
-	color: #efefef;
-	margin: 0px 6px;
-	font-weight: bold;
-	min-width: 110px;
-	text-align: center;
+    background-color: white;
+    border: 1px solid #333;
+    padding: 2px 8px;
+    border-radius: 2px;
+    color: black;
+    margin: 0px 6px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+}
+
+.server-version-popover {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
 }
 
 .server-version-wrapper {
 	display: flex;
 	align-items: center;
-	padding: 5px 0px 25px 0px;
+  margin-top: 16px;
+
+  @media screen and (max-width: 1068px) {
+    margin: 0 0 16px 0;
+  }
 }
 
 /* Shows when screen > $screen-md, hides when smaller */

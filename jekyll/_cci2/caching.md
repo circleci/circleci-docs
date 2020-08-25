@@ -5,7 +5,7 @@ short-title: "Caching Dependencies"
 description: "Caching Dependencies"
 categories: [optimization]
 order: 50
-version
+version:
 - Cloud
 - Server v2.19
 ---
