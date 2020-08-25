@@ -1,0 +1,66 @@
+{ "paths" : {
+    "/context" : {
+        "get" : {
+            "parameters" : [ {
+                "in" : "query",
+                "name" : "owner-id",
+                "description" : "The unique ID of the owner of the context. Specify either this or owner-slug.",
+                "schema" : {
+                    "type" : "string",
+                    "format" : "uuid"
+                },
+                "x-examples": {
+                    "owner-id": {
+                        "value": {"owner-id": "c65b68ef-e73b-4bf2-be9a-7a322a9df150"},
+                        "in": "body"
+                    }
+                },
+                "required" : false
+                }, {
+                "in" : "query",
+                "name" : "owner-slug",
+                "description" : "A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.",
+                "schema" : {
+                    "type" : "string"
+                },
+                "x-examples": {
+                    "owner-slug": {
+                        "value": {"owner-slug": "CircleCI-Public"},
+                        "in": "body"
+                    }
+                },
+                "required" : false
+                }, {
+                "in" : "query",
+                "name" : "owner-type",
+                "description" : "The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
+                "schema" : {
+                    "type" : "string",
+                    "enum" : [ "account", "organization" ]
+                },
+                "x-examples": {
+                    "owner-type": {
+                        "value": {"owner-type": "account"},
+                        "in": "body"
+                    }
+                },
+                "required" : false
+                }, {
+                "in" : "query",
+                "name" : "page-token",
+                "description" : "A token to retrieve the next page of results.",
+                "schema" : {
+                    "type" : "string"
+                },
+                "x-examples": {
+                        "page-token": {
+                        "value": {"page-token": "next_page_token"},
+                        "in": "body"
+                    }
+                },
+                "required" : false,
+                "allowEmptyValue" : true
+            } ]
+        }
+    }
+} }

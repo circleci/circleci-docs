@@ -1,0 +1,20 @@
+{ "paths" : { "/context" : { "get" : { "parameters" : [
+    { "x-examples": {
+        "owner-id": {
+            "value": {"owner-id": "c65b68ef-e73b-4bf2-be9a-7a322a9df150"},
+            "in": "body"
+        },
+        "owner-slug": {
+            "value": {"owner-slug": "CircleCI-Public"},
+            "in": "body"
+        },
+        "owner-type": {
+            "value": {"owner-type": "account"},
+            "in": "body"
+        },
+        "page-token": {
+            "value": {"page-token": "next_page_token"},
+            "in": "body"
+        }
+    } }
+]} } } }
