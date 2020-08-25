@@ -62,24 +62,24 @@ CircleCI is moving to a new image repository that brings better documentation an
 image: cimg/go:1.13
 ```
 
-This is a direct replacement for the legacy CircleCI Go image (`cimg/golang`).
+This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub repository is `cimg`.
 
 
 ## Best Practices
 
-The next-gen convenience images in the following sections are based on the most recent LTS Ubuntu docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
+The next-gen convenience images in the following sections are based on the most recent LTS Ubuntu docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image. The legacy images are Debian `jessie` or `stretch`.
 
 That is, to prevent unintended changes that come from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
-For example, pin down those images to a specific point version, like `cimg/ruby:2.3.7-jessie`, or specify the OS version with `cimg/ruby:2.3-jessie`. Specifying the version is possible for any of the CircleCI images.
+For example, pin down those images to a specific point version, like `cimg/ruby:2.4.10-node`. Specifying the version is possible for any of the CircleCI images.
 
-It is also possible to specify all the way down to the specific SHA of the image you want to use. Doing so allows you to test specific images for as long as you like before making any changes.
+It is also possible to specify all the way down to the specific SHA of the image you want to use. For example, you can use `cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390` instead of `cimg/ruby:2.4.10-node`. Doing so allows you to test specific images for as long as you like before making any changes.
 
 There are two ways
 to make an image more specific:
 
 - Use a tag
-to pin an image to a version or operating system (OS).
+to pin an image to a version or variant.
 - Use a Docker image ID
 to pin an image to a fixed version.
 
@@ -130,7 +130,8 @@ However,
 since this tag may change unexpectedly,
 it is best practice
 to add an explicit image tag.
-Only legacy images from the `circleci` support the `latest` tag.
+Only legacy images from the `circleci` repository support the `latest` tag.
+Next-gen images from the `cimg` repository do not support `latest`.
 
 ### Using a Docker Image ID to Pin an Image to a Fixed Version
 {:.no_toc}
@@ -237,7 +238,6 @@ CircleCI is developing next-gen images for the languages below.
 - [Ruby](https://circleci.com/developer/images/image/cimg/ruby)
 - [Rust](https://circleci.com/developer/images/image/cimg/rust)
 
-Is there a next-gen equivalent for this?
 If your language is not listed,
 CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
 you can use to create a custom image.
@@ -282,8 +282,8 @@ use the `circleci/postgres:9.5-postgis-ram` image.
 ### Next-Gen Service Images
 {:.no_toc}
 
-Circleci is working on adding next-gen service images as well.
-Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for available services.
+Circleci is working on adding next-gen service convenience images.
+Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for the latest available service images.
 
 ## Pre-installed Tools
 
@@ -296,7 +296,7 @@ All convenience images have been extended with additional tools, installed with 
 - `gnupg`
 - `gzip`
 - `locales`
-- `mercurial`
+- `mercurial` (legacy images only)
 - `net-tools`
 - `netcat`
 - `openssh-client`
@@ -305,7 +305,7 @@ All convenience images have been extended with additional tools, installed with 
 - `tar`
 - `unzip`
 - `wget`
-- `xvfb`
+- `xvfb` (legacy images only)
 - `zip`
 
 The specific version of a particular package
@@ -314,7 +314,7 @@ depends on the default version included in the package directory
 for the Linux distribution/version installed in that variant's base image.
 The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
 or [Stretch](https://packages.debian.org/stretch/)-based images,
-however the Next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
+however the next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
 For details on individual variants of legacy CircleCI images, see the
 [circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
 For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
@@ -336,15 +336,18 @@ The following packages are installed via `curl` or other means.
 
 ## Latest Image Tags by Language
 
-Below is a list of the latest legacy convenience images, sorted by language.
+Below is a list of the latest **legacy** convenience images, sorted by language.
 For details about the contents of each image,
 refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
+
 <div class="alert alert-warning" role="alert">
-For list of the latest next-gen convenience images, visit the [Developer Hub](https://circleci.com/developer/images/image/cimg/base).
+For a list of the latest next-gen convenience images and details about the content of each image, visit the <a href="https://circleci.com/developer/">Developer Hub.</a>
+</div>
+
 
 **Note:**
-Excluding [language image variants](#language-image-variants) and [the service image variant](#service-image-variant),
+Excluding [language image variants](#language-image-variants) and [the service image variant](#service-image-variant), **for legacy images**
 CircleCI does **not** control which tags are used.
 These tags are chosen and maintained by upstream projects.
 Do not assume
