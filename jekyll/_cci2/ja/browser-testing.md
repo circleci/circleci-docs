@@ -198,12 +198,14 @@ If you are running a test that runs an HTTP server on CircleCI, it is sometimes 
     ssh -p 64625 ubuntu@54.221.135.43
     
 
-2. コマンドにポート転送を追加するには、`-L` フラグを使用します。 次の例では、ブラウザーでの `http://localhost:3000` へのリクエストを CircleCI コンテナ上のポート `8080` に転送します。 これは、ジョブで Ruby on Rails デバッグ アプリを実行し、それがポート 8080 をリスンする場合などに使用できます。 これを実行した後、ブラウザーに移動して http://localhost:3000 をリクエストすると、コンテナのポート 8080 の処理の内容が表示されます。
+2. コマンドにポート転送を追加するには、`-L` フラグを使用します。 The following example forwards requests to `http://localhost:3000` on your local browser to port `8080` on the CircleCI container. これは、ジョブで Ruby on Rails デバッグ アプリを実行し、それがポート 8080 をリスンする場合などに使用できます。 After you run this, if you go to your local browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
+
+**Note:** Update `8080` to be the port you are running on the CircleCI container.
 
     ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
     
 
-3. 次に、ローカル マシンでブラウザーを開き、`http://localhost:8080` に移動すると、CircleCI コンテナ上のポート `3000` で実行されているサーバーに直接リクエストが送信されます。 CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
+3. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
 
 This is a very easy way to debug things when setting up Selenium tests, for example.
 
