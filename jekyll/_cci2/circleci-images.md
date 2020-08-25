@@ -56,24 +56,29 @@ You can find more config examples for this image on the [Developer Hub](https://
 
 ## Next-gen CircleCI Images
 
-CircleCI is moving to a new image repository that brings better documentation and more determinism. Below is an example image definition for the next-gen Go image.
+CircleCI is moving to a set of new image repositories that bring better documentation and more determinism. Below is an example image definition for the next-gen Go image.
 
 ```yaml
 image: cimg/go:1.13
 ```
 
-This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub repository is `cimg`.
+This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`.
 
 
 ## Best Practices
 
-The next-gen convenience images in the following sections are based on the most recent LTS Ubuntu docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image. The legacy images are Debian `jessie` or `stretch`.
+The next-gen convenience images in the following sections are based on the most recent Ubuntu LTS Docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
 That is, to prevent unintended changes that come from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
 For example, pin down those images to a specific point version, like `cimg/ruby:2.4.10-node`. Specifying the version is possible for any of the CircleCI images.
 
 It is also possible to specify all the way down to the specific SHA of the image you want to use. For example, you can use `cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390` instead of `cimg/ruby:2.4.10-node`. Doing so allows you to test specific images for as long as you like before making any changes.
+
+
+<div class="alert alert-warning" role="alert">
+It is not recommended that you use the SHA for extended periods of time. If there's a major bug or security issue what would require a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
+</div>
 
 There are two ways
 to make an image more specific:
@@ -97,7 +102,6 @@ jobs:
       - checkout
       - run:
           name: "Update Node.js and npm"
-          # what should I do
           command: |
             curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
             curl https://www.npmjs.com/install.sh | sudo bash
@@ -197,10 +201,6 @@ CircleCI maintains legacy images for the languages below.
 - [Ruby](#ruby)
 - [Rust](#rust)
 
-If your language is not listed,
-CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
-you can use to create a custom image.
-
 #### Language Image Variants
 {:.no_toc}
 
@@ -227,7 +227,6 @@ making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-conta
 
 CircleCI is developing next-gen images for the languages below.
 
-- Android
 - Clojure
 - [Elixir](https://circleci.com/developer/images/image/cimg/elixir)
 - [Go (Golang)](https://circleci.com/developer/images/image/cimg/go)
@@ -239,8 +238,13 @@ CircleCI is developing next-gen images for the languages below.
 - [Rust](https://circleci.com/developer/images/image/cimg/rust)
 
 If your language is not listed,
-CircleCI also maintains a [Dockerfile Wizard](https://github.com/circleci-public/dockerfile-wizard)
-you can use to create a custom image.
+feel free to request an image on our [Ideas Board](https://ideas.circleci.com/).
+First, check to see if that "idea" is already on CircleCI Ideas.
+If it is, up-vote it.
+If not, create it and set the category as "images".
+Finally, go and market your "idea" to friends, co-workers, forums, and other communities in order to help it build traction.
+
+If we see an idea on the board take off, we'll consider building it officially.
 
 #### Next-Gen Language Image Variants
 {:.no_toc}
