@@ -53,7 +53,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
+4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
 
     ```yaml
     version: 2.1
@@ -62,8 +62,9 @@ If you find you need to rename an org or repo that you have previously hooked up
       my-workflow:
         jobs:
           - run-tests:
-              context: org-global        
-      
+              context:
+                - org-global
+
     jobs:
       run-tests:
         docker:
@@ -78,6 +79,10 @@ If you find you need to rename an org or repo that you have previously hooked up
 ### Moving a Repository that Uses a Context
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
+
+## Combining Contexts
+
+You can combine several contexts for a single job by just adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way you can scope contexts to be as small and granular as you like.
 
 ## Restricting a Context
 

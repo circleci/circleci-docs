@@ -1361,7 +1361,7 @@ Jobs may be configured to use global environment variables set for an organizati
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-context | N | String | The name of the context. The initial default name was `org-global`. Each context name must be unique.
+context | N | String/List | The name of the context(s). The initial default name was `org-global`. Each context name must be unique.
 {: class="table table-striped"}
 
 ###### **`type`**
