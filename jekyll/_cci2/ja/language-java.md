@@ -14,259 +14,316 @@ order: 4
 {:toc}
 
 ## 概要
-{:.no_toc}
 
-お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+This is an example application showcasing how to run a Java app on CircleCI 2.1. This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
 
-ここでは、以下を前提としています。
+## Sample configuration: version 2.1:
 
-- [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
-- Java 11 を使用している 
-- Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています) 
-- アプリケーションをオールインワン uberjar として配布できる
+### A basic build with an orb:
 
-## 設定ファイルの例
-
-{% raw %}
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
-jobs: # 一連のステップ
-  build:
-    # 並列処理が必要ない場合は削除します
-    parallelism: 2
-    environment:
-      # OOM (メモリ不足) エラーを回避するように JVM と Gradle を構成します
-      _JAVA_OPTIONS: "-Xmx3g"
-      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
-    docker: # Docker でステップを実行します
+version: 2.1
 
-      - image: circleci/openjdk:11.0.3-jdk-stretch # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-      - image: circleci/postgres:12-alpine
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: circle_test
-    steps: # 実行可能コマンドの集合
-      - checkout # ソース コードを作業ディレクトリにチェックアウトします
-      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-      - restore_cache:
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - restore_cache:
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
-      - run:
-          name: テストの並列実行 # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
-          # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します
-          command: |
-            cd src/test/java
-            # このノードで実行する必要があるテストのクラス名のリストを取得します
-            CLASSNAMES=$(circleci tests glob "**/*.java" \
-              | cut -c 1- | sed 's@/@.@g' \
-              | sed 's/.\{5\}$//' \
-              | circleci tests split --split-by=timings --timings-type=classname)
-            cd ../../..
-            # 引数を「./gradlew test」にフォーマットします
-            GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
-            echo "Prepared arguments for Gradle: $GRADLE_ARGS"
-            ./gradlew test $GRADLE_ARGS
-      - save_cache:
-          paths:
-            - ~/.gradle/wrapper
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
-      - store_test_results:
-      # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するテスト結果をアップロードします
-          path: build/test-results/test
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト結果をアップロードします
-          path: build/test-results/test
-          when: always
-      - run:
-          name: JAR の収集
-          command: |
-            # 他のノードでは以下をスキップします
-            if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
-              ./gradlew assemble
-            fi
-      # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
-      - store_artifacts:
-          path: build/libs
-      # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+orbs:
+  maven: circleci/maven@0.0.12
+
 workflows:
-  version: 2
-  workflow:
+  maven_test:
     jobs:
-    - build 
-```
-{% endraw %}
 
-## コードの取得
-
-上記は Java デモ アプリケーションの設定ファイルの抜粋です。このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-java-spring> からアクセスできます。
-
-ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
-
-これで `config.yml` を最初からビルドする準備ができました。
-
-## 設定ファイルの詳細
-
-常にバージョンの指定から始めます。
-
-```yaml
-version: 2
+      - maven/test # checkout, build, test, and upload test results
 ```
 
-次に、`jobs` キーを記述します。 1 つひとつのジョブが、ビルド、テスト、デプロイのプロセス内の各段階を表します。 このサンプル アプリケーションでは 1 つの `build` ジョブのみが必要なので、他の要素はそのキーの下に置きます。
+This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/orbs/registry/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
+
+## For 2.0 configuration (recommended for CircleCI Server only):
 
 ```yaml
-version: 2
+version: 2.0
+
 jobs:
   build:
-    # 並列処理が必要ない場合は削除します
-    parallelism: 2
-    environment:
-      # OOM (メモリ不足) エラーを回避するように JVM と Gradle を構成します
-      _JAVA_OPTIONS: "-Xmx3g"
-      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
-```
-
-テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
-
-We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/). We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
-
-```yaml
-version: 2
-...
     docker:
-      - image: circleci/openjdk:11.0.3-jdk-stretch
-      - image: circleci/postgres:12-alpine
-        environment:
-          POSTGRES_USER: postgres
-          POSTGRES_DB: circle_test
-```
 
-バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK コンビニエンス イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
-
-この `build` ジョブ内にいくつかの `steps` を追加します。
-
-コードベースで作業できるように、最初に `checkout` を置きます。
-
-次に、Gradle ラッパーと依存関係のキャッシュをプル ダウンします (存在する場合)。 初回実行時、または `gradle/wrapper/gradle-wrapper.properties` と `build.gradle` を変更した場合、これは実行されません。
-
-<div class="alert alert-info" role="alert">
-  <strong>ヒント:</strong> プロジェクトに `build.gradle` ファイルが複数存在する場合、依存関係のキャッシュが完全には機能しない可能性があります。 その場合は、すべての `build.gradle` ファイルの内容に基づいてチェックサムを計算し、それをキャッシュ キーに組み込むことを検討してください。
-</div>
-
-{% raw %}
-```yaml
-...
+      - image: circleci/openjdk:stretch
     steps:
-
       - checkout
-      - restore_cache:
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - restore_cache:
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
+      - run: ./mvnw package
 ```
-{% endraw %}
 
- 追加の引数を使用して `./gradlew test` を実行します。これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
+Version 2.0 configs without workflows will look for a job named `build`. A job is a essentially a series of commands run in a clean execution environment. Notice the two primary parts of a job: the executor and steps. In this case, we are using the docker executor and passing in a CircleCI convenience image.
 
- {% raw %}
+### Using a workflow to build then test
+
+A workflow is a dependency graph of jobs. This basic workflow runs a build job followed by a test job. The test job will not run unless the build job exits successfully.
+
 ```yaml
-...
+version: 2.0
+
+jobs:
+  test:
+    docker:
+
+      - image: circleci/openjdk:stretch
     steps:
+      - checkout
+      - run: ./mvnw test
 
-      - run:
-          name: Run tests in parallel # https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/ を参照してください
-          # テストを並列に実行しない場合は、代わりに「./gradlew test」を使用します
-          command: |
-            cd src/test/java
-            # このノードで実行する必要があるテストのクラス名のリストを取得します
-            CLASSNAMES=$(circleci tests glob "**/*.java" \
-              | cut -c 1- | sed 's@/@.@g' \
-              | sed 's/.\{5\}$//' \
-              | circleci tests split --split-by=timings --timings-type=classname)
-            cd ../../..
-            # 引数を「./gradlew test」にフォーマットします
-            GRADLE_ARGS=$(echo $CLASSNAMES | awk '{for (i=1; i<=NF; i++) print "--tests",$i}')
-            echo "Prepared arguments for Gradle: $GRADLE_ARGS"
-            ./gradlew test $GRADLE_ARGS
-```
-{% endraw %}
+  build:
+    docker:
 
-次回の処理を高速化するために、`save_cache` ステップを使用して Gradle ラッパーと依存関係を保存します。
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
 
-{% raw %}
-```yaml
-...
-
-      - save_cache:
-          paths:
-            - ~/.gradle/wrapper
-          key: v1-gradle-wrapper-{{ checksum "gradle/wrapper/gradle-wrapper.properties" }}
-      - save_cache:
-          paths:
-            - ~/.gradle/caches
-          key: v1-gradle-cache-{{ checksum "build.gradle" }}
-```
-{% endraw %}
-
-
-続けて、CircleCI ダッシュボードにテスト メタデータを表示できるように、`store_test_results` が `build/test-results/test` ディレクトリから JUnit テスト メタデータを取得してアップロードします。 また、テスト メタデータを調べる必要がある場合は、`store_artifacts` を介してテスト メタデータをアーティファクトとしてアップロードします。
-
-
-{% raw %}
-```yaml
-...
-
-      - store_test_results:
-          path: build/test-results/test
-      - store_artifacts:
-          path: build/test-results/test
-          when: always
-```
-{% endraw %}
-
-`./gradlew assemble` コマンドを使用して、"uberjar" ファイルを作成します。このファイルには、コンパイルされたアプリケーションと共にそのアプリケーションのすべての依存関係が含まれます。 uberjar のコピーは 1 つだけあればよいので、これは、並列に実行しているすべてのビルド コンテナではなく最初のビルド コンテナでだけ実行されます。
-
-その後、`store_artifacts` ステップを使用して、uberjar を[アーティファクト](https://circleci.com/docs/ja/2.0/artifacts/)として保存します。 そこから、これを目的の継続的デプロイ スキームに結び付けることができます。
-
-{% raw %}
-```yaml
-...
-
-      - run:
-          name: Assemble JAR
-          command: |
-            # 他のノードでは以下をスキップします
-            if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
-              ./gradlew assemble
-            fi
-      # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
-      - store_artifacts:
-          path: build/libs
-```
-{% endraw %}
-
-最後に、ワークフロー内の唯一のジョブとして `build` ジョブによって実行される `workflow` というワークフローを定義します。
-
-{% raw %}
-```yaml
-...
 workflows:
   version: 2
-  workflow:
+
+  build-then-test:
     jobs:
 
-    - build
+      - build
+      - test:
+          requires:
+            - build
+```
+
+### Caching dependencies
+
+The following code sample details the use of **caching**.
+
+{% raw %}
+```yaml
+version: 2.0
+
+jobs:
+  build:
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+# appends cache key with a hash of pom.xml file
+            - v1-dependencies- # fallback in case previous cache key is not found
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - save_cache:
+            paths:
+              - ~/.m2
+            key: v1-dependencies-{{ checksum "pom.xml" }}
+            ```
+{% endraw %}
+
+The first time this build ran without any dependencies cached, it took 2m14s. Once the dependencies were restored, the build took 39 seconds.
+
+Note that the `restore_cache` step will restore whichever cache it first matches. You can add a restore key here as a fallback. In this case, even if `pom.xml` changes, you can still restore the previous cache. This means the job will only have to fetch the dependencies that have changed between the new `pom.xml` and the previous cache.
+
+### Persisting build artifacts to workspace
+
+The following configuration sample details persisting a build artifact to a workspace.
+
+```yaml
+version: 2.0
+
+jobs:
+  build:
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - persist_to_workspace:
+         root: ./
+         paths:
+           - target/
+
+  test:
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./target
+      - run: ./mvnw test
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+```
+
+This `persist_to_workspace` step allows you to persist files or directories to be used by downstream jobs in the workflow. In this case, the target directory produced by the build step is persisted for use by the test step.
+
+### Splitting tests across parallel containers
+
+
+{% raw %}
+```yaml
+version: 2.0
+
+jobs:
+  test:
+    parallelism: 2 # parallel containers to split the tests among
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - run: |
+          ./mvnw \
+          -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
+          | circleci tests split --split-by=timings); \
+          do basename $file \
+          | sed -e "s/.java/,/"; \
+          done | tr -d '\r\n') \
+          -e test
+      - store_test_results: # We use this timing data to optimize the future runs
+          path: target/surefire-reports
+
+  build:
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{% endraw %}
+
+Splitting tests by timings is a great way to divide time-consuming tests across multiple parallel containers. You might think of splitting by timings as requiring 4 parts:
+
+1. a list of tests to split
+2. the command: `circleci tests split --split-by=timings`
+3. containers to run the tests
+4. historical data to intelligently decide how to split tests
+
+To collect the list of tests to split, simply pull out all of the Java test files with this command: `circleci tests glob "src/test/**/**.java"`. Then use `sed` and `tr` to translate this newline-separated list of test files into a comma-separated list of test classes.
+
+Adding `store_test_results` enables CircleCI to access the historical timing data for previous executions of these tests, so the platform knows how to split tests to achieve the fastest overall runtime.
+
+### Storing code coverage artifacts
+
+```yaml
+version: 2.0
+
+jobs:
+  test:
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - run: ./mvnw test verify
+      - store_artifacts:
+          path: target/site/jacoco/index.html
+
+workflows:
+  version: 2
+
+  test-with-store-artifacts:
+    jobs:
+
+      - test
+```
+
+The Maven test runner with the [JaCoCo](https://www.eclemma.org/jacoco/) plugin generates a code coverage report during the build. To save that report as a build artifact, use the `store_artifacts` step.
+
+### A Configuration
+
+The following code sample is the entirety of a configuration file combining the features described above.
+
+
+{% raw %}
+
+```yaml
+version: 2.0
+
+jobs:
+  test:
+    parallelism: 2
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - attach_workspace:
+          at: ./target
+      - run: |
+            ./mvnw \
+            -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
+            | circleci tests split --split-by=timings); \
+            do basename $file \
+            | sed -e "s/.java/,/"; \
+            done | tr -d '\r\n') \
+            -e test verify
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/site/jacoco/index.html
+
+  build:
+    docker:
+
+      - image: circleci/openjdk:stretch
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+      - v1-dependencies-
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - persist_to_workspace:
+         root: ./
+         paths:
+           - target/
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+
+      - build
+      - test:
+          requires:
+            - build
 ```
 {% endraw %}
 
-完了です。 これで Gradle と Spring を使用する Java アプリケーション用に CircleCI をセットアップできました。
+The configuration above is from a demo Java app, which you can access [here](https://github.com/CircleCI-Public/circleci-demo-java-spring). If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the **Add Projects** page in CircleCI and click the **Build Project** button next to your project. Finally, delete everything in .circleci/config.yml. Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 
-## 関連項目
-{:.no_toc}
+## See Also
 
-- デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
-- Java のメモリの問題に対処する方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/2.0/java-oom/)」を参照してください。
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
+- See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document for details on handling Java memory issues.
