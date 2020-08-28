@@ -396,7 +396,9 @@ Not all command-line programs take credentials in the same way that `docker` doe
 
 Pipeline parameters can be used to pass variables using the CircleCI API v2. 
 
-A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
+A pipeline can be triggered with specific `parameter` values using the API v2
+endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById). 
+This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
