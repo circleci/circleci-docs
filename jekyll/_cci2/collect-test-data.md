@@ -23,10 +23,6 @@ The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-refe
 
 Where the `path` key is an absolute or relative path to your `working_directory` containing subdirectories of JUnit XML or Cucumber JSON test metadata files. Make sure that your `path` value is not a hidden folder (example: `.my_hidden_directory` would be an invalid format).
 
-After configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of [Insights](https://circleci.com/build-insights){:rel="nofollow"} in the application to identify flaky tests and isolate recurring issues.
-
-![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
-
 ## Enabling Formatters
 
 Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
