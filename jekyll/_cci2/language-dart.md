@@ -9,12 +9,12 @@ order: 2
 
 This document is a walkthrough of a sample Dart project setup on CircleCI. The project cherry-picks `number_guesser` and `number_thinker` code from the [Write HTTP clients & servers](https://dart.dev/tutorials/server/httpserver) tutorial.
 
-We assume you have a basic working knowledge of CircleCI and associated terminology. If not, visit our [Getting Started docs](http://0.0.0.0:4000/docs/2.0/getting-started/#section=getting-started).
+We assume you have a basic working knowledge of CircleCI and associated terminology. If not, visit our [Getting Started docs]({{ site.baseurl }}/2.0/getting-started/#section=getting-started).
 
 ## Quickstart
 
-**Repository**: <https://github.com/CircleCI-Public/circleci-dart-demo>   
-**Builds**: <https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo>
+**Repository**: https://github.com/CircleCI-Public/circleci-dart-demo
+**Builds**: https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo
 
 1. Find the full configuration at the bottom of this document or in the repository linked above.
 1. Copy that config into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory.
@@ -51,11 +51,6 @@ The first section of the file defines common items. The order in which things ar
 ```yaml
 version: 2.1
 
-#####################
-# Common Definitions
-#####################
-
-# Orb declarations
 orbs:
   win: circleci/windows@2.4.0
 ```
@@ -119,9 +114,6 @@ commands:
     - In both commands, we take parameters to override a cache path and shell for different jobs. Dart's package cache is in a different location in Windows, and it also uses a different shell (Powershell).
 
 ```yaml
-######################
-# Workflow Definition
-######################
 workflows:
   version: 2.1
   test-and-build:
@@ -148,9 +140,6 @@ workflows:
 - The commented line for `build-docker` uses a `dart-docker` context. See links to resources at the bottom of this document.
 
 ```yaml
-##################
-# Job Definitions
-##################
 jobs:
   test:
     docker:
