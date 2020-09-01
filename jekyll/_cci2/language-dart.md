@@ -22,7 +22,7 @@ We assume you have a basic working knowledge of CircleCI and associated terminol
 
 The CircleCI config does the following:
 
-- **It runs the tests on a Docker container.**
+- **It runs the tests in a Docker container.**
     - The `test` job uses the `google/dart` Docker image as its execution image (CircleCI doesn't currently have a native Dart image).
     - The tests uses the [junitreporter](https://pub.dev/packages/junitreport) package to produce JUnit XML output for CircleCI's [test metadata feature](https://circleci.com/docs/2.0/collect-test-data/), which in turn supports things like test summary, intelligent test splitting, and insights data/metrics.
 - **After tests run, it builds executables for deployment.**
@@ -432,4 +432,3 @@ jobs:
 - [Deploying on CircleCI](https://circleci.com/docs/2.0/deployment-integrations/#section=deployment)
 - [Using Contexts](https://circleci.com/docs/2.0/contexts/)
 - [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
-
