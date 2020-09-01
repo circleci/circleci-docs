@@ -13,7 +13,7 @@ We assume you have a basic working knowledge of CircleCI and associated terminol
 
 ## Quickstart
 
-**Repository**: [https://github.com/CircleCI-Public/circleci-dart-demo](https://github.com/CircleCI-Public/circleci-dart-demo)
+**Repository**: [https://github.com/CircleCI-Public/circleci-dart-demo](https://github.com/CircleCI-Public/circleci-dart-demo)   
 **Builds**: [https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo)
 
 1. Find the full configuration at the bottom of this document or in the repository linked above.
