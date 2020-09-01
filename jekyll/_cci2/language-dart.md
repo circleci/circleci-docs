@@ -9,7 +9,7 @@ order: 2
 
 This document is a walkthrough of a sample Dart project setup on CircleCI. The project cherry-picks `number_guesser` and `number_thinker` code from the [Write HTTP clients & servers](https://dart.dev/tutorials/server/httpserver) tutorial.
 
-We assume you have a basic working knowledge of CircleCI and associated terminology. If not, visit our [Getting Started docs]({{ site.baseurl }}/2.0/getting-started/#section=getting-started).
+We assume you have a basic working knowledge of CircleCI and associated terminology. If not, visit our [Getting Started docs]({{ site.baseurl }}/2.0/getting-started/).
 
 ## Quickstart
 
