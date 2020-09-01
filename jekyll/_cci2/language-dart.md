@@ -145,7 +145,7 @@ workflows:
 
 - In the `workflows` section, we define a workflow called `test-and-build` and define which jobs are run.
 - Each of the `build-*` jobs depend on `test` passing, which is set by the `requires` key.
-- There's a commented line for `build-docker`, which is using a `dart-docker` context. See links to resources at the bottom of this document.
+- The commented line for `build-docker` uses a `dart-docker` context. See links to resources at the bottom of this document.
 
 ```yaml
 ##################
