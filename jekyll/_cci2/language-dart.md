@@ -60,7 +60,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-- **Config Version**: Current is 2.1. Unless using legacy server install or legacy jobs and workflows, we highly suggest using 2.1.
+- **Config Version**: Current is `2.1`. Unless using a legacy server installation,  jobs or workflows, we recommend using 2.1.
 - **Orbs**: CircleCI offers [orbs](https://circleci.com/orbs/registry/), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/orbs/registry/orb/circleci/windows) to make use of a pre-defined execution environment later on.
 
 {% raw %}
