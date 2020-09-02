@@ -14,7 +14,8 @@ We assume you have a basic working knowledge of CircleCI and associated terminol
 
 ## Quickstart
 
-**Repository**: https://github.com/CircleCI-Public/circleci-dart-demo **Builds**: https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo
+**Repository**: [circleci-dart-demo](https://github.com/CircleCI-Public/circleci-dart-demo)   
+**Builds**: [circleci-dart-demo on CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-dart-demo)
 
 1. Find the full configuration at the bottom of this document or in the repository linked above.
 1. Copy that config into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory.
