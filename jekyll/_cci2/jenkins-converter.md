@@ -6,7 +6,6 @@ description: "Starting point for how to use the Jenkins Converter"
 categories: [getting-started]
 order: 1
 ---
-## Introduction to Jenkins Converter
 
 The Jenkins Converter is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you get started on building on CircleCI quickly and easily. It can be accessed at https://circleci.com/developer/tools/jenkins-converter.
 
