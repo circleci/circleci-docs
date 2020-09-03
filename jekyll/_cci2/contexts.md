@@ -17,7 +17,11 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 
 Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
+{:.tab.contextsimage.Cloud}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set. 
 
@@ -53,8 +57,9 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
+4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
+    {:.tab.contexts.Cloud}
     ```yaml
     version: 2.1
 
@@ -64,6 +69,28 @@ If you find you need to rename an org or repo that you have previously hooked up
           - run-tests:
               context:
                 - org-global
+                - my-context
+
+    jobs:
+      run-tests:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: 
+              name: "echo environment variables from org-global context"
+              command: echo $MY_ENV_VAR  
+    ```
+
+    {:.tab.contexts.Server}
+    ```yaml
+    version: 2.1
+
+    workflows:
+      my-workflow:
+        jobs:
+          - run-tests:
+              context: org-global
 
     jobs:
       run-tests:
