@@ -7,9 +7,9 @@ categories: [getting-started]
 order: 1
 ---
 
-The Jenkins Converter is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you get started on building on CircleCI quickly and easily. It can be accessed at https://circleci.com/developer/tools/jenkins-converter.
+The Jenkins Converter is a web tool that allows you to easily convert a Jenkinsfile to a CircleCI config.yml, helping you to get started building on CircleCI quickly and easily. It can be accessed at https://circleci.com/developer/tools/jenkins-converter.
 
-Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started on building on CircleCI.
+Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started building on CircleCI.
 
 ## Limitations
 
@@ -38,9 +38,9 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 
 A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor](https://circleci.com/docs/reference-2-1/#executors) regardless of the one defined within the Jenkinsfile input.
 
-Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different executor. [CircleCI's convenience images](https://circleci.com/docs/2.0/circleci-images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
+Given that `cimg/base` is a very lean image, it's highly likely that your project will require a different image. [CircleCI's convenience images](https://circleci.com/developer/images/) are a good place to find other images. Refer to [custom Docker image](https://circleci.com/docs/2.0/custom-images/) for advanced steps to create your own custom image.
 
-Depending on the use case, you may require the usage of a [machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) when your application requires full access to OS resources and the job environment, or the [macOS executor](https://circleci.com/docs/2.0/executor-types/#using-macos).
+Depending on the use case, you might require the [machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) if your application requires full access to OS resources and the job environment, or the [macOS executor](https://circleci.com/docs/2.0/executor-types/#using-macos).
 
 ### Workflows
 
@@ -78,7 +78,7 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
 ## Supported Jenkins plugins
 
-**Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise <u>you will see an error message saying something is "Unknown" or "Invalid"</u>. Please submit a ticket with our support center if you have a request to add a plugin to the list.
+**Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise **you will see an error message saying something is "Unknown" or "Invalid"**. Please submit a ticket with our support center if you have a request to add a plugin to the list.
 
 - Trilead API Plugin (`trilead-api`)
 - Folders Plugin (`cloudbees-folder`)
