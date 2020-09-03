@@ -460,9 +460,6 @@ ja:
         - name: Migrating a Linux Project
           i18n_name: Linuxプロジェクトの移行
           link: ja/2.0/migrating-from-1-2/
-        - name: Migrating an iOS Project
-          i18n_name: iOSプロジェクトの移行
-          link: ja/2.0/ios-migrating-from-1-2/
         - name: Using the config-translator
           i18n_name: config-translatorを使う
           link: ja/2.0/config-translation/

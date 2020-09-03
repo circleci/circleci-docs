@@ -74,8 +74,6 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
            xcode: "9.0"
      ```
 
-詳細については、「[iOS プロジェクトの 1.0 から 2.0 への移行](https://circleci.com/ja/docs/2.0/ios-migrating-from-1-2/)」を参照してください。
-
 6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。それには、以下のコードを検索します。
 
      ```
