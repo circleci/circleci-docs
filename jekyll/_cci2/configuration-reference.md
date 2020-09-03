@@ -1361,7 +1361,7 @@ Jobs may be configured to use global environment variables set for an organizati
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-context | N | String/List | The name of the context(s). The initial default name was `org-global`. Each context name must be unique.
+context | N | String/List | The name of the context(s). The initial default name was `org-global`. Each context name must be unique. If using CircleCI Server, only a single Context per workflow is supported.
 {: class="table table-striped"}
 
 ###### **`type`**
