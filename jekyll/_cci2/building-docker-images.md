@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 55
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote docker environment.

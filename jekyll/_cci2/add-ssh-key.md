@@ -6,7 +6,7 @@ description: "How to Add an SSH Key to CircleCI"
 order: 20
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 If deploying to your servers requires SSH access,

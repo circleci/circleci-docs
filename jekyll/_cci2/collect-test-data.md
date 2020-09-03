@@ -7,7 +7,7 @@ description: "Collecting test metadata"
 order: 34
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. 

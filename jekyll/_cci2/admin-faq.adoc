@@ -1,6 +1,6 @@
 ---
 version:
-- Server v2.19
+- Server v2.x
 ---
 = Frequently Asked Questions
 :page-layout: classic-docs

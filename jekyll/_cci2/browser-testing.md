@@ -5,7 +5,7 @@ description: Browser Testing on CircleCI
 category: [test]
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This document describes common methods for running and debugging browser testing in your CircleCI config in the following sections:

@@ -1,6 +1,6 @@
 ---
 version:
-- Server v2.19
+- Server v2.x
 ---
 = CircleCI Server Container Architecture
 :page-layout: classic-docs

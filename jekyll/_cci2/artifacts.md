@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 70
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This document describes how to work with Artifacts in the following sections:

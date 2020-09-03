@@ -7,7 +7,7 @@ categories: [containerization]
 order: 30
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This document describes how to create and use custom Docker images with CircleCI in the following sections:

@@ -7,7 +7,7 @@ categories: [containerization]
 order: 20
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.

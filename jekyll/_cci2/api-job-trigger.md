@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 80
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 

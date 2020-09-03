@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.

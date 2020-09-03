@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 41
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:

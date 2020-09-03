@@ -7,7 +7,7 @@ categories: [optimization]
 order: 50
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.

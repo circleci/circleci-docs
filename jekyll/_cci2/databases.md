@@ -7,7 +7,7 @@ categories: [configuring-jobs]
 order: 35
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 

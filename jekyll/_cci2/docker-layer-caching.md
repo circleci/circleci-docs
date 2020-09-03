@@ -7,7 +7,7 @@ categories: [optimization]
 order: 70
 version: 
  - Cloud
- - Server v2.19
+ - Server v2.x
 ---
 
 Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on

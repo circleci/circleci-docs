@@ -8,7 +8,7 @@ order: 50
 sitemap: false
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 Code Coverage tells you how much of your application is tested.

@@ -4,7 +4,7 @@ title: "Configuration Introduction"
 description: "Landing page for CircleCI 2.0 Config"
 version:
 - Cloud
-- Server v2.19
+- Server v2.x
 ---
 
 This guide focuses on getting you started with the core of the CircleCI experience - `config.yml` in the following simple steps:
