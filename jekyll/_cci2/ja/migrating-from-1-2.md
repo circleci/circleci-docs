@@ -74,8 +74,6 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
            xcode: 11.3.0
      ```
 
-詳細については、「[iOS プロジェクトの 1.0 から 2.0 への移行](https://circleci.com/ja/docs/2.0/ios-migrating-from-1-2/)」を参照してください。
-
 6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。それには、以下のコードを検索します。
 
      ```
@@ -122,13 +120,13 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
 
 ## 環境変数
 
-CircleCI 2.0 では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
+In CircleCI 2.0, all defined environment variables are treated literally. It is possible to interpolate variables within a command by setting it for the current shell.
 
-詳細については、「[環境変数を使用する]({{ site.baseurl }}/2.0/env-vars/)」を参照してください。
+For more information, refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## ワークフローを構成する手順
 
-迅速なフィードバック、再実行時間の短縮、効率的なリソースの使用によって、ソフトウェア開発をスピードアップさせるには、以下の手順に従ってワークフローを構成します。
+To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
 1. ワークフロー機能を使用するには、ビルド ジョブを複数のジョブに分割し、それぞれに一意の名前を付けます。 デプロイのみが失敗したときにビルド全体を再実行しなくても済むように、最初はデプロイ ジョブのみを分割するだけでもよいでしょう。
 
@@ -190,7 +188,7 @@ CircleCI 2.0 では、定義されたすべての環境変数はリテラルと�
       PATH: "/path/to/foo/bin:$PATH"
 ```
 
-次のように置き換えてシェルにロードします ($BASH_ENV ファイルはランダムな名前で既に /tmp に置かれています)。
+With the following to load it into your shell (the file $BASH_ENV already exists and has a random name in /tmp):
 
 ```yaml
     steps:
@@ -205,7 +203,7 @@ hosts:
     circlehost: 127.0.0.1
 ```
 
-次のように `run` ステップに置き換えます。
+With an appropriate `run` Step, for example:
 
 ```yaml
     steps:
@@ -220,7 +218,7 @@ dependencies:
     - <インストール済み依存関係>
 ```
 
-次のように置き換えます。
+Is replaced with:
 
 ```yaml
       - run:
@@ -235,7 +233,7 @@ dependencies:
     - "vendor/bundle"
 ```
 
-次のように置き換えて `steps:` の下にネストし、実際のアプリケーションに合わせて適切にカスタマイズします。
+With the following, nested under `steps:` and customizing for your application as appropriate:
 
 ```yaml
      - save_cache:
@@ -254,7 +252,7 @@ dependencies:
 
 ## YAML のバリデーション
 
-`.circleci/config.yml` にすべてのセクションを記述したら、<http://codebeautify.org/yaml-validator> などのツールを使用して、YAML 構文が正しい形式かどうかをチェックすることをお勧めします。 次に、`circleci` CLI を使用して、新しい構成が CircleCI 2.0 スキーマに照らして正しいかどうかをバリデーションします。 手順については、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-jobs/)」を参照してください。 すべての問題を修正したら、更新した `.circleci/config.yml` ファイルをコミットします。 コミットをプッシュすると、ジョブが自動的に開始され、それを CircleCI アプリケーションでモニタリングできます。
+When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
 ## 次のステップ
 {:.no_toc}
