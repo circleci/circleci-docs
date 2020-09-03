@@ -15,5 +15,4 @@ CircleCI Server のプライベート環境を 2.0 にアップグレードす�
 
 * [2.0 への移行のヒント](https://circleci.com/ja/docs/2.0/migration/)
 * [Linux プロジェクトの移行](https://circleci.com/ja/docs/2.0/migrating-from-1-2/)
-* [iOS プロジェクトの移行](https://circleci.com/ja/docs/2.0/ios-migrating-from-1-2/)
 * [設定ファイル変換ツールの使用](https://circleci.com/ja/docs/2.0/config-translation/)
