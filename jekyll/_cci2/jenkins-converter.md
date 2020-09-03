@@ -44,7 +44,7 @@ Depending on the use case, you might require the [machine executor](https://circ
 
 ### Workflows
 
-[CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) should be fully transferred from your Jenkinsfile to config.yml, including branch filters. The converter will not transfer over any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
+[CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
 ### Jobs
 
