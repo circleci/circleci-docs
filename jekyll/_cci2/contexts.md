@@ -56,7 +56,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
+4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. Note that it is possible to specify multiple contexts in a workflow.
 
     ```yaml
     version: 2.1
@@ -138,14 +138,14 @@ workflows:
             - build
             - hold 
       - deploy:
-          context: my-restricted-context
+          context: deploy-key-restricted-context
           requires:
             - build
             - hold
             - test
 ```
 
-In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `my-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing Groups from Contexts
 
