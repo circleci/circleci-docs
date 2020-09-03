@@ -1,6 +1,7 @@
 ---
 version:
 - Server v2.x
+- Admin
 ---
 = Frequently Asked Questions
 :page-layout: classic-docs

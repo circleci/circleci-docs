@@ -5,6 +5,8 @@ short-title: "Best Practices for Orbs"
 description: "a guide to best practices for orbs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 A collection of best practices and strategies for authoring orbs. CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors.

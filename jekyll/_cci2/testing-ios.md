@@ -5,6 +5,8 @@ short-title: Testing iOS Applications on macOS
 categories: [platforms]
 description: Testing iOS applications on macOS
 order: 30
+version: 
+- Cloud
 ---
 
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:

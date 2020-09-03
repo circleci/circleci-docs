@@ -5,6 +5,9 @@ short-title: "Writing YAML"
 description: "How to Write YAML on CircleCI"
 categories: [configuring-jobs]
 order: 20
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes the most important features of YAML for use in CircleCI configuration.

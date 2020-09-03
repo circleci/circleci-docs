@@ -5,6 +5,9 @@ short-title: "Status"
 description: "Status dashboard"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 <hr>

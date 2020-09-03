@@ -5,6 +5,8 @@ short-title: "Orbs FAQ"
 description: "FAQs for Orbs"
 categories: [configuring-jobs]
 order: 20
+version:
+- Cloud
 ---
 
 This document describes various questions and technical issues that you may find helpful when working with orbs.

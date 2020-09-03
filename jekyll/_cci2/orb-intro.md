@@ -5,9 +5,9 @@ short-title: "Orbs Introduction"
 description: "Starting point for CircleCI Orbs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
-
-_Available on CircleCI with `version 2.1` config. Not currently available on self-hosted installations of CircleCI Server_
 
 * TOC
 {:toc}

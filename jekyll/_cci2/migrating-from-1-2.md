@@ -5,6 +5,8 @@ short-title: "Migrating a Linux Project from 1.0 to 2.0"
 description: "Why and how to migrate from CircleCI 1.0 to 2.0"
 categories: [migration]
 order: 15
+version:
+- Server v2.x
 ---
 
 This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. 
