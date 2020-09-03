@@ -24,13 +24,15 @@ CircleCI は、XML ファイルからテスト メタデータを収集し、そ
 
 ここで、`path` キーは、JUnit XML または Cucumber JSON テスト メタデータ ファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パスです。 この `path` 値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
 
-テスト メタデータを収集するように CircleCI を構成すると、最も頻繁に失敗するテストの一覧がアプリケーション内の [[Insights (インサイト)]](https://circleci.com/build-insights){:rel="nofollow"} の詳細ページに表示されるので、不安定なテストを特定して、繰り返し発生している問題を分離できます。
+**If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of [Insights](https://circleci.com/build-insights){:rel="nofollow"} in the CircleCI application to identify flaky tests and isolate recurring issues.
 
 ![失敗したテストに関するインサイト]({{ site.baseurl }}/assets/img/docs/insights.png)
 
+**If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
+
 ## フォーマッタの有効化
 
-JUnit フォーマッタを有効化するまで、テスト メタデータは CircleCI 2.0 で自動的には収集されません。 RSpec、Minitest、および Django に対して、以下の構成を追加してフォーマッタを有効化します。
+Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
 * RSpec では、gemfile に以下を追加する必要があります。
 
@@ -46,7 +48,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 
 ## カスタム テスト ステップでのメタデータの収集
 
-大多数のテスト ランナーが何らかの形式でサポートしているように、JUnit XML 出力を生成するカスタムのテスト ステップを使用している場合は、以下のとおり XML ファイルをサブディレクトリに書き出します。
+Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
 
     <br />- store_test_results:
         path: /tmp/test-results
@@ -55,7 +57,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 ### カスタム テスト ランナーの例
 {:.no_toc}
 
-このセクションでは、以下のテスト ランナーの例を示します。
+This section provides the following test runner examples:
 
 * [Cucumber]({{ site.baseurl }}/2.0/collect-test-data/#cucumber)
 * [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
@@ -74,7 +76,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 #### Cucumber
 {:.no_toc}
 
-カスタム Cucumber ステップの場合は、JUnit フォーマッタを使用してファイルを生成し、それを `cucumber` ディレクトリに書き込む必要があります。 `.circleci/config.yml` ファイルに追加するコードの例は以下のとおりです。
+For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory. Following is an example of the addition to your `.circleci/config.yml` file:
 
 ```yaml
     steps:
@@ -90,9 +92,9 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
           path: ~/cucumber
 ```
 
-`path:` は、ファイルが格納されるディレクトリをプロジェクトのルート ディレクトリからの相対ディレクトリで指定します。 CircleCI は、アーティファクトを収集して S3 にアップロードし、アプリケーション内の**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示します。
+The `path:` is a directory relative to the project’s root directory where the files are stored. CircleCI collects and uploads the artifacts to S3 and makes them available in the Artifacts tab of the **Job page** in the application.
 
-または、Cucumber の JSON フォーマッタを使用する場合は、出力ファイルに `.cucumber` で終わる名前を付け、それを `/cucumber` ディレクトリに書き出します。 たとえば、以下のようになります。
+Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the output file that ends with `.cucumber` and write it to the `/cucumber` directory. For example:
 
 ```yaml
     steps:
@@ -111,7 +113,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 #### Java JUnit の結果に使用する Maven Surefire プラグイン
 {:.no_toc}
 
-[Maven](http://maven.apache.org/) ベースのプロジェクトをビルドする場合は、[Maven Surefire プラグイン](http://maven.apache.org/surefire/maven-surefire-plugin/)を使用して XML 形式のテスト レポートを生成することがほとんどです。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
+If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
 ```yaml
     steps:
@@ -130,7 +132,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 #### <a name="gradle-junit-results"></a>Gradle JUnit のテスト結果
 {:.no_toc}
 
-[Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テスト レポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
+If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
 
 ```yaml
     steps:
@@ -149,9 +151,9 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 #### <a name="mochajs"></a>Node.js 用の Mocha
 {:.no_toc}
 
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
+To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
-`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
+A working `.circleci/config.yml` section for testing might look like this:
 
 ```yaml
     steps:
@@ -171,7 +173,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 
 #### Mocha と nyc の組み合わせ
 
-以下は、[marcospgp](https://github.com/marcospgp) から提供された、Mocha と nyc の組み合わせに使用できるサンプルの全文です。
+Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
 version: 2
@@ -273,9 +275,9 @@ version: 2
 #### <a name="ava"></a>Node.js 用の AVA
 {:.no_toc}
 
-[AVA](https://github.com/avajs/ava) テスト ランナーで JUnit テストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit) を指定して TAP レポーターを使用します。
+To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
-`.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
+A working `.circleci/config.yml` section for testing might look like the following example:
 
         steps:
           - run:
@@ -293,9 +295,9 @@ version: 2
 #### ESLint
 {:.no_toc}
 
-[ESLint](http://eslint.org/) から JUnit 結果を出力するには、[JUnit フォーマッタ](http://eslint.org/docs/user-guide/formatters/#junit)を使用します。
+To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
-`.circleci/config.yml` の作業テスト セクションは、以下のようになります。
+A working `.circleci/config.yml` test section might look like this:
 
         steps:
           - run:
@@ -312,7 +314,7 @@ version: 2
 #### PHPUnit
 {:.no_toc}
 
-PHPUnit テストの場合は、`--log-junit` コマンド ライン オプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
+For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
 
         steps:
           - run:
@@ -329,7 +331,7 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
 #### pytest
 {:.no_toc}
 
-`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
+To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
 
           - run:
               name: テストの実行
@@ -348,12 +350,12 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
 #### RSpec
 {:.no_toc}
 
-カスタム `rspec` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
 
     gem 'rspec_junit_formatter'
     
 
-さらに、テスト コマンドを以下のように変更します。
+And modify your test command to this:
 
         steps:
           - checkout
@@ -369,12 +371,12 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
 ### Minitest
 {:.no_toc}
 
-カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
     gem 'minitest-ci'
     
 
-さらに、テスト コマンドを以下のように変更します。
+And modify your test command to this:
 
         steps:
           - checkout
@@ -386,18 +388,18 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
               path: test/reports
     
 
-詳細については、[minitest-ci README](https://github.com/circleci/minitest-ci#readme) を参照してください。
+See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
 #### Clojure テスト用の test2junit
 {:.no_toc}
 
-Clojure のテスト出力を XML 形式に変換するには、[test2junit](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、[サンプル プロジェクト](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
+Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
 #### Visual Studio/.NET Core テスト用の trx2junit
 
-{:.no_toc} Visual Studio または .NET Core で出力される trx ファイルを XML 形式に変換するには、[trx2junit](https://github.com/gfoidl/trx2junit) を使用します。
+{:.no_toc} Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
-`.circleci/config.yml` の作業セクションは、以下のようになります。
+A working `.circleci/config.yml` section might look like this:
 
 ```yaml
     steps:
@@ -420,9 +422,9 @@ Clojure のテスト出力を XML 形式に変換するには、[test2junit](htt
 
 #### Karma
 {:.no_toc}
-Karma テスト ランナーで JUnit テストを出力するには、[karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) を使用します。
+To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
 
-`.circleci/config.yml` の作業セクションは、以下のようになります。
+A working `.circleci/config.yml` section might look like this:
 
 ```yaml
     steps:
@@ -481,9 +483,9 @@ steps:
 
 For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI 2.0 with Jest and ESLint](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint). Note that usage of the jest cli argument `--testResultsProcessor` in the article has been superseded by the `--reporters` syntax, and JEST_JUNIT_OUTPUT has been replaced with `JEST_JUNIT_OUTPUT_DIR` and `JEST_JUNIT_OUTPUT_NAME`, as demonstrated above.
 
-**メモ:** Jest テストの実行時には、`--runInBand` フラグを使用してください。 このフラグがない場合、Jest はジョブを実行している仮想マシン全体に CPU リソースを割り当てようとします。 `--runInBand` を使用すると、Jest は仮想マシン内の仮想化されたビルド環境のみを使用するようになります。
+**Note:** When running Jest tests, please use the `--runInBand` flag. Without this flag, Jest will try to allocate the CPU resources of the entire virtual machine in which your job is running. Using `--runInBand` will force Jest to use only the virtualized build environment within the virtual machine.
 
-`--runInBand` の詳細については、[Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) ドキュメントを参照してください。 この問題の詳細については、公式 Jest リポジトリの [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) と [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) を参照してください。
+For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
 ## API
 
@@ -492,7 +494,7 @@ To access test metadata for a run from the API, refer to the [test-metadata API 
 ## 関連項目
 {:.no_toc}
 
-[インサイトの使用]({{ site.baseurl }}/2.0/insights/)
+[Using Insights]({{ site.baseurl }}/2.0/insights/)
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {:.no_toc}
