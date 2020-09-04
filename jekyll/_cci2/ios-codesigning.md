@@ -153,15 +153,14 @@ jobs:
     macos:
       xcode: 11.3.0
     steps:
-      ...
+      # inc steps to complete build and test
       - run: bundle exec fastlane test
-      ...
 
   adhoc:
     macos:
       xcode: 11.3.0
     steps:
-      ...
+      # inc steps required to complete job
       - run: bundle exec fastlane adhoc
 
 workflows:
