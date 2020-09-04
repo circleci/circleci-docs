@@ -6,7 +6,7 @@ description: "Connecting JIRA with CircleCI"
 ---
 
 This document describes how you can connect JIRA to your CircleCI builds. With
-the CircleCI JIRA plugin, you can display your build statuses in Jira.
+the CircleCI JIRA plugin, you can display your build statuses in JIRA.
 
 **Note:** You have to be an JIRA admin to install this plugin.
 

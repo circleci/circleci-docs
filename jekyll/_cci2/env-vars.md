@@ -5,6 +5,9 @@ short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
 categories: [configuring-jobs]
 order: 40
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes using environment variables in CircleCI in the following sections:

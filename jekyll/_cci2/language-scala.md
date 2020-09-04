@@ -5,6 +5,9 @@ short-title: "Language Guide: Scala"
 description: "CircleCI 2.0 Language Guide: Scala"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document will walk you through a Scala application [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:

@@ -1,7 +1,7 @@
 ---
 version:
-- Cloud
-- Server v2.17
+- Server v2.x
+- Server Admin
 ---
 = Customization and Configuration
 :page-layout: classic-docs
