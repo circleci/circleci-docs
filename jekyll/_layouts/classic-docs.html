@@ -28,8 +28,9 @@
 
       <article>
         <!-- Title and version badges: -->
-        <div class="title-and-badges">
+        <div>
           {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
+        </div>
 
           {% if page.version %}
           <div class="server-version-wrapper">
@@ -45,8 +46,6 @@
             {% endfor %}
           </div>
           {% endif %}
-
-        </div>
 
 
 		{% if page.untranslated %}

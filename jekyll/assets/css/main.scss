@@ -31,14 +31,6 @@ a {
 	}
 }
 
-.title-and-badges {
-  display: flex;
-  justify-content: space-between;
-
-  @media screen and (max-width: 1068px) {
-    flex-direction: column;
-  }
-}
 
 div.main-body{
 	overflow: auto;
@@ -411,6 +403,10 @@ pre {
     font-weight: bold;
     font-size: 12px;
     text-align: center;
+
+    &:first-child {
+      margin-left: 0px;
+    }
 }
 
 .server-version-popover {
@@ -424,7 +420,8 @@ pre {
 .server-version-wrapper {
 	display: flex;
 	align-items: center;
-  margin-top: 16px;
+  margin-bottom: 16px;
+  margin-top: -4px;
 
   @media screen and (max-width: 1068px) {
     margin: 0 0 16px 0;
