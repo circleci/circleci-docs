@@ -13,7 +13,8 @@ toc::[]
 
 == Services Machine
 The Services machine hosts the core of our Server product, including the user-facing website, API engine, datastores, and Nomad job scheduler. It is best practice to use an isolated machine.
-Note: Currently CircleCI Server only supports x86_64 architecture.
+
+NOTE: Currently, CircleCI Server only supports x86_64 architecture.
 
 The following table defines the Services machine CPU, RAM, and disk space requirements:
 
