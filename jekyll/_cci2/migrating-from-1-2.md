@@ -60,7 +60,6 @@ The `config-translation` endpoint can help you quickly get started with converti
          macos: 
            xcode: 11.3.0
      ```
-See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2.0/ios-migrating-from-1-2/) document for details.
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
      ```

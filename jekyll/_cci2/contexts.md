@@ -167,14 +167,14 @@ workflows:
             - build
             - hold 
       - deploy:
-          context: my-restricted-context
+          context: deploy-key-restricted-context
           requires:
             - build
             - hold
             - test
 ```
 
-In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `my-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing Groups from Contexts
 
