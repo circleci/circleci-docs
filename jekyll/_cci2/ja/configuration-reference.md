@@ -1373,9 +1373,9 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
 
-| キー      | 必須 | 型      | 説明                                                                                                    |
-| ------- | -- | ------ | ----------------------------------------------------------------------------------------------------- |
-| context | ×  | String | The name of the context. The initial default name was `org-global`. Each context name must be unique. |
+| キー      | 必須 | 型           | 説明                                                                                                                                                                                 |
+| ------- | -- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| context | ×  | String/List | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single Context per workflow is supported. |
 {: class="table table-striped"}
 
 ###### **`type`**
