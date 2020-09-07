@@ -18,16 +18,20 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 
 Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
+{:.tab.contextsimage.Cloud}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set.
 
-コンテキスト名は、各 GitHub 組織または Bitbucket 組織内で一意でなければなりません。 **メモ:** 初期デフォルト名 `org-global` で作成されたコンテキストは、引き続き機能します。
+Context names must be unique for each GitHub or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work.
 
 ### Context Naming for CircleCI Server
 {:.no_toc}
 
-GitHub Enterprise (GHE) インストールに複数の組織が含まれる場合、コンテキスト名はそれらの組織間でも一意である必要があります。 たとえば、Kiwi という名前の GHE があり、それに 2 つの組織が含まれる場合、両方の組織に `deploy` という名前のコンテキストを追加することはできません。 つまり、Kiwi アカウントの同じ GHE インストールに存在する 2 つの組織内で、コンテキスト名 `deploy` を重複させることはできません。 1 つのアカウント内で重複するコンテキストは、エラーとなって失敗します。
+For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error.
 
 ### Renaming Orgs and Repositories
 
@@ -54,8 +58,9 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. Note that it is possible to specify multiple contexts in a workflow.
+4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
+    {:.tab.contexts.Cloud}
     ```yaml
     version: 2.1
 
@@ -64,7 +69,32 @@ If you find you need to rename an org or repo that you have previously hooked up
         jobs:
 
           - run-tests:
-              context: org-global        
+              context:
+                - org-global
+                - my-context
+
+    jobs:
+      run-tests:
+        docker:
+
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: 
+              name: "echo environment variables from org-global context"
+              command: echo $MY_ENV_VAR  
+    ```
+
+    {:.tab.contexts.Server}
+    ```yaml
+    version: 2.1
+
+    workflows:
+      my-workflow:
+        jobs:
+
+          - run-tests:
+              context: org-global
 
     jobs:
       run-tests:
@@ -81,6 +111,10 @@ If you find you need to rename an org or repo that you have previously hooked up
 ### Moving a Repository that Uses a Context
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
+
+## Combining Contexts
+
+You can combine several contexts for a single job by just adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way you can scope contexts to be as small and granular as you like.
 
 ## Restricting a Context
 
@@ -161,7 +195,7 @@ CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added o
 
 Addition and deletion of environment variables from a restricted context is limited to members of the context groups.
 
-## コンテキストの削除
+## Deleting a Context
 
 If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task:
 
@@ -171,7 +205,7 @@ If the context is restricted with a group other than `All members`, you must be 
 
 3. Type Delete and click Confirm. The Context and all associated environment variables will be deleted. **Note:** If the context was being used by a job in a Workflow, the job will start to fail and show an error.
 
-## 環境変数の使用方法
+## Environment Variable Usage
 
 Environment variables are used according to a specific precedence order, as follows:
 
@@ -184,7 +218,7 @@ Environment variables are used according to a specific precedence order, as foll
 
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
-## シークレットのマスキング
+## Secrets Masking
 
 *Secrets masking is not currently available on self-hosted installations of CircleCI Server*
 
@@ -197,7 +231,7 @@ The value of the context will not be masked in the build output if:
 
 **Note:** secret masking will only prevent the value of the context from appearing in your build output. The value of the context is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
-## 関連項目
+## See Also
 {:.no_toc}
 
 [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) [Workflows]({{ site.baseurl }}/2.0/workflows/)
