@@ -12,7 +12,7 @@ This document describes an initial set of troubleshooting steps to take if you a
 toc::[]
 
 === Generating a Support Bundle
-To download a support bundle, select **Support** from the Managment Console menu bar, and then select **Download Support Bundle**. Often CircleCI support engineers will request support bundles to help diagnose/fix the problem you are experiencing.
+To download a support bundle, select **Support** from the Management Console menu bar, and then select **Download Support Bundle**. CircleCI support engineers will often request support bundles to help diagnose/fix the problem you are experiencing.
 
 === Debug Queuing Builds
 
