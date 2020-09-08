@@ -50,9 +50,9 @@ API v2 is compiled from an [OpenAPI
 spec](https://github.com/OAI/OpenAPI-Specification). We use
 [Redoc](https://github.com/Redocly/redoc) to compile our spec into a webpage. To
 see the compilation process, refer to `build_api_docs.sh` and our
-`.circleci/config.yml`. If you need to make changes to the output site, it is
-likely you will need to make source code changes to the API, where the docs are
-generated from.
+`.circleci/config.yml`. If you need to make changes to the output site, you will
+likely need to make source code changes to the API, where the docs are generated
+from.
 
 This is the build folder we use for automatically generating documentation for
 the CircleCI API v2. This uses [Slate](https://github.com/slatedocs/slate) and
