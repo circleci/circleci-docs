@@ -142,7 +142,7 @@ unavailable","level":"warning","msg":"error fetching config, retrying","time":"2
 
 If a `restore_cache` step is failing for one of your jobs, it is worth checking the size of the cache - you can view the cache size from the CircleCI Jobs page within the `restore_cache` step. We recommend keeping cache sizes under 500MB – this is our upper limit for corruption checks because above this limit check times would be excessively long. Larger cache sizes are allowed but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting into multiple distinct caches.
 
-=== How do I get round the API service being impacted by a high thread count?
+=== How do I get around the API service being impacted by a high thread count?
 
 Disable cache warming by completing the following steps:
 
