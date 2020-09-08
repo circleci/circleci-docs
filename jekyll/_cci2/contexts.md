@@ -14,7 +14,11 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 
 Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
+{:.tab.contextsimage.Cloud}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set. 
 
@@ -50,8 +54,9 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
+4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
+    {:.tab.contexts.Cloud}
     ```yaml
     version: 2.1
 
@@ -59,8 +64,31 @@ If you find you need to rename an org or repo that you have previously hooked up
       my-workflow:
         jobs:
           - run-tests:
-              context: org-global        
-      
+              context:
+                - org-global
+                - my-context
+
+    jobs:
+      run-tests:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: 
+              name: "echo environment variables from org-global context"
+              command: echo $MY_ENV_VAR  
+    ```
+
+    {:.tab.contexts.Server}
+    ```yaml
+    version: 2.1
+
+    workflows:
+      my-workflow:
+        jobs:
+          - run-tests:
+              context: org-global
+
     jobs:
       run-tests:
         docker:
@@ -76,6 +104,10 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
+## Combining Contexts
+
+You can combine several contexts for a single job by just adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way you can scope contexts to be as small and granular as you like.
+
 ## Restricting a Context
 
 CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are defined by GitHub teams. If you are using CircleCI Server with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables. 
@@ -88,7 +120,7 @@ The default security group is `All members` and enables any member of the organi
 
 ### Running Workflows with a Restricted Context
 
-To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
+To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context and must sign up for CircleCI. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
 ### Restrict a Context to a Security Group or Groups
 
@@ -132,14 +164,14 @@ workflows:
             - build
             - hold 
       - deploy:
-          context: my-restricted-context
+          context: deploy-key-restricted-context
           requires:
             - build
             - hold
             - test
 ```
 
-In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `my-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing Groups from Contexts
 
@@ -177,6 +209,8 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
+
+_Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
 

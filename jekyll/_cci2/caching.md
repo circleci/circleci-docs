@@ -52,6 +52,18 @@ Caching is a balance between reliability (not using an out-of-date or inappropri
 
 In general it is safer to preserve reliability than to risk a corrupted build or to build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability.
 
+## Caching and Open Source
+
+If your project is open source/available to be forked and receive PRs from
+contributors, please make note of the following:
+
+- PRs from the same fork repo will share a cache (this includes, as previously
+  stated, that PRs in the master repo share a cache with master).
+- Two PRs in different Fork Repos will have different caches.
+- enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
+  will enable cache sharing between the original repo and all forked builds.
+
+
 ## Caching Libraries
 
 The dependencies that are most important to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and [demo projects](https://circleci.com/docs/2.0/demo-apps/) for the specifics for your stack.
@@ -571,7 +583,7 @@ In this example, `restore_cache` looks for a cache hit from the current git revi
 
 If your source code changes frequently, we recommend using fewer, more specific keys. This produces a more granular source cache that will update more often as the current branch and git revision change.
 
-Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
+Even with the narrowest `restore_cache` option ({% raw %}`source-v1-{{ .Branch }}-{{ .Revision }}`{% endraw %}), source caching can be greatly beneficial when, for example, running repeated builds against the same git revision (i.e., with [API-triggered builds](https://circleci.com/docs/api/v1/#trigger-a-new-build-by-project-preview)) or when using Workflows, where you might otherwise need to `checkout` the same repository once per Workflows job.
 
 That said, it's worth comparing build times with and without source caching; `git clone` is often faster than `restore_cache`.
 

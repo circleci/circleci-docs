@@ -5,6 +5,7 @@
 | [Clojure]{:target="_blank"}             | Luminus      | [circleci-demo-clojure-luminus]{:target="_blank"}        |
 | [Crystal]{:target="_blank"}             | Kemal        | [circleci-demo-crystal]{:target="_blank"}                |
 | C                                       | -            | [parallel-compile-circleci]{:target="_blank"}            |
+| [Dart]{:target="_blank"}                | -            | [circleci-demo-dart]{:target="_blank"}                   |
 | [Elixir]{:target="_blank"}              | Phoenix      | [circleci-demo-elixir-phoenix]{:target="_blank"}         |
 | [Go]{:target="_blank"}                  | Go           | [circleci-demo-go]{:target="_blank"}                     |
 | [Haskell]{:target="_blank"}             | Scotty       | [circleci-demo-haskell]{:target="_blank"}                |
@@ -29,6 +30,7 @@
 [Android - React]: https://github.com/CircleCI-Public/circleci-demo-react-native/blob/master/README.md
 [Clojure]: {{ site.baseurl }}/2.0/language-clojure/
 [Crystal]: {{ site.baseurl }}/2.0/language-crystal/
+[Dart]: {{ site.baseurl }}/2.0/language-dart/
 [Elixir]: {{ site.baseurl }}/2.0/language-elixir/
 [Go]: {{ site.baseurl }}/2.0/language-go/
 [Haskell]: {{ site.baseurl }}/2.0/language-haskell/
@@ -50,6 +52,7 @@
 [android-image]: https://github.com/circleci/circleci-images/tree/master/android
 [circleci-demo-clojure-luminus]: https://github.com/CircleCI-Public/circleci-demo-clojure-luminus
 [circleci-demo-crystal]: https://github.com/CircleCI-Public/circleci-demo-crystal
+[circleci-demo-dart]: https://github.com/CircleCI-Public/circleci-dart-demo
 [circleci-demo-elixir-phoenix]: https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix
 [circleci-demo-go]: https://github.com/CircleCI-Public/circleci-demo-go
 [circleci-demo-java-spring]: https://github.com/CircleCI-Public/circleci-demo-java-spring

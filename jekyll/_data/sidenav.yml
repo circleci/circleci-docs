@@ -71,6 +71,8 @@ en:
           link: 2.0/migrating-from-teamcity/
         - name: Migrating from TravisCI
           link: 2.0/migrating-from-travis/
+        - name: Jenkins Converter
+          link: 2.0/jenkins-converter/
 
 - name: Configuration
   icon: docs/config.svg
@@ -97,38 +99,25 @@ en:
       children:
         - name: Orb Introduction
           link: 2.0/orb-intro/
+        - name: Orbs Concepts
+          link: 2.0/orb-concepts/
         - name: Orbs FAQ
           link: 2.0/orbs-faq/
-        - name: Orbs Concepts
-          link: 2.0/using-orbs/
-        - name: Reusable Config Reference
-          link: 2.0/reusing-config/
-        - name: Orb Testing Methodologies
-          link: 2.0/testing-orbs/
-        - name: Orb Publishing Process
-          link: 2.0/creating-orbs/
     - name: Authoring Orbs
       link: 2.0/orb-author-intro/
       children:
         - name: Intro to Authoring an Orb
           link: 2.0/orb-author-intro/
-        - name: Set up the CircleCI CLI
-          link: 2.0/orb-author-cli/
         - name: Author an Orb
           link: 2.0/orb-author/
-        - name: Test and Publish Your Orb
-          link: 2.0/orb-author-validate-publish/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
         - name: Orbs Best Practices
           link: 2.0/orbs-best-practices/
-    - name: Using Orbs
-      link: 2.0/orbs-user-config/
-      children:
-        - name: Get Set Up For Orbs
-          link: 2.0/orbs-user-config/
-        - name: Selecting and Using an Orb
-          link: 2.0/orbs-user-select-orb/
+        - name: Orb Testing Methodologies
+          link: 2.0/testing-orbs/
+        - name: Orb Publishing Process
+          link: 2.0/creating-orbs/
     - name: Examples
       link: 2.0/examples-intro/
       children:
@@ -293,7 +282,7 @@ en:
         - name: API v2 Developer's Guide
           link: 2.0/api-developers-guide
         - name: API v1.1 Reference
-          link: api/
+          link: api/v1
         - name: Prebuilt Images
           link: 2.0/circleci-images/
         - name: Glossary
@@ -325,8 +314,6 @@ en:
           link: 2.0/aws-teardown/
         - name: Upgrades from 1.0 to 2.0
           link: 2.0/upgrading/
-        - name: Trial Single-box Install
-          link: 2.0/single-box/
     - name: Server v2.19.x Operations
       link: 2.0/overview/
       children:
@@ -334,7 +321,7 @@ en:
           link: 2.0/overview/
         - name: Nomad
           link: 2.0/nomad/
-        - name: Monitoring
+        - name: Metrics & Monitoring
           link: 2.0/monitoring/
         - name: Nomad Metrics
           link: 2.0/nomad-metrics/
@@ -356,6 +343,8 @@ en:
           link: 2.0/usage-stats/
         - name: JVM Heap Size
           link: 2.0/jvm-heap-size-configuration/
+        - name: SSH Reruns
+          link: 2.0/ssh-server/
         - name: Maintenance
           link: 2.0/ops/
         - name: Backup and Recovery
@@ -370,6 +359,8 @@ en:
           link: 2.0/customizations/
         - name: Architecture
           link: 2.0/architecture/
+        - name: Storage Lifecycle
+          link: 2.0/storage-lifecycle/
         - name: Acknowledgments
           link: 2.0/open-source/
     - name: Server v2.19 PDFs
@@ -469,9 +460,6 @@ ja:
         - name: Migrating a Linux Project
           i18n_name: Linuxプロジェクトの移行
           link: ja/2.0/migrating-from-1-2/
-        - name: Migrating an iOS Project
-          i18n_name: iOSプロジェクトの移行
-          link: ja/2.0/ios-migrating-from-1-2/
         - name: Using the config-translator
           i18n_name: config-translatorを使う
           link: ja/2.0/config-translation/

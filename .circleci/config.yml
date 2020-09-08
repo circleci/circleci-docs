@@ -156,7 +156,7 @@ jobs:
       - checkout
       - run:
           name: Build PDFs for Server
-          command: ./scripts/build_pdfs_local.sh
+          command: ./scripts/build_pdfs_asciidoc.sh
       - store_artifacts: 
           path: release/tmp/
 
@@ -201,7 +201,9 @@ jobs:
       - *attach_workspace
       - run:
           name: "Create landing folder for API doc output"
-          command: mkdir -p /tmp/workspace/api/v2
+          command: |
+            mkdir -p /tmp/workspace/api/v1
+            mkdir -p /tmp/workspace/api/v2
       - ruby-deps:
           dir: src-api
       - restore_cache:
@@ -283,7 +285,9 @@ jobs:
             mv /tmp/workspace/js/* jekyll/assets/js/
 
             mkdir -p /tmp/workspace/api
-            cp -r /tmp/workspace/api/**/* jekyll/_api/
+            cp -r /tmp/workspace/api/ jekyll/_api/
+            # remove unusued /api folder.
+            rm -rf jekyll/_api/api
 
             mkdir -p /tmp/workspace/config-builder
             mkdir -p jekyll/config-builder
@@ -295,6 +299,7 @@ jobs:
             
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
+      - run: sudo apt-get update; sudo apt-get --yes install nkf
       - run:
           name: Shim untranslated Japanese pages
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja

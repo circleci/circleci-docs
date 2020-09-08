@@ -91,7 +91,7 @@ machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/orbs/registry/orb/circleci/windows).
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
-working_directory | N | String | In which directory to run the steps.
+working_directory | N | String | In which directory to run the steps. Will be interpreted as an absolute path.
 environment | N | Map | A map of environment variable names and values.
 {: class="table table-striped"}
 
@@ -117,11 +117,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 ## **`jobs`**
 
-A run is comprised of one or more named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
-
-If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
-
-If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
+A Workflow is comprised of one or more uniquely named jobs. Jobs are specified in the `jobs` map, see [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) for two examples of a `job` map. The name of the job is the key in the map, and the value is a map describing the job.
 
 **Note:**
 Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider running some of them concurrently using [workflows]({{ site.baseurl }}/2.0/workflows/).
@@ -138,7 +134,7 @@ macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 parameters | N | Map | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`.
 steps | Y | List | A list of [steps](#steps) to be performed
-working_directory | N | String | In which directory to run the steps. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
+working_directory | N | String | In which directory to run the steps. Will be interpreted as an absolute path. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
@@ -656,7 +652,7 @@ name | N | String | Title of the step to be shown in the CircleCI UI (default: f
 shell | N | String | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))
 environment | N | Map | Additional environmental variables, locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
-working_directory | N | String | In which directory to run this step (default:  [`working_directory`](#jobs) of the job)
+working_directory | N | String | In which directory to run this step. Will be interpreted relative to the [`working_directory`](#jobs) of the job). (default: `.`)
 no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
@@ -776,7 +772,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ###### Ending a Job from within a `step`
 
-A job can exit without failing by using using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
+A job can exit without failing by using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
@@ -857,7 +853,7 @@ A special step used to check out source code to the configured `path` (defaults 
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-path | N | String | Checkout directory (default: job's [`working_directory`](#jobs))
+path | N | String | Checkout directory. Will be interpreted relative to the [`working_directory`](#jobs) of the job). (default: `.`)
 {: class="table table-striped"}
 
 If `path` already exists and is:
@@ -1357,7 +1353,7 @@ Jobs may be configured to use global environment variables set for an organizati
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-context | N | String | The name of the context. The initial default name was `org-global`. Each context name must be unique.
+context | N | String/List | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single Context per workflow is supported.
 {: class="table table-striped"}
 
 ###### **`type`**
@@ -1650,20 +1646,19 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
-Type               | Arguments          | `true` if                              | Example
--------------------|--------------------|----------------------------------------|----------------------------------------
-YAML literal       | None               | is truthy                              | `true`/`42`/`"a string"`
-[Pipeline Value](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-values) | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`
-[Pipeline Parameter](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`
-and                | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`
-or                 | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`
-not                | 1 logic statement  | the argument is not truthy             | `not: true`
-equal              | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`
+Type | Arguments | `true` if | Example
+---|---|---|---
+YAML literal | None | is truthy | `true`/`42`/`"a string"`
+YAML alias | None | resolves to a truthy value | *my-alias
+[Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values) | None | resolves to a truthy value | `<< pipeline.git.branch >>`
+[Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None | resolves to a truthy value | `<< pipeline.parameters.my-parameter >>`
+and | N logic statements | all arguments are truthy | `and: [ true, true, false ]`
+or | N logic statements | any argument is truthy | `or: [ false, true, false ]`
+not | 1 logic statement | the argument is not truthy | `not: true`
+equal | N values | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`
 {: class="table table-striped"}
 
-Truthiness rules are as follows:
-
-`false`, `null`, `0`, the empty string, and `NaN` are falsy. Any other value is truthy.
+Truthiness rules are as follows: `false`, `null`, `0`, the empty string, and `NaN` are falsy. Any other value is truthy.
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
@@ -1691,8 +1686,43 @@ workflows:
             - << pipeline.parameters.deploy-canary >>
 ```
 
+```yaml
+version: 2.1
+
+executors:
+  linux-13:
+    docker:
+      - image: cimg/node:13.13
+  macos: &macos-executor
+    macos:
+      xcode: 11.4
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - when:
+          condition:
+            equal: [ *macos-executor, << parameters.os >> ]
+          steps:
+            - run: echo << parameters.node-version >>
+      - run: echo 0
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          os: macos
+          node-version: "13.13.0"
+```
+
 ## Example Full Configuration
-{:.no_toc}
 
 {% raw %}
 ```yaml

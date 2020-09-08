@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app.
+This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app. This document applies only to the cloud-hosted version of CircleCI
 
 ## Overview
 
@@ -25,16 +25,17 @@ To use the CircleCI Check integration, you first need to navigate to the Org Set
 
 ### Prerequisites
 
-- You must be using the cloud-hosted version of Circle CI.
+- You must be using the cloud-hosted version of CircleCI.
 - Your project must be using CircleCI 2.0 with [Workflows]( {{ site.baseurl }}/2.0/workflows/).
 - You must be an Admin on your GitHub repository to authorize installation of the CircleCI Checks integration.
 
 ### Steps
 
-1. Click the Settings tab in the CircleCI app main menu.
+1. In the CircleCI sidebar, select "Organization Settings"
 2. Select VCS. 
-3. Click the Manage GitHub Checks button. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_setting.png)
-4. Select the repositories that should utilize checks and click the Install button. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_install.png)
+3. Click the **Manage GitHub Checks** button. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/screen_github_checks_new_ui.png)
+4. Select the repositories that should utilize checks and click the Install button. 
+
 After installation completes, the Checks tab in GitHub will be populated with workflow run status information. 
 
 ## Checks Status Reporting
@@ -47,19 +48,19 @@ After the rerun is initiated, CircleCI reruns the workflow from beginning and re
 
 ## To Disable GitHub Checks for a Project
 
-To disable the CircleCI Check integration, navigate to the Org Settings Page, then remove the repositories using CircleCI Checks as follows:
+To disable the CircleCI Check integration, navigate to the "Organization Settings" page, then remove the repositories using CircleCI Checks as follows:
 
 ### Steps
 
-1. Click the Settings tab in the CircleCI app main menu.
+1. Click the "Organization Settings" option in the CircleCI sidebar
 2. Select VCS. 
-3. Click the Manage GitHub Checks button. The Update CircleCI Checks repository access page appears. ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/checks_update.png)
+3. Click the Manage GitHub Checks button. The Update CircleCI Checks repository access page appears. 
 4. Deselect the repository to uninstall the Checks integration.
 5. Confirm the status settings on your projects: Go to CircleCI > Project
    Settings > Advanced Settings > Confirm that the setting `GitHub Status
    Updates` is set to `on`.
 
-![Re-enable GitHub Status]({{ site.baseurl }}/assets/img/docs/github-checks-enable-updates.png)
+![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/screen_github_checks_disable_new_ui.png)
 
 ## To Uninstall Checks for the Organization
 
@@ -79,6 +80,4 @@ If you have enabled GitHub Checks in your GitHub repository, but the status chec
 Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a workflow job level.
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
-
-
 

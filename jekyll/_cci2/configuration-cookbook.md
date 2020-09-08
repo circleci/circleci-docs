@@ -40,7 +40,7 @@ For more detailed information about CircleCI orbs, refer to the [Orbs Introducti
 
 Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
-* In order to use pipelines features and orbs you must use `version 2.1` config, and enable pipelines for your project. 
+* In order to use pipelines features and orbs you must use `version 2.1` config. 
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
 * If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
@@ -463,7 +463,7 @@ For more detailed information about this orb and its functionality, refer to the
 
 ### Selecting a Workflow With a Pipeline Parameter
 
-If you want to be able to trigger custom workflows manually via the API, but still run a workflow on every push, you can use pipeline parameters to decide which workflows to run.
+If you want to be able to trigger custom workflows manually via the API, but still run a workflow on every push, you can use pipeline parameters to decide which workflows to run. For more information see the [API Reference Documentation]({{ site.baseurl }}/2.0/configuration-cookbook/#selecting-a-workflow-with-a-pipeline-parameter) and the [API Developers Guide Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request)
 
 ```yaml
 version: 2.1
@@ -501,7 +501,15 @@ workflows:
       - report
 ```
 
-The `action` parameter will default to `build` on pushes, but you can supply a different value to select a different workflow to run, like `report`.
+The `action` parameter will default to `build` on pushes. Below is an example of supplying a different value using the API v2 Trigger a New Pipeline endpoint and Pipeline Parameters to select a different workflow to run, in this case, `report`. Remember to substitute [`project-slug`({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) for your values.
+
+```sh
+curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Circle-Token: API_KEY' \
+  -d '{ "parameters": { "action": report } }'
+```
 
 ### Branch-filtering for Job Steps
 

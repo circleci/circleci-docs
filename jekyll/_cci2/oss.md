@@ -53,6 +53,8 @@ Many open source projects accept PRs from forked repositories. Building these PR
 
 By default, CircleCI does not build PRs from forked repositories. To change this setting, go to the **Project Settings>Advanced** of your project and set the **Build forked pull requests** option to _On_.
 
+**Note**This feature is not currently supported for BitBucket users.
+
 **Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
 ### Pass Secrets to Builds From Forked Pull Requests
@@ -78,11 +80,16 @@ If you are comfortable sharing secrets with anyone who forks your project and op
 
 ### Caching
 
-Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repository-id of the originator of the fork PR to identify the cache.
-- PRs from the same fork repo will share a cache (this includes, as previously stated, that PRs in the master repo share a cache with master).
+Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub
+repository-id of the originator of the fork PR to identify the cache.
+- PRs from the same fork repo will share a cache (this includes, as previously
+  stated, that PRs in the master repo share a cache with master).
 - Two PRs in different Fork Repos will have different caches.
+- enabling the sharing of [environment variables]({{site.baseurl}}/2.0/env-vars)
+  will enable cache sharing between the original repo and all forked builds.
 
-Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
+Currently there is no pre-population of caches because this optimization hasn't
+made it to the top of the priority list yet.
 
 ## Example Open Source Projects 
 

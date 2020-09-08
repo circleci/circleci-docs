@@ -9,7 +9,7 @@ order: 1
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
 
-* [API v1.1 Reference](https://circleci.com/docs/api/#api-overview)
+* [API v1.1 Reference](https://circleci.com/docs/api/v1/)
 * [API v2 Reference](https://circleci.com/docs/api/v2/)
 
 API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that users migrate their scripts to API v2 stable endpoints as soon as possible. 
@@ -50,12 +50,6 @@ The CircleCI API v2 enables users to be authenticated by simply sending your API
 
 **Note**, the `:` is included to indicate there is no password.
 
-### Pipelines
-
-The CircleCI API v2 requires you to enable pipelines on your project. By enabling pipelines, you can also take advantage of the following:
-
-{% include snippets/pipelines-benefits.adoc %}
-
 #### Triggering a Pipeline with Parameters Example
 
 Here is a simple example using `curl` to trigger a pipeline with parameters:
@@ -86,7 +80,7 @@ The table below describes the new endpoints that have been added to the CircleCI
 Endpoint       | Description                       
 -----------|-------------------------------------------------------
 `GET /workflow/:id ` | This endpoint enables users to return an individual Workflow based on the `id` parameter being passed in the request
-`GET /workflow/:id/jobs` | This endoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.
+`GET /workflow/:id/job` | This endoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.
 `GET /project/:project_slug`  | This endpoint enables users to retrieve a specific Project by its unique slug.
 `POST /project/:project_slug/pipeline` | This endpoint enables users to retrieve an individual project by its unique slug.
 `GET /pipeline/:id` | This endpoint enables users to retrieve an individual pipeline, based on the `id` passed in the request.
