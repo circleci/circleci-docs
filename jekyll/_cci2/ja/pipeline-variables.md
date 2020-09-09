@@ -6,6 +6,8 @@ description: "パイプラインの変数、パラメーター、値について
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
