@@ -2,9 +2,12 @@
 layout: classic-docs
 title: "Deployment Examples"
 short-title: "Deployment Examples"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-This document presents example config for a variately of popular deployment targets. Many of the examples use orbs. CircleCI and partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+This document presents example config for a variety of popular deployment targets. Many of the examples use orbs. CircleCI and partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 * TOC
 {:toc}
