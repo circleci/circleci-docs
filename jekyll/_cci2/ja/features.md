@@ -6,6 +6,9 @@ description: "CircleCI 2.0 コア機能の入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、CircleCI の機能について、開発者向け機能とオペレーター向け機能に分けて概要を説明します。
