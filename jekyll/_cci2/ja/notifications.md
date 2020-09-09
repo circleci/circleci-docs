@@ -6,6 +6,8 @@ categories:
   - configuring-jobs
 order: 100
 published: true
+version:
+  - Cloud
 ---
 
 * 目次
