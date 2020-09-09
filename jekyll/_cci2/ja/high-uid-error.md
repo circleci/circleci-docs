@@ -6,6 +6,9 @@ description: "コンテナの起動時に「コンテナ ID XXX をホスト ID 
 categories:
   - troubleshooting
 order: 21
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 *[リファレンス]({{ site.baseurl }}/2.0/reference/) > コンテナ ID をホスト ID にマップできないエラーのデバッグ*
