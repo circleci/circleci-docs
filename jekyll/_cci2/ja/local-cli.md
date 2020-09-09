@@ -6,6 +6,9 @@ description: "CLI を使用したローカル ジョブの実行方法"
 categories:
   - troubleshooting
 order: 10
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ## 概要
