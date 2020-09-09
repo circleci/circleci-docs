@@ -5,6 +5,9 @@ short-title: "Getting Started with the CircleCI CLI"
 description: "An introduction to interfacing with CircleCI from the command line"
 categories: [getting-started]
 order: 50
+version:
+- Cloud
+- Server v2.x
 ---
 
 # Overview

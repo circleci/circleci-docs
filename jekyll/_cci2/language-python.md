@@ -5,6 +5,9 @@ short-title: "Python"
 description: "Continuous integration with Python on CircleCI"
 categories: [language-guides]
 order: 7
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes

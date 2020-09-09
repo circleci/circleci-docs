@@ -5,6 +5,9 @@ short-title: "Crystal"
 description: "Building and Testing with Crystal on CircleCI 2.0"
 categories: [language-guides]
 order: 9
+version:
+- Cloud
+- Server v2.x
 ---
 
 *[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Crystal*

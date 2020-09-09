@@ -5,7 +5,11 @@ short-title: "Using Workflows to Schedule Jobs"
 description: "Using Workflows to Schedule Jobs"
 categories: [configuring-jobs]
 order: 30
+version:
+- Cloud
+- Server v2.x
 ---
+
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC

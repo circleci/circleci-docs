@@ -5,6 +5,9 @@ short-title: "FAQ"
 description: "Frequently asked questions about CircleCI 2.0"
 categories: [migration]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 * TOC

@@ -5,6 +5,9 @@ short-title: "Core Features"
 description: "Starting point for learning core features of CircleCI 2.0"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides a summary of differentiating features of CircleCI for Developers and Operators.

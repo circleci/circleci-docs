@@ -5,6 +5,8 @@ short-title: "Orb Author FAQ"
 description: "Frequently asked questions from orb authors."
 categories: [configuring-jobs]
 order: 20
+version:
+- Cloud
 ---
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.

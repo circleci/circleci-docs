@@ -5,6 +5,9 @@ short-title: "Triggers"
 description: "Description of triggers"
 categories: [builds]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 

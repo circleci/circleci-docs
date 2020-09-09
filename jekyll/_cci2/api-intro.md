@@ -5,6 +5,8 @@ short-title: "API Reference"
 description: "Introduction to the CircleCI API"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
@@ -12,7 +14,7 @@ The CircleCI API may be used to make API calls to retrieve detailed information 
 * [API v1.1 Reference](https://circleci.com/docs/api/v1/)
 * [API v2 Reference](https://circleci.com/docs/api/v2/)
 
-API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that users migrate their scripts to API v2 stable endpoints as soon as possible. 
+API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI Cloud users migrate their scripts to API v2 stable endpoints as soon as possible. 
 
 CircleCI API v1.1 and portions of API v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2 as more API v2 endpoints are announced as stable. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 

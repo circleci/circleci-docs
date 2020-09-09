@@ -1,3 +1,8 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = CircleCI Server AWS S3 Storage Lifecycle Guide
 :page-layout: classic-docs
 :page-liquid:
@@ -7,9 +12,6 @@
 :toc: macro
 :toc-title:
 :sectanchors:
-
-
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This guide is intended to help system administrators of CircleCI Server installations on AWS better understand how S3 storage is used. This can help to cut compute resource costs and avoid issues for service users when removing resources. 
 

@@ -5,6 +5,8 @@ short-title: "Sign Up and Try CircleCI"
 description: "First step for using CircleCI"
 categories: [getting-started]
 order: 2
+version:
+- Cloud
 ---
 
 To run your very first build on CircleCI, complete the following steps:

@@ -5,6 +5,8 @@ short-title: "Pipeline Variables"
 description: "Detailed information about Pipeline variables, parameters and values"
 categories: [getting-started]
 order: 1
+version: 
+- Cloud
 ---
 
 Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher. 
