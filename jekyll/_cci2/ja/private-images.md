@@ -6,6 +6,9 @@ description: "プライベート イメージを使用する方法"
 categories:
   - containerization
 order: 50
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
