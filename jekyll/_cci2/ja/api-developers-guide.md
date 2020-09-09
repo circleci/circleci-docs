@@ -6,6 +6,8 @@ description: "API cookbook for internal and external CircleCI developers"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows.
