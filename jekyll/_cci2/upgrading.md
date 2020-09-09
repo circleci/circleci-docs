@@ -17,5 +17,4 @@ Following are links to various documents we provide to assist in the 1.0 to 2.0 
 
 * [Tips for Migrating to 2.0](https://circleci.com/docs/2.0/migration/)
 * [Migrating a Linux Project](https://circleci.com/docs/2.0/migrating-from-1-2/)
-* [Migrating an iOS Project](https://circleci.com/docs/2.0/ios-migrating-from-1-2/)
 * [Using the config-translator](https://circleci.com/docs/2.0/config-translation/)
