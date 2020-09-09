@@ -15,7 +15,9 @@ The document provides an overview of orbs, jobs, steps and workflows.
 
 ## Orbs の概要
 
-Orbs は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orbs を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)では、構成作業の簡素化に役立つ Orb を検索できます。
+*Orbs are not currently available on self-hosted installations of CircleCI Server.*
+
+Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
 
 ## ジョブの概要
 
@@ -31,13 +33,13 @@ The following diagram illustrates how data flows between jobs:
 
 Jobs can be run using the `machine` (linux), macOS or Windows executors, or the `docker` executor, which can compose Docker containers to run your jobs and any services they require, such as databases.
 
-`docker` Executor を使用する場合、起動するコンテナのイメージを `docker:` キーの下に指定します。 `docker` Executor には任意のパブリック Docker イメージを使用できます。
+When using the `docker` executor the container images listed under the `docker:` keys specify the containers to start. Any public Docker images can be used with the `docker` executor.
 
 See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for use cases and comparisons of the different executor types.
 
 ## ステップの概要
 
-ステップは、ジョブ中に実行される実行可能なコマンドの集まりです。コードをチェック アウトするには `checkout:` キーを指定します。また、`run:` キーを使用すると、複数行にわたる任意のシェル コマンド スクリプトを追加できます。 `run:` キーのほかに、`save_cache:`、`restore_cache:`、`deploy:`、`store_artifacts:`、`store_test_results:`、`add_ssh_keys` などのキーをステップの下にネストします。
+Steps are a collection of executable commands which are run during a job, the `checkout:` key is required to checkout your code and a key for `run:` enables addition of arbitrary, multi-line shell command scripting. In addition to the `run:` key, keys for `save_cache:`, `restore_cache:`, `deploy:`, `store_artifacts:`, `store_test_results:` and `add_ssh_keys` are nested under Steps.
 
 ## インポートした Orb を使用した設定ファイルの例
 
