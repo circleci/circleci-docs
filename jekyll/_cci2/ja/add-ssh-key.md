@@ -4,6 +4,9 @@ title: "CircleCI に SSH 鍵を登録する"
 short-title: "CircleCI に SSH 鍵を登録する"
 description: "CircleCI に SSH 鍵を追加する方法"
 order: 20
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
@@ -15,9 +18,15 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトを有効にする)を参照してください。 2 つ目が目的のときは、以下の手順でプロジェクトに SSH 鍵を登録します。
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトを有効にする)を参照してください。 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
 ## 手順
+
+**メモ:** CircleCI が SSH 鍵を復号化できるよう、鍵には常に空のパスフレーズを設定してください。 また、CircleCI は OpenSSH のデフォルトのファイル形式をサポートしていません。OpenSSH を使用して鍵を生成する場合は、`ssh-keygen -m pem` コマンドを使用します。
+
+**メモ:** 最近 `ssh-keygen` は、デフォルトで PEM 形式の鍵を生成しないように更新されました。 非公開鍵が `-----BEGIN RSA PRIVATE KEY-----` で始まらない場合、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドで鍵を生成すると、強制的に PEM 形式で生成できます。
+
+### CircleCI Cloud
 
 1. ターミナルから、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドを入力して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
@@ -35,9 +44,21 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 8. **Add SSH Key** ボタンをクリックします
 
-**メモ:** CircleCI が SSH 鍵を復号化できるよう、鍵には常に空のパスフレーズを設定してください。 また、CircleCI は OpenSSH のデフォルトのファイル形式をサポートしていません。OpenSSH を使用して鍵を生成する場合は、`ssh-keygen -m pem` コマンドを使用します。
+### CircleCI Server
 
-**メモ:** 最近 `ssh-keygen` は、デフォルトで PEM 形式の鍵を生成しないように更新されました。 非公開鍵が `-----BEGIN RSA PRIVATE KEY-----` で始まらない場合、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドで鍵を生成すると、強制的に PEM 形式で生成できます。
+1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
+
+2. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
+
+3. In the **Permissions** section, click on **SSH Permissions**.
+
+4. Click the **Add SSH Key** button.
+
+5. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you don't specify a hostname, the key will be used for all hosts.
+
+6. In the **Private Key** field, paste the SSH key you are adding.
+
+7. Click the **Add SSH Key** button.
 
 ## ジョブに SSH 鍵を登録する
 
