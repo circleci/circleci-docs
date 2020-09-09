@@ -6,6 +6,9 @@ description: "PostgreSQL の構成例"
 categories:
   - configuring-jobs
 order: 35
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
