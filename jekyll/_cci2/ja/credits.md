@@ -4,6 +4,8 @@ title: クレジットの使用
 categories:
   - how-to
 description: CircleCI のクレジットの使用方法
+version:
+  - Cloud
 ---
 
 このドキュメントでは、CircleCI でのクレジット使用の基本事項について説明します。 CircleCI の従来のコンテナベースのプランを利用している場合は、「[コンテナを使用する]({{site.baseurl}}/2.0/containers)」をご覧ください。 コンテナ使用からクレジット使用への切り替えを希望される場合は、[サポート チケットを作成](https://support.circleci.com/hc/ja/requests/new)してお問い合わせください。
