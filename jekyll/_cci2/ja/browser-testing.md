@@ -4,6 +4,9 @@ title: ブラウザー テスト
 description: CircleCI 上のブラウザー テスト
 category:
   - test
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 以下のセクションに沿って、CircleCI 設定ファイルでブラウザー テストの実行とデバッグを構成する一般的な方法について説明します。
