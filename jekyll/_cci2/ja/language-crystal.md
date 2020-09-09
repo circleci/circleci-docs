@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での Crystal を使用したビルドとテスト"
 categories:
   - language-guides
 order: 9
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 *[チュートリアル & 2.0 サンプル アプリケーション]({{ site.baseurl }}/2.0/tutorials/) > 言語ガイド: Crystal*
@@ -28,7 +31,6 @@ target="_blank">GitHub 上の Crystal デモ プロジェクト</a>
 ## 設定ファイルの例
 
 {% raw %}
-
 ```yaml
 version: 2 # CircleCI 2.0 を使用します
 jobs: # 一連のジョブ
@@ -54,7 +56,6 @@ jobs: # 一連のジョブ
           command: crystal spec
 # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください    
 ```
-
 {% endraw %}
 
 ## 設定ファイルの詳細
@@ -90,7 +91,6 @@ jobs:
 [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。 この例では、`shard.lock` ファイルのチェックサムを使用して、依存関係キャッシュが変更されているかどうかを判断します。
 
 {% raw %}
-
 ```yaml
     steps: #
 
@@ -105,7 +105,6 @@ jobs:
           paths:
             - ./lib
 ```
-
 {% endraw %}
 
 最後に `crystal spec` を実行して、プロジェクトのテスト スイートを実行します。
