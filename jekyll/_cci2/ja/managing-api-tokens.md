@@ -4,6 +4,9 @@ title: "API トークンの管理"
 short-title: "API トークンの管理"
 description: "CircleCI の API を使用するためにスコープ付きトークンを割り当てる方法"
 order: 20
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI の API を使用したり、ビルドの詳細を確認したりするには、適切な権限を持つ API トークンが必要です。 ここでは、API トークンの種類と、トークンを作成および削除する方法について説明します。
