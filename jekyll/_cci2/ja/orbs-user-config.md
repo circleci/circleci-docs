@@ -6,6 +6,8 @@ description: "CircleCI またはパートナーの Orbs を使用できるよう
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 ## はじめに
