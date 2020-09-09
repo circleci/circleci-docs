@@ -53,6 +53,7 @@
     });
 
     function setSidebar () {
+
       // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
       if ((footer.getBoundingClientRect().top - window.innerHeight) <= 0 && footer.getBoundingClientRect().top >= window.innerHeight) {
         if (sidebar.classList.contains('fixed')) {
@@ -68,16 +69,16 @@
       if (footer.getBoundingClientRect().top <= window.innerHeight) {
         var footerOffset = (footer.getBoundingClientRect().top - 70) + 'px';
         sidebar.style.height = footerOffset
-        sidebarToc.style.height = footerOffset;
+        if(sidebarToc) sidebarToc.style.height = footerOffset;
       } else {
         sidebar.style.height = null;
-        sidebarToc.style.height = "100%";
+        if(sidebarToc) sidebarToc.style.height = "100%";
       }
     };
 
     /* Handle opening/closing the mobile-table of contents */
     mobileTocToggle.addEventListener("click", function(e) {
-      sidebarToc.classList.toggle("open");
+      if(sidebarToc) sidebarToc.classList.toggle("open");
       mobileTocOpen = !mobileTocOpen
       if (mobileTocOpen) {
         mobileTocChevron.classList.add("icon-chevron-right");

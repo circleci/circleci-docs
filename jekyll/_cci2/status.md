@@ -5,6 +5,7 @@ short-title: "Status"
 description: "Status dashboard"
 categories: [getting-started]
 order: 1
+side_toc: none
 ---
 
 <hr>
