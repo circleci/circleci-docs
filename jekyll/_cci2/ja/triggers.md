@@ -6,6 +6,9 @@ description: "トリガーの説明"
 categories:
   - builds
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 
