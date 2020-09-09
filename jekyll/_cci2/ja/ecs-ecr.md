@@ -2,6 +2,9 @@
 layout: classic-docs
 title: AWS ECR/ECS へのデプロイ
 description: CircleCI を使用した AWS ECR から ECS へのデプロイ方法
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、CircleCI を使用して、Amazon Elastic Container Registry (ECR) から Amazon Elastic Container Service (ECS) にデプロイする方法を説明します。
