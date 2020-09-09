@@ -6,6 +6,9 @@ description: "CircleCI 上での Python による継続的インテグレーシ�
 categories:
   - language-guides
 order: 7
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、Python で記述されたサンプル アプリケーションを参考に、CircleCI を構成する方法について説明します。
