@@ -6,6 +6,9 @@ description: "CircleCI が提供する Docker イメージの一覧"
 categories:
   - containerization
 order: 20
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI が提供しているビルド済みイメージの概要と、言語別、サービス タイプ別、タグ別のイメージについて、以下のセクションに沿って説明します。
