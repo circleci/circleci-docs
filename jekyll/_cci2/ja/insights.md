@@ -6,6 +6,8 @@ description: "リポジトリのステータスおよびテスト パフォー�
 categories:
   - configuring-jobs
 order: 41
+version:
+  - Server v2.x
 ---
 
 <div class="alert alert-warning" role="alert">
