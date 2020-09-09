@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI 2.0 で実行されるパブリック プロジェクトおよびオープンソース プロジェクトのサンプル全体は、以下の各ドキュメントとリンク先の `.circleci/config.yml` ファイルでご確認いただけます。
+Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI.
 
 * 目次
 {:toc}
