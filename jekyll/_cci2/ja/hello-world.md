@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での最初のプロジェクト"
 categories:
   - getting-started
 order: 4
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 [ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
@@ -16,7 +19,7 @@ order: 4
 
 1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
-2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成します。
+2. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration):
 
    ```yaml
    version: 2.1
@@ -29,11 +32,11 @@ order: 4
            - run: echo "hello world" # `echo` コマンドを実行します
    ```
 
-1. 変更をコミットし、プッシュします。
+2. 変更をコミットし、プッシュします。
 
-2. CircleCI アプリケーションの [Projects (プロジェクト)] ページで **[Add Projects (プロジェクトの追加)]** ボタンをクリックし、プロジェクトの横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
+3. CircleCI アプリケーションの [Projects (プロジェクト)] ページで **[Add Projects (プロジェクトの追加)]** ボタンをクリックし、プロジェクトの横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
 
-3. **[Start Building (ビルドの開始)]** ボタンをクリックすると、最初のビルドがトリガーされます。
+4. **[Start Building (ビルドの開始)]** ボタンをクリックすると、最初のビルドがトリガーされます。
 
 [Workflows (ワークフロー)] ページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
 
@@ -57,7 +60,9 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれ
 
 ## macOS での Hello World
 
-Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
+*The macOS executor is not currently available on self-hosted installations of CircleCI Server*
+
+Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
     jobs: 
       build-macos: 
@@ -65,46 +70,70 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
           xcode: 11.3.0
     
 
-詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/2.0/hello-world-macos)」を参照してください。
+Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
 
 ## Windows での Hello World
 
-ここにも Linux、Android、macOS の例における基礎を流用できます。同じ `.circleci/config.yml` ファイルに `orb:` キーを追加して、`win/vs2019` Executor (Windows Server 2019) を使用するジョブを追加します。
+Using the basics from the Linux, Android, and macOS examples above, you can add a job that uses the windows executor (Windows Server 2019) as follows. Notice the Cloud version of this requires the use of `version:2.1` config, and orbs:
 
-    orbs:
-      win: circleci/windows@1.0.0
-    
-    jobs:
-      build-windows:
-        executor: win/vs2019
-        steps:
-    
-          - checkout
-          - run: Write-Host 'Hello, Windows'
-    
+{:.tab.windowsblock.Cloud}
+```yaml
+version: 2.1 # Use version 2.1 to enable orb usage.
 
-**メモ:** Windows ビルドでは、セットアップと前提条件が多少異なります。 詳しくは「[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows)」を参照してください。
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
+
+**Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows).
 
 ### Orbs の使用とオーサリングの詳細
 
-Orbs は、構成を簡略化したりプロジェクト間で再利用したりできる、便利な構成パッケージです。[CircleCI Orb レジストリ](https://circleci.com/orbs/registry)で参照できます。
+Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry).
 
 ## プロジェクトのフォロー
 
-プッシュする新しいプロジェクトを自動的に*フォロー*することで、メール通知が届き、プロジェクトがダッシュボードに追加されます。 また、手動でプロジェクトのフォローを開始または停止できます。それには、CircleCI アプリケーションの [Projects (プロジェクト)] ページで組織を選択し、[Add Projects (プロジェクトの追加)] ボタンをクリックし、フォローを開始または停止するプロジェクトの横にあるボタンをクリックします。
+You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the Projects page in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
 
 ## 組織の切り替え
 
-CircleCI アプリケーションの左上で組織を切り替えられます。
+In the top left, you will find the Org switcher.
 
 
 {:.tab.switcher.Cloud}
-![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
 {:.tab.switcher.Server}
-![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-表示したいプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。 たとえば、左上にユーザー `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。 `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
+If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
 ## 次のステップ
 
