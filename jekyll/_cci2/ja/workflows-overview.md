@@ -6,6 +6,9 @@ description: "ワークフローの説明"
 categories:
   - workflows
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) enable you to introduce concurrency and sequence your job runs with great flexibility for faster feedback when jobs fail.
