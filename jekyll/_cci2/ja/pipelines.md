@@ -6,6 +6,8 @@ description: "パイプラインの概要"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 CircleCI アプリケーションの [Pipelines (パイプライン)] ページについて概説すると共に、CircleCI ユーザー インターフェイスの変更について説明します。
