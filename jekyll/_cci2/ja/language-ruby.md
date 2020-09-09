@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での Ruby on Rails を使用したビルドとテ�
 categories:
   - language-guides
 order: 8
+version:
+  - Cloud
+  - Server v2.x
 ---
     
 このガイドでは、CircleCI で Ruby on Rails アプリケーションをビルドする方法について説明します。
