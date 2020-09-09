@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "チュートリアル"
 description: "チュートリアルおよびガイド付き 2.0 サンプル アプリケーション"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
