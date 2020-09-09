@@ -6,6 +6,9 @@ description: "CircleCI 2.0 サンプルの紹介"
 categories:
   - migration
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 
@@ -83,7 +86,9 @@ jobs:
 
 {% endraw %}          
 
-## iOS
+## macOS
+
+*The macOS executor is not currently available on self-hosted installations of CircleCI Server*
 
     jobs:
       build-and-test:
