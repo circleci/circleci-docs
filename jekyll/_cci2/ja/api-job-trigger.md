@@ -6,6 +6,9 @@ description: "ビルド以外のジョブを定義およびトリガーする方
 categories:
   - configuring-jobs
 order: 80
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 
