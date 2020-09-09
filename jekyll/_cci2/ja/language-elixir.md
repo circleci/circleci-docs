@@ -6,6 +6,9 @@ description: "Elixir プロジェクトの概要と構成例"
 categories:
   - language-guides
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 これは、単純な Phoenix Web アプリケーション用の注釈付き `config.yml` で、<https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix> から入手できます。
