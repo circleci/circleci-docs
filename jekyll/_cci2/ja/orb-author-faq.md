@@ -6,6 +6,8 @@ description: "Orb オーサリングに関するよくあるご質問"
 categories:
   - configuring-jobs
 order: 20
+version:
+  - Cloud
 ---
 
 よく寄せられるご質問や技術的な問題など、Orbs のオーサリングに役立つ情報をまとめました。
