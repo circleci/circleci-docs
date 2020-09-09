@@ -6,6 +6,9 @@ description: ".circleci/config.yml に関するリファレンス"
 categories:
   - configuring-jobs
 order: 20
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 `config.yml` ファイルで使用される CircleCI 2.x 構成キーのリファレンス ガイドです。 CircleCI によって承認されたリポジトリ ブランチに `.circleci/config.yml` ファイルが存在するということは、2.x インフラストラクチャを使用することを意味しています。
