@@ -6,6 +6,9 @@ description: "依存関係のキャッシュ"
 categories:
   - optimization
 order: 50
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 キャッシュは、以前のジョブの高コストなフェッチ操作から取得したデータを再利用することで、CircleCI のジョブを効果的に高速化します。
