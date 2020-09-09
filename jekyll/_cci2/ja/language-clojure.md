@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での Clojure を使用したビルドとテスト"
 categories:
   - language-guides
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 このガイドでは、CircleCI 2.0 で Clojure アプリケーションをビルドする方法について説明します。お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
