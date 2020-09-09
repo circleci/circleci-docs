@@ -6,6 +6,9 @@ description: "CircleCI 2.0 言語ガイド: Scala"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 以下のセクションに沿って、Scala アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) の作成方法について説明します。
