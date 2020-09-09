@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での Go (Golang) を使用したビルドとテス�
 categories:
   - language-guides
 order: 3
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI では、Docker イメージにインストール可能な任意のバージョンの Go を使用して、Go プロジェクトをビルドできます。 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
