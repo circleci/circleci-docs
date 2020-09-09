@@ -6,6 +6,8 @@ description: "構成クックブック入門編"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
