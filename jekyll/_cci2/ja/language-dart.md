@@ -6,6 +6,9 @@ description: "Overview and sample config for a Dart project"
 categories:
   - language-guides
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 This document is a walkthrough of a sample Dart project setup on CircleCI. The project cherry-picks `number_guesser` and `number_thinker` code from the [Write HTTP clients & servers](https://dart.dev/tutorials/server/httpserver) tutorial.
@@ -56,7 +59,7 @@ orbs:
   win: circleci/windows@2.4.0
 ```
 
-- **Config Version**: Current is `2.1`. Unless using a legacy server installation,  jobs or workflows, we recommend using 2.1.
+- **Config Version**: Current is `2.1`. Unless using a CircleCI Server installation, we recommend using 2.1.
 - **Orbs**: CircleCI offers [orbs](https://circleci.com/orbs/registry/), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/orbs/registry/orb/circleci/windows) to make use of a pre-defined execution environment later on.
 
 {% raw %}
