@@ -7,6 +7,9 @@ categories:
 description: コード カバレッジ メトリクスの生成
 order: 50
 sitemap: false
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 コード カバレッジは、アプリケーションがどの程度テストされたかを示します。
