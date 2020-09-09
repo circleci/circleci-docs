@@ -6,6 +6,9 @@ description: "プロジェクトの説明"
 categories:
   - projects
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI プロジェクトは、関連付けられているコード リポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
