@@ -6,6 +6,9 @@ description: "PostgreSQL の構成例"
 categories:
   - configuring-jobs
 order: 35
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、正式な CircleCI ビルド済み Docker コンテナ イメージを CircleCI 2.0 でデータベースサービスに使用する方法について説明します。
