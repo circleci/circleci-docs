@@ -56,7 +56,3 @@ You can view workflows or single jobs by expanding the pipeline and clicking in 
 When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
 
 ![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
-
-## 関連項目
-
-[Settings]({{ site.baseurl }}/2.0/settings)
