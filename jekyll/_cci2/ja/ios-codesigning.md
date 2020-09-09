@@ -6,6 +6,8 @@ description: "iOS または Mac アプリのコード署名をセットアップ
 categories:
   - platforms
 order: 40
+version:
+  - Cloud
 ---
 
 CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドラインを紹介します。
@@ -105,38 +107,38 @@ CircleCI のプロジェクト設定で **[Build Settings (ビルド設定)] -> 
 
 match を構成して、その呼び出しをアドホック レーンに追加すると、そのアドホック レーンを CircleCI で実行できます。 以下の `config.yml` では、`development` ブランチにプッシュするたびにアドホック ビルドが作成されます。
 
-    # .circleci/config.yml
-    version: 2
+```yaml
+# .circleci/config.yml
+version: 2
+jobs:
+  build-and-test:
+    macos:
+      xcode: 11.3.0
+    steps:
+      # inc steps to complete build and test
+      - run: bundle exec fastlane test
+
+  adhoc:
+    macos:
+      xcode: 11.3.0
+    steps:
+      # inc steps required to complete job
+
+      - run: bundle exec fastlane adhoc
+
+workflows:
+  version: 2
+  build-test-adhoc:
     jobs:
-      build-and-test:
-        macos:
-          xcode: 11.3.0
-        steps:
-          ...
-          - run: bundle exec fastlane test
-          ...
-    
-      adhoc:
-        macos:
-          xcode: 11.3.0
-        steps:
-          ...
-    
-          - run: bundle exec fastlane adhoc
-    
-    workflows:
-      version: 2
-      build-test-adhoc:
-        jobs:
-    
-          - build-and-test
-          - adhoc:
-              filters:
-                branches:
-                  only: development
-              requires:
-                - build-and-test
-    
+
+      - build-and-test
+      - adhoc:
+          filters:
+            branches:
+              only: development
+          requires:
+            - build-and-test
+```
 
 ## サンプルの設定ファイル
 
