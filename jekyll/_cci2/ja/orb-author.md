@@ -6,6 +6,8 @@ description: "CircleCI Orbs のオーサリングに関する入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 ## はじめに
