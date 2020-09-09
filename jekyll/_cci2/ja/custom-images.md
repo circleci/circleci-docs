@@ -6,6 +6,9 @@ description: "カスタム Docker イメージを作成する理由とその方�
 categories:
   - containerization
 order: 30
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、以下のセクションに沿って、CircleCI でカスタム Docker イメージを作成および使用する方法について説明します。
