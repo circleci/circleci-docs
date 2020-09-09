@@ -6,6 +6,9 @@ description: "ビルド中に作成されるアーティファクトのアップ
 categories:
   - configuring-jobs
 order: 70
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 以下のセクションに沿って、アーティファクトの操作方法を説明します。
