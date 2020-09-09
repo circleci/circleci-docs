@@ -6,6 +6,8 @@ description: "Orb のベスト プラクティス ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 Orb のオーサリングに関するベスト プラクティスと戦略についてまとめます。 CircleCI の Orb とは、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。
