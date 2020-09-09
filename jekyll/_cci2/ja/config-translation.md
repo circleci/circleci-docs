@@ -7,6 +7,8 @@ categories:
   - migration
 hide: true
 order: 60
+version:
+  - Server v2.x
 ---
 
 ここでは、`config-translation` エンドポイントを使用して、既存の CircleCI 1.0 プロジェクトから CircleCI 2.0 の基本的な作業用設定ファイルを生成する手順を説明します。対象となる言語は、以下に限定されます。
