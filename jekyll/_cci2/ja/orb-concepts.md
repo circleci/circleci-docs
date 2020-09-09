@@ -6,6 +6,8 @@ description: "Orb のコンセプトの概要"
 categories:
   - getting-started
 order: 1
+verison:
+  - Cloud
 ---
 
 * TOC
