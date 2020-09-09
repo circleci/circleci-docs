@@ -6,9 +6,9 @@ description: "CircleCI Orb の入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
-
-*Available on CircleCI with `version 2.1` config. Not currently available on self-hosted installations of CircleCI Server*
 
 - TOC
 {:toc}
