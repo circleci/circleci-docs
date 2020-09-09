@@ -6,6 +6,9 @@ categories:
   - configuring-jobs
 description: "テスト メタデータの収集"
 order: 34
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI は、XML ファイルからテスト メタデータを収集し、それを使用してジョブに関するインサイトを提供します。 ここでは、よく使用されるテスト ランナー用にテスト メタデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を構成する方法について説明します。
