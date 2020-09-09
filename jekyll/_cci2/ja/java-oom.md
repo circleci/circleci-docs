@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "Java メモリ エラーの回避とデバッグ"
 description: "CircleCI で Java メモリ エラーを回避およびデバッグする方法"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI で Java メモリ エラーを回避およびデバッグする方法について説明します。
