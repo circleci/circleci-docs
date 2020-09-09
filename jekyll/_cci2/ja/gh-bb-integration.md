@@ -5,6 +5,8 @@ description: GitHub または Bitbucket の使用
 categories:
   - migration
 Order: 60
+version:
+  - Cloud
 ---
 
 以下のセクションに沿って、CircleCI での GitHub、GitHub Enterprise、または Bitbucket Cloud の利用について概説します。
