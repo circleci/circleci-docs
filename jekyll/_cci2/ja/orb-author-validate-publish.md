@@ -7,6 +7,8 @@ categories:
   - getting-started
 order: 1
 sitemap: false
+version:
+  - Cloud
 ---
 
 ## はじめに
