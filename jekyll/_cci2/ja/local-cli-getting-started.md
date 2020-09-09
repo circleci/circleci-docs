@@ -6,6 +6,9 @@ description: "コマンド ラインから CircleCI を操作する方法の基�
 categories:
   - getting-started
 order: 50
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 # 概要
