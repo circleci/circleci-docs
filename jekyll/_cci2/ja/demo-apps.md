@@ -6,6 +6,9 @@ description: "人気の言語で構築された CircleCI サンプル アプリ�
 categories:
   - language-guides
 order: 0
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 でビルドされます。CircleCI では、さまざまな言語で複数のデモ アプリケーションを用意しているため、お使いの言語で記述されているアプリケーションの例を参考にしながら学習していただけます。 以下に挙げた各言語については、関連ガイドと GitHub のパブリック リポジトリを公開しています。 それぞれをフォークし、内容をご確認ください。
