@@ -519,6 +519,13 @@ When you use workflows, you increase your ability to rapidly respond to failures
 
 This section describes common problems and solutions for Workflows.
 
+### Workflow and Subsequent Jobs Do Not Trigger
+
+Oftentimes if you do not see your workflows triggering, a configuration error is
+preventing the workflow from starting. As a result, the workflow does not start
+any jobs. Navigate to your project's pipelines and click on your workflow name
+to discern what might be failing.
+
 ### Rerunning Workflows Fails
 {:.no_toc}
 
