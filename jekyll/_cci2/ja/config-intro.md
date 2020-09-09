@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "設定ファイルの概要"
 description: "CircleCI 2.0 設定ファイルのランディング ページ"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 このガイドでは、簡単なステップに沿って、CircleCI で作業の中心となる `config.yml` の概要を説明していきます。
