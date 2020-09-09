@@ -6,6 +6,9 @@ description: "設定ファイルの説明"
 categories:
   - configuration
 order: 2
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI の[設定ファイルの構文]({{ site.baseurl }}/2.0/configuration-reference/)は、構造化された [YAML]({{ site.baseurl }}/2.0/writing-yaml/) です。最初に、バージョン、名前付きジョブ、およびそのジョブの [Executor タイプ]({{ site.baseurl }}/2.0/executor-types/) (`docker`、`machine`、`windows`、または `macos`) が指定されます。 以下のビデオでも説明されているとおり、CircleCI は便利なビルド済みの Docker イメージを提供しています。
