@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "設定ファイル"
 description: "CircleCI 2.0 設定ファイルのランディング ページ"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI で作業の中心となるのは、`config.yml` ファイルを使用して*決定論的ビルド*を作成することです。 決定論的ビルドとは、コミット時にも、翌日にも、あるいは翌月であっても実行することができ、かつ、まったく同じ結果を生成して終了するビルドを指します。
