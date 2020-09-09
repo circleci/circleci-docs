@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での PHP を使用したビルドとテスト"
 categories:
   - language-guides
 order: 6
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、PHP サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
