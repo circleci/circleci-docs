@@ -4,6 +4,9 @@ title: packagecloud へのパッケージのパブリッシュ
 categories:
   - how-to
 description: CircleCI を使用して packagecloud にパッケージをパブリッシュする方法
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 [packagecloud](https://packagecloud.io) は、ホスティングされているパッケージ リポジトリ サービスです。 packagecloud を使用すると、事前構成なしで npm、Maven (Java)、Python、apt、yum、RubyGem の各リポジトリをホスティングすることができます。
