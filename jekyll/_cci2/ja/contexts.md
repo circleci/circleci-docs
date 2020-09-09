@@ -6,6 +6,9 @@ description: "プロジェクト間で共有できる安全なリソース"
 categories:
   - configuring-jobs
 order: 41
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
@@ -234,4 +237,5 @@ The value of the context will not be masked in the build output if:
 ## See Also
 {:.no_toc}
 
-[CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) [Workflows]({{ site.baseurl }}/2.0/workflows/)
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
+* [Workflows]({{ site.baseurl }}/2.0/workflows/)
