@@ -5,6 +5,9 @@ short-title: "Yarn パッケージ マネージャー"
 categories:
   - how-to
 description: "CircleCI での Yarn パッケージ マネージャーの使用方法"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 [Yarn](https://yarnpkg.com/ja/) は、JavaScript 用のオープンソース パッケージ マネージャーです。 Yarn によってインストールされるパッケージはキャッシュできるため、 ビルドを高速化できるだけでなく、さらに重要なメリットとして、ネットワーク接続に関するエラーも低減できます。
