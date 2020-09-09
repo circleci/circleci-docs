@@ -2,6 +2,9 @@
 layout: classic-docs
 title: ステータス バッジの追加
 description: CircleCI のステータス バッジを Web ページや Web ドキュメントに埋め込む方法
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 プロジェクトのビルド ステータス (成功または失敗) を表示するバッジを README または他のドキュメントに作成する方法について説明します。
