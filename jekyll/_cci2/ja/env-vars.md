@@ -6,6 +6,9 @@ description: "CircleCI 2.0 でサポートされている環境変数の一覧"
 categories:
   - configuring-jobs
 order: 40
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 以下のセクションに沿って、CircleCI で環境変数を使用する方法について説明します。
