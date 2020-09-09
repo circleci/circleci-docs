@@ -6,6 +6,9 @@ description: "CircleCI の YAML を記述する方法"
 categories:
   - configuring-jobs
 order: 20
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI の構成に使用する YAML の最も重要な機能について説明します。
