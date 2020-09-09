@@ -6,6 +6,9 @@ description: "CircleCI 2.0 の Executor とイメージ"
 categories:
   - configuration
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 **Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
@@ -49,7 +52,7 @@ jobs:
 
 ## macOS
 
-*CircleCI.com で利用可能です。オンプレミス版の CircleCI Server では現在サポートされていません。*
+*The macOS executor is not currently available on self-hosted installations of CircleCI Server*
 
     jobs:
       build: # ジョブの名前
