@@ -6,6 +6,8 @@ description: "CircleCI 1.0 から 2.0 に移行する理由と方法"
 categories:
   - migration
 order: 15
+version:
+  - Server v2.x
 ---
 
 このドキュメントでは、CircleCI 1.0 を 2.0 に移行する際に最初に行う作業について説明します。移行作業ではまず、既存の 1.0 の設定ファイルをコピーして利用し、古いキーに対応する新しいキーがある場合はキーを置き換えます。
