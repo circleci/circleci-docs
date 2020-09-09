@@ -4,19 +4,23 @@ title: Artifactory へのアップロード
 categories:
   - how-to
 description: CircleCI でアーティファクトを Artifactory にアップロードする方法
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI では Artifactory への直接アップロードがサポートされています。
 
-- 目次 {:toc}
+- 目次 
+{:toc}
 
 ## デプロイ
 
 Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API) を活用する方法については、Artifactory からわかりやすいドキュメントが提供されています。
 
-ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
+We will use this space to highlight some sample projects showing how to best use CircleCI and Artifactory together.
 
-このサンプルを実行する前に、リポジトリが作成されていることを確認してください。リポジトリが作成されていないと、CircleCI が依存要素を保存する場所がありません。
+Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
 
 ## Artifactory プラグイン
 
@@ -37,21 +41,21 @@ JFrog CLI を使用する場合は、`.circleci/config.yml` に以下のコー�
 
 次に、自分の資格情報を安全に使用するために JFrog を設定する必要があります。 自分の `$ARTIFACTORY_URL` を自分の `$ARTIFACTORY_USER` および `$ARTIFACTORY_APIKEY` と共に使用するようにクライアントを設定します。 これらは、`Project Settings->Environment Variables` に入力できます。
 
-        - run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
+    - run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
     
     
 
-JAR ファイルをアップロードする場合には、以下の例を使用します。
+If you would like to upload JAR files use the following example:
 
-        - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
+    - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
     
 
-WAR ファイルをアップロードする場合には、以下の例を使用します。
+If you would like to upload WAR files use the following example:
 
-        - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
+    - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
     
 
-.circleci/config.yml ファイル全体は、以下のようになります。
+The full `.circleci/config.yml` file would look something like the following:
 
 ```yaml
 version: 2
