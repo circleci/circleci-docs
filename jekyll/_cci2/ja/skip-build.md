@@ -6,6 +6,9 @@ description: CircleCI の自動ビルドを止める方法
 categories:
   - configuring-jobs
 order: 100
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 以下のセクションに沿って、ビルドをスキップまたはキャンセルする方法について説明します。
