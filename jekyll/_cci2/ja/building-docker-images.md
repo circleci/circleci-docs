@@ -6,6 +6,9 @@ description: "Docker イメージをビルドし、リモート サービスに�
 categories:
   - configuring-jobs
 order: 55
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 他の場所にデプロイしたり、高度なテストを行ったりするための Docker イメージのビルド方法や、リモート Docker 環境でサービスを開始する方法について説明します。
