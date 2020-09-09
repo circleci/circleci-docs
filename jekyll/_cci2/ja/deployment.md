@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "デプロイ"
 short-title: "デプロイ"
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }}/2.0/deployment-integrations/)するように構成できます。
