@@ -6,6 +6,9 @@ description: "プライマリ コンテナで docker-compose を有効化する�
 categories:
   - containerization
 order: 40
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、`docker-compose` をインストールして使用する方法を説明します。
