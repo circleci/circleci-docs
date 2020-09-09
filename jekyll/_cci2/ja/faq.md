@@ -6,6 +6,9 @@ description: "CircleCI 2.0 に関してよく寄せられるご質問"
 categories:
   - migration
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 - 目次
