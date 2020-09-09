@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での最初の Windows プロジェクト"
 categories:
   - getting-started
 order: 4
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 CircleCI の **Windows ビルド環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/2.0/getting-started)をご覧になることをお勧めします。
