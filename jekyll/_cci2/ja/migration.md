@@ -2,18 +2,19 @@
 layout: classic-docs
 title: "2.0 への移行のヒント"
 description: "1.0 から CircleCI 2.0 設定ファイルへの移行のヒント"
+version:
+  - Server v2.x
 ---
 
 
-CircleCI v1.0 のサポート期限の終了が近付いています。まだ 2.0 への移行作業を開始していない場合は、以下にまとめられたヒントとベスト プラクティスを確認してください。
+Take a look through some of the tips and best practices listed below, for migrating from CircleCI 1.0 to 2.0.
 
-1.0 ビルドの最終日は **2018 年 8 月 31 日**です。 CircleCI 上で引き続きプロジェクトをビルドするには、すべてのプロジェクトを変換する必要があります。 1.0 のサポート終了の詳細とその他の参考情報については、[1.0 の終了に関するページ](https://circleci.com/sunset1-0/)を参照してください。
-
-- 目次 {:toc}
+- 目次
+{:toc}
 
 ## CircleCI 1.0 と 2.0 で同じプロジェクトをビルド可能
 
-CircleCI 2.0 への移行を開始するにあたり、直ちにすべてを移行する必要はありません。 1.0 でプロジェクトのビルドを継続しながら、以下の方法で 2.0 を試用してください。
+When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:
 
 - 2.0 のテストのための新しいブランチを作成します。
 - そのブランチから `circle.yml` を削除し、`.circleci/config.yml` ファイルを追加します。
@@ -144,4 +145,4 @@ CircleCI 2.0 への移行を開始するにあたり、直ちにすべてを移�
                     print(sys.version)
     
 
-``` - bash を上手に活用することで、何でも実行可能です。 `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
+``` - You can be clever with bash to achieve whatever you need `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
