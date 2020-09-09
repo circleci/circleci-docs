@@ -6,6 +6,9 @@ description: "ステータス ダッシュボード"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 <hr />
