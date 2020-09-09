@@ -6,6 +6,8 @@ description: "CircleCI 導入の第一歩"
 categories:
   - getting-started
 order: 2
+version:
+  - Cloud
 ---
 
 To run your very first build on CircleCI, complete the following steps:
