@@ -6,6 +6,9 @@ description: "CircleCI 2.0 ビルドの最適化"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 このドキュメントでは、CircleCI 設定ファイルを最適化する方法をいくつか紹介します。 最適化の各方法について簡単に説明し、考えられるユース ケースを提示し、ジョブを最適化して高速化する例を示します。
