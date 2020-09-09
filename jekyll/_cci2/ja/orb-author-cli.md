@@ -6,6 +6,8 @@ description: "Orb のオーサリング用に CircleCI CLI をセットアップ
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 * 目次
