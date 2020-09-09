@@ -6,6 +6,8 @@ description: "Orbs に関するよくあるご質問"
 categories:
   - configuring-jobs
 order: 20
+version:
+  - Cloud
 ---
 
 よく寄せられるご質問や技術的な問題など、Orbs の使用時に役立つ情報をまとめました。
