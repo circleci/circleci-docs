@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での JavaScript および Node.js を使用した�
 categories:
   - language-guides
 order: 5
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
