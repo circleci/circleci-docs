@@ -6,6 +6,8 @@ description: "CircleCI 2.0 プロジェクトの入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 This document describes how CircleCI automates your pipelines.
