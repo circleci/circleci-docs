@@ -6,6 +6,8 @@ description: "CircleCI Orbs のパブリッシュに関する入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 ## Orb パブリッシュ プロセスの概要
