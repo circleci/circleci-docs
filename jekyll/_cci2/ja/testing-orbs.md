@@ -6,6 +6,8 @@ description: "CircleCI Orbs のテストに関する入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 Orbs のテストに利用できるさまざまな手法について説明します。
