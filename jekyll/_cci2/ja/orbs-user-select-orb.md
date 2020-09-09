@@ -6,6 +6,8 @@ description: "構成に使用する Orb を選択する方法"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
 ## はじめに
