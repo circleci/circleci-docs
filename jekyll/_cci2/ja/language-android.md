@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での Android アプリのビルドとテスト"
 categories:
   - language-guides
 order: 9
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 以下のセクションに沿って、CircleCI で Android プロジェクトをセットアップする方法について説明します。
