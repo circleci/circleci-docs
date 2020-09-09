@@ -6,6 +6,9 @@ description: "Docker、Machine、および macOS Executor タイプの概要"
 categories:
   - containerization
 order: 10
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 [custom-images]: {{ site.baseurl }}/2.0/custom-images/ [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/ [server-gpu]: {{ site.baseurl }}/2.0/gpu/
