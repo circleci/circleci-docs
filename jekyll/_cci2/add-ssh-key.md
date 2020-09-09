@@ -23,7 +23,7 @@ to add SSH keys to CircleCI:
 If you are adding an SSH key for the first reason,
 refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
 Otherwise,
-follow the steps below for the version of CircleCI your are using (Cloud/Server) to add an SSH key to your project.
+follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
 ## Steps
 
