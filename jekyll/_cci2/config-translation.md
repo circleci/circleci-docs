@@ -6,6 +6,8 @@ description: "Instructions for using the experimental Translator to translate Ci
 categories: [migration]
 hide: true
 order: 60
+version:
+- Server v2.x
 ---
 
 This document provides instructions for using the `config-translation` endpoint to generate a basic working CircleCI 2.0 configuration from your existing CircleCI 1.0 project for a limited set of languages:

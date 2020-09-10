@@ -5,6 +5,8 @@ short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS or Mac app"
 categories: [platforms]
 order: 40
+version:
+- Cloud
 ---
 
 This document describes the guidelines for setting up code signing
@@ -143,7 +145,7 @@ After you have configured Match and added its invocation into the Ad-hoc
 lane, you can run that lane on CircleCI. The following `config.yml` will
 create an Ad-hoc build every time you push to the `development` branch:
 
-```
+```yaml
 # .circleci/config.yml
 version: 2
 jobs:
@@ -151,15 +153,14 @@ jobs:
     macos:
       xcode: 11.3.0
     steps:
-      ...
+      # inc steps to complete build and test
       - run: bundle exec fastlane test
-      ...
 
   adhoc:
     macos:
       xcode: 11.3.0
     steps:
-      ...
+      # inc steps required to complete job
       - run: bundle exec fastlane adhoc
 
 workflows:

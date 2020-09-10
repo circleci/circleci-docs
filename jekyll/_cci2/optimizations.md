@@ -5,6 +5,9 @@ short-title: "Optimizations"
 description: "CircleCI 2.0 build optimizations"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides an overview of several methods for optimizing your CircleCI configuration. Each optimization method will be described briefly, will present possible use cases, and will provide an example optimization for speeding up your jobs.

@@ -5,6 +5,9 @@ short-title: "Examples"
 description: "CircleCI 2.0 Examples Introduction"
 categories: [migration]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 
@@ -82,7 +85,8 @@ jobs:
 
 {% endraw %}          
 
-## iOS
+## macOS
+_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
 ```
 jobs:

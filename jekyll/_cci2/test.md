@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "Test"
 description: "CircleCI 2.0 test automation setup"
+version:
+- Cloud
+- Server v2.x
 ---
 
 Refer to the following video and documents for help with setting up your tests.

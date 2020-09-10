@@ -5,6 +5,9 @@ short-title: "Installing and Using docker-compose"
 description: "How to enable docker-compose in your primary container"
 categories: [containerization]
 order: 40
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to install and use `docker-compose`.

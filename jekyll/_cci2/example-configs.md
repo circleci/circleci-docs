@@ -7,7 +7,7 @@ categories: [getting-started]
 order: 1
 ---
 
-Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI 2.0.
+Refer to the following documents and linked `.circleci/config.yml` files for complete examples of public and open source projects that run on CircleCI.
 
 * TOC
 {:toc}

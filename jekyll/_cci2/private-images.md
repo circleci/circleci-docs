@@ -5,6 +5,9 @@ short-title: "Using Private Images"
 description: "How to use private images"
 categories: [containerization]
 order: 50
+version:
+- Cloud
+- Server v2.x
 ---
 
 To use private Docker images, specify the username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file.  To protect the password, create an Environment Variable in the CircleCI Project Settings page, and then reference it:

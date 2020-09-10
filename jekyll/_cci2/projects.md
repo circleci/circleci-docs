@@ -5,6 +5,9 @@ short-title: "Projects"
 description: "Description of projects"
 categories: [projects]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 A CircleCI project shares the name of the associated code repository and is visible on the Projects page of the CircleCI app. Projects are added by using the Add Project button.

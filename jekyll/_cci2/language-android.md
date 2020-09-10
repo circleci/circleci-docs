@@ -5,6 +5,9 @@ short-title: "Android"
 description: "Building and Testing an Android App on CircleCI 2.0"
 categories: [language-guides]
 order: 9
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes

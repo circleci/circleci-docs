@@ -5,6 +5,9 @@ short-title: "Concepts"
 description: "CircleCI 2.0 concepts"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.
@@ -38,7 +41,7 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
-- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. 
+- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. Available in CircleCI Cloud only.
 - **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
 - **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project. 
@@ -65,7 +68,7 @@ projects. Users may not view project data that is stored in environment variable
 
 ## Pipelines
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration).
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
 
 Pipelines represent methods for interacting with your configuration:
 
@@ -73,7 +76,7 @@ Pipelines represent methods for interacting with your configuration:
 
 ## Orbs
 
-Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
+Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config. Orbs are not currently available for CircleCI Server.
 
 The graphic above illustrating an example Java configuration can be greatly simplified using orbs. The following illustration re-creates the same configuration with [the Maven orb](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-orbs-config).
 

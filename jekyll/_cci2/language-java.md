@@ -5,6 +5,9 @@ short-title: "Java"
 description: "Building and Testing with Java on CircleCI 2.0"
 categories: [language-guides]
 order: 4
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide will help you get started with a Java application building with Gradle on CircleCI. 

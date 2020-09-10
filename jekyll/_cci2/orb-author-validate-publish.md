@@ -6,6 +6,8 @@ description: "Starting point for testing and publishing orbs"
 categories: [getting-started]
 order: 1
 sitemap: false
+version:
+- Cloud
 ---
 
 ## Introduction

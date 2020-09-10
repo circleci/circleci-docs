@@ -5,6 +5,9 @@ short-title: "Pre-Built CircleCI Docker Images"
 description: "Listing of available images maintained by CircleCI"
 categories: [containerization]
 order: 20
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides information about pre-built CircleCI images and a listing by language, service type, and tags in the following sections:
