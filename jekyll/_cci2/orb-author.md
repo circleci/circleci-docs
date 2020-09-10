@@ -28,20 +28,20 @@ The Orb Development Kit refers to a suite of tools working together to make prod
 
 To begin creating your new orb with the Orb Developer Kit, first create a new repository on GitHub.com. Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
 
-1) Create new [GitHub repository](https://github.com/new).
+**1)** Create new [GitHub repository](https://github.com/new).
 
 The name of your repository is not critical but we recommend something similar to "myProject-orb".
 
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-2) Clone or initialize the repository locally and change directory into the git project.
+**2)** Clone or initialize the repository locally and change directory into the git project.
 
 ```bash
 $ git clone https://github.com/<user>/myProject-orb.git
 $ cd myProject-orb
 ```
 
-3) Initialize a new orb project using the `orb init` CLI command.
+**3)** Initialize a new orb project using the `orb init` CLI command.
 
 ```bash
 $ circleci orb init .
@@ -49,7 +49,7 @@ $ circleci orb init .
 
 The `circleci orb init` is called, followed by the directory where we will create our orb. We are going to use `.` for the current directory.
 
-4) When prompted, we will opt to select the fully automated orb setup.
+**4)** When prompted, we will opt to select the fully automated orb setup.
 
 ```text
 ? Would you like to perform an automated setup of this orb?:
@@ -57,11 +57,11 @@ The `circleci orb init` is called, followed by the directory where we will creat
     No, I'll handle everything myself.
 ```
 
-5) You will be asked a short series of questions to configure and setup your orb such as your [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) and orb name.
+**5)** You will be asked a short series of questions to configure and setup your orb such as your [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) and orb name.
 
 In the background the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There is a detailed `README.md` file within each directory that contains helpful information specific to that directory.
 
-6) When prompted, in a separate terminal, push the changes up to Github.
+**6)** When prompted, in a separate terminal, push the changes up to Github.
 
 During the setup process, the `orb init` command will take several steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on CircleCI.com.
 
@@ -69,13 +69,16 @@ During the setup process, the `orb init` command will take several steps to prep
 $ git push origin master
 ```
 
-7) Once complete, return to the CLI window and confirm the changes have been pushed. The CLI will finish by automatically following the project on CircleCI and generating the first development version fo your orb for testing (a hello-world sample).
+For technical reasons, we can not automatically push this code.
+Once complete, return to the CLI window and confirm the changes have been pushed.
+
+**7)** The CLI will finish by automatically following the project on CircleCI and generating the first development version fo your orb for testing (a hello-world sample).
 
 You are now ready to push changes to your orb and automatically publish your orb. We'll go over deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) docs.
 
 ### Writing Your Orb
 
-Before you begin working on your orb, ensure you are on a non-default branch. We typically recommend s tarting your orb on the `alpha` branch.
+Before you begin working on your orb, ensure you are on a non-default branch. We typically recommend starting your orb on the `alpha` branch.
 
 ```shell
 $ git checkout -b alpha
@@ -113,7 +116,7 @@ _Example: Orb Project "src" Directory_
 
 These files and directories above are the only "_required_" components, you may additionally see a `scripts` and `tests` folder in your project and we will go over those shortly. If your orb however does not need any `executors` or `jobs` for instance, these directories can be deleted.
 
-Each directory in the `src` folder listed above corresponds with an orb component type which can be added or removed from the orb.
+Each directory in the `src` folder listed above corresponds with a [reusable orb]({{site.baseurl}}/2.0/reusing-config) component type which can be added or removed from the orb.
 
 ##### @orb.yml
 {:.no_toc}
@@ -122,6 +125,7 @@ This file acts as the "root" to your orb project and contains the config version
 
 Use the `display` key to add clickable links to the orb registry for both your `home_url` (the home of the product or service), and `source_url` (the git repository URL).
 
+{:.tab.orb-yaml.@orb-yaml}
 ```yaml
 version: 2.1
 
@@ -142,6 +146,7 @@ Each _YAML_ file within this directory will be treated as an orb command, with a
 
 View the included _[greet.yml](./greet.yml)_ command example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src).
 
+{:.tab.command-yaml.greet-yaml}
 ```yaml
 description: >
   # What will this command do?
@@ -188,13 +193,14 @@ Jobs may invoke orb commands and other steps to fully automate tasks with minima
 
 View the included _[hello.yml](./hello.yml)_ job example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs).
 
-
+{:.tab.job-yaml.hello-yaml}
 ```yaml
 description: >
   # What will this job do?
   # Descriptions should be short, simple, and clear.
 
-executor: default
+docker:
+  - image: cimg/base:stable
 parameters:
   greeting:
     type: string
@@ -253,8 +259,9 @@ Using the Orb Dev Kit and the `<<include(file)>>` syntax, we can import into our
 
 To keep our scripts portable and able to be executed locally, we expect a set of environment variables within our script and set them at the config level.
 
-The `greet.sh` file which was included with the special `<<include(file)>>`syntax above in our `greet.yml` command file looks like this:
+The `greet.sh` file which was included with the special `<<include(file)>>` syntax above in our `greet.yml` command file looks like this:
 
+{:.tab.greet-script.greet-sh}
 ```bash
 echo Hello "${PARAM_TO}"
 ```
