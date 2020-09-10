@@ -1673,16 +1673,18 @@ Truthiness rules are as follows: `false`, `null`, `0`, the empty string, and `Na
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
+**Note:**
+When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
 ### Logic Statement Examples
 
 ```yaml
 workflows:
   my-workflow:
       when:
-        condition:
-          or:
-            - equal: [ master, << pipeline.git.branch >> ]
-            - equal: [ staging, << pipeline.git.branch >> ]
+        or:
+          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml
