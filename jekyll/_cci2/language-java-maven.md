@@ -22,7 +22,7 @@ This application uses the [Spring PetClinic sample project](https://projects.spr
 pared down sample configurations demonstrating different CircleCI features including workspaces,
 dependency caching, and parallelism.
 
-## Sample configuration: version 2.1:
+## Sample Configuration: version 2.1:
 
 ### A basic build with an orb:
 
