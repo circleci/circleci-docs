@@ -135,7 +135,7 @@ changes, you can still restore the previous cache. This means the job will only
 have to fetch the dependencies that have changed between the new `pom.xml` and the
 previous cache.
 
-### Persisting build artifacts to workspace
+### Persisting Build Artifacts to Workspace
 
 The following configuration sample details persisting a build artifact to a workspace.
 
