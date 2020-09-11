@@ -178,7 +178,7 @@ This `persist_to_workspace` step allows you to persist files or directories to b
 downstream jobs in the workflow. In this case, the target directory produced by
 the build step is persisted for use by the test step.
 
-### Splitting tests across parallel containers
+### Splitting Tests Across Parallel Containers
 
 
 {% raw %}
