@@ -241,7 +241,7 @@ Adding `store_test_results` enables CircleCI to access the historical timing dat
 for previous executions of these tests, so the platform knows how to split tests
 to achieve the fastest overall runtime.
 
-### Storing code coverage artifacts
+### Storing Code Coverage Artifacts
 
 ```yaml
 version: 2.0
