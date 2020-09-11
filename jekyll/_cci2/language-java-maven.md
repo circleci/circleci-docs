@@ -65,7 +65,7 @@ is a essentially a series of commands run in a clean execution environment.
 Notice the two primary parts of a job: the executor and steps. In this case, we
 are using the docker executor and passing in a CircleCI convenience image.
 
-### Using a workflow to build then test
+### Using a Workflow to Build then Test
 
 A workflow is a dependency graph of jobs. This basic workflow runs a build job
 followed by a test job. The test job will not run unless the build job exits
