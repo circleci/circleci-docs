@@ -149,7 +149,7 @@ version: 2
 
 We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `11.0.3-jdk-stretch`.
 
-Now we’ll add several `steps` within the `build` job.
+Now we will add several `steps` within the `build` job.
 
 We start with `checkout` so we can operate on the codebase.
 
