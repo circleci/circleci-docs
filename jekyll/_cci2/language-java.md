@@ -20,7 +20,7 @@ This guide will help you get started with a Java application building with Gradl
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-We're going to make a few assumptions here:
+We are going to make a few assumptions here:
 
 * You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java-maven/).
 * You are using Java 11. 
@@ -267,4 +267,3 @@ Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document
 for details on handling Java memory issues.
-
