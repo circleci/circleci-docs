@@ -24,7 +24,7 @@ dependency caching, and parallelism.
 
 ## Sample Configuration: version 2.1:
 
-### A basic build with an orb:
+### A Basic Build with an Orb:
 
 ```yaml
 version: 2.1
