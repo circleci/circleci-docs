@@ -46,7 +46,7 @@ command checks out the code, builds, tests, and uploads the test result. The
 parameters of this command can be customized. See the maven orb docs for more
 information.
 
-## For 2.0 configuration (recommended for CircleCI Server only):
+## For 2.0 Configuration (recommended for CircleCI Server only):
 
 ```yaml
 version: 2.0
