@@ -67,6 +67,9 @@ CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50
 
 ![Docker Layer Caching]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
+### Scope of Cache
+With DLC enabled, the entirety of `/var/lib/docker` is cached to the remote volume.
+
 ### Remote Docker Environment
 {:.no_toc}
 
