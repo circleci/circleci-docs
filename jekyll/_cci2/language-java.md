@@ -108,7 +108,7 @@ The configuration above is from a demo Java app, which you can access at [https:
 
 If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
-Now we’re ready to build a `config.yml` from scratch.
+Now we are ready to build a `config.yml` from scratch.
 
 ## Config Walkthrough
 
