@@ -100,7 +100,7 @@ workflows:
             - build
 ```
 
-### Caching dependencies
+### Caching Dependencies
 
 The following code sample details the use of **caching**.
 
