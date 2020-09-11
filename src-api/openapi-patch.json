@@ -2,54 +2,6 @@
   "paths":{
     "/context":{
       "get":{
-        "parameters":[
-          {
-            "in":"query",
-            "name":"owner-id",
-            "description":"The unique ID of the owner of the context. Specify either this or owner-slug.",
-            "schema":{
-              "type":"string",
-              "format":"uuid",
-              "example":"c65b68ef-e73b-4bf2-be9a-7a322a9df150"
-            },
-            "required":false
-          },
-          {
-            "in":"query",
-            "name":"owner-slug",
-            "description":"A string that represents an organization. Specify either this or owner-id. Cannot be used for accounts.",
-            "schema":{
-              "type":"string",
-              "example":"CircleCI-Public"
-            },
-            "required":false
-          },
-          {
-            "in":"query",
-            "name":"owner-type",
-            "description":"The type of the owner. Defaults to \"organization\". Accounts are only used as context owners in server.",
-            "schema":{
-              "type":"string",
-              "enum":[
-                "account",
-                "organization"
-              ],
-              "example":"account"
-            },
-            "required":false
-          },
-          {
-            "in":"query",
-            "name":"page-token",
-            "description":"A token to retrieve the next page of results.",
-            "schema":{
-              "type":"string",
-              "example":"next_page_token"
-            },
-            "required":false,
-            "allowEmptyValue":true
-          }
-        ],
         "x-codeSamples": [
           {
             "lang": "Node + Request",
