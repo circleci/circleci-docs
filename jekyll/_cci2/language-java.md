@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This guide will help you get started with a Java application building with Gradle on CircleCI. 
+This guide will help you get started with a Java application building with Maven on CircleCI. 
 
 * TOC
 {:toc}
@@ -340,7 +340,7 @@ The configuration above is from a demo Java app, which you can access
 want to step through it yourself, you can fork the project on GitHub and
 download it to your machine. Go to the **Add Projects** page in CircleCI and click
 the **Build Project** button next to your project. Finally, delete everything in
-.circleci/config.yml. Nice! You just set up CircleCI for a Java app using Gradle
+.circleci/config.yml. Nice! You just set up CircleCI for a Java app using Maven
 and Spring.
 
 ## See Also
