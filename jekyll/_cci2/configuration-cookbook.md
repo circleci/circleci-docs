@@ -537,7 +537,7 @@ workflows:
 
 Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
 
-In the following example the `test` job is run in Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
+In the following example the `test` job is run across Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
 
 ```yaml
 version: 2.1
@@ -582,7 +582,7 @@ workflows:
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
-```yaml
+```
     - test-13.13.0-linux
     - test-14.0.0-linux
     - test-13.13.0-windows
