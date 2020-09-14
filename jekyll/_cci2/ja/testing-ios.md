@@ -66,6 +66,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 | `9.0.1`  | Xcode 9.0.1 (9A1004)         | 10.12.6       | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html) |                                                                                          |
 {: class="table table-striped"}
 
+**Note:** Xcode 9.0.1 and Xcode 9.3.1 are deprecated and are scheduled for removal on 5 October 2020 and 28 September 2020 respectively. For more information, please see the [deprecation notice](https://discuss.circleci.com/t/deprecation-notice-xcode-9-0-1-and-xcode-9-3-1/37382).
+
 ## はじめに
 
 Select a macOS project repository you would like to build from the **Add Projects** page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
