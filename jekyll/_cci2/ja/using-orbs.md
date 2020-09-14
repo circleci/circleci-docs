@@ -227,4 +227,4 @@ CircleCI は通常、グローバルに読み取り可能としてパブリッ�
 
 - [Orb の概要]({{site.baseurl}}/2.0/orb-intro/):Orb の使用とオーサリングについての概要
 - [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の詳細
-- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/#構成レシピ): CircleCI Orbs のレシピを構成に使用する詳しい方法
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
