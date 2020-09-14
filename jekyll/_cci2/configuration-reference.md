@@ -1041,7 +1041,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
 
-- [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
+- [Workflows](https://circleci.com/docs/2.0/workflows/)
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### Example
