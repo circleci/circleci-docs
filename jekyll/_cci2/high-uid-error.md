@@ -9,7 +9,6 @@ version:
 - Cloud
 - Server v2.x
 ---
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Debugging Container ID Cannot Be Mapped to Host ID Error*
 
 When starting a container,
 you may see this error message:
