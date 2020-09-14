@@ -192,4 +192,4 @@ Orbs テストは、複数のレベルから選択して実行できます。 �
 - [Orb のコンセプト]({{site.baseurl}}/2.0/using-orbs/): CircleCI Orbs の基本的な概念
 - [Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
 - [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
-- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/#構成レシピ): CircleCI Orbs のレシピを構成に使用する詳しい方法
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
