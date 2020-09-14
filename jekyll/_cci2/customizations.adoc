@@ -185,7 +185,7 @@ Let's take a look at one of the options in more detail
 ```
 
 * `:medium`  - this is the name that your developers will use to refer to the resource class in their config.yml and the is the external facing name of the resource class.
-* `:id "d1.medium"`` - this is the internal name for the resource class. You can customize this ID for Docker resource classes.
+* `:id "d1.medium"` - this is the internal name for the resource class. You can customize this ID for Docker resource classes.
 * `:availability :general` - required field
 * `:ui {:cpu 4.0 :ram 8192 :class :medium}` - Information used by the CircleCI UI. This this should be kept in parity with :outer - see below.
 * `:outer {:cpu 4.0 :ram 8192}` - This defines the CPU and RAM for the resource class.
