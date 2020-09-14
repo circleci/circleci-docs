@@ -34,14 +34,16 @@ For example, if only one job in a workflow fails, you will know it is failing in
 
 Workflows may appear with one of the following states:
 
-- RUNNING: ワークフローが実行中
-- NOT RUN: ワークフローが起動されていない
-- CANCELLED: ワークフローが終了前にキャンセルされた
-- FAILING: ワークフロー内の 1 つのジョブが失敗 (グラフ内のジョブの 1 つが失敗し、他のジョブが引き続き実行されている場合、 ワークフローが最終的に失敗することを意味する「Failing」ステータスとなります)
-- FAILED: ワークフロー内の 1 つ以上のジョブが失敗 (ワークフロー グラフ内の 1 つ以上のジョブが失敗した場合の 最終的なステータスです)
-- SUCCESS: ワークフロー内のすべてのジョブが正常に完了
-- ON HOLD: ワークフロー内のジョブが承認を待機中
-- NEEDS SETUP: このプロジェクトの [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイル内にワークフロー スタンザが含まれていない、または正しくない
+| State       | Description                                                                                                                                  |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| RUNNING     | Workflow is in progress                                                                                                                      |
+| NOT RUN     | Workflow was never started                                                                                                                   |
+| CANCELLED   | Workflow was cancelled before it finished                                                                                                    |
+| FAILING     | A job in the workflow has failed                                                                                                             |
+| FAILED      | One or more jobs in the workflow failed                                                                                                      |
+| SUCCESS     | All jobs in the workflow completed successfully                                                                                              |
+| ON HOLD     | A job in the workflow is waiting for approval                                                                                                |
+| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project |
 
 ### 制限事項
 {:.no_toc}
@@ -519,10 +521,14 @@ workflows:
 
 このセクションでは、ワークフローに関連する一般的な問題とその解決方法について説明します。
 
-### ワークフローの再実行が失敗する
+### Workflow and Subsequent Jobs Do Not Trigger
+
+If you do not see your workflows triggering, a common cause is a configuration error preventing the workflow from starting. As a result, the workflow does not start any jobs. Navigate to your project's pipelines and click on your workflow name to discern what might be failing.
+
+### Rerunning Workflows Fails
 {:.no_toc}
 
-(パイプラインの処理中に) ワークフローを実行する前にエラーが発生する場合があることがわかっています。 この場合、停止する前は正しく動作していたワークフローでも、再実行すると失敗します。 これを回避するには、プロジェクトのリポジトリに変更をプッシュします。 これにより、最初にパイプライン処理が再実行されてからワークフローが実行されます。
+It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
 
 ### Workflows Waiting for Status in GitHub
 {:.no_toc}
