@@ -11,7 +11,7 @@ version:
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> This document refers to using the Insights page on the CircleCI <i>Server</i> product. If you are interested in accessing insights and analytics for your usage, please consider exploring the <a href="https://circleci.com/docs/api/v2/#circleci-api-insights">Insights endpoints</a> of the CircleCI V2 API.</span>
+  <span> This document refers to using the Insights page on the CircleCI <i>Server</i> product. If you are interested in accessing insights and analytics for your usage, please consider exploring the <a href="https://circleci.com/docs/api/v2/#tag/Insights">Insights endpoints</a> of the CircleCI V2 API.</span>
 </div>
 
 
