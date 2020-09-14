@@ -16,7 +16,7 @@ CircleCI API を使用してジョブをトリガーする方法について説�
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> This document refers to using the legacy CircleCI API 1.0, a service that will be eventually be deprecated in favour of the <a href="https://circleci.com/docs/api/v2/#circleci-api">V2 API</a>. Consider using the <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">Pipelines</a> endpoints to trigger pipelines.</span>
+  <span> This document refers to using the legacy CircleCI API 1.0, a service that will be eventually be deprecated in favor of the <a href="https://circleci.com/docs/api/v2/">V2 API</a>. Consider using the <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">Pipelines</a> endpoints to trigger pipelines.</span>
 </div>
 
 - 目次
