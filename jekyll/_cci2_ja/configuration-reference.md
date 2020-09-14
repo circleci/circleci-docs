@@ -1010,7 +1010,7 @@ steps:
 
 `deploy` ステップを使用するときには、ワークフローを使用してジョブのオーケストレーションやトリガーを実行する方法を理解しておくことをお勧めします。 ワークフローの使用方法については、以下を参照してください。
 
-- [ワークフロー](https://circleci.com/docs/2.0/workflows-overview/)
+- [ワークフロー](https://circleci.com/docs/2.0/workflows/)
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### 例
