@@ -47,7 +47,9 @@ Test metadata is not automatically collected in CircleCI 2.0 until you enable th
     gem 'minitest-ci'
     
 
-* Django は、[django-nose](https://github.com/django-nose/django-nose) テスト ランナーを使用して構成する必要があります。 
+* Django は、[django-nose](https://github.com/django-nose/django-nose) テスト ランナーを使用して構成する必要があります。
+
+**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
 
 ## カスタム テスト ステップでのメタデータの収集
 
