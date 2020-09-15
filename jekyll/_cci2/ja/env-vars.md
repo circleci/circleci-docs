@@ -536,6 +536,8 @@ For more details, see [Setting an Environment Variable in a Shell Command](#sett
 
 {:class="table table-striped"}
 
+**Note:** For a list of pipeline values and parameters, refer to the [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) page.
+
 ## See Also
 {:.no_toc}
 
