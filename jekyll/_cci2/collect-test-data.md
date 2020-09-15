@@ -50,7 +50,7 @@ gem 'minitest-ci'
 
 - Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.
 
-**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS] ({{ site.baseurl}}/2.0/testing-ios/)page.
+**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
  
 ## Metadata Collection in Custom Test Steps
 
