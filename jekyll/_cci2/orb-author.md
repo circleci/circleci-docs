@@ -18,7 +18,7 @@ version:
 
   As orbs are simply packages of [reusable config]({{site.baseurl}}/2.0/reusing-config), orbs can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish) as singular `yaml` files and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
-  Alternatively, whether you are writing your first orb or getting ready for a production level orb, we recommend using our Orb Development Kit to get started.
+  Alternatively, whether you are writing your first orb or getting ready for production level, we recommend using our Orb Development Kit to get started.
 
 ## Orb Development Kit
 
@@ -26,30 +26,34 @@ The Orb Development Kit refers to a suite of tools working together to make prod
 
 ### Getting Started
 
-To begin creating your new orb with the Orb Developer Kit, first create a new repository on GitHub.com. Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
+To begin creating your new orb with the Orb Developer Kit, first create a new repository on [GitHub.com](https://github.com).
 
-**1)** Create new [GitHub repository](https://github.com/new).
+Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
+
+
+#### 1) Create new [GitHub repository](https://github.com/new).
+{:.no_toc}
 
 The name of your repository is not critical but we recommend something similar to "myProject-orb".
 
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-**2)** Clone or initialize the repository locally and change directory into the git project.
+When complete, you will be brought to a page confirming your new repository and you should the generated git URL. Take note of the `HTTPS` version of your git URL, we will use it during out configuration.
+
+![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+
+
+#### 2) Initialize a new orb project using the `orb init` CLI command.
+{:.no_toc}
 
 ```bash
-$ git clone https://github.com/<user>/myProject-orb.git
-$ cd myProject-orb
+$ circleci orb init /path/to/myProject-orb
 ```
 
-**3)** Initialize a new orb project using the `orb init` CLI command.
+The `circleci orb init` is called followed by a path which we will create and initialize our orb project. It is recommended to use the same directory name as the git project's repo name.
 
-```bash
-$ circleci orb init .
-```
-
-The `circleci orb init` is called, followed by the directory where we will create our orb. We are going to use `.` for the current directory.
-
-**4)** When prompted, we will opt to select the fully automated orb setup.
+#### 3) When prompted, we will opt to select the fully automated orb setup.
+{:.no_toc}
 
 ```text
 ? Would you like to perform an automated setup of this orb?:
@@ -57,13 +61,21 @@ The `circleci orb init` is called, followed by the directory where we will creat
     No, I'll handle everything myself.
 ```
 
-**5)** You will be asked a short series of questions to configure and setup your orb such as your [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) and orb name.
+If you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
+
+We will however select to take the automated route. With this option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with our custom options. After, the project will be automatically followed on CircleCI with an automated CI/CD pipeline included. We'll expend more on the included CI pipeline in our [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/#section=configuration) documentation.
+
+#### 4) You will be asked a short series of questions to configure and setup your orb such as your [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) and orb name.
+{:.no_toc}
 
 In the background the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There is a detailed `README.md` file within each directory that contains helpful information specific to that directory.
 
-**6)** When prompted, in a separate terminal, push the changes up to Github.
+You will also be asked for the remote git repository URL which we obtained in step 1. Ensure you are using the `HTTPS` URL.
 
-During the setup process, the `orb init` command will take several steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on CircleCI.com.
+#### 5) When prompted, in a separate terminal, push the changes up to Github.
+{:.no_toc}
+
+During the setup process, the `orb init` command will take several steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on CircleCI.com successfully.
 
 ```bash
 $ git push origin master
@@ -72,7 +84,8 @@ $ git push origin master
 For technical reasons, we can not automatically push this code.
 Once complete, return to the CLI window and confirm the changes have been pushed.
 
-**7)** The CLI will finish by automatically following the project on CircleCI and generating the first development version fo your orb for testing (a hello-world sample).
+#### 6) The CLI will finish by automatically following the project on CircleCI and generating the first development version fo your orb for testing (a hello-world sample).
+{:.no_toc}
 
 You are now ready to push changes to your orb and automatically publish your orb. We'll go over deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) docs.
 
@@ -100,6 +113,7 @@ _Example: Orb Project Structure_
 {: class="table table-striped"}
 
 #### Orb Source
+
 
 Navigate to the `src` directory.
 
