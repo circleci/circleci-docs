@@ -12,7 +12,7 @@ docs@circleci.com
 :pagenums:
 :idprefix:
 :idseparator: -
-:sectanchors:
+
 :autofit-option:
 
 :leveloffset: +1

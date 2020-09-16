@@ -5,7 +5,7 @@
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
+
 
 This document provides an overview of how to migrate from TeamCity to CircleCI.
 
