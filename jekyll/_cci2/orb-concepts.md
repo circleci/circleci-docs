@@ -5,6 +5,8 @@ short-title: "Orbs Concepts"
 description: "Conceptual Overview for Orbs"
 categories: [getting-started]
 order: 1
+verison:
+- Cloud
 ---
 
 * TOC
@@ -106,7 +108,12 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 
 ### Jobs
 
-Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
+Jobs define a collection of
+[steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run
+within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are
+orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs
+will also individually return their status via [GitHub
+Checks](https://circleci.com/docs/2.0/enable-checks/).
 
 ```yaml
 version: 2.1

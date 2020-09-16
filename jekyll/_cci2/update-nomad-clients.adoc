@@ -1,3 +1,8 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = Nomad Client Launch Configuration Update
 :page-layout: classic-docs
 :page-liquid:

@@ -5,6 +5,9 @@ short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
 categories: [configuring-jobs]
 order: 70
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to work with Artifacts in the following sections:
@@ -156,7 +159,7 @@ for all variables that start with `:`.
 ```bash
 export CIRCLE_TOKEN=':your_token'
 
-curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
+curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
    | grep -o 'https://[^"]*' \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```

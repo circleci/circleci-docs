@@ -1,3 +1,8 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = SSH Rerun Architecture in Server
 :page-layout: classic-docs
 :page-liquid:

@@ -5,6 +5,8 @@ short-title: Testing iOS Applications on macOS
 categories: [platforms]
 description: Testing iOS applications on macOS
 order: 30
+version: 
+- Cloud
 ---
 
 This document describes how to set up and customize testing for an iOS application with CircleCI in the following sections:
@@ -59,6 +61,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `9.3.1`  | Xcode 9.3.1 (9E501)       | 10.13.3 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1875/index.html)
  `9.0.1`  | Xcode 9.0.1 (9A1004)      | 10.12.6 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1848/index.html)
 {: class="table table-striped"}
+
+**Note:** Xcode 9.0.1 and Xcode 9.3.1 are deprecated and are scheduled for removal on 5 October 2020 and 28 September 2020 respectively. For more information, please see the [deprecation notice](https://discuss.circleci.com/t/deprecation-notice-xcode-9-0-1-and-xcode-9-3-1/37382).
 
 ## Getting Started
 

@@ -5,6 +5,9 @@ short-title: "Ruby"
 description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
 categories: [language-guides]
 order: 8
+version:
+- Cloud
+- Server v2.x
 ---
     
 This guide will help you get started with a Ruby on Rails application on CircleCI. 

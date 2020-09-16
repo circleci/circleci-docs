@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "Configuration"
 description: "Landing page for CircleCI 2.0 Config"
+version:
+- Cloud
+- Server v2.x
 ---
 
 The core of the CircleCI experience is creating a *deterministic build* with the `config.yml` file. A deterministic build is one that can be run live at commit time, tomorrow, or even next month and will end with the exact same results.

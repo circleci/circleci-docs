@@ -5,6 +5,9 @@ short-title: "Sample config.yml File"
 description: "Sample config.yml File"
 categories: [migration]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files.

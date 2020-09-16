@@ -5,6 +5,9 @@ short-title: "PHP"
 description: "Building and Testing with PHP on CircleCI 2.0"
 categories: [language-guides]
 order: 6
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a PHP sample application.

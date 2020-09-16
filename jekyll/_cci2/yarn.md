@@ -4,6 +4,9 @@ title: "Using Yarn (an NPM alternative) on CircleCI"
 short-title: "Yarn Package Manager"
 categories: [how-to]
 description: "How to use the Yarn package manager on CircleCI."
+version:
+- Cloud
+- Server v2.x
 ---
 
 [Yarn](https://yarnpkg.com/) is an open-source package manager for JavaScript.

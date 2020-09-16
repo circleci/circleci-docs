@@ -1,3 +1,7 @@
+---
+version:
+- Server v2.x
+---
 = Installation Prerequisites
 :page-layout: classic-docs
 :page-liquid:

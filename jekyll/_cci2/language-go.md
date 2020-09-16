@@ -5,6 +5,9 @@ short-title: "Go"
 description: "Building and Testing with Go (Golang) on CircleCI 2.0"
 categories: [language-guides]
 order: 3
+version:
+- Cloud
+- Server v2.x
 ---
 
 CircleCI supports building Go projects using any version of Go that can be

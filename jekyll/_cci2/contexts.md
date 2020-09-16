@@ -5,6 +5,9 @@ short-title: "Using Contexts"
 description: "Secured, cross-project resources"
 categories: [configuring-jobs]
 order: 41
+version:
+- Cloud
+- Server v2.x
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
@@ -44,7 +47,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
 
-    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -209,7 +212,6 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
-
 _Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
@@ -224,5 +226,5 @@ The value of the context will not be masked in the build output if:
 ## See Also
 {:.no_toc}
 
-[CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
-[Workflows]({{ site.baseurl }}/2.0/workflows/) 
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
+* [Workflows]({{ site.baseurl }}/2.0/workflows/) 

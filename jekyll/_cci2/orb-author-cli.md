@@ -5,6 +5,8 @@ short-title: "Setting up the CLI"
 description: "Setting Up the CircleCI ClI for Orb Authors"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 ## Introduction to the CircleCI CLI

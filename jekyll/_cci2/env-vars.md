@@ -5,6 +5,9 @@ short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
 categories: [configuring-jobs]
 order: 40
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes using environment variables in CircleCI in the following sections:
@@ -395,7 +398,9 @@ Not all command-line programs take credentials in the same way that `docker` doe
 
 Pipeline parameters can be used to pass variables using the CircleCI API v2. 
 
-A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
+A pipeline can be triggered with specific `parameter` values using the API v2
+endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById). 
+This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
@@ -408,7 +413,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
+**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in your Project Settings page and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
 Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
 
@@ -422,7 +427,7 @@ Build parameters are environment variables, therefore their names have to meet t
 
 Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
-**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
+**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in your Project Settings page and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
 For example, when you pass the parameters:
 
@@ -522,6 +527,8 @@ Variable                    | Type    | Value
 `CI_PULL_REQUESTS`          | List    | **Deprecated**. Kept for backward compatibility with CircleCI 1.0. Use `CIRCLE_PULL_REQUESTS` instead.
 
 {:class="table table-striped"}
+
+**Note:** For a list of pipeline values and parameters, refer to the [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) page.
 
 ## See Also
 {:.no_toc}

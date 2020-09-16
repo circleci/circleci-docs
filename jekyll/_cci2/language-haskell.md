@@ -5,6 +5,9 @@ short-title: "Haskell"
 description: "Building and Testing with Haskell on CircleCI 2.0"
 categories: [language-guides]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide will help you get started with a basic Haskell application on

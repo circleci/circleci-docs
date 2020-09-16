@@ -5,6 +5,9 @@ short-title: "Optimizations Cookbook"
 description: "Starting point for Optimizations Cookbook"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to optimize your **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs. 

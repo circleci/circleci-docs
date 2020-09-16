@@ -1,3 +1,7 @@
+---
+version:
+- Server v2.x
+---
 [#install]
 = Installation on AWS with Terraform
 :page-layout: classic-docs

@@ -5,8 +5,10 @@ short-title: "Debugging Container ID Cannot Be Mapped to Host ID Error"
 description: "Debugging 'Container ID XXX cannot be mapped to a host ID' error when starting a container"
 categories: [troubleshooting]
 order: 21
+version:
+- Cloud
+- Server v2.x
 ---
-*[Reference]({{ site.baseurl }}/2.0/reference/) > Debugging Container ID Cannot Be Mapped to Host ID Error*
 
 When starting a container,
 you may see this error message:

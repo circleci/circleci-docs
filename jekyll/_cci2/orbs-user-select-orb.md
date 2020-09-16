@@ -5,6 +5,8 @@ short-title: "Orb Registry Selection"
 description: "Selectiing an orb to use with your configuration"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 ## Introduction

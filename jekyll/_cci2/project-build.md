@@ -5,6 +5,8 @@ short-title: "Projects and Pipelines"
 description: "Starting point for CircleCI 2.0 projects"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 This document describes how CircleCI automates your pipelines.
@@ -56,6 +58,3 @@ of the page to navigate back to a job's respective workflow or pipeline.
 
 ![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
 
-## See Also
-
-[Settings]({{ site.baseurl }}/2.0/settings)

@@ -5,6 +5,9 @@ short-title: "Hello World"
 description: "First project on CircleCI 2.0"
 categories: [getting-started]
 order: 4
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).  
@@ -15,8 +18,7 @@ This example adds a job called `build` that spins up a container running a [pre-
 
 1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
 
-1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines: 
-
+1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration): 
    ```yaml
    version: 2.1
    jobs:
@@ -28,12 +30,12 @@ This example adds a job called `build` that spins up a container running a [pre-
          - run: echo "hello world" # run the `echo` command
    ```
 
-1. Commit and push the changes. 
+2. Commit and push the changes. 
 
-1. Go to the Projects page in the CircleCI app, click the **Add Projects** button, then click
+3. Go to the Projects page in the CircleCI app, click the **Add Projects** button, then click
 the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated Org. See the Org Switching section below for tips.
 
-3. Click the **Start Building** button to trigger your first build. 
+1. Click the **Start Building** button to trigger your first build. 
 
 The Workflows page appears with your `build` job and prints `Hello World` to the console. 
 
@@ -58,6 +60,8 @@ See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for det
 
 ## Hello World for macOS
 
+_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
+
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
 ```
@@ -71,18 +75,40 @@ Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) docu
 
 ## Hello World for Windows
 
-Using the basics from the Linux, Android, and macOS examples above, you can add a job that uses the `win/vs2019` executor (Windows Server 2019) by adding the `orb:` key in the same `.circleci/config.yml` file as follows:
+Using the basics from the Linux, Android, and macOS examples above, you can add a job that uses the windows executor (Windows Server 2019) as follows. Notice the Cloud version of this requires the use of `version:2.1` config, and orbs:
 
-```
+{:.tab.windowsblock.Cloud}
+```yaml
+version: 2.1 # Use version 2.1 to enable orb usage.
+
 orbs:
-  win: circleci/windows@1.0.0
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
-  build-windows:
-    executor: win/vs2019
+  build: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
     steps:
+      # Commands are run in a Windows virtual machine environment
       - checkout
       - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
 ```
 
 **Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows). 

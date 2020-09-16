@@ -5,6 +5,9 @@ short-title: "Database Configuration Examples"
 description: "Example of Configuring PostgreSQL"
 categories: [configuring-jobs]
 order: 35
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides example database [config.yml]({{ site.baseurl }}/2.0/databases/) files using PostgreSQL/Rails and MySQL/Ruby in the following sections:

@@ -5,6 +5,9 @@ short-title: "Configuring CircleCI"
 description: "Reference for .circleci/config.yml"
 categories: [configuring-jobs]
 order: 20
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
@@ -1030,7 +1033,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
 
-- [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
+- [Workflows](https://circleci.com/docs/2.0/workflows/)
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### Example
@@ -1662,16 +1665,18 @@ Truthiness rules are as follows: `false`, `null`, `0`, the empty string, and `Na
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
+**Note:**
+When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
 ### Logic Statement Examples
 
 ```yaml
 workflows:
   my-workflow:
       when:
-        condition:
-          or:
-            - equal: [ master, << pipeline.git.branch >> ]
-            - equal: [ staging, << pipeline.git.branch >> ]
+        or:
+          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml

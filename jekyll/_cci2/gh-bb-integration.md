@@ -4,6 +4,8 @@ title: GitHub and Bitbucket Integration
 description: Using GitHub or Bitbucket
 categories: [migration]
 Order: 60
+version:
+- Cloud
 ---
 
 This document provides an overview of using GitHub, GitHub Enterprise, or Bitbucket Cloud with CircleCI in the following sections:

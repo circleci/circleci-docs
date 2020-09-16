@@ -5,6 +5,8 @@ short-title: "Orb Author FAQ"
 description: "Frequently asked questions from orb authors."
 categories: [configuring-jobs]
 order: 20
+version:
+- Cloud
 ---
 
 This document describes various questions and technical issues that you may find helpful when authoring orbs.
@@ -99,4 +101,4 @@ steps:
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
 - Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) for information on how to test orbs you have created.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/#configuration-recipes) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.

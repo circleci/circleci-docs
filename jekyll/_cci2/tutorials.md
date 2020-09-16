@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "Tutorials"
 description: "Tutorials and 2.0 Sample Apps with Guides"
+version:
+- Cloud
+- Server v2.x
 ---
 
 Use the tutorial associated with your platform to learn about the customization that is possible in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).

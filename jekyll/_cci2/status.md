@@ -6,6 +6,9 @@ description: "Status dashboard"
 categories: [getting-started]
 order: 1
 side_toc: none
+version:
+- Cloud
+- Server v2.x
 ---
 
 <hr>

@@ -1,3 +1,8 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 [#upgrade]
 = Upgrading a Server Installation
 :page-layout: classic-docs

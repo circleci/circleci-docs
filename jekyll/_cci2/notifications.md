@@ -5,6 +5,8 @@ short-title: "Using Notifications"
 categories: [configuring-jobs]
 order: 100
 published: true
+version:
+- Cloud
 ---
 
 

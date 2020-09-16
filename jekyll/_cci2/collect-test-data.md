@@ -5,6 +5,9 @@ short-title: "Collecting Test Metadata"
 categories: [configuring-jobs]
 description: "Collecting test metadata"
 order: 34
+version:
+- Cloud
+- Server v2.x
 ---
 
 CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. 
@@ -42,7 +45,9 @@ gem 'rspec_junit_formatter'
 gem 'minitest-ci'
 ```
 
-- Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.  
+- Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.
+
+**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
  
 ## Metadata Collection in Custom Test Steps
 

@@ -5,6 +5,9 @@ short-title: "Choosing an Executor Type"
 description: "Overviews of the docker, machine, and executor types"
 categories: [containerization]
 order: 10
+version:
+- Cloud
+- Server v2.x
 ---
 [custom-images]: {{ site.baseurl }}/2.0/custom-images/
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
