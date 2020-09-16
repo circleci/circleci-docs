@@ -99,7 +99,7 @@ Jobs run using the remote Docker Environment, or the `machine` executor are sche
 
 // add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
 
-NOTE: A cron job is scheduled to cycle all default and preallocated instances at least once per day to ensure instances do not end up in a unworkable state.
+NOTE: A cron job is scheduled to cycle all default and preallocated instances at least once per day to ensure instances do not end up in an unworkable state.
 
 == Accessing Remote Docker and `machine` instances
 By default, private IP addresses are used to communicate with VM service instances. If you need to grant wider access, for example, to allow developers SSH access, this can be set using the checkbox in the VM Provider Advanced Settings.
