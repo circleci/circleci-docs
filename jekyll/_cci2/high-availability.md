@@ -4,6 +4,7 @@ title: "Adding External Database Hosts for High Availability"
 category: [administration]
 order: 20
 description: "Configuring High Availability for CircleCI 2.0"
+side_toc: none
 version:
 - Server Admin
 ---

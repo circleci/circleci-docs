@@ -145,7 +145,7 @@ nav.nav-toggle.two {
 .table-of-contents {
     position: fixed;
     right: 0;
-    padding: 32px 32px 96px 12px;
+    padding: 32px 32px 112px 12px;
     background: #ffffff;
     height: 100%;
     width: 340px;
@@ -187,6 +187,7 @@ div.article-container{
 	}
 	padding: 60px 48px;
   width: calc(100% - 260px - 330px);
+  max-width: 62em;
 
   // we hide the toc on mobile, so recalc the width.
   @media (max-width: $toc-breakpoint) {

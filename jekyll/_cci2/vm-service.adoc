@@ -17,7 +17,7 @@ This section outlines how to set up and customize VM service for your CircleCI i
 
 NOTE: This is only available for installations on AWS, please contact your CircleCI account representative to request this for a static installation.
 
-toc::[]
+
 
 == Overview
 

@@ -14,7 +14,7 @@ version:
 
 This document describes the various ways users of your CircleCI Server installation can get access and authenticate their accounts. CircleCI currently supports OAuth and LDAP as authentication methods.
 
-toc::[]
+
 
 == OAuth with GitHub/GitHub Enterprise
 

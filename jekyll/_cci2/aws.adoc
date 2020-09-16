@@ -14,7 +14,7 @@ version:
 
 Following is a step by step guide to installing CircleCI Server v{serverversion} with Terraform.
 
-toc::[]
+
 
 == Define Variables for Terraform
 

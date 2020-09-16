@@ -1,6 +1,7 @@
 ---
 version:
 - Server v2.x
+side_toc: none
 ---
 = Teardown
 :page-layout: classic-docs
@@ -9,6 +10,7 @@ version:
 :toc: macro
 :side_toc: none
 :toc-title:
+
 
 [.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 

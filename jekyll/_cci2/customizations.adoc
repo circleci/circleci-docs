@@ -12,7 +12,7 @@ version:
 
 The following sections summarize the key files and variables that impact CircleCI Server behavior, and configuration options for your Server installation.
 
-toc::[]
+
 
 == Notable Files & Folders
 

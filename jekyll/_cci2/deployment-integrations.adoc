@@ -12,7 +12,7 @@ version:
 
 Deployment at CircleCI is just the same as any other job configuration; you create a job and configure it to deploy to virtually any target. This document provides an overview of the deployment process, along with best practices and optimization strategies.
 
-toc::[]
+
 
 [discrete]
 == Overview

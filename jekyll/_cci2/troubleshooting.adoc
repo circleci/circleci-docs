@@ -12,7 +12,7 @@ version:
 
 This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, you can generate a support bundle and contact CircleCI Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
 
-toc::[]
+
 
 === Generating a Support Bundle
 To download a support bundle, select **Support** from the Management Console menu bar, and then select **Download Support Bundle**. CircleCI support engineers will often request support bundles to help diagnose/fix the problem you are experiencing.

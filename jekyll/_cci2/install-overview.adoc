@@ -16,7 +16,7 @@ Refer to the <<v.2.19-overview#,What's New>> page for full details of what's new
 
 If you are looking to update an existing installation, see our guide to <<updating-server#upgrading-a-server-installation,Upgrading a Server Installation>>.
 
-toc::[]
+
 
 == Support Packages
 

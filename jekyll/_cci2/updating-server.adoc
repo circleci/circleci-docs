@@ -15,7 +15,7 @@ version:
 
 This document describes the process for upgrading your CircleCI Server installation to v{serverversion}. 
 
-toc::[]
+
 
 == Nomad Launch Configuration
 

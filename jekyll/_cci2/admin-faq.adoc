@@ -14,7 +14,7 @@ version:
 
 This chapter answers frequently asked questions and provides installation troubleshooting tips.
 
-toc::[]
+
 
 [discrete]
 === Can I move or change my GitHub Enterprise URL without downtime?
