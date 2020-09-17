@@ -10,8 +10,6 @@ version:
 :toc: macro
 :toc-title:
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
-
 This document describes the various ways users of your CircleCI Server installation can get access and authenticate their accounts. CircleCI currently supports OAuth and LDAP as authentication methods.
 
 toc::[]
