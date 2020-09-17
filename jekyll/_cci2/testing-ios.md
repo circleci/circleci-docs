@@ -39,7 +39,9 @@ To read about our customer support policy regarding beta images, please check ou
 
 ### Apple Silicon Support
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel. 
+**Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
+
+It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel. 
 
 Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. 
 
@@ -47,7 +49,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|-------------------|--------------
- `12.0.0` | Xcode 12.0 Beta 6 (12A8189n) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3558/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-beta-6-released/37242)
+ `12.0.0` | Xcode 12.0 GM (12A7209) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3851/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-gm-released/37437)
+ `12.0.0-beta` | Xcode 12.0 Beta 6 (12A8189n) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3558/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-beta-6-released/37242)
  `11.7.0` | Xcode 11.7 (11E801a) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-7-released/37312)
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)
  `11.5.0` | Xcode 11.5 (11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)
