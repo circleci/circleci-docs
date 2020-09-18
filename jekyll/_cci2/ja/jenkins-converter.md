@@ -76,6 +76,7 @@ Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 | parameters         | [parameters](https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration)     | Unsupported                                                                           |
 | triggers           | [cron](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow)                           | Unsupported                                                                           |
 | stage              | [job](https://circleci.com/docs/2.0/configuration-reference/#jobs)                               | Supported                                                                             |
+{: class="table table-striped"}
 
 ## Supported Jenkins plugins
 
