@@ -36,3 +36,6 @@ CircleCI プロジェクトは、関連付けられているコード リポジ�
 
 ![ワークフロー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
+## 関連項目
+
+[設定]({{ site.baseurl }}/ja/2.0/settings)
