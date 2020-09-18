@@ -23,13 +23,13 @@ version:
 
    ```yaml
    version: 2.1
-     jobs:
-       build:
-         docker: 
-           - image: circleci/node:4.8.2 # ジョブのコマンドが実行されるプライマリ コンテナ
-         steps:
-           - checkout # プロジェクト ディレクトリ内のコードをチェック アウトします
-           - run: echo "hello world" # `echo` コマンドを実行します
+   jobs:
+     build:
+       docker: 
+         - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+       steps:
+         - checkout # check out the code in the project directory
+         - run: echo "hello world" # run the `echo` command
    ```
 
 2. 変更をコミットし、プッシュします。
@@ -118,9 +118,9 @@ jobs:
 
 Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry).
 
-## プロジェクトのフォロー
+## Following / Unfollowing Projects
 
-You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the Projects page in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
+You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking "Projects" in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
 ## 組織の切り替え
 
