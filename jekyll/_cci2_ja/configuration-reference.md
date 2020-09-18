@@ -3,8 +3,6 @@ layout: classic-docs
 title: "CircleCI を設定する"
 short-title: "CircleCI を設定する"
 description: ".circleci/config.yml に関するリファレンス"
-categories:
-  - configuring-jobs
 order: 20
 ---
 

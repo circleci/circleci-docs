@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Orbs FAQ"
 short-title: "Orbs FAQ"
 description: "FAQs for Orbs"
-categories: [configuring-jobs]
 order: 20
 version:
 - Cloud

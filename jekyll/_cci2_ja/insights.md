@@ -3,8 +3,6 @@ layout: classic-docs
 title: "インサイトの使用"
 short-title: "インサイトの使用"
 description: "リポジトリのステータスおよびテスト パフォーマンスを表示する方法"
-categories:
-  - configuring-jobs
 order: 41
 ---
 

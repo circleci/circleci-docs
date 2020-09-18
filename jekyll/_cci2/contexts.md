@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
-categories: [configuring-jobs]
 order: 41
 version:
 - Cloud

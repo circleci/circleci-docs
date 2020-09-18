@@ -3,8 +3,6 @@ layout: classic-docs
 title: "Orbs に関するよくあるご質問"
 short-title: "Orbs に関するよくあるご質問"
 description: "Orbs に関するよくあるご質問"
-categories:
-  - configuring-jobs
 order: 20
 ---
 

@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "Using Notifications"
 short-title: "Using Notifications"
-categories: [configuring-jobs]
 order: 100
 published: true
 version:

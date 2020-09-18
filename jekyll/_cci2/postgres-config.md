@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
 description: "Example of Configuring PostgreSQL"
-categories: [configuring-jobs]
 order: 35
 version:
 - Cloud

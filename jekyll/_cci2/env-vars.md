@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using Environment Variables"
 short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
-categories: [configuring-jobs]
 order: 40
 version:
 - Cloud

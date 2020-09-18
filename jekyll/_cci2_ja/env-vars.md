@@ -3,8 +3,6 @@ layout: classic-docs
 title: "環境変数の使用"
 short-title: "環境変数の使用"
 description: "CircleCI 2.0 でサポートされている環境変数の一覧"
-categories:
-  - configuring-jobs
 order: 40
 ---
 
