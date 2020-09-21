@@ -12,7 +12,7 @@ version:
 ---
 
 
-It is possible to build, test, and deploy applications that run on Linux, Android, iOS and Windows with CircleCI. 以下のスニペットでは、各プラットフォーム用にジョブの構成をカスタマイズする方法に重点を置いて解説しています。 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
+It is possible to build, test, and deploy applications that run on Linux, Android, iOS and Windows with CircleCI. See the following snippets for a peek into how you can customize the configuration of a job for any platform. 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
 
 ## Linux と Docker
 
