@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Configuring CircleCI"
 short-title: "Configuring CircleCI"
 description: "Reference for .circleci/config.yml"
-categories: [configuring-jobs]
 order: 20
 version:
 - Cloud

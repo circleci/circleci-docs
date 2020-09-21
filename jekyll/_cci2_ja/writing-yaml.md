@@ -3,8 +3,6 @@ layout: classic-docs
 title: "YAML の記述"
 short-title: "YAML の記述"
 description: "CircleCI の YAML を記述する方法"
-categories:
-  - configuring-jobs
 order: 20
 ---
 

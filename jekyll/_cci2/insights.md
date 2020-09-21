@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using Insights"
 short-title: "Using Insights"
 description: "Viewing the status of repos and test performance"
-categories: [configuring-jobs]
 order: 41
 version:
 - Server v2.x

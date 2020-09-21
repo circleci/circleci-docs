@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Running Docker Commands"
 short-title: "Running Docker Commands"
 description: "How to build Docker images and access remote services"
-categories: [configuring-jobs]
 order: 55
 version:
 - Cloud

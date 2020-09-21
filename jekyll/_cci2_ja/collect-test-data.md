@@ -2,8 +2,6 @@
 layout: classic-docs
 title: "テスト メタデータの収集"
 short-title: "テスト メタデータの収集"
-categories:
-  - configuring-jobs
 description: "テスト メタデータの収集"
 order: 34
 ---
