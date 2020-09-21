@@ -29,10 +29,7 @@ CircleCI provides Project and Org settings with encrypted storage in the CircleC
 {:.tab.settingsscreenshot.Server}
 ![settings]( {{ site.baseurl }}/assets/img/docs/settings.png)
 
-
 ## Organization Settings Page
-For your [Org Plan or Billing settings]({{ site.baseurl }}/2.0/faq/#billing), see the Settings tab of the CircleCI app for summary data about your usage.
-<hr>
 
 {:.tab.orgsettingsscreenshot.Cloud}
 ![settings]( {{ site.baseurl }}/assets/img/docs/org-settings-cloud.png)
