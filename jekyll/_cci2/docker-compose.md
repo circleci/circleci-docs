@@ -32,7 +32,7 @@ to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
 The above code example assumes that you will also have `curl` available in your
 executor. If you are constructing your own docker images, consider reading the
-[custom docker images document]({{site.baseurl}}/docs/2.0/custom-images/}}).
+[custom docker images document]({{site.baseurl}}/2.0/custom-images/}}).
 
 [pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
