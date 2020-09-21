@@ -190,8 +190,6 @@ en:
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
-        - name: Enabling Pipelines
-          link: 2.0/build-processing/
         - name: iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
@@ -216,6 +214,8 @@ en:
       children:
         - name: Status Overview
           link: 2.0/status/
+        - name: Pipelines Overview
+          link: 2.0/build-processing/
         - name: Viewing Pipelines
           link: 2.0/pipelines/
         - name: Using Credits
