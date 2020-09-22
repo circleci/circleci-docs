@@ -131,7 +131,7 @@ The directories listed above represented a type of orb component that may be inc
 
 If your orb does not require any `executors` or `jobs`, for example, these directories can be deleted.
 
-Each directory in the `src` folder listed above corresponds with a [reusable orb]({{site.baseurl}}/2.0/reusing-config) component type which can be added or removed from the orb.
+Each directory within `src` corresponds with a [reusable configuration]({{site.baseurl}}/2.0/reusing-config) component type, which can be added or removed from the orb.
 
 ##### @orb.yml
 {:.no_toc}
