@@ -15,10 +15,10 @@ This document provides an overview of several methods for optimizing your Circle
 * TOC
 {:toc}
 
-**Note**: Some of the features discussed in this document may require a specific pricing
-plan. Visit our [pricing usage page](https://circleci.com/pricing/usage/) to get an
+**Note**: For Cloud customers, some of the features discussed in this document may require a specific pricing
+plan. Visit our [pricing page](https://circleci.com/pricing/) to get an
 overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web
-application, go to `Settings > Plan Settings` to make adjustments to your plan.
+application, go to **Plan** from the sidebar to view and make adjustments to your plan.
 
 ## Docker Image Choice
 
