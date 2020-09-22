@@ -84,7 +84,7 @@ The CLI will finish by automatically following the project on CircleCI and gener
 
 You will be provided with a link to the project building on CircleCI where you can view the validation, packing, testing, and publication process.
 
-You should also see the CLI has automatically migrated you into a new development branch named `alpha`. From your new branch you are now ready to make and push changes. From this point on, on every commit your orb will be packed, validated, optionally tested, and may be published.
+You should also see the CLI has automatically migrated you into a new development branch named `alpha`. From your new branch you are now ready to make and push changes. From this point on, on every commit to your orb will be packed, validated, optionally tested, and may be published.
 
 When you are ready to deploy the first major version of your orb, we'll go over deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) docs.
 
