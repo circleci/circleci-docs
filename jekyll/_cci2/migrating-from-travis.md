@@ -13,7 +13,7 @@ on this [example JavaScript repository](https://github.com/CircleCI-Public/circl
 ## Prerequisites
 
 This document assumes that:
-1. You have an account with CircleCI that is linked to a repository. If you don't yet,
+1. You have an account with CircleCI that is linked to a repository. If you do not have an account,
 consider reading our [Getting Started Guide]({{ site.baseurl }}/2.0/getting-started/).
 1. You understand the [Basic Concepts]({{ site.baseurl }}/2.0/concepts/) in CircleCI.
 
