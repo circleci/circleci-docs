@@ -16,7 +16,7 @@ version:
 - 目次
 {:toc}
 
-**メモ:** このドキュメントで説明している機能の中には、特定の料金プランが必要なものがあります。 CircleCI が提供しているプランの概要については、[料金プランのページ](https://circleci.com/ja/pricing/usage/)を参照してください。 または、CircleCI の Web アプリケーションにログインし、`[Settings (設定)] > [Plan Settings (プラン設定)]` の順に移動して、プランを調整してください。
+**Note**: For Cloud customers, some of the features discussed in this document may require a specific pricing plan. Visit our [pricing page](https://circleci.com/pricing/) to get an overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web application, go to **Plan** from the sidebar to view and make adjustments to your plan.
 
 ## Docker イメージの選択
 
