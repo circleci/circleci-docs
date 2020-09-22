@@ -25,10 +25,11 @@ const formatResultSnippet = (snippet) => {
 
 // Instant search initialization
 export function init () {
-  var search = instantsearch({
-    appId:     ALGOLIA_APP_ID,
-    apiKey:    ALGOLIA_API_KEY,
+  const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
+
+  const search = instantsearch({
     indexName: ALGOLIA_INDEX_NAME,
+    searchClient: client,
     routing: true,
     searchParameters: { hitsPerPage: 25 },
     searchFunction: function(helper) {
@@ -88,7 +89,7 @@ export function init () {
   search.start();
 
   // insert search results
-  var searchResetButton = document.querySelector("#search-box .ais-search-box--reset");
+  var searchResetButton = document.querySelector("#search-box .ais-SearchBox-reset");
   var searchBox = document.querySelector("input.instantsearch-search");
   var template = document.querySelector("#hits-template");
   var pageBody = document.querySelector('.main-body');
