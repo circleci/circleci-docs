@@ -66,7 +66,7 @@ Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseur
     git push origin master
     ```
 
-    For technical reasons, we can not automatically push this code. Once complete, return to the CLI window and confirm the changes have been pushed.
+    Once complete, return to the CLI window and confirm the changes have been pushed.
 
 6. The CLI will finish by automatically following the project on CircleCI and generating the first development version fo your orb for testing (a hello-world sample).
 
@@ -80,7 +80,7 @@ Before you begin working on your orb, ensure you are on a non-default branch. We
 git checkout -b alpha
 ```
 
-Once you have run the `circleci orb init` command, you will have a repository with importantly, a `.circleci` and `src` directory.
+Once you have run the `circleci orb init` command (step 2 above), you will have a repository with several directories and files, importantly, `.circleci` and `src`.
 
 **_Example: Orb Project Structure_**
 
@@ -110,9 +110,9 @@ Navigate to the `src` directory to look at the included sections.
 | <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
 {: class="table table-striped"}
 
-These files and directories above are the only "_required_" components. You may additionally see [`scripts`](#scripts) and [`tests`](#testing-orbs) folders in your project, which will be covered in the following sections. However, if your orb does not need any `executors` or `jobs`, for example, these directories can be deleted.
+The directories listed above represent orb components that can be included with your orb. @orb.yml acts as the root of our orb. You might additionally see [`scripts`](#scripts) and [`tests`](#testing-orbs) folders in your project, which will be covered in the following sections. However, if your orb does not need any `executors` or `jobs`, for example, these directories can be deleted.
 
-Each directory in the `src` folder listed above corresponds with a [reusable orb]({{site.baseurl}}/2.0/reusing-config) component type which can be added or removed from the orb.
+Each directory within `src` corresponds with a [reusable configuration]({{site.baseurl}}/2.0/reusing-config) component type, which can be added or removed from the orb.
 
 ##### @orb.yml
 {:.no_toc}
