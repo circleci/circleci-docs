@@ -28,9 +28,9 @@ To begin creating your new orb with the Orb Development Kit, first create a new 
 
 Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
 
-1) **Create new [GitHub repository](https://github.com/new).
+1) **Create a new [GitHub repository](https://github.com/new).**
 
-The name of your repository is not critical but we recommend something similar to "myProject-orb".**
+The name of your repository is not critical but we recommend something similar to "myProject-orb".
 
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png).
 
@@ -58,13 +58,15 @@ The `circleci orb init` is called followed by a path which we will create and in
 
 If you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
 
-We will however select to take the automated route. With this option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with our custom options. After, the project will be automatically followed on CircleCI with an automated CI/CD pipeline included. We'll expend more on the included CI pipeline in our [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/#section=configuration) documentation.
+We will however, select to take the automated route. With this option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with our customized settings.
+
+When selecting the automated route, the project will be followed on CircleCI with an automated CI/CD pipeline included. We'll expand more on the included CI pipeline in our [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/#section=configuration) documentation.
 
 4) **Answer questions to configure and set up your orb.**
 
 In the background the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There is a detailed `README.md` file within each directory that contains helpful information specific to that directory.
 
-You will also be asked for the remote git repository URL which we obtained in step 1. Ensure you are using the `HTTPS` URL.
+You will also be asked for the remote git repository URL which we obtained in step 1.
 
 5) **Push the changes up to Github.**
 
@@ -224,7 +226,7 @@ steps:
 
 #### Scripts
 
-One of the major benefits of the orb development kit is a script inclusion feature. When using the orb development kit, you can use the value `<<include(file)>>` within your orb config code for any key to include the file contents directly in the orb.
+One of the major benefits of the orb development kit is a script inclusion feature. When using the `circleci orb pack` command (automated in the Orb Development Kit), you can use the value `<<include(file)>>` within your orb config code for any key to include the file contents directly in the orb.
 
 This is especially useful when writing complex orb commands which may contain a lot of _bash_ code, _(although you could use python too!)_.
 
