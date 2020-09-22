@@ -44,6 +44,7 @@ Orb CLI commands are scoped to different user permission levels set by your VCS.
 | Orb Command                                | Permission Scope |
 |--------------------------------------------|------------------|
 | `circleci namespace create`                | Owner            |
+| `circleci orb init`                        | Owner            |
 | `circleci orb create`                      | Owner            |
 | `circleci orb publish` development version | Member           |
 | `circleci orb publish` production version  | Owner            |
