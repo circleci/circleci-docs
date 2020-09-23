@@ -44,15 +44,75 @@ In the `test-pack` workflow again, you will find included the [shellcheck orb](h
 
 ## Unit Testing
 
-If you are taking advantage of the Orb Development Kit's `<<include(file)>>` feature and `src/scripts` directory to store and source your bash files, it is even possible to write true integration tests for your scripts. When writing longer or complex Bash scripts, Test Driven Development can aid in programming process.
+If you are taking advantage of the Orb Development Kit's `<<include(file)>>` feature and `src/scripts` directory to store and source your bash files, it is even possible to write true integration tests for your scripts. When writing longer or complex Bash scripts, it is often helpful to break up our code into smaller and more manageable functions, which we can test with the help of testing frameworks just like any other code.
 
-Included in the provided `config.yml` file from the Orb Development Kit, within the `test-pack` workflow is the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job.
+Included in the provided `config.yml` file from the Orb Development Kit, within the `test-pack` workflow is the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job, which is responsible for automatically executing [.bats](#bats-core) tests within the `src/tests` directory.
 
-When you initialize your orb, there is an included [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command, which includes the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script.
+When you initialize your orb, there is a generated [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command, which _includes_ the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script. Also included is a test case example using the BATS-Core (Bash Automation Testing System) framework, in the `src/tests` directory, named [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats)
 
-Also included is a unit test example using the BATS-Core (Bash Automation Testing System) framework, in the `src/tests` directory, named [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats)
+{:.tab.unitTest.greet-yaml}
+
+```yaml
+
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml
+
+description: >
+  This command echos "Hello World" using file inclusion.
+parameters:
+  to:
+    type: string
+    default: "World"
+    description: "Hello to whom?"
+steps:
+  - run:
+      environment:
+        PARAM_TO: <<parameters.to>>
+      name: Hello Greeting
+      command: <<include(scripts/greet.sh)>>
+
+```
+
+{:.tab.unitTest.greet-sh}
+
+```bash
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh
+
+Greet() {
+    echo Hello "${PARAM_TO}"
+}
+
+# Will not run if sourced for bats-core tests.
+# View src/tests for more information.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
+    Greet
+fi
+
+```
+
+{:.tab.unitTest.greet-bats}
+```bash
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+
+# Runs prior to every test
+setup() {
+    # Load our script file.
+    source ./src/scripts/greet.sh
+}
+
+@test '1: Greet the world' {
+    # Mock environment variables or functions by exporting them (after the script has been sourced)
+    export PARAM_TO="World"
+    # Capture the output of our "Greet" function
+    result=$(Greet)
+    [ "$result" == "Hello World" ]
+}
+
+```
+
 
 ### BATS Core
+
 The [Bash Automation Testing System](https://github.com/bats-core/bats-core) is an open source testing framework that provides a simple way to test UNIX programs.
 
 Within your [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) is a [README](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/README.md) with a full and updated tutorial for creating BATS test cases.
@@ -68,16 +128,19 @@ Remember, including bats tests are optional and can be removed from your configu
 
 ## Integration Testing
 
-Up until this point all testing had occurred prior to packing the orb, and applied to the code itself but not the finalized functionality of our orb. For the final critical part of orb testing, we want to actually test our orb commands and jobs to ensure they actually work. We do this after we have ran our validation tests and published a new development version of the orb which we will use to test.
+Up until this point all testing had occurred prior to packing the orb, and applied to the code itself but not the finalized functionality of our orb. For the final critical part of orb testing, we want to actually test our orb commands and jobs to ensure they work as intended in production. We do this after we have ran our validation tests and published a new development version of the orb which we will use to test.
 
 After the development version of the orb has been published, the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow will be automatically triggered and use the newly created development version of the orb.
 
 Within the `integration-test_deploy` workflow, we run a series of final integration tests, and if all pass, and we are on our main deployment branch, then we may also deploy our orb.
 
-The first job you will see in the workflow is [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82), a sample integration test included with the `hello-world` orb generated by the `orb-init` command.
+### How To Test Orb Commands
+
+The first job you will see in the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow is the [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) job, a sample integration test included with the `hello-world` orb generated by the `orb-init` command.
 
 You can see the definition of the [`integration-test-1` job](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) above in the `jobs` key.
 
+{:.tab.integration-test-job.integration-test-1}
 ```yaml
   integration-test-1:
     docker:
@@ -89,8 +152,11 @@ You can see the definition of the [`integration-test-1` job](https://github.com/
 
 In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
 
+### How To Test Orb Jobs
+
 If we needed to test our orb's jobs, rather than commands, we can simply add our orb job right next to the `integration-test-1` job in our config under the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow.
 
+{:.tab.integration-test-workflow.integration-test_deploy}
 ```yaml
 integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
