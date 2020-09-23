@@ -141,16 +141,16 @@ The first job you will see in the [integration-test_deploy](https://github.com/C
 You can see the definition of the [`integration-test-1` job](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) above in the `jobs` key.
 
 {:.tab.intTestJob.integration-test-1}
-```yaml
 {% raw %}
+```yaml
   integration-test-1:
     docker:
       - image: cimg/base:stable
     steps:
       - checkout
       - <orb-name>/greet
-{% endraw %}
 ```
+{% endraw %}
 
 In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
 
@@ -159,8 +159,8 @@ In your local version, `<orb-name>` will be replaced by the orb name you provide
 If we needed to test our orb's jobs, rather than commands, we can simply add our orb job right next to the `integration-test-1` job in our config under the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow.
 
 {:.tab.intTestWorkflow.integration-test_deploy}
+{ % raw %}
 ```yaml
-{% raw %}
 integration-test_deploy:
     when: << pipeline.parameters.run-integration-tests >>
     jobs:
@@ -170,8 +170,8 @@ integration-test_deploy:
           requires:
             - integration-test-1
             - my-orb/orb-job
-{% endraw %}
 ```
+{ % endraw %}
 
 ## What's Next?
 
