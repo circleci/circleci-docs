@@ -34,7 +34,9 @@ Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseur
 
     Note down the git URL, we will be providing it to our CLI shortly (SSH or HTTPS, which ever you can authenticate with).
 
-2. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
+2. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
+
+The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
@@ -46,7 +48,7 @@ circleci orb init /path/to/myProject-orb
     No, I'll handle everything myself.
 ```
 
-    When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/#section=configuration) documentation.
+    When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
 
     Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
 
@@ -60,7 +62,7 @@ Once complete, return to the CLI window and confirm the changes have been pushed
 
 1. **Complete and write your orb.** The CLI will finish by automatically following the project on CircleCI and generating the first development version `<namespace>/<orb>@dev:alpha` of your orb for testing (a hello-world sample). You will be provided with a link to the project building on CircleCI where you can view the validation, packing, testing, and publication process.
 You should also see the CLI has automatically migrated you into a new development branch named `alpha`. From your new branch you are now ready to make and push changes. From this point on, on every commit, your orb will be packed, validated, optionally tested, and may be published.
-When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) guide.
+When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
 ### Writing Your Orb
 
@@ -133,7 +135,7 @@ Author and add [Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authorin
 
 Each _YAML_ file within this directory will be treated as an orb command, with a name which matches its filename.
 
-View the included _[greet.yml](./greet.yml)_ command example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src).
+View the included _[greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml)_ command example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src).
 
 {:.tab.greet.greet-yml}
 ```yaml
@@ -154,7 +156,9 @@ steps:
 ##### Examples
 {:.no_toc}
 
-Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-author/#providing-usage-examples-of-orbs) to the `src/examples` directory.
+Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory.
+
+Usage Examples will not be utilized by the end user, but provide a way for the orb developer to share use-case specific examples or orb usage live on the [Orb Registry](https://circleci.com/orbs/registry/).
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
@@ -179,7 +183,7 @@ Each _YAML_ file within this directory will be treated as an orb job, with a nam
 
 Jobs can invoke orb commands and other steps to fully automate tasks with minimal user configuration.
 
-View the included _[hello.yml](./hello.yml)_ job example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs).
+View the included _[hello.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/jobs/hello.yml)_ job example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs).
 
 {:.tab.hello.hello-yml}
 ```yaml
@@ -271,10 +275,10 @@ For Orb Development Kit users, this step is handled automatically.
 
 Much like any other software, there are multiple ways to test your code and it is entirely up to you as the developer to implement as many tests as desired. Within your config file right now there will be a job named [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) that will need to be updated to test your orb components. This is a type of _integration testing_. Unit testing with orbs is possible as well.
 
-Read our full [Orb Testing Methodologies]({site.baseurl}}/2.0/testing-orbs) documentation.
+Read our full [Orb Testing Methodologies]({site.baseurl}}/2.0/testing-orbs/) documentation.
 
 ### Publishing Your Orb
 
 With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
-Read our full [Orb Publishing Process]({site.baseurl}}/2.0/creating-orbs) documentation.
+Read our full [Orb Publishing Process]({site.baseurl}}/2.0/creating-orbs/) documentation.

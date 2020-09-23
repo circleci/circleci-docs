@@ -110,7 +110,7 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 
 Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
 
-```yaml
+```
 version: 2.1
 
 orbs:
@@ -126,7 +126,7 @@ See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring
 
 ### Usage Examples
 
-Usages examples are not used by the user in their configs. Usage examples are a type of metadata in orbs that allows multiple full usage examples to be listed on the Orb Registry.
+Usage examples are not used by the user in their configs, but are a type of metadata in orbs. Usage examples may be included by the orb developer to share how a user would utilize the orb in their config via examples on the [Orb Registry](https://circleci.com/orbs/registry/).
 
 If you are an orb developer, you should highly consider adding usage examples to help new users adapt their config to use your orb creation.
 
@@ -232,6 +232,44 @@ _[See: inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) fo
 - Not accessible outside of the repository
 - Not public
 - Not accessible via CircleCI CLI
+
+## Orb Packing
+
+All orbs on CircleCI are singular YAML files, typically named `orb.yml`, which contain valid CircleCI orb configuration code. However, for development, we often find it easier to break our code up into more manageable bite-sized chunks. For orb developers, we have created the `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit).
+
+"Packing" is the term we use to condense multiple yaml files (and more) into a single `orb.yml` file.
+
+If you are using the Orb Development Kit, orb packing is handled automatically by the included CI pipeline with the [orb-tools/pack](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-pack) job.
+{: class="alert alert-warning"}
+
+**_Example: Orb Project Structure_**
+
+| type | name|
+| --- | --- |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs) |
+| <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
+{: class="table table-striped"}
+
+In order to "pack" and orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, we may include additional directories for each orb components type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
+
+Additionally, the pack command provides a special pre-processor for orb developers that allows you to import code from external files using the special [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax).
+
+## File Include Syntax
+
+The file include syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file. The `<<include(dir/file)>>` syntax _will not_ work on CircleCI and is a special key for use with the [`circleci orb pack` command]().
+
+When `circleci orb pack <dir> > orb.yml` is ran against a directory with an `@orb.yml` file, the pack command will begin to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
+
+Included files are always referenced from the location of the `@orb.yml` file.
+{: class="alert alert-warning"}
+
+File inclusion is especially useful for separating your configuration's Bash logic from your yaml. Including Bash scripts will allow you to develop and test your Bash outside of your orb.
+
+View more about including bash scripts on our [Orb Author]({{site.baseurl}}/2.0/orb-author/#scripts) page.
+
 
 ## Using Orbs Within Your Orb and Register-Time Resolution
 
