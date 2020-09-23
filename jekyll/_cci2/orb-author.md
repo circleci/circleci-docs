@@ -29,9 +29,9 @@ To begin creating your new orb with the Orb Development Kit, first create a new 
 Ensure the Organization on GitHub is the owner for the [namespace]({{site.baseurl}}/2.0/orb-concepts/#namespaces) for which you are developing your orb. If this is your own personal organization and namespace, you need not worry.
 
 1. **Create a new [GitHub repository](https://github.com/new).** The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
-  
-    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png) 
-  
+
+    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+
     Note down the git URL, we will be providing it to our CLI shortly (SSH or HTTPS, which ever you can authenticate with).
 
 2. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
@@ -114,6 +114,7 @@ Each directory within `src` corresponds with a [reusable configuration]({{site.b
 
 Use the `display` key to add clickable links to the orb registry for both your `home_url` (the home of the product or service), and `source_url` (the git repository URL).
 
+{:.tab.main.@orb-yml}
 ```yaml
 version: 2.1
 
@@ -134,6 +135,7 @@ Each _YAML_ file within this directory will be treated as an orb command, with a
 
 View the included _[greet.yml](./greet.yml)_ command example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src).
 
+{:.tab.greet.greet-yml}
 ```yaml
 description: >
   # What will this command do?
@@ -179,6 +181,7 @@ Jobs can invoke orb commands and other steps to fully automate tasks with minima
 
 View the included _[hello.yml](./hello.yml)_ job example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs).
 
+{:.tab.hello.hello-yml}
 ```yaml
 description: >
   # What will this job do?
@@ -202,8 +205,8 @@ One of the major benefits of the orb development kit is a script inclusion featu
 
 This is especially useful when writing complex orb commands which may contain a lot of _bash_ code, _(although you could use python too!)_.
 
-**Standard YAML Config**
 
+{:.tab.scripts.Standard-YAML-Config}
 ```yaml
 parameters:
   to:
@@ -216,8 +219,7 @@ steps:
       command: echo "Hello <<parameters.to>>"
 ```
 
-**Orb Developer Kit Packing**
-
+{:.tab.scripts.Orb-Development-Kit-Packing}
 ```yaml
 parameters:
   to:

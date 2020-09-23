@@ -22,7 +22,7 @@ This document describes various questions and technical issues that you may find
 
 * Answer: You may not be an organization owner/admin.
 
-Organizations may only claim a single namespace. In order to claim a namespace for an organization the authenticating user must possess owner/admin privileges over the organization. 
+Organizations may only claim a single namespace. In order to claim a namespace for an organization the authenticating user must possess owner/admin privileges over the organization.
 
 If you do not have the proper permissions you may see an error similar to below:
 
@@ -30,14 +30,14 @@ If you do not have the proper permissions you may see an error similar to below:
 > Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 
 
-Read more in our [Orbs Quickstart]({{site.baseurl}}/2.0/orb-author/#orbs-quickstart).
+Read more in our [Orb CLI Permission Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
 
 
 ## Secure API Tokens
 
 * Question: How do I protect a user's API tokens and other sensitive information?
 
-* Answer: Utilize the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX  environment variable name strings as valid input. In the parameter description it is best to mention to the user to add this environment variable. 
+* Answer: Utilize the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX  environment variable name strings as valid input. In the parameter description it is best to mention to the user to add this environment variable.
 
 Read more:
 * [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
@@ -46,7 +46,7 @@ Read more:
 ## Environment Variables
 
 * Question: How can I require a user to add an environment variable?
-* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. In either event instruct the user where they can obtain their API key. 
+* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. In either event instruct the user where they can obtain their API key.
 
 Consider validating required environment variables. [See more]({{site.baseurl}}/2.0/orbs-best-practices/#commands).
 
@@ -57,7 +57,7 @@ Read more:
 ## Supported Programming Languages
 
 * Question: What language do I use to write an orb?
-* Answer: Orbs are packages of [CircleCI YAML config]({{site.baseurl}}/2.0/configuration-reference/) language. 
+* Answer: Orbs are packages of [CircleCI YAML config]({{site.baseurl}}/2.0/configuration-reference/) language.
 
 CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [Executor]({{site.baseurl}}/2.0/executor-intro/) defined by either the user if using a _command_ within a custom job, or by the orb author if using a [Reusable Job]({{site.baseurl}}/2.0/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
 
@@ -83,7 +83,7 @@ steps:
 
 **Binary**
 
-This option is strongly discouraged when possible. Sometimes it may be necessary to fetch a remote binary file such as a CLI tool. These binaries should be fetched from a package manager or hosted by a VCS such as GitHub releases when possible. 
+This option is strongly discouraged when possible. Sometimes it may be necessary to fetch a remote binary file such as a CLI tool. These binaries should be fetched from a package manager or hosted by a VCS such as GitHub releases when possible.
 
 Ex: Installing Homebrew as a part of the [AWS Serverless orb](https://circleci.com/orbs/registry/orb/circleci/aws-serverless#commands-install)
 

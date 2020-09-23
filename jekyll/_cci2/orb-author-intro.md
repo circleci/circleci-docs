@@ -38,7 +38,6 @@ To begin creating orbs, you will need to [setup the CircleCI CLI]({{site.baseurl
 
 ### Permissions Matrix
 
-
 Orb CLI commands are scoped to different user permission levels set by your VCS. You are the owner of your own organization. If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:
 
 | Orb Command                                | Permission Scope |
