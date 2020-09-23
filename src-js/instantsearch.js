@@ -1,4 +1,3 @@
-import * as debounce from 'lodash.debounce';
 import * as get from 'lodash.get';
 
 const ALGOLIA_APP_ID     = window.circleJsConfig.algolia.appId;
@@ -25,13 +24,10 @@ const formatResultSnippet = (snippet) => {
 
 // Instant search initialization
 export function init () {
-  const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
-
   const search = instantsearch({
     indexName: ALGOLIA_INDEX_NAME,
-    searchClient: client,
+    searchClient: algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY),
     routing: true,
-    searchParameters: { hitsPerPage: 25 },
     searchFunction: function(helper) {
       // don't run search for blank query, including on initial page load
       // https://stackoverflow.com/a/42321947
@@ -42,34 +38,24 @@ export function init () {
     }
   });
 
-  // adding conditions to filter search
-  search.addWidget(
+  search.addWidgets([
+    // adding conditions to filter search
     instantsearch.widgets.configure({
-      filters: `collection: ${ALGOLIA_COLLECTION}`
-    })
-  );
+      filters: `collection: ${ALGOLIA_COLLECTION}`,
+      hitsPerPage: 25
+    }),
 
-  // initialize SearchBox
-  search.addWidget(
+    // initialize SearchBox
     instantsearch.widgets.searchBox({
       container: '#search-box',
       cssClasses: {
         input: 'instantsearch-search'
       },
       placeholder: 'Search Documentation',
-      autofocus: false,
-      queryHook: debounce(function (query, searchFunction) {
-          searchFunction(query);
-          setTimeout(renderResults, 100);
-        },
-        500,
-       { 'leading': true, 'trailing': true, 'maxWait': 1000 }
-      ) // method to throttle search requests
-    })
-  );
+      showLoadingIndicator: false
+    }),
 
-  // initialize hits widget
-  search.addWidget(
+    // initialize hits widget
     instantsearch.widgets.hits({
       container: '#instant-hits',
       escapeHits: true,
@@ -84,7 +70,7 @@ export function init () {
         }
       }
     })
-  );
+  ]);
 
   search.start();
 
