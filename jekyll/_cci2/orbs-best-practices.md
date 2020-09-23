@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orbs Best Practices"
-short-title: "Best Practices for Orbs"
-description: "a guide to best practices for orbs"
+title: "Orbs Authoring Best Practices"
+short-title: "Best Practices for Orb Authors"
+description: "a guide to best practices for developing orbs"
 categories: [getting-started]
 order: 1
 version:
@@ -26,11 +26,11 @@ A collection of best practices and strategies for authoring orbs. CircleCI orbs 
 - Must have at least 1 [usage example]({{ site.baseurl }}/2.0/orb-author/#providing-usage-examples-of-orbs).
 - Show orb version as `x.y` (patch version may not need to be included) in the example.
 - Example should include most common/simplest use case calling a top-level job or other base-case elements if no job is present.
-- If applicable, you may want to showcase the use of [pre and post steps]({{ site.baseurl }}/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job. 
+- If applicable, you may want to showcase the use of [pre and post steps]({{ site.baseurl }}/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job.
 
 ### Commands
 
-- In general, all orbs should contain at least one command. 
+- In general, all orbs should contain at least one command.
 - Some exceptions may include creating an orb for the sole task of providing an executor.
 - Combine one or more parameterizable steps to simplify a task.
 - All commands available to the user should complete a full task. Do not create a command for the sole purpose of being a “partial” to another command unless it can be used on its own.
@@ -48,8 +48,8 @@ fi
 
 ### Parameters
 
-- When possible, use defaults for parameters unless a user input is essential. 
-- Utilize the [“env_var_name” parameter type]({{ site.baseurl }}/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data. 
+- When possible, use defaults for parameters unless a user input is essential.
+- Utilize the [“env_var_name” parameter type]({{ site.baseurl }}/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data.
 - [Injecting steps as a parameter]({{ site.baseurl }}/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
 
 **Installing binaries and tools**
@@ -67,7 +67,7 @@ echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
  - Jobs should utilize Commands defined within the orb to orchestrate common use cases for this orb.
  - Plan for flexibility
  - Plan how users might utilize post-steps, pre-steps, or steps as a parameter.
- - Consider creating pass-through parameters. 
+ - Consider creating pass-through parameters.
  - If a job utilizes an executor or command that accepts parameters, the job will need those parameters as well if they are to be passed down to the executor or commands.
 - Never hard-code the executor. Utilize a parameterizable (ex: ‘default’) executor that is able to have the image or tag overwritten.
 
