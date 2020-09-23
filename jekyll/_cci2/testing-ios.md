@@ -225,7 +225,7 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 
 ### Images using Xcode 11.7 and later
 
-As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later iamges default to Ruby 2.7 via `chruby`.
+As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later images default to Ruby 2.7 via `chruby`.
 
 Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
