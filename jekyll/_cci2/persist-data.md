@@ -36,4 +36,4 @@ TODO: replace ^^ with up to date image
 
 TODO: add in overview of artifacts and applicable use cases
 
-For more information on using artifacts to persist data once a job has completes, see the [Workflows]({{site.baseurl}}/2.0/storing-build-artifacts/) guide.
+For more information on using artifacts to persist data once a job has completes, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.
