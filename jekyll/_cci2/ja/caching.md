@@ -133,9 +133,9 @@ There are many different approaches to utilizing caching in monorepos. This type
 
 1) Add custom command to config:
 {% raw %}```yaml
-    commands:
-        create_concatenated_package_lock:
-        description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
+commands:
+  create_concatenated_package_lock:
+    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
     parameters:
       filename:
         type: string
@@ -151,11 +151,11 @@ There are many different approaches to utilizing caching in monorepos. This type
 {% raw %}```yaml
     steps:
 
-        - checkout
-        - create_concatenated_package_lock:
+      - checkout
+      - create_concatenated_package_lock:
           filename: combined-package-lock.txt
-    ## combined-package-lock.text をキャッシュ キーに使用します
-        - restore_cache:
+      ## Use combined-package-lock.text in cache key
+      - restore_cache:
           keys:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
             - v3-deps
