@@ -275,10 +275,10 @@ For Orb Development Kit users, this step is handled automatically.
 
 Much like any other software, there are multiple ways to test your code and it is entirely up to you as the developer to implement as many tests as desired. Within your config file right now there will be a job named [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) that will need to be updated to test your orb components. This is a type of _integration testing_. Unit testing with orbs is possible as well.
 
-Read our full [Orb Testing Methodologies]({site.baseurl}}/2.0/testing-orbs/) documentation.
+Read our full [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) documentation.
 
 ### Publishing Your Orb
 
 With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
-Read our full [Orb Publishing Process]({site.baseurl}}/2.0/creating-orbs/) documentation.
+Read our full [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
