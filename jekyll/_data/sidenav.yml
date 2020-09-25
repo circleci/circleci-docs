@@ -148,6 +148,8 @@ en:
           link: 2.0/custom-images/
         - name: Using Docker Authenticated Pulls
           link: 2.0/private-images/
+        - name: Xcode Image Policy
+          link: 2.0/xcode-policy/
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
