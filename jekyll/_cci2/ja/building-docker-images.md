@@ -24,7 +24,8 @@ jobs:
     steps:
       # ... アプリのビルド・テストに関する記述 ...
 
-      - setup_remote_docker
+      - setup_remote_docker:
+        version: 19.03.12
 ```
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
@@ -78,9 +79,10 @@ jobs:
       # ... アプリのビルド・テストに関する記述 ...
     
       - setup_remote_docker:
+          version: 19.03.12
           docker_layer_caching: true
     
-      # Docker イメージをビルドしプッシュします
+      # build and push Docker image
     
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
@@ -106,34 +108,17 @@ jobs:
 
 ## Docker のバージョン
 
-ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
+To specify the Docker version, you can set it as a `version` attribute:
 
           - setup_remote_docker:
-              version: 18.06.0-ce
+              version: 19.03.12
     
 
-CircleCI は複数の Docker バージョンをサポートしており、デフォルトでは `17.09.0-ce` が使用されます。 以下に、サポートされている安定版とエッジ版を示します。
+CircleCI supports multiple versions of Docker. The following are the available versions:
 
 - `19.03.12`
 - `19.03.8`
 - `18.09.3`
-- `18.06.0-ce`
-- `18.05.0-ce`
-- `18.04.0-ce`
-- `18.03.1-ce`
-- `18.03.0-ce`
-- `18.02.1-ce`
-- `18.01.0-ce`
-- `17.12.1-ce`
-- `17.12.0-ce`
-- `17.11.0-ce`
-- `17.10.0-ce`
-- `17.09.0-ce`
-- `17.07.0-ce`
-- `17.06.1-ce`
-- `17.06.0-ce`
-- `17.05.0-ce`
-- `17.03.0-ce`
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
