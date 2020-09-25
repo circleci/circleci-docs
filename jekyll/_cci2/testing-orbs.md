@@ -193,7 +193,9 @@ You can see the definition of the [`integration-test-1` job](https://github.com/
       - <orb-name>/greet
 ```
 
-In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
+In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment.
+
+Replace  the steps of this job with commands from your orb. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
 
 ### How To Test Orb Jobs
 
