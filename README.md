@@ -36,7 +36,7 @@ this folder (in our build process) and integrated into the Jekyll Site. Follow
 the [local development guide](./docs/local-development.md) to get started with
 building the Jekyll site.
 
-`/src-api` - API v1.1 and v2 Build Tooling
+### `/src-api` - API v1.1 and v2 Build Tooling
 
 Our API documentation source can be found in this folder.
 
