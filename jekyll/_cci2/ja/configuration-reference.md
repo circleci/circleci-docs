@@ -319,19 +319,10 @@ jobs:
 
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+- `ubuntu-2004:202008-01` (beta) - Ubuntu 20.04, Docker v19.03.12, Docker Compose v1.26.2
 - `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 - `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 - `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
-- `circleci/classic:latest` (old default) - an Ubuntu version `14.04` image that includes Docker version `17.09.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image. Changes to the `latest` image are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance. Ubuntu 14.04 is now End-of-Life'd. We suggest using the Ubuntu 16.04 image.
-- `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.10.0-ce` and docker-compose version `1.16.1`, along with common language tools found in CircleCI 1.0 build image.
-- `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
-- `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
-- `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
-- `circleci/classic:201709-01` – docker 17.07.0-ce, docker-compose 1.14.0
-- `circleci/classic:201710-01` – docker 17.09.0-ce, docker-compose 1.14.0
-- `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
-- `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
-- `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -359,8 +350,8 @@ workflows:
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01
-      docker_layer_caching: true    # デフォルトは false
+      image: ubuntu-1604:202007-01
+      docker_layer_caching: true    # default - false
 ```
 
 #### **`macos`**
