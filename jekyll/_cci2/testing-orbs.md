@@ -130,6 +130,45 @@ For a real-life example, take a look at the tests in our [Shellcheck orb](https:
 Remember, including bats tests are optional and can be removed from your configuration file if desired.
 {: class="alert alert-warning"}
 
+Here is a simplified snippet from the Shellcheck orb's BATS test suite.
+
+
+{:.tab.batsTests.Example_BATS_test}
+```bash
+setup() {
+    # Sourcing our bash script allows us to acces to functions defined within.
+    source ./src/scripts/check.sh
+    # Our script expects certain envrionment variables which would be set as parameters.
+    # We can "mock" those inputs here.
+    export SC_PARAM_OUTPUT="/tmp/shellcheck.log"
+    export SC_PARAM_SHELL="bash"
+}
+
+teardown() {
+    # Logs are recorded in each function.
+    # We will echo it out on error, but otherwise remove it to indicate no issue.
+    rm -rf /tmp/shellcheck.log
+}
+
+# This is a test case in the BATS framework.
+# This is essentially just a function with a name.
+# For each test case, setup() will run -> test -> teardown() -> repeat.
+
+# Esure Shellcheck is able to find the two included shell scripts
+@test "1: Shellcheck test - Find both scripts" {
+    # Mocking inputs
+    export SC_PARAM_DIR="src/scripts"
+    export SC_PARAM_SEVERITY="style"
+    export SC_PARAM_EXCLUDE="SC2148,SC2038,SC2059"
+    Set_SHELLCHECK_EXCLUDE_PARAM
+    Run_ShellCheck
+    # Test that 2 scripts were found
+    [ $(wc -l tmp | awk '{print $1}') == 2 ]
+    # If an error is thrown anywhere in this test case, it will be considered a failure.
+    # We use a standard POSIX test command to  test the functionality of the "Run_ShellCheck" function.
+}
+```
+
 ## Integration Testing
 
 Up until this point, all testing has happened prior to packing the orb, and is applied to the code itself, not the finalized functioning orb. For the final, critical part of orb testing, you will test your orb commands and jobs to ensure they work as intended in production. This happens after the validation tests have run and a new development version of your orb is published.
