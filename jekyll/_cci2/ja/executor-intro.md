@@ -41,11 +41,11 @@ jobs:
 
 {:.tab.machine.Server}
 jobs:
-      build: # ジョブの名前
-        machine: true # Executor タイプ
-    
-          steps:
-            # Linux 仮想マシン環境で実行するコマンド
+      build: 
+        machine: 
+          image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+        steps:
+          # Commands run in a Linux virtual machine environment
     
 
 `machine` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#machine-の使用)をご覧ください。
