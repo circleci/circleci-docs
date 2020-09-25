@@ -52,7 +52,9 @@
   }
 }
 
-#hits-template {
+#hits-target {
+  padding-top: $spacing-small-vertical;
+  background: #fff;
   min-height: 500px;
 
   @media screen and (min-width: $screen-sm) {
@@ -97,9 +99,4 @@
 
 .ais-Hits--empty {
   margin-left: $spacing-small-vertical;
-}
-
-.hits-target {
-  padding-top: $spacing-small-vertical;
-  background: #fff;
 }

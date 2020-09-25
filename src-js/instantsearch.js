@@ -2,7 +2,8 @@ import * as get from 'lodash.get';
 
 const ALGOLIA_APP_ID     = window.circleJsConfig.algolia.appId;
 const ALGOLIA_API_KEY    = window.circleJsConfig.algolia.apiKey;
-const ALGOLIA_INDEX_NAME = window.circleJsConfig.algolia.indexName;
+const ALGOLIA_INDEX      = window.circleJsConfig.algolia.indexName;
+const ALGOLIA_ORBS_INDEX = window.circleJsConfig.algolia.indexNameOrbs;
 const ALGOLIA_COLLECTION = ((lang) => {
   // Page language is default language or missing, use default collection
   if (typeof lang !== 'string' || lang === 'en') {
@@ -12,20 +13,10 @@ const ALGOLIA_COLLECTION = ((lang) => {
   }
 })(get(window.circleJsConfig, 'page.lang'));
 
-const formatResultSnippet = (snippet) => {
-  const title = get(snippet, ['title', 'value'], '(untitled)');
-  const content = get(snippet, ['content', 'value'], '');
-  const titleTag = `<strong>${title}</strong>`;
-  const contextTag = snippet.headings ?
-    `<p class="context">${snippet.headings.map(h => h.value).join(' > ')}</p>` : '';
-  const contentTag = `<p class="content">${content}</p>`;
-  return `<div class="result-item-wrap">${titleTag + contextTag + contentTag}</div>`;
-}
-
 // Instant search initialization
 export function init () {
   const search = instantsearch({
-    indexName: ALGOLIA_INDEX_NAME,
+    indexName: ALGOLIA_INDEX,
     searchClient: algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY),
     routing: true,
     searchFunction: function(helper) {
@@ -66,10 +57,45 @@ export function init () {
           if (item.anchor) {
             url += `#${item.anchor}`;
           }
-          return `<a href="/docs${url}">${formatResultSnippet(item._snippetResult)}</a>`;
+
+          const snippet = item._snippetResult
+          const title = get(snippet, ['title', 'value'], '(untitled)');
+          const content = get(snippet, ['content', 'value'], '');
+          const titleTag = `<strong>${title}</strong>`;
+          const contextTag = snippet.headings ?
+            `<p class="context">${snippet.headings.map(h => h.value).join(' > ')}</p>` : '';
+          const contentTag = `<p class="content">${content}</p>`;
+          const resultTag = `<div class="result-item-wrap">${titleTag + contextTag + contentTag}</div>`
+
+          return `<a href="/docs${url}">${resultTag}</a>`;
         }
       }
-    })
+    }),
+
+    // add Orbs search
+    instantsearch.widgets
+      .index({ indexName: ALGOLIA_ORBS_INDEX })
+      .addWidgets([
+        instantsearch.widgets.configure({
+          filters: '' // turn off filter present on base search
+        }),
+        instantsearch.widgets.hits({
+          container: '#instant-hits-orbs',
+          escapeHits: true,
+          templates: {
+            empty: 'No results',
+            item: (item) => {
+              const title   = get(item._highlightResult, ['full_name', 'value'], item.full_name);
+              const content = get(item._highlightResult, ['description', 'value'], item.description);
+              const titleTag = `<strong>${title}</strong>`;
+              const contentTag = `<p class="content">${content}</p>`;
+              const resultTag = `<div class="result-item-wrap">${titleTag + contentTag}</div>`
+
+              return `<a href="${item.url}">${resultTag}</a>`;
+            }
+          }
+        })
+      ])
   ]);
 
   search.start();
@@ -77,23 +103,17 @@ export function init () {
   // insert search results
   var searchResetButton = document.querySelector("#search-box .ais-SearchBox-reset");
   var searchBox = document.querySelector("input.instantsearch-search");
-  var template = document.querySelector("#hits-template");
   var pageBody = document.querySelector('.main-body');
-  var resultDisplay = document.querySelector('.hits-target');
-  var stateHolder = resultDisplay.cloneNode(true);
+  var resultDisplay = document.querySelector('#hits-target');
   var form = document.querySelector('.main-searchbar form');
 
   function renderResults (e) {
-    resultDisplay.innerHTML = "";
     if (searchBox.value.length > 0) {
-      template.querySelector('#search-term-display').innerText = searchBox.value;
-      var results = template.cloneNode(true);
-      resultDisplay.appendChild(results);
+      document.querySelector('#search-term-display').innerText = searchBox.value;
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
       resultDisplay.style.display = "block";
     } else {
-      resultDisplay.appendChild(stateHolder);
       pageBody.style.display = "flex";
       resultDisplay.style.display = "none";
     }

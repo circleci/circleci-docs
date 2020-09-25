@@ -20,6 +20,7 @@ algolia:
   application_id: U0RXNGRK45
   api_key: dd49f5b81d238d474b49645a4daed322 # search-only API Key; safe for front-end code
   index_name: documentation
+  index_name_orbs: orbs-prod
   extensions_to_index:
     - html
     - md

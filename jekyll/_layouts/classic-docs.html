@@ -6,18 +6,18 @@
 	{% include google-tag-manager.html %}
 {% endif %}
 
-<!-- instant hit template container /-->
-<div style="display:none;">
-	<div id="hits-template">
-		<h2>Search Results for "<span id="search-term-display"></span>"</h2>
-		<div id="instant-hits"></div>
-	</div>
-</div>
 <div class="outer">
 	{% include global-nav.html %}
 	{% include main-searchbar.html %}
 	{% include mobile-sidebar.html %}
-  <div class="hits-target"></div>
+	<!-- instant hit template container /-->
+	<div id="hits-target" style="display:none;">
+		<div class="container">
+			<h2>Search Results for "<span id="search-term-display"></span>"</h2>
+			<div id="instant-hits-orbs"></div>
+			<div id="instant-hits"></div>
+		</div>
+	</div>
 	<div class="main-body">
 		{% include sidebar.html %}
 		<div class="article-container docs" id="main">
