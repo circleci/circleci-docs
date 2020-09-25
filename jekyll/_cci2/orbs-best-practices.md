@@ -9,104 +9,218 @@ version:
 - Cloud
 ---
 
-A collection of best practices and strategies for authoring orbs. CircleCI orbs are shareable packages of configuration elements, including jobs, commands, and executors.
+* TOC
+{:toc}
 
-## Guidelines
+## General
 
-### Metadata
+#### Give Your Orb A Descriptive Name
+{:.no_toc}
 
-- Ensure all commands, jobs, executors, and parameters have detailed descriptions.
-- Provide a `source_url`, and if available, `home_url` [via the `display` key]({{ site.baseurl }}/2.0/orb-author/#describing-your-orb).
-- Define any prerequisites such as obtaining an API key in the description.
-- Be consistent and concise in naming your orb elements. For example, don't mix "kebab case" and "snake case."
+An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
+| Proper Orb Slug | Bad Orb Slug |
+| --------------- | ------------ |
+| circleci/node   | circleci/node-orb |
+| company/company  | company/orb |
+{: class="table table-striped"}
 
-### Examples
+#### Ensure All Orb Components Have Descriptions
+{:.no_toc}
 
-- Must have at least 1 [usage example]({{ site.baseurl }}/2.0/orb-author/#providing-usage-examples-of-orbs).
-- Show orb version as `x.y` (patch version may not need to be included) in the example.
-- Example should include most common/simplest use case calling a top-level job or other base-case elements if no job is present.
-- If applicable, you may want to showcase the use of [pre and post steps]({{ site.baseurl }}/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job.
+Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
+
+## Structure
+
+### @orb.yml
+
+The `@orb.yml` file acts as the "root" of our project and contains much of the meta-data for our orb which will appear on the Orb Registry as well as the CLI.
+
+#### ALL Orbs Should Have A Description
+{:.no_toc}
+
+When orbs are published to the Orb Registry they are searchable by their name and description. Besides giving your users a better idea of the purpose and functionality of your orb, good descriptions are important for search optimization.
+
+#### Include Display Links
+{:.no_toc}
+
+Orbs utilize a special config key "[display]({{site.baseurl}}/2.0/orb-author/#orbyml)" which can hold a `source_url` for linking to your Git repository which holds the orb source code, and `home_url` to link to the product or service home page if applicable.
+
+```yaml
+display:
+  home_url: "https://www.website.com/docs"
+  source_url: "https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT"
+```
 
 ### Commands
 
-- In general, all orbs should contain at least one command.
-- Some exceptions may include creating an orb for the sole task of providing an executor.
-- Combine one or more parameterizable steps to simplify a task.
-- All commands available to the user should complete a full task. Do not create a command for the sole purpose of being a “partial” to another command unless it can be used on its own.
-- It is possible not all CLI commands need to be transformed into an orb command. Single line commands with no parameters do not necessarily need to have an orb command alias.
-- Command descriptions should call out any dependencies or assumptions, particularly if you intend for the command to run outside of a provided executor in your orb.
-- It is a good idea to check for the existence of required parameters, environment variables or other dependencies as a part of your command.
+#### Most Orbs Will Contain At Least One Command
+{:.no_toc}
 
-example:
+Most, but not all orbs will contain at least a single command. Commands are used to execute shell commands and special CircleCI steps automatically on the user's behalf. In less common situations, for instance if a tool _requires_ the use of a particular Docker container, an orb may not project commands and only provide jobs.
+
+#### Use The Minimal Number Of Steps Required.
+{:.no_toc}
+
+When writing a [Reusable Command]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) for your orb, you may input any number of [steps]({{site.baseurl}}/2.0/configuration-reference/#steps). Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
+
+{:.tab.minsteps.Deploy_Command_GOOD}
+```yaml
+
+description: "A demo of a command to install a CLI, authenticate, and deploy an app"
+    parameters:
+      api-token:
+        type: env_var_name
+        default: MY_SECRET_TOKEN
+    steps:
+      - run:
+          name: "Deploying application"
+          command: |
+            pip install example
+            example login $<<parameters.api-token>>
+            example deploy my-app
 ```
-if [ -z "$<<parameters.SECRET_API_KEY>>" ]; then
-  echo "Error: The parameter SECRET_API_KEY is empty. Please ensure the environment variable <<parameters.SECRET_API_KEY>> has been added."
-  exit 1
+
+{:.tab.minsteps.Deploy_Command_BAD}
+```yaml
+
+description: "A bad example of a deploy command. Steps should be named, and combined when possible."
+    parameters:
+      api-token:
+        type: env_var_name
+        default: MY_SECRET_TOKEN
+    steps:
+      - run: pip install example
+      - run: example login $<<parameters.api-token>>
+      - run: example deploy my-app
+```
+
+#### Check For Root
+{:.no_toc}
+
+Before adding "sudo" to your commands, check to see if the user is already the root user. This can be done dynamically with environment variables.
+
+```bash
+if [[ $EUID == 0 ]]; then export SUDO=""; else # Check if we're root
+  export SUDO="sudo";
 fi
+
+$SUDO do_command
 ```
-
-### Parameters
-
-- When possible, use defaults for parameters unless a user input is essential.
-- Utilize the [“env_var_name” parameter type]({{ site.baseurl }}/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data.
-- [Injecting steps as a parameter]({{ site.baseurl }}/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
-
-**Installing binaries and tools**
-  - Set an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and ensure to install the binary to this parameterized location. This may often avoid the issue of needing `root` privileges in environments where the user may not have root.
-  - If `root`is required for your use case, it is recommended to add pre-flight checks to determine if the user has root permissions and gracefully fail with a descriptive error message alerting the user they need proper permissions.
-  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run]({{ site.baseurl }}/2.0/configuration-reference/#run) statement. This is required when installing to a non-default path.
-  example:
-```
-echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
-```
-
 
 ### Jobs
 
- - Jobs should utilize Commands defined within the orb to orchestrate common use cases for this orb.
- - Plan for flexibility
- - Plan how users might utilize post-steps, pre-steps, or steps as a parameter.
- - Consider creating pass-through parameters.
- - If a job utilizes an executor or command that accepts parameters, the job will need those parameters as well if they are to be passed down to the executor or commands.
-- Never hard-code the executor. Utilize a parameterizable (ex: ‘default’) executor that is able to have the image or tag overwritten.
+#### Consider "pass-through" Parameters
+{:.no_toc}
+
+Inside your job, if you are utilizing any commands or executors, you must include a copy of each parameter from each of those components into your job. You can then "pass-through" the parameters given to the job, to each referenced component.
+
+For example, here is a partial snippet of the [Node orb's "test" job](https://circleci.com/orbs/registry/orb/circleci/node#jobs-test):
+
+{:.tab.nodeParam.Test_Job}
+```yaml
+description: |
+  Simple drop-in job to test your NodeJS application automatically.
+parameters:
+  version:
+    default: 13.11.0
+    description: >
+      A full version tag must be specified. Example: "13.11.0" For a full list
+      of releases, see the following: https://nodejs.org/en/download/releases
+    type: string
+executor:
+  name: default
+  tag: << parameters.version >>
+```
+
+{:.tab.nodeParam.Default_Executor}
+```yaml
+description: >
+  Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
+  images built for CI.
+
+  Any available tag from this list can be used:
+  https://hub.docker.com/r/cimg/node/tags
+docker:
+  - image: 'cimg/node:<<parameters.tag>>'
+parameters:
+  tag:
+    default: '13.11'
+    description: >
+      Pick a specific cimg/node image version tag:
+      https://hub.docker.com/r/cimg/node
+    type: string
+```
+
+You can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
+
+#### A Parameter For A Docker Image, May Be Preferred To An Executor.
+{:.no_toc}
+Does your orb have multiple jobs which require a specific execution environment? If so, you may choose to implement a custom executor. Will your job run on most linux platforms? Consider just using the `docker` executor directly in your job, and parameterize the image.
+
+#### Consider _Post_ and _Pre_ Steps, and Step Parameters
+{:.no_toc}
+
+Jobs on CircleCI can have steps injected into them, either before or after the job, or somewhere in-between with the use of parameters. Jobs are often easier to setup for users than assembling commands into a custom job (where applicable). Injectable steps allow for more flexibility in jobs and may allow new functionalities in your orb.
+
+See the following:
+* [Pre and Post Steps]({{site.baseurl}}/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [Step Parameter]({{site.baseurl}}/2.0/reusing-config/#steps)
 
 ### Executors
 
-- At least one executor per supported OS (MacOs, Windows, Docker, VM).
-- Must include one executor named `default`.
-- Executor should be parameterized to allow the user to overwrite the version/tag in the event an issue arises with the included image.
+#### Your Orb May Not Benefit From An Executor
+{:.no_toc}
+Executors are especially useful outside of orbs, in users own configs as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs. In Orbs, we usually use executors to either provide or utilize a specific execution environment when we have multiple jobs which can only be run in said environment. For example, if your orb were to rely on a specific Docker container and provided 2 jobs and no commands, it make make sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) used in both jobs.
 
-### Imported Orbs
+### Examples
 
-- Should import full semver immutable version of orb. This protects your orb from changes to the dependancy orb (like a lock file).
-- [Partner Only] - Should only import Certified/Partnered namespaces, or Orbs of the same namespace.
+Orb [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) provide an excellent way for orb developers to share with the community the use-cases and best practices for using their orb. Usage examples act as the majority of the documentation a user will reference when utilizing an orb, so it's important to include clear and useful examples.
 
-### Maintainability
+#### All Public Orbs Should Contain At Least One Usage Example.
+{:.no_toc}
 
-- Deploy full CI/CD for your orb with a fully automated build > test > deploy workflow using the [Orb Starter Kit (Beta)](https://github.com/CircleCI-Public/orb-starter-kit). This handles all of the below.
-- Optional: Utilize a destructured orb pattern to more easily maintain individual orb components.
+Orbs intended for consumption by other organizations should include at least one usage example, with a description.
 
-### Sample Data
+#### Use-Case Based Examples
+{:.no_toc}
 
-- Sample data neccesary for testing your Orb in CI/CD pipelines should be kept as small as possible, e.g a single `composer.json` or `package.json` file with minimal dependencies.
-- Sample data should live under the `sample/` directory in the orb's repository, when possible.
+Each included usage example should be named for a specific use-case to instruct the user in how to accomplish a task. Example: `install_cli_and_deploy`, `scan_docker_container`, or `test_application_with_this-tool`
 
-### Deployment
+#### Show Correct Orb Version
+{:.no_toc}
 
-#### Versioning
+Each usage example must show a full example showing the orb being imported. The version number displayed in the usage-example should match the currently published orb. If your orb was currently on version `0.1.0`, and you were to open a pull request to publish version `1.0.0`, your usage examples should be updated to reflect version `1.0.0` of the orb in use.
 
-- Utilize [semver versioning](https://semver.org/) (x.y.z)
-- Major: Incompatible changes
-- Minor: Add new features (backwards compatible)
-- Patch: Minor bug fixes, metadata updates, or other safe actions.
+### Parameters
 
-View our Orb Deployment best practices here: [coming soon]
+#### Secrets Should _Never_ Be Directly Entered
+{:.no_toc}
 
-This section is handled automatically via the Orb Starter Kit.
+Any information that could be considered "secret" such as API keys, auth tokens, passwords, or ect, should never be entered as a parameter value directly. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable which will contain the secret information.
 
-### GitHub/Bitbucket
+#### Parameterize The Installation Path
+{:.no_toc}
 
-GitHub has the ability to tag repositories with "_topics_". This is used as a datapoint in GitHub search but more importantly, in their Explore page to group repositories by tags. We suggest using the topic `circleci-orbs` for a repo containing an orb. This allows users to view a listing of orb repos whether they are CircleCI, Partner, or community orbs on [this page](https://github.com/topics/circleci-orbs).
+When installing any binary into a potentially unknown user-defined Docker image, it is hard to know what permissions will be available. Create an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and install binaries to the location (if possible). This may often avoid the issue of requiring "root" privileges in environments where that may not possible.
 
-[How to add a topic to a GitHub repository](https://help.github.com/en/articles/classifying-your-repository-with-topics)
+## Deployment
+
+#### ALWAYS Follow Strict Semantic Versioning
+{:.no_toc}
+
+Semantic versioning is a critical update and release practice where in version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understand [semantic versioning]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning)
+
+#### Ensure Your Orb-Publishing Context is RESTRICTED
+{:.no_toc}
+
+If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure to restrict this context to ensure the job's accessing it will only run when trigger or approved by you or other approved users.
+
+See: [Restricted Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context)
+
+## Promotion
+
+#### Share Your Orb With The Community!
+{:.no_toc}
+
+Have you published an orb to the Orb Registry? We'd love to hear about it. Come make a post on [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/orbs)

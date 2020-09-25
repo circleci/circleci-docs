@@ -53,9 +53,9 @@ circleci orb init /path/to/myProject-orb
     No, I'll handle everything myself.
 ```
 
-    When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
+When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
 
-    Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
+Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
 
 4. **Answer questions to configure and set up your orb.**
 
@@ -171,7 +171,7 @@ steps:
 
 Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory.
 
-Usage Examples will not be utilized by the end user, but provide a way for the orb developer to share use-case specific examples or orb usage live on the [Orb Registry](https://circleci.com/orbs/registry/).
+Usage Examples will not be utilized by the end user i n their CI config, but provide a way for the orb developer to share use-case specific examples or orb usage live on the [Orb Registry](https://circleci.com/orbs/registry/), which users can reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
