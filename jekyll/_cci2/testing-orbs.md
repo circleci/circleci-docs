@@ -22,7 +22,22 @@ Setting up a solid testing pipeline for your orb is important, as with all softw
 
 The most basic forms of testing for orbs are configuration validation and code linting. When an orb is packed and published it must be both valid YAML, and valid CircleCI syntax. Both of these checks are automatically applied when using the orb development kit, and provided in the project's config file at `.circleci/config.yml`. Config validation and code linting can also be performed manually, locally.
 
+
+{:.tab.validation.Snippet_From_test-pack_Workflow}
+```yaml
+test-pack:
+    unless: << pipeline.parameters.run-integration-tests >>
+    jobs:
+      - orb-tools/lint # Lint Yaml files
+      - orb-tools/pack # Pack orb source + validate config
+      - shellcheck/check:
+          dir: ./src/scripts
+          exclude: SC2148
+```
+
 When you first make a commit to your orb repository, the [test-pack](https://github.com/CircleCI-Public/Orb-Project-Template/blob/43712ad367f2f3b06b2ae46e43ddf70bd3d83222/.circleci/config.yml#L40) workflow will be triggered, which contains several jobs related to validating and testing your orb.
+
+
 
 Learn more about what is included in orb project config files in the [Orb Publishing Process]({site.baseurl}}/2.0/creating-orbs) guide.
 
@@ -199,7 +214,7 @@ Replace  the steps of this job with commands from your orb. You could include a 
 
 ### How To Test Orb Jobs
 
-If we needed to test our orb's jobs, rather than commands, we can simply add our orb job right next to the `integration-test-1` job in our config under the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow.
+If we needed to test our orb's jobs, as well as commands, we can simply add our orb job right next to the `integration-test-1` job in our config under the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow.
 
 {:.tab.intTestWorkflow.integration-test_deploy}
 ```

@@ -24,25 +24,23 @@ If you are publishing your orb using the [Orb Development Kit]({{site.baseurl}}/
 
 ### Issue A New Release
 
-Issuing a new semantic release of your orb is simple. Once you have generated your orb sample project with the `circleci orb init` command, you will have been automatically migrated to the `alpha` branch. The name of the branch does not matter, just ensure any new features, bug fixes, or patches, are created in a non-default branch for your repository. Once you have added your new code it is time to being the release process.
+Issuing a new semantic release of your orb is simple. Once you have generated your orb sample project with the `circleci orb init` command, you will have been automatically migrated to the `alpha` branch. The name of the branch does not matter, just ensure any new features, bug fixes, or patches, are created in a non-default branch for your repository. Once you have added or updated your code and are ready to issue a release, continue with these steps.
 
-1. **Open a new Pull Request to the default branch**. New releases are only published on merges to the default branch. The included [`.circleci/config.yml` configuration](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml) file automatically [packs]({{site.baseurl}}/2.0/orb-concepts/#orb-packing), [tests]({{site.baseurl}}/2.0/testing-orbs/), and publishes your orbs.
+**1) Open a new Pull Request to the default branch**
 
-<<<<<<< HEAD
-1. **Ensure all tests are passing**. By default, both [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) and [unit tests]({{site.baseurl}}/2.0/testing-orbs/#unit-testing) are enabled for this CICD pipeline. It is highly recommended that you add, at minimum, integration tests to ensure the functionality of your orb. If your orb does not make use of scripts or you do not wish to add unit testing at this time, the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) job can be commented out. [image]
+New releases are only published on merges to the default branch. The included [`.circleci/config.yml` configuration](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml) file automatically [packs]({{site.baseurl}}/2.0/orb-concepts/#orb-packing), [tests]({{site.baseurl}}/2.0/testing-orbs/), and publishes your orbs.
 
-1. **Title pull request with special semver tag**. The included CICD config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbsthat pass testing on the main branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release intended. For example, to release the first major public version of your orb from the `beta` branch, your pull request would be titled `[semver:major] first orb release.` [image]
-The tag template looks as follows: `[semver:<increment>]` where `<increment>` is replaced with one of the following values:
-=======
 By default, both [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) and [unit tests]({{site.baseurl}}/2.0/testing-orbs/#unit-testing) are enabled for this CI pipeline. It is highly recommended that you add at minimum integration tests to ensure the functionality of your orb. If your orb does not make use of scripts or you do not wish to add unit testing at this time, the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) job can be commented out.
+
+**2) Ensure all tests pass**
 
 ![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
 You can view the results of your tests directly on GitHub within the Pull Request, or for a more detailed view, watch the entire pipeline on CircleCI.com
 
-3) **Title Pull Request with Special Semver Tag**
+**3) Title Pull Request with Special Semver Tag**
 
-The included CI config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs which pass testing on the main branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release we are intending.
+The included CI config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs which pass testing on the default branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release we are intending.
 
 The tag template looks as such: `[semver:<increment>]` where `<increment>` is replaced with one of the following values:
 
@@ -58,24 +56,16 @@ So for example, to release the first major public version of your orb from the `
 
 ![First major release of an orb - Pull Request]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
-4) **"Squash" Merge**
+**4) "Squash" Merge**
 
 Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, it also by convention keeps the title of the Pull Request, as the commit message.
 
 ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
->>>>>>> 50ecd980622c90c6016599f030c9f4ee84c5d79d
 
-    | Increment | Description |
-    | ----------| ----------- |
-    | major     | Issue a 1.0.0 incremented release |
-    | minor     | Issue a x.1.0 incremented release |
-    | patch     | Issue a x.x.1 incremented release |
-    | skip      | Do not issue a release |
-    {: class="table table-striped"}
 
-4. **"Squash" Merge**. Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but also keeps the title of the Pull Request as the commit message. It is important to ensure when merging to the default branch that you include the semver tag in the commit message. [image]
+**5) Complete!**
 
-5. **Complete!**. If you head on over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search your orb on the [Orb Registry](https://circleci.com/orbs/registry/).
+If you head on over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search your orb on the [Orb Registry](https://circleci.com/orbs/registry/).
 
 ### How It Works
 
