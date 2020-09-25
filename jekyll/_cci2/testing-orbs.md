@@ -46,11 +46,14 @@ In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci
 
 ## Unit Testing
 
-If you are taking advantage of the Orb Development Kit's `<<include(file)>>` feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts. When writing longer or complex bash scripts, it is often helpful to break up our code into smaller and more manageable functions, which we can test with the help of testing frameworks just like any other code.
+If you are taking advantage of the Orb Development Kit's `<<include(file)>>` feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+
+![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
+
 
 The `test-pack` workflow includes the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job, which is responsible for automatically executing [.bats](#bats-core) tests within the `src/tests` directory.
 
-When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command is generated, which _includes_ the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script. Also included, is a test case example using the BATS-Core (Bash Automation Testing System) framework, in the `src/tests` directory, named [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats)
+When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command is generated, which _includes_ the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script. Also included, is a test case example using the [BATS-Core (Bash Automation Testing System)](#bats-core) framework, in the `src/tests` directory, named [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats)
 
 {:.tab.unitTest.greet-yaml}
 

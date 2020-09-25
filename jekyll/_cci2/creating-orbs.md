@@ -32,7 +32,9 @@ New releases are only published on merges to the default branch. We make use of 
 
 By default, both [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) and [unit tests]({{site.baseurl}}/2.0/testing-orbs/#unit-testing) are enabled for this CI pipeline. It is highly recommended that you add at minimum integration tests to ensure the functionality of your orb. If your orb does not make use of scripts or you do not wish to add unit testing at this time, the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) job can be commented out.
 
-[image]
+![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
+
+You can view the results of your tests directly on GitHub within the Pull Request, or for a more detailed view, watch the entire pipeline on CircleCI.com
 
 3) **Title Pull Request with Special Semver Tag**
 
@@ -48,15 +50,15 @@ The tag template looks as such: `[semver:<increment>]` where `<increment>` is re
 | skip      | Do not issue a release|
 {: class="table table-striped"}
 
-So for example, to release the first major public version of your orb from the `beta` branch, your pull request may be titled `[semver:major] first orb release.`
+So for example, to release the first major public version of your orb from the `alpha` branch, your pull request may be titled `[semver:major] first orb release.`
 
-[image]
+![First major release of an orb - Pull Request]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
 4) **"Squash" Merge**
 
 Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, it also by convention keeps the title of the Pull Request, as the commit message.
 
-[image]
+![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
 The important piece is to ensure when merging to the default branch, to include the semver tag in the commit message.
 
@@ -84,7 +86,7 @@ The `test-pack` workflow is responsible for all testing we can accomplish up unt
 
 For that reason, we first run our tests which do not require and special access, and therefore could run from open source PRs, and then we place the workflow [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval).
 
-[image]
+![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png)
 
 When we place a job on-hold for manual approval, the workflow will wait for our physical input, via an alert prompt, before continuing. Once we authorize the manual approval, subsequent jobs will be authorized by us and may access our Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
 
