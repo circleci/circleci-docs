@@ -17,9 +17,21 @@ Authenticated pulls allow access to private Docker images.  It may also grant hi
 
 Starting [November 1, 2020](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/), Docker Hub will impose rate limits based on the originating IP. Since CircleCI runs jobs from a shared pool of IPs, it is highly recommended to use authenticated Docker pulls with Docker Hub to avoid rate limit problems.
 
-For the [Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) executor, specify username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file. To protect the password, create a [context]({{ site.baseurl }}/2.0/contexts) or Environment Variable in the CircleCI Project Settings page, and then reference it:
+For the [Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) executor, specify username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file. To protect the password, place it in a [context]({{ site.baseurl }}/2.0/contexts), or use a per-project Environment Variable.
+
+**Note:** Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
+
+In this example, we grant the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
 
 ```yaml
+workflows:
+  my-workflow:
+    jobs:
+      - build:
+          context:
+            - build-env-vars
+            - docker-hub-creds
+
 jobs:
   build:
     docker:
@@ -50,7 +62,8 @@ workflows:
     jobs:
       - machine-job:
           context:
-            - docker-hub-context
+            - build-env-vars
+            - docker-hub-creds
 
 jobs:
   machine-job:
