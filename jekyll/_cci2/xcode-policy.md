@@ -63,19 +63,19 @@ We endeavour to make beta Xcode versions available on the macOS executor as soon
 
 Unlike our stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
 
-To read about our customer support policy regarding beta images, please check out this [support center article]().
+To read about our customer support policy regarding beta images, please check out this [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
 ## Xcode Image Releases
 
 We closely track and monitor Apple’s Xcode releases and always endeavor to release new images as quickly as possible. We can not provide an official SLA turnaround time for this as it is highly dependent on any changes made in Xcode and macOS.
 
-New images are always announced on our [Discuss site]() along with release notes and will be added to the table of [Xcode versions in the documentation](). 
+New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes and will be added to the table of [Xcode versions in the documentation](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions). 
 macOS Versions
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version as stable as possible by only updating it when the minimum version requirement for Xcode is increased. When this occurs, we will update the macOS version to the latest stable version that is available.
 
-When a new major version of macOS (e.g., `10.15` or `11.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple’s own release cycle, but will always be announced ahead of time on our [Discuss forum]().
+When a new major version of macOS (e.g., `10.15` or `11.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple’s own release cycle, but will always be announced ahead of time on our [Discuss forum](https://discuss.circleci.com/c/announcements/39).
 
 ## Exceptions
 
-At any time, we reserve the right to work outside of the information in this document if circumstances require. In the event that we are required to make an exception to the policy, we will endeavour to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our [Discuss forum](), along with additional outreach, such as an email notice, where possible.
+At any time, we reserve the right to work outside of the information in this document if circumstances require. In the event that we are required to make an exception to the policy, we will endeavour to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with additional outreach, such as an email notice, where possible.
