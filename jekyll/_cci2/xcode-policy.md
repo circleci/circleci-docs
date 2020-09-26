@@ -49,7 +49,7 @@ We will never automatically redirect requests for images to different major.mino
 
 ## Xcode Patches
 
-We retain the latest patch version of each Xcode `major.minor` version we support. Once a new patch version has been, we will deprecate the previous patch version and redirect all requests to the new patch.
+We retain the latest patch version of each Xcode `major.minor` version we support. Once a new patch version has been released, we will deprecate the previous patch version and redirect all requests to the new patch.
 
 As patches are generally backwards compatible, redirects will be put in place within 24 hours of a new patch release. If any major issues are discovered, we will issue a rollback and make both versions temporarily available.
 
