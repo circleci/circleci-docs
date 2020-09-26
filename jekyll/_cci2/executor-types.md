@@ -103,7 +103,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Private Images]({{ site.baseurl }}/2.0/private-images).
+Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
 
 ### RAM disks
 
