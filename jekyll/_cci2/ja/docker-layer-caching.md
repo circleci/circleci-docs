@@ -41,16 +41,19 @@ DLC は、docker build、docker compose などの Docker コマンドを使用�
 ```YAML
 version: 2 
 jobs: 
- build: 
-   docker: 
-     # ここでは、DLC は動作しません。キャッシュの状況は、イメージ レイヤーにどれだけ共通点があるかによって左右されます。
-     - image: circleci/node:9.8.0-stretch-browsers 
-   steps: 
-     - checkout 
-     - setup_remote_docker: 
-         docker_layer_caching: true 
-     # ここでは、DLC はレイヤーを明示的にキャッシュし、リビルドを避けようとします。
-     - run: docker build .
+  build:
+    docker:
+      # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: circleci/node:9.8.0-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
 ```
 
 ## DLC のしくみ
@@ -201,14 +204,19 @@ In the video example, the job runs all of the steps in a Dockerfile with the `do
 ```yaml
 version: 2 
 jobs: 
- build: 
-   docker: 
-     - image: circleci/node:9.8.0-stretch-browsers 
-   steps: 
-     - checkout 
-     - setup_remote_docker: 
-         docker_layer_caching: true 
-     - run: docker build . 
+  build:
+    docker:
+      - image: circleci/node:9.8.0-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: docker build .
 ```
 
 When none of the layers in the image change between job runs, DLC pulls the layers from cache from the image that was built previously and reuses those instead of rebuilding the entire image.
