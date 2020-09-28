@@ -30,6 +30,23 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 
 Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
+{:.tab.elementDescription.myCommand-yml}
+
+```yaml
+description: "Utilize this command to echo Hello to a step in the UI."
+steps:
+  - run:
+      name: "Running Echo command"
+      command: echo "Hello"
+```
+
+Create detailed descriptions that fully explain the benefit and usage of the orb element. Descriptions are an excellent place for more specific documentation related to each component.
+
+#### Ensure Your Orb-Publishing Context is Restricted
+{:.no_toc}
+
+If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
+
 ## Structure
 
 ### @orb.yml
@@ -68,31 +85,31 @@ When writing a [Reusable Command]({{site.baseurl}}/2.0/reusing-config/#authoring
 ```yaml
 
 description: "A demo of a command to install a CLI, authenticate, and deploy an app"
-    parameters:
-      api-token:
-        type: env_var_name
-        default: MY_SECRET_TOKEN
-    steps:
-      - run:
-          name: "Deploying application"
-          command: |
-            pip install example
-            example login $<<parameters.api-token>>
-            example deploy my-app
+parameters:
+  api-token:
+    type: env_var_name
+    default: MY_SECRET_TOKEN
+steps:
+  - run:
+      name: "Deploying application"
+      command: |
+        pip install example
+        example login $<<parameters.api-token>>
+        example deploy my-app
 ```
 
 {:.tab.minsteps.Deploy_Command_BAD}
 ```yaml
 
 description: "A bad example of a deploy command. Steps should be named, and combined when possible."
-    parameters:
-      api-token:
-        type: env_var_name
-        default: MY_SECRET_TOKEN
-    steps:
-      - run: pip install example
-      - run: example login $<<parameters.api-token>>
-      - run: example deploy my-app
+parameters:
+  api-token:
+    type: env_var_name
+    default: MY_SECRET_TOKEN
+steps:
+  - run: pip install example
+  - run: example login $<<parameters.api-token>>
+  - run: example deploy my-app
 ```
 
 #### Check For Root
@@ -210,11 +227,6 @@ When installing any binary into a potentially unknown user-defined Docker image,
 {:.no_toc}
 
 Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood [semantic versioning]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning).
-
-#### Ensure Your Orb-Publishing Context is Restricted
-{:.no_toc}
-
-If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
 
 ## Promotion
 
