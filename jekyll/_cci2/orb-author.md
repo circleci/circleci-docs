@@ -61,6 +61,18 @@ Alternatively, if you would simply like a convenient way of downloading the [Orb
 
 In the background, the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will also be asked for the remote git repository URL which we obtained back in step 1.
 
+The [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) contains a full CI/CD pipeline (Described in [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/)) which will automatically [pack](), [test](({{site.baseurl}}/2.0/testing-orbs/)), and publish your orb. In the setup processed you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/2.0/contexts/). Saving the token is necessary for publishing development and production versions of the orb.
+
+
+**Ensure the context is restricted**
+<br/>
+Restrict a context by navigating to _Organization Settings > Contexts_.
+<br/><br/>
+After fully completing the creation of your orb, you should see a new context created named `orb-publishing`. Click into `orb-publishing` and add a _Security Group_. Use Security Groups to limit access to what (if any) users are allowed to trigger jobs which will have access to this private [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/).
+<br/><br/>
+See: [Restricted Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context)
+{: class="alert alert-warning"}
+
 5. **Push the changes up to Github.**
 
 During the setup process, the `orb init` command will take several steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com successfully. Run the following command from a separate terminal when prompted to do so:
