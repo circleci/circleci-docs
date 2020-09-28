@@ -26,19 +26,25 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
+    # Primary container image where all commands run
 
     docker:
 
       - image: circleci/ruby:2.4.1-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # `host: localhost` でアクセスできるサービス コンテナ イメージ
+    # Service container image available at `host: localhost`
 
       - image: circleci/postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
@@ -47,22 +53,22 @@ jobs:
 
       - checkout
 
-      # バンドル キャッシュを復元します
+      # Restore bundle cache
 
       - restore_cache:
           keys:
             - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
-      # 依存関係をバンドル インストールします
+      # Bundle install dependencies
 
       - run:
-          name: 依存関係のインストール
+          name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # バンドル キャッシュを保存します
+      # Store bundle cache
 
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
@@ -70,16 +76,16 @@ jobs:
             - vendor/bundle
 
       - run:
-          name: データベースのセットアップ
+          name: Database Setup
           command: |
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
       - run:
-          name: RSpec の並列実行
+          name: Parallel RSpec
           command: bin/rails test
 
-      # アーティファクトを保存します
+      # Save artifacts
 
       - store_test_results:
           path: /tmp/test-results
@@ -106,24 +112,30 @@ jobs:
     working_directory: ~/appName
     docker:
       - image: ruby:2.3.1-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # この例では PostgresSQL 9.6 公式イメージを使用しています。
-      # circleci/postgres:9.6 も使用可能で、いくつかの機能強化とカスタマイズが加えられています。 いずれかのイメージを使用できます。
+      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
+      # which includes a few enhancements and modifications. いずれかのイメージを使用できます。
       - image: postgres:9.6-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
     steps:
       - checkout
       - run:
-          name: Ruby の依存関係のインストール
+          name: Install Ruby Dependencies
           command: bundle install
       - run: 
-          name: データベースのセットアップ
+          name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
             bundle exec rake db:migrate
@@ -142,10 +154,16 @@ version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go イメージは https://hub.docker.com/r/circleci/golang/ で入手できます
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
-      # CircleCI PostgreSQL イメージは https://hub.docker.com/r/circleci/postgres/ で入手できます
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -164,8 +182,8 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # 通常、このステップはカスタム プライマリ イメージに記述されています
-      # この例では、説明のためにここにステップを追加しました
+      # Normally, this step would be in a custom primary image;
+      # we've added it here for the sake of explanation.
 
       run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
@@ -226,8 +244,14 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # ステップが実行される場所となるプライマリ コンテナ
+      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/mysql:8.0.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -238,7 +262,7 @@ jobs:
 
       - checkout
       - run:
-      # プライマリ コンテナは MySQL ではないため、準備が完了するまで sleep コマンドを実行します。
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: MySQL が準備できるまで待機
           command: |
             for i in `seq 1 10`;
