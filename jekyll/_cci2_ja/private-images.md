@@ -43,7 +43,7 @@ jobs:
 ```
 
 また、[gcr.io](https://cloud.google.com/container-registry) や [quay.io](https://quay.io) などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。
-```
+```yaml
 - image: quay.io/project/image:tag
   auth:
     username: $QUAY_USERNAME
@@ -51,7 +51,7 @@ jobs:
 ```    
 または、以下のように `machine` Executor と Docker Orb を使用する場合にも同じ結果が得られます。
 
-``` yaml
+```yaml
 version: 2.1
 orbs:
   docker: circleci/docker@1.4.0
