@@ -3,8 +3,6 @@ layout: classic-docs
 title: "ビルド アーティファクトの保存"
 short-title: "ビルド アーティファクトの保存"
 description: "ビルド中に作成されるアーティファクトのアップロード例"
-categories:
-  - configuring-jobs
 order: 70
 ---
 

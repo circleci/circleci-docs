@@ -11,8 +11,6 @@ version:
 :toc: macro
 :toc-title:
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
-
 This document describes the process for upgrading your CircleCI Server installation to v{serverversion}. 
 
 

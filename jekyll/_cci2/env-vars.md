@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using Environment Variables"
 short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
-categories: [configuring-jobs]
 order: 40
 version:
 - Cloud
@@ -413,7 +412,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in your Project Settings page and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
+**IMPORTANT** Pipeline parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
 Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
 
@@ -427,7 +426,7 @@ Build parameters are environment variables, therefore their names have to meet t
 
 Aside from the usual constraints for environment variables there are no restrictions on the values themselves and are treated as simple strings. The order that build parameters are loaded in is **not** guaranteed so avoid interpolating one build parameter into another. It is best practice to set build parameters as an unordered list of independent environment variables.
 
-**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in your Project Settings page and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
+**IMPORTANT** Build parameters are not treated as sensitive data and must not be used by customers for sensitive values (secrets). You can find this sensitive information in [Project Settings]({{site.baseurl}}/2.0/settings/) and [Contexts]({{site.baseurl}}/2.0/glossary/#context).
 
 For example, when you pass the parameters:
 

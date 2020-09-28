@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "Collecting Test Metadata"
 short-title: "Collecting Test Metadata"
-categories: [configuring-jobs]
 description: "Collecting test metadata"
 order: 34
 version:

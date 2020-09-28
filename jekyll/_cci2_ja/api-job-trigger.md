@@ -3,8 +3,6 @@ layout: classic-docs
 title: "API を使用したジョブのトリガー"
 short-title: "API を使用したジョブのトリガー"
 description: "ビルド以外のジョブを定義およびトリガーする方法"
-categories:
-  - configuring-jobs
 order: 80
 ---
 

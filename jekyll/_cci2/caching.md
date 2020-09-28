@@ -126,9 +126,9 @@ There are many different approaches to utilizing caching in monorepos. This type
 
 {% raw %}
 ```yaml
-    commands:
-        create_concatenated_package_lock:
-        description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+commands:
+  create_concatenated_package_lock:
+    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
     parameters:
       filename:
         type: string
@@ -144,11 +144,11 @@ There are many different approaches to utilizing caching in monorepos. This type
 {% raw %}
 ```yaml
     steps:
-        - checkout
-        - create_concatenated_package_lock:
+      - checkout
+      - create_concatenated_package_lock:
           filename: combined-package-lock.txt
-    ## Use combined-package-lock.text in cache key
-        - restore_cache:
+      ## Use combined-package-lock.text in cache key
+      - restore_cache:
           keys:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
             - v3-deps

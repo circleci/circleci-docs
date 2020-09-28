@@ -9,9 +9,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
-
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This section includes information on metrics for monitoring your CircleCI Server installation.
 

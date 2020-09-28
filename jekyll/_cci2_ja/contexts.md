@@ -3,8 +3,6 @@ layout: classic-docs
 title: "コンテキストの使用"
 short-title: "コンテキストの使用"
 description: "プロジェクト間で共有できる安全なリソース"
-categories:
-  - configuring-jobs
 order: 41
 ---
 

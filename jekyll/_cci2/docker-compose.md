@@ -18,9 +18,9 @@ The `docker-compose` utility is [pre-installed in the CircleCI convenience imag
       - run:
           name: Install Docker Compose
           command: |
-            set -x
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
 
 [pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools

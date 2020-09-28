@@ -6,7 +6,6 @@
 :toc: macro
 :toc-title:
 
-
 This document provides an overview of how to migrate from TeamCity to CircleCI.
 
 == Quick Start

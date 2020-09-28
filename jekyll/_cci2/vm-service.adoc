@@ -10,12 +10,9 @@ version:
 :toc: macro
 :toc-title:
 
+This section outlines how to set up and customize VM service for your CircleCI installation. VM Service controls how `machine` executor (Linux and Windows images) and remote Docker jobs are run.
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
-
-This section outlines how to set up and customize VM service for your CircleCI installation, to be used for `machine` executor (Linux and Windows images) and remote Docker jobs.
-
-NOTE: This is only available for installations on AWS, please contact your CircleCI account representative to request this for a static installation.
+NOTE: The information on this page is only applicable to installations on AWS. Please contact your CircleCI account representative to request VM service guidance for a static installation.
 
 
 
@@ -24,15 +21,17 @@ NOTE: This is only available for installations on AWS, please contact your Circl
 VM service enables users of CircleCI Server, installed on AWS, to run jobs using the https://circleci.com/docs/2.0/building-docker-images[Remote Docker Environment] and the https://circleci.com/docs/2.0/executor-types/#using-machine[`machine` executor].
 
 .VM Service Settings
-image::vm-service.png[Configuring VM Service on CircleCI Server,width=50%]
-
-== Configuration
+image::vm-service.png[Configuring VM Service on CircleCI Server,width=120%]
 
 CAUTION: Any changes to management console settings require downtime while the CircleCI application restarts.
 
+The following sections will run through the settings and options displayed in the VM Service screenshot show above.
+
 To configure VM service, it is best practice to select the AWS EC2 option in the Management Console Settings. This will allow CircleCI to run remote Docker and `machine` executor jobs using dedicated EC2 instances.
 
-You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMIs) for VM service, as described in the sections below. If you do not provide any custom images, all `machine` executor and remote Docker jobs will be run on instances built with one of our default AMIs, which have Ubuntu 16.04, Docker version 18.06.3 and a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details. To run Windows jobs you must supply a Windows AMI, without this Windows jobs will fail to run.
+== 1. Supply AMIs
+
+You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html[Amazon Machine Image] (AMIs) for VM service, as described in the sections below. If you do not provide any custom images, all `machine` executor and remote Docker jobs will be run on instances built with one of our default AMIs (listed below), which have Ubuntu 16.04, Docker version 18.06.3 and a selection of common languages, tools, and frameworks. See the https://github.com/circleci/image-builder/tree/picard-vm-image/circleci-provision-scripts[`picard-vm-image` branch of our image-builder repository] for details. To run Windows jobs you must supply a Windows AMI, without this Windows jobs will fail to run.
 
 === Default VM service Linux AMIs
 
@@ -51,11 +50,11 @@ You can provide custom https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.
 * Us-west-1:ami-06f6efb13d9ccf93d
 * Us-west-2:ami-0b5b8ad02f405a909
 
-== Customizing and Creating VM Service Images
+=== Customizing and Creating VM Service Images
 
-Customizing the VM service images for your installation of CircleCI will allow you to specify versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker or the `machine` executor, and for `machine` you can specify separate AMIs for Linux and Windows. If you choose not to use a custom Linux image, you will likely need to run additional install and update steps on every commit as part of your `config.yml` file.
+Customizing the VM service images for your installation will allow you to specify versions of Docker and Docker Compose, as well as install any additional dependencies that may be part of your CI/CD pipeline. You can create separate AMIs for jobs that use remote Docker or the `machine` executor, and for `machine` you can specify separate AMIs for Linux and Windows. It's worth noting that if you choose not to customize the base Linux image, developers will likely need to configure jobs to run additional install and update steps on every commit as part of each project's `config.yml` file.
 
-From v2.18, you can either provide a single custom Linux AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each
+**From Server v2.18**, you can either provide a single custom Linux AMI to use for both `machine` and remote Docker jobs using just the field marked '1' below, or, by providing a second custom AMI in the field marked '2', you can use different settings for each.
 
 .Custom VM Service Images
 image::vm-service-custom.png[Custom VM Service Images]
@@ -66,20 +65,15 @@ image::vm-service-custom.png[Custom VM Service Images]
 * Packer (https://packer.io/intro/getting-started/install.html)
 * AWS Access Key ID and Secret Access Key
 
-==== Creating a Custom AMI
+==== Creating a Custom Linux AMI
 
 1. Clone our image builder repo: https://github.com/circleci/image-builder/tree/picard-vm-image
-2. Open `aws-vm.json` in your editor. This provides a baseline template for building an AMI with Packer. An AWS access key ID and secret access key are required to upload. You can find more information about managing AWS authentication with Packer https://packer.io/docs/builders/amazon.html#authentication[here].  If the baseline template is too limited, you can find additional AWS configuration options https://packer.io/docs/builders/amazon.html[here].
-3. (Optional) Consider restricting the `ami_groups` to only within your organization [1]
-4. We provide a list of pre-configured dependencies [2].  You can customize the provision.sh script to meet the needs of your environment.
+2. Open `aws-vm.json` in your editor. This provides a baseline template for building an AMI with Packer. An AWS access key ID and secret access key are required to upload. You can find more information about managing AWS authentication with Packer https://packer.io/docs/builders/amazon.html#authentication[here]. If the baseline template is too limited, you can find additional AWS configuration options https://packer.io/docs/builders/amazon.html[here].
+3. (Optional) Consider restricting the `ami_groups` to only within your organization. See the [Packer documentation](https://packer.io/docs/builders/amazon-ebs.html#ami_groups) for more information on AMI groups.
+4. We provide a list of [pre-configured dependencies](https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh). You can customize the provision.sh script to meet the needs of your environment.
 5. Run `packer build aws-vm.json`
 
-[1] https://packer.io/docs/builders/amazon-ebs.html#ami_groups
-
-[2] https://github.com/circleci/image-builder/blob/picard-vm-image/provision.sh
-
-==== Using the Custom Images
-To enable the use of these custom images for your installation, you will need to provide the individual AMI IDs in the Settings tab of the Management console (for example, `<your-circleci-id>.com:8800`). The fields are located in the *VM Service* section.
+Once your AMI(s) have been created, copy the AMI ID(s) into the relevant field shown in the screenshot above.
 
 === Creating a Windows AMI
 _Introduced in CircleCI Server v2.18.3_
@@ -88,11 +82,11 @@ Creating a Windows image and specifying it under the VM Service settings lets yo
 
 NOTE: Windows images are built on CircleCI, so we suggest you run through this process once your installation is up and running. Alternatively you can use any other CircleCI account – including on our managed Cloud service – to generate the image.
 
-== Defining Instance Types
-There are two fields for defining the instance types you wish to use. The first is for the default instance type, and the second is to set the instance type to use when a Job specifies the `large` resource class.
+== 2. Define Instance Types
+There are two fields for defining the AWS instance types you wish to use. The first is for the default instance type, and the second is to set the instance type to use when a Job specifies the `large` resource class.
 
-== On Demand and Preallocated Instances
-Remote Docker and `machine` executor instances are spun up on demand. It is also possible to preallocate instances to remain up and running, ready for remote Docker and `machine` jobs to be run (see the last two fields in figure 9).
+== 3. On Demand and Preallocated Instances
+Remote Docker and `machine` executor instances are spun up on demand. It is also possible to preallocate instances to remain up and running, ready for remote Docker and `machine` jobs to be run (see the last two fields in figure 1).
 
 WARNING: If https://circleci.com/docs/2.0/docker-layer-caching/[Docker Layer Caching (DLC)] is to be used, VM Service instances need to be spun up on-demand. To ensure this can happen, **either** ensure any preallocated instances are in use, **or** set both remote Docker and `machine` preallocated instance fields to `0`.
 
@@ -104,7 +98,7 @@ Jobs run using the remote Docker Environment, or the `machine` executor are sche
 
 // add steps to find out statuses of Remote Docker and machine executor - would this be run `nomad node-status` from one of the nomad client instances? If so, how does a user navigate to a Nomad client instance?
 
-NOTE: A cron job in scheduled to cycle all default and preallocated instanced at least once per day to ensure instanced don't end up in a dead/bad state.
+NOTE: A cron job is scheduled to cycle all default and preallocated instances at least once per day to ensure instances do not end up in an unworkable state.
 
 == Accessing Remote Docker and `machine` instances
 By default, private IP addresses are used to communicate with VM service instances. If you need to grant wider access, for example, to allow developers SSH access, this can be set using the checkbox in the VM Provider Advanced Settings.

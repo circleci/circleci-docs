@@ -3,8 +3,6 @@ layout: classic-docs
 title: "Orbオーサリングに関するよくあるご質問"
 short-title: "Orbオーサリングに関するよくあるご質問"
 description: "Orbオーサリングに関するよくあるご質問"
-categories:
-  - configuring-jobs
 order: 20
 ---
 

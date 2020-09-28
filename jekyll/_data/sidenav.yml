@@ -69,7 +69,7 @@ en:
           link: 2.0/migrating-from-jenkins/
         - name: Migrating from TeamCity
           link: 2.0/migrating-from-teamcity/
-        - name: Migrating from TravisCI
+        - name: Migrating from Travis CI
           link: 2.0/migrating-from-travis/
         - name: Jenkins Converter
           link: 2.0/jenkins-converter/
@@ -146,8 +146,10 @@ en:
           link: 2.0/circleci-images/
         - name: Using Custom Images
           link: 2.0/custom-images/
-        - name: Using Private Images
+        - name: Using Docker Authenticated Pulls
           link: 2.0/private-images/
+        - name: Xcode Image Policy
+          link: 2.0/xcode-policy/
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
@@ -190,8 +192,6 @@ en:
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
-        - name: Enabling Pipelines
-          link: 2.0/build-processing/
         - name: iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
@@ -216,6 +216,8 @@ en:
       children:
         - name: Status Overview
           link: 2.0/status/
+        - name: Pipelines Overview
+          link: 2.0/build-processing/
         - name: Viewing Pipelines
           link: 2.0/pipelines/
         - name: Using Credits
@@ -416,6 +418,9 @@ ja:
         - name: Supported Languages
           i18n_name: サポートされている言語
           link: ja/2.0/demo-apps/
+        - name: Core Features
+          i18n_name: コア機能
+          link: ja/2.0/features/ 
 
 - name: Getting Started
   i18n_name: はじめよう
@@ -532,7 +537,7 @@ ja:
         - name: Using Custom Images
           i18n_name: カスタムイメージを使う
           link: ja/2.0/custom-images/
-        - name: Using Private Images
+        - name: Using Docker Authenticated Pulls
           i18n_name: プライベートイメージを使う
           link: ja/2.0/private-images/
     - name: ADVANCED CONFIG
