@@ -14,7 +14,7 @@ version:
 
 ## Introduction
 
-This orb authoring guide assumes you have read the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-intro) document and claimed your namespace. At this point you are ready to develop and orb.
+This orb authoring guide assumes you have read the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-intro) document and claimed your namespace. At this point you are ready to develop an orb.
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our [orb development kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/2.0/reusing-config), they can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
@@ -171,7 +171,7 @@ steps:
 
 Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory.
 
-Usage Examples will not be utilized by the end user i n their CI config, but provide a way for the orb developer to share use-case specific examples or orb usage live on the [Orb Registry](https://circleci.com/orbs/registry/), which users can reference.
+Usage Examples will not be utilized by the end user in their CI config, but provide a way for the orb developer to share use-case specific examples or orb usage live on the [Orb Registry](https://circleci.com/orbs/registry/), which users can reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 

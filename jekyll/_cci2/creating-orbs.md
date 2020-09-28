@@ -26,88 +26,71 @@ If you are publishing your orb using the [Orb Development Kit]({{site.baseurl}}/
 
 Issuing a new semantic release of your orb is simple. Once you have generated your orb sample project with the `circleci orb init` command, you will have been automatically migrated to the `alpha` branch. The name of the branch does not matter, just ensure any new features, bug fixes, or patches, are created in a non-default branch for your repository. Once you have added or updated your code and are ready to issue a release, continue with these steps.
 
-**1) Open a new Pull Request to the default branch**
+1. **Open a new Pull Request to the default branch.** New releases are only published on merges to the default branch. The included [`.circleci/config.yml` configuration](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml) file automatically [packs]({{site.baseurl}}/2.0/orb-concepts/#orb-packing), [tests]({{site.baseurl}}/2.0/testing-orbs/), and publishes your orbs. By default, both [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) and [unit tests]({{site.baseurl}}/2.0/testing-orbs/#unit-testing) are enabled for this CI pipeline. It is highly recommended that you add integration tests at a minimum to ensure the functionality of your orb. If your orb does not make use of scripts or you do not wish to add unit testing at this time, the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) job can be commented out.
 
-New releases are only published on merges to the default branch. The included [`.circleci/config.yml` configuration](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml) file automatically [packs]({{site.baseurl}}/2.0/orb-concepts/#orb-packing), [tests]({{site.baseurl}}/2.0/testing-orbs/), and publishes your orbs.
+1. **Ensure all tests pass.** You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline on CircleCI.com. ![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
-By default, both [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing) and [unit tests]({{site.baseurl}}/2.0/testing-orbs/#unit-testing) are enabled for this CI pipeline. It is highly recommended that you add at minimum integration tests to ensure the functionality of your orb. If your orb does not make use of scripts or you do not wish to add unit testing at this time, the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) job can be commented out.
+1. **Title Pull Request with Special Semver Tag.** The included CI config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs that pass testing on the default branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release we are intending.
 
-**2) Ensure all tests pass**
+    The tag template looks like this: `[semver:<increment>]`, where `<increment>` is replaced with one of the following values:
 
-![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
+    | Increment | Description |
+    | ----------| ----------- |
+    | major     | Issue a 1.0.0 incremented release |
+    | minor     | Issue a x.1.0 incremented release |
+    | patch     | Issue a x.x.1 incremented release |
+    | skip      | Do not issue a release |
+    {: class="table table-striped"}
 
-You can view the results of your tests directly on GitHub within the Pull Request, or for a more detailed view, watch the entire pipeline on CircleCI.com
+    For example, to release the first major public version of your orb from the `alpha` branch, your pull request may be titled `[semver:major] first orb release.` ![First major release of an orb - Pull Request]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
-**3) Title Pull Request with Special Semver Tag**
+2. **"Squash" Merge.** Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message. ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
-The included CI config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs which pass testing on the default branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release we are intending.
+1. **Complete!** If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/orbs/registry/).
 
-The tag template looks as such: `[semver:<increment>]` where `<increment>` is replaced with one of the following values:
+### Orb Publishing Process
 
-| Increment | Description|
-| ----------| -----------|
-| major     | Issue a 1.0.0 incremented release|
-| minor     | Issue a x.1.0 incremented release|
-| patch     | Issue a x.x.1 incremented release|
-| skip      | Do not issue a release|
-{: class="table table-striped"}
+If you want to dive deeper into the orb development kit and get a look at how the components work together to publish your orb, this section is for you.
 
-So for example, to release the first major public version of your orb from the `alpha` branch, your pull request may be titled `[semver:major] first orb release.`
-
-![First major release of an orb - Pull Request]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
-
-**4) "Squash" Merge**
-
-Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, it also by convention keeps the title of the Pull Request, as the commit message.
-
-![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
-
-
-**5) Complete!**
-
-If you head on over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search your orb on the [Orb Registry](https://circleci.com/orbs/registry/).
-
-### How It Works
-
-If you want to dive deeper into the Orb Development Kit and get a look at how the components work together to publish your orb, this section is for you.
-
-The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning a customizing an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-written CircleCI configuration file designed with our optimal orb development pipeline.
+The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning a customizing an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
 
 Included in the [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) directory is a README with a breakdown of the included workflows.
 
-Your orb pipeline occurs in two workflows:
+Your orb pipeline occurs across two workflows:
 * [test-pack](#test-pack)
 * [integration-test_deploy](#integration-test_deploy)
 
 #### test-pack
 
-This workflow is the first of two workflows to run, and will execute any time code is committed to the repository for any branch. You can view [this workflow in the template project here](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L40).
+[`test-pack`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L40) is the first of two workflows to run, and will execute each time code is committed to the repository on **any** branch.
 
-The `test-pack` workflow is responsible for all testing we can accomplish up until a development version of an orb is to be published. The reason this separation exists is, to create a development version of an orb, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job requires access to our Personal Access Token which will be secured in a [Restricted Context]({{site.baseurl}}/2.0/contexts/#restricting-a-context). Using a Restricted Context allows us to store our token as an environment variable, but only when the job has been triggered by us, or anyone else with access to the context.
+The `test-pack` workflow is responsible for all testing that happens prior to a development version of the orb being published. Integration tests (which happen in the next workflow) can only run once the development version of the orb is available to run the tests on. 
 
-For that reason, we first run our tests which do not require and special access, and therefore could run from open source PRs, and then we place the workflow [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval).
+A development version of the orb is created in the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job, and this job requires access to the Personal Access Token, which is secured in a [Restricted Context]({{site.baseurl}}/2.0/contexts/#restricting-a-context). Using a Restricted Context in this way allows us to store our token as an environment variable such that the job can only be triggered by someone with access to the Context, therefore 'securing' the publishing stage.
 
-![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png)
+The workflow runs as follows:
 
-When we place a job on-hold for manual approval, the workflow will wait for our physical input, via an alert prompt, before continuing. Once we authorize the manual approval, subsequent jobs will be authorized by us and may access our Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
+* Tests that do not require special access to the Personal Access Token are run, this stage can run from open source pull requests.
+* The workflow is placed [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval). ![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png)
+    The workflow will wait for a button click, via an alert prompt in the CircleCI app, before continuing. 
+* Once the manual approval is authorized, subsequent jobs will be automatically authorized and may access the Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
+* After the workflow has been approved, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
 
-After the workflow has been approved, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
+    | Published Development Tag | Description|
+    | ----------| -----------|
+    | `<namespace>/<orb>@dev:<branch>`     | A development tag linked to the branch name. Useful for testing in your configs. |
+    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}`     | A development tag specific to this SHA. Used in the following workflow. |
+    {: class="table table-striped"}
 
-| Published Development Tag | Description|
-| ----------| -----------|
-| `<namespace>/<orb>@dev:<branch>`     | A development tag linked to the branch name. Useful for testing in your configs. |
-| `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}`     | A development tag specific to this SHA. Used in the following workflow. |
-{: class="table table-striped"}
-
-You can learn more about the testing jobs on the [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs) page.
+You can learn more about the testing jobs in the [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs) guide.
 
 #### integration-test_deploy
 
-[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) is the second and last workflow to fire in our orb development pipeline. This workflow is manually triggered via API at the end of the `test-pack` workflow. This new workflow will have access to the unique [development version]({{site.baseurl}}/2.0/orb-concepts/#orb-versions-development-vs-production-vs-inline) of our orb that was produced by the `test-pack` workflow.
+[`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) is the second and last workflow to run in our orb development pipeline. This workflow is manually triggered via the API at the end of the `test-pack` workflow. This new workflow has access to the unique [development version]({{site.baseurl}}/2.0/orb-concepts/#orb-versions-development-vs-production-vs-inline) of the orb that was produced by the `test-pack` workflow.
 
-In this second stage of our pipeline we are mainly running our [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing), or testing the new orb functionality we have just added and published to the development version of our orb.
+This second stage of the pipeline runs the [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing), testing the new orb's functionality that has just been added and published to the development version..
 
-After integration testing, and only on the default branch, our deployment job will run. [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/orbs/registry/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) is responsible for taking the SHA specific development version of the orb, and promoting it to a semantically versioned public release.
+After integration testing, and only on the default branch, the deployment job will run. [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/orbs/registry/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) is responsible for taking the SHA specific development version of the orb, and promoting it to a semantically versioned public release.
 
 ```yaml
       - orb-tools/dev-promote-prod-from-commit-subject:
@@ -125,7 +108,7 @@ After integration testing, and only on the default branch, our deployment job wi
 
 The `fail-if-semver-not-indicated` parameter is set to true by default, ensuring any commits without the proper [semver tag]({{site.baseurl}}/2.0/creating-orbs/#how-to-issue-a-new-release) in the commit title, result in a failed build.
 
-You can optionally enable additional features such as publishing a version tag back to GitHub, and automatically posting new versions to the Pull Request via comment.
+You can optionally enable additional features such as publishing a version tag back to GitHub, and automatically posting new versions to the pull request via comment.
 
 ##### Publish Version Tag To GitHub
 
