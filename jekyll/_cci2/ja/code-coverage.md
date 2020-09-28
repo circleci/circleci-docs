@@ -60,9 +60,15 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.5.3-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog
@@ -70,16 +76,16 @@ jobs:
     steps:
       - checkout
       - run:
-          name: バンドル インストール
+          name: Bundle Install
           command: bundle check || bundle install
       - run:
-          name: DB の待機
+          name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
       - run:
-          name: データベースのセットアップ
+          name: Database setup
           command: bin/rails db:schema:load --trace
       - run:
-          name: テストの実行
+          name: Run Tests
           command: bin/rails test
       - store_artifacts:
           path: coverage
@@ -119,19 +125,22 @@ jobs:
   build:
     docker:
     - image: circleci/python:3.7-node-browsers-legacy
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:
-        name: テスト環境のセットアップ
+        name: Setup testing environment
         command: |
           pip install '.[test]' --user
           echo $HOME
     - run:
-        name: テストの実行
+        name: Run Tests
         command: |
           $HOME/.local/bin/coverage run -m pytest
           $HOME/.local/bin/coverage report
-          $HOME/.local/bin/coverage html  # ブラウザーで htmlcov/index.html を開きます
+          $HOME/.local/bin/coverage html  # open htmlcov/index.html in a browser
     - store_artifacts:
         path: htmlcov
 workflows:
@@ -230,6 +239,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run : mvn test
@@ -247,11 +259,14 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: npm install
       - run:
-          name: "Jest の実行とカバレッジ レポートの収集"
+          name: "Run Jest and Collect Coverage Reports"
           command: jest --collectCoverage=true
       - store_artifacts:
           path: coverage
@@ -269,10 +284,13 @@ jobs:
   build:
     docker:
       - image: circleci/php:7-fpm-browsers-legacy
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: "テストの実行"
+          name: "Run tests"
           command: phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report
       - store_artifacts:
           path:  build/coverage-report
@@ -297,11 +315,14 @@ jobs:
     docker:
 
       - image: circleci/golang:1.11
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: go build
       - run:
-          name: "アーティファクト用の一時ディレクトリの作成"
+          name: "Create a temp directory for artifacts"
           command: |
             mkdir -p /tmp/artifacts
       - run:
