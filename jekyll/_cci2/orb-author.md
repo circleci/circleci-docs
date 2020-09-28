@@ -22,6 +22,8 @@ Whether you are writing your first orb or getting ready for production level, we
 
 The Orb Development Kit refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI.
 
+<script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
+
 ### Getting Started
 
 To begin creating your new orb with the Orb Development Kit, first create a new repository on [GitHub.com](https://github.com).

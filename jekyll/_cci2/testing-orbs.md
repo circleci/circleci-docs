@@ -61,7 +61,7 @@ In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci
 
 ## Unit Testing
 
-If you are taking advantage of the Orb Development Kit's `<<include(file)>>` feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+If you are taking advantage of the Orb Development Kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
 
 ![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 

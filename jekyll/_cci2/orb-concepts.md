@@ -260,8 +260,35 @@ The file include syntax (`<<include(dir/file)>>`) is a special config enhancemen
 
 When `circleci orb pack <dir> > orb.yml` is ran against a directory with an `@orb.yml` file, the pack command will begin to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
 
-Included files are always referenced from the location of the `@orb.yml` file.
+Included files are always referenced from the relative location of the `@orb.yml` file.
 {: class="alert alert-warning"}
+
+{:.tab.fileInclude.Command-yaml}
+```yaml
+description: A simple command that imports from a file when packed.
+steps:
+  - run:
+      name: Hello Greeting
+      command: <<include(scripts/file.sh)>>
+```
+
+{:.tab.fileInclude.file-sh}
+```bash
+# This is a bash file, but could really be any text-based file
+echo "Hello World"
+
+```
+
+{:.tab.fileInclude.Packed_Command-yaml}
+```yaml
+description: A simple command that imports from a file when packed.
+steps:
+  - run:
+      name: Hello Greeting
+      command: |
+        # This is a bash file, but could really be any text-based file
+        echo "Hello World"
+```
 
 File inclusion is especially useful for separating your configuration's Bash logic from your yaml. Including Bash scripts will allow you to develop and test your Bash outside of your orb.
 
