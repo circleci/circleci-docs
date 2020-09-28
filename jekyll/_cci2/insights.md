@@ -13,7 +13,7 @@ version:
 
 
 The CircleCI Insights feature provides a dashboard for viewing the health and
-usage of your repositories build processes. _Insights_ provides time-series data
+usage of your repositories' build processes. _Insights_ provides time-series data
 overviews of credit usage, success rates, pipeline duration, and other pertinent
 information.
 
@@ -21,8 +21,11 @@ This document describes how to access the Insights feature on CircleCI Cloud and
 
 ## Usage (CircleCI Cloud)
 
-To access a project's insights, view a pipeline's workflow and click the
- **Insights** button. Alternatively, you may access the Insights page by
+Insights across your organization can be accessed from the sidebar of the
+CircleCI web application.
+
+To access a specific project's insights, view a pipeline's workflow and click
+ the **Insights** button. Alternatively, you may access the Insights page by
  clicking on the **actions** button while viewing the _pipelines dashboard_.
 
 {:.tab.insight-access.Access_by_pipeline}
