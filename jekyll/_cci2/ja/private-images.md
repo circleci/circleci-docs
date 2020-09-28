@@ -18,11 +18,11 @@ version:
 
 Docker Hub には [2020 年 11 月 1 日](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)から、送信元 IP に基づいたレート制限が導入されます。 CirlceCI では共有 IP プールからジョブを実行しているので、このレート制限による問題発生を回避するために、Docker Hub で認証済みの Docker プルを使用することを強くお勧めします。
 
-[Docker]({{site.baseurl }}/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 To protect the password, place it in a [context]({{ site.baseurl }}/2.0/contexts), or use a per-project Environment Variable.
+[Docker]({{site.baseurl }}/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、[コンテキスト]({{ site.baseurl }}/2.0/contexts)を作成するか、プロジェクトごとの環境変数を使用します。
 
-**Note:** Contexts are the more flexible option. CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
+**メモ:** コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。**
 
-In this example, we grant the "build" job access to Docker credentials context, `docker-hub-creds`, without bloating the existing `build-env-vars` context:
+この例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与します。
 
 ```yaml
 workflows:
@@ -39,11 +39,11 @@ jobs:
 
       - image: acme-private/private-image:321
         auth:
-          username: mydockerhub-user  # can specify string literal values
-          password: $DOCKERHUB_PASSWORD  # or project environment variable reference
+          username: mydockerhub-user  # 文字列リテラル値を指定します
+          password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ```
 
-You can also use images from a private repository like [gcr.io](https://cloud.google.com/container-registry) or [quay.io](https://quay.io). Make sure to supply the full registry/image URL for the `image` key, and use the appropriate username/password for the `auth` key. For example:
+また、[gcr.io](https://cloud.google.com/container-registry) や [quay.io](https://quay.io) などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。
 
     - image: quay.io/project/image:tag
       auth:
@@ -51,7 +51,7 @@ You can also use images from a private repository like [gcr.io](https://cloud.go
         password: $QUAY_PASSWORD
     
 
-Alternatively, you can utilize the `machine` executor to achieve the same result using the Docker orb:
+または、以下のように `machine` Executor と Docker Orb を使用する場合にも同じ結果が得られます。
 
 ```yaml
 version: 2.1
@@ -76,7 +76,7 @@ jobs:
           images: 'circleci/node:latest'
 ```
 
-or with cli:
+CLI を使用する場合には以下のようになります。
 
 ```yaml
 version: 2
@@ -95,7 +95,7 @@ jobs:
           docker run -d --name db company/proprietary-db:1.2.3
 ```
 
-CircleCI now supports pulling private images from Amazon's ECR service. You can start using private images from ECR in one of two ways:
+現在 CircleCI では、Amazon の ECR サービスからのプライベート イメージのプルをサポートしています。 以下のいずれかの方法で、ECR のプライベート イメージを使用できるようになります。
 
 1. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
 2. `aws_auth` を使用して、`.circleci/config.yml` に AWS 認証情報を指定する
@@ -111,7 +111,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
 ```
 
-Both options are virtually the same, however, the second option enables you to specify the variable name you want for the credentials. This can come in handy where you have different AWS credentials for different infrastructure. For example, let's say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag pushes, we run the full-blown test suite before deploying to production:
+いずれの方法もほぼ同じですが、2 番目の方法では認証情報に対して任意の変数名を指定できます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番にデプロイする前には本格的なテスト スイートを実行します。
 
 ```yaml
 version: 2
@@ -164,4 +164,4 @@ workflows:
 
 ## 関連項目
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
