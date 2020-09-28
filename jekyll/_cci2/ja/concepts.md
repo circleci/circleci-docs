@@ -101,7 +101,13 @@ jobs:
    docker: # Specifies the primary container image,
 
      - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # for the secondary or service container run in a common
       # network where ports exposed on the primary container are
       # available on localhost.
@@ -132,7 +138,13 @@ jobs:
    docker: # Specifies the primary container image,
 
      - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # for the secondary or service container run in a common
       # network where ports exposed on the primary container are
       # available on localhost.
@@ -168,6 +180,9 @@ jobs:
   build:
     docker:
       - image: <image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Special step to checkout your source code
       - run: # Run step to execute commands, see
@@ -191,8 +206,14 @@ An image is a packaged system that has instructions for creating a running conta
      # see circleci.com/docs/2.0/circleci-images/ for
      # the list of pre-built CircleCI images on dockerhub.
        - image: buildpack-deps:trusty
+         auth:
+           username: mydockerhub-user
+           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
        - image: postgres:9.4.1 # Specifies the database image
+         auth:
+           username: mydockerhub-user
+           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # for the secondary or service container run in a common
         # network where ports exposed on the primary container are
         # available on localhost.
@@ -237,7 +258,13 @@ jobs:
     docker:
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -249,7 +276,13 @@ jobs:
     docker:
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -259,7 +292,13 @@ jobs:
   build3:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -292,7 +331,13 @@ jobs:
     docker:
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -304,7 +349,13 @@ jobs:
     docker:
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -314,7 +365,13 @@ jobs:
   build3:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -357,7 +414,13 @@ jobs:
     # and more examples.
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -371,7 +434,13 @@ jobs:
     docker:
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -391,7 +460,13 @@ jobs:
     # and more examples.
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -405,7 +480,13 @@ jobs:
     docker:
 
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
