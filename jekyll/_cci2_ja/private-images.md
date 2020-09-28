@@ -20,7 +20,7 @@ Docker Hub には [2020 年 11 月 1 日](https://www.docker.com/blog/scaling-do
 
 [Docker]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を作成するか、プロジェクトごとの環境変数を使用します。
 
-**メモ:** コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。**
+**メモ:** コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。
 
 この例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与します。
 
@@ -36,7 +36,6 @@ workflows:
 jobs:
   build:
     docker:
-
       - image: acme-private/private-image:321
         auth:
           username: mydockerhub-user  # 文字列リテラル値を指定します
@@ -44,16 +43,15 @@ jobs:
 ```
 
 また、[gcr.io](https://cloud.google.com/container-registry) や [quay.io](https://quay.io) などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 以下に例を示します。
-
-    - image: quay.io/project/image:tag
-      auth:
-        username: $QUAY_USERNAME
-        password: $QUAY_PASSWORD
-    
-
+```
+- image: quay.io/project/image:tag
+  auth:
+    username: $QUAY_USERNAME
+    password: $QUAY_PASSWORD
+```    
 または、以下のように `machine` Executor と Docker Orb を使用する場合にも同じ結果が得られます。
 
-```yaml
+``` yaml
 version: 2.1
 orbs:
   docker: circleci/docker@1.4.0
@@ -61,7 +59,6 @@ orbs:
 workflows:
   my-workflow:
     jobs:
-
       - machine-job:
           context:
             - build-env-vars
@@ -89,7 +86,6 @@ jobs:
       - checkout
 
       # プライベート Docker イメージを使用して固有の所有 DB を開始します
-
       - run: |
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker run -d --name db company/proprietary-db:1.2.3
@@ -147,7 +143,6 @@ workflows:
   version: 2
   main:
     jobs:
-
       - build:
           filters:
             tags:
