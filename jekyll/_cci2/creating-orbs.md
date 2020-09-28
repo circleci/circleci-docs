@@ -86,7 +86,7 @@ You can learn more about the testing jobs in the [Orb Testing Methodologies]({{s
 
 #### integration-test_deploy
 
-[`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) is the second and last workflow to run in our orb development pipeline. This workflow is manually triggered via the API at the end of the `test-pack` workflow. This new workflow has access to the unique [development version]({{site.baseurl}}/2.0/orb-concepts/#orb-versions-development-vs-production-vs-inline) of the orb that was produced by the `test-pack` workflow.
+[`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) is the second and last workflow to run in our orb development pipeline. This workflow is automatically triggered, via the API, at the end of the `test-pack` workflow. This new workflow has access to the unique [development version]({{site.baseurl}}/2.0/orb-concepts/#orb-versions-development-vs-production-vs-inline) of the orb that was produced by the `test-pack` workflow.
 
 This second stage of the pipeline runs the [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing), testing the new orb's functionality that has just been added and published to the development version..
 
