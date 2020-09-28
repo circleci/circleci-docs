@@ -140,7 +140,13 @@ jobs:
   build:
     docker:
       - image: your/primary-image:version-tag
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mysql:5.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
            TZ: "America/Los_Angeles"
     working_directory: ~/your-dir
