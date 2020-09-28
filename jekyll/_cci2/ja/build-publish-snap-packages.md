@@ -32,6 +32,9 @@ jobs:
   build:
     docker:
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 #...
 ```
 
@@ -126,6 +129,9 @@ jobs:
   build:
     docker:
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -140,6 +146,9 @@ jobs:
     docker:
 
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - attach_workspace:
           at: .
