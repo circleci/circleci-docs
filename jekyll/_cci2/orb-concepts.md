@@ -221,7 +221,8 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 {:.no_toc}
 
 Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
-_[See: inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on types of namespaces._
+
+_[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on inline orbs._
 
 - Not published to the orb service
 - No versioning
@@ -250,7 +251,7 @@ If you are using the Orb Development Kit, orb packing is handled automatically b
 | <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
 {: class="table table-striped"}
 
-In order to "pack" and orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, we may include additional directories for each orb components type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
+In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, we may include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
 
 Additionally, the pack command provides a special pre-processor for orb developers that allows you to import code from external files using the special [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax).
 
