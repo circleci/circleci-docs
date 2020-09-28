@@ -44,12 +44,15 @@ jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
 
       - run:
-          name: ダミー アーティファクトの作成
+          name: Creating Dummy Artifacts
           command: |
             echo "my artifact file" > /tmp/artifact-1;
             mkdir /tmp/artifacts;
@@ -102,12 +105,15 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout
       - run: make
       - run: |
-          # コア ダンプ ファイルのファイル サイズ制限をなくすようにオペレーティング システムに指示します
+          # tell the operating system to remove the file size limit on core dump files 
           ulimit -c unlimited
           ./dump
       - run:
