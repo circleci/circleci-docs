@@ -60,6 +60,9 @@ jobs:
   shellcheck:
     docker:
       - image: koalaman/shellcheck-alpine:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
