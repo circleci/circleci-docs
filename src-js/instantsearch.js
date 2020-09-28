@@ -61,13 +61,20 @@ export function init () {
           const snippet = item._snippetResult
           const title = get(snippet, ['title', 'value'], '(untitled)');
           const content = get(snippet, ['content', 'value'], '');
-          const titleTag = `<strong>${title}</strong>`;
+          const titleTag = `<h4 class="result-title">${title}</h4>`;
           const contextTag = snippet.headings ?
-            `<p class="context">${snippet.headings.map(h => h.value).join(' > ')}</p>` : '';
-          const contentTag = `<p class="content">${content}</p>`;
-          const resultTag = `<div class="result-item-wrap">${titleTag + contextTag + contentTag}</div>`
+            `<p class="result-context">${snippet.headings.map(h => h.value).join(' > ')}</p>` : '';
+          const contentTag = `<p class="result-content">${content}</p>`;
 
-          return `<a href="/docs${url}">${resultTag}</a>`;
+          return `
+            <a href="/docs${url}">
+              <div class="result-item-wrap">
+                ${titleTag}
+                ${contextTag}
+                ${contentTag}
+              </div>
+            </a>
+          `;
         }
       }
     }),
@@ -87,11 +94,25 @@ export function init () {
             item: (item) => {
               const title   = get(item._highlightResult, ['full_name', 'value'], item.full_name);
               const content = get(item._highlightResult, ['description', 'value'], item.description);
-              const titleTag = `<strong>${title}</strong>`;
-              const contentTag = `<p class="content">${content}</p>`;
-              const resultTag = `<div class="result-item-wrap">${titleTag + contentTag}</div>`
+              const lastUpdateDate = get(item, ['last_updated_at', 'formatted']);
+              const extLinkIcon = `<i class="fa fa-external-link" aria-hidden="true"></i>`;
+              const titleTag = `<h4 class="result-title">${title} ${extLinkIcon}</h4>`;
+              const contentTag = content ? `<p class="result-content">${content}</p>` : '';
+              const contextTag = lastUpdateDate ? `<p class="result-context"><strong>Version Published:</strong> ${lastUpdateDate}</p>` : '';
+              const certifiedTag = item.is_certified ? `<span class="result-tag">Certified</span>` : '';
+              const partnerTag = item.is_partner ? `<span class="result-tag">Partner</span>` : '';
 
-              return `<a href="${item.url}">${resultTag}</a>`;
+              return `
+                <a href="${item.url}">
+                  <div class="result-item-wrap">
+                    ${titleTag}
+                    ${contextTag}
+                    ${contentTag}
+                    ${certifiedTag}
+                    ${partnerTag}
+                  </div>
+                </a>
+              `;
             }
           }
         })

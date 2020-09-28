@@ -54,7 +54,7 @@
 
 #hits-target {
   padding-top: $spacing-small-vertical;
-  background: #fff;
+  background: #FAFAFA;
   min-height: 500px;
 
   @media screen and (min-width: $screen-sm) {
@@ -67,36 +67,52 @@
 }
 
 .result-item-wrap {
-  padding: $spacing-small-vertical;
-  border-bottom: 1px solid $gray-200;
+  $result-spacing: $spacing-medium-vertical / 2;
 
-  a strong {
-    font-family: "roboto";
-    font-size: $font-size-small;
+  padding: $result-spacing/2 $result-spacing;
+  margin-left:  -$result-spacing;
+  margin-right: -$result-spacing;
+
+  .result-title {
+    font-size: 18px;
+    font-weight: $font-weight-bold;
+
+    .fa-external-link {
+      margin-left: 4px;
+      font-size: 80%;
+    }
   }
 
-  .content {
-    margin-top: 4px;
-    font-size: $font-size-small;
+  .result-content {
+    margin-top: 8px;
   }
 
-  .context {
+  .result-context {
     margin-top: 4px;
     color: $gray-dark;
-    font-size: $font-size-micro;
+    font-size: $font-size-small;
   }
 
-  em {
-    font-style: normal;
-    font-weight: bold;
+  .result-tag {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.7px;
+    padding: 4px 8px;
+    margin-right: 12px;
+    color: #343434;
+    background-color: white;
+    border: 0.5px solid #D8D8D8;
+  }
+
+  mark {
+    color: #1A649A;
+    background-color: #EEF2F5;
+    font-weight: $font-weight-bold;
   }
 
   &:hover {
-    background: $gray-100;
     cursor: pointer;
+    background: white;
   }
-}
-
-.ais-Hits--empty {
-  margin-left: $spacing-small-vertical;
 }
