@@ -140,7 +140,7 @@ description: >
   images built for CI.
 
   Any available tag from this list can be used:
-  https://hub.docker.com/r/cimg/node/tags
+  https://circleci.com/developer/images/image/cimg/node
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
 parameters:
@@ -148,7 +148,7 @@ parameters:
     default: '13.11'
     description: >
       Pick a specific cimg/node image version tag:
-      https://hub.docker.com/r/cimg/node
+      https://circleci.com/developer/images/image/cimg/node
     type: string
 ```
 
