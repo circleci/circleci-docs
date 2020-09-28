@@ -27,8 +27,7 @@ Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/re
 
 As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
 
-#### Usage Example
-{:.no_toc}
+{:.tab.orbCommands.Usage_Example}
 
 ```yaml
 version: 2.1
@@ -108,8 +107,11 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 
 ### Jobs
 
-Jobs define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
+[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows-overview/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
 
+When importing an orb which has jobs, you can reference them directly from your workflows.
+
+{:.tab.orbJob.Utilizing_Orb_Job}
 ```
 version: 2.1
 
@@ -130,6 +132,7 @@ Usage examples are not used by the user in their configs, but are a type of meta
 
 Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory, as follows.
 
+{:.tab.orbExamples.Usage_Example}
 ```yaml
 # Source https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/examples/example.yml
 
