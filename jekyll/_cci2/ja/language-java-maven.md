@@ -48,6 +48,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: ./mvnw package
@@ -66,6 +69,9 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: ./mvnw test
@@ -73,6 +79,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: ./mvnw -Dmaven.test.skip=true package
@@ -100,6 +109,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -129,6 +141,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: ./mvnw -Dmaven.test.skip=true package
@@ -140,6 +155,9 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - attach_workspace:
@@ -171,6 +189,9 @@ jobs:
     parallelism: 2 # parallel containers to split the tests among
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: |
@@ -187,6 +208,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: ./mvnw -Dmaven.test.skip=true package
@@ -224,6 +248,9 @@ jobs:
   test:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: ./mvnw test verify
@@ -255,6 +282,9 @@ jobs:
     parallelism: 2
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -279,6 +309,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
