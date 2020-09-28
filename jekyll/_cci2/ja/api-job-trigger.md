@@ -61,6 +61,9 @@ jobs:
   build:
     docker:
       - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           LANG: C.UTF-8
     working_directory: /my-project
@@ -71,9 +74,9 @@ jobs:
       - run: echo "run some tests"
 
       - deploy:
-          name: デプロイ ジョブを条件付きで実行
+          name: conditionally run a deploy job
           command: |
-            # これをビルド・デプロイのチェックに置き換えます (すなわち、現在のブランチが "release")
+            # replace this with your build/deploy check (i.e. current branch is "release")
             if [[ true ]]; then
               curl --user ${CIRCLE_API_USER_TOKEN}: \
                 --data build_parameters[CIRCLE_JOB]=deploy_docker \
@@ -85,6 +88,9 @@ jobs:
     docker:
 
       - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /
     steps:
       - setup_remote_docker
