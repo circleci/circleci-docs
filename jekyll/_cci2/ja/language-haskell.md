@@ -36,31 +36,34 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
-          # 依存関係のキャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-          name: キャッシュされた依存関係の復元
+          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          name: Restore Cached Dependencies
           keys:
             - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
             - cci-demo-haskell-v1-{{ checksum "stack.yaml" }}
       - run:
-          name: 依存関係の解決・更新
+          name: Resolve/Update Dependencies
           command: stack --no-terminal setup
       - run:
-          name: テストの実行
+          name: Run tests
           command: stack --no-terminal test
       - run:
-          name: 実行可能ファイルのインストール
+          name: Install executable
           command: stack --no-terminal install
       - save_cache:
-          name: 依存関係のキャッシュ
+          name: Cache Dependencies
           key: cci-demo-haskell-v1-{{ checksum "stack.yaml" }}-{{ checksum "package.yaml" }}
           paths:
             - "/root/.stack"
             - ".stack-work"
       - store_artifacts:
-          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するためにテスト サマリーをアップロードします
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -91,6 +94,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 これで、この環境で Haskell ビルド ツール `stack` を実行するように設定できました。 `config.yml` ファイルの残りの部分はすべて `steps` キーのブロックです。
