@@ -32,8 +32,6 @@ For more information on using workspaces to persist data throughout a workflow, 
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-TODO: replace ^^ with up to date image
-
 TODO: add in overview of artifacts and applicable use cases
 
 For more information on using artifacts to persist data once a job has completes, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.
