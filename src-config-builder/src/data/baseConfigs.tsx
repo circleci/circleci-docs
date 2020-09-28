@@ -28,6 +28,11 @@ const docker = (image: string): IData => {
         docker: [
           {
             image: image,
+            auth: {
+              username: "mydockerhub-user",
+              password: "$DOCKERHUB_PASSWORD",
+
+            },
           },
         ],
         steps: [
