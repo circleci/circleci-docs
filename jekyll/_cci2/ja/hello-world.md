@@ -27,6 +27,9 @@ version:
      build:
        docker: 
          - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
        steps:
          - checkout # check out the code in the project directory
          - run: echo "hello world" # run the `echo` command
@@ -54,6 +57,9 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれ
       build-android:
         docker:
           - image: circleci/android:api-25-alpha
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     
 
 詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/2.0/language-android/)を参照してください。
