@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "プライベート イメージの使用"
-short-title: "プライベート イメージの使用"
-description: "プライベート イメージを使用する方法"
+title: "Docker の認証付きプルの使用"
+short-title: "Docker の認証付きプルの使用"
+description: "Docker の認証付きプルを使用して、プライベート イメージにアクセスし、レート制限を回避する方法"
 categories:
   - containerization
 order: 50
@@ -12,13 +12,13 @@ version:
 ---
 
 
-プライベート Docker イメージを使用するには、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、CircleCI の [Project Settings (プロジェクト設定)] ページで環境変数を作成して、それを参照させるようにします。
+ここでは、Docker レジストリのプロバイダーでイメージのプルを認証する方法について説明します。
 
-Authenticated pulls allow access to private Docker images. It may also grant higher rate limits depending on your registry provider.
+プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。 お使いのレジストリ プロバイダーによっては、レート制限が引き上げられる可能性もあります。
 
-Starting [November 1, 2020](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/), Docker Hub will impose rate limits based on the originating IP. Since CircleCI runs jobs from a shared pool of IPs, it is highly recommended to use authenticated Docker pulls with Docker Hub to avoid rate limit problems.
+Docker Hub には [2020 年 11 月 1 日](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)から、送信元 IP に基づいたレート制限が導入されます。 CirlceCI では共有 IP プールからジョブを実行しているので、このレート制限による問題発生を回避するために、Docker Hub で認証済みの Docker プルを使用することを強くお勧めします。
 
-For the [Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) executor, specify username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file. To protect the password, place it in a [context]({{ site.baseurl }}/2.0/contexts), or use a per-project Environment Variable.
+[Docker]({{site.baseurl }}/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 To protect the password, place it in a [context]({{ site.baseurl }}/2.0/contexts), or use a per-project Environment Variable.
 
 **Note:** Contexts are the more flexible option. CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
 
@@ -82,20 +82,33 @@ or with cli:
 version: 2
 jobs:
   build:
-    docker:
-      - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
-        aws_auth:
-          aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定します
-              aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
+    machine: true
+    working_directory: ~/my_app
+    steps:
+      # Docker と docker-compose がプリインストールされています
+      - checkout
+
+      # プライベート Docker イメージを使用して固有の所有 DB を開始します
+
+      - run: |
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker run -d --name db company/proprietary-db:1.2.3
 ```
 
 CircleCI now supports pulling private images from Amazon's ECR service. You can start using private images from ECR in one of two ways:
 
-1. CircleCI AWS インテグレーションを使用して、AWS 認証情報を設定する
-2. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
+1. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
+2. `aws_auth` を使用して、`.circleci/config.yml` に AWS 認証情報を指定する
 
 ```yaml
-aws_auth を使用して、.circleci/config.yml に AWS 認証情報を指定する
+version: 2
+jobs:
+  build:
+    docker:
+      - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
+        aws_auth:
+          aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定します
+          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
 ```
 
 Both options are virtually the same, however, the second option enables you to specify the variable name you want for the credentials. This can come in handy where you have different AWS credentials for different infrastructure. For example, let's say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag pushes, we run the full-blown test suite before deploying to production:
@@ -105,7 +118,6 @@ version: 2
 jobs:
   build:
     docker:
-
       - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
         aws_auth:
           aws_access_key_id: $AWS_ACCESS_KEY_ID_STAGING
@@ -113,13 +125,16 @@ jobs:
     steps:
       - run:
           name: "毎日のテスト"
-          command: ".... CLI"
+          command: ".... のテスト"
+      - run:
+          name: "ステージング インフラストラクチャへのデプロイ"
+          command: "よくわからないもの.... cli"
   deploy:
     docker:
       - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
         aws_auth:
-          aws_access_key_id: $AWS_ACCESS_KEY_ID_STAGING
-          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_STAGING
+          aws_access_key_id: $AWS_ACCESS_KEY_ID_PRODUCTION
+          aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_PRODUCTION
     steps:
       - run:
           name: "フル テスト スイート"
