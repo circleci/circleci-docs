@@ -41,6 +41,9 @@ jobs:
   build:
     docker:
       - image: 'cimg/python:3.6'
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
@@ -75,6 +78,9 @@ description: >
   images built for CI.
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
+    auth:
+      username: mydockerhub-user
+      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '13.11'
@@ -95,6 +101,9 @@ description: >
   https://hub.docker.com/r/cimg/ruby/tags
 docker:
   - image: 'cimg/ruby:<< parameters.tag >>'
+    auth:
+      username: mydockerhub-user
+      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '2.7'
