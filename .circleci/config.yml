@@ -259,7 +259,6 @@ jobs:
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
-      NOKOGIRI_USE_SYSTEM_LIBRARIES: true
       JOB_RESULTS_PATH: run-results
     steps:
       - checkout
