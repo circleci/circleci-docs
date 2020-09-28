@@ -63,24 +63,27 @@ jobs:
   upload-artifact:
     docker:
       - image: circleci/openjdk:8-jdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout
       - run: mvn dependency:go-offline
       - run:
-          name: maven ビルド
+          name: maven build
           command: |
             mvn clean install
       - run:
-          name: jFrog CLI のインストール
+          name: Install jFrog CLI
           command: curl -fL https://getcli.jfrog.io | sh
       - run:
-          name: Artifactory へのプッシュ
+          name: Push to Artifactory
           command: |
             ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
             ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
-            ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # エージェント上のすべての環境変数を収集します
-            ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # Artifactory 内のビルドに ^^ を付加します
+            ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
+            ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 ```
 
 ## 関連項目
