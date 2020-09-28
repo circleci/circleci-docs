@@ -64,12 +64,18 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -458,6 +464,9 @@ executors:
     docker:
 
       - image: buildpack-deps:jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp
 
 jobs:
@@ -468,7 +477,7 @@ jobs:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をワークスペースに維持します。 
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
 
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。 これは、ワークスペースの
