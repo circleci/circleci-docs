@@ -28,6 +28,9 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 以下のように CircleCI 設定ファイルで `postgres` に POSTGRES_USER 環境変数を設定して、イメージにロールを追加します。
 
           - image: circleci/postgres:9.6-alpine
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
             environment:
               POSTGRES_USER: postgres
     
@@ -41,17 +44,23 @@ version: 2
 jobs:
   build:
 
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
+    # Primary container image where all commands run
 
     docker:
 
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
-    # サービス コンテナ イメージ
+    # Service container image
 
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
 
@@ -118,19 +127,25 @@ jobs:
     working_directory: /your/workdir
     docker:
       - image: your/image_for_primary_container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: your_postgres_user
           POSTGRES_DB: your_postgres_test
     steps:
       - checkout
       - run:
-          name: dockerize のインストール
+          name: install dockerize
           command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
           environment:
             DOCKERIZE_VERSION: v0.3.0
       - run:
-          name: db の待機
+          name: Wait for db
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 ```
 
