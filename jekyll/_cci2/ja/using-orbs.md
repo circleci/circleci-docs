@@ -48,6 +48,9 @@ Orb は、以下の要素で構成されます。
       myjob:
         docker:
           - image: "circleci/node:9.6.1"
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - myorb/sayhello:
               to: "Lev"
@@ -84,6 +87,9 @@ Executor の定義では、以下のキーを使用できます (一部のキー
       my-executor:
         docker:
           - image: circleci/ruby:2.4.0
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     
     jobs:
       my-job:
