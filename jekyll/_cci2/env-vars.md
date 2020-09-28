@@ -89,6 +89,9 @@ jobs: # basic units of work in a run
     docker: # use the Docker executor
       # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
       - image: circleci/node:10.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -213,6 +216,9 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
@@ -238,6 +244,9 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -263,6 +272,9 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
 ```
@@ -290,6 +302,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: 
@@ -322,6 +337,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: 
@@ -345,6 +363,9 @@ jobs:
   build:
     docker:
       - image: <image>:<tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # environment variables available for entrypoint/command run by docker container
         environment:
           MY_ENV_VAR_1: my-value-1
@@ -360,10 +381,16 @@ jobs:
   build:
     docker:
       - image: <image>:<tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MY_ENV_VAR_1: my-value-1
           MY_ENV_VAR_2: my-value-2
       - image: <image>:<tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MY_ENV_VAR_3: my-value-3
           MY_ENV_VAR_4: my-value-4

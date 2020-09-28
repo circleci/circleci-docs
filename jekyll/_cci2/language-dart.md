@@ -147,6 +147,9 @@ jobs:
   test:
     docker:
       - image: google/dart:2.9.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
@@ -217,6 +220,9 @@ jobs:
   build-docker:
     docker:
       - image: cimg/base:2020.08
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - setup_remote_docker
       - checkout
@@ -334,6 +340,9 @@ jobs:
   test:
     docker:
       - image: google/dart:2.9.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
@@ -395,6 +404,9 @@ jobs:
   build-docker:
     docker:
       - image: cimg/base:2020.08
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - setup_remote_docker
       - checkout

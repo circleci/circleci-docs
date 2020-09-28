@@ -35,6 +35,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: pip install -r requirements/dev.txt
@@ -59,10 +62,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
@@ -83,10 +92,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -121,10 +136,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -165,10 +186,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -203,10 +230,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -288,10 +321,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test
@@ -378,10 +417,16 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           FLASK_CONFIG: testing
           TEST_DATABASE_URL: postgresql://ubuntu@localhost/circle_test?sslmode=disable
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: circle_test

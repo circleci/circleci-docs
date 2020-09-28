@@ -81,6 +81,9 @@ jobs:
     # Define environment
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Define steps for job
     steps:
@@ -139,6 +142,9 @@ jobs:
     # Define environment
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     # Define steps for job 
     steps:
@@ -340,6 +346,9 @@ jobs:
   Gradle:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -349,6 +358,9 @@ jobs:
   Maven:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -415,6 +427,9 @@ jobs:
   Gradle:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:
@@ -424,6 +439,9 @@ jobs:
   Maven:
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Checks out source code
       - run:

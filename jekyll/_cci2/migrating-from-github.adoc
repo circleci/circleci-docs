@@ -118,6 +118,9 @@ a|
 # Docker (container) Executor
 docker:
   - image: circleci/openjdk:11.0-jdk
+    auth:
+      username: mydockerhub-user
+      password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 # Linux Ubuntu Executor
 machine: true
@@ -162,9 +165,15 @@ jobs:
     docker:
       # Primary Executor
       - image: circleci/openjdk:11.0-jdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       # Dependency Service(s)
       - image: postgres:10.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres

@@ -39,6 +39,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:jessie-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
@@ -99,6 +102,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:jessie-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:

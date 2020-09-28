@@ -191,9 +191,15 @@ jobs:
             NODE_ENV: development
         docker:
             - image: circleci/node:8
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
             - image: mongo:4.0
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGO_INITDB_ROOT_USERNAME: admin
                 MONGO_INITDB_ROOT_PASSWORD: password

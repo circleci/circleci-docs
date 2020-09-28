@@ -39,6 +39,9 @@ jobs: # a collection of jobs
     working_directory: ~/demo_app
     docker: # run build steps with docker
       - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps: # a collection of executable steps
       - checkout # checks out source code to working directory
       - restore_cache: # Restore dependency cache
@@ -86,6 +89,9 @@ jobs:
     working_directory: ~/demo_app
     docker:
       - image: crystallang/crystal:0.27.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.

@@ -56,6 +56,9 @@ jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
@@ -114,6 +117,9 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout

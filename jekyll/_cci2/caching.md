@@ -270,10 +270,16 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: circleci/mysql:5.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout

@@ -73,12 +73,18 @@ jobs: # here we define two jobs: "build" and "test"
   build:
     docker: # the docker executor is used
       - image: circleci/<language>:<version TAG> # An example docker image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Pulls code down from your VCS
       - run: <command> # An example command
   test:
     docker: # same as previous docker key.
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -118,6 +124,9 @@ version: 2
 jobs:
   docker:
     - image: circleci/<language>:<version TAG>
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   test:
     parallelism: 4
 ```
@@ -137,6 +146,9 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 3
@@ -160,6 +172,9 @@ jobs:
  build:
     docker:
       - image: circleci/node:9.8.0-stretch-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:

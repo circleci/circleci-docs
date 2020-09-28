@@ -54,6 +54,9 @@ jobs:
   build:
     docker:
       - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           LANG: C.UTF-8
     working_directory: /my-project
@@ -78,6 +81,9 @@ jobs:
     docker:
 
       - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /
     steps:
       - setup_remote_docker

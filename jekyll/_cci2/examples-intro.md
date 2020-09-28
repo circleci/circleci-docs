@@ -25,8 +25,14 @@ jobs:
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
       - image: circleci/node:4.8.2-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -69,6 +75,9 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:

@@ -38,6 +38,9 @@ jobs: # basic units of work in a run
     working_directory: ~/cci-demo-clojure # directory where steps will run
     docker: # run the steps with Docker
       - image: circleci/clojure:lein-2.9.1 # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment: # environment variables for primary container
       LEIN_ROOT: nbd
       JVM_OPTS: -Xmx3200m # limit the maximum heap size to prevent out of memory errors
@@ -95,6 +98,9 @@ version: 2
 ...
     docker:
       - image: circleci/clojure:lein-2.9.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circleci-images/#clojure) with the `lein-2.7.1` tag.
