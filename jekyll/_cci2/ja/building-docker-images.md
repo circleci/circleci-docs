@@ -74,6 +74,9 @@ jobs:
 {% highlight yaml linenos %} version: 2.1 jobs: build: docker:
 
       - image: circleci/golang:1.13-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       # ... アプリのビルド・テストに関する記述 ...
