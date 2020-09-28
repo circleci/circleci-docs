@@ -66,33 +66,35 @@ When writing a [Reusable Command]({{site.baseurl}}/2.0/reusing-config/#authoring
 
 {:.tab.minsteps.Deploy_Command_GOOD}
 ```yaml
-
-description: "A demo of a command to install a CLI, authenticate, and deploy an app"
-    parameters:
-      api-token:
-        type: env_var_name
-        default: MY_SECRET_TOKEN
-    steps:
-      - run:
-          name: "Deploying application"
-          command: |
-            pip install example
-            example login $<<parameters.api-token>>
-            example deploy my-app
+commands:
+  my-command:
+    description: "A demo of a command to install a CLI, authenticate, and deploy an app"
+        parameters:
+          api-token:
+            type: env_var_name
+            default: MY_SECRET_TOKEN
+        steps:
+          - run:
+              name: "Deploying application"
+              command: |
+                pip install example
+                example login $<<parameters.api-token>>
+                example deploy my-app
 ```
 
 {:.tab.minsteps.Deploy_Command_BAD}
 ```yaml
-
-description: "A bad example of a deploy command. Steps should be named, and combined when possible."
-    parameters:
-      api-token:
-        type: env_var_name
-        default: MY_SECRET_TOKEN
-    steps:
-      - run: pip install example
-      - run: example login $<<parameters.api-token>>
-      - run: example deploy my-app
+commands:
+  my-commands:
+    description: "A bad example of a deploy command. Steps should be named, and combined when possible."
+        parameters:
+          api-token:
+            type: env_var_name
+            default: MY_SECRET_TOKEN
+        steps:
+          - run: pip install example
+          - run: example login $<<parameters.api-token>>
+          - run: example deploy my-app
 ```
 
 #### Check For Root
