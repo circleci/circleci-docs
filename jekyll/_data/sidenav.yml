@@ -418,6 +418,9 @@ ja:
         - name: Supported Languages
           i18n_name: サポートされている言語
           link: ja/2.0/demo-apps/
+        - name: Core Features
+          i18n_name: コア機能
+          link: ja/2.0/features/ 
 
 - name: Getting Started
   i18n_name: はじめよう
