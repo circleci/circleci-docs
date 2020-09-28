@@ -113,6 +113,9 @@ jobs:
   verify-deployment:
     docker:
       - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - aws-cli/install
       - aws-cli/configure:
@@ -404,6 +407,9 @@ jobs:
   build:
     docker:
       - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - slack/notify:
           color: '#42e2f4'
@@ -440,6 +446,9 @@ jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: exit 0
       - slack/status:
@@ -520,6 +529,9 @@ jobs:
   my-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - when:
@@ -551,6 +563,9 @@ executors:
   linux: # linux executor using the node base image
     docker:
       - image: cimg/node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   windows: win/default # windows executor - uses the default executor from the windows orb
   macos: # macos executor using xcode 11.6
     macos:
