@@ -472,6 +472,9 @@ jobs:
     docker:
 
       - image: bytesguy/swiftlint:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: swiftlint lint --reporter junit | tee result.xml
@@ -484,6 +487,9 @@ jobs:
     docker:
 
       - image: bytesguy/danger:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: danger
