@@ -61,49 +61,49 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
-{:.tab.contexts.Cloud}
-```yaml
-version: 2.1
+    {:.tab.contexts.Cloud}
+    ```yaml
+    version: 2.1
 
-workflows:
-my-workflow:
- jobs:
-   - run-tests:
-       context:
-         - org-global
-         - my-context
+    workflows:
+      my-workflow:
+        jobs:
+          - run-tests:
+              context:
+                - org-global
+                - my-context
 
-jobs:
-run-tests:
- docker:
-   - image: cimg/base:2020.01
- steps:
-   - checkout
-   - run: 
-       name: "echo environment variables from org-global context"
-       command: echo $MY_ENV_VAR  
-```
+    jobs:
+      run-tests:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: 
+              name: "echo environment variables from org-global context"
+              command: echo $MY_ENV_VAR  
+    ```
 
-{:.tab.contexts.Server}
-```yaml
-version: 2.1
+    {:.tab.contexts.Server}
+    ```yaml
+    version: 2.1
 
-workflows:
-my-workflow:
- jobs:
-   - run-tests:
-       context: org-global
+    workflows:
+      my-workflow:
+        jobs:
+          - run-tests:
+              context: org-global
 
-jobs:
-run-tests:
- docker:
-   - image: cimg/base:2020.01
- steps:
-   - checkout
-   - run: 
-       name: "echo environment variables from org-global context"
-       command: echo $MY_ENV_VAR  
-```
+    jobs:
+      run-tests:
+        docker:
+          - image: cimg/base:2020.01
+        steps:
+          - checkout
+          - run: 
+              name: "echo environment variables from org-global context"
+              command: echo $MY_ENV_VAR  
+    ```
 
 ### Moving a Repository that Uses a Context
 
