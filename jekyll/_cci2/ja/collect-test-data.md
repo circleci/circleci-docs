@@ -188,9 +188,15 @@ version: 2
             docker:
     
                 - image: circleci/node:8
+                  auth:
+                    username: mydockerhub-user
+                    password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
                   environment:
                     MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
                 - image: mongo:4.0
+                  auth:
+                    username: mydockerhub-user
+                    password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
                   environment:
                     MONGO_INITDB_ROOT_USERNAME: admin
                     MONGO_INITDB_ROOT_PASSWORD: password
@@ -198,23 +204,23 @@ version: 2
             steps:
                 - checkout
     
-                # npm を更新します
+                # Update npm
     
                 - run:
                     name: update-npm
                     command: 'sudo npm install -g npm@latest'
     
-                # 依存関係をダウンロードしてキャッシュします
+                # Download and cache dependencies
     
                 - restore_cache:
                     keys:
                         - v1-dependencies-{{ checksum "package-lock.json" }}
-                    # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
+                    # fallback to using the latest cache if no exact match is found
                         - v1-dependencies-
     
                 - run: npm install
     
-                - run: npm install mocha-junit-reporter # CircleCI 専用
+                - run: npm install mocha-junit-reporter # just for CircleCI
     
                 - save_cache:
                     paths:
@@ -223,14 +229,14 @@ version: 2
 
             - run: mkdir reports
     
-                # mocha を実行します
+                # Run mocha
     
                 - run:
-                    name: npm のテスト
+                    name: npm test
                     command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
                     when: always
     
-                # eslint を実行します
+                # Run eslint
     
                 - run:
                     name: eslint
@@ -238,12 +244,12 @@ version: 2
                         ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
                     when: always
     
-                # Code Climate のカバレッジ レポートを実行します
+                # Run coverage report for Code Climate
     
                 - run:
-                    name: Code Climate テスト レポーターのセットアップ
+                    name: Setup Code Climate test-reporter
                     command: |
-                        # テスト レポーターを静的バイナリとしてダウンロードします
+                        # download test reporter as a static binary
                         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
                         chmod +x ./cc-test-reporter
                         ./cc-test-reporter before-build
@@ -253,13 +259,13 @@ version: 2
                     name: code-coverage
                     command: |
                         mkdir coverage
-                        # nyc レポートでは、nyc が既に実行されている必要があります
-                        # これにより、必要なデータが入った .nyc_output フォルダーが作成されます
+                        # nyc report requires that nyc has already been run,
+                        # which creates the .nyc_output folder containing necessary data
                         ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
                         ./cc-test-reporter after-build -t lcov
                     when: always
     
-                # 結果をアップロードします
+                # Upload results
     
                 - store_test_results:
                     path: reports
@@ -270,7 +276,7 @@ version: 2
                 - store_artifacts:
                     path: ./reports/eslint/eslint.xml
     
-                - store_artifacts: # テスト カバレッジをアーティファクトとしてアップロードします
+                - store_artifacts: # upload test coverage as artifact
                     path: ./coverage/lcov.info
                     prefix: tests
 {% endraw %}
