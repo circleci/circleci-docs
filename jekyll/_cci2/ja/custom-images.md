@@ -129,7 +129,7 @@ $ docker build <path-to-dockerfile>
 
 CircleCI でカスタム イメージを使用できるようにするには、イメージをパブリックの [Docker Registry](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker Hub では無料でパブリック イメージを無制限に保存できるため、[Docker Hub](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker Hub を使用している場合は、既存のアカウントを使用できます。
 
-**メモ:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/2.0/executor-types) で使用する場合は、パブリック リポジトリが必要です。 イメージをプライベートのままにする場合は、[プライベート イメージとリポジトリの使用方法]({{ site.baseurl }}/2.0/private-images/)に関するドキュメントで手順を確認してください。
+**メモ:** イメージを CircleCI [Docker Executor]({{ site.baseurl }}/2.0/executor-types) で使用する場合は、パブリック リポジトリが必要です。 If you want to keep your image private refer to the [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) document for instructions.
 
 この例では Docker Hub を使用していますが、必要に応じて別のレジストリを使用することも可能です。 使用するレジストリに合わせて変更してください。
 
@@ -173,6 +173,9 @@ jobs:
   build:
     docker:
       - image: circleci/cci-demo-docker-primary:0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 ご不明な点がありましたら、[コミュニティ フォーラム](https://discuss.circleci.com/)にアクセスしてください。CircleCI または他のユーザーからのサポートを受けることができます。
