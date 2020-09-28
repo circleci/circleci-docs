@@ -111,6 +111,9 @@ You do not have to use orbs to use CircleCI. The following example details how t
       one: # This is our first job.
         docker: # it uses the docker executor
           - image: circleci/ruby:2.4.1 # specifically, a docker image with ruby 2.4.1
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # Steps are a list of commands to run inside the docker container above.
         steps:
           - checkout # this pulls code down from GitHub
@@ -119,6 +122,9 @@ You do not have to use orbs to use CircleCI. The following example details how t
       two: # This is our second job.
         docker: # it runs inside a docker image, the same as above.
           - image: circleci/ruby:2.4.1
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - checkout
           - run: echo "A more familiar hi" # We run a similar echo command to above.
@@ -149,6 +155,9 @@ jobs:
   one:
     docker:
       - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "A first hello"
@@ -163,6 +172,9 @@ jobs:
   two:
     docker:
       - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: echo "A more familiar hi"  
