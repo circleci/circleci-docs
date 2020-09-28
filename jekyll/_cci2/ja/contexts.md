@@ -66,24 +66,27 @@ If you find you need to rename an org or repo that you have previously hooked up
 version: 2.1
 
 workflows:
-my-workflow:
- jobs:
+  my-workflow:
+    jobs:
 
-   - run-tests:
-       context:
-         - org-global
-         - my-context
+      - run-tests:
+          context:
+            - org-global
+            - my-context
 
 jobs:
-run-tests:
- docker:
+  run-tests:
+    docker:
 
-   - image: cimg/base:2020.01
- steps:
-   - checkout
-   - run: 
-       name: "echo environment variables from org-global context"
-       command: echo $MY_ENV_VAR  
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
 ```
 
 {:.tab.contexts.Server}
@@ -91,22 +94,25 @@ run-tests:
 version: 2.1
 
 workflows:
-my-workflow:
- jobs:
+  my-workflow:
+    jobs:
 
-   - run-tests:
-       context: org-global
+      - run-tests:
+          context: org-global
 
 jobs:
-run-tests:
- docker:
+  run-tests:
+    docker:
 
-   - image: cimg/base:2020.01
- steps:
-   - checkout
-   - run: 
-       name: "echo environment variables from org-global context"
-       command: echo $MY_ENV_VAR  
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
 ```
 
 ### Moving a Repository that Uses a Context
