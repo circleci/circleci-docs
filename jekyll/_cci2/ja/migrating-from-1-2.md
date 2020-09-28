@@ -53,12 +53,15 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
          version: 2.3
      ```
 
-     上記を以下の 2 行に置き換えます。
+     Replace with the following lines:
     
 
      ```
          docker:
            - image: circleci/ruby:2.3-jessie
+             auth:
+               username: mydockerhub-user
+               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
 
      最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。ジョブごとにコマンドを宣言します。 Docker コンテナを初めて使用する場合は、「[Docker 入門](https://docs.docker.com/get-started/#docker-concepts)」を参照してください。 
