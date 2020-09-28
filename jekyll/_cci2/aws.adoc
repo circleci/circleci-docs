@@ -212,7 +212,7 @@ CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be
 .Metrics
 image::metrics_setup.png[]
 
-. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you recieve through Telegraf. For more on this see our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
+. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you receive through Telegraf. For more on this see our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
 
 . **Distributed Tracing** is used in our support bundles, and settings should remain set to default unless a change is requested by CircleCI Support.
 
