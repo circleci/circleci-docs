@@ -133,7 +133,7 @@ In both cases, builds are returned in the order that they were created. For all 
 curl https://circleci.com/api/v1.1/me -H "Accept: application/json" -H "Circle-Token: <circle-token>"
 ```
 
-If no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To recieve the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.
+If no accept header is specified (or it is empty), CircleCI will return the data in a Clojure EDN format. To receive the data as nicely formatted JSON, include any value for the `Accept` header (e.g `text/plain`). If you prefer to receive compact JSON with no whitespace or comments, use `application/json` as the `Accept` header.
 
 ## Getting Started
 
