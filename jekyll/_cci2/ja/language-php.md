@@ -47,36 +47,39 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 
 {% raw %}
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
+version: 2 # use CircleCI 2.0
 
-jobs: # 一連のステップ
-  build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
-    docker: # Docker でステップを実行します
+jobs: # a collection of steps
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker 
 
-      - image: circleci/php:7.1-node-browsers # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
-    working_directory: ~/laravel # ステップが実行されるディレクトリ
-    steps: # 実行可能コマンドの集合
-      - checkout # ソース コードを作業ディレクトリにチェックアウトする特別なステップ
+      - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: ~/laravel # directory where steps will run
+    steps: # a set of executable commands
+      - checkout # special step to check out source code to working directory
       - run: sudo apt install -y libsqlite3-dev zlib1g-dev
       - run: sudo docker-php-ext-install zip
       - run: sudo composer self-update
-      - restore_cache: # `composer.lock` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
+      - restore_cache: # special step to restore the dependency cache if `composer.lock` does not change
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
-            # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/ja/docs/2.0/caching/ を参照)
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - composer-v1-
       - run: composer install -n --prefer-dist
-      - save_cache: # `composer.lock` キャッシュ キー テンプレートを使用して依存関係キャッシュを保存する特別なステップ
+      - save_cache: # special step to save the dependency cache with the `composer.lock` cache key template
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
-      - restore_cache: # `package.json` が変更されていない場合に、依存関係キャッシュを復元する特別なステップ
+      - restore_cache: # special step to restore the dependency cache if `package-lock.json` does not change
           keys:
             - node-v1-{{ checksum "package-lock.json" }}
-            # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします (https://circleci.com/ja/docs/2.0/caching/ を参照)
+            # fallback to using the latest cache if no exact match is found (See https://circleci.com/docs/2.0/caching/)
             - node-v1-
       - run: yarn install
-      - save_cache: # `package.json` キャッシュ キー テンプレートを使用して依存関係キャッシュを保存する特別なステップ
+      - save_cache: # special step to save the dependency cache with the `package-lock.json` cache key template
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
@@ -84,7 +87,7 @@ jobs: # 一連のステップ
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
 ```
 {% endraw %}
 
@@ -109,7 +112,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-node-browsers 
+      - image: circleci/php:7.1-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/laravel 
 ```
 
