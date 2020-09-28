@@ -95,6 +95,9 @@ orbs:
       specialthingsexecutor:
         docker:
           - image: circleci/ruby:2.7.0
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     commands:
       dospecialthings:
         steps:
@@ -123,7 +126,7 @@ When you want to author an orb, you may wish to use this example template to qui
 {% raw %}
 ```yaml
 version: 2.1
-description: これはインライン ジョブです
+description: This is an inline job
 
 orbs:
   inline_example:
@@ -131,7 +134,7 @@ orbs:
       my_inline_job:
         parameters:
           greeting_name:
-            description: #わかりやすい説明
+            description: # a helpful description
             type: string
             default: olleh
         executor: my_inline_executor
@@ -153,12 +156,15 @@ orbs:
             default: "2.4"
         docker:
           - image: circleci/ruby:<<parameters.version>>
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 workflows:
   build-test-deploy:
     jobs:
       - inline_example/my_inline_job:
-          name: mybuild # 各 Orb ジョブに名前を付けることをお勧めします
+          name: mybuild # best practice is to name each orb job
       - inline_example/my_inline_job:
           name: mybuild2
           greeting_name: world
