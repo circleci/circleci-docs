@@ -39,13 +39,16 @@ jobs: # 一連のジョブ
     docker: # Docker でビルド ステップを実行します
 
       - image: crystallang/crystal:0.27.0 # すべての `steps` が実行されるプライマリ Docker コンテナ
-    steps: # 一連の実行可能ステップ
-      - checkout # ソース コードを作業ディレクトリにチェックアウトします
-      - restore_cache: # 依存関係キャッシュを復元します
-      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps: # a collection of executable steps
+      - checkout # checks out source code to working directory
+      - restore_cache: # Restore dependency cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: dependency-cache-{{ checksum "shard.lock" }}
       - run:
-          name: 依存関係のインストール
+          name: Install dependencies.
           command: shards install
       - save_cache: # 依存関係キャッシュを保存するステップ
           key: dependency-cache-{{ checksum "shard.lock" }}
@@ -78,6 +81,9 @@ jobs:
     working_directory: ~/demo_app
     docker:
       - image: crystallang/crystal:0.27.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を作成します。
