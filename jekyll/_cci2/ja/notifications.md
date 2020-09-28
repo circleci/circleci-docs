@@ -20,20 +20,26 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
 workflows:
   version: 2
-  build_and_test: # < ワークフローに関して Slack 通知とメール通知が送信されます
+  build_and_test: # < Slack and Email notifications will be delivered for workflows
     jobs:
-    # IRC インテグレーションによってジョブごとの通知が送信されます
+    # IRC integrations will receive notification for each job.
       - build
       - test
 ```
@@ -85,6 +91,9 @@ jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - slack/notify:
           color: '#42e2f4'
@@ -116,9 +125,12 @@ jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - irc/notify:
-          server: 'IRC-server-to-connect-to' # デフォルト: IRC_SERVER 環境変数
+          server: 'IRC-server-to-connect-to' # default: IRC_SERVER environment varible.
           port: '6667' # デフォルト: 6667 (空白の場合)
           channel: 'the irc server to post in' # required parameter
           nick: 'Your IRC nick name' # default: `circleci-bot`
