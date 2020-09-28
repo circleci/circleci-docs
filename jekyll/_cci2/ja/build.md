@@ -22,7 +22,7 @@ description: "CircleCI 2.0 のビルド環境の構成"
 | ------------------------- | ------------------------------------------------------------------------------ |
 | <a href="{{ site.baseurl }}/2.0/circleci-images/">CircleCI のビルド済み Docker イメージ</a> | CircleCI が提供しているビルド済み Docker イメージの一覧                                           |
 | <a href="{{ site.baseurl }}/2.0/custom-images/">カスタム ビルドの Docker イメージの使用</a> | CircleCI におけるカスタム Docker イメージの作成方法と使用方法                                        |
-| <a href="{{ site.baseurl }}/2.0/private-images/">プライベート イメージの使用</a> | プライベート リポジトリや Amazon ECR 上にあるイメージの使用方法                                         |
+| <a href="{{ site.baseurl }}/2.0/private-images/">Using Docker Authenticated Pulls</a> | Use Docker authenticated pulls to access private images and avoid rate limits. |
 | <a href="{{ site.baseurl }}/2.0/building-docker-images/">Docker コマンドの実行手順</a> | 他の場所にデプロイしたり、高度なテストを行ったりするための Docker イメージのビルド方法や、リモート Docker コンテナ内のサービスを開始する方法 |
 | <a href="{{ site.baseurl }}/2.0/docker-compose/">docker-compose のインストールと使用</a> | docker-compose をジョブ実行時にプライマリ コンテナにインストールして使用する方法                               |
 | <a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Docker レイヤーキャッシュの有効化</a> | Docker レイヤーキャッシュ (DLC) 機能を有効化して、設定ファイルに追加する方法                                  |
