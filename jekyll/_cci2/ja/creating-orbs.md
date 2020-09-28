@@ -179,13 +179,16 @@ workflows:
 
 {% raw %}
 ```sh
-# 'circleci/hello-build@0.0.5' に解決された Orb 'circleci/hello-build@0.0.5'
+# Orb 'circleci/hello-build@0.0.5' resolved to 'circleci/hello-build@0.0.5'
 version: 2.1
 jobs:
   hello/hello-build:
     docker:
 
     - image: circleci/buildpack-deps:curl-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - run:
         command: echo "Hello ${CIRCLE_USERNAME}"
@@ -198,12 +201,12 @@ jobs:
           echo "RUNNING JOB: ${CIRCLE_JOB}"
           echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
           echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
-        name: 一部の CircleCI ランタイム環境変数の表示
+        name: Show some of the CircleCI runtime env vars
     - run:
         command: |-
           echo "uname:" $(uname -a)
           echo "arch: " $(arch)
-        name: システム情報の表示
+        name: Show system information
 workflows:
   Hello Workflow:
     jobs:
