@@ -97,7 +97,13 @@ jobs:
     working_directory: ~/mern-starter
     docker:
       - image: circleci/node:4.8.2 # Primary execution image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mongo:3.4.4         # Service/dependency image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:

@@ -59,6 +59,9 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/ruby:2.3-jessie
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   build:
     <<: *defaults
@@ -168,6 +171,9 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/node:8.9.1
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   test:
     <<: *defaults

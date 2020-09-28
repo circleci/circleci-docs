@@ -75,6 +75,9 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.13-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       # ... steps for building/testing app ...

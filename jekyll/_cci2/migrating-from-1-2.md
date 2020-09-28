@@ -48,10 +48,13 @@ The `config-translation` endpoint can help you quickly get started with converti
        ruby:
          version: 2.3
      ```
-     Replace with the following two lines:
+     Replace with the following lines:
      ```
          docker:
            - image: circleci/ruby:2.3-jessie
+             auth:
+               username: mydockerhub-user
+               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
      The primary container is an instance of the first image listed. Your job's commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers. 
      ```yaml

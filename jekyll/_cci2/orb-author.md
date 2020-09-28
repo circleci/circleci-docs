@@ -94,6 +94,9 @@ orbs:
       specialthingsexecutor:
         docker:
           - image: circleci/ruby:2.7.0
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     commands:
       dospecialthings:
         steps:
@@ -152,6 +155,9 @@ orbs:
             default: "2.4"
         docker:
           - image: circleci/ruby:<<parameters.version>>
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 workflows:
   build-test-deploy:

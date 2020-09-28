@@ -225,6 +225,9 @@ jobs:
   build:
     docker:
       - image: circleci/cci-demo-docker-primary:0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.

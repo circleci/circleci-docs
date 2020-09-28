@@ -25,6 +25,9 @@ This example adds a job called `build` that spins up a container running a [pre-
      build:
        docker: 
          - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
        steps:
          - checkout # check out the code in the project directory
          - run: echo "hello world" # run the `echo` command
@@ -54,6 +57,9 @@ jobs:
   build-android:
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for details and a sample project.

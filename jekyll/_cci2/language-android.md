@@ -55,6 +55,9 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -107,6 +110,9 @@ Directly beneath `working_directory`, we can specify container images under a `d
 ```yaml
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 We use the CircleCI-provided Android image with the `api-25-alpha` tag. See [Docker Images](#docker-images) below for more information about what images are available.
@@ -207,6 +213,9 @@ jobs:
   test:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Build debug APK and release APK

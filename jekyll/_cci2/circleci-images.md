@@ -101,6 +101,9 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.7.1-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:

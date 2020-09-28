@@ -240,7 +240,10 @@ The following section details the steps you would need, from start to finish, to
       build: 
         docker: 
           - image: "circleci/node:<< pipeline.parameters.image-tag >>"
-        environment: 
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
           IMAGETAG: "<< pipeline.parameters.image-tag >>"
         steps: 
           - run: echo "Image tag used was ${IMAGETAG}"

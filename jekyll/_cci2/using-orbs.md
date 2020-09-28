@@ -48,6 +48,9 @@ jobs:
   myjob:
     docker:
       - image: "circleci/node:9.6.1"
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - myorb/sayhello:
           to: "Lev"
@@ -86,6 +89,9 @@ executors:
   my-executor:
     docker:
       - image: circleci/ruby:2.4.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   my-job:
