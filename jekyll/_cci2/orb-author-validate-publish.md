@@ -32,9 +32,6 @@ commands:
                 default: World
         steps:
             - run: echo "Hello, << parameters.to >>"
-```sh
-echo 'version: "2.1"\ndescription: "a sample orb"' > /tmp/orb.yml
-```
 
 1. Validate your orb code using the CLI:
 ```
