@@ -19,7 +19,19 @@ circleci namespace create <my-namespace> github <my-gh-org>
 circleci orb create <my-namespace>/<my-orb-name>
 ```
 
-1. Create the content of your orb in a YAML file. Generally, you would do this in your code editor, in a git repo made for your orb, but, For this simple example, let's assume a file in `/tmp/orb.yml` could be made with a bare-bones orb like:
+1. Create the content of your orb in a YAML file. For example:
+```yaml
+version: 2.1
+description: A greeting command orb
+commands:
+    greet:
+        description: Greet someone with a "hello".
+        parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, << parameters.to >>"
 ```sh
 echo 'version: "2.1"\ndescription: "a sample orb"' > /tmp/orb.yml
 ```
