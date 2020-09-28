@@ -43,6 +43,9 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -50,7 +53,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
           name: 依存関係のダウンロード
@@ -95,6 +98,9 @@ jobs:
 ```yaml
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 `api-25-alpha` タグを指定して CircleCI 提供の Android イメージを使用します。 使用可能なイメージの詳細については、以下の「[Docker イメージ](#docker-イメージ)」を参照してください。
@@ -163,30 +169,33 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/android:api-28-alpha  # gcloud はこのイメージに含まれています
+      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
-          name: デバッグ APK とリリース APK のビルド
+          name: Build debug APK and release APK
           command: |
             ./gradlew :app:assembleDebug
             ./gradlew :app:assembleDebugAndroidTest
       - run:
-          name: Google サービス アカウントの保存
+          name: Store Google Service Account
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run:
-          name: gcloud の承認とデフォルト プロジェクトの設定
+          name: Authorize gcloud and set config defaults
           command: |
             sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
-          name: Firebase Test Lab でのテスト
+          name: Test with Firebase Test Lab
           command: >
             sudo gcloud firebase test android run \ 
               --app <local_server_path>/<app_apk>.apk \ 
               --test <local_server_path>/<app_test_apk>.apk \ 
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
-          name: gsutil 依存関係のインストールとテスト結果データのコピー
+          name: Install gsutil dependency and copy test results data
           command: |
             sudo pip install -U crcmod
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
