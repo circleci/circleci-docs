@@ -297,19 +297,25 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: circleci/mysql:5.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
 
       - checkout
       - run: cp config/{database_circleci,database}.yml
 
-      # Bundler を実行します
-      # 可能な場合は、インストールされている gem をキャッシュから読み込み、バンドル インストール後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # Run bundler
+      # Load installed gems from cache if possible, bundle install then save cache
+      # Multiple caches are used to increase the chance of a cache hit
 
       - restore_cache:
           keys:
@@ -328,9 +334,9 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
       - run: bundle exec rake db:create db:schema:load --trace
       - run: bundle exec rake factory_girl:lint
 
-      # アセットのプリコンパイルを行います
-      # 可能な場合は、アセットをキャッシュから読み込み、アセットのプリコンパイル後にキャッシュを保存します
-      # 複数のキャッシュを使用して、キャッシュ ヒットの確率を上げます
+      # Precompile assets
+      # Load assets from cache if possible, precompile assets then save cache
+      # Multiple caches are used to increase the chance of a cache hit
 
       - restore_cache:
           keys:
