@@ -116,6 +116,9 @@ executors:
   my-executor:
     docker:
       - image: circleci/ruby:2.5.1-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   my-job:
@@ -171,6 +174,9 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 3
@@ -232,36 +238,43 @@ The `environment` settings apply to entrypoint/command run by the docker contain
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
+Some registries, Docker Hub, for example, may rate limit anonymous docker pulls. It's recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field. See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
+
 Example:
 
 ```yaml
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty # プライマリ コンテナ
+      - image: buildpack-deps:trusty # primary container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           ENV: CI
 
       - image: mongo:2.6.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [--smallfiles]
 
       - image: postgres:9.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-```
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-If you are using a private image, you can specify the username and password in the `auth` field. To protect the password, you can set it as a project setting which you reference here:
-
-```yaml
-jobs:
-  build:
-    docker:
       - image: acme-private/private-image:321
         auth:
-          username: mydockerhub-user  # 文字列リテラル値を指定するか
-          password: $DOCKERHUB_PASSWORD  # UI から設定したプロジェクトの環境変数を参照するように指定します
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
@@ -272,8 +285,8 @@ jobs:
     docker:
       - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
         aws_auth:
-          aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定するか
-          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # UI から設定したプロジェクトの環境変数を参照するように指定します
+          aws_access_key_id: AKIAQWERVA  # can specify string literal values
+          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
 ```
 
 It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
@@ -283,6 +296,9 @@ jobs:
   myjob:
     docker:
       - image: "circleci/node:9.6.1"
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - sayhello:
           to: "Lev"
@@ -467,9 +483,12 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: xlarge
     steps:
-      ... // 他の構成
+      ... // other config
 ```
 
 ##### machine Executor (Linux)
@@ -605,7 +624,7 @@ jobs:
       FOO: bar
     steps:
       - run:
-          name: テストの実行
+          name: Running tests
           command: make test
 ```
 
@@ -726,7 +745,7 @@ The `background` attribute enables you to configure commands to run in the backg
 
 ```YAML
 - run:
-    name: X 仮想フレームバッファの実行
+    name: Running X virtual framebuffer
     command: Xvfb :99 -screen 0 1280x1024x24
     background: true
 
@@ -740,7 +759,7 @@ The `background` attribute enables you to configure commands to run in the backg
 ```YAML
 - run: make test
 
-# 省略形式のコマンドは複数行にわたって記述可能です
+# shorthanded command can also have multiple lines
 
 - run: |
     mkdir -p /tmp/test-results
@@ -765,9 +784,9 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 ```YAML
 - run:
-    name: CodeCov.io データのアップロード
+    name: Upload CodeCov.io Data
     command: bash <(curl -s https://codecov.io/bash) -F unittests
-    when: always # 成功しても失敗しても、コード カバレッジの結果をアップロードします
+    when: always # Uploads code coverage results, pass or fail
 ```
 
 ###### `step` 内からのジョブの終了
@@ -788,7 +807,7 @@ run: |
 ```yaml
 steps:
   - run:
-      name: アプリケーションのテスト
+      name: Testing application
       command: make test
       shell: /bin/bash
       working_directory: ~/my-app
@@ -803,7 +822,7 @@ steps:
       sudo createdb -h localhost test_db
 
   - run:
-      name: 失敗したテストのアップロード
+      name: Upload Failed Tests
       command: curl --data fail_tests.log http://example.com/error_logs
       when: on_fail
 ```
@@ -822,7 +841,7 @@ A conditional step consists of a step with the key `when` or `unless`. Under the
 
     version: 2.1
     
-    jobs: # 条件付きステップは `commands:` でも定義できます
+    jobs: # conditional steps may also be defined in `commands:`
       job_with_optional_custom_checkout:
         parameters:
           custom_checkout:
@@ -1011,12 +1030,12 @@ A path is not required here because the cache will be restored to the location f
 <br />- restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
-      # `project.clj` の正確なバージョンに対応するキャッシュが存在しない場合は、最新のキャッシュをロードします
+      # if cache for exact version of `project.clj` is not present then load any most recent one
       - v1-myapp-
 
-# ... アプリケーションをビルドおよびテストするステップ ...
+# ... Steps building and testing your application ...
 
-# `project.clj` のバージョンごとに一度だけキャッシュを保存します
+# cache will be saved only once for each version of `project.clj`
 
 - save_cache:
     key: v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
@@ -1074,7 +1093,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ```YAML
 - run:
-    name: Jekyll サイトのビルド
+    name: Build the Jekyll site
     command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
 - store_artifacts:
     path: jekyll/_site/docs/
@@ -1161,17 +1180,16 @@ The `paths` list uses `Glob` from Go, and the pattern matches [filepath.Match](h
     pattern:
         { term }
 term:
-            '*'         区切り文字を除く任意の文字シーケンスに一致します
-            '?'         区切り文字を除く任意の 1 文字に一致します
+            '*' matches any sequence of non-Separator characters
+            '?' matches any single non-Separator character
             '[' [ '^' ] { character-range }
-        ']'
-                        文字クラス (空白は不可)
-            c           文字 c に一致します ('*'、'?'、'\\'、'[' 以外) 
-            '\\' c      文字 c に一致します
+        ']' character class (must be non-empty)
+            c matches character c (c != '*', '?', '\\', '[')
+            '\\' c matches character c
     character-range:
-            c           文字 c に一致します ('\\'、'-'、']' 以外)
-            '\\' c      文字 c に一致します
-            lo '-' hi   lo <= c <= hi の範囲にある文字 c に一致します
+            c matches character c (c != '\\', '-', ']')
+            '\\' c matches character c
+            lo '-' hi matches character c for lo <= c <= hi
     
 
 The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory.
@@ -1249,6 +1267,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: latest
     working_directory: ~/main
@@ -1707,6 +1728,9 @@ executors:
     docker:
 
       - image: cimg/node:13.13
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
       xcode: 11.4
@@ -1746,18 +1770,33 @@ jobs:
     docker:
 
       - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: mongo:2.6.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [mongod, --smallfiles]
 
       - image: postgres:9.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: root
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: rabbitmq:3.5.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -1819,6 +1858,9 @@ jobs:
     docker:
 
       - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -1829,6 +1871,9 @@ jobs:
     docker:
 
       - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
