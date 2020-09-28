@@ -37,6 +37,9 @@ jobs:
     docker:
 
       - image: nlknguyen/alpine-shellcheck:v0.4.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -60,6 +63,9 @@ jobs:
     docker:
 
       - image: circleci/node-jessie-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
@@ -87,12 +93,18 @@ jobs:
     docker:
 
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # Service container image
 
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
 
@@ -128,6 +140,9 @@ jobs:
     docker:
 
       - image: <primary-container-image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       # ... steps for building/testing app ...
 
