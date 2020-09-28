@@ -18,7 +18,7 @@ version:
 
 Docker Hub には [2020 年 11 月 1 日](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)から、送信元 IP に基づいたレート制限が導入されます。 CirlceCI では共有 IP プールからジョブを実行しているので、このレート制限による問題発生を回避するために、Docker Hub で認証済みの Docker プルを使用することを強くお勧めします。
 
-[Docker]({{site.baseurl }}/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、[コンテキスト]({{ site.baseurl }}/2.0/contexts)を作成するか、プロジェクトごとの環境変数を使用します。
+[Docker]({{site.baseurl }}/ja/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を作成するか、プロジェクトごとの環境変数を使用します。
 
 **メモ:** コンテキストを作成するほうがより柔軟性の高い方法です。 CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。**
 
@@ -164,4 +164,4 @@ workflows:
 
 ## 関連項目
 
-[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
+[[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)]({{ site.baseurl }}/2.0/configuration-reference/)
