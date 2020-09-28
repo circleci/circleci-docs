@@ -66,16 +66,22 @@ jobs:
 
 ```yaml
 version: 2.1
-jobs: # ここで、"build" と "test" の 2 つのジョブを定義します
+jobs: # here we define two jobs: "build" and "test"
   build:
-    docker: # Docker Executor を使用します
-      - image: circleci/<言語>:<バージョン タグ> # Docker イメージを指定します
+    docker: # the docker executor is used
+      - image: circleci/<language>:<version TAG> # An example docker image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout # VCS からコードをプル ダウンします
-      - run: <コマンド> # コマンドを実行します
+      - checkout # Pulls code down from your VCS
+      - run: <command> # An example command
   test:
-    docker: # 上記の Docker キーと同じです
+    docker: # same as previous docker key.
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -110,7 +116,10 @@ If your project has a large test suite, you can configure your build to use [`pa
 version: 2
 jobs:
   docker:
-    - image: circleci/<言語>:<バージョン タグ>
+    - image: circleci/<language>:<version TAG>
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   test:
     parallelism: 4
 ```
@@ -130,10 +139,13 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 3
-    resource_class: large # 4 基の vCPU と 8 GB の RAM を搭載したマシンを実装します
+    resource_class: large # implements a machine with 4 vCPUS and 8gb of ram.
     steps:
       - run: make test
       - run: make
@@ -153,10 +165,13 @@ jobs:
  build:
     docker:
       - image: circleci/node:9.8.0-stretch-browsers # ここでは DLC は動作しません。キャッシュの状況は、イメージ レイヤーがどれだけ共有されているかによって決まります。
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - setup_remote_docker:
-          docker_layer_caching: true # ここで、DLC はレイヤーを明示的にキャッシュし、リビルドを回避しようとします。
+          docker_layer_caching: true # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
 ```
 
