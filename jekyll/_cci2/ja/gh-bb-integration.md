@@ -43,6 +43,9 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.4.1-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: |
           bundle install
