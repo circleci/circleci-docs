@@ -137,9 +137,9 @@ jobs:
   build:
     docker:
     - image: circleci/python:3.7-node-browsers-legacy
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - checkout
     - run:
