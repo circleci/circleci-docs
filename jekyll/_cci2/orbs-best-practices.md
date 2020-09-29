@@ -61,7 +61,7 @@ When orbs are published to the Orb Registry they are searchable by their name an
 #### Include Display Links
 {:.no_toc}
 
-Orbs utilize a special config key [`display`]({{site.baseurl}}/2.0/orb-author/#orbyml) which can hold a `source_url` for linking to your Git repository, which holds the orb source code, and `home_url` to link to the product or service home page if applicable.
+Orbs utilize a special config key [`display`]({{site.baseurl}}/2.0/orb-author/#orbyml) that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
 
 ```yaml
 display:
