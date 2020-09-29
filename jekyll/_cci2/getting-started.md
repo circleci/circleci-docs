@@ -150,13 +150,9 @@ You do not have to use orbs to use CircleCI. The following example details how
 to create a custom configuration that also uses the [workflow
 feature]({{site.baseurl}}/2.0/workflows) of CircleCI. 
 
-1. Take a moment and read the comments in the code block below. Of course, we
-do not want to be copying and pasting code without understanding what we are
-doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file
-and copy and paste the following text into it.  
+1. Take a moment and read the comments in the code block below. Of course, we do not want to be copying and pasting code without understanding what we are doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file and copy and paste the following text into it.  
 ```yaml
 version: 2
-
 jobs: # we now have TWO jobs, so that a workflow can coordinate them!
   one: # This is our first job.
     docker: # it uses the docker executor
@@ -186,13 +182,11 @@ workflows:
     jobs: # and here we list the jobs we are going to run.
       - one
       - two
- ```
+```
 
-1. Commit these changes to your repository and navigate back over to the
-    CircleCI Pipelines page. You should see your CircleCI pipeline running.
+1. Commit these changes to your repository and navigate back over to the CircleCI Pipelines page. You should see your CircleCI pipeline running.
 
-1. Click on the running pipeline to view the workflow you have created. You
-    should see that two jobs ran (or are currently running!) concurrently.
+1. Click on the running pipeline to view the workflow you have created. You should see that two jobs ran (or are currently running!) concurrently.
 
 Read more about workflows in the [Orchestrating
 Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
