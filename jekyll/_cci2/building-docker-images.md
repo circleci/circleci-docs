@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Running Docker Commands"
 short-title: "Running Docker Commands"
 description: "How to build Docker images and access remote services"
-categories: [configuring-jobs]
 order: 55
 version:
 - Cloud
@@ -25,7 +24,8 @@ jobs:
     steps:
       # ... steps for building/testing app ...
 
-      - setup_remote_docker
+      - setup_remote_docker:
+        version: 19.03.12
 ```
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
@@ -75,11 +75,15 @@ jobs:
   build:
     docker:
       - image: circleci/golang:1.13-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
+          version: 19.03.12
           docker_layer_caching: true
 
       # build and push Docker image
@@ -108,35 +112,18 @@ Let’s break down what’s happening during this build’s execution:
 
 ## Docker Version
 
-If your job requires a specific docker version, you can set it as a `version` attribute:
+To specify the Docker version, you can set it as a `version` attribute:
 
 ```
       - setup_remote_docker:
-          version: 18.06.0-ce
+          version: 19.03.12
 ```
 
-CircleCI supports multiple versions of Docker and defaults to using `17.09.0-ce`. Following are the supported stable and edge versions:
+CircleCI supports multiple versions of Docker. The following are the available versions:
 
 - `19.03.12`
 - `19.03.8`
 - `18.09.3`
-- `18.06.0-ce`
-- `18.05.0-ce`
-- `18.04.0-ce`
-- `18.03.1-ce`
-- `18.03.0-ce`
-- `18.02.1-ce`
-- `18.01.0-ce`
-- `17.12.1-ce`
-- `17.12.0-ce`
-- `17.11.0-ce`
-- `17.10.0-ce`
-- `17.09.0-ce`
-- `17.07.0-ce`
-- `17.06.1-ce`
-- `17.06.0-ce`
-- `17.05.0-ce`
-- `17.03.0-ce`
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.

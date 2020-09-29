@@ -231,6 +231,9 @@ jobs:
   hello/hello-build:
     docker:
     - image: circleci/buildpack-deps:curl-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - run:
         command: echo "Hello ${CIRCLE_USERNAME}"

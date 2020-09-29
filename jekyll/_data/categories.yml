@@ -88,10 +88,6 @@
   name: "Containerization"
 
 - section: cci2
-  slug: configuring-jobs
-  name: "Configuration"
-
-- section: cci2
   slug: optimization
   name: "Optimization"
 

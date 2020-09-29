@@ -2,8 +2,6 @@
 layout: classic-docs
 title: "通知の使用"
 short-title: "通知の使用"
-categories:
-  - configuring-jobs
 order: 100
 published: true
 ---

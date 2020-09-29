@@ -88,7 +88,13 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
@@ -114,7 +120,13 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.4-node # primary container - where job steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine # services container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout

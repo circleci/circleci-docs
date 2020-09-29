@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Database Configuration Examples"
 short-title: "Database Configuration Examples"
 description: "Example of Configuring PostgreSQL"
-categories: [configuring-jobs]
 order: 35
 version:
 - Cloud
@@ -34,6 +33,9 @@ jobs:
     
     docker:
       - image: circleci/ruby:2.4.1-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
@@ -42,6 +44,9 @@ jobs:
     # Service container image available at `host: localhost`
     
       - image: circleci/postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
@@ -106,6 +111,9 @@ jobs:
     working_directory: ~/appName
     docker:
       - image: ruby:2.3.1-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
@@ -114,6 +122,9 @@ jobs:
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
@@ -144,8 +155,14 @@ jobs:
     docker:
       # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -225,7 +242,13 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/mysql:8.0.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db

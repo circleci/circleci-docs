@@ -3,8 +3,6 @@ layout: classic-docs
 title: "Docker コマンドの実行手順"
 short-title: "Docker コマンドの実行手順"
 description: "Docker イメージをビルドし、リモート サービスにアクセスする方法"
-categories:
-  - configuring-jobs
 order: 55
 ---
 

@@ -36,6 +36,9 @@ jobs:
   build:
     docker:
       - image: alpine:3.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step
@@ -73,6 +76,9 @@ jobs:
   build:
     docker:
       - image: alpine:3.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -109,6 +115,9 @@ jobs:
     # pre-built images: https://circleci.com/docs/2.0/circleci-images/
     docker:
       - image: circleci/node:10-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -153,6 +162,9 @@ jobs:
   Hello-World:
     docker:
       - image: alpine:3.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Hello World
@@ -162,6 +174,9 @@ jobs:
   I-Have-Code:
     docker:
       - image: alpine:3.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -172,6 +187,9 @@ jobs:
   Run-With-Node:
     docker:
       - image: circleci/node:10-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Running In A Container With Node
@@ -180,6 +198,9 @@ jobs:
   Now-Complete:
     docker:
       - image: alpine:3.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Approval Complete

@@ -9,7 +9,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
 
 NOTE: CircleCI Server v{serverversion} uses the CircleCI 2.0 architecture. +
 `version: 2.0` should be used in all `.circleci/config.yml` files. +

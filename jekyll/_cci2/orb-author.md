@@ -131,7 +131,6 @@ Each directory within `src` corresponds with a [reusable configuration]({{site.b
 
 Use the `display` key to add clickable links to the orb registry for both your `home_url` (the home of the product or service), and `source_url` (the git repository URL).
 
-{:.tab.main.@orb-yml}
 ```yaml
 version: 2.1
 
@@ -152,8 +151,8 @@ Each _YAML_ file within this directory will be treated as an orb command, with a
 
 View the included _[greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml)_ command example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src).
 
-{:.tab.greet.greet-yml}
 ```yaml
+
 description: >
   # What will this command do?
   # Descriptions should be short, simple, and clear.

@@ -129,9 +129,9 @@ There are many different approaches to utilizing caching in monorepos. This type
 
 {% raw %}
 ```yaml
-    commands:
-        create_concatenated_package_lock:
-        description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
+commands:
+  create_concatenated_package_lock:
+    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
     parameters:
       filename:
         type: string
@@ -147,11 +147,11 @@ There are many different approaches to utilizing caching in monorepos. This type
 {% raw %}
 ```yaml
     steps:
-        - checkout
-        - create_concatenated_package_lock:
+      - checkout
+      - create_concatenated_package_lock:
           filename: combined-package-lock.txt
-    ## Use combined-package-lock.text in cache key
-        - restore_cache:
+      ## Use combined-package-lock.text in cache key
+      - restore_cache:
           keys:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
             - v3-deps
@@ -270,10 +270,16 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: circleci/mysql:5.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
       - checkout

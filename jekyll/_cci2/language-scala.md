@@ -46,6 +46,9 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
     steps:
@@ -101,6 +104,9 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
 ```
@@ -116,6 +122,9 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
     steps:

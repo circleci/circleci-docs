@@ -107,7 +107,6 @@ Each individual doc should begin like this:
 :icons: font                // use font awesome icons for admonitions
 :toc: macro                 // allows you to place the TOC wherever you like in the doc using toc::[]
 :toc-title:                 // gives the option to customise the TOC heading
-:sectanchors:               // adds anchors in front of section titles 
 ```
 == Attributes for Master Docs
 
