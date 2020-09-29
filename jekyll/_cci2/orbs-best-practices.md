@@ -188,7 +188,7 @@ See the following:
 
 #### Your Orb May Not Benefit From An Executor
 {:.no_toc}
-Executors are especially useful outside of orbs, in users own configs as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs. In Orbs, we usually use executors to either provide or utilize a specific execution environment when we have multiple jobs which can only be run in said environment. For example, if your orb were to rely on a specific Docker container and provided two jobs and no commands, it make make sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) used in both jobs.
+Executors are especially useful outside of orbs, in users own configs as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs. In orbs, we usually use executors to either provide or utilize a specific execution environment when we have multiple jobs which can only be run in said environment. For example, if your orb were to rely on a specific Docker container and provided two jobs and no commands, it make make sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) used in both jobs.
 
 ### Examples
 
