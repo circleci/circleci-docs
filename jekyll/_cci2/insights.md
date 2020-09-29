@@ -5,19 +5,19 @@ short-title: "Using Insights"
 description: "Viewing the status of repos and test performance"
 order: 41
 version:
-- Server v2.x
 - Cloud
+- Server v2.x
 ---
 
 ## Overview
 
 
-The CircleCI Insights feature provides a dashboard for viewing the health and
-usage of your repositories' build processes. _Insights_ provides time-series data
-overviews of credit usage, success rates, pipeline duration, and other pertinent
-information.
+The CircleCI Insights dashboard provides an overview of the health and usage of
+your repository build processes, allowing users to make better engineering
+decisions. _Insights_ provides time-series data overviews of credit usage,
+success rates, pipeline duration, and other pertinent information.
 
-This document describes how to access the Insights feature on CircleCI Cloud and Server.
+This document describes how to access and use the Insights dashboard on CircleCI Cloud and Server.
 
 ## Usage (CircleCI Cloud)
 
@@ -28,6 +28,9 @@ To access a specific project's insights, view a pipeline's workflow and click
  the **Insights** button. Alternatively, you may access the Insights page by
  clicking on the **actions** button while viewing the _pipelines dashboard_.
 
+{:.tab.insight-access.Access_by_sidebar}
+![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
+
 {:.tab.insight-access.Access_by_pipeline}
 ![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
 
@@ -37,9 +40,9 @@ To access a specific project's insights, view a pipeline's workflow and click
 
 ### Workflow Overview
 
-The insights page provides workflow details plotted over the last 90 days (with
-custom date ranges coming soon). You may also filter by different workflows at
-the top of the page. The following data is charted under the workflow overview:
+The insights page provides workflow details plotted over the last 90 days. You
+may also filter by different workflows at the top of the page. The following
+data is charted under the workflow overview:
 
 - All workflow runs
 - Workflow success rate
