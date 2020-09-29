@@ -154,7 +154,6 @@ feature]({{site.baseurl}}/2.0/workflows) of CircleCI.
 do not want to be copying and pasting code without understanding what we are
 doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file
 and copy and paste the following text into it.  
-
 ```yaml
 version: 2
 
