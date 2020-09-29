@@ -68,7 +68,7 @@ In the setup process you will be asked if you would like to save your [Personal 
 1. **Push the changes up to Github.**<br/>
 During the setup process, the `orb init` command will take several steps to prepare your automated orb development pipeline. The modified template code produced by the CLI must be pushed to the repository before the CLI can continue and automatically follow your project on circleci.com successfully. Run the following command from a separate terminal when prompted to do so:
 ```bash
-git push origin <main branch>
+git push origin <default-branch>
 ```
 Once complete, return to the CLI window and confirm the changes have been pushed.
 
