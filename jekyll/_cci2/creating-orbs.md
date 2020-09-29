@@ -99,7 +99,7 @@ This second stage of the pipeline runs the [integration tests]({{site.baseurl}}/
 After integration testing, and only on the default branch, the deployment job will run. [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/orbs/registry/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) is responsible for taking the SHA specific development version of the orb, and promoting it to a semantically versioned public release.
 
 {% raw %}
-```yaml
+```
       - orb-tools/dev-promote-prod-from-commit-subject:
           orb-name: <namespace>/<orb-name>
           context: <publishing-context>
@@ -125,7 +125,7 @@ Your CircleCI orb will ultimately be hosted and displayed on the [Orb Registry](
 To push a tag to GitHub, CircleCI will need a [deploy key with write access]({{site.baseurl}}/2.0/add-ssh-key/#circleci-cloud). Follow the linked docs to generate and add your deploy key. When complete, you will see a "fingerprint" generated `"SO:ME:FIN:G:ER:PR:IN:T"` for that key. Add your SSH fingerprint to your `orb-tools/dev-promote-prod-from-commit-subject` job via the `ssh-fingerprints` parameter.
 
 {% raw %}
-```yaml
+```
       - orb-tools/dev-promote-prod-from-commit-subject:
           publish-version-tag: true
           ssh-fingerprints: "SO:ME:FIN:G:ER:PR:IN:T"
