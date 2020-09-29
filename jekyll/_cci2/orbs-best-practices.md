@@ -169,7 +169,7 @@ parameters:
     type: string
 ```
 
-You can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
+As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 
 #### A Docker Image Parameter might be Preferable To an Executor.
 {:.no_toc}
