@@ -52,6 +52,9 @@ jobs:
   build:
     docker:
       - image: 'cimg/base:stable'
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: echo "hello"
 ```

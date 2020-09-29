@@ -3,8 +3,6 @@ layout: classic-docs
 title: "データベースの構成例"
 short-title: "データベースの構成例"
 description: "PostgreSQL の構成例"
-categories:
-  - configuring-jobs
 order: 35
 ---
 

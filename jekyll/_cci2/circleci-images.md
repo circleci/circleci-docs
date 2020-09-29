@@ -101,6 +101,9 @@ jobs:
   build:
     docker:
       - image: cimg/ruby:2.7.1-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -400,6 +403,6 @@ Note: Any variants available for this image can be used by appending the variant
 ## See Also
 {:.no_toc}
 
-- See [Using Private Images]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
+- See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
 - For information about macOS images for iOS, see ({{ site.baseurl }}/2.0/testing-ios/).
 - See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for information about how to build Docker images.

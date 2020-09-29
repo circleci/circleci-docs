@@ -41,16 +41,19 @@ DLC is only useful when creating your own Docker image  with docker build, docke
 ``` YAML
 version: 2 
 jobs: 
- build: 
-   docker: 
-     # DLC does nothing here, its caching depends on commonality of the image layers.
-     - image: circleci/node:9.8.0-stretch-browsers 
-   steps: 
-     - checkout 
-     - setup_remote_docker: 
-         docker_layer_caching: true 
-     # DLC will explicitly cache layers here and try to avoid rebuilding.
-     - run: docker build .
+  build:
+    docker:
+      # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: circleci/node:9.8.0-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      # DLC will explicitly cache layers here and try to avoid rebuilding.
+      - run: docker build .
 ``` 
 
 ## How DLC Works
@@ -66,6 +69,9 @@ The DLC volumes are deleted after 3 days of not being used in a job.
 CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50 concurrent `machine` or Remote Docker jobs per project can have access to DLC. This takes into account the parallelism of the jobs, so a maximum of 1 job with 50x parallelism will have access to DLC per project, or 2 jobs with 25x parallelism, and so on.
 
 ![Docker Layer Caching]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
+
+### Scope of Cache
+With DLC enabled, the entirety of `/var/lib/docker` is cached to the remote volume, which also includes any custom networks created in previous jobs.
 
 ### Remote Docker Environment
 {:.no_toc}
@@ -199,14 +205,18 @@ In the video example, the job runs all of the steps in a Dockerfile with the `do
 ```yaml 
 version: 2 
 jobs: 
- build: 
-   docker: 
-     - image: circleci/node:9.8.0-stretch-browsers 
-   steps: 
-     - checkout 
-     - setup_remote_docker: 
-         docker_layer_caching: true 
-     - run: docker build . 
+  build:
+    docker:
+      - image: circleci/node:9.8.0-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: docker build .
 ``` 
 
 When none of the layers in the image change between job runs, DLC pulls the layers from cache from the image that was built previously and reuses those instead of rebuilding the entire image. 
@@ -218,4 +228,3 @@ So, if you change something in the Dockerfile, all of those later steps are inva
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
-

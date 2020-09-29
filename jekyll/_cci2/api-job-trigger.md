@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using the API to Trigger Jobs"
 short-title: "Using the API to Trigger Jobs"
 description: "How to define and trigger non-build jobs"
-categories: [configuring-jobs]
 order: 80
 version:
 - Cloud
@@ -15,7 +14,7 @@ This document describes how to trigger jobs using the CircleCI API.
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> This document refers to using the legacy CircleCI API 1.0, a service that will be eventually be deprecated in favour of the <a href="https://circleci.com/docs/api/v2/#circleci-api">V2 API</a>. Consider using the <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">Pipelines</a> endpoints to trigger pipelines.</span>
+  <span> This document refers to using the legacy CircleCI API 1.0, a service that will be eventually be deprecated in favor of the <a href="https://circleci.com/docs/api/v2/">V2 API</a>. Consider using the <a href="https://circleci.com/docs/api/v2/#trigger-a-new-pipeline">Pipelines</a> endpoints to trigger pipelines.</span>
 </div>
 
 
@@ -62,6 +61,9 @@ jobs:
   build:
     docker:
       - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           LANG: C.UTF-8
     working_directory: /my-project
@@ -85,6 +87,9 @@ jobs:
   deploy_docker:
     docker:
       - image: ruby:2.4.0-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /
     steps:
       - setup_remote_docker

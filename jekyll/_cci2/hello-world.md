@@ -24,7 +24,10 @@ This example adds a job called `build` that spins up a container running a [pre-
    jobs:
      build:
        docker: 
-         - image: circleci/node:4.8.2 # the primary container, where your job's commands are run
+         - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
        steps:
          - checkout # check out the code in the project directory
          - run: echo "hello world" # run the `echo` command
@@ -54,6 +57,9 @@ jobs:
   build-android:
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for details and a sample project.
@@ -117,9 +123,9 @@ jobs:
 
 Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry).
 
-## Following Projects
+## Following / Unfollowing Projects
 
-You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your org on the Projects page in the CircleCI app, clicking the Add Projects button, and then clicking the button next to the project you want to follow or stop following.
+You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking "Projects" in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
 ## Org Switching
 

@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Configuring CircleCI"
 short-title: "Configuring CircleCI"
 description: "Reference for .circleci/config.yml"
-categories: [configuring-jobs]
 order: 20
 version:
 - Cloud
@@ -116,6 +115,9 @@ executors:
   my-executor:
     docker:
       - image: circleci/ruby:2.5.1-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
 jobs:
   my-job:
@@ -171,6 +173,9 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
     parallelism: 3
@@ -240,6 +245,8 @@ The `environment` settings apply to entrypoint/command run by the docker contain
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
+Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It's recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
+
 Example:
 
 ```yaml
@@ -247,29 +254,34 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty # primary container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           ENV: CI
 
       - image: mongo:2.6.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [--smallfiles]
 
       - image: postgres:9.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
-```
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-If you are using a private image, you can specify the username and password in the `auth` field.  To protect the password, you can set it as a project setting which you reference here:
-
-```yaml
-jobs:
-  build:
-    docker:
       - image: acme-private/private-image:321
         auth:
-          username: mydockerhub-user  # can specify string literal values
-          password: $DOCKERHUB_PASSWORD  # or project UI env-var reference
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
@@ -291,6 +303,9 @@ jobs:
   myjob:
     docker:
       - image: "circleci/node:9.6.1"
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - sayhello:
           to: "Lev"
@@ -326,19 +341,10 @@ jobs:
 ##### Available `machine` images
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202008-01` (beta) - Ubuntu 20.04, Docker v19.03.12, Docker Compose v1.26.2
 * `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 * `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
-* `circleci/classic:latest` (old default) - an Ubuntu version `14.04` image that includes Docker version `17.09.0-ce` and docker-compose version `1.14.0`, along with common language tools found in CircleCI 1.0 build image. Changes to the `latest` image are [announced](https://discuss.circleci.com/t/how-to-subscribe-to-announcements-and-notifications-from-circleci-email-rss-json/5616) at least a week in advance. Ubuntu 14.04 is now End-of-Life'd. We suggest using the Ubuntu 16.04 image.
-* `circleci/classic:edge` - an Ubuntu version `14.04` image with Docker version `17.10.0-ce` and docker-compose version `1.16.1`, along with common language tools found in CircleCI 1.0 build image.
-* `circleci/classic:201703-01` – docker 17.03.0-ce, docker-compose 1.9.0
-* `circleci/classic:201707-01` – docker 17.06.0-ce, docker-compose 1.14.0
-* `circleci/classic:201708-01` – docker 17.06.1-ce, docker-compose 1.14.0
-* `circleci/classic:201709-01` – docker 17.07.0-ce, docker-compose 1.14.0
-* `circleci/classic:201710-01` – docker 17.09.0-ce, docker-compose 1.14.0
-* `circleci/classic:201710-02` – docker 17.10.0-ce, docker-compose 1.16.1
-* `circleci/classic:201711-01` – docker 17.11.0-ce, docker-compose 1.17.1
-* `circleci/classic:201808-01` – docker 18.06.0-ce, docker-compose 1.22.0
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -367,7 +373,7 @@ workflows:
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202007-01
       docker_layer_caching: true    # default - false
 ```
 
@@ -484,6 +490,9 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     resource_class: xlarge
     steps:
       ... // other config
@@ -1041,7 +1050,7 @@ In general `deploy` step behaves just like `run` with two exceptions:
 
 When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
 
-- [Workflows](https://circleci.com/docs/2.0/workflows-overview/)
+- [Workflows](https://circleci.com/docs/2.0/workflows/)
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### Example
@@ -1255,6 +1264,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: latest
     working_directory: ~/main
@@ -1673,16 +1685,18 @@ Truthiness rules are as follows: `false`, `null`, `0`, the empty string, and `Na
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
+**Note:**
+When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
+
 ### Logic Statement Examples
 
 ```yaml
 workflows:
   my-workflow:
       when:
-        condition:
-          or:
-            - equal: [ master, << pipeline.git.branch >> ]
-            - equal: [ staging, << pipeline.git.branch >> ]
+        or:
+          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml
@@ -1704,6 +1718,9 @@ executors:
   linux-13:
     docker:
       - image: cimg/node:13.13
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
   macos: &macos-executor
     macos:
       xcode: 11.4
@@ -1742,18 +1759,33 @@ jobs:
   build:
     docker:
       - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: mongo:2.6.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         command: [mongod, --smallfiles]
 
       - image: postgres:9.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # some containers require setting environment variables
         environment:
           POSTGRES_USER: root
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
       - image: rabbitmq:3.5.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     environment:
       TEST_REPORTS: /tmp/test-reports
@@ -1810,6 +1842,9 @@ jobs:
   deploy-stage:
     docker:
       - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -1819,6 +1854,9 @@ jobs:
   deploy-prod:
     docker:
       - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:

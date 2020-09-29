@@ -240,7 +240,10 @@ The following section details the steps you would need, from start to finish, to
       build: 
         docker: 
           - image: "circleci/node:<< pipeline.parameters.image-tag >>"
-        environment: 
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment:
           IMAGETAG: "<< pipeline.parameters.image-tag >>"
         steps: 
           - run: echo "Image tag used was ${IMAGETAG}"
@@ -262,7 +265,10 @@ The following section details the steps you would need, from start to finish, to
     }' https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
-This concludes the end-to-end example of using the V2 API. For more detailed information about other endpoints you may wish to call, please refer to the [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2/#circleci-api) for an overview of all endpoints currently available.
+This concludes the end-to-end example of using the v2 API. For more detailed
+information about other endpoints you may wish to call, please refer to the
+[CircleCI API v2 Documentation]({{site.baseurl}}/api/v2) for an overview of all
+endpoints currently available.
 
 ## Additional API Use Cases
 

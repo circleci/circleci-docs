@@ -2,7 +2,6 @@
 layout: classic-docs
 title: "Collecting Test Metadata"
 short-title: "Collecting Test Metadata"
-categories: [configuring-jobs]
 description: "Collecting test metadata"
 order: 34
 version:
@@ -48,7 +47,9 @@ gem 'rspec_junit_formatter'
 gem 'minitest-ci'
 ```
 
-- Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.  
+- Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.
+
+**Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
  
 ## Metadata Collection in Custom Test Steps
 
@@ -190,9 +191,15 @@ jobs:
             NODE_ENV: development
         docker:
             - image: circleci/node:8
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
             - image: mongo:4.0
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
               environment:
                 MONGO_INITDB_ROOT_USERNAME: admin
                 MONGO_INITDB_ROOT_PASSWORD: password

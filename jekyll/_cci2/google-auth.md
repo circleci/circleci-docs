@@ -52,14 +52,15 @@ to learn more about Identity and Access Management (IAM) permissions.
 
 Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk), you may have to authenticate to the Google Container Registry.
 
-If you are using Google's public image (`google/cloud-sdk`), no authentication is needed.
-
 ```yaml
 version: 2.1
 jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 If you are using a custom image, you must authenticate to GCR. Use the [`auth` key (https://circleci.com/docs/2.0/configuration-reference/#docker) to specify credentials.
@@ -91,6 +92,9 @@ jobs:
   deploy:
     docker:
       - image: google/cloud-sdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: |
           echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-

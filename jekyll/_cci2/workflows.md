@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using Workflows to Schedule Jobs"
 short-title: "Using Workflows to Schedule Jobs"
 description: "Using Workflows to Schedule Jobs"
-categories: [configuring-jobs]
 order: 30
 version:
 - Cloud
@@ -33,14 +32,16 @@ For example, if only one job in a workflow fails, you will know it is failing in
 
 Workflows may appear with one of the following states:
 
-- RUNNING: Workflow is in progress
-- NOT RUN: Workflow was never started
-- CANCELLED: Workflow was cancelled before it finished
-- FAILING: A job in the workflow has failed. Workflows go into Failing state when one of the jobs within the graph has failed while other jobs are still running. Failing state indicates that the workflow is eventually going to fail.
-- FAILED: One or more jobs in the workflow failed. Failed state is when one or more jobs in the workflow graph have failed. Failed is a terminal state.
-- SUCCESS: All jobs in the workflow completed successfully
-- ON HOLD: A job in the workflow is waiting for approval
-- NEEDS SETUP: A workflow stanza is not included or is incorrect in the [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) for this project
+| State | Description |
+|-------|-------------|
+| RUNNING | Workflow is in progress | 
+| NOT RUN | Workflow was never started | 
+| CANCELLED | Workflow was cancelled before it finished | 
+| FAILING | A job in the workflow has failed | 
+| FAILED | One or more jobs in the workflow failed | 
+| SUCCESS | All jobs in the workflow completed successfully | 
+| ON HOLD | A job in the workflow is waiting for approval | 
+| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project | 
 
 ### Limitations
 {:.no_toc}
@@ -63,12 +64,18 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -466,6 +473,9 @@ executors:
   my-executor:
     docker:
       - image: buildpack-deps:jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp
 
 jobs:
@@ -522,6 +532,13 @@ When you use workflows, you increase your ability to rapidly respond to failures
 ## Troubleshooting
 
 This section describes common problems and solutions for Workflows.
+
+### Workflow and Subsequent Jobs Do Not Trigger
+
+If you do not see your workflows triggering, a common cause is a configuration error
+preventing the workflow from starting. As a result, the workflow does not start
+any jobs. Navigate to your project's pipelines and click on your workflow name
+to discern what might be failing.
 
 ### Rerunning Workflows Fails
 {:.no_toc}

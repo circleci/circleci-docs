@@ -52,6 +52,9 @@ jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
     docker: # run the steps with Docker 
       - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/laravel # directory where steps will run
     steps: # a set of executable commands
       - checkout # special step to check out source code to working directory
@@ -114,7 +117,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-node-browsers 
+      - image: circleci/php:7.1-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/laravel 
 ```
 

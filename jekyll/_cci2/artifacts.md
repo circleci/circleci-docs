@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Storing Build Artifacts"
 short-title: "Storing Build Artifacts"
 description: "Example of uploading artifacts created during a build"
-categories: [configuring-jobs]
 order: 70
 version:
 - Cloud
@@ -57,6 +56,9 @@ jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
@@ -115,6 +117,9 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout
@@ -162,7 +167,7 @@ for all variables that start with `:`.
 ```bash
 export CIRCLE_TOKEN=':your_token'
 
-curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
+curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
    | grep -o 'https://[^"]*' \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
 ```

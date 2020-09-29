@@ -38,6 +38,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -99,6 +102,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 We are now set to run the Haskell build tool `stack` in our environment. The remainder of our

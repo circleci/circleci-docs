@@ -3,7 +3,6 @@ layout: classic-docs
 title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
-categories: [configuring-jobs]
 order: 41
 version:
 - Cloud
@@ -50,7 +49,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
 
-    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -62,49 +61,55 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
-    {:.tab.contexts.Cloud}
-    ```yaml
-    version: 2.1
+{:.tab.contexts.Cloud}
+```yaml
+version: 2.1
 
-    workflows:
-      my-workflow:
-        jobs:
-          - run-tests:
-              context:
-                - org-global
-                - my-context
-
+workflows:
+  my-workflow:
     jobs:
-      run-tests:
-        docker:
-          - image: cimg/base:2020.01
-        steps:
-          - checkout
-          - run: 
-              name: "echo environment variables from org-global context"
-              command: echo $MY_ENV_VAR  
-    ```
+      - run-tests:
+          context:
+            - org-global
+            - my-context
 
-    {:.tab.contexts.Server}
-    ```yaml
-    version: 2.1
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+```
 
-    workflows:
-      my-workflow:
-        jobs:
-          - run-tests:
-              context: org-global
+{:.tab.contexts.Server}
+```yaml
+version: 2.1
 
+workflows:
+  my-workflow:
     jobs:
-      run-tests:
-        docker:
-          - image: cimg/base:2020.01
-        steps:
-          - checkout
-          - run: 
-              name: "echo environment variables from org-global context"
-              command: echo $MY_ENV_VAR  
-    ```
+      - run-tests:
+          context: org-global
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+```
 
 ### Moving a Repository that Uses a Context
 

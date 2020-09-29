@@ -181,7 +181,7 @@ Congratulations, you've just built your first image! Now we need to store it som
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
 
-**Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/2.0/executor-types) you must have a public repository. If you want to keep your image private refer to the [Using Private Images and Repositories]({{ site.baseurl }}/2.0/private-images/) document for instructions.
+**Note:** To use an image with the CircleCI [Docker Executor]({{ site.baseurl }}/2.0/executor-types) you must have a public repository. If you want to keep your image private refer to the [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) document for instructions.
 
 The example uses Docker Hub, but it is possible to use different registries if you prefer. Adapt the example based on the registry you are using.
 
@@ -225,6 +225,9 @@ jobs:
   build:
     docker:
       - image: circleci/cci-demo-docker-primary:0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
