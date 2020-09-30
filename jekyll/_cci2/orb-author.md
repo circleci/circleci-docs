@@ -216,7 +216,7 @@ One of the major benefits of the orb development kit is a script inclusion featu
 
 This is especially useful when writing complex orb commands, which might contain a lot of _bash_ code, _(although you could use python too!)_.
 
-{:.tab.scripts.Orb-Development-Kit-Packing}
+{:.tab.scripts.Orb_Development_Kit_Packing}
 ```yaml
 parameters:
   to:
