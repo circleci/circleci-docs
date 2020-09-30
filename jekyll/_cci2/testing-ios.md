@@ -49,8 +49,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|-------------------|--------------
- `12.2.0` | Xcode 12.2 Beta 1 (12B5018i) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3864/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-beta-1-released/37460)
- `12.0.0` | Xcode 12.0 GM (12A7209) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3851/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-gm-released/37437)
+ `12.2.0` | Xcode 12.2 Beta 2 (12B5025f) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-beta-2-released/37603)
+ `12.0.0` | Xcode 12.0 (12A7209) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3851/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-gm-released/37437)
  `11.7.0` | Xcode 11.7 (11E801a) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-7-released/37312)
  `11.6.0` | Xcode 11.6 (11E708) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)
  `11.5.0` | Xcode 11.5 (11E608c)    | 10.15.4 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)
