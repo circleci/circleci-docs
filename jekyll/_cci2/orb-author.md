@@ -262,20 +262,6 @@ echo Hello "${PARAM_TO}"
 
 This way, you can both mock and test your scripts locally.
 
-#### Orb Packing
-
-If you are using the the automated orb development kit, much of the work of running CLI commands is done for you. When you push changes to your code the included `.circleci/config.yml` file executes on CircleCI.com to validate, "pack", and publish your orb.
-
-"Packing" in relation to orbs refers to combining the multiple files and folders that make up orb components into a single `orb.yml` file, which contains only standard CircleCI config language.
-
-The `pack` command is also responsible for providing the file inclusion functionality (`<<include(file)>>`).
-
-**CLI command**
-
-`circleci orb pack <dir> > orb.yml`
-
-For orb development kit users, this step is handled automatically.
-
 ### Testing Orbs
 
 Much like any other software, there are multiple ways to test your code and it is entirely up to you as the developer to implement as many tests as desired. Within your config file right now there will be a job named [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) that will need to be updated to test your orb components. This is a type of _integration testing_. Unit testing with orbs is possible as well.

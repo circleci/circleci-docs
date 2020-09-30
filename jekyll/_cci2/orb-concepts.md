@@ -197,7 +197,7 @@ To avoid negatively impacting a user's CI process, orb authors should strictly a
 **Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
 {: class="alert alert-warning"}
 
-## Orb Versions (Development vs. Production vs Inline)
+## Orb Versions (Development vs Production vs Inline)
 
 ### Production Orbs
 {:.no_toc}
@@ -257,7 +257,13 @@ If you are using the orb development kit, orb packing is handled automatically, 
 
 In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
 
-Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax).
+Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) (`<<include(file)>>`).
+
+**CLI command**
+
+`circleci orb pack <dir> > orb.yml`
+
+For orb development kit users, this step is handled automatically.
 
 ## File Include Syntax
 
