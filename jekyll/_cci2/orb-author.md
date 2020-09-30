@@ -231,7 +231,7 @@ steps:
       command: <<include(scripts/greet.sh)>>
 ```
 
-{:.tab.scripts.Standard-YAML-Config}
+{:.tab.scripts.Standard_YAML_Config}
 ```yaml
 parameters:
   to:
