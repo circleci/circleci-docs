@@ -63,7 +63,7 @@ Switch to the **Job** tab to view cumulative time-series data on a per-job basis
 <small>
 <i> * The Insights dashboard is not a real time financial reporting tool and should
 not be used for credit reporting. The most up to date credit information can be
-found in the plans and payments tab.</i>
+found in your organization's Plan Overview.</i>
 </small>
 
 ---
