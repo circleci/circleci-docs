@@ -5,15 +5,59 @@ short-title: "インサイトの使用"
 description: "リポジトリのステータスおよびテスト パフォーマンスを表示する方法"
 order: 41
 version:
+  - Cloud
   - Server v2.x
 ---
 
+## 概要
+
+The CircleCI Insights dashboard provides an overview of the health and usage of your repository build processes, allowing users to make better engineering decisions. *Insights* provides time-series data overviews of credit usage, success rates, pipeline duration, and other pertinent information.
+
+This document describes how to access and use the Insights dashboard on CircleCI Cloud and Server.
+
+## Usage (CircleCI Cloud)
+
+Insights across your organization can be accessed from the sidebar of the CircleCI web application.
+
+To access a specific project's insights, view a pipeline's workflow and click the **Insights** button. Alternatively, you may access the Insights page by clicking on the **actions** button while viewing the *pipelines dashboard*.
+
+{:.tab.insight-access.Access_by_sidebar}
+![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-3.png)
+
+{:.tab.insight-access.Access_by_pipeline}
+![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-1.png)
+
+{:.tab.insight-access.Access_by_workflow}
+![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
+
+### Workflow Overview
+
+The insights page provides workflow details plotted over the last 90 days. You may also filter by different workflows at the top of the page. The following data is charted under the workflow overview:
+
+- All workflow runs
+- Workflow success rate
+- Workflow duration
+- Workflow credit usage
+
+### Job Overview
+
+Switch to the **Job** tab to view cumulative time-series data on a per-job basis:
+
+- Total credits used
+- Duration (the 95th percentile)
+- Total runs
+- Success rate
+
+* * *
+
+## CircleCI Server Insights
+
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
-  <span> This document refers to using the Insights page on the CircleCI <i>Server</i> product. If you are interested in accessing insights and analytics for your usage, please consider exploring the <a href="https://circleci.com/docs/api/v2/#tag/Insights">Insights endpoints</a> of the CircleCI V2 API.</span>
+  <span> The following section refers to using the Insights page on the CircleCI <i>Server</i> product. </span>
 </div>
 
-## 概要
+### Overview
 
 Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. **Note:** If you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
 
@@ -21,17 +65,13 @@ Click the Insights menu item in the CircleCI app to view a dashboard showing the
 
 The image illustrates the following data about your builds:
 
-- CircleCI でビルドされているすべてのリポジトリのリアルタイム ステータス
+- Status of all your repos building on CircleCI in real time
+- Median queue time
+- Median build time
+- Number of branches
+- Last build
 
-- 平均キュー時間
-
-- 平均ビルド時間
-
-- ブランチ数
-
-- 最終ビルド時刻
-
-## プロジェクトのインサイト
+### Project Insights
 
 Click the Insights icon on the main navigation, then click your repo name to access per-project insights.
 
@@ -39,102 +79,10 @@ The per-project insights page gives you access to the build status and build per
 
 ![header]({{ site.baseurl }}/assets/img/docs/insights-current-build.png)
 
-- **ビルド ステータス:** デフォルト ブランチに関する直近 50 件のビルドが表示されます。 右上隅でブランチを選択すると、そのブランチに関する 100 件を超えるビルド・ジョブのステータスを確認できます。
+- **Build Status:** The Insights dashboard shows the last 50 builds for your default branch. Click a branch in the top right corner to access over 100 build/job statuses for the selected branch.
 
-- **ビルド パフォーマンス:** このグラフには、最大 90 日前までのビルド・ジョブのデータが日別に集約され、各日の平均値がプロットされています。 任意のブランチをクリックして、リポジトリのパフォーマンスをモニタリングできます。
+- **Build Performance:** The Build Performance graph aggregates your build/job data for a particular day and plots the median for that day going back as far as 90 days. Monitor the performance of your repo by clicking a particular branch.
 
-## 関連項目
+### See Also
 
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
-
-## Sumo Logic とのインテグレーション
-
-Sumo Logic users may track and visualize analytical data across all of their jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app integration from the Sumo Logic partner integrations site.
-
-### Sumo Logic の CircleCI ダッシュボード
-
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
-
-Included panels:
-
-- 合計ジョブ数
-- 合計成功ジョブ数
-- 合計失敗ジョブ数
-- ジョブの結果
-- ジョブ別の平均実行時間 (秒単位)
-- プロジェクト別のジョブ数
-- 最新のジョブ (直近 10 個)
-- 時間のかかった失敗ジョブ上位 10 個 (秒単位)
-- 時間のかかった成功ジョブ上位 10 個 (秒単位)
-
-Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
-
-![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
-
-This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
-
-### Sumo Logic Orb
-
-Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/orbs/registry/orb/circleci/sumologic).
-
-#### 1. Sumo Logic Orb をインポートする
-
-Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
-
-```yaml
-orbs:
-  sumologic: circleci/sumologic@x.y.z
-```
-
-#### 2. ワークフローに *Workflow-Collector* を追加する
-
-The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
-
-```yaml
-version: 2.1
-workflows:
-  build-test-and-deploy:
-    jobs:
-      - sumologic/workflow-collector # このジョブを追加してワークフローを追跡します
-      - build
-      - test:
-          requires:
-            - build
-      - deploy:
-          requires:
-            - test
-```
-
-#### 3. ソース コレクターを 2 つ作成する
-
-You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
-
-You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
-
-To create the two source collectors:
-
-1. ダッシュボードから **[Setup Wizard (セットアップ ウィザード)]** を選択します。
-2. **[Set Up Streaming Data (ストリーミング データのセットアップ)]** を選択します。
-3. 一番下までスクロールし、**[All Other Sources (他のすべてのソース)]** を選択します。
-4. **[HTTPS Source (HTTPS ソース)]** を選択します。
-5. `Source Category` に、前述した 2 つのうちのいずれかを入力します。
-6. 結果として得られる URL を保存します。
-
-#### 4. 環境変数を追加する
-
-For each of the URLs produce in the previous step, create the corresponding environment variable.
-
-Env vars:
-
-- `JOB_HTTP_SOURCE`
-- `WORKFLOW_HTTP_SOURCE`
-
-**[How to add an environment variable to your project.]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
-
-This will link the orb with your Sumo Logic dashboard.
-
-Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
-
-## 関連項目
-
-Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
