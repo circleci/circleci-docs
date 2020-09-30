@@ -30,8 +30,6 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 
 Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
-{:.tab.elementDescription.myCommand-yml}
-
 ```yaml
 description: "Utilize this command to echo Hello to a step in the UI."
 steps:
@@ -171,7 +169,7 @@ parameters:
 
 As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 
-#### A Docker Image Parameter might be Preferable To an Executor.
+#### A Docker Image Parameter might be Preferable To an Executor
 {:.no_toc}
 Does your orb have multiple jobs which require a specific execution environment? If so, you may choose to implement a custom executor. Will your job run on most linux platforms? Consider just using the `docker` executor directly in your job, and parameterize the image.
 
@@ -186,15 +184,17 @@ See the following:
 
 ### Executors
 
-#### Your Orb May Not Benefit From An Executor
+#### Orbs do not Always Require an Executor
 {:.no_toc}
-Executors are especially useful outside of orbs, in users own configs as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs. In orbs, we usually use executors to either provide or utilize a specific execution environment when we have multiple jobs which can only be run in said environment. For example, if your orb were to rely on a specific Docker container and provided two jobs and no commands, it make make sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) used in both jobs.
+In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) to be used for both jobs.
+
+Executors are especially useful outside of orbs, as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs.
 
 ### Examples
 
-Orb [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) provide an excellent way for orb developers to share use-cases and best practices for using their orb with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
+Orb [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
 
-#### All Public Orbs Should Contain At Least One Usage Example.
+#### All Public Orbs Should Contain at least One Usage Example.
 {:.no_toc}
 
 Orbs intended for consumption by other organizations should include at least one usage example, with a description.
@@ -211,10 +211,10 @@ Each usage example must present a full example including showing the orb being i
 
 ### Parameters
 
-#### Secrets Should _Never_ Be Directly Entered
+#### Secrets Should _Never_ be Directly Entered
 {:.no_toc}
 
-Any information that could be considered "secret" such as API keys, auth tokens, passwords, ect. should never be entered directly as a parameter value. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable which will contain the secret information.
+Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information.
 
 #### Parameterize the Installation Path
 {:.no_toc}
