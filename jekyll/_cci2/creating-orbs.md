@@ -35,7 +35,7 @@ New releases are only published on merges to the default branch. The included [`
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline on CircleCI.com. ![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
 1. **Title Pull Request with Special Semver Tag.** <br/>
-The included CI config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs that pass testing on the default branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release we are intending.<br/>
+The included CI config uses the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs that pass testing on the default branch, provided that the commit message contains the correct tag designated the intended [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release.<br/>
 The tag template looks like this: `[semver:<increment>]`, where `<increment>` is replaced with one of the following values:
 
     | Increment | Description |
@@ -58,7 +58,7 @@ If you head over to the [CircleCI app](https://app.circleci.com/) you can view t
 
 If you want to dive deeper into the orb development kit and get a look at how the components work together to publish your orb, this section is for you.
 
-The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning a customizing an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
+The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
 
 Included in the [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) directory is a README with a breakdown of the included workflows.
 
