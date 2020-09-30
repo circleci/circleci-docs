@@ -61,7 +61,7 @@ When orbs are published to the Orb Registry they are searchable by their name an
 #### Include Display Links
 {:.no_toc}
 
-Orbs utilize a special config key [`display`]({{site.baseurl}}/2.0/orb-author/#orbyml) which can hold a `source_url` for linking to your Git repository, which holds the orb source code, and `home_url` to link to the product or service home page if applicable.
+Orbs utilize a special config key [`display`]({{site.baseurl}}/2.0/orb-author/#orbyml) that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
 
 ```yaml
 display:
@@ -169,7 +169,7 @@ parameters:
     type: string
 ```
 
-You can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
+As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 
 #### A Docker Image Parameter might be Preferable To an Executor.
 {:.no_toc}
@@ -188,7 +188,7 @@ See the following:
 
 #### Your Orb May Not Benefit From An Executor
 {:.no_toc}
-Executors are especially useful outside of orbs, in users own configs as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs. In Orbs, we usually use executors to either provide or utilize a specific execution environment when we have multiple jobs which can only be run in said environment. For example, if your orb were to rely on a specific Docker container and provided two jobs and no commands, it make make sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) used in both jobs.
+Executors are especially useful outside of orbs, in users own configs as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs. In orbs, we usually use executors to either provide or utilize a specific execution environment when we have multiple jobs which can only be run in said environment. For example, if your orb were to rely on a specific Docker container and provided two jobs and no commands, it make make sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) used in both jobs.
 
 ### Examples
 

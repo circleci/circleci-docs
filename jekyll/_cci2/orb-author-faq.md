@@ -43,7 +43,7 @@ Read more:
 
 * Question: How can I require a user to add an environment variable?
   
-* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user how they can obtain their API key.
+* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user on how they can obtain their API key.
 
 Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
 
@@ -100,9 +100,9 @@ steps:
 
 * Answer: The answer might be both, but it will heavily depend on the task you want to accomplish.
 
-A, orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
+An orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
 
-A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a cli, and run a deployment command, all with little to no further configuration from the user.
+A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
 
 Read more:
 * [Introduction To CircleCI Config Language]({{site.baseurl}}/2.0/config-intro/)
