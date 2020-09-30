@@ -35,7 +35,7 @@ New releases are only published on merges to the default branch. The included [`
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline on CircleCI.com. ![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
 1. **Title Pull Request with Special Semver Tag.** <br/>
-The included CI config utilizes the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs that pass testing on the default branch, if the commit message contains a special tag designating the type of [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release we are intending.<br/>
+The included CI config uses the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs that pass testing on the default branch, provided that the commit message contains the correct tag designated the intended [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release.<br/>
 The tag template looks like this: `[semver:<increment>]`, where `<increment>` is replaced with one of the following values:
 
     | Increment | Description |
