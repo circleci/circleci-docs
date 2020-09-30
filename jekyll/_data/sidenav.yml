@@ -329,6 +329,8 @@ en:
           link: 2.0/nomad-metrics/
         - name: Proxies
           link: 2.0/proxy/
+        - name: Docker Hub Pull Through Mirror
+          link: 2.0/docker-hub-pull-through-mirror/
         - name: Authentication
           link: 2.0/authentication/
         - name: VM Service
