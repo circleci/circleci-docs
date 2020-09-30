@@ -58,7 +58,7 @@ If you head over to the [CircleCI app](https://app.circleci.com/) you can view t
 
 If you want to dive deeper into the orb development kit and get a look at how the components work together to publish your orb, this section is for you.
 
-The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning a customizing an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
+The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
 
 Included in the [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) directory is a README with a breakdown of the included workflows.
 
