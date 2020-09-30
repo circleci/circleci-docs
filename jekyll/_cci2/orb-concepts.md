@@ -261,7 +261,7 @@ Additionally, the _pack_ command provides a special pre-processor for orb develo
 
 ## File Include Syntax
 
-The file include syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file. The `<<include(dir/file)>>` syntax is a special key for use with the [`circleci orb pack` command](#orb-packing) and _will not_ work more widely on CircleCI.
+The `file include` syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file. The `<<include(dir/file)>>` syntax is a special key for use with the [`circleci orb pack` command](#orb-packing) and _will not_ work more widely on CircleCI.
 
 When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
 
