@@ -40,23 +40,31 @@ To access a specific project's insights, view a pipeline's workflow and click
 
 ### Workflow Overview
 
-The insights page provides workflow details plotted over the last 90 days. You
-may also filter by different workflows at the top of the page. The following
-data is charted under the workflow overview:
+The Insights dashboard provides workflow details plotted over the last 90 days.
+**Please note that the data is not real time and there may be up to a 24 hour
+ delay**. You may also filter by different workflows at the top of the page. The
+ following data is charted under the workflow overview:
 
 - All workflow runs
 - Workflow success rate
 - Workflow duration
-- Workflow credit usage
+- Workflow credit usage*
 
 ### Job Overview
 
 Switch to the **Job** tab to view cumulative time-series data on a per-job basis:
 
-- Total credits used
+- Total credits used*
 - Duration (the 95th percentile)
 - Total runs
 - Success rate
+
+
+<small>
+<i> * The Insights dashboard is not a real time financial reporting tool and should
+not be used for credit reporting. The most up to date credit information can be
+found in your organization's Plan Overview.</i>
+</small>
 
 ---
 
