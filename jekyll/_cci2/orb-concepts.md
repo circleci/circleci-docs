@@ -134,9 +134,7 @@ See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring
 
 ### Usage Examples
 
-Usage examples are not used by the user in their configs, but are a type of metadata in orbs. Usage examples may be included by the orb developer to share how a user would utilize the orb in their config via examples on the [Orb Registry](https://circleci.com/orbs/registry/).
-
-Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory, as follows.
+Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/orbs/registry/). Below is a sample usage example:
 
 ```yaml
 # Source https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/examples/example.yml
