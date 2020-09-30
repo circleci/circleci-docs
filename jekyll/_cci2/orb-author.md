@@ -53,7 +53,7 @@ Alternatively, if you would simply like a convenient way of downloading the [Orb
 
 1. **Answer questions to configure and set up your orb.**<br/>
 In the background, the `orb init` command will be copying and customizing the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) based on your inputs. There are detailed `README.md` files within each directory that contain helpful information specific to the contents of each directory. You will also be asked for the remote git repository URL which we obtained back in step 1.<br/><br/>
-The [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) contains a full CI/CD pipeline (Described in [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/)) which will automatically [pack](), [test](({{site.baseurl}}/2.0/testing-orbs/)), and publish your orb. <br/><br/>
+The [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template) contains a full CI/CD pipeline (Described in [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/)) which will automatically [pack](), [test]({{site.baseurl}}/2.0/testing-orbs/), and publish your orb. <br/><br/>
 In the setup process you will be asked if you would like to save your [Personal API Token]({{site.baseurl}}/2.0/managing-api-tokens/) into an `orb-publishing` [context]({{site.baseurl}}/2.0/contexts/). Saving the token is necessary for publishing development and production versions of the orb.
  
     **Ensure the context is restricted**
@@ -181,7 +181,7 @@ View the full example on the [Orb Project Template](https://github.com/CircleCI-
 ##### Executors
 {:.no_toc}
 
-Author and add [Parameterized Executors]({{site.baseurl}}/2.0/reusing-config/#executors) to the `src/executors` directory.
+Author and add [Parameterized Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) to the `src/executors` directory.
 
 Each _YAML_ file within this directory will be treated as an orb executor, with a name which matches its filename.
 

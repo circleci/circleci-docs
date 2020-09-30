@@ -36,7 +36,7 @@ test-pack:
 
 When you first make a commit to your orb repository, the [test-pack](https://github.com/CircleCI-Public/Orb-Project-Template/blob/43712ad367f2f3b06b2ae46e43ddf70bd3d83222/.circleci/config.yml#L40) workflow is triggered, which contains several jobs related to validating and testing your orb.
 
-Learn more about what is included in orb project config files in the [Orb Publishing Process]({site.baseurl}}/2.0/creating-orbs) guide.
+Learn more about what is included in orb project config files in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) guide.
 
 ### YAML Lint
 

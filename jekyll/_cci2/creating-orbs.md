@@ -114,7 +114,7 @@ After integration testing, and only on the default branch, the deployment job wi
 ```
 {% endraw %}
 
-The `fail-if-semver-not-indicated` parameter is set to true by default, ensuring any commits without the proper [semver tag]({{site.baseurl}}/2.0/creating-orbs/#how-to-issue-a-new-release) in the commit title, result in a failed build.
+The `fail-if-semver-not-indicated` parameter is set to true by default, ensuring any commits without the proper [semver tag](#issue-a-new-release) in the commit title, result in a failed build.
 
 You can optionally enable additional features such as publishing a version tag back to GitHub, and automatically posting new versions to the pull request via comment.
 
