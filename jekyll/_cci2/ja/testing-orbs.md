@@ -10,186 +10,224 @@ version:
   - Cloud
 ---
 
-Orbs のテストに利用できるさまざまな手法について説明します。
+This guide covers various best practices for testing orbs.
 
 - 目次
 {:toc}
 
 ## はじめに
 
-CircleCI Orbs とは構成のエレメントをまとめたパッケージです。構成時に Orbs を使用することで、ワークフローを簡素化し、ワークフロー内でアプリケーションや Orbs をすばやく簡単にデプロイできます。 ワークフローの Orb を作成したら、Orb をデプロイしてパブリッシュする前に、Orb をテストして、一定のニーズを満たしているかどうかを確認できます。
+Orbs are open source and contributions are expected, therefore, as with all software, setting up a solid testing pipeline for your orb is important. Because orbs are created in YAML, it may seem difficult to test them effectively. With the orb development kit, there is a simple path to implementing a full range of robust tests for your orb.
 
-Orb のテストには 4 つのレベルがあります。レベルが上がるごとに内容が複雑になり、その範囲も広がります。
+## Validation
 
-- スキーマ バリデーション - このテストは、1 つの CLI コマンドで実行可能です。Orb の YAML の形式が正しいかどうか、Orb スキーマに準拠しているかどうかを確認します。
-- 展開テスト - CircleCI CLI のスクリプトを記述して実行します。このテストでは、Orb のエレメントを含む設定が処理されるときに、意図したとおりの設定が生成されるかどうかを確認します。
-- 実行時テスト - このテストを実行するには、別のテストを準備し、それらを CircleCI ビルド内で実行する必要があります。
-- インテグレーション テスト - 通常このテストは、サードパーティ サービスとの安定したパブリック インターフェースとして特別に設計された Orbs など、きわめて高度な Orbs でのみ必要になります。 Orb のインテグレーション テストを実行するには、インテグレーション先のシステムに合わせて、カスタム ビルドと独自の外部テスト環境を準備する必要があります。
+The most basic forms of testing for orbs are configuration validation and code linting. When an orb is packed and published it must be both valid YAML, and valid CircleCI syntax. Both of these checks are automatically applied when using the orb development kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. Config validation and code linting can also be performed manually, locally.
 
-ここからは、Orb テストの方法についてレベル別に詳しく説明します。
+```yaml
+# snippet from test-pack workflow
+test-pack:
+    unless: << pipeline.parameters.run-integration-tests >>
+    jobs:
+      - orb-tools/lint # Lint Yaml files
+      - orb-tools/pack # Pack orb source + validate config
+      - shellcheck/check:
+          dir: ./src/scripts
+          exclude: SC2148
+```
 
-### スキーマ バリデーション
+When you first make a commit to your orb repository, the [test-pack](https://github.com/CircleCI-Public/Orb-Project-Template/blob/43712ad367f2f3b06b2ae46e43ddf70bd3d83222/.circleci/config.yml#L40) workflow is triggered, which contains several jobs related to validating and testing your orb.
 
-Orb が有効な YAML であり、スキーマに従った正しい形式になっているかどうかをテストするには、CircleCI CLI で `circleci orb validate` を使用します。
+Learn more about what is included in orb project config files in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) guide.
+
+### YAML Lint
+
+The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/orbs/registry/orb/circleci/orb-tools), which is a major component of the orb development kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-lint).
+
+### Config Validation
+
+The `test-pack` workflow will run the [orb-tools/pack](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-pack) job, in parallel with your YAML linting job (`orb-tools/lint`), to automatically pack and validate the configuration.
+
+A singular `orb.yml` file (a packed orb) can be validated with the CircleCI CLI via `circleci orb validate orb.yml`. However, using the orb development kit, we rarely work out of singular YAML files. Instead, your configuration file is automatically validated after it has been packed with the `circleci orb pack <dir> > orb.yml` command.
+
+### Shellcheck
+
+One of the major benefits of using the orb development kit is the ability to import external bash scripts into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/scripts) directory, you can run additional tests against your scripts.
+
+The most basic tests to run against bash scripts are a form of validation: "shellchecking". This is similar to a linter for Bash, you can find out more at [shellcheck.net](https://www.shellcheck.net/).
+
+In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
+
+## Unit Testing
+
+If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+
+![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
+
+The `test-pack` workflow includes the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job, which is responsible for automatically executing [.bats](#bats-core) tests within the `src/tests` directory.
+
+When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command is generated, which *includes* the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script. Also included, is a test case example using the [BATS-Core (Bash Automation Testing System)](#bats-core) framework, in the `src/tests` directory, named [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats)
+
+{:.tab.unitTest.greet-yaml}
+
+```yaml
+<br /># Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml
+
+description: >
+  This command echos "Hello World" using file inclusion.
+parameters:
+  to:
+    type: string
+    default: "World"
+    description: "Hello to whom?"
+steps:
+
+  - run:
+      environment:
+        PARAM_TO: <<parameters.to>>
+      name: Hello Greeting
+      command: <<include(scripts/greet.sh)>>
+
+```
+
+{:.tab.unitTest.greet-sh}
+
+```bash
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh
+
+Greet() {
+    echo Hello "${PARAM_TO}"
+}
+
+# Will not run if sourced for bats-core tests.
+# View src/tests for more information.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
+    Greet
+fi
+
+```
+
+{:.tab.unitTest.greet-bats}
+```bash
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+
+# Runs prior to every test
+setup() {
+    # Load our script file.
+    source ./src/scripts/greet.sh
+}
+
+@test '1: Greet the world' {
+    # Mock environment variables or functions by exporting them (after the script has been sourced)
+    export PARAM_TO="World"
+    # Capture the output of our "Greet" function
+    result=$(Greet)
+    [ "$result" == "Hello World" ]
+}
+
+```
+
+### BATS Core
+
+The [Bash Automation Testing System](https://github.com/bats-core/bats-core) is an open source testing framework that provides a simple way to test UNIX programs.
+
+Within your [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) is a [README](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/README.md) with a full and updated tutorial for creating BATS test cases.
+
+Each `.bats` file within the [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) directory will be automatically loaded and tested by the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job provided by the [bats orb](https://circleci.com/orbs/registry/orb/circleci/bats).
 
 #### 例
 
-たとえば Orb のソースが `./src/orb.yml` にある場合、`circleci orb validate ./src/orb.yml` を実行することで、Orb が有効かどうか、設定ファイルの処理が正しく進むかどうかについて、フィードバックを受け取ることができます。 エラーが発生した場合は、最初のスキーマ バリデーション エラーが返されます。 また、ファイル パスではなく STDIN を渡しても実行できます。
+For a real-life example, take a look at the tests in our [Shellcheck orb](https://github.com/CircleCI-Public/shellcheck-orb/blob/master/src/tests/check-test.bats).
 
-たとえば、上記の例なら、`cat ./src/orb.yml | circleci orb validate -` として実行します。
+Remember, including bats tests are optional and can be removed from your configuration file if desired.
+{: class="alert alert-warning"}
 
-**メモ**: スキーマ エラーはよく「裏こそ表」と表現されます。コーディング エラーの内容を把握するには、エラー スタックの最も内側のエラーを見るのが一番です。
+Here is a simplified snippet from the Shellcheck orb's BATS test suite.
 
-バリデーション テストには、CircleCI CLI を使用してビルド内で実行する方法もあります。 `circleci/circleci-cli` Orb を直接使用して、CLI をビルドに挿入できます。また、ジョブ内でスキーマ バリデーションをデフォルトで実行するなどの便利なコマンド ジョブをいくつか含む `circleci/orb-tools` Orb を使用することも可能です。 `orb-tools` を使用して基本的なパブリッシュを実行する Orb には "hello-build" Orb などがあります。
+```bash
+# example BATS test
+setup() {
+    # Sourcing our bash script allows us to acces to functions defined within.
+    source ./src/scripts/check.sh
+    # Our script expects certain envrionment variables which would be set as parameters.
+    # We can "mock" those inputs here.
+    export SC_PARAM_OUTPUT="/tmp/shellcheck.log"
+    export SC_PARAM_SHELL="bash"
+}
 
-### 展開テスト
+teardown() {
+    # Logs are recorded in each function.
+    # We will echo it out on error, but otherwise remove it to indicate no issue.
+    rm -rf /tmp/shellcheck.log
+}
 
-次のレベルの Orb テストでは、Orb が展開されて、CircleCI システムで使用される最終的な `config.yml` が意図したとおりに生成されるかどうかをバリデーションします。
+# This is a test case in the BATS framework.
+# This is essentially just a function with a name.
+# For each test case, setup() will run -> test -> teardown() -> repeat.
 
-このテストを実行するときには、Orb を dev バージョンとしてパブリッシュし、それを設定ファイルで使用して処理するか、設定ファイルをパッケージ化してインライン Orb にしたうえで処理することをお勧めします。 次に、`circleci config` プロセスを使用し、意図していた展開状態と実際の結果を比較します。
-
-Orb が別の Orbs を参照している場合は、別の形式の展開テストを対象の Orb に実行できます。 `circleci orb` プロセスを使用すると、Orbs に依存している Orbs が解決でき、レジストリにパブリッシュしたときにどのように展開されるかを確認できます。
-
-なお、展開をテストするときは、展開される文字列リテラルではなく、データの基底構造をテストすることが肝心です。 YAML 内の記述についてアサーションする場合は、`yq` を使用すると便利です。 このツールを使用すると、特定の構造エレメントをチェックできます。文字列の比較や展開後のジョブの各部に依存しないため、テストが不安定になることもありません。
-
-以下に、CLI から基本的な展開テストを実行する手順を示します。
-
-1) `src/orb.yml` にあるシンプルな Orb を想定します。
-
-{% raw %}
-```yaml
-version: 2.1
-
-executors:
-  default:
-    parameters:
-      tag:
-        type: string
-        default: "curl-browsers"
-      docker:
-
-        - image:  circleci/buildpack-deps:parameters.tag
-
-jobs:
-  hello-build:
-    executor: default
-    steps:
-
-      - run: echo "Hello, build!"
+# Esure Shellcheck is able to find the two included shell scripts
+@test "1: Shellcheck test - Find both scripts" {
+    # Mocking inputs
+    export SC_PARAM_DIR="src/scripts"
+    export SC_PARAM_SEVERITY="style"
+    export SC_PARAM_EXCLUDE="SC2148,SC2038,SC2059"
+    Set_SHELLCHECK_EXCLUDE_PARAM
+    Run_ShellCheck
+    # Test that 2 scripts were found
+    [ $(wc -l tmp | awk '{print $1}') == 2 ]
+    # If an error is thrown anywhere in this test case, it will be considered a failure.
+    # We use a standard POSIX test command to  test the functionality of the "Run_ShellCheck" function.
+}
 ```
-{% endraw %}
 
-2) `circleci orb validate src/orb.yml` を使用して Orb をバリデーションします。
+## Integration Testing
 
-3) `circleci orb publish src/orb.yml namespace/orb@dev:0.0.1` を使用して dev バージョンをパブリッシュします。
+Up until this point, all testing has happened prior to packing the orb, and is applied to the code itself, not the finalized functioning orb. For the final, critical part of orb testing, you will test your orb commands and jobs to ensure they work as intended in production. This happens after the validation tests have run and a new development version of your orb is published.
 
-4) その Orb を `.circleci/config.yml` に入れます。
+After the development version of your orb has been published, the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow will be triggered automatically to test it.
 
-{% raw %}
-```yaml
-version: 2.1
+The `integration-test_deploy` workflow runs a series of final integration tests, and if all pass, and you are on your main deployment branch, you can deploy your orb.
 
-orbs:
-  hello: namespace/orb@dev:0.0.1
+### Testing Orb Commands
 
-workflows:
-  hello-workflow:
-    jobs:
+The first job you will see in the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow is the [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) job, a sample integration test included with the `hello-world` orb, generated by the `orb-init` command.
 
-      - hello/hello-build
-```
-{% endraw %}
+You can see the definition of the [`integration-test-1` job](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) above in the `jobs` key.
 
-`circleci config process .circleci/config.yml` を実行すると、以下のような結果が表示されます。
+      integration-test-1:
+        docker:
+          - image: cimg/base:stable
+        steps:
+          - checkout
+          - <orb-name>/greet
+    
 
-{% raw %}
-```yaml
-version: 2.1
+In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment.
 
-jobs:
-  hello/hello-build:
-    docker:
+Replace the steps of this job with commands from your orb. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
 
-      - image: circleci/buildpack-deps:curl-browsers
-    steps:
-      - run:
-          command: echo "Hello, build!"
-workflows:
-  hello-workflow:
-    jobs:
-      - hello/hello-build
-  version: 2
-```
-{% endraw %}
+### Testing Orb Jobs
 
-`config.yml` ファイルは以下のようになります。
+If we needed to test our orb's jobs, as well as commands, we can simply add our orb job right next to the `integration-test-1` job in our config under the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow.
 
-{% raw %}
-```yaml
-version: 2.1
+    integration-test_deploy:
+        when: << pipeline.parameters.run-integration-tests >>
+        jobs:
+          - integration-test-1
+          - my-orb/orb-job
+          - orb-tools/dev-promote-prod-from-commit-subject:
+              requires:
+                - integration-test-1
+                - my-orb/orb-job
+    
 
-orbs:
-  hello: namespace/orb@dev:0.0.1
+## What's Next?
 
-  workflows:
-    hello-workflow:
-    jobs:
+Once you have added new orb features, and created passing tests, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide for information on automatically publishing semantically versioned orbs.
 
-        - hello/hello-build
-```
-{% endraw %}
+## See Also
 
-これで、上記の結果をカスタム スクリプトで使用して、その構造を意図する構造と比較するテストを実行できます。 This form of testing is useful for ensuring you do not break any contracts your orb interface has established with users of the orb, while also enabling you to test different parameter inputs to determine how these parameter inputs impact what is generated during config processing.
-
-### 実行時テスト
-
-実行時テストでは、Orbs を含むアクティブなビルドを実行します。 ビルド内のジョブは、設定ファイルの一部である Orbs、またはビルドの開始時にパブリッシュされた Orbs にのみ依存するため、このテストを実行するには特別な計画が必要です。
-
-1 つの選択肢として、CircleCI CLI を使用し、ビルド内の Machine Executor 上で `circleci local execute` を使用してローカル ビルドを実行し、ビルドのジョブ内でジョブを実行する方法があります。 こうすると、ビルド出力を `stdout` に表示してアサーションすることができます。 ただし、ローカル ビルドにはワークフローをサポートしないなどの注意点があるため、この方法を利用できないことがあります。 この方法は、Orb エレメントを使用するビルドの実際の実行出力をテストする必要がある場合にもたいへん便利です。
-
-実行時テストは他にも、Orb エンティティをジョブの設定で直接使用するなどの方法で実行できます。
-
-オプションとして、実行してテストするジョブの事後ステップ、または実行してテストするコマンドの後続ステップを使用してチェックすることも可能です。 これらのステップでは、ファイル システムの状態などをチェックできますが、ジョブとコマンドの出力についてはアサーションできません。
-
-**メモ:** CircleCI では、この制限をなくせるように努めております。Orbs をテストする理想的な方法についてご意見がございましたらぜひお知らせください。
-
-また、Orb ソースを `config.yml` として使用するという方法もあります。 Orb でジョブのテストとパブリッシュを定義する場合、それらのジョブは Orb で定義されているすべての項目にアクセスできます。 ただし、この方法では、無関係なジョブやコマンドを Orb に追加しなければならない場合があり、Orb がテストとパブリッシュに必要なすべての Orb に依存するという欠点もあります。
-
-さらに別の方法として、ビルドの実行時に dev バージョンの Orb をパブリッシュしてから、その dev バージョンを利用する設定ファイルを使用するブランチに自動的にプッシュするという方法もあります。 この新しいビルドでテストを実行できます。 この方法の欠点は、実際のテストを行うビルドがそのコミットに直接関連付けられていないことと、Orb を変更するたびに複数のジョブを処理する必要があることです。
-
-### インテグレーション テスト
-
-Orbs と外部サービスとのやり取りについてテストしたい場合は、 状況に応じて以下のような方法でテストできます。
-
-- やり取りするサービスのドライラン機能を Orb でサポートし、そのモードをテストで使用します。
-- 適切に設定されたテスト アカウントを使用して実際にサービスとやり取りし、パブリッシュされた dev バージョンの Orb を使用してこのテストを実行するリポジトリを別途用意します。
-- ジョブの別のコンテナでローカル サービスをスピンアップします。
-
-## Orb テストのベスト プラクティス
-
-Orbs テストにおける最大の問題は、Orb ソース コードを含むリポジトリに新しいコミットを単純にプッシュできないという点にあります。 これは、Orbs が展開後の `config.yml` にビルドの開始時に補間され、そのコミットに含まれる Orb には最新の変更が反映されていないことが原因です。
-
-Orb と CircleCI プラットフォームの互換性が維持されるように Orbs をテストするには、インライン Orbs や外部リポジトリを使用するなど、いくつかの方法があります。 また、CircleCI では、Orbs テストの新しい方法の開発を進めています。
-
-## 手法
-
-### ローカルでの Orbs のテスト
-
-Orbs をローカルでテストするなら、インライン Orb を作成すると簡単です。 インライン Orb を作成することで、アクティブな開発中でも Orb をテストできます。 インライン Orbs は、Orb の開発時や、長い設定に含まれるジョブやコマンドの名前空間を作成するときに使用すると便利です。
-
-インライン Orb の作成方法の詳細については、CircleCI ドキュメントの「[Orbs の作成]({{site.baseurl}}/2.0/creating-orbs/)」ページを参照してください。
-
-### Orbs テストの自動化
-
-Orbs テストは、複数のレベルから選択して実行できます。 テストのレベルは、Orb の複雑さやユーザーの範囲を考慮して決定します。
-
-どのレベルのテストでも、CircleCI CLI を使用して、Orb をローカルでバリデーションするか、ビルド内でテストを自動化することをお勧めします。 CLI のインストール手順については、CLI に関するドキュメントを参照してください。
-
-高度なテストを実行する場合は、Bats などのシェル単体テスト フレームワークも使用できます。
-
-## 関連項目
-
-- [Orb のコンセプト]({{site.baseurl}}/2.0/using-orbs/): CircleCI Orbs の基本的な概念
-- [Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
-- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
+- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
+- Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
+- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
