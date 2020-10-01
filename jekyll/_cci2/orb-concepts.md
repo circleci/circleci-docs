@@ -23,12 +23,9 @@ CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) featur
 
 ### Commands
 
-Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running BASH or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
+Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running bash or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
 
 As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
-
-#### Usage Example
-{:.no_toc}
 
 ```yaml
 version: 2.1
@@ -117,14 +114,11 @@ For more information, see the guide to [Authoring Reusable Executors]({{site.bas
 
 ### Jobs
 
-Jobs define a collection of
-[steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run
-within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are
-orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs
-will also individually return their status via [GitHub
-Checks](https://circleci.com/docs/2.0/enable-checks/).
+[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
 
-```yaml
+When importing an orb which has jobs, you can reference them directly from your workflows.
+
+```
 version: 2.1
 
 orbs:
@@ -137,6 +131,26 @@ workflows:
 ```
 
 See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
+
+### Usage Examples
+
+Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/orbs/registry/). Below is a sample usage example:
+
+```yaml
+# Source https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/examples/example.yml
+
+description: >
+  Sample example description.
+usage:
+  version: 2.1
+  orbs:
+    <orb-name>: <namespace>/<orb-name>@1.2.3
+  workflows:
+    use-my-orb:
+      jobs:
+        - <orb-name>/<job-name>
+
+```
 
 ## Namespaces
 
@@ -181,9 +195,7 @@ To avoid negatively impacting a user's CI process, orb authors should strictly a
 **Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
 {: class="alert alert-warning"}
 
-
-
-## Orb Versions (Development vs. Production vs Inline)
+## Orb Versions (Development vs Production vs Inline)
 
 ### Production Orbs
 {:.no_toc}
@@ -213,7 +225,8 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 {:.no_toc}
 
 Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
-_[See: inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on types of namespaces._
+
+_[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on inline orbs._
 
 - Not published to the orb service
 - No versioning
@@ -221,6 +234,74 @@ _[See: inline orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) fo
 - Not accessible outside of the repository
 - Not public
 - Not accessible via CircleCI CLI
+
+## Orb Packing
+
+All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
+
+If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-pack) job.
+{: class="alert alert-warning"}
+
+**_Example: Orb Project Structure_**
+
+| type | name|
+| --- | --- |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors) |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs) |
+| <i class="fa fa-file-text-o" aria-hidden="true"></i>| [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
+{: class="table table-striped"}
+
+In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
+
+Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) (`<<include(file)>>`).
+
+**CLI command**
+
+`circleci orb pack <dir> > orb.yml`
+
+For orb development kit users, this step is handled automatically.
+
+## File Include Syntax
+
+The `file include` syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file. The `<<include(dir/file)>>` syntax is a special key for use with the [`circleci orb pack` command](#orb-packing) and _will not_ work more widely on CircleCI.
+
+When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
+
+Included files are always referenced from the relative location of the `@orb.yml` file.
+{: class="alert alert-warning"}
+
+{:.tab.fileInclude.Command-yaml}
+```yaml
+description: A simple command that imports from a file when packed.
+steps:
+  - run:
+      name: Hello Greeting
+      command: <<include(scripts/file.sh)>>
+```
+
+{:.tab.fileInclude.file-sh}
+```bash
+# This is a bash file, but could really be any text-based file
+echo "Hello World"
+
+```
+
+{:.tab.fileInclude.Packed_Command-yaml}
+```yaml
+description: A simple command that imports from a file when packed.
+steps:
+  - run:
+      name: Hello Greeting
+      command: |
+        # This is a bash file, but could really be any text-based file
+        echo "Hello World"
+```
+
+File inclusion is especially useful for separating your configuration's bash logic from your yaml. Including bash scripts will allow you to develop and test your bash outside of your orb.
+
+View more about including bash scripts in the [Orb Author]({{site.baseurl}}/2.0/orb-author/#scripts) guide.
 
 ## Using Orbs Within Your Orb and Register-Time Resolution
 
