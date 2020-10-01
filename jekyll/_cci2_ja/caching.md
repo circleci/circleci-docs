@@ -31,7 +31,6 @@ order: 50
 {% raw %}
 ```yaml
     steps:
-
       - restore_cache:
          keys:
            - m2-{{ checksum "pom.xml" }}
@@ -73,9 +72,7 @@ Docker イメージの未変更レイヤーを再利用するプレミアム機�
 
 このワークフローの実行中、Job3 は Job1 または Job2 によって書き込まれたキャッシュを使用します。 キャッシュは変更不可なので、どちらかのジョブによって最初に保存されたキャッシュが使用されます。 結果が確定的ではなく、その時々によって結果が異なるため、通常、この動作は好ましくありません。 これを確定的なワークフローにするには、ジョブの依存関係を変更します。Job1 と Job2 で別のキャッシュに書き込み、Job3 ではいずれかのキャッシュから読み込みます。または、一方向の依存関係を指定します (Job1 -> Job2 ->Job3)。
 
-{% raw %}
-`node-cache-{{ checksum "package-lock.json" }}
-            `{% endraw %} のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用して復元を行うような、より複雑なジョブのケースもあります。 競合状態が発生する可能性がありますが、詳細はケースによって異なります。 たとえば、ダウンストリーム ジョブがアップストリーム ジョブのキャッシュを使用して最後に実行されるような場合です。
+{% raw %}`node-cache-{{ checksum "package-lock.json" }}`{% endraw %} のような動的キーを使用して保存を行い、`node-cache-` のようなキーの部分一致を使用して復元を行うような、より複雑なジョブのケースもあります。 競合状態が発生する可能性がありますが、詳細はケースによって異なります。 たとえば、ダウンストリーム ジョブがアップストリーム ジョブのキャッシュを使用して最後に実行されるような場合です。
 
 ジョブ間でキャッシュを共有している場合に発生する競合状態もあります。 Job1 と Job2 の間に依存関係がないワークフローを例に考えます。 Job2 は Job1 によって保存されたキャッシュを使用します。 Job1 がキャッシュの保存を報告したとしても、Job2 でキャッシュを正常に復元できることもあれば、キャッシュが見つからないと報告することもあります。 また、Job2 が以前のワークフローからキャッシュを読み込むこともあります。 その場合は、Job1 がキャッシュを保存する前に、Job2 がキャッシュを読み込もうとすることになります。 この問題を解決するには、ワークフローの依存関係 (Job1 -> Job2) を作成します。 こうすることで、Job1 の実行が終了するまで、Job2 の実行を待機させることができます。
 
@@ -88,7 +85,6 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 {% raw %}
 ```yaml
     steps:
-
       - restore_cache:
           keys:
             # この package-lock.json のチェックサムに一致するキャッシュを検索します
@@ -103,14 +99,11 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 上のキャッシュ キーの使用方法について、詳しく見ていきましょう。
 
-`keys:` リストのすべての行は *1 つのキャッシュ*を管理します (各行が固有のキャッシュに対応しているわけでは**ありません**)。 この例でリストされているキー
-
-{% raw %}
-(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュの復元が必要になると、まず (最も特定度の高い) 最初のキーに基づいてキャッシュがバリデーションされ、次に他のキーを順に調べて、他のキャッシュ キーに変更があるかどうかが確認されます。
+`keys:` リストのすべての行は *1 つのキャッシュ*を管理します (各行が固有のキャッシュに対応しているわけでは**ありません**)。 この例でリストされているキー {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュの復元が必要になると、まず (最も特定度の高い) 最初のキーに基づいてキャッシュがバリデーションされ、次に他のキーを順に調べて、他のキャッシュ キーに変更があるかどうかが確認されます。
 
 ここでは、最初のキーによって `package-lock.json` ファイルのチェックサムが文字列 `v1-npm-deps-` に連結されます。コミットでこのファイルが変更されている場合は、新しいキャッシュ キーが調べられます。
 
-次のキーには動的コンポーネントが連結されていません。これは静的な文字列 `v1-npm-deps-` です。 キャッシュを手動で無効にするには、`config.yml` ファイルで `v1` を `v2` にバンプします。 これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
+次のキーには動的コンポーネントが連結されていません。これは静的な文字列 `v1-npm-deps-` です。 キャッシュを手動で無効にするには、`config.yml` ファイルで `v1` を `v2` に上げます。 これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
 
 ### モノレポ (モノリポ) でのキャッシュの使用
 
@@ -119,15 +112,16 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 #### 連結 `package-lock` ファイルの作成と構築
 
 1) カスタム コマンドを設定ファイルに追加します。
-{% raw %}```yaml
-    commands:
-        create_concatenated_package_lock:
-        description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
+
+{% raw %}
+```yaml
+commands:
+  create_concatenated_package_lock:
+    description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
     parameters:
       filename:
         type: string
     steps:
-
       - run:
           name: package-lock.json ファイルの単一ファイルへの統合
           command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
@@ -135,14 +129,15 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 {% endraw %}
 
 2) ビルド時にカスタム コマンドを使用して、連結 `package-lock` ファイルを生成します。
-{% raw %}```yaml
-    steps:
 
-        - checkout
-        - create_concatenated_package_lock:
+{% raw %}
+```yaml
+    steps:
+      - checkout
+      - create_concatenated_package_lock:
           filename: combined-package-lock.txt
-    ## combined-package-lock.text をキャッシュ キーに使用します
-        - restore_cache:
+      ## combined-package-lock.text をキャッシュ キーに使用します
+      - restore_cache:
           keys:
             - v3-deps-{{ checksum "package-lock.json" }}-{{ checksum "combined-package-lock.txt" }}
             - v3-deps
@@ -153,7 +148,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 ### キャッシュの有効期限
 {:.no_toc}
-`save_cache` ステップで作成されたキャッシュは、最長 30 日間保存されます。
+`save_cache` ステップで作成されたキャッシュは、最長 15 日間保存されます。
 
 ### キャッシュのクリア
 {:.no_toc}
@@ -175,9 +170,9 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 </div>
 
 ### キャッシュ サイズ
-
 {:.no_toc}
- キャッシュ サイズは 500 MB 未満に抑えることをお勧めします。 これは、破損チェックを効率的に実行するための上限のサイズです。500 MB を超えると、チェック時間が非常に長くなります。 キャッシュ サイズは、CircleCI の [Jobs (ジョブ)] ページの `restore_cache` ステップで確認できます。 キャッシュ サイズを増やすこともできますが、キャッシュの復元中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュ サイズを抑えるため、複数のキャッシュに分割することを検討してください。
+キャッシュ サイズは 500 MB 未満に抑えることをお勧めします。 これは、破損チェックを効率的に実行するための上限のサイズです。500 MB を超えると、チェック時間が非常に長くなります。 キャッシュ サイズは、CircleCI の Jobs (ジョブ) ページの `restore_cache` ステップで確認できます。
+キャッシュ サイズを増やすこともできますが、キャッシュの復元中に問題が発生したり、ダウンロード中に破損する可能性が高くなるため、お勧めできません。 キャッシュ サイズを抑えるため、複数のキャッシュに分割することを検討してください。
 
 ## 基本的な依存関係キャッシュの例
 
@@ -196,7 +191,8 @@ CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限�
 
 ディレクトリのパスは、ジョブの `working_directory` からの相対パスです。 必要に応じて、絶対パスも指定できます。
 
-**メモ:** 特別なステップ [`persist_to_workspace`]({{ site.baseurl }}/ja/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
+**メモ:**
+特別なステップ [`persist_to_workspace`]({{ site.baseurl }}/ja/2.0/configuration-reference/#persist_to_workspace) とは異なり、`save_cache` および `restore_cache` は `paths` キーのグロブをサポートしていません。
 
 ## キーとテンプレートの使用
 
@@ -211,7 +207,7 @@ CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限�
 この例では、以下のような文字列が出力されます。
 
 ```sh
-{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ<etc>{% endraw %}
+{% raw %}myapp-+KlBebDceJh_zOWQIAJDLEkdkKoeldAldkaKiallQ{% endraw %}
 ```
 
 `package-lock` ファイルの内容が変更された場合、`checksum` 関数は別の一意の文字列を返し、キャッシュを無効化する必要があることが示されます。
@@ -221,47 +217,30 @@ CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限�
 最初に、プロジェクトの何らかの側面を表す値を含むキーを使用して、キャッシュを保存または復元するタイミングを指定します。 たとえば、ビルド番号が増えたとき、リビジョン番号が増えたとき、依存関係マニフェスト ファイルのハッシュが変更されたときなどです。
 
 以下に、さまざまな目的を持つキャッシュ戦略の例を示します。
-
--
-{% raw %}`myapp-{{ checksum "package-lock.json" }}`
-
-{% endraw %}
-
-- `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
--
-{% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}
-        `
-{% endraw %}
-
-- `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。このプロジェクトのブランチでそれぞれ異なるキャッシュ キーが生成されます。
--
-{% raw %}`myapp-{{ epoch }}`
-
-{% endraw %}
-
-- ビルドのたびに異なるキャッシュ キーが生成されます。
+ 
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %}
+ - `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。このプロジェクトのブランチでそれぞれ異なるキャッシュ キーが生成されます。
+ * {% raw %}`myapp-{{ epoch }}`{% endraw %} - ビルドのたびに異なるキャッシュ キーが生成されます。
 
 ステップの実行中に、上記のテンプレートが実行時の値に置き換えられ、その置換後の文字列が `key` として使用されます。 以下の表に、使用可能なキャッシュの `key` テンプレートを示します。
 
-| テンプレート                                                 | 説明                                                                                                                                                                                                                                                                                                                                              |
-| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}       | filename で指定したファイルの内容の SHA256 ハッシュを Base64 エンコードした値。ファイルが変更されると、新しいキャッシュ キーが生成されます。 リポジトリにコミットされるファイルのみを指定できます。 依存関係マニフェスト ファイル (`package-lock.json`、`pom.xml`、`project.clj` など) の使用を検討してください。 また、`restore_cache` から `save_cache` までの間にファイルの内容が変更されないようにすることが重要です。ファイルの内容が変更された場合、`restore_cache` のタイミングで使用されるファイルとは異なるキャッシュ キーの下でキャッシュが保存されます。 |
-| {% raw %}`{{ .Branch }}`{% endraw %}                   | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                               |
-| {% raw %}`{{ .BuildNum }}`{% endraw %}                 | このビルドの CircleCI ジョブ番号。                                                                                                                                                                                                                                                                                                                          |
-| {% raw %}`{{ .Revision }}`{% endraw %}                 | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                              |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | 環境変数 `variableName` ([CircleCI からエクスポートされる環境変数](https://circleci.com/ja/docs/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト](https://circleci.com/ja/docs/2.0/contexts)に追加した環境変数がサポートされ、任意の環境変数は使用できません)。                                                                                                              |
-| {% raw %}`{{ epoch }}`{% endraw %}                     | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や Unix エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。                                                                                                                                                                                                                          |
-| {% raw %}`{{ arch }}`{% endraw %}                      | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに依存するコンパイル済みバイナリをキャッシュする場合に便利です (`darwin-amd64-6_58`、`linux-amd64-6_62` など)。 See [サポートされている CPU アーキテクチャ]({{ site.baseurl }}/ja/2.0/faq/#circleci-ではどの-cpu-アーキテクチャをサポートしていますか)を参照してください。                                                                                                                                         |
+テンプレート | 説明
+------------| ----
+{% raw %}`{{ checksum "filename" }}`{% endraw %} | filename で指定したファイルの内容の SHA256 ハッシュを Base64 エンコードした値。ファイルが変更されると、新しいキャッシュ キーが生成されます。 リポジトリにコミットされるファイルのみを指定できます。 依存関係マニフェスト ファイル (`package-lock.json`、`pom.xml`、`project.clj` など) の使用を検討してください。 また、`restore_cache` から `save_cache` までの間にファイルの内容が変更されないようにすることが重要です。ファイルの内容が変更された場合、`restore_cache` のタイミングで使用されるファイルとは異なるキャッシュ キーの下でキャッシュが保存されます。
+{% raw %}`{{ .Branch }}`{% endraw %} | 現在ビルド中の VCS ブランチ。
+{% raw %}`{{ .BuildNum }}`{% endraw %} | このビルドの CircleCI ジョブ番号。
+{% raw %}`{{ .Revision }}`{% endraw %} | 現在ビルド中の VCS リビジョン。
+{% raw %}`{{ .Environment.variableName }}`{% endraw %} | 環境変数 `variableName` ([CircleCI からエクスポートされる環境変数](https://circleci.com/ja/docs/2.0/env-vars/#circleci-environment-variable-descriptions)、または特定の[コンテキスト](https://circleci.com/ja/docs/2.0/contexts)に追加した環境変数がサポートされ、任意の環境変数は使用できません)。
+{% raw %}`{{ epoch }}`{% endraw %} | 協定世界時 (UTC) 1970 年 1 月 1 日午前 0 時 0 分 0 秒からの経過秒数。POSIX や Unix エポックとも呼ばれます。 このキャッシュ キーは、実行のたびに新しいキャッシュを保存する必要がある場合に便利です。
+{% raw %}`{{ arch }}`{% endraw %} | OS と CPU (アーキテクチャ、ファミリ、モデル) の情報を取得します。 OS や CPU アーキテクチャに依存するコンパイル済みバイナリをキャッシュする場合に便利です (`darwin-amd64-6_58`、`linux-amd64-6_62` など)。[サポートされている CPU アーキテクチャ]({{ site.baseurl }}/ja/2.0/faq/#circleci-ではどの-cpu-アーキテクチャをサポートしていますか)を参照してください。
 {: class="table table-striped"}
 
 ### キーとテンプレートの使用に関する補足説明
 {:.no_toc}
-- キャッシュに一意の識別子を定義するときは、
-{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。
-{% raw %}`{{ .Branch }}`{% endraw %} や
-{% raw %}`{{ checksum "filename" }}`{% endraw %} などの特定度の低いテンプレート キーを使用すると、キャッシュが使用される可能性が高くなります。
-- キャッシュ変数には、ビルドで使用している[パラメーター]({{site.baseurl}}/ja/2.0/reusing-config/#executor-でのパラメーターの使用)も使用できます。たとえば、
-{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} のように指定します。
+
+- キャッシュに一意の識別子を定義するときは、{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。{% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} などの特定度の低いテンプレート キーを使用すると、キャッシュが使用される可能性が高くなります。
+- キャッシュ変数には、ビルドで使用している[パラメーター]({{site.baseurl}}/ja/2.0/reusing-config/#executor-でのパラメーターの使用)も使用できます。たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} のように指定します。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。
 
 ### キャッシュの保存および復元の例
@@ -274,13 +253,18 @@ CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限�
 ```yaml
     docker:
       - image: customimage/ruby:2.3-node-phantomjs-0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           RACK_ENV: test
       - image: circleci/mysql:5.6
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
-
       - checkout
       - run: cp config/{database_circleci,database}.yml
 
@@ -373,7 +357,8 @@ steps:
 #### Bundler (Ruby)
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか?** はい。ただし、注意点があります。
+**部分キャッシュ リストアを使用しても安全でしょうか?**
+はい。ただし、注意点があります。
 
 Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
 
@@ -383,13 +368,14 @@ Bundler では、明示的に指定されないシステム gem が使用され�
 
 ```yaml
 steps:
+  - run: bundle clean --force
   - restore_cache:
       keys:
         # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュを復元します
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
-  - run: bundle install && bundle clean
+  - run: bundle install
   - save_cache:
       paths:
         - ~/.bundle
@@ -401,7 +387,8 @@ steps:
 #### Gradle (Java)
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか?** はい。
+**部分キャッシュ リストアを使用しても安全でしょうか?**
+はい。
 
 Gradle リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、キャッシュの一部を復元できます。
 
@@ -426,7 +413,8 @@ steps:
 #### Maven (Java) および Leiningen (Clojure)
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか?** はい。
+**部分キャッシュ リストアを使用しても安全でしょうか?**
+はい。
 
 Maven リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、キャッシュの一部を復元できます。
 
@@ -453,7 +441,8 @@ steps:
 #### npm (Node)
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか?** はい。ただし、npm5 以降を使用する必要があります。
+**部分キャッシュ リストアを使用しても安全でしょうか?**
+はい。ただし、npm5 以降を使用する必要があります。
 
 npm5 以降でロック ファイルを使用すると、部分キャッシュ リストアを安全に行うことができます。
 
@@ -465,7 +454,7 @@ steps:
       keys:
         # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュを復元します
         - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-- node-v1-{{ .Branch }}-
+        - node-v1-{{ .Branch }}-
         - node-v1-
   - save_cache:
       paths:
@@ -478,7 +467,8 @@ steps:
 #### pip (Python)
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか?** はい。ただし、Pipenv を使用する必要があります。
+**部分キャッシュ リストアを使用しても安全でしょうか?**
+はい。ただし、Pipenv を使用する必要があります。
 
 Pip では、`requirements.txt` で明示的に指定されていないファイルを使用できます。 [Pipenv](https://docs.pipenv.org/) を使用するには、ロック ファイルでバージョンを明示的に指定する必要があります。
 
@@ -503,9 +493,10 @@ steps:
 #### Yarn (Node)
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか?** はい。
+**部分キャッシュ リストアを使用しても安全でしょうか?**
+はい。
 
-Yarn では、部分キャッシュ リストアを実行するために、既にロック ファイルが使用されています。
+Yarn では、部分キャッシュ リストアを実行するために、常にロック ファイルが使用されています。
 
 {% raw %}
 
@@ -540,11 +531,7 @@ steps:
 
 言語の依存関係管理ツールが扱うロック ファイル (`Gemfile.lock` や `yarn.lock` など) のチェックサムは、キャッシュ キーとして便利に使用できます。
 
-また、`ls -laR your-deps-dir > deps_checksum` を実行し、
-
-{% raw %}
-
-`{{ checksum "deps_checksum" }}`{% endraw %} で参照するという方法もあります。 たとえば、Python で `requirements.txt` ファイルのチェックサムよりも限定的なキャッシュを取得するには、プロジェクト ルート `venv` の virtualenv 内に依存関係をインストールし、`ls -laR venv > python_deps_checksum` を実行します。
+また、`ls -laR your-deps-dir > deps_checksum` を実行し、{% raw %}`{{ checksum "deps_checksum" }}`{% endraw %} で参照するという方法もあります。 たとえば、Python で `requirements.txt` ファイルのチェックサムよりも限定的なキャッシュを取得するには、プロジェクト ルート `venv` の virtualenv 内に依存関係をインストールし、`ls -laR venv > python_deps_checksum` を実行します。
 
 ### 言語ごとに異なるキャッシュを使用する
 {:.no_toc}
