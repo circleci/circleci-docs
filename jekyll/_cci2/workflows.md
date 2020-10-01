@@ -186,7 +186,7 @@ workflows:
           requires: # test1 will not run until the `build` job is completed.
             - build
       - test2: # another custom job; runs test suite 2,
-          requires: # test2 is dependent on the succes of job `test1`
+          requires: # test2 is dependent on the success of job `test1`
             - test1
       - hold: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
@@ -223,7 +223,7 @@ The following screenshot demonstrates a workflow on hold.
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
-By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears requesting that you approve or cancel the holding job.
+By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
 
 After approving, the rest of the workflow runs as directed.
 
@@ -548,7 +548,7 @@ It has been observed that in some cases, a failure happens before the workflow r
 ### Workflows Waiting for Status in GitHub
 {:.no_toc}
 
-If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be  status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
+If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
