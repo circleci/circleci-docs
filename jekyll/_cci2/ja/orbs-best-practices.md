@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orb のベスト プラクティス"
-short-title: "Orb のベスト プラクティス"
-description: "Orb のベスト プラクティス ガイド"
+title: "Orbs Authoring Best Practices"
+short-title: "Best Practices for Orb Authors"
+description: "a guide to best practices for developing orbs"
 categories:
   - getting-started
 order: 1
@@ -10,103 +10,228 @@ version:
   - Cloud
 ---
 
-Orb のオーサリングに関するベスト プラクティスと戦略についてまとめます。 CircleCI の Orb とは、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。
+* TOC
+{:toc}
 
-## ガイドライン
+## General
 
-### メタデータ
+#### Give your Orb a Descriptive Name
+{:.no_toc}
 
-- すべてのコマンド、ジョブ、Executor、パラメーターに詳細な説明文を付記します。
-- Provide a `source_url`, and if available, `home_url` [via the `display` key]({{ site.baseurl }}/2.0/orb-author/#describing-your-orb).
-- Define any prerequisites such as obtaining an API key in the description.
-- Be consistent and concise in naming your orb elements. For example, don't mix "kebab case" and "snake case."
+An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward slash. The namespace represents, the individual, company, or organization that owns and maintains the orb, while the orb name itself should describe the product, service, or action provided by the individual orb.
 
+| Proper Orb Slug | Bad Orb Slug      |
+| --------------- | ----------------- |
+| circleci/node   | circleci/node-orb |
+| company/orb     | company/company   |
+{: class="table table-striped"}
 
-### 例
+#### Ensure All Orb Components Include Descriptions
+{:.no_toc}
 
-- Must have at least 1 [usage example]({{ site.baseurl }}/2.0/orb-author/#providing-usage-examples-of-orbs).
-- 例の中で Orb のバージョンは `x.y` と表記します (パッチ バージョンは省略可能)。
-- 例には、ジョブが含まれない場合に最上位のジョブや他の基本的な要素を呼び出す、最も汎用的でシンプルなユースケースを使用します。
-- If applicable, you may want to showcase the use of [pre and post steps]({{ site.baseurl }}/2.0/reusing-config/#using-pre-and-post-steps) in conjunction with an orb’s job.
+Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
-### コマンド
-
-- 一般に、すべての Orb には少なくとも 1 つのコマンドが必要です。
-- 例外として、Executor を提供することのみを目的にした Orb を作成する場合があります。
-- 1 つ以上のパラメーター化可能ステップを組み合わせて、タスクを簡略化します。
-- ユーザーは 1 つのタスクを完了するコマンドのみを使用できます。 単独では実行できない、他のコマンドの一部として実行することのみを目的としたコマンドは作成しないでください。
-- すべての CLI コマンドを Orb コマンドに変換する必要はありません。 また、パラメーターを持たない 1 行のコマンドに必ずしも Orb コマンド エイリアスを指定する必要はありません。
-- Orb で指定された Executor 以外でコマンドを実行する場合は特に、コマンドの説明文に依存関係や前提条件を明記する必要があります。
-- It is a good idea to check for the existence of required parameters, environment variables or other dependencies as a part of your command.
-
-以下に例を示します。
+```yaml
+description: "Utilize this command to echo Hello to a step in the UI."
+steps:
+  - run:
+      name: "Running Echo command"
+      command: echo "Hello"
 ```
-if [ -z "$<<parameters.SECRET_API_KEY>>" ]; then
-  echo "Error: The parameter SECRET_API_KEY is empty. Please ensure the environment variable <<parameters.SECRET_API_KEY>> has been added."
-  exit 1
+
+Create detailed descriptions that fully explain the benefit and usage of the orb element. Descriptions are an excellent place for more specific documentation related to each component.
+
+#### Ensure Your Orb-Publishing Context is Restricted
+{:.no_toc}
+
+If using the Orb Developer Kit, your CircleCI Personal Access Token is saved to a context in your Organization. Ensure you restrict this context so that jobs accessing it will only run when triggered or approved by you or other approved users. For more information, see the [Using Contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) guide.
+
+## Structure
+
+### @orb.yml
+
+The `@orb.yml` file acts as the "root" of our project and contains much of the meta-data for our orb, which will appear on the Orb Registry as well as the CLI.
+
+#### All Orbs Should Include a Description
+{:.no_toc}
+
+When orbs are published to the Orb Registry they are searchable by their name and description. Besides giving your users a better idea of the purpose and functionality of your orb, good descriptions are important for search optimization.
+
+#### Include Display Links
+{:.no_toc}
+
+Orbs utilize a special config key [`display`]({{site.baseurl}}/2.0/orb-author/#orbyml) that can hold a `source_url` for linking to your Git repository, which in turn holds the orb source code and `home_url` to link to the product or service home page if applicable.
+
+```yaml
+display:
+  home_url: "https://www.website.com/docs"
+  source_url: "https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT"
+```
+
+### Commands
+
+#### Most Orbs Will Contain At Least One Command
+{:.no_toc}
+
+Most orbs will contain at least a single command. Commands are used to execute shell commands and special CircleCI steps automatically on the user's behalf. In less common situations, for instance, if a tool _requires_ the use of a particular Docker container, an orb may not contain commands and only provide jobs.
+
+#### Use The Minimal Number of Steps Required.
+{:.no_toc}
+
+When writing a [Reusable Command]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) for your orb, you may input any number of [steps]({{site.baseurl}}/2.0/configuration-reference/#steps). Each step should be properly named as it will appear in the user's UI. To limit the amount of "noise" in the UI, attempt to use as few steps as possible.
+
+{:.tab.minsteps.Deploy_Command_GOOD}
+```yaml
+
+description: "A demo of a command to install a CLI, authenticate, and deploy an app"
+parameters:
+  api-token:
+    type: env_var_name
+    default: MY_SECRET_TOKEN
+steps:
+  - run:
+      name: "Deploying application"
+      command: |
+        pip install example
+        example login $<<parameters.api-token>>
+        example deploy my-app
+```
+
+{:.tab.minsteps.Deploy_Command_BAD}
+```yaml
+
+description: "A bad example of a deploy command. Steps should be named, and combined when possible."
+parameters:
+  api-token:
+    type: env_var_name
+    default: MY_SECRET_TOKEN
+steps:
+  - run: pip install example
+  - run: example login $<<parameters.api-token>>
+  - run: example deploy my-app
+```
+
+#### Check For Root
+{:.no_toc}
+
+Before adding "sudo" to your commands, check to see if the user is already the root user. This can be done dynamically with environment variables.
+
+```bash
+if [[ $EUID == 0 ]]; then export SUDO=""; else # Check if we are root
+  export SUDO="sudo";
 fi
+
+$SUDO do_command
 ```
 
-### パラメーター
+### Jobs
 
-- ユーザー入力が必要な場合を除き、パラメーターには可能な限りデフォルト値を使用します。
-- Utilize the [“env_var_name” parameter type]({{ site.baseurl }}/2.0/reusing-config/#environment-variable-name) to secure API keys, webhook urls or other sensitive data.
-- [Injecting steps as a parameter]({{ site.baseurl }}/2.0/reusing-config/#steps) is a useful way to run user defined steps within a job between your orb-defined steps.Good for if you need to perform an action both before and after user-defined tasks - for instance, you could run user-provided steps between your caching logic inside the command.
+#### Consider "pass-through" Parameters
+{:.no_toc}
 
-**バイナリとツールのインストール**
-  - install-path パラメーターを設定し (/usr/local/bin のデフォルト値が理想的)、このパラメーター化された場所にバイナリをインストールします。 This may often avoid the issue of needing `root` privileges in environments where the user may not have root.
-  - `root` が必要なユースケースでは、事前チェックを追加して、ユーザーが root 権限を持っているかどうかを確認し、ユーザーに適切な権限が必要な場合にはその旨を明確なエラー メッセージでユーザーに警告します。
-  - Add the binary to the user's path via `$BASH_ENV` so the user may call the binary from a separate [run]({{ site.baseurl }}/2.0/configuration-reference/#run) statement. デフォルト以外のパスにインストールするときにはこの方法で実行する必要があります。 以下に例を示します。
+Inside your job, if you are utilizing any commands or executors, you must include a copy of each parameter from each of those components into your job. You can then "pass-through" the parameters given to the job, to each referenced component.
+
+For example, here is a partial snippet of the [Node orb's `test` job](https://circleci.com/orbs/registry/orb/circleci/node#jobs-test):
+
+{:.tab.nodeParam.Test_Job}
+```yaml
+description: |
+  Simple drop-in job to test your NodeJS application automatically.
+parameters:
+  version:
+    default: 13.11.0
+    description: >
+      A full version tag must be specified. Example: "13.11.0" For a full list
+      of releases, see the following: https://nodejs.org/en/download/releases
+    type: string
+executor:
+  name: default
+  tag: << parameters.version >>
 ```
-echo `export PATH="$PATH:<<parameters.install-path>>"` >> $BASH_ENV
+
+{:.tab.nodeParam.Default_Executor}
+```yaml
+description: >
+  Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
+  images built for CI.
+
+  Any available tag from this list can be used:
+  https://circleci.com/developer/images/image/cimg/node
+docker:
+  - image: 'cimg/node:<<parameters.tag>>'
+parameters:
+  tag:
+    default: '13.11'
+    description: >
+      Pick a specific cimg/node image version tag:
+      https://circleci.com/developer/images/image/cimg/node
+    type: string
 ```
 
+As you can see, this job utilizes an executor named `default` which accepts a `version` parameter. In order to enable the user of this _job_ to set the `version` parameter in the _executor_, we must create the parameter in our job, and pass the parameter to our other orb components.
 
-### ジョブ
+#### A Docker Image Parameter might be Preferable To an Executor
+{:.no_toc}
+Does your orb have multiple jobs which require a specific execution environment? If so, you may choose to implement a custom executor. Will your job run on most linux platforms? Consider just using the `docker` executor directly in your job, and parameterize the image.
 
- - ジョブは、Orb 内で定義されたコマンドを使用して、その Orb の一般的なユース ケースをオーケストレーションする必要があります。
- - 柔軟性を考慮します。
- - ユーザーが事後ステップ、事前ステップ、パラメーターとしてのステップをどのように利用できるかを考慮します。
- - パススルー パラメーターの作成を検討します。
- - パラメーターを受け入れる Executor またはコマンドを使用するジョブで、Executor またはコマンドにパラメーターを渡すには、ジョブにもそれらのパラメーターが必要です。
-- Executor をハードコーディングしてはなりません。 イメージまたはタグを上書きできるパラメーター化可能な Executor を使用します (‘default’ など)。
+#### Consider _Post_ and _Pre_ Steps, and Step Parameters
+{:.no_toc}
 
-### Executor
+Jobs on CircleCI can have steps injected into them, either before or after the job, or somewhere in-between with the use of parameters. Jobs are often easier to set up for users than assembling commands into a custom job (where applicable). Injectable steps allow for more flexibility in jobs and may allow new functionalities in your orb.
 
-- サポートされている OS (MacOs、Windows、Docker、VM) ごとに少なくとも 1 つの Executor が必要です。
-- Must include one executor named `default`.
-- 含まれているイメージに問題が発生した場合に、ユーザーがバージョンやタグを上書きできるよう、Executor をパラメーター化する必要があります。
+See the following:
+* [Pre and Post Steps]({{site.baseurl}}/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [Step Parameter]({{site.baseurl}}/2.0/reusing-config/#steps)
 
-### インポートする Orb
+### Executors
 
-- 変更不可の完全なセマンティック バージョンの Orb をインポートする必要があります。 こうすることで、ロック ファイルなど、依存関係のある Orb への変更による影響から Orb を保護できます。
-- [パートナーのみ] - 承認済みおよびパートナーの名前空間、または同じ名前空間の Orb のみをインポートする必要があります。
+#### Orbs do not Always Require an Executor
+{:.no_toc}
+In orb development, executors are often used to either provide or utilize a specific execution environment when we have multiple jobs which can only run in that environment. For example, if your orb relies on a specific Docker container and includes two jobs and no commands, it makes sense to abstract the execution environment into a single [Reusable Exeuctor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) to be used for both jobs.
 
-### 保全性
+Executors are especially useful outside of orbs, as a way to create [matrix tests](https://circleci.com/blog/circleci-matrix-jobs/) for custom jobs.
 
-- [Orb スターター キット (ベータ版)](https://github.com/CircleCI-Public/orb-starter-kit) を使用して、完全に自動化されたビルド > テスト > デプロイのワークフローで Orb の CI/CD をデプロイします。 これで、以降のすべてが処理されます。
-- オプション: Orb をパターンに分解して使用すると、個別の Orb コンポーネントのメンテナンスがさらに簡単になります。
+### Examples
 
-### Sample Data
+Orb [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) provide an excellent way for orb developers to share use-cases and best practices with the community. Usage examples act as the main source of documentation users will reference when utilizing an orb, so it is important to include clear and useful examples.
 
-- Sample data neccesary for testing your Orb in CI/CD pipelines should be kept as small as possible, e.g a single `composer.json` or `package.json` file with minimal dependencies.
-- Sample data should live under the `sample/` directory in the orb's repository, when possible.
+#### All Public Orbs Should Contain at least One Usage Example.
+{:.no_toc}
 
-### Deployment
+Orbs intended for consumption by other organizations should include at least one usage example, with a description.
 
-#### バージョニング
+#### Use-Case Based Examples
+{:.no_toc}
 
-- Utilize [semver versioning](https://semver.org/) (x.y.z)
-- Major: Incompatible changes
-- Minor: Add new features (backwards compatible)
-- Patch: Minor bug fixes, metadata updates, or other safe actions.
+Each included usage example should be named for a specific use-case to instruct the user in how to accomplish a task. Example: `install_cli_and_deploy`, `scan_docker_container`, or `test_application_with_this-tool`
 
-Orb のデプロイに関するベスト プラクティス ガイドを参照してください (近日追加予定)。
+#### Show Correct Orb Version
+{:.no_toc}
 
-このセクションは、Orb スターター キットによって自動的に処理されます。
+Each usage example must present a full example including showing the orb being imported. The version number displayed in the usage-example should match the currently published orb. If your orb is currently on version `0.1.0`, and you were to open a pull request to publish version `1.0.0`, your usage examples should be updated to reflect version `1.0.0` of the orb in use.
 
-### GitHub/Bitbucket
+### Parameters
 
-GitHub では、"_topics_" でリポジトリにタグ付けできます。 トピックは GitHub 検索でデータポイントとして使用されます。さらに、GitHub の [Explore] ページでは、このタグを使用してリポジトリがグループ化されます。 Orb を格納するリポジトリには、`circleci-orbs` のトピックを使用することをお勧めします。 CircleCI Orb、パートナー Orb、コミュニティ Orb のどれであっても、このトピックを使用することで、Orb レポジトリが[こちらのページ](https://github.com/topics/circleci-orbs)に掲載されます。
+#### Secrets Should _Never_ be Directly Entered
+{:.no_toc}
 
-[トピックでリポジトリを分類する](https://help.github.com/en/articles/classifying-your-repository-with-topics)
+Any information that could be considered "secret" such as API keys, auth tokens and passwords, should never be entered directly as parameter values. Instead, the orb developer should use the [env_var_name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name) parameter type, which expects the string value of the name of the environment variable that contains the secret information.
+
+#### Parameterize the Installation Path
+{:.no_toc}
+
+When installing any binary into a potentially unknown user-defined Docker image, it is hard to know what permissions will be available. Create an `install-path` parameter, ideally with a default value of `/usr/local/bin`, and install binaries to this location (if possible). This often avoids the issue of requiring "root" privileges in environments where that may not possible.
+
+## Deployment
+
+#### Always Follow Strict Semantic Versioning
+{:.no_toc}
+
+Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood [semantic versioning]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning).
+
+## Promotion
+
+#### Share Your Orb With The Community!
+{:.no_toc}
+
+Have you published an orb to the Orb Registry? We'd love to hear about it. Come make a post on [CircleCI Discuss](https://discuss.circleci.com/c/ecosystem/orbs).
