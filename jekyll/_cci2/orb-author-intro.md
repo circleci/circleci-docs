@@ -66,5 +66,5 @@ Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) gu
 {:.no_toc}
 
 - [Orb Authoring]({{site.baseurl}}/2.0/orb-author/)
-- [Orb Concepts]({{site.baseurl}}/2.0//orb-concepts/)
+- [Orb Concepts]({{site.baseurl}}/2.0/orb-concepts/)
 - [Orb Author FAQ]({{site.baseurl}}/2.0/orb-author-faq/)
