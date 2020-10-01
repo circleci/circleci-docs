@@ -79,6 +79,13 @@ export function init () {
       }
     }),
 
+    // add custom hits stats
+    // https://www.algolia.com/doc/api-reference/widgets/stats/js/#connector
+    instantsearch.connectors.connectStats(function (renderOptions, isFirstrender) {
+      const { nbHits } = renderOptions;
+      document.querySelector('.hits-count-docs').innerHTML = nbHits;
+    })(),
+
     // add Orbs search
     instantsearch.widgets
       .index({ indexName: ALGOLIA_ORBS_INDEX })
@@ -115,7 +122,14 @@ export function init () {
               `;
             }
           }
-        })
+        }),
+
+        // add custom hits stats
+        // https://www.algolia.com/doc/api-reference/widgets/stats/js/#connector
+        instantsearch.connectors.connectStats(function (renderOptions, isFirstrender) {
+          const { nbHits } = renderOptions;
+          document.querySelector('.hits-count-orbs').innerHTML = nbHits;
+        })()
       ])
   ]);
 
@@ -130,7 +144,6 @@ export function init () {
 
   function renderResults (e) {
     if (searchBox.value.length > 0) {
-      document.querySelector('#search-term-display').innerText = searchBox.value;
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
       resultDisplay.style.display = "block";

@@ -13,9 +13,28 @@
 	<!-- instant hit template container /-->
 	<div id="hits-target" style="display:none;">
 		<div class="container">
-			<h2>Search Results for "<span id="search-term-display"></span>"</h2>
-			<div id="instant-hits-orbs"></div>
+			<div id="subnav-placeholder">
+				<div class="component subnav dynamic-fixed" data-top-nav-offset="120">
+					<ul class="results-nav" data-active="documentation">
+						<li data-value="documentation" data-subnav-item>
+							<a href="#documentation">
+								Documentation <span class="hits-count">(<span class="hits-count-docs">0</span>)</span>
+							</a>
+						</li>
+						<li data-value="orbs" data-subnav-item>
+							<a href="#orbs">
+								Orbs <span class="hits-count">(<span class="hits-count-orbs">0</span>)</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<a id="documentation" class="deep-link-anchor subnav-offset anchor"></a>
 			<div id="instant-hits"></div>
+
+			<a id="orbs" class="deep-link-anchor subnav-offset anchor"></a>
+			<div id="instant-hits-orbs"></div>
 		</div>
 	</div>
 	<div class="main-body">
@@ -79,6 +98,7 @@
 	{% asset jquery.cookie.min.js %}
 	{% asset main.js %}
 	{% asset nav.js %}
+	{% asset subnav.js %}
 	{% asset shared/analytics-recursive-tracking.js %}
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
 </div><!-- .outter -->
