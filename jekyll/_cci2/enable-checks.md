@@ -5,9 +5,11 @@ short-title: "Enabling GitHub Checks"
 description: "How to enable GitHub Checks for CircleCI"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
-This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app. This document applies only to the cloud-hosted version of CircleCI
+This document describes how to enable the GitHub Checks CircleCI Setting and authorize the CircleCI Checks app to report workflow status to the GitHub app. The GitHub checks integration feature is not currently available on CircleCI Server.
 
 ## Overview
 

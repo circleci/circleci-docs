@@ -3,6 +3,7 @@
 @import 'variables';
 @import 'sidebar';
 @import 'instantsearch';
+@import 'tooltip';
 
 // General
 body{
@@ -29,6 +30,7 @@ a {
 		text-decoration: none;
 	}
 }
+
 
 div.main-body{
 	overflow: auto;
@@ -389,6 +391,41 @@ pre {
 
 .serveronly {
 	color: #4e9eb3; 
+}
+
+.server-version-badge {
+    background-color: white;
+    border: 1px solid #333;
+    padding: 2px 8px;
+    border-radius: 2px;
+    color: black;
+    margin: 0px 6px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+
+    &:first-child {
+      margin-left: 0px;
+    }
+}
+
+.server-version-popover {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.server-version-wrapper {
+	display: flex;
+	align-items: center;
+  margin-bottom: 16px;
+  margin-top: -4px;
+
+  @media screen and (max-width: 1068px) {
+    margin: 0 0 16px 0;
+  }
 }
 
 /* Shows when screen > $screen-md, hides when smaller */

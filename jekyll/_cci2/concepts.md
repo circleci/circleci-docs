@@ -5,6 +5,9 @@ short-title: "Concepts"
 description: "CircleCI 2.0 concepts"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.
@@ -38,7 +41,7 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
-- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. 
+- **[Pipeline](#pipelines)**: Represents the entirety of your configuration. Available in CircleCI Cloud only.
 - **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
 - **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project. 
@@ -65,7 +68,7 @@ projects. Users may not view project data that is stored in environment variable
 
 ## Pipelines
 
-A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration).
+A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
 
 Pipelines represent methods for interacting with your configuration:
 
@@ -73,7 +76,7 @@ Pipelines represent methods for interacting with your configuration:
 
 ## Orbs
 
-Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
+Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config. Orbs are not currently available for CircleCI Server.
 
 The graphic above illustrating an example Java configuration can be greatly simplified using orbs. The following illustration re-creates the same configuration with [the Maven orb](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-orbs-config).
 
@@ -101,7 +104,13 @@ jobs:
  build1: # job name
    docker: # Specifies the primary container image,
      - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # for the secondary or service container run in a common
       # network where ports exposed on the primary container are
       # available on localhost.
@@ -131,7 +140,13 @@ jobs:
  build1: # job name
    docker: # Specifies the primary container image,
      - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       # for the secondary or service container run in a common
       # network where ports exposed on the primary container are
       # available on localhost.
@@ -169,6 +184,9 @@ jobs:
   build:
     docker:
       - image: <image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # Special step to checkout your source code
       - run: # Run step to execute commands, see
@@ -178,7 +196,50 @@ jobs:
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
 #...          
-```
+```          
+
+## Image
+
+An image is a packaged system that has instructions for creating a running container. 
+The Primary Container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
+
+ ```yaml
+ version: 2
+ jobs:
+   build1: # job name
+     docker: # Specifies the primary container image,
+     # see circleci.com/docs/2.0/circleci-images/ for
+     # the list of pre-built CircleCI images on dockerhub.
+       - image: buildpack-deps:trusty
+         auth:
+           username: mydockerhub-user
+           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+       - image: postgres:9.4.1 # Specifies the database image
+         auth:
+           username: mydockerhub-user
+           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        # for the secondary or service container run in a common
+        # network where ports exposed on the primary container are
+        # available on localhost.
+         environment: # Specifies the POSTGRES_USER authentication
+          # environment variable, see circleci.com/docs/2.0/env-vars/
+          # for instructions about using environment variables.
+           POSTGRES_USER: root
+...
+   build2:
+     machine: # Specifies a machine image that uses
+     # an Ubuntu version 16.04 image
+     # follow CircleCI Discuss Announcements
+     # for new image releases.
+       image: ubuntu-1604:202007-01
+...       
+   build3:
+     macos: # Specifies a macOS virtual machine with Xcode version 9.0
+       xcode: "9.0"       
+ ...          
+ ```
+
 
 ## Workflows
 
@@ -201,7 +262,13 @@ jobs:
   build1:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -212,7 +279,13 @@ jobs:
   build2:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -222,7 +295,13 @@ jobs:
   build3:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -254,7 +333,13 @@ jobs:
   build1:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -265,7 +350,13 @@ jobs:
   build2:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -275,7 +366,13 @@ jobs:
   build3:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
@@ -318,7 +415,13 @@ jobs:
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -331,7 +434,13 @@ jobs:
   build2:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
@@ -350,7 +459,13 @@ jobs:
     # circleci.com/docs/2.0/executor-types/ for a comparison
     # and more examples.
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - save_cache: # Caches dependencies with a cache key
@@ -363,7 +478,13 @@ jobs:
   build2:
     docker:
       - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       

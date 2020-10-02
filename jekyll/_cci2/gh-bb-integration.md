@@ -4,6 +4,8 @@ title: GitHub and Bitbucket Integration
 description: Using GitHub or Bitbucket
 categories: [migration]
 Order: 60
+version:
+- Cloud
 ---
 
 This document provides an overview of using GitHub, GitHub Enterprise, or Bitbucket Cloud with CircleCI in the following sections:
@@ -38,6 +40,9 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.4.1-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: |
           bundle install
@@ -254,12 +259,12 @@ do **not** enter one.
 2. Go to `https://github.com/you/test-repo/settings/keys`,
 and click "Add deploy key".
 Enter a title in the "Title" field,
-then copy and paste the key you created in step 1.
+then copy and paste the public key you created in step 1.
 Check "Allow write access",
 then click "Add key".
 
 3. Go to your project settings, click on SSH Keys, and "Add SSH key",
-and add the key you created in step 1.
+and add the private key you created in step 1.
 In the "Hostname" field,
 enter "github.com",
 and press the submit button.

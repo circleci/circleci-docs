@@ -3,8 +3,10 @@ layout: classic-docs
 title: "Using Environment Variables"
 short-title: "Using Environment Variables"
 description: "A list of supported environment variables in CircleCI 2.0"
-categories: [configuring-jobs]
 order: 40
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes using environment variables in CircleCI in the following sections:
@@ -87,6 +89,9 @@ jobs: # basic units of work in a run
     docker: # use the Docker executor
       # CircleCI node images available at: https://hub.docker.com/r/circleci/node/
       - image: circleci/node:10.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
       # Run a step to setup an environment variable
@@ -135,7 +140,9 @@ Notice there are two similar steps in the above image and config - "What branch 
 ### Using Parameters and Bash Environment
 {:.no_toc}
 
-CircleCI does not support interpolation when setting environment variables. All defined values are treated literally. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
+In general, CircleCI does not support interpolating environment variable into build config. Values used are treated as literals. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
+
+An exception to this rule is the docker image section in order to support [Private Images]({{ site.baseurl }}/2.0/private-images/).
 
 In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
 
@@ -209,6 +216,9 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Update PATH and Define Environment Variable at Runtime
@@ -234,6 +244,9 @@ jobs:
   build:
     docker:
       - image: smaant/lein-flyway:2.7.1-4.0.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -259,6 +272,9 @@ jobs:
   build:
     docker:
       - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       FOO: bar
 ```
@@ -286,6 +302,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: 
@@ -318,6 +337,9 @@ jobs:
   build:
     docker:
       - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: 
@@ -341,6 +363,9 @@ jobs:
   build:
     docker:
       - image: <image>:<tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         # environment variables available for entrypoint/command run by docker container
         environment:
           MY_ENV_VAR_1: my-value-1
@@ -356,10 +381,16 @@ jobs:
   build:
     docker:
       - image: <image>:<tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MY_ENV_VAR_1: my-value-1
           MY_ENV_VAR_2: my-value-2
       - image: <image>:<tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MY_ENV_VAR_3: my-value-3
           MY_ENV_VAR_4: my-value-4
@@ -396,7 +427,9 @@ Not all command-line programs take credentials in the same way that `docker` doe
 
 Pipeline parameters can be used to pass variables using the CircleCI API v2. 
 
-A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
+A pipeline can be triggered with specific `parameter` values using the API v2
+endpoint to [trigger a pipeline]({{site.baseurl}}/api/v2/#operation/getPipelineConfigById). 
+This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 The example below triggers a pipeline with the parameters described in the above config example (NOTE: To pass a parameter when triggering a pipeline via the API the parameter must be declared in the configuration file.).
 
@@ -523,6 +556,8 @@ Variable                    | Type    | Value
 `CI_PULL_REQUESTS`          | List    | **Deprecated**. Kept for backward compatibility with CircleCI 1.0. Use `CIRCLE_PULL_REQUESTS` instead.
 
 {:class="table table-striped"}
+
+**Note:** For a list of pipeline values and parameters, refer to the [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) page.
 
 ## See Also
 {:.no_toc}

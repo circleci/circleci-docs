@@ -5,15 +5,18 @@ short-title: "Build & Publish Snap Packages"
 description: "How to build and publish Snap packages on CircleCI using Snapcraft."
 categories: [containerization]
 order: 20
+version:
+- Cloud
+- Server v2.x
 ---
 
 Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.
 
 ## Overview
 
-A .snap file can be created once and installed on any Linux distros that supports `snapd` such as Ubuntu, Debian, Fedora, Arch, and more. More information on Snapcraft itself can be found on [Snapcraft's website](https://snapcraft.io/).
+A `.snap` file can be created once and installed on any Linux distro that supports `snapd`, such as Ubuntu, Debian, Fedora, Arch, and more. More information on Snapcraft itself can be found on [Snapcraft's website](https://snapcraft.io/).
 
-Building a snap on CircleCI is mostly the same as your local machine, wrapped with [CircleCI 2.0 syntax](https://circleci.com/docs/2.0/configuration-reference/). This document describes how to build a snap package and publish it to the [Snap Store](https://snapcraft.io/store) via CircleCI. The following sections use snippets of a sample `.circleci/config.yml` file with the full version at the [end of this doc](#full-example-config).
+Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI 2.0 syntax](https://circleci.com/docs/2.0/configuration-reference/). This document describes how to build a snap package and publish it to the [Snap Store](https://snapcraft.io/store) via CircleCI. The following sections use snippets of a sample `.circleci/config.yml` file with the full version at the [end of this doc](#full-example-config).
 
 ## Prerequisites
 
@@ -29,6 +32,9 @@ jobs:
   build:
     docker:
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 #...
 ```
 
@@ -125,6 +131,9 @@ jobs:
   build:
     docker:
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -138,6 +147,9 @@ jobs:
   publish:
     docker:
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - attach_workspace:
           at: .

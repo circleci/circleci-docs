@@ -5,6 +5,9 @@ short-title: "Language Guide: Scala"
 description: "CircleCI 2.0 Language Guide: Scala"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document will walk you through a Scala application [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in the following sections:
@@ -43,6 +46,9 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
     steps:
@@ -98,6 +104,9 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
 ```
@@ -113,6 +122,9 @@ jobs:
     working_directory: ~/samplescala
     docker:
       - image: openjdk:8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       SBT_VERSION: 1.0.4
     steps:

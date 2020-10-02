@@ -3,8 +3,10 @@ layout: classic-docs
 title: "Configuring Databases"
 short-title: "Configuring Databases"
 description: "Example of Configuring PostgreSQL"
-categories: [configuring-jobs]
 order: 35
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 
@@ -26,6 +28,9 @@ In the primary image the config defines an environment variable with the `enviro
 Set the POSTGRES_USER environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
           - image: circleci/postgres:9.6-alpine
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
             environment:
               POSTGRES_USER: postgres
 
@@ -42,13 +47,19 @@ jobs:
     
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
           
     # Service container image
     
       - image: circleci/postgres:9.6.5-alpine-ram
-        
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
     steps:
       - checkout
       - run: sudo apt-get update
@@ -119,7 +130,13 @@ jobs:
     working_directory: /your/workdir
     docker:
       - image: your/image_for_primary_container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: your_postgres_user
           POSTGRES_DB: your_postgres_test

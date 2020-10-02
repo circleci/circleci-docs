@@ -3,6 +3,9 @@ layout: classic-docs
 title: Upload to Artifactory
 categories: [how-to]
 description: How to upload Artifacts to Artifactory in CircleCI
+version:
+- Cloud
+- Server v2.x
 ---
 
 CircleCI supports uploading directly to Artifactory.
@@ -14,9 +17,9 @@ CircleCI supports uploading directly to Artifactory.
 
 Artifactory has great documentation explaining how to leverage their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).
 
-We'll use this space to highlight some sample projects showing how to best leverage CircleCI and Artifactory together.
+We will use this space to highlight some sample projects showing how to best use CircleCI and Artifactory together.
 
-Ensure that you've created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
+Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
 
 ## Artifactory Plugins
 Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
@@ -37,23 +40,23 @@ If you want to use the JFrog CLI, you can install it by adding the following to 
 Now we need to configure JFrog to use our credentials securely. We configure the client to use our `$ARTIFACTORY_URL`, along with our `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. These can be entered under `Project Settings->Environment Variables`
 
 ```
-    - run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
+- run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 
 ```
 
-If you'd like to upload JAR files use the following example:
+If you would like to upload JAR files use the following example:
 
 ```
-    - run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
+- run: ./jfrog rt u "multi*/*.jar" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
-If you'd like to upload WAR files use the following example:
+If you would like to upload WAR files use the following example:
 
 ```
-    - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
+- run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
-The full .circleci/config.yml file would look something like the following:
+The full `.circleci/config.yml` file would look something like the following:
 
 ```yaml
 version: 2
@@ -61,6 +64,9 @@ jobs:
   upload-artifact:
     docker:
       - image: circleci/openjdk:8-jdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout

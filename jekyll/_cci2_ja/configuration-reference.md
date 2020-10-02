@@ -3,8 +3,6 @@ layout: classic-docs
 title: "CircleCI を設定する"
 short-title: "CircleCI を設定する"
 description: ".circleci/config.yml に関するリファレンス"
-categories:
-  - configuring-jobs
 order: 20
 ---
 
@@ -1010,7 +1008,7 @@ steps:
 
 `deploy` ステップを使用するときには、ワークフローを使用してジョブのオーケストレーションやトリガーを実行する方法を理解しておくことをお勧めします。 ワークフローの使用方法については、以下を参照してください。
 
-- [ワークフロー](https://circleci.com/docs/2.0/workflows-overview/)
+- [ワークフロー](https://circleci.com/docs/2.0/workflows/)
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### 例
@@ -1336,7 +1334,7 @@ branches では `only` キーと `ignore` キーを使用でき、どちらに�
 
 | キー      | 必須 | 型   | 説明                                                            |
 | ------- | -- | --- | ------------------------------------------------------------- |
-| context | ×  | 文字列 | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 |
+| context | ×  | 文字列・リスト | コンテキストの名前。 初期のデフォルト名は `org-global` です。 各コンテキスト名は一意である必要があります。 |
 {: class="table table-striped"}
 
 ###### **`type`**

@@ -2,12 +2,12 @@
 layout: classic-docs
 title: "Tips for Migrating to 2.0"
 description: "Tips for Migrating from 1.0 to CircleCI 2.0 Config"
+version:
+- Server v2.x
 ---
 
 
-CircleCI is getting closer to the end of life for v1.0. If you haven't started the migration to 2.0 yet take a look through some of the tips and best practices aggregated below.
-
-Remember **August 31st, 2018** is the last day for 1.0 builds. You need to make sure all of your projects are converted if you'd like them to continue building on CircleCI. You can read more about 1.0 end of life and find other helpful resources on our [sunsetting 1.0 page](https://circleci.com/sunset1-0/).
+Take a look through some of the tips and best practices listed below, for migrating from CircleCI 1.0 to 2.0.
 
 * TOC
 {:toc}

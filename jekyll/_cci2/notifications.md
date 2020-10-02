@@ -2,9 +2,10 @@
 layout: classic-docs
 title: "Using Notifications"
 short-title: "Using Notifications"
-categories: [configuring-jobs]
 order: 100
 published: true
+version:
+- Cloud
 ---
 
 * TOC
@@ -20,12 +21,18 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -88,6 +95,9 @@ jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - slack/notify:
           color: '#42e2f4'
@@ -119,6 +129,9 @@ jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - irc/notify:
           server: 'IRC-server-to-connect-to' # default: IRC_SERVER environment varible.

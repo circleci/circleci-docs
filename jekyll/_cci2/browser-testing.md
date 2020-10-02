@@ -3,6 +3,9 @@ layout: classic-docs
 title: Browser Testing
 description: Browser Testing on CircleCI
 category: [test]
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes common methods for running and debugging browser testing in your CircleCI config in the following sections:
@@ -36,6 +39,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:jessie-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
@@ -96,6 +102,9 @@ jobs:
   build:
     docker:
       - image: circleci/python:jessie-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -195,11 +204,13 @@ If you are running a test that runs an HTTP server on CircleCI, it is sometimes 
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```
-2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` on your browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
+2. To add port-forwarding to the command, use the `-L` flag. The following example forwards requests to `http://localhost:3000` on your local browser to port `8080` on the CircleCI container. This would be useful, for example, if your job runs a debug Ruby on Rails app, which listens on port 8080. After you run this, if you go to your local browser and request http://localhost:3000, you should see whatever is being served on port 8080 of the container.
+
+**Note:** Update `8080` to be the port you are running on the CircleCI container.
 ```
 ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
-3. Then, open your browser on your local machine and navigate to `http://localhost:8080` to send requests directly to the server running on port `3000` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
+3. Then, open your browser on your local machine and navigate to `http://localhost:3000` to send requests directly to the server running on port `8080` on the CircleCI container. You can also manually start the test server on the CircleCI container (if it is not already running), and you should be able to access the running test server from the browser on your development machine.
 
 This is a very easy way to debug things when setting up Selenium tests, for example.
 

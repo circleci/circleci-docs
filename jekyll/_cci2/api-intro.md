@@ -5,6 +5,8 @@ short-title: "API Reference"
 description: "Introduction to the CircleCI API"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 The CircleCI API may be used to make API calls to retrieve detailed information about users, jobs, workflows and pipelines. There are currently two supported API versions:
@@ -12,7 +14,7 @@ The CircleCI API may be used to make API calls to retrieve detailed information 
 * [API v1.1 Reference](https://circleci.com/docs/api/v1/)
 * [API v2 Reference](https://circleci.com/docs/api/v2/)
 
-API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that users migrate their scripts to API v2 stable endpoints as soon as possible. 
+API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI Cloud users migrate their scripts to API v2 stable endpoints as soon as possible. 
 
 CircleCI API v1.1 and portions of API v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2 as more API v2 endpoints are announced as stable. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
@@ -49,6 +51,7 @@ The CircleCI API v2 enables users to be authenticated by simply sending your API
 `curl -u ${CIRCLECI_TOKEN}: https://circleci.com/api/v2/me`
 
 **Note**, the `:` is included to indicate there is no password.
+**Note**, [Project tokens](https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-project-api-token) are currently not supported on API v2.
 
 #### Triggering a Pipeline with Parameters Example
 
@@ -71,7 +74,7 @@ In the above example the `project_slug` would take the form `:vcs/:org/:project`
 
 The CircleCI API v2 release includes several new endpoints, and deprecates some others. The sections below list the endpoints added for this release, in addition to the endpoints that have been removed.
 
-For a complete list of all API v2 enpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/#circleci-api), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
+For a complete list of all API v2 endpoints, please refer to the [API v2 Reference Guide](https://circleci.com/docs/api/v2/), which contains a detailed description of each individual endpoint, as well as information on required and optional parameters, HTTP status and error codes, and code samples you may use in your workflows.
 
 ### New Endpoints
 

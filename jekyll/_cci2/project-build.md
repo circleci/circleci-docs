@@ -5,6 +5,8 @@ short-title: "Projects and Pipelines"
 description: "Starting point for CircleCI 2.0 projects"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 This document describes how CircleCI automates your pipelines.

@@ -5,6 +5,9 @@ short-title: "Java"
 description: "Building and Testing with Java on CircleCI 2.0"
 categories: [language-guides]
 order: 4
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide will help you get started with a Java application building with Gradle on CircleCI. 
@@ -17,7 +20,7 @@ This guide will help you get started with a Java application building with Gradl
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
 
-We're going to make a few assumptions here:
+We are going to make a few assumptions here:
 
 * You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java-maven/).
 * You are using Java 11. 
@@ -40,7 +43,13 @@ jobs: # a collection of steps
       GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.workers.max=2"
     docker: # run the steps with Docker
       - image: circleci/openjdk:11.0.3-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
@@ -105,7 +114,7 @@ The configuration above is from a demo Java app, which you can access at [https:
 
 If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
 
-Now we’re ready to build a `config.yml` from scratch.
+Now we are ready to build a `config.yml` from scratch.
 
 ## Config Walkthrough
 
@@ -138,7 +147,13 @@ version: 2
 ...
     docker:
       - image: circleci/openjdk:11.0.3-jdk-stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/postgres:12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: circle_test
@@ -146,7 +161,7 @@ version: 2
 
 We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `11.0.3-jdk-stretch`.
 
-Now we’ll add several `steps` within the `build` job.
+Now we will add several `steps` within the `build` job.
 
 We start with `checkout` so we can operate on the codebase.
 

@@ -5,6 +5,9 @@ short-title: "Installing and Using docker-compose"
 description: "How to enable docker-compose in your primary container"
 categories: [containerization]
 order: 40
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to install and use `docker-compose`.
@@ -18,9 +21,9 @@ The `docker-compose` utility is [pre-installed in the CircleCI convenience imag
       - run:
           name: Install Docker Compose
           command: |
-            set -x
-            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-            chmod +x /usr/local/bin/docker-compose
+            curl -L https://github.com/docker/compose/releases/download/1.25.3/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
 
 [pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools

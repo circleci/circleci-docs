@@ -5,6 +5,8 @@ short-title: "Configuration Cookbook"
 description: "Starting point for Configuration Cookbook"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
 
 The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
@@ -19,7 +21,7 @@ This page, and its associated recipes, describes how you can perform specific co
 ### What Are CircleCI Orbs?
 {:.no_toc}
 
-CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a refererence for configuration best practices.
+CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a reference for configuration best practices.
 
 Refer to the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/) for the complete list of available orbs.
 
@@ -40,6 +42,7 @@ workflows:
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
 ## Configure Your Environment for CircleCI Pipelines and Orbs
+{:.no_toc}
 
 Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
@@ -48,19 +51,6 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 * If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/orbs/registry/) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 * Any items that appear within `< >` should be replaced with your own parameters.
-
-## Configuration Recipes
-
-The table below lists some recipes to help and inspire your projects.
-
-Configuration Recipe | Description
-------------|-----------
-[Deploy Changes to Amazon Elastic Container Service (ECS)](#deploy-changes-to-amazon-ecs) | This section describes how you can deploy changes to the Amazon Elastic Container Service (ECS) using a CircleCI-certified ECS orb.
-[Interact with Google Kubernetes Engine (GKE)](#interact-with-google-kubernetes-engine-gke) | This section describes how you can deploy changes to the Google Kubernetes Engine (GKE) using a CircleCI-certified GKE orb.
-[Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)](#using-amazon-elastic-container-service-for-kubernetes-amazon-eks) | This section describes how you can use the Amazon ECS service for Kubernetes for Kubernetes-related tasks and operations.
-[Enabling Custom Slack Notifications in CircleCI Jobs](#enabling-custom-slack-notifications-in-circleci-jobs) | This section describes how you can enable customized Slack notifications in CircleCI jobs.
-[Using Logic in Configuration](#using-logic-in-configuration) | This section describes how you can use pipeline values & parameters to select the work to perform.
-{: class="table table-striped"}
 
 ## Deploy changes to Amazon ECS
 
@@ -122,6 +112,9 @@ jobs:
   verify-deployment:
     docker:
       - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - aws-cli/install
       - aws-cli/configure:
@@ -413,6 +406,9 @@ jobs:
   build:
     docker:
       - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - slack/notify:
           color: '#42e2f4'
@@ -449,6 +445,9 @@ jobs:
   build:
     docker:
       - image: <docker image>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run: exit 0
       - slack/status:
@@ -462,11 +461,11 @@ Notice in the example that the job is run and a Slack status alert is sent to yo
 
 For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/orbs/registry/orb/circleci/slack).
 
-## Using Logic in Configuration
+## Selecting a Workflow to Run Using Pipeline Parameters
 
-### Selecting a Workflow With a Pipeline Parameter
+You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run. 
 
-If you want to be able to trigger custom workflows manually via the API, but still run a workflow on every push, you can use pipeline parameters to decide which workflows to run. For more information see the [API Reference Documentation]({{ site.baseurl }}/2.0/configuration-cookbook/#selecting-a-workflow-with-a-pipeline-parameter) and the [API Developers Guide Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request)
+The following example defaults to running the `build` workflow, but allows control of which other workflow to run using the API:
 
 ```yaml
 version: 2.1
@@ -504,7 +503,7 @@ workflows:
       - report
 ```
 
-The `action` parameter will default to `build` on pushes. Below is an example of supplying a different value using the API v2 Trigger a New Pipeline endpoint and Pipeline Parameters to select a different workflow to run, in this case, `report`. Remember to substitute [`project-slug`({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) for your values.
+The `action` parameter will default to `build` on pushes to the project. Below is an example of supplying a different value to `action` using the API v2 [Trigger a New Pipeline]({{ site.baseurl }}/api/v2/#operation/triggerPipeline) endpoint to select a different workflow to run, in this example, the workflow named `report` would run. Remember to substitute [`project-slug`]({{ site.baseurl }}/2.0/api-developers-guide/#getting-started-with-the-api) with your values.
 
 ```sh
 curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
@@ -514,9 +513,13 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
   -d '{ "parameters": { "action": report } }'
 ```
 
-### Branch-filtering for Job Steps
+For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
 
-Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can implement it for job steps as well.
+## Branch-filtering for Job Steps
+
+Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps. 
+
+The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
 
 ```yaml
 version: 2.1
@@ -525,6 +528,9 @@ jobs:
   my-job:
     docker:
       - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - when:
@@ -538,3 +544,66 @@ workflows:
     jobs:
       - my-job
 ```
+
+## Use Matrix Jobs to Run Multiple OS Tests
+
+Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
+
+In the following example the `test` job is run across Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
+
+```yaml
+version: 2.1
+
+orbs:
+  node: circleci/node@4.0.0
+  win: circleci/windows@2.2.0 
+
+executors:
+  linux: # linux executor using the node base image
+    docker:
+      - image: cimg/node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+  windows: win/default # windows executor - uses the default executor from the windows orb
+  macos: # macos executor using xcode 11.6
+    macos:
+      xcode: 11.6
+
+jobs:
+  test:
+    parameters:
+      os:
+        type: executor
+      node-version:
+        type: string
+    executor: << parameters.os >>
+    steps:
+      - checkout
+      - node/install:
+          node-version: << parameters.node-version >>
+          install-yarn: true
+      - run: yarn test
+
+workflows:
+  all-tests:
+    jobs:
+      - test:
+          matrix:
+            parameters:
+              os: [linux, windows, macos]
+              node-version: ["13.13.0", "14.0.0"]
+```
+
+The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
+
+```
+    - test-13.13.0-linux
+    - test-14.0.0-linux
+    - test-13.13.0-windows
+    - test-14.0.0-windows
+    - test-13.13.0-macos
+    - test-14.0.0-macos
+```
+
+For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).

@@ -5,6 +5,9 @@ short-title: "Ruby"
 description: "Building and Testing with Ruby and Rails on CircleCI 2.0"
 categories: [language-guides]
 order: 8
+version:
+- Cloud
+- Server v2.x
 ---
     
 This guide will help you get started with a Ruby on Rails application on CircleCI. 
@@ -62,6 +65,9 @@ jobs:
   build: # our first job, named "build"
     docker:
       - image: cimg/ruby:2.7-node # use a tailored CircleCI docker image.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout # pull down our git code.
       - ruby/install-deps # use the ruby orb to install dependencies
@@ -79,7 +85,13 @@ jobs:
     # here we set TWO docker images.
     docker:
       - image: cimg/ruby:2.7-node # this is our primary docker image, where step commands run.
-      - image: circleci/postgres:9.5-alpine 
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.5-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # add POSTGRES environment variables.
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog_test

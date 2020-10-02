@@ -5,6 +5,8 @@ short-title: "Code Signing for iOS Projects"
 description: "How to set up code signing for an iOS or Mac app"
 categories: [platforms]
 order: 40
+version:
+- Cloud
 ---
 
 This document describes the guidelines for setting up code signing
@@ -21,7 +23,7 @@ Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repo.
 
 **Note:** Setting up code signing on
-CircleCI 2.0 using Fastlane Match requires *adding a User key** to your
+CircleCI 2.0 using Fastlane Match requires **adding a User key** to your
 CircleCI project. Setting up code signing is quite different than it was in CircleCI 1.0. The 2.0 documentation has been updated to reflect that the CircleCI app is not used, only the config instructions below are used for code signing in 2.0.
 
 **Note**: If you would like to proceed without using Fastlane Match, [this blog post](https://medium.com/@m4rr/circleci-2-0-and-the-ios-code-signing-df434d0086e2) provides an overview of how you can do this with CircleCI.
@@ -143,7 +145,7 @@ After you have configured Match and added its invocation into the Ad-hoc
 lane, you can run that lane on CircleCI. The following `config.yml` will
 create an Ad-hoc build every time you push to the `development` branch:
 
-```
+```yaml
 # .circleci/config.yml
 version: 2
 jobs:
@@ -151,15 +153,14 @@ jobs:
     macos:
       xcode: 11.3.0
     steps:
-      ...
+      # inc steps to complete build and test
       - run: bundle exec fastlane test
-      ...
 
   adhoc:
     macos:
       xcode: 11.3.0
     steps:
-      ...
+      # inc steps required to complete job
       - run: bundle exec fastlane adhoc
 
 workflows:

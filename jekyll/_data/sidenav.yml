@@ -69,8 +69,10 @@ en:
           link: 2.0/migrating-from-jenkins/
         - name: Migrating from TeamCity
           link: 2.0/migrating-from-teamcity/
-        - name: Migrating from TravisCI
+        - name: Migrating from Travis CI
           link: 2.0/migrating-from-travis/
+        - name: Jenkins Converter
+          link: 2.0/jenkins-converter/
 
 - name: Configuration
   icon: docs/config.svg
@@ -110,7 +112,7 @@ en:
           link: 2.0/orb-author/
         - name: Orb Author FAQ
           link: 2.0/orb-author-faq/
-        - name: Orbs Best Practices
+        - name: Orb Authoring Best Practices
           link: 2.0/orbs-best-practices/
         - name: Orb Testing Methodologies
           link: 2.0/testing-orbs/
@@ -144,8 +146,10 @@ en:
           link: 2.0/circleci-images/
         - name: Using Custom Images
           link: 2.0/custom-images/
-        - name: Using Private Images
+        - name: Using Docker Authenticated Pulls
           link: 2.0/private-images/
+        - name: Xcode Image Policy
+          link: 2.0/xcode-policy/
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
@@ -188,8 +192,6 @@ en:
           link: 2.0/env-vars/
         - name: Using Contexts
           link: 2.0/contexts/
-        - name: Enabling Pipelines
-          link: 2.0/build-processing/
         - name: iOS Code Signing
           link: 2.0/ios-codesigning/
     - name: Optimizations
@@ -214,6 +216,8 @@ en:
       children:
         - name: Status Overview
           link: 2.0/status/
+        - name: Pipelines Overview
+          link: 2.0/build-processing/
         - name: Viewing Pipelines
           link: 2.0/pipelines/
         - name: Using Credits
@@ -312,8 +316,6 @@ en:
           link: 2.0/aws-teardown/
         - name: Upgrades from 1.0 to 2.0
           link: 2.0/upgrading/
-        - name: Trial Single-box Install
-          link: 2.0/single-box/
     - name: Server v2.19.x Operations
       link: 2.0/overview/
       children:
@@ -321,12 +323,14 @@ en:
           link: 2.0/overview/
         - name: Nomad
           link: 2.0/nomad/
-        - name: Monitoring
+        - name: Metrics & Monitoring
           link: 2.0/monitoring/
         - name: Nomad Metrics
           link: 2.0/nomad-metrics/
         - name: Proxies
           link: 2.0/proxy/
+        - name: Docker Hub Pull Through Mirror
+          link: 2.0/docker-hub-pull-through-mirror/
         - name: Authentication
           link: 2.0/authentication/
         - name: VM Service
@@ -359,6 +363,8 @@ en:
           link: 2.0/customizations/
         - name: Architecture
           link: 2.0/architecture/
+        - name: Storage Lifecycle
+          link: 2.0/storage-lifecycle/
         - name: Acknowledgments
           link: 2.0/open-source/
     - name: Server v2.19 PDFs
@@ -414,6 +420,9 @@ ja:
         - name: Supported Languages
           i18n_name: サポートされている言語
           link: ja/2.0/demo-apps/
+        - name: Core Features
+          i18n_name: コア機能
+          link: ja/2.0/features/ 
 
 - name: Getting Started
   i18n_name: はじめよう
@@ -423,19 +432,40 @@ ja:
       i18n_name: イントロダクション
       link: ja/2.0/getting-started/
       children:
+        - name: Getting Started
+          i18n_name: 入門ガイド
+          link: ja/2.0/getting-started/
+        - name: What is CircleCI?
+          i18n_name: 概要
+          link: ja/2.0/about-circleci/
         - name: Sign Up & Try CircleCI
-          i18n_name: CircleCIを始める
+          i18n_name: ユーザー登録
           link: ja/2.0/first-steps/
         - name: Hello World
           i18n_name: Hello World
           link: ja/2.0/hello-world/
+        - name: Hello World MacOS
+          i18n_name: macOSでのHello World 
+          link: ja/2.0/hello-world-macos/
+        - name: Hello World Windows
+          i18n_name: WindowsでのHello World
+          link: ja/2.0/hello-world-windows/
+        - name: Get Started with the CLI
+          i18n_name: CircleCI CLI入門
+          link: ja/2.0/local-cli-getting-started/
         - name: FAQ
           i18n_name: FAQ
           link: ja/2.0/faq/
+        - name: Config Builder
+          i18n_name: Config Builder
+          link: config-builder
     - name: Concepts
       i18n_name: コンセプト
       link: ja/2.0/concepts/
       children:
+        - name: Getting Started Concepts
+          i18n_name: コンセプト入門ガイド
+          link: ja/2.0/concepts/
         - name: Projects and Builds
           i18n_name: プロジェクトとビルド
           link: ja/2.0/project-build/
@@ -443,27 +473,26 @@ ja:
           i18n_name: Orbs, ジョブ、ステップ、ワークフロー
           link: ja/2.0/jobs-steps/
         - name: Differences from Jenkins
-          i18n_name: Jenkinsとの違い
+          i18n_name: Jenkinsとの相違点
           link: ja/2.0/migrating-from-jenkins/
         - name: Security
-          i18n_name: セキュリティ
+          i18n_name: セキュリティ機能
           link: ja/2.0/security/
     - name: Migration
-      i18n_name: マイグレーション
+      i18n_name: 移行
       link: ja/2.0/migration-intro/
       children:
-        - name: Tips for Migrating to 2.0
-          i18n_name: 2.0への移行のヒント
-          link: ja/2.0/migration/
-        - name: Migrating a Linux Project
-          i18n_name: Linuxプロジェクトの移行
-          link: ja/2.0/migrating-from-1-2/
-        - name: Migrating an iOS Project
-          i18n_name: iOSプロジェクトの移行
-          link: ja/2.0/ios-migrating-from-1-2/
-        - name: Using the config-translator
-          i18n_name: config-translatorを使う
-          link: ja/2.0/config-translation/
+        - name: Migration Introduction
+          i18n_name: 移行の概要
+          link: ja/2.0/migration-intro/
+        - name: Migrating from Jenkins
+          i18n_name: Jenkinsからの移行
+          link: ja/2.0/migrating-from-jenkins/
+        - name: Migrating from TravisCI
+          i18n_name: TravisCIからの移行
+          link: ja/2.0/migrating-from-travis/
+        - name: Jenkins Converter
+          link: 2.0/jenkins-converter/
 
 - name: Configuration
   i18n_name: 設定
@@ -473,49 +502,80 @@ ja:
       i18n_name: イントロダクション
       link: ja/2.0/config-intro/
       children:
-        - name: Configuration Reference
+        - name: Configuration Introduction
+          i18n_name: 設定の概要
+          link: ja/2.0/config-intro/
+        - name: Configuration Reference Full
           i18n_name: 設定リファレンス
           link: ja/2.0/configuration-reference/
+        - name: Reusable Config Reference
+          i18n_name: コンフィグの再利用(Orbs)
+          link: ja/2.0/reusing-config/
+        - name: Config Builder
+          i18n_name: Config Builder
+          link: config-builder        
         - name: Writing YAML
-          i18n_name: YAMLを書く
+          i18n_name: YAMLの記述
           link: ja/2.0/writing-yaml/
         - name: Using the CircleCI CLI
-          i18n_name: CircleCI CLIを使う
+          i18n_name: CircleCI CLIの使用
           link: ja/2.0/local-cli/
-        - name: Testing Config Locally
-          i18n_name: ローカルでコンフィグのテスト
-          link: ja/2.0/examples/
     - name: Orbs
       i18n_name: Orbs
       link: ja/2.0/orb-intro/
       children:
-        - name: Using Orbs
-          i18n_name: Orbsを使う
-          link: ja/2.0/using-orbs/
-        - name: Reusing Config
-          i18n_name: コンフィグの再利用
-          link: ja/2.0/reusing-config/
+        - name: Orb Introduction
+          i18n_name: Orbの概要
+          link: ja/2.0/orb-intro/
+        - name: Orbs Concepts
+          i18n_name: Orbのコンセプト
+          link: ja/2.0/orb-concepts/
         - name: Orbs FAQ
           i18n_name: Orbs FAQ
           link: ja/2.0/orbs-faq/
-        - name: Creating Orbs
-          i18n_name: Orbsを作る
+    - name: Authoring Orbs
+      i18n_name: Orbオーサリング
+      link: ja/2.0/orb-author-intro/
+      children:
+        - name: Intro to Authoring an Orb
+          i18n_name: Orbオーサリングの概要
+          link: ja/2.0/orb-author-intro/
+        - name: Author an Orb
+          i18n_name: Orbのオーサリングプロセス
+          link: ja/2.0/orb-author/
+        - name: Orb Author FAQ
+          i18n_name: OrbオーサリングFAQ
+          link: ja/2.0/orb-author-faq/
+        - name: Orbs Best Practices
+          i18n_name: Orbのベストプラクティス
+          link: ja/2.0/orbs-best-practices/
+        - name: Orb Testing Methodologies
+          i18n_name: Orbのテスト手法
+          link: ja/2.0/testing-orbs/
+        - name: Orb Publishing Process
+          i18n_name: Orbのパブリッシュ
           link: ja/2.0/creating-orbs/
     - name: Examples
       i18n_name: サンプル
       link: ja/2.0/examples-intro/
       children:
+        - name: Examples Introduction
+          i18n_name: サンプルの概要
+          link: ja/2.0/examples-intro/
         - name: Sample config.yml Files
-          i18n_name: config.ymlの設定
+          i18n_name: config.ymlのサンプル
           link: ja/2.0/sample-config/
         - name: Tutorials
           i18n_name: チュートリアル
           link: ja/2.0/tutorials/
+        - name: Configuration Cookbook
+          i18n_name: 構成クックブック
+          link: ja/2.0/configuration-cookbook/
         - name: Database Config Examples
-          i18n_name: データベースの設定例
+          i18n_name: データベースの構成例
           link: ja/2.0/postgres-config/
         - name: Example Public Repos
-          i18n_name: パブリックなサンプルリポジトリ
+          i18n_name: パブリックリポジトリの例
           link: ja/2.0/example-configs/
         - name: Testing iOS Applications
           i18n_name: iOSアプリをテストする
@@ -524,8 +584,11 @@ ja:
       i18n_name: Executorとイメージ
       link: ja/2.0/executor-intro/
       children:
+        - name: Executor & Image Intro
+          i18n_name: Executorとイメージの概要
+          link: ja/2.0/executor-intro/
         - name: Choosing an Executor Type
-          i18n_name: Executorを選ぶ
+          i18n_name: Executorタイプを選択
           link: ja/2.0/executor-types/
         - name: CircleCI Docker Images
           i18n_name: CircleCI Dockerイメージ
@@ -533,13 +596,17 @@ ja:
         - name: Using Custom Images
           i18n_name: カスタムイメージを使う
           link: ja/2.0/custom-images/
-        - name: Using Private Images
-          i18n_name: プライベートイメージを使う
+        - name: Using Docker Authenticated Pulls
+          i18n_name: Dockerの認証付きプルの使用
           link: ja/2.0/private-images/
+
     - name: ADVANCED CONFIG
       i18n_name: 高度な設定
       link: ja/2.0/adv-config/
       children:
+        - name: Advanced Config Intro
+          i18n_name: 高度な設定の概要
+          link: ja/2.0/adv-config/
         - name: Using Shell Scripts
           i18n_name: シェルスクリプトを使う
           link: ja/2.0/using-shell-scripts/
@@ -564,6 +631,9 @@ ja:
       i18n_name: セッティング
       link: ja/2.0/settings/
       children:
+        - name: Settings Overview
+          i18n_name: セッティングの概要
+          link: ja/2.0/settings/
         - name: GitHub and Bitbucket
           i18n_name: GitHubとBitbucket
           link: ja/2.0/gh-bb-integration/
@@ -586,7 +656,7 @@ ja:
           i18n_name: Contextsを使う
           link: ja/2.0/contexts/
         - name: Enabling Build Processing
-          i18n_name: Build Processingの有効化
+          i18n_name: パイプラインの有効化
           link: ja/2.0/build-processing/
         - name: Setting Up iOS Code Signing
           i18n_name: iOSコードサインの設定
@@ -595,6 +665,9 @@ ja:
       i18n_name: 最適化
       link: ja/2.0/optimizations/
       children:
+        - name: Optimization Overview
+          i18n_name: 最適化の概要
+          link: ja/2.0/optimizations/
         - name: Caching Dependencies
           i18n_name: 依存関係のキャッシュ
           link: ja/2.0/caching/
@@ -604,20 +677,32 @@ ja:
         - name: Using Docker Layer Caching
           i18n_name: Docker Layer Cachingを使う
           link: ja/2.0/docker-layer-caching/
+        - name: Optimizations Cookbook
+          i18n_name: 最適化クックブック
+          link: ja/2.0/optimization-cookbook/
 
-- name: Jobs
-  i18n_name: ジョブ
+- name: Pipelines
+  i18n_name: パイプライン
   icon: docs/builds.svg
   children:
     - name: Status
       i18n_name: ステータス
       link: ja/2.0/status/
       children:
+        - name: Status Overview
+          i18n_name: ステータスの概要
+          link: ja/2.0/status/
+        - name: Viewing Pipelines
+          i18n_name: パイプラインの表示
+          link: ja/2.0/pipelines/
+        - name: Using Credits
+          i18n_name: クレジットの使用
+          link: ja/2.0/credits/
         - name: Using Containers
-          i18n_name: コンテナを使う
+          i18n_name: コンテナを使用する
           link: ja/2.0/containers/
         - name: Adding Status Badges
-          i18n_name: ステータスバッジを追加する
+          i18n_name: ステータスバッジの追加
           link: ja/2.0/status-badges/
         - name: Storing Build Artifacts
           i18n_name: ビルドアーティファクトの保存
@@ -626,11 +711,14 @@ ja:
           i18n_name: SSHデバッグ
           link: ja/2.0/ssh-access-jobs/
         - name: Debugging Java Memory Errors
-          i18n_name: Javaのメモリエラーのデバッグ
+          i18n_name: Javaメモリエラーのデバッグ
           link: ja/2.0/java-oom/
         - name: Collecting Test Metadata
           i18n_name: テストメタデータの収集
           link: ja/2.0/collect-test-data/
+        - name: Code Coverage Metrics
+          i18n_name: コードカバレッジメトリクスの生成
+          link: ja/2.0/code-coverage/
         - name: Using Insights
           i18n_name: Insightsを使う
           link: ja/2.0/insights/
@@ -638,14 +726,17 @@ ja:
       i18n_name: トリガー
       link: ja/2.0/triggers/
       children:
+        - name: Introductions to Triggers
+          i18n_name: トリガーの概要
+          link: ja/2.0/triggers/
         - name: Skip and Cancel Builds
           i18n_name: ビルドのスキップとキャンセル
           link: ja/2.0/skip-build/
         - name: Using the API to Trigger Jobs
-          i18n_name: APIを使ってジョブをトリガーする
+          i18n_name: APIを使用したジョブのトリガー
           link: ja/2.0/api-job-trigger/
         - name: Using Workflows to Schedule Jobs
-          i18n_name: ワークフローでジョブをスケジュールする
+          i18n_name: ワークフローを使用したジョブのスケジュール
           link: ja/2.0/workflows/
 
 - name: Deployment
@@ -656,14 +747,10 @@ ja:
       i18n_name: デプロイメントの設定
       link: ja/2.0/deployment-integrations/
       children:
-        - name: Deploying to AWS ECR/ECS
-          i18n_name: AWS ECR/ECSにデプロイする
-          link: ja/2.0/ecs-ecr/
-        - name: Using Yarn on CircleCI
-          i18n_name: YarnをCircleCIで使う
-          link: ja/2.0/yarn/
+        - name: Deployment Overview
+          i18n_name: デプロイメントの概要
         - name: Publishing Snap Packages
-          i18n_name: Snapのパッケージを公開する
+          i18n_name: Snapのパッケージを公開
           link: ja/2.0/build-publish-snap-packages/
         - name: Using Artifactory
           i18n_name: Artifactoryを使う
@@ -680,15 +767,15 @@ ja:
         - name: Configuration Reference
           i18n_name: 設定リファレンス
           link: ja/2.0/configuration-reference/
+        - name: API v2 Introduction
+          i18n_name: APIリファレンス
+          link: ja/2.0/api-intro/
         - name: API Reference
           i18n_name: APIリファレンス
           link: api/
         - name: Prebuilt Images
           i18n_name: CircleCI公式イメージ
           link: ja/2.0/circleci-images/
-        - name: Glossary
-          i18n_name: 用語集
-          link: ja/2.0/glossary/
         - name: Help and Support
           i18n_name: ヘルプとサポート
           link: ja/2.0/help-and-support/

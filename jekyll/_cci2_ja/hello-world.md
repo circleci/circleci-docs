@@ -19,7 +19,7 @@ order: 4
 2. 以下の行を含む [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成します。
 
    ```yaml
-   version: 2.1
+     version: 2.1
      jobs:
        build:
          docker: 
@@ -47,11 +47,12 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ
 
 前述の Linux の例と基本的な考え方は同じです。ビルド済みの Android イメージを同じ `config.yml` ファイルで使用して、`docker` executor を使用するジョブを追加します。
 
-    jobs:
-      build-android:
-        docker:
-          - image: circleci/android:api-25-alpha
-    
+```
+jobs:
+  build-android:
+    docker:
+      - image: circleci/android:api-25-alpha
+```
 
 詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/ja/2.0/language-android/)を参照してください。
 
@@ -59,11 +60,12 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ
 
 Linux と Android の例と基本的に変わらず、`macos` Executor およびサポートされているバージョンの Xcode を使用するジョブを追加します。
 
-    jobs: 
-      build-macos: 
-        macos:  
-          xcode: 11.3.0
-    
+```
+jobs:
+  build-macos:
+    macos:
+      xcode: 11.3.0
+```
 
 詳細とサンプル プロジェクトについては、「[macOS での Hello World]({{site.baseurl}}/ja/2.0/hello-world-macos)」を参照してください。
 
@@ -71,17 +73,39 @@ Linux と Android の例と基本的に変わらず、`macos` Executor および
 
 ここにも Linux、Android、macOS の例における基礎を流用できます。同じ `.circleci/config.yml` ファイルに `orb:` キーを追加して、`win/vs2019` Executor (Windows Server 2019) を使用するジョブを追加します。
 
-    orbs:
-      win: circleci/windows@1.0.0
-    
-    jobs:
-      build-windows:
-        executor: win/vs2019
-        steps:
-    
-          - checkout
-          - run: Write-Host 'Hello, Windows'
-    
+{:.tab.windowsblock.Cloud}
+```yaml
+version: 2.1 # Use version 2.1 to enable orb usage.
+
+orbs:
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
+
+jobs:
+  build: # name of your job
+    executor:
+      name: win/default # executor type
+      size: "medium" # resource class, can be "medium", "large", "xlarge", "2xlarge", defaults to "medium" if not specified
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
+```
+
+{:.tab.windowsblock.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # Commands are run in a Windows virtual machine environment
+        - checkout
+        - run: Write-Host 'Hello, Windows'
+```
 
 **メモ:** Windows ビルドでは、セットアップと前提条件が多少異なります。 詳しくは「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows)」を参照してください。
 

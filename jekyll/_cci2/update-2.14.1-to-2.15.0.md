@@ -4,6 +4,9 @@ title: "Upgrading MongoDB when using externalized MongoDB"
 category: [administration]
 order: 12
 description: "How to upgrading MongoDB from 3.2 to 3.6 when using externalized MongoDB"
+version:
+- Server v2.x
+- Server Admin
 ---
 
 If you are running an external MongoDB with your CircleCI installation, multiple MongoDB upgrades are recommended for use with CircleCI v2.15.0. Work with a CircleCI Solutions Engineer to complete the recommended upgrades to your custom HA configuration (requires Platinum Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).

@@ -2,8 +2,12 @@
 layout: classic-docs
 title: "Deployment Examples"
 short-title: "Deployment Examples"
+version:
+- Cloud
+- Server v2.x
 ---
-This document presents example config for a variately of popular deployment targets. Many of the examples use orbs. CircleCI and partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+
+This document presents example config for a variety of popular deployment targets. Many of the examples use orbs. CircleCI and partners have developed a catalogue of orbs that enable you to quickly deploy applications with minimal config. Details of all orbs can be found in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
 
 * TOC
 {:toc}
@@ -63,10 +67,16 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
       build:
         docker: # Use the Docker executor for the build job
           - image: <image-name-and-tag> # Specify the Docker image to use for the build job
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       ... # build job steps omitted for brevity
       deploy:
         docker: # Use the Docker executor for the deploy job
           - image: <image-name-and-tag>  # Specify the Docker image to use for the deploy job
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       steps:
           - checkout
           - aws-s3/sync:
@@ -112,10 +122,16 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
       build:
         docker: # Specify executor for running build job - this example uses a Docker container
           - image: <docker-image-name-tag> # Specify docker image to use
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       ... # build job steps omitted for brevity
       deploy:
         docker: # Specify executor for running deploy job
           - image: <docker-image-name-tag> # Specify docker image to use
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - run: # Install the AWS CLI if it is not already included in the docker image
               name: Install awscli 
@@ -278,6 +294,9 @@ jobs:
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout
@@ -457,6 +476,9 @@ The following example shows how you can add a deploy to Firebase job to your pro
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp/my-project
     steps:
       - run:
@@ -534,7 +556,10 @@ jobs:
   deploy-job:
     docker:
       - image: <docker-image-name-tag>
-    working_directory: /tmp/my-project  
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp/my-project
     steps:
       - run:
           name: Deploy Master to GKE
@@ -625,6 +650,9 @@ to set up a project in your chosen language.
       deploy:
         docker:
           - image: <docker-image-name-tag>
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - checkout
           - run:
@@ -676,6 +704,9 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
       publish:
         docker:
           - image: <docker-image-name-tag>
+            auth:
+              username: mydockerhub-user
+              password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - checkout
           - run:

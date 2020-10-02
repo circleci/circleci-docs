@@ -14,7 +14,7 @@ In the following sections we provide helpful guides and tips for migrating your 
 * [Migrating from Buildkite]({{ site.baseurl }}/2.0/migrating-from-buildkite/)
 * [Migrating from GitLab]({{ site.baseurl }}/2.0/migrating-from-gitlab/)
 * [Migrating from Github Actions]({{ site.baseurl }}/2.0/migrating-from-github/)
-* [Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/)
+* [Migrating from Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) also see the guide to using the [CircleCI Jenkins Converter]({{ site.baseurl }}/2.0/jenkins-converter/).
 * [Migrating from TeamCity]({{ site.baseurl }}/2.0/migrating-from-teamcity/)
 * [Migrating from Travis CI]({{ site.baseurl }}/2.0/migrating-from-travis/)
 

@@ -5,6 +5,9 @@ short-title: "Debugging with SSH"
 description: "How to access a build container using SSH on CircleCI 2.0"
 categories: [troubleshooting]
 order: 20
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:

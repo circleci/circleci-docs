@@ -5,6 +5,9 @@ short-title: "FAQ"
 description: "Frequently asked questions about CircleCI 2.0"
 categories: [migration]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 * TOC
@@ -138,7 +141,13 @@ jobs:
   build:
     docker:
       - image: your/primary-image:version-tag
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mysql:5.7
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
            TZ: "America/Los_Angeles"
     working_directory: ~/your-dir
@@ -179,7 +188,7 @@ Using Workflow config you can run multiple jobs at once or sequentially. You can
 
 ### Do you plan to add the ability to launch jobs on both Linux and Mac environments in the same workflow?
 {:.no_toc}
-Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types-macos--docker) document.
+Yes, this is supported. See the section for multiple executor types in the [Sample 2.0 `config.yml` Files]({{ site.baseurl }}/2.0/sample-config/#sample-configuration-with-multiple-executor-types) document.
 
 ### Is it possible to split the `config.yml` into different files?
 {:.no_toc}

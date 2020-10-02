@@ -5,6 +5,9 @@ short-title: "Using the CircleCI Local CLI"
 description: "How to run local jobs with the CLI"
 categories: [troubleshooting]
 order: 10
+version:
+- Cloud
+- Server v2.x
 ---
 
 ## Overview
@@ -228,6 +231,9 @@ jobs:
   hello/hello-build:
     docker:
     - image: circleci/buildpack-deps:curl-browsers
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
     - run:
         command: echo "Hello ${CIRCLE_USERNAME}"

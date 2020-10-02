@@ -3,8 +3,6 @@ layout: classic-docs
 title: "コンテキストの使用"
 short-title: "コンテキストの使用"
 description: "プロジェクト間で共有できる安全なリソース"
-categories:
-  - configuring-jobs
 order: 41
 ---
 
@@ -37,15 +35,16 @@ GitHub Enterprise (GHE) インストールに複数の組織が含まれる場�
 
 3. [Add Environment Variable (環境変数を追加)] ボタンをクリックし、変数名と値をコピー & ペーストします。 [Add Variable (変数を追加)] ボタンをクリックして保存します。
 
-4. この変数を使用する各ジョブで、[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの [`workflows`]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションに `context: <context name>` キーを追加します。 以下の例では、`run-tests` ジョブが、`org-global` コンテキストに設定された変数を使用します。
+4. この変数を使用する各ジョブで、[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの [`workflows`]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションに `context` キーを追加します。 以下の例では、`run-tests` ジョブが、`org-global` コンテキストに設定された変数を使用します。
 
     workflows:
       version: 2
       my-workflow:
         jobs:
           - run-tests:
-              context: org-global
-    
+              context:
+                - org-global
+
 
 ## コンテキストを使用するリポジトリの移動
 

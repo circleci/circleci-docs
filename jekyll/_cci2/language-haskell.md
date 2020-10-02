@@ -5,6 +5,9 @@ short-title: "Haskell"
 description: "Building and Testing with Haskell on CircleCI 2.0"
 categories: [language-guides]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide will help you get started with a basic Haskell application on
@@ -35,6 +38,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -96,6 +102,9 @@ jobs:
   build:
     docker:
       - image: fpco/stack-build:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 We are now set to run the Haskell build tool `stack` in our environment. The remainder of our

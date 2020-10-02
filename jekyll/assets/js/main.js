@@ -83,23 +83,79 @@ function getUrlVars(url) {
 
 function detectScrollbar( element ){
 
-	if( element.prop( 'scrollWidth' ) > element.prop( 'offsetWidth' )){
-		element.siblings( '.tab' ).css("margin-top", "15px");
-	}
+  if( element.prop( 'scrollWidth' ) > element.prop( 'offsetWidth' )){
+    element.siblings( '.tab' ).css("margin-top", "15px");
+  }
+}
+
+function renderVersionBlockPopover() {
+  var badges = document.querySelectorAll(".server-version-badge")
+  var tooltip = document.querySelector(".server-version-popover")
+  badges.forEach(function(badge) {
+
+    let popperInstance = null;
+
+    function create() {
+      popperInstance = Popper.createPopper(badge, tooltip, {
+        modifiers: [
+          {name: 'offset',
+           options: {
+             offset: [0, 8],
+           },
+          },
+        ],
+      });
+    }
+
+    function destroy() {
+      if (popperInstance) {
+        popperInstance.destroy();
+        popperInstance = null;
+      }
+    }
+
+    function show() {
+      tooltip.setAttribute('data-show', '');
+      // change tooltip text based on current button popover.
+      tooltip.innerHTML = "This document is applicable to CircleCI "
+        + badge.innerText
+        + "<div id='arrow' data-popper-arrow></div>"
+      create();
+    }
+
+    function hide() {
+      tooltip.removeAttribute('data-show');
+      destroy();
+    }
+
+    const showEvents = ['mouseenter', 'focus'];
+    const hideEvents = ['mouseleave', 'blur'];
+
+    showEvents.forEach(event => {
+      badge.addEventListener(event, show);
+    });
+
+    hideEvents.forEach(event => {
+      badge.addEventListener(event, hide);
+    });
+
+
+  })
+
 }
 
 /**
-  * renderTabbedHtml implements a "tabbing" behaviour on html elements.
-  * Tabs are implemented using css classes. Proper usage looks like so:
-  * <div class="tab $tab-group $tab-name", or kramdown: {:.tab.$tab-group.$tab-name}
-  *
-  * The function performs the following:
-  * * Find all tabs in the DOM and group them into a datastructure
-  * * Loop through the collected tabs and wrap them in a HTML tab structure.
-  * * Apply click behaviour to toggle hide/showing of the tab's content.
-  * *
-  *
-  *
+ * renderTabbedHtml implements a "tabbing" behaviour on html elements.
+ * Tabs are implemented using css classes. Proper usage looks like so:
+ * <div class="tab $tab-group $tab-name", or kramdown: {:.tab.$tab-group.$tab-name}
+ *
+ * The function performs the following:
+ * * Find all tabs in the DOM and group them into a datastructure
+ * * Loop through the collected tabs and wrap them in a HTML tab structure.
+ * * Apply click behaviour to toggle hide/showing of the tab's content.
+ * *
+ *
+ *
  */
 function renderTabbedHtml() {
   var tabData = {};
@@ -142,12 +198,12 @@ function renderTabbedHtml() {
 
 
   /**
-    * Loop through the collected dom Tabs and handle:
-    * 1) Building the actual tabs with HTML and setting their css styles
-    * 2) Building the 'tab-switching behaviour.
-    *
-    * All tab switching is handled by css classes.
-    */
+   * Loop through the collected dom Tabs and handle:
+   * 1) Building the actual tabs with HTML and setting their css styles
+   * 2) Building the 'tab-switching behaviour.
+   *
+   * All tab switching is handled by css classes.
+   */
   $.each(tabData, function (key, val) {
     var tabWrapperName = "tabWrapper-" + key;     // The wrapper for the entire switchable-content
     var tabGroupName = "tabGroup-" + key;         // Name for the group of tabs
@@ -176,8 +232,8 @@ function renderTabbedHtml() {
       var tabName = tabContentClasses[2]
       $("." + tabGroupName)
         .append($("<div>")
-          .addClass(tabClass)
-          .text(deSlugTabName(tabName)))
+                .addClass(tabClass)
+                .text(deSlugTabName(tabName)))
     })
   })
 
@@ -192,32 +248,33 @@ function renderTabbedHtml() {
     $(tabToShow).not(".realtab").show()
   })
 
-	$( ".tabGroup" ).each( function(){
-		detectScrollbar( $(this) );
-	});
+  $( ".tabGroup" ).each( function(){
+    detectScrollbar( $(this) );
+  });
 }
 
 $( document ).ready(function() {
 
-	// Allow navigation to slide open and close on small devices
-	$("#nav-button").click(function(){
-		event.preventDefault();
+  // Allow navigation to slide open and close on small devices
+  $("#nav-button").click(function(){
+    event.preventDefault();
 
-		$("#nav-button").toggleClass("open");
-		$("nav.sidebar").toggleClass("open");
-	});
+    $("#nav-button").toggleClass("open");
+    $("nav.sidebar").toggleClass("open");
+  });
 
-	// Give article headings direct links to anchors
-	$("article h2, article h3, article h4, article h5, article h6").filter("[id]").each(function () {
-		$(this).append('<a href="#' + $(this).attr("id") + '"><i class="fa fa-link"></i></a>');
-	});
-	$("article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
-		$(this).find("i").toggle();
-	});
+  // Give article headings direct links to anchors
+  $("article h2, article h3, article h4, article h5, article h6").filter("[id]").each(function () {
+    $(this).append('<a href="#' + $(this).attr("id") + '"><i class="fa fa-link"></i></a>');
+  });
+  $("article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
+    $(this).find("i").toggle();
+  });
 
   renderTabbedHtml();
+  renderVersionBlockPopover();
 
-	$.getJSON("/api/v1/me").done(function (userData) {
-		analytics.identify(userData['analytics_id']);
-	});
+  // $.getJSON("/api/v1/me").done(function (userData) {
+  // 	analytics.identify(userData['analytics_id']);
+  // });
 });

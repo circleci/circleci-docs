@@ -36,9 +36,25 @@ this folder (in our build process) and integrated into the Jekyll Site. Follow
 the [local development guide](./docs/local-development.md) to get started with
 building the Jekyll site.
 
-### `/src-api` - API V2 Build Tooling
+### `/src-api` - API v1.1 and v2 Build Tooling
 
-This is the build tooling we use for automatically generating documentation for
+Our API documentation source can be found in this folder.
+
+**API v1** is written by hand, and compiled to work with
+[Slate](https://github.com/slatedocs/slate). The compilation and deployment of
+`v1` is handled by our `.circleci/config.yml`, which calls our `build_api_docs`
+script. If you need to make changes to our V1 documentation, go to
+`src-api/source/includes` and make changes as needed in the markdown files.
+
+API v2 is compiled from an [OpenAPI
+spec](https://github.com/OAI/OpenAPI-Specification). We use
+[Redoc](https://github.com/Redocly/redoc) to compile our spec into a webpage. To
+see the compilation process, refer to `build_api_docs.sh` and our
+`.circleci/config.yml`. If you need to make changes to the output site, you will
+likely need to make source code changes to the API, where the docs are generated
+from.
+
+This is the build folder we use for automatically generating documentation for
 the CircleCI API v2. This uses [Slate](https://github.com/slatedocs/slate) and
 [Widdershins](https://github.com/Mermade/widdershins) to create documentation
 with a spec (that follows the Open API Spec) generated from the CircleCI code

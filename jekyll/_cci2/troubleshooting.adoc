@@ -1,3 +1,8 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = Troubleshooting Server Installations
 :page-layout: classic-docs
 :page-liquid:
@@ -5,14 +10,14 @@
 :toc: macro
 :toc-title:
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
-
-This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, please https://help.replicated.com/docs/native/packaging-an-application/support-bundle/[generate a support bundle] and contact our Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
+This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI installation on your private server. If your issue is not addressed below, you can generate a support bundle and contact CircleCI Support Engineers by https://support.circleci.com/hc/en-us/requests/new[opening a support ticket].
 
 toc::[]
 
-[discrete]
-=== Debugging Queuing Builds
+=== Generating a Support Bundle
+To download a support bundle, select **Support** from the Management Console menu bar, and then select **Download Support Bundle**. CircleCI support engineers will often request support bundles to help diagnose/fix the problem you are experiencing.
+
+=== Debug Queuing Builds
 
 If your Services component is fine, but builds are not running, or all builds are queueing, follow the steps below.
 
@@ -127,8 +132,7 @@ After a job has completed, the Status shows `dead`. This is a regular state for 
 
 NOTE: The use of `--stderr` is to print the specific error if one exists.
 
-[discrete]
-=== Jobs stay in `queued` status until they fail and never successfully run
+=== Why do my Jobs stay in `queued` status until they fail and never successfully run?
 
 If the nomad client logs contain the following error message typw, check port 8585:
 
@@ -137,13 +141,11 @@ If the nomad client logs contain the following error message typw, check port 85
 unavailable","level":"warning","msg":"error fetching config, retrying","time":"2018-04-17T18:47:01Z"}
 ```
 
-[discrete]
 === Why is the cache failing to unpack?
 
 If a `restore_cache` step is failing for one of your jobs, it is worth checking the size of the cache - you can view the cache size from the CircleCI Jobs page within the `restore_cache` step. We recommend keeping cache sizes under 500MB – this is our upper limit for corruption checks because above this limit check times would be excessively long. Larger cache sizes are allowed but may cause problems due to a higher chance of decompression issues and corruption during download. To keep cache sizes down, consider splitting into multiple distinct caches.
 
-[discrete]
-=== How do I get round the API service being impacted by a high thread count
+=== How do I get around the API service being impacted by a high thread count?
 
 Disable cache warming by completing the following steps:
 

@@ -8,8 +8,6 @@ categories:
 order: 21
 ---
 
-*[リファレンス]({{ site.baseurl }}/ja/2.0/reference/) > コンテナ ID をホスト ID にマップできないエラーのデバッグ*
-
 コンテナの起動時に、以下のエラー メッセージが表示されることがあります。
 
     failed to register layer: Error processing tar file (exit status 1): container id 1000000 cannot be mapped to a host id

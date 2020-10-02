@@ -5,6 +5,9 @@ short-title: "Choosing an Executor Type"
 description: "Overviews of the docker, machine, and executor types"
 categories: [containerization]
 order: 10
+version:
+- Cloud
+- Server v2.x
 ---
 [custom-images]: {{ site.baseurl }}/2.0/custom-images/
 [building-docker-images]: {{ site.baseurl }}/2.0/building-docker-images/
@@ -48,6 +51,8 @@ In this example, all steps run in the container created by the first image liste
 
 ### Docker Image Best Practices
 {:.no_toc}
+
+- If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
 
 - Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago. 
 
@@ -98,7 +103,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `image_full_url@digest`
     - `gcr.io/google-containers/busybox@sha256:4bdd623e848417d9612...`
 
-Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Private Images]({{ site.baseurl }}/2.0/private-images).
+Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
 
 ### RAM disks
 
@@ -200,41 +205,35 @@ Using the `machine` executor also means that you get full access to the Docker p
 **Note**:
 Using `machine` may require additional fees in a future pricing update.
 
-To use the `machine` executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) to `true` in `.circleci/config.yml`:
+To use the machine executor,
+set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
 
 {:.tab.machineblock.Cloud}
 ```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01    # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+      image: ubuntu-1604:202007-01
 ```
+
+You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
+
+The following example uses an image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 
 {:.tab.machineblock.Server}
 ```yaml
-version: 2
-jobs:
-  build:
-    machine: true # uses default image
-```
-
-**Note:** The default image for the machine executor is `circleci/classic:latest`.  If you don't specify an image, jobs will run on the default image - which is currently circleci/classic:201710-01 but may change in future.
-
-All images have common language tools preinstalled. Refer to the [specification script for the VM](https://raw.githubusercontent.com/circleci/image-builder/picard-vm-image/provision.sh) for more information.
-
-**Note:** The `image` key is not required on self-hosted installations of CircleCI Server (see example above) but if it is used, it should be set to: `image: default`.
-
-The following example uses the default machine image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow.
-
-```yaml
-version: 2
+version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-1604:202007-01
       docker_layer_caching: true    # default - false
 ```
+
+**Note:**
+The `image` key is not supported on private installations of CircleCI.
+See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
 ## Using macOS
 

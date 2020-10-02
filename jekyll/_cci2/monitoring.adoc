@@ -1,12 +1,14 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = Monitoring Your Installation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
-
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This section includes information on metrics for monitoring your CircleCI Server installation.
 
@@ -40,11 +42,11 @@ It is worth noting that Telegraf can accept multiple input and output types at t
 
 Review your metrics configuration file using the following command:
 
-{% raw %}
+ifndef::pdf[{% raw %}]
 ```sh
 sudo docker inspect --format='{{range .Mounts}}{{println .Source "->" .Destination}}{{end}}' telegraf | grep telegraf.conf | awk '{ print $1 }' | xargs cat
 ```
-{% endraw %}
+ifndef::pdf[{% endraw %}]
 
 There are four notable blocks in the file (some blocks might not be there depending on your configuration in the Management Console):
 
@@ -270,11 +272,11 @@ Now you are ready to do anything Telegraf supports! All you need to provide is a
 
 NOTE: See the https://github.com/influxdata/telegraf/blob/master/README.md[Telegraf README] for further config syntax details.
 
+[discrete]
 ==== Sample Telegraph Configuration
-{:.no_toc}
 
+[discrete]
 ===== Scenario 1: Record standard metrics to two InfluxDB instances
-{:.no_toc}
 
 The example below records default metrics to two InfluxDB instances: One is your on-premises InfluxDB server (`your-influx-db-instance.example.com`), and the other is https://cloud2.influxdata.com/[InfluxDB Cloud 2].
 
@@ -314,8 +316,8 @@ The example below records default metrics to two InfluxDB instances: One is your
   bucket = "circleci"
 ```
 
+[discrete]
 ===== Scenario 2: Record all metrics to Datadog
-{:.no_toc}
 
 The standard configuration handles only selected metrics, and there are many metrics discarded by Telegraf. If you want to receive this discarded, sophisticated data, such as JVM stats and per-container CPU usage, you can keep all received metrics by removing namepass filter. This example also illustrates how to configure metrics emission to Datadog. As discussed above, you need manual configuration for outputs to Datadog regardless of configurations on Replicated.
 
@@ -331,8 +333,8 @@ CAUTION: This scenario leads to very large amounts of data.
   apikey = 'YOUR_API_KEY_HERE'
 ```
 
+[discrete]
 ===== Scenario 3: Send limited metrics to CloudWatch
-{:.no_toc}
 
 AWS charges fees for CloudWatch per series of scalar (i.e. at the level of "mean" or "sum"). Since multiple fields (e.g. mean, max, min and sum) are calculated for each metrics key (e.g. `circle.run-queue.latency`) and some fields can be redundant, you might want to select which fields are sent to CloudWatch. This can be achieved by configuring `\[[outputs.cloudwatch]]` with `fieldpass`. You also may declare `\[[outputs.cloudwatch]]` multiple times to pick up multiple metrics, as illustrated below.
 

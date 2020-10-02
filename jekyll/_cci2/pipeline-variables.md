@@ -5,6 +5,8 @@ short-title: "Pipeline Variables"
 description: "Detailed information about Pipeline variables, parameters and values"
 categories: [getting-started]
 order: 1
+version: 
+- Cloud
 ---
 
 Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher. 
@@ -39,6 +41,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       CIRCLE_COMPARE_URL: << pipeline.project.git_url >>/compare/<< pipeline.git.base_revision >>..<<pipeline.git.revision>>
     working_directory: ~/main
@@ -77,6 +82,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:<< pipeline.parameters.image-tag >>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       IMAGETAG: << pipeline.parameters.image-tag >>
     working_directory: << pipeline.parameters.workingdir >>

@@ -3,9 +3,12 @@ layout: classic-docs
 title: "Using Workflows to Schedule Jobs"
 short-title: "Using Workflows to Schedule Jobs"
 description: "Using Workflows to Schedule Jobs"
-categories: [configuring-jobs]
 order: 30
+version:
+- Cloud
+- Server v2.x
 ---
+
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
 
 * TOC
@@ -29,14 +32,16 @@ For example, if only one job in a workflow fails, you will know it is failing in
 
 Workflows may appear with one of the following states:
 
-- RUNNING: Workflow is in progress
-- NOT RUN: Workflow was never started
-- CANCELLED: Workflow was cancelled before it finished
-- FAILING: A job in the workflow has failed. Workflows go into Failing state when one of the jobs within the graph has failed while other jobs are still running. Failing state indicates that the workflow is eventually going to fail.
-- FAILED: One or more jobs in the workflow failed. Failed state is when one or more jobs in the workflow graph have failed. Failed is a terminal state.
-- SUCCESS: All jobs in the workflow completed successfully
-- ON HOLD: A job in the workflow is waiting for approval
-- NEEDS SETUP: A workflow stanza is not included or is incorrect in the [config.yml file]({{ site.baseurl }}/2.0/configuration-reference/) for this project
+| State | Description |
+|-------|-------------|
+| RUNNING | Workflow is in progress | 
+| NOT RUN | Workflow was never started | 
+| CANCELLED | Workflow was cancelled before it finished | 
+| FAILING | A job in the workflow has failed | 
+| FAILED | One or more jobs in the workflow failed | 
+| SUCCESS | All jobs in the workflow completed successfully | 
+| ON HOLD | A job in the workflow is waiting for approval | 
+| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project | 
 
 ### Limitations
 {:.no_toc}
@@ -59,12 +64,18 @@ jobs:
   build:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
@@ -175,7 +186,7 @@ workflows:
           requires: # test1 will not run until the `build` job is completed.
             - build
       - test2: # another custom job; runs test suite 2,
-          requires: # test2 is dependent on the succes of job `test1`
+          requires: # test2 is dependent on the success of job `test1`
             - test1
       - hold: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
@@ -212,7 +223,7 @@ The following screenshot demonstrates a workflow on hold.
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
-By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears requesting that you approve or cancel the holding job.
+By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
 
 After approving, the rest of the workflow runs as directed.
 
@@ -462,6 +473,9 @@ executors:
   my-executor:
     docker:
       - image: buildpack-deps:jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: /tmp
 
 jobs:
@@ -519,6 +533,13 @@ When you use workflows, you increase your ability to rapidly respond to failures
 
 This section describes common problems and solutions for Workflows.
 
+### Workflow and Subsequent Jobs Do Not Trigger
+
+If you do not see your workflows triggering, a common cause is a configuration error
+preventing the workflow from starting. As a result, the workflow does not start
+any jobs. Navigate to your project's pipelines and click on your workflow name
+to discern what might be failing.
+
 ### Rerunning Workflows Fails
 {:.no_toc}
 
@@ -527,7 +548,7 @@ It has been observed that in some cases, a failure happens before the workflow r
 ### Workflows Waiting for Status in GitHub
 {:.no_toc}
 
-If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be  status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
+If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
 
 ![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 

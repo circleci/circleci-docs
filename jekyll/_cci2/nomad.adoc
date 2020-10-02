@@ -1,12 +1,14 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = Introduction to Nomad Cluster Operation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
-
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 CircleCI 2.0 uses https://www.hashicorp.com/blog/nomad-announcement/[Nomad] as the primary job scheduler. This chapter provides a basic introduction to Nomad for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 

@@ -5,6 +5,8 @@ short-title: "Migrating a Linux Project from 1.0 to 2.0"
 description: "Why and how to migrate from CircleCI 1.0 to 2.0"
 categories: [migration]
 order: 15
+version:
+- Server v2.x
 ---
 
 This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. 
@@ -46,10 +48,13 @@ The `config-translation` endpoint can help you quickly get started with converti
        ruby:
          version: 2.3
      ```
-     Replace with the following two lines:
+     Replace with the following lines:
      ```
          docker:
            - image: circleci/ruby:2.3-jessie
+             auth:
+               username: mydockerhub-user
+               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
      The primary container is an instance of the first image listed. Your job's commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers. 
      ```yaml
@@ -60,7 +65,6 @@ The `config-translation` endpoint can help you quickly get started with converti
          macos: 
            xcode: 11.3.0
      ```
-See the [Migrating Your iOS Project From 1.0 to 2.0](https://circleci.com/docs/2.0/ios-migrating-from-1-2/) document for details.
 
 6. The `checkout:` step is required to run jobs on your source files. Nest `checkout:` under `steps:` for every job by search and replacing
      ```

@@ -3,8 +3,10 @@ layout: classic-docs
 title: Skip and Cancel Builds
 short-title: Skip and Cancel Builds
 description: How to Prevent CircleCI From Automatically Building
-categories: [configuring-jobs]
 order: 100
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to skip or cancel builds in the following sections.

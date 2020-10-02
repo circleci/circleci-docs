@@ -7,6 +7,7 @@ docs@circleci.com
 :toc:
 :toc-title: Contents
 :icons: font
+:page-liquid:
 :source-highlighter: rouge
 :pagenums:
 :idprefix:
@@ -57,5 +58,7 @@ include::admin-faq.adoc[]
 include::customizations.adoc[]
 
 include::architecture.adoc[]
+
+include::storage-lifecycle.adoc[]
 
 :leveloffset: -1

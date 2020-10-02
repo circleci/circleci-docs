@@ -5,6 +5,8 @@ short-title: "Viewing Pipelines"
 description: "Introduction to Pipelines"
 categories: [getting-started]
 order: 1
+version: 
+- Cloud
 ---
 
 This document provides a summary of the Pipelines page in the CircleCI app and documents some of the changes to the CircleCI user interface.

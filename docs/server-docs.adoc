@@ -107,7 +107,6 @@ Each individual doc should begin like this:
 :icons: font                // use font awesome icons for admonitions
 :toc: macro                 // allows you to place the TOC wherever you like in the doc using toc::[]
 :toc-title:                 // gives the option to customise the TOC heading
-:sectanchors:               // adds anchors in front of section titles 
 ```
 == Attributes for Master Docs
 
@@ -126,4 +125,24 @@ docs@circleci.com                                                               
 :idprefix:                                                                       // by default IDs generated from section titles start with _ ... this removes it
 :idseparator: -                                                                  // use - between words for IDs generated from section titles
 :sectanchors:                                                                    // adds anchors in front of section titles 
-:autofit-option:                                                                 // auto-fit code blocks to the page width                                                  
+:autofit-option:                                                                 // auto-fit code blocks to the page width  
+```     
+
+== Prevent Heading from Appearing in TOC
+
+```
+[discrete]
+== Heading
+```
+
+== Liquid Tags and Other Content You Do Not Want in the PDFs
+
+Liquid, used for the Jekyll content, is not rendered during the PDF conversion process. If `{% raw %}` tags are used in Server docs pages they need to be removed from the PDF content, so that they do not appear as text in the PDF. This can be done using the https://asciidoctor.org/docs/user-manual/#ifndef-directive[`ifndef` directive], as follows:
+
+```
+\ifndef::pdf[{% raw %}]
+code example
+\ifndef::pdf[{% endraw %}]
+```
+
+The script that builds the PDFs applies an attribute called `pdf` during the build - so any content that uses `ifndef::pdf` will **not** be included in the generated PDFs. For further information on usage and the inverse `ifdef::pdf` see the https://asciidoctor.org/docs/user-manual/#conditional-preprocessor-directives[Conditional Preprocessor Directives] section of the Asciidoctor user manual. **This same process can be used to create any type of content to appear on just one of our platforms.**

@@ -13,6 +13,7 @@ The document provides an overview of orbs, jobs, steps and workflows.
 {:toc}
 
 ## Orbs Overview
+_Orbs are not currently available on self-hosted installations of CircleCI Server._
 
 Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
 
@@ -51,6 +52,9 @@ jobs:
   deploy2s3: 
     docker: 
       - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - aws-s3/sync: #invokes the sync command declared in the s3 orb
           from: .
@@ -75,12 +79,18 @@ jobs:
   build:
     docker:
       - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>
   test:
     docker:
       - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: <command>

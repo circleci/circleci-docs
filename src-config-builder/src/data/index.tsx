@@ -61,6 +61,10 @@ export const buildConfig: IData = {
   macos: {
     name: 'Xcode Version',
     options: [
+      { value: '12.0.0', label: 'Xcode 12.0.0 Beta (macOS 10.15.5)' },
+      { value: '11.6.0', label: 'Xcode 11.6.0 (macOS 10.15.5)' },
+      { value: '11.5.0', label: 'Xcode 11.5.0 (macOS 10.15.4)' },
+      { value: '11.4.1', label: 'Xcode 11.4.1 (macOS 10.15.4)' },
       { value: '11.3.1', label: 'Xcode 11.3.1 (macOS 10.15.1)' },
       { value: '11.3.0', label: 'Xcode 11.3.0 (macOS 10.15.1)' },
       { value: '11.2.1', label: 'Xcode 11.2.1 (macOS 10.15)' },

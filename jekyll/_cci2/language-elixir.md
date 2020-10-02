@@ -5,6 +5,9 @@ short-title: "Elixir"
 description: "Overview and sample config for an Elixir project"
 categories: [language-guides]
 order: 2
+version:
+- Cloud
+- Server v2.x
 ---
 
 This is an annotated `config.yml` for a simple Phoenix web application, which you can access at <https://github.com/CircleCI-Public/circleci-demo-elixir-phoenix>.
@@ -22,9 +25,15 @@ jobs:  # basic units of work in a run
     parallelism: 1  # run only one instance of this job
     docker:  # run the steps with Docker
       - image: circleci/elixir:1.7.3  # ...with this image as the primary container; this is where all `steps` will run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:  # environment variables for primary container
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine  # database image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:  # environment variables for database
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test
@@ -97,9 +106,15 @@ jobs:
     parallelism: 1
     docker:
       - image: circleci/elixir:1.7.3
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MIX_ENV: test
       - image: circleci/postgres:10.1-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
           POSTGRES_DB: app_test

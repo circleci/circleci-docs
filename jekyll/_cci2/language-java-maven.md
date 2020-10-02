@@ -5,6 +5,9 @@ short-title: "Java with Maven"
 description: "Building and Testing with Java and Maven on CircleCI 2.0"
 categories: [language-guides]
 order: 4
+version:
+- Cloud
+- Server v2.x
 ---
 
 This guide will help you get started with a Java application building with Maven on CircleCI. 
@@ -13,165 +16,367 @@ This guide will help you get started with a Java application building with Maven
 {:toc}
 
 ## Overview
-{:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+This is an example application showcasing how to run a Java app on CircleCI 2.1.
+This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes
+pared down sample configurations demonstrating different CircleCI features including workspaces,
+dependency caching, and parallelism.
 
-We're going to make a few assumptions here:
+## Sample Configuration: version 2.1:
 
-* You are using [Maven](https://maven.apache.org/). A [Gradle](https://gradle.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java/).
-* You are using Java 8. 
-* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/). 
-* Your application can be distributed as an all-in-one uberjar.
-
-
-## Sample Configuration
-
-{% raw %}
-```yaml
-version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
-    
-    working_directory: ~/circleci-demo-java-spring # directory where steps will run
-
-    docker: # run the steps with Docker
-      - image: circleci/openjdk:8-jdk-stretch # ...with this image as the primary container; this is where all `steps` will run
-
-    steps: # a collection of executable commands
-
-      - checkout # check out source code to working directory
-
-      - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
-          # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      
-      - run: mvn dependency:go-offline # gets the project dependencies
-      
-      - save_cache: # saves the project dependencies
-          paths:
-            - ~/.m2
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      
-      - run: mvn package # run the actual tests
-      
-      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
-      # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: target/surefire-reports
-      
-      - store_artifacts: # store the uberjar as an artifact
-      # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
-```
-{% endraw %}
-
-## Get the Code
-
-The configuration above is from a demo Java app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/maven), which is the `maven` branch of the repository.
-
-If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to your project. Finally, delete everything in `.circleci/config.yml`.
-
-Now we’re ready to build a `config.yml` from scratch.
-
-## Config Walkthrough
-
-We always start with the version.
+### A Basic Build with an Orb:
 
 ```yaml
-version: 2
+version: 2.1
+
+orbs:
+  maven: circleci/maven@0.0.12
+
+workflows:
+  maven_test:
+    jobs:
+      - maven/test # checkout, build, test, and upload test results
 ```
 
-Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
 
-In each job, we must specify a `working_directory`. In this sample config, we’ll name it after the project in our home directory.
+This config uses the language-specific orb to replace any executors, build
+tools, and commands available. Here we are using the [maven orb](https://circleci.com/orbs/registry/orb/circleci/maven),
+which simplifies building and testing Java projects using Maven. The maven/test
+command checks out the code, builds, tests, and uploads the test result. The
+parameters of this command can be customized. See the maven orb docs for more
+information.
+
+## For 2.0 Configuration (recommended for CircleCI Server only):
 
 ```yaml
-version: 2
+version: 2.0
+
 jobs:
   build:
-    working_directory: ~/circleci-demo-java-spring
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw package
 ```
 
-This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
+Version 2.0 configs without workflows will look for a job named `build`. A job
+is a essentially a series of commands run in a clean execution environment.
+Notice the two primary parts of a job: the executor and steps. In this case, we
+are using the docker executor and passing in a CircleCI convenience image.
 
-Directly beneath `working_directory`, we can specify container images under a `docker` key.
+### Using a Workflow to Build then Test
+
+A workflow is a dependency graph of jobs. This basic workflow runs a build job
+followed by a test job. The test job will not run unless the build job exits
+successfully.
 
 ```yaml
-version: 2
-...
+version: 2.0
+
+jobs:
+  test:
     docker:
-      - image: circleci/openjdk:8-jdk-stretch
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw test
+
+  build:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
 ```
 
-We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `8-jdk-stretch`.
+### Caching Dependencies
 
-Now we’ll add several `steps` within the `build` job.
-
-We start with `checkout` so we can operate on the codebase.
-
-Next we pull down the cache, if present. If this is your first run, or if you've changed `pom.xml`, this won't do anything. We run `mvn dependency:go-offline` next to pull down the project's dependencies. This allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
-
-<div class="alert alert-info" role="alert">
-  <strong>Tip:</strong> <code class="highlighter-rouge">mvn dependency:go-offline</code> may not work if you are running a multi-module
-project build. If this is the case, consider using the <a href="https://github.com/qaware/go-offline-maven-plugin">go-offline-maven-plugin</a>.
-</div>
-
-Multi-module cache should depend on pom.xml in every module, it could be achieved with this additional step:
+The following code sample details the use of **caching**.
 
 {% raw %}
 ```yaml
-...
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run:
-          name: Generate cumulative pom.xml checksum
-          command: |
-            find . -type f -name "pom.xml" -exec sh -c "sha256sum {} >> ~/pom-checksum.tmp" \;
-            sort -o ~/pom-checksum ~/pom-checksum.tmp
-          when: always
       - restore_cache:
-          key: circleci-demo-java-spring-{{ checksum "~/pom-checksum" }}
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }} # appends cache key with a hash of pom.xml file
+            - v1-dependencies- # fallback in case previous cache key is not found
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - save_cache:
+            paths:
+              - ~/.m2
+            key: v1-dependencies-{{ checksum "pom.xml" }}
 ```
 {% endraw %}
 
-Then `mvn package` runs the actual tests, and if they succeed, it creates an "uberjar" file containing the application source along with all its dependencies.
+The first time this build ran without any dependencies cached, it took 2m14s.
+Once the dependencies were restored, the build took 39 seconds.
 
-Next `store_test_results` uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard. 
+Note that the `restore_cache` step will restore whichever cache it first matches.
+You can add a restore key here as a fallback. In this case, even if `pom.xml`
+changes, you can still restore the previous cache. This means the job will only
+have to fetch the dependencies that have changed between the new `pom.xml` and the
+previous cache.
 
-Finally we store the uberjar as an [artifact](https://circleci.com/docs/2.0/artifacts/) using the `store_artifacts` step. From there this can be tied into a continuous deployment scheme of your choice.
+### Persisting Build Artifacts to Workspace
+
+The following configuration sample details persisting a build artifact to a workspace.
+
+```yaml
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+      - persist_to_workspace:
+         root: ./
+         paths:
+           - target/
+
+  test:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ./target
+      - run: ./mvnw test
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+This `persist_to_workspace` step allows you to persist files or directories to be used by
+downstream jobs in the workflow. In this case, the target directory produced by
+the build step is persisted for use by the test step.
+
+### Splitting Tests Across Parallel Containers
+
 
 {% raw %}
 ```yaml
-...
+version: 2.0
+
+jobs:
+  test:
+    parallelism: 2 # parallel containers to split the tests among
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-
       - checkout
+      - run: |
+          ./mvnw \
+          -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
+          | circleci tests split --split-by=timings); \
+          do basename $file \
+          | sed -e "s/.java/,/"; \
+          done | tr -d '\r\n') \
+          -e test
+      - store_test_results: # We use this timing data to optimize the future runs
+          path: target/surefire-reports
 
+  build:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw -Dmaven.test.skip=true package
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+```
+
+{% endraw %}
+
+Splitting tests by timings is a great way to divide time-consuming tests across
+multiple parallel containers. You might think of splitting by timings as requiring 4
+parts:
+
+1. a list of tests to split
+2. the command: `circleci tests split --split-by=timings`
+3. containers to run the tests
+4. historical data to intelligently decide how to split tests
+
+To collect the list of tests to split, simply pull out all of the Java test
+files with this command: `circleci tests glob "src/test/**/**.java"`. Then use `sed`
+and `tr` to translate this newline-separated list of test files into a
+comma-separated list of test classes.
+
+Adding `store_test_results` enables CircleCI to access the historical timing data
+for previous executions of these tests, so the platform knows how to split tests
+to achieve the fastest overall runtime.
+
+### Storing Code Coverage Artifacts
+
+```yaml
+version: 2.0
+
+jobs:
+  test:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: ./mvnw test verify
+      - store_artifacts:
+          path: target/site/jacoco/index.html
+
+workflows:
+  version: 2
+
+  test-with-store-artifacts:
+    jobs:
+      - test
+```
+
+The Maven test runner with the [JaCoCo](https://www.eclemma.org/jacoco/) plugin
+generates a code coverage report during the build. To save that report as a
+build artifact, use the `store_artifacts` step.
+
+### A Configuration
+
+The following code sample is the entirety of a configuration file combining the features described above.
+
+
+{% raw %}
+
+```yaml
+version: 2.0
+
+jobs:
+  test:
+    parallelism: 2
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
       - restore_cache:
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      
-      - run: mvn dependency:go-offline
-      
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - attach_workspace:
+          at: ./target
+      - run: |
+            ./mvnw \
+            -Dtest=$(for file in $(circleci tests glob "src/test/**/**.java" \
+            | circleci tests split --split-by=timings); \
+            do basename $file \
+            | sed -e "s/.java/,/"; \
+            done | tr -d '\r\n') \
+            -e test verify
+      - store_test_results:
+          path: target/surefire-reports
+      - store_artifacts:
+          path: target/site/jacoco/index.html
+
+  build:
+    docker:
+      - image: circleci/openjdk:stretch
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "pom.xml" }}
+            - v1-dependencies-
+      - run: ./mvnw -Dmaven.test.skip=true package
       - save_cache:
           paths:
             - ~/.m2
-          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
-      
-      - run: mvn package
-      
-      - store_test_results:
-          path: target/surefire-reports
-      
-      - store_artifacts:
-          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+          key: v1-dependencies-{{ checksum "pom.xml" }}
+      - persist_to_workspace:
+         root: ./
+         paths:
+           - target/
+
+workflows:
+  version: 2
+
+  build-then-test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
 ```
 {% endraw %}
 
-Nice! You just set up CircleCI for a Java app using Maven and Spring.
+The configuration above is from a demo Java app, which you can access
+[here](https://github.com/CircleCI-Public/circleci-demo-java-spring). If you
+want to step through it yourself, you can fork the project on GitHub and
+download it to your machine. Go to the **Projects** page in CircleCI and click
+the **Follow Project** button next to your forked project. Finally, delete everything in
+.circleci/config.yml. Nice! You just set up CircleCI for a Java app using Gradle
+and Spring.
 
 ## See Also
-{:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document

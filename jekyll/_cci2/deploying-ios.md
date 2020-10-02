@@ -5,6 +5,8 @@ short-title: Deploying iOS Applications
 categories: [platforms]
 description: Deploying iOS Applications
 order: 1
+version:
+- Cloud
 ---
 
 This document describes how to configure Fastlane to automatically deploy iOS apps from CircleCI to a distribution service.
@@ -216,7 +218,7 @@ workflows:
       - adhoc
 ```
 
-**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version][({{ site.baseurl }}/2.0/testing-ios/#using-custom-ruby-versions)
+**Note:** The Firebase plugin may cause errors when run with the macOS system Ruby. It is therefore advisable to [switch to a different ruby version]({{ site.baseurl }}/2.0/testing-ios/#using-ruby)
 
 ## Deploying to Visual Studio App Center
 

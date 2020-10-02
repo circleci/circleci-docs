@@ -5,6 +5,9 @@ short-title: "Hello World On Windows"
 description: "First Windows project on CircleCI 2.0"
 categories: [getting-started]
 order: 4
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide]({{ site.baseurl}}/2.0/getting-started/).

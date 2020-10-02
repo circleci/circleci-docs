@@ -81,6 +81,8 @@ Following are the system events that are logged. See `action` in the Field secti
 - project.env_var.create
 - project.env_var.delete
 - project.settings.update
+- project.ssh_key.create
+- project.ssh_key.delete
 - user.create
 - user.logged_in
 - user.logged_out

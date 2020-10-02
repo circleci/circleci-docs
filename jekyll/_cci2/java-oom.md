@@ -2,6 +2,9 @@
 layout: classic-docs
 title: "Avoiding and Debugging Java Memory Errors"
 description: "How to avoid and debug Java memory errors on CircleCI."
+version:
+- Cloud
+- Server v2.x
 ---
 
 How to avoid and debug Java memory errors on CircleCI.

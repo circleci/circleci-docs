@@ -5,6 +5,9 @@ short-title: "Executors and Images"
 description: "CircleCI 2.0 executors and images"
 categories: [configuration]
 order: 1
+version:
+- Cloud
+- Server v2.x
 ---
 
 An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
@@ -41,18 +44,18 @@ jobs:
 {:.tab.machine.Server}
 ```
 jobs:
-  build: # name of your job
-    machine: true # executor type
-
-      steps:
-        # Commands run in a Linux virtual machine environment
+  build: 
+    machine: 
+      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+    steps:
+      # Commands run in a Linux virtual machine environment
 ```
 
 Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
 
 ## macOS
 
-_Available on CircleCI.com - not currently available on self-hosted installations of CircleCI Server._
+_The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
 ```
 jobs:

@@ -3,6 +3,9 @@ layout: classic-docs
 title: Publishing Packages to packagecloud
 categories: [how-to]
 description: How to publish packages to packagecloud using CircleCI
+version:
+- Cloud
+- Server v2.x
 ---
 
 [Packagecloud](https://packagecloud.io) is a hosted package repository service. It allows users to host npm, Java/Maven, python, apt, yum and rubygem repositories without any pre-configuration.
@@ -56,6 +59,9 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/ruby:2.3-jessie
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   build:
     <<: *defaults
@@ -165,6 +171,9 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/node:8.9.1
+      auth:
+        username: mydockerhub-user
+        password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 jobs:
   test:
     <<: *defaults

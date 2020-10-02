@@ -5,9 +5,9 @@ short-title: "Orbs Introduction"
 description: "Starting point for CircleCI Orbs"
 categories: [getting-started]
 order: 1
+version:
+- Cloud
 ---
-
-_Available on CircleCI with `version 2.1` config. Not currently available on self-hosted installations of CircleCI Server_
 
 * TOC
 {:toc}
@@ -46,6 +46,9 @@ jobs:
   test:
     docker:
       - image: cimg/node:<node-version>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - restore_cache:
@@ -125,6 +128,9 @@ jobs:
   test:
     docker:
       - image: cimg/node:<node-version>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - node/install-packages # Utilize commands in steps

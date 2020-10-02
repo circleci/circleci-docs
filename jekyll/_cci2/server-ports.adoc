@@ -1,3 +1,8 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
 = System Requirements
 :page-layout: classic-docs
 :page-liquid:
@@ -5,14 +10,14 @@
 :toc: macro
 :toc-title:
 
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
-
 This section defines the system and port access requirements for installing CircleCI v{serverversion}.
 
 toc::[]
 
 == Services Machine
 The Services machine hosts the core of our Server product, including the user-facing website, API engine, datastores, and Nomad job scheduler. It is best practice to use an isolated machine.
+
+NOTE: Currently, CircleCI Server only supports x86_64 architecture.
 
 The following table defines the Services machine CPU, RAM, and disk space requirements:
 
@@ -67,7 +72,9 @@ Nomad client machines run CircleCI jobs that are scheduled by the Nomad Server. 
 
 For an AWS install of CircleCI Server, the recommended instance type for Nomad clients is `m5.2xlarge` (8 vCPUs @ 2.4GHz, 32GB RAM). 
 
-You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m5.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will researve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run.
+NOTE: Currently, Nomad Clients only support x86_64 architecture. 
+
+You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m5.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will researve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run. 
 
 === Recommendations for Heavy Usage
 

@@ -5,6 +5,9 @@ short-title: "JavaScript"
 description: "Building and Testing with JavaScript and Node.js on CircleCI 2.0"
 categories: [language-guides]
 order: 5
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for a Node.js sample application.

@@ -1,11 +1,14 @@
+---
+version:
+- Server v2.x
+- Admin
+---
 = Backup and Recovery
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
-[.serveronly]_This document is intended for system administrators of self-hosted installations of CircleCI Server._
 
 This chapter describes failover or replacement of the services machine. Refer to the Backup section below for information about possible backup strategies and procedures for implementing a regular backup image or snapshot of the services machine.
 

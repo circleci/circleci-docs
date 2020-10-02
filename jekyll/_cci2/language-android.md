@@ -5,6 +5,9 @@ short-title: "Android"
 description: "Building and Testing an Android App on CircleCI 2.0"
 categories: [language-guides]
 order: 9
+version:
+- Cloud
+- Server v2.x
 ---
 
 This document describes
@@ -52,6 +55,9 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -104,6 +110,9 @@ Directly beneath `working_directory`, we can specify container images under a `d
 ```yaml
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 We use the CircleCI-provided Android image with the `api-25-alpha` tag. See [Docker Images](#docker-images) below for more information about what images are available.
@@ -122,17 +131,12 @@ We then upload the build reports as job artifacts, and we upload the test metada
 
 For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
 
-The CircleCI Android image is based on the [`openjdk:8-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
+The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
 
 ### API Levels
 {:.no_toc}
 
 We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in a job, you should select `circleci/android:api-24-alpha`.
-
-### Alpha Tag
-{:.no_toc}
-
-Our Android Docker images are currently tagged with the suffix `-alpha`. This is to indicate the images are currently under development and might change in backwards incompatible ways from week to week.
 
 ### Customizing the Images
 {:.no_toc}
@@ -209,6 +213,9 @@ jobs:
   test:
     docker:
       - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Build debug APK and release APK

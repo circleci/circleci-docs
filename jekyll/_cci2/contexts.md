@@ -3,8 +3,10 @@ layout: classic-docs
 title: "Using Contexts"
 short-title: "Using Contexts"
 description: "Secured, cross-project resources"
-categories: [configuring-jobs]
 order: 41
+version:
+- Cloud
+- Server v2.x
 ---
 
 Contexts provide a mechanism for securing and sharing environment variables across projects. The environment variables are defined as name/value pairs and are injected at runtime. This document describes creating and using contexts in CircleCI in the following sections:
@@ -17,7 +19,11 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 
 Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
 
-![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_overview.png)
+{:.tab.contextsimage.Cloud}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_cloud.png)
+
+{:.tab.contextsimage.Server}
+![Contexts Overview]({{ site.baseurl }}/assets/img/docs/contexts_server.png)
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set. 
 
@@ -43,7 +49,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
 
-    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is BitBucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -53,31 +59,65 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 3. Click the Add Environment Variable button and enter the variable name and value you wish to associate with this context. Click the Add Variable button to save.
 
-4. Add the `context: <context name>` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context.
+4. Add the `context` key to the [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) section of your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file for every job in which you want to use the variable. In the following example, the `run-tests` job will have access to the variables set in the `org-global` context. CircleCI Cloud users can specify multiple contexts, so in this example `run-tests` will also have access to variables set in the context called `my-context`.
 
-    ```yaml
-    version: 2.1
+{:.tab.contexts.Cloud}
+```yaml
+version: 2.1
 
-    workflows:
-      my-workflow:
-        jobs:
-          - run-tests:
-              context: org-global        
-      
+workflows:
+  my-workflow:
     jobs:
-      run-tests:
-        docker:
-          - image: cimg/base:2020.01
-        steps:
-          - checkout
-          - run: 
-              name: "echo environment variables from org-global context"
-              command: echo $MY_ENV_VAR  
-    ```
+      - run-tests:
+          context:
+            - org-global
+            - my-context
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+```
+
+{:.tab.contexts.Server}
+```yaml
+version: 2.1
+
+workflows:
+  my-workflow:
+    jobs:
+      - run-tests:
+          context: org-global
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/base:2020.01
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: "echo environment variables from org-global context"
+          command: echo $MY_ENV_VAR
+```
 
 ### Moving a Repository that Uses a Context
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
+
+## Combining Contexts
+
+You can combine several contexts for a single job by just adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way you can scope contexts to be as small and granular as you like.
 
 ## Restricting a Context
 
@@ -135,14 +175,14 @@ workflows:
             - build
             - hold 
       - deploy:
-          context: my-restricted-context
+          context: deploy-key-restricted-context
           requires:
             - build
             - hold
             - test
 ```
 
-In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `my-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing Groups from Contexts
 
@@ -180,7 +220,6 @@ Environment variables are used according to a specific precedence order, as foll
 Environment variables declared inside a shell command `run step`, for example `FOO=bar make install`, will override environment variables declared with the `environment` and `contexts` keys. Environment variables added on the Contexts page will take precedence over variables added on the Project Settings page.
 
 ## Secrets Masking
-
 _Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
@@ -195,5 +234,5 @@ The value of the context will not be masked in the build output if:
 ## See Also
 {:.no_toc}
 
-[CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
-[Workflows]({{ site.baseurl }}/2.0/workflows/) 
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/) 
+* [Workflows]({{ site.baseurl }}/2.0/workflows/) 

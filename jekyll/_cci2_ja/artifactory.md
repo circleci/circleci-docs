@@ -60,6 +60,9 @@ jobs:
   upload-artifact:
     docker:
       - image: circleci/openjdk:8-jdk
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout

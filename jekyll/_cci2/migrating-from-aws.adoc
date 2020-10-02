@@ -4,7 +4,6 @@
 :icons: font
 :toc: macro
 :toc-title:
-:sectanchors:
 
 This document provides an overview of how to migrate from AWS CodeCommit to CircleCI. 
 
@@ -96,6 +95,9 @@ jobs:
   job1:
     docker:
       - image: node:10
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ----
 
 2+h| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs. An AWS CodeBuild project runs all commands sequentially. If you are running concurrent commands, you’re probably using CodePipeline and multiple CodeBuild projects.
