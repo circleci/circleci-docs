@@ -42,7 +42,7 @@ For more information on using workspaces to persist data throughout a workflow, 
 
 Artifacts are used for longer-term storage of the outputs of your pipelines. For example if you have a Java project, your build will most likely produce a `.jar` file of your code. This code will be validated by your tests. If the whole build/test process passes, then the output of the process (the `.jar`) can be stored as an artifact. The `.jar` file is available to download from our artifacts system long after the workflow that created it has finished.
 
-If your project needs to be packaged, say an Android app where the `.apk` file is uploaded to Google Play, that’s a great example of an artifact. Many users take their artifacts and upload them to a company-wide storage location such as Amazon S3 or Artifactory.
+If your project needs to be packaged, say an Android app where the `.apk` file is uploaded to Google Play, you would likely wish to store it as an artifact. Many users take their artifacts and upload them to a company-wide storage location such as Amazon S3 or Artifactory.
 
 **Artifacts are stored for up to 30 days.**
 
