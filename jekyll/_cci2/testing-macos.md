@@ -29,13 +29,13 @@ Apple does not provide an alternative command line based tool for granting permi
 
 There are two unique `TCC.db` files in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime. 
 
-While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and newer have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
+While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
-While it can be written to manually with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/orbs/registry/orb/circleci/macos) to simplify this.
+While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/orbs/registry/orb/circleci/macos) to simplify this.
 
 ## Setting up a macOS UI Test Project
 
-Configuring CircleCI to run UI tests on a macOS app is split into two parts. Firstly, the CircleCI config needs to add the correct permissions and set up the environment to run the tests. Secondly, Fastlane needs to be configured to execute the tests.
+Configuring CircleCI to run UI tests on a macOS app happens in two parts. Firstly, the CircleCI config needs to add the correct permissions and set up the environment to run the tests. Secondly, Fastlane needs to be configured to execute the tests.
 
 ### Configuring CircleCI
 
