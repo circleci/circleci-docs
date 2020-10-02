@@ -133,7 +133,7 @@ This command generates two steps; one lists the contents of the user `TCC.db` an
 
 ### Listing Permission Types
 
-To grant permissions, the correct type of key for the permission type needs to be passed. These are not very well documented by Apple, but can be found by running the `list-permission-types` command, as this example shows:
+To grant permissions, the correct type of key for the permission type needs to be passed. These are not clearly documented by Apple, but can be found by running the `list-permission-types` command, as this example shows:
 
 ```yaml
 version: 2.1
