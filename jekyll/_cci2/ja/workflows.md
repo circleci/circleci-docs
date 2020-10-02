@@ -185,10 +185,10 @@ workflows:
       - test1: # カスタム ジョブ。テスト スイート 1 を実行します。
           requires: # `build` ジョブが完了するまで、test1 は実行されません。
             - build
-      - test2: # 別のカスタム ジョブ。テスト スイート 2 を実行します。
-          requires: # test2 は、ジョブ `test1` が成功するかどうかに依存します。
+      - test2: # another custom job; runs test suite 2,
+          requires: # test2 is dependent on the success of job `test1`
             - test1
-      - hold: # <<< CircleCI Web アプリケーションで手動承認を必要とするジョブ。
+      - hold: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< このキー・値のペアにより、ワークフローのステータスが "On Hold" に設定されます。
           requires: # test2 が成功した場合にのみ "hold" ジョブを実行します。
            - test2
@@ -218,7 +218,7 @@ The following screenshot demonstrates a workflow on hold.
 {:.tab.switcher.Server}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
-By clicking on the pending job's name (`build`, in the screenshot above ), an approval dialog box appears requesting that you approve or cancel the holding job.
+By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
 
 After approving, the rest of the workflow runs as directed.
 
