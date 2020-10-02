@@ -181,7 +181,7 @@ jobs:
 
 ### Granting New Permissions
 
-The orb can be used to add custom permissions with the `add-permission` command. In the following example, we are granting Screen Capture permissions to Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters: 
+The orb can be used to add custom permissions with the `add-permission` command. The following example grants Screen Capture permissions to Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters: 
 
 ```yaml
 version: 2.1
