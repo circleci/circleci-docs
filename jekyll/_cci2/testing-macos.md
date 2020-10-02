@@ -41,7 +41,7 @@ Configuring CircleCI to run UI tests on a macOS app is split into two parts. Fir
 
 In the CircleCI `config.yml` we need to include the `circleci/macos` [orb](https://circleci.com/orbs/registry/orb/circleci/macos) and call the `macos/add-mac-uitest-permissions` step. This step ensures that the correct permissions are added to run Xcode UI tests on a macOS app.
 
-If additional permissions are required, you can find out how to set these up at the [macOS permission orb documentation](https://circleci.com/orbs/registry/orb/circleci/macos).
+If additional permissions are required, you can find out how to set these up in the [macOS permission orb documentation](https://circleci.com/orbs/registry/orb/circleci/macos).
 
 Sample `config.yml` for testing a macOS app:
 
