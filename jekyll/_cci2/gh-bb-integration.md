@@ -83,22 +83,16 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 ## Enable Your Project to Check Out Additional Private Repositories
 
-If your testing process refers to multiple repositories, CircleCI will need a
-GitHub user key in addition to the deploy key because each deploy key is valid
-for only _one_ repository while a GitHub user key has access to _all_ of your
-GitHub repositories.
+If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid
+for only _one_ repository while a GitHub user key has access to _all_ of your GitHub repositories.
 
-Provide CircleCI with a GitHub user key in your project's **Project Settings** >
-**SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**.
-CircleCI creates and associates this new SSH key with your GitHub user account
-for access to all your repositories.
+Provide CircleCI with a GitHub user key in your project's **Project Settings** > **SSH keys**. Scroll down the page to **User Key** and click **Authorize with Github**. CircleCI creates and associates this new SSH key with your GitHub user account for access to all your repositories.
 
 <h2 id="security">User key security</h2>
 
 CircleCI will never make your SSH keys public.
 
-Remember that SSH keys should be shared only with trusted users and that anyone that is a GitHub collaborator on a project employing user keys
-can access your repositories, so only entrust a user key to someone with whom you would entrust your source code.
+Remember that SSH keys should be shared only with trusted users and that anyone that is a GitHub collaborator on a project employing user keys can access your repositories, so only entrust a user key to someone with whom you would entrust your source code.
 
 <h2 id="error-messages">User key access-related error messages</h2>
 
@@ -118,56 +112,30 @@ Permission denied (publickey).
 
 ## Controlling Access Via a Machine User
 
-For fine-grained access to multiple repositories,
-it is best practice to create a machine user
-for your CircleCI projects.
-A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user
-that you create for running automated tasks.
-By using the SSH key of a machine user,
-you allow anyone with repository access
-to build, test, and deploy the project.
-Creating a machine user also reduces
-the risk of losing credentials linked to a single user.
+For fine-grained access to multiple repositories, it is best practice to create a machine user for your CircleCI projects. A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
 
-To use the SSH key of a machine user,
-follow the steps below.
+To use the SSH key of a machine user, follow the steps below.
 
 **Note:**
-To perform these steps,
-the machine user must have admin access.
-When you have finished adding projects,
-you can revert the machine user to read-only access.
+To perform these steps, the machine user must have admin access. When you have finished adding projects, you can revert the machine user to read-only access.
 
-1. Create a machine user
-by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
+1. Create a machine user by following the [instructions on GitHub](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users).
 
 2. Log in to GitHub as the machine user.
 
-3. [Log in to CircleCI](https://circleci.com/login).
-When GitHub prompts you
-to authorize CircleCI,
-click the **Authorize application** button.
+3. [Log in to CircleCI](https://circleci.com/login). When GitHub prompts you to authorize CircleCI, click the **Authorize application** button.
 
-4. From the Add Projects page,
-follow all projects
-you want the machine user to have access to.
+4. From the Add Projects page, follow all projects you want the machine user to have access to.
 
-5. On the **Project Settings > Checkout SSH keys** page,
-click the **Authorize With GitHub** button.
-This gives CircleCI permission
-to create and upload SSH keys to GitHub
-on behalf of the machine user.
+5. On the **Project Settings > Checkout SSH keys** page, click the **Authorize With GitHub** button. This gives CircleCI permission to create and upload SSH keys to GitHub on behalf of the machine user.
 
 6. Click the **Create and add XXXX user key** button.
 
-Now, CircleCI will use the machine user's SSH key
-for any Git commands
-that run during your builds.
+Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
 
 ## Permissions Overview
 
-CircleCI requests the following permissions from your VCS provider,
-as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
+CircleCI requests the following permissions from your VCS provider, as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
 and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
 
 **Read Permission**
@@ -181,17 +149,9 @@ and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket
 - Add deploy keys to a repo
 - Add service hooks to a repo
 
-**Note:** CircleCI only asks for permissions that are absolutely
-necessary. However, CircleCI is constrained by the specific
-permissions each VCS provider chooses to supply. For example, getting
-a list of all user's repos -- public and private -- from GitHub
-requires the [`repo`
-scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes),
-which is write-level access. GitHub does not provide a read-only
-permission for listing all a user's repositories.
+**Note:** CircleCI only asks for permissions that are absolutely necessary. However, CircleCI is constrained by the specific permissions each VCS provider chooses to supply. For example, getting a list of all user's repos -- public and private -- from GitHub requires the [`repo` scope](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes), which is write-level access. GitHub does not provide a read-only permission for listing all a user's repositories.
 
-If you feel strongly about reducing the number of permissions CircleCI uses,
-consider contacting your VCS provider to communicate your concerns.
+If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting your VCS provider to communicate your concerns.
 
 ### Permissions for Team Accounts
 {:.no_toc}
@@ -224,15 +184,31 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
+## Bitbucket API and Organization Changes
+
+A number of Bitbucket API endpoints and response payloads have recently been deprecated; including the `/2.0/teams` and most `/2.0/users` endpoints. If you are using Bitbucket, you will need to migrate to the new `/2.0/workspaces` endpoints.
+
+This change was made to enable org administrators, using multiple Atlassian cloud products, to enforce access to their content across their many different product entities. With this transition, you will see a limited set of expansions to read permissions for users who have only repo access (i.e. are not members of a group) within a given Bitbucket workspace. Those users will now have read access to the following:
+
+* Pages
+  * Org Settings
+  * Plans
+
+* API endpoints
+  * `GET /v1/organization/{name}/settings`
+  * `GET /v1/organization/{name}/plan`
+  * Workspace included in `GET /v1/user/organizations` response
+
+**Note:** "Workspace"s are mapped to organizations in CircleCI in the same manner that "teams" were previously. Bitbucket now considers users with only repo access to be “members” of the workspace per their new API endpoints, which has led to the permission change. 
+
+No changes on your end should be necessary for existing teams/workspaces to continue to function as organizations within CircleCI.
+
 ## Deployment Keys and User Keys
 
 **What is a deploy key?**
 
-When you add a new project, CircleCI creates a deployment key on the web-based
-VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH
-key. If you are using GitHub as your VCS then GitHub has the public key, and
-CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
-To prevent CircleCI from pushing to your repository, this deployment key is read-only.
+When you add a new project, CircleCI creates a deployment key on the web-based VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH
+key. If you are using GitHub as your VCS then GitHub has the public key, and CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository. To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
 If you want to push to the repository from your builds, you will need a deployment key with write access. The steps to create a deployment key with write access depend on your VCS. See below for GitHub-specific instructions.
 
@@ -243,34 +219,22 @@ A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI
 ### Creating a GitHub Deploy Key
 {:.no_toc}
 
-In this example,
-the GitHub repository is `https://github.com/you/test-repo`,
-and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circleci.com/gh/you/test-repo){:rel="nofollow"}.
+In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circleci.com/gh/you/test-repo){:rel="nofollow"}.
 
 1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
-When prompted to enter a passphrase,
-do **not** enter one.
+When prompted to enter a passphrase, do **not** enter one.
 
     **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM
     format by default. If your private key does not start with `-----BEGIN RSA
     PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen
     -m PEM -t rsa -C "your_email@example.com"`
 
-2. Go to `https://github.com/you/test-repo/settings/keys`,
-and click "Add deploy key".
-Enter a title in the "Title" field,
-then copy and paste the public key you created in step 1.
-Check "Allow write access",
-then click "Add key".
+2. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy key". Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check "Allow write access", then click "Add key".
 
-3. Go to your project settings, click on SSH Keys, and "Add SSH key",
-and add the private key you created in step 1.
-In the "Hostname" field,
-enter "github.com",
+3. Go to your project settings, click on SSH Keys, and "Add SSH key", and add the private key you created in step 1. In the "Hostname" field, enter "github.com",
 and press the submit button.
 
-4. In your config.yml,
-add the fingerprint using the `add_ssh_keys` key:
+4. In your config.yml, add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml
 version: 2
@@ -282,37 +246,26 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-When you push to your GitHub repository from a job,
-CircleCI will use the SSH key you added.
+When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
 
 ### Creating a Bitbucket User Key
 {:.no_toc}
 
-Bitbucket does not currently provide CircleCI with an API
-to create user keys.
-However, it is still possible to create a user key
-by following this workaround:
+Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following this workaround:
 
-1. In the CircleCI application,
-go to your project's settings.
+1. In the CircleCI application, go to your project's settings.
 
 2. Navigate to the **Checkout SSH Keys** page.
 
-3. Right-click the **Create `<username>` user key** button
-and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
+3. Right-click the **Create `<username>` user key** button and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
 
-4. In the developer console,
-select the **Network** tab.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
+4. In the developer console, select the **Network** tab.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
 
-6. In the developer console,
-click the `checkout-key` with a 201 status
-and copy the `public_key` to your clipboard.
+5. In the developer console, click the `checkout-key` with a 201 status and copy the `public_key` to your clipboard.
 
-7. Add the key to Bitbucket
-by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
+6. Add the key to Bitbucket by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
 
-8. In your `.circleci/config.yml`,
-add the fingerprint using the `add_ssh_keys` key:
+7. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml
 version: 2
@@ -326,9 +279,7 @@ jobs:
 
 ### How are these keys used?
 
-When CircleCI builds your project, the private key is installed into the `.ssh`
-directory and SSH is subsequently configured to communicate with your version
-control provider. Therefore, the private key is used for:
+When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
 - checking out the main project
 - checking out any GitHub-hosted submodules
@@ -343,21 +294,14 @@ The private keys of the checkout keypairs CircleCI generates never leave the Cir
 
 **Isn't there a difference between deploy keys and user keys?**
 
-Deploy keys and user keys are the only key types that GitHub supports. Deploy
-keys are globally unique (for example, no mechanism exists to make a deploy key with
-access to multiple repositories) and user keys have no notion of _scope_
-separate from the user associated with them.
+Deploy keys and user keys are the only key types that GitHub supports. Deploy keys are globally unique (for example, no mechanism exists to make a deploy key with
+access to multiple repositories) and user keys have no notion of _scope_ separate from the user associated with them.
 
 To achieve fine-grained access to more than one repo, consider creating what GitHub calls a machine user. Give this user exactly the permissions your build requires, and then associate its user key with your project on CircleCI.
 
 ## Establishing the authenticity of an SSH host
 
-When using SSH keys to checkout repositories, it may be neccesary to add the 
-fingerprints for GitHub or BitBucket to a "known hosts" file 
-(`~/.ssh/known_hosts`) so that the executor can verify that the host it's
-connecting to is authentic. The `checkout`job step does this automatically, so 
-the following command will need to be used if you opt to use a custom checkout
-command.
+When using SSH keys to checkout repositories, it may be neccesary to add the  fingerprints for GitHub or BitBucket to a "known hosts" file (`~/.ssh/known_hosts`) so that the executor can verify that the host it's connecting to is authentic. The `checkout`job step does this automatically, so  the following command will need to be used if you opt to use a custom checkout command.
 
 ```
 mkdir -p ~/.ssh
@@ -367,8 +311,7 @@ bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqT
 ' >> ~/.ssh/known_hosts
 ```
 
-SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then 
-adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your
+SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then  adding the key that is prefixed with `ssh-rsa` to the `known_hosts` file of your
 job. You can see this in action here:
 
 ```
