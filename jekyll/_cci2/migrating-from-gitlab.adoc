@@ -14,7 +14,7 @@ NOTE: **Tips provided by ImagineX Consulting**
 If you are using GitLab's SCM, you will first need to migrate your source code to GitHub or BitBucket. See the following for details on how to import your code:
 
 * https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
-* https://confluence.atlassian.com/get-started-with-bitbucket/import-a-repository-861178561.html[Import into BitBucket]
+* https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository/[Import into BitBucket]
 
 === GitHub Enterprise
 

@@ -49,7 +49,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar. 
 
-    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group. The one exception to this case is Bitbucket organizations, which require a user to have the `create repositories` workspace permission, regardless of their other permissions on the workspace or the repositories it contains.
+    **Note:** Organization members can create a context, but only organization administrators can restrict it with a security group.
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
@@ -127,7 +127,7 @@ Organization administrators have read/write access to all projects and have unre
 
 The default security group is `All members` and enables any member of the organization who uses CircleCI to use the context.
 
-**Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups.
+**Note:** Bitbucket does **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups.
 
 ### Running Workflows with a Restricted Context
 

@@ -26,7 +26,7 @@ There are some additional, less common cases where CircleCI uses hooks, as follo
 - CircleCI processes PR hooks (Pull Request Hooks) to store PR information for the CircleCI app. If the Only Build Pull Requests setting is set then CircleCI will only trigger builds when a PR is opened, or when there is a push to a branch for which there is an existing PR. Even if this setting is set we will always build all pushes to the project's default branch.
 - If the Build Forked Pull Requests setting is set, CircleCI will trigger builds in response to PRs created from forked repos.
 
-It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html) for details.
+It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict events that trigger a build. Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. Refer to the [GitHub Edit a Hook document](https://developer.github.com/v3/repos/hooks/#edit-a-hook) or the [Atlassian Manage Webhooks document](https://support.atlassian.com/bitbucket-cloud/docs/manage-webhooks/) for details.
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
@@ -168,7 +168,7 @@ that run during your builds.
 
 CircleCI requests the following permissions from your VCS provider,
 as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
-and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
+and the [Bitbucket permissions model](https://support.atlassian.com/bitbucket-cloud/docs/use-oauth-on-bitbucket-cloud/#OAuthonBitbucketCloud-Scopes).
 
 **Read Permission**
 - Get a user's email address
@@ -202,7 +202,7 @@ This section provides an overview of the possible team and individual account ch
 
 2. If an individual upgrades to a GitHub Team account they can add team members and may give admin permissions on the repo to those who run builds. The owner of the team GitHub account (org) must go to the CircleCI [Add Project](https://circleci.com/add-projects){:rel="nofollow"}, click the link to GitHub's application permissions screen, and select Authorize CircleCI to enable members of the org to follow the project from their account. A team account with two members is $25 per month instead of $7 per month for a personal account.
 
-3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
+3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket workspace, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
 ### How to Re-enable CircleCI for a GitHub Organization
 {:.no_toc}
@@ -309,7 +309,7 @@ click the `checkout-key` with a 201 status
 and copy the `public_key` to your clipboard.
 
 7. Add the key to Bitbucket
-by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
+by following Bitbucket's guide on [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
 8. In your `.circleci/config.yml`,
 add the fingerprint using the `add_ssh_keys` key:

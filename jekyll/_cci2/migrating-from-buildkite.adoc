@@ -12,8 +12,8 @@ NOTE: **Tips provided by ImagineX Consulting**
 == Source Control Setup
 First you will need to ensure your source code is located in either to GitHub or BitBucket. See the following for details on how to import your code:
 
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[GitHub]
-* https://help.github.com/en/articles/importing-a-repository-with-github-importer[BitBucket]
+* https://help.github.com/en/articles/importing-a-repository-with-github-importer[Import into GitHub]
+* https://support.atlassian.com/bitbucket-cloud/docs/import-a-repository/[Import into BitBucket]
 
 === GitHub Enterprise
 
