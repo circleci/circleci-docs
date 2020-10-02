@@ -96,7 +96,7 @@ A fully configured sample project can be found [on GitHub](https://github.com/Ci
 
 The `TCC.db` file is simply an SQLite database, so this makes it easy to inject new permissions, or modify existing ones, during a job. 
 
-While it can be written to manually with `sqlite3` commands, we encourage the use of the [macOS orb](https://circleci.com/orbs/registry/orb/circleci/macos) simplify this. The examples in this section are all based on using the orb.
+While it can be written to manually with `sqlite3` commands, we encourage the use of the [macOS orb](https://circleci.com/orbs/registry/orb/circleci/macos) to simplify this. The examples in this section are all based on using the orb.
 
 ### Listing Current Permissions
 
