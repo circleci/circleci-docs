@@ -1,0 +1,31 @@
+// The following variables required by shared subnav component.
+// Values are copied from circleci.com project.
+$border-width: 1px;
+$border-width-widest: 4px;
+$z-index-subnav: 2;
+$gray: #D8D8D8;
+$white: #FFFFFF;
+$text-color-header: $black-light;
+$transition-duration-medium: 400ms;
+
+// These values are also required, but have been customized to match the nav height of this project.
+$nav-height: 120px;
+$subnav-height: 64px;
+$nav-offset: $nav-height;
+$subnav-offset: $subnav-height;
+$nav-offset-subnav: $nav-offset + $subnav-offset;
+
+@import 'shared/components/subnav';
+
+// These tweaks to the shared subnav CSS are necessary to work in the context of this project's layout.
+
+#subnav-placeholder,
+.subnav.component.js-fixed {
+  width: inherit;
+}
+
+.deep-link-anchor {
+  &.subnav-offset {
+    top: -$nav-offset-subnav;
+  }
+}

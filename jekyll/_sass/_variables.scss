@@ -30,6 +30,12 @@ $screen-md-min:              $screen-md;
 $screen-lg:                  1200px;
 $screen-lg-min:              $screen-lg;
 
+// So media queries don't overlap. When required, provide a maximum.
+$screen-xxs-max:             ($screen-xs-min - 1);
+$screen-xs-max:              ($screen-sm-min - 1);
+$screen-sm-max:              ($screen-md-min - 1);
+$screen-md-max:              ($screen-lg-min - 1);
+
 // General Sizing
 $spacing-small-horizontal: 12px;
 $spacing-medium-horizontal: 24px;
