@@ -18,4 +18,4 @@ CircleCI の[ドキュメント リポジトリ](https://github.com/circleci/cir
 
 ## プル リクエストの作成
 
-CircleCI のドキュメント リポジトリでは、具体的な編集内容のご提案もお待ちしております。 [こちらのガイド](https://github.com/circleci/circleci-docs/blob/master/CONTRIBUTING.md#pull-requests)に従ってドキュメントの変更や追加をご提案ください。
+CircleCI のドキュメント リポジトリでは、具体的な編集内容のご提案もお待ちしております。 Please suggest a change or addition by following our [Contributing Guide](https://github.com/circleci/circleci-docs/blob/master/docs/CONTRIBUTING.md#pull-requests).
