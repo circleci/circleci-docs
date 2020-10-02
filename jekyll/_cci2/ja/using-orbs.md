@@ -147,7 +147,7 @@ Orb オーサーは、セマンティック バージョニングに従う必要
 
 Orb の各バージョンは、開発版または安定版としてレジストリに追加されます。 安定版は、1.5.3 のように常にセマンティック バージョンです。一方、開発版には文字列タグを付加でき、`dev:myfirstorb` のように常に「dev:」プレフィックスが付きます。
 
-**メモ: ** 開発版は変更可能で、有効期限があり、90 日後に削除されます。したがって、本番ソフトウェアを開発版 Orb に依存させないこと、また、開発版は Orb 開発を集中的に進めている間にのみ使用することを強くお勧めします。 チームの組織メンバーは、別のメンバーの設定ファイルをコピー & ペーストするのではなく、開発版 Orb を基に Orb のセマンティック バージョンをパブリッシュできます。
+**Note:** Dev versions are mutable and expire: their contents can change, and they are subject to deletion after 90 days; therefore, it is strongly recommended you do not rely on development versions in any production software, and use them only while actively developing your orb. チームの組織メンバーは、別のメンバーの設定ファイルをコピー & ペーストするのではなく、開発版 Orb を基に Orb のセマンティック バージョンをパブリッシュできます。
 
 ### 開発版および安定版 Orb のセキュリティ プロファイル
 
