@@ -70,7 +70,7 @@ workflows:
 
 ### Configuring Fastlane
 
-Fastlane allows us to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane we can build, sign (for testing) and test a macOS app. 
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. 
 
 A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore we do not need to set up Fastlane Match. If your app requires signing to test, follow the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/) (while the code signing documentation talks about iOS, it is also applicable to macOS).
 
