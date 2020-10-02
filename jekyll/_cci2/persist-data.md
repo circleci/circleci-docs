@@ -32,7 +32,7 @@ When a workspace is declared in a job, files and directories can be added to it.
 
 Unlike caching, workspaces are not shared between runs as they no longer exists once a workflow is complete. The one exception is when workflows are rerun.
 
-**Workspaces are stored for up to 15 days**
+**Workspaces are stored for up to 15 days.**
 
 For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/2.0/workflows/using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
@@ -44,6 +44,6 @@ Artifacts are used for longer-term storage of the outputs of your pipelines. For
 
 If your project needs to be packaged, say an Android app where the `.apk` file is uploaded to Google Play, that’s a great example of an artifact. Many users take their artifacts and upload them to a company-wide storage location such as Amazon S3 or Artifactory.
 
-**Artifacts are stored for up to 30 days**
+**Artifacts are stored for up to 30 days.**
 
 For more information on using artifacts to persist data once a job has completes, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.

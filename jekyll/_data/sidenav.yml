@@ -46,6 +46,8 @@ en:
           link: 2.0/project-build/
         - name: Orbs, Jobs, Steps, and Workflows
           link: 2.0/jobs-steps/
+        - name: Data Persistence
+          link: 2.0/persist-data/
         - name: Differences from Jenkins
           link: 2.0/migrating-from-jenkins/
         - name: Security
