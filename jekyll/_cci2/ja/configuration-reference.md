@@ -335,7 +335,7 @@ jobs:
 
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
-- `ubuntu-2004:202008-01` (beta) - Ubuntu 20.04, Docker v19.03.12, Docker Compose v1.26.2
+- `ubuntu-2004:202008-01` (beta) - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4
 - `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 - `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 - `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
