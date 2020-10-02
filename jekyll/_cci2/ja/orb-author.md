@@ -25,7 +25,7 @@ The orb development kit refers to a suite of tools that work together to simplif
 
 * [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template)
 * [Orb Pack]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)
-* Orb Init
+* [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb Tools Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
 <script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
