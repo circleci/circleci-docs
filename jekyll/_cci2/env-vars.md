@@ -285,7 +285,7 @@ jobs:
 
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
-2. Select the Context you want to associate your envorinment variable with, or create a new one by clicking the Create Context button.
+2. Select the context you want to associate your environment variable with, or create a new one by clicking the Create Context button.
 3. Click Add Environment Variable and enter a name and value.
 4. Use your new environment variable in your `.circleci/config.yml` once the context is added under the workflows key, as follows:
 
