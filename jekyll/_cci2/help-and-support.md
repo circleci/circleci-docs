@@ -17,5 +17,5 @@ Our [docs repo](https://github.com/circleci/circleci-docs/) is open source and h
 
 ## Make a Pull Request
 
-We love contributions to our documentation repo! Please suggest a change or addition by following our [Contributing Guide](https://github.com/circleci/circleci-docs/blob/master/CONTRIBUTING.md#pull-requests). 
+We love contributions to our documentation repo! Please suggest a change or addition by following our [Contributing Guide](https://github.com/circleci/circleci-docs/blob/master/docs/CONTRIBUTING.md#pull-requests). 
 
