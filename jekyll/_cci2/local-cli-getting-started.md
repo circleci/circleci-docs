@@ -152,7 +152,7 @@ Success!
 	
 ## Connect Your Repo to CircleCI
 
-We will need to leave the terminal behind for this step. Head over to [the "Add Projects page"](https://circleci.com/add-projects). It's time to set up your project to run CI whenever you push code.
+We will need to leave the terminal behind for this step. Head over to [the "Add Projects page"](https://circleci.com/docs/2.0/project-build/#adding-projects). It's time to set up your project to run CI whenever you push code.
 
 Find your project ("foo_ci", or whatever you named it on GitHub) in the list of projects and click "Set Up Project". Next, return to your terminal and push your latest changes to GitHub (the addition of our `config.yml` file.)
 
