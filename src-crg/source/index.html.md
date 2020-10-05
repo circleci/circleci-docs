@@ -113,7 +113,7 @@ See the [Using Parameters in Executors](https://circleci.com/docs/2.0/reusing-co
 
 A run is comprised of one or more named jobs. The name of the job is the key in the map, and the value is a map describing the job.
 
-If you are using [Workflows]({{ https://circleci.com/docs/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
+If you are using [Workflows](https://circleci.com/docs/2.0/workflows/), jobs must have unique names within the `.circleci/config.yml` file.
 
 If you are **not** using workflows, the `jobs` map must contain a job named `build`. This `build` job is the default entry-point for a run that is triggered by a push to your VCS provider. It is possible to then specify additional jobs and run them using the CircleCI API.
 
