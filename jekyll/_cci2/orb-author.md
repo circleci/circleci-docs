@@ -289,7 +289,23 @@ You can categorize your orb for better discoverability in the [Orb Registry](htt
 
 You can select up to two categories for your orb. These are the available categories:
 
-The list of categories can also be obtained by running `[circleci orb list-categories]`(https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html) in the CircleCI CLI.
+- Artifacts/Registry
+- Build
+- Cloud Platform
+- Code Analysis
+- Collaboration
+- Containers
+- Deployment
+- Infra Automation
+- Kubernetes
+- Language/Framework
+- Monitoring
+- Notifications
+- Reporting
+- Security
+- Testing
+
+The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for it [here](https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html).
 
 #### Add an orb to a category
 
