@@ -135,6 +135,8 @@ en:
           link: 2.0/example-configs/
         - name: Testing iOS Applications
           link: 2.0/testing-ios/
+        - name: Testing macOS Application
+          link: 2.0/testing-macos/
     - name: EXECUTORS & IMAGES
       link: 2.0/executor-intro/
       children:
