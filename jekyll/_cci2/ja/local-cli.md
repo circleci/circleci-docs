@@ -103,7 +103,7 @@ This command may prompt you for `sudo` if your user doesn't have write permissio
 
 ## CLI の構成
 
-Before using the CLI you need to generate a CircleCI API Token from the [Personal API Token tab](https://circleci.com/account/api). After you get your token, configure the CLI by running:
+Before using the CLI you need to generate a CircleCI API Token from the [Personal API Token tab](https://app.circleci.com/settings/user/tokens). After you get your token, configure the CLI by running:
 
 ```sh
 circleci setup
