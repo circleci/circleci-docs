@@ -9,6 +9,11 @@ version:
 
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 
+# A Question
+
+Is there any chance in the world that this process can be automated? I don't see a single reason not to have it automated on the Project Settings the way it used to be before the transition to the new UI.
+
+
 ## Overview
 
 Status badges are commonly embedded in project READMEs, although they can be placed in any web document. CircleCI provides a tool to generate embed code for status badges.
