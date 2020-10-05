@@ -152,7 +152,7 @@ Success!
 
 ## リポジトリを CircleCI に接続する
 
-このステップでは、ターミナルを離れる必要があります。 [[Add Projects (プロジェクトの追加)] ページ](https://circleci.com/add-projects)にアクセスします。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
+このステップでは、ターミナルを離れる必要があります。 Head over to [the "Add Projects page"](https://app.circleci.com/projects/project-dashboard/github/circleci/). コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
 
 プロジェクトのリストから目的のプロジェクト ("foo_ci" または GitHub で付けた名前) を見つけ、[Set Up Project (プロジェクトのセットアップ)] をクリックします。 次に、ターミナルに戻り、最新の変更を GitHub にプッシュします (`config.yml` ファイルの追加分)。
 
