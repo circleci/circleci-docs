@@ -569,7 +569,7 @@ Do not cache everything, but _do_ consider caching for costly steps like compila
 
 ## Source Caching
 
-As in CircleCI 1.0, it is possible and oftentimes beneficial to cache your git repository, thus saving time in your `checkout` step—especially for larger projects. Here is an example of source caching:
+It is possible and often beneficial to cache your git repository to save time in your `checkout` step, especially for larger projects. Here is an example of source caching:
 
 {% raw %}
 
