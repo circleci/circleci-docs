@@ -172,7 +172,7 @@ steps:
 ##### Examples
 {:.no_toc}
 
-Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/orbs/registry/) for users to reference.
+Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/developer/orbs/) for users to reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
@@ -278,3 +278,50 @@ Read our full [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) do
 With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
+
+### Categorizing Your Orb
+
+You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs/). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs/). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
+
+#### Listing categories
+
+![](  {{ site.baseurl }}/assets/img/docs/orb-categories-list-categories.png)
+
+You can select up to two categories for your orb. These are the available categories:
+
+- Artifacts/Registry
+- Build
+- Cloud Platform
+- Code Analysis
+- Collaboration
+- Containers
+- Deployment
+- Infra Automation
+- Kubernetes
+- Language/Framework
+- Monitoring
+- Notifications
+- Reporting
+- Security
+- Testing
+
+The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html).
+
+#### Add an orb to a category
+
+![](  {{ site.baseurl }}/assets/img/docs/orb-categories-add-to-category.png)
+
+Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html).
+
+
+#### Remove an orb from a category
+
+![](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
+
+Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html).
+
+#### Viewing an orb's categorizations
+
+![](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
+
+To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
