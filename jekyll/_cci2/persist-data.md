@@ -30,7 +30,7 @@ For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching
 
 When a workspace is declared in a job, files and directories can be added to it. Each addition creates a new layer in the workspace filesystem. Downstream jobs can then use this workspace for their own needs or add more layers on top.
 
-Unlike caching, workspaces are not shared between runs as they no longer exists once a workflow is complete. The one exception is when workflows are rerun.
+Workspaces are not shared between pipeline runs. The only time a workspace can be accessed after the pipeline has run is when a workflow is rerun within the 15 day limit.
 
 **Workspaces are stored for up to 15 days.**
 
