@@ -355,6 +355,6 @@ Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事
 
 ## Coveralls
 
-Coveralls のユーザーは、[カバレッジ統計のセットアップ ガイド](https://coveralls.io/docs)を参照してください。CircleCI の[環境変数]({{ site.baseurl }}/1.0/environment-variables/)に `COVERALLS_REPO_TOKEN` を追加する必要があります。
+If you're a Coveralls customer, follow [their guide to set up your coverage stats.](https://docs.coveralls.io/) You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI [environment variables]({{ site.baseurl }}/1.0/environment-variables/).
 
 Coveralls will automatically handle the merging of coverage stats in concurrent jobs.
