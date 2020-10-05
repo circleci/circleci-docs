@@ -381,7 +381,7 @@ Read more about Codecov's orb in their [guest blog post](https://circleci.com/bl
 ## Coveralls
 
 If you're a Coveralls customer, follow
-[their guide to set up your coverage stats.](https://coveralls.io/docs)
+[their guide to set up your coverage stats.](https://docs.coveralls.io/)
 You'll need to add `COVERALLS_REPO_TOKEN` to your CircleCI
 [environment variables]( {{ site.baseurl }}/1.0/environment-variables/).
 
