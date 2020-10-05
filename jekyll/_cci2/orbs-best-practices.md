@@ -25,6 +25,11 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 | company/orb  | company/company |
 {: class="table table-striped"}
 
+#### Categorize your Orb
+{:.no_toc}
+
+Categorizing your orb allows it to be searchable on the [Orb Registry](https://circleci.com/developer/orbs/) by category. To see how you can categorize your orb via the CircleCI CLI, refer to [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author).
+
 #### Ensure All Orb Components Include Descriptions
 {:.no_toc}
 
@@ -130,7 +135,7 @@ $SUDO do_command
 
 Inside your job, if you are utilizing any commands or executors, you must include a copy of each parameter from each of those components into your job. You can then "pass-through" the parameters given to the job, to each referenced component.
 
-For example, here is a partial snippet of the [Node orb's `test` job](https://circleci.com/orbs/registry/orb/circleci/node#jobs-test):
+For example, here is a partial snippet of the [Node orb's `test` job](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test):
 
 {:.tab.nodeParam.Test_Job}
 ```yaml
