@@ -70,7 +70,7 @@ CircleCI ダッシュボードは、ダッシュボードのホームページ�
 
 ### Sumo Logic Orb
 
-Sumo Logic Orb の最新版は、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/orb/circleci/sumologic)で提供されています。
+Sumo Logic Orb の最新版は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/sumologic)で提供されています。
 
 #### 1. Sumo Logic Orb をインポートする
 

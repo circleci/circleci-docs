@@ -193,7 +193,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-クラウド版の例では、Windows Executor のセットアップに Windows Orb を使用することで、構成を簡素化しています。 詳細については、[Windows Orb の詳細ページ](https://circleci.com/orbs/registry/orb/circleci/windows)を参照してください。
+クラウド版の例では、Windows Executor のセットアップに Windows Orb を使用することで、構成を簡素化しています。 詳細については、[Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)を参照してください。
 
 CircleCI Server を使用している場合、Windows ジョブに使用しているイメージに関する詳細情報については、システム管理者にお問い合わせください。 Windows イメージはシステム管理者によって構成され、CircleCI の設定ファイルでは常に `windows-default` というイメージ名で利用できます。
 

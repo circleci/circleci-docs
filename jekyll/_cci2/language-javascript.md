@@ -60,7 +60,7 @@ workflows:
   
 ## Config Walkthrough
 
-Using the [2.1 Node orb](https://circleci.com/orbs/registry/orb/circleci/node#jobs-test) sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
+Using the [2.1 Node orb](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test) sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
  
 The Node Orb `test` command will test your code with a one-line command, with optional parameters.
 

@@ -91,7 +91,7 @@ the following parts of the run:
    a specific purpose. Because we are using the `welcome` orb, we don't see
    custom steps; they are configured in the orb. But no problem! We can view the
    [source of an
-   orb](https://circleci.com/orbs/registry/orb/circleci/welcome-orb) online. 
+   orb](https://circleci.com/developer/orbs/orb/circleci/welcome-orb) online. 
 
 Even though there was no actual source code in your repo, and no actual tests
 configured in your `config.yml`, CircleCI considers your build to have
@@ -113,7 +113,7 @@ text-editor and push your changes with git.
 
 `https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
 
-Let's use the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node). Paste the following into your `config.yml`
+Let's use the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node). Paste the following into your `config.yml`
 
 ```yaml
 version: 2.1

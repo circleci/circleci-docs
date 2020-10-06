@@ -15,7 +15,7 @@ The document provides an overview of orbs, jobs, steps and workflows.
 ## Orbs Overview
 _Orbs are not currently available on self-hosted installations of CircleCI Server._
 
-Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/orbs/registry/) to search for orbs to help simplify your config.
+Orbs are packages of config that you either import by name or configure inline to simplify your config, share, and reuse config within and across projects. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs/) to search for orbs to help simplify your config.
 
 ## Jobs Overview
 
@@ -40,7 +40,7 @@ Steps are a collection of executable commands which are run during a job, the `c
 
 ## Sample Configuration with Imported Orb
 
-Find full details of the AWS S3 orb in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands-sync).
+Find full details of the AWS S3 orb in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands-sync).
 
 ```yaml
 version: 2.1

@@ -79,7 +79,7 @@ workflows:
 
 CircleCI offers similar functionality in our https://circleci.com/docs/2.0/orb-intro/#section=configuration[orbs]. The primary difference is that CircleCI orbs are just packaged, reusable YAML, so you can orbify reusable jobs, executors, or commands, and use them however you see fit in any of your jobs or workflows.
 
-Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/orbs/registry/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
+Github offers browsing of Actions in their Marketplace; CircleCI has an https://circleci.com/developer/orbs/[Orb Registry] as well as an https://circleci.com/integrations/[Integrations Page] containing numerous Certified, Partner, and community orbs / integrations.
 
 === Runners vs. Executors
 In GitHub, you can specify your builds to run in Linux, macOS, and Windows environments via a `runs-on` key in the YAML, and if you want to run anything in a container, you specify an additional `container` key.
@@ -292,5 +292,5 @@ Since the configuration between Github Actions and CircleCI is similar, it shoul
 
 . https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
 . https://circleci.com/docs/2.0/workflows/[More Advanced Workflow and Job Dependency Configuration]
-. https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Actions to Orbs]. Our registry can be found https://circleci.com/orbs/registry/?filterBy=all[here].
+. https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs/?filterBy=all[here].
 . https://circleci.com/docs/2.0/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]

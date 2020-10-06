@@ -10,7 +10,7 @@ order: 1
 
 ## はじめに
 
-CircleCI Orb を使用するようにプラットフォームを構成したら、次に、ワークフローや構成に使用する Orb を選択する必要があります。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)には、CircleCI およびパートナーの承認済み Orb が多数公開されており、ワークフローの大幅な簡略化に利用できます。
+CircleCI Orb を使用するようにプラットフォームを構成したら、次に、ワークフローや構成に使用する Orb を選択する必要があります。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/)には、CircleCI およびパートナーの承認済み Orb が多数公開されており、ワークフローの大幅な簡略化に利用できます。
 
 ### 承認済み Orbs と サードパーティ製 Orbs
 
@@ -26,7 +26,7 @@ CircleCI Orb を使用するようにプラットフォームを構成したら�
 
 CircleCI Orb レジストリの利用方法は以下のとおりです。
 
-1) [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)に移動します。 デフォルトでは、CircleCI およびパートナーの承認済み Orb が表示されます。
+1) [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/)に移動します。 デフォルトでは、CircleCI およびパートナーの承認済み Orb が表示されます。
 
 2) Orb 一覧のビューを選択します。 **[Certified and Partner (承認済み & パートナー)]**、**[Popular (人気)]**、**[All (すべて表示)]** の 3 つのタブがあります。 選択したタブに応じたビューで、Orb がアルファベット順に一覧表示されます。
 

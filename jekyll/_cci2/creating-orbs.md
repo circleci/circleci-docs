@@ -16,7 +16,7 @@ This guide covers the steps required to publish an orb.
 
 ## Introduction
 
-After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) tag, and the orb will appear publicly on the [Orb Registry](https://circleci.com/orbs/registry/).
+After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) tag, and the orb will appear publicly on the [Orb Registry](https://circleci.com/developer/orbs/).
 
 ![Orb Publishing Process]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
@@ -35,7 +35,7 @@ New releases are only published on merges to the default branch. The included [`
 You can view the results of your tests directly on GitHub within the Pull Request, or, for a more detailed view, watch the entire pipeline on CircleCI.com. ![Orb test results as reported by GitHub Checks API on pull request]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
 1. **Title Pull Request with Special Semver Tag.** <br/>
-The included CI config uses the [orb-tools orb](https://circleci.com/orbs/registry) to automatically publish orbs that pass testing on the default branch, provided that the commit message contains the correct tag designated the intended [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release.<br/>
+The included CI config uses the [orb-tools orb](https://circleci.com/developer/orbs) to automatically publish orbs that pass testing on the default branch, provided that the commit message contains the correct tag designated the intended [semver]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) release.<br/>
 The tag template looks like this: `[semver:<increment>]`, where `<increment>` is replaced with one of the following values:
 
     | Increment | Description |
@@ -52,7 +52,7 @@ The tag template looks like this: `[semver:<increment>]`, where `<increment>` is
 Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message. ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
 1. **Complete!** <br/>
-If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/orbs/registry/).
+If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/developer/orbs/).
 
 ### Orb Publishing Process
 
@@ -96,7 +96,7 @@ You can learn more about the testing jobs in the [Orb Testing Methodologies]({{s
 
 This second stage of the pipeline runs the [integration tests]({{site.baseurl}}/2.0/testing-orbs/#integration-testing), testing the new orb's functionality that has just been added and published to the development version..
 
-After integration testing, and only on the default branch, the deployment job will run. [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/orbs/registry/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) is responsible for taking the SHA specific development version of the orb, and promoting it to a semantically versioned public release.
+After integration testing, and only on the default branch, the deployment job will run. [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) is responsible for taking the SHA specific development version of the orb, and promoting it to a semantically versioned public release.
 
 {% raw %}
 ```
@@ -120,7 +120,7 @@ You can optionally enable additional features such as publishing a version tag b
 
 ##### Publish Version Tag To GitHub
 
-Your CircleCI orb will ultimately be hosted and displayed on the [Orb Registry](https://circleci.com/orbs/registry), however, if you would like to track your releases on GitHub, it is possible to automatically publish a version tag from CircleCI.
+Your CircleCI orb will ultimately be hosted and displayed on the [Orb Registry](https://circleci.com/developer/orbs), however, if you would like to track your releases on GitHub, it is possible to automatically publish a version tag from CircleCI.
 
 To push a tag to GitHub, CircleCI will need a [deploy key with write access]({{site.baseurl}}/2.0/add-ssh-key/#circleci-cloud). Follow the linked docs to generate and add your deploy key. When complete, you will see a "fingerprint" generated `"SO:ME:FIN:G:ER:PR:IN:T"` for that key. Add your SSH fingerprint to your `orb-tools/dev-promote-prod-from-commit-subject` job via the `ssh-fingerprints` parameter.
 
@@ -132,4 +132,4 @@ To push a tag to GitHub, CircleCI will need a [deploy key with write access]({{s
 ```
 {% endraw %}
 
-You can find a full set of available commands, jobs and parameters for the [orb-tools orb](https://circleci.com/orbs/registry/orb/circleci/orb-tools) on the [Orb Registry](https://circleci.com/orbs/registry/orb/circleci/orb-tools).
+You can find a full set of available commands, jobs and parameters for the [orb-tools orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools) on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/orb-tools).

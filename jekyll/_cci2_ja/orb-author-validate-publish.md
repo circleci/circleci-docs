@@ -10,7 +10,7 @@ order: 1
 
 ## はじめに
 
-Orb のオーサリングが完了したら、作成した Orb をテストして、自分の環境内で動作することを確認します。 テストの完了後、Orb を [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)にパブリッシュできます。 Orb のバリデーションとパブリッシュには、CircleCI CLI を使用することをお勧めします。CLI には、バリデーションとパブリッシュのプロセスを簡素化する関連コマンドを備えた `orb-tools` Orb が用意されています。
+Orb のオーサリングが完了したら、作成した Orb をテストして、自分の環境内で動作することを確認します。 テストの完了後、Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/)にパブリッシュできます。 Orb のバリデーションとパブリッシュには、CircleCI CLI を使用することをお勧めします。CLI には、バリデーションとパブリッシュのプロセスを簡素化する関連コマンドを備えた `orb-tools` Orb が用意されています。
 
 ## orb-tools
 
@@ -102,4 +102,4 @@ workflows:
           validate: true
 ```
 
-この例の Build-Test-Deploy (BTD) ワークフローは、最初に `orb-tools/validate` ジョブを実行します。 この Orb が有効であると見なされれば、次のステップが実行され、`orb-tools/publish` が実行されます。 `orb-tools/publish` が成功すると、ジョブ入力には、新しい Orb が [CircleCI Orbs レジストリ](https://circleci.com/orbs/registry/)にパブリッシュされたことを示す成功メッセージが表示されます。
+この例の Build-Test-Deploy (BTD) ワークフローは、最初に `orb-tools/validate` ジョブを実行します。 この Orb が有効であると見なされれば、次のステップが実行され、`orb-tools/publish` が実行されます。 `orb-tools/publish` が成功すると、ジョブ入力には、新しい Orb が [CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs/)にパブリッシュされたことを示す成功メッセージが表示されます。

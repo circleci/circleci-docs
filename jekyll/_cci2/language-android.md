@@ -146,7 +146,7 @@ We welcome contributions [on our GitHub repo for the Android image](https://gith
 To customize the image, create a Dockerfile that builds `FROM` the `circleci/android` image. See [Using Custom-Built Docker Images]({{ site.baseurl }}/2.0/custom-images/) for instructions.
 
 You can also use the [CircleCI Android
-Orb](https://circleci.com/orbs/registry/orb/circleci/android) to select your
+Orb](https://circleci.com/developer/orbs/orb/circleci/android) to select your
 desired Android SDK and NDK.
 
 ### React Native Projects

@@ -31,7 +31,7 @@ There are two unique `TCC.db` files in use. The first copy resides in the home d
 
 While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
-While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/orbs/registry/orb/circleci/macos) to simplify this.
+While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
 
 ## Setting up a macOS UI Test Project
 
@@ -39,9 +39,9 @@ Configuring CircleCI to run UI tests on a macOS app happens in two parts. Firstl
 
 ### Configuring CircleCI
 
-In the CircleCI `config.yml` we need to include the `circleci/macos` [orb](https://circleci.com/orbs/registry/orb/circleci/macos) and call the `macos/add-mac-uitest-permissions` step. This step ensures that the correct permissions are added to run Xcode UI tests on a macOS app.
+In the CircleCI `config.yml` we need to include the `circleci/macos` [orb](https://circleci.com/developer/orbs/orb/circleci/macos) and call the `macos/add-mac-uitest-permissions` step. This step ensures that the correct permissions are added to run Xcode UI tests on a macOS app.
 
-If additional permissions are required, you can find out how to set these up in the [macOS permission orb documentation](https://circleci.com/orbs/registry/orb/circleci/macos).
+If additional permissions are required, you can find out how to set these up in the [macOS permission orb documentation](https://circleci.com/developer/orbs/orb/circleci/macos).
 
 Sample `config.yml` for testing a macOS app:
 
@@ -96,7 +96,7 @@ A fully configured sample project can be found [on GitHub](https://github.com/Ci
 
 The `TCC.db` file is simply an SQLite database, so this makes it easy to inject new permissions, or modify existing ones, during a job. 
 
-While it can be written to manually with `sqlite3` commands, we encourage the use of the [macOS orb](https://circleci.com/orbs/registry/orb/circleci/macos) to simplify this. The examples in this section are all based on using the orb.
+While it can be written to manually with `sqlite3` commands, we encourage the use of the [macOS orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this. The examples in this section are all based on using the orb.
 
 ### Listing Current Permissions
 

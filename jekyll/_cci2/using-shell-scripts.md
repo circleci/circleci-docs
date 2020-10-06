@@ -26,7 +26,7 @@ Configuring CircleCI often requires writing shell scripts. While shell scripting
 
 [ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
 
-Use the [Shellcheck orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck) for the simplest way to add shellcheck to your `version: 2.1` configuration (remember to replace `x.y.z` with a valid version):
+Use the [Shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for the simplest way to add shellcheck to your `version: 2.1` configuration (remember to replace `x.y.z` with a valid version):
 
 ```yaml
 version: 2.1
