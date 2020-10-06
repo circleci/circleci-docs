@@ -3,7 +3,7 @@ version:
 - Server v2.x
 - Server Admin
 ---
-= Docker Hub のプル スルー ミラーの設定
+= Docker Hub のミラーの使用
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
