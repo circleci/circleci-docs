@@ -68,7 +68,7 @@ Nomad クライアント「ごと」に以下の手順を実行します。
 
 == 関連資料
 
-* https://docs.docker.com/registry/recipes/mirror/ (ミラーのレジストリ
+* https://docs.docker.com/registry/recipes/mirror/ (レジストリのミラー
 の構成方法、英語)
 * https://hub.docker.com/_/registry (Docker Registry
 公式イメージ、英語)
