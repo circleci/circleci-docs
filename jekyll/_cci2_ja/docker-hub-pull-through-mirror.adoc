@@ -1,0 +1,76 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
+= Docker Hub のミラーの使用
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+ここでは、Docker Hub のレジストリのミラーを設定する方法について説明します。
+
+toc::[]
+
+== 概要
+
+[2020年11月1 日](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)から、Docker Hub で匿名ユーザーに対する発信元 IP に基づいたプル回数制限が導入されます。運用中のサービスでの混乱を避けるために、Docker Hub から認証付きでプル操作を行うようにすることをお勧めします。認証は設定ファイルで行えます [Docker の認証付きプルの使用](https://circleci.com/ja/docs/2.0/private-images/)を参照。
+
+あるいは、Docker Hub アカウントの資格情報をあらかじめ構成した Docker Hub のレジストリのミラーをセットアップするという方法もあります。レジストリのミラーを使用すると、場合によっては多数の設定ファイルを変更するよりも簡単に対応できます。また、Docker Hub への通信が減るため、パフォーマンスがさらに向上する可能性もあります。
+
+この設定手順は大きく 2 段階に分かれます。まずレジストリのミラーをセットアップし、次に Nomad クライアントでミラーを使用するように設定します。
+
+== レジストリのミラー(Docker Hub のプロキシ) をセットアップする
+
+1. *Docker Hub アカウントを用意* します。これは、レジストリのミラーから Docker Hub にアクセスする際に使用します。
++
+TIP: 有料アカウントを使用すると、回数制限をさらに緩めることができます。 https://www.docker.com/pricing を参照してください。
+
+2. *独立した Linux サーバーを用意* し、Docker をインストールします。
++
+このレジストリを独立したサーバー (CircleCI 環境外のサーバー) として設定し、このキャッシュ サーバーの負荷が他の CircleCI Server のサービスに影響を与えないようにします。
++
+例として、このサーバーの IP アドレスを `192.0.2.1` とします。
+
+3. 以下のコマンドを実行して、*キャッシュ サーバーを起動* します。
++
+NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセス トークンに置き換えてください。
++
+`sudo docker run -d -p 80:5000 --restart=always --name=through-cache -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" -e REGISTRY_PROXY_USERNAME=DOCKER_HUB_USERNAME -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN registry`
+
+4. TCP ポート 80 (HTTP) が開いていてアクセス可能であることを確認します。セキュリティ強化のため、Nomad クライアントのみにポートを開放することをお勧めします。
++
+たとえば AWS では、セキュリティ グループと OS レベルのファイアウォールの両方が HTTP 経由で Nomad クライアントからの接続を受け付けるように正しく設定されていることを確認する必要があります。
+
+== Nomad クライアントがレジストリのミラーを使用するように設定する (Nomad クライアント「ごと」に実行)
+
+1. 以下のコマンドを実行して、*Docker デーモンの `registry-mirrors` オプションを指定* します。
++
+NOTE: `192.0.2.1` は実際のプル スルー キャッシュ サーバーの IP アドレスに置き換えてください。
++
+`sudo bash -c 'cat <<< $(jq ".¥"registry-mirrors¥" = [¥"http://192.0.2.1¥"]" /etc/docker/daemon.json) > /etc/docker/daemon.json'`
+
+2. *Docker デーモンをリロード* して、設定を適用します。
++
+`sudo systemctl restart docker.service`
+
+これで、Docker Hub からレジストリのミラー経由で Docker イメージがダウンロードされることを確認できるはずです。副次的な効果として、レジストリのミラーにキャッシュされているユーザーのプライベート イメージが、明示的な認証なしにダウンロードできます。
+
+== 設定を元に戻すには
+
+Nomad クライアント「ごと」に以下の手順を実行します。
+
+1. *`/etc/docker/daemon.json` の `registry-mirrors` オプションを削除* します。ファイルの編集後も、*`/etc/docker/daemon.json` が有効な JSON ファイルであることを確認* してください。
+
+2. `sudo systemctl restart docker.service` を実行して、変更を適用します。
+
+== 関連資料
+
+* https://docs.docker.com/registry/recipes/mirror/ (レジストリのミラー
+の構成方法、英語)
+* https://hub.docker.com/_/registry (Docker Registry
+公式イメージ、英語)
+* https://docs.docker.com/registry/configuration/ (公式
+Docker Registry の構成方法、英語)
