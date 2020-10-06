@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-ここでは、Docker Hub のプル スルー レジストリ ミラーを設定する方法について説明します。
+ここでは、Docker Hub のレジストリのミラーを設定する方法について説明します。
 
 toc::[]
 
