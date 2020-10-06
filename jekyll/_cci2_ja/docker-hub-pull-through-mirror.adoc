@@ -40,7 +40,7 @@ NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に�
 +
 `sudo docker run -d -p 80:5000 --restart=always --name=through-cache -e REGISTRY_PROXY_REMOTEURL="https://registry-1.docker.io" -e REGISTRY_PROXY_USERNAME=DOCKER_HUB_USERNAME -e REGISTRY_PROXY_PASSWORD=DOCKER_HUB_ACCESS_TOKEN registry`
 
-4. TCP ポート 80 (HTTP) が開いていてアクセス可能であることを確認します。セキュリティを強化するには、Nomad クライアントのみにポートを開放することをお勧めします。
+4. TCP ポート 80 (HTTP) が開いていてアクセス可能であることを確認します。セキュリティ強化のため、Nomad クライアントのみにポートを開放することをお勧めします。
 +
 たとえば AWS では、セキュリティ グループと OS レベルのファイアウォールの両方が HTTP 経由で Nomad クライアントからの接続を受け付けるように正しく設定されていることを確認する必要があります。
 
