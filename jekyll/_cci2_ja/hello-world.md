@@ -111,7 +111,7 @@ jobs:
 
 ### Orbs の使用とオーサリングの詳細
 
-Orbs は、構成を簡略化したりプロジェクト間で再利用したりできる、便利な構成パッケージです。[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で参照できます。
+Orbs は、構成を簡略化したりプロジェクト間で再利用したりできる、便利な構成パッケージです。[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)で参照できます。
 
 ## プロジェクトのフォロー
 

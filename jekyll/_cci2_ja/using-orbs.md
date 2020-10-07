@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI の Orb とは、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。 CircleCI では承認済み Orbs に加え、CircleCI パートナーによってオーサリングされたサードパーティ製の Orbs も提供しています。 まずは、こうした既存の Orbs がご自身の構成ワークフローに活用できるかどうかを評価することをお勧めします。 承認済み Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/)にて確認してください。
+CircleCI の Orb とは、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。 CircleCI では承認済み Orbs に加え、CircleCI パートナーによってオーサリングされたサードパーティ製の Orbs も提供しています。 まずは、こうした既存の Orbs がご自身の構成ワークフローに活用できるかどうかを評価することをお勧めします。 承認済み Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/)にて確認してください。
 
 Orb を使用する前に、まず Orb の中核的なコンセプト、Orb の構造と動作についてよく理解しておく必要があります。 こうしたコンセプトについて基本的な知識を身に着けることで、それぞれの環境で Orb を簡単に活用できるようになります。
 

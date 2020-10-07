@@ -36,7 +36,7 @@ CircleCI プラットフォームを使用するとき、多くのケースで�
 **メモ:** CircleCI のキューイング Orb の詳細については、以下のページを参照してください。
 
 - [キューイングとシングル スレッドの概要](https://github.com/eddiewebb/circleci-queue)
-- [CircleCI キューイング Orb](https://circleci.com/developer/ja/orbs/orb/eddiewebb/queue#quick-start)
+- [CircleCI キューイング Orb](https://circleci.com/developer/orbs/orb/eddiewebb/queue#quick-start)
 
 ### CircleCI プラットフォームと CircleCI Orbs を使用するための環境のセットアップと構成
 
@@ -59,7 +59,7 @@ orbs:
   queue: eddiewebb/queue@1.1.2
 ```
 
-4) 既存のワークフローやジョブで [`queue` 要素](https://circleci.com/developer/ja/orbs/orb/eddiewebb/queue#usage-examples)を使用します。
+4) 既存のワークフローやジョブで [`queue` 要素](https://circleci.com/developer/orbs/orb/eddiewebb/queue#usage-examples)を使用します。
 
 5) サードパーティ製 Orb を使用する場合は、組織の [**Security Settings (セキュリティ設定)**] ページでオプトインします。
 
