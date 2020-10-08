@@ -94,16 +94,16 @@ commands:
 
 executors では、ジョブのステップを実行する環境を定義します。これにより、複数のジョブで 1 つの Executor 定義を再利用できます。
 
-| キー                | 必須               | 型   | 説明                                                                                                                                      |
-| ----------------- | ---------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                     |
-| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A performance plan is required to access this feature.                                       |
-| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                                   |
-| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                       |
-| windows           | ○ <sup>(1)</sup> | マップ | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/orbs/registry/orb/circleci/windows). |
-| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                      |
-| working_directory | ×                | 文字列 | In which directory to run the steps. Will be interpreted as an absolute path.                                                           |
-| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                          |
+| キー                | 必須               | 型   | 説明                                                                                                                                       |
+| ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                      |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A performance plan is required to access this feature.                                        |
+| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                                    |
+| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                        |
+| windows           | ○ <sup>(1)</sup> | マップ | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows). |
+| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                       |
+| working_directory | ×                | 文字列 | In which directory to run the steps. Will be interpreted as an absolute path.                                                            |
+| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                           |
 {: class="table table-striped"}
 
 <sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 If more than one is set you will receive an error.
