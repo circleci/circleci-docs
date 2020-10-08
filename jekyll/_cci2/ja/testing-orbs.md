@@ -41,11 +41,11 @@ Learn more about what is included in orb project config files in the [Orb Publis
 
 ### YAML Lint
 
-The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/orbs/registry/orb/circleci/orb-tools), which is a major component of the orb development kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-lint).
+The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the orb development kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint).
 
 ### Config Validation
 
-The `test-pack` workflow will run the [orb-tools/pack](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-pack) job, in parallel with your YAML linting job (`orb-tools/lint`), to automatically pack and validate the configuration.
+The `test-pack` workflow will run the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job, in parallel with your YAML linting job (`orb-tools/lint`), to automatically pack and validate the configuration.
 
 A singular `orb.yml` file (a packed orb) can be validated with the CircleCI CLI via `circleci orb validate orb.yml`. However, using the orb development kit, we rarely work out of singular YAML files. Instead, your configuration file is automatically validated after it has been packed with the `circleci orb pack <dir> > orb.yml` command.
 
@@ -55,7 +55,7 @@ One of the major benefits of using the orb development kit is the ability to imp
 
 The most basic tests to run against bash scripts are a form of validation: "shellchecking". This is similar to a linter for Bash, you can find out more at [shellcheck.net](https://www.shellcheck.net/).
 
-In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
+In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
 
 ## Unit Testing
 
@@ -133,7 +133,7 @@ The [Bash Automation Testing System](https://github.com/bats-core/bats-core) is 
 
 Within your [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) is a [README](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/README.md) with a full and updated tutorial for creating BATS test cases.
 
-Each `.bats` file within the [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) directory will be automatically loaded and tested by the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job provided by the [bats orb](https://circleci.com/orbs/registry/orb/circleci/bats).
+Each `.bats` file within the [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) directory will be automatically loaded and tested by the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job provided by the [bats orb](https://circleci.com/developer/orbs/orb/circleci/bats).
 
 #### 例
 
