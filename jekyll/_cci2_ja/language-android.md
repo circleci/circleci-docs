@@ -129,7 +129,7 @@ CircleCI では、[Android イメージの GitHub リポジトリ](https://githu
 
 イメージをカスタマイズするには、ベースにする `circleci/android` イメージを `FROM` で指定した Dockerfile を作成します。 手順については、「[カスタム ビルドの Docker イメージの使用]({{ site.baseurl }}/ja/2.0/custom-images/)」を参照してください。
 
-[CircleCI Android Orb](https://circleci.com/orbs/registry/orb/circleci/android) を使用して目的の Android SDK と NDK を選択することも可能です。
+[CircleCI Android Orb](https://circleci.com/developer/orbs/orb/circleci/android) を使用して目的の Android SDK と NDK を選択することも可能です。
 
 ### React Native プロジェクト
 {:.no_toc}

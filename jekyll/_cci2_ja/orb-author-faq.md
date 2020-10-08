@@ -82,7 +82,7 @@ steps:
 
 このオプションは、可能な限り使用しないことを強くお勧めします。 時に、CLI ツールなどのリモート バイナリ ファイルをフェッチしなければならない場合があります。 これらのバイナリは、パッケージ マネージャーからフェッチするか、可能な場合は GitHub リリースなどの VCS でホスティングする必要があります。
 
-Homebrew を [AWS Serverless Orb](https://circleci.com/orbs/registry/orb/circleci/aws-serverless#commands-install) の一部としてインストールする例を以下に示します。
+Homebrew を [AWS Serverless Orb](https://circleci.com/developer/orbs/orb/circleci/aws-serverless#commands-install) の一部としてインストールする例を以下に示します。
 
 ```yaml
 steps:

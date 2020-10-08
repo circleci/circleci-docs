@@ -101,7 +101,7 @@ version: 2
           - run: Write-Host 'Hello, Windows'
     
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/orbs/registry/orb/circleci/windows)でご確認ください。
+`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/orbs/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 

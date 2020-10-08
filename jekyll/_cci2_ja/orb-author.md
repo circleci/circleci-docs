@@ -169,7 +169,7 @@ _`examples` スタンザは、バージョン 2.1 以上の構成で使用可能
 
 Orb のオーサーとして、CircleCI の設定ファイルで Orb を使用する例をドキュメント化できます。これにより、新しいユーザーに入門ガイドを提供できるだけでなく、より複雑なユースケースの具体例を示すことができます。
 
-Orb のオーサリングを完了し、パブリッシュすると、その Orb は [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)にパブリッシュされます。 以下のように、新しく作成された Orb が Orb レジストリに表示されます。
+Orb のオーサリングを完了し、パブリッシュすると、その Orb は [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュされます。 以下のように、新しく作成された Orb が Orb レジストリに表示されます。
 
 ![Orbs レジストリの画像]({{ site.baseurl }}/assets/img/docs/orbs-registry.png)
 
