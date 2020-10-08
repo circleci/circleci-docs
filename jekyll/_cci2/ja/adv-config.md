@@ -12,7 +12,7 @@ CircleCI supports many advanced configuration options and features, check out th
 
 ## スクリプトのチェック
 
-Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/orbs/registry/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
+Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
 
 ```yaml
 version: 2.1
