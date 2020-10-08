@@ -66,10 +66,10 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
 
 **メモ:** このセクションで説明するサンプル プロジェクトは、以下で提供されている CircleCI の AWS-ECR Orb と AWS-ECS Orb を使用します。
 
-- [AWS-ECR](https://circleci.com/orbs/registry/orb/circleci/aws-ecr)
-- [AWS-ECS](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)
+- [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
+- [AWS-ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
 
-Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry/).
+Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ### Docker イメージをビルドして AWS ECR にプッシュする
 
@@ -93,7 +93,7 @@ workflows:
 
 ### 新しい Docker イメージを既存の AWS ECS サービスにデプロイする
 
-The `deploy-service-update` job of the aws-ecs orb creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions, and deploys the new task definition to the specified ECS service. If you would like more information about the CircleCI AWS-ECS orb, go to: https://circleci.com/orbs/registry/orb/circleci/aws-ecs
+The `deploy-service-update` job of the aws-ecs orb creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions, and deploys the new task definition to the specified ECS service. If you would like more information about the CircleCI AWS-ECS orb, go to: https://circleci.com/developer/orbs/orb/circleci/aws-ecs
 
 **Note** The `deploy-service-update` job depends on `build-and-push-image` because of the `requires` key.
 
