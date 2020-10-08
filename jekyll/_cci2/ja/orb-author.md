@@ -157,7 +157,7 @@ steps:
 ##### Examples
 {:.no_toc}
 
-Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/developer/orbs/) for users to reference.
+Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/developer/orbs) for users to reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
@@ -266,7 +266,7 @@ For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/crea
 
 ### Categorizing Your Orb
 
-You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs/). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs/). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
+You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 
 #### Listing categories
 
