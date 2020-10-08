@@ -64,7 +64,7 @@ You should see your pipeline start to run automatically—and pass! So, what jus
 
 2. **Spin up environment:** CircleCI used an [orb](https://circleci.com/orbs) to help provide some defaults for this project. By using an orb, we can get quick access to common configuration. In this case, `circleci/welcome-orb@0.4.1` provides a "pre-built" job you can run which simply greets the user.
 
-3. **Views step results:** Every job is made up of a series of steps - some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. Other steps are specified by a user to achieve a specific purpose. Because we are using the `welcome` orb, we don't see custom steps; they are configured in the orb. But no problem! We can view the [source of an orb](https://circleci.com/orbs/registry/orb/circleci/welcome-orb) online.
+3. **Views step results:** Every job is made up of a series of steps - some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. Other steps are specified by a user to achieve a specific purpose. Because we are using the `welcome` orb, we don't see custom steps; they are configured in the orb. But no problem! We can view the [source of an orb](https://circleci.com/developer/orbs/orb/circleci/welcome-orb) online.
 
 Even though there was no actual source code in your repo, and no actual tests configured in your `config.yml`, CircleCI considers your build to have "succeeded" because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests. You can learn more about all the possible steps one may put in a `config.yml` file in the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference).
 
@@ -75,7 +75,7 @@ Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
 
 `https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
 
-Let's use the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node). Paste the following into your `config.yml`
+Let's use the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node). Paste the following into your `config.yml`
 
 ```yaml
 version: 2.1
