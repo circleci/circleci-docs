@@ -152,7 +152,7 @@ workflows:
 ```
 {% endraw %}
 
-For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs/).
+For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## BrowserStack and Appium
 
@@ -178,7 +178,7 @@ workflows:
 ```
 {% endraw %}
 
-There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/developer/orbs/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs/).
+There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/developer/orbs/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## Debugging Browser Tests
 

@@ -17,7 +17,7 @@ version:
 
 CircleCI orbs are open-source, shareable packages of parameterizable [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.
 
-Published orbs can be found on our [Orb Registry](https://circleci.com/developer/orbs/), or you can [author your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
+Published orbs can be found on our [Orb Registry](https://circleci.com/developer/orbs), or you can [author your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
 ## Benefits of Using Orbs
 
@@ -75,7 +75,7 @@ workflows:
 
 ## The Orb Registry
 
-The [Orb Registry](https://circleci.com/developer/orbs/) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
+The [Orb Registry](https://circleci.com/developer/orbs) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
 ![Orb Registry]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 

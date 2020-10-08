@@ -21,7 +21,7 @@ order: 1
 
 CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orb を使用すると、複数のプロジェクトで構成を共有、標準化、簡略化することができます。 構成のベスト プラクティスの参考として Orb を使用することも可能です。
 
-現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/)にて確認してください。
+現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)にて確認してください。
 
 既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 以下の例では、`circleci` 名前空間で [`hello-build` Orb](https://circleci.com/developer/orbs/orb/circleci/hello-build) を呼び出します。
 

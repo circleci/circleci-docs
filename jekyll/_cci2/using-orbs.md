@@ -134,7 +134,7 @@ See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring
 
 ### Usage Examples
 
-Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/developer/orbs/). Below is a sample usage example:
+Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
 
 ```yaml
 # Source https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/examples/example.yml
@@ -160,7 +160,7 @@ For example, the `circleci/rails` orb may coexist in the registry with an orb ca
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact support.
 
-By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/developer/orbs/).
+By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/developer/orbs).
 
 
 ## Semantic Versioning
@@ -200,7 +200,7 @@ To avoid negatively impacting a user's CI process, orb authors should strictly a
 ### Production Orbs
 {:.no_toc}
 
-Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/developer/orbs/).
+Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/developer/orbs).
 
 - Production orbs are immutable, they cannot be deleted or edited, and updates must be provided in a new semver release
 - Version string must be in semver format, for example, `<namespace>/<orb>@1.2.3`

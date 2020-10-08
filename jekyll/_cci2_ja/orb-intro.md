@@ -10,11 +10,11 @@ order: 1
 
 *`version 2.1` のクラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。*
 
-CircleCI Orbs は、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。 CircleCI では承認済み Orbs に加え、CircleCI パートナーによってオーサリングされたサードパーティ製の Orbs も提供しています。 まずは、こうした既存の Orbs がご自身の構成ワークフローに活用できるかどうかを評価することをお勧めします。 承認済み Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs/)にて確認してください。
+CircleCI Orbs は、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。 CircleCI では承認済み Orbs に加え、CircleCI パートナーによってオーサリングされたサードパーティ製の Orbs も提供しています。 まずは、こうした既存の Orbs がご自身の構成ワークフローに活用できるかどうかを評価することをお勧めします。 承認済み Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)にて確認してください。
 
 ## CircleCI Orbs の使用
 
-ワークフローやジョブに CircleCI Orbs を使用するには、いくつかの方法があります。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs/)から既存の Orb (CircleCI およびパートナー承認済み Orbs) をインポートする方法か、特定のワークフロー用に独自の Orb をオーサリングする方法を選ぶ場合が多いでしょう。 それぞれのアプローチについて以下に説明します。
+ワークフローやジョブに CircleCI Orbs を使用するには、いくつかの方法があります。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)から既存の Orb (CircleCI およびパートナー承認済み Orbs) をインポートする方法か、特定のワークフロー用に独自の Orb をオーサリングする方法を選ぶ場合が多いでしょう。 それぞれのアプローチについて以下に説明します。
 
 ### 既存の Orb をインポートする
 
@@ -46,7 +46,7 @@ version: 2.1
 
 1) 構成内の `.circleci.yml/config.yml` ファイルで `orbs` キーをインポートします。
 
-2) 下の例の `<Orb 参照文字列>` の値を [CircleCI Orb レジストリ](https://circleci.com/developer/orbs/)からインポートする Orb に置き換えます。 レジストリには数多くの CircleCI 承認済み Orb およびパートナー承認済み Orbs が公開されており、必要なものを利用できます。
+2) 下の例の `<Orb 参照文字列>` の値を [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)からインポートする Orb に置き換えます。 レジストリには数多くの CircleCI 承認済み Orb およびパートナー承認済み Orbs が公開されており、必要なものを利用できます。
 
 ```yaml
 version: 2.1

@@ -76,7 +76,7 @@ CircleCI アプリケーションの [[Notifications (通知)](https://circleci.
 
 ## Orb を使用した通知
 
-Orb を使用すれば、さまざまな種類の通知を構成に統合できます。現在、CircleCI からは Slack Orb と IRC Orb が提供されており、サードパーティ製の Orb もいくつか存在します。 [Orb レジストリ](https://circleci.com/developer/orbs/?query=notification&filterBy=all)で *notifications* を検索して、現在使用できる Orb をご確認ください。
+Orb を使用すれば、さまざまな種類の通知を構成に統合できます。現在、CircleCI からは Slack Orb と IRC Orb が提供されており、サードパーティ製の Orb もいくつか存在します。 [Orb レジストリ](https://circleci.com/developer/orbs?query=notification&filterBy=all)で *notifications* を検索して、現在使用できる Orb をご確認ください。
 
 ### 前提条件
 

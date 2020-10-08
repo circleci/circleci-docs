@@ -23,7 +23,7 @@ This page, and its associated recipes, describes how you can perform specific co
 
 CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a reference for configuration best practices.
 
-Refer to the [CircleCI Orbs Registry](https://circleci.com/developer/orbs/) for the complete list of available orbs.
+Refer to the [CircleCI Orbs Registry](https://circleci.com/developer/orbs) for the complete list of available orbs.
 
 To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/developer/orbs/orb/circleci/hello-build) in the `circleci` namespace.
 
@@ -48,8 +48,8 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 
 * In order to use pipelines features and orbs you must use `version 2.1` config. 
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
-* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs/) to see how the individual jobs and commands are built.
-* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs/).
+* If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
+* In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items that appear within `< >` should be replaced with your own parameters.
 
 ## Deploy changes to Amazon ECS

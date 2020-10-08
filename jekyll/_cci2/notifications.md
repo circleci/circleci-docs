@@ -76,7 +76,7 @@ documentation for handling web notifications.
 
 ## Notifications with Orbs
 
-You can use Orbs to integrate various kinds of notifications into your configuration; currently, CircleCI offers a Slack orb and an IRC orb, but several third-party orbs also exist. Consider searching the [orb registry](https://circleci.com/developer/orbs/?query=notification&filterBy=all) for _notifications_ to see what is available.
+You can use Orbs to integrate various kinds of notifications into your configuration; currently, CircleCI offers a Slack orb and an IRC orb, but several third-party orbs also exist. Consider searching the [orb registry](https://circleci.com/developer/orbs?query=notification&filterBy=all) for _notifications_ to see what is available.
 
 ### Prerequisites
 

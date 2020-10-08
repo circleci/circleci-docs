@@ -14,7 +14,7 @@ version:
 
 ## Quick Start
 
-Orbs take [reusable configuration]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements) and package it in a way that can be published to the [Orb Registry](https://circleci.com/developer/orbs/) and imported into multiple configuration files. If you manage multiple, similar projects, consider abstracting out your config with orbs.
+Orbs take [reusable configuration]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements) and package it in a way that can be published to the [Orb Registry](https://circleci.com/developer/orbs) and imported into multiple configuration files. If you manage multiple, similar projects, consider abstracting out your config with orbs.
 
 Before authoring an orb, it is recommended that you become familiar with the [CircleCI config]({{site.baseurl}}/2.0/config-intro/) and authoring [parameterized reusable config elements]({{site.baseurl}}/2.0/reusing-config/) pages.
 

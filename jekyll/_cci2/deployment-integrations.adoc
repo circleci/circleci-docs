@@ -35,7 +35,7 @@ Once a software application has been developed and tested, it needs to be deploy
 
 == Using Orbs to Simplify Deployment
 
-At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your config. Check out the full range of available orbs in the https://circleci.com/developer/orbs/[Orbs Registry]. For simple deployment pipelines, using orbs will get you the results you need with minimal configuration. 
+At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your config. Check out the full range of available orbs in the https://circleci.com/developer/orbs[Orbs Registry]. For simple deployment pipelines, using orbs will get you the results you need with minimal configuration. 
 
 As an example, consider the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
 
@@ -175,4 +175,4 @@ workflows:
 //== Deployment Security Considerations
 
 == Next Steps
-Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/developer/orbs/[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!
+Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. Also head to the https://circleci.com/developer/orbs[Orbs Registry] to see if there's an orb for your deployment target to help keep your config simple. If not consider <<orb-author-intro#,authoring one>>!

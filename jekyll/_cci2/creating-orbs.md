@@ -16,7 +16,7 @@ This guide covers the steps required to publish an orb.
 
 ## Introduction
 
-After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) tag, and the orb will appear publicly on the [Orb Registry](https://circleci.com/developer/orbs/).
+After authoring your orb, you can publish it with a [semantically versioned]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) tag, and the orb will appear publicly on the [Orb Registry](https://circleci.com/developer/orbs).
 
 ![Orb Publishing Process]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
@@ -52,7 +52,7 @@ The tag template looks like this: `[semver:<increment>]`, where `<increment>` is
 Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message. ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
 1. **Complete!** <br/>
-If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/developer/orbs/).
+If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/developer/orbs).
 
 ### Orb Publishing Process
 
