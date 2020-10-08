@@ -113,7 +113,7 @@ This dashboard receives data through the CircleCI Sumo Logic orb which must be i
 
 ### The Sumo Logic Orb
 
-Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/orbs/registry/orb/circleci/sumologic).
+Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/sumologic).
 
 #### 1. Import the Sumo Logic orb.
 
