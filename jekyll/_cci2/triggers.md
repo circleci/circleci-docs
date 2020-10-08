@@ -24,7 +24,7 @@ By default, CircleCI automatically builds a project whenever you push changes to
 
 ```
 curl -u ${CIRCLE_API_USER_TOKEN}: \
-     -d build_parameters[CIRCLE_JOB]=deploy_docker \
+     -d 'build_parameters[CIRCLE_JOB]=deploy_docker' \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
