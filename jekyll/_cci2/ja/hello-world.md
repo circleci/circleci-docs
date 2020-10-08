@@ -122,7 +122,7 @@ jobs:
 
 ### Orbs の使用とオーサリングの詳細
 
-Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/orbs/registry).
+Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## Following / Unfollowing Projects
 
