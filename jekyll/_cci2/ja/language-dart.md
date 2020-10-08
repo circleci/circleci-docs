@@ -60,7 +60,7 @@ orbs:
 ```
 
 - **Config Version**: Current is `2.1`. Unless using a CircleCI Server installation, we recommend using 2.1.
-- **Orbs**: CircleCI offers [orbs](https://circleci.com/orbs/registry/), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/orbs/registry/orb/circleci/windows) to make use of a pre-defined execution environment later on.
+- **Orbs**: CircleCI offers [orbs](https://circleci.com/developer/orbs), which are packaged, templatized, and reusable configuration. Here, we include the [Windows orb](https://circleci.com/developer/orbs/orb/circleci/windows) to make use of a pre-defined execution environment later on.
 
 {% raw %}
 
