@@ -52,7 +52,7 @@ jobs:
   #... workflows , other jobs etc.
 ```
 
-See the [AWS-S3 Orb](https://circleci.com/orbs/registry/orb/circleci/aws-s3#commands) page in the registry for more information.
+See the [AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands) page in the registry for more information.
 
 ### Executors
 
@@ -109,9 +109,9 @@ parameters:
 ```
 {% endraw %}
 
-In the [Node orb](https://circleci.com/orbs/registry/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing).
+In the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing).
 
-For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/orbs/registry/orb/circleci/node#executors-default).
+For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node#executors-default).
 
 ### Jobs
 
@@ -131,11 +131,11 @@ workflows:
       - <orb>/<job-name>
 ```
 
-See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/orbs/registry/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
+See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
 
 ### Usage Examples
 
-Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/orbs/registry/). Below is a sample usage example:
+Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
 
 ```yaml
 # Source https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/examples/example.yml
@@ -161,7 +161,7 @@ For example, the `circleci/rails` orb may coexist in the registry with an orb ca
 
 Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact support.
 
-By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/orbs/registry/).
+By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/developer/orbs).
 
 
 ## Semantic Versioning
@@ -201,13 +201,13 @@ To avoid negatively impacting a user's CI process, orb authors should strictly a
 ### Production Orbs
 {:.no_toc}
 
-Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/orbs/registry/).
+Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/developer/orbs).
 
 - Production orbs are immutable, they cannot be deleted or edited, and updates must be provided in a new semver release
 - Version string must be in semver format, for example, `<namespace>/<orb>@1.2.3`
 - Production orbs can only be published by an owner of the namespace organization
 - Published to the Orb Registry
-- Open source, released under [MIT license](https://circleci.com/orbs/registry/licensing)
+- Open source, released under [MIT license](https://circleci.com/developer/orbs/licensing)
 - Available via CircleCI CLI
 
 ### Development Orbs
@@ -219,7 +219,7 @@ Development orbs are temporary overwrite-able orb tag versions, useful for rapid
 - Version string must begin with `dev:` followed by any string, for example, `<namespace>/<orb>@dev:my-feature-branch`
 - Development orbs may be published by any member of the namespace organization
 - Will not appear on the Orb Registry
-- Open source, released under [MIT license](https://circleci.com/orbs/registry/licensing).
+- Open source, released under [MIT license](https://circleci.com/developer/orbs/licensing).
 - Available via CircleCI CLI (if the development tag name is known)
 
 ### Inline Orbs
@@ -240,7 +240,7 @@ _[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-
 
 All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
 
-If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/orbs/registry/orb/circleci/orb-tools#jobs-pack) job.
+If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
 {: class="alert alert-warning"}
 
 **_Example: Orb Project Structure_**
