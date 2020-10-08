@@ -29,7 +29,7 @@ An orb "slug" is made up of a _namespace_ and _orb_ name separated by a forward 
 #### Categorize your Orb
 {:.no_toc}
 
-Categorizing your orb allows it to be searchable on the [Orb Registry](https://circleci.com/developer/orbs/) by category. To see how you can categorize your orb using the CircleCI CLI, refer to the [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author) guide.
+Categorizing your orb allows it to be searchable on the [Orb Registry](https://circleci.com/developer/orbs) by category. To see how you can categorize your orb using the CircleCI CLI, refer to the [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author) guide.
 
 #### Ensure All Orb Components Include Descriptions
 {:.no_toc}
