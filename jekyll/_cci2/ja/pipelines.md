@@ -24,16 +24,13 @@ CircleCI アプリケーションの [Pipelines (パイプライン)] ページ�
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-jobs-to-pipelines.png)
 
-**メモ:** 新しい UI には当面継続的に改善を加えていくため、その間は一時的に新しい UI の使用をオプトアウトして、引き続き従来の UI を使用することが可能です。
-
-![]({{ site.baseurl }}/assets/img/docs/pipelines-opt-out-1.png)
 
 ## ジョブ、テスト、アーティファクト
 
-パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプライン中のいずれかのジョブに移動すると、ジョブ出力、テスト結果、アーティファクトに各タブからアクセスできます。
+A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
+Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
