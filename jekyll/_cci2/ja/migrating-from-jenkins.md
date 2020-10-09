@@ -95,10 +95,10 @@ CircleCI では、すべての Linux および Android のビルドが専用コ�
 
 CircleCI では、プロジェクトの設定で並列に処理できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 CircleCI の並列処理の詳細については、「[テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)」を参照してください。
 
-## Jenkinsfile Converter (preview)
+## Jenkinsfile Converter
 
-CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed at https://jenkinsto.cc/i.
+CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed at https://circleci.com/developer/tools/jenkins-converter.
 
 **Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 
-Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Jenkinsfile Converter project repo](https://github.com/circleci/jenkinsfile-converter). The [companion guide](https://github.com/circleci/jenkinsfile-converter/blob/dev/docs/GUIDE.md) is highly recommended reading after you’ve created a ```config.yml``` file by using the converter.
+Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation](https://circleci.com/docs/2.0/jenkins-converter/).
