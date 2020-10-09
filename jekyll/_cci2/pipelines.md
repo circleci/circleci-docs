@@ -23,9 +23,6 @@ Where you once saw the term `Jobs` in the sidebar, you will now see `Pipelines`.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-jobs-to-pipelines.png)
 
-**Note:** If you would like to continue to use the old UI while it is still available, you can temporarily opt out while the new UI is continually improved.
-
-![]({{ site.baseurl }}/assets/img/docs/pipelines-opt-out-1.png)
 
 ## Jobs, Tests, Artifacts
 
