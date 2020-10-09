@@ -23,7 +23,7 @@ CircleCI のデフォルトでは、ユーザーが変更をバージョン管�
 **Note:** You cannot currently trigger jobs that use 2.1 config from the API.
 
     curl -u ${CIRCLE_API_USER_TOKEN}: \
-         -d build_parameters[CIRCLE_JOB]=deploy_docker \
+         -d 'build_parameters[CIRCLE_JOB]=deploy_docker' \
          https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
     
 
