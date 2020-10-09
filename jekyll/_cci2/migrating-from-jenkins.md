@@ -97,9 +97,9 @@ It is possible to run multiple tests in parallel on a Jenkins build using techni
 
 CircleCI lets you increase the parallelism in any project’s settings so that each build for that project uses multiple containers at once. Tests are evenly split between containers allowing the total build to run in a fraction of the time it normally would. Unlike with simple multithreading, tests are strongly isolated from each other in their own environments. You can read more about parallelism on CircleCI in the [Running Tests in Parallel]( {{ site.baseurl }}/2.0/parallelism-faster-jobs/) document.
 
-## Jenkinsfile Converter (preview)
-CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed at https://jenkinsto.cc/i.
+## Jenkinsfile Converter
+CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed at https://circleci.com/developer/tools/jenkins-converter.
 
-**Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will   be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
+**Note:** The converter only supports declarative Jenkinsfiles. The number of supported plug-ins and steps will be expanded, this preview of the converter may help you to convert half of the Jenkinsfile to make it easier for you to get started with CircleCI.
 
-Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Jenkinsfile Converter project repo](https://github.com/circleci/jenkinsfile-converter). The [companion guide](https://github.com/circleci/jenkinsfile-converter/blob/dev/docs/GUIDE.md) is highly recommended reading after you’ve created a ```config.yml``` file by using the converter.
+Instructions on how to use the Jenkinsfile converter, its features, and limitations are located in the [Introduction to Jenkins Converter documentation](https://circleci.com/docs/2.0/jenkins-converter/).
