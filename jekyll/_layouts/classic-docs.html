@@ -13,28 +13,32 @@
 	<!-- instant hit template container /-->
 	<div id="hits-target" style="display:none;">
 		<div class="container">
-			<div id="subnav-placeholder">
-				<div class="component subnav dynamic-fixed" data-top-nav-offset="120">
-					<ul class="results-nav" data-active="search-results-documentation">
-						<li data-value="search-results-documentation" data-subnav-item>
-							<a href="#search-results-documentation">
-								Documentation <span class="hits-count">(<span class="hits-count-docs">0</span>)</span>
-							</a>
-						</li>
-						<li data-value="search-results-orbs" data-subnav-item>
-							<a href="#search-results-orbs">
-								Orbs <span class="hits-count">(<span class="hits-count-orbs">0</span>)</span>
-							</a>
-						</li>
-					</ul>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<div id="subnav-placeholder">
+						<div class="component subnav dynamic-fixed" data-top-nav-offset="120">
+							<ul class="results-nav" data-active="search-results-documentation">
+								<li data-value="search-results-documentation" data-subnav-item>
+									<a href="#search-results-documentation">
+										Documentation <span class="hits-count">(<span class="hits-count-docs">0</span>)</span>
+									</a>
+								</li>
+								<li data-value="search-results-orbs" data-subnav-item>
+									<a href="#search-results-orbs">
+										Orbs <span class="hits-count">(<span class="hits-count-orbs">0</span>)</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<a id="search-results-documentation" class="deep-link-anchor subnav-offset anchor"></a>
+					<div id="instant-hits"></div>
+
+					<a id="search-results-orbs" class="deep-link-anchor subnav-offset anchor"></a>
+					<div id="instant-hits-orbs"></div>
 				</div>
 			</div>
-
-			<a id="search-results-documentation" class="deep-link-anchor subnav-offset anchor"></a>
-			<div id="instant-hits"></div>
-
-			<a id="search-results-orbs" class="deep-link-anchor subnav-offset anchor"></a>
-			<div id="instant-hits-orbs"></div>
 		</div>
 	</div>
 	<div class="main-body">

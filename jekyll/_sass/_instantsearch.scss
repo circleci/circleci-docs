@@ -25,14 +25,24 @@
       margin: 0;
     }
 
-    .ais-SearchBox-submit,
-    .ais-SearchBox-reset {
+    .ais-SearchBox-submit {
       position: absolute;
       top: calc(50% - 20px/2);
 
       svg {
         width: 20px;
         height: auto;
+      }
+    }
+
+    .ais-SearchBox-reset {
+      position: absolute;
+      top: calc(50% - 14px/2);
+
+      svg {
+        width: 14px;
+        height: auto;
+        fill: #D8D8D8;
       }
     }
 
@@ -64,6 +74,10 @@
   h2 {
     padding-left: $spacing-small-vertical;
   }
+}
+
+#instant-hits {
+  margin-top: 24px;
 }
 
 .result-item-wrap {
@@ -107,7 +121,7 @@
 
   mark {
     color: #1A649A;
-    background-color: #EEF2F5;
+    background-color: rgba(#19639A, 0.05);
     font-weight: $font-weight-bold;
   }
 
@@ -120,11 +134,14 @@
 ul.results-nav {
   margin: 0;
   padding: 0;
-  background: #FAFAFA;
+  border-bottom: 1px solid #D8D8D8;
 
   li {
+    font-weight: 500;
+    color: $gray-dark;
+
     &.active {
-      font-weight: 500;
+      color: $black-light;
     }
 
     .hits-count {

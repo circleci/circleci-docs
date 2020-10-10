@@ -19,9 +19,26 @@ $nav-offset-subnav: $nav-offset + $subnav-offset;
 
 // These tweaks to the shared subnav CSS are necessary to work in the context of this project's layout.
 
-#subnav-placeholder,
-.subnav.component.js-fixed {
-  width: inherit;
+.subnav.component {
+  padding: 0 24px;
+  margin-left: -24px;
+  margin-right: -24px;
+  width: auto;
+  background-color: #FAFAFA;
+
+  border-bottom: none; // re-implemented on .results-nav so that result item white hover background doesn't show around the left/right edges of the subnav
+
+  &.js-fixed {
+    transition: none;
+  }
+
+  li a {
+    color: inherit;
+  }
+
+  li:first-child {
+    margin-left: 0;
+  }
 }
 
 .deep-link-anchor {
