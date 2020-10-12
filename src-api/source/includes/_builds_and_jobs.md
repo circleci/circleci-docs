@@ -284,8 +284,6 @@ tag | The tag to build. Default is null. Cannot be used with revision parameter.
 parallel | The number of containers to use to run the build. Default is null and the project default is used. This parameter is ignored for builds running on our 2.0 infrastructure.
 build_parameters | Additional environment variables to inject into the build environment. A map of names to values.
 
-**Note** Triggering a new job is not currently supported with configurations that specify `version: 2.1`.
-
 ## Trigger a new Job with a Branch
 
 ```sh
@@ -384,8 +382,6 @@ For more about build parameters, see 2.0 build parameters <a href="https://circl
 revision | The specific revision to build. Default is null and the head of the branch is used. Cannot be used with tag parameter.
 parallel | The number of containers to use to run the build. Default is null and the project default is used. This parameter is ignored for builds running on our 2.0 infrastructure.
 build_parameters | Additional environment variables to inject into the build environment. A map of names to values.
-
-**Note** Triggering a new job with a branch is not currently supported with configurations that specify `version: 2.1`.
 
 ## Trigger a new Build by Project (preview)
 
