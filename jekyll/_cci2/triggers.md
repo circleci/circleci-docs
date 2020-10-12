@@ -20,8 +20,6 @@ By default, CircleCI automatically builds a project whenever you push changes to
 
 ## Trigger a Job Using curl and Your API Token
 
-**Note:** You cannot currently trigger jobs that use 2.1 config from the API.
-
 ```
 curl -u ${CIRCLE_API_USER_TOKEN}: \
      -d 'build_parameters[CIRCLE_JOB]=deploy_docker' \
