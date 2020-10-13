@@ -295,7 +295,7 @@ curl -X POST --header "Content-Type: application/json" -H "Circle-Token: <circle
   "build_parameters": { // optional
     "RUN_EXTRA_TESTS": "true"
   }
-}
+}'
 
 https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/tree/:branch
 ```
