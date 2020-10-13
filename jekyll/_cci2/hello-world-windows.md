@@ -270,7 +270,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 
 * Windows Server 2019 Core Datacenter Edition
 * Visual Studio 2019 Community Edition
-    * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/vs/community/#usage) before using this Visual Studio version in your Windows jobs.
+    * Additional licensing terms may apply to your organisation when using this version of Visual Studio on CircleCI. Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/license-terms/mlt031819/) before using this Visual Studio version in your Windows jobs.
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
 * Shells:
