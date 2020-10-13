@@ -269,7 +269,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 
 * Windows Server 2019 Core Datacenter エディション
 * Visual Studio 2019 Community エディション
-    * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Windows ジョブでこの Visual Studio バージョンを使用する前に、[Visual Studio 2019 Community エディションのライセンス条項](https://visualstudio.microsoft.com/vs/community/#usage)を確認してください。
+    * CircleCI でこのバージョンの Visual Studio を使用する組織には、追加のライセンス条項が適用されます。 Please review the [Visual Studio 2019 Community Edition licensing terms](https://visualstudio.microsoft.com/license-terms/mlt031819/) before using this Visual Studio version in your Windows jobs.
     * Azure SDK for Visual Studio 2019
     * Visual Studio 2019 Build Tools
 * シェル
