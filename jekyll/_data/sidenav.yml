@@ -325,7 +325,7 @@ en:
       children:
         - name: Overview
           link: 2.0/overview/
-        - name: Nomad
+        - name: Intro to Nomad
           link: 2.0/nomad/
         - name: Metrics & Monitoring
           link: 2.0/monitoring/
