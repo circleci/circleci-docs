@@ -33,6 +33,10 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
+Alternative syntaxes for the above example:
+- Replace single quotes with double quotes (`-d "build_parameters[CIRCLE_JOB]=deploy_docker"`)
+- Escape the square brackets (`-d build_parameters\[CIRCLE_JOB\]=deploy_docker`)
+
 Some notes on the variables used in this example:
 - `CIRCLE_API_USER_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
 - `<vcs-type>` is a placeholder variable and refers to your chosen VCS (either `github` or `bitbucket`).
