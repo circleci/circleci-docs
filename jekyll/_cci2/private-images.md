@@ -57,7 +57,7 @@ Alternatively, you can utilize the `machine` executor to achieve the same result
 ``` yaml
 version: 2.1
 orbs:
-  docker: circleci/docker@1.4.0
+  docker: circleci/docker@1.5.0
 
 workflows:
   my-workflow:
@@ -73,7 +73,7 @@ jobs:
     steps:
       - docker/check:
           docker-username: mydockerhub-user  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
-          docker-password: $DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
+          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
       - docker/pull:
           images: 'circleci/node:latest'
 ```
