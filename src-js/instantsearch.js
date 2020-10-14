@@ -147,6 +147,7 @@ export function init () {
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
       resultDisplay.style.display = "block";
+      window.dispatchEvent(new Event('shown.subnav'));
     } else {
       pageBody.style.display = "flex";
       resultDisplay.style.display = "none";
