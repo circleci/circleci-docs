@@ -51,7 +51,7 @@ export function init () {
       container: '#instant-hits',
       escapeHits: true,
       templates: {
-        empty: 'No results',
+        empty: 'No Documentation results',
         item: (item) => {
           let url = item.url;
           if (item.anchor) {
@@ -97,7 +97,7 @@ export function init () {
           container: '#instant-hits-orbs',
           escapeHits: true,
           templates: {
-            empty: 'No results',
+            empty: 'No Orbs results',
             item: (item) => {
               const title   = get(item._highlightResult, ['full_name', 'value'], item.full_name);
               const content = get(item._highlightResult, ['description', 'value'], item.description);
