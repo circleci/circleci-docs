@@ -366,7 +366,7 @@ workflows:
 jobs:
   build:
     machine:
-      image: ubuntu-1604:202007-01
+      image: windows-server-2019-nvidia:stable
       docker_layer_caching: true    # default - false
 ```
 
