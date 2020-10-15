@@ -423,39 +423,81 @@ workflows:
               ignore: /.*/
 ```
 
-**メモ:** GitHub からの Web フック ペイロードは、[上限が 5 MB](https://developer.github.com/webhooks/#payloads) に設定されており、[一部のイベント](https://developer.github.com/v3/activity/events/types/#createevent)は最大 3 つのタグに制限されます。 複数のタグを一度にプッシュした場合、CircleCI はすべてを受信できないことがあります。
+In the example below, two jobs are defined (`test` and `deploy`) and three workflows utilize those jobs:
+
+- The `build` workflow runs for all branches except `main` and is not run on tags.
+- The `staging` workflow will only run on the `main` branch and is not run on tags.
+- The `production` workflow runs for no branches and only for tags starting with `v.`.
+
+```yaml
+workflows:
+  build: # This workflow will run on all branches except 'main' and will not run on tags
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: main
+  staging: # This workflow will only run on 'main' and will not run on tags
+    jobs:
+      - test:
+          filters: &filters-staging # this yaml anchor is setting these values to "filters-staging"
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            <<: *filters-staging # this is calling the previously set yaml anchor
+  production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
+    jobs:
+      - test:
+          filters: &filters-production # this yaml anchor is setting these values to "filters-production"
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            <<: *filters-production # this is calling the previously set yaml anchor
+```
+
+**Note:** Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once, CircleCI may not receive all of them.
 
 ### 正規表現を使用してタグとブランチをフィルタリングする
 {:.no_toc}
 
-CircleCI のブランチおよびタグ フィルターは、Java 正規表現パターン マッチの一種をサポートしています。 フィルターを記述した場合、CircleCI は正規表現との正確な一致を調べます。
+CircleCI branch and tag filters support the Java variant of regex pattern matching. When writing filters, CircleCI matches exact regular expressions.
 
-たとえば、`only: /^config-test/` は `config-test` タグにのみ一致します。 `config-test` で始まるすべてのタグに一致させるには、代わりに `only: /^config-test.*/` を使用します。
+For example, `only: /^config-test/` only matches the `config-test` tag. To match all tags starting with `config-test`, use `only: /^config-test.*/` instead.
 
-セマンティック バージョニングにはタグが一般的に使用されています。 2.1 リリースのパッチ バージョン 3-7 と一致させるには、`/^version-2\.1\.[3-7]/` と記述します。
+Using tags for semantic versioning is a common use case. To match patch versions 3-7 of a 2.1 release, you could write `/^version-2\.1\.[3-7]/`.
 
-パターン マッチ ルールの詳細については、[java.util.regex のドキュメント](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html)を参照してください。
+For full details on pattern-matching rules, see the [java.util.regex documentation](https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html).
 
 ## ワークスペースによるジョブ間のデータ共有
 
-各ワークフローには 1 つのワークスペースが関連付けられ、ワークフローの進行に伴ってダウンストリーム ジョブにファイルを転送するために使用されます。 ワークスペースは、追加専用のデータ ストレージです。 ジョブは、ワークスペースにデータを維持できます。 この構成は、データをアーカイブし、コンテナ外のストアに新しいレイヤーを作成します。 ダウンストリーム ジョブは、そのコンテナ ファイル システムにワークスペースをアタッチできます。 ワークスペースをアタッチすると、ワークフロー グラフ内のアップストリーム ジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
+Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. The workspace is an additive-only store of data. Jobs can persist data to the workspace. This configuration archives the data and creates a new layer in an off-container store. Downstream jobs can attach the workspace to their container filesystem. Attaching the workspace downloads and unpacks each layer based on the ordering of the upstream jobs in the workflow graph.
 
-![ワークスペースのデータ フロー]({{ site.baseurl }}/assets/img/docs/workspaces.png)
+![workspaces data flow]({{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-ワークスペースを使用して実行ごとに固有のデータを渡しますが、これはダウンストリーム ジョブに必要です。 複数のブランチで実行されるジョブを含むワークフローでは、ワークスペースを使用してデータを共有しなければならない場合があります。 ワークスペースは、コンパイルされたデータがテスト コンテナによって使用されるプロジェクトでも便利です。
+Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
 
-たとえば、Scala プロジェクトは通常、ビルド ジョブ内のコンパイルで CPU に高い負荷がかかります。 対照的に、Scala テスト ジョブは CPU に高い負荷がかからず、コンテナ間で十分に並列処理できます。 ビルド ジョブにより大きなコンテナを使用し、コンパイルされたデータをワークスペースに保存することで、テスト コンテナはビルド ジョブからコンパイルされた Scala を使用できるようになります。
+For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
 
-2 つ目の例は、jar をビルドしてワークスペースに保存する `build` ジョブを含むプロジェクトです。 The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
+A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
 
-あるジョブのデータを維持し、他のジョブにそのデータを提供するには、`persist_to_workspace` キーを使用するようにジョブを構成します。 `persist_to_workspace` の `paths:` プロパティで指定したファイルとディレクトリは、`root` キーで指定したディレクトリからの相対パスにある、ワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
+To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
-`attach_workspace` キーを構成することで、保存されたデータを取得するようにジョブを構成します。 以下の `config.yml` ファイルでは 2 つのジョブが定義されており、`downstream` ジョブは `flow` ジョブのアーティファクトを使用します。 順次実行のワークフローとして構成されているため、`downstream` が開始する前に `flow` が終了する必要があります。
+Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
 ```yaml
-# 以下のスタンザは、CircleCI 2.1 を使用して再利用可能な Executor を使用していることに注意してください。
-# これにより、ジョブ間で再利用される Docker イメージを定義できます。
-# 詳細については、https://circleci.com/ja/docs/2.0/reusing-config/#再利用可能な-executors-のオーサリング を参照してください。
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
 
 version: 2.1
 
@@ -480,10 +522,10 @@ jobs:
       # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
 
       - persist_to_workspace:
-          # 絶対パスまたは working_directory からの相対パスでなければなりません。 これは、ワークスペースの
-      # ルート ディレクトリとなる、コンテナ上のディレクトリです。
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # taken to be the root directory of the workspace.
           root: workspace
-          # ルートからの相対パスでなければなりません。
+          # Must be relative path from root
           paths:
             - echo-output
 
@@ -492,7 +534,7 @@ jobs:
     steps:
 
       - attach_workspace:
-          # 絶対パスであるか、working_directory からの相対パスでなければなりません。
+          # Must be absolute path or relative path from working_directory
           at: /tmp/workspace
 
       - run: |
@@ -514,19 +556,19 @@ workflows:
             - flow
 ```
 
-ワークスペースを使用してビルド ジョブとデプロイ ジョブの間でデータを受け渡す実際の例については、CircleCI ドキュメントをビルドするように構成された [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) を参照してください。
+For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
 
-ワークスペース、キャッシュ、およびアーティファクトの使用に関する概念的な情報については、ブログ記事「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
 ## ワークフロー内の失敗したジョブの再実行
 
-ワークフローを使用すると、失敗にもすばやく対応できるようになります。 ワークフローの**失敗したジョブ**のみを再実行するには、アプリで **[Workflows (ワークフロー)]** アイコンをクリックし、ワークフローを選択して各ジョブのステータスを表示します。次に、**[Rerun (再実行)]** ボタンをクリックし、[**Rerun from failed (失敗から再実行)**] を選択します。
+When you use workflows, you increase your ability to rapidly respond to failures. To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
 
-![CircleCI のワークフロー ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 
-このセクションでは、ワークフローに関連する一般的な問題とその解決方法について説明します。
+This section describes common problems and solutions for Workflows.
 
 ### Workflow and Subsequent Jobs Do Not Trigger
 
