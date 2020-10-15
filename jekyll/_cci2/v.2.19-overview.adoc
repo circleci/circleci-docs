@@ -28,6 +28,8 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 ## Known Issues
 
+* On static (non-AWS) installations with `NONE` selected under storage driver settings, tests can be split only by file name or file size. If a user attempts to split tests by timing data, static instances will split them by file name instead.
+
 * **If you are using an HTTP proxy for your installation, upgrade to v2.19.02 or above**. We had a known issue around job step logging and docker commands customization that made pre-2.19.2 releases incompatible with an HTTP proxy setup of CircleCI Server.
 
 * The first user to access a CircleCI Server installation should be granted admin access. Currently, there is an issue preventing this from happening when LDAP authentication is in use. Follow https://circleci.com/docs/2.0/authentication#grant-admin-access-to-user[this guide] for a workaround.
@@ -39,6 +41,10 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
+## What's New in v2.19.08
+
+* Fixed a bug that was causing parallelism to fail for static installations with `NONE` selected under storage driver settings.
 
 ## What's New in v2.19.07
 
