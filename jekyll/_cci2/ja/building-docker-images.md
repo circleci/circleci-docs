@@ -94,7 +94,7 @@ jobs:
           docker push CircleCI-Public/circleci-demo-docker:$TAG
 {% endhighlight %}
 
-使用するプライマリ コンテナに Docker CLI をまだインストールしていない場合は[インストールする必要があります](https://docs.docker.com/install/#supported-platforms)。
+**Note:** The [CircleCI convenience images](https://circleci.com/docs/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
           # Alpine ベースのイメージに APK でインストールします
           - run:
