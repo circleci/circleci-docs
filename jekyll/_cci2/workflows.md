@@ -430,6 +430,48 @@ workflows:
               ignore: /.*/
 ```
 
+In the example below, two jobs are defined (`test` and `deploy`) and three workflows utilize those jobs:
+
+- The `build` workflow runs for all branches except `main` and is not run on tags.
+- The `staging` workflow will only run on the `main` branch and is not run on tags.
+- The `production` workflow runs for no branches and only for tags starting with `v.`.
+
+```yaml
+workflows:
+  build: # This workflow will run on all branches except 'main' and will not run on tags
+    jobs:
+      - test:
+          filters:
+            branches:
+              ignore: main
+  staging: # This workflow will only run on 'main' and will not run on tags
+    jobs:
+      - test:
+          filters: &filters-staging # this yaml anchor is setting these values to "filters-staging"
+            branches:
+              only: main
+            tags:
+              ignore: /.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            <<: *filters-staging # this is calling the previously set yaml anchor
+  production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
+    jobs:
+      - test:
+          filters: &filters-production # this yaml anchor is setting these values to "filters-production"
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - build
+          filters:
+            <<: *filters-production # this is calling the previously set yaml anchor
+```
+
 **Note:**
 Webhook payloads from GitHub [are capped at 5MB](https://developer.github.com/webhooks/#payloads) and [for some events](https://developer.github.com/v3/activity/events/types/#createevent) a maximum of 3 tags. If you push several tags at once,
 CircleCI may not receive all of them.
