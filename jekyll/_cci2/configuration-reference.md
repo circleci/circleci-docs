@@ -330,7 +330,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:202007-01
+      image: ubuntu-2004:202010-01
     steps:
       - checkout
       - run:
@@ -341,7 +341,8 @@ jobs:
 ##### Available `machine` images
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
-* `ubuntu-2004:202008-01` (beta) - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4
+* `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
+* `ubuntu-1604:202010-01` - Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4
 * `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 * `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
@@ -507,7 +508,7 @@ jobs:
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01 # recommended linux image - includes Ubuntu 16.04, docker 18.09.3, docker-compose 1.23.1
+      image: ubuntu-2004:202010-01 # recommended linux image
     resource_class: large
     steps:
       ... // other config
