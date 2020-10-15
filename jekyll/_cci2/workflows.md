@@ -447,7 +447,7 @@ workflows:
   staging: # This workflow will only run on 'main' and will not run on tags
     jobs:
       - test:
-          filters: &filters-staging
+          filters: &filters-staging # this yaml anchor is setting these values to "filters-staging"
             branches:
               only: main
             tags:
@@ -456,11 +456,11 @@ workflows:
           requires:
             - build
           filters:
-            <<: *filters-staging
+            <<: *filters-staging # this is calling the previously set yaml anchor
   production: # This workflow will only run on tags (specifically starting with 'v.') and will not run on branches
     jobs:
       - test:
-          filters: &filters-production
+          filters: &filters-production # this yaml anchor is setting these values to "filters-production"
             branches:
               ignore: /.*/
             tags:
@@ -469,7 +469,7 @@ workflows:
           requires:
             - build
           filters:
-            <<: *filters-production
+            <<: *filters-production # this is calling the previously set yaml anchor
 ```
 
 **Note:**
