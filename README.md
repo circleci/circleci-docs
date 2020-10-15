@@ -91,8 +91,7 @@ pulling in the updates for the sub-module.
 ### Server Documentation
 
 Docs for CircleCI Server Administration are built in a slightly different way;
-please refer to the [server build documentation](./docs/server-docs.md)
-
+please refer to the [server build documentation](./docs/server-docs.adoc)
 ## License Information
 Documentation (guides, references, and associated images) is licensed as
 Creative Commons Attribution-NonCommercial-ShareAlike CC BY-NC-SA. The full
