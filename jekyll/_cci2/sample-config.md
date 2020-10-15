@@ -461,9 +461,9 @@ jobs:
     prepare-dependencies:
         docker:
             - image: node:current-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
             - checkout
             - run:
@@ -490,9 +490,9 @@ jobs:
     build-production:
         docker:
             - image: node:current-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
             - attach_workspace:
                   at: .
@@ -532,9 +532,9 @@ jobs:
     test:
         docker:
             - image: node:current-alpine
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+              auth:
+                username: mydockerhub-user
+                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         parallelism: 2
         steps:
             - attach_workspace:
