@@ -45,7 +45,7 @@ By default, CircleCI builds every commit from every branch. This behavior may be
 
 To change this setting, go to the **Project Settings>Advanced** of your project and set the **Only build pull requests** option to *On*.
 
-**Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch.
+**Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch and tags
 
 ### フォークされたリポジトリからプル リクエストをビルドする
 {:.no_toc}
