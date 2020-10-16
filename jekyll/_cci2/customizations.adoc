@@ -148,6 +148,8 @@ sudo mkdir /etc/circleconfig/picard-dispatcher
 ```shell
 sudo vim /etc/circleconfig/picard-dispatcher/resource-definitions.edn
 ```
++
+NOTE: This file replaces the full resource class definition for your installation so it is important to include all resource classes your users need at this point, not just those you wish to customize.
 . Add your required customizations to the file, then save and exit vim with `:wq` - see below for options and formatting.
 . Run:
 +
