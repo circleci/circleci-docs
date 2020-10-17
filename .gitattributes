@@ -1,0 +1,7 @@
+.circleci/
+.github/
+.gitattributes
+.gitignore
+.gitmodules
+.ruby-version
+README.md
