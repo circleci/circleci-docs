@@ -15,18 +15,34 @@ export const executorOptions = [
   { value: 'windows', label: 'Windows' },
 ];
 
+// TODO replace any type
+const buildSteps = (steps: any) => {
+  return ['checkout', ...steps];
+};
+
 export const buildConfig: IData = {
   machine: {
     name: 'Machine image',
     options: [
-      { value: 'ubuntu-1604:201903-01', label: 'Ubuntu 16.04 (default)' },
       {
-        value: 'circleci/classic:latest',
-        label: 'Ubuntu 14.04 (circleci/classic:latest)',
+        value: 'ubuntu-2004:202010-01',
+        label: 'Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4',
       },
       {
-        value: 'circleci/classic:edge',
-        label: 'Ubuntu 14.04 (circleci/classic:edge)',
+        value: 'ubuntu-1604:202010-01',
+        label: 'Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4',
+      },
+      {
+        value: 'ubuntu-1604:202007-01',
+        label: 'Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1',
+      },
+      {
+        value: 'ubuntu-1604:202004-01',
+        label: 'Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5',
+      },
+      {
+        value: 'ubuntu-1604:201903-01',
+        label: 'Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1',
       },
     ],
   },
@@ -34,28 +50,69 @@ export const buildConfig: IData = {
   docker: {
     name: 'Docker Image',
     options: [
-      'android',
-      'buildpack-deps',
-      'clojure',
-      'dynamodb',
-      'elixir',
-      'golang',
-      'jruby',
-      'mariadb',
-      'mongo',
-      'mysql',
-      'node',
-      'openjdk',
-      'php',
-      'postgres',
-      'python',
-      'redis',
-      'ruby',
-      'rust',
-    ].map(img => ({
-      value: `circleci/${img}:latest`,
-      label: img.charAt(0).toUpperCase() + img.slice(1),
-    })),
+      // { value: '', label: 'Android' },
+      {
+        value: {
+          image: 'cimg/elixir:1.10.4',
+          steps: buildSteps([
+            { run: 'mix --version' },
+            { run: 'mix deps.get' },
+            { run: 'mix test' },
+          ]),
+        },
+        label: 'Elixir',
+      },
+      {
+        value: {
+          image: 'cimg/go:1.15.3',
+          steps: ['checkout', { run: 'go version' }],
+        },
+        label: 'Go',
+      },
+      {
+        value: {
+          image: 'cimg/openjdk:15.0.0',
+          steps: [{ run: 'java --version' }],
+        },
+        label: 'Java',
+      },
+      {
+        value: {
+          image: 'cimg/node:14.14.0',
+          steps: [{ run: 'node --version' }],
+        },
+        label: 'Node',
+      },
+      {
+        value: {
+          image: 'cimg/php:7.4.11',
+          steps: [{ run: 'php --version' }],
+        },
+        label: 'PHP',
+      },
+      {
+        value: {
+          image: 'cimg/python:3.9.0',
+          steps: [{ run: 'python --version' }],
+        },
+        label: 'Python',
+      },
+
+      {
+        value: {
+          image: 'cimg/ruby:2.7.2',
+          steps: [{ run: 'ruby --version' }],
+        },
+        label: 'Ruby',
+      },
+      {
+        value: {
+          image: 'cimg/rust:1.47.0',
+          steps: [{ run: 'cargo --version' }],
+        },
+        label: 'Rust',
+      }
+    ],
   },
 
   macos: {

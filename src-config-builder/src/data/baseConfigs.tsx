@@ -20,14 +20,14 @@ const defaultConfig = (): IData => ({
   },
 });
 
-const docker = (image: string): IData => {
+const docker = (config: any): IData => {
   const newConfig = {
     version: 2.1,
     jobs: {
       build: {
         docker: [
           {
-            image: image,
+            image: config.image,
             auth: {
               username: "mydockerhub-user",
               password: "$DOCKERHUB_PASSWORD",
@@ -35,12 +35,7 @@ const docker = (image: string): IData => {
             },
           },
         ],
-        steps: [
-          'checkout',
-          {
-            run: "echo 'hello world'",
-          },
-        ],
+        steps: config.steps,
       },
     },
   };
