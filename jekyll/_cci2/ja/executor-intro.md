@@ -32,12 +32,12 @@ version:
 
 {:.tab.machine.Cloud}
 jobs:
-      build: # ジョブの名前
-        machine: # Executor タイプ
-          image: ubuntu-1604:201903-01 # 推奨 Linux イメージ - Ubuntu 16.04、docker 18.09.3、docker-compose 1.23.1 が含まれます
+      build: # name of your job
+        machine: # executor type
+          image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
     
           steps:
-            # Linux 仮想マシン環境で実行するコマンド
+            # Commands run in a Linux virtual machine environment
 
 {:.tab.machine.Server}
 jobs:
