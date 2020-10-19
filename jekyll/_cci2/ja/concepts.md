@@ -118,10 +118,10 @@ jobs:
 #...
  build2:
    machine: # Specifies a machine image that uses
-   # an Ubuntu version 14.04 image with Docker 17.06.1-ce
-   # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
+   # an Ubuntu version 20.04 image with Docker 19.03.13
+   # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
    # for new image releases.
-     image: ubuntu-1604:201903-01
+     image: ubuntu-2004:202010-01
 #...       
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 11.3
