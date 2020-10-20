@@ -58,13 +58,59 @@ NOTE: Replace `192.0.2.1` with the IP address of your pull through cache server.
 
 Now you should be able to see that Docker images from Docker Hub are downloaded through the cache server. As a side effect, you should be able to see that private images for the user, configured for the cache server can be downloaded without explicit authentications.
 
+== Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Server
+
+Follow the steps below on your services machine.
+
+1. Run the command below to *create a directory for your customization files*.
++
+`sudo mkdir -p /etc/circleconfig/vm-service`
+
+2. *Populate a customization script* to be loaded by vm-service. *Add the script below to `/etc/circleconfig/vm-service/customizations`*.
++
+NOTE: Replace `192.0.2.1` in `DOCKER_MIRROR_HOSTNAME` variable with the IP address of your pull through cache server.
++
+[source,bash]
+----
+export JAVA_OPTS='-cp /resources:/service/app.jar'
+export DOCKER_MIRROR_HOSTNAME="http://192.0.2.1"
+
+mkdir -p /resources/ec2
+cat > /resources/ec2/linux_cloud_init.yaml << EOD
+#cloud-config
+system_info:
+  default_user:
+    name: "%1\$s"
+ssh_authorized_keys:
+  - "%2\$s"
+runcmd:
+  - bash -c 'if [ ! -f /etc/docker/daemon.json ]; then mkdir -p /etc/docker; echo "{}" > /etc/docker/daemon.json; fi'
+  - bash -c 'cat <<< \$(jq ".\"registry-mirrors\" = [\"$DOCKER_MIRROR_HOSTNAME\"]" /etc/docker/daemon.json) > /etc/docker/daemon.json'
+  - systemctl restart docker.service
+EOD
+----
+
+3. *Restart VM Service* to apply the customization.
++
+`sudo docker restart vm-service`
+
 == How to revert the setup?
+
+=== Disarm Nomad clients
 
 Follow the steps below on _each_ Nomad client.
 
 1. *Remove `registry-mirrors` option in `/etc/docker/daemon.json`*. When you edit the file, *make sure that `/etc/docker/daemon.json` is still a valid JSON file*.
 
 2. Run `sudo systemctl restart docker.service` to apply the change.
+
+=== Disarm VM Service
+
+Follow the steps below on your services machine.
+
+1. *Comment out the line beginning with `export JAVA_OPTS` in `/etc/circleconfig/vm-service/customizations`*, where customization of `-cp` option is configured. When you edit the file, *make sure that `/etc/circleconfig/vm-service/customizations` is still a valid shell script*.
+
+2. Run `sudo docker restart vm-service` to apply the change.
 
 == Resources
 
