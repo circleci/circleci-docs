@@ -78,7 +78,7 @@ it is "preparing", it means that CircleCI is setting up or _dispatching_ your
 job so that it may run.
 
 If you find that jobs are "preparing" for quite some time, you may be able to
-reduce it if your jobs use the docker executor; try using more recent docker
+reduce it if your jobs use the Docker executor; try using more recent docker
 images to decrease preparation time.
 
 ## Questions And Comments

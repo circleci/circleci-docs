@@ -204,7 +204,7 @@ See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) 
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many Docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {:.no_toc}
@@ -213,7 +213,7 @@ Configured by `docker` key which takes a list of maps:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The name of a custom docker image to use
+image | Y | String | The name of a custom Docker image to use
 name | N | String | The name the container is reachable by.  By default, container services are accessible through `localhost`
 entrypoint | N | String or List | The command used as executable when launching the container
 command | N | String or List | The command used as pid 1 (or args for entrypoint) when launching the container
@@ -241,7 +241,7 @@ container only.
 
 `name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
 
-The `environment` settings apply to entrypoint/command run by the docker container, not the job steps.
+The `environment` settings apply to entrypoint/command run by the Docker container, not the job steps.
 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
@@ -906,7 +906,7 @@ Creates a remote Docker environment configured to execute Docker commands. See [
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker_layer_caching | N | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)
-version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
+version | N        | String | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported Docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version).
 {: class="table table-striped"}
 
 **Notes**:

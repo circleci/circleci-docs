@@ -294,7 +294,7 @@ sudo lxc-attach -n "$(docker inspect --format "{{.Id}}" $MY_CONTAINER_NAME)" -- 
 ```
 {% endraw %}
 
-Note that these commands are run inside the container's root directory, so you may have to `cd` into your docker working directory first.
+Note that these commands are run inside the container's root directory, so you may have to `cd` into your Docker working directory first.
 
 ## Caching Docker layers
 
@@ -308,7 +308,7 @@ What makes them hard to cache is that the COW linking and structure sharing
 is all maintained in kernel-space.
 
 User-space is completely unaware that a filesystem is really a copy-on-write
-filesystem. If you were to try to back up docker images you would
+filesystem. If you were to try to back up Docker images you would
 end up with each layer as an entirely separate complete copy of the layer
 with all the COW structure sharing lost.
 
@@ -340,7 +340,7 @@ other tags will be re-pulled on every build if a tag is not specified in the FRO
 
 ## Connecting to services outside of the container
 
-You can connect to services outside your docker container (like our
+You can connect to services outside your Docker container (like our
 pre-installed databases) by using the [docker0 ethernet bridge
 device](https://docs.docker.com/engine/userguide/networking/dockernetworks/). Just make sure
 that the outside services are listening for connections on `docker0`—the

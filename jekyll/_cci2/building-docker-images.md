@@ -9,7 +9,7 @@ version:
 - Server v2.x
 ---
 
-This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote docker environment.
+This document explains how to build Docker images for deployment elsewhere or further testing, and how to start services in a remote Docker environment.
 
 * TOC
 {:toc}
@@ -30,7 +30,7 @@ jobs:
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.
 
-**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a docker container. If your executor is `machine` (and you want to use docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
+**Note:** The use of the `setup_remote_docker` key is reserved for configs in which your primary executor _is_ a Docker container. If your executor is `machine` (and you want to use Docker commands in your config) you do **not** need to use the `setup_remote_docker` key.
 
 ### Specifications
 {:.no_toc}
@@ -67,7 +67,7 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-The example below shows how you can build and deploy a Docker image for our [demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
+The example below shows how you can build and deploy a Docker image for our [demo Docker project](https://github.com/CircleCI-Public/circleci-demo-docker) using the Docker executor, with remote Docker:
 
 {% highlight yaml linenos %}
 version: 2.1
@@ -138,7 +138,7 @@ The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run 
 ### Accessing Services
 {:.no_toc}
 
-It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
+It is **not** possible to start a service in remote Docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```
 #...

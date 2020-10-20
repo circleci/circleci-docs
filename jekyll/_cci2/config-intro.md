@@ -16,7 +16,7 @@ This guide focuses on getting you started with the core of the CircleCI experien
 {:.no_toc}
 
 This guide describes how CircleCI finds and runs `config.yml` and how you can use shell commands to do things, then it outlines how `config.yml` can interact with code and kick-off a build
-followed by how to use docker containers to run in precisely the environment that you need. Finally, there is a short exploration of workflows so you can learn to orchestrate your build, tests, security scans, approval steps, and deployment.
+followed by how to use Docker containers to run in precisely the environment that you need. Finally, there is a short exploration of workflows so you can learn to orchestrate your build, tests, security scans, approval steps, and deployment.
 
 CircleCI believes in *configuration as code*.  As a result, the entire delivery process from build to deploy is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the top of your project.  CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
 
@@ -101,11 +101,11 @@ Although we’ve only made two small changes to the config, these represent sign
 - Line 13-17: The second run on the `build` job is listing (through `ls -al`) the contents of the checkout.  Your branch is now available for you to interact with.
 
 ## Part Three: That’s nice but I need...
-Every code base and project is different.  That’s okay.  We like diversity.  This is one of the reasons we allow you to run in your machine or docker container of choice.  In this case we will demonstrate running in a container with node available.  Other examples might include macOS machines, java containers, or even GPU.
+Every code base and project is different.  That’s okay.  We like diversity.  This is one of the reasons we allow you to run in your machine or Docker container of choice.  In this case we will demonstrate running in a container with node available.  Other examples might include macOS machines, java containers, or even GPU.
 
 1. This section expands on Part One and Two.  If you haven’t already, go through at least Part One to ensure you have a working `config.yml` file in your branch.
 
-2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a docker image for the build job.
+2. This is a very simple and yet amazingly powerful change.  We are going to add a reference to a Docker image for the build job.
 
 
 {% highlight yaml linenos %}
@@ -141,10 +141,10 @@ We also added a small `run` block that demonstrates we are running in a node con
 ### Learnings
 {:.no_toc}
 
-The above two changes to the config significantly affect how you get work done.  By associating a docker container to a job and then dynamically running the job in the container, you don’t need to perform special magic or operational gymnastics to upgrade, experiment or tune the environment you run in.  With a small change you can dramatically upgrade a mongo environment, grow or shrink the base image, or even change languages.
+The above two changes to the config significantly affect how you get work done.  By associating a Docker container to a job and then dynamically running the job in the container, you don’t need to perform special magic or operational gymnastics to upgrade, experiment or tune the environment you run in.  With a small change you can dramatically upgrade a mongo environment, grow or shrink the base image, or even change languages.
 
 - Line 4: Here we see a comment in-line in yml.  Like any other unit of code, comments are a useful tool as config gets complicated.
-- Line 5-6: These lines indicate that docker image to use for the job.  Because you can have more than one job in your config (as we will see next) you can also run different parts of your config in different environments.  For example, you could perform a build job in a thin java container and then perform a test job using a container with browsers pre-installed. In this case, it uses  a [pre-built container from CircleCI]({{ site.baseurl }}/2.0/circleci-images/) that already has a browser and other useful tools built in.  
+- Line 5-6: These lines indicate that Docker image to use for the job.  Because you can have more than one job in your config (as we will see next) you can also run different parts of your config in different environments.  For example, you could perform a build job in a thin java container and then perform a test job using a container with browsers pre-installed. In this case, it uses  a [pre-built container from CircleCI]({{ site.baseurl }}/2.0/circleci-images/) that already has a browser and other useful tools built in.  
 - Line 19-22: These lines add a run step that returns the version of node available in the container. Try experimenting with different containers from CircleCI’s pre-built convenience images or even public containers from Docker hub.
 
 ## Part Four: Approved to Start

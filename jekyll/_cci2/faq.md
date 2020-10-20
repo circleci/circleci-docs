@@ -429,7 +429,7 @@ A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers ma
 
 #### Why am I being charged for remote Docker spin up time? 
 {:.no_toc}
-When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
+When CircleCI spins up a remote Docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote Docker instance itself, you are charged for the time that the primary container is up.
 
 ---
 

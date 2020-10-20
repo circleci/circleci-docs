@@ -57,7 +57,7 @@ For a complete reference of the API, see the [CircleCI API Documentation](https:
 
 ## Conditionally Running Jobs With the API
 
-The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
+The next example demonstrates a configuration for building Docker images with `setup_remote_docker` only for builds that should be deployed.
 
 ```yaml
 version: 2

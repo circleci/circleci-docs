@@ -36,7 +36,7 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment. 
+DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar Docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment. 
 
 ``` YAML
 version: 2 
