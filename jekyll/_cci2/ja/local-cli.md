@@ -109,7 +109,7 @@ Before using the CLI you need to generate a CircleCI API Token from the [Persona
 circleci setup
 ```
 
-Setup will prompt you for configuration settings. If you are using the CLI with circleci.com, use the default CircleCI Host. If you are using CircleCI installed on your own server or private cloud, change the value to your installation address (for example, circleci.your-org.com).
+The set up process will prompt you for configuration settings. If you are using the CLI with circleci.com, use the default CircleCI Host. If you are using CircleCI server, change the value to your installation address (for example, circleci.your-org.com).
 
 ## CircleCI の設定ファイルのバリデーション
 
@@ -130,9 +130,13 @@ circleci orb validate /tmp/my_orb.yml
 
 Where the above command will look for an orb called `my_orb.yml` in the `/tmp` folder of the directory in which you ran the command.
 
-## 設定ファイルのパッケージ化
+## Orb Development Kit
 
-The CLI provides a `pack` command, allowing you to create a single YAML file from several separate files. The `pack` command implements [FYAML](https://github.com/CircleCI-Public/fyaml), a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
+The [orb development kit]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit) refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. Two CLI commands are included in the orb development kit: [`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) and [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html). For more information on the orb packing, see the [Orbs Concepts guide]({{site.baseurl}}/2.0/orb-concepts/#orb-packing).
+
+## Packing A Config
+
+The CLI provides a `circleci config pack` command (separate to `circleci orb pack` described above), allowing you to create a single YAML file from several separate files. The `pack` command implements [FYAML](https://github.com/CircleCI-Public/fyaml), a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
 
 ```sh
 $ tree
@@ -192,7 +196,7 @@ bar:
 
 See the [CircleCI Orbs GitHub topic tag](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories) to see examples of orbs written using multiple YAML source files. `circleci config pack` is typically run as part of these projects' CI/CD workflows, to prepare orb source code for publishing.
 
-## 設定ファイルの処理
+## Processing A Config
 
 Running `circleci config process` validates your config, but will also display expanded source configuration alongside your original config (useful if you are using orbs).
 
@@ -262,7 +266,7 @@ workflows:
 ```
 {% endraw %}
 
-## マシン上のコンテナ内でのジョブの実行
+## Run A Job In A Container On Your Machine
 
 ### Overview
 {:.no_toc}
@@ -327,11 +331,11 @@ Further, not all commands may work on your local machine as they do online. For 
 
 For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
 
-## テストの分割
+## Test Splitting
 
 The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
-## CircleCI Server での CLI の使用
+## Using the CLI on CircleCI Server
 
 Currently, only the legacy CircleCI CLI is available to run on server installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
 
