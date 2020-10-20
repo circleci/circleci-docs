@@ -127,7 +127,7 @@ The next key does not have a dynamic component to it, it simply is a static stri
 
 ### モノレポ (モノリポ) でのキャッシュの使用
 
-There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to managed a shared cache based on multiple files in different parts of your monorepo.
+There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo.
 
 #### 連結 `package-lock` ファイルの作成と構築
 
