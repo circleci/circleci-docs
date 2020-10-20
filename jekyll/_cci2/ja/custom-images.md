@@ -72,6 +72,7 @@ RUN go get github.com/jstemmer/go-junit-report
 
 CircleCI でカスタム Docker イメージをプライマリ コンテナとして使用するには、以下のツールをインストールする必要があります。
 
+- bash (most likely already installed or available via your package manager)
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [ssh](https://help.ubuntu.com/lts/serverguide/openssh-server.html.en#openssh-installation)
 - [tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
