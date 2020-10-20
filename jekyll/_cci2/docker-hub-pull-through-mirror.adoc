@@ -58,9 +58,11 @@ NOTE: Replace `192.0.2.1` with the IP address of your pull through cache server.
 
 Now you should be able to see that Docker images from Docker Hub are downloaded through the cache server. As a side effect, you should be able to see that private images for the user, configured for the cache server can be downloaded without explicit authentications.
 
-== Configure VM Service to let machine/remote docker VMs to use the pull through cache server (run this on your services box)
+== Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Server
 
-1. Run the command below to *create a directory to put customization files*.
+Follow the steps below on your services machine.
+
+1. Run the command below to *create a directory for your customization files*.
 +
 `sudo mkdir -p /etc/circleconfig/vm-service`
 
@@ -104,7 +106,7 @@ Follow the steps below on _each_ Nomad client.
 
 === Disarm VM Service
 
-Follow the steps below on your services box.
+Follow the steps below on your services machine.
 
 1. *Comment out the line beginning with `export JAVA_OPTS` in `/etc/circleconfig/vm-service/customizations`*, where customization of `-cp` option is configured. When you edit the file, *make sure that `/etc/circleconfig/vm-service/customizations` is still a valid shell script*.
 
