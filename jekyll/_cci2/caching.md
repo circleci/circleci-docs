@@ -121,7 +121,7 @@ The next key does not have a dynamic component to it, it simply is a static stri
 
 ### Using Caching in Monorepos
 
-There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to managed a shared cache based on multiple files in different parts of your monorepo. 
+There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo. 
 
 #### Creating and Building a Concatenated `package-lock` file
 
