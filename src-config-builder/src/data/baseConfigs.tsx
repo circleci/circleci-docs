@@ -29,9 +29,8 @@ const docker = (config: any): IData => {
           {
             image: config.image,
             auth: {
-              username: "mydockerhub-user",
-              password: "$DOCKERHUB_PASSWORD",
-
+              username: 'mydockerhub-user',
+              password: '$DOCKERHUB_PASSWORD',
             },
           },
         ],
@@ -68,33 +67,7 @@ const macos = (image: string): IData => ({
       macos: {
         xcode: image,
       },
-      steps: [
-        'checkout',
-        {
-          run: {
-            name: 'Run Unit Tests',
-            command: 'xcodebuild test -scheme circleci-demo-macos',
-          },
-        },
-        {
-          run: {
-            name: 'Build Application',
-            command: 'xcodebuild',
-          },
-        },
-        {
-          run: {
-            name: 'Compress app for storage',
-            command: 'zip -r app.zip build/Release/circleci-demo-macos.app',
-          },
-        },
-        {
-          store_artifacts: {
-            path: 'app.zip',
-            destination: 'app',
-          },
-        },
-      ],
+      steps: ['checkout', { run: 'xcodebuild -version' }],
     },
   },
 });
