@@ -296,20 +296,22 @@ by following this workaround:
 1. In the CircleCI application,
 go to your project's settings.
 
-2. Navigate to the **Checkout SSH Keys** page.
+2. Navigate to the **SSH Keys** page.
 
-3. Right-click the **Create `<username>` user key** button
+3. Right-click the **Add User Key** button
 and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
 
 4. In the developer console,
 select the **Network** tab.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
+
+5. Click the **Add User Key** button to create your user key.
 
 6. In the developer console,
 click the `checkout-key` with a 201 status
 and copy the `public_key` to your clipboard.
 
 7. Add the key to Bitbucket
-by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
+by following Bitbucket's guide on [setting up SSH keys](https://support.atlassian.com/bitbucket-cloud/docs/set-up-an-ssh-key/).
 
 8. In your `.circleci/config.yml`,
 add the fingerprint using the `add_ssh_keys` key:
@@ -352,7 +354,7 @@ To achieve fine-grained access to more than one repo, consider creating what Git
 
 ## Establishing the authenticity of an SSH host
 
-When using SSH keys to checkout repositories, it may be neccesary to add the 
+When using SSH keys to checkout repositories, it may be necessary to add the 
 fingerprints for GitHub or BitBucket to a "known hosts" file 
 (`~/.ssh/known_hosts`) so that the executor can verify that the host it's
 connecting to is authentic. The `checkout`job step does this automatically, so 
