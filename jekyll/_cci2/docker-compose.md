@@ -15,7 +15,11 @@ This document describes how to install and use `docker-compose`.
 * TOC 
 {:toc}
 
-The `docker-compose` utility is [pre-installed in the CircleCI convenience images][pre-installed] and machine executors. If you're using another image, you can install it into your [primary container][primary-container] during the job execution with the Remote Docker Environment activated by adding the following to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
+The `docker-compose` utility is [pre-installed in the CircleCI convenience
+images][pre-installed] and machine executors. If you are using another image, you
+can install it into your [primary container][primary-container] during the job
+execution with the Remote Docker Environment activated by adding the following
+to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
 ``` 
       - run:
@@ -25,6 +29,10 @@ The `docker-compose` utility is [pre-installed in the CircleCI convenience imag
             chmod +x ~/docker-compose
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 ```
+
+The above code example assumes that you will also have `curl` available in your
+executor. If you are constructing your own docker images, consider reading the
+[custom docker images document]({{site.baseurl}}/2.0/custom-images/).
 
 [pre-installed]: {{ site.baseurl }}/2.0/circleci-images/#pre-installed-tools
 [primary-container]: {{ site.baseurl }}/2.0/glossary/#primary-container
