@@ -135,15 +135,15 @@ There are many different approaches to utilizing caching in monorepos. This type
 {% raw %}```yaml
 commands:
   create_concatenated_package_lock:
-    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
+    description: "Concatenate all package-lock.json files recognized by lerna.js into single file. File is used as checksum source for part of caching key."
     parameters:
       filename:
         type: string
     steps:
 
       - run:
-          name: package-lock.json ファイルの単一ファイルへの統合
-          command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+          name: Combine package-lock.json files to single file
+          command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
 ```
 {% endraw %}
 
