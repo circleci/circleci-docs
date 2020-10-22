@@ -345,7 +345,7 @@ jobs:
       - run: 
           name: "echo an env var that is part of our project"
           command: |
-            echo $MY_ENV_VAR # this env var must be swt within the project
+            echo $MY_ENV_VAR # this env var must be set within the project
 ```
 
 Once created, environment variables are hidden and uneditable in the application. Changing an environment variable is only possible by deleting and recreating it.
