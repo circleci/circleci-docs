@@ -43,7 +43,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully.
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-    **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and     **contexts**.
+    **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
 ## Creating and Using a Context
 
@@ -53,7 +53,7 @@ If you find you need to rename an org or repo that you have previously hooked up
     
     ![Contexts]({{ site.baseurl }}/assets/img/docs/org-settings-contexts-v2.png)
 
-    **Note: If you are using the old version of the CircleCI application**, you can access the Organization Settings using the following URL format: `https://circleci.com/gh/organizations/<org>/settings#contexts`, substituting your organization/GitHub username. If you are using CircleCI Server, Organization Settings can still be accessed as normal from the main navigation.
+    **Note**: If you are using CircleCI Server, Organization Settings can still be accessed as normal using the **Settings** link in the main navigation.
 
 2. Click the Create Context button and add a unique name for your Context. After you click the Create Context button in the dialog box, the Context appears in a list with Security set to `All members` to indicate that anyone in your organization can access this Context at runtime.
 
