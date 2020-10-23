@@ -1,97 +1,71 @@
 ---
 layout: classic-docs
-title: "Orbオーサリングの概要"
-short-title: "Orbオーサリングの概要"
-description: "Orbのオーサリング方法に関する入門ガイド"
+title: "Orb オーサリングの概要"
+short-title: "Orb オーサリングの概要"
+description: "Orb のオーサリング方法に関する入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
-## Orb オーサリングの概要
+* 目次
+{:toc}
 
-Orb は、複数のプロジェクト間で共有できる CircleCI 構成の再利用可能パッケージです。カプセル化およびパラメーター化されたコマンド、ジョブ、および Executor を作成して、[複数のプロジェクトで使用]({{ site.baseurl }}/ja/2.0/using-orbs/)できます。
+## クイックスタート
 
-[Orbs]({{ site.baseurl }}/ja/2.0/orb-intro/) は、2.1 の [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのトップレベルにある `orbs` キーを通して構成内で利用できるようになります。
+Orb とは、[再利用可能な構成]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化することを検討してみてください。
 
-既存の CircleCI Orb またはパートナー承認済みの Orb では特定のワークフローまたはジョブに対応できない場合、独自の Orb をオーサリングすることも可能です。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)にある既存の Orb を使用する場合に比べて時間はかかりますが、独自の Orb をオーサリングすれば、特定のワークフローに合わせて構成を作成し、事前にパッケージ化できます。 Orb のオーサリングと構成のバリデーションを行ってから、新たに作成した Orb を CircleCI Orb レジストリにパブリッシュするためのプロセスについて、順を追って説明していきます。
-
-## 主なコンセプト
-
-Orb をオーサリングする前に、まず Orb の中核的なコンセプト、Orb の構造と動作についてよく理解しておく必要があります。 こうしたコンセプトについて基本的な知識を身に着けることで、十分な機能を有する Orb を記述して活用できるだけでなく、ワークフローにも使用できます。
+Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な構成要素]({{site.baseurl}}/ja/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
 Orb は、以下の 3 つの要素で構成されます。
 
-- コマンド
-- ジョブ
-- Executor
+* [コマンド]({{site.baseurl}}/ja/2.0/orb-concepts/#コマンド)
+* [ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#ジョブ)
+* [Executor]({{site.baseurl}}/ja/2.0/orb-concepts/#executor)
 
-### コマンド
+[インライン Orb]({{site.baseurl}}/ja/2.0/reusing-config/#writing-inline-orbs) を使って練習してみることができます。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストするのに適しています。
 
-コマンドは、再利用可能なステップの集合体であり、既存のジョブ内から特定のパラメーターを使用して呼び出すことができます。 たとえば、`sayhello` コマンドを呼び出す場合は、以下のように `to` パラメーターを渡します。
+Orb をオーサリングすると、自動的に、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
+{: class="alert alert-success"}
 
-```yaml
-version: 2.1
-jobs:
-  myjob:
-    docker:
-      - image: "circleci/node:9.6.1"
-    steps:
-      - myorb/sayhello:
-          to: "Lev"
-```
-### ジョブ
+## はじめよう
 
-ジョブは、ステップの集合体と、それが実行される環境の 2 つの部分で構成されます。 ジョブをビルド構成または Orb で定義すると、構成または外部の Orb 構成のジョブ キーの下にあるマップ内でジョブ名を定義できます。
+### Orb CLI
 
-ジョブは `config.yml ファイル`のワークフロー スタンザで呼び出す必要があります。このとき、必要なパラメーターをサブキーとしてジョブに渡します。
+Orb の作成を始めるには、[パーソナル アクセス トークン](https://app.circleci.com/settings/user/tokens)を使用して、ローカル マシンに [CircleCI CLI をセットアップ]({{site.baseurl}}/ja/2.0/local-cli/#installation)する必要があります。 [CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)にアクセスすると、CircleCI CLI に含まれている Orb 関連のすべてのコマンドが記載されたリストを確認できます。
 
-### Executor
+### 権限の一覧表
 
-Executor は、ジョブのステップが実行される環境を定義します。 CircleCI 構成でジョブを宣言するとき、ジョブを実行する環境のタイプ (docker、machine、macos など) と共に、その環境について以下のようなパラメーターを定義します。
+Orb CLI のコマンドは、VCS (バージョン管理システム) によって、ユーザーの権限レベルごとに異なる範囲が設定されています。 組織の「オーナー」は、オーサリングを行うユーザー自身です。 別の組織がオーナーである名前空間向けに Orb のオーサリングやパブリッシュを行う際は、組織の管理者への支援要請が必要になる場合があります。
 
-- 挿入する環境変数
-- 使用するシェル
-- 使用する `resource_class` のサイズ
-
-設定ファイル内のジョブの外側で Executor を宣言すると、その宣言をスコープ内のすべてのジョブで使用できるため、1 つの Executor 定義を複数のジョブで再利用できます。
-
-Executor の定義では、以下のキーを使用できます (一部のキーは、ジョブ宣言を使用する際にも使用できます)。
-
-- docker、machine、macos
-- environment
-- working_directory
-- shell
-- resource_class
-
-## Orb の構成
-
-以下の表で、Orb を構成する各要素について説明します。
-
-**メモ:** Orb には CircleCI バージョン 2.1 が必要です。
-
-| キー        | 必須 | タイプ | 説明                                                                                            |
-| --------- | -- | --- | --------------------------------------------------------------------------------------------- |
-| orbs      | ×  | マップ | ユーザーが選択した名前から Orb 参照 (文字列) または Orb 定義 (マップ) へのマップ。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 |
-| executors | ×  | マップ | Executor 定義への文字列のマップ。                                                                         |
-| commands  | ×  | マップ | コマンド名からコマンド定義へのマップ。                                                                           |
+| Orb コマンド | 権限の範囲 |
+| ------------------------------ | ----- |
+| `circleci namespace create`    | オーナー  |
+| `circleci orb init`            | オーナー  |
+| `circleci orb create`          | オーナー  |
+| `circleci orb publish` 開発バージョン | メンバー  |
+| `circleci orb publish` 本番バージョン | オーナー  |
 {: class="table table-striped"}
 
-### Orb の構成例
+### 名前空間の登録
 
-以下の例は、承認済みの `circleci` 名前空間に置かれた `hello-build` という名前の Orb を呼び出します。
+CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl}}/ja/2.0/orb-concepts/#namespaces)を **1 つ**要求できます。 「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。 名前空間は各組織に 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の _オーナー_ になっている必要があります。
 
-```yaml
-version: 2.1
-orbs:
-    hello: circleci/hello-build@0.0.5
-workflows:
-    "Hello Workflow":
-        jobs:
-          - hello/hello-build
+まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。
+```sh
+circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
-上の例で、`hello` は Orb 参照と見なされます。`circleci/hello-build@0.0.5` は完全修飾 Orb 参照です。
 
-## 次のステップ
+### 次のステップ
 
-次に行うべき手順については、「[Orb のオーサリング – CircleCI CLI のセットアップ]({{site.baseurl}}/ja/2.0/orb-author-cli/)」を参照してください。
+Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/ja/2.0/orb-author/) ガイドに進んでください。
+
+
+## 関連項目
+{:.no_toc}
+
+- [Orb のオーサリング]({{site.baseurl}}/ja/2.0/orb-author/)
+- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)
+- [Orb オーサリングに関するよくあるご質問]({{site.baseurl}}/ja/2.0/orb-author-faq/)
