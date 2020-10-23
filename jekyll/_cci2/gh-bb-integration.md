@@ -33,7 +33,7 @@ Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/wo
 ### Add a .circleci/config.yml File
 {:.no_toc}
 
-After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
+After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository, CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
 
 ```yaml
 jobs:
@@ -62,7 +62,7 @@ Integrated status also appears on the pull request screen, to show that all test
 ## Best Practices for Keys
 
 - Use Deploy Keys whenever possible.
-- When Deploy Keys cannot be used, Machine User Keys must be used, and have their access restricted to the most limited set of repos and permissions necessary.
+- When Deploy Keys cannot be used, [Machine User Keys](#controlling-access-via-a-machine-user) must be used, and have their access restricted to the most limited set of repos and permissions necessary.
 - Never use non-Machine user keys (keys should be associated with the build, not with a specific person).
 - You must rotate the Deploy or User key as part of revoking user access to that repo.
     1. After revoking the user’s access in github, delete keys in GitHub.
@@ -79,9 +79,9 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully.
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-**Note**: If these steps are not followed, it is possible, that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+**Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
 
-## Enable Your Project to Check Out Additional Private Repositories
+## Enable your Project to Check Out Additional Private Repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a
 GitHub user key in addition to the deploy key because each deploy key is valid
@@ -97,8 +97,8 @@ for access to all your repositories.
 
 CircleCI will never make your SSH keys public.
 
-Remember that SSH keys should be shared only with trusted users and that anyone that is a GitHub collaborator on a project employing user keys
-can access your repositories, so only entrust a user key to someone with whom you would entrust your source code.
+Remember that SSH keys should be shared only with trusted users. GitHub collaborators on projects employing user keys
+can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
 
 <h2 id="error-messages">User key access-related error messages</h2>
 
@@ -231,7 +231,7 @@ The account and permissions system we use is not as clear as we would like and a
 When you add a new project, CircleCI creates a deployment key on the web-based
 VCS (GitHub or Bitbucket) for your project. A deploy key is a repo-specific SSH
 key. If you are using GitHub as your VCS then GitHub has the public key, and
-CircleCI  stores the private key. The deployment key gives CircleCI access to a single repository.
+CircleCI stores the private key. The deployment key gives CircleCI access to a single repository.
 To prevent CircleCI from pushing to your repository, this deployment key is read-only.
 
 If you want to push to the repository from your builds, you will need a deployment key with write access. The steps to create a deployment key with write access depend on your VCS. See below for GitHub-specific instructions.
@@ -245,7 +245,7 @@ A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI
 
 In this example,
 the GitHub repository is `https://github.com/you/test-repo`,
-and the CircleCI project is [https://circleci.com/gh/you/test-repo](https://circleci.com/gh/you/test-repo){:rel="nofollow"}.
+and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
 1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
 When prompted to enter a passphrase,
