@@ -36,7 +36,7 @@ GitHub または Bitbucket Cloud で Web フックを編集して、ビルドを
 ### .circleci/config.yml ファイルの追加
 {:.no_toc}
 
-[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成して GitHub または Bitbucket Cloud リポジトリにコミットすると、CircleCI は直ちにユーザー コードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。 たとえば、Postgres の仕様と機能を使用する Rails プロジェクトで作業している場合、ジョブ実行ステップの構成は以下のようになります。
+After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository, CircleCI immediately checks your code out and runs your first job along with any configured tests. たとえば、Postgres の仕様と機能を使用する Rails プロジェクトで作業している場合、ジョブ実行ステップの構成は以下のようになります。
 
 ```yaml
 jobs:
@@ -65,7 +65,7 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
 ## キーのベスト プラクティス
 
 - 可能な限り、デプロイ キーを使用します。
-- デプロイ キーを使用できない場合は、マシン ユーザー キーを使用し、必要最低限のリポジトリと権限にのみアクセスできるように制限します。
+- When Deploy Keys cannot be used, [Machine User Keys](#controlling-access-via-a-machine-user) must be used, and have their access restricted to the most limited set of repos and permissions necessary.
 - マシン ユーザー キー以外のユーザー キーは使用しないでください (キーは特定のユーザーではなく、ビルドに関連付ける必要があります)。
 - リポジトリへのユーザー アクセスを取り消す場合、デプロイ キーまたはユーザー キーを交換する必要があります。 
     1. GitHub へのユーザー アクセスを取り消した後、GitHub でキーを削除します。
@@ -82,9 +82,9 @@ If you find you need to rename an org or repo that you have previously hooked up
 3. Confirm that your plan, projects and settings have been transferred successfully.
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
-**Note**: If these steps are not followed, it is possible, that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+**Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
 
-## Enable Your Project to Check Out Additional Private Repositories
+## Enable your Project to Check Out Additional Private Repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only *one* repository while a GitHub user key has access to *all* of your GitHub repositories.
 
@@ -94,7 +94,7 @@ Provide CircleCI with a GitHub user key in your project's **Project Settings** >
 
 CircleCI will never make your SSH keys public.
 
-Remember that SSH keys should be shared only with trusted users and that anyone that is a GitHub collaborator on a project employing user keys can access your repositories, so only entrust a user key to someone with whom you would entrust your source code.
+Remember that SSH keys should be shared only with trusted users. GitHub collaborators on projects employing user keys can access your repositories, therefore, only entrust a user key to someone with whom you would entrust your source code.
 
 <h2 id="error-messages">User key access-related error messages</h2>
 
@@ -200,7 +200,7 @@ A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI
 ### GitHub のデプロイ キーの作成
 {:.no_toc}
 
-In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is <https://circleci.com/gh/you/test-repo>{:rel="nofollow"}.
+In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
 1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). When prompted to enter a passphrase, do **not** enter one.
     
