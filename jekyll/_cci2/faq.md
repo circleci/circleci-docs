@@ -317,13 +317,11 @@ To find a list of your Active Users, log in to the CircleCI web app > click `Pla
 #### What happens when I run out of credits?
 {:.no_toc}
 
-On the Performance plan, when you reach 10% of your remaining credits, you will
-be refilled 25% of your credit subscription (at 25% the cost of your plan). For
-example, If your monthly package size is 25,000 credits, you will automatically
-be refilled 6,250 credits (at $.0006 each, not including applicable taxes) when
-you reach 2,500 remaining credits.
+On the **Performance plan**, when you reach 2% of your remaining credits, you will be refilled 25% of your credit subscription, with a minimum refill of 25,000 credits. For example, If your monthly package size is 100,000 credits, you will automatically be refilled 25,000 credits (at $.0006 each, not including applicable taxes) when you reach 2000 remaining credits.
 
 If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
+
+On the **free plan**, jobs will fail to run once you have run out of credits.
 
 #### Do credits expire?
 {:.no_toc}
@@ -336,7 +334,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 #### When do I pay?
 {:.no_toc}
 
-On the Usage plans, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling back to 25% on reaching 10% of credits available) will be paid _at the time of the refill_.
+On the **Performance Plan**, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
 
 #### Am I charged if my build is "Queued" or "Preparing"?
 
