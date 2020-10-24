@@ -4,14 +4,14 @@ title: "Orbオーサリングに関するよくあるご質問"
 short-title: "Orbオーサリングに関するよくあるご質問"
 description: "Orbオーサリングに関するよくあるご質問"
 order: 20
+version:
+ - Cloud
 ---
 
 よく寄せられるご質問や技術的な問題など、Orbs のオーサリングに役立つ情報をまとめました。
 
 * 目次
 {:toc}
-
-
 
 ## 名前空間の要求または Orb のパブリッシュに伴うエラー
 
@@ -23,12 +23,11 @@ order: 20
 
 適切な権限がない場合、以下のエラー メッセージが表示されます。
 
-
-> Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
-
+```
+Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
+```
 
 詳細については、「[Orb クイックスタート]({{site.baseurl}}/ja/2.0/orb-author/#orb-クイックスタート)」を参照してください。
-
 
 ## API トークンの保護
 
@@ -43,7 +42,8 @@ order: 20
 ## 環境変数
 
 * 質問: ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
-* 回答: 環境変数名のパラメーターを作成してください。_変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーを取得できる場所をユーザーに示す必要があります。
+
+* 回答: 環境変数名のパラメーターを作成してください。_変更できない_ 静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーを取得できる場所をユーザーに示す必要があります。
 
 必須の環境変数はバリデーションすることをお勧めします。 [こちらのドキュメント]({{site.baseurl}}/ja/2.0/orbs-best-practices/#コマンド)でも取り上げています。
 
@@ -54,11 +54,13 @@ order: 20
 ## サポートされているプログラミング言語
 
 * 質問: Orb の記述にはどの言語を使用できますか。
+
 * 回答: Orb は [CircleCI 構成の YAML ファイル]({{site.baseurl}}/ja/2.0/configuration-reference/)の言語パッケージです。
 
-CircleCI Orbs は、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージ化します。たとえば、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#再利用可能なコマンドのオーサリング)は、特定の [Executor]({{site.baseurl}}/ja/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタム ジョブ内で _command_ を使用する場合はユーザー、[再利用可能ジョブ]({{site.baseurl}}/ja/2.0/orb-author-intro/#ジョブ)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
+CircleCI Orb は、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージ化します。たとえば、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#再利用可能なコマンドのオーサリング)は、特定の [Executor]({{site.baseurl}}/ja/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタム ジョブ内で _command_ を使用する場合はユーザー、[再利用可能ジョブ]({{site.baseurl}}/ja/2.0/orb-author-intro/#%E3%82%B8%E3%83%A7%E3%83%96)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
 
 * 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
+
 * 回答: 移植可能性と汎用性に最も優れているのは、POSIX 準拠の Bash です。 Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールでも自由に実行できます。
 
 **Bash**
@@ -93,9 +95,6 @@ steps:
       /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
     name: Homebrew のインストール (Linux 向け)
 ```
-
-
-
 
 ## 関連項目
 - [Orb のベスト プラクティス]({{site.baseurl}}/ja/2.0/orbs-best-practices): 安定版 Orb の作成に関する推奨事項
