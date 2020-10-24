@@ -57,7 +57,7 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 
 * 回答: Orb は [CircleCI 構成の YAML ファイル]({{site.baseurl}}/ja/2.0/configuration-reference/)の言語パッケージです。
 
-CircleCI Orb は、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージ化します。たとえば、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#再利用可能なコマンドのオーサリング)は、特定の [Executor]({{site.baseurl}}/ja/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタム ジョブ内で _command_ を使用する場合はユーザー、[再利用可能ジョブ]({{site.baseurl}}/ja/2.0/orb-author-intro/#%E3%82%B8%E3%83%A7%E3%83%96)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
+CircleCI Orb は、[再利用可能な CircleCI 設定ファイル]({{site.baseurl}}/ja/2.0/reusing-config/)をパッケージ化します。たとえば、[コマンド]({{site.baseurl}}/ja/2.0/reusing-config/#再利用可能なコマンドのオーサリング)は、特定の [Executor]({{site.baseurl}}/ja/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタム ジョブ内で _command_ を使用する場合はユーザー、[再利用可能ジョブ]({{site.baseurl}}/ja/2.0/orb-author-intro/)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
 
 * 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
 
