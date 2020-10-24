@@ -57,6 +57,8 @@ Enter the following command to claim your namespace, if you have not yet claimed
 circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
 
+where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organisation
+
 ### Next Steps
 
 Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
