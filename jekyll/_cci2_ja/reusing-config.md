@@ -91,7 +91,7 @@ jobs:
 
 ## 特別なキー
 
-CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
+CircleCI では、すべての [circleci.com](https://circleci.com/ja/) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
 
 - `checkout`
 - `setup_remote_docker`
