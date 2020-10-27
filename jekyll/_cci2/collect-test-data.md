@@ -29,6 +29,8 @@ Where the `path` key is an absolute or relative path to your `working_directory`
 
 ![Insights for Failed Tests]( {{ site.baseurl }}/assets/img/docs/insights.png)
 
+_The above screenshot applies to CircleCI Server only._
+
 **If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling Formatters
