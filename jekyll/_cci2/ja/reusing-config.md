@@ -455,7 +455,7 @@ Commands can use other commands in the scope of execution. For instance, if a co
 
 ### Special Keys
 
-CircleCI has several special keys available to all [circleci.com](http://circleci.com) customers and available by default in CircleCI server installations. Examples of these keys are:
+CircleCI has several special keys available to all [circleci.com](https://circleci.com) customers and available by default in CircleCI server installations. Examples of these keys are:
 
 - `checkout`
 - `setup_remote_docker`
