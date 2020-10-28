@@ -16,7 +16,7 @@ version:
 
 プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。 お使いのレジストリ プロバイダーによっては、レート制限が引き上げられる可能性もあります。
 
-Docker Hub には [2020 年 11 月 1 日](https://www.docker.com/blog/scaling-docker-to-serve-millions-more-developers-network-egress/)から、送信元 IP に基づいたレート制限が導入されます。 CirlceCI では共有 IP プールからジョブを実行しているので、このレート制限による問題発生を回避するために、Docker Hub で認証済みの Docker プルを使用することを強くお勧めします。
+CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. That’s why we’re encouraging you and your team to add Docker Hub authentication to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
 [Docker]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を作成するか、プロジェクトごとの環境変数を使用します。
 
