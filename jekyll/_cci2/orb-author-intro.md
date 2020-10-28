@@ -57,7 +57,7 @@ Enter the following command to claim your namespace, if you have not yet claimed
 circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
 
-where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organisation
+where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organization.
 
 ### Next Steps
 
