@@ -29,6 +29,8 @@ CircleCI は、XML ファイルからテスト メタデータを収集し、そ
 
 ![失敗したテストに関するインサイト]({{ site.baseurl }}/assets/img/docs/insights.png)
 
+*The above screenshot applies to CircleCI Server only.*
+
 **If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## フォーマッタの有効化
