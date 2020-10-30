@@ -123,7 +123,7 @@ When importing an orb which has jobs, you can reference them directly from your 
 version: 2.1
 
 orbs:
-  <orb>: <orb>/<namespace>@x.y #orb version
+  <orb>: <namespace>/<orb>@x.y #orb version
 
 workflows:
   use-orb-job:
