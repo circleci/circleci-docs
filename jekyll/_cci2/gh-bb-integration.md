@@ -298,10 +298,12 @@ go to your project's settings.
 
 2. Navigate to the **SSH Keys** page.
 
-3. Right-click the **Add User Key** button
-and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
+3. - **For users of the new CircleCI UI:** Right-click the **Add User Key** button and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/new_bb_user_key.png)
+    - **For users of the legacy CircleCI UI:** Right-click the **Create `<username>` user key** button and select the **Inspect** option to open the browser inspector.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key.png)
 
-4. In the developer console,
+4. - **For users of the new CircleCI UI:** In the developer console,
+select the **Network** tab.![]( {{ site.baseurl }}/assets/img/docs/new_bb_user_key2.png)
+    - **For users of the legacy CircleCI UI:** In the developer console,
 select the **Network** tab.![]( {{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
 
 5. Click the **Add User Key** button to create your user key.
