@@ -290,7 +290,7 @@ cat <file_name>      # show me the contents of the file <file_name>
 
 ## Collaborating with Teammates
 
-It is easy to bring others into into a workflow such as described above.
+It is easy for teammates and collaborators to view and follow your projects.
 Teammates can make a free CircleCI account at any time to view your pipelines,
 even if they are not committing any code. 
 
