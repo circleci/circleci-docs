@@ -1,48 +1,86 @@
-= CircleCI Runner Installation
+= Installing the CircleCI Runner
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-== What Is the CircleCI Runner?
+This page describes the steps required to install CircleCI Runner on Linux and macOS platforms.
 
-The CircleCI Runner allows users to use their own infrastructure for running jobs. This allows a wider variety of compute architecture and environments, as well as more control over the security of the environment.
+=== Supported Platforms
 
-The system consists of two components: the Launch and the Task Runners.
+At present, the supported platforms are:
 
-  * Launch Agent (launch-agent) - manages gathering the information required to run a task. It also downloads and launches a Task Agent process.
-  * Task Agent (task-agent) - handles running a task retrieved and configured by the Launch Agent.
-￼
-The system has been written to allow agent administrators to configure the task-agent to run with a lower level of privileges than the launch-agent - as any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are for our recommended deployment which follows this approach - Launch Agent will run as root, but Task Agent will run as ```circleci```.
+- Ubuntu 18.04 running on an x86_64 (AMD64) or ARM64 architecture
+- macOS Catalina (10.15.6+) or above, running on an x86_64 architecture.
 
-== Installing The CircleCI Agent
-
-Currently only Ubuntu 18.04 running on an AMD64 architecture is officially supported. Running in a container is not supported at this time.
+Running in a container is not supported at this time.
 
 === Prerequisites
+
+==== Authentication
+
+In order to complete this process you'll need to create a namespace, resource-class and authentication token:
+
+. Install the circleci command-line tool.
+
+. Create a namespace for your organization's runner resources under:
+
+Each organization can only create a single namespace.
+
+- If you already use orbs, this will be same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
+
+. Create a resource class for your runner in the above namespace:
+
+- Use the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+
+. Create a token for authenticating the above resource-class:
+
+- Use the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`).
+
+This will print a generated Runner config including the authentication token. Note that the token cannot be retrieved again, so store it safely.
 
 ==== Installation Tooling
 
 The installation process assumes that the following utilities are installed on the system:
 
-	* curl
-	* sha256sum (installed as part of coreutils)
-	* systemd
-
-Installation also requires permissions to create a user, and create directories under ```/opt```.
+- curl (installed by default on macOS)
+- sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
+- systemd version 235+ (Linux only)
+- Installation also requires permissions to create a user, and create directories under /opt.
 
 === Job Running Requirements
 
 Running jobs requires that the following tools are available on the machine:
 
-	* tar
-	* gzip
-	* coreutils
+- tar
+- gzip
+- coreutils (Linux only)
+- git (recommended, but not required)
 
-== Download the Launch Agent Binary and Verify the Checksum
+=== Installation
 
-The Launch Agent can be installed using the following script in a bash shell. This will use ```/opt/circleci``` as the base install location.
+==== Download the Launch Agent Binary and Verify the Checksum
+
+The Launch Agent can be installed using the following script in a bash shell.
+
+This will use /opt/circleci as the base install location.
+
+First, set one of these variables as appropriate for for your installation target.
+
+===== For Linux x86_64
+
+`platform=linux/amd64`
+
+===== For Linux ARM64
+
+`platform=linux/arm64`
+
+===== For macOS x86_64
+
+`platform=darwin/amd64`
+
+And then run the following steps to download, verify and install the binary.
 
 ```sh
 prefix=/opt/circleci
@@ -53,227 +91,64 @@ agent_version=$(curl "$base_url/release.txt")
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-IFS=" " read -r -a selected <<< "$(grep -F "linux/amd64" checksums.txt)"
-checksum=${selected[0]}
-file=${selected[1]:1}
-mkdir -p "linux/amd64"
+file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2)"
+file="${file:1}"
+mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 echo "Verifying CircleCI Launch Agent download"
-sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo mv "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
-== Configure Launch Agent
+=== Platform-specific instructions
 
-A YAML file is used to configure the Launch Agent; how it communicates with our servers and how it will launch the Task Agent. The configuration file uses the following format, with the parameters are explained in more detail below:
+Please refer to the platform-specific installation instructions:
+
+- linux
+- macOS
+
+=== Configuration file reference
+
+A YAML file is used to configure the Launch Agent; how it communicates with our servers and how it will launch the Task Agent.
+
+The configuration file uses the following format, the parameters are explained in more detail below:
 
 ```sh
 api:
-  auth_token: {{ api.auth_token }}
+  auth_token: AUTH_TOKEN
 runner:
-  name: {{ runner.name }}
-  resource_class: {{ runner.resource_class }}
-  command_prefix: ["/opt/circleci/launch-task"]
-  working_directory: /opt/circleci/workdir/%s
+  name: RUNNER_NAME
+runner.name
 ```
 
-Once the configuration file has been created, save the configuration file to:
+This is a unique name assigned to this particular running Launch Agent, we recommend using the hostname of the machine. It will be used to identify the agent when viewing statuses and job results in the CircleCI UI.
 
-```sh
-/opt/circleci/launch-agent-config.yaml owned by root with permissions 600
-```
+==== api.auth_token
 
-```sh
-sudo chown root: /opt/circleci/launch-agent-config.yaml
-```
+This is a token used to identify the Launch Agent to CircleCI, it will be provided by your Customer Success Manager. An existing token may be shared among many installations, but only allows a particular resource_class to be specified.
 
-```sh
-sudo chmod 600 /opt/circleci/launch-agent-config.yaml
-```
+==== runner.command_prefix
 
-=== runner.name
+This allows you to customize how the Task Agent process is launched, our example uses the launch-task script provided below.
 
-This value is a unique name assigned to this particular running Launch Agent, however, it is recommended that you use the hostname of the machine because the hostname will be used to identify the agent when viewing statuses and job results in the CircleCI UI.
+==== runner.working_directory
 
-=== api.auth_token
+This allows you to control the default working directory used by each job. If the directory already exists, Task Agent will need permissions to write to it. If the directory does not exist, then the Task Agent will need permissions to create it. If `%s` is present in the value, it will be replaced with a different value for each job. These directories will not be automatically removed.
 
-This value is a token used to identify the Launch Agent to CircleCI. This token will be provided by your Customer Success Manager. An existing token may be shared among many installations, but only allows a particular ```resource_class``` to be specified.
+==== runner.cleanup_working_directory
 
-=== runner.resource_class
+This allows for control of working directory cleanup after each job. The default value is `false`.
 
-The ```resource_class`` value is used to uniquely identify the type of resource a job needs, and takes the format of ```{{ namespace }}/{{ identifier }}```
+==== runner.max_run_time
 
-The namespace identifies the organization that owns the resource, while the identifier identifies the specific type of resource. For example, a medium sized docker resource on CircleCI would use ```circleci/docker-medium```.
+This can be used to override the default maximum duration the Task Agent will run each job. The value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
 
-Along with the token, this value will be arranged through your Customer Success Manager.
+A few valid examples
 
-=== runner.command_prefix
+- `72h` - 3 days
+- `1h30m` - 1 hour 30 minutes
+- `30s` - 30 seconds
+- `50m` - 50 minutes
+- `1h30m20s` - An overly specific (yet still valid) duration.
 
-This value allows you to customize how the Task Agent process is launched. Note that the CircleCI example uses the launch-task script provided below.
-
-=== runner.working_directory
-
-This value allows you to control the default working directory used by each job. Please note the following conditions:
-
-* If the directory already exists, Task Agent will need permissions to write to it.
-* If the directory does not exist, then the Task Agent will need permissions to create it.
-* If %s is present in the value, it will be replaced with a different value for each job. These directories will not be automatically removed.
-
-=== Create the circleci user & working directory
-
-These values will be used when executing task-agent:
-
-```sh
-id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
-```
-
-```sh
-mkdir -p /opt/circleci/workdir
-```
-
-```sh
-chown -R circleci /opt/circleci/workdir
-```
-
-=== Create the Launch script
-
-This wrapper script will be used by Launch Agent to execute the Task Agent, while ensuring appropriate sandboxing and a clean shutdown.
-Create /opt/circleci/launch-task owned by root with permissions 755
-
-```sh
-#!/bin/bash
-```
-
-```sh
-set -euo pipefail
-```
-
-This script launches the build-agent using ```systemd-run`` in order to create a ```cgroup``` which will capture all child processes so they are cleaned up correctly on exit.
-
-* The user to run the build-agent as - must be numeric USER_ID=$(id -u circleci)
-
-* Give the transient ```systemd``` unit an inteligible name unit="circleci-$CIRCLECI_LAUNCH_ID"
-
-* When this process exits, tell the ```systemd``` unit to shut down:
-
-```sh
-abort() {
-  systemctl stop "$unit"
-}
-trap abort EXIT
-
-systemd-run \
-    --pipe --collect --quiet --wait \
-    --uid "$USER_ID" --unit "$unit" -- "$@"
-```
-
-=== Create the Stop script
-
-This script will be used by systemd to perform an orderly shutdown of the Launch agent. It will first request that the launch agent stops accepting new tasks by sending a SIGINT signal, and then it will follow up with a SIGTERM to abort the current task if it is still going for too long.
-
-The wait times in the environment variables should be used to tune how long you wish to wait for shutdown - the DRAIN_TIMEOUT should be set slightly longer than your jobs normally take if you want to avoid aborting any jobs early.
-
-* Create /opt/circleci/stop-agent owned by root with permissions 755
-
-```sh
-#!/bin/bash
-``
-
-* Perform an orderly shutdown of agents:
-
-```sh
-set -uo pipefail
-```
-
-* Specify how long to wait for draining to complete:
-
-```sh
-DRAIN_TIMEOUT=5m
-```
-
-* Specify how long to wait for cancellation to complete:
-
-```sh
-CANCEL_TIMEOUT=1m
-``
-
-* First send a SIGINT, this tells the launch-agent to stop accepting new tasks:
-
-```sh
-kill -s SIGINT $MAINPID
-timeout $DRAIN_TIMEOUT tail --pid=$MAINPID -f /dev/null
-```
-
-* If the process is still running, then execute the SIGTERM command to cancel the running task:
-
-```shif [ $? -eq 124 ]; then
-    kill -SIGTERM $MAINPID
-    timeout $CANCEL_TIMEOUT tail --pid=$MAINPID -f /dev/null
-fi
-```
-
-* If the process is _still_ running at this point, leave ```systemd``` to perform a SIGKILL and forcibly shut down the process:
-
-== Starting Launch Agent with Systemd
-
-Create ```/opt/circleci/circleci.service``` owned by root with permissions 755.
-
-You must ensure that ```TimeoutStopSec``` is greater than the total amount of time the stop-agent script will take.
-
-If you want to configure the CircleCI Agent installation to start on boot, it is important to note that the Launch Agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The Launch Agent may be configured as a service and be managed by systemd with the following scripts:
-
-```sh
-[Unit]
-Description=CircleCI Agent
-After=network.target
-[Service]
-ExecStart=/opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
-Restart=always
-User=root
-NotifyAccess=exec
-TimeoutStopSec=600
-ExecStop=/opt/circleci/stop-agent
-[Install]
-WantedBy = multi-user.target
-UNIT
-```
-
-You can now enable and start the service.
-
-```sh
-prefix=/opt/circleci
-systemctl enable $prefix/circleci.service
-systemctl stop circleci.service
-Start the CircleCI Agent Service
-When the CircleCI Agent Service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
-systemctl start circleci.service
-```
-
-== Verify the Service is Running
-
-The system reports a very basic health status through the Status field in ```systemctl```. This will report Healthy or Unhealthy based on connectivity to the CircleCI APIs.
-
-You can see the status of the agent by running:
-
-```sh
-systemctl status circleci.service --no-pager
-```
-
-Which should produce output similar to:
-
-```sh
-circleci.service - CircleCI Agent
-   Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
-   Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
- Main PID: 5592 (circleci-launch)
-   Status: "Healthy"
-    Tasks: 8 (limit: 2287)
-   CGroup: /system.slice/circleci.service
-           └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
-```
-
-You can also see the logs for the system by running:
-
-```sh
-journalctl -u circleci
-```
+The default value is 5 hours.
