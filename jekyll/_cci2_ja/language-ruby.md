@@ -27,7 +27,7 @@ CircleCI は、以下のページで Ruby on Rails サンプル プロジェク�
 
 このアプリケーションでは、最新の安定した Rails バージョン 5.1 (`rspec-rails`)、[RspecJunitFormatter](https://github.com/sj26/rspec_junit_formatter)、および PostgreSQL データベースを使用しています。
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ](http://circleci.com/ja/docs/2.0/circleci-images)の 1 つを使用しています。
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ](http://circleci.com/docs/ja/2.0/circleci-images)の 1 つを使用しています。
 
 ## CircleCI のビルド済み Docker イメージ
 
