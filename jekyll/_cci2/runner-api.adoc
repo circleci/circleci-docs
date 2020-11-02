@@ -4,11 +4,8 @@
 :icons: font
 :toc: macro
 :toc-title:
-//:circle-success: image:circle-success.png[]
-//:circle-warning: image:circle-warning.png[]
-//:circle-failure: image:circle-failure.png[]
 
-This document contains all the external facing endpoints for the Agent API.
+This document contains all the external facing endpoints for the CircleCI Runner API.
 
 == Authentication Methods
 
