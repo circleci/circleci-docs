@@ -39,20 +39,17 @@ Services マシンには多数のコンポーネントがあり、以下のネ�
 
 Services マシンに対して SSH 接続を実行し、プロキシアドレスから以下のコードスニペットを実行します。 Amazon の EC2 サービスで実行する場合、以下に示すとおり `169.254.169.254` の EC2 サービスを含める必要があります。
 
-    # 1.) コンテナのプルダウンにプロキシを使用するように、Replicated に指示します
-    echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee  /etc/replicated.conf
-    # 2.) 通信時にプロキシを使用するように、すべての CircleCI コンテナに指示します
-    (cat <<'EOF'
-    HTTP_PROXY=<proxy-ip:port>
-    HTTPS_PROXY=<proxy-ip:port>
-    NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
-    JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
-    
-    EOF
-    ) | sudo tee -a /etc/circle-installation-customizations
-    # 3.) Replicated を再起動して変更点を拾い出します
-    sudo service replicated-ui stop; sudo service replicated stop; sudo service replicated-operator stop; sudo service replicated-ui start; sudo service replicated-operator start; sudo service replicated start
-    
+```
+echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee /etc/replicated.conf
+(cat <<EOF
+HTTP_PROXY=<proxy-ip:port>
+HTTPS_PROXY=<proxy-ip:port>
+NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
+JVM_OPTS="-Dhttp.proxyHost=<proxy-ip> -Dhttp.proxyPort=<proxy-port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=<proxy-port> -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
+EOF) | sudo tee -a /etc/circle-installation-customizations
+
+systemctl restart replicated\*
+```
 
 **メモ：**上記は、CircleCI の enterprise-setup スクリプトでは処理されません。Services box の起動のためにユーザーデータに追加するか、または手動で実行する必要があります。
 
@@ -79,21 +76,18 @@ CircleCI の Replicated 管理コンソールのページにアクセスでき�
 
 AWS Terraform を使用している場合、Nomad クライアントの起動設定に以下を追加する必要があります。 以下の命令は、`/etc/environment` に追加します。 Docker を使用している場合は、[Docker での HTTP プロキシの設定に関するドキュメント](https://docs.docker.com/engine/admin/systemd/#/http-proxy)を参照してください。
 
-    #!/bin/bash
-    
-    # 1.) 任意のプロセスで読み込めるようにプロキシを設定します
-    (cat <<'EOF'
-    HTTP_PROXY=<proxy-ip:port>
-    HTTPS_PROXY=<proxy-ip:port>
-    NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
-    JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
-    EOF
-    ) | sudo tee -a /etc/environment
-    
-    # 2.) 修正した環境を現在のシェルに読み込ませます
-    set -a
-    . /etc/environment
-    
-    
+```
+#!/bin/bash
+
+(cat <<EOF
+HTTP_PROXY=<proxy-ip:port>
+HTTPS_PROXY=<proxy-ip:port>
+NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
+JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
+EOF) | sudo tee -a /etc/environment
+
+set -a
+. /etc/environment
+```
 
 また、https://docs.docker.com/network/proxy/ の指示に従って、コンテナが確実にアウトバウンドおよびプロキシのアクセス権を持つようにしてください。

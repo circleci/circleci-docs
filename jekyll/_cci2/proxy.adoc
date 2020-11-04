@@ -46,38 +46,27 @@ The Service machine has many components that need to make network calls, as foll
 For a static installation, not on AWS, SSH into the Services machine and run the following code snippet with your proxy address:
 
 ```
-echo '{"HttpProxy": "http://<proxy-ip:port>"}' |
-sudo tee  /etc/replicated.conf
+echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee /etc/replicated.conf
 (cat <<'EOF'
 HTTP_PROXY=<proxy-ip:port>
 HTTPS_PROXY=<proxy-ip:port>
+EOF) | sudo tee -a /etc/circle-installation-customizations
 
-EOF
-| sudo tee -a /etc/circle-installation-customizations
- sudo service replicated-ui stop; sudo service replicated stop;
- sudo service replicated-operator stop; sudo service replicated-ui start;
-  sudo service replicated-operator start; sudo service replicated start
+systemctl restart replicated\*
 ```
 
 If you run in Amazon's EC2 service then you'll need to include `169.254.169.254` EC2 services as shown below:
 
 ```
-echo '{"HttpProxy": "http://<proxy-ip:port>"}' |
-sudo tee  /etc/replicated.conf
-(cat <<'EOF'
+echo '{"HttpProxy": "http://<proxy-ip:port>"}' | sudo tee /etc/replicated.conf
+(cat <<EOF
 HTTP_PROXY=<proxy-ip:port>
 HTTPS_PROXY=<proxy-ip:port>
-NO_PROXY=169.254.169.254,<circleci-service-ip>,
-127.0.0.1,localhost,ghe.example.com
-JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port>
--Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=<port) -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|
-127.0.0.1|localhost|ghe.example.com"
+NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
+JVM_OPTS="-Dhttp.proxyHost=<proxy-ip> -Dhttp.proxyPort=<proxy-port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=<proxy-port> -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
+EOF) | sudo tee -a /etc/circle-installation-customizations
 
-EOF
-| sudo tee -a /etc/circle-installation-customizations
- sudo service replicated-ui stop; sudo service replicated stop;
- sudo service replicated-operator stop; sudo service replicated-ui start;
-  sudo service replicated-operator start; sudo service replicated start
+systemctl restart replicated\*
 ```
 
 NOTE: The above is not handled by by our enterprise-setup script and will need to be added to the user data for the Services Machine startup or done manually.
@@ -111,19 +100,16 @@ CircleCI uses `curl`  and `awscli` scripts to download initialization scripts, a
 * If you are using Docker refer to the https://docs.docker.com/engine/admin/systemd/#/http-proxy[Docker HTTP Proxy Instructions] documentation.
 * If you are running a static installation, add the following to the server before installation:
 +
-```bash
+
+```
 #!/bin/bash
 
-(cat <<'EOF'
+(cat <<EOF
 HTTP_PROXY=<proxy-ip:port>
 HTTPS_PROXY=<proxy-ip:port>
-NO_PROXY=169.254.169.254,<circleci-service-ip>,
-127.0.0.1,localhost,ghe.example.com
-JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port>
--Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|
-127.0.0.1|localhost|ghe.example.com"
-EOF
-) | sudo tee -a /etc/environment
+NO_PROXY=169.254.169.254,<circleci-service-ip>,127.0.0.1,localhost,ghe.example.com
+JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy-ip> -Dhttps.proxyPort=3128 -Dhttp.nonProxyHosts=169.254.169.254|<circleci-service-ip>|127.0.0.1|localhost|ghe.example.com"
+EOF) | sudo tee -a /etc/environment
 
 set -a
 . /etc/environment
