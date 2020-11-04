@@ -151,7 +151,7 @@ See the [built-in environment variable documentation]({{ site.baseurl }}/2.0/env
 Globbing and splitting tests does not actually run your tests. To combine test grouping with test execution, consider saving the grouped tests to a file, then passing this file to your test runner.
 
 ```bash
-circleci tests glob test/**/*.rb | circleci tests split > /tmp/tests-to-run
+circleci tests glob "test/**/*.rb" | circleci tests split > /tmp/tests-to-run
 bundle exec rspec $(cat /tmp/tests-to-run)
 ```
 
