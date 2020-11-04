@@ -1,83 +1,83 @@
 ---
 layout: classic-docs
-title: CircleCI Xcode Image Release, Update and Deprecation Policy
-short-title: CircleCI Xcode Image Release, Update and Deprecation Policy
+title: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
+short-title: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
 categories:
   - platforms
-description: CircleCI Xcode Image Release, Update and Deprecation Policy
+description: Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて
 order: 31
 version:
   - Cloud
 ---
 
-* TOC
+* 目次
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
-This document outlines the CircleCI Xcode release, update and deprecation policy. By having a defined Xcode image policy, we ensure that we are able to continue releasing new images quickly and easily, including beta images.
+ここでは、Xcode イメージのリリース、更新、サポート終了に関する CircleCI のポリシーについて説明します。 CircleCI では、ベータ イメージを含め、新しいイメージのリリースを切れ目なくスピーディかつ円滑に行うため、Xcode イメージについて明確なポリシーを定めています。
 
-## Xcode Image Retention and Deprecation
+## Xcode イメージの維持およびサポート終了
 
-We aim to retain 4 major versions of Xcode, with more recent versions having a larger number of images to choose from.
+CircleCI では、Xcode のメジャー バージョンを 4 つまで維持し、新しいバージョンについては複数のイメージを提供することを目標とします。
 
-Example with Xcode 12 being the latest major version being released:
+Xcode 12 が最新のリリース済みメジャー バージョンである執筆時点では、次のようになります。
 
-| Xcode Version | Action                                                                                                     |
-| ------------- | ---------------------------------------------------------------------------------------------------------- |
-| Xcode 12      | We will keep all major.minor versions at the latest patch version                                          |
-| Xcode 11      | We will keep all major.minor versions at the latest patch version                                          |
-| Xcode 10      | As further Xcode 12 releases are announced, we will begin deprecating older versions of Xcode 10 in stages |
-| Xcode 9       | We retain a single image which will be the last stable release of Xcode 9                                  |
-| Xcode 8       | Removed entirely                                                                                           |
+| Xcode のバージョン | 対応                                                            |
+| ------------ | ------------------------------------------------------------- |
+| Xcode 12     | すべての major.minor バージョンについて最新のパッチ バージョンを維持します                  |
+| Xcode 11     | すべての major.minor バージョンについて最新のパッチ バージョンを維持します                  |
+| Xcode 10     | 今後の Xcode 12 リリースの発表に応じて、過去の Xcode 10 バージョンに対するサポートを段階的に終了します |
+| Xcode 9      | Xcode 9 の最新の安定版リリースとなるイメージ 1 つのみを維持します                        |
+| Xcode 8      | 完全に削除されました                                                    |
 {: class="table table-striped"}
 
-Future example when Xcode 13 enters Beta:
+今後、Xcode 13 のベータ イメージがリリースされた場合の維持の例は次のようになります。
 
-| Xcode Version | Action                                                                                                                                                                |
-| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Xcode 13      | Beta image will be released and updated as per the beta image policy                                                                                                  |
-| Xcode 12      | We will keep all `major.minor` versions at the latest patch version                                                                                                   |
-| Xcode 11      | We will keep all `major.minor` versions at the latest patch version during the beta period and begin to flag images for deprecation during the Xcode 13 release cycle |
-| Xcode 10      | All images except for the final release will be flagged for deprecation and removed when Xcode 13 reaches GM                                                          |
-| Xcode 9       | Flagged for deprecation, removed when Xcode 13 reaches GM                                                                                                             |
+| Xcode のバージョン | 対応                                                                                       |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| Xcode 13     | ベータ イメージ ポリシーに従いベータ イメージをリリースおよび更新します                                                    |
+| Xcode 12     | すべての `major.minor` バージョンについて最新のパッチ バージョンを維持します                                           |
+| Xcode 11     | ベータ期間中はすべての `major.minor` バージョンについて最新のパッチ バージョンを維持し、Xcode 13 のリリース サイクル開始後はサポート終了の対象とします |
+| Xcode 10     | Xcode 13 の GM 版がリリースされ次第、最終リリースを除くすべてのイメージをサポート終了対象とします                                  |
+| Xcode 9      | Xcode 13 の GM 版がリリースされ次第、サポート終了対象とし、削除します                                                |
 {: class="table table-striped"}
 
-When an image is selected for deprecation and removal, we will create an announcement on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with reaching out via email to developers who have requested one of the deprecated images in their recent jobs. We will always aim to provide 4 weeks notice.
+特定のイメージがサポート終了対象および削除対象となった場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)でお知らせするとともに、最近実行されたジョブでいずれかの廃止対象イメージをリクエストした開発者の方々にメールで通知します。 CircleCI では、廃止の 4 週間前に通知することを目標とします。
 
-We will never automatically redirect requests for images to different major.minor versions, so when one of these images is removed, jobs will start to fail if the config has not been updated.
+イメージに対するリクエストが別の major.minor バージョンに自動でリダイレクトされることはありません。そのため、ジョブでリクエストされるイメージのいずれかが削除された場合、設定ファイルの更新が必要となります。更新を行わない場合、ジョブは失敗するようになります。
 
-## Xcode Patches
+## Xcode のパッチ
 
-We retain the latest patch version of each Xcode `major.minor` version we support. Once a new patch version has been released, we will deprecate the previous patch version and redirect all requests to the new patch.
+CircleCI では、サポート対象の Xcode `major.minor` バージョンごとに最新のパッチ バージョンを維持します。 新しいパッチ バージョンがリリースされた場合、過去のパッチ バージョンのサポートを終了し、すべてのリクエストを新しいパッチにリダイレクトします。
 
-As patches are generally backwards compatible, redirects will be put in place within 24 hours of a new patch release. If any major issues are discovered, we will issue a rollback and make both versions temporarily available.
+通常、パッチには後方互換性が備わっているため、このリダイレクトは新パッチのリリースから 24 時間以内に開始されます。 深刻な問題が確認された場合には、ロールバック版を公開し、暫定的にどちらのバージョンも選択可能にします。
 
-**Example:**
+**例:**
 
-When Xcode `12.0.1` is released, we will remove the previous patch version, `12.0.0`, and automatically redirect all requests for `12.0.0` to `12.0.1`.
+Xcode `12.0.1` がリリースされた時点で、過去のパッチ バージョンである `12.0.0` を削除し、`12.0.0` に対するすべてのリクエストを `12.0.1` にリダイレクトします。
 
-## Beta Image Support
+## ベータ イメージのサポート
 
-We endeavour to make beta Xcode versions available on the macOS executor as soon as we can, to allow developers to test their apps ahead of the next stable Xcode release.
+Xcode の次回安定版リリースよりも前に開発者の方々がアプリのテストを行えるように、可能な限り早期に macOS Executor で Xcode のベータ バージョンを公開できるよう尽力します。
 
-Unlike our stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
+ベータ イメージについては、安定版イメージ (更新が停止されたもの) と異なり、GM (安定版) イメージが公開され更新が停止するまでは、新規リリースのたびに既存のイメージが上書きされます。 ある時点でベータ版の Xcode バージョンが使用されているイメージをリクエストする場合は、Apple から Xcode の新規ベータ版が公開され次第、最小限の通知とともにそのイメージに変更が加えられることをご了承ください。 こうした変更には Xcode および関連ツールに対する抜本的な変更が含まれ、CircleCI の保証範囲外となります。
 
-To read about our customer support policy regarding beta images, please check out this [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
+ベータ版イメージに関する CircleCI のお客様サポート ポリシーについては、[サポート センターに関するこちらの記事](https://support.circleci.com/hc/ja-jp/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-)をご覧ください。
 
-## Xcode Image Releases
+## Xcode イメージのリリース
 
-We closely track and monitor Apple’s Xcode releases and always endeavor to release new images as quickly as possible. We can not provide an official SLA turnaround time for this as it is highly dependent on any changes made in Xcode and macOS.
+CircleCI では Apple の Xcode のリリース状況を注意深く追跡し、常に可能な限り迅速に新しいイメージをリリースするよう努めます。 この作業は Xcode と macOS で行われる変更に大きく依存するため、リリースについて SLA として所要時間を公式に定めることはいたしません。
 
-New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes and will be added to the table of [Xcode versions in the documentation](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions).
+新しいイメージがリリースされた際は常に、[CircleCI の Discuss サイト](https://discuss.circleci.com/c/announcements/39)でリリース ノートを添えてお知らせします。また、[こちらの Xcode バージョンの表](https://circleci.com/ja/docs/2.0/testing-ios/#%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B-xcode-%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3)に追記します。
 
-## macOS Versions
+## macOS のバージョン
 
-Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version as stable as possible by only updating it when the minimum version requirement for Xcode is increased. When this occurs, we will update the macOS version to the latest stable version that is available.
+各 Xcode イメージは、macOS のクリーン インストールを基盤としています。 CircleCI では、macOS バージョンの更新を Xcode の必要最小バージョンが上がったときにのみ行い、できる限りバージョンを一定に保つことを目指します。 Xcode の必要最小バージョンが上がった場合は、macOS のバージョンを最新の安定版バージョンに更新します。
 
-When a new major version of macOS (e.g., `10.15` or `11.0`) is released, we will usually start to use this version after a minimum of two minor Xcode releases have passed to allow for any major bugs and issues to be resolved. The release timing for this is entirely dependent on Apple’s own release cycle, but will always be announced ahead of time on our [Discuss forum](https://discuss.circleci.com/c/announcements/39).
+macOS の新しいメジャー バージョン (`10.15` や `11.0` など) がリリースされた場合、重大なバグや問題が発生した際に解決できるように、通常は Xcode のマイナー バージョンが 2 つ以上リリースされた後からそのバージョンの使用を開始します。 このリリースのタイミングは Apple のリリース サイクル次第ですが、必ず事前に [CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)で告知します。
 
-## Exceptions
+## 例外
 
-At any time, we reserve the right to work outside of the information in this document if circumstances require. In the event that we are required to make an exception to the policy, we will endeavour to provide as much notice and clarity as possible. In these cases, an announcement will be posted on our [Discuss forum](https://discuss.circleci.com/c/announcements/39), along with additional outreach, such as an email notice, where possible.
+CircleCI は、どのような場合でも、状況に応じて本記事の説明内容とは異なる措置を講じる権利を保有しています。 本ポリシーの例外を実施する必要がある場合、可能な限り十分な告知を行い、最善の透明性を維持するよう努めます。 こうした場合、[CircleCI Discuss フォーラム](https://discuss.circleci.com/c/announcements/39)に告知を掲載するとともに、可能であればメールなどでの通知も行います。
