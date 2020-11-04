@@ -133,15 +133,15 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 {% raw %}```yaml
 commands:
   create_concatenated_package_lock:
-    description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 File is used as checksum source for part of caching key."
+    description: "lerna.js で認識されるすべての package-lock.json ファイルを単一のファイルに連結します。 ファイルは、チェックサム ソースとしてキャッシュ キーの一部に使用します"
     parameters:
       filename:
         type: string
     steps:
 
       - run:
-          name: Combine package-lock.json files to single file
-          command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+          name: package-lock.json ファイルの単一ファイルへの統合
+          command: npx lerna list -p -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
 ```
 {% endraw %}
 
