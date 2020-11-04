@@ -138,7 +138,8 @@ commands:
     steps:
       - run:
           name: Combine package-lock.json files to single file
-          command: npx lerna la -a | awk -F packages '{printf "\"packages%s/package-lock.json\" ", $2}' | xargs cat > << parameters.filename >>
+          command: cat $(ls packages/*/package-lock.json) > << parameters.filename >>
+
 ```
 {% endraw %}
 
