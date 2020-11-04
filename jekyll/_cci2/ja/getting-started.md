@@ -224,7 +224,11 @@ Using some of the following commands, see if you can find and view the contents 
     cat <file_name>      # show me the contents of the file <file_name>
     
 
-## 関連項目
+## Collaborating with Teammates
+
+It is easy for teammates and collaborators to view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
+
+## See Also
 {:.no_toc}
 
 [Blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) on how to validate the CircleCI `config.yml` on every commit with a git hook.
