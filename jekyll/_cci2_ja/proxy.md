@@ -87,7 +87,7 @@ JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy
 EOF) | sudo tee -a /etc/environment
 
 set -a
-./etc/environment
+. /etc/environment
 ```
 
 また、https://docs.docker.com/network/proxy/ の指示に従って、コンテナが確実にアウトバウンドおよびプロキシのアクセス権を持つようにしてください。

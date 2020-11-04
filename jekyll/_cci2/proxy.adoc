@@ -112,7 +112,7 @@ JVM_OPTS="-Dhttp.proxyHost=<ip> -Dhttp.proxyPort=<port> -Dhttps.proxyHost=<proxy
 EOF) | sudo tee -a /etc/environment
 
 set -a
-./etc/environment
+. /etc/environment
 ```
 +
 If your containers need to use a proxy server you will need to set the following schedulerer environment variables: `DOCKER_HTTP_PROXY`, `DOCKER_HTTPS_PROXY`, `NO_PROXY`, corresponding to those listed in https://docs.docker.com/network/proxy/[the Docker instructions]. This will ensure your containers have outbound/proxy access. For more information on creating configuration overrides, see the <<customizations#service-configuration-overrides,Customizations Guide>>.
