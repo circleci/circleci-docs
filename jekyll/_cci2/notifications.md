@@ -122,7 +122,7 @@ workflows:
           context: slack-secrets      
 ```
 
-CircleCI's Slack Orb can be used to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. To view such usage examples, consult the [CircleCI Slack Orb page](https://circleci.com/developer/orbs/orb/circleci/slack).
+CircleCI's Slack orb can be used to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. For more information and to view usage examples, see the [CircleCI Slack orb page](https://circleci.com/developer/orbs/orb/circleci/slack).
 
 ### Using the IRC Orb
 
