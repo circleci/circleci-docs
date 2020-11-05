@@ -87,7 +87,7 @@ Before integrating an orb into your configuration, you will need to perform two 
 
 ### Using the Slack Orb
 
-Using the [CircleCI Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack), you can integrate and customize Slack notifications directly from your configuration file. The following config is an example of notifying a Slack channel with a custom message:
+Using the [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack), you can integrate and customize Slack notifications directly from your configuration file. The following config is an example of notifying a Slack channel with a custom message:
 
 ```yaml
 version: '2.1'
