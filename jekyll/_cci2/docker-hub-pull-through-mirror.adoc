@@ -22,6 +22,8 @@ Alternatively, you can set up a Docker Hub pull through registry mirror pre-conf
 
 These setup instructions are divided into three parts: Setting up a pull through cache registry, configuring Nomad clients to use the registry as a mirror, and configuring VM Service to use the registry as a mirror in machine executors and remote Docker jobs.
 
+One clarification here: We will not configure the Services box to use the mirror. The Services box does not pull Docker images regularly (it pulls images only upon initial setup and upgrade processes), and most images are pulled from Replicated. Hence it has few chances to hit the rate limit.
+
 == Set up a pull through cache registry
 
 In this phase we setup a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. This section introduces two types of pull through cache registry: The elementary and easier-to-setup one using HTTP, and the securer one using HTTPS. Either of them is functional for most cases, whereas you will need a securer one in certain cases.
