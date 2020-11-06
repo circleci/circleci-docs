@@ -22,23 +22,23 @@ Alternatively, you can set up a Docker Hub pull through registry mirror pre-conf
 
 These setup instructions are divided into three parts: Setting up a pull through cache registry, configuring Nomad clients to use the registry as a mirror, and configuring VM Service to use the registry as a mirror in machine executors and remote Docker jobs.
 
-One clarification here: We will not configure the Services box to use the mirror. The Services box does not pull Docker images regularly (it pulls images only upon initial setup and upgrade processes), and most images are pulled from Replicated. Hence it has few chances to hit the rate limit.
+NOTE: The Services machine does not need to be configured to use the mirror. The Services machine does not pull Docker images regularly (it pulls images only upon initial setup and upgrade processes), and most images are pulled from Replicated. Hence it has few chances to hit the rate limit.
 
 == Set up a pull through cache registry
 
-In this phase we setup a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. This section introduces two types of pull through cache registry: The elementary and easier-to-setup one using HTTP, and the securer one using HTTPS. Either of them is functional for most cases, whereas you will need a securer one in certain cases.
+This section covers setting up a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
 
-=== Setup an elementary pull through cache registry (HTTP proxy for Docker Hub)
+=== Set up an elementary pull through cache registry (HTTP proxy for Docker Hub)
 
-. *Set up a Docker Hub account* which will be used by the pull through cache registry to access Docker Hub.
+. *Set up a Docker Hub account*, which will be used by the pull through cache registry to access Docker Hub.
 +
-TIP: Setting up a paid account can be a good option to ease the rate limiting further. See also: https://www.docker.com/pricing
+TIP: Setting up a paid account can be a good option to ease the rate limiting further. See also: https://www.docker.com/pricing.
 
 . *Set up an independent Linux server* that has Docker installed.
 +
 We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
 +
-Assuming that the IP address for this server is `192.0.2.1`, the URL for the registry to setup is `http://192.0.2.1`. The URL will be needed later to arm Nomad clients and the VM Service.
+Assuming that the IP address for this server is `192.0.2.1`, the URL for the registry to set up is `http://192.0.2.1`. The URL will be needed later to arm Nomad clients and the VM Service.
 
 . Run the command below to *start the registry*.
 +
@@ -57,27 +57,27 @@ sudo docker run \
   registry
 ----
 
-. Finally, make sure that the TCP port 80 (i.e. HTTP) is open and accessible. For better security, we recommend you to open the port only to Nomad clients, and VMs for `machine` executors and remote docker engines.
+. Finally, make sure that the TCP port 80 (i.e. HTTP) is open and accessible. For better security, we recommend that you only open the port to Nomad clients and VMs for `machine` executors and remote docker engines.
 +
 On AWS, for example, you will need to make sure that both Security Groups and the firewall at the OS level are configured correctly to accept connections from Nomad clients over HTTP.
 
 === Set up a secure pull through cache registry (HTTPS proxy for Docker Hub)
 
-Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on machine executors and remote docker engines), your pull through cache registry needs to accept connections over HTTPS. This is the instruction to setup a pull through cache that listens for HTTPS connections.
+Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on `machine` executors and remote Docker engines), your pull through cache registry needs to accept connections over HTTPS. These instructions cover setting up a pull through cache that listens for HTTPS connections.
 
-. *Set up a Docker Hub account* which will be used by the pull through cache registry to access Docker Hub.
+. *Set up a Docker Hub account*, which will be used by the pull through cache registry to access Docker Hub.
 +
-TIP: Setting up a paid account can be a good option to ease the rate limiting further. See also: https://www.docker.com/pricing
+TIP: Setting up a paid account can be a good option to ease the rate limiting further. See also: https://www.docker.com/pricing.
 
 . *Set up an independent Linux server* that has Docker installed.
 +
 We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
 +
-Note that **the sever needs to be accessible by its hostname**. Namely, you have to configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. Hereby we assume that the URL for the registry to setup is `https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). The URL will be needed later to arm Nomad clients and the VM Service.
+NOTE: *The server needs to be accessible by its hostname*. Namely, you must configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. In this guide we assume that the URL for the registry we are setting up is `https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). The URL will be needed later to arm Nomad clients and the VM Service.
 
 . *Obtain a TLS certificate for `your-mirror.example.com`* and *put the certificate and the private key into `/root/tls`* of the server.
 +
-Note that this document assumes that you are obtaining a certificate issued by a well-known CA, not a self-signed one. Use of self-signed certificates is NOT tested.
+NOTE: This guide assumes you are obtaining a certificate issued by a well-known CA, not a self-signed certificate. Use of self-signed certificates has NOT been tested.
 
 . Run the command below to *start the registry*.
 +
@@ -196,6 +196,6 @@ Follow the steps below on your services machine.
 
 == Resources
 
-* https://docs.docker.com/registry/recipes/mirror/ (How to configure a pull through cache mirror)
-* https://hub.docker.com/_/registry (Official Docker Registry Docker image)
-* https://docs.docker.com/registry/configuration/ (How to configure official Docker Registry)
+* https://docs.docker.com/registry/recipes/mirror/[How to configure a pull through cache mirror]
+* https://hub.docker.com/_/registry[Official Docker Registry Docker image]
+* https://docs.docker.com/registry/configuration/[How to configure official Docker Registry]
