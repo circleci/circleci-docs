@@ -87,37 +87,42 @@ Before integrating an orb into your configuration, you will need to perform two 
 
 ### Using the Slack Orb
 
-Using the [CircleCI Slack Orb](https://circleci.com/developer/orbs/orb/circleci/slack), you can integrate and customize Slack notifications directly from your configuration file. The following config is an example of notifying a Slack channel with a custom message:
+Using the [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack), you can integrate and customize Slack notifications directly from your configuration file. The following config is an example of notifying a Slack channel with a custom message:
 
 ```yaml
-version: 2.1
+version: '2.1'
+orbs:
+  slack: circleci/slack@4.0
 jobs:
-  build:
+  notify:
     docker:
-      - image: <docker image>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: 'cimg/base:stable'
     steps:
       - slack/notify:
-          color: '#42e2f4'
-          mentions: 'USERID1,USERID2,'
-          message: This is a custom message notification
-          webhook: webhook
-orbs:
-  slack: circleci/slack@x.y.z
-version: 2.1
+          custom: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "plain_text",
+                      "text": "*This is a text notification*",
+                      "emoji": true
+                    }
+                  ]
+                }
+              ]
+            }
+          event: always
 workflows:
-  your-workflow:
+  send-notification:
     jobs:
-      - build
+      - notify:
+          context: slack-secrets      
 ```
 
-To get started with enabling notifications in Slack *for a specific project*, head to the *Settings* page for your project. Click on *Slack Integration* in the sidebar and follow the steps to setup Slack.
-
-![]({{ site.baseurl }}/assets/img/docs/notification-page-slack.png)
-
-It is also possible to use the Slack Orb to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. To view such usage examples, consult the [CircleCI Slack Orb page](https://circleci.com/developer/orbs/orb/circleci/slack).
+CircleCI's Slack orb can be used to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. For more information and to view usage examples, see the [CircleCI Slack orb page](https://circleci.com/developer/orbs/orb/circleci/slack).
 
 ### Using the IRC Orb
 
