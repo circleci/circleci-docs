@@ -83,8 +83,9 @@ NOTE: This guide assumes you are obtaining a certificate issued by a well-known 
 +
 [NOTE]
 ====
-. Replace `DOCKER_HUB_USERNAME` and `DOCKER_HUB_ACCESS_TOKEN` with the username for the Docker Hub account and the access token you obtained through https://hub.docker.com/settings/security, respectively.
-. Replace `fullchain.pem` and `privkey.pem` with the filenames of your certificate and private key, respectively. *The certificate specified there must be correctly chained enough for tracing the certification path from the leaf to the root*.
+Replace `DOCKER_HUB_USERNAME` and `DOCKER_HUB_ACCESS_TOKEN` with the username for the Docker Hub account and the access token you obtained through https://hub.docker.com/settings/security, respectively.
+
+Replace `fullchain.pem` and `privkey.pem` with the filenames of your certificate and private key, respectively. *The certificate specified there must be correctly chained enough for tracing the certification path from the leaf to the root*.
 ====
 +
 [source,bash]
