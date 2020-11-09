@@ -32,7 +32,7 @@ This section covers setting up a pull through cache registry, which works as a m
 
 Before setting up a pull through cache registry, you need to *set up a Docker Hub account*. The account will be used by the pull through cache registry to authenticate itself with Docker Hub.
 
-WARNING: We recommend to set up a dedicated account. Resources that the account has access will become accessible by all of the end users on your CircleCI Server. Especially, *if the account has private images registered on Docker Hub, those private images will become accessible by the all the users on your CircleCI Server*.
+WARNING: We recommend that you set up a dedicated account. Resources that the account has access to will also become accessible by all end users of your CircleCI Server installation. This is especially important *if the account has _private_ images registered on Docker Hub*, as these private images will become accessible by all users of your CircleCI Server installation.
 
 NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimitted allowance of image pulls. See also: https://www.docker.com/pricing.
 
@@ -42,7 +42,7 @@ NOTE: While a free account can be used, setting up a paid account would be a goo
 +
 We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
 +
-Assuming that the IP address for this server is `192.0.2.1`, the URL for the registry to set up is `http://192.0.2.1`. The URL will be needed later to arm Nomad clients and the VM Service.
+Assuming that the IP address for this server is `192.0.2.1`, the URL for the registry to set up is `http://192.0.2.1`. This URL will be needed later to arm Nomad clients and the VM Service.
 
 . Run the command below to *start the registry*.
 +
