@@ -67,7 +67,7 @@ You should see your pipeline start to run automatically—and pass! So, what jus
 happened? Click on the green **Success** button on your pipeline to investigate
 the following parts of the run: 
 
-![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png){:.img--bordered}
+![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
 1. **Which workflows ran?**: After clicking **Success**, we are taken to a page
    listing the jobs that ran. If this is your first build, you probably only ran
@@ -75,7 +75,7 @@ the following parts of the run:
    case, we only ran one job, called `welcome/run`. Click on `welcome/run` and let's
    investigate the steps of our job. 
 
-   ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png){:.img--bordered}
+   ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png)
 
 
 1. **Spin up environment:** CircleCI used an [orb](https://circleci.com/orbs) to
