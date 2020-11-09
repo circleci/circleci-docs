@@ -20,7 +20,7 @@ Running in a container is not supported at this time.
 
 ==== Authentication
 
-In order to complete this process you'll need to create a namespace, resource-class and authentication token:
+In order to complete this process you will need to create a namespace, resource-class and authentication token:
 
 . Install the circleci command-line tool.
 
