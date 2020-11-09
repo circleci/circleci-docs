@@ -126,7 +126,7 @@ orbs:
 ```
 
 #### 2. ワークフローに *Workflow-Collector* を追加する
-`workflow-collector` ジョブはワークフローと同時に並列で実行され、ワークフロー内のすべてのジョブが完了するまで Sumo Logic に分析データを送信します。
+`workflow-collector` ジョブはワークフローと同時に並列で実行され、ワークフロー内のすべてのジョブが完了するまで Sumo Logic に分析データを送信しつづけます。
 
 ```yaml
 version: 2.1
