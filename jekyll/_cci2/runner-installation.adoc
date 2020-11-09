@@ -5,20 +5,78 @@
 :toc: macro
 :toc-title:
 
+NOTE: CircleCI Runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+
 This page describes how to install CircleCI Runner on Linux and macOS platforms.
 
 toc::[]
 
 === Prerequisites
 
+==== Support Levels
+
+There are currently three support levels for CircleCI Runner:
+
+- Supported
+- Untested
+- Untested
+
+===== Supported
+
+- CircleCI has built and tested runner on a given platform.
+- Support expectation:
++
+- DCEs can provide support.
+- CircleCI documentation and best practices available.
+- If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
+
+===== Untested
+
+- CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
+- Support expectation:
++
+- There is no CircleCI documentation available.
+- Customers can run CircleCI Runner on an untested platform, but the customer is responsible for determining how to run Runner on this platform.
+- If issues arise on the untested platform, DCEs might or might not be able to help.
+- DCEs will provide general guidance (not specific to this platform) on best practices for CircleCI Runner.
+- If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
+
+===== Unsupported
+
+- CircleCI will not provide a runner binary capable of running CircleCI Runner on the platform.
+- Support expectation:
++
+- CircleCI Runner will not work on the platform.
+- A customer can try running CircleCI Runner on the platform, but are unlikely to succeed.
+- No CircleCI documentation or DCE support.
+
 ==== Supported Platforms
 
-Currently, the following platforms are supported with CircleCI Runner:
+The following platforms have been validated to work with CircleCI Runner:
 
-- Ubuntu 18.04 running on an x86_64 (AMD64) or ARM64 architecture.
-- macOS Catalina (10.15.6+) or above, running on an x86_64 architecture.
+- Intel + Ubuntu
+- Arm64 + Ubuntu
+- Intel + macOS
 
-CAUTION: Running in a container is not currently supported.
+===== Untested Platforms
+
+The following platforms have not been tested, but are believed to work with CircleCI Runner:
+
+- Intel + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
+- Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
+- Docker
+
+NOTE: CircleCI provides no documentation for these platforms.
+
+===== Unsupported Platforms
+
+The following platforms are not currently supported to work with CircleCI Runner:
+
+- Intel + Windows
+- Arm + Windows
+- Apple Silicon + macOS
+- Arm32 + Linux
+- Run natively in Kubernetes/Rancher/other container orchestration solutions
 
 ==== Authentication
 
@@ -388,3 +446,17 @@ Here are few valid examples:
 - `1h30m20s` - An overly specific (yet still valid) duration.
 
 NOTE: The default value is 5 hours.
+
+=== Docker Installation
+
+The `circleci/runner`image has been created by CircleCI to work with the CircleCI Runner feature. Currently the `launch-agent` tag can be used to run the `launch-agent` in a container co-located with the CircleCI job (e.g. the job will run inside the same container). In the future, a variant will be added that runs the `launch-agent` on the host and will run each job inside its own container, via the `task-agent`.
+
+==== Getting Started
+
+To perform a docker pull of the CircleCI Runner, run the following command:
+
+`docker pull circleci/runner`
+
+This CircleCI Runner image can also be used as a host with docker installed by running the following command:
+
+`CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_`
