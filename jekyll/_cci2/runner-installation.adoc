@@ -129,7 +129,7 @@ This is a token used to identify the Launch Agent to CircleCI, it will be provid
 
 ==== runner.command_prefix
 
-This allows you to customize how the Task Agent process is launched, our example uses the launch-task script provided below.
+This allows you to customize how the Task Agent process is launched; our example uses the launch-task script provided below.
 
 ==== runner.working_directory
 
