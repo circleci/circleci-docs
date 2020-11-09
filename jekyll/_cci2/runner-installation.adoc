@@ -80,7 +80,7 @@ The following platforms are not currently supported to work with CircleCI Runner
 
 ==== Authentication
 
-In order to complete this process you will need to create a namespace, resource-class and authentication token by performing the steps listed below:
+In order to complete this process you will need to create a namespace, https://circleci.com/docs/2.0/optimizations/#resource-class [resource-class] and authentication token by performing the steps listed below:
 
 1. Install the circleci command-line tool.
 2. Create a namespace for your organization's runner resources under:
