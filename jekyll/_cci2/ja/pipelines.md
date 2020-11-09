@@ -10,20 +10,15 @@ version:
   - Cloud
 ---
 
-CircleCI アプリケーションの [Pipelines (パイプライン)] ページについて概説すると共に、CircleCI ユーザー インターフェイスの変更について説明します。
+This document provides a summary of the Pipelines page in the CircleCI app and documents some of the changes to the CircleCI user interface.
 
 ## 概要
 
-最近 CircleCI の Web インターフェイスの一部が変更されたことにお気付きかと思います。 ビルドをグループ化する方法と、その情報を表示するユーザー インターフェイスに関して、いくつかの変更を行いました。
+最近 CircleCI の Web インターフェイスの一部が変更されたことにお気付きかと思います。 We have some exciting changes that are rolling out regarding how your builds are being grouped and the user interface that presents that information. Let's begin by stating what a **Pipeline** is.
 
-まず、**パイプライン**についてご説明しましょう。
+**Pipelines** represent the entire configuration that is run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline.
 
-パイプラインとは、CircleCI を使用するプロジェクトで作業をトリガーするときに実行される構成全体を指す言葉です。 `.circleci/config.yml` ファイルの全体が 1 つのパイプラインによって実行されます。
-
-これまでサイドバーの [`JOBS` (ジョブ)] が表示されていた場所に、[`Pipelines (パイプライン)`] が表示されるようになりました。
-
-![]({{ site.baseurl }}/assets/img/docs/pipelines-jobs-to-pipelines.png)
-
+When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
 
 ## ジョブ、テスト、アーティファクト
 
