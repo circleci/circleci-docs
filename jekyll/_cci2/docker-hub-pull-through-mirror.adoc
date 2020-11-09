@@ -28,11 +28,15 @@ NOTE: The Services machine does not need to be configured to use the mirror. The
 
 This section covers setting up a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
 
-=== Set up an elementary pull through cache registry (HTTP proxy for Docker Hub)
+=== Prerequisites: Set up a Docker Hub account
 
-. *Set up a Docker Hub account*, which will be used by the pull through cache registry to access Docker Hub.
-+
-TIP: Setting up a paid account can be a good option to ease the rate limiting further. See also: https://www.docker.com/pricing.
+Before setting up a pull through cache registry, you need to *set up a Docker Hub account*. The account will be used by the pull through cache registry to authenticate itself with Docker Hub.
+
+WARNING: We recommend to set up a dedicated account. Resources that the account has access will become accessible by all of the end users on your CircleCI Server. Especially, *if the account has private images registered on Docker Hub, those private images will become accessible by the all the users on your CircleCI Server*.
+
+NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimitted allowance of image pulls. See also: https://www.docker.com/pricing.
+
+=== Set up an elementary pull through cache registry (HTTP proxy for Docker Hub)
 
 . *Set up an independent Linux server* that has Docker installed.
 +
@@ -64,10 +68,6 @@ On AWS, for example, you will need to make sure that both Security Groups and th
 === Set up a secure pull through cache registry (HTTPS proxy for Docker Hub)
 
 Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on `machine` executors and remote Docker engines), your pull through cache registry needs to accept connections over HTTPS. These instructions cover setting up a pull through cache that listens for HTTPS connections.
-
-. *Set up a Docker Hub account*, which will be used by the pull through cache registry to access Docker Hub.
-+
-TIP: Setting up a paid account can be a good option to ease the rate limiting further. See also: https://www.docker.com/pricing.
 
 . *Set up an independent Linux server* that has Docker installed.
 +
@@ -132,8 +132,6 @@ sudo bash -c 'cat <<< $(jq ".\"registry-mirrors\" = [\"http://192.0.2.1.or.https
 . *Reload Docker daemon* to apply the configuration.
 +
 `sudo systemctl restart docker.service`
-
-Now you should be able to see that Docker images from Docker Hub are downloaded through the cache registry. As a side effect, you should be able to see that private images for the user, which is configured for the cache registry, can be downloaded without explicit authentications.
 
 == Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Registry
 
