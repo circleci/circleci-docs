@@ -220,8 +220,3 @@ workflows:
 ## GitHub 上のサンプル アプリケーション
 
 fastlane match を使用して iOS アプリのコード署名を構成する方法の例として、[`circleci-demo-ios` GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios)を参照してください。
-
-## 関連項目
-{:.no_toc}
-
-fastlane と CircleCI による CI の設定については、Medium の Sixt Labs Techblog に投稿されている Franz Busch 氏の記事「[Continuous integration and delivery with fastlane and CircleCI (fastlane と CircleCI を活用した継続的インテグレーションおよび継続的デリバリー)](https://medium.com/sixt-labs-techblog/continuous-integration-and-delivery-at-sixt-91ca215670a0)」を参照してください。
