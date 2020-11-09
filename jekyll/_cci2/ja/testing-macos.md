@@ -20,8 +20,6 @@ CircleCI supports testing macOS apps on the macOS executor and by utilising Fast
 
 By setting up automated macOS app testing on CircleCI, you can easily test your app against different versions of macOS and add automation to your development pipeline.
 
-**Note:** Testing macOS apps is only supported on Xcode 11.7 images and newer.
-
 ## Concepts
 
 To test a macOS app, the Xcode Runner requires the ability to take control of the app under test to allow it to spoof user interactions. Over time, Apple has increased security in macOS and now triggering a macOS app UI test will cause a popup permissions dialog to ask whether you wish to allow control. On a local development machine this is not an issue, however, in a headless CI environment, it is not possible to interact with the UI.
@@ -33,6 +31,12 @@ There are two unique `TCC.db` files in use. The first copy resides in the home d
 While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
 While adding permissions can be manually written in your CircleCI config with `sqlite3` commands, [CircleCI provides an Orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this.
+
+## Supported Xcode and macOS Versions
+
+Testing macOS apps is only supported on Xcode 11.7 images and newer as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
+
+For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
 
 ## Setting up a macOS UI Test Project
 
