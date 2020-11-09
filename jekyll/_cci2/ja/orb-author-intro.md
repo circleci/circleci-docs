@@ -58,9 +58,11 @@ CircleCI に登録している組織は、一意の[名前空間]({{site.baseurl
 circleci namespace create <name> <vcs-type> <org-name> [flags]
 ```
 
+where `name` is the namespace you wish to claim, `vcs-type` is the type of your version control system (i.e. `github` or `bitbucket`), and `org-name` is the name of your organization.
+
 ### 次のステップ
 
-Orb の作成について解説した [Orb オーサリング プロセス]({{site.baseurl}}/2.0/orb-author/) ガイドに進んでください。
+Continue on to the  [Orb Authoring Process]({{site.baseurl}}/2.0/orb-author/) guide for information on developing your orb.
 
 
 ## 関連項目
