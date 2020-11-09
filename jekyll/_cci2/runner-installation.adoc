@@ -11,7 +11,7 @@ This page describes the steps required to install CircleCI Runner on Linux and m
 
 At present, the supported platforms are:
 
-- Ubuntu 18.04 running on an x86_64 (AMD64) or ARM64 architecture
+- Ubuntu 18.04 running on an x86_64 (AMD64) or ARM64 architecture.
 - macOS Catalina (10.15.6+) or above, running on an x86_64 architecture.
 
 Running in a container is not supported at this time.
