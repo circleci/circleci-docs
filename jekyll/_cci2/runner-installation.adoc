@@ -17,54 +17,54 @@ toc::[]
 
 There are currently three support levels for CircleCI Runner:
 
-- Supported
-- Untested
-- Untested
+* Supported
+* Untested
+* Untested
 
 ===== Supported
 
-- CircleCI has built and tested runner on a given platform.
-- Support expectation:
+* CircleCI has built and tested runner on a given platform.
+* Support expectation:
 +
-- DCEs can provide support.
-- CircleCI documentation and best practices available.
-- If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
+** DCEs can provide support.
+** CircleCI documentation and best practices available.
+** If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
 
 ===== Untested
 
-- CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
-- Support expectation:
+* CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
+* Support expectation:
 +
-- There is no CircleCI documentation available.
-- Customers can run CircleCI Runner on an untested platform, but the customer is responsible for determining how to run Runner on this platform.
-- If issues arise on the untested platform, DCEs might or might not be able to help.
-- DCEs will provide general guidance (not specific to this platform) on best practices for CircleCI Runner.
-- If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
+** There is no CircleCI documentation available.
+** Customers can run CircleCI Runner on an untested platform, but the customer is responsible for determining how to run Runner on this platform.
+** If issues arise on the untested platform, DCEs might or might not be able to help.
+** DCEs will provide general guidance (not specific to this platform) on best practices for CircleCI Runner.
+** If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
 
 ===== Unsupported
 
-- CircleCI will not provide a runner binary capable of running CircleCI Runner on the platform.
-- Support expectation:
+* CircleCI will not provide a runner binary capable of running CircleCI Runner on the platform.
+* Support expectation:
 +
-- CircleCI Runner will not work on the platform.
-- A customer can try running CircleCI Runner on the platform, but are unlikely to succeed.
-- No CircleCI documentation or DCE support.
+** CircleCI Runner will not work on the platform.
+** A customer can try running CircleCI Runner on the platform, but are unlikely to succeed.
+** No CircleCI documentation or DCE support.
 
 ==== Supported Platforms
 
 The following platforms have been validated to work with CircleCI Runner:
 
-- Intel + Ubuntu
-- Arm64 + Ubuntu
-- Intel + macOS
+* Intel + Ubuntu
+* Arm64 + Ubuntu
+* Intel + macOS
 
 ===== Untested Platforms
 
 The following platforms have not been tested, but are believed to work with CircleCI Runner:
 
-- Intel + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-- Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-- Docker
+* Intel + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
+* Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
+* Docker
 
 NOTE: CircleCI provides no documentation for these platforms.
 
@@ -72,25 +72,22 @@ NOTE: CircleCI provides no documentation for these platforms.
 
 The following platforms are not currently supported to work with CircleCI Runner:
 
-- Intel + Windows
-- Arm + Windows
-- Apple Silicon + macOS
-- Arm32 + Linux
-- Run natively in Kubernetes/Rancher/other container orchestration solutions
+* Intel + Windows
+* Arm + Windows
+* Apple Silicon + macOS
+* Arm32 + Linux
+* Run natively in Kubernetes/Rancher/other container orchestration solutions
 
 ==== Authentication
 
 In order to complete this process you will need to create a namespace, resource-class and authentication token by performing the steps listed below:
 
-. Install the circleci command-line tool.
-
-. Create a namespace for your organization's runner resources under:
-
+1. Install the circleci command-line tool.
+2. Create a namespace for your organization's runner resources under:
++
 NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
-
-. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
-
-. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
+3. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+4. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
@@ -98,19 +95,19 @@ CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
 The installation process assumes you have installted the following utilities on your system:
 
-- curl (installed by default on macOS)
-- sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
-- systemd version 235+ (Linux only)
-- permissions to create a user, and create directories under /opt.
+* curl (installed by default on macOS)
+* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
+* systemd version 235+ (Linux only)
+* permissions to create a user, and create directories under /opt.
 
 === Job Running Requirements
 
 Running jobs requires you have the following tools available on your machine:
 
-- tar
-- gzip
-- coreutils (Linux only)
-- git (recommended, but not required)
+* tar
+* gzip
+* coreutils (Linux only)
+* git (recommended, but not required)
 
 === Installation
 
@@ -160,8 +157,8 @@ sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo cp "$
 
 Please refer to the platform-specific installation instructions:
 
-- linux
-- macOS
+* linux
+* macOS
 
 == Installing the CircleCI Runner on Linux
 
@@ -283,7 +280,7 @@ systemctl status circleci.service --no-pager
 Which should produce output similar to:
 
 ```
-● circleci.service - CircleCI Runner
+circleci.service - CircleCI Runner
    Loaded: loaded (/opt/circleci/circleci.service; enabled; vendor preset: enabled)
    Active: active (running) since Fri 2020-05-29 14:33:31 UTC; 18min ago
  Main PID: 5592 (circleci-launch)
@@ -439,11 +436,11 @@ This value can be used to override the default maximum duration the Task Agent w
 
 Here are few valid examples:
 
-- `72h` - 3 days
-- `1h30m` - 1 hour 30 minutes
-- `30s` - 30 seconds
-- `50m` - 50 minutes
-- `1h30m20s` - An overly specific (yet still valid) duration.
+* `72h` - 3 days
+* `1h30m` - 1 hour 30 minutes
+* `30s` - 30 seconds
+* `50m` - 50 minutes
+* `1h30m20s` - An overly specific (yet still valid) duration.
 
 NOTE: The default value is 5 hours.
 
@@ -455,8 +452,12 @@ The `circleci/runner`image has been created by CircleCI to work with the CircleC
 
 To perform a docker pull of the CircleCI Runner, run the following command:
 
-`docker pull circleci/runner`
+```bash
+docker pull circleci/runner
+````
 
 This CircleCI Runner image can also be used as a host with docker installed by running the following command:
 
-`CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_`
+```bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_
+```
