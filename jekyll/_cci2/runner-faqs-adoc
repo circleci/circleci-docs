@@ -9,85 +9,50 @@ This page answers frequently asked questions for the CircleCI Runner product.
 
 toc::[]
 
-=== How do I get customers on to the preview?
+=== What is the pricing for the CircleCI runner?
 
-See How to run a CircleCI Runner preview
+Currently, CircleCI does not charge for runner usage; however, this will change in the future. If you are a "preview" customer, your account team will keep you informed of any pricing changes for the runner.
 
-=== Can I try CircleCI Runner out for myself?
+=== What is the security model for the runner?
 
-Internal users are welcome to give CircleCI Runner a try.
+When installing the runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
 
-The install docs can be found here:
-https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent/docs/install.html
-
-Give @ask-execution a nudge with your desired `resource_clas`s name and which org you would use it on. The execution team will provide a token (during their working hours, expect up to a 2 day delay depending on what else is going on).
-
-CircleCI is interested to know what sorts of things you want to achieve with this (or whether you just want to see it in action).
-
-=== Do CircleCI Runners support macOS?
-
-CircleCI Runners do not currently fully support macOS. The basics have been successfully tested on macOS, and we expect to support this properly in future.
-
-=== Do CircleCI Runners support Windows?
-
-CircleCI Runners do not currently fully support Windows. The basics have been successfully tested on Windows, and we expect to support this properly in future.
-
-=== Do CircleCI Runners support ARM on Linux?
-
-CircleCI Runners do not currently fully support ARM on Linux. The basics have been successfully tested on ARM on Linux, and we expect to support this properly in future.
-
-=== Do CircleCI Runners support Docker Layer Caching (DLC)?
-
-CircleCI Runners do not currently support DLC; however, in the Runner environments, there should not be a need for DLC:
-
-- DLC is a workaround for not having persistent runner machines to execute on.
-
-- When using CircleCI Runner, you can set up a fleet of machines that persist between jobs. The Docker volumes that have been downloaded in a previous job will still be accessible.
-
-NOTE: In the runner case, the customer is responsible for setting up the runner machines. So if a customer chooses to use persistent machines, they can retrieve the volumes caches on those machines, but the customer needs to clean up the volumes periodically to prevent the machine’s disk from filling up.
-
-=== Do CircleCI Runners support a longer maximum runtime?
-
-CircleCI Runners do not currently support extending the maximum runtime. There is no fundamental reason this could not be supported in the future if there is a sufficient demand or reasons.
-
-=== What is the security model for CircleCI Runner?
-
-When installing CircleCI Runner, you may select the user that executes jobs. It is up to you to ensure that this user only has permissions you are comfortable letting jobs use. 
-
-NOTE: allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
+NOTE: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
 
 === How do I install dependencies needed for my jobs?
 
 There are two main approaches available for installing dependencies:
 
-=== Allow the jobs to install their own dependencies
+==== Allow the jobs to install their own dependencies
 
-This approach is the most flexible and will require giving the jobs sufficient privileges to install tools; or to install the tools in a non-overlapping manner (eg. into the working directory).
+This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner (eg. into the working directory).
 
-=== Pre-install dependencies on the runner machine
+==== Pre-install dependencies on the runner machine
 
-This approach is the most secure; however, it means that if the job’s dependencies change, the CircleCI Runner machine must be reconfigured
+This approach is the most secure; however, this means that if the job’s dependencies change, the runner machine must be reconfigured.
 
 === What connectivity is required?
 
-In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to runner.circleci.com, circleci-binary-releases.s3.amazonaws.com are required.
+In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
 
-No inbound connectivity is required by CircleCI Runner. Any other required connectivity is dependent on the content of the jobs themselves. Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to circle-production-customer-artifacts.s3.amazonaws.com.
+NOTE: No inbound connectivity is required by runner. Any other required connectivity is dependent on the content of the jobs themselves.
 
-=== How do caching and workspaces and artifacts work with CircleCI Runner?
+CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
-Caches, workspaces and artifacts will be stored in the `us-east-1` region of S3. If your runners are not in this region, you may see reduced performance. Although CircleCI is not currently charging for runner usage, the transfer and storage of data will incur costs when pricing is introduced.
+=== How do caching and workspaces and artifacts work with the runner?
 
-If you would prefer to take complete control of artifact storage, CircleCI recommends avoiding the built-in steps and uploading the artifacts directly to your chosen storage backend.
+Caches and workspaces and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. Although we are not currently charging for runner usage, the transfer and storage of data will incur costs when pricing is introduced.
+
+If you would prefer to take complete control of artifact storage, we recommend avoiding the built-in steps and uploading the artifacts directly to your chosen storage backend.
 
 === What are the best practices for managing state between jobs?
 
-The CircleCI Runner itself is unopinionated about this. Runner can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of its own working directory.
+The runner itself is unopinionated about this. Runner can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of it's working directory.
 
-In general, CircleCI recommends that jobs rely on as little state as possible, to improve their reproducibility. An effective way to do this is to put cleanup steps at the start of a job - so that they are guaranteed to run regardless of what happened to a previous job.
+In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
 
 It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time.
 
 === Can I run multiple agents on a single host?
 
-Yes, by running multiple replicas of the 'launch-agent' with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you desire. Take care to ensure these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
+Yes, by running multiple replicas of the `launch-agent` with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
