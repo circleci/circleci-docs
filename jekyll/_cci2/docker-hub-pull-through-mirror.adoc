@@ -169,6 +169,44 @@ EOD
 +
 `sudo docker restart vm-service`
 
+== How to test your setup?
+
+=== Use private images without explicit authentication
+
+If the Docker ID for the cache registry has a private image, the private image should be accessible without explicit end-user authentication.
+
+Below is a sample config to test the access (assume that the cache registry uses Docker ID `yourmachineaccount`, and there is a private image `yourmachineaccount/private-image-with-docker-client`):
+
+[source,yaml]
+----
+version: 2
+
+jobs:
+  remote-docker:
+    docker:
+      - image: yourmachineaccount/private-image-with-docker-client # A copy of library/docker
+    steps:
+      - setup_remote_docker
+      - run: docker pull yourmachineaccount/private-image-with-docker-client
+
+  machine:
+    machine: true
+    steps:
+      - run: docker pull yourmachineaccount/private-image-with-docker-client
+
+workflows:
+  version: 2
+
+  run:
+    jobs:
+      - remote-docker
+      - machine
+----
+
+=== Check logs on the cache registry
+
+By running `sudo docker logs through-cache` (or `sudo docker logs through-cache-secure` if you have set up a secure registry) you can see log outputs from your cache registry. If it is operational, there should be messages that the registry is responding to the requests for manifests and blobs with HTTP status code `200`.
+
 == How to revert the setup?
 
 === Disarm Nomad clients
