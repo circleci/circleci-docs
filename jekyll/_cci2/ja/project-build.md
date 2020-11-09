@@ -18,12 +18,12 @@ After a software repository on GitHub or Bitbucket is authorized and added as a 
 
 ## プロジェクトの追加
 
-A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select **Add Project** from the CircleCI application to enter the Projects dashboard, from where you can set up and follow any projects you have access to.
+A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select **Projects** from the CircleCI application sidebar to enter the Projects dashboard, where you can set up and follow any projects you have access to.
 
 On the Projects Dashboard, you can either:
 
 * *Set Up* any project that you are the owner of in your VCS 
-* *Follow* any project in your organization to gain access to its pipelines and to subscribe to \[email notifications\]({{ site.baseurl }}/2.0/notifications/) for the project's status.
+* *Follow* any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project's status.
 
 ## Projects Dashboard
 
@@ -49,11 +49,7 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 ## Viewing and Navigating Pipelines
 
-Your pipeline appears on the [Pipelines page]({{site.baseurl}}/2.0/pipelines) of the CircleCI app when a new commit is pushed to your repository.
-
-You can view workflows or single jobs by expanding the pipeline and clicking in on any workflow or job descriptors.
-
-![Navigating Pipelines]({{ site.baseurl }}/assets/img/docs/navigating_pipelines.png)
+Your pipeline appears on the Dashboard of the CircleCI app when a new commit is pushed to your repository. You can view workflows or single jobs by expanding the pipeline and clicking in on any workflow or job descriptors.
 
 When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
 
