@@ -24,11 +24,11 @@ These setup instructions are divided into three parts: Setting up a pull through
 
 NOTE: The Services machine does not need to be configured to use the mirror. The Services machine does not pull Docker images regularly (it pulls images only upon initial setup and upgrade processes), and most images are pulled from Replicated. Hence it has few chances to hit the rate limit.
 
-== Set up a pull through cache registry
+== Set Up a Pull Through Cache Registry
 
 This section covers setting up a pull through cache registry, which works as a mirror and reverse proxy for Docker Hub. Two types of pull through cache registry are presented: The elementary and easier-to-setup version using HTTP, and the more secure option using HTTPS. Either option is functional for most cases, but you might need the more secure option in certain cases.
 
-=== Prerequisites: Set up a Docker Hub account
+=== Prerequisites: Set Up Docker Hub Account
 
 Before setting up a pull through cache registry, you need to *set up a Docker Hub account*. The account will be used by the pull through cache registry to authenticate itself with Docker Hub.
 
@@ -36,7 +36,7 @@ WARNING: We recommend that you set up a dedicated account. Resources that the ac
 
 NOTE: While a free account can be used, setting up a paid account would be a good option to ease the rate limiting further: Paid accounts have an unlimitted allowance of image pulls. See also: https://www.docker.com/pricing.
 
-=== Set up an elementary pull through cache registry (HTTP proxy for Docker Hub)
+=== Set Up an Elementary Pull Through Cache Registry (HTTP Proxy for Docker Hub)
 
 . *Set up an independent Linux server* that has Docker installed.
 +
@@ -65,7 +65,7 @@ sudo docker run \
 +
 On AWS, for example, you will need to make sure that both Security Groups and the firewall at the OS level are configured correctly to accept connections from Nomad clients over HTTP.
 
-=== Set up a secure pull through cache registry (HTTPS proxy for Docker Hub)
+=== Set Up a Secure Pull Through Cache Registry (HTTPS Proxy for Docker Hub)
 
 Under certain circumstances (especially when you are enabling https://docs.docker.com/develop/develop-images/build_enhancements/[BuildKit] on `machine` executors and remote Docker engines), your pull through cache registry needs to accept connections over HTTPS. These instructions cover setting up a pull through cache that listens for HTTPS connections.
 
@@ -108,7 +108,7 @@ sudo docker run \
 +
 On AWS, for example, you will need to make sure that both Security Groups and the firewall at the OS level are configured correctly to accept connections from Nomad clients and VMs for `machine`/`setup_remote_docker` jobs over HTTPS.
 
-==== Plan for renewal of TLS certificates
+==== Plan for Renewal of TLS Certificates
 
 You will need to renew TLS certificates periodically. These are the steps required to renew certificates.
 
@@ -118,7 +118,7 @@ You will need to renew TLS certificates periodically. These are the steps requir
 
 Technically, this can be automated. For example, if you are using Let's Encrypt for your certificates, you can setup a cron task that executes `certbot renew` and the steps above.
 
-== Configure Nomad clients to use the pull through cache registry (run this for _each_ Nomad client)
+== Configure Nomad Clients to use the Pull Through Cache Registry (run for _each_ Nomad client)
 
 . Run the command below to *configure the `registry-mirrors` option for the Docker daemon*.
 +
@@ -169,9 +169,9 @@ EOD
 +
 `sudo docker restart vm-service`
 
-== How to test your setup?
+== Testing your Setup
 
-=== Use private images without explicit authentication
+=== Use Private Images without Explicit Authentication
 
 If the Docker ID for the cache registry has a private image, the private image should be accessible without explicit end-user authentication.
 
@@ -203,13 +203,13 @@ workflows:
       - machine
 ----
 
-=== Check logs on the cache registry
+=== Check Logs on the Cache Registry
 
 By running `sudo docker logs through-cache` (or `sudo docker logs through-cache-secure` if you have set up a secure registry) you can see log outputs from your cache registry. If it is operational, there should be messages that the registry is responding to the requests for manifests and blobs with HTTP status code `200`.
 
-== How to revert the setup?
+== Reverting the Setup
 
-=== Disarm Nomad clients
+=== Disarm Nomad Clients
 
 Follow the steps below on _each_ Nomad client.
 
