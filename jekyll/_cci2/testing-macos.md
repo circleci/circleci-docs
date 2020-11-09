@@ -33,7 +33,7 @@ While adding permissions can be manually written in your CircleCI config with `s
 
 ## Supported Xcode and macOS Versions
 
-Testing macOS apps is only supported on Xcode 11.7 images and newer.
+Testing macOS apps is only supported on Xcode 11.7 images and newer due as it requires System Integrity Protection (SIP) to be disabled. Older images do not have SIP disabled and are therefore unsuitable for testing macOS apps.
 
 For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
 
