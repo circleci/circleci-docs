@@ -603,6 +603,8 @@ ja:
         - name: Using Docker Authenticated Pulls
           i18n_name: Dockerの認証付きプルの使用
           link: ja/2.0/private-images/
+        - name: Xcodeイメージのリリース
+          link: ja/2.0/xcode-policy/
 
     - name: ADVANCED CONFIG
       i18n_name: 高度な設定
