@@ -1,14 +1,19 @@
 = CircleCI Server Documentation
 
-Server documentation is written in ASCIIDOC and built for the web and PDF using ASCIIDOCTOR + Jekyll and PDF plugins.
+Server documentation is written in ASCIIDOC and built for the web and PDF using https://github.com/asciidoctor/jekyll-asciidoc[jekyll-asciidoc] and https://github.com/asciidoctor/asciidoctor-pdf[asciidoctor-pdf] plugins.
 
 == Document Structure
 Server documentation is provided in two formats:
 
-* HTML on the main CircleCI docs site generated with Jekyll, showing the current docs 
-* PDFs of our Operations and Installation guides are provided for each feature release
+* HTML on the main CircleCI docs site showing the current docs for server 2.x 
+* PDFs of our Operations and Installation guides are provided for each feature release (scroll down to the bottom of the Server Administration section in the main navigation)
 
-Each topic is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for the ops guide (`_ops-guide.adoc`) and the installation guide (`_aws-install.adoc`) that combine the separate topics using: `include::jekyll/_cci2/overview.adoc[]` etc.
+Each topic/guide is written in a separate `.adoc` file, and for the purposes of PDF generation there are master `.adoc` files for: 
+
+* Operations Guide (`_ops-guide.adoc`)
+* Installation Guide (`_aws-install.adoc`) 
+
+These "master files" combine the separate topics using the `include::jekyll/_cci2/overview.adoc[]` etc. syntax.
 
 NOTE: Master asciidoc files that are **only** used for creating PDFs have an `_` at the start of the filenames to prevent Jekyll from converting them to HTML for the main site.
 
@@ -24,11 +29,9 @@ Then, from the top of the circleci-docs directory, run:
 
 You will then find the PDFs in: `releases/tmp`
 
-This script is run as part of the CCI build every time you push a commit, then the PDFs can be found in the build artifacts, accessible from the CircleCI UI.
-
 == Build PDFs with CI
 
-The CI config for CircleCI docs is configured to build the Operator and Installation guides on commit to any branch that starts with `server/`. The PDFs appear as build artifacts and can be accessed from the CircleCI App
+The CI config for CircleCI docs is configured to build the Operator and Installation guides on commit to any branch that starts with `server/*`. The PDFs appear as build artifacts and can be accessed from the CircleCI App
 
 == Some Notes on Formatting in Asciidoc
 See the Asciidoctor user manual for all available features: https://asciidoctor.org/docs/user-manual/. 
@@ -124,7 +127,6 @@ docs@circleci.com                                                               
 :pagenums:                                                                       // print page numbers in PDF output
 :idprefix:                                                                       // by default IDs generated from section titles start with _ ... this removes it
 :idseparator: -                                                                  // use - between words for IDs generated from section titles
-:sectanchors:                                                                    // adds anchors in front of section titles 
 :autofit-option:                                                                 // auto-fit code blocks to the page width  
 ```     
 
@@ -143,6 +145,14 @@ Liquid, used for the Jekyll content, is not rendered during the PDF conversion p
 \ifndef::pdf[{% raw %}]
 code example
 \ifndef::pdf[{% endraw %}]
+```
+
+== Highlight Content (useful for to do items so they don't get missed and published!)
+
+To highlight some text in the html/pdf output just enclose it in #, as follows, leaving no gaps:
+
+```
+#text to highlight#
 ```
 
 The script that builds the PDFs applies an attribute called `pdf` during the build - so any content that uses `ifndef::pdf` will **not** be included in the generated PDFs. For further information on usage and the inverse `ifdef::pdf` see the https://asciidoctor.org/docs/user-manual/#conditional-preprocessor-directives[Conditional Preprocessor Directives] section of the Asciidoctor user manual. **This same process can be used to create any type of content to appear on just one of our platforms.**
