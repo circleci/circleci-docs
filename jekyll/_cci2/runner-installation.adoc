@@ -4,10 +4,12 @@
 :icons: font
 :toc: macro
 :toc-title:
+version:
+- Cloud
 
-NOTE: CircleCI Runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
-This page describes how to install CircleCI Runner on Linux and macOS platforms.
+This page describes how to install CircleCI runner on Linux and macOS platforms.
 
 toc::[]
 
@@ -36,23 +38,23 @@ There are currently three support levels for CircleCI Runner:
 * Support expectation:
 +
 ** There is no CircleCI documentation available.
-** Customers can run CircleCI Runner on an untested platform, but the customer is responsible for determining how to run Runner on this platform.
+** Customers can run CircleCI runner on an untested platform, but the customer is responsible for determining how to run runner on this platform.
 ** If issues arise on the untested platform, DCEs might or might not be able to help.
-** DCEs will provide general guidance (not specific to this platform) on best practices for CircleCI Runner.
+** DCEs will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
 ** If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
 
 ===== Unsupported
 
-* CircleCI will not provide a runner binary capable of running CircleCI Runner on the platform.
+* CircleCI will not provide a runner binary capable of running CircleCI runner on the platform.
 * Support expectation:
 +
-** CircleCI Runner will not work on the platform.
-** A customer can try running CircleCI Runner on the platform, but are unlikely to succeed.
+** CircleCI runner will not work on the platform.
+** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
 ** No CircleCI documentation or DCE support.
 
 ==== Supported Platforms
 
-The following platforms have been validated to work with CircleCI Runner:
+The following platforms have been validated to work with CircleCI runner:
 
 * Intel + Ubuntu
 * Arm64 + Ubuntu
@@ -60,7 +62,7 @@ The following platforms have been validated to work with CircleCI Runner:
 
 ===== Untested Platforms
 
-The following platforms have not been tested, but are believed to work with CircleCI Runner:
+The following platforms have not been tested, but are believed to work with CircleCI runner:
 
 * Intel + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
 * Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
@@ -70,7 +72,7 @@ NOTE: CircleCI provides no documentation for these platforms.
 
 ===== Unsupported Platforms
 
-The following platforms are not currently supported to work with CircleCI Runner:
+The following platforms are not currently supported to work with CircleCI runner:
 
 * Intel + Windows
 * Arm + Windows
@@ -93,7 +95,7 @@ CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
 ==== Installation Tooling
 
-The installation process assumes you have installted the following utilities on your system:
+The installation process assumes you have installed the following utilities on your system:
 
 * curl (installed by default on macOS)
 * sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
@@ -160,11 +162,11 @@ Please refer to the platform-specific installation instructions:
 * linux
 * macOS
 
-== Installing the CircleCI Runner on Linux
+== Installing the CircleCI runner on Linux
 
-=== Create the CircleCI Runner configuration
+=== Create the CircleCI runner configuration
 
-The recommended CircleCI Runner configuration for Linux is:
+The recommended CircleCI runner configuration for Linux is:
 
 ```yaml
 api:
@@ -176,7 +178,7 @@ runner:
   cleanup_working_directory: true
 ```
 
-=== Install the CircleCI Runner configuration
+=== Install the CircleCI runner configuration
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`.
 
@@ -261,7 +263,7 @@ systemctl enable $prefix/circleci.service
 
 === Start the service
 
-When the CircleCI Runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
 
 ```bash
 systemctl start circleci.service
@@ -298,7 +300,7 @@ journalctl -u circleci
 
 == CircleCI Runner Installation macOS
 
-=== Create a CircleCI Runner configuration
+=== Create a CircleCI runner configuration
 
 Choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`.
 
@@ -446,17 +448,17 @@ NOTE: The default value is 5 hours.
 
 === Docker Installation
 
-The `circleci/runner`image has been created by CircleCI to work with the CircleCI Runner feature. Currently the `launch-agent` tag can be used to run the `launch-agent` in a container co-located with the CircleCI job (e.g. the job will run inside the same container). In the future, a variant will be added that runs the `launch-agent` on the host and will run each job inside its own container, via the `task-agent`.
+The `circleci/runner`image has been created by CircleCI to work with the CircleCI runner feature. Currently the `launch-agent` tag can be used to run the `launch-agent` in a container co-located with the CircleCI job (e.g. the job will run inside the same container). In the future, a variant will be added that runs the `launch-agent` on the host and will run each job inside its own container, via the `task-agent`.
 
 ==== Getting Started
 
-To perform a docker pull of the CircleCI Runner, run the following command:
+To perform a docker pull of the CircleCI runner, run the following command:
 
 ```bash
 docker pull circleci/runner
 ````
 
-This CircleCI Runner image can also be used as a host with docker installed by running the following command:
+This CircleCI runner image can also be used as a host with docker installed by running the following command:
 
 ```bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_
