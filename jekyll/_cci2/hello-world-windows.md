@@ -165,7 +165,7 @@ jobs:
 
 ```
 
-# Example Application
+# Example application
 
 Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
 
@@ -232,7 +232,7 @@ Next, we run two steps: one to build the executable for Windows 10, and another 
 
 In our last step, we store the build executable as an artifact, making it accessible with the CircleCI web application or API.
 
-# SSH Into Your Build
+# SSH into your build
 
 It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:
 
@@ -256,7 +256,7 @@ The available options are:
 
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
-# Next Steps
+# Next steps
 
 Also, consider reading documentation on some of CircleCI’s features:
 
@@ -264,7 +264,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
 
-# Software pre-installed in the Windows image
+# Software pre-installed in the windows image
 
 **Windows Server 2019 with Visual Studio 2019**
 

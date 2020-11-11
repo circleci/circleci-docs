@@ -48,7 +48,7 @@ The `config-translator` endpoint does **not** currently support translation of t
      ```
       The default is to use the default branch that is set in your VCS, typically `master`.
       
-## See Also
+## See also
 
  [Tips For Migrating from 1.0 to 2.0]({{site.baseurl}}/2.0/migration/)
 

@@ -56,7 +56,7 @@ jobs:
       - run: docker build .
 ``` 
 
-## How DLC Works
+## How DLC works
 
 DLC caches your Docker image layers by creating an external volume and attaching it to the instances that execute the `machine` and Remote Docker jobs. The volume is attached in a way that makes Docker save the image layers on the attached volume. When the job finishes, the volume is disconnected and re-used in a future job. This means that the layers downloaded in a previous job with DLC will be available in the next job that uses the same DLC volume.
 
@@ -70,10 +70,10 @@ CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50
 
 ![Docker Layer Caching]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
-### Scope of Cache
+### Scope of cache
 With DLC enabled, the entirety of `/var/lib/docker` is cached to the remote volume, which also includes any custom networks created in previous jobs.
 
-### Remote Docker Environment
+### Remote docker environment
 {:.no_toc}
 
 To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file:
@@ -89,7 +89,7 @@ If you run many concurrent jobs for the same project that depend on the same env
 
 **Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
 
-### Machine Executor
+### Machine executor
 {:.no_toc}
 
 Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
@@ -109,14 +109,14 @@ Let's use the following Dockerfile to illustrate how Docker Layer Caching works.
 ```
 FROM elixir:1.6.5
 
-# make apt non-interactive
+# Make apt non-interactive
 RUN echo 'APT::Get::Assume-Yes "true";' > /etc/apt/apt.conf.d/90circleci \
   && echo 'DPkg::Options "--force-confnew";' >> /etc/apt/apt.conf.d/90circleci
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# man directory is missing in some base images
-# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
+# Man directory is missing in some base images
+# Https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=863199
 RUN apt-get update \
   && mkdir -p /usr/share/man/man1 \
   && apt-get install -y \
@@ -124,14 +124,14 @@ RUN apt-get update \
     locales sudo openssh-client ca-certificates tar gzip parallel \
     net-tools netcat unzip zip bzip2 gnupg curl wget
 
-# set timezone to UTC
+# Set timezone to utc
 RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 
-# use unicode
+# Use unicode
 RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 
-# install docker
+# Install docker
 RUN set -ex \
   && export DOCKER_VERSION=$(curl --silent --fail --retry 3 \
     https://download.docker.com/linux/static/stable/x86_64/ | \
@@ -144,13 +144,13 @@ RUN set -ex \
   && mv /tmp/docker/* /usr/bin \
   && rm -rf /tmp/docker /tmp/docker.tgz
 
-# install docker-compose
+# Install docker-compose
 RUN curl --silent --show-error --location --fail --retry 3 --output /usr/bin/docker-compose \
     https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/docker-compose-latest \
   && chmod +x /usr/bin/docker-compose \
   && docker-compose version
 
-# setup circleci user
+# Setup circleci user
 RUN groupadd --gid 3434 circleci \
   && useradd --uid 3434 --gid circleci --shell /bin/bash --create-home circleci \
   && echo 'circleci ALL=NOPASSWD: ALL' >> /etc/sudoers.d/50-circleci \
@@ -184,7 +184,7 @@ On subsequent commits, if our example Dockerfile has not changed, then DLC will 
 Now, let's say we add the following step to our Dockerfile, in between the `# use unicode` and `# install docker` steps:
 
 ```
-# install jq
+# Install jq
 RUN JQ_URL="https://circle-downloads.s3.amazonaws.com/circleci-images/cache/linux-amd64/jq-latest" \
   && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \
   && chmod +x /usr/bin/jq \
@@ -197,7 +197,7 @@ However, because our `#install jq` step is new, it and all subsequent steps will
 
 If we were to change the first step in our example Dockerfile—perhaps we want to pull from a different Elixir base image—then our entire cache for this image would be invalidated, even if every other part of our Dockerfile stayed the same.
 
-## Video: Overview of Docker Layer Caching
+## Video: overview of docker layer caching
 {:.no_toc}
 
 In the video example, the job runs all of the steps in a Dockerfile with the `docker_layer_caching: true` for the `setup_remote_docker` step. On subsequent runs of that job, steps that haven't changed in the Dockerfile, will be reused. So, the first run takes over two minutes to build the Docker image. If nothing changes in the Dockerfile before the second run, those steps happen instantly, in zero seconds.

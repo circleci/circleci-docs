@@ -20,7 +20,7 @@ This document will walk you through a Scala application [`.circleci/config.yml`]
 
 This document assumes that your [project’s AWS Permission settings](https://circleci.com/docs/2.0/deployment-integrations/#aws) are configured with valid AWS keys that are permitted to read and write to an S3 bucket. The examples in this post upload build packages to the specified S3 bucket.
 
-## Sample Scala Project Source Code
+## Sample Scala project source code
 
 The source code for this sample application is in the [Public samplescala GitHub repo](https://github.com/ariv3ra/samplescala).
 
@@ -35,7 +35,7 @@ touch .circleci/config.yml
 
 These commands create a directory named `.circleci` & the next command creates a new file named `config.yml` within the `.circleci` directory.  Again you **must** use the names .circleci for the dir and config.yml.  Learn more about the [version 2.0 prerequisites here]({{ site.baseurl }}/2.0/migrating-from-1-2/).
 
-### Scala config.yml File
+### Scala config.yml file
 
 To get started, open the newly created `config.yml` in your favorite text editor and paste the following CircleCI 2.0 schema into the file. Below is the complete 2.0 configuration:
 
@@ -86,7 +86,7 @@ jobs:
               aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 ```
 
-## Schema Walkthrough
+## Schema walkthrough
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -215,7 +215,7 @@ steps:
 
 The deploy command is another multi-line execution.
 
-## See Also 
+## See also
 {:.no_toc}
 
 - Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.

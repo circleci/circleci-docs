@@ -51,6 +51,6 @@ Here's an example:
 ```
 {% endraw %}
 
-## See Also
+## See also
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

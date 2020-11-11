@@ -14,14 +14,14 @@ This document describes how to skip or cancel builds in the following sections.
 * TOC
 {:toc}
 
-## Skipping a Build
+## Skipping a build
 
 By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag in the first line of the body of the commit or the commit's title. This not only skips the marked commit, but also **all other commits** in the push.
 
 **Note:**
 This feature is not supported for fork PRs. Scheduled workflows will not be cancelled even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
-### Example Commit Title
+### Example commit title
 {:.no_toc}
 
 ```bash
@@ -36,7 +36,7 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
 
 When pushed to a VCS, this commit will not be built on CircleCI because of the `[ci skip]` in the commit title.
 
-### Example Commit Description
+### Example commit description
 {:.no_toc}
 
 ```bash
@@ -59,7 +59,7 @@ When pushed to a VCS, this commit will not be built on CircleCI because of the `
 **Note:**
 If you push multiple commits at once, a single `[ci skip]` or `[skip ci]` will skip the build **for all commits**.
 
-## Auto Cancelling a Redundant Build
+## Auto cancelling a redundant build
 
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to finish building before the most recent version starts.
 
@@ -67,7 +67,7 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 
 **Note:** Your project's default branch (usually `master`) will never auto-cancel builds. 
 
-### Steps to Enable Auto-Cancel for Pipelines Triggered by Pushes to GitHub or the API
+### Steps to enable auto-cancel for pipelines triggered by pushes to github or the API
 {:.no_toc}
 
 **Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
@@ -81,11 +81,11 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 Projects for which auto-cancel is enabled in the Advanced Settings will have pipelines and workflows on non-default branches cancelled when a newer build is triggered on that same branch, with the following exceptions:
 - Scheduled workflows and Re-run workflows will not be cancelled.
 
-## Auto Cancel for CircleCI Server installations
+## Auto cancel for CircleCI server installations
 
 CircleCI Server does not currently use the pipelines feature, and as a result the Auto Cancel Builds feature only works for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
 
-### Steps to Enable Auto-Cancel for CircleCI Server Installations
+### Steps to enable auto-cancel for circleci server installations
 {:.no_toc}
 
 1. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.

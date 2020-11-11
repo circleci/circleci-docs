@@ -30,7 +30,7 @@ It is possible to edit the webhooks in GitHub or Bitbucket Cloud to restrict eve
 
 Refer to CircleCI documentation of [Workflows filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows) for how to build tag pushes. 
 
-### Add a .circleci/config.yml File
+### Add a .circleci/config.yml file
 {:.no_toc}
 
 After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository, CircleCI immediately checks your code out and runs your first job along with any configured tests. For example, if you are working on a Rails project using Postgres specifications and features you might configure the following job run step:
@@ -59,7 +59,7 @@ Integrated status also appears on the pull request screen, to show that all test
 
 ![Status Badge After PR]({{ site.baseurl }}/assets/img/docs/status_check.png)
 
-## Best Practices for Keys
+## Best practices for keys
 
 - Use Deploy Keys whenever possible.
 - When Deploy Keys cannot be used, [Machine User Keys](#controlling-access-via-a-machine-user) must be used, and have their access restricted to the most limited set of repos and permissions necessary.
@@ -70,7 +70,7 @@ Integrated status also appears on the pull request screen, to show that all test
     3. Regenerate the keys in CircleCI project.
 - Ensure no developer has access to a build in a repo with a User Key that requires more access than they have.
 
-## Renaming Orgs and Repositories
+## Renaming orgs and repositories
 
 If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
 
@@ -81,7 +81,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 **Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
 
-## Enable your Project to Check Out Additional Private Repositories
+## Enable your project to check out additional private repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a
 GitHub user key in addition to the deploy key because each deploy key is valid
@@ -116,7 +116,7 @@ ERROR: Repository not found.
 Permission denied (publickey).
 ```
 
-## Controlling Access Via a Machine User
+## Controlling access via a machine user
 
 For fine-grained access to multiple repositories,
 it is best practice to create a machine user
@@ -164,7 +164,7 @@ Now, CircleCI will use the machine user's SSH key
 for any Git commands
 that run during your builds.
 
-## Permissions Overview
+## Permissions overview
 
 CircleCI requests the following permissions from your VCS provider,
 as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
@@ -193,7 +193,7 @@ permission for listing all a user's repositories.
 If you feel strongly about reducing the number of permissions CircleCI uses,
 consider contacting your VCS provider to communicate your concerns.
 
-### Permissions for Team Accounts
+### Permissions for team accounts
 {:.no_toc}
 
 This section provides an overview of the possible team and individual account choices available to meet various business needs:
@@ -204,7 +204,7 @@ This section provides an overview of the possible team and individual account ch
 
 3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
-### How to Re-enable CircleCI for a GitHub Organization
+### How to re-enable CircleCI for a GitHub organization
 {:.no_toc}
 
 This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
@@ -224,7 +224,7 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## Deployment Keys and User Keys
+## Deployment keys and user keys
 
 **What is a deploy key?**
 
@@ -240,7 +240,7 @@ If you want to push to the repository from your builds, you will need a deployme
 
 A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
-### Creating a GitHub Deploy Key
+### Creating a GitHub deploy key
 {:.no_toc}
 
 In this example,
@@ -285,7 +285,7 @@ jobs:
 When you push to your GitHub repository from a job,
 CircleCI will use the SSH key you added.
 
-### Creating a Bitbucket User Key
+### Creating a BitBucket user key
 {:.no_toc}
 
 Bitbucket does not currently provide CircleCI with an API

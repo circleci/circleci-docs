@@ -21,7 +21,7 @@ After checks are enabled, CircleCI workflow and job status is reported under the
 
 **Note:** GitHub does not currently provide a granular way for you to rerun workflows. Because CircleCI uses checks that are mapped to workflows (e.g. a single configuration may have one or more workflows), when you select the Re-run checks button, you will automatically re-run all checks, regardless of whether you selected "re-run failed checks" or "rerun all checks" from the Re-run checks button. 
 
-## To Enable GitHub Checks
+## To enable GitHub checks
 
 To use the CircleCI Check integration, you first need to navigate to the Org Setting, then authenticate the repository to use CircleCI Checks as follows:
 
@@ -40,7 +40,7 @@ To use the CircleCI Check integration, you first need to navigate to the Org Set
 
 After installation completes, the Checks tab in GitHub will be populated with workflow run status information. 
 
-## Checks Status Reporting
+## Checks status reporting
 
 CircleCI reports the status of workflows and all corresponding jobs under the Checks tab on GitHub. Additionally, Checks provides a button to rerun each workflow from GitHub Checks tab. 
 
@@ -48,7 +48,7 @@ After the rerun is initiated, CircleCI reruns the workflow from beginning and re
 
 **Note:** Your project will stop receiving job level status after GitHub Checks is turned on. You can change this in the GitHub Status updates section of the Project Settings > Advanced Settings page. 
 
-## To Disable GitHub Checks for a Project
+## To disable GitHub checks for a project
 
 To disable the CircleCI Check integration, navigate to the "Organization Settings" page, then remove the repositories using CircleCI Checks as follows:
 
@@ -64,14 +64,14 @@ To disable the CircleCI Check integration, navigate to the "Organization Setting
 
 ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/screen_github_checks_disable_new_ui.png)
 
-## To Uninstall Checks for the Organization
+## To uninstall checks for the organization
 
 1. Click the Settings tab in the CircleCI app main menu.
 2. Select VCS.
 3. Click the Manage GitHub Checks button.
 4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
 
-## GitHub Checks Waiting for Status in GitHub
+## Github checks waiting for status in github
 
 `ci/circleci:build — Waiting for status to be reported`
 

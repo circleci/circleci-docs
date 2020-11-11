@@ -13,12 +13,12 @@ version:
 
 There are a few great tricks for triggering and scheduling builds in the following snippets!
 
-## Skip Builds 
+## Skip builds
 
 By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a [ci skip] or [skip ci] tag anywhere in a commit’s title or description. 
 
 
-## Trigger a Job Using curl and Your API Token
+## Trigger a job using curl and your API token
 
 ```
 curl -u ${CIRCLE_API_USER_TOKEN}: \
@@ -26,7 +26,7 @@ curl -u ${CIRCLE_API_USER_TOKEN}: \
      https://circleci.com/api/v1.1/project/<vcs-type>/<org>/<repo>/tree/<branch>
 ```
 
-## Scheduled Builds 
+## Scheduled builds
 
 ```
 workflows:
@@ -48,7 +48,7 @@ workflows:
       - coverage
 ```      
 
-## Manual Approval
+## Manual approval
 
 ```
 workflows:
@@ -71,7 +71,7 @@ workflows:
             - hold
 ```
 
-## Trigger Docker Builds in Dockerhub
+## Trigger docker builds in Dockerhub
 
 ```yaml
 version: 2
@@ -90,6 +90,6 @@ jobs:
           command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
 ```
 
-## See Also
+## See also
 
 [Workflows]({{ site.baseurl }}/2.0/workflows/)

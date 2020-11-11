@@ -120,7 +120,7 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 
 ```
 
-## Creating Badges for Private Repositories
+## Creating badges for private repositories
 
 
 **NOTE:** To create a status badge for a private project you will need to
@@ -150,6 +150,6 @@ To use the shield style, replace `style=svg` with `style=shield` in the link you
 ![Failing shield version]({{ site.baseurl }}/assets/img/docs/shield-failing.png)
 
  
-## See Also
+## See also
 
 [Status]({{ site.baseurl }}/2.0/status/)

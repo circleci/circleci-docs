@@ -18,7 +18,7 @@ Your 2.0 `config.yml` files should work as-is on Server, assuming they are worki
 
 Custom `machine` executor AMIs and configurable instance types are defined in a specific way, so consider how your teams may be using [configurable resources](https://circleci.com/docs/2.0/configuration-reference/#resource_class) (`resource_class`) on SaaS when defining your Server build cluster.
 
-## Limitations 
+## Limitations
 
 - Currently the `macos` executor is not supported on Server.
 - Bitbucket is not supported on Server; GitHub/GitHub Enterprise is the only supported VCS.

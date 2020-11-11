@@ -17,7 +17,7 @@ version:
 
 This document outlines the CircleCI Xcode release, update and deprecation policy. By having a defined Xcode image policy, we ensure that we are able to continue releasing new images quickly and easily, including beta images.
 
-## Xcode Image Retention and Deprecation
+## Xcode image retention and deprecation
 
 We aim to retain 4 major versions of Xcode, with more recent versions having a larger number of images to choose from.
 
@@ -47,7 +47,7 @@ When an image is selected for deprecation and removal, we will create an announc
 
 We will never automatically redirect requests for images to different major.minor versions, so when one of these images is removed, jobs will start to fail if the config has not been updated.
 
-## Xcode Patches
+## Xcode patches
 
 We retain the latest patch version of each Xcode `major.minor` version we support. Once a new patch version has been released, we will deprecate the previous patch version and redirect all requests to the new patch.
 
@@ -57,7 +57,7 @@ As patches are generally backwards compatible, redirects will be put in place wi
 
 When Xcode `12.0.1` is released, we will remove the previous patch version, `12.0.0`, and automatically redirect all requests for `12.0.0` to `12.0.1`.
 
-## Beta Image Support
+## Beta image support
 
 We endeavour to make beta Xcode versions available on the macOS executor as soon as we can, to allow developers to test their apps ahead of the next stable Xcode release.
 
@@ -65,13 +65,13 @@ Unlike our stable images (which are frozen and will not change), once a new beta
 
 To read about our customer support policy regarding beta images, please check out this [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
-## Xcode Image Releases
+## Xcode image releases
 
 We closely track and monitor Apple’s Xcode releases and always endeavor to release new images as quickly as possible. We can not provide an official SLA turnaround time for this as it is highly dependent on any changes made in Xcode and macOS.
 
 New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes and will be added to the table of [Xcode versions in the documentation](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions). 
 
-## macOS Versions
+## Macos versions
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version as stable as possible by only updating it when the minimum version requirement for Xcode is increased. When this occurs, we will update the macOS version to the latest stable version that is available.
 

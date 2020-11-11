@@ -40,11 +40,11 @@ CircleCI does not preserve entrypoints by default.
 See [Adding an Entrypoint](#adding-an-entrypoint)
 for more details.
 
-## CircleCI Dockerfile Wizard 
+## CircleCI dockerfile wizard
 
 Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
 
-## Creating a Custom Image Manually
+## Creating a custom image manually
 
 The following sections provide a walkthrough of how to create a custom image manually. In most cases you'll want to have a custom image for your [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) so that is the focus of this document. But, you can easily apply this knowledge to create images for supporting containers as well.
 
@@ -66,7 +66,7 @@ to assemble an image.
 Consider keeping your `Dockerfile` in your `.circleci/images` folder,
 as shown in [this Docker demo project](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary).
 
-### Choosing and Setting a Base Image
+### Choosing and setting a base image
 {:.no_toc}
 
 Before you create a custom image,
@@ -89,7 +89,7 @@ by using the [`FROM` instruction](https://docs.docker.com/engine/reference/build
 FROM golang:1.8.0
 ```
 
-### Installing Additional Tools
+### Installing additional tools
 {:.no_toc}
 
 To install any additional tools
@@ -101,7 +101,7 @@ RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
 ```
 
-#### Required Tools for Primary Containers
+#### Required tools for primary containers
 {:.no_toc}
 
 In order to be used as a primary container on CircleCI,
@@ -121,7 +121,7 @@ some CircleCI services may not work.
 If you do not install these tools with a package manager,
 you must use the `ADD` instruction instead of `RUN` (see below).
 
-### Adding Other Files and Directories
+### Adding other files and directories
 {:.no_toc}
 
 To add files and directories
@@ -133,7 +133,7 @@ ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
 ```
 
-### Adding an Entrypoint
+### Adding an entrypoint
 {:.no_toc}
 
 To run the container as an executable,
@@ -157,7 +157,7 @@ the build will also terminate.
 If you need to access logs or build status,
 consider using a background step instead of an entrypoint.
 
-### Building the Image
+### Building the image
 {:.no_toc}
 
 After all of the required tools are specified in the `Dockerfile` it is possible to build the image.
@@ -177,7 +177,7 @@ Read more about [`docker build` command](https://docs.docker.com/engine/referenc
 
 Congratulations, you've just built your first image! Now we need to store it somewhere to make it available for CircleCI.
 
-### Storing Images in a Docker Registry
+### Storing images in a docker registry
 {:.no_toc}
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.
@@ -186,7 +186,7 @@ In order to allow CircleCI to use your custom image, store it in a public [Docke
 
 The example uses Docker Hub, but it is possible to use different registries if you prefer. Adapt the example based on the registry you are using.
 
-### Preparing the Image for the Registry
+### Preparing the image for the registry
 {:.no_toc}
 
 Log in to Docker Hub with your account and create a new repository on the [add repository](https://hub.docker.com/add/repository/) page. It is best practice to use a pattern similar to `<project-name>-<container-name>` for a repository name (for example, `cci-demo-docker-primary`).
@@ -215,7 +215,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 **Note:** First, we use `docker login` to authenticate in Docker Hub. If you use a registry other than Docker Hub, refer to the related documentation about how to push images to that registry.
 
-### Using Your Image on CircleCI
+### Using your image on CircleCI
 {:.no_toc}
 
 After the image is successfully pushed it is available for use it in your `.circleci/config.yml`:
@@ -233,7 +233,7 @@ jobs:
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
-## Detailed Custom Dockerfile Example for Ruby
+## Detailed custom dockerfile example for ruby
 
 This section demonstrates how to build a Ruby container to use on CircleCI 2.0. **Note:** This section assumes you have already used docker login locally. 
 
@@ -243,7 +243,7 @@ Notice the environment variables that are used to pull in the proper versions.
 ```
 FROM buildpack-deps:jessie
 
-# skip installing gem documentation
+# Skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
 	&& { \
 		echo 'install: --no-document'; \

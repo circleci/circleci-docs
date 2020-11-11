@@ -11,7 +11,7 @@ verison:
 
 Upgrading your private CircleCI Server installation to 2.0 gives you the ability to use Workflows, Docker as a first-class executor, and all of the additional features and stability built into CircleCI 2.0. Work with a CircleCI Solutions Engineer to set up a 2.0 installation in your datacenter or private cloud (requires Platinum Support). Get started by [opening a support ticket](https://support.circleci.com/hc/en-us/requests/new).
 
-## Migrating Config to 2.0
+## Migrating config to 2.0
 
 Following are links to various documents we provide to assist in the 1.0 to 2.0 migration process:
 

@@ -8,7 +8,7 @@ order: 1
 sitemap: false
 ---
 
-## Getting Started
+## Getting started
 - [Introduction to CircleCI]({{ site.baseurl }}/archive/introduction/){:rel="nofollow"}
 - [Getting Started with CircleCI 1.0]({{ site.baseurl }}/archive/getting-started/){:rel="nofollow"}
 - [FAQ]({{ site.baseurl }}/archive/faq/){:rel="nofollow"}
@@ -18,7 +18,7 @@ sitemap: false
 - [GitHub Integration (5)]({{ site.baseurl }}/archive/github-privacy/){:rel="nofollow"}
 - [Migrating from Jenkins to CircleCI]({{ site.baseurl }}/archive/migrating-from-jenkins/){:rel="nofollow"}
 
-## Build Environments
+## Build environments
 - [Android]({{ site.baseurl }}/archive/android/){:rel="nofollow"}
 - [macOS Build Images]({{ site.baseurl }}/archive/build-image-macos/){:rel="nofollow"}
 - [Ubuntu 12.04 (Precise)]( {{ site.baseurl }}/archive/build-image-precise/){:rel="nofollow"}
@@ -26,7 +26,7 @@ sitemap: false
 - [Differences between Ubuntu 14.04 and 12.04]({{ site.baseurl }}/archive/differences-between-trusty-and-precise/){:rel="nofollow"}
 - [Customizing Build Environments]({{ site.baseurl }}/archive/installing-custom-software/){:rel="nofollow"}
 
-## Language Guides
+## Language guides
 - [Go (Golang)]({{ site.baseurl }}/archive/language-go/){:rel="nofollow"}
 - [Haskell]({{ site.baseurl }}/archive/language-haskell/){:rel="nofollow"}
 - [Java]({{ site.baseurl }}/archive/language-java/){:rel="nofollow"}
@@ -108,7 +108,7 @@ sitemap: false
 - [Python (1)]({{ site.baseurl }}/archive/troubleshooting-python/){:rel="nofollow"}
 - [Ruby (10)]({{ site.baseurl }}/archive/troubleshooting-ruby/){:rel="nofollow"}
 
-## Enterprise Administration
+## Enterprise administration
 
 - [Installation]({{ site.baseurl }}/enterprise/aws/){:rel="nofollow"}
 - [Backup]({{ site.baseurl }}/enterprise/backup/){:rel="nofollow"}

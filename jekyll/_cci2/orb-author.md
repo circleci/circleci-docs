@@ -29,7 +29,7 @@ The orb development kit refers to a suite of tools that work together to simplif
 
 <script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
 
-### Getting Started
+### Getting started
 
 To begin creating your new orb with the orb development kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
@@ -84,7 +84,7 @@ You should also see the CLI has automatically migrated you into a new developmen
 From your new branch you are now ready to make and push changes. From this point on, on every commit, your orb will be packed, validated, tested (optional), and can be published.<br/><br/>
 When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
-### Writing Your Orb
+### Writing your orb
 
 Before you begin working on your orb, ensure you are on a non-default branch. We typically recommend starting your orb on the `alpha` branch.
 
@@ -110,7 +110,7 @@ If you have run the `circleci orb init` command, you will automatically be in th
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) |
 {: class="table table-striped"}
 
-#### Orb Source
+#### Orb source
 
 Navigate to the `src` directory to look at the included sections.
 
@@ -267,19 +267,19 @@ echo Hello "${PARAM_TO}"
 
 This way, you can both mock and test your scripts locally.
 
-### Testing Orbs
+### Testing orbs
 
 Much like any other software, there are multiple ways to test your code and it is entirely up to you as the developer to implement as many tests as desired. Within your config file right now there will be a job named [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) that will need to be updated to test your orb components. This is a type of _integration testing_. Unit testing with orbs is possible as well.
 
 Read our full [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) documentation.
 
-### Publishing Your Orb
+### Publishing your orb
 
 With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
-### Categorizing Your Orb
+### Categorizing your orb
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 

@@ -34,7 +34,7 @@ The following sections walk through how to write Jobs and Steps that use `xcodeb
 ![Manage Schemes Dialogue](  {{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. Commit and push the schemes.
 
-## Running Tests
+## Running tests
 
 For iOS projects, it is possible to run your tests with Fastlane Scan as follows:
 
@@ -56,13 +56,13 @@ jobs:
 
 Refer to [the Xcode version section]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) of the iOS testing document for the complete list of supported versions.
 
-## Code Signing and Certificates
+## Code signing and certificates
 
 Refer to [the code signing doc]({{ site.baseurl }}/2.0/ios-codesigning/) for details.
 
 To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]( {{ site.baseurl }}/2.0/sample-config/) document for customizations.
 
-## Installing Dependencies
+## Installing dependencies
 
 To install dependencies from homebrew, for example, use a `run` step with the appropriate command:
 
@@ -76,7 +76,7 @@ To install dependencies from homebrew, for example, use a `run` step with the ap
           command: yarn install
 ```
 
-## Running Tests
+## Running tests
 
 The `run` step is also used to run your tests as in the following example of the short form `run` syntax:
 
@@ -120,12 +120,12 @@ workflows:
               only: release
 ```
 
-## Advanced Configuration
+## Advanced configuration
 
 See the [Testing iOS Applications on macOS](https://circleci.com/docs/2.0/testing-ios/) document for more
 advanced details on configuring iOS projects.
 
-## Example Application on GitHub
+## Example application on github
 
 See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for an example of how to build, test and sign an iOS project using

@@ -53,7 +53,7 @@ jobs:
 
 Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
 
-## macOS
+## Macos
 
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
@@ -111,7 +111,7 @@ jobs:
 
 Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor). See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
-## See Also
+## See also
 
 * [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
 * [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos).

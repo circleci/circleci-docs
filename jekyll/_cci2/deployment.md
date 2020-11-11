@@ -10,7 +10,7 @@ version:
 CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integrations/) to virtually any service.
 
 
-## Amazon Web Services 
+## Amazon web services
 
 ```
     steps:
@@ -61,7 +61,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 
-## Heroku 
+## Heroku
 
 ```    
     steps:
