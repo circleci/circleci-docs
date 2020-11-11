@@ -5,13 +5,18 @@
 :toc: macro
 :toc-title:
 
+version:
+- Cloud
+
+NOTE: CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+
 toc::[]
 
 == Introduction
 
-CircleCI Runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures and environments, in addition to providing you with additional control over the security of the environment.
+CircleCI runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures and environments, in addition to providing you with additional control over the security of the environment.
 
-== Runner Use Cases
+== Runner use cases
 
 There are two key use cases CircleCI aims to meet with the runner:
 
@@ -23,7 +28,7 @@ There are two key use cases CircleCI aims to meet with the runner:
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
-== Runner Operation
+== Runner operation
 
 Once CircleCI runner is installed, the runner polls circleci.com for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
 
@@ -34,7 +39,7 @@ The runner consists of two components: the Launch Agent and the Task Agent.
 
 The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (Launch Agent will run as root, but Task Agent will run as circleci).
 
-== CircleCI Runner Limitations
+== CircleCI runner limitations
 
 There are a few limitations you should be aware of when using CircleCI runner:
 
