@@ -4,14 +4,18 @@
 :icons: font
 :toc: macro
 :toc-title:
+version:
+- Cloud
+
+NOTE: CircleCI Runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
 This page answers frequently asked questions for the CircleCI Runner product.
 
 toc::[]
 
-=== What is the security model for the CircleCI Runner?
+=== What is the security model for the CircleCI runner?
 
-When installing CircleCI Runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
+When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
 
 NOTE: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
 
@@ -35,11 +39,11 @@ NOTE: No inbound connectivity is required by runner. Any other required connecti
 
 CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
 
-=== How do caching and workspaces and artifacts work with CircleCI Runner?
+=== How do caching and workspaces and artifacts work with CircleCI runner?
 
 Caches and workspaces and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. Although CircleCI is not currently charging for runner usage, you may be charged for data transfer and storage in the future.
 
-If you would prefer to take complete control of artifact storage, we recommend avoiding the built-in steps and uploading the artifacts directly to your chosen storage backend.
+If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and uploading the artifacts directly to your chosen storage backend.
 
 === What are the best practices for managing state between jobs?
 
