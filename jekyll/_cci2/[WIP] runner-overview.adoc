@@ -44,7 +44,7 @@ The following platforms are currently supported:
 * Arm64 + Ubuntu
 * Intel + macOS
 
-For more information on additional platforms that have been tested, but are not supported, and platforms that have not veen tested, please refer to the Runner Installation [add link here when ready] page.
+For more information on additional platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the Runner Installation [add link here when ready] page.
 
 The following features are not yet available, but may be in the future:
 
