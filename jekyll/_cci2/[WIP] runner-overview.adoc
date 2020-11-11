@@ -27,7 +27,7 @@ There are two key use cases we are aiming to meet with the runner:
 
 Once CircleCI runner is installed, the runner polls circleci.com for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
 
-The runner consists of two components: the Launch Agent and the Task Agent
+The runner consists of two components: the Launch Agent and the Task Agent.
 
 * Launch Agent (launch-agent) - manages gathering the information required to run a task, while also downloading and launching a Task Agent process.
 * Task Agent (task-agent) - handles running a task retrieved and configured by the Launch Agent.
