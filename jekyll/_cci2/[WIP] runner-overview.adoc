@@ -63,7 +63,7 @@ CircleCI runner is not recommended for use with public projects that have the "B
 
 == Prerequisites
 
-In order to use CircleCI Runner, you must:
+In order to use CircleCI runner, you must:
 
 * be on the Scale Plan.
 * use CircleCI Cloud.
