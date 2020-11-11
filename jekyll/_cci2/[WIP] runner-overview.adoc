@@ -36,7 +36,7 @@ The system has been written to allow agent administrators to configure the task-
 
 == CircleCI Runner Limitations
 
-There are a few limitations you should be aware of when using CircleCI Runner:
+There are a few limitations you should be aware of when using CircleCI runner:
 
 The following platforms are currently supported:
 
