@@ -32,7 +32,7 @@ The runner consists of two components: the Launch Agent and the Task Agent.
 * Launch Agent (launch-agent) - manages gathering the information required to run a task, while also downloading and launching a Task Agent process.
 * Task Agent (task-agent) - handles running a task retrieved and configured by the Launch Agent.
 
-The system has been written to allow agent administrators to configure the task-agent to run with a lower level of privileges than the launch-agent - as any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are for our recommended deployment which follows this approach - Launch Agent will run as root, but Task Agent will run as circleci.
+The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (Launch Agent will run as root, but Task Agent will run as circleci).
 
 == CircleCI Runner Limitations
 
