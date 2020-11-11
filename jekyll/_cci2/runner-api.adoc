@@ -4,12 +4,16 @@
 :icons: font
 :toc: macro
 :toc-title:
+version:
+- Cloud
 
-This document contains all the external facing endpoints for the CircleCI Runner API.
+NOTE: CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+
+This document contains all the external facing endpoints for the CircleCI runner API.
 
 == Authentication Methods
 
-The CircleCI Runner `agent api` contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
+The CircleCI runner `agent api` contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
 
 === Circle-Token (personal authentication)
 
