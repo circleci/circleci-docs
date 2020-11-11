@@ -19,7 +19,7 @@ There are two key use cases we are aiming to meet with the runner:
 ** IP restrictions - Runners can have static IP addresses that you can control.
 ** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions.
 ** Monitor the operating system.
-** Connect to private networks
+** Connect to private networks.
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
