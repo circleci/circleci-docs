@@ -98,3 +98,5 @@ jobs:
       - run: echo "Hi I'm on Runners!"
 ```
 The job will then execute using your runner when you push the config to your VCS provider.
+
+NOTE: A namespace is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact support.
