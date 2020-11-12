@@ -70,10 +70,10 @@ CircleCI runner is not recommended for use with public projects that have the "B
 
 In order to use CircleCI runner, you must:
 
-* be on the Scale Plan.
-* use CircleCI Cloud.
-* have experience managing your infrastructure.
-* install [add link here when ready] CircleCI Runner.
+* Be on the Scale Plan.
+* Use CircleCI Cloud.
+* Have experience managing your infrastructure.
+* Install [add link here when ready] CircleCI Runner.
 
 == Referencing your runner on a job
 
