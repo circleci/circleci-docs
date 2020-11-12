@@ -20,7 +20,7 @@ CircleCI runner enables you to use your own infrastructure for running jobs. Thi
 
 There are two key use cases CircleCI aims to meet with the runner:
 
-* Security requirements - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to strict security requirements. Some things that the runner enables are:
+* Security & compliance requirements - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to strict security requirements. Some things that the runner enables are:
 ** IP restrictions - Runners can have static IP addresses that you can control.
 ** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions.
 ** Monitor the operating system.
