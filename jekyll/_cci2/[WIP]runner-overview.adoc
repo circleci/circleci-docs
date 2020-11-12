@@ -43,7 +43,7 @@ The system has been designed to allow administrators to configure the task-agent
 
 There are a few limitations you should be aware of when using CircleCI runner:
 
-The following platforms are currently supported:
+Currently, the runner officially supports the following platforms:
 
 * Intel + Ubuntu
 * Arm64 + Ubuntu
