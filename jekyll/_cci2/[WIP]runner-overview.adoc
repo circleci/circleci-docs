@@ -8,7 +8,7 @@
 version:
 - Cloud
 
-NOTE: CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+NOTE: The CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
 toc::[]
 
