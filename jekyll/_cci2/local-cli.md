@@ -261,15 +261,15 @@ workflows:
   version: 2
 
 # Original config.yml file:
-# Version: 2.1
+# version: 2.1
 # 
-# Orbs:
-# Hello: circleci/hello-build@0.0.5
+# orbs:
+#     hello: circleci/hello-build@0.0.5
 # 
-# Workflows:
-# \"hello workflow\":
-# Jobs:
-# - hello/hello-build
+# workflows:
+#     \"Hello Workflow\":
+#         jobs:
+#           - hello/hello-build
 
 ```
 {% endraw %}
