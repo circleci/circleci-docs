@@ -71,7 +71,7 @@ To disable the CircleCI Check integration, navigate to the "Organization Setting
 3. Click the Manage GitHub Checks button.
 4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
 
-## Github checks waiting for status in github
+## GitHub checks waiting for status in GitHub
 
 `ci/circleci:build — Waiting for status to be reported`
 
@@ -82,4 +82,3 @@ If you have enabled GitHub Checks in your GitHub repository, but the status chec
 Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a workflow job level.
 
 Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
-

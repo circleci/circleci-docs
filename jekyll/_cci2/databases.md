@@ -95,7 +95,7 @@ When the database service spins up, it automatically creates the database `circl
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
-### Optimizing postgres images
+### Optimizing Postgres images
 {:.no_toc}
 
 The default `circleci/postgres` Docker image uses regular persistent storage on disk.
@@ -174,5 +174,4 @@ Redis also has a CLI available:
 {:.no_toc}
 
 Refer to the [Database Configuration Examples]({{ site.baseurl }}/2.0/postgres-config/) document for additional configuration file examples.
-
 

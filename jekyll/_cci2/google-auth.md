@@ -48,7 +48,7 @@ If you are having issues pushing container images to GCR you may need more granu
 Refer to the Cloud Storage [permission documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions)
 to learn more about Identity and Access Management (IAM) permissions.
 
-### Authenticating to google container registry
+### Authenticating to Google Container Registry
 
 Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk), you may have to authenticate to the Google Container Registry.
 

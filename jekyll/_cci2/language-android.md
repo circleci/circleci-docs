@@ -157,7 +157,7 @@ and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
 
-## Testing with firebase test lab
+## Testing with Firebase test lab
 
 To use Firebase Test Lab with CircleCI,
 first complete the following steps.
@@ -298,11 +298,10 @@ CircleCI runs clean builds,
 so pre-dexing actually increases compilation time
 and may also increase memory usage.
 
-### Deploying to google play store
+### Deploying to Google Play Store
 
 There are a few third-party solutions for deploying to the Play Store from your
 CI build. [Gradle Play
 Publisher](https://github.com/Triple-T/gradle-play-publisher) enables you to
 upload an App Bundle/APK as well as app metadata. It's also possible to use
 [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) with Android.
-

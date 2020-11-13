@@ -109,7 +109,7 @@ jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app
 integration from the Sumo Logic partner integrations site.
 
 
-### The CircleCI dashboard for sumo logic
+### The CircleCI dashboard for Sumo Logic
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
@@ -135,7 +135,7 @@ This dashboard receives data through the CircleCI Sumo Logic orb which must be i
 
 Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/sumologic).
 
-#### 1. import the sumo logic orb.
+#### 1. Import the Sumo Logic orb.
 Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
 
 ```yaml
@@ -143,7 +143,7 @@ orbs:
   sumologic: circleci/sumologic@x.y.z
 ```
 
-#### 2. add _workflow-collector_ to workflow.
+#### 2. Add _workflow-collector_ to workflow.
 The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
 
 ```yaml
@@ -160,7 +160,7 @@ workflows:
           requires:
             - test
 ```
-#### 3. create two source collectors.
+#### 3. Create two source collectors.
 You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
 
 You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
@@ -173,7 +173,7 @@ To create the two source collectors:
 5. For the `Source Category` enter one of the two mentioned above.
 6. Save the resulting URL.
 
-#### 4. add environment variables.
+#### 4. Add environment variables.
 For each of the URLs produce in the previous step, create the corresponding environment variable.
 
 Env vars:
@@ -192,4 +192,3 @@ Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to 
 ### See also
 
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
-

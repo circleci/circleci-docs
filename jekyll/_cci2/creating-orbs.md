@@ -118,7 +118,7 @@ The `fail-if-semver-not-indicated` parameter is set to true by default, ensuring
 
 You can optionally enable additional features such as publishing a version tag back to GitHub, and automatically posting new versions to the pull request via comment.
 
-##### Publish version tag to github
+##### Publish version tag to GitHub
 
 Your CircleCI orb will ultimately be hosted and displayed on the [Orb Registry](https://circleci.com/developer/orbs), however, if you would like to track your releases on GitHub, it is possible to automatically publish a version tag from CircleCI.
 

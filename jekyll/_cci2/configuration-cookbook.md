@@ -97,7 +97,7 @@ workflows:
 
 For a full list of usage options and orb elements see the [AWS-ECS orb page](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) in the CircleCI Orbs Registry.
 
-### Verify the amazon ECS service update
+### Verify the AWS ECS service update
 
 Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`. 
 
@@ -264,7 +264,7 @@ workflows:
 
 In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
 
-### Create a kubernetes deployment
+### Create a Kubernetes deployment
 
 You may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
 
@@ -326,7 +326,7 @@ workflows:
             - aws-eks/update-container-image
 ```
 
-### Install a helm chart in your cluster
+### Install a Helm chart in your cluster
 
 Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
 
@@ -365,11 +365,11 @@ workflows:
             - aws-eks/delete-helm-release
 ```
 
-## Enabling custom slack notifications in CircleCI jobs
+## Enabling custom Slack notifications in CircleCI jobs
 
 Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
 
-### Notifying a slack channel of pending approval
+### Notifying a Slack channel of pending approval
 
 The [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
 
@@ -390,7 +390,7 @@ In the above example, note that you first need to invoke the `circleci/slack@x.y
 
 There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
 
-### Notifying a slack channel with custom messages
+### Notifying a Slack channel with custom messages
 
 Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project.
 

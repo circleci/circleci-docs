@@ -65,7 +65,7 @@ In the target that you will be using for ad-hoc builds:
 * **Build Settings -> Provisioning Profile (Deprecated)** is set to the
 *Match AdHoc* profile.
 
-### Adding match to the Fastlane lane
+### Adding Match to the Fastlane lane
 {:.no_toc}
 
 On CircleCI, Fastlane Match will need to be run every time you are
@@ -182,7 +182,7 @@ The best practice configuration for setting up code signing for iOS and
 Mac projects is as follows:
 
 ```
-# Fastlane/fastfile
+# fastlane/fastfile
 default_platform :ios
 
 platform :ios do

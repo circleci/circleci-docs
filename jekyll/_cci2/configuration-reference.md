@@ -499,7 +499,7 @@ jobs:
       ... // other config
 ```
 
-##### Machine executor (linux)
+##### Machine executor (Linux)
 
 {% include snippets/machine-resource-table.md %}
 
@@ -514,7 +514,7 @@ jobs:
       ... // other config
 ```
 
-##### Macos executor
+##### macOS executor
 
 Class              | vCPUs | RAM
 -------------------|-------|-----
@@ -563,7 +563,7 @@ Note the way resource class is set is different for `windows` because the execut
 
 See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
-##### GPU executor (linux)
+##### GPU executor (Linux)
 
 Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
 --------------------------------|-------|-----|------|-----------------|------------------

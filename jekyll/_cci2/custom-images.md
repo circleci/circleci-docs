@@ -177,7 +177,7 @@ Read more about [`docker build` command](https://docs.docker.com/engine/referenc
 
 Congratulations, you've just built your first image! Now we need to store it somewhere to make it available for CircleCI.
 
-### Storing images in a docker registry
+### Storing images in a Docker registry
 {:.no_toc}
 
 In order to allow CircleCI to use your custom image, store it in a public [Docker Registry](https://docs.docker.com/registry/introduction/). The easiest mechanism is to create an account on [Docker Hub](https://hub.docker.com/) because Docker Hub allows you to store unlimited public images for free. If your organization is already using Docker Hub you can use your existing account.

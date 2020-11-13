@@ -152,7 +152,7 @@ This environment variable is exclusive to Apache Maven projects.
 Use it
 to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
-## Debugging Java oom errors
+## Debugging Java OOM errors
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
 code 137` in your error output.

@@ -53,7 +53,7 @@ jobs:
 
 Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
 
-## Macos
+## macOS
 
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 

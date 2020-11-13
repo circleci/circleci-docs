@@ -91,7 +91,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `name@digest`
     - `redis@sha256:34057dd7e135ca41...`
 
-#### Public images on docker hub
+#### Public images on Docker Hub
 {:.no_toc}
   - `name:tag`
     - `alpine:3.4`
@@ -237,7 +237,7 @@ jobs:
 The `image` key is not supported on private installations of CircleCI.
 See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
-## Using macos
+## Using macOS
 
 _Available on CircleCI Cloud - not currently available on self-hosted installations_
 
@@ -255,7 +255,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-## Using the windows executor
+## Using the Windows executor
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
 * CircleCI Cloud – config version 2.1.

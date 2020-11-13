@@ -370,7 +370,7 @@ Since caches are immutable, this strategy allows you to regenerate all of your c
 
 The stability of partial dependency caching is dependent on your dependency manager. Below is a list of common dependency managers, recommended partial caching strategies, and associated justifications.
 
-#### Bundler (ruby)
+#### Bundler (Ruby)
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -426,7 +426,7 @@ steps:
 
 {% endraw %}
 
-#### Maven (java) and leiningen (clojure)
+#### Maven (Java) and Leiningen (Clojure)
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -454,7 +454,7 @@ steps:
 
 {% endraw %}
 
-#### Npm (node)
+#### npm (Node)
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -480,7 +480,7 @@ steps:
 
 {% endraw %}
 
-#### Pip (python)
+#### pip (Python)
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -506,7 +506,7 @@ steps:
 
 {% endraw %}
 
-#### Yarn (node)
+#### Yarn (Node)
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -555,7 +555,7 @@ Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock
 
 An alternative is to do `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR venv > python_deps_checksum`.
 
-### Using multiple caches for different language
+### Using multiple caches for different languages
 {:.no_toc}
 
 It is also possible to lower the cost of a cache miss by splitting your job across multiple caches. By specifying multiple `restore_cache` steps with different keys, each cache is reduced in size thereby reducing the performance impact of a cache miss. Consider splitting caches by language type (npm, pip, or bundler) if you know how each dependency manager stores its files, how it upgrades, and how it checks dependencies.

@@ -144,7 +144,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 For a complete list of AWS CLI commands and options, see the [AWS CLI Command Reference](https://docs.aws.amazon.com/cli/latest/reference/).
 
-### Deploy docker image to aws ecr
+### Deploy Docker image to AWS ECR
 {:.no_toc}
 The AWS ECR orb enables you to log into AWS, build, and then push a Docker image to AWS Elastic Container Registry with minimal config. See the [orb registry page](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) for a full list of parameters, jobs, commands and options.
 
@@ -171,7 +171,7 @@ workflows:
 
 {% endraw %}
 
-### Update an aws ecs instance
+### Update an AWS ECS instance
 {:.no_toc}
 
 Use the [AWS ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) and [ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) orbs to easily update an existing AWS ECS instance.
@@ -206,7 +206,7 @@ workflows:
 
 {% endraw %}
 
-### Aws codedeploy
+### AWS codedeploy
 {:.no_toc}
 
 The [AWS CodeDeploy](https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy) orb enables you to run deployments through AWS CodeDeploy.
@@ -310,7 +310,7 @@ jobs:
 
 {% endraw %}
 
-## Cloud foundry
+## Cloud Foundry
 
 CircleCI has developed a CloudFoundry Orb that you can use to simplify your configuration workflows. The Cloud Foundry page in the [Orbs Registry](https://circleci.com/developer/orbs/orb/circleci/cloudfoundry) contains several different examples of how you can perform tasks with CloudFoundry, including the example below that shows how you can build and run blue green deployment in a single job - in this example `domain` will automatically be prefixed with `dark` and `live` for two subdomains to be specified. Validation steps would also need to be provided to allow the live deployment to go ahead.
 
@@ -346,12 +346,12 @@ workflows:
 
 If you would like more detailed information about various CloudFoundry orb elements that you can use in your configuration workflows, refer to the [CloudFoundry Orb](https://circleci.com/developer/orbs/orb/circleci/cloudfoundry) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-### Deploy to cloud foundry with 2.0 config
+### Deploy to Cloud Foundry with 2.0 config
 {:.no_toc}
 
 Cloud Foundry deployments require the Cloud Foundry CLI. Be sure to match the architecture to your Docker image (the commands below assume you are using a Debian-based image). This example pattern implements "Blue-Green" deployments using Cloud Foundry's map-route/unmap-route commands, which is an optional feature above and beyond a basic `cf push`.
 
-#### Install the cli
+#### Install the CLI
 {:.no_toc}
 
 ```yaml
@@ -511,11 +511,11 @@ If using Google Cloud Functions with Firebase, instruct CircleCI to navigate to 
 
 {% endraw %}
 
-## Google cloud platform
+## Google Cloud Platform
 
 Before deploying to Google Cloud Platform, you will need to authorize the Google Cloud SDK and set default configuration settings. Refer to the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document for full details.
 
-### Using google cloud orbs
+### Using Google Cloud orbs
 {:.no_toc}
 
 There are several Google Cloud orbs available in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs) that you can use to simplify your deployments. For example, the [Google Kubernetes Engine (GKE) orb](https://circleci.com/developer/orbs/orb/circleci/gcp-gke#usage-publish-and-rollout-image) has a pre-built job to build and publish a Docker image, and roll the image out to a GKE cluster, as follows:
@@ -541,7 +541,7 @@ workflows:
 
 {% endraw %}
 
-### Deployment to gke with 2.0 config
+### Deployment to GKE with 2.0 config
 {:.no_toc}
 
 In the following example, if the `build-job` passes and the current branch is `master`, CircleCI runs the deployment job.
@@ -594,7 +594,7 @@ For another example, see our [CircleCI Google Cloud deployment example project](
 [Heroku](https://www.heroku.com/) is a popular platform for hosting applications in the cloud. To configure CircleCI
 to deploy your application to Heroku, follow the steps below.
 
-### Deploy with the heroku orb
+### Deploy with the Heroku orb
 {:.no_toc}
 1. Create a Heroku account and follow the [Getting Started on Heroku](https://devcenter.heroku.com/start) documentation
 to set up a project in your chosen language.
@@ -677,7 +677,7 @@ to set up a project in your chosen language.
 
 **Note:** Heroku provides the option "Wait for CI to pass before deploy" under deploy / automatic deploys. See the [Heroku documentation](https://devcenter.heroku.com/articles/github-integration#automatic-deploys) for details.
 
-## Npm
+## NPM
 
 Setting up CircleCI to publish packages to the npm registry makes it easy for project collaborators to release new package versions in a consistent and predictable way.
 
@@ -740,7 +740,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
     ```
 5.  If tests passed, CircleCI will publish the package to npm automatically.
 
-## Ssh
+## SSH
 
 To configure CircleCI to deploy your application over SSH, follow the steps below.
 

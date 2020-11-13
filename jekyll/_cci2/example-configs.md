@@ -12,7 +12,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 * TOC
 {:toc}
 
-## Example circleci files and public repos
+## Example CircleCI files and public repos
 
 Example Name | Description | Link
 ----|----------|--------

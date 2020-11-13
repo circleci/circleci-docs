@@ -125,7 +125,7 @@ workflows:
 See the [Testing iOS Applications on macOS](https://circleci.com/docs/2.0/testing-ios/) document for more
 advanced details on configuring iOS projects.
 
-## Example application on github
+## Example application on GitHub
 
 See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for an example of how to build, test and sign an iOS project using

@@ -14,11 +14,11 @@ This *API Developer's Guide* was written to assist developers in quickly and eas
 * TOC
 {:toc}
 
-# Api overview
+# API overview
 
 The CircleCI platform provides an API that enables users to interact with the CircleCI platform (e.g. triggering pipelines, updating settings etc, in addition to retrieving detailed information about users, jobs, workflows and pipelines.
 
-## Api categories
+## API categories
 
 The current categories of API v2 endpoints are:
 
@@ -37,7 +37,7 @@ The CircleCI API utilizes token-based authentication to manage access to the API
 
 **Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
 
-### Add an api token
+### Add an API token
 
 To add an API token, perform the steps listed below.
 
@@ -61,7 +61,7 @@ To add an API token, perform the steps listed below.
 
 **Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
 
-## Getting started with the api
+## Getting started with the API
 
 The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository. 
 

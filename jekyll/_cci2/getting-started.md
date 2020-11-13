@@ -314,7 +314,7 @@ on how to validate the CircleCI `config.yml` on every commit with a git hook.
 * [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
 * [Best Practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices) 
 
-### Yaml
+### YAML
 {:.no_toc}
 
 * [Advanced Concepts](https://en.wikipedia.org/wiki/YAML#Advanced_components)

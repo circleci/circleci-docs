@@ -188,7 +188,7 @@ allowing you to use interpolation and share environment variables across `run` s
 **Note:**
 The `$BASH_ENV` workaround only works with `bash`. Other shells probably won't work.
 
-### Alpine linux
+### Alpine Linux
 {:.no_toc}
 
 An image that's based on [Alpine Linux](https://alpinelinux.org/) (like [docker](https://hub.docker.com/_/docker)), uses the `ash` shell. 

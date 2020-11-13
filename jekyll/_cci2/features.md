@@ -16,7 +16,7 @@ This document provides a summary of differentiating features of CircleCI for Dev
 
 Following are the most popular features CircleCI offers that Developers are interested in.
 
-### Ssh into builds
+### SSH into builds
 
 Often the best way to troubleshoot problems is to [SSH into a job]({{ site.baseurl }}/2.0/ssh-access-jobs/) and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
 
@@ -57,7 +57,7 @@ System Administrators are able to gather [metrics for monitoring]({{ site.baseur
 
 CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [basic introduction to Nomad]({{ site.baseurl }}/2.0/nomad/) for understanding how to operate the Nomad Cluster in your CircleCI 2.0 installation.
 
-### Apis
+### APIs
 
 The [CircleCI API]({{ site.baseurl }}/api/) is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. 
 

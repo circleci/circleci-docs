@@ -29,7 +29,7 @@ Use a shell script to [debug your config locally]({{ site.baseurl }}/2.0/example
 
 <hr>
 
-## Video: introduction to `.circleci/config.yml`
+## Video: Introduction to `.circleci/config.yml`
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xOSHKNUIkjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
