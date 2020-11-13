@@ -270,7 +270,7 @@ information about other endpoints you may wish to call, please refer to the
 [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2) for an overview of all
 endpoints currently available.
 
-## Additional api use cases
+## Additional API use cases
 
 Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Whether you wish to return information about a job or project, or retrieve more detailed information about a project by reviewing its artifacts, the examples shown below should assist you in gaining a better understanding of how to make some API requests to the server so you can perform a deep dive into the specifics of your work.
 
