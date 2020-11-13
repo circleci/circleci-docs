@@ -48,7 +48,7 @@ The build VM will remain available for an SSH connection for **10 minutes after 
 If you run into permission troubles trying to SSH to your job, try
 these things:
 
-### Ensure authentication with github/bitbucket
+### Ensure authentication with GitHub/Bitbucket
 {:.no_toc}
 
 A single command can be used to test that your keys are set up as expected. For

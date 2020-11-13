@@ -71,7 +71,7 @@ We closely track and monitor Apple’s Xcode releases and always endeavor to rel
 
 New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes and will be added to the table of [Xcode versions in the documentation](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions). 
 
-## Macos versions
+## macOS versions
 
 Each Xcode image is built on top of a clean macOS install. We aim to keep the macOS version as stable as possible by only updating it when the minimum version requirement for Xcode is increased. When this occurs, we will update the macOS version to the latest stable version that is available.
 

@@ -88,7 +88,7 @@ curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master
 
 You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
-## Updating the cli
+## Updating the CLI
 
 You can update to the newest version of the CLI using the following command: `circleci update`. If you would just like to check for updates manually (and not install them) use the command: `circleci update check`.
 
@@ -115,7 +115,7 @@ circleci setup
 The set up process will prompt you for configuration settings. If you are using the CLI with
 circleci.com, use the default CircleCI Host. If you are using CircleCI server, change the value to your installation address (for example, circleci.your-org.com).
 
-## Validate a circleci config
+## Validate a CircleCI config
 
 You can avoid pushing additional commits to test your config.yml by using the CLI to validate your config locally.
 
@@ -344,7 +344,7 @@ For security reasons, encrypted environment variables configured in the UI will 
 
 The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
-## Using the cli on circleci server
+## Using the CLI on CircleCI server
 
 Currently, only the legacy CircleCI CLI is available to run on server
 installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
@@ -399,4 +399,3 @@ installation method was using respectively:
 - **curl installation command**: Remove the `circleci` executable from `usr/local/bin`
 - **Homebrew installation for Mac**: Run `brew uninstall circleci`
 - **Snap installation on Linux**: Run `sudo snap remove circleci`
-

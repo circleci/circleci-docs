@@ -47,7 +47,7 @@ It’s never necessary to access a CircleCI environment to install dependencies 
 
 If you install CircleCI on your own hardware, the divide between the host OS (at the “metal”/VM level) and the containerized build environments can be extremely useful for security and ops (see Your Builds in Containers below). Ops team members can do what they need to on the host OS without affecting builds, and they never need to give developers access. Developers, on the other hand, can use CircleCI’s SSH feature to debug builds at the container level as much as they like without affecting ops.
 
-## Web ui
+## Web UI
 {:.no_toc}
 
 CircleCI is a single-page web app that makes the entire user experience fast and easy on the eyes. The CircleCI team also continually refreshes and improves its UI. CircleCI’s modern UI is very popular with users, so the team will keep investing in it as technology and user expectations change.

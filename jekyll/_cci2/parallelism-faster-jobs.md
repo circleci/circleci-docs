@@ -40,7 +40,7 @@ jobs:
 For more information,
 see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
 
-## Using the circleci cli to split tests
+## Using the CircleCI CLI to split tests
 
 CircleCI supports automatic test allocation across your containers. The allocation is filename or classname based, depending on the requirements of the test-runner you are using. It requires the CircleCI CLI, which is automatically injected into your build at run-time.
 

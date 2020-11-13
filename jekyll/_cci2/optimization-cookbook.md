@@ -62,7 +62,7 @@ When running tests on the CircleCI platform, one of the primary considerations y
 
 There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below (adapted with permission from the developer who wrote about this test optimization use case in his [blog post](https://www.brautaset.org/articles/2019/speed-up-circleci.html)) describes how you can optimize testing using Django and the CircleCI platform.
 
-### Testing optimization on the circleci platform for a python django project
+### Testing optimization on the CircleCI platform for a Python Django project
 {:.no_toc}
 
 Some organizations use CircleCI to run tests for each change before merging to the main branch. Faster tests means faster feedback cycles, which in turn means you can confidently ship code more often. Let's take a look at a case study for a Python Django application's workflow, that took more than 13 minutes to complete testing on the CircleCI platform.
@@ -96,7 +96,7 @@ As you can see, there is a a significant amount of time being spent setting up t
 
 Knowing that ~13 minutes was too long to perform the steps in this workflow, the following approaches were taken to optimize and reduce this time.
 
-#### Changing the ci test workflow
+#### Changing the CI test workflow
 {:.no_toc}
 
 The CI test workflow was changed to no longer depend on building the base image. The test jobs were also changed to launch auxiliary services using CircleCI's docker executor native service container support instead of using `docker-compose`. Finally,`tox` was run from the main container to install dependencies and run tests, which eliminates minutes used to save and then restore the image from the workspace. This also eliminated the extra start-up costs of the machine executor.

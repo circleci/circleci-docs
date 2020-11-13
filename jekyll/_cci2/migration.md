@@ -12,7 +12,7 @@ Take a look through some of the tips and best practices listed below, for migrat
 * TOC
 {:toc}
 
-## You can build the same project on both circleci 1.0 and 2.0!
+## You can build the same project on both CircleCI 1.0 and 2.0!
 
 When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:
 

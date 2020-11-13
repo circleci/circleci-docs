@@ -21,7 +21,7 @@ This document describes the most important features of YAML for use in CircleCI 
 
 CircleCI configuration is stored in a single YAML file located at `~/.circleci/config.yml`, where `~` is the root of your project's directory. Since most of your work with CircleCI occurs in this file, it is important to understand the basics of YAML formatting.
 
-## How to write yaml
+## How to write YAML
 
 The basic structure of a YAML file is a [hash map](https://en.wikipedia.org/wiki/Hash_table) and consists of one or more key-value pairs.
 
