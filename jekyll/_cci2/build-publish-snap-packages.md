@@ -66,7 +66,7 @@ Publishing a snap is more or less a two-step process. Here's on this might look 
 
 ```Bash
 snapcraft login
-# Follow prompts for logging in with an ubuntu one account
+# Follow prompts for logging in with an Ubuntu One account
 snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```

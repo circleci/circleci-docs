@@ -118,11 +118,11 @@ There are different protections and limits in place for different parts of the A
 For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
 In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
-## Rest api tutorial
+## Rest API tutorial
 
 For more detailed information about HTTP status codes, refer to the [rest api tutorial](http://www.restapitutorial.com/httpstatuscodes.html).
 
-## Example end-to-end api request
+## Example end-to-end API request
 
 The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a "demo repository" called "hello-world", however, you can use a pre-existing repository to follow along if you choose.
 
@@ -653,7 +653,7 @@ When reviewing each individual review job, please note that the following inform
 
 ## Reference
 
-### Api endpoints
+### API endpoints
 
 The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
 
@@ -667,7 +667,7 @@ Before working with the API and making calls, you should first have an understan
 | GET /me/collaborations | This endoint enables you to return a list of organizations that the user is a member of, or is a collaborator by making a GET request and passing the `collaborations` parameter in the request. |
 {: class="table table-striped"}
 
-#### Pipeline api requests
+#### Pipeline API requests
 
 | Endpoint                                  | Description                                                         | 
 |-------------------------------------------|---------------------------------------------------------------------|
@@ -679,7 +679,7 @@ Before working with the API and making calls, you should first have an understan
 | GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.      |
 {: class="table table-striped"}
 
-#### Project api requests
+#### Project API requests
 
 | Endpoint                                                  | Description                                                       |
 |-----------------------------------------------------------|-------------------------------------------------------------------|
@@ -695,7 +695,7 @@ Before working with the API and making calls, you should first have an understan
 | GET /project/{project-slug}/envvar/{name}                 | Returns a masked value for an environment variable for a project. |
 {: class="table table-striped"}
 
-#### Job api requests
+#### Job API requests
 
 | Endpoint                                             | Description                      |        
 |------------------------------------------------------|----------------------------------|
@@ -705,7 +705,7 @@ Before working with the API and making calls, you should first have an understan
 | GET /project/{project-slug}/{job-number}/tests       | Returns test metadata for a job. |
 {: class="table table-striped"}
 
-#### Workflow api requests
+#### Workflow API requests
 
 | Endpoint                   | Description                                  |
 |----------------------------|----------------------------------------------|

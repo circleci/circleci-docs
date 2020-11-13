@@ -85,7 +85,7 @@ jobs:
 ```
 {% endraw %}
 
-## Sauce labs
+## Sauce Labs
 
 Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To allow the browsers access
 the web application you want to test, run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
@@ -282,7 +282,7 @@ steps:
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
 
-## X11 forwarding over ssh
+## X11 forwarding over SSH
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
