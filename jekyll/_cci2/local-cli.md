@@ -92,7 +92,7 @@ You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-
 
 You can update to the newest version of the CLI using the following command: `circleci update`. If you would just like to check for updates manually (and not install them) use the command: `circleci update check`.
 
-### Updating the legacy cli
+### Updating the legacy CLI
 {:.no_toc}
 
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
