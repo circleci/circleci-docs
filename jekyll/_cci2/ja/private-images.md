@@ -79,8 +79,8 @@ jobs:
     steps:
 
       - docker/check:
-          docker-username: mydockerhub-user  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
-          docker-password: $DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
+          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
+          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
       - docker/pull:
           images: 'circleci/node:latest'
 ```
