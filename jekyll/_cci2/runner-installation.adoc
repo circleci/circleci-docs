@@ -13,9 +13,9 @@ This page describes how to install CircleCI runner on Linux and macOS platforms.
 
 toc::[]
 
-=== Prerequisites
+== Prerequisites
 
-==== Support Levels
+=== Support Levels
 
 There are currently three support levels for CircleCI runner:
 
@@ -23,7 +23,7 @@ There are currently three support levels for CircleCI runner:
 * Untested
 * Unsupported
 
-===== Supported
+==== Supported
 
 * CircleCI has built and tested runner on a given platform.
 * Support expectation:
@@ -32,7 +32,7 @@ There are currently three support levels for CircleCI runner:
 ** CircleCI documentation and best practices available.
 ** If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
 
-===== Untested
+==== Untested
 
 * CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
 * Support expectation:
@@ -43,7 +43,7 @@ There are currently three support levels for CircleCI runner:
 ** Customer Engineers will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
 ** If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
 
-===== Unsupported
+==== Unsupported
 
 * CircleCI will not provide a runner binary capable of running CircleCI runner on the platform.
 * Support expectation:
@@ -52,7 +52,7 @@ There are currently three support levels for CircleCI runner:
 ** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
 ** No CircleCI documentation or Customer Engineering support.
 
-==== Supported Platforms
+=== Supported Platforms
 
 The following platforms have been validated to work with CircleCI runner:
 
@@ -60,7 +60,7 @@ The following platforms have been validated to work with CircleCI runner:
 * Arm64 + Ubuntu
 * Intel + macOS
 
-===== Untested Platforms
+==== Untested platforms
 
 The following platforms have not been tested, but are believed to work with CircleCI runner:
 
@@ -70,7 +70,7 @@ The following platforms have not been tested, but are believed to work with Circ
 
 NOTE: CircleCI provides no documentation for these platforms.
 
-===== Unsupported Platforms
+==== Unsupported platforms
 
 The following platforms are not currently supported to work with CircleCI runner:
 
@@ -80,7 +80,7 @@ The following platforms are not currently supported to work with CircleCI runner
 * Arm32 + Linux
 * Run natively in Kubernetes/Rancher/other container orchestration solutions
 
-==== Authentication
+=== Authentication
 
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
@@ -93,7 +93,7 @@ NOTE: Each organization can only create a single namespace. If you already use o
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
-==== Installation Tooling
+=== Installation tooling
 
 The installation process assumes you have installed the following utilities on your system:
 
@@ -102,7 +102,7 @@ The installation process assumes you have installed the following utilities on y
 * systemd version 235+ (Linux only)
 * permissions to create a user, and create directories under /opt.
 
-=== Job Running Requirements
+=== Job running requirements
 
 Running jobs requires you have the following tools available on your machine:
 
@@ -198,7 +198,7 @@ mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
 ```
 
-=== Install the Launch Script
+=== Install the launch script
 
 This wrapper script will be used by Launch Agent to execute the Task Agent, while ensuring appropriate sandboxing and a clean shutdown.
 
