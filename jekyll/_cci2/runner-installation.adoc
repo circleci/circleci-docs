@@ -117,7 +117,7 @@ Running jobs requires you have the following tools available on your machine:
 
 The Launch Agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
-First, set one of these variables as appropriate for for your installation target.
+First, set one of these variables as appropriate for your installation target.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
