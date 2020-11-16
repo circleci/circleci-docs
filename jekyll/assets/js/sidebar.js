@@ -4,7 +4,7 @@
   window.addEventListener('load', function () {
     var footer = document.querySelector('.footer');
     var sidebar = document.querySelector('.sidebar');
-    var defaultSectionName = 'welcome';
+    var defaultSectionName = 'projects'; // TODO get this working with "getting started"
     var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
     var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');

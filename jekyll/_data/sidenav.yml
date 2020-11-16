@@ -1,57 +1,15 @@
 en:
-- name: Welcome
-  link:
-  icon: docs/welcome.svg
-  children:
-    - name: Introduction
-      link: 2.0/
-      children:
-        - name: CI/CD Overview
-          link: 2.0/about-circleci/
-        - name: Supported Languages
-          link: 2.0/demo-apps/
-        - name: Core Features
-          link: 2.0/features/
-
 - name: Getting Started
   icon: docs/start.svg
   children:
-    - name: Introduction
-      link: 2.0/getting-started/
+    - name: Overview
       children:
-        - name: Getting Started
-          link: 2.0/getting-started/
-        - name: What is CircleCI?
+        - name: About CircleCI
           link: 2.0/about-circleci/
-        - name: Sign Up & Try CircleCI
-          link: 2.0/first-steps/
+        - name: Concepts
+          link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
-        - name: Hello World MacOS
-          link: 2.0/hello-world-macos/
-        - name: Hello World Windows
-          link: 2.0/hello-world-windows/
-        - name: Get Started with the CLI
-          link: 2.0/local-cli-getting-started/
-        - name: FAQ
-          link: 2.0/faq/
-        - name: Config Builder
-          link: config-builder
-    - name: Concepts
-      link: 2.0/concepts/
-      children:
-        - name: Getting Started Concepts
-          link: 2.0/concepts/
-        - name: Projects and Pipelines
-          link: 2.0/project-build/
-        - name: Orbs, Jobs, Steps, and Workflows
-          link: 2.0/jobs-steps/
-        - name: Data Persistence
-          link: 2.0/persist-data/
-        - name: Differences from Jenkins
-          link: 2.0/migrating-from-jenkins/
-        - name: Security
-          link: 2.0/security/
     - name: Migration
       link: 2.0/migration-intro/
       children:
@@ -86,16 +44,10 @@ en:
           link: 2.0/config-intro/
         - name: Config Reference Full
           link: 2.0/configuration-reference/
-        - name: Config Reference 2.1
-          link: reference-2-1/
-        - name: Reusable Config Reference
+        - name: Config Reference 2.1 # TODO: < merge this into config ref 1.
+          link: reference-2-1/       # and then hide this from the sidebar
+        - name: Reusing Configuration
           link: 2.0/reusing-config/
-        - name: Config Builder
-          link: config-builder
-        - name: Writing YAML
-          link: 2.0/writing-yaml/
-        - name: Using the CircleCI CLI
-          link: 2.0/local-cli/
     - name: Orbs
       link: 2.0/orb-intro/
       children:
@@ -120,57 +72,54 @@ en:
           link: 2.0/testing-orbs/
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
-    - name: Examples
-      link: 2.0/examples-intro/
+
+- name: Executors and Images
+  icon: docs/welcome.svg
+  children:
+    - name: Overview
       children:
-        - name: Examples Introduction
-          link: 2.0/examples-intro/
-        - name: Sample config.yml Files
-          link: 2.0/sample-config/
-        - name: Tutorials
-          link: 2.0/tutorials/
-        - name: Configuration Cookbook
-          link: 2.0/configuration-cookbook/
-        - name: Database Config Examples
-          link: 2.0/postgres-config/
-        - name: Example Public Repos
-          link: 2.0/example-configs/
-        - name: Testing iOS Applications
-          link: 2.0/testing-ios/
-        - name: Testing macOS Applications
-          link: 2.0/testing-macos/
-    - name: EXECUTORS & IMAGES
-      link: 2.0/executor-intro/
-      children:
-        - name: Executor & Image Intro
-          link: 2.0/executor-intro/
-        - name: Choosing an Executor Type
+        - name: Introduction
           link: 2.0/executor-types/
-        - name: CircleCI Docker Images
-          link: 2.0/circleci-images/
-        - name: Using Custom Images
-          link: 2.0/custom-images/
-        - name: Using Docker Authenticated Pulls
-          link: 2.0/private-images/
-        - name: Xcode Image Policy
-          link: 2.0/xcode-policy/
-    - name: ADVANCED CONFIG
-      link: 2.0/adv-config/
+    - name: Docker
       children:
-        - name: Advanced Config Intro
-          link: 2.0/adv-config/
-        - name: Pipeline Variables
-          link: 2.0/pipeline-variables
-        - name: Using Shell Scripts
-          link: 2.0/using-shell-scripts/
-        - name: Setting up Browser Testing
-          link: 2.0/browser-testing/
-        - name: Configuring Databases
-          link: 2.0/databases/
-        - name: Run Docker Commands
-          link: 2.0/building-docker-images/
-        - name: Using Docker Compose
+        - name: Overview
+          link: 2.0/executor-types/#using-docker
+        - name: CircleCI Images
+          link: 2.0/circleci-images/
+        - name: Docker compose
           link: 2.0/docker-compose/
+        - name: Docker layer caching
+          link: 2.0/docker-layer-caching/
+        - name: Running docker commands
+          link: 2.0/building-docker-images/
+        - name: Using custom images
+          link: 2.0/custom-images/
+        - name: Docker authenticated pulls
+          link: 2.0/private-images/
+    - name: Machine
+      children:
+        - name: Overview
+          link: 2.0/executor-types/#using-machine
+        - name: Pre-installed software
+          link: 2.0/docker-to-machine/#pre-installed-software
+    - name: Mac
+      children:
+        - name: Overview
+          link: 2.0/hello-world-macos/
+        - name: Testing iOS applications
+          link: 2.0/testing-ios/
+        - name: iOS Code Signing
+          link: 2.0/ios-codesigning/
+        - name: Testing macOS applications
+          link: 2.0/testing-macos/
+        - name: Xcode Image Policy
+          link: 2.0/xcode-policy
+    - name: Windows
+      children:
+        - name: Overview
+          children:
+            - name: Hello World on Windows
+              link: 2.0/hello-world-windows/
 
 - name: Projects
   icon: docs/project.svg
@@ -407,6 +356,61 @@ en:
           link: 2.0/circleci-install-doc.pdf
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
+
+## TO BE REUSED, moved back into new sections:
+    # - name: Examples
+    #   link: 2.0/examples-intro/
+    #   children:
+    #     - name: Examples Introduction
+    #       link: 2.0/examples-intro/
+    #     - name: Sample config.yml Files
+    #       link: 2.0/sample-config/
+    #     - name: Tutorials
+    #       link: 2.0/tutorials/
+    #     - name: Configuration Cookbook
+    #       link: 2.0/configuration-cookbook/
+    #     - name: Database Config Examples
+    #       link: 2.0/postgres-config/
+    #     - name: Example Public Repos
+    #       link: 2.0/example-configs/
+    #     - name: Testing iOS Applications
+    #       link: 2.0/testing-ios/
+    #     - name: Testing macOS Applications
+    #       link: 2.0/testing-macos/
+    #
+    #
+    # - name: EXECUTORS & IMAGES
+    #   link: 2.0/executor-intro/
+    #   children:
+    #     - name: Executor & Image Intro
+    #       link: 2.0/executor-intro/
+    #     - name: Choosing an Executor Type
+    #       link: 2.0/executor-types/
+    #     - name: CircleCI Docker Images
+    #       link: 2.0/circleci-images/
+    #     - name: Using Custom Images
+    #       link: 2.0/custom-images/
+    #     - name: Using Docker Authenticated Pulls
+    #       link: 2.0/private-images/
+    #     - name: Xcode Image Policy
+    #       link: 2.0/xcode-policy/
+    # - name: ADVANCED CONFIG
+    #   link: 2.0/adv-config/
+    #   children:
+    #     - name: Advanced Config Intro
+    #       link: 2.0/adv-config/
+    #     - name: Pipeline Variables
+    #       link: 2.0/pipeline-variables
+    #     - name: Using Shell Scripts
+    #       link: 2.0/using-shell-scripts/
+    #     - name: Setting up Browser Testing
+    #       link: 2.0/browser-testing/
+    #     - name: Configuring Databases
+    #       link: 2.0/databases/
+    #     - name: Run Docker Commands
+    #       link: 2.0/building-docker-images/
+    #     - name: Using Docker Compose
+    #       link: 2.0/docker-compose/
 
 ja:
 - name: Welcome
