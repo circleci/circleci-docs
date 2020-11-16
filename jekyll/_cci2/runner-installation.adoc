@@ -27,7 +27,6 @@ There are currently three support levels for CircleCI runner:
 
 * CircleCI has built and tested runner on a given platform.
 * Support expectation:
-+
 ** DCEs can provide support.
 ** CircleCI documentation and best practices available.
 ** If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
