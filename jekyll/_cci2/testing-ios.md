@@ -23,7 +23,7 @@ There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tu
 
 ## Using the macOS Executor
 
-Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environement stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
 Periodically, we will update the version of macOS each image includes to ensure the build environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the build environment is kept stable.
 
@@ -49,7 +49,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|-------------------|--------------
- `12.2.0` | Xcode 12.2 Beta 3 (12B5035g) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3995/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-beta-3-released/37810)
++ `12.2.0` | Xcode 12.2 RC (12B5044c) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4061/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-rc-released/38038)
++ `12.1.1` | Xcode 12.1.1 RC (12A7605b) | 10.15.5 | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4054/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-1-1-rc-released/38023)
  `12.1.0` | Xcode 12.1 (12A7403) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3985/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-1-gm-released/37809)
  `12.0.1` | Xcode 12.0.1 (12A7300) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3933/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-0-1-released-xcode-12-0-0-deprecated/37630)
  `11.7.0` | Xcode 11.7 (11E801a) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-7-released/37312)
