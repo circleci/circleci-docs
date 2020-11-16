@@ -24,7 +24,7 @@ There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tu
 
 ## Using the macOS Executor
 
-Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environement stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
+Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
 Periodically, we will update the version of macOS each image includes to ensure the build environment is as up to date as possible. When a new major version of macOS is released, we will generally switch to this once the new major version of Xcode reaches the `xx.2` release to ensure the build environment is kept stable.
 
