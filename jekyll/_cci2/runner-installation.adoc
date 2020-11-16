@@ -17,7 +17,7 @@ toc::[]
 
 ==== Support Levels
 
-There are currently three support levels for CircleCI Runner:
+There are currently three support levels for CircleCI runner:
 
 * Supported
 * Untested
