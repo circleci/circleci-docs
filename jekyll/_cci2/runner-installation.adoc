@@ -85,7 +85,7 @@ The following platforms are not currently supported to work with CircleCI runner
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
 1. <<local-cli#installation,Install the circleci command-line tool>>.
-2. Create a namespace for your organization's runner resources under:
+2. Create a namespace for your organization's runner resources.
 +
 NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 3. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
