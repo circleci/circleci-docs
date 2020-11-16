@@ -28,7 +28,7 @@ There are currently three support levels for CircleCI runner:
 * CircleCI has built and tested runner on a given platform.
 * Support expectation:
 +
-** DCEs can provide support.
+** Customer Engineers can provide support.
 ** CircleCI documentation and best practices available.
 ** If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
 
@@ -40,7 +40,7 @@ There are currently three support levels for CircleCI runner:
 ** There is no CircleCI documentation available.
 ** Customers can run CircleCI runner on an untested platform, but the customer is responsible for determining how to run runner on this platform.
 ** If issues arise on the untested platform, DCEs might or might not be able to help.
-** DCEs will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
+** Customer Engineers will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
 ** If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
 
 ===== Unsupported
@@ -50,7 +50,7 @@ There are currently three support levels for CircleCI runner:
 +
 ** CircleCI runner will not work on the platform.
 ** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
-** No CircleCI documentation or DCE support.
+** No CircleCI documentation or Customer Engineering support.
 
 ==== Supported Platforms
 
@@ -82,13 +82,13 @@ The following platforms are not currently supported to work with CircleCI runner
 
 ==== Authentication
 
-In order to complete this process you will need to create a namespace, https://circleci.com/docs/2.0/optimizations/#resource-class[resource-class] and authentication token by performing the steps listed below:
+In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
 1. <<local-cli#installation,Install the circleci command-line tool>>.
 2. Create a namespace for your organization's runner resources under:
 +
 NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
-3. Create a https://circleci.com/docs/2.0/optimizations/#resource-class[resource class] for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+3. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
 4. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
