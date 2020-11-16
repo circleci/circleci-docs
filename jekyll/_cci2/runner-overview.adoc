@@ -1,12 +1,13 @@
+---
+version:
+- Cloud
+---
 = CircleCI Runner Overview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-
-version:
-- Cloud
 
 NOTE: The CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
