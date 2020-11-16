@@ -17,7 +17,6 @@ toc::[]
 
 CircleCI runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures and environments, in addition to providing you with additional control over the security of the environment. The diagram below illustrates how CircleCI Runner can be implemented in an environment.
 
-+
 .Runner Architecture
 image::runner-overview-diagram.png[CircleCI Runner Architecture]
 
