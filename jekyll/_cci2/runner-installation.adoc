@@ -52,7 +52,7 @@ There are currently three support levels for CircleCI runner:
 ** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
 ** No CircleCI documentation or Customer Engineering support.
 
-=== Supported Platforms
+== Supported Platforms
 
 The following platforms have been validated to work with CircleCI runner:
 
@@ -60,7 +60,7 @@ The following platforms have been validated to work with CircleCI runner:
 * Arm64 + Ubuntu
 * Intel + macOS
 
-==== Untested platforms
+== Untested platforms
 
 The following platforms have not been tested, but are believed to work with CircleCI runner:
 
@@ -70,7 +70,7 @@ The following platforms have not been tested, but are believed to work with Circ
 
 NOTE: CircleCI provides no documentation for these platforms.
 
-==== Unsupported platforms
+== Unsupported platforms
 
 The following platforms are not currently supported to work with CircleCI runner:
 
@@ -80,7 +80,7 @@ The following platforms are not currently supported to work with CircleCI runner
 * Arm32 + Linux
 * Run natively in Kubernetes/Rancher/other container orchestration solutions
 
-=== Authentication
+== Authentication
 
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
@@ -93,7 +93,7 @@ NOTE: Each organization can only create a single namespace. If you already use o
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
-=== Installation tooling
+== Installation tooling
 
 The installation process assumes you have installed the following utilities on your system:
 
@@ -102,7 +102,7 @@ The installation process assumes you have installed the following utilities on y
 * systemd version 235+ (Linux only)
 * permissions to create a user, and create directories under /opt.
 
-=== Job running requirements
+== Job running requirements
 
 Running jobs requires you have the following tools available on your machine:
 
@@ -111,9 +111,9 @@ Running jobs requires you have the following tools available on your machine:
 * coreutils (Linux only)
 * git (recommended, but not required)
 
-=== Installation
+== Installation
 
-==== Download the Launch Agent Binary and Verify the Checksum
+=== Download the Launch Agent Binary and Verify the Checksum
 
 The Launch Agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
