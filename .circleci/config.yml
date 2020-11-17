@@ -309,7 +309,7 @@ jobs:
       ### NOTE: we are ignore some files in the HTML proofer as it fails on pending translated docs.
       - run:
           name: Test with HTMLproofer
-          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "jekyll/_site/docs/api/v2/index.html,docs/api/v2/,/docs/ja/2.0/local-cli/,/docs/ja/2.0/security-server/,/docs/ja/2.0/v.2.19-overview/,/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/,/docs/reference-2-1/" --empty-alt-ignore 2>&1 | nkf -w --url-input | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+          command: bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "jekyll/_site/docs/api/v2/index.html,docs/api/v2/,/docs/ja/2.0/runner-installation/,/docs/ja/2.0/security-server/,/docs/ja/2.0/v.2.19-overview/,/docs/ja/2.0/customizations/,/docs/ja/2.0/aws-prereq/,/docs/ja/2.0/ops/,/docs/ja/2.0/about-circleci/,/docs/ja/2.0/demo-apps/,/docs/ja/2.0/google-auth/,/docs/ja/2.0/orb-concepts/,/docs/ja/2.0/tutorials/,/docs/reference-2-1/" --empty-alt-ignore 2>&1 | nkf -w --url-input | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
 
       - store_artifacts: # stores the built files of the Jekyll site
           path: jekyll/_site/docs/
