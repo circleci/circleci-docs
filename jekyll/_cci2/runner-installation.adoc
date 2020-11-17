@@ -238,7 +238,7 @@ systemd-run \
 
 Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
-You must ensure that `TimeoutStopSec` is greater than the total amount of time the `stop-agent` script will take.
+You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
 
 If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by systemd with the following scripts:
 
