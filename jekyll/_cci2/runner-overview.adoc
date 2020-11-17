@@ -36,12 +36,12 @@ There are two key use cases CircleCI aims to meet with the runner:
 
 Once CircleCI runner is installed, the runner polls circleci.com for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
 
-The runner consists of two components: the Launch Agent and the Task Agent.
+The runner consists of two components: the launch agent and the task agent.
 
 * launch agent (launch-agent) - manages gathering the information required to run a task (defined as a parallel run of a job) while also downloading and launching a task agent process.
 * task agent (task-agent) - handles running a task retrieved and configured by the launch agent.
 
-The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (Launch Agent will run as root, but Task Agent will run as circleci).
+The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
 
 == CircleCI runner limitations
 
@@ -53,7 +53,7 @@ Currently, the runner officially supports the following platforms:
 * Arm64 + Ubuntu
 * Intel + macOS
 
-Additional platforms have been tested but are not yet officially supported by the runner. For more information on platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the Runner Installation [add link here when ready] page.
+Additional platforms have been tested but are not yet officially supported by the runner. For more information on platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the <<runner-installation#,Runner Installation>> page.
 
 The following features are not yet available, but may be in the future:
 

@@ -1,11 +1,13 @@
+---
+version:
+- Cloud
+---
 = Installing the CircleCI Runner
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-version:
-- Cloud
 
 NOTE: CircleCI runner is currently only available if you are on the Scale Plan. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
@@ -115,7 +117,7 @@ Running jobs requires you have the following tools available on your machine:
 
 === Download the Launch Agent Binary and Verify the Checksum
 
-The Launch Agent can be installed using the following script, which will use `opt/circleci` as the base install location.
+The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
 First, set one of these variables as appropriate for for your installation target.
 
@@ -200,7 +202,7 @@ chown -R circleci /opt/circleci/workdir
 
 === Install the launch script
 
-This wrapper script will be used by Launch Agent to execute the Task Agent, while ensuring appropriate sandboxing and a clean shutdown.
+This wrapper script will be used by launch agent to execute the task agent, while ensuring appropriate sandboxing and a clean shutdown.
 
 Create `/opt/circleci/launch-task` owned by `root` with permissions `755`
 
@@ -238,7 +240,7 @@ Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
 
 You must ensure that `TimeoutStopSec` is greater than the total amount of time the `stop-agent` script will take.
 
-If you want to configure the CircleCI runner installation to start on boot, it is important to note that the Launch Agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The Launch Agent may be configured as a service and be managed by systemd with the following scripts:
+If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by systemd with the following scripts:
 
 ```
 [Unit]
@@ -402,7 +404,7 @@ The macOS application console can be used to view the logs for the CircleCI agen
 
 === Configuration file reference
 
-A YAML file is used to configure the Launch Agent, how it communicates with our servers and how it will launch the Task Agent.
+A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
 
 The configuration file uses the following format with the various parameters explained in more detail below:
 
@@ -414,19 +416,19 @@ runner:
 runner.name
 ```
 
-`RUNNER_NAME` is a unique name assigned to this particular running Launch Agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
+`RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
 
 ==== api.auth_token
 
-This is a token used to identify the Launch Agent to CircleCI and will be provided by your Customer Success Manager. An existing token may be shared among many installations, but this token only allows a particular `resource_class` to be specified.
+This is a token used to identify the launch agent to CircleCI and will be provided by your Customer Success Manager. An existing token may be shared among many installations, but this token only allows a particular `resource_class` to be specified.
 
 ==== runner.command_prefix
 
-This prefix enables you to customize how the Task Agent process is launched; The CircleCI example uses the launch-task script provided below.
+This prefix enables you to customize how the task agent process is launched; The CircleCI example uses the launch-task script provided below.
 
 ==== runner.working_directory
 
-This directory allows you to control the default working directory used by each job. If the directory already exists, Task Agent will need permissions to write to the directory. If the directory does not exist, then the Task Agent will need permissions to create ithe directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not be automatically removed.
+This directory allows you to control the default working directory used by each job. If the directory already exists, task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not be automatically removed.
 
 ==== runner.cleanup_working_directory
 
@@ -434,7 +436,7 @@ This directory enables you to control the working directory cleanup after each j
 
 ==== runner.max_run_time
 
-This value can be used to override the default maximum duration the Task Agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
+This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
 
 Here are few valid examples:
 
@@ -448,7 +450,7 @@ NOTE: The default value is 5 hours.
 
 === Docker Installation
 
-The `circleci/runner` image has been created by CircleCI to work with the CircleCI runner feature. Currently the `launch-agent` tag can be used to run the Launch Agent in a container co-located with the CircleCI job (for example, the job will run inside the same container). In the future, a variant will be added that runs the Launch Agent on the host and will run each job inside its own container, via the Task Agent.
+The `circleci/runner` image has been created by CircleCI to work with the CircleCI runner feature. Currently the `launch-agent` tag can be used to run the launch agent in a container co-located with the CircleCI job (for example, the job will run inside the same container). In the future, a variant will be added that runs the launch agent on the host and will run each job inside its own container, via the task agent.
 
 ==== Getting Started
 
