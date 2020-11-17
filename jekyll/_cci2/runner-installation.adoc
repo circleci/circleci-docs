@@ -41,9 +41,9 @@ There are currently three support levels for CircleCI runner:
 +
 ** There is no CircleCI documentation available.
 ** Customers can run CircleCI runner on an untested platform, but the customer is responsible for determining how to run runner on this platform.
-** If issues arise on the untested platform, DCEs might or might not be able to help.
+** If issues arise on the untested platform, the CircleCI account team may or may not be able to help.
 ** Customer Engineers will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
-** If a customer is able to get an untested platform up and running, DCEs will collect information about their setup in order to reuse information with other customers.
+** If a customer is able to get an untested platform up and running, the account team will collect information about their setup in order to reuse information with other customers.
 
 ==== Unsupported
 

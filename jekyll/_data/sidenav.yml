@@ -154,17 +154,17 @@ en:
           link: 2.0/private-images/
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
-#    - name: Runner
-#      link: 2.0/runner-overview/
-#      children:
-#        - name: Runner Overview
-#          link: 2.0/runner-overview/
-#        - name: Runner Installation
-#          link: 2.0/runner-installation/
-#        - name: Runner API
-#          link: 2.0/runner-api/
-#        - name: Runner FAQs
-#          link: 2.0/runner-faqs/
+   - name: Runner
+     link: 2.0/runner-overview/
+     children:
+       - name: Runner Overview
+         link: 2.0/runner-overview/
+       - name: Runner Installation
+         link: 2.0/runner-installation/
+       - name: Runner API
+         link: 2.0/runner-api/
+       - name: Runner FAQs
+         link: 2.0/runner-faqs/
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
