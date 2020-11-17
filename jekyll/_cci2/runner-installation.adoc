@@ -251,7 +251,7 @@ ExecStart=/opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agen
 Restart=always
 User=root
 NotifyAccess=exec
-TimeoutStopSec=600
+TimeoutStopSec=18300
 [Install]
 WantedBy = multi-user.target
 ```
