@@ -77,7 +77,7 @@ In order to use CircleCI runner, you must:
 * Be on the Scale Plan.
 * Use CircleCI Cloud.
 * Have experience managing your infrastructure.
-* Install [add link here when ready] CircleCI runner.
+* <<runner-installation#,Install CircleCI runner>>.
 
 == Referencing your runner on a job
 
