@@ -18,7 +18,7 @@ GitHub Checks should not be confused with GitHub status updates:
 * GitHub Checks are administered from the GitHub UI, and are reported in the GitHub UI per _workflow_.
 * GitHub status updates are the default way status updates from your builds are reported in the GitHub UI, and they are reported per _job_. 
 
-If both these features are enabled, the Checks tab in your GitHub PRs will show both job and workflow statuses.
+If both these features are enabled, in a GitHub PR view the Checks tab will show workflow status and the Checks section in the PR conversation view will show job status.
 
 ## Overview
 
@@ -89,4 +89,3 @@ If you have enabled GitHub Checks in your GitHub repository, but the status chec
 Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a job level.
 
 Go to **Settings** > **Branches** in GitHub and click the **Edit** button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
-
