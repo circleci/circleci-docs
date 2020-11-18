@@ -46,7 +46,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 * Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the [Docker ID password field under the `auth` key]({{ '/2.0/private-images/#docker-executor' | docs_url }}).
 * Improved the way commit statuses are handled to reduce instances of them being published out of order in certain situations.
-* Security vulnerability patch for the `VM-scaler` service.
+* General security updates.
 
 ## What's New in v2.19.08
 
@@ -128,4 +128,3 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 * CircleCI Server installations on AWS can now be https://github.com/circleci/enterprise-setup#configuration[configured to work on GovCloud].
 
 * The image used to run the RabbitMQ server has been updated to fix vulnerabilities.
-
