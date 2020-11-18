@@ -30,10 +30,10 @@ This authentication method is based on personal tokens and follows the same rule
 | Description
 
 | circle-token header
-| Need a description here
+| Header that contains the `circle-token` used to authenticate the user.
 
 | http basic auth username
-| The token can be provided using the Basic scheme, where username should be set as the circle-token and the password should be left blank
+| The token can be provided using the Basic scheme, where username should be set as the `circle-token` and the password should be left blank.
 |===
 
 === Browser Session Authentication
