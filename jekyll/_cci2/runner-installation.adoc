@@ -456,7 +456,7 @@ The number of containers running in parallel on the host is constrained by the h
 
 === Create a Dockerfile that extends the CircleCI Runner image
 
-Here we install python3 on top of the base image
+In this example, python3 is installed on top of the base image.
 
 `Dockerfile.runner.extended`
 
