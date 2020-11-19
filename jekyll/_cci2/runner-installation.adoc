@@ -491,7 +491,7 @@ docker stop <container-name>
 
 === Additional Resources
 
-- [CircleCI Runner Image on Docker Hub](https://github.com/CircleCI-Public/runner-preview-docs/)
+- https://github.com/CircleCI-Public/runner-preview-docs/[CircleCI Runner Image on Docker Hub]
 - [CircleCI Runner Image on Github](https://github.com/CircleCI-Public/circleci-runner-docker)
 - [CircleCI Docs](https://circleci.com/docs/) - The official CircleCI Documentation website.
 - https://docs.docker.com/[Docker Docs]
