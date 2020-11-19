@@ -450,7 +450,7 @@ NOTE: The default value is 5 hours.
 
 == Docker Installation
 
-The host needs to have Docker installed. Once the `runner` container is started, it will immediately attempt to start running jobs.  The container will be reused to run more jobs indefinitely until it's stopped.
+The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
 
 The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
