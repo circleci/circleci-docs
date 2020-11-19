@@ -44,7 +44,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19.09
 
-* Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the [Docker ID password field under the `auth` key]({{ '/2.0/private-images/#docker-executor' | docs_url }}).
+* Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the <<private-images#docker-executor,Docker ID password field under the `auth` key>>.
 * General security updates.
 
 ## What's New in v2.19.08
