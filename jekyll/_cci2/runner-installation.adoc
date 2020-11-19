@@ -475,7 +475,7 @@ docker build --file ./Dockerfile.runner.extended .
 
 === Start the Docker container
 
-Note that we don't pass the environment variable values to the `docker` command, so they're not visible in `ps` output.
+NOTE: The environment variable values are not to the `docker` command, so these environment variables are not visible in `ps` output.
 
 ```bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
