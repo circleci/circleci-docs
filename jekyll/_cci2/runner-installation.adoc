@@ -448,20 +448,50 @@ Here are few valid examples:
 
 NOTE: The default value is 5 hours.
 
-=== Docker Installation
+== Docker Installation
 
-The `circleci/runner` image has been created by CircleCI to work with the CircleCI runner feature. Currently the `launch-agent` tag can be used to run the launch agent in a container co-located with the CircleCI job (for example, the job will run inside the same container). In the future, a variant will be added that runs the launch agent on the host and will run each job inside its own container, via the task agent.
+The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
 
-==== Getting Started
+The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
 
-To perform a docker pull of the CircleCI runner, run the following command:
+=== Create a Dockerfile that extends the CircleCI Runner image
 
-```sh
-docker pull circleci/runner
+In this example, python3 is installed on top of the base image.
+
+`Dockerfile.runner.extended`
+
+```
+FROM circleci/runner:launch-agent
+RUN apt-get update; \
+    apt-get install --no-install-recommends -y \
+        python3
 ```
 
-This CircleCI runner image can also be used as a host with docker installed by running the following command:
+=== Build the Docker image
 
-```sh
-CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_
+```bash
+docker build --file ./Dockerfile.runner.extended .
 ```
+
+=== Start the Docker container
+
+NOTE: The environment variable values are not to the `docker` command, so these environment variables are not visible in `ps` output.
+
+```bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
+When the container starts, it will immediately attempt to start running jobs.
+
+=== Stopping the Docker container
+
+``` bash
+docker stop <container-name>
+```
+
+=== Additional Resources
+
+- https://github.com/CircleCI-Public/runner-preview-docs/[CircleCI Runner Image on Docker Hub]
+- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
+- https://circleci.com/docs/[CircleCI Docs - The official CircleCI Documentation website]
+- https://docs.docker.com/[Docker Docs]
