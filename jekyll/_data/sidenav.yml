@@ -102,6 +102,7 @@ en:
           link: 2.0/executor-types/#using-machine
         - name: Pre-installed software
           link: 2.0/docker-to-machine/#pre-installed-software
+          # TODO: check hotjar/sentiment about missing machine content
     - name: Mac
       children:
         - name: Overview
@@ -110,6 +111,8 @@ en:
           link: 2.0/testing-ios/
         - name: iOS Code Signing
           link: 2.0/ios-codesigning/
+        - name: Deploying iOS applications
+          link: 2.0/deploying-ios/
         - name: Testing macOS applications
           link: 2.0/testing-macos/
         - name: Xcode Image Policy
@@ -120,6 +123,72 @@ en:
           children:
             - name: Hello World on Windows
               link: 2.0/hello-world-windows/
+            # TODO: check hotjar/sentiment about missing windows content
+
+- name: Features
+  icon: docs/welcome.svg
+  children:
+    - name: Overview
+      children:
+        - name: Concepts
+          link: 2.0/concepts
+        - name: Environment variables
+          link: 2.0/env-vars
+        - name: workflows
+          link: 2.0/workflows
+        - name: Caching
+          link: 2.0/caching
+        - name: Artifacts
+          link: 2.0/concepts
+        - name: Insights
+          link: 2.0/insights
+        - name: Collecting test data
+          link: 2.0/collect-test-data
+        - name: Debugging with SSH
+          link: 2.0/ssh-access-jobs/
+        - name: Parallelism
+          link: 2.0/parallelism-faster-jobs/
+        - name: Contexts
+          link: 2.0/contexts
+
+- name: Examples and Guides
+  icon: docs/welcome.svg
+  children:
+    - name: Testing
+      children:
+        - name: Setting up Browser Testing
+          link: 2.0/browser-testing/
+
+    - name: Languages and Databases
+      children:
+        - name: Node
+          link: 2.0/concepts
+        - name: Android
+          link: 2.0/env-vars
+        - name: Java
+          link: 2.0/workflows
+        - name: Go
+          link: 2.0/caching
+        - name: Python
+          link: 2.0/concepts
+        - name: Ruby
+          link: 2.0/concepts
+        - name: Configuring Databases
+          link: 2.0/databases
+    - name: Deployment
+      children:
+        - name: Overview
+          link: 2.0/deployment-integrations
+        - name: Examples
+          link: 2.0/deployment-examples/
+        - name: Deploying iOS applications
+          link: 2.0/deploying-ios/
+        - name: Publishing Snap packages
+          link: 2.0/build-publish-snap-packages
+        - name: Upload to Artifactory
+          name: 2.0/packagecloud
+        - name: Publishing to Packagecloud
+
 
 - name: Projects
   icon: docs/project.svg
@@ -129,10 +198,10 @@ en:
       children:
         - name: Settings Overview
           link: 2.0/settings/
-        - name: GitHub and Bitbucket
-          link: 2.0/gh-bb-integration/
         - name: Enabling GitHub Checks
           link: 2.0/enable-checks/
+        - name: GitHub and Bitbucket
+          link: 2.0/gh-bb-integration/
         - name: Open Source Projects
           link: 2.0/oss/
         - name: Using Notifications
@@ -141,86 +210,25 @@ en:
           link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
-        - name: Environment Variables
-          link: 2.0/env-vars/
-        - name: Using Contexts
-          link: 2.0/contexts/
-        - name: iOS Code Signing
-          link: 2.0/ios-codesigning/
-    - name: Optimizations
-      link: 2.0/optimizations/
-      children:
-        - name: Optimization Overview
-          link: 2.0/optimizations/
-        - name: Caching Dependencies
-          link: 2.0/caching/
-        - name: Running Tests in Parallel
-          link: 2.0/parallelism-faster-jobs/
-        - name: Docker Layer Caching
-          link: 2.0/docker-layer-caching/
-        - name: Optimizations Cookbook
-          link: 2.0/optimization-cookbook/
-
-- name: Pipelines
-  icon: docs/builds.svg
-  children:
-    - name: Status
-      link: 2.0/status/
-      children:
-        - name: Status Overview
-          link: 2.0/status/
-        - name: Pipelines Overview
-          link: 2.0/build-processing/
-        - name: Viewing Pipelines
-          link: 2.0/pipelines/
         - name: Using Credits
           link: 2.0/credits/
-        - name: Using Containers
-          link: 2.0/containers/
-        - name: Adding Status Badges
-          link: 2.0/status-badges/
-        - name: Storing Build Artifacts
-          link: 2.0/artifacts/
-        - name: Debugging with SSH
-          link: 2.0/ssh-access-jobs/
-        - name: Debug Java Memory Errors
-          link: 2.0/java-oom/
-        - name: Collecting Test Metadata
-          link: 2.0/collect-test-data/
-        - name: Code Coverage Metrics
-          link: 2.0/code-coverage/
-        - name: Using Insights
-          link: 2.0/insights/
-    - name: Triggers
-      link: 2.0/triggers/
-      children:
-        - name: Introduction to Triggers
-          link: 2.0/triggers/
-        - name: Skip and Cancel Builds
-          link: 2.0/skip-build/
-        - name: Trigger Jobs with the API
-          link: 2.0/api-job-trigger/
-        - name: Workflows
-          link: 2.0/workflows/
 
-- name: Deployment
-  icon: docs/deploy.svg
+- name: Optimizations
+  icon: docs/project.svg
   children:
-    - name: Configuring Deploys
-      link: 2.0/deployment-integrations/
-      children:
-        - name: Deployment Overview
-          link: 2.0/deployment-integrations/
-        - name: Deployment Examples
-          link: 2.0/deployment-examples/
-        - name: Deploying iOS Apps
-          link: 2.0/deploying-ios/
-        - name: Publishing Snap Packages
-          link: 2.0/build-publish-snap-packages/
-        - name: Using Artifactory
-          link: 2.0/artifactory/
-        - name: Publishing to packagecloud
-          link: 2.0/packagecloud/
+    - name: Pipeline variables
+    - link: 2.0/pipeline-variables/
+    - name: Using shell scripts
+    - link: 2.0/using-shell-scripts/
+    - name: Caching dependencies
+      link: 2.0/caching/
+    - name: Running tests in parallel
+      link: 2.0/parallelism-faster-jobs/
+    - name: Docker layer caching
+      link: 2.0/docker-layer-caching/
+    - name: Optimizations cookbook
+      link: 2.0/optimization-cookbook/
+
 
 - name: Reference
   icon: docs/reference.svg
@@ -357,60 +365,6 @@ en:
         - name: v2.16 Operations Guide
           link: 2.0/circleci-ops-guide.pdf
 
-## TO BE REUSED, moved back into new sections:
-    # - name: Examples
-    #   link: 2.0/examples-intro/
-    #   children:
-    #     - name: Examples Introduction
-    #       link: 2.0/examples-intro/
-    #     - name: Sample config.yml Files
-    #       link: 2.0/sample-config/
-    #     - name: Tutorials
-    #       link: 2.0/tutorials/
-    #     - name: Configuration Cookbook
-    #       link: 2.0/configuration-cookbook/
-    #     - name: Database Config Examples
-    #       link: 2.0/postgres-config/
-    #     - name: Example Public Repos
-    #       link: 2.0/example-configs/
-    #     - name: Testing iOS Applications
-    #       link: 2.0/testing-ios/
-    #     - name: Testing macOS Applications
-    #       link: 2.0/testing-macos/
-    #
-    #
-    # - name: EXECUTORS & IMAGES
-    #   link: 2.0/executor-intro/
-    #   children:
-    #     - name: Executor & Image Intro
-    #       link: 2.0/executor-intro/
-    #     - name: Choosing an Executor Type
-    #       link: 2.0/executor-types/
-    #     - name: CircleCI Docker Images
-    #       link: 2.0/circleci-images/
-    #     - name: Using Custom Images
-    #       link: 2.0/custom-images/
-    #     - name: Using Docker Authenticated Pulls
-    #       link: 2.0/private-images/
-    #     - name: Xcode Image Policy
-    #       link: 2.0/xcode-policy/
-    # - name: ADVANCED CONFIG
-    #   link: 2.0/adv-config/
-    #   children:
-    #     - name: Advanced Config Intro
-    #       link: 2.0/adv-config/
-    #     - name: Pipeline Variables
-    #       link: 2.0/pipeline-variables
-    #     - name: Using Shell Scripts
-    #       link: 2.0/using-shell-scripts/
-    #     - name: Setting up Browser Testing
-    #       link: 2.0/browser-testing/
-    #     - name: Configuring Databases
-    #       link: 2.0/databases/
-    #     - name: Run Docker Commands
-    #       link: 2.0/building-docker-images/
-    #     - name: Using Docker Compose
-    #       link: 2.0/docker-compose/
 
 ja:
 - name: Welcome
