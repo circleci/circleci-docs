@@ -29,7 +29,7 @@ Orb のスラッグ "slug" は、_名前空間_ と _Orb_ 名をスラッシュ�
 #### Orb にカテゴリを設定する
 {:.no_toc}
 
-Orb にカテゴリを付けると、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 CircleCI CLI を使用して Orb のカテゴリを設定する方法は、「[Orb のオーサリング プロセス]({{site.baseurl}}/ja/2.0/orb-author/#categorizing-your-orb)」の該当セクションを参照してください。
+Orb にカテゴリを付けると、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 CircleCI CLI を使用して Orb のカテゴリを設定する方法は、「[Orb のオーサリング プロセス]({{site.baseurl}}/ja/2.0/orb-author/#orb-%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E8%A8%AD%E5%AE%9A)」の該当セクションを参照してください。
 
 #### Orb のすべてのコンポーネントに説明を付ける
 {:.no_toc}
@@ -185,8 +185,8 @@ Orb に特定の実行環境が必要なジョブを複数設定しているの�
 CircleCI のジョブでは、その実行前後にステップを挿入することができます。また、パラメーターを使用することでジョブ内にステップを挿入することも可能です。 一般的に、カスタム ジョブにコマンドを組み込む (該当する場合) よりも、ジョブを設定する方がユーザーにとっては容易です。 挿入可能なステップを用いると、ジョブの柔軟性が高まるだけでなく、Orb で新機能を試しやすくなります。
 
 詳しくは次を参照してください。
-* [事前ステップと事後ステップ]({{site.baseurl}}/ja/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
-* [ステップ型パラメーター]({{site.baseurl}}/ja/2.0/reusing-config/#steps)
+* [事前ステップと事後ステップ(英語)]({{site.baseurl}}/2.0/configuration-reference/#pre-steps-and-post-steps-requires-version-21)
+* [ステップ型パラメーター(英語)]({{site.baseurl}}/2.0/reusing-config/#steps)
 
 ### Executor
 
@@ -198,7 +198,7 @@ Executor は、Orb 以外でも、特にカスタム ジョブの[マトリッ�
 
 ### 使用例を付ける
 
-Orb のオーサーにとって Orb の[使用例]({{site.baseurl}}/ja/2.0/orb-concepts/#usage-examples)は、コミュニティにユースケースやベスト プラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
+Orb のオーサーにとって Orb の[使用例(英語)]({{site.baseurl}}/2.0/orb-concepts/#usage-examples)は、コミュニティにユースケースやベスト プラクティスを伝える最適な手段です。 使用例は、Orb を利用するユーザーが参照する主要なドキュメントになるので、わかりやすく役立つ例を載せることが重要です。
 
 #### すべての公開版 Orb には使用例を 1 つ以上含める
 {:.no_toc}

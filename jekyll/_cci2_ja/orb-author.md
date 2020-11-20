@@ -17,14 +17,14 @@ version:
 
 この Orb オーサリング ガイドは、事前に「[Orb の概要]({{site.baseurl}}/ja/2.0/orb-intro)」を読み、名前空間の要求が終わっていることを前提としています。 これらが終わっていれば、Orb の開発準備は完了です。
 
-初めて Orb を記述する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-development-kit)を使って Orb の開発を始めることをお勧めします。 一方で、Orb は[再利用可能な構成]({{site.baseurl}}/ja/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orbs 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB) を使用してパブリッシュすることもできます。
+初めて Orb を記述する方も、本番レベルで用意したい方も、[Orb 開発キット](#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)を使って Orb の開発を始めることをお勧めします。 一方で、Orb は[再利用可能な構成]({{site.baseurl}}/ja/2.0/reusing-config)をパッケージにしたものなので、単体の `yaml` ファイルとして Orb を[手動で]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)記述し、[CircleCI Orbs 用の CLI]({{site.baseurl}}/ja/2.0/local-cli/#%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB) を使用してパブリッシュすることもできます。
 
 ## Orb 開発キット
 
 Orb 開発キットは、相互に連携する複数のツールをセットにしたものです。キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットは、次の要素で構成されています。
 
 * [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)
-* [Orb Pack]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)
+* [Orb Pack]({{site.baseurl}}/ja/2.0/orb-concepts/)
 * [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
@@ -54,7 +54,7 @@ circleci orb init /path/to/myProject-orb
 ```
 完全自動オプションを選択すると、[Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含められます。 <br /><br /> 含められる CI/CD パイプラインの詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)」を参照してください。 または、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をダウンロードするだけに留める場合は、「No, I'll handle everything myself (すべて手動で行う)」を選択します。
 
-1. **質問に答えて Orb の構成とセットアップを進めます。**<br /> バックグラウンドでは、`orb init` コマンドが [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をコピーし、回答に基づいてカスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 でメモしておいたリモート Git リポジトリの URL も、ここで入力を求められます。<br /><br /> [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は「[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)」を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。 <br /><br /> セットアップ プロセスでは、[パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)に格納するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするために、このトークンを格納しておくことが必要になります。
+1. **質問に答えて Orb の構成とセットアップを進めます。**<br /> バックグラウンドでは、`orb init` コマンドが [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をコピーし、回答に基づいてカスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 でメモしておいたリモート Git リポジトリの URL も、ここで入力を求められます。<br /><br /> [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は「[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)」を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。 <br /><br /> セットアップ プロセスでは、[パーソナル API トークン]({{site.baseurl}}/ja/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)に格納するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするために、このトークンを格納しておくことが必要になります。
 
     **コンテキストは必ず使用者を制限する**
     <br />
@@ -110,7 +110,7 @@ $ git branch
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
 {: class="table table-striped"}
 
-上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートの役割を果たします。 任意で Orb 開発を強化するための [`scripts`](#scripts) ディレクトリと [`tests`](#testing-orbs) ディレクトリがプロジェクトに含まれている場合もあります。これらのディレクトリについては、このページの「[スクリプト](#scripts)」セクションと、「[Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/)」ガイドに解説があります。
+上記のディレクトリは、作成した Orb に含まれる Orb コンポーネントを表しています。Orb によっては、一部のコンポーネントが含まれない場合もあります。 @orb.yml は Orb のルートの役割を果たします。 任意で Orb 開発を強化するための [`scripts`](#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88) ディレクトリと [`tests`](#orb-%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88) ディレクトリがプロジェクトに含まれている場合もあります。これらのディレクトリについては、このページの「[スクリプト](#%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88)」セクションと、「[Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/)」ガイドに解説があります。
 
 `src` 内の各ディレクトリは、[再利用可能な構成]({{site.baseurl}}/ja/2.0/reusing-config)のコンポーネント タイプに対応しており、Orb から追加や削除をすることができます。 たとえば、作成した Orb に `executors` や `jobs` が必要ない場合は、これらのディレクトリを削除できます。
 
@@ -157,7 +157,7 @@ steps:
 ##### 例
 {:.no_toc}
 
-[使用例]({{site.baseurl}}/ja/2.0/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加できます。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
+[使用例(英語)]({{site.baseurl}}/2.0/orb-concepts/#usage-examples)をオーサリングして、`src/examples` ディレクトリに追加できます。 使用例は、エンド ユーザーが自分のプロジェクトの設定ファイルにそのまま使用することを目的としたものではなく、Orb 開発者が [Orb レジストリ](https://circleci.com/developer/ja/orbs)でユースケースごとの例を共有し、他のユーザーが参照できるようにするための手段です。
 
 このディレクトリ内の各 _YAML_ ファイルは、1 つの Orb 使用例として扱われます。名前にはファイル名が使用されます。
 

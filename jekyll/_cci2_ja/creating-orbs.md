@@ -23,14 +23,14 @@ version:
 
 ## Orb 開発キット
 
-[手動]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-development-kit)を使用して Orb をパブリッシュすると、次のセクションで説明する手順に従ってセマンティック リリースを簡単に行えます。 パブリッシュ プロセスの簡単な概要については、オーサリング プロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) ファイルを参照してください。
+[手動]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)を使用して Orb をパブリッシュすると、次のセクションで説明する手順に従ってセマンティック リリースを簡単に行えます。 パブリッシュ プロセスの簡単な概要については、オーサリング プロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) ファイルを参照してください。
 
 ### 新リリースの公開
 
 以下では、Orb の新しいセマンティック リリースを公開する方法について説明します。 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 このブランチは、リポジトリの非デフォルトのブランチに新機能やバグ修正、パッチなどを作成するためのものであり、名前に深い意味はありません。 コードの追加や更新を行いリリースを公開する準備が整ったら、以下の手順を行います。
 
 1. **デフォルト ブランチに対して新しいプル リクエストを作成します。**   
-    新しいリリースは、デフォルト ブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)と[単体テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#unit-testing)が有効になっています。 Orb が正常に機能するかを確認するため、少なくとも結合テストは有効にしておくことを強くお勧めします。 Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
+    新しいリリースは、デフォルト ブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E7%B5%90%E5%90%88%E3%83%86%E3%82%B9%E3%83%88)と[単体テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88)が有効になっています。 Orb が正常に機能するかを確認するため、少なくとも結合テストは有効にしておくことを強くお勧めします。 Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
 
 2. **すべてのテストに合格したことを確認します。**   
     テスト結果は、GitHub 上においてプル リクエスト内で直接確認できます。また、CircleCI.com ではパイプライン全体に対する詳細な結果を確認できます。 ![プル リクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
@@ -59,7 +59,7 @@ version:
 
 ここでは、Orb 開発キットについて掘り下げ、Orb のパブリッシュに関係するコンポーネントについて説明します。
 
-[circleci orb init]({{site.baseurl}}/ja/2.0/orb-author/#getting-started) コマンドは、Orb 開発パイプラインに最適な CircleCI 製設定ファイルなどを含む [Orb テンプレート リポジトリ](https://github.com/CircleCI-Public/Orb-Project-Template)を、Orb 用にクローンします。
+[circleci orb init]({{site.baseurl}}/ja/2.0/orb-author/#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB-1) コマンドは、Orb 開発パイプラインに最適な CircleCI 製設定ファイルなどを含む [Orb テンプレート リポジトリ](https://github.com/CircleCI-Public/Orb-Project-Template)を、Orb 用にクローンします。
 
 この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
 
@@ -93,9 +93,9 @@ Orb パイプラインには次の 2 つのワークフローがあります。
 
 #### integration-test_deploy
 
-CircleCI 製の Orb 開発パイプラインで実行されるワークフローは、次の [`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) で最後です。 このワークフローは、`test-pack` ワークフローの完了時に API から自動的にトリガーされます。 このワークフローには、`test-pack` ワークフローで独自に生成された[開発版]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-versions-development-vs-production-vs-inline)の Orb へのアクセス権が付与されています。
+CircleCI 製の Orb 開発パイプラインで実行されるワークフローは、次の [`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) で最後です。 このワークフローは、`test-pack` ワークフローの完了時に API から自動的にトリガーされます。 このワークフローには、`test-pack` ワークフローで独自に生成された[開発版]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3-%E9%96%8B%E7%99%BA%E7%89%88%E3%81%A8-%E5%AE%89%E5%AE%9A%E7%89%88)の Orb へのアクセス権が付与されています。
 
-このパイプラインの第 2 ステージでは[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#integration-testing)を実行し、開発版に追加およびパブリッシュされた新しい Orb の動作を確認します。
+このパイプラインの第 2 ステージでは[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E7%B5%90%E5%90%88%E3%83%86%E3%82%B9%E3%83%88)を実行し、開発版に追加およびパブリッシュされた新しい Orb の動作を確認します。
 
 結合テストが完了すると、デフォルト ブランチでのみデプロイ ジョブが実行されます。 [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) により、SHA 固有の開発版の Orb が取得され、セマンティック バージョン付きの公開バージョンにプロモートされます。
 
@@ -113,7 +113,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
                   only: <your default branch>
 {% endraw %}
 
-デフォルトでは、`fail-if-semver-not-indicated` パラメーターは true に設定されており、タイトルに適切な[セマンティック バージョン タグ](#issue-a-new-release)が含まれないコミットのビルドはすべて失敗します。
+デフォルトでは、`fail-if-semver-not-indicated` パラメーターは true に設定されており、タイトルに適切な[セマンティック バージョン タグ](#%E6%96%B0%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%81%AE%E5%85%AC%E9%96%8B)が含まれないコミットのビルドはすべて失敗します。
 
 追加機能として、GitHub にバージョン タグをパブリッシュし、コメントからプル リクエストに新しいバージョンを自動で反映することなども可能です。
 
@@ -121,7 +121,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
 
 パブリッシュした CircleCI Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でホストおよび公開されます。ただし、GitHub 上でリリースを追跡する必要がある場合は、CircleCI からバージョン タグを自動的にパブリッシュできます。
 
-CircleCI から GitHub にタグをプッシュするには、[書き込みアクセス権のあるデプロイ キー]({{site.baseurl}}/ja/2.0/add-ssh-key/#circleci-cloud)が必要です。 リンク先の記事を参照して、デプロイ キーを生成し追加してください。 追加が完了すると、そのキー用に生成された、`"SO:ME:FIN:G:ER:PR:IN:T"` のような "フィンガープリント" が表示されます。 この SSH フィンガープリントを、`orb-tools/dev-promote-prod-from-commit-subject` ジョブの `ssh-fingerprints` パラメーターに追加します。
+CircleCI から GitHub にタグをプッシュするには、[書き込みアクセス権のあるデプロイ キー]({{site.baseurl}}/ja/2.0/add-ssh-key/)が必要です。 リンク先の記事を参照して、デプロイ キーを生成し追加してください。 追加が完了すると、そのキー用に生成された、`"SO:ME:FIN:G:ER:PR:IN:T"` のような "フィンガープリント" が表示されます。 この SSH フィンガープリントを、`orb-tools/dev-promote-prod-from-commit-subject` ジョブの `ssh-fingerprints` パラメーターに追加します。
 
 {% raw %}
 <br />      - orb-tools/dev-promote-prod-from-commit-subject:

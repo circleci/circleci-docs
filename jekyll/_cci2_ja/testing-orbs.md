@@ -59,7 +59,7 @@ bash スクリプトのテストで最も基本的なものは、"ShellCheck" �
 
 ## 単体テスト
 
-Orb 開発キットの [`<<include(file)>>` ファイル インクルード]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax)機能を使っており、`src/scripts` に bash ファイルを保存して読み込む場合、スクリプト向けの完全な結合テストを作成できます。
+Orb 開発キットの [`<<include(file)>>` ファイル インクルード(英語)]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax)機能を使っており、`src/scripts` に bash ファイルを保存して読み込む場合、スクリプト向けの完全な結合テストを作成できます。
 
 ![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
