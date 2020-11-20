@@ -48,7 +48,7 @@ After the rerun is initiated, CircleCI reruns the workflow from beginning and re
 
 **Note:** Your project will stop receiving job level status after GitHub Checks is turned on. You can change this in the GitHub Status updates section of the Project Settings > Advanced Settings page. 
 
-## To disable GitHub checks for a project
+## To disable GitHub Checks for a project
 
 To disable the CircleCI Check integration, navigate to the "Organization Settings" page, then remove the repositories using CircleCI Checks as follows:
 
