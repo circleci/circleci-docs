@@ -71,7 +71,7 @@ To disable the CircleCI Check integration, navigate to the "Organization Setting
 3. Click the Manage GitHub Checks button.
 4. Scroll down and click the Uninstall button to uninstall the GitHub Checks app.
 
-## GitHub checks waiting for status in GitHub
+## GitHub Checks waiting for status in GitHub
 
 `ci/circleci:build — Waiting for status to be reported`
 
