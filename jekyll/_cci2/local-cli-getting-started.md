@@ -64,7 +64,7 @@ git push --set-upstream origin master
 
 You now have a git repo that is connected to a VCS. The remote on your VCS ("origin") now matches your local work.
 
-## Download and setup the CircleCI CLI
+## Download and set up the CircleCI CLI
 
 Next, we will install the CircleCI CLI and try out some of its features. To install the CLI on a unix machine run the following command in your terminal:
 
