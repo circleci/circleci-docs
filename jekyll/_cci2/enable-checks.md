@@ -64,7 +64,7 @@ To disable the CircleCI Check integration, navigate to the "Organization Setting
 
 ![CircleCI VCS Settings Page]( {{ site.baseurl }}/assets/img/docs/screen_github_checks_disable_new_ui.png)
 
-## To uninstall checks for the organization
+## To uninstall Checks for the organization
 
 1. Click the Settings tab in the CircleCI app main menu.
 2. Select VCS.
