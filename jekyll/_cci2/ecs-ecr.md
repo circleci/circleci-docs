@@ -72,7 +72,7 @@ Every CircleCI project requires a configuration file called [`.circleci/config.y
 
 Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-### Build and push the docker image to AWS ECR
+### Build and push the Docker image to AWS ECR
 
 The `build-and-push-image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
 
