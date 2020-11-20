@@ -176,7 +176,7 @@ The following describes the detail of the added key values:
 
 You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
 
-## Installing and running selenium to automate browser testing
+## Installing and running Selenium to automate browser testing
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 

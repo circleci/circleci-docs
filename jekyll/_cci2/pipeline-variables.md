@@ -93,7 +93,7 @@ jobs:
       - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
 ```
 
-### Passing parameters when triggering pipelines via the api
+### Passing parameters when triggering pipelines via the API
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 

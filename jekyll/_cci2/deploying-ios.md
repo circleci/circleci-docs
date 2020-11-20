@@ -23,7 +23,7 @@ These deployment lanes can be combined with testing lanes so that the app is aut
 
 **Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/).
 
-## Best practises
+## Best practices
 
 ### Using Git branches
 

@@ -62,7 +62,7 @@ In this example, all steps run in the container created by the first image liste
 
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-### Using multiple docker images
+### Using multiple Docker images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```yaml
@@ -98,7 +98,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
   - `name@digest`
     - `redis@sha256:54057dd7e125ca41...`
 
-#### Public docker registries
+#### Public Docker registries
 {:.no_toc}
   - `image_full_url:tag`
     - `gcr.io/google-containers/busybox:1.24`
@@ -166,7 +166,7 @@ Capability | `docker` | `machine`
 For more information on `machine`, see the next section below.
 
 
-### Available docker resource classes
+### Available Docker resource classes
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
 job. In Docker, the following resources classes are available:

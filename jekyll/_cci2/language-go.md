@@ -16,7 +16,7 @@ installed in a Docker image. If you’re in a rush, just copy the sample configu
 * TOC
 {:toc}
 
-## Quickstart: demo Go reference project
+## Quickstart: Demo Go reference project
 
 We maintain a reference Go project to show how to build on CircleCI 2.0:
 

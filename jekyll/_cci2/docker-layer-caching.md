@@ -73,7 +73,7 @@ CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50
 ### Scope of cache
 With DLC enabled, the entirety of `/var/lib/docker` is cached to the remote volume, which also includes any custom networks created in previous jobs.
 
-### Remote docker environment
+### Remote Docker environment
 {:.no_toc}
 
 To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file:

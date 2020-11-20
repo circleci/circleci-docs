@@ -100,7 +100,7 @@ Although we’ve only made two small changes to the config, these represent sign
 - Line 7: The `checkout` command is an example of a built-in reserved word that contextualizes your job.  In this case, it is pulling down your code so you can start a build.
 - Line 13-17: The second run on the `build` job is listing (through `ls -al`) the contents of the checkout.  Your branch is now available for you to interact with.
 
-## Part three: That’s nice but i need...
+## Part three: That’s nice but I need...
 Every code base and project is different.  That’s okay.  We like diversity.  This is one of the reasons we allow you to run in your machine or docker container of choice.  In this case we will demonstrate running in a container with node available.  Other examples might include macOS machines, java containers, or even GPU.
 
 1. This section expands on Part One and Two.  If you haven’t already, go through at least Part One to ensure you have a working `config.yml` file in your branch.

@@ -157,7 +157,7 @@ and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
 
-## Testing with Firebase test lab
+## Testing with Firebase Test Lab
 
 To use Firebase Test Lab with CircleCI,
 first complete the following steps.

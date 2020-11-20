@@ -49,7 +49,7 @@ install the Development keys and profiles, and then run `bundle exec
 fastlane match adhoc` to generate and install the Ad-hoc distribution
 keys and profiles.
 
-### Preparing your XCode project for use with Fastlane Match
+### Preparing your Xcode project for use with Fastlane Match
 {:.no_toc}
 
 Before setting up Match you must ensure that the code signing

@@ -1047,7 +1047,7 @@ workflows:
 
 **Note:** Conditional steps are available in configuration version 2.1 and later.
 
-### **the `when` step**
+### **The `when` step**
 
 Under the `when` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a truthy value.
 
@@ -1057,7 +1057,7 @@ condition | Y | Logic | [A logic statement](https://circleci.com/docs/2.0/config
 steps |	Y |	Sequence |	A list of steps to execute when the condition is truthy.
 {: class="table table-striped"}
 
-### **the `unless` step**
+### **The `unless` step**
 
 Under the `unless` key are the subkeys `condition` and `steps`. The subkey `steps` are run only if the condition evaluates to a falsy value.
 

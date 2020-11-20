@@ -206,7 +206,7 @@ workflows:
 
 {% endraw %}
 
-### AWS codedeploy
+### AWS CodeDeploy
 {:.no_toc}
 
 The [AWS CodeDeploy](https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy) orb enables you to run deployments through AWS CodeDeploy.

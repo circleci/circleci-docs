@@ -108,7 +108,7 @@ Once you have the snapshot you are free to make changes on the Services machine.
 
 If you do need to rollback at any point, see our (restore from backup)[http://localhost:4000/docs/2.0/backup/#restoring-from-backup] guide.
 
-### Update replicated
+### Update Replicated
 
 **Perquisites**
 
@@ -119,7 +119,7 @@ If you do need to rollback at any point, see our (restore from backup)[http://lo
 - All steps are completed on the Services machine
 - Verify what version of replicated you need to update to by viewing the (Server Changelog)[https://circleci.com/server/changelog/]
 
-#### Preparations for updating replicated
+#### Preparations for updating Replicated
 
 Before performing a replicated version update, backup your data using the [Backup instructions]({{site.baseurl}}/2.0/backup/).
 
@@ -163,7 +163,7 @@ Example Output:
     sudo apt-mark hold docker-ce
 ```
 
-#### Update replicated
+#### Update Replicated
 
 Perform the Replicated update by executing the update script as follows:
 

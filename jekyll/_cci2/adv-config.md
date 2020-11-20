@@ -121,7 +121,7 @@ jobs:
 
 For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/2.0/databases/) guide.
 
-## Run docker commands to build your docker images
+## Run Docker commands to build your Docker images
 
 Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
 

@@ -66,7 +66,7 @@ It is possible to make a Jenkins server distribute your builds to a number of �
 
 CircleCI distributes builds to a large fleet of builder machines by default. If you use SaaS-based circleci.com, then this just happens for you, your builds don’t queue unless you are using all the build capacity in your plan, and that’s that. If you use CircleCI installed in your own environment, then you will appreciate that CircleCI does manage your cluster of builder machines without the need for any extra tools.
 
-## Containers and docker
+## Containers and Docker
 
 Talking about containerization in build systems can be complicated because arbitrary build and test commands can be run inside of containers as part of the implementation of the CI system, and some of these commands may themselves involve running containers. Both of these points are addressed below. Also note that Docker is an extremely popular tool for running containers, but it is not the only one. Both the terms “container” (general) and “Docker” (specific) will be used.
 

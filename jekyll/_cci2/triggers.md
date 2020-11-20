@@ -71,7 +71,7 @@ workflows:
             - hold
 ```
 
-## Trigger docker builds in Dockerhub
+## Trigger Docker builds in Dockerhub
 
 ```yaml
 version: 2

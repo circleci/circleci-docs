@@ -15,7 +15,7 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 * TOC
 {:toc}
 
-## Quickstart: demo PHP Laravel reference project
+## Quickstart: Demo PHP Laravel reference project
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 
@@ -24,7 +24,7 @@ We maintain a reference PHP Laravel project to show how to build PHP on CircleCI
 
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
 
-## Pre-built CircleCI docker images
+## Pre-built CircleCI Docker images
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
 

@@ -285,7 +285,7 @@ jobs:
 When you push to your GitHub repository from a job,
 CircleCI will use the SSH key you added.
 
-### Creating a BitBucket user key
+### Creating a Bitbucket user key
 {:.no_toc}
 
 Bitbucket does not currently provide CircleCI with an API
