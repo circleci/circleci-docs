@@ -114,7 +114,7 @@ workflows:
 
 {% endraw %}
 
-### Pre-built CircleCI docker images
+### Pre-built CircleCI Docker images
 {:.no_toc}
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
