@@ -40,7 +40,7 @@ CircleCI does not preserve entrypoints by default.
 See [Adding an Entrypoint](#adding-an-entrypoint)
 for more details.
 
-## CircleCI dockerfile wizard
+## CircleCI Dockerfile wizard
 
 Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
 
@@ -233,7 +233,7 @@ jobs:
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.
 
-## Detailed custom dockerfile example for ruby
+## Detailed custom Dockerfile example for Ruby
 
 This section demonstrates how to build a Ruby container to use on CircleCI 2.0. **Note:** This section assumes you have already used docker login locally. 
 

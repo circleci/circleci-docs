@@ -545,7 +545,7 @@ workflows:
       - my-job
 ```
 
-## Use matrix jobs to run multiple os tests
+## Use matrix jobs to run multiple OS tests
 
 Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
 

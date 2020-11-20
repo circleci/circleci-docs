@@ -117,7 +117,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
        - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
 ```
 
-### Using dockerize to wait for dependencies
+### Using Dockerize to wait for dependencies
 {:.no_toc}
 
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
