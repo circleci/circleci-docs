@@ -15,7 +15,7 @@ CircleCI プロジェクトは、関連付けられているコード リポジ�
 
 On the "Add Projects" page, you can either *Set Up* any project that you are the owner of on your VCS, or, *Follow* any project in your organization to gain access to its pipelines and to subscribe to \[email notifications\]({{ site.baseurl }}/2.0/notifications/) for the project's status.
 
-## プロジェクトの追加ページ
+## Add projects page
 
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
