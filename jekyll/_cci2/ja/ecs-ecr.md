@@ -27,7 +27,7 @@ version:
 
 ## 前提条件
 
-### Terraform を使用して AWS リソースを作成する
+### Use Terraform to create AWS resources
 
 このガイドに沿ってアプリケーションをビルドしてデプロイするには、いくつかの AWS リソースが必要です。 CircleCI では、これらのリソースを作成するために[いくつかの Terraform スクリプト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup)を提供しています。 これらのスクリプトを使用するには、以下の手順を行います。
 
@@ -46,7 +46,7 @@ terraform apply  # プランを適用して AWS リソースを作成します
 
 **メモ:** ほとんどの AWS リソースは、`terraform destroy` を実行することで破棄できます。 リソースが残っている場合は、[AWS マネジメント コンソール](https://console.aws.amazon.com/)、特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
 
-### CircleCI 環境変数を設定する
+### Configure CircleCI environment variables
 
 CircleCI アプリケーションで、以下の[プロジェクト環境変数]({{ site.baseurl }}/2.0/env-vars/#プロジェクト内で環境変数を設定する)を設定します。
 
@@ -60,7 +60,7 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
 | AWS_ECR_ACCOUNT_URL      | Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com                                     |
 {:class="table table-striped"}
 
-## 設定の詳細説明
+## Configuration walkthrough
 
 すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
@@ -71,7 +71,7 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
 
 Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-### Docker イメージをビルドして AWS ECR にプッシュする
+### Build and push the Docker image to AWS ECR
 
 The `build-and-push-image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
 
@@ -121,7 +121,7 @@ workflows:
 
 Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) for more information.
 
-## See Also
+## See also
 
 - Docker イメージをビルドおよびテストして ECR にプッシュした後で、`aws-ecs` Orb を使用して更新をデプロイする例を参照するには、[AWS-ECS-ECR Orbs](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs) のデモ ページにアクセスしてください。
 - CircleCI Orbs を使用しない例を参照するには、[Non-Orbs AWS ECR-ECS](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs) のデモ ページにアクセスしてください。
