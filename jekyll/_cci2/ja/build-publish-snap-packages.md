@@ -23,10 +23,10 @@ Building a snap on CircleCI is mostly the same as on your local machine, wrapped
 
 任意の環境 (ローカル、企業サーバー CI など) で Snap をビルドするには、Snapcraft 設定ファイルが必要です。 通常、`snap/snapcraft.yml` に格納されています。 ここでは、このファイルが既に存在し、ローカル マシンで Snap を正しくビルドできると想定します。 そうでない場合は、[Snapcraft のドキュメント](https://docs.snapcraft.io/build-snaps/your-first-snap)を参照して、ローカル マシンで Snap をビルドしてください。
 
-## ビルド環境
+## Build environment
 
 ```yaml
-#...
+# ...
 version: 2
 jobs:
   build:
@@ -66,7 +66,7 @@ Snap のパブリッシュは、ほぼ 2 ステップで完了します。 以�
 
 ```Bash
 snapcraft login
-# プロンプトに従って Ubuntu One のアカウントでログインします
+# Follow prompts for logging in with an Ubuntu One account
 snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```
@@ -90,7 +90,7 @@ base64 snapcraft.login | xsel --clipboard
 
 この例では、Snapcraft が自動的に `.snapcraft/snapcraft.cfg` 内のログイン認証情報を検索し、前に作成した環境変数がその場所にデコードされます。 次に、`snapcraft push` コマンドを使用して .snap ファイルを Snap Store にアップロードします。
 
-### アップロードとリリース
+### Uploading vs releasing
 
 デフォルトの `snapcraft push *.snap` は、Snap を Snap Store にアップロードし、サーバー側でストア チェックを実行してから停止します。 この Snap は「リリース」されません。すなわち、このアップデートは自動的にはユーザーに表示されません。 Snap をローカルにパブリッシュするには、`snap release <release-id>` コマンドを使用するか、Snap Store にログインしてリリース ボタンをクリックします。
 
@@ -121,7 +121,7 @@ base64 snapcraft.login | xsel --clipboard
 
 以下に、CircleCI 上で Snap パッケージをビルドするサンプル ファイルの全体を示します。 これと同じプロセスが \[CircleCI ローカル CLI\]\[local-cli-repo\] 用の Snap パッケージのビルドに使用されています。
 
-## サンプル設定ファイルの全文
+## Full example config
 
 ```yaml
 version: 2
