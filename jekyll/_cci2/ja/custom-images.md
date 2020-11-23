@@ -26,11 +26,11 @@ CircleCI では Docker がサポートされています。Docker を使用す�
 
 **メモ:** デフォルトでは、Docker イメージのビルド時にエントリポイントは維持されません。 詳細については、「[エントリポイントの追加](#エントリポイントの追加)」を参照してください。
 
-## CircleCI Dockerfile Wizard
+## CircleCI Dockerfile wizard
 
 Docker をインストールしなくても、ウィザードのクローンを作成して使用することで、Dockerfile を作成してカスタム イメージを生成できます。その方法については、[CircleCI Public の GitHub リポジトリ `dockerfile-wizard`](https://github.com/circleci-public/dockerfile-wizard) を参照してください。
 
-## カスタム イメージの手動作成
+## Creating a custom image manually
 
 以下のセクションでは、カスタム イメージを手動で作成する方法について、手順を追って説明します。 [プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)のカスタム イメージが作成されることが多いため、ここではその方法に焦点を当てます。 以下の内容を応用して、コンテナをサポートするためのイメージも作成できます。
 
@@ -44,7 +44,7 @@ Docker をインストールしなくても、ウィザードのクローンを�
 
 カスタム イメージを作成するには、[`Dockerfile` を作成](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile)する必要があります。 これは、Docker がイメージの収集に使用するコマンドが格納されたテキスト ドキュメントです。 [この Docker デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary)に示されているように、`Dockerfile` はできるだけ `.circleci/images` フォルダーに保存してください。
 
-### 基本イメージの選択と設定
+### Choosing and setting a base image
 {:.no_toc}
 
 カスタム イメージを作成する前に、カスタム イメージの拡張元となる別のイメージを選択する必要があります。 [Docker Hub](https://hub.docker.com/explore/) には、ほぼすべての一般的な言語とフレームワーク向けに、正式なビルド済みイメージが用意されています。 特定の言語やフレームワークごとに、多くのイメージ バリアントから選択できます。 これらのバリアントは、[Docker タグ](https://docs.docker.com/engine/reference/commandline/tag/)で指定されます。
@@ -57,7 +57,7 @@ Docker をインストールしなくても、ウィザードのクローンを�
 FROM golang:1.8.0
 ```
 
-### 追加ツールのインストール
+### Installing additional tools
 {:.no_toc}
 
 追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` 命令](https://docs.docker.com/engine/reference/builder/#run)を使用します。
@@ -67,7 +67,7 @@ RUN apt-get update && apt-get install -y netcat
 RUN go get github.com/jstemmer/go-junit-report
 ```
 
-#### プライマリ コンテナに必要なツール
+#### Required tools for primary containers
 {:.no_toc}
 
 CircleCI でカスタム Docker イメージをプライマリ コンテナとして使用するには、以下のツールをインストールする必要があります。
@@ -83,7 +83,7 @@ CircleCI でカスタム Docker イメージをプライマリ コンテナと�
 
 **メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
-### 他のファイルとディレクトリの追加
+### Adding other files and directories
 {:.no_toc}
 
 パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` 命令](https://docs.docker.com/engine/reference/builder/#add)を使用します。
@@ -93,7 +93,7 @@ ADD ./workdir/contacts /usr/bin/contacts
 ADD ./db/migrations /migrations
 ```
 
-### エントリポイントの追加
+### Adding an entrypoint
 {:.no_toc}
 
 コンテナを実行可能ファイルとして実行するには、[`ENTRYPOINT` 命令](https://docs.docker.com/engine/reference/builder/#entrypoint)を使用します。 By default, CircleCI will ignore the entrypoint for a job's primary container. To preserve the entrypoint even when the image is used for a primary container, use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label) as shown below.
@@ -106,7 +106,7 @@ ENTRYPOINT contacts
 
 **メモ:** ENTRYPOINT コマンドは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルド ステータスにアクセスする必要がある場合は、ENTRYPOINT の代わりにバックグラウンド ステップを使用します。
 
-### イメージのビルド
+### Building the image
 {:.no_toc}
 
 `Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
@@ -125,7 +125,7 @@ $ docker build <path-to-dockerfile>
 
 これで、最初のイメージがビルドされました。 次に、CircleCI で使用できるように、このイメージを保存する必要があります。
 
-### Docker Registry へのイメージの保存
+### Storing images in a Docker registry
 {:.no_toc}
 
 CircleCI でカスタム イメージを使用できるようにするには、イメージをパブリックの [Docker Registry](https://docs.docker.com/registry/introduction/) に保存する必要があります。 Docker Hub では無料でパブリック イメージを無制限に保存できるため、[Docker Hub](https://hub.docker.com/) にアカウントを作成する方法が最も簡単です。 既に Docker Hub を使用している場合は、既存のアカウントを使用できます。
@@ -134,7 +134,7 @@ CircleCI でカスタム イメージを使用できるようにするには、�
 
 この例では Docker Hub を使用していますが、必要に応じて別のレジストリを使用することも可能です。 使用するレジストリに合わせて変更してください。
 
-### レジストリとイメージの準備
+### Preparing the image for the registry
 {:.no_toc}
 
 自身のアカウントで Docker Hub にログインし、[リポジトリ追加](https://hub.docker.com/add/repository/)ページで新しいリポジトリを作成します。 リポジトリ名には `<プロジェクト名>-<コンテナ名>` のようなパターンを使用することをお勧めします (`cci-demo-docker-primary` など)。
@@ -163,7 +163,7 @@ $ docker push circleci/cci-demo-docker-primary:0.0.1
 
 **メモ:** 最初に、`docker login` を使用して Docker Hub での認証を実行しています。 Docker Hub 以外のレジストリを使用する場合は、関連ドキュメントを参照して、イメージをそのレジストリにプッシュする方法を確認してください。
 
-### CircleCI でのイメージの使用
+### Using your image on CircleCI
 {:.no_toc}
 
 イメージが正常にプッシュされたら、以下のように指定することで、イメージを `.circleci/config.yml` で使用できます。
@@ -181,7 +181,7 @@ jobs:
 
 ご不明な点がありましたら、[コミュニティ フォーラム](https://discuss.circleci.com/)にアクセスしてください。CircleCI または他のユーザーからのサポートを受けることができます。
 
-## Ruby 用のカスタム Dockerfile の例
+## Detailed custom Dockerfile example for Ruby
 
 このセクションでは、Ruby コンテナをビルドして CircleCI 2.0 で使用する方法について説明します。**メモ:** このセクションでは、Docker ログインをローカルで使用していることを前提としています。
 
@@ -189,7 +189,7 @@ jobs:
 
     FROM buildpack-deps:jessie
     
-    # gem ドキュメントのインストールをスキップします
+    # Skip installing gem documentation
     RUN mkdir -p /usr/local/etc \
         && { \
             echo 'install: --no-document'; \
@@ -201,8 +201,8 @@ jobs:
     ENV RUBY_DOWNLOAD_SHA256 5be9f8d5d29d252cd7f969ab7550e31bbb001feb4a83532301c0dd3b5006e148
     ENV RUBYGEMS_VERSION 2.6.10
     
-    # Ruby のビルド スクリプトは一部が Ruby で記述されています
-    #   最終イメージではビルドしたものだけが使用されるように、後からシステムの Ruby を削除します
+    # some of ruby's build scripts are written in ruby
+    #   we purge system ruby later to make sure our final image uses what we just built
     RUN set -ex \
         \
         && buildDeps=' \
@@ -223,7 +223,7 @@ jobs:
         \
         && cd /usr/src/ruby \
         \
-    # 以下を非表示にするために "ENABLE_PATH_CHECK" を無効にします
+    # hack in "ENABLE_PATH_CHECK" disabling to suppress:
     #   warning: Insecure world writable dir
         && { \
             echo '#define ENABLE_PATH_CHECK 0'; \
@@ -247,8 +247,8 @@ jobs:
     
     RUN gem install bundler --version "$BUNDLER_VERSION"
     
-    # グローバルにインストールします
-    # すべてのアプリケーションで ".bundle" を作成しません
+    # install things globally, for great justice
+    # and don't create ".bundle" in all our apps
     ENV GEM_HOME /usr/local/bundle
     ENV BUNDLE_PATH="$GEM_HOME" \
         BUNDLE_BIN="$GEM_HOME/bin" \
