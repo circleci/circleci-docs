@@ -26,12 +26,12 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
 
 既に `circle.yml` ファイルがある場合は、以降の各セクションの手順に従って、既存のファイルをコピーし、新しい必須キーを記述し、1.0 のキーを検索して 2.0 のキーに置き換えます。
 
-### 1.0 から 2.0 への `config-translation` エンドポイントを使用する
+### Using the 1.0 to 2.0 `config-translation` endpoint
 {:.no_toc}
 
 `config-translation` エンドポイントを使用すると、1.0 の設定ファイルから 2.0 の設定ファイルへの変換をすぐに始めることができます。詳細については、「[1.0 から 2.0 への config-translation エンドポイントを使用する]({{ site.baseurl }}/2.0/config-translation)」を参照してください。
 
-## 必須キーを構成する手順
+## Steps to configure required keys
 
 1. 既存の `circle.yml` ファイルをコピーして、プロジェクト リポジトリのルートにある新しい `.circleci` ディレクトリに置きます。
 
@@ -123,13 +123,13 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-
 
 8. <http://codebeautify.org/yaml-validator> で YAML をバリデーションして、変更をチェックします。
 
-## 環境変数
+## Environment variables
 
 In CircleCI 2.0, all defined environment variables are treated literally. It is possible to interpolate variables within a command by setting it for the current shell.
 
 For more information, refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
-## ワークフローを構成する手順
+## Steps to configure workflows
 
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
@@ -177,7 +177,7 @@ To increase the speed of your software development through faster feedback, shor
 
 6. <http://codebeautify.org/yaml-validator> で再度 YAML をバリデーションして、形式が正しいことをチェックします。
 
-## 2.0 で非推奨となるキーの検索と置換
+## Search and replace deprecated 2.0 keys
 
 - 構成にタイムゾーンが含まれる場合は、`timezone: America/Los_Angeles` を検索して、以下の 2 行に置き換えます。
 
