@@ -24,7 +24,7 @@ version:
 
 - **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. *Commands* contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). *Jobs* are a definition of what steps/commands to run *and* the [executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) to run them in. *Commands* are invoked within jobs. *Jobs* are orchestrated using *[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)*.
 
-## Using Orbs on CircleCI Server
+## Using orbs on CircleCI server
 
 - **Question:** Can orbs be used on a private installation of CircleCI server?
 
@@ -68,7 +68,7 @@ version:
 
 - **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
 
-## See Also
+## See also
 
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
