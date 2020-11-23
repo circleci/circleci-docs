@@ -17,13 +17,13 @@ version:
 | [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
 {: class="table table-striped"}
 
-## ガイド付きサンプル プロジェクト
+## Sample projects with companion guides
 
 サンプル プロジェクトを参照すると、アプリケーションの記述に使用する言語やフレームワークの構築に役立ちます。
 
 {% include snippets/language-guides.md %}
 
-## サンプル ワークフロー
+## Sample workflows
 
 | Workflow Example     | GitHub Repo                                                                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -33,7 +33,7 @@ version:
 | Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)         |
 {: class="table table-striped"}
 
-## CircleCI パブリック リポジトリ
+## CircleCI public repos
 
 | GitHub Repo            | Description                                                      | config.yml link                                                                                      |
 | ---------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -43,7 +43,7 @@ version:
 | circleci image-builder | Uses Docker for building container images.                       | [.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)   |
 {: class="table table-striped"}
 
-## 関連項目
+## See also
 
 Hello World ドキュメントと`config.yml` ファイルの例を参照して、最初のビルドを構成できます。
 
