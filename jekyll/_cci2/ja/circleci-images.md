@@ -27,7 +27,7 @@ CircleCI ではすぐに使える Docker イメージを多数提供していま
 
 ビルド済み CircleCI Docker イメージのデモ アプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)を参照してください。
 
-## Next-generation Convenience Images
+## Next-generation convenience images
 
 The next-generation convenience images in this section were built from the ground up with CI, efficiency, and determinism in mind. Here are some of the highlights:
 
@@ -35,7 +35,7 @@ The next-generation convenience images in this section were built from the groun
 
 **Improved reliability and stability** - The current images are rebuilt practically every day with potential changes from upstream that we can't always test fast enough. This leads to frequent breaking changes, which is not the best environment for stable, deterministic builds. Next-gen images will only be rebuilt for security and critical-bugs, leading to more stable and deterministic images.
 
-### CircleCI Base Image
+### CircleCI base image
 
 ```yaml
 image: cimg/base:2020.01
@@ -61,7 +61,7 @@ image: cimg/go:1.13
 
 This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`.
 
-## Best Practices
+## Best practices
 
 The next-gen convenience images in the following sections are based on the most recent Ubuntu LTS Docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
@@ -103,7 +103,7 @@ jobs:
           command: node -v
 ```
 
-### Using an Image Tag to Pin an Image Version
+### Using an image tag to pin an image version
 {:.no_toc}
 
 You can pin aspects of a Docker image by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
@@ -114,7 +114,7 @@ See below for a list of the [Latest Image Tags by Language](#latest-image-tags-b
 
 **Note:** If you do not specify a tag, Docker applies the `latest` tag. The `latest` tag refers to the most recent stable release of an image. However, since this tag may change unexpectedly, it is best practice to add an explicit image tag. Only legacy images from the `circleci` repository support the `latest` tag. Next-gen images from the `cimg` repository do not support `latest`.
 
-### Using a Docker Image ID to Pin an Image to a Fixed Version
+### Using a docker image id to pin an image to a fixed version
 {:.no_toc}
 
 Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier). You can use this image ID to pin an image to a fixed version.
@@ -124,7 +124,7 @@ Each image ID is an immutable SHA256 digest and looks like this:
     sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
     
 
-#### イメージ ID の確認方法
+#### Finding an image id
 {:.no_toc}
 
 1. CircleCI にアクセスし、そのイメージを使用した過去のビルドを表示します。
@@ -135,13 +135,13 @@ Each image ID is an immutable SHA256 digest and looks like this:
     cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b0182cf
     
 
-## Image Types
+## Image types
 
 CircleCI's convenience images fall into two categories: **language** images and **service** images. All images add a `circleci` user as a system user.
 
 **Note:** The images below are based on the most recently built upstream images for their respective languages. Because the most recent images are more likely to change, it is [best practice](#best-practices) to use a more specific tag.
 
-### Legacy Language Images
+### Legacy language images
 {:.no_toc}
 
 The legacy language images are convenience images for common programming languages. These images include both the relevant language and [commonly-used tools](#pre-installed-tools). A language image should be listed first under the `docker` key in your configuration, making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
@@ -160,7 +160,7 @@ CircleCI maintains legacy images for the languages below.
 - [Ruby](#ruby)
 - [Rust](#rust)
 
-#### 言語イメージのバリアント
+#### Language image variants
 {:.no_toc}
 
 CircleCI maintains several variants for language images. To use these variants, add one of the following suffixes to the end of an image tag.
@@ -171,7 +171,7 @@ CircleCI maintains several variants for language images. To use these variants, 
 
 For example, if you want to add browsers to the `circleci/golang:1.9` image, use the `circleci/golang:1.9-browsers` image.
 
-### Next-Gen Language Images
+### Next-gen language images
 {:.no_toc}
 
 Like the legacy images, the next-gen language images are convenience images for common programming languages. These images include both the same relevant language and [commonly-used tools](#pre-installed-tools). A language image should be listed first under the `docker` key in your configuration, making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
@@ -192,12 +192,12 @@ If your language is not listed, feel free to request an image on our [Ideas Boar
 
 If we see an idea on the board take off, we'll consider building it officially.
 
-#### Next-Gen Language Image Variants
+#### Next-gen language image variants
 {:.no_toc}
 
 CircleCI maintains several variants for the next-gen language image. For next-gen images be sure to check each image listing for information on each variant. The `-browsers` variant for next-gen images is still in progress. See each image listing on the [Developer Hub](https://circleci.com/developer/images/) for details on which variants it supports.
 
-### Service Images
+### Service images
 {:.no_toc}
 
 Service images are convenience images for services like databases. These images should be listed **after** language images so they become secondary service containers.
@@ -212,19 +212,19 @@ CircleCI maintains legacy images for the services below.
 - [PostgreSQL](#postgresql)
 - [Redis](#redis)
 
-#### Service Image Variant
+#### Service image variant
 {:.no_toc}
 
 CircleCI maintains only one variant for service images. To speed up builds using RAM volume, add the `-ram` suffix to the end of a service image tag.
 
 For example, if you want the `circleci/postgres:9.5-postgis` image to use RAM volume, use the `circleci/postgres:9.5-postgis-ram` image.
 
-### Next-Gen Service Images
+### Next-gen service images
 {:.no_toc}
 
-Circleci is working on adding next-gen service convenience images. Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for the latest available service images.
+CircleCI is working on adding next-gen service convenience images. Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for the latest available service images.
 
-## Pre-installed Tools
+## Pre-installed tools
 
 All convenience images have been extended with additional tools, installed with `apt-get`:
 
@@ -256,13 +256,13 @@ The following packages are installed via `curl` or other means.
 - [dockerize](https://github.com/jwilder/dockerize)
 - [jq](https://stedolan.github.io/jq/)
 
-## Out of Scope
+## Out of scope
 
 1. 上記一覧に記載のないイメージは利用できません。 コンビニエンス イメージの提供プログラムが刷新されたため、現在のところ新しいイメージについての提案は受け付けていません。
 2. 旧バージョンのソフトウェアは再作成されません。 アップストリーム イメージの特定のリリース (Node.js v8.1.0 など) 用のタグが作成されなくなったら、CircleCI でもイメージの作成を終了します。 つまり、そのイメージ (`npm` など) に含まれる他のツールも更新されなくなります。
 3. プレビュー、ベータ版、リリース候補を指定するイメージ タグには対応していません。 利用できることもありますが、これらのタグが原因となってコンビニエンス イメージのビルド システムに問題が発生しやすくなります。 特定の言語の非安定版リリースが必要な場合は、[Orbs](https://circleci.com/ja/orbs/) またはカスタム Docker イメージからインストールすることをお勧めします。
 
-## Latest Image Tags by Language
+## Latest image tags by language
 
 Below is a list of the latest **legacy** convenience images, sorted by language. For details about the contents of each image, refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
 
@@ -311,7 +311,7 @@ Note: Any variants available for this image can be used by appending the variant
 
 {% endfor %}
 
-## See Also
+## See also
 {:.no_toc}
 
 - See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.
