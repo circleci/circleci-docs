@@ -20,9 +20,9 @@ version:
 
 This is an example application showcasing how to run a Java app on CircleCI 2.1. This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes pared down sample configurations demonstrating different CircleCI features including workspaces, dependency caching, and parallelism.
 
-## Sample Configuration: version 2.1:
+## Sample configuration: version 2.1:
 
-### A Basic Build with an Orb:
+### A basic build with an orb:
 
 ```yaml
 version: 2.1
@@ -58,7 +58,7 @@ jobs:
 
 Version 2.0 configs without workflows will look for a job named `build`. A job is a essentially a series of commands run in a clean execution environment. Notice the two primary parts of a job: the executor and steps. In this case, we are using the docker executor and passing in a CircleCI convenience image.
 
-### Using a Workflow to Build then Test
+### Using a workflow to build then test
 
 A workflow is a dependency graph of jobs. This basic workflow runs a build job followed by a test job. The test job will not run unless the build job exits successfully.
 
@@ -97,7 +97,7 @@ workflows:
             - build
 ```
 
-### Caching Dependencies
+### Caching dependencies
 
 The following code sample details the use of **caching**.
 
@@ -130,7 +130,7 @@ The first time this build ran without any dependencies cached, it took 2m14s. On
 
 Note that the `restore_cache` step will restore whichever cache it first matches. You can add a restore key here as a fallback. In this case, even if `pom.xml` changes, you can still restore the previous cache. This means the job will only have to fetch the dependencies that have changed between the new `pom.xml` and the previous cache.
 
-### Persisting Build Artifacts to Workspace
+### Persisting build artifacts to workspace
 
 The following configuration sample details persisting a build artifact to a workspace.
 
@@ -177,7 +177,7 @@ workflows:
 
 This `persist_to_workspace` step allows you to persist files or directories to be used by downstream jobs in the workflow. In this case, the target directory produced by the build step is persisted for use by the test step.
 
-### Splitting Tests Across Parallel Containers
+### Splitting tests across parallel containers
 
 
 {% raw %}
@@ -239,7 +239,7 @@ To collect the list of tests to split, simply pull out all of the Java test file
 
 Adding `store_test_results` enables CircleCI to access the historical timing data for previous executions of these tests, so the platform knows how to split tests to achieve the fastest overall runtime.
 
-### Storing Code Coverage Artifacts
+### Storing code coverage artifacts
 
 ```yaml
 version: 2.0
@@ -267,7 +267,7 @@ workflows:
 
 The Maven test runner with the [JaCoCo](https://www.eclemma.org/jacoco/) plugin generates a code coverage report during the build. To save that report as a build artifact, use the `store_artifacts` step.
 
-### A Configuration
+### A configuration
 
 The following code sample is the entirety of a configuration file combining the features described above.
 
@@ -342,7 +342,7 @@ workflows:
 
 The configuration above is from a demo Java app, which you can access [here](https://github.com/CircleCI-Public/circleci-demo-java-spring). If you want to step through it yourself, you can fork the project on GitHub and download it to your machine. Go to the **Projects** page in CircleCI and click the **Follow Project** button next to your forked project. Finally, delete everything in .circleci/config.yml. Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 
-## See Also
+## See also
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document for details on handling Java memory issues.
