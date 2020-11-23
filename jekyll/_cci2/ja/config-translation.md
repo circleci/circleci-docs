@@ -53,6 +53,6 @@ version:
       The default is to use the default branch that is set in your VCS, typically `master`.
     
 
-## 関連項目
+## See also
 
 [1.0 から 2.0 への移行のヒント]({{site.baseurl}}/2.0/migration/)
