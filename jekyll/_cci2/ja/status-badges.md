@@ -114,7 +114,7 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 
 ```
 
-## Creating Badges for Private Repositories
+## Creating badges for private repositories
 
 **NOTE:** To create a status badge for a private project you will need to create an **api token** *specifically scoped to "status"* and include that token in the url string of your badge. Consider the following markdown image badge snippet against the original markdown example above; it has a url parameter for a token added.
 
@@ -136,6 +136,6 @@ If you find the default status badge too minimal, you can use the [shield style]
 
 ![Failing shield version]({{ site.baseurl }}/assets/img/docs/shield-failing.png)
 
-## See Also
+## See also
 
 [Status]({{ site.baseurl }}/2.0/status/)
