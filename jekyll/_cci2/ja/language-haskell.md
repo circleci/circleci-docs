@@ -26,7 +26,7 @@ target="_blank">GitHub 上の Haskell デモ プロジェクト</a>
 
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
-## 設定ファイルの例
+## Sample configuration
 
 {% raw %}
 
@@ -71,7 +71,7 @@ jobs:
 
 {% endraw %}
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -153,7 +153,7 @@ jobs:
 
 完了です。 これで Haskell アプリケーション用に CircleCI を構成できました。
 
-## 一般的なトラブルシューティング
+## Common troubleshooting
 
 `stack test` コマンドは、メモリ不足エラーで失敗する場合があります。 以下に示すように、`stack test` コマンドに `-j1` フラグを追加することを検討してみてください (メモ: これにより、テストを実行するコア数を 1 に減らして、メモリ使用量を抑えられますが、テストの実行時間が長くなる可能性があります)。
 
@@ -163,7 +163,7 @@ jobs:
           command: stack --no-terminal test -j1
 ```
 
-## 関連項目
+## See also
 {:.no_toc}
 
 デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
