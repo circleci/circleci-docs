@@ -13,7 +13,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * 目次
 {:toc}
 
-## 初回のビルド実行にあたっての前提条件
+## Prerequisites for running your first build
 {:.no_toc}
 
 * Some basic knowledge of Git.
@@ -21,7 +21,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * An account on CircleCI.
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
 
-## リポジトリを作成する
+## Creating a repository
 
 Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
 
@@ -51,7 +51,7 @@ World` configuration example at the bottom of the list.
 
 6. You will be taken to the Pipelines page where you can view your newly running build.
 
-## Digging Into Your First Pipeline
+## Digging into your first pipeline
 
 You should see your pipeline start to run automatically—and pass! So, what just happened? Click on the green **Success** button on your pipeline to investigate the following parts of the run:
 
@@ -67,7 +67,7 @@ You should see your pipeline start to run automatically—and pass! So, what jus
 
 Even though there was no actual source code in your repo, and no actual tests configured in your `config.yml`, CircleCI considers your build to have "succeeded" because all steps completed successfully (returned an [exit code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far more complicated, oftentimes with multiple Docker images and multiple steps, including a large number of tests. You can learn more about all the possible steps one may put in a `config.yml` file in the [Configuration Reference](https://circleci.com/docs/2.0/configuration-reference).
 
-### ビルドを意図的に失敗させる
+### Breaking your build!
 {:.no_toc}
 
 Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On GitHub, it is possible to edit files directly. Use the URL below and substitute the name of your repository and username (replace the text with `{brackets}`) and then paste it in your browser. If you are already familiar with Git, use your text-editor and push your changes with git.
@@ -97,7 +97,7 @@ Then, commit your change in the GitHub editor and return to the Projects page in
 
 The Node orb runs some common Node tasks. Because we are working with an empty repository, running `npm run test`, a Node script, causes our configuration to fail. How would we fix this? You would need to setup a Node project in your repository; a topic for another tutorial. You can view several [demo applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on setting up CircleCI with various languages and frameworks.
 
-## Using the Workflows Functionality
+## Using the workflows functionality
 {:.no_toc}
 
 You do not have to use orbs to use CircleCI. The following example details how to create a custom configuration that also uses the [workflow feature]({{site.baseurl}}/2.0/workflows) of CircleCI.
@@ -143,7 +143,7 @@ You do not have to use orbs to use CircleCI. The following example details how t
 
 Read more about workflows in the [Orchestrating Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
-### Adding Some Changes to use the Workspaces Functionality
+### Adding some changes to use the workspaces functionality
 {:.no_toc}
 
 Each workflow has an associated workspace which can be used to transfer files to downstream jobs as the workflow progresses. You can use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Try updating `config.yml` to the following:
@@ -199,7 +199,7 @@ workflows:
 
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
-### SSH into Your {% comment %} TODO: Job {% endcomment %}Build
+### SSH into your {% comment %} todo: job {% endcomment %}build
 {:.no_toc}
 
 If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
@@ -223,11 +223,11 @@ Using some of the following commands, see if you can find and view the contents 
     cat <file_name>      # show me the contents of the file <file_name>
     
 
-## Collaborating with Teammates
+## Collaborating with teammates
 
 It is easy for teammates and collaborators to view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
 
-## See Also
+## See also
 {:.no_toc}
 
 [Blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) on how to validate the CircleCI `config.yml` on every commit with a git hook.
@@ -239,7 +239,7 @@ It is easy for teammates and collaborators to view and follow your projects. Tea
 * [What is continuous integration?](https://circleci.com/blog/what-is-continuous-integration/)
 * CircleCI on [GitHub](https://github.com/circleci), [Twitter](https://twitter.com/circleci) and [Facebook](https://www.facebook.com/circleci)
 
-### Continuous Integration
+### Continuous integration
 {:.no_toc}
 
 * [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
