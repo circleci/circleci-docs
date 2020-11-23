@@ -32,7 +32,7 @@ version:
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-## 設定ファイルの例
+## Sample configuration
 
 {% raw %}
 
@@ -75,7 +75,7 @@ jobs:
 
 {% endraw %}
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 必ずバージョンの指定から始めます。
 
@@ -115,18 +115,18 @@ jobs:
 
 ビルド レポートをジョブ アーティファクトとしてアップロードし、CircleCI で処理するテスト メタデータ (XML) をアップロードします。
 
-## Docker イメージ
+## Docker images
 
 CircleCI には、Android アプリのビルドに使用できる Docker イメージが用意されているので便利です。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソース コードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
 
 The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). ベース OS は Debian Jessie です。ビルドは、パスワードなしで `sudo` にフル アクセスできる `circleci` ユーザーとして実行されます。
 
-### API レベル
+### API levels
 {:.no_toc}
 
 [Android API レベル](https://source.android.com/source/build-numbers)ごとに異なる Docker イメージが用意されています。 ジョブで API レベル 24 (Nougat 7.0) を使用するには、`circleci/android:api-24-alpha` を選択します。
 
-### Customizing the Images
+### Customizing the images
 {:.no_toc}
 
 We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
@@ -135,12 +135,12 @@ To customize the image, create a Dockerfile that builds `FROM` the `circleci/and
 
 You can also use the [CircleCI Android Orb](https://circleci.com/developer/orbs/orb/circleci/android) to select your desired Android SDK and NDK.
 
-### React Native Projects
+### React Native projects
 {:.no_toc}
 
 React Native projects can be built on CircleCI 2.0 using Linux, Android and macOS capabilities. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
 
-## Firebase Test Lab を使用したテスト
+## Testing with Firebase Test Lab
 
 To use Firebase Test Lab with CircleCI, first complete the following steps.
 
@@ -209,7 +209,7 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 ## トラブルシューティング
 
-### Handling Out Of Memory Errors
+### Handling out of memory errors
 
 You might run into out of memory (oom) errors with your build. To get acquainted with the basics of customizing the JVM's memory usage, consider reading the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document.
 
@@ -230,7 +230,7 @@ android {
 
 If you are still running into OOM issues you can also limit the max workers for gradle: `./gradlew test --max-workers 4`
 
-### Disabling Pre-Dexing to Improve Build Performance
+### Disabling pre-dexing to improve build performance
 {:.no_toc}
 
 Pre-dexing dependencies has no benefit on CircleCI. To disable pre-dexing, refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
