@@ -23,7 +23,7 @@ CircleCI では 2 種類の API トークンを作成できます。
 
 **メモ:** API トークンは、一度作成すると修正できません。 既存のトークンを変更するには、いったん削除してから再作成する必要があります。
 
-### パーソナル API トークンの作成
+### Creating a personal API token
 
 1. CircleCI アプリケーションで、[ユーザー設定](https://circleci.com/account){:rel="nofollow"}に移動します。
 2. [[Personal API Tokens (パーソナル API トークン)](https://circleci.com/account/api)]{:rel="nofollow"} をクリックします。
@@ -34,7 +34,7 @@ CircleCI では 2 種類の API トークンを作成できます。
 
 パーソナル API トークンを削除するには、**[Remove (削除する)]** 列の [X] をクリックします。
 
-### プロジェクト API トークンの作成
+### Creating a project API token
 
 1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 2. **[Permissions (権限)]** セクションで、**[API Permissions (API の権限)]** をクリックします。
@@ -45,7 +45,7 @@ CircleCI では 2 種類の API トークンを作成できます。
 
 プロジェクト API トークンを削除するには、**[[Remove (削除する)]** 列の [X] をクリックします。 確認ウィンドウが表示されたら、**[Remove (削除する)]** ボタンをクリックします。
 
-## 次のステップ
+## Next steps
 
 API トークンは何らかの作業に活用されて初めて、その効力を発揮します。 たとえば以下のような用途が考えられます。
 
