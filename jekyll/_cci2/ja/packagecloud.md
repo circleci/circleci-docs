@@ -14,7 +14,7 @@ version:
 * 目次
 {:toc}
 
-## 環境変数の構成
+## Configure environment variables
 
 ### `$PACKAGECLOUD_TOKEN` の設定
 
@@ -43,11 +43,11 @@ CircleCI で packagecloud CLI を使用するには、RubyGems を使用して�
 
 CLI は、自動的に `$PACKAGECLOUD_TOKEN` 環境変数を使用して、packagecloud サービスに対して認証を行います。
 
-### 依存関係のキャッシュの使用
+### Using dependency caching
 
 後続のビルドのためにこの依存関係をキャッシュするには、`Gemfile` に `package_cloud` gem を追加して、「[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)」に記載された CircleCI のガイダンスに従ってください。
 
-## packagecloud CLI でのパッケージのプッシュ
+## Pushing packages with the packagecloud CLI
 
 ビルド プロセスはパッケージのタイプによって異なりますが、パッケージを packagecloud リポジトリにプッシュする方法はきわめて単純です。 CircleCI のビルドからパッケージをリポジトリに追加するには、ユーザーの `deploy` 設定に packagecloud CLI を使用するステップを追加します。
 
@@ -94,11 +94,11 @@ workflows:
             - build
 ```
 
-## `npm` パッケージのデプロイ
+## Deploy `npm` packages
 
 CircleCI ユーザーは、packagecloud でホスティングされている npm レジストリにパッケージを直接デプロイできます。
 
-### テスト ジョブの構成
+### Configure the test job
 
 This job will retrieve the project code, install its dependencies and run any tests in the NodeJS project:
 
@@ -130,7 +130,7 @@ jobs:
           paths: .
 ```
 
-### デプロイ ジョブの構成
+### Configure the deploy job
 
 次にデプロイ ジョブを構成します。 このジョブは、packagecloud npm リポジトリに対して認証およびパブリッシュを行います。
 
@@ -232,6 +232,6 @@ packagecloud には、パッケージ リポジトリを管理するための堅
 
 {:.no_toc}
 
-## 関連項目
+## See also
 
 [アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)
