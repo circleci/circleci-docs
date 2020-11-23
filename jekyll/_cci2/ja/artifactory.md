@@ -22,7 +22,7 @@ We will use this space to highlight some sample projects showing how to best use
 
 Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
 
-## Artifactory プラグイン
+## Artifactory plugins
 
 Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
 
@@ -86,7 +86,7 @@ jobs:
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 ```
 
-## 関連項目
+## See also
 
 {:.no_toc}
 
