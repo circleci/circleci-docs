@@ -28,7 +28,7 @@ target="_blank">GitHub 上の Crystal デモ プロジェクト</a>
 
 このアプリケーションでは Crystal 0.27 と Kemal 0.25 を使用しています。 Crystal と Kemal は速いペースで開発が進められています。 Docker イメージを `:latest` バージョンに変更すると、互換性を損なう変更が発生する可能性があります。
 
-## 設定ファイルの例
+## Sample configuration
 
 {% raw %}
 ```yaml
@@ -57,11 +57,11 @@ jobs: # 一連のジョブ
       - run:
           name: テスト
           command: crystal spec
-# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください    
+# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
 ```
 {% endraw %}
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
