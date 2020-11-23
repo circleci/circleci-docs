@@ -15,7 +15,7 @@ Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 で�
 
 {% include snippets/language-guides.md %}
 
-## サポートされている言語
+## Supported languages
 
 - Clojure (v1.2.0 以降)
 - Elixir (v1.2 以降)
@@ -30,6 +30,6 @@ Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 で�
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
 
-## 関連項目
+## See also
 
 Refer to the [Getting Started Introduction]({{ site.baseurl }}/2.0/getting-started/) for the steps to run your first build.
