@@ -30,7 +30,7 @@ Orb 開発キットは、相互に連携する複数のツールをセットに�
 
 <script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
 
-### はじめに
+### Getting started
 
 Orb 開発キットで新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
@@ -69,7 +69,7 @@ git push origin <default-branch>
 
 1. **Orb の記述を完了します。**<br /> 新しい Orb プロジェクトが CircleCI で自動的にフォローされ、テスト用に最初の開発バージョン `<namespace>/<orb>@dev:alpha` (hello-world サンプル) が生成されて、CLI が終了します。<br /><br /> CircleCI 上にビルドされたプロジェクトへのリンクが提供されます。そこで、バリデーション、パッケージ化、テスト、パブリッシュのプロセスを確認できます。 また、CLI によって自動的に `alpha` という新しい開発ブランチに移行したことも確認できます。<br /><br /> この新しいブランチから、変更を加えたりプッシュしたりすることができます。 これで、コミットするたびに、Orb がパッケージ化、バリデーション、テスト (任意) され、パブリッシュできるようになりました。<br /><br /> Orb の最初のメジャー バージョンをデプロイする準備が整ったら、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」で、セマンティック バージョニング (semver) を使った変更のデプロイに関する情報を確認してください。
 
-### Orb の記述
+### Writing your orb
 
 Orb の作成を始める前に、デフォルト以外のブランチにいることを確認してください。 通常は、`alpha` ブランチで Orb の作業を始めることをお勧めします。
 
@@ -95,7 +95,7 @@ $ git branch
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md)       |
 {: class="table table-striped"}
 
-#### Orb のソース
+#### Orb source
 
 `src` ディレクトリに移動すると、含まれているセクションを確認できます。
 
@@ -252,19 +252,19 @@ echo Hello "${PARAM_TO}"
 
 これで、スクリプトをローカルでモックしてテストできます。
 
-### Orb のテスト
+### Testing orbs
 
 他のソフトウェアと同様、コードをテストする方法は複数あります。どれだけのテストを実装するかは、開発者が決めることができます。 この時点で、設定ファイル内には　[integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) という名前のジョブがあります。作成した Orb コンポーネントをテストするには、このジョブを更新する必要があります。 これは一種の_結合テスト_で、 Orb の単体テストも可能です。
 
 詳しくは、「[Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/)」をお読みください。
 
-### Orb のパブリッシュ
+### Publishing your orb
 
 Orb 開発キットを使用すると、完全に自動化された CI/CD パイプラインが `.circleci/config.yml` 内に自動的に構成されます。 この構成により、Orb のセマンティック バージョニングによるリリースを簡単に自動デプロイできます。
 
 詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
 
-### Orb のカテゴリ設定
+### Categorizing your orb
 
 作成した Orb を [Orb レジストリ](https://circleci.com/developer/ja/orbs)で見つけやすくするために、カテゴリを設定できます。 カテゴリを設定した Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 Orb を見つけやすくするために、CircleCI が Orb のカテゴリ項目を作成、編集する場合もあります。
 
