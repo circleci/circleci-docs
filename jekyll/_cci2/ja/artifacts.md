@@ -14,7 +14,7 @@ version:
 * 目次
 {:toc}
 
-## アーティファクトの概要
+## Artifacts overview
 
 Artifacts persist data after a job is completed and may be used for storage of the outputs of your build process.
 
@@ -34,7 +34,7 @@ Android アプリとしてパッケージ化されるプロジェクトの場合
 
 **Note:** Uploaded artifact filenames are encoded using the [Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html). Keep this in mind if you are expecting to find artifacts at a given path within the application.
 
-## アーティファクトのアップロード
+## Uploading artifacts
 
 To upload artifacts created during builds, use the following example:
 
@@ -74,7 +74,7 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
 * `path` は、アーティファクトとしてアップロードされるファイルまたはディレクトリのパスです。
 * `destination` **(オプション)** は、アーティファクト API でアーティファクト パスに追加されるプレフィックスです。 `path` で指定されたファイルのディレクトリがデフォルトとして使用されます。
 
-## コア ファイルのアップロード
+## Uploading core files
 
 This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
 
@@ -133,7 +133,7 @@ Finally, the core dump files are stored to the artifacts service with `store_art
 
 When CircleCI runs a job, a link to the core dump file appears in the Artifacts tab of the **Job page**.
 
-## CircleCI で行うビルドのすべてのアーティファクトのダウンロード
+## Downloading all artifacts for a build on CircleCI
 
 To download your artifacts with `curl`, follow the steps below.
 
@@ -168,12 +168,12 @@ You can read more about using CircleCI's API to interact with artifacts in our [
 | `:build_num`  | アーティファクトをダウンロードする対象のビルドの番号。                                                  |
 {: class="table table-striped"}
 
-### コマンドの説明
+### Description of commands
 {:.no_toc}
 
 First, the CIRCLE_TOKEN environment variable is created. Then, the `curl` command fetches all artifact details for a build and pipes them to `grep` to extract the URLs. Using `sed` your circle token is appended to the file to create a unique file name. Finally, `wget` is used to download the artifacts to the current directory in your terminal.
 
-## 関連項目
+## See also
 {:.no_toc}
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
