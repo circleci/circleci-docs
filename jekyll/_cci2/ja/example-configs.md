@@ -13,7 +13,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 * 目次
 {:toc}
 
-## CircleCI ファイルとパブリック リポジトリのサンプル
+## Example CircleCI files and public repos
 
 | サンプル名                   | 説明                                                                                                                                                               | リンク                                                                                                                                                            |
 | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -30,7 +30,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 | circleci-demo-docker    | CircleCI 2.0 で Docker イメージをビルドするサンプル アプリケーション                                                                                                                    | [.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-docker/blob/master/.circleci/config.yml)                                               |
 {: class="table table-striped"}
 
-## 機能別のオープンソース プロジェクト
+## Open source projects by feature
 
 以下のプロジェクトでは、CircleCI の機能別に設定ファイル構文のサンプルを提供しています。
 
@@ -47,7 +47,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 | スケジュールされたタグ付きワークフロー ジョブ                                            | **Cloud Pub/Sub** 向けの Node.js イディオム　クライアント                                                                                        | [nodejs-pubsub/.circleci/config.yml](https://github.com/googleapis/nodejs-pubsub/blob/master/.circleci/config.yml)     |
 {: class="table table-striped"}
 
-## 言語別のオープンソース プロジェクト
+## Open source projects by language
 
 以下のプロジェクトでは、プログラミング言語、テストのメカニズム、デプロイ ターゲット別のサンプルを提供しています。
 
@@ -67,6 +67,6 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 | Scala and `sbt` build, test, and release with three workflows                        | **Arweave4s** is a lightweight modular HTTP client for the Arweave blockchain.                                                                                                                                                    | [arweave4s/.circleci/config.yml](https://github.com/toknapp/arweave4s/blob/master/.circleci/config.yml)                        |
 {: class="table table-striped"}
 
-## 関連項目
+## See also
 
 [チュートリアルとサンプル アプリケーション]({{ site.baseurl }}/2.0/tutorials/)もご覧ください。このページには、11 種類の言語で作成された基礎的なアプリケーションについて、ひととおりのサンプル設定ファイルをコメントや詳細な解説付きで用意しています。
