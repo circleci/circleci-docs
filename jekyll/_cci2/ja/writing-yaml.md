@@ -21,7 +21,7 @@ CircleCI の構成に使用する YAML の最も重要な機能について説�
 
 CircleCI の構成は、`~/.circleci/config.yml` にある単一の YAML ファイルに格納されています。ここで、`~` は、プロジェクトのディレクトリのルートです。 CircleCI の作業の大部分はこのファイルで行われるため、YAML 形式の基礎を理解することが重要になります。
 
-## YAML の記述方法
+## How to write YAML
 
 YAML ファイルの基本構造は[ハッシュ テーブル](https://ja.wikipedia.org/wiki/ハッシュテーブル)で、1 つ以上のキー・値のペアで構成されます。
 
@@ -36,7 +36,7 @@ key:
   another_key: "another value"
 ```
 
-### 複数行文字列
+### Multi-line strings
 {:.no_toc}
 
 値の文字列が複数行にわたる場合は、`>` 文字を使用します。この記号の後には、任意の数の行を記述できます。 長いコマンドを記述する場合に特に便利です。
@@ -75,7 +75,7 @@ simulation:
 
 **メモ:** シーケンス内の項目をキー・値のペアで記述する場合は、正しくインデントするように注意してください。
 
-### アンカーとエイリアス
+### Anchors and aliases
 {:.no_toc}
 
 [DRY (Don't Repeat Yourself: 繰り返しを避けること) の原則](https://ja.wikipedia.org/wiki/Don%27t_repeat_yourself)に基づいて `config.yml` を作成するために、アンカーとエイリアスを使用できます。 アンカーは `&` 文字、エイリアスは `*` 文字で識別されます。
@@ -102,7 +102,7 @@ song:
   - Al
 ```
 
-### マップのマージ
+### Merging maps
 {:.no_toc}
 
 アンカーとエイリアスはスカラー値に対して機能しますが、マップまたはシーケンスを保存するには、`<<` を使用してエイリアスを挿入します。
@@ -141,7 +141,7 @@ harry_data:
 
 さらに複雑な例は、[こちらの Gist](https://gist.github.com/bowsersenior/979804) で参照してください。
 
-## 関連項目
+## See also
 
 YAML には他にも機能がありますが、YAML の基礎について理解し、CircleCI の設定ファイルを簡潔に保つには、上記の例で十分です。 さらに知識を深めたい場合は、以下の資料をご活用ください。
 
