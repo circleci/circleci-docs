@@ -46,6 +46,6 @@ Yarn パッケージをキャッシュして、CI ビルド時間を短縮でき
 ```
 {% endraw %}
 
-## 関連項目
+## See also
 
 [依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
