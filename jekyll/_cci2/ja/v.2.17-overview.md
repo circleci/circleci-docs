@@ -10,7 +10,7 @@ order: 1
 
 CircleCI Server v2.17 の機能強化や不具合修正についてまとめます。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。
 
-## バージョン 2.17 の新機能
+## What's new in release 2.17
 
 * ワークフローで Slack インテグレーションが利用できるようになりました。 ユーザーは、ワークフローの完了時に Slack 通知を受信するよう選択できます。
 * CircleCI 環境へのアクセスを許可する組織を、管理者が制限できるようになりました。 この機能を有効化する方法の詳細については、2.17 の操作マニュアルのユーザー管理セクションを参照してください。
@@ -19,7 +19,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 * GraphQL API の直前のキャッシュ改善し、全体的なパフォーマンスを改善しました。
 * リクエスト時に Nomad クライアントの容量飽和を避けるために、バックプレッシャー制御を追加しました。これにより、既存の Nomad クラスターのパフォーマンスが向上します。
 
-## バージョン 2.17 での修正点
+## Fixed in release 2.17
 
 * GitHub API 応答処理と Web フック処理に関連するいくつかのバグを修正しました。
 * Services マシンを再起動したときのスケジュール済みワークフローに関する問題を修正しました。
@@ -36,7 +36,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 * ワークフローの多数のジョブへのファンアウトが制限されていた問題を修正しました。
 
 
-## バージョン 2.17 での更新点
+## Updated in release 2.17
 
 * AWS 向け Ubuntu 16.04 をベースとする新しい Machine Executor AMI を導入しました。 Docker 18.09.3 がインストールされた Ubuntu 16.04 では、apt-daily サービスと apt-daily-upgrade サービスが無効になっています。 正式に切り替える前に、以下の AMI でお試しになることを強くお勧めします。新しいイメージは以下のとおりです。
 
@@ -85,7 +85,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 
 * CircleCI 2.0 から 1.0 のシングル ボックス オプションを削除しています。1.0 のビルド イメージに重大な脆弱性がいくつか見つかったため、長らくトライアルに推奨していません。 ワークフローに確実に必要な場合はご連絡ください。 なお、クラスター モードで 1.0 を実行しているユーザーには影響しません。
 
-## CircleCI Server v2.17 に更新する手順
+## Steps to update to CircleCI Server v2.17
 CircleCI Server v2.17 に更新する手順は次のとおりです。
 
 1. 後から必要に応じてロールバックできるよう、お使いの環境のスナップショットを取得します (任意ですが推奨の手順です)。
@@ -93,7 +93,7 @@ CircleCI Server v2.17 に更新する手順は次のとおりです。
 3. Replicated を v2.34.1 に更新します (後述のセクションを参照)。
 4. Navigate to your Management Console dashboard (e.g. `<your-circleci-hostname>.com:8800`) and select the v2.17 upgrade
 
-### ロールバックのスナップショット
+### Snapshot for rollback
 
 お使いの環境のスナップショットを取得するには、以下のとおり実行します。
 
@@ -115,7 +115,7 @@ CircleCI Server v2.17 に更新する手順は次のとおりです。
 - Services マシン上ですべての手順が完了していること
 - (サーバーの更新履歴)[https://circleci.com/ja/server/changelog/]をご覧になり、どのバージョンの Replicated への更新が必要か確認してください。
 
-#### Replicated を更新するための準備
+#### Preparations for updating Replicated
 
 Replicated バージョンの更新を実行する前に、[バックアップ手順]({{site.baseurl}}/2.0/backup/)に従ってデータをバックアップします。
 
