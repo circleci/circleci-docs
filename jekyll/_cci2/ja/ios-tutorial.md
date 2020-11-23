@@ -33,7 +33,7 @@ version:
 3. スキームの管理ダイアログで、ビルドするスキームを選択し、[Shared (共有)] チェックボックスをオンにします。![スキームの管理ダイアログ]({{ site.baseurl }}/assets/img/docs/ios-getting-started-manage-schemes.png)
 4. スキームをコミットし、プッシュします。
 
-## テストの実行
+## Running tests
 
 iOS プロジェクトでは、fastlane Scan を使用して以下のようにテストを実行できます。
 
@@ -54,13 +54,13 @@ iOS プロジェクトでは、fastlane Scan を使用して以下のように�
 
 サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
 
-## コード署名と証明書
+## Code signing and certificates
 
 詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/2.0/ios-codesigning/)」を参照してください。
 
 カスタム ツールの使用や独自スクリプトの実行を目的としてビルド プロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については、[2.0 config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)を参照してください。
 
-## 依存関係のインストール
+## Installing dependencies
 
 たとえば Homebrew から依存関係をインストールする場合は、`run` ステップを使用して適切なコマンドを指定します。
 
@@ -73,7 +73,7 @@ iOS プロジェクトでは、fastlane Scan を使用して以下のように�
               command: yarn install
     
 
-## テストの実行
+## Running tests
 
 以下の短い `run` 構文例のように、`run` ステップを使用してテストを実行することもできます。
 
@@ -116,10 +116,10 @@ iOS プロジェクトでは、fastlane Scan を使用して以下のように�
                   only: release
     
 
-## 高度な構成
+## Advanced configuration
 
 iOS プロジェクトの高度な構成の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/ja/docs/2.0/testing-ios/)を参照してください。
 
-## GitHub 上のサンプル アプリケーション
+## Example application on GitHub
 
 CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、および署名する例については、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
