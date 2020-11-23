@@ -27,18 +27,18 @@ While open source can be a liberating practice, take care not to liberate sensit
 - If your repository is public, your CircleCI project and its build logs are also public. 表示対象として選択する情報に注意してください。
 - Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests) unless explicitly enabled.
 
-## オープンソース プロジェクトの機能と設定
+## Features and settings for open source projects
 
 以下の機能と設定は、オープンソース プロジェクトにおいて特に便利です。
 
-### プライベート環境変数
+### Private environment variables
 {:.no_toc}
 
 多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 Private environment variables allow you to safely store secrets, even if your project is public.
 
 For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
-### プル リクエストのみをビルドする
+### Only build pull requests
 {:.no_toc}
 
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
@@ -47,7 +47,7 @@ To change this setting, go to the **Project Settings>Advanced** of your project 
 
 **Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch and tags
 
-### フォークされたリポジトリからプル リクエストをビルドする
+### Build pull requests from forked repositories
 {:.no_toc}
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
@@ -58,7 +58,7 @@ By default, CircleCI does not build PRs from forked repositories. To change this
 
 **Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
-### フォークされたプル リクエストからのビルドにシークレットを渡す
+### Pass secrets to builds from forked pull requests
 {:.no_toc}
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
@@ -87,7 +87,7 @@ Caches are isolated based on GitHub Repo for PRs. CircleCI uses the GitHub repos
 
 Currently there is no pre-population of caches because this optimization hasn't made it to the top of the priority list yet.
 
-## オープンソース プロジェクトの例
+## Example open source projects
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
@@ -105,7 +105,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[fastlane](https://github.com/fastlane/fastlane)** - Android および iOS 用の自動ビルド ツール。
 - **[Yarn](https://github.com/yarnpkg/yarn)** - [npm に代わるツール](https://circleci.com/blog/why-are-developers-moving-to-yarn/)。
 
-## 関連項目
+## See also
 {:.no_toc}
 
 Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.
