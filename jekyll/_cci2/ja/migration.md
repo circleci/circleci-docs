@@ -12,7 +12,7 @@ Take a look through some of the tips and best practices listed below, for migrat
 - 目次
 {:toc}
 
-## CircleCI 1.0 と 2.0 で同じプロジェクトをビルド可能
+## You can build the same project on both CircleCI 1.0 and 2.0!
 
 When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:
 
@@ -22,7 +22,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - 動作具合を細かく確認できるように、少しずつ構成を追加します。最初はコードをチェックアウトするだけにし、次に依存関係をインストールし、さらにテストを実行します。 その後、依存関係をキャッシュしたり、ワークフローなどの高度な機能を使用したりします。 設定ファイルを徐々に作り上げていってください。
 - すべてが正常に機能するようになったら、新しい設定ファイルを含むブランチを主プロジェクトにマージします。
 
-## CircleCI 2.0 のセットアップに関するヒント
+## Tips for setting up CircleCI 2.0
 
 - `steps` にリストされたコマンドは、`docker` セクションで最初にリストされたコンテナ内でのみ実行されます。
 - こまめにビルドを実行して構成をテストします。そうすれば、何かが壊れても、最後のビルドから何を変更していたかがわかります。
@@ -59,7 +59,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
     - `command: [mysqld, --character-set-server=utf8mb4, --collation-server=utf8mb4_unicode_ci, --init-connect='SET NAMES utf8mb4;']`
 - CI でテスト ランナーを実行するときは、スレッドまたはワーカーを 2 つだけ (または、`resource_class` を使用する場合はそれ以上) 生成するように構成します。 それらは、不正な値に基づいて自動的に最適化される場合があります。 詳細については、[こちらのビデオ](https://www.youtube.com/watch?v=CKDVkqIMpHM)を参照してください。
 
-## 1.0 から 2.0 への移行のヒント
+## Tips for migrating from 1.0 to 2.0
 
 - `$CIRCLE_ARTIFACTS` と `$CIRCLE_TEST_REPORTS` は 2.0 で定義されていないことに注意してください。 
     - ユーザーご自身で定義できますが、その場合は `mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS` を実行してください。
@@ -87,9 +87,9 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
     
     ``` scalacOptions ++= Seq( `-encoding`, `utf-8`, `-target:jvm-1.8`, `-deprecation`, `-unchecked`, `-Xlint`, `-feature`, `-Xmax-classfile-name`, `242` <= add here ),
 
-    <br /><br />## ブラウザー テストに関するヒント
+    <br /><br />## Tips for browser testing
     
-    - テストに再現性がなく、理由なく失敗するように見える場合があります。 失敗したブラウザー テストは自動的に再実行できます。ただし、タイミング データは破損します。
+    - Tests can sometimes be flaky and may appear to fail for no reason. 失敗したブラウザー テストは自動的に再実行できます。ただし、タイミング データは破損します。
     - 失敗したテストのスクリーンショットを撮ると、デバッグが容易になります。
     - VNC をインストールして使用できます。 `metacity` をインストールしたら、VNC 内でブラウザーをドラッグできます。 ブラウザー イメージの 1 つから以下を実行してください。
     
@@ -102,15 +102,15 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
             firefox &
     
 
-    <br />## Docker に関するヒント
+    <br />## Tips for docker
     
-    - cron ジョブで Docker イメージをビルドすると、以下のメリットがあります。
-        - 毎週、毎日、または必要に応じてビルドできます。
-            - API から容易に新しい Docker イメージのビルドをトリガーできるようになります。
-        - `node_modules` のような依存関係をイメージに含めると、以下のメリットがあります。
-            - DNS 障害による問題を緩和できます。
-            - 依存関係のバージョン管理を行うことができます。
-            - ノード リポジトリから消失したモジュールがあっても、アプリケーションの実行に必要な依存関係は安全です。
+    - Building a Docker image on a cron job has these benefits:
+        - Build weekly, daily, or whenever you need
+            - Make it possible to trigger a new Docker image build via the API easily
+        - Including dependencies like `node_modules` in the image has these benefits:
+            - Helps mitigate issues from a DNS outage
+            - Keeps the dependencies version controlled
+            - Even if a module disappears from the node repositories, the necessary dependencies to run the application are safe.
         - プライベート イメージには、プライベート gems およびプライベート ソース キャッシュを含めることができます。
     
     - データベース用のソケット ファイルはないため、ホスト変数 (`$PGHOST`、`$MYSQL_HOST`) を定義して 127.0.0.1 を指定し、TCP を使用する必要があります。
@@ -125,17 +125,17 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
         - https://www.docker.elastic.co/
     - コンテナに名前を付けることができます。 そのため、特定のサービスの複数のコンテナを、異なるホスト名を持つ同じポートで実行できます。
     - 特権コンテナをリモート環境および `machine` Executor で実行できます。
-    - ベース Docker Executor からリモート環境にボリュームをマウントすることはできません。
-        - `docker cp` でファイルを転送できます。
-        - 参照されるボリュームは、リモート環境内からコンテナにマウントされます。
+    - Volumes can't be mounted from the base Docker executor into the remote environment
+        - `docker cp` can transfer files
+        - Volumes referenced will be mounted from the within the remote environment into the container
     
     
     
     
-    ## その他のヒント
+    ## Fun facts
     
-    - CircleCI 2.0 では、ユーザーの想像力を無限に活かすことができます。
-    - シェルを Python に設定すれば、YAML で任意の Python を実行できます。
+    - You are limited by your imagination in CircleCI 2.0
+    - The shell can be set to Python to just execute arbitrary Python in the YAML
     
 
             - run:
