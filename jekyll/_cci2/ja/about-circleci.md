@@ -10,7 +10,7 @@ order: 1
 
 継続的インテグレーションの概要と、CircleCI を使用してエンジニアリング チームが自動化を行うしくみについて説明します。 CircleCI は、ソフトウェアのビルド、テスト、デプロイを自動化します。
 
-## CircleCI の概要
+## CircleCI overview
 
 **CircleCI** - Our mission is to empower technology-driven organizations to do their best work. We want to make engineering teams more productive through intelligent automation.
 
@@ -34,7 +34,7 @@ GitHub または Bitbucket 上のソフトウェア リポジトリが承認さ�
 
 CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Google Kubernetes Engine (GKE)、Microsoft Azure、Heroku などのさまざまな環境にコードをデプロイするように構成できます。 他のクラウド サービスへのデプロイには、SSH を使用するか、ジョブの構成でサービスの API クライアントをインストールすることで、簡単にスクリプト化できます。
 
-## 継続的インテグレーションとは
+## What is continuous integration?
 
 **継続的インテグレーション**は、コードを共有リポジトリの `master` ブランチに常時頻繁に統合することを奨励する開発手法です。 それぞれの機能を個別にビルドして、開発サイクルの最後に統合するのではなく、各開発者のコードが 1 日に何度も共有リポジトリに統合されます。
 
@@ -50,18 +50,18 @@ Improve team productivity, efficiency, happiness.
 Find problems and solve them, quickly.  
 Release higher quality, more stable products.
 
-## 無料トライアル
+## Free trial options
 
 CircleCI は以下の無料トライアル オプションをご用意しています。
 
 - **クラウド**: 「[CircleCI を始める]({{site.baseurl}}/2.0/first-steps/)」を参照しながら、CircleCI がホスティングするアプリケーションの使用を開始してください。
 - **サーバー**: [CircleCI トライアルのインストール]({{site.baseurl}}/2.0/single-box/)」に記載されている Enterprise トライアルの手順をご覧ください。
 
-### オープンソース
+### Open source
 
 パブリック オープンソース プロジェクト用無料コンテナの詳細については、「[オープンソース プロジェクトの構築]({{site.baseurl}}/2.0/oss/)」を参照してください。
 
-## 関連項目
+## See also
 
 Linux、Android、macOS 上で動作するすべてのアプリがサポートされます。 以下のドキュメントを参照してください。
 
