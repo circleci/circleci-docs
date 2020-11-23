@@ -57,7 +57,7 @@ To prevent the JVM from pre-allocating too much memory, declare memory limits
 To debug OOM errors,
 look for the [appropriate exit code](#debugging-java-oom-errors).
 
-## Using Java Environment Variables to Set Memory Limits
+## Using Java environment variables to set memory limits
 
 You can set several Java environment variables
 to manage JVM memory usage.
@@ -152,7 +152,7 @@ This environment variable is exclusive to Apache Maven projects.
 Use it
 to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
-## Debugging Java OOM Errors
+## Debugging Java OOM errors
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
 code 137` in your error output.
@@ -166,7 +166,7 @@ Even if the JVM's maximum heap size is larger than the job's limit, the garbage 
 If you are still consistently hitting memory limits,
 consider [increasing your jobs's RAM allocation](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
-## See Also
+## See also
 
 [Java Language Guide]({{ site.baseurl }}/2.0/language-java/)
 [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)

@@ -50,7 +50,7 @@ The following image uses an [example Java application](https://github.com/Circle
 
 ![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
-## User Types
+## User types
   
 It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
 
@@ -88,7 +88,7 @@ Jobs are the building blocks of your config. Jobs are collections of [steps](#st
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
-## Executors and Images
+## Executors and images
 
 Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
@@ -396,7 +396,7 @@ workflows:
 ```
 {% endraw %}
 
-## Caches, Workspaces and Artifacts
+## Caches, workspaces and artifacts
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -574,7 +574,7 @@ Caches     | Months               | Store non-vital data that may help the job r
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
-## See Also
+## See also
 {:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.

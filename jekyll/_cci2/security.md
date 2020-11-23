@@ -58,7 +58,7 @@ A few different external services and technology integration points touch Circle
 ```
 {% endraw %}
 
-## Audit Logs
+## Audit logs
 CircleCI Server customers can access the audit log feature from the UI.
 Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
 
@@ -68,7 +68,7 @@ Complete Audit logs may be downloaded from the Audit Log page within the Admin s
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
-### Audit Log Events
+### Audit log events
 {:.no_toc}
 
 <!-- TODO: automate this from event-cataloger -->
@@ -92,7 +92,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - workflow.job.start
 
 
-### Audit Log Fields
+### Audit log fields
 {:.no_toc}
 
 - **action:** The action taken that created the event. The format is ASCII lowercase words separated by dots, with the entity acted upon first and the action taken last. In some cases entities are nested, for example, `workflow.job.start`.
@@ -107,7 +107,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - **success:** A flag to indicate if the action was successful.
 - **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
 
-## Checklist To Using CircleCI Securely as a Customer
+## Checklist to using CircleCI securely as a customer
 
 If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as _users_ of CircleCI:
 
@@ -127,7 +127,7 @@ If you are getting started with CircleCI there are some things you can ask your 
 - If your project is open source and public, please make note of whether or not you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our [Open Source Projects document]({{site.baseurl}}/2.0/oss/#security).
 
 
-## See Also
+## See also
 {:.no_toc}
 
 [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)

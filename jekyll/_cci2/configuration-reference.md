@@ -17,7 +17,7 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
-## Table of Contents
+## Table of contents
 {:.no_toc}
 
 * TOC
@@ -471,7 +471,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
-##### Docker Executor
+##### Docker executor
 
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
@@ -484,7 +484,7 @@ xlarge                | 8     | 16GB
 2xlarge+<sup>(2)</sup>| 20    | 40GB
 {: class="table table-striped"}
 
-###### Example Usage
+###### Example usage
 
 ```yaml
 jobs:
@@ -499,11 +499,11 @@ jobs:
       ... // other config
 ```
 
-##### Machine Executor (Linux)
+##### Machine executor (Linux)
 
 {% include snippets/machine-resource-table.md %}
 
-###### Example Usage
+###### Example usage
 ```yaml
 jobs:
   build:
@@ -514,7 +514,7 @@ jobs:
       ... // other config
 ```
 
-##### macOS Executor
+##### macOS executor
 
 Class              | vCPUs | RAM
 -------------------|-------|-----
@@ -522,7 +522,7 @@ medium (default)   | 4     | 8GB
 large<sup>(2)</sup>| 8     | 16GB
 {: class="table table-striped"}
 
-###### Example Usage
+###### Example usage
 ```yaml
 jobs:
   build:
@@ -533,7 +533,7 @@ jobs:
       ... // other config
 ```
 
-##### Windows Executor
+##### Windows executor
 
 Class             | vCPUs | RAM
 ------------------|-------|------
@@ -543,7 +543,7 @@ xlarge            | 16    | 60GB
 2xlarge           | 32    | 128GB
 {: class="table table-striped"}
 
-###### Example Usage
+###### Example usage
 ```yaml
 version: 2.1
 
@@ -563,7 +563,7 @@ Note the way resource class is set is different for `windows` because the execut
 
 See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
-##### GPU Executor (Linux)
+##### GPU executor (Linux)
 
 Class                           | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
 --------------------------------|-------|-----|------|-----------------|------------------
@@ -571,7 +571,7 @@ gpu.nvidia.small<sup>(2)</sup>  |   4   | 15  | 1    | Nvidia Tesla P4 | 8
 gpu.nvidia.medium<sup>(2)</sup> |   8   | 30  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
-###### Example Usage
+###### Example usage
 ```yaml
 version: 2.1
 
@@ -587,14 +587,14 @@ jobs:
 
 See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
 
-##### GPU Executor (Windows)
+##### GPU executor (Windows)
 
 Class                                   | vCPUs | RAM | GPUs |    GPU model    | GPU Memory (GiB)
 ----------------------------------------|-------|-----|------|-----------------|------------------
 windows.gpu.nvidia.medium<sup>(2)</sup> |   16  | 60  | 1    | Nvidia Tesla T4 | 16
 {: class="table table-striped"}
 
-###### Example Usage
+###### Example usage
 ```yaml
 version: 2.1
 orbs:
@@ -791,7 +791,7 @@ A value of `on_fail` means that the step will run only if one of the preceding s
 
 
 
-###### Ending a Job from within a `step`
+###### Ending a job from within a `step`
 
 A job can exit without failing by using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
 
@@ -1666,7 +1666,7 @@ This example prevents the workflow `integration_tests` from running unless the t
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
 
-## Logic Statements
+## Logic statements
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
@@ -1689,7 +1689,7 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 **Note:**
 When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
-### Logic Statement Examples
+### Logic statement examples
 
 ```yaml
 workflows:
@@ -1751,7 +1751,7 @@ workflows:
           node-version: "13.13.0"
 ```
 
-## Example Full Configuration
+## Example full configuration
 
 {% raw %}
 ```yaml
@@ -1889,7 +1889,7 @@ workflows:
 ```
 {% endraw %}
 
-## See Also
+## See also
 {:.no_toc}
 
 [Config Introduction]({{site.baseurl}}/2.0/config-intro/)

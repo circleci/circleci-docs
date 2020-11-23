@@ -12,7 +12,7 @@ This guide gives an overview of the various ways to persist data within and beyo
 * TOC
 {:toc}
 
-## Caching Strategies
+## Caching strategies
 
 ![caching data flow]({{ site.baseurl }}/assets/img/docs/caching-dependencies-overview.png)
 
@@ -24,7 +24,7 @@ Caches are global within a project. A cache saved on one branch will be used by 
 
 For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) guide.
 
-## Using Workspaces
+## Using workspaces
 
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -36,7 +36,7 @@ Workspaces are not shared between pipeline runs. The only time a workspace can b
 
 For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
-## Using Artifacts
+## Using artifacts
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 

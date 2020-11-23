@@ -174,6 +174,6 @@ workflows:
               only: /^\d{4}\.\d+$/
 ```
 
-## See Also
+## See also
 
 [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)

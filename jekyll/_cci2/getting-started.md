@@ -12,7 +12,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * TOC
 {:toc}
 
-## Prerequisites for Running Your First Build
+## Prerequisites for running your first build
 {:.no_toc}
 
 * Some basic knowledge of Git.
@@ -20,7 +20,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * An account on CircleCI.
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
 
-## Creating a Repository
+## Creating a repository
 
 Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
 
@@ -61,7 +61,7 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 1. You will be taken to the Pipelines page where you can view your newly running
    build. 
 
-## Digging Into Your First Pipeline
+## Digging into your first pipeline
 
 You should see your pipeline start to run automatically—and pass! So, what just
 happened? Click on the green **Success** button on your pipeline to investigate
@@ -102,7 +102,7 @@ including a large number of tests. You can learn more about all the possible
 steps one may put in a `config.yml` file in the [Configuration
 Reference](https://circleci.com/docs/2.0/configuration-reference). 
 
-### Breaking Your Build!
+### Breaking your build!
 {:.no_toc}
 
 Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
@@ -143,7 +143,7 @@ repository;  a topic for another tutorial. You can view several [demo
 applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
 setting up CircleCI with various languages and frameworks. 
 
-## Using the Workflows Functionality
+## Using the workflows functionality
 {:.no_toc}
 
 You do not have to use orbs to use CircleCI. The following example details how
@@ -198,7 +198,7 @@ and copy and paste the following text into it.
 Read more about workflows in the [Orchestrating
 Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
-### Adding Some Changes to use the Workspaces Functionality
+### Adding some changes to use the workspaces functionality
 {:.no_toc}
 
 Each workflow has an associated workspace which can be used to transfer files to
@@ -257,7 +257,7 @@ workflows:
 
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
-### SSH into Your {% comment %} TODO: Job {% endcomment %}Build
+### SSH into your {% comment %} todo: job {% endcomment %}build
 {:.no_toc}
 
 If you are comfortable with the terminal, you can SSH directly into your
@@ -288,13 +288,13 @@ cd <directory_name>  # change directory to the <directory_name> directory
 cat <file_name>      # show me the contents of the file <file_name>
 ```
 
-## Collaborating with Teammates
+## Collaborating with teammates
 
 It is easy for teammates and collaborators to view and follow your projects.
 Teammates can make a free CircleCI account at any time to view your pipelines,
 even if they are not committing any code. 
 
-## See Also
+## See also
 {:.no_toc}
 
 [Blog
@@ -308,7 +308,7 @@ on how to validate the CircleCI `config.yml` on every commit with a git hook.
 * [What is continuous integration?](https://circleci.com/blog/what-is-continuous-integration/)
 * CircleCI on [GitHub](https://github.com/circleci), [Twitter](https://twitter.com/circleci) and [Facebook](https://www.facebook.com/circleci)
 
-### Continuous Integration
+### Continuous integration
 {:.no_toc}
 
 * [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)

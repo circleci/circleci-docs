@@ -10,7 +10,7 @@ the CircleCI JIRA plugin, you can display your build statuses in JIRA.
 
 **Note:** You have to be an JIRA admin to install this plugin.
 
-# Installation Steps
+# Installation steps
 
 1. Navigate to project settings and select `JIRA integration`
 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
@@ -23,7 +23,7 @@ the CircleCI JIRA plugin, you can display your build statuses in JIRA.
 
 ---
 
-# Viewing Build and Deploy Statuses in Jira 
+# Viewing build and deploy statuses in Jira
 
 With CircleCI orbs it is possible to display your build and deploy status
 in Jira Cloud. To do this, you will need to: 

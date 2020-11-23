@@ -38,7 +38,7 @@ To access a specific project's insights, view a pipeline's workflow and click
 ![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
 
-### Workflow Overview
+### Workflow overview
 
 The Insights dashboard provides workflow details plotted over the last 90 days.
 **Please note that the data is not real time and there may be up to a 24 hour
@@ -50,7 +50,7 @@ The Insights dashboard provides workflow details plotted over the last 90 days.
 - Workflow duration
 - Workflow credit usage*
 
-### Job Overview
+### Job overview
 
 Switch to the **Job** tab to view cumulative time-series data on a per-job basis:
 
@@ -89,7 +89,7 @@ The image illustrates the following data about your builds:
 - Number of branches
 - Last build
 
-### Project Insights
+### Project insights
 
 Click the Insights icon on the main navigation, then click your repo name to access per-project insights.
 
@@ -102,14 +102,14 @@ The per-project insights page gives you access to the build status and build per
 - **Build Performance:** The Build Performance graph aggregates your build/job data for a particular day and plots the median for that day going back as far as 90 days. Monitor the performance of your repo by clicking a particular branch.
 
 
-## Sumo Logic Integration
+## Sumo Logic integration
 
 Sumo Logic users may track and visualize analytical data across all of their
 jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app
 integration from the Sumo Logic partner integrations site.
 
 
-### The CircleCI Dashboard for Sumo Logic
+### The CircleCI dashboard for Sumo Logic
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
@@ -131,7 +131,7 @@ Install the CircleCI dashboard by using the App Catalog from the dashboard home 
 
 This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
-### The Sumo Logic Orb
+### The Sumo Logic orb
 
 Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/sumologic).
 
@@ -143,7 +143,7 @@ orbs:
   sumologic: circleci/sumologic@x.y.z
 ```
 
-#### 2. Add _Workflow-Collector_ to Workflow.
+#### 2. Add _workflow-collector_ to workflow.
 The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
 
 ```yaml
@@ -186,10 +186,9 @@ This will link the orb with your Sumo Logic dashboard.
 
 Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
 
-## See Also
+## See also
 Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
 
-### See Also
+### See also
 
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
-

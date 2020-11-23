@@ -25,7 +25,7 @@ work on your projects that use CircleCI. The entirety of a
 
 When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
 
-## Jobs, Tests, Artifacts
+## Jobs, tests, artifacts
 
 A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 

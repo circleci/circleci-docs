@@ -23,10 +23,10 @@ Building a snap on CircleCI is mostly the same as on your local machine, wrapped
 To build a snap in any environment (local, company servers CI, etc) there needs to be a Snapcraft config file. Typically this will be located at `snap/snapcraft.yml`. This doc assumes you already have this file and can build snaps successfully on your local machine. If not, you can read through the [Build Your First Snap](https://docs.snapcraft.io/build-snaps/your-first-snap) doc by Snapcraft to get your snap building on your local machine.
 
 
-## Build Environment
+## Build environment
 
 ```yaml
-#...
+# ...
 version: 2
 jobs:
   build:
@@ -66,7 +66,7 @@ Publishing a snap is more or less a two-step process. Here's on this might look 
 
 ```Bash
 snapcraft login
-# follow prompts for logging in with an Ubuntu One account
+# Follow prompts for logging in with an Ubuntu One account
 snapcraft export-login snapcraft.login
 base64 snapcraft.login | xsel --clipboard
 ```
@@ -90,7 +90,7 @@ base64 snapcraft.login | xsel --clipboard
 
 In this example, Snapcraft automatically looks for login credentials in `.snapcraft/snapcraft.cfg` and the environment variable made previously is decoded into that location. The `snapcraft push` command is then used to upload the .snap file into the Snap Store.
 
-### Uploading vs Releasing
+### Uploading vs releasing
 
 `snapcraft push *.snap` by default will upload the snap to the Snap Store, run any store checks on the server side, and then stop. The snap won't be "released" meaning users won't automatically see the update. The snap can be published locally with the `snap release <release-id>` command or by logging into the Snap Store and clicking the release button.
 
@@ -123,7 +123,7 @@ Utilize CircleCI `workspaces` to move a generated snap file between jobs when ne
 Below is a complete example of how a snap package could be built on CircleCI. This same process is used the build the Snap pakcage for the [CircleCI Local CLI][local-cli-repo].
 
 
-## Full Example Config
+## Full example config
 
 ```yaml
 version: 2

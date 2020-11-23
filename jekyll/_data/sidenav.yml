@@ -123,6 +123,17 @@ en:
           children:
             - name: Hello World on Windows
               link: 2.0/hello-world-windows/
+    - name: Runner
+      link: 2.0/runner-overview/
+      children:
+        - name: Runner Overview
+          link: 2.0/runner-overview/
+        - name: Runner Installation
+          link: 2.0/runner-installation/
+        - name: Runner API
+          link: 2.0/runner-api/
+        - name: Runner FAQs
+          link: 2.0/runner-faqs/
             # TODO: check hotjar/sentiment about missing windows content
 
 - name: Features
@@ -189,7 +200,6 @@ en:
           name: 2.0/packagecloud
         - name: Publishing to Packagecloud
 
-
 - name: Projects
   icon: docs/project.svg
   children:
@@ -228,7 +238,6 @@ en:
       link: 2.0/docker-layer-caching/
     - name: Optimizations cookbook
       link: 2.0/optimization-cookbook/
-
 
 - name: Reference
   icon: docs/reference.svg

@@ -23,13 +23,13 @@ These deployment lanes can be combined with testing lanes so that the app is aut
 
 **Note:** Using these deployment examples requires that code signing be already configured for your project. To learn how to set up code signing, see the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/).
 
-## Best Practises
+## Best practices
 
-### Using Git Branches
+### Using Git branches
 
 It is advisable to only run your release lane on a specific branch of your git repository, for example a dedicated release/beta branch. This will allow releases on only successful merges into the specified branch, prevent a release every time a push is committed during your development phase. In turn this will also reduce job completion time as uploading to an external service may take some time depending on the size our the iOS app binary. For information on how to set up a workflow to achieve this, check out the [Branch-Level Job Execution]({{ site.baseurl }}/2.0/workflows/#branch-level-job-execution) documentation.
 
-### Setting the Build Number
+### Setting the build number
 
 When uploading to a deployment service, it is important to consider the build number of the iOS app binary. Commonly this is set in the `.xcproject` and has to be updated manually to ensure it is unique. If the build number is not updated before each run of the deployment lane, you may find the receiving service rejects the binary due to a build number conflict.
 
@@ -41,7 +41,7 @@ increment_build_number(
 )
 ```
 
-## App Store Connect
+## App store connect
 
 ### Setting up
 
@@ -165,14 +165,14 @@ Firebase requires a token to used during authentication. To generate the token, 
 3. Complete the sign in via the browser window, then copy the token provided in the Terminal output
 4. Go to your project settings in CircleCI and create a new environment variable named `FIREBASE_TOKEN` with the value of the token.
 
-### Fastlane Configuration
+### Fastlane configuration
 
 The Firebase plugin requires minimal configuration to upload an iOS binary to Firebase. The main parameter is `app` which will require the App ID set by Firebase. To find this, go to your project in the [Firebase Console](https://console.firebase.google.com), then go to `Settings -> General`. Under "Your apps", you will see the list of apps that are part of the project and their information, including the App ID (generally in the format of `1:123456789012:ios:abcd1234abcd1234567890`).
 
 For more configuration options, see the [Firebase Fastlane plugin documentation](https://firebase.google.com/docs/app-distribution/ios/distribute-fastlane#step_3_set_up_your_fastfile_and_distribute_your_app).
 
 ```ruby
-# fastlane/Fastfile
+# Fastlane/fastfile
 default_platform :ios
 
 platform :ios do
@@ -246,12 +246,12 @@ Once this is complete you will need to generate an API token to allow Fastlane t
 4. When the token is generated, make sure to copy it somewhere safe.
 5. Go to your project settings in CircleCI and create a new environment variable named `VS_API_TOKEN` with the value of the API Key.
 
-### Fastlane Configuration
+### Fastlane configuration
 
 Below is an example of a lane that distributes beta app builds to Visual Studio App Center. Both the username of your App Center account and an API Token with "Full Access" is required to upload the binary to App Center.
 
 ```ruby
-# fastlane/Fastfile
+# Fastlane/fastfile
 default_platform :ios
 
 platform :ios do
@@ -291,12 +291,12 @@ end
 2. On the Preferences page, go to the API Key section and copy your API Key.
 3. Go to your project settings in CircleCI and create a new environment variable named `TESTFAIRY_API_KEY` with the value of the API Key.
 
-### Fastlane Configuration
+### Fastlane configuration
 
 To configure uploading to TestFairy within Fastlane, see the following example:
 
 ```ruby
-# fastlane/Fastfile
+# Fastlane/fastfile
 default_platform :ios
 
 platform :ios do

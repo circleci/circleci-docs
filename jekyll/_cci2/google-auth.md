@@ -29,7 +29,7 @@ You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.
 
 Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
-### Creating and Storing a Service Account
+### Creating and storing a service account
 
 Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud`. Google offers two types of authorization: user accounts and service accounts. Because you are installing the Cloud SDK on CircleCI, the service account is the appropriate choice.
 
@@ -41,7 +41,7 @@ Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud
     - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
     - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
 
-#### Adding Granular Permissions
+#### Adding granular permissions
 
 If you are having issues pushing container images to GCR you may need more granular permissions than the default `service account` provides. You can grant permission changes in the Cloud Storage [IAM Console](https://console.cloud.google.com/iam-admin/iam/project).
 

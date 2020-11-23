@@ -21,7 +21,7 @@ We will use this space to highlight some sample projects showing how to best use
 
 Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
 
-## Artifactory Plugins
+## Artifactory plugins
 Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
 
 - [Deploying with Maven](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
@@ -87,7 +87,7 @@ jobs:
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
 ```
 
-## See Also
+## See also
 
 {:.no_toc}
 

@@ -23,7 +23,7 @@ Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-
 
 Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch. 
 
-## Selenium 
+## Selenium
 
 Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard. 
 
@@ -125,7 +125,7 @@ jobs:
 ```
 {% endraw %}
 
-### Sauce Labs Browser Testing Orb Example
+### Sauce Labs browser testing orb example
 
 Sauce Labs provide a browser testing orb for use with CircleCI that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
 
@@ -180,11 +180,11 @@ workflows:
 
 There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/developer/orbs/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-## Debugging Browser Tests
+## Debugging browser tests
 
 Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
 
-### Using Screenshots and Artifacts
+### Using screenshots and artifacts
 {:.no_toc}
 
 CircleCI may be configured to collect [build artifacts]( {{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]( {{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
@@ -195,7 +195,7 @@ Saving screenshots is straightforward: it's a built-in feature in WebKit and Sel
 *   [Automatically on failure, using Cucumber](https://github.com/mattheworiordan/capybara-screenshot)
 *   [Automatically on failure, using Behat and Mink](https://gist.github.com/michalochman/3175175)
 
-### Using a Local Browser to Access HTTP server on CircleCI
+### Using a local browser to access HTTP server on CircleCI
 {:.no_toc}
 
 If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
@@ -214,7 +214,7 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 
 This is a very easy way to debug things when setting up Selenium tests, for example.
 
-### Interacting With the Browser Over VNC
+### Interacting with the browser over VNC
 {:.no_toc}
 
 VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
@@ -309,6 +309,6 @@ You can kill xclock with `Ctrl+c` after it appears on your desktop.
 
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
-## See Also
+## See also
 
 [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
