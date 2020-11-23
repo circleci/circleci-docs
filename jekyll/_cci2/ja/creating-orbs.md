@@ -21,11 +21,11 @@ version:
 
 ![Orb のパブリッシュ プロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
-## Orb 開発キット
+## Orb development kit
 
 [手動]({{site.baseurl}}/2.0/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用して Orb をパブリッシュすると、次のセクションで説明する手順に従ってセマンティック リリースを簡単に行えます。 パブリッシュ プロセスの簡単な概要については、オーサリング プロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) ファイルを参照してください。
 
-### 新リリースの公開
+### Issue a new release
 
 以下では、Orb の新しいセマンティック リリースを公開する方法について説明します。 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 このブランチは、リポジトリの非デフォルトのブランチに新機能やバグ修正、パッチなどを作成するためのものであり、名前に深い意味はありません。 コードの追加や更新を行いリリースを公開する準備が整ったら、以下の手順を行います。
 
@@ -55,7 +55,7 @@ version:
 5. **お疲れさまでした。**   
     [CircleCI アプリケーション](https://app.circleci.com/)にアクセスすると、Orb のパブリッシュ パイプラインの進捗状況を確認できます。 このパイプラインが完了したら、[Orb レジストリ](https://circleci.com/developer/ja/orbs) に Orb が公開されます。
 
-### Orb のパブリッシュ プロセス
+### Orb publishing process
 
 ここでは、Orb 開発キットについて掘り下げ、Orb のパブリッシュに関係するコンポーネントについて説明します。
 
@@ -117,7 +117,7 @@ CircleCI 製の Orb 開発パイプラインで実行されるワークフロー
 
 追加機能として、GitHub にバージョン タグをパブリッシュし、コメントからプル リクエストに新しいバージョンを自動で反映することなども可能です。
 
-##### GitHub へのバージョン タグのパブリッシュ
+##### Publish version tag to GitHub
 
 パブリッシュした CircleCI Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でホストおよび公開されます。ただし、GitHub 上でリリースを追跡する必要がある場合は、CircleCI からバージョン タグを自動的にパブリッシュできます。
 
