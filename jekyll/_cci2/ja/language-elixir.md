@@ -15,7 +15,7 @@ version:
 
 お急ぎの場合は、以下の構成をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) にコピーしてください。 お急ぎでなければ、全体に目を通し、十分に理解を深めることをお勧めします。
 
-## 設定ファイルの例
+## Sample configuration
 
 {% raw %}
 
@@ -80,7 +80,7 @@ jobs:  # basic units of work in a run
 
 {% endraw %}
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -186,6 +186,6 @@ By default, JUnitFormatter saves the output to the `_build/test/lib/<application
 
 However, JUnitFormatter also allows you to configure the directory where the results are saved via the `report_dir` setting, in which case, the `path` value in your CircleCI config should match the relative path of wherever you're storing the output.
 
-## See Also
+## See also
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
