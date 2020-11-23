@@ -61,7 +61,7 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
     ]
 {% endraw %}
 
-## 監査ログ
+## Audit logs
 
 CircleCI Server customers can access the audit log feature from the UI. Cloud customers can [contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request an Audit log. **Note:** only organization admin users can make an audit log request.
 
@@ -71,7 +71,7 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 
 **メモ:** 内部挙動により、監査ログにイベントが重複して生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
-### 監査ログ イベント
+### Audit log events
 {:.no_toc}
 
 <!-- TODO: automate this from event-cataloger --> ログには以下のシステム イベントが記録されます。 定義と形式については、以下の「監査ログ フィールド」セクションの 
@@ -95,7 +95,7 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - workflow.job.scheduled
 - workflow.job.start
 
-### 監査ログ フィールド
+### Audit log fields
 {:.no_toc}
 
 - **action:** 実行され、イベントを生成したアクション。 ドット区切りの小文字 ASCII ワードの形式が使用され、最初に影響を受けたエンティティと最後に実行されたアクションが含まれます。 エンティティは、たとえば `workflow.job.start` のようにネストされる場合があります。
@@ -110,7 +110,7 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - **success:** アクションが成功したかどうかを示すフラグ。
 - **request:** 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 `id` (CircleCI がこのリクエストに割り当てたリクエスト ID)、`ip_address` (リクエストされた元の IP アドレスであり、たとえば 127.0.0.1 など IPV4 のドット区切り表記で表される)、および `client_trace_id` (元のリクエストに HTTP ヘッダー「X-Client-Trace-Id」が存在する場合は、対応するクライアント追跡 ID ヘッダー) を含む JSON BLOB の形式で表示されます。
 
-## CircleCI を安全に使用していただくためのチェックリスト
+## Checklist to using CircleCI securely as a customer
 
 CircleCI を使用するときには、CircleCI の*ユーザー*として、セキュリティ面のベスト プラクティスに関していくつかの事項を考慮する必要があります。
 
@@ -128,7 +128,7 @@ CircleCI を使用するときには、CircleCI の*ユーザー*として、セ
 - VCS で 2 要素認証 (2FA) を必ず使用します ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa)、[Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html))。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるアクターによってコードがプッシュされたり、秘密が盗まれたりする危険性があります。
 - パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、*フォークされたバージョンのリポジトリ*に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは**有効になっていません**。 この設定とオープンソースのセキュリティの詳細については、[オープンソース プロジェクトのドキュメント]({{site.baseurl}}/2.0/oss/#セキュリティ)を参照してください。
 
-## 関連項目
+## See also
 {:.no_toc}
 
 [GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
