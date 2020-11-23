@@ -17,13 +17,13 @@ Platform Guide | Description
 [Windows Project Tutorial]({{ site.baseurl }}/2.0/hello-world-windows/) | Full example of setting up a .NET project in CircleCI 2.0.
 {: class="table table-striped"}
 
-## Sample Projects with Companion Guides
+## Sample projects with companion guides
 
 Refer to the Sample Projects to get help with building the language and framework in which your application is written.
 
 {% include snippets/language-guides.md %}
 
-## Sample Workflows
+## Sample workflows
 
 Workflow Example | GitHub Repo
 ------|-----------
@@ -33,7 +33,7 @@ Fan-in / Fan-out | [fan-in-fan-out](https://github.com/CircleCI-Public/circleci-
 Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/workspace-forwarding/.circleci/config.yml)
 {: class="table table-striped"}
 
-## CircleCI Public Repos
+## CircleCI public repos
 
 GitHub Repo | Description | config.yml link
 ------|-----------|------------
@@ -43,7 +43,7 @@ circleci-images | Contains the official set of images that CircleCI maintains. |
 circleci image-builder | Uses Docker for building container images. | [.circleci/config.yml](https://github.com/circleci/image-builder/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## See Also
+## See also
 
 Use the Hello World document and sample `config.yml` files to start configuring your build.
 

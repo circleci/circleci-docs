@@ -13,7 +13,7 @@ version:
 * TOC
 {:toc}
 
-## Configure Environment Variables
+## Configure environment variables
 
 ### Set the `$PACKAGECLOUD_TOKEN`
 
@@ -43,11 +43,11 @@ To use the packagecloud CLI from CircleCI, install it using RubyGems by adding t
 
 The CLI will automatically use the `$PACKAGECLOUD_TOKEN` environment variable to authenticate against the packagecloud service.
 
-### Using Dependency Caching
+### Using dependency caching
 
 If you want to cache this dependency between builds, you can add the `package_cloud` gem to a `Gemfile` and follow CircleCI's guide for [Caching Dependencies]({{ site.baseurl }}/2.0/caching/).
 
-## Pushing Packages with the packagecloud CLI
+## Pushing packages with the packagecloud CLI
 
 The build processes for package types will vary, but pushing them into a packagecloud repository is quite simple. To add packages to a repository from your CircleCI builds, add a step in your `deploy` configuration that uses the packagecloud CLI.
 
@@ -94,11 +94,11 @@ workflows:
             - build
 ```
 
-## Deploy `npm` Packages
+## Deploy `npm` packages
 
 CircleCI users can deploy packages directly to npm registries hosted on packagecloud.
 
-### Configure the Test Job
+### Configure the test job
 
 This job will retrieve the project code, install its dependencies and run any tests in the NodeJS project:
 
@@ -130,7 +130,7 @@ jobs:
           paths: .
 ```
 
-### Configure the Deploy Job
+### Configure the deploy job
 
 The next job configured is the deploy job. This job will authenticate and publish to the packagecloud npm registry:
 
@@ -233,6 +233,6 @@ Packagecloud also provides a robust API to manage package repositories. You can 
 
 {:.no_toc}
 
-## See Also
+## See also
 
 [Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)

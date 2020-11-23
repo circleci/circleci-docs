@@ -17,7 +17,7 @@ the owner of on your VCS, or, _Follow_ any project in your organization to gain
 access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
 
-## Add Projects Page
+## Add projects page
 
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)

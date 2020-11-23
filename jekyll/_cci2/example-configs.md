@@ -12,7 +12,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 * TOC
 {:toc}
 
-## Example CircleCI Files and Public Repos
+## Example CircleCI files and public repos
 
 Example Name | Description | Link
 ----|----------|--------
@@ -29,7 +29,7 @@ circleci image-builder | Uses Docker for building container images. | [image-bui
 circleci-demo-docker | This is an example application showcasing how to build Docker images in CircleCI 2.0. | [.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-docker/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## Open Source Projects by Feature
+## Open source projects by feature
 
 The following projects provide examples of using features and functionality of CircleCI configuration syntax:
 
@@ -46,7 +46,7 @@ Build and test on multiple platforms with tagged releases | **Crystal** is a pro
 Tagged and scheduled workflow jobs | Node.js idiomatic client for **Cloud Pub/Sub**. | [nodejs-pubsub/.circleci/config.yml](https://github.com/googleapis/nodejs-pubsub/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## Open Source Projects by Language
+## Open source projects by language
 
 The following projects provide examples for particular programming languages, testing mechanisms, and deployment targets:
 
@@ -66,6 +66,6 @@ Python build with `apt` for concurrent job run with webhooks notification | **Su
 Scala and `sbt` build, test, and release with three workflows | **Arweave4s** is a lightweight modular HTTP client for the Arweave blockchain. | [arweave4s/.circleci/config.yml](https://github.com/toknapp/arweave4s/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## See Also
+## See also
 
 Refer to [Tutorials and Sample Apps]({{ site.baseurl }}/2.0/tutorials/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in 11 different languages.

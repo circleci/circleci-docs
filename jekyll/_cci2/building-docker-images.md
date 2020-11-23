@@ -110,7 +110,7 @@ Let’s break down what’s happening during this build’s execution:
 3. We enable [Docker Layer Caching]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) here to speed up image building (**note:** the option `docker_layer_caching: true` is available on [Performance and Custom plans](https://circleci.com/pricing/), not the Free plan. DLC is available on CircleCI Server installations). (line 11)
 4. We use project environment variables to store credentials for Docker Hub. (line 17)
 
-## Docker Version
+## Docker version
 
 To specify the Docker version, you can set it as a `version` attribute:
 
@@ -132,35 +132,35 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 **Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
 
-## Separation of Environments
+## Separation of environments
 The job and [remote docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) run in separate environments. Therefore, Docker containers specified to run your jobs cannot directly communicate with containers running in remote docker.
 
-### Accessing Services
+### Accessing services
 {:.no_toc}
 
 It is **not** possible to start a service in remote docker and ping it directly from a primary container or to start a primary container that can ping a service in remote docker. To solve that, you’ll need to interact with a service from remote docker, as well as through the same container:
 
 ```
-#...
+# ...
       - run:
           name: "Start Service and Check That it’s Running"
           command: |
             docker run -d --name my-app my-app
             docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
-#...
+# ...
 ```
 
 A different way to do this is to use another container running in the same network as the target container:
 
 ```
-#...
+# ...
       - run: |
           docker run -d --name my-app my-app
           docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
-#...
+# ...
 ```
 
-### Mounting Folders
+### Mounting folders
 {:.no_toc}
 
 It is **not** possible to mount a volume from your job space into a container in Remote Docker (and vice versa). You may use the `docker cp` command to transfer files between these two environments. For example, to start a container in Remote Docker using a config file from your source code:
@@ -243,7 +243,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
 ```
 {% endraw %}
 
-### Accessing the Remote Docker environment
+### Accessing the remote docker environment
 
 When a remote Docker environment is spun up, an SSH alias is created for you so you can SSH into the remote Docker virtual machine. This may be helpful for debugging your builds, or modifying the Docker or VM filesystem configuration. To SSH into the remote Docker VM, run the following within your project configuration job steps, or during a SSH rerun:
 
@@ -255,7 +255,7 @@ ssh remote-docker
 
 Thanks to ryansch for contributing this example.
 
-## See Also
+## See also
 
 [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)
 

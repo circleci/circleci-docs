@@ -45,7 +45,7 @@ Docker Hub in the `circleci` directory.
 
 ---
 
-## Sample Configuration
+## Sample configuration
 
 The following code block is commented to describe each part of the configuration
 for the sample application.
@@ -136,7 +136,7 @@ workflows:
 {% endraw %}
 
 
-## Build the Demo Ruby on Rails Project Yourself
+## Build the demo Ruby on Rails project yourself
   
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -144,7 +144,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 2. Go to the [Add Projects](https://circleci.com/add-projects){:rel="nofollow"} page in CircleCI and click the Build Project button next to the project you just forked.
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
-## See Also
+## See also
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.

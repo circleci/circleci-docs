@@ -38,7 +38,7 @@ after they have been created.
 The only way to change existing tokens
 is to delete and recreate them.
 
-### Creating a Personal API Token
+### Creating a personal API token
 
   1. In the CircleCI application,
   go to your [User settings](https://circleci.com/account){:rel="nofollow"}.
@@ -54,7 +54,7 @@ is to delete and recreate them.
 To delete a personal API token,
 click the X in the **Remove** column.
 
-### Creating a Project API Token
+### Creating a project API token
 
   1. In the CircleCI application,
   go to your project's settings
@@ -72,7 +72,7 @@ click the X in the **Remove** column.
 When the confirmation window appears,
 click the **Remove** button.
 
-## Next Steps
+## Next steps
 
 API tokens are not useful
 unless you do something with them.

@@ -29,7 +29,7 @@ The application uses Crystal 0.27 and Kemal 0.25. Both Crystal and Kemal are
 developing quickly. Altering the Docker image to the `:latest` version may cause
 breaking changes.
 
-## Sample Configuration
+## Sample configuration
 
 {% raw %}
 ```yaml
@@ -57,11 +57,11 @@ jobs: # a collection of jobs
       - run:
           name: test
           command: crystal spec
-# See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
+# See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 {% endraw %}
 
-## Config Walkthrough
+## Config walkthrough
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.

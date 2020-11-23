@@ -32,7 +32,7 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
   }
   ```
 
-## Next Steps After Conversion
+## Next steps after conversion
 
 ### Executors
 
@@ -60,7 +60,7 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 
 While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
 
-## Supported Syntax
+## Supported syntax
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 

@@ -21,7 +21,7 @@ To follow along with this document you will need:
 - A subscription to a [paid plan](https://circleci.com/pricing/#build-os-x) to enable building on the macOS executor.
 - An Apple computer with XCode installed on it (if you want to open the example project).
 
-## Overview Of The macOS Executor
+## Overview of the macOS executor
 
 The macOS build environment (or `executor`) is used for iOS and macOS
 development, allowing you to test, build, and deploy macOS and iOS applications on
@@ -29,7 +29,7 @@ CircleCI. The macOS executor runs jobs in a macOS environment and provides acces
 
 Before we get to setting up the macOS executor, we will need to setup our example application.
 
-## Example Application
+## Example application
 
 The example application is a simple mac app - it runs a 5 minute
 timer and contains a single unit test (real-world applications
@@ -44,7 +44,7 @@ As a user getting to know the macOS build environment, our ideal scenario is for
 You can checkout the example application's repo on
 [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
 
-## Example Configuration File
+## Example configuration file
 
 Our application does not make use of any external tools or dependencies, so we
 have a fairly simple `.circleci/config.yml` file. Below, each line is commented
@@ -90,7 +90,7 @@ Since this is a general introduction to building on MacOs, the `config.yml` abov
   
 You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/).
 
-## Next Steps
+## Next steps
 
 The macOS executor is commonly used for testing and building iOS applications,
 which can be more complex in their continuous integrations configuration. If you

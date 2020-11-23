@@ -21,7 +21,7 @@ CircleCI offers support for building, testing and deploying iOS projects in macO
 
 There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
 
-## Using the macOS Executor
+## Using the macOS executor
 
 Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
@@ -29,7 +29,7 @@ Periodically, we will update the version of macOS each image includes to ensure 
 
 We announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
-### Beta Image Support
+### Beta image support
 
 We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release. 
 
@@ -37,7 +37,7 @@ Unlike our stable images (which are frozen and will not change), once a new beta
 
 To read about our customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
-### Apple Silicon Support
+### Apple silicon support
 
 **Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
 
@@ -45,7 +45,7 @@ It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0
 
 Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. 
 
-## Supported Xcode Versions
+## Supported Xcode versions
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|-------------------|--------------
@@ -68,13 +68,13 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `9.4.1`  | Xcode 9.4.1 (9F2000)      | 10.13.3 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
 {: class="table table-striped"}
 
-## Getting Started
+## Getting started
 
 Select a macOS project repository you would like to build from the **Add Projects** page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
 
 We highly recommend using [Fastlane](https://fastlane.tools) to build and sign your apps in CircleCI. Fastlane requires minimal configuration in most cases and simplifies the build-test-deploy process.
 
-### Setting Up Your Xcode Project
+### Setting up your Xcode project
 
 After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already be marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
 
@@ -323,13 +323,13 @@ steps:
 
 It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
-## Configuring Deployment
+## Configuring deployment
 
 After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/2.0/deploying-ios/)
 
-## Reducing Job Time and Best Practises
+## Reducing job time and best practises
 
-### Pre-Starting the Simulator
+### Pre-starting the simulator
 {:.no_toc}
 
 Pre-start the iOS simulator before building your
@@ -356,7 +356,7 @@ image:
 * `iPhone 11 Pro (13.3) [<uuid>]` for the iPhone simulator.
 * `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
 
-### Collecting iOS Simulator Crash Reports
+### Collecting iOS simulator crash reports
 {:.no_toc}
 
 Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
@@ -422,11 +422,11 @@ jobs:
       - run: brew install wget
 ```
 
-## Supported Build and Test Tools
+## Supported build and test tools
 
 With the macOS executor on CircleCI, it is possible to customize your build as needed to satisfy almost any iOS build and test strategy.
 
-### Common Test Tools
+### Common test tools
 {:.no_toc}
 
 The following common test tools are known to work well on CircleCI:
@@ -513,7 +513,7 @@ workflows:
 
 If you are facing build failures while executing your jobs, check out our [support center knowledge base](https://support.circleci.com/hc/en-us/categories/115001914008-Mobile) for answers to common issues.
 
-## See Also
+## See also
 {:.no_toc}
 
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)

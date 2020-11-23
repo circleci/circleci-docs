@@ -51,7 +51,7 @@ jobs:
 
 {% endraw %}
 
-## Linux with Machine
+## Linux with machine
 
 **Note**: Use of machine may require additional fees in a future pricing update.
 
@@ -149,6 +149,6 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-## See Also
+## See also
 
 Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.

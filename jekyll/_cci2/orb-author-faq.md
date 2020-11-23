@@ -13,7 +13,7 @@ This document describes various questions and technical issues that you may find
 * TOC
 {:toc}
 
-## Errors Claiming Namespace or Publishing Orbs
+## Errors claiming namespace or publishing orbs
 
 * Question: I receive an error when attempting to claim a namespace or publish a production orb.
 
@@ -29,7 +29,7 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 
 Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
 
-## Secure API Tokens
+## Secure API tokens
 
 * Question: How do I protect a user's API tokens and other sensitive information?
 
@@ -39,7 +39,7 @@ Read more:
 * [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
 * [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## Environment Variables
+## Environment variables
 
 * Question: How can I require a user to add an environment variable?
   
@@ -51,7 +51,7 @@ Read more:
 * [Environment Variable Name parameter type]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
 * [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## Supported Programming Languages
+## Supported programming languages
 
 * Question: What language do I use to write an orb?
   
@@ -94,7 +94,7 @@ steps:
     name: Install Homebrew (for Linux)
 ```
 
-## Command vs Job
+## Command vs job
 
 * Question: Should I create a command or a job?
 
@@ -109,7 +109,7 @@ Read more:
 * [Reusable Config Reference]({{site.baseurl}}/2.0/reusing-config/)
 
 
-## See Also
+## See also
 - Refer to [Orbs Best Practices]({{site.baseurl}}/2.0/orbs-best-practices) for suggestions on creating a production-ready orb.
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
