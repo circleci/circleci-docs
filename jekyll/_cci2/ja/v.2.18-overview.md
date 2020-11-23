@@ -10,23 +10,23 @@ order: 1
 
 CircleCI Server v2.18 の機能強化や不具合修正についてまとめます。 パッチ リリースを含むすべての変更の一覧は、[変更履歴](https://circleci.com/ja/server/changelog)でご確認ください。 For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
-## アップグレードの要件
+## Requirements for upgrading
 
 <div class="alert alert-warning" role="alert">
 <b>警告:</b> 任意の時点で組織の名前を変更していた場合は、アップグレード プロセスを開始する前に、<a href="https://circleci.com/ja/docs/2.0/updating-server/#org-rename-script">スクリプト</a>を実行する<b>必要があります</b>。
 </div>
 
-## 注意事項とベスト プラクティス
+## Notes and best practices
 
 * Services マシンには最低 32 GB の RAM が必要になりました。
 * Redis の構成を一部変更しました。 Redis を外部処理化している場合は、構成を更新する必要があります。 担当のカスタマー サクセス マネージャーまでお問い合わせください。
 * 対応する Postgres バージョンを変更したため、postgreSQL v9.5.16 以降が必要です。 PostgreSQL を外部処理化している場合は、バージョン 2.17.x のうちに更新してから、2.18 にアップグレードしてください。
 
-## What's New in Release 2.18.3
+## What's new in release 2.18.3
 
 * You can now generate a Windows-based image to make available for running using the `machine` executor. See the VM Service guide for [instructions on building the image and making it available]({{ site.baseurl }}/2.0/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/2.0/executor-intro/#windows).
 
-## What's New in Release 2.18
+## What's new in release 2.18
 
 * It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context).
 * Customers running storage drivers external to AWS will see improved routing times when searching for build Artifacts.
@@ -59,7 +59,7 @@ CircleCI Server v2.18 の機能強化や不具合修正についてまとめま�
 
 * You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.
 
-## Fixed in Release 2.18
+## Fixed in release 2.18
 
 * Additional fixes around contexts and org renames.
 * Fixed an issue where occasionally volumes would fail to attach to spun up Remote Docker/`machine` instances.
