@@ -22,13 +22,13 @@ CircleCI の **macOS ビルド環境**で継続的インテグレーションを
 - macOS Executor でのビルドを実行できる[有料プラン](https://circleci.com/ja/pricing/#build-os-x)のサブスクリプション
 - Xcode がインストールされた Apple コンピューター (サンプル プロジェクトを開く場合)
 
-## macOS Executor の概要
+## Overview of the macOS executor
 
 macOS ビルド環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行うことができます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
 macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
 
-## サンプル アプリケーション
+## Example application
 
 このサンプル アプリケーションは簡単な Mac アプリです。5 分間のタイマーが実行され、単体テストが含まれています (このアプリは単に macOS ビルド環境の基礎を説明することを目的としており、実際のアプリケーションはこれよりもはるかに複雑です)。
 
@@ -39,7 +39,7 @@ macOS ビルド環境についての理解を深めていただければ、Circl
 
 サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
 
-## サンプルの設定ファイル
+## Example configuration file
 
 このアプリケーションでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
 
@@ -80,7 +80,7 @@ macOS でのビルドの基礎について説明しているため、上記の�
 
 `config.yml` ファイルの詳細については、[構成リファレンス ガイド]({{site.baseurl}}/2.0/configuration-reference/)を参照してください。
 
-## 次のステップ
+## Next steps
 
 macOS Executor は iOS アプリケーションのテストとビルドに広く使用されていますが、継続的インテグレーションの構成が複雑になる可能性があります。 iOS アプリケーションのビルドやテストについて詳しく知りたい場合は、以下のドキュメントをご覧ください。
 
