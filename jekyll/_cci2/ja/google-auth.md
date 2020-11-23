@@ -29,7 +29,7 @@ If Debian is an acceptable operating system for your primary container, consider
 
 それ以外の場合は、基本イメージのオペレーティング システムに対応する [Google Cloud SDK インストール手順](https://cloud.google.com/sdk/)に従ってください。
 
-### サービス アカウントの作成と格納
+### Creating and storing a service account
 
 Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud`. Google は、ユーザー アカウントとサービス アカウントの 2 種類の承認を提供しています。 Because you are installing the Cloud SDK on CircleCI, the service account is the appropriate choice.
 
@@ -42,7 +42,7 @@ Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud
     - `GOOGLE_PROJECT_ID`: GCP プロジェクトの ID
     - `GOOGLE_COMPUTE_ZONE`: デフォルトの [Compute Engine のゾーン](https://cloud.google.com/compute/docs/regions-zones/)
 
-#### きめ細かい権限の追加
+#### Adding granular permissions
 
 If you are having issues pushing container images to GCR you may need more granular permissions than the default `service account` provides. You can grant permission changes in the Cloud Storage [IAM Console](https://console.cloud.google.com/iam-admin/iam/project).
 
