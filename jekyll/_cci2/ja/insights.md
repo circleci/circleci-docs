@@ -30,7 +30,7 @@ CircleCI Web アプリケーションのサイドバーから、組織全体の�
 {:.tab.insight-access.Access_by_workflow}
 ![]({{ site.baseurl }}/assets/img/docs/screen_insights_access-2.png)
 
-### ワークフローの概要
+### Workflow overview
 
 インサイト ダッシュボードには、過去 90 日間のワークフローの詳細が表示されます。 **このデータはリアルタイムのものではなく、最新の情報が反映されるまでには最大で 24 時間かかることがあります**。 ページ上部で、ワークフローごとにフィルタリングすることも可能です。 ワークフローの概要に表示されるデータは以下のとおりです。
 
@@ -39,7 +39,7 @@ CircleCI Web アプリケーションのサイドバーから、組織全体の�
 - ワークフローの実行時間
 - ワークフローのクレジット使用量*
 
-### ジョブの概要
+### Job overview
 
 **[Job (ジョブ)]** タブに切り替えると、ジョブごとに集計された以下の時系列データを確認できます。
 
@@ -75,7 +75,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 - ブランチ数
 - 最終ビルド時刻
 
-### プロジェクトのインサイト
+### Project insights
 
 メイン ナビゲーション上の [Insights (インサイト)] アイコンをクリックしてから、リポジトリ名をクリックすると、プロジェクト別のインサイトのページにアクセスできます。
 
@@ -87,11 +87,11 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 - **ビルド パフォーマンス:** このグラフには、最大 90 日前までのビルド・ジョブのデータが日別に集約され、各日の平均値がプロットされています。 任意のブランチをクリックして、リポジトリのパフォーマンスをモニタリングできます。
 
-## Sumo Logic とのインテグレーション
+## Sumo Logic integration
 
 Sumo Logic を使用すると、CircleCI 上のすべてのジョブを追跡し、その分析データを可視化できます。 そのためには、Sumo Logic パートナー インテグレーション サイトから、Sumo Logic Orb と Sumo Logic アプリケーション インテグレーションを使用します。
 
-### Sumo Logic の CircleCI ダッシュボード
+### The CircleCI dashboard for Sumo Logic
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
@@ -113,7 +113,7 @@ CircleCI ダッシュボードは、ダッシュボードのホームページ�
 
 ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。この Orb は、追跡するプロジェクトに含まれている必要があります。
 
-### Sumo Logic Orb
+### The Sumo Logic orb
 
 Sumo Logic Orb の最新版は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/sumologic)で提供されています。
 
@@ -126,7 +126,7 @@ orbs:
   sumologic: circleci/sumologic@x.y.z
 ```
 
-#### 2. ワークフローに *Workflow-Collector* を追加する
+#### 2. Add *workflow-collector* to workflow.
 
 `workflow-collector` ジョブはワークフローと同時に並列で実行され、ワークフロー内のすべてのジョブが完了するまで Sumo Logic に分析データを送信します。
 
@@ -175,10 +175,10 @@ HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成�
 
 各ジョブが CircleCI で実行されると、Sumo Logic ダッシュボードはデータの入力を開始します。
 
-## 関連項目
+## See also
 
 Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
 
-### 関連項目
+### See also
 
 失敗が多いテストに対してインサイトを使用したい場合は、「[テスト メタデータの収集]({{ site.baseurl }}/j2.0/collect-test-data/)」を参照してください。
