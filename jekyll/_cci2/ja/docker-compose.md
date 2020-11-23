@@ -57,17 +57,17 @@ In the following example, the whole system starts, then verifies it is running a
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 ```
 
-## サンプル プロジェクト
+## Example project
 
 See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects.
 
 **Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network.
 
-## Docker Compose を Machine Executor と組み合わせて使用
+## Using docker compose with machine executor
 
 If you want to use docker compose to manage a multi-container setup with a docker-compose file, use the `machine` key in your `config.yml` file and use docker-compose as you would normally (see machine executor documentation [here](https://circleci.com/docs/2.0/executor-types/#using-machine) for more details). That is, if you have a docker-compose file that shares local directories with a container, this will work as expected. Refer to Docker's documentation of [Your first docker-compose.yml file](https://docs.docker.com/get-started/part3/#your-first-docker-composeyml-file) for details. **Note: There is an overhead for provisioning a machine executor as a result of spinning up a private Docker server. Use of the `machine` key may require additional fees in a future pricing update.**
 
-## Docker Compose を Docker Executor と組み合わせて使用
+## Using docker compose with docker executor
 
 Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
 
@@ -77,7 +77,7 @@ This combination is required if you want to build docker images for deployment.
 
 Using `docker-compose` with the `macos` executor is not supported, see [the support article for more information](https://support.circleci.com/hc/en-us/articles/360045029591-Can-I-use-Docker-within-the-macOS-executor-).
 
-## See Also
+## See also
 {:.no_toc}
 
 See the Mounting Folders section of the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#mounting-folders) for examples and details.
