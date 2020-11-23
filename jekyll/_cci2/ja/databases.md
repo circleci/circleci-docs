@@ -21,7 +21,7 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 
 以下には、`build` という 1 つのジョブが含まれている 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの例を示しています。 Executor に Docker が選択されており、最初のイメージとなるのは、すべての処理が実行されるプライマリ コンテナです。 この例には 2 番目のイメージがあり、これがサービス イメージとして使用されます。 最初のイメージのプログラミング言語は Python です。 Python イメージには `pip` がインストールされており、ブラウザーのテスト用に `-browsers` があります。 2 番目のイメージから、データベースなどにアクセスできます。
 
-## PostgreSQL データベースのテスト例
+## PostgreSQL database testing example
 
 プライマリ イメージでは、設定ファイルに `environment` キーで環境変数が定義されており、URL が指定されています。 この URL により、これが PostgreSQL データベースであることが示されているので、デフォルトでは PostgreSQL デフォルト ポートが使用されます。 このビルド済みの CircleCi イメージには、データベースとユーザーがあらかじめ含まれています。 ユーザー名は `postgres`、データベースは `circle_test` です。 このため、すぐにこのユーザー名とデータベースを使用してイメージを使用できます。ご自身で構成する必要はありません。
 
@@ -94,18 +94,18 @@ jobs:
 
 データベース サービスがスピンアップされると、データベースの `circlecitest` および `root` のロールが自動的に作成されます。これらは、ログインとテストの実行時に使用できます。 データベース サービスは `root` ではなく、`circle` アカウントを使用して実行されます。 次に、データベースのテストが実行されてテーブルが作成され、値がそのテーブルに挿入されます。テーブルで SELECT が実行されると、値が取得されます。
 
-## オプションのカスタマイズ
+## Optional customization
 
 このセクションでは、ビルドをさらにカスタマイズしたり、競合状態を避けたりするためのオプションの追加構成について説明します。
 
-### Postgres イメージの最適化
+### Optimizing Postgres images
 {:.no_toc}
 
 デフォルトの `circleci/postgres` Docker イメージは、ディスク上の通常の固定記憶域を使用します。 `tmpfs` を使用すると、テストの実行速度が向上し、リソースの使用量を抑えられる可能性があります。 `tmpfs` ストレージを利用するバリアントを使用するには、`-ram` を `circleci/postgres` タグ (`circleci/postgres:9.6-alpine-ram`など) に付加します。
 
 また、PostGIS も使用可能です。上記の例では、`circleci/postgres:9.6-alpine-postgis-ram` のようになります。
 
-### バイナリの使用
+### Using binaries
 {:.no_toc}
 
 `pg_dump`、`pg_restore`、および類似ユーティリティを使用するには、`pg_dump` の呼び出し時にも正しいバージョンが使用されるように追加の構成を行う必要があります。 以下の行を `config.yml` ファイルに追加して、`pg_*` または同等のデータベース ユーティリティを有効化します。
@@ -115,7 +115,7 @@ jobs:
            - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
     
 
-### Dockerize を使用した依存関係の待機
+### Using Dockerize to wait for dependencies
 {:.no_toc}
 
 ジョブで複数の Docker コンテナを使用している場合、コンテナ内のサービスが開始される前にジョブがサービスを使用しようとすると、競合状態が発生することがあります。 たとえば、PostgreSQL コンテナが実行されていても、接続を受け入れる準備ができていない場合などです。 この問題を回避するには、`dockerize` を使用して依存関係を待機します。 以下の例は、CircleCI `config.yml` ファイルでこの問題を回避する方法を示しています。
@@ -167,7 +167,7 @@ Redis では CLI も使用可能です。
 
 `dockerize -wait http://localhost:80 -timeout 1m`
 
-## 関連項目
+## See also
 {:.no_toc}
 
 他の設定ファイルの例については、「[データベースの構成例]({{ site.baseurl }}/2.0/postgres-config/)」を参照してください。
