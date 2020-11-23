@@ -10,7 +10,7 @@ order: 1
 
 CircleCI Server v2.16 の機能強化や不具合修正についてまとめます。
 
-## バージョン 2.16 の新機能
+## What's new in release 2.16
 
 - Services マシンの外部にデータとワークロードを分散できるようになりました。 MongoDB、Redis、Nomad Server、RabbitMQ、Postgres、Vault を外部サービスとして使用できます。 最新ドキュメントについては、CSM にお問い合わせください。
 
@@ -25,7 +25,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
    - *CircleCI v2.16 インストール ガイド*
    - *CircleCI v2.16 運用ガイド*
 
-## バージョン 2.16 での修正点
+## Fixed in release 2.16
 
 - 32 日後にコンテキストが破損する問題を修正しました。
 
@@ -43,7 +43,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 
 - セキュリティ上の理由から、デフォルトでは、フォークされた PR が親プロジェクトのキャッシュに書き込むことはできなくなりました。 ただし、詳細設定の [Pass secrets to builds from forked pull requests (フォークされたプル リクエストからビルドにシークレットを渡す)] を有効にしている場合は、フォークから親プロジェクトのキャッシュに書き込むことができます。
 
-## バージョン 2.16 での更新点
+## Updated in release 2.16
 
 - ビルドのメールから EOL バナーを削除しました。
 
@@ -57,7 +57,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 
 - 今回のリリースで Replicated がバージョン 2.29.0 に更新されたため、Docker 17.12.1 が必要になります。CircleCI v2.16 にアップグレードする前に、以下の手順を実行してください。
 
-### Replicated を更新するための前提条件
+### Prequisites for updating Replicated
 
 - Ubuntu 14.04 ベースの環境を使用していること
 - Services マシンで Replicated バージョン 2.10.3 を実行していること 
