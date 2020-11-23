@@ -33,7 +33,7 @@ GitHub または Bitbucket Cloud で Web フックを編集して、ビルドを
 
 タグ プッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{ site.baseurl }}/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
 
-### .circleci/config.yml ファイルの追加
+### Add a .circleci/config.yml file
 {:.no_toc}
 
 After you create and commit a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file to your GitHub or Bitbucket Cloud repository, CircleCI immediately checks your code out and runs your first job along with any configured tests. たとえば、Postgres の仕様と機能を使用する Rails プロジェクトで作業している場合、ジョブ実行ステップの構成は以下のようになります。
@@ -62,7 +62,7 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
 
 ![PR 後のステータス バッジ]({{ site.baseurl }}/assets/img/docs/status_check.png)
 
-## キーのベスト プラクティス
+## Best practices for keys
 
 - 可能な限り、デプロイ キーを使用します。
 - When Deploy Keys cannot be used, [Machine User Keys](#controlling-access-via-a-machine-user) must be used, and have their access restricted to the most limited set of repos and permissions necessary.
@@ -73,7 +73,7 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
     3. CircleCI プロジェクトでキーを再生成します。
 - 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザー キーを使用してアクセスできないようにします。
 
-## Renaming Orgs and Repositories
+## Renaming orgs and repositories
 
 If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
 
@@ -84,7 +84,7 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 **Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
 
-## Enable your Project to Check Out Additional Private Repositories
+## Enable your project to check out additional private repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a GitHub user key in addition to the deploy key because each deploy key is valid for only *one* repository while a GitHub user key has access to *all* of your GitHub repositories.
 
@@ -110,7 +110,7 @@ Here are common errors that indicate you need to add a user key.
     Permission denied (publickey).
     
 
-## Controlling Access Via a Machine User
+## Controlling access via a machine user
 
 For fine-grained access to multiple repositories, it is best practice to create a machine user for your CircleCI projects. A [machine user](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) is a GitHub user that you create for running automated tasks. By using the SSH key of a machine user, you allow anyone with repository access to build, test, and deploy the project. Creating a machine user also reduces the risk of losing credentials linked to a single user.
 
@@ -132,7 +132,7 @@ To use the SSH key of a machine user, follow the steps below.
 
 Now, CircleCI will use the machine user's SSH key for any Git commands that run during your builds.
 
-## Permissions Overview
+## Permissions overview
 
 CircleCI requests the following permissions from your VCS provider, as defined by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes) and the [Bitbucket permissions model](https://confluence.atlassian.com/bitbucket/oauth-on-bitbucket-cloud-238027431.html#OAuthonBitbucketCloud-Scopes).
 
@@ -154,7 +154,7 @@ CircleCI requests the following permissions from your VCS provider, as defined b
 
 If you feel strongly about reducing the number of permissions CircleCI uses, consider contacting your VCS provider to communicate your concerns.
 
-### チーム アカウントの権限
+### Permissions for team accounts
 {:.no_toc}
 
 This section provides an overview of the possible team and individual account choices available to meet various business needs:
@@ -165,7 +165,7 @@ This section provides an overview of the possible team and individual account ch
 
 3. An individual Bitbucket account is free for private repos for teams of up to five. An individual may create a Bitbucket team, add members and give out admin permissions on the repo as needed to those who need to build. This project would appear in CircleCI for members to follow without additional cost.
 
-### GitHub 組織で CircleCI を再有効化する方法
+### How to re-enable CircleCI for a GitHub organization
 {:.no_toc}
 
 This section describes how to re-enable CircleCI after enabling third-party application restrictions for a GitHub organization. Go to [GitHub Settings](https://github.com/settings/connections/applications/78a2ba87f071c28e65bb) and in the "Organization access" section either:
@@ -185,7 +185,7 @@ If you enable these restrictions on an organization for which CircleCI has been 
 
 The account and permissions system we use is not as clear as we would like and as mentioned we have a much improved system in development with users as first class citizens in CircleCI.
 
-## Deployment Keys and User Keys
+## Deployment keys and user keys
 
 **What is a deploy key?**
 
@@ -197,7 +197,7 @@ If you want to push to the repository from your builds, you will need a deployme
 
 A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI stores the private key. Possession of the private key gives the ability to act as that user, for purposes of 'git' access to projects.
 
-### GitHub のデプロイ キーの作成
+### Creating a GitHub deploy key
 {:.no_toc}
 
 In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
@@ -226,7 +226,7 @@ jobs:
 
 When you push to your GitHub repository from a job, CircleCI will use the SSH key you added.
 
-### Bitbucket ユーザー キーの作成
+### Creating a Bitbucket user key
 {:.no_toc}
 
 Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following this workaround:
