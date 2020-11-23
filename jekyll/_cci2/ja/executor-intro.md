@@ -106,7 +106,7 @@ version: 2
 
 `windows` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#windows-executor-の使用)をご覧ください。 See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
-## 関連項目
+## See also
 
 * [ビルド済みの CircleCI コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/)
 * [macOS でのビルド]({{site.baseurl}}/2.0/hello-world-macos)
