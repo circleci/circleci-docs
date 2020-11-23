@@ -33,11 +33,11 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 
 CircleCI の各プランで提供される内容や、マシン タイプ別の消費クレジットについては、CircleCI の[料金プラン](https://circleci.com/ja/pricing/)のページをご確認ください。
 
-## クレジットベース プランの設定
+## Configuring your credit plan
 
 ご希望のプランを設定するには、CircleCI の Web アプリケーションで [`Settings`] > [`Plan Overview`] を開き、 お客様のニーズに最適なプランを選択します。
 
-## Free プラン
+## Free plan
 
 従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
 
@@ -48,7 +48,7 @@ CircleCI の各プランで提供される内容や、マシン タイプ別の�
 
 The free usage-based plan offers 2,500 build credits across medium-type machines per week (which offers 2 CPUs, 4gb of memory.) With this combination, credits are used at a rate of 10 credits/minute and there is no limit on user seats.
 
-## Performance プラン
+## Performance plan
 
 Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
@@ -59,24 +59,24 @@ Performance プランにアップグレードすると、Free プランの内容
 - キューイングなし
 - サポート
 
-## オープンソース プロジェクトでのクレジット使用
+## Open source credit usage
 
 Free プランの組織には、毎月 400,000 クレジットが無料で付与され、Linux コンピューティングでのオープンソース プロジェクトのビルドに利用できます。 この特典を受け取るには、Free プランを利用し、リポジトリをパブリックにする必要があります。
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
-## Docker レイヤー キャッシュ
+## Docker layer caching
 
 Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC は Performance プランでのみ提供されます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)をご覧ください。
 
 ## Troubleshooting
 
-### Am I charged if my build is "Queued" or "Preparing"?
+### Am i charged if my build is "queued" or "preparing"?
 
 No. If you are notified that a job is "queued", it indicates that your job is waiting due to a **plan** or **concurrency** limit. If your job indicates that it is "preparing", it means that CircleCI is setting up or _dispatching_ your job so that it may run.
 
 If you find that jobs are "preparing" for quite some time, you may be able to reduce it if your jobs use the docker executor; try using more recent docker images to decrease preparation time.
 
-## Questions And Comments
+## Questions and comments
 
 Consider reading our section on Billing in our [FAQ]({{site.baseurl}}/2.0/faq/#billing). For any further questions, do not hesitate to open a [open a support ticket](https://support.circleci.com/hc/en-us/requests/new).
