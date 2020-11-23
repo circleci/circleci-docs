@@ -17,7 +17,7 @@ version:
 * **パイプライン値**: 設定ファイル全体で使用できるメタデータです。
 * **パイプライン パラメーター**: 型指定された変数です。設定ファイルのトップ レベルに `parameters` キーで宣言します。 `parameters` は、API からパイプラインの新規実行をトリガーする際にパイプラインに渡すことができます。
 
-## パイプライン値
+## Pipeline values
 
 パイプライン値は、あらゆるパイプライン構成で使用可能であり、事前に宣言することなく使用できます。
 
@@ -53,7 +53,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-## 設定ファイルにおけるパイプライン パラメーター
+## Pipeline parameters in configuration
 
 パイプライン パラメーターは、`.circleci/config.yml` のトップ レベルで `parameters` キーを使って宣言します。
 
@@ -94,7 +94,7 @@ jobs:
       - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
 ```
 
-### API からパイプラインをトリガーするときにパラメーターを渡す
+### Passing parameters when triggering pipelines via the API
 
 [パイプラインをトリガーする](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
 
@@ -111,14 +111,14 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-## パイプライン パラメーターのスコープ
+## The scope of pipeline parameters
 
 Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability.
 
 
-## 構成プロセスの段階とパラメーターのスコープ
+## Config processing stages and parameter scopes
 
-### プロセスの段階
+### Processing stages
 
 Configuration processing happens in the following stages:
 
@@ -128,7 +128,7 @@ Configuration processing happens in the following stages:
 
 The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
-## 要素パラメーターのスコープ
+## Element parameter scope
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
@@ -162,18 +162,18 @@ workflows:
 
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
 
-## パイプライン値のスコープ
+## Pipeline value scope
 
 Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
-### パイプライン パラメーターのスコープ
+### Pipeline parameter scope
 
 Pipeline parameters which are defined in configuration are always in scope, with two exceptions:
 
 - パイプライン パラメーターは、他のパイプライン パラメーターの定義の範囲内では有効でないため、相互に依存させることはできません。
 - データ漏えいを防ぐために、パイプライン パラメーターは Orbs 本体、Orbs のインラインの範囲内では有効ではありません。
 
-## 条件付きワークフロー
+## Conditional workflows
 
 Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy values can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
 
