@@ -35,7 +35,7 @@ Database images for use as a secondary 'service' container are also available on
 
 * * *
 
-## 設定ファイルの例
+## Sample configuration
 
 The following code block is commented to describe each part of the configuration for the sample application.
 
@@ -128,7 +128,7 @@ workflows:
 {% endraw %}
 
 
-## Ruby on Rails のデモ プロジェクトのビルド
+## Build the demo Ruby on Rails project yourself
 
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
@@ -136,7 +136,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI で ［[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-## See Also
+## See also
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
