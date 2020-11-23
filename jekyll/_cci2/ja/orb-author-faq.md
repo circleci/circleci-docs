@@ -13,7 +13,7 @@ version:
 * 目次
 {:toc}
 
-## 名前空間の要求または Orb のパブリッシュに伴うエラー
+## Errors claiming namespace or publishing orbs
 
 * 質問: 名前空間を要求または安定版 Orb をパブリッシュしようとするとエラーが発生します。
 
@@ -29,7 +29,7 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 
 詳細については、[Orb CLI の権限の一覧表]({{site.baseurl}}/2.0/orb-author-intro/#%E6%A8%A9%E9%99%90%E3%81%AE%E4%B8%80%E8%A6%A7%E8%A1%A8)を参照してください。
 
-## API トークンの保護
+## Secure API tokens
 
 * 質問: ユーザーの API トークンなどの機密情報を保護するにはどうしたらよいですか。
 
@@ -39,7 +39,7 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 * [環境変数名]({{site.baseurl}}/2.0/reusing-config/#環境変数名)
 * [Orb のベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## 環境変数
+## Environment variables
 
 * 質問: ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
 
@@ -51,7 +51,7 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 * [環境変数名パラメーター型]({{site.baseurl}}/2.0/reusing-config/#環境変数名)
 * [Orb のベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## サポートされているプログラミング言語
+## Supported programming languages
 
 * 質問: Orb の記述にはどの言語を使用できますか。
 
@@ -103,7 +103,7 @@ steps:
 
 
 
-## コマンドとジョブの比較
+## Command vs job
 
 * 質問: コマンドとジョブのどちらを作成するべきですか。
 
@@ -121,7 +121,7 @@ Orb の[コマンド]({{site.baseurl}}/2.0/orb-concepts/#%E3%82%B3%E3%83%9E%E3%8
 
 
 
-## 関連項目
+## See also
 
 - [Orb のオーサリングのベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices): 安定版 Orb のオーサリングに関する推奨事項
 - [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orbs の基本的な概念
