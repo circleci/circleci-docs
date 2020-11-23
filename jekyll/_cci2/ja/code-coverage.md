@@ -334,7 +334,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-# コード カバレッジ サービスの使用
+# Using a code coverage service
 
 ## Codecov
 
