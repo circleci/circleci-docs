@@ -13,7 +13,7 @@ version:
 
 [ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
 
-## Linux での Hello World
+## Echo hello world on Linux
 
 この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
@@ -49,7 +49,7 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれ
 
 サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/2.0/language-javascript/)を参照してください。
 
-## Android での Hello World
+## Hello world for Android
 
 前述の Linux の例と基本的な考え方は同じです。ビルド済みの Android イメージを同じ `config.yml` ファイルで使用して、`docker` executor を使用するジョブを追加します。
 
@@ -64,7 +64,7 @@ CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれ
 
 詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/2.0/language-android/)を参照してください。
 
-## macOS での Hello World
+## Hello world for macOS
 
 *The macOS executor is not currently available on self-hosted installations of CircleCI Server*
 
@@ -78,7 +78,7 @@ Using the basics from the Linux and Android examples above, you can add a job th
 
 Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
 
-## Windows での Hello World
+## Hello world for Windows
 
 Using the basics from the Linux, Android, and macOS examples above, you can add a job that uses the windows executor (Windows Server 2019) as follows. Notice the Cloud version of this requires the use of `version:2.1` config, and orbs:
 
@@ -120,15 +120,15 @@ jobs:
 
 **Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows).
 
-### Orbs の使用とオーサリングの詳細
+### More about using and authoring orbs
 
 Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-## Following / Unfollowing Projects
+## Following / unfollowing projects
 
 You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking "Projects" in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
-## 組織の切り替え
+## Org switching
 
 In the top left, you will find the Org switcher.
 
@@ -141,7 +141,7 @@ In the top left, you will find the Org switcher.
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application. For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`. If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
-## 次のステップ
+## Next steps
 
 - 2.0 構成の概要、および `.circleci/config.yml` ファイルにおけるトップ レベル キーの階層については「[コンセプト]({{ site.baseurl }}/2.0/concepts/)」を参照してください。
 
