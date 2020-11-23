@@ -16,7 +16,7 @@ version:
 - 目次
 {:toc}
 
-## ジョブの並列処理レベルの指定
+## Specifying a job's parallelism level
 
 Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. `parallelism` キーには、ジョブのステップを実行するためにセットアップする独立した Executor の数を指定します。
 
@@ -39,18 +39,18 @@ jobs:
 
 詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#parallelism)」を参照してください。
 
-## CircleCI CLI を使用したテストの分割
+## Using the CircleCI CLI to split tests
 
 CircleCI では、複数のコンテナに対してテストを自動的に割り当てることができます。 割り当ては、使用しているテスト ランナーの要件に応じて、ファイル名またはクラス名に基づいて行われます。 割り当てには CircleCI CLI が必要で、実行時にビルドに自動挿入されます。
 
 CLI をローカルにインストールするには、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」の説明を参照してください。
 
-### テスト ファイルの分割
+### Splitting test files
 {:.no_toc}
 
 CLI では、並列ジョブの実行時に複数のマシンにテストを分割できます。 それには、`circleci tests split` コマンドでファイル名またはクラス名のリストをテスト ランナーに渡す必要があります。
 
-#### テスト ファイルのグロブ
+#### Globbing test files
 {:.no_toc}
 
 CLI では、以下のパターンを使用したテスト ファイルのグロブをサポートしています。
@@ -86,7 +86,7 @@ jobs:
             circleci tests glob "foo/**/*" "bar/**/*" | xargs -n 1 echo
 ```
 
-#### タイミング データに基づいた分割
+#### Splitting by timing data
 
 一連の並列 Executor でテスト スイートを最適化するための最良の方法は、タイミング データを使用してテストを分割することです。 これにより、テストが最も均等に分割され、全体のテスト時間が短縮されます。
 
@@ -108,7 +108,7 @@ CLI は、テスト スイートによって生成されたタイミング デ�
 
 手動でタイミング データを格納および取得する場合は、[`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) ステップを使用します。
 
-#### ファイル名に基づいた分割
+#### Splitting by name
 {:.no_toc}
 
 デフォルトでは、`--split-by` フラグを使用しない場合、`circleci tests split` はファイル名またはクラス名の一覧が渡されることを想定しており、テスト名またはクラス名によってアルファベット順にテストを分割します。 ファイル名の一覧は、以下に挙げる複数の方法で用意できます。
@@ -140,7 +140,7 @@ CLI は、使用可能なコンテナ数と現在のコンテナ インデック
     circleci tests split --index=0 test_filenames.txt
     
 
-#### ファイル サイズに基づいた分割
+#### Splitting by filesize
 {:.no_toc}
 
 ファイル パスを指定すれば、CLI はファイル サイズでも分割できます。 それには、分割タイプ `filesize` を付けて `--split-by` フラグを使用します。
@@ -148,11 +148,11 @@ CLI は、使用可能なコンテナ数と現在のコンテナ インデック
     circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
     
 
-## 環境変数を使用したテストの分割
+## Using environment variables to split tests
 
 CircleCI には並列処理を完全に制御するための環境変数が 2 つ用意されており、CLI の代わりに使用してコンテナを個別に構成できます。 `CIRCLE_NODE_TOTAL` はジョブの実行に使用されている並列コンテナの合計数、`CIRCLE_NODE_INDEX` は現在実行されている特定のコンテナのインデックスです。 詳細については、「[定義済み環境変数]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)」を参照してください。
 
-## 分割テストの実行
+## Running split tests
 
 テストをグロブおよび分割しても、実際にテストが実行されるわけではありません。 テストのグループ化とテストの実行を結び付けるには、グループ化されたテストをファイルに保存してから、そのファイルをテスト ランナーに渡します。
 
@@ -163,12 +163,12 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 
 The contents of the file `/tmp/tests-to-run` will be different in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
-### ビデオ: グロブのトラブルシューティング
+### Video: troubleshooting globbing
 {:.no_toc}
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
-## 関連項目
+## See also
 
 [コンテナを使用する]({{ site.baseurl }}/2.0/containers/)
 
