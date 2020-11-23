@@ -24,12 +24,12 @@ Orb はオープン ソースであり他者が手を加えられるので、す
 Orb のテストで最も基本的なものは、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュする Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Orb 開発キットを使用していれば、これら両方のチェックは、プロジェクトの設定ファイル `.circleci/config.yml` に定められた CI/CD パイプラインにより自動で行われます。 また、ローカル環境において手動で実施することも可能です。
 
 ```yaml
-# test-pack ワークフローのスニペット
+# Snippet from test-pack workflow
 test-pack:
     unless: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - orb-tools/lint # YAML ファイルの構文チェック
-      - orb-tools/pack # Orb ソースのパッケージ化と設定ファイルのバリデーション
+      - orb-tools/lint # Lint Yaml files
+      - orb-tools/pack # Pack orb source + validate config
       - shellcheck/check:
           dir: ./src/scripts
           exclude: SC2148
@@ -39,11 +39,11 @@ Orb リポジトリへの初回コミット時には、[test-pack](https://githu
 
 Orb プロジェクトの設定ファイルの中身について詳しくは、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs)」ガイドを参照してください。
 
-### YAML 構文チェック
+### YAML lint
 
 上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。詳しくは、[Orb レジストリのページ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
 
-### 設定ファイルのバリデーション
+### Config validation
 
 `test-pack` ワークフローでは、YAML 構文チェック ジョブ (`orb-tools/lint`) と並列で [orb-tools/pack](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-pack) ジョブも実行し、自動的に設定ファイルのパッケージ化とバリデーションを行います。
 
@@ -57,7 +57,7 @@ bash スクリプトのテストで最も基本的なものは、"ShellCheck" �
 
 `test-pack` ワークフローでは、[ShellCheck Orb](https://circleci.com/developer/ja/orbs/orb/circleci/shellcheck) を使用します。 ShellCheck Orb のステップはすべて省略可能であり、特に Orb でスクリプトのインストールが不要な場合などは削除してかまいません。
 
-## 単体テスト
+## Unit testing
 
 Orb 開発キットの [`<<include(file)>>` ファイル インクルード]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax)機能を使っており、`src/scripts` に bash ファイルを保存して読み込む場合、スクリプト向けの完全な結合テストを作成できます。
 
@@ -165,22 +165,22 @@ teardown() {
 # これは本質的には、名前の付いた関数に過ぎません。
 # テスト ケースごとに setup() で -> test -> teardown() -> repeat を実行します。
 
-# ShellCheck で 2 つのインクルードされたシェル スクリプトを見つけられるかを確認
-@test "1: ShellCheck テスト - スクリプト 2 つの確認" {
-    # 入力をモック
+# Ensure Shellcheck is able to find the two included shell scripts
+@test "1: Shellcheck test - Find both scripts" {
+    # Mocking inputs
     export SC_PARAM_DIR="src/scripts"
     export SC_PARAM_SEVERITY="style"
     export SC_PARAM_EXCLUDE="SC2148,SC2038,SC2059"
     Set_SHELLCHECK_EXCLUDE_PARAM
     Run_ShellCheck
-    # 見つかったスクリプト 2 つをテスト
+    # Test that 2 scripts were found
     [ $(wc -l tmp | awk '{print $1}') == 2 ]
-    # テスト ケースでエラーが返されたら、失敗とみなします。
+    # If an error is thrown anywhere in this test case, it will be considered a failure.
     # 標準的な POSIX テスト コマンドを使用して "Run_ShellCheck" 関数の機能をテストします。
 }
 ```
 
-## 結合テスト
+## Integration testing
 
 ここまでは、すべてのテストを Orb のパッケージ化前に実行し、完成版の Orb ではなくコード自体を対象としていました。 最後に最も重要な Orb のテストとして、Orb のコマンドとジョブをテストし、本番環境で意図したとおりに動作するかを確認します。 このテストは、バリデーション テストを実行して新しい開発版の Orb がパブリッシュされた後に行われます。
 
@@ -188,7 +188,7 @@ teardown() {
 
 `integration-test_deploy` ワークフローでは、一連の最終結合テストを実行します。これらすべてのテストに合格した場合、メインのデプロイメント ブランチに移動し、Orb をデプロイすることができます。
 
-### Orb コマンドのテスト
+### Testing orb commands
 
 [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの最初のジョブは [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) ジョブです。これは、`orb-init` コマンドで生成される `hello-world` Orb に含まれるサンプルの結合テストです。
 
@@ -206,7 +206,7 @@ teardown() {
 
 このジョブのステップを、Orb のコマンドに置き換えます。 必要に応じてサンプル プロジェクトを含めたり、Orb のコマンドだけを実行してエラーが発生しないことを確認したりすることもできます。
 
-### Orb ジョブのテスト
+### Testing orb jobs
 
 Orb のコマンドだけでなくジョブもテストする必要がある場合は、設定ファイルで、[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの `integration-test-1` のすぐ下にテストする Orb ジョブを追加します。
 
@@ -221,11 +221,11 @@ Orb のコマンドだけでなくジョブもテストする必要がある場�
                 - my-orb/orb-job
     
 
-## 次の手順
+## What's next?
 
 Orb の新しい機能を追加し、適切なテストを作成できたら、Orb レジストリに Orb をパブリッシュしましょう。 セマンティック バージョンの Orb を自動的にパブリッシュする方法について、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
 
-## 関連項目
+## See also
 
 - CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)」を参照してください。
 - ワークフローやジョブで使用する Orb については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
