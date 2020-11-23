@@ -10,7 +10,7 @@ description: "Jira と CircleCI の接続"
 
 **メモ:** CircleCI Jira プラグインは Jira 管理者のみがインストールできます。
 
-# インストール手順
+# Installation steps
 
 1. Navigate to project settings and select `JIRA integration` ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_1.png)
 2. Atlassian Marketplace にアクセスし、[CircleCI Jira プラグイン](https://marketplace.atlassian.com/apps/1215946/circleci-for-jira?hosting=cloud&tab=overview)を入手します。 ![]({{ site.baseurl }}/assets/img/docs/jira_plugin_2.png)
@@ -19,7 +19,7 @@ description: "Jira と CircleCI の接続"
 
 * * *
 
-# Viewing Build and Deploy Statuses in Jira
+# Viewing build and deploy statuses in Jira
 
 With CircleCI orbs it is possible to display your build and deploy status in Jira Cloud. To do this, you will need to:
 
