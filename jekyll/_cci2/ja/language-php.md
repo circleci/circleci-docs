@@ -25,13 +25,13 @@ CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リ�
 
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、PHP プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
 
-## CircleCI のビルド済み Docker イメージ
+## Pre-built CircleCI Docker images
 
 CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 [Docker Hub](https://hub.docker.com/r/circleci/php/) から必要な PHP バージョンを選択できます。 デモ プロジェクトでは、公式 CircleCI イメージを使用しています。
 
 セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
 
-## PHP のデモ プロジェクトのビルド
+## Build the demo PHP project yourself
 
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
@@ -41,7 +41,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 
 * * *
 
-## 設定ファイルの例
+## Sample configuration
 
 以下に、デモ プロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
@@ -91,7 +91,7 @@ jobs: # a collection of steps
 ```
 {% endraw %}
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -175,7 +175,7 @@ jobs:
 
 完了です。 これで PHP アプリケーション用に CircleCI 2.0 をセットアップできました。CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}を参照してください。
 
-## 関連項目
+## See also
 {:.no_toc}
 
 - デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
