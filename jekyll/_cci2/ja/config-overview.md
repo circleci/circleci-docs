@@ -17,10 +17,10 @@ CircleCI の[設定ファイルの構文]({{ site.baseurl }}/2.0/configuration-r
 <iframe width="560" height="315" src="https://www.youtube.com/embed/PgIwBzXBn7M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 </div>
 
-## シークレット、プライベート キー、トークン、スクリプト
+## Secrets, private keys, tokens, and scripts
 
 プロジェクトのシークレットとプライベート キーを暗号化して格納するには、[環境変数]({{ site.baseurl }}/2.0/env-vars/)または[コンテキスト]({{ site.baseurl }}/2.0/contexts/)に関するドキュメントを参照してください。 スクリプトを保護し、適切に [API トークンを管理]({{ site.baseurl }}/2.0/managing-api-tokens/)できるよう構成するには、[シェル スクリプトの使用]({{ site.baseurl }}/2.0/using-shell-scripts/)に関するベスト プラクティスを参照してください。
 
-## 高度なテストの構成
+## Advanced test configuration
 
 CircleCI では、[テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)を利用して、効率性を最大限に高めることができます。 ブラウザーやデータベースを使用してテストすることも可能です。詳細については、「[ブラウザー テスト]({{ site.baseurl }}/2.0/browser-testing/)」および「[データベースの構成]({{ site.baseurl }}/2.0/databases/)」を参照してください。
