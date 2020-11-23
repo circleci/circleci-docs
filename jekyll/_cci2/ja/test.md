@@ -9,7 +9,7 @@ version:
 
 テストのセットアップ方法については、以下のビデオとドキュメントを参照してください。
 
-## ビルド、テスト、デプロイのビデオ チュートリアル
+## How to build, test, and deploy video tutorial
 
 以下のビデオで、Docker、iOS、および Android ビルドの詳細なチュートリアルをご覧いただけます。
 
@@ -17,7 +17,7 @@ version:
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Qp-BA9e0TnA" frameborder="0" allowfullscreen></iframe>
 </div>
 
-## テストの実行、分割、デバッグ
+## Running, splitting, and debugging tests
 
 | ドキュメント                                                      | 説明                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------- |
