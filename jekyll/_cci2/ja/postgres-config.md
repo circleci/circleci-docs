@@ -14,7 +14,7 @@ PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.
 * TOC
 {:toc}
 
-## structure.sql を使用した Rails アプリケーション用の CircleCI 構成例
+## Example CircleCI configuration for a rails app with structure.sql
 
 `structure.sql` ファイルを使用して構成した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、circleci/ruby:2.4.1-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
 
@@ -95,7 +95,7 @@ jobs:
 
 **メモ:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker Hub などのレジストリにプッシュしてください。
 
-### 環境のセットアップ例
+### Example environment setup
 {:.no_toc}
 
 CircleCI 2.0 では、複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベース構成は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
@@ -145,7 +145,7 @@ jobs:
 
 この例では、PostgreSQL 9.6 のデフォルトのユーザーとポートとして `$DATABASE_URL` が指定されています。バージョン 9.5 の場合、デフォルトのポートは 5432 ではなく 5433 になります。 他のポートを指定するには、`$DATABASE_URL` と `psql` の呼び出し箇所をすべて変更します。
 
-## Go アプリケーションと PostgreSQL の構成例
+## Example go app with postgresql
 
 以下の構成例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/2.0/language-go/)を参照してください。
 
@@ -235,7 +235,7 @@ jobs:
           path: /tmp/test-results
 ```
 
-## MYSQL プロジェクトの例
+## Example mysql project.
 
 以下の例では、PHP コンテナと共に、MYSQL をセカンダリ コンテナとしてセットアップしています。
 
@@ -310,6 +310,6 @@ VALUES (
 );
 ```
 
-## 関連項目
+## See also
 
 サービス イメージの使用とデータベースのテスト手順に関する概念的な情報については、「[データベースの構成]({{ site.baseurl }}/2.0/databases/)」を参照してください。
