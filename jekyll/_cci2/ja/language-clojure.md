@@ -28,7 +28,7 @@ version:
 
 他のテスト ツールを使用する場合は、別の `lein` タスクを実行するようにそのステップを調整するだけです。
 
-## 設定ファイルの例
+## Sample configuration
 
 {% raw %}
 
@@ -63,7 +63,7 @@ jobs: # basic units of work in a run
 
 {% endraw %}
 
-## コードの取得
+## Get the code
 
 上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
 
@@ -71,7 +71,7 @@ jobs: # basic units of work in a run
 
 これで `config.yml` を最初からビルドする準備ができました。
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 常にバージョンの指定から始めます。
 
@@ -148,12 +148,12 @@ version: 2
 
 完了です。 これで Clojure アプリケーション用に CircleCI をセットアップできました。
 
-## 関連項目
+## See also
 {:.no_toc}
 
 デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
 
-### 詳細な例
+### Detailed examples
 {:.no_toc}
 
 このガイドでは、Clojure Web アプリの最も単純な構成例を示しました。通常、実際のプロジェクトはこれよりも複雑です。このため、独自のプロジェクトを構成するときは、以下のサイトのさらに詳細な例が参考になります。
