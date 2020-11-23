@@ -16,7 +16,7 @@ CircleCI では、Docker イメージにインストール可能な任意のバ�
 - 目次
 {:toc}
 
-## クイック スタート: デモ用の Go リファレンス プロジェクト
+## Quickstart: Demo Go reference project
 
 CircleCI 2.0 でのビルド方法を示すために、Go リファレンス プロジェクトを提供しています。
 
@@ -25,7 +25,7 @@ CircleCI 2.0 でのビルド方法を示すために、Go リファレンス プ
 
 このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 この設定ファイルは、Go プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
 
-## 設定ファイルの例
+## Sample configuration
 
 {% raw %}
 
@@ -115,12 +115,12 @@ workflows:
 
 {% endraw %}
 
-### CircleCI のビルド済み Docker イメージ
+### Pre-built CircleCI Docker images
 {:.no_toc}
 
 CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/golang/>) から必要なバージョンを選択できます。 デモ プロジェクトでは、公式 CircleCI イメージを使用しています。
 
-### デモ プロジェクトのビルド
+### Build the demo project yourself
 {:.no_toc}
 
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用して <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Go デモ プロジェクト</a>をビルドする方法を示します。
@@ -133,7 +133,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 
 * * *
 
-## 設定ファイルの詳細
+## Config walkthrough
 
 このセクションでは、`.circleci/config.yml` 内のコマンドについて説明します。
 
@@ -280,7 +280,7 @@ Finally, we specify the workflow block. This is not mandatory (as we only have o
 
 完了です。 これで Go アプリケーション用に CircleCI 2.0 を構成できました。CircleCI でビルドを行うとどのように表示されるかについては、[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}を参照してください。
 
-## 関連項目
+## See also
 
 デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
 
