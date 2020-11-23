@@ -49,7 +49,7 @@ jobs:
 
 In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an offical [Docker image](https://hub.docker.com/_/docker/).
 
-### Docker イメージのベスト プラクティス
+### Docker image best practices
 {:.no_toc}
 
 * If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
@@ -62,7 +62,7 @@ In this example, all steps run in the container created by the first image liste
 
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-### Using Multiple Docker Images
+### Using multiple Docker images
 
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
@@ -87,21 +87,21 @@ jobs:
 
 Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
-#### Public Convenience Images on Docker Hub
+#### Public convenience images on Docker Hub
 {:.no_toc}
   * `name:tag` 
     * `circleci/node:7.10-jessie-browsers`
 * `name@digest` 
     * `redis@sha256:34057dd7e135ca41...`
 
-#### Public Images on Docker Hub
+#### Public images on Docker Hub
 {:.no_toc}
   * `name:tag` 
     * `alpine:3.4`
 * `name@digest` 
     * `redis@sha256:54057dd7e125ca41...`
 
-#### Public Docker Registries
+#### Public Docker registries
 {:.no_toc}
   * `image_full_url:tag` 
     * `gcr.io/google-containers/busybox:1.24`
@@ -133,7 +133,7 @@ jobs:
       - run: ./run.sh
 ```
 
-### Docker Benefits and Limitations
+### Docker benefits and limitations
 
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via \[Remote Docker\]\[building-docker-images\]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
 
@@ -170,7 +170,7 @@ There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` i
 
 For more information on `machine`, see the next section below.
 
-### Available Docker Resource Classes
+### Available Docker resource classes
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each job. In Docker, the following resources classes are available:
 
@@ -197,7 +197,7 @@ jobs:
     #  ...  other config
 ```
 
-## Machine の使用
+## Using machine
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
@@ -255,7 +255,7 @@ jobs:
       - run: xcodebuild -version
 ```
 
-## Windows Executor の使用
+## Using the Windows executor
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using:
 
@@ -335,6 +335,6 @@ jobs:
 
 Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See \[Running GPU Executors in Server\]\[server-gpu\].
 
-## See Also
+## See also
 
 [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)
