@@ -48,7 +48,7 @@ If you fork this project and want to push to DockerHub, this project assumes [a 
 
 See the config and modify as needed for your use case.
 
-## Config Walkthrough
+## Config walkthrough
 
 The first section of the file defines common items. The order in which things are defined in a CircleCI configuration doesn't matter - we have laid it out this way for readability.
 
@@ -245,7 +245,7 @@ jobs:
 - The final job builds a Docker image using Google's [`dart-runtime`](https://hub.docker.com/r/google/dart-runtime) as a base.
 - The commented section is code to build, tag, and push a Docker image according to environment variables defined in a [context](https://circleci.com/docs/2.0/contexts/). It's included as an example.
 
-## Full Sample Configuration
+## Full sample configuration
 
 Below is the entirety of the file. Additional resources and links to supporting documentation can be found below.
 
@@ -311,9 +311,9 @@ commands:
       - store_artifacts:
           path: circleci_dart_demo.exe
 
-######################
-# Workflow Definition
-######################
+###### ################
+# Workflow definition
+###### ################
 workflows:
   version: 2.1
   test-and-build:
@@ -428,7 +428,7 @@ jobs:
 
 {% endraw %}
 
-## Additional Resources
+## Additional resources
 
 - [Getting Started](https://circleci.com/docs/2.0/getting-started/#section=getting-started)
 - [Migrating to CircleCI](https://circleci.com/docs/2.0/migration-intro/#section=getting-started)
