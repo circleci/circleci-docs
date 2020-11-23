@@ -13,14 +13,14 @@ version:
 - TOC
 {:toc}
 
-## Quick Start
+## Quick start
 {:.no_toc}
 
 CircleCI orbs are open-source, shareable packages of parameterizable [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.
 
 Published orbs can be found on our [Orb Registry](https://circleci.com/developer/orbs), or you can [author your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
-## Benefits of Using Orbs
+## Benefits of using orbs
 
 Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application – defining a job with the required steps for testing the application – versus using the `test` job provided by the [`circleci/node`](https://circleci.com/developer/orbs/orb/circleci/node) orb. With orbs, it is possible to write a parameterized configuration once and utilize it across multiple similar projects.
 
@@ -77,7 +77,7 @@ workflows:
 ```
 {% endraw %}
 
-## The Orb Registry
+## The orb registry
 
 The [Orb Registry](https://circleci.com/developer/orbs) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
@@ -95,13 +95,13 @@ Each orb contains its own description and documentation listed in the orb regist
 
 If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
 
-## Identifying Orbs
+## Identifying orbs
 
 An orb is identified by its *slug* which contains the *namespace* and *orb name*. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
 
 Example orb slug: `<namespace>/<orb-name>@1.2.3`
 
-## Using Orbs
+## Using orbs
 
 Each orb within the registry provides a sample code snippet for importing that specific orb with its most recent version.
 
@@ -116,7 +116,7 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements. The Node example below shows how to use an orb command.
 
-### Node Example
+### Node example
 {:.no_toc}
 
 The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
@@ -140,7 +140,7 @@ jobs:
       - node/install-packages # Utilize commands in steps
 ```
 
-## See Also
+## See also
 {:.no_toc}
 
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
