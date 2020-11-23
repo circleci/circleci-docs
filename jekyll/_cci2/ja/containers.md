@@ -20,7 +20,7 @@ version:
 
 - **並列処理** - テストを複数のコンテナに分割することで、テスト全体のスピードを大幅に向上できます。 テストを並列で実行するには、[CircleCI の構成に関するドキュメント]({{ site.baseurl }}/2.0/configuration-reference/#parallelism)で説明されているように `.circleci/config.yml` ファイルを変更します。 設定ファイルを変更してテストの分割と並列処理を行い、ビルド時間を短縮する方法については、[テストの並列実行に関するドキュメント]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)をご覧ください。
 
-## はじめよう
+## Getting started
 
 Linux plans start with the ability to run one workflow, without concurrency, at no charge. 追加のコンテナが必要な場合は、有料の Linux プランを購入してください。 ユーザー登録時に無料プランと有料プランを選択できます。登録後、必要に応じて CircleCI アプリケーションの [Settings (設定)] ページでプランの変更が可能です。
 
