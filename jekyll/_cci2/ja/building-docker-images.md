@@ -109,7 +109,7 @@ jobs:
 3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-レイヤー-キャッシュ) (DLC) を有効化して、イメージのビルドを高速化します (**メモ:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 また、DLC は CircleCI Server で利用できます)。 (11 行目)
 4. プロジェクト環境変数を使用して、Docker Hub の認証情報を格納します。 (17 行目)
 
-## Docker のバージョン
+## Docker version
 
 To specify the Docker version, you can set it as a `version` attribute:
 
@@ -130,34 +130,34 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 **メモ:** `version` キーは、現在 CircleCI Server 環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
-## 環境の分離
+## Separation of environments
 
 ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#リモート-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
-### サービスへのアクセス
+### Accessing services
 {:.no_toc}
 
 リモート Docker でサービスを開始してプライマリ コンテナから直接 ping することや、リモート Docker 内のサービスに ping できるプライマリ コンテナを開始することは**できません**。 これを解決するには、リモート Docker から同じコンテナを通してサービスとやり取りする必要があります。
 
-    #...
+    # ...
           - run:
-              name: "サービスの開始および実行チェック"
+              name: "Start Service and Check That it’s Running"
               command: |
                 docker run -d --name my-app my-app
                 docker exec my-app curl --retry 10 --retry-connrefused http://localhost:8080
-    #...
+    # ...
     
 
 同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
 
-    #...
+    # ...
           - run: |
               docker run -d --name my-app my-app
               docker run --network container:my-app appropriate/curl --retry 10 --retry-connrefused http://localhost:8080
-    #...
+    # ...
     
 
-### フォルダーのマウント
+### Mounting folders
 {:.no_toc}
 
 ジョブ空間からリモート Docker 内のコンテナにボリュームをマウントすること (およびその逆) は**できません**。 `docker cp` コマンドを使用して、この 2 つの環境間でファイルを転送することは可能です。 たとえば以下のように、ソース コードから設定ファイルを使用してリモート Docker でコンテナを開始します。
@@ -239,7 +239,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 ```
 {% endraw %}
 
-### リモート Docker 環境へのアクセス
+### Accessing the remote docker environment
 
 リモート Docker 環境が起動されると、SSH エイリアスが作成され、リモート Docker 仮想マシンに対して SSH 接続できます。 SSH 接続は、ビルドをデバッグする場合や、Docker または VM ファイルシステムの構成を変更する場合に便利です。 リモート Docker 仮想マシンに SSH 接続するには、プロジェクトを構成するジョブ ステップ内で、または SSH 再実行中に、以下を実行します。
 
@@ -250,7 +250,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 この例は、ryansch のご協力によって作成されました。
 
-## 関連項目
+## See also
 
 [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
