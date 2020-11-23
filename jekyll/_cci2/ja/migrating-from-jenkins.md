@@ -11,7 +11,7 @@ Jenkins を長年使用されていた方向けに、CircleCI に移行するう
 * 目次
 {:toc}
 
-## クイックスタート
+## Quick start
 {:.no_toc}
 
 CircleCI は、Jenkins とは大きく異なる製品であり、CI および CD の管理方法についても多くの相違点が見られます。ただし、Jenkins のビルドの基本的な機能を CircleCI に移行するだけなら、それほど時間はかかりません。 すばやく移行に取り掛かれるよう、以下のいずれかをお試しください。
@@ -33,13 +33,13 @@ Some programs and utilities are [pre-installed on CircleCI Images]({{ site.baseu
 
 **手動構成:** Jenkins の Execute Shell 以外のプラグインまたはオプションを使用してビルド ステップを実行していた場合は、Jenkins からビルドを手動で移植する必要があります。 すべての CircleCI 構成キーの詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」を参照してください。
 
-## ジョブの構成
+## Job configuration
 
 通常、Jenkins のプロジェクトは Jenkins の Web UI で設定され、その設定は Jenkins サーバーのファイル システムに保存されています。 そのため、チームや組織内で構成情報を共有することは困難です。 GitHub または Bitbucket リポジトリをクローンしても、Jenkins に保存された情報はコピーできません。 また、Jenkins サーバーに設定を保存すると、すべての Jenkins サーバーを定期的にバックアップする必要が生じます。
 
 CircleCI のビルドに関する設定の大部分は、各プロジェクトのルートにある `.circleci/config.yml` という名前のファイルに保存されます。 CI の構成も他のソース コードと同様に扱われるため、バックアップや共有が簡単に行えます。 ソース コードに格納すべきではないシークレットなどのごく一部のプロジェクト設定は、暗号化された状態で CircleCI のアプリケーションに保存されます。
 
-### ビルド マシンへのアクセス
+### Access to build machines
 {:.no_toc}
 
 Jenkins サーバーの管理は、運用部門のメンバーやチームに委ねられているケースがほとんどです。 その担当者は、依存関係のインストールやトラブルシューティングなど、CI メンテナンスに関するさまざまなタスクに日々追われています。
@@ -61,7 +61,7 @@ Jenkins を使用しているなら、ほとんどの場合でプラグインも
 
 CircleCI にはすべてのコア CI 機能が組み込まれています。 GitHub や Bitbucket からのソースのチェック アウト、お気に入りのツールを使用したビルドやテストの実行、テスト出力の解析、アーティファクトの保存などの機能は、主要なタスクとして扱われ、プラグインを必要としません。 ビルドやデプロイにカスタム機能を追加するには、適切な場所でいくつかの bash スニペットを使用します。
 
-## 分散ビルド
+## Distributed builds
 
 Jenkins サーバーでも、ビルドを複数の「エージェント」マシンに分散させてジョブを実行することはできますが、事前に多くの作業を要します。 この点については [Jenkins の Wiki](https://wiki.jenkins.io/display/JA/Distributed+builds) に、Jenkins はクラスタリング ミドルウェアではないため、事前の準備は容易ではないと説明されています。
 
@@ -71,7 +71,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 
 ビルドシステム内のコンテナ化は複雑になる傾向があります。CI システムの実装を構成するコンテナ内で任意のビルド コマンドやテスト コマンドが実行され、それらのコマンド自体にコンテナの実行が含まれることもあるためです。 これらの点については、以下で詳しく説明します。 また、コンテナを実行するツールとしては Docker が絶大な人気を誇りますが、それ以外にもさまざまなツールが存在します。 ここでは、一般的な「コンテナ」と製品名である「Docker」という用語を使い分けながら説明していきます。
 
-### ビルド内のコンテナ
+### Containers in your builds
 {:.no_toc}
 
 
@@ -79,7 +79,7 @@ CircleCI は、デフォルトでビルドを大規模なビルド マシン フ
 
 CircleCI にはかねてから Docker がプリインストールされており、`config.yml` ファイルに Executor として `docker` を追加するだけで、ビルド内で Docker にアクセスできます。 詳細については、「[Executor タイプの選び方]({{ site.baseurl }}/2.0/executor-types/)」と「[Docker]({{ site.baseurl }}/2.0/build/#docker)」を参照してください。
 
-### コンテナ内のビルド
+### Your builds in containers
 {:.no_toc}
 
 
@@ -95,7 +95,7 @@ CircleCI では、すべての Linux および Android のビルドが専用コ�
 
 CircleCI では、プロジェクトの設定で並列に処理できる数を増やせるため、プロジェクトの各ビルドで一度に複数のコンテナを使用できます。 各コンテナにテストが均等に割り振られることで、通常よりも大幅に短い時間で全体のビルドが完了します。 単純なマルチスレッドの場合とは異なり、各テストはそれぞれ独自の環境に置かれ、他のテストから完全に分離されています。 CircleCI の並列処理の詳細については、「[テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/)」を参照してください。
 
-## Jenkinsfile Converter
+## Jenkinsfile converter
 
 CircleCI manages a Jenkinsfile Converter, a web tool that allows you to easily convert a Jenkinsfile to a CircleCI ```config.yml``` file, to help you get started with CircleCI quickly and easily. It can be accessed on [CircleCI's developer hub](https://circleci.com/developer/tools/jenkins-converter).
 
