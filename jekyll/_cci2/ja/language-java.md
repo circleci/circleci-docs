@@ -28,7 +28,7 @@ We are going to make a few assumptions here:
 - You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/). 
 - Your application can be distributed as an all-in-one uberjar.
 
-## Sample Configuration
+## Sample configuration
 
 {% raw %}
 ```yaml
@@ -109,7 +109,7 @@ workflows:
 ```
 {% endraw %}
 
-## Get the Code
+## Get the code
 
 The configuration above is from a demo Java app, which you can access at <https://github.com/CircleCI-Public/circleci-demo-java-spring>.
 
@@ -117,7 +117,7 @@ If you want to step through it yourself, you can fork the project on GitHub and 
 
 Now we are ready to build a `config.yml` from scratch.
 
-## Config Walkthrough
+## Config walkthrough
 
 We always start with the version.
 
@@ -280,7 +280,7 @@ workflows:
 
 Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 
-## See Also
+## See also
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
