@@ -21,7 +21,7 @@ This document describes best practices for using shell scripts in your [CircleCI
 
 Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
 
-## シェル スクリプトのベスト プラクティス
+## Shell script best practices
 
 ### ShellCheck の使用
 
@@ -126,7 +126,7 @@ set -o errexit
 set -o pipefail
 ```
 
-## 関連項目
+## See also
 {:.no_toc}
 
 For more detailed explanations and additional techniques, see [this blog post](https://www.davidpashley.com/articles/writing-robust-shell-scripts) on writing robust shell scripts.
