@@ -14,13 +14,13 @@ version:
 - 目次
 {:toc}
 
-## ビルドのスキップ
+## Skipping a build
 
 CircleCI のデフォルトでは、ユーザーが変更をバージョン管理システム (VCS) にプッシュするたびに、自動的にプロジェクトがビルドされます。 You can override this behavior by adding a `[ci skip]` or `[skip ci]` tag in the first line of the body of the commit or the commit's title. これにより、マークされたコミットだけでなく、そのプッシュに含まれる**他のすべてのコミット**もスキップされます。
 
 **Note:** This feature is not supported for fork PRs. Scheduled workflows will not be cancelled even if you push a commit with `[ci skip]` message. Changing the config file is the way to upgrade the current schedule.
 
-### コミットのタイトルの例
+### Example commit title
 {:.no_toc}
 
 ```bash
@@ -35,7 +35,7 @@ Date:   Wed Jan 23 16:48:25 2017 -0800
 
 このコミットはタイトルに `[ci skip]` が含まれているため、VCS にプッシュされても CircleCI でビルドされません。
 
-### コミットの説明の例
+### Example commit description
 {:.no_toc}
 
 ```bash
@@ -57,7 +57,7 @@ When pushed to a VCS, this commit will not be built on CircleCI because of the `
 
 **メモ:** 一度に複数のコミットをプッシュした場合、1 つの `[ci skip]` または `[skip ci]` で**すべてのコミット**のビルドがスキップされます。
 
-## 冗長ビルドの自動キャンセル
+## Auto cancelling a redundant build
 
 If you are frequently pushing changes to a branch, you increase the chances of queueing. This means you might have to wait for an older pipeline to finish building before the most recent version starts.
 
@@ -65,7 +65,7 @@ To save time, you can configure CircleCI to automatically cancel any queued or r
 
 **Note:** Your project's default branch (usually `master`) will never auto-cancel builds.
 
-### Steps to Enable Auto-Cancel for Pipelines Triggered by Pushes to GitHub or the API
+### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
 {:.no_toc}
 
 **Notes:** It is important to carefully consider the impact of enabling the auto-cancel feature, for example, if you have configured automated deployment jobs on non-default branches.
@@ -80,11 +80,11 @@ Projects for which auto-cancel is enabled in the Advanced Settings will have pip
 
 - スケジュールされたワークフローおよび再実行されたワークフローはキャンセルされません。
 
-## Auto Cancel for CircleCI Server installations
+## Auto cancel for CircleCI server installations
 
 CircleCI Server does not currently use the pipelines feature, and as a result the Auto Cancel Builds feature only works for builds triggered with the API or by pushes to GitHub for projects that **do not** use workflows.
 
-### Steps to Enable Auto-Cancel for CircleCI Server Installations
+### Steps to enable auto-cancel for CircleCI server installations
 {:.no_toc}
 
 1. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
