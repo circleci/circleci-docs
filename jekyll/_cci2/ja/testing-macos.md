@@ -136,7 +136,7 @@ com.apple.Terminal  kTCCServiceAccessibility         1
 
 This command generates two steps; one lists the contents of the user `TCC.db` and one lists the system `TCC.db`.
 
-### Listing Permission Types
+### Listing permission types
 
 To grant permissions, the correct type of key for the permission type needs to be passed. These are not clearly documented by Apple, but can be found by running the `list-permission-types` command, as this example shows:
 
@@ -165,7 +165,7 @@ kTCCServiceSpeechRecognition
 ...
 ```
 
-### Granting Default Permissions for macOS App Testing
+### Granting default permissions for macOS app testing
 
 For most developers, only a few standard permissions for Terminal and Xcode Helper are required to set up the environment for macOS app UI Testing. These can be set by calling the `add-uitest-permissions` command, such as in this example:
 
@@ -184,7 +184,7 @@ jobs:
         - mac-permissions/add-uitest-permissions
 ```
 
-### Granting New Permissions
+### Granting new permissions
 
 The orb can be used to add custom permissions with the `add-permission` command. The following example grants Screen Capture permissions to Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters:
 
