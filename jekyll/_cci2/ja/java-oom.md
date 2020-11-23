@@ -36,7 +36,7 @@ Recent versions of Java (JDK 8u191, and JDK 10 and up) include a flag `UseContai
 
 Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. To prevent the JVM from pre-allocating too much memory, declare memory limits [using Java environment variables](#using-java-environment-variables-to-set-memory-limits). To debug OOM errors, look for the [appropriate exit code](#debugging-java-oom-errors).
 
-## Java 環境変数を使用したメモリ制限の設定
+## Using Java environment variables to set memory limits
 
 You can set several Java environment variables to manage JVM memory usage. These variables have similar names and interact with each other in complicated ways.
 
@@ -92,7 +92,7 @@ See the Maven documentation for [memory settings](http://maven.apache.org/config
 
 This environment variable is exclusive to Apache Maven projects. Use it to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
-## Java OOM エラーのデバッグ
+## Debugging Java OOM errors
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
 code 137` in your error output.
@@ -103,6 +103,6 @@ Even if the JVM's maximum heap size is larger than the job's limit, the garbage 
 
 If you are still consistently hitting memory limits, consider [increasing your jobs's RAM allocation](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
-## 関連項目
+## See also
 
 [Java Language Guide]({{ site.baseurl }}/2.0/language-java/) [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)
