@@ -33,7 +33,7 @@ CircleCI は、XML ファイルからテスト メタデータを収集し、そ
 
 **If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
-## フォーマッタの有効化
+## Enabling formatters
 
 Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
@@ -51,7 +51,7 @@ Test metadata is not automatically collected in CircleCI 2.0 until you enable th
 
 **Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
 
-## カスタム テスト ステップでのメタデータの収集
+## Metadata collection in custom test steps
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
 
@@ -59,7 +59,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
         path: /tmp/test-results
     
 
-### カスタム テスト ランナーの例
+### Custom test runner examples
 {:.no_toc}
 
 This section provides the following test runner examples:
