@@ -21,7 +21,7 @@ version:
 
 このドキュメントは、[プロジェクトの AWS 権限](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws)に、S3 バケットの読み取りと書き込みが許可される有効な AWS キーが構成されていることを前提としています。 このドキュメントの例では、指定された S3 バケットにビルド パッケージがアップロードされます。
 
-## Scala サンプル プロジェクトのソース コード
+## Sample Scala project source code
 
 このサンプル アプリケーションのソース コードは、[samplescala の GitHub パブリック リポジトリ](https://github.com/ariv3ra/samplescala)にあります。
 
@@ -35,7 +35,7 @@ CircleCI 2.0 では、リポジトリの root に新しいディレクトリを�
 
 最初のコマンドは `.circleci` という名前のディレクトリを作成し、次のコマンドは `.circleci` ディレクトリの中に `config.yml` という名前の新しいファイルを作成します。 繰り返しますが、.circleci というディレクトリ名と config.yml というファイル名を**使用する必要があります**。 バージョン 2.0 の前提条件については、[こちらのドキュメント]({{ site.baseurl }}/2.0/migrating-from-1-2/)を参照してください。
 
-### Scala の config.yml ファイル
+### Scala config.yml file
 
 最初に、新しく作成した `config.yml` を任意のテキスト エディタで開き、以下の CircleCI 2.0 スキーマをファイルに貼り付けます。 以下に、2.0 構成の全文を示します。
 
@@ -86,7 +86,7 @@ jobs:
               aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 ```
 
-## スキーマの詳細説明
+## Schema walkthrough
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -216,7 +216,7 @@ steps:
 
 この deploy コマンドも複数行実行コマンドです。
 
-## 関連項目 
+## See also
 {:.no_toc}
 
 - 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
