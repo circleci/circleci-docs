@@ -22,11 +22,11 @@ version:
 
 このガイドに沿って、[リポジトリをフォーク](https://help.github.com/articles/fork-a-repo/)し、[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-python-django/blob/master/.circleci/config.yml)を記述してみることをお勧めします。
 
-## 設定ファイルの詳細
+## Configuration walkthrough
 
 すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
-### バージョンの指定
+### Specify a version
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -34,7 +34,7 @@ version:
 version: 2
 ```
 
-### ビルド ジョブの作成
+### Create a build job
 
 実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/2.0/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
 
@@ -47,7 +47,7 @@ jobs:
     working_directory: ~/circleci-demo-python-django
 ```
 
-### Executor タイプの選択
+### Choose an executor type
 
 ジョブの各ステップは [Executor]({{ site.baseurl }}/2.0/executor-types/) という仮想環境で実行されます。
 
@@ -67,7 +67,7 @@ jobs:
 
 **メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
 
-### 他サービスの追加と環境変数の設定
+### Add other services and set environment variables
 
 データベースなどのサービス用の追加コンテナを指定します。 [`environment`]({{ site.baseurl }}/2.0/env-vars/#コンテナでの環境変数の設定) キーを使用して、コンテナ内のすべてのコマンドで使用される環境変数を設定します。
 
@@ -93,7 +93,7 @@ jobs:
           POSTGRES_DB: circle_test
 ```
 
-### 依存関係のインストール
+### Install dependencies
 
 ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を作成します。
 
@@ -114,7 +114,7 @@ jobs:
             pipenv install
 ```
 
-### 依存関係のキャッシュ
+### Cache dependencies
 
 実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/2.0/caching/)を検討してください。
 
@@ -151,7 +151,7 @@ jobs:
 
 **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
-### テストの実行
+### Run tests
 
 `run` ステップを使用して、テスト スイートを実行します。
 
@@ -167,7 +167,7 @@ jobs:
           pipenv run python manage.py test
 ```
 
-### テスト結果のアップロードおよび保存
+### Upload and store test results
 
 [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) ステップを使用して、テスト結果を CircleCI にアップロードします。 この結果は、CircleCI アプリケーションの**テスト サマリー**セクションに表示されます。
 
@@ -187,11 +187,11 @@ jobs:
           destination: tr1
 ```
 
-### アプリケーションのデプロイ
+### Deploy application
 
 この Django アプリケーションはどこにもデプロイされません。 デプロイの例については、[Flask を使用したプロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)または[デプロイに関するドキュメント]({{ site.baseurl }}/2.0/deployment-integrations/)を参照してください。
 
-## 設定ファイルの全文
+## Full configuration file
 
 {% raw %}
 
@@ -245,6 +245,6 @@ jobs: # A basic unit of work in a run
 
 {% endraw %}
 
-## 関連項目
+## See also
 
 - 他の言語ガイドについては、「[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)」を参照してください。
