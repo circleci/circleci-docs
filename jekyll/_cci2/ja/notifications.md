@@ -46,7 +46,7 @@ workflows:
 
 続いて、各通知タイプ (チャット、メール、Web) の設定方法について説明していきます。
 
-## Set or Change Email Notifications
+## Set or change email notifications
 
 Use the [Notifications](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
 
@@ -56,7 +56,7 @@ Email notifications will look like the following:
 
 ![]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
-## Enable Web Notifications
+## Enable web notifications
 
 Perform the following steps to enable web notifications:
 
@@ -149,8 +149,8 @@ workflows:
       - build
 ```
 
-## Third Party Tools
+## Third party tools
 
-### Chroma Feedback
+### Chroma feedback
 
 [Chroma Feedback](https://github.com/redaxmedia/chroma-feedback) is a command line tool in Python to turn your RGB powered hardware into an build indicator. The idea of such extreme visibility is to encourage developers to instantly repair their builds.
