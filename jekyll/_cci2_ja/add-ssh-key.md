@@ -19,7 +19,9 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 ## 手順
 
-1. ターミナルから、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドを入力して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
+FIXME: BELOW TEXT NEEDS UPDATING WITH THE SAME CHANGES AS OTHER PLACES:
+
+1. ターミナルから、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを入力して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
 2. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
@@ -32,6 +34,8 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 6. **[Private Key (非公開鍵)]** フィールドに登録する SSH 鍵を貼り付けます。
 
 7. **[Add SSH Key (SSH 鍵を追加する)]** ボタンをクリックします。
+
+FIXME: BELOW TEXT NEEDS UPDATING WITH THE SAME CHANGES AS OTHER PLACES:
 
 **メモ:** CircleCI が SSH 鍵を復号化できるよう、鍵には常に空のパスフレーズを設定してください。 また、CircleCI は OpenSSH のデフォルトのファイル形式をサポートしていません。OpenSSH を使用して鍵を生成する場合は、`ssh-keygen -m pem` コマンドを使用します。
 
