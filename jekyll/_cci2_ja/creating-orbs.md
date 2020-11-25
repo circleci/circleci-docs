@@ -1,243 +1,132 @@
 ---
 layout: classic-docs
-title: "Orbのパブリッシュ"
-short-title: "Orbのパブリッシュ"
-description: "CircleCI Orbs のパブリッシュに関する入門ガイド"
+title: "Orb のパブリッシュ"
+short-title: "Orb のパブリッシュ"
+description: "Orb レジストリへの Orb のパブリッシュ"
 categories:
   - getting-started
 order: 1
+version:
+  - クラウド
 ---
 
-## Orb パブリッシュ プロセスの概要
+ここでは、Orb のパブリッシュ手順について説明します。
 
-Orb を使用する前に、Orb パブリッシュ プロセス全体について大まかに把握しておくと、理解が深まるでしょう。 下図は Orb パブリッシュ プロセスを図式化したものです。 ![Orb ワークフローのダイアグラム イメージ]({{ site.baseurl }}/assets/img/docs/orbs_outline_v3.png)
+* 目次
+{:toc}
 
-### ステップ 1 - CircleCI CLI を準備する
+## はじめに
 
-[`orbs-tool`](https://circleci.com/ja/docs/2.0/creating-orbs/#orb-toolspublish) Orb を使用して Orb パブリッシュの CI/CD を行うことはできますが、CircleCI CLI を使用した方がより直接的かつ反復的に Orb のビルド、パブリッシュ、およびテストを行うことができます。 以下の手順で、CircleCI CLI をインストールして構成できます。
+オーサリングした Orb は、[セマンティック バージョン]({{site.baseurl}}/ja/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/developer/ja/orbs)に公開できます。
 
-- [CircleCI CLI をインストールする](https://circleci.com/ja/docs/2.0/orb-author-cli/#cli-の初回インストールを行う)
-- [CLI を更新する](https://circleci.com/ja/docs/2.0/orb-author-cli/#cli-を更新する)
-- [CLI を構成する](https://circleci.com/ja/docs/2.0/orb-author-cli/#cli-を構成する)
+![Orb のパブリッシュ プロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
-### ステップ 2 - CLI が正しくインストールされていることを検証する
+## Orb 開発キット
 
-CircleCI CLI の構成を終えたら、Orb を扱う前に、CLI が正しくインストールされ、適切に更新および構成されていることを検証します。
+[手動]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)を使用して Orb をパブリッシュすると、次のセクションで説明する手順に従ってセマンティック リリースを簡単に行えます。 パブリッシュ プロセスの簡単な概要については、オーサリング プロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) ファイルを参照してください。
 
-### ステップ 3 - バージョン プロパティを Orbs 互換 2.1 に上げる
+### 新リリースの公開
 
-ビルド構成をバリデーションしたら、バージョン プロパティを 2.1 に上げて、Orbs の使用に対する互換性を持たせます。
+以下では、Orb の新しいセマンティック リリースを公開する方法について説明します。 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 このブランチは、リポジトリの非デフォルトのブランチに新機能やバグ修正、パッチなどを作成するためのものであり、名前に深い意味はありません。 コードの追加や更新を行いリリースを公開する準備が整ったら、以下の手順を行います。
 
-### ステップ 4 - インライン テンプレートを使用して新しい Orb を作成する
+1. **デフォルト ブランチに対して新しいプル リクエストを作成します。**   
+    新しいリリースは、デフォルト ブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/ja/2.0/orb-concepts/)、[テスト]({{site.baseurl}}/ja/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E7%B5%90%E5%90%88%E3%83%86%E3%82%B9%E3%83%88)と[単体テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E5%8D%98%E4%BD%93%E3%83%86%E3%82%B9%E3%83%88)が有効になっています。 Orb が正常に機能するかを確認するため、少なくとも結合テストは有効にしておくことを強くお勧めします。 Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
 
-インライン Orbs は既存の構成から参照できるため、最初はインライン Orbs から作成するのが一番簡単です。 Orb のオーサリングに必須ではないものの、[インライン Orbs](https://circleci.com/ja/docs/2.0/orb-author/#インライン-orbs-の作成) を使用することによってプロセスを簡素化できるため、すばやく簡単に Orb をオーサリングするには理想的なアプローチと言えます。
+2. **すべてのテストに合格したことを確認します。**   
+    テスト結果は、GitHub 上においてプル リクエスト内で直接確認できます。また、CircleCI.com ではパイプライン全体に対する詳細な結果を確認できます。 ![プル リクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
-### ステップ 5 - Orb を設計する
+3. **プル リクエストのタイトルに特別なセマンティック バージョン タグを付けます。**   
+    コミット メッセージに目的の[セマンティック バージョン]({{site.baseurl}}/ja/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0) リリースを指すタグを適切に設定すると、サンプルに含まれる CI 設定ファイルの [orb-tools orb](https://circleci.com/developer/ja/orbs) により、テストに合格した Orb がデフォルト ブランチに自動でパブリッシュされます。  
+    タグの書式は `[semver:<increment>]` です。ここで、`<increment>` は次のいずれかの値に置き換えます。
+    
+    | increment の値 | 説明                             |
+    | ------------ | ------------------------------ |
+    | major        | リリースのバージョン番号を 1.0.0 だけ増やして公開する |
+    | minor        | リリースのバージョン番号を x.1.0 だけ増やして公開する |
+    | patch        | リリースのバージョン番号を x.x.1 だけ増やして公開する |
+    | skip         | リリースを公開しない                     |
+    {: class="table table-striped"}
 
-インライン テンプレートを使用するか、インライン テンプレートとは別に Orb をオーサリングするかに応じて、いくつかの要素 (ジョブ、コマンド、Executor) を Orb に追加します。 これらの Orb 要素の詳細については、「[Orb のコンセプト](https://circleci.com/ja/docs/2.0/using-orbs/#section=configuration)」ドキュメントの「[コマンド](https://circleci.com/ja/docs/2.0/using-orbs/#コマンド)」、「[ジョブ](https://circleci.com/ja/docs/2.0/using-orbs/#ジョブ)」、「[Executors](https://circleci.com/ja/docs/2.0/using-orbs/#executors)」の各セクションを参照してください。
+    たとえば、`alpha` ブランチから Orb のメジャー バージョン リリースを初めて公開する場合は、プル リクエストのタイトルを `[semver:major] 初回 Orb リリース` のように設定します。 ![Orb の初回メジャー リリース - プル リクエスト]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
-### ステップ 6 - Orb をバリデーションする
+4. **"スカッシュ" マージを行います。**   
+    [スカッシュ](https://docs.github.com/ja/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) マージを行うと、デフォルト ブランチへのマージ時にブランチが 1 つのコミットにまとめられるだけでなく、プル リクエストのタイトルがコミット メッセージとして維持されます。 ![プル リクエストをスカッシュ マージして semver タイトルを保持する]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
-Orb のオーサリングが終了したら、CLI から `validate` コマンドを実行するだけです。 CircleCI は、`circleci/orb-tools` Orb など、Orb をバリデーションするためのさまざまなツールを提供しています。 `circleci/orb-tools` Orb の使用方法については、「[Orb のバリデーションとパブリッシュ](https://circleci.com/ja/docs/2.0/orb-author-validate-publish/)」を参照してください。
+5. **お疲れさまでした。**   
+    [CircleCI アプリケーション](https://app.circleci.com/)にアクセスすると、Orb のパブリッシュ パイプラインの進捗状況を確認できます。 このパイプラインが完了したら、[Orb レジストリ](https://circleci.com/developer/ja/orbs) に Orb が公開されます。
 
-### ステップ 7 - Orb をパブリッシュする
+### Orb のパブリッシュ プロセス
 
-Orb パブリッシュ プロセスの最終ステップは、`circleci/orb-tools` Orb の `orb-tools/publish` CLI コマンドを使用して Orb をパブリッシュすることです。 `dev` Orb バージョンを使用すると、1 つの Orb 名で複数のバージョンをパブリッシュできます (`dev` は可変)。 Orb をパブリッシュするには、その Orb が格納されている組織の管理者である必要があります。
+ここでは、Orb 開発キットについて掘り下げ、Orb のパブリッシュに関係するコンポーネントについて説明します。
 
-**メモ:** このコマンドの詳細については、このページの [orb-tools/publish](https://circleci.com/ja/docs/2.0/creating-orbs/#orb-toolspublish) セクションを参照してください。
+[circleci orb init]({{site.baseurl}}/ja/2.0/orb-author/#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB-1) コマンドは、Orb 開発パイプラインに最適な CircleCI 製設定ファイルなどを含む [Orb テンプレート リポジトリ](https://github.com/CircleCI-Public/Orb-Project-Template)を、Orb 用にクローンします。
 
-[Orbs]({{ site.baseurl }}/ja/2.0/orb-intro/) は、2.1 の [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのトップレベルにある `orbs` キーを通して構成内で利用できるようになります。
+この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
 
-## Orb のパブリッシュ プロセス
+Orb パイプラインには次の 2 つのワークフローがあります。
 
-Orb のオーサリングが終了したら、CircleCI Orb レジストリに Orb をパブリッシュします。 以下に、Orb パブリッシュ プロセスの手順を詳しく説明します。
+* [test-pack](#test-pack)
+* [integration-test_deploy](#integration-test_deploy)
 
-### Orb のパブリッシュ
+#### test-pack
 
-このセクションでは、ツールの使用方法と、独自の Orb をオーサリングして CircleCI Orb レジストリにパブリッシュするまでの流れを説明します。
+2 つのワークフローのうち、実行順が先であるのは [`test-pack`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L40) です。このワークフローは、**いずれかの**ブランチのリポジトリにコードがコミットされるたびに実行されます。
 
-Orb は、`config.yml` ファイルにインラインでオーサリングするか、別途オーサリングした後に、複数のプロジェクト間で再利用するために Orb レジストリにパブリッシュすることができます。 このタスクを完了するには、Orb がパブリッシュされる組織の管理者である必要があります。
+`test-pack` ワークフローでは、開発版の Orb のパブリッシュ前に行うすべてのテストを実行します。 結合テスト (次のワークフローで実施) は、開発版の Orb がパブリッシュされテストを実行可能になるまで実行できません。
 
-[警告] Orb は、常にグローバルに読み取り可能です。 パブリッシュされたすべての Orb (安定版および開発用) は、だれでも読み取って使用することができます。 これは組織のメンバーに限定されません。 通常 CircleCI は、シークレットやその他の機密の変数を構成に含めないように強く推奨しています。 代わりに、コンテキストまたはプロジェクト環境変数を使用し、Orb 内でそれらの環境変数の名前を参照してください。
+[orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) ジョブで開発版の Orb を作成するので、このジョブを実行するために、[制限付きコンテキスト]({{site.baseurl}}/ja/2.0/contexts/#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E5%88%B6%E9%99%90)で保護されているパーソナル アクセス トークンへのアクセス権が必要になります。 ここで制限付きコンテキストを使用する理由は、トークンを環境変数として保存することで、ジョブをトリガー可能なユーザーをこのコンテキストにアクセス可能な人だけに制限し、パブリッシュ ステージを "保護" するためです。
 
-## CLI を使用した Orb のパブリッシュ
+このワークフローの実行内容は以下のとおりです。
 
-`circleci` CLI には、Orb パブリッシュ パイプラインを管理するコマンドがいくつかあります。 CLI について学習するなら、CLI をインストールして `circleci help` を実行してみるのが一番の早道です。 詳細については、「[CircleCI ローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/#cli-の構成)」を参照してください。 以下に、Orb のパブリッシュに特に関連するコマンドをいくつか示します。
+* パーソナル アクセス トークンへの特別なアクセス権が不要なテストが実行されます。このステージは、オープン ソースのプル リクエストから実行可能です。
+* ワークフローが[保留](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54)状態になり、[手動での承認]({{site.baseurl}}/ja/2.0/workflows/#%E6%89%8B%E5%8B%95%E6%89%BF%E8%AA%8D%E5%BE%8C%E3%81%AB%E5%87%A6%E7%90%86%E3%82%92%E7%B6%9A%E8%A1%8C%E3%81%99%E3%82%8B%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC)を求められます。 ![開発版 Orb のパブリッシュを手動で承認する]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png) CircleCI アプリケーションにアラート プロンプトが表示され、ボタンをクリックするまでワークフローは保留状態になります。 
+* 手動承認によって認証が行われると、以降のジョブも自動的に認証され、制限付きコンテキストへのアクセス権が付与されます。 このようにすることで、オープンソースのプル リクエストによる Orb に対するビルドを可能にしながら、悪意のあるコードを防止しています。
+* ワークフローが承認されると、[orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) ジョブにより、開発版の Orb が次のように 2 回パブリッシュされます。
+    
+    | パブリッシュされる開発タグ                                          | 説明                                         |
+    | ------------------------------------------------------ | ------------------------------------------ |
+    | `<namespace>/<orb>@dev:<branch>`     | ブランチ名にリンクされる開発タグです。 設定ファイルのテストを行う場合に使用します。 |
+    | `<namespace>/<orb>@dev:${CIRCLE_SHA1:0:7}` | この SHA に固有の開発タグです。 次のワークフローで使用します。         |
+    {: class="table table-striped"}
 
-- `circleci namespace create <name> <vcs-type> <org-name> [flags]`
-- `circleci orb create <namespace>/<orb> [flags]`
-- `circleci orb validate <path> [flags]`
-- `circleci orb publish <path> <namespace>/<orb>@<version> [flags]`
-- `circleci orb publish increment <path> <namespace>/<orb> <segment> [flags]`
-- `circleci orb publish promote <namespace>/<orb>@<version> <segment> [flags]`
+テスト ジョブの詳細については、「[Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs)」を参照してください。
 
-CLI のすべてのヘルプ コマンドは、[CircleCI CLI ヘルプ](https://circleci-public.github.io/circleci-cli/circleci_orb.html)で参照できます。
+#### integration-test_deploy
 
-## CircleCI Orb の作成
+CircleCI 製の Orb 開発パイプラインで実行されるワークフローは、次の [`integration-test_deploy`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L78) で最後です。 このワークフローは、`test-pack` ワークフローの完了時に API から自動的にトリガーされます。 このワークフローには、`test-pack` ワークフローで独自に生成された[開発版]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3-%E9%96%8B%E7%99%BA%E7%89%88%E3%81%A8-%E5%AE%89%E5%AE%9A%E7%89%88)の Orb へのアクセス権が付与されています。
 
-このセクションでは、独自の Orb をパブリッシュする方法をよく理解できるように、Orb のパブリッシュ プロセスについて順を追って説明します。 それぞれの例を通してプロセスをステップバイステップで確認することで、CircleCI の要件だけでなくユーザー独自のニーズも満たす Orb を作成できるようになります。
+このパイプラインの第 2 ステージでは[結合テスト]({{site.baseurl}}/ja/2.0/testing-orbs/#%E7%B5%90%E5%90%88%E3%83%86%E3%82%B9%E3%83%88)を実行し、開発版に追加およびパブリッシュされた新しい Orb の動作を確認します。
 
-Orb のオーサリングとパブリッシュのプロセスをステップごとに説明していきます。
-
-### CircleCI の設定
-
-CircleCI アプリケーションの [Settings (設定)] ページで、パイプラインが有効になっている必要があります (デフォルトではすべての新しいプロジェクトに対して有効)。 また、組織オーナーが CircleCI アプリケーションの [Security (セキュリティ)] ページの [Settings (設定)] タブで、組織内での未承認 Orb の使用をオプトインしている必要があります。
-
-### 新しい CircleCI CLI の取得
-
-CircleCI プラットフォームでは、CircleCI CLI を使用して Orb を作成できます。 CLI を使用する場合は、既存の CircleCI CLI ツールとコマンドを使用できるため、Orb の作成プロセスが効率化されます。
-
-### 設定ファイルのパッケージ化
-
-CLI が提供する `pack` コマンドを使用して、複数のファイルから 1 つの `config.yml` ファイルを作成できます。 これは、大きな設定ファイルを分割している場合に特に利便性が高く、yaml 構成のカスタム編成を行うことができます。 `circleci config pack` は、ディレクトリ構造とファイル コンテンツに基づいて、ファイル システム ツリーを 1 つの yaml ファイルに変換します。 `pack` コマンドを使用するときのファイルの**名前**や**編成**に応じて、最終的にどのような `config.yml` が出力されるかが決まります。 以下のフォルダー構造を例に考えます。
-
-```sh
-$ tree
-.
-├── config.yml
-└── foo
-    ├── bar
-    │   └── @baz.yml
-    ├── foo.yml
-    └── subtree
-        └── types.yml
-
-3 directories, 4 files
-```
-
-Unix の `tree` コマンドは、フォルダー構造の出力にたいへん便利です。 上記のツリー構造の場合、`pack` コマンドは、フォルダー名とファイル名を **yaml のキー**にマップし、ファイル コンテンツをそれらのキーの**値**にマップします。 上記の例のフォルダーを `pack` してみましょう。
+結合テストが完了すると、デフォルト ブランチでのみデプロイ ジョブが実行されます。 [orb-tools/dev-promote-prod-from-commit-subject](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#commands-dev-promote-from-commit-subject) により、SHA 固有の開発版の Orb が取得され、セマンティック バージョン付きの公開バージョンにプロモートされます。
 
 {% raw %}
-```sh
-$ circleci config pack foo
-```
-
-```yaml
-version: 2.1
-bar:
-  baz: qux
-foo: bar
-subtree:
-  types:
-    ginkgo:
-      seasonality: deciduous
-    oak:
-      seasonality: deciduous
-    pine:
-      seasonality: evergreen
-```
+<br />      - orb-tools/dev-promote-prod-from-commit-subject:
+              orb-name: <namespace>/<orb-name>
+              context: <publishing-context>
+              add-pr-comment: false
+              fail-if-semver-not-indicated: true
+              publish-version-tag: false
+              requires:
+                - integration-test-1
+              filters:
+                branches:
+                  only: <your default branch>
 {% endraw %}
 
-#### その他の設定ファイル パッケージ化機能
-{:.no_toc}
+デフォルトでは、`fail-if-semver-not-indicated` パラメーターは true に設定されており、タイトルに適切な[セマンティック バージョン タグ](#%E6%96%B0%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%81%AE%E5%85%AC%E9%96%8B)が含まれないコミットのビルドはすべて失敗します。
 
-`@` で始まるファイルの内容は、その親フォルダーのレベルにマージされます。 この機能は、汎用的な `orb.yml` にメタデータを格納したいものの、`orb` のキー・値のペアにはマップしたくない場合に、トップレベルの Orb で使用すると便利です。
+追加機能として、GitHub にバージョン タグをパブリッシュし、コメントからプル リクエストに新しいバージョンを自動で反映することなども可能です。
 
-たとえば、以下のような場合
+##### GitHub へのバージョン タグのパブリッシュ
+
+パブリッシュした CircleCI Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でホストおよび公開されます。ただし、GitHub 上でリリースを追跡する必要がある場合は、CircleCI からバージョン タグを自動的にパブリッシュできます。
+
+CircleCI から GitHub にタグをプッシュするには、[書き込みアクセス権のあるデプロイ キー]({{site.baseurl}}/ja/2.0/add-ssh-key/)が必要です。 リンク先の記事を参照して、デプロイ キーを生成し追加してください。 追加が完了すると、そのキー用に生成された、`"SO:ME:FIN:G:ER:PR:IN:T"` のような "フィンガープリント" が表示されます。 この SSH フィンガープリントを、`orb-tools/dev-promote-prod-from-commit-subject` ジョブの `ssh-fingerprints` パラメーターに追加します。
 
 {% raw %}
-```sh
-$ cat foo/bar/@baz.yml
-{baz: qux}
-```
+<br />      - orb-tools/dev-promote-prod-from-commit-subject:
+              publish-version-tag: true
+              ssh-fingerprints: "SO:ME:FIN:G:ER:PR:IN:T"
 {% endraw %}
 
-次のようにマップされます。
-
-```yaml
-bar:
-  baz: qux
-```
-
-#### パッケージ化された Config.yml の例
-{:.no_toc}
-
-`circleci config pack` を Git コミット フックと共に使用して複数の yaml ソースから 1 つの `config.yml` を生成する方法については、[example_config_pack フォルダー](https://github.com/CircleCI-Public/config-preview-sdk/tree/v2.1/docs/example_config_pack)を参照してください。
-
-### 設定ファイルの処理
-
-`circleci config process` を実行すると設定ファイルがバリデーションされますが、同時に、展開されたソースが元の設定ファイルの内容と共に表示されます (Orb を使用している場合に便利)。
-
-`hello-build` Orb を使用する設定ファイルを例に考えます。
-
-{% raw %}
-```yaml
-version: 2.1
-orbs:
-    hello: circleci/hello-build@0.0.5
-workflows:
-    "Hello Workflow":
-        jobs:
-
-          - hello/hello-build
-```
-{% endraw %}
-
-`circleci config process .circleci/config.yml` を実行すると、以下のように出力されます (これは、展開されたソースとコメントアウトされた元の設定ファイルから成ります)。
-
-{% raw %}
-```sh
-# 'circleci/hello-build@0.0.5' に解決された Orb 'circleci/hello-build@0.0.5'
-version: 2.1
-jobs:
-  hello/hello-build:
-    docker:
-
-    - image: circleci/buildpack-deps:curl-browsers
-    steps:
-    - run:
-        command: echo "Hello ${CIRCLE_USERNAME}"
-    - run:
-        command: |-
-          echo "TRIGGERER: ${CIRCLE_USERNAME}"
-          echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
-          echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
-          echo "BRANCH: ${CIRCLE_BRANCH}"
-          echo "RUNNING JOB: ${CIRCLE_JOB}"
-          echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
-          echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
-        name: 一部の CircleCI ランタイム環境変数の表示
-    - run:
-        command: |-
-          echo "uname:" $(uname -a)
-          echo "arch: " $(arch)
-        name: システム情報の表示
-workflows:
-  Hello Workflow:
-    jobs:
-    - hello/hello-build
-  version: 2
-
- Original config.yml file:
- version: 2.1
-
- orbs:
-     hello: circleci/hello-build@0.0.5
-
- workflows:
-     \"Hello Workflow\":
-         jobs:
-
-           - hello/hello-build
-```
-{% endraw %}
-
-### ビルド設定ファイルのバリデーション
-
-CircleCI CLI ツールが正しくインストールされていることを確認するには、CLI ツールを使用して以下のコマンドを実行し、ビルド設定ファイルをバリデーションします。
-
-    $ circleci config validate
-
-
-以下のような応答が表示されます。
-
-    Config file at .circleci/config.yml is valid
-
-
-## 関連項目
-
-- [Orb の概要]({{site.baseurl}}/ja/2.0/orb-intro/): Orb の利用に関する概要
-- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/using-orbs/): Orbs の基本的な概念
-- [Orbs に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orbs-faq/): Orbs の使用に際して発生している既知の問題や不明点
-- [Orbs リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
-- [構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ
+利用可能なコマンド、ジョブ、パラメーターの一覧については、[Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) の[orb-tools orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) を参照してください。
