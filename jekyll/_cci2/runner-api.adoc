@@ -17,7 +17,7 @@ toc::[]
 
 == Authentication Methods
 
-The CircleCI runner `agent api` contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
+The CircleCI runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
 
 === Circle-Token (personal authentication)
 
@@ -58,15 +58,15 @@ This token is the same one used in the launch-agent setup.
 
 == Endpoints
 
-=== GET /api/v2/agent
+=== GET /api/v2/runner
 
-Lists the available agents based on the specified parameters. It is mandatory to use one parameter to filter results.
+Lists the available runnerss based on the specified parameters. It is mandatory to use one parameter to filter results.
 
 ==== Authentication Methods
 
 * Circle-Token (personal authentication)
 * Browser Session Authentication
-+ This allows the endpoint to be accessible on circleci.com/api/v2/agent for users that have already logged into circleci.com.
++ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
 * Launch Token
 
 ===== Request
@@ -84,24 +84,24 @@ Lists the available agents based on the specified parameters. It is mandatory to
 | string
 | query
 | false
-| filters the list of agents by specific resource class.
+| filters the list of runners by specific resource class.
 
 | namespace
 | string
 | query
 | false
-| filters the list of agents by namespace.
+| filters the list of runners by namespace.
 |===
 
 == Examples
 
 ```sh
-curl -X GET https://agent.circleci.com/api/v2/agent?resource-class=test-namespace/test-resource \
+curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
     -H 'Circle-Token: secret-token'
 ```
 
 ```sh
-curl -X GET https://agent.circleci.com/api/v2/agent?namespace=test-namespace \
+curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
 
@@ -132,47 +132,42 @@ curl -X GET https://agent.circleci.com/api/v2/agent?namespace=test-namespace \
 |items
 |[object]
 |true
-|array containing the agents
+|array containing the runners
 
 |resource_class
 |string
 |true
-|agent resource class
+|runner resource class
 
 |hostname
 |string
 |true
-|agent hostname
+|runner hostname
 
 |name
 |string
 |true
-|agent name
+|runner name
 
 |first_connected
 |string (date-time)
 |true
-|first time the agent was connected
+|first time the runner was connected
 
 |last_connected
 |string (date-time)
 |true
-|last time the agent was connected
+|last time the runner was connected
 
 |last_used
 |string (date-time)
 |true
-|last time the agent was used to run a job
-
-|ip
-|string
-|false
-|agent's IP
+|last time the runner was used to run a job
 
 |version
 |string
 |true
-|version of the build-agent running on agent
+|version of the launch-agent running
 |===
 
 == Example
@@ -187,7 +182,6 @@ curl -X GET https://agent.circleci.com/api/v2/agent?namespace=test-namespace \
             "first_connected": "2020-05-15T00:00:00Z",
             "last_connected": "2020-05-16T00:00:00Z",
             "last_used": "2020-05-17T00:00:00Z",
-            "ip": "1.1.1.1",
             "version": "5.4.3.2.1"
         }
     ]
