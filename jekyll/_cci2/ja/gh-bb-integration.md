@@ -202,11 +202,10 @@ A user key is a user-specific SSH key. Your VCS has the public key, and CircleCI
 
 In this example, the GitHub repository is `https://github.com/you/test-repo`, and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 
-1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). When prompted to enter a passphrase, do **not** enter one.
+1. Create an SSH key pair by following the [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/). When prompted to enter a passphrase, do **not** enter one:
+
+    ssh-keygen -t ed25519 -C "your_email@example.com"
     
-    **Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA
-PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen
--m PEM -t rsa -C "your_email@example.com"`
 
 2. Go to `https://github.com/you/test-repo/settings/keys`, and click "Add deploy key". Enter a title in the "Title" field, then copy and paste the public key you created in step 1. Check "Allow write access", then click "Add key".
 
@@ -231,19 +230,19 @@ When you push to your GitHub repository from a job, CircleCI will use the SSH ke
 
 Bitbucket does not currently provide CircleCI with an API to create user keys. However, it is still possible to create a user key by following this workaround:
 
-1. CircleCI アプリケーションで、プロジェクトの設定に移動します。
+1. In the CircleCI application, go to your project's settings.
 
-2. **[Checkout SSH Keys (SSH 鍵のチェックアウト)]** ページに移動します。
+2. Navigate to the **Checkout SSH Keys** page.
 
-3. **[Create `<username>` user key (`<ユーザー名>` のユーザー キーの作成)]** ボタンを右クリックし、**[Inspect (検査)]** オプションを選択して、ブラウザーの検査ツールを開きます。![]({{ site.baseurl }}/assets/img/docs/bb_user_key.png)
+3. Right-click the **Create `<username>` user key** button and select the **Inspect** option to open the browser inspector.![]({{ site.baseurl }}/assets/img/docs/bb_user_key.png)
 
-4. 開発者コンソールで、**[Network (ネットワーク)]** タブを選択します。![]({{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
+4. In the developer console, select the **Network** tab.![]({{ site.baseurl }}/assets/img/docs/bb_user_key2.png)
 
-5. 開発者コンソールで、ステータスが 201 の `checkout-key` をクリックし、`public_key` をクリップボードにコピーします。
+5. In the developer console, click the `checkout-key` with a 201 status and copy the `public_key` to your clipboard.
 
-6. Bitbucket の [SSH 鍵の設定方法](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html)の説明に従って、Bitbucket にキーを追加します。
+6. Add the key to Bitbucket by following Bitbucket's guide on [setting up SSH keys](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html).
 
-7. `.circleci/config.yml` で `add_ssh_keys` キーを使用して、以下のようにフィンガープリントを追加します。
+7. In your `.circleci/config.yml`, add the fingerprint using the `add_ssh_keys` key:
 
 ```yaml
 version: 2
