@@ -1680,19 +1680,27 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
-| Type                                                                                                | Arguments          | `true` if                              | Example                                              |
-| --------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------- | ---------------------------------------------------- |
-| YAML literal                                                                                        | None               | is truthy                              | `true`/`42`/`"a string"`                             |
-| YAML alias                                                                                          | None               | resolves to a truthy value             | *my-alias                                            |
-| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`              |
-| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>` |
-| and                                                                                                 | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`                         |
-| or                                                                                                  | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                         |
-| not                                                                                                 | 1 logic statement  | the argument is not truthy             | `not: true`                                          |
-| equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`    |
-{: class="table table-striped"}
+| Type                                                                                                | Arguments          | `true` if                              | Example                                                                          |
+| --------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------- | -------------------------------------------------------------------------------- |
+| YAML literal                                                                                        | None               | is truthy                              | `true`/`42`/`"a string"`                                                         |
+| YAML alias                                                                                          | None               | resolves to a truthy value             | *my-alias                                                                        |
+| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`                                          |
+| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                             |
+| and                                                                                                 | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`                                                     |
+| or                                                                                                  | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                                                     |
+| not                                                                                                 | 1 logic statement  | the argument is not truthy             | `not: true`                                                                      |
+| equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`{: class="table table-striped"} |
 
-Truthiness rules are as follows: `false`, `null`, `0`, the empty string, and `NaN` are falsy. Any other value is truthy.
+The following logic values are considered falsy:
+
+- false
+- null
+- 0
+- NaN
+- empty strings ("")
+- statements with no arguments
+
+All other values are truthy. Further, Please also note that using logic with an empty list will cause a validation error.
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
