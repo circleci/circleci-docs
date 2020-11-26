@@ -1682,7 +1682,8 @@ includes:
 | and                                                                                                 | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`                                         |
 | or                                                                                                  | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                                         |
 | not                                                                                                 | 1 logic statement  | the argument is not truthy             | `not: true`                                                          |
-| equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`{: class="table table-striped"} |
+| equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                |
+{: class="table table-striped"}
 
 The following logic values are considered falsy:
 
