@@ -71,4 +71,4 @@ If you would like programatic access to this data in order to better understand 
 
 ### Security and privacy
 
-Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/outer/legal/enterprise-license-agreement.pdf) for our complete security and privacy disclosures.
+Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/legal/enterprise-license-agreement/) for our complete security and privacy disclosures.

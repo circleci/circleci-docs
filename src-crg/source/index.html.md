@@ -202,7 +202,7 @@ The `environment` settings apply to all commands run in this executor, not just 
 You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images](https://circleci.com/docs/2.0/executor-types).
 
 
-Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It's recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
+Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It's recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls](https://circleci.com/docs/2.0/private-images/) for details.
 
 ```yaml
 version: 2.1

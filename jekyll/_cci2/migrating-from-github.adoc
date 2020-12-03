@@ -208,7 +208,7 @@ jobs:
 ----
 
 2+| Using shared tasks (Actions for Github, orbs for CircleCI). In CircleCI, you declare orbs at the top level +
-and then https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[refer to them by name in config], similar in concept to Python or JavaScript imports.
+and then https://circleci.com/docs/2.0/orb-intro/#using-orbs[refer to them by name in config], similar in concept to Python or JavaScript imports.
 
 a|
 [source, yaml]
