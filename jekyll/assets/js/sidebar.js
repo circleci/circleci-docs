@@ -30,6 +30,7 @@
 
       sidenavAutoExpand(sidebar);
       sidenavAutoExpand(mobileSidebar);
+      scrollToActiveSidebarItem();
 
       // for mobile sidebar, if sidebar is set, display proper item
       var mobileCurrentElement = mobileSidebar.querySelector('[data-id=' + localStorage.sidenavActive + ']');
@@ -67,6 +68,14 @@
         sidebar.style.height = null;
       }
     };
+
+    function scrollToActiveSidebarItem() {
+      var activeEl = $('nav.sidebar .active')[0];
+      var sidebarTop = $("nav.sidebar")[0].offsetTop;
+      var activeElTop = activeEl && activeEl.offsetTop;
+      var elementRelativeTop = activeElTop - sidebarTop;
+      $("nav.sidebar").scrollTop(elementRelativeTop);
+    }
 
     window.addEventListener('scroll', setSidebar);
     window.addEventListener('load', setSidebar);
