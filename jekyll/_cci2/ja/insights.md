@@ -177,8 +177,4 @@ HTTPS URL を返す 2 つの*ソース コレクター*を Sumo Logic で作成�
 
 ## See also
 
-Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
-
-### See also
-
-失敗が多いテストに対してインサイトを使用したい場合は、「[テスト メタデータの収集]({{ site.baseurl }}/j2.0/collect-test-data/)」を参照してください。
+Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs. Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
