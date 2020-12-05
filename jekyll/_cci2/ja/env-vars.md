@@ -152,24 +152,41 @@ In the example below, `$ORGNAME` and `$REPONAME` will not be interpolated.
 working_directory: /go/src/github.com/$ORGNAME/$REPONAME
 ```
 
-Using `version:2.1` config, you can reuse pieces of config across your `config.yml`. By using the `parameters` declaration, you can interpolate (or, "pass values") into reusable `commands` `jobs` and `executors`:
+Using `version: 2.1` config, you can reuse pieces of config across your `config.yml`. By using the `parameters` declaration, you can interpolate (or, "pass values") into reusable `commands` `jobs` and `executors`:
 
 ```yaml
 version: 2.1
 
 jobs:
-  parameters:
-    org_name:
-      type: string
-      default: my_org
-    repo_name:
-      type: string
-      default: my_repo
-  my_job:
+  build:
+    parameters:
+      org_name:
+        type: string
+        default: my_org
+      repo_name:
+        type: string
+        default: my_repo
     docker:
 
-      - circleci/node:12.15.0
-    working_directory: /go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>
+      - image: circleci/go:1.15.0
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - run: echo "project directory is go/src/github.com/<< parameters.org_name >>/<< parameters.repo_name >>"
+
+workflows:
+  my_workflow:
+    jobs:
+
+      - build:
+          org_name: my_organization
+          repo_name: project1
+
+      - build:
+          org_name: my_organization
+          repo_name: project2
+
 ```
 
 For more information, read the documentation on [using the parameters declaration]({{ site.baseurl }}/2.0/reusing-config/#using-the-parameters-declaration).
