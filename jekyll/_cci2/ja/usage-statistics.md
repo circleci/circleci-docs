@@ -73,4 +73,4 @@ Replicated の管理コンソールで [Settings (設定)] > [Usage Statistics (
 
 ### Security and privacy
 
-セキュリティとプライバシーに関する CircleCI の開示情報は、契約条件の別紙 C および CircleCI の[標準ライセンス契約](https://circleci.com/outer/legal/enterprise-license-agreement.pdf)にてご覧いただけます。
+Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/legal/enterprise-license-agreement/) for our complete security and privacy disclosures.
