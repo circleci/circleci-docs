@@ -187,8 +187,6 @@ This will link the orb with your Sumo Logic dashboard.
 Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
 
 ## See also
+
 Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
-
-### See also
-
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.

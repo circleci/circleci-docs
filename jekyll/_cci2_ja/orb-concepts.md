@@ -230,4 +230,4 @@ CircleCI は通常、グローバルに読み取り可能としてパブリッ�
 
 - [Orb の概要]({{site.baseurl}}/ja/2.0/orb-intro/): CircleCI Orbs についての基本情報
 - [Orbs リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): コマンド、ジョブ、Executor の説明など、Orb に関する詳細な参考情報
-- [Orbs に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orb-faq/): Orbs 使用に際してよく発生している問題についての情報
+- [Orbs に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orbs-faq/): Orbs 使用に際してよく発生している問題についての情報

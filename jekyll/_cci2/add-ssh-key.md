@@ -30,13 +30,10 @@ follow the steps below for the version of CircleCI you are using (Cloud/Server) 
 **Note:**
 Since CircleCI cannot decrypt SSH keys,
 every new key must have an empty passphrase.
-CircleCI also will not accept OpenSSH's default file format - use `ssh-keygen -m pem` if you are using OpenSSH to generate your key. 
-
-**Caution:** Recent updates in `ssh-keygen` don't generate the key in PEM format by default. If your private key does not start with `-----BEGIN RSA PRIVATE KEY-----`, enforce PEM format by generating the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`
 
 ### CircleCI Cloud
 
-1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
+1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
 
 2. In the CircleCI application,
 go to your project's settings
