@@ -82,9 +82,7 @@ $sidebar-spacing-base: 5px;
     }
     .subnav {
       overflow: hidden;
-      ul{
-        margin-bottom: 20px;
-      }
+      margin-bottom: 20px;
     }
 
     &.closed {
@@ -101,8 +99,12 @@ $sidebar-spacing-base: 5px;
     text-transform: uppercase;
     font-size: $font-size-micro;
     font-weight: $font-weight-bold;
-    margin: 0 0 10px 0;
+    margin: 12px 0;
     letter-spacing: .5px;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
   .subnav-item {
     font-weight: 400;

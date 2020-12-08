@@ -9,12 +9,21 @@
     var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
     var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
+    var urlParams = new URLSearchParams(window.location.search)
+    var currentSection = urlParams.get("section");
 
-    // get hash, if it exists
-    if (window.location.hash && window.location.hash.indexOf('section') > -1) {
-      var section = getUrlVars(window.location.hash);
-      localStorage.sidenavActive = section['section']
+    console.log("current Section is ", currentSection);
+    if (currentSection) {
+      localStorage.sidenavActive = currentSection;
     }
+    // set active drawer in local storage (if it exists as a query param)
+    // get section query param, if it exists
+    // if (window.location.hash && window.location.hash.indexOf('section') > -1) {
+    //   var section = getUrlVars(window.location.hash);
+    //   localStorage.sidenavActive = section['section']
+    // }
+    //
+    //
 
     // activate default section, if nothing else is selected
     localStorage.sidenavActive = localStorage.sidenavActive || defaultSectionName;

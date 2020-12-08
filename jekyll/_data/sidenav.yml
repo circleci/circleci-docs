@@ -42,10 +42,8 @@ en:
       children:
         - name: Configuration Introduction
           link: 2.0/config-intro/
-        - name: Config Reference Full
+        - name: Configuration Reference
           link: 2.0/configuration-reference/
-        - name: Config Reference 2.1 # TODO: < merge this into config ref 1.
-          link: reference-2-1/       # and then hide this from the sidebar
         - name: Reusing Configuration
           link: 2.0/reusing-config/
     - name: Orbs
@@ -74,7 +72,7 @@ en:
           link: 2.0/creating-orbs/
 
 - name: Executors and Images
-  icon: docs/welcome.svg
+  icon: icons/executors.svg
   children:
     - name: Overview
       children:
@@ -82,8 +80,6 @@ en:
           link: 2.0/executor-types/
     - name: Docker
       children:
-        - name: Overview
-          link: 2.0/executor-types/#using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Docker compose
@@ -102,7 +98,6 @@ en:
           link: 2.0/executor-types/#using-machine
         - name: Pre-installed software
           link: 2.0/docker-to-machine/#pre-installed-software
-          # TODO: check hotjar/sentiment about missing machine content
     - name: Mac
       children:
         - name: Overview
@@ -116,13 +111,13 @@ en:
         - name: Testing macOS applications
           link: 2.0/testing-macos/
         - name: Xcode Image Policy
-          link: 2.0/xcode-policy
+          link: 2.0/xcode-policy/
     - name: Windows
       children:
         - name: Overview
           children:
-            - name: Hello World on Windows
-              link: 2.0/hello-world-windows/
+        - name: Hello World on Windows
+          link: 2.0/hello-world-windows/
     - name: Runner
       link: 2.0/runner-overview/
       children:
@@ -134,70 +129,69 @@ en:
           link: 2.0/runner-api/
         - name: Runner FAQs
           link: 2.0/runner-faqs/
-            # TODO: check hotjar/sentiment about missing windows content
 
-- name: Features
-  icon: docs/welcome.svg
+- name: Pipelines
+  icon: icons/pipelines.svg
   children:
-    - name: Overview
+    - name: Features
       children:
-        - name: Concepts
-          link: 2.0/concepts
+        - name: Workflows
+          link: 2.0/workflows/
         - name: Environment variables
-          link: 2.0/env-vars
-        - name: workflows
-          link: 2.0/workflows
+          link: 2.0/env-vars/
         - name: Caching
-          link: 2.0/caching
+          link: 2.0/caching/
         - name: Artifacts
-          link: 2.0/concepts
+          link: 2.0/artifacts/
         - name: Insights
-          link: 2.0/insights
+          link: 2.0/insights/
         - name: Collecting test data
-          link: 2.0/collect-test-data
+          link: 2.0/collect-test-data/
         - name: Debugging with SSH
           link: 2.0/ssh-access-jobs/
         - name: Parallelism
           link: 2.0/parallelism-faster-jobs/
         - name: Contexts
-          link: 2.0/contexts
+          link: 2.0/contexts/
 
 - name: Examples and Guides
   icon: docs/welcome.svg
   children:
-    - name: Testing
-      children:
-        - name: Setting up Browser Testing
-          link: 2.0/browser-testing/
 
     - name: Languages and Databases
       children:
         - name: Node
-          link: 2.0/concepts
+          link: 2.0/language-javascript/
         - name: Android
-          link: 2.0/env-vars
+          link: 2.0/language-android/
         - name: Java
-          link: 2.0/workflows
+          link: 2.0/language-java/
         - name: Go
-          link: 2.0/caching
+          link: 2.0/language-go/
         - name: Python
-          link: 2.0/concepts
+          link: 2.0/language-python/
         - name: Ruby
-          link: 2.0/concepts
+          link: 2.0/language-ruby/
         - name: Configuring Databases
-          link: 2.0/databases
+          link: 2.0/databases/
+
+    - name: Testing
+      children:
+        - name: Browser Testing
+          link: 2.0/browser-testing/
+
     - name: Deployment
       children:
         - name: Overview
-          link: 2.0/deployment-integrations
+          link: 2.0/deployment-integrations/
         - name: Examples
           link: 2.0/deployment-examples/
         - name: Deploying iOS applications
           link: 2.0/deploying-ios/
         - name: Publishing Snap packages
-          link: 2.0/build-publish-snap-packages
+          link: 2.0/build-publish-snap-packages/
         - name: Upload to Artifactory
-          name: 2.0/packagecloud
+          link: 2.0/packagecloud/
         - name: Publishing to Packagecloud
 
 - name: Projects
@@ -224,12 +218,12 @@ en:
           link: 2.0/credits/
 
 - name: Optimizations
-  icon: docs/project.svg
+  icon: icons/optimizations.svg
   children:
     - name: Pipeline variables
-    - link: 2.0/pipeline-variables/
+      link: 2.0/pipeline-variables/
     - name: Using shell scripts
-    - link: 2.0/using-shell-scripts/
+      link: 2.0/using-shell-scripts/
     - name: Caching dependencies
       link: 2.0/caching/
     - name: Running tests in parallel
@@ -242,27 +236,24 @@ en:
 - name: Reference
   icon: docs/reference.svg
   children:
-    - children:
-        - name: Config Reference Full
-          link: 2.0/configuration-reference/
-        - name: Config Reference 2.1
-          link: reference-2-1/
-        - name: API v2 Reference
-          link: api/v2
-        - name: API v2 Introduction
-          link: 2.0/api-intro/
-        - name: API v2 Developer's Guide
-          link: 2.0/api-developers-guide
-        - name: API v1.1 Reference
-          link: api/v1
-        - name: Prebuilt Images
-          link: 2.0/circleci-images/
-        - name: Glossary
-          link: 2.0/glossary/
-        - name: Help and Support
-          link: 2.0/help-and-support/
-        - name: Archive of 1.0 Docs
-          link: 2.0/archive/
+    - name: Configuration Reference
+      link: 2.0/configuration-reference/
+    - name: API v2 Reference
+      link: api/v2
+    - name: API v2 Introduction
+      link: 2.0/api-intro/
+    - name: API v2 Developer's Guide
+      link: 2.0/api-developers-guide/
+    - name: API v1.1 Reference
+      link: api/v1
+    - name: Prebuilt Images
+      link: 2.0/circleci-images/
+    - name: Glossary
+      link: 2.0/glossary/
+    - name: Help and Support
+      link: 2.0/help-and-support/
+    - name: Archive of 1.0 Docs
+      link: 2.0/archive/
 
 - name: Server Administration
   icon: docs/admin.svg
