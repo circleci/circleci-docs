@@ -617,6 +617,23 @@ ja:
         - name: Xcodeイメージのリリース
           link: ja/2.0/xcode-policy/
 
+    - name: Runner
+      i18n_name: ランナー
+      link: ja/2.0/runner-overview/
+      children:
+        - name: Runner Overview
+          i18n_name: ランナーの概要
+          link: ja/2.0/runner-overview/
+        - name: Runner Installation
+          i18n_name: ランナーのインストール
+          link: ja/2.0/runner-installation/
+        - name: Runner API
+          i18n_name: ランナーAPI 
+          link: ja/2.0/runner-api/
+        - name: Runner FAQs
+          i18n_name: ランナーFAQ
+          link: ja/2.0/runner-faqs/
+
     - name: ADVANCED CONFIG
       i18n_name: 高度な設定
       link: ja/2.0/adv-config/
