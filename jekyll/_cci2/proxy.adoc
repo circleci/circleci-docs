@@ -71,7 +71,7 @@ EOF
 systemctl restart replicated\*
 ```
 
-NOTE: NOTE: If the proxy requires user authentication, you will need to be added user authentication information into <proxy-ip>.
+NOTE: NOTE: If the proxy requires user authentication, you will need to add user authentication information into <proxy-ip> like below:
 
 ```
 export HTTP_PROXY=http://<userid>:<password>@<proxy-ip>:<port>
