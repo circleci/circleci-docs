@@ -81,7 +81,7 @@ export HTTPS_PROXY=https://<userid>:<password>@<proxy-ip>:<port>
 NOTE: The above is not handled by by our enterprise-setup script and will need to be added to the user data for the Services Machine startup or done manually.
 
 // not quite clear what is meant by this note... what's user data in this context?
-// If the cusotmer automatically apply the above setting, they need to add them into ServiceBox's user data.
+// If the customer wants to apply the above setting automatically, they need to add them into ServiceBox's user data.
 //  User data is a script, and the metadata of the EC2 instances, which is executed at lunchtime of an EC2 instance.
 // https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html#user-data-shell-scripts
 // https://github.com/circleci/enterprise-setup/blob/master/templates/services_user_data.tpl
