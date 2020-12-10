@@ -22,7 +22,7 @@ To support the open source community, organizations on Github or Bitbucket will 
 If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
 **Note:**
-There is a concurrency limit of 4 containers. Additional containers will be queued.
+There is a concurrency limit of 4 containers for Docker and Linux machine executors whereas macOS executors are limited to 1 container. Additional containers will be queued.
 
 ## Security
 
