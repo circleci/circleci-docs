@@ -26,7 +26,7 @@ Orb 開発キットは、相互に連携する複数のツールをセットに�
 * [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)
 * [Orb Pack]({{site.baseurl}}/ja/2.0/orb-concepts/)
 * [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
-* [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
+* [Orb ツールの Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools)
 
 <script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
 

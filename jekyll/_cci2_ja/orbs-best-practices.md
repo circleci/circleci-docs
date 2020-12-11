@@ -161,7 +161,7 @@ description: >
   CircleCI 製コンビニエンス イメージを使用します。
 
   次のリストにあるすべてのタグを使用できます。
-  https://circleci.com/developer/images/image/cimg/node
+  https://circleci.com/developer/ja/images/image/cimg/node
 docker:
   - image: 'cimg/node:<<parameters.tag>>'
 parameters:
@@ -169,7 +169,7 @@ parameters:
     default: '13.11'
     description: >
       cimg/node イメージのバージョン タグを次から選択してください。
-      https://circleci.com/developer/images/image/cimg/node
+      https://circleci.com/developer/ja/images/image/cimg/node
     type: string
 ```
 
