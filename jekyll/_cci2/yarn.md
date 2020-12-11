@@ -30,6 +30,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 ## Caching
 
 Yarn packages can be cached to improve CI build times.
+
 An example for Yarn 2:
 
 {% raw %}
