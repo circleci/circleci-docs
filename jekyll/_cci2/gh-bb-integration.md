@@ -72,7 +72,7 @@ Integrated status also appears on the pull request screen, to show that all test
 
 ## Renaming orgs and repositories
 
-If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+If you find you need to rename an org or repo that you have previously hooked up to CircleCI, the best practice is to follow these steps:
 
 1. Rename org/repo in VCS.
 2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
@@ -80,6 +80,12 @@ If you find you need to rename an org or repo that you have previously hooked up
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
 **Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
+
+### Bitbucket personal orgs
+
+CircleCI expects that your personal/default org matches your VCS username. Bitbucket now supports renaming your personal workspace to differ from your username; however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, please ensure its name matches your username.
+
+As an alternative, after renaming your personal workspace, you can create a non-default workspace matching your username and transfer projects to it. This will allow you to keep your personal default workspace under a different name. Please follow the advice above concerning renames if you choose to do this.
 
 ## Enable your project to check out additional private repositories
 
