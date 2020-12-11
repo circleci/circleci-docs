@@ -112,7 +112,7 @@ AWS CLI のコマンドとオプションの一覧は、「[AWS CLI コマンド
 
 ### AWS Orb のサンプル
 
-CircleCI はパートナーと協力して、AWS アプリケーションを迅速にデプロイするための AWS Orb をいくつか開発しています。これらの Orb は [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)で確認できます。 以下に AWS S3、AWS ECR、AWS ECS の各 Orb の使用方法を説明します。
+CircleCI はパートナーと協力して、AWS アプリケーションを迅速にデプロイするための AWS Orb をいくつか開発しています。これらの Orb は [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で確認できます。 以下に AWS S3、AWS ECR、AWS ECS の各 Orb の使用方法を説明します。
 
 #### AWS S3 Orb
 
@@ -139,7 +139,7 @@ CircleCI はパートナーと協力して、AWS アプリケーションを迅�
               arguments: '--dryrun'
     
 
-AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb のページ](https://circleci.com/developer/orbs/orb/circleci/aws-s3)を参照してください。
+AWS S3 Orb の詳細については、[CircleCI AWS S3 Orb のページ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-s3)を参照してください。
 
 #### AWS ECR と AWS ECS の Orb のサンプル
 
@@ -213,9 +213,9 @@ workflows:
 
 AWS ECS、AWS ECR、AWS CodeDeploy Orb の詳細については、Orb レジストリの各ページを参照してください。
 
-- [AWS ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
-- [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
-- [AWS CodeDeploy](https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy)
+- [AWS ECR](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr)
+- [AWS ECS](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)
+- [AWS CodeDeploy](https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy)
 
 ## Azure
 
@@ -345,7 +345,7 @@ Cloud Foundry へのデプロイには Cloud Foundry CLI が必要です。 ア�
 
 ### Orb のデプロイ例
 
-CircleCI は、構成ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 [CircleCI Orb レジストリ](https://circleci.com/developer/orbs)には、Cloud Foundry で実行できるタスクのサンプルがいくつか含まれています。この中には、単一のジョブで Cloud Foundry アプリケーションをビルドしてデプロイする方法を示した以下のサンプルも含まれています。
+CircleCI は、構成ワークフローを簡略化するために Cloud Foundry Orb を開発しました。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)には、Cloud Foundry で実行できるタスクのサンプルがいくつか含まれています。この中には、単一のジョブで Cloud Foundry アプリケーションをビルドしてデプロイする方法を示した以下のサンプルも含まれています。
 
     version: 2.1
     
@@ -374,7 +374,7 @@ CircleCI は、構成ワークフローを簡略化するために Cloud Foundry
                     package: # アプリケーション パッケージへのパス
     
 
-構成ワークフローで使用できるさまざまな Cloud Foundry Orb のサンプルについては、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)の [Cloud Foundry Orb のページ](https://circleci.com/developer/orbs/orb/circleci/cloudfoundry)で詳細を確認できます。
+構成ワークフローで使用できるさまざまな Cloud Foundry Orb のサンプルについては、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の [Cloud Foundry Orb のページ](https://circleci.com/developer/ja/orbs/orb/circleci/cloudfoundry)で詳細を確認できます。
 
 ## Firebase
 
@@ -445,7 +445,7 @@ Firebase の構成ワークフローを簡略化するには、必要な構成�
               command: ./firebase-deploy/node_modules/.bin/firebase deploy --token=<< parameters.token >>
     
 
-Firebase Orb を使用してアプリケーションをデプロイする方法については、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)の [Firebase Orb のデプロイ](https://circleci.com/developer/orbs/orb/cloudliner/firebase-deploy)に関するページを参照してください。
+Firebase Orb を使用してアプリケーションをデプロイする方法については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の [Firebase Orb のデプロイ](https://circleci.com/developer/ja/orbs/orb/cloudliner/firebase-deploy)に関するページを参照してください。
 
 ## Google Cloud
 
@@ -497,7 +497,7 @@ Google Cloud Platform にデプロイする前に、Google Cloud SDK を承認�
 
 ### Google Cloud Orb のサンプル
 
-CircleCI Orb (ジョブ、コマンド、Executor を含む構成パッケージ) を使用して構成ワークフローを簡略化するには、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)で提供されている Google Cloud 向けの Orb のサンプルを参照してください。この中には、以下のサンプルも含まれています。
+CircleCI Orb (ジョブ、コマンド、Executor を含む構成パッケージ) を使用して構成ワークフローを簡略化するには、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)で提供されている Google Cloud 向けの Orb のサンプルを参照してください。この中には、以下のサンプルも含まれています。
 
           version: 2.1
           orbs:
@@ -513,7 +513,7 @@ CircleCI Orb (ジョブ、コマンド、Executor を含む構成パッケージ
                     google-compute-zone: myGoogleComputeZone
     
 
-この Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)の [CircleCI Google Cloud Orb](https://circleci.com/developer/orbs/orb/circleci/gcp-cli) に関するページを参照してください。
+この Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の [CircleCI Google Cloud Orb](https://circleci.com/developer/ja/orbs/orb/circleci/gcp-cli) に関するページを参照してください。
 
 ## Heroku
 
@@ -596,7 +596,7 @@ jobs:
           only-branch: master # only-branch を指定した場合、他のブランチでデプロイは行われません。
 ```
 
-これらの Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)の [CircleCI Heroku Orb のページ](https://circleci.com/developer/orbs/orb/circleci/heroku)を参照してください。
+これらの Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)の [CircleCI Heroku Orb のページ](https://circleci.com/developer/ja/orbs/orb/circleci/heroku)を参照してください。
 
 ## NPM
 

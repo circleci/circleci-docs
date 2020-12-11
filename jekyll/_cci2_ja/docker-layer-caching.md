@@ -29,7 +29,7 @@ Docker レイヤー キャッシュは、[`machine` Executor]({{ site.baseurl }}
 - 30 の並列処理で 1 つのジョブを実行する場合、ワークフローが 1 つであれば正常に動作しますが、複数のワークフローがあるとキャッシュ ミスが発生します。
 - 30 を超える `parallelism` で任意の数のジョブを実行する場合、ワークフローの数に関係なく、キャッシュ ミスが発生します。
 
-キャッシュ ミスの問題が発生している場合、または高並列処理を行う必要がある場合は、実験的な [docker-registry-image-cache Orb](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) をお試しください。
+キャッシュ ミスの問題が発生している場合、または高並列処理を行う必要がある場合は、実験的な [docker-registry-image-cache Orb](https://circleci.com/developer/ja/orbs/orb/cci-x/docker-registry-image-cache) をお試しください。
 
 **メモ:** DLC は、ビルド コンテナとして使用する Docker イメージには影響を**及ぼしません**。 そのため、ジョブの*実行*に使用するコンテナは、[`docker` Executor]({{ site.baseurl }}/ja/2.0/executor-types/#docker-の使用) を使用している場合、`image` キーで指定したものが [Jobs (ジョブ)] ページの Spin up Environment ステップに表示されます。
 

@@ -62,8 +62,8 @@ CircleCI アプリケーションで、以下の[プロジェクト環境変数]
 
 **メモ:** このセクションで説明するサンプル プロジェクトは、以下で提供されている CircleCI の AWS-ECR Orb と AWS-ECS Orb を使用します。
 
-- [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
-- [AWS-ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
+- [AWS-ECR](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr)
+- [AWS-ECS](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)
 
 ### Docker イメージをビルドして AWS ECR にプッシュする
 
@@ -88,7 +88,7 @@ workflows:
 
 ### 新しい Docker イメージを既存の AWS ECS サービスにデプロイする
 
-aws-ecs Orb の `deploy-service-update` ジョブは、現在のタスク定義に基づきつつ、タスク定義のコンテナ定義で指定された新しい Docker イメージを使用して新しいタスク定義を作成し、この新しいタスク定義を指定された ECS サービスにデプロイします。 CircleCI AWS-ECS Orb の詳細については、https://circleci.com/developer/orbs/orb/circleci/aws-ecs を参照してください。
+aws-ecs Orb の `deploy-service-update` ジョブは、現在のタスク定義に基づきつつ、タスク定義のコンテナ定義で指定された新しい Docker イメージを使用して新しいタスク定義を作成し、この新しいタスク定義を指定された ECS サービスにデプロイします。 CircleCI AWS-ECS Orb の詳細については、https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs を参照してください。
 
 **メモ:** `deploy-service-update` ジョブは、`requires` キーがあるため、`build_and_push_image` に依存します。
 
