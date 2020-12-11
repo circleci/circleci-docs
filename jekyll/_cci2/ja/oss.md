@@ -20,6 +20,8 @@ To support the open source community, organizations on Github or Bitbucket will 
 
 **Note:** If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
+**Note:** There is a concurrency limit of 4 containers for Docker and Machine executors whereas macOS executors are limited to 1 container. Additional containers will be queued.
+
 ## セキュリティ
 
 While open source can be a liberating practice, take care not to liberate sensitive information.
@@ -29,12 +31,12 @@ While open source can be a liberating practice, take care not to liberate sensit
 
 ## Features and settings for open source projects
 
-以下の機能と設定は、オープンソース プロジェクトにおいて特に便利です。
+The following features and settings are especially useful for open source projects.
 
 ### Private environment variables
 {:.no_toc}
 
-多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 Private environment variables allow you to safely store secrets, even if your project is public.
+Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
 
 For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
