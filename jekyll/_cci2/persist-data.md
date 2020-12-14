@@ -79,34 +79,70 @@ For more information on using artifacts to persist data once a job has
 completes, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/)
 guide.
 
-
 ## Managing network and storage use
 
-There are several common ways that your configuration can be optimized to ensure
-you are getting the most out of your storage and network usage. The following
-cases are examples of storage and network optimization opportunities:
+### Overview of storage and network transfer
 
-**Uploading the same artifact many times**
+All data persistence operations within a job will accrue network and storage usage, the relevant actions are:
 
-Ensure that you are making intentional use of the `store_artifacts` step. Also
-check that parallelized jobs aren't uploading artifacts unless necessary.
+* Uploading and downloading caches
+* Uploading and downloading workspaces
+* Uploading artifacts
+* Uploading test results
 
-**Caching unused or superfluous dependencies**
+Details about your storage and network transfer usage can now be viewed on your Plan Settings.
 
-Depending on what language and package management system you are using, you may
-be able to leverage tools that clear or "prune" unnecessary dependencies. For
-example, the `node-prune` [package](https://github.com/tj/node-prune) removes
-unnecessary files (markdown, typescript files, etc.) from `node_modules`.
+### How to manage your storage and network transfer use
 
-**Uploading large artifacts**
+There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage. 
 
-- Artifacts that are text can be compressed at very little cost. 
-- If you are uploading images/videos of UI tests, filter out and upload only
-  failing tests. Many organizations upload _all_ of the images from their UI
-  tests, many of which will go unused.
-- If your pipelines build a binary, uberjar, consider if these are necessary for
-  *every* commit? You may wish to only upload artifacts on failure / success, or
-  perhaps only on a single branch, using a [filter]({{site.baseurl}}/2.0//configuration-reference/#filters).
+Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
 
+### Opportunities to reduce artifact and cache/workspace traffic
 
+#### Check which artifacts are being uploaded
 
+Often we see that the store_artifacts step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
+
+If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the CIRCLE_NODE_INDEX environment variable in a run step to change the behaviour of scripts depending on the parallel task run.
+
+#### Caching unused or superfluous dependencies
+
+Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies. For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from node_modules.
+
+#### Optimizing cache usage
+
+If you notice your cache usage is high and would like to reduce it, try:
+
+* Ensuring that your cache “key”  is following best practices:
+
+```sh
+     - save_cache:
+         key: brew-{{ epoch }}
+         paths:
+           - /Users/distiller/Library/Caches/Homebrew
+           - /usr/local/Homebrew
+```
+
+Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build; causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache key like the following:
+
+```sh
+     - save_cache:
+         key: brew-{{ checksum “Brewfile” }}
+         paths:
+           - /Users/distiller/Library/Caches/Homebrew
+           - /usr/local/Homebrew
+```
+
+Which will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
+
+* Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely. 
+
+* Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well. 
+
+#### Uploading large artifacts
+
+* Artifacts that are text can be compressed at very little cost.
+* If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
+* If your pipelines build a binary, uberjar, consider if these are necessary for every commit? You may wish to only upload artifacts on failure / success, or perhaps only on a single branch, using a filter.
+* If you must upload a large artifact you can upload them to your own bucket at no cost.
