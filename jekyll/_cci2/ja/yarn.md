@@ -24,7 +24,9 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 ## キャッシュ
 
-Yarn パッケージをキャッシュして、CI ビルド時間を短縮できます。 以下に例を示します。
+Yarn packages can be cached to improve CI build times.
+
+An example for Yarn 2:
 
 {% raw %}
 ```yaml
@@ -46,6 +48,28 @@ Yarn パッケージをキャッシュして、CI ビルド時間を短縮でき
 ```
 {% endraw %}
 
+An example for Yarn 1.x:
+
+{% raw %}
+```yaml
+#...
+
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
+
 ## See also
 
-[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
