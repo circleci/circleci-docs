@@ -125,6 +125,7 @@ CircleCI supports multiple versions of Docker. The following are the available v
 - `19.03.12`
 - `19.03.8`
 - `18.09.3`
+- `17.09.0-ce` (default)
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
