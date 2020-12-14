@@ -75,7 +75,7 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
 
 ## Renaming orgs and repositories
 
-If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
+If you find you need to rename an org or repo that you have previously hooked up to CircleCI, the best practice is to follow these steps:
 
 1. Rename org/repo in VCS.
 2. Head to the CircleCI application, using the new org/repo name, for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
@@ -83,6 +83,12 @@ If you find you need to rename an org or repo that you have previously hooked up
 4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
 **Note**: If these steps are not followed, you might lose access to your org or repo settings, including **environment variables** and **contexts**.
+
+### Bitbucket personal orgs
+
+CircleCI expects that your personal/default org matches your VCS username. Bitbucket now supports renaming your personal workspace to differ from your username; however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, please ensure its name matches your username.
+
+As an alternative, after renaming your personal workspace, you can create a non-default workspace matching your username and transfer projects to it. This will allow you to keep your personal default workspace under a different name. Please follow the advice above concerning renames if you choose to do this.
 
 ## Enable your project to check out additional private repositories
 
@@ -254,7 +260,7 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-### これらのキーの使用方法
+### How are these keys used?
 
 When CircleCI builds your project, the private key is installed into the `.ssh` directory and SSH is subsequently configured to communicate with your version control provider. Therefore, the private key is used for:
 
@@ -265,7 +271,7 @@ When CircleCI builds your project, the private key is installed into the `.ssh` 
 
 For this reason, a deploy key isn't sufficiently powerful for projects with additional private dependencies.
 
-### これらのキーのセキュリティ
+### What about security?
 
 The private keys of the checkout keypairs CircleCI generates never leave the CircleCI systems (only the public key is transmitted to GitHub) and are safely encrypted in storage. However, since the keys are installed into your build containers, any code that you run in CircleCI can read them. Likewise, developers that can SSH in will have direct access to this key.
 
