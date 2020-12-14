@@ -1218,7 +1218,7 @@ Note the following distinctions between Artifacts, Workspaces, and Caches:
 | Type      | lifetime        | Use                      | Example |
 |-----------|-----------------|------------------------------------|---------
 | Artifacts | 1 Month         | Preserve long-term artifacts. |  Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.     |
-| Workspaces | Duration of workflow        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
+| Workspaces | Duration of workflow (up to 15 days)        | Attach the workspace in a downstream container with the `attach_workspace:` step. | The `attach_workspace` copies and re-creates the entire workspace content when it runs.    |
 | Caches    | 15 Days         | Store non-vital data that may help the job run faster, for example npm or Gem packages.          |  The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
