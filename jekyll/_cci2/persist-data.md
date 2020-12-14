@@ -84,7 +84,7 @@ Depending on what language and package management system you are using, you may 
 
 If you notice your cache usage is high and would like to reduce it, try:
 
-* Ensuring that your cache “key”  is following best practices:
+* Ensuring that your cache “key” is following best practices:
 
 ```sh
      - save_cache:
