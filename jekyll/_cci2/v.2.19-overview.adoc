@@ -42,6 +42,14 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
 
+## What's New in v2.19.10
+
+* Fixed a bug that caused 'git checkout' to fail in go-git.
+* Fixed a bug in the YAML parser in picard dispatcher to support `config-str` to have more than 50 YAML aliases.
+* Fixed a bug where s3 retention policy deleted test results from an older job.
+* Reduced the likelihood of 'out-of-sequence' commit statuses.
+* Vulnerability patches in boostrap, React, conductor, and jQuery.
+
 ## What's New in v2.19.09
 
 * Better handling of non-alphanumeric characters in authentication passwords for Docker executors. Fixed a bug that was preventing the use of `~` and `?` in the https://circleci.com/docs/2.0/private-images/#docker-executor[Docker ID password field under the `auth` key].
