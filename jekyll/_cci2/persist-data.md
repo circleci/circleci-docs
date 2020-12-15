@@ -61,7 +61,7 @@ All data persistence operations within a job will accrue network and storage usa
 * Uploading artifacts
 * Uploading test results
 
-Details about your storage and network transfer usage can now be viewed on your Plan Settings.
+Details about your storage and network transfer usage can be viewed on your Plan Settings.
 
 ### How to manage your storage and network transfer use
 
