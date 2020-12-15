@@ -9,7 +9,8 @@ version:
 
 This guide gives an overview of the various ways to persist data within and beyond your CircleCI builds. There are a number of ways to move data into, out of and between jobs, and persist data for future use. Using the right feature for the right task will help speed up your builds and improve repeatability and efficiency.
 
-* TOC {:toc}
+* TOC
+{:toc}
 
 ## Caching strategies
 
