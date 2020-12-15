@@ -48,7 +48,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 * Fixed a bug in the YAML parser in picard dispatcher to support `config-str` to have more than 50 YAML aliases.
 * Fixed a bug where s3 retention policy deleted test results from an older job.
 * Reduced the likelihood of 'out-of-sequence' commit statuses.
-* Vulnerability patches in boostrap, React, conductor, and jQuery.
+* General security updates.
 
 ## What's New in v2.19.09
 
