@@ -99,6 +99,7 @@ If you notice your cache usage is high and would like to reduce it, try:
 
 Notice in the above example that best practices are not being followed. `brew-{{ epoch }}` will change every build; causing an upload every time even if the value has not changed. This will eventually cost you money, and never save you any time. Instead pick a cache key like the following:
 
+{% raw %}
 ```sh
      - save_cache:
          key: brew-{{checksum “Brewfile”}}
@@ -106,6 +107,7 @@ Notice in the above example that best practices are not being followed. `brew-{{
            - /Users/distiller/Library/Caches/Homebrew
            - /usr/local/Homebrew
 ```
+{% endraw %}
 
 Which will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
 
