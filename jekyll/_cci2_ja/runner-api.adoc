@@ -1,0 +1,189 @@
+---
+version:
+- Cloud
+---
+= CircleCI ランナー API
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
+
+CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
+
+toc::[]
+
+== 認証方法
+
+CircleCI ランナー APIには、エンドポイントや用途によって異なる認証方法を利用しています。1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+
+=== Circle-Token (個人認証)
+
+この認証方法はパーソナル トークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| 名前
+| 説明
+
+| circle-token ヘッダー
+| ユーザー認証に使用される `circle-token` が含まれたヘッダー
+
+| ユーザー名による HTTP Basic 認証
+| トークンを使用して Basic 認証できます。ユーザー名には `circle-token` を設定し、パスワードは空白のまま残します。
+|===
+
+=== ブラウザー セッション認証
+
+リクエストのCookieに含まれるセッションを使用してそのまま認証することができます。この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
+
+=== ローンチ トークン
+
+このトークンは、launch-agent のセットアップに使用するものと同じです。
+
+==== サポートされている方法
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| 名前
+| 説明
+
+| HTTP Bearer 認証
+| Bearer スキームを使用してトークンを送信します。
+|===
+
+== エンドポイント
+
+=== GET /api/v2/runner
+
+指定したパラメーターに基づいた利用可能なランナーの一覧を取得できます。フィルター用パラメーターを 1つ以上使用することが必須です。
+
+==== 認証方法
+
+* Circle-Token (個人認証)
+* ブラウザー セッション認証
++ この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできます。
+* ローンチ トークン
+
+===== リクエスト
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| 名前
+| 型
+| 入力
+| 必須?
+| 説明
+
+| resource-class
+| string
+| クエリ
+| 省略可
+| 指定したリソース クラスでランナーの一覧を絞り込みます。
+
+| namespace
+| string
+| クエリ
+| 省略可
+| 指定したネームスペースでランナーの一覧を絞り込みます。
+|===
+
+== 例
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
+    -H 'Circle-Token: secret-token'
+```
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
+    -H 'Circle-Token: secret-token'
+```
+
+=== レスポンス
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| ステータス
+| 説明
+| 形式
+
+|200
+|ランナーの一覧
+|JSON
+|===
+
+=== レスポンススキーム
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| 名前
+| 型
+| 必須?
+| 説明
+
+|items
+|[object]
+|必須
+|ランナーの配列
+
+|resource_class
+|string
+|必須
+|ランナーのリソース クラス
+
+|hostname
+|string
+|必須
+|ランナーのホスト名
+
+|name
+|string
+|必須
+|ランナー名
+
+|first_connected
+|string (date-time)
+|必須
+|ランナーが最初に接続した日時
+
+|last_connected
+|string (date-time)
+|必須
+|ランナーが最後に接続した日時
+
+|last_used
+|string (date-time)
+|必須
+|ジョブの実行にランナーを最後に使用した日時
+
+|version
+|string
+|必須
+|ローンチ エージェントのバージョン
+|===
+
+== 例
+
+```sh
+{
+    "items": [
+        {
+            "resource_class": "test-namespace/test-resource",
+            "hostname": "bobby",
+            "name": "bobby-sue",
+            "first_connected": "2020-05-15T00:00:00Z",
+            "last_connected": "2020-05-16T00:00:00Z",
+            "last_used": "2020-05-17T00:00:00Z",
+            "version": "5.4.3.2.1"
+        }
+    ]
+}
+```
