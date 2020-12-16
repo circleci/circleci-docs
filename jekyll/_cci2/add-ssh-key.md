@@ -83,12 +83,11 @@ you are adding.
 
 ## Adding SSH Keys to a Job
 
-Even though all CircleCI jobs use `ssh-agent`
-to automatically sign all added SSH keys,
-you **must** use the `add_ssh_keys` key
-to actually add keys to a container.
+CircleCI jobs use `ssh-agent`
+to automatically sign all added SSH keys
+to a container.
 
-To add a set of SSH keys to a container,
+To explicitly add a set of SSH keys to a container,
 use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)
 within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/)
 in your configuration file.
