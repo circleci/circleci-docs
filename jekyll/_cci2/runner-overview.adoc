@@ -53,7 +53,7 @@ Currently, the runner officially supports the following platforms:
 * Arm64 + Ubuntu
 * Intel + macOS
 
-Additional platforms have been tested but are not yet officially supported by the runner. For more information on platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the <<runner-installation#,Runner Installation>> page.
+Additional platforms have been tested but are not yet officially supported by the runner. For more information on platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the <<runner-installation#,Runner Installation>> page. Given the active development of CircleCI Runner, please link:https://circleci.com/contact/[contact us] if you have questions around support for your use-case(s). We also invite you to contribute to our link:https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help prioritize development efforts from our team!
 
 The following features are not yet available, but may be in the future:
 
