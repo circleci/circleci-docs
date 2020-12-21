@@ -85,8 +85,6 @@ If you find you need to rename an org or repo that you have previously hooked up
 
 CircleCI expects that your personal/default org matches your VCS username. Bitbucket now supports renaming your personal workspace to differ from your username; however, this is not currently supported by CircleCI. If you are building projects in your personal workspace with CircleCI, please ensure its name matches your username.
 
-As an alternative, after renaming your personal workspace, you can create a non-default workspace matching your username and transfer projects to it. This will allow you to keep your personal default workspace under a different name. Please follow the advice above concerning renames if you choose to do this.
-
 ## Enable your project to check out additional private repositories
 
 If your testing process refers to multiple repositories, CircleCI will need a
