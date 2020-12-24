@@ -62,7 +62,7 @@ asciidoctor:
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
-    outfilesuffix: /index.html 
+    outfilesuffix: /index.html
     serverversion: 2.19.10
 
 collections:
