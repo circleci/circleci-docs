@@ -23,7 +23,7 @@ Code that builds on Linux or iOS will generally build on CircleCI 2.0. We’ve c
 - PHP (PHP 5 and later)
 - Python (Python 2 and later)
 - React Native
-- Ruby and Rails (Ruby 2 and later)
+- Ruby on Rails (Ruby 2 and later)
 - Scala and sbt
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
