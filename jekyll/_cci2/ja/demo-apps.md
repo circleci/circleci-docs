@@ -25,7 +25,7 @@ Linux または iOS でビルドされるコードは、通常 CircleCI 2.0 で�
 - PHP (PHP 5 以降)
 - Python (Python 2 以降)
 - React Native
-- Ruby on Rails (Ruby 2 以降)
+- Ruby on Rails (Ruby 2 and later)
 - Scala および sbt
 
 Build projects in C, C#, C++, Clojure, Elixir, Erlang, Go, Groovy, Haskell, Haxe, Java, JavaScript, Node.js, Perl, PHP, Python, Ruby, Rust, Scala and many more.
