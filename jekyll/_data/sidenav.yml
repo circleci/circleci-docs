@@ -153,6 +153,20 @@ en:
           link: 2.0/parallelism-faster-jobs/
         - name: Contexts
           link: 2.0/contexts/
+    - name: Optimizations
+      children:
+        - name: Pipeline variables
+          link: 2.0/pipeline-variables/
+        - name: Using shell scripts
+          link: 2.0/using-shell-scripts/
+        - name: Caching dependencies
+          link: 2.0/caching/
+        - name: Running tests in parallel
+          link: 2.0/parallelism-faster-jobs/
+        - name: Docker layer caching
+          link: 2.0/docker-layer-caching/
+        - name: Optimizations cookbook
+          link: 2.0/optimization-cookbook/
 
 - name: Examples and Guides
   icon: docs/welcome.svg
@@ -217,21 +231,6 @@ en:
         - name: Using Credits
           link: 2.0/credits/
 
-- name: Optimizations
-  icon: icons/optimizations.svg
-  children:
-    - name: Pipeline variables
-      link: 2.0/pipeline-variables/
-    - name: Using shell scripts
-      link: 2.0/using-shell-scripts/
-    - name: Caching dependencies
-      link: 2.0/caching/
-    - name: Running tests in parallel
-      link: 2.0/parallelism-faster-jobs/
-    - name: Docker layer caching
-      link: 2.0/docker-layer-caching/
-    - name: Optimizations cookbook
-      link: 2.0/optimization-cookbook/
 
 - name: Reference
   icon: docs/reference.svg
