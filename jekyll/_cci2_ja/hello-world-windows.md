@@ -153,7 +153,7 @@ orbs:
   win: circleci/windows@2.2.0
 ```
 
-次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) のみを使用します。
+次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) のみを使用します。
 
 ```yaml
 jobs:

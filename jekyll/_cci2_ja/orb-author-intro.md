@@ -15,7 +15,7 @@ version:
 
 ## クイックスタート
 
-Orb とは、[再利用可能な構成]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-%E3%81%AE%E6%A7%8B%E9%80%A0)をパッケージとしてまとめたものです。Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化することを検討してみてください。
+Orb とは、[再利用可能な構成]({{site.baseurl}}/ja/2.0/orb-concepts/#orb-%E3%81%AE%E6%A7%8B%E9%80%A0)をパッケージとしてまとめたものです。Orb は [Orb レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化することを検討してみてください。
 
 Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/ja/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な構成要素]({{site.baseurl}}/ja/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
@@ -27,7 +27,7 @@ Orb は、以下の 3 つの要素で構成されます。
 
 [インライン Orb]({{site.baseurl}}/ja/2.0/reusing-config/) を使って練習してみることができます。 インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストするのに適しています。
 
-Orb をオーサリングすると、自動的に、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/orbs/licensing)に関するページをご覧ください。
+Orb をオーサリングすると、自動的に、CircleCI [コード共有利用規約](https://circleci.com/legal/code-sharing-terms/)に同意したものと見なされます。 パブリッシュされたすべての Orb は、[MIT ライセンス契約](https://opensource.org/licenses/MIT)に基づき、Orb レジストリで公開されます。 詳細については、[Orb ライセンス](https://circleci.com/developer/ja/orbs/licensing)に関するページをご覧ください。
 {: class="alert alert-success"}
 
 ## はじめよう

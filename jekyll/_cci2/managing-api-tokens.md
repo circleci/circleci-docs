@@ -24,13 +24,12 @@ you can create within CircleCI.
   These tokens are used to interact with the CircleCI API
   and grant full read and write permissions.
   2. **Project**:
-  These tokens provide information about specific projects
-  and only grant read permissions.
-  Project tokens have three scope options: _Status_, _Build Artifacts_, and _All_.
+  These tokens allow you to read/write information for specific projects.
+  Project tokens have three scope options: _Status_, _Read Only_, and _Admin_.
       - _Status_ tokens grant read access to the project's build statuses.
       Useful for [embedding status badges]({{ site.baseurl }}/2.0/status-badges/).
-      - _Build Artifacts_ tokens grant read access to the project's build artifacts.
-      - _All_ tokens grant read access for the project's build statuses and build artifacts.
+      - _Read Only_ tokens grant read only access to the project's API.
+      - _Admin_ tokens grant read and write access for the project's API.
 
 **Note**:
 API tokens cannot be modifed
