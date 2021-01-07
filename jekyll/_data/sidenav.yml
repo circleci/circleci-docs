@@ -80,6 +80,9 @@ en:
           link: 2.0/executor-types/
     - name: Docker
       children:
+        - name: Overview
+          link: 2.0/executor-types/
+          hash: using-docker
         - name: CircleCI Images
           link: 2.0/circleci-images/
         - name: Docker compose
@@ -95,9 +98,11 @@ en:
     - name: Machine
       children:
         - name: Overview
-          link: 2.0/executor-types/#using-machine
+          link: 2.0/executor-types/
+          hash: using-machine
         - name: Pre-installed software
-          link: 2.0/docker-to-machine/#pre-installed-software
+          link: 2.0/docker-to-machine
+          hash: pre-installed-software
     - name: Mac
       children:
         - name: Overview
@@ -115,8 +120,6 @@ en:
     - name: Windows
       children:
         - name: Overview
-          children:
-        - name: Hello World on Windows
           link: 2.0/hello-world-windows/
     - name: Runner
       link: 2.0/runner-overview/
@@ -189,6 +192,16 @@ en:
       children:
         - name: Browser Testing
           link: 2.0/browser-testing/
+
+    - name: Cookbooks
+      children:
+        - name: Optimizations cookbook
+          link: 2.0/optimization-cookbook/
+        - name: Configuration cookbook
+          link: 2.0/configuration-cookbook/
+        - name: Deployment cookbook
+          link: 2.0/deployment-examples/
+
 
     - name: Deployment
       children:
