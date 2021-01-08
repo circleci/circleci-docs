@@ -19,9 +19,9 @@ CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコ
 
 このドキュメントは、iOS プロジェクトまたは Mac プロジェクトが CircleCI 2.0 上に正しく構築されていること、また Bundle と fastlane を使用しており、`Gemfile`、`Appfile` および `Fastfile` がリポジトリにチェックインされていることを前提としています。
 
-**Note:** Setting up code signing on CircleCI 2.0 using Fastlane Match requires **adding a User key** to your CircleCI project. コード署名のセットアップは、CircleCI 1.0 の場合とは大きく異なります。2.0 ではコード署名に CircleCI アプリケーションを使用する必要がなく、以下の構成手順を実施するだけでセットアップが完了します。この 2.0 ドキュメントはその点を踏まえて作成されています。
+**Note:** CircleCI only officially supports Fastlane Match for codesigning. Other methods may be used, but are not guaranteed to work and are unsupported.
 
-**メモ:**: fastlane match を使用せずに進める場合は、その方法を紹介している[こちらのブログ記事](https://medium.com/@m4rr/circleci-2-0-and-the-ios-code-signing-df434d0086e2)を参照してください。
+**Note:** Setting up code signing on CircleCI 2.0 using Fastlane Match requires **adding a User key** to your CircleCI project. Setting up code signing is quite different than it was in CircleCI 1.0. The 2.0 documentation has been updated to reflect that the CircleCI app is not used, only the config instructions below are used for code signing in 2.0.
 
 CircleCI 2.0 上で iOS プロジェクトまたは Mac プロジェクトをまだ構成していない場合、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios/)」で構成手順を確認できます。
 
