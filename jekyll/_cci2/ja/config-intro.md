@@ -32,9 +32,6 @@ CircleCI は *Configuration as Code* を貫いています。 そのため、ビ
 {% highlight yaml linenos %} version: 2.1 jobs: build: docker:
 
       - image: alpine:3.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: The First Step
@@ -69,9 +66,6 @@ CircleCI 設定ファイルの構文はとても明快です。 特につまづ�
 {% highlight yaml linenos %} version: 2.1 jobs: build: docker:
 
       - image: alpine:3.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -104,9 +98,6 @@ CircleCI 設定ファイルの構文はとても明快です。 特につまづ�
 {% highlight yaml linenos %} version: 2.1 jobs: build: # ビルド済みイメージ: https://circleci.com/ja/docs/2.0/circleci-images/ docker:
 
       - image: circleci/node:10-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -146,9 +137,6 @@ CircleCI 設定ファイルの構文はとても明快です。 特につまづ�
 {% highlight yaml linenos %} version: 2.1 jobs: Hello-World: docker:
 
       - image: alpine:3.7
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - run:
           name: Hello World
@@ -157,7 +145,7 @@ CircleCI 設定ファイルの構文はとても明快です。 特につまづ�
             echo 'This is the delivery pipeline'
     
 
-I-Have-Code: docker: - image: alpine:3.7 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD # context / project UI env-var reference steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:10-browsers auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD # context / project UI env-var reference steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD # context / project UI env-var reference steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
+I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:10-browsers steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
 
 workflows: version: 2 Example_Workflow: jobs:
 
