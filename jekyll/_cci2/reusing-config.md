@@ -121,8 +121,12 @@ commands:
         description: include all files
         type: boolean
         default: false
+      short:
+        description: Keep list of files short
+        type: boolean
+        default: true
     steps:
-      - run: ls <<# parameters.all >> -a <</ parameters.all >>
+      - run: ls <<# parameters.all >> -a <</ parameters.all >><<^ parameters.short >> -l <</ parameters.all >>
 ```
 
 Boolean parameter evaluation is based on the [values specified in YAML 1.1](http://yaml.org/type/bool.html):
