@@ -60,7 +60,7 @@ Email notifications will look like the following:
 
 Perform the following steps to enable web notifications:
 
-1. [CircleCI のユーザー設定](https://circleci.com/account/notifications){:rel="nofollow"}に移動します。 Enable the toggle for "Web Notifications" at the bottom of the document.
+1. Go to your [CircleCI user settings](https://app.circleci.com/settings/user/notifications){:rel="nofollow"}. Enable the toggle for "Web Notifications" at the bottom of the document.
 
 2. Your browser will ask you to confirm that you want to allow notifications. Click `Allow`. See the screenshot below for additional details:
 
