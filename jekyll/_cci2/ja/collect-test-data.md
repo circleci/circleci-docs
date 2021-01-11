@@ -25,7 +25,7 @@ CircleCI は、XML ファイルからテスト メタデータを収集し、そ
 
 ここで、`path` キーは、JUnit XML または Cucumber JSON テスト メタデータ ファイルのサブディレクトリが含まれる `working_directory` への絶対パスまたは相対パスです。 この `path` 値が非表示のフォルダーではないことを確認してください (たとえば `.my_hidden_directory` は無効な形式です)。
 
-**If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the details page of [Insights](https://circleci.com/build-insights){:rel="nofollow"} in the CircleCI application to identify flaky tests and isolate recurring issues.
+**If you are using CircleCI Server**, after configuring CircleCI to collect your test metadata, tests that fail most often appear in a list on the **Insights** page in the CircleCI application where you can identify flaky tests and isolate recurring issues.
 
 ![失敗したテストに関するインサイト]({{ site.baseurl }}/assets/img/docs/insights.png)
 
