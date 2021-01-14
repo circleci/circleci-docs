@@ -40,7 +40,7 @@ To access a specific project's insights, view a pipeline's workflow and click
 
 ### Workflow overview
 
-The Insights dashboard provides workflow details plotted over the last 90 days.
+The Insights dashboard provides workflow details plotted over time.
 **Please note that the data is not real time and there may be up to a 24 hour
  delay**. You may also filter by different workflows at the top of the page. The
  following data is charted under the workflow overview:
