@@ -187,8 +187,6 @@ en:
           link: 2.0/language-python/
         - name: Ruby
           link: 2.0/language-ruby/
-        - name: Configuring Databases
-          link: 2.0/databases/
 
     - name: Databases
       children:
