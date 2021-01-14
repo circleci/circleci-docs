@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Overview"
+title: "About CircleCI"
 short-title: "Overview"
 description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]

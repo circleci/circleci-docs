@@ -7,6 +7,8 @@ en:
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
+          link: 2.0/concepts/
+        - name: Your First Green Build
           link: 2.0/getting-started/
         - name: Hello World
           link: 2.0/hello-world/
@@ -34,42 +36,39 @@ en:
         - name: Jenkins Converter
           link: 2.0/jenkins-converter/
 
-- name: Configuration
-  icon: docs/config.svg
+- name: Pipelines
+  icon: icons/pipelines.svg
   children:
-    - name: Introduction
-      link: 2.0/config-intro/
+    - name: Features
       children:
-        - name: Configuration Introduction
-          link: 2.0/config-intro/
-        - name: Configuration Reference
-          link: 2.0/configuration-reference/
-        - name: Reusing Configuration
-          link: 2.0/reusing-config/
-    - name: Orbs
-      link: 2.0/orb-intro/
+        - name: Workflows
+          link: 2.0/workflows/
+        - name: Environment variables
+          link: 2.0/env-vars/
+        - name: Caching
+          link: 2.0/caching/
+        - name: Artifacts
+          link: 2.0/artifacts/
+        - name: Insights
+          link: 2.0/insights/
+        - name: Collecting test data
+          link: 2.0/collect-test-data/
+        - name: Debugging with SSH
+          link: 2.0/ssh-access-jobs/
+        - name: Parallelism
+          link: 2.0/parallelism-faster-jobs/
+        - name: Contexts
+          link: 2.0/contexts/
+    - name: Optimizations
       children:
-        - name: Orb Introduction
-          link: 2.0/orb-intro/
-        - name: Orbs Concepts
-          link: 2.0/orb-concepts/
-        - name: Orbs FAQ
-          link: 2.0/orbs-faq/
-    - name: Authoring Orbs
-      link: 2.0/orb-author-intro/
-      children:
-        - name: Intro to Authoring an Orb
-          link: 2.0/orb-author-intro/
-        - name: Author an Orb
-          link: 2.0/orb-author/
-        - name: Orb Author FAQ
-          link: 2.0/orb-author-faq/
-        - name: Orb Authoring Best Practices
-          link: 2.0/orbs-best-practices/
-        - name: Orb Testing Methodologies
-          link: 2.0/testing-orbs/
-        - name: Orb Publishing Process
-          link: 2.0/creating-orbs/
+        - name: Pipeline variables
+          link: 2.0/pipeline-variables/
+        - name: Using shell scripts
+          link: 2.0/using-shell-scripts/
+        - name: Docker layer caching
+          link: 2.0/docker-layer-caching/
+        - name: Optimizations cookbook
+          link: 2.0/optimization-cookbook/
 
 - name: Executors and Images
   icon: icons/executors.svg
@@ -133,45 +132,48 @@ en:
         - name: Runner FAQs
           link: 2.0/runner-faqs/
 
-- name: Pipelines
-  icon: icons/pipelines.svg
+- name: Configuration
+  icon: docs/config.svg
   children:
-    - name: Features
+    - name: Introduction
+      link: 2.0/config-intro/
       children:
-        - name: Workflows
-          link: 2.0/workflows/
-        - name: Environment variables
-          link: 2.0/env-vars/
-        - name: Caching
-          link: 2.0/caching/
-        - name: Artifacts
-          link: 2.0/artifacts/
-        - name: Insights
-          link: 2.0/insights/
-        - name: Collecting test data
-          link: 2.0/collect-test-data/
-        - name: Debugging with SSH
-          link: 2.0/ssh-access-jobs/
-        - name: Parallelism
-          link: 2.0/parallelism-faster-jobs/
-        - name: Contexts
-          link: 2.0/contexts/
-    - name: Optimizations
+        - name: Configuration Introduction
+          link: 2.0/config-intro/
+        - name: Configuration Reference
+          link: 2.0/configuration-reference/
+        - name: Reusing Configuration
+          link: 2.0/reusing-config/
+    - name: Orbs
+      link: 2.0/orb-intro/
       children:
-        - name: Pipeline variables
-          link: 2.0/pipeline-variables/
-        - name: Using shell scripts
-          link: 2.0/using-shell-scripts/
-        - name: Docker layer caching
-          link: 2.0/docker-layer-caching/
-        - name: Optimizations cookbook
-          link: 2.0/optimization-cookbook/
+        - name: Orb Introduction
+          link: 2.0/orb-intro/
+        - name: Orbs Concepts
+          link: 2.0/orb-concepts/
+        - name: Orbs FAQ
+          link: 2.0/orbs-faq/
+    - name: Authoring Orbs
+      link: 2.0/orb-author-intro/
+      children:
+        - name: Intro to Authoring an Orb
+          link: 2.0/orb-author-intro/
+        - name: Author an Orb
+          link: 2.0/orb-author/
+        - name: Orb Author FAQ
+          link: 2.0/orb-author-faq/
+        - name: Orb Authoring Best Practices
+          link: 2.0/orbs-best-practices/
+        - name: Orb Testing Methodologies
+          link: 2.0/testing-orbs/
+        - name: Orb Publishing Process
+          link: 2.0/creating-orbs/
 
 - name: Examples and Guides
   icon: docs/welcome.svg
   children:
 
-    - name: Languages and Databases
+    - name: Languages
       children:
         - name: Node
           link: 2.0/language-javascript/
@@ -188,6 +190,11 @@ en:
         - name: Configuring Databases
           link: 2.0/databases/
 
+    - name: Databases
+      children:
+        - name: Configuring Databases
+          link: 2.0/databases/
+
     - name: Testing
       children:
         - name: Browser Testing
@@ -195,20 +202,18 @@ en:
 
     - name: Cookbooks
       children:
-        - name: Optimizations cookbook
+        - name: Optimizations
           link: 2.0/optimization-cookbook/
-        - name: Configuration cookbook
+        - name: Configuration
           link: 2.0/configuration-cookbook/
-        - name: Deployment cookbook
+        - name: Deployment
           link: 2.0/deployment-examples/
 
 
     - name: Deployment
       children:
-        - name: Overview
+        - name: Configuring Deploys
           link: 2.0/deployment-integrations/
-        - name: Examples
-          link: 2.0/deployment-examples/
         - name: Deploying iOS applications
           link: 2.0/deploying-ios/
         - name: Publishing Snap packages
