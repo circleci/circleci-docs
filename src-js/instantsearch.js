@@ -1,17 +1,29 @@
 import * as get from 'lodash.get';
 
+const PAGE_LANG = get(window.circleJsConfig, 'page.lang', 'en');
+const PAGE_LANG_URL_PREFIX = ((lang) => {
+  if (lang === 'en') {
+    return ""
+  } else {
+    return `/${lang}`
+  }
+})(PAGE_LANG);
+
+const CIMG_BASE_URL = `${window.circleJsConfig.url.devhub}${PAGE_LANG_URL_PREFIX}/images/image`;
+
 const ALGOLIA_APP_ID     = window.circleJsConfig.algolia.appId;
 const ALGOLIA_API_KEY    = window.circleJsConfig.algolia.apiKey;
 const ALGOLIA_INDEX      = window.circleJsConfig.algolia.indexName;
 const ALGOLIA_ORBS_INDEX = window.circleJsConfig.algolia.indexNameOrbs;
+const ALGOLIA_CIMGS_INDEX= window.circleJsConfig.algolia.indexNameCimgs;
 const ALGOLIA_COLLECTION = ((lang) => {
-  // Page language is default language or missing, use default collection
-  if (typeof lang !== 'string' || lang === 'en') {
+  // Page language is default language, use default collection
+  if (lang === 'en') {
     return 'cci2';
   } else {
     return `cci2_${lang}`;
   }
-})(get(window.circleJsConfig, 'page.lang'));
+})(PAGE_LANG);
 
 // Instant search initialization
 export function init () {
@@ -129,6 +141,48 @@ export function init () {
         instantsearch.connectors.connectStats(function (renderOptions, isFirstrender) {
           const { nbHits } = renderOptions;
           document.querySelector('.hits-count-orbs').innerHTML = nbHits;
+        })()
+      ]),
+
+    // add Convenience Images search
+    instantsearch.widgets
+      .index({ indexName: ALGOLIA_CIMGS_INDEX })
+      .addWidgets([
+        instantsearch.widgets.configure({
+          filters: '' // turn off filter present on base search
+        }),
+        instantsearch.widgets.hits({
+          container: '#instant-hits-cimgs',
+          escapeHits: true,
+          templates: {
+            empty: 'No Convenience Images results',
+            item: (item) => {
+              const title   = get(item._highlightResult, ['name', 'value'], item.name);
+              const content = get(item._highlightResult, ['description', PAGE_LANG, 'value'], item.description.en);
+              const latestVersion = get(item, ['latestVersion']);
+              const extLinkIcon = `<i class="fa fa-external-link" aria-hidden="true"></i>`;
+              const titleTag = `<h4 class="result-title">${title} ${extLinkIcon}</h4>`;
+              const contentTag = content ? `<p class="result-content">${content}</p>` : '';
+              const contextTag = latestVersion ? `<p class="result-context"><strong>Latest version:</strong> ${latestVersion}</p>` : '';
+
+              return `
+                <a href="${CIMG_BASE_URL}/${item.name}">
+                  <div class="result-item-wrap">
+                    ${titleTag}
+                    ${contextTag}
+                    ${contentTag}
+                  </div>
+                </a>
+              `;
+            }
+          }
+        }),
+
+        // add custom hits stats
+        // https://www.algolia.com/doc/api-reference/widgets/stats/js/#connector
+        instantsearch.connectors.connectStats(function (renderOptions, isFirstrender) {
+          const { nbHits } = renderOptions;
+          document.querySelector('.hits-count-cimgs').innerHTML = nbHits;
         })()
       ])
   ]);
