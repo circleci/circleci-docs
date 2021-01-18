@@ -46,14 +46,16 @@
               {% endif %}
 
               <!-- If there are grandchildren, add subnav-items-->
-              {% if item.children %}
-                <li class="nav-item">
-                  <a class="{% if current_url == item.link %} active {% endif %}"
-                     href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
-                     data-proofer-ignore>
-                    {{ display_name }}
-                  </a>
-                </li>
+              {% if item.children  %}
+                {% if item.name %}
+                  <li class="nav-item">
+                    <a class="{% if current_url == item.link %} active {% endif %}"
+                      href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                      data-proofer-ignore>
+                      {{ display_name }}
+                    </a>
+                  </li>
+                {% endif %}
 
                 <ul>
                   {% for sub-item in item.children %}

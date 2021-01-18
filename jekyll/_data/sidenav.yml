@@ -1,6 +1,6 @@
 en:
 - name: Getting Started
-  icon: docs/start.svg
+  icon: icons/sidebar/getting_started.svg
   children:
     - name: Overview
       children:
@@ -37,7 +37,7 @@ en:
           link: 2.0/jenkins-converter/
 
 - name: Pipelines
-  icon: icons/pipelines.svg
+  icon: icons/sidebar/pipelines.svg
   children:
     - name: Features
       children:
@@ -71,7 +71,7 @@ en:
           link: 2.0/optimization-cookbook/
 
 - name: Executors and Images
-  icon: icons/executors.svg
+  icon: icons/sidebar/executors.svg
   children:
     - name: Overview
       children:
@@ -133,7 +133,7 @@ en:
           link: 2.0/runner-faqs/
 
 - name: Configuration
-  icon: docs/config.svg
+  icon: icons/sidebar/configure.svg
   children:
     - name: Introduction
       link: 2.0/config-intro/
@@ -170,7 +170,7 @@ en:
           link: 2.0/creating-orbs/
 
 - name: Examples and Guides
-  icon: docs/welcome.svg
+  icon: icons/sidebar/examples.svg
   children:
 
     - name: Languages
@@ -221,7 +221,7 @@ en:
         - name: Publishing to Packagecloud
 
 - name: Projects
-  icon: docs/project.svg
+  icon: icons/sidebar/projects.svg
   children:
     - name: settings
       link: 2.0/settings/
@@ -245,29 +245,32 @@ en:
 
 
 - name: Reference
-  icon: docs/reference.svg
+  icon: icons/sidebar/reference.svg
   children:
-    - name: Configuration Reference
-      link: 2.0/configuration-reference/
-    - name: API v2 Reference
-      link: api/v2
-    - name: API v2 Introduction
-      link: 2.0/api-intro/
-    - name: API v2 Developer's Guide
-      link: 2.0/api-developers-guide/
-    - name: API v1.1 Reference
-      link: api/v1
-    - name: Prebuilt Images
-      link: 2.0/circleci-images/
-    - name: Glossary
-      link: 2.0/glossary/
-    - name: Help and Support
-      link: 2.0/help-and-support/
-    - name: Archive of 1.0 Docs
-      link: 2.0/archive/
+    - children:
+      - name: Configuration Reference
+        link: 2.0/configuration-reference/
+      - name: API v2 Reference
+        link: api/v2
+      - name: API v2 Introduction
+        link: 2.0/api-intro/
+      - name: API v2 Developer's Guide
+        link: 2.0/api-developers-guide/
+      - name: API v1.1 Reference
+        link: api/v1
+      - name: Prebuilt Images
+        link: 2.0/circleci-images/
+      - name: Glossary
+        link: 2.0/glossary/
+      - name: Help and Support
+        link: 2.0/help-and-support/
+      - name: Archive of 1.0 Docs
+        link: 2.0/archive/
+
+
 
 - name: Server Administration
-  icon: docs/admin.svg
+  icon: icons/sidebar/admin.svg
   children:
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
