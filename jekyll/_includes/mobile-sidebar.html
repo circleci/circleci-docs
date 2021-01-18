@@ -43,7 +43,7 @@
               {% endif %}
 
               {% if main-item.link %}
-                <a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name}}</a>
+                <a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}?section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name}}</a>
               {% else %}
                 <span class="nav-span">{{ display_name}}</span>
               {% endif %}
@@ -62,7 +62,12 @@
                   {% else %}
                     {% assign display_name = item.name %}
                   {% endif %}
-                <li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name }}</a></li>
+              <li class="nav-item">
+                <a class="{% if page.url == item.link %} active {% endif %}"
+                   href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                   data-proofer-ignore>{{ display_name }}
+                </a>
+              </li>
                 {% endif %}
 
                 {% if item.children %}
@@ -73,7 +78,10 @@
                       {% else %}
                         {% assign display_name = sub-item.name %}
                       {% endif %}
-                      <li class="subnav-item"><a class="{% if page.url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name }}</a></li>
+                    <li class="subnav-item">
+                      <a class="{% if page.url == sub-item.link %} active {% endif %}"
+                         href="{{ site.baseurl }}/{{ sub-item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                         data-proofer-ignore>{{ display_name }}</a></li>
                     {% endfor %}
                   </ul>
                 {% endif %}
