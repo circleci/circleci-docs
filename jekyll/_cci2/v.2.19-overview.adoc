@@ -44,7 +44,7 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 ## What's New in v2.19.11
 
-* Fixed a bug that didn't allow more than 50 aliases in a configuration
+* Fixed a bug that didn't allow more than 50 aliases in a configuration.
 
 ## What's New in v2.19.10
 
