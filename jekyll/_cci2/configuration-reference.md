@@ -882,7 +882,7 @@ path | N | String | Checkout directory. Will be interpreted relative to the [`wo
 {: class="table table-striped"}
 
 If `path` already exists and is:
- * a git repo - step will not clone whole repo, instead will pull origin
+ * a git repo - step will not clone whole repo, instead will fetch origin
  * NOT a git repo - step will fail.
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
