@@ -1,5 +1,5 @@
 /**
- * JS related to our language switcher in the footer
+ * JS related to our language switcher in the footer and sidebar
  */
 
 // helpers -------------------
@@ -21,9 +21,28 @@ var els = {
   footerLangOptions: getElById("footerLangOptions")
 };
 
+/**
+ * When we change languages, break down the url and reconstruct it with the new
+ * languages code as part of the path.
+ * if we are on a localized url: remove langCode -> go to english version.
+ * otherwise, inject new langCode into url -> and visit it.
+ *
+ * */
 function reloadWithNewLocale(langCode) {
-  window.location.href = "https://circleci.com/" + languages[langCode].url
+  var currentPathName = window.location.pathname;
+  var urlWithLang     = languages[window.currentLang].url;
+  var currentPage     = currentPathName.split(urlWithLang)[1];
+  var outgoingURL     = "https://circleci.com"
+
+
+  if (window.currentLang !== "en") {
+    outgoingURL += "/docs/2.0/" + currentPage;
+  } else {
+    outgoingURL += "/docs/" + langCode + "/2.0/" + currentPage;
+  }
+  window.location.href = outgoingURL
 }
+
 
 // Sets the sidebar language picker to the currently selected language
 function handleSetLanguageOnLoad() {
