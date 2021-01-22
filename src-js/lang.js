@@ -22,27 +22,19 @@ var els = {
 };
 
 /**
- * When we change languages, break down the url and reconstruct it with the new
- * languages code as part of the path.
- * if we are on a localized url: remove langCode -> go to english version.
- * otherwise, inject new langCode into url -> and visit it.
+ *
+ * When a new languages is chosen in the sidebar, reload the document in the new
+ * languages. Unfortunately, this is quite tied to our url structure (and the use of 2.0).
  *
  * */
 function reloadWithNewLocale(langCode) {
-  var currentPathName = window.location.pathname;
-  var urlWithLang     = languages[window.currentLang].url;
-  var currentPage     = currentPathName.split(urlWithLang)[1];
-  var outgoingURL     = "https://circleci.com"
-
-
+  var outgoingURL = ""
+  var path = window.location.pathname
   if (window.currentLang !== "en") {
-    // temp replace docs with branch deploy name.
-    outgoingURL += "/ts-lang-picker-preview/2.0/" + currentPage;
+    outgoingURL = path.replace(/\/[a-z]{2}\/2.0/, "/2.0")
   } else {
-    outgoingURL += "/ts-lang-picker-preview/" + langCode + "/2.0/" + currentPage;
+    outgoingURL = path.replace("2.0", langCode + "/2.0")
   }
-
-  alert("outgoing URL is: " + outgoingURL)
   window.location.href = outgoingURL
 }
 
