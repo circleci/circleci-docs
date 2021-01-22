@@ -20,11 +20,6 @@ Following are the most popular features CircleCI offers that Developers are inte
 
 Often the best way to troubleshoot problems is to [SSH into a job]({{ site.baseurl }}/2.0/ssh-access-jobs/) and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH.
 
-When you log in with SSH, you are running an interactive login shell. You are also likely to be running the command on top of the directory where the command failed the first time, so you are not starting a clean run. 
-
-In contrast, CircleCI uses a non-interactive shell for running commands by default. Hence, steps run in interactive mode may succeed, while failing in non-interactive mode.
-
-
 ### Parallelism
 
 If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can [run tests in parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) by spreading them across multiple machines. This requires specifying a parallelism level. 
