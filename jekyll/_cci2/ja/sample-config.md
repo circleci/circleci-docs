@@ -805,6 +805,7 @@ jobs:
           name: Build iperf3
           working_directory: iperf
           command: |
+            CIRCLE_WORKING_DIRECTORY=$(eval "echo $CIRCLE_WORKING_DIRECTORY")
             IPERF3_MAKE_PREFIX=$CIRCLE_WORKING_DIRECTORY/<< parameters.label >>
             ./configure --prefix=$IPERF3_MAKE_PREFIX << pipeline.parameters.common-build-params >>
             make
