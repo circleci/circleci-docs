@@ -36,10 +36,13 @@ function reloadWithNewLocale(langCode) {
 
 
   if (window.currentLang !== "en") {
-    outgoingURL += "/docs/2.0/" + currentPage;
+    // temp replace docs with branch deploy name.
+    outgoingURL += "/ts-lang-picker-preview/2.0/" + currentPage;
   } else {
-    outgoingURL += "/docs/" + langCode + "/2.0/" + currentPage;
+    outgoingURL += "/ts-lang-picker-preview/" + langCode + "/2.0/" + currentPage;
   }
+
+  alert("outgoing URL is: " + outgoingURL)
   window.location.href = outgoingURL
 }
 
