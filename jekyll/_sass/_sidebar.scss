@@ -124,6 +124,12 @@ $sidebar-spacing-base: 5px;
         display: inline-block;
       }
     }
+
+    .subheading {
+      color: $body-text-color;
+      margin-left: 30px;
+      display: inline-block;
+    }
   }
 
   .lang-picker {

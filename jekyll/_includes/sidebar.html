@@ -49,11 +49,15 @@
               {% if item.children  %}
                 {% if item.name %}
                   <li class="nav-item">
-                    <a class="{% if current_url == item.link %} active {% endif %}"
-                      href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
-                      data-proofer-ignore>
-                      {{ display_name }}
-                    </a>
+                    {% if item.link %}
+                      <a class="{% if current_url == item.link %} active {% endif %}"
+                        href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                        data-proofer-ignore>
+                        {{ display_name }}
+                      </a>
+                    {% else %}
+                      <span class="subheading">{{ display_name }}</spans>
+                    {% endif %}
                   </li>
                 {% endif %}
 
