@@ -415,8 +415,9 @@ api:
   auth_token: AUTH_TOKEN
 runner:
   name: RUNNER_NAME
-runner.name
 ```
+
+==== runner.name
 
 `RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
 
