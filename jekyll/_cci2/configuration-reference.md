@@ -501,6 +501,17 @@ jobs:
       ... // other config
 ```
 
+You may also use the `resource_class` to configure a runner instance.
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
+```
+
 ##### Machine executor (Linux)
 
 {% include snippets/machine-resource-table.md %}
@@ -515,6 +526,16 @@ jobs:
     steps:
       ... // other config
 ```
+
+You may also use the `machine` class to configure a runner instance.
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
 
 ##### macOS executor
 
