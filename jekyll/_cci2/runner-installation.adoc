@@ -404,7 +404,7 @@ sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 The macOS application console can be used to view the logs for the CircleCI agent. Look under "Log Reports" for the logs called `com.circleci.runner.log`.
 
-=== Configuration file reference
+== Configuration file reference
 
 A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
 
@@ -426,7 +426,7 @@ This is a token used to identify the launch agent to CircleCI and can be generat
 
 ==== runner.command_prefix
 
-This prefix enables you to customize how the task agent process is launched; The CircleCI example uses the launch-task script provided below.
+This prefix enables you to customize how the task agent process is launched. Using a custom script here can allow you to execute arbitrary commands before and after the task runner. You should take care to ensure the supplied arguments are executed, and the correct exit code is returned from the script upon completion.
 
 ==== runner.working_directory
 
