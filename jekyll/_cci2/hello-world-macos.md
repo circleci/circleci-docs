@@ -93,10 +93,10 @@ You can learn more about the `config.yml` file in the [configuration reference g
 ## Xcode Cross Compilation
 
 ### Universal Binaries
-Xcode currently supports the creation of universal binaries which can be run on both Intel and ARM64 CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate Intel and ARM64 executables. 
+Xcode currently supports the creation of universal binaries which can be run on both x86_64 and ARM64 CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables. 
 
 ### Extracting Unwanted Architectures
-Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both Intel and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility. 
+Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility. 
 
 Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
 
@@ -109,9 +109,7 @@ We can then confirm the supported architecture of the extracted binary with `lip
 
 ### Cross Compiled Binaries
 
-While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`
-
-For Intel CPUs set `ARCHS` to `x86_64`.
+While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the x86_64 architecture simply change `ARCHS` to `x86_64`.
 
 ## Next steps
 
