@@ -501,7 +501,7 @@ jobs:
       ... // other config
 ```
 
-You may also use the `resource_class` to configure a runner instance.
+You may also use the `resource_class` to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
 
 For example:
 
@@ -527,7 +527,7 @@ jobs:
       ... // other config
 ```
 
-You may also use the `machine` class to configure a runner instance.
+You may also use the `machine` class to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
 
 For example:
 
