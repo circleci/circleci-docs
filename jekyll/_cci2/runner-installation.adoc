@@ -58,7 +58,7 @@ There are currently three support levels for CircleCI runner:
 
 The following platforms have been validated to work with CircleCI runner:
 
-* Intel + Ubuntu 18.04+
+* x86_64 + Ubuntu 18.04+
 * Arm64 + Ubuntu 18.04+
 * Intel + macOS
 
@@ -66,7 +66,7 @@ The following platforms have been validated to work with CircleCI runner:
 
 The following platforms have not been tested, but are believed to work with CircleCI runner:
 
-* Intel + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
+* x86_64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
 * Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
 * Docker
 
@@ -76,7 +76,7 @@ NOTE: CircleCI provides no documentation for these platforms.
 
 The following platforms are not currently supported to work with CircleCI runner:
 
-* Intel + Windows
+* x86_64 + Windows
 * Arm + Windows
 * Apple Silicon + macOS
 * Arm32 + Linux
