@@ -34,7 +34,7 @@ There are two key use cases CircleCI aims to meet with the runner:
 
 == Runner operation
 
-Once CircleCI runner is installed, the runner polls circleci.com for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
+Once CircleCI runner is installed, the runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
 
 The runner consists of two components: the launch agent and the task agent.
 
@@ -49,7 +49,7 @@ There are a few limitations you should be aware of when using CircleCI runner:
 
 Currently, the runner officially supports the following platforms:
 
-* Intel + Ubuntu 18.04+
+* x86_64 + Ubuntu 18.04+
 * Arm64 + Ubuntu 18.04+
 * Intel + macOS
 
