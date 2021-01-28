@@ -168,8 +168,6 @@ jobs:
 # ...          
 ```
 
-
-
 The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Subsequent images can be added to spin up Secondary/Service Containers.
 
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
@@ -239,7 +237,6 @@ The Primary Container is defined by the first image listed in a [`.circleci/conf
        xcode: "9.0"       
  ...          
  ```
-
 
 ## Workflows
 
@@ -400,8 +397,9 @@ workflows:
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-A cache stores a file or directory of files such as dependencies or source code in object storage.
-Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
+A cache stores a file or directory of files such as dependencies or source code in object storage. Each job may contain special steps for caching dependencies from previous jobs to speed up the build.
+
+If there comes a time when you need to [clear your cache](https://circleci.com/docs/2.0/caching/#clearing-cache), refer to the [Caching Dependencies](https://circleci.com/docs/2.0/caching/) page for more information on caching.
 
 {:.tab.cache.Cloud}
 {% raw %}
