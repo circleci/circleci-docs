@@ -387,16 +387,17 @@ ja:
   icon: icons/sidebar/getting_started.svg
   children:
     - name: Overview
+      i18n_name: 概要
       children:
         - name: About CircleCI
           link: ja/2.0/about-circleci/
-          # i18n_name: TODO
+          i18n_name: CircleCIの概要
         - name: Concepts
           link: ja/2.0/concepts/
           i18n_name: コンセプト
         - name: Your First Green Build
           link: ja/2.0/getting-started/
-          # i18n_name: TODO
+          i18n_name: 入門ガイド
         - name: Hello World
           link: ja/2.0/hello-world/
           i18n_name: Hello World
@@ -409,25 +410,25 @@ ja:
           i18n_name: 移行の概要
         - name: Migrating from AWS
           link: ja/2.0/migrating-from-aws/
-          # i18n_name: TODO
+          i18n_name: AWSからの移行
         - name: Migrating from Azure
           link: ja/2.0/migrating-from-azuredevops/
-          # i18n_name: TODO
+          i18n_name: Azureからの移行
         - name: Migrating from Buildkite
           link: ja/2.0/migrating-from-buildkite/
-          # i18n_name: TODO
+          i18n_name: Buildkiteからの移行
         - name: Migrating from GitHub
           link: ja/2.0/migrating-from-github/
-          # i18n_name: TODO
+          i18n_name: GitHubからの移行
         - name: Migrating from GitLab
           link: ja/2.0/migrating-from-gitlab/
-          # i18n_name: TODO
+          i18n_name: GitLabからの移行
         - name: Migrating from Jenkins
           link: ja/2.0/migrating-from-jenkins/
           i18n_name: Jenkinsからの移行
         - name: Migrating from TeamCity
           link: ja/2.0/migrating-from-teamcity/
-          # i18n_name: TODO
+          i18n_name: TeamCityからの移行
         - name: Migrating from Travis CI
           link: ja/2.0/migrating-from-travis/
           i18n_name: TravisCIからの移行
@@ -439,23 +440,23 @@ ja:
   icon: icons/sidebar/pipelines.svg
   children:
     - name: Features
-      # i18n_name: TODO
+      i18n_name: 機能
       children:
         - name: Workflows
           link: ja/2.0/workflows/
-          # i18n_name: TODO
+          i18n_name: ワークフロー
         - name: Environment variables
           link: ja/2.0/env-vars/
-          # i18n_name: TODO
+          i18n_name: 環境変数
         - name: Caching 
           link: ja/2.0/caching/
-          # i18n_name: TODO
+          i18n_name: キャッシュ
         - name: Artifacts
           link: ja/2.0/artifacts/
-          # i18n_name: TODO
+          i18n_name: アーティファクト
         - name: Insights
           link: ja/2.0/insights/
-          # i18n_name: TODO
+          i18n_name: インサイト
         - name: Collecting test data
           i18n_name: テストメタデータの収集
           link: ja/2.0/collect-test-data/
@@ -464,83 +465,94 @@ ja:
           i18n_name: SSHデバッグ
         - name: Parallelism
           link: ja/2.0/parallelism-faster-jobs/
-          # i18n_name: TODO
+          i18n_name: テストの並列実行
         - name: Contexts
           link: ja/2.0/contexts/
-          # i18n_name: TODO
+          i18n_name: コンテキスト
     - name: Optimizations
+      i18n_name: 最適化
       children:
         - name: Pipeline variables
           link: ja/2.0/pipeline-variables/
+          i18n_name: パイプライン変数
         - name: Using shell scripts
-          i18n_name: シェルスクリプトを使う
           link: ja/2.0/using-shell-scripts/
+          i18n_name: シェルスクリプトを使う
         - name: Docker layer caching
           link: ja/2.0/docker-layer-caching/
+          i18n_name: Dockerレイヤーキャッシュ
         - name: Optimizations cookbook
           link: ja/2.0/optimization-cookbook/
+          i18n_name: クックブック
 
 - name: Executors and Images
   icon: icons/sidebar/executors.svg
-  # i18n_name: TODO
+  i18n_name: Executorとイメージ
   children:
     - name: Overview
-      # i18n_name: TODO
+      i18n_name: 概要
       children:
         - name: Introduction
           link: ja/2.0/executor-types/
-        # i18n_name: TODO
+          i18n_name: Executorタイプ
     - name: Docker
       children:
         - name: Overview
-          # i18n_name: TODO
           link: ja/2.0/executor-types/
+          i18n_name: 概要
           hash: using-docker
         - name: CircleCI Images
           link: ja/2.0/circleci-images/
+          i18n_name: CircleCIイメージ
         - name: Docker compose
           link: ja/2.0/docker-compose/
+          i18n_name: docker-compose
         - name: Docker layer caching
           link: ja/2.0/docker-layer-caching/
+          i18n_name: Dockerレイヤーキャッシュ
         - name: Running docker commands
           link: ja/2.0/building-docker-images/
+          i18n_name: Dockerコマンド
         - name: Using custom images
           link: ja/2.0/custom-images/
+          i18n_name: カスタムイメージ
         - name: Docker authenticated pulls
           link: ja/2.0/private-images/
+          i18n_name: 認証付きプル
     - name: Machine
       children:
         - name: Overview
-          # i18n_name: TODO
           link: ja/2.0/executor-types/
+          i18n_name: 概要
           hash: using-machine
         - name: Pre-installed software
           link: ja/2.0/docker-to-machine
+          i18n_name: インストール済ソフト
           hash: pre-installed-software
     - name: Mac
       children:
         - name: Overview
-          # i18n_name: TODO
           link: ja/2.0/hello-world-macos/
+          i18n_name: 概要
         - name: Testing iOS applications
           link: ja/2.0/testing-ios/
           i18n_name: iOSアプリをテストする
         - name: iOS Code Signing
-          i18n_name: iOSコードサインの設定
           link: ja/2.0/ios-codesigning/
+          i18n_name: iOSコードサインの設定
         - name: Deploying iOS applications
-          # i18n_name: TODO
           link: ja/2.0/deploying-ios/
+          i18n_name: iOSアプリのデプロイ
         - name: Testing macOS applications
-          # i18n_name: TODO
           link: ja/2.0/testing-macos/
+          i18n_name: macOSアプリのテスト
         - name: Xcode Image Policy
           link: ja/2.0/xcode-policy/
-          # i18n_name: TODO
+          i18n_name: Xcodeイメージポリシー
     - name: Windows
       children:
         - name: Overview
-          # i18n_name: TODO
+          i18n_name: 概要
           link: ja/2.0/hello-world-windows/
     - name: Runner
       link: ja/2.0/runner-overview/
@@ -549,107 +561,107 @@ ja:
           link: ja/2.0/runner-overview/
           i18n_name: ランナーの概要
         - name: Runner Installation
-          i18n_name: ランナーのインストール
           link: ja/2.0/runner-installation/
+          i18n_name: ランナーのインストール
         - name: Runner API
-          i18n_name: ランナーAPI 
           link: ja/2.0/runner-api/
+          i18n_name: ランナーAPI 
         - name: Runner FAQs
-          i18n_name: ランナーFAQ
           link: ja/2.0/runner-faqs/
+          i18n_name: ランナーFAQ
 
 - name: Configuration
   icon: icons/sidebar/configure.svg
-  i18n_name: 設定
+  i18n_name: 設定ファイル
   children:
     - name: Introduction
       link: ja/2.0/config-intro/
-      i18n_name: イントロダクション
+      i18n_name: 概要
       children:
         - name: Configuration Introduction
-          i18n_name: 設定の概要
           link: ja/2.0/config-intro/
+          i18n_name: 設定ファイル概要
         - name: Configuration Reference
-          i18n_name: 設定リファレンス
           link: ja/2.0/configuration-reference/
+          i18n_name: リファレンス
         - name: Reusing Configuration
-          i18n_name: コンフィグの再利用(Orbs)
           link: ja/2.0/reusing-config/
+          i18n_name: 設定ファイル再利用(Orbs)
     - name: Orbs
       link: ja/2.0/orb-intro/
       i18n_name: Orbs
       children:
         - name: Orb Introduction
           link: ja/2.0/orb-intro/
-          i18n_name: Orbの概要
+          i18n_name: Orbs概要
         - name: Orbs Concepts
           link: ja/2.0/orb-concepts/
-          i18n_name: Orbのコンセプト
+          i18n_name: Orbsコンセプト
         - name: Orbs FAQ
-          i18n_name: Orbs FAQ
           link: ja/2.0/orbs-faq/
+          i18n_name: Orbs FAQ
     - name: Authoring Orbs
-      i18n_name: Orbオーサリング
       link: ja/2.0/orb-author-intro/
+      i18n_name: Orbsオーサリング
       children:
         - name: Intro to Authoring an Orb
-          i18n_name: Orbオーサリングの概要
           link: ja/2.0/orb-author-intro/
+          i18n_name: 概要
         - name: Author an Orb
-          i18n_name: Orbのオーサリングプロセス
           link: ja/2.0/orb-author/
+          i18n_name: Orbsオーサリング
         - name: Orb Author FAQ
-          i18n_name: OrbオーサリングFAQ
           link: ja/2.0/orb-author-faq/
+          i18n_name: OrbsオーサリングFAQ
         - name: Orbs Best Practices
-          i18n_name: Orbのベストプラクティス
           link: ja/2.0/orbs-best-practices/
+          i18n_name: Orbsベストプラクティス
         - name: Orb Testing Methodologies
-          i18n_name: Orbのテスト手法
           link: ja/2.0/testing-orbs/
+          i18n_name: Orbsテスト手法
         - name: Orb Publishing Process
-          i18n_name: Orbのパブリッシュ
           link: ja/2.0/creating-orbs/
+          i18n_name: Orbsパブリッシュ
 
 - name: Projects
   i18n_name: プロジェクト
   icon: icons/sidebar/projects.svg
   children:
     - name: settings
-      i18n_name: セッティング
       link: ja/2.0/settings/
+      i18n_name: 設定
       children:
         - name: Settings Overview
-          i18n_name: セッティングの概要
           link: ja/2.0/settings/
+          i18n_name: 概要
         - name: Enabling GitHub Checks
           link: ja/2.0/enable-checks/
-          i18n_name: GitHub Checksを有効化する
+          i18n_name: GitHub Checks有効化
         - name: GitHub and Bitbucket
           link: ja/2.0/gh-bb-integration/
           i18n_name: GitHubとBitbucket
         - name: Open Source Projects
           link: ja/2.0/oss/
-          i18n_name: オープンソースプロジェクトをビルド
+          i18n_name: OSSのビルド
         - name: Using Notifications
           link: ja/2.0/notifications/
-          # i18n_name: TODO
+          i18n_name: 通知の使用
         - name: Connect with JIRA
           link: ja/2.0/jira-plugin/
-          # i18n_name: TODO
+          i18n_name: Jira連携
         - name: Managing API tokens
           link: ja/2.0/managing-api-tokens/
-          # i18n_name: TODO
+          i18n_name: APIトークン
         - name: Using Credits
           link: ja/2.0/credits/
-          # i18n_name: TODO
+          i18n_name: クレジット使用
 
 - name: Examples and Guides
   i18n_name: サンプル
   icon: icons/sidebar/examples.svg
   children:
     - name: Languages
-      # i18n_name: TODO
+      i18n_name: 言語
       children:
         - name: Node
           link: ja/2.0/language-javascript/
@@ -665,48 +677,51 @@ ja:
           link: ja/2.0/language-ruby/
 
     - name: Databases
+      i18n_name: データベース
       children:
         - name: Configuring Databases
-          i18n_name: データベースを設定する
           link: ja/2.0/databases/
+          i18n_name: 設定
 
     - name: Testing
+      i18n_name: テスト
       children:
         - name: Browser Testing
-          i18n_name: ブラウザテストのセットアップ
           link: ja/2.0/browser-testing/
+          i18n_name: ブラウザテスト
 
     - name: Cookbooks
+      i18n_name: クックブック
       children:
         - name: Optimizations
-          i18n_name: ブラウザテストのセットアップ
           link: ja/2.0/optimization-cookbook/
+          i18n_name: 最適化クックブック
         - name: Configuration
-          i18n_name: ブラウザテストのセットアップ
           link: ja/2.0/configuration-cookbook/
+          i18n_name: コンフィグクックブック
         - name: Deployment
-          i18n_name: デプロイメント
           link: ja/2.0/deployment-examples/
+          i18n_name: デプロイクックブック
 
 - name: Deployment
   icon: icons/sidebar/deployment.svg
-  i18n_name: デプロイメント
+  i18n_name: デプロイ
   children:
     - name: Configuring Deploys
-      i18n_name: デプロイメントの設定
       link: ja/2.0/deployment-integrations/
+      i18n_name: デプロイ設定
     - name: Deploying iOS applications
-      # i18n_name: TODO
       link: ja/2.0/deploying-ios/
+      i18n_name: iOSアプリのデプロイ
     - name: Publishing Snap packages
-      i18n_name: Snapのパッケージを公開
       link: ja/2.0/build-publish-snap-packages/
+      i18n_name: Snapパッケージのパブリッシュ
     - name: Upload to Artifactory
-      i18n_name: Artifactoryを使う
-      link: ja/2.0/packagecloud/
+      link: ja/2.0/artifactory/
+      i18n_name: Artifactoryの利用
     - name: Publishing to Packagecloud
-      i18n_name: Packagecloudに公開する
       link: ja/2.0/packagecloud/
+      i18n_name: Packagecloudへの公開
 
 - name: Reference
   icon: icons/sidebar/reference.svg
@@ -714,169 +729,180 @@ ja:
   children:
     - children:
       - name: Configuration Reference
-        i18n_name: 設定リファレンス
         link: ja/2.0/configuration-reference/
+        i18n_name: 設定ファイルリファレンス
       - name: API v2 Reference
-        i18n_name: APIリファレンス
         link: api/v2
+        i18n_name: API v2リファレンス
       - name: API v2 Introduction
-        i18n_name: APIリファレンス
         link: ja/2.0/api-intro/
+        i18n_name: API v2概要
       - name: API v2 Developer's Guide
-        # i18n_name: TODO
         link: ja/2.0/api-developers-guide/
+        i18n_name: API v2開発ガイド
       - name: API v1.1 Reference
         link: api/v1
-        # i18n_name: TODO
+        i18n_name: API v1リファレンス
       - name: Prebuilt Images
         link: ja/2.0/circleci-images/
         i18n_name: CircleCI公式イメージ
       - name: Glossary
-        # i18n_name: TODO
         link: ja/2.0/glossary/
+        i18n_name: 用語集
       - name: Help and Support
-        i18n_name: ヘルプとサポート
         link: ja/2.0/help-and-support/
+        i18n_name: ヘルプとサポート
       - name: Archive of 1.0 Docs
         link: ja/2.0/archive/
+        i18n_name: アーカイブ
 
 - name: Server Administration
-  i18n_name: アドミニストレーション
+  i18n_name: Server管理
   icon: icons/sidebar/admin.svg
   children:
     - name: Server v2.19.x Install
       link: ja/2.0/install-overview/
+      i18n_name: v2.19.xインストール
       children:
         - name: Overview
-          # i18n_name: TODO
           link: ja/2.0/install-overview/
+          i18n_name: 概要
         - name: What's New in v2.19.x
-          # i18n_name: TODO
           link: ja/2.0/v.2.19-overview/
+          i18n_name: v2.19.xの新機能
         - name: Upgrade to v2.19.x
-          # i18n_name: TODO
           link: ja/2.0/updating-server/
+          i18n_name: アップグレード方法
         - name: System Requirements
-          # i18n_name: TODO
           link: ja/2.0/server-ports/
+          i18n_name: 使用ポート
         - name: Prerequisites and Planning
-          # i18n_name: TODO
           link: ja/2.0/aws-prereq/
+          i18n_name: 必須要件
         - name: Installation
           link: ja/2.0/aws/
-          # i18n_name: TODO
+          i18n_name: インストール
         - name: Teardown
           link: ja/2.0/aws-teardown/
-          # i18n_name: TODO
+          i18n_name: アンインストール
         - name: Upgrades from 1.0 to 2.0
-          # i18n_name: TODO
           link: ja/2.0/upgrading/
+          i18n_name: v1からのアップグレード
     - name: Server v2.19.x Operations
       link: ja/2.0/overview/
+      i18n_name: 管理者ガイド
       children:
         - name: Overview
-          # i18n_name: TODO
           link: ja/2.0/overview/
+          i18n_name: 概要
         - name: Intro to Nomad
-          # i18n_name: TODO
           link: ja/2.0/nomad/
+          i18n_name: Nomadガイド
         - name: Metrics & Monitoring
-          # i18n_name: TODO
           link: ja/2.0/monitoring/
+          i18n_name: 設定・モニタリング
         - name: Nomad Metrics
-          # i18n_name: TODO
           link: ja/2.0/nomad-metrics/
+          i18n_name: Nomadメトリクス
         - name: Proxies
-          i18n_name: プロキシー
           link: ja/2.0/proxy/
+          i18n_name: プロキシ
         - name: Docker Hub Pull Through Mirror
           link: ja/2.0/docker-hub-pull-through-mirror/
+          i18n_name: DockerHubミラー
         - name: Authentication
-          i18n_name: 認証
           link: ja/2.0/authentication/
+          i18n_name: 認証
         - name: VM Service
-          i18n_name: VMサービスの設定
-          # i18n_name: TODO
           link: ja/2.0/vm-service/
+          i18n_name: VMサービスの設定
         - name: GPU Builders
-          i18n_name: GPUビルダー
           link: ja/2.0/gpu/
+          i18n_name: GPUビルダー
         - name: Certificates
-          i18n_name: 証明書
           link: ja/2.0/certificates/
+          i18n_name: 証明書
         - name: User Accounts
-          # i18n_name: TODO
           link: ja/2.0/user-accounts/
+          i18n_name: ユーザアカウント
         - name: Build Artifacts
-          # i18n_name: TODO
           link: ja/2.0/build-artifacts/
+          i18n_name: アーティファクト
         - name: Usage statistics
-          # i18n_name: TODO
           link: ja/2.0/usage-stats/
+          i18n_name: 利用状況データ
         - name: JVM Heap Size
-          # i18n_name: TODO
           link: ja/2.0/jvm-heap-size-configuration/
+          i18n_name: JVMヒープサイズ
         - name: SSH Reruns
-          # i18n_name: TODO
           link: ja/2.0/ssh-server/
+          i18n_name: SSH再実行
         - name: Maintenance
-          # i18n_name: TODO
           link: ja/2.0/ops/
+          i18n_name: メンテナンス
         - name: Backup and Recovery
-          # i18n_name: TODO
           link: ja/2.0/backup/
+          i18n_name: バックアップとリカバリ
         - name: Security
-          # i18n_name: TODO
           link: ja/2.0/security-server/
+          i18n_name: セキュリティ
         - name: Troubleshooting
-          # i18n_name: TODO
           link: ja/2.0/troubleshooting/
+          i18n_name: トラブルシューティング
         - name: Faq
-          # i18n_name: TODO
           link: ja/2.0/admin-faq/
+          i18n_name: FAQ
         - name: Customization & Config
-          # i18n_name: TODO
           link: ja/2.0/customizations/
+          i18n_name: カスタマイズ・設定
         - name: Architecture
-          # i18n_name: TODO
           link: ja/2.0/architecture/
+          i18n_name: アーキテクチャ
         - name: Storage Lifecycle
-          # i18n_name: TODO
           link: ja/2.0/storage-lifecycle/
+          i18n_name: ストレージライフサイクル
         - name: Acknowledgments
-          # i18n_name: TODO
           link: ja/2.0/open-source/
+          i18n_name: 謝辞(OSS)
     - name: Server v2.19 PDFs
       link: ja/2.0/v.2.19-overview/
+      i18n_name: Server v2.19 PDF
       children:
         - name: What's New in v2.19
           link: ja/2.0/v.2.19-overview/
+          i18n_name: v2.19の新機能
         - name: v2.19 Installation Guide
           link: ja/2.0/CircleCI-Server-AWS-Installation-Guide.pdf
         - name: v2.19 Operations Guide
           link: ja/2.0/CircleCI-Server-Operations-Guide.pdf
     - name: Server v2.18 PDFs
       link: ja/2.0/v.2.18-overview/
+      i18n_name: Server v2.18 PDF
       children:
         - name: What's New in v2.18
           link: ja/2.0/v.2.18-overview/
+          i18n_name: v2.18の新機能
         - name: v2.18.3 Installation Guide
           link: ja/2.0/CircleCI-Server-AWS-Installation-Guide-v2-18-3.pdf
         - name: v2.18.3 Operations Guide
           link: ja/2.0/CircleCI-Server-Operations-Guide-v2-18-3.pdf
     - name: Server v2.17.3 PDFs
       link: ja/2.0/v.2.17-overview/
+      i18n_name: Server v2.17.3 PDF
       children:
         - name: What's New in v2.17
           link: ja/2.0/v.2.17-overview/
+          i18n_name: v2.17の新機能
         - name: v2.17.3 Installation Guide
           link: ja/2.0/CircleCI-Server-AWS-Installation-Guide-v2-17.pdf
         - name: v2.17.3 Operations Guide
           link: ja/2.0/CircleCI-Server-Operations-Guide-v2-17.pdf
     - name: Server v2.16 PDFs
       link: ja/2.0/v.2.16-overview/
+      i18n_name: Server v2.16 PDF
       children:
         - name: What's New in v2.16
+          i18n_name: v2.16の新機能
           link: ja/2.0/v.2.16-overview/
         - name: v2.16 Installation Guide
           link: ja/2.0/circleci-install-doc.pdf
