@@ -30,7 +30,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 
 ### CircleCI Cloud
 
-1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation (https://www.ssh.com/ssh/keygen/) web site for additional details.
+1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
 2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
