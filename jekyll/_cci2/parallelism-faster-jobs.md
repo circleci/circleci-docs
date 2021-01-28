@@ -46,6 +46,8 @@ CircleCI supports automatic test allocation across your containers. The allocati
 
 To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
+Note: The `circleci tests split` command cannot be run locally as it requires information that only exists within a CircleCI container.
+
 ### Splitting test files
 {:.no_toc}
 
