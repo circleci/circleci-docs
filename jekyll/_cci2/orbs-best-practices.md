@@ -233,6 +233,11 @@ When installing any binary into a potentially unknown user-defined Docker image,
 
 Semantic versioning is a critical update and release practice in which version numbers communicate either bug fixes and patches, new functionality, or breaking changes. Introducing a breaking change as a patch update, for example, can lead to users of that orb automatically receiving updates that block their CI process. Before updating your orbs, make sure you have read over and understood [semantic versioning]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning).
 
+### Keep a changelog
+{:.no_toc}
+
+Keeping a concise changelog allows users of an orb to quickly see what has changed in a particular version. While git does provide a log of changes, it can be difficult to discover the difference between two versions, especially when commits don't neccesarily align to a release. Changelogs should conform to the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) guidelines.
+
 ## Promotion
 
 #### Share your orb with the community!
