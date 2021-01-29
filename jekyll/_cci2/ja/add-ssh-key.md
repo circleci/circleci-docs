@@ -9,16 +9,20 @@ version:
   - Server v2.x
 ---
 
-サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
+If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
 
 ## 概要
 
-CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
+There are two reasons to add SSH keys to CircleCI:
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトを有効にする)を参照してください。 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
+If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+
+Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
+
+**Note:** You may need to add the public key to `~/.ssh/ authorized_keys`in order to add SSH keys.
 
 ## 手順
 
@@ -26,7 +30,7 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 ### CircleCI Cloud
 
-1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
+1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
 2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
 
@@ -36,7 +40,7 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 5. Click the **Add SSH Key** button.
 
-6. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you don't specify a hostname, the key will be used for all hosts.
+6. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
 
 7. In the **Private Key** field, paste the SSH key you are adding.
 
@@ -52,7 +56,7 @@ CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パ
 
 4. Click the **Add SSH Key** button.
 
-5. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you don't specify a hostname, the key will be used for all hosts.
+5. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you do not specify a hostname, the key will be used for all hosts.
 
 6. In the **Private Key** field, paste the SSH key you are adding.
 
@@ -78,7 +82,7 @@ jobs:
 
 ## ホスト名を指定せずに複数の鍵を登録する
 
-If you need to add multiple SSH keys with blank hostnames to your project you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
+If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
 
 ## 関連項目
 
