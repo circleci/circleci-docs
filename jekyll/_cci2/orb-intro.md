@@ -21,7 +21,7 @@ Published orbs can be found on our [Orb Registry](https://circleci.com/developer
 
 ## Private orbs vs. public orbs
 
-There are two different types of orbs you can use in your configuration, depending on how you want to publish your orbs. If you prefer to publish your orb internally, and not to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a Private Orb. However, if you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a Public Orb. Descriptions of each type of orb is described in the sections below.
+There are two different types of orbs you can use in your configuration, depending on how you want to publish your orbs. If you prefer to publish your orb internally, and not to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a Private Orb. However, if you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), use a Public Orb. Descriptions of each type of orb is described in the sections below.
 
 ### Private orbs
 
