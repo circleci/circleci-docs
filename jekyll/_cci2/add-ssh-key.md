@@ -22,7 +22,7 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
-**Note:** You may need to add the public key to `~/.ssh/ authorized_keys`.
+**Note:** You may need to add the public key to `~/.ssh/ authorized_keys`in order to add SSH keys.
 
 ## Steps
 
