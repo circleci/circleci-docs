@@ -3,7 +3,6 @@
   <nav class="sidebar fixed">
     {% assign lang = page.lang %}
     {% assign sidenav = site.data.sidenav[lang] %}
-    <!-- TODO: slice at query param rather than first url point; hopefully enabling jumping to page anchors/marking such links as "active" -->
     {% assign current_url = page.url | slice: 1, page.url.size %}
 
     <div class="sidebar-item-group">
@@ -35,7 +34,7 @@
             {% endif %}
           </div>
 
-          <!-- "main items 1st level-children" -->
+          {% comment %} main items / 1st level-children {% endcomment %}
           {% if main-item.children %}
           <ul class="subnav">
             {% for item in main-item.children %}
@@ -45,7 +44,7 @@
                 {% assign display_name = item.name %}
               {% endif %}
 
-              <!-- If there are grandchildren, add subnav-items-->
+              {% comment %}If there are grandchildren, add subnav-items {% endcomment %}
               {% if item.children  %}
                 {% if item.name %}
                   <li class="nav-item">
