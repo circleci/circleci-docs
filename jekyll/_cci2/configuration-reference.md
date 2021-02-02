@@ -536,6 +536,7 @@ jobs:
   job_name:
     machine: true
     resource_class: my-namespace/my-runner
+```
 
 ##### macOS executor
 
