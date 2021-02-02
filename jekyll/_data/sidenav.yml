@@ -242,8 +242,9 @@ en:
     - name: Publishing Snap packages
       link: 2.0/build-publish-snap-packages/
     - name: Upload to Artifactory
-      link: 2.0/packagecloud/
+      link: 2.0/artifactory/
     - name: Publishing to Packagecloud
+      link: 2.0/packagecloud/
 
 - name: Reference
   icon: icons/sidebar/reference.svg

@@ -78,6 +78,7 @@
                   {% endfor %}
                 </ul>
 
+              {% comment %} Items that do not have a top level "item" {% endcomment %}
               {% else %}
                 {% if item.i18n_name %}
                   {% assign display_name = item.i18n_name %}
@@ -86,7 +87,7 @@
                 {% endif %}
                 <li class="subnav-item">
                   <a class="{% if current_url == item.link %} active {% endif %}"
-                     href={{ site.baseurl }}/{{ item.link }}>
+                    href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}">
                     {{display_name}}
                   </a>
                 </li>
