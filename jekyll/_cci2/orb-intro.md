@@ -43,7 +43,7 @@ By choosing to use a private orb instead of a public orb, you also need to under
 
 ### Public orbs
 
-Public orbs are used by most users when authoring and publishing orbs to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). When authoring a public orb, you are enabling all other users worldwide to use your orb in their own configurations.
+Public orbs are used by most users when authoring and publishing orbs to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). When authoring a public orb, you are enabling all  CircleCI users to use your orb in their own configurations.
 
 ## Benefits of using orbs
 
