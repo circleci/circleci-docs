@@ -25,7 +25,7 @@ There are two different types of orbs you can use in your configuration, dependi
 
 ### Private orbs
 
-**Note:** Private orbs are currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+**Note:** Private orbs are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
 Using a private orb enables you to author an orb while ensuring the following:
 
