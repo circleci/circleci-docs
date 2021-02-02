@@ -45,7 +45,7 @@ CircleCI では、複数のコンテナに対してテストを自動的に割�
 
 CLI をローカルにインストールするには、「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」の説明を参照してください。
 
-Note: The `circleci tests split` command cannot be run locally as it requires information that only exists within a CircleCI container.
+Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
 
 ### Splitting test files
 {:.no_toc}
@@ -168,7 +168,7 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 ### Video: troubleshooting globbing
 {:.no_toc}
 
-<iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
+Note: To follow along with the commands in the video below you will need to be [`SSH-ed into a job`]({{ site.baseurl }}/2.0/ssh-access-jobs/). <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
 ## See also
 
