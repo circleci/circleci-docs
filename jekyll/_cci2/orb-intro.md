@@ -27,7 +27,7 @@ There are two different types of orbs you can use in your configuration, dependi
 
 **Note:** Private orbs are currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
-Orbs are reusable chunks of configuration published to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). Traditionally, these orbs are authored by individuals and then published to the entire world. But what should you do if you want to author an orb, but do not want the orb published outside of your organization? Using a private orb enables you to author an orb while ensuring the following:
+Using a private orb enables you to author an orb while ensuring the following:
 
 * your orb does not appear in the CircleCI Orb Registry.
 
