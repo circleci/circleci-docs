@@ -9,7 +9,7 @@ version:
 - Cloud
 ---
 
-This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed [here]({{site.baseurl}}/api/v2}).
+This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed [here]({{site.baseurl}}/api/v2).
 
 * TOC
 {:toc}
