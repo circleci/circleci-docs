@@ -39,7 +39,7 @@ To create a private orb, simply run the `circleci orb create --private <ns/orb>`
 
 By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:
 
-* you will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --orgSlug <your-org-slug> <path/to/config.yml>` command to validate your configuration.
+* you will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --orgslug <your-org-slug> <path/to/config.yml>` command to validate your configuration.
 
 * you cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
 
