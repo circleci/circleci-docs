@@ -508,6 +508,17 @@ jobs:
       ... // other config
 ```
 
+You may also use the `resource_class` to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
+```
+
 ##### Machine executor (Linux)
 
 {% include snippets/machine-resource-table.md %}
@@ -521,6 +532,17 @@ jobs:
     resource_class: large
     steps:
       ... // other config
+```
+
+You may also use the `machine` class to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
 ```
 
 ##### macOS executor
