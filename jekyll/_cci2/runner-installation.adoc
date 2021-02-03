@@ -84,6 +84,8 @@ The following platforms are not currently supported to work with CircleCI runner
 
 == Authentication
 
+NOTE: These commands can only be run by an owner/admin of your organization.
+
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
 1. <<local-cli#installation,Install the circleci command-line tool>>.
