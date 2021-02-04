@@ -179,7 +179,7 @@ api:
   auth_token: AUTH_TOKEN
 runner:
   name: RUNNER_NAME
-  command_prefix: ["/opt/circleci/launch-task"]
+  command_prefix: ["sudo", "-niHu", "circleci", "--"]
   working_directory: /opt/circleci/workdir/%s
   cleanup_working_directory: true
 ```
@@ -195,47 +195,13 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 === Create the circleci user & working directory
 
-These will be used when executing the `build-agent`.
+These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`).
 
 ```bash
 id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
-```
-
-=== Install the launch script
-
-This wrapper script will be used by launch agent to execute the task agent, while ensuring appropriate sandboxing and a clean shutdown.
-
-Create `/opt/circleci/launch-task` owned by `root` with permissions `755`
-
-```bash
-#!/bin/bash
-
-set -euo pipefail
-
-## This script launches the build-agent using systemd-run in order to create a
-## cgroup which will capture all child processes so they're cleaned up correctly
-## on exit.
-
-# The user to run the build-agent as - must be numeric
-USER_ID=$(id -u circleci)
-
-# Give the transient systemd unit an inteligible name
-unit="circleci-$CIRCLECI_LAUNCH_ID"
-
-# When this process exits, tell the systemd unit to shut down
-abort() {
-  if systemctl is-active --quiet "$unit"; then
-    systemctl stop "$unit"
-  fi
-}
-trap abort EXIT
-
-systemd-run \
-    --pipe --collect --quiet --wait \
-    --uid "$USER_ID" --unit "$unit" -- "$@"
 ```
 
 === Enable the `systemd` unit
