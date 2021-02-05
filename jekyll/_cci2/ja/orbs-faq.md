@@ -14,9 +14,7 @@ version:
 
 - **Question:** Can orbs be made private?
 
-- **Answer:** Currently, all orbs published to the [Orb Registry]() are open source. Please subscribe to this feature request for updates: [Feature Request: private orbs](https://ideas.circleci.com/ideas/CCI-I-606).
-    
-    Consider using orbs for importing code hosted on private package registries such as [npm](https://docs.npmjs.com/about-private-packages), or [GitHub](https://github.com/features/packages).
+- **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
 ## Difference between commands and jobs
 
