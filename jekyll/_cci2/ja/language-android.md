@@ -21,7 +21,7 @@ version:
 
 ここでは、CircleCI での Android 開発の概要を説明します。 Android 用の `.circleci/config.yml` テンプレートをお探しの場合は、このページの「[設定ファイルの例](#設定ファイルの例)」を参照してください。
 
-**メモ:** CircleCI が Linux 上で使用している仮想化では、Android エミュレーターの実行がサポートされません。 ジョブからエミュレーター テストを実行するには、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してください。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-を使用したテスト)」を参照してください。
+**Note:** We now have an Android machine image available in preview on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here](https://github.com/CircleCI-Public/android-image-preview-docs). Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). For more details, see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
 ## 前提条件
 {:.no_toc}
