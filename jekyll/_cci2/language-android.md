@@ -25,10 +25,8 @@ If you are looking for a `.circleci/config.yml` template for Android,
 see the [Sample Configuration](#sample-configuration) section of this document.
 
 **Note:**
-Running the Android emulator is not supported
-by the type of virtualization CircleCI uses on Linux.
-To run emulator tests from a job,
-consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
+We now have an Android machine image available in preview on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here](https://github.com/CircleCI-Public/android-image-preview-docs).
+Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
 For more details,
 see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
