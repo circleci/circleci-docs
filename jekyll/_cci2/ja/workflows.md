@@ -502,11 +502,11 @@ Each workflow has an associated workspace which can be used to transfer files to
 
 workspace を使用してその実行に固有であり、ダウンストリーム ジョブで必要になるデータを渡します。 複数のブランチでジョブを実行するような workflows では、workspace を利用してデータを共有する必要に迫られることがあります。 Workspace は、コンパイル化されたデータがテスト コンテナによって使用されるプロジェクトでも便利です。
 
-例えば、Scala プロジェクトは通常、ビルド ジョブ内のコンパイルで CPU に高い負荷がかかります。 対照的に、Scala テスト ジョブは CPU に高い負荷がかからず、コンテナ間で十分に並列処理できます。 Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
+例えば、Scala プロジェクトは通常、ビルド ジョブ内のコンパイルで CPU に高い負荷がかかります。 対照的に、Scala テスト ジョブは CPU に高い負荷がかからず、コンテナ間で十分に並列処理できます。 ビルドジョブにより大きなコンテナを使い、コンパイルされたデータを workspace に保存することで、ビルドジョブからコンパイルされた Scala をテストコンテナで使用できるようになります。
 
-A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
+もう 1 つの例は、Java アプリケーションをビルドし、その jar ファイルを workspace に保存する `build` ジョブを含むプロジェクトです。 この `build` ジョブは、`integration-test`、`unit-test`、`code-coverage` にファンアウトし、jar を使用してこれらのテストを並列に実行します。
 
-To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+あるジョブのデータを維持し、他のジョブにそのデータを提供するには、`persist_to_workspace` キーを使用するようにジョブを構成します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、`root` キーで指定しているディレクトリの相対パスとなる一時 workspace にアップロードされます。 The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
 Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
