@@ -602,9 +602,9 @@ GitHub リポジトリのブランチに実装済みの Workflows があり、�
 
 ![GitHub ステータスキーのチェックを外す]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
+Workflow を使用している場合に `ci/circleci` チェックボックスをオンにすると、GitHub でステータスが完了と表示されなくなります。これは、CircleCI が名前にジョブを含むキーを使用して GitHub にステータスを送信するためです。
 
-Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
+この設定を解除するには、GitHub の [Setting (設定)] ページから [Branches (ブランチ)] にアクセスし、保護されたブランチの [Edit (編集)] ボタンクリックします (例: https://github.com/your-org/project/settings/branches)。
 
 ## See also
 {:.no_toc}
