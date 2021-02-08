@@ -538,10 +538,10 @@ jobs:
       # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をworkspaceに維持します。 
 
       - persist_to_workspace:
-          # 絶対パスまたは working_directory からの相対パスでなければなりません。 This is a directory on the container which is 
-          # taken to be the root directory of the workspace.
+          # 絶対パスまたは working_directory からの相対パスでなければなりません。 これは、workspace の
+      # ルート ディレクトリとなる、コンテナ上のディレクトリです。
           root: workspace
-          # Must be relative path from root
+          # ルートからの相対パスでなければなりません。
           paths:
             - echo-output
 
@@ -550,7 +550,7 @@ jobs:
     steps:
 
       - attach_workspace:
-          # Must be absolute path or relative path from working_directory
+          # 絶対パスであるか、working_directory からの相対パスでなければなりません。
           at: /tmp/workspace
 
       - run: |
@@ -572,7 +572,7 @@ workflows:
             - flow
 ```
 
-For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
+ビルドジョブとデプロイジョブの間でデータをやりとりする workspace を活用する生きたサンプルとして、CircleCI マニュアルのビルドを構成している [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) も参考にしてください。
 
 For additional conceptual information on using workspaces, caching, and artifacts, refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) blog post.
 
