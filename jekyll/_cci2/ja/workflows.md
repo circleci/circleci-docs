@@ -506,14 +506,14 @@ workspace を使用してその実行に固有であり、ダウンストリー�
 
 もう 1 つの例は、Java アプリケーションをビルドし、その jar ファイルを workspace に保存する `build` ジョブを含むプロジェクトです。 この `build` ジョブは、`integration-test`、`unit-test`、`code-coverage` にファンアウトし、jar を使用してこれらのテストを並列に実行します。
 
-あるジョブのデータを維持し、他のジョブにそのデータを提供するには、`persist_to_workspace` キーを使用するようにジョブを構成します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、`root` キーで指定しているディレクトリの相対パスとなる一時 workspace にアップロードされます。 The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+あるジョブのデータを維持し、他のジョブにそのデータを提供するには、`persist_to_workspace` キーを使用するようにジョブを構成します。 `persist_to_workspace` の `paths:` プロパティに記述されたファイルとディレクトリは、`root` キーで指定しているディレクトリの相対パスとなる一時 workspace にアップロードされます。 その後、ファイルとディレクトリはアップロードされ、続くジョブで (および Workflow の再実行時に) 利用できるようにします。
 
-Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
+`attach_workspace` キーを構成することで、保存されたデータを取得するようにジョブを構成します。 以下の `config.yml` ファイルでは 2 つのジョブが定義されており、`downstream` ジョブは `flow` ジョブのアーティファクトを使用します。 Workflow はシーケンシャルのため、`downstream` ジョブの処理が開始する前に `flow` ジョブが終了していなければなりません。
 
 ```yaml
-# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
-# This allows defining a docker image to reuse across jobs.
-# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
+# 以下のスタンザは、CircleCI 2.1 を使用して再利用可能な Executor を使用していることに注意してください
+# これにより、ジョブ間で再利用される Docker イメージを定義できます。
+# 詳細については、https://circleci.com/ja/docs/2.0/reusing-config/#再利用可能な-executors-のオーサリング を参照してください。
 
 version: 2.1
 
@@ -535,10 +535,10 @@ jobs:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+      # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をworkspaceに維持します。 
 
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # 絶対パスまたは working_directory からの相対パスでなければなりません。 This is a directory on the container which is 
           # taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
