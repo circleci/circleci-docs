@@ -270,7 +270,7 @@ workflows:
 
 `cron` キーの値は、[有効な crontab エントリ](https://crontab.guru/)である必要があります。
 
-**メモ:** cron のステップ構文 (たとえば、`*/1`、`*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内の範囲エレメントも**サポートされません**。
+**メモ:** cron のステップ構文 (たとえば、`*/1`、`*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内の範囲エレメントも**サポートされません**。 In addition, range elements for days (for example, `Tue-Sat`) is **not** supported. Use comma-separated digits instead.
 
 `filters` キーの値は、特定ブランチ上の実行ルールを定義するマップです。
 
