@@ -578,22 +578,22 @@ workflows:
 
 ## Rerunning a workflow's failed jobs
 
-Workflows を利用すると、ビルドの失敗に迅速に対応できるようになります。 To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
+Workflows を利用すると、ビルドの失敗に迅速に対応できるようになります。 その際、Workflow のなかで**失敗した**ジョブのみを再実行できます。CircleCI で **[Workflows]** アイコンをクリックし、目的の Workflow を選んでジョブごとのステータスを表示してから、**[Rerun]** ボタンをクリックして **[Rerun from failed]** を選びます。
 
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI の Workflows ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 
-This section describes common problems and solutions for Workflows.
+ここでは Workflows に関する一般的な問題とその解決方法について解説しています。
 
 ### Workflow and subsequent jobs do not trigger
 
-If you do not see your workflows triggering, a common cause is a configuration error preventing the workflow from starting. As a result, the workflow does not start any jobs. Navigate to your project's pipelines and click on your workflow name to discern what might be failing.
+Workflows がトリガーされないのは、主に構成エラーによって Workflows の起動が妨げられていることが原因です。 そのため、Workflow がジョブを開始しない事態が発生します。 プロジェクトのパイプラインをナビゲートし、失敗の可能性を識別する Workflow 名をクリックしてください。
 
 ### Rerunning workflows fails
 {:.no_toc}
 
-It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
+(パイプラインの処理中に) Workflow を実行する前にエラーが発生する場合があることがわかっています。 この場合、停止する前は正しく動作していた Workflow でも、再実行すると失敗します。 これを回避するには、プロジェクトのリポジトリに変更をプッシュします。 This will re-run pipeline processing first, and then run the workflow.
 
 ### Workflows waiting for status in GitHub
 {:.no_toc}
