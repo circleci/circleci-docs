@@ -272,22 +272,38 @@ workflows:
 
 **メモ:** cron のステップ構文 (たとえば、`*/1`、`*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内の範囲エレメントも**サポートされません**。 In addition, range elements for days (for example, `Tue-Sat`) is **not** supported. Use comma-separated digits instead.
 
-`filters` キーの値は、特定ブランチ上の実行ルールを定義するマップです。
+Example **invalid** cron range syntax:
 
-詳細については、「CircleCI を設定する」の「[branches ]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)」を参照してください。
+```yaml
+    triggers:
+      - schedule:
+          cron: "5 4 * * 1,3-5,6" # < the range separator with `-` is invalid
+```
 
-このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
+Example **valid** cron range syntax:
+
+```yaml
+    triggers:
+      - schedule:
+          cron: "5 4 * * 1,3,4,5,6" 
+```
+
+The value of the `filters` key must be a map that defines rules for execution on specific branches.
+
+For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
+
+For a full configuration example, see the [Sample Scheduled Workflows configuration](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml).
 
 ## Using contexts and filtering in your workflows
 
-以下のセクションでは、コンテキストとフィルターを使用してジョブの実行を管理する例を示します。
+The following sections provide example for using Contexts and filters to manage job execution.
 
 ### Using job contexts to share environment variables
 {:.no_toc}
 
-以下の例は、コンテキストを使用して環境変数を共有して 4 つの順次ジョブから成るワークフローを示しています。 アプリケーションでこの設定を行う詳細な手順については、[コンテキストに関するドキュメント]({{ site.baseurl }}/2.0/contexts)を参照してください。
+The following example shows a workflow with four sequential jobs that use a context to share environment variables. See the [Contexts]({{ site.baseurl }}/2.0/contexts) document for detailed instructions on this setting in the application.
 
-以下の `config.yml` スニペットは、`org-global` コンテキスト内に定義されたリソースを使用するように順次ジョブ ワークフローを構成した例です。
+The following `config.yml` snippet is an example of a sequential job workflow configured to use the resources defined in the `org-global` context:
 
 ```yaml
 workflows:
@@ -308,16 +324,16 @@ workflows:
             - test2
 ```
 
-これらの環境変数は、ここに示すように、`context` キーにデフォルト名 `org-global` を設定することによって定義されます。 この構成例の `test1` ジョブと `test2` ジョブは、組織の所属ユーザーによって開始された場合、同じ共有環境変数を使用します。 デフォルトでは、組織に対して設定されたコンテキストには、その組織内のすべてのプロジェクトがアクセスできます。
+The environment variables are defined by setting the `context` key as shown to the default name `org-global`. The `test1` and `test2` jobs in this workflows example will use the same shared environment variables when initiated by a user who is part of the organization. By default, all projects in an organization have access to contexts set for that organization.
 
 ### Branch-level job execution
 {:.no_toc}
 
-以下の例は、3 つのブランチ (Dev、Stage、Pre-Prod) 上にあるジョブを使用して構成されたワークフローを示しています。 ワークフローは `jobs` 設定の下にネストされた `branches` キーを無視するため、ジョブレベルのブランチを使用して後でワークフローを追加する場合は、ジョブレベルのブランチを削除し、代わりにそれを `config.yml` のワークフロー セクションで宣言する必要があります。
+The following example shows a workflow configured with jobs on three branches: Dev, Stage, and Pre-Prod. Workflows will ignore `branches` keys nested under `jobs` configuration, so if you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
-![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
-以下の `config.yml` スニペットは、ブランチレベルのジョブ実行を構成するワークフローの例を示しています。
+The following `config.yml` snippet is an example of a workflow configured for branch-level job execution:
 
 ```yaml
 workflows:
@@ -325,9 +341,9 @@ workflows:
   dev_stage_pre-prod:
     jobs:
       - test_dev:
-          filters:  # 正規表現フィルターを使用すると、ブランチ全体が一致する必要があります
+          filters:  # using regex filters requires the entire branch to match
             branches:
-              only:  # 以下の正規表現フィルターに一致するブランチのみが実行されます
+              only:  # only branches matching the below regex filters will run
                 - dev
                 - /user-.*/
       - test_stage:
@@ -340,16 +356,16 @@ workflows:
               only: /pre-prod(?:-.+)?$/
 ```
 
-正規表現の詳細については、この後の「[正規表現を使用してタグとブランチをフィルタリングする](#正規表現を使用してタグとブランチをフィルタリングする)」を参照してください。
+For more information on regular expressions, see the [Using Regular Expressions to Filter Tags And Branches](#using-regular-expressions-to-filter-tags-and-branches) section below.
 
-ワークフロー構成例の全文は、ブランチを含む順次ワークフロー サンプル プロジェクトの[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
+For a full example of workflows, see the [configuration file](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml) for the Sample Sequential Workflow With Branching project.
 
 ### Executing workflows for a git tag
 {:.no_toc}
 
-明示的にタグ フィルターを設定しない限り、CircleCI はタグに関するワークフローを実行しません。 さらに、ジョブが (直接的または間接的に) 他のジョブを必要とする場合は、[正規表現を使用](#正規表現を使用してタグとブランチをフィルタリングする)して、それらのジョブに対応するタグ フィルターを指定する必要があります。 軽量のタグと注釈付きのタグがサポートされています。
+CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must [use regular expressions](#using-regular-expressions-to-filter-tags-and-branches) to specify tag filters for those jobs. Both lightweight and annotated tags are supported.
 
-以下の例では、2 つのキーが定義されています。
+In the example below, two workflows are defined:
 
 - `untagged-build` runs the `build` job for all branches.
 - `tagged-build` runs `build` for all branches **and** all tags starting with `v`.
@@ -368,7 +384,7 @@ workflows:
               only: /^v.*/
 ```
 
-以下の例では、`build-n-deploy` ワークフローで 2 つのジョブが定義されています。
+In the example below, two jobs are defined within the `build-n-deploy` workflow:
 
 - The `build` job runs for all branches and all tags.
 - The `deploy` job runs for no branches and only for tags starting with 'v'.
@@ -379,7 +395,7 @@ workflows:
   build-n-deploy:
     jobs:
       - build:
-          filters:  # `deploy` にタグ フィルターがあり、それが `build` を必要とするため必須
+          filters:  # required since `deploy` has tag filters AND requires `build`
             tags:
               only: /.*/
       - deploy:
@@ -392,7 +408,7 @@ workflows:
               ignore: /.*/
 ```
 
-以下の例では、`build-test-deploy` ワークフローで 3 つのジョブが定義されています。
+In the example below, three jobs are defined with the `build-test-deploy` workflow:
 
 - The `build` job runs for all branches and only tags starting with 'config-test'.
 - The `test` job runs for all branches and only tags starting with 'config-test'.
@@ -404,13 +420,13 @@ workflows:
   build-test-deploy:
     jobs:
       - build:
-          filters:  # `test` にタグ フィルターがあり、それが `build` を必要とするため必須
+          filters:  # required since `test` has tag filters AND requires `build`
             tags:
               only: /^config-test.*/
       - test:
           requires:
             - build
-          filters:  # `deploy` にタグ フィルターがあり、それが `test` を必要とするため必須
+          filters:  # required since `deploy` has tag filters AND requires `test`
             tags:
               only: /^config-test.*/
       - deploy:
