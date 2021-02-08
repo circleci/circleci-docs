@@ -500,9 +500,9 @@ Each workflow has an associated workspace which can be used to transfer files to
 
 ![Workspace のデータ フロー]({{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
+workspace を使用してその実行に固有であり、ダウンストリーム ジョブで必要になるデータを渡します。 複数のブランチでジョブを実行するような workflows では、workspace を利用してデータを共有する必要に迫られることがあります。 Workspace は、コンパイル化されたデータがテスト コンテナによって使用されるプロジェクトでも便利です。
 
-For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
+例えば、Scala プロジェクトは通常、ビルド ジョブ内のコンパイルで CPU に高い負荷がかかります。 対照的に、Scala テスト ジョブは CPU に高い負荷がかからず、コンテナ間で十分に並列処理できます。 Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
 
 A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
 
