@@ -42,7 +42,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-30-alpha
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
