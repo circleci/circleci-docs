@@ -119,6 +119,8 @@ To specify the Docker version, you can set it as a `version` attribute:
 
 CircleCI supports multiple versions of Docker. The following are the available versions:
 
+- `20.10.2`
+- `19.03.14`
 - `19.03.13`
 - `19.03.12`
 - `19.03.8`
