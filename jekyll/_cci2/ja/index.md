@@ -43,7 +43,6 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="{{ site.baseurl }}/2.0/writing-yaml/">YAML の記述</a></li>
       <li><a href="{{ site.baseurl }}/2.0/env-vars/">環境変数の使用</a></li>
       <li><a href="{{ site.baseurl }}/2.0/ssh-access-jobs/">SSH を使用したデバッグ</a></li>
-      <li><a href="/docs/config-builder">Config Builder</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
