@@ -35,8 +35,6 @@ en:
           link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
-        - name: Config Builder
-          link: config-builder
     - name: Concepts
       link: 2.0/concepts/
       children:
@@ -90,8 +88,6 @@ en:
           link: reference-2-1/
         - name: Reusable Config Reference
           link: 2.0/reusing-config/
-        - name: Config Builder
-          link: config-builder
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
@@ -471,9 +467,6 @@ ja:
         - name: FAQ
           i18n_name: FAQ
           link: ja/2.0/faq/
-        - name: Config Builder
-          i18n_name: Config Builder
-          link: config-builder
     - name: Concepts
       i18n_name: コンセプト
       link: ja/2.0/concepts/
@@ -526,9 +519,6 @@ ja:
         - name: Reusable Config Reference
           i18n_name: コンフィグの再利用(Orbs)
           link: ja/2.0/reusing-config/
-        - name: Config Builder
-          i18n_name: Config Builder
-          link: config-builder        
         - name: Writing YAML
           i18n_name: YAMLの記述
           link: ja/2.0/writing-yaml/

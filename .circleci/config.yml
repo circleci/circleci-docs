@@ -81,12 +81,10 @@ workflows:
             branches:
               only: /server\/.*/
       - build_api_docs
-      - build_config_builder
       - build_config_ref
       - build:
           requires:
             - js_build
-            - build_config_builder
             - build_server_pdfs
             - build_api_docs
             - build_config_ref
@@ -120,13 +118,11 @@ workflows:
     jobs:
       - js_build
       - build_api_docs
-      - build_config_builder
       - build_config_ref
       - build:
           requires:
             - js_build
             - build_api_docs
-            - build_config_builder
             - build_config_ref
       - deploy:
           requires:
@@ -174,37 +170,6 @@ jobs:
           command: ./scripts/build_pdfs_asciidoc.sh
       - store_artifacts:
           path: release/tmp/
-
-  build_config_builder: # this job runs the src-config-builder build process and moves the output into jekyll.
-    executor:
-      name: node/default
-      tag: '8.11.1'
-    steps:
-      - checkout
-      - install-shared-assets
-      - *attach_workspace
-      - run:
-          name: "Create landing folder for config-builder-output"
-          command: mkdir -p /tmp/workspace/config-builder/
-      - restore_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
-      - run:
-          name: Install node dependencies
-          command: cd src-config-builder; npm install;
-      - save_cache:
-          key: circleci-docs-{{ .Branch }}-{{ checksum "src-config-builder/package-lock.json"}}
-          paths:
-            - src-config-builder/node_modules
-      - run:
-          name: Build Config Builder
-          command: cd src-config-builder; npm run build ; cd build; ls
-      - run:
-          name: Copy build output to temporary workspace
-          command: cd src-config-builder; mv build/* /tmp/workspace/config-builder
-      - persist_to_workspace:
-          root: *workspace_root
-          paths:
-            - config-builder
 
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
@@ -293,7 +258,7 @@ jobs:
           name: "Manage Data Files We'll Need"
           command: ./scripts/pull-docker-image-tags.sh
       - run:
-          name: Restore Previous Job Assets (Javascript, API docs, config-builder) to Jekyll directory.
+          name: Restore Previous Job Assets (Javascript, API docs) to Jekyll directory.
           command: |
             set -exu
             mkdir -p /tmp/workspace/js
@@ -303,10 +268,6 @@ jobs:
             cp -r /tmp/workspace/api/ jekyll/_api/
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
-
-            mkdir -p /tmp/workspace/config-builder
-            mkdir -p jekyll/config-builder
-            cp -R /tmp/workspace/config-builder/* jekyll/config-builder/
 
             mkdir -p /tmp/workspace/crg
             mkdir -p jekyll/reference-2-1
