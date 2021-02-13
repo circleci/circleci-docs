@@ -4,10 +4,14 @@
       appId:     {{ site.algolia.application_id | jsonify }},
       apiKey:    {{ site.algolia.api_key | jsonify }},
       indexName: {{ site.algolia.index_name | jsonify }},
-      indexNameOrbs: {{ site.algolia.index_name_orbs | jsonify }}
+      indexNameOrbs: {{ site.algolia.index_name_orbs | jsonify }},
+      indexNameCimgs: {{ site.algolia.index_name_cimgs | jsonify }}
     },
     page: {
       lang: {{ page.lang | jsonify }}
+    },
+    url: {
+      devhub: {{ site.devhub_base_url | jsonify }}
     }
   }
 </script>

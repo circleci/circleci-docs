@@ -34,7 +34,7 @@ There are two key use cases CircleCI aims to meet with the runner:
 
 == Runner operation
 
-Once CircleCI runner is installed, the runner polls circleci.com for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
+Once CircleCI runner is installed, the runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
 
 The runner consists of two components: the launch agent and the task agent.
 
@@ -49,8 +49,8 @@ There are a few limitations you should be aware of when using CircleCI runner:
 
 Currently, the runner officially supports the following platforms:
 
-* Intel + Ubuntu
-* Arm64 + Ubuntu
+* x86_64 + Ubuntu 18.04+
+* Arm64 + Ubuntu 18.04+
 * Intel + macOS
 
 Additional platforms have been tested but are not yet officially supported by the runner. For more information on platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the <<runner-installation#,Runner Installation>> page. Given the active development of CircleCI Runner, please link:https://circleci.com/contact/[contact us] if you have questions around support for your use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback] and contribute to our link:https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help prioritize development efforts from our team!
@@ -84,7 +84,7 @@ In order to use CircleCI runner, you must:
 After setting up the runner, you will need to reference it on a job by setting some fields in a special way in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your runner are:
 
 * `machine: true`
-* `resource_class: your-namespace/your-resource` 
+* `resource_class: your-namespace/your-resource`
 
 Here is a simple example of how you could set up a job.
 

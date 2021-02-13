@@ -297,6 +297,8 @@ jobs:
       FOO: bar
 ```
 
+**Note: Integers longer than 6 digits will be converted to an exponential number. To avoid this, store them as a string instead (i.e. "1234567").** 
+
 ## Setting an environment variable in a context
 
 1. In the CircleCI application, go to your organization settings by clicking the link in the left hand navigation.
