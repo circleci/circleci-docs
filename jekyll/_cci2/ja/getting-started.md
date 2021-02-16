@@ -35,7 +35,7 @@ Begin by creating a new repository on GitHub. You may skip this section if you i
 If you have not yet, create an account on CircleCI by navigating to [the signup page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 
 1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
-2. If you are part of any organizations, you will need to select the organization you wish to work under in order to setup your repository with CircleCI.
+2. If you created your new repository under an organization you will need to select the organization name when you login to CircleCI.
 3. Once on the Project page, find the project you are using, in our case `hello-world`, and click **Set Up Project**.
 
 4. On the following screen, choose a language from the dropdown to get a pre-populated config.yml file with suggested best-practices for your project. For this example, because we have an empty repository, we will use the `Hello
@@ -45,11 +45,7 @@ World` configuration example at the bottom of the list.
   
     **Note:** Based on which language you choose you can view related documentation in the sidebar on the right of the screen
 
-5. Click **Start Building** and follow the prompt to add your config to a new branch and start your first pipeline. **Note:** You can also manually add a `config.yml` to your project root under a `.circleci` folder and push this to your VCS provider.
-    
-    ![Automatic Commit]( {{ site.baseurl }}/assets/img/docs/getting-started--auto-commit.png){:.img--bordered}
-
-6. You will be taken to the Pipelines page where you can view your newly running build.
+5. Click **Commit and Run**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circle-ci-setup`. If you are happy with this configuration you can merge it into your main branch later, or continue to make changes.
 
 ## Digging into your first pipeline
 
