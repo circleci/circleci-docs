@@ -45,7 +45,7 @@ World` configuration example at the bottom of the list.
   
     **Note:** Based on which language you choose you can view related documentation in the sidebar on the right of the screen
 
-5. Click **Commit and Run**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circle-ci-setup`. If you are happy with this configuration you can merge it into your main branch later, or continue to make changes.
+5. Click **Commit and Run**. This will create a file `.circleci/config.yml` at the root of your repository on a new branch called `circle-ci-setup`. この構成に満足したら、後でメインブランチにそれをマージするか、引き続き変更を行うことができます。
 
 ## Digging into your first pipeline
 
