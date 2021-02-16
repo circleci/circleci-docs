@@ -39,7 +39,6 @@ def iterate_docs():
 def print_docs_table():
     for doc in updated_docs_metadata:
         print ("{:<40} {:<20}".format(doc["file_name"], doc["last_updated"].rstrip()))
-    pass
 
 ## --
 
