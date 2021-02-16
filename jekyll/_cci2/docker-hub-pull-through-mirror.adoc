@@ -145,6 +145,9 @@ Follow the steps below on your services machine.
 +
 NOTE: Replace `http://192.0.2.1.or.https.your-mirror.example.com` in `DOCKER_MIRROR_HOSTNAME` variable with the URL of your pull through cache registry accordingly.
 +
+WARNING: This customization is only available in 2.19.0 version and later.
+
++
 [source,bash]
 ----
 export JAVA_OPTS='-cp /resources:/service/app.jar'

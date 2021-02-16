@@ -144,6 +144,8 @@ en:
           link: 2.0/configuration-reference/
         - name: Reusing Configuration
           link: 2.0/reusing-config/
+        - name: Using the CircleCI CLI
+          link: 2.0/local-cli/
     - name: Orbs
       link: 2.0/orb-intro/
       children:
@@ -588,6 +590,9 @@ ja:
         - name: Reusing Configuration
           link: ja/2.0/reusing-config/
           i18n_name: 設定ファイル再利用(Orbs)
+        - name: Using the CircleCI CLI
+          i18n_name: CircleCI CLIの使用
+          link: ja/2.0/local-cli/
     - name: Orbs
       link: ja/2.0/orb-intro/
       i18n_name: Orbs

@@ -108,7 +108,13 @@ jobs:
 
 ### AWS ECR
 
-CircleCI now supports pulling private images from Amazon's ECR service. You can start using private images from ECR in one of two ways:
+CircleCI now supports pulling private images from Amazon's ECR service.
+
+<div class="alert alert-info" role="alert">
+<b>Tip:</b> You can pull your private images from ECR repositories in any regions. However, for the best experience, we strongly recommend to make a copy of your image in <code class="highlighter-rouge">us-east-1</code> region, and specify that <code class="highlighter-rouge">us-east-1</code> image for Docker executor. Our job execution infrastructure is in <code class="highlighter-rouge">us-east-1</code> region so using <code class="highlighter-rouge">us-east-1</code> images makes the <code class="highlighter-rouge"> Spin Up Environement</code> step faster.
+</div>
+
+You can start using private images from ECR in one of two ways:
 
 1. Set your AWS credentials using standard CircleCI private environment variables.
 2. Specify your AWS credentials in `.circleci/config.yml` using `aws_auth`:

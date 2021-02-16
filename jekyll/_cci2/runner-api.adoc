@@ -60,7 +60,7 @@ This token is the same one used in the launch-agent setup.
 
 === GET /api/v2/runner
 
-Lists the available runnerss based on the specified parameters. It is mandatory to use one parameter to filter results.
+Lists the available runners based on the specified parameters. It is mandatory to use one parameter to filter results.
 
 ==== Authentication Methods
 

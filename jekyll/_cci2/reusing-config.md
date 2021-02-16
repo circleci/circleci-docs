@@ -32,27 +32,28 @@ In the following example, a command named `greeting` is designed with a single p
 ```yaml
 version: 2.1
 commands: # a reusable command with parameters
-   greeting:
-      parameters:
-         to:
-           default: "world"
-           type: string
-      steps:
-         - run: echo "Hello <<parameters.to>>"
+  greeting:
+    parameters:
+      to:
+        default: "world"
+        type: string
+    steps:
+      - run: echo "Hello <<parameters.to>>"
 jobs:
-   my-job:
-      docker:
-         - image: cimg/base:stable
-           auth:
-             username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      steps:
-         - greeting:
-            to: "My-Name"
+  my-job:
+    docker:
+      - image: cimg/base:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - greeting:
+          to: "My-Name"
 workflows:
-   my-workflow:
-      jobs:
-         - my-job        
+  my-workflow:
+    jobs:
+      - my-job        
+               
          
 ```
 
