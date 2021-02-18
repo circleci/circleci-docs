@@ -41,8 +41,15 @@ The name of your repository is not critical, but we recommend something similar 
     When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
+
+To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb
+```
+
+To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
+```bash
+circleci orb init /path/to/myProject-orb --private
 ```
 The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
@@ -317,7 +324,6 @@ The list of categories can also be obtained by running the `circleci orb list-ca
 
 Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html).
 
-
 #### Remove an orb from a category
 
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
@@ -329,3 +335,19 @@ Remove an orb from a category by running `circleci orb remove-from-category <nam
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
 
 To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
+
+### Listing your orbs
+
+List your available orbs using the CLI:
+
+To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+```sh
+circleci orb list <my-namespace>
+```
+
+To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+```sh
+circleci orb list <my-namespace> --private
+```
+
+For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
