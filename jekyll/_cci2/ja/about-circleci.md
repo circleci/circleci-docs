@@ -36,7 +36,7 @@ CircleCI は、AWS CodeDeploy、AWS EC2 Container Service (ECS)、AWS S3、Googl
 
 ## What is continuous integration?
 
-**継続的インテグレーション**は、コードを共有リポジトリの `master` ブランチに常時頻繁に統合することを奨励する開発手法です。 それぞれの機能を個別にビルドして、開発サイクルの最後に統合するのではなく、各開発者のコードが 1 日に何度も共有リポジトリに統合されます。
+**Continuous integration** is a practice that encourages developers to integrate their code into a `main` branch of a shared repository early and often. それぞれの機能を個別にビルドして、開発サイクルの最後に統合するのではなく、各開発者のコードが 1 日に何度も共有リポジトリに統合されます。
 
 **継続的インテグレーション**は、デジタル トランスフォーメーションの重要なステップです。
 
