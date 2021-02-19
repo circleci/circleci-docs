@@ -47,7 +47,7 @@ def iterate_docs():
         fpath         = Path(file)
         file_name     = str(fpath.stem)
         file_dir      = str(fpath.parent.name)
-        name          = file_dir + "/" + file_name + str(fpath.suffix)
+        name          = file_name + str(fpath.suffix)
         doc_data      = create_document_metadata(name, relative_date, epoch_date, file, file_dir)
 
         updated_docs_metadata.append(doc_data)
