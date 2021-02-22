@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "概要"
+title: "About CircleCI"
 short-title: "概要"
 description: "CircleCI 2.0 入門ガイド"
 categories:
