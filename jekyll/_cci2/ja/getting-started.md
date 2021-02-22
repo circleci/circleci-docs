@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "入門ガイド"
-short-title: "入門ガイド"
+title: "Your First Green Build"
+short-title: "Your First Green Build"
 description: "CircleCI を使用して初めてのビルドを成功させるためのチュートリアル"
 categories:
   - getting-started
