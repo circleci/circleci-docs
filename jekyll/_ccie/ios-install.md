@@ -120,4 +120,4 @@ user=> (circle.http.api.admin-commands/enable-osx-beta "example-org")
 {:name "example-org" :osx-builds-enabled? true}
 ```
 
-First, enable building on OSX in the project settings under the Experimental Settings tab for your iOS project. Next, ensure that you have have a shared build scheme in Xcode. We have documented how to do this here: [https://circleci.com/docs/ios-builds-on-os-x/](https://circleci.com/docs/ios-builds-on-os-x/). Finally, you just need to push a new commit, and the build will run a on a Mac running OSX.
+First, enable building on OSX in the project settings under the Experimental Settings tab for your iOS project. Next, ensure that you have have a shared build scheme in Xcode. Finally, you just need to push a new commit, and the build will run a on a Mac running OSX.

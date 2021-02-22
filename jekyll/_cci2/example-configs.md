@@ -12,7 +12,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 * TOC
 {:toc}
 
-## Example CircleCI Files and Public Repos
+## Example CircleCI files and public repos
 
 Example Name | Description | Link
 ----|----------|--------
@@ -29,7 +29,7 @@ circleci image-builder | Uses Docker for building container images. | [image-bui
 circleci-demo-docker | This is an example application showcasing how to build Docker images in CircleCI 2.0. | [.circleci/config.yml](https://github.com/CircleCI-Public/circleci-demo-docker/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## Open Source Projects by Feature
+## Open source projects by feature
 
 The following projects provide examples of using features and functionality of CircleCI configuration syntax:
 
@@ -46,7 +46,7 @@ Build and test on multiple platforms with tagged releases | **Crystal** is a pro
 Tagged and scheduled workflow jobs | Node.js idiomatic client for **Cloud Pub/Sub**. | [nodejs-pubsub/.circleci/config.yml](https://github.com/googleapis/nodejs-pubsub/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## Open Source Projects by Language
+## Open source projects by language
 
 The following projects provide examples for particular programming languages, testing mechanisms, and deployment targets:
 
@@ -54,7 +54,6 @@ Example Description | Project | config.yml link
 ------|-----------|------------
 Bazel build and testing with `xvfb` | **Angular** is a development platform for building mobile and desktop web applications using Typescript/JavaScript and other languages. | [angular/.circleci/config.yml](https://github.com/angular/angular/blob/master/.circleci/config.yml)
 Salesforce DX | This repository shows one way you can successfully set up **Salesforce DX** with CircleCI. | [sfdx-circleci/.circleci/config.yml](https://github.com/forcedotcom/sfdx-circleci/blob/master/.circleci/config.yml)
-Golang Docker and VM dependencies/lint/build/test with Kubernetes and codecov | **Istio** in an open platform to connect, manage, and secure microservices. | [istio/.circleci/config.yml](https://github.com/istio/istio/blob/master/.circleci/config.yml)
 Golang build with `junit` and Kubernetes tests for prod and master job workflow | The **Azure Container Service Engine** (acs-engine) generates ARM (Azure Resource Manager) templates for Docker enabled clusters on Microsoft Azure with your choice of DC/OS, Kubernetes, Swarm Mode, or Swarm orchestrators. | [acs-engine/.circleci/config.yml](https://github.com/Azure/acs-engine/blob/master/.circleci/config.yml)
 Go and Node build, package, and deploy run | **Ignition** is a landing page for developers to self-service their way onto your Pivotal Cloud Foundry (PCF) deployment(s). | [ignition/.circleci/config.yml](https://github.com/pivotalservices/ignition/blob/master/.circleci/config.yml)
 Java build and publish with `sbt` | **Scio** is a Scala API for Apache Beam and Google Cloud Dataflow inspired by Apache Spark and Scalding. | [scio/.circleci/config.yml](https://github.com/spotify/scio/blob/master/.circleci/config.yml)
@@ -67,6 +66,6 @@ Python build with `apt` for concurrent job run with webhooks notification | **Su
 Scala and `sbt` build, test, and release with three workflows | **Arweave4s** is a lightweight modular HTTP client for the Arweave blockchain. | [arweave4s/.circleci/config.yml](https://github.com/toknapp/arweave4s/blob/master/.circleci/config.yml)
 {: class="table table-striped"}
 
-## See Also
+## See also
 
 Refer to [Tutorials and Sample Apps]({{ site.baseurl }}/2.0/tutorials/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in 11 different languages.

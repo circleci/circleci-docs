@@ -30,7 +30,8 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 ## Caching
 
 Yarn packages can be cached to improve CI build times.
-Here's an example:
+
+An example for Yarn 2:
 
 {% raw %}
 ```yaml
@@ -51,6 +52,27 @@ Here's an example:
 ```
 {% endraw %}
 
-## See Also
+An example for Yarn 1.x:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
+
+## See also
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

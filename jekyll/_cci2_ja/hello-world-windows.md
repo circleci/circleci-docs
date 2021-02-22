@@ -19,7 +19,7 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 作業を行う前に、以下を準備しておく必要があります。
 
 * CircleCI の[アカウント](https://circleci.com/ja/signup/)。
-* Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ｊａ／pricing/usage/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
+* Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ja/pricing/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
 * クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。
 
 # Windows Executor の概要
@@ -153,7 +153,7 @@ orbs:
   win: circleci/windows@2.2.0
 ```
 
-次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/orbs/orb/circleci/windows) のみを使用します。
+次に、ビルドで使用する Orb を宣言します。 最初は [Windows Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) のみを使用します。
 
 ```yaml
 jobs:

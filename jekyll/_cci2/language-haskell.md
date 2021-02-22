@@ -28,7 +28,7 @@ In the project you will find a commented CircleCI configuration file <a
 href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
 
 
-## Sample Configuration
+## Sample configuration
 
 {% raw %}
 
@@ -73,7 +73,7 @@ jobs:
 
 {% endraw %}
 
-## Config Walkthrough
+## Config walkthrough
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -173,7 +173,7 @@ Finally, we can take the built executable and store it as an artifact.
 
 Excellent! You are now setup on CircleCI with a Haskell app.
 
-## Common Trouble Shooting
+## Common troubleshooting
 
 The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the `stack test` command 
 as seen below (Note: this will reduce test execution to one core, decreasing memory usage as well, but may also increase your test execution time).
@@ -184,7 +184,7 @@ as seen below (Note: this will reduce test execution to one core, decreasing mem
           command: stack --no-terminal test -j1
 ```
 
-## See Also
+## See also
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

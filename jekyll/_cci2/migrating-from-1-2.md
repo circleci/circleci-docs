@@ -25,12 +25,12 @@ CircleCI requires that you create a [`.circleci/config.yml`]({{ site.baseurl }}/
 
 If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys.
 
-### Using the 1.0 to 2.0 `config-translation` Endpoint
+### Using the 1.0 to 2.0 `config-translation` endpoint
 {:.no_toc}
 
 The `config-translation` endpoint can help you quickly get started with converting a 1.0 config to 2.0. For more, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
 
-## Steps to Configure Required Keys
+## Steps to configure required keys
 
 1. Copy your existing `circle.yml` file into a new directory called `.circleci` at the root of your project repository.
 
@@ -98,7 +98,7 @@ The `config-translation` endpoint can help you quickly get started with converti
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
-## Environment Variables
+## Environment variables
 
 In CircleCI 2.0, all defined environment variables are treated literally.
 It is possible to interpolate variables within a command
@@ -107,7 +107,7 @@ by setting it for the current shell.
 For more information,
 refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
-## Steps to Configure Workflows
+## Steps to configure workflows
 
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
@@ -150,7 +150,7 @@ To increase the speed of your software development through faster feedback, shor
      ```     
 6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
-## Search and Replace Deprecated 2.0 Keys
+## Search and replace deprecated 2.0 keys
 
 - If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:
 

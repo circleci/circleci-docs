@@ -15,7 +15,7 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 * TOC
 {:toc}
 
-## Quickstart: Demo JavaScript Node.js Reference Project
+## Quickstart: demo JavaScript Node.js reference project
 
 We maintain a reference JavaScript project to show how to build a React.js app on CircleCI with `version: 2.1` configuration:
 
@@ -24,7 +24,7 @@ We maintain a reference JavaScript project to show how to build a React.js app o
 
 In the project you will find a CircleCI configuration file [`.circleci/config.yml`](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app/blob/master/.circleci/config.yml). This file shows best practice for using version 2.1 config with Node projects.
 
-## Build the Demo JavaScript Node Project Yourself
+## Build the demo JavaScript Node project yourself
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -33,7 +33,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 
-## Sample Configuration
+## Sample configuration
 
 Below is the `.circleci/config.yml` file in the demo project.
 
@@ -58,7 +58,7 @@ workflows:
 {% endraw %}
 
   
-## Config Walkthrough
+## Config walkthrough
 
 Using the [2.1 Node orb](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test) sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
  
@@ -68,7 +68,7 @@ Matrix jobs are a simple way to test your Node app on various node environments.
 
 Success! You just set up a Node.js app to build on CircleCI with version: 2.1 configuration. Check out [our project’s pipeline page](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-javascript-react-app) to see how this looks when building on CircleCI.
 
-## See Also
+## See also
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

@@ -12,7 +12,7 @@ version:
 
 This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).  
 
-## Echo Hello World on Linux 
+## Echo hello world on Linux
 
 This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/2.0/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
 
@@ -48,7 +48,7 @@ CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [cont
 
 Refer to the [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javascript/) for a sample project.
 
-## Hello World for Android
+## Hello world for Android
 
 Using the basic ideas from the Linux example above, you can add a job that uses the `docker` executor with a pre-built Android image in the same `config.yml` file as follows:
 
@@ -64,7 +64,7 @@ jobs:
 
 See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for details and a sample project.
 
-## Hello World for macOS
+## Hello world for macOS
 
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
@@ -79,7 +79,7 @@ jobs:
 
 Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
 
-## Hello World for Windows
+## Hello world for Windows
 
 Using the basics from the Linux, Android, and macOS examples above, you can add a job that uses the windows executor (Windows Server 2019) as follows. Notice the Cloud version of this requires the use of `version:2.1` config, and orbs:
 
@@ -119,15 +119,15 @@ jobs:
 
 **Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows). 
 
-### More About Using and Authoring Orbs
+### More about using and authoring orbs
 
 Orbs are a great way to simplify your config or re-use config across your projects, by referencing packages of config in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-## Following / Unfollowing Projects
+## Following / unfollowing projects
 
 You automatically *follow* any new project that you push to, subscribing you to email notifications and adding the project to your dashboard. You can also manually follow or stop following a project by selecting your organization in the CircleCI application (as detailed below), clicking "Projects" in the sidebar, and then clicking the button next to the project you want to follow or stop following.
 
-## Org Switching
+## Org switching
 
 In the top left, you will find the Org switcher.
 
@@ -140,7 +140,7 @@ In the top left, you will find the Org switcher.
 
 If you do not see your project and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
-## Next Steps
+## Next steps
 
 - See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
 

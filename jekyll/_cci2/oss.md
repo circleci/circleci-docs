@@ -21,6 +21,9 @@ To support the open source community, organizations on Github or Bitbucket will 
 **Note:**
 If you are building an open source project on macOS, contact billing@circleci.com to enable these additional containers.
 
+**Note:**
+There is a concurrency limit of 4 containers for Docker and Machine executors whereas macOS executors are limited to 1 container. Additional containers will be queued.
+
 ## Security
 
 While open source can be a liberating practice, take care not to liberate sensitive information.
@@ -29,18 +32,18 @@ While open source can be a liberating practice, take care not to liberate sensit
 - Environment variables set in the CircleCI application are hidden from the public, these variables will not be shared in [forked PRs](#pass-secrets-to-builds-from-forked-pull-requests)
 unless explicitly enabled.
 
-## Features and Settings for Open Source Projects
+## Features and settings for open source projects
 
 The following features and settings are especially useful for open source projects.
 
-### Private Environment Variables
+### Private environment variables
 {:.no_toc}
 
 Many projects require API tokens, SSH keys, or passwords. Private environment variables allow you to safely store secrets, even if your project is public.
 
 For more information, see the [Environment Variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project) document.
 
-### Only Build Pull Requests
+### Only build pull requests
 {:.no_toc}
 
 By default, CircleCI builds every commit from every branch. This behavior may be too aggressive for open source projects, which often have significantly more commits than private projects.
@@ -49,7 +52,7 @@ To change this setting, go to the **Project Settings>Advanced** of your project 
 
 **Note:** Even if this option is enabled, CircleCI will still build all commits from your project's default branch and tags
 
-### Build Pull Requests From Forked Repositories
+### Build pull requests from forked repositories
 {:.no_toc}
 
 Many open source projects accept PRs from forked repositories. Building these PRs is an effective way to catch bugs before manually reviewing changes.
@@ -60,7 +63,7 @@ By default, CircleCI does not build PRs from forked repositories. To change this
 
 **Note:** If a user submits a pull request to your repository from a fork, but no pipeline is triggered, then the user most likely is following a project fork on their personal account rather than the project itself of CircleCi, causing the jobs to trigger under the user's personal account and not the organization account. To resolve this issue, have the user unfollow their fork of the project on CircleCI and instead follow the source project. This will trigger their jobs to run under the organization when they submit pull requests.
 
-### Pass Secrets to Builds From Forked Pull Requests
+### Pass secrets to builds from forked pull requests
 {:.no_toc}
 
 Running an unrestricted build in a parent repository can be dangerous. Projects often contain sensitive information, and this information is freely available to anyone who can push code that triggers a build.
@@ -94,7 +97,7 @@ repository-id of the originator of the fork PR to identify the cache.
 Currently there is no pre-population of caches because this optimization hasn't
 made it to the top of the priority list yet.
 
-## Example Open Source Projects 
+## Example open source projects
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
@@ -112,7 +115,7 @@ Following are a few examples of projects (big and small) that build on CircleCI:
 - **[Fastlane](https://github.com/fastlane/fastlane)** - A build automatically tool for Android and iOS.
 - **[Yarn](https://github.com/yarnpkg/yarn)** - The [npm replacement](https://circleci.com/blog/why-are-developers-moving-to-yarn/).
 
-## See Also
+## See also
 {:.no_toc}
 
 Refer to the [Examples]({{ site.baseurl }}/2.0/example-configs/) document for more public and open source project configuration links organized by CircleCI features and by programming language.

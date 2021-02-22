@@ -16,7 +16,7 @@ CircleCI は、数十～数百のビルドマシンから成るクラスタを�
 
 トライアルを正常にインストールするには、以下の要件を満たす必要があります。
 
-- [サインアップ](https://circleci.jp/enterprise-trial-install/)して、CircleCI の評価版ライセンス ファイルを取得する。
+- [サインアップ](https://circleci.com/ja/enterprise-trial-install/)して、CircleCI の評価版ライセンス ファイルを取得する。
 - [AWS アカウント](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=header_signup&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)を作成する。
 - バージョン管理に **GitHub.com または GitHub Enterprise** を使用する。
 - CircleCI と GitHub を実行するマシンがネットワーク上で相互にアクセスできる。

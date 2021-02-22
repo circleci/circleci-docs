@@ -6,7 +6,7 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 ## 1. Local Development with Docker (recommended)
 
 1. Install Docker for your platform: <https://docs.docker.com/engine/installation/>
-1. Clone the CircleCI docs repo: `git clone --recurse-submodules https://github.com/circleci/circleci-docs.git`   
+1. Clone the CircleCI docs repo: `git clone --recurse-submodules https://github.com/circleci/circleci-docs.git`
 _(If you already cloned the project and forgot `--recurse-submodules`, run `git submodule update --init`)_
 1. Run `npm install` to fetch dependencies
 1. Run `npm run webpack-dev` to create needed js assets
@@ -142,7 +142,7 @@ Our API is handled in two possible places currently:
   accessible via the CircleCI landing page > Developers Dropdown > "Api"
 - [New Version using Slate](https://circleci.com/docs/api/v1/#section=reference) -
   A newer API guide, built with [Slate](https://github.com/lord/slate)
-  
+
 **What is Slate?**
 
 Slate is a tool for generating API documentation. Slate works by having a user
@@ -179,4 +179,9 @@ The following is an example workflow to contribute to a document (from Github, n
 - If you want to see your changes live before committing them, `cd` into
   `src-api` and run `bundle install` followed by `bundle exec middleman server`.
 - You may need a specific version of Ruby for bundler to work (2.3.1).
- 
+
+## Preview Deploy
+
+If your branch ends with `-preview` and passed all tests, docs pages are automatically deployed to our preview site. The link to the preview site will appear at the end `deploy-preview` job in CircleCI.
+
+Note that preview deploys will be automatically cleaned up after certain time so that you don't have to do it manually.

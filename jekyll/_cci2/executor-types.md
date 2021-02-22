@@ -30,7 +30,7 @@ An *executor type* defines the underlying technology or environment in which to 
 
 It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
 
-- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient. 
+- Jobs that require Docker images (`docker`) may use an image for Node.js or Python. The [pre-built CircleCI Docker image]({{ site.baseurl }}/2.0/circleci-images/) from the CircleCI Dockerhub will help you get started quickly without learning all about Docker. These images are not a full operating system, so they will generally make building your software more efficient.
 - Jobs that require a complete Linux virtual machine (VM) image (`machine`) may use an Ubuntu version such as 16.04.
 - Jobs that require a macOS VM image (`macos`) may use an Xcode version such as 10.0.0.
 
@@ -49,18 +49,22 @@ jobs:
 
 In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an offical [Docker image](https://hub.docker.com/_/docker/).
 
-### Docker Image Best Practices
+### Docker image best practices
 {:.no_toc}
 
 - If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
 
-- Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago. 
+- CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. That’s why we’re encouraging you and your team to [add Docker Hub authentication]({{ site.baseurl }}/2.0/private-images/) to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
 
-- If you experience increases in your run times due to installing additional tools during execution, it is best practice to use the [Building Custom Docker Images Documentation]({{ site.baseurl }}/2.0/custom-images/) to create a custom image with tools that are pre-loaded in the container to meet the job requirements. 
+- Avoid using mutable tags like `latest` or `1` as the image version in your `config.yml file`. It is best practice to use precise image versions or digests, like `redis:3.2.7` or `redis@sha256:95f0c9434f37db0a4f...` as shown in the examples. Mutable tags often lead to unexpected changes in your job environment.  CircleCI cannot guarantee that mutable tags will return an up-to-date version of an image. You could specify `alpine:latest` and actually get a stale cache from a month ago.
+
+- If you experience increases in your run times due to installing additional tools during execution, it is best practice to use the [Building Custom Docker Images Documentation]({{ site.baseurl }}/2.0/custom-images/) to create a custom image with tools that are pre-loaded in the container to meet the job requirements.
+
+- When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
 
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
-### Using Multiple Docker Images
+### Using multiple Docker images
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```yaml
@@ -69,7 +73,7 @@ jobs:
     docker:
     # Primary container image where all steps run.
      - image: buildpack-deps:trusty
-    # Secondary container image on common network. 
+    # Secondary container image on common network.
      - image: mongo:2.6.8-jessie
        command: [mongod, --smallfiles]
 
@@ -82,21 +86,21 @@ jobs:
 ```
 Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
-#### Public Convenience Images on Docker Hub
+#### Public convenience images on Docker Hub
 {:.no_toc}
   - `name:tag`
     - `circleci/node:7.10-jessie-browsers`
   - `name@digest`
     - `redis@sha256:34057dd7e135ca41...`
 
-#### Public Images on Docker Hub
+#### Public images on Docker Hub
 {:.no_toc}
   - `name:tag`
     - `alpine:3.4`
   - `name@digest`
     - `redis@sha256:54057dd7e125ca41...`
 
-#### Public Docker Registries
+#### Public Docker registries
 {:.no_toc}
   - `image_full_url:tag`
     - `gcr.io/google-containers/busybox:1.24`
@@ -127,9 +131,9 @@ jobs:
       - run: ./run.sh
 ```
 
-### Docker Benefits and Limitations
+### Docker benefits and limitations
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via [Remote Docker][building-docker-images]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
- 
+
 - Your application is self-sufficient
 - Your application requires additional services to be tested
 - Your application is distributed as a Docker Image (requires using [Remote Docker][building-docker-images])
@@ -164,7 +168,7 @@ Capability | `docker` | `machine`
 For more information on `machine`, see the next section below.
 
 
-### Available Docker Resource Classes
+### Available Docker resource classes
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
 job. In Docker, the following resources classes are available:
@@ -192,7 +196,7 @@ jobs:
     #  ...  other config
 ```
 
-## Using Machine
+## Using machine
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
@@ -219,7 +223,7 @@ jobs:
 
 You can view the list of available images [here]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images).
 
-The following example uses an image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
+The following example uses an image and enables [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) (DLC) which is useful when you are building Docker images during your job or Workflow. **Note:** Check our [pricing page](https://circleci.com/pricing/) to see which plans include the use of Docker Layer Caching.
 
 {:.tab.machineblock.Server}
 ```yaml
@@ -246,16 +250,16 @@ jobs:
   build:
     macos:
       xcode: 11.3.0
-      
+
     steps:
       # Commands will execute in macOS container
       # with Xcode 11.3 installed
       - run: xcodebuild -version
 ```
 
-## Using the Windows Executor
+## Using the Windows executor
 
-Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using: 
+Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using:
 * CircleCI Cloud – config version 2.1.
 * Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.
 
@@ -306,7 +310,7 @@ version: 2.1
 jobs:
   build:
     machine:
-      resource_class: gpu.nvidia.small 
+      resource_class: gpu.nvidia.small
       image: ubuntu-1604-cuda-10.1:201909-23
     steps:
       - run: nvidia-smi
@@ -328,6 +332,6 @@ jobs:
 
 Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See [Running GPU Executors in Server][server-gpu].
 
-## See Also
+## See also
 
 [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)

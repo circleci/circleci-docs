@@ -55,7 +55,7 @@ For a complete reference of the API, see the [CircleCI API Documentation](https:
 - It is currently not possible to trigger a single job if you are using CircleCI 2.1 and Workflows
 - It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API: a [singular workflow can be re-run](https://circleci.com/docs/api/v2/#rerun-a-workflow), or you may [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) which will run its subsequent workflows. 
 
-## Conditionally Running Jobs With the API
+## Conditionally running jobs with the API
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 
@@ -105,6 +105,6 @@ Notes on the above example:
 - Using the `deploy` step in the build job is important to prevent triggering N builds, where N is your parallelism value - `deploy` is a special step that will only run on one container, even when the job parallelism is set greater that one.
 - We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
 
-## See Also
+## See also
 
 [Triggers]({{ site.baseurl }}/2.0/triggers/)

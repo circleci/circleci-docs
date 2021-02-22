@@ -178,7 +178,7 @@ LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を�
 ```yaml
 # このコードは、MIT ライセンスに基づいて CircleCI からユーザーに使用許諾されています。 詳細については、
 
-# https://circleci.com/developer/orbs/licensing をご覧ください。
+# https://circleci.com/developer/ja/orbs/licensing をご覧ください。
 
 version: 2.1 description: > Lambda Tunnel とのインタラクションをカプセル化します
 
@@ -292,7 +292,7 @@ workflows:
 ```
 {% endraw %}
 
-Sauce Labs Orb の詳細と、この Orb をワークフローに使用する方法については、[CircleCI Orb レジストリ](https://circleci.com/developer/orbs)にある [Sauce Labs Orb のページ](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect)を参照してください。
+Sauce Labs Orb の詳細と、この Orb をワークフローに使用する方法については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にある [Sauce Labs Orb のページ](https://circleci.com/developer/ja/orbs/orb/saucelabs/sauce-connect)を参照してください。
 
 ## BrowserStack と Appium
 
@@ -313,7 +313,7 @@ JavaScript エンドツーエンド テストに使用できるブラウザー �
           - cypress/run
     
 
-設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/orbs/orb/cypress-io/cypress)を参照してください。
+設定ファイルのワークフローに使用できる Cypress Orb の例は他にもあります。 これらの Orb の詳細については、[CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にある[Cypress Orbs のページ](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)を参照してください。
 
 ## ブラウザー テストのデバッグ
 

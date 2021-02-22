@@ -9,7 +9,7 @@ order: 2
 
 CircleCI supports many advanced configuration options and features, check out the snippets below to get an idea of what is possible, and get tips for optimizing your advanced configurations.
 
-## Check Your Scripts
+## Check your scripts
 
 Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
 
@@ -48,7 +48,7 @@ jobs:
 
 For more information on using shell scripts in your config, see the [Using Shell Scripts]({{site.baseurl}}/2.0/using-shell-scripts/) guide.
 
-## Browser Testing
+## Browser testing
 
 Use Selenium to manage in-browser tesing:
 
@@ -76,7 +76,7 @@ jobs:
 
 For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/2.0/browser-testing/) guide.
 
-## Database Testing
+## Database testing
 
 Use a service container to run database testing:
 
@@ -121,7 +121,7 @@ jobs:
 
 For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/2.0/databases/) guide.
 
-## Run Docker Commands to Build Your Docker Images
+## Run Docker commands to build your Docker images
 
 Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
 
@@ -152,7 +152,7 @@ jobs:
 
 For more information on building Docker images, see the [Building Docker Images]({{site.baseurl}}/2.0/building-docker-images/) guide.
 
-## Tips for Advanced Configuration
+## Tips for advanced configuration
 
 Here are a few tips for optimization and maintaining a clear configuration file.
 
@@ -162,7 +162,7 @@ Here are a few tips for optimization and maintaining a clear configuration file.
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
 
 
-## See Also
+## See also
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)
 [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/)

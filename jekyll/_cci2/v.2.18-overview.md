@@ -8,23 +8,23 @@ order: 1
 ---
 This document provides a summary of features and product notes for the release of CircleCI Server v2.18. For a full list of changes, including patch releases, refer to the [changelog](https://circleci.com/server/changelog). For a step by step guide to **upgrading** your CircleCI Server installation from v2.17.x to v2.18, see our [upgrade guide]({{ site.baseurl }}/2.0/updating-server/).
 
-## Requirements for Upgrading
+## Requirements for upgrading
 
 <div class="alert alert-warning" role="alert">
 <b>Warning:</b> If at any time your organization name has been changed, there is a <a href="https://circleci.com/docs/2.0/updating-server/#org-rename-script">script</a> that <b>must</b> be run before stating the upgrade process.
 </div>
 
-## Notes and Best Practices
+## Notes and best practices
 
 * We now require a minimum 32GB of RAM for the Services Machine. 
 * We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
 * We have also made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to 2.18.
 
-## What's New in Release 2.18.3
+## What's new in release 2.18.3
 
 * You can now generate a Windows-based image to make available for running using the `machine` executor. See the VM Service guide for [instructions on building the image and making it available]({{ site.baseurl }}/2.0/vm-service/#creating-a-windows-ami). For details of using the Windows executor, see our [Executors and Images overview]({{ site.baseurl }}/2.0/executor-intro/#windows).
 
-## What's New in Release 2.18
+## What's new in release 2.18
 
 * It is now possible to restrict environment variables at run time by adding security groups to contexts. Security groups are defined as GitHub teams or LDAP groups. After a security group is added to a context, only CircleCI users who are members of that security group may access or use the environment variables of the context. For more information see our [guide to restricting a context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context).
 * Customers running storage drivers external to AWS will see improved routing times when searching for build Artifacts.
@@ -56,7 +56,7 @@ Metric | Description
 
 * You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.  
 
-## Fixed in Release 2.18
+## Fixed in release 2.18
 
 * Additional fixes around contexts and org renames.
 * Fixed an issue where occasionally volumes would fail to attach to spun up Remote Docker/`machine` instances. 

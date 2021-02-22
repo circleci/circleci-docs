@@ -12,14 +12,46 @@ version:
 * TOC
 {:toc}
 
-## Quick Start
+## Quick start
 {:.no_toc}
 
 CircleCI orbs are open-source, shareable packages of parameterizable [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#executor). Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.
 
 Published orbs can be found on our [Orb Registry](https://circleci.com/developer/orbs), or you can [author your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
-## Benefits of Using Orbs
+## Private orbs vs. public orbs
+
+There are two different types of orbs you can use in your configuration, depending on how you want to publish your orbs. If you prefer to publish your orb internally, and not to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), you will want to use a private orb. However, if you want to publish your orb to the [CircleCI Orb Registry](https://circleci.com/developer/orbs), use a public orb. Descriptions of each type of orb is described in the sections below.
+
+### Private orbs
+
+**Note:** Private orbs are available on our [Scale Plan](https://circleci.com/pricing). Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+
+Using a private orb enables you to author an orb while ensuring the following:
+
+* your orb does not appear in the CircleCI Orb Registry.
+
+* your orb cannot be viewed or used by someone outside of your organization.
+
+* your orb cannot be used in a pipeline that does not belong to your organization.
+
+By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:
+
+* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration.
+
+* You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
+
+### Public orbs
+
+Public orbs are used by most users when authoring and publishing orbs to the [CircleCI Orb Registry](https://circleci.com/developer/orbs). When authoring a public orb, you are enabling all  CircleCI users to use your orb in their own configurations.
+### Authoring orbs
+
+Both public and private orbs can be authored in two ways:
+
+* Using the [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/)
+* Using the [Orb Development Kit](https://circleci.com/docs/2.0/orb-author/#orb-development-kit)  (recommended)
+
+## Benefits of using orbs
 
 Orbs provide parameterizable configuration elements that can greatly simplify your configuration. To illustrate this, the following example shows a typical configuration for testing a Node.js application – defining a job with the required steps for testing the application – versus using the `test` job provided by the [`circleci/node`](https://circleci.com/developer/orbs/orb/circleci/node) orb. With orbs, it is possible to write a parameterized configuration once and utilize it across multiple similar projects.
 
@@ -73,7 +105,7 @@ workflows:
 ```
 {% endraw %}
 
-## The Orb Registry
+## The orb registry
 
 The [Orb Registry](https://circleci.com/developer/orbs) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
 
@@ -93,12 +125,12 @@ Each orb contains its own description and documentation listed in the orb regist
 
 If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
 
-## Identifying Orbs
+## Identifying orbs
 An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
 
 Example orb slug: `<namespace>/<orb-name>@1.2.3`
 
-## Using Orbs
+## Using orbs
 
 Each orb within the registry provides a sample code snippet for importing that specific orb with its most recent version.
 
@@ -113,7 +145,7 @@ orbs:
 
 After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements. The Node example below shows how to use an orb command.
 
-### Node Example
+### Node example
 {:.no_toc}
 
 The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
@@ -137,7 +169,7 @@ jobs:
 ```
 
 
-## See Also
+## See also
 {:.no_toc}
 
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.

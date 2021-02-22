@@ -7,37 +7,46 @@
 {% endif %}
 
 <div class="outer">
-	{% include global-nav.html %}
+	{% include_localized global-nav.html %}
 	{% include main-searchbar.html %}
 	{% include mobile-sidebar.html %}
 	<!-- instant hit template container /-->
 	<div id="hits-target" style="display:none;">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-10 col-md-offset-1">
 					<div id="subnav-placeholder">
-						<div class="component subnav dynamic-fixed" data-top-nav-offset="120">
-							<ul class="results-nav" data-active="search-results-documentation">
-								<li data-value="search-results-documentation" data-subnav-item>
-									<a href="#search-results-documentation">
+						<div class="component subnav">
+							<ul class="results-nav" role="tablist">
+								<li role="presentation" class="active">
+									<a role="tab" data-toggle="tab" aria-controls="search-results-documentation" href="#search-results-documentation">
 										Documentation <span class="hits-count">(<span class="hits-count-docs">0</span>)</span>
 									</a>
 								</li>
-								<li data-value="search-results-orbs" data-subnav-item>
-									<a href="#search-results-orbs">
+								<li role="presentation">
+									<a role="tab" data-toggle="tab" aria-controls="search-results-orbs" href="#search-results-orbs">
 										Orbs <span class="hits-count">(<span class="hits-count-orbs">0</span>)</span>
+									</a>
+								</li>
+								<li role="presentation">
+									<a role="tab" data-toggle="tab" aria-controls="search-results-cimgs" href="#search-results-cimgs">
+										Convenience Images <span class="hits-count">(<span class="hits-count-cimgs">0</span>)</span>
 									</a>
 								</li>
 							</ul>
 						</div>
 					</div>
 
-					<a id="search-results-documentation" class="deep-link-anchor subnav-offset anchor"></a>
-					<div id="instant-hits"></div>
-
-					<a id="search-results-orbs" class="deep-link-anchor subnav-offset anchor"></a>
-					<div id="instant-hits-orbs"></div>
-				</div>
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="search-results-documentation">
+							<div id="instant-hits"></div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="search-results-orbs">
+							<div id="instant-hits-orbs"></div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="search-results-cimgs">
+							<div id="instant-hits-cimgs"></div>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -82,7 +91,7 @@
 		</div><!-- .article-container -->
 	</div><!-- .main-body -->
 
-	{% include global-footer.html %}
+	{% include_localized global-footer.html %}
 	{% include js-config.html %}
 	{% asset vendor.min.js %}
   <script src="https://unpkg.com/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>

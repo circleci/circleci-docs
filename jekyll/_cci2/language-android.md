@@ -25,10 +25,8 @@ If you are looking for a `.circleci/config.yml` template for Android,
 see the [Sample Configuration](#sample-configuration) section of this document.
 
 **Note:**
-Running the Android emulator is not supported
-by the type of virtualization CircleCI uses on Linux.
-To run emulator tests from a job,
-consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
+We now have an Android machine image available in preview on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here](https://github.com/CircleCI-Public/android-image-preview-docs).
+Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
 For more details,
 see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
@@ -44,7 +42,7 @@ for projects created with [Android Studio](https://developer.android.com/studio)
 - Your project is located in the root of your VCS repository.
 - The project's application is located in a subfolder named `app`.
 
-## Sample Configuration
+## Sample configuration
 
 {% raw %}
 
@@ -54,7 +52,7 @@ jobs:
   build:
     working_directory: ~/code
     docker:
-      - image: circleci/android:api-25-alpha
+      - image: circleci/android:api-30-alpha
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -87,7 +85,7 @@ jobs:
 
 {% endraw %}
 
-## Config Walkthrough
+## Config walkthrough
 
 We always start with the version.
 
@@ -127,18 +125,18 @@ Then `./gradlew lint test` runs the unit tests, and runs the built in linting to
 
 We then upload the build reports as job artifacts, and we upload the test metadata (XML) for CircleCI to process.
 
-## Docker Images
+## Docker images
 
 For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
 
 The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
 
-### API Levels
+### API levels
 {:.no_toc}
 
 We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in a job, you should select `circleci/android:api-24-alpha`.
 
-### Customizing the Images
+### Customizing the images
 {:.no_toc}
 
 We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
@@ -149,7 +147,7 @@ You can also use the [CircleCI Android
 Orb](https://circleci.com/developer/orbs/orb/circleci/android) to select your
 desired Android SDK and NDK.
 
-### React Native Projects
+### React Native projects
 {:.no_toc}
 
 React Native projects can be built on CircleCI 2.0 using Linux, Android
@@ -157,7 +155,7 @@ and macOS capabilities. Please check out [this example React Native
 application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
 
-## Testing With Firebase Test Lab
+## Testing with Firebase Test Lab
 
 To use Firebase Test Lab with CircleCI,
 first complete the following steps.
@@ -254,7 +252,7 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 ## Troubleshooting
 
-### Handling Out Of Memory Errors
+### Handling out of memory errors
 
 You might run into out of memory (oom) errors with your build. To get acquainted
 with the basics of customizing the JVM's memory usage, consider reading the
@@ -281,7 +279,7 @@ android {
 If you are still running into OOM issues you can also limit the max workers for
 gradle: `./gradlew test --max-workers 4`
 
-### Disabling Pre-Dexing to Improve Build Performance
+### Disabling pre-dexing to improve build performance
 {:.no_toc}
 
 Pre-dexing dependencies has no benefit on CircleCI.
@@ -305,4 +303,3 @@ CI build. [Gradle Play
 Publisher](https://github.com/Triple-T/gradle-play-publisher) enables you to
 upload an App Bundle/APK as well as app metadata. It's also possible to use
 [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) with Android.
-

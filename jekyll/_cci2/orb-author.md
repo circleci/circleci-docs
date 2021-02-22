@@ -29,7 +29,7 @@ The orb development kit refers to a suite of tools that work together to simplif
 
 <script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
 
-### Getting Started
+### Getting started
 
 To begin creating your new orb with the orb development kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
@@ -41,8 +41,15 @@ The name of your repository is not critical, but we recommend something similar 
     When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
+
+To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb
+```
+
+To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
+```bash
+circleci orb init /path/to/myProject-orb --private
 ```
 The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
@@ -84,7 +91,7 @@ You should also see the CLI has automatically migrated you into a new developmen
 From your new branch you are now ready to make and push changes. From this point on, on every commit, your orb will be packed, validated, tested (optional), and can be published.<br/><br/>
 When you are ready to deploy the first major version of your orb, find information on deploying changes with semver versioning in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
-### Writing Your Orb
+### Writing your orb
 
 Before you begin working on your orb, ensure you are on a non-default branch. We typically recommend starting your orb on the `alpha` branch.
 
@@ -110,7 +117,7 @@ If you have run the `circleci orb init` command, you will automatically be in th
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) |
 {: class="table table-striped"}
 
-#### Orb Source
+#### Orb source
 
 Navigate to the `src` directory to look at the included sections.
 
@@ -267,19 +274,23 @@ echo Hello "${PARAM_TO}"
 
 This way, you can both mock and test your scripts locally.
 
-### Testing Orbs
+### Testing orbs
 
 Much like any other software, there are multiple ways to test your code and it is entirely up to you as the developer to implement as many tests as desired. Within your config file right now there will be a job named [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) that will need to be updated to test your orb components. This is a type of _integration testing_. Unit testing with orbs is possible as well.
 
 Read our full [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) documentation.
 
-### Publishing Your Orb
+### Keeping a changelog
+
+Deciphering the difference between two versions of an orb can prove tricky. Along with semantic versioning, we recommend leveraging a changelog to more clearly describe changes between versions. The orb template comes with the `CHANGELOG.md` file, which should be updated with each new version of your orb. The file uses the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+
+### Publishing your orb
 
 With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
 
 For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
 
-### Categorizing Your Orb
+### Categorizing your orb
 
 You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
 
@@ -313,7 +324,6 @@ The list of categories can also be obtained by running the `circleci orb list-ca
 
 Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html).
 
-
 #### Remove an orb from a category
 
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
@@ -325,3 +335,19 @@ Remove an orb from a category by running `circleci orb remove-from-category <nam
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
 
 To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
+
+### Listing your orbs
+
+List your available orbs using the CLI:
+
+To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+```sh
+circleci orb list <my-namespace>
+```
+
+To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+```sh
+circleci orb list <my-namespace> --private
+```
+
+For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).

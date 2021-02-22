@@ -31,7 +31,7 @@ git checkout master && git pull
 
 . If you plan to use 1.0 builders, specify a `circle_secret_passphrase` in section 2, replacing `...` with alpha numeric characters, if not, leave it as is. 1.0 builders are disabled by default in section 3.
 
-. Specify the instance type to use for your Nomad clients. By default, the value specified in the `terraform.tfvars` file for Nomad Clients is `m5.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad Client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] guide for details, and see our guidance in the <<server-ports#nomad-clients,System Requirements>> document.
+. Specify the instance type to use for your Nomad clients. By default, the value specified in the `terraform.tfvars` file for Nomad clients is `m5.2xlarge` (8 vCPUs, 32GB RAM). To increase the number of concurrent CircleCI jobs that each Nomad client can run, modify section 2 of the `terraform.tfvars` file to specify a larger `nomad_client_instance_type`. Refer to the AWS https://aws.amazon.com/ec2/instance-types[Amazon EC2 Instance Types] guide for details, and read our guidance in the <<server-ports#nomad-clients,System Requirements>> document.
 +
 NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled by default in section 3.
 
@@ -40,7 +40,43 @@ NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled 
 .. enter proxy details, and enter a prefix if there will be multiple installations within your AWS region – the Services and Nomad client instances will be displayed with this prefix in the AWS console.
 
 .Example tfvars
-image::tfvars.png[terraform.tfvars]
+
+```shell
+#####################################
+# 1. Required Cloud Configuration
+#####################################
+
+aws_access_key = "..."
+aws_secret_key = "..."
+aws_region = "eu-central-1"
+aws_vpc_id = "..."
+aws_subnet_id = "..."
+aws_ssh_key_name = "..."
+
+#####################################
+# 2. Required CircleCI Configuration
+#####################################
+
+circle_secret_passphrase = "..."
+services_instance_type = "m4.2xlarge"
+builder_instance_type = "r3.4xlarge"
+nomad_client_instance_type = "m4.2xlarge"
+
+#####################################
+# 3. Optional Cloud Configuration
+#####################################
+
+# Set this to `1` or higher to enable CircleCI 1.0 builders
+desired_builders_count = "0"
+
+# Provide proxy address if your network configuration requires it
+http_proxy = ""
+https_proxy = ""
+no_proxy = ""
+
+# Use this var if you have multiple installation within one AWS region
+prefix = "..."
+```
 
 Above is an example of the `terraform.tfvars` file you will be editing. The table below shows some of the default settings, and some optional variables that can be used to further customize your cluster. A full list of variables and defaults can be found in the `variables.tf` file in the root of the `enterprise-setup` directory. 
 
@@ -123,12 +159,12 @@ You will be asked to confirm if you wish to go ahead by typing `yes`.
 // explain what to do if this step fails
 
 == Access Your Installation
-. You will see a browser-specific SSL/TLS info box. This is just to inform you that on the next screen your browser might tell you the connection to the admin console is unsafe, but you can be confident it is secure. Click Continue to Setup and proceed to your installation IP.
+. Your browser may prompt you with a SSL/TLS info box. This is just to inform you that on the next screen your browser might tell you the connection to the admin console is unsafe, but you can be confident it is secure. Click Continue to Setup and proceed to your installation IP.
 +
 .SSL Security
 image::browser-warning.png[SSL Security]
 
-. Enter your hostname. This can be your domain name or public IP of the Services Machine instance. At this time you can also upload your SSL public key and certificate if you have them. To proceed without providing these click Use Self-Signed Cert – choosing this option will mean you will see security warnings each time you visit the Management Console.
+. Enter your hostname. This can be your domain name or public IP of the Services Machine instance. At this time you can also upload your SSL public key and certificate if you have them. To proceed without providing these click Use Self-Signed Cert – choosing this option prompts security warnings each time you visit the Management Console.
 +
 .Hostname
 image::secure-management-console.png[Hostname]
@@ -182,7 +218,7 @@ NOTE: If you get an "Unknown error authenticating via GitHub. Try again, or cont
 .Enter Github Enterprise Token
 image::ghe_token.png[Github Integration]
 
-. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, see our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
+. **LDAP** – if you wish to use LDAP authentication for your installation, enter the required details in the LDAP section. For a detailed runthrough of LDAP settings, read our https://circleci.com/docs/2.0/authentication/#ldap[LDAP authentication guide]
 
 . **Privacy** – We recommend using an SSL certificate and key for your install. You can submit these in the Privacy section if this step was missed during the installation.
 +
@@ -201,22 +237,22 @@ image::storage.png[]
 +
 NOTE: Due to an issue with our third party tooling, Replicated, the Test SMTP Authentication button is not currently working
 
-. **VM Provider** – Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, see our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
+. **VM Provider** – Configure VM service if you plan to use https://circleci.com/docs/2.0/building-docker-images/[Remote Docker] or `machine` executor (Linux/Windows) features. We recommend using an IAM instance profile for authentication, as described in the <<aws-prereq#planning,planning>> section of this document. With this section completed, instances will automatically be provisioned to execute jobs in Remote Docker or use the `machine` executor. To use the Windows `machine` executor you will need to https://circleci.com/docs/2.0/vm-service/#creating-a-windows-ami[build an image]. For more information on VM Service and creating custom AMIs for remote Docker and `machine` executor jobs, read our https://circleci.com/docs/2.0/vm-service/#section=server-administration[VM service guide].
 +
 You can preallocate instances to always be up and running, reducing the time taken for Remote Docker and `machine` executor jobs to start. If preallocation is set, a cron job will cycle through your preallocated instances once per day to prevent them getting into a bad/dead state.
 +
 CAUTION: If Docker Layer Caching (DLC) is to be used, VM preallocation should be set to `0`, forcing containers to be spun up on-demand for both `machine` and Remote Docker. It is worth noting here that if these fields are **not** set to `0` but all preallocated instances are in use, DLC will work correctly, as if preallocation was set to `0`.
 
-. **AWS Cloudwatch or Datadog Metrics** can be configured for your installation. Set either of these up in the relevant sections. For more information see our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
+. **AWS Cloudwatch or Datadog Metrics** can be configured for your installation. Set either of these up in the relevant sections. For more information read our https://circleci.com/docs/2.0/monitoring/[Monitoring guidance]:
 +
 .Metrics
 image::metrics_setup.png[]
 
-. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you receive through Telegraf. For more on this see our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
+. **Custom Metrics** are an alternative to Cloudwatch and Datadog metrics, you can also customize the metrics you receive through Telegraf. For more on this read our https://circleci.com/docs/2.0/monitoring/#custom-metrics[Custom Metics] guide.
 
 . **Distributed Tracing** is used in our support bundles, and settings should remain set to default unless a change is requested by CircleCI Support.
 
-. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types see our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
+. **Artifacts** persist data after a job is completed, and may be used for longer-term storage of your build process outputs. By default, CircleCI Server only allows approved types to be served. This is to protect users from uploading, and potentially executing malicious content. The **Artifacts** setting allows you to override this protection. For more information on safe/unsafe types read our https://circleci.com/docs/2.0/build-artifacts/[Build Artifacts guidance].
 
 . After agreeing to the License Agreement and saving your settings, select Restart Now from the popup. You will then be redirected to start CircleCI and view the Management Console Dashboard. It will take a few minutes to download all of the necessary Docker containers.
 

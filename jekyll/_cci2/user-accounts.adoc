@@ -89,6 +89,8 @@ circleci dev-console
 
 === Deleting a User
 
+NOTE: If you have at any point changed your GitHub/Enterprise hostname associated with CircleCI, contact your account team before attempting to remove a user.
+
 If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine first and then delete using the following command, substituting the user's GitHub username:
 
 ```shell

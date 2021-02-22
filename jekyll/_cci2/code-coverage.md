@@ -359,7 +359,7 @@ jobs:
 ```
 
 
-# Using a Code Coverage Service
+# Using a code coverage service
 
 ## Codecov
 

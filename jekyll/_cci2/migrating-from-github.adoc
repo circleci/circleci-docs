@@ -11,7 +11,7 @@ This document provides an overview of how to migrate from Github Actions to Circ
 
 CircleCI is a first-class CI tool. CI/CD has been our specialization since the company's founding 8 years ago. On top of the features you would expect from any CI/CD tool, what sets us apart are the following productivity-boosting features:
 
-1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to http://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
+1. **Advanced Caching** - On top of https://circleci.com/docs/2.0/caching/#full-example-of-saving-and-restoring-cache[normal dependency caching], CircleCI offers caching specific to https://circleci.com/docs/2.0/docker-layer-caching/[Docker image layers]. This means subsequent builds of your Docker images will run faster, cutting even more time off your commit-to-deploy workflows.
 2. **SSH Into Builds** - CircleCI offers the ability to https://circleci.com/docs/2.0/ssh-access-jobs/[securely SSH into a build environment] to tail logs, work with files, and directly interact with an environment. This is highly useful for debugging failing builds.
 3. **Resource Classes** - you can use various different https://circleci.com/docs/2.0/optimizations/#resource-class[sizes of executor] on our platform, great for adjusting according to lighter or heavier workloads on a node.
 4. **Test Parallelism** - our platform provides not only https://circleci.com/docs/2.0/workflows/[concurrent job execution] but also the ability to split tests between parallel environments. You can dramatically cut build times by https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests[splitting workloads between different containers].
@@ -292,5 +292,5 @@ Since the configuration between Github Actions and CircleCI is similar, it shoul
 
 . https://circleci.com/docs/2.0/concepts/#section=getting-started[Jobs, Steps, and Workflows]
 . https://circleci.com/docs/2.0/workflows/[More Advanced Workflow and Job Dependency Configuration]
-. https://circleci.com/docs/2.0/orbs-user-config/#section=configuration[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
+. https://circleci.com/docs/2.0/orb-intro/[Actions to Orbs]. Our registry can be found https://circleci.com/developer/orbs?filterBy=all[here].
 . https://circleci.com/docs/2.0/optimizations/#section=projects[Optimizations like caching, workspaces, and parallelism]

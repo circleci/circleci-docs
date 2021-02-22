@@ -20,14 +20,14 @@ plan. Visit our [pricing page](https://circleci.com/pricing/) to get an
 overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web
 application, go to **Plan** from the sidebar to view and make adjustments to your plan.
 
-## Docker Image Choice
+## Docker image choice
 
 Choosing the right docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI provides a range of [convenience images](https://circleci.com/docs/2.0/circleci-images/#section=configuration), typically based on official Docker images, but with a range of useful language tools pre-installed.
 * You can [create your own images](https://circleci.com/docs/2.0/custom-images/#section=configuration), maximizing specificity for your projects. To help with this we provide both a [Docker image build wizard](https://github.com/circleci-public/dockerfile-wizard), and [guidance for building images manually](https://circleci.com/docs/2.0/custom-images/#creating-a-custom-image-manually).
 
-## Caching Dependencies
+## Caching dependencies
 
 Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
@@ -105,7 +105,7 @@ You can view more examples of workflows in the  [CircleCI demo workflows repo](h
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
-To persist data from a job and make it available to downstream jobs via the [`attach_workspace`] key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/2.0/configuration-reference#attach_workspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
 Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
@@ -133,7 +133,7 @@ jobs:
 
 Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).
 
-## Resource Class
+## Resource class
 
 **Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
@@ -158,7 +158,7 @@ jobs:
       - run: make
 ```
 
-## Docker Layer Caching
+## Docker layer caching
 
 **Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrate to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
@@ -184,7 +184,7 @@ jobs:
 
 Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
-## See Also
+## See also
 {:.no_toc}
 
 - For a complete list of customizations that can be made your build, consider reading our [configuration reference]({{ site.baseurl}}/2.0/configuration-reference/).

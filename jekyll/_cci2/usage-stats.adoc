@@ -173,4 +173,4 @@ docker exec usage-stats /src/builds/extract
 
 === Security and Privacy
 
-Please reference exhibit C within your terms of contract and our https://circleci.com/outer/legal/enterprise-license-agreement.pd[standard license agreement] for our complete security and privacy disclosures.
+Please reference exhibit C within your terms of contract and our https://circleci.com/legal/enterprise-license-agreement/[standard license agreement] for our complete security and privacy disclosures.

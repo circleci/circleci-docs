@@ -35,8 +35,6 @@ en:
           link: 2.0/local-cli-getting-started/
         - name: FAQ
           link: 2.0/faq/
-        - name: Config Builder
-          link: config-builder
     - name: Concepts
       link: 2.0/concepts/
       children:
@@ -90,8 +88,6 @@ en:
           link: reference-2-1/
         - name: Reusable Config Reference
           link: 2.0/reusing-config/
-        - name: Config Builder
-          link: config-builder
         - name: Writing YAML
           link: 2.0/writing-yaml/
         - name: Using the CircleCI CLI
@@ -154,6 +150,17 @@ en:
           link: 2.0/private-images/
         - name: Xcode Image Policy
           link: 2.0/xcode-policy/
+    - name: Runner
+      link: 2.0/runner-overview/
+      children:
+        - name: Runner Overview
+          link: 2.0/runner-overview/
+        - name: Runner Installation
+          link: 2.0/runner-installation/
+        - name: Runner API
+          link: 2.0/runner-api/
+        - name: Runner FAQs
+          link: 2.0/runner-faqs/
     - name: ADVANCED CONFIG
       link: 2.0/adv-config/
       children:
@@ -460,9 +467,6 @@ ja:
         - name: FAQ
           i18n_name: FAQ
           link: ja/2.0/faq/
-        - name: Config Builder
-          i18n_name: Config Builder
-          link: config-builder
     - name: Concepts
       i18n_name: コンセプト
       link: ja/2.0/concepts/
@@ -515,9 +519,6 @@ ja:
         - name: Reusable Config Reference
           i18n_name: コンフィグの再利用(Orbs)
           link: ja/2.0/reusing-config/
-        - name: Config Builder
-          i18n_name: Config Builder
-          link: config-builder        
         - name: Writing YAML
           i18n_name: YAMLの記述
           link: ja/2.0/writing-yaml/
@@ -603,7 +604,24 @@ ja:
         - name: Using Docker Authenticated Pulls
           i18n_name: Dockerの認証付きプルの使用
           link: ja/2.0/private-images/
-
+        - name: Xcodeイメージのリリース
+          link: ja/2.0/xcode-policy/
+    - name: Runner
+      i18n_name: ランナー
+      link: ja/2.0/runner-overview/
+      children:
+        - name: Runner Overview
+          i18n_name: ランナーの概要
+          link: ja/2.0/runner-overview/
+        - name: Runner Installation
+          i18n_name: ランナーのインストール
+          link: ja/2.0/runner-installation/
+        - name: Runner API
+          i18n_name: ランナーAPI 
+          link: ja/2.0/runner-api/
+        - name: Runner FAQs
+          i18n_name: ランナーFAQ
+          link: ja/2.0/runner-faqs/
     - name: ADVANCED CONFIG
       i18n_name: 高度な設定
       link: ja/2.0/adv-config/

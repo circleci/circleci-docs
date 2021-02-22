@@ -21,6 +21,6 @@ To run your very first build on CircleCI, complete the following steps:
 
 5. Use the Add Project page of the CircleCI app to start building your project code.
 
-## Next Steps
+## Next steps
 
 Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) to learn about the basics of Projects, switching Orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your build environment and automates your tests.  

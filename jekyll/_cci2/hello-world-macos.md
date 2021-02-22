@@ -21,7 +21,7 @@ To follow along with this document you will need:
 - A subscription to a [paid plan](https://circleci.com/pricing/#build-os-x) to enable building on the macOS executor.
 - An Apple computer with XCode installed on it (if you want to open the example project).
 
-## Overview Of The macOS Executor
+## Overview of the macOS executor
 
 The macOS build environment (or `executor`) is used for iOS and macOS
 development, allowing you to test, build, and deploy macOS and iOS applications on
@@ -29,7 +29,7 @@ CircleCI. The macOS executor runs jobs in a macOS environment and provides acces
 
 Before we get to setting up the macOS executor, we will need to setup our example application.
 
-## Example Application
+## Example application
 
 The example application is a simple mac app - it runs a 5 minute
 timer and contains a single unit test (real-world applications
@@ -44,7 +44,7 @@ As a user getting to know the macOS build environment, our ideal scenario is for
 You can checkout the example application's repo on
 [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
 
-## Example Configuration File
+## Example configuration file
 
 Our application does not make use of any external tools or dependencies, so we
 have a fairly simple `.circleci/config.yml` file. Below, each line is commented
@@ -90,7 +90,28 @@ Since this is a general introduction to building on MacOs, the `config.yml` abov
   
 You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/).
 
-## Next Steps
+## Xcode Cross Compilation
+
+### Universal Binaries
+Xcode currently supports the creation of universal binaries which can be run on both x86_64 and ARM64 CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables. 
+
+### Extracting Unwanted Architectures
+Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility. 
+
+Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
+
+```lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64```
+
+We can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64` which will output the following
+
+```Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64```
+
+
+### Cross Compiled Binaries
+
+While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the x86_64 architecture simply change `ARCHS` to `x86_64`.
+
+## Next steps
 
 The macOS executor is commonly used for testing and building iOS applications,
 which can be more complex in their continuous integrations configuration. If you

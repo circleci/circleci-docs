@@ -15,6 +15,8 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
 
 * A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
 
+* Only a single Jenkinsfile is accepted per request. Namely, [Shared Libraries](https://www.jenkins.io/doc/book/pipeline/shared-libraries/) will not be resolved, and the resulting `config.yml` may be incomplete. Note that under certain cases the converter does not raise errors even if there are unresolvable Shared Libraries.
+
 * Only `Default` is supported as a tool name for `maven`, `jdk` and `gradle` in the [`tools` block](https://www.jenkins.io/doc/book/pipeline/syntax/#tools), and other names will cause conversion failures. Please configure them as follows or remove them manually.
 
   For example, the following stanza:
@@ -32,7 +34,7 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
   }
   ```
 
-## Next Steps After Conversion
+## Next steps after conversion
 
 ### Executors
 
@@ -60,7 +62,7 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 
 While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
 
-## Supported Syntax
+## Supported syntax
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 

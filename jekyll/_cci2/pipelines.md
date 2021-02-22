@@ -9,22 +9,23 @@ version:
 - Cloud
 ---
 
-This document provides a summary of the Pipelines page in the CircleCI app and documents some of the changes to the CircleCI user interface.
+This document provides a summary of the Pipelines page in the CircleCI app and
+documents some of the changes to the CircleCI user interface.
 
 ## Overview
 
-You may have noticed some changes to CircleCI's web interface lately. We have some exciting changes that are rolling out regarding how your builds are being grouped and the user interface that presents that information. 
+You may have noticed some changes to CircleCI's web interface lately. We have
+some exciting changes that are rolling out regarding how your builds are being
+grouped and the user interface that presents that information. Let's begin by
+stating what a **Pipeline** is.
 
-Let's begin by stating what a **Pipeline** is.
+**Pipelines** represent the entire configuration that is run when you trigger
+work on your projects that use CircleCI. The entirety of a
+`.circleci/config.yml` file is executed by a pipeline.
 
-Pipelines represent the entire configuration that is run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline.
+When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
 
-Where you once saw the term `Jobs` in the sidebar, you will now see `Pipelines`.
-
-![]({{ site.baseurl }}/assets/img/docs/pipelines-jobs-to-pipelines.png)
-
-
-## Jobs, Tests, Artifacts
+## Jobs, tests, artifacts
 
 A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 

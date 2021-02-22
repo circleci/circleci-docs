@@ -22,15 +22,15 @@ Linux、macOS、Android、Windows、さらに SaaS やファイアウォール�
 
 ## CircleCI のメリット
 
-CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI は、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)、および[従量課金制プラン](https://circleci.com/ja/pricing/usage/)によって、きわめて複雑なパイプラインを効率的に実行するように構成できます。
+CircleCI は、30,000 の組織をサポートし、1 日に 100 万近くのジョブを実行しています。 CircleCI が選ばれる理由は、ジョブの実行が高速であり、ビルドのスピードを最適化できることです。 CircleCI は、高度な[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)、[Docker レイヤー キャッシュ]({{site.baseurl}}/ja/2.0/docker-layer-caching/)、高速マシン上で実行するための[リソース クラス]({{site.baseurl}}/ja/2.0/optimizations/#resource-class)、および[従量課金制プラン](https://circleci.com/ja/pricing/)によって、きわめて複雑なパイプラインを効率的に実行するように構成できます。
 
-開発者は [circleci.com](https://circleci.com/jp) を使用して、[任意のジョブに SSH 接続]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)してビルドの問題をデバッグしたり、[.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルで[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)をセットアップしてジョブの実行を高速化したり、わずか 2 つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を構成して[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)で以前のジョブのデータを再利用したりすることができます。
+開発者は [circleci.com](https://circleci.com/ja/) を使用して、[任意のジョブに SSH 接続]({{site.baseurl}}/ja/2.0/ssh-access-jobs/)してビルドの問題をデバッグしたり、[.circleci/config.yml]({{site.baseurl}}/ja/2.0/configuration-reference/) ファイルで[並列処理]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs/)をセットアップしてジョブの実行を高速化したり、わずか 2 つのキーで[キャッシュ]({{site.baseurl}}/ja/2.0/caching/)を構成して[ワークフロー]({{site.baseurl}}/ja/2.0/workflows/)で以前のジョブのデータを再利用したりすることができます。
 
 自社サーバーにインストールされた CircleCI のオペレーターや管理者は、CircleCI を使用して、ビルドをモニタリングしてインサイトを得たり、スケジュールに Nomad クラスターを使用したりすることができます。詳細については、[CircleCI 運用ガイド]({{site.baseurl}}/ja/2.0/circleci-ops-guide-v2-17.pdf)を参照してください。
 
 ## 概要
 
-GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、プロジェクトとして [circleci.com](https://circleci.com/ja) に追加された後は、コードを変更するたびに、クリーン コンテナまたは VM で自動化されたテストがトリガーされます。 CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
+GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、プロジェクトとして [circleci.com](https://circleci.com/ja/) に追加された後は、コードを変更するたびに、クリーン コンテナまたは VM で自動化されたテストがトリガーされます。 CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#job)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#container)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピンアップし、そこでジョブを実行します。
 
 その後 CircleCI は、テストが完了すると、成功または失敗のメール通知を送信します。 CircleCI には Slack 通知と IRC 通知も統合されています。 コード テスト カバレッジの結果は、レポート ライブラリが追加されているプロジェクトの詳細ページから提供されます。
 

@@ -16,7 +16,7 @@ There are two types of pipeline variables:
 * **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
 * **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API. 
 
-## Pipeline Values
+## Pipeline values
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
@@ -52,7 +52,7 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
-## Pipeline Parameters in Configuration
+## Pipeline parameters in configuration
 
 Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. 
 
@@ -93,7 +93,7 @@ jobs:
       - run: echo "$(pwd) == << pipeline.parameters.workingdir >>"
 ```
 
-### Passing Parameters When Triggering Pipelines via the API
+### Passing parameters when triggering pipelines via the API
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
@@ -110,14 +110,14 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }' https://circleci.com/api/v2/project/:project_slug/pipeline
 ```
 
-## The Scope of Pipeline Parameters
+## The scope of pipeline parameters
 
 Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability. 
 
 
-## Config Processing Stages and Parameter Scopes
+## Config processing stages and parameter scopes
 
-### Processing Stages
+### Processing stages
 
 Configuration processing happens in the following stages:
 
@@ -127,7 +127,7 @@ Configuration processing happens in the following stages:
 
 The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
-## Element Parameter Scope
+## Element parameter scope
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
@@ -161,18 +161,18 @@ workflows:
 
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
 
-## Pipeline Value Scope
+## Pipeline value scope
 
 Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
-### Pipeline Parameter Scope
+### Pipeline parameter scope
 
 Pipeline parameters which are defined in configuration are always in scope, with two exceptions:
 
 - Pipeline parameters are not in scope for the definition of other pipeline parameters, so they cannot depend on one another.
 - Pipeline parameters are not in scope in the body of orbs, even inline orbs, to prevent data leaks.
 
-## Conditional Workflows
+## Conditional workflows
 
 Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy values can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
 

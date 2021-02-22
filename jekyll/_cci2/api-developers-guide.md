@@ -9,16 +9,12 @@ version:
 - Cloud
 ---
 
-This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows.
+This *API Developer's Guide* was written to assist developers in quickly and easily making API calls to CircleCI services to return detailed information about users, pipelines, projects and workflows. The API v2 Specification itself may be viewed [here]({{site.baseurl}}/api/v2).
 
 * TOC
 {:toc}
 
-# API Overview
-
-The CircleCI platform provides an API that enables users to interact with the CircleCI platform (e.g. triggering pipelines, updating settings etc, in addition to retrieving detailed information about users, jobs, workflows and pipelines.
-
-## API Categories
+## API categories
 
 The current categories of API v2 endpoints are:
 
@@ -31,17 +27,19 @@ The current categories of API v2 endpoints are:
 
 **Note:** Portions of the CircleCI API v2 remain under “Preview”. Preview endpoints are not yet fully supported or considered generally available. Breaking changes to API v2 Preview endpoints are planned in advance and are announced in the API v2 breaking changes log.
 
-## Authentication and Authorization
+## Authentication and authorization
 
 The CircleCI API utilizes token-based authentication to manage access to the API server and validate that a user has permission to make API requests. Before you can make an API request, you must first add an API token and then verify that you are authenticated by the API server to make requests. The process to add an API token and have the API server authenticate you is described in the sections below.
 
 **Note** You may use the API token as the username for HTTP Basic Authentication, by passing the `-u` flag to the `curl` command.
 
-### Add an API Token
+### Add an API token
+{:.no_toc}
 
 To add an API token, perform the steps listed below.
 
-1.  Add an API token from the [Personal API Tokens page](https://account.circleci.com/tokens). 
+1. Log in to the CircleCI web application.
+1. Visit the [Personal API Tokens page](https://app.circleci.com/settings/user/tokens) and follow the steps to add an API token.
 2.  To test your token call the API using the command below. You will need to set your API token as an environment variable before making a cURL call.
 
     ```sh
@@ -61,7 +59,7 @@ To add an API token, perform the steps listed below.
 
 **Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
 
-## Getting Started with the API
+## Getting started with the API
 
 The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository. 
 
@@ -77,40 +75,9 @@ The `project_slug` is included in the payload when pulling information about a p
 
 ![API structure]({{ site.baseurl }}/assets/img/docs/api-structure.png)
 
-## HTTP Status Codes and Response Handling
+## Rate limits
 
-When you make an API request to the server, an HTTP status code is returned along with the JSON body response. The CircleCI API v2 adheres to standard HTTP response codes, which include the following status code definitions:
-
-* 200 - Success
-* 400 - Client error
-* 500 - Server error
-
-### 200 Status Codes
-
-If you receive a 200 HTTP status code, your API request is successful and the requested resource will be returned. The following 200 HTTP status codes could potentially be returned with your request:
-
-* 200 - OK
-* 201 - Created
-* 202 - Accepted
-
-### 400 Status Codes
-
-If you receive a 400 HTTP status code, there is a problem with the request and the server is unable to successfully process the request. The following status codes may be returned with your request:
-
-* 401 - Unauthorized
-* 403 - Forbidden
-* 404 - Not Found
-* 429 - Too Many Requests (see [rate limits](#rate-limits)).
-
-### 500 Status Code
-
-If you receive a 500 HTTP status code, there is a problem with the server and the request cannot be processed. If you encounter a 500 response, the error will be logged and CircleCI will work to resolve the error. The following 500 HTTP status codes could potentially be returned with your request:
-
-* 500 - Internal Server Error
-
-## Rate Limits
-
-The CircleCI API is protected by a number of rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
+The CircleCI API is protected by rate limiting measures to ensure the stability of the system. We reserve the right to throttle the requests made by an individual user, or the requests made to individual resources in order to ensure a fair level of service to all of our users.
 
 As the author of an API integration with CircleCI, your integration should expect to be throttled, and should be able to gracefully handle failure.
 There are different protections and limits in place for different parts of the API. In particular, we protect our API against **sudden large bursts of traffic**, and we protect against **sustained high volumes** of requests, for example, frequent polling.
@@ -118,11 +85,7 @@ There are different protections and limits in place for different parts of the A
 For HTTP APIs, when a request is throttled, you will receive [HTTP status code 429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429). If your integration requires that a throttled request is completed, then you should retry these requests after a delay, using an exponential backoff.
 In most cases, the HTTP 429 response code will be accompanied by the [Retry-After HTTP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Retry-After). When this header is present, your integration should wait for the period of time specified by the header value before retrying a request.
 
-## REST API Tutorial
-
-For more detailed information about HTTP status codes, refer to the [rest api tutorial](http://www.restapitutorial.com/httpstatuscodes.html).
-
-## Example End-to-End API Request
+## Example end-to-end API request
 
 The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a "demo repository" called "hello-world", however, you can use a pre-existing repository to follow along if you choose.
 
@@ -130,10 +93,13 @@ The following section details the steps you would need, from start to finish, to
 
 ### Prerequisites
 
+{:.no_toc}
+
 * A GitHub or BitBucket account with a repository to setup with CircleCI.
 * Completion of the CircleCI onboarding.
 
 ### Steps
+{:.no_toc}
 
 1. On your VCS provider, create a repository. The repo for this example will be called `hello-world`.
 
@@ -270,11 +236,13 @@ information about other endpoints you may wish to call, please refer to the
 [CircleCI API v2 Documentation]({{site.baseurl}}/api/v2) for an overview of all
 endpoints currently available.
 
-## Additional API Use Cases
+## Additional API use cases
 
 Now that you have a general understanding of how the CircleCI API v2 service works through an end-to-end API example request and walkthrough, let's look at a few common tasks and operations you may perform on a regular basis when using the API. Whether you wish to return information about a job or project, or retrieve more detailed information about a project by reviewing its artifacts, the examples shown below should assist you in gaining a better understanding of how to make some API requests to the server so you can perform a deep dive into the specifics of your work.
 
 ### Prerequisites
+{:.no_toc}
+
 
 Before trying any of the API calls in this section, make sure you have met the following prerequisites:
 
@@ -289,7 +257,8 @@ This section provides detailed information on how you can perform the following 
 * [Download artifacts](#download-artifacts)
 * [Gather Insights](#gather-insights)
 
-### Get Project Details
+### Get project details
+{:.no_toc}
 
 You may often find that it would be helpful to retrieve information about a specific project, including the name of the organization the project belongs to, the version control system (vcs) that hosts the project, and other details. The CircleCI API enables you to return this and other information by making a single GET request to the `project/{project-slug}` endpoint by passing the `project-slug` parameter.
 
@@ -304,6 +273,7 @@ The `project_slug` is included in the payload when you pull information about a 
 **Note** If you would like more detailed information about a project, or simply need a refresher on the specifics of a project, please refer to the CircleCI [Projects](https://circleci.com/docs/2.0/projects/) page.
 
 #### Steps
+{:.no_toc}
 
 Of the several project-related API endpoints available with CircleCI API v2, making a GET request to the `/project/{project-slug}` endpoint enables you to return detailed information about a specific project by passing the `project_slug` parameter with your request.
 
@@ -337,13 +307,14 @@ To return project details, perform the following steps:
 
 Notice in the example above that you will receive very specific information about your project, including the name of the project, the name of the organization that the project belongs to, and information about the VCS that hosts the project. For a more detailed breakdown of each value returned in this request, please refer to the [Get Project Details](https://circleci.com/docs/api/v2/#get-a-project) section of the *CircleCI API v2 Reference Guide*.
 
-### Get Job Details
+### Get job details
 
 Much like the Get Project Details API request described in the previous example, the Get Job Details API request enables you to return specific job information from the CircleCI API by making a single API request. Retrieving job information can be very useful when you want information about how your job performed, what resources were used (e.g. pipeline, executor type, etc.), and the time it took for the job to finish.
 
 Please remember, jobs are collections of steps. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a default image if not specified, for `docker` you must specify an image to use for the primary container, for `macos` you must specify an Xcode version, and for `windows` you must use the Windows orb.
 
 #### Steps
+{:.no_toc}
 
 Of the several Jobs-related API endpoints available with CircleCI API v2, there is a specific endpoint you may wish to call to receive detailed information about your job. This API call to the `GET /project/{project_slug}/job/{job-number}`endpoint enables you to return detailed information about a specific job by passing the `project-slug` and `job-number` parameters with your request.
 
@@ -412,11 +383,14 @@ Notice in the example above that you will receive very specific information abou
 
 For a more detailed breakdown of each value returned in this request, please refer to the [Get Job Details](https://circleci.com/docs/api/v2/#get-job-details) section of the *CircleCI API v2 Reference Guide*.
 
-### Download Artifacts
+### Download artifacts
 
 The following section details the steps you need to follow to download artifacts that are generated when a job is run, first, returning a list of artifacts for a job, and then downloading the full set of artifacts. If you are looking for instructions for downloading the _latest_ artifacts for a pipeline, without needing to specify a job number, see our [API v1.1 guide](https://circleci.com/docs/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) – keep checking back here as this functionality will be added to API v2 in the future.
 
 #### Steps
+{:.no_toc}
+
+
 
 1. First, we will ensure your API token is set as an environment variable. You maybe have already done this during authentication, but if not, run the following command in your terminal, substituting your personal API token:
 
@@ -470,11 +444,12 @@ The following section details the steps you need to follow to download artifacts
 
     **Note:** `grep` is used to locate all the URLs for downloading the job artifacts, while `wget` is used to perform the download.
 
-### Gather Insights
+### Gather insights
 
 The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. By making API calls to these endpoints, you can better understand how to optimize your workflows and jobs so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containg information about metrics and credit usage.
 
-#### Returning Workflow Metrics
+#### Returning workflow metrics
+{:.no_toc}
 
 To return aggregated data for an individual workflow, perform the steps listed below.
 
@@ -574,7 +549,8 @@ Notice that in this JSON response, you will receive detailed metrics for the set
 
 **Note** The above example only shows just a few builds. When you run this command, you may receive up to 250 individual builds that you can review in much more detail.
 
-#### Reviewing Individual Job Metrics
+#### Reviewing individual job metrics
+{:.no_toc}
 
 Now that you have retrieved aggregated data for up to 250 different jobs, you will most likely want to review specific information about a single job, or smaller number of jobs, to ensure that your jobs are running efficiently. To review an individual job, follow the steps below.
 
@@ -652,80 +628,6 @@ When reviewing each individual review job, please note that the following inform
 - `credits_used` - The number of credits used during the job.
 
 ## Reference
-
-### API Endpoints
-
-The CircleCI v2 API, and its associated endpoints allow you to make HTTP calls to designated endpoints developed in the underlying CircleCI API architecture. These endpoints provide programmatic access to CircleCI services, including pipelines, workflows, and jobs. 
-
-Before working with the API and making calls, you should first have an understanding of the various API requests you can make to API v2 endpoints. The sections below describe these API requests.
-
-#### User Endpoints
-
-| Endpoint               | Description                       
-|------------------------|-------------------------------------------------------
-| GET /user/{id}         | This endpoint enables you to return information about a specific user by making a GET request and passing the `id` parameter in the request |
-| GET /me/collaborations | This endoint enables you to return a list of organizations that the user is a member of, or is a collaborator by making a GET request and passing the `collaborations` parameter in the request. |
-{: class="table table-striped"}
-
-#### Pipeline API Requests
-
-| Endpoint                                  | Description                                                         | 
-|-------------------------------------------|---------------------------------------------------------------------|
-| GET /project/{project-slug}/pipeline/{pipeline-number}  | Returns an individual pipeline.                       |
-| GET /pipeline/{pipeline-id}/config        | Returns the configuration of a specific pipeline.                   |
-| GET /pipeline/{pipeline-id}/workflow      | Returns a list of workflows for a specific pipeline.                |
-| POST /project/{project-slug}/pipeline     | Triggers a pipeline.                                                |
-| GET /project/{project-slug}/pipeline      | Returns a list of all pipelines associated with a specific project. |
-| GET /project/{project-slug}/pipeline/mine | Returns all pipelines for the project that you have triggered.      |
-{: class="table table-striped"}
-
-#### Project API Requests
-
-| Endpoint                                                  | Description                                                       |
-|-----------------------------------------------------------|-------------------------------------------------------------------|
-| GET /project/{project-slug}                               | Returns an individual project.                                    |
-| GET /project/{project-slug}/checkout-key                  | Returns all checkout keys for a specific project.                 | 
-| POST /project/{project-slug}/checkout-key                 | Creates a new checkout key for a project.                         |
-| DELETE /project/{project-slug}/checkout-key/{fingerprint} | Deletes a checkout key for a specific project.                    |
-| GET /project/{project-slug}/checkout-key/{fingerprint}    | Returns an individual checkout key for a specific project.        |
-| GET /project/{project-slug}/pipeline/mine                 | Returns all pipelines for the project that you have triggered.    |
-| GET /project/{project-slug}/envvar                        | Lists all current environment variables for a specific project.   |
-| POST /project/{project-slug}/envvar                       | Creates an environment variable for a project.                    | 
-| DELETE /project/{project-slug}/envvar/{name}              | Deletes an existing environment variable from a project.          |
-| GET /project/{project-slug}/envvar/{name}                 | Returns a masked value for an environment variable for a project. |
-{: class="table table-striped"}
-
-#### Job API Requests
-
-| Endpoint                                             | Description                      |        
-|------------------------------------------------------|----------------------------------|
-| GET /project/{project-slug}/job/{job-number}         | Returns details of a job.        |
-| POST /project/{project-slug}/job/{job-number}/cancel | Cancels a job.                   |
-| GET /project/{project-slug}/{job-number}/artifacts   | Returns artifacts for a job.     |
-| GET /project/{project-slug}/{job-number}/tests       | Returns test metadata for a job. |
-{: class="table table-striped"}
-
-#### Workflow API Requests
-
-| Endpoint                   | Description                                  |
-|----------------------------|----------------------------------------------|
-| GET /workflow/{id}         | Returns a workflow.                          |
-| POST /workflow/{id}/cancel | Cancels a workflow.                          |
-| GET workflow/{id}/job      | Returns all jobs associated with a workflow. |
-| POST /workflow/{id}/rerun  | Reruns a workflow.                           |
-{: class="table table-striped"}
-
-#### Insights Requests
-
-| Endpoint                                                               | Description                                       |
-|------------------------------------------------------------------------|---------------------------------------------------|
-| GET /insights/{project-slug}/workflows                                 | Get summary metrics for a project's workflows.    |
-| GET /insights/{project-slug}/workflows/{workflow-name}                 | Get recent runs of a workflow                     |
-| GET /insights/{project-slug}/workflows/{workflow-name}/jobs            | Get summary metrics for a project workflow's jobs.|
-| GET /insights/{project-slug}/workflows/{workflow-name}/jobs/{job-name} | Get recent runs of a job within a workflow.       |
-{: class="table table-striped"}
-
-### See Also
 
 - Refer to [API V2 Introduction]({{site.baseurl}}/2.0/api-intro/) for high-level information about the CircleCI V2 API.
 - Refer to [API V2 Reference Guide]({{site.baseurl}}/api/v2/) for a detailed list of all endpoints that make up the CircleCI V2 API.

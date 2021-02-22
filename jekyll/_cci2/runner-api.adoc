@@ -1,0 +1,189 @@
+---
+version:
+- Cloud
+---
+= CircleCI Runner API
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+
+This document contains all the external facing endpoints for the CircleCI runner API.
+
+toc::[]
+
+== Authentication Methods
+
+The CircleCI runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
+
+=== Circle-Token (personal authentication)
+
+This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Name
+| Description
+
+| circle-token header
+| Header that contains the `circle-token` used to authenticate the user.
+
+| http basic auth username
+| The token can be provided using the Basic scheme, where username should be set as the `circle-token` and the password should be left blank.
+|===
+
+=== Browser Session Authentication
+
+Ring-session sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
+
+=== Launch Token
+
+This token is the same one used in the launch-agent setup.
+
+==== Supported methods
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Name
+| Description
+
+| http bearer auth
+| The token that should be provided using the Bearer scheme.
+|===
+
+== Endpoints
+
+=== GET /api/v2/runner
+
+Lists the available runners based on the specified parameters. It is mandatory to use one parameter to filter results.
+
+==== Authentication Methods
+
+* Circle-Token (personal authentication)
+* Browser Session Authentication
++ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+* Launch Token
+
+===== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| resource-class
+| string
+| query
+| false
+| filters the list of runners by specific resource class.
+
+| namespace
+| string
+| query
+| false
+| filters the list of runners by namespace.
+|===
+
+== Examples
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
+    -H 'Circle-Token: secret-token'
+```
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
+    -H 'Circle-Token: secret-token'
+```
+
+=== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|200
+|List of agents
+|JSON
+|===
+
+=== Response Schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|items
+|[object]
+|true
+|array containing the runners
+
+|resource_class
+|string
+|true
+|runner resource class
+
+|hostname
+|string
+|true
+|runner hostname
+
+|name
+|string
+|true
+|runner name
+
+|first_connected
+|string (date-time)
+|true
+|first time the runner was connected
+
+|last_connected
+|string (date-time)
+|true
+|last time the runner was connected
+
+|last_used
+|string (date-time)
+|true
+|last time the runner was used to run a job
+
+|version
+|string
+|true
+|version of the launch-agent running
+|===
+
+== Example
+
+```sh
+{
+    "items": [
+        {
+            "resource_class": "test-namespace/test-resource",
+            "hostname": "bobby",
+            "name": "bobby-sue",
+            "first_connected": "2020-05-15T00:00:00Z",
+            "last_connected": "2020-05-16T00:00:00Z",
+            "last_used": "2020-05-17T00:00:00Z",
+            "version": "5.4.3.2.1"
+        }
+    ]
+}
+```

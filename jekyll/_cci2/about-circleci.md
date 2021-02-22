@@ -9,7 +9,7 @@ order: 1
 
 This document provides a summary of continuous integration and how CircleCI enables engineering teams with automation. CircleCI automates your software builds, tests, and deployments.
 
-## CircleCI Overview
+## CircleCI overview
 
 **CircleCI** - Our mission is to empower technology-driven organizations to do their best work. We want to make engineering teams more productive through intelligent automation.
 
@@ -34,9 +34,9 @@ CircleCI then sends an email notification of success or failure after the tests 
 
 CircleCI may be configured to deploy code to various environments, including AWS CodeDeploy, AWS EC2 Container Service (ECS), AWS S3, Google Kubernetes Engine (GKE), Microsoft Azure, and Heroku. Other cloud service deployments are easily scripted using SSH or by installing the API client of the service with your job configuration.
 
-## What is Continuous Integration?
+## What is continuous integration?
 
-**Continuous integration** is a practice that encourages developers to integrate their code into a `master` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
+**Continuous integration** is a practice that encourages developers to integrate their code into a `main` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
 **Continuous Integration** is a key step to digital transformation.
 
@@ -51,18 +51,18 @@ Find problems and solve them, quickly.
 Release higher quality, more stable products.  
 
 
-## Free Trial Options
+## Free trial options
 
 CircleCI provides a free trial with the following options:
 
 - **Cloud**: See [Signup and Try CircleCI]({{site.baseurl}}/2.0/first-steps/) to get started with the hosted application.
 - **Server**: Refer to [CircleCI Trial Installation]({{site.baseurl}}/2.0/single-box/) for the Enterprise Trial instructions.
 
-### Open Source
+### Open source
 
 See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects. 
 
-## See Also
+## See also
 
 Any app that runs on Linux, Android, or macOS is supported. Refer to the 
 - [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.

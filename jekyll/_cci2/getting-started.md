@@ -12,7 +12,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * TOC
 {:toc}
 
-## Prerequisites for Running Your First Build
+## Prerequisites for running your first build
 {:.no_toc}
 
 * Some basic knowledge of Git.
@@ -20,7 +20,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * An account on CircleCI.
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
 
-## Creating a Repository
+## Creating a repository
 
 Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
 
@@ -36,8 +36,8 @@ If you have not yet, create an account on CircleCI by navigating to [the signup
 page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 
 1. Navigate to the CircleCI [Project Page](https://app.circleci.com/projects/).
-1. If you are part of any organizations, you will need to select the
-   organization you wish to work under in order to setup your repository with CircleCI.
+1. If you created your new repository under an organization you will need to
+   select the organization name when you login to CircleCI.
 1. Once on the Project page, find the project you are using, in our case
   `hello-world`, and click **Set Up Project**. 
   
@@ -51,23 +51,18 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
     **Note:** Based on which language you choose you can view related 
     documentation in the sidebar on the right of the screen 
 
-1. Click **Start Building** and follow the prompt to add your config to a new
-   branch and start your first pipeline. **Note:** You can also manually add a
-   `config.yml` to your project root under a `.circleci` folder and push this to
-   your VCS provider. 
+1. Click **Commit and Run**. This will create a file `.circleci/config.yml` at
+   the root of your repository on a new branch called `circle-ci-setup`. If you
+   are happy with this configuration you can merge it into your main branch
+   later, or continue to make changes. 
 
-    ![Automatic Commit]( {{ site.baseurl }}/assets/img/docs/getting-started--auto-commit.png){:.img--bordered}
-
-1. You will be taken to the Pipelines page where you can view your newly running
-   build. 
-
-## Digging Into Your First Pipeline
+## Digging into your first pipeline
 
 You should see your pipeline start to run automatically—and pass! So, what just
 happened? Click on the green **Success** button on your pipeline to investigate
 the following parts of the run: 
 
-![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png){:.img--bordered}
+![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
 1. **Which workflows ran?**: After clicking **Success**, we are taken to a page
    listing the jobs that ran. If this is your first build, you probably only ran
@@ -75,7 +70,7 @@ the following parts of the run:
    case, we only ran one job, called `welcome/run`. Click on `welcome/run` and let's
    investigate the steps of our job. 
 
-   ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png){:.img--bordered}
+   ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png)
 
 
 1. **Spin up environment:** CircleCI used an [orb](https://circleci.com/orbs) to
@@ -102,7 +97,7 @@ including a large number of tests. You can learn more about all the possible
 steps one may put in a `config.yml` file in the [Configuration
 Reference](https://circleci.com/docs/2.0/configuration-reference). 
 
-### Breaking Your Build!
+### Breaking your build!
 {:.no_toc}
 
 Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
@@ -143,7 +138,7 @@ repository;  a topic for another tutorial. You can view several [demo
 applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
 setting up CircleCI with various languages and frameworks. 
 
-## Using the Workflows Functionality
+## Using the workflows functionality
 {:.no_toc}
 
 You do not have to use orbs to use CircleCI. The following example details how
@@ -198,7 +193,7 @@ and copy and paste the following text into it.
 Read more about workflows in the [Orchestrating
 Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
-### Adding Some Changes to use the Workspaces Functionality
+### Adding some changes to use the workspaces functionality
 {:.no_toc}
 
 Each workflow has an associated workspace which can be used to transfer files to
@@ -257,7 +252,7 @@ workflows:
 
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
-### SSH into Your {% comment %} TODO: Job {% endcomment %}Build
+### SSH into your {% comment %} todo: job {% endcomment %}build
 {:.no_toc}
 
 If you are comfortable with the terminal, you can SSH directly into your
@@ -288,7 +283,13 @@ cd <directory_name>  # change directory to the <directory_name> directory
 cat <file_name>      # show me the contents of the file <file_name>
 ```
 
-## See Also
+## Collaborating with teammates
+
+It is easy for teammates and collaborators to view and follow your projects.
+Teammates can make a free CircleCI account at any time to view your pipelines,
+even if they are not committing any code. 
+
+## See also
 {:.no_toc}
 
 [Blog
@@ -302,7 +303,7 @@ on how to validate the CircleCI `config.yml` on every commit with a git hook.
 * [What is continuous integration?](https://circleci.com/blog/what-is-continuous-integration/)
 * CircleCI on [GitHub](https://github.com/circleci), [Twitter](https://twitter.com/circleci) and [Facebook](https://www.facebook.com/circleci)
 
-### Continuous Integration
+### Continuous integration
 {:.no_toc}
 
 * [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
