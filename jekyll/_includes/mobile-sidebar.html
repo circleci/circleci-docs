@@ -43,40 +43,71 @@
               {% endif %}
 
               {% if main-item.link %}
-                <a class="{% if page.url == main-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ main-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name}}</a>
+                <a class="{% if page.url == main-item.link %} active {% endif %}"
+                  href="{{ site.baseurl }}/{{ main-item.link }}?section={{ main-item.name | slugify }}{% if sub-item.hash %}#{{sub-item.hash}}{% endif %}"
+                  data-proofer-ignore>{{ display_name}}</a>
               {% else %}
                 <span class="nav-span">{{ display_name}}</span>
               {% endif %}
 
               {% if main-item.children %}
-                {% asset docs/arrow-right.svg class=arrow %}
+              {% asset docs/arrow-right.svg class=arrow %}
               {% endif %}
             </div>
 
+            {% comment %} children of top level items {% endcomment %}
             {% if main-item.children %}
             <ul class="subnav">
               {% for item in main-item.children %}
+                {% if item.i18n_name %}
+                  {% assign display_name = item.i18n_name %}
+                {% else %}
+                  {% assign display_name = item.name %}
+                {% endif %}
+              {% if item.children %}
                 {% if item.name %}
-                  {% if item.i18n_name %}
-                    {% assign display_name = item.i18n_name %}
-                  {% else %}
-                    {% assign display_name = item.name %}
-                  {% endif %}
-                <li class="nav-item"><a class="{% if page.url == item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name }}</a></li>
-                {% endif %}
+                  <li class="nav-item">
+                    {% if item.link %}
+                      <a class="{% if page.url == item.link %} active {% endif %}"
+                        href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                        data-proofer-ignore>{{ display_name }}
+                      </a>
+                    {% else %}
+                      <span class="subheading">{{display_name}}</span>
+                    {% endif %}
+                  </li>
+              {% endif %}
 
-                {% if item.children %}
-                  <ul>
-                    {% for sub-item in item.children %}
-                      {% if sub-item.i18n_name %}
-                        {% assign display_name = sub-item.i18n_name %}
-                      {% else %}
-                        {% assign display_name = sub-item.name %}
-                      {% endif %}
-                      <li class="subnav-item"><a class="{% if page.url == sub-item.link %} active {% endif %}" href="{{ site.baseurl }}/{{ sub-item.link }}#section={{ main-item.name | slugify }}" data-proofer-ignore>{{ display_name }}</a></li>
-                    {% endfor %}
-                  </ul>
+              <ul>
+                {% for sub-item in item.children %}
+                {% if sub-item.i18n_name %}
+                  {% assign display_name = sub-item.i18n_name %}
+                {% else %}
+                  {% assign display_name = sub-item.name %}
                 {% endif %}
+                <li class="subnav-item">
+                  <a class="{% if page.url == sub-item.link %} active {% endif %}"
+                    href="{{ site.baseurl }}/{{ sub-item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                    data-proofer-ignore>{{ display_name }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+
+              {% else %}
+
+              {% if item.i18n_name %}
+                {% assign display_name = item.i18n_name %}
+              {% else %}
+                {% assign display_name = item.name %}
+              {% endif %}
+              <li class="subnav-item">
+                <a class="{% if current_url == item.link %} active {% endif %}"
+                  href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}">
+                  {{display_name}}
+                </a>
+              </li>
+
+              {% endif %}
               {% endfor %}
             </ul>
             {% endif %}

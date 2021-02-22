@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Getting Started Introduction"
-short-title: "Getting Started Introduction"
+title: "Your First Green Build"
+short-title: "Your First Green Build"
 description: "A tutorial for getting your first green CircleCI build"
 categories: [getting-started]
 order: 41
