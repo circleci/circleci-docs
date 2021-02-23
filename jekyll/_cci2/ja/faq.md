@@ -359,9 +359,7 @@ Note that the benefits of Docker layer caching are only apparent on pipelines th
 
 #### How do I upgrade my container plan with more containers to prevent queuing?
 {:.no_toc}
-- Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
-
-- macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
+- Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 
