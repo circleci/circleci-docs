@@ -357,24 +357,11 @@ Note that the benefits of Docker layer caching are only apparent on pipelines th
 
 ### コンテナベース プラン
 
-#### What if I go over the minutes allotted for a Container-based macOS plan?
-
-Minutes and overages ensure we can stabilize capacity while offering as much power as possible which should hopefully lead to the greatest possible utility all around.
-
-Overages are as follows:
-
-- Seed プランと Startup プラン: 0.08 ドル/分
-- Growth プラン: 0.05 ドル/分
-
-Users will be alerted in-app as they approach the limit and upon passing their respective limit.
-
-Reach out to billing@circleci.com with any additional questions.
-
 #### How do I upgrade my container plan with more containers to prevent queuing?
 {:.no_toc}
-- Linux プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、[Add Containers (コンテナの追加)] ボタンをクリックします。 Linux プランの入力フィールドに必要なコンテナの数を入力したら、[Pay Now (今すぐ支払う)] ボタンをクリックして、支払い方法の設定画面へと進みます。
+- Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
 
-- macOS プランの変更: CircleCI アプリケーションで [Settings (設定)] > [Plan Overview (プラン概要)] を開いて、右上の macOS タブをクリックします。 [Startup]、[Growth]、[Mobile Focused] のいずれかの [Pay Now (今すぐ支払う)] ボタンをクリックして、支払い方法の設定画面へと進みます。
+- macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 
@@ -425,13 +412,13 @@ Docker allows enabling IPv6 at different levels: [globally via daemon config lik
 
 ### CircleCI 2.0 ではどの OS をサポートしていますか?
 {:.no_toc}
-- **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも対応します。
+- **Linux:** CircleCI is flexible enough that you should be able to build most applications that run on Linux. These do not have to be web applications!
 
-- **Android:** 詳細は「[言語ガイド: Android]({{ site.baseurl }}/2.0/language-android/)」をご覧ください。
+- **Android:** Refer to [Android Language Guide]({{ site.baseurl }}/2.0/language-android/) for instructions.
 
-- **iOS:** 「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial)」でビルド方法を確認できます。
+- **iOS:** Refer to the [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial) to get started.
 
-- **Windows:** 現在、Windows は早期アクセス版のみご利用いただけます。 早期アクセス版のお申し込みについては、CircleCI Discuss の[こちらの投稿](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977)をご参照ください。
+- **Windows:** We are currently offering Early Access to Windows. Please take a look at [this Discuss post](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977) for details on how to get access.
 
 ### CircleCI ではどの CPU アーキテクチャをサポートしていますか?
  {:.no_toc}
