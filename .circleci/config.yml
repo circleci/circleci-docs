@@ -206,29 +206,6 @@ jobs:
           paths:
             - api
 
-
-  # TODO: fix copying of build artifacts.
-  build_config_ref: # a job to manage building our config-reference documentation and persisting it to the workspace
-    executor:
-      name: ruby/default
-      tag: '2.6.3-node-browsers'
-    steps:
-      - checkout
-      - install-shared-assets
-      - *attach_workspace
-      - run:
-          name: "Create landing folder for crg output"
-          command: mkdir -p /tmp/workspace/crg/
-      - ruby-deps:
-          dir: src-crg
-      - run:
-          name: Build CRG documentation with Slate
-          command: ./scripts/build_api_docs.sh -crg
-      - persist_to_workspace:
-          root: *workspace_root
-          paths:
-            - crg
-
   # The Main "Build" job. It pulls in assets from previous jobs (the built api docs, pdfs and javascript)
   # and puts everything in its place for a Jekyll build.
   build:
@@ -268,10 +245,6 @@ jobs:
             cp -r /tmp/workspace/api/ jekyll/_api/
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
-
-            mkdir -p /tmp/workspace/crg
-            mkdir -p jekyll/reference-2-1
-            cp -R /tmp/workspace/crg/* jekyll/reference-2-1/
 
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
