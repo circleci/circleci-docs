@@ -427,7 +427,7 @@ NOTE: If the Task Agent does not exit after a brief period, the Launch Agent wil
 Draining can end in one of two ways:
 
 * The task has been in the draining state for longer than the configured `max_run_time`.
-* A TERM signal is received by the Launch Agent during "draining".
+* An additional TERM signal is received by the Launch Agent during "draining".
 
 == Docker Installation
 
