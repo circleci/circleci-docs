@@ -81,13 +81,11 @@ workflows:
             branches:
               only: /server\/.*/
       - build_api_docs
-      - build_config_ref
       - build:
           requires:
             - js_build
             - build_server_pdfs
             - build_api_docs
-            - build_config_ref
       - reindex-search:
           requires:
             - build
@@ -118,12 +116,10 @@ workflows:
     jobs:
       - js_build
       - build_api_docs
-      - build_config_ref
       - build:
           requires:
             - js_build
             - build_api_docs
-            - build_config_ref
       - deploy:
           requires:
             - build
