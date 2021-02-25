@@ -87,7 +87,7 @@ If you have enabled GitHub Checks in your GitHub repository, but the status chec
 
 ![Uncheck GitHub Job Status Keys]({{ site.baseurl }}/assets/img/docs/github_job_status.png)
 
-Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Checks because CircleCI posts statuses to GitHub at a workflow level rather than a job level.
+Having the `ci/circleci:build` checkbox enabled will prevent the status from showing as completed in GitHub when using a GitHub Check because CircleCI posts statuses to GitHub at a workflow level rather than a job level.
 
 Go to **Settings** > **Branches** in GitHub and click the **Edit** button on the protected branch to deselect the settings, for example `https://github.com/your-org/project/settings/branches`.
 
