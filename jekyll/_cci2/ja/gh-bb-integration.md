@@ -292,3 +292,8 @@ SSH keys for servers can be fetched by running `ssh-keyscan <host>`, then adding
     # github.com:22 SSH-2.0-babeld-2e9d163d
     # github.com:22 SSH-2.0-babeld-2e9d163d
     ➜  ~ ✗
+    
+
+You can add the key to known_hosts by running the following command:
+
+    ssh-keyscan github.com >> ~/.ssh/known_hosts
