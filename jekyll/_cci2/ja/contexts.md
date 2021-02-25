@@ -27,7 +27,9 @@ Create and manage contexts on the Organization Settings page of the CircleCI app
 
 To use environment variables set on the Contexts page, the person running the workflow must be a member of the organization for which the context is set.
 
-Context names must be unique for each GitHub or Bitbucket organization. **Note:** Contexts created with the initial default name of `org-global` will continue to work.
+Context names must be unique for each GitHub or Bitbucket organization.
+
+**Note:** Contexts created with the initial default name of `org-global` will continue to work.
 
 ### Context naming for CircleCI server
 {:.no_toc}
@@ -125,7 +127,7 @@ You can combine several contexts for a single job by just adding them to the con
 
 ## Restricting a context
 
-CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are defined by GitHub teams. If you are using CircleCI Server with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
+CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's GitHub teams. If you are using CircleCI Server with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
 Organization administrators have read/write access to all projects and have unrestricted access to all contexts.
 
@@ -188,7 +190,7 @@ workflows:
             - test
 ```
 
-In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by *any* member, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by *any* member of the security group, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing groups from contexts
 
