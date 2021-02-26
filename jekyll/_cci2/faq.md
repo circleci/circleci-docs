@@ -395,23 +395,9 @@ caching will provide no benefit.
 
 ### Container Based Plans
 
-#### What if I go over the minutes allotted for a Container-based macOS plan?
-
-Minutes and overages ensure we can stabilize capacity while offering as much power as possible which should hopefully lead to the greatest possible utility all around.
-
-Overages are as follows:
-- Seed & Startup: .08/minute
-- Growth: .05/minute
-
-Users will be alerted in-app as they approach the limit and upon passing their respective limit.
-
-Reach out to billing@circleci.com with any additional questions.
-
 #### How do I upgrade my container plan with more containers to prevent queuing?
 {:.no_toc}
 * Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
-
-* macOS: Go to the Settings > Plan Settings page of the CircleCI app and click the macOS tab in the upper-right. Then, click the Pay Now button on the Startup, Growth, or Mobile Focused plan to enter your payment details.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}

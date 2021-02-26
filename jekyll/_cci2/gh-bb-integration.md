@@ -445,3 +445,8 @@ github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXY
 # github.com:22 SSH-2.0-babeld-2e9d163d
 ➜  ~ ✗
 ```
+
+You can add the key to known_hosts by running the following command:
+```
+ssh-keyscan github.com >> ~/.ssh/known_hosts
+```

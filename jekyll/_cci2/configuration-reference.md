@@ -341,11 +341,18 @@ jobs:
 ##### Available `machine` images
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
+
+* `ubuntu-1604:202101-01` - Ubuntu 16.04, Docker v19.03.14, Docker Compose v1.28.2, 2nd to last release
 * `ubuntu-1604:202010-01` - Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4
 * `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 * `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
+
+***Note:*** *Ubuntu 16.04 reaches the end of its LTS window at the end of April 2021 and will no longer be supported by Canonical.
+As a result, the final 16.04 CircleCI machine image release by us will take place in April to include the most recent security patches.
+We suggest upgrading to the Ubuntu 20.04 image for continued releases past April. 2021.*
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -501,6 +508,17 @@ jobs:
       ... // other config
 ```
 
+You may also use the `resource_class` to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
+```
+
 ##### Machine executor (Linux)
 
 {% include snippets/machine-resource-table.md %}
@@ -514,6 +532,17 @@ jobs:
     resource_class: large
     steps:
       ... // other config
+```
+
+You may also use the `machine` class to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
+
+For example:
+
+```yaml
+jobs:
+  job_name:
+    machine: true
+    resource_class: my-namespace/my-runner
 ```
 
 ##### macOS executor
@@ -882,7 +911,7 @@ path | N | String | Checkout directory. Will be interpreted relative to the [`wo
 {: class="table table-striped"}
 
 If `path` already exists and is:
- * a git repo - step will not clone whole repo, instead will pull origin
+ * a git repo - step will not clone whole repo, instead will fetch origin
  * NOT a git repo - step will fail.
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
@@ -1372,7 +1401,7 @@ Jobs are run in parallel by default, so you must explicitly require any dependen
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-requires | N | List | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option.
+requires | N | List | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. However, if all dependencies of a job are filtered, then that job will not be executed either.
 name | N | String | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)
 {: class="table table-striped"}
 

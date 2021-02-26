@@ -1,6 +1,6 @@
 ---
 layout: classic-docs
-title: "Overview"
+title: "About CircleCI"
 short-title: "Overview"
 description: "Starting point for CircleCI 2.0 docs"
 categories: [getting-started]
@@ -36,7 +36,7 @@ CircleCI may be configured to deploy code to various environments, including AWS
 
 ## What is continuous integration?
 
-**Continuous integration** is a practice that encourages developers to integrate their code into a `master` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
+**Continuous integration** is a practice that encourages developers to integrate their code into a `main` branch of a shared repository early and often. Instead of building out features in isolation and integrating them at the end of a development cycle, code is integrated with the shared repository by each developer multiple times throughout the day.
 
 **Continuous Integration** is a key step to digital transformation.
 

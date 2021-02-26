@@ -279,6 +279,7 @@ Also, consider reading documentation on some of CircleCI’s features:
     * cmd
 * .NET Framework 4.8
 * .NET Core
+    * SDK 3.1.406 (x64)
     * SDK 3.0.100-preview7-012821
     * Runtime 3.0.0-preview6-27804-01
     * SDK 2.2.401 

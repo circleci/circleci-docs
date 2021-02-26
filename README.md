@@ -60,13 +60,6 @@ the CircleCI API v2. This uses [Slate](https://github.com/slatedocs/slate) and
 with a spec (that follows the Open API Spec) generated from the CircleCI code
 base.
 
-### `/src-config-builder` - Configuration Builder
-
-The [configuration builder](https://circleci.com/docs/config-builder/) is a
-small React application that providers users with a basic configuration builder
-that they can access through our documentation. When it is deployed, the
-compiled site is moved into `/jekyll`.
-
 ### `/src-crg` - Configuration Reference
 
 This is documentation for the 2.1 configuration keys, built with Slate and

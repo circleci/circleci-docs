@@ -72,6 +72,7 @@ $sidebar-spacing-base: 5px;
     .icon {
       position: absolute;
       top: -1px;
+      width: 24px;
     }
     .arrow {
       position: absolute;
@@ -82,9 +83,7 @@ $sidebar-spacing-base: 5px;
     }
     .subnav {
       overflow: hidden;
-      ul{
-        margin-bottom: 20px;
-      }
+      margin-bottom: 20px;
     }
 
     &.closed {
@@ -101,8 +100,12 @@ $sidebar-spacing-base: 5px;
     text-transform: uppercase;
     font-size: $font-size-micro;
     font-weight: $font-weight-bold;
-    margin: 0 0 10px 0;
+    margin: 12px 0;
     letter-spacing: .5px;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
   .subnav-item {
     font-weight: 400;
@@ -120,6 +123,12 @@ $sidebar-spacing-base: 5px;
         margin-left: 30px;
         display: inline-block;
       }
+    }
+
+    .subheading {
+      color: $body-text-color;
+      margin-left: 30px;
+      display: inline-block;
     }
   }
 
@@ -140,6 +149,10 @@ $sidebar-spacing-base: 5px;
   background: $gray-100;
   display: none;
   cursor: pointer;
+
+  .icon {
+    width: 24px;
+  }
 
   .mobile-sidebar-item {
     display: block;

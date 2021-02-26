@@ -276,7 +276,24 @@ A valid `schedule` requires a `cron` key and a `filters` key.
 The value of the `cron` key must be a [valid crontab entry](https://crontab.guru/).
 
 **Note:**
-Cron step syntax (for example, `*/1`, `*/20`) is **not** supported. Range elements within comma-separated lists of elements are also **not** supported. 
+Cron step syntax (for example, `*/1`, `*/20`) is **not** supported. Range elements within comma-separated lists of elements are also **not** supported. In addition, range elements for days (for example, `Tue-Sat`) is **not** supported. Use comma-separated digits instead.
+
+
+Example **invalid** cron range syntax:
+
+```yaml
+    triggers:
+      - schedule:
+          cron: "5 4 * * 1,3-5,6" # < the range separator with `-` is invalid
+```
+
+Example **valid** cron range syntax:
+
+```yaml
+    triggers:
+      - schedule:
+          cron: "5 4 * * 1,3,4,5,6" 
+```
 
 The value of the `filters` key must be a map that defines rules for execution on specific branches.
 

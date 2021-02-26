@@ -58,15 +58,15 @@ There are currently three support levels for CircleCI runner:
 
 The following platforms have been validated to work with CircleCI runner:
 
-* Intel + Ubuntu
-* Arm64 + Ubuntu
+* x86_64 + Ubuntu 18.04+
+* Arm64 + Ubuntu 18.04+
 * Intel + macOS
 
 == Untested platforms
 
 The following platforms have not been tested, but are believed to work with CircleCI runner:
 
-* Intel + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
+* x86_64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
 * Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
 * Docker
 
@@ -76,13 +76,15 @@ NOTE: CircleCI provides no documentation for these platforms.
 
 The following platforms are not currently supported to work with CircleCI runner:
 
-* Intel + Windows
+* x86_64 + Windows
 * Arm + Windows
 * Apple Silicon + macOS
 * Arm32 + Linux
 * Run natively in Kubernetes/Rancher/other container orchestration solutions
 
 == Authentication
+
+NOTE: These commands can only be run by an owner/admin of your organization.
 
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
@@ -92,7 +94,7 @@ In order to complete this process you will need to create a namespace and authen
 NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 3. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
 +
-NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider. 
+NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
 4. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
@@ -177,7 +179,7 @@ api:
   auth_token: AUTH_TOKEN
 runner:
   name: RUNNER_NAME
-  command_prefix: ["/opt/circleci/launch-task"]
+  command_prefix: ["sudo", "-niHu", "circleci", "--"]
   working_directory: /opt/circleci/workdir/%s
   cleanup_working_directory: true
 ```
@@ -193,47 +195,13 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 === Create the circleci user & working directory
 
-These will be used when executing the `build-agent`.
+These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`).
 
 ```bash
 id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
-```
-
-=== Install the launch script
-
-This wrapper script will be used by launch agent to execute the task agent, while ensuring appropriate sandboxing and a clean shutdown.
-
-Create `/opt/circleci/launch-task` owned by `root` with permissions `755`
-
-```bash
-#!/bin/bash
-
-set -euo pipefail
-
-## This script launches the build-agent using systemd-run in order to create a
-## cgroup which will capture all child processes so they're cleaned up correctly
-## on exit.
-
-# The user to run the build-agent as - must be numeric
-USER_ID=$(id -u circleci)
-
-# Give the transient systemd unit an inteligible name
-unit="circleci-$CIRCLECI_LAUNCH_ID"
-
-# When this process exits, tell the systemd unit to shut down
-abort() {
-  if systemctl is-active --quiet "$unit"; then
-    systemctl stop "$unit"
-  fi
-}
-trap abort EXIT
-
-systemd-run \
-    --pipe --collect --quiet --wait \
-    --uid "$USER_ID" --unit "$unit" -- "$@"
 ```
 
 === Enable the `systemd` unit
@@ -449,6 +417,17 @@ Here are few valid examples:
 * `1h30m20s` - An overly specific (yet still valid) duration.
 
 NOTE: The default value is 5 hours.
+
+===== Customizing job timeouts and drain timeouts
+
+If you would like to customize the job timeout setting, you can "drain" the job by sending the Launch Agent a termination (TERM) signal, which then causes the Launch Agent to attempt to gracefully shutdown. When this TERM signal is received, the launch agent enters 'draining' mode, preventing the Launch Agent from accepting any new jobs, but still allowing any current active job to be completed. At the end of "draining," the Launch Agent then signals the Task Agent to cancel any active job (by sending it a TERM signal).
+
+NOTE: If the Task Agent does not exit a brief period after the TERM, the Launch Agent will manually kill it by sending it a KILL signal.
+
+Draining can end in one of two ways:
+
+* The task has been in the draining state for longer than the configured `max_run_time`.
+* An additional TERM signal is received by the Launch Agent during "draining".
 
 == Docker Installation
 

@@ -46,6 +46,8 @@ CircleCI supports automatic test allocation across your containers. The allocati
 
 To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
 
+Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
+
 ### Splitting test files
 {:.no_toc}
 
@@ -159,6 +161,8 @@ The contents of the file `/tmp/tests-to-run` will be different in each container
 
 ### Video: troubleshooting globbing
 {:.no_toc}
+
+Note: To follow along with the commands in the video below you will need to be [`SSH-ed into a job`]({{ site.baseurl }}/2.0/ssh-access-jobs/).
 
 <iframe width="854" height="480" src="https://www.youtube.com/embed/fq-on5AUinE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
