@@ -1,0 +1,199 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= CircleCI Server システムの監視
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+ここでは、CircleCI Server v{serverversion}-beta システムを監視するためのメトリクスについて説明します。
+
+toc::[]
+
+== メトリクスの概要
+
+メトリクスとは、監視と分析を目的として収集される技術的な統計データです。このデータには、CPU やメモリの使用率などの基本情報のほか、実行済みビルド数や内部エラー数といった高度な数値も含まれます。メトリクスを活用すると、以下のことが可能になります。
+
+* インシデントや異常な動作をすばやく検出する
+* コンピューティング リソースを動的にスケールする
+* インフラ全体の問題をさかのぼって把握する
+
+=== CircleCI Server v3.x におけるメトリクスの仕組み
+
+CircleCI Server では、メトリクス収集用の主要コンポーネントとして、サーバー ソフトウェアの Telegraf を使用します。CircleCI サービスによって生成されたメトリクス データは、Telegraf によって Datadog などのデータ監視プラットフォームに送信されます。
+
+//#画像を更新する必要があります - Nomad のメトリクスが 12 月の締め切りに間に合うかどうかの確認待ちです#
+// .メトリクス
+// image::metrics-server-3.png[メトリクス]
+
+CircleCI Server では、以下のようにしてメトリクスが収集されます。
+
+* 各コンポーネントからメトリクス データが Telegraf サービスに送信される。
+* Telegraf がポート 8125/UDP でリッスンし、全コンポーネントからのデータを受信 (入力) した後、事前に構成されたフィルターを適用してデータを保持するか破棄するかを判断する。
+* 一部のメトリクス タイプでは、データが Telegraf 内部に保持され、最大値、最小値、平均、標準偏差、合計などの統計データが定期的に計算される。
+* 最後に、Telegraf から、stdout や Datadog などの事前に構成されたシンクにデータが送信 (出力) される。
+
+注目すべき点は、Telegraf では複数の入力タイプと出力タイプがまとめて許容されることです。これにより、管理者は、1 つの Telegraf インスタンスで複数のメトリクス データ セットを収集して Datadog に転送することができます。
+
+== サポート対象プラットフォーム
+
+CircleCI Server v{serverversion}-beta には、Datadog へのメトリクスの転送に対するサポート機能が組み込まれています。
+
+=== Datadog
+
+Datadog を有効にするには、以下の手順を行います。なお、この手順を実行するには Datadog API キーをご自身で用意しておく必要があります。
+
+.[Admin Dashboard (管理ダッシュボード)] に移動します (localhost:8800)。
+.*[Config (構成)]* タブを選択します。 
+.*[Enable Metrics (メトリクスを有効にする)]* セクションまでスクロールします。
+.次の手順に従い、このセクションを設定します。
+.. Datadog へのメトリクス転送の有効/無効を切り替えるチェックボックスをオンにします。
+.. (任意) メトリクスのプレフィックスを入力します。
+.. (必須) Datadog の API キーを入力します。
+
+== 標準のメトリクス構成
+
+CircleCI Server 環境の標準のメトリクス構成を確認するには、以下の手順を実行します。
+
+.[Admin Dashboard (管理ダッシュボード)] に移動します。 
+.*[View Files (ファイルの表示)]* タブを選択します。
+.Telegraf の構成マップ (`base/charts/external-services/charts/telegraf/templates/configmap.yaml`) を開きます。
+
+.メトリクス構成
+image::metrics-config.png[メトリクス構成]
+
+Telegraph 構成ファイルに含まれる各要素の詳細については、 https://github.com/influxdata/telegraf/blob/master/docs/CONFIGURATION.md[こちらの Telegraf ドキュメント]を参照してください。
+
+== メトリクス構成のカスタマイズ
+
+環境に合わせてメトリクスの標準の設定内容を変更する必要がある場合は、変更を実装するためのオーバーレイを作成できます。なお、CircleCI では標準の設定内容以外はサポートしていません。そのため、*変更を加える場合は、変更後の環境をサポートできるエンジニアリング担当者を自社で確保していただく必要があります*。カスタムの設定を作成するには、以下の手順を実行します。 
+
+.[Admin Dashboard (管理ダッシュボード)] に移動します (localhost:8800)。
+.*[View Files (ファイルの表示)]* タブを選択します。
+.*[View Files (ファイルの表示)]* ウィンドウの上部にある青い通知バーで、ファイル バンドルをダウンロードするためのリンクをクリックします。ダウンロード方法を確認して、その指示に従います。
+.必要な構成を含むカスタム オーバーレイを作成します。 
+.オーバーレイを overlays/midstream フォルダーに保存し、アプリの指示に従ってアップロードします。
+
+加えた変更内容は、*[Version History (バージョン履歴)]* タブで確認できます。
+
+== システム監視のメトリクス
+
+以下のセクションでは、CircleCI Server 環境で利用可能なメトリクスの概要を説明します。
+
+=== VM サービスと Docker のメトリクス
+
+VM サービスと Docker サービスのメトリクスは、メトリクスの収集とレポート用プラグイン駆動型サーバー エージェントである https://github.com/influxdata/telegraf[Telegraf] によって転送されます。
+
+以下のメトリクスが有効化されています。
+
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements[CPU]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics[ディスク]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics[メモリ]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md[ネットワーク]
+* https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics[Docker]
+
+=== Nomad ジョブのメトリクス
+
+https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad ジョブのメトリクス]は、Nomad サーバー エージェントによって有効化され、送信されます。レポートされるメトリクスは、以下の 5 つです。
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+[cols="6,5"]
+|===
+|メトリクス
+|説明
+
+|`circle.nomad.server_agent.poll_failure`
+|Nomad エージェントの最後のポーリングが失敗した場合は 1、成功した場合は 0 を返します。
+
+|`circle.nomad.server_agent.jobs.pending`
+|クラスタ全体の保留中ジョブの総数を返します。
+
+|`circle.nomad.server_agent.jobs.running`
+|クラスタ全体の実行中ジョブの総数を返します。
+
+|`circle.nomad.server_agent.jobs.complete`
+|クラスタ全体の完了済みジョブの総数を返します。
+
+|`circle.nomad.server_agent.jobs.dead`
+|クラスタ全体の停止中ジョブの総数を返します。
+|===
+
+Nomad メトリクスのコンテナが正常に動作している場合、標準出力や標準エラーには何も出力されません。障害が発生すると、標準エラーにメッセージが出力されます。
+
+=== CircleCI のメトリクス
+
+[.table.table-striped]
+[cols=2*, stripes=even]
+[cols="5,6"]
+|===
+| `circle.backend.action.upload-artifact-error`
+| アーティファクトのアップロードに失敗した回数
+
+| `circle.build-queue.runnable.builds`
+| システムを経由するビルドのうち実行可能と見なされているビルドの数
+
+| `circle.dispatcher.find-containers-failed`
+| 1.0 ビルドの数
+
+| `circle.github.api_call`
+| CircleCI が GitHub に対して実行している API 呼び出しの回数
+
+| `circle.http.request`
+| CircleCi のリクエストに対する応答コードの数
+
+| `circle.nomad.client_agent.*``
+| Nomad クライアントのメトリクス
+
+| `circle.nomad.server_agent.*`
+| Nomad サーバーの数
+
+| `circle.run-queue.latency`
+| 実行可能なビルドが受け入れられるまでの時間
+
+| `circle.state.container-builder-ratio`
+| Builder ごとのコンテナの数 (1.0 のみ)
+
+| `circle.state.lxc-available`
+| 利用可能なコンテナの数 (1.0 のみ)
+
+| `circle.state.lxc-reserved`
+| 予約/使用中のコンテナの数 (1.0 のみ)
+
+| `circleci.cron-service.messaging.handle-message`
+| `cron-service` による RabbitMQ メッセージの処理のタイミングと回数
+
+| `circleci.grpc-response`
+| システム コールに対するシステム gRPC のレイテンシ
+|===
+
+== ヒントとトラブルシューティング
+
+=== メトリクスのレポート状況を確認する
+
+Service/Pod によってメトリクスが正常にレポートされているかどうかを確認するには、メトリクスが標準出力にレポートされているかどうかを調べます。具体的には、`kubectl logs` を実行するか、 https://github.com/wercker/stern[stern] などのツールを使用して、`circleci-telegraf` Pod のログを調べます。Telegraf のログを表示するには、以下の手順を実行します。
+
+.`kubectl get pods` を実行して、サービスのリストを取得します
+.`kubectl logs -f circleci-telegraf-<hash>` に、お使いの CircleCI Server システムのハッシュを代入して実行します
+
+現在のログ ストリームを監視しながら、ログアウト/ログインやワークフローの実行など、CircleCI Server システムに対してアクションを実行してみてください。これらのアクションがログに記録されていれば、メトリクスはレポートされています。
+
+ログに記録されているメトリクスのほとんどは、`frontend` Pod によるものです。ただし、ワークフローを実行したときは、CPU、メモリ、ディスクの統計データに関するメトリクスに加えて、`dispatcher`、`legacy-dispatcher`、`output-processor`、`workflows-conductor` によって報告されるメトリクスも表示されます。
+
+=== ログが正常に機能しているかどうかを確認する
+
+ログが正常に機能しているかどうかを確認するには、`kubectl logs circleci-telegraf-<hash> -n <namespace> -f` を実行して、指定した出力プロバイダー (influx など) が構成済み出力のリストに含まれていることを確認します。 
+
+=== メトリクスにタグ付けする
+お使いの CircleCI Server システムのすべてのメトリクスが特定の環境にタグ付けされるようにするには、設定ファイルに以下のコードを記載します。
+
+```yaml
+[global_tags]
+Env="<staging-circleci>"
+```
+
+デフォルトのインストール手順や高度なインストール手順については、 https://github.com/influxdata/influxdb#installation[こちらの InfluxDB のドキュメント]を参照してください。

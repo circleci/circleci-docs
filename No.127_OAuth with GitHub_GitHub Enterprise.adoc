@@ -1,0 +1,107 @@
+---
+version:
+- Server v3.x
+- サーバー管理者
+---
+= 認証
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+このガイドでは、お使いの CircleCI Server v{serverversion} ベータ版環境にユーザーがアクセスして、アカウントを認証する方法を説明します。現在、CircleCI Server では、GitHub または GitHub Enterprise による OAuth 認証を使用できます。
+
+toc::[]
+
+== GitHub/GitHub Enterprise による OAuth 認証
+
+CircleCI Server におけるデフォルトのユーザー アカウント認証方法は、GitHub.com/GitHub Enterprise 経由の OAuth 認証です。
+
+CircleCI Server が起動したら、CircleCI アプリケーションにアクセスするためのリンク (例: `<your-circleci-hostname>.com`) をユーザーに提供します。ユーザーがリンクにアクセスすると、GitHub/GitHub Enterprise の OAuth フローを実行してアカウントを設定するように求められます。設定が完了すると、CircleCI のログイン画面にリダイレクトされます。
+
+////
+== LDAP
+GitHub の OAuth の代わりに、LDAP 認証を選択することもできます。多くの組織では、LDAP サーバーを使用して 全 ID 情報の一元管理を行っています。このセクションでは、CircleCI で OpenLDAP または Active Directory の資格情報に基づくユーザー認証を有効化、構成、テストする方法を説明します。
+
+CAUTION: LDAP を有効にすると、他の認証方法は**無効**になります。そのため、**現在の環境で GitHub 経由でユーザーを認証したことがある場合は、LDAP 認証を有効にしないことをお勧めします**。現在の環境の認証方法を LDAP に切り替える必要がある場合は、アカウント チームにご相談ください。
+
+=== 前提条件
+
+* OpenLDAP サーバーまたは Active Directory をインストールして構成する。
+* GitHub Enterprise または GitHub.com を構成して、ユーザーがアクセス可能な組織とプロジェクトのソースにする。
+* 既存ユーザーがいない新しい CircleCI Server インスタンスをインストールする。
+
+=== LDAP 認証の構成
+
+このセクションでは、LDAP を構成するための情報を紹介します。以下に、必要な情報の種類を把握するうえで参考になる構成の例を示します。この例では OpenLDAP を使用していますが、Active Directory の設定も同様です。
+
+.LDAP の構成例
+image::LDAP_example.png[LDAP の例]
+
+CircleCI Server の管理コンソールで LDAP を構成する手順は以下のとおりです。
+
+.LDAP/AD ポートから LDAP/AD サーバーにアクセスできることを確認します。
+.新しくインストールした CircleCI インスタンスの管理コンソールに、管理者としてログインします。
+.設定ページ (例: `<your-circleci-hostname>.com:8800`) に移動して、下にスクロールし、[Enable LDAP-only Authentication (LDAP のみの認証を有効にする)] ボタンをオンにします。[OpenLDAP] または [Active Directory] を選択します。
+.[Hostname (ホスト名)] フィールドと [Port (ポート)] フィールドに、LDAP インスタンスのホスト名とポート番号を入力します。
+.[Encryption Type (暗号化の種類)] で適用する暗号化を選択します ([Plain (プレーン)] はセキュアでないのでお勧めしません)。
+.[Search user (検索対象ユーザー)] フィールドに、LDAP データベースでの検索クエリに使用する認証対象ユーザーの完全な識別名を入力します。例:  `cn=<admin>,dc=<example>,dc=<org>`。
+.[Search password (検索パスワード)] フィールドに、前の手順で指定したユーザーの LDAP パスワードを入力します。
+.[Base DN (ベース DN)] フィールドに、CircleCI でのユーザー/グループの検索の起点となるディレクトリの識別名を入力します。例:  `ou=company,dc=example,dc=org`
+.[User search DN (ユーザー検索 DN)] フィールドに、CircleCI でのユーザー検索の起点となるディレクトリの相対識別名を入力します。この識別名は、前の手順で指定したベース DN を基準とする必要があります。例:  `ou=users`。
+.[Username Field (ユーザー名フィールド)] に、ログイン用のユーザー名のソースとなる属性名を入力します。例:  `uid` (ユーザーが UID をログインに使用する場合) または `mail` (ユーザーがメール アドレスをログインに使用する場合)。
+.[Email Field (メール フィールド)] に、ユーザー メール アドレスのソースとなる属性名を入力します。例:  `mail`
+.[Group Membership Field (グループ メンバーシップ フィールド)] に、特定のグループのユーザー メンバーシップとなる属性名を入力します。例:  `uniqueMember`。
+.[Group Object Class Field (グループ オブジェクト クラス フィールド)] に、DN を一意のグループとするオブジェクト クラス名を入力します。例:  `groupOfUniqueNames`
+.(任意) LDAP ユーザーのメール アドレスとパスワードをテストしたい場合は、[Test username (テスト ユーザー名)] フィールドと [Test password (テスト パスワード)] フィールドにテストするメール アドレスとパスワードを入力します。このテスト オプションはサードパーティ製のインフラストラクチャであるため、信頼性に欠けることがあることをご了承ください。
+.設定を保存します。
+
+=== 既知の問題:  ユーザーへの管理者権限の付与
+
+LDAP 認証を使用する場合、以下のいずれかの方法でユーザーに管理者権限を付与します。管理者権限は、通常、プロジェクトにアクセスした最初のユーザーに自動的に付与されます。しかし、現在、LDAP 認証を使用する場合には管理者権限が付与されないという既知の問題が発生しています。
+
+NOTE: 管理者権限の付与は、以下の方法のいずれか 1 つを実施するだけで十分です。REPL にあまり詳しくない方は、以下の手順を行う前にご遠慮なくカスタマー サポートに問い合わせください。
+
+*LDAP ユーザー名で特定のユーザーを指定して付与する (GitHub アカウントに接続する前またはそのユーザーの GitHub アカウントがない場合):*
+
+```sh
+(-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-ldap-username" :first_vcs_authorized_client_id nil} :limit 1)
+    (first)
+    (circle.model.user/set-fields! {:admin "all"})
+    (:analytics-id)
+    (circle.services.domain/delete-user-cache))
+```
+
+*GitHub ユーザー名で指定して付与する (GitHub アカウントに接続し、以前の :login 値が置き換えられている場合):*
+
+```sh
+(-> (circle.repl.mongo/fetch :users :domain-model :where {:login "the-github-username"} :limit 1)
+    (first)
+    (circle.model.user/set-fields! {:admin "all"})
+    (:analytics-id)
+    (circle.services.domain/delete-user-cache))
+```
+
+*アナリティクス ID で指定して付与する*
+
+```sh
+(-> (circle.model.user/find-one-by-analytics-id "3b35037c-6eb3-4e41-88e2-3913b2f43d96")
+    (circle.model.user/set-fields! {:admin "all"})
+    (:analytics-id)
+    (circle.services.domain/delete-user-cache))
+```
+
+=== ユーザー インタラクション
+
+LDAP の設定が完了すると、CircleCI にログインしたユーザーはアカウント ページにリダイレクトされるようになります。このページで、[Connect (接続)] ボタンをクリックして GitHub アカウントに接続する必要があります。[Connect (接続)] ボタンをクリックすると、ページにユーザー情報 (例: メール アドレス) が記載された [LDAP] セクションが表示され、GitHub アカウントを認証するよう求められます。GitHub アカウントを認証すると、**[Job (ジョブ)]** ページにリダイレクトされ、CircleCI を使用できるようになります。
+
+NOTE: Cookie が使用されているため、LDAP で認証したことがあるユーザーは、現在 LDAP/AD から削除されていても、ログイン状態にある限り CircleCI にアクセスできます。ユーザーがログアウトするか、Cookie の有効期限が切れた後は、再ログインできなくなります。ユーザーのプロジェクト閲覧やビルド実行の可否は、GitHub 権限で定義されています。したがって、GitHub 権限を LDAP/AD 権限と同期している場合、削除された LDAP/AD ユーザーは、CircleCI の表示権限やアクセス権限も自動的に失うことになります。
+
+
+=== トラブルシューティング
+
+LDAP サーバー設定のトラブルシューティングは、次のように ldapsearch を使用して行います。
+
+`ldapsearch -x LLL -h <ldap_address_server>`
+////

@@ -1,0 +1,116 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= 概要
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI Server v3.x は、GCP または AWS の Kubernetes クラスタにインストールできる継続的インテグレーション & 継続的デリバリー (CI/CD) プラットフォームです。v3.x の新機能については、「https://circleci.com/ja/server/changelog[サーバーの更新履歴]」を参照してください。
+
+toc::[]
+
+.Server v3.x のアーキテクチャ
+image::server-3-arch.png[Server v3.x のアーキテクチャ]
+
+== アーキテクチャ
+//CircleCI の UI 内に [Insights (インサイト)] というページがあります。このページには、フォローしているすべてのリポジトリのヘルス状態が表示されます。以下の情報を確認するダッシュボードとして利用できます。
+// [Insights (インサイト)] ページの説明は別の場所に移動したほうがよいと思います。
+
+//* 平均ビルド時間
+//* 平均キュー時間
+//* 最終ビルド時刻
+//* 成功率
+//* 並列処理数
+
+// [Insights (インサイト)] ページのスクリーンショットを追加
+
+上図は、CircleCI Server v3.x のコア コンポーネントを示しています。これらのコンポーネントには、次のような特徴があります。 
+
+* CircleCI https://circleci.com/docs/api/v1/#section=reference[API] は、全面的な機能を備えた RESTful API で、CircleCI のすべての情報にアクセスでき、すべてのアクションをトリガーできます。
+* CircleCI は、Services と Nomad クライアントという 2 つのプライマリ コンポーネントで構成されます。ジョブは、1 つ以上の Nomad クライアントで実行され、Services に返されます。 
+* すべてのコンポーネントが、GitHub か、お使いのネットワーク上にホストされた GitHub Enterprise のインスタンスにアクセスできる必要があります。
+
+== Services クラスタ
+
+CircleCI Server v{serverversion}-beta を構成するすべてのサービスは、Kubernetes クラスタ内で Pod として実行されます。サービスの全一覧とロール情報については、「<<architecture#,Services Architecture (Services アーキテクチャ)>>」ガイド (英語) を参照してください。
+
+== ビルド環境
+
+CircleCI Server v{serverversion}-beta では、プライマリ ジョブ スケジューラとして Nomad を使用します。ジョブ スケジューラ、およびクライアントとクラスタの基本的な操作方法については、「<<nomad#introduction-to-nomad-cluster-operation,Nomad クラスタの操作ガイド>>」を参照してください。
+
+デフォルトでは、CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに構成されている Executor に従って、コンピューティング リソースを自動的にプロビジョニングします。
+
+=== Nomad クライアント
+Nomad クライアントでは実行時に状態が保存されないため、必要に応じてコンテナ数を増減することができます。
+
+すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューイングされているビルドを追跡し、必要に応じて Nomad クライアント マシンの数を増やして負荷を分散させます。メトリクスの追跡に関する詳細については、「<<monitoring#system-monitoring-metrics,CircleCI Server システムの監視>>」を参照してください。
+
+各マシンには、ビルドを調整するために、それぞれ 2 基の vCPU と 4GB のメモリが予約されています。そのうえで、ジョブ実行用のコンテナが残りのプロセッサーとメモリで作成されます。マシンの規模が大きくなれば、その分多くのコンテナを実行することができますが、調整用に予約してある 2 基以外に使用できるコアの数によって制限されます。
+
+NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/CPU 64 基です。使用する Nomad クライアント マシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者に問い合わせてください。
+
+以下の表に、Nomad クライアントで使用されるポートを示します。
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ソース
+|ポート
+|用途
+
+|エンド ユーザー
+|64535 ～ 65535
+|ビルドへの SSH 接続
+
+|管理者
+|80 または 443
+|CCI API アクセス
+
+|管理者
+|22
+|SSH
+
+|Services マシン
+|すべてのトラフィック、すべてのポート
+|内部通信
+
+|Nomad クライアント (それ自身を含む)
+|すべてのトラフィック、すべてのポート
+|内部通信
+|===
+
+=== GitHub
+CircleCI では、認証に GitHub または GitHub Enterprise の認証情報が使用され、認証後は SAML または SSH を使用してアクセスできます。つまり、CircleCI は、一元管理された SSO インフラストラクチャでサポートされる認証を継承します。
+
+NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。 
+
+以下の表に、GitHub を実行するマシンで Services および Nomad クライアント インスタンスと通信する際に使用されるポートを示します。
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+|ソース
+|ポート
+|用途
+
+|Services
+|22
+|Git アクセス
+
+|Services
+|80、443
+|API アクセス
+
+|Nomad クライアント
+|22
+|Git アクセス
+
+|Nomad クライアント
+|80、443
+|API アクセス
+|===

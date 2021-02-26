@@ -1,0 +1,97 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= Server でのユーザー アカウントの管理
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+ここでは、CircleCI Server のシステム管理者がユーザーのアカウントを管理する際に役立つ情報を紹介します。ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、[Admin (管理者)] を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。この概要には、アクティブ ユーザー数とライセンスが付与されているユーザーの総数が表示されます。
+
+toc::[]
+
+.[Admin Settings (管理者設定)] – アカウントの概要
+image::admin_settings.png[アカウントの概要]
+
+== アカウントの停止
+
+不要になったアカウントは、ライセンス割り当ての数にカウントされないよう、停止してアクティブ状態を解除できます。アカウントを停止するには、以下の手順を行います。
+
+.CircleCI の [Admin Settings (管理者設定)] に移動します。
+.[Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
+.下へスクロールして、[Active (アクティブ)] ウィンドウまたは [Inactive (非アクティブ)] ウィンドウで、目的のアカウントを見つけます。
+.アカウント名の横にある `[Suspend (停止)]` をクリックします。停止したアカウントは [Suspended (停止中)] ウィンドウに表示されるようになります。
+
+.アカウントの停止
+image::suspend_account.png[ユーザー アカウントの停止]
+
+== 停止中のユーザー アカウントの再アクティブ化
+
+停止したアカウントを再びアクティブ状態にするには、以下の手順を行います。
+
+1.CircleCI の [Admin Settings (管理者設定)] に移動します。
+2.[Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
+3.[Suspended (停止中)] ウィンドウを表示します。
+4.アクセス権を付与するユーザー名の横にある `[Activate (アクティブ化)]` をクリックします。そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
+
+.既存ユーザーの再アクティブ化
+image::activate_user.png[既存ユーザーの再アクティブ化]
+
+== アカウントのアクセス権の制御
+
+GitHub.com または GitHub Enterprise の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。アクセス可能なユーザーを制御するには、新規ユーザーは**全員**を自動的に停止しておき、ユーザーのログイン前に管理者にアクティブ化が要求されるようにします。この機能を使用するには、以下の手順を行います。
+
+1.CircleCI の [Admin Settings (管理者設定)] に移動します。
+2.[Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+3.[Suspend New Users (新規ユーザーの停止)] を `[true (有効)]` に設定します。
+
+.新規ユーザーの自動停止
+image::suspend-new-users.png[新規ユーザーの停止]
+
+=== 停止中の新規ユーザー アカウントのアクティブ化
+
+自動的に停止された**新規**アカウントをアクティブ化し、CircleCI Server に関連するユーザー アクセスを許可するには、以下の手順を行います。
+
+1.CircleCI の [Admin Settings (管理者設定)] に移動します。
+2.[Admin Settings (管理者設定)] メニューから [Users (ユーザー)] を選択します。
+3.[Suspended New Users (停止中の新規ユーザー)] ウィンドウを表示します。
+4.アクセス権を付与するユーザー名の横にある `[Activate (アクティブ化)]` をクリックします。そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
+
+.停止中の新規ユーザーのアクティブ化
+image::unsuspend.png[新規ユーザーのアクティブ化]
+
+=== GitHub 組織ごとのユーザー登録の制限
+
+GitHub.com を使用している場合は、承認済みの組織リストで指定した組織に*メンバーシップを有している*ユーザーのみに CircleCI への登録を制限できます。この機能を使用するには、以下の手順を行います。
+
+1.CircleCI の [Admin Settings (管理者設定)] ページに移動します。
+2.[Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+3.[Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
+4.承認する組織を入力します。複数の組織を入力する場合は、カンマで区切って入力します。
+
+.組織のメンバーシップ
+image::org-membership.png[組織のメンバーシップ]
+
+NOTE: 組織のメンバーシップは、どの形式であっても、この承認機能の対象になります。なお、リスト上にない組織にユーザーが所属している場合、この機能はその組織に関連付けられたビルドの実行には影響しません。
+
+=== ユーザーの全一覧
+
+CircleCI Server の全ユーザー一覧を表示するには、Services マシンに SSH 接続してから、以下のコマンドを実行します。
+
+```
+circleci dev-console
+(circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
+```
+
+=== ユーザーの削除
+
+CircleCI Server からユーザーを削除するには、Services マシンに SSH 接続してから、以下のコマンドを実行して削除します。コマンドには、対象ユーザーの GitHub ユーザー名を代入します。
+
+```shell
+circleci dev-console
+(circle.http.api.admin-commands.user/delete-by-login-vcs-type! "github-username-of-user" :github)
+```
