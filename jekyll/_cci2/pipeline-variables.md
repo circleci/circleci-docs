@@ -29,8 +29,10 @@ pipeline.project.type       | The lower-case name of the VCS provider, E.g. “g
 pipeline.git.tag            | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string.
 pipeline.git.branch         | The name of the git branch that was pushed to trigger the pipeline.
 pipeline.git.revision       | The long (40-character) git SHA that is being built.
-pipeline.git.base_revision  | The previous git revision
+pipeline.git.base_revision  | The long (40-character) git SHA of the build prior to the one being built.
 {: class="table table-striped"}
+
+Note: While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
 
 For example:
 
