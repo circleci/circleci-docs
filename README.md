@@ -60,11 +60,6 @@ the CircleCI API v2. This uses [Slate](https://github.com/slatedocs/slate) and
 with a spec (that follows the Open API Spec) generated from the CircleCI code
 base.
 
-### `/src-crg` - Configuration Reference
-
-This is documentation for the 2.1 configuration keys, built with Slate and
-compiled and moved into the Jekyll site.
-
 ### `/src-js` - Javascript Files
 
 Some JavaScript files that make use of Webpack  and bundles a Javascript
