@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="4068" original="/master/jekyll/_cci2/orb-author-validate-publish.md" source-language="en" target-language="ja" datatype="plaintext" project-id="306408" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1" />
+    </header>
+    <body>
+      <trans-unit id="306366">
+        <source>classic-docs</source>
+        <target state="translated">classic-docs</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="402530">
+        <source>Manual Orb Authoring Process</source>
+        <target state="translated">Orb の手動オーサリング プロセス</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[2]/div[2]</note></trans-unit>
+      <trans-unit id="402532">
+        <source>Authoring simple orbs manually without the orb development kit.</source>
+        <target state="translated">Orb 開発キットを使用せずに、シンプルな Orb を手動でオーサリングする方法を説明します。</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[3]/div[2]</note></trans-unit>
+      <trans-unit id="402534">
+        <source>Cloud</source>
+        <target state="translated">Cloud</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[4]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="402536">
+        <source>This guide covers the steps required to create a simple orb, manually, without using the orb development kit.</source>
+        <target state="translated">ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p</note></trans-unit>
+      <trans-unit id="402538">
+        <source>We recommend the orb development kit for most orb projects, to find out more, see the &lt;a href="{{site.baseurl}}/2.0/orb-author"&gt;Orb Authoring Guide&lt;/a&gt;.</source>
+        <target state="translated">ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。詳細は「&lt;a href="{{site.baseurl}}/2.0/orb-author"&gt;Orb のオーサリング プロセス&lt;/a&gt;」を参照してください。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p</note></trans-unit>
+      <trans-unit id="402540">
+        <source>If you have not already done so, claim a namespace for your user/organization using the following command, substituting your namespace choice and GitHub org name:</source>
+        <target state="translated">ユーザーまたは組織の名前空間をまだ要求していない場合は、要求を行います。次のコマンドに、希望する名前空間と利用中の GitHub 組織名を代入して実行します。</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ol/li</note></trans-unit>
+      <trans-unit id="402542">
+        <source>circleci namespace create &amp;lt;my-namespace&amp;gt; github &amp;lt;my-gh-org&amp;gt;</source>
+        <target state="translated">circleci namespace create &amp;lt;my-namespace&amp;gt; github &amp;lt;my-gh-org&amp;gt;</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre/code</note></trans-unit>
+      <trans-unit id="402544">
+        <source>&lt;strong x-id="1"&gt;Note:&lt;/strong&gt; When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.</source>
+        <target state="translated">&lt;strong x-id="1"&gt;メモ:&lt;/strong&gt; CircleCI CLI から名前空間を作成する場合は、VCS プロバイダーを指定してください。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[2]</note></trans-unit>
+      <trans-unit id="402546">
+        <source>Create your orb inside your namespace.</source>
+        <target state="translated">名前空間内に Orb を作成します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[2]/li</note></trans-unit>
+      <trans-unit id="423134">
+        <source>At this stage no orb content is being generated, but the naming is reserved for when the orb is published.</source>
+        <target state="translated">この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[2]/li</note></trans-unit>
+      <trans-unit id="423136">
+        <source>To create a &lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/2.0/orb-intro/#public-orbs"&gt;public&lt;/a&gt;&lt;/strong&gt; orb:</source>
+        <target state="translated">&lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF-Orbs"&gt;パブリック&lt;/a&gt;&lt;/strong&gt; Orb を作成する場合:</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[3]</note></trans-unit>
+      <trans-unit id="402550">
+        <source>circleci orb create &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;</source>
+        <target state="translated">circleci orb create &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[2]/code</note></trans-unit>
+      <trans-unit id="423138">
+        <source>To create a &lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/2.0/orb-intro/#private-orbs"&gt;private&lt;/a&gt;&lt;/strong&gt; orb:</source>
+        <target state="translated">&lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88-Orbs"&gt;プライベート&lt;/a&gt;&lt;/strong&gt; Orb を作成する場合:</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[4]</note></trans-unit>
+      <trans-unit id="423140">
+        <source>circleci orb create &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt; --private</source>
+        <target state="translated">circleci orb create &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt; --private</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[3]/code</note></trans-unit>
+      <trans-unit id="402552">
+        <source>Create the content of your orb in a YAML file.</source>
+        <target state="translated">YAML ファイル形式で Orb のコンテンツを作成します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[3]/li</note></trans-unit>
+      <trans-unit id="402554">
+        <source>Here is a simple example to get you started:</source>
+        <target state="translated">以下のシンプルな例を参考にしてください。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[3]/li</note></trans-unit>
+      <trans-unit id="423142">
+        <source>version: 2.1
+description: A greeting command orb
+commands:
+    greet:
+        description: Greet someone with a "hello".</source>
+        <target state="translated">version: 2.1
+description: あいさつコマンド Orb
+commands:
+    greet:
+        description: 相手に "Hello" とあいさつします。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /pre[4]/code</note></trans-unit>
+      <trans-unit id="423144">
+        <source>parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, &amp;lt;&amp;lt; parameters.to &amp;gt;&amp;gt;"</source>
+        <target state="translated">parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, &amp;lt;&amp;lt; parameters.to &amp;gt;&amp;gt;"</target>
+        
+      <note from="Crowdin" priority="3">XPath: /pre[4]/code</note></trans-unit>
+      <trans-unit id="402560">
+        <source>Validate your orb code using the CLI:</source>
+        <target state="translated">CLI を使用して、Orb コードをバリデーションします。</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ol[4]/li</note></trans-unit>
+      <trans-unit id="423146">
+        <source>circleci orb validate /tmp/orb.yml</source>
+        <target state="translated">circleci orb validate /tmp/orb.yml</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[5]/code</note></trans-unit>
+      <trans-unit id="402564">
+        <source>Publish a dev version of your orb:</source>
+        <target state="translated">開発版の Orb をパブリッシュします。</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ol[5]/li</note></trans-unit>
+      <trans-unit id="423148">
+        <source>circleci orb publish /tmp/orb.yml &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;@dev:first</source>
+        <target state="translated">circleci orb publish /tmp/orb.yml &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;@dev:first</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[6]/code</note></trans-unit>
+      <trans-unit id="402568">
+        <source>Once you are ready to push your orb to production, you can publish it manually using &lt;code&gt;circleci orb publish&lt;/code&gt; or promote it directly from the dev version.</source>
+        <target state="translated">Orb を本番にプッシュする準備が整ったら、&lt;code&gt;circleci orb publish&lt;/code&gt; を使用して手動でパブリッシュするか、開発バージョンから直接プロモートすることができます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[6]/li</note></trans-unit>
+      <trans-unit id="402570">
+        <source>Using the following command will increment the dev version to become &lt;code&gt;0.0.1&lt;/code&gt;:</source>
+        <target state="translated">以下のコマンドを使用すると、開発バージョン番号を &lt;code&gt;0.0.1&lt;/code&gt; にインクリメントできます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[6]/li</note></trans-unit>
+      <trans-unit id="423150">
+        <source>circleci orb publish promote &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;@dev:first patch</source>
+        <target state="translated">circleci orb publish promote &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;@dev:first patch</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[7]/code</note></trans-unit>
+      <trans-unit id="402574">
+        <source>Your orb is now published, in an immutable form, as a production version and can be used safely in CircleCI projects.</source>
+        <target state="translated">安定版の Orb が変更不可形式でパブリッシュされ、CircleCI プロジェクトで安全に使用できるようになりました。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[7]/li</note></trans-unit>
+      <trans-unit id="402576">
+        <source>You can pull the source of your orb using:</source>
+        <target state="translated">以下のコマンドを使用して、Orb のソースをプルします。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ol[7]/li</note></trans-unit>
+      <trans-unit id="423152">
+        <source>circleci orb source &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;@0.0.1</source>
+        <target state="translated">circleci orb source &amp;lt;my-namespace&amp;gt;/&amp;lt;my-orb-name&amp;gt;@0.0.1</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[8]/code</note></trans-unit>
+      <trans-unit id="423154">
+        <source>List your available orbs using the CLI:</source>
+        <target state="translated">CLI を使用して、公開中の Orb を一覧表示します。</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ol[8]/li</note></trans-unit>
+      <trans-unit id="423156">
+        <source>To list &lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/2.0/orb-intro/#public-orbs"&gt;public&lt;/a&gt;&lt;/strong&gt; orbs:</source>
+        <target state="translated">&lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF-Orbs"&gt;パブリック&lt;/a&gt;&lt;/strong&gt; Orb を一覧表示する場合:</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[5]</note></trans-unit>
+      <trans-unit id="423158">
+        <source>circleci orb list &amp;lt;my-namespace&amp;gt;</source>
+        <target state="translated">circleci orb list &amp;lt;my-namespace&amp;gt;</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[9]/code</note></trans-unit>
+      <trans-unit id="423160">
+        <source>To list &lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/2.0/orb-intro/#private-orbs"&gt;private&lt;/a&gt;&lt;/strong&gt; orbs:</source>
+        <target state="translated">&lt;strong x-id="1"&gt;&lt;a href="https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88-Orbs"&gt;プライベート&lt;/a&gt;&lt;/strong&gt; Orb を一覧表示する場合:</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[6]</note></trans-unit>
+      <trans-unit id="423162">
+        <source>circleci orb list &amp;lt;my-namespace&amp;gt; --private</source>
+        <target state="translated">circleci orb list &amp;lt;my-namespace&amp;gt; --private</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[10]/code</note></trans-unit>
+      <trans-unit id="423164">
+        <source>For more information on how to use the &lt;code&gt;circleci orb&lt;/code&gt; command, see the CLI &lt;a href="https://circleci-public.github.io/circleci-cli/circleci_orb.html"&gt;documentation&lt;/a&gt;.</source>
+        <target state="translated">&lt;code&gt;circleci orb&lt;/code&gt; コマンドの使用方法の詳細については、&lt;a href="https://circleci-public.github.io/circleci-cli/circleci_orb.html"&gt;CLI に関するドキュメント&lt;/a&gt;を参照してください。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[7]</note></trans-unit>
+    </body>
+  </file>
+</xliff>

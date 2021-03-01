@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="1702" original="/master/jekyll/_cci2/orb-intro.md" source-language="en" target-language="ja" datatype="plaintext" project-id="306408" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1" />
+    </header>
+    <body>
+      <trans-unit id="162144">
+        <source>classic-docs</source>
+        <target state="translated">classic-docs</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="162146">
+        <source>Orbs Introduction</source>
+        <target state="translated">Orb の概要</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[2]/div[2]</note></trans-unit>
+      <trans-unit id="162148">
+        <source>Orbs Introduction</source>
+        <target state="translated">Orb の概要</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[3]/div[2]</note></trans-unit>
+      <trans-unit id="162150">
+        <source>Starting point for CircleCI Orbs</source>
+        <target state="translated">CircleCI Orb の入門ガイド</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[4]/div[2]</note></trans-unit>
+      <trans-unit id="162152">
+        <source>getting-started</source>
+        <target state="translated">getting-started</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[5]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="162154">
+        <source>1</source>
+        <target state="translated">1</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[6]/div[2]</note></trans-unit>
+      <trans-unit id="395978">
+        <source>Cloud</source>
+        <target state="translated">Cloud</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[7]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="388460">
+        <source>TOC
+{:toc}</source>
+        <target state="translated">目次
+{:toc}</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul/li</note></trans-unit>
+      <trans-unit id="412096">
+        <source>Quick start</source>
+        <target state="translated">クイック スタート</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2</note></trans-unit>
+      <trans-unit id="395980">
+        <source>{:.no_toc}</source>
+        <target state="translated">{:.no_toc}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p</note></trans-unit>
+      <trans-unit id="395982">
+        <source>CircleCI orbs are open-source, shareable packages of parameterizable &lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;reusable configuration&lt;/a&gt; elements, including &lt;a href="{{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs"&gt;jobs&lt;/a&gt;, &lt;a href="{{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands"&gt;commands&lt;/a&gt;, and &lt;a href="{{site.baseurl}}/2.0/reusing-config/#executor"&gt;executors&lt;/a&gt;.</source>
+        <target state="translated">CircleCI Orbs とは、&lt;a href="{{site.baseurl}}/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E3%82%B8%E3%83%A7%E3%83%96%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0"&gt;ジョブ&lt;/a&gt;、&lt;a href="{{site.baseurl}}/2.0/reusing-config/#%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0"&gt;コマンド&lt;/a&gt;、&lt;a href="{{site.baseurl}}/2.0/reusing-config/#executor"&gt;Executor&lt;/a&gt; などの、パラメーター化および&lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;再利用可能な構成要素&lt;/a&gt;をまとめた共有可能なオープン ソース パッケージです。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[2]</note></trans-unit>
+      <trans-unit id="395984">
+        <source>Use orbs to reduce configuration complexity and help you integrate with your software and services stack quickly and easily across many projects.</source>
+        <target state="translated">Orbs を使用すると、構成がシンプルになり、多くのプロジェクトにまたがってソフトウェアやサービス スタックとの連携を素早く、容易に行えるようになります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[2]</note></trans-unit>
+      <trans-unit id="404582">
+        <source>Published orbs can be found on our &lt;a href="https://circleci.com/developer/orbs"&gt;Orb Registry&lt;/a&gt;, or you can &lt;a href="{{site.baseurl}}/2.0/orb-author-intro/"&gt;author your own orb&lt;/a&gt;.</source>
+        <target state="translated">パブリッシュされている Orb を &lt;a href="https://circleci.com/developer/ja/orbs"&gt;CircleCI Orb レジストリ&lt;/a&gt;から入手できるほか、&lt;a href="{{site.baseurl}}/2.0/orb-author-intro/"&gt;独自の Orb をオーサリングする&lt;/a&gt;こともできます。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[3]</note></trans-unit>
+      <trans-unit id="420736">
+        <source>Private orbs vs.</source>
+        <target state="translated">プライベート Orbs と</target>
+        
+      <note from="Crowdin" priority="3">XPath: /h2[2]</note></trans-unit>
+      <trans-unit id="420738">
+        <source>public orbs</source>
+        <target state="translated">パブリック Orbs の比較</target>
+        
+      <note from="Crowdin" priority="3">XPath: /h2[2]</note></trans-unit>
+      <trans-unit id="420740">
+        <source>There are two different types of orbs you can use in your configuration, depending on how you want to publish your orbs.</source>
+        <target state="translated">設定ファイルで使用できる Orbs の種類は 2 つあり、Orb のパブリッシュ方法によって使い分ける必要があります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[4]</note></trans-unit>
+      <trans-unit id="420742">
+        <source>If you prefer to publish your orb internally, and not to the &lt;a href="https://circleci.com/developer/orbs"&gt;CircleCI Orb Registry&lt;/a&gt;, you will want to use a private orb.</source>
+        <target state="translated">Orb を &lt;a href="https://circleci.com/developer/ja/orbs"&gt;CircleCI Orb レジストリ&lt;/a&gt;ではなく社内のみにパブリッシュする場合は、プライベート Orbs を使用します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[4]</note></trans-unit>
+      <trans-unit id="420744">
+        <source>However, if you want to publish your orb to the &lt;a href="https://circleci.com/developer/orbs"&gt;CircleCI Orb Registry&lt;/a&gt;, use a public orb.</source>
+        <target state="translated">Orb を &lt;a href="https://circleci.com/developer/ja/orbs"&gt;CircleCI Orb レジストリ&lt;/a&gt;にパブリッシュする場合は、パブリック Orbs を使用します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[4]</note></trans-unit>
+      <trans-unit id="420746">
+        <source>Descriptions of each type of orb is described in the sections below.</source>
+        <target state="translated">それぞれの Orbs について、以下のセクションで説明します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[4]</note></trans-unit>
+      <trans-unit id="420748">
+        <source>Private orbs</source>
+        <target state="translated">プライベート Orbs</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3</note></trans-unit>
+      <trans-unit id="423438">
+        <source>&lt;strong&gt;Note:&lt;/strong&gt; Private orbs are available on our &lt;a href="https://circleci.com/pricing"&gt;Scale Plan&lt;/a&gt;.</source>
+        <target state="translated">&lt;strong&gt;メモ:&lt;/strong&gt; プライベート Orbs 機能は、&lt;a href="https://circleci.com/ja/pricing"&gt;Scale プラン&lt;/a&gt;で利用できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[5]</note></trans-unit>
+      <trans-unit id="420752">
+        <source>Please reach out to your sales representative for information on how to sign up for the Scale Plan.</source>
+        <target state="translated">Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[5]</note></trans-unit>
+      <trans-unit id="420754">
+        <source>Using a private orb enables you to author an orb while ensuring the following:</source>
+        <target state="translated">プライベート Orbs 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[6]</note></trans-unit>
+      <trans-unit id="420756">
+        <source>your orb does not appear in the CircleCI Orb Registry.</source>
+        <target state="translated">CircleCI Orb レジストリに公開されない。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /ul[2]/li/p</note></trans-unit>
+      <trans-unit id="420758">
+        <source>your orb cannot be viewed or used by someone outside of your organization.</source>
+        <target state="translated">作成元組織以外のユーザーは閲覧、使用できない。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /ul[2]/li[2]/p</note></trans-unit>
+      <trans-unit id="420760">
+        <source>your orb cannot be used in a pipeline that does not belong to your organization.</source>
+        <target state="translated">作成元組織のものではないパイプラインでは使用できない。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /ul[2]/li[3]/p</note></trans-unit>
+      <trans-unit id="423440">
+        <source>By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:</source>
+        <target state="translated">パブリック Orbs ではなくプライベート Orbs を選択する場合には、プライベート Orbs ならではの制限事項も理解する必要があります。具体的には次のとおりです。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[7]</note></trans-unit>
+      <trans-unit id="423442">
+        <source>You will be unable to use the &lt;code&gt;circleci config validate&lt;/code&gt; command to validate your configuration.</source>
+        <target state="translated">設定ファイルのバリデーションに &lt;code&gt;circleci config validate&lt;/code&gt; コマンドを使用できなくなります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ul[3]/li/p</note></trans-unit>
+      <trans-unit id="423132">
+        <source>You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the &lt;code&gt;circleci config validate --org-slug &amp;lt;your-org-slug&amp;gt; &amp;lt;path/to/config.yml&amp;gt;&lt;/code&gt; command to validate your configuration.</source>
+        <target state="translated">その代わり、Orb のコンテンツを設定ファイルの "orbs" スタンザにインラインで貼り付けるか、&lt;code&gt;circleci config validate --org-slug &amp;lt;your-org-slug&amp;gt; &amp;lt;path/to/config.yml&amp;gt;&lt;/code&gt; コマンドを使用することで、設定ファイルをバリデーションできます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ul[3]/li/p</note></trans-unit>
+      <trans-unit id="423444">
+        <source>You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations.</source>
+        <target state="translated">組織間の関係性にかかわらず、ある組織で作成されたプライベート Orbs を、別の組織のパイプラインで使用することはできません。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ul[3]/li[2]/p</note></trans-unit>
+      <trans-unit id="420770">
+        <source>This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.</source>
+        <target state="translated">それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orbs を設定ファイル内で使うことはできますが、別の Orb からは参照できません。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /ul[3]/li[2]/p</note></trans-unit>
+      <trans-unit id="420772">
+        <source>Public orbs</source>
+        <target state="translated">パブリック Orbs</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3[2]</note></trans-unit>
+      <trans-unit id="423446">
+        <source>Public orbs are used by most users when authoring and publishing orbs to the &lt;a href="https://circleci.com/developer/orbs"&gt;CircleCI Orb Registry&lt;/a&gt;.</source>
+        <target state="translated">Orb をオーサリングして &lt;a href="https://circleci.com/developer/ja/orbs"&gt;CircleCI Orb レジストリ&lt;/a&gt;にパブリッシュする場合には、通常、パブリック Orbs を使用します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[8]</note></trans-unit>
+      <trans-unit id="423448">
+        <source>When authoring a public orb, you are enabling all  CircleCI users to use your orb in their own configurations.</source>
+        <target state="translated">パブリック Orb をオーサリングすると、すべての CircleCI ユーザーがその Orb を設定ファイル内で使用できるようになります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[8]</note></trans-unit>
+      <trans-unit id="423450">
+        <source>Authoring orbs</source>
+        <target state="translated">Orb のオーサリング</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3[3]</note></trans-unit>
+      <trans-unit id="423452">
+        <source>Both public and private orbs can be authored in two ways:</source>
+        <target state="translated">パブリック Orbs とプライベート Orbs はいずれも、2 種類の方法でオーサリングできます。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[9]</note></trans-unit>
+      <trans-unit id="423454">
+        <source>Using the &lt;a href="https://circleci.com/docs/2.0/orb-author-validate-publish/"&gt;Manual Orb Authoring Process&lt;/a&gt;</source>
+        <target state="translated">&lt;a href="https://circleci.com/ja/docs/2.0/orb-author-validate-publish/"&gt;Orb を手動でオーサリングする&lt;/a&gt;方法</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[4]/li</note></trans-unit>
+      <trans-unit id="423456">
+        <source>Using the &lt;a href="https://circleci.com/docs/2.0/orb-author/#orb-development-kit"&gt;Orb Development Kit&lt;/a&gt;  (recommended)</source>
+        <target state="translated">&lt;a href="https://circleci.com/ja/docs/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88"&gt;Orb 開発キット&lt;/a&gt;を使用する方法 (推奨)</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[4]/li[2]</note></trans-unit>
+      <trans-unit id="420778">
+        <source>Benefits of using orbs</source>
+        <target state="translated">Orbs を使用するメリット</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[3]</note></trans-unit>
+      <trans-unit id="420966">
+        <source>Orbs provide parameterizable configuration elements that can greatly simplify your configuration.</source>
+        <target state="translated">Orbs では設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[10]</note></trans-unit>
+      <trans-unit id="420968">
+        <source>To illustrate this, the following example shows a typical configuration for testing a Node.js application – defining a job with the required steps for testing the application – versus using the &lt;code&gt;test&lt;/code&gt; job provided by the &lt;a href="https://circleci.com/developer/orbs/orb/circleci/node"&gt;&lt;code&gt;circleci/node&lt;/code&gt;&lt;/a&gt; orb.</source>
+        <target state="translated">例を使って説明しましょう。以下は、Node.js アプリケーションをテストするための一般的な設定ファイルであり、ジョブの定義には、アプリケーションのテストに必要なステップが複数含まれています。一方、CircleCI Orbs を使用する場合は、&lt;a href="https://circleci.com/developer/ja/orbs/orb/circleci/node"&gt;&lt;code&gt;circleci/node&lt;/code&gt;&lt;/a&gt; Orb に含まれる &lt;code&gt;test&lt;/code&gt; ジョブを使用します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[10]</note></trans-unit>
+      <trans-unit id="420970">
+        <source>With orbs, it is possible to write a parameterized configuration once and utilize it across multiple similar projects.</source>
+        <target state="translated">Orbs を使用すれば、パラメーター化された構成を 1 回記述するだけで、それをいくつもの類似したプロジェクトで利用できるようになります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[10]</note></trans-unit>
+      <trans-unit id="420972">
+        <source>{:.tab.nodeTest.Orbs}</source>
+        <target state="translated">{:.tab.nodeTest.Orb を使用}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[11]</note></trans-unit>
+      <trans-unit id="388482">
+        <source>version: 2.1
+
+orbs:
+  node: circleci/node@x.y #orb version
+
+workflows:
+  test_my_app:
+    jobs:
+
+      - node/test:
+          version: &amp;lt;node-version&amp;gt;</source>
+        <target state="translated">version: 2.1
+
+orbs:
+  node: circleci/node@x.y #Orb バージョン
+
+workflows:
+  test_my_app:
+    jobs:
+
+      - node/test:
+          version: &amp;lt;node-version&amp;gt;</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre/code</note></trans-unit>
+      <trans-unit id="420974">
+        <source>{:.tab.nodeTest.Without-Orbs}
+{% raw %}</source>
+        <target state="translated">{:.tab.nodeTest.Orbs なし}
+{% raw %}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[12]</note></trans-unit>
+      <trans-unit id="400810">
+        <source>version: 2.1
+
+jobs:
+  test:
+    docker:
+
+      - image: cimg/node:&amp;lt;node-version&amp;gt;
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run:
+          name: Run Tests
+          command: npm run test
+
+workflows:
+  test_my_app:
+    jobs:
+
+      - test</source>
+        <target state="translated">version: 2.1
+
+jobs:
+  test:
+    docker:
+
+      - image: cimg/node:&amp;lt;node-version&amp;gt;
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: パッケージのインストール
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run:
+          name: テストの実行
+          command: npm run test
+
+workflows:
+  test_my_app:
+    jobs:
+
+      - test</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[2]/code</note></trans-unit>
+      <trans-unit id="420976">
+        <source>{% endraw %}</source>
+        <target state="translated">{% endraw %}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[13]</note></trans-unit>
+      <trans-unit id="420792">
+        <source>The orb registry</source>
+        <target state="translated">Orb レジストリ</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[4]</note></trans-unit>
+      <trans-unit id="420978">
+        <source>The &lt;a href="https://circleci.com/developer/orbs"&gt;Orb Registry&lt;/a&gt; is an open repository of all published orbs.</source>
+        <target state="translated">&lt;a href="https://circleci.com/developer/ja/orbs"&gt;Orb レジストリ&lt;/a&gt;は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[14]</note></trans-unit>
+      <trans-unit id="420980">
+        <source>Find the orb for your stack or consider developing and &lt;a href="{{site.baseurl}}/2.0/orb-author-intro/"&gt;publishing your own orb&lt;/a&gt;.</source>
+        <target state="translated">自分のスタックに適した Orb を検索できるだけでなく、&lt;a href="{{site.baseurl}}/2.0/orb-author-intro/"&gt;独自の Orb を開発してパブリッシュ&lt;/a&gt;することもできます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[14]</note></trans-unit>
+      <trans-unit id="420982" translate="no">
+        <source>{{site.baseurl}}/assets/img/docs/orbs-registry.png</source>
+        <target state="new">{{site.baseurl}}/assets/img/docs/orbs-registry.png</target>
+        
+      <note from="Crowdin" priority="3">Image Source
+XPath: /p[15]/img[@src]</note></trans-unit>
+      <trans-unit id="420984">
+        <source>Orb Registry</source>
+        <target state="translated">Orb レジストリ</target>
+        
+      <note from="Crowdin" priority="3">Image Alternative Text
+XPath: /p[15]/img[@alt]</note></trans-unit>
+      <trans-unit id="420986">
+        <source>Orbs in the registry will appear with one of three different namespace designations:</source>
+        <target state="translated">レジストリの Orb には、次の 3 つのラベルのいずれかが一緒に表示されます。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[16]</note></trans-unit>
+      <trans-unit id="420988">
+        <source>| Certified | Written and tested by the CircleCI team |
+| Partner | Written by our technology partners |
+| Community | Written by the community |
+{: class="table table-striped"}</source>
+        <target state="translated">| Certified (承認済み) | CircleCI チームが作成してテスト済み |
+| Partner (パートナー製) | CircleCI のテクノロジー パートナーが作成 |
+| Community (コミュニティ) | コミュニティが作成 |
+{: class="table table-striped"}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[17]</note></trans-unit>
+      <trans-unit id="420990">
+        <source>&lt;strong&gt;Note:&lt;/strong&gt; &lt;em&gt;In order to use uncertified orbs, your organization’s administrator must opt-in to allow 3rd-party uncertified orb usage on the &lt;strong&gt;Organization Settings &gt; Security&lt;/strong&gt; page for your org.&lt;/em&gt;
+{: class="alert alert-warning"}</source>
+        <target state="translated">&lt;strong&gt;メモ:&lt;/strong&gt; &lt;em&gt;未承認の Orb を使用するには、組織の管理者が組織の &lt;strong&gt;[Organization Settings (組織設定)] &gt; [Security (セキュリティ)] &lt;/strong&gt; ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。&lt;/em&gt;
+{: class="alert alert-warning"}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[18]</note></trans-unit>
+      <trans-unit id="420992">
+        <source>Each orb contains its own description and documentation listed in the orb registry.</source>
+        <target state="translated">Orb レジストリには、Orb それぞれに説明とドキュメントが用意されています。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[19]</note></trans-unit>
+      <trans-unit id="420994">
+        <source>Often, orbs will have a set of usage examples to get you started.</source>
+        <target state="translated">また、多くの Orb には参考になる一連の使用例も付記されています。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[19]</note></trans-unit>
+      <trans-unit id="420996">
+        <source>If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.</source>
+        <target state="translated">既存の Orb に対する協力や、Orb リポジトリに関する問題の報告を受けるために、Orb オーサーの多くは Git リポジトリ リンクを掲載しています。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[20]</note></trans-unit>
+      <trans-unit id="420814">
+        <source>Identifying orbs</source>
+        <target state="translated">Orb の指定</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[5]</note></trans-unit>
+      <trans-unit id="420998">
+        <source>An orb is identified by its &lt;em&gt;slug&lt;/em&gt; which contains the &lt;em&gt;namespace&lt;/em&gt; and &lt;em&gt;orb name&lt;/em&gt;.</source>
+        <target state="translated">Orb は、&lt;em&gt;名前空間&lt;/em&gt;と &lt;em&gt;Orb 名&lt;/em&gt;から成る&lt;em&gt;スラッグ&lt;/em&gt;で指定します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[21]</note></trans-unit>
+      <trans-unit id="421000">
+        <source>A namespace is a unique identifier referring to the organization authoring a set of orbs.</source>
+        <target state="translated">名前空間は、Orb をオーサリングした組織を指す一意の識別子です。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[21]</note></trans-unit>
+      <trans-unit id="421002">
+        <source>The orb name will be followed be an &lt;code&gt;@&lt;/code&gt; symbol and a &lt;a href="{{site.baseurl}}/2.0/orb-concepts/#semantic-versioning"&gt;semantic version&lt;/a&gt; string, identifying which version of the orb is being used.</source>
+        <target state="translated">Orb 名の後には、&lt;code&gt;@&lt;/code&gt; 記号と、使用する Orb バージョンを指定する&lt;a href="{{site.baseurl}}/2.0/orb-concepts/#semantic-versioning"&gt;セマンティック バージョン&lt;/a&gt;文字列を続けます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[21]</note></trans-unit>
+      <trans-unit id="421004">
+        <source>Example orb slug: &lt;code&gt;&amp;lt;namespace&amp;gt;/&amp;lt;orb-name&amp;gt;@1.2.3&lt;/code&gt;</source>
+        <target state="translated">Orb スラッグの例: &lt;code&gt;&amp;lt;namespace&amp;gt;/&amp;lt;orb-name&amp;gt;@1.2.3&lt;/code&gt;</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[22]</note></trans-unit>
+      <trans-unit id="420824">
+        <source>Using orbs</source>
+        <target state="translated">Orb の使用</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[6]</note></trans-unit>
+      <trans-unit id="421006">
+        <source>Each orb within the registry provides a sample code snippet for importing that specific orb with its most recent version.</source>
+        <target state="translated">レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプル コード スニペットが用意されています。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[23]</note></trans-unit>
+      <trans-unit id="421008">
+        <source>The example below shows how to import an orb into your &lt;code&gt;version: 2.1&lt;/code&gt; config file.</source>
+        <target state="translated">以下の例に、&lt;code&gt;version: 2.1&lt;/code&gt; の設定ファイルに Orb をインポートする方法を示します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[24]</note></trans-unit>
+      <trans-unit id="421010">
+        <source>Create an &lt;code&gt;orbs&lt;/code&gt; key followed by the orb-name key to reference which orb you want to import.</source>
+        <target state="translated">&lt;code&gt;orbs&lt;/code&gt; キーの後に、インポートする Orb を表す orb-name キーを記述します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[24]</note></trans-unit>
+      <trans-unit id="421012">
+        <source>The value for the orb-name key should then be the orb slug and version.</source>
+        <target state="translated">orb-name キーの値には、Orb スラッグとバージョンを指定します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[24]</note></trans-unit>
+      <trans-unit id="388532">
+        <source>version: 2.1
+
+orbs:
+  orb-name: &amp;lt;namespace&amp;gt;/&amp;lt;orb-name&amp;gt;@1.2.3</source>
+        <target state="translated">version: 2.1
+
+orbs:
+  orb-name: &amp;lt;namespace&amp;gt;/&amp;lt;orb-name&amp;gt;@1.2.3</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[3]/code</note></trans-unit>
+      <trans-unit id="421014">
+        <source>After the orb has been imported into the configuration file, the elements provided by the orb are available as &lt;code&gt;&amp;lt;orb-name&amp;gt;/&amp;lt;element&amp;gt;&lt;/code&gt;.</source>
+        <target state="translated">設定ファイルに Orb をインポートしたら、その Orb が提供するエレメントを &lt;code&gt;&amp;lt;orb-name&amp;gt;/&amp;lt;element&amp;gt;&lt;/code&gt; の形式で使用できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[25]</note></trans-unit>
+      <trans-unit id="421016">
+        <source>Orb elements can be used in the same way as &lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;reusable configuration&lt;/a&gt; elements.</source>
+        <target state="translated">Orb エレメントは、&lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;再利用可能な構成要素&lt;/a&gt;と同じ方法で使用できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[25]</note></trans-unit>
+      <trans-unit id="421018">
+        <source>The Node example below shows how to use an orb command.</source>
+        <target state="translated">Orb のコマンドの使用方法について詳しくは、下記の Node の例をご覧ください。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[25]</note></trans-unit>
+      <trans-unit id="423458">
+        <source>Node example</source>
+        <target state="translated">Node の例</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3[4]</note></trans-unit>
+      <trans-unit id="421020">
+        <source>{:.no_toc}</source>
+        <target state="translated">{:.no_toc}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[26]</note></trans-unit>
+      <trans-unit id="421022">
+        <source>The Node orb provides a command, &lt;a href="https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages"&gt;&lt;code&gt;install-packages&lt;/code&gt;&lt;/a&gt;, to install your node packages, automatically enable caching, and provide additional options through the use of parameters.</source>
+        <target state="translated">Node Orb には、&lt;a href="https://circleci.com/developer/ja/orbs/orb/circleci/node#commands-install-packages"&gt;&lt;code&gt;install-packages&lt;/code&gt;&lt;/a&gt; という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[27]</note></trans-unit>
+      <trans-unit id="421024">
+        <source>To use the &lt;code&gt;install-packages&lt;/code&gt; command, reference it in a job's &lt;a href="https://circleci.com/docs/2.0/configuration-reference/#steps"&gt;steps&lt;/a&gt;.</source>
+        <target state="translated">&lt;code&gt;install-packages&lt;/code&gt; コマンドを使用するには、ジョブの &lt;a href="https://circleci.com/ja/docs/2.0/configuration-reference/#steps"&gt;steps&lt;/a&gt; にこのコマンドを記述します。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[27]</note></trans-unit>
+      <trans-unit id="400812">
+        <source>version: 2.1
+
+orbs:
+  node: circleci/node@x.y #orb version
+
+jobs:
+  test:
+    docker:
+
+      - image: cimg/node:&amp;lt;node-version&amp;gt;
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - node/install-packages # Utilize commands in steps</source>
+        <target state="translated">version: 2.1
+
+orbs:
+  node: circleci/node@x.y #orb バージョン
+
+jobs:
+  test:
+    docker:
+
+      - image: cimg/node:&amp;lt;node-version&amp;gt;
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    steps:
+      - checkout
+      - node/install-packages # steps でコマンドを使用する</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre[4]/code</note></trans-unit>
+      <trans-unit id="420848">
+        <source>See also</source>
+        <target state="translated">関連項目</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[7]</note></trans-unit>
+      <trans-unit id="421026">
+        <source>{:.no_toc}</source>
+        <target state="translated">{:.no_toc}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[28]</note></trans-unit>
+      <trans-unit id="423460">
+        <source>Refer to &lt;a href="{{site.baseurl}}/2.0/orb-concepts/"&gt;Orbs Concepts&lt;/a&gt; for high-level information about CircleCI orbs.</source>
+        <target state="translated">&lt;a href="{{site.baseurl}}/2.0/orb-concepts/"&gt;Orbs のコンセプト&lt;/a&gt;: CircleCI Orbs の基本的な概念</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[5]/li</note></trans-unit>
+      <trans-unit id="423462">
+        <source>Refer to &lt;a href="{{site.baseurl}}/2.0/orbs-faq/"&gt;Orbs FAQ&lt;/a&gt; for information on known issues and questions that have been addressed when using CircleCI orbs.</source>
+        <target state="translated">&lt;a href="{{site.baseurl}}/2.0/orbs-faq/"&gt;Orbs に関するよくあるご質問&lt;/a&gt;: CircleCI Orbs の使用に際して発生している既知の問題や不明点</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[5]/li[2]</note></trans-unit>
+      <trans-unit id="423464">
+        <source>Refer to &lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;Reusable Configuration Reference&lt;/a&gt; for examples of reusable orbs, commands, parameters, and executors.</source>
+        <target state="translated">&lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;Orbs リファレンス ガイド&lt;/a&gt;: 再利用可能な Orb、コマンド、パラメーター、および Executors の例</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[5]/li[3]</note></trans-unit>
+      <trans-unit id="423466">
+        <source>Refer to &lt;a href="{{site.baseurl}}/2.0/testing-orbs/"&gt;Orb Testing Methodologies&lt;/a&gt; for information on how to test orbs you have created.</source>
+        <target state="translated">&lt;a href="{{site.baseurl}}/2.0/testing-orbs/"&gt;Orb のテスト手法&lt;/a&gt;: 独自に作成した Orb のテスト方法</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[5]/li[4]</note></trans-unit>
+      <trans-unit id="423468">
+        <source>Refer to &lt;a href="{{site.baseurl}}/2.0/configuration-cookbook/"&gt;Configuration Cookbook&lt;/a&gt; for information about how you can use CircleCI orb recipes in your configurations.</source>
+        <target state="translated">&lt;a href="{{site.baseurl}}/2.0/configuration-cookbook/"&gt;構成クックブック&lt;/a&gt;: 設定ファイル内で CircleCI Orbs を使用するためのレシピ</target>
+        
+      <note from="Crowdin" priority="3">List Item
+XPath: /ul[5]/li[5]</note></trans-unit>
+    </body>
+  </file>
+</xliff>

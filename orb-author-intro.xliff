@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file id="4066" original="/master/jekyll/_cci2/orb-author-intro.md" source-language="en" target-language="ja" datatype="plaintext" project-id="306408" tool-id="crowdin">
+    <header>
+      <tool tool-id="crowdin" tool-name="Crowdin" tool-version="1.1" />
+    </header>
+    <body>
+      <trans-unit id="306234" approved="yes">
+        <source>classic-docs</source>
+        <target state="final">classic-docs</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="388652" approved="yes">
+        <source>Introduction to Authoring Orbs</source>
+        <target state="final">Orb オーサリングの概要</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[2]/div[2]</note></trans-unit>
+      <trans-unit id="306238" approved="yes">
+        <source>Authoring Orbs Introduction</source>
+        <target state="final">Orb オーサリングの概要</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[3]/div[2]</note></trans-unit>
+      <trans-unit id="388654" approved="yes">
+        <source>Starting point for how to author an orb</source>
+        <target state="final">Orb のオーサリング方法に関する入門ガイド</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[4]/div[2]</note></trans-unit>
+      <trans-unit id="306242" approved="yes">
+        <source>getting-started</source>
+        <target state="final">getting-started</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[5]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="306244" approved="yes">
+        <source>1</source>
+        <target state="final">1</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[6]/div[2]</note></trans-unit>
+      <trans-unit id="395970" approved="yes">
+        <source>Cloud</source>
+        <target state="final">Cloud</target>
+        
+      <note from="Crowdin" priority="3">Block element text (div)
+XPath: /div[@id=front-matter]/ul/li[7]/ul/li/div[2]</note></trans-unit>
+      <trans-unit id="388656" approved="yes">
+        <source>TOC</source>
+        <target state="final">目次</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /ul/li/p</note></trans-unit>
+      <trans-unit id="388658" approved="yes">
+        <source>{:toc}</source>
+        <target state="final">{:toc}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /ul/li/p[2]</note></trans-unit>
+      <trans-unit id="412044">
+        <source>Quick start</source>
+        <target state="translated">クイック スタート</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2</note></trans-unit>
+      <trans-unit id="404550" approved="yes">
+        <source>Orbs take &lt;a href="{{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements"&gt;reusable configuration&lt;/a&gt; and package it in a way that can be published to the &lt;a href="https://circleci.com/developer/orbs"&gt;Orb Registry&lt;/a&gt; and imported into multiple configuration files.</source>
+        <target state="final">Orb とは、&lt;a href="{{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements"&gt;再利用可能な構成&lt;/a&gt;をパッケージとしてまとめたものです。Orb は &lt;a href="https://circleci.com/developer/orbs"&gt;Orb レジストリ&lt;/a&gt;にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p</note></trans-unit>
+      <trans-unit id="401142" approved="yes">
+        <source>If you manage multiple, similar projects, consider abstracting out your config with orbs.</source>
+        <target state="final">類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化することを検討してみてください。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p</note></trans-unit>
+      <trans-unit id="388666" approved="yes">
+        <source>Before authoring an orb, it is recommended that you become familiar with the &lt;a href="{{site.baseurl}}/2.0/config-intro/"&gt;CircleCI config&lt;/a&gt; and authoring &lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;parameterized reusable config elements&lt;/a&gt; pages.</source>
+        <target state="final">Orb のオーサリングを始める前に、まず &lt;a href="{{site.baseurl}}/2.0/config-intro/"&gt;CircleCI の設定ファイル&lt;/a&gt;に関するページと、&lt;a href="{{site.baseurl}}/2.0/reusing-config/"&gt;パラメーター化された再利用可能な構成要素&lt;/a&gt;のオーサリングに関するページの説明をよく理解することをお勧めします。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[2]</note></trans-unit>
+      <trans-unit id="388668" approved="yes">
+        <source>Orbs consist of three main elements:</source>
+        <target state="final">Orb は、以下の 3 つの要素で構成されます。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[3]</note></trans-unit>
+      <trans-unit id="388670" translate="no">
+        <source>{{site.baseurl}}/2.0/orb-concepts/#commands</source>
+        <target state="new">{{site.baseurl}}/2.0/orb-concepts/#commands</target>
+        
+      <note from="Crowdin" priority="3">Link Resource
+XPath: /ul[2]/li/a[@href]</note></trans-unit>
+      <trans-unit id="388672" approved="yes">
+        <source>Commands</source>
+        <target state="final">コマンド</target>
+        
+      <note from="Crowdin" priority="3">Anchor Link
+XPath: /ul[2]/li/a</note></trans-unit>
+      <trans-unit id="388674" translate="no">
+        <source>{{site.baseurl}}/2.0/orb-concepts/#executors</source>
+        <target state="new">{{site.baseurl}}/2.0/orb-concepts/#executors</target>
+        
+      <note from="Crowdin" priority="3">Link Resource
+XPath: /ul[2]/li[2]/a[@href]</note></trans-unit>
+      <trans-unit id="388676" approved="yes">
+        <source>Jobs</source>
+        <target state="final">ジョブ</target>
+        
+      <note from="Crowdin" priority="3">Anchor Link
+XPath: /ul[2]/li[2]/a</note></trans-unit>
+      <trans-unit id="388678" translate="no">
+        <source>{{site.baseurl}}/2.0/orb-concepts/#jobs</source>
+        <target state="new">{{site.baseurl}}/2.0/orb-concepts/#jobs</target>
+        
+      <note from="Crowdin" priority="3">Link Resource
+XPath: /ul[2]/li[3]/a[@href]</note></trans-unit>
+      <trans-unit id="388680" approved="yes">
+        <source>Executors</source>
+        <target state="final">Executor</target>
+        
+      <note from="Crowdin" priority="3">Anchor Link
+XPath: /ul[2]/li[3]/a</note></trans-unit>
+      <trans-unit id="388682" approved="yes">
+        <source>Practice with &lt;a href="{{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs"&gt;inline orbs&lt;/a&gt;.</source>
+        <target state="final">&lt;a href="{{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs"&gt;インライン Orb&lt;/a&gt; を使って練習してみることができます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[4]</note></trans-unit>
+      <trans-unit id="388684" approved="yes">
+        <source>Inline orbs can be defined within a single config file for easy and quick testing.</source>
+        <target state="final">インライン Orb は 1 つの設定ファイル内で定義できるので、手早く簡単にテストするのに適しています。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[4]</note></trans-unit>
+      <trans-unit id="401144" approved="yes">
+        <source>Orb authors automatically agree to the CircleCI &lt;a href="https://circleci.com/legal/code-sharing-terms/"&gt;Code Sharing Terms of Service&lt;/a&gt;.</source>
+        <target state="final">Orb をオーサリングすると、自動的に、CircleCI &lt;a href="https://circleci.com/legal/code-sharing-terms/"&gt;コード共有利用規約&lt;/a&gt;に同意したものと見なされます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[5]</note></trans-unit>
+      <trans-unit id="388688" approved="yes">
+        <source>All published orbs are made available publicly on the Orb Registry under the &lt;a href="https://opensource.org/licenses/MIT"&gt;MIT License agreement&lt;/a&gt;.</source>
+        <target state="final">パブリッシュされたすべての Orb は、&lt;a href="https://opensource.org/licenses/MIT"&gt;MIT ライセンス契約&lt;/a&gt;に基づき、Orb レジストリで公開されます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[5]</note></trans-unit>
+      <trans-unit id="404552" approved="yes">
+        <source>For more information, see &lt;a href="https://circleci.com/developer/orbs/licensing"&gt;Orb Licensing&lt;/a&gt;.</source>
+        <target state="final">詳細については、&lt;a href="https://circleci.com/developer/orbs/licensing"&gt;Orb ライセンス&lt;/a&gt;に関するページをご覧ください。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[5]</note></trans-unit>
+      <trans-unit id="388692" approved="yes">
+        <source>{: class="alert alert-success"}</source>
+        <target state="final">{: class="alert alert-success"}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[6]</note></trans-unit>
+      <trans-unit id="412046">
+        <source>Getting started</source>
+        <target state="translated">作業を開始する</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[2]</note></trans-unit>
+      <trans-unit id="388696" approved="yes">
+        <source>Orb CLI</source>
+        <target state="final">Orb CLI</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3</note></trans-unit>
+      <trans-unit id="401146" approved="yes">
+        <source>To begin creating orbs, you will need to &lt;a href="{{site.baseurl}}/2.0/local-cli/#installation"&gt;set up the CircleCI CLI&lt;/a&gt; on your local machine, with a &lt;a href="https://app.circleci.com/settings/user/tokens"&gt;personal access token&lt;/a&gt;.</source>
+        <target state="final">Orb の作成を始めるには、&lt;a href="https://app.circleci.com/settings/user/tokens"&gt;パーソナル アクセス トークン&lt;/a&gt;を使用して、ローカル マシンに &lt;a href="{{site.baseurl}}/2.0/local-cli/#installation"&gt;CircleCI CLI をセットアップ&lt;/a&gt;する必要があります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[7]</note></trans-unit>
+      <trans-unit id="388700" approved="yes">
+        <source>For a full list of orb-related commands inside the CircleCI CLI, visit &lt;a href="https://circleci-public.github.io/circleci-cli/circleci_orb.html"&gt;CircleCI CLI help&lt;/a&gt;.</source>
+        <target state="final">&lt;a href="https://circleci-public.github.io/circleci-cli/circleci_orb.html"&gt;CircleCI CLI ヘルプ&lt;/a&gt;にアクセスすると、CircleCI CLI に含まれている Orb 関連のすべてのコマンドが記載されたリストを確認できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[7]</note></trans-unit>
+      <trans-unit id="412048">
+        <source>Permissions matrix</source>
+        <target state="translated">権限の一覧表</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3[2]</note></trans-unit>
+      <trans-unit id="401148" approved="yes">
+        <source>Orb CLI commands are scoped to different user permission levels, set by your VCS.</source>
+        <target state="final">Orb CLI のコマンドは、VCS (バージョン管理システム) によって、ユーザーの権限レベルごとに異なる範囲が設定されています。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[8]</note></trans-unit>
+      <trans-unit id="388706" approved="yes">
+        <source>You are the owner of your own organization.</source>
+        <target state="final">組織の「オーナー」は、オーサリングを行うユーザー自身です。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[8]</note></trans-unit>
+      <trans-unit id="388708" approved="yes">
+        <source>If you are authoring or publishing orbs for a namespace owned by another organization, you may require assistance from your organization admin:</source>
+        <target state="final">別の組織がオーナーである名前空間向けに Orb のオーサリングやパブリッシュを行う際は、組織の管理者への支援要請が必要になる場合があります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[8]</note></trans-unit>
+      <trans-unit id="388710" approved="yes">
+        <source>Orb Command</source>
+        <target state="final">Orb コマンド</target>
+        
+      <note from="Crowdin" priority="3">Table Header
+XPath: /p[9]/table/thead/tr/th</note></trans-unit>
+      <trans-unit id="388712" approved="yes">
+        <source>Permission Scope</source>
+        <target state="final">権限の範囲</target>
+        
+      <note from="Crowdin" priority="3">Table Header
+XPath: /p[9]/table/thead/tr/th[2]</note></trans-unit>
+      <trans-unit id="388714" approved="yes">
+        <source>circleci namespace create</source>
+        <target state="final">circleci namespace create</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /p[9]/table/tbody/tr/td/code</note></trans-unit>
+      <trans-unit id="388716" approved="yes">
+        <source>Owner</source>
+        <target state="final">オーナー</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr/td[2]</note></trans-unit>
+      <trans-unit id="401150" approved="yes">
+        <source>circleci orb init</source>
+        <target state="final">circleci orb init</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /p[9]/table/tbody/tr[2]/td/code</note></trans-unit>
+      <trans-unit id="388720" approved="yes">
+        <source>Owner</source>
+        <target state="final">オーナー</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr[2]/td[2]</note></trans-unit>
+      <trans-unit id="401152" approved="yes">
+        <source>circleci orb create</source>
+        <target state="final">circleci orb create</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /p[9]/table/tbody/tr[3]/td/code</note></trans-unit>
+      <trans-unit id="401154" approved="yes">
+        <source>Owner</source>
+        <target state="final">オーナー</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr[3]/td[2]</note></trans-unit>
+      <trans-unit id="401156" approved="yes">
+        <source>&lt;code&gt;circleci orb publish&lt;/code&gt; development version</source>
+        <target state="final">&lt;code&gt;circleci orb publish&lt;/code&gt; 開発バージョン</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr[4]/td</note></trans-unit>
+      <trans-unit id="401158" approved="yes">
+        <source>Member</source>
+        <target state="final">メンバー</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr[4]/td[2]</note></trans-unit>
+      <trans-unit id="401160" approved="yes">
+        <source>&lt;code&gt;circleci orb publish&lt;/code&gt; production version</source>
+        <target state="final">&lt;code&gt;circleci orb publish&lt;/code&gt; 本番バージョン</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr[5]/td</note></trans-unit>
+      <trans-unit id="401162" approved="yes">
+        <source>Owner</source>
+        <target state="final">オーナー</target>
+        
+      <note from="Crowdin" priority="3">Table Data
+XPath: /p[9]/table/tbody/tr[5]/td[2]</note></trans-unit>
+      <trans-unit id="388730" approved="yes">
+        <source>{: class="table table-striped"}</source>
+        <target state="final">{: class="table table-striped"}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[10]</note></trans-unit>
+      <trans-unit id="412050">
+        <source>Register a namespace</source>
+        <target state="translated">名前空間の登録</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3[3]</note></trans-unit>
+      <trans-unit id="388734" approved="yes">
+        <source>Every organization registered on CircleCI is able to claim &lt;strong x-id="1"&gt;one&lt;/strong&gt; unique &lt;a href="{{site.baseurl}}/2.0/orb-concepts/#namespaces"&gt;namespace&lt;/a&gt;.</source>
+        <target state="final">CircleCI に登録している組織は、一意の&lt;a href="{{site.baseurl}}/2.0/orb-concepts/#namespaces"&gt;名前空間&lt;/a&gt;を &lt;strong x-id="1"&gt;1 つ&lt;/strong&gt;要求できます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[11]</note></trans-unit>
+      <trans-unit id="388736" approved="yes">
+        <source>This includes your personal organization and any organization you are a member of.</source>
+        <target state="final">「組織」には、自分の個人用組織や自分がメンバーになっている組織が含まれます。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[11]</note></trans-unit>
+      <trans-unit id="401164" approved="yes">
+        <source>As each organization is limited to a single namespace, in order to register the namespace for an organization you must be the &lt;em x-id="4"&gt;owner&lt;/em&gt; of the organization.</source>
+        <target state="final">名前空間は各組織に 1 つに制限されているため、組織の名前空間を登録するには、自分が組織の&lt;em x-id="4"&gt;オーナー&lt;/em&gt;になっている必要があります。</target>
+        
+      <note from="Crowdin" priority="3">XPath: /p[11]</note></trans-unit>
+      <trans-unit id="401166" approved="yes">
+        <source>Enter the following command to claim your namespace, if you have not yet claimed one:</source>
+        <target state="final">まだ名前空間を要求していない場合は、以下のコマンドを実行して要求できます。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[12]</note></trans-unit>
+      <trans-unit id="401168" approved="yes">
+        <source>circleci namespace create &amp;lt;name&amp;gt; &amp;lt;vcs-type&amp;gt; &amp;lt;org-name&amp;gt; [flags]</source>
+        <target state="final">circleci namespace create &amp;lt;name&amp;gt; &amp;lt;vcs-type&amp;gt; &amp;lt;org-name&amp;gt; [flags]</target>
+        
+      <note from="Crowdin" priority="3">Text
+XPath: /pre/code</note></trans-unit>
+      <trans-unit id="410120">
+        <source>where &lt;code&gt;name&lt;/code&gt; is the namespace you wish to claim, &lt;code&gt;vcs-type&lt;/code&gt; is the type of your version control system (i.e. &lt;code&gt;github&lt;/code&gt; or &lt;code&gt;bitbucket&lt;/code&gt;), and &lt;code&gt;org-name&lt;/code&gt; is the name of your organization.</source>
+        <target state="translated">&lt;code&gt;name&lt;/code&gt; は要求する名前空間、&lt;code&gt;vcs-type&lt;/code&gt; はお使いのバージョン管理システムの種類 (&lt;code&gt;github&lt;/code&gt; または &lt;code&gt;bitbucket&lt;/code&gt;)、&lt;code&gt;org-name&lt;/code&gt; は自分の組織名に置き換えてください。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[13]</note></trans-unit>
+      <trans-unit id="412052">
+        <source>Next steps</source>
+        <target state="translated">次のステップ</target>
+        
+      <note from="Crowdin" priority="3">Headline 3
+XPath: /h3[4]</note></trans-unit>
+      <trans-unit id="410122">
+        <source>Continue on to the  &lt;a href="{{site.baseurl}}/2.0/orb-author/"&gt;Orb Authoring Process&lt;/a&gt; guide for information on developing your orb.</source>
+        <target state="translated">Orb の作成について解説した &lt;a href="{{site.baseurl}}/2.0/orb-author/"&gt;Orb オーサリング プロセス&lt;/a&gt; ガイドに進んでください。</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[14]</note></trans-unit>
+      <trans-unit id="412054">
+        <source>See also</source>
+        <target state="translated">関連項目</target>
+        
+      <note from="Crowdin" priority="3">Headline 2
+XPath: /h2[3]</note></trans-unit>
+      <trans-unit id="410124">
+        <source>{:.no_toc}</source>
+        <target state="translated">{:.no_toc}</target>
+        
+      <note from="Crowdin" priority="3">Paragraph text
+XPath: /p[15]</note></trans-unit>
+      <trans-unit id="388760" translate="no">
+        <source>{{site.baseurl}}/2.0/orb-author/</source>
+        <target state="new">{{site.baseurl}}/2.0/orb-author/</target>
+        
+      <note from="Crowdin" priority="3">Link Resource
+XPath: /ul[3]/li/a[@href]</note></trans-unit>
+      <trans-unit id="388762" approved="yes">
+        <source>Orb Authoring</source>
+        <target state="final">Orb のオーサリング</target>
+        
+      <note from="Crowdin" priority="3">Anchor Link
+XPath: /ul[3]/li/a</note></trans-unit>
+      <trans-unit id="402628" translate="no">
+        <source>{{site.baseurl}}/2.0/orb-concepts/</source>
+        <target state="new">{{site.baseurl}}/2.0/orb-concepts/</target>
+        
+      <note from="Crowdin" priority="3">Link Resource
+XPath: /ul[3]/li[2]/a[@href]</note></trans-unit>
+      <trans-unit id="388766" approved="yes">
+        <source>Orb Concepts</source>
+        <target state="final">Orb のコンセプト</target>
+        
+      <note from="Crowdin" priority="3">Anchor Link
+XPath: /ul[3]/li[2]/a</note></trans-unit>
+      <trans-unit id="388768" translate="no">
+        <source>{{site.baseurl}}/2.0/orb-author-faq/</source>
+        <target state="new">{{site.baseurl}}/2.0/orb-author-faq/</target>
+        
+      <note from="Crowdin" priority="3">Link Resource
+XPath: /ul[3]/li[3]/a[@href]</note></trans-unit>
+      <trans-unit id="388770" approved="yes">
+        <source>Orb Author FAQ</source>
+        <target state="final">Orb オーサリングに関するよくあるご質問</target>
+        
+      <note from="Crowdin" priority="3">Anchor Link
+XPath: /ul[3]/li[3]/a</note></trans-unit>
+    </body>
+  </file>
+</xliff>
