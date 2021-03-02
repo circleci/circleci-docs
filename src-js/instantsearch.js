@@ -223,4 +223,9 @@ export function init () {
     searchBox.value = ''
     renderResults();
   });
+
+  // Scroll results back to top upon tab change
+  $(resultDisplay).find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $("html, body").animate({ scrollTop: 0 });
+  });
 };
