@@ -193,6 +193,7 @@ export function init () {
   var searchResetButton = document.querySelector("#search-box .ais-SearchBox-reset");
   var searchBox = document.querySelector("input.instantsearch-search");
   var pageBody = document.querySelector('.main-body');
+  var mobileNav = document.querySelector('.sidebar-mobile-wrapper');
   var resultDisplay = document.querySelector('#hits-target');
   var form = document.querySelector('.main-searchbar form');
 
@@ -200,10 +201,12 @@ export function init () {
     if (searchBox.value.length > 0) {
       window.scrollTo(0, 0);
       pageBody.style.display = "none";
+      mobileNav.style.display = "none";
       resultDisplay.style.display = "block";
       window.dispatchEvent(new Event('shown.subnav'));
     } else {
       pageBody.style.display = "flex";
+      mobileNav.style.display = "block";
       resultDisplay.style.display = "none";
     }
   };
