@@ -18,12 +18,6 @@
     position: relative;
     display: block;
     max-width: 400px;
-    margin-left: 18px;
-    margin-right: 18px;
-
-    @media screen and (min-width: $screen-md) {
-      margin: 0;
-    }
 
     .ais-SearchBox-submit {
       position: absolute;
@@ -81,11 +75,12 @@
 }
 
 .result-item-wrap {
-  $result-spacing: $spacing-medium-vertical / 2;
+  $result-vertical-spacing: $spacing-medium-vertical / 4;
+  $half-gutter-width: $grid-gutter-width / 2;
 
-  padding: $result-spacing/2 $result-spacing;
-  margin-left:  -$result-spacing;
-  margin-right: -$result-spacing;
+  padding: $result-vertical-spacing $half-gutter-width;
+  margin-left:  -$half-gutter-width;
+  margin-right: -$half-gutter-width;
 
   .result-title {
     font-size: 18px;

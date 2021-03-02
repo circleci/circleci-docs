@@ -26,7 +26,6 @@
   .nav-toggle.two .widescreen a.logo {
     position: absolute;
     top: 18px;
-    left: 0;
     z-index: 3; }
   .nav-toggle.two .widescreen img.logo {
     height: 35px; }
