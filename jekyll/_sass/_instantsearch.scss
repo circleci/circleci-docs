@@ -141,3 +141,19 @@ ul.results-nav {
     }
   }
 }
+
+// Showing/hiding search screen
+body.search-open {
+  .main-body {
+    display: none;
+  }
+
+  .sidebar-mobile-wrapper {
+    display: none;
+  }
+
+  #hits-target {
+    // To override an element style being applied by some JS we don't own, probably instantsearch
+    display: block !important;
+  }
+}
