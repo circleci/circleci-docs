@@ -60,10 +60,7 @@
   padding: $spacing-small-vertical 0;
   background: #FAFAFA;
   min-height: 500px;
-
-  @media screen and (min-width: $screen-sm) {
-    margin-top: $spacing-medium-vertical;
-  }
+  margin-top: $spacing-medium-vertical;
 
   h2 {
     padding-left: $spacing-small-vertical;
