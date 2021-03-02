@@ -24,128 +24,50 @@ This guide provides an introduction to Android development on CircleCI.
 If you are looking for a `.circleci/config.yml` template for Android,
 see the [Sample Configuration](#sample-configuration) section of this document.
 
-**Note:**
-We now have an Android machine image available in preview on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here](https://github.com/CircleCI-Public/android-image-preview-docs).
-Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab).
-For more details,
-see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
+**Note:** We now have an Android machine image available in preview on CircleCI
+Cloud that supports x86 Android emulators and nested virtualization.
+Documentation on how to access it is available
+[here]({{site.baseurl}}/docs/android-machine-image). Another way to run emulator
+tests from a job is to consider using an external service like [Firebase Test
+Lab](https://firebase.google.com/docs/test-lab). For more details, see the
+[Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
 ## Prerequisites
 {:.no_toc}
 
 This guide assumes the following:
 
-- You are using [Gradle](https://gradle.org/)
-to build your Android project.
-Gradle is the default build tool
+- You are using [Gradle](https://gradle.org/) to build your Android project. Gradle is the default build tool
 for projects created with [Android Studio](https://developer.android.com/studio).
 - Your project is located in the root of your VCS repository.
 - The project's application is located in a subfolder named `app`.
 
 ## Sample configuration
 
-{% raw %}
+Let's walk through a sample configuration using the Android machine image. It is
+possible to use both orbs and to manually configure the use of the Android
+machine image to best suit your project. 
 
 ```yaml
-version: 2
-jobs:
-  build:
-    working_directory: ~/code
-    docker:
-      - image: circleci/android:api-30-alpha
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    environment:
-      JVM_OPTS: -Xmx3200m
-    steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-#      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
-      - run:
-          name: Run Tests
-          command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: app/build/reports
-          destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+# .circleci/config.yaml
+version: 2.1 # to enable orb usage, you must be using circleci 2.1
+# Declare the orbs you wish to use.
+# Android orb docs are available here:  https://circleci.com/developer/orbs/orb/circleci/android
+orbs:
+  android: circleci/android@1.0 
+workflows:
+  test:
+    jobs:
+      # This job uses the Android machine image by default
+      - android/run-ui-tests:
+          # Use pre-steps and post-steps if necessary
+          # to execute custom steps before and afer any of the built-in steps
+          system-image: system-images;android-29;default;x86
 ```
 
-{% endraw %}
-
-## Config walkthrough
-
-We always start with the version.
-
-```yaml
-version: 2
-```
-
-Next, we have a `jobs` key. Each job represents a phase in your Build-Test-Deploy process. Our sample app only needs a `build` job, so everything else is going to live under that key.
-
-In each job, we have the option of specifying a `working_directory`. This is the directory into which our code will be checked out, and this path will be used as the default working directory for the rest of the `job` unless otherwise specified.
-
-```yaml
-jobs:
-  build:
-    working_directory: ~/code
-```
-
-Directly beneath `working_directory`, we can specify container images under a `docker` key.
-
-```yaml
-    docker:
-      - image: circleci/android:api-25-alpha
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-```
-
-We use the CircleCI-provided Android image with the `api-25-alpha` tag. See [Docker Images](#docker-images) below for more information about what images are available.
-
-Now we’ll add several `steps` within the `build` job.
-
-We start with `checkout` so we can operate on the codebase.
-
-Next we pull down the cache, if present. If this is your first run, or if you've changed either of your `build.gradle` files, this won't do anything. We run `./gradlew androidDependencies` next to pull down the project's dependencies. Normally you never call this task directly since it's done automatically when it's needed, but calling it directly allows us to insert a `save_cache` step that will store the dependencies in order to speed things up for next time.
-
-Then `./gradlew lint test` runs the unit tests, and runs the built in linting tools to check your code for style issues.
-
-We then upload the build reports as job artifacts, and we upload the test metadata (XML) for CircleCI to process.
-
-## Docker images
-
-For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
-
-The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
-
-### API levels
-{:.no_toc}
-
-We have a different Docker image for each [Android API level](https://source.android.com/source/build-numbers). To use API level 24 (Nougat 7.0) in a job, you should select `circleci/android:api-24-alpha`.
-
-### Customizing the images
-{:.no_toc}
-
-We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
-
-To customize the image, create a Dockerfile that builds `FROM` the `circleci/android` image. See [Using Custom-Built Docker Images]({{ site.baseurl }}/2.0/custom-images/) for instructions.
-
-You can also use the [CircleCI Android
-Orb](https://circleci.com/developer/orbs/orb/circleci/android) to select your
-desired Android SDK and NDK.
+As per above, using the Android orb will simplify your
+configuration; you can compare and contrast examples of different sizes
+[here]({{site.baseurl}}/2.0/android-machine-image#examples).
 
 ### React Native projects
 {:.no_toc}
@@ -157,8 +79,11 @@ on GitHub for a full example of a React Native project.
 
 ## Testing with Firebase Test Lab
 
-To use Firebase Test Lab with CircleCI,
-first complete the following steps.
+**Note:**: While this portion of the document walks through using a third party
+tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for
+running emulator tests.
+
+To use Firebase Test Lab with CircleCI, first complete the following steps.
 
 1. **Create a Firebase project.**
 Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
