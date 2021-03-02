@@ -141,6 +141,7 @@ the circleci/android [orb](https://circleci.com/developer/orbs/orb/circleci/andr
 the [run-ui-tests](https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests) job of the orb.
 
 
+{% raw %}
 ```yaml
 # .circleci/config.yml
 version: 2.1
@@ -215,6 +216,7 @@ workflows:
       - build
 ```
 
+{% endraw %}
 
 
 ## How to provide feedback
