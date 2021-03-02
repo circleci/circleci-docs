@@ -27,7 +27,7 @@ see the [Sample Configuration](#sample-configuration) section of this document.
 **Note:** We now have an Android machine image available in preview on CircleCI
 Cloud that supports x86 Android emulators and nested virtualization.
 Documentation on how to access it is available
-[here]({{site.baseurl}}/docs/android-machine-image). Another way to run emulator
+[here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator
 tests from a job is to consider using an external service like [Firebase Test
 Lab](https://firebase.google.com/docs/test-lab). For more details, see the
 [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
