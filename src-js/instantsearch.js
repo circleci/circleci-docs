@@ -192,19 +192,17 @@ export function init () {
   // insert search results
   var searchResetButton = document.querySelector("#search-box .ais-SearchBox-reset");
   var searchBox = document.querySelector("input.instantsearch-search");
-  var pageBody = document.querySelector('.main-body');
+  var documentBody = document.querySelector('body');
   var resultDisplay = document.querySelector('#hits-target');
   var form = document.querySelector('.main-searchbar form');
 
   function renderResults (e) {
     if (searchBox.value.length > 0) {
       window.scrollTo(0, 0);
-      pageBody.style.display = "none";
-      resultDisplay.style.display = "block";
+      documentBody.classList.add('search-open');
       window.dispatchEvent(new Event('shown.subnav'));
     } else {
-      pageBody.style.display = "flex";
-      resultDisplay.style.display = "none";
+      documentBody.classList.remove('search-open');
     }
   };
 

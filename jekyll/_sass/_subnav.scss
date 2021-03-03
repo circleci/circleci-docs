@@ -46,3 +46,29 @@ $nav-offset-subnav: $nav-offset + $subnav-offset;
     top: -$nav-offset-subnav;
   }
 }
+
+// Another set of styles specific to this project:
+
+// 1. Override hiding of subnav on mobile
+.component.subnav {
+  @media screen and (max-width: $screen-xs-max) {
+    display: block;
+  }
+}
+#subnav-placeholder {
+  @media screen and (max-width: $screen-xs-max) {
+    display: block;
+  }
+}
+
+// 2. Add style for mobile
+.component.subnav {
+  @media screen and (max-width: $screen-xs-max) {
+    font-size: $font-size-small;
+
+    li {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+  }
+}
