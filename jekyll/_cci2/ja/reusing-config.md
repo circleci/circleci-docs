@@ -922,7 +922,7 @@ jobs:
   build:
     steps: []
     docker:
-      - image: cimg/python:3.8
+      - image: cimg/python:2.7
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
