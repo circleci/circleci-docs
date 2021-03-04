@@ -10,9 +10,8 @@ version:
 - Server v2.x
 ---
 
-This document describes
-how to set up an Android project on CircleCI
-in the following sections.
+This document describes how to set up an Android project on CircleCI in the
+following sections.
 
 * TOC
 {:toc}
@@ -24,7 +23,7 @@ This guide provides an introduction to Android development on CircleCI.
 If you are looking for a `.circleci/config.yml` template for Android,
 see the [Sample Configuration](#sample-configuration) section of this document.
 
-**Note:** We now have an Android machine image available in preview on CircleCI
+**Note:** CircleCI offers an Android machine image available on CircleCI
 Cloud that supports x86 Android emulators and nested virtualization.
 Documentation on how to access it is available
 [here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator
@@ -42,7 +41,7 @@ for projects created with [Android Studio](https://developer.android.com/studio)
 - Your project is located in the root of your VCS repository.
 - The project's application is located in a subfolder named `app`.
 
-## Sample configuration
+## Sample configuration for UI tests
 
 Let's walk through a sample configuration using the Android machine image. It is
 possible to use both orbs and to manually configure the use of the Android
@@ -69,6 +68,50 @@ As per above, using the Android orb will simplify your
 configuration; you can compare and contrast examples of different sizes
 [here]({{site.baseurl}}/2.0/android-machine-image#examples).
 
+
+## Sample configuration for unit tests
+
+You may also use CircleCI's docker image (or another docker image) if you are not running UI tests.
+
+{% raw %}
+
+```yaml
+version: 2
+jobs:
+  build:
+    working_directory: ~/code
+    docker:
+      - image: circleci/android:api-30-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+#      - run:
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         command: sudo chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Run Tests
+          command: ./gradlew lint test
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          path: app/build/reports
+          destination: reports
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+          path: app/build/test-results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+```
+
 ### React Native projects
 {:.no_toc}
 
@@ -80,8 +123,8 @@ on GitHub for a full example of a React Native project.
 ## Testing with Firebase Test Lab
 
 **Note:**: While this portion of the document walks through using a third party
-tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for
-running emulator tests.
+tool for testing, CircleCI recommends using the [Android machine
+image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
 
 To use Firebase Test Lab with CircleCI, first complete the following steps.
 

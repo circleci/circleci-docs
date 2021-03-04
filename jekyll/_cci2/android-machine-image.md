@@ -1,4 +1,4 @@
----
+  ---
 layout: classic-docs
 title: "Using Android Images with the Machine Executor"
 short-title: "Android Image on the Machine Executor"
@@ -30,7 +30,7 @@ The Android machine image comes with the following pre-installed:
 
 ### Android SDK
 - sdkmanager
-- Android platform 27, 28, 29, 30
+- Android platform 23, 24, 25, 26, 27, 28, 29, 30, S
 - Build tools 30.0.3
 - emulator, platform-tools, tools
 - NDK (Side-by-side) 21.4.7075529
@@ -40,25 +40,17 @@ The Android machine image comes with the following pre-installed:
 ### Others
 - gcloud
 - OpenJDK 8, OpenJDK 11 (default)
-- maven 3.6.3, gradle 6.8, ant
-- nodejs 12.20.1, 14.15.4 (default), 15.6.0
-- python 2.7.18, python 3.9.1
-- ruby 2.7.1, ruby 3.0.0
-- docker 20.10.2, docker-compose 1.28.2
+- maven 3.6.3, gradle 6.8.3, ant
+- nodejs 12.21.0, 14.16.0 (default), 15.11.0
+- python 2.7.18, python 3.9.2
+- ruby 2.7.2, ruby 3.0.0
+- docker 20.10.5, docker-compose 1.28.5
 - jq 1.6
 
 ## Limitations
 
 * There may be up to 2 mins of spin-up time before your job starts running. This
-  time will decrease as more preview customers start using the Android image.
-* Only one image is currently available, `android:202102-01`. It contains most of
-  the tools you’ll likely need for Android development. If there is software you
-  require that’s not available in the image, please 
-  [open an issue](https://github.com/CircleCI-Public/android-image-preview-docs/issues) to let us know.
-* We may change and update the pre-installed software on the `android:202102-01`
-  image without prior notice during the preview period. Once the preview period
-  is over, the images for Android images will be stable and will follow our
-  standard image release cadence.
+  time will decrease as more customers start using the Android image.
 
 ## Pricing
 
@@ -217,11 +209,3 @@ workflows:
 ```
 {% endraw %}
 
-
-## How to provide feedback
-
-Please [open an issue](https://github.com/CircleCI-Public/android-image-preview-docs/issues)
-with any feedback. Specifically, we would appreciate feedback on the following:
-
-* The software pre-installed in the image. Do you find everything you need in the image?
-* Are there any bugs that you have noticed in the pre-installed software?
