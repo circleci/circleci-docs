@@ -30,10 +30,12 @@ version:
 | pipeline.git.tag           | The name of the git tag that was pushed to trigger the pipeline. If the pipeline was not triggered by a tag, then this is the empty string. |
 | pipeline.git.branch        | The name of the git branch that was pushed to trigger the pipeline.                                                                         |
 | pipeline.git.revision      | The long (40-character) git SHA that is being built.                                                                                        |
-| pipeline.git.base_revision | 以前の git リビジョン                                                                                                                               |
+| pipeline.git.base_revision | The long (40-character) git SHA of the build prior to the one being built.                                                                  |
 {: class="table table-striped"}
 
-例
+Note: While in most cases `pipeline.git.base_revision` will be the SHA of the pipeline that ran before your currently running pipeline, there are some caveats. When the build is the first build for a branch, the variable will not be present. In addition, if the build was triggered via the API, the variable will not be present.
+
+For example:
 
 ```yaml
 version: 2.1
@@ -55,19 +57,19 @@ jobs:
 
 ## Pipeline parameters in configuration
 
-パイプライン パラメーターは、`.circleci/config.yml` のトップ レベルで `parameters` キーを使って宣言します。
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file.
 
-パイプライン パラメーターは次のデータ型をサポートしています。
+Pipeline parameters support the following types:
 * 文字列
 * ブール値
 * 整数
 * 列挙
 
-詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details.
 
-パイプライン パラメーターは値として参照され、スコープ `pipeline.parameters` の下で設定ファイル内の変数として使用できます。
+Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`.
 
-以下の例では、2 つのパイプライン パラメーター (`image-tag`、`workingdir`) が設定ファイルの上部で定義され、後続の `build` ジョブで参照されています。
+The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
 
 ```yaml
 version: 2.1
@@ -96,7 +98,7 @@ jobs:
 
 ### Passing parameters when triggering pipelines via the API
 
-[パイプラインをトリガーする](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) API v2 エンドポイントを使用すると、特定のパラメーターの値でパイプラインをトリガーすることができます。 これを実行するには、`POST` 本体の JSON パケット内で `parameters` キーを渡します。
+A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
 **Note:** Please note that the `parameters` key passed in this `POST` request is **NOT** secret.
 
