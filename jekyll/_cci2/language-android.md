@@ -16,20 +16,6 @@ following sections.
 * TOC
 {:toc}
 
-## Overview
-{:.no_toc}
-
-This guide provides an introduction to Android development on CircleCI.
-If you are looking for a `.circleci/config.yml` template for Android,
-see the [Sample Configuration](#sample-configuration) section of this document.
-
-**Note:** CircleCI offers an Android machine image available on CircleCI
-Cloud that supports x86 Android emulators and nested virtualization.
-Documentation on how to access it is available
-[here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator
-tests from a job is to consider using an external service like [Firebase Test
-Lab](https://firebase.google.com/docs/test-lab). For more details, see the
-[Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
 
 ## Prerequisites
 {:.no_toc}
@@ -40,6 +26,15 @@ This guide assumes the following:
 for projects created with [Android Studio](https://developer.android.com/studio).
 - Your project is located in the root of your VCS repository.
 - The project's application is located in a subfolder named `app`.
+
+**Note:** CircleCI offers an Android machine image available on CircleCI
+Cloud that supports x86 Android emulators and nested virtualization.
+Documentation on how to access it is available
+[here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator
+tests from a job is to consider using an external service like [Firebase Test
+Lab](https://firebase.google.com/docs/test-lab). For more details, see the
+[Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
+
 
 ## Sample configuration for UI tests
 
