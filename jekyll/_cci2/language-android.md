@@ -111,6 +111,7 @@ jobs:
           path: app/build/test-results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
+{% endraw %}
 
 ### React Native projects
 {:.no_toc}
