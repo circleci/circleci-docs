@@ -543,7 +543,7 @@ jobs:
 | クラス                 | vCPU | RAM  |
 | ------------------- | ---- | ---- |
 | medium (デフォルト)      | 4    | 8GB  |
-| large<sup>(2)</sup> | 8    | 16GB |
+| large<sup>(3)</sup> | 8    | 16GB |
 {: class="table table-striped"}
 
 ###### Example usage
@@ -640,6 +640,7 @@ jobs:
 ```
 
 <sup>(2)</sup> *This resource requires review by our support team. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to request access.*
+<sup>(3)</sup> *This resource is available only for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans.*
 
 **Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
 
