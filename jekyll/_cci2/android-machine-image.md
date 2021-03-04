@@ -1,4 +1,4 @@
-  ---
+---
 layout: classic-docs
 title: "Using Android Images with the Machine Executor"
 short-title: "Android Image on the Machine Executor"
