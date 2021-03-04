@@ -36,14 +36,17 @@ There are currently three support levels for CircleCI runner:
 
 ==== Untested
 
+NOTE: CircleCI provides no documentation for untested platforms.
+
 * CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
 * Support expectation:
 +
-** There is no CircleCI documentation available.
+** CircleCI does not provide documentation on these platforms.
 ** Customers can run CircleCI runner on an untested platform, but the customer is responsible for determining how to run runner on this platform.
 ** If issues arise on the untested platform, the CircleCI account team may or may not be able to help.
 ** Customer Engineers will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
 ** If a customer is able to get an untested platform up and running, the account team will collect information about their setup in order to reuse information with other customers.
+
 
 ==== Unsupported
 
@@ -54,33 +57,22 @@ There are currently three support levels for CircleCI runner:
 ** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
 ** No CircleCI documentation or Customer Engineering support.
 
+
 == Supported Platforms
 
-The following platforms have been validated to work with CircleCI runner:
+We are continuing to test and verify platforms. If you have a platform you'd like to see, https://ideas.circleci.com/cloud-feature-requests?search=runner[submit an idea] in our portal.
 
-* x86_64 + Ubuntu 18.04+
-* Arm64 + Ubuntu 18.04+
-* Intel + macOS
+[.table]
+[cols=8*, options="header"]
+[cols="h,1,1,1,1,1,1,1"]
+|===
 
-== Untested platforms
+| Processor | macOS | Windows | Ubuntu/Debian | RHEL/CentOS | Other Linux | Docker | Kubernetes/Other Orchestrator
 
-The following platforms have not been tested, but are believed to work with CircleCI runner:
+| x86_64 | Supported | Unsupported | Supported | Supported | Untested | Supported | Unsupported
+| arm64  | Unsupported | Unsupported | Supported | Untested | Untested | Unsupported | Unsupported
 
-* x86_64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-* Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-* Docker
-
-NOTE: CircleCI provides no documentation for these platforms.
-
-== Unsupported platforms
-
-The following platforms are not currently supported to work with CircleCI runner:
-
-* x86_64 + Windows
-* Arm + Windows
-* Apple Silicon + macOS
-* Arm32 + Linux
-* Run natively in Kubernetes/Rancher/other container orchestration solutions
+|===
 
 == Authentication
 
@@ -152,13 +144,12 @@ agent_version=$(curl "$base_url/release.txt")
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2)"
-file="${file:1}"
+file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
 mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 echo "Verifying CircleCI Launch Agent download"
-sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
 === Platform-specific instructions
@@ -184,6 +175,8 @@ runner:
   cleanup_working_directory: true
 ```
 
+Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like.
+
 === Install the CircleCI runner configuration
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`.
@@ -195,10 +188,21 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 === Create the circleci user & working directory
 
-These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`).
+These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+
+==== Ubuntu/Debian
 
 ```bash
 id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
+
+mkdir -p /opt/circleci/workdir
+chown -R circleci /opt/circleci/workdir
+```
+
+==== CentOS/RHEL
+
+```bash
+id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
