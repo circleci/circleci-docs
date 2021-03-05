@@ -455,3 +455,40 @@ pre {
 h6{
 	font-size: 16px;
 }
+
+// Table of Contents Sidebar ----------------------------------
+.table-of-contents {
+    position: fixed;
+    right: 0;
+    padding: 32px 32px 112px 12px;
+    background: #ffffff;
+    height: 100%;
+    width: 340px;
+    overflow: scroll;
+    border-left: 1px solid #e2e0e0;
+    top: 118px;
+    font-size: 14px;
+    transition: all 0.5s ease-in-out;
+
+    @media(max-width: $toc-breakpoint) {
+        right: -500px;
+
+        &.open {
+            right: 0px;
+        }
+    }
+
+
+    .toc-heading {
+        padding-left: 24px;
+    }
+
+    ul, li {
+        list-style-type: none;
+        padding-left: 12px;
+        margin: 4px 0;
+        &:first {
+            padding-left: 0px;
+        }
+    }
+}

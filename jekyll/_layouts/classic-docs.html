@@ -90,6 +90,15 @@
 				{% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
 					{% include doc-footer.html %}
 				{% endif %}
+
+        {% if page.side_toc != "none" %}
+        <aside class="table-of-contents">
+          <h5 class="toc-heading">On this page </h5>
+          {% include toc.html html=content h_max=4 %}
+        </aside>
+        {% endif %}
+
+
 			</article>
 		</div><!-- .article-container -->
 	</div><!-- .main-body -->
