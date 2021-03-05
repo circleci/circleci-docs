@@ -82,7 +82,7 @@ prioritize development efforts from our team!
 To get started with CircleCI runner:
 
 * https://circleci.com/contact/[Contact us] to sign up for a free trial of the Scale plan, if you are not already enrolled
-* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runmer platforms>> section)
+* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runner platforms>> section)
 * xref:runner-installation.adoc[Install] CircleCI runner!
 
 == Runner operation
