@@ -19,7 +19,7 @@ toc::[]
 
 The installation process assumes you have installed the following utilities on your system:
 
-* xref:local-cli.md[CircleCI CLI]
+* <<local-cli#installation,CircleCI CLI>>
 * curl (installed by default on macOS)
 * sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
 * systemd version 235+ (Linux only)
