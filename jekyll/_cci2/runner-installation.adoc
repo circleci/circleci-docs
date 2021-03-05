@@ -9,78 +9,21 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is currently available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
-This page describes how to install CircleCI runner on Linux and macOS platforms.
+This page describes how to install CircleCI runner on Linux and macOS platforms. For other platorms, see xref:runner-overview.adoc#available-circleci-runmer-platforms[Available CircleCI runner platforms] for more information.
 
 toc::[]
 
 == Prerequisites
 
-=== Support Levels
+The installation process assumes you have installed the following utilities on your system:
 
-There are currently three support levels for CircleCI runner:
-
-* Supported
-* Untested
-* Unsupported
-
-==== Supported
-
-* CircleCI has built and tested runner on a given platform.
-* Support expectation:
-+
-** Customer Engineers can provide support.
-** CircleCI documentation and best practices available.
-** If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
-
-==== Untested
-
-* CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
-* Support expectation:
-+
-** There is no CircleCI documentation available.
-** Customers can run CircleCI runner on an untested platform, but the customer is responsible for determining how to run runner on this platform.
-** If issues arise on the untested platform, the CircleCI account team may or may not be able to help.
-** Customer Engineers will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
-** If a customer is able to get an untested platform up and running, the account team will collect information about their setup in order to reuse information with other customers.
-
-==== Unsupported
-
-* CircleCI will not provide a runner binary capable of running CircleCI runner on the platform.
-* Support expectation:
-+
-** CircleCI runner will not work on the platform.
-** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
-** No CircleCI documentation or Customer Engineering support.
-
-== Supported Platforms
-
-The following platforms have been validated to work with CircleCI runner:
-
-* x86_64 + Ubuntu 18.04+
-* Arm64 + Ubuntu 18.04+
-* Intel + macOS
-
-== Untested platforms
-
-The following platforms have not been tested, but are believed to work with CircleCI runner:
-
-* x86_64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-* Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-* Docker
-
-NOTE: CircleCI provides no documentation for these platforms.
-
-== Unsupported platforms
-
-The following platforms are not currently supported to work with CircleCI runner:
-
-* x86_64 + Windows
-* Arm + Windows
-* Apple Silicon + macOS
-* Arm32 + Linux
-* Run natively in Kubernetes/Rancher/other container orchestration solutions
+* xref:local-cli.md[CircleCI CLI]
+* curl (installed by default on macOS)
+* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
+* systemd version 235+ (Linux only)
+* permissions to create a user, and create directories under /opt.
 
 == Authentication
 
@@ -88,25 +31,15 @@ NOTE: These commands can only be run by an owner/admin of your organization.
 
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
-1. <<local-cli#installation,Install the circleci command-line tool>>.
-2. Create a namespace for your organization's runner resources.
+. Create a namespace for your organization's runner resources.
 +
 NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
-3. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
 +
 NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
-4. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
+. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
-
-== Installation tooling
-
-The installation process assumes you have installed the following utilities on your system:
-
-* curl (installed by default on macOS)
-* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
-* systemd version 235+ (Linux only)
-* permissions to create a user, and create directories under /opt.
 
 == Job running requirements
 

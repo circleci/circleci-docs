@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: The CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan or to learn more.
+NOTE: The CircleCI runner is available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan or to learn more.
 
 toc::[]
 
@@ -20,7 +20,7 @@ CircleCI runner enables you to use your own infrastructure for running jobs. Thi
 .Runner Architecture
 image::runner-overview-diagram.png[CircleCI Runner Architecture]
 
-== Runner use cases
+== CircleCI runner use cases
 
 There are two key use cases CircleCI aims to meet with the runner:
 
@@ -31,6 +31,59 @@ There are two key use cases CircleCI aims to meet with the runner:
 ** Connect to private networks.
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
+
+== Available CircleCI runmer platforms
+
+CircleCI runner is available on multiple platforms. Support levels fall into two categories:
+
+* <<Supported>>
+* <<Preview>>
+
+=== Supported
+
+*Supported* Level platforms ensure that CircleCI runners are both built and tested on their respective systems.
+
+With a *Supported* platform, users receive the following:
+
+* Documentation and best practices
+* Support: CircleCI Customer Engineers will assist customers to resolve issues within their usual Gold Service Level Agreements (SLAs)
+
+*Supported* CircleCI runners are available on the following platforms:
+
+* Ubuntu 18.04 or later (x86_64 or ARM64)
+* macOS 10.15+ (Intel)
+
+=== Preview
+
+On *Preview* Level platforms, CircleCI runners are currently in development, thus testing is not complete.
+
+With a *Preview* platform, users receive the following:
+
+* A full integration that is a work-in-progress -- thus, some manual configuration may be required to install, configure, and deploy
+* Work-in-progress documentation and best practices
+* Support: CircleCI Customer Engineers will provide assistance and guidance on best practices for installing, configuring, and operating CircleCI runners
+** Users are encouraged to provide feedback in order to rapidly improve the CircleCI runner user experience and meet its necessary criteria as a *Supported* platform
+
+*Preview* CircleCI runners are available on the following platforms:
+
+* Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
+* Docker
+* Kubernetes
+* Windows
+* macOS (Apple M1)
+
+NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
+have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
+and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
+prioritize development efforts from our team!
+
+== Getting Started
+
+To get started with CircleCI runner:
+
+* https://circleci.com/contact/[Contact us] to sign up for a free trial of the Scale plan, if you are not already enrolled
+* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runmer platforms>> section)
+* xref:runner-installation.adoc[Install] CircleCI runner!
 
 == Runner operation
 
@@ -43,24 +96,6 @@ The runner consists of two components: the launch agent and the task agent.
 
 The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
 
-== CircleCI runner limitations
-
-There are a few limitations you should be aware of when using CircleCI runner:
-
-Currently, the runner officially supports the following platforms:
-
-* x86_64 + Ubuntu 18.04+
-* Arm64 + Ubuntu 18.04+
-* Intel + macOS
-
-Additional platforms have been tested but are not yet officially supported by the runner. For more information on platforms that have been tested, but are not supported, and platforms that have not been tested, please refer to the <<runner-installation#,Runner Installation>> page. Given the active development of CircleCI Runner, please link:https://circleci.com/contact/[contact us] if you have questions around support for your use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback] and contribute to our link:https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help prioritize development efforts from our team!
-
-The following features are not yet available, but may be in the future:
-
-* Rerun with SSH
-* Test splitting
-* `add_ssh_keys`
-
 == Public repositories
 
 CircleCI runner is not recommended for use with public projects that have the "Build forked pull requests" setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
@@ -69,15 +104,6 @@ CircleCI runner is not recommended for use with public projects that have the "B
 * Escaping the machine's runner sandbox.
 * Exposing access to the machine's network environment.
 * Persisting unwanted or dangerous data on the machine.
-
-== Prerequisites
-
-In order to use CircleCI runner, you must:
-
-* Be on the Scale Plan.
-* Use CircleCI Cloud.
-* Have experience managing your infrastructure.
-* <<runner-installation#,Install CircleCI runner>>.
 
 == Referencing your runner on a job
 
