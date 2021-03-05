@@ -32,7 +32,7 @@ There are two key use cases CircleCI aims to meet with the runner:
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
-== Available CircleCI runmer platforms
+== Available CircleCI runner platforms
 
 CircleCI runner is available on multiple platforms. Support levels fall into two categories:
 
