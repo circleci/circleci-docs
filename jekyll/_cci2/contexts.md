@@ -267,7 +267,7 @@ To delete an environment variable using our CLI, perform the following steps:
 1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI:\
   `circleci context list <vcs-type> <org-name>`
 2. Confirm the environment variable exists within that context. Execute this command in the CLI to list all variables under that context:\
-	`circleci context show <vcs-type> <org-name> <context-name>`
+  `circleci context show <vcs-type> <org-name> <context-name>`
 3. Delete the environment variable by executing this command:\
   `circleci context remove-secret <vcs-type> <org-name> <context-name> <secret name>`
 
