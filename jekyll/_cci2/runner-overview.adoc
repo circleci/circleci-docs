@@ -10,6 +10,7 @@ version:
 :toc-title:
 
 NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+
 toc::[]
 
 == Introduction
@@ -31,7 +32,7 @@ There are two key use cases CircleCI aims to meet with the runner:
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
-== Available CircleCI runmer platforms
+== Available CircleCI runner platforms
 
 CircleCI runner is available on multiple platforms. Support levels fall into two categories:
 
@@ -81,10 +82,10 @@ prioritize development efforts from our team!
 To get started with CircleCI runner:
 
 * https://circleci.com/contact/[Contact us] to sign up for a free trial of the Scale plan, if you are not already enrolled
-* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runmer platforms>> section)
+* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runner platforms>> section)
 * xref:runner-installation.adoc[Install] CircleCI runner!
 
-== Runner operation
+== CircleCI runner operation
 
 Once CircleCI runner is installed, the runner polls `circleci.com` for work, runs jobs, and returns status, logs, and artifacts to CircleCI. When the runner is not running a job, it will auto-update itself when a new version is released.
 

@@ -85,23 +85,22 @@ agent_version=$(curl "$base_url/release.txt")
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2)"
-file="${file:1}"
+file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
 mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 echo "Verifying CircleCI Launch Agent download"
-sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
 === Platform-specific instructions
 
 Please refer to the platform-specific installation instructions:
 
-* linux
-* macOS
+* <<CircleCI Runner Installation (Linux), Linux>>
+* <<CircleCI Runner Installation (macOS), macOS>>
 
-== Installing the CircleCI runner on Linux
+== CircleCI Runner Installation (Linux)
 
 === Create the CircleCI runner configuration
 
@@ -117,6 +116,8 @@ runner:
   cleanup_working_directory: true
 ```
 
+Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like.
+
 === Install the CircleCI runner configuration
 
 Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`.
@@ -128,10 +129,21 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 === Create the circleci user & working directory
 
-These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`).
+These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+
+==== Ubuntu/Debian
 
 ```bash
 id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
+
+mkdir -p /opt/circleci/workdir
+chown -R circleci /opt/circleci/workdir
+```
+
+==== CentOS/RHEL
+
+```bash
+id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
@@ -203,7 +215,7 @@ You can also see the logs for the system by running:
 journalctl -u circleci
 ```
 
-== CircleCI Runner Installation macOS
+== CircleCI Runner Installation (macOS)
 
 === Create a CircleCI runner configuration
 
