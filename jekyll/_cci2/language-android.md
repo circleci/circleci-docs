@@ -66,7 +66,11 @@ configuration; you can compare and contrast examples of different sizes
 
 ## Sample configuration for unit tests
 
-You may also use CircleCI's docker image (or another docker image) if you are not running UI tests.
+For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
+
+The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
+
+The following example demonstrates using an Android docker image rather than the Android machine image.
 
 {% raw %}
 
