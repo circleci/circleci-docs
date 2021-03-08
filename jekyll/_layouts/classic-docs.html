@@ -94,7 +94,9 @@
         {% if page.side_toc != "none" %}
         <aside class="table-of-contents">
           <h5 class="toc-heading">On this page </h5>
-          {% include toc.html html=content h_max=4 %}
+          <div class="toc-indent">
+            {% include toc.html html=content h_max=4 %}
+          </div>
         </aside>
         {% endif %}
 

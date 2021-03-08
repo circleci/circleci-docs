@@ -39,7 +39,7 @@ div.main-body{
 
 div.main-body {
 	display: flex;
-	max-width: 1200px;
+	max-width: 1920px;
 	margin: 0 auto;
 	background: #fff;
 }
@@ -144,8 +144,9 @@ div.article-container{
 		padding: 0 16px 0 16px;
 		width: 100%;
 	}
-	padding: 60px 48px 0 48px;
-	width: calc(100% - 260px);
+	padding: 60px 96px 0 48px;
+	width: calc(100% - #{$leftbar-width} - #{$rightbar-width});
+  max-width: 60em; // increase readability on large screens.
 }
 	article{
 		h2,
@@ -247,7 +248,7 @@ body.homepage{
       width: 100%;
     }
 	  padding: 60px 48px 0 48px;
-    width: calc(100% - 260px);
+    width: calc(100% - $leftbar-width);
   }
 
 	article{
@@ -463,11 +464,10 @@ h6{
     padding: 32px 32px 112px 12px;
     background: #ffffff;
     height: 100%;
-    width: 340px;
+    width: $rightbar-width;
     overflow: scroll;
-    border-left: 1px solid #e2e0e0;
     top: 118px;
-    font-size: 14px;
+    font-size: 16px;
     transition: all 0.5s ease-in-out;
 
     @media(max-width: $toc-breakpoint) {
@@ -480,7 +480,18 @@ h6{
 
 
     .toc-heading {
-        padding-left: 24px;
+        margin-left: -2px;
+    }
+
+    .toc-indent {
+      border-left: 2px solid #EEEEEE;
+      a {
+        color: $body-text-color;
+        &:hover {
+          color: $link-text-color;
+        }
+
+      }
     }
 
     ul, li {

@@ -1,7 +1,7 @@
 $sidebar-spacing-base: 5px;
 
 .sidebar-wrapper {
-  width: 260px;
+  width: $leftbar-width; // 260px;
   position: relative;
 
   @media screen and (max-width: $screen-sm) {
@@ -16,7 +16,7 @@ $sidebar-spacing-base: 5px;
   padding: 30px 24px 60px 16px;
   position: absolute;
   bottom: 0;
-  width: 260px;
+  width: $leftbar-width; // 260px;
   border-right: 1px solid $gray-200;
   overflow-y: scroll;
 
