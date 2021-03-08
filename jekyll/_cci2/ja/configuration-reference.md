@@ -1465,7 +1465,7 @@ workflows:
               only: /server\/.*/
 ```
 
-The above snippet causes the job `build_server_pdfs` to only be run when the branch being built contains the word "server/" in it.
+The above snippet causes the job `build_server_pdfs` to only be run when the branch being built starts with "server/" in it.
 
 You can read more about using regex in your config in the [Workflows document]({{ site.baseurl }}/2.0/workflows/#using-regular-expressions-to-filter-tags-and-branches).
 
