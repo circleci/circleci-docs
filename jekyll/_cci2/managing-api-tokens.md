@@ -29,7 +29,7 @@ There are two types of API tokens you can create within CircleCI.
     - _Admin_ tokens grant read and write access for the project's API.
 
 **Note**: API tokens cannot be modified after they have been created. The only
-way to change existing tokens is to delete and recreate them.
+way to change existing tokens is to delete and recreate them, also known as "token rotation".
 
 ### Creating a personal API token
 
