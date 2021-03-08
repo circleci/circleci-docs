@@ -102,6 +102,8 @@ en:
         - name: Pre-installed software
           link: 2.0/docker-to-machine
           hash: pre-installed-software
+        - name: ARM Resources
+          link: 2.0/arm_resources/
     - name: Mac
       children:
         - name: Overview
@@ -532,6 +534,8 @@ ja:
           link: ja/2.0/docker-to-machine
           i18n_name: インストール済ソフト
           hash: pre-installed-software
+        - i18n_name: ARM Resources # TODO: needs translation
+          link: ja/2.0/arm_resources/
     - name: Mac
       children:
         - name: Overview
