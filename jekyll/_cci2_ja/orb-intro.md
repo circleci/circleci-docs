@@ -6,166 +6,179 @@ description: "CircleCI Orb の入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
-*`version 2.1` のクラウド版 CircleCI で利用可能です。オンプレミス版では現在サポートされていません。*
+- 目次
+{:toc}
 
-CircleCI Orbs は、ジョブ、コマンド、Executor などの構成要素をまとめた共有可能なパッケージです。 CircleCI では承認済み Orbs に加え、CircleCI パートナーによってオーサリングされたサードパーティ製の Orbs も提供しています。 まずは、こうした既存の Orbs がご自身の構成ワークフローに活用できるかどうかを評価することをお勧めします。 承認済み Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にて確認してください。
+## クイック スタート
+{:.no_toc}
 
-## CircleCI Orbs の使用
+CircleCI Orbs とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E3%82%B8%E3%83%A7%E3%83%96%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、パラメーター化および[再利用可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)をまとめた共有可能なオープン ソース パッケージです。 Orbs を使用すると、構成がシンプルになり、多くのプロジェクトにまたがってソフトウェアやサービス スタックとの連携を素早く、容易に行えるようになります。
 
-ワークフローやジョブに CircleCI Orbs を使用するには、いくつかの方法があります。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から既存の Orb (CircleCI およびパートナー承認済み Orbs) をインポートする方法か、特定のワークフロー用に独自の Orb をオーサリングする方法を選ぶ場合が多いでしょう。 それぞれのアプローチについて以下に説明します。
+パブリッシュされている Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/2.0/orb-author-intro/)こともできます。
 
-### 既存の Orb をインポートする
+## プライベート Orbs と パブリック Orbs の比較
 
-既存の Orb をインポートするには、以下の手順を行います。
+設定ファイルで使用できる Orbs の種類は 2 つあり、Orb のパブリッシュ方法によって使い分ける必要があります。 Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)ではなく社内のみにパブリッシュする場合は、プライベート Orbs を使用します。 Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュする場合は、パブリック Orbs を使用します。 それぞれの Orbs について、以下のセクションで説明します。
 
-1) 各 Orb のバージョン 2.1 [.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに以下の 1 行を追加します。
+### プライベート Orbs
 
-```yaml
-version: 2.1
-```
+**メモ:** プライベート Orbs 機能は、[Scale プラン](https://circleci.com/ja/pricing)で利用できます。 Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
 
-**メモ:** 2.1 よりも前のバージョンで CircleCI に追加されていたプロジェクトでは、パイプラインを有効化して `orbs` キーを使用できるようにする必要があります。
+プライベート Orbs 機能と使うと、以下のような特徴を持つ Orb をオーサリングできます。
 
-2) バージョンの下に `orbs` スタンザを追加し、Orbs を呼び出します。 以下に例を示します。
+- CircleCI Orb レジストリに公開されない。
 
-    orbs:
-      slack: circleci/slack@0.1.0
-      heroku: circleci/heroku@0.0.1
-    
+- 作成元組織以外のユーザーは閲覧、使用できない。
 
-上記の例では、2 つの Orb が設定ファイルにインポートされます。
+- 作成元組織のものではないパイプラインでは使用できない。
 
-- [Slack Orb](https://circleci.com/developer/ja/orbs/orb/circleci/slack) 
-- [Heroku Orb](https://circleci.com/developer/ja/orbs/orb/circleci/heroku)
+パブリック Orbs ではなくプライベート Orbs を選択する場合には、プライベート Orbs ならではの制限事項も理解する必要があります。具体的には次のとおりです。
 
-### パートナーの Orb をインポートする
+- 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 その代わり、Orb のコンテンツを設定ファイルの "orbs" スタンザにインラインで貼り付けるか、`circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` コマンドを使用することで、設定ファイルをバリデーションできます。
 
-パートナーの Orb をインポートするには、以下の手順を行います。
+- 組織間の関係性にかかわらず、ある組織で作成されたプライベート Orbs を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orbs を設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
-1) 構成内の `.circleci.yml/config.yml` ファイルで `orbs` キーをインポートします。
+### パブリック Orbs
 
-2) 下の例の `<Orb 参照文字列>` の値を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)からインポートする Orb に置き換えます。 レジストリには数多くの CircleCI 承認済み Orb およびパートナー承認済み Orbs が公開されており、必要なものを利用できます。
+Orb をオーサリングして [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュする場合には、通常、パブリック Orbs を使用します。 パブリック Orb をオーサリングすると、すべての CircleCI ユーザーがその Orb を設定ファイル内で使用できるようになります。
+
+### Orb のオーサリング
+
+パブリック Orbs とプライベート Orbs はいずれも、2 種類の方法でオーサリングできます。
+
+- [Orb を手動でオーサリングする](https://circleci.com/ja/docs/2.0/orb-author-validate-publish/)方法
+- [Orb 開発キット](https://circleci.com/ja/docs/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)を使用する方法 (推奨)
+
+## Orbs を使用するメリット
+
+Orbs では設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするための一般的な設定ファイルであり、ジョブの定義には、アプリケーションのテストに必要なステップが複数含まれています。一方、CircleCI Orbs を使用する場合は、[`circleci/node`](https://circleci.com/developer/ja/orbs/orb/circleci/node) Orb に含まれる `test` ジョブを使用します。 Orbs を使用すれば、パラメーター化された構成を 1 回記述するだけで、それをいくつもの類似したプロジェクトで利用できるようになります。
+
+{:.tab.nodeTest.Orb を使用}
 
 ```yaml
 version: 2.1
 
 orbs:
-  <Orb 参照文字列>
+  node: circleci/node@x.y #Orb バージョン
+
+workflows:
+  test_my_app:
+    jobs:
+
+      - node/test:
+          version: <node-version>
 ```
 
-#### CircleCI Orb レジストリで提供されているパートナー Orb の例
+{:.tab.nodeTest.Orbs なし}
+{% raw %}
+```yaml
+version: 2.1
 
-CircleCI Orb レジストリから入手できる数多くの Orb の中から、一部をご紹介します。
+jobs:
+  test:
+    docker:
 
-| Partner Orb レジストリ リンク                                                                                         | Orbs 参照文字列                                              |
-| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [Alcide-io](https://circleci.com/developer/ja/orbs/orb/alcideio/alcide-advisor)                                   | `alcide: alcideio/alcide-advisor@1.0.3`                 |
-| [Anchore](https://circleci.com/developer/ja/orbs/orb/anchore/anchore-engine)                                      | `anchore: anchore/anchore-engine@1.0.0`                 |
-| [Aqua Security](https://circleci.com/developer/ja/orbs/orb/aquasecurity/microscanner)                             | `aqua: aquasecurity/microscanner@0.0.1`                 |
-| [AWS CLI](https://circleci.com/developer/ja/orbs/orb/circleci/aws-cli)                                            | `cli: circleci/aws-cli@0.1.13`                          |
-| [AWS CodeDeploy](https://circleci.com/developer/ja/orbs/orb/circleci/aws-code-deploy)                             | `codedeploy: circleci/aws-code-deploy@0.0.9`            |
-| [Amazon ECR](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecr)                                         | `ecr: circleci/aws-ecr@4.0.1`                           |
-| [Amazon ECS](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)                                         | `ecs: circleci/aws-ecs@0.0.11`                          |
-| [Amazon EKS](https://circleci.com/developer/ja/orbs/orb/circleci/aws-eks)                                         | `eks: circleci/aws-eks@0.1.0`                           |
-| [AWS パラメータ ストア](https://circleci.com/developer/ja/orbs/orb/circleci/aws-parameter-store)                          | `awsparameter: circleci/aws-parameter-store@1.0.0`      |
-| [AWS S3](https://circleci.com/developer/ja/orbs/orb/circleci/aws-s3)                                              | `s3: circleci/aws-s3@1.0.11`                            |
-| [Azure ACR](https://circleci.com/developer/ja/orbs/orb/circleci/azure-acr)                                        | `acr: circleci/azure-acr@0.1.1`                         |
-| [Azure AKS](https://circleci.com/developer/ja/orbs/orb/circleci/azure-aks)                                        | `aks: circleci/azure-aks@0.1.0`                         |
-| [Azure CLI](https://circleci.com/developer/ja/orbs/orb/circleci/azure-cli)                                        | `cli: circleci/azure-cli@1.1.0`                         |
-| [Cloudsmith](https://circleci.com/developer/ja/orbs/orb/cloudsmith/cloudsmith)                                    | `cloudsmith: cloudsmith/cloudsmith@1.0.3`               |
-| [Codecov](https://circleci.com/developer/ja/orbs/orb/codecov/codecov)                                             | `codecov: codecov/codecov@1.0.1`                        |
-| [CodeScene](https://circleci.com/developer/ja/orbs/orb/empear/codescene-ci-cd)                                    | `codescene: empear/codescene-ci-cd@1.0.0`               |
-| [ConfigCat](https://circleci.com/developer/ja/orbs/orb/configcat/flag_reference_validator)                        | `configcat: configcat/flag_reference_validator@1.0.3`   |
-| [Contrast Security](https://circleci.com/developer/ja/orbs/orb/contrastsecurity/verify)                           | `contrastsecurity: contrastsecurity/verify@0.1.2`       |
-| [Convox](https://circleci.com/developer/ja/orbs/orb/convox/orb)                                                   | `convox: convox/orb@1.4.1`                              |
-| [Cypress-io](https://circleci.com/developer/ja/orbs/orb/cypress-io/cypress)                                       | `cypress-io: cypress-io/cypress@1.0.0`                  |
-| [Datree](https://circleci.com/developer/ja/orbs/orb/datree/policy)                                                | `datree: datree/policy@1.0.6`                           |
-| [DeployHub](https://circleci.com/developer/ja/orbs/orb/deployhub/deployhub-orb)                                   | `deployhub: deployhub/deployhub-orb@1.2.0`              |
-| [Docker Hub](https://circleci.com/developer/ja/orbs/orb/circleci/docker)                                          | `dockerhub: circleci/docker@0.1.0`                      |
-| [FØCAL](https://circleci.com/developer/ja/orbs/orb/f0cal/farm)                                                    | `f0cal: f0cal/farm@1.0.0`                               |
-| [Fairwinds](https://circleci.com/developer/ja/orbs/orb/fairwinds/rok8s-scripts)                                   | `fairwinds: fairwinds/rok8s-scripts@9.4.0`              |
-| [Fortanix](https://circleci.com/developer/ja/orbs/orb/fortanix/sdkms-cli)                                         | `fortanix: fortanix/sdkms-cli@1.0.0`                    |
-| [FOSSA](https://circleci.com/developer/ja/orbs/orb/fossa/cli)                                                     | `fossa: fossa/cli@0.0.3`                                |
-| [Ghost Inspector](https://circleci.com/developer/ja/orbs/orb/ghostinspector/test-runner)                          | `ghostinspector: ghostinspector/test-runner@1.0.0`      |
-| [GCP Bin Auth](https://circleci.com/developer/ja/orbs/orb/circleci/gcp-binary-authorization)                      | `gcp: circleci/gcp-binary-authorization@0.5.2`          |
-| [Google Cloud CLI](https://circleci.com/developer/ja/orbs/orb/circleci/gcp-cli)                                   | `gcpcli: circleci/gcp-cli@1.8.2`                        |
-| [Google Container Registry](https://circleci.com/developer/ja/orbs/orb/circleci/gcp-gcr)                          | `gcr: circleci/gcp-gcr@0.0.7`                           |
-| [Google Kubernetes Engine](https://circleci.com/developer/ja/orbs/orb/circleci/gcp-gke)                           | `gke: circleci/gcp-gke@0.1.0`                           |
-| [Happo](https://circleci.com/developer/ja/orbs/orb/happo/happo)                                                   | `happo: happo/happo@1.0.1`                              |
-| [Helm](https://circleci.com/developer/ja/orbs/orb/circleci/helm)                                                  | `helm: circleci/helm@0.1.1`                             |
-| [Honeybadger-io](https://circleci.com/developer/ja/orbs/orb/honeybadger-io/deploy)                                | `honeybadger-io: honeybadger-io/deploy@1.1.1`           |
-| [Honeycomb](https://circleci.com/developer/ja/orbs/orb/honeycombio/buildevents)                                   | `buildevents: honeycombio/buildevents@0.1.1`            |
-| [JFrog](https://circleci.com/developer/ja/orbs/orb/circleci/artifactory)                                          | `jfrog: circleci/artifactory@1.0.0`                     |
-| [Kublr](https://circleci.com/developer/ja/orbs/orb/kublr/kublr-api)                                               | `kublr: kublr/kublr-api@0.0.1`                          |
-| [LambdaTest](https://circleci.com/developer/ja/orbs/orb/lambdatest/lambda-tunnel)                                 | `lambdatest: lambdatest/lambda-tunnel@0.0.1`            |
-| [LaunchDarkly](https://circleci.com/developer/ja/orbs/orb/launchdarkly/ld-find-code-refs)                         | `launchdarkly: launchdarkly/ld-find-code-refs@1.2.0`    |
-| [LogDNA](https://circleci.com/developer/ja/orbs/orb/logdna/logdna)                                                | `logdna: logdna/logdna@0.0.1`                           |
-| [Neocortix](https://circleci.com/developer/ja/orbs/orb/neocortix/loadtest)                                        | `neocortix: neocortix/loadtest@0.4.0`                   |
-| [NeuVector](https://circleci.com/developer/ja/orbs/orb/neuvector/neuvector-orb)                                   | `neuvector: neuvector/neuvector-orb@1.0.0`              |
-| [Nirmata](https://circleci.com/developer/ja/orbs/orb/nirmata/nirmata)                                             | `nirmata: nirmata/nirmata@1.1.0`                        |
-| [NowSecure](https://circleci.com/developer/ja/orbs/orb/nowsecure/ci-auto-orb)                                     | `nowsecure: nowsecure/ci-auto-orb@1.0.5`                |
-| [Oxygen](https://circleci.com/developer/ja/orbs/orb/cloudbeat/oxygen)                                             | `oxygen: cloudbeat/oxygen@1.0.0`                        |
-| [PackageCloud](https://circleci.com/developer/ja/orbs/orb/packagecloud/packagecloud)                              | `packagecloud: packagecloud/packagecloud@0.1.0`         |
-| [packtracker.io](https://circleci.com/developer/ja/orbs/orb/packtracker/report)                                   | `packtracker: packtracker/report@2.2.2`                 |
-| [Pantheon](https://circleci.com/developer/ja/orbs/orb/pantheon-systems/pantheon)                                  | `pantheon: pantheon-systems/pantheon@0.1.0`             |
-| [Percy](https://circleci.com/developer/ja/orbs/orb/percy/agent)                                                   | `percy: percy/agent@0.1.2`                              |
-| [Postman](https://circleci.com/developer/ja/orbs/orb/postman/newman)                                              | `postman: postman/newman@0.0.1`                         |
-| [Probely](https://circleci.com/developer/ja/orbs/orb/probely/security-scan)                                       | `probely: probely/security-scan@1.0.0`                  |
-| [Provar](https://circleci.com/developer/ja/orbs/orb/provartesting/provar)                                         | `provar: provartesting/provar@1.9.10`                   |
-| [Pulumi](https://circleci.com/developer/ja/orbs/orb/pulumi/pulumi)                                                | `pulumi: pulumi/pulumi@1.0.0`                           |
-| [Quali](https://circleci.com/developer/ja/orbs/orb/quali/cloudshell-colony)                                       | `quali: quali/cloudshell-colony@1.0.4`                  |
-| [realMethods](https://circleci.com/developer/ja/orbs/orb/realmethods/appgen)                                      | `realmethods: realmethods/appgen@1.0.1`                 |
-| [Red Hat OpenShift](https://circleci.com/developer/ja/orbs/orb/circleci/redhat-openshift)                         | `redhat: circleci/redhat-openshift@0.1.0`               |
-| [Rocro](https://circleci.com/developer/ja/orbs/orb/rocro/inspecode)                                               | `rocro: rocro/inspecode@1.0.0`                          |
-| [Rollbar](https://circleci.com/developer/ja/orbs/orb/rollbar/deploy)                                              | `rollbar: rollbar/deploy@1.0.1`                         |
-| [Rookout](https://circleci.com/developer/ja/orbs/orb/rookout/rookout-node)                                        | `rookout: rookout/rookout-node@0.0.2`                   |
-| [Sauce Labs](https://circleci.com/developer/ja/orbs/orb/saucelabs/sauce-connect)                                  | `saucelabs: saucelabs/sauce-connect@1.0.1`              |
-| [Snyk](https://circleci.com/developer/ja/orbs/orb/snyk/snyk)                                                      | `snyk: snyk/snyk@0.0.8`                                 |
-| [Sonatype](https://circleci.com/developer/ja/orbs/orb/sonatype/nexus-platform-orb)                                | `sonatype: sonatype/nexus-platform-orb@1.0.2`           |
-| [Styra](https://circleci.com/developer/ja/orbs/orb/styra/cli)                                                     | `styra: styra/cli@0.0.7`                                |
-| [Sumo Logic](https://circleci.com/developer/ja/orbs/orb/circleci/sumologic)                                       | `sumologic: circleci/sumologic@1.0.0`                   |
-| [Testim](https://circleci.com/developer/ja/orbs/orb/testimio/runner)                                              | `testim: testimio/runner@1.1.1`                         |
-| [Twistlock](https://circleci.com/developer/ja/orbs/orb/twistlock/twistcli-scan)                                   | `twistlock: twistlock/twistcli-scan@1.0.4`              |
-| [Unmock](https://circleci.com/developer/ja/orbs/orb/unmock/unmock)                                                | `unmock: unmock/unmock@0.0.10`                          |
-| [VMware Code Stream](https://circleci.com/developer/ja/orbs/orb/vmware/codestream)                                | `vmware: vmware/codestream@1.0.0`                       |
-| [WhiteSource](https://circleci.com/developer/ja/orbs/orb/whitesource/whitesource-scan)                            | `whitesource: whitesource/whitesource-scan@18.10.2`     |
-| [WhiteSource Vulnerability Checker](https://circleci.com/developer/ja/orbs/orb/whitesource/vulnerability-checker) | `whitesource: whitesource/vulnerability-checker@19.7.2` |
-| [xMatters](https://circleci.com/developer/ja/orbs/orb/xmatters/xmatters-orb)                                      | `xmatters: xmatters/xmatters-orb@0.0.1`                 |
+      - image: cimg/node:<node-version>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: パッケージのインストール
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run:
+          name: テストの実行
+          command: npm run test
+
+workflows:
+  test_my_app:
+    jobs:
+
+      - test
+
+```
+{% endraw %}
+
+## Orb レジストリ
+
+[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
+
+![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
+
+レジストリの Orb には、次の 3 つのラベルのいずれかが一緒に表示されます。
+
+| Certified (承認済み) | CircleCI チームが作成してテスト済み | | Partner (パートナー製) | CircleCI のテクノロジー パートナーが作成 | | Community (コミュニティ) | コミュニティが作成 |
 {: class="table table-striped"}
 
-**メモ:** 前提条件として、組織の [Settings (設定)] > [Security (セキュリティ)] ページでサードパーティ製 Orbs の使用を有効化する必要があります。
+**メモ:** *未承認の Orb を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)] ** ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。*
+{: class="alert alert-warning"}
 
-## 独自の Orb をオーサリングする
+Orb レジストリには、Orb それぞれに説明とドキュメントが用意されています。 また、多くの Orb には参考になる一連の使用例も付記されています。
 
-既存の Orb ではニーズを満たせない場合、以下の `circleci orb help` の出力に示されている [CircleCI CLI]({{ site.baseurl }}/ja/2.0/local-cli/#概要) を使用して、特定の環境や構成要件に合った独自の Orb をオーサリングできます。 インポート機能を使用する場合に比べて時間はかかりますが、独自 Orb をオーサリングすると、グローバルに読み取り可能な Orb を作成して自身の構成を共有することが可能です。 詳細については、[Orbs の作成に関するドキュメント]({{ site.baseurl }}/ja/2.0/creating-orbs/)を参照してください。
+既存の Orb に対する協力や、Orb リポジトリに関する問題の報告を受けるために、Orb オーサーの多くは Git リポジトリ リンクを掲載しています。
 
-**メモ:** パブリッシュ済みの Orb をレジストリのリストから除外するには、`circleci orb unlist` CLI コマンドを使用します。 詳細については、[ヘルプ ページ](https://circleci-public.github.io/circleci-cli/circleci_orb_unlist.html)を参照してください。 リストから除外した Orb は、名前で参照すれば引き続きグローバルに読み取り可能ですが、Orb レジストリの検索結果には表示されません。 リストから除外した後も、`circleci orb unlist <namespace/orb> false` コマンドを使用して再度リストに戻すことができます。
+## Orb の指定
 
-    $ circleci orb help
-    Operate on orbs
-    
-    Usage:
-      circleci orb [command]
-    
-    Available Commands:
-      create      指定された名前空間に Orb を作成します
-      info        Orb のメタデータを表示します
-      list        Orb をリストに含めます
-      process     事前登録処理後に Orb のバリデーションを行い、Orb の形式を出力します
-      publish     Orb をレジストリにパブリッシュします
-      source      Orb のソースを表示します
-      validate    orb.yml のバリデーションを行います  
-    
+Orb は、*名前空間*と *Orb 名*から成る*スラッグ*で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning)文字列を続けます。
 
-**メモ:** Orb をオーサリングするには、組織がサードパーティ製 Orb の使用とオーサリングをオプトインし、CircleCI の[コード共有利用規約](https://circleci.com/ja/legal/code-sharing-terms/)に同意する必要があります。 CircleCI はそれを受けて、MIT ライセンス契約に基づき、すべての Orb のライセンスをユーザーに付与します。
+Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
+
+## Orb の使用
+
+レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプル コード スニペットが用意されています。
+
+以下の例に、`version: 2.1` の設定ファイルに Orb をインポートする方法を示します。 `orbs` キーの後に、インポートする Orb を表す orb-name キーを記述します。 orb-name キーの値には、Orb スラッグとバージョンを指定します。
+
+```yaml
+version: 2.1
+
+orbs:
+  orb-name: <namespace>/<orb-name>@1.2.3
+```
+
+設定ファイルに Orb をインポートしたら、その Orb が提供するエレメントを `<orb-name>/<element>` の形式で使用できます。 Orb エレメントは、[再利用可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)と同じ方法で使用できます。 Orb のコマンドの使用方法について詳しくは、下記の Node の例をご覧ください。
+
+### Node の例
+{:.no_toc}
+
+Node Orb には、[`install-packages`](https://circleci.com/developer/ja/orbs/orb/circleci/node#commands-install-packages) という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。 `install-packages` コマンドを使用するには、ジョブの [steps](https://circleci.com/ja/docs/2.0/configuration-reference/#steps) にこのコマンドを記述します。
+
+```yaml
+version: 2.1
+
+orbs:
+  node: circleci/node@x.y #orb バージョン
+
+jobs:
+  test:
+    docker:
+
+      - image: cimg/node:<node-version>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+    steps:
+      - checkout
+      - node/install-packages # steps でコマンドを使用する
+```
 
 ## 関連項目
+{:.no_toc}
 
-- [Orb のコンセプト]({{site.baseurl}}/ja/2.0/using-orbs/): CircleCI Orbs の基本的な概念
-- [Orbs に関するよくあるご質問]({{site.baseurl}}/ja/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
-- [Orbs リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
-- [Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs/): 独自に作成した Orbs のテスト方法
-- [Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/): ワークフローやジョブに使用する Orb のパブリッシュ プロセス
-- [構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ
+- [Orbs のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orbs の基本的な概念
+- [Orbs に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
+- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executors の例
+- [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 独自に作成した Orb のテスト方法
+- [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ
