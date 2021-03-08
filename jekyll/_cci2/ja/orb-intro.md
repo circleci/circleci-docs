@@ -134,7 +134,7 @@ Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
 
 ## Orbs の使用
 
-レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプル コード スニペットが用意されています。
+レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプルコード スニペットが用意されています。
 
 以下の例に、`version: 2.1` の設定ファイルに Orb をインポートする方法を示します。 `orbs` キーの後に、インポートする Orb を表す orb-name キーを記述します。 orb-name キーの値には、Orb スラッグとバージョンを指定します。
 
@@ -161,7 +161,6 @@ orbs:
 jobs:
   test:
     docker:
-
       - image: cimg/node:<node-version>
         auth:
           username: mydockerhub-user
