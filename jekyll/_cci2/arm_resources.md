@@ -32,10 +32,10 @@ As these are `machine` executor resources, each class is a dedicated VM that is 
 
 The following ARM resource class is available to all CircleCI customers:
 
-|Resource class name|Specs|Pricing|Plans on which the resource is available|
-|---|---|---|---|
-|`arm.medium`|2 vCPUs, 8GB RAM |10 credits/min| Free, Performance, Scale, Custom|
-|`arm.large` |4 vCPUs, 16GB RAM|20 credits/min| Performance, Scale              |
+| Resource class name | Specs             | Pricing        | Requisite Plan                   |
+|---------------------|-------------------|----------------|----------------------------------|
+| `arm.medium`        | 2 vCPUs, 8GB RAM  | 10 credits/min | Free, Performance, Scale, Custom |
+| `arm.large`         | 4 vCPUs, 16GB RAM | 20 credits/min | Performance, Scale               |
 {: class="table table-striped"}
 
 At this moment, ARM resources are only available on our cloud offering. If you
