@@ -91,13 +91,9 @@ employee leaves the company or when a token has been considered leaked.
 
 ## Next steps
 
-API tokens are not useful unless you do something with them. Here are a few
-ideas:
+Some possible usecases for an API token might be:
 
   - [Embed Build Status Badges]({{ site.baseurl }}/2.0/status-badges/) in your project's README or other external page.
   - [Trigger Conditional Jobs]({{ site.baseurl }}/2.0/api-job-trigger/).
   - [Download a build's artifacts]({{ site.baseurl }}/2.0/artifacts/#downloading-all-artifacts-for-a-build-on-circleci) for safekeeping.
   - [Inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v2) into a build.
-  
-  For more information on why token rotation is so critical to a secure
-  application, see this blog post on rotating tokens at CircleCI.
