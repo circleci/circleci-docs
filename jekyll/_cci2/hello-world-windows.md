@@ -34,9 +34,10 @@ The Windows build environment (or `executor`) gives users the tools to build Win
 - Powershell is the default shell (Bash and cmd are available to be manually selected).
 - Docker Engine - Enterprise is available for running Windows containers.
 
-Note: the Windows executor does not have have support for [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching).
+**Notes:**
 
-Note: the Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
+- The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
+- Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
 
 ## Windows executor images
 
@@ -44,6 +45,7 @@ Currently CircleCI supports a single Windows image: Windows Server 2019 with Vis
 
 Please note that it is possible to run Windows Docker Containers on the Windows executor like so:
 
+{:.tab.windowsblockone.Cloud}
 ```yaml
 version: 2.1
 
@@ -66,6 +68,27 @@ jobs:
             docker run hello-world:nanoserver-1809
 ```
 
+{:.tab.windowsblockone.Server}
+```yaml
+version: 2
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: systeminfo
+      - run:
+          name: "Check docker"
+          shell: powershell.exe
+          command: |
+            docker info
+            docker run hello-world:nanoserver-1809
+```
+
+
 ## Known issues
 
 These are the issues with the Windows executor that we are aware of and will address as soon as we can:
@@ -77,7 +100,7 @@ These are the issues with the Windows executor that we are aware of and will add
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
-{:.tab.windowsblock.Cloud}
+{:.tab.windowsblocktwo.Cloud}
 ```yaml
 version: 2.1 # Use version 2.1 to enable orb usage.
 
@@ -96,7 +119,7 @@ jobs:
       - run: Write-Host 'Hello, Windows'
 ```
 
-{:.tab.windowsblock.Server}
+{:.tab.windowsblocktwo.Server}
 ```yaml
 version: 2
 
@@ -123,6 +146,8 @@ There are three shells that you can use to run job steps on Windows:
 
 You can configure the shell at the job level or at the step level. It is possible to use multiple shells in the same job. Consider the example below, where we use Bash, Powershell, and Command by adding a `shell:` argument to our `job` and `step` declarations:
 
+
+{:.tab.windowsblockthree.Cloud}
 ```YAML
 version: 2.1
 
@@ -146,8 +171,32 @@ jobs:
          shell: cmd.exe
 ```
 
+{:.tab.windowsblockthree.Server}
+```YAML
+version: 2.0
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      # default shell is Powershell
+      - run:            
+         command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
+         shell: powershell.exe
+      - run:
+         command: echo hello && echo world
+         shell: bash.exe
+      - run:
+         command: echo hello & echo world
+         shell: cmd.exe
+```
+
 **Note** It is possible to install updated or other Windows shell-tooling as well; for example, you could install the latest version of Powershell Core with the `dotnet` cli and use it in a job's successive steps:
 
+
+{:.tab.windowsblockfour.Cloud}
 ```YAML
 
 version: 2.1
@@ -165,9 +214,24 @@ jobs:
 
 ```
 
+{:.tab.windowsblockfour.Cloud}
+```YAML
+version: 2.0
+
+jobs:
+  build: # name of your job
+    machine:
+      image: windows-default # Windows machine image
+    resource_class: windows.medium
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run: pwsh ./<my-script>.ps1
+```
+
 # Example application
 
-Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build.
+Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
 
 You can view the entire configuration [here](https://github.com/CircleCI-Public/circleci-demo-windows/blob/master/.circleci/config.yml).
 
