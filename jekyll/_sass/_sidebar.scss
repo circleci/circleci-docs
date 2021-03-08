@@ -4,7 +4,7 @@ $sidebar-spacing-base: 5px;
   width: 260px;
   position: relative;
 
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: none;
   }
 }
@@ -188,7 +188,7 @@ $sidebar-spacing-base: 5px;
     }
   }
 
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: block;
   }
 }
