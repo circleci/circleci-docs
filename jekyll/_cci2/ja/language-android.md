@@ -11,28 +11,53 @@ version:
   - Server v2.x
 ---
 
-以下のセクションに沿って、CircleCI で Android プロジェクトをセットアップする方法について説明します。
+This document describes how to set up an Android project on CircleCI in the following sections.
 
 - 目次
 {:toc}
 
-## 概要
+
+## Prerequisites
 {:.no_toc}
 
-ここでは、CircleCI での Android 開発の概要を説明します。 Android 用の `.circleci/config.yml` テンプレートをお探しの場合は、このページの「[設定ファイルの例](#設定ファイルの例)」を参照してください。
+This guide assumes the following:
 
-**Note:** We now have an Android machine image available in preview on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here](https://github.com/CircleCI-Public/android-image-preview-docs). Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). For more details, see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
-
-## 前提条件
-{:.no_toc}
-
-このガイドは以下を前提としています。
-
-- [Gradle](https://gradle.org/) を使用して Android プロジェクトをビルドしている。 Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルド ツールです。
+- You are using [Gradle](https://gradle.org/) to build your Android project. Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルド ツールです。
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-## Sample configuration
+**Note:** CircleCI offers an Android machine image available on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). For more details, see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
+
+## Sample configuration for UI tests
+
+Let's walk through a sample configuration using the Android machine image. It is possible to use both orbs and to manually configure the use of the Android machine image to best suit your project.
+
+```yaml
+# .circleci/config.yaml
+version: 2.1 # to enable orb usage, you must be using circleci 2.1
+# Declare the orbs you wish to use.
+# Android orb docs are available here:  https://circleci.com/developer/orbs/orb/circleci/android
+orbs:
+  android: circleci/android@1.0 
+workflows:
+  test:
+    jobs:
+      # This job uses the Android machine image by default
+      - android/run-ui-tests:
+          # Use pre-steps and post-steps if necessary
+          # to execute custom steps before and afer any of the built-in steps
+          system-image: system-images;android-29;default;x86
+```
+
+As per above, using the Android orb will simplify your configuration; you can compare and contrast examples of different sizes [here]({{site.baseurl}}/2.0/android-machine-image#examples).
+
+## Sample configuration for unit tests
+
+For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
+
+The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
+
+The following example demonstrates using an Android docker image rather than the Android machine image.
 
 {% raw %}
 
@@ -56,84 +81,23 @@ jobs:
 #         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
-          name: 依存関係のダウンロード
+          name: Download Dependencies
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: テストの実行
+          name: Run Tests
           command: ./gradlew lint test
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/reports
           destination: reports
-      - store_test_results: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示されるようにします
+      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: app/build/test-results
-      # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示されるようにします
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
-
 {% endraw %}
-
-## Config walkthrough
-
-必ずバージョンの指定から始めます。
-
-```yaml
-version: 2
-```
-
-次に、`jobs` キーを記述します。 1 つひとつのジョブが、ビルド、テスト、デプロイのプロセス内の各段階を表します。 このサンプル アプリケーションでは 1 つの `build` ジョブのみが必要なので、このキーの下に各要素を記述します。
-
-ジョブには、`working_directory` を指定するオプションがあります。 これは、コードのチェックアウト先のディレクトリです。他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
-
-```yaml
-jobs:
-  build:
-    working_directory: ~/code
-```
-
-`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
-
-```yaml
-    docker:
-      - image: circleci/android:api-25-alpha
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-```
-
-`api-25-alpha` タグを指定して CircleCI 提供の Android イメージを使用します。 使用可能なイメージの詳細については、以下の「[Docker イメージ](#docker-イメージ)」を参照してください。
-
-次に、`build` ジョブ内にいくつかの `steps` を追加します。
-
-コードベースで作業できるように、最初に `checkout` を記述します。
-
-次に、キャッシュをプル ダウンします (存在する場合)。 初回実行時、またはいずれかの `build.gradle` ファイルを変更した場合、このステップは実行されません。 さらに `./gradlew androidDependencies` を実行して、プロジェクトの依存関係をプル ダウンします。 通常、このタスクは必要時に自動的に実行されるため、これを直接呼び出すことはありません。ただし、このタスクを直接呼び出すことで、`save_cache` ステップを挿入して依存関係を保存し、次回の処理を高速化することができます。
-
-`./gradlew lint test` で単体テストを実行し、組み込みの Lint ツールによって、コードのスタイルに問題がないかをチェックします。
-
-ビルド レポートをジョブ アーティファクトとしてアップロードし、CircleCI で処理するテスト メタデータ (XML) をアップロードします。
-
-## Docker images
-
-CircleCI には、Android アプリのビルドに使用できる Docker イメージが用意されているので便利です。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソース コードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
-
-The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). ベース OS は Debian Jessie です。ビルドは、パスワードなしで `sudo` にフル アクセスできる `circleci` ユーザーとして実行されます。
-
-### API levels
-{:.no_toc}
-
-[Android API レベル](https://source.android.com/source/build-numbers)ごとに異なる Docker イメージが用意されています。 ジョブで API レベル 24 (Nougat 7.0) を使用するには、`circleci/android:api-24-alpha` を選択します。
-
-### Customizing the images
-{:.no_toc}
-
-We welcome contributions [on our GitHub repo for the Android image](https://github.com/circleci/circleci-images/tree/master/android). Our goal is provide a base image that has *most* of the tools you need; we do not plan to provide *every* tool that you might need.
-
-To customize the image, create a Dockerfile that builds `FROM` the `circleci/android` image. See [Using Custom-Built Docker Images]({{ site.baseurl }}/2.0/custom-images/) for instructions.
-
-You can also use the [CircleCI Android Orb](https://circleci.com/developer/orbs/orb/circleci/android) to select your desired Android SDK and NDK.
 
 ### React Native projects
 {:.no_toc}
@@ -141,6 +105,8 @@ You can also use the [CircleCI Android Orb](https://circleci.com/developer/orbs/
 React Native projects can be built on CircleCI 2.0 using Linux, Android and macOS capabilities. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
 
 ## Testing with Firebase Test Lab
+
+**Note:**: While this portion of the document walks through using a third party tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
 
 To use Firebase Test Lab with CircleCI, first complete the following steps.
 
@@ -203,11 +169,11 @@ jobs:
 
 For more details on using `gcloud` to run Firebase, see the [official documentation](https://firebase.google.com/docs/test-lab/android/command-line).
 
-## デプロイ
+## Deployment
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
-## トラブルシューティング
+## Troubleshooting
 
 ### Handling out of memory errors
 
@@ -219,7 +185,7 @@ If you are using [Robolectric](http://robolectric.org/) for testing you may need
 android {
     testOptions {
         unitTests {
-            // その他の構成
+            // Any other configurations
 
             all {
                 maxHeapSize = "1024m"
