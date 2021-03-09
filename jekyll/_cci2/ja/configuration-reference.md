@@ -17,7 +17,7 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 * * *
 
-## Table of contents
+## 目次
 {:.no_toc}
 
 - 目次
