@@ -32,15 +32,22 @@ a {
 	}
 }
 
-
-div.main-body{
-	overflow: auto;
+.container-semi-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
 }
 
+.container-semi-fluid,
+div.main-body{
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+
 div.main-body {
+  overflow: auto;
 	display: flex;
-	max-width: 1200px;
-	margin: 0 auto;
 	background: #fff;
 }
 
