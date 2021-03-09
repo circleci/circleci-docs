@@ -112,7 +112,7 @@ test:
     - find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 ```
 
-#### <a name="gradle-junit-results"></a>Gradle JUnit Test results
+#### Gradle JUnit Test results
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/),
 test reports are automatically generated in XML format. CircleCI makes it easy to collect these
@@ -126,7 +126,7 @@ test:
     - find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
 ```
 
-#### <a name="mochajs"></a>Mocha for Node.js
+#### Mocha for Node.js
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter)
 
@@ -142,7 +142,7 @@ test:
 
 
 
-#### <a name="ava"></a>Ava for Node.js
+#### Ava for Node.js
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
 
@@ -200,7 +200,7 @@ test:
     - bundle exec rspec --format progress --format RspecJunitFormatter -o $CIRCLE_TEST_REPORTS/rspec.xml
 ```
 
-### <a name="minitest"></a> Minitest
+### Minitest
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
 
