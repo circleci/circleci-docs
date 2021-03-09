@@ -18,11 +18,11 @@ version:
 
 CircleCI Orbs とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E3%82%B8%E3%83%A7%E3%83%96%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#%E5%86%8D%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E3%81%AE%E3%82%AA%E3%83%BC%E3%82%B5%E3%83%AA%E3%83%B3%E3%82%B0)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、パラメーター化および[再利用可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)をまとめた共有可能なオープン ソース パッケージです。 Orbs を使用すると、構成がシンプルになり、多くのプロジェクトにまたがってソフトウェアやサービス スタックとの連携を素早く、容易に行えるようになります。
 
-パブリッシュされている Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/2.0/orb-author-intro/)こともできます。
+公開されている Orbs を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/2.0/orb-author-intro/)こともできます。
 
 ## プライベート Orbs と パブリック Orbs の比較
 
-設定ファイルで使用できる Orbs の種類は 2 つあり、Orb のパブリッシュ方法によって使い分ける必要があります。 Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)ではなく社内のみにパブリッシュする場合は、プライベート Orbs を使用します。 Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュする場合は、パブリック Orbs を使用します。 それぞれの Orbs について、以下のセクションで説明します。
+設定ファイルで使用できる Orbs の種類は 2 つあり、Orb 公開方法によって使い分ける必要があります。 Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)ではなく社内のみに公開する場合は、プライベート Orbs を使用します。 Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュする場合は、パブリック Orbs を使用します。 それぞれの Orbs について、以下のセクションで説明します。
 
 ### プライベート Orbs
 
@@ -68,7 +68,6 @@ orbs:
 workflows:
   test_my_app:
     jobs:
-
       - node/test:
           version: <node-version>
 ```
@@ -81,7 +80,6 @@ version: 2.1
 jobs:
   test:
     docker:
-
       - image: cimg/node:<node-version>
         auth:
           username: mydockerhub-user
@@ -105,7 +103,6 @@ jobs:
 workflows:
   test_my_app:
     jobs:
-
       - test
 
 ```
@@ -113,31 +110,33 @@ workflows:
 
 ## Orb レジストリ
 
-[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
+[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、公開されたすべての Orbs を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発して公開]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
 
 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
 レジストリの Orb には、次の 3 つのラベルのいずれかが一緒に表示されます。
 
-| Certified (承認済み) | CircleCI チームが作成してテスト済み | | Partner (パートナー製) | CircleCI のテクノロジー パートナーが作成 | | Community (コミュニティ) | コミュニティが作成 |
+| Certified (承認済み) | CircleCI チームが作成してテスト済み |
+| Partner (パートナー製) | CircleCI のテクノロジー パートナーが作成 |
+| Community (コミュニティ) | コミュニティが作成 |
 {: class="table table-striped"}
 
-**メモ:** *未承認の Orb を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)] ** ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。*
+**メモ:** *未承認の Orb を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)]** ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。*
 {: class="alert alert-warning"}
 
-Orb レジストリには、Orb それぞれに説明とドキュメントが用意されています。 また、多くの Orb には参考になる一連の使用例も付記されています。
+それぞれのOrb には、Orb レジストリにリストされている説明とドキュメントが含まれています。 多くの場合、Orbs には参考になる使用例が記載されています。
 
-既存の Orb に対する協力や、Orb リポジトリに関する問題の報告を受けるために、Orb オーサーの多くは Git リポジトリ リンクを掲載しています。
+既存の Orb に対する貢献や、Orb リポジトリに関する問題の報告を受けるために、Orb の著者の多くは Git リポジトリのリンクを掲載しています。
 
-## Orb の指定
+## Orbs の指定
 
 Orb は、*名前空間*と *Orb 名*から成る*スラッグ*で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning)文字列を続けます。
 
 Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
 
-## Orb の使用
+## Orbs の使用
 
-レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプル コード スニペットが用意されています。
+レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプルコード スニペットが用意されています。
 
 以下の例に、`version: 2.1` の設定ファイルに Orb をインポートする方法を示します。 `orbs` キーの後に、インポートする Orb を表す orb-name キーを記述します。 orb-name キーの値には、Orb スラッグとバージョンを指定します。
 
@@ -164,7 +163,6 @@ orbs:
 jobs:
   test:
     docker:
-
       - image: cimg/node:<node-version>
         auth:
           username: mydockerhub-user
