@@ -56,7 +56,7 @@ var trackEvent = function (name, properties, options, callback) {
   });
 };
 
-// analytics tracking for CTA button clicks
+// analytics tracking for CTA button clicks and eventName query param
 window.addEventListener('load', function () {
   var buttons = Array.from(document.querySelectorAll('[data-analytics-action]'));
 
@@ -67,6 +67,11 @@ window.addEventListener('load', function () {
       trackEvent(action, analyticsTrackProps(this));
     });
   });
+
+  var queryParams = getUrlVars(window.location.href);
+  if (!!queryParams.eventName) {
+    trackEvent(eventName);
+  }
 });
 
 function getUrlVars(url) {
