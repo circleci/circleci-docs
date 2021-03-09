@@ -224,9 +224,9 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 ### Secure Environment Variable Creation, Deletion, and Rotation
 
-This section will walk through interacting with environment variables using the CircleCI CLI or API.
+This section will walk through interacting with context environment variables using the CircleCI CLI or API.
 
-#### Creating Environment	Variables
+#### Creating Environment Variables
 
 ##### Using CircleCI’s CLI
 {:.no_toc}
@@ -237,121 +237,110 @@ to set up your CircleCI command line interface._
 
 To create an environment variable using our CLI, perform the following steps:
 
-1. If you have not already done so, find the right context name that will contain the new environment variable. Execute this command in the CLI: \
+1. If you have not already done so, find the right context name that will contain the new environment variable. Execute this command in the CLI:
 `circleci context list <vcs-type> <org-name>`
-2. Store a new environment variable under that context. Execute this command in the CLI: \
-`circleci context store-secret <vcs-type> <org-name> <context-name> <secret name>`
+2. Store a new environment variable under that context. Execute this command in the CLI:
+`circleci context store-secret <vcs-type> <org-name> <context-name> <env-var-name>`
+
+Note that the CLI will prompt you to input the secret value, rather than accepting it 
+as an argument. This approach is designed to avoid unintentional secret exposure.
 
 ##### Using CircleCI’s API
 {:.no_toc}
 
-To create an environment variable using our API, perform the following steps:
+To create an environment variable using the API, call the [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext)
+endpoint with the appropriate request body. For this request, replace the 
+`context-id` and the `env-var-name` with the ID for the context and the new 
+environment variable name. The request body should include a `value` key 
+containing the plaintext secret as a string.
 
-1. Call the [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext)
-   endpoint with the appropriate request body in one of our supported languages.
-   For this request, replace the `context-id` and the `env-var-name` with the ID
-   for the context and the new environment variable name. The request body
-   should include a `value` key with a string value.
-   
-2. If the request is successful, the response will include the name of the
-   environment variable that has been updated. An unsuccessful response will
-   include a clear error message explaining the error reported.
-
-#### Deleting Context Environment Variables
+#### Deleting Environment Variables
 
 ##### Using CircleCI’s CLI
 {:.no_toc}
 
-To delete an environment variable using our CLI, perform the following steps:
+To delete an environment variable using the CLI, perform the following steps:
 
-1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI:\
-  `circleci context list <vcs-type> <org-name>`
-2. Confirm the environment variable exists within that context. Execute this command in the CLI to list all variables under that context:\
-  `circleci context show <vcs-type> <org-name> <context-name>`
-3. Delete the environment variable by executing this command:\
-  `circleci context remove-secret <vcs-type> <org-name> <context-name> <secret name>`
+1. If you have not already done so, find the context name that contains the 
+   environment variable you wish to delete. Execute this command in the CLI:
+   `circleci context list <vcs-type> <org-name>`
+
+2. Confirm the environment variable exists within that context. Execute this 
+   command in the CLI to list all variables under that context:
+   `circleci context show <vcs-type> <org-name> <context-name>`
+
+3. Delete the environment variable by executing this command:
+   `circleci context remove-secret <vcs-type> <org-name> <context-name> <env-var-name>`
 
 ##### Using CircleCI’s API
 {:.no_toc}
 
-To delete an environment variable using our API, perform the following steps:
+To delete an environment variable using the API, call the [Delete Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint.
 
-1. Call the [Delete Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint in one of our supported languages. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. 
+For this request, replace the `context-id` and the `env-var-name` with the ID 
+   for the context and the environment variable name that should be updated.
 
-    To see request samples in all supported languages, visit our [api docs on creating an environment variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext).
+#### Rotating Environment Variables
 
-2.  If the request is successful, the response will include a message object
-    confirming the variable was successfully deleted. An unsuccessful response
-    will include a clear error message explaining the error reported.
-
-
-#### Rotating Context Environment Variables
-
-
-Rotation occurs when an old API token is replaced with a new token. 
+Rotation refers to the process of updating a secret's value without deleting it 
+or changing its name.
 
 Because environment variables can be shared, passed around between employees and
 teams, and exposed inadvertently, it is always good practice to periodically
 rotate secrets. Many organizations automate this process, running a script when
-an employee leaves the company or when a secret has been considered leaked.
+an employee leaves the company or when a secret may have been compromised.
 
 Context environment variables can be rotated using CircleCI’s CLI, or by
-directly accessing our API.
+directly accessing the API.
 
 
 ##### Using CircleCI’s CLI
 {:.no_toc}
 
-If this is your first time using the CLI, follow the instructions on [
-CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration)
-to set up your CircleCI command line interface.
+_If this is your first time using the CLI, follow the instructions on 
+[CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration)
+to set up your CircleCI command line interface._
 
-To rotate an environment variable using our CLI, perform the following steps:
+To rotate an environment variable using the CLI, perform the following steps:
 
 1. If you have not already done so, find the context name that contains the
-   variable you would like to rotate. Execute this command in the CLI: \
-`circleci context list <vcs-type> <org-name>`
+   variable you would like to rotate. Execute this command in the CLI:
+   `circleci context list <vcs-type> <org-name>`
   
-2. Find the environment variable to rotate within that context. Execute this command in the CLI: \
-`circleci context show <vcs-type> <org-name> <context-name>`
+2. Find the environment variable to rotate within that context. Execute this command in the CLI:
+   `circleci context show <vcs-type> <org-name> <context-name>`
 
-3. Replace the existing environment variable under that context. Execute this
-   command in the CLI and replace the `secret name` with the name of the
-   environment variable from Step 2: \
-  `circleci context store-secret <vcs-type> <org-name> <context-name> <secret name>`
+3. Update the existing environment variable under that context. Execute this
+   command in the CLI and replace the `env-var-name` with the name of the
+   environment variable from Step 2:
+  `circleci context store-secret <vcs-type> <org-name> <context-name> <env-var-name>`
 
+Note that the CLI will prompt you to input the secret value, rather than accepting it 
+as an argument. This approach is designed to avoid unintentional secret exposure.
 
 ##### Using CircleCI’s API
 {:.no_toc}
 
-To rotate an environment variable from our API, perform the following steps:
-
-1. Call the [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext)
-   endpoint with the appropriate request body in one of our supported languages.
-   For this request, replace the `context-id` and the `env-var-name` with the ID
-   for the context and the environment variable name that should be updated. The
-   request body should include a `value` key with a string value assigned.
-
-   To see request samples in all supported languages, visit our [api docs on
-   updating an environment
-   variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext).
-
-2. If the request is successful, the response will include the name of the
-   environment variable that has been updated. An unsuccessful response will
-   include a clear error message explaining the error reported.
+To rotate an environment variable from our API, call the [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext)
+endpoint with the appropriate request body. For this request, replace the `context-id` 
+and the `env-var-name` with the ID for the context and the environment variable name 
+that should be updated. The request body should include a `value` key containing the 
+plaintext secret as a string.
 
 
 ## Secrets masking
 _Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
-Contexts hold project secrets or keys that perform crucial functions for your applications. For added security CircleCI performs secret masking on the build output, obscuring the `echo` or `print` output of contexts.
+Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security, 
+CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that 
+contains env var values.
 
 The value of the context will not be masked in the build output if:
 
-* the value of the context is less than 4 characters
-* the value of the context is equal to one of `true`, `True`, `false` or `False`
+* the value is less than 4 characters
+* the value is equal to one of `true`, `True`, `false` or `False`
 
-**Note:** secret masking will only prevent the value of the context from appearing in your build output. The value of the context is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
+**Note:** secret masking will only prevent the secret value from appearing in your build output. The value is still accessible to code executed within your builds and users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ## See also
 {:.no_toc}
