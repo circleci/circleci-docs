@@ -53,7 +53,7 @@
         padding: 0 14px 0 14px; }
     .nav-toggle.two .widescreen .main-nav.right-links {
       display: none;
-      right: 0;
+      right: 15px;
       top: 12px;
       z-index: 0; }
       .nav-toggle.two .widescreen .main-nav.right-links .btn, .nav-toggle.two .widescreen .main-nav.right-links .btn-primary, .nav-toggle.two .widescreen .main-nav.right-links .btn-secondary, .nav-toggle.two .widescreen .main-nav.right-links .btn-primary-enterprise, .nav-toggle.two .widescreen .main-nav.right-links .btn-secondary-enterprise, .nav-toggle.two .widescreen .main-nav.right-links .btn-secondary-enterprise-ico {
