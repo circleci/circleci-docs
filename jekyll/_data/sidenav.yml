@@ -102,8 +102,11 @@ en:
         - name: Pre-installed software
           link: 2.0/docker-to-machine
           hash: pre-installed-software
+        - name: Android Machine Image
+          link: 2.0/android-machine-image
         - name: ARM Resources
           link: 2.0/arm_resources/
+
     - name: Mac
       children:
         - name: Overview
