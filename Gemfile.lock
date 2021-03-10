@@ -33,6 +33,7 @@ GEM
     concurrent-ruby (1.1.6)
     css_parser (1.7.1)
       addressable
+    dotenv (2.7.6)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
@@ -153,6 +154,7 @@ GEM
       multi_json (>= 1.0.0)
     rack (2.1.4)
     rainbow (3.0.0)
+    rake (13.0.3)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -185,6 +187,7 @@ PLATFORMS
 DEPENDENCIES
   asciidoctor
   asciidoctor-pdf (~> 1.5.3)
+  dotenv
   html-proofer
   jekyll (= 3.8.6)
   jekyll-algolia (~> 1.0)
@@ -194,6 +197,7 @@ DEPENDENCIES
   jekyll-target-blank
   pygments.rb (~> 1.1.2)
   rack (>= 2.0.6)
+  rake
 
 RUBY VERSION
    ruby 2.6.3p62
