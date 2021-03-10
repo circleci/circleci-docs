@@ -208,7 +208,7 @@ jobs:
     executor:
       name: ruby/default
       tag: '2.6.3-node-browsers'
-
+    resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
@@ -236,12 +236,10 @@ jobs:
             set -exu
             mkdir -p /tmp/workspace/js
             mv /tmp/workspace/js/* jekyll/assets/js/
-
             mkdir -p /tmp/workspace/api
             cp -r /tmp/workspace/api/ jekyll/_api/
             # remove unusued /api folder.
             rm -rf jekyll/_api/api
-
             mkdir -p /tmp/workspace/pdfs
             cp -r /tmp/workspace/api/* jekyll/_api/
       - run: sudo apt-get update; sudo apt-get --yes install nkf
@@ -250,12 +248,8 @@ jobs:
           command: ./scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja
       - set-jekyll-basename
       - run:
-          name: Create jekyll config file to override things
-          command: |
-            echo "baseurl: \"/${JEKYLL_BASENAME}\"" > jekyll/_config_override.yml
-      - run:
           name: Build the Jekyll site
-          command: bundle exec jekyll build --config jekyll/_config.yml,jekyll/_config_production.yml,jekyll/_config_override.yml --source jekyll --destination jekyll/_site/${JEKYLL_BASENAME} 2>&1 | tee $JOB_RESULTS_PATH/build-results.txt
+          command: bundle exec rake build
       - run:
           name: Workaround to pass htmlproofer for docs where baseurl (/docs) is hardcoded
           command: |
@@ -267,9 +261,13 @@ jobs:
       - run:
           name: Test with HTMLproofer
           command: |
-            bundle exec htmlproofer jekyll/_site --allow-hash-href --check-favicon --check-html --disable-external --file-ignore "jekyll/_site/${JEKYLL_BASENAME}/api/v2/index.html,${JEKYLL_BASENAME}/api/v2/,/${JEKYLL_BASENAME}/ja/2.0/runner-installation/,/${JEKYLL_BASENAME}/ja/2.0/security-server/,/${JEKYLL_BASENAME}/ja/2.0/v.2.19-overview/,/${JEKYLL_BASENAME}/ja/2.0/customizations/,/${JEKYLL_BASENAME}/ja/2.0/aws-prereq/,/${JEKYLL_BASENAME}/ja/2.0/ops/,/${JEKYLL_BASENAME}/ja/2.0/about-circleci/,/${JEKYLL_BASENAME}/ja/2.0/demo-apps/,/${JEKYLL_BASENAME}/ja/2.0/google-auth/,/${JEKYLL_BASENAME}/ja/2.0/orb-concepts/,/${JEKYLL_BASENAME}/ja/2.0/tutorials/,/${JEKYLL_BASENAME}/reference-2-1/" --empty-alt-ignore 2>&1 | nkf -w --url-input | tee $JOB_RESULTS_PATH/htmlproofer-results.txt
+            bundle exec rake test
+      - run:
+          name: compress jekyll output
+          command: |
+            tar -zcvf circleci-docs.tar.gz jekyll/_site/
       - store_artifacts: # stores the built files of the Jekyll site
-          path: jekyll/_site/
+          path: circleci-docs.tar.gz
           destination: circleci-docs
       - store_artifacts: # stores build log output.
           path: run-results/
@@ -297,7 +295,6 @@ jobs:
           name: Update Algolia Index
           command: |
             ALGOLIA_API_KEY=$ALGOLIA_PRIVATE_KEY bundle exec jekyll algolia --source jekyll --config jekyll/_config.yml
-
   deploy:
     docker:
       - image: cibuilds/aws:1.16.185
