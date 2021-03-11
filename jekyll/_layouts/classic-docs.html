@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang }}">
-{% include_cached head.html %}
+{% include_cached head.html site=site page=page %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
-	{% include_cached google-tag-manager.html %}
+  {% include_cached google-tag-manager.html %}
 {% endif %}
 
 <div class="outer">
@@ -66,38 +66,44 @@
         <div>
           {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
         </div>
-
-          {% if page.version %}
-          <div class="server-version-wrapper">
-            <div id="tooltip" role="tooltip" class="server-version-popover">
-              This document is applicable to the following:
-              <div id="arrow" data-popper-arrow></div>
-            </div>
-            {% for version in page.version %}
-            <span class="badge badge-primary">
-              <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
-              <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-            </span>
-            {% endfor %}
+        {% if page.version %}
+        <div class="server-version-wrapper">
+          <div id="tooltip" role="tooltip" class="server-version-popover">
+            This document is applicable to the following:
+            <div id="arrow" data-popper-arrow></div>
           </div>
-          {% endif %}
-
-
-		{% if page.untranslated %}
-          {% include_cached translation_in_progress.html %}
+          {% for version in page.version %}
+          <span class="badge badge-primary">
+            <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
+            <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
+          </span>
+          {% endfor %}
+        </div>
         {% endif %}
-				{{ content }}
-				{% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
-					{% include_cached doc-footer.html %}
-				{% endif %}
-			</article>
-		</div><!-- .article-container -->
-	</div><!-- .main-body -->
+        {% if page.untranslated %}
+          {% include_cached translation_in_progress.html site=site page=page %}
+        {% endif %}
+        {{ content }}
+        {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+          {% include_cached doc-footer.html page=page site=site %}
+        {% endif %}
+      </article>
+    </div><!-- .article-container -->
+  </div><!-- .main-body -->
 
-	{% include_cached global-footer.html %}
-	{% include_cached js-config.html %}
-	{% include_cached js-assets.html %}
+  {% include_localized global-footer.html %}
+  {% include_cached js-config.html site=site page=page %}
+  {% asset vendor.min.js %}
+  <script src="https://unpkg.com/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+  {% include_cached rollbar.html site=site %}
+  {% asset app.bundle.js %}
+  {% asset site.min.js %}
+  {% asset jquery.cookie.min.js %}
+  {% asset main.js %}
+  {% asset nav.js %}
+  {% asset shared/components/subnav.js %}
+  {% asset shared/analytics-recursive-tracking.js %}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
 </div><!-- .outter -->
 </body>
 </html>
-
