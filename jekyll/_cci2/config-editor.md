@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "Using the CircleCI in-app Configuration Editor"
-description: "Docs page on in-app configuration editor use and features"
+title: "Using the CircleCI In-app Configuration Editor"
+description: "Docs page on In-app configuration editor use and features"
 version:
 - Cloud
 - Server v2.x
