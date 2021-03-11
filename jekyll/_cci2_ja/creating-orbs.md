@@ -59,7 +59,7 @@ version:
 
 ここでは、Orb 開発キットについて掘り下げ、Orb のパブリッシュに関係するコンポーネントについて説明します。
 
-[circleci orb init]({{site.baseurl}}/ja/2.0/orb-author/#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB-1) コマンドは、Orb 開発パイプラインに最適な CircleCI 製設定ファイルなどを含む [Orb テンプレート リポジトリ](https://github.com/CircleCI-Public/Orb-Project-Template)を、Orb 用にクローンします。
+[circleci orb init]({{site.baseurl}}/ja/2.0/orb-author/#%E4%BD%9C%E6%A5%AD%E3%82%92%E9%96%8B%E5%A7%8B%E3%81%99%E3%82%8B) コマンドは、Orb 開発パイプラインに最適な CircleCI 製設定ファイルなどを含む [Orb テンプレート リポジトリ](https://github.com/CircleCI-Public/Orb-Project-Template)を、Orb 用にクローンします。
 
 この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
 

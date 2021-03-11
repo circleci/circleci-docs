@@ -1,105 +1,77 @@
 ---
 layout: classic-docs
-title: "Orb のオーサリング – Orb のバリデーションとパブリッシュ"
-short-title: "Orb のテストとパブリッシュ"
-description: "Orb のテストとパブリッシュに関する入門ガイド"
-categories:
-  - getting-started
-order: 1
+title: "Orb の手動オーサリング プロセス"
+description: "Orb 開発キットを使用せずに、シンプルな Orb を手動でオーサリングする方法を説明します。"
+version:
+  - Cloud
 ---
 
-## はじめに
+ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。詳細は「[Orb のオーサリング プロセス]({{site.baseurl}}/2.0/orb-author)」を参照してください。
 
-Orb のオーサリングが完了したら、作成した Orb をテストして、自分の環境内で動作することを確認します。 テストの完了後、Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュできます。 Orb のバリデーションとパブリッシュには、CircleCI CLI を使用することをお勧めします。CLI には、バリデーションとパブリッシュのプロセスを簡素化する関連コマンドを備えた `orb-tools` Orb が用意されています。
+1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。希望する名前空間とGitHub 組織名を代入して実行してください。
 
-## orb-tools
+```sh
+circleci namespace create <my-namespace> github <my-gh-org>
+```
+**メモ:** CircleCI CLI から名前空間を作成する場合は、VCS プロバイダーを指定してください。
 
-`orb-tools` Orb は、Orb を構築したり、パブリッシュの前にバリデーションしたりするためのシンプルかつ簡単な方法を提供しており、以下のジョブやコマンドを実行できます。
+1. 名前空間内に Orb を作成します。 この段階では Orb のコンテンツは何も生成されませんが、Orb をパブリッシュするときの名前が予約されます。
 
-| コマンド/ジョブ            | 説明                                                                  |
-| ------------------- | ------------------------------------------------------------------- |
-| orb-tools/pack      | Orb のファイル構造を単一の Orb yml にパッケージ化します。                                 |
-| orb-tools/validate  | 特定の Orb yml のバリデーションを行います。                                          |
-| orb-tools/increment | レジストリ内の Orb のバージョンをインクリメントします。 まだバージョンを持たない Orb の場合は、0.0.0 から始まります。 |
-| orb-tools/publish   | レジストリに Orb をパブリッシュします。                                              |
-{: class="table table-striped"}
-
-### orb-tools/pack
-
-この CLI コマンドを使用すると、Orb のコンテンツをパブリッシュ用にパッケージ化できます。 このコマンドでは以下のパラメーターを渡すことができます。
-
-| パラメーター               | 説明                                                                                                                       |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| source-dir           | パッケージ化する Orb ソース ディレクトリのルート パス  (my-orb/src/ など)。                                                                        |
-| destination-orb-path | パッケージ化された Orb が書き込まれる場所のファイル名を含むパス。                                                                                      |
-| attach-workspace     | 既存のワークスペースにアタッチするかどうかを示すブール値。 デフォルトは false です。                                                                           |
-| workspace-root       | ワークスペースのルート パス。絶対パスまたは作業ディレクトリからの相対パスとなります。 デフォルトは、‘.’ (作業ディレクトリ) です。                                                    |
-| workspace-path       | 保存先のワークスペースのパス。workspace-root からの相対パスとなります。 通常は destination-orb-path と同じです。 デフォルト値の空白が指定されている場合、このジョブはワークスペースへの保存を行いません。 |
-| artifact-path        | ジョブ アーティファクトを保存するディレクトリのパス。 デフォルト値の空白が指定されている場合、このジョブはアーティファクトを保存しません。                                                   |
-{: class="table table-striped"}
-
-### orb-tools/validate
-
-この CLI コマンドを使用すると、特定の Orb をバリデーションして、CircleCI Orb レジストリにパブリッシュ可能であることを確認できます。 このコマンドでは以下のパラメーターを渡すことができます。
-
-| パラメーター           | 説明                                                                                                                       |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| validate         | Orb のバリデーションを行うかどうかを示すブール値。 デフォルトは false です。                                                                             |
-| checkout         | 最初のステップとしてチェック アウトを行うかどうかを示すブール値。 デフォルトは true です。                                                                        |
-| attach-workspace | 既存のワークスペースにアタッチするかどうかを示すブール値。 デフォルトは false です。                                                                           |
-| workspace-root   | ワークスペースのルート パス。絶対パスまたは作業ディレクトリからの相対パスとなります。 デフォルトは、‘.’ (作業ディレクトリ) です。                                                    |
-| workspace-path   | 保存先のワークスペースのパス。workspace-root からの相対パスとなります。 通常は destination-orb-path と同じです。 デフォルト値の空白が指定されている場合、このジョブはワークスペースへの保存を行いません。 |
-| artifact-path    | ジョブ アーティファクトを保存するディレクトリのパス。 デフォルト値の空白が指定されている場合、このジョブはアーティファクトを保存しません。                                                   |
-{: class="table table-striped"}
-
-### orb-tools/increment
-
-この CLI コマンドを使用すると、レジストリ内の Orb のバージョンをインクリメントできます。 まだバージョンを持たない Orb の場合は、0.0.0 から始まります。このコマンドでは以下のパラメーターを渡すことができます。
-
-| パラメーター                 | 説明                                                                                                                                |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| orb-path               | Orb ファイルのパス。                                                                                                                      |
-| orb-ref                | / 形式のバージョンなし orb-ref。                                                                                                             |
-| segment                | インクリメントするセマンティック バージョン セグメント ('major'、'minor'、または 'patch')。                                                                       |
-| publish-token-variable | トークンを含む環境変数。 これを $ORB_PUBLISHING_TOKEN などの文字列リテラルとして渡します。 設定ファイル内に実際のトークンを貼り付けないでください。 省略すると、CLI に既に有効なトークンがセットアップされていると見なされます。 |
-| validate               | Orb のバリデーションを行うかどうかを示すブール値。 デフォルトは false です。                                                                                      |
-| checkout               | 最初のステップとしてチェック アウトを行うかどうかを示すブール値。 デフォルトは true です。                                                                                 |
-| attach-workspace       | 既存のワークスペースにアタッチするかどうかを示すブール値。 デフォルトは false です。                                                                                    |
-| workspace-root         | ワークスペースのルート パス。絶対パスまたは作業ディレクトリからの相対パスとなります。 デフォルトは、‘.’ (作業ディレクトリ) です。                                                             |
-{: class="table table-striped"}
-
-### orb-tools/publish
-
-このコマンドは、Orb のパブリッシュに使用します。 このコマンドでは以下のパラメーターを渡すことができます。
-
-| パラメーター                 | 説明                                                                                                                                       |
-| ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| orb-path               | パブリッシュする Orb ファイルのパス。                                                                                                                    |
-| orb-ref                | /@ 形式のフル orb-ref。                                                                                                                        |
-| publish-token-variable | パブリッシュ トークンを含む環境変数。 これを $ORB_PUBLISHING_TOKEN などの文字列リテラルとして渡します。 設定ファイル内に実際のトークンを貼り付けないでください。 省略すると、CLI に既に有効なトークンがセットアップされていると見なされます。 |
-| validate               | Orb のバリデーションを行うかどうかを示すブール値。 デフォルトは false です。                                                                                             |
-| checkout               | 最初のステップとしてチェック アウトを行うかどうかを示すブール値。 デフォルトは true です。                                                                                        |
-| attach-workspace       | 既存のワークスペースにアタッチするかどうかを示すブール値。 デフォルトは false です。                                                                                           |
-| workspace-root         | ワークスペースのルート パス。絶対パスまたは作業ディレクトリからの相対パスとなります。 デフォルトは、‘.’ (作業ディレクトリ) です。                                                                    |
-{: class="table table-striped"}
-
-### バリデーションとパブリッシュの例
-
-以下に、`orb-tools` Orb を使用して Orb のバリデーションとパブリッシュを行う例を示します。
-
-```yaml
-version: 2.1
-orbs:
-  orb-tools: circleci/orb-tools@2.0.0
-
-workflows:
-  btd:
-    jobs:
-      - orb-tools/publish:
-          orb-path: src/orb.yml
-          orb-ref: circleci/hello-build@dev:${CIRCLE_BRANCH}
-          publish-token-variable: "$CIRCLECI_DEV_API_TOKEN"
-          validate: true
+**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF-Orbs)** Orb を作成する場合:
+```sh
+circleci orb create <my-namespace>/<my-orb-name>
 ```
 
-この例の Build-Test-Deploy (BTD) ワークフローは、最初に `orb-tools/validate` ジョブを実行します。 この Orb が有効であると見なされれば、次のステップが実行され、`orb-tools/publish` が実行されます。 `orb-tools/publish` が成功すると、ジョブ入力には、新しい Orb が [CircleCI Orbs レジストリ](https://circleci.com/developer/ja/orbs)にパブリッシュされたことを示す成功メッセージが表示されます。
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88-Orbs)** Orb を作成する場合:
+```sh
+circleci orb create <my-namespace>/<my-orb-name> --private
+```
+
+1. YAML ファイル形式で Orb のコンテンツを作成します。 以下のシンプルな例を参考にしてください。
+```yaml
+version: 2.1
+description: あいさつコマンド Orb
+commands:
+    greet:
+        description: 相手に "Hello" とあいさつします。
+        parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, << parameters.to >>"
+```
+
+1. CLI を使用して、Orb コードをバリデーションします。
+```
+circleci orb validate /tmp/orb.yml
+```
+
+1. 開発版の Orb をパブリッシュします。
+```sh
+circleci orb publish /tmp/orb.yml <my-namespace>/<my-orb-name>@dev:first
+```
+
+1. Orb を本番にプッシュする準備が整ったら、`circleci orb publish` を使用して手動でパブリッシュするか、開発バージョンから直接プロモートすることができます。 以下のコマンドを使用すると、開発バージョン番号を `0.0.1` にインクリメントできます。
+```sh
+circleci orb publish promote <my-namespace>/<my-orb-name>@dev:first patch
+```
+
+1. 安定版の Orb が変更不可形式でパブリッシュされ、CircleCI プロジェクトで安全に使用できるようになりました。 以下のコマンドを使用して、Orb のソースをプルします。
+```sh
+circleci orb source <my-namespace>/<my-orb-name>@0.0.1
+```
+
+1. CLI を使用して、公開中の Orb を一覧表示します。
+
+**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF-Orbs)** Orb を一覧表示する場合:
+```sh
+circleci orb list <my-namespace>
+```
+
+**[プライベート](https://circleci.com/docs/ja/2.0/orb-intro/#%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88-Orbs)** Orb を一覧表示する場合:
+```sh
+circleci orb list <my-namespace> --private
+```
+
+`circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。
