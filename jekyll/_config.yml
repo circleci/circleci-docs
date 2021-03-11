@@ -15,6 +15,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
+  - jekyll-include-cache
 
 algolia:
   application_id: U0RXNGRK45
