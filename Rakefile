@@ -5,13 +5,13 @@ require 'dotenv/load'
 
 JEKYLL_BASENAME = ENV['JEKYLL_BASENAME'] || 'docs'
 
-task :set_untranslated do
-  puts 'Shim untranslated Japanese pages'
+desc 'Shim untranslated Japanese pages'
+task :shim_untranslated do
   sh './scripts/shim-translation.sh jekyll/_cci2 jekyll/_cci2_ja'
 end
 
+desc 'Build Jekyll site'
 task :build do
-  puts 'build Jekyll'
   # Create jekyll config file to override things
   sh "echo 'baseurl: \"\/#{JEKYLL_BASENAME}\"' > jekyll/_config_override.yml"
   # Build the Jekyll site
@@ -24,8 +24,8 @@ task :build do
   Jekyll::Commands::Build.build site, config
 end
 
+desc 'Make mock API docs'
 task :make_mock_api do
-  puts 'Make mock API docs'
   sh "echo \"<html lang=''><head><link href='/docs/assets/img/icons/favicon.png' rel='icon' type='image/png' /></head></html>\" > ./jekyll/_site/index.html"
   sh "mkdir -p ./jekyll/_site/docs/api/2.0/"
   sh "mkdir -p ./jekyll/_site/docs/api/v2/"
@@ -35,8 +35,13 @@ task :make_mock_api do
   sh "rm ./jekyll/_site/index.html"
 end
 
+desc 'Build your jekyll site in local env'
+task :build_local => [:set_untranslated, :build, :make_mock_api] do
+  puts 'Finish building your jekyll site, and now you can run `bundle exec rake test` to run `HTMLproofer` test'
+end
+
+desc 'Test with HTMLproofer'
 task :test do
-  puts 'Test with HTMLproofer'
   ignore_files = ["./jekyll/_site/#{JEKYLL_BASENAME}/api/v2/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/runner-installation/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/security-server/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/v.2.19-overview/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/customizations/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/aws-prereq/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/ops/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/about-circleci/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/demo-apps/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/google-auth/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/orb-concepts/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/tutorials/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/reference-2-1/index.html"]
 
   options = { :allow_hash_href => true,  :check_favicon => true, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => 4}, :file_ignore => ignore_files}
