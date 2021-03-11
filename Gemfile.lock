@@ -123,9 +123,11 @@ GEM
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
     mercenary (0.3.6)
+    mini_portile2 (2.5.0)
     minitest (5.14.4)
     multi_json (1.15.0)
-    nokogiri (1.11.1-x86_64-linux)
+    nokogiri (1.11.1)
+      mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     nokogumbo (2.0.4)
       nokogiri (~> 1.8, >= 1.8.4)
@@ -188,7 +190,7 @@ GEM
     yell (2.2.2)
 
 PLATFORMS
-  x86_64-linux
+  ruby
 
 DEPENDENCIES
   asciidoctor
@@ -209,7 +211,7 @@ DEPENDENCIES
   sprockets (~> 3.7)
 
 RUBY VERSION
-   ruby 2.6.3p62
+   ruby 2.7.2p137
 
 BUNDLED WITH
-   2.2.14
+   2.1.4
