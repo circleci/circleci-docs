@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang }}">
-{% include head.html %}
+{% include_cached head.html %}
 <body class="{% if page.page-type == "index" or page.page-type == "homepage" %}homepage{% endif %}">
 {% if jekyll.environment == "production" %}
 	{% include google-tag-manager.html %}
@@ -8,8 +8,8 @@
 
 <div class="outer">
 	{% include_localized global-nav.html %}
-	{% include main-searchbar.html %}
-	{% include mobile-sidebar.html %}
+	{% include_cached main-searchbar.html %}
+	{% include_cached mobile-sidebar.html %}
 	<!-- instant hit template container /-->
 	<div id="hits-target" style="display:none;">
 		<div class="container-semi-fluid">
@@ -54,10 +54,10 @@
 		</div>
 	</div>
 	<div class="main-body">
-		{% include sidebar.html %}
+		{% include_cached sidebar.html %}
 		<div class="article-container docs" id="main">
-			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
-			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
+			{% if page.collection == "ccie" %}{% include_cached v2-banner.html %}{% endif %}
+			{% if page.collection == "cci1" %}{% include_cached v2-dev-banner.html %}{% endif %}
 			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 
 
@@ -84,11 +84,11 @@
 
 
 		{% if page.untranslated %}
-          {% include translation_in_progress.html %}
+          {% include_cached translation_in_progress.html %}
         {% endif %}
 				{{ content }}
 				{% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
-					{% include doc-footer.html %}
+					{% include_cached doc-footer.html %}
 				{% endif %}
 			</article>
 		</div><!-- .article-container -->
