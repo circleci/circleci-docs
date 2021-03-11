@@ -4,6 +4,7 @@ require 'jekyll'
 require 'dotenv/load'
 
 JEKYLL_BASENAME = ENV['JEKYLL_BASENAME'] || 'docs'
+HTML_PROOFER_PARALLEL = ENV['HTML_PROOFER_PARALLEL'] || 4
 
 desc 'Shim untranslated Japanese pages'
 task :shim_untranslated do
@@ -15,8 +16,8 @@ task :build do
   # Create jekyll config file to override things
   sh "echo 'baseurl: \"\/#{JEKYLL_BASENAME}\"' > jekyll/_config_override.yml"
   # Build the Jekyll site
-  config = Jekyll.configuration({ 
-    'source' => './jekyll', 
+  config = Jekyll.configuration({
+    'source' => './jekyll',
     'destination' => "./jekyll/_site/#{JEKYLL_BASENAME}",
     'config' => ['./jekyll/_config.yml','./jekyll/_config_production.yml','./jekyll/_config_override.yml']
   })
@@ -36,15 +37,34 @@ task :make_mock_api do
 end
 
 desc 'Build your jekyll site in local env'
-task :build_local => [:set_untranslated, :build, :make_mock_api] do
+task :build_local => [:shim_untranslated, :build, :make_mock_api] do
   puts 'Finish building your jekyll site, and now you can run `bundle exec rake test` to run `HTMLproofer` test'
 end
 
 desc 'Test with HTMLproofer'
 task :test do
-  ignore_files = ["./jekyll/_site/#{JEKYLL_BASENAME}/api/v2/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/runner-installation/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/security-server/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/v.2.19-overview/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/customizations/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/aws-prereq/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/ops/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/about-circleci/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/demo-apps/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/google-auth/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/orb-concepts/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/ja/2.0/tutorials/index.html","./jekyll/_site/#{JEKYLL_BASENAME}/reference-2-1/index.html"]
+  def makeFilePath(target_dir)
+    return "./jekyll/_site/#{JEKYLL_BASENAME}/#{target_dir}/index.html"
+  end
 
-  options = { :allow_hash_href => true,  :check_favicon => true, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => 4}, :file_ignore => ignore_files}
+  ignore_dirs = [
+    "api/v2",
+    "ja/2.0/runner-installation",
+    "ja/2.0/security-server",
+    "ja/2.0/v.2.19-overview",
+    "ja/2.0/customizations",
+    "ja/2.0/aws-prereq",
+    "ja/2.0/ops",
+    "ja/2.0/about-circleci",
+    "ja/2.0/demo-apps",
+    "ja/2.0/google-auth",
+    "ja/2.0/orb-concepts",
+    "ja/2.0/tutorials",
+    "reference-2-1"
+  ]
+
+  ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
+  options = { :allow_hash_href => true,  :check_favicon => true, :check_html => true, :disable_external => true, :empty_alt_ignore => true, :parallel => { :in_processes => HTML_PROOFER_PARALLEL}, :file_ignore => ignore_files}
 
   HTMLProofer.check_directory("./jekyll/_site", options).run
 end
