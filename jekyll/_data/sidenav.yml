@@ -150,7 +150,7 @@ en:
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
-          link: 2.0/config-editor
+          link: 2.0/config-editor/
     - name: Orbs
       link: 2.0/orb-intro/
       children:

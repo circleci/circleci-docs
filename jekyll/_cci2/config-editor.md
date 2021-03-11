@@ -19,27 +19,24 @@ In the CircleCI app, select a pipeline in the *All Pipelines* view.
 To access the CircleCI Configuration Editor, select your desired branch from the *All Branches*
 drop-down menu near the top of the screen.
 
-![header]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
-*Config Editor Access*
+[Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
 
 Once you select a branch, the *Edit Config* button will become enabled. Click it to access the Configuration Editor.
 
 The config editor is much like any other traditional IDE, providing line-numbers and other features.
 
-## Autocompletion
+## Auto-completion
 
 Like many traditional IDEs, the CircleCI configuration editor will provide auto-complete suggestions as you type, as well
 as any supporting documentation.
 
-![header]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
-*Auto completion*
+[Auto-completion]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
 
 ## Smart tooltips
 
 When hovering over a CircleCI definition in your configuration file, a tooltip will appear, giving you additional information.
 
-![header]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
-*Tooltips*
+[Tooltips]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
 
 ## Automatic validation
 
@@ -49,26 +46,23 @@ At the bottom of the editor, you can verify whether or not your configuration is
 
 For a valid configuration, you will see the following:
 
-![header]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
-*Passing Configuration Validation*
+[Passing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
 
 For a failing validation, a red bar is displayed, as well as any errors, where they occur, and any relevant documentation 
 that may assist in fixing the error (see the "DOCS" tab in the below screen shot).
 
-![header]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
-*Failing Configuration Validation*
+[Failing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
 
 ## Commit and run
 
 Once your configuration is valid, you may commit to your VCS and re-run the pipeline, all from within the Config Editor,
 by selecting the *Commit and Run* button in the upper-right corner.
 
-![header]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
-*Commit and Run button*
+[Commit and Run]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
 
 ## See also
 
-[Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
-[Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli)
+- [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
+- [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli)
 
 
