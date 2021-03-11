@@ -10,6 +10,7 @@ gem 'asciidoctor-pdf', '~> 1.5.3'
 gem 'pygments.rb', '~> 1.1.2'
 gem 'rake'
 gem 'dotenv'
+gem "sprockets", "~> 3.7.2"
 
 group :jekyll_plugins do
   gem 'jekyll-algolia', '~> 1.0'
