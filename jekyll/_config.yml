@@ -11,11 +11,11 @@ gh_url: "https://github.com/circleci/circleci-docs"
 devhub_base_url: "https://circleci.com/developer"
 
 plugins:
+  - jekyll-include-cache
   - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
-  - jekyll-include-cache
 
 algolia:
   application_id: U0RXNGRK45
