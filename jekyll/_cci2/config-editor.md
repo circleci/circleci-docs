@@ -7,17 +7,28 @@ version:
 - Server v2.x
 ---
 
-In this section, you will find an overview of the available features of using the in-app CircleCI configuration editor.
+A UI environment, the CircleCI config editor, is provided for users who wish to modify their configurations without the use of the
+[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/).
+
+The benefits of using the CircleCI config editor include:
+
+- Automatic validation and error checking
+- Auto-completion suggestions and configuration tooltips specific to CircleCI configuration syntax
+- Education of CircleCI concepts
+- Easily accessible CircleCI documentation, designed to best-suit your needs
 
 ## Getting started with the CircleCI config editor
-
-A UI environment is provided for users who wish to modify their configurations without the use of the 
-[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/). 
 
 In the CircleCI app, select a pipeline in the *All Pipelines* view.
 
 To access the CircleCI Configuration Editor, select your desired branch from the *All Branches*
 drop-down menu near the top of the screen.
+
+You can also access the config editor:
+
+- Upon selecting the **Set Up Project** button in the **Projects** view
+- By selecting the 3 dots in the **Actions** column in the **Pipelines** view, then selecting *Configuration File* from the modal
+- By selecting a job in the **Pipelines** view, selecting the 3 dots in the upper-right corner, and then selecting **Configuration File**
 
 ![Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
 
@@ -34,15 +45,15 @@ as any supporting documentation.
 
 ## Smart tooltips
 
-When hovering over a CircleCI definition in your configuration file, a tooltip will appear, giving you additional information.
+When hovering over a CircleCI definition in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
 ![Tooltips]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
 
 ## Automatic validation
 
-If using the in-app Config Editor, your configuration will be automatically validated after every change.
+The config editor will automatically validate your configuration yaml after every change.
 
-At the bottom of the editor, you can verify whether or not your configuration is valid.
+At the bottom of the editor, you can verify that your configuration is valid.
 
 For a valid configuration, you will see the following:
 
