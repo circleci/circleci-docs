@@ -8,7 +8,8 @@ version:
 ---
 
 A UI environment, the CircleCI config editor, is provided for users who wish to modify their configurations without the use of the
-[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/).
+[CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/) and/or a text editor. Using the CircleCI configuration editor eases the developer
+experience by giving users the ability to modify their CI/CD processes in a more unified fashion.
 
 ![Config Editor]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
 
@@ -53,9 +54,7 @@ When hovering over a CircleCI definition in your configuration file, a tooltip w
 
 The config editor will automatically validate your configuration yaml after every change.
 
-At the bottom of the editor, you can verify that your configuration is valid.
-
-For a valid configuration, you will see the following:
+For a valid configuration, you will see the following at the bottom of the configuration editor:
 
 ![Passing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
 
