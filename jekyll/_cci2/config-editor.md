@@ -10,6 +10,8 @@ version:
 A UI environment, the CircleCI config editor, is provided for users who wish to modify their configurations without the use of the
 [CircleCI CLI]({{ site.baseurl }}/2.0/local-cli/).
 
+![Config Editor]({{ site.baseurl }}/assets/img/docs/config-editor-main.png)
+
 The benefits of using the CircleCI config editor include:
 
 - Automatic validation and error checking
@@ -19,7 +21,7 @@ The benefits of using the CircleCI config editor include:
 
 ## Getting started with the CircleCI config editor
 
-In the CircleCI app, select a pipeline in the *All Pipelines* view.
+In the CircleCI app, select a pipeline in the **All Pipelines** view.
 
 To access the CircleCI Configuration Editor, select your desired branch from the *All Branches*
 drop-down menu near the top of the screen.
@@ -32,9 +34,7 @@ You can also access the config editor:
 
 ![Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
 
-Once you select a branch, the *Edit Config* button will become enabled. Click it to access the Configuration Editor.
-
-The config editor is much like any other traditional IDE, providing line-numbers and other features.
+Once you select a branch, the **Edit Config** button will become enabled. Click it to access the configuration editor.
 
 ## Auto-completion
 
