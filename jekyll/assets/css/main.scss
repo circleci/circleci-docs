@@ -2,6 +2,7 @@
 ---
 @import 'variables';
 @import 'sidebar';
+@import 'footer';
 @import 'subnav';
 @import 'instantsearch';
 @import 'tooltip';
@@ -42,6 +43,8 @@ div.main-body {
 	max-width: 1920px;
 	margin: 0 auto;
 	background: #fff;
+  overflow: inherit;
+  flex-direction: column;
 }
 
 .text-center-small-float-right {
@@ -136,6 +139,9 @@ nav.nav-toggle.two {
 	}
 }
 
+div.sidebar-offset {
+  margin-left: $leftbar-width;
+}
 
 // Article
 div.article-container{
@@ -145,7 +151,7 @@ div.article-container{
 		width: 100%;
 	}
 	padding: 60px 96px 0 48px;
-	width: calc(100% - #{$leftbar-width} - #{$rightbar-width});
+	width: calc(100% - #{$rightbar-width});
   max-width: 60em; // increase readability on large screens.
 }
 	article{
@@ -459,11 +465,11 @@ h6{
 
 // Table of Contents Sidebar ----------------------------------
 .table-of-contents {
-    position: fixed;
+    position: sticky;
     right: 0;
     padding: 32px 32px 112px 12px;
     background: #ffffff;
-    height: 100%;
+    height: 90vh;
     width: $rightbar-width;
     overflow: scroll;
     top: 118px;

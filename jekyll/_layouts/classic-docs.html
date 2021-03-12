@@ -55,41 +55,48 @@
 	</div>
 	<div class="main-body">
 		{% include sidebar.html %}
-		<div class="article-container docs" id="main">
-			{% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
-			{% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
-			{% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
+    <div class="sidebar-offset">
+      <div class="article-container docs" id="main">
+        {% if page.collection == "ccie" %}{% include v2-banner.html %}{% endif %}
+        {% if page.collection == "cci1" %}{% include v2-dev-banner.html %}{% endif %}
+        {% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 
 
-      <article>
-        <!-- Title and version badges: -->
-        <div>
-          {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
-        </div>
-
-          {% if page.version %}
-          <div class="server-version-wrapper">
-            <div id="tooltip" role="tooltip" class="server-version-popover">
-              This document is applicable to the following:
-              <div id="arrow" data-popper-arrow></div>
-            </div>
-            {% for version in page.version %}
-            <span class="badge badge-primary">
-              <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
-              <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-            </span>
-            {% endfor %}
+        <article>
+          <!-- Title and version badges: -->
+          <div>
+            {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
           </div>
+
+            {% if page.version %}
+            <div class="server-version-wrapper">
+              <div id="tooltip" role="tooltip" class="server-version-popover">
+                This document is applicable to the following:
+                <div id="arrow" data-popper-arrow></div>
+              </div>
+              {% for version in page.version %}
+              <span class="badge badge-primary">
+                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
+                <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
+              </span>
+              {% endfor %}
+            </div>
+            {% endif %}
+
+
+          {% if page.untranslated %}
+            {% include translation_in_progress.html %}
           {% endif %}
 
+          {{ content }}
 
-		{% if page.untranslated %}
-          {% include translation_in_progress.html %}
-        {% endif %}
-				{{ content }}
-				{% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
-					{% include doc-footer.html %}
-				{% endif %}
+          {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+            {% include doc-footer.html %}
+          {% endif %}
+
+        </article>
+
+      </div><!-- .article-container -->
 
         {% if page.side_toc != "none" %}
         <aside class="table-of-contents">
@@ -99,13 +106,11 @@
           </div>
         </aside>
         {% endif %}
-
-
-			</article>
-		</div><!-- .article-container -->
-	</div><!-- .main-body -->
+    </div><!-- .sidebar-offset -->
 
 	{% include_localized global-footer.html %}
+	</div><!-- .main-body -->
+
 	{% include js-config.html %}
 	{% asset vendor.min.js %}
   <script src="https://unpkg.com/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
