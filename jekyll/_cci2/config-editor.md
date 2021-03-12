@@ -17,7 +17,7 @@ The benefits of using the CircleCI config editor include:
 - Automatic validation and error checking
 - Auto-completion suggestions and configuration tooltips specific to CircleCI configuration syntax
 - Education of CircleCI concepts
-- Easily accessible CircleCI documentation, designed to best-suit your needs
+- Easily accessible CircleCI documentation, designed to best suit your needs
 
 ## Getting started with the CircleCI config editor
 
