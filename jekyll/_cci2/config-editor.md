@@ -26,15 +26,15 @@ In the CircleCI app, select a pipeline in the **All Pipelines** view.
 To access the CircleCI Configuration Editor, select your desired branch from the *All Branches*
 drop-down menu near the top of the screen.
 
+![Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
+
+Once you select a branch, the **Edit Config** button will become enabled. Click it to access the configuration editor.
+
 You can also access the config editor:
 
 - Upon selecting the **Set Up Project** button in the **Projects** view
 - By selecting the 3 dots in the **Actions** column in the **Pipelines** view, then selecting *Configuration File* from the modal
 - By selecting a job in the **Pipelines** view, selecting the 3 dots in the upper-right corner, and then selecting **Configuration File**
-
-![Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
-
-Once you select a branch, the **Edit Config** button will become enabled. Click it to access the configuration editor.
 
 ## Auto-completion
 
