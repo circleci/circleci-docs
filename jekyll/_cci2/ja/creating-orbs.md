@@ -129,4 +129,4 @@ CircleCI から GitHub にタグをプッシュするには、[書き込みア�
               ssh-fingerprints: "SO:ME:FIN:G:ER:PR:IN:T"
 {% endraw %}
 
-利用可能なコマンド、ジョブ、パラメーターの一覧については、[Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) の[orb-tools orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) を参照してください。
+利用可能なコマンド、ジョブ、パラメーターの一覧については、[Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools)の [orb-tools orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) を参照してください。
