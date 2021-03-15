@@ -1,68 +1,29 @@
-<footer class="blog-footer inverted" data-analytics="clicked-footer" data-analytics-parent>
-	<div class="blog-container">
-		<div class="blog-footer--row">
-			<a
-				href="{{ '/' | relative_url }}"
-				class="blog-footer--lockup-link flex flex-row items-center"
-			>
-				<span class="blog-footer--lockup-title">
-					placeholder
-				</span>
-			</a>
-			<div class="blog-footer--social">
-				social icons
-			</div>
-		</div>
-		<div class="blog-footer--row">
-			<nav class="blog-footer--nav">
-				<ul class="blog-footer--nav-list">
-					<li>
-						<a
-							class="blog-footer--nav-link"
-							href="{{ '/legal/terms-of-use/' | relative_url }}"
-							data-analytics-child='{ "menu": "terms-of-use" }'
-						>
+<footer class="docs-footer inverted" data-analytics="clicked-footer" data-analytics-parent>
+  <div class="blog-container">
+    <div class="nav-row">
+      <a href="{{ '/' | relative_url }}" class="lockup-link" >
+        <img src="{{site.baseurl}}/assets/img/logos/logo-wordmark-black.svg" class="logo-small margin-top-small" alt="circleci"></img>
+        <span class="title"> Docs </span>
+      </a>
+      <div class="social">
+        {% include social-buttons.html %}
+      </div>
+    </div>
+    <div class="nav-row">
+      <nav class="blog-footer--nav">
+        <ul class="blog-footer--nav-list">
 
-							placeholder tou
-						</a>
-					</li>
-					<li>
-						<a
-							class="blog-footer--nav-link"
-							href="{{ '/privacy/' | relative_url }}"
-							data-analytics-child='{ "menu": "privacy-policy" }'
-						>
-
-							placeholder privacy policy
-
-						</a>
-					</li>
-					<li>
-						<a
-							class="blog-footer--nav-link"
-							href="{{ '/legal/cookie-policy/' | relative_url }}"
-							data-analytics-child='{ "menu": "cookie-policy" }'
-						>
-							placeholder cookies
-						</a>
-					</li>
-					<li>
-						<a
-							class="blog-footer--nav-link"
-							href="{{ '/security/' | relative_url }}"
-							data-analytics-child='{ "menu": "security" }'
-						>
-							placeholder footer security
-						</a>
-					</li>
-					placeholder lang selector
-				</ul>
-			</nav>
-			<div class="blog-copyright">
-				© {{ site.time | date: '%Y' }} Circle Internet Services, Inc., All Rights Reserved.
-			</div>
-		</div>
-	</div>
+          <li><a class="nav-link" href="https://circleci.com/terms-of-service/" data-analytics-child='{ "menu": "terms-of-service" }'>Terms of Service</a></li>
+          <li><a class="nav-link" href="https://circleci.com/privacy/" data-analytics-child='{ "menu": "privacy-policy" }'>Privacy Policy</a></li>
+          <li><a class="nav-link" href="https://circleci.com/legal/cookie-policy/" data-analytics-child='{ "menu": "cookie-policy" }'>Cookie Policy</a></li>
+          <li><a class="nav-link" href="https://circleci.com/security/" data-analytics-child='{ "menu": "security" }'>Security</a></li>
+        </ul>
+      </nav>
+      <div class="blog-copyright">
+        © {{ site.time | date: '%Y' }} Circle Internet Services, Inc., All Rights Reserved.
+      </div>
+    </div>
+  </div>
 </footer>
 
 <!-- <footer class="footer" data-analytics="clicked-footer" data-analytics-parent>
