@@ -54,7 +54,10 @@
 		</div>
 	</div>
 	<div class="main-body">
-		{% include_cached sidebar.html %}
+    {% assign lang = page.lang %}
+    {% assign sidenav = site.data.sidenav[lang] %}
+    {% assign current_url = page.url | slice: 1, page.url.size %}
+		{% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url%}
 		<div class="article-container docs" id="main">
 			{% if page.collection == "ccie" %}{% include_cached v2-banner.html %}{% endif %}
 			{% if page.collection == "cci1" %}{% include_cached v2-dev-banner.html %}{% endif %}
