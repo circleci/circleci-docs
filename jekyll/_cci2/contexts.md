@@ -125,7 +125,7 @@ When creating contexts/environment variables, please note the following:
 - An organization may contain no more than 500 contexts.
 - The environment variable name must be 300 or fewer characters, must have alpha or `_` as the first character and can *only* contain  alphanumeric or `_` as the remaining characters.
 - An environment variable value must be 32000 or fewer characters and must NOT contain `null`. 
-**Note**: An empty environment variable is considered valid.
+- An empty environment variable is considered valid.
 - A context may contain no more than 100 environment variables.
 
 ## Combining contexts
