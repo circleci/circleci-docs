@@ -121,6 +121,17 @@ jobs:
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
+### Contexts & Environment variables validation
+
+When creating contexts/environment variables, please note the following:
+
+* The context name must be 200 or fewer characters, must contain at least one non-whitespace character, and must not contain leading, trailing or vertical whitespaces.
+* An organization may contain no more than 500 contexts.
+* The environment variable name must be 300 or fewer characters, must have alpha or `_` as the first character and can *only* contain alphanumeric or `_` as the remaining characters.
+* An environment variable value must be 32000 or fewer characters and must NOT contain `null`. 
+* An empty environment variable is considered valid.
+* A context may contain no more than 100 environment variables.
+
 ## Combining contexts
 
 You can combine several contexts for a single job by just adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way you can scope contexts to be as small and granular as you like.
