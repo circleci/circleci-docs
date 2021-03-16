@@ -42,6 +42,11 @@ TIP: For more information on SSH reruns in Server installations, see the https:/
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
 
+## What's New in v2.19.12
+
+* Removed support for 1.0 builder graceful shutdown on auto-scaling events.
+  ** This alleviates Python 2 security vulnerabilities.
+
 ## What's New in v2.19.11
 
 * Fixed a bug that didn't allow more than 50 aliases in a configuration.
