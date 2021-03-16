@@ -125,12 +125,12 @@ If you move your repository to a new organization, you must also have the contex
 
 When creating contexts/environment variables, please note the following:
 
-* The context name must be 200 or fewer characters, must contain at least one non-whitespace character, and must not contain leading, trailing or vertical whitespaces.
-* Each organization is limited to 500 contexts.
-* The environment variable name must be 300 or fewer characters, beging with alpha or `_` as the first character, and use alphanumeric or `_` for the remaining characters.
+* The context name must be 200 or fewer characters, must contain at least one non-whitespace character, and must not contain leading, trailing or vertical whitespace.
+* The environment variable name must be 300 or fewer characters, begin with alpha or `_` as the first character, and use alphanumeric or `_` for the remaining characters.
 * An environment variable value must have 32k or fewer characters. 
 * An empty environment variable is considered valid.
 * Each context is limited to 100 environment variables.
+* Each organization is limited to 500 contexts.
 
 ## Combining contexts
 
