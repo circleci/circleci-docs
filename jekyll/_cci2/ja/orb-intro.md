@@ -81,7 +81,6 @@ version: 2.1
 jobs:
   test:
     docker:
-
       - image: cimg/node:<node-version>
         auth:
           username: mydockerhub-user
@@ -105,7 +104,6 @@ jobs:
 workflows:
   test_my_app:
     jobs:
-
       - test
 
 ```
@@ -164,7 +162,6 @@ orbs:
 jobs:
   test:
     docker:
-
       - image: cimg/node:<node-version>
         auth:
           username: mydockerhub-user
