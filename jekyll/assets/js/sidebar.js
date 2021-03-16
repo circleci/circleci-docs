@@ -9,6 +9,11 @@
     var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
     var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
+    // for toggling right table of contents sidebar
+    var sidebarToc = document.querySelector('.table-of-contents');
+    var mobileTocToggle = document.getElementById("mobile-table-of-contents");
+    var mobileTocChevron = document.querySelector(".toc-chevron");
+    var mobileTocOpen = false
     var urlParams = new URLSearchParams(window.location.search)
     var currentSection = urlParams.get("section");
 
@@ -76,6 +81,20 @@
       var elementRelativeTop = activeElTop - sidebarTop;
       $("nav.sidebar").scrollTop(elementRelativeTop);
     }
+
+    /* Handle opening/closing the mobile-table of contents */
+    mobileTocToggle.addEventListener("click", function(e) {
+      if(sidebarToc) sidebarToc.classList.toggle("open");
+      mobileTocOpen = !mobileTocOpen
+      if (mobileTocOpen) {
+        mobileTocChevron.classList.add("fa-chevron-right");
+        mobileTocChevron.classList.remove("fa-chevron-left");
+      } else {
+        mobileTocChevron.classList.remove("fa-chevron-right");
+        mobileTocChevron.classList.add("fa-chevron-left");
+      }
+    })
+
 
     window.addEventListener('scroll', setSidebar);
     window.addEventListener('load', setSidebar);

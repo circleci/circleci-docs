@@ -20,11 +20,10 @@ $text-black: #171717;
   }
 
   .nav-row {
-
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
     border-top: 2px solid $black-light;
     padding: 26px 0 30px;
@@ -50,14 +49,20 @@ $text-black: #171717;
     flex-direction: row;
     align-items: center;
 
+    .logo {
+      width: 126px;
+    }
+
     @media (max-width: $screen-xs-max) {
       justify-content: center;
       flex-grow: 1;
     }
 
-    &.title {
+    .title {
       font-size: 25.2px;
       font-weight: 300;
+      font-style: normal;
+      color: $text-black;
       letter-spacing: 0.34px;
       line-height: 24px;
       margin-left: 9px;

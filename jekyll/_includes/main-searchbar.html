@@ -1,9 +1,16 @@
 <div class="main-searchbar">
   <div class="container">
-    <form>
+    <form class="searchbar-form">
       <div id="search-box">
         <!-- SearchBox widget will appear here -->
       </div>
     </form>
   </div>
+
+    {% if include.side_toc != "none" %}
+    <button id="mobile-table-of-contents">
+      <i class="toc-chevron fa fa-chevron-left"></i>
+      <span>On this page</span>
+    </button>
+    {% endif %}
 </div>

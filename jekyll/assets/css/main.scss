@@ -141,16 +141,28 @@ nav.nav-toggle.two {
 
 div.sidebar-offset {
   margin-left: $leftbar-width;
+  display: flex;
+
+	@media screen and (max-width: $screen-sm) {
+		margin-left: 0px;
+		width: 100%;
+	}
 }
 
 // Article
 div.article-container{
-	float: left;
+  flex: 1;
 	@media screen and (max-width: $screen-sm) {
 		padding: 0 16px 0 16px;
 		width: 100%;
 	}
-	padding: 60px 96px 0 48px;
+
+  // @media screen and (max-width: $screen-lg) {
+  //   background: red;
+  //   order: 2;
+  // }
+
+	padding: 60px 48px 0 48px;
 	width: calc(100% - #{$rightbar-width});
   max-width: 60em; // increase readability on large screens.
 }
@@ -477,10 +489,13 @@ h6{
     transition: all 0.5s ease-in-out;
 
     @media(max-width: $toc-breakpoint) {
+        position: fixed;
         right: -500px;
 
         &.open {
-            right: 0px;
+          right: 0px;
+          border-left: 1px solid #EEEEE;
+          padding-left: 32px;
         }
     }
 
@@ -502,7 +517,7 @@ h6{
 
     ul, li {
         list-style-type: none;
-        padding-left: 12px;
+        padding-left: 8px;
         margin: 4px 0;
         &:first {
             padding-left: 0px;
