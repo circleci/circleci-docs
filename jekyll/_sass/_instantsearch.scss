@@ -13,44 +13,6 @@
   background: white;
   z-index: 2;
   top: 70px;
-  display: flex;
-
-  .searchbar-form {
-    flex: 1;
-  }
-  .container {
-    flex: inherit;
-  }
-
-
-  .toc-chevron {
-    padding-right: 8px;
-  }
-
-  #mobile-table-of-contents {
-    display: none;
-  }
-
-  @media (max-width: $toc-breakpoint) {
-    .container {
-      flex: 1;
-    }
-
-    // styles for button to toggle hide/show of toc.
-    #mobile-table-of-contents {
-      align-items: center;
-      background: white;
-      border: none;
-      border-left: 1px solid #e2e0e0;
-      color: #777;
-      display: flex;
-      font-size: 12px;
-      outline: none;
-      padding: 0 24px 0 12px;
-    }
-  }
-
-
 
   #search-box {
     position: relative;
