@@ -134,6 +134,8 @@ en:
           link: 2.0/runner-api/
         - name: Runner FAQs
           link: 2.0/runner-faqs/
+        - name: Runner in Server
+          link: 2.0/runner-server/
 
 - name: Configuration
   icon: icons/sidebar/configure.svg
