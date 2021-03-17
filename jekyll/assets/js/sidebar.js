@@ -9,7 +9,6 @@
     var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
     var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
-    // for toggling right table of contents sidebar
     var urlParams = new URLSearchParams(window.location.search)
     var currentSection = urlParams.get("section");
 
