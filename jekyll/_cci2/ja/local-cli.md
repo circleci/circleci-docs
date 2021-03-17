@@ -342,7 +342,9 @@ Currently, only the legacy CircleCI CLI is available to run on server installati
 1. [Docker のインストール手順](https://docs.docker.com/install/)に従って、Docker をインストールし、構成します。
 2. 以下のコマンドを実行して、CLI をインストールします。
 
-`$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
+```sh
+$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
+```
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
