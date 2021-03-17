@@ -14,6 +14,10 @@ $text-black: #171717;
     padding-bottom: 52px;
   }
 
+  @media(max-width: $screen-sm) {
+    margin-left: 0;
+    width: 100%;
+  }
 
   .nav-link {
     color: $text-black;
