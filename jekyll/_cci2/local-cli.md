@@ -352,7 +352,9 @@ installations of CircleCI. To install the legacy CLI on macOS and other Linux Di
 1. Install and configure Docker by using the [docker installation instructions](https://docs.docker.com/install/).
 2. To install the CLI, run the following command:
 
-`$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci`
+```sh
+$ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/releases/build_agent_wrapper/circleci && chmod +x /usr/local/bin/circleci
+```
 
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
