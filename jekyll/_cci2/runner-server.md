@@ -21,7 +21,7 @@ circleci runner resource-class create <resource-class> <description> --host HOST
 
 ## Configuration file
 
-When setting up a Runner the configuration file should include `host` property.
+When setting up a Runner, the configuration file should include `host` property.
 
 ```yaml
 api:
