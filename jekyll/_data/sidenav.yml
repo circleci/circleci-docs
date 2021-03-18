@@ -176,6 +176,14 @@ en:
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
 
+- name: Insights
+  icon: icons/sidebar/insights.svg
+  children:
+    - name: Overview
+      link: 2.0/insights/
+    - name: Insights metrics glossary
+      link: 2.0/insights-glossary/
+
 - name: Projects
   icon: icons/sidebar/projects.svg
   children:
