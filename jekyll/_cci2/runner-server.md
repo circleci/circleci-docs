@@ -36,7 +36,7 @@ runner:
 
 ## Version
 
-Specific server version works with specific runner version. The table below presents the mapping.
+A specific server version works with a specific runner version. The table below presents the mapping.
 
 Server Version  | Runner
 ----------------|---------------------------------
