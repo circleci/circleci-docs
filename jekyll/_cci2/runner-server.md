@@ -11,7 +11,7 @@ version:
 
 ## Authentication
 
-When creating namespaces. resource classes and tokens, the CLI needs to be configured to connect to the Server 
+When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server 
 deployment either via `--host HOSTNAME` and `--token TOKEN` flags or CLI's config file.
 
 ####  Resource class example
