@@ -12,7 +12,7 @@ version:
 ## Authentication
 
 When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server 
-deployment either via `--host HOSTNAME` and `--token TOKEN` flags or CLI's config file.
+deployment either via `--host HOSTNAME` and `--token TOKEN` flags, or the CircleCI CLI's configuration file.
 
 ####  Resource class example
 ```plaintext
