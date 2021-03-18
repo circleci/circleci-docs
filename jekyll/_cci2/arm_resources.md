@@ -10,8 +10,9 @@ version:
 # Overview
 
 This document will walk you through the setup steps required to use an Arm
-resource on CircleCI. Current, Arm resources are not available on CircleCI
-Server.
+resource on CircleCI. Arm resources are not available on CircleCI Server 1.x or
+2.x. If you are interested in using Arm with CircleCI Server 3.0, please contact
+your CircleCI Customer Success Manager or fill out this [contact form](https://circleci.com/contact-us/).
 
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
 CircleCI `config.yml` file you can choose the right environment for your job using the
