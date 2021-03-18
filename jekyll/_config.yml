@@ -64,7 +64,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 2.19.12
+    serverversion: 3.0.0
 
 collections:
   # this is named with an underscore because it needs to be processed
