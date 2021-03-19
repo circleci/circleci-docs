@@ -188,7 +188,8 @@ en:
     - name: Data Partnerships
       link: 2.0/insights-partnerships/
     - name: Insights API
-      link: api/v2/#tag/Insights
+      link: api/v2/
+      hash: tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
