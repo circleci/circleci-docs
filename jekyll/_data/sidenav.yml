@@ -181,10 +181,14 @@ en:
   children:
     - name: Overview
       link: 2.0/insights/
+    - name: Test Insights
+      link: 2.0/insights-tests/
     - name: Metrics glossary
       link: 2.0/insights-glossary/
     - name: Data Partnerships
       link: 2.0/insights-partnerships/
+    - name: Insights API
+      link: api/v2/#tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
