@@ -181,8 +181,10 @@ en:
   children:
     - name: Overview
       link: 2.0/insights/
-    - name: Insights metrics glossary
+    - name: Metrics glossary
       link: 2.0/insights-glossary/
+    - name: Data Partnerships
+      link: 2.0/insights-partnerships/
 
 - name: Projects
   icon: icons/sidebar/projects.svg
