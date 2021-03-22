@@ -92,7 +92,7 @@ It is recommended to scope the rule as closely as possible to allowed source IPs
 ### Egress
 You most probably want all your instances to access internet resources. This will require you to allow egress for UDP
 and TCP on port 53 to the DNS server within your VPC as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
-Instances building jobs, i.e. the Nomad clients and external VMs, also will most probably need to pull code from your VCS via
+Instances building jobs (i.e. the Nomad clients and external VMs) also will likely need to pull code from your VCS via
 SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with
 the destination of the VM subnet and your VCS at the very least.
 
