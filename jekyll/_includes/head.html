@@ -28,7 +28,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script-->
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
-	{% include_cached segment.html site=site page=page %}
+	{% include segment.html %}
 
 	<!-- Instant Search CDN links /-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossorigin="anonymous">
