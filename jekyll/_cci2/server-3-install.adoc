@@ -379,7 +379,7 @@ region = "us-west-1"
 }
 
 module "nomad_clients" {
-source = "git::https://github.com/CircleCI-Public/server-terraform.git?//nomad-aws?ref=3.0.0-RC7"
+source = "git::https://github.com/CircleCI-Public/server-terraform.git?//nomad-aws?ref=3.0.0"
 
   # Number of nomad clients to run
   nodes = 4
@@ -423,6 +423,76 @@ encryption. Make sure to copy them somewhere safe, you will need them in the nex
 
 Once terraform apply is complete, click on the *Application* tab in the admin console and wait for the deployment Status
 to show "Ready," then move on to the next step.
+
+### Google Cloud Platform
+
+If you’d like to to install Nomad clients in Google Cloud Platform, create a
+file `main.tf`. An example is shared below to document common settings. For
+documentation on all available variables please see
+https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[the
+module README].
+
+[source,text]
+----
+# main.tf
+provider "google-beta" {
+  # Your specific credentials here
+  project = "your-project"
+  region  = "us-west1"
+  zone    = "us-west1-a"
+}
+module "nomad_clients" {
+  # Note the use of ref=<<tag>> to pin the version to a fixed release
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git?//nomad-gcp?ref=3.0.0"
+  zone    = "us-west1-a"
+  region  = "us-west1"
+  network = "my-network"
+  subnet  = "my-nomad-subnet"
+  # hostname:port of Nomad load balancer
+  server_endpoint = "nomad.example.com:4647"
+
+  # Number of nomad clients to run
+  min_replicas     = 3
+  max_replicas     = 10
+  # Example autoscaling policy: scale up if we ever reach 70% cpu utilization
+  autoscaling_mode = "ONLY_UP"
+  target_cpu_utilization = 0.70
+  # Network policy example: block access to 1.1.1.1 from jobs and allow retry
+  # with SSH from only 2.2.2.2
+  blocked_cidrs = [
+    "1.1.1.1/32"
+  ]
+  retry_with_ssh_allowed_cidr_blocks = [
+    "2.2.2.2/32"
+  ]
+}
+output "nomad_server_cert" {
+  value = module.nomad_clients.nomad_server_cert
+}
+output "nomad_server_key" {
+  value = module.nomad_clients.nomad_server_key
+}
+output "nomad_ca" {
+  value = module.nomad_clients.nomad_tls_ca
+}
+----
+
+To deploy your Nomad clients simply run:
+
+[source,bash]
+----
+terraform init
+terraform plan
+terraform apply
+----
+
+After Terraform is done spinning up the Nomad client(s) it will output the
+certificates and key needed for Nomad mTLS encryption. Make sure to copy them
+somewhere safe, you will need them in the next step.
+
+Once terraform apply is complete, click on the *Application* tab in the admin
+console and wait for the deployment Status to show "Ready," then move on to the
+next step.
 
 
 ### Optional: Running Jobs Outside the Nomad Client
