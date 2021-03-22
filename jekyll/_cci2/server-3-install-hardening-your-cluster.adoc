@@ -30,7 +30,7 @@ Currently, custom subnetting is not supported for GCP. Custom subnetting support
 ## Network Traffic
 This section spells out the minimum requirements that are needed for a server installation to work. Depending on your workloads,
 you might need to add additional rules to egress for Nomad clients and VMs. Nomenclature between cloud providers differs, therefore,
-you will probably implement these rules using firewall rules and/or security groups.
+you will probably need to implement these rules using firewall rules and/or security groups.
 
 Where you see "external,"" this usually means all external IPv4 addresses. Depending on your particular setup, you might
 be able to be more specific than that, e.g. if you are using a proxy for all external traffic.
