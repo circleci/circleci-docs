@@ -60,7 +60,8 @@ task :test do
     "ja/2.0/google-auth",
     "ja/2.0/orb-concepts",
     "ja/2.0/tutorials",
-    "reference-2-1"
+    "reference-2-1",
+    "2.0/server-3-global-variables"
   ]
 
   ignore_files = ignore_dirs.map {|d| makeFilePath(d)}
