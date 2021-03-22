@@ -40,7 +40,7 @@ It is assumed that you have configured the load balancers for Nomad, vm-service 
 The rules spelled out here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you will need to create matching ingress or egress rules to the ones listed here.
 
 ## Kubernetes Load Balancers
-Depending on your setup, your load balancers might be transparent, i.e. they are not treated as a distinct layer in your networking topology. In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure how to apply networking security rules given the type of load balancing you are using with your installation.
+Depending on your setup, your load balancers might be transparent (i.e. they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules given the type of load balancing you are using with your installation.
 
 ### Ingress
 If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
