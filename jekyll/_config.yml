@@ -10,7 +10,11 @@ baseurl: "/docs" # the subpath of your site, e.g. /blog
 gh_url: "https://github.com/circleci/circleci-docs"
 devhub_base_url: "https://circleci.com/developer"
 
+exclude:
+  - .jekyll-cache
+
 plugins:
+  - jekyll-include-cache
   - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
