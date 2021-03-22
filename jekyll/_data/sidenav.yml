@@ -104,6 +104,8 @@ en:
           hash: pre-installed-software
         - name: Android Machine Image
           link: 2.0/android-machine-image
+        - name: ARM Resources
+          link: 2.0/arm_resources/
 
     - name: Mac
       children:
@@ -544,6 +546,8 @@ ja:
           link: ja/2.0/docker-to-machine
           i18n_name: インストール済ソフト
           hash: pre-installed-software
+        - i18n_name: ARM Resources # TODO: needs translation
+          link: ja/2.0/arm_resources/
     - name: Mac
       children:
         - name: Overview
