@@ -99,7 +99,7 @@ the destination of the VM subnet and your VCS at the very least.
 ## Kubernetes Nodes
 
 ### Intra-node traffic
-The traffic within your K8s cluster is regulated by networking policies by default. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to pare down traffic between K8s nodes any further, i.e. it is fine to allow all traffic between K8s nodes.
+The traffic within your K8s cluster is regulated by networking policies by default. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to pare down traffic between K8s nodes any further (i.e. it is fine to allow all traffic between K8s nodes).
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 
