@@ -58,7 +58,7 @@ asciidoc:
       serverversion: 3.0.0
 
 asciidoctor:
-  base_dir: _cci3/
+  base_dir: _cci2/
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
@@ -113,13 +113,6 @@ collections:
     permalink: /ja/2.0/:path/
     prefix: "/ja/2.0"
     selectorName: "2.0"
-  cci3:
-    name: "3.0 Docs"
-    site_section: true
-    output: true
-    permalink: /3.0/:path/
-    prefix: "/3.0"
-    selectorName: "3.0"
 
 twitter_username: circleci
 github_username: circleci
