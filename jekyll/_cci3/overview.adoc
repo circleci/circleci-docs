@@ -3,19 +3,18 @@ version:
 - Server v3.x
 - Server Admin
 ---
-// global version numbers
-:serverversion: 3.0
-:terraformversion: 0.13.0
-:kubectlversion: 1.19
-:helmversion: 3.4.0
-:kotsversion: 1.26
-
 = CircleCI Server v3.x Overview
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
+// global version numbers
+:serverversion: 3.0
+:terraformversion: 0.13.0
+:kubectlversion: 1.19
+:helmversion: 3.4.0
+:kotsversion: 1.26
 
 toc::[]
 
