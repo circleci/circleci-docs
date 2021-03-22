@@ -17,6 +17,8 @@ version:
 :toc: macro
 :toc-title:
 
+toc::[]
+
 CircleCI Server v{serverversion} is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 
 The core of the CircleCI Server application runs inside Kubernetes.
@@ -64,9 +66,11 @@ https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
 
 == Architecture
 
-.Server v{serverversion} Architecture
-image::server-3-architecture.png[Server v{serverversion} Architecture]
+.CircleCI Server v3.x Architecture
+image::server-3-architecture.png[Services Architecture]
+<<<
 
 == What to read next
 
 * xref:whats-new.adoc[What's new in 3.x]
+
