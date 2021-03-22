@@ -55,16 +55,16 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 2.19.11
+      serverversion: 3.0.0
 
 asciidoctor:
-  base_dir: _cci2/
+  base_dir: _cci3/
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 2.19.12
+    serverversion: 3.0.0
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -113,6 +113,13 @@ collections:
     permalink: /ja/2.0/:path/
     prefix: "/ja/2.0"
     selectorName: "2.0"
+  cci3:
+    name: "3.0 Docs"
+    site_section: true
+    output: true
+    permalink: /3.0/:path/
+    prefix: "/3.0"
+    selectorName: "3.0"
 
 twitter_username: circleci
 github_username: circleci
