@@ -25,7 +25,7 @@ working NAT gateway setup. Otherwise, you will need at least one public subnet f
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to
 SSH into jobs and scope access via networking rules.
 
-Currently, custom subnetting is not supported for GCP. Custom subnetting support will be coming soon!
+Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
 
 ## Network Traffic
 This section spells out the minimum requirements that are needed for a server installation to work. Depending on your workloads,
