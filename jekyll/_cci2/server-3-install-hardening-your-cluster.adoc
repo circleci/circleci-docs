@@ -9,6 +9,7 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+include::server-3-global-variables.adoc[]
 
 This section provides supplemental information on hardening your Kubernetes cluster.
 

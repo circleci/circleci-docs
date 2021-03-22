@@ -9,6 +9,7 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+include::server-3-global-variables.adoc[]
 
 If you have never previously set up a Kubernetes cluster, we have provided some tips in this section.
 

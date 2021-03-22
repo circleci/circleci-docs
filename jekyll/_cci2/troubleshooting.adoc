@@ -1,6 +1,7 @@
 ---
 version:
 - Server v2.x
+- Server v3.x
 - Server Admin
 ---
 = Troubleshooting Server Installations

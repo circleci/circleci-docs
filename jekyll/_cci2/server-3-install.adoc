@@ -9,6 +9,9 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+include::server-3-global-variables.adoc[]
+
+Before you begin with the CircleCI Server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
 toc::[]
 
