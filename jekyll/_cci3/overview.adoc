@@ -66,11 +66,11 @@ Nomad clients need access to object storage.
 
 https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
 
-== Architecture
-
-.CircleCI Server v3.x Architecture
-image::server-3-architecture-diagram.png[Services Architecture]
-<<<
+//== Architecture
+//
+//.CircleCI Server v3.x Architecture
+//image::server-3-architecture-diagram.png[Services Architecture]
+//<<<
 
 == What to read next
 
