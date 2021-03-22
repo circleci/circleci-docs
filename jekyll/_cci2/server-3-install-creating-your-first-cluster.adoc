@@ -88,3 +88,8 @@ For more information on exploring your new cluster, see the following:
 - https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#gs-eksctl-view-resources[Step 2: View resources] - AWS docs
 - https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/[Accessing clusters] - Kubernetes docs
 - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management] - `kubectl` docs
+
+## What to read next
+
+* xref:server-3-install.adoc[Server 3.x Installation]
+* xref:server-3-install-hardening-your-cluster.adoc[Hardening your cluster]

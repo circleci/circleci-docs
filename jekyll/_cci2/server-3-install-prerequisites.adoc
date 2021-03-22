@@ -10,6 +10,8 @@ version:
 :toc: macro
 :toc-title:
 
+It is assumed you have already read the Server 3.x xref:server-3-overview.adoc[overview].
+
 In order to configure the CircleCI Server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
 
 * An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
@@ -133,3 +135,7 @@ set up a new VPC rather than use an existing one.
 | Only required for the nomad clients.
 |===
 
+## What to read next
+
+* xref:server-3-install-creating-your-first-cluster.adoc[Creating your first cluster]
+* xref:server-3-install.adoc[Server 3.x Installation]

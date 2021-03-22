@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Hardening Your Cluster
+= CircleCI Server v3.x - Hardening Your Cluster
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -213,3 +213,8 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 
 ### Egress
 You will only need the egress rules for internet access and SSH for your VCS.
+
+//TO DO:
+//## What to read next
+//
+//* xref:server-3-operator.adoc[Server 3.x Operator Guide]
