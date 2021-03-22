@@ -289,6 +289,17 @@ en:
           link: 2.0/server-3-overview
         - name: What's New in v3.x
           link: 2.0/server-3-whats-new
+    - name: Server v3.x Install
+      link: 2.0/server-3-install-prerequisites
+      children:
+        - name: Prerequisites
+          link: 2.0/server-3-install-prerequisites
+        - name: Your First Cluster
+          link: 2.0/server-3-install-creating-your-first-cluster
+        - name: Installation
+          link: 2.0/server-3-install
+        - name: Hardening Your Cluster
+          link: 2.0/server-3-install-hardening-your-cluster
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:

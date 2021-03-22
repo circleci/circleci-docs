@@ -34,7 +34,11 @@ patch releases and quarterly feature releases.
 identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
 
 // TO DO: Add links
-//To learn more about server 3.0 installation, migration, or operations please see our documentation.
+== What to read next
+To learn more about Server v3.x, see the following:
+
+* xref:server-3-overview.adoc[Server 3.x Overview]
+* xref:server-3-install.adoc[Server 3.x Installation]
 
 
 

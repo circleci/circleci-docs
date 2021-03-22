@@ -1,0 +1,90 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x - Creating Your First Cluster (Optional)
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+If you have never previously set up a Kubernetes cluster, we have provided some tips in this section.
+
+toc::[]
+
+## Step 1 - Create
+
+### Amazon EKS
+
+CircleCI recommends using `eksctl` to set up your first cluster on AWS. `eksctl` will take care of VPC creation, in addition
+to security group selection.
+
+Before creating the cluster, make sure you have the following:
+
+. The latest AWS CLI https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[installed] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configured] to your AWS account
+. `eksctl` https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[installed]
+. `kubectl` https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html[installed]
+
+#### Create a cluster using flags
+
+To create a simple cluster, you can run the command:
+
+`eksctl create cluster`
+
+Additional flags are available on the command line. See the `eksctl` https://eksctl.io/introduction/[introduction] for more information.
+
+#### Create cluster using a configuration file
+
+You can also create a config file for your cluster, for example:
+
+[source,yaml]
+----
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: <your-cluster-name>
+  region: <aws-region>
+
+managedNodeGroups:
+  - name: <nodegroup-name-1>
+    instanceType: <instance-type> # i.e., m5.large. see https://aws.amazon.com/ec2/instance-types/ for available instance types
+    minSize: 4 # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-minsize for more information
+    maxSize: 6 # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-maxsize for more information
+----
+
+For more examples on cluster configuration files, see https://eksctl.io[eksctl.io].
+
+When you are finished with your configuration, save it and run:
+
+`eksctl create cluster -f <your-cluster-config.yaml>`
+
+[TIP]
+====
+When using the `eksctl` tool to create your cluster, you may receive an AWS STS access error: `AWS STS access – cannot get role ARN for current session: InvalidClientTokenId.`
+
+This may mean your https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html[AWS credentials] are invalid,
+or your IAM user does not have permission to create an EKS cluster. Note that the proper IAM permissions are necessary in
+order to use `eksctl`. See the AWS https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#eksctl-prereqs[documentation]
+regarding prerequisite IAM permissions.
+====
+
+## Step 2 - Verify
+
+Once your cluster is finished being created, you should be able to run various `kubectl` commands to view your cluster resources.
+
+For instance, to view your cluster's https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#discovering-builtin-services[built-in services], you can run:
+
+`kubectl cluster-info`
+
+Or, to verify that your cluster has worker nodes attached, run:
+
+`kubectl get nodes -o wide`
+
+For more information on exploring your new cluster, see the following:
+
+- https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#gs-eksctl-view-resources[Step 2: View resources] - AWS docs
+- https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/[Accessing clusters] - Kubernetes docs
+- https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management] - `kubectl` docs

@@ -9,12 +9,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-// global version numbers
-:serverversion: 3.0
-:terraformversion: 0.13.0
-:kubectlversion: 1.19
-:helmversion: 3.4.0
-:kotsversion: 1.26
 
 toc::[]
 
@@ -74,4 +68,5 @@ image::server-3-architecture-diagram.png[Services Architecture]
 == What to read next
 
 * xref:server-3-whats-new.adoc[What's new in 3.x]
-
+* xref:server-3-overview.adoc[Server 3.x Overview]
+* xref:server-3-install.adoc[Server 3.x Installation]
