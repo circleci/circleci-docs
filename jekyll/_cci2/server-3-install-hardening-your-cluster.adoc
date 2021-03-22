@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x - Hardening Your Cluster
+= CircleCI Server v3.x Hardening Your Cluster
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,31 +16,33 @@ toc::[]
 
 ## Network Topology
 A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients and external VMs.
-It is highly recommended to deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you
+
+It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you
 to control traffic between the different components of the system and isolate them from each other.
 
 As always, the rule is to make as many of the resources private as possible, applies. If your users will access your
 CircleCI Server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a
 working NAT gateway setup. Otherwise, you will need at least one public subnet for the frontend load balancer.
-However, in this case it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to
+
+However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to
 SSH into jobs and scope access via networking rules.
 
-Currently, custom subnetting is not supported for GCP. Custom subnetting support will be coming soon!
+Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
 
 ## Network Traffic
 This section spells out the minimum requirements that are needed for a server installation to work. Depending on your workloads,
-you might need to add additional rules to egress for Nomad clients and VMs. Nomenclature between cloud providers differs,
-you will probably implement these rules using firewall rules and/or security groups.
+you might need to add additional rules to egress for Nomad clients and VMs. Nomenclature between cloud providers differs, therefore,
+you will probably need to implement these rules using firewall rules and/or security groups.
 
-Where you see "external,"" this usually means all external IPv4 addresses. Depending on your particular setup, you might
-be able to be more specific than that, e.g. if you are using a proxy for all external traffic.
+Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might
+be able to be more specific (e.g., if you are using a proxy for all external traffic).
 
 It is assumed that you have configured the load balancers for Nomad, vm-service and output processor to be internal load balancers - this is the default.
 
-The rules spelled out here are assumed to be stateful and for TCP connections only unless stated otherwise. If you are working with stateless rules, you will need to create matching ingress or egress rules to the ones listed here.
+The rules spelled out here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you will need to create matching ingress or egress rules to the ones listed here.
 
 ## Kubernetes Load Balancers
-Depending on your setup, your load balancers might be transparent, i.e. they are not treated as a distinct layer in your networking topology. In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure how to apply networking security rules given the type of load balancing you are using with your installation.
+Depending on your setup, your load balancers might be transparent (i.e. they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules given the type of load balancing you are using with your installation.
 
 ### Ingress
 If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
@@ -90,16 +92,16 @@ If you want to access your instances via SSH, you will need to open port 22 for 
 It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule ad hoc when needed.
 
 ### Egress
-You most probably want all your instances to access internet resources. This will require you to allow egress for UDP
-and TCP on port 53 to the DNS server within your VPC as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
-Instances building jobs, i.e. the Nomad clients and external VMs, also will most probably need to pull code from your VCS via
+You most likely want all of your instances to access internet resources. This will require you to allow egress for UDP
+and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
+Instances building jobs (i.e. the Nomad clients and external VMs) also will likely need to pull code from your VCS via
 SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with
 the destination of the VM subnet and your VCS at the very least.
 
 ## Kubernetes Nodes
 
 ### Intra-node traffic
-The traffic within your K8s cluster is regulated by networking policies by default. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to pare down traffic between K8s nodes any further, i.e. it is fine to allow all traffic between K8s nodes.
+The traffic within your K8s cluster is regulated by networking policies by default. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to pare down traffic between K8s nodes any further (i.e. it is fine to allow all traffic between K8s nodes).
 
 To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
 
@@ -135,7 +137,7 @@ ingress. If you are using transparent load balancers, you will need to apply the
 |===
 
 ## Nomad Clients
-Nomad clients do not need to communicate with each other, you can block traffic between Nomad client instances completely.
+Nomad clients do not need to communicate with each other; you can block traffic between Nomad client instances completely.
 
 ### Ingress
 [.table.table-striped]
