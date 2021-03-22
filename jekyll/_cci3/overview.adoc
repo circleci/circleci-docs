@@ -9,6 +9,7 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
+:imagesdir: ../assets/img/docs/
 // global version numbers
 :serverversion: 3.0
 :terraformversion: 0.13.0
@@ -69,10 +70,6 @@ https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
 
 .CircleCI Server v3.x Architecture
 image::server-3-architecture-diagram.png[Services Architecture]
-<<<
-
-.CircleCI Server v3.x Architecture
-image::server-3-test.png[Services Architecture]
 <<<
 
 == What to read next
