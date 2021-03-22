@@ -33,7 +33,7 @@ patch releases and quarterly feature releases.
 * It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
 identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
 
-To learn more about server 3.0 installation, migration, or operations please see our xref:overview.adoc[documentation].
+//To learn more about server 3.0 installation, migration, or operations please see our xref:overview.adoc[documentation].
 
 
 
