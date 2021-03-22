@@ -86,12 +86,11 @@ configuration (and even the same workflow).
 * Some orbs that include an executable may **not** be compatible with Arm at
   this moment. If you run into issues with orbs on Arm, please [open an
   issue](https://github.com/CircleCI-Public/arm-preview-docs/issues).
-* We currently don’t provide support for 32-bit Arm architectures. Only 64-bit
+* We currently do not provide support for 32-bit Arm architectures. Only 64-bit
   `arm64` architecture is supported.
 * There may be up to 2 minutes of spin-up time before your job actually starts
   running. This time will decrease as more customers start using Arm resources.
 * If there is software you require that’s not available in the image, please
   [open an issue](https://github.com/CircleCI-Public/arm-preview-docs/issues) to
   let us know.
-
 
