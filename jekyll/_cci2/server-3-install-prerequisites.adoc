@@ -47,7 +47,7 @@ CircleCI Server users: +
 *** Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * A CircleCI License file. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] for a license.
 * The <<Required Tools>> tools installed
-** Note that the `kubectl` tool must also be configured to have access your cluster
+** Note that the `kubectl` tool must also be configured to have access your cluster.
 *** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Connect to Amazon EKS clusters] - Amazon EKS
 *** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[Configuring cluster access for kubectl] - Google GKE
 * Port access requirements are listed here:
