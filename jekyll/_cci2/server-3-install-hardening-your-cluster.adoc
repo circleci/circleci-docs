@@ -33,7 +33,7 @@ you might need to add additional rules to egress for Nomad clients and VMs. Nome
 you will probably need to implement these rules using firewall rules and/or security groups.
 
 Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might
-be able to be more specific than that, e.g. if you are using a proxy for all external traffic.
+be able to be more specific (e.g., if you are using a proxy for all external traffic).
 
 It is assumed that you have configured the load balancers for Nomad, vm-service and output processor to be internal load balancers - this is the default.
 
