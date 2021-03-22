@@ -61,6 +61,7 @@ task :test do
     "ja/2.0/orb-concepts",
     "ja/2.0/tutorials",
     "reference-2-1",
+    "ja/2.0/server-3-global-variables",
     "2.0/server-3-global-variables"
   ]
 
