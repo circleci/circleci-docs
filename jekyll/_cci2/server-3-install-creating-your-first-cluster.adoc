@@ -4,12 +4,12 @@ version:
 - Server Admin
 ---
 = CircleCI Server v3.x - Creating Your First Cluster (Optional)
+include::server-3-global-variables.adoc[]
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-include::server-3-global-variables.adoc[]
 
 If you have never previously set up a Kubernetes cluster, we have provided some tips in this section.
 

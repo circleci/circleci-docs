@@ -4,12 +4,12 @@ version:
 - Server Admin
 ---
 = CircleCI Server v3.x Overview
+include::server-3-global-variables.adoc[]
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
-include::server-3-global-variables.adoc[]
 
 toc::[]
 
