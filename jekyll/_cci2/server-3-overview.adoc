@@ -24,7 +24,7 @@ CircleCI Server v{serverversion} is a continuous integration and continuous deli
 
 The core of the CircleCI Server application runs inside Kubernetes.
 
-The application exposes 4 services using load balancers, three of these load balancers are VPC-internal.
+The application exposes four services using load balancers, three of these load balancers are VPC-internal.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
