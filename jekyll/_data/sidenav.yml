@@ -283,7 +283,7 @@ en:
     - name: Server v3.x Overview
       link: 3.0/overview/
       children:
-        - name: Overview
+        - name: CircleCI Server 3.x Overview
           link: 3.0/overview/
         - name: What's New in v3.x
           link: 3.0/whats-new/
