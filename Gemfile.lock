@@ -108,7 +108,7 @@ GEM
       nokogiri (~> 1.10)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.2.0)
+    json (2.5.1)
     kramdown (1.17.0)
     liquid (4.0.3)
     liquid-tag-parser (1.9.0)
