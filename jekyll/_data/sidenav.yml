@@ -280,6 +280,13 @@ en:
 - name: Server Administration
   icon: icons/sidebar/admin.svg
   children:
+    - name: Server v3.x Overview
+      link: 2.0/server-3-overview
+      children:
+        - name: Overview
+          link: 2.0/server-3-overview
+        - name: What's New in v3.x
+          link: 2.0/server-3-whats-new
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
