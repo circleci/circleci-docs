@@ -287,8 +287,6 @@ en:
           link: 3.0/overview/
         - name: What's New in v3.x
           link: 3.0/3.x-what's-new/
-        - name: Architecture
-          link: 3.0/
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:

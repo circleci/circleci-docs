@@ -19,6 +19,8 @@ version:
 
 toc::[]
 
+== Introduction
+
 CircleCI Server v{serverversion} is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 
 The core of the CircleCI Server application runs inside Kubernetes.
