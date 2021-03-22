@@ -9,7 +9,6 @@ version:
 :icons: font
 :toc: macro
 :toc-title:
-:imagesdir: ../assets/img/docs/
 // global version numbers
 :serverversion: 3.0
 :terraformversion: 0.13.0
