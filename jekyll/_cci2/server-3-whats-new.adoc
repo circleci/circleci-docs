@@ -4,7 +4,6 @@ version:
 - Server Admin
 ---
 = CircleCI Server v3.x What's New
-include::server-3-global-variables.adoc[]
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

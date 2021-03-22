@@ -1,4 +1,4 @@
-:icons: font
+//:icons: font
 :serverversion: 3.0
 :terraformversion: 0.13.0
 :kubectlversion: 1.19
