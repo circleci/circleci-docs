@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Install - Prerequisites
+= CircleCI Server v3.x Prerequisites
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

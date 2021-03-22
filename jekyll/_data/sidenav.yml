@@ -291,7 +291,7 @@ en:
       link: 2.0/server-3-install-prerequisites
       children:
         - name: Prerequisites
-          link: 2.0/server-3-install-prequisites
+          link: 2.0/server-3-install-prerequisites
         - name: Your First Cluster
           link: 2.0/server-3-install-creating-your-first-cluster
         - name: Installation

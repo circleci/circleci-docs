@@ -3,16 +3,16 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Install - Hardening Your Cluster
+= CircleCI Server v3.x Hardening Your Cluster
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-toc::[]
-
 This section provides supplemental information on hardening your Kubernetes cluster.
+
+toc::[]
 
 ## Network Topology
 A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients and external VMs.
