@@ -36,7 +36,7 @@ identical names. This should be avoided as doing so could lead to errors and une
 
 // TO DO: Add links
 == What to read next
-To learn more about Server 3.0, see the following:
+To learn more about Server v3.x, see the following:
 
 * xref:server-3-overview.adoc[Server 3.x Overview]
 * xref:server-3-install.adoc[Server 3.x Installation]
