@@ -58,7 +58,7 @@ asciidoc:
       serverversion: 3.0.0
 
 asciidoctor:
-  base_dir: _cci3/
+  base_dir: _cci2/
   safe: unsafe
   attributes:
     imagesdir: /docs/assets/img/docs/
