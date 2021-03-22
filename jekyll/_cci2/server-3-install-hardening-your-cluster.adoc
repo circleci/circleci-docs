@@ -135,7 +135,7 @@ ingress. If you are using transparent load balancers, you will need to apply the
 |===
 
 ## Nomad Clients
-Nomad clients do not need to communicate with each other, you can block traffic between Nomad client instances completely.
+Nomad clients do not need to communicate with each other; you can block traffic between Nomad client instances completely.
 
 ### Ingress
 [.table.table-striped]
