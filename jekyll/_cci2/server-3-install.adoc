@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x - Installation
+= CircleCI Server v3.x Installation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -576,3 +576,7 @@ Click the *Save config* button to update your installation and re-deploy server.
 If you are unable to run your first builds successfully, start with the https://circleci.com/docs/2.0/troubleshooting[Troubleshooting]
 guide for general troubleshooting topics, and the https://circleci.com/docs/2.0/nomad[Introduction to Nomad Cluster Operation]
 for information about how to check the status of Nomad Clients within your installation.
+
+## What to read next
+
+* xref:server-3-install-hardening-your-cluster.adoc[Hardening your cluster]
