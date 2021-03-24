@@ -96,3 +96,32 @@ configuration (and even the same workflow).
 * If there is software you require that is not available in the image, please
   [open an issue](https://github.com/CircleCI-Public/arm-preview-docs/issues) to
   let us know.
+
+## Arm FAQs 
+
+This section answers frequently asked questions regarding CircleCI Arm support.
+
+toc::[]
+
+=== How do I get access to the Arm preview?
+
+To receive access to the CircleCI Arm preview, complete the [Arm Program Request Form](https://form.asana.com/?k=S8EKGU3o66ld_qYXsdOQww&d=5374345383152).
+
+=== What Arm architectures are currently supported?
+
+CircleCI currently only supports Arm 64-bit architectures.
+
+=== What Arm resources are available in the CircleCI preview?
+
+There are two Arm resources available:
+
+* arm.medium - arm64 architecture, 2 vCPU, 8GB RAM
+* arm.large - arm64 architecture, 4 vCPU, 16GB RAM
+
+=== Can I use an 'arm.large' resource if I am on the Free Plan?
+
+No, you must be on a Performance or Scale plan in order to use an 'arm.large' resource. Contact your CircleCI Support Representative for information on how to sign up for a Performance or Scale Plan.
+
+=== Can I use orbs with Arm?
+
+Yes, you can use orbs with Arm, with the exception of Orbs that have executables.
