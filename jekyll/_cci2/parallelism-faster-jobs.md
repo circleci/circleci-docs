@@ -66,7 +66,9 @@ To assist in defining your test suite, the CLI supports globbing test files usin
 
 To glob test files, pass one or more patterns to the `circleci tests glob` command.
 
-    circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
+```
+circleci tests glob "tests/unit/*.java" "tests/functional/*.java"
+```
 
 To check the results of pattern-matching, use the `echo` command.
 
@@ -100,11 +102,15 @@ Note: If you do not use `store_test_results`, there will be no timing data avail
 
 To split by test timings, use the `--split-by` flag with the `timings` split type. The available timings data will then be analyzed and your tests will be split across your parallel-running containers as evenly as possible leading to the fastest possible test run time
 
-    circleci tests glob "**/*.go" | circleci tests split --split-by=timings
+```
+circleci tests glob "**/*.go" | circleci tests split --split-by=timings
+```
 
 The CLI expects both filenames and classnames to be present in the timing data produced by the testing suite. By default, splitting defaults to filename, but you can specify classnames by using the `--timings-type` flag.
 
-    cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
+```
+cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
+```
 
 If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
 
@@ -115,32 +121,44 @@ By default, if you don't specify a method using the `--split-by` flag, `circleci
 
 Create a text file with test filenames.
 
-    circleci tests split test_filenames.txt
+```
+circleci tests split test_filenames.txt
+```
 
 Provide a path to the test files.
 
-    circleci tests split < /path/to/items/to/split
+```
+circleci tests split < /path/to/items/to/split
+```
 
 Or pipe a glob of test files.
 
-    circleci tests glob "test/**/*.java" | circleci tests split
+```
+circleci tests glob "test/**/*.java" | circleci tests split
+```
 
 The CLI looks up the number of available containers, along with the current container index. Then, it uses deterministic splitting algorithms to split the test files across all available containers.
 
 By default, the number of containers is specified by the `parallelism` key. You can manually set this by using the `--total` flag.
 
-    circleci tests split --total=4 test_filenames.txt
+```
+circleci tests split --total=4 test_filenames.txt
+```
 
 Similarly, the current container index is automatically picked up from environment variables, but can be manually set by using the `--index` flag.
 
-    circleci tests split --index=0 test_filenames.txt
+```
+circleci tests split --index=0 test_filenames.txt
+```
 
 #### Splitting by filesize
 {:.no_toc}
 
 When provided with filepaths, the CLI can also split by filesize. To do this, use the `--split-by` flag with the `filesize` split type.
 
-    circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
+```
+circleci tests glob "**/*.go" | circleci tests split --split-by=filesize
+```
 
 ## Using environment variables to split tests
 
@@ -184,6 +202,7 @@ suite. These applications are not developed or supported by CircleCI. Please che
   filenames and print them. This is useful if you want to split tests to run
   them in parallel based on timings on CI tools.
 - **[go list](https://golang.org/cmd/go/#hdr-List_packages_or_modules)** - Use the built-in Go command `go list ./...` to glob Golang packages. This allows splitting package tests across multiple containers.
-    ```
-    go test -v $(go list ./... | circleci tests split)
-    ```
+
+  ```
+  go test -v $(go list ./... | circleci tests split)
+  ```

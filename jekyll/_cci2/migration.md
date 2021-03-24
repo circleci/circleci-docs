@@ -96,13 +96,14 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Tests can sometimes be flaky and may appear to fail for no reason. You can re-run your failing browser tests automatically, however, this will corrupt the timing data.
 - Take screenshots of failed tests to make debugging easier.
 - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. Run this from one of our browsers images:
+
 ```
-			ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
-			sudo apt install vnc4server metacity
-			vnc4server -geometry 1280x1024 -depth 24
-			export DISPLAY=:1.0
-			metacity &
-			firefox &
+ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
+sudo apt install vnc4server metacity
+vnc4server -geometry 1280x1024 -depth 24
+export DISPLAY=:1.0
+metacity &
+firefox &
 ```
 
 ## Tips for docker
@@ -139,12 +140,14 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - You are limited by your imagination in CircleCI 2.0
 - The shell can be set to Python to just execute arbitrary Python in the YAML
-```
+
+```yml
 			- run:
 				shell: /usr/bin/python3
 				command:
 					import sys
 					print(sys.version)
 ```
+
 - You can be clever with bash to achieve whatever you need
 			`for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
