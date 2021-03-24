@@ -61,7 +61,7 @@ To add an API token, perform the steps listed below.
 
 ## Getting started with the API
 
-The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository. 
+The CircleCI API shares similarities with previous API versions in that it identifies your projects using repository name. For instance, if you want to pull information from CircleCI about the GitHub repository https://github.com/CircleCI-Public/circleci-cli you can refer to that in the CircleCI API as `gh/CircleCI-Public/circleci-cli`, which is a “triplet” of the project type (VCS provider), the name of your “organization” (or your username), and the name of the repository.
 
 For the project type you can use `github` or `bitbucket` as well as the shorter forms `gh` or `bb`. The `organization` is your username or organization name in your version control system.
 
@@ -89,7 +89,7 @@ In most cases, the HTTP 429 response code will be accompanied by the [Retry-Afte
 
 The following section details the steps you would need, from start to finish, to make an API call. This section includes creating a "demo repository" called "hello-world", however, you can use a pre-existing repository to follow along if you choose.
 
-**NOTE:** Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api). 
+**NOTE:** Many of the API calls make use of the `{project-slug}` triplet, described [above](#getting-started-with-the-api).
 
 ### Prerequisites
 
@@ -128,11 +128,11 @@ The following section details the steps you would need, from start to finish, to
     ```sh
     # First: set your CircleCI token as an environment variable
     export CIRCLECI_TOKEN={your_api_token}
-        
+
     curl --header "Circle-Token: $CIRCLECI_TOKEN" \
       --header 'Accept: application/json'    \
       --header 'Content-Type: application/json' \
-      https://circleci.com/api/v2/project/{project-slug}/pipeline 
+      https://circleci.com/api/v2/project/{project-slug}/pipeline
     ```
 
     You will likely receive a long string of unformatted JSON. After formatting, it should look like so:
@@ -168,7 +168,7 @@ The following section details the steps you would need, from start to finish, to
         ]
       }
     ```
-        
+
     That's great! Hopefully everything is working for you up to this point. Let's move on to performing something that might be a bit more useful.
 
 5. One of the benefits of the CircleCI API v2 is the ability to remotely trigger pipelines with parameters. The following code snippet simply triggers a pipeline via `curl` without any body parameters:
@@ -178,7 +178,7 @@ The following section details the steps you would need, from start to finish, to
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLECI_TOKEN" \
-          
+
     # Which returns:
     {
       "number": 2,
@@ -195,26 +195,26 @@ The following section details the steps you would need, from start to finish, to
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
     --header "Circle-Token: $CIRCLE_TOKEN" \
-    -d '{ "branch": "bar" }' 
+    -d '{ "branch": "bar" }'
     ```
 
 6. Let's move on to a more complex example: triggering a pipeline and passing a parameter that can be dynamically substituted into your configuration. In this example, we will pass a docker image tag to our docker-executor key. First, we will need to modify the `.circleci/config.yml` to be a little more complex than the standard "Hello World" sample provided by the onboarding.
 
     ```yaml
     version: 2.1
-    jobs: 
-      build: 
-        docker: 
+    jobs:
+      build:
+        docker:
           - image: "circleci/node:<< pipeline.parameters.image-tag >>"
             auth:
               username: mydockerhub-user
               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           IMAGETAG: "<< pipeline.parameters.image-tag >>"
-        steps: 
+        steps:
           - run: echo "Image tag used was ${IMAGETAG}"
-    parameters: 
-      image-tag: 
+    parameters:
+      image-tag:
         default: latest
         type: string
     ```
@@ -402,15 +402,15 @@ The following section details the steps you need to follow to download artifacts
 
     ![Job Number]({{ site.baseurl }}/assets/img/docs/job-number.png)
 
-3.  Next, use the `curl` command to return a list of artifacts for a specific job. 
+3.  Next, use the `curl` command to return a list of artifacts for a specific job.
 
     ```sh
     curl -X GET https://circleci.com/api/v2/project/{project-slug}/{job_number}/artifacts \
     --header 'Content-Type: application/json' \
     --header 'Accept: application/json' \
-    --header "Circle-Token: $CIRCLECI_TOKEN" 
+    --header "Circle-Token: $CIRCLECI_TOKEN"
     ```
-    
+
     You should get a list of artifacts back - if the job you selected has artifacts associated with it. Here's an extract from the output when requesting artifacts for a job that builds these docs:
 
     ```

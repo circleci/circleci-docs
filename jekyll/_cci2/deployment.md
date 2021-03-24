@@ -47,8 +47,8 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
             # delete previous version
             cf delete app-name -f
             # Switch name of "dark" version to claim correct name
-            cf rename app-name-dark app-name      
-```           
+            cf rename app-name-dark app-name
+```
 
 
 ## Google
@@ -63,23 +63,23 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 
 ## Heroku
 
-```    
+```
     steps:
       - checkout
       - run:
           name: Deploy Master to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
-```            
+```
 
 ## NPM
 
 ```
     steps:
       - checkout
-      - run: 
+      - run:
           name: Publish to NPM
-          command: | 
+          command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
 ```
@@ -92,7 +92,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
           name: Deploy Over SSH
           command: |
             ssh $SSH_USER@$SSH_HOST "<remote deploy command>"
-```            
+```
 
 ## Snapcraft
 
@@ -104,7 +104,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
             mkdir .snapcraft
             echo $SNAPCRAFT_LOGIN_FILE | base64 --decode --ignore-garbage > .snapcraft/snapcraft.cfg
             snapcraft push *.snap --release stable
-```            
+```
 
 ## Artifactory
 
@@ -117,7 +117,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
             ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
-```            
+```
 
 ## NuGet (via .NET Core CLI)
 

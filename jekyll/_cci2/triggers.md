@@ -15,7 +15,7 @@ There are a few great tricks for triggering and scheduling builds in the followi
 
 ## Skip builds
 
-By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a [ci skip] or [skip ci] tag anywhere in a commit’s title or description. 
+By default, CircleCI automatically builds a project whenever you push changes to a version control system (VCS). You can override this behavior by adding a [ci skip] or [skip ci] tag anywhere in a commit’s title or description.
 
 
 ## Trigger a job using curl and your API token
@@ -46,7 +46,7 @@ workflows:
                 - beta
     jobs:
       - coverage
-```      
+```
 
 ## Manual approval
 

@@ -50,7 +50,7 @@ jobs:
     ...
 ```
 
-Alternatively, shell check can be configured without using the orb if you are using version 2 configuration: 
+Alternatively, shell check can be configured without using the orb if you are using version 2 configuration:
 
 ```yaml
 version: 2

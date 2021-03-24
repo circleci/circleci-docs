@@ -101,10 +101,10 @@ made it to the top of the priority list yet.
 
 Following are a few examples of projects (big and small) that build on CircleCI:
 
-- **[React](https://github.com/facebook/react)** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools). 
+- **[React](https://github.com/facebook/react)** - Facebook’s JavaScript based React is built with CircleCI (as well as other CI tools).
 - **[React Native](https://github.com/facebook/react-native/)** - Build native mobile apps using JavaScript and React.
 - **[Flow](https://github.com/facebook/flow/)** - Adds static typing to JavaScript to improve developer productivity and code quality.
-- **[Relay](https://github.com/facebook/relay)** - JavaScript framework for building data-driven React applications. 
+- **[Relay](https://github.com/facebook/relay)** - JavaScript framework for building data-driven React applications.
 - **[Vue](https://github.com/vuejs/vue)** -  Vue.js is a progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 - **[StoryBook](https://github.com/storybooks/storybook)** - Interactive UI component dev & test: React, React Native, Vue, Angular, Ember.
 - **[Electron](https://github.com/electron/electron)** - Build cross-platform desktop apps with JavaScript, HTML, and CSS.

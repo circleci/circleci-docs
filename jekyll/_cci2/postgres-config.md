@@ -28,9 +28,9 @@ version: 2
 jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
-    
+
     # Primary container image where all commands run
-    
+
     docker:
       - image: circleci/ruby:2.4.1-node
         auth:
@@ -40,9 +40,9 @@ jobs:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-    
+
     # Service container image available at `host: localhost`
-    
+
       - image: circleci/postgres:9.6.2-alpine
         auth:
           username: mydockerhub-user
@@ -50,7 +50,7 @@ jobs:
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
-        
+
     steps:
       - checkout
 
@@ -119,7 +119,7 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
+      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6-jessie
         auth:
@@ -133,7 +133,7 @@ jobs:
       - run:
           name: Install Ruby Dependencies
           command: bundle install
-      - run: 
+      - run:
           name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
@@ -313,4 +313,4 @@ VALUES (
 ## See also
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps. 
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

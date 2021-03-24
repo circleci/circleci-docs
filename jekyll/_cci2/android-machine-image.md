@@ -65,7 +65,7 @@ machine image both with and without orbs.
 
 ### Simple orb usage
 
-The below sample uses the Android orb to run a single job. 
+The below sample uses the Android orb to run a single job.
 
 ```yaml
 # .circleci/config.yaml
@@ -196,7 +196,7 @@ jobs:
                  exit 1
                fi
             }
-            run_with_retry 
+            run_with_retry
       - save_cache:
           key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
           paths:

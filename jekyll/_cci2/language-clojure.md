@@ -54,10 +54,10 @@ jobs: # basic units of work in a run
             - ~/.m2
           key: cci-demo-clojure-{{ checksum "project.clj" }}
       - run: lein do test, uberjar
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/uberjar/cci-demo-clojure.jar
           destination: uberjar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples     
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 
 {% endraw %}
@@ -107,7 +107,7 @@ We use the [CircleCI-provided Clojure image](https://circleci.com/docs/2.0/circl
 
 We set `JVM_OPTS` here in order to limit the maximum heap size; otherwise we'll run into out of memory errors. The standard container limit is 4 GB, but we leave some extra room for Leiningen itself as well as things the JVM keeps outside the heap. (You can avoid the Leiningen overhead by using `lein trampoline ...` in some cases.) If you have background containers for your database or queue, for example, consider those containers when you allocate memory for the main JVM heap.
 
-Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case. 
+Normally Leiningen expects to be run as a non-root user and will assume you're running as root by accident. We set the `LEIN_ROOT` environment variable to indicate that it's intentional in this case.
 
 ```yaml
     environment:

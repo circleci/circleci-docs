@@ -52,9 +52,9 @@ jobs:
 workflows:
   my-workflow:
     jobs:
-      - my-job        
-               
-         
+      - my-job
+
+
 ```
 
 ### Parameter syntax
@@ -62,9 +62,9 @@ workflows:
 
 A parameter can have the following keys as immediate children:
 
-Key Name | Description | Default value 
+Key Name | Description | Default value
 ---|---|---
-description | Optional. Used to generate documentation for your orb. | N/A 
+description | Optional. Used to generate documentation for your orb. | N/A
 type | Required. See **Parameter Types** in the section below for details. | N/A
 default | The default value for the parameter. If not present, the parameter is implied to be required. | N/A
 {: class="table table-striped"}

@@ -33,7 +33,7 @@ Consider taking a moment to look at the CircleCI [Pricing](https://circleci.com/
 
 ## Configuring your credit plan
 
-To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs. 
+To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
 
 ## Free plan
 

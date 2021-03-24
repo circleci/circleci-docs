@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This guide will help you get started with a Java application building with Gradle on CircleCI. 
+This guide will help you get started with a Java application building with Gradle on CircleCI.
 
 * TOC
 {:toc}
@@ -23,8 +23,8 @@ If you’re in a rush, just copy the sample configuration below into a [`.circle
 We are going to make a few assumptions here:
 
 * You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java-maven/).
-* You are using Java 11. 
-* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/). 
+* You are using Java 11.
+* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/).
 * Your application can be distributed as an all-in-one uberjar.
 
 
@@ -104,7 +104,7 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build 
+    - build
 ```
 {% endraw %}
 

@@ -65,7 +65,7 @@ If you are frequently pushing changes to a branch, you increase the chances of q
 
 To save time, you can configure CircleCI to automatically cancel any queued or running pipelines when a newer pipeline is triggered on that same branch.
 
-**Note:** Your project's default branch (usually `master`) will never auto-cancel builds. 
+**Note:** Your project's default branch (usually `master`) will never auto-cancel builds.
 
 ### Steps to enable auto-cancel for pipelines triggered by pushes to GitHub or the API
 {:.no_toc}

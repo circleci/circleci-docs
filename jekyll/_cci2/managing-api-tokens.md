@@ -61,7 +61,7 @@ DELETE in the form and click the Delete API Token button.
 
 ### Rotating Personal and Project API Tokens
 
-API Token rotation occurs when an old API token is replaced with a new token. 
+API Token rotation occurs when an old API token is replaced with a new token.
 
 Because API Tokens can be shared, passed around between employees and teams, and
 exposed inadvertently, it is always good practice to periodically regenerate new
@@ -72,7 +72,7 @@ employee leaves the company or when a token has been considered leaked.
 
 1. In the CircleCI application, go to your [User settings](https://app.circleci.com/settings/user).
 1. Click [Personal API Tokens](https://app.circleci.com/settings/user/tokens).
-1. Click the **X** in the **Remove** column for the token you wish to replace and confirm your deletion. 
+1. Click the **X** in the **Remove** column for the token you wish to replace and confirm your deletion.
 1. Click the Create New Token button.
 1. In the Token name field, type a new name for the old token you are rotating. It can be the same name given to the old token.
 1. Click the Add API Token button.

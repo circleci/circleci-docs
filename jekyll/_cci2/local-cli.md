@@ -15,17 +15,17 @@ version:
 
 The CircleCI CLI is a command line interface that leverages many of CircleCI's
 advanced and powerful tools from the comfort of your terminal. Some of the
-things you can do with the CircleCI CLI include: 
+things you can do with the CircleCI CLI include:
 
-- Debug and validate your CI config 
-- Run jobs locally 
+- Debug and validate your CI config
+- Run jobs locally
 - Query CircleCI's API
 - Create, publish, view and manage Orbs
 - Managing contexts
 
 This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
-legacy CLI does work in Server and can be installed. 
+legacy CLI does work in Server and can be installed.
 
 * TOC
 {:toc}
@@ -99,7 +99,7 @@ You can update to the newest version of the CLI using the following command: `ci
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
 
 ```sh
-circleci update 
+circleci update
 circleci switch
 ```
 
@@ -194,7 +194,7 @@ $ cat foo/bar/@baz.yml
 Is mapped to:
 
 ```yaml
-bar: 
+bar:
   baz: qux
 ```
 
@@ -263,10 +263,10 @@ workflows:
 
 # Original config.yml file:
 # version: 2.1
-# 
+#
 # orbs:
 #     hello: circleci/hello-build@0.0.5
-# 
+#
 # workflows:
 #     \"Hello Workflow\":
 #         jobs:
@@ -290,7 +290,7 @@ You will need to have [Docker](https://www.docker.com/products/docker-desktop) i
 ### Running a job
 {:.no_toc}
 
-The CLI allows you to run a single job from CircleCI on your desktop using Docker. 
+The CLI allows you to run a single job from CircleCI on your desktop using Docker.
 
 ```sh
 $ circleci local execute --job JOB_NAME

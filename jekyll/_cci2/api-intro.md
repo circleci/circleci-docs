@@ -14,7 +14,7 @@ The CircleCI API may be used to make API calls to retrieve detailed information 
 * [API v1.1 Reference](https://circleci.com/docs/api/v1/)
 * [API v2 Reference](https://circleci.com/docs/api/v2/)
 
-API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI Cloud users migrate their scripts to API v2 stable endpoints as soon as possible. 
+API v2 includes several powerful features (e.g. support for pipelines and pipeline parameters) that are unavailable in API v1.1. It is recommended that CircleCI Cloud users migrate their scripts to API v2 stable endpoints as soon as possible.
 
 CircleCI API v1.1 and portions of API v2 are supported and generally available. CircleCI expects to eventually End-Of-Life (EOL) API v1.1 in favor of API v2 as more API v2 endpoints are announced as stable. Further guidance on when CircleCI API v1.1 will be discontinued will be communicated at a future date.
 
@@ -80,7 +80,7 @@ For a complete list of all API v2 endpoints, please refer to the [API v2 Referen
 
 The table below describes the new endpoints that have been added to the CircleCI API for this updated v2 version.
 
-Endpoint       | Description                       
+Endpoint       | Description
 -----------|-------------------------------------------------------
 `GET /workflow/:id ` | This endpoint enables users to return an individual Workflow based on the `id` parameter being passed in the request
 `GET /workflow/:id/job` | This endoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.

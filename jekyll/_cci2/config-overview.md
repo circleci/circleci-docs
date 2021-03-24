@@ -19,7 +19,7 @@ an [executor type]({{ site.baseurl }}/2.0/executor-types/) for that job, either 
 
 ## Secrets, private keys, tokens, and scripts
 
-Encrypt and store secrets and private keys for your project by following the [environment variables]({{ site.baseurl }}/2.0/env-vars/) or [contexts]({{ site.baseurl }}/2.0/contexts/) documentation. Review the best practices for [using shell scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) to secure scripts and properly [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/) in your configuration.  
+Encrypt and store secrets and private keys for your project by following the [environment variables]({{ site.baseurl }}/2.0/env-vars/) or [contexts]({{ site.baseurl }}/2.0/contexts/) documentation. Review the best practices for [using shell scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) to secure scripts and properly [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/) in your configuration.
 
 ## Advanced test configuration
 

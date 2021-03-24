@@ -42,7 +42,7 @@ Start with the [Hello World doc]({{ site.baseurl }}/2.0/hello-world/), then add 
             echo "Probably copy-pasted from 'Execute Shell' on Jenkins"
 ```
 
-Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.           
+Refer to [Migrating From Jenkins]({{ site.baseurl }}/2.0/migrating-from-jenkins/) for conceptual differences between Jenkins and CircleCI.
 
 ### Does CircleCI 2.0 run inference commands?
 {:.no_toc}
@@ -287,8 +287,8 @@ You can choose to pay for premium features per active user, compute, and optiona
 - Docker Layer Caching (DLC) is paid for with credits per usage, similar to
   compute credits.
 
-  
-#### Why does CircleCI have per-active-user pricing? 
+
+#### Why does CircleCI have per-active-user pricing?
 {:.no_toc}
 
 Credit usage covers access to compute. We prefer to keep usage costs as low as possible to encourage frequent job runs, which is the foundation of a good CI practice. Per-active-user fees cover access to platform features and job orchestration. This includes features like dependency caching, artifact caching, and workspaces, all of which speed up build times without incurring additional compute cost.
@@ -350,7 +350,7 @@ The first credit card charge on the day you upgrade to a paid plan or change pai
 #### Are there credit plans for open source projects?
 {:.no_toc}
 
-Open source organizations **on our free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs. 
+Open source organizations **on our free plan** receive 400,000 free credits per month that can be spent on Linux open source projects, using a maximum of 4 concurrent jobs.
 
 If you build on macOS, we also offer organizations on our free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com. Free credits for macOS open source builds can be used on a maximum of 2 concurrent jobs per organization.
 
@@ -359,9 +359,9 @@ If you build on macOS, we also offer organizations on our free plan 25,000 free 
 
 CircleCI no longer offers discounts for open source customers on the Performance plan.
 
-#### Why does CircleCI charge for Docker layer caching? 
+#### Why does CircleCI charge for Docker layer caching?
 {:.no_toc}
- 
+
 Docker layer caching (DLC) reduces build times on pipelines where Docker images are
 built by only rebuilding Docker layers that have changed (read more about DLC
 [here]({{site.baseurl}})/2.0/docker-layer-caching). DLC costs 200 credits per
@@ -384,14 +384,14 @@ that are building Docker images, and reduces image build times by reusing the
 unchanged layers of the application image built during your job. If your
 pipeline does not include a job where Docker images are built, Docker layer
 caching will provide no benefit.
- 
+
 ---
 
 ### Container Based Plans
 
 #### How do I upgrade my container plan with more containers to prevent queuing?
 {:.no_toc}
-* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details. 
+* Linux: Go to the Settings > Plan Settings page of the CircleCI app to increase the number of containers on your Linux plan. Type the increased number of containers in the entry field under the Choose Linux Plan heading and click the Pay Now button to enter your payment details.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
@@ -405,7 +405,7 @@ Yes, the billing is associated with the organization. You can buy while within t
 {:.no_toc}
 A container is a 2 CPU 4GB RAM machine that you pay for access to. Containers may be used for concurrent tasks (for example, running five different jobs) or for parallelism (for example, splitting one job across five different tasks, all running at the same time). Both examples would use five containers.
 
-#### Why am I being charged for remote Docker spin up time? 
+#### Why am I being charged for remote Docker spin up time?
 {:.no_toc}
 When CircleCI spins up a remote docker instance, it requires the primary container to be running and spending compute. Thus while you are not charged for the remote docker instance itself, you are charged for the time that the primary container is up.
 

@@ -66,17 +66,17 @@ While the Jenkinsfile Converter attempts to directly translate steps, it does no
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
-Jenkinsfile Syntax | Approx. CircleCI Syntax | Status 
---- | --- | --- 
+Jenkinsfile Syntax | Approx. CircleCI Syntax | Status
+--- | --- | ---
 agent | [executor](https://circleci.com/docs/2.0/configuration-reference/#executors-requires-version-21) | Static
 post | [when attribute](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute) | See [when](https://circleci.com/docs/2.0/configuration-reference/#the-when-attribute)
 stages | [workflows](https://circleci.com/docs/2.0/workflows/) | Supported |
-steps | [step](https://circleci.com/docs/2.0/jobs-steps/#steps-overview) | Limited 
-environment | [environment](https://circleci.com/docs/2.0/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26) 
+steps | [step](https://circleci.com/docs/2.0/jobs-steps/#steps-overview) | Limited
+environment | [environment](https://circleci.com/docs/2.0/env-vars/) | [Unsupported](https://github.com/circleci/jenkinsfile-converter/issues/26)
 options | N/A | See [Supported Jenkins Plugins](#supported-jenkins-plugins)
-parameters | [parameters](https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration) | Unsupported 
-triggers | [cron](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) | Unsupported 
-stage | [job](https://circleci.com/docs/2.0/configuration-reference/#jobs) | Supported 
+parameters | [parameters](https://circleci.com/docs/2.0/reusing-config/#using-the-parameters-declaration) | Unsupported
+triggers | [cron](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow) | Unsupported
+stage | [job](https://circleci.com/docs/2.0/configuration-reference/#jobs) | Supported
 {: class="table table-striped"}
 
 ## Supported Jenkins plugins

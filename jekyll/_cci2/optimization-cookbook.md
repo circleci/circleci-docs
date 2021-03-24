@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to optimize your **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs. 
+The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to optimize your **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs.
 
 The recipes in this guide will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
 
@@ -50,7 +50,7 @@ jobs:
 
 Notice in the above example that you can use a `checksum` in the cache key. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) changes so the cache will be updated accordingly. Also note that the `restore_cache` example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
-**Note:** Before adding any caching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache. 
+**Note:** Before adding any caching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
 Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be used to optimize your config:
 
@@ -75,10 +75,10 @@ Let's take a closer look at the testing process in the figure above to better un
 
 The following steps were performed during testing:
 
-1. The build job created a Docker image, which contained only runtime dependencies. 
-2. The build job dumped the image to a file with `docker save`, and then persisted it in the workspace. 
+1. The build job created a Docker image, which contained only runtime dependencies.
+2. The build job dumped the image to a file with `docker save`, and then persisted it in the workspace.
 3. Two test jobs were run to restore the base image from the workspace.
-4. The test jobs built on this base image to create an image with all the extra modules required to run the tests. 
+4. The test jobs built on this base image to create an image with all the extra modules required to run the tests.
 5. The test jobs started dependencies, and the tests were finally initiated.
 
 Typically, performing setup once, and then performing `fan out` steps, is a traditional way to reduce resource usage; however, in this example, the `fan out` steps proved to be very expensive in the following ways:
@@ -109,7 +109,7 @@ Installing dependencies in the primary container on CircleCI, rather than relyin
 ### Test execution optimization
 {:.no_toc}
 
-Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time. 
+Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
 
 The figure below illustrates how overall these changes can reduce the total workflow time.
 
@@ -190,9 +190,9 @@ When you provide developers with a workflow that runs all of their tests in the 
 {%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
 endcomment %}
 
-A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers. 
+A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
 
-A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed. 
+A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed.
 
 For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
 
@@ -211,7 +211,7 @@ workflows:
 ```
 
 
-The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break. 
+The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
 
 For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
 

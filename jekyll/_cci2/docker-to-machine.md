@@ -13,7 +13,7 @@ version:
 This document contains some general guidelines and considerations to
 make when moving from the Docker executor to machine, or vice versa.
 
-* TOC 
+* TOC
 {:toc}
 
 ## Overview

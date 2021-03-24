@@ -44,8 +44,8 @@ jobs:
 {:.tab.machine.Server}
 ```
 jobs:
-  build: 
-    machine: 
+  build:
+    machine:
       image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
     steps:
       # Commands run in a Linux virtual machine environment
@@ -72,7 +72,7 @@ Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/exe
 
 ## Windows
 
-The syntax for using the Windows executor in your config differs depending on whether you are using: 
+The syntax for using the Windows executor in your config differs depending on whether you are using:
 
 * The cloud version of CircleCI, using config version 2.1 and the Windows orb.
 * Self-hosted installation of CircleCI Server with config version 2.0 – this option is an instance of using the `machine` executor with a Windows image – _Introduced in CircleCI Server v2.18.3_.

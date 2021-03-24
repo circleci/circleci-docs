@@ -10,7 +10,7 @@ version:
 
 CircleCI supports uploading directly to Artifactory.
 
-* TOC 
+* TOC
 {:toc}
 
 ## Deploy

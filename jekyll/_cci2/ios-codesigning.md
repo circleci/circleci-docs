@@ -22,7 +22,7 @@ correctly on CircleCI 2.0. It also assumes that you use Bundle and
 Fastlane, and have a `Gemfile`, `Appfile` and `Fastfile` checked into
 your repo.
 
-**Note:** CircleCI only officially supports Fastlane Match for codesigning. Other methods may be used, but are not guaranteed to work and are unsupported. 
+**Note:** CircleCI only officially supports Fastlane Match for codesigning. Other methods may be used, but are not guaranteed to work and are unsupported.
 
 **Note:** Setting up code signing on
 CircleCI 2.0 using Fastlane Match requires **adding a User key** to your

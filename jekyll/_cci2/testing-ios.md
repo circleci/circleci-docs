@@ -5,7 +5,7 @@ short-title: Testing iOS Applications on macOS
 categories: [platforms]
 description: Testing iOS applications on macOS
 order: 30
-version: 
+version:
 - Cloud
 ---
 
@@ -31,7 +31,7 @@ We announce the availability of new macOS containers, including Xcode betas, in 
 
 ### Beta image support
 
-We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release. 
+We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release.
 
 Unlike our stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
 
@@ -41,9 +41,9 @@ To read about our customer support policy regarding beta images, please check ou
 
 **Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel. 
+It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. 
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
 
 ## Supported Xcode versions
 
@@ -211,7 +211,7 @@ The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLan
 
 ### Code Signing with Fastlane Match
 
-We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment. 
+We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
 
 For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/).
 
@@ -255,7 +255,7 @@ Replace `2.6` with the version of Ruby required - you do not need to specify the
 
 Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
 
-To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). 
+To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
 
 If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
@@ -400,7 +400,7 @@ sudo gem install cocoapods
 
 We also recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
 
-**Note:** The previous S3 mirror we provided for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, we highly recommend switching to the CDN method described above. 
+**Note:** The previous S3 mirror we provided for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, we highly recommend switching to the CDN method described above.
 
 ### Optimizing Homebrew
 {:.no_toc}

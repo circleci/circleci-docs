@@ -283,7 +283,7 @@ workflows:
 
 ## Sample configuration with sequential workflow
 
-Following is a sample `.circleci/config.yml` file using the following configuration features: 
+Following is a sample `.circleci/config.yml` file using the following configuration features:
 
 * A sequential workflow
 * An orb (`version: 2.1`/Cloud config only) - the node orb handles caching automatically, but you can see saving and restoring caches in the `version: 2.0`/Server example
@@ -441,9 +441,9 @@ workflows:
 This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 ## Sample configuration with fan-in/fan-out workflow
-Below are two sample configurations for a Fan-in/Fan-out workflow. 
+Below are two sample configurations for a Fan-in/Fan-out workflow.
 
-For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details. 
+For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
 For the Cloud/`2.1` example, see the following workflow map:
 
@@ -730,7 +730,7 @@ workflows:
 ## Sample configuration with multiple executor types
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/)
-in the same workflow. 
+in the same workflow.
 
 In `Example-1` each push will build and test the project on Linux, Windows and macOS.
 

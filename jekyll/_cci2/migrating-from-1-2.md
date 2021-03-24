@@ -9,7 +9,7 @@ version:
 - Server v2.x
 ---
 
-This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist. 
+This document will give you a starting place for migrating from CircleCI 1.0 to 2.0 by using a copy of your existing 1.0 configuration file and replacing the old keys with the new keys if equivalents exist.
 
 * TOC
 {:toc}
@@ -56,13 +56,13 @@ The `config-translation` endpoint can help you quickly get started with converti
                username: mydockerhub-user
                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
-     The primary container is an instance of the first image listed. Your job's commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers. 
+     The primary container is an instance of the first image listed. Your job's commands run in this container and must be declared for each job. See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers.
      ```yaml
          machine: true
      ```
      See the Using Machine section of the [Choosing an Executor Type](https://circleci.com/docs/2.0/executor-types/#using-machine) document for details about the available VM images.
      ```yaml
-         macos: 
+         macos:
            xcode: 11.3.0
      ```
 
@@ -93,7 +93,7 @@ The `config-translation` endpoint can help you quickly get started with converti
            - run: echo "foo" > /tmp/test-data/foo
      ```
      If you do not have a `checkout` step, you must add this step to your `config.yml` file.
-     
+
 7. (Optional) Add  the `add_ssh_keys` step with fingeprint to enable SSH into builds, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) document for details.
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
@@ -112,15 +112,15 @@ refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
 1. To use the Workflows feature, split your build job into multiple jobs, each with a unique name. It might make sense to start by just splitting out a deploy job to prevent you from having to re-run the entire build when only the deployment fails.
- 
-2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circleci/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.  
+
+2. As a best practice, add lines for `workflows:`, `version: 2` and `<workflow_name>` at the *end* of the master `.circleci/config.yml` file, replacing `<workflow_name>` with a unique name for your workflow. **Note:** The Workflows section of the `config.yml` file is not nested in the config. It is best to put the Workflows at the end of the file because the Workflows `version: 2` is in addition to the `version:` key at the top of the `config.yml` file.
      ```
      workflows:
        version: 2
        <workflow_name>:
-     ```  
+     ```
 3. Add a line for the `jobs:` key under `<workflow_name>` and add a list of all of the job names you want to orchestrate. In this example, `build` and `test` will run concurrently.
- 
+
      ```
      workflows:
        version: 2
@@ -128,16 +128,16 @@ To increase the speed of your software development through faster feedback, shor
            jobs:
              - build
              - test
-     ```  
+     ```
 4. For jobs which must run sequentially depending on success of another job, add the `requires:` key with a nested list of jobs that must succeed for it to start. If you were using a `curl` command to start a job, Workflows enable you to remove the command and start the job by using the `requires:` key.
- 
+
      ```
       - <job_name>:
           requires:
             - <job_name>
      ```
 5. For jobs which must run on a particular branch, add the `filters:` key with a nested `branches` and `only` key. For jobs which must not run on a particular branch, add the `filters:` key with a nested `branches` and `ignore` key. **Note:** Workflows will ignore job-level branching, so if you have configured job-level branching and then add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
- 
+
      ```
      - <job_name>:
          filters:
@@ -147,7 +147,7 @@ To increase the speed of your software development through faster feedback, shor
          filters:
            branches:
              ignore: master
-     ```     
+     ```
 6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
 ## Search and replace deprecated 2.0 keys
@@ -159,7 +159,7 @@ To increase the speed of your software development through faster feedback, shor
       TZ: "America/Los_Angeles"
 ```
 
-- If your configuration modifies $PATH, add the path to your `.bashrc` file and replace 
+- If your configuration modifies $PATH, add the path to your `.bashrc` file and replace
 
 ```yaml
     environment:
@@ -170,7 +170,7 @@ With the following to load it into your shell (the file $BASH_ENV already exists
 
 ```yaml
     steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
       - run: some_program_inside_bin
 ```
 

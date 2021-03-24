@@ -26,7 +26,7 @@ keeping it available after the process has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
+Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
 
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
@@ -35,7 +35,7 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 Find links to the artifacts under the "Artifacts" tab on the **Job page**.
 Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
-There is a 3GB `curl` file size limit. 
+There is a 3GB `curl` file size limit.
 
 **Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
 
@@ -77,8 +77,8 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.  
-There is no limit on the number of `store_artifacts` steps a job can run.  
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.
+There is no limit on the number of `store_artifacts` steps a job can run.
 
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
@@ -101,7 +101,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
      ```C
      #include <stdlib.h>
-     
+
      int main(int argc, char **argv) {
          abort();
      }
@@ -125,7 +125,7 @@ jobs:
       - checkout
       - run: make
       - run: |
-          # tell the operating system to remove the file size limit on core dump files 
+          # tell the operating system to remove the file size limit on core dump files
           ulimit -c unlimited
           ./dump
       - run:

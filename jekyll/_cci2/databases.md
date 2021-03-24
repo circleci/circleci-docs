@@ -9,7 +9,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0. 
+This document describes how to use the official CircleCI pre-built Docker container images for a database service in CircleCI 2.0.
 
 * TOC
 {:toc}
@@ -19,11 +19,11 @@ This document describes how to use the official CircleCI pre-built Docker contai
 
 CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 
-The following example shows a 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The secondary image gives access to things like databases. 
+The following example shows a 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The secondary image gives access to things like databases.
 
 ## PostgreSQL database testing example
 
-In the primary image the config defines an environment variable with the `environment` key, giving it a URL. The URL tells it that it is a PostgreSQL database, so it will default to the PostgreSQL default port. This pre-built circleci image includes a database and a user already. The username is `postgres` and database is `circle_test`. So, you can begin with using that user and database without having to set it up yourself. 
+In the primary image the config defines an environment variable with the `environment` key, giving it a URL. The URL tells it that it is a PostgreSQL database, so it will default to the PostgreSQL default port. This pre-built circleci image includes a database and a user already. The username is `postgres` and database is `circle_test`. So, you can begin with using that user and database without having to set it up yourself.
 
 Set the POSTGRES_USER environment variable in your CircleCI config to `postgres` to add the role to the image as follows:
 
@@ -42,9 +42,9 @@ This Postgres image in the example is slightly modified already with `-ram` at t
 version: 2
 jobs:
   build:
-    
+
     # Primary container image where all commands run
-    
+
     docker:
       - image: circleci/python:3.6.2-stretch-browsers
         auth:
@@ -52,9 +52,9 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
-          
+
     # Service container image
-    
+
       - image: circleci/postgres:9.6.5-alpine-ram
         auth:
           username: mydockerhub-user
@@ -83,9 +83,9 @@ jobs:
 
 The `steps` run `checkout` first, then install the Postgres client tools. The `postgres:9.6.5-alpine-ram` image doesn't install any client-specific database adapters. For example, for Python, you might install [`psycopg2`](https://www.psycopg.org/) so that you can interface with the PostgreSQL database. See [Pre-Built CircleCI Services Images]({{ site.baseurl }}/2.0/circleci-images/#service-images) for the list of images and for a video of this build configuration.
 
-In this example, the config installs the PostgreSQL client tools to get access to `psql`.  **Note:** that `sudo` is run because the images do not run under the root account like most containers do by default. CircleCI has a circle account that runs commands by default, so if you want to do admin privileges or root privileges, you need to add `sudo` in front of your commands. 
+In this example, the config installs the PostgreSQL client tools to get access to `psql`.  **Note:** that `sudo` is run because the images do not run under the root account like most containers do by default. CircleCI has a circle account that runs commands by default, so if you want to do admin privileges or root privileges, you need to add `sudo` in front of your commands.
 
-Three commands follow the `postgresql-client-9.6` installation that interact with the database service. These are SQL commands that create a table called test, insert a value into that table, and select from the table. After committing changes and pushing them to GitHub, the build is automatically triggered on CircleCI and spins up the primary container. 
+Three commands follow the `postgresql-client-9.6` installation that interact with the database service. These are SQL commands that create a table called test, insert a value into that table, and select from the table. After committing changes and pushing them to GitHub, the build is automatically triggered on CircleCI and spins up the primary container.
 
 **Note:** CircleCI injects a number of convenience environment variables into the primary container that you can use in conditionals throughout the rest of your build. For example, CIRCLE_NODE_INDEX and CIRCLE_NODE_TOTAL are related to concurrent build environments. See the [Build Specific Environment Variables]({{ site.baseurl }}/2.0/env-vars/#built-in-environment-variables) document for details.
 
@@ -100,8 +100,8 @@ This section describes additional optional configuration for further customizing
 
 The default `circleci/postgres` Docker image uses regular persistent storage on disk.
 Using `tmpfs` may make tests run faster and may use fewer resources. To use a variant
-leveraging `tmpfs` storage, just append `-ram` to the `circleci/postgres` tag (i.e., 
-`circleci/postgres:9.6-alpine-ram`). 
+leveraging `tmpfs` storage, just append `-ram` to the `circleci/postgres` tag (i.e.,
+`circleci/postgres:9.6-alpine-ram`).
 
 PostGIS is also available and can be combined with the previous example:
 `circleci/postgres:9.6-alpine-postgis-ram`

@@ -26,7 +26,7 @@ To follow along with this document you will need:
 
 # Overview of the Windows executor
 
-The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor: 
+The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - Is VM-based to guarantee full job isolation.
 - Uses the Server Core version of Windows Server 2019 Datacenter Edition.
@@ -160,7 +160,7 @@ jobs:
       name: win/default
     steps:
       # default shell is Powershell
-      - run:            
+      - run:
          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
          shell: powershell.exe
       - run:
@@ -182,7 +182,7 @@ jobs:
     resource_class: windows.medium
     steps:
       # default shell is Powershell
-      - run:            
+      - run:
          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
          shell: powershell.exe
       - run:
@@ -346,7 +346,7 @@ Also, consider reading documentation on some of CircleCI’s features:
     * SDK 3.1.406 (x64)
     * SDK 3.0.100-preview7-012821
     * Runtime 3.0.0-preview6-27804-01
-    * SDK 2.2.401 
+    * SDK 2.2.401
     * Runtime 2.2.6
     * SDK 2.1.801
 * Git 2.22.0
@@ -354,7 +354,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Windows 10 SDK
     * 10.0.26624
     * 10.1.18362.1
-* Docker Engine - Enterprise version 18.09.7 
+* Docker Engine - Enterprise version 18.09.7
 * NuGet CLI 5.2.0.6090
 * Chocolatey v0.10.15
 * Azure Service Fabric

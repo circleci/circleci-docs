@@ -24,22 +24,22 @@ Note: When CircleCI runs your pipeline, the [`run` ](https://circleci.com/docs/2
 
 ### Parallelism
 
-If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can [run tests in parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) by spreading them across multiple machines. This requires specifying a parallelism level. 
+If your project has a large number of tests, it will need more time to run them on one machine. To reduce this time, you can [run tests in parallel]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) by spreading them across multiple machines. This requires specifying a parallelism level.
 
 Use either the CircleCI CLI to split test files or use environment variables to configure each parallel machine individually.
 
 
 ### Resource class
 
-It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file.  If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used. 
+It is possible to configure CPU and RAM resources for each job, allowing for efficient use of your resources. The [resource class]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) will need to be specified in the `.circleci/config.yml` file.  If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
 
 ### Cache
 
-Another popular feature is [caching]({{ site.baseurl }}/2.0/caching/). Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs. 
+Another popular feature is [caching]({{ site.baseurl }}/2.0/caching/). Caching is one of the most effective ways to make jobs faster on CircleCI by reusing the data from expensive fetch operations from previous jobs.
 
 ### Workflows
 
-CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) are a great feature that can increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. 
+CircleCI [Workflows]({{ site.baseurl }}/2.0/workflows/) are a great feature that can increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources.
 
 
 ## Operator features
@@ -56,14 +56,14 @@ CircleCI uses Nomad as the primary job scheduler in CircleCI 2.0. Refer to the [
 
 ### APIs
 
-The [CircleCI API]({{ site.baseurl }}/api/) is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI. 
+The [CircleCI API]({{ site.baseurl }}/api/) is a full-featured RESTful API that allows you to access all information and trigger all actions in CircleCI.
 
 ### Basic troubleshooting
 
-There are some [initial troubleshooting]({{ site.baseurl }}/2.0/troubleshooting/) steps to take if you are having problems with your CircleCI installation on your private server. 
+There are some [initial troubleshooting]({{ site.baseurl }}/2.0/troubleshooting/) steps to take if you are having problems with your CircleCI installation on your private server.
 
-If your issue is not addressed in the above article, generate a [support bundle](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/) for your installation and open a support ticket. 
+If your issue is not addressed in the above article, generate a [support bundle](https://help.replicated.com/docs/native/packaging-an-application/support-bundle/) for your installation and open a support ticket.
 
 ### Insights
 
-The [Insights page]({{ site.baseurl }}/2.0/insights/) in the CircleCI UI is a dashboard showing the health of all repositories you are following including median build time, median queue time, last build time, success rate, and parallelism. 
+The [Insights page]({{ site.baseurl }}/2.0/insights/) in the CircleCI UI is a dashboard showing the health of all repositories you are following including median build time, median queue time, last build time, success rate, and parallelism.

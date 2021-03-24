@@ -42,7 +42,7 @@ Read more:
 ## Environment variables
 
 * Question: How can I require a user to add an environment variable?
-  
+
 * Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user on how they can obtain their API key.
 
 Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
@@ -54,13 +54,13 @@ Read more:
 ## Supported programming languages
 
 * Question: What language do I use to write an orb?
-  
+
 * Answer: Orbs are packages of [CircleCI YAML configuration]({{site.baseurl}}/2.0/configuration-reference/).
 
 CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [executor]({{site.baseurl}}/2.0/executor-intro/) defined by either, the user if using a _command_ within a custom job, or by the orb author if using a [reusable job]({{site.baseurl}}/2.0/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
 
 * Question: What programming languages can I write my Command logic in?
-  
+
 * Answer: POSIX compliant bash is the most portable and universal language. This is the recommended option when you intend to share your orb. Orbs do, however, come with the flexibility and freedom to run other programming languages or tools.
 
 **Bash**

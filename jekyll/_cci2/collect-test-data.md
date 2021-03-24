@@ -9,9 +9,9 @@ version:
 - Server v2.x
 ---
 
-CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step. 
+CircleCI collects test metadata from XML files and uses it to provide insights into your job. This document describes how to configure CircleCI to output test metadata as XML for some common test runners and store reports with the `store_test_results` step.
 
-* TOC 
+* TOC
 {:toc}
 
 To see test results as artifacts, upload them using the `store_artifacts` step.
@@ -52,7 +52,7 @@ gem 'minitest-ci'
 - Django should be configured using the [django-nose](https://github.com/django-nose/django-nose) test runner.
 
 **Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
- 
+
 ## Metadata collection in custom test steps
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
@@ -115,7 +115,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
       - store_test_results:
           path: ~/cucumber
       - store_artifacts:
-          path: ~/cucumber      
+          path: ~/cucumber
 ```
 
 #### Maven Surefire Plugin for Java JUnit Results
@@ -134,7 +134,7 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit         
+          path: ~/test-results/junit
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
@@ -153,7 +153,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit         
+          path: ~/test-results/junit
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
@@ -176,7 +176,7 @@ A working `.circleci/config.yml` section for testing might look like this:
       - store_test_results:
           path: ~/junit
       - store_artifacts:
-          path: ~/junit          
+          path: ~/junit
 ```
 
 #### Mocha with nyc
@@ -301,7 +301,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
       - store_test_results:
           path: ~/reports
       - store_artifacts:
-          path: ~/reports          
+          path: ~/reports
 ```
 
 
@@ -322,7 +322,7 @@ A working `.circleci/config.yml` test section might look like this:
       - store_test_results:
           path: ~/reports
       - store_artifacts:
-          path: ~/reports          
+          path: ~/reports
 ```
 
 
@@ -341,7 +341,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
       - store_test_results:
           path: ~/phpunit
       - store_artifacts:
-          path: ~/phpunit          
+          path: ~/phpunit
 ```
 
 #### pytest
@@ -361,7 +361,7 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
           path: test-results
 
       - store_artifacts:
-          path: test-results    
+          path: test-results
 ```
 
 
@@ -419,7 +419,7 @@ Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure t
 
 #### trx2junit for Visual Studio / .NET Core Tests
 {:.no_toc}
-Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format. 
+Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
 A working `.circleci/config.yml` section might look like this:
 
@@ -459,7 +459,7 @@ A working `.circleci/config.yml` section might look like this:
           environment:
             JUNIT_REPORT_PATH: ./junit/
             JUNIT_REPORT_NAME: test-results.xml
-          when: always  
+          when: always
       - store_test_results:
           path: ./junit
       - store_artifacts:

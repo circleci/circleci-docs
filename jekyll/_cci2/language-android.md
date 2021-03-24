@@ -40,7 +40,7 @@ Lab](https://firebase.google.com/docs/test-lab). For more details, see the
 
 Let's walk through a sample configuration using the Android machine image. It is
 possible to use both orbs and to manually configure the use of the Android
-machine image to best suit your project. 
+machine image to best suit your project.
 
 ```yaml
 # .circleci/config.yaml
@@ -48,7 +48,7 @@ version: 2.1 # to enable orb usage, you must be using circleci 2.1
 # Declare the orbs you wish to use.
 # Android orb docs are available here:  https://circleci.com/developer/orbs/orb/circleci/android
 orbs:
-  android: circleci/android@1.0 
+  android: circleci/android@1.0
 workflows:
   test:
     jobs:
@@ -103,7 +103,7 @@ jobs:
       - run:
           name: Run Tests
           command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: app/build/reports
           destination: reports
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
@@ -199,9 +199,9 @@ jobs:
       - run:
           name: Test with Firebase Test Lab
           command: >
-            sudo gcloud firebase test android run \ 
-              --app <local_server_path>/<app_apk>.apk \ 
-              --test <local_server_path>/<app_test_apk>.apk \ 
+            sudo gcloud firebase test android run \
+              --app <local_server_path>/<app_apk>.apk \
+              --test <local_server_path>/<app_test_apk>.apk \
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
           name: Install gsutil dependency and copy test results data
@@ -224,7 +224,7 @@ See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for e
 
 You might run into out of memory (oom) errors with your build. To get acquainted
 with the basics of customizing the JVM's memory usage, consider reading the
-[Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document. 
+[Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document.
 
 If you are using [Robolectric](http://robolectric.org/) for testing you may need to make tweaks to gradle's
 use of memory. When the gradle vm is forked for tests it does not receive

@@ -21,7 +21,7 @@ or using partners.
 {:toc}
 
 
-# Viewing Coverage on CircleCI 
+# Viewing Coverage on CircleCI
 
 You can upload your code coverage reports directly to CircleCI. First, add a
 coverage library to your project and configure your build to write the coverage

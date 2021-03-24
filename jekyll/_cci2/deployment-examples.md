@@ -44,9 +44,9 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
 
 3. Use the orb's `sync` command to deploy. Note the use of workflows to deploy only if the `build` job passes and the current branch is `master`.
 
-    {% raw %}  
+    {% raw %}
     ```yaml
-    version: 2.1 
+    version: 2.1
 
     orbs:
       aws-s3: circleci/aws-s3@x.y.z # use the AWS S3 orb in your config
@@ -134,7 +134,7 @@ For detailed information about the AWS S3 orb, refer to the [CircleCI AWS S3 Orb
               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - run: # Install the AWS CLI if it is not already included in the docker image
-              name: Install awscli 
+              name: Install awscli
               command: sudo pip install awscli
           - run: # Deploy to S3 using the sync command
               name: Deploy to S3
@@ -159,7 +159,7 @@ orbs:
   aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your config
 
 workflows:
-  build_and_push_image: 
+  build_and_push_image:
     jobs:
       - aws-ecr/build-and-push-image: # Use the pre-defined `build-and-push-image` job
           dockerfile: <my-Docker-file>
@@ -181,7 +181,7 @@ Using the `build-and-push-image` job, as shown below requires the following env 
 {% raw %}
 
 ```yaml
-version: 2.1 
+version: 2.1
 
 orbs:
   aws-ecr: circleci/aws-ecr@x.y.z # Use the AWS ECR orb in your config
@@ -195,7 +195,7 @@ workflows:
           path: <path-to-my-Docker-file>
           profile-name: <my-profile-name>
           repo: ${MY_APP_PREFIX}
-          tag: '${CIRCLE_SHA1}' 
+          tag: '${CIRCLE_SHA1}'
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image # only run the deployment job once the build and push image job has completed
@@ -241,7 +241,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
 1. Whether your require a user or service principal login, you will need to provide environment variables for username, password and tennent to CircleCI. For user logins use env var names as follows: `AZURE_USERNAME`, `AZURE_PASSWORD` and `AZURE_TENANT`. For service principal logins use: `AZURE_SP`, `AZURE_SP_PASSWORD` and `AZURE_SP_TENANT`. {% include snippets/env-var-or-context.md %}
 
 2. Use the orb's `build-and-push-image` job to build your image and deploy it to ACR. Note the use of workflows to deploy only if the current branch is `master`.
-  
+
     {% raw %}
 
     ```yaml
@@ -250,7 +250,7 @@ For detailed information about the Azure ACR orb, including all options, refer t
     orbs:
       azure-acr: circleci/azure-acr@x.y.z # Use the Azure ACR orb in your config
 
-    workflows: 
+    workflows:
       build-deploy:
         jobs:
           - azure/build-and-push-image:
@@ -273,7 +273,7 @@ If pushing to your repo is required, see the [Adding Read/Write Deployment Keys 
 Once your project is set up to use Capistrano, you can run [deployment commands](https://github.com/capistrano/capistrano/blob/master/README.md#command-line-usage) within your CircleCI job steps as required.
 
 {% raw %}
- 
+
 ```yaml
 version: 2
 
@@ -321,7 +321,7 @@ version: 2.1
 
 orbs:
   cloudfoundry: circleci/cloudfoundry@x.y.z # Use the Cloud Foundry orb in your config
-  
+
 workflows:
   build_deploy:
     jobs:
@@ -337,7 +337,7 @@ workflows:
           org: your-org
           package: null
           space: your-space
-          validate_steps: 
+          validate_steps:
             # Call any orbs or custom commands that validate the health of deployed application before letting Green deploy/reroute proceed.
             # For example,  hitting a /health endpoint with curl and making sure the dark URL returns a 200.
 ```
@@ -565,10 +565,10 @@ jobs:
           name: Deploy Master to GKE
           command: |
           # Push Docker image to registry, update K8s deployment to use new image - `gcloud` command handles authentication and push all at once
-          sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello 
+          sudo /opt/google-cloud-sdk/bin/gcloud docker push us.gcr.io/${PROJECT_NAME}/hello
           # The new image is now available in GCR for the GCP infrastructure to access, next, change permissions:
           sudo chown -R ubuntu:ubuntu /home/ubuntu/.kube
-          # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image. 
+          # Use `kubectl` to find the line that specifies the image to use for our container, replace with image tag of the new image.
           # The K8s deployment intelligently upgrades the cluster by shutting down old containers and starting up-to-date ones.
           kubectl patch deployment docker-hello-google -p '{"spec":{"template":{"spec":{"containers":[{"name":"docker-hello-google","image":"us.gcr.io/circle-ctl-test/hello:'"$CIRCLE_SHA1"'"}]}}}}'
 
@@ -576,7 +576,7 @@ workflows:
   version: 2
   build-deploy:
     jobs:
-      - build-job 
+      - build-job
       - deploy-job:
           requires:
             - build-job # Only deploy once the build job has completed
@@ -604,7 +604,7 @@ to set up a project in your chosen language.
 3. Use the [Heroku orb](https://circleci.com/developer/orbs/orb/circleci/heroku) to keep your config simple. The `deploy-via-git` installs the Heroku CLI in the primary container, runs any pre deployment steps you define, deploys your application, then runs any post-deployment steps you define. See the Heroku orb page in the [orbs registry](https://circleci.com/developer/orbs/orb/circleci/heroku) for full details of parameters and options:
 
     {% raw %}
-    
+
     ```yaml
     version: 2.1
 
@@ -640,7 +640,7 @@ to set up a project in your chosen language.
 4. Add steps to your deployment job to checkout and deploy your code. You can specify which branch you would like to deploy, in this example we specify the master branch and deploy using a `git push` command.
 
     {% raw %}
-    
+
     ```yaml
     version: 2
 
@@ -711,7 +711,7 @@ Setting up CircleCI to publish packages to the npm registry makes it easy for pr
           - checkout
           - run:
               name: Publish to NPM
-              command: | 
+              command: |
                 npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
                 npm publish
 
@@ -751,7 +751,7 @@ To configure CircleCI to deploy your application over SSH, follow the steps belo
 3. In your `.circleci/config.yml`, create a `deploy` job and add a command to deploy the master branch.
 
     {% raw %}
-    
+
     ```yaml
     version: 2
 

@@ -176,7 +176,7 @@ our test results. Note, this environment variable is set for the entirety of the
 Now we need to add several `steps` within the `build` job. Steps make up the bulk of a job.
 
 Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step
-to check out source code. 
+to check out source code.
 
 ```yaml
     steps:
@@ -278,7 +278,7 @@ to inspect them manually.
 ```
 
 
-Finally, we specify the workflow block. This is not mandatory (as we only have one job to sequence) but it is recommended. 
+Finally, we specify the workflow block. This is not mandatory (as we only have one job to sequence) but it is recommended.
 
 ```yaml
 

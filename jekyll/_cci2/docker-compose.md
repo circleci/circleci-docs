@@ -12,7 +12,7 @@ version:
 
 This document describes how to install and use `docker-compose`.
 
-* TOC 
+* TOC
 {:toc}
 
 The `docker-compose` utility is [pre-installed in the CircleCI convenience
@@ -21,7 +21,7 @@ can install it into your [primary container][primary-container] during the job
 execution with the Remote Docker Environment activated by adding the following
 to your [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
-``` 
+```
       - run:
           name: Install Docker Compose
           command: |
@@ -45,13 +45,13 @@ Then, to activate the Remote Docker Environment, add the `setup_remote_docker` s
 
 This step enables you to add `docker-compose` commands to build images:
 
-``` 
+```
 docker-compose build
 ```
 
 Or to run the whole system:
 
-``` 
+```
 docker-compose up -d
 ```
 
@@ -69,9 +69,9 @@ In the following example, the whole system starts, then verifies it is running a
 
 ## Example project
 
-See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects. 
+See the [Example docker-compose Project](https://github.com/circleci/cci-demo-docker/tree/docker-compose) on GitHub for a demonstration and use the [full configuration file](https://github.com/circleci/cci-demo-docker/blob/docker-compose/.circleci/config.yml) as a template for your own projects.
 
-**Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network. 
+**Note**: The primary container runs in a separate environment from Remote Docker and the two cannot communicate directly. To interact with a running service, use docker and a container running in the service's network.
 
 ## Using docker compose with machine executor
 
@@ -80,9 +80,9 @@ If you want to use docker compose to manage a multi-container setup with a docke
 
 ## Using docker compose with docker executor
 
-Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host. 
+Using `docker` combined with `setup_remote_docker` provides a remote engine similar to the one created with docker-machine, but volume mounting and port forwarding do **not** work the same way in this setup. The remote docker daemon runs on a different system than the docker CLI and docker compose, so you must move data around to make this work. Mounting can usually be solved by making content available in a docker volume. It is possible to load data into a docker volume by using `docker cp` to get the data from the CLI host into a container running on the docker remote host.
 
-This combination is required if you want to build docker images for deployment. 
+This combination is required if you want to build docker images for deployment.
 
 ## Limitations
 

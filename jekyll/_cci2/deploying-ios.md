@@ -66,7 +66,7 @@ app_identifier "com.example.HelloWorld"
 
 ### Deploying to the App Store
 
-The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The `deliver` action provided by Fastlane is a powerful tool that automates the App Store submission process. 
+The example below shows a basic lane to build, sign and upload a binary to App Store Connect. The `deliver` action provided by Fastlane is a powerful tool that automates the App Store submission process.
 
 Deliver also allows various options such as automatic uploading of metadata and screenshots (which can be generated with the [screenshot](https://docs.fastlane.tools/actions/snapshot/) and [frameit](https://docs.fastlane.tools/actions/frameit/) actions). For further configuration, refer to the Fastlane [documentation for deliver](https://docs.fastlane.tools/actions/deliver/).
 
@@ -152,7 +152,7 @@ Firebase is a distribution service from Google. Deploying to Firebase is simplif
 
 ### Fastlane Plugin Setup
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`. 
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin firebase_app_distribution`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
 
 **Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
 
@@ -226,7 +226,7 @@ Visual Studio App Center, formally HockeyApp, is a distribution service from Mic
 
 ### Fastlane Plugin Setup
 
-To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin appcenter`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`. 
+To set up the plugin for your project, On your local machine open your project directory in Terminal and run the command `fastlane add_plugin appcenter`. This will install the plugin and add the required information to `fastlane/Pluginfile` and your `Gemfile`.
 
 **Note:** It is important that both of these files are checked into your git repo so that this plugin can be installed by CircleCI during the job execution via a `bundle install` step.
 
@@ -238,7 +238,7 @@ First, the app needs to be created in VS App Center.
 2. At the top-right of the page, click on "Add New", then select "Add New App"
 3. Fill out the required information in the form as required
 
-Once this is complete you will need to generate an API token to allow Fastlane to upload to App Center. 
+Once this is complete you will need to generate an API token to allow Fastlane to upload to App Center.
 
 1. Go to the [API Tokens](https://appcenter.ms/settings/apitokens) section in Settings
 2. Click on "New API Token"

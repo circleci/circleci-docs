@@ -14,7 +14,7 @@ Next, you will need to manually copy over all of your project settings including
 
 **Note:** It is not possible to bring your projects' build histories from SaaS; you will have to re-add all of your projects to your Server installation.
 
-Your 2.0 `config.yml` files should work as-is on Server, assuming they are working on SaaS. There are small differences between the 1.0 build environments that may result in some 1.0 configs not translating 100% from SaaS to Server. 
+Your 2.0 `config.yml` files should work as-is on Server, assuming they are working on SaaS. There are small differences between the 1.0 build environments that may result in some 1.0 configs not translating 100% from SaaS to Server.
 
 Custom `machine` executor AMIs and configurable instance types are defined in a specific way, so consider how your teams may be using [configurable resources](https://circleci.com/docs/2.0/configuration-reference/#resource_class) (`resource_class`) on SaaS when defining your Server build cluster.
 

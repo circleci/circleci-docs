@@ -5,7 +5,7 @@ short-title: "Hello World On MacOS"
 description: "First macOS project on CircleCI 2.0"
 categories: [getting-started]
 order: 4
-version: 
+version:
 - Cloud
 ---
 
@@ -81,22 +81,22 @@ provide a more in-depth overview of how a `config.yml` works.
 
 Since this is a general introduction to building on MacOs, the `config.yml` above example covers the following:
 
-- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use 
+- Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use
 - Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
 - Running tests with Xcode
 - Building our application
 - Compressing our application and storing it with the [`store_artifacts`]({{
   site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
-  
+
 You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/).
 
 ## Xcode Cross Compilation
 
 ### Universal Binaries
-Xcode currently supports the creation of universal binaries which can be run on both x86_64 and ARM64 CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables. 
+Xcode currently supports the creation of universal binaries which can be run on both x86_64 and ARM64 CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables.
 
 ### Extracting Unwanted Architectures
-Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility. 
+Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
 
 Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
 

@@ -94,7 +94,7 @@ In this example, Snapcraft automatically looks for login credentials in `.snapcr
 
 `snapcraft push *.snap` by default will upload the snap to the Snap Store, run any store checks on the server side, and then stop. The snap won't be "released" meaning users won't automatically see the update. The snap can be published locally with the `snap release <release-id>` command or by logging into the Snap Store and clicking the release button.
 
-In typical CircleCI fashion, we can go fully automated (as in the above example) but using the `--release <channel>` flag. This uploads the snap, does Store side verification, and then will automatically release the snap in the specified channels. 
+In typical CircleCI fashion, we can go fully automated (as in the above example) but using the `--release <channel>` flag. This uploads the snap, does Store side verification, and then will automatically release the snap in the specified channels.
 
 
 ## Workflows

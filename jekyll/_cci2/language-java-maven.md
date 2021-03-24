@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-This guide will help you get started with a Java application building with Maven on CircleCI. 
+This guide will help you get started with a Java application building with Maven on CircleCI.
 
 * TOC
 {:toc}

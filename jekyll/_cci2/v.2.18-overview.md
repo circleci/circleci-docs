@@ -16,7 +16,7 @@ This document provides a summary of features and product notes for the release o
 
 ## Notes and best practices
 
-* We now require a minimum 32GB of RAM for the Services Machine. 
+* We now require a minimum 32GB of RAM for the Services Machine.
 * We have made some changes to our Redis configuration. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager.
 * We have also made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to 2.18.
 
@@ -36,14 +36,14 @@ Metric | Description
 --- | ---
 `circle.backend.action.upload-artifact-error` | Tracks how many times an artifact has failed to upload
 `circle.build-queue.runnable.builds` | Track how many builds flowing through the system are considered runnable
-`circle.dispatcher.find-containers-failed` | Track how many 1.0 builds 
+`circle.dispatcher.find-containers-failed` | Track how many 1.0 builds
 `circle.github.api_call` | Tracks how many api calls CircleCI is making to GitHub
 `circle.http.request` | Tracks the response codes to CircleCi requests
 `circle.nomad.client_agent.*` | Tracks nomad client metrics
-`circle.nomad.server_agent.*` | Tracks how many nomad servers there are 
+`circle.nomad.server_agent.*` | Tracks how many nomad servers there are
 `circle.run-queue.latency` | Tracks how long it takes for a runnable build to be accepted
-`circle.state.container-builder-ratio` | Keeps track of how many containers exist per builder ( 1.0 only ) 
-`circle.state.lxc-available` | Tracks how many containers are available ( 1.0 only ) 
+`circle.state.container-builder-ratio` | Keeps track of how many containers exist per builder ( 1.0 only )
+`circle.state.lxc-available` | Tracks how many containers are available ( 1.0 only )
 `circle.state.lxc-reserved` | Tracks how many containers are reserved/in use ( 1.0 only )
 `circleci.cron-service.messaging.handle-message` | Provides timing and counts for RabbitMQ messages processed by the `cron-service`
 `circleci.grpc-response` | Tracks latency over the system grpc system calls
@@ -54,12 +54,12 @@ Metric | Description
 
 <br>
 
-* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.  
+* You can now provide individual AMIs for both Remote Docker and machine executor jobs. Previously we provided the option for a single custom AMI to be used across both, but with v2.18, this expanded customization gives you greater control over versioning and dependencies to meet your individual CICD needs. See [the VM Service guide]({{ site.baseurl }}/2.0/vm-service/) for more information.
 
 ## Fixed in release 2.18
 
 * Additional fixes around contexts and org renames.
-* Fixed an issue where occasionally volumes would fail to attach to spun up Remote Docker/`machine` instances. 
+* Fixed an issue where occasionally volumes would fail to attach to spun up Remote Docker/`machine` instances.
 * Fixed an issue where the CircleCI integration could not be installed on JIRA instances with the jira.com subdomain.
 * Fixed an issue where the Workflows page would still point to an old repo after renaming an organization.
 * Fixed an issue where the Workflows UI would fail to refresh data automatically.

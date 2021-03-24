@@ -13,7 +13,7 @@ This document provides a summary of features and product notes for the release o
 
 - We are excited to announce that you can now distribute your data and workload external to the Services Machine. The following services can be externalized; MongoDB, Redis, Nomad Server, RabbitMQ, Postgres and Vault. Contact your CSM for the latest documentation.
 
-- Custom Metrics can now be accomplished via a Telegraf Output Configuration File. See the Monitoring chapter of the Operations Guide. 
+- Custom Metrics can now be accomplished via a Telegraf Output Configuration File. See the Monitoring chapter of the Operations Guide.
 
 - Users can now receive email notifications about Workflows.
 

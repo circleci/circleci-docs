@@ -24,7 +24,7 @@ This document provides a step-by-step tutorial for getting your first successful
 
 Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
 
-1. Navigate to GitHub and [create a new repository](https://github.com/new). 
+1. Navigate to GitHub and [create a new repository](https://github.com/new).
 1. Input the name of your repository, in this case "hello-world", then click
 **Initialize this repository with a README**. Finally, click **Create repository**.
 
@@ -39,28 +39,28 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
 1. If you created your new repository under an organization you will need to
    select the organization name when you login to CircleCI.
 1. Once on the Project page, find the project you are using, in our case
-  `hello-world`, and click **Set Up Project**. 
-  
+  `hello-world`, and click **Set Up Project**.
+
 1. On the following screen, choose a language from the dropdown to get a
   pre-populated config.yml file with suggested best-practices for your project.
   For this example, because we have an empty repository, we will use the `Hello
-  World` configuration example at the bottom of the list. 
+  World` configuration example at the bottom of the list.
 
     ![Getting a sample configuration]( {{ site.baseurl }}/assets/img/docs/getting-started--sample-config.png){:.img--bordered}
-  
-    **Note:** Based on which language you choose you can view related 
-    documentation in the sidebar on the right of the screen 
+
+    **Note:** Based on which language you choose you can view related
+    documentation in the sidebar on the right of the screen
 
 1. Click **Commit and Run**. This will create a file `.circleci/config.yml` at
    the root of your repository on a new branch called `circle-ci-setup`. If you
    are happy with this configuration you can merge it into your main branch
-   later, or continue to make changes. 
+   later, or continue to make changes.
 
 ## Digging into your first pipeline
 
 You should see your pipeline start to run automatically—and pass! So, what just
 happened? Click on the green **Success** button on your pipeline to investigate
-the following parts of the run: 
+the following parts of the run:
 
 ![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
@@ -68,7 +68,7 @@ the following parts of the run:
    listing the jobs that ran. If this is your first build, you probably only ran
    **one job**  (which automatically runs inside **one workflow**).  In our
    case, we only ran one job, called `welcome/run`. Click on `welcome/run` and let's
-   investigate the steps of our job. 
+   investigate the steps of our job.
 
    ![Investigate build]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png)
 
@@ -77,7 +77,7 @@ the following parts of the run:
    help provide some defaults for this project. By using an orb, we can get
    quick access to common configuration. In this case,
    `circleci/welcome-orb@0.4.1` provides a "pre-built" job you can run which
-   simply greets the user. 
+   simply greets the user.
 
 1. **Views step results:** Every job is made up of a series of steps - some
    steps, like
@@ -86,7 +86,7 @@ the following parts of the run:
    a specific purpose. Because we are using the `welcome` orb, we don't see
    custom steps; they are configured in the orb. But no problem! We can view the
    [source of an
-   orb](https://circleci.com/developer/orbs/orb/circleci/welcome-orb) online. 
+   orb](https://circleci.com/developer/orbs/orb/circleci/welcome-orb) online.
 
 Even though there was no actual source code in your repo, and no actual tests
 configured in your `config.yml`, CircleCI considers your build to have
@@ -95,7 +95,7 @@ code](https://en.wikipedia.org/wiki/Exit_status) of 0). Most projects are far
 more complicated, oftentimes with multiple Docker images and multiple steps,
 including a large number of tests. You can learn more about all the possible
 steps one may put in a `config.yml` file in the [Configuration
-Reference](https://circleci.com/docs/2.0/configuration-reference). 
+Reference](https://circleci.com/docs/2.0/configuration-reference).
 
 ### Breaking your build!
 {:.no_toc}
@@ -104,7 +104,7 @@ Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
 GitHub, it is possible to edit files directly. Use the URL below and substitute
 the name of your repository and username (replace the text with `{brackets}`) and
 then paste it in your browser. If you are already familiar with Git, use your
-text-editor and push your changes with git. 
+text-editor and push your changes with git.
 
 `https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
 
@@ -136,19 +136,19 @@ repository, running `npm run test`, a Node script, causes our configuration to
 fail.  How would we fix this? You would need to setup a Node project in your
 repository;  a topic for another tutorial. You can view several [demo
 applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
-setting up CircleCI with various languages and frameworks. 
+setting up CircleCI with various languages and frameworks.
 
 ## Using the workflows functionality
 {:.no_toc}
 
 You do not have to use orbs to use CircleCI. The following example details how
 to create a custom configuration that also uses the [workflow
-feature]({{site.baseurl}}/2.0/workflows) of CircleCI. 
+feature]({{site.baseurl}}/2.0/workflows) of CircleCI.
 
 1. Take a moment and read the comments in the code block below. Of course, we
 do not want to be copying and pasting code without understanding what we are
 doing. Now, to see Workflows in action, edit your `.circleci/config.yml` file
-and copy and paste the following text into it.  
+and copy and paste the following text into it.
 
    ```yaml
    version: 2
@@ -199,7 +199,7 @@ Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 Each workflow has an associated workspace which can be used to transfer files to
 downstream jobs as the workflow progresses. You can use workspaces to pass along
 data that is unique to this run and which is needed for downstream jobs. Try
-updating `config.yml` to the following: 
+updating `config.yml` to the following:
 
 ```yml
 version: 2
@@ -220,7 +220,7 @@ jobs:
           root: my_workspace
           # Must be relative path from root
           paths:
-            - echo-output      
+            - echo-output
   two:
     docker:
       - image: circleci/ruby:2.4.1
@@ -229,7 +229,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: echo "A more familiar hi"  
+      - run: echo "A more familiar hi"
       - attach_workspace:
           # Must be absolute path or relative path from working_directory
           at: my_workspace
@@ -257,7 +257,7 @@ Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using
 
 If you are comfortable with the terminal, you can SSH directly into your
 CircleCI jobs to troubleshoot issues with your builds by rerunning your {%
-comment %} TODO: Job {% endcomment %}build with the SSH enabled option. 
+comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 
 *Note that you will need to add your SSH keys to your GitHub account:
 <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
@@ -287,14 +287,14 @@ cat <file_name>      # show me the contents of the file <file_name>
 
 It is easy for teammates and collaborators to view and follow your projects.
 Teammates can make a free CircleCI account at any time to view your pipelines,
-even if they are not committing any code. 
+even if they are not committing any code.
 
 ## See also
 {:.no_toc}
 
 [Blog
 post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)
-on how to validate the CircleCI `config.yml` on every commit with a git hook. 
+on how to validate the CircleCI `config.yml` on every commit with a git hook.
 
 ### CircleCI
 {:.no_toc}
@@ -307,7 +307,7 @@ on how to validate the CircleCI `config.yml` on every commit with a git hook.
 {:.no_toc}
 
 * [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
-* [Best Practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices) 
+* [Best Practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices)
 
 ### YAML
 {:.no_toc}

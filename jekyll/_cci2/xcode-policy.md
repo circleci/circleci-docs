@@ -5,7 +5,7 @@ short-title: CircleCI Xcode Image Release, Update and Deprecation Policy
 categories: [platforms]
 description: CircleCI Xcode Image Release, Update and Deprecation Policy
 order: 31
-version: 
+version:
 - Cloud
 ---
 
@@ -69,7 +69,7 @@ To read about our customer support policy regarding beta images, please check ou
 
 We closely track and monitor Apple’s Xcode releases and always endeavor to release new images as quickly as possible. We can not provide an official SLA turnaround time for this as it is highly dependent on any changes made in Xcode and macOS.
 
-New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes and will be added to the table of [Xcode versions in the documentation](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions). 
+New images are always announced on our [Discuss site](https://discuss.circleci.com/c/announcements/39) along with release notes and will be added to the table of [Xcode versions in the documentation](https://circleci.com/docs/2.0/testing-ios/#supported-xcode-versions).
 
 ## macOS versions
 

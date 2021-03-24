@@ -4,7 +4,7 @@ title: Testing macOS Applications
 short-title: Testing macOS Applications
 categories: [platforms]
 description: Testing macOS Applications
-order: 
+order:
 ---
 
 This document describes how to configure CircleCI for macOS app UI testing.
@@ -25,7 +25,7 @@ To test a macOS app, the Xcode Runner requires the ability to take control of th
 
 Apple does not provide an alternative command line based tool for granting permissions, but there is a workaround. By manually modifying the permissions database, we can insert new permissions which will allow Xcode Helper to interact with apps. This file, called `TCC.db`, is responsible for holding information about the permissions that have been requested and granted, or denied, for each app.
 
-There are two unique `TCC.db` files in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime. 
+There are two unique `TCC.db` files in use. The first copy resides in the home directory `~/Library/Application Support/com.apple.TCC/TCC.db` and the second is in `/Library/Application Support/com.apple.TCC/TCC.db`. When adding, or modifying, permissions we need to edit both of these files to ensure the permissions are available at runtime.
 
 While it is possible to write to the copy that is located in the home directory, it is not possible to write to `/Library/Application Support/com.apple.TCC/TCC.db` with System Integrity Protection enabled (since macOS Mojave). On CircleCI, all images from Xcode 11.7 and up have System Integrity Protection disabled. Attempting to write to `TCC.db` on an image with System Integrity Protection enabled will cause a job failure.
 
@@ -74,7 +74,7 @@ workflows:
 
 ### Configuring Fastlane
 
-Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app. 
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app.
 
 A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/) (the code signing documentation talks about iOS but it is also applicable to macOS).
 
@@ -98,7 +98,7 @@ A fully configured sample project can be found [on GitHub](https://github.com/Ci
 
 ## Working with the macOS Orb
 
-The `TCC.db` file is simply an SQLite database, so this makes it easy to inject new permissions, or modify existing ones, during a job. 
+The `TCC.db` file is simply an SQLite database, so this makes it easy to inject new permissions, or modify existing ones, during a job.
 
 While it can be written to manually with `sqlite3` commands, we encourage the use of the [macOS orb](https://circleci.com/developer/orbs/orb/circleci/macos) to simplify this. The examples in this section are all based on using the orb.
 
@@ -124,13 +124,13 @@ jobs:
 Sample output:
 
 ```bash
-client              service                          allowed   
+client              service                          allowed
 ------------------  -------------------------------  ----------
-com.apple.Terminal  kTCCServiceSystemPolicyAllFiles  1         
-com.apple.Terminal  kTCCServiceDeveloperTool         1                
-/usr/sbin/sshd      kTCCServiceAccessibility         1         
-com.apple.systemev  kTCCServiceAccessibility         1         
-com.apple.Terminal  kTCCServiceAccessibility         1         
+com.apple.Terminal  kTCCServiceSystemPolicyAllFiles  1
+com.apple.Terminal  kTCCServiceDeveloperTool         1
+/usr/sbin/sshd      kTCCServiceAccessibility         1
+com.apple.systemev  kTCCServiceAccessibility         1
+com.apple.Terminal  kTCCServiceAccessibility         1
 ```
 
 This command generates two steps; one lists the contents of the user `TCC.db` and one lists the system `TCC.db`.
@@ -185,7 +185,7 @@ jobs:
 
 ### Granting new permissions
 
-The orb can be used to add custom permissions with the `add-permission` command. The following example grants Screen Capture permissions to Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters: 
+The orb can be used to add custom permissions with the `add-permission` command. The following example grants Screen Capture permissions to Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters:
 
 ```yaml
 version: 2.1
@@ -206,7 +206,7 @@ jobs:
 
 ### Removing a permission
 
-In the unlikely event that a permission needs to be removed during a job, use the `delete-permission` command. In the following example, we are removing Screen Capture permissions from Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters: 
+In the unlikely event that a permission needs to be removed during a job, use the `delete-permission` command. In the following example, we are removing Screen Capture permissions from Terminal. The Bundle ID and the [permission](#listing-permission-types) type are both required parameters:
 
 ```yaml
 version: 2.1

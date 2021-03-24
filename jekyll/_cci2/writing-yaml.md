@@ -126,7 +126,7 @@ You can also merge multiple maps.
 name: &harry_name
   first_name: Harry
   last_name: Potter
-  
+
 address: &harry_address
   street: 4, Privet Drive
   district: Little Whinging

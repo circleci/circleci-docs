@@ -5,16 +5,16 @@ short-title: "Pipeline Variables"
 description: "Detailed information about Pipeline variables, parameters and values"
 categories: [getting-started]
 order: 1
-version: 
+version:
 - Cloud
 ---
 
-Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher. 
+Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher.
 
-There are two types of pipeline variables: 
+There are two types of pipeline variables:
 
 * **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
-* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API. 
+* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API.
 
 ## Pipeline values
 
@@ -56,7 +56,7 @@ jobs:
 
 ## Pipeline parameters in configuration
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. 
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file.
 
 Pipeline parameters support the following types:
 * string
@@ -64,9 +64,9 @@ Pipeline parameters support the following types:
 * integer
 * enum
 
-See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details. 
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details.
 
-Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`. 
+Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
 
@@ -114,7 +114,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 ## The scope of pipeline parameters
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability. 
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability.
 
 
 ## Config processing stages and parameter scopes

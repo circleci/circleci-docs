@@ -65,7 +65,7 @@ Details about your storage and network transfer usage can be viewed on your Plan
 
 ### How to manage your storage and network transfer use
 
-There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage. 
+There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage.
 
 Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
 
@@ -111,9 +111,9 @@ Notice in the above example that best practices are not being followed. `brew-{{
 
 Which will only change if the list of requested dependencies has changed. If you find that this is not uploading a new cache often enough, include the version numbers in your dependencies.
 
-* Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely. 
+* Let your cache be slightly out of date. In contrast to the suggestion above where we ensured that a new cache would be uploaded any time a new dependency was added to your lockfile or version of the dependency changed, use something that tracks it less precisely.
 
-* Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well. 
+* Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
 
 #### Uploading large artifacts
 

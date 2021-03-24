@@ -34,19 +34,19 @@ Workflows may appear with one of the following states:
 
 | State | Description |
 |-------|-------------|
-| RUNNING | Workflow is in progress | 
-| NOT RUN | Workflow was never started | 
-| CANCELLED | Workflow was cancelled before it finished | 
-| FAILING | A job in the workflow has failed | 
-| FAILED | One or more jobs in the workflow failed | 
-| SUCCESS | All jobs in the workflow completed successfully | 
-| ON HOLD | A job in the workflow is waiting for approval | 
-| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project | 
+| RUNNING | Workflow is in progress |
+| NOT RUN | Workflow was never started |
+| CANCELLED | Workflow was cancelled before it finished |
+| FAILING | A job in the workflow has failed |
+| FAILED | One or more jobs in the workflow failed |
+| SUCCESS | All jobs in the workflow completed successfully |
+| ON HOLD | A job in the workflow is waiting for approval |
+| NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project |
 
 ### Limitations
 {:.no_toc}
 
-* Projects that have pipelines enabled may use the CircleCI API to trigger workflows. 
+* Projects that have pipelines enabled may use the CircleCI API to trigger workflows.
 * Config without workflows requires a job called `build`.
 
 Refer to the [Workflows]({{ site.baseurl }}/2.0/faq/#workflows) section of the FAQ for additional information and limitations.
@@ -168,9 +168,9 @@ See the [Sample Fan-in/Fan-out Workflow config](https://github.com/CircleCI-Publ
 ## Holding a workflow for a manual approval
 
 Workflows can be configured to wait for manual approval of a job before
-continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow. 
+continuing to the next job. Anyone who has push access to the repository can click the Approval button to continue the workflow.
 To do this, add a job to the `jobs` list with the
-key `type: approval`. Let's look at a commented config example. 
+key `type: approval`. Let's look at a commented config example.
 
 ```yaml
 # ...
@@ -192,7 +192,7 @@ workflows:
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
-      # On approval of the `hold` job, any successive job that requires the `hold` job will run. 
+      # On approval of the `hold` job, any successive job that requires the `hold` job will run.
       # In this case, a user is manually triggering the deploy job.
       - deploy:
           requires:
@@ -214,7 +214,7 @@ Some things to keep in mind when using manual approval in a workflow:
 - All jobs that are to run after a manually approved job _must_ `require:` the name of that job. Refer to the `deploy:` job in the above example.
 - Jobs run in the order defined until the workflow processes a job with the `type: approval` key followed by a job on which it depends.
 
-The following screenshot demonstrates a workflow on hold. 
+The following screenshot demonstrates a workflow on hold.
 
 {:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
@@ -231,7 +231,7 @@ After approving, the rest of the workflow runs as directed.
 
 It can be inefficient and expensive to run a workflow for every commit for every branch. Instead, you can schedule a workflow to run at a certain time for specific branches. This will disable commits from triggering jobs on those branches.
 
-Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches. 
+Consider running workflows that are resource-intensive or that generate reports on a schedule rather than on every commit by adding a `triggers` key to the configuration. The `triggers` key is **only** added under your `workflows` key. This feature enables you to schedule a workflow run by using `cron` syntax to represent Coordinated Universal Time (UTC) for specified branches.
 
 **Note:** In CircleCI v2.1, when no workflow is provided in config, an implicit one is used. However, if you declare a workflow to run a scheduled build, the implicit workflow is no longer run. You must add the job workflow to your config in order for CircleCI to also build on every commit.
 
@@ -292,7 +292,7 @@ Example **valid** cron range syntax:
 ```yaml
     triggers:
       - schedule:
-          cron: "5 4 * * 1,3,4,5,6" 
+          cron: "5 4 * * 1,3,4,5,6"
 ```
 
 The value of the `filters` key must be a map that defines rules for execution on specific branches.
@@ -321,11 +321,11 @@ workflows:
       - test1:
           requires:
             - build
-          context: org-global  
+          context: org-global
       - test2:
           requires:
             - test1
-          context: org-global  
+          context: org-global
       - deploy:
           requires:
             - test2
@@ -511,15 +511,15 @@ The workspace is an additive-only store of data. Jobs can persist data to the wo
 
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
-Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers. 
+Use workspaces to pass along data that is unique to this run and which is needed for downstream jobs. Workflows that include jobs running on multiple branches may require data to be shared using workspaces. Workspaces are also useful for projects in which compiled data are used by test containers.
 
-For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job. 
+For example, Scala projects typically require lots of CPU for compilation in the build job. In contrast, the Scala test jobs are not CPU-intensive and may be parallelised across containers well. Using a larger container for the build job and saving the compiled data into the workspace enables the test containers to use the compiled Scala from the build job.
 
 A second example is a project with a `build` job that builds a jar and saves it to a workspace. The `build` job fans-out into the `integration-test`, `unit-test`, and `code-coverage` to run those tests concurrently using the jar.
 
-To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use. 
+To persist data from a job and make it available to other jobs, configure the job to use the `persist_to_workspace` key. Files and directories named in the `paths:` property of `persist_to_workspace` will be uploaded to the workflow's temporary workspace relative to the directory specified with the `root` key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
-Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start. 
+Configure a job to get saved data by configuring the `attach_workspace` key. The following `config.yml` file defines two jobs where the `downstream` job uses the artifact of the `flow` job. The workflow configuration is sequential, so that `downstream` requires `flow` to finish before it can start.
 
 ```yaml
 # Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
@@ -543,10 +543,10 @@ jobs:
     steps:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
-      
-      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job. 
+
+      # Persist the specified paths (workspace/echo-output) into the workspace for use in downstream job.
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is 
+          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
           # taken to be the root directory of the workspace.
           root: workspace
           # Must be relative path from root
@@ -619,7 +619,7 @@ Go to Settings > Branches in GitHub and click the Edit button on the protected b
 ## See also
 {:.no_toc}
 
-- For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document. 
+- For procedural instructions on how to add Workflows your configuration as you are migrating from a 1.0 `circle.yml` file to a 2.0 `.circleci/config.yml` file, see the [Steps to Configure Workflows]({{ site.baseurl }}/2.0/migrating-from-1-2/) section of the Migrating from 1.0 to 2.0 document.
 
 - For frequently asked questions and answers about Workflows, see the [Workflows]({{ site.baseurl }}/2.0/faq) section of the  FAQ.
 

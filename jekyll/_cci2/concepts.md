@@ -12,7 +12,7 @@ version:
 
 This guide introduces some basic concepts to help you understand how CircleCI manages your CICD pipelines.
 
-* TOC 
+* TOC
 {:toc}
 
 ## Projects
@@ -20,7 +20,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
 
 On the Projects Dashboard, you can either:
-* _Set Up_ any project that you are the owner of in your VCS 
+* _Set Up_ any project that you are the owner of in your VCS
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{
 site.baseurl }}/2.0/notifications/) for the project's status.
 
@@ -37,29 +37,29 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 └── all-other-project-files-and-folders
 ```
 
-`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that are used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) page for more information. 
+`config.yml` is a powerful YAML file that defines the entire pipeline for your project. For a full overview of the various keys that are used, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/) page for more information.
 
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
 - **[Pipeline](#pipelines)**: Represents the entirety of your configuration. Available in CircleCI Cloud only.
 - **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
-- **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project. 
+- **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project.
 
 The following image uses an [example Java application](https://github.com/CircleCI-Public/circleci-demo-java-spring/tree/2.1-config) to show the various config elements:
 
 ![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
 ## User types
-  
+
 It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
 
 * The *Organization Administrator* is a permission level inherited from your VCS:
   * GitHub: **Owner** and following at least one project building on CircleCI
   * Bitbucket: **Admin** and following at least one project building on CircleCI
 * The *Project Administrator* is the user who adds a GitHub or Bitbucket
-repository to CircleCI as a Project. 
-* A *User* is an individual user within an organization, inherited from your VCS. 
+repository to CircleCI as a Project.
+* A *User* is an individual user within an organization, inherited from your VCS.
 * A CircleCI user is anyone who can log in to the CircleCI platform with a
 username and password. Users must be added to a [GitHub or Bitbucket org]({{
 site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI
@@ -125,11 +125,11 @@ jobs:
    # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
    # for new image releases.
      image: ubuntu-2004:202010-01
-#...       
+#...
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 11.3
      xcode: "11.3.0"
-# ...          
+# ...
 ```
 
 {:.tab.executors.Server}
@@ -161,11 +161,11 @@ jobs:
    # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
    # for new image releases.
      image: ubuntu-1604:201903-01
-#...       
+#...
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 11.3
      xcode: "11.3.0"
-# ...          
+# ...
 ```
 
 The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Subsequent images can be added to spin up Secondary/Service Containers.
@@ -193,12 +193,12 @@ jobs:
           command: make test # executable command run in
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
-#...          
-```          
+#...
+```
 
 ## Image
 
-An image is a packaged system that has instructions for creating a running container. 
+An image is a packaged system that has instructions for creating a running container.
 The Primary Container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
 
  ```yaml
@@ -231,11 +231,11 @@ The Primary Container is defined by the first image listed in a [`.circleci/conf
      # follow CircleCI Discuss Announcements
      # for new image releases.
        image: ubuntu-1604:202007-01
-...       
+...
    build3:
      macos: # Specifies a macOS virtual machine with Xcode version 9.0
-       xcode: "9.0"       
- ...          
+       xcode: "9.0"
+ ...
  ```
 
 ## Workflows
@@ -272,7 +272,7 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows
-      
+
   build2:
     docker:
       - image: circleci/ruby:2.4-node
@@ -305,7 +305,7 @@ jobs:
       - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
-#...                          
+#...
 workflows:
   build_and_test: # name of your workflow
     jobs:
@@ -343,7 +343,7 @@ jobs:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/circleci-demo-workflows
-      
+
   build2:
     docker:
       - image: circleci/ruby:2.4-node
@@ -376,7 +376,7 @@ jobs:
       - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
-#...                          
+#...
 workflows:
   version: 2
   build_and_test: # name of your workflow
@@ -441,7 +441,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 {% endraw %}
 
@@ -485,7 +485,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 {% endraw %}
 
@@ -500,8 +500,8 @@ version: 2.1
 
 jobs:
   build1:
-#...   
-    steps:    
+#...
+    steps:
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
       # into the workspace for use in downstream job. Must be an absolute path,
       # or relative path from working_directory. This is a directory on the container which is
@@ -524,7 +524,7 @@ jobs:
           path: /tmp/artifact-1
           destination: artifact-file
 #...
-```        
+```
 {% endraw %}
 
 {:.tab.workspace.Server}
@@ -534,8 +534,8 @@ version: 2
 
 jobs:
   build1:
-#...   
-    steps:    
+#...
+    steps:
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
       # into the workspace  for use in downstream job. Must be an absolute path,
       # or relative path from working_directory. This is a directory on the container which is
@@ -558,7 +558,7 @@ jobs:
           path: /tmp/artifact-1
           destination: artifact-file
 #...
-```        
+```
 {% endraw %}
 
 Note the following distinctions between Artifacts, Workspaces, and Caches:

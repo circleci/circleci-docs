@@ -16,7 +16,7 @@ The *CircleCI Configuration Cookbook* is a collection of individual use cases (r
 
 ## Introduction
 
-This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. Each recipe in this cookbook relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs. 
+This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. Each recipe in this cookbook relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs.
 
 ### What are CircleCI orbs?
 {:.no_toc}
@@ -46,7 +46,7 @@ For more detailed information about CircleCI orbs, refer to the [Orbs Introducti
 
 Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
-* In order to use pipelines features and orbs you must use `version 2.1` config. 
+* In order to use pipelines features and orbs you must use `version 2.1` config.
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
 * If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
@@ -59,9 +59,9 @@ The Amazon Elastic Container Service (ECS) is a scalable container orchestration
 ### Setting environment variables
 The following environment variables need to be set in CircleCI either directly or through a context:
 
-* `AWS_ECR_ACCOUNT_URL` 
-* `MY_APP_PREFIX` 
-* `AWS_REGION` 
+* `AWS_ECR_ACCOUNT_URL`
+* `MY_APP_PREFIX`
+* `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
 If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
@@ -73,7 +73,7 @@ If you need more information on how to set these environment variables, refer to
 To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible: the `aws-ecr` orb to build and push an updated image to ECR, and the `aws-ecs` orb to deploy you service update.
 
 The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
- 
+
 ```yml
 version: 2.1 # 2.1 config required to use orbs
 
@@ -99,7 +99,7 @@ For a full list of usage options and orb elements see the [AWS-ECS orb page](htt
 
 ### Verify the AWS ECS service update
 
-Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`. 
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
 
 ```yaml
 version: 2.1
@@ -463,7 +463,7 @@ For more detailed information about this orb and its functionality, refer to the
 
 ## Selecting a workflow to run using pipeline parameters
 
-You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run. 
+You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run.
 
 The following example defaults to running the `build` workflow, but allows control of which other workflow to run using the API:
 
@@ -517,7 +517,7 @@ For more information on using API v2 endpoints, see the [API Reference Documenta
 
 ## Branch-filtering for job steps
 
-Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps. 
+Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
 
 The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
 
@@ -556,7 +556,7 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.0.0
-  win: circleci/windows@2.2.0 
+  win: circleci/windows@2.2.0
 
 executors:
   linux: # linux executor using the node base image

@@ -10,20 +10,20 @@ version:
 - Server v2.x
 ---
 
-This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).  
+This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
 
 ## Echo hello world on Linux
 
 This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/2.0/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
 
-1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository. 
+1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
 
-1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration): 
+1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration):
    ```yaml
    version: 2.1
    jobs:
      build:
-       docker: 
+       docker:
          - image: cimg/node:14.10.1 # the primary container, where your job's commands are run
            auth:
              username: mydockerhub-user
@@ -33,14 +33,14 @@ This example adds a job called `build` that spins up a container running a [pre-
          - run: echo "hello world" # run the `echo` command
    ```
 
-2. Commit and push the changes. 
+2. Commit and push the changes.
 
 3. Go to the Projects page in the CircleCI app, click the **Add Projects** button, then click
 the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated Org. See the Org Switching section below for tips.
 
-1. Click the **Start Building** button to trigger your first build. 
+1. Click the **Start Building** button to trigger your first build.
 
-The Workflows page appears with your `build` job and prints `Hello World` to the console. 
+The Workflows page appears with your `build` job and prints `Hello World` to the console.
 
 **Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
 
@@ -71,11 +71,11 @@ _The macOS executor is not currently available on self-hosted installations of C
 Using the basics from the Linux and Android examples above, you can add a job that uses the `macos` executor and a supported version of Xcode as follows:
 
 ```
-jobs: 
-  build-macos: 
-    macos:  
+jobs:
+  build-macos:
+    macos:
       xcode: 11.3.0
-```      
+```
 
 Refer to the [Hello World on MacOS]({{site.baseurl}}/2.0/hello-world-macos) document for more information and a sample project.
 
@@ -117,7 +117,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-**Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows). 
+**Note**: For Windows builds, some setup and prerequisites are different. Please refer to our [Hello World on Windows]({{site.baseurl}}/2.0/hello-world-windows).
 
 ### More about using and authoring orbs
 

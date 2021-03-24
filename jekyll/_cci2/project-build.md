@@ -23,7 +23,7 @@ enter the Projects dashboard, where you can set up and follow any projects
 you have access to.
 
 On the Projects Dashboard, you can either:
-* _Set Up_ any project that you are the owner of in your VCS 
+* _Set Up_ any project that you are the owner of in your VCS
 * _Follow_ any project in your organization to gain access to its pipelines and
 to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for
 the project's status.

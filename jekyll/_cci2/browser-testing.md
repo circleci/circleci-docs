@@ -21,15 +21,15 @@ Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-
 ## Overview
 {:.no_toc}
 
-Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch. 
+Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch.
 
 ## Selenium
 
-Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard. 
+Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
 
 Selenium WebDriver provides a common API for programatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the [Selenium documentation](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project) for details on set up. Refer to the [Xvfb man page](http://www.xfree86.org/4.0.1/Xvfb.1.html) for virtual framebuffer X server documentation.
 
-WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run remotely, your tests interact with a Selenium Server, and it is up to the server to drive the browsers. 
+WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run remotely, your tests interact with a Selenium Server, and it is up to the server to drive the browsers.
 
 If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
@@ -60,7 +60,7 @@ For more information about working with Headless Chrome,
 see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)
 and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112).
 
-As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment. 
+As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment.
 
 ## LambdaTest
 
@@ -76,7 +76,7 @@ version: 2.1
 
 orbs:
   lambda-tunnel: lambdatest/lambda-tunnel@0.0.1
-   
+
 jobs:
   lambdatest/with_tunnel:
     tunnel_name: <your-tunnel-name>
@@ -121,7 +121,7 @@ jobs:
       - run:
           name: Shut Down Sauce Connect Tunnel
           command: |
-            kill -9 `cat /tmp/sc_client.pid`          
+            kill -9 `cat /tmp/sc_client.pid`
 ```
 {% endraw %}
 

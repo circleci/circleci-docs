@@ -5,7 +5,7 @@ short-title: "Viewing Pipelines"
 description: "Introduction to Pipelines"
 categories: [getting-started]
 order: 1
-version: 
+version:
 - Cloud
 ---
 
@@ -31,6 +31,6 @@ A pipeline is composed of workflows, which are composed of jobs. By navigating f
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members. 
+Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)

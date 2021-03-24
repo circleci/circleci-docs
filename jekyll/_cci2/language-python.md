@@ -245,7 +245,7 @@ See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # A basic unit of work in a run
-  build: # runs not using Workflows must have a `build` job as entry point 
+  build: # runs not using Workflows must have a `build` job as entry point
     # directory where steps are run
     working_directory: ~/circleci-demo-python-django
     docker: # run the steps with Docker

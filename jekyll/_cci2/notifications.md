@@ -80,9 +80,9 @@ You can use Orbs to integrate various kinds of notifications into your configura
 
 ### Prerequisites
 
-Before integrating an orb into your configuration, you will need to perform two steps: 
+Before integrating an orb into your configuration, you will need to perform two steps:
 
-1. Increment the `version` key in your config to `2.1` and; 
+1. Increment the `version` key in your config to `2.1` and;
 2. {% include snippets/enable-pipelines.md %}
 
 ### Using the Slack Orb
@@ -119,7 +119,7 @@ workflows:
   send-notification:
     jobs:
       - notify:
-          context: slack-secrets      
+          context: slack-secrets
 ```
 
 CircleCI's Slack orb can be used to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. For more information and to view usage examples, see the [CircleCI Slack orb page](https://circleci.com/developer/orbs/orb/circleci/slack).

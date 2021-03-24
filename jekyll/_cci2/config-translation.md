@@ -17,7 +17,7 @@ This document provides instructions for using the `config-translation` endpoint 
 * iOS (partial: 1.0 code signing is not supported - use Fastlane instead)
 * Java (partial)
 
-The generated `config-translation` file includes comments to help you understand how to modify the configuration for use as the `.circleci/config.yml` in your CircleCI 2.0 project. 
+The generated `config-translation` file includes comments to help you understand how to modify the configuration for use as the `.circleci/config.yml` in your CircleCI 2.0 project.
 
 **Warning: Do not use the generated configuration file in production without testing.** There are structures in 1.0 that cannot be reconciled in the 2.0 configuration, so it is important to put the generated configuration file on a branch, test it, and modify it before going to production. Results may vary significantly from your 1.0 results with the draft configuration generated with `config-translation`.
 
@@ -31,7 +31,7 @@ The `config-translator` endpoint does **not** currently support translation of t
 
 ## Using `config-translation`
 
-1. To use the `config-translation`, use the following API endpoint passing the name of your CircleCI project building on 1.0. 
+1. To use the `config-translation`, use the following API endpoint passing the name of your CircleCI project building on 1.0.
 
      `GET: /project/:vcs-type/:username/:project/config-translation`
 
@@ -47,7 +47,7 @@ The `config-translator` endpoint does **not** currently support translation of t
      curl -H "Circle-Token: $CIRCLE_TOKEN" "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?branch=develop"
      ```
       The default is to use the default branch that is set in your VCS, typically `master`.
-      
+
 ## See also
 
  [Tips For Migrating from 1.0 to 2.0]({{site.baseurl}}/2.0/migration/)

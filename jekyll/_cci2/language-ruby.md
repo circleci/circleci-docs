@@ -9,8 +9,8 @@ version:
 - Cloud
 - Server v2.x
 ---
-    
-This guide will help you get started with a Ruby on Rails application on CircleCI. 
+
+This guide will help you get started with a Ruby on Rails application on CircleCI.
 
 * TOC
 {:toc}
@@ -58,7 +58,7 @@ version: 2.1 # Use 2.1 to enable using orbs and other features.
 # Declare the orbs that we'll use in our config.
 # read more about orbs: https://circleci.com/docs/2.0/using-orbs/
 orbs:
-  ruby: circleci/ruby@1.0 
+  ruby: circleci/ruby@1.0
   node: circleci/node@2
 
 jobs:
@@ -74,14 +74,14 @@ jobs:
       # use the node orb to install our packages
       # specifying that we use `yarn` and to cache dependencies with `yarn.lock`
       # learn more: https://circleci.com/docs/2.0/caching/
-      - node/install-packages: 
+      - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-          
+
   test:  # our next job, called "test"
     # we run "parallel job containers" to enable speeding up our tests;
     # this splits our tests across multiple containers.
-    parallelism: 3 
+    parallelism: 3
     # here we set TWO docker images.
     docker:
       - image: cimg/ruby:2.7-node # this is our primary docker image, where step commands run.
@@ -106,12 +106,12 @@ jobs:
       RAILS_ENV: test
     # A series of steps to run, some are similar to those in "build".
     steps:
-      - checkout 
-      - ruby/install-deps 
+      - checkout
+      - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-      # Here we make sure that the secondary container boots 
+      # Here we make sure that the secondary container boots
       # up before we run operations on the database.
       - run:
           name: Wait for DB
@@ -137,7 +137,7 @@ workflows:
 
 
 ## Build the demo Ruby on Rails project yourself
-  
+
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. [Fork the project][fork-demo-project] on GitHub to your own account.

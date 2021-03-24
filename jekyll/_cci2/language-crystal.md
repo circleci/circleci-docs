@@ -12,7 +12,7 @@ version:
 
 *[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Crystal*
 
-This guide will help you get started with a minimal Crystal application on CircleCI. 
+This guide will help you get started with a minimal Crystal application on CircleCI.
 
 ## Overview
 
@@ -35,7 +35,7 @@ breaking changes.
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of jobs
-  build: 
+  build:
     working_directory: ~/demo_app
     docker: # run build steps with docker
       - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
@@ -85,7 +85,7 @@ All commands for a job execute in this container.
 
 ```yaml
 jobs:
-  build: 
+  build:
     working_directory: ~/demo_app
     docker:
       - image: crystallang/crystal:0.27.0

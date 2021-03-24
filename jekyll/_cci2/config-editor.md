@@ -58,7 +58,7 @@ For a valid configuration, you will see the following at the bottom of the confi
 
 ![Passing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
 
-For a failing validation, a red bar is displayed, as well as any errors, where they occur, and any relevant documentation 
+For a failing validation, a red bar is displayed, as well as any errors, where they occur, and any relevant documentation
 that may assist in fixing the error (see the "DOCS" tab in the below screenshot).
 
 ![Failing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)

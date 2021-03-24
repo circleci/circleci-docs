@@ -20,7 +20,7 @@ We work where you work: Linux, macOS, Android, and Windows - SaaS or behind your
 
 ## Benefits of CircleCI
 
-CircleCI runs nearly one million jobs per day in support of 30,000 organizations. Organizations choose CircleCI because jobs run fast and builds can be optimized for speed. CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching]({{site.baseurl}}/2.0/caching/), [docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching/), [resource classes]({{site.baseurl}}/2.0/optimizations/#resource-class) for running on faster machines, and [performance pricing](https://circleci.com/pricing/usage/). 
+CircleCI runs nearly one million jobs per day in support of 30,000 organizations. Organizations choose CircleCI because jobs run fast and builds can be optimized for speed. CircleCI can be configured to run very complex pipelines efficiently with sophisticated [caching]({{site.baseurl}}/2.0/caching/), [docker layer caching]({{site.baseurl}}/2.0/docker-layer-caching/), [resource classes]({{site.baseurl}}/2.0/optimizations/#resource-class) for running on faster machines, and [performance pricing](https://circleci.com/pricing/usage/).
 
 As a developer using [circleci.com](https://circleci.com), you can [SSH into any job]({{site.baseurl}}/2.0/ssh-access-jobs/) to debug your build issues, set up [parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs/) in your [.circleci/config.yml]({{site.baseurl}}/2.0/configuration-reference/) file to run jobs faster, and configure [caching]({{site.baseurl}}/2.0/caching/) with two simple keys to reuse data from previous jobs in your [workflow]({{site.baseurl}}/2.0/workflows/).
 
@@ -40,15 +40,15 @@ CircleCI may be configured to deploy code to various environments, including AWS
 
 **Continuous Integration** is a key step to digital transformation.
 
-**What?**    
+**What?**  
 Every developer commits daily to a shared mainline.  
 Every commit triggers an automated build and test.  
-If build and test fails, it’s repaired quickly - within minutes.  
+If build and test fails, it’s repaired quickly - within minutes.
 
-**Why?**    
+**Why?**  
 Improve team productivity, efficiency, happiness.  
 Find problems and solve them, quickly.  
-Release higher quality, more stable products.  
+Release higher quality, more stable products.
 
 
 ## Free trial options
@@ -60,11 +60,11 @@ CircleCI provides a free trial with the following options:
 
 ### Open source
 
-See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects. 
+See [Building Open Source Projects]({{site.baseurl}}/2.0/oss/) for information about free containers for public open source projects.
 
 ## See also
 
-Any app that runs on Linux, Android, or macOS is supported. Refer to the 
+Any app that runs on Linux, Android, or macOS is supported. Refer to the
 - [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
 - [Core Features]({{site.baseurl}}/2.0/features/) for detailed descriptions and links to procedural documentation.
 

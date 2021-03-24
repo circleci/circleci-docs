@@ -71,7 +71,7 @@ jobs:
       - run:
           name: Compile samplescala dist package
           command: cat /dev/null | sbt clean update dist
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/universal/samplescala.zip
           destination: samplescala
       - save_cache:
@@ -148,7 +148,7 @@ The steps/run keys specify the types of actions to perform. The run keys represe
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
 ```
 
-This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename. 
+This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename.
 
 The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
 
@@ -197,7 +197,7 @@ The following keys represent actions performed after the multi-line command is e
 ```
 
 Below is an explanation of the preceding example:
-- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container 
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container
 - [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
 - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
 - [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.

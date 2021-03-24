@@ -70,7 +70,7 @@ Your orb pipeline occurs across two workflows:
 
 [`test-pack`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L40) is the first of two workflows to run, and will execute each time code is committed to the repository on **any** branch.
 
-The `test-pack` workflow is responsible for all testing that happens prior to a development version of the orb being published. Integration tests (which happen in the next workflow) can only run once the development version of the orb is available to run the tests on. 
+The `test-pack` workflow is responsible for all testing that happens prior to a development version of the orb being published. Integration tests (which happen in the next workflow) can only run once the development version of the orb is available to run the tests on.
 
 A development version of the orb is created in the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job, and this job requires access to the Personal Access Token, which is secured in a [Restricted Context]({{site.baseurl}}/2.0/contexts/#restricting-a-context). Using a Restricted Context in this way allows us to store our token as an environment variable such that the job can only be triggered by someone with access to the Context, therefore 'securing' the publishing stage.
 
@@ -78,7 +78,7 @@ The workflow runs as follows:
 
 * Tests that do not require special access to the Personal Access Token are run, this stage can run from open source pull requests.
 * The workflow is placed [on-hold](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L54) for [manual approval]({{site.baseurl}}/2.0/workflows/#holding-a-workflow-for-a-manual-approval). ![Manually approve publishing development orbs]({{site.baseurl}}/assets/img/docs/orb-publish-approval.png)
-    The workflow will wait for a button click, via an alert prompt in the CircleCI app, before continuing. 
+    The workflow will wait for a button click, via an alert prompt in the CircleCI app, before continuing.
 * Once the manual approval is authorized, subsequent jobs will be automatically authorized and may access the Restricted Context. This is especially useful when we want to allow open-source pull requests to build against our orb but gives us a chance to ensure there is no malicious code.
 * After the workflow has been approved, the [orb-tools/publish-dev](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L62) job will publish a development version of your orb twice:
 

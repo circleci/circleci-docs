@@ -26,7 +26,7 @@ consider reading our [Getting Started Guide]({{ site.baseurl }}/2.0/getting-star
 
 ## Configuration files
 
-Both Travis CI and CircleCI make use of a _configuration file_ to define your 
+Both Travis CI and CircleCI make use of a _configuration file_ to define your
 workflows and jobs. The only difference is that your CircleCI configuration
 will live in `.circleci/config.yml` at the root of your repository.
 
@@ -61,7 +61,7 @@ Travis Configuration might look like the following example:
 ```yaml
 language: node_js
 services: mongodb
-before_install: 
+before_install:
   - npm i -g npm@5
 node_js:
   - "5"
@@ -200,4 +200,4 @@ jobs rely on the success of previous jobs.)
 With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.circleci/config.yml` to define a collection of jobs and their
 run order, whether leveraging concurrency, fan-in or fan-out builds, or
 sequentially-dependant builds. Workflows allow complex and fine-grained control
-over your build configuration. 
+over your build configuration.

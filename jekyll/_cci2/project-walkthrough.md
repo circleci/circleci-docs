@@ -47,7 +47,7 @@ jobs:
 `.circleci/config.yml`, you must have a job named `build` that includes the following:
 
 - Executor of the underlying technology, defined as `docker` in this example.
-- Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing. 
+- Image is a Docker image - in this example containing Python 3.6.2 on Debian Stretch provided by CircleCI with web browsers installed to help with testing.
 - Steps starting with a required `checkout` Step and followed by `run:` keys that execute commands sequentially on the primary container.
 
 ## Service containers
@@ -281,7 +281,7 @@ jobs:
 
 Notes on the added keys:
 
-- Each command runs in a new shell, so the virtual environment that was activated in the dependencies installation step is activated again in this final `run:` key with `. venv/bin/activate`. 
+- Each command runs in a new shell, so the virtual environment that was activated in the dependencies installation step is activated again in this final `run:` key with `. venv/bin/activate`.
 - The `store_artifacts` step is a special step. The `path:` is a directory relative to the project’s `root` directory where the files are stored. The `destination:` specifies a prefix chosen to be unique in the event that another step in the job produces artifacts in a directory with the same name. CircleCI collects and uploads the artifacts to S3 for storage.
 - When a job completes, artifacts appear in the CircleCI Artifacts tab:
 

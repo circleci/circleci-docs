@@ -235,7 +235,7 @@ If you have any questions, head over to our [community forum](https://discuss.ci
 
 ## Detailed custom Dockerfile example for Ruby
 
-This section demonstrates how to build a Ruby container to use on CircleCI 2.0. **Note:** This section assumes you have already used docker login locally. 
+This section demonstrates how to build a Ruby container to use on CircleCI 2.0. **Note:** This section assumes you have already used docker login locally.
 
 The example starts with the [Ruby 2.1](https://hub.docker.com/_/ruby/) image. However, instead of using FROM ruby:2.1 as the base image it describes how the container is built. From the Ruby Docker Hub page, go to the [2.1/Dockerfile](https://raw.githubusercontent.com/docker-library/ruby/e32433a12099d96dc5a1b28a011b73af4f17cfff/2.1/Dockerfile10).
 Notice the environment variables that are used to pull in the proper versions.
@@ -394,7 +394,7 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 # Postgres 9.5
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" >> /etc/apt/sources.list \
       && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C 
+      && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 58118E89F3A912897C070ADBF76221572C52609D 514A2AD631A57A16DD0047EC749D6EEC0353B12C
 
 # skip installing gem documentation
 RUN mkdir -p /usr/local/etc \
