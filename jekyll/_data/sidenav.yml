@@ -49,8 +49,6 @@ en:
           link: 2.0/caching/
         - name: Artifacts
           link: 2.0/artifacts/
-        - name: Insights
-          link: 2.0/insights/
         - name: Collecting test data
           link: 2.0/collect-test-data/
         - name: Debugging with SSH
@@ -181,10 +179,10 @@ en:
   children:
     - name: Overview
       link: 2.0/insights/
-    - name: Test Insights
-      link: 2.0/insights-tests/
     - name: Metrics glossary
       link: 2.0/insights-glossary/
+    - name: Test Insights
+      link: 2.0/insights-tests/
     - name: Data Partnerships
       link: 2.0/insights-partnerships/
     - name: Insights API
@@ -648,6 +646,22 @@ ja:
         - name: Orb Publishing Process
           link: ja/2.0/creating-orbs/
           i18n_name: Orbsパブリッシュ
+
+# TODO - i18n names for insights.
+- name: Insights
+  icon: icons/sidebar/insights.svg
+  children:
+    - name: Overview
+      link: 2.0/insights/
+    - name: Metrics glossary
+      link: 2.0/insights-glossary/
+    - name: Test Insights
+      link: 2.0/insights-tests/
+    - name: Data Partnerships
+      link: 2.0/insights-partnerships/
+    - name: Insights API
+      link: api/v2/
+      hash: tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト
