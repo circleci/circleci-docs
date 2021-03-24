@@ -105,7 +105,7 @@ en:
         - name: Android Machine Image
           link: 2.0/android-machine-image
         - name: Arm Resources
-          link: 2.0/arm_resources/
+          link: 2.0/arm-resources/
 
     - name: Mac
       children:
@@ -559,7 +559,7 @@ ja:
           hash: pre-installed-software
         - name: Arm Resources
         - i18n_name: Arm Resources # TODO: needs translation
-          link: ja/2.0/arm_resources/
+          link: ja/2.0/arm-resources/
     - name: Mac
       children:
         - name: Overview
