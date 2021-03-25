@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-# This script scans our the documentation for any blocked words that should be avoided.
+# This script scans the documentation for words on a block list that should be avoided.
 ## It does this by constructing a regex from a `block_list`, and giving it to ripgrep.
-## ripgrep searches all md and adoc files, and returns it's output as json.
+## ripgrep searches all md and adoc files, and returns its output as json.
 ## the program parses the json and prints stats to stdout as well as creating a file report as yaml.
 
 # Ripgrep has been vendored into scripts/bin/
