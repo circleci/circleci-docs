@@ -48,14 +48,6 @@ class BlockList
   end
 
   # run the RG regex and parse the json results.
-  # Example json output
-  # 
-  # {"type":"begin","data":{"path":{"text":"_cci2/configuration-reference.md"}}}
-  # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"      - /foo\n"},"line_number":1068,"absolute_offset":49624,"submatches":[{"match":{"text":"foo"},"start":9,"end":12}]}}
-  # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"      - foo/bar\n"},"line_number":1185,"absolute_offset":54653,"submatches":[{"match":{"text":"foo"},"start":8,"end":11}]}}
-  # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"/tmp/dir/foo/bar\n"},"line_number":1192,"absolute_offset":54772,"submatches":[{"match":{"text":"foo"},"start":9,"end":12}]}}
-  # {"type":"end","data":{"path":{"text":"_cci2/configuration-reference.md"},"binary_offset":null,"stats":{"elapsed":{"secs":0,"nanos":77256,"human":"0.000077s"},"searches":1,"searches_with_match":1,"bytes_searched":83172,"bytes_printed":723,"matched_lines":3,"matches":3}}}
-
   def update_stats(word)
     if !@stats.key?(word)
       @stats[word] = 0
