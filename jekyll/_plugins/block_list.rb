@@ -1,7 +1,11 @@
 #!/usr/bin/env ruby
 
-# This script scans our the documentation for any blocked words that should not be published.
-# This script makes use of ripgrep, which is avaiable in scripts/bin/*
+# This script scans our the documentation for any blocked words that should be avoided.
+## It does this by constructing a regex from a `block_list`, and giving it to ripgrep.
+## ripgrep searches all md and adoc files, and returns it's output as json.
+## the program parses the json and prints stats to stdout as well as creating a file report as yaml.
+
+# Ripgrep has been vendored into scripts/bin/
 
 require 'json'
 require 'pp'
@@ -43,15 +47,14 @@ class BlockList
     @rg_pattern = "#{word_batch.delete_suffix("|")}"
   end
 
-  # run the regex and parse the json
-  #
+  # run the RG regex and parse the json results.
   # Example json output
+  # 
   # {"type":"begin","data":{"path":{"text":"_cci2/configuration-reference.md"}}}
   # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"      - /foo\n"},"line_number":1068,"absolute_offset":49624,"submatches":[{"match":{"text":"foo"},"start":9,"end":12}]}}
   # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"      - foo/bar\n"},"line_number":1185,"absolute_offset":54653,"submatches":[{"match":{"text":"foo"},"start":8,"end":11}]}}
   # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"/tmp/dir/foo/bar\n"},"line_number":1192,"absolute_offset":54772,"submatches":[{"match":{"text":"foo"},"start":9,"end":12}]}}
   # {"type":"end","data":{"path":{"text":"_cci2/configuration-reference.md"},"binary_offset":null,"stats":{"elapsed":{"secs":0,"nanos":77256,"human":"0.000077s"},"searches":1,"searches_with_match":1,"bytes_searched":83172,"bytes_printed":723,"matched_lines":3,"matches":3}}}
-  #
 
   def update_stats(word)
     if !@stats.key?(word)
@@ -70,8 +73,8 @@ class BlockList
         # pull data out of parsed json from ripgrep.
         present_words = []
         filename = parsed.dig("data", "path", "text")
-        line  = parsed.dig("data", "lines", "text") # couldn't rg's return "lines" be multiple...? maybe this should just be parsed.dig("data", "lines")
-        linum = parsed.dig("data", "line_number")   # couldn't rg's return "lines" be multiple...? maybe this should just be parsed.dig("data", "lines")
+        context  = parsed.dig("data", "lines", "text") 
+        linum = parsed.dig("data", "line_number")  
         submatches = parsed.dig("data", "submatches")
         submatches.each do |sm|
           present_words.push(sm.dig("match", "text"))
@@ -86,7 +89,7 @@ class BlockList
         end
         
         @results[filename].push(
-          {line: line.strip,
+          {context: context.strip,
            line_number: linum,
            present_words: present_words}
         )
@@ -107,7 +110,7 @@ Jekyll::Hooks.register :site, :after_init do |site|
       f.write yaml_results
       puts "Wrote list of blocked words and their originating file and line number \n  to 'blocked_words.yaml'"
     }
-    # if we want to break the build in CI whenn this plugin runs, run exit.
+    # NOTE: if desired result is to break CI on results being found; add `exit` command.
     # exit
   end
 end
