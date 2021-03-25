@@ -9,6 +9,8 @@ version:
 - Server v3.x
 ---
 
+NOTE: CircleCI Runner is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. Please [contact us](https://circleci.com/contact/) for more information.
+
 ## Authentication
 
 When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server 
