@@ -4,24 +4,26 @@
 # This script makes use of ripgrep, which is avaiable in scripts/bin/*
 
 require 'json'
+require 'pp'
+require 'yaml'
 
 class BlockList
-  attr_accessor :rg_bin, :rg_pattern
+  attr_accessor :rg_bin, :rg_pattern, :results, :stats
 
   def initialize()
-    puts "Running word block list ----"
+    puts "🔍 Running scan for blocked words..."
 
-    @results = []
+    @results = {}
+    @stats = {}
     @rg_bin = nil
     @rg_flags = "-tmd -tasciidoc --json"
     @rg_pattern = nil
     @files = Dir.glob("**/*.{md,adoc}")
-    @block_list = ["foo"]
+    @block_list = ["blacklist", "whitelist", "master"]
 
     set_rg_bin()
     set_regex()
-    grepit()
-    # iterate_files
+    find_blocked_words()
   end
 
   def set_rg_bin
@@ -41,21 +43,6 @@ class BlockList
     @rg_pattern = "#{word_batch.delete_suffix("|")}"
   end
 
-  ## For each file, search every word in block_list
-  # def iterate_files
-  #   @files.each do |f|
-  #     @block_list.each do |word|
-  #       search_file(f, word)
-  #     end
-  #   end
-  # end
-
-  # # searches a single file for a specific word
-  # def search_file(file, word)
-  #   puts "Searching #{file} for uses of #{word}"
-  #   system("#{@rg_bin} #{word} --files #{file}")
-  # end
-
   # run the regex and parse the json
   #
   # Example json output
@@ -65,27 +52,62 @@ class BlockList
   # {"type":"match","data":{"path":{"text":"_cci2/configuration-reference.md"},"lines":{"text":"/tmp/dir/foo/bar\n"},"line_number":1192,"absolute_offset":54772,"submatches":[{"match":{"text":"foo"},"start":9,"end":12}]}}
   # {"type":"end","data":{"path":{"text":"_cci2/configuration-reference.md"},"binary_offset":null,"stats":{"elapsed":{"secs":0,"nanos":77256,"human":"0.000077s"},"searches":1,"searches_with_match":1,"bytes_searched":83172,"bytes_printed":723,"matched_lines":3,"matches":3}}}
   #
-  def grepit
+
+  def update_stats(word)
+    if !@stats.key?(word)
+      @stats[word] = 0
+    end
+    @stats[word] =  @stats[word] + 1
+  end
+  
+  def find_blocked_words
     x = `#{@rg_bin} \"#{@rg_pattern}\" #{@rg_flags}`
     lines = x.split("\n")
     lines.each do |json_line|
       parsed = JSON.parse(json_line)
       if parsed["type"] == "match"
-        puts parsed
+
+        # pull data out of parsed json from ripgrep.
+        present_words = []
+        filename = parsed.dig("data", "path", "text")
+        line  = parsed.dig("data", "lines", "text") # couldn't rg's return "lines" be multiple...? maybe this should just be parsed.dig("data", "lines")
+        linum = parsed.dig("data", "line_number")   # couldn't rg's return "lines" be multiple...? maybe this should just be parsed.dig("data", "lines")
+        submatches = parsed.dig("data", "submatches")
+        submatches.each do |sm|
+          present_words.push(sm.dig("match", "text"))
+        end
+
+        present_words.each do |w|
+          update_stats(w)
+        end
+
+        if !@results.key?(filename)
+          @results[filename] = []
+        end
+        
+        @results[filename].push(
+          {line: line.strip,
+           line_number: linum,
+           present_words: present_words}
+        )
       end
     end
-
-
-
-
   end
-
-
 end
 
-BlockList.new()
 
+Jekyll::Hooks.register :site, :after_init do |site|
+  bl = BlockList.new()
 
-# Jekyll::Hooks.register :site, :after_init do |site|
-#   BlockList.new()
-# end
+  if bl.results.length > 0
+    puts "The following 'words to avoid' (and their number of occurrences) were found."
+    pp bl.stats
+    yaml_results = bl.results.to_yaml
+    File.open("blocked_words.yaml", "w") { |f|
+      f.write yaml_results
+      puts "Wrote list of blocked words and their originating file and line number \n  to 'blocked_words.yaml'"
+    }
+    # if we want to break the build in CI whenn this plugin runs, run exit.
+    # exit
+  end
+end
