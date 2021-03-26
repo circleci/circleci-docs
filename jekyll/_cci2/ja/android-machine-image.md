@@ -40,7 +40,7 @@ Android マシン イメージには以下がプリインストールされて�
 
 ## 制限事項
 
-* ジョブが実行を開始するまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Android イメージを利用するユーザーが増えると短縮されます。
+* ジョブが実行を開始するまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Android イメージを利用するユーザーが増えるに連れ短縮されます。
 
 ## 料金プラン
 
@@ -49,7 +49,7 @@ Android マシン イメージには以下がプリインストールされて�
 
 ## 例
 
-以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかのバージョンを示して説明します。
+以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
 
 ### Orb を使用するシンプルな例
 
@@ -73,7 +73,7 @@ workflows:
 
 ### Orb を使用する複雑な例
 
-この例は、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
+この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 
 ```yaml
 # .circleci/config.yml
@@ -94,7 +94,7 @@ jobs:
           install: true
       # デフォルトで、エミュレーターの起動後、キャッシュが復元されます
       # "./gradlew assembleDebugAndroidTest" が実行された後、スクリプトが
-      # 実行され、エミュレーターの起動を待機します
+      # 実行され、エミュレーターの起動を待ちます
       # "post-emulator-launch-assemble-command" コマンドを指定して
       # gradle コマンドの実行をオーバーライドするか、"wait-for-emulator" を false に設定して
       # エミュレーターの待機を完全に無効にします
