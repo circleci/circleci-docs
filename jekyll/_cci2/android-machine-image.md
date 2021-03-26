@@ -8,6 +8,7 @@ version:
 ---
 
 ## Overview
+{: #overview }
 
 The Android machine image is accessed through the [Linux `machine`
 executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux),
@@ -16,6 +17,7 @@ nested virtualization and x86 Android emulators, so it can be used for Android
 UI testing. It also comes with the Android SDK pre-installed.
 
 ## Using the Android machine image
+{: #using-the-android-machine-image }
 
 It is possible to configure the use of the Android image in your configuration
 with [orbs]({{site.baseurl}}/2.0/orb-intro) as well as manually. Using the
@@ -25,10 +27,12 @@ will cover both use cases. Please view the [examples](#examples) section
 below for more details.
 
 ## Pre-installed Software
+{: #pre-installed-software }
 
 The Android machine image comes with the following pre-installed:
 
 ### Android SDK
+{: #android-sdk }
 - sdkmanager
 - Android platform 23, 24, 25, 26, 27, 28, 29, 30, S
 - Build tools 30.0.3
@@ -38,6 +42,7 @@ The Android machine image comes with the following pre-installed:
 - extras;android;m2repository, extras;google;m2repository, extras;google;google_play_service
 
 ### Others
+{: #others }
 - gcloud
 - OpenJDK 8, OpenJDK 11 (default)
 - maven 3.6.3, gradle 6.8.3, ant
@@ -48,22 +53,26 @@ The Android machine image comes with the following pre-installed:
 - jq 1.6
 
 ## Limitations
+{: #limitations }
 
 * There may be up to 2 mins of spin-up time before your job starts running. This
   time will decrease as more customers start using the Android image.
 
 ## Pricing
+{: #pricing }
 
 For pricing information, refer to the Linux machine executors under the “Linux
 VM" section on the [pricing page](https://circleci.com/pricing/).
 
 
 ## Examples
+{: #examples }
 
 Below you will find several examples demonstrating the use of the Android
 machine image both with and without orbs.
 
 ### Simple orb usage
+{: #simple-orb-usage }
 
 The below sample uses the Android orb to run a single job.
 
@@ -84,6 +93,7 @@ workflows:
 
 
 ### More complex orb usage
+{: #more-complex-orb-usage }
 
 This example shows how you can use more granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
 
@@ -127,6 +137,7 @@ workflows:
 
 
 ### No-orb example
+{: #no-orb-example }
 
 The following is an example of using the Android machine image, _without_ using
 the circleci/android [orb](https://circleci.com/developer/orbs/orb/circleci/android). These steps are similar to what is run when you use

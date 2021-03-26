@@ -14,6 +14,7 @@ CircleCI supports uploading directly to Artifactory.
 {:toc}
 
 ## Deploy
+{: #deploy }
 
 Artifactory has great documentation explaining how to leverage their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).
 
@@ -22,12 +23,14 @@ We will use this space to highlight some sample projects showing how to best use
 Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
 
 ## Artifactory plugins
+{: #artifactory-plugins }
 Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
 
 - [Deploying with Maven](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
 - [Deploying with Gradle](https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin)
 
 ## JFrog CLI
+{: #jfrog-cli }
 If you want to use the JFrog CLI, you can install it by adding the following to your `.circleci/config.yml` :
 
 ```
@@ -88,6 +91,7 @@ jobs:
 ```
 
 ## See also
+{: #see-also }
 
 {:.no_toc}
 

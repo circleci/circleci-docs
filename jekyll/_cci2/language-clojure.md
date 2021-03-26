@@ -16,6 +16,7 @@ This guide will help you get started with a Clojure application on CircleCI 2.0.
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 Otherwise, we recommend reading our [walkthrough](#config-walkthrough) for a detailed explanation of our configuration.
@@ -28,6 +29,7 @@ We're going to make a few assumptions here:
 If you use another testing tool, you can just adjust that step to run a different `lein` task.
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -63,6 +65,7 @@ jobs: # basic units of work in a run
 {% endraw %}
 
 ## Get the code
+{: #get-the-code }
 
 The configuration above is from a demo Clojure app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-clojure-luminus](https://github.com/CircleCI-Public/circleci-demo-clojure-luminus).
 
@@ -71,6 +74,7 @@ If you want to step through it yourself, you can fork the project on GitHub and 
 Now we’re ready to build a `config.yml` from scratch.
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 We always start with the version.
 
@@ -147,11 +151,13 @@ Finally we store the uberjar as an [artifact](https://circleci.com/docs/1.0/buil
 Nice! You just set up CircleCI for a Clojure app.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 ### Detailed examples
+{: #detailed-examples }
 {:.no_toc}
 
 The app described in this guide illustrates the simplest possible setup for a Clojure web app. Real-world projects tend to be more complex, so you may find this more detailed example useful as you configure your own projects:

@@ -14,6 +14,7 @@ version:
 It is possible to build, test, and deploy applications that run on Linux, Android, iOS and Windows with CircleCI. See the following snippets for a peek into how you can customize the configuration of a job for any platform. You may also configure jobs to run on multiple platforms in a single [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file.
 
 ## Linux with Docker
+{: #linux-with-docker }
 
 {% raw %}
 
@@ -52,6 +53,7 @@ jobs:
 {% endraw %}
 
 ## Linux with machine
+{: #linux-with-machine }
 
 **Note**: Use of machine may require additional fees in a future pricing update.
 
@@ -65,6 +67,7 @@ jobs:
 ```
 
 ## Android
+{: #android }
 
 {% raw %}
 
@@ -95,6 +98,7 @@ jobs:
 {% endraw %}
 
 ## macOS
+{: #macos }
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
 ```
@@ -114,6 +118,7 @@ jobs:
 ```
 
 ## Windows
+{: #windows }
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -150,5 +155,6 @@ jobs:
 ```
 
 ## See also
+{: #see-also }
 
 Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.

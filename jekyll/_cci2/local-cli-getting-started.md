@@ -11,11 +11,13 @@ version:
 ---
 
 # Overview
+{: #overview }
 
 For those who prefer to spend most of their development time in the terminal, consider installing the [CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) to interact with your projects on CircleCI. This document provides a step-by-step guide on intializing and working with a CircleCI project primarily from within the terminal.
 Please note that our server offering only supports a legacy version of the CLI. You can find more information on how to install that here: https://circleci.com/docs/2.0/local-cli/#using-the-cli-on-circleci-server.
 
 # Prerequisites
+{: #prerequisites }
 
 - You are using a unix-machine (Mac or Linux): the CircleCI CLI tool _is_ installable on Windows but is currently in beta and not as fully featured as unix installations.
 - You have a basic knowledge of CI/CD and the features and concepts of CircleCI's offerings.
@@ -27,8 +29,10 @@ Please note that our server offering only supports a legacy version of the CLI. 
 If some of these prerequisites sound unfamiliar, or you are new to the CircleCI platform, you may want to consider reading our [getting started]({{site.baseurl}}/2.0/getting-started/) guide or reading our [concepts document](https://circleci.com/docs/2.0/concepts/#section=getting-started) before proceeding.
 
 # Steps
+{: #steps }
 
 ## Initialize a git repo
+{: #initialize-a-git-repo }
 
 Let's start from the very basics: create a project and initialize a git repository. Refer to the below code block for a list of steps.
 
@@ -44,6 +48,7 @@ git commit -m "Initial commit" # create your first commit.
 ```
 
 ## Connect your git repo to a VCS
+{: #connect-your-git-repo-to-a-vcs }
 
 Great! We have a git repository set up, with one file that says "Hello World!". We need to connect our local git repository to a Version Control System - either GitHub or BitBucket. Let's do that now.
 
@@ -65,6 +70,7 @@ git push --set-upstream origin master
 You now have a git repo that is connected to a VCS. The remote on your VCS ("origin") now matches your local work.
 
 ## Download and set up the CircleCI CLI
+{: #download-and-set-up-the-circleci-cli }
 
 Next, we will install the CircleCI CLI and try out some of its features. To install the CLI on a unix machine run the following command in your terminal:
 
@@ -85,6 +91,7 @@ You'll be asked for your API token. Go to the [Account Settings](https://circlec
 Return to the CLI and paste in your API token to complete your setup.
 
 ## Setup and validate our first config
+{: #setup-and-validate-our-first-config }
 
 Now it's time to create a configuration file in our project directory.
 
@@ -126,6 +133,7 @@ circleci config validate --help
 ```
 
 ## Testing a job before pushing to a VCS
+{: #testing-a-job-before-pushing-to-a-vcs }
 
 The CircleCI CLI enables you to test a job locally from the command line rather than having to push to your VCS. If a job in your configuration is proving problematic, this is a great way to try and debug it locally rather than using credits or minutes on the platform.
 
@@ -151,6 +159,7 @@ Success!
 ```
 
 ## Connect your repo to CircleCI
+{: #connect-your-repo-to-circleci }
 
 We will need to leave the terminal behind for this step. Head over to [the "Add Projects page"](https://app.circleci.com/projects/project-dashboard/github/circleci/). It's time to set up your project to run CI whenever you push code.
 
@@ -165,6 +174,7 @@ git push
 Returning to CircleCI in your browser, you can now click "start building" to run your build.
 
 # Next steps
+{: #next-steps }
 
 This document provides a small overview to getting started with the CircleCI CLI tool. There are several more complex features that the CircleCI CLI offers:
 

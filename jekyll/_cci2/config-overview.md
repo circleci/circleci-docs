@@ -18,9 +18,11 @@ an [executor type]({{ site.baseurl }}/2.0/executor-types/) for that job, either 
 </div>
 
 ## Secrets, private keys, tokens, and scripts
+{: #secrets-private-keys-tokens-and-scripts }
 
 Encrypt and store secrets and private keys for your project by following the [environment variables]({{ site.baseurl }}/2.0/env-vars/) or [contexts]({{ site.baseurl }}/2.0/contexts/) documentation. Review the best practices for [using shell scripts]({{ site.baseurl }}/2.0/using-shell-scripts/) to secure scripts and properly [manage API tokens]({{ site.baseurl }}/2.0/managing-api-tokens/) in your configuration.
 
 ## Advanced test configuration
+{: #advanced-test-configuration }
 
 CircleCI enables you to [parallelize your test runs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) for greatest efficiency. It is also possible to test with browsers and databases, refer to the [Browser Testing]({{ site.baseurl }}/2.0/browser-testing/) and [Database Configuration]({{ site.baseurl }}/2.0/databases/) documents for details.

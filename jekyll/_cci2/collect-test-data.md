@@ -34,6 +34,7 @@ _The above screenshot applies to CircleCI Server only._
 **If you are using CircleCI Cloud**, see the [API v2 Insights endpoints](https://circleci.com/docs/api/v2/#circleci-api-insights) to find test failure information.
 
 ## Enabling formatters
+{: #enabling-formatters }
 
 Test metadata is not automatically collected in CircleCI 2.0 until you enable the JUnit formatters. For RSpec, Minitest, and Django, add the following configuration to enable the formatters:
 
@@ -54,6 +55,7 @@ gem 'minitest-ci'
 **Note:** For detailed information on how to test your iOS applications, refer to the [Testing iOS Applications on macOS]({{ site.baseurl}}/2.0/testing-ios/) page.
 
 ## Metadata collection in custom test steps
+{: #metadata-collection-in-custom-test-steps }
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
 ```
@@ -62,6 +64,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 ```
 
 ### Custom test runner examples
+{: #custom-test-runner-examples }
 {:.no_toc}
 
 This section provides the following test runner examples:
@@ -82,6 +85,7 @@ This section provides the following test runner examples:
 
 
 #### Cucumber
+{: #cucumber }
 {:.no_toc}
 
 For custom Cucumber steps, you should generate a file using the JUnit formatter and write it to the `cucumber` directory.  Following is an example of the addition to your `.circleci/config.yml` file:
@@ -119,6 +123,7 @@ Alternatively, if you want to use Cucumber's JSON formatter, be sure to name the
 ```
 
 #### Maven Surefire Plugin for Java JUnit Results
+{: #maven-surefire-plugin-for-java-junit-results }
 {:.no_toc}
 
 If you are building a [Maven](http://maven.apache.org/) based project, you are more than likely using the [Maven Surefire plugin](http://maven.apache.org/surefire/maven-surefire-plugin/) to generate test reports in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
@@ -138,6 +143,7 @@ If you are building a [Maven](http://maven.apache.org/) based project, you are m
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit Test Results
+{: #lessa-namegradle-junit-resultsgreaterlessagreatergradle-junit-test-results }
 {:.no_toc}
 
 If you are building a Java or Groovy based project with [Gradle](https://gradle.org/), test reports are automatically generated in XML format. CircleCI makes it easy to collect these reports. Add the following to the `.circleci/config.yml` file in your project.
@@ -157,6 +163,7 @@ If you are building a Java or Groovy based project with [Gradle](https://gradle.
 ```
 
 #### <a name="mochajs"></a>Mocha for Node.js
+{: #lessa-namemochajsgreaterlessagreatermocha-for-nodejs }
 {:.no_toc}
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
@@ -180,6 +187,7 @@ A working `.circleci/config.yml` section for testing might look like this:
 ```
 
 #### Mocha with nyc
+{: #mocha-with-nyc }
 
 Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
@@ -284,6 +292,7 @@ jobs:
 {% endraw %}
 
 #### <a name="ava"></a>Ava for Node.js
+{: #lessa-nameavagreaterlessagreaterava-for-nodejs }
 {:.no_toc}
 
 To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
@@ -306,6 +315,7 @@ A working `.circleci/config.yml` section for testing might look like the followi
 
 
 #### ESLint
+{: #eslint }
 {:.no_toc}
 
 To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
@@ -327,6 +337,7 @@ A working `.circleci/config.yml` test section might look like this:
 
 
 #### PHPUnit
+{: #phpunit }
 {:.no_toc}
 
 For PHPUnit tests, you should generate a file using the `--log-junit` command line option and write it to the `/phpunit` directory. Your `.circleci/config.yml` might be:
@@ -345,6 +356,7 @@ For PHPUnit tests, you should generate a file using the `--log-junit` command li
 ```
 
 #### pytest
+{: #pytest }
 {:.no_toc}
 
 To add test metadata to a project that uses `pytest` you need to tell it to output JUnit XML, and then save the test metadata:
@@ -366,6 +378,7 @@ To add test metadata to a project that uses `pytest` you need to tell it to outp
 
 
 #### RSpec
+{: #rspec }
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `rspec` build step, add the following gem to your Gemfile:
@@ -389,6 +402,7 @@ And modify your test command to this:
 ```
 
 ### Minitest
+{: #minitest }
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
@@ -413,11 +427,13 @@ And modify your test command to this:
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
 #### test2junit for Clojure Tests
+{: #test2junit-for-clojure-tests }
 {:.no_toc}
 
 Use [test2junit](https://github.com/ruedigergad/test2junit) to convert Clojure test output to XML format. For more details, refer to the [sample project](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit).
 
 #### trx2junit for Visual Studio / .NET Core Tests
+{: #trx2junit-for-visual-studio-net-core-tests }
 {:.no_toc}
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
@@ -443,6 +459,7 @@ A working `.circleci/config.yml` section might look like this:
 ```
 
 #### Karma
+{: #karma }
 {:.no_toc}
 
 To output JUnit tests with the Karma test runner you can use [karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter).
@@ -482,6 +499,7 @@ A working `.circleci/config.yml` section might look like this:
 ```
 
 #### Jest
+{: #jest }
 {:.no_toc}
 
 To output JUnit compatible test data with Jest you can use [jest-junit](https://www.npmjs.com/package/jest-junit).
@@ -511,15 +529,18 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 For more details on `--runInBand`, refer to the [Jest CLI](https://facebook.github.io/jest/docs/en/cli.html#runinband) documentation. For more information on these issues, see [Issue 1524](https://github.com/facebook/jest/issues/1524#issuecomment-262366820) and [Issue 5239](https://github.com/facebook/jest/issues/5239#issuecomment-355867359) of the official Jest repository.
 
 ## API
+{: #api }
 
 To access test metadata for a run from the API, refer to the [test-metadata API documentation](https://circleci.com/docs/api/v1/#get-build-test-metadata).
 
 ## See Also
+{: #see-also }
 {:.no_toc}
 
 [Using Insights]( {{ site.baseurl }}/2.0/insights/)
 
 ## Video: Troubleshooting Test Runners
+{: #video-troubleshooting-test-runners }
 {:.no_toc}
 
 <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>

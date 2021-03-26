@@ -13,6 +13,7 @@ This document provides a step-by-step tutorial for getting your first successful
 {:toc}
 
 ## Prerequisites for running your first build
+{: #prerequisites-for-running-your-first-build }
 {:.no_toc}
 
 * Some basic knowledge of Git.
@@ -21,6 +22,7 @@ This document provides a step-by-step tutorial for getting your first successful
 * Some basic terminal or `bash` knowledge and prior experience using the command line is helpful.
 
 ## Creating a repository
+{: #creating-a-repository }
 
 Begin by creating a new repository on GitHub. You may skip this section if you intend to use an existing repository.
 
@@ -31,6 +33,7 @@ Begin by creating a new repository on GitHub. You may skip this section if you i
 ![Creating a Repository]( {{ site.baseurl }}/assets/img/docs/getting-started--new-repo.png){:.img--bordered}
 
 ## Setting up CircleCI
+{: #setting-up-circleci }
 
 If you have not yet, create an account on CircleCI by navigating to [the signup
 page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
@@ -57,6 +60,7 @@ page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
    later, or continue to make changes.
 
 ## Digging into your first pipeline
+{: #digging-into-your-first-pipeline }
 
 You should see your pipeline start to run automatically—and pass! So, what just
 happened? Click on the green **Success** button on your pipeline to investigate
@@ -98,6 +102,7 @@ steps one may put in a `config.yml` file in the [Configuration
 Reference](https://circleci.com/docs/2.0/configuration-reference).
 
 ### Breaking your build!
+{: #breaking-your-build }
 {:.no_toc}
 
 Let's get a bit more complex. Let's edit our `.circleci/config.yml` file now. On
@@ -139,6 +144,7 @@ applications]({{site.baseurl}}/2.0/demo-apps/) that go into more detail on
 setting up CircleCI with various languages and frameworks.
 
 ## Using the workflows functionality
+{: #using-the-workflows-functionality }
 {:.no_toc}
 
 You do not have to use orbs to use CircleCI. The following example details how
@@ -194,6 +200,7 @@ Read more about workflows in the [Orchestrating
 Workflows](https://circleci.com/docs/2.0/workflows/#overview) documentation.
 
 ### Adding some changes to use the workspaces functionality
+{: #adding-some-changes-to-use-the-workspaces-functionality }
 {:.no_toc}
 
 Each workflow has an associated workspace which can be used to transfer files to
@@ -253,6 +260,7 @@ workflows:
 Read more about workspaces [here](https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ### SSH into your {% comment %} todo: job {% endcomment %}build
+{: #ssh-into-your-percent-comment-percent-todo-job-percent-endcomment-percentbuild }
 {:.no_toc}
 
 If you are comfortable with the terminal, you can SSH directly into your
@@ -284,12 +292,14 @@ cat <file_name>      # show me the contents of the file <file_name>
 ```
 
 ## Collaborating with teammates
+{: #collaborating-with-teammates }
 
 It is easy for teammates and collaborators to view and follow your projects.
 Teammates can make a free CircleCI account at any time to view your pipelines,
 even if they are not committing any code.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 [Blog
@@ -297,6 +307,7 @@ post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every
 on how to validate the CircleCI `config.yml` on every commit with a git hook.
 
 ### CircleCI
+{: #circleci }
 {:.no_toc}
 
 * The [CircleCI blog](https://circleci.com/blog/).
@@ -304,12 +315,14 @@ on how to validate the CircleCI `config.yml` on every commit with a git hook.
 * CircleCI on [GitHub](https://github.com/circleci), [Twitter](https://twitter.com/circleci) and [Facebook](https://www.facebook.com/circleci)
 
 ### Continuous integration
+{: #continuous-integration }
 {:.no_toc}
 
 * [Martin Fowler - Continuous Integration](https://martinfowler.com/articles/continuousIntegration.html)
 * [Best Practices](https://en.wikipedia.org/wiki/Continuous_integration#Best_practices)
 
 ### YAML
+{: #yaml }
 {:.no_toc}
 
 * [Advanced Concepts](https://en.wikipedia.org/wiki/YAML#Advanced_components)

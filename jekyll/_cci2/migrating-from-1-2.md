@@ -19,6 +19,7 @@ The migration process may not end with this document, but the goal is to get the
 If you do not have a `circle.yml` file, refer to the [Sample 2.0 `config.yml` File]({{ site.baseurl }}/2.0/sample-config) to get started from scratch.
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 CircleCI requires that you create a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference), and it adds new required keys for which values must be defined. **Note:** Parallelism may only be set in the `.circleci/config.yml` file, the parallelism setting in the CircleCI app is ignored.
@@ -26,11 +27,13 @@ CircleCI requires that you create a [`.circleci/config.yml`]({{ site.baseurl }}/
 If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys.
 
 ### Using the 1.0 to 2.0 `config-translation` endpoint
+{: #using-the-10-to-20-config-translation-endpoint }
 {:.no_toc}
 
 The `config-translation` endpoint can help you quickly get started with converting a 1.0 config to 2.0. For more, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
 
 ## Steps to configure required keys
+{: #steps-to-configure-required-keys }
 
 1. Copy your existing `circle.yml` file into a new directory called `.circleci` at the root of your project repository.
 
@@ -99,6 +102,7 @@ The `config-translation` endpoint can help you quickly get started with converti
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
 ## Environment variables
+{: #environment-variables }
 
 In CircleCI 2.0, all defined environment variables are treated literally.
 It is possible to interpolate variables within a command
@@ -108,6 +112,7 @@ For more information,
 refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to configure workflows
+{: #steps-to-configure-workflows }
 
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
@@ -151,6 +156,7 @@ To increase the speed of your software development through faster feedback, shor
 6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
 ## Search and replace deprecated 2.0 keys
+{: #search-and-replace-deprecated-20-keys }
 
 - If your configuration sets a timezone, search and replace `timezone: America/Los_Angeles` with the following two lines:
 
@@ -230,10 +236,12 @@ With the following, nested under `steps:` and customizing for your application a
 ```
 
 ## Validate YAML
+{: #validate-yaml }
 
 When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
 ## Next Steps
+{: #next-steps }
 {:.no_toc}
 
 - See the [Tips for Migrating from 1.0 to 2.0]({{ site.baseurl }}/2.0/migration/)

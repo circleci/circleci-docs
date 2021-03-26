@@ -15,6 +15,7 @@ An **executor** defines the underlying technology or environment in which to run
 ![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
 ## Docker
+{: #docker }
 
 ```
 jobs:
@@ -29,6 +30,7 @@ jobs:
 Find out more about using the `docker` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-docker).
 
 ## Machine
+{: #machine }
 
 {:.tab.machine.Cloud}
 ```
@@ -54,6 +56,7 @@ jobs:
 Find out more about using the `machine` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-machine).
 
 ## macOS
+{: #macos }
 
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
@@ -71,6 +74,7 @@ jobs:
 Find out more about using the `macos` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-macos).
 
 ## Windows
+{: #windows }
 
 The syntax for using the Windows executor in your config differs depending on whether you are using:
 
@@ -112,6 +116,7 @@ jobs:
 Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/executor-types/#using-the-windows-executor). See [the Windows orb details](https://circleci.com/developer/orbs/orb/circleci/windows) for the list of options available in the Windows orb.
 
 ## See also
+{: #see-also }
 
 * [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
 * [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos).

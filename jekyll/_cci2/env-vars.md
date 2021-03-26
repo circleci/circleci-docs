@@ -15,6 +15,7 @@ This document describes using environment variables in CircleCI in the following
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 There are several ways to use environment variables in CircleCI to provide variety in scope and authorization level. Environment variables are governed by an [order of precedence](#order-of-precedence), depending on how they are set, allowing control at each level in your configuration.
@@ -26,6 +27,7 @@ Private environment variables enable you to store secrets safely even when your 
 Use Contexts to [further restrict access to environment variables](#setting-an-environment-variable-in-a-context). Contexts are set from the Organization Settings in the CircleCI application. For more information about controlling access to env vars with Contexts, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
 
 ## Secrets masking
+{: #secrets-masking }
 
 _Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
@@ -39,6 +41,7 @@ The value of the environment variable will not be masked in the build output if:
 **Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ## Renaming orgs and repositories
+{: #renaming-orgs-and-repositories }
 
 If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
 
@@ -50,10 +53,12 @@ If you find you need to rename an org or repo that you have previously hooked up
 **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
 ## Environment variable usage options
+{: #environment-variable-usage-options }
 
 CircleCI uses Bash, which follows the POSIX naming convention for environment variables. Valid characters include letters (uppercase and lowercase), digits, and the underscore. The first character of each environment variable must be a letter.
 
 ### Order of precedence
+{: #order-of-precedence }
 {:.no_toc}
 
 Environment variables are used according to a specific precedence order, as follows:
@@ -70,6 +75,7 @@ Environment variables declared inside a shell command `run step`, for example `F
 ![Env Var Order]({{ site.baseurl }}/assets/img/docs/env-var-order.png)
 
 #### Notes on security
+{: #notes-on-security }
 {:.no_toc}
 
 Do not add secrets or keys inside the `.circleci/config.yml` file. The full text of `config.yml` is visible to developers with access to your project on CircleCI. Store secrets or keys in [project](#setting-an-environment-variable-in-a-project) or [context](#setting-an-environment-variable-in-a-context) settings in the CircleCI app. For more information, see the [Encryption]({{ site.baseurl }}/2.0/security/#encryption) section of the Security document.
@@ -77,6 +83,7 @@ Do not add secrets or keys inside the `.circleci/config.yml` file. The full text
 Running scripts within configuration may expose secret environment variables. See the [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/#shell-script-best-practices) document for best practices for secure scripts.
 
 ### Example configuration of environment variables
+{: #example-configuration-of-environment-variables }
 {:.no_toc}
 
 Consider the example `config.yml` below:
@@ -138,6 +145,7 @@ When the above config runs, the output looks like this. Notice the env var store
 Notice there are two similar steps in the above image and config - "What branch am I on?". These steps illustrate two different methods to read environment variables. Note that both `${VAR}` and `$VAR` syntaxes are supported. You can read more about shell parameter expansion in the [Bash documentation](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion).
 
 ### Using parameters and bash environment
+{: #using-parameters-and-bash-environment }
 {:.no_toc}
 
 In general, CircleCI does not support interpolating environment variable into build config. Values used are treated as literals. This can cause issues when defining `working_directory`, modifying `PATH`, and sharing variables across multiple `run` steps.
@@ -207,6 +215,7 @@ allowing you to use interpolation and share environment variables across `run` s
 The `$BASH_ENV` workaround only works with `bash`. Other shells probably won't work.
 
 ### Alpine Linux
+{: #alpine-linux }
 {:.no_toc}
 
 An image that's based on [Alpine Linux](https://alpinelinux.org/) (like [docker](https://hub.docker.com/_/docker)), uses the `ash` shell.
@@ -224,6 +233,7 @@ jobs:
 ```
 
 ## Setting an environment variable in a shell command
+{: #setting-an-environment-variable-in-a-shell-command }
 
 While CircleCI does not support interpolation when setting environment variables, it is possible to set variables for the current shell by [using `BASH_ENV`](#using-parameters-and-bash-environment). This is useful for both modifying your `PATH` and setting environment variables that reference other variables.
 
@@ -252,6 +262,7 @@ Depending on your shell, you may have to append the new variable to a shell star
 For more information, refer to your shell's documentation on setting environment variables.
 
 ## Setting an environment variable in a step
+{: #setting-an-environment-variable-in-a-step }
 
 To set an environment variable in a step, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#run).
 
@@ -280,6 +291,7 @@ Since every `run` step is a new shell, environment variables are not shared acro
 to be accessible in more than one step, export the value [using `BASH_ENV`](#using-parameters-and-bash-environment).
 
 ## Setting an environment variable in a job
+{: #setting-an-environment-variable-in-a-job }
 
 To set an environment variable in a job, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#job_name).
 
@@ -300,6 +312,7 @@ jobs:
 **Note: Integers longer than 6 digits will be converted to an exponential number. To avoid this, store them as a string instead (i.e. "1234567").**
 
 ## Setting an environment variable in a context
+{: #setting-an-environment-variable-in-a-context }
 
 1. In the CircleCI application, go to your organization settings by clicking the link in the left hand navigation.
 
@@ -336,6 +349,7 @@ jobs:
 Creating a context allows you to share environment variables across multiple projects, and control who has access. For more information, see the [Contexts documentation]({{ site.baseurl }}/2.0/contexts/).
 
 ## Setting an environment variable in a project
+{: #setting-an-environment-variable-in-a-project }
 
 1. In the CircleCI application, go to your project's settings by clicking the gear icon on the Pipelines page, or the three dots on other pages in the application.
 
@@ -371,6 +385,7 @@ jobs:
 Once created, environment variables are hidden and uneditable in the application. Changing an environment variable is only possible by deleting and recreating it.
 
 ## Setting an environment variable in a container
+{: #setting-an-environment-variable-in-a-container }
 
 Environment variables can also be set for a Docker container. To do this, use the [`environment` key]({{ site.baseurl }}/2.0/configuration-reference/#docker).
 
@@ -417,6 +432,7 @@ jobs:
 ```
 
 ### Encoding multi-line environment variables
+{: #encoding-multi-line-environment-variables }
 {:.no_toc}
 
 If you are having difficulty adding a multiline environment variable, use `base64` to encode it.
@@ -444,6 +460,7 @@ Login Succeeded
 Not all command-line programs take credentials in the same way that `docker` does.
 
 ## Injecting environment variables with API v2
+{: #injecting-environment-variables-with-api-v2 }
 
 Pipeline parameters can be used to pass variables using the CircleCI API v2.
 
@@ -467,6 +484,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) guide.
 
 ## Injecting environment variables with API v1
+{: #injecting-environment-variables-with-api-v1 }
 
 Build parameters are environment variables, therefore their names have to meet the following restrictions:
 
@@ -537,6 +555,7 @@ export param2="500"
 Start a run with the POST API call, see the [new build](https://circleci.com/docs/api/v1/#trigger-a-new-build-with-a-branch) section of the API documentation for details. A POST with an empty body will start a new run of the named branch.
 
 ## Built-in environment variables
+{: #built-in-environment-variables }
 
 The following environment variables are exported in each build and can be used for more complex testing or deployment.
 
@@ -580,6 +599,7 @@ Variable                    | Type    | Value
 **Note:** For a list of pipeline values and parameters, refer to the [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) page.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 [Contexts]( {{ site.baseurl }}/2.0/contexts/)

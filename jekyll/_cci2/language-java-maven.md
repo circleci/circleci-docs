@@ -16,6 +16,7 @@ This guide will help you get started with a Java application building with Maven
 {:toc}
 
 ## Overview
+{: #overview }
 
 This is an example application showcasing how to run a Java app on CircleCI 2.1.
 This application uses the [Spring PetClinic sample project](https://projects.spring.io/spring-petclinic/). This document includes
@@ -23,8 +24,10 @@ pared down sample configurations demonstrating different CircleCI features inclu
 dependency caching, and parallelism.
 
 ## Sample configuration: version 2.1:
+{: #sample-configuration-version-21 }
 
 ### A basic build with an orb:
+{: #a-basic-build-with-an-orb }
 
 ```yaml
 version: 2.1
@@ -47,6 +50,7 @@ parameters of this command can be customized. See the maven orb docs for more
 information.
 
 ## For 2.0 Configuration (recommended for CircleCI Server only):
+{: #for-20-configuration-recommended-for-circleci-server-only }
 
 ```yaml
 version: 2.0
@@ -69,6 +73,7 @@ Notice the two primary parts of a job: the executor and steps. In this case, we
 are using the docker executor and passing in a CircleCI convenience image.
 
 ### Using a workflow to build then test
+{: #using-a-workflow-to-build-then-test }
 
 A workflow is a dependency graph of jobs. This basic workflow runs a build job
 followed by a test job. The test job will not run unless the build job exits
@@ -110,6 +115,7 @@ workflows:
 ```
 
 ### Caching dependencies
+{: #caching-dependencies }
 
 The following code sample details the use of **caching**.
 
@@ -148,6 +154,7 @@ have to fetch the dependencies that have changed between the new `pom.xml` and t
 previous cache.
 
 ### Persisting build artifacts to workspace
+{: #persisting-build-artifacts-to-workspace }
 
 The following configuration sample details persisting a build artifact to a workspace.
 
@@ -197,6 +204,7 @@ downstream jobs in the workflow. In this case, the target directory produced by
 the build step is persisted for use by the test step.
 
 ### Splitting tests across parallel containers
+{: #splitting-tests-across-parallel-containers }
 
 
 {% raw %}
@@ -266,6 +274,7 @@ for previous executions of these tests, so the platform knows how to split tests
 to achieve the fastest overall runtime.
 
 ### Storing code coverage artifacts
+{: #storing-code-coverage-artifacts }
 
 ```yaml
 version: 2.0
@@ -296,6 +305,7 @@ generates a code coverage report during the build. To save that report as a
 build artifact, use the `store_artifacts` step.
 
 ### A configuration
+{: #a-configuration }
 
 The following code sample is the entirety of a configuration file combining the features described above.
 
@@ -377,6 +387,7 @@ the **Follow Project** button next to your forked project. Finally, delete every
 and Spring.
 
 ## See also
+{: #see-also }
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 - See the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document

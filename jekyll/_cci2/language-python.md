@@ -18,6 +18,7 @@ using a sample application written in Python.
 {:toc}
 
 ## Overview
+{: #overview }
 
 This guide uses a sample Django application
 to describe configuration best practices
@@ -30,12 +31,14 @@ and rewriting [the configuration file](https://github.com/CircleCI-Public/circle
 as you follow this guide.
 
 ## Configuration walkthrough
+{: #configuration-walkthrough }
 
 Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/).
 Follow the steps below
 to create a complete `config.yml` file.
 
 ### Specify a version
+{: #specify-a-version }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used
@@ -46,6 +49,7 @@ version: 2
 ```
 
 ### Create a build job
+{: #create-a-build-job }
 
 A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
 Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows),
@@ -65,6 +69,7 @@ jobs:
 ```
 
 ### Choose an executor type
+{: #choose-an-executor-type }
 
 The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
 
@@ -92,6 +97,7 @@ These images are extensions of official Docker images
 and include tools useful for CI/CD environments.
 
 ### Add other services and set environment variables
+{: #add-other-services-and-set-environment-variables }
 
 Specify additional containers for services like databases.
 Use the [`environment`]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-container) key
@@ -120,6 +126,7 @@ jobs:
 ```
 
 ### Install dependencies
+{: #install-dependencies }
 
 After choosing containers for a job,
 create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
@@ -150,6 +157,7 @@ jobs:
 ```
 
 ### Cache dependencies
+{: #cache-dependencies }
 
 To save time between runs,
 consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
@@ -194,6 +202,7 @@ Use the `chown` command
 to grant CircleCI access to dependency locations.
 
 ### Run tests
+{: #run-tests }
 
 Use the `run` step
 to run your test suite.
@@ -211,6 +220,7 @@ jobs:
 ```
 
 ### Upload and store test results
+{: #upload-and-store-test-results }
 
 Use the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step
 to upload test results to CircleCI.
@@ -234,11 +244,13 @@ jobs:
 ```
 
 ### Deploy application
+{: #deploy-application }
 
 This Django application is not deployed anywhere.
 See the [Flask Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/) or the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for deploy examples.
 
 ## Full configuration file
+{: #full-configuration-file }
 
 {% raw %}
 
@@ -293,5 +305,6 @@ jobs: # A basic unit of work in a run
 {% endraw %}
 
 ## See also
+{: #see-also }
 
 - See the [Tutorials page]({{ site.baseurl }}/2.0/tutorials/) for other language guides.

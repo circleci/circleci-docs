@@ -18,6 +18,7 @@ following sections.
 
 
 ## Prerequisites
+{: #prerequisites }
 {:.no_toc}
 
 This guide assumes the following:
@@ -37,6 +38,7 @@ Lab](https://firebase.google.com/docs/test-lab). For more details, see the
 
 
 ## Sample configuration for UI tests
+{: #sample-configuration-for-ui-tests }
 
 Let's walk through a sample configuration using the Android machine image. It is
 possible to use both orbs and to manually configure the use of the Android
@@ -65,6 +67,7 @@ configuration; you can compare and contrast examples of different sizes
 
 
 ## Sample configuration for unit tests
+{: #sample-configuration-for-unit-tests }
 
 For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
 
@@ -113,6 +116,7 @@ jobs:
 {% endraw %}
 
 ### React Native projects
+{: #react-native-projects }
 {:.no_toc}
 
 React Native projects can be built on CircleCI 2.0 using Linux, Android
@@ -121,6 +125,7 @@ application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 on GitHub for a full example of a React Native project.
 
 ## Testing with Firebase Test Lab
+{: #testing-with-firebase-test-lab }
 
 **Note:**: While this portion of the document walks through using a third party
 tool for testing, CircleCI recommends using the [Android machine
@@ -215,12 +220,15 @@ see the [official documentation](https://firebase.google.com/docs/test-lab/andro
 
 
 ## Deployment
+{: #deployment }
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
 ## Troubleshooting
+{: #troubleshooting }
 
 ### Handling out of memory errors
+{: #handling-out-of-memory-errors }
 
 You might run into out of memory (oom) errors with your build. To get acquainted
 with the basics of customizing the JVM's memory usage, consider reading the
@@ -248,6 +256,7 @@ If you are still running into OOM issues you can also limit the max workers for
 gradle: `./gradlew test --max-workers 4`
 
 ### Disabling pre-dexing to improve build performance
+{: #disabling-pre-dexing-to-improve-build-performance }
 {:.no_toc}
 
 Pre-dexing dependencies has no benefit on CircleCI.
@@ -265,6 +274,7 @@ so pre-dexing actually increases compilation time
 and may also increase memory usage.
 
 ### Deploying to Google Play Store
+{: #deploying-to-google-play-store }
 
 There are a few third-party solutions for deploying to the Play Store from your
 CI build. [Gradle Play

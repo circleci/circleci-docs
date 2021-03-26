@@ -18,10 +18,12 @@ The recipes in this guide will enable you to quickly and easily perform repeatab
 {:toc}
 
 ## Introduction
+{: #introduction }
 
 Sometimes when you are using the CircleCI platform, you may encounter unexpected lags in pipeline performance, which can negatively affect your ability to perform critical organizational functions. These performance bottlenecks can not only impact overall performance, but also cause workflow and build failures. These "hiccups" can cost you money in terms of credit usage, resources, and individual time spent reducing bottlenecks.
 
 ## Using caching to optimize builds and workflows
+{: #using-caching-to-optimize-builds-and-workflows }
 
 One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
 
@@ -57,12 +59,14 @@ Because caching is a such a critical aspect of optimizing builds and workflows, 
 - [Caching](https://circleci.com/docs/2.0/caching/)
 
 ## Improving test performance
+{: #improving-test-performance }
 
 When running tests on the CircleCI platform, one of the primary considerations you will want to make is how you can optimize the testing process to minimize credit usage and improve overall testing performance and results. Testing can sometimes be a time and performance-intensive process, therefore, the ability to reduce testing time can be a significant boost to your organizational goals.
 
 There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below (adapted with permission from the developer who wrote about this test optimization use case in his [blog post](https://www.brautaset.org/articles/2019/speed-up-circleci.html)) describes how you can optimize testing using Django and the CircleCI platform.
 
 ### Testing optimization on the CircleCI platform for a Python Django project
+{: #testing-optimization-on-the-circleci-platform-for-a-python-django-project }
 {:.no_toc}
 
 Some organizations use CircleCI to run tests for each change before merging to the main branch. Faster tests means faster feedback cycles, which in turn means you can confidently ship code more often. Let's take a look at a case study for a Python Django application's workflow, that took more than 13 minutes to complete testing on the CircleCI platform.
@@ -92,21 +96,25 @@ Typically, performing setup once, and then performing `fan out` steps, is a trad
 As you can see, there is a a significant amount of time being spent setting up the tests, without any actual tests being performed. In fact, this approach required 6.5 minutes before the actual tests were run, which took another 6.5 minutes.
 
 ### Test preparation optimization
+{: #test-preparation-optimization }
 {:.no_toc}
 
 Knowing that ~13 minutes was too long to perform the steps in this workflow, the following approaches were taken to optimize and reduce this time.
 
 #### Changing the CI test workflow
+{: #changing-the-ci-test-workflow }
 {:.no_toc}
 
 The CI test workflow was changed to no longer depend on building the base image. The test jobs were also changed to launch auxiliary services using CircleCI's docker executor native service container support instead of using `docker-compose`. Finally,`tox` was run from the main container to install dependencies and run tests, which eliminates minutes used to save and then restore the image from the workspace. This also eliminated the extra start-up costs of the machine executor.
 
 #### Dependency changes
+{: #dependency-changes }
 {:.no_toc}
 
 Installing dependencies in the primary container on CircleCI, rather than relying on a Dockerfile, may enable you to use CircleCI's caching to speed up `virtualenv` creation.
 
 ### Test execution optimization
+{: #test-execution-optimization }
 {:.no_toc}
 
 Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
@@ -118,6 +126,7 @@ The figure below illustrates how overall these changes can reduce the total work
 As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time.
 
 ## Test splitting to speed up pipelines
+{: #test-splitting-to-speed-up-pipelines }
 
 Pipelines are often configured so that each time code is committed a set of tests are run. Test splitting is a great way to speed up the testing portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments running in parallel.
 
@@ -126,6 +135,7 @@ Test splitting lets you intelligently define where these splits happen across a 
 ![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
 ### Parallelism and test splitting
+{: #parallelism-and-test-splitting }
 {:.no_toc}
 
 To illustrate this with CI config, take a sequentially running test suite – all tests run in a single test environment (docker container):
@@ -168,6 +178,7 @@ jobs:
 **Note:** The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
 
 ### Is it worth it?
+{: #is-it-worth-it }
 {:.no_toc}
 
 To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run across the CircleCI application project actually decreased the test time **from 26:11 down to 3:55**.
@@ -175,6 +186,7 @@ To give a quantitative illustration of the power of the split-by-timings feature
 Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
 
 ## Workflows increase deployment frequency
+{: #workflows-increase-deployment-frequency }
 
 Providing value to your customers is the top goal for any organization, and one can measure the performance of an organization by how often (frequency) value is delivered (deployment). High-performing teams deploy value to customers multiple times per day according to the DevOps Research and Assessment Report, 2019.
 
@@ -234,6 +246,7 @@ The time difference includes the lag described above plus the duration of the pi
 
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - Refer to [Optimizations]({{site.baseurl}}/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.

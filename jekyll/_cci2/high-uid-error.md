@@ -20,6 +20,7 @@ failed to register layer: Error processing tar file (exit status 1): container i
 This document explains the problem and how to fix it.
 
 ## Background
+{: #background }
 
 The user namespace (`userns`) is a feature of the Linux kernel
 that adds another security layer to Linux containers.
@@ -38,6 +39,7 @@ This allows the container to run a process as if it were the root user,
 while **actually** being run by the non-root user on the host machine.
 
 ## Problem
+{: #problem }
 
 The error is caused by a `userns` remapping failure.
 CircleCI runs Docker containers with `userns` enabled
@@ -53,6 +55,7 @@ Docker cannot successfully remap
 and fails to start the container.
 
 ## Solution
+{: #solution }
 
 To fix this error,
 you must update the files' UID/GID
@@ -101,5 +104,6 @@ Adding `&& chown -R root:root /root` to the problem step
 should fix the problem without creating a bad interim.
 
 ## See Also
+{: #see-also }
 
 Refer to the following [Microsoft forum post](https://social.msdn.microsoft.com/Forums/vstudio/en-US/f034bd0a-00e1-4a11-a716-8cf1112a5db4/container-id-xxxxxxx-cannot-be-mapped-to-a-host-id?forum=windowsazurewebsitespreview) for additional links if you get more errors after performing this procedure.

@@ -19,10 +19,12 @@ Opt-In to this feature by going to Settings > Usage Statistics on the management
 ![](  {{ site.baseurl }}/assets/img/docs/usage-statistics-setting.png)
 
 ## Detailed usage statistics
+{: #detailed-usage-statistics }
 
 The following sections provide information about the usage statistics CircleCI will gather when this setting is enabled.
 
 ### Weekly account usage
+{: #weekly-account-usage }
 
 | **Name** | **Type**  | **Purpose** |
 |  ------- | ------ | ------ |
@@ -34,6 +36,7 @@ The following sections provide information about the usage statistics CircleCI w
 {: class="table table-striped"}
 
 ### Weekly job activity
+{: #weekly-job-activity }
 
 | **Name** | **Type**  | **Purpose** |
 |  ------- | ------ | ------ |
@@ -65,10 +68,12 @@ The following sections provide information about the usage statistics CircleCI w
 {: class="table table-striped"}
 
 ## Accessing usage data
+{: #accessing-usage-data }
 If you would like programatic access to this data in order to better understand your users you may run this command from the Services VM.
 
 `docker exec usage-stats /src/builds/extract`
 
 ### Security and privacy
+{: #security-and-privacy }
 
 Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/legal/enterprise-license-agreement/) for our complete security and privacy disclosures.

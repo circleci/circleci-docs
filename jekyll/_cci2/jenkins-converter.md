@@ -12,6 +12,7 @@ The CircleCI [Jenkins Converter](https://circleci.com/developer/tools/jenkins-co
 Currently, the converter only supports declarative Jenkinsfiles. While the number of supported plug-ins and steps continue to be expanded, the hope is that this tool gets you started at least 50% of the way, and makes it easier for you to get started building on CircleCI.
 
 ## Limitations
+{: #limitations }
 
 * A limited number of syntaxes and plugins are supported. Jenkinsfiles relying on unsupported syntaxes and plugins cannot be converted. Please manually remove them.
 
@@ -35,8 +36,10 @@ Currently, the converter only supports declarative Jenkinsfiles. While the numbe
   ```
 
 ## Next steps after conversion
+{: #next-steps-after-conversion }
 
 ### Executors
+{: #executors }
 
 A static Docker executor, [cimg/base](https://github.com/CircleCI-Public/cimg-base), is inserted as the [executor](https://circleci.com/docs/reference-2-1/#executors) regardless of the one defined within the Jenkinsfile input.
 
@@ -45,10 +48,12 @@ Given that `cimg/base` is a very lean image, it's highly likely that your projec
 Depending on the use case, you might require the [machine executor](https://circleci.com/docs/2.0/executor-types/#using-machine) if your application requires full access to OS resources and the job environment, or the [macOS executor](https://circleci.com/docs/2.0/executor-types/#using-macos).
 
 ### Workflows
+{: #workflows }
 
 [CircleCI Workflows](https://circleci.com/docs/2.0/workflows/) (the equivalent of Jenkins pipelines) are transferred from your Jenkinsfile to the config.yml, including branch filters. The converter will not transfer any [scheduled builds](https://circleci.com/docs/2.0/configuration-reference/#triggers) to prevent unintentional builds from being triggered.
 
 ### Jobs
+{: #jobs }
 
 Many of the configuration options within CircleCI jobs don't have equivalents to Jenkins' offerings. It is best practice to start with the following features to get a richer experience from CircleCI:
 
@@ -59,10 +64,12 @@ Many of the configuration options within CircleCI jobs don't have equivalents to
 - [Store Artifacts](https://circleci.com/docs/2.0/configuration-reference/#store_artifacts)
 
 ### Steps
+{: #steps }
 
 While the Jenkinsfile Converter attempts to directly translate steps, it does not provide full translation of all steps. To address this, the `JFC_STACK_TRACE` key was added to translate specific steps within the output YAML and to provide some guidance on how to proceed with unsupported step directives.
 
 ## Supported syntax
+{: #supported-syntax }
 
 Only declarative (pipeline) `Jenkinsfile`s are currently supported.
 
@@ -80,6 +87,7 @@ stage | [job](https://circleci.com/docs/2.0/configuration-reference/#jobs) | Sup
 {: class="table table-striped"}
 
 ## Supported Jenkins plugins
+{: #supported-jenkins-plugins }
 
 **Note: Jenkinsfiles relying on plugins not listed below cannot be converted**. Please remove stanzas relying on those unsupported plugins (for example `options`), otherwise **you will see an error message saying something is "Unknown" or "Invalid"**. Please submit a ticket with our support center if you have a request to add a plugin to the list.
 
@@ -163,5 +171,6 @@ stage | [job](https://circleci.com/docs/2.0/configuration-reference/#jobs) | Sup
 - Pipeline Utility Steps (`pipeline-utility-steps`)
 
 ## Feedback
+{: #feedback }
 
 To share any general feedback regarding this project, submit a ticket with our CircleCI Support team.

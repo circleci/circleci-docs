@@ -15,6 +15,7 @@ This is an annotated `config.yml` for a simple Phoenix web application, which yo
 If you're in a rush, just copy the configuration below into [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project's root directory. Otherwise, we recommend reading through the whole configuration for better understanding.
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -79,6 +80,7 @@ jobs:  # basic units of work in a run
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -184,6 +186,7 @@ available in the CircleCI web app.
 ```
 
 ## Parallelism
+{: #parallelism }
 
 **Splitting by Timings**
 
@@ -201,6 +204,7 @@ By default, JUnitFormatter saves the output to the `_build/test/lib/<application
 However, JUnitFormatter also allows you to configure the directory where the results are saved via the `report_dir` setting, in which case, the `path` value in your CircleCI config should match the relative path of wherever you're storing the output.
 
 ## See also
+{: #see-also }
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
 [Configuring Databases]({{ site.baseurl }}/2.0/databases/)

@@ -17,6 +17,7 @@ installed in a Docker image. If you’re in a rush, just copy the sample configu
 {:toc}
 
 ## Quickstart: Demo Go reference project
+{: #quickstart-demo-go-reference-project }
 
 We maintain a reference Go project to show how to build on CircleCI 2.0:
 
@@ -27,6 +28,7 @@ In the project you will find a commented CircleCI configuration file <a href="ht
 
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -115,11 +117,13 @@ workflows:
 {% endraw %}
 
 ### Pre-built CircleCI Docker images
+{: #pre-built-circleci-docker-images }
 {:.no_toc}
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
 
 ### Build the demo project yourself
+{: #build-the-demo-project-yourself }
 {:.no_toc}
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
@@ -133,6 +137,7 @@ If you want to test your changes locally, use [our CLI tool](https://circleci.co
 ---
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 This section explains the commands in `.circleci/config.yml`
 
@@ -292,6 +297,7 @@ workflows:
 Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
+{: #see-also }
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 

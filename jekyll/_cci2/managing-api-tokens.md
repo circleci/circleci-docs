@@ -14,6 +14,7 @@ with the appropriate permissions. This document describes the types of API
 tokens, as well as how to create and delete them.
 
 ## Overview
+{: #overview }
 
 There are two types of API tokens you can create within CircleCI.
 
@@ -32,6 +33,7 @@ There are two types of API tokens you can create within CircleCI.
 way to change existing tokens is to delete and recreate them, also known as "token rotation".
 
 ### Creating a personal API token
+{: #creating-a-personal-api-token }
 
   1. In the CircleCI application, go to your [User settings](https://circleci.com/account){:rel="nofollow"}.
   2. Click [Personal API Tokens](https://circleci.com/account/api){:rel="nofollow"}.
@@ -45,6 +47,7 @@ To delete a personal API token, click the X in the **Remove** column and confirm
 your deletion in the dialog window.
 
 ### Creating a project API token
+{: #creating-a-project-api-token }
 
   1. In the CircleCI application, go to your project's settings by clicking the
      gear icon next to your project.
@@ -60,6 +63,7 @@ DELETE in the form and click the Delete API Token button.
 
 
 ### Rotating Personal and Project API Tokens
+{: #rotating-personal-and-project-api-tokens }
 
 API Token rotation occurs when an old API token is replaced with a new token.
 
@@ -69,6 +73,7 @@ API Tokens. Many organizations automate this process, running a script when an
 employee leaves the company or when a token has been considered leaked.
 
 #### Rotating a Personal API Token
+{: #rotating-a-personal-api-token }
 
 1. In the CircleCI application, go to your [User settings](https://app.circleci.com/settings/user).
 1. Click [Personal API Tokens](https://app.circleci.com/settings/user/tokens).
@@ -79,6 +84,7 @@ employee leaves the company or when a token has been considered leaked.
 1. After the token appears, copy and paste it to another location. You will not be able to view the token again.
 
 #### Rotating a Project API Token
+{: #rotating-a-project-api-token }
 
 1. In the CircleCI application, go to your project’s settings by clicking the gear icon next to your project.
 1. In the **Permissions** section, click on **API Permissions**.
@@ -90,6 +96,7 @@ employee leaves the company or when a token has been considered leaked.
 1. Click the **Add Token** button.
 
 ## Next steps
+{: #next-steps }
 
 Some possible usecases for an API token might be:
 

@@ -12,16 +12,19 @@ version:
 NOTE: CircleCI Runner is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. Please [contact us](https://circleci.com/contact/) for more information.
 
 ## Authentication
+{: #authentication }
 
 When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server
 deployment either via `--host HOSTNAME` and `--token TOKEN` flags, or the CircleCI CLI's configuration file.
 
 ####  Resource class example
+{: #resource-class-example }
 ```plaintext
 circleci runner resource-class create <resource-class> <description> --host HOSTNAME --token TOKEN
 ```
 
 ## Configuration file
+{: #configuration-file }
 
 When setting up a Runner, the configuration file should include `host` property.
 
@@ -37,6 +40,7 @@ runner:
 ```
 
 ## Version
+{: #version }
 
 A specific server version works with a specific runner version. The table below presents the mapping.
 

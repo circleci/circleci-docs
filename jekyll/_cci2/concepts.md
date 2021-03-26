@@ -16,6 +16,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 {:toc}
 
 ## Projects
+{: #projects }
 
 A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
 
@@ -27,6 +28,7 @@ site.baseurl }}/2.0/notifications/) for the project's status.
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
 ## Configuration
+{: #configuration }
 
 CircleCI believes in *configuration as code*. Your entire continuous integration and deployment process is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
 
@@ -51,6 +53,7 @@ The following image uses an [example Java application](https://github.com/Circle
 ![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
 ## User types
+{: #user-types }
 
 It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
 
@@ -67,6 +70,7 @@ projects. Users may not view project data that is stored in environment variable
 
 
 ## Pipelines
+{: #pipelines }
 
 A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
 
@@ -75,6 +79,7 @@ Pipelines represent methods for interacting with your configuration:
 {% include snippets/pipelines-benefits.adoc %}
 
 ## Orbs
+{: #orbs }
 
 Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config. Orbs are not currently available for CircleCI Server.
 
@@ -83,12 +88,14 @@ The graphic above illustrating an example Java configuration can be greatly simp
 ![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
 ## Jobs
+{: #jobs }
 
 Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
 ## Executors and images
+{: #executors-and-images }
 
 Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
@@ -173,6 +180,7 @@ The Primary Container is defined by the first image listed in [`.circleci/config
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
 ## Steps
+{: #steps }
 
 Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step, which is a _built-in_ step available across all CircleCI projects, checks out the source code for a job over SSH. Then, the `run` step allows you to run custom commands, such as executing the command `make test`  using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
@@ -197,6 +205,7 @@ jobs:
 ```
 
 ## Image
+{: #image }
 
 An image is a packaged system that has instructions for creating a running container.
 The Primary Container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
@@ -239,6 +248,7 @@ The Primary Container is defined by the first image listed in a [`.circleci/conf
  ```
 
 ## Workflows
+{: #workflows }
 
 Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
@@ -394,6 +404,7 @@ workflows:
 {% endraw %}
 
 ## Caches, workspaces and artifacts
+{: #caches-workspaces-and-artifacts }
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -573,6 +584,7 @@ Caches     | Months               | Store non-vital data that may help the job r
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.

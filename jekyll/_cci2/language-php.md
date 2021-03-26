@@ -16,6 +16,7 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 {:toc}
 
 ## Quickstart: Demo PHP Laravel reference project
+{: #quickstart-demo-php-laravel-reference-project }
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 
@@ -25,12 +26,14 @@ We maintain a reference PHP Laravel project to show how to build PHP on CircleCI
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
 
 ## Pre-built CircleCI Docker images
+{: #pre-built-circleci-docker-images }
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available.
 
 ## Build the demo PHP project yourself
+{: #build-the-demo-php-project-yourself }
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -41,6 +44,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 ---
 
 ## Sample configuration
+{: #sample-configuration }
 
 Following is the commented `.circleci/config.yml` file in the demo project.
 
@@ -90,6 +94,7 @@ jobs: # a collection of steps
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -185,6 +190,7 @@ Finally, we will set up a test database with Sqlite, run migrations and run test
 Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

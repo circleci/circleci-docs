@@ -16,6 +16,7 @@ This document provides information about pre-built CircleCI images and a listing
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 For convenience,
@@ -30,10 +31,12 @@ Visit the `circleci-dockerfiles` GitHub repo for the [Dockerfiles for the Circle
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or otherwise improve functionality, and these changes can sometimes cause affect how images work in CircleCI jobs. Please follow the [**convenience-images** tag on Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
 
 ### Examples
+{: #examples }
 
 Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## Next-generation convenience images
+{: #next-generation-convenience-images }
 
 The next-generation convenience images in this section were built from the ground up with CI, efficiency, and determinism in mind. Here are some of the highlights:
 
@@ -42,6 +45,7 @@ The next-generation convenience images in this section were built from the groun
 **Improved reliability and stability** - The current images are rebuilt practically every day with potential changes from upstream that we can't always test fast enough. This leads to frequent breaking changes, which is not the best environment for stable, deterministic builds. Next-gen images will only be rebuilt for security and critical-bugs, leading to more stable and deterministic images.
 
 ### CircleCI base image
+{: #circleci-base-image }
 
 ```yaml
 image: cimg/base:2020.01
@@ -58,6 +62,7 @@ If you need a generic image to run on CircleCI, to use with orbs, or to use as a
 You can find more config examples for this image on the [Developer Hub](https://circleci.com/developer/images/image/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
 
 ## Next-gen CircleCI Images
+{: #next-gen-circleci-images }
 
 CircleCI is moving to a set of new image repositories that bring better documentation and more determinism. Below is an example image definition for the next-gen Go image.
 
@@ -69,6 +74,7 @@ This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`
 
 
 ## Best practices
+{: #best-practices }
 
 The next-gen convenience images in the following sections are based on the most recent Ubuntu LTS Docker images and installed with the base libraries for the language or services, so it is best practice to use the most specific image possible. This makes your builds more deterministic by preventing an upstream image from introducing unintended changes to your image.
 
@@ -117,6 +123,7 @@ jobs:
 ```
 
 ### Using an image tag to pin an image version
+{: #using-an-image-tag-to-pin-an-image-version }
 {:.no_toc}
 
 You can pin aspects of a Docker image
@@ -144,6 +151,7 @@ Only legacy images from the `circleci` repository support the `latest` tag.
 Next-gen images from the `cimg` repository do not support `latest`.
 
 ### Using a docker image id to pin an image to a fixed version
+{: #using-a-docker-image-id-to-pin-an-image-to-a-fixed-version }
 {:.no_toc}
 
 Every Docker image has a [unique ID](https://docs.docker.com/engine/reference/commandline/pull/#pull-an-image-by-digest-immutable-identifier).
@@ -158,6 +166,7 @@ sha256:df1808e61a9c32d0ec110960fed213ab2339451ca88941e9be01a03adc98396e
 ```
 
 #### Finding an image id
+{: #finding-an-image-id }
 {:.no_toc}
 
 1. In the CircleCI application,
@@ -174,6 +183,7 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 ```
 
 ## Image types
+{: #image-types }
 
 CircleCI's convenience images fall into two categories:
 **language** images and **service** images.
@@ -186,6 +196,7 @@ it is [best practice](#best-practices)
 to use a more specific tag.
 
 ### Legacy language images
+{: #legacy-language-images }
 {:.no_toc}
 
 The legacy language images are convenience images for common programming languages.
@@ -208,6 +219,7 @@ CircleCI maintains legacy images for the languages below.
 - [Rust](#rust)
 
 #### Language image variants
+{: #language-image-variants }
 {:.no_toc}
 
 CircleCI maintains several variants for language images.
@@ -224,6 +236,7 @@ to add browsers to the `circleci/golang:1.9` image,
 use the `circleci/golang:1.9-browsers` image.
 
 ### Next-gen language images
+{: #next-gen-language-images }
 {:.no_toc}
 
 Like the legacy images, the next-gen language images are convenience images for common programming languages.
@@ -253,6 +266,7 @@ Finally, go and market your "idea" to friends, co-workers, forums, and other com
 If we see an idea on the board take off, we'll consider building it officially.
 
 #### Next-gen language image variants
+{: #next-gen-language-image-variants }
 {:.no_toc}
 
 CircleCI maintains several variants for the next-gen language image.
@@ -260,6 +274,7 @@ For next-gen images be sure to check each image listing for information on each 
 See each image listing on the [Developer Hub](https://circleci.com/developer/images/) for details on which variants it supports.
 
 ### Service images
+{: #service-images }
 {:.no_toc}
 
 Service images are convenience images for services like databases.
@@ -277,6 +292,7 @@ CircleCI maintains legacy images for the services below.
 - [Redis](#redis)
 
 #### Service image variant
+{: #service-image-variant }
 {:.no_toc}
 
 CircleCI maintains only one variant for service images.
@@ -290,12 +306,14 @@ to use RAM volume,
 use the `circleci/postgres:9.5-postgis-ram` image.
 
 ### Next-gen service images
+{: #next-gen-service-images }
 {:.no_toc}
 
 CircleCI is working on adding next-gen service convenience images.
 Checkout CircleCI's [Developer Hub](https://circleci.com/developer/images/) for the latest available service images.
 
 ## Pre-installed tools
+{: #pre-installed-tools }
 
 All convenience images have been extended with additional tools, installed with `apt-get`:
 
@@ -338,6 +356,7 @@ The following packages are installed via `curl` or other means.
 
 
 ## Out of scope
+{: #out-of-scope }
 
 1. If an image isn't listed above, it is not available. As the Convenience Image program is revamped, proposals for new images are not currently being accepted.
 1. Old versions of software will not be rebuilt. Once an upstream image stops building the tag for a specific release, say Node.js v8.1.0, then we stop building it too. This means other tools in that image, such as `npm` in this example, will no longer be updated either.
@@ -345,6 +364,7 @@ The following packages are installed via `curl` or other means.
 
 
 ## Latest image tags by language
+{: #latest-image-tags-by-language }
 
 Below is a list of the latest **legacy** convenience images, sorted by language.
 For details about the contents of each image,
@@ -367,6 +387,7 @@ that a given tag has the same meaning across images!
 {% for image in images %}
 
 ### {{ image[1].name }}
+{: #image1name }
 {:.no_toc}
 
 **Resources:**
@@ -401,6 +422,7 @@ Note: Any variants available for this image can be used by appending the variant
 {% endfor %}
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for information about how to authorize your build to use an image in a private repository or in Amazon ECR.

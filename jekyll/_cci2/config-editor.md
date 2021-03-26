@@ -21,6 +21,7 @@ The benefits of using the CircleCI config editor include:
 - Easily accessible CircleCI documentation, designed to best suit your needs
 
 ## Getting started with the CircleCI config editor
+{: #getting-started-with-the-circleci-config-editor }
 
 In the CircleCI app, select a pipeline in the **All Pipelines** view.
 
@@ -38,6 +39,7 @@ You can also access the config editor:
 - By selecting a job in the **Pipelines** view, selecting the 3 dots in the upper-right corner, and then selecting **Configuration File**
 
 ## Auto-completion
+{: #auto-completion }
 
 Like many traditional IDEs, the CircleCI configuration editor will provide auto-complete suggestions as you type, as well
 as any supporting documentation.
@@ -45,12 +47,14 @@ as any supporting documentation.
 ![Auto-completion]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
 
 ## Smart tooltips
+{: #smart-tooltips }
 
 When hovering over a CircleCI definition in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
 ![Tooltips]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
 
 ## Automatic validation
+{: #automatic-validation }
 
 The config editor will automatically validate your configuration yaml after every change.
 
@@ -64,6 +68,7 @@ that may assist in fixing the error (see the "DOCS" tab in the below screenshot)
 ![Failing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
 
 ## Commit and run
+{: #commit-and-run }
 
 Once your configuration is valid, you may commit to your VCS and re-run the pipeline, all from within the Config Editor,
 by selecting the **Commit and Run** button in the upper-right corner.
@@ -71,6 +76,7 @@ by selecting the **Commit and Run** button in the upper-right corner.
 ![Commit and Run]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
 
 ## See also
+{: #see-also }
 
 - [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/)
 - [Using the CircleCI CLI]({{ site.baseurl }}/2.0/local-cli)

@@ -15,6 +15,7 @@ This document describes how to use the official CircleCI pre-built Docker contai
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 CircleCI provides pre-built images for languages and services like databases with a lot of conveniences added into the images on [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
@@ -22,6 +23,7 @@ CircleCI provides pre-built images for languages and services like databases wit
 The following example shows a 2.0 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with one job called `build`. Docker is selected for the executor and the first image is the primary container where all execution occurs. This example has a second image and this will be used as the service image. The first image is the programming language Python. The Python image has `pip` installed and `-browsers` for browser testing. The secondary image gives access to things like databases.
 
 ## PostgreSQL database testing example
+{: #postgresql-database-testing-example }
 
 In the primary image the config defines an environment variable with the `environment` key, giving it a URL. The URL tells it that it is a PostgreSQL database, so it will default to the PostgreSQL default port. This pre-built circleci image includes a database and a user already. The username is `postgres` and database is `circle_test`. So, you can begin with using that user and database without having to set it up yourself.
 
@@ -94,10 +96,12 @@ Three commands follow the `postgresql-client-9.6` installation that interact wit
 When the database service spins up, it automatically creates the database `circlecitest` and the `root` role that you can use to log in and run your tests. It isn't running as `root`, it is using the `circle` account. Then the database tests run to create a table, insert value into the table, and when SELECT is run on the table, the value comes out.
 
 ## Optional customization
+{: #optional-customization }
 
 This section describes additional optional configuration for further customizing your build and avoiding race conditions.
 
 ### Optimizing Postgres images
+{: #optimizing-postgres-images }
 {:.no_toc}
 
 The default `circleci/postgres` Docker image uses regular persistent storage on disk.
@@ -109,6 +113,7 @@ PostGIS is also available and can be combined with the previous example:
 `circleci/postgres:9.6-alpine-postgis-ram`
 
 ### Using binaries
+{: #using-binaries }
 {:.no_toc}
 
 To use `pg_dump`, `pg_restore` and similar utilities requires some extra configuration to ensure that `pg_dump` invocations will also use the correct version. Add the following to your `config.yml` file to enable `pg_*` or equivalent database utilities:
@@ -120,6 +125,7 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```
 
 ### Using Dockerize to wait for dependencies
+{: #using-dockerize-to-wait-for-dependencies }
 {:.no_toc}
 
 Using multiple Docker containers for your jobs may cause race conditions if the service in a container does not start  before the job tries to use it. For example, your PostgreSQL container might be running, but might not be ready to accept connections. Work around this problem by using `dockerize` to wait for dependencies.
@@ -173,6 +179,7 @@ Redis also has a CLI available:
 `dockerize -wait http://localhost:80 -timeout 1m`
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 Refer to the [Database Configuration Examples]({{ site.baseurl }}/2.0/postgres-config/) document for additional configuration file examples.

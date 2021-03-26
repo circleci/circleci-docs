@@ -16,13 +16,16 @@ This document describes best practices for using shell scripts in your [CircleCI
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 Configuring CircleCI often requires writing shell scripts. While shell scripting can grant finer control over your build, it is a subtle art that can produce equally subtle errors. You can avoid many of these errors by reviewing the best practices explained below.
 
 ## Shell script best practices
+{: #shell-script-best-practices }
 
 ### Use ShellCheck
+{: #use-shellcheck }
 
 [ShellCheck](https://github.com/koalaman/shellcheck) is a shell script static analysis tool that gives warnings and suggestions for bash/sh shell scripts.
 
@@ -109,6 +112,7 @@ You must set SECRET_ENV_VAR!
 
 
 ### Set Error Flags
+{: #set-error-flags }
 
 There are several error flags you can set to automatically exit scripts when unfavorable conditions occur.
 As a best practice, add the following flags at the beginning of each script to protect yourself from tricky errors.
@@ -127,6 +131,7 @@ set -o pipefail
 ```
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 For more detailed explanations and additional techniques,

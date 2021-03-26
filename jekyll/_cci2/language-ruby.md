@@ -16,6 +16,7 @@ This guide will help you get started with a Ruby on Rails application on CircleC
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a
@@ -32,6 +33,7 @@ The application uses Rails version 6.1, `rspec-rails`, and
 
 
 ## Pre-Built CircleCI Docker Images
+{: #pre-built-circleci-docker-images }
 
 This application build also uses one of the pre-built [CircleCI Docker
 Images]({{site.baseurl}}/2.0/circleci-images/).
@@ -46,6 +48,7 @@ Docker Hub in the `circleci` directory.
 ---
 
 ## Sample configuration
+{: #sample-configuration }
 
 The following code block is commented to describe each part of the configuration
 for the sample application.
@@ -137,6 +140,7 @@ workflows:
 
 
 ## Build the demo Ruby on Rails project yourself
+{: #build-the-demo-ruby-on-rails-project-yourself }
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -145,6 +149,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 3. To make changes you can edit the `.circleci/config.yml` file and make a commit. When you push a commit to GitHub, CircleCI will build and test the project.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.

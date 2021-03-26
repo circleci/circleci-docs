@@ -10,6 +10,7 @@ version:
 Refer to the following video and documents for help with setting up your tests.
 
 ## How to build, test, and deploy video tutorial
+{: #how-to-build-test-and-deploy-video-tutorial }
 
 Watch the following video for a detailed tutorial of Docker, iOS, and Android builds.
 <div class="video-wrapper">
@@ -17,6 +18,7 @@ Watch the following video for a detailed tutorial of Docker, iOS, and Android bu
 </div>
 
 ## Running, splitting, and debugging tests
+{: #running-splitting-and-debugging-tests }
 
 Document | Description
 ----|----------
@@ -32,6 +34,7 @@ Document | Description
 {: class="table table-striped"}
 
 ## Deploy
+{: #deploy }
 
 Refer to the following document for information and examples of deployment targets and tools.
 

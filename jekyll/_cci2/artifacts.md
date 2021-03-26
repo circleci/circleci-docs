@@ -15,6 +15,7 @@ This document describes how to work with Artifacts in the following sections:
 {:toc}
 
 ## Artifacts overview
+{: #artifacts-overview }
 
 Artifacts persist data after a job is completed
 and may be used for storage of the outputs of your build process.
@@ -47,6 +48,7 @@ if you are expecting
 to find artifacts at a given path within the application.
 
 ## Uploading artifacts
+{: #uploading-artifacts }
 
 To upload artifacts created during builds, use the following example:
 
@@ -87,6 +89,7 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
   - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
 
 ## Uploading core files
+{: #uploading-core-files }
 
 This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
 
@@ -147,6 +150,7 @@ When CircleCI runs a job,
 a link to the core dump file appears in the Artifacts tab of the **Job page**.
 
 ## Downloading all artifacts for a build on CircleCI
+{: #downloading-all-artifacts-for-a-build-on-circleci }
 
 To download your artifacts with `curl`,
 follow the steps below.
@@ -190,6 +194,7 @@ Placeholder   | Meaning                                                         
 {: class="table table-striped"}
 
 ### Description of commands
+{: #description-of-commands }
 {:.no_toc}
 
 First, the CIRCLE_TOKEN environment variable is created. Then, the `curl`
@@ -200,6 +205,7 @@ the current directory in your terminal.
 
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)

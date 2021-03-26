@@ -11,6 +11,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 
 
 ## Amazon Web Services
+{: #amazon-web-services }
 
 ```
     steps:
@@ -23,6 +24,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 ## Pivotal
+{: #pivotal }
 
 ```
     steps:
@@ -52,6 +54,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 
 
 ## Google
+{: #google }
 
 ```
     steps:
@@ -62,6 +65,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 
 
 ## Heroku
+{: #heroku }
 
 ```
     steps:
@@ -73,6 +77,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 ## NPM
+{: #npm }
 
 ```
     steps:
@@ -85,6 +90,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 ## SSH
+{: #ssh }
 
 ```
     steps:
@@ -95,6 +101,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 ## Snapcraft
+{: #snapcraft }
 
 ```
     steps:
@@ -107,6 +114,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 ## Artifactory
+{: #artifactory }
 
 ```
     steps:
@@ -120,6 +128,7 @@ CircleCI can be configured to [deploy](  {{ site.baseurl }}/2.0/deployment-integ
 ```
 
 ## NuGet (via .NET Core CLI)
+{: #nuget-via-net-core-cli }
 
 ```
     steps:

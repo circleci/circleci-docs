@@ -16,6 +16,7 @@ for your iOS or Mac project on CircleCI 2.0.
 {:toc}
 
 ## Basic configuration of iOS projects
+{: #basic-configuration-of-ios-projects }
 
 This document assumes that you already have an iOS or Mac project building
 correctly on CircleCI 2.0. It also assumes that you use Bundle and
@@ -32,6 +33,7 @@ If you have not yet configured your iOS or Mac project on CircleCI 2.0,
 you can find the configuration instructions in the [Testing iOS Applications on macOS document]({{ site.baseurl }}/2.0/testing-ios/).
 
 ## Setting up Fastlane Match
+{: #setting-up-fastlane-match }
 
 Code signing must be configured to generate
 ad-hoc distributions of your app and App Store builds.
@@ -50,6 +52,7 @@ fastlane match adhoc` to generate and install the Ad-hoc distribution
 keys and profiles.
 
 ### Preparing your Xcode project for use with Fastlane Match
+{: #preparing-your-xcode-project-for-use-with-fastlane-match }
 {:.no_toc}
 
 Before setting up Match you must ensure that the code signing
@@ -66,6 +69,7 @@ In the target that you will be using for ad-hoc builds:
 *Match AdHoc* profile.
 
 ### Adding Match to the Fastlane lane
+{: #adding-match-to-the-fastlane-lane }
 {:.no_toc}
 
 On CircleCI, Fastlane Match will need to be run every time you are
@@ -98,6 +102,7 @@ end
 ```
 
 ### Adding a user key to the CircleCI project
+{: #adding-a-user-key-to-the-circleci-project }
 {:.no_toc}
 
 To enable Fastlane Match to download the certificates and the keys
@@ -126,6 +131,7 @@ After you have added a user key, CircleCI will be able to checkout both the
 project repo and the code signing certificates / keys repo from GitHub.
 
 ### Adding the Match passphrase to the encrypted environment variables
+{: #adding-the-match-passphrase-to-the-encrypted-environment-variables }
 {:.no_toc}
 
 To enable Fastlane Match to decrypt the keys and profiles stored in
@@ -139,6 +145,7 @@ its value to your encryption passphrase. The passphrase will be stored
 encrypted at rest.
 
 ### Invoking the Fastlane Test Lane on CircleCI
+{: #invoking-the-fastlane-test-lane-on-circleci }
 {:.no_toc}
 
 After you have configured Match and added its invocation into the Ad-hoc
@@ -177,6 +184,7 @@ workflows:
 ```
 
 ## Sample configuration files
+{: #sample-configuration-files }
 
 The best practice configuration for setting up code signing for iOS and
 Mac projects is as follows:
@@ -254,6 +262,7 @@ workflows:
 By setting the `FL_OUTPUT_DIR:` env, that will tell Fastlane to output the XCode and Fastlane logs to that directory, so they get uploaded as artifacts for ease in troubleshooting.
 
 ## Example application on GitHub
+{: #example-application-on-github }
 
 See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)
 for an example of how to configure code signing for iOS apps using

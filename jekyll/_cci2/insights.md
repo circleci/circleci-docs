@@ -10,6 +10,7 @@ version:
 ---
 
 ## Overview
+{: #overview }
 
 
 The CircleCI Insights dashboard provides an overview of the health and usage of
@@ -20,6 +21,7 @@ success rates, pipeline duration, and other pertinent information.
 This document describes how to access and use the Insights dashboard on CircleCI Cloud and Server.
 
 ## Usage (CircleCI Cloud)
+{: #usage-circleci-cloud }
 
 Insights across your organization can be accessed from the sidebar of the
 CircleCI web application.
@@ -39,6 +41,7 @@ To access a specific project's insights, view a pipeline's workflow and click
 
 
 ### Workflow overview
+{: #workflow-overview }
 
 The Insights dashboard provides workflow details plotted over time.
 **Please note that the data is not real time and there may be up to a 24 hour
@@ -51,6 +54,7 @@ The Insights dashboard provides workflow details plotted over time.
 - Workflow credit usage*
 
 ### Job overview
+{: #job-overview }
 
 Switch to the **Job** tab to view cumulative time-series data on a per-job basis:
 
@@ -69,6 +73,7 @@ found in your organization's Plan Overview.</i>
 ---
 
 ## CircleCI Server Insights
+{: #circleci-server-insights }
 
 <div class="alert alert-warning" role="alert">
   <p><span style="font-size: 115%; font-weight: bold;">⚠️ Heads up!</span></p>
@@ -76,6 +81,7 @@ found in your organization's Plan Overview.</i>
 </div>
 
 ### Overview
+{: #overview }
 
 Click the Insights menu item in the CircleCI app to view a dashboard showing the health of all repositories you are following. Median build time, median queue time, last build time, success rate, and parallelism appear for your default branch. **Note:** If you have configured Workflows, graphs display all of the jobs that are being executed for your default branch.
 
@@ -90,6 +96,7 @@ The image illustrates the following data about your builds:
 - Last build
 
 ### Project insights
+{: #project-insights }
 
 Click the Insights icon on the main navigation, then click your repo name to access per-project insights.
 
@@ -103,6 +110,7 @@ The per-project insights page gives you access to the build status and build per
 
 
 ## Sumo Logic integration
+{: #sumo-logic-integration }
 
 Sumo Logic users may track and visualize analytical data across all of their
 jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app
@@ -110,6 +118,7 @@ integration from the Sumo Logic partner integrations site.
 
 
 ### The CircleCI dashboard for Sumo Logic
+{: #the-circleci-dashboard-for-sumo-logic }
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
@@ -132,10 +141,12 @@ Install the CircleCI dashboard by using the App Catalog from the dashboard home 
 This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
 ### The Sumo Logic orb
+{: #the-sumo-logic-orb }
 
 Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/sumologic).
 
 #### 1. Import the Sumo Logic orb.
+{: #1-import-the-sumo-logic-orb }
 Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
 
 ```yaml
@@ -144,6 +155,7 @@ orbs:
 ```
 
 #### 2. Add _workflow-collector_ to workflow.
+{: #2-add-workflow-collector-to-workflow }
 The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
 
 ```yaml
@@ -161,6 +173,7 @@ workflows:
             - test
 ```
 #### 3. Create two source collectors.
+{: #3-create-two-source-collectors }
 You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
 
 You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
@@ -174,6 +187,7 @@ To create the two source collectors:
 6. Save the resulting URL.
 
 #### 4. Add environment variables.
+{: #4-add-environment-variables }
 For each of the URLs produce in the previous step, create the corresponding environment variable.
 
 Env vars:
@@ -187,6 +201,7 @@ This will link the orb with your Sumo Logic dashboard.
 Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
 
 ## See also
+{: #see-also }
 
 Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.

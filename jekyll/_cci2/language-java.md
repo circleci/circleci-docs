@@ -16,6 +16,7 @@ This guide will help you get started with a Java application building with Gradl
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -29,6 +30,7 @@ We are going to make a few assumptions here:
 
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 ```yaml
@@ -109,6 +111,7 @@ workflows:
 {% endraw %}
 
 ## Get the code
+{: #get-the-code }
 
 The configuration above is from a demo Java app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-java-spring](https://github.com/CircleCI-Public/circleci-demo-java-spring).
 
@@ -117,6 +120,7 @@ If you want to step through it yourself, you can fork the project on GitHub and 
 Now we are ready to build a `config.yml` from scratch.
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 We always start with the version.
 
@@ -274,6 +278,7 @@ workflows:
 Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
