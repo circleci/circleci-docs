@@ -134,6 +134,8 @@ en:
           link: 2.0/runner-installation/
         - name: Runner API
           link: 2.0/runner-api/
+        - name: Runner in Server
+          link: 2.0/runner-server/
         - name: Runner FAQs
           link: 2.0/runner-faqs/
 
