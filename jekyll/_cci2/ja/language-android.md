@@ -128,9 +128,9 @@ CircleCI で Firebase Test Lab を使用するには、最初に以下の手順�
 
 3. **`gcloud` を承認する:**. `gcloud` ツールを承認し、デフォルトのプロジェクトを設定します。
 
-4. **Use `gcloud` to test with Firebase Test Lab.** Adjust the paths to the APK files to correspond to your project.
+4. **`gcloud` を使用して Firebase Test Lab でテストする:** APK ファイルへのパスはプロジェクトに合わせて調整してください。
 
-5. **Install `crcmod` and use `gsutil` to copy test results data.** `crcmod` is required to use `gsutil`. `gsutil` を使用してバケット内の最新ファイルを CircleCI アーティファクト フォルダーにダウンロードします。 `BUCKET_NAME` と `OBJECT_NAME` は、プロジェクト固有の名前に置き換えてください。
+5. **`crcmod` をインストールし、`gsutil` を使用してテスト結果データをコピーする:** `gsutil` を使用するには `crcmod` が必要です。 `gsutil` を使用してバケット内の最新ファイルを CircleCI アーティファクト フォルダーにダウンロードします。 `BUCKET_NAME` と `OBJECT_NAME` は、プロジェクト固有の名前に置き換えてください。
 
 ```yaml
 version: 2
