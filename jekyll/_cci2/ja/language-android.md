@@ -11,55 +11,55 @@ version:
   - Server v2.x
 ---
 
-This document describes how to set up an Android project on CircleCI in the following sections.
+以下のセクションに沿って、CircleCI で Android プロジェクトをセットアップする方法について説明します。
 
 * TOC
 {:toc}
 
 
-## Prerequisites
+## 前提条件
 {:.no_toc}
 
-This guide assumes the following:
+このガイドは以下を前提としています。
 
-- You are using [Gradle](https://gradle.org/) to build your Android project. Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルド ツールです。
+- [Gradle](https://gradle.org/) を使用して Android プロジェクトをビルドしている。 Gradle とは、[Android Studio](https://developer.android.com/studio) でプロジェクトを作成する際のデフォルトのビルド ツールです。
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**Note:** CircleCI offers an Android machine image available on CircleCI Cloud that supports x86 Android emulators and nested virtualization. Documentation on how to access it is available [here]({{site.baseurl}}/2.0/android-machine-image). Another way to run emulator tests from a job is to consider using an external service like [Firebase Test Lab](https://firebase.google.com/docs/test-lab). For more details, see the [Testing With Firebase Test Lab](#testing-with-firebase-test-lab) section below.
+**Note:** CircleCI offers an Android machine image available on CircleCI Cloud that supports x86 Android emulators and nested virtualization. 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーター テストを実行することもできます。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
 
 
-## Sample configuration for UI tests
+## UI テストの設定ファイルの例
 
-Let's walk through a sample configuration using the Android machine image. It is possible to use both orbs and to manually configure the use of the Android machine image to best suit your project.
+Android マシン イメージを使用した設定ファイルのサンプルを詳しく見ていきましょう。 Android マシン イメージの使用を構成するには、Orb を使用することも手動で行うこともできます。プロジェクトに最適な方法を選んでください。
 
 ```yaml
 # .circleci/config.yaml
-version: 2.1 # to enable orb usage, you must be using circleci 2.1
-# Declare the orbs you wish to use.
-# Android orb docs are available here:  https://circleci.com/developer/orbs/orb/circleci/android
+version: 2.1 # Orb を使用するには、CircleCI 2.1 を使用する必要があります
+# 使用したい Orb を宣言します
+# Android Orb のドキュメントは、こちらから参照できます: https://circleci.com/developer/ja/orbs/orb/circleci/android
 orbs:
   android: circleci/android@1.0 
 workflows:
   test:
     jobs:
-      # This job uses the Android machine image by default
+      # このジョブではデフォルトで Android マシン イメージを使用します
       - android/run-ui-tests:
-          # Use pre-steps and post-steps if necessary
-          # to execute custom steps before and afer any of the built-in steps
+          # 必要に応じて事前ステップと事後ステップを使用して
+          # ビルトイン ステップの前後でカスタム ステップを実行します
           system-image: system-images;android-29;default;x86
 ```
 
-As per above, using the Android orb will simplify your configuration; you can compare and contrast examples of different sizes [here]({{site.baseurl}}/2.0/android-machine-image#examples).
+上記のように、Android Orb を使用すると構成がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
 
 
-## Sample configuration for unit tests
+## 単体テストの設定ファイルの例
 
-For convenience, CircleCI provides a set of Docker images for building Android apps. These pre-built images are available in the [CircleCI org on Docker Hub](https://hub.docker.com/r/circleci/android/). The source code and Dockerfiles for these images are available in [this GitHub repository](https://github.com/circleci/circleci-images/tree/master/android).
+CircleCI には、Android アプリのビルドに使用できる Docker イメージが用意されているので便利です。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソース コードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
 
-The CircleCI Android image is based on the [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) official Docker image, which is based on [buildpack-deps](https://hub.docker.com/_/buildpack-deps/). The base OS is Debian Jessie, and builds run as the `circleci` user, which has full access to passwordless `sudo`.
+CircleCI Android イメージは、公式の [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) Docker イメージに基づいており、この公式イメージは [buildpack-deps](https://hub.docker.com/_/buildpack-deps/) に基づいています。 ベース OS は Debian Jessie です。ビルドは、パスワードなしで `sudo` にフル アクセスできる `circleci` ユーザーとして実行されます。
 
-The following example demonstrates using an Android docker image rather than the Android machine image.
+以下の例は、Android マシン イメージではなく Android Docker イメージを使用する例を示しています。
 
 {% raw %}
 
@@ -72,7 +72,7 @@ jobs:
       - image: circleci/android:api-30-alpha
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -80,37 +80,37 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         name: Chmod パーミッション #Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
 #         command: sudo chmod +x ./gradlew
       - run:
-          name: Download Dependencies
+          name: 依存関係のダウンロード
           command: ./gradlew androidDependencies
       - save_cache:
           paths:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-          name: Run Tests
+          name: テストの実行
           command: ./gradlew lint test
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示されるようにします
           path: app/build/reports
           destination: reports
-      - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
+      - store_test_results: # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示されるようにします
           path: app/build/test-results
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+      # デプロイの構成例は https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
 ```
 {% endraw %}
 
-### React Native projects
+### React Native プロジェクト
 {:.no_toc}
 
-React Native projects can be built on CircleCI 2.0 using Linux, Android and macOS capabilities. Please check out [this example React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native) on GitHub for a full example of a React Native project.
+React Native プロジェクトは、Linux、Android、および macOS の機能を使用して CircleCI 2.0 上でビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
-## Testing with Firebase Test Lab
+## Firebase Test Lab を使用したテスト
 
 **Note:**: While this portion of the document walks through using a third party tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
 
-To use Firebase Test Lab with CircleCI, first complete the following steps.
+CircleCI で Firebase Test Lab を使用するには、最初に以下の手順を行います。
 
 1. **Create a Firebase project.** Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
 
@@ -120,9 +120,9 @@ To use Firebase Test Lab with CircleCI, first complete the following steps.
 
 3. **Enable required APIs.** Using the service account you created, log into Google and go to the [Google Developers Console API Library page](https://console.developers.google.com/apis/library). Enable the **Google Cloud Testing API** and the **Cloud Tool Results API** by typing their names into the search box at the top of the console and clicking **Enable API**.
 
-In your `.circleci/config.yml` file, add the following `run` steps.
+`.Circleci/config.yml` ファイルに、以下の `run` ステップを追加します。
 
-1. **Build the debug APK and test APK.** Use Gradle to build two APKs. ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#pre-dexing-の無効化によるビルド-パフォーマンスの向上)を検討してください。
+1. **Build the debug APK and test APK.** Use Gradle to build two APKs. ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#Pre-Dexing+%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%AB%E3%82%88%E3%82%8B%E3%83%93%E3%83%AB%E3%83%89+%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A)を検討してください。
 
 2. **Store the service account.** Store the service account you created in a local JSON file.
 
@@ -137,58 +137,58 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/android:api-28-alpha  # gcloud is baked into this image
+      - image: circleci/android:api-28-alpha  # gcloud はこのイメージに含まれています
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - run:
-          name: Build debug APK and release APK
+          name: デバッグ APK とリリース APK のビルド
           command: |
             ./gradlew :app:assembleDebug
             ./gradlew :app:assembleDebugAndroidTest
       - run:
-          name: Store Google Service Account
+          name: Google サービス アカウントの保存
           command: echo $GCLOUD_SERVICE_KEY > ${HOME}/gcloud-service-key.json
       - run:
-          name: Authorize gcloud and set config defaults
+          name: gcloud の承認とデフォルト プロジェクトの設定
           command: |
             sudo gcloud auth activate-service-account --key-file=${HOME}/gcloud-service-key.json
             sudo gcloud --quiet config set project ${GOOGLE_PROJECT_ID}
       - run:
-          name: Test with Firebase Test Lab
+          name: Firebase Test Lab でのテスト
           command: >
             sudo gcloud firebase test android run \ 
               --app <local_server_path>/<app_apk>.apk \ 
               --test <local_server_path>/<app_test_apk>.apk \ 
               --results-bucket cloud-test-${GOOGLE_PROJECT_ID}
       - run:
-          name: Install gsutil dependency and copy test results data
+          name: gsutil 依存関係のインストールとテスト結果データのコピー
           command: |
             sudo pip install -U crcmod
             sudo gsutil -m cp -r -U `sudo gsutil ls gs://[BUCKET_NAME]/[OBJECT_NAME] | tail -1` ${CIRCLE_ARTIFACTS}/ | true
 ```
 
-For more details on using `gcloud` to run Firebase, see the [official documentation](https://firebase.google.com/docs/test-lab/android/command-line).
+`gcloud` を使用して Firebase を実行する方法については、[Firebase の公式ドキュメント](https://firebase.google.com/docs/test-lab/android/command-line)を参照してください。
 
 
-## Deployment
+## デプロイ
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
 
-## Troubleshooting
+## トラブルシューティング
 
-### Handling out of memory errors
+### メモリ不足エラーへの対処
 
-You might run into out of memory (oom) errors with your build. To get acquainted with the basics of customizing the JVM's memory usage, consider reading the [Debugging Java OOM errors]({{ site.baseurl }}/2.0/java-oom/) document.
+ビルド中にメモリ不足 (OOM) エラーが発生することがあります。 JVM のメモリ使用をカスタマイズする基本的な方法については、「[Java メモリ エラーの回避とデバッグ]({{ site.baseurl }}/2.0/java-oom/)」を参照してください。
 
-If you are using [Robolectric](http://robolectric.org/) for testing you may need to make tweaks to gradle's use of memory. When the gradle vm is forked for tests it does not receive previously customized JVM memory parameters. You will need to supply Gradle with additional JVM heap for tests in your `build.gradle` file by adding `android.testOptions.unitTests.all { maxHeapSize = "1024m" }`. You can also add `all { maxHeapSize = "1024m" }` to your existing Android config block, which could look like so after the addition:
+テストに [Robolectric](http://robolectric.org/) を使用している場合は、Gradle のメモリ使用を微調整する必要があります。 Gradle VM を複数のテストにフォークする場合、VM は事前にカスタマイズされた JVM メモリ パラメーターを受け取りません。 `build.gradle` ファイル内に `android.testOptions.unitTests.all { maxHeapSize = "1024m" }` を追加して、テスト用の追加 JVM ヒープを Gradle に提供する必要があります。 `all { maxHeapSize = "1024m" }` を既存の Android 構成ブロックに追加してもかまいません。その場合は以下のようになります。
 
 ```groovy
 android {
     testOptions {
         unitTests {
-            // Any other configurations
+            // その他の構成
 
             all {
                 maxHeapSize = "1024m"
@@ -197,15 +197,15 @@ android {
     }
 ```
 
-If you are still running into OOM issues you can also limit the max workers for gradle: `./gradlew test --max-workers 4`
+それでも OOM の問題が解決しない場合は、Gradle の最大ワーカー数を `./gradlew test --max-workers 4` のように制限します。
 
-### Disabling pre-dexing to improve build performance
+### Pre-Dexing の無効化によるビルド パフォーマンスの向上
 {:.no_toc}
 
-Pre-dexing dependencies has no benefit on CircleCI. To disable pre-dexing, refer to [this blog post](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/).
+依存関係を Pre-Dexing しても CircleCI でメリットはありません。 Pre-Dexing を無効にする方法については、[こちらのブログ記事](http://www.littlerobots.nl/blog/disable-android-pre-dexing-on-ci-builds/)を参照してください。
 
-By default, the Gradle Android plugin pre-dexes dependencies. Pre-dexing speeds up development by converting Java bytecode into Android bytecode, allowing incremental dexing as you change code. CircleCI runs clean builds, so pre-dexing actually increases compilation time and may also increase memory usage.
+Gradle Android プラグインはデフォルトで依存関係を Pre-Dexing します。 Pre-Dexing は、Java バイトコードを Android バイトコードに変換し、コードの変更時にインクリメンタルに Dexing できるため、開発スピードの向上につながります。 ただし、CircleCI はクリーン ビルドを実行するため、実際には Pre-Dexing によってコンパイル時間が長引き、メモリ使用量も増加します。
 
-### Deploying to Google Play Store
+### Google Play ストアへのデプロイ
 
-There are a few third-party solutions for deploying to the Play Store from your CI build. [Gradle Play Publisher](https://github.com/Triple-T/gradle-play-publisher) enables you to upload an App Bundle/APK as well as app metadata. It's also possible to use [Fastlane](https://docs.fastlane.tools/getting-started/android/setup/) with Android.
+CI ビルドから Play ストアにデプロイする場合には、いくつかのサードパーティ ソリューションを利用できます。 [Gradle Play Publisher](https://github.com/Triple-T/gradle-play-publisher) では、App Bundle や APK、アプリ メタデータをアップロードできます。 [fastlane](https://docs.fastlane.tools/getting-started/android/setup/) を Android で使用することも可能です。
