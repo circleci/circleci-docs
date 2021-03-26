@@ -32,6 +32,8 @@ count of workflow executions or jobs, depending on the context.
 
 ## Organization-level metrics
 
+![]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
+
 Organization-level metrics allow you to analyze your organization’s performance.
 
 | Term                    | Definition     |
@@ -43,6 +45,8 @@ Organization-level metrics allow you to analyze your organization’s performanc
 {: class="table table-striped"}
 
 ## Workflow Metrics
+
+![]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
 
 | Term                    | Definition     |
 |-------------------------|----------------|
