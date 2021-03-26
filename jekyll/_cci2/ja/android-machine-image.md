@@ -138,12 +138,12 @@ jobs:
             sdkmanager "$SYSTEM_IMAGES"
             echo "no" | avdmanager --verbose create avd -n test -k "$SYSTEM_IMAGES"
       - run:
-          name: エミュレーターの起動
+          name: エミュレーター起動
           command: |
             emulator -avd test -delay-adb -verbose -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
           background: true
       - run:
-          name: キャッシュ キーの生成
+          name: キャッシュ キー生成
           command: |
             find . -name 'build.gradle' | sort | xargs cat |
             shasum | awk '{print $1}' > /tmp/gradle_cache_seed
@@ -165,7 +165,7 @@ jobs:
             adb shell settings put global transition_animation_scale 0.0
             adb shell settings put global animator_duration_scale 0.0
       - run:
-          name: UI テストの実行 (再試行あり)
+          name: UI テストの実行 (リトライあり)
           command: |
             MAX_TRIES=2
             run_with_retry() {
