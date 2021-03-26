@@ -13,7 +13,7 @@ Android マシン イメージには、CircleCI で Linux マシン イメージ
 
 ## Android マシン イメージの使用
 
-設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると構成作業がシンプルになりますが、複雑なカスタム構成は手動で行ったほうが効果的かもしれません。 このドキュメントでは、どちらの構成方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
+設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
 
 ## プリインストールされたソフトウェア
 
@@ -23,7 +23,7 @@ Android マシン イメージには以下がプリインストールされて�
 - sdkmanager
 - Android プラットフォーム 23、24、25、26、27、28、29、30、S
 - ビルド ツール 30.0.3
-- エミュレーター、プラットフォーム ツール、各種ツール
+- エミュレーター、platform-tools、tools
 - NDK (Side by side) 21.4.7075529
 - cmake 3.6.4111459
 - extras;android;m2repository、extras;google;m2repository、extras;google;google_play_service
