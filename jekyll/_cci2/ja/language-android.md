@@ -50,14 +50,14 @@ workflows:
           system-image: system-images;android-29;default;x86
 ```
 
-上記のように、Android Orb を使用すると構成がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
+上記のように、Android Orb を使用すると設定がシンプルになります。[こちら]({{site.baseurl}}/ja/2.0/android-machine-image#E4%BE%8B)で、さまざまな複雑さの設定ファイルの例を比較できます。
 
 
 ## 単体テストの設定ファイルの例
 
-CircleCI には、Android アプリのビルドに使用できる Docker イメージが用意されているので便利です。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソース コードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
+CircleCI には、Android アプリのビルドに使用できる便利な Docker イメージが用意しています。 これらのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/r/circleci/android/) から入手できます。 これらのイメージのソース コードと Dockerfile は、[こちらの GitHub リポジトリ](https://github.com/circleci/circleci-images/tree/master/android)で入手できます。
 
-CircleCI Android イメージは、公式の [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) Docker イメージに基づいており、この公式イメージは [buildpack-deps](https://hub.docker.com/_/buildpack-deps/) に基づいています。 ベース OS は Debian Jessie です。ビルドは、パスワードなしで `sudo` にフル アクセスできる `circleci` ユーザーとして実行されます。
+CircleCI Android イメージは、公式の [`openjdk:11-jdk`](https://hub.docker.com/_/openjdk/) Docker イメージをベースにしており、この公式イメージは [buildpack-deps](https://hub.docker.com/_/buildpack-deps/) をベースにしています。 ベース OS は Debian Jessie です。ビルドは、パスワードなしの `sudo` にフル アクセスできる `circleci` ユーザーとして実行されます。
 
 以下の例は、Android マシン イメージではなく Android Docker イメージを使用する例を示しています。
 
