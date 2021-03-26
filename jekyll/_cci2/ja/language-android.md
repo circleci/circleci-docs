@@ -26,7 +26,7 @@ version:
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**Note:** CircleCI offers an Android machine image available on CircleCI Cloud that supports x86 Android emulators and nested virtualization. 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーター テストを実行することもできます。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
+**メモ:** CircleCI では、クラウド版 CircleCI で利用可能な、x86 Android エミュレーターとネストされた仮想化をサポートしている Android マシン イメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーター テストを実行することもできます。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
 
 
 ## UI テストの設定ファイルの例
@@ -108,25 +108,25 @@ React Native プロジェクトは、Linux、Android、および macOS の機能
 
 ## Firebase Test Lab を使用したテスト
 
-**Note:**: While this portion of the document walks through using a third party tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
+**メモ:**: ここではサードパーティ製ツールをテストに使用して説明していますが、エミュレーター テストを実行する際には [Android マシン イメージ]({{site.baseurl}}/2.0/android-machine-image)を使用することをお勧めします。
 
 CircleCI で Firebase Test Lab を使用するには、最初に以下の手順を行います。
 
-1. **Create a Firebase project.** Follow the instructions in the [Firebase documentation](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project).
+1. **Firebase プロジェクトを作成する:** [Firebase のドキュメント](https://firebase.google.com/docs/test-lab/android/command-line#create_a_firebase_project)の手順に従います。
 
-2. **Install and authorize the Google Cloud SDK.** Follow the instructions in the [Authorizing the Google Cloud SDK]({{ site.baseurl }}/2.0/google-auth/) document.
+2. **Google Cloud SDK をインストールおよび承認する:** 「[Google Cloud SDK の承認]({{ site.baseurl }}/2.0/google-auth/)」の手順に従います。
 
-    **Note:** Instead of `google/cloud-sdk`, consider using an [Android convenience image]({{ site.baseurl }}/2.0/circleci-images/#android), which includes `gcloud` and Android-specific tools.
+    **メモ:** `google/cloud-sdk` の代わりに、[Android コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/#android)の使用を検討してください。このイメージには、`gcloud` と Android に特化したツールが含まれています。
 
-3. **Enable required APIs.** Using the service account you created, log into Google and go to the [Google Developers Console API Library page](https://console.developers.google.com/apis/library). Enable the **Google Cloud Testing API** and the **Cloud Tool Results API** by typing their names into the search box at the top of the console and clicking **Enable API**.
+3. **必要な API を有効にする:** 作成したサービス アカウントを使用して Google にログインし、[Google Developers Console の API ライブラリ ページ](https://console.developers.google.com/apis/library)に移動したら、 コンソール上部の検索ボックスで **Google Cloud Testing API** と **Cloud Tool Results API** を検索し、それぞれ **[有効にする]** をクリックします。
 
 `.Circleci/config.yml` ファイルに、以下の `run` ステップを追加します。
 
-1. **Build the debug APK and test APK.** Use Gradle to build two APKs. ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#Pre-Dexing+%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%AB%E3%82%88%E3%82%8B%E3%83%93%E3%83%AB%E3%83%89+%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A)を検討してください。
+1. **デバッグ APK とテスト APK をビルドする:** Gradle から 2 つの APK をビルドします。 ビルドのパフォーマンスを向上させるために、[Pre-Dexing の無効化](#Pre-Dexing+%E3%81%AE%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%AB%E3%82%88%E3%82%8B%E3%83%93%E3%83%AB%E3%83%89+%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E5%90%91%E4%B8%8A)を検討してください。
 
-2. **Store the service account.** Store the service account you created in a local JSON file.
+2. **サービス アカウントを保存する:** 作成したサービス アカウントをローカルの JSON ファイルに保存します。
 
-3. **Authorize `gcloud`**. `gcloud` ツールを承認し、デフォルトのプロジェクトを設定します。
+3. **`gcloud` を承認する:**. `gcloud` ツールを承認し、デフォルトのプロジェクトを設定します。
 
 4. **Use `gcloud` to test with Firebase Test Lab.** Adjust the paths to the APK files to correspond to your project.
 
