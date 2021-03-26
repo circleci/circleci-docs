@@ -26,7 +26,7 @@ version:
 - プロジェクトが VCS リポジトリのルートに置かれている。
 - プロジェクトのアプリケーションが `app` という名前のサブフォルダーに置かれている。
 
-**メモ:** CircleCI では、クラウド版 CircleCI で利用可能な、x86 Android エミュレーターとネストされた仮想化をサポートしている Android マシン イメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 別の方法でジョブからエミュレーター テストを実行するには、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してください。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
+**メモ:** CircleCI では、クラウド版 CircleCI で利用可能な、x86 Android エミュレーターとネストされた仮想化をサポートしている Android マシン イメージを提供しています。 利用方法に関するドキュメントは、[こちら]({{site.baseurl}}/2.0/android-machine-image)で参照できます。 または、[Firebase Test Lab](https://firebase.google.com/docs/test-lab) などの外部サービスを使用してエミュレーター テストを実行することもできます。 詳細については、後述のセクション「[Firebase Test Lab を使用したテスト](#firebase-test-lab-%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%9F%E3%83%86%E3%82%B9%E3%83%88)」を参照してください。
 
 ## UI テストの設定ファイルの例
 
