@@ -12,20 +12,22 @@ version:
 This document provides definitions for all the metrics in CircleCI Insights. You
 can review metrics in the Insights dashboard as well as the Insights API.
 
+{:toc}
+
 ## General metrics 
 
 General metrics appear across the Insights experience and can refer to different
 entities, depending on the context. For example, the `Runs` metric may refer to a
 count of workflow executions or jobs, depending on the context.
 
-| Term                    | Definition     |
-|-------------------------|----------------|
-| Runs                    | The count of executions in a selected time window. |
-| Total Duration          | The sum of execution times for all workflows in a project. |
-| P95 Duration            | The 95th percentile of execution times for an entity in a selected time window (i.e. 95% of runs completed in the same or less amount of this time). _The 95th percentile is a standard measure used to interpret performance data. It provides a measure of max value when outlier or transient values are excluded._ |
-| P50 (median) Duration   | The median execution time. _Medians are a better measure of central tendency than arithmetic means because they are more resilient to_ skewness _in datasets_. |
-| Total Credits           | The sum of credits consumed during execution. |
-| Success Rate            | The percentage of runs that completed successfully, calculated by 100 x (Successful Runs / All Runs) |
+| Term                  | Definition                                                                                                                                                                                                                                                                                                             |
+|-----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Runs                  | The count of executions in a selected time window.                                                                                                                                                                                                                                                                     |
+| Total Duration        | The sum of execution times for all workflows in a project.                                                                                                                                                                                                                                                             |
+| P95 Duration          | The 95th percentile of execution times for an entity in a selected time window (i.e. 95% of runs completed in the same or less amount of this time). <br/> _The 95th percentile is a standard measure used to interpret performance data. It provides a measure of max value when outlier or transient values are excluded._ |
+| P50 (median) Duration | The median execution time. <br/> _Medians are a better measure of central tendency than arithmetic means because they are more resilient to_ skewness _in datasets_.                                                                                                                                                         |
+| Total Credits         | The sum of credits consumed during execution.                                                                                                                                                                                                                                                                          |
+| Success Rate          | The percentage of runs that completed successfully, calculated by `100 x (Successful Runs / All Runs)`                                                                                                                                                                                                                   |
 {: class="table table-striped"}
 
 ## Organization-level metrics
@@ -58,10 +60,13 @@ against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
 Please note that trends are available only for 24-hour, 7-day, and 30-day time
-windows. For percentile metrics like `duration`, approximation methods are used
-to find the prior window benchmarks.
+windows. 
 
 Trends are calculated as `100 * (current value - previous value) / prior-value`.
+
+**Approximate Trends**
+
+For percentile metrics like duration, approximation methods are used to find the prior window benchmarks.
 
 ### Duration 
 {:.no_toc}
