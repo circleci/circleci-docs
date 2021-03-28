@@ -59,7 +59,7 @@ Prerequisites:
 - Installed npm packages at the root of the repository `npm install`
 - Installed gems at the root of the repository `bundle install`
 
-You can lint the markdowns using the [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
+You can lint the markdown using the [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
 
 ```bash
 .PATH=$(npm bin):$PATH markdownlint-cli2 jekyll/_cci2/*.md
