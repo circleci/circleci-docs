@@ -216,7 +216,5 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 ### Egress
 You will only need the egress rules for internet access and SSH for your VCS.
 
-//TO DO:
-//## What to read next
-//
-//* xref:server-3-operator.adoc[Server 3.x Operator Guide]
+## What to read next
+* xref:server-3-operator-overview.adoc[Server 3.x Operator Guide]

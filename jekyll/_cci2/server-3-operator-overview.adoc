@@ -37,7 +37,6 @@ By default, CircleCI Nomad clients automatically provision compute resources acc
 each job in a project’s `.circleci/config.yml` file.
 
 ### Nomad Clients
-
 Nomad Clients run without storing state, enabling you to increase or decrease the number of containers as needed.
 
 To ensure enough Nomad clients are running to handle all builds, track the queued builds and increase the number of
@@ -51,45 +50,17 @@ cores after two are reserved for coordination.
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to
 request use of larger machines for Nomad Clients.
 
-The following table describes the ports used on Nomad clients:
-
---
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| Source
-| Ports
-| Use
-
-| End Users
-| 64535-65535
-| SSH into builds
-
-| Administrators
-| 80 or 443
-| CCI API Access
-
-| Administrators
-| 22
-| SSH
-
-| Services Machine
-| all traffic, all ports
-| Internal communications
-
-| Nomad Clients (including itself)
-| all traffic, all ports
-| Internal communications
-|===
---
+For more information on Nomad port requirements, see the
+xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Hardening Your Cluster] section of the xref:server-3-install.adoc[Install guide].
 
 ### GitHub
-CircleCI uses GitHub or GitHub Enterprise credentials for authentication, which, in turn, may use SAML orSSH for access.
-This means CircleCI will inherit the authentication supported by your central SSO infrastructure.
+CircleCI uses GitHub or GitHub Enterprise as an identity provider. GitHub Enterprise can, in turn, use
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM]
+to manage users from an external identity provider.
 
-Note: CircleCI does not support changing the URL or backend GitHub instance after it has been set up.
+NOTE: CircleCI does not support changing the URL or back-end GitHub instance after it has been set up.
 
-The following table describes the ports used on machines running GitHub to communicate with the Services and Nomad Client
+The following table describes the ports used on machines running GitHub to communicate with the sewrvices and Nomad Client
 instances.
 
 --
