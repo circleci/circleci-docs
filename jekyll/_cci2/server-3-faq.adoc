@@ -15,10 +15,6 @@ toc::[]
 ## Does Server 3.0 have a data retention policy?
 We do not currently support a defined data retention policy. Data is stored indefinitely on server.
 
-How to login into the internal database(s) Postgres & Mongo?
-SERVER 2.X
-A. MongoDB
-
 ## What control is granted over Nomad certificates?
 Full control of the certificates, all the way down to mTLS for Nomad.
 
