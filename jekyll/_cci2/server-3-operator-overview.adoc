@@ -60,7 +60,7 @@ to manage users from an external identity provider.
 
 NOTE: CircleCI does not support changing the URL or back-end GitHub instance after it has been set up.
 
-The following table describes the ports used on machines running GitHub to communicate with the sewrvices and Nomad Client
+The following table describes the ports used on machines running GitHub to communicate with the services and Nomad Client
 instances.
 
 --
