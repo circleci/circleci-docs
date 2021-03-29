@@ -302,6 +302,36 @@ en:
           link: 2.0/server-3-install
         - name: Hardening Your Cluster
           link: 2.0/server-3-install-hardening-your-cluster
+    - name: Server v3.x Operations
+      link: 2.0/server-3-operator-overview
+      children:
+        - name: Overview
+          link: 2.0/server-3-operator-overview
+        - name: Metrics and Monitoring
+          link: 2.0/server-3-operator-metrics-and-monitoring
+        - name: User Accounts
+          link: 2.0/server-3-operator-user-accounts
+        - name: Orbs
+          link: 2.0/server-3-operator-orbs
+        - name: VM Service
+          link: 2.0/vm-service
+        - name: Authentication
+          link: 2.0/server-3-operator-authentication
+        - name: Docker Hub Pull through Mirror
+          link: 2.0/docker-hub-pull-through-mirror
+        - name: Running GPU Executors
+          link: 2.0/gpu
+        - name: Build Artifacts
+          link: 2.0/server-3-operator-build-artifacts
+        - name: Usage Data
+          link: 2.0/server-3-operator-usage-data
+        - name: Security
+          link: 2.0/security-server
+        - name: Application Lifecycle
+          link: 2.0/server-3-operator-application-lifecycle
+        - name: Troubleshooting and Support
+          link: 2.0/server-3-operator-troubleshooting-and-support
+
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:

@@ -1,0 +1,57 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Orbs
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This section describes Orbs and how to manage them. Server installations include their own local orb registry. This registry
+is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You
+are responsible for maintaining orbs, this includes copying orbs from the public registry, updating orbs that may have
+been copied prior, and registering your companies private orbs if they exist.
+
+toc::[]
+
+## Managing Orbs
+Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be
+an admin. They also require a personal api token https://circleci.com/docs/2.0/managing-api-tokens/. Providing a local
+repository location using the `--host` option allows you to access your local server orbs vs the public cloud orbs. For
+example, if your server installation is located at `http://circleci.somehostname.com`, then you can run orb commands
+local to that orb repository by passing `--host http://cirlceci.somehostname.com`.
+
+## List available orbs
+To list available public orbs, visit the orb directory or run:
+
+[source,bash]
+----
+circleci orb list
+----
+
+To list available private orbs (registered in your local server orb repository) run:
+[source,bash]
+----
+circleci orb list --host <your server install domain> --token <your api token>
+----
+
+## Import a public orb
+To import a public orb to your local server orb repository:
+
+[source,bash]
+----
+circleci orb import ns[/orb[@version]] --host <your server installation domain> --token <your api token>
+----
+
+## Fetch a public orb’s updates
+To update a public orb in your local server orb repository with a new version, run:
+
+[source,bash]
+----
+circleci orb import ns[/orb[@version]] --host <your server installation domain> --token <your api token>
+----
+
+For more Orb information, please refer to the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs] for the cloud product.

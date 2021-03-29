@@ -1,0 +1,19 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Scaling Services
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Prior to Server 3.0, scaling Server required increasing JVM Heap Size, RAM and other resources. Server 3.0 relies on
+replica sets to scale out services. If you want to scale up frontend or output processor, you simply increase the number
+of replicas available for those services.
+
+There are two methods for setting the replica set.
+
+Configure a Deployment
