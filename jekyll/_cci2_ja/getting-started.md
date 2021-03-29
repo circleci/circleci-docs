@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "入門ガイド"
-short-title: "入門ガイド"
+title: "初回ビルドの前提条件"
+short-title: "初回ビルドの前提条件"
 description: "CircleCI を使用して初めてのビルドを成功させるためのチュートリアル"
 categories:
   - getting-started
 order: 41
 ---
 
-CircleCI 2.0 で初めてのビルドを成功させるためのステップについて詳しくご説明します。
+CircleCI で初めてのビルドを成功させるためのステップについて詳しくご説明します。
 
 * 目次
 {:toc}
@@ -16,125 +16,127 @@ CircleCI 2.0 で初めてのビルドを成功させるためのステップに�
 ## 初回のビルド実行にあたっての前提条件
 {:.no_toc}
 
-* Git に関する基本知識を備えており、GitHub.com アカウントを持っている、またはアカウントを作成できること。 以下の説明では新しい GitHub リポジトリを使用しますが、CircleCI では Bitbucket の使用もサポートされています。
+* Git の基礎知識
+* ログイン先の GitHub または Bitbucket アカウント。 このガイドでは GitHub を使用しますが、必要に応じて同じプロセスを Bitbucket で実行してもかまいません。
+* CircleCI のアカウント
 * ターミナルまたは `bash` に関する基本知識と、コマンド ラインの使用経験があると役立ちます。
 
 ## リポジトリを作成する
 
-1. GitHub.com でお使いのアカウントに移動します。
+最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしてもかまいません。
 
-  * **[Repositories (リポジトリ)]** タブに移動し、**[New (新規)]** を選択するか、直接 <https://github.com/new> に移動します。 ![]({{ site.baseurl }}/assets/img/docs/GH_Repo-New-Banner.png)
+1. GitHub に移動して、[新規リポジトリを作成](https://github.com/new)します。 
+2. リポジトリの名前 (ここでは "hello-world") を入力して、[Initialize this repository with: (リポジトリを初期化し次を実行:)] セクションで **[Add a README file (README ファイルを追加)]** を選択します 最後に、**[Create repository (リポジトリを作成)]** をクリックします。
 
-2. [Initialize this repository with a README (リポジトリを初期化し、README を添付する)] を選択し、[Create repository (リポジトリの作成)] ボタンをクリックします。![]({{ site.baseurl }}/assets/img/docs/create-repo-circle-101-initialise-readme.png)
+![リポジトリを作成する]( {{ site.baseurl }}/assets/img/docs/getting-started--new-repo.png){:.img--bordered}
 
-## .yml ファイルを追加する
+## CircleCI をセットアップする
 
-CircleCI は、テスト環境のセットアップ方法や実行するテストを識別するために、[YAML](https://ja.wikipedia.org/wiki/YAML) ファイルを使用します。 CircleCI 2.0 では、このファイルは `config.yml` という名前で、`.circleci` という名前の非表示のフォルダーに置く必要があります。 Mac、Linux、および Windows のシステムでは、ピリオドで始まる名前を持つファイルやフォルダーは*システム* ファイルとして扱われ、デフォルトではユーザーに対して非表示になっています。
+CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
-1. GitHub でこのファイルとフォルダーを作成するには、リポジトリ ページで **[Create new file (ファイルの新規作成)]** ボタンをクリックし、`.circleci/config.yml` と入力します。 これで、`.circleci` フォルダーに空の `config.yml` ファイルが作成されて表示されます。
+1. CircleCI の[プロジェクト ページ](https://app.circleci.com/projects/)に移動します。
+2. 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
+3. プロジェクト ページに移動したら、使用するプロジェクト (今回の例では `hello-world`) を探し、**[Set Up Project (プロジェクトのセットアップ)]** をクリックします。
 
-2. 最初は単純な `config.yml` を作成するために、GitHub のファイル編集ウィンドウに以下のテキストをコピーします。
+4. 次の画面で、ドロップダウンから言語を選択して、プロジェクト向けの推奨ベスト プラクティスがあらかじめ記述されている config.yml ファイルを取得します。 この例では、空のリポジトリを用意したので、リスト下部にある `Hello World` 構成サンプルを使用します。
+    
+    ![サンプル構成を取得する]( {{ site.baseurl }}/assets/img/docs/getting-started--sample-config.png){:.img--bordered}
+  
+    **注:** 選択した言語に応じて、参考ドキュメントが画面右側のサイドバーに表示されます。
 
-    ```yml
-    version: 2
-    jobs:
-      build:
-        docker:
-          - image: circleci/ruby:2.4.1
-        steps:
-          - checkout
-          - run: echo "A first hello"
-    ```
+5. **[Commit and Run (コミットして実行)]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。 この構成に満足したら、後でメインブランチにそれをマージするか、引き続き変更を行うことができます。
 
-3. コメントを入力し、[Commit new file (新規ファイルのコミット)] ボタンをクリックしてファイルをコミットします。![]({{ site.baseurl }}/assets/img/docs/commit-new-file.png)
+## 最初のパイプラインを掘り下げる
 
-`- image: circleci/ruby:2.4.1` というテキストは、プロジェクトのビルド時に使用する Docker イメージを CircleCI に指示します。 CircleCI は、このイメージを使用して「コンテナ」と呼ばれる仮想コンピューティング環境を起動し、プロジェクトの実行に必要な言語、システム ユーティリティ、依存関係、Web ブラウザー、およびツールをそこにインストールします。
+ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するはずです。 さて、何が起こったのでしょうか。 パイプラインの緑色の **[Success (成功)]** ボタンをクリックして、実行について以下の部分を確認しましょう。
 
-## CircleCI でビルドを準備する
+![最初のパイプライン実行の成功]({{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
-1. このステップでは、CircleCI アカウントが必要です。 既に CircleCI アカウントをお持ちの場合は、[ダッシュボード](https://circleci.com/dashboard)に移動します。または、CircleCI Server をお使いの場合は、ホスト名を `https://<your-circleci-hostname>.com/dashboard` に置き換えます。 まだアカウントをお持ちでない場合は、CircleCI の[登録ページ](https://circleci.com/ja/signup)に移動し、[GitHub でログイン] をクリックします。 ビルドを実行するには、CircleCI に GitHub アカウントへのアクセスを許可する必要があります。
+1. **実行されたワークフローを確認する**: **[Success (成功)]** をクリックすると、実行されたジョブの一覧ページに移動します。 初めてのビルドであれば、(**1 つのワークフロー**内で自動的に実行される) **1 つのジョブ** だけが実行されているはずです。 この例では、`welcome/run` という名前のジョブだけが実行されました。 [`welcome/run`] をクリックして、ジョブのステップを調査してみましょう。
+    
+    ![ビルドを調査する]({{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png)
 
-2. 次に、既に CircleCI でビルド中のプロジェクトがあり、自分がアクセスできる場合は、それらを*フォロー*するためのオプションが表示されます (通常、会社または組織の GitHub アカウントに接続している開発者が該当します)。 次の画面では、先ほど作成したリポジトリを CircleCI の新しいプロジェクトとして追加できます。
+2. **環境をスピンアップする:** このプロジェクトのデフォルト設定には、[Orb](https://circleci.com/ja/orbs) が利用されています。 Orb を使用すると、よく使用する構成にすばやくアクセスできます。 この例では、ユーザーに単純なあいさつをする "構築済み" ジョブを実行する `circleci/welcome-orb@0.4.1` を使用しています。
 
-3. 新しいリポジトリを追加する前に、左上のドロップダウンで自分の GitHub アカウントが選択されていることを確認します。[Add Projects (プロジェクトの追加)] ページを選択し、先ほど作成したリポジトリをリストで見つけたら (検索もできます)、その横にある **[Set Up Project (プロジェクトのセットアップ)]** ボタンをクリックします。 ![]({{ site.baseurl }}/assets/img/docs/getting-started--sample-config.png)
+3. **ステップの結果を表示する:** どのジョブも、一連のステップから構成されています。[`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) など、一部のステップは、CircleCI で予約されている特別なコマンドです。 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 `welcome` Orb を使用しているので、カスタム ステップは表示されません。カスタム ステップは Orb 内で構成されているからです。 しかし、問題ありません。 [Orb のソース](https://circleci.com/ja/developer/orbs/orb/circleci/welcome-orb)はオンラインで確認できます。
 
-4. 次の画面で、ドロップダウンから言語を選択して、プロジェクト向けに推奨されるベスト プラクティスがあらかじめ記述されている config.yml ファイルを取得します。 使用している言語がリストにない場合は、リスト下部にある [Use Hello World] ボタンをクリックします。 表示される YAML 構成をコピーし、リポジトリのディレクトリのルートにある `.circleci` というフォルダーに「config.yml」という名前で保存します。 ![]({{ site.baseurl }}/assets/img/docs/CircleCI-add-new-project-list-2.png)
-
-5. 新しい `config.yml` ファイルを VCS に git push します。 これで、ビルドを開始する準備ができました。 [Start Building] ボタンをクリックし、リポジトリのビルド準備が完了したことを確認するモーダルに同意します。
-
-## 初めての CircleCI ビルドを実行する
-
-ここまでの手順を終えると、自動的にビルドの実行が開始され、成功するはずです。 さて、何が起こったのでしょうか。 CircleCI ダッシュボードで緑色の [Success (成功)] ボタンをクリックすると、実行について以下の部分を確認できます。
-
-1. **環境のスピンアップ:** CircleCI は `circleci/ruby:2.4.1` Docker イメージを使用して仮想コンピューティング環境をローンチしました。
-
-2. **コードのチェック アウト:** CircleCI は、GitHub リポジトリを検査し、ステップ 1 でローンチした仮想環境内に「クローン」を作成しました。
-
-3. **echo:** これがこの `config.yml` ファイル内の唯一の命令でした。CircleCI は入力「A first hello」を使用して echo コマンドを実行しました ([echo](https://linux.die.net/man/1/echo) とは文字どおり「こだま」のように、指定された文字列をそのまま表示させるコマンドです)。
-
-リポジトリに実際のソース コードがなく、`config.yml` に実際のテストが構成されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://ja.wikipedia.org/wiki/終了ステータス) 0 が返されたため)、CircleCI はビルドが「成功した」と見なします。 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、「[CircleCI を設定する](https://circleci.com/ja/docs/2.0/configuration-reference)」を参照してください。
+リポジトリに実際のソース コードがなく、`config.yml` に実際のテストが構成されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://ja.wikipedia.org/wiki/%E7%B5%82%E4%BA%86%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、「[CircleCI を設定する](https://circleci.com/ja/docs/2.0/configuration-reference)」を参照してください。
 
 ### ビルドを意図的に失敗させる
 {:.no_toc}
 
-GitHub のエディタで `config.yml` ファイルを簡単に編集して、`echo "A first hello"` を `notacommand` に書き換えてみましょう。 GitHub のエディタで **[Commit change (変更のコミット)]** ボタンをクリックします。 CircleCI の {% comment %} TODO: Jobs {% endcomment %}[Build (ビルド)] ページに戻ると、新しいビルドがトリガーされています。 このビルドは失敗して、赤色の [Failed (失敗)] ボタンが表示され、失敗を通知するメールが送信されます。
+もう少し複雑なことをしてみましょう。 `.circleci/config.yml` ファイルを編集してみます。 ファイルの編集は、GitHub で直接行うことができます。 以下の URL のリポジトリ名とユーザー名 (`{ }` で囲まれたテキスト) を自分のものに置き換えて、ブラウザーに貼り付けます。 Git に慣れている方は、テキスト エディターを使用し、変更を Git にプッシュしてもかまいません。
 
-### ワークフロー機能を使用する
+`https://github.com/{username}/{repo}/edit/circleci-project-setup/.circleci/config.yml`
+
+今回は、[Node Orb](https://circleci.com/ja/developer/orbs/orb/circleci/node) を使用してみましょう。 以下の内容を `config.yml` に貼り付けます。
+
+```yaml
+version: 2.1
+orbs:
+  node: circleci/node@1.1
+jobs:
+  build:
+    executor:
+      name: node/default
+      tag: '10.4'
+    steps:
+      - checkout
+      - node/with-cache:
+          steps:
+            - run: npm install
+      - run: npm run test
+```
+
+次に、GitHub のエディターで変更をコミットし、CircleCI のプロジェクト ページに戻ります。 新しいパイプラインが実行中であると表示され、しばらくすると 実行が失敗します。 何が起こったのでしょうか。
+
+Node Orb は、一般的な Node タスクを実行します。 今回は空のリポジトリで Node スクリプト `npm run test` を実行したので、構成が失敗したのです。 修正するには、 リポジトリで Node プロジェクトをセットアップする必要があります。その方法は、別のチュートリアルで説明します。 参考として、[デモ アプリケーション]({{site.baseurl}}/2.0/demo-apps/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
+
+## ワークフロー機能を使用する
 {:.no_toc}
 
-1. ワークフローの動作を確認するために、`.circleci/config.yml` ファイルを編集します。 ブラウザー ウィンドウでファイルを編集モードにしたら、ファイルの `build` 以降のテキストを選択し、そのセクションをコピーして貼り付けます。 コード ブロックは以下のようになります。
+CircleCI を使用する際には、必ずしも Orb を使用する必要はありません。 次の例では、カスタム設定ファイルの作成方法を説明します。この例でも、CircleCI の[ワークフロー機能]({{site.baseurl}}/2.0/workflows)を使用します。
 
-    ```yml
-    version: 2
-    jobs:
-      build:
-        docker:
-          - image: circleci/ruby:2.4.1
-        steps:
-          - checkout
-          - run: echo "A first hello"
-      build:
-        docker:
-          - image: circleci/ruby:2.4.1
-        steps:
-          - checkout
-          - run: echo "A first hello"
-    ```
+1. 以下のコード ブロックと付記されているコメントを読み進めます。 面倒だとしても、どのような処理をしているのかを理解しないままコードをコピー & ペーストするのはやめてください。 読み終えたら、ワークフローの動作を確認するために、`.circleci/config.yml` ファイルを編集して以下のテキストをコピー & ペーストします。 
 
-2. 次に、2 つのジョブの名前を、それぞれ異なる名前に変更します。 この例では、`one` と `two` という名前を使用します。 echo コマンドの内容を変更します。 {% comment %} TODO: Job {% endcomment %}ビルドの時間を長引かせるために、システムの `sleep` コマンドを追加します。
+   ```yaml
+   version: 2
+   jobs: # 今回は 2 つのジョブを用意し、ワークフロー機能でジョブの調整を行います
+     one: # 1 つ目のジョブ
+       docker: # Docker Executor を使用します
+         - image: circleci/ruby:2.4.1 # Ruby 2.4.1 を含む Docker イメージを指定します
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+       # ステップは、上記の Docker コンテナ内で実行するコマンドのリストです
+       steps:
+         - checkout # GitHub からコードをプルします
+         - run: echo "A first hello" # "A first hello" を stdout に出力します
+         - run: sleep 25 # 25 秒間スリープするようにジョブに指示するコマンド
+     two: # 2 つ目のジョブ
+       docker: # 前述と同様に Docker イメージ内で実行します
+         - image: circleci/ruby:2.4.1
+           auth:
+             username: mydockerhub-user
+             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+       steps:
+         - checkout
+         - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します
+         - run: sleep 15 # 15 秒間スリープします
+   # workflows 以下でマッピングを行い、上記で定義した 2 つのジョブを調整します
+   workflows:
+     version: 2
+     one_and_two: # ワークフローの名前
+       jobs: # 実行するジョブをここにリストします
+         - one
+         - two
+   ```
 
-3. `config.yml` ファイルに `workflows` セクションを追加します。 workflows セクションは、ファイル内のどこに配置してもかまいません。 通常は、ファイルの先頭または末尾に配置されます。
+1. この変更をリポジトリにコミットし、CircleCI パイプライン ページに戻ります。 CircleCI パイプラインが実行中であると表示されます。
 
-    ```yml
-    version: 2
-    jobs:
-      one:
-        docker:
-          - image: circleci/ruby:2.4.1
-        steps:
-          - checkout
-          - run: echo "A first hello"
-          - run: sleep 25
-      two:
-        docker:
-          - image: circleci/ruby:2.4.1
-        steps:
-          - checkout
-          - run: echo "A more familiar hi"
-          - run: sleep 15
-    workflows:
-      version: 2
-      one_and_two:
-        jobs:
-          - one
-          - two
-    ```
+2. 実行中のパイプラインをクリックし、作成したワークフローを表示します。 2 つのジョブが同時に実行された (または現在実行されている) ことがわかります。
 
-4. この変更をリポジトリにコミットし、CircleCI ダッシュボードに戻ります。![]({{ site.baseurl }}/assets/img/docs/workflows-circle-101-running.png)
-
-5. ワークフローのリンクをクリックすると、この 2 つのジョブが並列に実行されていることがわかります。![]({{ site.baseurl }}/assets/img/docs/inside-workflows-circle-101-running.png)
-
-ワークフローの詳細については、[こちらのドキュメント](https://circleci.com/ja/docs/2.0/workflows/#概要)を参照してください。
+ワークフローの詳細については、[こちらのドキュメント](https://circleci.com/ja/docs/2.0/workflows/#%E6%A6%82%E8%A6%81)を参照してください。
 
 ### 変更を追加してワークスペース機能を使用する
 {:.no_toc}
@@ -147,6 +149,9 @@ jobs:
   one:
     docker:
       - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
       - run: echo "A first hello"
@@ -157,15 +162,18 @@ jobs:
           root: my_workspace
           # ルートからの相対パスでなければなりません
           paths:
-            - echo-output
+            - echo-output      
   two:
     docker:
       - image: circleci/ruby:2.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - run: echo "A more familiar hi"
+      - run: echo "A more familiar hi"  
       - attach_workspace:
-          # 絶対パスであるか、working_directory からの相対パスでなければなりません
+          # 絶対パスまたは working_directory からの相対パスでなければなりません
           at: my_workspace
 
       - run: |
@@ -184,12 +192,10 @@ workflows:
             - one
 ```
 
-ワークスペースの詳細については、[こちら](https://circleci.com/ja/docs/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を参照してください。
+ワークスペースの詳細については、[こちら](https://circleci.com/ja/docs/2.0/workflows/#%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B8%E3%83%A7%E3%83%96%E9%96%93%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%85%B1%E6%9C%89)を参照してください。
 
-### {% comment %} TODO: Job {% endcomment %}ビルドに SSH 接続する
+### {% comment %} todo: job {% endcomment %}ビルドに SSH 接続する
 {:.no_toc}
-
-![]({{ site.baseurl }}/assets/img/docs/SSH-screen.png)
 
 ターミナルの操作に慣れている場合は、CircleCI に直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
 
@@ -210,32 +216,31 @@ workflows:
     ls -al               # 現在のディレクトリに含まれるファイルとディレクトリを一覧表示します
     cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します
     cat <file_name>      # ファイル <file_name> の内容を表示します
+    
 
+## チームメイトと協力する
+
+チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローしたりできます。 チームメイトは、コードをまったくコミットしていないとしても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
 
 ## 関連項目
 {:.no_toc}
 
-Git フックを使用してコミットごとに CircleCI `config.yml` をバリデーションする方法については、[こちらのブログ記事](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)を参照してください。
+Git フックを使用してコミットごとに CircleCI `config.yml` をバリデーションする方法については、[こちらのブログ記事](https://circleci.com/ja/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)を参照してください。
 
 ### CircleCI
 {:.no_toc}
 
-* CircleCI ブログ (購読できます)
-  * <https://circleci.com/blog/>
-* CircleCI ブログの関連記事
-  * <https://circleci.com/blog/what-is-continuous-integration/>
-* CircleCI に関する他のソーシャル メディアと GitHub
-  * <https://github.com/circleci>
-  * <https://twitter.com/circlecijapan>
-  * <https://www.facebook.com/groups/CircleCIJP/>
+* [CircleCI ブログ](https://circleci.com/ja/blog/)
+* [継続的インテグレーションとは](https://circleci.com/blog/what-is-continuous-integration/)
+* CircleCI のアカウント: [GitHub](https://github.com/circleci) (英語)、[Twitter](https://twitter.com/circleci) (英語)、[Facebook](https://www.facebook.com/circleci) (英語)
 
 ### 継続的インテグレーション
 {:.no_toc}
 
-* <https://martinfowler.com/articles/continuousIntegration.html>
-* <https://ja.wikipedia.org/wiki/継続的インテグレーション>
+* [Martin Fowler 氏 - Continuous Integration (継続的インテグレーション) (英語)](https://martinfowler.com/articles/continuousIntegration.html)
+* [ベスト プラクティス](https://ja.wikipedia.org/wiki/継続的インテグレーション) 
 
 ### YAML
 {:.no_toc}
 
-* <https://en.wikipedia.org/wiki/YAML#Advanced_components>
+* [Advanced components (高度なコンポーネント) (英語)](https://en.wikipedia.org/wiki/YAML#Advanced_components)
