@@ -41,7 +41,8 @@ each job in a project’s `.circleci/config.yml` file.
 Nomad Clients run without storing state, enabling you to increase or decrease the number of containers as needed.
 
 To ensure enough Nomad clients are running to handle all builds, track the queued builds and increase the number of
-Nomad Client machines as needed to balance the load. For more on tracking metrics see Monitoring Your Installation.
+Nomad Client machines as needed to balance the load. For more on tracking metrics see the
+xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
 
 Each machine reserves two vCPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the
 containers for running jobs. Larger machines are able to run more containers and are limited by the number of available
