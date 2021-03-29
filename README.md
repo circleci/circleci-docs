@@ -1,4 +1,4 @@
-# CircleCI Documentation 
+# CircleCI Documentation
 
 [![CircleCI Build Status](https://circleci.com/gh/circleci/circleci-docs.svg?style=shield)](https://circleci.com/gh/circleci/circleci-docs)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/circleci/circleci-docs/master/LICENSE)
@@ -22,10 +22,19 @@ If you have a question or need help debugging, please head to [CircleCI
 Discuss](https://discuss.circleci.com/) where our support team will help you
 out.
 
+## Preview
+
+Building the static Jekyll site can run without installation by using Docker.
+If you already configured Jekyll on your local machine, you need to delete `vendor` directory, before running the command.
+
+```
+$ docker-compose up
+```
+
 ## Documentation Components
 
 This repository houses and manages several arms of documentation for CircleCI.
-This section will provide a brief overview of each "component" and how to get 
+This section will provide a brief overview of each "component" and how to get
 started with making changes.
 
 ### `/Jekyll` - Main Site
