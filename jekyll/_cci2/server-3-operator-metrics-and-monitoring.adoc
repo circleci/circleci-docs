@@ -153,13 +153,14 @@ Various CircleCI metrics are available to monitor, including failed artifact upl
 |===
 --
 
-## Supported Data Monitoring Platforms
+// TO DO:
+// ## Supported Data Monitoring Platforms
 
-CircleCI Server 3.0 currently supports the following data monitoring platforms:
+// CircleCI Server 3.0 currently supports the following data monitoring platforms:
 
-- https://docs.google.com/document/d/1v623l76vU_nsOxb8HCM81Hv7c8YJlzjf82oFozip5SI/edit#heading=h.ve7fa7gok03i[CloudWatch]
-- https://docs.google.com/document/d/1v623l76vU_nsOxb8HCM81Hv7c8YJlzjf82oFozip5SI/edit#heading=h.vf0rtm9n21ya[Datadog]
-- https://docs.google.com/document/d/1v623l76vU_nsOxb8HCM81Hv7c8YJlzjf82oFozip5SI/edit#heading=h.qzkceed6g3o3[Custom]
+// - https://aws.amazon.com/cloudwatch/[CloudWatch]
+// - https://www.datadoghq.com/[Datadog]
+// - Custom
 
 ## Tips and Troubleshooting
 
