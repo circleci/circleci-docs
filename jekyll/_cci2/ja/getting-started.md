@@ -44,20 +44,20 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
     **注:** 選択した言語に応じて、参考ドキュメントが画面右側のサイドバーに表示されます。
 
-1. Click **Commit and Run**. リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。 この構成に満足したら、後でメインブランチにそれをマージするか、引き続き変更を行うことができます。
+1. **[Commit and Run (コミットして実行)]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。 この設定で問題がなければ、後にメインブランチにマージする、もしくは引き続き変更を行うことができます。
 
 ## 最初のパイプラインを掘り下げる
 
-ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するはずです。 さて、何が起こったのでしょうか。 Click on the green **Success** button on your pipeline to investigate the following parts of the run:
+ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するのを確認できます。 実行結果を確認します。 パイプラインの緑色の **[Success (成功)]** ボタンをクリックして、実行について以下の部分を確認しましょう。
 
 ![最初のパイプライン実行の成功]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
-1. **Which workflows ran?**: After clicking **Success**, we are taken to a page listing the jobs that ran. If this is your first build, you probably only ran **one job**  (which automatically runs inside **one workflow**).  この例では、`welcome/run` という名前のジョブだけが実行されました。 [`welcome/run`] をクリックして、ジョブのステップを調査してみましょう。
+1. **実行されたワークフローを確認する**: **[Success (成功)]** をクリックすると、実行されたジョブの一覧ページに移動します。 初めてのビルドであれば、(**1 つのワークフロー**内で自動的に実行される) **1 つのジョブ** だけが実行されています。  この例では、`welcome/run` という名前のジョブだけが実行されました。 [`welcome/run`] をクリックして、ジョブのステップを調査してみましょう。
 
    ![ビルドを調査する]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success-workflow.png)
 
 
-1. **Spin up environment:** CircleCI used an [orb](https://circleci.com/orbs) to help provide some defaults for this project. Orb を使用すると、よく使用する構成にすばやくアクセスできます。 この例では、ユーザーに単純なあいさつをする "構築済み" ジョブを実行する `circleci/welcome-orb@0.4.1` を使用しています。
+1. **環境をスピンアップする:** このプロジェクトのデフォルト設定には、[Orb](https://circleci.com/ja/orbs) が利用されています。 Orb を使用すると、よく使用する構成にすばやくアクセスできます。 この例では、ユーザーに単純なあいさつをする "構築済み" ジョブを実行する `circleci/welcome-orb@0.4.1` を使用しています。
 
 1. **Views step results:** Every job is made up of a series of steps - some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 `welcome` Orb を使用しているので、カスタム ステップは表示されません。カスタム ステップは Orb 内で構成されているからです。 しかし、問題ありません。 [Orb のソース](https://circleci.com/ja/developer/orbs/orb/circleci/welcome-orb)はオンラインで確認できます。
 
