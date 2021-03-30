@@ -24,7 +24,7 @@ out.
 
 ## Preview
 
-Building the static Jekyll site can run without installation by using Docker.
+It is possible to build and serve the Jekyll docs locally (without ruby or jekyll installed) using Docker and docker compose.
 If you already configured Jekyll on your local machine, you need to delete `vendor` directory, before running the command.
 
 ```
