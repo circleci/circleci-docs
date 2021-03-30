@@ -183,7 +183,7 @@ output provider (e.g. influx) is listed in the configured outputs.
 
 ### Metrics Tags
 
-If you would like to ensure that all metrics in your installation are tagged against an environment you could place the
+If you would like to ensure all metrics in your installation are tagged against an environment, you could place the
 following code in your config:
 
 [source,bash]
