@@ -173,7 +173,7 @@ To view logs for Telegraf, run the following:
 * `kubectl get pods` to get a list of services
 * `kubectl logs -f circleci-telegraf-<hash>`, substituting the hash for your installation.
 
-While monitoring the current log stream, perform some actions with your server installation, e.g. logging in/out or
+While monitoring the current log stream, perform some actions with your server installation (e.g. logging in/out or
 running a workflow. These activities should be logged, showing that metrics are being reported. Most metrics you see logged
 will be from the frontend pod. However, when you run workflows, you should also see metrics reported by the dispatcher,
 `legacy-dispatcher`, `output-processor` and `workflows-conductor`, as well as metrics concerning cpu, memory and disk stats.
