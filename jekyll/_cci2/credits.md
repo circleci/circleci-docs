@@ -23,7 +23,6 @@ The right plan for you and your team will depend on several factors:
 Let's look at how a Performance plan might use credits. With the Performance plan you have:
 
 - At least one credit block (25,000 credits)
-- An unlimited number of user seats (at $15 for the first three users and $15 for each additional user)
 - A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
 - The MacOS machine type
 - The Windows machine type
