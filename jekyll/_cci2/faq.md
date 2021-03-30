@@ -281,7 +281,7 @@ Every month, you are charged for your selected credit package at the beginning o
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
 
-- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user (not including applicable taxes).
+- Access to features, such as new machine sizes, are paid with a monthly fee of 25,000 credits per active user (not including applicable taxes).
 - Compute is paid for monthly in credits for the machine size and duration you use:
   - Credits are sold in packages of 25,000 at $15 each (not including applicable taxes).
   - Credits rollover each month and expire after one year.
