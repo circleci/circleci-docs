@@ -9,6 +9,7 @@ order: 10
 version:
   - Cloud
   - Server v2.x
+  - Server v3.x
 ---
 
 ## 概要
