@@ -9,6 +9,7 @@ order: 20
 version:
   - Cloud
   - Server v2.x
+  - Server v3.x
 ---
 
 以下のセクションに沿って、CircleCI 2.0 で SSH を使用してビルド コンテナにアクセスする方法について説明します。
