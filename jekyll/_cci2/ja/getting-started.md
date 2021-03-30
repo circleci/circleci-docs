@@ -59,7 +59,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 
 1. **環境をスピンアップする:** このプロジェクトのデフォルト設定には、[Orb](https://circleci.com/ja/orbs) が利用されています。 Orb を使用すると、よく使用する構成にすばやくアクセスできます。 この例では、ユーザーに単純なあいさつをする "構築済み" ジョブを実行する `circleci/welcome-orb@0.4.1` を使用しています。
 
-1. **Views step results:** Every job is made up of a series of steps - some steps, like [`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) are special, reserved commands in CircleCI. 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 `welcome` Orb を使用しているので、カスタム ステップは表示されません。カスタム ステップは Orb 内で構成されているからです。 しかし、問題ありません。 [Orb のソース](https://circleci.com/ja/developer/orbs/orb/circleci/welcome-orb)はオンラインで確認できます。
+1. **ステップの結果を表示する:** どのジョブも、一連のステップから構成されています。[`checkout`]({{site.baseurl}}/2.0/configuration-reference/#checkout) など、一部のステップは、CircleCI で予約されている特別なコマンドです。 他のステップは、ユーザーがそれぞれの目的に合わせて指定します。 `welcome` Orb を使用しているので、カスタム ステップは表示されません。カスタム ステップは Orb 内で構成されているからです。 しかし、問題ありません。 [Orb のソース](https://circleci.com/ja/developer/orbs/orb/circleci/welcome-orb)はオンラインで確認できます。
 
 リポジトリに実際のソース コードがなく、`config.yml` に実際のテストが構成されていなくても、すべてのステップが問題なく完了したため ([終了コード](https://ja.wikipedia.org/wiki/%E7%B5%82%E4%BA%86%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9) 0 が返されたため)、CircleCI はビルドが "成功した" と見なします。 実際のプロジェクトは、これよりもはるかに複雑で、複数の Docker イメージと複数のステップを使用し、膨大な数のテストを行います。 `config.yml` ファイルで使用できるすべてのステップの詳細については、「[CircleCI を設定する](https://circleci.com/ja/docs/2.0/configuration-reference)」を参照してください。
 
@@ -90,7 +90,7 @@ jobs:
 ```
 
 
-次に、GitHub のエディターで変更をコミットし、CircleCI のプロジェクト ページに戻ります。 You should see a new pipelines running... and it will fail! 何が起こったのでしょうか。
+次に、GitHub のエディターで変更をコミットし、CircleCI のプロジェクト ページに戻ります。 新しいパイプラインが実行され失敗することが確認できます。 何が起こったのでしょうか。
 
 Node Orb は、一般的な Node タスクを実行します。 今回は空のリポジトリで Node スクリプト `npm run test` を実行したので、構成が失敗したのです。  修正するには、 リポジトリで Node プロジェクトをセットアップする必要があります。その方法は、別のチュートリアルで説明します。 参考として、[デモ アプリケーション]({{site.baseurl}}/2.0/demo-apps/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
 
