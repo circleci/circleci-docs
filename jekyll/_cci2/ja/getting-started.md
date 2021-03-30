@@ -135,9 +135,9 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
    ```
 
 
-1. Commit these changes to your repository and navigate back over to the CircleCI Pipelines page. CircleCI パイプラインが実行中であると表示されます。
+1. この変更をリポジトリにコミットし、CircleCI パイプライン ページに戻ります。 CircleCI パイプラインが実行中であると表示されます。
 
-1. 実行中のパイプラインをクリックし、作成したワークフローを表示します。 You should see that two jobs ran (or are currently running!) concurrently.
+1. 実行中のパイプラインをクリックし、作成したワークフローを表示します。 2 つのジョブが同時に実行された (または現在実行されている) ことがわかります。
 
 ワークフローの詳細については、[こちらのドキュメント](https://circleci.com/ja/docs/2.0/workflows/#%E6%A6%82%E8%A6%81)を参照してください。
 
@@ -202,7 +202,7 @@ workflows:
 
 ターミナルの操作に慣れている場合は、CircleCI に直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
 
-*Note that you will need to add your SSH keys to your GitHub account: <https://help.github.com/articles/connecting-to-github-with-ssh/>*.
+*SSH 公開鍵を GitHub アカウントに登録する必要があることにご注意ください。詳細は[こちら](https://help.github.com/articles/connecting-to-github-with-ssh/)。*
 
 
 {:.tab.switcher.Cloud}
