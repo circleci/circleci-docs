@@ -12,7 +12,7 @@ version:
 
 This section describes Orbs and how to manage them. Server installations include their own local orb registry. This registry
 is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You
-are responsible for maintaining orbs, this includes copying orbs from the public registry, updating orbs that may have
+are responsible for maintaining orbs; this includes copying orbs from the public registry, updating orbs that may have
 been copied prior, and registering your companies private orbs if they exist.
 
 toc::[]
