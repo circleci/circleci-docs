@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "初回ビルドの前提条件"
-short-title: "初回ビルドの前提条件"
-description: "CircleCI を使用して初めてのビルドを成功させるためのチュートリアル"
+title: "はじめてのビルドの成功（グリーンビルド）"
+short-title: "はじめてのビルドの成功"
+description: "CircleCI を使用してはじめてビルドを成功させるためのチュートリアル"
 categories:
   - getting-started
 order: 41
 ---
 
-CircleCI で初めてのビルドを成功させるためのステップについて詳しくご説明します。
+CircleCI ではじめてビルドを成功（グリーンビルド）させるためのステップについて詳しくご説明します。
 
 * TOC
 {:toc}
