@@ -134,7 +134,7 @@ Various CircleCI metrics are available to monitor, including failed artifact upl
 | Tracks how many API calls CircleCI is making to GitHub.
 
 | circle.http.request
-| Tracks the response codes to CircleCi requests
+| Tracks the response codes to CircleCi requests.
 
 | circle.nomad.client_agent.*`
 | Tracks nomad client metrics.
