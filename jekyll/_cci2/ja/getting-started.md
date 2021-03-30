@@ -23,26 +23,26 @@ CircleCI ではじめてビルドを成功（グリーンビルド）させる�
 
 ## リポジトリを作成する
 
-最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしてもかまいません。
+最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしても問題ありません。
 
 1. GitHub に移動して、[新規リポジトリを作成](https://github.com/new)します。
-1. Input the name of your repository, in this case "hello-world", then click **Initialize this repository with a README**. Finally, click **Create repository**.
+1. リポジトリの名前に (ここでは "hello-world") を入力して、[Initialize this repository with: (リポジトリを初期化し次を実行:)] セクションで **[Add a README file (README ファイルを追加)]** を選択します 最後に、**[Create repository (リポジトリを作成)]** をクリックします。
 
 ![リポジトリを作成する]( {{ site.baseurl }}/assets/img/docs/getting-started--new-repo.png){:.img--bordered}
 
 ## CircleCI をセットアップする
 
-If you have not yet, create an account on CircleCI by navigating to [the signup page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
+CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
 1. CircleCI の[プロジェクト ページ](https://app.circleci.com/projects/)に移動します。
 1. 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
-1. Once on the Project page, find the project you are using, in our case `hello-world`, and click **Set Up Project**.
+1. プロジェクト ページに移動したら、使用するプロジェクト (今回の例では `hello-world`) を探し、**[Set Up Project (プロジェクトのセットアップ)]** をクリックします。
 
 1. 次の画面で、ドロップダウンから言語を選択して、プロジェクト向けの推奨ベスト プラクティスがあらかじめ記述されている config.yml ファイルを取得します。 この例では、空のリポジトリを用意したので、リスト下部にある `Hello World` 構成サンプルを使用します。
 
     ![サンプル構成を取得する]( {{ site.baseurl }}/assets/img/docs/getting-started--sample-config.png){:.img--bordered}
 
-    **Note:** Based on which language you choose you can view related documentation in the sidebar on the right of the screen
+    **注:** 選択した言語に応じて、参考ドキュメントが画面右側のサイドバーに表示されます。
 
 1. Click **Commit and Run**. リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。 この構成に満足したら、後でメインブランチにそれをマージするか、引き続き変更を行うことができます。
 
