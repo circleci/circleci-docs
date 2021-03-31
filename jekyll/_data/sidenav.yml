@@ -302,6 +302,8 @@ en:
           link: 2.0/server-3-install-creating-your-first-cluster
         - name: Installation
           link: 2.0/server-3-install
+        - name: Migration
+          link: 2.0/server-3-install-migration
         - name: Hardening Your Cluster
           link: 2.0/server-3-install-hardening-your-cluster
     - name: Server v3.x Operations

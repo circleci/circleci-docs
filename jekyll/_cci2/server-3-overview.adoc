@@ -18,7 +18,7 @@ CircleCI Server v{serverversion} is a continuous integration and continuous deli
 
 The core of the CircleCI Server application runs inside Kubernetes.
 
-The application exposes four services using load balancers, three of these load balancers are VPC-internal.
+The application exposes five services using load balancers, three of these load balancers are VPC-internal.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -28,7 +28,12 @@ The application exposes four services using load balancers, three of these load 
 | Ports
 | Description
 
-| Front-end Service
+| Front-end GUI Proxy
+| External
+| 80 and 443
+| Exposes the web application.
+
+| Front-end API
 | External
 | 80 and 443
 | Exposes the web application.
@@ -61,12 +66,284 @@ https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
 
 == Architecture
 
+Below is a diagram describing the architecture of Server 3.x. The available services
+are described in greater detail in the <<Services>> section.
+
 .CircleCI Server v3.x Architecture
 image::server-3-architecture-diagram.png[Services Architecture]
 <<<
+
+== Services
+
+CircleCI Server 3.0 consists of the following services. Find their descriptions and failure implications below:
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Service
+| Component
+| Description
+| What happens if it fails?
+| Notes
+
+| api-service
+| App Core
+| Provides a GraphQL API that provides much of the data to render the web frontend.
+| Many parts of the UI (e.g. Contexts) will fail completely.
+|
+
+| audit-log-service
+| App Core
+| Persists audit log events to blob storage for long term storage.
+| Some events may not be recorded.
+|
+
+| builds-service
+| App Core
+| Ingests from www-api and sends to plans-service, workflows-conductor, and to orbs-service
+|
+|
+
+| circle-legacy-dispatcher
+| Execution
+| Part of Compute Management. Sends to usage Q (mongo) and back to VCS.
+|
+|
+
+| circleci-mongodb
+| Execution
+| Primary datastore
+|
+|
+
+| circleci-postgres
+| Data storage for microservices
+|
+|
+|
+
+| circleci-rabbitmq
+| Pipelines and Execution
+| Queuing for workflow messaging, test-results, usage, crons, output, notifications, and scheduler
+|
+|
+
+| circleci-redis
+| Execution
+| Cache data that will not be stored permanently (i.e. build logs), for request caching, and for rate limit calculations.
+| A failed cache can end up resulting in rate limiting from the VCS if too many calls are made to it.
+|
+
+| circleci-telegraf
+|
+| Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
+but can also be configured to be exported to other places (i.e. Datadog or local-observability-stack-prometheus)
+|
+|
+
+| circleci-vault
+|
+| HashiCorp Vault to run encryption and decryption as a service for secrets
+|
+|
+
+| config
+|
+|
+|
+|
+
+| contexts-service
+| App Core
+| Stores and provides encrypted contexts.
+| All builds using Contexts will fail.
+|
+
+| cron-service
+| Pipelines
+| Triggers scheduled workflows.
+| Scheduled workflows will not run.
+|
+
+| dispatcher
+| Execution
+| Split jobs into tasks and send them to scheduler to run.
+| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
+|
+
+| domain-service
+| App Core
+| Stores and provides information about our domain model. Works with permissions and API
+| Workflows will fail to start and some REST API calls may fail causing 500 errors in the CircleCI UI. 	If LDAP authentication is in use, all logins will fail.
+|
+
+| exim
+|
+| Will be removed in GA, but users can provide mail submission credentials to an existing MTA
+| No email notifications will be sent.
+|
+
+| federations-service
+| App Core
+| Stores user identities (LDAP). API and permissions-service
+| If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
+| LDAP integration not available
+
+| frontend
+| Frontend
+| CircleCI web app and www-api proxy.
+| The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK but no updates will be seen.
+|
+
+| inject-bottoken
+|
+| A Kubernetes job that inserts a "bot token" into MongoDB. Bot tokens are authorization interservice communication.		Mainly for www-api
+|
+|
+
+| kotsadm-kots
+| Licensing
+| The main Kots application. Runs the Kots admin console where upgrades and configuration of server take place	No admin console available.
+| No upgrades or configuration possible for Server
+|
+
+| kotsadm-migrations
+| Licensing
+| Performs database migrations to handle updates of Kotsadm
+|
+|
+
+| kotsadm-minio
+| Licensing
+| Object storage for Kots licensing
+|
+|
+
+| kotsadm-operator
+| Licensing
+| Deploys and controls Kotsadm
+|
+|
+
+| kotsadm-postgres
+| Licensing
+| Database for Kots licensing
+|
+|
+
+| legacy-notifier
+| App Core
+| Handles notifications to external services (Slack, email, etc.)
+|
+|
+
+| local-observability-stack-grafana
+| Server
+| Used for dashboarding and monitoring
+|
+|
+
+| local-observability-stack-loki
+| Server
+| Used for log aggregation
+|
+|
+
+| local-observability-stack-prometheus
+| Server
+| Used for metrics
+|
+|
+
+| local-observability-stack-promtail
+| Server
+| Used to aggregate logs in a Loki instance.
+| Log aggregation will fail. Loki won't contain any container logs.
+|
+
+| orb-service
+| Pipelines
+| Handles communication between orb registry and config.
+|
+|
+
+| output-processor
+| Execution
+| Receives job output & status updates and writes them to MongoDB. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
+|
+|
+
+| permissions-service
+| App Core
+| Provides the CircleCI permissions interface.
+| Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
+|
+
+| scheduler
+| Execution
+| Runs tasks sent to it. Works with Nomad server.
+| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
+|
+
+| server-troubleshooter
+| Data
+| Runs commands inside pods and appends output to support bundles.
+|
+| May not be available in GA.
+
+| slanger
+| Server
+| Provides real-time events to the CircleCI app.
+| Live UI updates will stop but hard refreshes will still work.
+|
+
+| test-results
+| Execution
+| Parses test result files and stores data.
+| There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
+|
+
+| vm-gc
+| Compute Management
+| Periodically check for stale machine and remote Docker instances and request that vm-service remove them.
+| Old vm-service instances might not be destroyed until this service is restarted.
+|
+
+| vm-scaler
+| Machine
+| Periodically requests that vm-service provision more instances for running machine and remote Docker jobs.
+| VM instances for machine and Remote Docker might not be provisioned causing you to run out of capacity to run jobs with these executors.
+| Different overlay for EKS vs. GKE.
+
+| vm-service
+| Machine
+| Inventory of available vm-service instances, and provisioning of new instances.
+| Jobs that use machine or remote Docker will fail.
+|
+
+| workflows-conductor-event-consumer
+| Pipelines
+| Takes in information from VCS to kick off pipelines.
+| New Pipelines will not be kicked off when there are changes in the VCS.
+|
+
+| workflows-conductor-grpc-handler
+| Pipelines
+| Helps translate the information through gRPC.
+|
+|
+
+| web-ui-*
+| Frontend
+| Micro Front End (MFE) services used to render the frontend web application GUI.
+| The respective services page will fail to load. Example: A web-ui-server-admin failure means the Server Admin page will fail to load.
+| The MFE's are used to render the web application located at app.<my domain here>
+
+|===
 
 == What to read next
 
 * xref:server-3-whats-new.adoc[What's new in 3.x]
 * xref:server-3-overview.adoc[Server 3.x Overview]
 * xref:server-3-install.adoc[Server 3.x Installation]
+* xref:server-3-install-migration.adoc[Server 3.x Migration]
