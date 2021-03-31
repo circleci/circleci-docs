@@ -10,11 +10,11 @@ version:
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 3.0 requires back up your 2.19 installation and data restoration to your Server 3.0 installation.
-It does require that you have an already operating 3.0 installation. Depending on the size of your data stores, the migration
-can take anywhere from a few minutes to a few hours. We recommend that you perform this process in a staging environment
-first, so you get a better understanding of how long it will take for your particular system and the migration process
-before going to production.
+Migrating from 2.19.x to 3.0 requires that you back up your 2.19 installation and then restore the data to the new Server 3.0 installation.
+It does require an already operating Server 3.0 installation. Depending on the size of your data stores, the migration
+can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this
+process in a production environment. This will not only allow you to gain a better understanding of the migration process,
+but will also give you a feel for how long the migration will take to complete.
 
 NOTE: If you have externalized your data stores (Mongo, Postgres, and Vault), then you need to wait until the Server 3.1
 release for migration. Server 3.1 will support externalized data stores, and you will be able to point your 3.1
@@ -23,7 +23,7 @@ installation to the data stores you were using for your 2.19 instance.
 toc::[]
 
 ## Prerequisites
-. Your CircleCI Server installation has been upgraded to the most recent 2.19 version.
+. Your current CircleCI Server installation is 2.19
 . You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
 
