@@ -370,7 +370,8 @@ https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute I
 . *Number of <VM type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
 of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
 instances lowers the start time allowing for faster machine and `remote_docker` builds. Note, that preallocated instances
-are always running and could potentially increase costs.
+are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes
+to take effect. You have the option of terminating those instances manually, if required.
 . *VM Service Custom Configuration*: Custom configuration can fine tune many aspects of your VM service. This is an advanced
 option and we recommend you reach out to your account manager to learn more.
 

@@ -13,4 +13,161 @@ version:
 CircleCI Server's VM service controls how https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor
 (Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
 
+This section describes the available configuration options for VM Service.
+
 toc::[]
+
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your server installation.
+
+== AWS EC2
+You will need the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
+Key used by VM Service differs from the policy used by object storage in the previous section.
+
+. *AWS Region* (required): This is the region the application is in.
+. *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
+. *Subnet ID* (required): Choose a subnet (public or private) where the VMs should be deployed.
+. *Security Group ID* (required): This is the security group that will be attached to the VMs.
+
+The recommended security group configuration can be found in the xref:server-3-install-hardening-your-cluster.adoc#external-vms[Hardening Your Cluster] section.
+
+[start=5]
+. *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
+. *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for EC2 access.
+
+It is recommended to create a new user with programmatic access for this purpose. You should attach the following IAM policy to the user:
+
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*::image/*",
+        "arn:aws:ec2:*::snapshot/*",
+        "arn:aws:ec2:*:*:key-pair/*",
+        "arn:aws:ec2:*:*:launch-template/*",
+        "arn:aws:ec2:*:*:network-interface/*",
+        "arn:aws:ec2:*:*:placement-group/*",
+        "arn:aws:ec2:*:*:volume/*",
+        "arn:aws:ec2:*:*:subnet/*",
+        "arn:aws:ec2:*:*:security-group/${SECURITY_GROUP_ID}"
+      ]
+    },
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:CreateVolume"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*:*:volume/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction" : "CreateVolume"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction" : "RunInstances"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:CreateTags",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances",
+        "ec2:AttachVolume",
+        "ec2:DetachVolume",
+        "ec2:DeleteVolume"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:subnet/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:Vpc": "${VPC_ARN}"
+        }
+      }
+    }
+  ]
+}
+----
+
+== Google Cloud Platform
+You will need the following fields to configure your VM Service to work with Google Cloud Platform (GCP).
+
+. *GCP project ID* (required): Name of the GCP project the cluster resides.
+. *GCP Zone* (required): GCP zone the virtual machines instances should be created in IE `us-east1-b`.
+. *GCP Windows Image* (optional): Name of the image used for Windows builds. Leave this field blank if you do not require them.
+. *GCP VPC Network* (required): Name of the VPC Network.
+. *GCP VPC Subnet* (optional): Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
+. *GCP Service Account JSON file* (required): Copy and paste the contents of your https://cloud.google.com/iam/docs/service-accounts[service account JSON file].
+
+WARNING: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta)
+role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
+https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
+
+== Configuring VM Service
+
+. *Number of <VM type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
+of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
+instances lowers the start time allowing for faster machine and `remote_docker` builds. Note, that preallocated instances
+are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes
+to take effect. You have the option of terminating those instances manually, if required.
+. *VM Service Custom Configuration*: Custom configuration can fine tune many aspects of your VM service. This is an advanced
+option and we recommend you reach out to your account manager to learn more.
