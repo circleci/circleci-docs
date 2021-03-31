@@ -570,7 +570,7 @@ After Terraform is done spinning up the Nomad client(s), it will output the cert
 encryption mentioned in the xref:server-3-install.adoc#enable-mutual-tls-mtls[Nomad configuration section]. Make sure to
 copy them somewhere safe.
 
-Once terraform apply is complete, click on the *Application* tab in the admin console and wait for the deployment Status
+Once Terraform `apply` is complete, click on the *Application* tab in the admin console and wait for the deployment Status
 to show "Ready," then move on to the next step.
 
 ### Optional: Running Jobs Outside the Nomad Client
