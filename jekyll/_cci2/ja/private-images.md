@@ -9,6 +9,7 @@ order: 50
 version:
   - Cloud
   - Server v2.x
+  - Server v3.x
 ---
 
 
@@ -22,7 +23,7 @@ CircleCI has partnered with Docker to ensure that our users can continue to acce
 
 [Docker]({{ site.baseurl }}/ja/2.0/executor-types/#using-docker) Executor を使用する場合は、[config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)を作成するか、プロジェクトごとの環境変数を使用します。
 
-**Note:** Server customers may instead [setup a pull through Docker Hub registry mirror]({{ site.baseurl }}/2.0/docker-hub-pull-through-mirror/).
+**Note:** Server 2.x customers may instead [setup a pull through Docker Hub registry mirror]({{ site.baseurl }}/2.0/docker-hub-pull-through-mirror/). Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
 
 **Note:** Contexts are the more flexible option. CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
 
