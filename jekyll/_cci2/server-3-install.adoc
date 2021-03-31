@@ -582,7 +582,7 @@ ingress rules for TCP port 2376 with the IP addresses of the Nomad clients and K
 
 ## Step 5 - Create DNS Entries for the Frontend
 Next, create a DNS entry for your external frontend and traefik load balancer, i.e. `circleci.your.domain.com` and
-`app.circleci.your.domain.com19`, respectively. You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how
+`app.circleci.your.domain.com`, respectively. You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how
 to create TLS certs for your server install. Although TLS is optional, should it be used, it is important to ensure your TLS cert
 covers both the server domain and sub-domain as in the examples provided. Once the user is logged in, all client requests
 are routed through your traefik sub-domain, i.e, `app.{your_domain}.com`.
