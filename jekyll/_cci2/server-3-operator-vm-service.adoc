@@ -1,0 +1,16 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x VM Service
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI Server's VM service controls how https://circleci.com/docs/2.0/executor-types/#using-machin[`machine`] executor
+(Linux and Windows images) and https://circleci.com/docs/2.0/building-docker-images[Remote Docker] jobs are run.
+
+toc::[]

@@ -8,6 +8,7 @@ order: 50
 version:
 - Cloud
 - Server v2.x
+- Server v3.x
 ---
 
 
@@ -22,7 +23,8 @@ CircleCI has partnered with Docker to ensure that our users can continue to acce
 
 For the [Docker]({{ site.baseurl }}/2.0/executor-types/#using-docker) executor, specify username and password in the `auth` field of your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file. To protect the password, place it in a [context]({{ site.baseurl }}/2.0/contexts), or use a per-project Environment Variable.
 
-**Note:** Server customers may instead [setup a pull through Docker Hub registry mirror]({{ site.baseurl }}/2.0/docker-hub-pull-through-mirror/).
+**Note:** Server 2.x customers may instead [setup a pull through Docker Hub registry mirror]({{ site.baseurl }}/2.0/docker-hub-pull-through-mirror/).
+Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
 
 **Note:** Contexts are the more flexible option.  CircleCI supports multiple contexts, which is a great way modularize secrets, ensuring jobs can only access what they *need*.
 
