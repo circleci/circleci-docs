@@ -228,3 +228,4 @@ You will only need the egress rules for internet access and SSH for your VCS.
 
 ## What to read next
 * xref:server-3-operator-overview.adoc[Server 3.x Operator Guide]
+* xref:server-3-install-migration.adoc[Server 3.x Migration Guide]
