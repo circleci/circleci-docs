@@ -323,8 +323,6 @@ en:
           link: 2.0/server-3-operator-authentication
         - name: Docker Authenticated Pulls
           link: 2.0/private-images
-        - name: Running GPU Executors
-          link: 2.0/gpu
         - name: Build Artifacts
           link: 2.0/server-3-operator-build-artifacts
         - name: Usage Data
