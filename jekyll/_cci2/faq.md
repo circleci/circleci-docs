@@ -255,10 +255,9 @@ For the vast majority of customers, you can keep your current plan for now and t
 
 #### What are credits?
 {:.no_toc}
-Credits are used to pay for users and usage. Credits can also be used to pay for features, such as Docker Layer Caching.
+Credits are used to pay for users and usage based on machine type, size, and features such as Docker Layer Caching.
 
-For example, the 25,000 credit package would provide 2,500 build minutes when
-using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
