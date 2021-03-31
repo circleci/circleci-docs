@@ -23,8 +23,7 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 
 例として、Performance プランでクレジットを使用する場合を考えてみましょう。 Performance プランでは以下を利用できます。
 
-- 1 つ以上のクレジット ブロック (25,000 クレジット)
-- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
+- At least two credit blocks (at 25,000 credits per user)
 - Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
 - macOS のマシン タイプ
 - Windows のマシン タイプ
@@ -54,7 +53,7 @@ Performance プランにアップグレードすると、Free プランの内容
 
 - すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
 - Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
-- 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
+- Scalable user seat count (at 25,000 credits for the first three users and 25,000 credits for each additional user)
 - Docker レイヤー キャッシュへのアクセス
 - キューイングなし
 - サポート
