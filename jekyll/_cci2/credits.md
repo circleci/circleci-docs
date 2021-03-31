@@ -22,7 +22,7 @@ The right plan for you and your team will depend on several factors:
 
 Let's look at how a Performance plan might use credits. With the Performance plan you have:
 
-- At least one credit block (25,000 credits)
+- At least two credit blocks (at 25,000 credits per user)
 - A variety of Docker/Linux machine-types (Small, Medium, Medium+, Large, or X-Large)
 - The MacOS machine type
 - The Windows machine type
@@ -52,7 +52,7 @@ Upgrading to a performance plan offers several improvements over the free plan:
 
 - Access to all machine sizes for Docker/Linux based machines
 - Access to medium sized MacOS machines (4 CPUs, 8gb Ram at 50 credits/minute)
-- Unlimited user seat count (at 25,000 credits for the first three users and 25,000 credits for each additional user)
+- Scalable user seat count (at 25,000 credits for the first three users and 25,000 credits for each additional user)
 - Access to Docker Layer Caching
 - No queuing
 - Support
