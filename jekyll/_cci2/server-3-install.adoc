@@ -627,3 +627,4 @@ for information about how to check the status of Nomad Clients within your insta
 ## What to read next
 
 * xref:server-3-install-hardening-your-cluster.adoc[Hardening your cluster]
+* xref:server-3-install-migration.adoc[Server 3.x Migration Guide]

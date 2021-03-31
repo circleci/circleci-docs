@@ -51,6 +51,8 @@ To learn more about Server v3.x, see the following:
 
 * xref:server-3-overview.adoc[Server 3.x Overview]
 * xref:server-3-install.adoc[Server 3.x Installation]
+* xref:server-3-install-migration.adoc[Server 3.x Migration]
+* xref:server-3-operator-overview.adoc[Server 3.x Operations]
 
 
 
