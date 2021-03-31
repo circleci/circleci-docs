@@ -102,10 +102,6 @@ In order to keep the system stable for all CircleCI customers, we implement diff
 {:.no_toc}
 If you are not seeing a project you would like to build and it is not currently building on CircleCI, check your org in the top left corner of the CircleCI application.  For instance, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must change your org on the application Switch Organization menu to `your-org`.
 
-### I got an error saying "You have met the maximum number of active users allowed for your plan per billing period."
-{:.no_toc}
-Configure your plan and add user seats to ensure your organization has enough seats for future billing periods. If you have questions or need assistance, please reach out to billing@circleci.com.
-
 ### I got an error saying my “build didn’t run because it needs more containers than your plan allows” but my plan has more than enough. Why is this failing?
 {:.no_toc}
 There is a default setting within CircleCI to initially limit project parallelism to 16. If you request more than that, it will fail. Contact [Support or your Customer Success Manager](https://support.circleci.com/hc/en-us) to have it increased.
@@ -259,11 +255,9 @@ For the vast majority of customers, you can keep your current plan for now and t
 
 #### What are credits?
 {:.no_toc}
-Credits are used to pay for your usage based on machine type and size. Credits
-can also be used to pay for features, such as Docker Layer Caching.
+Credits are used to pay for users and usage based on machine type, size, and features such as Docker Layer Caching.
 
-For example, the 25,000 credit package would provide 2,500 build minutes when
-using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
+For example, the 25,000 credit package would provide 2,500 build minutes when using a single machine at the default rate of 10 credits per minute. The same package would last 1,250 minutes when using 2x parallelism or 250 minutes at 10x parallelism.
 
 #### Is there a way to share plans across organizations and have them billed centrally?
 {:.no_toc}
@@ -286,7 +280,7 @@ Every month, you are charged for your selected credit package at the beginning o
 You can choose to pay for premium features per active user, compute, and optionally, premium support.
 
 
-- Access to features, such as new machine sizes, are paid with a monthly fee of $15 per active user (not including applicable taxes).
+- Access to features, such as new machine sizes, are paid with a monthly fee of 25,000 credits per active user (not including applicable taxes).
 - Compute is paid for monthly in credits for the machine size and duration you use:
   - Credits are sold in packages of 25,000 at $15 each (not including applicable taxes).
   - Credits rollover each month and expire after one year.
@@ -334,7 +328,7 @@ You can pay from inside the CircleCI app for monthly pricing.
 #### When do I pay?
 {:.no_toc}
 
-On the **Performance Plan**, at the beginning of your billing cycle, you will be charged for user seats, premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
+On the **Performance Plan**, at the beginning of your billing cycle, you will be charged for premium support tiers and your monthly credit allocation. Any subsequent credit refills _during_ the month (such as the auto-refilling at 25% on reaching 2% of credits available) will be paid _at the time of the refill_.
 
 #### Am I charged if my build is "Queued" or "Preparing"?
 
