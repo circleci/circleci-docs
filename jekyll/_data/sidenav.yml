@@ -318,13 +318,11 @@ en:
         - name: Orbs
           link: 2.0/server-3-operator-orbs
         - name: VM Service
-          link: 2.0/vm-service
+          link: 2.0/server-3-operator-vm-service
         - name: Authentication
           link: 2.0/server-3-operator-authentication
-        - name: Docker Hub Pull through Mirror
-          link: 2.0/docker-hub-pull-through-mirror
-        - name: Running GPU Executors
-          link: 2.0/gpu
+        - name: Docker Authenticated Pulls
+          link: 2.0/private-images
         - name: Build Artifacts
           link: 2.0/server-3-operator-build-artifacts
         - name: Usage Data

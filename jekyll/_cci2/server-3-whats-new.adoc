@@ -45,6 +45,8 @@ annotation that will not persist upgrades: `kubectl -n <namespace> annotate serv
      *** ``"kubernetes.io/role/internal-elb"          = "1"``
 * CircleCI currently assigns a public load balancer for the frontend services. For some customers, their infrastructure
 or security groups won’t allow this. We will provide an optional internal local balancer for the frontend services in a future release.
+* https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
+* Support for GPU builders is not yet available.
 
 == What to read next
 To learn more about Server v3.x, see the following:

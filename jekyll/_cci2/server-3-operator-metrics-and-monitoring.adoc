@@ -20,44 +20,6 @@ toc::[]
 
 ## Metrics Collection
 
-### Telegraf
-
-CircleCI server uses https://docs.influxdata.com/[Telegraf] for collecting metrics. Telegraf brokers metrics data emitted
-by CircleCI services to data monitoring platforms, such as Datadog.
-
-Metrics collection in CircleCI Server works as follows:
-
-. Each component sends metrics data to the Telegraf service.
-. Telegraf listens on port 8125/UDP and receives data from all components (inputs) and applies configured filters to
-determine whether data should be kept or dropped.
-. For some metric-types, Telegraf keeps data internal and periodically calculates statistical data, such asmax, min,
-mean, stdev, sum.
-. Finally, Telegraf sends out data to configured sinks (outputs), such as stdout and Datadog.
-
-It is worth noting that Telegraf can accept multiple input and output types at the same time allowing administrators to
-configure a single Telegraf instance to collect and forward multiple metrics data sets to Datadog.
-
-#### Telegraf Configuration
-
-Follow these steps to review the standard Telegraf metrics configuration for your installation:
-
-. Navigate to the Admin Dashboard.
-
-TIP: If you need to bring up the console again, run `kubectl kots admin-console -n <namespace-you-installed-server>`.
-
-[start=2]
-. Select the *View Files* tab
-. Navigate to the Telegraf Config Map – `base/charts/circleci-server/charts/telegraf/templates/configmap.yml`
-
-.CircleCI Server v3.x Telegraf Config Map
-image::server-3-telegraf-config-map.png[Telegraf Config Map]
-<<<
-
-For detailed information on each element contained in the Telegraph configuration file, see the
-https://docs.influxdata.com/telegraf/v1.18/administration/configuration/#agent-configuration[Telegraf Docs].
-
-You may also opt for using `kubectl edit configmaps telegraf` to edit the configmap outside the UI.
-
 ### Grafana
 Server ships with https://grafana.com/[Grafana] which has become the world’s most popular technology used to compose
 observability dashboards. We have integrated with Prometheus & Loki Logs so you can create dashboards, set up alerts,
@@ -71,96 +33,6 @@ log stream.
 ### Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server ships with basic
 implementation of monitoring common performance metrics.
-
-## Monitoring Metrics
-
-VM Service and Docker services metrics are forwarded to Telegraf. The following metrics are enabled:
-
-* CPU
-* Disk
-* Memory
-* Networking
-* Docker
-
-### Nomad Job Metrics
-
-Nomad job metrics are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
-
---
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| Metric
-| Description
-
-| circle.nomad.server_agent.poll_failure
-| Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0.
-
-| circle.nomad.server_agent.jobs.pending
-| Returns the total number of pending jobs across the cluster.
-
-| circle.nomad.server_agent.jobs.running
-| Returns the total number of running jobs across the cluster.
-
-| circle.nomad.server_agent.jobs.complete
-| Returns the total number of complete jobs across the cluster.
-
-| circle.nomad.server_agent.jobs.dead
-| Returns the total number of dead jobs across the cluster.
-|===
---
-
-When the Nomad metrics container is running normally, no output will be written to standard output standard error.
-Failures will elicit a message to standard error.
-
-### CircleCI Metrics
-
-Various CircleCI metrics are available to monitor, including failed artifact uploads, number of runnable builds, etc.
-
---
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| Metric
-| Description
-
-| circle.backend.action.upload-artifact-error
-| Tracks how many times an artifact has failed to upload.
-
-| circle.build-queue.runnable.builds
-| Tracks how many builds flowing through the system are considered runnable.
-
-| circle.github.api_call
-| Tracks how many API calls CircleCI is making to GitHub.
-
-| circle.http.request
-| Tracks the response codes to CircleCi requests.
-
-| circle.nomad.client_agent.*`
-| Tracks nomad client metrics.
-
-| circle.nomad.server_agent.*
-| Tracks how many nomad servers are available.
-
-| circle.run-queue.latency
-| Tracks how long it takes for a runnable build to be accepted.
-
-| circleci.cron-service.messaging.handle-message
-| Provides timing and counts for RabbitMQ messages processed by the cron-service.
-
-| circleci.grpc-response
-| Tracks latency over the system grpc system calls.
-|===
---
-
-// TO DO:
-// ## Supported Data Monitoring Platforms
-
-// CircleCI Server 3.0 currently supports the following data monitoring platforms:
-
-// Cloudwatch
-// Datadog
-// Custom
 
 ## Tips and Troubleshooting
 
@@ -181,16 +53,3 @@ will be from the frontend pod. However, when you run workflows, you should also 
 
 You may also check the logs by running `kubectl logs circleci-telegraf-<hash> -n <namespace> -f` to confirm that your
 output provider (e.g. influx) is listed in the configured outputs.
-
-### Metrics Tags
-
-If you would like to ensure all metrics in your installation are tagged against an environment, you could place the
-following code in your config:
-
-[source,bash]
-----
-[global_tags]
-Env="<staging-circleci>"
-----
-
-Read the https://www.influxdata.com/products/influxdb/[InfluxDB documentation] for default and advanced installation steps.
