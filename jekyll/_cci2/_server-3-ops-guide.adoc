@@ -29,36 +29,16 @@ include::server-3-operator-vm-service.adoc[]
 
 include::server-3-operator-authentication.adoc[]
 
-include::private-images.md
+include::private-images.adoc[]
 
-include::gpu.adoc[]
+include::server-3-operator-build-artifacts.adoc[]
 
-include::certificates.adoc[]
-
-include::user-accounts.adoc[]
-
-include::build-artifacts.adoc[]
-
-include::usage-stats.adoc[]
-
-include::jvm-heap-size-configuration.adoc[]
-
-include::ssh-server.adoc[]
-
-include::ops.adoc[]
-
-include::backup.adoc[]
+include::server-3-operator-usage-data.adoc[]
 
 include::security-server.adoc[]
 
-include::troubleshooting.adoc[]
+include::server-3-operator-application-lifecycle.adoc[]
 
-include::admin-faq.adoc[]
-
-include::customizations.adoc[]
-
-include::architecture.adoc[]
-
-include::storage-lifecycle.adoc[]
+include::server-3-operator-troubleshooting-and-support.adoc[]
 
 :leveloffset: -1
