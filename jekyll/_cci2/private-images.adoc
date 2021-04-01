@@ -147,6 +147,7 @@ let's say your SaaS app runs the speedier tests and deploys to staging infrastru
 pushes, we run the full-blown test suite before deploying to production:
 
 [source,yaml]
+----
 version: 2
 jobs:
   build:
@@ -192,7 +193,7 @@ workflows:
               ignore: /.*/
             tags:
               only: /^\d{4}\.\d+$/
-[source,yaml]
+----
 
 ## See also
 
