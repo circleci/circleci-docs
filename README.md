@@ -46,6 +46,13 @@ this folder (in our build process) and integrated into the Jekyll Site. Follow
 the [local development guide](./docs/local-development.md) to get started with
 building the Jekyll site.
 
+We also have an automated code review tool setup, so it will run [markdownlint
+](https://github.com/DavidAnson/markdownlint) on your PR and review for any
+markdown style violations. The rules are located at [.markdownlint.jsonc
+](https://github.com/DavidAnson/markdownlint/blob/main/.markdownlint.jsonc).
+You can also fix most of the violations automatically. You can read more 
+[here](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#markdownlinter).
+
 ### `/src-api` - API v1.1 and v2 Build Tooling
 
 Our API documentation source can be found in this folder.

@@ -52,6 +52,21 @@ Jekyll will build the site and start a web server, which can be viewed in your b
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
 
+## Markdownlinter
+
+Prerequisites:
+
+- Installed npm packages at the root of the repository `npm install`
+- Installed gems at the root of the repository `bundle install`
+
+You can lint the markdown using the [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
+
+```bash
+.PATH=$(npm bin):$PATH markdownlint-cli2 jekyll/_cci2/*.md
+```
+
+You can also autofix the issues by adding `fix: true` to the configuration file `.markdownlint-cli2.jsonc`.
+
 ## Working on search
 
 If you want to work on the way search works on docs, follow the below instructions.

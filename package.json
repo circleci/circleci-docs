@@ -22,6 +22,9 @@
     "@babel/core": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "babel-loader": "^8.0.2",
+    "markdownlint-cli2": "0.0.15",
+    "markdownlint-cli2-formatter-json": "0.0.4",
+    "markdownlint-rule-header-id": "^0.0.3",
     "uglifyjs-webpack-plugin": "^1.1.2",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0"
