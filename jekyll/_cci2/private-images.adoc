@@ -4,6 +4,7 @@ version:
 - Server v2.x
 - Server v3.x
 ---
+= Using Docker Authenticated Pulls
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
