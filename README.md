@@ -50,7 +50,7 @@ We also have an automated code review tool setup, so it will run [markdownlint
 ](https://github.com/DavidAnson/markdownlint) on your PR and review for any
 markdown style violations. The rules are located at [.markdownlint.jsonc
 ](https://github.com/DavidAnson/markdownlint/blob/main/.markdownlint.jsonc).
-You can also fix most of the violations automatically. You can read more at
+You can also fix most of the violations automatically. You can read more 
 [here](https://github.com/circleci/circleci-docs/blob/master/docs/local-development.md#markdownlinter).
 
 ### `/src-api` - API v1.1 and v2 Build Tooling
