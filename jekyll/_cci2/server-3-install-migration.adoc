@@ -41,6 +41,8 @@ toc::[]
 
 Input the required information and complete the migration process.
 
+NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
+
 ### Step 2 - Validate your migration to Server 3.0
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check]
 with contexts on your new Server 3.0 environment by pushing a fresh commit.
