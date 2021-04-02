@@ -40,7 +40,7 @@ The migration script will:
 * Stop your v2.19.x application
 * Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases
 * Archive existing application data for Vault and CircleCI encryption/signing keys
-* Export the data from your v2.19.x application to your v3.x installation
+* Export the tarball to your v3.x installation
 * Scale v3.x application deployments down to zero, and then to one
 * Import the data from the previously exported tarball to your new v3.x instance
 
