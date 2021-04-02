@@ -28,7 +28,7 @@ Key used by VM Service differs from the policy used by object storage in the pre
 . *Subnet ID* (required): Choose a subnet (public or private) where the VMs should be deployed.
 . *Security Group ID* (required): This is the security group that will be attached to the VMs.
 
-The recommended security group configuration can be found in the xref:server-3-install-hardening-your-cluster.adoc#external-vms[Hardening Your Cluster] section.
+The recommended security group configuration can be found in the https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster] section.
 
 [start=5]
 . *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.

@@ -333,7 +333,15 @@ en:
           link: 2.0/server-3-operator-application-lifecycle
         - name: Troubleshooting and Support
           link: 2.0/server-3-operator-troubleshooting-and-support
-
+    - name: Server v3.x PDFs
+      link: 2.0/server-3-overview
+      children:
+        - name: v3.0 Overview
+          link: 2.0/CircleCI-Server-3.0.0-Overview.pdf
+        - name: v3.0 Installation Guide
+          link: 2.0/CircleCI-Server-3.0.0-Installation-Guide.pdf
+        - name: v3.0 Operations Guide
+          link: 2.0/CircleCI-Server-3.0.0-Operations-Guide.pdf
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:

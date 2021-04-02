@@ -90,6 +90,5 @@ For more information on exploring your new cluster, see the following:
 - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management] - `kubectl` docs
 
 ## What to read next
-
-* xref:server-3-install.adoc[Server 3.x Installation]
-* xref:server-3-install-hardening-your-cluster.adoc[Hardening your cluster]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]

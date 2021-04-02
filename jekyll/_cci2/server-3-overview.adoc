@@ -65,7 +65,6 @@ Nomad clients need access to object storage.
 https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
 
 == Architecture
-
 Below is a diagram describing the architecture of Server 3.x. The available services
 are described in greater detail in the <<Services>> section.
 
@@ -343,7 +342,6 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 
 == What to read next
 
-* xref:server-3-whats-new.adoc[What's new in 3.x]
-* xref:server-3-overview.adoc[Server 3.x Overview]
-* xref:server-3-install.adoc[Server 3.x Installation]
-* xref:server-3-install-migration.adoc[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server-3-whats-new[What's new in 3.x]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
