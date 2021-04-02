@@ -50,5 +50,5 @@ Once you have successfully run https://support.circleci.com/hc/en-us/articles/36
 notify your team of the new CircleCI UI and URL, if it has changed.
 
 ## What to read next
-* xref:server-3-install-hardening-your-cluster.adoc[Hardening Your Cluster]
-* xref:server-3-operator-overview.adoc[Server 3.x Operator Guide]
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operator Guide]
