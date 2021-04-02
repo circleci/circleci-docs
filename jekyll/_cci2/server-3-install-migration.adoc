@@ -26,10 +26,25 @@ toc::[]
 . Your current CircleCI Server installation is 2.19
 . You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
+. You have password-less `sudo` access on the services machine.
 
 ## Migration
 
+WARNING: Migrating to Server v3.x will shut down your v2.19.x application. Your v2.19.x application will not be started back up,
+so be sure to keep your team informed of downtime.
+
 ### Step 1 - Clone the repository and run the migration script
+The instructions below will clone the repository containing the Server v2.19.x to Server v3.x migration script.
+The migration script will:
+
+* Stop your v2.19.x application
+* Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases
+* Archive existing application data for Vault and CircleCI encryption/signing keys
+* Export the data from your v2.19.x application to your v3.x installation
+* Scale v3.x application deployments down to zero, and then to one
+* Import the data from the previously exported tarball to your new v3.x instance
+
+In a terminal:
 . Run `git clone git@github.com:CircleCI-Public/server-scripts.git`
 . Change into the `migrate` directory: `cd server-scripts/migrate`
 . Run the migration script, i.e.: `./migrate.sh`
@@ -50,6 +65,9 @@ with contexts on your new Server 3.0 environment by pushing a fresh commit.
 ### Step 3 - Update your team
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check],
 notify your team of the new CircleCI UI and URL, if it has changed.
+
+// TO DO:
+// ### Troubleshooting
 
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
