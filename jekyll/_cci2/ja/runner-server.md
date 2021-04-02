@@ -1,29 +1,29 @@
 ---
 layout: classic-docs
-title: CircleCI Runner in Server
-short-title: CircleCI Runner in Server
+title: CircleCI Server のランナー
+short-title: CircleCI Server のランナー
 categories:
   - platforms
-description: How to set up a Runner in Server
+description: CircleCI Server でランナーをセットアップする方法
 order: 31
 version:
   - Server v3.x
 ---
 
-NOTE: CircleCI Runner is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. Please [contact us](https://circleci.com/contact/) for more information.
+注: 執筆時点のバージョンの CircleCI Server 3.x では、CircleCI ランナーは使用できません。CircleCI Server に対応した CircleCI ランナーは、次回リリース前にプレビュー版として提供される予定です。 詳細については、[こちらからお問い合わせください](https://circleci.com/ja/contact/)。
 
-## Authentication
+## 認証
 
-When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server deployment either via `--host HOSTNAME` and `--token TOKEN` flags, or the CircleCI CLI's configuration file.
+名前空間、リソース クラス、トークンを作成するには、CLI が CircleCI Server 環境に接続できるよう構成する必要があります。この構成は、`--host HOSTNAME` フラグと `--token TOKEN` フラグを付けるか、または CircleCI CLI の設定ファイルを使用して行います。
 
-#### Resource class example
+#### リソース クラスの作成例
 ```plaintext
 circleci runner resource-class create <resource-class> <description> --host HOSTNAME --token TOKEN
 ```
 
-## Configuration file
+## 設定ファイル
 
-When setting up a Runner, the configuration file should include `host` property.
+ランナーのセットアップ時には、設定ファイルで `host` プロパティを指定する必要があります。
 
 ```yaml
 api:
@@ -36,17 +36,17 @@ runner:
   cleanup_working_directory: true
 ```
 
-## Version
+## バージョン
 
-A specific server version works with a specific runner version. The table below presents the mapping.
+CircleCI Server のバージョンによって、対応しているランナーのバージョンは異なります。 下表に、それぞれのバージョンの対応関係を示します。
 
-| Server Version | Runner |
-| -------------- | ------ |
-| 3.0            | TBD    |
+| CircleCI Server のバージョン | ランナーのバージョン |
+| ---------------------- | ---------- |
+| 3.0                    | 未定         |
 {: class="table table-striped"}
 
 
-Replace `VERSION` and run the following steps to download, verify and install the binary of a specific version of runner.
+次のスクリプトの `VERSION` を適切なバージョンに置き換えて実行し、指定したバージョンのランナーのバイナリをダウンロードおよび検証して、インストールします。
 
 ```sh
 agent_version=VERSION
