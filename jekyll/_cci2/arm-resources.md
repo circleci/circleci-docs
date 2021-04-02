@@ -1,26 +1,26 @@
 ---
 layout: classic-docs
-title: "Arm resources"
-short-title: "Using Arm resources on CircleCI"
-description: "Using Arm resources on CircleCI"
+title: "ARM resources"
+short-title: "Using ARM resources on CircleCI"
+description: "Using ARM resources on CircleCI"
 version:
 - Cloud
 ---
 
 # Overview
 
-This document will walk you through the setup steps required to use an Arm
-resource on CircleCI. Arm resources are not available on CircleCI Server 1.x or
+This document will walk you through the setup steps required to use an [ARM](https://en.wikipedia.org/wiki/ARM_architecture)
+resource on CircleCI. ARM resources are not available on CircleCI Server 1.x or
 2.x. 
 
 <div class="alert alert-info" role="alert">
-  <b>Note:</b> If you are interested in using Arm resources, please fill out this <a href="https://www2.circleci.com/arm.html"><b>contact form</b></a>.
+  <b>Note:</b> If you are interested in using ARM resources, please fill out this <a href="https://www2.circleci.com/arm.html"><b>contact form</b></a>.
 </div>
 
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
 CircleCI `config.yml` file you can choose the right environment for your job using the
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
-key. CircleCI offers two Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+key. CircleCI offers two ARM resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
 
 * `arm.medium` - `arm64` architecture, 2 vCPU, 8GB RAM
 * `arm.large` - `arm64` architecture, 4 vCPU, 16GB RAM
@@ -44,14 +44,14 @@ The following Arm resource class is available to all CircleCI customers:
 
 For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
 
-At this moment, Arm resources are only available on our cloud offering. If you
-are a CircleCI Server customer and are looking to try Arm resources, consider
+At this moment, ARM resources are only available on our cloud offering. If you
+are a CircleCI Server customer and are looking to try ARM resources, consider
 creating a CircleCI Cloud account, or contact your Customer Success Manager to
 request Arm on Server.
 
 ## Using Arm resources
 
-Update your `.circleci/config.yml` file to use Arm resources. Consider the example config:
+Update your `.circleci/config.yml` file to use ARM resources. Consider the example config:
 
 ```yaml
 # .circleci/config.yml
@@ -72,7 +72,7 @@ jobs:
     resource_class: arm.large
     steps:
       - run: uname -a
-      - run: echo "Hello, Arm!"
+      - run: echo "Hello, ARM!"
 
 workflows:
   build:
