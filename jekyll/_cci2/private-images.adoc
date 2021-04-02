@@ -120,7 +120,7 @@ jobs:
 CircleCI now supports pulling private images from Amazon's ECR service.
 
 TIP: You can pull your private images from ECR repositories in any regions. However, for the best experience, we strongly
-recommend to make a copy of your image in `us-east-1` region, and specify that `us-east-1` image for the Docker executor.
+recommend you make a copy of your image in `us-east-1` region, and specify that `us-east-1` image for the Docker executor.
 Our job execution infrastructure is in the `us-east-1` region so using `us-east-1` images speeds up the process of spinning
 up your environment.
 
