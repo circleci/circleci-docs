@@ -21,6 +21,6 @@ include::server-3-overview.adoc[]
 
 include::server-3-whats-new.adoc[]
 
-include::server-3-faq.adoc
+include::server-3-faq.adoc[]
 
 :leveloffset: -1
