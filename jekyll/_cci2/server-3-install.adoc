@@ -422,7 +422,7 @@ NOTE: At this time you can choose to create DNS entries for each of the load bal
 prefer to do so. For example, VM service might be called `vmservice.circleci.yourdomain.com`.
 
 ## Step 4 - Install Nomad Clients
-As mentioned in the xref:server-3-overview.adoc[Overview], Nomad is a workload orchestration tool that CircleCI uses to
+As mentioned in the https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to
 schedule (via Nomad Server) and run (via Nomad Clients) CircleCI jobs.
 
 Nomad client machines are provisioned outside the cluster and need access to the Nomad Control Plane, Output Processor,
@@ -627,5 +627,5 @@ for information about how to check the status of Nomad Clients within your insta
 
 ## What to read next
 
-* xref:server-3-install-hardening-your-cluster.adoc[Hardening your cluster]
-* xref:server-3-install-migration.adoc[Server 3.x Migration Guide]
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]

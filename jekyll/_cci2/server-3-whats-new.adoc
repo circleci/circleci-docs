@@ -46,10 +46,7 @@ or security groups won’t allow this. We will provide an optional internal loca
 == What to read next
 To learn more about Server v3.x, see the following:
 
-* xref:server-3-overview.adoc[Server 3.x Overview]
-* xref:server-3-install.adoc[Server 3.x Installation]
-* xref:server-3-install-migration.adoc[Server 3.x Migration]
-* xref:server-3-operator-overview.adoc[Server 3.x Operations]
-
-
-
+* https://circleci.com/docs/2.0/server-3-whats-new[Server 3.x Overview]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
