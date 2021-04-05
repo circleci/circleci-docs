@@ -29,6 +29,18 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 
 Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
 
+## Deleting Orbs
+
+* Question: Is it possible to delete an orb I've created?
+
+* Answer: No. Orbs are public by default and immutable, once a version of an orb is published it can not be changed. This is done so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
+
+Orbs can however be "Unlisted" from the [Orb Registry](https://circleci.com/developer/orbs). Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
+
+```
+circleci orb unlist myOrb/myNamespace
+```
+
 ## Secure API tokens
 
 * Question: How do I protect a user's API tokens and other sensitive information?
@@ -94,7 +106,7 @@ steps:
     name: Install Homebrew (for Linux)
 ```
 
-## Command vs job
+## Command vs Job
 
 * Question: Should I create a command or a job?
 
