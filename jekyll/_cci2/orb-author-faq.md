@@ -14,6 +14,7 @@ This document describes various questions and technical issues that you may find
 {:toc}
 
 ## Errors claiming namespace or publishing orbs
+{: #publishing-errors }
 
 * Question: I receive an error when attempting to claim a namespace or publish a production orb.
 
@@ -30,6 +31,7 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
 
 ## Deleting Orbs
+{: #deleting-orbs }
 
 * Question: Is it possible to delete an orb I've created?
 
@@ -42,6 +44,7 @@ circleci orb unlist myOrb/myNamespace
 ```
 
 ## Secure API tokens
+{: #secure-ap-tokens }
 
 * Question: How do I protect a user's API tokens and other sensitive information?
 
@@ -52,6 +55,7 @@ Read more:
 * [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
 
 ## Environment variables
+{: #environment-variables }
 
 * Question: How can I require a user to add an environment variable?
   
@@ -64,6 +68,7 @@ Read more:
 * [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
 
 ## Supported programming languages
+{: #supported-languages }
 
 * Question: What language do I use to write an orb?
   
@@ -107,6 +112,7 @@ steps:
 ```
 
 ## Command vs Job
+{: #command-vs-job }
 
 * Question: Should I create a command or a job?
 
