@@ -51,7 +51,7 @@ Organization-level metrics allow you to analyze your organization’s performanc
 | Term                    | Definition     |
 |-------------------------|----------------|
 | Time to Recovery | Total time spent in a failed state before a successful execution. |
-| Mean Time to Recovery (MTTR)| The average time it takes to get back to a successful execution from a failed one (Calculated by `total recovery time / # of failures`). If there are no failed builds (and thus no recoveries) in the current time window, the MTTR value will be empty. Empty MTTR values will be treated as 0 when calculating Trends. |
+| Mean Time to Recovery (MTTR)| The average time it takes to get back to a successful execution from a failed one (Calculated by `total recovery time / # of failures`). <br> _If there are no failed builds (and thus no recoveries) in the current time window, the MTTR value will be empty. Empty MTTR values will be treated as 0 when calculating Trends._ |
 | Throughput | The average (mean) number of builds of any status per day. Calculated by `Sum of builds/ # of days.` |
 {: class="table table-striped"}
 
@@ -63,16 +63,15 @@ additional context to Insights metrics by presenting a relative benchmark
 against previous performance. For instance, on the last 7-day view, trends will
 display the change in value or delta compared to the prior 7-day window.
 
-Please note that trends are available only for 24-hour, 7-day, and 30-day time
-windows. 
+**Please note that trends are available only for 24-hour, 7-day, and 30-day time windows.**
 
 Trends are calculated as `100 * (current value - previous value) / prior-value`.
 
-**Approximate Trends**
+### Approximate Trends
 
 For percentile metrics like duration, approximation methods are used to find the prior window benchmarks.
 
-### Duration 
+#### Duration 
 {:.no_toc}
 
 **P95 Duration** 
@@ -98,7 +97,6 @@ are calculated by taking the median of the daily P50 values as a benchmark.
 This section describes how your trend data may appear across various metrics.
 
 ![]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
-<sub>Screenshot depicting how trend data might appear.</sub>
 
 - **Green**: The metric is trending in the right direction.
 - **Red**: The metric is trending in the wrong direction.

@@ -18,15 +18,27 @@ The following test insights are available:
 
 ### Performance Summary
 
-The summary chart displays test performance across the most recent 10 workflow runs. Users can hover over each bar to review the test count, skipped tests, and success rate of their tests. 
+
+![]({{ site.baseurl }}/assets/img/docs/insights-test-performance.png)
+
+The summary chart displays test performance across the most recent 10 workflow
+runs. Users can hover over each bar to review the test count, skipped tests, and
+success rate of their tests.
 
 ### Top 10 Most Failed Tests 
 
-Users can view the 10 tests with the lowest success rates in their most recent pipeline executions. The table provides the Test name, the associated Job, run time, and success rate. 
+![]({{ site.baseurl }}/assets/img/docs/insights-test-most-failed.png)
+
+Users can view the 10 tests with the lowest success rates in their most recent
+pipeline executions. The table provides the Test name, the associated Job, run
+time, and success rate.
 
 
 ### Top 10 Slowest Tests 
 
-Users can view the 10 tests with the longest run times in their most recent pipeline executions. The table provides the Test name, the associated Job, run time, and success rate. 
+![]({{ site.baseurl }}/assets/img/docs/insights-test-slowest.png)
 
-![]({{ site.baseurl }}/assets/img/docs/insights-test-insights.png)
+Users can view the 10 tests with the longest run times in their most recent
+pipeline executions. The table provides the Test name, the associated Job, run
+time, and success rate.
+
