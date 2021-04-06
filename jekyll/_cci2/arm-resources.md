@@ -7,6 +7,8 @@ version:
 - Cloud
 ---
 
+**Note:** In order to eliminate any confusion regarding the naming convention of "Arm" on this page, it should be noted that the industry standard naming for this new architecture is "Arm," not "ARM."
+
 # Overview
 
 This document will walk you through the setup steps required to use an Arm
