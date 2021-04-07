@@ -25,8 +25,3 @@ group :jekyll_plugins do
   # https://nvd.nist.gov/vuln/detail/CVE-2018-16470
   gem 'jekyll-asciidoc'
 end
-
-group :test, :development do
-  gem 'pronto'
-  gem 'pronto-markdownlint'
-end
