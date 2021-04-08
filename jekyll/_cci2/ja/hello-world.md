@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Hello World"
 short-title: "Hello World"
-description: "First project on CircleCI 2.0"
+description: "CircleCI 2.0 での最初のプロジェクト"
 categories:
   - getting-started
 order: 4
@@ -11,13 +11,13 @@ version:
   - Server v2.x
 ---
 
-This document describes how to get started with a basic build of your Linux, Android, Windows, or macOS project on CircleCI 2.x after you [sign up]({{ site.baseurl }}/2.0/first-steps/).
+[ユーザー登録]({{ site.baseurl }}/2.0/first-steps/)後、CircleCI 2.x で Linux、Android、Windows、macOS のプロジェクトの基本的なビルドを開始する方法について説明します。
 
 ## Echo hello world on Linux
 
-This example adds a job called `build` that spins up a container running a [pre-built CircleCI Docker image for Node]({{ site.baseurl }}/2.0/circleci-images/#nodejs). Then, it runs a simple `echo` command. To get started, complete the following steps:
+この例では、[Node 用のビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/#nodejs)を実行するコンテナをスピン アップする `build` というジョブを追加してから、 `echo` コマンドを実行します。 まずは以下の手順を行います。
 
-1. Create a directory called `.circleci` in the root directory of your local GitHub or Bitbucket code repository.
+1. GitHub または Bitbucket のローカル コード リポジトリのルートに、`.circleci` というディレクトリを作成します。
 
 1. Create a [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file with the following lines (if you are using CircleCI Server, use `version: 2.0` configuration):
    ```yaml
@@ -34,23 +34,23 @@ This example adds a job called `build` that spins up a container running a [pre-
          - run: echo "hello world" # run the `echo` command
    ```
 
-2. Commit and push the changes.
+2. 変更をコミットし、プッシュします。
 
-3. Go to the Projects page in the CircleCI app, click the **Add Projects** button, then click the **Set Up Project** button next to your project. If you don't see your project, make sure you have selected the associated Org. See the Org Switching section below for tips.
+3. Go to the Projects page in the CircleCI app, click the **Add Projects** button, then click the **Set Up Project** button next to your project. プロジェクトが表示されない場合は、そのプロジェクトが関連付けられている組織を選択してあるかどうか確認してください。 これに関するヒントは「組織の切り替え」セクションで説明します。
 
 1. Click the **Start Building** button to trigger your first build.
 
-The Workflows page appears with your `build` job and prints `Hello World` to the console.
+[Workflows (ワークフロー)] ページに `build` ジョブが表示され、コンソールに `Hello World` と出力されます。
 
-**Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. Be sure to use `.yml` file extension to resolve this error.
+**Note:** If you get a `No Config Found` error, it may be that you used `.yaml` file extension. このエラーを解決するには、ファイル拡張子として `.yml` を使用してください。
 
-CircleCI runs each [job]({{site.baseurl}}/2.0/glossary/#job) in a separate [container]({{site.baseurl}}/2.0/glossary/#container) or VM. That is, each time your job runs, CircleCI spins up a container or VM to run the job in.
+CircleCI は、各[ジョブ]({{site.baseurl}}/2.0/glossary/#ジョブ)をそれぞれ独立した[コンテナ]({{site.baseurl}}/2.0/glossary/#コンテナ)または VM で実行します。 つまり、ジョブが実行されるたびに、CircleCI がコンテナまたは VM をスピン アップし、そこでジョブを実行します。
 
-Refer to the [Node.js - JavaScript Tutorial]({{site.baseurl}}/2.0/language-javascript/) for a sample project.
+サンプル プロジェクトについては、[Node.js の JavaScript チュートリアル]({{site.baseurl}}/2.0/language-javascript/)を参照してください。
 
 ## Hello world for Android
 
-Using the basic ideas from the Linux example above, you can add a job that uses the `docker` executor with a pre-built Android image in the same `config.yml` file as follows:
+前述の Linux の例と基本的な考え方は同じです。ビルド済みの Android イメージを同じ `config.yml` ファイルで使用して、`docker` executor を使用するジョブを追加します。
 
 ```
 jobs:
@@ -62,7 +62,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
-See the [Android Language Guide]({{site.baseurl}}/2.0/language-android/) for details and a sample project.
+詳細とサンプル プロジェクトについては、[Android 言語ガイド]({{site.baseurl}}/2.0/language-android/)を参照してください。
 
 ## Hello world for macOS
 
@@ -142,8 +142,8 @@ If you do not see your project and it is not currently building on CircleCI, che
 
 ## Next steps
 
-- See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+- 2.0 構成の概要、および `.circleci/config.yml` ファイルにおけるトップ レベル キーの階層については「[コンセプト]({{ site.baseurl }}/2.0/concepts/)」を参照してください。
 
 - Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 
-- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
+- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。
