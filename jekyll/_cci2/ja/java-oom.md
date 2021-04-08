@@ -1,17 +1,17 @@
 ---
 layout: classic-docs
-title: "Avoiding and Debugging Java Memory Errors"
-description: "How to avoid and debug Java memory errors on CircleCI."
+title: "Java メモリ エラーの回避とデバッグ"
+description: "CircleCI で Java メモリ エラーを回避およびデバッグする方法"
 version:
   - Cloud
   - Server v2.x
 ---
 
-How to avoid and debug Java memory errors on CircleCI.
+CircleCI で Java メモリ エラーを回避およびデバッグする方法について説明します。
 
-## Overview
+## 概要
 
-The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) provides a portable execution environment for Java-based applications. Without any memory limits, the JVM pre-allocates a fraction of the total memory available in the system. CircleCI runs container based builds on large machines with lots of memory. Each container has a smaller memory limit than the total amount available on the machine.
+[Java 仮想マシン](https://ja.wikipedia.org/wiki/Java仮想マシン) (JVM) は、Java ベースのアプリケーションに移植可能な実行環境を提供します。 メモリ制限が設定されていない場合、JVM はシステムで使用可能な合計メモリの一部を事前に割り当てます。 CircleCI は大量のメモリを搭載した大規模なマシンでコンテナ ベースのビルドを実行しており、 各コンテナには、マシンで使用可能な総量よりも少ない量のメモリ制限が設定されています。
 
 By default, Java's is configured so that it will use:
 - More than `1/64th` of your total memory (for Docker Medium with 4GiB of RAM this will be 64 MiB)
@@ -32,7 +32,7 @@ You can see how much memory your container is allocated, and how much it has use
 
 Recent versions of Java (JDK 8u191, and JDK 10 and up) include a flag `UseContainerSupport` which defaults on. This flag enables the JVM to use the CGroup memory constraints available to the container, rather than the much larger amount of memory on the machine. Under Docker and other container runtimes, this will let the JVM more accurately detect memory constraints, and set a default memory usage within those constraints. You can use the `MaxRAMPercentage` flag to customise the fraction of available RAM that is used, e.g. `-XX:MaxRAMPercentage=90.0`.
 
-## Manual memory limits
+## 手動でのメモリ制限
 
 Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool. To prevent the JVM from pre-allocating too much memory, declare memory limits [using Java environment variables](#using-java-environment-variables-to-set-memory-limits). To debug OOM errors, look for the [appropriate exit code](#debugging-java-oom-errors).
 
@@ -42,16 +42,16 @@ You can set several Java environment variables to manage JVM memory usage. These
 
 The table below shows these environment variables, along with the precedence levels they take when using different build tools. The lower the number, the higher the precedence level, with 0 being the highest.
 
-| Java Environment Variable                 | Java | Gradle | Maven | Kotlin | Lein |
+| Java 環境変数                                 | Java | Gradle | Maven | Kotlin | Lein |
 | ----------------------------------------- | ---- | ------ | ----- | ------ | ---- |
 | [`_JAVA_OPTIONS`](#_java_options)         | 0    | 0      | 0     | 0      | 0    |
 | [`JAVA_TOOL_OPTIONS`](#java_tool_options) | 2    | 3      | 2     | 2      | 2    |
-| [`JAVA_OPTS`](#java_opts)                 | no   | 2      | no    | 1      | no   |
-| [`JVM_OPTS`](#jvm_opts)                   | *    | no     | no    | no     | *    |
-| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | no   | no     | no    | no     | 1    |
-| [`GRADLE_OPTS`](#gradle_opts)             | no   | 1      | no    | no     | no   |
-| [`MAVEN_OPTS`](#maven_opts)               | no   | no     | 1     | no     | no   |
-| CLI args                                  | 1    | no     | no    | no     | no   |
+| [`JAVA_OPTS`](#java_opts)                 | ×    | 2      | ×     | 1      | ×    |
+| [`JVM_OPTS`](#jvm_opts)                   | *    | ×      | ×     | ×      | *    |
+| [`LEIN_JVM_OPTS`](#lein_jvm_opts)         | ×    | ×      | ×     | ×      | 1    |
+| [`GRADLE_OPTS`](#gradle_opts)             | ×    | 1      | ×     | ×      | ×    |
+| [`MAVEN_OPTS`](#maven_opts)               | ×    | ×      | 1     | ×      | ×    |
+| CLI 引数                                    | 1    | ×      | ×     | ×      | ×    |
 {:class="table table-striped"}
 
 The above environment variables are listed below, along with details on why to choose one over another.
