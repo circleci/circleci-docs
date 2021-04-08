@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Hello World On MacOS"
-short-title: "Hello World On MacOS"
-description: "First macOS project on CircleCI 2.0"
+title: "macOS での Hello World"
+short-title: "macOS での Hello World"
+description: "CircleCI 2.0 での最初の macOS プロジェクト"
 categories:
   - getting-started
 order: 4
@@ -10,75 +10,75 @@ version:
   - Cloud
 ---
 
-This document describes how to get started with continuous integration on **macOS build environments** on CircleCI. If you still need to get acquainted with CircleCI, it is recommended to checkout the [getting started guide]({{ site.baseurl }}/2.0/getting-started).
+This document describes how to get started with continuous integration on **macOS build environments** on CircleCI. CircleCI の基本的な操作について確認したい場合は、[入門ガイド]({{ site.baseurl }}/2.0/getting-started)を参照することをお勧めします。
 
-Also, there is documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
+また、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)」も併せてご覧ください。
 
-## Prerequisites
+## 前提条件
 
-To follow along with this document you will need:
+作業を行う前に、以下を準備しておく必要があります。
 
-- An [account](https://circleci.com/signup/) on CircleCI.
-- A subscription to a [paid plan](https://circleci.com/pricing/#build-os-x) to enable building on the macOS executor.
-- An Apple computer with XCode installed on it (if you want to open the example project).
+- CircleCI の[アカウント](https://circleci.com/ja/signup/)
+- macOS Executor でのビルドを実行できる[有料プラン](https://circleci.com/ja/pricing/#build-os-x)のサブスクリプション
+- Xcode がインストールされた Apple コンピューター (サンプル プロジェクトを開く場合)
 
 ## Overview of the macOS executor
 
-The macOS build environment (or `executor`) is used for iOS and macOS development, allowing you to test, build, and deploy macOS and iOS applications on CircleCI. The macOS executor runs jobs in a macOS environment and provides access to iPhone, iPad, Apple Watch and Apple TV simulators.
+macOS ビルド環境 (`executor`) は iOS と macOS の開発用に提供されるもので、これを使用して macOS および iOS アプリケーションのテスト、ビルド、デプロイを CircleCI 上で行うことができます。 macOS Executor は、macOS 環境でジョブを実行し、iPhone、iPad、Apple Watch、および Apple TV の各シミュレーターへのアクセスを提供します。
 
-Before we get to setting up the macOS executor, we will need to setup our example application.
+macOS Executor をセットアップする前に、サンプル アプリケーションをセットアップする必要があります。
 
 ## Example application
 
-The example application is a simple mac app - it runs a 5 minute timer and contains a single unit test (real-world applications will be far more complex; this app simply serves as an introduction to the macOS build environment).
+このサンプル アプリケーションは簡単な Mac アプリです。5 分間のタイマーが実行され、単体テストが含まれています (このアプリは単に macOS ビルド環境の基礎を説明することを目的としており、実際のアプリケーションはこれよりもはるかに複雑です)。
 
-As a user getting to know the macOS build environment, our ideal scenario is for CircleCI to help with the following:
+macOS ビルド環境についての理解を深めていただければ、CircleCI を利用して以下のことが可能になります。
 
-- Run tests using XCode on the macOS VM whenever we push code.
-- Create and upload the compiled application as an artifact after tests have run successfully.
+- コードをプッシュするたびに、macOS VM 上で Xcode を使用してテストを実行する
+- テストが正常に完了した後、コンパイルされたアプリケーションをアーティファクトとして作成してアップロードする
 
-You can checkout the example application's repo on [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos).
+サンプル アプリケーションのリポジトリは [GitHub](https://github.com/CircleCI-Public/circleci-demo-macos) にチェック アウトできます。
 
 ## Example configuration file
 
-Our application does not make use of any external tools or dependencies, so we have a fairly simple `.circleci/config.yml` file. Below, each line is commented to indicate what is happening at each step.
+このアプリケーションでは、外部ツールや依存関係が使用されていないため、`.circleci/config.yml` ファイルの内容はきわめて単純です。 各ステップの内容についてコメントを付けて説明しています。
 
 ```yaml
 version: 2.1
-jobs: # a basic unit of work in a run
-  build: # runs not using `Workflows` must have a `build` job as entry point
-    macos:  # indicate that we are using the macOS executor
-      xcode: 11.3.0 # indicate our selected version of Xcode
-    steps: # a series of commands to run
-      - checkout  # pull down code from your version control system.
+jobs: # 1 回の実行の基本作業単位
+  build: # 「ワークフロー」を使用しない実行では、エントリポイントとして `build` ジョブが必要です
+    macos:  # macOS Executor を使用していることを示します
+      xcode: 11.3.0 # 選択された Xcode のバージョン
+    steps: # 実行する一連のコマンド
+      - checkout  # ユーザーのバージョン管理システムからコードをプル ダウンします
       - run:
-          # run our tests using xcode's cli tool `xcodebuild`
-          name: Run Unit Tests
+          # Xcode の CLI ツール「xcodebuild」を使用してテストを実行します
+          name: 単体テストの実行
           command: xcodebuild test -scheme circleci-demo-macos
       - run:
-          # build our application
-          name: Build Application
+          # アプリケーションをビルドします
+          name: アプリケーションのビルド
           command: xcodebuild
       - run:
-          # compress Xcode's build output so that it can be stored as an artifact
-          name: Compress app for storage
+          # Xcode のビルド出力を圧縮し、アーティファクトとして格納できるようにします
+          name: 保存のためのアプリ圧縮
           command: zip -r app.zip build/Release/circleci-demo-macos.app
-      - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
+      - store_artifacts: # このビルド出力を保存します  (詳細については https://circleci.com/ja/docs/2.0/artifacts/ を参照)
           path: app.zip
           destination: app
 ```
 
-If this is your first exposure to a CircleCI `config.yml`, some of the above might seem a bit confusing. In the section below you can find some links that provide a more in-depth overview of how a `config.yml` works.
+まだ CircleCI の `config.yml` を編集したことがない方には、わかりにくい部分があるかもしれません。 `config.yml` の動作の概要については、以降のセクションに記載しているリンク先から確認できます。
 
-Since this is a general introduction to building on MacOs, the `config.yml` above example covers the following:
+macOS でのビルドの基礎について説明しているため、上記のサンプルの `config.yml` には以下の内容が含まれています。
 
 - Picking an [`executor`]({{ site.baseurl }}/2.0/configuration-reference/#docker) to use
-- Pulling code via the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) key
-- Running tests with Xcode
-- Building our application
-- Compressing our application and storing it with the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) key.
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) キーによるコードのプル
+- Xcode でのテストの実行
+- アプリケーションのビルド
+- アプリケーションの圧縮と [`store_artifacts`]({{site.baseurl }}/2.0/configuration-reference/#store_artifacts) キーによる保存
 
-You can learn more about the `config.yml` file in the [configuration reference guide]({{site.baseurl}}/2.0/configuration-reference/).
+`config.yml` ファイルの詳細については、[構成リファレンス ガイド]({{site.baseurl}}/2.0/configuration-reference/)を参照してください。
 
 ## Xcode Cross Compilation
 
@@ -105,14 +105,14 @@ While universal binaries are only supported under Xcode 12.2+, you can still cro
 
 The macOS executor is commonly used for testing and building iOS applications, which can be more complex in their continuous integrations configuration. If you are interested in building and/or testing iOS applications, consider checking out our following docs that further explore this topic:
 
-- [Testing iOS Applications on macOS]({{ site.baseurl }}/2.0/testing-ios)
-- [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial)
-- [Setting Up Code Signing for iOS Projects]({{ site.baseurl }}/2.0/ios-codesigning)
+- [macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios)
+- [iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial)
+- [iOS プロジェクトのコード署名のセットアップ]({{ site.baseurl }}/2.0/ios-codesigning)
 
 Also, consider reading documentation on some of CircleCI's features:
 
-- See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
+- 2.0 設定ファイルの概要、および `.circleci/config.yml` ファイルにおけるトップレベル キーの階層については「[コンセプト]({{ site.baseurl }}/2.0/concepts/)」を参照してください。
 
 - Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 
-- Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.
+- すべてのキーとビルド済み Docker イメージに関する詳細なリファレンスについては、それぞれ「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」、「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照してください。
