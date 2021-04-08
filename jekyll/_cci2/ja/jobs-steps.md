@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Orbs, Jobs, Steps, and Workflows"
-short-title: "Orbs, Jobs, Steps, and Workflows"
-description: "Description of Jobs and Steps"
+title: "Orbs、ジョブ、ステップ、ワークフロー"
+short-title: "Orbs、ジョブ、ステップ、ワークフロー"
+description: "ジョブとステップの説明"
 categories:
   - migration
 order: 2
