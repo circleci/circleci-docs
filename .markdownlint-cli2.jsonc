@@ -1,9 +1,0 @@
-{
-  /* "fix": true, */
-  "outputFormatters": [
-    [ "markdownlint-cli2-formatter-json", { "name": "markdownlint-results.json" }]
-  ],
-  "customRules": [
-    "markdownlint-rule-header-id"
-  ]
-}

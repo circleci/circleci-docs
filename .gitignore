@@ -1,6 +1,5 @@
 .DS_Store
 .bundle/
-.byebug_history
 .jekyll-metadata
 .jekyll-cache/
 .sass-cache/
@@ -24,4 +23,3 @@ src-api/build/
 # local test
 vendor
 jekyll/_config_override.yml
-markdownlint-results.json
