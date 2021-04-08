@@ -1,59 +1,59 @@
 ---
 layout: classic-docs
-title: "Welcome to CircleCI Documentation"
-description: "Welcome to CircleCI Documentation"
+title: "CircleCI ドキュメントへようこそ"
+description: "CircleCI ドキュメントへようこそ"
 permalink: /2.0/
 ---
 
-Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.
+CircleCI について理解を深めていただけるよう、チュートリアルやサンプル、ハウツーといった参考情報をまとめました。
 
 <hr class="hidden-xs" />
 
 <div class="row">
   <div class="col-xs-12 col-sm-6">
-    <h2>Get Started</h2>
-    <p>Get started with CircleCI automated builds.</p>
+    <h2>はじめよう</h2>
+    <p>CircleCI でビルドの自動化を始めましょう。</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/2.0/first-steps/">Sign Up & Try</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/getting-started/">Your First Green Build</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/first-steps/">ユーザー登録とトライアル</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/getting-started/">初回ビルドの前提条件</a></li>
       <li><a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/faq/">FAQ</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/faq/">よくあるご質問</a></li>
       <li><a href="{{ site.baseurl }}/2.0/orb-intro/">Orbs</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
-    <h2>Examples</h2>
-    <p>Check out some of our popular examples.</p>
+    <h2>サンプル</h2>
+    <p>人気のサンプルをチェックしましょう。</p>
     <ul>
-        <li><a href="{{ site.baseurl }}/2.0/example-configs/">Open Source Projects that use CircleCI</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/postgres-config/">Database Config Examples</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/sample-config/">Sample config.yml Files</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/tutorials/">Tutorials and Sample Apps</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/using-orbs/">Using Orbs</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/postgres-config/">データベースの構成例</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
+        <li><a href="{{ site.baseurl }}/2.0/using-orbs/">Orbs の使用</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
     <hr />
   </div>
   <div class="col-xs-12 col-sm-6">
-    <h2>Config</h2>
-    <p>Set up and debug your build configuration.</p>
+    <h2>設定ファイル</h2>
+    <p>ビルド構成のセットアップとデバッグについて解説します。</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-reference/">Configuration Reference</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/writing-yaml/">Writing YAML</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/env-vars/">Using Environment Variables</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/ssh-access-jobs/">Debugging with SSH</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/configuration-reference/">リファレンス</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/writing-yaml/">YAML の記述</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/env-vars/">環境変数の使用</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/ssh-access-jobs/">SSH を使用したデバッグ</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
-    <h2>Workflows</h2>
+    <h2>ワークフロー</h2>
     <p>Use workflows to schedule and sequence jobs.</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/2.0/workflows/">Using Workflows to Schedule Jobs</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples">Example Configs</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/creating-orbs/">Creating Orbs</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">ワークフローにおけるコンテキストとフィルターの使用</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/creating-orbs/">Orbs の作成</a></li>
     </ul>
   </div>
    <div class="col-xs-12">
