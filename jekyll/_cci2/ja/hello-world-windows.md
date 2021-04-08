@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "Hello World On Windows"
-short-title: "Hello World On Windows"
-description: "First Windows project on CircleCI 2.0"
+title: "Windows での Hello World"
+short-title: "Windows での Hello World"
+description: "CircleCI 2.0 での最初の Windows プロジェクト"
 categories:
   - getting-started
 order: 4
@@ -11,36 +11,36 @@ version:
   - Server v2.x
 ---
 
-This document describes how to get started with continuous integration on **Windows build environments** on CircleCI. If this is your first time setting up CircleCI, we recommended checking out the [getting started guide]({{ site.baseurl}}/2.0/getting-started/).
+CircleCI の **Windows ビルド環境**で継続的インテグレーションを開始する方法を説明します。 今回初めて CircleCI をセットアップする場合は、先に[入門ガイド]({{ site.baseurl }}/2.0/getting-started)をご覧になることをお勧めします。
 
-* TOC
+* 目次
 {:toc}
 
 
-# Prerequisites
+# 前提条件
 
-To follow along with this document you will need:
+作業を行う前に、以下を準備しておく必要があります。
 
-* An [account](https://circleci.com/signup/) on CircleCI.
-* Either the Free plan (default) or a [performance plan](https://circleci.com/pricing/usage/). If you are running CircleCI Server there are alternative code examples below.
-* For the cloud version, pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
+* CircleCI の[アカウント](https://circleci.com/ja/signup/)。
+* Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ｊａ／pricing/usage/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
+* クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/2.0/build-processing/)する必要があります。
 
-# Overview of the Windows executor
+# Windows Executor の概要
 
-The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
+Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) アプリケーション、.NET 実行可能ファイル、(.NET フレームワークなどの) Windows 固有プロジェクトといった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
 
-- Is VM-based to guarantee full job isolation.
-- Uses the Server Core version of Windows Server 2019 Datacenter Edition.
-- Has 4 vCPUS and 15 GB of RAM.
-- Powershell is the default shell (Bash and cmd are available to be manually selected).
-- Docker Engine - Enterprise is available for running Windows containers.
+- VM ベースでジョブの完全分離を保証
+- Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
+- vCPU 4 基と RAM 15 GB を搭載
+- PowerShell がデフォルトのシェル (Bash と cmd を手動で選択可能)
+- Windows コンテナの実行に Docker Engine - Enterprise を使用可能
 
 **Notes:**
 
 - The Windows executor currently only supports Windows containers. Running Linux containers on Windows is not possible for now.
 - Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
 
-## Windows executor images
+## Windows Executor イメージ
 
 Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
@@ -90,14 +90,14 @@ jobs:
 ```
 
 
-## Known issues
+## 既知の問題
 
 These are the issues with the Windows executor that we are aware of and will address as soon as we can:
 
 * Connecting to a Windows job via SSH and using the `bash` shell results in an empty terminal prompt.
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
-# Example configuration file
+# サンプルの設定ファイル
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
@@ -137,7 +137,7 @@ jobs:
 
 From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
-# Specifying a Shell with the Windows Executor
+# Windows Executor でのシェルの指定
 
 There are three shells that you can use to run job steps on Windows:
 
@@ -301,13 +301,13 @@ In our last step, we store the build executable as an artifact, making it access
 
 It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:
 
-## Steps
+## 手順
 
-1. Ensure that you have added an SSH key to your [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) or [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) account.
+1. SSH キーを [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) アカウントまたは [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) アカウントに追加していることを確認します。
 
-2. To start a job with SSH enabled, select the 'Rerun job with SSH' option from the 'Rerun Workflow' dropdown menu.
+2. SSH 接続を有効にしてジョブを起動するには、[Rerun Workflow (ワークフローを再実行する)] ドロップダウン メニューから [Rerun job with SSH (SSH でジョブを再実行する)] オプションを選択します。
 
-3. To see the connection details, expand the 'Enable SSH' section in the job output where you will see the SSH command needed to connect: ![SSH connection details]({{ site.baseurl }}/assets/img/docs/ssh-windows-obf.png)
+3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。ここで、接続に必要な SSH コマンドを確認できます。![SSH 接続の詳細情報]({{ site.baseurl }}/assets/img/docs/ssh-windows-obf.png)
 
 Ensure that you are passing the name of the shell you want to run when you ssh in. To run  `cmd.exe` in the build above you would run: `ssh -p <remote_ip> -- cmd.exe`
 
@@ -327,7 +327,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Refer to the [Workflows]({{site.baseurl}}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
 
-# Software pre-installed in the Windows image
+# Windows イメージにプリインストールされているソフトウェア
 
 **Windows Server 2019 with Visual Studio 2019**
 
