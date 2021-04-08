@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Authorizing the Google Cloud SDK
-description: How to authorize the Google Cloud SDK
+title: Google Cloud SDK の承認
+description: Google Cloud SDK を承認する方法
 categories:
   - deploying
 order: 100
@@ -12,34 +12,34 @@ This document explains how to install and authorize the [Google Cloud SDK](https
 * TOC
 {:toc}
 
-## Overview
+## 概要
 {:.no_toc}
 
 The Google Cloud SDK is a powerful set of tools that can be used to access Google Cloud Platform (GCP) services like Google Compute Engine and Google Kubernetes Engine. On CircleCI, the Google Cloud SDK is recommended to deploy your application to GCP products.
 
-## Prerequisites
+## 前提条件
 {:.no_toc}
 
-- A CircleCI 2.0 project.
-- A GCP project.
+- CircleCI 2.0 プロジェクト
+- GCP プロジェクト
 
-### Installing the Google Cloud SDK
+### Google Cloud SDK のインストール
 
-If Debian is an acceptable operating system for your primary container, consider using Google's base Docker image. You can find this image on DockerHub as [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/).
+If Debian is an acceptable operating system for your primary container, consider using Google's base Docker image. このイメージは、Docker Hub で [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) として提供されています。
 
-Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
+それ以外の場合は、基本イメージのオペレーティング システムに対応する [Google Cloud SDK インストール手順](https://cloud.google.com/sdk/)に従ってください。
 
 ### Creating and storing a service account
 
-Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud`. Google offers two types of authorization: user accounts and service accounts. Because you are installing the Cloud SDK on CircleCI, the service account is the appropriate choice.
+Before you can use any tools in the Google Cloud SDK, you must authorize `gcloud`. Google は、ユーザー アカウントとサービス アカウントの 2 種類の承認を提供しています。 Because you are installing the Cloud SDK on CircleCI, the service account is the appropriate choice.
 
-1. Create a service account by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). Remember to download the JSON-formatted key file.
+1. Create a service account by following Steps 1-3 of [Google's instructions](https://cloud.google.com/sdk/docs/authorizing#authorizing_with_a_service_account). 必ず JSON 形式のキー ファイルをダウンロードしてください。
 
-2. Add the key file to CircleCI as a [project environment variable]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project). In this example, the variable is named `GCLOUD_SERVICE_KEY`. Using this particular name is not required, but it will be used throughout the examples in this document.
+2. CircleCI にキー ファイルを[プロジェクト環境変数]({{ site.baseurl }}/2.0/env-vars/#プロジェクト内で環境変数を設定する)として追加します。 この例では、`GCLOUD_SERVICE_KEY` という変数名になっています。 Using this particular name is not required, but it will be used throughout the examples in this document.
 
-3. For convenience, add two more environment variables to your CircleCI project:
-    - `GOOGLE_PROJECT_ID`: the ID of your GCP project.
-    - `GOOGLE_COMPUTE_ZONE`: the default [compute zone](https://cloud.google.com/compute/docs/regions-zones/).
+3. 便宜上、次の 2 つの環境変数を CircleCI プロジェクトに追加します。
+    - `GOOGLE_PROJECT_ID`: GCP プロジェクトの ID
+    - `GOOGLE_COMPUTE_ZONE`: デフォルトの [Compute Engine のゾーン](https://cloud.google.com/compute/docs/regions-zones/)
 
 #### Adding granular permissions
 
@@ -47,7 +47,7 @@ If you are having issues pushing container images to GCR you may need more granu
 
 Refer to the Cloud Storage [permission documentation](https://cloud.google.com/storage/docs/access-control/iam-permissions) to learn more about Identity and Access Management (IAM) permissions.
 
-### Authenticating to Google Container Registry
+### Google Container Registry への認証
 
 Depending on the [base Docker image you chose](#installing-the-google-cloud-sdk), you may have to authenticate to the Google Container Registry.
 
@@ -81,7 +81,7 @@ jobs:
 cat <file> | base64 -w 0
 ```
 
-### Authorization
+### 承認
 
 Use `gcloud` to authorize the Google Cloud SDK and set several default settings. Before executing this command, make sure to write the key to a file before running this command, otherwise, the key file will be interpreted as a .p12 file.
 
