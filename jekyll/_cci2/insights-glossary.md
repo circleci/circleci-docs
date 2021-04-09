@@ -12,7 +12,7 @@ version:
 This document provides definitions for all the metrics in CircleCI Insights. You
 can review metrics in the Insights dashboard as well as the Insights API.
 
-*TOC
+* TOC
 {:toc}
 
 
