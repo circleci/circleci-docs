@@ -13,7 +13,7 @@ NOTE: CircleCI Runner is not yet available on the current version of Server 3.x;
 
 ## Authentication
 
-When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server 
+When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server
 deployment either via `--host HOSTNAME` and `--token TOKEN` flags, or the CircleCI CLI's configuration file.
 
 ####  Resource class example
@@ -23,12 +23,12 @@ circleci runner resource-class create <resource-class> <description> --host HOST
 
 ## Configuration file
 
-When setting up a Runner, the configuration file should include `host` property.
+When setting up a Runner, the configuration file should include `url` property.
 
 ```yaml
 api:
     auth_token: AUTH_TOKEN
-    host: HOSTNAME
+    url: https://HOSTNAME
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "circleci", "--"]
