@@ -15,6 +15,7 @@ can review metrics in the Insights dashboard as well as the Insights API.
 *TOC
 {:toc}
 
+
 ## General metrics 
 
 General metrics appear across the Insights experience and can refer to different
