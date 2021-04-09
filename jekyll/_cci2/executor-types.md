@@ -167,7 +167,6 @@ Capability | `docker` | `machine`
 
 For more information on `machine`, see the next section below.
 
-
 ### Available Docker resource classes
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each
@@ -183,6 +182,8 @@ xlarge                | 8     | 16GB
 2xlarge<sup>(2)</sup> | 16    | 32GB
 2xlarge+<sup>(2)</sup>| 20    | 40GB
 {: class="table table-striped"}
+
+<sup>(2)</sup> Requires using [Remote Docker][building-docker-images].
 
 Where example usage looks like the following:
 
