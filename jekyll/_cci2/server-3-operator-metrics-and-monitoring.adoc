@@ -1,0 +1,55 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Metrics and Monitoring
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Metrics such as CPU or memory usage, number of executed builds and internal metrics are useful in:
+
+* Quickly detecting incidents and abnormal behavior
+* Dynamically scaling compute resources
+* Retroactively understanding infrastructure-wide issues
+
+toc::[]
+
+## Metrics Collection
+
+### Grafana
+Server ships with https://grafana.com/[Grafana] which has become the world’s most popular technology used to compose
+observability dashboards. We have integrated with Prometheus & Loki Logs so you can create dashboards, set up alerts,
+search for errors and more.
+
+### Loki
+Loki is a horizontally-scalable, highly-available, log aggregation system inspired by Prometheus. It is designed to be
+very cost effective and easy to operate. It does not index the contents of the logs, but rather a set of labels for each
+log stream.
+
+### Prometheus
+https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server ships with basic
+implementation of monitoring common performance metrics.
+
+## Tips and Troubleshooting
+
+### Pod Logs
+
+You can check that services/pods are reporting metrics correctly by checking if they are being reported to stdout. To do
+this, examine the logs of the `circleci-telegraf` pod using `kubectl logs` or a tool like https://github.com/wercker/stern[stern].
+
+To view logs for Telegraf, run the following:
+
+* `kubectl get pods` to get a list of services
+* `kubectl logs -f circleci-telegraf-<hash>`, substituting the hash for your installation.
+
+While monitoring the current log stream, perform some actions with your server installation (e.g. logging in/out or
+running a workflow). These activities should be logged, showing that metrics are being reported. Most metrics you see logged
+will be from the frontend pod. However, when you run workflows, you should also see metrics reported by the dispatcher,
+`legacy-dispatcher`, `output-processor` and `workflows-conductor`, as well as metrics concerning cpu, memory and disk stats.
+
+You may also check the logs by running `kubectl logs circleci-telegraf-<hash> -n <namespace> -f` to confirm that your
+output provider (e.g. influx) is listed in the configured outputs.

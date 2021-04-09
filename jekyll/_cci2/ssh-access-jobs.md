@@ -8,6 +8,7 @@ order: 20
 version:
 - Cloud
 - Server v2.x
+- Server v3.x
 ---
 
 This document describes how to access a build container using SSH on CircleCI 2.0 in the following sections:
