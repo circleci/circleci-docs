@@ -71,7 +71,7 @@ The below sample uses the Android orb to run a single job.
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@1.0.3
 workflows:
   test:
     jobs:
