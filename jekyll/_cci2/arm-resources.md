@@ -32,6 +32,8 @@ Which are available under these images:
 
 As these are `machine` executor resources, each class is a dedicated VM that is created specifically for your job and subsequently taken down after the job has finished running.
 
+**Note:** In order to eliminate any confusion regarding the naming convention of "Arm," it should be noted that the industry standard naming for this new architecture is "Arm," not "ARM."
+
 ## Pricing and availability
 
 The following Arm resource class is available to all CircleCI customers:
