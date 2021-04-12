@@ -21,7 +21,8 @@ or using partners.
 {:toc}
 
 
-# Viewing Coverage on CircleCI 
+# Viewing Coverage on CircleCI
+{: #viewing-coverage-on-circleci }
 
 You can upload your code coverage reports directly to CircleCI. First, add a
 coverage library to your project and configure your build to write the coverage
@@ -33,6 +34,7 @@ Here are a few examples to demonstrate configuring coverage libraries for
 different languages.
 
 ## Ruby
+{: #ruby }
 
 [Simplecov](https://github.com/colszowka/simplecov) is a popular Ruby code
 coverage library. To get started, add the `simplecov` gem to your `Gemfile`
@@ -101,6 +103,7 @@ jobs:
 The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
 
 ## Python
+{: #python }
 
 [Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) is a popular library
 for generating Code Coverage Reports in python. To get started, install
@@ -163,6 +166,7 @@ workflows:
 ```
 
 ## Java
+{: #java }
 
 [JaCoCo](https://github.com/jacoco/jacoco) is a popular library for Java code
 coverage. Below is an example pom.xml that includes JUnit and JaCoCo as part of
@@ -267,6 +271,7 @@ jobs:
 ```
 
 ## JavaScript
+{: #javascript }
 
 [Istanbul](https://github.com/gotwarlost/istanbul) is a popular library for generating code coverage reports for
 JavaScript projects. Another popular testing tool, Jest, uses Istanbul to
@@ -292,6 +297,7 @@ jobs:
 ```
 
 ## PHP
+{: #php }
 
 PHPUnit is a popular testing framework for PHP. To generate code-coverage
 reports you may need to install [PHP Xdebug](https://xdebug.org/) if you are
@@ -321,6 +327,7 @@ jobs:
 ```
 
 ## Golang
+{: #golang }
 
 Go has built-in functionality for generating code coverage reports. To generate
 reports, add the flag `-coverprofile=c.out`. This will generate a coverage
@@ -360,8 +367,10 @@ jobs:
 
 
 # Using a code coverage service
+{: #using-a-code-coverage-service }
 
 ## Codecov
+{: #codecov }
 
 Codecov has an [orb](https://circleci.com/orbs) to help make uploading your coverage report easy.
 
@@ -379,6 +388,7 @@ jobs:
 Read more about Codecov's orb in their [guest blog post](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/).
 
 ## Coveralls
+{: #coveralls }
 
 If you're a Coveralls customer, follow
 [their guide to set up your coverage stats.](https://docs.coveralls.io/)

@@ -15,6 +15,7 @@ Bitbucket Cloud with CircleCI in the following sections:
 {:toc}
 
 ## Overview
+{: #overview }
 
 {:.no_toc}
 
@@ -58,6 +59,7 @@ filters]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-
 for how to build tag pushes.
 
 ### Add a .circleci/config.yml file
+{: #add-a-circleciconfigyml-file }
 
 {:.no_toc}
 
@@ -100,6 +102,7 @@ tests have passed:
 ![Status Badge After PR]({{ site.baseurl }}/assets/img/docs/status_check.png)
 
 ## Best practices for keys
+{: #best-practices-for-keys }
 
 - Use Deploy Keys whenever possible.
 - When Deploy Keys cannot be used,
@@ -117,6 +120,7 @@ tests have passed:
   requires more access than they have.
 
 ## Renaming orgs and repositories
+{: #renaming-orgs-and-repositories }
 
 If you find you need to rename an org or repo that you have previously hooked up
 to CircleCI, the best practice is to follow these steps:
@@ -133,6 +137,7 @@ to CircleCI, the best practice is to follow these steps:
 repo settings, including **environment variables** and **contexts**.
 
 ### Bitbucket personal orgs
+{: #bitbucket-personal-orgs }
 
 CircleCI expects that your personal/default org matches your VCS username.
 Bitbucket now supports renaming your personal workspace to differ from your
@@ -141,6 +146,7 @@ building projects in your personal workspace with CircleCI, please ensure its
 name matches your username.
 
 ## Enable your project to check out additional private repositories
+{: #enable-your-project-to-check-out-additional-private-repositories }
 
 If your testing process refers to multiple repositories, CircleCI will need a
 GitHub user key in addition to the deploy key because each deploy key is valid
@@ -152,7 +158,8 @@ Provide CircleCI with a GitHub user key in your project's **Project Settings** >
 Github**. CircleCI creates and associates this new SSH key with your GitHub user
 account for access to all your repositories.
 
-## User key security 
+## User key security
+{: #user-key-security }
 
 CircleCI will never make your SSH keys public.
 
@@ -162,6 +169,7 @@ therefore, only entrust a user key to someone with whom you would entrust your
 source code.
 
 ## User key access-related error messages
+{: #user-key-access-related-error-messages }
 
 Here are common errors that indicate you need to add a user key.
 
@@ -178,6 +186,7 @@ Permission denied (publickey).
 ```
 
 ## Controlling access via a machine user
+{: #controlling-access-via-a-machine-user }
 
 For fine-grained access to multiple repositories, it is best practice to create
 a machine user for your CircleCI projects. A
@@ -214,6 +223,7 @@ Now, CircleCI will use the machine user's SSH key for any Git commands that run
 during your builds.
 
 ## Permissions overview
+{: #permissions-overview }
 
 CircleCI requests the following permissions from your VCS provider, as defined
 by the [GitHub permissions model](http://developer.github.com/v3/oauth/#scopes)
@@ -247,6 +257,7 @@ consider contacting your VCS provider to communicate your concerns.
 
 
 ### How to re-enable CircleCI for a GitHub organization
+{: #how-to-re-enable-circleci-for-a-github-organization }
 
 {:.no_toc}
 
@@ -288,6 +299,7 @@ as mentioned we have a much improved system in development with users as first
 class citizens in CircleCI.
 
 ## Deployment keys and user keys
+{: #deployment-keys-and-user-keys }
 
 **What is a deploy key?**
 
@@ -309,6 +321,7 @@ stores the private key. Possession of the private key gives the ability to act
 as that user, for purposes of 'git' access to projects.
 
 ### Creating a GitHub deploy key
+{: #creating-a-github-deploy-key }
 
 {:.no_toc}
 
@@ -347,6 +360,7 @@ When you push to your GitHub repository from a job, CircleCI will use the SSH
 key you added.
 
 ### Creating a Bitbucket user key
+{: #creating-a-bitbucket-user-key }
 
 {:.no_toc}
 
@@ -384,6 +398,7 @@ jobs:
 ```
 
 ### How are these keys used?
+{: #how-are-these-keys-used }
 
 When CircleCI builds your project, the private key is installed into the `.ssh`
 directory and SSH is subsequently configured to communicate with your version
@@ -398,6 +413,7 @@ For this reason, a deploy key isn't sufficiently powerful for projects with
 additional private dependencies.
 
 ### What about security?
+{: #what-about-security }
 
 The private keys of the checkout keypairs CircleCI generates never leave the
 CircleCI systems (only the public key is transmitted to GitHub) and are safely
@@ -417,6 +433,7 @@ GitHub calls a machine user. Give this user exactly the permissions your build
 requires, and then associate its user key with your project on CircleCI.
 
 ## Establishing the authenticity of an SSH host
+{: #establishing-the-authenticity-of-an-ssh-host }
 
 When using SSH keys to checkout repositories, it may be neccesary to add the
 fingerprints for GitHub or BitBucket to a "known hosts" file

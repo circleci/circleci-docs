@@ -20,6 +20,7 @@ Document | Description
 {: class="table table-striped"}
 
 ## Features
+{: #features }
 
 Learn to use the basic features of CircleCI.
 
