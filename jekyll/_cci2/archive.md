@@ -9,16 +9,19 @@ sitemap: false
 ---
 
 ## Getting started
+{: #getting-started }
 - [Introduction to CircleCI]({{ site.baseurl }}/archive/introduction/){:rel="nofollow"}
 - [Getting Started with CircleCI 1.0]({{ site.baseurl }}/archive/getting-started/){:rel="nofollow"}
 - [FAQ]({{ site.baseurl }}/archive/faq/){:rel="nofollow"}
 
 ## Migration
+{: #migration }
 - [Sample 1.0 circle.yml file]({{ site.baseurl }}/archive/config-sample/){:rel="nofollow"}
 - [GitHub Integration (5)]({{ site.baseurl }}/archive/github-privacy/){:rel="nofollow"}
 - [Migrating from Jenkins to CircleCI]({{ site.baseurl }}/archive/migrating-from-jenkins/){:rel="nofollow"}
 
 ## Build environments
+{: #build-environments }
 - [Android]({{ site.baseurl }}/archive/android/){:rel="nofollow"}
 - [macOS Build Images]({{ site.baseurl }}/archive/build-image-macos/){:rel="nofollow"}
 - [Ubuntu 12.04 (Precise)]( {{ site.baseurl }}/archive/build-image-precise/){:rel="nofollow"}
@@ -27,6 +30,7 @@ sitemap: false
 - [Customizing Build Environments]({{ site.baseurl }}/archive/installing-custom-software/){:rel="nofollow"}
 
 ## Language guides
+{: #language-guides }
 - [Go (Golang)]({{ site.baseurl }}/archive/language-go/){:rel="nofollow"}
 - [Haskell]({{ site.baseurl }}/archive/language-haskell/){:rel="nofollow"}
 - [Java]({{ site.baseurl }}/archive/language-java/){:rel="nofollow"}
@@ -38,6 +42,7 @@ sitemap: false
 - [Node.js & npm Guides (3)]({{ site.baseurl }}/archive/nodejs-and-npm/){:rel="nofollow"}
 
 ## Configuration
+{: #configuration }
 - [Overview]({{ site.baseurl }}/archive/manually/){:rel="nofollow"}
 - [Configuring CircleCI 1.0]({{ site.baseurl }}/archive/configuration/){:rel="nofollow"}
 - [Using CircleCI 1.0 Environment Variables]({{ site.baseurl }}/archive/environment-variables/){:rel="nofollow"}
@@ -53,12 +58,14 @@ sitemap: false
 - [iOS code signing]({{ site.baseurl }}/archive/ios-code-signing/){:rel="nofollow"}
 
 ## Optimization
+{: #optimization }
 - [How Parallelism Works]({{ site.baseurl }}/archive/how-parallelism-works/){:rel="nofollow"}
 - [Manually Setting Up Parallelism]({{ site.baseurl }}/archive/parallel-manual-setup/){:rel="nofollow"}
 - [SSH between build containers]({{ site.baseurl }}/archive/ssh-between-build-containers/){:rel="nofollow"}
 - [Setting up parallelism]({{ site.baseurl }}/archive/setting-up-parallelism/){:rel="nofollow"}
 
 ## Integrations
+{: #integrations }
 - [Upload to Artifactory]({{ site.baseurl }}/archive/Artifactory/){:rel="nofollow"}
 - [Test with Sauce Labs]({{ site.baseurl }}/archive/browser-testing-with-sauce-labs/){:rel="nofollow"}
 - [Continuous Deployment with Amazon S3]({{ site.baseurl }}/archive/continuous-deployment-with-amazon-s3/){:rel="nofollow"}
@@ -83,6 +90,7 @@ sitemap: false
 - [Permissions and access during deployment]({{ site.baseurl }}/archive/permissions-and-access-during-deployment/){:rel="nofollow"}
 
 ## Reference
+{: #reference }
 - [Build artifacts]({{ site.baseurl }}/archive/build-artifacts/){:rel="nofollow"}
 - [Test Environment]({{ site.baseurl }}/archive/environment/){:rel="nofollow"}
 - [Fork PR Builds]({{ site.baseurl }}/archive/fork-pr-builds/){:rel="nofollow"}
@@ -91,6 +99,7 @@ sitemap: false
 - [Embeddable status badges]({{ site.baseurl }}/archive/status-badges/){:rel="nofollow"}
 
 ## Troubleshooting
+{: #troubleshooting }
 - [Downgrading MySQL from 5.7 to 5.6]({{ site.baseurl }}/archive/downgrading-mysql-to-5.6/){:rel="nofollow"}
 - [File-ordering bugs on Linux systems]({{ site.baseurl }}/archive/file-ordering/){:rel="nofollow"}
 - [Filesystem layout problems (2)]({{ site.baseurl }}/archive/filesystem/){:rel="nofollow"}
@@ -109,6 +118,7 @@ sitemap: false
 - [Ruby (10)]({{ site.baseurl }}/archive/troubleshooting-ruby/){:rel="nofollow"}
 
 ## Enterprise administration
+{: #enterprise-administration }
 
 - [Installation]({{ site.baseurl }}/enterprise/aws/){:rel="nofollow"}
 - [Backup]({{ site.baseurl }}/enterprise/backup/){:rel="nofollow"}

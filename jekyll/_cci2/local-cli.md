@@ -12,25 +12,27 @@ version:
 ---
 
 ## Overview
+{: #overview }
 
 The CircleCI CLI is a command line interface that leverages many of CircleCI's
 advanced and powerful tools from the comfort of your terminal. Some of the
-things you can do with the CircleCI CLI include: 
+things you can do with the CircleCI CLI include:
 
-- Debug and validate your CI config 
-- Run jobs locally 
+- Debug and validate your CI config
+- Run jobs locally
 - Query CircleCI's API
 - Create, publish, view and manage Orbs
 - Managing contexts
 
 This document will cover the installation and usage of the CLI tool. **Note:**
 the new CLI is currently not available on server installations of CircleCI. The
-legacy CLI does work in Server and can be installed. 
+legacy CLI does work in Server and can be installed.
 
 * TOC
 {:toc}
 
 ## Installation
+{: #installation }
 
 There are multiple installation options for the CLI.
 
@@ -39,6 +41,7 @@ There are multiple installation options for the CLI.
 For the majority of installations, we recommend one of the following package managers to install the CircleCI CLI:
 
 ### Install with Snap (Linux)
+{: #install-with-snap-linux }
 {:.no_toc}
 
 The following commands will install the CircleCI CLI, Docker, and the security and auto-update features that come along with [Snap packages](https://snapcraft.io/).
@@ -51,6 +54,7 @@ sudo snap connect circleci:docker docker
 **Note:** With snap packages, the docker command will use the Docker snap, not any version of Docker you may have previously installed. For security purposes, snap packages can only read/write files from within $HOME.
 
 ### Install with Homebrew (macOS)
+{: #install-with-homebrew-macos }
 {:.no_toc}
 
 If you’re using [Homebrew](https://brew.sh/) with macOS, you can install the CLI with the following command:
@@ -62,6 +66,7 @@ brew install circleci
 **Note**: If you already have Docker for Mac installed, use `brew install --ignore-dependencies circleci`.
 
 ### Install with Chocolatey (Windows)
+{: #install-with-chocolatey-windows }
 {:.no_toc}
 
 For Windows users, we provide a [Chocolatey](https://chocolatey.org/) package:
@@ -71,6 +76,7 @@ choco install circleci-cli -y
 ```
 
 ### Alternative installation method
+{: #alternative-installation-method }
 {:.no_toc}
 
 **Mac and Linux:**
@@ -86,26 +92,30 @@ curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master
 ```
 
 ### Manual download
+{: #manual-download }
 
 You can visit the [GitHub releases](https://github.com/CircleCI-Public/circleci-cli/releases) page for the CLI to manually download and install. This approach is best if you would like the installed CLI to be in a specific path on your system.
 
 ## Updating the CLI
+{: #updating-the-cli }
 
 You can update to the newest version of the CLI using the following command: `circleci update`. If you would just like to check for updates manually (and not install them) use the command: `circleci update check`.
 
 ### Updating the legacy CLI
+{: #updating-the-legacy-cli }
 {:.no_toc}
 
 The newest version of the CLI is a [CircleCI-Public open source project](https://github.com/CircleCI-Public/circleci-cli). If you have the [old CLI installed](https://github.com/circleci/local-cli), run the following commands to update and switch to the new CLI:
 
 ```sh
-circleci update 
+circleci update
 circleci switch
 ```
 
 This command may prompt you for `sudo` if your user doesn't have write permissions to the install directory, `/usr/local/bin`.
 
 ## Configuring the CLI
+{: #configuring-the-cli }
 
 Before using the CLI you need to generate a CircleCI API Token from the [Personal API Token tab](https://app.circleci.com/settings/user/tokens). After you get your token, configure the CLI by running:
 
@@ -117,6 +127,7 @@ The set up process will prompt you for configuration settings. If you are using 
 circleci.com, use the default CircleCI Host. If you are using CircleCI server, change the value to your installation address (for example, circleci.your-org.com).
 
 ## Validate a CircleCI config
+{: #validate-a-circleci-config }
 
 You can avoid pushing additional commits to test your config.yml by using the CLI to validate your config locally.
 
@@ -136,10 +147,12 @@ circleci orb validate /tmp/my_orb.yml
 Where the above command will look for an orb called `my_orb.yml` in the `/tmp` folder of the directory in which you ran the command.
 
 ## Orb development kit
+{: #orb-development-kit }
 
 The [orb development kit]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit) refers to a suite of tools that work together to simplify the orb development process, with automatic testing and deployment on CircleCI. Two CLI commands are included in the orb development kit: [`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) and [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html). For more information on the orb packing, see the [Orbs Concepts guide]({{site.baseurl}}/2.0/orb-concepts/#orb-packing).
 
 ## Packing a config
+{: #packing-a-config }
 
 The CLI provides a `circleci config pack` command (separate to `circleci orb pack` described above), allowing you to create a single YAML file from several separate files. The `pack` command implements [FYAML](https://github.com/CircleCI-Public/fyaml), a scheme for breaking YAML documents across files in a directory tree. This is particularly useful for breaking up source code for large orbs and allows custom organization of your orbs' YAML configuration. `circleci config pack` converts a filesystem tree into a single YAML file based on directory structure and file contents. How you **name** and **organize** your files when using the `pack` command will determine the final outputted `orb.yml`. Consider the following example folder structure:
 
@@ -178,6 +191,7 @@ jobs:
 {% endraw %}
 
 ### Other config packing capabilities
+{: #other-config-packing-capabilities }
 {:.no_toc}
 
 A file beginning with `@` will have its contents merged into its parent folder level. This can be useful at the top level of an orb, when one might want generic `orb.yml` to contain metadata, but not to map into an `orb` key-value pair.
@@ -194,17 +208,19 @@ $ cat foo/bar/@baz.yml
 Is mapped to:
 
 ```yaml
-bar: 
+bar:
   baz: qux
 ```
 
 
 ### An example packed config.yml
+{: #an-example-packed-configyml }
 {:.no_toc}
 
 See the [CircleCI Orbs GitHub topic tag](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories) to see examples of orbs written using multiple YAML source files. `circleci config pack` is typically run as part of these projects' CI/CD workflows, to prepare orb source code for publishing.
 
 ## Processing a config
+{: #processing-a-config }
 
 Running `circleci config process` validates your config, but will also display
 expanded source configuration alongside your original config (useful if you are using orbs).
@@ -263,10 +279,10 @@ workflows:
 
 # Original config.yml file:
 # version: 2.1
-# 
+#
 # orbs:
 #     hello: circleci/hello-build@0.0.5
-# 
+#
 # workflows:
 #     \"Hello Workflow\":
 #         jobs:
@@ -276,21 +292,25 @@ workflows:
 {% endraw %}
 
 ## Run a job in a container on your machine
+{: #run-a-job-in-a-container-on-your-machine }
 
 ### Overview
+{: #overview }
 {:.no_toc}
 
 The CLI enables you to run jobs in your config via Docker. This can be useful to run tests before pushing config changes or debugging your build process without impacting your build queue.
 
 ### Prerequisites
+{: #prerequisites }
 {:.no_toc}
 
 You will need to have [Docker](https://www.docker.com/products/docker-desktop) installed on your system and have installed the most recent version of the CLI tool. You will also need to have a project with a valid `.circleci/config.yml` file in it.
 
 ### Running a job
+{: #running-a-job }
 {:.no_toc}
 
-The CLI allows you to run a single job from CircleCI on your desktop using Docker. 
+The CLI allows you to run a single job from CircleCI on your desktop using Docker.
 
 ```sh
 $ circleci local execute --job JOB_NAME
@@ -315,6 +335,7 @@ The commands above will run the entire _build_ job (only jobs, not workflows, ca
 
 
 ### Limitations of running jobs locally
+{: #limitations-of-running-jobs-locally }
 {:.no_toc}
 
 Although running jobs locally with `circleci` is very helpful, there are some limitations.
@@ -342,10 +363,12 @@ Further, not all commands may work on your local machine as they do online. For 
 For security reasons, encrypted environment variables configured in the UI will not be imported into local builds. As an alternative, you can specify env vars to the CLI with the `-e` flag. See the output of `circleci help build` for more information. If you have multiple environment variables, you must use the flag for each variable, for example, `circleci build -e VAR1=FOO -e VAR2=BAR`.
 
 ## Test splitting
+{: #test-splitting }
 
 The CircleCI CLI is also used for some advanced features during job runs, for example [test splitting](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) for build time optimization.
 
 ## Using the CLI on CircleCI server
+{: #using-the-cli-on-circleci-server }
 
 Currently, only the legacy CircleCI CLI is available to run on server
 installations of CircleCI. To install the legacy CLI on macOS and other Linux Distros:
@@ -360,6 +383,7 @@ $ curl -o /usr/local/bin/circleci https://circle-downloads.s3.amazonaws.com/rele
 The CLI, `circleci`, is downloaded to the `/usr/local/bin` directory. If you do not have write permissions for `/usr/local/bin`, you might need to run the above commands with `sudo`. The CLI automatically checks for updates and will prompt you if one is available.
 
 ## Context management
+{: #context-management }
 
 [Contexts]({{site.baseurl}}/2.0/contexts) provide a mechanism for securing and
 sharing environment variables across projects. While contexts have been
@@ -395,6 +419,7 @@ your version of the CLI with a token to enable performing context related
 actions.
 
 ## Uninstallation
+{: #uninstallation }
 
 Commands for uninstalling the CircleCI CLI will vary depending on what your
 installation method was using respectively:

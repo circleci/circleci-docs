@@ -163,7 +163,7 @@ Eight databases are required for 2.0 services:
 
 ## Configuring automatic recovery
 
-**Note:** Please see the Backups sections for more information on what is getting backed, and how that gets pulled into automatic recovery. 
+**Note:** Please see the Backups sections for more information on what is getting backed, and how that gets pulled into automatic recovery.
 
 To enable the Services machine to automatically recover from failure, replace it with an AWS Auto Scaling Group (ASG) containing a single member. Then, configure the associated userdata for this member to specify how to install and configure Replicated and connect to the external databases as shown in the following file snippets.
 
@@ -297,8 +297,8 @@ Vault should be setup as follows:
 * There must be a `transit` mount available
 * A token must be provided with permissions to manage keys and encrypt/decrypt data for the mounted `transit` backend
 
-1. Pull down vault. No higher than 0.7 currently: 
- 
+1. Pull down vault. No higher than 0.7 currently:
+
 2. Put the vault binary somewhere on $PATH as a best practice.
 
 3. Create a `vault.hcl` config file with the following:
@@ -321,21 +321,21 @@ listener "tcp" {
 
 5. Run `export VAULT_ADDR=http://127.0.0.1:8200`.
 
-6. Run `sudo vault init`. 
+6. Run `sudo vault init`.
 
-7. Copy the unseal keys and the root key.  You’ll need these values. 
+7. Copy the unseal keys and the root key.  You’ll need these values.
 
-8. Unseal vault using: `sudo vault unseal` . You'll have to run this command three times using three different unseal keys. 
+8. Unseal vault using: `sudo vault unseal` . You'll have to run this command three times using three different unseal keys.
 
 9. Now you need to authenticate by running `sudo vault auth`. The token here should be the root token that you copied earlier.
 
 10. Once authenticated, you should now mount the transit mount by running `sudo vault mount transit`.
 
-11. For CircleCI, generate a token that can be renewed. Generate this by running the following: `sudo vault token-create -period="1h"`. Use the generated token as your vault token which you will also need below. 
+11. For CircleCI, generate a token that can be renewed. Generate this by running the following: `sudo vault token-create -period="1h"`. Use the generated token as your vault token which you will also need below.
 
 12. Seal vault by running `sudo vault seal`.
 
-Proceed to Configuring Replicated, to continue with setting up CircleCI in HA mode. 
+Proceed to Configuring Replicated, to continue with setting up CircleCI in HA mode.
 
 
 ## Configuring replicated

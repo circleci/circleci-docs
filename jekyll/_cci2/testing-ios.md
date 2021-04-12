@@ -5,7 +5,7 @@ short-title: Testing iOS Applications on macOS
 categories: [platforms]
 description: Testing iOS applications on macOS
 order: 30
-version: 
+version:
 - Cloud
 ---
 
@@ -15,6 +15,7 @@ This document describes how to set up and customize testing for an iOS applicati
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 CircleCI offers support for building, testing and deploying iOS projects in macOS virtual machines. Each image provided has a set of common tools installed, such as Ruby and OpenJDK, alongside a version of Xcode. For more information about supplied images, refer to the [software manifest](#supported-xcode-versions) for each Xcode image.
@@ -22,6 +23,7 @@ CircleCI offers support for building, testing and deploying iOS projects in macO
 There is documentation for [an iOS example project]({{ site.baseurl}}/2.0/ios-tutorial/) and [getting started on MacOS]({{ site.baseurl }}/2.0/hello-world-macos/).
 
 ## Using the macOS executor
+{: #using-the-macos-executor }
 
 Each `macos` job is run a fresh virtual machine, running a specified version macOS. We build a new image each time a new stable, or beta, version of Xcode is released by Apple and aim to get these deployed as soon as possible. Generally, the contents of a particular build image will remain unchanged, except in very exceptional circumstances we might be forced to re-build a container for a specific reason. Our goal is to keep your build environment stable, and to allow you to opt-in to newer containers by setting the `xcode` key in your `config.yml` file.
 
@@ -30,22 +32,25 @@ Periodically, we will update the version of macOS each image includes to ensure 
 We announce the availability of new macOS containers, including Xcode betas, in the [annoucements section of our Discuss site](https://discuss.circleci.com/c/announcements).
 
 ### Beta image support
+{: #beta-image-support }
 
-We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release. 
+We endeavour to make beta Xcode versions available on the macOS executor as soon as we can to allow developers to test their apps ahead of the next stable Xcode release.
 
 Unlike our stable images (which are frozen and will not change), once a new beta image is released it will overwrite the previous beta image until a GM (stable) image is released, at which point the image is frozen and no longer updated. If you are requesting an image using an Xcode version that is currently in beta, please expect it to change when Apple releases a new Xcode beta with minimal notice. This can include breaking changes in Xcode/associated tooling which are beyond our control.
 
 To read about our customer support policy regarding beta images, please check out the following [support center article](https://support.circleci.com/hc/en-us/articles/360046930351-What-is-CircleCI-s-Xcode-Beta-Image-Support-Policy-).
 
 ### Apple silicon support
+{: #apple-silicon-support }
 
 **Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel. 
+It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. 
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
 
 ## Supported Xcode versions
+{: #supported-xcode-versions }
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
@@ -71,12 +76,14 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 {: class="table table-striped"}
 
 ## Getting started
+{: #getting-started }
 
 Select a macOS project repository you would like to build from the **Add Projects** page of the CircleCI application. You will need to ensure you have a [plan that allows macOS builds](https://circleci.com/pricing/), or if your project is open source, you can [apply for a special plan](https://circleci.com/open-source/) with free monthly build credits.
 
 We highly recommend using [Fastlane](https://fastlane.tools) to build and sign your apps in CircleCI. Fastlane requires minimal configuration in most cases and simplifies the build-test-deploy process.
 
 ### Setting up your Xcode project
+{: #setting-up-your-xcode-project }
 
 After setting up the project on CircleCI, you will need to ensure that the scheme you intend to build with Fastlane is marked as "shared" in your Xcode project. In most new projects created by Xcode, the default scheme will already be marked as "shared". To verify this, or to share an existing scheme, complete the following steps:
 
@@ -89,10 +96,12 @@ example of a minimal config in the
 [iOS Project Tutorial]({{ site.baseurl }}/2.0/ios-tutorial/).
 
 ## Using Fastlane
+{: #using-fastlane }
 
 [Fastlane](https://fastlane.tools/) is a set of tools for automating the build and deploy process of mobile apps. We encourage the use of Fastlane on CircleCI as it simplifies the setup and automation of the build, test and deploy process. Additionally, it allows parity between local and CircleCI builds.
 
 ### Adding a Gemfile
+{: #adding-a-gemfile }
 {:.no_toc}
 
 It is recommended to add a `Gemfile` to your repository to make sure that the same version of Fastlane is used both locally and on CircleCI and that all dependencies are installed. Below is a sample of a simple `Gemfile`:
@@ -106,6 +115,7 @@ gem 'fastlane'
 After you have created a `Gemfile` locally, you will need to run `bundle install` and check both `Gemfile` and `Gemfile.lock` into your project repository.
 
 ### Setting up Fastlane for use on CircleCI
+{: #setting-up-fastlane-for-use-on-circleci }
 {:.no_toc}
 
 When using Fastlane in your CircleCI project, we recommend adding the following to beginning of your `Fastfile`:
@@ -131,6 +141,7 @@ new code signing certificates or provisioning profiles.
 * Set up log and test result paths to be easily collectible.
 
 ### Example Configuration for Using Fastlane on CircleCI
+{: #example-configuration-for-using-fastlane-on-circleci }
 {:.no_toc}
 
 A basic Fastlane configuration that can be used on CircleCI is as follows:
@@ -210,12 +221,14 @@ workflows:
 The environment variable `FL_OUTPUT_DIR` is the artifact directory where FastLane logs and signed `.ipa` file should be stored. Use this to set the path in the `store_artifacts` step to automatically save logs and build artifacts from Fastlane.
 
 ### Code Signing with Fastlane Match
+{: #code-signing-with-fastlane-match }
 
-We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment. 
+We recommend the use of Fastlane Match for signing your iOS applications as it simplifies and automates the process of code signing both locally and in the CircleCI environment.
 
 For more information on how to get started with Fastlane Match, please see our [iOS code signing documentation]({{ site.baseurl}}/2.0/ios-codesigning/).
 
 ## Using Ruby
+{: #using-ruby }
 
 Our macOS images contain multiple versions of Ruby. The default version in use on all images is the system Ruby. The images also include the latest stable versions of Ruby at the time that the image is built. We determine the stable versions of Ruby using the [Ruby-Lang.org downloads page](https://www.ruby-lang.org/en/downloads/). The versions of Ruby that are installed in each image are listed in the [software manifests of each container](#supported-xcode-versions).
 
@@ -224,6 +237,7 @@ If you want to run steps with a version of Ruby that is listed as "available to 
 **Note:** Installing Gems with the system Ruby is not advised due to the restrictive permissions enforced on the system directories. As a general rule, we advise using one of the alternative Rubies provided by Chruby for all jobs.
 
 ### Images using Xcode 11.7 and later
+{: #images-using-xcode-117-and-later }
 
 As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible with various gems (especially those which require native extensions), Xcode 11.7 and later images default to Ruby 2.7 via `chruby`.
 
@@ -239,6 +253,7 @@ run:
 ```
 
 ### Images using Xcode 11.2 and later
+{: #images-using-xcode-112-and-later }
 
 The [`chruby`](https://github.com/postmodern/chruby) program is installed on the image and can be used to select a version of Ruby. The auto-switching feature is not enabled by default. To select a version of Ruby to use, add the `chruby` function to `~/.bash_profile`:
 
@@ -252,10 +267,11 @@ run:
 Replace `2.6` with the version of Ruby required - you do not need to specify the full Ruby version, `2.6.5` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Images using Xcode 11.1 and earlier
+{: #images-using-xcode-111-and-earlier }
 
 Images using macOS 10.14 and earlier (Xcode 11.1 and earlier) have both `chruby` and [the auto-switcher](https://github.com/postmodern/chruby#auto-switching) enabled by default.
 
-To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching). 
+To specify a version of Ruby to use, there are two options. You can [create a file named `.ruby-version` and commit it to your repository, as documented by `chruby`](https://github.com/postmodern/chruby#auto-switching).
 
 If you do not want to commit a `.ruby-version` file to source control, then you can create the file from a job step:
 
@@ -269,10 +285,12 @@ run:
 Replace `2.4` with the version of Ruby required - you do not need to specify the full Ruby version, `2.4.9` for example, just the major version. This will ensure your config does not break when switching to newer images that might have slightly newer Ruby versions.
 
 ### Installing additional Ruby versions
+{: #installing-additional-ruby-versions }
 
 To run a job with a version of Ruby that is not pre-installed, you must install the required version of Ruby. We use the [ruby-install](https://github.com/postmodern/ruby-install) tool to install the required version. After the install is complete, you can select it using the appropriate technique above.
 
 ### Using Custom Versions of CocoaPods and Other Ruby Gems
+{: #using-custom-versions-of-cocoapods-and-other-ruby-gems }
 {:.no_toc}
 
 To make sure the version of CocoaPods that you use locally is also used
@@ -309,6 +327,7 @@ steps:
 ```
 
 ## Using Homebrew
+{: #using-homebrew }
 
 [Homebrew](http://brew.sh/) is pre-installed on CircleCI, so you can simply use `brew install` to add nearly any dependency you require to complete your build. For example:
 
@@ -326,12 +345,15 @@ steps:
 It is also possible to use the `sudo` command if necessary to perform customizations outside of Homebrew.
 
 ## Configuring deployment
+{: #configuring-deployment }
 
 After the app has been tested and signed, you are ready to configure deployment to your service of choice, such as App Store Connect or TestFlight. For more information on how to deploy to various services, including example Fastlane configurations, check out the [deploying iOS apps guide]({{ site.baseurl }}/2.0/deploying-ios/)
 
 ## Reducing job time and best practises
+{: #reducing-job-time-and-best-practises }
 
 ### Pre-starting the simulator
+{: #pre-starting-the-simulator }
 {:.no_toc}
 
 Pre-start the iOS simulator before building your
@@ -359,6 +381,7 @@ image:
 * `iPhone 11 Pro (13.3) + Apple Watch Series 5 - 40mm (6.1.1) [<uuid>]` for the phone + watch pair.
 
 ### Collecting iOS simulator crash reports
+{: #collecting-ios-simulator-crash-reports }
 {:.no_toc}
 
 Often if your `scan` step fails, for example due to a test runner timeout, it is likely that your app has crashed during the test run. In such cases, collecting crash report is useful for diagnosing the exact cause of the crash. Crash reports can be uploaded as artifacts, as follows:
@@ -371,11 +394,13 @@ steps:
 ```
 
 ### Optimizing Fastlane
+{: #optimizing-fastlane }
 {:.no_toc}
 
 By default, Fastlane Scan generates test output reports in `html` and `junit` formats. If your tests are taking a long time and you do not need these reports, consider disabling them by altering the `output_type` parameter as described in the [fastlane docs](https://docs.fastlane.tools/actions/run_tests/#parameters).
 
 ### Optimizing Cocoapods
+{: #optimizing-cocoapods }
 {:.no_toc}
 
 In addition to the basic setup steps, it is best practice to use Cocoapods 1.8 or newer which allows the use of the CDN, rather than having to clone the entire Specs repo. This will allow you to install pods faster, reducing build times. If you are using Cocoapods 1.7 or older, consider upgrading to 1.8 or newer as this change allows for much faster job execution of the `pod install` step.
@@ -400,9 +425,10 @@ sudo gem install cocoapods
 
 We also recommend that you check your [Pods directory into source control](http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control). This will ensure that you have a deterministic, reproducible build.
 
-**Note:** The previous S3 mirror we provided for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, we highly recommend switching to the CDN method described above. 
+**Note:** The previous S3 mirror we provided for the Cocoapods Spec repo is no longer being maintained or updated since the release of Cocoapods 1.8. It will remain available to prevent existing jobs breaking, we highly recommend switching to the CDN method described above.
 
 ### Optimizing Homebrew
+{: #optimizing-homebrew }
 {:.no_toc}
 
 Homebrew, by default, will check for updates at the start of any operation. As Homebrew has a fairly frequent release cycle, this means that any step which calls `brew` can take some extra time to complete.
@@ -425,10 +451,12 @@ jobs:
 ```
 
 ## Supported build and test tools
+{: #supported-build-and-test-tools }
 
 With the macOS executor on CircleCI, it is possible to customize your build as needed to satisfy almost any iOS build and test strategy.
 
 ### Common test tools
+{: #common-test-tools }
 {:.no_toc}
 
 The following common test tools are known to work well on CircleCI:
@@ -439,16 +467,19 @@ The following common test tools are known to work well on CircleCI:
 * [Appium](http://appium.io/)
 
 ### React Native projects
+{: #react-native-projects }
 {:.no_toc}
 
 React Native projects can be built on CircleCI using `macos` and `docker` executor types. For an example of configuring a React Native project, please see [our demo React Native application](https://github.com/CircleCI-Public/circleci-demo-react-native)
 
 ### Creating a `config.yml` File
+{: #creating-a-configyml-file }
 {:.no_toc}
 
 The most flexible way to customize your build is to modify the CircleCI configuration for your project in `.circleci/config.yml`. This allows you to run arbitrary bash commands as well as utilise built-in features such as workspaces and caching. See the [Configuring CircleCI]( {{ site.baseurl }}/2.0/configuration-reference/) documentation for a detailed description of the structure of the `config.yml` file.
 
 ## Using Multiple Executor Types (macOS + Docker)
+{: #using-multiple-executor-types-macos-docker }
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
@@ -512,10 +543,12 @@ workflows:
 ```
 
 ## Troubleshooting
+{: #troubleshooting }
 
 If you are facing build failures while executing your jobs, check out our [support center knowledge base](https://support.circleci.com/hc/en-us/categories/115001914008-Mobile) for answers to common issues.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - See the [`circleci-demo-ios` GitHub repository](https://github.com/CircleCI-Public/circleci-demo-ios)

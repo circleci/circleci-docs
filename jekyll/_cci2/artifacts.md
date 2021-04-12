@@ -15,6 +15,7 @@ This document describes how to work with Artifacts in the following sections:
 {:toc}
 
 ## Artifacts overview
+{: #artifacts-overview }
 
 Artifacts persist data after a job is completed
 and may be used for storage of the outputs of your build process.
@@ -26,7 +27,7 @@ keeping it available after the process has finished.
 
 ![artifacts data flow]( {{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
-Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play. 
+Another example of an artifact is a project that is packaged as an Android app where the `.apk` file is uploaded to Google Play.
 
 If a job produces persistent artifacts such as screenshots, coverage reports, core files, or
 deployment tarballs, CircleCI can automatically save and link them for you.
@@ -35,7 +36,7 @@ deployment tarballs, CircleCI can automatically save and link them for you.
 
 Find links to the artifacts under the "Artifacts" tab on the **Job page**.
 Artifacts are stored on Amazon S3 and are protected with your CircleCI account for private projects.
-There is a 3GB `curl` file size limit. 
+There is a 3GB `curl` file size limit.
 
 **Artifacts will be accessible for thirty days after creation**. If you are relying on them as a source of documentation or persistent content, we recommend deploying the output to a dedicated output target such as S3, or GitHub Pages or Netlify for static websites.
 
@@ -47,6 +48,7 @@ if you are expecting
 to find artifacts at a given path within the application.
 
 ## Uploading artifacts
+{: #uploading-artifacts }
 
 To upload artifacts created during builds, use the following example:
 
@@ -77,8 +79,8 @@ jobs:
           path: /tmp/artifacts
 ```
 
-The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.  
-There is no limit on the number of `store_artifacts` steps a job can run.  
+The `store_artifacts` step uploads two build artifacts: a file (`/tmp/artifact-1`) and a directory (`/tmp/artifacts`). After the artifacts successfully upload, view them in the **Artifacts** tab of the **Job page** in your browser. If you're uploading hundreds of artifacts, then consider [compressing and uploading as a single compressed file](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step) to accelerate this step.
+There is no limit on the number of `store_artifacts` steps a job can run.
 
 
 Currently, `store_artifacts` has two keys: `path` and `destination`.
@@ -87,6 +89,7 @@ Currently, `store_artifacts` has two keys: `path` and `destination`.
   - `destination` **(Optional)** is a prefix added to the artifact paths in the artifacts API. The directory of the file specified in `path` is used as the default.
 
 ## Uploading core files
+{: #uploading-core-files }
 
 This section describes how to get [core dumps](http://man7.org/linux/man-pages/man5/core.5.html) and push them as artifacts for inspection and debugging. The following example creates a short C program that runs [`abort(3)`](http://man7.org/linux/man-pages/man3/abort.3.html) to crash the program.
 
@@ -101,7 +104,7 @@ This section describes how to get [core dumps](http://man7.org/linux/man-pages/m
 
      ```C
      #include <stdlib.h>
-     
+
      int main(int argc, char **argv) {
          abort();
      }
@@ -125,7 +128,7 @@ jobs:
       - checkout
       - run: make
       - run: |
-          # tell the operating system to remove the file size limit on core dump files 
+          # tell the operating system to remove the file size limit on core dump files
           ulimit -c unlimited
           ./dump
       - run:
@@ -147,6 +150,7 @@ When CircleCI runs a job,
 a link to the core dump file appears in the Artifacts tab of the **Job page**.
 
 ## Downloading all artifacts for a build on CircleCI
+{: #downloading-all-artifacts-for-a-build-on-circleci }
 
 To download your artifacts with `curl`,
 follow the steps below.
@@ -194,8 +198,8 @@ Placeholder   | Meaning                                                         
 `:build_num`  | The number for the build for which you want to download artifacts.
 {: class="table table-striped"}
 
-
 ## See also
+{: #see-also }
 {:.no_toc}
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
