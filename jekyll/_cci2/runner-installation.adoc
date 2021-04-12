@@ -174,8 +174,7 @@ WantedBy = multi-user.target
 You can now enable the service:
 
 ```bash
-prefix=/opt/circleci
-systemctl enable $prefix/circleci.service
+systemctl enable /opt/circleci/circleci.service
 ```
 
 === Start the service

@@ -26,12 +26,12 @@ circleci runner resource-class create <resource-class> <description> --host HOST
 ## Configuration file
 {: #configuration-file }
 
-When setting up a Runner, the configuration file should include `host` property.
+When setting up a Runner, the configuration file should include `url` property.
 
 ```yaml
 api:
     auth_token: AUTH_TOKEN
-    host: HOSTNAME
+    url: https://HOSTNAME
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "circleci", "--"]

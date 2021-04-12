@@ -13,8 +13,17 @@ CircleCI collects test metadata from XML files and uses it to provide insights i
 
 * TOC
 {:toc}
+  
+Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to 
+not only upload and store test results, but also provides an easy-to-read UI of your passing/failing tests in the CircleCI 
+application.
 
-To see test results as artifacts, upload them using the `store_artifacts` step.
+You can access the test results interface from the *Tests* tab when viewing any particular [job]({{ site.baseurl}}/2.0/concepts/#jobs),
+as seen below.
+
+![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
+
+To see test results as build artifacts, upload them using the [`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) step.
 
 The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your config looks like the following:
 

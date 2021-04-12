@@ -169,7 +169,12 @@ to substitute actual values
 for all variables that start with `:`.
 
 ```bash
+# Set an environment variable for your API token.
 export CIRCLE_TOKEN=':your_token'
+
+# `curl` gets all artifact details for a build 
+# then, the result is piped into `grep` to extract the URLs.
+# finally, `wget` is used to download the the artifacts to the current directory in your terminal.
 
 curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/:build_num/artifacts \
    | grep -o 'https://[^"]*' \
@@ -192,17 +197,6 @@ Placeholder   | Meaning                                                         
 `:project`    | The name of the target VCS repository.
 `:build_num`  | The number for the build for which you want to download artifacts.
 {: class="table table-striped"}
-
-### Description of commands
-{: #description-of-commands }
-{:.no_toc}
-
-First, the CIRCLE_TOKEN environment variable is created. Then, the `curl`
-command fetches all artifact details for a build and pipes them to `grep` to
-extract the URLs. Using `sed` your circle token is appended to the file to
-create a unique file name. Finally, `wget` is used to download the artifacts to
-the current directory in your terminal.
-
 
 ## See also
 {: #see-also }

@@ -403,7 +403,6 @@ To prevent this behavior, add a step that cleans Bundler before restoring depend
 
 ```yaml
 steps:
-  - run: bundle clean --force
   - restore_cache:
       keys:
         # when lock file changes, use increasingly general patterns to restore cache
@@ -411,6 +410,7 @@ steps:
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
   - run: bundle install
+  - run: bundle clean --force
   - save_cache:
       paths:
         - ~/.bundle
