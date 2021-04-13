@@ -13,6 +13,7 @@ Refer to the following documents and linked `.circleci/config.yml` files for com
 {:toc}
 
 ## Example CircleCI files and public repos
+{: #example-circleci-files-and-public-repos }
 
 Example Name | Description | Link
 ----|----------|--------
@@ -30,6 +31,7 @@ circleci-demo-docker | This is an example application showcasing how to build Do
 {: class="table table-striped"}
 
 ## Open source projects by feature
+{: #open-source-projects-by-feature }
 
 The following projects provide examples of using features and functionality of CircleCI configuration syntax:
 
@@ -47,6 +49,7 @@ Tagged and scheduled workflow jobs | Node.js idiomatic client for **Cloud Pub/Su
 {: class="table table-striped"}
 
 ## Open source projects by language
+{: #open-source-projects-by-language }
 
 The following projects provide examples for particular programming languages, testing mechanisms, and deployment targets:
 
@@ -67,5 +70,6 @@ Scala and `sbt` build, test, and release with three workflows | **Arweave4s** is
 {: class="table table-striped"}
 
 ## See also
+{: #see-also }
 
 Refer to [Tutorials and Sample Apps]({{ site.baseurl }}/2.0/tutorials/) for configuration walkthroughs with commented examples and detailed explanations for basic applications written in 11 different languages.

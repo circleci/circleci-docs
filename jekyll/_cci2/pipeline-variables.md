@@ -5,18 +5,19 @@ short-title: "Pipeline Variables"
 description: "Detailed information about Pipeline variables, parameters and values"
 categories: [getting-started]
 order: 1
-version: 
+version:
 - Cloud
 ---
 
-Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher. 
+Pipeline variables can be used to create reusable pipeline configurations. To use pipeline variables you must have [pipelines enabled]({{ site.baseurl }}/2.0/build-processing) and use configuration [version]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` or higher.
 
-There are two types of pipeline variables: 
+There are two types of pipeline variables:
 
 * **Pipeline values** represent pipeline metadata that can be used throughout the configuration.
-* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API. 
+* **Pipeline parameters** are typed pipeline variables that are declared in the `parameters` key at the top level of a configuration. Users can pass `parameters` into their pipelines when triggering a new run of a pipeline through the API.
 
 ## Pipeline values
+{: #pipeline-values }
 
 Pipeline values are available to all pipeline configurations and can be used without previous declaration.
 
@@ -55,8 +56,9 @@ jobs:
 ```
 
 ## Pipeline parameters in configuration
+{: #pipeline-parameters-in-configuration }
 
-Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file. 
+Pipeline parameters are declared using the `parameters` key at the top level of a `.circleci/config.yml` file.
 
 Pipeline parameters support the following types:
 * string
@@ -64,9 +66,9 @@ Pipeline parameters support the following types:
 * integer
 * enum
 
-See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details. 
+See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for usage details.
 
-Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`. 
+Pipeline parameters can be referenced by value and used as a config variable under the scope `pipeline.parameters`.
 
 The example below shows a configuration with two pipeline parameters (`image-tag` and `workingdir`) defined at the top of the config, and then subsequently referenced in the `build` job:
 
@@ -96,6 +98,7 @@ jobs:
 ```
 
 ### Passing parameters when triggering pipelines via the API
+{: #passing-parameters-when-triggering-pipelines-via-the-api }
 
 A pipeline can be triggered with specific `parameter` values using the API v2 endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline). This can be done by passing a `parameters` key in the JSON packet of the `POST` body.
 
@@ -113,13 +116,16 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 ```
 
 ## The scope of pipeline parameters
+{: #the-scope-of-pipeline-parameters }
 
-Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability. 
+Pipeline parameters can only be resolved in the `.circleci/config.yml` file in which they are declared. Pipeline parameters are not available in orbs, including orbs declared locally in your config.yml file. This was done because access to the pipeline scope in orbs would break encapsulation and create a hard dependency between the orb and the calling config, potentially jeopardizing determinism and creating a surface area of vulnerability.
 
 
 ## Config processing stages and parameter scopes
+{: #config-processing-stages-and-parameter-scopes }
 
 ### Processing stages
+{: #processing-stages }
 
 Configuration processing happens in the following stages:
 
@@ -130,6 +136,7 @@ Configuration processing happens in the following stages:
 The remaining configuration is processed, element parameters are resolved, type-checked, and substituted.
 
 ## Element parameter scope
+{: #element-parameter-scope }
 
 Element parameters use lexical scoping, so parameters are in scope within the element they are defined in, e.g. a job, a command, or an executor. If an element with parameters calls another element with parameters, like in the example below, the inner element does not inherit the scope of the calling element.
 
@@ -164,10 +171,12 @@ workflows:
 Even though the `print` command is called from the cat-file job, the file parameter would not be in scope inside the print. This ensures that all parameters are always bound to a valid value, and the set of available parameters is always known.
 
 ## Pipeline value scope
+{: #pipeline-value-scope }
 
 Pipeline values, the pipeline-wide values that are provided by CircleCI (e.g. `<< pipeline.number >>`) are always in scope.
 
 ### Pipeline parameter scope
+{: #pipeline-parameter-scope }
 
 Pipeline parameters which are defined in configuration are always in scope, with two exceptions:
 
@@ -175,6 +184,7 @@ Pipeline parameters which are defined in configuration are always in scope, with
 - Pipeline parameters are not in scope in the body of orbs, even inline orbs, to prevent data leaks.
 
 ## Conditional workflows
+{: #conditional-workflows }
 
 Use the `when` clause (or the inverse clause `unless`) under a workflow declaration, with a truthy or falsy value, to decide whether or not to run that workflow. Truthy/falsy values can be booleans, numbers, and strings. Falsy would be any of: false, 0, empty string, null, and NaN. Everything else would be truthy.
 

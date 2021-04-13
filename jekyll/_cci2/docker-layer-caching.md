@@ -5,7 +5,7 @@ short-title: "Enabling Docker Layer Caching"
 description: "How to reuse unchanged cache layers in images you build to reduce overall run time"
 categories: [optimization]
 order: 70
-version: 
+version:
  - Cloud
  - Server v2.x
 ---
@@ -17,14 +17,16 @@ the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 
 {:toc}
 
 ## Overview
+{: #overview }
 
-Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job. 
+Docker Layer Caching (DLC) is a great feature to use if building Docker images is a regular part of your CI/CD process. DLC will save image layers created within your jobs, rather than impact the actual container used to run your job.
 
 DLC caches the individual layers of any Docker images built during your CircleCI jobs, and then reuses unchanged image layers on subsequent CircleCI runs, rather than rebuilding the entire image every time. In short, the less your Dockerfiles change from commit to commit, the faster your image-building steps will run.
 
 Docker Layer Caching can be used with both the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine) and the [Remote Docker Environment]({{ site.baseurl }}/2.0/building-docker-images) (`setup_remote_docker`).
 
 ### Limitations
+{: #limitations }
 {:.no_toc}
 
 Please note that high usage of [parallelism]({{site.baseurl}}/2.0/configuration-reference/#parallelism) (that is, a parallelism of 30 or above) in your configuration may cause issues with DLC, notably pulling a stale cache or no cache. For example:
@@ -36,11 +38,11 @@ If you are experiencing issues with cache-misses or need high-parallelism, consi
 
 **Note:** DLC has **no** effect on Docker images used as build containers. That is, containers that are used to _run_ your jobs are specified with the `image` key when using the [`docker` executor]({{ site.baseurl }}/2.0/executor-types/#using-docker) and appear in the Spin up Environment step on your Jobs pages.
 
-DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment. 
+DLC is only useful when creating your own Docker image  with docker build, docker compose, or similar docker commands), it does not decrease the wall clock time that all builds take to spin up the initial environment.
 
 ``` YAML
-version: 2 
-jobs: 
+version: 2
+jobs:
   build:
     docker:
       # DLC does nothing here, its caching depends on commonality of the image layers.
@@ -54,9 +56,10 @@ jobs:
           docker_layer_caching: true
       # DLC will explicitly cache layers here and try to avoid rebuilding.
       - run: docker build .
-``` 
+```
 
 ## How DLC works
+{: #how-dlc-works }
 
 DLC caches your Docker image layers by creating an external volume and attaching it to the instances that execute the `machine` and Remote Docker jobs. The volume is attached in a way that makes Docker save the image layers on the attached volume. When the job finishes, the volume is disconnected and re-used in a future job. This means that the layers downloaded in a previous job with DLC will be available in the next job that uses the same DLC volume.
 
@@ -71,17 +74,19 @@ CircleCI will create a maximum of 50 DLC volumes per project, so a maximum of 50
 ![Docker Layer Caching]({{ site.baseurl }}/assets/img/docs/dlc_cloud.png)
 
 ### Scope of cache
+{: #scope-of-cache }
 With DLC enabled, the entirety of `/var/lib/docker` is cached to the remote volume, which also includes any custom networks created in previous jobs.
 
 ### Remote Docker environment
+{: #remote-docker-environment }
 {:.no_toc}
 
 To use DLC in the Remote Docker Environment, add `docker_layer_caching: true` under the `setup_remote_docker` key in your [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file:
 
 ``` YAML
 - setup_remote_docker:
-    docker_layer_caching: true  # default - false  
-``` 
+    docker_layer_caching: true  # default - false
+```
 
 Every layer built in a previous job will be accessible in the Remote Docker Environment. However, in some cases your job may run in a clean environment, even if the configuration specifies `docker_layer_caching: true`.
 
@@ -90,6 +95,7 @@ If you run many concurrent jobs for the same project that depend on the same env
 **Note:** Previously DLC was enabled via the `reusable: true` key. The `reusable` key is deprecated in favor of the `docker_layer_caching` key. In addition, the `exclusive: true` option is deprecated and all Remote Docker VMs are now treated as exclusive. This means that when using DLC, jobs are guaranteed to have an exclusive Remote Docker Environment that other jobs cannot access.
 
 ### Machine executor
+{: #machine-executor }
 {:.no_toc}
 
 Docker Layer Caching can also reduce job runtimes when building Docker images using the [`machine` executor]({{ site.baseurl }}/2.0/executor-types/#using-machine). Use DLC with the `machine` executor by adding `docker_layer_caching: true` below your `machine` key (as seen above in our [example](#configyml)):
@@ -100,10 +106,12 @@ machine:
 ```
 
 ## Examples
+{: #examples }
 
 Let's use the following Dockerfile to illustrate how Docker Layer Caching works. This example Dockerfile is adapted from our [Elixir convenience image](https://hub.docker.com/r/circleci/elixir/~/dockerfile):
 
 ### Dockerfile
+{: #dockerfile }
 {:.no_toc}
 
 ```
@@ -162,6 +170,7 @@ CMD ["/bin/sh"]
 ```
 
 ### Config.yml
+{: #configyml }
 {:.no_toc}
 
 In the config.yml snippet below, let's assume the `build_elixir` job is regularly building an image using the above Dockerfile. By adding `docker_layer_caching: true` underneath our `machine` executor key, we ensure that CircleCI will save each Docker image layer as this Elixir image is built.
@@ -198,13 +207,14 @@ However, because our `#install jq` step is new, it and all subsequent steps will
 If we were to change the first step in our example Dockerfile—perhaps we want to pull from a different Elixir base image—then our entire cache for this image would be invalidated, even if every other part of our Dockerfile stayed the same.
 
 ## Video: overview of Docker Layer Caching
+{: #video-overview-of-docker-layer-caching }
 {:.no_toc}
 
 In the video example, the job runs all of the steps in a Dockerfile with the `docker_layer_caching: true` for the `setup_remote_docker` step. On subsequent runs of that job, steps that haven't changed in the Dockerfile, will be reused. So, the first run takes over two minutes to build the Docker image. If nothing changes in the Dockerfile before the second run, those steps happen instantly, in zero seconds.
 
-```yaml 
-version: 2 
-jobs: 
+```yaml
+version: 2
+jobs:
   build:
     docker:
       - image: circleci/node:9.8.0-stretch-browsers
@@ -217,11 +227,11 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: docker build .
-``` 
+```
 
-When none of the layers in the image change between job runs, DLC pulls the layers from cache from the image that was built previously and reuses those instead of rebuilding the entire image. 
+When none of the layers in the image change between job runs, DLC pulls the layers from cache from the image that was built previously and reuses those instead of rebuilding the entire image.
 
-If part of the Dockerfile changes (which changes part of the image) a subsequent run of the exact same job with the modified Dockerfile may still finish faster than rebuilding the entire image. It will finish faster because the cache is used for the first few steps that didn't change in the Dockerfile. The steps that follow the change must be rerun because the Dockerfile change invalidates the cache. 
+If part of the Dockerfile changes (which changes part of the image) a subsequent run of the exact same job with the modified Dockerfile may still finish faster than rebuilding the entire image. It will finish faster because the cache is used for the first few steps that didn't change in the Dockerfile. The steps that follow the change must be rerun because the Dockerfile change invalidates the cache.
 
 So, if you change something in the Dockerfile, all of those later steps are invalidated and the layers have to be rebuilt. When some of the steps remain the same (the steps before the one you removed), those steps can be reused. So, it is still faster than rebuilding the entire image.
 

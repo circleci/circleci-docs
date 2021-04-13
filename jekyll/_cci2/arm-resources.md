@@ -8,10 +8,11 @@ version:
 ---
 
 # Overview
+{: #overview }
 
 This document will walk you through the setup steps required to use an Arm
 resource on CircleCI. Arm resources are not available on CircleCI Server 1.x or
-2.x. 
+2.x.
 
 <div class="alert alert-info" role="alert">
   <b>Note:</b> If you are interested in using Arm resources, please fill out this <a href="https://www2.circleci.com/arm.html"><b>contact form</b></a>.
@@ -33,6 +34,7 @@ Which are available under these images:
 As these are `machine` executor resources, each class is a dedicated VM that is created specifically for your job and subsequently taken down after the job has finished running.
 
 ## Pricing and availability
+{: #pricing-and-availability }
 
 The following Arm resource class is available to all CircleCI customers:
 
@@ -50,6 +52,7 @@ creating a CircleCI Cloud account, or contact your Customer Success Manager to
 request Arm on Server.
 
 ## Using Arm resources
+{: #using-arm-resources }
 
 Update your `.circleci/config.yml` file to use Arm resources. Consider the example config:
 
@@ -85,6 +88,7 @@ Please note that it is indeed possible to mix various resources in the same
 configuration (and even the same workflow).
 
 ## Limitations
+{: #limitations }
 
 * Some orbs that include an executable may **not** be compatible with Arm at
   this moment. If you run into issues with orbs on Arm, please [open an

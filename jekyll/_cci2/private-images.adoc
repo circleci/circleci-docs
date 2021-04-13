@@ -20,6 +20,7 @@ CircleCI has partnered with Docker to ensure that our users can continue to acce
 toc::[]
 
 ## Docker executor
+{: #docker-executor }
 
 For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in
 the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password,
@@ -65,6 +66,7 @@ username/password for the `auth` key. For example:
 
 
 ## Machine executor (with Docker orb)
+{: #machine-executor-with-docker-orb }
 
 Alternatively, you can utilize the `machine` executor to achieve the same result using the Docker orb:
 
@@ -95,6 +97,7 @@ jobs:
 
 
 ## Machine executor (with Docker CLI)
+{: #machine-executor-with-docker-cli }
 
 or with the CLI:
 
@@ -116,6 +119,7 @@ jobs:
 ----
 
 ## AWS ECR
+{: #aws-ecr }
 
 CircleCI now supports pulling private images from Amazon's ECR service.
 
@@ -196,5 +200,6 @@ workflows:
 ----
 
 ## See also
+{: #see-also }
 
 * https://circleci.com/docs/2.0/configuration-reference[Configuration Reference]

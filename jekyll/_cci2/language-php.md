@@ -16,6 +16,7 @@ This document provides a walkthrough of the [`.circleci/config.yml`]({{ site.bas
 {:toc}
 
 ## Quickstart: Demo PHP Laravel reference project
+{: #quickstart-demo-php-laravel-reference-project }
 
 We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 
@@ -25,12 +26,14 @@ We maintain a reference PHP Laravel project to show how to build PHP on CircleCI
 In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
 
 ## Pre-built CircleCI Docker images
+{: #pre-built-circleci-docker-images }
 
 We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
 
 Database images for use as a secondary 'service' container are also available.
 
 ## Build the demo PHP project yourself
+{: #build-the-demo-php-project-yourself }
 
 A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
@@ -41,6 +44,7 @@ A good way to start using CircleCI is to build a project yourself. Here's how to
 ---
 
 ## Sample configuration
+{: #sample-configuration }
 
 Following is the commented `.circleci/config.yml` file in the demo project.
 
@@ -50,7 +54,7 @@ version: 2 # use CircleCI 2.0
 
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
-    docker: # run the steps with Docker 
+    docker: # run the steps with Docker
       - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
@@ -81,15 +85,16 @@ jobs: # a collection of steps
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      - run: touch storage/testing.sqlite 
+      - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -121,7 +126,7 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: ~/laravel 
+    working_directory: ~/laravel
 ```
 
 Next, we'll run a series of commands under the `steps:` key. Below we install
@@ -142,7 +147,7 @@ and caching. The sample project caches both PHP dependencies and JavaScript depe
 
 Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step
 to cache certain files or directories. In this example, the cache key will be based on a checksum of the
-`composer.lock` file, but will fall back to using a more generic cache key. 
+`composer.lock` file, but will fall back to using a more generic cache key.
 
 Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step
 to restore cached files or directories.
@@ -150,12 +155,12 @@ to restore cached files or directories.
 
 {% raw %}
 ```yaml
-      - restore_cache: 
+      - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
             - composer-v1-
       - run: composer install -n --prefer-dist
-      - save_cache: 
+      - save_cache:
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
@@ -164,7 +169,7 @@ to restore cached files or directories.
             - node-v1-{{ checksum "package-lock.json" }}
             - node-v1-
       - run: yarn install
-      - save_cache: 
+      - save_cache:
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
@@ -174,7 +179,7 @@ to restore cached files or directories.
 Finally, we will set up a test database with Sqlite, run migrations and run tests.
 
 ```yaml
-      - run: touch storage/testing.sqlite 
+      - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
@@ -185,6 +190,7 @@ Finally, we will set up a test database with Sqlite, run migrations and run test
 Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
