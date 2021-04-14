@@ -2,22 +2,12 @@
   border-radius: 0;
   padding: 1.25em 1em 1em 2.8em;
   width: 100%;
-  border: none;
 }
 
 .main-searchbar {
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  position: fixed;
-  width: 100%;
-  background: white;
-  z-index: 2;
-  top: 70px;
-
   #search-box {
     position: relative;
     display: block;
-    max-width: 400px;
 
     .ais-SearchBox-submit {
       position: absolute;
@@ -36,22 +26,20 @@
       svg {
         width: 14px;
         height: auto;
-        fill: #D8D8D8;
       }
     }
 
     .ais-SearchBox-submit {
-      left: 0;
+      left: 15px;
     }
 
     .ais-SearchBox-reset {
-      right: 0;
+      right: 15px;
     }
 
     .instantsearch-search {
       @extend .base-input-style;
       margin: 0;
-      padding: 1.5em 2em;
     }
   }
 }
@@ -60,7 +48,6 @@
   padding: $spacing-small-vertical 0;
   background: #FAFAFA;
   min-height: 500px;
-  margin-top: $spacing-medium-vertical;
 
   h2 {
     padding-left: $spacing-small-vertical;

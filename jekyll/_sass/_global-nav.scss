@@ -8,7 +8,7 @@ $white: #FFFFFF;
 $gray: #D8D8D8;
 $black: #161616;
 $transition-duration-medium: 400ms;
-$nav-height: 70px;
+$nav-height: 68px;
 $padding-large-vertical: 11px;
 
 
@@ -225,6 +225,33 @@ $padding-large-vertical: 11px;
 .items-center   { align-items: center; }
 
 
+// Search bar
+///////////////////////////////////////////////////////////////////////////////
+
+.global-nav--search-bar {
+  position: absolute;
+  left: $sidebar-width;
+
+  .instantsearch-search {
+    border: 1px solid #BFBFBF;
+    border-radius: 2px;
+
+    &:focus {
+      border-color: #279AF1
+    }
+  }
+
+  width: 260px;
+
+  @media (min-width: $screen-lg) {
+    width: 440px;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    display: none;
+  }
+}
+
 // Customizations/extensions of outer blog-nav
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -263,7 +290,7 @@ $padding-large-vertical: 11px;
 
     @media (min-width: $screen-md) {
       border-left: solid 1px $black;
-      margin-left: 30px;
+      margin-left: 10px;
       margin-right: 30px;
       align-self: stretch;
       display: flex;
