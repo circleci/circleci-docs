@@ -59,6 +59,8 @@ For a more in-depth explanation on the behind-the-scenes pipeline creation/conti
 see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
 
 ## Dynamic Configuration FAQs
+{: #dynamic-config-faqs }
+
 **Q:** I thought pipeline parameters could only be used with the API?
 **A:** Previously, this was true. But using our Dynamic Configuration feature, you can set pipeline parameters dynamically, 
 before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
