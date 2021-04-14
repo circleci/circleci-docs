@@ -151,7 +151,7 @@ that the bucket name you provide exists in your chosen object storage provider b
 . *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for S3 bucket access.
 . *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for S3 bucket access.
 
-It is recommended to create a new user with programmatic access for this purpose. You should attach the following https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html[IAM policy] to the user:
+It is recommended to create a new user with programmatic access for this purpose. You should fill in <<Bucket Name>> and <<AWS Account ID>> and attach the following https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html[IAM policy] to the user:
 
 [source,json]
 ----
@@ -236,7 +236,7 @@ The recommended security group configuration can be found in the xref:server-3-i
 . *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
 . *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for EC2 access.
 
-It is recommended to create a new user with programmatic access for this purpose. You should attach the following IAM policy to the user:
+It is recommended to create a new user with programmatic access for this purpose. You should fill in <<Security Group ID>> and <<VPC ARN>> and attach the following IAM policy to the user:
 
 [source,json]
 ----
@@ -255,7 +255,7 @@ It is recommended to create a new user with programmatic access for this purpose
         "arn:aws:ec2:*:*:placement-group/*",
         "arn:aws:ec2:*:*:volume/*",
         "arn:aws:ec2:*:*:subnet/*",
-        "arn:aws:ec2:*:*:security-group/${SECURITY_GROUP_ID}"
+        "arn:aws:ec2:*:*:security-group/<<Security Group ID>>"
       ]
     },
     {
@@ -342,7 +342,7 @@ It is recommended to create a new user with programmatic access for this purpose
       "Resource": "arn:aws:ec2:*:*:subnet/*",
       "Condition": {
         "StringEquals": {
-          "ec2:Vpc": "${VPC_ARN}"
+          "ec2:Vpc": "<<VPC ARN>>"
         }
       }
     }
