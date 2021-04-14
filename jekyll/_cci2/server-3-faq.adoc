@@ -1,0 +1,25 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x FAQ
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+## Does Server 3.0 have a data retention policy?
+We do not currently support a defined data retention policy. Data is stored indefinitely on server.
+
+## What control is granted over Nomad certificates?
+Full control of the certificates, all the way down to mTLS for Nomad.
+
+## Is the polling time which checks for health status able to be changed or disabled?
+No, this is not customizable.
+
+## What do the Application Status options in KOTS mean?
+Please see the https://kots.io/vendor/config/application-status/#resource-statuses[KOTS documentation].

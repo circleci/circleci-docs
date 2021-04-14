@@ -1,10 +1,6 @@
 <!-- FULL SCREEN /-->
 <div class="sidebar-wrapper">
   <nav class="sidebar fixed">
-    {% assign lang = page.lang %}
-    {% assign sidenav = site.data.sidenav[lang] %}
-    {% assign current_url = page.url | slice: 1, page.url.size %}
-
     <div class="sidebar-item-group">
       {% for main-item in sidenav %}
       <ul>
@@ -108,6 +104,6 @@
 
   <script>
     // Add the current language to the window for auto setting the dropdown to current language.
-    window.currentLang = "{{page.lang}}"
+    window.currentLang = "{{lang}}"
   </script>
 </div>

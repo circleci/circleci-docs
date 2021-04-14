@@ -1,0 +1,56 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Migration
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Migrating from 2.19.x to 3.0 requires that you back up your 2.19 installation and then restore the data to the new Server 3.0 installation.
+It does require an already operating Server 3.0 installation. Depending on the size of your data stores, the migration
+can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this
+process in a production environment. This will not only allow you to gain a better understanding of the migration process,
+but will also give you a feel for how long the migration will take to complete.
+
+NOTE: If you have externalized your data stores (Mongo, Postgres, and Vault), then you need to wait until the Server 3.1
+release for migration. Server 3.1 will support externalized data stores, and you will be able to point your 3.1
+installation to the data stores you were using for your 2.19 instance.
+
+toc::[]
+
+## Prerequisites
+. Your current CircleCI Server installation is 2.19
+. You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
+. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
+
+## Migration
+
+### Step 1 - Clone the repository and run the migration script
+. Run `git clone git@github.com:CircleCI-Public/server-scripts.git`
+. Change into the `migrate` directory: `cd server-scripts/migrate`
+. Run the migration script, i.e.: `./migrate.sh`
+. You will be prompted for the following information:
+  * Username of your Server 2.19 installation
+  * Hostname of your Server 2.19 installation
+  * The path to your SSH key file for your Server 2.19 installation
+  * Kubernetes namespace of your Server 3.0 installation
+
+Input the required information and complete the migration process.
+
+NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
+
+### Step 2 - Validate your migration to Server 3.0
+Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check]
+with contexts on your new Server 3.0 environment by pushing a fresh commit.
+
+### Step 3 - Update your team
+Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check],
+notify your team of the new CircleCI UI and URL, if it has changed.
+
+## What to read next
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operator Guide]

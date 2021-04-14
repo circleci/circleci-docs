@@ -1,10 +1,11 @@
 version: "3"
 services:
   jekyll:
-    command: jekyll serve -s jekyll --incremental --livereload
-    image: jekyll/jekyll:3.8.6
+    command: bash -c "bundle install && bundle exec jekyll serve -s jekyll --incremental --livereload --host=0.0.0.0"
+    working_dir: /root
+    image: ruby:2.7.2
     volumes:
-      - ".:/srv/jekyll"
+      - ".:/root"
     ports:
       - 127.0.0.1:4000:4000
       - 127.0.0.1:35729:35729

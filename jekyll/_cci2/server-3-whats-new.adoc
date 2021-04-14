@@ -1,0 +1,52 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x What's New
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Server 3.0 is now generally available. The newest version of server offers the ability to scale under heavy workloads,
+all within your own Kubernetes cluster and private network, while still enjoying the full CircleCI cloud experience.
+Server 3.0 includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more. For existing
+customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.0 will receive monthly
+patch releases and quarterly feature releases.
+
+== New Features
+
+* New UI
+* Orbs for Server
+* Pipelines
+* Config 2.1
+* API 2.0
+* Scheduled Workflows
+* Matrix Jobs
+* And much more...
+
+== Known Issues
+
+* No support for external data stores (Postgres, Mongo, Vault). This feature will be implemented in a future release.
+* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
+identical names. This should be avoided as doing so could lead to errors and unexpected behavior. This will be fixed in
+a future patch release.
+* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
+application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
+CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
+and get details of the possible cause of the issue.
+* Account contexts are not usable in v3.0. This feature will be fixed in a future release.
+* CircleCI currently assigns a public load balancer for the frontend services. For some customers, their infrastructure
+or security groups won’t allow this. We will provide an optional internal local balancer for the frontend services in a future release.
+* https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
+* Support for GPU builders is not yet available.
+
+== What to read next
+To learn more about Server v3.x, see the following:
+
+* https://circleci.com/docs/2.0/server-3-whats-new[Server 3.x Overview]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
