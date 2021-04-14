@@ -619,7 +619,7 @@ In the above configuration, we:
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
 For a more in-depth explanation of what the `continuation` orb does, see the orb's source code in the
-[`CircleCI Developer Hub`](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or see the
+[CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or see the
 [Dynamic Configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
 
 ### Execute specific `workflows` or `steps` based on which files are modified
