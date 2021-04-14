@@ -22,13 +22,6 @@ you can set `setup` to `true` in the top-level of your configuration file, thus 
 `setup workflow`. See the [Getting Started](#getting-started-with-dynamic-config-in-circleci) section below for more 
 information.
 
-## Table of Contents
-{: #table-of-contents }
-{:.no_toc}
-
-* TOC
-  {:toc}
-
 ## Getting Started with Dynamic Config in CircleCI
 {: #getting-started-with-dynamic-config-in-circleci }
 
@@ -61,17 +54,29 @@ see our [public GitHub repository](https://github.com/CircleCI-Public/api-previe
 ## Dynamic Configuration FAQs
 {: #dynamic-config-faqs }
 
+### Pipeline Parameters
+{: #pipeline-parameters }
+
 **Q:** I thought pipeline parameters could only be used with the API?
+
 **A:** Previously, this was true. But using our Dynamic Configuration feature, you can set pipeline parameters dynamically, 
 before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
 
+### The Continuation Orb
+{: #the-continuation-orb }
+
 **Q:** What is the `continuation` orb?
+
 **A:** The `continuation` orb assists CircleCI users in managing the pipeline continuation process easily. The
 `continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline)
 in an easy-to-use fashion. See the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 documentation for more information.
 
+### `sandbox` vs. `circleci` Orbs
+{: #sandbox-vs-circleci-orbs }
+
 **Q:** What is the difference between the `sandbox` and `circleci` orbs for both `continuation` and `path-filtering`?
+
 **A:** The `sandbox` versions were our experimental versions of the orbs. These orbs will no longer be receiving updates. 
 The `circleci` orbs are where we are currently pushing all updates. If you are using code that uses the `sandbox` orbs, 
 we recommend updating to the `circleci` orbs.
@@ -79,7 +84,7 @@ we recommend updating to the `circleci` orbs.
 ## What to Read Next
 {: #what-to-read-next }
 
-- [A Basic Example](({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [Execute specific `workflows` or `steps` based on which files are modified](({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [A Basic Example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - The [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 - The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
