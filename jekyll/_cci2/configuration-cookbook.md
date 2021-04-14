@@ -570,7 +570,7 @@ workflows:
 {: #dynamic-configuration }
 
 This section provides various examples in using CircleCI's Dynamic Configuration feature. To get started, and for more
-information, see the [documentation](dynamic-config.md).
+information, see the [documentation]({{ site.baseurl }}/2.0/dynamic-config).
 
 ### A Basic Example
 {: #a-basic-example }

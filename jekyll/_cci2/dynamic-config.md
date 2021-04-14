@@ -9,7 +9,7 @@ version:
 
 You may find that instead of manually creating each and every individual CircleCI configuration per project,
 you would prefer to generate these configurations dynamically, before the build begins or is triggered. Or, you may
-prefer to set a specific [pipeline's](concepts.md#pipelines) configuration or parameters 
+prefer to set a specific [pipeline's](({{ site.baseurl }}/2.0/concepts/#pipelines) configuration or parameters 
 before a build is run.
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to
@@ -50,15 +50,15 @@ can set up the pipeline by any of the following means:
 
 At the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) 
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute
-workflows or steps based on updates to specified files, as described in the [Configuration Cookbook](configuration-cookbook.md#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example.
+workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example.
 
-For a basic example on how to use `setup workflows` for Dynamic Configuration generation, see the [Configuration Cookbook](configuration-cookbook.md#dynamic-configuration).
+For a basic example on how to use `setup workflows` for Dynamic Configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
 Included in the cookbook are other more in-depth examples, which will be updated as this feature matures.
 
 For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when dynamically generating configuration,
 see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
 
-## Dynamic Cofiguration FAQs
+## Dynamic Configuration FAQs
 **Q:** I thought pipeline parameters could only be used with the API?
 **A:** Previously, this was true. But using our Dynamic Configuration feature, you can set pipeline parameters dynamically, 
 before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
@@ -77,7 +77,7 @@ we recommend updating to the `circleci` orbs.
 ## What to Read Next
 {: #what-to-read-next }
 
-- [A Basic Example](configuration-cookbook.md#a-basic-example)
-- [Execute specific `workflows` or `steps` based on which files are modified](configuration-cookbook.md#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [A Basic Example](({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [Execute specific `workflows` or `steps` based on which files are modified](({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - The [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 - The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
