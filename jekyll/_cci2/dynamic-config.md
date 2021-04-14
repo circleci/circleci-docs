@@ -9,7 +9,7 @@ version:
 
 You may find that instead of manually creating each and every individual CircleCI configuration per project,
 you would prefer to generate these configurations dynamically, before the build begins or is triggered. Or, you may
-prefer to set a specific [pipeline's](({{ site.baseurl }}/2.0/concepts/#pipelines) configuration or parameters 
+prefer to set a specific [pipeline's]({{ site.baseurl }}/2.0/concepts/#pipelines) configuration or parameters 
 before a build is run.
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to
