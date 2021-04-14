@@ -1,0 +1,323 @@
+// Values from outer project variables
+///////////////////////////////////////////////////////////////////////////////
+
+$zindex-navbar-fixed:      1030;
+$green: #04AA51;
+$blue-darker: #19639A;
+$white: #FFFFFF;
+$gray: #D8D8D8;
+$black: #161616;
+$transition-duration-medium: 400ms;
+$nav-height: 70px;
+$padding-large-vertical: 11px;
+
+
+// Copy of outer blog-nav, renmaed to global-nav
+///////////////////////////////////////////////////////////////////////////////
+
+.global-nav--component {
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: $zindex-navbar-fixed;
+
+  top: 0;
+
+  background-color: $white;
+  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.15);
+  $shadow-space: 20px;
+
+  @media (max-width: $screen-xs-max) {
+    position: sticky;
+  }
+
+  @media (min-width: $screen-sm) {
+    transition: top $transition-duration-medium ease;
+
+    .nav-hide & {
+      top: calc(-#{$nav-height} - #{$shadow-space});
+    }
+  }
+
+  @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
+    .mobile-menu-button {
+      display: block;
+    }
+  }
+
+  .icon-bar {
+    background-color: $black;
+  }
+}
+
+.global-nav--lockup {
+  &-link {
+    // not used, yet
+    --link-color: #{$black};
+    --link-color-hover: #{$black};
+
+    &:hover {
+      color: $black;
+    }
+  }
+
+  &-title {
+    font-size: 25.2px;
+    font-weight: 300;
+    letter-spacing: 0.34px;
+    line-height: 24px;
+    margin-left: 9px;
+  }
+}
+
+.global-nav--row {
+  &-mobile {
+    @media (max-width: $screen-sm-max) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+    }
+  }
+
+  &-desktop {
+    @media (min-width: $screen-md) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+    }
+  }
+}
+
+.global-nav--toggle {
+  position: relative;
+  padding: 9px 10px;
+  margin-right: -10px;
+  background-color: transparent;
+  background-image: none;
+  border: 0 none transparent;
+
+  &:focus {
+    outline: 0;
+  }
+
+  .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  .icon-bar + .icon-bar {
+    margin-top: 4px;
+  }
+
+  @media (min-width: $screen-md) {
+    display: none;
+  }
+}
+
+.global-nav--nav {
+  @media (max-width: $screen-sm-max) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 -15px;
+    padding: 0 15px;
+    max-height: 500px;
+    border-top: 1px solid $gray;
+
+    &.in {
+      overflow-y: auto;
+    }
+  }
+
+  &.in {
+    display: flex;
+  }
+
+  @media (min-width: $screen-md) {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-height: 48px;
+  }
+}
+
+.global-nav--list {
+  @media (max-width: $screen-sm-max) {
+    margin-top: 7.5px;
+
+    &-item {
+      position: relative;
+      display: block;
+      padding: 10px 0;
+      font-size: 15px;
+    }
+  }
+}
+
+.global-nav--tag {
+  &s {
+    @media (min-width: $screen-md) {
+      display: none;
+    }
+  }
+
+  --link-color: #{$black};
+  --link-color-hover: #{$green};
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: $green;
+  }
+
+  &.active {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.global-nav--external-link {
+  &s {
+    @media (min-width: $screen-md) {
+      order: -1;
+    }
+  }
+
+  --link-color: #{$gray-dark};
+  --link-color-hover: #{$blue-darker};
+  color: $gray-dark;
+  font-size: 14px;
+
+  &:hover {
+    color: $blue-darker;
+  }
+
+  @media (min-width: $screen-md) {
+    margin-right: 20px;
+    font-size: 16px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.global-nav--footer {
+  @media (max-width: $screen-sm-max) {
+    width: calc(100% + 30px);
+    padding: 15px;
+    margin: 10px -15px 0;
+    text-align: center;
+    border-top: 1px solid $gray;
+  }
+}
+
+
+// Additional CSS depended on by outer blog-nav
+///////////////////////////////////////////////////////////////////////////////
+
+.flex { display: flex; }
+.flex-row     { flex-direction: row; }
+.items-center   { align-items: center; }
+
+
+// Customizations/extensions of outer blog-nav
+///////////////////////////////////////////////////////////////////////////////
+
+.global-nav--component {
+
+  a.global-nav--lockup-link {
+    color: initial;
+  }
+
+  .btn-primary {
+    display: block;
+    padding: $padding-large-vertical 30px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+    }
+  }
+
+  // Replacement for .molecule-search
+  .divider {
+    position: relative;
+
+    @media (max-width: $screen-sm-max) {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      width: calc(100% + 30px);
+      margin: 0 -15px;
+      padding: 0 15px;
+      border-bottom: solid 1px $gray;
+    }
+
+    @media (min-width: $screen-md) {
+      border-left: solid 1px $black;
+      margin-left: 30px;
+      margin-right: 30px;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      max-height: 48px;
+    }
+  }
+}
+
+.global-nav--external-link {
+  @media (max-width: $screen-sm-max) {
+    color: $black;
+  }
+}
+
+.global-nav--footer {
+  @media (max-width: $screen-sm-max) {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+}
+
+.global-nav--footer-links {
+  margin-top: 30px;
+
+  @media (min-width: $screen-md) {
+    display: none;
+  }
+}
+
+.global-nav--footer-link {
+  padding: 10px 20px;
+  border-left: 1px solid $gray;
+  color: $black;
+
+  &:first-child {
+    border-left-color: transparent;
+  }
+
+  &:hover {
+    color: $blue-darker;
+  }
+}
+
+// Allow expanded version to use full screen height with sticky footer on mobile
+.global-nav--nav {
+  @media (max-width: $screen-sm-max) {
+    max-height: none;
+  }
+}
+
+// Reset a rule buried deep in the 170K+ character-long minified site.css
+@media (max-width: $screen-sm-max) {
+  body {
+    padding-top: initial;
+  }
+}

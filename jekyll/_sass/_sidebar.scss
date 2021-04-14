@@ -15,7 +15,6 @@ $sidebar-spacing-base: 5px;
   height: 92vh;
   padding: 30px 24px 60px 15px;
   position: absolute;
-  bottom: 0;
   width: 260px;
   border-right: 1px solid $gray-200;
   overflow-y: scroll;
@@ -50,7 +49,6 @@ $sidebar-spacing-base: 5px;
 
   &.fixed {
     position: fixed;
-    top: 118px;
     display: flex;
     flex-direction: column;
   }

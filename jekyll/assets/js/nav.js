@@ -1,3 +1,4 @@
+/*
 // Collapsing submenus on mobile nav
 (function () {
   // grabbing all expandable submenus
@@ -55,3 +56,4 @@
     });
   });
 }());
+*/
