@@ -728,7 +728,7 @@ In the above configuration, we:
   - `pre`: a conditionally run `workflow`, that is only executed when we want to designate this configuration as a `setup 
     workflow` configuration in order to dynamically generate the pipeline's remaining configuration. The `pre` workflow contains a 
     single job that uses the `filter` element of the `path-filtering` orb. This will continue a pipeline in the `setup`
-    state, based on changes made to files defined in the regex expression defined in the `mapping` parameter. If any of 
+    state, based on changes made to files defined in the regex expression of the `mapping` parameter of the `path-filtering` orb. If any of 
     the specified files have been updated, the default pipeline parameters will be updated to their corresponding mappings,
     i.e., in the case of an update to any files in `module-a`, the pipeline parameter, `run-module-a` will be dynamically
     set to `true`, thus, executing the `module-a` job only. 
