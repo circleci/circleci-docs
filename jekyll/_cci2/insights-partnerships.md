@@ -7,6 +7,7 @@ version:
 ---
 
 ## Overview
+{: #overview }
 
 {:toc}
 
@@ -14,6 +15,7 @@ This document describes how you can connect Insights data with third party
 providers.
 
 ### Sumo Logic integration
+{: #sumo-logic-integration }
 
 Sumo Logic users may track and visualize analytical data across all of their
 jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app
@@ -21,6 +23,7 @@ integration from the Sumo Logic partner integrations site.
 
 
 #### The CircleCI dashboard for Sumo Logic
+{: #the-circleci-dashboard-for-sumo-logic }
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
@@ -43,10 +46,12 @@ Install the CircleCI dashboard by using the App Catalog from the dashboard home 
 This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
 #### The Sumo Logic orb
+{: #the-sumo-logic-orb }
 
 Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/sumologic).
 
 ##### 1. Import the Sumo Logic orb.
+{: #1-import-the-sumo-logic-orb }
 {:.no_toc}
 
 Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
@@ -57,6 +62,7 @@ orbs:
 ```
 
 ##### 2. Add _workflow-collector_ to workflow.
+{: #2-add-workflow-collector-to-workflow }
 {:.no_toc}
 
 The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
@@ -77,6 +83,7 @@ workflows:
 ```
 
 ##### 3. Create two source collectors.
+{: #3-create-two-source-collectors }
 {:.no_toc}
 You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
 
@@ -91,6 +98,7 @@ To create the two source collectors:
 6. Save the resulting URL.
 
 ##### 4. Add environment variables.
+{: #4-add-environment-variables }
 {:.no_toc}
 
 For each of the URLs produce in the previous step, create the corresponding environment variable.
@@ -107,5 +115,6 @@ Your Sumo Logic dashboard will now begin to populate with data as each job runs 
 
 
 ## See also
+{: #see-also }
 
 Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
