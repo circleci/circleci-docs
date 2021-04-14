@@ -93,7 +93,7 @@ To create the two source collectors:
 1. From the dashboard select the **Setup Wizard**.
 2. Select **Set Up Streaming Data**.
 3. Scroll to the bottom and select **All Other Sources**.
-4. Select **HTTPS Source**
+4. Select **HTTPS Source**.
 5. For the `Source Category` enter one of the two mentioned above.
 6. Save the resulting URL.
 
