@@ -463,7 +463,7 @@ The following section details the steps you need to follow to download artifacts
 ### Gather insights
 {: #gather-insights }
 
-The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. By making API calls to these endpoints, you can better understand how to optimize your workflows and jobs so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containg information about metrics and credit usage.
+The CircleCI API v2 also includes several endpoints that enable you to retrieve detailed insights into your workflows and individual jobs. By making API calls to these endpoints, you can better understand how to optimize your workflows and jobs so you can increase workflow performance while minimizing credit usage and consumption. The example below describes how you can return information about a single workflow containing information about metrics and credit usage.
 
 #### Returning workflow metrics
 {: #returning-workflow-metrics }
