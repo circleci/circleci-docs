@@ -313,28 +313,6 @@ $padding-large-vertical: 11px;
   }
 }
 
-.global-nav--footer-links {
-  margin-top: 30px;
-
-  @media (min-width: $screen-md) {
-    display: none;
-  }
-}
-
-.global-nav--footer-link {
-  padding: 10px 20px;
-  border-left: 1px solid $gray;
-  color: $black;
-
-  &:first-child {
-    border-left-color: transparent;
-  }
-
-  &:hover {
-    color: $blue-darker;
-  }
-}
-
 // Allow expanded version to use full screen height with sticky footer on mobile
 .global-nav--nav {
   @media (max-width: $screen-sm-max) {
