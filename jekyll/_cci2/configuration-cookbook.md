@@ -610,7 +610,7 @@ workflows:
 
 In the above configuration, we:
 
-- Set `setup: true` to designate this configuration file as a `setup workflow` configuration.
+- Add the line `setup: true` to the top-level of our config, to designate it as a `setup workflow` configuration.
 - Invoke the `continuation` orb so we can use it.
 - Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/2.0/executor-intro/). This job:
     - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
@@ -709,7 +709,7 @@ workflows:
 
 In the above configuration, we:
 
-- Set `setup: true` to designate this configuration file as a `setup workflow` configuration.
+- Add the line `setup: true` to the top-level of our config, to designate it as a `setup workflow` configuration.
 - Invoke the `path-filtering` orb so we can use it.
 - Define three jobs: `module-a`, `module-b` and `module-b-post`:
   - `module-a`: uses a `docker` [`executor`]({{ site.baseurl }}/2.0/executor-intro/#docker) with an alpine image

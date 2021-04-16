@@ -4,7 +4,6 @@ title: "Dynamic Configuration"
 description: "Docs page on using Setup Workflows for Dynamic Configuration"
 version:
 - Cloud
-- Server v2.x
 ---
 
 You may find that instead of manually creating each and every individual CircleCI configuration per project,
@@ -18,7 +17,7 @@ specific builds in specific areas of your project. Otherwise, your repository wi
 your build, test, and deployment processes when any single update is introduced.
 
 To dynamically generate your configuration (or set a pipeline's configuration/parameters) before a project's build, 
-you can set `setup` to `true` in the top-level of your configuration file, thus designating that configuration as a 
+you can set the key`setup` to `true` in the top-level of your configuration file, thus designating that configuration as a 
 `setup workflow`. See the [Getting Started](#getting-started-with-dynamic-config-in-circleci) section below for more 
 information.
 
@@ -71,15 +70,6 @@ before the pipeline is executed, triggered from both the API, or a webhook (A pu
 `continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline)
 in an easy-to-use fashion. See the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 documentation for more information.
-
-### `sandbox` vs. `circleci` Orbs
-{: #sandbox-vs-circleci-orbs }
-
-**Q:** What is the difference between the `sandbox` and `circleci` orbs for both `continuation` and `path-filtering`?
-
-**A:** The `sandbox` versions were our experimental versions of the orbs. These orbs will no longer be receiving updates. 
-The `circleci` orbs are where we are currently pushing all updates. If you are using code that uses the `sandbox` orbs, 
-we recommend updating to the `circleci` orbs.
 
 ## What to Read Next
 {: #what-to-read-next }
