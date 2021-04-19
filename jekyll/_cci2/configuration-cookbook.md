@@ -569,8 +569,13 @@ workflows:
 ## Dynamic Configuration
 {: #dynamic-configuration }
 
-This section provides various examples in using CircleCI's Dynamic Configuration feature. To get started, and for more
-information, see the [documentation]({{ site.baseurl }}/2.0/dynamic-config).
+This section assumes you have already read the [Dynamic Configuration]({{ site.baseurl }}/2.0/dynamic-config) section and
+have followed the steps outlined in the [Getting Started]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci) guide.
+
+The following examples of Dynamic Configuration Usage are provided below:
+
+- [A Basic Example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 
 ### A Basic Example
 {: #a-basic-example }
@@ -590,6 +595,7 @@ setup: true
 orbs:
   continuation: circleci/continuation:0.1.2
 
+# our defined job, and its steps
 jobs:
   setup:
     executor: continuation/default
@@ -602,6 +608,7 @@ jobs:
       - continuation/continue:
           configuration_path: generated_config.yml # use newly generated config to continue
 
+# our single workflow, that triggers the setup job defined above
 workflows:
   setup:
     jobs:
@@ -633,16 +640,18 @@ orb, which allows a pipeline to continue execution based upon the specific paths
 
 For example, consider a monorepo structure like so:
 
+```shell
 .
-+-- config.yml
-+-- _service1
-|   +-- Service1.java
-+-- _service2
-|   +-- Service2.java
-+-- tests
-|   +-- IntegrationTests.java
+├── service1
+│   ├── Service1.java
+├── service2
+│   ├── Service2.java
+├── tests
+│   ├── IntegrationTests.java
+└── config.yaml
+```
 
-An example implementation of CircleCI's Dynamic Configuration for the above use case can be found in the following:
+An example implementation of CircleCI's Dynamic Configuration for the above use case can be found in the following `config.yaml`:
 
 ```yaml
 version: 2.1

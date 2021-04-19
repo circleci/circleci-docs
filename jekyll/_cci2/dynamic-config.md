@@ -12,7 +12,7 @@ parameters or file-paths.
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to
 using multiple repositories to store your code. In the case of using a monorepo, it is of course optimal to only trigger 
-specific builds in specific areas of your project. Otherwise, all of your microservices/project will go through 
+specific builds in specific areas of your project. Otherwise, all of your microservices/sub-projects will go through 
 the entirety of your build, test, and deployment processes when any single update is introduced. 
 
 In both of these (and many other) use cases, automatic, dynamic generation of your configuration files will optimize your
@@ -21,7 +21,7 @@ CircleCI experience and save your team both time and money.
 CircleCI's Dynamic Configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that
 `setup` children pipelines through computed pipeline parameters, or by generating followup pipelines via pre-existing scripts.
 These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml`
-that potentially exist in outside directories.
+that potentially exists in outside directories.
 
 In summary, CircleCI's Dynamic Configuration allows you to:
 
@@ -30,8 +30,8 @@ In summary, CircleCI's Dynamic Configuration allows you to:
 - Trigger separate `config.yml` configurations which exist outside the default parent `.circleci/` directory
 
 To use our Dynamic Configuration feature, you can add the key `setup` with a value of `true` to the top-level of your 
-parent configuration file (in the `.circleci/` directory). This will designate that configuration as a `setup workflow` 
-configuration.
+parent configuration file (in the `.circleci/` directory). This will designate that `config.yaml` as a `setup workflow` 
+configuration, enabling you and your team to get up and running with Dynamic Configuration.
 
 See the [Getting Started](#getting-started-with-dynamic-config-in-circleci) section below for more 
 information.
@@ -48,7 +48,7 @@ To get started with Dynamic Config in CircleCI:
 
 <!-- INCLUDE A SCREENSHOT AFTER GA -->
 
-Now, your project has the ability to dynamically generate configuration.
+Now, your project has the ability to dynamically generate and update configuration.
 
 When using Dynamic Configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) 
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute
@@ -57,7 +57,7 @@ workflows or steps based on updates to specified files, as described in the [Con
 For a basic example on how to use `setup workflows` for Dynamic Configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration).
 Included in the cookbook are other more in-depth examples, which will be updated as this feature matures.
 
-For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when dynamically generating configuration,
+For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when using CircleCI's Dynamic Configuration,
 see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
 
 ## Dynamic Configuration FAQs
@@ -83,8 +83,8 @@ documentation for more information.
 
 ## What to Read Next
 {: #what-to-read-next }
-
-- [A Basic Example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- Cookbook Examples
+  - [A Basic Example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+  - [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 - The [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
 - The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
