@@ -31,7 +31,7 @@ build_api_v2() {
     echo "Merging in JSON patches to correct and augment the OpenAPI spec."
     jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-final.json
     echo "Swapping code samples to use the circle token header."
-    sed -i '.bak' 's/authorization/Circle-Token/g' openapi-final.json; sed -i '.bak' 's/Basic REPLACE_BASIC_AUTH/:CIRCLECI_TOKEN/g' openapi-final.json
+    sed -i '.bak' -e 's/authorization/Circle-Token/g' openapi-final.json; sed -i '.bak' -e 's/Basic REPLACE_BASIC_AUTH/:CIRCLECI_TOKEN/g' openapi-final.json
     echo "Bundling with redoc cli."
     ./node_modules/.bin/redoc-cli bundle openapi-final.json
     echo "Moving build redoc file to api/v2"
