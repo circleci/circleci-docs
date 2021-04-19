@@ -575,18 +575,18 @@ information, see the [documentation]({{ site.baseurl }}/2.0/dynamic-config).
 ### A Basic Example
 {: #a-basic-example }
 
-The following is a basic example using a `setup workflow` configuration to generate a desired configuration. In this
-example, we assume that a `generate-config` script already exists. The script outputs a new configuration YAML based on some type
+The following is a basic example using CircleCI's Dynamic Configuration feature. In this example, we assume that a 
+`generate-config` script already exists. The script outputs a new configuration YAML based on some type
 of work it performs. It could potentially inspect `git` history, pipeline values that get passed to it, or anything
 else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
 
 ```yaml
 version: 2.1
 
-# this designates this configuration file as a setup workflow configuration
+# this allows you to use CircleCI's Dynamic Configuration feature
 setup: true 
 
-# the continuation orb is required in order to use a setup workflow
+# the continuation orb is required in order to use Dynamic Configuration
 orbs:
   continuation: circleci/continuation:0.1.2
 
@@ -610,7 +610,7 @@ workflows:
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it as a `setup workflow` configuration.
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's Dynamic Configuration feature
 - Invoke the `continuation` orb so we can use it.
 - Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/2.0/executor-intro/). This job:
     - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
@@ -631,124 +631,102 @@ This would be beneficial in the case of your code/microservices being stored in 
 To achieve this, CircleCI has provided the [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering)
 orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
 
-An example `setup workflow` configuration for this is provided below:
+For example, consider a monorepo structure like so:
+
+.
++-- config.yml
++-- _service1
+|   +-- Service1.java
++-- _service2
+|   +-- Service2.java
++-- tests
+|   +-- IntegrationTests.java
+
+An example implementation of CircleCI's Dynamic Configuration for the above use case can be found in the following:
 
 ```yaml
 version: 2.1
 
-# this designates this configuration file as a setup workflow configuration
-setup: << pipeline.parameters.run-setup >>
+# this allows you to use CircleCI's Dynamic Configuration feature
+setup: true
 
 # the path-filtering orb is required to continue a pipeline based on the path of an updated fileset
+# the maven orb is also used, as an example on using Dynamic Configuration to build a Java project.
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
+  maven: circleci/maven@1.2.0
 
-# the default pipeline parameters, which can be updated/set in order to dynamically generate configuration
+# the default pipeline parameters, which will be updated according to the results of the path-filtering orb
 parameters:
-  run-setup:
-    type: boolean
-    default: true
-  run-module-a:
+  run-service-1-job:
     type: boolean
     default: false
-  run-module-b:
+  run-service-2-job:
     type: boolean
     default: false
 
 # our defined jobs
 jobs:
-  module-a:
-    docker:
-      - image: alpine
-    steps:
-      - checkout
-      - run: "echo 'Hello from module A!'"
-      - run: cat module-a/README.md
+  check-updated-files:
+    - path-filtering/filter:
+        # 3-column, whitespace-delimited mapping. One mapping per line: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>.
+        mapping: |
+          service1/.* run-service-1-job true
+          service2/.* run-service-2-job true
+        base-revision: master
+        # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. in this case, we are using the parent Dynamic Configuration itself.
+        config-path: ".circleci/config.yml"
+        
+  build-service-1:
+    - maven/test:
+        command: 'install -DskipTests'
+        app_src_directory: 'service1'
 
-  module-b:
-    machine: true
-    steps:
-      - checkout
-      - run: "echo 'Hello from module B!'"
-      - run: cat module-b/README.md
+  build-service-2:
+    - maven/test:
+        command: 'install -DskipTests'
+        app_src_directory: 'service2'
 
-  module-b-post:
-    docker:
-      - image: alpine
-    steps:
-      - run: "echo 'Continuing module B'"
-      - run: env
+  run-integration-tests:
+    - maven/test:
+        command: '-X verify'
+        app_src_directory: 'tests'
 
-# our workflows, one of which uses the path-filtering orb
+# our conditionally executed workflows, based on the results of the pipeline parameter values
 workflows:
-  pre:
-    when: << pipeline.parameters.run-setup >>
+  service-1:
+    when: << pipeline.parameters.run-build-service-1-job >>
     jobs:
-      - path-filtering/filter:
-          # The revision to compare the current one against (i.e., which branch)
-          base-revision: main
-          # The location of the configuration to continue the pipeline with (in this case, we use the original configuration itself)
-          config-path: .circleci/config.yml
-          # 3-column, whitespace-delimited mapping. One mapping per line: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>.
-          mapping: |
-            .* run-setup false
-            module-a/.* run-module-a true
-            module-b/.* run-module-b true
-  module-a:
-    when: << pipeline.parameters.run-module-a >>
+      - build-service-1
+  service-2:
+    when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
-      - module-a
-  module-b:
-    when: << pipeline.parameters.run-module-b >>
+      - build-service-2
+  run-integration-tests:
+    when: 
+      or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
     jobs:
-      - module-b
-      - module-b-post:
-          requires:
-            - module-b
+      - run-integration-tests
+  always-run:
+    jobs:
+      - check-updated-files
 ```
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it as a `setup workflow` configuration.
-- Invoke the `path-filtering` orb so we can use it.
-- Define three jobs: `module-a`, `module-b` and `module-b-post`:
-  - `module-a`: uses a `docker` [`executor`]({{ site.baseurl }}/2.0/executor-intro/#docker) with an alpine image
-     - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
-     - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to `echo` output
-     - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to `cat` the output of the README file in the `module-a` directory
-  - `module-b`: uses a `machine` [`executor`]({{ site.baseurl }}/2.0/executor-intro/#machine) 
-    - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
-    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to `echo` output
-    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to `cat` the output of the README file in the `module-b` directory
-  - `module-b-post`: uses a `docker` [`executor`]({{ site.baseurl }}/2.0/executor-intro/#docker) with an alpine image
-    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to `echo` output
-    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to run the `env` command, which will print a list of currently set environment variables
-    
-- Define three workflows: `pre`, `module-a` and `module-b`:
-  - `pre`: a conditionally run `workflow`, that is only executed when we want to designate this configuration as a `setup 
-    workflow` configuration in order to dynamically generate the pipeline's remaining configuration. The `pre` workflow contains a 
-    single job that uses the `filter` element of the `path-filtering` orb. This will continue a pipeline in the `setup`
-    state, based on changes made to files defined in the regex expression of the `mapping` parameter of the `path-filtering` orb. If any of 
-    the specified files have been updated, the default pipeline parameters will be updated to their corresponding mappings,
-    i.e., in the case of an update to any files in `module-a`, the pipeline parameter, `run-module-a` will be dynamically
-    set to `true`, thus, executing the `module-a` job only. 
-    
-    **NOTE:** the `continuation` orb is not required here, as was the case in the [previous example](#a-basic-example).
-    The `path-filtering` orb handles `continuation` automatically for you. 
-    
-  - `module-a`: a conditionally run `workflow`, that runs the `module-a` job when the `run-module-a` pipeline parameter is updated
-  to `true` (which is only updated if any changes were made to the specified files of the regex `mapping` in the `pre` workflow)
-
-  - `module-b`: a conditionally run `workflow`, that runs two jobs when the `run-module-b` pipeline parameter is updated
-  to `true` (which is only updated if any changes were made to the specified files of the regex `mapping` in the `pre` workflow).
-  The `module-b` `workflow` does the following:
-    - Calls the `module-b` job defined in the `jobs` section
-    - Calls the `module-b-post` job defined in the `jobs` section (which simply outputs currently set environment variables).
-      The `requires` key indicates that the `module-b` job must succeed in order for this `workflow` to be executed.
-      For instance, if no changes were made to any of the specified filepaths, you might see the following in the CircleCI
-      pipeline output:
-
-      ![Pipeline Filtering]({{ site.baseurl }}/assets/img/docs/dynamic-config-path-filtering-print-env.png).
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's Dynamic Configuration feature
+- Invoke the `path-filtering` and `maven` orbs so we can use them.
+- Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
+  - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
+    the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
+  - The `build-service-1` job uses the `maven` orb to compile/install the service1 code, but skips any tests
+  - The `build-service-2` job uses the `maven` orb to compile/install the service2 code, but skips any tests
+  - The `run-integration-tests` job uses the `maven` orb to run any integration tests
+- Define four workflows, three of which are conditionally executed:
+  - The `service-1` workflow triggers the `build-service-1` job when the pipeline parameter value mapped to run-build-service-1-job is set to `true`
+  - The `service-2` workflow triggers the `build-service-2` job when the pipeline parameter value mapped to run-build-service-2-job is set to `true`
+  - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
+  - The `check-updated-files` workflow will always run any time this pipeline is triggered
 
 See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more 
 information on available elements and required parameters.

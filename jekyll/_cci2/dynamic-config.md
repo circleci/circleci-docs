@@ -7,18 +7,33 @@ version:
 ---
 
 You may find that instead of manually creating each and every individual CircleCI configuration per project,
-you would prefer to generate these configurations dynamically, before the build begins or is triggered. Or, you may
-prefer to set a specific [pipeline's]({{ site.baseurl }}/2.0/concepts/#pipelines) configuration or parameters 
-before a build is run.
+you would prefer to generate these configurations dynamically depending on specific [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines) 
+parameters or file-paths.
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to
 using multiple repositories to store your code. In the case of using a monorepo, it is of course optimal to only trigger 
-specific builds in specific areas of your project. Otherwise, your repository will go through the entirety of 
-your build, test, and deployment processes when any single update is introduced.
+specific builds in specific areas of your project. Otherwise, all of your microservices/project will go through 
+the entirety of your build, test, and deployment processes when any single update is introduced. 
 
-To dynamically generate your configuration (or set a pipeline's configuration/parameters) before a project's build, 
-you can set the key`setup` to `true` in the top-level of your configuration file, thus designating that configuration as a 
-`setup workflow`. See the [Getting Started](#getting-started-with-dynamic-config-in-circleci) section below for more 
+In both of these (and many other) use cases, automatic, dynamic generation of your configuration files will optimize your
+CircleCI experience and save your team both time and money.
+
+CircleCI's Dynamic Configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that
+`setup` children pipelines through computed pipeline parameters, or by generating followup pipelines via pre-existing scripts.
+These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml`
+that potentially exist in outside directories.
+
+In summary, CircleCI's Dynamic Configuration allows you to:
+
+- Execute conditional workflows/commands
+- Pass pipeline parameter values and/or generate additional configuration
+- Trigger separate `config.yml` configurations which exist outside the default parent `.circleci/` directory
+
+To use our Dynamic Configuration feature, you can add the key `setup` with a value of `true` to the top-level of your 
+parent configuration file (in the `.circleci/` directory). This will designate that configuration as a `setup workflow` 
+configuration.
+
+See the [Getting Started](#getting-started-with-dynamic-config-in-circleci) section below for more 
 information.
 
 ## Getting Started with Dynamic Config in CircleCI
@@ -33,14 +48,9 @@ To get started with Dynamic Config in CircleCI:
 
 <!-- INCLUDE A SCREENSHOT AFTER GA -->
 
-Now, your project has the ability to run a `setup workflow`, or a [`workflow`]({{ site.baseurl }}/2.0/workflows/) that
-can set up the pipeline by any of the following means:
+Now, your project has the ability to dynamically generate configuration.
 
-- Generating a configuration file via an existing script
-- Setting pipeline parameters
-- Selecting existing configuration files
-
-At the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) 
+When using Dynamic Configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) 
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute
 workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
 
