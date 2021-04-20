@@ -2,6 +2,7 @@
 $(document).ready(function () {
   $('.global-nav--search-button').on('click', function (e) {
     e.preventDefault();
+    $('#global-nav').collapse('hide');
     $('body').addClass('search-open');
     $('.global-nav--search-bar .instantsearch-search').focus();
   });
