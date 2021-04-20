@@ -231,13 +231,19 @@ $padding-large-vertical: 11px;
 .global-nav--search-bar {
   position: absolute;
   left: $sidebar-width;
+  top: 50%;
+  margin-top: -21px;
 
-  .instantsearch-search {
-    border: 1px solid #BFBFBF;
-    border-radius: 2px;
+  input.instantsearch-search {
+    border: none;
 
-    &:focus {
-      border-color: #279AF1
+    @media (min-width: $screen-md) {
+      border: 1px solid #BFBFBF;
+      border-radius: 2px;
+
+      &:focus {
+        border-color: #279AF1
+      }
     }
   }
 
@@ -248,6 +254,37 @@ $padding-large-vertical: 11px;
   }
 
   @media (max-width: $screen-sm-max) {
+    left: 0;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .global-nav--search-bar {
+    display: none; // hidden by default; shown when search is open
+  }
+  body.search-open .global-nav--search-bar {
+    display: block;
+  }
+}
+
+
+// Mobile Search Button
+///////////////////////////////////////////////////////////////////////////////
+
+.global-nav--search-button {
+  display: inline-block;
+  border-right: 1px solid black;
+  padding: 5px 15px;
+
+  svg {
+    width: 17px;
+    height: auto;
+  }
+
+  @media (min-width: $screen-md) {
     display: none;
   }
 }
@@ -290,7 +327,7 @@ $padding-large-vertical: 11px;
 
     @media (min-width: $screen-md) {
       border-left: solid 1px $black;
-      margin-left: 10px;
+      margin-left: 30px;
       margin-right: 30px;
       align-self: stretch;
       display: flex;

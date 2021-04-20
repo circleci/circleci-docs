@@ -214,8 +214,10 @@ export function init () {
   });
 
   window.addEventListener('load', renderResults);
-  searchResetButton.addEventListener('click', function () {
+  searchResetButton.addEventListener('click', function (e) {
+    e.preventDefault();
     searchBox.value = ''
+    searchBox.blur();
     renderResults();
   });
 

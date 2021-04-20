@@ -1,3 +1,12 @@
+// Modal search on mobile
+$(document).ready(function () {
+  $('.global-nav--search-button').on('click', function (e) {
+    e.preventDefault();
+    $('body').addClass('search-open');
+    $('.global-nav--search-bar .instantsearch-search').focus();
+  });
+}());
+
 /*
 // Collapsing submenus on mobile nav
 (function () {
