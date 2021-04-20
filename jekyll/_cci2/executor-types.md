@@ -243,8 +243,7 @@ The following example uses an image and enables [Docker Layer Caching]({{ site.b
 version: 2.1
 jobs:
   build:
-    machine:
-      image: ubuntu-1604:202007-01
+    machine: true
       docker_layer_caching: true    # default - false
 ```
 
