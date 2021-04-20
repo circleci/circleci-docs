@@ -106,4 +106,4 @@ human-readable summary
 [here](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Everything in this repository not covered above is licensed under the [included
-MIT license](./docs/licence.md).
+MIT license](./docs/licence.md). 
