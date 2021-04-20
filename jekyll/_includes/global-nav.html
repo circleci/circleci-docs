@@ -8,6 +8,7 @@
         <a
           href="{{ '/' | language_relative_url }}"
           class="flex flex-row items-center global-nav--lockup-link"
+          data-analytics-action="click-outer-cta"
         >
           {% include utility-icons/circleci-wordmark.svg %}
           <span class="global-nav--lockup-title">
@@ -36,6 +37,7 @@
           <a
             href="{{ '/' | outer_url }}"
             class="global-nav--external-link global-nav--list-item"
+            data-analytics-action="click-outer-cta"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -47,9 +49,7 @@
             href="{{ '/signup/' | outer_url }}"
             class="btn-primary"
             target="_blank"
-            data-analytics-action="signup-clicked"
-            data-analytics-location="nav"
-            data-optimizely="signup_button_clicked"
+            data-analytics-action="click-outer-cta"
           >
             Start Building for Free
           </a>
