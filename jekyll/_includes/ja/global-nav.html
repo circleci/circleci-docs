@@ -1,161 +1,60 @@
-<nav class="nav-toggle two">
+<div class="global-nav--component">
   <div class="container-semi-fluid">
-        <a href="#main" class="nav-skip-button">
-          Skip to content
+    <a href="#main" class="nav-skip-button">
+      Skip to content
+    </a>
+    <div class="global-nav--row-desktop">
+      <div class="global-nav--row-mobile">
+        <a
+          href="{{ '/' | language_relative_url }}"
+          class="flex flex-row items-center global-nav--lockup-link"
+        >
+          {% include utility-icons/circleci-wordmark.svg %}
+          <span class="global-nav--lockup-title">
+            ドキュメント
+          </span>
         </a>
-
-        <div class="widescreen">
-          <a href="{{ '/' | outer_url }}" class="logo"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
-
-
-          <ul class="left-links main-nav">
-            <li class="nav-item"><a href="{{ '/product/' | outer_url }}">製品概要</a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="{{ '/product/' | outer_url }}">製品概要</a></li>
-                  <li class="subnav-item"><a href="{{ '/product/#how-it-works' | outer_url }}">CircleCI のメリット</a></li>
-                  <li class="subnav-item"><a href="{{ '/product/#features' | outer_url }}">機能</a></li>
-                  <li class="subnav-item"><a href="{{ '/build-environments/' | outer_url }}">ビルド環境</a></li>
-                  <li class="subnav-item"><a href="{{ '/product/#hosting-options' | outer_url }}">ホスティング オプション</a></li>
-                  <li class="subnav-item"><a href="{{ '/integrations/' | outer_url }}">インテグレーション</a></li>
-                </ul>
-              </div>
-            </li>
-
-            <li class="nav-item"><a href="{{ '/pricing/' | outer_url }}">料金プラン</a></li>
-            <li class="nav-item"><a href="{{ '/enterprise/' | outer_url }}">エンタープライズ向け</a></li>
-            <li class="nav-item">
-              <a href="{{ '' | devhub_url }}">
-                開発者向け
-              </a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="{{ '/2.0/hello-world/' | language_relative_url }}">Hello World</a></li>
-                  <li class="subnav-item"><a href="{{ '/' | language_relative_url }}">ドキュメント</a></li>
-                  <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">コミュニティ フォーラム</a></li>
-                  <li class="subnav-item"><a href="{{ '/orbs/' | outer_url }}">Orbs</a></li>
-                  <li class="subnav-item"><a href="https://circleci.com/docs/api/v2/">API</a></li>
-                  <li class="subnav-item"><a href="{{ '/open-source/' | outer_url }}">オープンソース</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="default-item nav-item"><a href="{{ '/about/' | outer_url }}">会社概要</a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="{{ '/about/' | outer_url }}">CircleCI について</a></li>
-                  <li class="subnav-item"><a href="{{ '/customers/' | outer_url }}"> ケース スタディー</a></li>
-                  <li class="subnav-item"><a href="{{ '/blog/' | outer_url }}">ブログ</a></li>
-                  <li class="subnav-item"><a href="{{ '/careers/' | outer_url }}">採用情報</a></li>
-                  <li class="subnav-item"><a href="{{ '/contact/' | outer_url }}">お問い合わせ</a></li>
-                  <li class="subnav-item"><a href="{{ '/partners/' | outer_url }}">パートナー募集</a></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-
-          <ul class="right-links main-nav">
-            <li class="default-item nav-item">
-              <a href="{{ '/contact/' | outer_url }}" data-analytics="top-nav-contact-us">
-                お問い合わせ
-              </a>
-            </li>
-            <li class="default-item nav-item">
-              <a href="#">
-                サポート
-              </a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="https://academy.circleci.com/?access_code=public-2020" target="_blank">トレーニング</a></li>
-                  <li class="subnav-item"><a href="https://support.circleci.com/hc/ja" target="_blank">サポート情報</a></li>
-                  <li class="subnav-item"><a href="https://status.circleci.com/" target="_blank">システム稼働状況</a></li>
-                  <li class="subnav-item"><a href="https://ideas.circleci.com/" target="_blank">改善要望</a></li>
-                  <li class="subnav-item"><a href="{{ '/support/premium-support/' | outer_url }}">プレミアム サポート</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="divider-left nav-item visitor-item"><a href="{{ '/vcs-authorize/' | outer_url }}" data-hj-masked>ログイン</a></li>
-            <li class="nav-item visitor-item"><a class="btn-primary small" href="{{ '/signup/' | outer_url }}" data-analytics-action="signup-clicked" data-analytics-location="nav" data-optimizely="signup_button_clicked">登録</a></li>
-            <li class="dashboard-link desktop-nav divider-left"><a href="https://circleci.com/dashboard">アプリへ移動</a></li>
-          </ul>
-
-        </div>
-
-        <div class="narrowscreen">
-
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile-navigation" aria-expanded="false" aria-controls="#mobile-navigation">
+        <div>
+          <a href="#" class="global-nav--search-button">
+            {% include utility-icons/search.svg %}
+          </a>
+          <button type="button" class="global-nav--toggle collapsed" data-toggle="collapse" data-target="#global-nav" aria-expanded="false" aria-controls="blog-subnav">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar top-bar"></span>
             <span class="icon-bar middle-bar"></span>
             <span class="icon-bar bottom-bar"></span>
           </button>
-
-          <a href="{{ '/' | outer_url }}"><img class="logo" src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" alt="CircleCI Home"></a>
-
-
-          <span class="login">
-            <a href="{{ '/vcs-authorize/' | outer_url }}" data-hj-masked class="mobile-nav signup visitor-item" data-analytics-location="nav" >ログイン</a>
-            <a href="https://circleci.com/dashboard" class="dashboard-link mobile-nav">アプリへ移動</a>
-          </span>
-
-          <ul class="dropdown-menu2" id="mobile-navigation">
-            <li><a href="{{ '/signup/' | outer_url }}" data-analytics-action="signup-clicked" data-optimizely="signup_button_clicked" class="btn-primary">Sign Up for Free</a></li>
-            <li class="arrow collapsed border-bottom">
-              <span class="heading">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                製品概要
-              </span>
-              <ul class="subnav">
-                <li class="subnav-item"><a href="{{ '/product/' | outer_url }}">製品概要</a></li>
-                <li class="subnav-item"><a href="{{ '/product/#how-it-works' | outer_url }}">CircleCI のメリット</a></li>
-                <li class="subnav-item"><a href="{{ '/product/#features' | outer_url }}">機能</a></li>
-                <li class="subnav-item"><a href="{{ '/build-environments/' | outer_url }}">ビルド環境</a></li>
-                <li class="subnav-item"><a href="{{ '/product/#hosting-options' | outer_url }}">ホスティング オプション</a></li>
-                <li class="subnav-item"><a href="{{ '/integrations/' | outer_url }}">インテグレーション</a></li>
-              </ul>
-            </li>
-            <li class="border-bottom"><a href="{{ '/pricing/' | outer_url }}">料金プラン</a></li>
-            <li class="border-bottom"><a href="{{ '/enterprise/' | outer_url }}">エンタープライズ向け</a></li>
-            <li class="arrow collapsed border-bottom">
-              <span class="heading">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                開発者向け
-              </span>
-              <ul class="subnav">
-                <li class="subnav-item"><a href="{{ '' | devhub_url }}">デベロッパー ハブ</a></li>
-                <li class="subnav-item"><a href="{{ '/2.0/hello-world/' | language_relative_url }}">Getting Started</a></li>
-                <li class="subnav-item"><a href="{{ '/' | language_relative_url }}">ドキュメント</a></li>
-                <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">コミュニティ フォーラム</a></li>
-                <li class="subnav-item"><a href="{{ '/orbs/' | outer_url }}">Orbs</a></li>
-                <li class="subnav-item"><a href="https://circleci.com/docs/api/v2/">API</a></li>
-                <li class="subnav-item"><a href="{{ '/open-source/' | outer_url }}">オープンソース</a></li>
-              </ul>
-            </li>
-            <li class="arrow collapsed border-bottom">
-              <span class="heading">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                会社概要
-              </span>
-              <ul class="subnav">
-                <li class="subnav-item"><a href="{{ '/about/' | outer_url }}">CircleCI について</a></li>
-                <li class="subnav-item"><a href="{{ '/customers/' | outer_url }}">ケース スタディー</a></li>
-                <li class="subnav-item"><a href="{{ '/blog/' | outer_url }}">ブログ</a></li>
-                <li class="subnav-item"><a href="{{ '/careers/' | outer_url }}">採用情報</a></li>
-                <li class="subnav-item"><a href="{{ '/contact/' | outer_url }}">お問い合わせ</a></li>
-                <li class="subnav-item"><a href="{{ '/partners/' | outer_url }}">パートナー募集</a></li>
-              </ul>
-            </li>
-            <li class="arrow collapsed border-bottom">
-              <i class="fa fa-angle-right" aria-hidden="true"></i>
-              サポート
-              <ul class="subnav">
-                <li class="subnav-item"><a href="https://academy.circleci.com/?access_code=public-2020" target="_blank">トレーニング</a></li>
-                <li class="subnav-item"><a href="https://support.circleci.com/ja" target="_blank">サポート情報</a></li>
-                <li class="subnav-item"><a href="https://status.circleci.com/" target="_blank">システム稼働状況</a></li>
-                <li class="subnav-item"><a href="https://ideas.circleci.com/" target="_blank">改善要望</a></li>
-                <li class="subnav-item"><a href="{{ '/support/premium-support/' | outer_url }}">プレミアム サポート</a></li>
-              </ul>
-            </li>
-          </ul>
+          <div class="global-nav--search-bar">
+            {% include main-searchbar.html %}
+          </div>
         </div>
+      </div>
+      <nav class="collapse global-nav--nav" id="global-nav">
+        <div class="divider"></div>
+        {% include_cached mobile-sidebar.html site=site page=page %}
+        <div class="global-nav--list global-nav--external-links">
+          <a
+            href="{{ '/' | outer_url }}"
+            class="global-nav--external-link global-nav--list-item"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            circleci.com&nbsp;&nbsp;{% include utility-icons/external.svg %}
+          </a>
+        </div>
+        <div class="global-nav--footer">
+          <a
+            href="{{ '/signup/' | outer_url }}"
+            class="btn-primary"
+            target="_blank"
+            data-analytics-action="signup-clicked"
+            data-analytics-location="nav"
+            data-optimizely="signup_button_clicked"
+          >
+            無料でビルドを開始する
+          </a>
+        </div>
+      </nav>
+    </div>
   </div>
-</nav>
+</div>
