@@ -14,10 +14,6 @@ This document will walk you through the setup steps required to use an Arm
 resource on CircleCI. Arm resources are not available on CircleCI Server 1.x or
 2.x.
 
-<div class="alert alert-info" role="alert">
-  <b>Note:</b> If you are interested in using Arm resources, please fill out this <a href="https://www2.circleci.com/arm.html"><b>contact form</b></a>.
-</div>
-
 CircleCI offers multiple kinds of environments for you to run jobs in. In your
 CircleCI `config.yml` file you can choose the right environment for your job using the
 [`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class)
