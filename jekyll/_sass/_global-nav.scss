@@ -385,3 +385,25 @@ $padding-large-vertical: 11px;
     padding-top: initial;
   }
 }
+
+// Skip button
+// https://www.bignerdranch.com/blog/web-accessibility-skip-navigation-links/
+a.nav-skip-button {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  text-align: left;
+  overflow: hidden;
+
+  &:active,
+  &:focus,
+  &:hover {
+    left: 15px;
+    top: 0;
+    width: auto;
+    height: auto;
+    overflow: visible;
+  }
+}
