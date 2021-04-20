@@ -141,46 +141,18 @@ $sidebar-width: 260px;
 }
 
 .sidebar-mobile-wrapper {
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  padding: 50px 0 0 0;
-  width: 100%;
-  background: $gray-100;
   display: none;
-  cursor: pointer;
-
-  .icon {
-    width: 24px;
-  }
-
-  .mobile-sidebar-item {
-    display: block;
-    width: 100%;
-    padding: $spacing-small-vertical 16px;
-
-    &.hidden {
-      display: none;
-    }
-
-    span {
-      display: inline-block;
-      margin-left: $spacing-small-horizontal;
-    }
-
-    .arrow {
-      float: right;
-      margin-top: 5px;
-      transform: rotate(90deg);
-    }
-  }
+  width: 100%;
 
   .mobile-sidebar {
     @extend .sidebar;
-    padding-right: 16px;
     width: 100%;
-    left: 0;
-    top: 182px;
-    z-index: 2;
+
+    // Reset various parts of .sidebar
+    position: initial;
+    height: initial;
+    background: initial;
+    border: initial;
 
     .main-nav-item {
       width: 100%;
