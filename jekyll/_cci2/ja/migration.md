@@ -13,6 +13,7 @@ Take a look through some of the tips and best practices listed below, for migrat
 {:toc}
 
 ## You can build the same project on both CircleCI 1.0 and 2.0!
+{: #you-can-build-the-same-project-on-both-circleci-10-and-20 }
 
 When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:
 
@@ -23,6 +24,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - すべてが正常に機能するようになったら、新しい設定ファイルを含むブランチを主プロジェクトにマージします。
 
 ## Tips for setting up CircleCI 2.0
+{: #tips-for-setting-up-circleci-20 }
 
 - `steps` にリストされたコマンドは、`docker` セクションで最初にリストされたコンテナ内でのみ実行されます。
 - こまめにビルドを実行して構成をテストします。そうすれば、何かが壊れても、最後のビルドから何を変更していたかがわかります。
@@ -56,6 +58,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 
 ## Tips for migrating from 1.0 to 2.0
+{: #tips-for-migrating-from-10-to-20 }
 
 - `$CIRCLE_ARTIFACTS` と `$CIRCLE_TEST_REPORTS` は 2.0 で定義されていないことに注意してください。
     - ユーザーご自身で定義できますが、その場合は `mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS` を実行してください。
@@ -67,14 +70,17 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 
 ## Python
+{: #python }
 - 通常、テストの実行にはファイル名ではなくクラス名が必要です。
 
 ## Ruby
+{: #ruby }
 - Ruby ファイルは、AUFS で想定される順序とは異なる順序でロードされる可能性があります。
 - `$RAILS_ENV` と `$RACK_ENV` を `test` と定義します (1.0 では自動で行われていました)。
 
 
 ## Java
+{: #java }
 - Java (アプリ、ツール、サービス) は使用可能な RAM の量を認識しないため、OOM (メモリ不足) が発生する可能性があります。 その場合は環境変数を定義する必要があります。 それでもメモリ不足になる場合は、コンテナを大きくする必要があります。
     - [CircleCI のブログ記事「How to Handle OOM Errors (OOM エラーの対処方法)」](https://circleci.com/blog/how-to-handle-java-oom-errors/)
 - Scala プロジェクトのファイル名は長すぎる場合があるため、`-Xmax-classfile-name` フラグを追加してください。
@@ -96,13 +102,14 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Tests can sometimes be flaky and may appear to fail for no reason. 失敗したブラウザー テストは自動的に再実行できます。ただし、タイミング データは破損します。
 - Take screenshots of failed tests to make debugging easier.
 - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. ブラウザー イメージの 1 つから以下を実行してください。
+
 ```
-            ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
-            sudo apt install vnc4server metacity
-            vnc4server -geometry 1280x1024 -depth 24
-            export DISPLAY=:1.0
-            metacity &
-            firefox &
+ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
+sudo apt install vnc4server metacity
+vnc4server -geometry 1280x1024 -depth 24
+export DISPLAY=:1.0
+metacity &
+firefox &
 ```
 
 ## Tips for docker
@@ -139,11 +146,13 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - You are limited by your imagination in CircleCI 2.0
 - The shell can be set to Python to just execute arbitrary Python in the YAML
-```
+
+```yml
             - run:
                 shell: /usr/bin/python3
                 command:
                     import sys
                     print(sys.version)
 ```
+
 - You can be clever with bash to achieve whatever you need `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
