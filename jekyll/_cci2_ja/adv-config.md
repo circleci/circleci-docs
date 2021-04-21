@@ -18,9 +18,6 @@ jobs:
   shellcheck:
     docker:
       - image: nlknguyen/alpine-shellcheck:v0.4.6
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -38,9 +35,6 @@ jobs:
   build:
     docker:
       - image: circleci/node-jessie-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: mkdir test-reports
@@ -65,18 +59,12 @@ jobs:
     docker:
 
       - image: circleci/python:3.6.2-stretch-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # サービス コンテナ イメージ
 
       - image: circleci/postgres:9.6.5-alpine-ram
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
 
@@ -123,10 +111,10 @@ jobs:
 設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
 
 - 長いインライン bash スクリプトを使用するのはやめましょう。特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、クリアで読みやすい設定ファイルにします。
-- フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
+- フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前に実行する必要があります。
 - ワークフローの*最初*に setup ジョブを実行すると、何らかの事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備に役立ちます。
 
 ## 関連項目
 
-[最適化]({{ site.baseurl }}/ja/2.0/optimizations/)
+[最適化]({{ site.baseurl }}/2.0/optimizations/)

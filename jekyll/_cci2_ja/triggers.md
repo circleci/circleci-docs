@@ -83,4 +83,4 @@ jobs:
 
 ## 関連項目
 
-[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)
+[ワークフロー]({{ site.baseurl }}/2.0/workflows/)

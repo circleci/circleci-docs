@@ -3,6 +3,8 @@ layout: classic-docs
 title: "ビルド アーティファクトの保存"
 short-title: "ビルド アーティファクトの保存"
 description: "ビルド中に作成されるアーティファクトのアップロード例"
+categories:
+  - configuring-jobs
 order: 70
 ---
 
@@ -13,9 +15,9 @@ order: 70
 
 ## アーティファクトの概要
 
-アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納するストレージとして使用できます。
+アーティファクトには、ジョブが完了した後もデータが維持され、ビルド プロセス出力を格納する長期ストレージとして使用できます。
 
-たとえば、Java のビルドおよびテストのプロセスが 1 つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も使用可能な状態に維持できます。
+たとえば、Java のビルドおよびテストのプロセスが 1 つ終了すると、プロセスの出力が `.jar` ファイルとして保存されます。 CircleCI では、このファイルをアーティファクトとして保存し、プロセスの終了後も長期間使用可能な状態に維持できます。
 
 ![アーティファクトのデータ フロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Artifact.png)
 
@@ -25,9 +27,7 @@ Android アプリとしてパッケージ化されるプロジェクトの場合
 
 ![[Artifacts (アーティファクト)] タブのスクリーンショット]({{ site.baseurl }}/assets/img/docs/artifacts.png)
 
-アーティファクトへのリンクは、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示されます。 アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。
-
-**アーティファクトへは作成から30日間アクセスできます。**  ドキュメントや永続的なコンテンツのソースとして依存している場合、S3や静的Webサイト用のGitHub Pages、Netlifyのような専用領域にデプロイすることを推奨します。
+アーティファクトへのリンクは、**[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブに表示されます。 アーティファクトは Amazon S3 に保存され、プライベート プロジェクト用の CircleCI アカウントを使用して保護されます。 `curl` ファイルのサイズは 3 GB に制限されています。 アーティファクトはビルドの前後で役立つように設計されています。 長期的な将来の保証を備えたソフトウェア ディストリビューションのメカニズムとしてアーティファクトに依存することはお勧めできません。
 
 **メモ:** アップロードされたアーティファクトのファイル名は、[Java URLEncoder](https://docs.oracle.com/javase/7/docs/api/java/net/URLEncoder.html) を使用してエンコードされます。 アプリケーション内の特定のパスにあるアーティファクトを探すときには、この点にご注意ください。
 
@@ -41,9 +41,6 @@ jobs:
   build:
     docker:
       - image: python:3.6.3-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     working_directory: /tmp
     steps:
@@ -102,9 +99,6 @@ jobs:
   build:
     docker:
       - image: gcc:8.1.0
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/work
     steps:
       - checkout
@@ -134,7 +128,7 @@ CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Ar
 
 `curl` を使用してアーティファクトをダウンロードするには、以下の手順を実行します。
 
-1. [パーソナル API トークンを作成]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
+1. [パーソナル API トークンを作成]({{ site.baseurl }}/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)し、クリップボードにコピーします。
 
 2. ターミナル ウィンドウで、アーティファクトを保存するディレクトリに `cd` します。
 
@@ -143,9 +137,10 @@ CircleCI がジョブを実行すると、**[Job (ジョブ)] ページ**の [Ar
 ```bash
 export CIRCLE_TOKEN=':your_token'
 
-curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
+curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts?circle-token=$CIRCLE_TOKEN \
    | grep -o 'https://[^"]*' \
-   | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
+   | sed -e "s/$/?circle-token=$CIRCLE_TOKEN/" \
+   | wget -v -i -
 ```
 
 同様に、ビルドの*最新*のアーティファクトをダウンロードする場合は、curl の呼び出しを以下のように URL で置き換えます。
@@ -173,4 +168,4 @@ CircleCI の API を使用してアーティファクトを操作する詳しい
 ## 関連項目
 {:.no_toc}
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)

@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
+パイプライン変数を使用すると、再利用可能なパイプラインを構成できます。 パイプライン変数を使用するには、[パイプライン]({{ site.baseurl }}/2.0/build-processing)を有効化し、設定ファイルで[バージョン]({{ site.baseurl }}/2.0/configuration-reference/#version) `2.1` 以上を指定する必要があります。
 
 パイプライン変数には、次の 2 つの種類があります。
 
@@ -58,7 +58,7 @@ jobs:
 * 整数
 * 列挙
 
-詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#パラメーターの構文)」を参照してください。
+詳しい使用方法については、「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」を参照してください。
 
 パイプライン パラメーターは値として参照され、スコープ `pipeline.parameters` の下で設定ファイル内の変数として使用できます。
 

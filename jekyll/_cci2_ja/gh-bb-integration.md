@@ -5,8 +5,6 @@ description: GitHub または Bitbucket の使用
 categories:
   - migration
 Order: 60
-version:
-- Cloud
 ---
 
 以下のセクションに沿って、CircleCI での GitHub、GitHub Enterprise、または Bitbucket Cloud の利用について概説します。
@@ -17,7 +15,7 @@ version:
 ## 概要
 {:.no_toc}
 
-CircleCI を使用する際には、 VCS として GitHub もしくは BitBucket を使用する必要があります。プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の GitHub または Bitbucket Cloud の設定がリポジトリに追加されます。
+プロジェクトを CircleCI に追加すると、ユーザー登録時に CircleCI に与えた権限に基づいて、以下の GitHub または Bitbucket Cloud の設定がリポジトリに追加されます。
 
 - **デプロイ キー**: GitHub または Bitbucket Cloud からプロジェクトをチェックアウトするために使用されます。
 - **サービス フック**: GitHub または Bitbucket Cloud にプッシュしたときに CircleCI に通知を送信するために使用されます。
@@ -31,22 +29,18 @@ CircleCI のデフォルトでは、プッシュ フックでビルドが行わ�
 
 GitHub または Bitbucket Cloud で Web フックを編集して、ビルドをトリガーするイベントを制限できます。 Web フックの設定を編集することで、CircleCI に送信されるフックを変更できますが、ビルドをトリガーするフックの種類は変更されません。 CircleCI は常にプッシュ フックでビルドを行い、設定によっては PR フックでもビルドを行います。ただし、Web フックの設定からプッシュ フックを削除すると、ビルドを行いません。 詳細については、[GitHub の「Edit a Hook (フックを編集する)」](https://developer.github.com/v3/repos/hooks/#edit-a-hook)または [Atlassian の「Manage Webhooks (Web フックを管理する)」](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html)を参照してください。
 
-タグ プッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{ site.baseurl }}/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
+タグ プッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{ site.baseurl }}/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
 
 ### .circleci/config.yml ファイルの追加
 {:.no_toc}
 
-[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成して GitHub または Bitbucket Cloud リポジトリにコミットすると、CircleCI は直ちにユーザー コードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。 たとえば、Postgres の仕様と機能を使用する Rails プロジェクトで作業している場合、ジョブ実行ステップの構成は以下のようになります。
+[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成して GitHub または Bitbucket Cloud リポジトリにコミットすると、CircleCI は直ちにユーザー コードをチェックアウトし、設定されているテストがあればそれを含めて、最初のジョブを実行します。 たとえば、Postgres の仕様と機能を使用する Rails プロジェクトで作業している場合、ジョブ実行ステップの構成は以下のようになります。
 
 ```yaml
 jobs:
   build:
     docker:
       - image: circleci/ruby:2.4.1-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-
     steps:
       - run: |
           bundle install
@@ -68,17 +62,17 @@ CircleCI は、毎回クリーンなコンテナでテストを実行します�
 - 可能な限り、デプロイ キーを使用します。
 - デプロイ キーを使用できない場合は、マシン ユーザー キーを使用し、必要最低限のリポジトリと権限にのみアクセスできるように制限します。
 - マシン ユーザー キー以外のユーザー キーは使用しないでください (キーは特定のユーザーではなく、ビルドに関連付ける必要があります)。
-- リポジトリへのユーザー アクセスを取り消す場合、デプロイ キーまたはユーザー キーを交換する必要があります。
+- リポジトリへのユーザー アクセスを取り消す場合、デプロイ キーまたはユーザー キーを交換する必要があります。 
     1. GitHub へのユーザー アクセスを取り消した後、GitHub でキーを削除します。
     2. CircleCI プロジェクトでキーを削除します。
     3. CircleCI プロジェクトでキーを再生成します。
 - 開発者自身が所有する以上のアクセス権を必要とするリポジトリのビルドに、開発者がユーザー キーを使用してアクセスできないようにします。
 
-## プロジェクトで追加のプライベート リポジトリのチェックアウトの有効化
+## プロジェクトでの追加のプライベート リポジトリのチェックアウトの有効化
 
-テスト プロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイ キーに加えて GitHub ユーザー キーも必要となります。これは、 GitHub ユーザー キーはユーザーの*すべて*の GitHub リポジトリに対してアクセス権を持ちますが、デプロイ キーは*単一の*リポジトリに対してのみ有効であるためです。
+テスト プロセスが複数のリポジトリを参照する場合、CircleCI ではデプロイ キーに加えて GitHub ユーザー キーも必要となります。デプロイ キーは *1 つ*のリポジトリに対してのみ有効であるのに対して、GitHub ユーザー キーはユーザーの*すべて*の GitHub リポジトリに対してアクセス権を持つためです。
 
-プロジェクトの **[Project Settings (プロジェクト設定)] > [SSH Keys (SSH 鍵)]** のページで、 **[User Key (ユーザー鍵)]** のセクションまでスクロールで移動し、 **[Authorize with GitHub (GitHub で認証する)]** ボタンをクリックします。 CircleCI は、この新しい SSH 鍵を作成し、それを GitHub のユーザー アカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
+プロジェクトの **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH 鍵のチェック アウト)]** ページで、CircleCI に渡す GitHub のユーザー キーを指定します。 CircleCI は、この新しい SSH 鍵を作成し、それを GitHub のユーザー アカウントに関連付けて、ユーザーのすべてのリポジトリにアクセスできるようにします。
 
 <h2 id="security">ユーザー キーのセキュリティ</h2>
 
@@ -93,12 +87,12 @@ SSH 鍵は信頼するユーザーとのみ共有してください。また、�
 **Python**: `pip install` ステップ実行中
 
     ERROR: Repository not found.
-
+    
 
 **Ruby**: `bundle install` ステップ実行中
 
     Permission denied (publickey).
-
+    
 
 ## マシン ユーザーを介したアクセスの制御
 
@@ -114,7 +108,7 @@ SSH 鍵は信頼するユーザーとのみ共有してください。また、�
 
 3. [CircleCI にログイン](https://circleci.com/login)します。 CircleCI を承認するよう GitHub から要求されたら、[**Authorize application (アプリケーションを承認)**] ボタンをクリックします。
 
-4. [Add Projects (プロジェクトの追加)] ページで、マシン ユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
+4. [[Add Projects (プロジェクトの追加)] ページ](https://circleci.com/add-projects){:rel="nofollow"}で、マシン ユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
 
 5. **[Project Settings (プロジェクト設定)] > [Checkout SSH keys (SSH 鍵のチェック アウト)]** ページで、[**Authorize With GitHub (GitHub で承認)**] ボタンをクリックします。 これで、マシン ユーザーの代わりに SSH 鍵を作成して GitHub にアップロードする権限が CircleCI に付与されます。
 
@@ -137,12 +131,7 @@ CircleCI は、VCS プロバイダーに対して、[GitHub の権限モデル](
 - ユーザーのリポジトリ リストを取得する
 - ユーザー アカウントへの SSH 鍵の追加
 
-**管理者権限**
-- デプロイ キーのリポジトリへの追加
-- サービス フックのレポジトリへの追加
-
-**メモ:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、 GitHub からユーザーのリポジトリ (公開・非公開の両方) の一覧を GitHub から取得する際には、 [`repo`
-スコープ](https://developer.github.com/apps/building-oauth-apps/understanding-scopes-for-oauth-apps/#available-scopes) の権限が必要で、これは書き込みアクセス権に相当します。 GitHub は読み取り専用のアクセス権の設定に対応していないため、このような設定が必要になります。
+**メモ:** CircleCI は絶対に必要な権限しか要求しません。 また、CircleCI が要求できる権限は、各 VCS プロバイダーが提供すると決めた権限のみに制限されます。 たとえば、GitHub は読み取り専用のアクセス権を提供していないため、ユーザーのリポジトリ リストを GitHub から取得するには、書き込みアクセス権が必要です。
 
 CircleCI が使用する権限の数をどうしても減らしたい場合は、VCS プロバイダーに連絡して、その旨を伝えてください。
 
@@ -192,16 +181,15 @@ CircleCI が使用しているアカウントと権限のシステムは、ま�
 ### GitHub のデプロイ キーの作成
 {:.no_toc}
 
-この例では、GitHub リポジトリは `https://github.com/you/test-repo`、CircleCI のプロジェクトは `https://circleci.com/gh/you/test-repo` とします。
+この例では、GitHub リポジトリは `https://github.com/you/test-repo`、CircleCI のプロジェクトは <https://circleci.com/gh/you/test-repo>{:rel="nofollow"} です。
 
-1. [GitHub の説明](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)に従い、下記コマンドを実行しSSH 鍵ペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
-```
-ssh-keygen -t ed25519 -C "your_email@example.com"
-```
+1. [GitHub の説明](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)に従って、SSH 鍵ペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
+
+**注意:** 最近 `ssh-keygen` は、デフォルトで PEM 形式の鍵を生成しないように更新されました。 秘密鍵が `-----BEGIN RSA PRIVATE KEY-----` で始まらない場合、`ssh-keygen -m PEM -t rsa -C "your_email@example.com"` コマンドで鍵を生成すると、強制的に PEM 形式で生成できます。
 
 2. `https://github.com/you/test-repo/settings/keys` に移動し、[Add deploy key (デプロイ キーを追加)] をクリックします。 [Title (タイトル)] フィールドにタイトルを入力し、手順 1 で作成した鍵をコピーして貼り付けます。 [Allow write access (書き込みアクセスを許可)] をオンにし、[Add key (キーを追加)] をクリックします。
 
-3. プロジェクトの設定画面に移動し、 [SSH Key (SSH 鍵)]、 [Add SSH key (SSH 鍵の追加)] の順にクリックし、手順 1 で作成した鍵を追加します。 [Hostname (ホスト名)] フィールドに「github.com」と入力し、送信ボタンを押します。
+3. <https://circleci.com/gh/you/test-repo/edit#ssh>{:rel="nofollow"} に移動し、手順 1 で作成した鍵を追加します。 [Hostname (ホスト名)] フィールドに「github.com」と入力し、送信ボタンを押します。
 
 4. config.yml で `add_ssh_keys` キーを使用して、以下のようにフィンガープリントを追加します。
 
@@ -259,7 +247,7 @@ CircleCI がプロジェクトをビルドするときには、秘密鍵が `.ss
 
 ### これらのキーのセキュリティ
 
-CircleCI が生成するチェックアウト キー ペアの秘密鍵は CircleCI システムを出ることはなく (公開鍵のみ GitHub に転送)、また、ストレージ上では安全に暗号化されています。 しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH でビルド環境にログインする権限を持つ開発者は、この鍵に直接アクセスできます。
+CircleCI が生成するチェックアウト キー ペアの秘密鍵は CircleCI システムを出ることはなく (公開鍵のみ GitHub に転送)、また、ストレージ上では安全に暗号化されています。 しかし、これらはビルド コンテナにインストールされるため、CircleCI で実行されるすべてのコードによって読み取ることができます。 同様に、SSH 鍵を使用できる開発者は、この鍵に直接アクセスできます。
 
 **デプロイ キーとユーザー キーの違い**
 
@@ -269,23 +257,20 @@ GitHub がサポートするキーの種類は、デプロイ キーとユーザ
 
 ## SSH ホストの信頼性の確立
 
-SSH キーを使用してレポジトリをチェックアウトするとき、 `~/.ssh/known_hosts` に GitHub または Bitbucket のフィンガープリントを追加する必要があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブ ステップによって自動的に処理されます。カスタムのチェックアウト コマンドを使用したい場合には、以下のコマンドを使用する必要があります。
+SSH キーを使用してレポジトリをチェックアウトするとき、既知のホスト ファイル (`~/.ssh/known_hosts`) に GitHub または Bitbucket のフィンガープリントを追加する必要があります。そうすることで、Executor は接続しているホストの信頼性を検証できます。 これは `checkout` ジョブ ステップによって自動的に処理されます。カスタムのチェックアウト コマンドを使用したい場合には、以下のコマンドを使用する必要があります。
 
-```
-mkdir -p ~/.ssh
+    mkdir -p ~/.ssh
+    
+    echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+    bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
+    ' >> ~/.ssh/known_hosts
+    
 
-echo 'github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
-bitbucket.org ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAubiN81eDcafrgMeLzaFPsw2kNvEcqTKl/VqLat/MaB33pZy0y3rJZtnqwR2qOOvbwKZYKiEO1O6VqNEBxKvJJelCq0dTXWT5pbO2gDXC6h6QDXCaHo6pOHGPUy+YBaGQRGuSusMEASYiWunYN0vCAI8QaXnWMXNMdFP3jHAJH0eDsoiGnLPBlBp4TNm6rYI74nMzgz3B9IikW4WVK+dc8KZJZWYjAuORU3jc1c/NPskD2ASinf8v3xnfXeukU0sJ5N6m5E8VLjObPEO+mN2t/FZTMZLiFqPWc/ALSqnMnnhwrNi2rbfg/rd/IpL8Le3pSBne8+seeFVBoGqzHM9yXw==
-' >> ~/.ssh/known_hosts
-```
+`ssh-keyscan <host>` を実行し、サーバーの SSH キーをフェッチします。次に、このキーに `ssh-rsa` をプレフィックスして、ジョブの `known_hosts` ファイルに追加します。 たとえば、以下のようになります。
 
-対象サーバーの SSH 公開鍵は `ssh-keyscan <host>` コマンドで取得できます。そして、取得されたテキストのうち `ssh-rsa` プレフィックスがついているものをジョブの `known_hosts` ファイルに追加することで、利用できるようになります。以下は動作例です:
-
-```
-➜  ~ ssh-keyscan github.com           
-# github.com:22 SSH-2.0-babeld-2e9d163d
-github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
-# github.com:22 SSH-2.0-babeld-2e9d163d
-# github.com:22 SSH-2.0-babeld-2e9d163d
-➜  ~ ✗ 
-```
+    ➜  ~ ssh-keyscan github.com           
+    # github.com:22 SSH-2.0-babeld-2e9d163d
+    github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+    # github.com:22 SSH-2.0-babeld-2e9d163d
+    # github.com:22 SSH-2.0-babeld-2e9d163d
+    ➜  ~ ✗

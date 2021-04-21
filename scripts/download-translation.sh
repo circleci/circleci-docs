@@ -8,7 +8,7 @@ api_key=${CROWDIN_API_KEY}
 
 # TODO
 # Why ?branch=master doesn't work?
-curl "https://api.crowdin.com/api/project/circleci-jp/download/ja.zip?key=${api_key}" -o $temp_dir/$file_name
+curl "https://api.crowdin.com/api/project/circleci-jp/download/ja.zip?login=teka23&account-key=${api_key}" -o $temp_dir/$file_name
 
 echo "Downloaded to ${temp_dir}/${file_name}"
 

@@ -18,15 +18,15 @@ description: "CircleCI 2.0 テストの自動化セットアップ"
 
 | ドキュメント                                                      | 説明                                                            |
 | ----------------------------------------------------------- | ------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/configuration-reference/#run">CircleCI を設定する: <code>run</code> ステップのセクション</a>                                   | テストを実行するジョブの記述方法                                              |
-| [ブラウザー テスト]({{ site.baseurl }}/ja/2.0/browser-testing/)        | CircleCI でブラウザー テストを実行およびデバッグするための一般的な方法                      |
-| <a href="{{ site.baseurl }}/ja/2.0/collect-test-data/">テスト メタデータの収集</a>                                   | よく使用されるさまざまなテスト ランナーを CircleCI の構成でセットアップする方法                 |
-| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                   | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
-| [テストの並列実行]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/) | ジョブ内でテストをグロブして分割する方法                                          |
-| <a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a>                                   | PostgreSQL と MySQL の設定ファイルの例                                  |
-| [データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)              | CircleCI 2.0 でのサービス イメージの使用方法、データベース テストの基本的な構成手順についての概要      |
+| <a href="{{ site.baseurl }}/2.0/configuration-reference/#run">CircleCI を設定する: <code>run</code> ステップのセクション</a>                                   | テストを実行するジョブの記述方法                                              |
+| [ブラウザー テスト]({{ site.baseurl }}/2.0/browser-testing/)        | CircleCI でブラウザー テストを実行およびデバッグするための一般的な方法                      |
+| <a href="{{ site.baseurl }}/2.0/collect-test-data/">テスト メタデータの収集</a>                                   | よく使用されるさまざまなテスト ランナーを CircleCI の構成でセットアップする方法                 |
+| <a href="{{ site.baseurl }}/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>                                   | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
+| [テストの並列実行]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) | ジョブ内でテストをグロブして分割する方法                                          |
+| <a href="{{ site.baseurl }}/2.0/postgres-config/">データベースの構成例</a>                                   | PostgreSQL と MySQL の設定ファイルの例                                  |
+| [データベースの構成]({{ site.baseurl }}/2.0/databases/)              | CircleCI 2.0 でのサービス イメージの使用方法、データベース テストの基本的な構成手順についての概要      |
 | **コード署名**                                                   |                                                               |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                   | CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドライン | 
+| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a>                                   | CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドライン | 
 {: class="table table-striped"} 
 
 ## デプロイ
@@ -35,9 +35,9 @@ description: "CircleCI 2.0 テストの自動化セットアップ"
 
 | ドキュメント                    | 説明                                                                  |
 | ------------------------- | ------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/deployment-integrations/">デプロイ</a> | AWS、Azure、Firebase、Google Cloud、Heroku、npm など、ほぼすべてのサービスへの自動デプロイの構成 |
-| <a href="{{ site.baseurl }}/ja/2.0/artifactory/">Artifactory</a> | Jfrog CLI を使用した Artifactory への自動アップロードの構成                           |
-| <a href="{{ site.baseurl }}/ja/2.0/packagecloud/">packagecloud</a> | packagecloud へのパッケージのパブリッシュ                                         | 
+| <a href="{{ site.baseurl }}/2.0/deployment-integrations/">デプロイ</a> | AWS、Azure、Firebase、Google Cloud、Heroku、npm など、ほぼすべてのサービスへの自動デプロイの構成 |
+| <a href="{{ site.baseurl }}/2.0/artifactory/">Artifactory</a> | Jfrog CLI を使用した Artifactory への自動アップロードの構成                           |
+| <a href="{{ site.baseurl }}/2.0/packagecloud/">packagecloud</a> | packagecloud へのパッケージのパブリッシュ                                         | 
 {: class="table table-striped"} 
 
 このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。

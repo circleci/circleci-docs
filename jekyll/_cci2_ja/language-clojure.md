@@ -8,7 +8,7 @@ categories:
 order: 2
 ---
 
-このガイドでは、CircleCI 2.0 で Clojure アプリケーションをビルドする方法について説明します。お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+このガイドでは、CircleCI 2.0 で Clojure アプリケーションをビルドする方法について説明します。お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 * 目次
 {:toc}
@@ -142,7 +142,7 @@ version: 2
 ## 関連項目
 {:.no_toc}
 
-デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成i]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
 
 ### 詳細な例
 {:.no_toc}

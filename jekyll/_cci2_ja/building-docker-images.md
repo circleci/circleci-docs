@@ -3,6 +3,8 @@ layout: classic-docs
 title: "Docker コマンドの実行手順"
 short-title: "Docker コマンドの実行手順"
 description: "Docker イメージをビルドし、リモート サービスにアクセスする方法"
+categories:
+  - configuring-jobs
 order: 55
 ---
 
@@ -24,7 +26,7 @@ jobs:
       - setup_remote_docker
 ```
 
-`setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
+`setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
 
 **メモ:** `setup_remote_docker` キーは、プライマリ Executor を *Docker コンテナ*とするよう指定した設定ファイルで使用することが想定されています。 Executor が `machine` または `macos` の場合 (および設定ファイルで Docker コマンドを使用する場合)、`setup_remote_docker` キーを使用する必要は**ありません**。
 
@@ -96,9 +98,9 @@ jobs:
 
 ビルド中に何が行われているのか詳しく見てみましょう。
 
-1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
+1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker Engine で行われます。 (10 行目)
-3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) を有効化して、イメージのビルドを高速化します (**メモ:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 また、DLC は CircleCI Server で利用できます)。 (11 行目)
+3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-レイヤー-キャッシュ) (DLC) を有効化して、イメージのビルドを高速化します (**メモ:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 また、DLC は CircleCI Server で利用できます)。 (11 行目)
 4. プロジェクト環境変数を使用して、Docker Hub の認証情報を格納します。 (17 行目)
 
 ## Docker のバージョン
@@ -138,7 +140,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ## 環境の分離
 
-ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#remote-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
+ジョブと[リモート Docker]({{ site.baseurl }}/2.0/glossary/#リモート-docker) は、独立した環境で実行されます。 したがって、ジョブ実行用に指定している Docker コンテナは、リモート Docker で実行されているコンテナと直接やり取りできません。
 
 ### サービスへのアクセス
 {:.no_toc}
@@ -258,10 +260,10 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ## 関連項目
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
-[ジョブ空間]({{ site.baseurl }}/2.0/glossary/#job-space)
+[ジョブ空間]({{ site.baseurl }}/2.0/glossary/#ジョブ空間)
 
-[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
+[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-レイヤー-キャッシュ)

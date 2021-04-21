@@ -3,6 +3,8 @@ layout: classic-docs
 title: ビルドのスキップとキャンセル
 short-title: ビルドのスキップとキャンセル
 description: CircleCI の自動ビルドを止める方法
+categories:
+  - configuring-jobs
 order: 100
 ---
 

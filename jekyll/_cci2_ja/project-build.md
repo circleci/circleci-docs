@@ -12,7 +12,7 @@ order: 1
 
 ## 概要
 
-GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、[プロジェクト]({{ site.baseurl }}/2.0/glossary/#project)として circleci.com に追加された後は、コードを変更するたびに、クリーン コンテナ、またはユーザーの要件に合わせて構成された VM で[ビルド]({{ site.baseurl }}/ja/2.0/build)と自動化されたテストがトリガーされます。
+GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、[プロジェクト]({{ site.baseurl }}/2.0/glossary/#プロジェクト)として circleci.com に追加された後は、コードを変更するたびに、クリーン コンテナ、またはユーザーの要件に合わせて構成された VM で[ビルド]({{ site.baseurl }}/2.0/build)と自動化されたテストがトリガーされます。
 
 ## プロジェクトの追加
 
@@ -22,9 +22,9 @@ CircleCI プロジェクトは、関連付けられているコード リポジ�
 
 ![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-ユーザーは、プロジェクトを*フォロー*することで、プロジェクトの[ビルド ステータス]({{ site.baseurl }}/ja/2.0/status/)に関する[メール通知]({{ site.baseurl }}/ja/2.0/notifications/)を受け取り、プロジェクトを自分の CircleCI ダッシュボードに追加できます。
+ユーザーは、プロジェクトを*フォロー*することで、プロジェクトの[ビルド ステータス]({{ site.baseurl }}/2.0/status/)に関する[メール通知]({{ site.baseurl }}/2.0/notifications/)を受け取り、プロジェクトを自分の CircleCI ダッシュボードに追加できます。
 
-*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{ site.baseurl }}/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
 プロジェクトが表示されない場合は、CircleCI 上でビルド中でないときに CircleCI アプリケーションの左上隅で組織を確認してください。 たとえば、左上にユーザー `my-user` が表示されているなら、`my-user` に所属する GitHub プロジェクトのみが `Add Projects` の下で使用できます。 GitHub プロジェクト `your-org/project` をビルドする場合は、アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 
@@ -38,4 +38,4 @@ CircleCI プロジェクトは、関連付けられているコード リポジ�
 
 ## 関連項目
 
-[設定]({{ site.baseurl }}/ja/2.0/settings)
+[設定]({{ site.baseurl }}/2.0/settings)

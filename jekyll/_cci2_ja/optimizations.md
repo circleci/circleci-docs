@@ -49,15 +49,15 @@ jobs:
 
 {% endraw %}
 
-キャッシュの `key` で `checksum` を使用していることに注目してください。これを使用することで、特定の依存関係管理ファイル (`package.json` や、上記の `requirements.txt` など) に*変更*があるかどうかを判断でき、それに応じてキャッシュが更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/ja/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
+キャッシュの `key` で `checksum` を使用していることに注目してください。これを使用することで、特定の依存関係管理ファイル (`package.json` や、上記の `requirements.txt` など) に*変更*があるかどうかを判断でき、それに応じてキャッシュが更新されます。 また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
 
 依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
 
-詳細については、[キャッシュに関するドキュメント]({{site.baseurl}}/ja/2.0/caching)を参照してください。
+詳細については、[キャッシュに関するドキュメント]({{site.baseurl}}/2.0/caching)を参照してください。
 
 ## ワークフロー
 
-ワークフローは、一連のジョブとその実行順序を定義する機能です。 ビルド中の任意の時点で 2 つのジョブを互いに独立して実行してかまわないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、ビルド構成を強化するための機能もいくつか用意されています。 詳細については、[ワークフローのドキュメント]({{site.baseurl}}/ja/2.0/workflows/)を参照してください。
+ワークフローは、一連のジョブとその実行順序を定義する機能です。 ビルド中の任意の時点で 2 つのジョブを互いに独立して実行してかまわないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、ビルド構成を強化するための機能もいくつか用意されています。 詳細については、[ワークフローのドキュメント]({{site.baseurl}}/2.0/workflows/)を参照してください。
 
 **メモ:** ワークフローはすべてのプランでご利用いただけます。ただし、ジョブを並列実行するには、ジョブを実行するための複数のマシンがお使いのプランで提供されている必要があります。
 
@@ -88,19 +88,19 @@ workflows: # ここで、ジョブを 1 つのワークフローとしてオー�
 
 ## ワークスペース
 
-**メモ: ** ワークスペースの使用は、[ワークフロー](#ワークフロー)を使用していることを前提としています。
+**メモ: ** ワークスペースの使用は、[ワークフロー](#workflows)を使用していることを前提としています。
 
 ワークスペースを使用すると、*ダウンストリーム ジョブ*に必要な、*その実行に固有*のデータを渡せます。 つまり、ワークスペースを使用して、ビルドの最初の段階で実行するジョブのデータをフェッチし、そのデータをビルドの後段で実行するジョブで*利用する*ことができます。
 
 任意のジョブのデータを永続化し、`attach_workspace` キーを使用してダウンストリーム ジョブで利用できるようにするには、[`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) キーを使用するようにジョブを構成します。 `persist_to_workspace` の paths: プロパティで指定したファイルとディレクトリは、root キーで指定したディレクトリからの相対パスにある、ワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
 
-ワークスペースの使用方法については、[ワークフローに関するドキュメント]({{site.baseurl}}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を参照してください。
+ワークスペースの使用方法については、[ワークフローに関するドキュメント]({{site.baseurl}}/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を参照してください。
 
 ## 並列処理
 
 **メモ:** ビルドで使用できる並列処理のレベル (1、2、4 など) は、お使いの CircleCI プランによって決まります。
 
-プロジェクトに大規模なテスト スイートがある場合は、CircleCI の[テストの並列処理機能](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割)で [`parallelism`]({{site.baseurl}}/ja/2.0/configuration-reference#parallelism) を設定するか、[サードパーティのアプリケーションまたはライブラリ](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#その他のテスト分割方法)を利用するようにビルドを構成して、テストを複数のマシンに分割できます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+プロジェクトに大規模なテスト スイートがある場合は、CircleCI の[テストの並列処理機能](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割)で [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) を設定するか、[サードパーティのアプリケーションまたはライブラリ](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#その他のテスト分割方法)を利用するようにビルドを構成して、テストを複数のマシンに分割できます。 CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
 
 ```yaml
 # ~/.circleci/config.yml
@@ -112,11 +112,11 @@ jobs:
     parallelism: 4
 ```
 
-テストの分割の詳細については、[並列処理に関するドキュメント]({{site.baseurl}}/ja/2.0/parallelism-faster-jobs)を参照してください。
+テストの分割の詳細については、[並列処理に関するドキュメント]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
 
 ## リソース クラス
 
-**メモ:** クラウド版で [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference#resource_class) 機能を使用するには、その機能を含むプランが必要です。 コンテナ ベースのプランをご利用の場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)し、この機能をアカウントで有効にしてください。 セルフホスティング環境では、システム管理者がリソース クラスのオプションを設定できます。
+**メモ:** クラウド版で [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) 機能を使用するには、その機能を含むプランが必要です。 コンテナ ベースのプランをご利用の場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)し、この機能をアカウントで有効にしてください。 セルフホスティング環境では、システム管理者がリソース クラスのオプションを設定できます。
 
 `resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)にまとめています。オンプレミス版の一覧については、システム管理者にお問い合わせください。 `resource_class` が指定されていない場合や、無効なクラスが指定されている場合は、デフォルトの `resource_class: medium` が使用されます。
 
@@ -157,11 +157,11 @@ jobs:
       - run: docker build .
 ```
 
-詳細については、[DLC に関するドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)を参照してください。
+詳細については、[DLC に関するドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)を参照してください。
 
 ## 関連項目
 {:.no_toc}
 
 - ビルドで構成可能な機能の一覧については、「[CircleCI を設定する]({{ site.baseurl}}/2.0/configuration-reference/)」を参照してください。
 - Coinbase から、「[Continuous Integration at Coinbase: How we optimized CircleCI for speed and cut our build times by 75%](https://blog.coinbase.com/continuous-integration-at-coinbase-how-we-optimized-circleci-for-speed-cut-our-build-times-by-378c8b1d7161) (Coinbase での継続的インテグレーション: CircleCI を最適化して処理速度を向上させ、ビルド時間を 75% 短縮)」というタイトルの記事が公開されています。
-- Yarn とキャッシュを使用してビルドを高速化する方法については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/yarn)を参照してください。
+- Yarn とキャッシュを使用してビルドを高速化する方法については、[こちらのドキュメント]({{site.baseurl}}/2.0/yarn)を参照してください。

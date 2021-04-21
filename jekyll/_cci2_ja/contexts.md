@@ -3,6 +3,8 @@ layout: classic-docs
 title: "コンテキストの使用"
 short-title: "コンテキストの使用"
 description: "プロジェクト間で共有できる安全なリソース"
+categories:
+  - configuring-jobs
 order: 41
 ---
 
@@ -16,7 +18,7 @@ order: 41
 ## 概要
 {:.no_toc}
 
-コンテキストは、CircleCI アプリケーションの [Settings (設定)] ページにある [Organization (組織)] セクションで作成します。 組織のメンバーでなければ、コンテキストを表示、作成、編集できません。 アプリケーションでコンテキストを設定したら、プロジェクトの [`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのワークフロー セクションでコンテキストを構成することができます。
+コンテキストは、CircleCI アプリケーションの [Settings (設定)] ページにある [Organization (組織)] セクションで作成します。 組織のメンバーでなければ、コンテキストを表示、作成、編集できません。 アプリケーションでコンテキストを設定したら、プロジェクトの [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルのワークフロー セクションでコンテキストを構成することができます。
 
 [Contexts (コンテキスト)] ページで設定された環境変数を使用するには、ワークフローを実行するユーザーが、コンテキストを設定した組織のメンバーでなければなりません。また、ルールによって組織内のすべてのプロジェクトへのアクセスが許可されていなければなりません。
 
@@ -35,16 +37,15 @@ GitHub Enterprise (GHE) インストールに複数の組織が含まれる場�
 
 3. [Add Environment Variable (環境変数を追加)] ボタンをクリックし、変数名と値をコピー & ペーストします。 [Add Variable (変数を追加)] ボタンをクリックして保存します。
 
-4. この変数を使用する各ジョブで、[`config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルの [`workflows`]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows) セクションに `context` キーを追加します。 以下の例では、`run-tests` ジョブが、`org-global` コンテキストに設定された変数を使用します。
+4. この変数を使用する各ジョブで、[`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルの [`workflows`]({{ site.baseurl }}/2.0/configuration-reference/#workflows) セクションに `context: <context name>` キーを追加します。 以下の例では、`run-tests` ジョブが、`org-global` コンテキストに設定された変数を使用します。
 
     workflows:
       version: 2
       my-workflow:
         jobs:
           - run-tests:
-              context:
-                - org-global
-
+              context: org-global
+    
 
 ## コンテキストを使用するリポジトリの移動
 
@@ -119,7 +120,7 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 4. コンテナで `environment` キーを使用して設定された環境変数
 5. コンテキスト環境変数 (ユーザーがコンテキストへのアクセス権を持つ場合)
 6. [Project Settings (プロジェクト設定)] ページで設定されたプロジェクトレベルの環境変数
-7. [CircleCI 環境変数に関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/#定義済み環境変数)で説明されている定義済みの特別な CircleCI 環境変数
+7. [CircleCI 環境変数に関するドキュメント]({{ site.baseurl }}/2.0/env-vars/#定義済み環境変数)で説明されている定義済みの特別な CircleCI 環境変数
 
 `FOO=bar make install` のように、`run` ステップのシェル コマンドで宣言された環境変数は、`environment` キーおよび `contexts` キーを使用して宣言された環境変数よりも優先されます。 [Contexts (コンテキスト)] ページで追加された環境変数は、[Project Settings (プロジェクト設定)] ページで追加された変数よりも優先されます。 最後に、特別な CircleCI 環境変数がロードされます。
 
@@ -132,9 +133,9 @@ CircleCI では、数時間ごとに GitHub チームと LDAP グループが同
 * コンテキストの値が 4 文字未満
 * コンテキストの値が `true`、`True`、`false`、`False` のいずれか
 
-**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
+**メモ:** シークレットのマスキングは、ビルドの出力でコンテキストの値が表示されないようにするだけの機能です。 コンテキストの値には、[SSH を使用したデバッグ]({{ site.baseurl }}/2.0/ssh-access-jobs)を行うユーザーがアクセスできます。
 
 ## 関連項目
 
-[環境変数]({{ site.baseurl }}/ja/2.0/env-vars/)  
-[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)
+[環境変数]({{ site.baseurl }}/2.0/env-vars/)  
+[ワークフロー]({{ site.baseurl }}/2.0/workflows/)

@@ -18,7 +18,7 @@ order: 1
 {:.no_toc}
  CircleCI の従業員がお客様の許諾を得ずにコードを見ることはありません。 お客様が問題解決のサポートを希望されるときには、事前に許可を得たうえで、サポート エンジニアがコードを確認させていただく場合があります。
 
-詳しくは CircleCI の[セキュリティ ポリシー]({{ site.baseurl }}/ja/2.0/security/)をご覧ください。
+詳しくは CircleCI の[セキュリティ ポリシー]({{ site.baseurl }}/2.0/security/)をご覧ください。
 
 ## 移行
 
@@ -31,7 +31,7 @@ order: 1
 ### Jenkins から CircleCI 2.0 へ移行する方法を教えてください。
 
 {:.no_toc}
- Jenkins に記述されている内容をそのまま `steps:` にコピーして貼り付けます。[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/) の基本的な例では、以下のようになります。
+ Jenkins に記述されている内容をそのまま `steps:` にコピーして貼り付けます。[Hello World]({{ site.baseurl }}/2.0/hello-world/) の基本的な例では、以下のようになります。
 
 ```yaml
     steps:
@@ -42,7 +42,7 @@ order: 1
             echo "通常は Jenkins の Execute Shell の内容をコピー ＆ ペーストすればよいだけです"
 ```
 
-Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/ja/2.0/migrating-from-jenkins/)」をご覧ください。
+Jenkins と CircleCI のコンセプトの違いについては「[Jenkins からの移行]({{ site.baseurl }}/2.0/migrating-from-jenkins/)」をご覧ください。
 
 ### inference コマンドは CircleCI 2.0 でも実行できますか?
 
@@ -65,7 +65,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 ### CircleCI 2.0 はオンプレミスでも利用できますか?
 
 {:.no_toc}
- はい、お客様のオンプレミス環境でもご利用いただけます。詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」をご覧ください。
+ はい、お客様のオンプレミス環境でもご利用いただけます。詳しいインストール手順については「[管理者向けの概要]({{ site.baseurl }}/2.0/overview)」をご覧ください。
 
 ### CircleCI のホスティング オプションについて教えてください。
 {:.no_toc}
@@ -87,7 +87,7 @@ Jenkins と CircleCI のコンセプトの違いについては「[Jenkins か�
 {:.no_toc}
  CircleCI アプリケーションの Workflows タブで、エラー メッセージが出力されていないかどうかを確認してください。 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
+詳細については「[YAML の記述]({{ site.baseurl }}/2.0/writing-yaml/)」をご覧ください。
 
 `config.yml` のフォーマットのミスを確認したうえで、それでも解決しない場合は [CircleCI サポート センター](https://support.circleci.com/hc/ja)で検索してみてください。
 
@@ -135,7 +135,7 @@ Docker Hub のパブリック イメージについては、以下のように�
 
 ### イメージのバージョン指定に関するベスト プラクティスを教えてください。
 {:.no_toc}
-`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 特定のバージョンとタグを使用するのもよいでしょう。たとえば、`circleci/ruby:2.4-jessie-node` のように限定的にイメージを指定すると、ベースとなるイメージのディストリビューションが変更されたときも、アップストリームの影響がコンテナに及ぶのを防ぐことができます。 一方、`circleci/ruby:2.4` とだけ指定していると、`jessie` から `stretch` への予期しない変更による影響を受けるおそれがあります。 その他の応用例は、「Executor タイプを選択する」の「[Docker イメージのベスト プラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-イメージのベスト-プラクティス)」や、「CircleCI のビルド済み Docker イメージ」の「[ベスト プラクティス]({{ site.baseurl }}/ja/2.0/circleci-images/#ベスト-プラクティス)」でご覧いただけます。
+`latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 特定のバージョンとタグを使用するのもよいでしょう。たとえば、`circleci/ruby:2.4-jessie-node` のように限定的にイメージを指定すると、ベースとなるイメージのディストリビューションが変更されたときも、アップストリームの影響がコンテナに及ぶのを防ぐことができます。 一方、`circleci/ruby:2.4` とだけ指定していると、`jessie` から `stretch` への予期しない変更による影響を受けるおそれがあります。 その他の応用例は、「Executor タイプを選択する」の「[Docker イメージのベスト プラクティス]({{ site.baseurl }}/2.0/executor-types/#docker-イメージのベスト-プラクティス)」や、「CircleCI のビルド済み Docker イメージ」の「[ベスト プラクティス]({{ site.baseurl }}/2.0/circleci-images/#ベスト-プラクティス)」でご覧いただけます。
 
 ### Docker イメージのタイムゾーンを設定する方法を教えてください。
 
@@ -167,17 +167,17 @@ jobs:
 ### ワークフローに API は使用できますか?
 
 {:.no_toc}
- はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing/)」をご覧ください。
+ はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/2.0/build-processing/)」をご覧ください。
 
 ### ワークフローでビルドの自動キャンセルは使用できますか?
 
 {:.no_toc}
- はい、ご利用いただけます。「[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/)」で手順をご確認ください。
+ はい、ご利用いただけます。「[ビルドのスキップとキャンセル]({{ site.baseurl }}/2.0/skip-build/)」で手順をご確認ください。
 
 ### ワークフローに `store_test_results` は使用できますか?
 
 {:.no_toc}
- はい、ご利用いただけます。`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。また、[タイミング データに基づいた分割]({{ site.baseurl }}/ja/2.0/parallelism-faster-jobs/#タイミング-データに基づいた分割)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
+ はい、ご利用いただけます。`store_test_results` を使用すると、テスト結果のデータを [Test Summary (テスト サマリー)] セクションに記録できます。また、[タイミング データに基づいた分割]({{ site.baseurl }}/2.0/parallelism-faster-jobs/#タイミング-データに基づいた分割)を行う際にも利用できます。 テストのタイミング データは、CircleCI 2.0 のワークフローから利用できるようになったもので、同一名称のジョブのデータは 50 ビルド分さかのぼることができます。
 
 ### CircleCI 1.0 でもワークフローを使用できますか?
 
@@ -187,7 +187,7 @@ jobs:
 ### オンプレミス環境の CircleCI でもワークフローを使用できますか?
 
 {:.no_toc}
- はい、ご利用いただけます。ワークフローは CircleCI 2.0 の 1 つの機能として、法人向けのオンプレミス版でもご利用いただけます。 CircleCI のインストール手順などについては「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
+ はい、ご利用いただけます。ワークフローは CircleCI 2.0 の 1 つの機能として、法人向けのオンプレミス版でもご利用いただけます。 CircleCI のインストール手順などについては「[管理者向けの概要]({{ site.baseurl }}/2.0/overview)」を参照してください。
 
 ### 同時にいくつのジョブを実行できますか?
 
@@ -197,7 +197,7 @@ jobs:
 ### 単一のワークフロー内で Linux 環境と Mac 環境の両方のジョブを実行できるような機能をサポートする予定はありますか?
 
 {:.no_toc}
- 既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/ja/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
+ 既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
 
 ### `config.yml` を複数のファイルに分割することは可能ですか?
 
@@ -243,7 +243,7 @@ jobs:
 
 ### Windows でのビルドを開始するには何が必要ですか?
 {:.no_toc}
-[Performance プラン](https://circleci.com/ja/pricing/usage/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+[Performance プラン](https://circleci.com/ja/pricing/usage/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
 
 ### 使用している Windows のバージョンを教えてください。
 {:.no_toc}
@@ -251,7 +251,7 @@ Windows Server 2019 Datacenter エディションの Server Core オプション
 
 ### マシンには何がインストールされていますか?
 {:.no_toc}
-[使用可能な依存関係の一覧]({{site.baseurl}}/ja/2.0/hello-world-windows/#windows-イメージにプリインストールされているソフトウェア)が「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows/)」に掲載されています。
+[使用可能な依存関係の一覧]({{site.baseurl}}/2.0/hello-world-windows/#windows-イメージにプリインストールされているソフトウェア)が「[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows/)」に掲載されています。
 
 ### マシンのサイズを教えてください。
 {:.no_toc}
@@ -312,12 +312,12 @@ Windows Server 2019 Datacenter エディションの Server Core オプション
 `アクティブ ユーザー`とは、非 OSS プロジェクトでコンピューティング リソースの使用をトリガーするユーザーのことです。 次のようなアクティビティが含まれます。
 
 - ビルドをトリガーするユーザーからのコミット (PR マージ コミットを含む)
-- CircleCI の Web アプリケーションでのジョブの再実行 ([SSH デバッグ]({{ site.baseurl }}/ja/2.0/ssh-access-jobs)を含む)
-- [ジョブの手動承認]({{ site.baseurl }}/ja/2.0/workflows/#手動承認後に処理を続行するワークフロー) (承認者はすべてのダウンストリーム ジョブのアクターと見なされる)
+- CircleCI の Web アプリケーションでのジョブの再実行 ([SSH デバッグ]({{ site.baseurl }}/2.0/ssh-access-jobs)を含む)
+- [ジョブの手動承認]({{ site.baseurl }}/2.0/workflows/#手動承認後に処理を続行するワークフロー) (承認者はすべてのダウンストリーム ジョブのアクターと見なされる)
 - スケジュールされたワークフローの使用
 - マシン ユーザー
 
-**メモ:** プロジェクトが[オープンソース]({{ site.baseurl }}/ja/2.0/oss)の場合は、アクティブ ユーザーとは**見なされません**。
+**メモ:** プロジェクトが[オープンソース]({{ site.baseurl }}/2.0/oss)の場合は、アクティブ ユーザーとは**見なされません**。
 
 アクティブ ユーザーの一覧は、CircleCI の Web アプリケーションにログインし、[`Settings` (設定)] > [`Plan Usage` (プランの使用状況)] の順に移動して、[`Users` (ユーザー)] タブで確認できます。
 
@@ -361,7 +361,7 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 
 #### Docker レイヤー キャッシュの利用に料金が発生するのはなぜですか?
 {:.no_toc}
-Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
+Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。
 
 ユーザーに DLC をご利用いただくために、CircleCI ではいくつかの処理を行っています。 ソリッドステート ドライブを使用し、キャッシュをゾーン間で複製し、DLC を利用可能な状態にします。 また、必要に応じてキャッシュを増やすことで、同時処理の要求に対応しながら、DLC をユーザーのジョブで利用できるようにしています。 これらのさまざまな最適化によって、コンピューティング プロバイダーである CircleCI に追加のコストが発生し、ユーザーが DLC を使用する際にそのコストが引き継がれます。
 
@@ -419,7 +419,7 @@ CircleCI ではすべてのお客様を可能な限りご支援できるよう�
 ### テストで IPv6 を利用できますか?
 
 {:.no_toc}
- IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/ja/2.0/executor-types) を利用できます。 CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
+ IPv6 によるローカル通信のテストでは、[Machine Executor]({{ site.baseurl }}/2.0/executor-types) を利用できます。 CircleCI が使用しているクラウド プロバイダーのサービスすべてが IPv6 をサポートしているわけではないため、申し訳ありませんが、WAN における IPv6 通信はサポートしておりません。
 
 Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワーク インターフェイスに対して IPv6 アドレスを割り当てられます。
 
@@ -448,9 +448,9 @@ Docker に IPv6 アドレスを割り当てる方法は複数あり、上記の�
 {:.no_toc}
 - **Linux:** CircleCI は柔軟性に優れており、ほぼすべての Linux アプリケーションをビルドできます。 Web アプリケーションはもちろん、それ以外のビルドにも対応します。
 
-- **Android:** 詳細は「[言語ガイド: Android]({{ site.baseurl }}/ja/2.0/language-android/)」をご覧ください。
+- **Android:** 詳細は「[言語ガイド: Android]({{ site.baseurl }}/2.0/language-android/)」をご覧ください。
 
-- **iOS:** 「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial)」でビルド方法を確認できます。
+- **iOS:** 「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial)」でビルド方法を確認できます。
 
 - **Windows:** 現在、Windows は早期アクセス版のみご利用いただけます。 早期アクセス版のお申し込みについては、CircleCI Discuss の[こちらの投稿](https://discuss.circleci.com/t/windows-early-access-now-available-on-circleci/30977)をご参照ください。
 

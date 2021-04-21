@@ -13,7 +13,7 @@ order: 20
 - 目次
 {:toc}
 
-**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
+**メモ:** 「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl}}/2.0/testing-ios/)」や「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/hello-world-macos/)」も併せてご覧ください。
 
 ## 概要
 {:.no_toc}
@@ -23,7 +23,7 @@ order: 20
 ## 前提条件
 {:.no_toc}
 
-- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照してください。
+- CircleCI にプロジェクトを追加します。詳細については「[Hello World]({{ site.baseurl }}/2.0/hello-world/)」を参照してください。
 - このチュートリアルは、対象のプロジェクト用の Xcode ワークスペースに少なくとも 1 つの共有スキームがあり、選択されたスキームにテスト アクションがあることを前提としています。 まだ共有スキームがない場合は、以下の手順に従って Xcode に共有スキームを追加してください。
 
 1. プロジェクトの Xcode ワークスペースを開きます。
@@ -50,13 +50,13 @@ iOS プロジェクトでは、fastlane Scan を使用して以下のように�
     
     
 
-サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/ja/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
+サポートされるバージョンの一覧は、iOS アプリのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」セクションで確認してください。
 
 ## コード署名と証明書
 
-詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/ja/2.0/ios-codesigning/)」を参照してください。
+詳細については「[iOS プロジェクトのコード署名の設定]({{ site.baseurl }}/2.0/ios-codesigning/)」を参照してください。
 
-カスタム ツールの使用や独自スクリプトの実行を目的としてビルド プロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については、[2.0 config.yml のサンプル]({{ site.baseurl }}/ja/2.0/sample-config/)を参照してください。
+カスタム ツールの使用や独自スクリプトの実行を目的としてビルド プロセスをさらにカスタマイズする場合は、`config.yml` ファイルを使用します。カスタマイズの詳細については、[2.0 config.yml のサンプル]({{ site.baseurl }}/2.0/sample-config/)を参照してください。
 
 ## 依存関係のインストール
 

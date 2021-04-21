@@ -21,7 +21,7 @@ order: 50
 - ターミナルを開いており、使用可能である。
 - オプション: Github の [`Hub`](https://hub.github.com/) コマンドライン ツールがインストールされている (Web UI ではなくコマンド ラインから Github を使用できます)。 Hub のインストール方法については、[こちら](https://github.com/github/hub#installation)を参照してください。
 
-上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント](https://circleci.com/ja/docs/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
+上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/2.0/getting-started/)または[コンセプトに関するドキュメント](https://circleci.com/ja/docs/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
 
 # 手順
 
@@ -69,7 +69,7 @@ git push --set-upstream origin master
 curl -fLSs https://circle.ci/cli | bash
 ```
 
-CLI のインストール方法はいくつかあります。別の方法を使用する必要がある場合は、[こちら]({{site.baseurl}}/ja/2.0/local-cli)を参照してください。
+CLI のインストール方法はいくつかあります。別の方法を使用する必要がある場合は、[こちら]({{site.baseurl}}/2.0/local-cli)を参照してください。
 
 次に、インストール後のセットアップ手順を実行します。
 
@@ -166,4 +166,4 @@ git push
 - CircleCI GraphQL API のクエリ
 - 複雑な設定ファイルのパッケージ化と処理
 
-詳細については、[CircleCI のローカル CLI に関するドキュメント]({{site.baseurl}}/ja/2.0/local-cli)を参照してください。
+詳細については、[CircleCI のローカル CLI に関するドキュメント]({{site.baseurl}}/2.0/local-cli)を参照してください。

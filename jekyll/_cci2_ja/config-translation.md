@@ -26,9 +26,9 @@ order: 60
 `config-translation` エンドポイントを使用すると、CircleCI 1.0 プロジェクトから 2.0 用の仮設定ファイルを生成できます。 CircleCI 1.0 と 2.0 の主な違いは以下のとおりです。
 
 * すべての構成は、リポジトリ内の `.circleci/config.yml` ファイルで明示的に宣言されていなければなりません。
-* CircleCI 2.0 では、複数のステップやジョブから成るビルドをオーケストレーションするために、ワークフロー機能が導入されています。 ワークフローを使用すると、ビルドを複数のジョブに分割し、不具合をすばやく検出できます。 ワークフローを使用するには、`config.yml` ファイルに新しいスタンザを追加する必要があります (`config-translation` によって `workflows` スタンザは**生成されません**)。 手順と例については、[ワークフローに関するドキュメント]({{site.baseurl}}/ja/2.0/workflows/)を参照してください。
+* CircleCI 2.0 では、複数のステップやジョブから成るビルドをオーケストレーションするために、ワークフロー機能が導入されています。 ワークフローを使用すると、ビルドを複数のジョブに分割し、不具合をすばやく検出できます。 ワークフローを使用するには、`config.yml` ファイルに新しいスタンザを追加する必要があります (`config-translation` によって `workflows` スタンザは**生成されません**)。 手順と例については、[ワークフローに関するドキュメント]({{site.baseurl}}/2.0/workflows/)を参照してください。
 
-`config-translator` エンドポイントは、現在、1.0 ビルドの `deploy` ステップの変換を**サポートしていない**ため、デプロイのためのジョブも新しく追加する必要があります。 詳細な説明と例については、CircleCI 2.0 の[デプロイの構成に関するドキュメント]({{site.baseurl}}/ja/2.0/deployment-integrations/)を参照してください。
+`config-translator` エンドポイントは、現在、1.0 ビルドの `deploy` ステップの変換を**サポートしていない**ため、デプロイのためのジョブも新しく追加する必要があります。 詳細な説明と例については、CircleCI 2.0 の[デプロイの構成に関するドキュメント]({{site.baseurl}}/2.0/deployment-integrations/)を参照してください。
 
 ## `config-translation` の使用方法
 
@@ -42,13 +42,13 @@ order: 60
     
     `https://circleci.com/api/v1.1/project/github/bar/foo/config-translation`
 
-3. `bar` という GitHub 組織の `foo` というリポジトリに対して、`circleci.com` で**認証されていない**場合、ブラウザーから `config-translation` を使用するには、以下の URL をリクエストし、クエリ文字列に `circle-token` を直接渡します。 以下の例では、`curl` を使用してこれを呼び出し、変換する `branch` を渡しています。また、[CircleCI API トークン]({{ site.baseurl }}/ja/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)は `CIRCLE_TOKEN` という環境変数にあると仮定しています。
+3. `bar` という GitHub 組織の `foo` というリポジトリに対して、`circleci.com` で**認証されていない**場合、ブラウザーから `config-translation` を使用するには、以下の URL をリクエストし、クエリ文字列に `circle-token` を直接渡します。 以下の例では、`curl` を使用してこれを呼び出し、変換する `branch` を渡しています。また、[CircleCI API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)は `CIRCLE_TOKEN` という環境変数にあると仮定しています。
     
         Shell
-         curl -H "Circle-Token: $CIRCLE_TOKEN" "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?branch=develop" デフォルトでは、VCS で設定されているデフォルトのブランチ (通常は
-
+         curl "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?circle-token=$CIRCLE_TOKEN&branch=develop" デフォルトでは、VCS で設定されているデフォルトのブランチ (通常は 
+    
     `master`) を使用します。
 
 ## 関連項目
 
-[1.0 から 2.0 への移行のヒント]({{site.baseurl}}/ja/2.0/migration/)
+[1.0 から 2.0 への移行のヒント]({{site.baseurl}}/2.0/migration/)

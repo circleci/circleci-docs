@@ -21,7 +21,7 @@ CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコ
 
 **メモ:**: fastlane match を使用せずに進める場合は、その方法を紹介している[こちらのブログ記事](https://medium.com/@m4rr/circleci-2-0-and-the-ios-code-signing-df434d0086e2)を参照してください。
 
-CircleCI 2.0 上で iOS プロジェクトまたは Mac プロジェクトをまだ構成していない場合、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/ja/2.0/testing-ios/)」で構成手順を確認できます。
+CircleCI 2.0 上で iOS プロジェクトまたは Mac プロジェクトをまだ構成していない場合、「[macOS 上の iOS アプリケーションのテスト]({{ site.baseurl }}/2.0/testing-ios/)」で構成手順を確認できます。
 
 ## fastlane match のセットアップ
 
@@ -38,7 +38,7 @@ match をセットアップする前に、ユーザーの Xcode プロジェク�
 
 * **[Build Settings (ビルド設定)] -> [Code Signing Style (コード署名スタイル)]** を *[Manual (手動)]* に設定
 * **[Build Settings (ビルド設定)] -> [Development Team (開発チーム)]** を開発チーム ID に設定
-* **[Build Settings (ビルド設定)] -> [Code Signing Identity (コード署名 ID)]** を以下のように設定 
+* **[Build Settings (ビルド設定)] -> [Code Signing Identity (コード署名 ID)] ** を以下のように設定 
   * デバッグ設定: *[iOS Developer (iOS 開発者)]*
   * リリース設定: *[iOS Distribution (iOS ディストリビューション)]*
 

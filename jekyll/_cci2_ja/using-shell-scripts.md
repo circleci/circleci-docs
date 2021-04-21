@@ -8,7 +8,7 @@ categories:
 order: 10
 ---
 
-[CircleCI 設定ファイル]({{ site.baseurl }}/ja/2.0/configuration-reference/)でシェル スクリプトを使用するうえでのベスト プラクティスについて、以下のセクションに沿って説明します。
+[CircleCI 設定ファイル]({{ site.baseurl }}/2.0/configuration-reference/)でシェル スクリプトを使用するうえでのベスト プラクティスについて、以下のセクションに沿って説明します。
 
 + 目次
 {:toc}
@@ -24,7 +24,7 @@ CircleCI を構成するときに、シェル スクリプトの記述が必要�
 
 [ShellCheck](https://github.com/koalaman/shellcheck) は、シェル スクリプトの静的解析ツールです。bash/sh シェル スクリプトに対して警告と提案を行います。
 
-CircleCI で ShellCheck を最も効果的に使用するには、このツールを `.circleci/config.yml` ファイルに個別のジョブとして追加します。 こうすると、以下のようにワークフロー内で `shellcheck` ジョブを他のジョブと並列に実行できます。 `version: 2.1` の構成を使用している場合は、[Shellcheck Orb](https://circleci.com/developer/ja/orbs/orb/circleci/shellcheck#usage-shellcheck-workflow) を使用して、設定ファイルを簡素化することを検討してください。
+CircleCI で ShellCheck を最も効果的に使用するには、このツールを `.circleci/config.yml` ファイルに個別のジョブとして追加します。 こうすると、以下のようにワークフロー内で `shellcheck` ジョブを他のジョブと並列に実行できます。 `version: 2.1` の構成を使用している場合は、[Shellcheck Orb](https://circleci.com/orbs/registry/orb/circleci/shellcheck#usage-shellcheck-workflow) を使用して、設定ファイルを簡素化することを検討してください。
 
 ```yaml
 version: 2

@@ -53,4 +53,4 @@ workflows:
 ## 次のステップ
 {:.no_toc}
 
-- 次の手順については、[Orbs の選択に関するドキュメント]({{site.baseurl}}/ja/2.0/orbs-user-select-orb/)を参照してください。
+- 次の手順については、[Orbs の選択に関するドキュメント]({{site.baseurl}}/2.0/orbs-user-select-orb/)を参照してください。

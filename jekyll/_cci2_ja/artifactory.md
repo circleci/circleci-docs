@@ -60,9 +60,6 @@ jobs:
   upload-artifact:
     docker:
       - image: circleci/openjdk:8-jdk
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     working_directory: ~/repo
     steps:
       - checkout
@@ -87,4 +84,4 @@ jobs:
 
 {:.no_toc}
 
-[アーティファクトの保存とアクセス]({{ site.baseurl }}/ja/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)

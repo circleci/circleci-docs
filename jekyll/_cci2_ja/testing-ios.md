@@ -13,7 +13,7 @@ order: 30
 - 目次
 {:toc}
 
-**メモ:** 「[iOS プロジェクトのチュートリアル]({{ site.baseurl}}/2.0/ios-tutorial/)」や「[macOS での Hello World]({{ site.baseurl }}/ja/2.0/hello-world-macos/)」も併せてご覧ください。
+**メモ:** 「[iOS プロジェクトのチュートリアル]({{ site.baseurl}}/2.0/ios-tutorial/)」や「[macOS での Hello World]({{ site.baseurl }}/2.0/hello-world-macos/)」も併せてご覧ください。
 
 ## 概要
 {:.no_toc}
@@ -61,7 +61,7 @@ CircleCI アプリケーションの [Add Projects (プロジェクトの追加)
 7. [Commit Files (ファイルをコミットする)] ボタンをクリックします。 新しい `.xcscheme` ファイルが Xcode プロジェクトの下の `xcshareddata/xcschemes` フォルダーに格納されます。
 8. CircleCI からアクセスできるように、このファイルを Git リポジトリにコミットします。
 
-単純なプロジェクトであれば、最小限の構成で実行できます。 最小限の設定ファイルの例は、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」にて参照してください。
+単純なプロジェクトであれば、最小限の構成で実行できます。 最小限の設定ファイルの例は、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)」にて参照してください。
 
 ### ベスト プラクティス
 {:.no_toc}
@@ -282,7 +282,7 @@ CircleCI 2.0 では、iOS のビルドやテストに関するほぼすべての
 ### `config.yml` ファイルの作成
 {:.no_toc}
 
-ビルドを柔軟にカスタマイズするには、`.circleci/config.yml` ファイルをプロジェクトに追加します。こうすることで、ビルド プロセスのさまざまな段階で任意の bash コマンドを実行できます。 `config.yml` ファイルの構造の詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。 **メモ:** このドキュメントに記載されているオプションの多くは、macOS ビルドでは機能しません。
+ビルドを柔軟にカスタマイズするには、`.circleci/config.yml` ファイルをプロジェクトに追加します。こうすることで、ビルド プロセスのさまざまな段階で任意の bash コマンドを実行できます。 `config.yml` ファイルの構造の詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」を参照してください。 **メモ:** このドキュメントに記載されているオプションの多くは、macOS ビルドでは機能しません。
 
 ### カスタム パッケージのインストール
 {:.no_toc}
@@ -470,7 +470,7 @@ workflows:
 ### macOS ベースのビルドの制限事項
 {:.no_toc}
 
-現在、macOS 上の並列コンテナ間でのテストの分割はサポートされていません。 複数の Xcode バージョンを使用してビルドする場合、または複数のテスト ターゲットを実行する場合は、並列ジョブを含むワークフローを使用することをお勧めします。 並列ジョブを含むワークフローの例については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/workflows/#ワークフローの構成例)を参照してください。
+現在、macOS 上の並列コンテナ間でのテストの分割はサポートされていません。 複数の Xcode バージョンを使用してビルドする場合、または複数のテスト ターゲットを実行する場合は、並列ジョブを含むワークフローを使用することをお勧めします。 並列ジョブを含むワークフローの例については、[こちらのドキュメント]({{ site.baseurl }}/2.0/workflows/#ワークフローの構成例)を参照してください。
 
 ## 複数の Executor タイプを含む構成例 (macOS と Docker)
 
@@ -552,4 +552,4 @@ React Native プロジェクトは、CircleCI 2.0 上で `macos` および `dock
 {:.no_toc}
 
 - CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、署名、およびデプロイする完全なサンプルについては、[`circleci-demo-ios` GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
-- 設定ファイルの詳しい説明については、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/ios-tutorial/)」を参照してください。
+- 設定ファイルの詳しい説明については、「[iOS プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/ios-tutorial/)」を参照してください。

@@ -3,10 +3,12 @@ layout: classic-docs
 title: "データベースの構成例"
 short-title: "データベースの構成例"
 description: "PostgreSQL の構成例"
+categories:
+  - configuring-jobs
 order: 35
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
+PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
 
 * TOC
 {:toc}
@@ -132,7 +134,7 @@ jobs:
 
 ## Go アプリケーションと PostgreSQL の構成例
 
-以下の構成例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)を参照してください。
+以下の構成例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/2.0/language-go/)を参照してください。
 
 ```yaml
 version: 2
@@ -285,4 +287,4 @@ VALUES (
 
 ## 関連項目
 
-サービス イメージの使用とデータベースのテスト手順に関する概念的な情報については、「[データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)」を参照してください。
+サービス イメージの使用とデータベースのテスト手順に関する概念的な情報については、「[データベースの構成]({{ site.baseurl }}/2.0/databases/)」を参照してください。

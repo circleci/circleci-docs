@@ -34,7 +34,7 @@ order: 1
 ### プライベート環境変数
 {:.no_toc}
 
-多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 詳細については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)」を参照してください。
+多くのプロジェクトでは、API トークン、SSH キー、またはパスワードが必要です。 プライベート環境変数を使用すると、プロジェクトがパブリックの場合でもシークレットを安全に格納できます。 詳細については、「[プロジェクト内で環境変数を設定する]({{ site.baseurl }}/2.0/env-vars/#プロジェクト内で環境変数を設定する)」を参照してください。
 
 ### プル リクエストのみをビルドする
 {:.no_toc}
@@ -59,11 +59,11 @@ CircleCI はデフォルトで、フォークされたリポジトリからの P
 
 - アプリケーションを通して設定される[環境変数](#プライベート環境変数)
 
-- [デプロイ キーとユーザー キー]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー)
+- [デプロイ キーとユーザー キー]({{ site.baseurl }}/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー)
 
-- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/ja/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
+- ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
 
-- [AWS 権限]({{ site.baseurl }}/ja/2.0/deployment-integrations/#aws)および設定ファイル
+- [AWS 権限]({{ site.baseurl }}/2.0/deployment-integrations/#aws)および設定ファイル
 
 **メモ:** シークレットを必要とするオープンソース プロジェクトのフォークされた PR ビルドは、この設定を有効にしない限り CircleCI 上で正しく動作しません。
 
@@ -82,10 +82,10 @@ CircleCI はデフォルトで、フォークされたリポジトリからの P
 
 CircleCI 上でビルドされたさまざまな規模のプロジェクトを以下にいくつかご紹介します。
 
-- **[React](https://github.com/facebook/react)** - Facebook の JavaScript ベースの React は、CircleCI (および他の CI ツール) でビルドされています。
+- **[React](https://github.com/facebook/react)** - Facebook の JavaScript ベースの React は、CircleCI (および他の CI ツール) でビルドされています。 
 - **[React Native](https://github.com/facebook/react-native/)** - JavaScript と React を使用してネイティブ モバイル アプリケーションをビルドします。
 - **[Flow](https://github.com/facebook/flow/)** - JavaScript に静的な型指定を追加して、開発者の生産性とコードの品質を向上させます。
-- **[Relay](https://github.com/facebook/relay)** - データ駆動型の React アプリケーションをビルドするための JavaScript フレームワーク。
+- **[Relay](https://github.com/facebook/relay)** - データ駆動型の React アプリケーションをビルドするための JavaScript フレームワーク。 
 - **[Vue](https://github.com/vuejs/vue)** - Vue.js は、Web 上で UI をビルドするための漸進的な JavaScript フレームワークであり、段階的に採用できます。
 - **[Storybook](https://github.com/storybooks/storybook)** - 対話型 UI コンポーネントの開発とテストを行います (React、React Native、Vue、Angular、Ember)。
 - **[Electron](https://github.com/electron/electron)** - JavaScript、HTML、および CSS でクロスプラットフォームのデスクトップ アプリケーションをビルドします。
@@ -99,4 +99,4 @@ CircleCI 上でビルドされたさまざまな規模のプロジェクトを�
 ## 関連項目
 {:.no_toc}
 
-「[パブリック リポジトリの例]({{ site.baseurl }}/ja/2.0/example-configs/)」では、パブリックおよびオープンソースのプロジェクト構成に関する各種のリンクが、CircleCI の機能とプログラミング言語ごとに紹介されています。
+「[パブリック リポジトリの例]({{ site.baseurl }}/2.0/example-configs/)」では、パブリックおよびオープンソースのプロジェクト構成に関する各種のリンクが、CircleCI の機能とプログラミング言語ごとに紹介されています。

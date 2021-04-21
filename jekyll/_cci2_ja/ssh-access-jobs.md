@@ -31,7 +31,7 @@ SSH を使用してログインする場合、ユーザーは対話型のログ�
 
 4. GitHub または Bitbucket で使用している SSH キーと同じキーを使用して、実行中のジョブに SSH 接続し、必要なトラブルシューティングを行います。
 
-Windows Executor を使用している場合は、SSH 接続を行うシェルを渡す必要があります。 たとえば、ビルド内で `powershell` を実行するには、`ssh -p <remote_ip> -- powershell.exe` とします。 詳細については、「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows)」を参照してください。
+Windows Executor を使用している場合は、SSH 接続を行うシェルを渡す必要があります。 たとえば、ビルド内で `powershell` を実行するには、`ssh -p <remote_ip> -- powershell.exe` とします。 詳細については、「[Windows での Hello World]({{site.baseurl}}/2.0/hello-world-windows)」を参照してください。
 
 ビルド VM は、**ビルドの実行が終了した後 10 分間**は SSH 接続で利用可能な状態で、その後自動的にシャットダウンされます。 シャットダウンはキャンセルも可能です。ビルドに SSH 接続すると、その後 **2 時間**は接続が維持されます。
 
@@ -113,4 +113,4 @@ GitHub が受け付けたキー (この例では /Users/me/.ssh/id_rsa_github) �
 ## 関連項目
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)

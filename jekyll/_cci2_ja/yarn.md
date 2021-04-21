@@ -45,4 +45,4 @@ Yarn パッケージをキャッシュして、CI ビルド時間を短縮でき
 
 ## 関連項目
 
-[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)
+[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)

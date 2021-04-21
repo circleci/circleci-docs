@@ -2,6 +2,8 @@
 layout: classic-docs
 title: "通知の使用"
 short-title: "通知の使用"
+categories:
+  - configuring-jobs
 order: 100
 published: true
 ---
@@ -10,7 +12,7 @@ published: true
 {:toc}
 
 
-CircleCI にチャット通知、自動メール通知、および Web 通知機能が統合されました。 Slack 通知とメール通知は、[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
+CircleCI にチャット通知、自動メール通知、および Web 通知機能が統合されました。 Slack 通知とメール通知は、[ワークフロー]({{ site.baseurl }}/2.0/workflows/)の成功時および失敗時に送信されます。 IRC 通知は、ジョブごとに送信されます。 以下に、最小限の CircleCI 設定ファイルの例を示します。
 
 ```yaml
 version: 2
@@ -76,7 +78,7 @@ CircleCI アプリケーションの [[Notifications (通知)](https://circleci.
 
 ## Orb を使用した通知
 
-Orb を使用すれば、さまざまな種類の通知を構成に統合できます。現在、CircleCI からは Slack Orb と IRC Orb が提供されており、サードパーティ製の Orb もいくつか存在します。 [Orb レジストリ](https://circleci.com/developer/ja/orbs?query=notification&filterBy=all)で *notifications* を検索して、現在使用できる Orb をご確認ください。
+Orb を使用すれば、さまざまな種類の通知を構成に統合できます。現在、CircleCI からは Slack Orb と IRC Orb が提供されており、サードパーティ製の Orb もいくつか存在します。 [Orb レジストリ](https://circleci.com/orbs/registry/?query=notification&filterBy=all)で *notifications* を検索して、現在使用できる Orb をご確認ください。
 
 ### 前提条件
 
@@ -84,7 +86,7 @@ Orb を構成に統合する前に、以下の 2 つの手順を実行する必�
 
 ### Slack Orb の使用
 
-[CircleCI Slack Orb](https://circleci.com/developer/ja/orbs/orb/circleci/slack) を使用すると、Slack 通知を設定ファイルから直接統合し、カスタマイズできます。 以下に、Slack チャンネルにカスタム メッセージの通知を送信する設定ファイルの例を示します。
+[CircleCI Slack Orb](https://circleci.com/orbs/registry/orb/circleci/slack) を使用すると、Slack 通知を設定ファイルから直接統合し、カスタマイズできます。 以下に、Slack チャンネルにカスタム メッセージの通知を送信する設定ファイルの例を示します。
 
 ```yaml
 version: 2.1
@@ -107,11 +109,11 @@ workflows:
       - build
 ```
 
-Slack Orb を使用すれば、Slack チャンネルに承認待ちを通知したり、ジョブ終了時に成功または失敗のステータス アラートを送信したり、他の種類の通知も設定できます。 こうした使用例については、[CircleCI の Slack Orb のページ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)を参照してください。
+Slack Orb を使用すれば、Slack チャンネルに承認待ちを通知したり、ジョブ終了時に成功または失敗のステータス アラートを送信したり、他の種類の通知も設定できます。 こうした使用例については、[CircleCI の Slack Orb のページ](https://circleci.com/orbs/registry/orb/circleci/slack)を参照してください。
 
 ### IRC Orb の使用
 
-[IRC Orb](https://circleci.com/developer/ja/orbs/orb/circleci/irc) は Slack Orb に似ていますが、CircleCI からカスタムの IRC 通知を送信することだけが主な機能です。 以下の設定ファイルの例を参照してください。
+[IRC Orb](https://circleci.com/orbs/registry/orb/circleci/irc) は Slack Orb に似ていますが、CircleCI からカスタムの IRC 通知を送信することだけが主な機能です。 以下の設定ファイルの例を参照してください。
 
 ```yaml
 version: 2.1

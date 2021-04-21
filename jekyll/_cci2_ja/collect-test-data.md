@@ -2,13 +2,15 @@
 layout: classic-docs
 title: "テスト メタデータの収集"
 short-title: "テスト メタデータの収集"
+categories:
+  - configuring-jobs
 description: "テスト メタデータの収集"
 order: 34
 ---
 
 CircleCI は、XML ファイルからテスト メタデータを収集し、それを使用してジョブに関するインサイトを提供します。 ここでは、よく使用されるテスト ランナー用にテスト メタデータを XML として出力し、`store_test_results` ステップでレポートを保存するように CircleCI を構成する方法について説明します。
 
-* 目次
+* 目次 
 {:toc}
 
 テスト結果をアーティファクトとして表示するには、`store_artifacts` ステップを使用してテスト結果をアップロードします。
@@ -33,14 +35,14 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 * RSpec では、gemfile に以下を追加する必要があります。
 
     gem 'rspec_junit_formatter'
-
+    
 
 * Minitest では、gemfile に以下を追加する必要があります。
 
     gem 'minitest-ci'
+    
 
-
-* Django は、[django-nose](https://github.com/django-nose/django-nose) テスト ランナーを使用して構成する必要があります。
+* Django は、[django-nose](https://github.com/django-nose/django-nose) テスト ランナーを使用して構成する必要があります。 
 
 ## カスタム テスト ステップでのメタデータの収集
 
@@ -48,26 +50,26 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
 
     <br />- store_test_results:
         path: /tmp/test-results
-
+    
 
 ### カスタム テスト ランナーの例
 {:.no_toc}
 
 このセクションでは、以下のテスト ランナーの例を示します。
 
-* [Cucumber]({{ site.baseurl }}/ja/2.0/collect-test-data/#cucumber)
-* [Maven Surefire]({{ site.baseurl }}/ja/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
-* [Gradle]({{ site.baseurl }}/ja/2.0/collect-test-data/#gradle-junit-のテスト結果)
-* [Mocha]({{ site.baseurl }}/ja/2.0/collect-test-data/#nodejs-用の-mocha)
-* [AVA]({{ site.baseurl }}/ja/2.0/collect-test-data/#nodejs-用の-ava)
-* [ESLint]({{ site.baseurl }}/ja/2.0/collect-test-data/#eslint)
-* [PHPUnit]({{ site.baseurl }}/ja/2.0/collect-test-data/#phpunit)
-* [pytest]({{ site.baseurl }}/ja/2.0/collect-test-data/#pytest)
-* [RSpec]({{ site.baseurl }}/ja/2.0/collect-test-data/#rspec)
-* [test2junit]({{ site.baseurl }}/ja/2.0/collect-test-data/#clojure-テスト用の-test2junit)
-* [trx2junit]({{ site.baseurl }}/ja/2.0/collect-test-data/#visual-studionet-core-テスト用の-trx2junit)
-* [Karma]({{ site.baseurl }}/ja/2.0/collect-test-data/#karma)
-* [Jest]({{ site.baseurl }}/ja/2.0/collect-test-data/#jest)
+* [Cucumber]({{ site.baseurl }}/2.0/collect-test-data/#cucumber)
+* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
+* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-のテスト結果)
+* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-mocha)
+* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-ava)
+* [ESLint]({{ site.baseurl }}/2.0/collect-test-data/#eslint)
+* [PHPUnit]({{ site.baseurl }}/2.0/collect-test-data/#phpunit)
+* [pytest]({{ site.baseurl }}/2.0/collect-test-data/#pytest)
+* [RSpec]({{ site.baseurl }}/2.0/collect-test-data/#rspec)
+* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#clojure-テスト用の-test2junit)
+* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#visual-studio/net-core-テスト用の-trx2junit)
+* [Karma]({{ site.baseurl }}/2.0/collect-test-data/#karma)
+* [Jest]({{ site.baseurl }}/2.0/collect-test-data/#jest)
 
 #### Cucumber
 {:.no_toc}
@@ -103,7 +105,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
       - store_test_results:
           path: ~/cucumber
       - store_artifacts:
-          path: ~/cucumber
+          path: ~/cucumber      
 ```
 
 #### Java JUnit の結果に使用する Maven Surefire プラグイン
@@ -122,7 +124,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit
+          path: ~/test-results/junit         
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit のテスト結果
@@ -141,7 +143,7 @@ JUnit フォーマッタを有効化するまで、テスト メタデータは 
       - store_test_results:
           path: ~/test-results
       - store_artifacts:
-          path: ~/test-results/junit
+          path: ~/test-results/junit         
 ```
 
 #### <a name="mochajs"></a>Node.js 用の Mocha
@@ -164,7 +166,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
       - store_test_results:
           path: ~/junit
       - store_artifacts:
-          path: ~/junit
+          path: ~/junit          
 ```
 
 #### Mocha と nyc の組み合わせ
@@ -179,7 +181,7 @@ version: 2
                 CC_TEST_REPORTER_ID: code_climate_id_here
                 NODE_ENV: development
             docker:
-
+    
                 - image: circleci/node:8
                   environment:
                     MONGODB_URI: mongodb://admin:password@localhost:27017/db?authSource=admin
@@ -190,49 +192,49 @@ version: 2
             working_directory: ~/repo
             steps:
                 - checkout
-
+    
                 # npm を更新します
-
+    
                 - run:
                     name: update-npm
                     command: 'sudo npm install -g npm@latest'
-
+    
                 # 依存関係をダウンロードしてキャッシュします
-
+    
                 - restore_cache:
                     keys:
                         - v1-dependencies-{{ checksum "package-lock.json" }}
                     # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
                         - v1-dependencies-
-
+    
                 - run: npm install
-
+    
                 - run: npm install mocha-junit-reporter # CircleCI 専用
-
+    
                 - save_cache:
                     paths:
                         - node_modules
                     key: v1-dependencies-{{ checksum "package-lock.json" }}
 
             - run: mkdir reports
-
+    
                 # mocha を実行します
-
+    
                 - run:
                     name: npm のテスト
                     command: ./node_modules/.bin/nyc ./node_modules/.bin/mocha --recursive --timeout=10000 --exit --reporter mocha-junit-reporter --reporter-options mochaFile=reports/mocha/test-results.xml
                     when: always
-
+    
                 # eslint を実行します
-
+    
                 - run:
                     name: eslint
                     command: |
                         ./node_modules/.bin/eslint ./ --format junit --output-file ./reports/eslint/eslint.xml
                     when: always
-
+    
                 # Code Climate のカバレッジ レポートを実行します
-
+    
                 - run:
                     name: Code Climate テスト レポーターのセットアップ
                     command: |
@@ -241,7 +243,7 @@ version: 2
                         chmod +x ./cc-test-reporter
                         ./cc-test-reporter before-build
                     when: always
-
+    
                 - run:
                     name: code-coverage
                     command: |
@@ -251,18 +253,18 @@ version: 2
                         ./node_modules/.bin/nyc report --reporter=text-lcov > coverage/lcov.info
                         ./cc-test-reporter after-build -t lcov
                     when: always
-
+    
                 # 結果をアップロードします
-
+    
                 - store_test_results:
                     path: reports
-
+    
                 - store_artifacts:
                     path: ./reports/mocha/test-results.xml
-
+    
                 - store_artifacts:
                     path: ./reports/eslint/eslint.xml
-
+    
                 - store_artifacts: # テスト カバレッジをアーティファクトとしてアップロードします
                     path: ./coverage/lcov.info
                     prefix: tests
@@ -285,8 +287,8 @@ version: 2
           - store_test_results:
               path: ~/reports
           - store_artifacts:
-              path: ~/reports
-
+              path: ~/reports          
+    
 
 #### ESLint
 {:.no_toc}
@@ -304,8 +306,8 @@ version: 2
           - store_test_results:
               path: ~/reports
           - store_artifacts:
-              path: ~/reports
-
+              path: ~/reports          
+    
 
 #### PHPUnit
 {:.no_toc}
@@ -321,8 +323,8 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
           - store_test_results:
               path: ~/phpunit
           - store_artifacts:
-              path: ~/phpunit
-
+              path: ~/phpunit          
+    
 
 #### pytest
 {:.no_toc}
@@ -335,13 +337,13 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
                 . venv/bin/activate
                 mkdir test-results
                 pytest --junitxml=test-results/junit.xml
-
+    
           - store_test_results:
               path: test-results
-
+    
           - store_artifacts:
-              path: test-results
-
+              path: test-results    
+    
 
 #### RSpec
 {:.no_toc}
@@ -349,7 +351,7 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
 カスタム `rspec` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
     gem 'rspec_junit_formatter'
-
+    
 
 さらに、テスト コマンドを以下のように変更します。
 
@@ -362,7 +364,7 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
               when: always
           - store_test_results:
               path: ~/rspec
-
+    
 
 ### Minitest
 {:.no_toc}
@@ -370,7 +372,7 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
 カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 
     gem 'minitest-ci'
-
+    
 
 さらに、テスト コマンドを以下のように変更します。
 
@@ -382,7 +384,7 @@ PHPUnit テストの場合は、`--log-junit` コマンド ライン オプシ�
               when: always
           - store_test_results:
               path: test/reports
-
+    
 
 詳細については、[minitest-ci README](https://github.com/circleci/minitest-ci#readme) を参照してください。
 
@@ -433,7 +435,7 @@ Karma テスト ランナーで JUnit テストを出力するには、[karma-ju
           environment:
             JUNIT_REPORT_PATH: ./junit/
             JUNIT_REPORT_NAME: test-results.xml
-          when: always
+          when: always  
       - store_test_results:
           path: ./junit
       - store_artifacts:
@@ -494,7 +496,7 @@ steps:
 ## 関連項目
 {:.no_toc}
 
-[インサイトの使用]({{ site.baseurl }}/ja/2.0/insights/)
+[インサイトの使用]({{ site.baseurl }}/2.0/insights/)
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {:.no_toc}

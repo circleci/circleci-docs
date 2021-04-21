@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-[.circleci/config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルのバージョンを指定し、Orb、コマンド、ジョブ、および Executor を再利用する方法について説明します。
+[.circleci/config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイルのバージョンを指定し、Orb、コマンド、ジョブ、および Executor を再利用する方法について説明します。
 
 - 目次
 {:toc}
@@ -18,7 +18,7 @@ order: 1
 
 1. **[Add Projects (プロジェクトの追加)]** ページで新規のプロジェクトを追加するか、 既存のプロジェクトで **[Settings (設定)] > [Projects (プロジェクト)]** を選択し、歯車アイコンをクリックします。そして **[Advanced Settings (詳細設定)]** を開き、ラジオ ボタンでパイプラインを有効にします。 ![パイプラインの有効化]({{ site.baseurl }}/assets/img/docs/enable_pipelines.png) このラジオ ボタンが使用できない場合、プロジェクトでは既にパイプラインが使用されています。
 
-2. (オプション) 「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-cli/)」の説明に従って、CircleCI-Public CLI をインストールします。 再利用可能な設定ファイルを確認するときには、`circleci config process` コマンドを使用すると便利です。
+2. (オプション) 「[CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli/)」の説明に従って、CircleCI-Public CLI をインストールします。 再利用可能な設定ファイルを確認するときには、`circleci config process` コマンドを使用すると便利です。
 
 3. `.circleci/config.yml` ファイルで `version` キーを 2.1 に変更し、変更をコミットしてビルドをテストします。 新しいパイプラインを使用したプロジェクトのビルドが成功したことを確認してから、新しい 2.1 キーを設定ファイルに追加してください。
 
@@ -43,7 +43,7 @@ order: 1
 | キー          | 必須 | タイプ   | 説明                                                                                                   |
 | ----------- | -- | ----- | ---------------------------------------------------------------------------------------------------- |
 | steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行される一連のステップ。                                                                        |
-| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#パラメーターの構文)」セクションを参照してください。 |
+| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)」セクションを参照してください。 |
 | description | ×  | 文字列   | コマンドの目的を記述する文字列。                                                                                     |
 {: class="table table-striped"}
 
@@ -91,7 +91,7 @@ jobs:
 
 ## 特別なキー
 
-CircleCI では、すべての [circleci.com](https://circleci.com/ja/) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
+CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
 
 - `checkout`
 - `setup_remote_docker`
@@ -637,7 +637,7 @@ steps:
 
 #### 環境変数名
 
-環境変数名 (`env_var_name`) パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` パラメーターは、追加のチェックを実施できるという点で便利なパラメーター型です。詳細については、[環境変数の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/env-vars/)を参照してください。
+環境変数名 (`env_var_name`) パラメーターは文字列で、POSIX_NAME 正規表現 (スペースや特殊文字の使用不可など) に適合している必要があります。 `env_var_name` パラメーターは、追加のチェックを実施できるという点で便利なパラメーター型です。詳細については、[環境変数の使用に関するドキュメント]({{ site.baseurl }}/2.0/env-vars/)を参照してください。
 
 以下の例は、再利用可能な `build` ジョブで AWS S3 にデプロイする場合の `env_var_name` パラメーター型の使用方法を示しています。 この例では、`AWS_ACCESS_KEY` および `AWS_SECRET_KEY` 環境変数に `access-key` および `secret-key` パラメーターを指定して使用しています。 したがって、`s3cmd` を実行するデプロイ ジョブがある場合、必要な認証を使用しつつもカスタム バケットにデプロイする再利用可能コマンドを作成することが可能です。
 
@@ -1007,6 +1007,6 @@ workflows:
 
 ## 関連項目
 
-- CircleCI で使用できる構成例は、「[2.0 config.yml のサンプル ファイル]({{site.baseurl}}/ja/2.0/sample-config/)」でご覧いただけます。
-- 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)」で紹介しています。
-- CircleCI で使用できるデータベースの構成例については、[データベースの構成例]({{site.baseurl}}/ja/2.0//postgres-config/)」を参照してください。
+- CircleCI で使用できる構成例は、「[2.0 config.yml のサンプル ファイル]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
+- 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
+- CircleCI で使用できるデータベースの構成例については、[データベースの構成例]({{site.baseurl}}/2.0//postgres-config/)」を参照してください。

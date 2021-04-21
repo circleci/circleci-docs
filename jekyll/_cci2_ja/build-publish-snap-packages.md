@@ -14,7 +14,7 @@ Snap とは、複数の Linux ディストリビューション (distros) 上で
 
 .snap ファイルを一度作成すれば、`snapd` をサポートする Ubuntu、Debian、Fedora、Arch などの任意の Linux ディストリビューション上にインストールできます。 Snapcraft 自体の詳細については、[Snapcraft の Web サイト](https://snapcraft.io/)を参照してください。
 
-CircleCI 上で行う Snap のビルドは、ローカル マシンの場合とほぼ同じで、[CircleCI 2.0 構文](https://circleci.com/ja/docs/2.0/configuration-reference/)でラップされています。 ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
+CircleCI 上で行う Snap のビルドは、ローカル マシンの場合とほぼ同じで、[CircleCI 2.0 構文](https://circleci.com/ja/docs/2.0/configuration-reference/)でラップされています。 ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。サンプル ファイルの全体は[最後のセクション](#full-example-config)で確認してください。
 
 ## 前提条件
 
@@ -66,9 +66,9 @@ base64 snapcraft.login | xsel --clipboard
 ```
 
 1. ローカル マシンで、CircleCI にアップロードする Snapcraft の「ログイン ファイル」を作成します。 ローカル マシン上に既にこれらのツールがインストールされており、Snap Store (`snapcraft login`) にログインしている場合は、`snapcraft export-login snapcraft.login` コマンドを使用して、`snapcraft.login` という名前のログイン ファイルを作成します。 このファイルをパブリックに公開したり、Git リポジトリに格納したりはせず、base64 でエンコードして、`$SNAPCRAFT_LOGIN_FILE` という名前の[プライベート環境変数](https://circleci.com/ja/docs/2.0/env-vars/#adding-environment-variables-in-the-app)に格納します。
-
+    
     *メモ: Snapcraft ログイン ファイルの有効期限はデフォルトで 1 年間です。 認証ファイルの有効期間を延長したい場合は、`--expires` フラグで有効期限の日付を設定してください。*
-
+    
     ```yaml
     ...
           - run:

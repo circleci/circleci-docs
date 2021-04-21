@@ -3,6 +3,8 @@ layout: classic-docs
 title: "YAML の記述"
 short-title: "YAML の記述"
 description: "CircleCI の YAML を記述する方法"
+categories:
+  - configuring-jobs
 order: 20
 ---
 
@@ -142,13 +144,13 @@ harry_data:
 
 YAML には他にも機能がありますが、YAML の基礎について理解し、CircleCI の設定ファイルを簡潔に保つには、上記の例で十分です。 さらに知識を深めたい場合は、以下の資料をご活用ください。
 
-- キーと値の具体的な例については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。
+- キーと値の具体的な例については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」を参照してください。
 - `config.yml` が有効な YAML かどうかがわからない場合は、[バリデーション ツール](http://yaml-online-parser.appspot.com/)を実行してください。
 
 CircleCI は「Orbs」も開発しました。Orbs とは、構成ワークフローで使用できる構成エレメントをまとめたパッケージであり、事前構成とテストを終えた状態で使用できます。 DRY (Don't Repeat Yourself: 繰り返しを避けること) の原則を守るためのツールとして Orbs を使用すれば、構成エレメント (ジョブ、Executor、コマンド) をワークフローにすばやく簡単に組み込むことができます。 Orbs の詳細については、以下のドキュメントを参照してください。
 
-- [Orbs とは]({{site.baseurl}}/ja/2.0/orb-intro/): Orbs の概要
-- [Orbs を使う]({{site.baseurl}}/ja/2.0/using-orbs/): 既存の Orbs の使用方法
-- [Orbs の作成]({{site.baseurl}}/ja/2.0/creating-orbs/): Orb を独自に作成する手順
-- [設定ファイルの再利用]({{site.baseurl}}/ja/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の詳細
+- [Orbs とは]({{site.baseurl}}/2.0/orb-intro/): Orbs の概要
+- [Orbs を使う]({{site.baseurl}}/2.0/using-orbs/): 既存の Orbs の使用方法
+- [Orbs の作成]({{site.baseurl}}/2.0/creating-orbs/): Orb を独自に作成する手順
+- [設定ファイルの再利用]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の詳細
 - [「Learn X in Y Minutes」の YAML ページ](https://learnxinyminutes.com/docs/yaml/): YAML について詳しく取り上げた徹底ガイド

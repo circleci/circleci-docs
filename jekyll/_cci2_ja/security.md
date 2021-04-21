@@ -45,22 +45,20 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 - **Docker:** Docker イメージを使用している場合は、Docker Engine について、Docker 公式の [seccomp (セキュリティ コンピューティング モード) プロファイル](https://github.com/docker/engine/blob/e76380b67bcdeb289af66ec5d6412ea85063fc04/profiles/seccomp/default.json)を参照してください。 CircleCI は、Docker のデフォルトの `seccomp` プロファイルに以下のように付加します。 
 
 {% raw %}
-```yaml
 [
-  {
-    "comment": "ユーザー名前空間の作成を許可",
-    "names": [
-      "clone",
-      "setns",
-      "unshare"
-    ],
-    "action": "SCMP_ACT_ALLOW",
-    "args": [],
-    "includes": {},
-    "excludes": {}
-  }
-]
-```
+      {
+        "comment": "ユーザー名前空間の作成を許可",
+        "names": [
+          "clone",
+          "setns",
+          "unshare"
+        ],
+        "action": "SCMP_ACT_ALLOW",
+        "args": [],
+        "includes": {},
+        "excludes": {}
+      }
+    ]
 {% endraw %}
 
 ## 監査ログ
@@ -123,12 +121,12 @@ CircleCI を使用するときには、CircleCI の*ユーザー*として、セ
   - `echo` を使用し、コード ベースまたはシェル内のシークレットを出力する場合
   - プログラムやデバッグ ツールがエラー時にシークレットを出力する場合
 - VCS プロバイダーから付与された組織の権限を確認したうえで、[最小権限の原則](https://ja.wikipedia.org/wiki/最小権限の原則)に従うよう努めます (組織に属している場合)。 
-- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 詳細については、[コンテキストに関するドキュメント]({{ site.baseurl }}/ja/2.0/contexts/#コンテキストの制限)をお読みください。
+- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 詳細については、[コンテキストに関するドキュメント]({{ site.baseurl }}/2.0/contexts/#コンテキストの制限)をお読みください。
 - SSH キーへのアクセス権を持つ人間は、必ず組織による監査の対象とします。
 - VCS で 2 要素認証 (2FA) を必ず使用します ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa)、[Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html))。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるアクターによってコードがプッシュされたり、秘密が盗まれたりする危険性があります。
-- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、*フォークされたバージョンのリポジトリ*に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは**有効になっていません**。 この設定とオープンソースのセキュリティの詳細については、[オープンソース プロジェクトのドキュメント]({{site.baseurl}}/ja/2.0/oss/#セキュリティ)を参照してください。
+- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 CircleCI では、プロジェクトの設定を変更して、*フォークされたバージョンのリポジトリ*に環境変数を渡すかどうかを制御できます。 これは、デフォルトでは**有効になっていません**。 この設定とオープンソースのセキュリティの詳細については、[オープンソース プロジェクトのドキュメント]({{site.baseurl}}/2.0/oss/#セキュリティ)を参照してください。
 
 ## 関連項目
 {:.no_toc}
 
-[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)

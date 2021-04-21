@@ -3,6 +3,8 @@ layout: classic-docs
 title: "ワークフローを使用したジョブのスケジュール"
 short-title: "ワークフローを使用したジョブのスケジュール"
 description: "ワークフローを使用したジョブのスケジュール"
+categories:
+  - configuring-jobs
 order: 30
 ---
 
@@ -38,18 +40,18 @@ order: 30
 - FAILED: ワークフロー内の 1 つ以上のジョブが失敗 (ワークフロー グラフ内の 1 つ以上のジョブが失敗した場合の 最終的なステータスです)
 - SUCCESS: ワークフロー内のすべてのジョブが正常に完了
 - ON HOLD: ワークフロー内のジョブが承認を待機中
-- NEEDS SETUP: このプロジェクトの [config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル内にワークフロー スタンザが含まれていない、または正しくない
+- NEEDS SETUP: このプロジェクトの [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイル内にワークフロー スタンザが含まれていない、または正しくない
 
 ### 制限事項
 {:.no_toc}
 
 パイプラインが有効化されているプロジェクトは、CircleCI API を使用してワークフローをトリガーできます。 パイプラインが有効化されていないプロジェクトは、API によってトリガーされても、ワークフローが存在しないかのように実行されます。 **メモ:** ワークフローが存在しないビルドには、`build` ジョブが必要です。
 
-その他の詳細と制限事項については、「[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq)」のワークフロー セクションを参照してください。
+その他の詳細と制限事項については、「[よくあるご質問]({{ site.baseurl }}/2.0/faq)」のワークフロー セクションを参照してください。
 
 ## ワークフローの構成例
 
-`workflows` *キーの完全な仕様については、**「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)」を参照してください。*
+`workflows` *キーの完全な仕様については、**「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows)」を参照してください。*
 
 **メモ:** ワークフローを使用して構成されたプロジェクトに含まれる複数のジョブが、Docker イメージ、環境変数、`run` ステップなどの構文を共有することは少なくありません。 `.circleci/config.yml` ファイルのサイズを抑えるために、構文をエイリアス化して再利用する方法については、[YAML の アンカーとエイリアスに関するドキュメント](http://yaml.org/spec/1.2/spec.html#id2765878)参照してください。 概要については、ブログ記事「[Reuse YAML in the CircleCI Config (CircleCI 設定ファイルで YAML を再利用する)](https://circleci.com/blog/circleci-hacks-reuse-yaml-in-your-circleci-config-with-yaml/)」を参照してください。
 
@@ -86,7 +88,7 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前に実行する必要があります。
 - ワークフローの*最初*に setup ジョブを実行すると、何らかの事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備に役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/2.0/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/2.0/adv-config)」を参照してください。
 
 ### 順次ジョブ実行の例
 {:.no_toc}
@@ -123,7 +125,7 @@ workflows:
 
 ここに示すワークフローの例では、共通のビルド ジョブを実行し、次にファンアウトして一連の受け入れテスト ジョブを並列に実行し、最後にファンインして共通のデプロイ ジョブを実行します。
 
-![ファンアウトとファンインのワークフロー]({{ site.baseurl }}/assets/img/docs/fan-out-in.png)
+![ファンアウトとファンインのワークフロー]({{ site.baseurl }}/assets/img/docs/fan_in_out.png)
 
 以下の `config.yml` スニペットは、ファンアウトとファンインのジョブ実行を構成するワークフローの例を示しています。
 
@@ -182,7 +184,7 @@ workflows:
           type: approval # <<< このキー・値のペアにより、ワークフローのステータスが "On Hold" に設定されます。
           requires: # test2 が成功した場合にのみ "hold" ジョブを実行します。
            - test2
-      # `hold` ジョブが承認されると、`hold` ジョブを必要とする後続のジョブが実行されます。
+      # `hold` ジョブが承認されると、`hold` ジョブを必要とする後続のジョブが実行されます。 
       # この例では、ユーザーが手動でデプロイ ジョブをトリガーしています。
       - deploy:
           requires:
@@ -206,7 +208,7 @@ workflows:
 
 下図は、`request-testing` ジョブをクリックしたときに表示される承認ダイアログ ボックスのスクリーンショットです。
 
-![保留中のワークフローの承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+![保留中のワークフローの承認ダイアログ]({{ site.baseurl }}/assets/img/docs/approval_job_dialog.png)
 
 ## ワークフローのスケジュール実行
 
@@ -258,7 +260,7 @@ workflows:
 
 `filters` キーの値は、特定ブランチ上の実行ルールを定義するマップです。
 
-詳細については、「CircleCI を設定する」の「[branches ]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)」を参照してください。
+詳細については、「CircleCI を設定する」の「[branches ]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)」を参照してください。
 
 このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
 
@@ -269,7 +271,7 @@ workflows:
 ### ジョブ コンテキストを使用して環境変数を共有する
 {:.no_toc}
 
-以下の例は、コンテキストを使用して環境変数を共有して 4 つの順次ジョブから成るワークフローを示しています。 アプリケーションでこの設定を行う詳細な手順については、[コンテキストに関するドキュメント]({{ site.baseurl }}/ja/2.0/contexts)を参照してください。
+以下の例は、コンテキストを使用して環境変数を共有して 4 つの順次ジョブから成るワークフローを示しています。 アプリケーションでこの設定を行う詳細な手順については、[コンテキストに関するドキュメント]({{ site.baseurl }}/2.0/contexts)を参照してください。
 
 以下の `config.yml` スニペットは、`org-global` コンテキスト内に定義されたリソースを使用するように順次ジョブ ワークフローを構成した例です。
 
@@ -282,11 +284,11 @@ workflows:
       - test1:
           requires:
             - build
-          context: org-global
+          context: org-global  
       - test2:
           requires:
             - test1
-          context: org-global
+          context: org-global  
       - deploy:
           requires:
             - test2
@@ -424,7 +426,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 
 各ワークフローには 1 つのワークスペースが関連付けられ、ワークフローの進行に伴ってダウンストリーム ジョブにファイルを転送するために使用されます。 ワークスペースは、追加専用のデータ ストレージです。 ジョブは、ワークスペースにデータを維持できます。 この構成は、データをアーカイブし、コンテナ外のストアに新しいレイヤーを作成します。 ダウンストリーム ジョブは、そのコンテナ ファイル システムにワークスペースをアタッチできます。 ワークスペースをアタッチすると、ワークフロー グラフ内のアップストリーム ジョブの順序に基づいて、各レイヤーがダウンロードされ、アンパッケージ化されます。
 
-![ワークスペースのデータ フロー]({{ site.baseurl }}/assets/img/docs/workspaces.png)
+![ワークスペースのデータ フロー]({{ site.baseurl }}/assets/img/docs/Diagram-v3-Workspaces.png)
 
 ワークスペースを使用して実行ごとに固有のデータを渡しますが、これはダウンストリーム ジョブに必要です。 複数のブランチで実行されるジョブを含むワークフローでは、ワークスペースを使用してデータを共有しなければならない場合があります。 ワークスペースは、コンパイルされたデータがテスト コンテナによって使用されるプロジェクトでも便利です。
 
@@ -458,7 +460,7 @@ jobs:
       - run: mkdir -p workspace
       - run: echo "Hello, world!" > workspace/echo-output
 
-      # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をワークスペースに維持します。
+      # ダウンストリーム ジョブで使用するために、指定されたパス (workspace/echo-output) をワークスペースに維持します。 
 
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。 これは、ワークスペースの
@@ -549,16 +551,16 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 ## 関連項目
 {:.no_toc}
 
-- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時に、ワークフローを構成に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)でワークフローの構成手順を参照してください。
+- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時に、ワークフローを構成に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/2.0/migrating-from-1-2/)でワークフローの構成手順を参照してください。
 
-- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq)」のワークフロー セクションを参照してください。
+- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/2.0/faq)」のワークフロー セクションを参照してください。
 
 - ワークフローを使用して構成されたデモ アプリについては、GitHub で [CircleCI デモ ワークフロー](https://github.com/CircleCI-Public/circleci-demo-workflows)を参照してください。
 
 ## ビデオ: ワークフローに複数のジョブを構成する
 {:.no_toc}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe> 
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {:.no_toc}

@@ -8,14 +8,14 @@ categories:
 order: 2
 ---
 
-ジョブ、ステップ、ワークフローに加え、Orbs に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) キーについて概説します。
+ジョブ、ステップ、ワークフローに加え、Orbs に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) キーについて概説します。
 
 - 目次
 {:toc}
 
 ## Orbs の概要
 
-Orbs は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orbs を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)では、構成作業の簡素化に役立つ Orb を検索できます。
+Orbs は、名前に基づいてインポートするかインラインで構成する、設定ファイルのパッケージです。プロジェクト内またはプロジェクト間で共有および再利用して、構成作業を簡略化することができます。 設定ファイルで Orbs を使用する方法と Orb 設計の概要については、[Orb の使用に関するドキュメント]({{ site.baseurl }}/2.0/using-orbs/)を参照してください。 [CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)では、構成作業の簡素化に役立つ Orb を検索できます。
 
 ## ジョブの概要
 
@@ -23,13 +23,13 @@ Orbs は、名前に基づいてインポートするかインラインで構成
 
 ジョブとステップはきめ細かく制御できます。ワークフローのフレームワークが提供され、各フェーズでのステータスを確認できるため、高頻度のフィードバックが可能になります。 下図はジョブ間のデータ フローを表したものです。 ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。 キャッシュは、異なるワークフロー ビルドにある同じジョブ間でデータを維持します。 アーティファクトは、ワークフローの終了後にデータを維持します。
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/jobs-overview.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/Diagram-v3--Default.png)
 
 2.0 のジョブは、最近使用した `machine` Executor の実行を再利用できる `machine` Executor、テストや必要なサービス (データベースなど) を実行するように Docker コンテナを構成できる `docker` Executor、または `macos` Executor を使用して実行できます。
 
 `docker` Executor を使用する場合、起動するコンテナのイメージを `docker:` キーの下に指定します。 `docker` Executor には任意のパブリック Docker イメージを使用できます。
 
-`docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
+`docker` Executor と `machine` Executor の用途と違いについては、[コンテナ イメージの指定に関するドキュメント]({{ site.baseurl }}/2.0/executor-types/)を参照してください。
 
 ## ステップの概要
 
@@ -60,12 +60,11 @@ workflows:
 2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
 {% raw %}
-```yaml
 version: 2
     jobs:
       build:
         docker:
-
+    
           - image: circleci/<language>:<version TAG>
         steps:
           - checkout
@@ -82,10 +81,9 @@ version: 2
         jobs:
           - build
           - test
-```
-{% endraw %}
+    
 
-上記は並列ジョブ ワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/ja/2.0/workflows)を参照してください。
+{% endraw %} 上記は並列ジョブ ワークフローの例です。処理時間を短縮するために、`build` ジョブと `test` ジョブを並列で実行しています。 並列実行、順次実行、および手動承認のワークフローによってジョブをオーケストレーションする詳しい方法については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 ## 関連項目
 

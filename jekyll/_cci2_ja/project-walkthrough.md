@@ -21,7 +21,7 @@ order: 3
 
 {:.no_toc}
 
-通常、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
+通常、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルは、複数の[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs)で構成されます。 この例では、`build` という名前のジョブが 1 つ含まれています。 1 つのジョブは複数の [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) で構成されます。steps とは、ファイル内の最初の [`image:`](https://circleci.com/ja/docs/2.0/configuration-reference/#image) キーで定義されたコンテナ内で実行されるコマンドです。 この最初のイメージは、*プライマリ コンテナ*とも呼ばれます。
 
 以下は、CircleCI デモ プロジェクトの最もシンプルな例です。すべての構成が `build` ジョブの下にネストされています。
 
@@ -36,7 +36,7 @@ jobs:
       - run: pip install -r requirements/dev.txt
 ```
 
-**メモ:** `.circleci/config.yml` 内で[ワークフロー]({{ site.baseurl }}/ja/2.0/workflows)を**使用しない**場合、以下を含む `build` という名前のジョブを記述している必要があります。
+**メモ:** `.circleci/config.yml` 内で[ワークフロー]({{ site.baseurl }}/2.0/workflows)を**使用しない**場合、以下を含む `build` という名前のジョブを記述している必要があります。
 
 - 基盤となるテクノロジーの Executor。上記の例では `docker` として定義されています。
 - イメージは Docker イメージです。上記の例では、CircleCI によって提供される Debian Stretch 上の Python 3.6.2 を含み、テストをサポートするためにブラウザーがインストールされています。 
@@ -149,7 +149,7 @@ jobs:
 
 - `save_cache:` ステップは、指定されたパス (この例では `venv`) からキャッシュを作成します。 キャッシュキーは、`key:` で指定したテンプレートから作成されます。 このとき、CircleCI で保存されたキャッシュが `restore_cache:` ステップで検出できるように、必ず `restore_cache:` ステップと同じテンプレートを使用してください。 キャッシュを保存する前に、CircleCI はテンプレートからキャッシュ キーを生成します。生成されたキーに一致するキャッシュが既に存在する場合、CircleCI は新しいキャッシュを保存しません。 テンプレートにはブランチ名と `requirements/dev.txt` のチェックサムが含まれるため、ジョブが別のブランチで実行されるか、`requirements/dev.txt` のチェックサムが変化すると、CircleCI は新しいキャッシュを作成します。
 
-キャッシュの詳細については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/caching)をご覧ください。
+キャッシュの詳細については、[こちらのドキュメント]({{ site.baseurl }}/2.0/caching)をご覧ください。
 
 ## Selenium のインストール・実行によるブラウザー テストの自動化
 
@@ -258,7 +258,7 @@ jobs:
 - Heroku アプリケーションが作成されている
 - `HEROKU_APP_NAME` と `HEROKU_API_KEY` の環境変数が設定されている
 
-上記のいずれか 1 つでも満たしていない場合には、デプロイに関するドキュメントの「[Heroku]({{ site.baseurl }}/ja/2.0/deployment-integrations/#heroku)」セクションの手順を実行してください。
+上記のいずれか 1 つでも満たしていない場合には、デプロイに関するドキュメントの「[Heroku]({{ site.baseurl }}/2.0/deployment-integrations/#heroku)」セクションの手順を実行してください。
 
 **メモ:** このデモ プロジェクトをフォークする場合は、Heroku プロジェクトの名前を変更すると、このチュートリアルで使用する名前空間と干渉しないように Heroku をデプロイできます。
 
@@ -401,4 +401,4 @@ jobs:
 
 {:.no_toc}
 
-ワークフローの詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows)」を参照してください。
+ワークフローの詳細については、「[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/2.0/workflows)」を参照してください。

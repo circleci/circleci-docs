@@ -16,7 +16,7 @@ order: 8
 ## 概要
 {:.no_toc}
 
-お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
+お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 CircleCI は、以下のページで Ruby on Rails サンプル プロジェクトを提供しています。
 
@@ -27,7 +27,7 @@ CircleCI は、以下のページで Ruby on Rails サンプル プロジェク�
 
 このアプリケーションでは、最新の安定した Rails バージョン 5.1 (`rspec-rails`)、[RspecJunitFormatter](https://github.com/sj26/rspec_junit_formatter)、および PostgreSQL データベースを使用しています。
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{ site.baseurl}}/ja/2.0/circleci-images/)の 1 つを使用しています。
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ](http://circleci.com/ja/docs/2.0/circleci-images)の 1 つを使用しています。
 
 ## CircleCI のビルド済み Docker イメージ
 
@@ -146,7 +146,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 
 ## 設定ファイルの詳細
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+`config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
 ```yaml
 version: 2
@@ -185,7 +185,7 @@ jobs:
           POSTGRES_PASSWORD: ""
 ```
 
-この例では、以下の 2 つの [CircleCI コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#イメージのタイプ)が使用されています。
+この例では、以下の 2 つの [CircleCI コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/#イメージのタイプ)が使用されています。
 
 * Debian Jessie 上で実行され、Ruby 2.4.2 と Node.js をインストールする言語イメージ
 
@@ -258,7 +258,7 @@ steps:
 ```
 {% endraw %}
 
-次のセクションでは、テスト データベースを設定します。 ここでは、`dockerize` [ユーティリティ](https://github.com/jwilder/dockerize)を使用して、データベース サービスが使用可能になるまで[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)のメイン処理の開始を遅らせています。
+次のセクションでは、テスト データベースを設定します。 ここでは、`dockerize` [ユーティリティ](https://github.com/jwilder/dockerize)を使用して、データベース サービスが使用可能になるまで[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#プライマリ-コンテナ)のメイン処理の開始を遅らせています。
 
 ```yaml
 steps:
@@ -314,7 +314,7 @@ RSpec テスト スイートには、以下の 2 つのフォーマッタが指�
 ## 関連項目
 {:.no_toc}
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
 
 このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな構成例であり、実際のプロジェクトはこれよりも複雑です。このため、独自のプロジェクトを構成する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 

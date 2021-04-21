@@ -42,7 +42,7 @@ CLI は、自動的に `$PACKAGECLOUD_TOKEN` 環境変数を使用して、packa
 
 ### 依存関係のキャッシュの使用
 
-後続のビルドのためにこの依存関係をキャッシュするには、`Gemfile` に `package_cloud` gem を追加して、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」に記載された CircleCI のガイダンスに従ってください。
+後続のビルドのためにこの依存関係をキャッシュするには、`Gemfile` に `package_cloud` gem を追加して、「[依存関係のキャッシュ]({{ site.baseurl }}/2.0/caching/)」に記載された CircleCI のガイダンスに従ってください。
 
 ## packagecloud CLI でのパッケージのプッシュ
 
@@ -225,4 +225,4 @@ packagecloud には、パッケージ リポジトリを管理するための堅
 
 ## 関連項目
 
-[アーティファクトの保存とアクセス]({{ site.baseurl }}/ja/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)

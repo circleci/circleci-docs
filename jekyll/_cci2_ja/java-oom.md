@@ -86,4 +86,4 @@ Java OOM エラーのデバッグを行っても、たいていの場合 `exit c
 
 ## 関連項目
 
-[Java 言語ガイド]({{ site.baseurl }}/ja/2.0/language-java/) [Android チュートリアル]({{ site.baseurl }}/ja/2.0/language-android/)
+[Java 言語ガイド]({{ site.baseurl }}/2.0/language-java/) [Android チュートリアル]({{ site.baseurl }}/2.0/language-android/)

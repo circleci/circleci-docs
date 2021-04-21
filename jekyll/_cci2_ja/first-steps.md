@@ -22,4 +22,4 @@ order: 2
 
 ## 次のステップ
 
-「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照し、プロジェクトの基礎、Org の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
+「[Hello World]({{ site.baseurl }}/2.0/hello-world/)」を参照し、プロジェクトの基礎、Org の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。

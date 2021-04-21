@@ -23,7 +23,7 @@ order: 1
             # プライマリ コンテナで実行するコマンド
     
 
-`docker` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#docker-の使用)をご覧ください。
+`docker` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#docker-の使用)をご覧ください。
 
 ## Machine
 
@@ -45,7 +45,7 @@ jobs:
             # Linux 仮想マシン環境で実行するコマンド
     
 
-`machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
+`machine` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#machine-の使用)をご覧ください。
 
 ## macOS
 
@@ -61,13 +61,13 @@ jobs:
           # macOS 仮想マシン環境で実行するコマンド
     
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#macos-の使用)をご覧ください。
+`macos` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#macos-の使用)をご覧ください。
 
 ## Windows
 
 Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
-* クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。 [パイプラインの有効化]({{ site.baseurl }}/ja/2.0/build-processing)も必要です。
+* クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。 [パイプラインの有効化]({{ site.baseurl }}/2.0/build-processing)も必要です。
 * オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。これは、*CircleCI Server v2.18.3* からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
@@ -101,10 +101,10 @@ version: 2
           - run: Write-Host 'Hello, Windows'
     
 
-`windows` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/developer/ja/orbs/orb/circleci/windows)でご確認ください。
+`windows` Executor の使用については、[こちら]({{ site.baseurl }}/2.0/executor-types/#windows-executor-の使用)をご覧ください。 Windows Orb で使用できるオプションの一覧は [Windows Orb の詳細ページ](https://circleci.com/orbs/registry/orb/circleci/windows)でご確認ください。
 
 ## 関連項目
 
-* [ビルド済みの CircleCI コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)
-* [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
-* [macOS でのビルド]({{site.baseurl}}/ja/2.0/hello-world-macos)
+* [ビルド済みの CircleCI コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/)
+* [macOS でのビルド]({{site.baseurl}}/2.0/hello-world-macos)
+* [macOS でのビルド]({{site.baseurl}}/2.0/hello-world-macos)

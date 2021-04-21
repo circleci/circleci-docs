@@ -21,9 +21,9 @@ order: 1
 
 CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orb を使用すると、複数のプロジェクトで構成を共有、標準化、簡略化することができます。 構成のベスト プラクティスの参考として Orb を使用することも可能です。
 
-現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にて確認してください。
+現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/)にて確認してください。
 
-既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 以下の例では、`circleci` 名前空間で [`hello-build` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/hello-build) を呼び出します。
+既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 以下の例では、`circleci` 名前空間で [`hello-build` Orb](https://circleci.com/orbs/registry/orb/circleci/hello-build) を呼び出します。
 
 ```yaml
 version: 2.1
@@ -37,7 +37,7 @@ workflows:
       - hello/hello-build
 ```
 
-CircleCI Orb の詳細については、「[Orb の概要]({{ site.baseurl }}/ja/2.0/orb-intro/)」を参照してください。
+CircleCI Orb の詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
 
 #### CircleCI プラットフォームおよび Orb を使用するための環境構成
 
@@ -175,7 +175,7 @@ workflows:
 
 この例は、Orb を使用して AWS CLI をインストール・構成し、タスク定義を取得してから、このリビジョンがデプロイされたかどうかを検証する方法を示しています。 イメージを構成して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws-ecr-と-aws-ecs-の-orb-のサンプル)を参照してください。
 
-CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)を参照してください。
+CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/orb/circleci/aws-ecs)を参照してください。
 
 ## ソフトウェアの変更を Google Kubernetes Engine (GKE) にデプロイする {#header2}
 
@@ -437,7 +437,7 @@ CircleCI が開発した Kubernetes Orb は、Amazon Elastic Container Service (
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-CircleCI AWS-EKS Orb を使用する前に、CircleCI Orb レジストリで [AWS-EKS Orb の仕様](https://circleci.com/developer/ja/orbs/orb/circleci/aws-eks#quick-start)を確認してください。
+CircleCI AWS-EKS Orb を使用する前に、CircleCI Orb レジストリで [AWS-EKS Orb の仕様](https://circleci.com/orbs/registry/orb/circleci/aws-eks#quick-start)を確認してください。
 
 ### 前提条件
 
@@ -1035,7 +1035,7 @@ workflows:
 
 上の例のように、CircleCI Heroku Orb (`circleci/heroku@0.0.10`) が呼び出されると、`heroku-deploy` ワークフローが開始され、`deploy-via-git` ジョブを実行できるようになります。
 
-CircleCI Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/heroku)を参照してください。
+CircleCI Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/orb/circleci/heroku)を参照してください。
 
 ## CircleCI ジョブでカスタム Slack 通知を利用する {#header5}
 
@@ -1063,7 +1063,7 @@ workflows:
 ```
 上の例では、ワークフローを実行する前に、まず `circleci/slack@1.0.0` Orb を呼び出す必要があることに注意してください。これで、`message` や `webhook` を関連付けて通知を送信できるようになります。
 
-この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
+この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/orb/circleci/slack)の Slack Orb を参照してください。
 
 ### カスタム メッセージを付けて Slack チャンネルに通知する
 
@@ -1126,4 +1126,4 @@ version: 2.1
 ```
 上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
 
-この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
+この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/orbs/registry/orb/circleci/slack)の Slack Orb を参照してください。

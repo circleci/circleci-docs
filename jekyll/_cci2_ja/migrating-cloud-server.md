@@ -8,7 +8,7 @@ categories:
 order: 1
 ---
 
-CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行するための正式なプロセスやツールセットはありません。 そのため、AWS と Terraform を使用して CircleCI 2.0 を新規にインストールします。詳細については、[こちらのインストール手順]({{ site.baseurl }}/ja/2.0/aws)を参照してください。
+CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行するための正式なプロセスやツールセットはありません。 そのため、AWS と Terraform を使用して CircleCI 2.0 を新規にインストールします。詳細については、[こちらのインストール手順]({{ site.baseurl }}/2.0/aws)を参照してください。
 
 インストールが完了したら、コンテキスト、環境変数、API トークンなどのすべてのプロジェクト設定を手動でコピーする必要があります。
 
