@@ -18,16 +18,18 @@ CircleCI の **Windows ビルド環境**で継続的インテグレーション�
 
 
 # 前提条件
+{: #prerequisites }
 
-作業を行う前に、以下を準備しておく必要があります。
+To follow along with this document you will need:
 
 * CircleCI の[アカウント](https://circleci.com/ja/signup/)。
 * Free プラン (デフォルト) または [Performance プラン](https://circleci.com/ｊａ／pricing/usage/)。 CircleCI Server をお使いの方向けには以下に別のコード例を掲載していますので、そちらをご参照ください。
 * クラウド版をお使いの場合にプロジェクトで Windows を使用するには、[パイプラインを有効化]({{site.baseurl}}/2.0/build-processing/)する必要があります。
 
 # Windows Executor の概要
+{: #overview-of-the-windows-executor }
 
-Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) アプリケーション、.NET 実行可能ファイル、(.NET フレームワークなどの) Windows 固有プロジェクトといった、Windows プロジェクトをビルドするためのツールを提供します。 Windows Executor の仕様と機能は以下のとおりです。
+The Windows build environment (or `executor`) gives users the tools to build Windows projects, such as a Universal Windows Platform (UWP) application, a .NET executable, or Windows-specific (like the .NET framework) projects. The following specifications detail the capacities and included features of the Windows executor:
 
 - VM ベースでジョブの完全分離を保証
 - Windows Server 2019 Datacenter エディションの Server Core バージョンを使用
@@ -41,6 +43,7 @@ Windows ビルド環境 (`Executor`) は、Universal Windows Platform (UWP) ア�
 - Orb usage is not supported on Server instances of CircleCI (please view the "server" code samples for server usage.)
 
 ## Windows Executor イメージ
+{: #windows-executor-images }
 
 Currently CircleCI supports a single Windows image: Windows Server 2019 with Visual Studio 2019. Please see the full contents of the image in the [list of installed software](#software-pre-installed-in-the-windows-image) further along in this document. Contact your systems administrator for details of what is included in CircleCI Server Windows images.
 
@@ -91,6 +94,7 @@ jobs:
 
 
 ## 既知の問題
+{: #known-issues }
 
 These are the issues with the Windows executor that we are aware of and will address as soon as we can:
 
@@ -98,6 +102,7 @@ These are the issues with the Windows executor that we are aware of and will add
 * It is currently not possible to do nested virtualization (for example, using the `--platform linux` flag).
 
 # サンプルの設定ファイル
+{: #example-configuration-file }
 
 Get started with Windows on CircleCI with the following configuration snippet that you can paste into your `.circleci/config.yml` file:
 
@@ -138,6 +143,7 @@ jobs:
 From here we will use the version 2.1 syntax to discuss using the Windows executor, but if you're using Server, you can follow along with the executor definition syntax described above.
 
 # Windows Executor でのシェルの指定
+{: #specifying-a-shell-with-the-windows-executor }
 
 There are three shells that you can use to run job steps on Windows:
 
@@ -161,7 +167,7 @@ jobs:
       name: win/default
     steps:
       # default shell is Powershell
-      - run:            
+      - run:
          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
          shell: powershell.exe
       - run:
@@ -183,7 +189,7 @@ jobs:
     resource_class: windows.medium
     steps:
       # default shell is Powershell
-      - run:            
+      - run:
          command: $(echo hello | Out-Host; $?) -and $(echo world | Out-Host; $?)
          shell: powershell.exe
       - run:
@@ -231,6 +237,7 @@ jobs:
 ```
 
 # Example application
+{: #example-application }
 
 Let’s consider a more advanced (but still introductory) "hello world" application using the Windows executor. This [example application](https://github.com/CircleCI-Public/circleci-demo-windows) still prints "Hello World" to the console, but does so using .NET core to create an executable, uses dependency caching, and creates an artifact on every build. **Note:** If you are using Windows on CircleCI Server instances, replace usage of orbs with a machine image as described in the previous code samples.
 
@@ -298,10 +305,12 @@ Next, we run two steps: one to build the executable for Windows 10, and another 
 In our last step, we store the build executable as an artifact, making it accessible with the CircleCI web application or API.
 
 # SSH into your build
+{: #ssh-into-your-build }
 
 It is possible to SSH into a Windows build container. This is useful for troubleshooting problems in your pipeline. Follow these steps to SSH into a Windows container:
 
 ## 手順
+{: #steps }
 
 1. SSH キーを [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) アカウントまたは [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) アカウントに追加していることを確認します。
 
@@ -320,6 +329,7 @@ The available options are:
 You can read more about using SSH in your builds [here]({{site.baseurl}}/2.0/ssh-access-jobs).
 
 # Next steps
+{: #next-steps }
 
 Also, consider reading documentation on some of CircleCI’s features:
 
@@ -328,6 +338,7 @@ Also, consider reading documentation on some of CircleCI’s features:
 * Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{site.baseurl}}/2.0/configuration-reference/) and [CircleCI Images]({{site.baseurl}}/2.0/circleci-images/) documentation, respectively.
 
 # Windows イメージにプリインストールされているソフトウェア
+{: #software-pre-installed-in-the-windows-image }
 
 **Windows Server 2019 with Visual Studio 2019**
 
