@@ -20,56 +20,61 @@ Opt-In to this feature by going to Settings > Usage Statistics on the management
 ![](  {{ site.baseurl }}/assets/img/docs/usage-statistics-setting.png)
 
 ## Detailed usage statistics
+{: #detailed-usage-statistics }
 
-以下のセクションでは、この設定を有効にした場合に CircleCI が収集する使用状況統計に関する情報を提供します。
+The following sections provide information about the usage statistics CircleCI will gather when this setting is enabled.
 
 ### Weekly account usage
+{: #weekly-account-usage }
 
-| **名前**                | **タイプ** | **目的**                                |
-| --------------------- | ------- | ------------------------------------- |
-| account_id            | UUID    | _各 vcs アカウントを一意に識別します。_               |
-| usage_current_macos | 分       | _各アカウントについて、1 週間で実行されたビルドを分単位で記録します。_ |
-| usage_legacy_macos  | 分       |                                       |
-| usage_current_linux | 分       |                                       |
-| usage_legacy_linux  | 分       |                                       |
+| **名前**                | **タイプ** | **目的**                                                        |
+| --------------------- | ------- | ------------------------------------------------------------- |
+| account_id            | UUID    | _Uniquely identifies each vcs account_                        |
+| usage_current_macos | 分       | _For each account, track weekly builds performed in minutes._ |
+| usage_legacy_macos  | 分       |                                                               |
+| usage_current_linux | 分       |                                                               |
+| usage_legacy_linux  | 分       |                                                               |
 {: class="table table-striped"}
 
 ### Weekly job activity
+{: #weekly-job-activity }
 
-| **名前**                                 | **タイプ** | **目的**                                                                                                   |
-| -------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
-| utc_week                               | 日付      | _以下のデータが適用される週を識別します。_                                                                                   |
-| usage_oss_macos_legacy               | 分       | _1 週間で実行されたビルドを記録します。_                                                                                   |
-| usage_oss_macos_current              | 分       |                                                                                                          |
-| usage_oss_linux_legacy               | 分       |                                                                                                          |
-| usage_oss_linux_current              | 分       |                                                                                                          |
-| usage_private_macos_legacy           | 分       |                                                                                                          |
-| usage_private_macos_current          | 分       |                                                                                                          |
-| usage_private_linux_legacy           | 分       |                                                                                                          |
-| usage_private_linux_current          | 分       |                                                                                                          |
-| new_projects_oss_macos_legacy      | 合計      | _Captures new Builds performed on 1.0. Observe if users are starting new projects on 1.0._               |
-| new_projects_oss_macos_current     | 合計      |                                                                                                          |
-| new_projects_oss_linux_legacy      | 合計      |                                                                                                          |
-| new_projects_oss_linux_current     | 合計      |                                                                                                          |
-| new_projects_private_macos_legacy  | 合計      |                                                                                                          |
-| new_projects_private_macos_current | 合計      |                                                                                                          |
-| new_projects_private_linux_legacy  | 合計      |                                                                                                          |
-| new_projects_private_linux_current | 合計      |                                                                                                          |
-| projects_oss_macos_legacy            | 合計      | _Captures Builds performed on 1.0 and 2.0. Observe if users are moving towards 2.0 or staying with 1.0._ |
-| projects_oss_macos_current           | 合計      |                                                                                                          |
-| projects_oss_linux_legacy            | 合計      |                                                                                                          |
-| projects_oss_linux_current           | 合計      |                                                                                                          |
-| projects_private_macos_legacy        | 合計      |                                                                                                          |
-| projects_private_macos_current       | 合計      |                                                                                                          |
-| projects_private_linux_legacy        | 合計      |                                                                                                          |
-| projects_private_linux_current       | 合計      |                                                                                                          |
+| **Name**                               | **Type** | **Purpose**                                                                                              |
+| -------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------- |
+| utc_week                               | date     | _Identifies which week the data below applies to_                                                        |
+| usage_oss_macos_legacy               | minutes  | _Track builds performed by week_                                                                         |
+| usage_oss_macos_current              | minutes  |                                                                                                          |
+| usage_oss_linux_legacy               | minutes  |                                                                                                          |
+| usage_oss_linux_current              | minutes  |                                                                                                          |
+| usage_private_macos_legacy           | minutes  |                                                                                                          |
+| usage_private_macos_current          | minutes  |                                                                                                          |
+| usage_private_linux_legacy           | minutes  |                                                                                                          |
+| usage_private_linux_current          | minutes  |                                                                                                          |
+| new_projects_oss_macos_legacy      | sum      | _Captures new Builds performed on 1.0. Observe if users are starting new projects on 1.0._               |
+| new_projects_oss_macos_current     | sum      |                                                                                                          |
+| new_projects_oss_linux_legacy      | sum      |                                                                                                          |
+| new_projects_oss_linux_current     | sum      |                                                                                                          |
+| new_projects_private_macos_legacy  | sum      |                                                                                                          |
+| new_projects_private_macos_current | sum      |                                                                                                          |
+| new_projects_private_linux_legacy  | sum      |                                                                                                          |
+| new_projects_private_linux_current | sum      |                                                                                                          |
+| projects_oss_macos_legacy            | sum      | _Captures Builds performed on 1.0 and 2.0. Observe if users are moving towards 2.0 or staying with 1.0._ |
+| projects_oss_macos_current           | sum      |                                                                                                          |
+| projects_oss_linux_legacy            | sum      |                                                                                                          |
+| projects_oss_linux_current           | sum      |                                                                                                          |
+| projects_private_macos_legacy        | sum      |                                                                                                          |
+| projects_private_macos_current       | sum      |                                                                                                          |
+| projects_private_linux_legacy        | sum      |                                                                                                          |
+| projects_private_linux_current       | sum      |                                                                                                          |
 {: class="table table-striped"}
 
 ## Accessing usage data
-このデータにプログラムでアクセスして、組織内の使用状況をさらに詳しく把握したいときには、Services VM からこのコマンドを実行します。
+{: #accessing-usage-data }
+If you would like programatic access to this data in order to better understand your users you may run this command from the Services VM.
 
 `docker exec usage-stats /src/builds/extract`
 
 ### Security and privacy
+{: #security-and-privacy }
 
 Please reference exhibit C within your terms of contract and our [standard license agreement](https://circleci.com/legal/enterprise-license-agreement/) for our complete security and privacy disclosures.
