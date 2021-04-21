@@ -19,22 +19,24 @@ version:
 {:toc}
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
-An *executor type* defines the underlying technology or environment in which to run a job. CircleCI では、以下の 4 つの環境のいずれかでジョブを実行できます。
+An *executor type* defines the underlying technology or environment in which to run a job. CircleCI enables you to run jobs in one of four environments:
 
 - Docker イメージ内 (`docker`)
 - Linux 仮想マシン (VM) イメージ内 (`machine`)
 - macOS VM イメージ内 (`macos`)
 - Windows VM イメージ内 (`windows`)
 
-['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) で Executor タイプと適切なイメージを指定することで、ジョブごとに異なる Executor タイプを指定することも可能です。 An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. たとえば以下のように、ジョブごとに Executor タイプとイメージを指定できます。
+It is possible to specify a different executor type for every job in your ['.circleci/config.yml']({{ site.baseurl }}/2.0/configuration-reference/) by specifying the executor type and an appropriate image. An *image* is a packaged system that has the instructions for creating a running environment.  A *container* or *virtual machine* is the term used for a running instance of an image. For example, you could specify an executor type and an image for every job:
 
 - Docker イメージ (`docker`) を必要とするジョブには、Node.js または Python のイメージを使用します。 CircleCI Docker Hub にある[ビルド済み CircleCI Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)を使用すると、Docker について完全に理解していなくてもすぐに着手できます。 このイメージはオペレーティング システムの全体ではないので、通常はソフトウェアのビルドの効率化が図れます。
 - Linux 仮想マシン (VM) の完全なイメージ (`machine`) を必要とするジョブは、Ubuntu バージョン (16.04 など) を使用します。
 - macOS VM イメージ (`macos`) を必要とするジョブには、Xcode バージョン (10.0.0 など) を使用します。
 
 ## Docker の使用
+{: #using-docker }
 
 The `docker` key defines Docker as the underlying technology to run your jobs using Docker Containers. Containers are an instance of the Docker Image you specify and the first image listed in your configuration is the primary container image in which all steps run. If you are new to Docker, see the [Docker Overview documentation](https://docs.docker.com/engine/docker-overview/) for concepts.
 
@@ -50,6 +52,7 @@ jobs:
 In this example, all steps run in the container created by the first image listed under the `build` job. To make the transition easy, CircleCI maintains convenience images on Docker Hub for popular languages. See [Using Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) for the complete list of names and tags. If you need a Docker image that installs Docker and has Git, consider using `docker:stable-git`, which is an offical [Docker image](https://hub.docker.com/_/docker/).
 
 ### Docker image best practices
+{: #docker-image-best-practices }
 {:.no_toc}
 
 - If you encounter problems with rate limits imposed by your registry provider, using [authenticated docker pulls]({{ site.baseurl }}/2.0/private-images/) may grant higher limits.
@@ -62,9 +65,12 @@ In this example, all steps run in the container created by the first image liste
 
 - When you use [AWS ECR]({{ site.baseurl }}/2.0/private-images/#aws-ecr) images, it is best practice to use `us-east-1` region. Our job execution infrastructure is in `us-east-1` region, so having your image on the same region reduces the image download time.
 
+- In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with docker images being used.
+
 More details on the Docker Executor are available in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) document.
 
 ### Using multiple Docker images
+{: #using-multiple-docker-images }
 It is possible to specify multiple images for your job. Specify multiple images if, for example, you need to use a database for your tests or for some other required service. **In a multi-image configuration job, all steps are executed in the container created by the first image listed**. All containers run in a common network and every exposed port will be available on `localhost` from a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container).
 
 ```yaml
@@ -87,6 +93,7 @@ jobs:
 Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
 #### Public convenience images on Docker Hub
+{: #public-convenience-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
     - `circleci/node:7.10-jessie-browsers`
@@ -94,6 +101,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
     - `redis@sha256:34057dd7e135ca41...`
 
 #### Public images on Docker Hub
+{: #public-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
     - `alpine:3.4`
@@ -101,6 +109,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
     - `redis@sha256:54057dd7e125ca41...`
 
 #### Public Docker registries
+{: #public-docker-registries }
 {:.no_toc}
   - `image_full_url:tag`
     - `gcr.io/google-containers/busybox:1.24`
@@ -110,6 +119,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
 Nearly all of the public images on Docker Hub and Docker Registry are supported by default when you specify the `docker:` key in your `config.yml` file. If you want to work with private images/registries, please refer to [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/).
 
 ### RAM disks
+{: #ram-disks }
 
 A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
 
@@ -132,6 +142,7 @@ jobs:
 ```
 
 ### Docker benefits and limitations
+{: #docker-benefits-and-limitations }
 Docker also has built-in image caching and enables you to build, run, and publish Docker images via \[Remote Docker\]\[building-docker-images\]. Consider the requirements of your application as well. If the following are true for your application, Docker may be the right choice:
 
 - Your application is self-sufficient
@@ -143,20 +154,20 @@ Choosing Docker limits your runs to what is possible from within a Docker contai
 
 There are tradeoffs to using a `docker` image versus an Ubuntu-based `machine` image as the environment for the container, as follows:
 
-| Capability                                                                            | `docker`           | `machine` |
-| ------------------------------------------------------------------------------------- | ------------------ | --------- |
-| 起動時間                                                                                  | 即時                 | 30 ～ 60 秒 |
-| クリーン環境                                                                                | ○                  | ○         |
-| カスタム イメージ                                                                             | Yes <sup>(1)</sup> | ×         |
-| Docker イメージのビルド                                                                       | Yes <sup>(2)</sup> | ○         |
-| ジョブ環境の完全な制御                                                                           | ×                  | ○         |
-| 完全なルート アクセス                                                                           | ×                  | ○         |
-| 複数データベースの実行                                                                           | Yes <sup>(3)</sup> | ○         |
-| 同じソフトウェアの複数バージョンの実行                                                                   | ×                  | ○         |
-| [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)                  | ○                  | ○         |
-| 特権コンテナの実行                                                                             | ×                  | ○         |
-| Docker Compose とボリュームの使用                                                              | ×                  | ○         |
-| [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | ○                  | ○         |
+| Capability                                                                                         | `docker`           | `machine` |
+| -------------------------------------------------------------------------------------------------- | ------------------ | --------- |
+| Start time                                                                                         | Instant            | 30-60 sec |
+| Clean environment                                                                                  | Yes                | Yes       |
+| Custom images                                                                                      | Yes <sup>(1)</sup> | No        |
+| Build Docker images                                                                                | Yes <sup>(2)</sup> | Yes       |
+| Full control over job environment                                                                  | No                 | Yes       |
+| Full root access                                                                                   | No                 | Yes       |
+| Run multiple databases                                                                             | Yes <sup>(3)</sup> | Yes       |
+| Run multiple versions of the same software                                                         | No                 | Yes       |
+| [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/)                               | Yes                | Yes       |
+| Run privileged containers                                                                          | No                 | Yes       |
+| Use docker compose with volumes                                                                    | No                 | Yes       |
+| [Configurable resources (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes                | Yes       |
 {: class="table table-striped"}
 
 <sup>(1)</sup> See \[Using Custom Docker Images\]\[custom-images\].
@@ -169,18 +180,19 @@ For more information on `machine`, see the next section below.
 
 
 ### Available Docker resource classes
+{: #available-docker-resource-classes }
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each job. In Docker, the following resources classes are available:
 
-| クラス                    | vCPU | RAM  |
-| ---------------------- | ---- | ---- |
-| small                  | 1    | 2GB  |
-| medium (default)       | 2    | 4GB  |
-| medium+                | 3    | 6GB  |
-| large                  | 4    | 8GB  |
-| xlarge                 | 8    | 16GB |
-| 2xlarge<sup>(2)</sup>  | 16   | 32GB |
-| 2xlarge+<sup>(2)</sup> | 20   | 40GB |
+| Class                  | vCPUs | RAM  |
+| ---------------------- | ----- | ---- |
+| small                  | 1     | 2GB  |
+| medium (default)       | 2     | 4GB  |
+| medium+                | 3     | 6GB  |
+| large                  | 4     | 8GB  |
+| xlarge                 | 8     | 16GB |
+| 2xlarge<sup>(2)</sup>  | 16    | 32GB |
+| 2xlarge+<sup>(2)</sup> | 20    | 40GB |
 {: class="table table-striped"}
 
 Where example usage looks like the following:
@@ -196,6 +208,7 @@ jobs:
 ```
 
 ## Using machine
+{: #using-machine }
 
 The `machine` option runs your jobs in a dedicated, ephemeral VM that has the following specifications:
 
@@ -235,6 +248,7 @@ jobs:
 **Note:** The `image` key is not supported on private installations of CircleCI. See the [VM Service documentation]({{ site.baseurl }}/2.0/vm-service) for more information.
 
 ## macOS の使用
+{: #using-macos }
 
 _Available on CircleCI Cloud - not currently available on self-hosted installations_
 
@@ -253,6 +267,7 @@ jobs:
 ```
 
 ## Using the Windows executor
+{: #using-the-windows-executor }
 
 Using the `windows` executor allows you to run your job in a Windows environment. The following is an example configuration that will run a simple Windows job. The syntax for using the Windows executor in your config differs depending on whether you are using:
 * CircleCI Cloud – config version 2.1.
@@ -295,6 +310,7 @@ Cloud users will notice the Windows Orb is used to set up the Windows executor t
 CircleCI Server users should contact their system administrator for specific information about the image used for Windows jobs. The Windows image is configured by the system administrator, and in the CircleCI config is always available as the `windows-default` image name.
 
 ## Using GPUs
+{: #using-gpus }
 
 CircleCI Cloud has execution environments with Nvidia GPUs for specialized workloads. The hardware is Nvidia Tesla T4 Tensor Core GPU, and our GPU executors come in both Linux and Windows VMs.
 
@@ -328,5 +344,6 @@ jobs:
 Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See \[Running GPU Executors in Server\]\[server-gpu\].
 
 ## See also
+{: #see-also }
 
 [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)
