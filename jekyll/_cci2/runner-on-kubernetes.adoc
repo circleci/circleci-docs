@@ -34,7 +34,7 @@ If you want to have different runners specialized for different workloads, it is
 
 == Getting Started
 
-. Clone the repository at https://github.com/circleci/circleci-runner-k8s.
+. Clone the repository at https://github.com/CircleCI-Public/circleci-runner-k8s.
 . Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<values,list of values>>.
 . Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
 +
