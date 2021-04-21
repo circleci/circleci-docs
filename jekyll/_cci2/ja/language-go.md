@@ -17,16 +17,18 @@ CircleCI では、Docker イメージにインストール可能な任意のバ�
 {:toc}
 
 ## Quickstart: Demo Go reference project
+{: #quickstart-demo-go-reference-project }
 
-CircleCI 2.0 でのビルド方法を示すために、Go リファレンス プロジェクトを提供しています。
+We maintain a reference Go project to show how to build on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">GitHub 上の Go デモ プロジェクト</a>
 - [CircleCI でビルドされた Go デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"}
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. この設定ファイルは、Go プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-go/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with Go projects.
 
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -115,34 +117,37 @@ workflows:
 {% endraw %}
 
 ### Pre-built CircleCI Docker images
+{: #pre-built-circleci-docker-images }
 {:.no_toc}
 
-CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. デモ プロジェクトでは、公式 CircleCI イメージを使用しています。
+We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the version you need from Docker Hub: <https://hub.docker.com/r/circleci/golang/>. The demo project uses an official CircleCI image.
 
 ### Build the demo project yourself
+{: #build-the-demo-project-yourself }
 {:.no_toc}
 
-CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
+A good way to start using CircleCI is to build a project yourself. Here's how to build the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project</a> with your own account:
 
 1. Fork the <a href="https://github.com/CircleCI-Public/circleci-demo-go" target="_blank">Demo Go Project on GitHub</a> to your own account
 2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-変更をローカルでテストする場合は、[CircleCI の CLI ツール](https://circleci.com/ja/docs/2.0/local-jobs/)を使用して `circleci build` を実行します。
+If you want to test your changes locally, use [our CLI tool](https://circleci.com/docs/2.0/local-jobs/) and run `circleci build`.
 
 ---
 
 ## Config walkthrough
+{: #config-walkthrough }
 
-このセクションでは、`.circleci/config.yml` 内のコマンドについて説明します。
+This section explains the commands in `.circleci/config.yml`
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
 ```
 
-次に、`jobs` キーを記述します。 If we do not use workflows and have only one job, it must be named `build`. Below, our job specifies to use the `docker` executor as well as the CircleCI created docker-image for golang 1.12. Next, we use a *secondary image* so that our job can also make use of Postgres. Finally, we use the `environment` key to specify environment variables for the Postgres container.
+Next, we have a `jobs` key. If we do not use workflows and have only one job, it must be named `build`. Below, our job specifies to use the `docker` executor as well as the CircleCI created docker-image for golang 1.12. Next, we use a *secondary image* so that our job can also make use of Postgres. Finally, we use the `environment` key to specify environment variables for the Postgres container.
 
 
 ```yaml
@@ -280,11 +285,12 @@ workflows:
       - build
 ```
 
-完了です。 You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a Go app. Check out our [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-go){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
+{: #see-also }
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
 How to use [workflows]({{ site.baseurl }}/2.0/workflows), which are particularly useful for optimizing your pipelines and orchestrating more complex projects.
 
