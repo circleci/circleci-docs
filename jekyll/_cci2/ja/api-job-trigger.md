@@ -21,6 +21,7 @@ CircleCI API を使用してジョブをトリガーする方法について説�
 {:toc}
 
 ## 概要
+{: #overview }
 
 Use the [CircleCI API](https://circleci.com/docs/api/v1/#trigger-a-new-job) to trigger [jobs]({{ site.baseurl }}/2.0/jobs-steps/#jobs-overview) that you have defined in `.circleci/config.yml`.
 
@@ -55,6 +56,7 @@ For a complete reference of the API, see the [CircleCI API Documentation](https:
 - It is possible to trigger [workflows]({{ site.baseurl }}/2.0/workflows/) with the CircleCI API: a [singular workflow can be re-run](https://circleci.com/docs/api/v2/#rerun-a-workflow), or you may [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline) which will run its subsequent workflows.
 
 ## Conditionally running jobs with the API
+{: #conditionally-running-jobs-with-the-api }
 
 The next example demonstrates a configuration for building docker images with `setup_remote_docker` only for builds that should be deployed.
 
@@ -105,5 +107,6 @@ Notes on the above example:
 - We use an API call with `build_parameters[CIRCLE_JOB]=deploy_docker` so that only the `deploy_docker` job will be run.
 
 ## See also
+{: #see-also }
 
 [Triggers]({{ site.baseurl }}/2.0/triggers/)
