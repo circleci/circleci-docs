@@ -19,52 +19,58 @@ CircleCI 設定ファイル エディターには次のメリットがありま�
 - ユーザーにニーズに合う CircleCI ドキュメントへのリンク
 
 ## CircleCI 設定ファイル エディターを使うには
+{: #getting-started-with-the-circleci-config-editor }
 
-CircleCI アプリの **[All Pipelines (すべてのパイプライン)]** ビューでパイプラインを選択選択します。
+In the CircleCI app, select a pipeline in the **All Pipelines** view.
 
-設定ファイル エディターにアクセスするには、まず、画面上方にある *[All Branches (すべてのブランチ)]* ドロップダウン メニューで設定ファイルを編集するブランチを選択します。
+To access the CircleCI Configuration Editor, select your desired branch from the *All Branches* drop-down menu near the top of the screen.
 
-![設定ファイル エディターへのアクセス方法]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
+![Config Editor Access]({{ site.baseurl }}/assets/img/docs/config-editor-all-branches.png)
 
-ブランチを選択すると、**[Edit Config (設定ファイルを編集)]** ボタンが使用可能になります。 このボタンをクリックすると、設定ファイル エディターにアクセスできます。
+Once you select a branch, the **Edit Config** button will become enabled. Click it to access the configuration editor.
 
-また、以下の方法で設定ファイルにアクセスすることも可能です。
+You can also access the config editor:
 
 - **[Projects (プロジェクト)]** ビューの **[Set Up Project (プロジェクトのセットアップ)]** を選択する
 - **[Pipelines (パイプライン)]** ビューの **[Actions (操作)]** 列にある 3 つの点を選択し、表示されたメニューで *[Configuration File (設定ファイル)]* を選択する
 - **[Pipelines (パイプライン)]** ビューでジョブを選択し、右上隅にある 3 つの点を選択してから、**[Configuration File (設定ファイル)]** を選択する
 
 ## 自動補完機能
+{: #auto-completion }
 
-一般的な多くの IDE と同じく、CircleCI 設定ファイル エディターでは、入力を自動で補完する機能が搭載されています。また、参考となるドキュメントも示されます。
+Like many traditional IDEs, the CircleCI configuration editor will provide auto-complete suggestions as you type, as well as any supporting documentation.
 
-![自動補完機能]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
+![Auto-completion]({{ site.baseurl }}/assets/img/docs/config-editor-auto-complete.png)
 
 ## スマート ツールチップ
+{: #smart-tooltips }
 
-設定ファイル内の CircleCI 定義済み項目にカーソルを合わせると、CircleCI 設定ファイルの構文の関連情報を示すツールチップが表示されます。
+When hovering over a CircleCI definition in your configuration file, a tooltip will appear, giving you additional information specific to CircleCI configuration syntax.
 
-![ツールチップ]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
+![Tooltips]({{ site.baseurl }}/assets/img/docs/config-editor-tooltips.png)
 
 ## 自動バリデーション機能
+{: #automatic-validation }
 
-設定ファイル エディターでは、YAML 設定ファイルに変更を加えるたびに自動でバリデーションが行われます。
+The config editor will automatically validate your configuration yaml after every change.
 
-設定ファイルが有効な場合は、設定ファイル エディターの最下部に次のメッセージが表示されます。
+For a valid configuration, you will see the following at the bottom of the configuration editor:
 
-![設定ファイルが有効な場合]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
+![Passing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-pass.png)
 
-設定ファイルに問題がある場合は赤色のバーが表示されるとともに、構文エラーがあればその場所が示されます。また、エラーの修正に役立つ参考ドキュメントがある場合は、下記スクリーンショットの中の [DOCS (ドキュメント)] タブにそれらのドキュメントが示されます。
+For a failing validation, a red bar is displayed, as well as any errors, where they occur, and any relevant documentation that may assist in fixing the error (see the "DOCS" tab in the below screenshot).
 
-![設定ファイルが無効な場合]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
+![Failing Configuration]({{ site.baseurl }}/assets/img/docs/config-editor-validate-fail.png)
 
 ## コミットおよび実行
+{: #commit-and-run }
 
-設定ファイルにエラーがなければ、設定ファイル エディター内で VCS へのコミットからパイプラインの再実行までを行うことができます。このためには、右上隅にある **[Commit and Run (コミットして実行)]** ボタンを選択します。
+Once your configuration is valid, you may commit to your VCS and re-run the pipeline, all from within the Config Editor, by selecting the **Commit and Run** button in the upper-right corner.
 
-![コミットおよび実行]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
+![Commit and Run]({{ site.baseurl }}/assets/img/docs/config-editor-commit-and-run.png)
 
 ## 関連項目
+{: #see-also }
 
 - [CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)
 - [CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-cli)
