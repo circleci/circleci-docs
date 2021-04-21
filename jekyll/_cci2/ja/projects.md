@@ -16,6 +16,7 @@ A CircleCI project shares the name of the associated code repository and is visi
 On the "Add Projects" page, you can either _Set Up_ any project that you are the owner of on your VCS, or, _Follow_ any project in your organization to gain access to its pipelines and to subscribe to \[email notifications\]({{ site.baseurl }}/2.0/notifications/) for the project's status.
 
 ## Add projects page
+{: #add-projects-page }
 
 {:.tab.addprojectpage.Cloud}
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
