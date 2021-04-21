@@ -15,6 +15,7 @@ version:
 It is possible to build, test, and deploy applications that run on Linux, Android, iOS and Windows with CircleCI. See the following snippets for a peek into how you can customize the configuration of a job for any platform. 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
 
 ## Linux と Docker
+{: #linux-with-docker }
 
 {% raw %}
 
@@ -53,10 +54,11 @@ jobs:
 {% endraw %}
 
 ## Linux with machine
+{: #linux-with-machine }
 
 **Note**: Use of machine may require additional fees in a future pricing update.
 
-デフォルトのマシン イメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
+To use the machine executor with the default machine image, set the machine key to true in `.circleci/config.yml`:
 
 ```yaml
 version: 2
@@ -66,6 +68,7 @@ jobs:
 ```
 
 ## Android
+{: #android }
 
 {% raw %}
 
@@ -96,6 +99,7 @@ jobs:
 {% endraw %}
 
 ## macOS
+{: #macos }
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
 ```
@@ -115,6 +119,7 @@ jobs:
 ```
 
 ## Windows
+{: #windows }
 
 {:.tab.windowsblock.Cloud}
 ```yaml
@@ -151,5 +156,6 @@ jobs:
 ```
 
 ## See also
+{: #see-also }
 
 Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
