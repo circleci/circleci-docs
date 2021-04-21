@@ -11,6 +11,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 
 ## Amazon Web Services
+{: #amazon-web-services }
 
 ```
     steps:
@@ -23,6 +24,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 ```
 
 ## Pivotal
+{: #pivotal }
 
 ```
     steps:
@@ -47,11 +49,12 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
             # 以前のバージョンを削除します
             cf delete app-name -f
             # "dark" バージョンの名前を正しい名前に切り替えます
-            cf rename app-name-dark app-name      
+            cf rename app-name-dark app-name
 ```
 
 
 ## Google
+{: #google }
 
 ```
     steps:
@@ -62,8 +65,9 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 
 ## Heroku
+{: #heroku }
 
-```    
+```
     steps:
       - checkout
       - run:
@@ -73,18 +77,20 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 ```
 
 ## NPM
+{: #npm }
 
 ```
     steps:
       - checkout
-      - run: 
-          name: NPM へのパブリッシュ
-          command: | 
+      - run:
+          name: Publish to NPM
+          command: |
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
 ```
 
 ## SSH
+{: #ssh }
 
 ```
     steps:
@@ -95,6 +101,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 ```
 
 ## Snapcraft
+{: #snapcraft }
 
 ```
     steps:
@@ -107,6 +114,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 ```
 
 ## Artifactory
+{: #artifactory }
 
 ```
     steps:
@@ -120,6 +128,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 ```
 
 ## NuGet (.NET Core CLI 経由)
+{: #nuget-via-net-core-cli }
 
 ```
     steps:
@@ -130,4 +139,4 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
             dotnet nuget push --source "${NUGET_FEED_URL}" --api-key="${NUGET_KEY}" <output-directory>/*.nupkg
 ```
 
-ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。
+Use the above examples to get started with automating deployment of green builds to your desired targets.
