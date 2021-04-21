@@ -15,21 +15,23 @@ CircleCI の構成に使用する YAML の最も重要な機能について説�
 {:toc}
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
-[YAML](http://yaml.org) は、理解しやすいデータ シリアライズの標準的な形式であり、あらゆるプログラミング言語で使用できます。 YAML は、別のデータ シリアライズ言語である [JSON](https://www.json.org/) の厳密なスーパーセットです。 This means it can do everything JSON can... and more.
+[YAML](http://yaml.org) is a human-friendly data serialization standard for all programming languages. It is a strict superset of [JSON](https://www.json.org/), another data serialization language. This means it can do everything JSON can... and more.
 
-CircleCI の構成は、`~/.circleci/config.yml` にある単一の YAML ファイルに格納されています。ここで、`~` は、プロジェクトのディレクトリのルートです。 CircleCI の作業の大部分はこのファイルで行われるため、YAML 形式の基礎を理解することが重要になります。
+CircleCI configuration is stored in a single YAML file located at `~/.circleci/config.yml`, where `~` is the root of your project's directory. Since most of your work with CircleCI occurs in this file, it is important to understand the basics of YAML formatting.
 
 ## How to write YAML
+{: #how-to-write-yaml }
 
-YAML ファイルの基本構造は[ハッシュ テーブル](https://ja.wikipedia.org/wiki/ハッシュテーブル)で、1 つ以上のキー・値のペアで構成されます。
+The basic structure of a YAML file is a [hash map](https://en.wikipedia.org/wiki/Hash_table) and consists of one or more key-value pairs.
 
 ```yaml
 key: value
 ```
 
-ネストされたキーをインデントすることで、別のキー・値のペアを値として設定できます。
+You can set another key-value pair as a value by indenting the nested key.
 
 ```yaml
 key:
@@ -37,9 +39,10 @@ key:
 ```
 
 ### Multi-line strings
+{: #multi-line-strings }
 {:.no_toc}
 
-値の文字列が複数行にわたる場合は、`>` 文字を使用します。この記号の後には、任意の数の行を記述できます。 長いコマンドを記述する場合に特に便利です。
+If the value is a multi-line string, use the `>` character, followed by any number of lines. This is especially useful for lengthy commands.
 
 ```yaml
 haiku: >
@@ -51,9 +54,10 @@ haiku: >
 **Note**: Quotes are not necessary when using multiline strings.
 
 ### シーケンス
+{: #sequences }
 {:.no_toc}
 
-キーと値は[スカラー](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar)に限定されません。 スカラーをシーケンスにマップすることもできます。
+Keys and values are not restricted to [scalars](https://softwareengineering.stackexchange.com/questions/238033/what-does-it-mean-when-data-is-scalar). You may also map a scalar to a sequence.
 
 ```yaml
 scalar:
@@ -64,7 +68,7 @@ scalar:
   - up
 ```
 
-シーケンス内の項目をキー・値のペアで記述することもできます。
+Items in sequences can also be key-value pairs.
 
 ```yaml
 simulation:
@@ -76,9 +80,10 @@ simulation:
 **Note**: Remember to properly indent a key-value pair when it is the value of an item in a sequence.
 
 ### Anchors and aliases
+{: #anchors-and-aliases }
 {:.no_toc}
 
-[DRY (Don't Repeat Yourself: 繰り返しを避けること) の原則](https://ja.wikipedia.org/wiki/Don%27t_repeat_yourself)に基づいて `config.yml` を作成するために、アンカーとエイリアスを使用できます。 アンカーは `&` 文字、エイリアスは `*` 文字で識別されます。
+To [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) up your `config.yml`, use anchors and aliases. Anchors are identified by an `&` character, and aliases by an `*` character.
 
 ```yaml
 song:
@@ -90,7 +95,7 @@ song:
   - *name
 ```
 
-上記のリストを YAML パーサーで読み取ると、次のようなリテラル出力が得られます。
+When the above list is read by a YAML parser, the literal output looks like this.
 
 ```yaml
 song:
@@ -103,9 +108,10 @@ song:
 ```
 
 ### Merging maps
+{: #merging-maps }
 {:.no_toc}
 
-アンカーとエイリアスはスカラー値に対して機能しますが、マップまたはシーケンスを保存するには、`<<` を使用してエイリアスを挿入します。
+Anchors and aliases work for scalar values, but to save maps or sequences, use `<<` to inject the alias.
 
 ```yaml
 default: &default
@@ -120,7 +126,7 @@ draco:
   house: slytherin
 ```
 
-複数のマップをマージすることもできます。
+You can also merge multiple maps.
 
 ```yaml
 name: &harry_name
@@ -139,16 +145,17 @@ harry_data:
 
 **Note**: As mentioned in [a YAML repository issue](https://github.com/yaml/yaml/issues/35), it is possible to merge maps, but not sequences (also called arrays or lists).
 
-さらに複雑な例は、[こちらの Gist](https://gist.github.com/bowsersenior/979804) で参照してください。
+For a more complex example, see [this gist](https://gist.github.com/bowsersenior/979804).
 
 ## See also
+{: #see-also }
 
-YAML には他にも機能がありますが、YAML の基礎について理解し、CircleCI の設定ファイルを簡潔に保つには、上記の例で十分です。 さらに知識を深めたい場合は、以下の資料をご活用ください。
+While YAML has several other features, the examples above should be enough to get you started with YAML and keep your CircleCI configuration concise. If you are hungry for more knowledge, here are a few ideas.
 
 - キーと値の具体的な例については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/)」を参照してください。
 - `config.yml` が有効な YAML かどうかがわからない場合は、[バリデーション ツール](http://yaml-online-parser.appspot.com/)を実行してください。
 
-CircleCI は「Orbs」も開発しました。Orbs とは、構成ワークフローで使用できる構成エレメントをまとめたパッケージであり、事前構成とテストを終えた状態で使用できます。 DRY (Don't Repeat Yourself: 繰り返しを避けること) の原則を守るためのツールとして Orbs を使用すれば、構成エレメント (ジョブ、Executor、コマンド) をワークフローにすばやく簡単に組み込むことができます。 Orbs の詳細については、以下のドキュメントを参照してください。
+CircleCI has also developed "orbs," which enable you to use pre-configured and tested packages of configuration elements that you can use in your configuration workflow. Utilizing DRY (Don't Repeat Yourself), orbs enable you to quickly and easily incorporate configuration elements (jobs, executors, commands) in your workflow. For more detailed information about orbs:
 
 - [Orbs とは]({{site.baseurl}}/2.0/orb-intro/): Orbs の概要
 - [Orbs を使う]({{site.baseurl}}/2.0/using-orbs/): 既存の Orbs の使用方法
