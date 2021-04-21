@@ -15,6 +15,7 @@ Contexts provide a mechanism for securing and sharing environment variables acro
 {:toc}
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
 Create and manage contexts on the Organization Settings page of the CircleCI application. You must be an organization member to view, create, or edit contexts. After a context has been created, you can use the `context` key in the workflows section of a project [`config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#context) file to give any job(s) access to the environment variables associated with the context, as shown in the image below.
@@ -32,11 +33,13 @@ Context names must be unique for each GitHub or Bitbucket organization.
 **Note:** Contexts created with the initial default name of `org-global` will continue to work.
 
 ### Context naming for CircleCI server
+{: #context-naming-for-circleci-server }
 {:.no_toc}
 
 For any GitHub Enterprise (GHE) installation that includes multiple organizations, the context names across those organizations must be unique. For example, if your GHE is named Kiwi and includes two organizations, you cannot add a context called `deploy` to both organizations. That is, the `deploy` context name cannot be duplicated in two orgs that exist in the same GHE installation for the Kiwi account. Duplicate contexts within an account will fail with an error.
 
 ### Renaming orgs and repositories
+{: #renaming-orgs-and-repositories }
 
 If you find you need to rename an org or repo that you have previously hooked up to CircleCI, best practice is to follow these steps:
 
@@ -48,6 +51,7 @@ If you find you need to rename an org or repo that you have previously hooked up
     **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
 
 ## Creating and using a context
+{: #creating-and-using-a-context }
 
 1. Using the new version of the CircleCI application, navigate to the Organization Settings page by clicking on the link in the sidebar.
 
@@ -114,10 +118,12 @@ jobs:
 ```
 
 ### Moving a repository that uses a context
+{: #moving-a-repository-that-uses-a-context }
 
 If you move your repository to a new organization, you must also have the context with that unique name set in the new organization.
 
 ### Contexts & Environment variables constraints
+{: #contexts-and-environment-variables-constraints }
 
 When creating contexts/environment variables, please note the following:
 
@@ -129,10 +135,12 @@ When creating contexts/environment variables, please note the following:
 - Each organization is limited to 500 contexts.
 
 ## Combining contexts
+{: #combining-contexts }
 
 You can combine several contexts for a single job by just adding them to the context list. Contexts are applied in order, so in the case of overlaps, later contexts override earlier ones. This way you can scope contexts to be as small and granular as you like.
 
 ## Restricting a context
+{: #restricting-a-context }
 
 CircleCI enables you to restrict secret environment variables at run time by adding security groups to contexts. Only organization administrators may add *security groups* to a new or existing context. Security groups are your organization's GitHub teams. If you are using CircleCI Server with LDAP authentication, then LDAP groups also define security groups. After a security group is added to a context, only members of that security group who are also CircleCI users may access the context and use the associated environment variables.
 
@@ -143,10 +151,12 @@ The default security group is `All members` and enables any member of the organi
 **Note:** Bitbucket repositories do **not** provide an API that allows CircleCI contexts to be restricted, only GitHub projects include the ability to restrict contexts with security groups.
 
 ### Running workflows with a restricted context
+{: #running-workflows-with-a-restricted-context }
 
 To invoke a job that uses a restricted context, a user must be a member of one of the security groups for the context and must sign up for CircleCI. If the user running the workflow does not have access to the context, the workflow will fail with the `Unauthorized` status.
 
 ### Restrict a context to a security group or groups
+{: #restrict-a-context-to-a-security-group-or-groups }
 
 You must be an organization administrator to complete the following task.
 
@@ -160,11 +170,13 @@ You must be an organization administrator to complete the following task.
 Only members of the selected groups may now use the context in their workflows or add or remove environment variables for the context.
 
 ### Making changes to context restrictions
+{: #making-changes-to-context-restrictions }
 Changes to security group restrictions for Contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the Org Administrator to refresh permissions once the change has been made. The **Refresh Permissions** button can be found on the [Account Integrations](https://app.circleci.com/settings/user) page.
 
 Administrators of CircleCI Server installations can find the **Refresh Permissions** button at `<circleci-hostname>/account`.
 
 ### Approving jobs that use restricted contexts
+{: #approving-jobs-that-use-restricted-contexts }
 {:.no_toc}
 
 Adding an [approval job]({{ site.baseurl }}/2.0/configuration-reference/#type) to a workflow gives the option to require manual approval of the use of a restricted context. To restrict running of jobs that are downstream from an approval job, add a restricted context to those downstream jobs, as shown in the example below:
@@ -186,7 +198,7 @@ workflows:
           context: my-restricted-context
           requires:
             - build
-            - hold 
+            - hold
       - deploy:
           context: deploy-key-restricted-context
           requires:
@@ -198,18 +210,22 @@ workflows:
 In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the security group, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing groups from contexts
+{: #removing-groups-from-contexts }
 
 To make a context available only to the administrators of the organization, you may remove all of the groups associated with a context. All other users will lose access to that context.
 
 ## Adding and removing users from teams and groups
+{: #adding-and-removing-users-from-teams-and-groups }
 
 CircleCI syncs GitHub team and LDAP groups every few hours. If a user is added or removed from a GitHub team or LDAP group, it will take up to a few hours to update the CircleCI records and remove access to the context.
 
 ## Adding and removing environment variables from restricted contexts
+{: #adding-and-removing-environment-variables-from-restricted-contexts }
 
 Addition and deletion of environment variables from a restricted context is limited to members of the context groups.
 
 ## Deleting a context
+{: #deleting-a-context }
 
 If the context is restricted with a group other than `All members`, you must be a member of that security group to complete this task:
 
@@ -220,6 +236,7 @@ If the context is restricted with a group other than `All members`, you must be 
 3. Type Delete and click Confirm. The Context and all associated environment variables will be deleted. **Note:** If the context was being used by a job in a Workflow, the job will start to fail and show an error.
 
 ## Environment variable usage
+{: #environment-variable-usage }
 
 Environment variables are used according to a specific precedence order, as follows:
 
@@ -234,12 +251,15 @@ Environment variables declared inside a shell command `run step`, for example `F
 
 
 ### Secure Environment Variable Creation, Deletion, and Rotation
+{: #secure-environment-variable-creation-deletion-and-rotation }
 
 This section will walk through interacting with context environment variables using the CircleCI CLI or API.
 
 #### Creating Environment Variables
+{: #creating-environment-variables }
 
 ##### Using CircleCI’s CLI
+{: #using-circlecis-cli }
 {:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on [CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration) to set up your CircleCI command line interface._
@@ -252,13 +272,16 @@ To create an environment variable using our CLI, perform the following steps:
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 
 ##### Using CircleCI’s API
+{: #using-circlecis-api }
 {:.no_toc}
 
 To create an environment variable using the API, call the [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plaintext secret as a string.
 
 #### Deleting Environment Variables
+{: #deleting-environment-variables }
 
 ##### Using CircleCI’s CLI
+{: #using-circlecis-cli }
 {:.no_toc}
 
 To delete an environment variable using the CLI, perform the following steps:
@@ -270,6 +293,7 @@ To delete an environment variable using the CLI, perform the following steps:
 3. Delete the environment variable by executing this command: `circleci context remove-secret <vcs-type> <org-name> <context-name> <env-var-name>`
 
 ##### Using CircleCI’s API
+{: #using-circlecis-api }
 {:.no_toc}
 
 To delete an environment variable using the API, call the [Delete Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint.
@@ -277,6 +301,7 @@ To delete an environment variable using the API, call the [Delete Environment Va
 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated.
 
 #### Rotating Environment Variables
+{: #rotating-environment-variables }
 
 Rotation refers to the process of updating a secret's value without deleting it or changing its name.
 
@@ -286,6 +311,7 @@ Context environment variables can be rotated using CircleCI’s CLI, or by direc
 
 
 ##### Using CircleCI’s CLI
+{: #using-circlecis-cli }
 {:.no_toc}
 
 _If this is your first time using the CLI, follow the instructions on [CircleCI CLI Configuration](https://circleci.com/docs/2.0/local-cli/?section=configuration) to set up your CircleCI command line interface._
@@ -301,12 +327,14 @@ To rotate an environment variable using the CLI, perform the following steps:
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 
 ##### Using CircleCI’s API
+{: #using-circlecis-api }
 {:.no_toc}
 
 To rotate an environment variable from our API, call the [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) endpoint with the appropriate request body. For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
 
 
 ## Secrets masking
+{: #secrets-masking }
 _Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
 Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security, CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that contains env var values.
@@ -319,7 +347,8 @@ The value of the context will not be masked in the build output if:
 **Note:** secret masking will only prevent the secret value from appearing in your build output. The value is still accessible to code executed within your builds and users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 * [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/)
-* [Workflows]({{ site.baseurl }}/2.0/workflows/) 
+* [Workflows]({{ site.baseurl }}/2.0/workflows/)
