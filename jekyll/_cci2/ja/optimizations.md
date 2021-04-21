@@ -19,15 +19,17 @@ version:
 **Note**: For Cloud customers, some of the features discussed in this document may require a specific pricing plan. Visit our [pricing page](https://circleci.com/pricing/) to get an overview of the plans CircleCI offers. Or, if you are a logged in to the CircleCI web application, go to **Plan** from the sidebar to view and make adjustments to your plan.
 
 ## Docker image choice
+{: #docker-image-choice }
 
-Choosing the right docker image for your project can have huge impact on build time. たとえば、言語の基本的なイメージを選択した場合は、パイプラインを実行するたびに依存関係とツールをダウンロードする必要があります。一方、それらの依存関係とツールが事前にインストールされているイメージを選択、ビルドした場合は、各ビルド実行時にダウンロードにかかる時間を節約できます。 プロジェクトを構成し、イメージを指定するときには、以下の点を考慮してください。
+Choosing the right docker image for your project can have huge impact on build time. For example, choosing a basic language image means dependencies and tools need to be downloaded each time your pipeline is run, whereas, if you choose or build an image that has these dependencies and tools already installed, this time will be saved for each build run. When configuring your projects and specifying images, consider the following options:
 
 * CircleCI には多数の[コンビニエンス イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#section=configuration)が用意されています。多くは公式の Docker イメージに基づいていますが、便利な言語ツールもプリインストールされています。
 * プロジェクトに特化した[独自のイメージを作成](https://circleci.com/ja/docs/2.0/custom-images/#section=configuration)することも可能です。 それが容易になるよう、[Docker イメージ ビルド ウィザード](https://github.com/circleci-public/dockerfile-wizard)と、[イメージを手動で作成するためのガイダンス](https://circleci.com/ja/docs/2.0/custom-images/#カスタム-イメージの手動作成)が用意されています。
 
 ## Caching dependencies
+{: #caching-dependencies }
 
-ジョブの最適化にあたってまず検討すべき項目の 1 つがキャッシュです。 ジョブで任意の時点のデータをフェッチする場合は、キャッシュを利用できる可能性があります。 一般的によく用いられるのが、パッケージ マネージャーや依存関係管理ツールです。 たとえば、プロジェクトで Yarn、Bundler、Pip などを利用すると、ジョブの実行中にダウンロードする依存関係は、ビルドのたびに再ダウンロードされるのではなく、後で使用できるようにキャッシュされます。
+Caching should be one of the first things you consider when trying to optimize your jobs. If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build.
 
 {% raw %}
 
@@ -52,15 +54,16 @@ jobs:
 
 {% endraw %}
 
-Make note of the use of a `checksum` in the cache `key`; this is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. また上記の例では、[`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) で動的な値をキャッシュ キーに挿入することで、キャッシュの更新が必要となる条件をより正確に制御できるようにしています。
+Make note of the use of a `checksum` in the cache `key`; this is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) _changes_ and so the cache will be updated accordingly. In the above example, the [`restore_cache`]({{site.baseurl}}/2.0/configuration-reference#restore_cache) example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
-依存関係のインストール ステップが正常に終了したことを確認してから、キャッシュのステップを追加することをお勧めします。 依存関係のステップで失敗したままキャッシュする場合は、不良キャッシュによるビルドの失敗を回避するために、キャッシュ キーを変更する必要があります。
+We recommend that you verify that the dependencies installation step succeeds before adding caching steps. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
-詳細については、[キャッシュに関するドキュメント]({{site.baseurl}}/2.0/caching)を参照してください。
+Consult the [caching document]({{site.baseurl}}/2.0/caching) to learn more.
 
 ## ワークフロー
+{: #workflows }
 
-ワークフローは、一連のジョブとその実行順序を定義する機能です。 ビルド中の任意の時点で 2 つのジョブを互いに独立して実行してかまわないステップがある場合は、ワークフローを使用すると便利です。 ワークフローには、ビルド構成を強化するための機能もいくつか用意されています。 詳細については、[ワークフローのドキュメント]({{site.baseurl}}/2.0/workflows/)を参照してください。
+Workflows provide a means to define a collection of jobs and their run order. If at any point in your build you see a step where two jobs could happily run independent of one another, workflows may be helpful. Workflows also provide several other features to augment and improve your build configuration. Read more about workflows in the [workflow documentation]({{site.baseurl}}/2.0/workflows/).
 
 **Note**: Workflows are available to all plans, but running jobs concurrently assumes that your plan provides multiple machines to execute on.
 
@@ -94,23 +97,25 @@ workflows: # Here we can orchestrate our jobs into a workflow
 ```
 
 
-その他のワークフローの例については、[CircleCI デモ ワークフロー リポジトリ](https://github.com/CircleCI-Public/circleci-demo-workflows/)を参照してください。
+You can view more examples of workflows in the  [CircleCI demo workflows repo](https://github.com/CircleCI-Public/circleci-demo-workflows/).
 
 ## ワークスペース
+{: #workspaces }
 
 **Note**: Using workspaces presumes that you are also using [workflows](#workflows).
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
-To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/2.0/configuration-reference#attach_workspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. `persist_to_workspace` の paths: プロパティで指定したファイルとディレクトリは、root キーで指定したディレクトリからの相対パスにある、ワークフローの一時ワークスペースにアップロードされます。 その後、それらのファイルとディレクトリは、後続のジョブ (およびワークフローの再実行) で使用するためにアップロードされ、利用可能になります。
+To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/2.0/configuration-reference#attach_workspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
-ワークスペースの使用方法については、[ワークフローに関するドキュメント]({{site.baseurl}}/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を参照してください。
+Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
 ## 並列処理
+{: #parallelism }
 
 **Note**: Your CircleCI plan determines what level of parallelism you can use in your builds (1x, 2x, 4x, etc)
 
-If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI では、複数のマシンにファイルごとに自動的にテストを割り当てることや、テストの割り当て方法を手動でカスタマイズすることも可能です。
+If your project has a large test suite, you can configure your build to use [`parallelism`]({{site.baseurl}}/2.0/configuration-reference#parallelism) together with either [CircleCI's test splitting functionality](https://circleci.com/docs/2.0/parallelism-faster-jobs/#using-the-circleci-cli-to-split-tests) or a [third party application or library](https://circleci.com/docs/2.0/parallelism-faster-jobs/#other-ways-to-split-tests) to split your tests across multiple machines. CircleCI supports automatic test allocation across machines on a file-basis, however, you can also manually customize how tests are allocated.
 
 ```yaml
 # ~/.circleci/config.yml
@@ -125,15 +130,16 @@ jobs:
     parallelism: 4
 ```
 
-テストの分割の詳細については、[並列処理に関するドキュメント]({{site.baseurl}}/2.0/parallelism-faster-jobs)を参照してください。
+Read more in-depth about splitting tests in our [document on parallelism]({{site.baseurl}}/2.0/parallelism-faster-jobs).
 
 ## Resource class
+{: #resource-class }
 
-**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. コンテナ ベースのプランをご利用の場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)し、この機能をアカウントで有効にしてください。 セルフホスティング環境では、システム管理者がリソース クラスのオプションを設定できます。
+**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
-`resource_class` 機能を使用すると、CPU と RAM のリソース量をジョブごとに構成できます。 クラウド版で使用可能なクラスの一覧は、[こちらの表](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)にまとめています。オンプレミス版の一覧については、システム管理者にお問い合わせください。 `resource_class` が指定されていない場合や、無効なクラスが指定されている場合は、デフォルトの `resource_class: medium` が使用されます。
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class) for a list of available classes, and for self hosted installations contact your system administrator for a list. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
 
-以下に、`resource_class` 機能の使用例を示します。
+Below is an example use case of the `resource_class` feature.
 
 ```yaml
 jobs:
@@ -153,10 +159,11 @@ jobs:
 ```
 
 ## Docker layer caching
+{: #docker-layer-caching }
 
 **Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrate to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
-DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. 日常的な CI/CD プロセスの中で頻繁に Docker イメージをビルドする場合に便利に活用できます。
+DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 
 DLC is similar to _caching dependencies_ mentioned above in that it _saves_ the image layers that you build within your job, making them available on subsequent builds.
 
@@ -176,9 +183,10 @@ jobs:
       - run: docker build .
 ```
 
-詳細については、[DLC に関するドキュメント]({{site.baseurl}}/2.0/docker-layer-caching)を参照してください。
+Learn more about [Docker Layer Caching]({{site.baseurl}}/2.0/docker-layer-caching)
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - ビルドで構成可能な機能の一覧については、「[CircleCI を設定する]({{ site.baseurl}}/2.0/configuration-reference/)」を参照してください。
