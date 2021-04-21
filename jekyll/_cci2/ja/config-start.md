@@ -30,6 +30,7 @@ The core of the CircleCI experience is creating a *deterministic build* with the
 <hr />
 
 ## ビデオ: `.circleci/config.yml` 入門
+{: #video-introduction-to-circleciconfigyml }
 <div class="video-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/xOSHKNUIkjY" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
