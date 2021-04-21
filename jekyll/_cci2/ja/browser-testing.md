@@ -15,24 +15,27 @@ version:
 {:toc}
 
 ## 前提条件
+{: #prerequisites }
 {:.no_toc}
 
-「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/2.0/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
+Refer to the [Pre-Built CircleCI Docker Images]({{ site.baseurl }}/2.0/circleci-images/) and add `-browsers:` to the image name for a variant that includes Java 8, Geckodriver, Firefox, and Chrome. Add  `-browsers-legacy` to the image name for a variant which includes PhantomJS.
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
-コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザー ベースのテストは、変更が行われるたび、各デプロイの前、または特定のブランチで実行されるように構成できます。
+Every time you commit and push code, CircleCI automatically runs all of your tests against the browsers you choose. You can configure your browser-based tests to run whenever a change is made, before every deployment, or on a certain branch.
 
 ## Selenium
+{: #selenium }
 
-ブラウザー テストに使用される多くの自動化ツールには、広く採用されているブラウザー ドライバー標準である Selenium WebDriver が使用されています。
+Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
 
-Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザー テストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアル ページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
+Selenium WebDriver provides a common API for programatically driving browsers implemented in several popular languages, including Java, Python, and Ruby. Because Selenium WebDriver provides a unified interface for these browsers, you only need to write your browser tests once. These tests will work across all browsers and platforms. See the [Selenium documentation](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project) for details on set up. Refer to the [Xvfb man page](http://www.xfree86.org/4.0.1/Xvfb.1.html) for virtual framebuffer X server documentation.
 
-WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 テストをリモートで実行する場合は、Selenium Server と通信し、サーバーからブラウザーを操作します。
+WebDriver can operate in two modes: local or remote. When run locally, your tests use the Selenium WebDriver library to communicate directly with a browser on the same machine. When run remotely, your tests interact with a Selenium Server, and it is up to the server to drive the browsers.
 
-プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
+If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
 ```yml
 version: 2
@@ -55,15 +58,16 @@ jobs:
           background: true
 ```
 
-サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome ヘッドレス CircleCI 2.0 設定ファイルの例については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
+Refer to the [Install and Run Selenium to Automate Browser Testing]({{ site.baseurl }}/2.0/project-walkthrough/) section of the 2.0 Project Tutorial for a sample application. Refer to the [Knapsack Pro documentation](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless) for an example of Capybara/Selenium/Chrome headless CircleCI 2.0 configuration for Ruby on Rails.
 
-ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザー テスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する[ディスカッション スレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
+For more information about working with Headless Chrome, see the CircleCI blog post [Headless Chrome for More Reliable, Efficient Browser Testing](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/) and the related [discuss thread](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112).
 
-Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment.
+As an alternative to configuring your environment for Selenium, you could move to cloud-based platforms such as LambdaTest, Sauce Labs, or BrowserStack. These cross browser testing clouds provide you with a ready-made infrastructure so you don’t have to spend time configuring a Selenium environment.
 
 ## LambdaTest
+{: #lambdatest }
 
-すばやい市場投入をご支援するべく、LambdaTest を CircleCI に統合しました。 自動化されたクロスブラウザー テストを LambdaTest で実行して、複数のマシンから実行される 2,000 以上の実ブラウザーを提供するオンライン Selenium Grid を通して、開発コードがクラウド上でシームレスに実行されていることを確認できます。 自動化テストを LambdaTest の Selenium Grid と並列に実行して、テスト サイクルを大幅に短縮できます。
+LambdaTest now integrates with CircleCI to boost your go-to-market delivery. Perform automated cross browser testing with LambdaTest to ensure your development code renders seamlessly through an online Selenium grid providing 2000+ real browsers running through machines, on the cloud. Perform automation testing in parallel with LambdaTest’s Selenium grid to drastically trim down your test cycles.
 
 LambdaTest provides an SSH (Secure Shell) tunnel connection, Lambda Tunnel, to help you perform cross browser testing of your locally stored web pages. With Lambda Tunnel, you can see how your website will look to your audience before making it live, by executing a test server inside your CircleCI build container to perform automated cross-browser testing on the range of browsers offered by Selenium Grid on LambdaTest.
 
@@ -85,6 +89,7 @@ jobs:
 {% endraw %}
 
 ## Sauce Labs
+{: #sauce-labs }
 
 Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To allow the browsers access the web application you want to test, run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
 
@@ -119,11 +124,12 @@ jobs:
       - run:
           name: Shut Down Sauce Connect Tunnel
           command: |
-            kill -9 `cat /tmp/sc_client.pid`          
+            kill -9 `cat /tmp/sc_client.pid`
 ```
 {% endraw %}
 
 ### Sauce Labs browser testing orb example
+{: #sauce-labs-browser-testing-orb-example }
 
 Sauce Labs provide a browser testing orb for use with CircleCI that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
 
@@ -153,12 +159,14 @@ workflows:
 For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## BrowserStack and Appium
+{: #browserstack-and-appium }
 
 As in the Sauce Labs example above, you could replace the installation of Sauce Labs with an installation of another cross-browser testing platform such as BrowserStack. Then, set the USERNAME and ACCESS_KEY [environment variables]({{ site.baseurl }}/2.0/env-vars/) to those associated with your BrowserStack account.
 
 For mobile applications, it is possible to use Appium or an equivalent platform that also uses the WebDriver protocol by installing Appium in your job and using CircleCI [environment variables]({{ site.baseurl }}/2.0/env-vars/) for the USERNAME and ACCESS_KEY.
 
 ## Cypress
+{: #cypress }
 
 Another browser testing solution you can use in your Javascript end-to-end testing is [Cypress](https://www.cypress.io/). Unlike a Selenium-architected browser testing solution, when using Cypress, you can run tests in the same run-loop as your application. To simplify this process, you may use a CircleCI-certified orb to perform many different tests, including running all Cypress tests without posting the results to your Cypress dashboard. The example below shows a CircleCI-certified orb that enables you to run all Cypress tests without publishing results to a dashboard.
 
@@ -179,10 +187,12 @@ workflows:
 There are other Cypress orb examples that you can use in your configuration workflows. For more information about these other orbs, refer to the [Cypress Orbs](https://circleci.com/developer/orbs/orb/cypress-io/cypress) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
 ## Debugging browser tests
+{: #debugging-browser-tests }
 
 Integration tests can be hard to debug, especially when they're running on a remote machine. This section provides some examples of how to debug browser tests on CircleCI.
 
 ### Using screenshots and artifacts
+{: #using-screenshots-and-artifacts }
 {:.no_toc}
 
 CircleCI may be configured to collect [build artifacts]({{ site.baseurl }}/2.0/artifacts/) and make them available from your build. For example, artifacts enable you to save screenshots as part of your job, and view them when the job finishes. You must explicitly collect those files with the `store_artifacts` step and specify the `path` and `destination`. See the [store_artifacts]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) section of the Configuring CircleCI document for an example.
@@ -194,6 +204,7 @@ Saving screenshots is straightforward: it's a built-in feature in WebKit and Sel
 *   [Behat と Mink を使用して障害時に自動的に保存する](https://gist.github.com/michalochman/3175175)
 
 ### Using a local browser to access HTTP server on CircleCI
+{: #using-a-local-browser-to-access-http-server-on-circleci }
 {:.no_toc}
 
 If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
@@ -213,6 +224,7 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 This is a very easy way to debug things when setting up Selenium tests, for example.
 
 ### Interacting with the browser over VNC
+{: #interacting-with-the-browser-over-vnc }
 {:.no_toc}
 
 VNC allows you to view and interact with the browser that is running your tests. This only works if you are using a driver that runs a real browser. You can interact with a browser that Selenium controls, but PhantomJS is headless, so there is nothing to interact with.
@@ -259,6 +271,7 @@ ubuntu@box159:~$ firefox &
 Now, you can run integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ### CircleCI の X サーバーの共有
+{: #sharing-circlecis-x-server }
 {:.no_toc}
 
 If you find yourself setting up a VNC server often, then you might want to automate the process. You can use `x11vnc` to attach a VNC server to X.
@@ -280,6 +293,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
 
 ## X11 forwarding over SSH
+{: #x11-forwarding-over-ssh }
 
 CircleCI also supports X11 forwarding over SSH. X11 forwarding is similar to VNC &mdash; you can interact with the browser running on CircleCI from your local machine.
 
@@ -307,5 +321,6 @@ You can kill xclock with `Ctrl+c` after it appears on your desktop.
 Now you can run your integration tests from the command line and watch the browser for unexpected behavior. You can even interact with the browser as if the tests were running on your local machine.
 
 ## See also
+{: #see-also }
 
 [Project Walkthrough]({{ site.baseurl }}/2.0/project-walkthrough/)
