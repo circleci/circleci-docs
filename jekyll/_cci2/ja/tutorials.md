@@ -18,12 +18,14 @@ version:
 {: class="table table-striped"}
 
 ## Sample projects with companion guides
+{: #sample-projects-with-companion-guides }
 
-サンプル プロジェクトを参照すると、アプリケーションの記述に使用する言語やフレームワークの構築に役立ちます。
+Refer to the Sample Projects to get help with building the language and framework in which your application is written.
 
 {% include snippets/language-guides.md %}
 
 ## Sample workflows
+{: #sample-workflows }
 
 | Workflow Example     | GitHub Repo                                                                                                                               |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -34,6 +36,7 @@ version:
 {: class="table table-striped"}
 
 ## CircleCI public repos
+{: #circleci-public-repos }
 
 | GitHub Repo            | 説明                                                               | config.yml link                                                                                      |
 | ---------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
@@ -44,10 +47,11 @@ version:
 {: class="table table-striped"}
 
 ## See also
+{: #see-also }
 
-Hello World ドキュメントと`config.yml` ファイルの例を参照して、最初のビルドを構成できます。
+Use the Hello World document and sample `config.yml` files to start configuring your build.
 
-| Document                  | 説明                                                                                                                                                               |
+| Document                  | Description                                                                                                                                                      |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.                                                                |
 | <a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
