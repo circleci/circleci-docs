@@ -9,6 +9,7 @@ order: 20
 version:
   - Cloud
   - Server v2.x
+  - Server v3.x
 ---
 
 以下のセクションに沿って、CircleCI 2.0 で SSH を使用してビルド コンテナにアクセスする方法について説明します。
@@ -17,13 +18,15 @@ version:
 {:toc}
 
 ## 概要
-多くの場合、問題を解決するには、ジョブへの SSH 接続を行い、ログ ファイル、実行中のプロセス、ディレクトリ パスなどを調べるのが一番の方法です。 CircleCI 2.0 には、すべてのジョブに SSH を介してアクセスするオプションが用意されています。 SSH を使用した CI/CD パイプラインのデバッグについては、CircleCI の[こちらのブログ記事](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/)をご参照ください。
+{: #overview }
+Often the best way to troubleshoot problems is to SSH into a job and inspect things like log files, running processes, and directory paths. CircleCI 2.0 gives you the option to access all jobs via SSH. Read our [blog post](https://circleci.com/blog/debugging-ci-cd-pipelines-with-ssh-access/) on debugging CI/CD pipelines with SSH.
 
-SSH を使用してログインする場合、ユーザーは対話型のログイン シェルを実行しています。 You may be running the command on top of the directory where the command failed the first time, **or** you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run (you may wish to execute `pwd` or `ls` to ensure that you are in the correct directory).
+When you log in with SSH, you are running an interactive login shell. You may be running the command on top of the directory where the command failed the first time, **or** you may be running the command from the directory one level up from where the command failed (e.g. `~/project/` or `~/`). Either way, you will not be initiating a clean run (you may wish to execute `pwd` or `ls` to ensure that you are in the correct directory).
 
 Please note that a default CircleCI pipeline executes steps in a non-interactive shell and hence, there is the possibility that running steps using an interactive login may succeed, while failing in non-interactive mode.
 
 ## ステップ
+{: #steps }
 
 1. SSH キーを [GitHub](https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/) アカウントまたは [Bitbucket](https://confluence.atlassian.com/bitbucket/set-up-an-ssh-key-728138079.html) アカウントに追加していることを確認します。
 
@@ -44,10 +47,12 @@ The build VM will remain available for an SSH connection for **10 minutes after 
 **Note**: If your job has parallel steps, CircleCI launches more than one VM to perform them. Thus, you'll see more than one 'Enable SSH' and 'Wait for SSH' section in the build output.
 
 ## Debugging: "permission denied (publickey)"
+{: #debugging-permission-denied-publickey }
 
 If you run into permission troubles trying to SSH to your job, try these things:
 
 ### Ensure authentication with GitHub/Bitbucket
+{: #ensure-authentication-with-githubbitbucket }
 {:.no_toc}
 
 A single command can be used to test that your keys are set up as expected. For GitHub run:
@@ -77,6 +82,7 @@ $ logged in as :username.
 If you _don't_ see output like that, you need to start by [troubleshooting your SSH keys with GitHub](https://help.github.com/articles/error-permission-denied-publickey)/ [troubleshooting your SSH keys with Bitbucket](https://confluence.atlassian.com/bitbucket/troubleshoot-ssh-issues-271943403.html).
 
 ### Ensure authenticating as the correct user
+{: #ensure-authenticating-as-the-correct-user }
 {:.no_toc}
 
 If you have multiple accounts, double-check that you are authenticated as the right one!
@@ -86,6 +92,7 @@ In order to SSH into a CircleCI build, the username must be one which has access
 If you're authenticating as the wrong user, you can probably resolve this by offering a different SSH key with `ssh -i`. See the next section if you need a hand figuring out which key is being offered.
 
 ### Ensure the correct key is offered to CircleCI
+{: #ensure-the-correct-key-is-offered-to-circleci }
 {:.no_toc}
 
 If you've verified that you can authenticate as the correct user, but you're still getting "Permission denied" from CircleCI, you may be offering the wrong credentials to us. (This can happen for several reasons, depending on your SSH configuration.)
@@ -125,6 +132,7 @@ $ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 ```
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
