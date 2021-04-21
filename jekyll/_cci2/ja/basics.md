@@ -20,25 +20,26 @@ CircleCI で使用される基本的な概念については、以下の各リ�
 {: class="table table-striped"}
 
 ## 機能
+{: #features }
 
-CircleCI の基本機能の使用方法については、以下の各リンクを参照してください。
+Learn to use the basic features of CircleCI.
 
-| ドキュメント                                                       | 説明                                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------------- |
-| [環境変数の使用]({{ site.baseurl }}/2.0/env-vars/)                  | CircleCI アプリケーションや `config.yml` ファイルで環境変数を使用する方法                    |
-| [コンテキストの使用]({{ site.baseurl }}/2.0/contexts/)                | コンテキストを使用してグローバルな環境変数を設定する方法                                        |
-| [シェル スクリプトの使用]({{ site.baseurl }}/2.0/using-shell-scripts/)  | CircleCI 設定でのシェル スクリプトの使用に関するベスト プラクティス                             |
-| [CircleCI に SSH 鍵を登録する]({{ site.baseurl }}/2.0/add-ssh-key/) | CircleCI に SSH 鍵を追加する方法                                             |
-| [SSH を使用したデバッグ]({{ site.baseurl }}/2.0/ssh-access-jobs/)     | SSH を使用してビルドに関する問題をデバッグする方法                                         |
-| [API トークンの管理]({{ site.baseurl }}/2.0/managing-api-tokens/)   | CircleCI API を使用するためにスコープ付きトークンを割り当てる方法                             |
-| [ビルドのスキップとキャンセル]({{ site.baseurl }}/2.0/skip-build/)         | CircleCI による変更内容の自動ビルドを止める方法                                        |
-| [通知の使用]({{ site.baseurl }}/2.0/notifications/)               | CircleCI アプリケーションで Slack 通知、チャット通知、メール通知を設定・変更する方法                  |
-| [ステータス バッジの追加]({{ site.baseurl }}/2.0/status-badges/)        | Web ページまたはドキュメントにビルドのステータスを表示する方法                                   |
-| [ビルド アーティファクトの保存]({{ site.baseurl }}/2.0/artifacts/)         | `config.yml` 構文でビルド アーティファクトを保存し、それらへのリンクを CircleCI アプリケーションで確認する方法 |
-| [API を使用したジョブのトリガー]({{ site.baseurl }}/2.0/api-job-trigger/) | API でジョブをトリガーする方法                                                   |
-| [インサイトの使用]({{ site.baseurl }}/2.0/insights/)                 | リポジトリのステータスとビルド パフォーマンス データを表示する方法                                  |
+| Document                                                                 | Description                                                                                            |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/)          | How to use environment variables in the CircleCI app and in the `config.yml` file.                     |
+| [Using Contexts]({{ site.baseurl }}/2.0/contexts/)                       | How to use Contexts to set global environment variables.                                               |
+| [Using Shell Scripts]({{ site.baseurl }}/2.0/using-shell-scripts/)       | Best practices for using shell scripts in CircleCI configuration.                                      |
+| [Adding an SSH Key]({{ site.baseurl }}/2.0/add-ssh-key/)                 | How to add an SSH key to CircleCI.                                                                     |
+| [Debugging with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs/)            | How to use SSH to debug build problems.                                                                |
+| [Managing API Tokens]({{ site.baseurl }}/2.0/managing-api-tokens/)       | How to assign scoped tokens for using the CircleCI API.                                                |
+| [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/)     | How to prevent CircleCI from automatically building changes.                                           |
+| [Enabling Notifications]({{ site.baseurl }}/2.0/notifications/)          | How to set or modify Slack, chat, and email notifications in the CircleCI app.                         |
+| [Embedding Build Status Badges]({{ site.baseurl }}/2.0/status-badges/)   | How to display the status of your builds on a web page or document.                                    |
+| [Storing Artifacts]({{ site.baseurl }}/2.0/artifacts/)                   | How to store build artifacts in the `config.yml` syntax and finding links to them in the CircleCI app. |
+| [Using the API to Trigger Jobs]({{ site.baseurl }}/2.0/api-job-trigger/) | How to trigger Jobs with the API.                                                                      |
+| [Using Insights]({{ site.baseurl }}/2.0/insights/)                       | How to view status for your repos and build performance data.                                          |
 {: class="table table-striped"}
 
-このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。
+We’re thrilled to have you here. Happy building!
 
-_CircleCI チーム_
+_The CircleCI Team_
