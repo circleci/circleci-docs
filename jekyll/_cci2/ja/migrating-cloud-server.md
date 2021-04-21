@@ -19,6 +19,7 @@ SaaS で動作している 2.0 `config.yml` ファイルであれば、Server �
 カスタムの `machine` Executor AMI および構成可能なインスタンスの種類は、特定の方法で定義されます。そのため、Server ビルド クラスタを定義するときには、チームが[構成可能なリソース](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class) (`resource_class`) を SaaS でどのように使用しているかを考慮してください。
 
 ## 制限事項
+{: #limitations }
 
 - 現在、`macos` Executor は Server でサポートされていません。
 - Bitbucket は Server でサポートされていません。Server でサポートされている VCS は、GitHub および GitHub Enterprise のみです。
