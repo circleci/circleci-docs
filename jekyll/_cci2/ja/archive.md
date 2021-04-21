@@ -10,16 +10,19 @@ sitemap: false
 ---
 
 ## Getting started
+{: #getting-started }
 - [CircleCI とは]({{ site.baseurl }}/archive/introduction/){:rel="nofollow"}
 - [CircleCI 1.0 入門]({{ site.baseurl }}/archive/getting-started/){:rel="nofollow"}
 - [よくあるご質問]({{ site.baseurl }}/archive/faq/){:rel="nofollow"}
 
 ## 移行
+{: #migration }
 - [1.0 circle.yml ファイルの例]({{ site.baseurl }}/archive/config-sample/){:rel="nofollow"}
 - [GitHub インテグレーション (5)]({{ site.baseurl }}/archive/github-privacy/){:rel="nofollow"}
 - [Jenkins から CircleCI への移行]({{ site.baseurl }}/archive/migrating-from-jenkins/){:rel="nofollow"}
 
 ## Build environments
+{: #build-environments }
 - [Android]({{ site.baseurl }}/archive/android/){:rel="nofollow"}
 - [macOS ビルド イメージ]({{ site.baseurl }}/archive/build-image-macos/){:rel="nofollow"}
 - [Ubuntu 12.04 (Precise)]({{ site.baseurl }}/archive/build-image-precise/){:rel="nofollow"}
@@ -28,6 +31,7 @@ sitemap: false
 - [ビルド環境のカスタマイズ]({{ site.baseurl }}/archive/installing-custom-software/){:rel="nofollow"}
 
 ## Language guides
+{: #language-guides }
 - [Go (Golang)]({{ site.baseurl }}/archive/language-go/){:rel="nofollow"}
 - [Haskell]({{ site.baseurl }}/archive/language-haskell/){:rel="nofollow"}
 - [Java]({{ site.baseurl }}/archive/language-java/){:rel="nofollow"}
@@ -39,6 +43,7 @@ sitemap: false
 - [Node.js & npm ガイド (3)]({{ site.baseurl }}/archive/nodejs-and-npm/){:rel="nofollow"}
 
 ## 設定
+{: #configuration }
 - [概要]({{ site.baseurl }}/archive/manually/){:rel="nofollow"}
 - [CircleCI 1.0 の設定]({{ site.baseurl }}/archive/configuration/){:rel="nofollow"}
 - [CircleCI 1.0 環境変数の使用]({{ site.baseurl }}/archive/environment-variables/){:rel="nofollow"}
@@ -54,12 +59,14 @@ sitemap: false
 - [iOS コード署名]({{ site.baseurl }}/archive/ios-code-signing/){:rel="nofollow"}
 
 ## 最適化
+{: #optimization }
 - [並列処理のしくみ]({{ site.baseurl }}/archive/how-parallelism-works/){:rel="nofollow"}
 - [並列処理の手動設定]({{ site.baseurl }}/archive/parallel-manual-setup/){:rel="nofollow"}
 - [ビルド コンテナ間の SSH]({{ site.baseurl }}/archive/ssh-between-build-containers/){:rel="nofollow"}
 - [並列処理の設定]({{ site.baseurl }}/archive/setting-up-parallelism/){:rel="nofollow"}
 
 ## インテグレーション
+{: #integrations }
 - [Artifactory へのアップロード]({{ site.baseurl }}/archive/Artifactory/){:rel="nofollow"}
 - [Sauce Labs によるテスト]({{ site.baseurl }}/archive/browser-testing-with-sauce-labs/){:rel="nofollow"}
 - [Amazon S3 による継続的デプロイ]({{ site.baseurl }}/archive/continuous-deployment-with-amazon-s3/){:rel="nofollow"}
@@ -84,6 +91,7 @@ sitemap: false
 - [デプロイ中のパーミッションとアクセス]({{ site.baseurl }}/archive/permissions-and-access-during-deployment/){:rel="nofollow"}
 
 ## 参考情報
+{: #reference }
 - [ビルド アーティファクト]({{ site.baseurl }}/archive/build-artifacts/){:rel="nofollow"}
 - [テスト環境]({{ site.baseurl }}/archive/environment/){:rel="nofollow"}
 - [フォーク PR のビルド]({{ site.baseurl }}/archive/fork-pr-builds/){:rel="nofollow"}
@@ -92,6 +100,7 @@ sitemap: false
 - [埋め込み可能なステータス バッジ]({{ site.baseurl }}/archive/status-badges/){:rel="nofollow"}
 
 ## トラブルシューティング
+{: #troubleshooting }
 - [MySQL 5.7 から 5.6 へのダウングレード]({{ site.baseurl }}/archive/downgrading-mysql-to-5.6/){:rel="nofollow"}
 - [Linux システムでのファイル順序のバグ]({{ site.baseurl }}/archive/file-ordering/){:rel="nofollow"}
 - [ファイル システム レイアウトの問題 (2)]({{ site.baseurl }}/archive/filesystem/){:rel="nofollow"}
@@ -110,6 +119,7 @@ sitemap: false
 - [Ruby (10)]({{ site.baseurl }}/archive/troubleshooting-ruby/){:rel="nofollow"}
 
 ## Enterprise administration
+{: #enterprise-administration }
 
 - [インストール]({{ site.baseurl }}/enterprise/aws/){:rel="nofollow"}
 - [バックアップ]({{ site.baseurl }}/enterprise/backup/){:rel="nofollow"}
