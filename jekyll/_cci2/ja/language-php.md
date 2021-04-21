@@ -17,23 +17,26 @@ version:
 {:toc}
 
 ## クイックスタート: デモ用の PHP Laravel リファレンス プロジェクト
+{: #quickstart-demo-php-laravel-reference-project }
 
-CircleCI 2.0 での PHP のビルド方法を示すために、PHP Laravel リファレンス プロジェクトが用意されています。
+We maintain a reference PHP Laravel project to show how to build PHP on CircleCI 2.0:
 
 - <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel" target="_blank">GitHub 上の PHP Laravel デモ プロジェクト</a>
 - [CircleCI でビルドされたデモ PHP Laravel プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"}
 
-In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. このファイルは、PHP プロジェクトで CircleCI 2.0 を使用するためのベスト プラクティスを示しています。
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-php-laravel/blob/circleci-2.0/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>. This file shows best practice for using CircleCI 2.0 with PHP projects.
 
 ## Pre-built CircleCI Docker images
+{: #pre-built-circleci-docker-images }
 
-CircleCI のビルド済みイメージを使用することをお勧めします。このイメージには、CI 環境で役立つツールがプリインストールされています。 [Docker Hub](https://hub.docker.com/r/circleci/php/) から必要な PHP バージョンを選択できます。 デモ プロジェクトでは、公式 CircleCI イメージを使用しています。
+We recommend using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the PHP version you need from [Docker Hub](https://hub.docker.com/r/circleci/php/). The demo project uses an official CircleCI image.
 
-セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
+Database images for use as a secondary 'service' container are also available.
 
 ## Build the demo PHP project yourself
+{: #build-the-demo-php-project-yourself }
 
-CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
+A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
 
 1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
 2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
@@ -42,8 +45,9 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 ---
 
 ## Sample configuration
+{: #sample-configuration }
 
-以下に、デモ プロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
+Following is the commented `.circleci/config.yml` file in the demo project.
 
 {% raw %}
 ```yaml
@@ -51,7 +55,7 @@ version: 2 # use CircleCI 2.0
 
 jobs: # a collection of steps
   build: # runs not using Workflows must have a `build` job as entry point
-    docker: # run the steps with Docker 
+    docker: # run the steps with Docker
       - image: circleci/php:7.1-node-browsers # ...with this image as the primary container; this is where all `steps` will run
         auth:
           username: mydockerhub-user
@@ -82,30 +86,31 @@ jobs: # a collection of steps
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-      - run: touch storage/testing.sqlite 
+      - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples    
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 ```
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
 ```
 
 
-実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/2.0/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
 
-[`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
 
-ジョブの各ステップは [Executor]({{ site.baseurl }}/2.0/executor-types/) という名前の仮想環境で実行されます。
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
 
-この例では [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 ここでは、ブラウザー ツールを含む [CircleCI 提供の PHP Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#php)を使用します。
+In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. We use the [CircleCI-provided PHP docker image](https://circleci.com/docs/2.0/circleci-images/#php) which includes browser tooling.
 
 ```yaml
 version: 2
@@ -116,10 +121,10 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    working_directory: ~/laravel 
+    working_directory: ~/laravel
 ```
 
-次に、`steps:` キーの下で、一連のコマンドを実行します。 以下のように、依存関係の管理に使用できる PHP ツールをインストールします。
+Next, we'll run a series of commands under the `steps:` key. Below we install some PHP tooling allowing up to manage our dependencies.
 
 {% raw %}
 ```yaml
@@ -131,21 +136,21 @@ jobs:
 ```
 {% endraw %}
 
-設定ファイルのその後のステップはすべて、依存関係の管理とキャッシュに関連しています。 このサンプル プロジェクトでは、PHP の依存関係と JavaScript の依存関係の両方をキャッシュします。
+The next set of steps for the config are all related to dependency management and caching. The sample project caches both PHP dependencies and JavaScript dependencies.
 
-[`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例のキャッシュ キーは、`composer.lock` ファイルのチェックサムに基づいていますが、より汎用的なキャッシュ キーを使用するようにフォールバックします。
+Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, the cache key will be based on a checksum of the `composer.lock` file, but will fall back to using a more generic cache key.
 
-[`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
 
 
 {% raw %}
 ```yaml
-      - restore_cache: 
+      - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
             - composer-v1-
       - run: composer install -n --prefer-dist
-      - save_cache: 
+      - save_cache:
           key: composer-v1-{{ checksum "composer.lock" }}
           paths:
             - vendor
@@ -154,17 +159,17 @@ jobs:
             - node-v1-{{ checksum "package-lock.json" }}
             - node-v1-
       - run: yarn install
-      - save_cache: 
+      - save_cache:
           key: node-v1-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
 ```
 {% endraw %}
 
-最後に、Sqlite テスト データベースを準備し、移行を実行し、テストを実行します。
+Finally, we will set up a test database with Sqlite, run migrations and run tests.
 
 ```yaml
-      - run: touch storage/testing.sqlite 
+      - run: touch storage/testing.sqlite
       - run: php artisan migrate --env=testing --database=sqlite_testing --force
       - run: ./vendor/bin/codecept build
       - run: ./vendor/bin/codecept run
@@ -172,9 +177,10 @@ jobs:
 
 ---
 
-完了です。 You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
+Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [Job page](https://circleci.com/gh/CircleCI-Public/circleci-demo-php-laravel){:rel="nofollow"} to see how this looks when building on CircleCI.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
