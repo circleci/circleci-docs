@@ -16,12 +16,14 @@ Orb のテストに関するベスト プラクティスを説明します。
 {:toc}
 
 ## はじめに
+{: #introduction }
 
-Orb はオープン ソースであり他者が手を加えられるので、すべてのソフトウェアと同様に、Orb 用に厳格なテスト パイプラインを作成することが重要です。 Orb は YAML 形式で作成するので、効率的にテストを行うのは難しいと思うかもしれません。 しかし、Orb 開発キットがあれば、Orb について厳密かつ網羅的なテストを簡単に実装できます。
+Orbs are open source and contributions are expected, therefore, as with all software, setting up a solid testing pipeline for your orb is important. Because orbs are created in YAML, it may seem difficult to test them effectively. With the orb development kit, there is a simple path to implementing a full range of robust tests for your orb.
 
 ## バリデーション
+{: #validation }
 
-Orb のテストで最も基本的なものは、設定ファイルのバリデーションとコードの構文チェックです。 パッケージ化およびパブリッシュする Orb は、有効な YAML 形式であり、かつ CircleCI の構文に従っている必要があります。 Orb 開発キットを使用していれば、これら両方のチェックは、プロジェクトの設定ファイル `.circleci/config.yml` に定められた CI/CD パイプラインにより自動で行われます。 また、ローカル環境において手動で実施することも可能です。
+The most basic forms of testing for orbs are configuration validation and code linting. When an orb is packed and published it must be both valid YAML, and valid CircleCI syntax. Both of these checks are automatically applied when using the orb development kit, through the CI/CD pipeline set out in the project's config file at `.circleci/config.yml`. Config validation and code linting can also be performed manually, locally.
 
 ```yaml
 # Snippet from test-pack workflow
@@ -35,37 +37,41 @@ test-pack:
           exclude: SC2148
 ```
 
-Orb リポジトリへの初回コミット時には、[test-pack](https://github.com/CircleCI-Public/Orb-Project-Template/blob/43712ad367f2f3b06b2ae46e43ddf70bd3d83222/.circleci/config.yml#L40) ワークフローがトリガーされ、Orb のバリデーションとテスト関係のジョブが複数実行されます。
+When you first make a commit to your orb repository, the [test-pack](https://github.com/CircleCI-Public/Orb-Project-Template/blob/43712ad367f2f3b06b2ae46e43ddf70bd3d83222/.circleci/config.yml#L40) workflow is triggered, which contains several jobs related to validating and testing your orb.
 
-Orb プロジェクトの設定ファイルの中身について詳しくは、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs)」ガイドを参照してください。
+Learn more about what is included in orb project config files in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) guide.
 
 ### YAML lint
+{: #yaml-lint }
 
-上記ワークフローの最初にあるジョブ `orb-tools/lint` は、Orb 開発キットの主要コンポーネントである [`orb-tools` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) のジョブです。 この `orb-tools/lint` ジョブは、基本的な YAML 構文チェックを行います。 ジョブのパラメーターで構文チェックのツールやその他の設定を変更できます。詳しくは、[Orb レジストリのページ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-lint)を参照してください。
+The first job listed within the workflow, `orb-tools/lint`, is from the [`orb-tools` orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools), which is a major component of the orb development kit. The `orb-tools/lint` job is responsible for basic YAML linting. You can modify the linting rules or other settings via the [job's parameters, which are listed on the orb registry](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-lint).
 
 ### Config validation
+{: #config-validation }
 
-`test-pack` ワークフローでは、YAML 構文チェック ジョブ (`orb-tools/lint`) と並列で [orb-tools/pack](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools#jobs-pack) ジョブも実行し、自動的に設定ファイルのパッケージ化とバリデーションを行います。
+The `test-pack` workflow will run the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job, in parallel with your YAML linting job (`orb-tools/lint`), to automatically pack and validate the configuration.
 
-単一の `orb.yml` ファイル (パッケージ化された Orb) であれば、CircleCI CLI の `circleci orb validate orb.yml` でバリデーションできます。 一方で、Orb 開発キットを使用する場合、YAML ファイル 1 つだけを扱うことはめったにありません。 その代わりに、設定ファイルは `circleci orb pack <dir> > orb.yml` コマンドでパッケージ化された後、自動的にバリデーションされます。
+A singular `orb.yml` file (a packed orb) can be validated with the CircleCI CLI via `circleci orb validate orb.yml`. However, using the orb development kit, we rarely work out of singular YAML files. Instead, your configuration file is automatically validated after it has been packed with the `circleci orb pack <dir> > orb.yml` command.
 
 ### ShellCheck
+{: #shellcheck }
 
-Orb 開発キットを使用することの大きなメリットとして、完成版の Orb に外部の bash スクリプトをインポートできることがあります。 bash スクリプトは [src/scripts](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/scripts) ディレクトリに配置するので、スクリプトに対する別のテストも実行できます。
+One of the major benefits of using the orb development kit is the ability to import external bash scripts into your final orb. Because you can keep your bash scripts in the [src/scripts](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/scripts) directory, you can run additional tests against your scripts.
 
-bash スクリプトのテストで最も基本的なものは、"ShellCheck" というバリデーション ツールです。 これは bash 用の構文チェック ツールというべきもので、詳細は [shellcheck.net](https://www.shellcheck.net/) に記載されています。
+The most basic tests to run against bash scripts are a form of validation: "shellchecking". This is similar to a linter for Bash, you can find out more at [shellcheck.net](https://www.shellcheck.net/).
 
-`test-pack` ワークフローでは、[ShellCheck Orb](https://circleci.com/developer/ja/orbs/orb/circleci/shellcheck) を使用します。 ShellCheck Orb のステップはすべて省略可能であり、特に Orb でスクリプトのインストールが不要な場合などは削除してかまいません。
+In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci.com/developer/orbs/orb/circleci/shellcheck) is included. The shellcheck orb steps are completely optional and can be removed, especially, if your orb does not require scripts to be imported.
 
 ## Unit testing
+{: #unit-testing }
 
-Orb 開発キットの [`<<include(file)>>` ファイル インクルード]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax)機能を使っており、`src/scripts` に bash ファイルを保存して読み込む場合、スクリプト向けの完全な結合テストを作成できます。
+If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
 
-![BATS-Core を使用した bash スクリプトの単体テスト]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
+![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
-`test-pack` ワークフローには [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) ジョブが含まれており、このジョブにより `src/tests` ディレクトリ内にある [.bats](#bats-core) テストが自動で実行されます。
+The `test-pack` workflow includes the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job, which is responsible for automatically executing [.bats](#bats-core) tests within the `src/tests` directory.
 
-When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command is generated, which _includes_ the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script. また、`src/tests` ディレクトリに、[BATS-Core (Bash Automation Testing System)](#bats-core) フレームワークを使用したテスト ケース サンプルである [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats) も生成されます。
+When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml) command is generated, which _includes_ the [greet.sh](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/scripts/greet.sh) shell script. Also included, is a test case example using the [BATS-Core (Bash Automation Testing System)](#bats-core) framework, in the `src/tests` directory, named [greet.bats](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats)
 
 {:.tab.unitTest.greet-yaml}
 
@@ -128,21 +134,23 @@ setup() {
 ```
 
 ### BATS-Core
+{: #bats-core }
 
-[Bash Automation Testing System](https://github.com/bats-core/bats-core) は、UNIX プログラムのテストを簡素化するためのオープン ソースのテスト フレームワークです。
+The [Bash Automation Testing System](https://github.com/bats-core/bats-core) is an open source testing framework that provides a simple way to test UNIX programs.
 
-[src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) にある [README](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/README.md) に、BATS テスト ケースの作成手順をすべて示した最新のチュートリアルが記載されています。
+Within your [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) is a [README](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/README.md) with a full and updated tutorial for creating BATS test cases.
 
-[src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) ディレクトリにある各 `.bats` ファイルは、[BATS Orb](https://circleci.com/developer/ja/orbs/orb/circleci/bats) の [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) ジョブにより自動的に読み込まれ、テストされます。
+Each `.bats` file within the [src/tests](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests) directory will be automatically loaded and tested by the [bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L49) job provided by the [bats orb](https://circleci.com/developer/orbs/orb/circleci/bats).
 
 #### 例
+{: #example }
 
-実際の使用例として、CircleCI 製の [ShellCheck Orb](https://github.com/CircleCI-Public/shellcheck-orb/blob/master/src/tests/check-test.bats) に含まれるテストを見てみましょう。
+For a real-life example, take a look at the tests in our [Shellcheck orb](https://github.com/CircleCI-Public/shellcheck-orb/blob/master/src/tests/check-test.bats).
 
-BATS テストのインクルードは必須ではなく、必要に応じて設定ファイルから削除してもかまいません。
+Remember, including bats tests are optional and can be removed from your configuration file if desired.
 {: class="alert alert-warning"}
 
-ShellCheck Orb の BATS テスト スイートの簡略版スニペットを次に示します。
+Here is a simplified snippet from the Shellcheck orb's BATS test suite.
 
 ```bash
 # BATS テストの例
@@ -181,18 +189,20 @@ teardown() {
 ```
 
 ## Integration testing
+{: #integration-testing }
 
-ここまでは、すべてのテストを Orb のパッケージ化前に実行し、完成版の Orb ではなくコード自体を対象としていました。 最後に最も重要な Orb のテストとして、Orb のコマンドとジョブをテストし、本番環境で意図したとおりに動作するかを確認します。 このテストは、バリデーション テストを実行して新しい開発版の Orb がパブリッシュされた後に行われます。
+Up until this point, all testing has happened prior to packing the orb, and is applied to the code itself, not the finalized functioning orb. For the final, critical part of orb testing, you will test your orb commands and jobs to ensure they work as intended in production. This happens after the validation tests have run and a new development version of your orb is published.
 
-開発版の Orb がパブリッシュされると、[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローが自動的にトリガーされ、Orb をテストします。
+After the development version of your orb has been published, the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow will be triggered automatically to test it.
 
-`integration-test_deploy` ワークフローでは、一連の最終結合テストを実行します。これらすべてのテストに合格した場合、メインのデプロイメント ブランチに移動し、Orb をデプロイすることができます。
+The `integration-test_deploy` workflow runs a series of final integration tests, and if all pass, and you are on your main deployment branch, you can deploy your orb.
 
 ### Testing orb commands
+{: #testing-orb-commands }
 
-[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの最初のジョブは [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) ジョブです。これは、`orb-init` コマンドで生成される `hello-world` Orb に含まれるサンプルの結合テストです。
+The first job you will see in the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow is the [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L82) job, a sample integration test included with the `hello-world` orb, generated by the `orb-init` command.
 
-[`integration-test-1` ジョブ](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) の定義は、上部の `jobs` キーで確認できます。
+You can see the definition of the [`integration-test-1` job](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L27) above in the `jobs` key.
 
 ```
   integration-test-1:
@@ -203,13 +213,14 @@ teardown() {
       - <orb-name>/greet
 ```
 
-ローカル バージョンでは、`<orb-name>` は指定した Orb 名に置き換えられます。 このジョブを利用することで、実際の CircleCI 環境で Orb のジョブをテストすることができます。
+In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment.
 
-このジョブのステップを、Orb のコマンドに置き換えます。 必要に応じてサンプル プロジェクトを含めたり、Orb のコマンドだけを実行してエラーが発生しないことを確認したりすることもできます。
+Replace  the steps of this job with commands from your orb. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
 
 ### Testing orb jobs
+{: #testing-orb-jobs }
 
-Orb のコマンドだけでなくジョブもテストする必要がある場合は、設定ファイルで、[integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) ワークフローの `integration-test-1` のすぐ下にテストする Orb ジョブを追加します。
+If we needed to test our orb's jobs, as well as commands, we can simply add our orb job right next to the `integration-test-1` job in our config under the [integration-test_deploy](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml#L78) workflow.
 
 ```
 integration-test_deploy:
@@ -224,10 +235,12 @@ integration-test_deploy:
 ```
 
 ## What's next?
+{: #whats-next }
 
-Orb の新しい機能を追加し、適切なテストを作成できたら、Orb レジストリに Orb をパブリッシュしましょう。 セマンティック バージョンの Orb を自動的にパブリッシュする方法について、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
+Once you have added new orb features, and created passing tests, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide for information on automatically publishing semantically versioned orbs.
 
 ## See also
+{: #see-also }
 
 - CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)」を参照してください。
 - ワークフローやジョブで使用する Orb については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
