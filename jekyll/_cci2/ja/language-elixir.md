@@ -16,6 +16,7 @@ This is an annotated `config.yml` for a simple Phoenix web application, which yo
 お急ぎの場合は、以下の構成をプロジェクトの root ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) にコピーしてください。 お急ぎでなければ、全体に目を通し、十分に理解を深めることをお勧めします。
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -80,20 +81,21 @@ jobs:  # basic units of work in a run
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
-`config.yml` は必ず [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
+Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key. This key is used to issue warnings about breaking changes.
 
 ```yaml
 version: 2
 ```
 
-実行処理は 1 つ以上の[ジョブ]({{ site.baseurl }}/2.0/configuration-reference/#jobs)で構成されます。 この実行では [ワークフロー]({{ site.baseurl }}/2.0/configuration-reference/#workflows)を使用しないため、`build` ジョブを記述する必要があります。
+A run is comprised of one or more [jobs]({{ site.baseurl }}/2.0/configuration-reference/#jobs). Because this run does not use [workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows), it must have a `build` job.
 
-[`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) キーを使用して、ジョブの [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を実行する場所を指定します。 `working_directory` のデフォルトの値は `~/project` です (`project` は文字列リテラル)。
+Use the [`working_directory`]({{ site.baseurl }}/2.0/configuration-reference/#job_name) key to specify where a job's [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) run. By default, the value of `working_directory` is `~/project`, where `project` is a literal string.
 
-ジョブの各ステップは [Executor]({{ site.baseurl }}/2.0/executor-types/) という仮想環境で実行されます。
+The steps of a job occur in a virtual environment called an [executor]({{ site.baseurl }}/2.0/executor-types/).
 
-この例では [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) Executor を使用して、カスタム Docker イメージを指定しています。 [CircleCI 提供の Elixir Docker イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#elixir)を使用します。
+In this example, the [`docker`]({{ site.baseurl }}/2.0/configuration-reference/#docker) executor is used to specify a custom Docker image. We use the [CircleCI-provided Elixir docker image](https://circleci.com/docs/2.0/circleci-images/#elixir).
 
 ```yaml
 jobs:
@@ -115,15 +117,15 @@ jobs:
           POSTGRES_DB: app_test
           POSTGRES_PASSWORD:
 
-    working_directory: ~/app 
+    working_directory: ~/app
 ```
 
 
-ジョブのコンテナを選択したら、いくつかのコマンドを実行する [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) を作成します。
+After choosing containers for a job, create [`steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps) to run specific commands.
 
-[`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップを使用して、ソース コードをチェックアウトします。 デフォルトでは、`working_directory` で指定されたパスにソース コードがチェックアウトされます。
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code. By default, source code is checked out to the path specified by `working_directory`.
 
-[`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) ステップを使用して、コマンドを実行します。 この例では [Mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html) を使用して Elixir ツールをインストールします。
+Use the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) step to execute commands. In this example, [mix](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html) is used to install Elixir tooling.
 
 ```yaml
     steps:
@@ -132,11 +134,11 @@ jobs:
       - run: mix local.rebar --force
 ```
 
-実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/2.0/caching/)を検討してください。
+To save time between runs, consider [caching dependencies or source code]({{ site.baseurl }}/2.0/caching/).
 
-[`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) ステップを使用して、いくつかのファイルまたはディレクトリをキャッシュします。 この例では、仮想環境とインストールされたパッケージがキャッシュされます。
+Use the [`save_cache`]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) step to cache certain files or directories. In this example, the virtual environment and installed packages are cached.
 
-[`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。
+Use the [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) step to restore cached files or directories.
 
 {% raw %}
 ```yaml
@@ -159,7 +161,7 @@ jobs:
 ```
 {% endraw %}
 
-最後に、データベースがオンラインになるまで待ち、テスト スイートを実行します。 テストの実行後、CircleCI Web アプリで使用できるようにテスト結果をアップロードします。
+Finally, we wait for the database to come online so that we can run the test suite. Following running the tests, we upload our test results to be made available in the CircleCI web app.
 
 ```yaml
       - run:
@@ -171,6 +173,7 @@ jobs:
 ```
 
 ## Parallelism
+{: #parallelism }
 
 **Splitting by Timings**
 
@@ -188,5 +191,6 @@ By default, JUnitFormatter saves the output to the `_build/test/lib/<application
 However, JUnitFormatter also allows you to configure the directory where the results are saved via the `report_dir` setting, in which case, the `path` value in your CircleCI config should match the relative path of wherever you're storing the output.
 
 ## See also
+{: #see-also }
 
 [Caching Dependencies]({{ site.baseurl }}/2.0/caching/) [Configuring Databases]({{ site.baseurl }}/2.0/databases/)
