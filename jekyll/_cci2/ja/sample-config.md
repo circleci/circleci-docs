@@ -17,8 +17,10 @@ version:
 {:toc}
 
 ## Simple configuration examples
+{: #simple-configuration-examples }
 
 ### Concurrent workflow
+{: #concurrent-workflow }
 
 The configuration example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
@@ -92,6 +94,7 @@ workflows:
 ```
 
 ### Sequential workflow
+{: #sequential-workflow }
 
 The configuration example below shows a sequential job workflow where the `build` job runs and then the `test` job runs once `build` has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
@@ -168,6 +171,7 @@ workflows:
 ```
 
 ### Approval job
+{: #approval-job }
 
 The example below shows a sequential job workflow with an approval step. The `build` job runs, then the `test` job, then a `hold` job, with `type: approval` ensures the workflow waits for manual approval before the `deploy` job can run. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
@@ -281,6 +285,7 @@ workflows:
 ```
 
 ## Sample configuration with sequential workflow
+{: #sample-configuration-with-sequential-workflow }
 
 Following is a sample `.circleci/config.yml` file using the following configuration features:
 
@@ -440,6 +445,7 @@ workflows:
 This example shows a sequential workflow with the `test` job configured to run only on the master branch. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 ## Sample configuration with fan-in/fan-out workflow
+{: #sample-configuration-with-fan-infan-out-workflow }
 Below are two sample configurations for a Fan-in/Fan-out workflow.
 
 For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
@@ -727,6 +733,7 @@ workflows:
 **Note:** a job can only run when its dependencies are satisfied therefore it requires the dependencies of all upstream jobs. This means only the immediate upstream dependencies need to be specified in the `requires:` blocks.
 
 ## Sample configuration with multiple executor types
+{: #sample-configuration-with-multiple-executor-types }
 
 It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow.
 
@@ -1067,6 +1074,7 @@ workflows:
 {% endraw %}
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 * See the [Concepts document]({{ site.baseurl }}/2.0/concepts/#configuration) and [Workflows]({{ site.baseurl }}/2.0/workflows/) for more details of the concepts covered in this example.
