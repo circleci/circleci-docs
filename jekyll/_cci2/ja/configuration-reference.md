@@ -20,7 +20,7 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 ## 目次
 {:.no_toc}
 
-* TOC
+* 目次
 {:toc}
 
 ---
@@ -34,13 +34,13 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 `version` フィールドは、非推奨または互換性を損なう変更について注意を促すために使用します。
 
-## **`orbs`** (requires version: 2.1)
+## **`orbs`** (version: 2.1 が必須)
 
-| キー        | 必須 | 型   | 説明                                                                                                                                                                                                                 |
-| --------- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| orbs      | ×  | マップ | ユーザー指定の名前によるマップ。Orb の参照名 (文字列) または Orb の定義名 (マップ) を指定します。 Orb definitions must be the orb-relevant subset of 2.1 config. See the [Creating Orbs]({{ site.baseurl }}/2.0/creating-orbs/) documentation for details. |
-| executors | ×  | マップ | Executor を定義する文字列のマップ。 このページの [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-version-21-が必須) セクションを参照してください。                                                                                |
-| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 このページの [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-version-21-が必須) セクションを参照してください。                                                                                     |
+| キー        | 必須 | 型   | 説明                                                                                                                                                                                |
+| --------- | -- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| orbs      | ×  | マップ | ユーザー指定の名前によるマップ。Orb の参照名 (文字列) または Orb の定義名 (マップ) を指定します。 Orb 定義は、2.1 設定ファイルの Orb 関連サブセットである必要があります。 詳細については、[Orb の作成に関するドキュメント]({{ site.baseurl }}/2.0/creating-orbs/)を参照してください。 |
+| executors | ×  | マップ | Executor を定義する文字列のマップ。 このページの [executors]({{ site.baseurl }}/2.0/configuration-reference/#executors-version-21-が必須) セクションを参照してください。                                               |
+| commands  | ×  | マップ | コマンドを定義するコマンド名のマップ。 このページの [commands]({{ site.baseurl }}/2.0/configuration-reference/#commands-version-21-が必須) セクションを参照してください。                                                    |
 {: class="table table-striped"}
 
 以下の例では、承認済みの `circleci` 名前空間に格納された `hello-build` という名前の Orb を呼び出します。
@@ -56,7 +56,7 @@ workflows:
 ```
 上の例で、`hello` は Orb の参照名と見なされます。`circleci/hello-build@0.0.5` は完全修飾の Orb 参照です。
 
-## **`commands`** (requires version: 2.1)
+## **`commands`** (version: 2.1 が必須)
 
 commands では、ジョブ内で実行する一連のステップをマップとして定義します。これにより、複数のジョブで [1 つのコマンド定義を再利用]({{ site.baseurl }}/2.0/reusing-config/)できます。
 
@@ -81,7 +81,7 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`parameters`** (requires version: 2.1)
+## **`parameters`** (version: 2.1 が必須)
 設定ファイル内で使用するパイプライン パラメーターを定義します。 使用方法の詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/2.0/pipeline-variables#設定ファイルにおけるパイプライン-パラメーター)を参照してください。
 
 | キー         | 必須 | 型   | 説明                                                                                                                         |
@@ -89,23 +89,23 @@ commands:
 | parameters | ×  | マップ | パラメーター キーのマップ。 `文字列`、`ブール値`、`整数`、`列挙型`がサポートされています。 [パラメーターの構文]({{ site.baseurl }}/2.0/reusing-config/#パラメーターの構文)を参照してください。 |
 {: class="table table-striped"}
 
-## **`executors`** (requires version: 2.1)
+## **`executors`** (version: 2.1 が必須)
 
 executors では、ジョブのステップを実行する環境を定義します。これにより、複数のジョブで 1 つの Executor 定義を再利用できます。
 
-| キー                | 必須               | 型   | 説明                                                                                                                                       |
-| ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                      |
-| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A performance plan is required to access this feature.                                        |
-| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                                    |
-| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                        |
-| windows           | ○ <sup>(1)</sup> | マップ | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows). |
-| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                       |
-| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 Will be interpreted as an absolute path.                                                                                |
-| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                           |
+| キー                | 必須               | 型   | 説明                                                                                                                                 |
+| ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **注:** この機能を利用するには、Performance プランへの申し込みが必要です。                                                    |
+| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                              |
+| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                  |
+| windows           | ○ <sup>(1)</sup> | マップ | 現在、[Windows Executor](#windows) は Orb に対応しています。 [こちらの Orb](https://circleci.com/developer/ja/orbs/orb/circleci/windows) を参照してください。 |
+| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                 |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 絶対パスとして解釈されます。                                                                                                    |
+| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                     |
 {: class="table table-striped"}
 
-<sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
+<sup>(1)</sup> 各ジョブにいずれか 1 つの Executor タイプを指定する必要があります。 2 つ以上指定するとエラーが発生します。
 
 例
 
@@ -136,21 +136,21 @@ A Workflow is comprised of one or more uniquely named jobs. それらのジョ�
 
 ### **<`job_name`>**
 
-Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
+各ジョブは、キーとなるジョブ名と、値となるマップで構成されます。 A name should be unique within a current `jobs` list. 値となるマップでは以下の属性を使用できます。
 
-| キー                | 必須               | 型       | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ----------------- | ---------------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト     | [docker Executor](#docker) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| machine           | ○ <sup>(1)</sup> | マップ     | [machine Executor](#machine) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| macos             | ○ <sup>(1)</sup> | マップ     | [macOS Executor](#macos) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| shell             | ×                | 文字列     | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| parameters        | ×                | マップ     | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| steps             | ○                | リスト     | 実行する[ステップ](#steps)のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| working_directory | ×                | 文字列     | ステップを実行するディレクトリ。 Will be interpreted as an absolute path. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. |
-| parallelism       | ×                | Integer | このジョブを実行する並列インスタンスの数 (デフォルトは 1)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| environment       | ×                | マップ     | 環境変数の名前と値のマップ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| branches          | ×                | マップ     | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.                                                                                                                                                                                                                                                                                                                                  |
-| resource_class    | ×                | 文字列     | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A performance plan is required to access this feature.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| キー                | 必須               | 型   | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| ----------------- | ---------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト | [docker Executor](#docker) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| machine           | ○ <sup>(1)</sup> | マップ | [machine Executor](#machine) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| macos             | ○ <sup>(1)</sup> | マップ | [macOS Executor](#macos) 用のオプション。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| shell             | ×                | 文字列 | すべてのステップのコマンド実行に使用するシェル。 各ステップ内の `shell` でオーバーライドできます (デフォルト設定については、[デフォルトのシェル オプション](#デフォルトのシェル-オプション)を参照してください)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| parameters        | ×                | マップ | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| steps             | ○                | リスト | 実行する[ステップ](#steps)のリスト。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ。 Will be interpreted as an absolute path. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. |
+| parallelism       | ×                | 整数  | このジョブを実行する並列インスタンスの数 (デフォルトは 1)。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| environment       | ×                | マップ | 環境変数の名前と値のマップ。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| branches          | ×                | マップ | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.                                                                                                                                                                                                                                                                                                                                  |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てられる CPU と RAM の量。 **Note:** A performance plan is required to access this feature.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -161,7 +161,7 @@ Each job consists of the job's name as a key and a map as a value. A name should
 
 #### `parallelism`
 
-If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
+If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. これにより、テスト ステップを最適化できます。CircleCI CLI を使用して並列コンテナにテスト スイートを分割すると、ジョブの実行時間を短縮できます。 Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
 
 `working_directory` will be created automatically if it doesn't exist.
 
@@ -203,7 +203,7 @@ See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) 
 
 #### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
 
-An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the necessary environment by launching as many docker containers as needed at once, or it can use a full virtual machine. Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
+Executor とは、簡単に言うと「ステップの実行環境」です。 CircleCI 2.0 では、必要な数の Docker コンテナを一度にローンチすることによって必要な環境を構築するか、完全な仮想マシンを使用します。 Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
 
 #### `docker`
 {:.no_toc}
@@ -230,11 +230,11 @@ The first `image` listed in the file defines the primary container image where a
 
 For a [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) (the first container in the list), if neither `command` nor `entrypoint` is specified in the config, then any `ENTRYPOINT` and `COMMAND` in the image are ignored. This is because the primary container is typically used only for running the `steps` and not for its `ENTRYPOINT`, and an `ENTRYPOINT` may consume significant resources or exit prematurely. ([A custom image may disable this behavior and force the `ENTRYPOINT` to run.]({{ site.baseurl }}/2.0/custom-images/#adding-an-entrypoint)) The job `steps` run in the primary container only.
 
-`name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  The field is appropriate if you would rather have a different host name instead of localhost, for example, if you are starting multiple versions of the same service.
+`name` defines the name for reaching the secondary service containers.  By default, all services are exposed directly on `localhost`.  たとえば、同じサービスのバージョン違いを複数立ち上げるときなど、ローカル ホスト以外のホスト名を使用したい場合に、このフィールドは適しています。
 
 The `environment` settings apply to entrypoint/command run by the docker container, not the job steps.
 
-You can specify image versions using tags or digest. You can use any public images from any public Docker registry (defaults to Docker Hub). Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
+タグまたはダイジェストを使用して、イメージのバージョンを指定できます。 任意の公式 Docker レジストリ (デフォルトは Docker Hub) にある任意のパブリック イメージを使用できます。 Learn more about [specifying images]({{ site.baseurl }}/2.0/executor-types).
 
 Some registries, Docker Hub, for example, may rate limit anonymous docker pulls.  It's recommended you authenticate in such cases to pull private and public images. The username and password can be specified in the `auth` field.  See [Using Docker Authenticated Pulls]({{ site.baseurl }}/2.0/private-images/) for details.
 
@@ -283,8 +283,8 @@ jobs:
     docker:
       - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
         aws_auth:
-          aws_access_key_id: AKIAQWERVA  # can specify string literal values
-          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # or project UI envar reference
+          aws_access_key_id: AKIAQWERVA  # 文字列リテラル値を指定するか
+          aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # UI から設定したプロジェクトの環境変数を参照するように指定します
 ```
 
 It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-config/) in a job when using version 2.1. The following example invokes the `sayhello` command.
@@ -325,7 +325,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Testing"
+          name: "テスト"
           command: echo "Hi"
 ```
 
@@ -397,7 +397,7 @@ jobs:
 #### **`windows`**
 {:.no_toc}
 
-CircleCI supports running jobs on Windows. To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orbs also provide easy access to setting up a Windows job. To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
+CircleCI は、Windows 上でのジョブ実行をサポートしています。 To run a job on a Windows machine, you must add the `windows` key to the top-level configuration for the job. Orb を使用すると、Windows ジョブを簡単にセットアップできます。 To learn more about prerequisites to running Windows jobs and what Windows machines can offer, consult the [Hello World on Windows]({{ site.baseurl }}/2.0/hello-world-windows) document.
 
 
 **Example:** Use a windows executor to run a simple job.
@@ -420,7 +420,7 @@ jobs:
 
 **This key is deprecated. Use [workflows filtering](#filters) to control which jobs run for which branches.**
 
-Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
+Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. 2.1 の設定ファイルを使用している場合にフィルターを使用するには、ワークフローを追加する必要があります。 See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
 | キー     | 必須 | 型   | 説明              |
 | ------ | -- | --- | --------------- |
@@ -428,7 +428,7 @@ Defines rules for allowing/blocking execution of some branches if Workflows are 
 | ignore | ×  | リスト | 無視するブランチのリスト。   |
 {: class="table table-striped"}
 
-Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. For example:
+Both `only` and `ignore` lists can have full names and regular expressions. Regular expressions must match the **entire** string. たとえば、以下のようになります。
 
 ``` YAML
 jobs:
@@ -439,7 +439,7 @@ jobs:
         - /rc-.*/
 ```
 
-In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
+この場合は、"master" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
 
 ``` YAML
 jobs:
@@ -450,21 +450,21 @@ jobs:
         - /feature-.*/
 ```
 
-In this example, all the branches will be executed except "develop" and branches matching regex "feature-.*".
+こちらの例では、"develop" ブランチと正規表現 "feature-.*" に一致するブランチを除くすべてのブランチが実行されます。
 
 If both `ignore` and `only` are present in config, only `ignore` will be taken into account.
 
-A job that was not executed due to configured rules will show up in the list of jobs in UI, but will be marked as skipped.
+構成されたルールによって実行されなかったジョブは、UI のジョブ一覧にスキップのマーク付きで表示されます。
 
 To ensure the job runs for **all** branches, either don't use the `branches` key, or use the `only` key along with the regular expression: `/.*/` to catch all branches.
 
 #### **`resource_class`**
 
-The `resource_class` feature allows configuring CPU and RAM resources for each job. Different resource classes are available for different executors, as described in the tables below.
+The `resource_class` feature allows configuring CPU and RAM resources for each job. 下表に示すように、Executor ごとにさまざまなリソース クラスが提供されています。
 
-We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
+CircleCI では、すべてのお客様がシステムを安定した状態で利用できるよう、リソース クラスごとに同時処理数のソフト制限を設けています。 Performance プランまたは Custom プランを使用していて、特定のリソース クラスで待機時間が発生している場合は、このソフト制限に達している可能性があります。 [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on free and Performance plans. Available resources classes are restricted for customers on the free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the free plan.
+**Note:** This feature is automatically enabled on free and Performance plans. Free プランのお客様の場合、利用可能なリソース クラスは Linux が small または medium、Windows が medium に制限されています。 MacOS は Free プランでは利用できません。
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -586,8 +586,8 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 
 | クラス                             | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) |
 | ------------------------------- | ---- | --- | --- | --------------- | ------------- |
-| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | Nvidia Tesla P4 | 8             |
-| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | Nvidia Tesla T4 | 16            |
+| gpu.nvidia.small<sup>(2)</sup>  | 4    | 15  | 1   | NVIDIA Tesla P4 | 8             |
+| gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4 | 16            |
 {: class="table table-striped"}
 
 ###### Example usage
@@ -610,7 +610,7 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 
 | クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) |
 | --------------------------------------- | ---- | --- | --- | --------------- | ------------- |
-| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | Nvidia Tesla T4 | 16            |
+| windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            |
 {: class="table table-striped"}
 
 ###### Example usage
@@ -631,14 +631,14 @@ jobs:
 
 <sup>(3)</sup> _This resource is available only for customers with an annual contract. [Open a support ticket](https://support.circleci.com/hc/en-us/requests/new) if you would like to learn more about our annual plans._
 
-**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. Programs with this issue may request 32 CPU cores and run slower than they would when requesting one core. Users of languages with this issue should pin their CPU count to their guaranteed CPU resources.
+**Note**: Java, Erlang and any other languages that introspect the `/proc` directory for information about CPU count may require additional configuration to prevent them from slowing down when using the CircleCI 2.0 resource class feature. この問題が発生すると、32 個の CPU コアを要求していても、1 コアを要求する場合よりも実行速度が低下する場合があります。 この問題が発生する言語をお使いの場合は、保証された CPU リソースに基づいて CPU 数を固定する必要があります。
 
 
 **Note**: If you want to confirm how much memory you have been allocated, you can check the cgroup memory hierarchy limit with `grep hierarchical_memory_limit /sys/fs/cgroup/memory/memory.stat`.
 
 #### **`steps`**
 
-The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. The value may be either a configuration map or a string (depending on what that type of step requires). For example, using a map:
+The `steps` setting in a job should be a list of single key/value pairs, the key of which indicates the step type. 値は (そのステップの種類の要件に従って) 構成マップまたは文字列で記述します。 たとえば、マップで記述する場合は以下のようになります。
 
 ```yaml
 jobs:
@@ -648,13 +648,13 @@ jobs:
       FOO: bar
     steps:
       - run:
-          name: Running tests
+          name: テストの実行
           command: make test
 ```
 
 Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific for `run` step and defines command to execute.
 
-Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
+一部のステップは省略構文を実装しており、 For example, `run` may be also be called like this:
 
 ```
 jobs:
@@ -665,7 +665,7 @@ jobs:
 
 In its short form, the `run` step allows us to directly specify which `command` to execute as a string value. In this case step itself provides default suitable values for other attributes (`name` here will have the same value as `command`, for example).
 
-Another shorthand, which is possible for some steps, is to simply use the step name as a string instead of a key/value pair:
+さらに一部のステップには別の省略表記があり、キーと値のペアの代わりに単なる文字列のステップ名を使用できます。
 
 ```
 jobs:
@@ -676,28 +676,28 @@ jobs:
 
 In this case, the `checkout` step will checkout project source code into the job's [`working_directory`](#jobs).
 
-In general all steps can be described as:
+通常、ステップは以下のように記述します。
 
-| キー                   | 必須 | 型             | 説明                                                                                       |
-| -------------------- | -- | ------------- | ---------------------------------------------------------------------------------------- |
-| &lt;step_type> | ○  | Map or String | A configuration map for the step or some string whose semantics are defined by the step. |
+| キー                   | 必須 | 型         | 説明                              |
+| -------------------- | -- | --------- | ------------------------------- |
+| &lt;step_type> | ○  | マップまたは文字列 | ステップの構成マップ、またはステップによって規定された文字列。 |
 {: class="table table-striped"}
 
-Each built-in step is described in detail below.
+定義済みステップについて、以下に詳しく説明します。
 
 ##### **`run`**
 
-Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
+Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. run コマンドは、デフォルトでは非ログイン シェルで実行されます。したがって、ドットファイルをコマンドの中で明示的に参照する必要があります。
 
 | キー                  | 必須 | 型    | 説明                                                                                                                                                       |
 | ------------------- | -- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| command             | ○  | 文字列  | Command to run via the shell                                                                                                                             |
+| command             | ○  | 文字列  | シェルから実行するコマンド。                                                                                                                                           |
 | name                | ×  | 文字列  | Title of the step to be shown in the CircleCI UI (default: full `command`)                                                                               |
 | shell               | ×  | 文字列  | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))                                                        |
-| environment         | ×  | マップ  | Additional environmental variables, locally scoped to command                                                                                            |
-| background          | ×  | ブール値 | Whether or not this step should run in the background (default: false)                                                                                   |
+| environment         | ×  | マップ  | コマンドに対するローカル スコープとなる追加の環境変数。                                                                                                                             |
+| background          | ×  | ブール値 | このステップをバックグラウンドで実行するかどうかの設定 (デフォルトは false)。                                                                                                              |
 | working_directory   | ×  | 文字列  | In which directory to run this step. Will be interpreted relative to the [`working_directory`](#jobs) of the job). (default: `.`)                        |
-| no_output_timeout | ×  | 文字列  | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)            |
+| no_output_timeout | ×  | 文字列  | 出力のないままコマンドを実行できる経過時間。 「20m」「1.25h」「5s」のように、数字の後に単位を付けた文字列で記述します (デフォルトは 10 分)                                                                           |
 | when                | ×  | 文字列  | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`) |
 {: class="table table-striped"}
 
@@ -717,7 +717,7 @@ You can also configure commands to run [in the background](#background-commands)
 
 For jobs that run on **Linux**, the default value of the `shell` option is `/bin/bash -eo pipefail` if `/bin/bash` is present in the build container. Otherwise it is `/bin/sh -eo pipefail`. The default shell is not a login shell (`--login` or `-l` are not specified). Hence, the shell will **not** source your `~/.bash_profile`, `~/.bash_login`, `~/.profile` files.
 
-For jobs that run on **macOS**, the default shell is `/bin/bash --login -eo pipefail`. The shell is a non-interactive login shell. The shell will execute `/etc/profile/` followed by `~/.bash_profile` before every step.
+For jobs that run on **macOS**, the default shell is `/bin/bash --login -eo pipefail`. このシェルは、非対話型のログイン シェルです。 The shell will execute `/etc/profile/` followed by `~/.bash_profile` before every step.
 
 For more information about which files are executed when bash is invocated, [see the `INVOCATION` section of the `bash` manpage](https://linux.die.net/man/1/bash).
 
@@ -727,7 +727,7 @@ Descriptions of the `-eo pipefail` options are provided below.
 
 > パイプライン (1 つのコマンドで構成される場合を含む)、かっこ「()」で囲まれたサブシェル コマンド、または中かっこ「{}」で囲まれたコマンド リストの一部として実行されるコマンドの 1 つが 0 以外のステータスで終了した場合は、直ちに終了します。
 
-So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. For example:
+So if in the previous example `mkdir` failed to create a directory and returned a non-zero status, then command execution would be terminated, and the whole step would be marked as failed. If you desire the opposite behaviour, you need to add `set +e` in your `command` or override the default `shell` in your configuration map of `run`. たとえば、以下のようになります。
 ``` YAML
 - run:
     command: |
@@ -765,11 +765,11 @@ For more information, see the [Using Shell Scripts]({{ site.baseurl }}/2.0/using
 
 ###### _バックグラウンド コマンド_
 
-The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. The following example shows the config for running the X virtual framebuffer in the background which is commonly required to run Selenium tests:
+The `background` attribute enables you to configure commands to run in the background. Job execution will immediately proceed to the next step rather than waiting for return of a command with the `background` attribute set to `true`. 以下は、Selenium テストにおいてよく必要となる、X 仮想フレームバッファをバックグラウンドで実行するための構成例です。
 
 ``` YAML
 - run:
-    name: Running X virtual framebuffer
+    name: X 仮想フレームバッファの実行
     command: Xvfb :99 -screen 0 1280x1024x24
     background: true
 
@@ -792,30 +792,30 @@ In this case, `command` and `name` become the string value of `run`, and the res
 
 ###### `when` 属性
 
-By default, CircleCI will execute job steps one at a time, in the order that they are defined in `config.yml`, until a step fails (returns a non-zero exit code). After a command fails, no further job steps will be executed.
+CircleCI のデフォルトでは、ジョブ ステップが `config.yml` に定義された順序で一度に 1 つずつ、いずれかのステップが失敗する (0 以外の終了コードを返す) まで実行されます。 コマンドが失敗すると、以降のジョブ ステップは実行されません。
 
-Adding the `when` attribute to a job step allows you to override this default behaviour, and selectively run or skip steps depending on the status of the job.
+ジョブ ステップに `when` 属性を追加すると、このデフォルトの動作をオーバーライドして、ジョブのステータスに応じてステップを実行するかスキップするかを選択できるようになります。
 
-The default value of `on_success` means that the step will run only if all of the previous steps have been successful (returned exit code 0).
+デフォルト値の `on_success` は、それまでのすべてのステップが成功した (終了コード 0 を返した) 場合にのみ、そのステップが実行されることを意味します。
 
-A value of `always` means that the step will run regardless of the exit status of previous steps. This is useful if you have a task that you want to run regardless of whether the previous steps are successful or not. For example, you might have a job step that needs to upload logs or code-coverage data somewhere.
+`always` は、それまでのステップの終了ステータスに関係なく、そのステップが実行されることを意味します。 それまでのステップの成否にかかわらずタスクを実行したい場合に便利です。 例として、ログやコード カバレッジ データをどこかにアップロードする必要があるジョブ ステップが挙げられます。
 
-A value of `on_fail` means that the step will run only if one of the preceding steps has failed (returns a non-zero exit code). It is common to use `on_fail` if you want to store some diagnostic data to help debug test failures, or to run custom notifications about the failure, such as sending emails or triggering alerts in chatrooms.
+`on_fail` は、それまでのステップの 1 つが失敗した (0 以外の終了コードを返した) 場合にのみ、そのステップが実行されることを意味します。 失敗したテストのデバッグに役立てるために何らかの診断データを保存したり、失敗に関するカスタム通知 (メールの送信やチャットルームへのアラートのトリガーなど) を実行したりする場合に、よく使用されます。``
 
-**Note**: Some steps, such as `store_artifacts` and `store_test_results` will always run, even if a **step has failed** (returned a non-zero exit code) previously. The `when` attribute, `store_artifacts` and  `store_test_results` are not run if the job has been **killed** by a cancel request or reaching the global 5 hour timeout.
+**メモ:** `store_artifacts`、`store_test_results` などの一部のステップは、**それより前のステップが失敗しても** (0 以外の終了コードが返された場合でも) 常に実行されます。 ただし、ジョブがキャンセル要求により**強制終了**された場合、または実行時間がグローバル タイムアウト上限である 5 時間に達した場合、`when` 属性、`store_artifacts`、`store_test_results` は実行されません。
 
 ``` YAML
 - run:
-    name: Upload CodeCov.io Data
+    name: CodeCov.io データのアップロード
     command: bash <(curl -s https://codecov.io/bash) -F unittests
-    when: always # Uploads code coverage results, pass or fail
+    when: always # 成功しても失敗しても、コード カバレッジの結果をアップロードします
 ```
 
 
 
 ###### Ending a job from within a `step`
 
-A job can exit without failing by using `run: circleci-agent step halt`. This can be useful in situations where jobs need to conditionally execute.
+A job can exit without failing by using `run: circleci-agent step halt`. これは、条件に従ってジョブを実行する必要がある場合に便利です。
 
 Here is an example where `halt` is used to avoid running a job on the `develop` branch:
 
@@ -831,7 +831,7 @@ run: |
 ```yaml
 steps:
   - run:
-      name: Testing application
+      name: アプリケーションのテスト
       command: make test
       shell: /bin/bash
       working_directory: ~/my-app
@@ -846,7 +846,7 @@ steps:
       sudo createdb -h localhost test_db
 
   - run:
-      name: Upload Failed Tests
+      name: 失敗したテストのアップロード
       command: curl --data fail_tests.log http://example.com/error_logs
       when: on_fail
 ```
@@ -892,7 +892,7 @@ workflows:
 
 ##### **`checkout`**
 
-A special step used to check out source code to the configured `path` (defaults to the `working_directory`). The reason this is a special step is because it is more of a helper function designed to make checking out code easy for you. If you require doing git over HTTPS you should not use this step as it configures git to checkout over ssh.
+A special step used to check out source code to the configured `path` (defaults to the `working_directory`). これが特別なステップである理由は、単なるヘルパー関数ではなく、コードを自動的に簡単にチェックアウトできるように設計されているからです。 このステップは SSH でチェックアウトするように git を設定するため、HTTPS で git を実行する必要がある場合は、このステップを使用しないでください。
 
 | キー   | 必須 | 型   | 説明                                                                                                               |
 | ---- | -- | --- | ---------------------------------------------------------------------------------------------------------------- |
@@ -901,7 +901,7 @@ A special step used to check out source code to the configured `path` (defaults 
 
 If `path` already exists and is:
  * a git repo - step will not clone whole repo, instead will fetch origin
- * NOT a git repo - step will fail.
+ * Git リポジトリ以外 - ステップは失敗します。
 
 In the case of `checkout`, the step type is just a string with no additional attributes:
 
@@ -923,29 +923,29 @@ This command will automatically add the required authenticity keys for interacti
 
 ##### **`setup_remote_docker`**
 
-Creates a remote Docker environment configured to execute Docker commands. See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
+Docker コマンドを実行するように構成されたリモート Docker 環境を作成します。 See [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/) for details.
 
-| キー                     | 必須 | 型       | 説明                                                                                                                                                                                      |
-| ---------------------- | -- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker_layer_caching | ×  | boolean | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)                                   |
-| version                | ×  | 文字列     | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version). |
+| キー                     | 必須 | 型    | 説明                                                                                                                                                                                      |
+| ---------------------- | -- | ---- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker_layer_caching | ×  | ブール値 | set this to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) in the Remote Docker Environment (default: `false`)                                   |
+| version                | ×  | 文字列  | Version string of Docker you would like to use (default: `17.09.0-ce`). View the list of supported docker versions [here]({{site.baseurl}}/2.0/building-docker-images/#docker-version). |
 {: class="table table-striped"}
 
 **Notes**:
 
 - A paid account on a [Performance or Custom Plan](https://circleci.com/pricing/) is required to access Docker Layer Caching.
 - `setup_remote_docker` is not compatible with the `machine` executor. See [Docker Layer Caching in Machine Executor]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor) for information on how to enable DLC with the `machine` executor.
-- The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+- The `version` key is not currently supported on CircleCI installed in your private cloud or datacenter. お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ##### **`save_cache`**
 
-Generates and stores a cache of a file or directory of files such as dependencies or source code in our object storage. Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
+依存関係やソース コードなどのファイルのキャッシュ、または複数のファイルが入ったディレクトリのキャッシュを生成して、オブジェクト ストレージに格納します。 Later jobs can [restore this cache](#restore_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
 | キー    | 必須 | 型   | 説明                                                                                                                                                       |
 | ----- | -- | --- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| paths | ○  | リスト | List of directories which should be added to the cache                                                                                                   |
-| key   | ○  | 文字列 | Unique identifier for this cache                                                                                                                         |
-| name  | ×  | 文字列 | Title of the step to be shown in the CircleCI UI (default: "Saving Cache")                                                                               |
+| paths | ○  | リスト | キャッシュに追加するディレクトリのリスト。                                                                                                                                    |
+| key   | ○  | 文字列 | このキャッシュの一意の識別子。                                                                                                                                          |
+| name  | ×  | 文字列 | CircleCI の UI に表示されるステップのタイトル (デフォルトは「Saving Cache」)。                                                                                                    |
 | when  | ×  | 文字列 | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`) |
 {: class="table table-striped"}
 
@@ -955,21 +955,21 @@ The cache for a specific `key` is immutable and cannot be changed once written.
 
 When storing a new cache, the `key` value may contain special templated values for your convenience:
 
-| Template                                               | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| {% raw %}`{{ .Branch }}`{% endraw %}                   | The VCS branch currently being built.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| {% raw %}`{{ .BuildNum }}`{% endraw %}                 | The CircleCI build number for this build.                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| {% raw %}`{{ .Revision }}`{% endraw %}                 | The VCS revision currently being built.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| {% raw %}`{{ .CheckoutKey }}`{% endraw %}              | The SSH key used to checkout the repo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
-| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).                                                                                                                                                                                                               |
-| {% raw %}`{{ checksum "filename" }}`{% endraw %}       | A base64 encoded SHA256 hash of the given filename's contents. This should be a file committed in your repo and may also be referenced as a path that is absolute or relative from the current working directory. Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. |
-| {% raw %}`{{ epoch }}`{% endraw %}                     | The current time in seconds since the unix epoch.                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| {% raw %}`{{ arch }}`{% endraw %}                      | The OS and CPU information.  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.                                                                                                                                                                                                                                                                                                                                                    |
+| テンプレート                                                 | 説明                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| {% raw %}`{{ .Branch }}`{% endraw %}                   | 現在ビルド中の VCS ブランチ。                                                                                                                                                                                                                                                                                                                                                                                                     |
+| {% raw %}`{{ .BuildNum }}`{% endraw %}                 | このビルドの CircleCI ビルド番号。                                                                                                                                                                                                                                                                                                                                                                                                |
+| {% raw %}`{{ .Revision }}`{% endraw %}                 | 現在ビルド中の VCS リビジョン。                                                                                                                                                                                                                                                                                                                                                                                                    |
+| {% raw %}`{{ .CheckoutKey }}`{% endraw %}              | リポジトリのチェックアウトに使用する SSH 鍵。                                                                                                                                                                                                                                                                                                                                                                                             |
+| {% raw %}`{{ .Environment.variableName }}`{% endraw %} | The environment variable `variableName` (supports any environment variable [exported by CircleCI](https://circleci.com/docs/2.0/env-vars/#circleci-environment-variable-descriptions) or added to a specific [Context](https://circleci.com/docs/2.0/contexts)—not any arbitrary environment variable).                                                                                                               |
+| {% raw %}`{{ checksum "filename" }}`{% endraw %}       | filename で指定したファイルの内容の SHA256 ハッシュを Base64 エンコードした値。 リポジトリにコミットするファイルのみを指定できます。絶対パス、または現在の作業ディレクトリからの相対パスで参照できます。 Good candidates are dependency manifests, such as `package-lock.json`, `pom.xml` or `project.clj`. It's important that this file does not change between `restore_cache` and `save_cache`, otherwise the cache will be saved under a cache key different than the one used at `restore_cache` time. |
+| {% raw %}`{{ epoch }}`{% endraw %}                     | UNIX エポックからの秒数で表される現在時刻。                                                                                                                                                                                                                                                                                                                                                                                              |
+| {% raw %}`{{ arch }}`{% endraw %}                      | OS と CPU の情報。  Useful when caching compiled binaries that depend on OS and CPU architecture, for example, `darwin amd64` versus `linux i386/32-bit`.                                                                                                                                                                                                                                                                  |
 {: class="table table-striped"}
 
 During step execution, the templates above will be replaced by runtime values and use the resultant string as the `key`.
 
-Template examples:
+テンプレートの例
  * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - cache will be regenerated every time something is changed in `package-lock.json` file, different branches of this project will generate the same cache key.
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - same as the previous one, but each branch will generate separate cache
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - every run of a job will generate a separate cache
@@ -995,20 +995,20 @@ While choosing suitable templates for your cache `key`, keep in mind that cache 
 
 Restores a previously saved cache based on a `key`. Cache needs to have been saved first for this key using [`save_cache` step](#save_cache). Learn more in [the caching documentation]({{ site.baseurl }}/2.0/caching/).
 
-| キー   | 必須               | 型   | 説明                                                                                             |
-| ---- | ---------------- | --- | ---------------------------------------------------------------------------------------------- |
-| key  | ○ <sup>(1)</sup> | 文字列 | Single cache key to restore                                                                    |
-| keys | ○ <sup>(1)</sup> | リスト | List of cache keys to lookup for a cache to restore. Only first existing key will be restored. |
-| name | ×                | 文字列 | Title of the step to be shown in the CircleCI UI (default: "Restoring Cache")                  |
+| キー   | 必須               | 型   | 説明                                                        |
+| ---- | ---------------- | --- | --------------------------------------------------------- |
+| key  | ○ <sup>(1)</sup> | 文字列 | 復元するキャッシュ キーを 1 つだけ指定します。                                 |
+| keys | ○ <sup>(1)</sup> | リスト | 復元するキャッシュを検索するためのキャッシュ キーのリスト。 最初に一致したキーのみが復元されます。        |
+| name | ×                | 文字列 | CircleCI の UI に表示されるステップのタイトル (デフォルトは "Restoring Cache")。 |
 {: class="table table-striped"}
 
 <sup>(1)</sup> at least one attribute has to be present. If `key` and `keys` are both given, `key` will be checked first, and then `keys`.
 
-A key is searched against existing keys as a prefix.
+既存のキーを対象に前方一致で検索が行われます。
 
 **Note**: When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
 
-For example:
+たとえば、以下のようになります。
 
 ``` YAML
 steps:
@@ -1032,9 +1032,9 @@ In this case cache `v1-myapp-cache-new` will be restored because it's the most r
 
 For more information on key formatting, see the `key` section of [`save_cache` step](#save_cache).
 
-When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). If no key has a cache that exists, the step will be skipped with a warning.
+When CircleCI encounters a list of `keys`, the cache will be restored from the first one matching an existing cache. Most probably you would want to have a more specific key to be first (for example, cache for exact version of `package-lock.json` file) and more generic keys after (for example, any cache for this project). キーに該当するキャッシュが存在しない場合は、警告が表示され、ステップがスキップされます。
 
-A path is not required here because the cache will be restored to the location from which it was originally saved.
+キャッシュは元々保存されていた場所に復元されるため、ここでパスは必要ありません。
 
 ###### 例
 
@@ -1043,10 +1043,10 @@ A path is not required here because the cache will be restored to the location f
 - restore_cache:
     keys:
       - v1-myapp-{{ arch }}-{{ checksum "project.clj" }}
-      # if cache for exact version of `project.clj` is not present then load any most recent one
+      # `project.clj` の正確なバージョンに対応するキャッシュが存在しない場合は、最新のキャッシュをロードします
       - v1-myapp-
 
-# ... Steps building and testing your application ...
+# ... アプリケーションをビルドおよびテストするステップ ...
 
 # cache will be saved only once for each version of `project.clj`
 - save_cache:
@@ -1060,18 +1060,18 @@ A path is not required here because the cache will be restored to the location f
 
 **This key is deprecated. For improved control over your deployments use [workflows](#workflows) plus associated filtering and scheduling keys.**
 
-Special step for deploying artifacts.
+アーティファクトをデプロイするための特別なステップです。
 
 `deploy` uses the same configuration map and semantics as [`run`](#run) step. Jobs may have more than one `deploy` step.
 
 In general `deploy` step behaves just like `run` with two exceptions:
 
-- In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. Nodes other than #0 will skip this step.
+- In a job with `parallelism`, the `deploy` step will only be executed by node #0 and only if all nodes succeed. #0 以外のノードは、このステップをスキップします。
 - In a job that runs with SSH, the `deploy` step will not execute, and the following action will show instead: > **skipping deploy** > Running in SSH mode.  Avoid deploying.
 
-When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. For more information about using workflows, refer to the following pages:
+When using the `deploy` step, it is also helpful to understand how you can use workflows to orchestrate jobs and trigger jobs. ワークフローの使用方法については、以下を参照してください。
 
-- [Workflows](https://circleci.com/docs/2.0/workflows/)
+- [ワークフロー](https://circleci.com/ja/docs/2.0/workflows/)
 - [`workflows`](https://circleci.com/docs/2.0/configuration-reference/#section=configuration)
 
 ###### 例
@@ -1090,21 +1090,21 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 ##### **`store_artifacts`**
 
-Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
+Web アプリまたは API からアクセスできるアーティファクト (ログ、バイナリなど) を格納するステップです。 See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
 | キー          | 必須 | 型   | 説明                                                                                                               |
 | ----------- | -- | --- | ---------------------------------------------------------------------------------------------------------------- |
-| path        | ○  | 文字列 | Directory in the primary container to save as job artifacts                                                      |
+| path        | ○  | 文字列 | ジョブ アーティファクトとして保存するプライマリ コンテナ内のディレクトリ。                                                                           |
 | destination | ×  | 文字列 | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`) |
 {: class="table table-striped"}
 
-There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
+There can be multiple `store_artifacts` steps in a job. 各ステップで一意のプレフィックスを使用すると、ファイルの上書きを防止できます。
 
 ###### 例
 
 ``` YAML
 - run:
-    name: Build the Jekyll site
+    name: Jekyll サイトのビルド
     command: bundle exec jekyll build --source jekyll --destination jekyll/_site/docs/
 - store_artifacts:
     path: jekyll/_site/docs/
@@ -1113,7 +1113,7 @@ There can be multiple `store_artifacts` steps in a job. Using a unique prefix fo
 
 ##### **`store_test_results`**
 
-Special step used to upload and store test results for a build. Test results are visible on the CircleCI web application, under each build's "Test Summary" section. Storing test results is useful for timing analysis of your test suites.
+ビルドのテスト結果をアップロードおよび保存するための特別なステップです。 テスト結果は、CircleCI Web アプリケーションで各ビルドの「テスト サマリー」セクションに表示されます。 テスト結果を保存すると、テスト スイートのタイミング分析に役立ちます。
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
@@ -1126,7 +1126,7 @@ It is also possible to store test results as a build artifact; to do so, please 
 
 ###### _例_
 
-Directory structure:
+ディレクトリ構造
 
 ```
 test-results
@@ -1147,17 +1147,17 @@ test-results
 
 ##### **`persist_to_workspace`**
 
-Special step used to persist a temporary file to be used by another job in the workflow.
+一時ファイルを永続化してワークフロー内の別のジョブで使用できるようにするための特別なステップです。
 
-**Note:** Workspaces are stored for up to 15 days after being created. All jobs that try to use a Workspace older than 15 days, including partial reruns of a Workflow and SSH reruns of individual jobs, will fail.
+**Note:** Workspaces are stored for up to 15 days after being created. 作成から 15 日以上が経過したワークスペースを使用するジョブは、すべて失敗します。これには、ワークフローの部分的な再実行や SSH による個別ジョブの再実行も含まれます。
 
-| キー    | 必須 | 型   | 説明                                                                                                                                                                                |
-| ----- | -- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| root  | ○  | 文字列 | Either an absolute path or a path relative to `working_directory`                                                                                                                 |
-| paths | ○  | リスト | Glob identifying file(s), or a non-glob path to a directory to add to the shared workspace. Interpreted as relative to the workspace root. Must not be the workspace root itself. |
+| キー    | 必須 | 型   | 説明                                                                                                                 |
+| ----- | -- | --- | ------------------------------------------------------------------------------------------------------------------ |
+| root  | ○  | 文字列 | Either an absolute path or a path relative to `working_directory`                                                  |
+| paths | ○  | リスト | 共有ワークスペースに追加する、グロブで認識されるファイル、またはディレクトリへの非グロブ パス。 ワークスペースのルート ディレクトリへの相対パスと解釈され、 ワークスペースのルート ディレクトリ自体を指定することはできません。 |
 {: class="table table-striped"}
 
-The root key is a directory on the container which is taken to be the root directory of the workspace. The paths values are all relative to the root.
+root キーは、ワークスペースのルート ディレクトリとなる、コンテナ上のディレクトリを指定します。 paths の値は、すべてルート ディレクトリからの相対的パスです。
 
 ##### _root キーの例_
 
@@ -1171,7 +1171,7 @@ For example, the following step syntax persists the specified paths from `/tmp/d
       - baz
 ```
 
-After this step completes, the following directories are added to the workspace:
+このステップが完了すると、以下のディレクトリがワークスペースに追加されます。
 
 ```
 /tmp/dir/foo/bar
@@ -1194,27 +1194,27 @@ The `paths` list uses `Glob` from Go, and the pattern matches [filepath.Match](h
 pattern:
         { term }
 term:
-        '*' matches any sequence of non-Separator characters
-        '?' matches any single non-Separator character
-        '[' [ '^' ] { character-range }
-        ']' character class (must be non-empty)
-        c matches character c (c != '*', '?', '\\', '[')
-        '\\' c matches character c
+        '*'         区切り文字を除く任意の文字シーケンスに一致します
+        '?'         区切り文字を除く任意の 1 文字に一致します
+        '[' [ '^' ] { character-range } ']'
+                    文字クラス (空白は不可)
+        c           文字 c に一致します ('*'、'?'、'\\'、'[' 以外) 
+        '\\' c      文字 c に一致します
 character-range:
-        c matches character c (c != '\\', '-', ']')
-        '\\' c matches character c
-        lo '-' hi matches character c for lo <= c <= hi
+        c           文字 c に一致します ('\\'、'-'、']' 以外)
+        '\\' c      文字 c に一致します
+        lo '-' hi   lo <= c <= hi の範囲にある文字 c に一致します
 ```
 
 The Go documentation states that the pattern may describe hierarchical names such as `/usr/*/bin/ed` (assuming the Separator is '/'). **Note:** Everything must be relative to the work space root directory.
 
 ##### **`attach_workspace`**
 
-Special step used to attach the workflow's workspace to the current container. The full contents of the workspace are downloaded and copied into the directory the workspace is being attached at.
+ワークフローのワークスペースを現在のコンテナにアタッチするための特別なステップです。 ワークスペースのすべての内容がダウンロードされ、ワークスペースがアタッチされているディレクトリにコピーされます。
 
-| キー | 必須 | 型   | 説明                                    |
-| -- | -- | --- | ------------------------------------- |
-| at | ○  | 文字列 | Directory to attach the workspace to. |
+| キー | 必須 | 型   | 説明                    |
+| -- | -- | --- | --------------------- |
+| at | ○  | 文字列 | ワークスペースのアタッチ先のディレクトリ。 |
 {: class="table table-striped"}
 
 ###### _例_
@@ -1224,28 +1224,28 @@ Special step used to attach the workflow's workspace to the current container. T
     at: /tmp/workspace
 ```
 
-Each workflow has a temporary workspace associated with it. The workspace can be used to pass along unique data built during a job to other jobs in the same workflow. Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step. The workspace is additive only, jobs may add files to the workspace but cannot delete files from the workspace. Each job can only see content added to the workspace by the jobs that are upstream of it. When attaching a workspace the "layer" from each upstream job is applied in the order the upstream jobs appear in the workflow graph. When two jobs run concurrently the order in which their layers are applied is undefined. If multiple concurrent jobs persist the same filename then attaching the workspace will error.
+各ワークフローには、それぞれに一時的なワークスペースが関連付けられています。 ワークスペースは、ジョブの実行中にビルドした固有のデータを、同じワークフローの他のジョブに渡すために使用します。 Jobs can add files into the workspace using the `persist_to_workspace` step and download the workspace content into their file system using the `attach_workspace` step. ワークスペースは追加専用です。ジョブは、ワークスペースにファイルを追加することはできますが、ワークスペースからファイルを削除することはできません。 各ジョブでは、そのアップストリームのジョブによってワークスペースに追加された内容を参照することのみ可能です。 ワークスペースをアタッチすると、アップストリーム ジョブがワークフロー グラフに現れる順番で、各アップストリーム ジョブからの「レイヤー」が適用されます。 2 つのジョブが同時に実行される場合、それらのレイヤーが適用される順番は不定になります。 複数の同時ジョブが同じファイル名を永続化する場合、ワークスペースのアタッチはエラーになります。
 
-If a workflow is re-run it inherits the same workspace as the original workflow. When re-running failed jobs only the re-run jobs will see the same workspace content as the jobs in the original workflow.
+ワークフローが再実行される場合、それは、元のワークフローと同じワークスペースを継承します。 失敗したジョブのみを再実行する場合、再実行されるジョブは、元のワークフロー内のジョブと同じワークスペースの内容を参照することになります。
 
-Note the following distinctions between Artifacts, Workspaces, and Caches:
+アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
 
-| 型          | lifetime                             | Use                                                                                     | 例                                                                                                                                                                                                                                            |
-| ---------- | ------------------------------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Artifacts  | 1 Month                              | Preserve long-term artifacts.                                                           | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.                                                                                                           |
-| Workspaces | Duration of workflow (up to 15 days) | Attach the workspace in a downstream container with the `attach_workspace:` step.       | The `attach_workspace` copies and re-creates the entire workspace content when it runs.                                                                                                                                                      |
-| Caches     | 15 Days                              | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
+| 型        | 存続期間                                 | 用途                                                                                      | 例                                                                                                                                                                                                                                            |
+| -------- | ------------------------------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| アーティファクト | 1 Month                              | Preserve long-term artifacts.                                                           | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container`   or similar directory.                                                                                                           |
+| ワークスペース  | Duration of workflow (up to 15 days) | Attach the workspace in a downstream container with the `attach_workspace:` step.       | The `attach_workspace` copies and re-creates the entire workspace content when it runs.                                                                                                                                                      |
+| キャッシュ    | 15 Days                              | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision).   Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ##### **`add_ssh_keys`**
 
-Special step that adds SSH keys from a project's settings to a container. Also configures SSH to use these keys.
+プロジェクトの設定からコンテナに SSH 鍵を追加するための特別なステップです。 指定する鍵を使用するように SSH を構成します。
 
-| キー           | 必須 | 型   | 説明                                                                                   |
-| ------------ | -- | --- | ------------------------------------------------------------------------------------ |
-| fingerprints | ×  | リスト | List of fingerprints corresponding to the keys to be added (default: all keys added) |
+| キー           | 必須 | 型   | 説明                                               |
+| ------------ | -- | --- | ------------------------------------------------ |
+| fingerprints | ×  | リスト | 追加する鍵に対応するフィンガープリントのリスト (デフォルトでは、追加されるすべての鍵が対象)。 |
 {: class="table table-striped"}
 
 ```yaml
@@ -1259,12 +1259,12 @@ steps:
 
 ##### `pipeline.` 値の使用
 
-Pipeline values are available to all pipeline configurations and can be used without previous declaration. The pipeline values available are as follows:
+パイプライン値はすべてのパイプライン構成で使用でき、事前の宣言なしに利用できます。 利用可能なパイプライン値は次のとおりです。
 
-| Value                      | 説明                                                 |
+| 値                          | 説明                                                 |
 | -------------------------- | -------------------------------------------------- |
 | pipeline.id                | A globally unique id representing for the pipeline |
-| pipeline.number            | A project unique integer id for the pipeline       |
+| pipeline.number            | パイプラインを表す、プロジェクトで一意の整数の ID                         |
 | pipeline.project.git_url   | E.g. https://github.com/circleci/circleci-docs     |
 | pipeline.project.type      | E.g. "github"                                      |
 | pipeline.git.tag           | The tag triggering the pipeline                    |
@@ -1292,7 +1292,7 @@ jobs:
 ```
 
 ## **`workflows`**
-Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
+すべてのジョブのオーケストレーションに使用します。 各ワークフローは、キーとなるワークフロー名と、値となるマップで構成します。 A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
 
 ### **`version`**
 The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
@@ -1304,14 +1304,14 @@ The Workflows `version` field is used to issue warnings for deprecation or break
 
 ### **<`workflow_name`>**
 
-A unique name for your workflow.
+ワークフローに付与する一意の名前です。
 
 #### **`triggers`**
-Specifies which triggers will cause this workflow to be executed. Default behavior is to trigger the workflow when pushing to a branch.
+ワークフローを実行するトリガーを指定します。 デフォルトの動作では、ブランチにプッシュされたときにワークフローがトリガーされます。
 
-| キー       | 必須 | 型     | 説明                              |
-| -------- | -- | ----- | ------------------------------- |
-| triggers | ×  | Array | Should currently be `schedule`. |
+| キー       | 必須 | 型  | 説明                              |
+| -------- | -- | -- | ------------------------------- |
+| triggers | ×  | 配列 | Should currently be `schedule`. |
 {: class="table table-striped"}
 
 ##### **`schedule`**
@@ -1360,19 +1360,19 @@ Branches can have the keys `only` and `ignore` which either map to a single stri
 - `only` と `ignore` のいずれも指定していない場合、すべてのブランチでジョブが実行されます。
 - `only` と `ignore` の両方を指定した場合、`ignore` よりも `only` が先に処理されます。
 
-| キー       | 必須 | 型              | 説明                                                               |
-| -------- | -- | -------------- | ---------------------------------------------------------------- |
-| branches | ○  | マップ            | 実行するブランチを定義するマップ。                                                |
-| only     | ○  | 文字列、または文字列のリスト | Either a single branch specifier, or a list of branch specifiers |
-| ignore   | ×  | 文字列、または文字列のリスト | Either a single branch specifier, or a list of branch specifiers |
+| キー       | 必須 | 型              | 説明                     |
+| -------- | -- | -------------- | ---------------------- |
+| branches | ○  | マップ            | 実行するブランチを定義するマップ。      |
+| only     | ○  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。 |
+| ignore   | ×  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。 |
 {: class="table table-striped"}
 
 #### **`jobs`**
 A job can have the keys `requires`, `context`, `type`, and `filters`.
 
-| キー   | 必須 | 型   | 説明                                            |
-| ---- | -- | --- | --------------------------------------------- |
-| jobs | ○  | リスト | A list of jobs to run with their dependencies |
+| キー   | 必須 | 型   | 説明                   |
+| ---- | -- | --- | -------------------- |
+| jobs | ○  | リスト | 依存関係に従って実行するジョブのリスト。 |
 {: class="table table-striped"}
 
 ##### **<`job_name`>**
@@ -1380,20 +1380,20 @@ A job can have the keys `requires`, `context`, `type`, and `filters`.
 A job name that exists in your `config.yml`.
 
 ###### **`requires`**
-Jobs are run in parallel by default, so you must explicitly require any dependencies by their job name.
+ジョブはデフォルトで並列に実行されるため、依存関係がある場合は、ジョブ名に基づいて明示的に要求する必要があります。
 
 | キー       | 必須 | 型   | 説明                                                                                                                                                                                                                                                                                                                           |
 | -------- | -- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | requires | ×  | リスト | A list of jobs that must succeed for the job to start. Note: When jobs in the current workflow that are listed as dependencies are not executed (due to a filter function for example), their requirement as a dependency for other jobs will be ignored by the requires option. しかし、ジョブのすべての依存関係がフィルター処理されると、そのジョブは実行されません。 |
-| name     | ×  | 文字列 | A replacement for the job name. Useful when calling a job multiple times. If you want to invoke the same job multiple times and a job requires one of the duplicate jobs, this is required. (2.1 only)                                                                                                                       |
+| name     | ×  | 文字列 | ジョブ名の代替名。 ジョブを複数回呼び出す場合に便利です。 同じジョブを複数回呼び出したいときや、あるジョブで同じ内容のジョブが必要なときなどに有効です (2.1 のみ)。                                                                                                                                                                                                                                       |
 {: class="table table-striped"}
 
 ###### **`context`**
 Jobs may be configured to use global environment variables set for an organization, see the [Contexts]({{ site.baseurl }}/2.0/contexts) document for adding a context in the application settings.
 
-| キー      | 必須 | 型           | 説明                                                                                                                                                                                 |
-| ------- | -- | ----------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| context | ×  | String/List | The name of the context(s). The initial default name is `org-global`. Each context name must be unique. If using CircleCI Server, only a single Context per workflow is supported. |
+| キー      | 必須 | 型           | 説明                                                                                                                                                                      |
+| ------- | -- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| context | ×  | String/List | The name of the context(s). The initial default name is `org-global`. 各コンテキスト名は一意である必要があります。 If using CircleCI Server, only a single Context per workflow is supported. |
 {: class="table table-striped"}
 
 ###### **`type`**
@@ -1439,37 +1439,37 @@ You can read more about using regex in your config in the [Workflows document]({
 
 ###### **`branches`**
 {:.no_toc}
-Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. You may also use regular expressions to match against branches by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string.
+Branches can have the keys `only` and `ignore` which either map to a single string naming a branch. スラッシュで囲むことで正規表現でブランチに一致させたり、そのような文字列のリストでマップさせたりできます。 Regular expressions must match the **entire** string.
 
 - Any branches that match `only` will run the job.
 - Any branches that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then all branches will run the job.
 - `only` と `ignore` の両方を指定した場合、`ignore` よりも `only` が先に処理されます。
 
-| キー       | 必須 | 型              | 説明                                                               |
-| -------- | -- | -------------- | ---------------------------------------------------------------- |
-| branches | ×  | マップ            | 実行するブランチを定義するマップ。                                                |
-| only     | ×  | 文字列、または文字列のリスト | Either a single branch specifier, or a list of branch specifiers |
-| ignore   | ×  | 文字列、または文字列のリスト | Either a single branch specifier, or a list of branch specifiers |
+| キー       | 必須 | 型              | 説明                     |
+| -------- | -- | -------------- | ---------------------- |
+| branches | ×  | マップ            | 実行するブランチを定義するマップ。      |
+| only     | ×  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。 |
+| ignore   | ×  | 文字列、または文字列のリスト | 単一のブランチ名、またはブランチ名のリスト。 |
 {: class="table table-striped"}
 
 ###### **`tags`**
 {:.no_toc}
 
-CircleCI does not run workflows for tags unless you explicitly specify tag filters. Additionally, if a job requires any other jobs (directly or indirectly), you must specify tag filters for those jobs.
+CircleCI does not run workflows for tags unless you explicitly specify tag filters. さらに、ジョブが (直接的または間接的に) 他のジョブを必要とする場合は、それらのジョブにタグ フィルターを指定する必要があります。
 
-Tags can have the keys `only` and `ignore` keys. You may also use regular expressions to match against tags by enclosing them with slashes, or map to a list of such strings. Regular expressions must match the **entire** string. Both lightweight and annotated tags are supported.
+Tags can have the keys `only` and `ignore` keys. スラッシュで囲むことで正規表現でタグに一致させたり、そのような文字列のリストでマップさせたりできます。 Regular expressions must match the **entire** string. 軽量のタグと注釈付きのタグがサポートされています。
 
 - Any tags that match `only` will run the job.
 - Any tags that match `ignore` will not run the job.
 - If neither `only` nor `ignore` are specified then the job is skipped for all tags.
 - If both `only` and `ignore` are specified the `only` is considered before `ignore`.
 
-| キー     | 必須 | 型              | 説明                                                         |
-| ------ | -- | -------------- | ---------------------------------------------------------- |
-| tags   | ×  | マップ            | A map defining rules for execution on specific tags        |
-| only   | ×  | 文字列、または文字列のリスト | Either a single tag specifier, or a list of tag specifiers |
-| ignore | ×  | 文字列、または文字列のリスト | Either a single tag specifier, or a list of tag specifiers |
+| キー     | 必須 | 型              | 説明                 |
+| ------ | -- | -------------- | ------------------ |
+| tags   | ×  | マップ            | 実行するタグを定義するマップ。    |
+| only   | ×  | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
+| ignore | ×  | 文字列、または文字列のリスト | 単一のタグ名、またはタグ名のリスト。 |
 {: class="table table-striped"}
 
 For more information, see the [Executing Workflows For a Git Tag]({{ site.baseurl }}/2.0/workflows/#executing-workflows-for-a-git-tag) section of the Workflows document.
@@ -1611,7 +1611,7 @@ Every job invocation in a workflow may optionally accept two special arguments: 
 
 Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
+事前・事後ステップを使用すると、特定のジョブ内で、そのジョブを変更せずにいくつかのステップを実行できます。 これは、たとえば、ジョブの実行前にカスタムのセットアップ ステップを実行したいときに便利です。
 
 ```yaml
 version: 2.1
@@ -1680,12 +1680,12 @@ Certain dynamic configuration features accept logic statements as arguments. Log
 
 | 型                                                                                                   | Arguments          | `true` if                              | 例                                                    |
 | --------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------- | ---------------------------------------------------- |
-| YAML literal                                                                                        | None               | is truthy                              | `true`/`42`/`"a string"`                             |
-| YAML alias                                                                                          | None               | resolves to a truthy value             | *my-alias                                            |
-| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`              |
-| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>` |
+| YAML literal                                                                                        | なし                 | is truthy                              | `true`/`42`/`"a string"`                             |
+| YAML alias                                                                                          | なし                 | resolves to a truthy value             | *my-alias                                            |
+| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | なし                 | resolves to a truthy value             | `<< pipeline.git.branch >>`              |
+| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | なし                 | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>` |
 | and                                                                                                 | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`                         |
-| or                                                                                                  | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                         |
+| または                                                                                                 | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                         |
 | not                                                                                                 | 1 logic statement  | the argument is not truthy             | `not: true`                                          |
 | equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`    |
 {: class="table table-striped"}
@@ -1905,7 +1905,7 @@ workflows:
 ```
 {% endraw %}
 
-## See also
+## 関連項目
 {:.no_toc}
 
-[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
+[設定ファイルの概要]({{site.baseurl}}/2.0/config-intro/)
