@@ -13,6 +13,7 @@ This guide gives an overview of the various ways to persist data within and beyo
 {:toc}
 
 ## Caching strategies
+{: #caching-strategies }
 
 ![caching data flow]({{ site.baseurl}}/assets/img/docs/caching-dependencies-overview.png)
 
@@ -25,6 +26,7 @@ Caches are global within a project. A cache saved on one branch will be used by 
 For more information see the [Caching Dependencies]({{site.baseurl}}/2.0/caching/) guide.
 
 ## Using workspaces
+{: #using-workspaces }
 
 ![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -37,6 +39,7 @@ Workspaces are not shared between pipeline runs. The only time a workspace can b
 For more information on using workspaces to persist data throughout a workflow, see the [Workflows]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs) guide. Also see the [Deep Diving into CircleCI Workspaces](https://circleci.com/blog/deep-diving-into-circleci-workspaces/) blog post.
 
 ## Using artifacts
+{: #using-artifacts }
 
 ![artifacts data flow]( {{ site.baseurl}}/assets/img/docs/Diagram-v3-Artifact.png)
 
@@ -49,8 +52,10 @@ If your project needs to be packaged, say an Android app where the `.apk` file i
 For more information on using artifacts to persist data once a job has completed, see the [Storing Build Artifacts]({{site.baseurl}}/2.0/artifacts/) guide.
 
 ## Managing network and storage use
+{: #managing-network-and-storage-use }
 
 ### Overview of storage and network transfer
+{: #overview-of-storage-and-network-transfer }
 
 All data persistence operations within a job will accrue network and storage usage, the relevant actions are:
 
@@ -62,24 +67,29 @@ All data persistence operations within a job will accrue network and storage usa
 Details about your storage and network transfer usage can be viewed on your Plan Settings.
 
 ### How to manage your storage and network transfer use
+{: #how-to-manage-your-storage-and-network-transfer-use }
 
 There are several common ways that your configuration can be optimized to ensure you are getting the most out of your storage and network usage.
 
 Before attempting to reduce data usage, you should first consider whether that usage is providing enough value to be kept. In the cases of caches and workspaces this can be quite easy to compare - does the developer/compute time saving from the cache outweigh the cost of the download and upload? Please see below for examples of storage and network optimization opportunities.
 
 ### Opportunities to reduce artifact and cache/workspace traffic
+{: #opportunities-to-reduce-artifact-and-cacheworkspace-traffic }
 
 #### Check which artifacts are being uploaded
+{: #check-which-artifacts-are-being-uploaded }
 
 Often we see that the store_artifacts step is being used on a large directory when only a few files are really needed, so a simple action you can take is to check which artifacts are being uploaded and why.
 
 If you are using parallelism in your jobs, it could be that each parallel task is uploading an identical artifact. You can use the CIRCLE_NODE_INDEX environment variable in a run step to change the behaviour of scripts depending on the parallel task run.
 
 #### Caching unused or superfluous dependencies
+{: #caching-unused-or-superfluous-dependencies }
 
 Depending on what language and package management system you are using, you may be able to leverage tools that clear or “prune” unnecessary dependencies. For example, the node-prune package removes unnecessary files (markdown, typescript files, etc.) from node_modules.
 
 #### Optimizing cache usage
+{: #optimizing-cache-usage }
 
 If you notice your cache usage is high and would like to reduce it, try:
 
@@ -114,6 +124,7 @@ Which will only change if the list of requested dependencies has changed. If you
 * Prune your cache before you upload it, but make sure you prune whatever generates your cache key as well.
 
 #### Uploading large artifacts
+{: #uploading-large-artifacts }
 
 * Artifacts that are text can be compressed at very little cost.
 * If you are uploading images/videos of UI tests, filter out and upload only failing tests. Many organizations upload all of the images from their UI tests, many of which will go unused.
