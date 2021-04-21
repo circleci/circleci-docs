@@ -11,6 +11,7 @@ order: 1
 CircleCI Server v2.16 の機能強化や不具合修正についてまとめます。
 
 ## What's new in release 2.16
+{: #whats-new-in-release-216 }
 
 - Services マシンの外部にデータとワークロードを分散できるようになりました。 MongoDB、Redis、Nomad Server、RabbitMQ、Postgres、Vault を外部サービスとして使用できます。 最新ドキュメントについては、CSM にお問い合わせください。
 
@@ -25,6 +26,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
    - *CircleCI v2.16 運用ガイド*
 
 ## Fixed in release 2.16
+{: #fixed-in-release-216 }
 
 - 32 日後にコンテキストが破損する問題を修正しました。
 
@@ -44,6 +46,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 
 
 ## Updated in release 2.16
+{: #updated-in-release-216 }
 
 - ビルドのメールから EOL バナーを削除しました。
 
@@ -57,6 +60,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 - Replicated was updated to version 2.29.0 in this release which requires Docker 17.12.1. Follow the instructions below before upgrading to CircleCI v2.16.
 
 ### Prequisites for updating Replicated
+{: #prequisites-for-updating-replicated }
 
 - Ubuntu 14.04 ベースの環境を使用していること
 - Services マシンで Replicated バージョン 2.10.3 を実行していること
@@ -65,6 +69,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 - Services マシン上ですべての手順が完了していること
 
 ### 準備
+{: #preparations }
 
 Before performing a replicated version update, backup your data using the Backup section of the *CircleCI v2.16 Operations Guide*.
 
@@ -74,13 +79,13 @@ Before performing a replicated version update, backup your data using the Backup
     replicatedctl app stop
 ```
 
-アプリケーションのシャットダウンには数分かかります。 管理ダッシュボードを確認して、ステータスが [Stopped (停止)] になってから続行してください。 以下のコマンドを実行してアプリケーションのステータスを表示する方法もあります。
+Application shutdown takes a few minutes. Please check the administration dashboard, and wait for the status to become “Stopped” before continuing. You can also run the following command to view the app status:
 
 ```
     replicatedctl app status inspect
 ```
 
-以下のように出力されます。
+Example Output:
 ```
 [
     {
@@ -109,33 +114,34 @@ Before performing a replicated version update, backup your data using the Backup
 ```
 
 ### 更新
+{: #update }
 
-以下のように更新スクリプトを実行して、Replicated の更新を実行します。
+Perform the Replicated update by executing the update script as follows:
 
 ```
     curl -sSL "https://get.replicated.com/docker?replicated_tag=2.29.0" | sudo bash
 ```
 
-Replicated と Docker の両方のバージョンをチェックしてください。
+Double-check your replicated and docker versions:
 
 ```
     replicatedctl version    # 2.29.0
     docker -v                # 17.12.1
 ```
 
-以下のコマンドでアプリケーションを再起動します。
+Restart the app with
 
 ```
     replicatedctl app start
 ```
 
-アプリケーションのスピンアップには数分かかります。 以下のコマンドを実行するか、管理ダッシュボードにアクセスして進行状況を確認できます。
+The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
 
 ```
     replicatedctl app status inspect
 ```
 
-以下のように出力されます。
+Example output:
 ```
 [
     {
