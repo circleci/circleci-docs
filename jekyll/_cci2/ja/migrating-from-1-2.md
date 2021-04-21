@@ -20,18 +20,21 @@ version:
 `circle.yml` ファイルがない場合は、最初から [2.0 `config.yml` のサンプル ファイル]({{ site.baseurl }}/2.0/sample-config)を参考にしてください。
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
-CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference) を作成して新しい必須キーを追加し、それらのキーに値を定義する必要があります。 **Note:** Parallelism may only be set in the `.circleci/config.yml` file, the parallelism setting in the CircleCI app is ignored.
+CircleCI requires that you create a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference), and it adds new required keys for which values must be defined. **Note:** Parallelism may only be set in the `.circleci/config.yml` file, the parallelism setting in the CircleCI app is ignored.
 
-既に `circle.yml` ファイルがある場合は、以降の各セクションの手順に従って、既存のファイルをコピーし、新しい必須キーを記述し、1.0 のキーを検索して 2.0 のキーに置き換えます。
+If you already have a `circle.yml` file, the following sections describe how to make a copy of your existing file, create the new required keys, and then search and replace your 1.0 keys with 2.0 keys.
 
 ### Using the 1.0 to 2.0 `config-translation` endpoint
+{: #using-the-10-to-20-config-translation-endpoint }
 {:.no_toc}
 
 The `config-translation` endpoint can help you quickly get started with converting a 1.0 config to 2.0. For more, see [Using the 1.0 to 2.0 config-translation Endpoint]({{ site.baseurl }}/2.0/config-translation).
 
 ## Steps to configure required keys
+{: #steps-to-configure-required-keys }
 
 1. 既存の `circle.yml` ファイルをコピーして、プロジェクト リポジトリのルートにある新しい `.circleci` ディレクトリに置きます。
 
@@ -63,7 +66,7 @@ The `config-translation` endpoint can help you quickly get started with converti
      ```
      See the Using Machine section of the [Choosing an Executor Type](https://circleci.com/docs/2.0/executor-types/#using-machine) document for details about the available VM images.
      ```yaml
-         macos: 
+         macos:
            xcode: 11.3.0
      ```
 
@@ -100,12 +103,14 @@ The `config-translation` endpoint can help you quickly get started with converti
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
 ## Environment variables
+{: #environment-variables }
 
 In CircleCI 2.0, all defined environment variables are treated literally. It is possible to interpolate variables within a command by setting it for the current shell.
 
 For more information, refer to the CircleCI 2.0 document [Using Environment Variables]({{ site.baseurl }}/2.0/env-vars/).
 
 ## Steps to configure workflows
+{: #steps-to-configure-workflows }
 
 To increase the speed of your software development through faster feedback, shorter re-runs, and more efficient use of resources, configure workflows using the following instructions:
 
@@ -149,6 +154,7 @@ To increase the speed of your software development through faster feedback, shor
 6. Validate your YAML again at <http://codebeautify.org/yaml-validator> to check that it is well-formed.
 
 ## Search and replace deprecated 2.0 keys
+{: #search-and-replace-deprecated-20-keys }
 
 - 構成にタイムゾーンが含まれる場合は、`timezone: America/Los_Angeles` を検索して、以下の 2 行に置き換えます。
 
@@ -168,7 +174,7 @@ With the following to load it into your shell (the file $BASH_ENV already exists
 
 ```yaml
     steps:
-      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV 
+      - run: echo 'export PATH=/path/to/foo/bin:$PATH' >> $BASH_ENV
       - run: some_program_inside_bin
 ```
 
@@ -228,10 +234,12 @@ With the following, nested under `steps:` and customizing for your application a
 ```
 
 ## YAML のバリデーション
+{: #validate-yaml }
 
 When you have all the sections in `.circleci/config.yml` we recommend that you check that your YAML syntax is well-formed using a tool such as <http://codebeautify.org/yaml-validator>. Then, use the `circleci` CLI to validate that the new configuration is correct with regard to the CircleCI 2.0 schema. See the [Using the CircleCI Command Line Interface (CLI)]({{ site.baseurl }}/2.0/local-jobs/) document for instructions. Fix up any issues and commit the updated `.circleci/config.yml` file. When you push a commit the job will start automatically and you can monitor it in the CircleCI app.
 
 ## 次のステップ
+{: #next-steps }
 {:.no_toc}
 
 - 「[2.0 への移行のヒント]({{ site.baseurl }}/2.0/migration/)」を参照してください。
