@@ -17,6 +17,7 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 {:toc}
 
 ## Projects
+{: #projects }
 
 A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select Add Project from the CircleCI application to enter the Projects dashboard, from where you can set up and follow the projects you have access to.
 
@@ -27,6 +28,7 @@ On the Projects Dashboard, you can either:
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
 ## Configuration
+{: #configuration }
 
 CircleCI believes in *configuration as code*. Your entire continuous integration and deployment process is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
 
@@ -51,6 +53,7 @@ The following image uses an [example Java application](https://github.com/Circle
 ![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
 ## User types
+{: #user-types }
 
 It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
 
@@ -63,6 +66,7 @@ It is worth taking a minute to define the various user types that relate to Circ
 
 
 ## Pipelines
+{: #pipelines }
 
 A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
 
@@ -71,6 +75,7 @@ Pipelines represent methods for interacting with your configuration:
 {% include snippets/pipelines-benefits.adoc %}
 
 ## Orbs
+{: #orbs }
 
 Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config. Orbs are not currently available for CircleCI Server.
 
@@ -79,12 +84,14 @@ The graphic above illustrating an example Java configuration can be greatly simp
 ![config elements orbs]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
 ## Jobs
+{: #jobs }
 
 Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. Each job must declare an executor that is either `docker`, `machine`, `windows` or `macos`. `machine` includes a [default image](https://circleci.com/docs/2.0/executor-intro/#machine) if not specified, for `docker` you must [specify an image](https://circleci.com/docs/2.0/executor-intro/#docker) to use for the primary container, for `macos` you must specify an [Xcode version](https://circleci.com/docs/2.0/executor-intro/#macos), and for `windows` you must use the [Windows orb](https://circleci.com/docs/2.0/executor-intro/#windows).
 
 ![job illustration]( {{ site.baseurl }}/assets/img/docs/job.png)
 
 ## Executors and images
+{: #executors-and-images }
 
 Each separate job defined within your config will run in a unique executor. An executor can be a docker container or a virtual machine running Linux, Windows, or MacOS. Note, macOS is not currently available on self-hosted installations of CircleCI Server.
 
@@ -121,11 +128,11 @@ jobs:
    # and docker-compose 1.27.4, follow CircleCI Discuss Announcements
    # for new image releases.
      image: ubuntu-2004:202010-01
-#...       
+#...
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 11.3
      xcode: "11.3.0"
-# ...          
+# ...
 ```
 
 {:.tab.executors.Server}
@@ -157,11 +164,11 @@ jobs:
    # and docker-compose 1.14.0, follow CircleCI Discuss Announcements
    # for new image releases.
      image: ubuntu-1604:201903-01
-#...       
+#...
  build3:
    macos: # Specifies a macOS virtual machine with Xcode version 11.3
      xcode: "11.3.0"
-# ...          
+# ...
 ```
 
 The Primary Container is defined by the first image listed in [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations. Subsequent images can be added to spin up Secondary/Service Containers.
@@ -169,6 +176,7 @@ The Primary Container is defined by the first image listed in [`.circleci/config
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
 ## Steps
+{: #steps }
 
 Steps are actions that need to be taken to complete your job. Steps are usually a collection of executable commands. For example, the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step, which is a _built-in_ step available across all CircleCI projects, checks out the source code for a job over SSH. Then, the `run` step allows you to run custom commands, such as executing the command `make test`  using a non-login shell by default. Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
@@ -189,10 +197,11 @@ jobs:
           command: make test # executable command run in
           # non-login shell with /bin/bash -eo pipefail option
           # by default.
-#...          
+#...
 ```
 
 ## Image
+{: #image }
 
 An image is a packaged system that has instructions for creating a running container. The Primary Container is defined by the first image listed in a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file. This is where commands are executed for jobs using the Docker or machine executor. The Docker executor spins up a container with a Docker image. The machine executor spins up a complete Ubuntu virtual machine image. See the [Choosing an Executor Type]({{ site.baseurl }}/2.0/executor-types/) document for a comparison table and considerations.
 
@@ -226,14 +235,15 @@ An image is a packaged system that has instructions for creating a running conta
      # follow CircleCI Discuss Announcements
      # for new image releases.
        image: ubuntu-1604:202007-01
-...       
+...
    build3:
      macos: # Specifies a macOS virtual machine with Xcode version 9.0
-       xcode: "9.0"       
- ...          
+       xcode: "9.0"
+ ...
  ```
 
 ## Workflows
+{: #workflows }
 
 Workflows define a list of jobs and their run order. It is possible to run jobs concurrently, sequentially, on a schedule, or with a manual gate using an approval job.
 
@@ -300,7 +310,7 @@ jobs:
       - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
-#...                          
+#...
 workflows:
   build_and_test: # name of your workflow
     jobs:
@@ -371,7 +381,7 @@ jobs:
       - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
-#...                          
+#...
 workflows:
   version: 2
   build_and_test: # name of your workflow
@@ -389,6 +399,7 @@ workflows:
 {% endraw %}
 
 ## Caches, workspaces and artifacts
+{: #caches-workspaces-and-artifacts }
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -436,7 +447,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 {% endraw %}
 
@@ -480,7 +491,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - restore_cache: # Restores the cached dependency.
-          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}       
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
 ```
 {% endraw %}
 
@@ -495,8 +506,8 @@ version: 2.1
 
 jobs:
   build1:
-#...   
-    steps:    
+#...
+    steps:
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
       # into the workspace for use in downstream job. Must be an absolute path,
       # or relative path from working_directory. This is a directory on the container which is
@@ -529,8 +540,8 @@ version: 2
 
 jobs:
   build1:
-#...   
-    steps:    
+#...
+    steps:
       - persist_to_workspace: # Persist the specified paths (workspace/echo-output)
       # into the workspace  for use in downstream job. Must be an absolute path,
       # or relative path from working_directory. This is a directory on the container which is
@@ -558,16 +569,17 @@ jobs:
 
 Note the following distinctions between Artifacts, Workspaces, and Caches:
 
-| タイプ      | ライフタイム    | 用途                                                           | 例                                                                                                                                            |
-| -------- | --------- | ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| アーティファクト | 数か月       | 長期アーティファクトを保存します。                                            | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.             |
-| ワークスペース  | ワークフローの期間 | `attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。 | `attach_workspace` を実行すると、ワークスペースの内容全体がコピーされ、再構築されます。                                                                                        |
-| キャッシュ    | 数か月       | ジョブ実行の高速化に役立つ非必須データ (npm、Gem パッケージなど) を保存します。                | 追加するディレクトリのリストへの `path` と、キャッシュを一意に識別する `key` (ブランチ、ビルド番号、リビジョンなど) を指定した `save_cache` ジョブ ステップ。 `restore_cache` と適切な `key` を使用してキャッシュを復元します。 |
+| Type       | Lifetime             | Use                                                                                     | Example                                                                                                                                                                                                                                    |
+| ---------- | -------------------- | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Artifacts  | Months               | Preserve long-term artifacts.                                                           | Available in the Artifacts tab of the **Job page** under the `tmp/circle-artifacts.<hash>/container` or similar directory.                                                                                                           |
+| Workspaces | Duration of workflow | Attach the workspace in a downstream container with the `attach_workspace:` step.       | The `attach_workspace` copies and re-creates the entire workspace content when it runs.                                                                                                                                                    |
+| Caches     | Months               | Store non-vital data that may help the job run faster, for example npm or Gem packages. | The `save_cache` job step with a `path` to a list of directories to add and a `key` to uniquely identify the cache (for example, the branch, build number, or revision). Restore the cache with `restore_cache` and the appropriate `key`. |
 {: class="table table-striped"}
 
 Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/) for additional conceptual information about using workspaces, caching, and artifacts.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
