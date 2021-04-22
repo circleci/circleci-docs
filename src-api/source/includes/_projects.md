@@ -288,17 +288,3 @@ The example to the right shows a user request for recent build information. Noti
 	"author_email": "trevor@circleci.com"
 }]
 ```
-
-## Clear Project Cache
-
-**`DELETE` Request:** Clears the cache for a project.
-
-```sh
-curl -X DELETE https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/build-cache -H "Circle-Token: <circle-token>"
-```
-
-```json
-{
-  "status" : "build caches deleted"
-}
-```
