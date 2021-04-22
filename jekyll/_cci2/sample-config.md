@@ -24,7 +24,7 @@ This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/co
 The configuration example below shows a concurrent  workflow in which the `build` and `test` jobs run at the same time. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 This image shows the workflow view for the following configuration example:
-![Concurrent Workflow Map]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
+![Concurrent Workflow Graph]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
 {:.tab.basic-concurrent.Cloud}
 ```yaml
@@ -99,7 +99,7 @@ workflows:
 The configuration example below shows a sequential job workflow where the `build` job runs and then the `test` job runs once `build` has completed. Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for complete details about orchestrating job runs with concurrent, sequential, and manual approval workflows.
 
 This image shows the workflow view for the following configuration example, in which jobs run sequentially; one after the other:
-![Sequential Workflow Map]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
+![Sequential Workflow Graph]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
 {:.tab.basic-sequential.Cloud}
 ```yaml
@@ -178,7 +178,7 @@ The example below shows a sequential job workflow with an approval step. The `bu
 
 This image shows the workflow view for the following configuration example. This image has three parts to show the approval popup that appears when you click on a hold step in the app, and then the workflow view again once the `hold` job has been approved and the `deploy` job has run:
 
-![Approval Workflow Map]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
+![Approval Workflow Graph]({{ site.baseurl }}/assets/img/docs/approval-workflow-map.png)
 
 {:.tab.approval.Cloud}
 ```yaml
@@ -451,7 +451,7 @@ Below are two sample configurations for a Fan-in/Fan-out workflow.
 
 For the Server/`2.0` config example, refer to [the complete demo repo on GitHub](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/fan-in-fan-out/.circleci/config.yml) for details.
 
-For the Cloud/`2.1` example, see the following workflow map:
+For the Cloud/`2.1` example, see the following workflow graph:
 
 ![Fan-in-out]({{ site.baseurl }}/assets/img/docs/fan-in-out-example.png)
 
