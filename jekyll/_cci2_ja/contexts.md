@@ -48,7 +48,7 @@ CircleCI と連携済みの Organization やリポジトリの名称を変更す
 3. CircleCI のプラン、プロジェクト一覧、各種設定が正しく引き継がれていることを確認します。
 4. 必要な場合、上記 3 の確認後、古い Org 名/リポジトリ名を再利用し新しい Org/リポジトリを作成します。
 
-    **Note**: If you do not follow these steps, it is possible that you may lose access to your org or repo settings, including **environment variables** and **contexts**.
+    **注**: 上記の手順で変更を行っていない場合、**環境変数**、**コンテキスト**を含み、 Organization またはレポジトリの設定が失われる可能性があります。
 
 ## コンテキストの作成と使用
 {: #creating-and-using-a-context }
