@@ -171,6 +171,7 @@ Only members of the selected groups may now use the context in their workflows o
 
 ### Making changes to context restrictions
 {: #making-changes-to-context-restrictions }
+
 Changes to security group restrictions for Contexts might not take effect immediately due to caching. To make sure settings are applied immediately, it is best practice for the Org Administrator to refresh permissions once the change has been made. The **Refresh Permissions** button can be found on the [Account Integrations](https://app.circleci.com/settings/user) page.
 
 Administrators of CircleCI Server installations can find the **Refresh Permissions** button at `<circleci-hostname>/account`.
@@ -190,15 +191,14 @@ workflows:
   jobs:
     build-test-deploy:
       - build
-      - hold:
-          type: approval # presents manual approval button in the UI
-          requires:
-            - build
       - test:
           context: my-restricted-context
           requires:
             - build
-            - hold
+      - hold:
+          type: approval # presents manual approval button in the UI
+          requires:
+            - build
       - deploy:
           context: deploy-key-restricted-context
           requires:
@@ -207,7 +207,7 @@ workflows:
             - test
 ```
 
-In this example, the jobs `test` and `deploy` are restricted, and will only run if the user who approves the `hold` job is a member of the security group assigned to the context `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the `build` job will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the security group, but the jobs `test` and `deploy` will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
+In this example, the jobs `test` and `deploy` are restricted, and `deploy` will only run if the user who approves the `hold` job is a member of the security group assigned to the context and `deploy-key-restricted-context`. When the workflow `build-test-deploy` runs, the jobs `build` and `test` will run, then the `hold` job, which presents a manual approval button in the CircleCI application. This approval job may be approved by _any_ member of the project, but the `deploy` job will fail as `unauthorized` if the "approver" is not part of the restricted context security group.
 
 ## Removing groups from contexts
 {: #removing-groups-from-contexts }
@@ -370,9 +370,7 @@ plaintext secret as a string.
 {: #secrets-masking }
 _Secrets masking is not currently available on self-hosted installations of CircleCI Server_
 
-Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security,
-CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that
-contains env var values.
+Contexts hold potentially sensitive secrets that are not intended to be exposed. For added security, CircleCI performs secret masking on the build output, obscuring `echo` or `print` output that contains env var values.
 
 The value of the context will not be masked in the build output if:
 
