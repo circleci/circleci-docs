@@ -10,17 +10,17 @@ version:
 ## 概要
 {: #overview }
 
-The Android machine image is accessed through the [Linux `machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux), like other Linux machine images on CircleCI. The Android machine image supports nested virtualization and x86 Android emulators, so it can be used for Android UI testing. It also comes with the Android SDK pre-installed.
+Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 ## Android マシン イメージの使用
 {: #using-the-android-machine-image }
 
-It is possible to configure the use of the Android image in your configuration with [orbs]({{site.baseurl}}/2.0/orb-intro) as well as manually. Using the Android orb will simplify your configuration while more complex and custom configurations may benefit from manually configuring your usage. This document will cover both use cases. Please view the [examples](#examples) section below for more details.
+設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#examples)」セクションを参照してください。
 
 ## プリインストールされたソフトウェア
 {: #pre-installed-software }
 
-The Android machine image comes with the following pre-installed:
+Android マシン イメージには以下がプリインストールされています。
 
 ### Android SDK
 {: #android-sdk }
@@ -51,18 +51,18 @@ The Android machine image comes with the following pre-installed:
 ## 料金プラン
 {: #pricing }
 
-For pricing information, refer to the Linux machine executors under the “Linux VM" section on the [pricing page](https://circleci.com/pricing/).
+料金情報に関しては、[料金ページ](https://circleci.com/ja/pricing/)の「Linux VM」セクションで Linux Machine Executor を参照してください。
 
 
 ## 例
 {: #examples }
 
-Below you will find several examples demonstrating the use of the Android machine image both with and without orbs.
+以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
 
 ### Orb を使用するシンプルな例
 {: #simple-orb-usage }
 
-The below sample uses the Android orb to run a single job.
+以下の例では、Android Orb を使用して 1 つのジョブを実行します。
 
 ```yaml
 # .circleci/config.yaml
@@ -72,10 +72,10 @@ orbs:
 workflows:
   test:
     jobs:
-      # This job uses the Android machine image by default
+      # このジョブではデフォルトで Android マシン イメージを使用します
       - android/run-ui-tests:
-          # Use pre-steps and post-steps if necessary
-          # to execute custom steps before and afer any of the built-in steps
+          # 必要に応じて事前ステップと事後ステップを使用して
+          # ビルトイン ステップの前後でカスタム ステップを実行します
           system-image: system-images;android-29;default;x86
 ```
 
@@ -83,7 +83,7 @@ workflows:
 ### Orb を使用する複雑な例
 {: #more-complex-orb-usage }
 
-This example shows how you can use more granular orb commands to achieve what the [start-emulator-and-run-tests](https://circleci.com/developer/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) command does.
+この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 
 ```yaml
 # .circleci/config.yml
@@ -127,7 +127,7 @@ workflows:
 ### Orb を使用しない例
 {: #no-orb-example }
 
-The following is an example of using the Android machine image, _without_ using the circleci/android [orb](https://circleci.com/developer/orbs/orb/circleci/android). These steps are similar to what is run when you use the [run-ui-tests](https://circleci.com/developer/orbs/orb/circleci/android#jobs-run-ui-tests) job of the orb.
+以下の例では、__circleci/android [Orb](https://circleci.com/developer/ja/orbs/orb/circleci/android) なしで Android マシン イメージを使用しています。 以下のステップは、Orb の [run-ui-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#jobs-run-ui-tests) ジョブを使用して実行する処理に類似しています。
 
 
 {% raw %}
