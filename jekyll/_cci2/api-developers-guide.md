@@ -67,7 +67,7 @@ To add an API token, perform the steps listed below.
 {: #accept-header }
 
 It is recommended to specify an accept header in your API requests. The majority
-of API end points will return JSON by default, but some requests (primarily API
+of API endpoints will return JSON by default, but some endpoints (primarily API
 v1) return EDN if no accept header is specified.
 
 To return formatted JSON, include a `text/plain` header like so:
