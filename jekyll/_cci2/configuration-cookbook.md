@@ -683,7 +683,7 @@ jobs:
           service1/.* run-service-1-job true
           service2/.* run-service-2-job true
         base-revision: master
-        # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. in this case, we are using the parent dynamic configuration itself.
+        # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. In this case, we are using the parent dynamic configuration itself.
         config-path: ".circleci/config.yml"
         
   build-service-1:
