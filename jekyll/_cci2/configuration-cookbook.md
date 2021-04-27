@@ -638,7 +638,7 @@ This would be beneficial in the case of your code/microservices being stored in 
 To achieve this, CircleCI has provided the [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering)
 orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
 
-For example, consider a monorepo structure like so:
+For example, consider a monorepo structure like the example shown below:
 
 ```shell
 .
