@@ -8,7 +8,6 @@ $white: #FFFFFF;
 $gray: #D8D8D8;
 $black: #161616;
 $transition-duration-medium: 400ms;
-$nav-height: 68px;
 $padding-large-vertical: 11px;
 
 
@@ -29,14 +28,6 @@ $padding-large-vertical: 11px;
 
   @media (max-width: $screen-xs-max) {
     position: sticky;
-  }
-
-  @media (min-width: $screen-sm) {
-    transition: top $transition-duration-medium ease;
-
-    .nav-hide & {
-      top: calc(-#{$nav-height} - #{$shadow-space});
-    }
   }
 
   @media (min-width: $screen-sm) and (max-width: $screen-sm-max) {
@@ -294,6 +285,8 @@ $padding-large-vertical: 11px;
 
 .global-nav--component {
 
+  position: sticky;
+
   a.global-nav--lockup-link {
     color: initial;
   }
@@ -379,11 +372,9 @@ $padding-large-vertical: 11px;
   }
 }
 
-// Reset a rule buried deep in the 170K+ character-long minified site.css
-@media (max-width: $screen-sm-max) {
-  body {
-    padding-top: initial;
-  }
+// Reset some rules buried deep in the 170K+ character-long minified site.css
+body {
+  padding-top: initial;
 }
 
 // Skip button
