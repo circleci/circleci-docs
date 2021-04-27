@@ -8,14 +8,6 @@ $white: #FFFFFF;
 $text-color-header: $black-light;
 $transition-duration-medium: 400ms;
 
-// These values are also required, but have been customized to match the nav height of this project.
-$nav-height: 68px;
-$nav-height-mobile: 62px;
-$subnav-height: 64px;
-$nav-offset: $nav-height;
-$subnav-offset: $subnav-height;
-$nav-offset-subnav: $nav-offset + $subnav-offset;
-
 @import 'shared/components/subnav';
 
 // These tweaks to the shared subnav CSS are necessary to work in the context of this project's layout.

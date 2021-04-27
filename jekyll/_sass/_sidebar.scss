@@ -13,7 +13,7 @@ $sidebar-width: 260px;
 .sidebar {
   background: #F7F7F7;
   font-family: "roboto";
-  height: 92vh;
+  height: calc(100vh - #{$nav-height});
   padding: 30px 24px 60px 15px;
   position: absolute;
   width: $sidebar-width;

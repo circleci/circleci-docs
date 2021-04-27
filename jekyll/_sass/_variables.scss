@@ -67,3 +67,11 @@ $font-size-h5: 18px;
 $font-weight-base: 400; 
 $font-weight-thin: 100;
 $font-weight-bold: 600;
+
+// Header and subnav
+$nav-height: 68px;
+$nav-height-mobile: 62px;
+$subnav-height: 64px;
+$nav-offset: $nav-height;
+$subnav-offset: $subnav-height;
+$nav-offset-subnav: $nav-offset + $subnav-offset;
