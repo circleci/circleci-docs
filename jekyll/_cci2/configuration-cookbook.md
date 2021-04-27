@@ -625,7 +625,7 @@ In the above configuration, we:
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
-For a more in-depth explanation of what the `continuation` orb does, see the orb's source code in the
+For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the
 [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or see the
 [Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
 
