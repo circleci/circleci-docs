@@ -145,7 +145,7 @@ Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider ru
 ### **<`job_name`>**
 {: #lessjobnamegreater }
 
-Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
+Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
