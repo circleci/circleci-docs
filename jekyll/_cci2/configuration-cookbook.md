@@ -580,7 +580,7 @@ The following examples of dynamic configuration usage are provided below:
 ### A basic example
 {: #a-basic-example }
 
-The following is a basic example using CircleCI's dynamic configuration feature. In this example, we assume that a 
+The following is a basic example using CircleCI's dynamic configuration feature. In this example, we assume that a
 `generate-config` script already exists. The script outputs a new configuration YAML based on some type
 of work it performs. It could potentially inspect `git` history, pipeline values that get passed to it, or anything
 else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
@@ -737,7 +737,7 @@ In the above configuration, we:
   - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
   - The `check-updated-files` workflow will always run any time this pipeline is triggered
 
-See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more 
+See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more
 information on available elements and required parameters.
 
 ## Use matrix jobs to run multiple OS tests

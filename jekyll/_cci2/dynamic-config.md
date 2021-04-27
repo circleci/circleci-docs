@@ -7,11 +7,11 @@ version:
 ---
 
 You may find that instead of manually creating each and every individual CircleCI configuration per project,
-you would prefer to generate these configurations dynamically depending on specific [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines) 
+you would prefer to generate these configurations dynamically depending on specific [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines)
 parameters or file-paths.
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to
-using multiple repositories to store your code. In the case of using a monorepo, it is of course optimal to only trigger 
+using multiple repositories to store your code. In the case of using a monorepo, it is of course optimal to only trigger
 specific builds in specific areas of your project. Otherwise, all of your microservices/sub-projects will go through 
 the entirety of your build, test, and deployment processes when any single update is introduced. 
 
@@ -45,13 +45,12 @@ To get started with Dynamic Config in CircleCI:
 - Click the **Project Settings** button in the upper-right corner.
 - On the left-hand panel, select **Advanced**.
 - Towards the bottom, toggle the switch for **Enable dynamic config using setup workflows** to the "on" position, as shown below:
-  
 
 ![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
 Now, your project has the ability to dynamically generate and update configuration.
 
-When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) 
+When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation)
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute
 workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
 
@@ -69,7 +68,7 @@ see our [public GitHub repository](https://github.com/CircleCI-Public/api-previe
 
 **Q:** I thought pipeline parameters could only be used with the API?
 
-**A:** Previously, this was true. But using our dynamic configuration feature, you can set pipeline parameters dynamically, 
+**A:** Previously, this was true. But using our dynamic configuration feature, you can set pipeline parameters dynamically,
 before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
 
 ### The continuation Orb
