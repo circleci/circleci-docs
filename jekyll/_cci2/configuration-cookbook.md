@@ -569,18 +569,18 @@ workflows:
 ## Dynamic Configuration
 {: #dynamic-configuration }
 
-This section assumes you have already read the [Dynamic Configuration]({{ site.baseurl }}/2.0/dynamic-config) section and
-have followed the steps outlined in the [Getting Started]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci) guide.
+This section assumes you have already read the [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config) section and
+have followed the steps outlined in the [Getting started]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci) guide.
 
-The following examples of Dynamic Configuration Usage are provided below:
+The following examples of dynamic configuration usage are provided below:
 
-- [A Basic Example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [A basic example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
 - [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 
-### A Basic Example
+### A basic example
 {: #a-basic-example }
 
-The following is a basic example using CircleCI's Dynamic Configuration feature. In this example, we assume that a 
+The following is a basic example using CircleCI's dynamic configuration feature. In this example, we assume that a 
 `generate-config` script already exists. The script outputs a new configuration YAML based on some type
 of work it performs. It could potentially inspect `git` history, pipeline values that get passed to it, or anything
 else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
@@ -588,10 +588,10 @@ else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-ref
 ```yaml
 version: 2.1
 
-# this allows you to use CircleCI's Dynamic Configuration feature
+# this allows you to use CircleCI's dynamic configuration feature
 setup: true 
 
-# the continuation orb is required in order to use Dynamic Configuration
+# the continuation orb is required in order to use dynamic configuration
 orbs:
   continuation: circleci/continuation:0.1.2
 
@@ -617,7 +617,7 @@ workflows:
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's Dynamic Configuration feature
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
 - Invoke the `continuation` orb so we can use it.
 - Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/2.0/executor-intro/). This job:
     - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
@@ -627,7 +627,7 @@ In the above configuration, we:
 
 For a more in-depth explanation of what the `continuation` orb does, see the orb's source code in the
 [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or see the
-[Dynamic Configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
+[Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
 
 ### Execute specific `workflows` or `steps` based on which files are modified
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
@@ -651,16 +651,16 @@ For example, consider a monorepo structure like so:
 └── config.yaml
 ```
 
-An example implementation of CircleCI's Dynamic Configuration for the above use case can be found in the following `config.yaml`:
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yaml`:
 
 ```yaml
 version: 2.1
 
-# this allows you to use CircleCI's Dynamic Configuration feature
+# this allows you to use CircleCI's dynamic configuration feature
 setup: true
 
 # the path-filtering orb is required to continue a pipeline based on the path of an updated fileset
-# the maven orb is also used, as an example on using Dynamic Configuration to build a Java project.
+# the maven orb is also used, as an example on using dynamic configuration to build a Java project.
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
   maven: circleci/maven@1.2.0
@@ -683,7 +683,7 @@ jobs:
           service1/.* run-service-1-job true
           service2/.* run-service-2-job true
         base-revision: master
-        # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. in this case, we are using the parent Dynamic Configuration itself.
+        # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. in this case, we are using the parent dynamic configuration itself.
         config-path: ".circleci/config.yml"
         
   build-service-1:
@@ -723,7 +723,7 @@ workflows:
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's Dynamic Configuration feature
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
 - Invoke the `path-filtering` and `maven` orbs so we can use them.
 - Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
   - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
