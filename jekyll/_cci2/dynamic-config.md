@@ -7,7 +7,7 @@ version:
 ---
 
 You may find that instead of manually creating each and every individual CircleCI configuration per project,
-you would prefer to generate these configurations dynamically depending on specific [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines)
+you would prefer to generate these configurations dynamically, depending on specific [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines)
 parameters or file-paths.
 
 This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to
