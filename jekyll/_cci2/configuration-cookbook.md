@@ -723,7 +723,7 @@ workflows:
 
 In the above configuration, we:
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
+- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 - Invoke the `path-filtering` and `maven` orbs so we can use them.
 - Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
   - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
