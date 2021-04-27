@@ -44,7 +44,7 @@ To get started with Dynamic Config in CircleCI:
 - Select the project you are interested in, in the **Projects** dashboard from the CircleCI application.
 - Click the **Project Settings** button in the upper-right corner.
 - On the left-hand panel, select **Advanced**.
-- Towards the bottom, toggle the switch for **Run Setup Workflows** to the "on" position (it should be blue)
+- Towards the bottom, toggle the switch for **Enable dynamic config using setup workflows** to the "on" position, as shown below:
 
 ![](dynamic-config-enable.png)
 
