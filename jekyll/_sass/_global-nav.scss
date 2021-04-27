@@ -234,7 +234,7 @@ $padding-large-vertical: 11px;
   top: 50%;
   margin-top: -21px;
 
-  input.instantsearch-search {
+  #search-box input.instantsearch-search {
     border: none;
 
     @media (min-width: $screen-md) {
