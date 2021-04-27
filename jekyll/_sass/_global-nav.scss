@@ -363,10 +363,11 @@ $padding-large-vertical: 11px;
   .sidebar-mobile-wrapper {
     max-height: calc(100vh - 230px);
     overflow: auto;
+    border-bottom: 1px solid $gray;
   }
   .mobile-sidebar {
-    padding: 30px 0 15px;
-    border-bottom: 1px solid $gray;
+    padding-top: 30px;
+    padding-bottom: 15px;
   }
 }
 

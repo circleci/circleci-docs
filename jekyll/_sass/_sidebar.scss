@@ -146,6 +146,7 @@ $sidebar-width: 260px;
 
   .mobile-sidebar {
     @extend .sidebar;
+    padding-right: 5px;
     width: 100%;
 
     // Reset various parts of .sidebar
