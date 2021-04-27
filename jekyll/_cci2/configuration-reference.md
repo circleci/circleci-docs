@@ -26,6 +26,16 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
+## **`setup`**
+{: #setup }
+
+Key | Required | Type | Description
+----|-----------|------|------------
+setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config/) feature.
+{: class="table table-striped"}
+
+The `setup` field enables you to conditionally trigger configurations from outside the primary .circleci parent directory, update pipeline parameters, or generate customized configurations.
+
 ## **`version`**
 {: #version }
 
