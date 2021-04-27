@@ -19,7 +19,7 @@ In both of these (and many other) use cases, automatic, dynamic generation of yo
 CircleCI experience and save your team both time and money.
 
 CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that
-`setup` children pipelines through computed pipeline parameters, or by generating followup pipelines via pre-existing scripts.
+`setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts.
 These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml`
 that potentially exists in outside directories.
 
