@@ -48,7 +48,7 @@ The next-generation convenience images in this section were built from the groun
 {: #circleci-base-image }
 
 ```yaml
-image: cimg/base:2020.01
+image: cimg/base:2021.04
 ```
 
 This is a brand new Ubuntu-based image designed to install the very bare minimum. All of the next-generation convenience images that we will be releasing in the coming weeks are based on this image.
@@ -67,7 +67,7 @@ You can find more config examples for this image on the [Developer Hub](https://
 CircleCI is moving to a set of new image repositories that bring better documentation and more determinism. Below is an example image definition for the next-gen Go image.
 
 ```yaml
-image: cimg/go:1.13
+image: cimg/go:1.16
 ```
 
 This is a direct replacement for the legacy CircleCI Go image (`circleci/golang`). Note, the Docker Hub namespace is `cimg`.
@@ -130,9 +130,9 @@ You can pin aspects of a Docker image
 by adding an [image tag](https://docs.docker.com/engine/reference/commandline/tag/#extended-description).
 
 For example,
-instead of `cimg/go:1.14`,
+instead of `cimg/go:1.16`,
 specify the version
-by using `cimg/go:1.14.3`.
+by using `cimg/go:1.16.3`.
 Because the second image specifies a specific version
 it is less likely
 to change unexpectedly.

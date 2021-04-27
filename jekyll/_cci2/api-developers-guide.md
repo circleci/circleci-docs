@@ -60,7 +60,31 @@ To add an API token, perform the steps listed below.
     }
     ```
 
+
 **Note:** All API calls are made in the same way, by making standard HTTP calls, using JSON, a content-type, and your API token. Please note that the JSON examples shown in this document are not comprehensive and may contain additional JSON response fields not shown in the example, based on user input and fields.
+
+### Accept Header
+{: #accept-header }
+
+It is recommended that you specify an accept header in your API requests. The majority
+of API endpoints will return JSON by default, but some endpoints (primarily API
+v1) return EDN if no accept header is specified.
+
+To return formatted JSON, include a `text/plain` header like the example shown below:
+
+```sh
+curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+  --header 'Accept: text/plain'    \
+  https://circleci.com/api/v2/project/{project-slug}/pipeline
+```
+
+To return compressed JSON:
+
+```sh
+curl --header "Circle-Token: $CIRCLECI_TOKEN" \
+  --header 'Accept: application/json'    \
+  https://circleci.com/api/v2/project/{project-slug}/pipeline
+```
 
 ## Getting started with the API
 {: #getting-started-with-the-api }

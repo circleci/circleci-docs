@@ -179,5 +179,4 @@ All CircleCI API endpoints begin with `https://circleci.com/api/v1.1/`
 **API** | **Description**
 ------- | -------------
 /project/:vcs-type/:username/:project/checkout-key/:fingerprint | Deletes a checkout key.
-/project/:vcs-type/:username/:project/build-cache | Clears the cache for a project.
 /project/:vcs-type/:username/:project/ssh-key | Delete the SSH key from a project.

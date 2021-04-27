@@ -135,6 +135,6 @@ NOTE: A namespace is a unique identifier claimed by a user or organization. Each
 
 Almost all standard CircleCI features are available for use with runner jobs, but at present a few features are not yet supported. If these features are important for you to make use of runner jobs, please let us know via the relevant canny page.
 
-- [Rerun with SSH](https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner)
-- [Test Splitting](https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners)
-- [`add_ssh_keys`](https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners)
+- https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[Rerun with SSH]
+- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
+- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
