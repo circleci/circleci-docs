@@ -66,11 +66,11 @@ To add an API token, perform the steps listed below.
 ### Accept Header
 {: #accept-header }
 
-It is recommended to specify an accept header in your API requests. The majority
+It is recommended that you specify an accept header in your API requests. The majority
 of API endpoints will return JSON by default, but some endpoints (primarily API
 v1) return EDN if no accept header is specified.
 
-To return formatted JSON, include a `text/plain` header like so:
+To return formatted JSON, include a `text/plain` header like the example shown below:
 
 ```sh
 curl --header "Circle-Token: $CIRCLECI_TOKEN" \
