@@ -131,6 +131,21 @@ footer {
 }
 
 
+// Logged In/Out State
+body.loggedin {
+	.visitor-item {
+		display: none !important;
+	}
+	.dashboard-link {
+		display: block !important;
+	}
+}
+
+.dashboard-link {
+	display: none !important;
+}
+
+
 // Article
 div.article-container{
 	float: left;
