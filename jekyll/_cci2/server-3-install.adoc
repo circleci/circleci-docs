@@ -128,7 +128,7 @@ WARNING: It is recommended to store these securely; if they are lost, job histor
 ### GitHub
 These settings control authorization to server using Github OAuth and allow for updates to Github using build status information.
 
-NOTE: If this instance is being set up in preparation for a migration from 2.19, it is recommended to use a new 0Auth application, not the same one used in 2.19.
+NOTE: If this instance is being set up in preparation for a migration from 2.19, it is recommended to use a new OAuth application, not the same one used in 2.19.
 
 . *Github Type*: Select Cloud or Enterprise.
 . *OAuth Client ID* (required): In GitHub, navigate to *Settings* > *Developer Settings* > *OAuth Apps* and select the *Register a new application* button.
