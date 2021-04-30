@@ -51,7 +51,7 @@ With a *Supported* platform, users receive the following:
 *Supported* CircleCI runners are available on the following platforms:
 
 * Ubuntu 18.04 or later (x86_64 or ARM64)
-* macOS 10.15+ (Intel)
+* Mac OS X 10.15+ (Intel)
 * macOS 11.2+ (Apple M1)
 
 === Preview
