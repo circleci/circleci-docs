@@ -383,6 +383,7 @@ body.global-nav-open .global-nav--search-button {
 }
 
 .global-nav--external-link {
+  font-weight: $font-weight-bold;
   @media (max-width: $screen-sm-max) {
     color: $black;
   }
