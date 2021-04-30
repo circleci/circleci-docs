@@ -5,9 +5,15 @@
 }
 
 .main-searchbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+
   #search-box {
     position: relative;
     display: block;
+    flex-grow: 1;
 
     .ais-SearchBox-submit {
       position: absolute;
@@ -40,6 +46,17 @@
     .instantsearch-search {
       @extend .base-input-style;
       margin: 0;
+    }
+  }
+
+  &--cancel-button {
+    display: block;
+    color: #7F7F7F;
+    border-left: 1px solid #7F7F7F;
+    padding: 5px 10px;
+
+    @media (min-width: $screen-sm) {
+      display: none;
     }
   }
 }
