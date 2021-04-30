@@ -22,10 +22,18 @@ installation to the data stores you were using for your 2.19 instance.
 
 toc::[]
 
+## Warnings
+- Running the migration script will cause downtime, it is recommend to schedule a maintenance window.
+- This script will stop the 2.19.x instance, and not restart it. It can be restarted manually via the Admin Console.
+- The script works by exporting the content of data stores, then importing that data into the new instance. Exported data will be stored in `migrate/circleci_export`, this data may be useful in debugging problems.
+
 ## Prerequisites
 . Your current CircleCI Server installation is 2.19
 . You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
+. The migration script must be run from a machine with
+- `kubectl` configured for the Server 3.0 instance
+- `ssh` access to the 2.19 services box
 
 ## Migration
 
@@ -38,8 +46,8 @@ toc::[]
   * Hostname of your Server 2.19 installation
   * The path to your SSH key file for your Server 2.19 installation
   * Kubernetes namespace of your Server 3.0 installation
-
-Input the required information and complete the migration process.
+. After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 3.0 instance via the KOTS Admin Console. The keys will be located in `migrate/circleci_export/circle-data`
+. The 3.0 instance will either need to be updated to point at the same bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
 
 NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
 
