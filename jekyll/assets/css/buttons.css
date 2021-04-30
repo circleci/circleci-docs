@@ -2,7 +2,6 @@
   font-weight: 700;
   line-height: 1.5;
   padding: 11px 0;
-  letter-spacing: 1px;
   border-radius: 3px;
   -webkit-transition: all 400ms ease;
           transition: all 400ms ease;
@@ -54,8 +53,8 @@
     background: #04AA51;
     border-color: #04AA51; }
     .btn.primary.green:hover, .btn-primary:hover, .primary.btn-secondary:hover, .btn-secondary.btn-primary-enterprise:hover, .green.btn-primary-enterprise:hover, .primary.green.btn-secondary-enterprise:hover, .primary.green.btn-secondary-enterprise-ico:hover {
-      background: #1CBF43;
-      border-color: #1CBF43; }
+      background: #049B4A;
+      border-color: #049B4A; }
   .btn.primary.blue, .blue.btn-primary, .btn-primary.btn-secondary-enterprise, .btn-primary.btn-secondary-enterprise-ico, .primary.blue.btn-secondary, .btn-primary-enterprise, .primary.btn-secondary-enterprise, .primary.btn-secondary-enterprise-ico {
     color: #FFFFFF;
     background: #27A0B6;
