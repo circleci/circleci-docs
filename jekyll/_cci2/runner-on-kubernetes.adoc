@@ -10,11 +10,11 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
-
 toc::[]
 
 == Introduction
+
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan. CircleCI runner on K8s is currently in preview. For information on our support levels, see <<runner-overview#preview,available platforms>>.
 
 This installation guide is to help setup CircleCI's runner(s) on your Kubernetes cluster. We provide a Helm chart which makes installing the pods easy.
 
