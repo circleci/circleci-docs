@@ -8,6 +8,16 @@ $(document).ready(function () {
   });
 }());
 
+// Show/hide search button on menu collapse
+$(document).ready(function () {
+  $('#global-nav').on('show.bs.collapse', function () {
+    $('body').addClass('global-nav-open');
+  });
+  $('#global-nav').on('hide.bs.collapse', function () {
+    $('body').removeClass('global-nav-open');
+  });
+});
+
 // Collapsing submenus on mobile nav
 (function () {
   // grabbing all expandable submenus

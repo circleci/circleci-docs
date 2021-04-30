@@ -307,6 +307,12 @@ $padding-large-vertical: 11px;
   @media (min-width: $screen-md) {
     display: none;
   }
+
+  transition: opacity 250ms ease;
+}
+
+body.global-nav-open .global-nav--search-button {
+  opacity: 0;
 }
 
 // Customizations/extensions of outer blog-nav
