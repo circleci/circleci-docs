@@ -49,6 +49,7 @@ task :test do
 
   ignore_dirs = [
     "api/v2",
+    "/dashboard",
     "ja/2.0/runner-installation",
     "ja/2.0/security-server",
     "ja/2.0/v.2.19-overview",
