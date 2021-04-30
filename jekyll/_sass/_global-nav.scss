@@ -254,14 +254,18 @@ $padding-large-vertical: 11px;
   top: 50%;
   margin-top: -21px;
 
-  #search-box input.instantsearch-search {
-    border: none;
+  .main-searchbar {
+    // Turn off default input field border
+    #search-box input.instantsearch-search {
+      border: none;
+    }
 
+    // Put border on .main-searchbar element so we can enclose the cancel button on desktop
     @media (min-width: $screen-md) {
       border: 1px solid #BFBFBF;
       border-radius: 2px;
 
-      &:focus {
+      &:focus-within {
         border-color: #279AF1
       }
     }
