@@ -702,8 +702,8 @@ jobs:
         command: '-X verify'
         app_src_directory: 'tests'
 
-# here we specify our workflows, most of which are conditionally executed based upon pipeline parameter values. each 
-# workflow calls a specific job defined above, in the jobs section.
+# here we specify our workflows, most of which are conditionally executed based upon pipeline parameter values. 
+# Each workflow calls a specific job defined above, in the jobs section.
 workflows:
   # when pipeline parameter, run-build-service-1-job is true, the build-service-1 job is triggered.
   service-1:
