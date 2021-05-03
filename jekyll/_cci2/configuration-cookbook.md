@@ -651,7 +651,7 @@ For example, consider a monorepo structure like the example shown below:
 └── config.yml
 ```
 
-An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yaml`:
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
 
 ```yaml
 version: 2.1
@@ -685,7 +685,7 @@ jobs:
           service2/.* run-build-service-2-job true
         base-revision: master
         # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. In this case, we are using the parent dynamic configuration itself.
-        config-path: ".circleci/config.yml"
+        config-path: .circleci/config.yml
   # the build-service-1 job uses the maven orb to build and install service1 artifacts into the maven repository (it does not run tests).
   build-service-1:
     - maven/test:
@@ -732,6 +732,7 @@ In the above configuration, we:
 
 - Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 - Invoke the `path-filtering` and `maven` orbs so we can use them.
+- Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
 - Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
   - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
     the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
