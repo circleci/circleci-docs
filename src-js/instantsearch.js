@@ -212,9 +212,11 @@ export function init () {
   function renderResults (e) {
     if (searchBox.value.length > 0) {
       window.scrollTo(0, 0);
+      searchResetButton.removeAttribute('hidden'); // This is how instantsearch.js shows/hides its reset button
       documentBody.classList.add('search-open');
       window.dispatchEvent(new Event('shown.subnav'));
     } else {
+      searchResetButton.setAttribute('hidden', '');
       clearResults();
     }
   };
@@ -240,6 +242,7 @@ export function init () {
   searchCancelButton.addEventListener('click', function (e) {
     e.preventDefault();
     resetSearch();
+    searchBox.blur();
     documentBody.classList.remove('search-open');
   });
 

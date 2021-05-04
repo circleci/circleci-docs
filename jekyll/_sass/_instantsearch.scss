@@ -57,6 +57,10 @@
 
     @media (min-width: $screen-sm) {
       display: none;
+
+      body.search-open & {
+        display: block;
+      }
     }
   }
 }
