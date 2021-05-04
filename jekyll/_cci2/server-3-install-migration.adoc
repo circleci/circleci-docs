@@ -59,6 +59,17 @@ with contexts on your new Server 3.0 environment by pushing a fresh commit.
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check],
 notify your team of the new CircleCI UI and URL, if it has changed.
 
+## Frequently Asked Questions
+
+### Where did all my job and build history go?
+* All of your existing jobs and build history have been moved to the Legacy Jobs view.  You can view the complete job history using one of the following methods:
+    ** Selecting Projects -> PROJECT_NAME and selecting the `legacy jobs view` link at the bottom of the project's build history
+    ** Using the following URL pattern: `https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
+    ** For specific job append a job number to the URL: `https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB#>`
+
+### Why does nothing happen when I select "Start Building" on my project after migration?
+* By default, a newly added project (a project that has never been followed) will trigger a build automatically after it has been followed for the first time. If the project was or ever has been followed in 2.0 or 3.0, it will not be considered a new project or first build and a build will not be triggered after follow. To trigger a build, perform an activity that will trigger a Github webhook such as pushing up a new commit or branch. 
+
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
 * https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operator Guide]
