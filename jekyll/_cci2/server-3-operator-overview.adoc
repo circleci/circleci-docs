@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-The following guide contains information useful for CircleCI Server Operators.
+The following guide contains information useful for CircleCI Server Operators, or those responsible for ensuring CircleCI Server 3.x is running properly, via maintenance and monitoring.
 
 It is assumed that you have already read the https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview].
 
