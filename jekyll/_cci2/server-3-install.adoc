@@ -381,21 +381,11 @@ option and we recommend you reach out to your account manager to learn more.
 Configure aspects of your Nomad control plane here.
 
 #### Enable Mutual TLS (mTLS)
-mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. Choose to enable or disable this feature here.
-
-WARNING: This should only be disabled if you can guarantee the authenticity of the nodes joining your cluster and confidentiality
-of traffic from them to the control plane in some other way.
-
-. *Nomad Server Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. If you have not
-yet reached Step 3, leave this disabled and modify it later.
-. *Nomad Server Private Key* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. If you have not
-yet reached Step 3, leave this disabled and modify it later.
-. *Nomad Server Certificate Authority (CA) Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>.
-If you have not yet reached Step 3, leave this disabled and modify it later.
+mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
 
 When all required information has been provided, click the *Continue* button and your CircleCI installation will be put
-through a set of preflight checks to verify your cluster meets the minimum requirements. When completed successfully,
-you should see something like the following:
+through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. When completed successfully,
+you should see something like the following and you can continue to the next step:
 
 .Sever v{serverversion} Preflight Checks
 image::preflight-checks.png[Preflight Checks]
@@ -603,11 +593,16 @@ Enter the values obtained from <<Step 3 - Obtain Load Balancer IPs>> into VM Ser
 Load Balancer Hostname, and Nomad Load Balancer Hostname under Global Settings.
 
 ### Nomad
-If you have already deployed the Nomad clients via terraform in <<Step 4 - Install Nomad Clients>> you can and should enable
-mutual TLS (mTLS) now.
 
-Enter the Nomad Server Certificate, Nomad Server Private Key, and Nomad Server Certificate Authority (CA) Certificate
-generated in <<Step 4 - Install Nomad Clients>>.
+mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. If you have already deployed the Nomad clients via terraform in <<Step 4 - Install Nomad Clients>> you can and should enable mutual TLS (mTLS).
+
+WARNING: This should only be disabled if you can guarantee the authenticity of the nodes joining your cluster and confidentiality
+of traffic from them to the control plane in some other way.
+
+. *Nomad Server Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. 
+. *Nomad Server Private Key* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. 
+. *Nomad Server Certificate Authority (CA) Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>.
+
 
 ### Deploy
 Click the *Save config* button to update your installation and re-deploy server.
