@@ -115,7 +115,7 @@ Endpoint       | Description
 ## API v2 and server customers
 {: #api-v2-and-server-customers }
 
-API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x. 
+API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x.
 
 ## Data insights
 {: #data-insights }
