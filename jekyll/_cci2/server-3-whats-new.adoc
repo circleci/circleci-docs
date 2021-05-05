@@ -49,6 +49,7 @@ or security groups won’t allow this. We will provide an optional internal loca
 
 - `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
 - Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
+- Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
 
 == What to read next
 To learn more about Server v3.x, see the following:
