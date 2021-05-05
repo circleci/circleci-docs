@@ -476,7 +476,8 @@ ja:
     - name: Overview
       i18n_name: 概要
       children:
-        - name: Welcome # TODO: get translation.
+        - name: Welcome
+          i18n_name: Welcome # TODO: get translation.
           link: ja/2.0/
         - name: About CircleCI
           link: ja/2.0/about-circleci/
