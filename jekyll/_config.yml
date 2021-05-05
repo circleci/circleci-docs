@@ -59,7 +59,7 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.0.0
+      serverversion: 3.0.1
       terraformversion: 0.13.0
       kubectlversion: 1.19
       helmversion: 3.4.0

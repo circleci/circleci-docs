@@ -352,7 +352,7 @@ en:
       link: 2.0/server-3-overview
       children:
         - name: v3.0 Overview
-          link: 2.0/CircleCI-Server-3.0.0-Overview.pdf
+          link: 2.0/CircleCI-Server-{serverversion}-Overview.pdf
         - name: v3.0 Installation Guide
           link: 2.0/CircleCI-Server-3.0.0-Installation-Guide.pdf
         - name: v3.0 Operations Guide
