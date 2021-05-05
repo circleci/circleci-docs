@@ -642,13 +642,14 @@ For example, consider a monorepo structure like the example shown below:
 
 ```shell
 .
+├── .circleci
+│   └── config.yml
 ├── service1
 │   ├── Service1.java
 ├── service2
 │   ├── Service2.java
 ├── tests
 │   ├── IntegrationTests.java
-└── config.yml
 ```
 
 An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
