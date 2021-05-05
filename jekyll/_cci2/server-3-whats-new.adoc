@@ -12,9 +12,12 @@ version:
 
 Server 3.0 is now generally available. The newest version of server offers the ability to scale under heavy workloads,
 all within your own Kubernetes cluster and private network, while still enjoying the full CircleCI cloud experience.
+
 Server 3.0 includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more. For existing
 customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.0 will receive monthly
 patch releases and quarterly feature releases.
+
+toc::[]
 
 == New Features
 
@@ -41,6 +44,12 @@ and get details of the possible cause of the issue.
 or security groups won’t allow this. We will provide an optional internal local balancer for the frontend services in a future release.
 * https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
 * Support for GPU builders is not yet available.
+
+== Release 3.0.1
+
+- `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
+- Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
+- Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
 
 == What to read next
 To learn more about Server v3.x, see the following:
