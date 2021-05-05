@@ -3,6 +3,7 @@ en:
   icon: icons/sidebar/getting_started.svg
   children:
     - name: Overview
+      link: 2.0/
       children:
         - name: About CircleCI
           link: 2.0/about-circleci/
@@ -473,6 +474,7 @@ ja:
   children:
     - name: Overview
       i18n_name: 概要
+      link: ja/2.0/
       children:
         - name: About CircleCI
           link: ja/2.0/about-circleci/
