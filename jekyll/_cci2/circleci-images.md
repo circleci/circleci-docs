@@ -387,7 +387,7 @@ that a given tag has the same meaning across images!
 {% for image in images %}
 
 ### {{ image[1].name }}
-{: #image1name }
+{: # {{image1name}} }
 {:.no_toc}
 
 **Resources:**
