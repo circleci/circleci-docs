@@ -1,31 +1,7 @@
 <!-- MOBILE SUBNAV /-->
 <div class="sidebar-mobile-wrapper">
-  <!-- DISPLAY ITEM /-->
-  <div class="current-item">
-    {% assign lang = page.lang %}
-    {% assign items = site.data.sidenav[lang] %}
-    {% for item in items %}
-      <div class="mobile-sidebar-item {% if forloop.index != 1 %} hidden {% endif %}" data-id="{{ item.name | slugify }}">
-        {% if item.icon %}
-          {% asset '{{ item.icon }}' class=icon %}
-        {% endif %}
-
-        {% if item.i18n_name %}
-          {% assign display_name = item.i18n_name %}
-        {% else %}
-          {% assign display_name = item.name %}
-        {% endif %}
-
-        <span class="nav-span"><strong>{{ display_name }}</strong></span>
-
-        {% asset docs/arrow-right.svg class="arrow" %}
-      </div>
-    {% endfor %}
-  </div>
-
-  <!-- DROPDOWN /-->
-  <div class="sidebar-mobile-dropdown">
-    <nav class="mobile-sidebar hidden">
+    <nav class="mobile-sidebar">
+      {% assign lang = page.lang %}
       {% assign sidenav = site.data.sidenav[lang] %}
 
       {% for main-item in sidenav %}
@@ -115,5 +91,4 @@
         </ul>
       {% endfor %}
     </nav>
-  </div>
 </div>

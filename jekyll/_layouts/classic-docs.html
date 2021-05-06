@@ -7,11 +7,8 @@
 {% endif %}
 
 <div class="outer">
-  {% include_cached global-nav.html %}
-  {% include_cached main-searchbar.html %}
-  {% include_cached mobile-sidebar.html site=site page=page %}
+  {% include_cached global-nav.html site=site page=page %}
   {% include_cached hits-target.html %}
-
   <div class="main-body">
     {% assign lang = page.lang %}
     {% assign sidenav = site.data.sidenav[lang] %}
