@@ -49,8 +49,6 @@ en:
           link: 2.0/caching/
         - name: Artifacts
           link: 2.0/artifacts/
-        - name: Insights
-          link: 2.0/insights/
         - name: Collecting test data
           link: 2.0/collect-test-data/
         - name: Debugging with SSH
@@ -151,6 +149,8 @@ en:
           link: 2.0/configuration-reference/
         - name: Reusing Configuration
           link: 2.0/reusing-config/
+        - name: Dynamic Configuration
+          link: 2.0/dynamic-config
         - name: Using the CircleCI CLI
           link: 2.0/local-cli/
         - name: Using the CircleCI Configuration Editor
@@ -179,6 +179,21 @@ en:
           link: 2.0/testing-orbs/
         - name: Orb Publishing Process
           link: 2.0/creating-orbs/
+
+- name: Insights
+  icon: icons/sidebar/insights.svg
+  children:
+    - name: Overview
+      link: 2.0/insights/
+    - name: Metrics glossary
+      link: 2.0/insights-glossary/
+    - name: Test Insights
+      link: 2.0/insights-tests/
+    - name: Data Partnerships
+      link: 2.0/insights-partnerships/
+    - name: Insights API
+      link: api/v2/
+      hash: tag/Insights
 
 - name: Projects
   icon: icons/sidebar/projects.svg
@@ -337,7 +352,7 @@ en:
       link: 2.0/server-3-overview
       children:
         - name: v3.0 Overview
-          link: 2.0/CircleCI-Server-3.0.0-Overview.pdf
+          link: 2.0/CircleCI-Server-{serverversion}-Overview.pdf
         - name: v3.0 Installation Guide
           link: 2.0/CircleCI-Server-3.0.0-Installation-Guide.pdf
         - name: v3.0 Operations Guide
@@ -698,6 +713,22 @@ ja:
         - name: Orb Publishing Process
           link: ja/2.0/creating-orbs/
           i18n_name: Orbsパブリッシュ
+
+# TODO - i18n names for insights.
+- name: Insights
+  icon: icons/sidebar/insights.svg
+  children:
+    - name: Overview
+      link: 2.0/insights/
+    - name: Metrics glossary
+      link: 2.0/insights-glossary/
+    - name: Test Insights
+      link: 2.0/insights-tests/
+    - name: Data Partnerships
+      link: 2.0/insights-partnerships/
+    - name: Insights API
+      link: api/v2/
+      hash: tag/Insights
 
 - name: Projects
   i18n_name: プロジェクト

@@ -110,13 +110,12 @@ Endpoint       | Description
 -----------|-----------------------------------------------------
 `POST /project/:vcs-type/:username/:project`  | This endpoint allowed users to trigger a new build.
 `POST /project/:vcs-type/:username/:project/build` | This endpoint enables users to trigger a new build by project.
-`DELETE /project/:vcs-type/:username/:project/build-cache` | This endpoint enabled users to clear the project cache for a specific project.
 `GET /recent-builds` | This endpoint enabled users to retrieve an array of recent builds.
 
 ## API v2 and server customers
 {: #api-v2-and-server-customers }
 
-API v2 is not currently supported for self-hosted installations of CircleCI Server.
+API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x.
 
 ## Data insights
 {: #data-insights }

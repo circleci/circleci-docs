@@ -26,6 +26,16 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
+## **`setup`**
+{: #setup }
+
+Key | Required | Type | Description
+----|-----------|------|------------
+setup | N | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config/) feature.
+{: class="table table-striped"}
+
+The `setup` field enables you to conditionally trigger configurations from outside the primary .circleci parent directory, update pipeline parameters, or generate customized configurations.
+
 ## **`version`**
 {: #version }
 
@@ -145,7 +155,7 @@ Jobs have a maximum runtime of 5 hours. If your jobs are timing out, consider ru
 ### **<`job_name`>**
 {: #lessjobnamegreater }
 
-Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
+Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -356,18 +366,20 @@ jobs:
 {: #available-machine-images }
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
 
+* `ubuntu-1604:202104-01` - Ubuntu 16.04, Docker v19.03.15, Docker Compose v1.29.1, final release by CircleCI
 * `ubuntu-1604:202101-01` - Ubuntu 16.04, Docker v19.03.14, Docker Compose v1.28.2, 2nd to last release
 * `ubuntu-1604:202010-01` - Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4
 * `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 * `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
 
-***Note:*** *Ubuntu 16.04 reaches the end of its LTS window at the end of April 2021 and will no longer be supported by Canonical.
-As a result, the final 16.04 CircleCI machine image release by us will take place in April to include the most recent security patches.
-We suggest upgrading to the Ubuntu 20.04 image for continued releases past April. 2021.*
+***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical.
+As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI.
+We suggest upgrading to the latest Ubuntu 20.04 image for continued releases and support past April 2021.*
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -450,7 +462,7 @@ jobs:
 #### **`branches` – DEPRECATED**
 {: #branches-deprecated }
 
-**This key is deprecated. Use [workflows filtering](#filters) to control which jobs run for which branches.**
+**This key is deprecated. Use [workflows filtering](#jobfilters) to control which jobs run for which branches.**
 
 Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
@@ -1429,7 +1441,7 @@ cron | Y | String | See the [crontab man page](http://pubs.opengroup.org/onlinep
 
 ###### **`filters`**
 {: #filters }
-Filters can have the key `branches`.
+Trigger Filters can have the key `branches`.
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1506,8 +1518,8 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 **Note:** The `hold` job name must not exist in the main configuration.
 
 ###### **`filters`**
-{: #filters }
-Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+{: #jobfilters }
+Job Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 Key | Required | Type | Description
 ----|-----------|------|------------
@@ -1792,16 +1804,17 @@ Logic statements are evaluated to boolean values at configuration compilation
 time, that is - before the workflow is run. The group of logic statements
 includes:
 
-| Type                                                                                                | Arguments          | `true` if                              | Example                                                              |
-|-----------------------------------------------------------------------------------------------------|--------------------|----------------------------------------|----------------------------------------------------------------------|
-| YAML literal                                                                                        | None               | is truthy                              | `true`/`42`/`"a string"`                                             |
-| YAML alias                                                                                          | None               | resolves to a truthy value             | *my-alias                                                            |
-| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`                                          |
-| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                             |
-| and                                                                                                 | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`                                         |
-| or                                                                                                  | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                                         |
-| not                                                                                                 | 1 logic statement  | the argument is not truthy             | `not: true`                                                          |
-| equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
+|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
+| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
+| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
+| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
+| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
+| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
+| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
+| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
+| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
+| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 The following logic values are considered falsy:
@@ -1818,6 +1831,11 @@ All other values are truthy. Further, Please also note that using logic with an 
 Logic statements always evaluate to a boolean value at the top level, and coerce
 as necessary. They can be nested in an arbitrary fashion, according to their
 argument specifications, and to a maximum depth of 100 levels.
+
+`matches` uses [Java regular
+expressions](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html)
+for its `pattern`. It is recommended to enclose a pattern in `^` and
+`$` to avoid accidental partial matches.
 
 **Note:**
 When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
@@ -1840,7 +1858,9 @@ workflows:
     when:
       and:
         - not:
-            equal: [ master, << pipeline.git.branch >> ]
+            matches:
+              pattern: "^master$"
+              value: << pipeline.git.branch >>
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
             - << pipeline.parameters.deploy-canary >>
