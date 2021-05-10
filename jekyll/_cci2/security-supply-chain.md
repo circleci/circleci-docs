@@ -29,7 +29,7 @@ your users using a few tricks.
 {: #using-contexts }
 
 When using CircleCI, you can split credentials and secrets into multiple
-[contexts]({{site.baseurl/2.0/contexts}}) that can be used individually or
+[contexts]({{site.baseurl}}/2.0/contexts) that can be used individually or
 combined in a build step. Avoid putting everything into the org-global context.
 This means that if there is a security error in one build step, only a small
 subset of your credentials are exposed. This effort is known as the [principle
