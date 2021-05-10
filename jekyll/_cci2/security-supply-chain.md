@@ -17,15 +17,16 @@ simultaneously.
 Continuous delivery providers, like CircleCI, understand these risks. We know we
 are the holder of many keys, and we go to great lengths to protect the
 credentials you use to publish and deploy software. No CI/CD-as-a-Service
-provider can guarantee safety, and it is possible to use these platforms in
-insecure ways. 
+provider can guarantee safety, and it is possible to use these platforms in insecure ways.
 
 ## Minimizing risk as a publisher
+{: #minimizing-risk-as-a-publisher }
 
 As both a downstream user or publisher of software, you can protect yourself and
 your users using a few tricks.
 
 ### Using contexts
+{: #using-contexts }
 
 When using CircleCI, you can split credentials and secrets into multiple
 [contexts]({{site.baseurl/2.0/contexts}}) that can be used individually or
@@ -38,19 +39,21 @@ scripts should not have access to your deploy keys simply because nothing in
 that step needs them.
 
 Additionally, you can put sensitive contexts used for deploying and signing
-software into [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context) 
+software into [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context)
 that are governed by your GitHub groups. These secrets are only then accessible
 to authorized users. Combining this with GitHub branch protection requiring
 review before merging can help reduce the likelihood of exposing credentials to
 malicious code.
 
 ### Minimizing risk as a developer
+{: #minimizing-risk-as-a-developer }
 
 If you are a developer using software, a significant portion of your
 dependencies and even tool chain are likely automatically published via
 continuous delivery.
 
 ## Pinning Dependencies
+{: #pinning-dependencies }
 
 Most tools such as yarn, cargo, and pip support the ability to create and use
 lock files to pin dependency versions and even hashes. Some tools can enforce
@@ -86,20 +89,21 @@ $ yarn install  --frozen-lockfile
 
 Many tools for scanning dependency files exist, and many are first party for a
 given language or tool chain. On CircleCI, there are orbs available that offer
-[dependency scanning](https://circleci.com/developer/orbs?query=&category=Security), 
+[dependency scanning](https://circleci.com/developer/orbs?query=&category=Security),
 and cron jobs for periodic scanning to ensure your
 applications are scanning more often than your pushes.
 
 Using dependency pinning with hashes like this prevents malicious binaries or
 packages from silently replacing known good versions. It protects against a
 narrow range of attacks where the upstream repository is compromised. This can
-protect your workstation and CI builds. 
+protect your workstation and CI builds.
 
 ## Conclusion
+{: #conclusion }
 
 CI/CD build systems can be trusted with deploy keys and other secrets, but using
 them safely still falls on the project maintainers. On CircleCI, it is easy to
 enforce isolation by splitting secrets into multiple contexts, using multiple
 build steps, and passing artifacts between steps by using workspace persistence.
 Security is a team sport, and being careful with your builds helps protect
-downstream develops and end users. 
+downstream develops and end users.
