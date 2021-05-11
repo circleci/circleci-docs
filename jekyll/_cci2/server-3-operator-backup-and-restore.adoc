@@ -219,9 +219,6 @@ Velero must have access to the storage bucket containing the backups.
 NOTE: If this is a new cluster or if you need to re-install Velero, the installation should be done with the same credentials
 generated above.
 
-You may run the following kots command to install and restore your instance of CircleCI server via the admin console or via CLI.
-
-// NOTE: IS SOMETHING MISSING HERE?
 
 === Restore a backup using the kots CLI
 
