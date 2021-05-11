@@ -207,7 +207,7 @@ Select the *Start a snapshot* button.
 
 image::kots-admin-create-backup.png[Kots Create Snapshot]
 
-== Step 8 - Restoring a backup
+== Step 7 - Restoring a backup
 
 === Restore a backup from a snapshot
 
