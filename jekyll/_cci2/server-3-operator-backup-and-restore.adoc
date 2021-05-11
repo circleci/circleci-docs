@@ -186,7 +186,7 @@ Now that Velero is installed on your cluster, you should see the snapshots optio
 image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 
 If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
-<<#troubleshooting,troubleshooting steps> below.
+<<troubleshooting-backups-and-restoration, troubleshooting>> section.
 
 == Step 5 - Create the backup with kots CLI
 
