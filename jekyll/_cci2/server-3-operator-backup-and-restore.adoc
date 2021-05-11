@@ -63,7 +63,7 @@ NOTE: us-east-1 does not support a LocationConstraint. If your region is us-east
 aws iam create-user --user-name velero
 ----
 
-* Attach policies to give user velero the necessary permissions:
+* Attach policies to give user `velero` the necessary permissions:
 
 [source,bash]
 ----
@@ -118,7 +118,7 @@ aws iam put-user-policy \
   --policy-document file://velero-policy.json
 ----
 
-* Create an access key for user velero
+* Create an access key for user `velero`
 
 [source,bash]
 ----
@@ -139,7 +139,7 @@ The result should look like this:
 }
 ----
 
-* Create a Velero-specific credentials file (eg: ./credentials-velero) in your local directory:
+* Create a Velero-specific credentials file (eg: `./credentials-velero`) in your local directory:
 
 [source,bash]
 ----
@@ -151,7 +151,7 @@ where the access key id and secret are the values returned from the create-acces
 
 === Install and Start Velero
 
-* Run Velero install command. This will create a namespace called velero and install all the necessary resources to run Velero.
+* Run Velero install command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you have created in the step before.
 
 [source, bash]
@@ -208,23 +208,12 @@ image::kots-admin-create-backup.png[Kots Create Snapshot]
 
 == Restoring CircleCI Server from snapshot
 Unlike other restore procedures, which would require you to reinstall server and then restore the data, restoring CircleCI server from a kots backup does not require you to reinstall server yourself before-hand.
-To restore from a backup stored in your S3 compatible storage, you will need to ensure Velero is installed on your kubernetes cluster as in the instructions above. 
-Velero must also be given access to the storage bucket containing the backups. If this is a new cluster or if you need to re-install Velero, the installation should be done with the same credentials generated above.
+To restore from a backup stored in your S3 compatible storage, you will need to ensure Velero is installed and configured on your kubernetes cluster as in the instructions above.
+Velero must have access to the storage bucket containing the backups.
 
-[source,bash]
-----
-velero install \
-    --provider aws \
-    --plugins velero/velero-plugin-for-aws:v1.2.0 \
-    --bucket <your-bucket-name> \
-    --backup-location-config region=<your-bucket-region> \
-    --snapshot-location-config region=<your-bucket-region> \
-    --secret-file <path-to-aws-velero-credentials-file>
-    --use-restic
-    --wait
-----
+NOTE: If this is a new cluster or if you need to re-install Velero, the installation should be done with the same credentials generated above.
 
-Once Velero is installed, you may run the following kots command to install and restore your instance of CircleCI server via the admin console or via CLI.
+You may run the following kots command to install and restore your instance of CircleCI server via the admin console or via CLI.
 
 === Restore from Backup with kots CLI
 [source,bash]
@@ -286,7 +275,7 @@ Using the command above, you may find 4XX errors which would likely be caused by
 * Then confirm that the credentials provided to Velero can be used to access the bucket. 
 * You may need to run the command to install Velero again, this time with updated bucket info.
 
-You may also check the status of pods in the velero namespace.
+You may also check the status of pods in the `velero` namespace.
 
 ```
 $ kubectl get pods --namespace velero
