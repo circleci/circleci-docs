@@ -161,42 +161,6 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 CircleCI's convenience images fall into two categories: **language** images and
 **service** images. All images add a `circleci` user as a system user. The sections below will walk through the available next-generation and legacy images.
 
-### Legacy language images
-{: #legacy-language-images }
-{:.no_toc}
-
-The legacy language images are convenience images for common programming languages.
-These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
-A language image should be listed first under the `docker` key in your configuration,
-making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
-
-CircleCI maintains legacy images for the languages below.
-
-- [Android](#android)
-- [Clojure](#clojure)
-- [Elixir](#elixir)
-- [Go (Golang)](#go-golang)
-- [JRuby](#jruby)
-- [Node.js](#nodejs)
-- [OpenJDK (Java)](#openjdk)
-- [PHP](#php)
-- [Python](#python)
-- [Ruby](#ruby)
-- [Rust](#rust)
-
-#### Language image variants
-{: #language-image-variants }
-{:.no_toc}
-
-CircleCI maintains several variants for language images. To use these variants,
-add one of the following suffixes to the end of an image tag.
-
-- `-node` includes Node.js for polyglot applications
-- `-browsers` includes Chrome, Firefox, OpenJDK v11, and Geckodriver
-- `-node-browsers` combines the `-node` and `-browsers` variants
-
-For example, if you want to add browsers to the `circleci/golang:1.9` image, use
-the `circleci/golang:1.9-browsers` image.
 
 ### Next-gen language images
 {: #next-gen-language-images }
@@ -235,6 +199,44 @@ next-gen images be sure to check each image listing for information on each
 variant. The `-browsers` variant for next-gen images is still in progress. See
 each image listing on the [Developer Hub](https://circleci.com/developer/images/) 
 for details on which variants it supports.
+
+
+### Legacy language images
+{: #legacy-language-images }
+{:.no_toc}
+
+The legacy language images are convenience images for common programming languages.
+These images include both the relevant language and [commonly-used tools](#pre-installed-tools).
+A language image should be listed first under the `docker` key in your configuration,
+making it the [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"} during execution.
+
+CircleCI maintains legacy images for the languages below.
+
+- [Android](#android)
+- [Clojure](#clojure)
+- [Elixir](#elixir)
+- [Go (Golang)](#go-golang)
+- [JRuby](#jruby)
+- [Node.js](#nodejs)
+- [OpenJDK (Java)](#openjdk)
+- [PHP](#php)
+- [Python](#python)
+- [Ruby](#ruby)
+- [Rust](#rust)
+
+#### Language image variants
+{: #language-image-variants }
+{:.no_toc}
+
+CircleCI maintains several variants for language images. To use these variants,
+add one of the following suffixes to the end of an image tag.
+
+- `-node` includes Node.js for polyglot applications
+- `-browsers` includes Chrome, Firefox, OpenJDK v11, and Geckodriver
+- `-node-browsers` combines the `-node` and `-browsers` variants
+
+For example, if you want to add browsers to the `circleci/golang:1.9` image, use
+the `circleci/golang:1.9-browsers` image.
 
 ### Service images
 {: #service-images }
@@ -362,10 +364,6 @@ images!
 
 **Recent Tags:** <small>(View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"})</small>
 
-<details>
-<br/>
-<summary> <b>Click to view all tags for {{ image[0] }}</b></summary>
-
 <ul class="list-3cols">
 {% assign tags = image[1].tags | sort | reverse %}
 {% assign tagCounter = 1 %}
@@ -380,7 +378,6 @@ images!
 {% endfor %}
 </ul>
 
-</details>
 
 <br/>
 Note: Any variants available for this image can be used by appending the variant tag to the tags above. View all available image tags [here]({{ site.baseurl }}/2.0/docker-image-tags.json){:target="_blank"}.
