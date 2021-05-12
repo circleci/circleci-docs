@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 3.x requires that you https://circleci.com/docs/2.0/server-3-operator-backup-and-restore[backup] your 2.19 installation and then restore the data to the new Server 3.0 installation.
+Migrating from 2.19.x to 3.x requires that you backup your 2.19 installation and then restore the data to the new Server 3.0 installation.
 It does require an already operating Server 3.0 installation. Depending on the size of your data stores, the migration
 can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this
 process in a production environment. This will not only allow you to gain a better understanding of the migration process,
