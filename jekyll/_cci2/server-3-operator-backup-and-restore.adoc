@@ -180,7 +180,7 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 
 As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
 
-== Step 4 - Backing up CircleCI aerver
+== Creating backups
 Now that Velero is installed on your cluster, you should see the snapshots option in the navbar of your kots admin console.
 
 image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
@@ -188,7 +188,7 @@ image::kots-admin-navbar-snapshot-option.png[Kots Navbar]
 If you see this option, you are ready to create your first backup. If you do not see this option, please refer to the
 <<troubleshooting-backups-and-restoration, troubleshooting>> section.
 
-== Step 5 - Create the backup with kots CLI
+=== Option 1 - Create a backup with kots CLI
 
 To create the backup, run:
 
@@ -197,7 +197,7 @@ To create the backup, run:
 kubectl kots backup --namespace <your namespace>
 ----
 
-== Step 6 - Create backup with kots admin console
+=== Option 2 - Create a backup with kots admin console
 
 Select *Snapshots* from the navbar. The default selection should be *Full Snapshots*, which is recommended.
 
@@ -207,9 +207,9 @@ Select the *Start a snapshot* button.
 
 image::kots-admin-create-backup.png[Kots Create Snapshot]
 
-== Step 7 - Restoring a backup
+== Restoring backups
 
-=== Restore a backup from a snapshot
+=== Option 1 - Restore a backup from a snapshot
 
 Unlike other restore procedures, which would require you to reinstall server and then restore the data, restoring CircleCI
 server from a kots backup does not require you to reinstall server yourself before-hand. To restore from a backup stored
@@ -220,7 +220,7 @@ NOTE: If this is a new cluster or if you need to re-install Velero, the installa
 generated above.
 
 
-=== Restore a backup using the kots CLI
+=== Option 2 - Restore a backup using the kots CLI
 
 To restore a backup using the kots CLI, run the following:
 
@@ -229,7 +229,7 @@ To restore a backup using the kots CLI, run the following:
 kubectl kots restore --from-backup <backup-instance-id>
 ----
 
-=== Restore a Backup using the kots administration console UI
+=== Option 3 - Restore a backup using the kots administration console UI
 
 As with backups, navigate to *Snapshots* in kots admin. Now you should see a list of all your backups, each with a restore icon.
 Choose the backup you wish to use and select restore.
@@ -245,7 +245,7 @@ nomad-server cluster.
 
 It should take roughly 10-15 mins for CircleCI server to be restored and operational.
 
-== Scheduling backups with kots
+== Optional - Scheduling backups with kots
 
 To schedule regular backups, select *Snapshots*, and then *Settings & Schedule* from the kots administration console.
 
