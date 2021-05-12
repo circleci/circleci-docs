@@ -32,7 +32,7 @@ Docker Layer Caching can be used with both the [`machine` executor]({{ site.base
 Please note that high usage of [parallelism]({{site.baseurl}}/2.0/configuration-reference/#parallelism) (that is, a parallelism of 30 or above) in your configuration may cause issues with DLC, notably pulling a stale cache or no cache. For example:
 
 - A single job with 30 parallelism will work if only a single workflow is running, however, having more than one workflow will result in cache misses.
-- any job with `parallelism` beyond 30 will experience cache misses regardless of number of workflows runing.
+- any job with `parallelism` beyond 30 will experience cache misses regardless of number of workflows running.
 
 If you are experiencing issues with cache-misses or need high-parallelism, consider trying the experimental [docker-registry-image-cache](https://circleci.com/developer/orbs/orb/cci-x/docker-registry-image-cache) orb.
 
