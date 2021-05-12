@@ -4,6 +4,8 @@ en:
   children:
     - name: Overview
       children:
+        - name: Welcome
+          link: 2.0/
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
@@ -474,6 +476,9 @@ ja:
     - name: Overview
       i18n_name: 概要
       children:
+        - name: Welcome
+          i18n_name: ようこそ
+          link: ja/2.0/
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要
