@@ -14,6 +14,9 @@ version:
 toc::[]
 
 == Overview
+
+NOTE: Backup and Restore is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. 
+
 While operating and administering CircleCI server, you will undoubtedly ponder how to maintain backups 
 and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
 This document outlines our recommendations for how to backup and restore your CircleCI server instance data and state.
