@@ -37,6 +37,8 @@ although you may manually start it back up using the administrative console.
 
 WARNING: Starting the migration process will cause downtime. It is recommended you schedule a maintenance window.
 
+WARNING: Running Server 2.19 and Server 3.0 at the same time can cause issues to your 2.19 build data. Server 2.19 should NOT be restarted if Server 3.0 is running.
+
 ### Step 1 - Clone the repository and run the migration script
 The instructions below will clone the repository containing the Server v2.19.x to Server v3.x migration script.
 The migration script will:
@@ -59,7 +61,7 @@ In a terminal:
   * The path to your SSH key file for your Server 2.19 installation
   * Kubernetes namespace of your Server 3.0 installation
 . After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 3.0 instance via the KOTS Admin Console. The keys will be located in `migrate/circleci_export/circle-data`
-. The 3.0 instance will either need to be updated to point at the same bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
+. The 3.0 instance will either need to be updated to point at the same storage bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
 
 NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
 
