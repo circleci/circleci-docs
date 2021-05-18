@@ -71,7 +71,7 @@ with contexts on your new Server 3.0 environment by pushing a fresh commit.
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check],
 notify your team of the new CircleCI UI and URL, if it has changed.
 
-## Troubleshooting
+## Frequently Asked Questions
 
 ### Where did all my job and build history go?
 * All of your existing jobs and build history have been moved to the Legacy Jobs view.  You can view the complete job history using one of the following methods:
