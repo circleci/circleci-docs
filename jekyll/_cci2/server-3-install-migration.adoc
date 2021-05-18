@@ -22,11 +22,6 @@ installation to the data stores you were using for your 2.19 instance.
 
 toc::[]
 
-## Warnings
-- Running the migration script will cause downtime, it is recommend to schedule a maintenance window.
-- This script will stop the 2.19.x instance, and not restart it. It can be restarted manually via the Admin Console.
-- The script works by exporting the content of data stores, then importing that data into the new instance. Exported data will be stored in `migrate/circleci_export`, this data may be useful in debugging problems.
-
 ## Prerequisites
 . Your current CircleCI Server installation is 2.19
 . You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
@@ -38,8 +33,9 @@ toc::[]
 ## Migration
 
 WARNING: Migrating to Server v3.x will shut down your v2.19.x application. Your v2.19.x application will not be started back up,
-so be sure to keep your team informed of downtime (you may manually start it back up using the administrative console).
+although you may manually start it back up using the administrative console.
 
+WARNING: Starting the migration process will cause downtime. It is recommended you schedule a maintenance window.
 
 ### Step 1 - Clone the repository and run the migration script
 The instructions below will clone the repository containing the Server v2.19.x to Server v3.x migration script.
@@ -53,6 +49,7 @@ The migration script will:
 * Import the data from the previously exported tarball to your new v3.x instance
 
 In a terminal:
+
 . Run `git clone git@github.com:CircleCI-Public/server-scripts.git`
 . Change into the `migrate` directory: `cd server-scripts/migrate`
 . Run the migration script, i.e.: `./migrate.sh`
