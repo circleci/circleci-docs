@@ -17,6 +17,7 @@ CircleCI 2.0. If you’re in a rush, feel free to copy the sample configuration 
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 You can view an example Haskell project that build with CircleCI at the following link:
@@ -29,6 +30,7 @@ href="https://github.com/CircleCI-Public/circleci-demo-haskell/blob/master/.circ
 
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 
@@ -65,7 +67,7 @@ jobs:
             - "/root/.stack"
             - ".stack-work"
       - store_artifacts:
-          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 
@@ -74,6 +76,7 @@ jobs:
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -111,7 +114,7 @@ We are now set to run the Haskell build tool `stack` in our environment. The rem
 `config.yml` file all falls under the `steps` key.
 
 Our first step is to run `checkout` to pull our repository's code down and set
-it up in our environment. 
+it up in our environment.
 
 Next we check if there are any dependencies that can be restored, enabling our
 build to speed up. Following that, we run `stack setup` to pull in the Haskell
@@ -151,7 +154,7 @@ You can read more about the differences between
 
 Finally, we can run our application build commands. We'll run our tests first
 and then move on to install our executable. Running `stack install` will create
-a binary and move it to `~/.local/bin`. 
+a binary and move it to `~/.local/bin`.
 
 ```yaml
       - run:
@@ -166,16 +169,17 @@ Finally, we can take the built executable and store it as an artifact.
 
 ```yaml
       - store_artifacts:
-          # Upload buildresults for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: ~/.local/bin/circleci-demo-haskell-exe 
+          # Upload buildresults for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
+          path: ~/.local/bin/circleci-demo-haskell-exe
           destination: circleci-demo-haskell-exe
 ```
 
 Excellent! You are now setup on CircleCI with a Haskell app.
 
 ## Common troubleshooting
+{: #common-troubleshooting }
 
-The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the `stack test` command 
+The command `stack test` may fail with an out of memory error. Consider adding the `-j1` flag to the `stack test` command
 as seen below (Note: this will reduce test execution to one core, decreasing memory usage as well, but may also increase your test execution time).
 
 ```yaml
@@ -185,6 +189,7 @@ as seen below (Note: this will reduce test execution to one core, decreasing mem
 ```
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

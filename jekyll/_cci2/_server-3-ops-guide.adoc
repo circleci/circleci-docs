@@ -41,4 +41,6 @@ include::server-3-operator-application-lifecycle.adoc[]
 
 include::server-3-operator-troubleshooting-and-support.adoc[]
 
+include::server-3-operator-backup-and-restore.adoc[]
+
 :leveloffset: -1

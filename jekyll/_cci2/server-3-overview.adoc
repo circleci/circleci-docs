@@ -192,7 +192,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | Frontend
 | CircleCI web app and www-api proxy.
 | The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK but no updates will be seen.
-|
+| Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests. 
 
 | inject-bottoken
 |

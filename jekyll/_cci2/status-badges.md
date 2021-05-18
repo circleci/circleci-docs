@@ -10,6 +10,7 @@ version:
 This document describes how to create a badge that displays your project's build status (passed or failed) in a README or other document.
 
 ## Overview
+{: #overview }
 
 Status badges are commonly embedded in project READMEs, although they can be placed in any web document. CircleCI provides a tool to generate embed code for status badges.
 By default, a badge displays the status of a project's default branch, though
@@ -26,6 +27,7 @@ You can generate code for the following formats:
 - pod
 
 ## Generating a status badge
+{: #generating-a-status-badge }
 
 To generate your own status badge, you will need to know and substitute the
 following variables in the code snippets below:
@@ -51,7 +53,7 @@ for a specific branch.
 [![CircleCI](https://circleci.com/gh/circleci/circleci-docs.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 
 # Example for specific branch:
-[![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5)
+[![CircleCI](https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5)
 ```
 
 {:.tab.status.Textile}
@@ -63,7 +65,7 @@ for a specific branch.
 !https://circleci.com/gh/circleci/circleci-docs.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs
 
 # Example for specific branch:
-!https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5
+!https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg!:https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
 ```
 
 {:.tab.status.Rdoc}
@@ -75,7 +77,7 @@ for a specific branch.
 {<img src="https://circleci.com/gh/circleci/circleci-docs.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs]
 
 # Example for specific branch:
-{<img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5]
+{<img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg" alt="CircleCI" />}[https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5]
 ```
 
 
@@ -88,7 +90,7 @@ image:https://circleci.com/<VCS>/<ORG_NAME>/<PROJECT_NAME>.svg?style=svg["<ORG_N
 image:https://circleci.com/gh/circleci/circleci-docs.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs"]
 
 # Example for specific branch:
-image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5"]
+image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg["CircleCI", link="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"]
 ```
 
 
@@ -104,7 +106,7 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 
 # Example for specific branch:
 .. image:: https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg
-    :target: https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5
+    :target: https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5
 ```
 
 {:.tab.status.pod}
@@ -116,11 +118,12 @@ image:https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?
 =for HTML <a href="https://circleci.com/gh/circleci/circleci-docs"><img src="https://circleci.com/gh/circleci/circleci-docs.svg?style=svg"></a>
 
 # Example for specific branch:
-=for HTML <a href="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5"><img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg"></a>
+=for HTML <a href="https://circleci.com/gh/circleci/circleci-docs/?branch=teesloane-patch-5"><img src="https://circleci.com/gh/circleci/circleci-docs/tree/teesloane-patch-5.svg?style=svg"></a>
 
 ```
 
 ## Creating badges for private repositories
+{: #creating-badges-for-private-repositories }
 
 
 **NOTE:** To create a status badge for a private project you will need to
@@ -137,19 +140,21 @@ Permissions** and create a token scoped to `Status`.
 
 
 ## Different styles
+{: #different-styles }
 
 If you find the default status badge too minimal, you can use the [shield style](https://shields.io/).
 To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
 
-![Passed `svg` version]({{ site.baseurl }}/assets/img/docs/svg-passed.png) 
+![Passed `svg` version]({{ site.baseurl }}/assets/img/docs/svg-passed.png)
 
 ![Failed `svg` version]({{ site.baseurl }}/assets/img/docs/svg-failed.png)
 
-![Passing shield version]({{ site.baseurl }}/assets/img/docs/shield-passing.png) 
+![Passing shield version]({{ site.baseurl }}/assets/img/docs/shield-passing.png)
 
 ![Failing shield version]({{ site.baseurl }}/assets/img/docs/shield-failing.png)
 
- 
+
 ## See also
+{: #see-also }
 
 [Status]({{ site.baseurl }}/2.0/status/)

@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 3.0 requires that you back up your 2.19 installation and then restore the data to the new Server 3.0 installation.
+Migrating from 2.19.x to 3.0 requires that you backup your 2.19 installation and then restore the data to the new Server 3.0 installation.
 It does require an already operating Server 3.0 installation. Depending on the size of your data stores, the migration
 can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this
 process in a production environment. This will not only allow you to gain a better understanding of the migration process,
@@ -22,16 +22,24 @@ installation to the data stores you were using for your 2.19 instance.
 
 toc::[]
 
+## Warnings
+- Running the migration script will cause downtime, it is recommend to schedule a maintenance window.
+- This script will stop the 2.19.x instance, and not restart it. It can be restarted manually via the Admin Console.
+- The script works by exporting the content of data stores, then importing that data into the new instance. Exported data will be stored in `migrate/circleci_export`, this data may be useful in debugging problems.
+
 ## Prerequisites
 . Your current CircleCI Server installation is 2.19
 . You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
-. You have password-less `sudo` access on the services machine.
+. The migration script must be run from a machine with
+- `kubectl` configured for the Server 3.0 instance
+- `ssh` access to the 2.19 services box
 
 ## Migration
 
 WARNING: Migrating to Server v3.x will shut down your v2.19.x application. Your v2.19.x application will not be started back up,
-so be sure to keep your team informed of downtime.
+so be sure to keep your team informed of downtime (you may manually start it back up using the administrative console).
+
 
 ### Step 1 - Clone the repository and run the migration script
 The instructions below will clone the repository containing the Server v2.19.x to Server v3.x migration script.
@@ -40,7 +48,7 @@ The migration script will:
 * Stop your v2.19.x application
 * Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases
 * Archive existing application data for Vault and CircleCI encryption/signing keys
-* Export the tarball to your v3.x installation
+* Export the tarball to your v3.x installation (exported data stores are stored in `migrate/circleci_export`, which may be useful for debugging purposes).
 * Scale v3.x application deployments down to zero, and then to one
 * Import the data from the previously exported tarball to your new v3.x instance
 
@@ -53,8 +61,8 @@ In a terminal:
   * Hostname of your Server 2.19 installation
   * The path to your SSH key file for your Server 2.19 installation
   * Kubernetes namespace of your Server 3.0 installation
-
-Input the required information and complete the migration process.
+. After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 3.0 instance via the KOTS Admin Console. The keys will be located in `migrate/circleci_export/circle-data`
+. The 3.0 instance will either need to be updated to point at the same bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
 
 NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
 
@@ -66,8 +74,16 @@ with contexts on your new Server 3.0 environment by pushing a fresh commit.
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check],
 notify your team of the new CircleCI UI and URL, if it has changed.
 
-// TO DO:
-// ### Troubleshooting
+## Troubleshooting
+
+### Where did all my job and build history go?
+* All of your existing jobs and build history have been moved to the Legacy Jobs view.  You can view the complete job history using one of the following methods:
+    ** Selecting Projects -> PROJECT_NAME and selecting the `legacy jobs view` link at the bottom of the project's build history
+    ** Using the following URL pattern: `https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs`
+    ** For specific job append a job number to the URL: `https://<APP_DOMAIN>/pipelines/github/<ORG>/<PROJECT>/jobs/<JOB#>`
+
+### Why does nothing happen when I select "Start Building" on my project after migration?
+* By default, a newly added project (a project that has never been followed) will trigger a build automatically after it has been followed for the first time. If the project was or ever has been followed in 2.0 or 3.0, it will not be considered a new project or first build and a build will not be triggered after follow. To trigger a build, perform an activity that will trigger a Github webhook such as pushing up a new commit or branch.
 
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]

@@ -103,7 +103,6 @@ API v2 のすべてのエンドポイントは、[API v2 リファレンス ガ�
 | ---------------------------------------------------------- | ------------------------------ |
 | `POST /project/:vcs-type/:username/:project`               | 新規ビルドをトリガーします。                 |
 | `POST /project/:vcs-type/:username/:project/build`         | 指定したプロジェクトで新規ビルドをトリガーします。      |
-| `DELETE /project/:vcs-type/:username/:project/build-cache` | 特定のプロジェクトのプロジェクト キャッシュをクリアします。 |
 | `GET /recent-builds`                                       | 最近のビルドのサマリーを配列で取得します。          |
 
 ## オンプレミス版をご利用のお客様

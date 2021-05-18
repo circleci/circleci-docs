@@ -13,6 +13,7 @@ Take a look through some of the tips and best practices listed below, for migrat
 {:toc}
 
 ## You can build the same project on both CircleCI 1.0 and 2.0!
+{: #you-can-build-the-same-project-on-both-circleci-10-and-20 }
 
 When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:
 
@@ -23,6 +24,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - When you have everything working you can merge the branch with the new config into your main project.
 
 ## Tips for setting up CircleCI 2.0
+{: #tips-for-setting-up-circleci-20 }
 
 - Commands listed in the `steps` may only be run in the first container listed in the `docker` section.
 - Run builds frequently to test the config so if something breaks, you will know what changed since the last build.
@@ -56,6 +58,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 
 ## Tips for migrating from 1.0 to 2.0
+{: #tips-for-migrating-from-10-to-20 }
 
 - Note that `$CIRCLE_ARTIFACTS` and `$CIRCLE_TEST_REPORTS` are not defined in 2.0
 	- You can define them yourself, but be sure to `mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS` if you do.
@@ -67,14 +70,17 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 
 ## Python
+{: #python }
 - Typically expects classnames and not filenames to run tests
 
 ## Ruby
+{: #ruby }
 - Ruby files can load in a different order than expected on AUFS
 - Define `$RAILS_ENV` and `$RACK_ENV` as `test` (this was automatic in 1.0)
 
 
 ## Java
+{: #java }
 - Java (apps, tools, and services) will OOM (run out of memory) because it doesn't recognize how much RAM is available. An environment variable should be defined. If it's still running out of memory, a bigger container is necessary.
 	- [CircleCI How to Handle OOM Errors blog](https://circleci.com/blog/how-to-handle-java-oom-errors/)
 - Scala projects can have filenames that are too long, include the `-Xmax-classfile-name` flag.
@@ -96,13 +102,14 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Tests can sometimes be flaky and may appear to fail for no reason. You can re-run your failing browser tests automatically, however, this will corrupt the timing data.
 - Take screenshots of failed tests to make debugging easier.
 - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. Run this from one of our browsers images:
+
 ```
-			ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
-			sudo apt install vnc4server metacity
-			vnc4server -geometry 1280x1024 -depth 24
-			export DISPLAY=:1.0
-			metacity &
-			firefox &
+ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
+sudo apt install vnc4server metacity
+vnc4server -geometry 1280x1024 -depth 24
+export DISPLAY=:1.0
+metacity &
+firefox &
 ```
 
 ## Tips for docker
@@ -139,12 +146,14 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - You are limited by your imagination in CircleCI 2.0
 - The shell can be set to Python to just execute arbitrary Python in the YAML
-```
+
+```yml
 			- run:
 				shell: /usr/bin/python3
 				command:
 					import sys
 					print(sys.version)
 ```
+
 - You can be clever with bash to achieve whatever you need
 			`for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
