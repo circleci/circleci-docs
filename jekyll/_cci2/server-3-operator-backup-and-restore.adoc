@@ -14,33 +14,35 @@ version:
 toc::[]
 
 == Overview
-While operating and administering CircleCI server, you will undoubtedly ponder how to maintain backups 
+While operating and administering CircleCI server, you will undoubtedly ponder how to maintain backups
 and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
 This document outlines our recommendations for how to backup and restore your CircleCI server instance data and state.
 
-CircleCI server is administered via https://kots.io/[Kots], which uses https://velero.io/[Velero] for backup and restore. 
+CircleCI server is administered via https://kots.io/[Kots], which uses https://velero.io/[Velero] for backup and restore.
 The benefit of this approach is that it not only restores your application's data,
 but it also restores the state of the Kubernetes cluster and its resources at the time of the backup.
 In this way, we can also restore admin-console configurations and customizations you made to your cluster.
 
 == The setup
 
-Backups of CircleCI server can be created quite easily through https://kots.io/[Kots]. 
+Backups of CircleCI server can be created quite easily through https://kots.io/[Kots].
 To enable backup support however, you will need to install and configure https://velero.io/[Velero] on your cluster.
 Below, we will outline the steps needed to install Velero on your cluster.
 
 . Download and install the https://velero.io/docs/v1.6/basic-install/[Velero CLI] for your environment.
-. You will also need an https://velero.io/docs/v1.6/supported-providers/[S3 compatible storage bucket] created.
+. You will also need an https://velero.io/docs/v1.6/supported-providers/[storage bucket] created with the cloud storage provider of your choice.
 
+First, we will go over the steps to use Velero in AWS using S3 as storage. Further down you will find instructions for GCP with GCS.
+
+== Installation on AWS with S3
 The following steps will assume AWS as the provider and that you have https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html[aws cli] installed,
 however you may always refer to the https://velero.io/docs/v1.6/supported-providers/[linked documentation] for instructions on your specific bucket provider.
 
-NOTE: kots backups require [restic](https://restic.net/) to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
-Below we discuss installation on AWS for an S3 bucket, however you may refer to these https://velero.io/docs/v1.6/supported-providers/[docs] for your provider.
+NOTE: kots backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
 
 These instructions were sourced from the Velero documentation https://github.com/vmware-tanzu/velero-plugin-for-aws#setup[here].
 
-== Step 1 - Create an AWS S3 bucket
+=== Step 1 - Create an AWS S3 bucket
 [source,bash]
 ----
 BUCKET=<YOUR_BUCKET>
@@ -52,7 +54,7 @@ aws s3api create-bucket \
 ----
 NOTE: us-east-1 does not support a https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html#API_CreateBucket_RequestBody[LocationConstraint]. If your region is us-east-1, omit the bucket configuration
 
-== Step 2 - Setup permissions for Velero
+=== Step 2 - Setup permissions for Velero
 
 * Create an IAM user
 
@@ -147,7 +149,7 @@ aws_secret_access_key=<AWS_SECRET_ACCESS_KEY>
 ----
 where the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` placeholders are values returned from the `create-access-key` request in the previous step.
 
-== Step 3 - Install and start Velero
+=== Step 3 - Install and start Velero
 
 * Run the following `velero` `install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
 Make sure that you pass the correct file name containing the AWS credentials that you have created in the step before.
@@ -160,8 +162,8 @@ velero install \
     --bucket $BUCKET \
     --backup-location-config region=$REGION \
     --snapshot-location-config region=$REGION \
-    --secret-file ./credentials-velero
-    --use-restic
+    --secret-file ./credentials-velero \
+    --use-restic \
     --wait
 ----
 
@@ -179,6 +181,167 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
 As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
+
+== Installation on GCP with GCS
+
+To follow the instruction steps for Google Cloud Platform, it is necessary that you have `gcloud` and `gsutil` installed and configured locally.
+Should that not be the case, you can follow Google's https://cloud.google.com/sdk/docs/[user guide] to set them up.
+
+NOTE: kots backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set.
+
+These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
+
+=== Step 1 - Create a GCP bucket
+To reduce the chance of typos, we will set some of the parameters as shell variables. Should you be unable to complete all the steps in the same session,
+do not forget to re-set variables as necessary before proceeding. In the step below, for example, we will define a variable for your bucket name. Replace
+the `<YOUR_BUCKET>` placeholder with the name of the bucket you want to create for your backups.
+
+[source,bash]
+----
+BUCKET=<YOUR_BUCKET>
+
+gsutil mb gs://$BUCKET/
+----
+
+=== Step 2 - Setup permissions for Velero
+
+If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be
+created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+
+. First, we will set a shell variable for your project ID. To do so, first make sure that your `gcloud` points to the correct project by looking at the current config:
++
+[source,bash]
+----
+gcloud config list
+----
+
+. If the project is correct, set the variable:
++
+[source,bash]
+----
+PROJECT_ID=$(gcloud config get-value project)
+----
+
+. Create a service account
++
+[source,bash]
+----
+gcloud iam service-accounts create velero \
+    --display-name "Velero service account"
+----
+NOTE: If you run several clusters with velero, you might want to consider using a more specific name for the Service Account than `velero` as suggested here
+
+. You can check if the service account has been created successfully by running
++
+[source,bash]
+----
+gcloud iam service-accounts list
+----
+
+. Next, store the email address for the Service Account in a variable:
++
+[source,bash]
+----
+SERVICE_ACCOUNT_EMAIL=$(gcloud iam service-accounts list \
+  --filter="displayName:Velero service account" \
+  --format 'value(email)')
+----
+Modify the command as needed to match the display name you have chosen for your Service Account.
+
+. Grant the necessary permissions to the Service Account
++
+[source,bash]
+----
+ROLE_PERMISSIONS=(
+    compute.disks.get
+    compute.disks.create
+    compute.disks.createSnapshot
+    compute.snapshots.get
+    compute.snapshots.create
+    compute.snapshots.useReadOnly
+    compute.snapshots.delete
+    compute.zones.get
+)
+
+gcloud iam roles create velero.server \
+    --project $PROJECT_ID \
+    --title "Velero Server" \
+    --permissions "$(IFS=","; echo "${ROLE_PERMISSIONS[*]}")"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:$SERVICE_ACCOUNT_EMAIL \
+    --role projects/$PROJECT_ID/roles/velero.server
+
+gsutil iam ch serviceAccount:$SERVICE_ACCOUNT_EMAIL:objectAdmin gs://${BUCKET}
+----
+
+Now you need to ensure that Velero can use this Service Account.
+
+==== Option 1: JSON key file
+
+You can simply pass a JSON credentials file to Velero to authorize it performing actions as the Service Account. To do this, we first need to create a key:
+[source,bash]
+----
+gcloud iam service-accounts keys create credentials-velero \
+    --iam-account $SERVICE_ACCOUNT_EMAIL
+----
+After running this, you should have a file named `credentials-velero` in your local working directory.
+
+==== Option 2: Workload Identities
+
+If you are already using Workload Identities in your cluster, you can bind
+the GCP Service Account you just created to Velero's Kubernetes service account. In this case, though, the GCP Service Account will need the
+`iam.serviceAccounts.signBlob` role in addition to the permissions already specified above.
+
+=== Step 3 - Install and start Velero
+
+* Run the following `velero` `install` command. This will create a namespace called `velero` and install all the necessary resources to run Velero.
+
+==== If using a key file
+
+[source, bash]
+----
+velero install \
+    --provider gcp \
+    --plugins velero/velero-plugin-for-gcp:v1.2.0 \
+    --bucket $BUCKET \
+    --secret-file ./credentials-velero \
+    --use-restic \
+    --wait
+----
+
+==== If using Workload Identities
+
+[source,bash]
+----
+velero install \
+    --provider gcp \
+    --plugins velero/velero-plugin-for-gcp:v1.2.0 \
+    --bucket $BUCKET \
+    --no-secret \
+    --sa-annotations iam.gke.io/gcp-service-account=$SERVICE_ACCOUNT_EMAIL \
+    --backup-location-config serviceAccount=$SERVICE_ACCOUNT_EMAIL \
+    --use-restic \
+    --wait
+----
+
+For more options on customizing your installation refer to the https://github.com/vmware-tanzu/velero-plugin-for-gcp#install-and-start-velero[Velero docs].
+
+* Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset. eg:
+
+[source,bash]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Running   0          2m
+restic-94ptv              1/1     Running   0          2m
+restic-ch6m9              1/1     Running   0          2m
+restic-mknws              1/1     Running   0          2m
+velero-68788b675c-dm2s7   1/1     Running   0          2m
+----
+
+As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
+
 
 == Creating backups
 Now that Velero is installed on your cluster, you should see the snapshots option in the navbar of your kots admin console.
@@ -283,8 +446,8 @@ You may need to reinstall Velero as a result.
 If you experience an error during backup or restore processes, the first place to look would be the Velero logs.
 Using the command above, you may find 4XX errors, which would likely be caused by issues with your storage bucket access.
 
-* Confirm that your bucket exists and is in the region you expect. 
-* Then confirm that the credentials provided to Velero can be used to access the bucket. 
+* Confirm that your bucket exists and is in the region you expect.
+* Then confirm that the credentials provided to Velero can be used to access the bucket.
 * You may need to run the command to install Velero again, this time with updated bucket info.
 
 You may also check the status of pods in the `velero` namespace.
