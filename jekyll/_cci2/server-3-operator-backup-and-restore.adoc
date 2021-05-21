@@ -35,7 +35,6 @@ Below, we will outline the steps needed to install Velero on your cluster.
 === Prerequisites
 
 - Download and install the https://velero.io/docs/v1.6/basic-install/[Velero CLI] for your environment.
-- You will also need a https://velero.io/docs/v1.6/supported-providers/[storage bucket] created with the cloud storage provider of your choice.
 
 ==== AWS Prerequisites
 
