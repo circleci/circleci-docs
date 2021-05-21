@@ -195,6 +195,8 @@ The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_
 | 2xlarge+<sup>(2)</sup> | 20    | 40GB |
 {: class="table table-striped"}
 
+<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
+
 Where example usage looks like the following:
 
 ```yaml
