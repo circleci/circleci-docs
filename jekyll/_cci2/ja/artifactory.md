@@ -32,7 +32,7 @@ Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to 
 
 ## JFrog CLI
 {: #jfrog-cli }
-If you want to use the JFrog CLI, you can install it by adding the following to your `.circleci/config.yml` :
+If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
 
 ```
 - run:
@@ -41,11 +41,10 @@ If you want to use the JFrog CLI, you can install it by adding the following to 
 
 ```
 
-Now we need to configure JFrog to use our credentials securely. We configure the client to use our `$ARTIFACTORY_URL`, along with our `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. These can be entered under `Project Settings->Environment Variables`
+Now we need to configure JFrog to use our credentials securely. We configure the client to use our `$ARTIFACTORY_URL`, along with our `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. These can be entered under `Project Settings->Environment Variables`. Configure the CLI to use these settings:
 
 ```
-- run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
-
+- run: ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 ```
 
 If you would like to upload JAR files use the following example:
@@ -80,12 +79,12 @@ jobs:
           command: |
             mvn clean install
       - run:
-          name: Install jFrog CLI
+          name: Install JFrog CLI
           command: curl -fL https://getcli.jfrog.io | sh
       - run:
           name: Push to Artifactory
           command: |
-            ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
+            ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
             ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
             ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
             ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
