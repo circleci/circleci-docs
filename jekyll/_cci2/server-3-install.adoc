@@ -378,7 +378,8 @@ to take effect. You have the option of terminating those instances manually, if 
 option and we recommend you reach out to your account manager to learn more.
 
 ### Nomad
-You will configure aspects of your Nomad control plane in step 3 after completing Nomad setup in step 2. This section can be left with its default values until step 3, with the exception of mTLS which should be disabled until after completing step 4. 
+You will configure aspects of your Nomad control plane in <<Step 3 - Obtain Load Balancer IPs, Step 3>> after completing the Nomad setup in <<Step 2 - Configure Server (Part 1), Step 2>>.
+This section can be left with its default values until <<Step 3 - Obtain Load Balancer IPs, Step 3>>, with the exception of mTLS, which should be only be enabled after completing <<Step 4 - Install Nomad Clients, Step 4>>.
 
 #### Enable Mutual TLS (mTLS)
 mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
