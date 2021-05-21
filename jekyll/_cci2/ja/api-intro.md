@@ -106,17 +106,16 @@ The table below describes the new endpoints that have been added to the CircleCI
 
 For this updated API v2 release, several endpoints have been deprecated, which are listed in the table below.
 
-| エンドポイント                                                    | 説明                             |
-| ---------------------------------------------------------- | ------------------------------ |
-| `POST /project/:vcs-type/:username/:project`               | 新規ビルドをトリガーします。                 |
-| `POST /project/:vcs-type/:username/:project/build`         | 指定したプロジェクトで新規ビルドをトリガーします。      |
-| `DELETE /project/:vcs-type/:username/:project/build-cache` | 特定のプロジェクトのプロジェクト キャッシュをクリアします。 |
-| `GET /recent-builds`                                       | 最近のビルドのサマリーを配列で取得します。          |
+| エンドポイント                                            | 説明                                                                 |
+| -------------------------------------------------- | ------------------------------------------------------------------ |
+| `POST /project/:vcs-type/:username/:project`       | 新規ビルドをトリガーします。                                                     |
+| `POST /project/:vcs-type/:username/:project/build` | 指定したプロジェクトで新規ビルドをトリガーします。                                          |
+| `GET /recent-builds`                               | This endpoint enabled users to retrieve an array of recent builds. |
 
 ## API v2 and server customers
 {: #api-v2-and-server-customers }
 
-API v2 is not currently supported for self-hosted installations of CircleCI Server.
+API v2 is not supported for self-hosted installations of CircleCI Server 2.x. API v2 is supported for self-hosted installations of CircleCI Server 3.x.
 
 ## Data insights
 {: #data-insights }
