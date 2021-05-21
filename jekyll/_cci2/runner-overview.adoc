@@ -51,7 +51,8 @@ With a *Supported* platform, users receive the following:
 *Supported* CircleCI runners are available on the following platforms:
 
 * Ubuntu 18.04 or later (x86_64 or ARM64)
-* macOS 10.15+ (Intel)
+* Mac OS X 10.15+ (Intel)
+* macOS 11.2+ (Apple M1)
 
 === Preview
 
@@ -70,7 +71,6 @@ With a *Preview* platform, users receive the following:
 * Docker
 * Kubernetes
 * Windows
-* macOS (Apple M1)
 
 NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
 have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]

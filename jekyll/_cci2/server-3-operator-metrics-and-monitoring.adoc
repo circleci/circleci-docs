@@ -10,6 +10,8 @@ version:
 :toc: macro
 :toc-title:
 
+NOTE: Backup and Restore is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release.
+
 Metrics such as CPU or memory usage, number of executed builds and internal metrics are useful in:
 
 * Quickly detecting incidents and abnormal behavior

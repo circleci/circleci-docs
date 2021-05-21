@@ -131,7 +131,7 @@
   }
 }
 
-ul.results-nav {
+.subnav.component ul.results-nav {
   margin: 0;
   padding: 0;
   border-bottom: 1px solid #D8D8D8;
@@ -139,6 +139,20 @@ ul.results-nav {
   li {
     font-weight: 500;
     color: $gray-dark;
+
+    // Reduce horizontal margin to fit on very narrow screens with result counts populated
+    @media (max-width: $screen-xxs-max) {
+      margin-left:  12px;
+      margin-right: 12px;
+
+      // Specificity rules make the above override the rules that suppress leading/trailing margins, so re-specify those here:
+      &:first-child {
+        margin-left: 0;
+      }
+      &:first-last {
+        margin-left: 0;
+      }
+    }
 
     &.active {
       color: $black-light;
