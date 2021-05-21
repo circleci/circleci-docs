@@ -10,10 +10,10 @@ version:
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 3.0 requires that you backup your 2.19 installation and then restore the data to the new Server 3.0 installation.
-It does require an already operating Server 3.0 installation. Depending on the size of your data stores, the migration
-can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this
-process in a production environment. This will not only allow you to gain a better understanding of the migration process,
+Migrating from 2.19.x to 3.0 requires backing up your 2.19 instance data (Mongo, Postgres, and Vault) and than restoring that data in a waiting Server 3.0
+instance. If you run into trouble you are able to fallback to your 2.19 instance. It does require an already operating Server 3.0 installation. Depending 
+on the size of your data stores, the migration can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing 
+this process in a production environment. This will not only allow you to gain a better understanding of the migration process,
 but will also give you a feel for how long the migration will take to complete.
 
 NOTE: If you have externalized your data stores (Mongo, Postgres, and Vault), then you need to wait until the Server 3.1
@@ -44,11 +44,14 @@ The instructions below will clone the repository containing the Server v2.19.x t
 The migration script will:
 
 * Stop your v2.19.x application
+* Perform pre-flight checks to confirm namespace and datastores for 2.19.x. 
 * Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases
 * Archive existing application data for Vault and CircleCI encryption/signing keys
-* Export the tarball to your v3.x installation (exported data stores are stored in `migrate/circleci_export`, which may be useful for debugging purposes).
-* Scale v3.x application deployments down to zero, and then to one
-* Import the data from the previously exported tarball to your new v3.x instance
+* Export the 2.19.x tarball to your v3.x installation (exported data stores are stored in `migrate/circleci_export`, which may be useful for debugging purposes).
+* Perform pre-flight checks to confirm namespace and datastores for 3.x instance. 
+* Scale v3.x application deployments down to zero.
+* Import the data from the previously exported tarball to your new v3.x instance.
+* Scale v3.x application deployments up to one.
 
 In a terminal:
 
@@ -83,6 +86,9 @@ notify your team of the new CircleCI UI and URL, if it has changed.
 
 ### Why does nothing happen when I select "Start Building" on my project after migration?
 * By default, a newly added project (a project that has never been followed) will trigger a build automatically after it has been followed for the first time. If the project was or ever has been followed in 2.0 or 3.0, it will not be considered a new project or first build and a build will not be triggered after follow. To trigger a build, perform an activity that will trigger a Github webhook such as pushing up a new commit or branch.
+
+### I got an error "Error from server (NotFound):" 
+* The script assumes a specific naming patterns for your Postgres and MongoDB. If you get this error, it may indicate a non-standard installation, a missing DB migration, or other issues. In this case it is best to contact support with a support bundle and the output from the migration script. 
 
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
