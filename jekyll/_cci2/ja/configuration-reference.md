@@ -26,17 +26,27 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
+## **`setup`**
+{: #setup }
+
+| キー    | 必須 | 型       | 説明                                                                                                                        |
+| ----- | -- | ------- | ------------------------------------------------------------------------------------------------------------------------- |
+| setup | N  | Boolean | Designates the config.yaml for use of CircleCI's [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config/) feature. |
+{: class="table table-striped"}
+
+The `setup` field enables you to conditionally trigger configurations from outside the primary .circleci parent directory, update pipeline parameters, or generate customized configurations.
+
 ## **`version`**
 {: #version }
 
-| キー      | 必須 | 型      | 説明                                                                                                                                                                                                               |
-| ------- | -- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| version | Y  | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs. |
+| Key     | Required | Type   | Description                                                                                                                                                                                                      |
+| ------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| version | Y        | String | `2`, `2.0`, or `2.1` See the [Reusing Config]({{ site.baseurl }}/2.0/reusing-config/) doc for an overview of new 2.1 keys available to simplify your `.circleci/config.yml` file, reuse, and parameterized jobs. |
 {: class="table table-striped"}
 
 The `version` field is intended to be used in order to issue warnings for deprecation or breaking changes.
 
-## **`orbs`** (version: 2.1 が必須)
+## **`orbs`** (requires version: 2.1)
 {: #orbs-requires-version-21 }
 
 | Key       | Required | Type | Description                                                                                                                                                                                                                                          |
@@ -57,9 +67,9 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference.
+In the above example, `hello` is considered the orbs reference; whereas `circleci/hello-build@0.0.5` is the fully-qualified orb reference. You can learn more about orbs [here](https://circleci.com/orbs/)
 
-## **`commands`** (version: 2.1 が必須)
+## **`commands`** (requires version: 2.1)
 {: #commands-requires-version-21 }
 
 A command definition defines a sequence of steps as a map to be executed in a job, enabling you to [reuse a single command definition]({{ site.baseurl }}/2.0/reusing-config/) across multiple jobs.
@@ -85,7 +95,7 @@ commands:
       - run: echo << parameters.to >>
 ```
 
-## **`parameters`** (version: 2.1 が必須)
+## **`parameters`** (requires version: 2.1)
 {: #parameters-requires-version-21 }
 Pipeline parameters declared for use in the configuration. See [Pipeline Variables]({{ site.baseurl }}/2.0/pipeline-variables#pipeline-parameters-in-configuration) for usage details.
 
@@ -94,7 +104,7 @@ Pipeline parameters declared for use in the configuration. See [Pipeline Variabl
 | parameters | N        | Map  | A map of parameter keys. Supports `string`, `boolean`, `integer` and `enum` types. See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) for details. |
 {: class="table table-striped"}
 
-## **`executors`** (version: 2.1 が必須)
+## **`executors`** (requires version: 2.1)
 {: #executors-requires-version-21 }
 
 Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
@@ -144,7 +154,7 @@ A Workflow is comprised of one or more uniquely named jobs. Jobs are specified i
 ### **<`job_name`>**
 {: #lessjobnamegreater }
 
-Each job consists of the job's name as a key and a map as a value. A name should be unique within a current `jobs` list. The value map has the following attributes:
+Each job consists of the job's name as a key and a map as a value. A name should be case insensitive unique within a current `jobs` list. The value map has the following attributes:
 
 | Key               | Required         | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ----------------- | ---------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -223,16 +233,16 @@ An "executor" is roughly "a place where steps occur". CircleCI 2.0 can build the
 
 Configured by `docker` key which takes a list of maps:
 
-| キー          | 必須 | 型              | 説明                                                                                                         |
-| ----------- | -- | -------------- | ---------------------------------------------------------------------------------------------------------- |
-| image       | ○  | 文字列            | The name of a custom docker image to use                                                                   |
-| name        | ×  | String         | The name the container is reachable by.  By default, container services are accessible through `localhost` |
-| entrypoint  | N  | String or List | The command used as executable when launching the container                                                |
-| command     | N  | String or List | The command used as pid 1 (or args for entrypoint) when launching the container                            |
-| user        | N  | String         | Which user to run commands as within the Docker container                                                  |
-| environment | N  | Map            | A map of environment variable names and values                                                             |
-| auth        | N  | Map            | Authentication for registries using standard `docker login` credentials                                    |
-| aws_auth    | N  | Map            | Authentication for AWS Elastic Container Registry (ECR)                                                    |
+| Key         | Required | Type           | Description                                                                                                |
+| ----------- | -------- | -------------- | ---------------------------------------------------------------------------------------------------------- |
+| image       | Y        | String         | The name of a custom docker image to use                                                                   |
+| name        | N        | String         | The name the container is reachable by.  By default, container services are accessible through `localhost` |
+| entrypoint  | N        | String or List | The command used as executable when launching the container                                                |
+| command     | N        | String or List | The command used as pid 1 (or args for entrypoint) when launching the container                            |
+| user        | N        | String         | Which user to run commands as within the Docker container                                                  |
+| environment | N        | Map            | A map of environment variable names and values                                                             |
+| auth        | N        | Map            | Authentication for registries using standard `docker login` credentials                                    |
+| aws_auth    | N        | Map            | Authentication for AWS Elastic Container Registry (ECR)                                                    |
 {: class="table table-striped"}
 
 The first `image` listed in the file defines the primary container image where all steps will run.
@@ -347,16 +357,18 @@ jobs:
 {: #available-machine-images }
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
 
+* `ubuntu-1604:202104-01` - Ubuntu 16.04, Docker v19.03.15, Docker Compose v1.29.1, final release by CircleCI
 * `ubuntu-1604:202101-01` - Ubuntu 16.04, Docker v19.03.14, Docker Compose v1.28.2, 2nd to last release
 * `ubuntu-1604:202010-01` - Ubuntu 16.04, Docker v19.03.13, Docker Compose v1.27.4
 * `ubuntu-1604:202007-01` - Ubuntu 16.04, Docker v19.03.12, Docker Compose v1.26.1
 * `ubuntu-1604:202004-01` - Ubuntu 16.04, Docker v19.03.8, Docker Compose v1.25.5
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
 
-***Note:*** *Ubuntu 16.04 reaches the end of its LTS window at the end of April 2021 and will no longer be supported by Canonical. As a result, the final 16.04 CircleCI machine image release by us will take place in April to include the most recent security patches. We suggest upgrading to the Ubuntu 20.04 image for continued releases past April. 2021.*
+***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical. As a result, `ubuntu-1604:202104-01` is the final Ubuntu 16.04 image released by CircleCI. We suggest upgrading to the latest Ubuntu 20.04 image for continued releases and support past April 2021.*
 
 The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching) which is useful when you are building Docker images during your job or Workflow.
 
@@ -438,7 +450,7 @@ jobs:
 #### **`branches` – DEPRECATED**
 {: #branches-deprecated }
 
-**This key is deprecated. Use [workflows filtering](#filters) to control which jobs run for which branches.**
+**This key is deprecated. Use [workflows filtering](#jobfilters) to control which jobs run for which branches.**
 
 Defines rules for allowing/blocking execution of some branches if Workflows are **not** configured and you are using 2.0 (not 2.1) config. If you are using [Workflows]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows), job-level branches will be ignored and must be configured in the Workflows section of your `config.yml` file. If you are using 2.1 config, you will need to add a workflow in order to use filtering. See the [workflows](#workflows) section for details. The job-level `branch` key takes a map:
 
@@ -724,16 +736,16 @@ Each built-in step is described in detail below.
 
 Used for invoking all command-line programs, taking either a map of configuration values, or, when called in its short-form, a string that will be used as both the `command` and `name`. Run commands are executed using non-login shells by default, so you must explicitly source any dotfiles as part of the command.
 
-| キー                  | 必須 | 型       | 説明                                                                                                                                                       |
-| ------------------- | -- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| command             | Y  | String  | Command to run via the shell                                                                                                                             |
-| name                | ×  | 文字列     | Title of the step to be shown in the CircleCI UI (default: full `command`)                                                                               |
-| shell               | N  | String  | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))                                                        |
-| environment         | N  | Map     | Additional environmental variables, locally scoped to command                                                                                            |
-| background          | N  | Boolean | Whether or not this step should run in the background (default: false)                                                                                   |
-| working_directory   | N  | String  | In which directory to run this step. Will be interpreted relative to the [`working_directory`](#jobs) of the job). (default: `.`)                        |
-| no_output_timeout | N  | String  | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)            |
-| when                | N  | String  | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`) |
+| Key                 | Required | Type    | Description                                                                                                                                              |
+| ------------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| command             | Y        | String  | Command to run via the shell                                                                                                                             |
+| name                | N        | String  | Title of the step to be shown in the CircleCI UI (default: full `command`)                                                                               |
+| shell               | N        | String  | Shell to use for execution command (default: See [Default Shell Options](#default-shell-options))                                                        |
+| environment         | N        | Map     | Additional environmental variables, locally scoped to command                                                                                            |
+| background          | N        | Boolean | Whether or not this step should run in the background (default: false)                                                                                   |
+| working_directory   | N        | String  | In which directory to run this step. Will be interpreted relative to the [`working_directory`](#jobs) of the job). (default: `.`)                        |
+| no_output_timeout | N        | String  | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)            |
+| when                | N        | String  | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`) |
 {: class="table table-striped"}
 
 Each `run` declaration represents a new shell. It is possible to specify a multi-line `command`, each line of which will be run in the same shell:
@@ -1144,10 +1156,10 @@ When using the `deploy` step, it is also helpful to understand how you can use w
 
 Step to store artifacts (for example logs, binaries, etc) to be available in the web app or through the API. See the [Uploading Artifacts]({{ site.baseurl }}/2.0/artifacts/) document for more information.
 
-| キー          | 必須 | 型      | 説明                                                                                                               |
-| ----------- | -- | ------ | ---------------------------------------------------------------------------------------------------------------- |
-| path        | ○  | String | Directory in the primary container to save as job artifacts                                                      |
-| destination | N  | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`) |
+| Key         | Required | Type   | Description                                                                                                      |
+| ----------- | -------- | ------ | ---------------------------------------------------------------------------------------------------------------- |
+| path        | Y        | String | Directory in the primary container to save as job artifacts                                                      |
+| destination | N        | String | Prefix added to the artifact paths in the artifacts API (default: the directory of the file specified in `path`) |
 {: class="table table-striped"}
 
 There can be multiple `store_artifacts` steps in a job. Using a unique prefix for each step prevents them from overwriting files.
@@ -1171,9 +1183,9 @@ Special step used to upload and store test results for a build. Test results are
 
 It is also possible to store test results as a build artifact; to do so, please refer to [the **store_artifacts** step](#store_artifacts).
 
-| キー   | 必須 | 型      | 説明                                                                                                                                                |
-| ---- | -- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| path | Y  | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files |
+| Key  | Required | Type   | Description                                                                                                                                       |
+| ---- | -------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| path | Y        | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files |
 {: class="table table-striped"}
 
 **Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
@@ -1410,7 +1422,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 
 ###### **`filters`**
 {: #filters }
-Filters can have the key `branches`.
+Trigger Filters can have the key `branches`.
 
 | Key     | Required | Type | Description                                             |
 | ------- | -------- | ---- | ------------------------------------------------------- |
@@ -1487,8 +1499,8 @@ A job may have a `type` of `approval` indicating it must be manually approved be
 **Note:** The `hold` job name must not exist in the main configuration.
 
 ###### **`filters`**
-{: #filters }
-Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
+{: #jobfilters }
+Job Filters can have the key `branches` or `tags`. **Note** Workflows will ignore job-level branching. If you use job-level branching and later add workflows, you must remove the branching at the job level and instead declare it in the workflows section of your `config.yml`, as follows:
 
 | Key     | Required | Type | Description                                             |
 | ------- | -------- | ---- | ------------------------------------------------------- |
@@ -1762,16 +1774,7 @@ Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) documen
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
-| Type                                                                                                | Arguments          | `true` if                              | Example                                              |
-| --------------------------------------------------------------------------------------------------- | ------------------ | -------------------------------------- | ---------------------------------------------------- |
-| YAML literal                                                                                        | None               | is truthy                              | `true`/`42`/`"a string"`                             |
-| YAML alias                                                                                          | None               | resolves to a truthy value             | *my-alias                                            |
-| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None               | resolves to a truthy value             | `<< pipeline.git.branch >>`              |
-| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None               | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>` |
-| and                                                                                                 | N logic statements | all arguments are truthy               | `and: [ true, true, false ]`                         |
-| or                                                                                                  | N logic statements | any argument is truthy                 | `or: [ false, true, false ]`                         |
-| not                                                                                                 | 1 logic statement  | the argument is not truthy             | `not: true`                                          |
-| equal                                                                                               | N values           | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`    |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 The following logic values are considered falsy:
@@ -1786,6 +1789,8 @@ The following logic values are considered falsy:
 All other values are truthy. Further, Please also note that using logic with an empty list will cause a validation error.
 
 Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
+
+`matches` uses [Java regular expressions](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) for its `pattern`. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
 
 **Note:** When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
@@ -1807,7 +1812,9 @@ workflows:
     when:
       and:
         - not:
-            equal: [ master, << pipeline.git.branch >> ]
+            matches:
+              pattern: "^master$"
+              value: << pipeline.git.branch >>
         - or:
             - equal: [ canary, << pipeline.git.tag >> ]
             - << pipeline.parameters.deploy-canary >>
@@ -1991,7 +1998,7 @@ workflows:
 ```
 {% endraw %}
 
-## 関連項目
+## See also
 {: #see-also }
 {:.no_toc}
 
