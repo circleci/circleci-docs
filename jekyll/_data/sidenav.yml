@@ -4,6 +4,8 @@ en:
   children:
     - name: Overview
       children:
+        - name: Welcome
+          link: 2.0/
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
@@ -352,7 +354,7 @@ en:
       link: 2.0/server-3-overview
       children:
         - name: v3.0 Overview
-          link: 2.0/CircleCI-Server-3.0.0-Overview.pdf
+          link: 2.0/CircleCI-Server-{serverversion}-Overview.pdf
         - name: v3.0 Installation Guide
           link: 2.0/CircleCI-Server-3.0.0-Installation-Guide.pdf
         - name: v3.0 Operations Guide
@@ -474,6 +476,9 @@ ja:
     - name: Overview
       i18n_name: 概要
       children:
+        - name: Welcome
+          i18n_name: ようこそ
+          link: ja/2.0/
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要

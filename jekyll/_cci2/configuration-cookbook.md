@@ -642,16 +642,17 @@ For example, consider a monorepo structure like the example shown below:
 
 ```shell
 .
+├── .circleci
+│   └── config.yml
 ├── service1
 │   ├── Service1.java
 ├── service2
 │   ├── Service2.java
 ├── tests
 │   ├── IntegrationTests.java
-└── config.yaml
 ```
 
-An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yaml`:
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
 
 ```yaml
 version: 2.1
@@ -667,55 +668,62 @@ orbs:
 
 # the default pipeline parameters, which will be updated according to the results of the path-filtering orb
 parameters:
-  run-service-1-job:
+  run-build-service-1-job:
     type: boolean
     default: false
-  run-service-2-job:
+  run-build-service-2-job:
     type: boolean
     default: false
 
 # our defined jobs
 jobs:
+  # the check-updated-files job uses the path-filtering orb to determine which pipeline parameters to update.
   check-updated-files:
     - path-filtering/filter:
         # 3-column, whitespace-delimited mapping. One mapping per line: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>.
         mapping: |
-          service1/.* run-service-1-job true
-          service2/.* run-service-2-job true
+          service1/.* run-build-service-1-job true
+          service2/.* run-build-service-2-job true
         base-revision: master
         # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. In this case, we are using the parent dynamic configuration itself.
-        config-path: ".circleci/config.yml"
-        
+        config-path: .circleci/config.yml
+  # the build-service-1 job uses the maven orb to build and install service1 artifacts into the maven repository (it does not run tests).
   build-service-1:
     - maven/test:
         command: 'install -DskipTests'
         app_src_directory: 'service1'
-
+  # the build-service-2 job uses the maven orb to build and install service2 artifacts into the maven repository (it does not run tests).
   build-service-2:
     - maven/test:
         command: 'install -DskipTests'
         app_src_directory: 'service2'
-
+  # the run-integration-tests job will run any tests defined in the tests directory.
   run-integration-tests:
     - maven/test:
         command: '-X verify'
         app_src_directory: 'tests'
 
-# our conditionally executed workflows, based on the results of the pipeline parameter values
+# here we specify our workflows, most of which are conditionally executed based upon pipeline parameter values. 
+# Each workflow calls a specific job defined above, in the jobs section.
 workflows:
+  # when pipeline parameter, run-build-service-1-job is true, the build-service-1 job is triggered.
   service-1:
     when: << pipeline.parameters.run-build-service-1-job >>
     jobs:
       - build-service-1
+  # when pipeline parameter, run-build-service-2-job is true, the build-service-2 job is triggered.
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
       - build-service-2
+  # when pipeline parameter, run-build-service-1-job OR run-build-service-2-job is true, run-integration-tests job is triggered.
+  # see: https://circleci.com/docs/2.0/configuration-reference/#logic-statements for more information.
   run-integration-tests:
     when: 
       or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
     jobs:
       - run-integration-tests
+  # the check-updated-files job is always triggered, regardless of pipeline parameters.
   always-run:
     jobs:
       - check-updated-files
@@ -725,6 +733,7 @@ In the above configuration, we:
 
 - Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
 - Invoke the `path-filtering` and `maven` orbs so we can use them.
+- Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
 - Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
   - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to
     the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
