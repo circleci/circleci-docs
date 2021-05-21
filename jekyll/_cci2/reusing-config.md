@@ -141,6 +141,8 @@ Boolean parameter evaluation is based on the [values specified in YAML 1.1](http
 * True: `y` `yes` `true` `on`
 * False: `n` `no` `false` `off`
 
+***Note:*** Boolean values may be returned as a '1' for True and '0' for False.
+
 Capitalized and uppercase versions of the above values are also valid.
 
 #### Integer
