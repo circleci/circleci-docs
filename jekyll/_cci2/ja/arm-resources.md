@@ -10,39 +10,39 @@ version:
 # 概要
 {: #overview }
 
-This document will walk you through the setup steps required to use an Arm resource on CircleCI. Arm resources are not available on CircleCI Server 1.x or 2.x.
+ここでは、CircleCI の Arm リソースを使ううえで必要なセットアップ手順について説明します。 ただし、CircleCI Server 1.x および 2.x では、これらの Arm リソースは使用できません。
 
-CircleCI offers multiple kinds of environments for you to run jobs in. In your CircleCI `config.yml` file you can choose the right environment for your job using the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference/#resource_class) key. CircleCI offers two Arm resources as part of the [`machine` executor]({{site.baseurl}}/2.0/configuration-reference/#machine-executor-linux):
+CircleCI には、さまざまなジョブ実行環境があります。 CircleCI の `config.yml` ファイルで [`resource_class`]({{site.baseurl}}/ja/2.0/configuration-reference/#resource_class) キーを指定することで、ジョブに合った実行環境を選ぶことができます。 Arm リソースは [`machine` Executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) の一部であり、次の 2 種類があります。
 
 * `arm.medium` - `arm64` アーキテクチャ、2 vCPU、8GB RAM
 * `arm.large` - `arm64` アーキテクチャ、4 vCPU、16GB RAM
 
-Which are available under these images:
+使用するイメージは、次のものから選択できます。
 
 * `ubuntu-2004:202101-01` - 最新版であり、すべてのユーザーに推奨
 * `ubuntu-2004:202011-01` - 2021 年 2 月 21 日にサポート終了
 
-As these are `machine` executor resources, each class is a dedicated VM that is created specifically for your job and subsequently taken down after the job has finished running.
+いずれのリソース クラスも `machine` Executor リソースであり、専用の VM となります。この VM はジョブのみのために作成され、ジョブの実行が完了すると削除されます。
 
 ## 料金と提供プラン
 {: #pricing-and-availability }
 
-The following Arm resource class is available to all CircleCI customers:
+以下の Arm リソース クラスは、すべての CircleCI ユーザーがご利用いただけます。
 
-| Resource class name | Specs             | Requisite Plan                   |
-| ------------------- | ----------------- | -------------------------------- |
-| `arm.medium`        | 2 vCPUs, 8GB RAM  | Free, Performance, Scale, Custom |
-| `arm.large`         | 4 vCPUs, 16GB RAM | Performance, Scale               |
+| リソース クラス名    | スペック            | 提供プラン                         |
+| ------------ | --------------- | ----------------------------- |
+| `arm.medium` | 2 vCPU、8GB RAM  | Free、Performance、Scale、Custom |
+| `arm.large`  | 4 vCPU、16GB RAM | Performance、Scale             |
 {: class="table table-striped"}
 
-For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
+料金と提供プランの詳細については、[料金ページ](https://circleci.com/ja/pricing/)をご覧ください。
 
-At this moment, Arm resources are only available on our cloud offering. If you are a CircleCI Server customer and are looking to try Arm resources, consider creating a CircleCI Cloud account, or contact your Customer Success Manager to request Arm on Server.
+現時点では、Arm リソース クラスはクラウド版 CircleCI でしか利用できません。 現在 CircleCI Server を利用しており、Arm リソースの使用を希望される場合は、クラウド版 CircleCI アカウントを作成することを検討してください。または、カスタマー サクセス マネージャーに CircleCI Server 用の Arm についてお問い合わせください。
 
 ## Arm リソースの使用方法
 {: #using-arm-resources }
 
-Update your `.circleci/config.yml` file to use Arm resources. Consider the example config:
+Arm リソースを使用するには、`.circleci/config.yml` ファイルを書き換える必要があります。 次の設定ファイル例を参考にしてください。
 
 ```yaml
 # .circleci/config.yml
@@ -72,7 +72,7 @@ workflows:
       - build-large
 ```
 
-Please note that it is indeed possible to mix various resources in the same configuration (and even the same workflow).
+1 つの設定ファイル内、および 1 つのワークフロー内でも、複数のリソースを混在させることができます。
 
 ## 制限事項
 {: #limitations }
