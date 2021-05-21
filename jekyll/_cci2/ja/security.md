@@ -112,7 +112,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - **version:** Version of the event schema. 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせてこの値も変更になる可能性があります。
 - **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. `id` (CircleCI がこのリクエストに割り当てたリクエスト ID)、`ip_address` (リクエストされた元の IP アドレスであり、たとえば 127.0.0.1 など IPV4 のドット区切り表記で表される)、および `client_trace_id` (元のリクエストに HTTP ヘッダー「X-Client-Trace-Id」が存在する場合は、対応するクライアント追跡 ID ヘッダー) を含む JSON BLOB の形式で表示されます。
+- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
 ## Checklist to using CircleCI securely as a customer
 {: #checklist-to-using-circleci-securely-as-a-customer }
