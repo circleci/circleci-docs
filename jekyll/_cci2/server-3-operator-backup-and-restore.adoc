@@ -163,8 +163,8 @@ velero install \
     --bucket $BUCKET \
     --backup-location-config region=$REGION \
     --snapshot-location-config region=$REGION \
-    --secret-file ./credentials-velero
-    --use-restic
+    --secret-file ./credentials-velero \
+    --use-restic \
     --wait
 ----
 
