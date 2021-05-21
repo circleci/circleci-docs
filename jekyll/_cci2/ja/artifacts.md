@@ -173,7 +173,7 @@ You can read more about using CircleCI's API to interact with artifacts in our [
 | `:vcs-type`   | The version control system (VCS) you are using. Either `github` or `bitbucket`.                                                                  |
 | `:username`   | The VCS project account username or organization name for the target project. Located at the top left of the screen in the CircleCI application. |
 | `:project`    | The name of the target VCS repository.                                                                                                           |
-| `:build_num`  | The number for the build for which you want to download artifacts.                                                                               |
+| `:build_num`  | The number of the job (aka. build) for which you want to download artifacts.                                                                     |
 {: class="table table-striped"}
 
 ## See also
