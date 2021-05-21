@@ -118,6 +118,8 @@ cat my_java_test_classnames | circleci tests split --split-by=timings --timings-
 
 If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
 
+Note: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
+
 #### Splitting by name
 {: #splitting-by-name }
 {:.no_toc}
