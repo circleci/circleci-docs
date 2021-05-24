@@ -50,7 +50,7 @@ implementation of monitoring common performance metrics.
 === Telegraf
 Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
 The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
-by Telegraf via the https://docs.influxdata.com/telegraf/v1.17/plugins/[output plugin]. By default, it will provide a
+by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a
 metrics endpoint for Prometheus to scrape so that the metrics can be viewed in Grafana.
 
 == Accessing the metrics dashboards on Grafana
