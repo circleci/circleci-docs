@@ -16,15 +16,18 @@ This document will walk you through a Scala application [`.circleci/config.yml`]
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 This document assumes that your [project’s AWS Permission settings](https://circleci.com/docs/2.0/deployment-integrations/#aws) are configured with valid AWS keys that are permitted to read and write to an S3 bucket. The examples in this post upload build packages to the specified S3 bucket.
 
 ## Sample Scala project source code
+{: #sample-scala-project-source-code }
 
 The source code for this sample application is in the [Public samplescala GitHub repo](https://github.com/ariv3ra/samplescala).
 
 ## Prerequisites
+{: #prerequisites }
 
 CircleCI 2.0 requires you to create a new directory in the repo's root and a YAML file within this new directory. The new assets must follow these naming schema's directory: `.circleci/` file: `config.yml`.
 
@@ -36,6 +39,7 @@ touch .circleci/config.yml
 These commands create a directory named `.circleci` & the next command creates a new file named `config.yml` within the `.circleci` directory.  Again you **must** use the names .circleci for the dir and config.yml.  Learn more about the [version 2.0 prerequisites here]({{ site.baseurl }}/2.0/migrating-from-1-2/).
 
 ### Scala config.yml file
+{: #scala-configyml-file }
 
 To get started, open the newly created `config.yml` in your favorite text editor and paste the following CircleCI 2.0 schema into the file. Below is the complete 2.0 configuration:
 
@@ -71,7 +75,7 @@ jobs:
       - run:
           name: Compile samplescala dist package
           command: cat /dev/null | sbt clean update dist
-      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
+      - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
           path: target/universal/samplescala.zip
           destination: samplescala
       - save_cache:
@@ -87,6 +91,7 @@ jobs:
 ```
 
 ## Schema walkthrough
+{: #schema-walkthrough }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -148,7 +153,7 @@ The steps/run keys specify the types of actions to perform. The run keys represe
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
 ```
 
-This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename. 
+This echo command defines the $ARTIFACT_BUILD environment variable and sets it to a build filename.
 
 The next run command executes multiple commands within the openjdk container. Since we're executing multiple commands we'll be defining a multi-line run command which is designated by the pipe `|` character, as shown below. When using the multi-line option, one line represents one command.
 
@@ -197,7 +202,7 @@ The following keys represent actions performed after the multi-line command is e
 ```
 
 Below is an explanation of the preceding example:
-- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container 
+- [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout): basically git clones the project repo from GitHub into the container
 - [`restore_cache`]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) key: specifies the name of the cache files to restore. The key name is specified in the save_cache key that is found later in the schema. If the key specified is not found then nothing is restored and continues to process.
 - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) command `cat /dev/null | sbt clean update dist`: executes the sbt compile command that generates the package .zip file.
 - [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) path: specifies the path to the source file to copy to the ARTIFACT zone in the image.
@@ -216,6 +221,7 @@ steps:
 The deploy command is another multi-line execution.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
