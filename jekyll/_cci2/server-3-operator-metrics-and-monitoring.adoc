@@ -30,6 +30,7 @@ needs.
 Most importantly, take note of the following:
 
 NOTE: You cannot modify dashboards that are provided by CircleCI. However, you can make copies of them that are editable.
+
 NOTE: Data is retained for a maximum of 15 days.
 
 === Grafana
