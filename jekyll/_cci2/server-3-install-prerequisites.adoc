@@ -16,9 +16,6 @@ In order to configure the CircleCI Server application, you will need to ensure t
 
 * An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
 ** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
-<<<<<<< HEAD
-*** Using `eksctl` is our recommended option, as it creates a VPC and selects the proper security group for you.
-=======
 *** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
 ** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
 *** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
