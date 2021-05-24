@@ -42,7 +42,8 @@ log stream.
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server ships with basic
-implementation of monitoring common performance metrics.
+implementation of monitoring common performance metrics. Prometheus will scrape metrics reported to Telegraf as well as
+Kubernetes health metrics and cluster metrics from your cluster. It is used as the primary data source for Grafana.
 
 === Telegraf
 Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
