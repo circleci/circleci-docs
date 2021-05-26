@@ -48,6 +48,11 @@ For more information, see Velero's https://velero.io/docs/v1.6/supported-provide
 
 Below, you will find instructions for creating a server 3.x backup on AWS and GCP.
 
+==== S3 Compatible Storage Prerequisites
+
+- https://docs.min.io/docs/minio-client-quickstart-guide.html[minio CLI] is
+  installed and configured for you your storage provider.
+
 ////
 
 * AWS SETUP *
@@ -365,6 +370,124 @@ velero-68788b675c-dm2s7   1/1     Running   0          2m
 ----
 
 As restic is a daemonset, there should be one pod for each node in your Kubernetes cluster.
+
+////
+
+* S3-Compatible SETUP *
+
+////
+== Server 3.x backups with S3 Compatible Storage
+
+The following steps will assume you're using S3 compatible object storage, but
+no necessarily AWS S3, for your backups. We test and support https://min.io/[minio]
+for S3 compatible storage.
+
+These instructions were sourced from the Velero documentation https://velero.io/docs/v1.6/contributions/minio/[here].
+
+=== Step 1 - Configure `mc` client
+
+To start, configure `mc` to connect to your storage provider:
+
+[source,bash]
+----
+# Alias can be any name as long as you use the
+# same value in subsequent commands
+export ALIAS=my-provider
+mc alias set $ALIAS <YOUR_ENDPOINT> <YOUR_ACCESS_KEY_ID> <YOUR_SECRET_ACCESS_KEY>
+----
+
+You can verify your client is correctly configured by running `mc ls my-provider` and you
+should see the buckets in your provider enumerated in the output
+
+=== Step 2 - Create a bucket
+
+Create a bucket for your backups. It is important that a new bucket is used as
+Velero cannot use a preexisting bucket with other content.
+
+[source, bash]
+----
+mc mb ${ALIAS}/<YOUR_BUCKET>
+----
+
+=== Set 3 - Create a user and policy
+
+Next, create a user and policy for velero to access your bucket.
+
+[source, bash]
+----
+# Create user
+mc admin user add $ALIAS <YOUR_VELERO_ACCESS_KEY_ID> <YOUR_VELERO_SECRET_ACCESS_KEY>
+
+# Create policy
+cat > velero-policy.json << EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<YOUR_BUCKET>",
+        "arn:aws:s3:::<YOUR_BUCKET>/*"
+      ]
+    }
+  ]
+}
+EOF
+
+mc admin policy add $ALIAS velero-policy velero-policy.json
+
+# Bind user to policy
+mc admin policy set $ALIAS velero-policy user=<YOUR_VELERO_ACCESS_KEY_ID>
+----
+
+Finally, we add our new user's credentials to a file (`./credentials-velero` in
+this example) with the following contents:
+
+[source,toml]
+----
+[default]
+aws_access_key_id=<YOUR_VELERO_ACCESS_KEY_ID>
+aws_secret_access_key=<YOUR_VELERO_SECRET_ACCESS_KEY>
+----
+
+=== Step 4 - Install and start Velero
+
+Run the following `velero install` command. This will create a namespace
+called `velero` and install all the necessary resources to run Velero.
+
+NOTE: kots backups require https://restic.net/[restic] to operate. When installing Velero, ensure that you have the `--use-restic` flag set, as shown below:
+
+[source, bash]
+----
+velero install --provider aws \
+  --plugins velero/velero-plugin-for-aws:v1.2.0 \
+  --bucket <YOUR_BUCKET> \
+  --secret-file ./credentials-velero \
+  --use-volume-snapshots=false \
+  --use-restic \
+  --backup-location-config region=minio,s3ForcePathStyle="true",s3Url=<YOUR_ENDPOINT> \
+  --wait
+----
+
+Once Velero is installed on your cluster, check the new `velero` namespace. You
+should have a Velero deployment and a restic daemonset, e.g.:
+
+[source,bash]
+----
+$ kubectl get pods --namespace velero
+NAME                      READY   STATUS    RESTARTS   AGE
+restic-5vlww              1/1     Running   0          2m
+restic-94ptv              1/1     Running   0          2m
+restic-ch6m9              1/1     Running   0          2m
+restic-mknws              1/1     Running   0          2m
+velero-68788b675c-dm2s7   1/1     Running   0          2m
+----
+
+As restic is a daemonset, there should be one pod for each node in your
+Kubernetes cluster.
 
 == Creating backups
 Now that Velero is installed on your cluster, you should see the snapshots option in the navbar of your kots admin console.
