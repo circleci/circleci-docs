@@ -2,6 +2,7 @@
 ---
 @import 'variables';
 @import 'sidebar';
+@import 'global-nav';
 @import 'footer';
 @import 'subnav';
 @import 'instantsearch';
@@ -33,12 +34,21 @@ a {
 	}
 }
 
-
-div.main-body{
-	overflow: auto;
+.container-semi-fluid {
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative;
 }
 
+.container-semi-fluid,
+div.main-body{
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+
 div.main-body {
+  overflow: auto;
 	display: flex;
 	max-width: 1920px;
 	margin: 0 auto;
@@ -49,7 +59,7 @@ div.main-body {
 
 .text-center-small-float-right {
   float: right;
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     text-align: center;
     float: none;
   }
@@ -57,7 +67,7 @@ div.main-body {
 
 .text-center-small-float-left {
   float: left;
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     text-align: center;
     float: none;
   }
@@ -100,20 +110,6 @@ footer {
 	}
 }
 
-// Main Nav Additions
-nav.nav-toggle.two {
-	.btn, .btn-primary, .btn-primary-enterprise {
-		display: inline-block;
-		text-align: center;
-		vertical-align: middle;
-		font-size: 16px;
-	}
-
-	a:hover {
-		text-decoration: none;
-	}
-}
-
 // Navigation Sidebar
 #nav-button{
 	display: none;
@@ -149,10 +145,25 @@ div.sidebar-offset {
 	}
 }
 
+// Logged In/Out State
+body.loggedin {
+	.visitor-item {
+		display: none !important;
+	}
+	.dashboard-link {
+		display: block !important;
+	}
+}
+
+.dashboard-link {
+	display: none !important;
+}
+
+
 // Article
 div.article-container{
   flex: 1;
-	@media screen and (max-width: $screen-sm) {
+	@media screen and (max-width: $screen-xs-max) {
 		padding: 0 16px 0 16px;
 		width: 100%;
 	}
@@ -256,7 +267,7 @@ div.align-center{
 // Homepage
 body.homepage{
   .article-container{
-    @media screen and (max-width: $screen-sm) {
+    @media screen and (max-width: $screen-xs-max) {
   	  padding: 0 16px 0 16px;
       width: 100%;
     }

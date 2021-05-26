@@ -1,0 +1,143 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Prerequisites
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+It is assumed you have already read the Server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
+
+In order to configure the CircleCI Server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
+
+* An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
+** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
+*** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
+** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
+*** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
++
+* Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
+CircleCI Server users: +
++
+--
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Number of daily active CircleCI users
+| Minimum Nodes
+| Total CPU
+| Total RAM
+| NIC speed
+
+| < 500
+| 3
+| 8 cores
+| 32 GB
+| 1 Gbps
+
+| 500+
+| 3
+| 48 cores
+| 240 GB
+| 10 Gbps
+|===
+--
+
+* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
+* You must have appropriate permissions to list, create, edit and delete pods in your cluster. You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
+* A CircleCI License file. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] for a license.
+* The <<Required Tools>> tools installed
+** Note that the `kubectl` tool must also be configured to have access to your cluster.
+
+*** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Connect to Amazon EKS clusters] - Amazon EKS
+*** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[Configuring cluster access for kubectl] - Google GKE
+* Port access requirements are listed here:
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes Load Balancers]
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes Nodes]
+** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad Clients]
+** xref:server-3-install-hardening-your-cluster.adoc#external-vms[External VMs]
+
+NOTE: There are no requirements regarding VPC setup or disk size for your cluster. It is, however, recommended that you
+set up a new VPC rather than use an existing one.
+
+## Required Tools
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Tool
+| Version
+| Used for
+
+| https://www.terraform.io/downloads.html[Terraform]
+| {terraformversion} or greater
+| Infrastructure Management
+
+| https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
+| {kubectlversion} or greater
+| Kubernetes CLI
+
+| https://helm.sh/[Helm]
+| {helmversion} or greater
+| Kubernetes Package Management
+
+| https://kots.io/[Kots]
+| {kotsversion} or greater
+| Replicated Kubernetes Application Management
+|===
+
+
+## External Ports
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Port number
+| Protocol
+| Direction
+| Source / Destination
+| Use
+| Notes
+
+| 80
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 443
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 8800
+| TCP
+| Inbound
+| Administrators
+| Admin console
+|
+
+| 22
+| TCP
+| Inbound
+| Administrators
+| SSH
+| Only required for the bastion host
+
+| 64535-65535
+| TCP
+| Inbound
+|
+| SSH into builds
+| Only required for the nomad clients.
+|===
+
+## What to read next
+* https://circleci.com/docs/2.0/server-3-install-creating-your-first-cluster[Creating your first cluster]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]

@@ -15,6 +15,7 @@ This document provides example database [config.yml]({{ site.baseurl }}/2.0/data
 {:toc}
 
 ## Example CircleCI configuration for a rails app with structure.sql
+{: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
 If you are migrating a Rails app configured with a `structure.sql` file make
 sure that `psql` is installed in your PATH and has the proper permissions, as
@@ -28,9 +29,9 @@ version: 2
 jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
-    
+
     # Primary container image where all commands run
-    
+
     docker:
       - image: circleci/ruby:2.4.1-node
         auth:
@@ -40,9 +41,9 @@ jobs:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
-    
+
     # Service container image available at `host: localhost`
-    
+
       - image: circleci/postgres:9.6.2-alpine
         auth:
           username: mydockerhub-user
@@ -50,7 +51,7 @@ jobs:
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
-        
+
     steps:
       - checkout
 
@@ -95,6 +96,7 @@ installing the needed packages, committing, and pushing it to Docker Hub or the
 registry of your choosing.
 
 ### Example environment setup
+{: #example-environment-setup }
 {:.no_toc}
 
 In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
@@ -119,7 +121,7 @@ jobs:
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6 
+      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
       # which includes a few enhancements and modifications. It is possible to use either image.
       - image: postgres:9.6-jessie
         auth:
@@ -133,7 +135,7 @@ jobs:
       - run:
           name: Install Ruby Dependencies
           command: bundle install
-      - run: 
+      - run:
           name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
@@ -145,6 +147,7 @@ jobs:
 This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
 
 ## Example go app with postgresql
+{: #example-go-app-with-postgresql }
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
@@ -233,6 +236,7 @@ jobs:
 ```
 
 ## Example mysql project.
+{: #example-mysql-project }
 
 The following example sets up MYSQL as a secondary container alongside a PHP container.
 
@@ -311,6 +315,7 @@ VALUES (
 
 
 ## See also
+{: #see-also }
 
 
-Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps. 
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

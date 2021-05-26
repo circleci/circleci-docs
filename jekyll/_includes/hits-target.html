@@ -1,0 +1,41 @@
+<div id="hits-target" style="display:none;">
+  <div class="container-semi-fluid">
+    <div id="subnav-placeholder">
+      <div class="component subnav">
+        <ul class="results-nav" role="tablist">
+          <li role="presentation" class="active">
+            <a role="tab" data-toggle="tab" aria-controls="search-results-documentation" href="#search-results-documentation">
+              <span class="hidden-xs">Documentation</span>
+              <span class="visible-xs-inline">Docs</span>
+              <span class="hits-count">(<span class="hits-count-counter hits-count-docs" data-initial-value="0">0</span>)</span>
+            </a>
+          </li>
+          <li role="presentation">
+            <a role="tab" data-toggle="tab" aria-controls="search-results-orbs" href="#search-results-orbs">
+              Orbs
+              <span class="hits-count">(<span class="hits-count-counter hits-count-orbs" data-initial-value="0">0</span>)</span>
+            </a>
+          </li>
+          <li role="presentation">
+            <a role="tab" data-toggle="tab" aria-controls="search-results-cimgs" href="#search-results-cimgs">
+              <span class="hidden-xs">Convenience Images</span>
+              <span class="visible-xs-inline">Images</span>
+              <span class="hits-count">(<span class="hits-count-counter hits-count-cimgs" data-initial-value="0">0</span>)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="search-results-documentation">
+        <div id="instant-hits" class="instant-hits"></div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="search-results-orbs">
+        <div id="instant-hits-orbs" class="instant-hits"></div>
+      </div>
+      <div role="tabpanel" class="tab-pane" id="search-results-cimgs">
+        <div id="instant-hits-cimgs" class="instant-hits"></div>
+      </div>
+    </div>
+  </div>
+</div>
