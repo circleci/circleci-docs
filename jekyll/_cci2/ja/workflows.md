@@ -108,7 +108,7 @@ workflows:
 
 以下の例は、4 つの順次ジョブから成るワークフローを示しています。 ジョブは、構成された要件に従って実行されます。図に示すように、各ジョブは必要なジョブが正常に終了してから開始されます。
 
-![Sequential Job Execution Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png
+![シーケンシャルジョブを実行する Workflow]({{ site.baseurl }}/assets/img/docs/sequential_workflow.png
 )
 
 下記で示した `config.yml` のコードは、シーケンシャルジョブの設定を施した Workflow の例です。
@@ -140,7 +140,7 @@ workflows:
 
 以下に示すワークフローの例では、共通のビルド ジョブを実行し、次にファンアウトして一連の受け入れテスト ジョブを同時に実行し、最後にファンインして共通のデプロイ ジョブを実行します。
 
-![Fan-out and Fan-in Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png
+![ファンイン・ファンアウト Workflow]({{ site.baseurl }}/assets/img/docs/fan-out-in.png
 )
 
 以下の `config.yml` スニペットは、ファンアウト/ファンイン ジョブの実行を構成するワークフローの例を示しています。
@@ -220,10 +220,10 @@ workflows:
 以下のスクリーンショットは、保留中のワークフローを示しています。
 
 {:.tab.switcher.Cloud}
-![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
+![ジョブの承認で処理を続行する Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
 {:.tab.switcher.Server}
-![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+![[Switch Organization (組織の切り替え)] メニュー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
 保留中のジョブの名前 (上記のスクリーンショットでは `build`) をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログ ボックスが表示されます。
@@ -346,7 +346,7 @@ workflows:
 
 下記は、Dev、Stage、Pre-Prod という 3 つのブランチにおけるジョブを設定した  Workflow の例です。 Workflow は `jobs` 配下でネストしている `branches` キーを無視します。そのため、ジョブレベルでブランチを宣言して、その後に Workflow を追加する場合には、下記の `config.yml` にあるように、ジョブレベルにあるブランチを削除し、workflows セクションで宣言しなければなりません。
 
-![Branch-Level Job Execution]({{ site.baseurl }}/assets/img/docs/branch_level.png)
+![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
 下記で示した `config.yml` ファイルのコードは、ブランチレベルのジョブ実行の設定を施した Workflow の例です。
 
@@ -516,7 +516,7 @@ CircleCI のブランチおよびタグ フィルターは、Java 正規表現�
 
 Workflow には必ず Workspace というものが割り当てられています。Workspace は、Workflow の進捗をチェックする目的で、それに続く後ろのジョブにファイルを渡すために使われます。 Workspace ではデータの追加保存のみが可能で、 ジョブは Workspace に永続的にデータを保管しておけます。 この設定を行うとデータをアーカイブし、コンテナの外に新たなレイヤーを生成します。 後で実行されるジョブは、Workspace を通じてそのコンテナのファイルシステムにアクセスできるということです。 下記のイラストは、Workspace 内に保管されたファイルへのアクセスと、ジョブの順序を表すレイヤーの展開図を説明しているものです。
 
-![workspaces data flow]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
+![workspace のデータフロー]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
 そのジョブ固有の動作を行ったり、後のジョブで必要になるデータを渡したりするのに Workspace を使います。 複数のブランチでジョブを実行するようなワークフローでは、Workspace を利用してデータを共有する必要に迫られることがあります。 また、テストコンテナで使われるコンパイル済みデータを含むプロジェクトにも Workspace は役立ちます。
 
@@ -592,37 +592,37 @@ workflows:
 ## ワークフロー内の失敗したジョブの再実行
 {: #rerunning-a-workflows-failed-jobs }
 
-Workflow を利用すると、ビルドの失敗に迅速に対応できるようになります。 To rerun only a workflow's **failed** jobs, click the **Workflows** icon in the app and select a workflow to see the status of each job, then click the **Rerun** button and select **Rerun from failed**.
+Workflow を利用すると、ビルドの失敗に迅速に対応できるようになります。 その際、ワークフローのなかで**失敗した**ジョブのみを再実行できます。CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
 
-![CircleCI Workflows Page]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
+![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
 ## トラブルシューティング
 {: #troubleshooting }
 
-This section describes common problems and solutions for Workflows.
+ここでは Workflow に関する一般的な問題とその解決方法について解説しています。
 
 ### ワークフローと後続のジョブがトリガーされない
 {: #workflow-and-subsequent-jobs-do-not-trigger }
 
-If you do not see your workflows triggering, a common cause is a configuration error preventing the workflow from starting. As a result, the workflow does not start any jobs. Navigate to your project's pipelines and click on your workflow name to discern what might be failing.
+Workflows がトリガーされないのは、主に構成エラーによって Workflows の起動が妨げられていることが原因です。 そのため、Workflow がジョブを開始しない事態が発生します。 プロジェクトのパイプラインをナビゲートし、失敗の可能性を識別する Workflow 名をクリックしてください。
 
 ### ワークフローの再実行が失敗する
 {: #rerunning-workflows-fails }
 {:.no_toc}
 
-It has been observed that in some cases, a failure happens before the workflow runs (during pipeline processing). In this case, re-running the workflow will fail even though it was succeeding before the outage. To work around this, push a change to the project's repository. This will re-run pipeline processing first, and then run the workflow.
+(パイプラインの処理中に) Workflow を実行する前にエラーが発生する場合があることがわかっています。 この場合、停止する前は正しく動作していた Workflow でも、再実行すると失敗します。 これを回避するには、プロジェクトのリポジトリに変更をプッシュします。 これにより、最初にパイプライン処理が再実行されてから Workflow が実行されます。
 
 ### GitHub でワークフローがステータスを待機する
 {: #workflows-waiting-for-status-in-github }
 {:.no_toc}
 
-If you have implemented Workflows on a branch in your GitHub repository, but the status check never completes, there may be status settings in GitHub that you need to deselect. For example, if you choose to protect your branches, you may need to deselect the `ci/circleci` status key as this check refers to the default CircleCI 1.0 check, as follows:
+GitHub リポジトリのブランチに実装済みの Workflows があり、かつステータスチェックの処理が終わらないときは、GitHub のステータス設定で解除したほうが良い項目があるかもしれません。 例えば、「Protect this branches」をオンにしている場合、以下のスクリーンショットにあるように、ステータスチェックの設定対象から `ci/circleci` を外す必要があります。この項目は古い CircleCI 1.0 のデフォルト設定になっていたものです。
 
-![Uncheck GitHub Status Keys]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
+![GitHub ステータスキーのチェックを外す]({{ site.baseurl }}/assets/img/docs/github_branches_status.png)
 
-Having the `ci/circleci` checkbox enabled will prevent the status from showing as completed in GitHub when using a workflow because CircleCI posts statuses to GitHub with a key that includes the job by name.
+Workflow を使用している場合に `ci/circleci` チェックボックスをオンにすると、GitHub でステータスが完了と表示されなくなります。これは、CircleCI が名前にジョブを含むキーを使用して GitHub にステータスを送信するためです。
 
-Go to Settings > Branches in GitHub and click the Edit button on the protected branch to deselect the settings, for example https://github.com/your-org/project/settings/branches.
+GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護されているブランチで [Edit (編集)] ボタンをクリックして、設定の選択を解除します (例: https://github.com/your-org/project/settings/branches)。
 
 
 ## 関連項目
