@@ -629,9 +629,9 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #see-also }
 {:.no_toc}
 
-- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時に、ワークフローを構成に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/2.0/migrating-from-1-2/)でワークフローの構成手順を参照してください。
+- 1.0 `circle.yml` ファイルから 2.0 `.circleci/config.yml` ファイルへの移行時に、ワークフローを構成に追加する手順については、[1.0 から 2.0 への移行に関するドキュメント]({{ site.baseurl }}/ja/2.0/migrating-from-1-2/)でワークフローの構成手順を参照してください。
 
-- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/2.0/faq)」の「ワークフロー」セクションを参照してください。
+- ワークフローに関するよくある質問と回答については、「[よくあるご質問]({{ site.baseurl }}/ja/2.0/faq)」の「ワークフロー」セクションを参照してください。
 
 - ワークフローを使用して構成されたデモ アプリについては、GitHub で [CircleCI デモ ワークフロー](https://github.com/CircleCI-Public/circleci-demo-workflows)を参照してください。
 
