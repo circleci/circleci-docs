@@ -36,7 +36,7 @@ _**メモ:** CircleCI は、バグの修正または機能の強化のために�
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代イメージは概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
-**信頼性と安定性の向上** – 従来のイメージは、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが間に合わないこともあります。 そのため、互換性の損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した確定的なイメージとなります。
+**信頼性と安定性の向上** – 従来のイメージは、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが十分に行われていない場合があります。 そのため、互換性の損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した確定的なイメージとなります。
 
 ### CircleCI ベース イメージ
 {: #circleci-base-image }
@@ -53,7 +53,7 @@ image: cimg/base:2021.04
 
 **関連資料**
 
-このイメージの設定ファイルのサンプルは[デベロッパー ハブ](https://circleci.com/developer/ja/images/image/cimg/base)、ソース コードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) で入手できます。
+このイメージの設定ファイルのサンプルは[Developer Hub](https://circleci.com/developer/ja/images/image/cimg/base)、ソース コードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) で入手できます。
 
 ## 次世代 CircleCI イメージ
 {: #next-gen-circleci-images }
@@ -64,7 +64,7 @@ CircleCI では新しいイメージをまとめたリポジトリへの移行�
 image: cimg/go:1.16
 ```
 
-これは従来の CircleCI Go イメージ (`circleci/golang`) の直系の後継となるものです。 Docker Hub の名前空間は `cimg` であることに留意してください。
+これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間は `cimg` であることに留意してください。
 
 
 ## ベスト プラクティス
@@ -213,7 +213,7 @@ CircleCI では、獲得票数の多いアイデアほど、正式な開発を�
 {: #next-gen-language-image-variants }
 {:.no_toc}
 
-CircleCI は、次世代言語イメージに対していくつかのバリアントを用意しています。 次世代イメージについては、それぞれのバリアントをイメージごとに確認するようにしてください。 次世代イメージの `-browsers` バリアントは現在作成中です。 サポートされているバリアントの詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/images)でイメージの一覧を参照してください。
+CircleCI は、次世代言語イメージに対していくつかのバリアントを用意しています。 次世代イメージについては、それぞれのバリアントをイメージごとに確認するようにしてください。 次世代イメージの `-browsers` バリアントは現在作成中です。 サポートされているバリアントの詳細については、[Developer Hub](https://circleci.com/developer/ja/images)でイメージの一覧を参照してください。
 
 ### サービス イメージ
 {: #service-images }
@@ -243,7 +243,7 @@ CircleCI は、サービスイメージに対してバリアント 1つのみ用
 {: #next-gen-service-images }
 {:.no_toc}
 
-CircleCI では、次世代サービス コンビニエンス イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
+CircleCI では、次世代サービス コンビニエンス イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[Developer Hub](https://circleci.com/developer/ja/images/)を参照してください。
 
 ## プリインストール ツール
 {: #pre-installed-tools }
