@@ -11,6 +11,7 @@ The example build configurations referenced throughout this article are based
 on this [example JavaScript repository](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml).
 
 ## Prerequisites
+{: #prerequisites }
 
 This document assumes that:
 1. You have an account with CircleCI that is linked to a repository. If you do not have an account,
@@ -18,6 +19,7 @@ consider reading our [Getting Started Guide]({{ site.baseurl }}/2.0/getting-star
 1. You understand the [Basic Concepts]({{ site.baseurl }}/2.0/concepts/) in CircleCI.
 
 ## Why migrate to CircleCI?
+{: #why-migrate-to-circleci }
 
 - **Scaling Concurrency**: You can run up to 80 concurrent jobs on our monthly Performance Plan or even more on a [custom plan](https://circleci.com/pricing/). Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
 - **Resource Classes**: [vCPU & RAM]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
@@ -25,8 +27,9 @@ consider reading our [Getting Started Guide]({{ site.baseurl }}/2.0/getting-star
 - **Orbs**: Rather than proprietary integrations, CircleCI offers [orbs]({{ site.baseurl }}/2.0/orb-intro/), which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. [Visit the registry](https://circleci.com/developer/orbs).
 
 ## Configuration files
+{: #configuration-files }
 
-Both Travis CI and CircleCI make use of a _configuration file_ to define your 
+Both Travis CI and CircleCI make use of a _configuration file_ to define your
 workflows and jobs. The only difference is that your CircleCI configuration
 will live in `.circleci/config.yml` at the root of your repository.
 
@@ -50,6 +53,7 @@ Below, you'll find a side-by-side comparison of different configuration declarat
 {: class="table table-striped"}
 
 ## Building on pushing code
+{: #building-on-pushing-code }
 
 The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The
 app is built with the `MERN` stack and there are tests present on the client as
@@ -61,7 +65,7 @@ Travis Configuration might look like the following example:
 ```yaml
 language: node_js
 services: mongodb
-before_install: 
+before_install:
   - npm i -g npm@5
 node_js:
   - "5"
@@ -130,6 +134,7 @@ restrictions on step order. By leveraging Docker, specific Node.js and
 MongoDB versions are made available in each `command` that gets run.
 
 ### Caching dependencies
+{: #caching-dependencies }
 
 With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml`
 checks for a dependency cache based specifically on a checksum of the
@@ -145,6 +150,7 @@ case, by using the `cache: npm` key in `.travis.yml`, dependencies will default
 to caching `node_modules`.
 
 ## Environment variables
+{: #environment-variables }
 
 Both Travis and CircleCI enable the use of environment variables in your builds.
 
@@ -152,6 +158,7 @@ In your CircleCI `.circleci/config.yml` you can put environment variables direct
 build config in a step, a job, or a container. These variables are public and unencrypted. With Travis CI, it is possible to include [encrypted environment](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml) variables directly in your config (if you install the `travis` gem).
 
 ### Setting environment variables in the web application
+{: #setting-environment-variables-in-the-web-application }
 
 If you've used Travis CI's [repository settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings),
 you'll be comfortable setting your environment variables in CircleCI's project
@@ -163,6 +170,7 @@ With CircleCI, it is also possible to securely set environment variables across 
 **Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
 
 ## Artifacts uploading
+{: #artifacts-uploading }
 
 With Travis CI you can upload build artifacts either manually using AWS S3 or
 as an attachment to a GitHub Release.
@@ -191,6 +199,7 @@ of the Job page in your browser, or access them through the CircleCI API. Read t
 documentation on [artifact uploading]({{site.baseurl}}/2.0/artifacts/) to learn more.
 
 ## Advanced tooling
+{: #advanced-tooling }
 
 More advanced configuration on Travis might make use of a *Build Matrix*
 (a configuration that specifies running multiple concurrent jobs) or *Build Stages*
@@ -200,4 +209,4 @@ jobs rely on the success of previous jobs.)
 With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.circleci/config.yml` to define a collection of jobs and their
 run order, whether leveraging concurrency, fan-in or fan-out builds, or
 sequentially-dependant builds. Workflows allow complex and fine-grained control
-over your build configuration. 
+over your build configuration.

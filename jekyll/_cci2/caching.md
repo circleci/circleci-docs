@@ -26,6 +26,7 @@ Caching is particularly useful with **package dependency managers** such as Yarn
 </div>
 
 ## Example caching configuration
+{: #example-caching-configuration }
 {:.no_toc}
 
 Caching keys are simple to configure. The following example updates a cache if it changes by using a checksum of `pom.xml` with a cascading fallback:
@@ -41,6 +42,7 @@ Caching keys are simple to configure. The following example updates a cache if i
 {% endraw %}
 
 ## Introduction
+{: #introduction }
 {:.no_toc}
 
 Automatic dependency caching is not available in CircleCI 2.0, so it is important to plan and implement your caching strategy to get the best performance. Manual configuration in 2.0 enables more advanced strategies and finer control.
@@ -50,6 +52,7 @@ This document describes the manual caching available, the costs and benefits of 
 For information about enabling a premium feature to reuse the unchanged layers of your Docker image, see the [Enabling Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching/) document.
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 A cache stores a hierarchy of files under a key. Use the cache to store data that makes your job faster, but in the case of a cache miss or zero cache restore the job will still run successfully. For example, you might cache `NPM` package directories (known as `node_modules`); the first time your job runs it will download all your dependencies, cache them, and—provided your cache is valid—the cache will be used to speed up your job the next time it is run.
@@ -59,6 +62,7 @@ Caching is a balance between reliability (not using an out-of-date or inappropri
 In general it is safer to preserve reliability than to risk a corrupted build or to build using stale dependencies very quickly. So, the ideal is to balance performance gains while maintaining high reliability.
 
 ## Caching and open source
+{: #caching-and-open-source }
 
 If your project is open source/available to be forked and receive PRs from
 contributors, please make note of the following:
@@ -71,6 +75,7 @@ contributors, please make note of the following:
 
 
 ## Caching libraries
+{: #caching-libraries }
 
 The dependencies that are most important to cache during a job are the libraries on which your project depends. For example, cache the libraries that are installed with `pip` in Python or `npm` for Node.js. The various language dependency managers, for example `npm` or `pip`, each have their own paths where dependencies are installed. See our Language guides and [demo projects](https://circleci.com/docs/2.0/demo-apps/) for the specifics for your stack.
 
@@ -79,6 +84,7 @@ Tools that are not explicitly required for your project are best stored on the D
 ![Caching Dependencies]( {{ site.baseurl }}/assets/img/docs/cache_deps.png)
 
 ## Writing to the cache in workflows
+{: #writing-to-the-cache-in-workflows }
 
 Jobs in one workflow can share caches. Note that this makes it possible to create race conditions in caching across different jobs in workflows.
 
@@ -91,6 +97,7 @@ There are more complex cases, where jobs can save using a dynamic key like {% ra
 Another race condition is possible when sharing caches between jobs. Consider a workflow with no dependency links: Job1 and Job2.  Job2 uses the cache saved from Job1.  Job2 could sometimes successfully restore a cache, and sometimes report no cache is found, even when Job1 reports saving it.  Job2 could also load a cache from a previous workflow.  If this happens, this means Job2 tried to load the cache before Job1 saved it.  This can be resolved by creating a workflow dependency: Job1 -> Job2.  This would force Job2 to wait until Job1 has finished running.
 
 ## Restoring cache
+{: #restoring-cache }
 
 CircleCI restores caches in the order of keys listed in the `restore_cache` step. Each cache key is namespaced to the project, and retrieval is prefix-matched. The cache will be restored from the first matching key. If there are multiple matches, the most recently generated cache will be used.
 
@@ -115,15 +122,17 @@ Let's walk through how the above cache keys are used in more detail:
 
 Each line in the `keys:` list all manage _one cache_ (each line does **not** correspond to its own cache). The list of keys {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} and `v1-npm-deps-`), in this example, represent a **single** cache. When it comes time to restore the cache, CircleCI first validates the cache based on the first (and most specific) key, and then steps through the other keys looking for any other cache-key changes.
 
-Here, the first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`; if this file was to change in your commit, CircleCI would see a new cache-key. 
+Here, the first key concatenates the checksum of `package-lock.json` file into the string `v1-npm-deps-`; if this file was to change in your commit, CircleCI would see a new cache-key.
 
 The next key does not have a dynamic component to it, it simply is a static string: `v1-npm-deps-`. If you would like to invalidate your cache manually, you can bump `v1` to `v2` in your `config.yml` file. In this case, you would now have a new cache key `v2-npm-deps`, which will trigger the storing of a new cache.
 
 ### Using caching in monorepos
+{: #using-caching-in-monorepos }
 
-There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo. 
+There are many different approaches to utilizing caching in monorepos. This type of approach can be used whenever you need to manage a shared cache based on multiple files in different parts of your monorepo.
 
 #### Creating and building a concatenated `package-lock` file
+{: #creating-and-building-a-concatenated-package-lock-file }
 
 1) Add custom command to config:
 
@@ -159,12 +168,15 @@ commands:
 {% endraw %}
 
 ## Managing caches
+{: #managing-caches }
 
 ### Cache expiration
+{: #cache-expiration }
 {:.no_toc}
 Caches created via the `save_cache` step are stored for up to 15 days.
 
 ### Clearing cache
+{: #clearing-cache }
 {:.no_toc}
 
 If you need to get clean caches when your language or dependency management tool versions change, use a naming strategy similar to the previous example and then change the cache key names in your `config.yml` file and commit the change to clear the cache.
@@ -186,12 +198,14 @@ For example, you may want to clear the cache in the following scenarios by incre
 </div>
 
 ### Cache size
+{: #cache-size }
 {:.no_toc}
 We recommend keeping cache sizes under 500MB. This is our upper limit for corruption checks because above this limit check times would be excessively long. You can view the cache size from the CircleCI Jobs page within the `restore_cache` step.
 Larger cache sizes are allowed but may cause problems due to a higher chance of decompression issues and corruption during download.
 To keep cache sizes down, consider splitting into multiple distinct caches.
 
 ## Basic example of dependency caching
+{: #basic-example-of-dependency-caching }
 
 The extra control and power in CircleCI 2.0 manual dependency caching requires that you be explicit about what you cache and how you cache it. See the [save cache section]({{ site.baseurl }}/2.0/configuration-reference/#save_cache) of the Configuring CircleCI document for additional examples.
 
@@ -213,6 +227,7 @@ Unlike the special step [`persist_to_workspace`]({{ site.baseurl }}/2.0/configur
 neither `save_cache` nor `restore_cache` support globbing for the `paths` key.
 
 ## Using keys and templates
+{: #using-keys-and-templates }
 
 A cache-key is a _user-defined_ string that corresponds to a data cache. A cache-key can be created by interpolating **dynamic values** — these are called **templates**. Anything you see in a cache-key between curly braces is a template. Consider the following example:
 
@@ -254,13 +269,15 @@ Template | Description
 {: class="table table-striped"}
 
 ### Further notes on using keys and templates
+{: #further-notes-on-using-keys-and-templates }
 {:.no_toc}
 
-- When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used. 
+- When defining a unique identifier for the cache, be careful about overusing template keys that are highly specific such as {% raw %}`{{ epoch }}`{% endraw %}. If you use less specific template keys such as {% raw %}`{{ .Branch }}`{% endraw %} or {% raw %}`{{ checksum "filename" }}`{% endraw %}, you’ll increase the odds of the cache being used.
 - Cache variables can also accept [parameters]({{site.baseurl}}/2.0/reusing-config/#using-parameters-in-executors) if your build makes use of them — for example: {% raw %}`v1-deps-<< parameters.varname >>`{% endraw %}.
 - You do not have to use dynamic templates for your cache-key. You can use a static string, and "bump" (change) its name to force a cache invalidation.
 
 ### Full example of saving and restoring cache
+{: #full-example-of-saving-and-restoring-cache }
 {:.no_toc}
 
 The following example demonstrates how to use `restore_cache` and `save_cache` together with templates and keys in your `.circleci/config.yml` file.
@@ -331,6 +348,7 @@ The following example demonstrates how to use `restore_cache` and `save_cache` t
 {% endraw %}
 
 ### Partial dependency caching strategies
+{: #partial-dependency-caching-strategies }
 {:.no_toc}
 
 Some dependency managers do not properly handle installing on top of partially restored dependency trees.
@@ -371,6 +389,7 @@ Since caches are immutable, this strategy allows you to regenerate all of your c
 The stability of partial dependency caching is dependent on your dependency manager. Below is a list of common dependency managers, recommended partial caching strategies, and associated justifications.
 
 #### Bundler (Ruby)
+{: #bundler-ruby }
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -384,7 +403,6 @@ To prevent this behavior, add a step that cleans Bundler before restoring depend
 
 ```yaml
 steps:
-  - run: bundle clean --force
   - restore_cache:
       keys:
         # when lock file changes, use increasingly general patterns to restore cache
@@ -392,6 +410,7 @@ steps:
         - v1-gem-cache-{{ arch }}-{{ .Branch }}-
         - v1-gem-cache-{{ arch }}-
   - run: bundle install
+  - run: bundle clean --force
   - save_cache:
       paths:
         - ~/.bundle
@@ -401,6 +420,7 @@ steps:
 {% endraw %}
 
 #### Gradle (Java)
+{: #gradle-java }
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -427,6 +447,7 @@ steps:
 {% endraw %}
 
 #### Maven (Java) and Leiningen (Clojure)
+{: #maven-java-and-leiningen-clojure }
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -455,6 +476,7 @@ steps:
 {% endraw %}
 
 #### npm (Node)
+{: #npm-node }
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -481,6 +503,7 @@ steps:
 {% endraw %}
 
 #### pip (Python)
+{: #pip-python }
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -507,6 +530,7 @@ steps:
 {% endraw %}
 
 #### Yarn (Node)
+{: #yarn-node }
 {:.no_toc}
 
 **Safe to Use Partial Cache Restoration?**
@@ -539,6 +563,7 @@ We recommend using `yarn --frozen-lockfile --cache-folder ~/.cache/yarn` for two
 {% endraw %}
 
 ## Caching strategy tradeoffs
+{: #caching-strategy-tradeoffs }
 
 In cases where the build tools for your language include elegant handling of dependencies, partial cache restores may be preferable to zero cache restores for performance reasons. If you get a zero cache restore, you have to reinstall all of your dependencies, which can result in reduced performance. One alternative is to get a large percentage of your dependencies from an older cache instead of starting from zero.
 
@@ -549,6 +574,7 @@ Then, track the costs over time. If the performance costs of zero cache restores
 Listing multiple keys for restoring a cache increases the odds of a partial cache hit. However, broadening your `restore_cache` scope to a wider history increases the risk of confusing failures. For example, if you have dependencies for Node v6 on an upgrade branch, but your other branches are still on Node v5, a `restore_cache` step that searches other branches might restore incompatible dependencies.
 
 ### Using a lock file
+{: #using-a-lock-file }
 {:.no_toc}
 
 Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock`) checksums may be a useful cache key.
@@ -556,11 +582,13 @@ Language dependency manager lockfiles (for example, `Gemfile.lock` or `yarn.lock
 An alternative is to do `ls -laR your-deps-dir > deps_checksum` and reference it with {% raw %}`{{ checksum "deps_checksum" }}`{% endraw %}. For example, in Python, to get a more specific cache than the checksum of your `requirements.txt` file you could install the dependencies within a virtualenv in the project root `venv` and then do `ls -laR venv > python_deps_checksum`.
 
 ### Using multiple caches for different languages
+{: #using-multiple-caches-for-different-languages }
 {:.no_toc}
 
 It is also possible to lower the cost of a cache miss by splitting your job across multiple caches. By specifying multiple `restore_cache` steps with different keys, each cache is reduced in size thereby reducing the performance impact of a cache miss. Consider splitting caches by language type (npm, pip, or bundler) if you know how each dependency manager stores its files, how it upgrades, and how it checks dependencies.
 
 ### Caching expensive steps
+{: #caching-expensive-steps }
 {:.no_toc}
 
 Certain languages and frameworks have more expensive steps that can and should be cached. Scala and Elixir are two examples where caching the compilation steps will be especially effective. Rails developers, too, would notice a performance boost from caching frontend assets.
@@ -568,6 +596,7 @@ Certain languages and frameworks have more expensive steps that can and should b
 Do not cache everything, but _do_ consider caching for costly steps like compilation.
 
 ## Source caching
+{: #source-caching }
 
 It is possible and often beneficial to cache your git repository to save time in your `checkout` step, especially for larger projects. Here is an example of source caching:
 
@@ -602,6 +631,7 @@ That said, it's worth comparing build times with and without source caching; `gi
 **NOTE**: The built-in `checkout` command disables git's automatic garbage collection. You might choose to manually run `git gc` in a `run` step prior to running `save_cache` to reduce the size of the saved cache.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 [Optimizations]({{ site.baseurl }}/2.0/optimizations/)

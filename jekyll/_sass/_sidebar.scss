@@ -4,7 +4,7 @@ $sidebar-spacing-base: 5px;
   width: $leftbar-width; // 260px;
   position: relative;
 
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: none;
   }
 }
@@ -12,10 +12,9 @@ $sidebar-spacing-base: 5px;
 .sidebar {
   background: #F7F7F7;
   font-family: "roboto";
-  height: 92vh;
+  height: calc(100vh - #{$nav-height});
   padding: 30px 24px 60px 16px;
   position: absolute;
-  bottom: 0;
   width: $leftbar-width; // 260px;
   border-right: 1px solid $gray-200;
   overflow-y: scroll;
@@ -50,7 +49,6 @@ $sidebar-spacing-base: 5px;
 
   &.fixed {
     position: fixed;
-    top: 118px;
     display: flex;
     flex-direction: column;
   }
@@ -142,53 +140,26 @@ $sidebar-spacing-base: 5px;
 }
 
 .sidebar-mobile-wrapper {
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  padding: 50px 0 0 0;
-  width: 100%;
-  background: $gray-100;
   display: none;
-  cursor: pointer;
-
-  .icon {
-    width: 24px;
-  }
-
-  .mobile-sidebar-item {
-    display: block;
-    width: 100%;
-    padding: $spacing-small-vertical 16px;
-
-    &.hidden {
-      display: none;
-    }
-
-    span {
-      display: inline-block;
-      margin-left: $spacing-small-horizontal;
-    }
-
-    .arrow {
-      float: right;
-      margin-top: 5px;
-      transform: rotate(90deg);
-    }
-  }
+  width: 100%;
 
   .mobile-sidebar {
     @extend .sidebar;
-    padding-right: 16px;
+    padding-right: 5px;
     width: 100%;
-    left: 0;
-    top: 182px;
-    z-index: 2;
+
+    // Reset various parts of .sidebar
+    position: initial;
+    height: initial;
+    background: initial;
+    border: initial;
 
     .main-nav-item {
       width: 100%;
     }
   }
 
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: block;
   }
 }

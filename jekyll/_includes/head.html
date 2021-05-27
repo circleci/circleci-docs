@@ -13,13 +13,12 @@
   <link rel="stylesheet" href="{{ "/assets/css/site.css" | prepend: site.baseurl }}" />
 	<link rel="stylesheet" href="{{ "/assets/css/spacing.css" | prepend: site.baseurl }}" />
 	<link rel="stylesheet" href="{{ "/assets/css/buttons.css" | prepend: site.baseurl }}" />
-	<link rel="stylesheet" href="{{ "/assets/css/navbar.css" | prepend: site.baseurl }}" />
     <link rel="stylesheet" href="{{ "/assets/css/syntax.css" | prepend: site.baseurl }}" />
 	<link rel="stylesheet" href="{{ "/assets/css/jquery.navgoco.css" | prepend: site.baseurl }}" type="text/css" media="screen" />
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 	<!-- End  -->
 	<link rel="stylesheet" href="{{ "/assets/css/main.css" | prepend: site.baseurl }}" />
-	<link rel='stylesheet' href="{{ "/assets/css/mobile.css" | prepend: site.baseurl }}" media="screen and (max-width: 800px)" />
+	<link rel='stylesheet' href="{{ "/assets/css/mobile.css" | prepend: site.baseurl }}" media="screen and (max-width: 767px)" />
 	<link rel="stylesheet" href="{{ "/assets/css/footer.css" | prepend: site.baseurl }}" type="text/css" media="screen" />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
 	<link rel="stylesheet" href="{{ "/assets/css/asciidoc.css" | prepend: site.baseurl }}">
@@ -28,7 +27,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js"></script>
 	<script>hljs.initHighlightingOnLoad();</script-->
 	<title>{% if page.title %}{{ page.title | escape }} - CircleCI{% else %}{{ site.title | escape }} - CircleCI{% endif %}</title>
-	{% include segment.html %}
+	{% include_cached segment.html site=site page=page %}
 
 	<!-- Instant Search CDN links /-->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossorigin="anonymous">

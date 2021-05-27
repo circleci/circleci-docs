@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document provides a summary of features and product notes for the release of CircleCI Server v{serverversion}. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v{serverversion}, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
+This document provides a summary of features and product notes for the release of CircleCI Server v2.19. For a full list of changes, including patch releases, refer to the https://circleci.com/server/changelog[changelog]. For a step by step guide to **upgrading** your CircleCI Server installation to v2.19.x, see our <<updating-server#nomad-launch-configuration,upgrade guide>>.
 
 ## Requirements for Upgrading
 
@@ -24,7 +24,7 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 
 * We now require a minimum 32GB of RAM for the Services Machine. 
 * We made some changes to our Redis configuration in v2.18. If you have externalized Redis then you’ll need to update your configuration. Please contact your Customer Success Manager if you are upgrading from pre v2.18 to v2.19.
-* We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to {serverversion}.
+* We have made changes to our Postgres version and require at least postgreSQL v9.5.16. If you have externalized postgreSQL then please update to at least that version in 2.17.x before upgrading to v2.19.
 
 ## Known Issues
 
@@ -41,6 +41,11 @@ WARNING: If you are upgrading from pre v2.18.x, and have at any time changed you
 TIP: For more information on SSH reruns in Server installations, see the https://circleci.com/docs/2.0/ssh-server/[SSH Rerun Architecture in Server] guide.
 
 * Classic Load Balancer is no longer available from v2.19.02 due to the ciphersuite changes listed in the notes below. CircleCI no longer accepts requests from https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-ssl-security-policy.html[Classic Load Balancer], so you should move to https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html[Network Load Balancer (NLB)] or https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html[Application Load Balancer (ALB)].
+
+## What's New in v2.19.12
+
+* Removed support for 1.0 builder graceful shutdown on auto-scaling events.
+  ** This alleviates Python 2 security vulnerabilities.
 
 ## What's New in v2.19.11
 

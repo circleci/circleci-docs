@@ -12,9 +12,10 @@ version:
 
 *[Tutorials & 2.0 Sample Apps]({{ site.baseurl }}/2.0/tutorials/) > Language Guide: Crystal*
 
-This guide will help you get started with a minimal Crystal application on CircleCI. 
+This guide will help you get started with a minimal Crystal application on CircleCI.
 
 ## Overview
+{: #overview }
 
 If you’re in a rush, just copy the sample configuration below into a `.circleci/config.yml` in your project’s root directory and start building.
 
@@ -30,12 +31,13 @@ developing quickly. Altering the Docker image to the `:latest` version may cause
 breaking changes.
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 ```yaml
 version: 2 # use CircleCI 2.0
 jobs: # a collection of jobs
-  build: 
+  build:
     working_directory: ~/demo_app
     docker: # run build steps with docker
       - image: crystallang/crystal:0.27.0 # primary docker container; all `steps` will run here.
@@ -62,6 +64,7 @@ jobs: # a collection of jobs
 {% endraw %}
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 Every `config.yml` starts with the [`version`]({{ site.baseurl }}/2.0/configuration-reference/#version) key.
 This key is used to issue warnings about breaking changes.
@@ -85,7 +88,7 @@ All commands for a job execute in this container.
 
 ```yaml
 jobs:
-  build: 
+  build:
     working_directory: ~/demo_app
     docker:
       - image: crystallang/crystal:0.27.0
@@ -135,5 +138,6 @@ Finally, we run `crystal spec` to run the project's test suite.
 Great! You've set up CircleCI 2.0 for a basic Crystal application.
 
 ## Deploy
+{: #deploy }
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

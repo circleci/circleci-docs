@@ -8,21 +8,14 @@ $white: #FFFFFF;
 $text-color-header: $black-light;
 $transition-duration-medium: 400ms;
 
-// These values are also required, but have been customized to match the nav height of this project.
-$nav-height: 120px;
-$subnav-height: 64px;
-$nav-offset: $nav-height;
-$subnav-offset: $subnav-height;
-$nav-offset-subnav: $nav-offset + $subnav-offset;
-
 @import 'shared/components/subnav';
 
 // These tweaks to the shared subnav CSS are necessary to work in the context of this project's layout.
 
 .subnav.component {
-  padding: 0 24px;
-  margin-left: -24px;
-  margin-right: -24px;
+  padding: 0 15px;
+  margin-left: -15px;
+  margin-right: -15px;
   width: auto;
   background-color: #FAFAFA;
 
@@ -67,8 +60,20 @@ $nav-offset-subnav: $nav-offset + $subnav-offset;
     font-size: $font-size-small;
 
     li {
-      padding-top: 8px;
+      // More top-padding to help separate these from the header drop-shadow
+      padding-top: 16px;
       padding-bottom: 8px;
+    }
+  }
+}
+
+// 3. Special case for search results container
+#hits-target {
+  #subnav-placeholder {
+    position: sticky;
+    top: $nav-height-mobile;
+    @media (min-width: $screen-md) {
+      top: $nav-height;
     }
   }
 }
