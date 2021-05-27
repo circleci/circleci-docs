@@ -20,7 +20,7 @@ CircleCI が提供しているビルド済みイメージの概要と、言語�
 {: #overview }
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 一般に、これらのイメージは正式な Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれます。 すべてのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/search?q=circleci&type=image) から入手できます。 GitHub の `circleci-images` リポジトリには、[従来の Docker イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。 各次世代イメージのリポジトリへのリンクについては、[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。 [これらの Docker イメージの作成に使用された Dockerfile](https://github.com/circleci-public/circleci-dockerfiles) は、`circleci-dockerfiles` リポジトリで確認できます。
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 一般に、これらのイメージは正式な Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれます。 すべてのビルド済みイメージは、[Docker Hub の CircleCI Org](https://hub.docker.com/search?q=circleci&type=image) から入手できます。 GitHub の `circleci-images` リポジトリには、[従来の Docker イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。 各次世代イメージのリポジトリへのリンクについては、[Developer Hub](https://circleci.com/developer/ja/images/)を参照してください。 [これらの Docker イメージの作成に使用された Dockerfile](https://github.com/circleci-public/circleci-dockerfiles) は、`circleci-dockerfiles` リポジトリで確認できます。
 
 _**メモ:** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
 
