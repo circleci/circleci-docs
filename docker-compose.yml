@@ -1,7 +1,7 @@
 version: "3"
 services:
   jekyll:
-    command: bash -c "apt-get update -y && apt-get install -y cmake pkg-config && bundle install && bundle exec jekyll serve -s jekyll --incremental --livereload --host=0.0.0.0"
+    command: bash -c "bundle install && bundle exec jekyll serve -s jekyll --incremental --livereload --host=0.0.0.0"
     working_dir: /root
     image: ruby:2.7.2
     volumes:
