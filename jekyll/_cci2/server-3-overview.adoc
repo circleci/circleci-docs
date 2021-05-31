@@ -28,7 +28,7 @@ The application exposes 4 services using load balancers, three of these load bal
 | Ports
 | Description
 
-| Front-end GUI Proxy & API
+| Frontend GUI Proxy & API
 | External
 | 80 and 443
 | Exposes the web application.
