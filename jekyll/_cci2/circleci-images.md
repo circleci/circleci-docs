@@ -36,6 +36,7 @@ Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in
 
 ### Examples
 {: #examples }
+{:.no_toc}
 
 Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
@@ -113,9 +114,7 @@ applies the `latest` tag. The `latest` tag refers to the most recent stable
 release of an image. However, since this tag may change unexpectedly, it is best
 practice to add an explicit image tag. 
 
-There are two ways to make an image more specific:
-
-**NOTE:** For Node.js variant Docker images (tags that end in `-node`) the LTS
+**Note:** For Node.js variant Docker images (tags that end in `-node`) the LTS
 release of Node.js is pre-installed. If you would like to include your own
 specific version of Node.js / NPM you can set it up in a series of `run` steps
 in your `.circleci/config.yml`. Consider the example below, which installs a
@@ -146,8 +145,10 @@ jobs:
 {: #finding-an-image-id }
 {:.no_toc}
 
-1. In the CircleCI application, go to a past build that used the image.
-2. On the **Test Summary** tab, click the **Spin up environment** step.
+Follow these steps to find your docker image id: 
+
+1. In the CircleCI application, navigate to the job in your pipeline for which you would like to know the docker image.
+2. Toggle open the **Spin up environment** step.
 3. In the log output, locate the digest for the image.
 4. Add the image ID to the image name as shown below.
 
@@ -297,11 +298,10 @@ All convenience images have been extended with additional tools, installed with 
 - `xvfb` (legacy images only)
 - `zip`
 
-The specific version of a particular package
-that gets installed in a particular CircleCI image variant
-depends on the default version included in the package directory
-for the Linux distribution/version installed in that variant's base image.
-The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
+The specific version of a particular package that gets installed in a particular
+CircleCI image variant depends on the default version included in the package
+directory for the Linux distribution/version installed in that variant's base
+image. The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
 or [Stretch](https://packages.debian.org/stretch/)-based images,
 however the next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
 For details on individual variants of legacy CircleCI images, see the
@@ -319,9 +319,18 @@ The following packages are installed via `curl` or other means.
 ## Out of scope
 {: #out-of-scope }
 
-1. If an image isn't listed above, it is not available. As the Convenience Image program is revamped, proposals for new images are not currently being accepted.
-1. Old versions of software will not be rebuilt. Once an upstream image stops building the tag for a specific release, say Node.js v8.1.0, then we stop building it too. This means other tools in that image, such as `npm` in this example, will no longer be updated either.
-1. We don't support building preview, beta, or release candidate images tags. On occasion they'll be available but these tags tend to cause our build system for Convenience Images to fail. If you need a non-stable release of a language, we suggest installing it via [an orb](https://circleci.com/orbs/) or a custom Docker image instead.
+1. If an image isn't listed above, it is not available. As the Convenience Image
+   program is revamped, proposals for new images are not currently being
+   accepted.
+1. Old versions of software will not be rebuilt. Once an upstream image stops
+   building the tag for a specific release, say Node.js v8.1.0, then we stop
+   building it too. This means other tools in that image, such as `npm` in this
+   example, will no longer be updated either.
+1. We don't support building preview, beta, or release candidate images tags. On
+   occasion they'll be available but these tags tend to cause our build system
+   for Convenience Images to fail. If you need a non-stable release of a
+   language, we suggest installing it via [an orb](https://circleci.com/orbs/)
+   or a custom Docker image instead.
 
 
 ## Latest image tags by language
