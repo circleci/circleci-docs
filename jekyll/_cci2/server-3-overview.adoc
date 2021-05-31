@@ -18,7 +18,7 @@ CircleCI Server v{serverversion} is a continuous integration and continuous deli
 
 The core of the CircleCI Server application runs inside Kubernetes.
 
-The application exposes five services using load balancers, three of these load balancers are VPC-internal.
+The application exposes 4 services using load balancers, three of these load balancers are VPC-internal.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -28,12 +28,7 @@ The application exposes five services using load balancers, three of these load 
 | Ports
 | Description
 
-| Front-end GUI Proxy
-| External
-| 80 and 443
-| Exposes the web application.
-
-| Front-end API
+| Front-end GUI Proxy & API
 | External
 | 80 and 443
 | Exposes the web application.
