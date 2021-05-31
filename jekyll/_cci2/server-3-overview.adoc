@@ -197,7 +197,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 
 | kotsadm-kots
 | Licensing
-| The main Kots application. Runs the Kots admin console where upgrades and configuration of server take place	No admin console available.
+| The main Kots application. Runs the Kots admin console where upgrades and configuration of Server take place	No admin console available.
 | No upgrades or configuration possible for Server
 |
 
@@ -275,7 +275,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 
 | scheduler
 | Execution
-| Runs tasks sent to it. Works with Nomad server.
+| Runs tasks sent to it. Works with Nomad Server.
 | No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
 |
 

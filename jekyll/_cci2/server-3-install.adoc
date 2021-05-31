@@ -59,7 +59,7 @@ image::server-config.png[Server v{serverversion} Configuration]
 Global configuration settings are a collection of cross-cutting configuration settings that affect the function of the entire
 application as a whole. Component-specific settings can be found below under the *Component Settings* section.
 
-. *Domain Name* (required): The domain name for your server installation. For example, circleci.yourcompany.com. You will
+. *Domain Name* (required): The domain name for your Server installation. For example, circleci.yourcompany.com. You will
 need to configure this domain and point it to the Circleci Server Traefik Load Balancer once it is configured in a later step.
 . *Frontend TLS Private Key*: A PEM encoded TLS private key for the web application. A default, self-signed TLS key is provided.
 . *Frontend TLS Certificate*: A PEM encoded TLS certificate for the web application. A default, self-signed TLS certificate is provided.
@@ -82,7 +82,7 @@ For example, if you host your DNS on Google Cloud, the following commands will p
 
 [source,bash]
 ----
-DOMAIN=example.com  # replace with the domain of your installation of server
+DOMAIN=example.com  # replace with the domain of your installation of Server
 GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json  # Path to GCP credentials
 sudo certbot certonly --dns-google \
   --dns-google-credentials ${GOOGLE_APPLICATION_CREDENTIALS} \
@@ -94,7 +94,7 @@ If instead you're using AWS Route53 for DNS, execute this example:
 
 [source,bash]
 ----
-DOMAIN=example.com # replace with the domain of your installation of server
+DOMAIN=example.com # replace with the domain of your installation of Server
 sudo certbot certonly --dns-route53 \
   -d "${DOMAIN}" \
   -d "app.${DOMAIN}"
@@ -126,7 +126,7 @@ Copy and paste the entirety of the output into the Encryption Signing Key field.
 WARNING: It is recommended to store these securely; if they are lost, job history and artifacts will not be recoverable.
 
 ### GitHub
-These settings control authorization to server using Github OAuth and allow for updates to Github using build status information.
+These settings control authorization to Server using Github OAuth and allow for updates to Github using build status information.
 
 NOTE: If this instance is being set up in preparation for a migration from 2.19, it is recommended to use a new OAuth application, not the same one used in 2.19.
 
@@ -220,7 +220,7 @@ WARNING: You should only disable this if you can otherwise guarantee the confide
 ### VM Service
 VM Service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules.
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your server installation.
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your Server installation.
 
 #### Authentication and Permissions
 ##### AWS EC2
@@ -574,8 +574,8 @@ ingress rules for TCP port 2376 with the IP addresses of the Nomad clients and K
 ## Step 5 - Create DNS Entries for the Frontend
 Next, create a DNS entry for your traefik load balancer, i.e. `circleci.your.domain.com` and
 `app.circleci.your.domain.com`. You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how
-to create TLS certs for your server install. Although TLS is optional, should it be used, it is important to ensure your TLS cert
-covers both the server domain and sub-domain as in the examples provided. Once the user is logged in, all client requests
+to create TLS certs for your Server install. Although TLS is optional, should it be used, it is important to ensure your TLS cert
+covers both the Server domain and sub-domain as in the examples provided. Once the user is logged in, all client requests
 are routed through your traefik sub-domain, i.e, `app.{your_domain}.com`.
 
 For more information on adding a new DNS record, see the following documentation:
@@ -605,7 +605,7 @@ of traffic from them to the control plane in some other way.
 
 
 ### Deploy
-Click the *Save config* button to update your installation and re-deploy server.
+Click the *Save config* button to update your installation and re-deploy Server.
 
 ## Step 7 - Validate Installation
 
