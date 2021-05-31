@@ -1,75 +1,75 @@
 ---
 layout: classic-docs
-title: "Insights Partnerships"
-short-title: "Insights Partnerships"
+title: "Insights データの連携"
+short-title: "Insights データの連携"
 version:
   - Cloud
 ---
 
-## Overview
+## 概要
 {: #overview }
 
 {:toc}
 
-This document describes how you can connect Insights data with third party providers.
+Insights ダッシュボードのデータを、サードパーティ プロバイダー製品と連携する方法について説明します。
 
-### Sumo Logic integration
+### Sumo Logic とのインテグレーション
 {: #sumo-logic-integration }
 
-Sumo Logic users may track and visualize analytical data across all of their jobs on CircleCI. To do so, use the Sumo Logic Orb and Sumo Logic app integration from the Sumo Logic partner integrations site.
+Sumo Logic を使用すると、CircleCI 上のすべてのジョブを追跡し、その分析データを可視化できます。 そのためには、Sumo Logic パートナー インテグレーション サイトから、Sumo Logic Orb と Sumo Logic アプリケーション インテグレーションを使用します。
 
 
-#### The CircleCI dashboard for Sumo Logic
+#### Sumo Logic の CircleCI ダッシュボード
 {: #the-circleci-dashboard-for-sumo-logic }
 
-![header]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI_SumoLogic_Dashboard.png)
 
-Included panels:
+以下の情報が表示されます。
 
-- Total Job
-- Total Successful Jobs
-- Total Failed Jobs
-- Job Outcome
-- Average Runtime in Seconds (by Job)
-- Jobs By Projects
-- Recent Jobs (latest 10)
-- Top 10 Slowest Failed Jobs In Seconds
-- Top 10 Slowest Successful Jobs In Seconds
+- 合計ジョブ数
+- 合計成功ジョブ数
+- 合計失敗ジョブ数
+- ジョブの結果
+- ジョブ別の平均実行時間 (秒単位)
+- プロジェクト別のジョブ数
+- 最新のジョブ (直近 10 個)
+- 時間のかかった失敗ジョブ上位 10 個 (秒単位)
+- 時間のかかった成功ジョブ上位 10 個 (秒単位)
 
-Install the CircleCI dashboard by using the App Catalog from the dashboard home page.
+CircleCI ダッシュボードは、ダッシュボードのホームページからアプリケーション カタログを使用してインストールできます。
 
-![header]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
+![ヘッダー]({{ site.baseurl }}/assets/img/docs/sumologic_app_catalog.png)
 
-This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
+ダッシュボードは CircleCI Sumo Logic Orb を介してデータを受け取ります。この Orb は、追跡するプロジェクトに含まれている必要があります。
 
-#### The Sumo Logic orb
+#### Sumo Logic Orb
 {: #the-sumo-logic-orb }
 
-Find the latest version of the Sumo Logic orb on the [Orb Registry](https://circleci.com/developer/orbs/orb/circleci/sumologic).
+Sumo Logic Orb の最新版は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/sumologic)で提供されています。
 
-##### 1. Import the Sumo Logic orb.
+##### 1. Sumo Logic Orb をインポートする
 {: #1-import-the-sumo-logic-orb }
 {:.no_toc}
 
-Add the Sumo Logic orb to your project by including the top-level `orbs` key and import `circleci/sumologic@x.y.z` as follows, replacing `x.y.z` with the latest version number at the link above.
+Sumo Logic Orb をプロジェクトに追加するには、以下のようにトップ レベルの `orbs` キーを記述し、`circleci/sumologic@x.y.z` をインポートします (`x.y.z` は上記リンクの最新バージョンの番号で置き換えてください)。
 
 ```yaml
 orbs:
   sumologic: circleci/sumologic@x.y.z
 ```
 
-##### 2. Add _workflow-collector_ to workflow.
+##### 2. ワークフローに _workflow-collector_ を追加する
 {: #2-add-workflow-collector-to-workflow }
 {:.no_toc}
 
-The `workflow-collector` job runs concurrently along side your workflow and sends analytics to Sumo Logic until all of the jobs in your workflow have completed.
+`workflow-collector` ジョブはワークフローと同時に並列で実行され、ワークフロー内のすべてのジョブが完了するまで Sumo Logic に分析データを送信します。
 
 ```yaml
 version: 2.1
 workflows:
   build-test-and-deploy:
     jobs:
-      - sumologic/workflow-collector # add this job to track workflow.
+      - sumologic/workflow-collector # このジョブを追加してワークフローを追跡します
       - build
       - test:
           requires:
@@ -79,39 +79,39 @@ workflows:
             - test
 ```
 
-##### 3. Create two source collectors.
+##### 3. ソース コレクターを 2 つ作成する
 {: #3-create-two-source-collectors }
 {:.no_toc}
-You will need to create two *source collectors* on Sumo Logic which will return an HTTPS URL. Your job data will be sent to this HTTPS URL.
+Sumo Logic で、HTTPS URL を返す 2 つの*ソース コレクター*を作成する必要があります。 この HTTPS URL にジョブ データが送信されます。
 
-You will need to create one called `circleci/job-collector` and another called `circleci/workflow-collector`.
+作成する必要があるのは、`circleci/job-collector` と `circleci/workflow-collector` という名前のコレクターです。
 
-To create the two source collectors:
-1. From the dashboard select the **Setup Wizard**.
-2. Select **Set Up Streaming Data**.
-3. Scroll to the bottom and select **All Other Sources**.
-4. Select **HTTPS Source**.
-5. For the `Source Category` enter one of the two mentioned above.
-6. Save the resulting URL.
+以下の手順で 2 つのソース コレクターを作成します。
+1. ダッシュボードで **[Setup Wizard (セットアップ ウィザード)]** を選択します。
+2. **[Set Up Streaming Data (ストリーミング データのセットアップ)]** を選択します。
+3. 一番下までスクロールし、**[All Other Sources (他のすべてのソース)]** を選択します。
+4. **[HTTPS Source (HTTPS ソース)]** を選択します。
+5. `[Source Category (ソース カテゴリ)]` に、前述した 2 つの名前のいずれかを入力します。
+6. 出力された URL を保存します。
 
-##### 4. Add environment variables.
+##### 4. 環境変数を追加する
 {: #4-add-environment-variables }
 {:.no_toc}
 
-For each of the URLs produce in the previous step, create the corresponding environment variable.
+ステップ 3 で生成された各 URL に対して、対応する環境変数を作成します。
 
-Env vars:
+対応する環境変数は以下の 2 つです。
 - `JOB_HTTP_SOURCE`
 - `WORKFLOW_HTTP_SOURCE`
 
-**[How to add an environment variable to your project.]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
+**[プロジェクトに環境変数を追加する方法]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project)**
 
-This will link the orb with your Sumo Logic dashboard.
+これにより、Orb が Sumo Logic ダッシュボードにリンクされます。
 
-Your Sumo Logic dashboard will now begin to populate with data as each job runs on CircleCI.
+各ジョブが CircleCI で実行されると、Sumo Logic ダッシュボードはデータの入力を開始します。
 
 
-## See also
+## 関連項目
 {: #see-also }
 
-Refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) document to learn more about using and authoring orbs.
+Orb の使用とオーサリングの詳細については、「[Orb の概要]({{ site.baseurl }}/2.0/orb-intro/)」を参照してください。
