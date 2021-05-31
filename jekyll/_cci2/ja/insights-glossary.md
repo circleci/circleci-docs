@@ -1,118 +1,118 @@
 ---
 layout: classic-docs
-title: "Insights metrics glossary"
-short-title: "Metric definitions for CircleCI insights"
+title: "Insights のメトリクスの用語集"
+short-title: "CircleCI Insights のメトリクスの定義"
 version:
   - Cloud
 ---
 
-## Overview
+## 概要
 {: #overview }
 
-This document provides definitions for all the metrics in CircleCI Insights. You can review metrics in the Insights dashboard as well as the Insights API.
+このドキュメントでは、CircleCI Insights で使用されるすべてのメトリクスの定義を説明します。 メトリクスは、Insights ダッシュボードと Insights API で確認できます。
 
-* TOC
+* 目次
 {:toc}
 
 
-## General metrics
+## 共通メトリクス
 {: #general-metrics }
 
-General metrics appear across the Insights experience and can refer to different entities, depending on the context. For example, the `Runs` metric may refer to a count of workflow executions or jobs, depending on the context.
+共通メトリクスは、Insights 機能のさまざまな場面で登場します。これらのメトリクスが指すエンティティは、コンテキストによって異なる可能性があります。 たとえば、`Runs (実行回数)` メトリクスは、コンテキストによって、ワークフローの実行回数を指す場合も、ジョブの実行回数を指す場合もあります。
 
-| Term                  | Definition                                                                                                                                                                                                                                                                                                                         |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Runs                  | The count of executions in a selected time window.                                                                                                                                                                                                                                                                                 |
-| Total Duration        | The sum of execution times for all workflows in a project.                                                                                                                                                                                                                                                                         |
-| P95 Duration          | The 95th percentile of execution times for an entity in a selected time window (i.e. 95% of runs completed in the same or less amount of this time). <br/> _The 95th percentile is a standard measure used to interpret performance data. It provides a measure of max value when outlier or transient values are excluded._ |
-| P50 (median) Duration | The median execution time. <br/> _Medians are a better measure of central tendency than arithmetic means because they are more resilient to_ skewness _in datasets_.                                                                                                                                                         |
-| Total Credits         | The sum of credits consumed during execution.                                                                                                                                                                                                                                                                                      |
-| Success Rate          | The percentage of runs that completed successfully, calculated by `100 x (Successful Runs / All Runs)`                                                                                                                                                                                                                             |
+| 用語                                            | 定義                                                                                                                                               |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Runs (実行回数)                                   | 選択した期間内の実行回数。                                                                                                                                    |
+| Total Duration (合計実行時間)                       | プロジェクトに含まれるすべてのワークフローの実行時間を合計した時間。                                                                                                               |
+| P95 Duration (95 パーセンタイル実行時間)                 | 選択した期間における、エンティティの実行時間の 95 パーセンタイル (実行のうち 95% がこの時間内に完了する)。 <br/> _95 パーセンタイルは、パフォーマンス データの解釈に使用される一般的な評価基準です。 外れ値や一時的な値を除いた場合の最大値に相当します。_ |
+| P50 (median) Duration (50 パーセンタイル (中央値) 実行時間) | 実行時間の中央値。 <br/> _中央値は、データセットの_歪度 (分布の非対称性を示す指標)_ の影響を受けにくいので、算術平均よりも適切に中心傾向を測ることができる評価基準です。_                                               |
+| Total Credits (合計クレジット)                       | 実行中に消費されたクレジットの合計。                                                                                                                               |
+| Success Rate (成功率)                            | 実行が正常に完了した割合。`100 x (成功した実行回数/すべての実行回数)` で計算されます。                                                                                                |
 {: class="table table-striped"}
 
-## Organization-level metrics
+## 組織レベルのメトリクス
 {: #organization-level-metrics }
 
 ![]({{ site.baseurl }}/assets/img/docs/insights-org-metrics.png)
 
-Organization-level metrics allow you to analyze your organization’s performance.
+組織レベルのメトリクスは、組織のパフォーマンス分析に利用できます。
 
-| Term                    | Definition                                                                                                                                                         |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Workflow Runs           | The count of all workflows executions for an organization for the selected projects in the selected time frame.                                                    |
-| Total Workflow Duration | The total execution time of all workflows runs for an organization within the selected projects and time frame.                                                    |
-| Total Credits           | The total credits consumed across all selected projects in an organization.                                                                                        |
-| Overall Success Rate    | The percentage of runs that completed successfully across all runs in the selected projects and workflows. (calculated by `100 x (All Successful Runs/ All Runs)`) |
+| 用語                                     | 定義                                                                                   |
+| -------------------------------------- | ------------------------------------------------------------------------------------ |
+| Workflow Runs (ワークフロー実行回数)             | 選択したプロジェクトの、選択した期間における組織のすべてのワークフロー実行回数。                                             |
+| Total Workflow Duration (合計ワークフロー実行時間) | 選択したプロジェクトの、選択した期間における組織のすべてのワークフロー実行時間を合計した時間。                                      |
+| Total Credits (合計クレジット)                | 組織における、選択したプロジェクトすべてで消費されたクレジットの合計。                                                  |
+| Overall Success Rate (全体成功率)           | 選択したプロジェクトとワークフローのすべての実行のうち、正常に完了した実行の割合  (`100 x (すべての成功した実行回数/すべての実行回数)` で計算されます)。 |
 {: class="table table-striped"}
 
-## Workflow Metrics
+## ワークフローのメトリクス
 {: #workflow-metrics }
 
 ![]({{ site.baseurl }}/assets/img/docs/insights-workflow-metrics.png)
 
-| Term                         | Definition                                                                                                                                                                                                                                                                                                                             |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Time to Recovery             | Total time spent in a failed state before a successful execution.                                                                                                                                                                                                                                                                      |
-| Mean Time to Recovery (MTTR) | The average time it takes to get back to a successful execution from a failed one (Calculated by `total recovery time / # of failures`). <br> _If there are no failed builds (and thus no recoveries) in the current time window, the MTTR value will be empty. Empty MTTR values will be treated as 0 when calculating Trends._ |
-| Throughput                   | The average (mean) number of builds of any status per day. Calculated by `Sum of builds/ # of days.`                                                                                                                                                                                                                                   |
+| 用語                                    | 定義                                                                                                                                      |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Time to Recovery (復旧時間)               | 失敗した実行が次に成功するまでにかかった合計時間。                                                                                                               |
+| Mean Time to Recovery (平均復旧時間) (MTTR) | 失敗した実行が次に成功するまでにかかる平均時間 (`合計復旧時間/失敗数`で計算します)。 <br> _選択した期間に失敗したビルドがなく復旧が行われなかった場合、MTTR 値は空になります。 傾向の計算時には、空の MTTR 値は 0 として扱われます。_ |
+| Throughput (スループット)                   | 1 日あたりのビルド回数 (状態は問わない) の平均 (算術平均)。 `合計ビルド数/日数`で計算されます。                                                                                  |
 {: class="table table-striped"}
 
 
-## Trends
+## 傾向
 {: #trends }
 
-Raw metric values are often difficult to interpret on their own. Trends provide additional context to Insights metrics by presenting a relative benchmark against previous performance. For instance, on the last 7-day view, trends will display the change in value or delta compared to the prior 7-day window.
+一般に、未処理のメトリクス値だけを使って解釈を行うのは困難です。 傾向は、以前のパフォーマンスと比較した相対的なベンチマークを示すことで、Insights のメトリクスにコンテキストを追加します。 たとえば、過去 7 日間のビューには、傾向として、その前の 7 日間と比べた値の変化や差が表示されます。
 
-**Please note that trends are available only for 24-hour, 7-day, and 30-day time windows.**
+**注意: 傾向を利用できるのは、24 時間、7 日間、30 日間の期間だけです。**
 
-Trends are calculated as `100 * (current value - previous value) / prior-value`.
+傾向は、`100 * (現在の値 - 以前の値)/以前の値`で計算されます。
 
-### Approximate Trends
+### 傾向の近似
 {: #approximate-trends }
 
-For percentile metrics like duration, approximation methods are used to find the prior window benchmarks.
+実行時間などのパーセンタイル メトリクスでは、以前の期間のベンチマークは近似手法によりベンチマークを求められます。
 
-#### Duration
+#### 実行時間
 {: #duration }
 {:.no_toc}
 
-**P95 Duration**
+**P95 Duration (95 パーセンタイル実行時間)**
 
-For P95 duration, trends data is calculated by using the worst-case performance of the previous time window as a benchmark.
+95 パーセンタイル実行時間の傾向データは、以前の期間の最悪のパフォーマンスをベンチマークとして使用して計算します。
 
-For example, to calculate the last 7-day trend information, Insights selects the worst/largest daily P95 duration of the previous 7 days as a benchmark. For the last 24-hour trends, Insights selects the worst hourly P95 of the previous 24 hours as a benchmark.
+たとえば、過去 7 日間の傾向情報を計算する場合、その前の 7 日間における各日の 95 パーセンタイル実行時間のうち最も悪い (長い) ものがベンチマークとして選択されます。 過去 24 時間の傾向の場合、その前の 24 時間における毎時間の 95 パーセンタイルのうち最も悪いものがベンチマークとして選択されます。
 
-**P50 Duration**
+**P50 Duration (95 パーセンタイル実行時間)**
 
-For P50 duration, Trends compares current duration with the median performance of the prior time window. For example, the last 30-day trends for P50 duration are calculated by taking the median of the daily P50 values as a benchmark.
+50 パーセンタイル実行時間の傾向は、現在の実行時間を、その前の期間のパフォーマンスの中央値と比較して求めます。 たとえば、過去 30 日間の 50 パーセンタイル実行時間の傾向は、各日の 50 パーセンタイル値の中央値をベンチマークとして使用して計算します。
 
 
-### Representations of trend data
+### 傾向データの表示方法
 {: #representations-of-trend-data }
 
 
-This section describes how your trend data may appear across various metrics.
+ここでは、さまざまなメトリクスの傾向データの表示方法を説明します。
 
 ![]({{ site.baseurl }}/assets/img/docs/insights_trend_data.png)
 
-- **Green**: The metric is trending in the right direction.
-- **Red**: The metric is trending in the wrong direction.
-- **Grey**: A trend in either direction is not right or wrong.
+- **緑**: このメトリクスは改善傾向にあります。
+- **赤**: このメトリクスは悪化傾向にあります。
+- **灰**: このメトリクスは良い/悪いを評価できないため、増加/減少の傾向のみが示されます。
 
-Red and Green are used when describing the `Success Rate`, `Throughput` and `MTTR` metrics. Grey arrows are used when describing `Runs`, `Duration` and `Total Credits`
+赤と緑は、`Success Rate (成功率)`、`Throughput (スループット)`、および `MTTR` の各メトリクスの傾向に使用されます。 灰色の矢印は、`Runs (実行回数)`、`Duration (実行時間)`、および `Total Credits (合計クレジット)` の傾向に使用されます。
 
-**Percentages**
+**パーセンテージ**
 
-Percentages are used to indicates the relative percentage change for a metric in the selected time window compared to the prior window. For instance, if the success rate of a workflow in the last 7 days has increased to 60% from 40% in the prior 7 days, Trends displays the +50% change in the current time window.
+パーセンテージは、選択した期間とその前の期間のメトリクスを比較した、相対的な変化の割合を示します。 たとえば、ワークフローの成功率が過去 7 日間は 60% で、その前の 7 日間の 40% よりも増加していた場合、+50% という変化が現在の期間に傾向として表示されます。
 
-**Multiples**
+**倍数**
 
-Multiples are used to indicate large swings in relative change over the selected period.
+倍数は、選択した期間の相対的な変化が大きいことを示します。
 
-**Arrows**
+**矢印**
 
-Trend arrows with no values are used to indicate that the previous time window contains zero executions or no data.
+値がなく、傾向の矢印だけの場合、その前の期間に実行が行われなかったか、その前の期間のデータが存在しないことを示します。
 
-**No Trend Data**
+**傾向データなし**
 
-Empty trend values indicate that there has been no change in data between the two periods.
+傾向データの値が空の場合、2 つの期間の間でデータが変化していないことを示します。
