@@ -27,9 +27,6 @@ cases. Hence, features around local observability are provided on an as-is basis
 flexibility and extensibility of the system, should you feel that the functionality provided is not sufficient for your
 needs.
 
-Most importantly, take note of the following:
-
-NOTE: You cannot modify dashboards that are provided by CircleCI. 
 
 NOTE: Data is retained for a maximum of 15 days.
 
