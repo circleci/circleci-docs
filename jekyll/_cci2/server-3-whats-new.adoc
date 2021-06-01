@@ -46,9 +46,9 @@ or security groups won’t allow this. We will provide an optional internal loca
 
 == Release 3.0.2
 
-- Resolved a bug that was causing the UI to mistakenly report server artifacts as expired
-- Resolved a bug that caused Traefik to become "unaware" of TLS certificate updates
-- Introduced an update that creates a single source of truth for heap size limits across all services
+- Resolved a bug that was causing the UI to mistakenly report server artifacts as expired.
+- Resolved a bug that caused Traefik to become "unaware" of TLS certificate updates.
+- Introduced an update that creates a single source of truth for heap size limits across all services.
 
 == Release 3.0.1
 
