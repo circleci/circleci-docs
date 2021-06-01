@@ -136,7 +136,7 @@ CircleCI Server 3.0 consists of the following services. Find their descriptions 
 | circleci-telegraf
 |
 | Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
-but can also be configured to be exported to other places (i.e. Datadog or prometheus)
+but can also be configured to be exported to other places (i.e. Datadog or Prometheus)
 |
 |
 
