@@ -135,6 +135,8 @@ footer {
 div.sidebar-offset {
   margin-left: $leftbar-width;
   display: flex;
+  height: 100vh;
+  overflow: scroll;
 
 	@media screen and (max-width: $screen-sm) {
 		margin-left: 0px;

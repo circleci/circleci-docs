@@ -70,15 +70,8 @@ function handleChangeLanguageSidebar() {
   })
 }
 
-function handleChangeLanguageFooter() {
-  els.footerLangSelect.addEventListener("click", function(_) {
-    els.footerLangOptions.classList.toggle("hidden");
-  })
-}
-
 
 export function init() {
   handleChangeLanguageSidebar();
-  handleChangeLanguageFooter();
   handleSetLanguageOnLoad();
 }
