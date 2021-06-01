@@ -2,7 +2,7 @@ $sidebar-spacing-base: 5px;
 $sidebar-width: 260px;
 
 .sidebar-wrapper {
-  width: $sidebar-width;
+  width: $leftbar-width;
   position: relative;
 
   @media screen and (max-width: $screen-xs-max) {
@@ -16,7 +16,7 @@ $sidebar-width: 260px;
   height: calc(100vh - #{$nav-height});
   padding: 30px 24px 60px 15px;
   position: absolute;
-  width: $sidebar-width;
+  width: $leftbar-width;
   border-right: 1px solid $gray-200;
   overflow-y: scroll;
 
@@ -162,5 +162,52 @@ $sidebar-width: 260px;
 
   @media screen and (max-width: $screen-xs-max) {
     display: block;
+  }
+}
+
+
+// Table of contents sidebar (right pane)
+
+// Table of Contents Sidebar ----------------------------------
+
+.table-of-contents {
+  position: sticky;
+  right: 0;
+  padding: 32px 32px 112px 12px;
+  background: #ffffff;
+  height: 90vh;
+  width: $rightbar-width;
+  overflow: scroll;
+  top: 118px;
+  font-size: 16px;
+  transition: all 0.5s ease-in-out;
+
+  @media(max-width: $toc-breakpoint) {
+    display: none;
+  }
+
+
+  .toc-heading {
+    margin-left: -2px;
+  }
+
+  .toc-indent {
+    border-left: 2px solid #EEEEEE;
+
+    a {
+      color: $body-text-color;
+      &:hover {
+        color: $link-text-color;
+      }
+    }
+  }
+
+  ul, li {
+    list-style-type: none;
+    padding-left: 8px;
+    margin: 4px 0;
+    &:first {
+      padding-left: 0px;
+    }
   }
 }

@@ -19,6 +19,7 @@ group :jekyll_plugins do
   gem 'jekyll-include-cache'
   gem 'jekyll-assets', git: "https://github.com/envygeeks/jekyll-assets"
   gem 'jekyll-target-blank'
+  gem 'jekyll-toc'
   # jekyll-assets depends on sprockets, which depends on rack, which has two
   # security vulnerabilities prior to 2.0.6.
   # https://nvd.nist.gov/vuln/detail/CVE-2018-16471

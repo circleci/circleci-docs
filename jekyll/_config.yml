@@ -19,6 +19,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
+  - jekyll-toc
 
 algolia:
   application_id: U0RXNGRK45
@@ -45,6 +46,10 @@ algolia:
       'title'
     ]
     minProximity: 3
+
+toc:
+  min_level: 1
+  max_level: 4
 
 sass:
   sass_dir: _sass
@@ -150,6 +155,12 @@ defaults:
     values:
       hide: false
       search: true
+
+  # Enable TOC by default
+  - scope:
+      path: ""
+    values:
+      toc: true
 
 t:
     translation_in_progress:

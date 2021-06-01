@@ -2,6 +2,7 @@
 ---
 @import 'variables';
 @import 'sidebar';
+@import 'footer';
 @import 'global-nav';
 @import 'subnav';
 @import 'instantsearch';
@@ -42,13 +43,14 @@ a {
 .container-semi-fluid,
 div.main-body{
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1920px;
 }
 
 
 div.main-body {
   overflow: auto;
 	display: flex;
+  flex-direction: column;
 	background: #fff;
 }
 
@@ -130,6 +132,15 @@ footer {
 	}
 }
 
+div.sidebar-offset {
+  margin-left: $leftbar-width;
+  display: flex;
+
+	@media screen and (max-width: $screen-sm) {
+		margin-left: 0px;
+		width: 100%;
+	}
+}
 
 // Logged In/Out State
 body.loggedin {
@@ -148,13 +159,14 @@ body.loggedin {
 
 // Article
 div.article-container{
-	float: left;
-	@media screen and (max-width: $screen-xs-max) {
-		padding: 0 16px 0 16px;
-		width: 100%;
-	}
-	padding: 0 48px;
-	width: calc(100% - 260px);
+  flex: 1;
+  @media screen and (max-width: $screen-xs-max) {
+      padding: 0 16px 0 16px;
+      width: 100%;
+  }
+  padding: 0 48px;
+	width: calc(100% - #{$rightbar-width});
+  max-width: 60em; // increase readability on large screens.
 }
 	article{
 		h2,
@@ -253,7 +265,7 @@ body.homepage{
   .article-container{
     @media screen and (max-width: $screen-xs-max) {
   	  padding: 0 16px 0 16px;
-      width: 100%;
+      width: calc(100% - $leftbar-width;
     }
   }
 
