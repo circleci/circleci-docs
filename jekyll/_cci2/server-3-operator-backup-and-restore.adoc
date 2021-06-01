@@ -377,11 +377,6 @@ As restic is a daemonset, there should be one pod for each node in your Kubernet
 ////
 == Server 3.x backups with S3 Compatible Storage
 
-The following steps are specific for Google Cloud Platform and it is assumed you have met the <<prerequisites, prerequisites>>.
-
-These instructions were sourced from the documentation for the Velero GCP plugin https://github.com/vmware-tanzu/velero-plugin-for-gcp#setup[here].
-
-
 The following steps will assume you're using S3 compatible object storage, but not necessarily AWS S3, for your backups.
 It is also assumed you have met the <<s3-compatible-storage-prerequisites, prerequisites>>.
 
