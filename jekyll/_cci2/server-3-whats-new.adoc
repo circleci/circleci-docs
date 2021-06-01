@@ -44,6 +44,12 @@ and get details of the possible cause of the issue.
 or security groups won’t allow this. We will provide an optional internal local balancer for the frontend services in a future release.
 * https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
 
+== Release 3.0.2
+
+- Resolved a bug that was causing the UI to mistakenly report server artifacts as expired
+- Resolved a bug that caused Traefik to become "unaware" of TLS certificate updates
+- Introduced an update that creates a single source of truth for heap size limits across all services
+
 == Release 3.0.1
 
 - `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
