@@ -225,7 +225,7 @@ NOTE: We recommend that you leave these options at their defaults until you have
 #### Authentication and Permissions
 ##### AWS EC2
 You will need the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
-Key used by VM Service differs from the policy used by object storage in the previous section. VM Service and Object Storage are kept distinct to allow organizations can utilize different cloud and on-premise providers within the same installation. 
+Key used by VM Service differs from the policy used by Object Storage in the previous section. VM Service and Object Storage are kept distinct to allow organizations to utilize different cloud and on-premise providers within the same installation. 
 
 . *AWS Region* (required): This is the region the application is in.
 . *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
@@ -392,7 +392,7 @@ image::preflight-checks.png[Preflight Checks]
 
 ## Step 3 - Obtain Load Balancer IPs
 Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
-installation. If necessary specify the namespace `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
+installation. If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
 
 * Frontend External
 * Circleci Server Traefik Proxy
