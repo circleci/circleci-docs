@@ -22,16 +22,13 @@ toc::[]
 
 === Scope
 Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring
-the health of your system and debug issues with your installation. However, requirements differ vastly between use
-cases. Hence, features around local observability are provided on an as-is basis, and we kindly ask to make use of the
-flexibility and extensibility of the system, should you feel that the functionality provided is not sufficient for your
-needs.
+the health of your system and debug issues with your installation.
 
 
 NOTE: Data is retained for a maximum of 15 days.
 
 NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI Server install. It will scrape metrics
-from your entire cluster by default. You may disable prometheus however from within the kots admin console config.
+from your entire cluster by default. You may disable prometheus from within the kots admin console config if needed.
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
