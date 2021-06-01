@@ -30,6 +30,9 @@ needs.
 
 NOTE: Data is retained for a maximum of 15 days.
 
+NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI Server install. It will scrape metrics
+from your entire cluster by default. You may disable prometheus however from within the kots admin console config.
+
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
 implementation of monitoring common performance metrics. 
