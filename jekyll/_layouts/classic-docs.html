@@ -40,11 +40,11 @@
         </div>
         {% endif %}
         {% if page.untranslated %}
-        {% include_cached translation_in_progress.html site=site page=page %}
+          {% include_cached translation_in_progress.html site=site page=page %}
         {% endif %}
         {{ content }}
         {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
-        {% include_cached doc-footer.html page=page site=site %}
+          {% include_cached doc-footer.html page=page site=site %}
         {% endif %}
       </article>
     </div><!-- .article-container -->

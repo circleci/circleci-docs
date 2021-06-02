@@ -167,7 +167,7 @@ div.article-container{
       width: 100%;
   }
   padding: 0 48px;
-	width: calc(100% - #{$rightbar-width});
+  width: calc(100% - #{$rightbar-width});
   max-width: 60em; // increase readability on large screens.
 }
 	article{
