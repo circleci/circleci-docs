@@ -49,12 +49,14 @@
       </article>
     </div><!-- .article-container -->
 
+      {% if page.toc != false %}
         <aside class="table-of-contents">
           <h5 class="toc-heading">On this page </h5>
           <div class="toc-indent">
             {{ content | toc_only }}
           </div>
         </aside>
+      {% endif %}
 
   </div><!-- .main-body -->
 
