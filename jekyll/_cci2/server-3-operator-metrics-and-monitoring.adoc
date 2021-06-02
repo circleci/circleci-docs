@@ -44,8 +44,9 @@ by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugi
 metrics endpoint for Prometheus to scrape so that the metrics can be viewed in Grafana.
 
 == Accessing the metrics dashboards
-Dashboards are provided in the KOTs admin console. If you have recommendations for additional data to be provided here please let us know. The currently provided dashboard provides important metrics for each container in your installation. Per container, it allows
-you to view the following metrics:
+Dashboards are provided in the KOTs administration console. If you have recommendations for additional data to be provided
+here, please let us know. The current dashboard provides important metrics for each container in your installation. The
+following metrics are available per container:
 
 * CPU Saturation
 * Memory Saturation
