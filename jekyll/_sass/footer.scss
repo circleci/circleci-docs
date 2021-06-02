@@ -5,6 +5,7 @@ $text-black: #171717;
   width: calc(100% - #{$leftbar-width});
   margin-left: $leftbar-width;
   padding: 48px;
+  background: #fff;
 
   @media (min-width: $screen-md) {
     padding-top: 52px;

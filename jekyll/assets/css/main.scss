@@ -44,14 +44,15 @@ a {
 div.main-body{
   margin: 0 auto;
   max-width: 1920px;
+  flex-direction: row;
 }
 
 
 div.main-body {
   overflow: auto;
 	display: flex;
-  flex-direction: column;
 	background: #fff;
+  height: 100vh;
 }
 
 .text-center-small-float-right {
