@@ -460,7 +460,7 @@ steps:
       keys:
         # ロック ファイルが変更されたら、パターンが一致する範囲を少しずつ広げてキャッシュを復元します
         - node-v1-{{ .Branch }}-{{ checksum "package-lock.json" }}
-- node-v1-{{ .Branch }}-
+        - node-v1-{{ .Branch }}-
         - node-v1-
   - save_cache:
       paths:

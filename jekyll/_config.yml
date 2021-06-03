@@ -63,7 +63,7 @@ asciidoc:
       terraformversion: 0.13.0
       kubectlversion: 1.19
       helmversion: 3.4.0
-      kotsversion: 1.26
+      kotsversion: 1.41
 
 asciidoctor:
   base_dir: _cci2/
@@ -76,7 +76,7 @@ asciidoctor:
     terraformversion: 0.13.0
     kubectlversion: 1.19
     helmversion: 3.4.0
-    kotsversion: 1.26
+    kotsversion: 1.41
 
 collections:
   # this is named with an underscore because it needs to be processed
