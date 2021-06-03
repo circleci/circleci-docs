@@ -71,6 +71,13 @@ see our [public GitHub repository](https://github.com/CircleCI-Public/api-previe
 **A:** Previously, this was true. But using our dynamic configuration feature, you can set pipeline parameters dynamically,
 before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
 
+### Scheduled workflows
+{: #scheduled-workflows }
+
+**Q:** What about dynamic config in scheduled workflows?
+
+**A:** Setup workflows cannot currently be used with the existing scheduler. However, the next version of our scheduler will enable you to trigger pipelines which have dynamic config.  
+
 ### The continuation Orb
 {: #the-continuation-orb }
 
