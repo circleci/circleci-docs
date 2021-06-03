@@ -5,6 +5,7 @@ short-title: "Migration"
 description: "CircleCI 2.0 Migration Introduction"
 categories: [migration]
 order: 1
+toc: false
 ---
 
 In the following sections we provide helpful guides and tips for migrating your CI/CD pipelines to CircleCI.
