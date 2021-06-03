@@ -60,7 +60,7 @@ asciidoc:
   attributes:
       source-highlighter: rouge
       serverversion: 3.0.1
-      terraformversion: 0.13.0
+      terraformversion: 0.15.4
       kubectlversion: 1.19
       helmversion: 3.4.0
       kotsversion: 1.41
@@ -73,7 +73,7 @@ asciidoctor:
     relfileprefix: ../
     outfilesuffix: /index.html
     serverversion: 3.0.1
-    terraformversion: 0.13.0
+    terraformversion: 0.15.4
     kubectlversion: 1.19
     helmversion: 3.4.0
     kotsversion: 1.41
