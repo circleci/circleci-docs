@@ -165,9 +165,18 @@ $sidebar-spacing-base: 5px;
 }
 
 
-// Table of contents sidebar (right pane)
-
 // Table of Contents Sidebar ----------------------------------
+
+// Many docs originally have a toc generated from the *toc directive in the markdown.
+// we are keeping this functionality in order to have a table of contents at the top of a page
+// on smaller screen sizes.
+
+// target markdown AND asciidoc toc's.
+#markdown-toc, #toc {
+  @media(min-width: $toc-breakpoint) {
+    display: none;
+  }
+}
 
 .table-of-contents {
   position: sticky;
