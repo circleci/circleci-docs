@@ -45,7 +45,7 @@ or security groups won’t allow this. We will provide an optional internal loca
 
 == Release 3.1.0
 
-IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing to `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember, you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik` in a terminal that has access to the cluster.
+IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing to the `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember, you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik` in a terminal that has access to the cluster.
 
 == Release 3.0.2
 
