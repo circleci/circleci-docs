@@ -29,8 +29,8 @@ There are two different types of orbs you can use in your configuration, dependi
 {: #private-orbs }
 
 
-**Note:** _Private orbs are available on any f our paid [plans](https://circleci.com/pricing). Custom and Performance Plans allow creation
-of up to three private orbs, whereas Scale Plan allows for creation of an unlimited number of private orbs. Please reach out to your sales representative for information._
+**Note:** _Private orbs are available on any of our paid [plans](https://circleci.com/pricing). Custom and Performance plans allow creation
+of up to three private orbs, whereas our Scale plan allows for creation of an unlimited number of private orbs. Please reach out to your sales representative for information._
 {: class="alert alert-warning"}
 
 Using a private orb enables you to author an orb while ensuring the following:
