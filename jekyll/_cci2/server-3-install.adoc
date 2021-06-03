@@ -60,7 +60,7 @@ Global configuration settings are a collection of cross-cutting configuration se
 application as a whole. Component-specific settings can be found below under the *Component Settings* section.
 
 . *Domain Name* (required): The domain name for your server installation. For example, circleci.yourcompany.com. You will
-need to configure this domain and point it to the external Frontend Load Balancer once it is configured in a later step.
+need to configure this domain and point it to the traefik Load Balancer once it is configured in a later step.
 . *Frontend TLS Private Key*: A PEM encoded TLS private key for the web application. A default, self-signed TLS key is provided.
 . *Frontend TLS Certificate*: A PEM encoded TLS certificate for the web application. A default, self-signed TLS certificate is provided.
 
@@ -393,10 +393,9 @@ image::preflight-checks.png[Preflight Checks]
 
 ## Step 3 - Obtain Load Balancer IPs
 Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
-installation. If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
+installation. If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services.
 
-* Frontend External
-* Circleci Server Traefik Proxy
+* Circleci Server Traefik
 * VM Service Load Balancer URI
 * Output Processor Load Balancer URI
 * Nomad Server Load Balancer URI
@@ -405,7 +404,7 @@ Depending on your cloud environment and configuration, your output can contain e
 for your load balancers. Either will work.
 
 The values for VM Service, Output Processor and Nomad Server should be added into the config as described in
-<<Step 2 - Configure Server (Part 1)>>. The value from Frontend External should be used in <<Step 5 - Create DNS Entries for the Frontend>>
+<<Step 2 - Configure Server (Part 1)>>. The value from Circleci Server Traefik should be used in <<Step 5 - Create DNS Entries for the Frontend>>
 to create the DNS entry for your applications domain name and sub-domain.
 
 If you had to leave the default value in place for the Nomad `server_endpoint` in the previous step, you can now go back
@@ -573,7 +572,7 @@ TIP: The machines for VM jobs are addressed via their external IPs in GCP at the
 ingress rules for TCP port 2376 with the IP addresses of the Nomad clients and Kubernetes nodes as allowed sources.
 
 ## Step 5 - Create DNS Entries for the Frontend
-Next, create a DNS entry for your external frontend and traefik load balancer, i.e. `circleci.your.domain.com` and
+Next, create DNS entries for your traefik load balancer, i.e. `circleci.your.domain.com` and
 `app.circleci.your.domain.com`, respectively. You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how
 to create TLS certs for your server install. Although TLS is optional, should it be used, it is important to ensure your TLS cert
 covers both the server domain and sub-domain as in the examples provided. Once the user is logged in, all client requests
