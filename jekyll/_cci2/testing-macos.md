@@ -40,6 +40,8 @@ Testing macOS apps is only supported on Xcode 11.7 images and newer as it requir
 
 For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
 
+If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/hello-world-macos/?section=executors-and-images#xcode-cross-compilation).
+
 ## Setting up a macOS UI Test Project
 {: #setting-up-a-macos-ui-test-project }
 
