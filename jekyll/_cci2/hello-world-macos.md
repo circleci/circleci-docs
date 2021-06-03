@@ -69,9 +69,6 @@ jobs: # a basic unit of work in a run
       - run:
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
-      - run:
-          name: Build Application
-          command: xcodebuild
 
   build: 
     macos:
