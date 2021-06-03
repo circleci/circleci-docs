@@ -17,11 +17,9 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
-
 * TOC
 {:toc}
 
----
 
 ## **`setup`**
 {: #setup }
