@@ -145,41 +145,34 @@ NOTE: If using GitHub Enterprise, you will also need a personal access token and
 
 ### Object Storage
 
-Server 3.0 hosts build artifacts, test results, and other state in object
-storage. We support
+Server 3.x hosts build artifacts, test results, and other state in object storage. We support
 
-. S3 compatible storage
+. Any https://docs.aws.amazon.com/s3/index.html?nc2=h_ql_doc_s3[S3]-compatible storage
 . https://cloud.google.com/storage/[Google Cloud Storage]
 
-While any S3 compatible object storage may work, we test and support
-https://aws.amazon.com/s3/[AWS S3] and https://min.io[Minio]. For object storage
-providers that do not support the S3 API, such as
-https://docs.microsoft.com/en-ca/azure/storage/blobs/[Azure blob storage], we recommend
-using https://docs.min.io/minio/baremetal/reference/minio-server/minio-gateway.html[Minio Gateway]
+While any S3-compatible object storage may work, we test and support https://aws.amazon.com/s3/[AWS S3] and https://min.io[Minio]. For object storage
+providers that do not support the https://docs.aws.amazon.com/AmazonS3/latest/API/Type_API_Reference.html[S3 API], such as
+https://docs.microsoft.com/en-ca/azure/storage/blobs/[Azure blob storage], we recommend using https://docs.min.io/minio/baremetal/reference/minio-server/minio-gateway.html[Minio Gateway].
 
-Please choose the one that best suits your needs.  A *Storage Bucket
-Name* is required, in addition to the following fields, depending on if you are
-using AWS or GCP. Ensure that the bucket name you provide exists in your chosen
-object storage provider before proceeeding.
+Please choose the one that best suits your needs.  A *Storage Bucket Name* is required, in addition to the following fields,
+depending on if you are using AWS or GCP. Ensure that the bucket name you provide exists in your chosen object storage provider
+before proceeding.
 
-#### S3 Compatible Object Storage
+#### S3-compatible Object Storage
 
-To configure S3 storage, set the following details in the object storage section of the
-configuration page:
+To configure S3-compatible storage, set the following details in the object storage section of the configuration page:
 
 . *Storage Bucket Name* (required): The bucket used for server.
-. *Storage Object Expiry* (optional): Number of days to retain your test
-results and artifacts. Set to 0 to disable and retain objects indefinitely.
-. *AWS S3 Region* (optional): AWS region of bucket if your provider is AWS. S3
-Endpoint is ignored if this option is set.
-. *S3 Endpoint* (optional): API endpoint of S3 storage provider. Required if
-your provider is not AWS. AWS S3 Region is ignored if this option is set.
+. *Storage Object Expiry* (optional): Number of days to retain your test results and artifacts. Set to 0 to disable and
+retain objects indefinitely.
+. *AWS S3 Region* (optional): AWS region of bucket if your provider is AWS. S3 Endpoint is ignored if this option is set.
+. *S3 Endpoint* (optional): API endpoint of S3 storage provider. Required if your provider is not AWS. AWS S3 Region is ignored
+if this option is set.
 . *Access Key ID* (required): Access Key ID for S3 bucket access.
 . *Secret Key* (required): Secret Key for S3 bucket access.
 
-It is recommended to create a new user with programmatic access for this
-purpose. If your provider support IAM policies, you should fill in <<Bucket
-Name>> and attach the following policy to the user:
+It is recommended to create a new user with programmatic access for this purpose. If your provider support IAM policies,
+you should fill in `<BUCKET_NAME>` and attach the following policy to the user:
 
 [source,json]
 ----
@@ -192,8 +185,8 @@ Name>> and attach the following policy to the user:
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::<<Bucket Name>>",
-        "arn:aws:s3:::<<Bucket Name>>/*"
+        "arn:aws:s3:::<BUCKET_NAME>",
+        "arn:aws:s3:::<BUCKET_NAME>/*"
       ]
     }
   ]
@@ -202,19 +195,16 @@ Name>> and attach the following policy to the user:
 
 #### Google Cloud Storage
 
-To configure Google Cloud Storage (GCS), set the following details in the object
-storage section of the configuration page:
+To configure Google Cloud Storage (GCS), set the following details in the object storage section of the configuration page:
 
 . *Storage Bucket Name* (required): The bucket used for server.
 . *Storage Object Expiry* (optional): Number of days to retain your test
 results and artifacts. Set to 0 to disable and retain objects indefinitely.
-. *Service Account JSON*: A JSON format key of the Service Account to use for
+. *Service Account JSON* (required): A JSON format key of the Service Account to use for
 bucket access.
 
-A dedicated service account is recommended.  Add to it the `Storage Object
-Admin` role, with a condition on the resource name limiting access to only the
-bucket specified above.  For example, enter the following into the Google's
-Condition Editor:
+A dedicated service account is recommended.  Add to it the `Storage Object Admin` role, with a condition on the resource
+name limiting access to only the bucket specified above.  For example, enter the following into the Google's Condition Editor of the IAM console:
 
 [source,text]
 ----
