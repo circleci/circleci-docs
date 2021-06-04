@@ -13,7 +13,7 @@ body{
 	color: $body-text-color;
 	display: block;
 	width: 100%;
-	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 50%, #fff 50%, #fff 100%);
+	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 30%, #fff 30%, #fff 100%);
 	font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -171,6 +171,24 @@ div.article-container{
   width: calc(100% - #{$rightbar-width});
   max-width: 60em; // increase readability on large screens.
 }
+
+.article-toc {
+    display: flex;
+    width: 100%;
+}
+
+.article-toc-footer {
+    display: flex;
+    flex: column;
+    flex-direction: column;
+    width: 100%;
+
+    @media (min-width: $screen-sm) and (max-width: $screen-lg) {
+        width: calc(100% - #{$leftbar-width});
+    }
+}
+
+
 	article{
 		h2,
 		h3,
@@ -298,6 +316,7 @@ body.homepage{
 
 code {
   padding: 2px;
+  white-space: pre-wrap;
 }
 
 /***** Widgets ****************************************************************/

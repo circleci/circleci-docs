@@ -68,11 +68,16 @@
 #hits-target {
   padding: $spacing-small-vertical 0;
   background: #FAFAFA;
-  min-height: 500px;
+  min-height:  calc(100vh - #{$nav-height}); // 500px;
 
   h2 {
     padding-left: $spacing-small-vertical;
   }
+}
+
+.search-tab-container {
+  max-width: 1390px; // aligns with search box at full width.
+  margin: 0 auto;
 }
 
 #hits-target .tab-content {

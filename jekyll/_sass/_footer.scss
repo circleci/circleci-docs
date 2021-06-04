@@ -2,8 +2,7 @@ $white: #efefef;
 $text-black: #171717;
 
 .docs-footer {
-  width: calc(100% - #{$leftbar-width});
-  margin-left: $leftbar-width;
+  width: 100%;
   padding: 48px;
   background: #fff;
 
@@ -80,10 +79,10 @@ $text-black: #171717;
   }
 }
 
-.blog-footer {
+.docs-footer {
 }
 
-.blog-footer--row {
+.docs-footer--row {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -107,7 +106,7 @@ $text-black: #171717;
   }
 }
 
-.blog-footer--lockup {
+.docs-footer--lockup {
   &-link {
     // not used, yet
     --link-color: #{$white};
@@ -132,7 +131,7 @@ $text-black: #171717;
   }
 }
 
-.blog-footer--nav-list {
+.docs-footer--nav-list {
   margin: 0 -12px;
   padding: 0;
   list-style: none;
@@ -148,14 +147,14 @@ $text-black: #171717;
 }
 
 
-.blog-footer--nav {
+.docs-footer--nav {
   @media (max-width: $screen-sm-max) {
     text-align: center;
     flex-grow: 1;
   }
 }
 
-.blog-copyright {
+.docs-copyright {
   margin-bottom: 5px;
 
   @media (max-width: $screen-sm-max) {
