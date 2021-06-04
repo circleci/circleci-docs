@@ -391,8 +391,7 @@ provider:
 ----
 # Alias can be any name as long as you use the same value in subsequent commands
 export ALIAS=my-provider
-// Can we clarify what these 3 params are exactly
-mc alias set $ALIAS <YOUR_ENDPOINT> <YOUR_ACCESS_KEY_ID> <YOUR_SECRET_ACCESS_KEY>
+mc alias set $ALIAS <YOUR_MINIO_ENDPOINT> <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
 ----
 
 You can verify your client is correctly configured by running `mc ls my-provider` and you should see the buckets in your provider enumerated in the output.
