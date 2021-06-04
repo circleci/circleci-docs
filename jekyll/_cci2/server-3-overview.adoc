@@ -231,28 +231,10 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 |
 |
 
-| local-observability-stack-grafana
-| Server
-| Used for dashboarding and monitoring
-|
-|
-
-| local-observability-stack-loki
-| Server
-| Used for log aggregation
-|
-|
-
 | local-observability-stack-prometheus
 | Server
 | Used for metrics
 |
-|
-
-| local-observability-stack-promtail
-| Server
-| Used to aggregate logs in a Loki instance.
-| Log aggregation will fail. Loki won't contain any container logs.
 |
 
 | orb-service
