@@ -1,70 +1,70 @@
 ---
 layout: classic-docs
-title: "Dynamic Configuration"
-description: "Docs page on using Setup Workflows for Dynamic Configuration"
+title: "ダイナミック コンフィグ"
+description: "セットアップ ワークフローによるダイナミック コンフィグの使用方法に関する開発者向けページ"
 version:
   - Cloud
 ---
 
-You may find that instead of manually creating each and every individual CircleCI configuration per project, you would prefer to generate these configurations dynamically, depending on specific [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines) parameters or file-paths.
+プロジェクトごとに毎回 CircleCI 設定ファイルを手動で作成するのではなく、特定の[パイプライン]({{ site.baseurl }}/2.0/concepts/#pipelines) パラメーターやファイルパスに応じて設定ファイルを動的に生成できると便利な場合があります。
 
-This becomes particularly useful in cases where your team is using a monorepo, or a single repository, as opposed to using multiple repositories to store your code. In the case of using a monorepo, it is of course optimal to only trigger specific builds in specific areas of your project. Otherwise, all of your microservices/sub-projects will go through the entirety of your build, test, and deployment processes when any single update is introduced.
+チームでコードの格納に複数のリポジトリではなくモノレポ (単一のリポジトリ) を使用している場合には特に、条件付きの自動生成が役立ちます。 当然ながら、モノレポを使用する場合、プロジェクトの特定の領域にある特定のビルドだけをトリガーするのが最善です。 そうしなければ、ちょっとした更新を加えるだけだとしても、すべてのマイクロサービスやサブプロジェクトでビルド、テスト、デプロイの一連のプロセスを毎回行うことになります。
 
-In both of these (and many other) use cases, automatic, dynamic generation of your configuration files will optimize your CircleCI experience and save your team both time and money.
+どちらの (さらにその他多くの) ユース ケースでも、設定ファイルの自動動的生成を利用すると、CircleCI エクスペリエンスが最適化され、チームの時間とコストの両方を節約できます。
 
-CircleCI's dynamic configuration feature uses a `setup workflow` configuration. A `setup workflow` can contain jobs that `setup` children pipelines through computed pipeline parameters, or by generating follow-up pipelines via pre-existing scripts. These computed pipeline parameters and/or generated `config.yaml` files can then be passed into an additional `config.yaml` that potentially exists in outside directories.
+CircleCI のダイナミック コンフィグ機能では、`セットアップ ワークフロー`構成を使用します。 `セットアップ ワークフロー`に含めたジョブでは、演算したパイプライン パラメーターを使用するか、スクリプトによるフォローアップ パイプラインを生成して、子パイプラインを`セットアップ`できます。 それらの演算されたパイプライン パラメーターや生成された `config.yaml` ファイルは、外部ディレクトリに存在する別の `config.yaml` に渡すことができます。
 
-In summary, CircleCI's dynamic configuration allows you to:
+要約すると、CircleCI のダイナミック コンフィグ機能では以下が可能です。
 
-- Execute conditional workflows/commands
-- Pass pipeline parameter values and/or generate additional configuration
-- Trigger separate `config.yml` configurations which exist outside the default parent `.circleci/` directory
+- 条件付きでワークフローやコマンドを実行する
+- パイプライン パラメーターの値を渡す/別の設定ファイルを生成する
+- デフォルトの親 `.circleci/` ディレクトリの外部に存在する別の `config.yml` をトリガーする
 
-To use our dynamic configuration feature, you can add the key `setup` with a value of `true` to the top-level of your parent configuration file (in the `.circleci/` directory). This will designate that `config.yaml` as a `setup workflow` configuration, enabling you and your team to get up and running with dynamic configuration.
+ダイナミック コンフィグ機能を使用するには、(`.circleci/` ディレクトリにある) 親設定ファイルの最上部に `setup` キーを追加し、値として `true` を設定します。 これで `config.yaml` が`セットアップ ワークフロー`構成として指定され、ダイナミック コンフィグを利用できるようになります。
 
-See the [Getting started](#getting-started-with-dynamic-config-in-circleci) section below for more information.
+詳細については、この後の[使用開始に関するセクション](#getting-started-with-dynamic-config-in-circleci)を参照してください。
 
-## Getting started with dynamic config in CircleCI
+## CircleCI のダイナミック コンフィグの使用を開始する
 {: #getting-started-with-dynamic-config-in-circleci }
 
-To get started with Dynamic Config in CircleCI:
+CircleCI でダイナミック コンフィグの使用を開始するには、以下の手順に従います。
 
-- Select the project you are interested in, in the **Projects** dashboard from the CircleCI application.
-- Click the **Project Settings** button in the upper-right corner.
-- On the left-hand panel, select **Advanced**.
-- Towards the bottom, toggle the switch for **Enable dynamic config using setup workflows** to the "on" position, as shown below:
+- CircleCI アプリケーションの **[Projects (プロジェクト)]** ダッシュボードで、目的のプロジェクトを選択します。
+- 右上隅の **[Project Settings (プロジェクト設定)]** ボタンをクリックします。
+- 左側のパネルで **[Advanced (詳細設定)]** を選択します。
+- 画面下部にある **[Enable dynamic config using setup workflows (セットアップ ワークフローによるダイナミック コンフィグを有効にする)]** を、下記画像のようにオンにします。
 
-![Enable dynamic config in the UI]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
+![UI でのダイナミック コンフィグの有効化]({{ site.baseurl }}/assets/img/docs/dynamic-config-enable.png)
 
-Now, your project has the ability to dynamically generate and update configuration.
+これで、プロジェクトで設定ファイルの動的な生成と更新ができるようになりました。
 
-When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
+ダイナミック コンフィグを使用する場合には、`セットアップ` ワークフローの終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。詳しくは、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照)。
 
-For a basic example on how to use `setup workflows` for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration). Included in the cookbook are other more in-depth examples, which will be updated as this feature matures.
+`セットアップ` ワークフローを使用してダイナミック コンフィグを利用する方法の基本的な例は、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 クックブックには、他にも詳しい例が掲載されています。クックブックの内容は、この機能の開発に合わせて更新される予定です。
 
-For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when using CircleCI's dynamic configuration, see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
+CircleCI のダイナミック コンフィグを使用する際のパイプライン作成/続行プロセスのバックグラウンド処理に関する詳細は、[GitHub の公開リポジトリ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts)を参照してください。
 
-## Dynamic configuration FAQs
+## ダイナミック コンフィグに関するよくあるご質問
 {: #dynamic-config-faqs }
 
-### Pipeline parameters
+### パイプライン パラメーター
 {: #pipeline-parameters }
 
-**Q:** I thought pipeline parameters could only be used with the API?
+**Q:** パイプライン パラメーターは API でしか使用できないのではありませんか？
 
-**A:** Previously, this was true. But using our dynamic configuration feature, you can set pipeline parameters dynamically, before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
+**A:** 以前はそうでした。 しかし、ダイナミック コンフィグ機能を使用すると、パイプライン パラメーターを動的に設定してから、パイプラインを実行したり、API または Web フック (VCS へのプッシュ イベント) からパイプラインをトリガーしたりすることができます。
 
-### The continuation Orb
+### continuation Orb
 {: #the-continuation-orb }
 
-**Q:** What is the `continuation` orb?
+**Q:** `continuation` Orb とは何ですか？
 
-**A:** The `continuation` orb assists CircleCI users in managing the pipeline continuation process easily. The `continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) in an easy-to-use fashion. See the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb documentation for more information.
+**A:** `continuation` Orb は、パイプラインの続行プロセスを簡単に管理できるように CircleCI ユーザーを支援する Orb です。 `continuation` Orb は、[`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) に対する API 呼び出しを使いやすくラップします。 詳細については、[`continuation` Orb のドキュメント](https://circleci.com/developer/ja/orbs/orb/circleci/continuation)を参照してください。
 
-## What to read next
+## 次に読む
 {: #what-to-read-next }
-- Cookbook examples
-  - [A basic example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-  - [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
-- The [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb
-- The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
+- クックブック内のサンプル
+  - [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+  - [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) Orb
+- [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API 呼び出し
