@@ -46,7 +46,7 @@ A specific server version works with a specific runner version. The table below 
 
 Server Version  | Runner
 ----------------|---------------------------------
-3.0 | TBD
+3.1 | 1.0.11147-881b608
 {: class="table table-striped"}
 
 
