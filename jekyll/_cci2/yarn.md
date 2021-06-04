@@ -33,7 +33,9 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 
 Yarn packages can be cached to improve CI build times.
 
-An example for Yarn 2:
+Yarn 2.x added the ability to do [Zero Installs](https://yarnpkg.com/features/zero-installs); if you're using Zero Installs, you shouldn't need to do any special caching.
+
+If you're using Yarn 2.x without Zero Installs, you can do something like this:
 
 {% raw %}
 ```yaml
@@ -49,7 +51,8 @@ An example for Yarn 2:
           name: Save Yarn Package Cache
           key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ~/.cache/yarn
+            - .yarn/cache
+            - .yarn/unplugged
 #...
 ```
 {% endraw %}
