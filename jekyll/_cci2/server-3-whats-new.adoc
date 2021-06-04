@@ -40,7 +40,6 @@ a future patch release.
 application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
 CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
 and get details of the possible cause of the issue.
-or security groups won’t allow this. We will provide an optional internal local balancer for the frontend services in a future release.
 * https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
 
 == Release 3.1.0
