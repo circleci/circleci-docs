@@ -10,14 +10,14 @@ version:
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI Server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+Before you begin with the CircleCI server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
 toc::[]
 
 ## Step 1 - Install KOTs
 
-CircleCI Server v3.x uses https://kots.io[KOTs] from https://www.replicated.com/[Replicated] to manage and
-distribute Server v3.x. KOTs is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
+CircleCI server v3.x uses https://kots.io[KOTs] from https://www.replicated.com/[Replicated] to manage and
+distribute server v3.x. KOTs is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 To install the latest version, you can run `curl  https://kots.io/install | bash`.
 
 Ensure you are running the minimum KOTs (KOTs {kotsversion}) by running `kubectl kots version`.
@@ -50,7 +50,7 @@ kubectl kots admin-console -n <namespace kots was installed in>
 ## Step 2 - Configure Server (Part 1)
 
 Once you have accessed the URL to the administrative console and uploaded your license file, you will see similar to the following,
-where you will need to configure CircleCI Server.
+where you will need to configure CircleCI server.
 
 .Server v{serverversion} Configuration
 image::server-config.png[Server v{serverversion} Configuration]
@@ -59,8 +59,8 @@ image::server-config.png[Server v{serverversion} Configuration]
 Global configuration settings are a collection of cross-cutting configuration settings that affect the function of the entire
 application as a whole. Component-specific settings can be found below under the *Component Settings* section.
 
-. *Domain Name* (required): The domain name for your Server installation. For example, circleci.yourcompany.com. You will
-need to configure this domain and point it to the Circleci Server Traefik Load Balancer once it is configured in a later step.
+. *Domain Name* (required): The domain name for your server installation. For example, circleci.yourcompany.com. You will
+need to configure this domain and point it to the Circleci server Traefik Load Balancer once it is configured in a later step.
 . *Frontend TLS Private Key*: A PEM encoded TLS private key for the web application. A default, self-signed TLS key is provided.
 . *Frontend TLS Certificate*: A PEM encoded TLS certificate for the web application. A default, self-signed TLS certificate is provided.
 
@@ -74,7 +74,7 @@ TIP: If you don’t already have a TLS certificate for your installation, you ca
 
 #### Optional: Generate a TLS Certificate
 
-By default, CircleCI Server will create self-signed certificates to get you started. In production, you should supply a
+By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a
 certificate from a trusted certificate authority. The https://letsencrypt.org/[LetsEncrypt] certificate authority, for example,
 can issue a certificate for free using their https://certbot.eff.org/[certbot] tool.
 
@@ -82,7 +82,7 @@ For example, if you host your DNS on Google Cloud, the following commands will p
 
 [source,bash]
 ----
-DOMAIN=example.com  # replace with the domain of your installation of Server
+DOMAIN=example.com  # replace with the domain of your installation of server
 GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json  # Path to GCP credentials
 sudo certbot certonly --dns-google \
   --dns-google-credentials ${GOOGLE_APPLICATION_CREDENTIALS} \
@@ -94,7 +94,7 @@ If instead you're using AWS Route53 for DNS, execute this example:
 
 [source,bash]
 ----
-DOMAIN=example.com # replace with the domain of your installation of Server
+DOMAIN=example.com # replace with the domain of your installation of server
 sudo certbot certonly --dns-route53 \
   -d "${DOMAIN}" \
   -d "app.${DOMAIN}"
@@ -126,7 +126,7 @@ Copy and paste the entirety of the output into the Encryption Signing Key field.
 WARNING: It is recommended to store these securely; if they are lost, job history and artifacts will not be recoverable.
 
 ### GitHub
-These settings control authorization to Server using Github OAuth and allow for updates to Github using build status information.
+These settings control authorization to server using Github OAuth and allow for updates to Github using build status information.
 
 NOTE: If this instance is being set up in preparation for a migration from 2.19, it is recommended to use a new OAuth application, not the same one used in 2.19.
 
@@ -233,7 +233,7 @@ WARNING: You should only disable this if you can otherwise guarantee the confide
 ### VM Service
 VM Service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules.
 
-NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your Server installation.
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your server installation.
 
 #### Authentication and Permissions
 ##### AWS EC2
@@ -408,16 +408,16 @@ image::preflight-checks.png[Preflight Checks]
 Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
 installation. If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
 
-* Circleci Server Traefik Proxy
+* Circleci server Traefik Proxy
 * VM Service Load Balancer URI
 * Output Processor Load Balancer URI
-* Nomad Server Load Balancer URI
+* Nomad server Load Balancer URI
 
 Depending on your cloud environment and configuration, your output can contain either an external IP address or a hostname
 for your load balancers. Either will work.
 
-The values for VM Service, Output Processor and Nomad Server should be added into the config as described in
-<<Step 2 - Configure Server (Part 1)>>. The value from Circleci Server Traefik should be used in <<Step 5 - Create DNS Entries for the Frontend>>
+The values for VM Service, Output Processor and Nomad server should be added into the config as described in
+<<Step 2 - Configure Server (Part 1)>>. The value from Circleci server Traefik should be used in <<Step 5 - Create DNS Entries for the Frontend>>
 to create the DNS entry for your applications domain name and sub-domain.
 
 If you had to leave the default value in place for the Nomad `server_endpoint` in the previous step, you can now go back
@@ -428,7 +428,7 @@ prefer to do so. For example, VM service might be called `vmservice.circleci.you
 
 ## Step 4 - Install Nomad Clients
 As mentioned in the https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to
-schedule (via Nomad Server) and run (via Nomad Clients) CircleCI jobs.
+schedule (via Nomad server) and run (via Nomad Clients) CircleCI jobs.
 
 Nomad client machines are provisioned outside the cluster and need access to the Nomad Control Plane, Output Processor,
 and VM Service.
@@ -578,18 +578,18 @@ Once Terraform `apply` is complete, click on the *Application* tab in the admin 
 to show "Ready," then move on to the next step.
 
 ### Optional: Running Jobs Outside the Nomad Client
-CircleCI Server can run Docker jobs on Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are controlled by Nomad clients,
+CircleCI server can run Docker jobs on Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are controlled by Nomad clients,
 therefore the Nomad clients must be able to access the VM machines on port 22 for SSH and port 2376 for remote Docker jobs.
 
 TIP: The machines for VM jobs are addressed via their external IPs in GCP at the moment. You need to create appropriate
 ingress rules for TCP port 2376 with the IP addresses of the Nomad clients and Kubernetes nodes as allowed sources.
 
 ## Step 5 - Create DNS Entries for the Frontend
-Next, create a DNS entry for your traefik load balancer, i.e. `circleci.your.domain.com` and
-`app.circleci.your.domain.com`. You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how
-to create TLS certs for your Server install. Although TLS is optional, should it be used, it is important to ensure your TLS cert
-covers both the Server domain and sub-domain as in the examples provided. Once the user is logged in, all client requests
-are routed through your traefik sub-domain, i.e, `app.{your_domain}.com`.
+Next, create a DNS entry for your Traefik load balancer, i.e. `circleci.your.domain.com` and `app.circleci.your.domain.com`.
+You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how to create TLS certs for your server install.
+Although TLS is optional, if it be used, it is important to ensure your TLS certificate covers both the server domain and
+sub-domain as in the examples provided. Once the user is logged in, all client requests are routed through your Traefik
+sub-domain, i.e, `app.{your_domain}.com`.
 
 For more information on adding a new DNS record, see the following documentation:
 
@@ -618,7 +618,7 @@ of traffic from them to the control plane in some other way.
 
 
 ### Deploy
-Click the *Save config* button to update your installation and re-deploy Server.
+Click the *Save config* button to update your installation and re-deploy server.
 
 ## Step 7 - Validate Installation
 
