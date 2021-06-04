@@ -443,7 +443,7 @@ If you would like to install Nomad clients in AWS, create a file `main.tf` file 
 ----
 # main.tf
 terraform {
-  required_version = ">= 0.14.0"
+  required_version = ">= 0.15.4"
   required_providers {
     aws = {
       source = "hashicorp/aws"
