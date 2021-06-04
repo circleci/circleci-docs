@@ -24,7 +24,7 @@ This page, and its associated recipes, describes how you can perform specific co
 {: #what-are-circleci-orbs }
 {:.no_toc}
 
-CircleCI orbs are configuration packages that enable you to get started with the CircleCI platform. Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a reference for configuration best practices.
+CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a reference for configuration best practices.
 
 Refer to the [CircleCI Orbs Registry](https://circleci.com/developer/orbs) for the complete list of available orbs.
 
@@ -59,11 +59,11 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 ## Deploy changes to Amazon ECS
 {: #deploy-changes-to-amazon-ecs }
 
-The Amazon Elastic Container Service (ECS) is a scalable container orchestration service that enables you to support Docker containers and allows you to run and scale containerized applications on AWS. By using Amazon ECS, you will be able to use this service without installing and configuring your own container orchestration software, thereby eliminating the complexity of your deployment and ensuring you have a simple and optimized container deployment on the CircleCI platform. This recipe shows you how to quickly deploy software changes to Amazon ECS using CircleCI orbs, but if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
+Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することで、独自のコンテナ オーケストレーション ソフトウェアをインストール・構成せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 This recipe shows you how to quickly deploy software changes to Amazon ECS using CircleCI orbs, but if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
 
 ### Setting environment variables
 {: #setting-environment-variables }
-The following environment variables need to be set in CircleCI either directly or through a context:
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
@@ -158,7 +158,7 @@ The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to q
 
 ### Set environment variables
 {: #set-environment-variables }
-The following environment variables need to be set in CircleCI either directly or through a context:
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 - `GCLOUD_SERVICE_KEY` (required)
 - `GOOGLE_PROJECT_ID`
@@ -219,19 +219,19 @@ workflows:
           image: <my-docker-image-name>
 ```
 
-## Using Amazon Elastic Container Service for Kubernetes (Amazon EKS)
+## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 {: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
 
 CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Kubernetes Service (EKS) to perform the following tasks:
 
-* Create an EKS cluster
-* Create a Kubernetes deployment
-* Install Helm charts
-* Update a container image
+* EKS クラスタの作成
+* Kubernetes デプロイの作成
+* Helm Chart のインストール
+* コンテナ イメージの更新
 
 Before working with the CircleCI AWS-EKS orb, you may wish to review the specifics of the [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) orb in the CircleCI Orb Registry page.
 
-### Create an EKS Cluster
+### EKS クラスタを作成する
 {: #create-an-eks-cluster }
 
 Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
@@ -278,7 +278,7 @@ workflows:
 
 In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
 
-### Create a Kubernetes deployment
+### Kubernetes デプロイの作成
 {: #create-a-kubernetes-deployment }
 
 You may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
@@ -287,7 +287,7 @@ You may wish to create a Kubernetes deployment, which enables you to manage the 
 * Authenticator を使用した Kubernetes 構成の更新
 * コンテナ イメージの更新
 
-The code example below illustrates how you can create the Kubernetes deployment.
+Kubernetes デプロイを作成するコードの例を示します。
 
 ```yaml
 version: 2.1
@@ -344,7 +344,7 @@ workflows:
 ### Install a Helm chart in your cluster
 {: #install-a-helm-chart-in-your-cluster }
 
-Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
+Helm は、Kubernetes クラスタ上で実行される強力なアプリケーション パッケージ マネージャーです。Helm Chart を使用することで、アプリケーション構造を記述し、シンプルなコマンドによってその構造を管理できます。 Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. 1 つのチャートを使用して、memcached ポッドのような単純なアプリケーションから、HTTP サーバー、データベース、キャッシュなどから成る完全な Web アプリ スタックのような複雑なアプリケーションまで、幅広くデプロイできます。
 
 Using the `aws-eks` orb you can install Helm on your Kubernetes cluster, then install a Helm chart just using the orb's built-in jobs. Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
 
@@ -384,12 +384,12 @@ workflows:
 ## Enabling custom Slack notifications in CircleCI jobs
 {: #enabling-custom-slack-notifications-in-circleci-jobs }
 
-Slack is a real-time collaboration application where team members can work together to perform routine tasks and projects through custom channels and workspaces. When using the CircleCI platform, you may find it useful to enable custom notifications with the Slack app based on specific team needs and requirements.
+Slack は、リアルタイム コラボレーション アプリケーションです。チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
 
 ### Notifying a Slack channel of pending approval
 {: #notifying-a-slack-channel-of-pending-approval }
 
-The [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. One type of notification you can create is an "approval" notification that alerts your recipients that a specific approval is pending. The example below illustrates how you can create this approval notification in a CircleCI job:
+The [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
 
 ```yaml
 version: 2.1
@@ -411,9 +411,9 @@ There are several parameters for you to customize your Slack notifications that 
 ### Notifying a Slack channel with custom messages
 {: #notifying-a-slack-channel-with-custom-messages }
 
-Another type of notification you can create using the CircleCI Slack orb is a notification with a custom message created by you. This type of notification is useful when you want to deliver a detailed message to your recipients that is specific to a workflow, job, or project.
+CircleCI Slack Orb では、カスタム メッセージを含む通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
 
-The example shown below details how you can create a custom message that will be delivered in a specific Slack channel for users.
+カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
 
 ```yaml
 version: 2.1
@@ -451,9 +451,9 @@ In this example, the Slack orb command `notify` is used, along with the followin
 ### Sending a status alert at the end of a job based on success or failure
 {: #sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure }
 
-You may also send a status alert at the end of a job to your recipients. Note that this status alert must be the last step in a job.
+ジョブの終了時に受信者にステータス アラートを送信することも可能です。 このステータス アラートの送信は、ジョブの最後のステップにする必要があります。
 
-The example below shows how you can send a status alert at the end of a job.
+ジョブの終了時にステータス アラートを送信する例を以下に示します。
 
 ```yaml
 version: 2.1
@@ -477,7 +477,7 @@ jobs:
           webhook: webhook
 ```
 
-Notice in the example that the job is run and a Slack status alert is sent to your recipients (USERID1, USERID2) if the job has failed.
+上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
 
 For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
 
@@ -567,71 +567,71 @@ workflows:
       - my-job
 ```
 
-## Dynamic Configuration
+## ダイナミック コンフィグ
 {: #dynamic-configuration }
 
-This section assumes you have already read the [dynamic configuration]({{ site.baseurl }}/2.0/dynamic-config) section and have followed the steps outlined in the [Getting started]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci) guide.
+このセクションは、「[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config)」を読み、「[CircleCI のダイナミック コンフィグの使用を開始する]({{ site.baseurl }}/2.0/dynamic-config#getting-started-with-dynamic-config-in-circleci)」セクションに記載の手順を完了済みであることを前提としています。
 
-The following examples of dynamic configuration usage are provided below:
+ここでは、下記のダイナミック コンフィグの使用方法の例を紹介します。
 
-- [A basic example]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
-- [Execute specific `workflows` or `steps` based on which files are modified]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
+- [基本的な例]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#a-basic-example)
+- [変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)
 
-### A basic example
+### 基本的な例
 {: #a-basic-example }
 
-The following is a basic example using CircleCI's dynamic configuration feature. In this example, we assume that a `generate-config` script already exists. The script outputs a new configuration YAML based on some type of work it performs. It could potentially inspect `git` history, pipeline values that get passed to it, or anything else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs).
+以下に、CircleCI のダイナミック コンフィグ機能の基本的な使用例を示します。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの検査を行うことができます。
 
 ```yaml
 version: 2.1
 
-# this allows you to use CircleCI's dynamic configuration feature
+# CircleCI のダイナミック コンフィグ機能を有効にする。
 setup: true 
 
-# the continuation orb is required in order to use dynamic configuration
+# ダイナミック コンフィグの使用には continuation Orb が必要。
 orbs:
   continuation: circleci/continuation@0.1.2
 
-# our defined job, and its steps
+# ジョブとステップの定義
 jobs:
   setup:
     executor: continuation/default
     steps:
-      - checkout # checkout code
-      - run: # run a command
-          name: Generate config
+      - checkout # コードのチェックアウト
+      - run: # コマンドの実行
+          name: 設定ファイルの生成
           command: |
             ./generate-config > generated_config.yml 
       - continuation/continue:
-          configuration_path: generated_config.yml # use newly generated config to continue
+          configuration_path: generated_config.yml # 新しく生成した設定ファイルを使用して続行
 
-# our single workflow, that triggers the setup job defined above
+# 上記で定義した setup ジョブをトリガーする 1 つのワークフロー。
 workflows:
   setup:
     jobs:
       - setup
 ```
 
-In the above configuration, we:
+上記の設定ファイルは、以下のように構成されています。
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature
-- Invoke the `continuation` orb so we can use it.
-- Define a job called `setup` that uses the `continuation` orb as an [`executor`]({{ site.baseurl }}/2.0/executor-intro/). This job:
-    - Calls the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to checkout code from the configured repository.
-    - Calls the [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to execute the existing `generate-config` script, so we can pass its output to the `continue` job of the `continuation` orb.
-    - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
-- Lastly, we call the `setup` job defined above as a part of our `workflow`
+- 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
+- ダイナミック コンフィグ機能を使用するために `continuation` Orb を呼び出します。
+- `continuation` Orb を [`executor`]({{ site.baseurl }}/2.0/executor-intro/) として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
+    - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
+    - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) ステップを呼び出して、`generate-config` スクリプトを実行します。これで、`continuation` Orb の `continue` ジョブに出力を渡すことができます。
+    - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
+- 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
-For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the [Dynamic configuration FAQ]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs).
+`continuation` Orb の処理について詳しくは、[CircleCI デベロッパー ハブ](https://circleci.com/developer/ja/orbs/orb/circleci/continuation?version=0.1.2)で Orb のソース コードを参照するか、「[ダイナミック コンフィグに関するよくあるご質問]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs)」を参照してください。
 
-### Execute specific `workflows` or `steps` based on which files are modified
+### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
 
-You may find that you would like to conditionally run a `workflow` or `step` based upon changes made to a specific fileset. This would be beneficial in the case of your code/microservices being stored in a monorepo, or a single repository.
+場合によっては、ある`ワークフロー`や`ステップ`を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したいことがあります。 条件に応じた実行は、コードやマイクロサービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
-To achieve this, CircleCI has provided the [`path-filtering`](https://circleci.com/developer/orbs/orb/circleci/path-filtering) orb, which allows a pipeline to continue execution based upon the specific paths of updated files.
+これを可能にするために、CircleCI には [`path-filtering`](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering) Orb が用意されています。この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
 
-For example, consider a monorepo structure like the example shown below:
+たとえば、以下のようなモノレポ構造を考えてみましょう。
 
 ```shell
 .
@@ -645,21 +645,21 @@ For example, consider a monorepo structure like the example shown below:
 │   ├── IntegrationTests.java
 ```
 
-An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
+上記を前提に CircleCI のダイナミック コンフィグを実装すると、`config.yml` は次のようになります。
 
 ```yaml
 version: 2.1
 
-# this allows you to use CircleCI's dynamic configuration feature
+# CircleCI のダイナミック コンフィグ機能を有効にする
 setup: true
 
-# the path-filtering orb is required to continue a pipeline based on the path of an updated fileset
-# the maven orb is also used, as an example on using dynamic configuration to build a Java project.
+# 更新対象ファイルセットのパスに基づいてパイプラインを続行するには path-filtering Orb が必要
+# ダイナミック コンフィグを使用して Java プロジェクトをビルドする例として maven Orb も使用する。
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
   maven: circleci/maven@1.2.0
 
-# the default pipeline parameters, which will be updated according to the results of the path-filtering orb
+# デフォルトのパイプライン パラメーター。path-filtering Orb の結果に応じて更新される
 parameters:
   run-build-service-1-job:
     type: boolean
@@ -668,77 +668,77 @@ parameters:
     type: boolean
     default: false
 
-# our defined jobs
+# ジョブの定義
 jobs:
-  # the check-updated-files job uses the path-filtering orb to determine which pipeline parameters to update.
+  # check-updated-files ジョブでは path-filtering Orb を使用して、更新するパイプライン パラメーターを判断する。
   check-updated-files:
     - path-filtering/filter:
-        # 3-column, whitespace-delimited mapping. One mapping per line: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>.
+        # 空白文字で区切った 3 列のマッピング。 1 行につき 1 つのマッピング: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
         mapping: |
           service1/.* run-build-service-1-job true
           service2/.* run-build-service-2-job true
         base-revision: master
-        # this is the path of the configuration we should trigger once path filtering and pipeline parameter value updates are complete. In this case, we are using the parent dynamic configuration itself.
+        # パス フィルタリングとパイプライン パラメーターの値の更新が完了したらトリガーする構成ファイルのパス。 今回は、親ダイナミック コンフィグ自体を使用する。
         config-path: .circleci/config.yml
-  # the build-service-1 job uses the maven orb to build and install service1 artifacts into the maven repository (it does not run tests).
+  # build-service-1 ジョブでは maven Orb を使用して service1 のアーティファクトを maven リポジトリにビルドしてインストールする (テストは実行しない)。
   build-service-1:
     - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service1'
-  # the build-service-2 job uses the maven orb to build and install service2 artifacts into the maven repository (it does not run tests).
+        command: ‘install -DskipTests’
+        app_src_directory: ‘service1’
+  # build-service-2 ジョブでは maven Orb を使用して service2 のアーティファクトを maven リポジトリにビルドしてインストールする (テストは実行しない)。
   build-service-2:
     - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service2'
-  # the run-integration-tests job will run any tests defined in the tests directory.
+        command: ‘install -DskipTests’
+        app_src_directory: ‘service2’
+  # run-integration-tests ジョブでは tests ディレクトリで定義されたジョブを実行する。
   run-integration-tests:
     - maven/test:
-        command: '-X verify'
-        app_src_directory: 'tests'
+        command: ‘-X verify’
+        app_src_directory: ‘tests’
 
-# here we specify our workflows, most of which are conditionally executed based upon pipeline parameter values. 
-# Each workflow calls a specific job defined above, in the jobs section.
+# 以下でワークフローを指定する。ワークフローの大半はパイプライン パラメーターの値に応じた条件に従って実行される。 
+# 各ワークフローでは、上記の jobs セクションで定義された特定のジョブを呼び出す。
 workflows:
-  # when pipeline parameter, run-build-service-1-job is true, the build-service-1 job is triggered.
+  # パイプライン パラメーター run-build-service-1-job が true の場合、build-service-1 ジョブがトリガーされる。
   service-1:
     when: << pipeline.parameters.run-build-service-1-job >>
     jobs:
       - build-service-1
-  # when pipeline parameter, run-build-service-2-job is true, the build-service-2 job is triggered.
+  # パイプライン パラメーター run-build-service-2-job が true の場合、build-service-2 ジョブがトリガーされる。
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
       - build-service-2
-  # when pipeline parameter, run-build-service-1-job OR run-build-service-2-job is true, run-integration-tests job is triggered.
-  # see: https://circleci.com/docs/2.0/configuration-reference/#logic-statements for more information.
+  # パイプライン パラメーター run-build-service-1-job または run-build-service-2-job が true の場合、run-integration-tests ジョブがトリガーされる。
+  # 詳細は https://circleci.com/docs/ja/2.0/configuration-reference/#logic-statements を参照。
   run-integration-tests:
     when: 
       or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
     jobs:
       - run-integration-tests
-  # the check-updated-files job is always triggered, regardless of pipeline parameters.
+  # check-updated-files ジョブはパイプライン パラメーターの値にかかわらず必ずトリガーされる。
   always-run:
     jobs:
       - check-updated-files
 ```
 
-In the above configuration, we:
+上記の設定ファイルは、以下のように構成されています。
 
-- Add the line `setup: true` to the top-level of our config, to designate it for use of CircleCI's dynamic configuration feature.
-- Invoke the `path-filtering` and `maven` orbs so we can use them.
-- Define two boolean pipeline parameters, `run-build-service-1-job` and `run-build-service-2-job`
-- Define four jobs: `check-updated-files`, `build-service-1`, `build-service-2`, and `run-integration-tests`:
-  - The `check-updated-files` job will use the `path-filtering` orb to determine which files have changed, according to the file-path provided. It will also set the designated pipeline parameters to their specified values (in this case, different maven commands will be triggered based on which files changed).
-  - The `build-service-1` job uses the `maven` orb to compile/install the service1 code, but skips any tests
-  - The `build-service-2` job uses the `maven` orb to compile/install the service2 code, but skips any tests
-  - The `run-integration-tests` job uses the `maven` orb to run any integration tests
-- Define four workflows, three of which are conditionally executed:
-  - The `service-1` workflow triggers the `build-service-1` job when the pipeline parameter value mapped to run-build-service-1-job is set to `true`
-  - The `service-2` workflow triggers the `build-service-2` job when the pipeline parameter value mapped to run-build-service-2-job is set to `true`
-  - The `run-integration-tests` workflow will run if the `run-build-service-1-job` or `run-build-service-2-job` pipeline parameters have been updated to `true` based on the results of the `path-filtering` orb
-  - The `check-updated-files` workflow will always run any time this pipeline is triggered
+- 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
+- `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
+- `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプライン パラメーターを定義します。
+- `check-updated-files`、`build-service-1`、`build-service-2`、`run-integration-tests` という 4 つのジョブを定義します。
+  - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプライン パラメーターに所定の値を設定します。今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
+  - `build-service-1` ジョブ: `maven` Orb を使用して service1 コードのコンパイルとインストールを行います。テストはスキップします。
+  - `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。テストはスキップします。
+  - `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
+- 以下の 4 つのワークフローを定義します。そのうち、3 つのワークフローは条件に従って実行されます。
+  - `service-1` ワークフロー: run-build-service-1-job にマッピングされたパイプライン パラメーターの値が `true` の場合に `build-service-1` ジョブをトリガーします。
+  - `service-2` ワークフロー: run-build-service-2-job にマッピングされたパイプライン パラメーターの値が `true` の場合に `build-service-2` ジョブをトリガーします。
+  - `run-integration-tests` ワークフロー: `path-filtering` Orb の結果に基づいて `run-build-service-1-job` または `run-build-service-2-job` パイプライン パラメーターの値が `true` に更新された場合に実行されます。
+  - `check-updated-files` ワークフロー: このパイプラインがトリガーされた場合に必ず実行されます。
 
-See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more information on available elements and required parameters.
+利用可能な要素と必須パラメーターの詳細については、[`path-filtering` Orb のドキュメント](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering)を参照してください。
 
 ## Use matrix jobs to run multiple OS tests
 {: #use-matrix-jobs-to-run-multiple-os-tests }
