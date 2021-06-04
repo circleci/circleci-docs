@@ -76,7 +76,7 @@ before the pipeline is executed, triggered from both the API, or a webhook (A pu
 
 **Q:** What about dynamic configuration in [scheduled workflows](https://circleci.com/docs/2.0/workflows/#scheduling-a-workflow)?
 
-**A:** Setup workflows cannot currently be used with the existing scheduler. However, the next version of our scheduler will enable you to trigger pipelines which have dynamic configuration.
+**A:** Dynamic configuration cannot currently be used with the existing scheduler. However, the next version of our scheduler will enable you to trigger pipelines which have dynamic configuration.
 
 ### The continuation Orb
 {: #the-continuation-orb }
