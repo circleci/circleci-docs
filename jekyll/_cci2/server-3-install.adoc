@@ -156,6 +156,41 @@ NOTE: If using GitHub Enterprise, you will also need a personal access token and
 . MongoDB authentication mechanism: The authentication mechanism to use, usually `SCRAM-SHA-1`.
 . Additional connection options: Any other connection options you would like to use. This needs to be formatted as a query string (key=value pairs, separated by &, special characters need to be URL encoded). See the https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
 
+### Vault
+*Internal* will deploy the default Vault instance inside the CircleCI K8s namespace.  The application will be automatically configured.
+*External* will not install the default Vault instance with the CircleCI application.  Select this option if using an existing Vault instance.  Will require the user to configure the following settings:
+
+. URL: ex. `http://vault:8200`
+. Transit Path: The path of the transit secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
+. Token: The Vault token to be used by CircleCI.  The following example shows how to create a token with the recommend policy
+
+Create the policy:
+[source,sh]
+----
+vault policy write circleci -<<EOF
+path "mytransit/export/*" {
+  capabilities = ["deny"]
+}
+path "mytransit/encrypt/*" {
+  capabilities = ["update"]
+}
+path "mytransit/decrypt/*" {
+  capabilities = ["update"]
+}
+path "/auth/token/lookup-self" {
+    capabilities = ["read", "list"]
+}
+EOF
+
+vault token create -policy=circleci
+----
+
+Create a token using the policy:
+[source,sh]
+----
+vault token create -policy=circleci -period=30m
+----
+
 ### Object Storage
 
 Server 3.x hosts build artifacts, test results, and other state in object storage. We support
