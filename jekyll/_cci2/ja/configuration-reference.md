@@ -194,7 +194,7 @@ jobs:
       - image: buildpack-deps:trusty
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     environment:
       FOO: bar
     parallelism: 3
@@ -222,7 +222,7 @@ Reserved parameter-names:
 See [Parameter Syntax]({{ site.baseurl }}/2.0/reusing-config/#parameter-syntax) <!-- In this reference, it's not mentioned which types are allowed for job-parameters. --> for definition details.
 
 
-#### **`docker`** / **`machine`** / **`macos`** / **`windows`** (_executor_)
+#### **`docker`**/**`machine`**/**`macos`**/**`windows`** (_Executor_)
 {: #docker-machine-macos-windows-executor }
 
 An "executor" is roughly "a place where steps occur". CircleCI 2.0 では、必要な数の Docker コンテナを一度にローンチすることによって必要な環境を構築するか、完全な仮想マシンを使用します。 Learn more about [different executors]({{ site.baseurl }}/2.0/executor-types/).
@@ -267,35 +267,35 @@ Example:
 jobs:
   build:
     docker:
-      - image: buildpack-deps:trusty # primary container
+      - image: buildpack-deps:trusty # プライマリ コンテナ
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
         environment:
           ENV: CI
 
       - image: mongo:2.6.8
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
         command: [--smallfiles]
 
       - image: postgres:9.4.1
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
         environment:
           POSTGRES_USER: root
 
       - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
 
       - image: acme-private/private-image:321
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  #  コンテキスト/プロジェクト UI 環境変数の参照
 ```
 
 Using an image hosted on [AWS ECR](https://aws.amazon.com/ecr/) requires authentication using AWS credentials. By default, CircleCI uses the AWS credentials that you add to the Project > Settings > AWS Permissions page in the CircleCI application or by setting the `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` project environment variables. It is also possible to set the credentials by using `aws_auth` field as in the following example:
@@ -319,7 +319,7 @@ jobs:
       - image: "circleci/node:9.6.1"
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
       - sayhello:
           to: "Lev"
@@ -377,17 +377,17 @@ The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/dock
 
 When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
 
-* `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1, Docker v19.03.13, nvidia-container-toolkit v1.4.0-1
-* `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
-* `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1, Docker v19.03.0-ce, nvidia-docker v2.2.2
-* `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2, Docker v19.03.0-ce, nvidia-docker v2.2.2
+* `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1、Docker v19.03.13、nvidia-container-toolkit v1.4.0-1
+* `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2、Docker v19.03.13、nvidia-container-toolkit v1.3.0-1
+* `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1、Docker v19.03.0-ce、nvidia-docker v2.2.2
+* `ubuntu-1604-cuda-9.2:201909-23` - CUDA v9.2、Docker v19.03.0-ce、nvidia-docker v2.2.2
 
 ##### 使用可能な Windows GPU イメージ
 {: #available-windows-gpu-image }
 
 When using the [Windows GPU executor](#gpu-executor-windows), the available image is:
 
-* `windows-server-2019-nvidia:stable` - Windows Server 2019, CUDA 10.1. This image is the default.
+* `windows-server-2019-nvidia:stable` - Windows Server 2019、CUDA 10.1。 このイメージはデフォルトです。
 
 **Example**
 
@@ -401,7 +401,7 @@ jobs:
   build:
     machine:
       image: windows-server-2019-nvidia:stable
-      docker_layer_caching: true    # default - false
+      docker_layer_caching: true    # デフォルトは false
 ```
 
 #### **`macos`**
@@ -447,7 +447,7 @@ jobs:
       - run: echo 'Hello, Windows'
 ```
 
-#### **`branches` – DEPRECATED**
+#### **`branches` – 非推奨**
 {: #branches-deprecated }
 
 **This key is deprecated. Use [workflows filtering](#jobfilters) to control which jobs run for which branches.**
@@ -501,7 +501,7 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
-##### Docker executor
+##### Docker Executor
 {: #docker-executor }
 
 | クラス                    | vCPU | RAM  |
@@ -515,7 +515,7 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 | 2xlarge+<sup>(2)</sup> | 20   | 40GB |
 {: class="table table-striped"}
 
-###### Example usage
+###### 例
 {: #example-usage }
 
 ```yaml
@@ -525,10 +525,10 @@ jobs:
       - image: buildpack-deps:trusty
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     resource_class: xlarge
     steps:
-      ... // other config
+      ... // 他の構成
 ```
 
 You may also use the `resource_class` to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
@@ -542,21 +542,21 @@ jobs:
     resource_class: my-namespace/my-runner
 ```
 
-##### Machine executor (Linux)
+##### machine Executor (Linux)
 {: #machine-executor-linux }
 
 {% include snippets/machine-resource-table.md %}
 
-###### Example usage
+###### 例
 {: #example-usage }
 ```yaml
 jobs:
   build:
     machine:
-      image: ubuntu-2004:202010-01 # recommended linux image
+      image: ubuntu-2004:202010-01 # 推奨 Linux イメージ
     resource_class: large
     steps:
-      ... // other config
+      ... // 他の構成
 ```
 
 You may also use the `machine` class to configure a [runner instance](https://circleci.com/docs/2.0/runner-overview/#section=configuration).
@@ -570,7 +570,7 @@ jobs:
     resource_class: my-namespace/my-runner
 ```
 
-##### macOS executor
+##### macOS Executor
 {: #macos-executor }
 
 | クラス                 | vCPU | RAM  |
@@ -579,7 +579,7 @@ jobs:
 | large<sup>(3)</sup> | 8    | 16GB |
 {: class="table table-striped"}
 
-###### Example usage
+###### 例
 {: #example-usage }
 ```yaml
 jobs:
@@ -588,10 +588,10 @@ jobs:
       xcode: "11.3.0"
     resource_class: large
     steps:
-      ... // other config
+      ... // 他の構成
 ```
 
-##### Windows executor
+##### Windows Executor
 {: #windows-executor }
 
 | クラス            | vCPU | RAM   |
@@ -602,7 +602,7 @@ jobs:
 | 2xlarge        | 32   | 128GB |
 {: class="table table-striped"}
 
-###### Example usage
+###### 例
 {: #example-usage }
 ```yaml
 version: 2.1
@@ -614,7 +614,7 @@ jobs:
   build:
     executor:
       name: win/default
-      size: "medium" # can be "medium", "large", "xlarge", "2xlarge"
+      size: "medium" # "medium"、"large"、"xlarge"、"2xlarge" のいずれを指定可能
     steps:
       - run: Write-Host 'Hello, Windows'
 ```
@@ -623,7 +623,7 @@ Note the way resource class is set is different for `windows` because the execut
 
 See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-windows/) for more details and examples of using the Windows executor.
 
-##### GPU executor (Linux)
+##### GPU Executor (Linux)
 {: #gpu-executor-linux }
 
 | クラス                             | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) |
@@ -632,7 +632,7 @@ See the [Windows Getting Started document]({{ site.baseurl }}/2.0/hello-world-wi
 | gpu.nvidia.medium<sup>(2)</sup> | 8    | 30  | 1   | NVIDIA Tesla T4 | 16            |
 {: class="table table-striped"}
 
-###### Example usage
+###### 例
 {: #example-usage }
 ```yaml
 version: 2.1
@@ -649,7 +649,7 @@ jobs:
 
 See the [Available Linux GPU images](#available-linux-gpu-images) section for the full list of available images.
 
-##### GPU executor (Windows)
+##### GPU Executor (Windows)
 {: #gpu-executor-windows }
 
 | クラス                                     | vCPU | RAM | GPU | GPU モデル         | GPU メモリ (GiB) |
@@ -657,7 +657,7 @@ See the [Available Linux GPU images](#available-linux-gpu-images) section for th
 | windows.gpu.nvidia.medium<sup>(2)</sup> | 16   | 60  | 1   | NVIDIA Tesla T4 | 16            |
 {: class="table table-striped"}
 
-###### Example usage
+###### 例
 {: #example-usage }
 ```yaml
 version: 2.1
