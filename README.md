@@ -139,7 +139,7 @@ To update the server changelog, you will need to update both the docs site and o
 pull requests, details, etc.) are linked in the Server Release e-mail sent out monthly by Sara Meisburger, in the 
 Server 3.x Release Plan document.
 
-- **server-3-whats-new.adoc**: Make sure the **Known Issues** section is up to date, and add a new section for the new 
+- **`server-3-whats-new.adoc`**: Make sure the **Known Issues** section is up to date, and add a new section for the new 
   release.
 
 - **Outer changelog**: the outer changelog is located in the private repository for circleci.com. Create a file containing
