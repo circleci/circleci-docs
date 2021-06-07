@@ -127,7 +127,7 @@ Below are important files to note when updating server documentation:
   is built. It uses `asciidoctor` to build the three PDFs above. You should not have to update this file.
   
 - `sidenav.yml`: Defines links in the sidebar. **Any brand-new sections must be added here. Links to the PDFs must also be
-  updated here with every new release. See the section named `Server v3.x PDFs`.**
+  updated here with every new release. See the section named [`Server v3.x PDFs`](https://github.com/circleci/circleci-docs/blob/21815f9ef8ff7213eff54f920a452032b06cccb8/jekyll/_data/sidenav.yml#L355).**
 
 - `_config.yml`: Update this file when you need to bump version numbers of `serverversion` (every new release),
   `terraformversion`, `kubectlversion`, `helmversion`, or `kostversion`. Consider these your global variables to use in any
