@@ -110,7 +110,7 @@ Server should not be capitalized, if it can be avoided.
 create a PR against the `server/3.<NEW_VERSION_NUMBER>-preview` branch (please create a branch with
 this nomenclature, if you don't see one).
 
-- Prefacing a branch with `server/` will generate PDFs defined in the BLAHBLAH script. The PDFs appear as build artifacts 
+- Prefacing a branch with `server/` will generate PDFs built of the files described in the following section. The PDFs appear as build artifacts 
 and can be accessed from the CircleCI App.
 - Appending `-preview` to a branch will deploy the preview site of the documentation updates.
 
