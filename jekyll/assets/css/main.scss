@@ -182,6 +182,9 @@ div.article-container{
     flex: column;
     flex-direction: column;
     width: calc(100% - #{$leftbar-width});
+    @media (max-width: $screen-sm) {
+      width: 100%;
+    }
 }
 
 
