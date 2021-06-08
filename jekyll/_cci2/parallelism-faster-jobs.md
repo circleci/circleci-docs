@@ -189,6 +189,7 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 The contents of the file `/tmp/tests-to-run` will be different in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
 ## Using test splitting with Python Django tests
+{: #using-test-splitting-with-python-django-tests }
 
 To utilize test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
 
@@ -210,6 +211,7 @@ Using this example, here is a quick example of how you can accomplish test split
 ```
 
 ## Using test splitting with pytest
+{: #using-test-splitting-with-pytest }
 
 If you try to split your tests across containers with pytest, you may encounter any of the following errors:
 
@@ -222,9 +224,13 @@ No timing found for "tests/commands/test_2.py"
 If any of these errors are returned, you may need to make a few adjustments, which are listed below.
 
 ### Are you setting a custom working_directory?
+{: #are-you-setting-a-custom-working-directory? }
+
 If so, you may need to adjust the file paths that are saving to your test metadata XML file. Alternatively, if you are able to, try working out of the standard working directory we set for a container to see if that helps (you can do this by removing any instances of `working_directory` in your test run job).
 
 ### Where does your `pytest.ini` live?
+{: #where-does-your-pytest-ini-live? }
+
 To ensure test splitting performs correctly, make sure you are running your tests in the root directory. If your tests are not being run in the root directory, you may need to run the following command before you test the `run` command:
 
 ```
@@ -234,17 +240,20 @@ cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 The `.circleci/resources/pytest_build_config.ini` path may need to be replaced to point to where it's located in your project.
 
 ### Are you setting the junit_family in your pytest.ini?
+{: #are-you-setting-the-junit-family-in-your-pytest-ini? }
+
 Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set junit_family, refeer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
 
 Search for "families" to see the relevant information. 
 
 ### Example project that correctly splits by timings
+{: #example-project-that-correctly-splits-by-timing }
+
 The following GitHub repository is a fork of our `sample-python-cfd` project(https://github.com/CircleCI-Public/sample-python-cfd) that demonstrates how you can implement test splitting:
 
 https://github.com/nbialostosky/sample-python-cfd/blob/split-test/.circleci/config.yml
 
 You may find an example build of proper test splitting [here](https://app.circleci.com/pipelines/github/nbialostosky/sample-python-cfd/18/workflows/8b37bd45-ed19-42e1-8cc4-44401697f3fc/jobs/20)
-
 
 ### Video: troubleshooting globbing
 {: #video-troubleshooting-globbing }
