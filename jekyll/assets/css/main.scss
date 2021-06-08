@@ -181,11 +181,7 @@ div.article-container{
     display: flex;
     flex: column;
     flex-direction: column;
-    width: 100%;
-
-    @media (min-width: $screen-sm) and (max-width: $screen-lg) {
-        width: calc(100% - #{$leftbar-width});
-    }
+    width: calc(100% - #{$leftbar-width});
 }
 
 

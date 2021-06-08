@@ -17,7 +17,6 @@ var languages = {
 var els = {
   sidebarLangSelect: getElById("sidebarLangSelect"),
   footerLangSelect: getElById("footerLangSelect"),
-  footerLangCurrentSelect: getElById("footerLangCurrentSelect"),
   footerLangOptions: getElById("footerLangOptions")
 };
 
@@ -45,9 +44,6 @@ function handleSetLanguageOnLoad() {
       break;
     }
   }
-
-  // set value for footer picker.
-  footerLangCurrentSelect.textContent = languages[window.currentLang].name;
 
 }
 
