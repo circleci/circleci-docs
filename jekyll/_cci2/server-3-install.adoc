@@ -148,7 +148,7 @@ NOTE: If using GitHub Enterprise, you will also need a personal access token and
 *External* will not install the default Vault instance with the CircleCI application.  Select this option if using an existing Vault instance.  Will require the user to configure the following settings:
 
 . URL: ex. `http://vault:8200`
-. Transit Path: The name of the secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
+. Transit Path: The path of the transit secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
 . Token: The Vault token to be used by CircleCI.  The following example shows how to create a token with the recommend policy
 
 Create the policy:
