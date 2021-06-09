@@ -43,7 +43,7 @@ To import a public orb to your local server orb repository:
 
 [source,bash]
 ----
-circleci orb import ns[/orb[@version]] --host <your server installation domain> --token <your api token>
+circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
 ----
 
 ## Fetch a public orb’s updates
@@ -51,7 +51,7 @@ To update a public orb in your local server orb repository with a new version, r
 
 [source,bash]
 ----
-circleci orb import ns[/orb[@version]] --host <your server installation domain> --token <your api token>
+circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
 ----
 
 For more Orb information, please refer to the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs] for the cloud product.
