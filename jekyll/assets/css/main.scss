@@ -52,7 +52,7 @@ div.main-body {
   overflow: auto;
 	display: flex;
 	background: #fff;
-  height: 100vh;
+  height: calc(100vh - #{$nav-height})
 }
 
 .text-center-small-float-right {
