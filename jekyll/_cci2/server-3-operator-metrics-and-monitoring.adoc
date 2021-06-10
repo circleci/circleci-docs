@@ -22,16 +22,13 @@ toc::[]
 
 === Scope
 Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring
-the health of your system and debug issues with your installation. However, requirements differ vastly between use
-cases. Hence, features around local observability are provided on an as-is basis, and we kindly ask to make use of the
-flexibility and extensibility of the system, should you feel that the functionality provided is not sufficient for your
-needs.
+the health of your system and debug issues with your installation.
 
-Most importantly, take note of the following:
-
-NOTE: You cannot modify dashboards that are provided by CircleCI. 
 
 NOTE: Data is retained for a maximum of 15 days.
+
+NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI Server install. It will scrape metrics
+from your entire cluster by default. You may disable prometheus from within the kots admin console config if needed.
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
@@ -41,36 +38,4 @@ implementation of monitoring common performance metrics.
 Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
 The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
 by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a
-metrics endpoint for Prometheus to scrape so that the metrics can be viewed in Grafana.
-
-== Accessing the metrics dashboards
-Dashboards are provided in the KOTs administration console. If you have recommendations for additional data to be provided
-here, please let us know. The current dashboard provides important metrics for each container in your installation. The
-following metrics are available per container:
-
-* CPU Saturation
-* Memory Saturation
-* Number of running pods
-* Most recent logs
-* File I/O (in B/s)
-* Network I/O (in B/s)
-* Number of service restarts
-
-== Tips and Troubleshooting
-
-=== Observing pod logs
-You can check that services/pods are reporting metrics correctly by checking if they are being reported to stdout. To do
-this, examine the logs of the `circleci-telegraf` pod using `kubectl logs` or a tool like https://github.com/wercker/stern[stern].
-
-To view logs for Telegraf, run the following:
-
-* `kubectl get pods` to get a list of services
-* `kubectl logs -f circleci-telegraf-<hash>`, substituting the hash for your installation.
-
-While monitoring the current log stream, perform some actions with your server installation (e.g. logging in/out or
-running a workflow). These activities should be logged, showing that metrics are being reported. Most metrics you see logged
-will be from the frontend pod. However, when you run workflows, you should also see metrics reported by the dispatcher,
-`legacy-dispatcher`, `output-processor` and `workflows-conductor`, as well as metrics concerning cpu, memory and disk stats.
-
-You may also check the logs by running `kubectl logs circleci-telegraf-<hash> -n <namespace> -f` to confirm that your
-output provider (e.g. influx) is listed in the configured outputs.
+metrics endpoint for Prometheus to scrape.
