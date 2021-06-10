@@ -15,7 +15,7 @@ This document describes various questions and technical issues that you may find
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are available on any of our paid [plans](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for more information.
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
