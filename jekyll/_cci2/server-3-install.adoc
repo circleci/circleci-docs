@@ -10,14 +10,14 @@ version:
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI Server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+Before you begin with the CircleCI server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
 toc::[]
 
 ## Step 1 - Install KOTs
 
-CircleCI Server v3.x uses https://kots.io[KOTs] from https://www.replicated.com/[Replicated] to manage and
-distribute Server v3.x. KOTs is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
+CircleCI server v3.x uses https://kots.io[KOTs] from https://www.replicated.com/[Replicated] to manage and
+distribute server v3.x. KOTs is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 To install the latest version, you can run `curl  https://kots.io/install | bash`.
 
 Ensure you are running the minimum KOTs (KOTs {kotsversion}) by running `kubectl kots version`.
@@ -50,7 +50,7 @@ kubectl kots admin-console -n <namespace kots was installed in>
 ## Step 2 - Configure Server (Part 1)
 
 Once you have accessed the URL to the administrative console and uploaded your license file, you will see similar to the following,
-where you will need to configure CircleCI Server.
+where you will need to configure CircleCI server.
 
 .Server v{serverversion} Configuration
 image::server-config.png[Server v{serverversion} Configuration]
@@ -60,7 +60,7 @@ Global configuration settings are a collection of cross-cutting configuration se
 application as a whole. Component-specific settings can be found below under the *Component Settings* section.
 
 . *Domain Name* (required): The domain name for your server installation. For example, circleci.yourcompany.com. You will
-need to configure this domain and point it to the external Frontend Load Balancer once it is configured in a later step.
+need to configure this domain and point it to the Circleci server Traefik Load Balancer once it is configured in a later step.
 . *Frontend TLS Private Key*: A PEM encoded TLS private key for the web application. A default, self-signed TLS key is provided.
 . *Frontend TLS Certificate*: A PEM encoded TLS certificate for the web application. A default, self-signed TLS certificate is provided.
 
@@ -74,7 +74,7 @@ TIP: If you don’t already have a TLS certificate for your installation, you ca
 
 #### Optional: Generate a TLS Certificate
 
-By default, CircleCI Server will create self-signed certificates to get you started. In production, you should supply a
+By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a
 certificate from a trusted certificate authority. The https://letsencrypt.org/[LetsEncrypt] certificate authority, for example,
 can issue a certificate for free using their https://certbot.eff.org/[certbot] tool.
 
@@ -144,16 +144,35 @@ The domain you selected for your CircleCI installation is the Homepage URL and *
 NOTE: If using GitHub Enterprise, you will also need a personal access token and the domain name of your GitHub Enterprise instance. You must also enable HTTP API Rate Limiting from the management console.
 
 ### Object Storage
-Server 3.0 hosts build artifacts, test results, and other state in object storage. Please choose the one that best suits your needs.
-A *Storage Bucket Name* is required, in addition to the following fields, depending on if you are using AWS or GCP. Ensure
-that the bucket name you provide exists in your chosen object storage provider before proceeeding.
 
-#### AWS S3
-. *AWS S3* (required): Region your S3 bucket is in.
-. *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for S3 bucket access.
-. *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for S3 bucket access.
+Server 3.x hosts build artifacts, test results, and other state in object storage. We support
 
-It is recommended to create a new user with programmatic access for this purpose. You should fill in <<Bucket Name>> and <<AWS Account ID>> and attach the following https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html[IAM policy] to the user:
+. Any https://docs.aws.amazon.com/s3/index.html?nc2=h_ql_doc_s3[S3]-compatible storage
+. https://cloud.google.com/storage/[Google Cloud Storage]
+
+While any S3-compatible object storage may work, we test and support https://aws.amazon.com/s3/[AWS S3] and https://min.io[Minio]. For object storage
+providers that do not support the https://docs.aws.amazon.com/AmazonS3/latest/API/Type_API_Reference.html[S3 API], such as
+https://docs.microsoft.com/en-ca/azure/storage/blobs/[Azure blob storage], we recommend using https://docs.min.io/minio/baremetal/reference/minio-server/minio-gateway.html[Minio Gateway].
+
+Please choose the one that best suits your needs.  A *Storage Bucket Name* is required, in addition to the following fields,
+depending on if you are using AWS or GCP. Ensure that the bucket name you provide exists in your chosen object storage provider
+before proceeding.
+
+#### S3-compatible Object Storage
+
+To configure S3-compatible storage, set the following details in the object storage section of the configuration page:
+
+. *Storage Bucket Name* (required): The bucket used for server.
+. *Storage Object Expiry* (optional): Number of days to retain your test results and artifacts. Set to 0 to disable and
+retain objects indefinitely.
+. *AWS S3 Region* (optional): AWS region of bucket if your provider is AWS. S3 Endpoint is ignored if this option is set.
+. *S3 Endpoint* (optional): API endpoint of S3 storage provider. Required if your provider is not AWS. AWS S3 Region is ignored
+if this option is set.
+. *Access Key ID* (required): Access Key ID for S3 bucket access.
+. *Secret Key* (required): Secret Key for S3 bucket access.
+
+It is recommended to create a new user with programmatic access for this purpose. If your provider support IAM policies,
+you should fill in `<BUCKET_NAME>` and attach the following policy to the user:
 
 [source,json]
 ----
@@ -166,28 +185,26 @@ It is recommended to create a new user with programmatic access for this purpose
         "s3:*"
       ],
       "Resource": [
-        "arn:aws:s3:::<<Bucket Name>>",
-        "arn:aws:s3:::<<Bucket Name>>/*"
+        "arn:aws:s3:::<BUCKET_NAME>",
+        "arn:aws:s3:::<BUCKET_NAME>/*"
       ]
-    },
-    {
-      "Action": [
-        "sts:GetFederationToken"
-      ],
-      "Resource": [
-        "arn:aws:sts::<<AWS account ID>>:federated-user/build-*"
-      ],
-      "Effect": "Allow"
     }
   ]
 }
 ----
 
 #### Google Cloud Storage
-* *Service Account JSON*: A JSON format key of the Service Account to use for bucket access.
+
+To configure Google Cloud Storage (GCS), set the following details in the object storage section of the configuration page:
+
+. *Storage Bucket Name* (required): The bucket used for server.
+. *Storage Object Expiry* (optional): Number of days to retain your test
+results and artifacts. Set to 0 to disable and retain objects indefinitely.
+. *Service Account JSON* (required): A JSON format key of the Service Account to use for
+bucket access.
 
 A dedicated service account is recommended.  Add to it the `Storage Object Admin` role, with a condition on the resource
-name limiting access to only the bucket specified above.  For example, enter the following into the Google's Condition Editor:
+name limiting access to only the bucket specified above.  For example, enter the following into the Google's Condition Editor of the IAM console:
 
 [source,text]
 ----
@@ -195,10 +212,6 @@ resource.name.startsWith("projects/_/buckets/<bucket-name>")
 ----
 
 NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
-
-#### Embedded Object Storage (coming soon)
-Server 3.0 will utilize Minio for alternative object storage options. Minio provides a S3 like interface on top of numerous
-object storage options. For more information on Minio please see https://min.io/.
 
 ### Email Notifications
 Build notifications are sent via email.
@@ -395,17 +408,16 @@ image::preflight-checks.png[Preflight Checks]
 Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
 installation. If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
 
-* Frontend External
-* Circleci Server Traefik Proxy
+* Circleci server Traefik Proxy
 * VM Service Load Balancer URI
 * Output Processor Load Balancer URI
-* Nomad Server Load Balancer URI
+* Nomad server Load Balancer URI
 
 Depending on your cloud environment and configuration, your output can contain either an external IP address or a hostname
 for your load balancers. Either will work.
 
-The values for VM Service, Output Processor and Nomad Server should be added into the config as described in
-<<Step 2 - Configure Server (Part 1)>>. The value from Frontend External should be used in <<Step 5 - Create DNS Entries for the Frontend>>
+The values for VM Service, Output Processor and Nomad server should be added into the config as described in
+<<Step 2 - Configure Server (Part 1)>>. The value from Circleci server Traefik should be used in <<Step 5 - Create DNS Entries for the Frontend>>
 to create the DNS entry for your applications domain name and sub-domain.
 
 If you had to leave the default value in place for the Nomad `server_endpoint` in the previous step, you can now go back
@@ -416,7 +428,7 @@ prefer to do so. For example, VM service might be called `vmservice.circleci.you
 
 ## Step 4 - Install Nomad Clients
 As mentioned in the https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to
-schedule (via Nomad Server) and run (via Nomad Clients) CircleCI jobs.
+schedule (via Nomad server) and run (via Nomad Clients) CircleCI jobs.
 
 Nomad client machines are provisioned outside the cluster and need access to the Nomad Control Plane, Output Processor,
 and VM Service.
@@ -431,7 +443,7 @@ If you would like to install Nomad clients in AWS, create a file `main.tf` file 
 ----
 # main.tf
 terraform {
-  required_version = ">= 0.14.0"
+  required_version = ">= 0.15.4"
   required_providers {
     aws = {
       source = "hashicorp/aws"
@@ -566,18 +578,18 @@ Once Terraform `apply` is complete, click on the *Application* tab in the admin 
 to show "Ready," then move on to the next step.
 
 ### Optional: Running Jobs Outside the Nomad Client
-CircleCI Server can run Docker jobs on Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are controlled by Nomad clients,
+CircleCI server can run Docker jobs on Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are controlled by Nomad clients,
 therefore the Nomad clients must be able to access the VM machines on port 22 for SSH and port 2376 for remote Docker jobs.
 
 TIP: The machines for VM jobs are addressed via their external IPs in GCP at the moment. You need to create appropriate
 ingress rules for TCP port 2376 with the IP addresses of the Nomad clients and Kubernetes nodes as allowed sources.
 
 ## Step 5 - Create DNS Entries for the Frontend
-Next, create a DNS entry for your external frontend and traefik load balancer, i.e. `circleci.your.domain.com` and
-`app.circleci.your.domain.com`, respectively. You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how
-to create TLS certs for your server install. Although TLS is optional, should it be used, it is important to ensure your TLS cert
-covers both the server domain and sub-domain as in the examples provided. Once the user is logged in, all client requests
-are routed through your traefik sub-domain, i.e, `app.{your_domain}.com`.
+Next, create a DNS entry for your Traefik load balancer, i.e. `circleci.your.domain.com` and `app.circleci.your.domain.com`.
+You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how to create TLS certs for your server install.
+Although TLS is optional, if it be used, it is important to ensure your TLS certificate covers both the server domain and
+sub-domain as in the examples provided. Once the user is logged in, all client requests are routed through your Traefik
+sub-domain, i.e, `app.{your_domain}.com`.
 
 For more information on adding a new DNS record, see the following documentation:
 
