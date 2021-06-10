@@ -81,22 +81,23 @@ First, set one of these variables as appropriate for for your installation targe
 | `platform=darwin/arm64`
 |===
 
-Next, set the launch-agent version. On cloud, we select the latest version by
-querying for our releases for it and on server we must select the version
-appropriate for our version of server. A table of server launch-agent versions
-can be found https://circleci.com/docs/2.0/runner-server/[here].
+Next, set the `circleci-launch-agent` version. On cloud, we select the latest version by
+querying for our releases for it and on server, we must select the version
+appropriate for our version of server. A table of server `circleci-launch-agent` versions
+can be found https://circleci.com/docs/2.0/runner-server/#version[here].
 
+For cloud, you can run the following:
 ```bash
-# On cloud
 export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 export agent_version=$(curl "${base_url}/release.txt")
+```
 
-# On server (using launch agent for server 3.1 for example)
+For server, run the following:
+```bash
 export agent_version="1.0.11147-881b608"
 ```
 
 Finally, run the following commands to download, verify and install the binary.
-
 ```bash
 # Set up runner directory
 prefix=/opt/circleci
