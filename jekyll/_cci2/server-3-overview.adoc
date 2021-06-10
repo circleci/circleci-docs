@@ -231,8 +231,8 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 |
 |
 
-| local-observability-stack-prometheus
-| server
+| prometheus
+| Server
 | Used for metrics
 |
 |
