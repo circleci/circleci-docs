@@ -27,7 +27,7 @@ the health of your system and debug issues with your installation.
 
 NOTE: Data is retained for a maximum of 15 days.
 
-NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI Server install. It will scrape metrics
+NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI server install. It will scrape metrics
 from your entire cluster by default. You may disable prometheus from within the kots admin console config if needed.
 
 === Prometheus
