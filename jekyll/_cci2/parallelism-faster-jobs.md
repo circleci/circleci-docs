@@ -240,7 +240,7 @@ cp -f .circleci/resources/pytest_build_config.ini pytest.ini
 The `.circleci/resources/pytest_build_config.ini` path may need to be replaced to point to where it's located in your project.
 
 ### Are you setting the junit_family in your pytest.ini?
-{: #are-you-setting-the-junit-family-in-your-pytest-ini? }
+{: #are-you-setting-the-junit-family-in-your-pytest-ini }
 
 Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set junit_family, refeer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
 
