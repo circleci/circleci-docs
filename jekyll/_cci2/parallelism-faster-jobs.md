@@ -229,7 +229,7 @@ If any of these errors are returned, you may need to make a few adjustments, whi
 If so, you may need to adjust the file paths that are saving to your test metadata XML file. Alternatively, if you are able to, try working out of the standard working directory we set for a container to see if that helps (you can do this by removing any instances of `working_directory` in your test run job).
 
 ### Where does your `pytest.ini` live?
-{: #where-does-your-pytest-ini-live? }
+{: #where-does-your-pytest-ini-live }
 
 To ensure test splitting performs correctly, make sure you are running your tests in the root directory. If your tests are not being run in the root directory, you may need to run the following command before you test the `run` command:
 
