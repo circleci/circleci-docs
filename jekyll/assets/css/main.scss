@@ -178,8 +178,6 @@ div.article-container{
 }
 
 .article-toc-footer {
-    display: flex;
-    flex: column;
     flex-direction: column;
     width: calc(100% - #{$leftbar-width});
     @media (max-width: $screen-sm) {
