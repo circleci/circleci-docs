@@ -14,7 +14,7 @@ NOTE: CircleCI Runner is not yet available on the current version of Server
 [contact us](https://circleci.com/contact/) for more information.
 
 Each minor version of server is compatible with a specific version of
-launch-agent. The table below enumerates which version of launch-agent to use
+`circleci-launch-agent`. The table below enumerates which version of `circleci-launch-agent` to use
 depending on your version of server:
 
 Server version  | Runner
