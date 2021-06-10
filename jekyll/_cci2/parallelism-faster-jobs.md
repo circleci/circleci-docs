@@ -242,16 +242,44 @@ The `.circleci/resources/pytest_build_config.ini` path may need to be replaced t
 ### Are you setting the junit_family in your pytest.ini?
 {: #are-you-setting-the-junit-family-in-your-pytest-ini }
 
-Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set junit_family, refeer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
+Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
 
 Search for "families" to see the relevant information. 
 
 ### Example project that correctly splits by timings
 {: #example-project-that-correctly-splits-by-timing }
 
-The following GitHub repository is a fork of our `sample-python-cfd` project(https://github.com/CircleCI-Public/sample-python-cfd) that demonstrates how you can implement test splitting:
+The example below is a fork of our `sample-python-cfd` project(https://github.com/CircleCI-Public/sample-python-cfd) that shows how you can implement test splitting:
 
-https://github.com/nbialostosky/sample-python-cfd/blob/split-test/.circleci/config.yml
+```
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+jobs:
+  build-and-test:
+    parallelism: 2
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: |
+            set -e
+            TEST_FILES=$(circleci tests glob "openapi_server/**/test_*.py" | circleci tests split --split-by=timings)
+            mkdir -p test-results
+            pytest --verbose --junitxml=test-results/junit.xml $TEST_FILES
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+```
 
 You may find an example build of proper test splitting [here](https://app.circleci.com/pipelines/github/nbialostosky/sample-python-cfd/18/workflows/8b37bd45-ed19-42e1-8cc4-44401697f3fc/jobs/20)
 
