@@ -27,12 +27,23 @@ the health of your system and debug issues with your installation.
 
 NOTE: Data is retained for a maximum of 15 days.
 
-NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI Server install. It will scrape metrics
-from your entire cluster by default. You may disable prometheus from within the kots admin console config if needed.
+NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI server install. It will scrape metrics
+from your entire cluster by default. You may disable Prometheus from within the kots admin console config if needed.
+
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
 implementation of monitoring common performance metrics. 
+
+=== Kots Admin - Metrics Graphs
+By default, an instance of Prometheus is deployed with your CircleCI server install. Once deployed, you may provide the 
+address for your Prometheus instance to the kots admin dashboard. Kots will use this address to generate graph data for 
+the cpu and memory usage of containers in your cluster.
+
+The default Prometheus address is `http://prometheus-server`
+
+From the kots dashboard, select "configure graphs". Then enter `http://prometheus-server` and kots will generate resource
+usage graphs.
 
 === Telegraf
 Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
