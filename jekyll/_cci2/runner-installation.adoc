@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 ---
 = Installing the CircleCI Runner
 :page-layout: classic-docs
@@ -9,7 +10,10 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale
+Plan] and with https://circleci.com/pricing/server/[Server]. Please reach out
+to your sales representative (or https://circleci.com/contact-us/?cloud[contact
+us]) for information on how to sign up for the Scale Plan or Server.
 
 This page describes how to install CircleCI runner on Linux and macOS platforms. For other platorms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
 
@@ -77,21 +81,38 @@ First, set one of these variables as appropriate for for your installation targe
 | `platform=darwin/arm64`
 |===
 
-Run the following steps to download, verify and install the binary.
+Next, set the launch-agent version. On cloud, we select the latest version by
+querying for our releases for it and on server we must select the version
+appropriate for our version of server. A table of server launch-agent versions
+can be found https://circleci.com/docs/2.0/runner-server/[here].
 
-```sh
+```bash
+# On cloud
+export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+export agent_version=$(curl "${base_url}/release.txt")
+
+# On server (using launch agent for server 3.1 for example)
+export agent_version="1.0.11147-881b608"
+```
+
+Finally, run the following commands to download, verify and install the binary.
+
+```bash
+# Set up runner directory
 prefix=/opt/circleci
 sudo mkdir -p "$prefix/workdir"
-base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-echo "Determining latest version of CircleCI Launch Agent"
-agent_version=$(curl "$base_url/release.txt")
+
+# Downloading launch agent
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
+base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
 file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
 mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
+
+# Verifying download
 echo "Verifying CircleCI Launch Agent download"
 grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
@@ -112,6 +133,9 @@ The recommended CircleCI runner configuration for Linux is:
 ```yaml
 api:
   auth_token: AUTH_TOKEN
+  # On server, set url to the hostname of your server installation. For example,
+  # url: https://circleci.example.com
+
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "circleci", "--"]
@@ -227,14 +251,18 @@ Complete the template shown below, with the various capitalized parameters fille
 
 ```yaml
 api:
-    auth_token: AUTH_TOKEN
+  auth_token: AUTH_TOKEN
+  # On server, set url to the hostname of your server installation. For example,
+  # url: https://circleci.example.com
+
 runner:
-    name: RUNNER_NAME
-    command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
-    working_directory: /tmp/%s
-    cleanup_working_directory: true
+  name: RUNNER_NAME
+  command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
+  working_directory: /tmp/%s
+  cleanup_working_directory: true
+
 logging:
-    file: /Library/Logs/com.circleci.runner.log
+  file: /Library/Logs/com.circleci.runner.log
 ```
 
 === Install the CircleCI Runner configuration
