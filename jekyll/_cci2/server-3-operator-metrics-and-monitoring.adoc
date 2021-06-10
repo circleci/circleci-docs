@@ -39,7 +39,7 @@ By default, an instance of Prometheus is deployed with your CircleCI server inst
 address for your Prometheus instance to the kots admin dashboard. Kots will use this address to generate graph data for 
 the cpu and memory usage of containers in your cluster.
 
-The default prometheus address is `http://prometheus-server`
+The default Prometheus address is `http://prometheus-server`
 
 From the kots dashboard, select "configure graphs". Then enter `http://prometheus-server` and kots will generate resource
 usage graphs.
