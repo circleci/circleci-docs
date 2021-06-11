@@ -162,7 +162,7 @@ NOTE: If using GitHub Enterprise, you will also need a personal access token and
 
 . URL: ex. `http://vault:8200`
 . Transit Path: The path of the transit secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
-. Token: The Vault token to be used by CircleCI.  The following example shows how to create a token with the recommend policy
+. Token: The Vault token to be used by CircleCI.  The following example shows how to create a token with the recommended policy
 
 Create the policy:
 [source,sh]
