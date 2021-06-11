@@ -43,9 +43,9 @@ To ensure enough Nomad clients are running to handle all builds, track the queue
 Nomad Client machines as needed to balance the load. For more on tracking metrics see the
 xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
 
-Each machine reserves two vCPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the
-containers for running jobs. Larger machines are able to run more containers and are limited by the number of available
-cores after two are reserved for coordination.
+If a job's resource class requires more resources than the Nomad client's instance type has available, it will remain in a pending state.  Choosing a smaller instance type for Nomad clients is a way to reduce cost, but will limit the Docker resource classes CircleCI can use.  Review the https://circleci.com/docs/2.0/executor-types/#available-docker-resource-classes[available resource classes] to decide what is best for you.  The default instance type will run up to `xlarge` resource classes.
+
+See the https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad Documentation] for options on optimizing the resource usage of Nomad clients.
 
 NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to
 request use of larger machines for Nomad Clients.
