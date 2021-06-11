@@ -158,7 +158,7 @@ NOTE: If using GitHub Enterprise, you will also need a personal access token and
 
 ### Vault
 *Internal* will deploy the default Vault instance inside the CircleCI K8s namespace.  The application will be automatically configured.
-*External* will not install the default Vault instance with the CircleCI application.  Select this option if using an existing Vault instance.  Will require the user to configure the following settings:
+*External* will not install the default Vault instance with the CircleCI application.  Select this option if using an existing Vault instance.  You need to configure the following settings:
 
 . URL: ex. `http://vault:8200`
 . Transit Path: The path of the transit secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
