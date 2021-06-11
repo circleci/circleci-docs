@@ -67,6 +67,9 @@ need to configure this domain and point it to the Circleci server Traefik Load B
 TIP: If you don’t already have a TLS certificate for your installation, you can generate one using a tool of your choice. See the <<Optional: Generate a TLS Certificate>> section.
 
 [start=4]
+
+. *Private Load Balancers*:  By default, frontend load balancers will be assigned a public IP address.  Ticking this box will make the load balancers for the frontend private, resulting in no public IPs being assigned to them. If you change this setting after the initial deployment, you might need to re-deploy the traefik service for it to take effect. Note that this only works for GKE and EKS installations. 
+
 . *VM Service Load Balancer Hostname* (required): The hostname or IP of your VM Service Load Balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
 . *Output Processor Load Balancer Hostname* (required): The hostname or IP of your Output Processor load balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
 . *Nomad Load Balancer Hostname* (required): The hostname or IP of your Nomad load balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
