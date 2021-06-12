@@ -44,6 +44,8 @@ Workflows may appear with one of the following states:
 | SUCCESS | All jobs in the workflow completed successfully |
 | ON HOLD | A job in the workflow is waiting for approval |
 | NEEDS SETUP | A workflow stanza is not included or is incorrect in the [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) file for this project |
+{: class="table table-striped"}
+
 
 ### Limitations
 {: #limitations }

@@ -44,6 +44,12 @@ and get details of the possible cause of the issue.
 or security groups won’t allow this. We will provide an optional internal local balancer for the frontend services in a future release.
 * https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
 
+== Release 3.0.2
+
+- Resolved a bug relating to artifacts disappearing after 30 days. The default settings for the artifact retention period have been updated to unlimited, and can be adjusted from the KOTS Admin Console.
+- Resolved a bug that made Traefik "unaware" of TLS certificate updates without requiring a manual restart of the Traefik pod. The Traefik pod will now restart automatically after any TLS certificate updates go into effect after the initial post KOTS deployment.
+- Resolved a bug in `builds-service` that was causing pods to crash as a result of running out of memory.
+
 == Release 3.0.1
 
 - `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.

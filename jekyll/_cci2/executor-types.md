@@ -246,7 +246,6 @@ version: 2.1
 jobs:
   build:
     machine:
-      image: ubuntu-1604:202007-01
       docker_layer_caching: true    # default - false
 ```
 

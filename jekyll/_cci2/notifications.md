@@ -151,7 +151,7 @@ jobs:
           nick: 'Your IRC nick name' # default: `circleci-bot`
           message: webhook # default: "Your CircleCI Job has completed."
 orbs:
-  slack: circleci/irc@x.y.z
+  irc: circleci/irc@x.y.z
 version: 2.1
 workflows:
   your-workflow:

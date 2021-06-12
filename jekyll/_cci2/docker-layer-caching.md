@@ -102,6 +102,7 @@ Docker Layer Caching can also reduce job runtimes when building Docker images us
 
 ``` YAML
 machine:
+  image: ubuntu-2004:202104-01  # any available image
   docker_layer_caching: true    # default - false
 ```
 
@@ -180,6 +181,7 @@ version: 2
 jobs:
   build_elixir:
     machine:
+      image: ubuntu-2004:202104-01
       docker_layer_caching: true
     steps:
       - checkout
