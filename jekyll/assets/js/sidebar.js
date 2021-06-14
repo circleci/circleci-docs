@@ -67,9 +67,7 @@
       $("nav.sidebar").scrollTop(elementRelativeTop);
     }
 
-    window.addEventListener('scroll', setSidebar);
     window.addEventListener('load', setSidebar);
-    window.addEventListener('resize', setSidebar);
 
     // allowing opening/closing of subnav elements
     var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));

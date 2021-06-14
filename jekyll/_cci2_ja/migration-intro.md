@@ -6,6 +6,7 @@ description: "CircleCI 2.0 への移行の概要"
 categories:
   - migration
 order: 1
+toc: false
 ---
 
 以下の各ドキュメントでは、CI/CD パイプラインを CircleCI に移行するうえで役立つガイドやヒントを提供しています。
