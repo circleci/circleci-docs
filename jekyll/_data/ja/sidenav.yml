@@ -262,20 +262,20 @@ en:
             name: Orb Publishing Process
             link: 2.0/creating-orbs/
   - 
-    name: Insights
+    name: インサイト
     icon: icons/sidebar/insights.svg
     children:
       - 
-        name: Overview
+        name: 概要
         link: 2.0/insights/
       - 
-        name: Metrics glossary
+        name: メトリクス用語集
         link: 2.0/insights-glossary/
       - 
-        name: Test Insights
+        name: テスト インサイト
         link: 2.0/insights-tests/
       - 
-        name: Data Partnerships
+        name: データの連携
         link: 2.0/insights-partnerships/
       - 
         name: Insights API
