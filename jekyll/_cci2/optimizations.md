@@ -167,7 +167,7 @@ jobs:
 ## Docker layer caching
 {: #docker-layer-caching }
 
-**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrate to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
+**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
 DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 

@@ -52,7 +52,7 @@ For more information on using shell scripts in your config, see the [Using Shell
 ## Browser testing
 {: #browser-testing }
 
-Use Selenium to manage in-browser tesing:
+Use Selenium to manage in-browser testing:
 
 ```yaml
 version: 2
