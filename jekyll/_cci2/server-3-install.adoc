@@ -110,6 +110,24 @@ This will create a private key and certificate (including intermediate certifica
 NOTE: It is important that your certificate contain both your domain and the `app.*` subdomain as subjects. For example,
 if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
 
+### PotsgreSQL
+*Internal*
+
+Deploys a pre-configured PostgreSQL 12 instance that runs inside of the CircleCI namespace. 
+
+*External* 
+
+Selecting the external option allows operators to connect to a PostgreSQL install running outside of the cluster.  CirceCI is tested against PostgreSQL 12.6.  We highly suggest that you configure your external PostgreSQL instance prior to deploying the CircleCI application.  You can find more information about configuration https://circleci.com/docs/2.0/server-3-operator-externalizing-services[here]. Once you have completed configuring your instance, fill out the following section:
+
+* PostgreSQL Service Domain
+  ** The domain or IP address of your PostgreSQL instance.
+* PostgreSQL Service Port
+  ** The port of your PostgreSQL instance.
+* PostgreSQL Service User
+  ** A user with the appropriate privileges to access your PostgreSQL instance.
+* PostgreSQL Service Password
+  ** The password of the user used to access your PostgreSQL instance.
+
 ### MongoDB
 *Internal* will deploy a completely configured MongoDB instance along with your server installation.
 *External* allows you to use your own MongoDB instance. CircleCI server is tested to work with MongoDB 3.6. You can customize the setup for your external MongoDB instance with the following settings:
