@@ -26,7 +26,7 @@ useful for CI/CD. This document will provide an overview of best practices when 
 If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
 
 - Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
-- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images). 
+- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
 - All CircleCI pre-built images are available for browsing on [Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
@@ -103,6 +103,7 @@ for as long as you like before making any changes.
 
 
 ### Notes on pinning images
+{: #notes-on-pinning-images }
 
 <div class="alert alert-warning" role="alert">
 It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue what would require a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
@@ -112,7 +113,7 @@ It is not recommended that you use the SHA for extended periods of time. If ther
 **Note:** If you are using a legacy image and you do not specify a tag, Docker
 applies the `latest` tag. The `latest` tag refers to the most recent stable
 release of an image. However, since this tag may change unexpectedly, it is best
-practice to add an explicit image tag. 
+practice to add an explicit image tag.
 
 **Note:** For Node.js variant Docker images (tags that end in `-node`) the LTS
 release of Node.js is pre-installed. If you would like to include your own
@@ -145,7 +146,7 @@ jobs:
 {: #finding-an-image-id }
 {:.no_toc}
 
-Follow these steps to find your docker image id: 
+Follow these steps to find your docker image id:
 
 1. In the CircleCI application, navigate to the job in your pipeline for which you would like to know the docker image.
 2. Toggle open the **Spin up environment** step.
@@ -198,7 +199,7 @@ If we see an idea on the board take off, we'll consider building it officially.
 CircleCI maintains several variants for the next-gen language image. For
 next-gen images be sure to check each image listing for information on each
 variant. The `-browsers` variant for next-gen images is still in progress. See
-each image listing on the [Developer Hub](https://circleci.com/developer/images/) 
+each image listing on the [Developer Hub](https://circleci.com/developer/images/)
 for details on which variants it supports.
 
 
@@ -342,9 +343,9 @@ refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circ
 
 
 <div class="alert alert-warning" role="alert">
-It is recommended to use next-generation images when possible. 
-For a list of the latest next-gen convenience images and 
-details about the content of each image, visit 
+It is recommended to use next-generation images when possible.
+For a list of the latest next-gen convenience images and
+details about the content of each image, visit
 the <a href="https://circleci.com/developer/">Developer Hub.</a>
 </div>
 
