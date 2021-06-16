@@ -75,7 +75,7 @@ app_identifier "com.example.HelloWorld"
 {:.no_toc}
 
 Please note that when using previous authentication methods with Fastlane (which
-was a cookie-based web session), depending on the actions in your configuration,
+uses a cookie-based web session), depending on the actions in your configuration,
 you may need to setup a 2-Factor Authentication (2FA) with your Apple account.
 Unfortunately, this requires an account owner to manually respond to a 2FA
 request during a build, which is less than ideal.
