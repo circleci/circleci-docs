@@ -70,6 +70,19 @@ apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
 
+#### Two-Factor Authentication
+{: #two-factor-authentication}
+{:.no_toc}
+
+Please note that when using previous authentication methods with Fastlane (which
+was a cookie-based web session), depending on the actions in your configuration,
+you may need to setup a 2-Factor Authentication (2FA) with your Apple account.
+Unfortunately, this requires an account owner to manually respond to a 2FA
+request during a build, which is less than ideal.
+
+Fastlane now recommends using the [App Store Connect API](https://docs.fastlane.tools/app-store-connect-api/) key, which does not require 2FA. Please consult Fastlane's [documentation](https://docs.fastlane.tools/best-practices/continuous-integration/#authenticating-with-apple-services) on integrating with continuous integration services for more information.
+
+
 ### Deploying to the App Store
 {: #deploying-to-the-app-store }
 
