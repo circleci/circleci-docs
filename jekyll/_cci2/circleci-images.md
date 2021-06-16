@@ -30,7 +30,7 @@ If you would like to directly search for an image, you can browse CircleCI Docke
 - All CircleCI pre-built images are available for browsing on [Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 
 _**Note:** CircleCI occasionally makes scheduled changes to images to fix bugs or
-otherwise improve functionality, and these changes can sometimes cause affect
+otherwise improve functionality, and these changes can sometimes affect
 how images work in CircleCI jobs. Please follow the [**convenience-images** tag on
 Discuss](https://discuss.circleci.com/tags/convenience-images) to be notified in advance of scheduled maintenance._
 
@@ -48,7 +48,7 @@ The next-generation convenience images in this section were built from the groun
 **Faster spin-up time** - In Docker terminology, these next-gen images will generally have fewer and smaller layers. Using these new images will lead to faster image downloads when a build starts, and a higher likelihood that the image is already cached on the host.
 
 **Improved reliability and stability** - The existing legacy convenience images are
-rebuilt practically every day with potential changes from upstream that we can't
+rebuilt practically every day with potential changes from upstream that we cannot
 always test fast enough. This leads to frequent breaking changes, which is not
 the best environment for stable, deterministic builds. Next-gen images will only
 be rebuilt for security and critical-bugs, leading to more stable and
@@ -56,7 +56,7 @@ deterministic images.
 
 ### CircleCI base image
 {: #circleci-base-image }
-Using the `base` image in your config looks like so:
+Using the `base` image in your config looks like the example shown below:
 
 ```yaml
   myjob:
@@ -76,7 +76,7 @@ base for your own custom Docker image, this image is for you.
 
 You can find more config examples for this image on the [Developer Hub](https://circleci.com/developer/images/image/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
 
-The example below demonstrates using the next-gen Go image, which is based off the `base` image above.
+The example below demonstrates how to use the next-gen Go image, which is based off the `base` image above.
 
 ```yaml
   myjob:
@@ -99,14 +99,14 @@ For example, pin down those images to a specific point version, like `cimg/ruby:
 It is also possible to use the specific SHA of a image. For example, you can use
 `cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390`
 instead of `cimg/ruby:2.4.10-node`. Doing so allows you to test specific images
-for as long as you like before making any changes.
+for as long as you would like before making any changes.
 
 
 ### Notes on pinning images
 {: #notes-on-pinning-images }
 
 <div class="alert alert-warning" role="alert">
-It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue what would require a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
+It is not recommended that you use the SHA for extended periods of time. If there is a major bug or security issue that requires a rebuild of the image, your pipeline's dependency on the image could inhibit you from acquiring the update that fixes that bug or patches a security issue.
 </div>
 
 
@@ -320,15 +320,15 @@ The following packages are installed via `curl` or other means.
 ## Out of scope
 {: #out-of-scope }
 
-1. If an image isn't listed above, it is not available. As the Convenience Image
+1. If an image is not listed above, it is not available. As the Convenience Image
    program is revamped, proposals for new images are not currently being
    accepted.
 1. Old versions of software will not be rebuilt. Once an upstream image stops
    building the tag for a specific release, say Node.js v8.1.0, then we stop
    building it too. This means other tools in that image, such as `npm` in this
    example, will no longer be updated either.
-1. We don't support building preview, beta, or release candidate images tags. On
-   occasion they'll be available but these tags tend to cause our build system
+1. We do not support building preview, beta, or release candidate images tags. On
+   occasion they will be available but these tags tend to cause our build system
    for Convenience Images to fail. If you need a non-stable release of a
    language, we suggest installing it via [an orb](https://circleci.com/orbs/)
    or a custom Docker image instead.
