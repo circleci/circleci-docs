@@ -1,6 +1,7 @@
 ---
 version:
 - Server v2.x
+- Server v3.x
 - Server Admin
 ---
 = Security
@@ -82,7 +83,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
 - **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
 - **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
+- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
 == Checklist To Using CircleCI Securely as a Customer
 

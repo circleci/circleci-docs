@@ -55,12 +55,22 @@ If the traffic rules for your load balancers have not been created automatically
 | Source
 | Purpose
 
-| frontend
+| frontend-external
+| 80
+| External
+| Frontend API
+
+| frontend-external
+| 443
+| External
+| Frontend API
+
+| *-server-traefik
 | 80
 | External
 | User Interface
 
-| frontend
+| *-server-traefik
 | 443
 | External
 | User Interface
@@ -144,7 +154,7 @@ Nomad clients do not need to communicate with each other; you can block traffic 
 [cols=3*, options="header", stripes=even]
 |===
 | Port
-| Destination
+| Source
 | Purpose
 
 | 4647
@@ -189,7 +199,7 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 [cols=3*, options="header", stripes=even]
 |===
 | Port
-| Destination
+| Source
 | Purpose
 
 | 22
@@ -216,7 +226,6 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 ### Egress
 You will only need the egress rules for internet access and SSH for your VCS.
 
-//TO DO:
-//## What to read next
-//
-//* xref:server-3-operator.adoc[Server 3.x Operator Guide]
+## What to read next
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]

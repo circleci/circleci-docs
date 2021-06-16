@@ -2,6 +2,7 @@
 ---
 @import 'variables';
 @import 'sidebar';
+@import 'global-nav';
 @import 'subnav';
 @import 'instantsearch';
 @import 'tooltip';
@@ -104,20 +105,6 @@ footer {
 	}
 }
 
-// Main Nav Additions
-nav.nav-toggle.two {
-	.btn, .btn-primary, .btn-primary-enterprise {
-		display: inline-block;
-		text-align: center;
-		vertical-align: middle;
-		font-size: 16px;
-	}
-
-	a:hover {
-		text-decoration: none;
-	}
-}
-
 // Navigation Sidebar
 #nav-button{
 	display: none;
@@ -144,6 +131,21 @@ nav.nav-toggle.two {
 }
 
 
+// Logged In/Out State
+body.loggedin {
+	.visitor-item {
+		display: none !important;
+	}
+	.dashboard-link {
+		display: block !important;
+	}
+}
+
+.dashboard-link {
+	display: none !important;
+}
+
+
 // Article
 div.article-container{
 	float: left;
@@ -151,7 +153,7 @@ div.article-container{
 		padding: 0 16px 0 16px;
 		width: 100%;
 	}
-	padding: 60px 48px 0 48px;
+	padding: 0 48px;
 	width: calc(100% - 260px);
 }
 	article{
@@ -253,8 +255,6 @@ body.homepage{
   	  padding: 0 16px 0 16px;
       width: 100%;
     }
-	  padding: 60px 48px 0 48px;
-    width: calc(100% - 260px);
   }
 
 	article{

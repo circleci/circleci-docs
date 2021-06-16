@@ -1,11 +1,11 @@
 # Local Development Instructions
 
 
-There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](http://bundler.io/).
+There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](https://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
 
-1. Install Docker for your platform: <https://docs.docker.com/engine/installation/>
+1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
 1. Clone the CircleCI docs repo: `git clone --recurse-submodules https://github.com/circleci/circleci-docs.git`
 _(If you already cloned the project and forgot `--recurse-submodules`, run `git submodule update --init`)_
 1. Run `npm install` to fetch dependencies
@@ -18,13 +18,13 @@ _(If you already cloned the project and forgot `--recurse-submodules`, run `git 
 
 ## 2. Local Development with Ruby and Bundler (alternative to Docker)
 
-If you already have a stable Ruby environment (currently Ruby 2.3.3) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
+If you already have a stable Ruby environment (currently Ruby 2.7.2) and feel comfortable installing dependencies, install Jekyll by following [this guide](https://jekyllrb.com/docs/installation/).
 
 Check out the [Gemfile](https://github.com/circleci/circleci-docs/blob/master/Gemfile) for the Ruby version we're currently using. We recommend [RVM](https://rvm.io/) for managing multiple Ruby versions.
 
 We also use a gem called [HTMLProofer](https://github.com/gjtorikian/html-proofer) to test links, images, and HTML. The docs site will need a passing build to be deployed, so use HTMLProofer to test everything before you push changes to GitHub.
 
-You're welcome to use [Bundler](http://bundler.io/) to install these gems.
+You're welcome to use [Bundler](https://bundler.io/) to install these gems.
 
 ## Building js assets
 
@@ -51,6 +51,21 @@ JEKYLL serve -Iw
 Jekyll will build the site and start a web server, which can be viewed in your browser at <http://localhost:4000/docs/>. `-w` tells Jekyll to watch for changes and rebuild, while `-I` enables an incremental rebuild to keep things efficient.
 
 For more info on how to use Jekyll, check out [their docs](https://jekyllrb.com/docs/usage/).
+
+## Markdownlinter
+
+Prerequisites:
+
+- Installed npm packages at the root of the repository `npm install`
+- Installed gems at the root of the repository `bundle install`
+
+You can lint the markdown using the [markdownlint-cli2](https://github.com/DavidAnson/markdownlint-cli2)
+
+```bash
+.PATH=$(npm bin):$PATH markdownlint-cli2 jekyll/_cci2/*.md
+```
+
+You can also autofix the issues by adding `fix: true` to the configuration file `.markdownlint-cli2.jsonc`.
 
 ## Working on search
 

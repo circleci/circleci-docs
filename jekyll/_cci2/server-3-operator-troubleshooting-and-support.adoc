@@ -1,0 +1,90 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Troubleshooting and Support
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI
+Server v3.x installation. If your issue is not addressed below, you can generate a support bundle or contact your
+CircleCI account team.
+
+toc::[]
+
+## Start Admin Console
+
+To restart the Admin Console, run:
+
+[source,bash]
+----
+kubectl kots admin-console --namespace <namespace>
+----
+
+Open your browser and access http://localhost:8800 to see the Admin console.
+
+## Generate Support Bundle
+A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically
+requested when you open a ticket.
+
+To download a support bundle to provide to CircleCI for support, select the *Troubleshoot* tab from the Admin console
+menu bar, and then click *Analyze CircleCI Server*.
+
+## Managing Pods
+
+### Verify Pod Readiness and Status
+Note: please check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to
+serve user requests. Some pods may take some time to become ready.
+
+[source,bash]
+----
+kubectl get pods -n <namespace>
+NAME READY STATUS RESTARTS AGE
+api-service-5c8f557548-zjbsj 1/1 Running 0 6d20h
+audit-log-service-77c478f9d5-5dfzv 1/1 Running 0 6d20h
+builds-service-v1-5f8568c7f5-62h8n 1/1 Running 0 6d20h
+circleci-mongodb-0 1/1 Running 0 6d20h
+circleci-nomad-0 1/1 Running 6 6d20h
+…
+----
+
+To show only pods with a status besides `Running`, you can use --field-selector option.
+
+[source,bash]
+----
+kubectl get pods --field-selector status.phase!=Running -n <namespace>
+NAME READY STATUS RESTARTS AGE
+local-observability-stack-loki-stack-test 0/1 Error 0 5d22h
+----
+
+### Verify Pod Settings and Status
+To show detail settings and status of pods:
+
+[source,bash]
+----
+kubectl describe pods <pod-name> -n <namespace>
+----
+
+### Get Pod Logs
+To show logs of pods:
+
+[source,bash]
+----
+kubectl logs <pod-name> -n <namespace>
+----
+
+### Restart Pods
+To restart specific pods, the easiest way is remove the pod. Kubernetes will automatically recreate the pod.
+
+[source,bash]
+----
+kubectl delete pod <pod-name> -n <name-space> --now
+----
+
+## Debug Queuing Builds
+For troubleshooting information on debugging queued builds, see the Server 2.x
+https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.

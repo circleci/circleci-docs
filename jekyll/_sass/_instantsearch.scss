@@ -2,22 +2,18 @@
   border-radius: 0;
   padding: 1.25em 1em 1em 2.8em;
   width: 100%;
-  border: none;
 }
 
 .main-searchbar {
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  position: fixed;
-  width: 100%;
-  background: white;
-  z-index: 2;
-  top: 70px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
 
   #search-box {
     position: relative;
     display: block;
-    max-width: 400px;
+    flex-grow: 1;
 
     .ais-SearchBox-submit {
       position: absolute;
@@ -36,22 +32,35 @@
       svg {
         width: 14px;
         height: auto;
-        fill: #D8D8D8;
       }
     }
 
     .ais-SearchBox-submit {
-      left: 0;
+      left: 15px;
     }
 
     .ais-SearchBox-reset {
-      right: 0;
+      right: 15px;
     }
 
     .instantsearch-search {
       @extend .base-input-style;
       margin: 0;
-      padding: 1.5em 2em;
+    }
+  }
+
+  &--cancel-button {
+    display: block;
+    color: #7F7F7F;
+    border-left: 1px solid #7F7F7F;
+    padding: 5px 10px;
+
+    @media (min-width: $screen-sm) {
+      display: none;
+
+      body.search-open & {
+        display: block;
+      }
     }
   }
 }
@@ -60,7 +69,6 @@
   padding: $spacing-small-vertical 0;
   background: #FAFAFA;
   min-height: 500px;
-  margin-top: $spacing-medium-vertical;
 
   h2 {
     padding-left: $spacing-small-vertical;
@@ -123,7 +131,7 @@
   }
 }
 
-ul.results-nav {
+.subnav.component ul.results-nav {
   margin: 0;
   padding: 0;
   border-bottom: 1px solid #D8D8D8;
@@ -131,6 +139,20 @@ ul.results-nav {
   li {
     font-weight: 500;
     color: $gray-dark;
+
+    // Reduce horizontal margin to fit on very narrow screens with result counts populated
+    @media (max-width: $screen-xxs-max) {
+      margin-left:  12px;
+      margin-right: 12px;
+
+      // Specificity rules make the above override the rules that suppress leading/trailing margins, so re-specify those here:
+      &:first-child {
+        margin-left: 0;
+      }
+      &:first-last {
+        margin-left: 0;
+      }
+    }
 
     &.active {
       color: $black-light;

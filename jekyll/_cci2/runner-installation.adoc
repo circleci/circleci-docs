@@ -72,6 +72,9 @@ First, set one of these variables as appropriate for for your installation targe
 
 | For macOS x86_64
 | `platform=darwin/amd64`
+
+| For macOS M1
+| `platform=darwin/arm64`
 |===
 
 Run the following steps to download, verify and install the binary.
@@ -174,8 +177,7 @@ WantedBy = multi-user.target
 You can now enable the service:
 
 ```bash
-prefix=/opt/circleci
-systemctl enable $prefix/circleci.service
+systemctl enable /opt/circleci/circleci.service
 ```
 
 === Start the service
