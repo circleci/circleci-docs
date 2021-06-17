@@ -1,0 +1,76 @@
+---
+layout: classic-docs
+title: "CircleCI での Yarn (npm の代替) の使用"
+short-title: "Yarn パッケージ マネージャー"
+categories:
+  - how-to
+description: "CircleCI での Yarn パッケージ マネージャーの使用方法"
+version:
+  - Cloud
+  - Server v2.x
+---
+
+[Yarn](https://yarnpkg.com/ja/) は、JavaScript 用のオープンソース パッケージ マネージャーです。 Yarn によってインストールされるパッケージはキャッシュできるため、 ビルドを高速化できるだけでなく、さらに重要なメリットとして、ネットワーク接続に関するエラーも低減できます。
+
+## CircleCI での Yarn の使用方法
+{: #using-yarn-in-circleci }
+
+Yarn might already be installed in your build environment if you are using the [`docker` executor](https://circleci.com/docs/2.0/executor-types/#using-docker). With [Pre-built CircleCI Docker Images](https://circleci.com/docs/2.0/circleci-images/), the NodeJS image (`circleci/node`) already has Yarn preinstalled. If you are using one of the other language images such as `circleci/python` or `circleci/ruby`, there are two [image variants](https://circleci.com/docs/2.0/circleci-images/#language-image-variants) that will include Yarn as well as NodeJS. These would be the `-node` and `-node-browsers` image variants. For example, using the Docker image `circleci/python:3-node` will give you a Python build environment with Yarn and NodeJS installed.
+
+If you're using your own Docker image base or the `macos`, `windows` or `machine` executors, you can install Yarn by following the official instructions from [Yarn Docs](https://yarnpkg.com/lang/en/docs/install/). The Yarn Docs provide several installation methods depending on what machine executor you might be using. For example, you can install on any unix-like environment using the following curl command.
+
+```sh
+curl -o- -L https://yarnpkg.com/install.sh | bash
+```
+
+## キャッシュ
+{: #caching }
+
+Yarn packages can be cached to improve CI build times.
+
+An example for Yarn 2:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --immutable
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
+
+An example for Yarn 1.x:
+
+{% raw %}
+```yaml
+#...
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile --cache-folder ~/.cache/yarn
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+#...
+```
+{% endraw %}
+
+## See also
+{: #see-also }
+
+[Caching Dependencies]({{ site.baseurl }}/2.0/caching/)
