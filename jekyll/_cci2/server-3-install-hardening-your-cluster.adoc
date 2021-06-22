@@ -203,22 +203,14 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | Purpose
 
 | 22
-| K8s nodes
-| Internal communication
-
-| 22
 | Nomad clients
-| Internal communication
-
-| 2376
-| K8s nodes
 | Internal communication
 
 | 2376
 | Nomad clients
 | Internal communication
 
-| 64535-65535
+| 54782
 | External
 | Rerun jobs with SSH functionality
 |===
