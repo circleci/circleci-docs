@@ -163,7 +163,7 @@ The `-t` key specifies the name and tag of the new image:
 
 - `circleci` - Docker Hub でのアカウント
 - `cci-demo-docker-primary` - リポジトリ名
-- `0.0.1` - イメージのタグ (バージョン)。 `Dockerfile` の内容を変更した場合は、必ずタグを更新してください。更新しないと予期しない結果になる場合があります。
+- `0.0.1` - イメージのタグ (バージョン)。 `Dockerfile` の内容を変更した場合は、必ずタグを更新してください。
 
 ### レジストリへのイメージのプッシュ
 {: #pushing-the-image-to-the-registry }
