@@ -99,8 +99,7 @@ set -o errexit
 set -o xtrace
 
 if [ -z "${SECRET_ENV_VAR:-}" ]; then
-  echo "You must set SECRET_ENV_VAR!"
-fi
+  echo "You must set SECRET_ENV_VAR!" fi
 > sh tmp.sh
 + '[' -z '' ']'
 + echo 'You must set SECRET_ENV_VAR!'
