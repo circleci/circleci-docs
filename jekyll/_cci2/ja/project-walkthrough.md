@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-このチュートリアルのデモ アプリケーションでは、バックエンド用に Python と Flask を使用し、 データベース用に PostgreSQL を使用します。
+このチュートリアルのデモ アプリケーションでは、バックエンド用に Python と Flask を使用し、 データベース用に PostgreSQL を使用します。 データベース用に PostgreSQL を使用します。
 
 * TOC
 {:toc}
@@ -44,9 +44,9 @@ jobs:
 
 **Note:** If you are **not** using  [workflows]({{ site.baseurl }}/2.0/workflows) in your `.circleci/config.yml`, you must have a job named `build` that includes the following:
 
-- 基盤となるテクノロジーの Executor。上記の例では `docker` として定義されています。
-- イメージは Docker イメージです。上記の例では、CircleCI によって提供される Debian Stretch 上の Python 3.6.2 を含み、テストをサポートするためにブラウザーがインストールされています。
-- 必須の `checkout` ステップで始まり、その後 `run:` キーが続く steps。プライマリ コンテナ上でコマンドが順次実行されます。
+- 上記の例では `docker` として定義されています。
+- イメージは Docker イメージです。 上記の例では、CircleCI によって提供される Debian Stretch 上の Python 3.6.2 を含み、テストをサポートするためにブラウザーがインストールされています。
+- 必須の `checkout` ステップで始まり、その後 `run:` キーが続く steps。 プライマリ コンテナ上でコマンドが順次実行されます。
 
 ## Service containers
 {: #service-containers }
@@ -169,11 +169,11 @@ jobs:
 
 The following describes the detail of the added key values:
 
-- `restore_cache:` ステップでは、キー テンプレートに一致するキーを持つキャッシュを検索します。 キー テンプレートは `deps1-` で始まり、`{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}` を使用して現在のブランチ名が埋め込まれています。 `requirements.txt` ファイルのチェックサムも、`{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}` を使用してキー テンプレートに埋め込まれています。 CircleCI は、テンプレートに一致する最新のキャッシュを復元します。このとき、キャッシュが保存されたブランチ、およびキャッシュされた virtualenv の作成に使用された `requirements/dev.txt` ファイルのチェックサムが一致する必要があります。
+- `restore_cache:` ステップでは、キー テンプレートに一致するキーを持つキャッシュを検索します。 キー テンプレートは `deps1-` で始まり、`{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}` を使用して現在のブランチ名が埋め込まれています。 `requirements.txt` ファイルのチェックサムも、`{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}` を使用してキー テンプレートに埋め込まれています。 CircleCI は、テンプレートに一致する最新のキャッシュを復元します。 このとき、キャッシュが保存されたブランチ、およびキャッシュされた virtualenv の作成に使用された `requirements/dev.txt` ファイルのチェックサムが一致する必要があります。
 
 - `Python deps を venv にインストール`という名前の `run:` ステップは、前述のとおり、Python の依存関係をインストールする仮想環境を作成してアクティブ化します。
 
-- `save_cache:` ステップは、指定されたパス (この例では `venv`) からキャッシュを作成します。 キャッシュキーは、`key:` で指定したテンプレートから作成されます。 このとき、CircleCI で保存されたキャッシュが `restore_cache:` ステップで検出できるように、必ず `restore_cache:` ステップと同じテンプレートを使用してください。 キャッシュを保存する前に、CircleCI はテンプレートからキャッシュ キーを生成します。生成されたキーに一致するキャッシュが既に存在する場合、CircleCI は新しいキャッシュを保存しません。 テンプレートにはブランチ名と `requirements/dev.txt` のチェックサムが含まれるため、ジョブが別のブランチで実行されるか、`requirements/dev.txt` のチェックサムが変化すると、CircleCI は新しいキャッシュを作成します。
+- `save_cache:` ステップは、指定されたパス (この例では `venv`) からキャッシュを作成します。 キャッシュキーは、`key:` で指定したテンプレートから作成されます。 このとき、CircleCI で保存されたキャッシュが `restore_cache:` ステップで検出できるように、必ず `restore_cache:` ステップと同じテンプレートを使用してください。 キャッシュを保存する前に、CircleCI はテンプレートからキャッシュ キーを生成します。 生成されたキーに一致するキャッシュが既に存在する場合、CircleCI は新しいキャッシュを保存しません。 テンプレートにはブランチ名と `requirements/dev.txt` のチェックサムが含まれるため、ジョブが別のブランチで実行されるか、`requirements/dev.txt` のチェックサムが変化すると、CircleCI は新しいキャッシュを作成します。
 
 You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
 
@@ -278,7 +278,7 @@ jobs:
 
 Notes on the added keys:
 
-- 各コマンドは新しいシェルで実行されます。したがって、依存関係のインストール ステップでアクティブ化された仮想環境は、この最終 `run:` キーの `. venv/bin/activate` で再度アクティブ化されます。
+- 各コマンドは新しいシェルで実行されます。 したがって、依存関係のインストール ステップでアクティブ化された仮想環境は、この最終 `run:` キーの `. venv/bin/activate` で再度アクティブ化されます。
 - `store_artifacts` ステップは特別なステップです。 `path:` は、ファイルが格納されるディレクトリをプロジェクトの `root` ディレクトリからの相対ディレクトリで指定します。 `destination:` は、ジョブ内の別のステップで同じ名前のディレクトリにアーティファクトが生成される場合に、一意性を確保するために選択されるプレフィックスを指定します。 CircleCI は、アーティファクトを収集し、S3 にアップロードして格納します。
 - ジョブが完了すると、アーティファクトは CircleCI の [Artifacts (アーティファクト)] タブに表示されます。
 
