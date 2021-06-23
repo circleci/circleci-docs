@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-このドキュメントでは、CircleCI 1.0 を 2.0 に移行する際に最初に行う作業について説明します。移行作業ではまず、既存の 1.0 の設定ファイルをコピーして利用し、古いキーに対応する新しいキーがある場合はキーを置き換えます。
+このドキュメントでは、CircleCI 1.0 を 2.0 に移行する際に最初に行う作業について説明します。 移行作業ではまず、既存の 1.0 の設定ファイルをコピーして利用し、古いキーに対応する新しいキーがある場合はキーを置き換えます。
 
 * TOC
 {:toc}
@@ -60,7 +60,7 @@ The `config-translation` endpoint can help you quickly get started with converti
                username: mydockerhub-user
                password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
-     最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。ジョブごとにコマンドを宣言します。 See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers.
+     最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。 ジョブごとにコマンドを宣言します。 See the [Docker Getting Started](https://docs.docker.com/get-started/#docker-concepts) if you are new to Docker containers.
      ```yaml
          machine: true
      ```
@@ -70,7 +70,7 @@ The `config-translation` endpoint can help you quickly get started with converti
            xcode: 11.3.0
      ```
 
-6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。それには、以下のコードを検索します。
+6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。 それには、以下のコードを検索します。
      ```
      checkout:
        post:
@@ -98,7 +98,7 @@ The `config-translation` endpoint can help you quickly get started with converti
      ```
      If you do not have a `checkout` step, you must add this step to your `config.yml` file.
 
-7. (オプション) ビルドへの SSH 接続を有効化するには、`add_ssh_keys` ステップとフィンガープリントを追加します。詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)」を参照してください。
+7. (オプション) ビルドへの SSH 接続を有効化するには、`add_ssh_keys` ステップとフィンガープリントを追加します。 詳細については、「[CircleCI を設定する]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys)」を参照してください。
 
 8. Validate your YAML at <http://codebeautify.org/yaml-validator> to check the changes.
 
