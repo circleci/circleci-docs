@@ -147,7 +147,7 @@ jobs:
           channel: 'the irc server to post in' # required parameter
           nick: 'Your IRC nick name' # default: `circleci-bot`
           message: webhook # default: "Your CircleCI Job has completed."
-orbs:
+          orbs:
   irc: circleci/irc@x.y.z
 version: 2.1
 workflows:
