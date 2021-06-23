@@ -64,7 +64,7 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
-      serverversion: 3.0.1
+      serverversion: 3.0.2
       terraformversion: 0.13.0
       kubectlversion: 1.19
       helmversion: 3.4.0
@@ -77,7 +77,7 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
-    serverversion: 3.0.1
+    serverversion: 3.0.2
     terraformversion: 0.13.0
     kubectlversion: 1.19
     helmversion: 3.4.0
