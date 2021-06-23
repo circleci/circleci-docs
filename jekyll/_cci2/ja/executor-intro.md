@@ -86,8 +86,19 @@ The syntax for using the Windows executor in your config differs depending on wh
 ```
 version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
+
 orbs:
   win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
+
+jobs:
+  build: # name of your job
+    executor: win/default # executor type
+
+    steps:
+      # Commands are run in a Windows virtual machine environment
+      - checkout
+      - run: Write-Host 'Hello, Windows'
 
 jobs:
   build: # name of your job
@@ -119,6 +130,6 @@ Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/e
 ## See also
 {: #see-also }
 
-* [ビルド済みの CircleCI コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/)
-* [macOS でのビルド]({{site.baseurl}}/2.0/hello-world-macos)
-* [macOS でのビルド]({{site.baseurl}}/2.0/hello-world-macos)
+* {{ site.baseurl }}/2.0/circleci-images/
+* {{site.baseurl}}/2.0/hello-world-macos
+* {{site.baseurl}}/2.0/hello-world-macos
