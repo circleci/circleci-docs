@@ -84,6 +84,6 @@ Because API Tokens can be shared, passed around between employees and teams, and
 Some possible usecases for an API token might be:
 
   - プロジェクトの README などの外部ページに[ビルド ステータス バッジを埋め込む]({{ site.baseurl }}/2.0/status-badges/)
-  - [ジョブを条件付きでトリガーする]({{ site.baseurl }}/2.0/api-job-trigger/)
-  - [ビルドのアーティファクトをダウンロードして保存する]({{ site.baseurl }}/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード)
+  - {{ site.baseurl }}/2.0/api-job-trigger/
+  - {{ site.baseurl }}/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード
   - [Inject environment variables]({{ site.baseurl }}/2.0/env-vars/#injecting-environment-variables-with-api-v2) into a build.
