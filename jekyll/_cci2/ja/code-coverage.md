@@ -52,6 +52,15 @@ class ActiveSupport::TestCase
   # すべてのテストの test/fixtures/*.yml にあるすべてのフィクスチャをアルファベット順にセットアップします
   fixtures :all
   # すべてのテストで使用されるヘルパー メソッドをここに追加します...
+
+ENV['RAILS_ENV'] ||= 'test'
+require_relative '../config/environment'
+require 'rails/test_help'
+
+class ActiveSupport::TestCase
+  # すべてのテストの test/fixtures/*.yml にあるすべてのフィクスチャをアルファベット順にセットアップします
+  fixtures :all
+  # すべてのテストで使用されるヘルパー メソッドをここに追加します...
 end
 ```
 
@@ -110,6 +119,7 @@ pip install coverage
 python my_program.py arg1 arg2
 
 # ここでは、コマンドにプレフィックス "coverage" を付けます
+coverage run my_program.py arg1 arg2
 coverage run my_program.py arg1 arg2
 ```
 
@@ -214,6 +224,20 @@ workflows:
                             <goal>report</goal>
                         </goals>
                         <configuration><!-- 実行データを含むファイルのパスを設定します --><dataFile>target/jacoco.exec</dataFile><!-- コード カバレッジ レポートの出力ディレクトリを設定します --><outputDirectory>target/my-reports</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <systemPropertyVariables>
+                        <jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project> -->
+
+                            <dataFile>target/jacoco.exec</dataFile><!-- コード カバレッジ レポートの出力ディレクトリを設定します --><outputDirectory>target/my-reports</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
