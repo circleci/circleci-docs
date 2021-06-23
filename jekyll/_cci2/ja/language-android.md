@@ -39,6 +39,9 @@ Let's walk through a sample configuration using the Android machine image. It is
 # .circleci/config.yaml
 version: 2.1 # Orb を使用するには、CircleCI 2.1 を使用する必要があります
 # 使用したい Orb を宣言します
+# .circleci/config.yaml
+version: 2.1 # Orb を使用するには、CircleCI 2.1 を使用する必要があります
+# 使用したい Orb を宣言します
 # Android orb docs are available here:  https://circleci.com/developer/orbs/orb/circleci/android
 orbs:
   android: circleci/android@1.0
