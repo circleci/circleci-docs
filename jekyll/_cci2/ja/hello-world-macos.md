@@ -70,6 +70,21 @@ jobs: # 1 回の実行の基本作業単位
       - store_artifacts: # このビルド出力を保存します  (詳細については https://circleci.com/ja/docs/2.0/artifacts/ を参照)
           path: app.zip
           destination: app
+      - run:
+          # Xcode の CLI ツール「xcodebuild」を使用してテストを実行します
+          name: 単体テストの実行
+          command: xcodebuild test -scheme circleci-demo-macos
+      - run:
+          # アプリケーションをビルドします
+          name: アプリケーションのビルド
+          command: xcodebuild
+      - run:
+          # Xcode のビルド出力を圧縮し、アーティファクトとして格納できるようにします
+          name: 保存のためのアプリ圧縮
+          command: zip -r app.zip build/Release/circleci-demo-macos.app
+      - store_artifacts: # このビルド出力を保存します  (詳細については https://circleci.com/ja/docs/2.0/artifacts/ を参照)
+          path: app.zip
+          destination: app
 ```
 
 If this is your first exposure to a CircleCI `config.yml`, some of the above might seem a bit confusing. In the section below you can find some links that provide a more in-depth overview of how a `config.yml` works.
