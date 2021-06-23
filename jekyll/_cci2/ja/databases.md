@@ -117,6 +117,8 @@ To use `pg_dump`, `pg_restore` and similar utilities requires some extra configu
 ```
      steps:
     # Postgres 9.6 バイナリをパスに追加します。
+       steps:
+    # Postgres 9.6 バイナリをパスに追加します。
        - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
 ```
 
