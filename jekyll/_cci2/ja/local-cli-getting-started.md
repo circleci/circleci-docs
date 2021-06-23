@@ -19,7 +19,7 @@ For those who prefer to spend most of their development time in the terminal, co
 # 前提条件
 {: #prerequisites }
 
-- Unix マシン (Mac または Linux) を使用している。Windows にも CircleCI CLI ツールのインストールは_可能_ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
+- Unix マシン (Mac または Linux) を使用している。 Windows にも CircleCI CLI ツールのインストールは_可能_ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
 - CI/CD、CircleCI サービスの機能とコンセプトについての基礎知識がある。
 - GitHub アカウントを持っている。
 - CircleCI アカウントを持っている。
@@ -37,6 +37,9 @@ If some of these prerequisites sound unfamiliar, or you are new to the CircleCI 
 Let's start from the very basics: create a project and initialize a git repository. Refer to the below code block for a list of steps.
 
 ```sh
+cd ~ # ホーム ディレクトリに移動します
+mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
+cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
 cd ~ # ホーム ディレクトリに移動します
 mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
 cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
