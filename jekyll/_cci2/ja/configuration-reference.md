@@ -700,7 +700,7 @@ jobs:
 
 Here `run` is a step type. The `name` attribute is used by the UI for display purposes. The `command` attribute is specific for `run` step and defines command to execute.
 
-一部のステップは省略構文を実装しており、 For example, `run` may be also be called like this:
+一部のステップは省略構文を実装しており、 一部のステップは省略構文を実装しており、 For example, `run` may be also be called like this:
 
 ```
 jobs:
