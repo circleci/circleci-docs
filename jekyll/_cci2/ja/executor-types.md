@@ -206,7 +206,7 @@ jobs:
       - image: buildpack-deps:trusty
     resource_class: xlarge
     steps:
-    #  ...  other config
+    #  ... other config
 ```
 
 ## Using machine
