@@ -25,6 +25,7 @@ jobs:
   build:
     working_directory: ~/mern-starter
     # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
+    ジョブのコマンドは、このコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
         auth:
