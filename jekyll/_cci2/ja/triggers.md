@@ -74,6 +74,11 @@ workflows:
       - deploy:
           requires:
             - hold
+          requires:
+           - test2
+      - deploy:
+          requires:
+            - hold
 ```
 
 ## Trigger Docker builds in Dockerhub
@@ -81,6 +86,11 @@ workflows:
 
 ```yaml
 version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.0-browsers # < 選択された任意の Docker イメージ
+        version: 2
 jobs:
   build:
     docker:
