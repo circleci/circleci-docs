@@ -15,7 +15,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 
 * ワークフローで Slack インテグレーションが利用できるようになりました。 ユーザーは、ワークフローの完了時に Slack 通知を受信するよう選択できます。
 * CircleCI 環境へのアクセスを許可する組織を、管理者が制限できるようになりました。 この機能を有効化する方法の詳細については、2.17 の操作マニュアルのユーザー管理セクションを参照してください。
-* 名称が変更された組織のフローを変更しました。これにより、名称が変更された組織は今後エラーが発生しないようになります。 このユース ケースで回避策を適用していたユーザーは、今後その回避策は不要となります。
+* 名称が変更された組織のフローを変更しました。 これにより、名称が変更された組織は今後エラーが発生しないようになります。 このユース ケースで回避策を適用していたユーザーは、今後その回避策は不要となります。
 * ワークフローが占有する DB スペースが減り、管理が容易になります。
 * GraphQL API の直前のキャッシュ改善し、全体的なパフォーマンスを改善しました。
 * リクエスト時に Nomad クライアントの容量飽和を避けるために、バックプレッシャー制御を追加しました。これにより、既存の Nomad クラスターのパフォーマンスが向上します。
@@ -28,7 +28,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 * 外部処理化するときのスケジュール済みワークフローの RabbitMQ ホスト名の変更について修正しました。
 * 名前のないコンテキストを作成できなくなりました。 名前のないコンテキストを使用している場合は、既存の実行環境からアクセスできなくなります。
 * メモリ不足エラーを回避するために、大量のビルド出力とテスト結果 XML の処理を最適化しました。
-* CIRCLE_PULL_REQUEST 環境変数は、複数のフォークからビルドする際、すべてのケースで正しく設定されていませんでしたが、 これを修正しました。
+* CIRCLE_PULL_REQUEST 環境変数は、複数のフォークからビルドする際、すべてのケースで正しく設定されていませんでしたが、 これを修正しました。 これを修正しました。
 * メッセージに [ci skip] を含むコミットの一部がいまだにビルドされていたバグを修正しました。
 * ジョブが失敗した後に infrastructure_failure が発生するとワークフローがスタックするバグを修正しました。
 * 同じ Nomad クライアントでの Docker ネットワークの重複が引き起こされるバグを修正しました (machine: true かつ vm-provider=on_host を使用してビルドを実行している場合)。
@@ -41,7 +41,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 ## Updated in release 2.17
 {: #updated-in-release-217 }
 
-* AWS 向け Ubuntu 16.04 をベースとする新しい Machine Executor AMI を導入しました。 Docker 18.09.3 がインストールされた Ubuntu 16.04 では、apt-daily サービスと apt-daily-upgrade サービスが無効になっています。 正式に切り替える前に、以下の AMI でお試しになることを強くお勧めします。新しいイメージは以下のとおりです。
+* AWS 向け Ubuntu 16.04 をベースとする新しい Machine Executor AMI を導入しました。 Docker 18.09.3 がインストールされた Ubuntu 16.04 では、apt-daily サービスと apt-daily-upgrade サービスが無効になっています。 正式に切り替える前に、以下の AMI でお試しになることを強くお勧めします。 新しいイメージは以下のとおりです。
 
   ```
   Ap-northeast-1:ami-0e49af0659db9fc5d,
@@ -105,7 +105,7 @@ To take a snapshot of your installation:
 1. Go to the Management Console (`<circleci-hostname>.com:8800`) and click Stop Now to stop the CircleCI Services machine from running
 2. `nomad status` を実行して、Nomad クライアントでジョブが実行されていないことを確認します。
 3. AWS EC2 管理コンソールにアクセスし、Services マシンのインスタンスを選択します。
-4. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。 **メモ:** AWS API を使用すると、このプロセスを自動化することも可能です。 以後の AMI/スナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさであるため、頻繁にスナップショットを作成しても、ストレージ コストが必ず大きくなるわけではありません。詳細については、Amazon の EBS スナップショットの請求に関するドキュメントをご覧ください。 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
+4. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。 **メモ:** AWS API を使用すると、このプロセスを自動化することも可能です。 以後の AMI/スナップショットは、最後に取得したスナップショットからの差分 (変更されたブロック) と同じ大きさであるため、頻繁にスナップショットを作成しても、ストレージ コストが必ず大きくなるわけではありません。 詳細については、Amazon の EBS スナップショットの請求に関するドキュメントをご覧ください。 スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
 
 If you do need to rollback at any point, see our [restore from backup](http://localhost:4000/docs/2.0/backup/#restoring-from-backup) guide.
 
