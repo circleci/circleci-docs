@@ -11,11 +11,11 @@ version:
   - Server v2.x
 ---
 
-ここでは、`config-translation` エンドポイントを使用して、既存の CircleCI 1.0 プロジェクトから CircleCI 2.0 の基本的な作業用設定ファイルを生成する手順を説明します。対象となる言語は、以下に限定されます。
+ここでは、`config-translation` エンドポイントを使用して、既存の CircleCI 1.0 プロジェクトから CircleCI 2.0 の基本的な作業用設定ファイルを生成する手順を説明します。
 * Ruby
 * PHP
 * Node.js
-* iOS (一部のみ。1.0 のコード署名はサポートされないため、代わりに Fastlane を使用してください)
+* iOS (一部のみ。 1.0 のコード署名はサポートされないため、代わりに Fastlane を使用してください)
 * Java (一部のみ)
 
 生成される `config-translation` ファイルには、構成を修正して CircleCI 2.0 プロジェクトの `.circleci/config.yml` として使用する方法について、わかりやすい説明文が記載されています。
@@ -44,7 +44,7 @@ The `config-translator` endpoint does **not** currently support translation of t
 
      `https://circleci.com/api/v1.1/project/github/bar/foo/config-translation`
 
-3. To use the `config-translation` from your browser when you are **not** authenticated in circleci.com for a repository called `foo` in a GitHub org named `bar`, request the following URL and pass your `circle-token` directly in the query string. 以下の例では、`curl` を使用してこれを呼び出し、変換する `branch` を渡しています。また、[CircleCI API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)は `CIRCLE_TOKEN` という環境変数にあると仮定しています。
+3. To use the `config-translation` from your browser when you are **not** authenticated in circleci.com for a repository called `foo` in a GitHub org named `bar`, request the following URL and pass your `circle-token` directly in the query string. 以下の例では、`curl` を使用してこれを呼び出し、変換する `branch` を渡しています。 また、[CircleCI API トークン]({{ site.baseurl }}/2.0/managing-api-tokens/#パーソナル-api-トークンの作成)は `CIRCLE_TOKEN` という環境変数にあると仮定しています。
 
      ``` Shell
      curl -H "Circle-Token: $CIRCLE_TOKEN" "https://circleci.com/api/v1.1/project/github/bar/foo/config-translation?branch=develop"
