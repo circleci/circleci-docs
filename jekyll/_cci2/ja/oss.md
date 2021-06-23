@@ -76,7 +76,7 @@ By default, CircleCI does not pass secrets to builds from forked PRs for open so
 
 - アプリケーションを通して設定される[環境変数](#プライベート環境変数)
 
-- [デプロイ キーとユーザー キー]({{ site.baseurl }}/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー)
+- {{ site.baseurl }}/2.0/gh-bb-integration/#デプロイ-キーとユーザー-キー
 
 - ビルド中に任意のホストにアクセスするために [CircleCI に追加した]({{ site.baseurl }}/2.0/add-ssh-key)、パスフレーズのないプライベート SSH キー
 
