@@ -19,7 +19,7 @@ CircleCI Server v2.16 の機能強化や不具合修正についてまとめま�
 
 - ワークフローに関するメール通知を受信できるようになりました。
 
-- PostgreSQL イメージが、`/etc/circleconfig/postgres/extra.conf` ファイルを作成することによってデフォルト設定を変更できるように更新されました。設定オプションの一覧は、[こちら](https://github.com/circleci/postgres-docker/blob/da250f226be17afdde923c08f2af6fe63ceec99e/postgresql.conf)でご覧いただけます。
+- PostgreSQL イメージが、`/etc/circleconfig/postgres/extra.conf` ファイルを作成することによってデフォルト設定を変更できるように更新されました。 設定オプションの一覧は、[こちら](https://github.com/circleci/postgres-docker/blob/da250f226be17afdde923c08f2af6fe63ceec99e/postgresql.conf)でご覧いただけます。
 
 - インストールと運用に関する PDF ドキュメントが公開されています。
    - *CircleCI v2.16 インストール ガイド*
