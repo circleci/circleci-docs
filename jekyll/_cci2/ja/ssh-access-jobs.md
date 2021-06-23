@@ -34,7 +34,7 @@ Please note that a default CircleCI pipeline executes steps in a non-interactive
 
      **Note:** The `Rerun job with SSH` feature is intended for debugging purposes; therefore, these jobs will not be reflected in your pipelines. When you rerun a job with SSH, a new pipeline is not triggered; a job is just rerun. If needed, you can access the running jobs via the legacy jobs view.
 
-3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。ここで、接続に必要な SSH コマンドを確認できます。
+3. 接続の詳細情報を確認するには、ジョブ出力の [Enable SSH (SSH を有効にする)] セクションを展開します。
 
      詳細情報は、ジョブ出力の末尾にある [Wait for SSH (SSH を待機する)] セクションにも再度表示されます。
 
