@@ -118,7 +118,7 @@ We can utilize multiple jobs to better organize our snap build. A job to build/c
 Utilize CircleCI `workspaces` to move a generated snap file between jobs when necessary. Here's an example showing a snippet from the "from" job and a snippet of the "to" job:
 
 ```yaml
-... # from a job that already has the snap
+# from a job that already has the snap
       - persist_to_workspace:
           root: .
           paths:
