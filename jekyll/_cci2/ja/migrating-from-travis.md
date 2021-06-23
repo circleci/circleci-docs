@@ -153,7 +153,8 @@ On CircleCI, artifact uploading occurs in a step in your config:
       - run:
           name: コード カバレッジの生成
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
-      - store_artifacts: # < test-results.xml を保存します。Web アプリまたは API から使用できます
+      - store_artifacts: # < test-results.xml を保存します。
+          Web アプリまたは API から使用できます
           path: test-results.xml
           prefix: tests
       - store_artifacts:
