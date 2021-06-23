@@ -177,7 +177,7 @@ The 2.0 version of our samplescala schema requires us to download required depen
 - インストール後に sbt.deb ファイルを削除します。
 - OS パッケージ リストを更新します。
 - python-pip と git クライアントをインストールします。
-- `awscli` パッケージをインストールします。これは、S3 へのアップロードに必要な AWS コマンドライン インターフェースです。
+- `awscli` パッケージをインストールします。 これは、S3 へのアップロードに必要な AWS コマンドライン インターフェースです。
 - 不要なインストール パッケージをすべて削除して、コンテナのサイズを最小化します。
 
 The following keys represent actions performed after the multi-line command is executed:
