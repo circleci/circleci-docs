@@ -131,27 +131,9 @@ For more information on configuring databases, see the [Configuring Databases]({
 Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
 
 ``` yaml
-version: 2
+Run Docker commands to build Docker images.
 
-jobs:
-  build:
-    docker:
-      - image: <primary-container-image>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      # ... steps for building/testing app ...
-
-      - setup_remote_docker # sets up remote docker container in which all docker commands will be run
-
-      - run:
-          name: Start container and verify it's working
-          command: |
-            set -x
-            docker-compose up -d
-            docker run --network container:contacts \
-              appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+      Set up a remote Docker environment when your primary executor is Docker:
 
 ```
 
@@ -162,7 +144,7 @@ For more information on building Docker images, see the [Building Docker Images]
 
 Here are a few tips for optimization and maintaining a clear configuration file.
 
-- 長いインライン bash スクリプトを使用するのはやめましょう。特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、クリアで読みやすい設定ファイルにします。
+- 長いインライン bash スクリプトを使用するのはやめましょう。 特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、クリアで読みやすい設定ファイルにします。
 - フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前に実行する必要があります。
 - Using a "setup" job at the _start_ of a workflow can be helpful to do some preflight checks and populate a workspace for all the following jobs.
