@@ -118,6 +118,7 @@ jobs:
           RACK_ENV: test
       # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
       # which includes a few enhancements and modifications. いずれかのイメージを使用できます。
+      いずれかのイメージを使用できます。
       - image: postgres:9.6-jessie
         auth:
           username: mydockerhub-user
