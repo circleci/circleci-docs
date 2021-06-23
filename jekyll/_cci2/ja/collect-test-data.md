@@ -547,4 +547,5 @@ To access test metadata for a run from the API, refer to the [test-metadata API 
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
+{:.no_toc}
 {:.no_toc} <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
