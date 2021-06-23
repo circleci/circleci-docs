@@ -10,7 +10,7 @@ version:
 ## 概要
 {: #overview }
 
-Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
+Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 ## Android マシン イメージの使用
 {: #using-the-android-machine-image }
