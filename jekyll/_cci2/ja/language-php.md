@@ -187,4 +187,4 @@ Success! You just set up CircleCI 2.0 for a PHP app. Check out our project’s [
 
 - その他のパブリック PHP プロジェクトの構成例については、「[CircleCI 設定ファイルのサンプル]({{ site.baseurl }}/2.0/examples/)」を参照してください。
 
-- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)に目を通すことをお勧めします。ここでは、Python と Flask を使用した構成を例に詳しく解説しています。
+- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した構成を例に詳しく解説しています。
