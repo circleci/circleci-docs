@@ -867,9 +867,9 @@ CircleCI のデフォルトでは、ジョブ ステップが `config.yml` に�
 ###### Ending a job from within a `step`
 {: #ending-a-job-from-within-a-step }
 
-A job can exit without failing by using `run: circleci-agent step halt`. これは、条件に従ってジョブを実行する必要がある場合に便利です。
+`run: circleci-agent step halt` を使用することで、ジョブを失敗させずに終了できます。 これは、条件に従ってジョブを実行する必要がある場合に便利です。
 
-Here is an example where `halt` is used to avoid running a job on the `develop` branch:
+以下の例では、`halt` を使用して、`develop` ブランチでジョブが実行されないようにしています。
 
 ``` YAML
 run: |
