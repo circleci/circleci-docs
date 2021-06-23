@@ -134,9 +134,9 @@ To create a status api token, go to your **Project's Settings** (present on the 
 
 If you find the default status badge too minimal, you can use the [shield style](https://shields.io/). To use the shield style, replace `style=svg` with `style=shield` in the link you generated above.
 
-![Passed <code>svg</code> version]({{ site.baseurl }}/assets/img/docs/svg-passed.png)
+![svg</code>@@ version" />]({{ site.baseurl }}/assets/img/docs/svg-passed.png)
 
-![Failed <code>svg</code> version]({{ site.baseurl }}/assets/img/docs/svg-failed.png)
+![svg</code>@@ version" />]({{ site.baseurl }}/assets/img/docs/svg-failed.png)
 
 ![Passing shield version]({{ site.baseurl }}/assets/img/docs/shield-passing.png)
 
