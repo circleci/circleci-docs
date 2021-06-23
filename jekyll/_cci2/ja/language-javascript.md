@@ -79,4 +79,4 @@ Success! You just set up a Node.js app to build on CircleCI with version: 2.1 co
 
 - デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
 - その他のパブリック JavaScript プロジェクトの構成例については、「[CircleCI 設定ファイルのサンプル]({{ site.baseurl }}/2.0/examples/)」を参照してください。
-- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)に目を通すことをお勧めします。ここでは、Python と Flask を使用した構成を例に詳しく解説しています。
+- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した構成を例に詳しく解説しています。
