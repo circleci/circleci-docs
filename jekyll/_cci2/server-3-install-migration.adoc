@@ -11,7 +11,7 @@ version:
 :toc-title:
 
 Migrating from 2.19.x to 3.0 requires you to back up your 2.19 instance data (Mongo, Postgres, and Vault) and then restore that data in a waiting Server 3.0
-instance. If you run into trouble you are able to fallback to your 2.19 instance. It does require an already operating Server 3.0 installation. Depending 
+instance. If you run into trouble you can fallback to your 2.19 instance. It does require an already operating Server 3.0 installation. Depending 
 on the size of your data stores, the migration can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing 
 this process in a production environment. This will not only allow you to gain a better understanding of the migration process,
 but will also give you a feel for how long the migration will take to complete.
