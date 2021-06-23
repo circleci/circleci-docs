@@ -77,8 +77,7 @@ Executors defined within orbs can be used to run jobs within your project config
 ```yaml
 description: >
   Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
-  images built for CI.
-docker:
+  images built for CI. docker:
   - image: 'cimg/node:<<parameters.tag>>'
     auth:
       username: mydockerhub-user
