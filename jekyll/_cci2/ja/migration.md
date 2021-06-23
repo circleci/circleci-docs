@@ -20,14 +20,14 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - 2.0 のテストのための新しいブランチを作成します。
 - そのブランチから `circle.yml` を削除し、`.circleci/config.yml` ファイルを追加します。
 - 2.0 設定ファイルにそのブランチに対する最小限の処理を記述して、ビルドが成功するまでプッシュします。
-- 動作具合を細かく確認できるように、少しずつ構成を追加します。最初はコードをチェックアウトするだけにし、次に依存関係をインストールし、さらにテストを実行します。 その後、依存関係をキャッシュしたり、ワークフローなどの高度な機能を使用したりします。 設定ファイルを徐々に作り上げていってください。
+- 動作具合を細かく確認できるように、少しずつ構成を追加します。 最初はコードをチェックアウトするだけにし、次に依存関係をインストールし、さらにテストを実行します。 その後、依存関係をキャッシュしたり、ワークフローなどの高度な機能を使用したりします。 設定ファイルを徐々に作り上げていってください。
 - すべてが正常に機能するようになったら、新しい設定ファイルを含むブランチを主プロジェクトにマージします。
 
 ## Tips for setting up CircleCI 2.0
 {: #tips-for-setting-up-circleci-20 }
 
 - `steps` にリストされたコマンドは、`docker` セクションで最初にリストされたコンテナ内でのみ実行されます。
-- こまめにビルドを実行して構成をテストします。そうすれば、何かが壊れても、最後のビルドから何を変更していたかがわかります。
+- こまめにビルドを実行して構成をテストします。 そうすれば、何かが壊れても、最後のビルドから何を変更していたかがわかります。
 - 最初はワークフローを追加せずに、正常に機能するビルドを先に完成させます。 ワークフローを追加したら、CircleCI アプリケーションの [Workflows (ワークフロー)] タブで、ジョブが実行されているかを確認します。 ワークフローの構成が誤っていると、ジョブが実行されなくなり、エラーと共に問題の詳細がアプリケーションの [Workflows (ワークフロー)] ページに表示されます。
 - 設定ファイルはゼロから手動で作成しますが、[`config-translation` エンドポイント]({{ site.baseurl }}/2.0/config-translation/)を参考として利用できます。
 - 設定ファイルの `environment` セクションで環境変数を定義することはできません。
@@ -47,7 +47,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 - 通常、Docker ビルドと docker-compose は `machine` で実行する必要があります。 しかし、事前に言語固有のツール (Ruby、Node、PHP など) が必要になる場合は、リモート環境でも十分です。
 - 全体のビルド時間を短縮するために、一部のタスクをバックグラウンドで実行するように設定できますが、リソースの不足に注意してください。
-- 異なる `resource_class` サイズの方が良い結果を得られる場合があります。サイズを変えて影響を確認してみてもよいでしょう。
+- 異なる `resource_class` サイズの方が良い結果を得られる場合があります。
 - `$PATH` には文字列を設定できます。 Docker イメージの `$PATH` がわからない場合は、単に実行して `echo $PATH` を行うか、`env` の出力を確認します。
 - イメージの `sha` は、`Spin up Environment` ステップで参照できます。 イメージをその `sha` 値にハードコーディングして、変更不可にすることができます。
 
@@ -63,9 +63,9 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - `$CIRCLE_ARTIFACTS` と `$CIRCLE_TEST_REPORTS` は 2.0 で定義されていないことに注意してください。
     - ユーザーご自身で定義できますが、その場合は `mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS` を実行してください。
 - 1 つのリポジトリにある Linux と macOS (React Native など) を移行する場合は、2 つの設定ファイルを組み合わせて 1 つのワークフローにする前に、Linux と macOS のそれぞれに 1 つのブランチを開く必要があります。
-- `sudo echo` は使用できません。`echo 192.168.44.44 git.example.com | sudo tee -a /etc/hosts` のようにパイプしてください。
+- `sudo echo` は使用できません。 `echo 192.168.44.44 git.example.com | sudo tee -a /etc/hosts` のようにパイプしてください。
 - Ubuntu システムと Debian システムではフォントが異なります。
-- Apache 2.2 と 2.4 では設定ファイルの構成方法が大幅に異なります。必ず 2.2 の設定ファイルをアップグレードしてください。
+- Apache 2.2 と 2.4 では設定ファイルの構成方法が大幅に異なります。 必ず 2.2 の設定ファイルをアップグレードしてください。
 - 1.0 によって自動的に推測されていたコマンドと、UI から手動で格納されたコマンドをすべて移行することを忘れないでください。
 
 
@@ -99,7 +99,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 
 ## Tips for browser testing
-- Tests can sometimes be flaky and may appear to fail for no reason. 失敗したブラウザー テストは自動的に再実行できます。ただし、タイミング データは破損します。
+- Tests can sometimes be flaky and may appear to fail for no reason. 失敗したブラウザー テストは自動的に再実行できます。 ただし、タイミング データは破損します。
 - Take screenshots of failed tests to make debugging easier.
 - VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. ブラウザー イメージの 1 つから以下を実行してください。
 
