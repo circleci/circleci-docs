@@ -81,11 +81,6 @@ When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public
 
 description: >
   このコマンドはファイル インクルードを使用して "Hello World" を出力します。
-parameters:
-  to:
-    type: string
-    default: "World"
-    description: "Hello to whom?"
 steps:
   - run:
       environment:
