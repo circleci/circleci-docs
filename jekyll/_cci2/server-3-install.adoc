@@ -505,7 +505,7 @@ region = "us-west-1"
 }
 
 module "nomad_clients" {
-source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.0.0"
+source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.1.0"
 
   # Number of nomad clients to run
   nodes = 4
@@ -567,7 +567,7 @@ provider "google-beta" {
 
 module "nomad_clients" {
   # Note the use of ref=<<tag>> to pin the version to a fixed release
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.0.0"
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.1.0"
 
   zone    = "us-west1-a"
   region  = "us-west1"
