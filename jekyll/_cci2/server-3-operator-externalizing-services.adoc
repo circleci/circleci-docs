@@ -70,7 +70,7 @@ Consider running at least two or more PostgreSQL replicas to enable recovery fro
 |===
 
 === Preparing the Database
-If you are configuring an externalized PostgreSQL instance as part of a new CircleCI 3.0 install, it is recommended that you login to your PostgreSQL instance and run the following commands. If you plan on using a different method, you must ensure that the databases and extensions outlined below are configured prior to running CircleCI Server 3.0 for the first time.
+If you are configuring an externalized PostgreSQL instance as part of a new CircleCI server 3.x install, it is recommended that you log in to your PostgreSQL instance and run the following commands. If you plan on using a different method, you must ensure that the databases and extensions outlined below are configured prior to running CircleCI server 3.x for the first time.
 
 ```sql
     CREATE DATABASE circle;
