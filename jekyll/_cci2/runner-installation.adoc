@@ -11,7 +11,7 @@ version:
 :toc-title:
 
 NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale
-Plan] and with https://circleci.com/pricing/server/[Server]. Please reach out
+plan] and with https://circleci.com/pricing/server/[server]. Please reach out
 to your sales representative (or https://circleci.com/contact-us/?cloud[contact
 us]) for information on how to sign up for the Scale Plan or Server.
 
