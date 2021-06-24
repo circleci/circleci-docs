@@ -20,17 +20,54 @@ This document describes how to configure the following external services for use
 == PostgreSQL
 
 === Best Practices for your PostgreSQL
-[width="60%",frame="topbot",options="header,footer"]
+
 Consider running at least two or more PostgreSQL replicas to enable recovery from primary failure and for backups. Following are the recommended specifications of the PostgreSQL machines:
 
-|=====================================================================================
-|# of Daily Active Users| # of PostgreSQL Replicas | CPU   | RAM  | Disk  | NIC Speed 
-|<50                    |2                         |8 Cores|16 GB |100 GB | 1 Gbps
-|50 - 250               |2                         |8 Cores|16 GB |200 GB | 1 Gbps
-|250 - 1000             |3                         |8 Cores|32 GB |500 GB | 10 Gbps
-|1000 - 5000            |3                         |8 Cores|32 GB |1 TB   | 10 Gbps
-|5000+                  |3                         |8 Cores|32 GB |1 TB   | 10 Gbps
-|=====================================================================================
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+|# of Daily Active Users
+|# of PostgreSQL Replicas 
+|CPU   
+|RAM  
+|Disk  
+|NIC Speed 
+
+|<50                    
+|2                         
+|8 Cores
+|16 GB 
+|100 GB 
+| 1 Gbps
+
+|50 - 250               
+|2                         
+|8 Cores
+|16 GB 
+|200 GB 
+|1 Gbps
+
+|250 - 1000             
+|3                         
+|8 Cores
+|32 GB 
+|500 GB 
+|10 Gbps
+
+|1000 - 5000            
+|3                         
+|8 Cores
+|32 GB 
+|1 TB   
+|10 Gbps
+
+|5000+                  
+|3                         
+|8 Cores
+|32 GB 
+|1 TB   
+|10 Gbps
+|===
 
 === Preparing the Database
 If you are configuring an externalized PostgreSQL instance as part of a new CircleCI 3.0 install, it is recommended that you login to your PostgreSQL instance and run the following commands. If you plan on using a different method, you must ensure that the databases and extensions outlined below are configured prior to running CircleCI Server 3.0 for the first time.
