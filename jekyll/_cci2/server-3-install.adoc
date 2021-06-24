@@ -129,8 +129,8 @@ Selecting the external option allows operators to connect to a PostgreSQL instal
   ** The password of the user used to access your PostgreSQL instance.
 
 ### MongoDB
-*Internal* will deploy a completely configured MongoDB instance along with your server installation.
-*External* allows you to use your own MongoDB instance. CircleCI server is tested to work with MongoDB 3.6. You can customize the setup for your external MongoDB instance with the following settings:
+*Internal*: deploys a completely configured MongoDB instance along with your server installation.
+*External*: allows you to use your own MongoDB instance. CircleCI server is tested to work with MongoDB 3.6. You can customize the setup for your external MongoDB instance with the following settings:
 
 . MongoDB connection host(s) or IP(s): The hostname or IP of your MongoDB instance. Specifying a port using a colon and multiple hosts for sharded instances are both supported.
 . Use SSL for connection to MongoDB: Whether to use SSL when connecting to your external MongoDB instance
