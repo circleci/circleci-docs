@@ -247,8 +247,18 @@ $ aws ec2 authorize-security-group-ingress \
 $ aws ec2 authorize-security-group-ingress \
     --group-name "circleci-vm-service-sg" \
     --protocol tcp \
+    --port 22 \
+    --cidr "<<CIDR of Kubernetes nodes>>"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
     --port 2376 \
-    --cidr "<<CIDR of nomad clients>>"
+    --cidr "<<CIDR of Nomad clients>>"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
+    --port 2376 \
+    --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
     --group-name "circleci-vm-service-sg" \
     --protocol tcp \
@@ -257,10 +267,15 @@ $ aws ec2 authorize-security-group-ingress \
 
 GCP
 ```bash
-$ gcloud compute firewall-rules create "circleci-vm-service-internal-fw" \
+$ gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" \
     --network "<<network for CircleCI; optional if default>>" \
     --action allow \
     --source-ranges "<<CIDR of Nomad clients>>" \
+    --rules "TCP:22,TCP:2376"
+$ gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" \
+    --network "<<network for CircleCI; optional if default>>" \
+    --action allow \
+    --source-ranges "<<CIDR of Kubernetes nodes>>" \
     --rules "TCP:22,TCP:2376"
 $ gcloud compute firewall-rules create "circleci-vm-service-external-fw" \
     --network "<<network for CircleCI; optional if default>>" \
