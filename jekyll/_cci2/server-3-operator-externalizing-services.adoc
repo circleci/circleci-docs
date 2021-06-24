@@ -13,7 +13,7 @@ version:
 toc::[]
 
 == External Database and Vault Setup for CircleCI Installations
-This document describes how to configure the following external services for use with CircleCI Server 3.0 Installation:
+This document describes how to configure the following external services for use with a CircleCI server 3.0 Installation:
 
 * PostgreSQL v12.6
 
