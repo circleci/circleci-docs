@@ -203,7 +203,15 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | Purpose
 
 | 22
+| Kubernetes nodes
+| Internal communication
+
+| 22
 | Nomad clients
+| Internal communication
+
+| 2376
+| Kubernetes nodes
 | Internal communication
 
 | 2376
