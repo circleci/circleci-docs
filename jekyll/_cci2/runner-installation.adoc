@@ -38,7 +38,8 @@ In order to complete this process you will need to create a namespace and authen
 . Create a namespace for your organization's runner resources.
 +
 NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. 
-+ Use the following command: 
++ 
+Use the following command: 
 +
 ```
 circleci namespace create <name> <vcs-type> <org-name>` 
