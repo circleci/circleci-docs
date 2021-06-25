@@ -81,9 +81,7 @@ First, set one of these variables as appropriate for for your installation targe
 | `platform=darwin/arm64`
 |===
 
-Next, set the `circleci-launch-agent` version. On cloud, we select the latest version by
-querying for our releases for it and on server, we must select the version
-appropriate for our version of server. A table of server `circleci-launch-agent` versions
+Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions
 can be found https://circleci.com/docs/2.0/runner-server/#version[here].
 
 For cloud, you can run the following:
