@@ -409,6 +409,7 @@ mc mb ${ALIAS}/<YOUR_BUCKET>
 
 Next, create a user and policy for Velero to access your bucket.
 
+NOTE: In the following snippet `<YOUR_MINIO_ACCESS_KEY_ID>` and `<YOUR_MINIO_SECRET_ACCESS_KEY>` refer to the credentials used by Velero to access MinIO.
 [source, bash]
 ----
 # Create user
