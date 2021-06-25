@@ -42,7 +42,8 @@ NOTE: Each organization can only create a single namespace. If you already use o
 Use the following command: 
 +
 ```
-circleci namespace create <name> <vcs-type> <org-name>` 
+circleci namespace create <name> <vcs-type> <org-name>
+```
 +
 For example, if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`).
 . Create a resource class for your runner for your namespace using the following command:
