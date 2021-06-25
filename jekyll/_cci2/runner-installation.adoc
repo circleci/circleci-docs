@@ -474,11 +474,18 @@ Each minor version of server is compatible with a specific version of
 `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,
 depending on your version of server:
 
-Server version  | Launch Agent Version
-----------------|---------------------------------
-3.0             | Runner not supported
-3.1             | 1.0.11147-881b608
-{: class="table table-striped"}
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Server version  
+| Launch Agent Version
+
+| 3.0             
+| Runner not supported
+
+| 3.1            
+| 1.0.11147-881b608
+|===
 
 === Additional Resources
 
