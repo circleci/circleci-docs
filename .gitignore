@@ -15,6 +15,9 @@ node_modules/
 release/tmp/CircleCI-Server-AWS-Installation-Guide.pdf
 release/tmp/CircleCI-Server-Operations-Guide.pdf
 
+# Vim open files
+*.swp
+
 src-api/build/
 
 # jekyll/_algolia_api_key can be used to store an algolia API key for
