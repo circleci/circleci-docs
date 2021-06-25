@@ -404,7 +404,14 @@ generated above.
 
 === Option 2 - Restore a backup using the kots CLI
 
-To restore a backup using the kots CLI, run the following:
+To restore a backup using the kots CLI, run the following to get a list of backups:
+
+[source,bash]
+----
+kubectl kots get backups
+----
+
+Using a backup name from the previous command, run the following to start the restore process:
 
 [source,bash]
 ----
