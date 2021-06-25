@@ -1,8 +1,7 @@
 $sidebar-spacing-base: 5px;
-$sidebar-width: 260px;
 
 .sidebar-wrapper {
-  width: $sidebar-width;
+  min-width: $leftbar-width;
   position: relative;
 
   @media screen and (max-width: $screen-xs-max) {
@@ -16,7 +15,7 @@ $sidebar-width: 260px;
   height: calc(100vh - #{$nav-height});
   padding: 30px 24px 60px 15px;
   position: absolute;
-  width: $sidebar-width;
+  width: $leftbar-width;
   border-right: 1px solid $gray-200;
   overflow-y: scroll;
 
@@ -162,5 +161,63 @@ $sidebar-width: 260px;
 
   @media screen and (max-width: $screen-xs-max) {
     display: block;
+  }
+}
+
+
+// Table of Contents Sidebar ----------------------------------
+
+// Many docs originally have a toc generated from the *toc directive in the markdown/asciidoc.
+// we are keeping this functionality in order to have a table of contents at the top of a page
+// on smaller screen sizes.
+
+// target markdown AND asciidoc toc's.
+.article-container {
+  #markdown-toc, #toc {
+    @media(min-width: $toc-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.table-of-contents {
+  position: sticky;
+  right: 0;
+  padding: 32px 32px 112px 12px;
+  background: #ffffff;
+  height: 90vh;
+  width: $rightbar-width;
+  overflow-y: auto;
+  top: 64px;
+  font-size: 16px;
+  transition: all 0.5s ease-in-out;
+
+  @media(max-width: $toc-breakpoint) {
+    display: none;
+  }
+
+
+  .toc-heading {
+    margin-left: -2px;
+  }
+
+  .toc-indent {
+    border-left: 2px solid #EEEEEE;
+
+    a {
+      color: $body-text-color;
+      &:hover {
+        color: $link-text-color;
+      }
+    }
+  }
+
+  ul, li {
+    list-style-type: none;
+    padding-left: 8px;
+    margin: 4px 0;
+    &:first {
+      padding-left: 0px;
+    }
   }
 }

@@ -35,7 +35,7 @@ CircleCI Server users: +
 
 | < 500
 | 3
-| 8 cores
+| 12 cores
 | 32 GB
 | 1 Gbps
 

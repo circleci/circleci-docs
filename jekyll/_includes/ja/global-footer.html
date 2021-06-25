@@ -1,101 +1,26 @@
-<footer class="footer" data-analytics="clicked-footer" data-analytics-parent>
-  <div class="container-semi-fluid">
-    <div class="row">
-      <nav>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <h6>製品概要</h6>
-          <ul class="list-unstyled">
-            <li><a href="{{ '/product/' | outer_url }}" data-analytics-child='{ "menu": "product" }'>製品概要</a></li>
-            <li><a href="{{ '/pricing/' | outer_url }}" data-analytics-child='{ "menu": "pricing" }'>料金プラン</a></li>
-            <li><a href="{{ '/integrations/' | outer_url }}" data-analytics-child='{ "menu": "integrations" }'>インテグレーション</a></li>
-            <li><a href="{{ '/open-source/' | outer_url }}" data-analytics-child='{ "menu": "open-source" }'>オープンソース</a></li>
-            <li><a href="{{ '/enterprise/' | outer_url }}" data-analytics-child='{ "menu": "enterprise" }'>エンタープライズ向け</a></li>
-            <li><a href="{{ '/changelog/' | outer_url }}" data-analytics-child='{ "menu": "changelog" }'>更新履歴</a></li>
-          </ul>
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <h6>サポート</h6>
-          <ul class="list-unstyled">
-            <li><a href="https://academy.circleci.com/?access_code=public-2020" data-analytics-child='{ "menu": "training" }' target="_blank">トレーニング</a></li>
-            <li><a href="https://support.circleci.com/hc/ja" data-analytics-child='{ "menu": "get-support" }' target="_blank">サポート情報</a></li>
-            <li><a href="https://discuss.circleci.com/" data-analytics-child='{ "menu": "community-forum" }' target="_blank">コミュニティ フォーラム</a></li>
-            <li><a href="https://status.circleci.com/" data-analytics-child='{ "menu": "system-status" }' target="_blank">システム稼働状況</a></li>
-            <li><a href="https://ideas.circleci.com/" data-analytics-child='{ "menu": "feature-requests" }' target="_blank">改善要望</a></li>
-            <li><a href="{{ '/support/premium-support/' | outer_url }}" data-analytics-child='{ "menu": "premium-support" }'>プレミアム サポート</a></li>
-          </ul>
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <h6>関連資料</h6>
-          <ul class="list-unstyled">
-            <li><a href="{{ '/blog/' | outer_url }}" data-analytics-child='{ "menu": "blog" }'>ブログ</a></li>
-            <li><a href="{{ '/customers/' | outer_url }}" data-analytics-child='{ "menu": "case-studies" }'>ケース スタディー</a></li>
-            <li><a href="{{ '/resources/#white-papers' | outer_url }}" data-analytics-child='{ "menu": "white-papers" }'>ホワイト ペーパー</a></li>
-            <li><a href="{{ '/resources/events/' | outer_url }}" data-analytics-child='{ "menu": "events" }'>イベント</a></li>
-            <li><a href="{{ '/resources/#webinars' | outer_url }}" data-analytics-child='{ "menu": "webinars" }'>ウェビナー</a></li>
-            <li><a href="{{ '/resources/#videos' | outer_url }}" data-analytics-child='{ "menu": "videos" }'>ビデオ</a></li>
-          </ul>
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <h6>会社概要</h6>
-          <ul class="list-unstyled">
-            <li><a href="{{ '/about/' | outer_url }}" data-analytics-child='{ "menu": "about-us" }'>CircleCI について</a></li>
-            <li><a href="{{ '/careers/' | outer_url }}" data-analytics-child='{ "menu": "careers" }'>採用情報 <span class="text-blue">(メンバー募集中!)</span></a></li>
-            <li><a href="{{ '/about/team/' | outer_url }}" data-analytics-child='{ "menu": "team" }'>チーム紹介</a></li>
-            <li><a href="{{ '/contact/' | outer_url }}" data-analytics-child='{ "menu": "contact-us" }'>お問い合わせ</a></li>
-            <li><a href="{{ '/partners/' | outer_url }}" data-analytics-child='{ "menu": "partner-with-us" }'>パートナー募集</a></li>
-            <li><a href="{{ '/newsroom/' | outer_url }}" data-analytics-child='{ "menu": "newsroom" }'>メディア掲載</a></li>
-          </ul>
-        </div>
-        <div class="col-md-2 col-sm-3 col-xs-6">
-          <h6>CircleCI 入門</h6>
-          <ul>
-            <li><a href="{{ '/continuous-integration/' | outer_url }}" data-analytics-child='{ "menu": "what-is-ci" }'>CI とは?</a></li>
-            <li><a href="{{ '/2.0/' | language_relative_url }}" data-analytics-child='{ "menu": "how-to-get-started" }'>CircleCI の導入手順</a></li>
-          </ul>
-        </div>
+<footer class="docs-footer inverted" data-analytics="clicked-footer" data-analytics-parent>
+  <div class="blog-container">
+    <div class="nav-row">
+      <a href="{{ '/' | relative_url }}" class="lockup-link" >
+        <img  src="{{site.baseurl}}/assets/img/logos/logo-wordmark-black.svg" class="logo" alt="circleci"></img>
+        <span class="title">ドキュメント</span>
+      </a>
+      <div class="social">
+        {% include social-buttons.html %}
+      </div>
+    </div>
+    <div class="nav-row">
+      <nav class="docs-footer--nav">
+        <ul class="docs-footer--nav-list">
+
+          <li><a class="nav-link" href="https://circleci.com/ja/terms-of-service/" data-analytics-child='{ "menu": "terms-of-service" }'>利用規約</a></li>
+          <li><a class="nav-link" href="https://circleci.com/ja/privacy/" data-analytics-child='{ "menu": "privacy-policy" }'>プライバシー ポリシー</a></li>
+          <li><a class="nav-link" href="https://circleci.com/ja/legal/cookie-policy/" data-analytics-child='{ "menu": "cookie-policy" }'>Cookie ポリシー</a></li>
+          <li><a class="nav-link" href="https://circleci.com/ja/security/" data-analytics-child='{ "menu": "security" }'>セキュリティ</a></li>
+        </ul>
       </nav>
-    </div>
-    <div class="row margin-top-medium">
-      <div class="col-md-2 col-xs-4">
-        <img src="{{site.baseurl}}/assets/img/logos/logo-wordmark.svg" class="logo-small margin-top-small" alt="circleci">
-      </div>
-      <div class="col-md-4 col-md-offset-6 col-xs-offset-0 col-xs-8">
-        <div class="text-center-small-float-right">
-          {% include social-buttons.html %}
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="margin-top-small text-center-small-float-left">
-          <nav>
-            <ul class="horizontal blue">
-              <li><a href="{{ '/terms-of-service/' | outer_url }}" data-analytics-child='{ "menu": "terms-of-service" }'>利用規約</a></li>
-              <li><a href="{{ '/privacy/' | outer_url }}" data-analytics-child='{ "menu": "privacy-policy" }'>プライバシー ポリシー</a></li>
-              <li><a href="{{ '/legal/cookie-policy/' | outer_url }}" data-analytics-child='{ "menu": "cookie-policy" }'>Cookie ポリシー</a></li>
-              <li><a href="{{ '/security/' | outer_url }}" data-analytics-child='{ "menu": "security" }'>セキュリティ</a></li>
-              <li class="language-select">
-                <div id="dropUp" class="dropup show">
-                  <a class="dropdown-toggle"
-                     role="button"
-                     id="footerLangSelect"
-                     data-toggle="dropdown"
-                     aria-haspopup="true"
-                     aria-expanded="false"
-                  >
-                    <img src="{{site.baseurl}}/assets/img/docs/ic-globe.svg" alt="globe" width="20"><span id="footerLangCurrentSelect"> English (US)</span><i class="fa fa-angle-up"></i></a>
-                  <div id="footerLangOptions" class="dropdown-menu hidden"  aria-labelledby="footerLangSelect">
-                    <a class="dropdown-item active" href="https://circleci.com">English (US)</a>
-                    <a class="dropdown-item" href="https://circleci.com/ja/" data-analytics-child='{ "menu": "japan" }'>日本語</a>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="margin-top-small text-center-small-float-right">
-          <span>Copyright © {{ site.time | date: '%Y' }} Circle Internet Services, Inc., All Rights Reserved.</span>
-        </div>
+      <div class="docs-copyright">
+        © {{ site.time | date: '%Y' }} Circle Internet Services, Inc., All Rights Reserved.
       </div>
     </div>
   </div>

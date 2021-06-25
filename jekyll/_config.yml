@@ -19,6 +19,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
+  - jekyll-toc
 
 algolia:
   application_id: U0RXNGRK45
@@ -46,6 +47,10 @@ algolia:
     ]
     minProximity: 3
 
+toc:
+  min_level: 1
+  max_level: 4
+
 sass:
   sass_dir: _sass
 
@@ -59,11 +64,16 @@ liquid:
 asciidoc:
   attributes:
       source-highlighter: rouge
+<<<<<<< HEAD
       serverversion: 3.0.1
       terraformversion: 0.15.4
+=======
+      serverversion: 3.0.2
+      terraformversion: 0.13.0
+>>>>>>> 6983f471aafc1e8811fb51eda778f0496691959d
       kubectlversion: 1.19
       helmversion: 3.4.0
-      kotsversion: 1.41
+      kotsversion: 1.44.1
 
 asciidoctor:
   base_dir: _cci2/
@@ -72,11 +82,16 @@ asciidoctor:
     imagesdir: /docs/assets/img/docs/
     relfileprefix: ../
     outfilesuffix: /index.html
+<<<<<<< HEAD
     serverversion: 3.0.1
     terraformversion: 0.15.4
+=======
+    serverversion: 3.0.2
+    terraformversion: 0.13.0
+>>>>>>> 6983f471aafc1e8811fb51eda778f0496691959d
     kubectlversion: 1.19
     helmversion: 3.4.0
-    kotsversion: 1.41
+    kotsversion: 1.44.1
 
 collections:
   # this is named with an underscore because it needs to be processed
@@ -150,6 +165,12 @@ defaults:
     values:
       hide: false
       search: true
+
+  # Enable TOC by default
+  - scope:
+      path: ""
+    values:
+      toc: true
 
 t:
     translation_in_progress:
