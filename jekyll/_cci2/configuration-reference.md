@@ -17,14 +17,9 @@ You can see a complete `config.yml` in our [full example](#example-full-configur
 
 ---
 
-## Table of contents
-{: #table-of-contents }
-{:.no_toc}
-
 * TOC
 {:toc}
 
----
 
 ## **`setup`**
 {: #setup }
@@ -756,7 +751,7 @@ shell | N | String | Shell to use for execution command (default: See [Default S
 environment | N | Map | Additional environmental variables, locally scoped to command
 background | N | Boolean | Whether or not this step should run in the background (default: false)
 working_directory | N | String | In which directory to run this step. Will be interpreted relative to the [`working_directory`](#jobs) of the job). (default: `.`)
-no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s" (default: 10 minutes)
+no_output_timeout | N | String | Elapsed time the command can run without output. The string is a decimal with unit suffix, such as "20m", "1.25h", "5s". The default is 10 minutes and the maximum is governed by the [maximum time a job is allowed to run](#jobs).
 when | N | String | [Specify when to enable or disable the step](#the-when-attribute). Takes the following values: `always`, `on_success`, `on_fail` (default: `on_success`)
 {: class="table table-striped"}
 
@@ -1834,7 +1829,7 @@ argument specifications, and to a maximum depth of 100 levels.
 
 `matches` uses [Java regular
 expressions](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html)
-for its `pattern`. It is recommended to enclose a pattern in `^` and
+for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and
 `$` to avoid accidental partial matches.
 
 **Note:**

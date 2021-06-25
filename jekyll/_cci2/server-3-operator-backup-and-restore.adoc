@@ -14,8 +14,7 @@ version:
 toc::[]
 
 == Overview
-
-NOTE: Backup and Restore is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. 
+_Backup and restore is available for server v3.1.0 and up._
 
 While operating and administering CircleCI server, you will undoubtedly ponder how to maintain backups 
 and recover your installation, should there be a need to migrate it to another cluster or recover from a critical event.
@@ -397,10 +396,7 @@ image::kots-admin-create-backup.png[Kots Create Snapshot]
 
 === Option 1 - Restore a backup from a snapshot
 
-Unlike other restore procedures, which would require you to reinstall server and then restore the data, restoring CircleCI
-server from a kots backup does not require you to reinstall server yourself before-hand. To restore from a backup stored
-in your S3 compatible storage, you will need to ensure Velero is installed and configured on your Kubernetes cluster, using the instructions above.
-Velero must have access to the storage bucket containing the backups.
+To restore from a backup stored in your S3 compatible storage, you will need to ensure Velero is installed on your Kubernetes cluster and that Velero has access to the storage bucket containing the backups.  When using EKS, restoring CircleCI server requires that an instance of CircleCI server is installed before-hand. When using GKE or other platforms, a cluster with just velero installed may work.  
 
 NOTE: If this is a new cluster or if you need to re-install Velero, the installation should be done with the same credentials
 generated above.

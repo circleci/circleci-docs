@@ -325,9 +325,58 @@ Key used by VM Service differs from the policy used by Object Storage in the pre
 . *AWS Region* (required): This is the region the application is in.
 . *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
 . *Subnet ID* (required): Choose a subnet (public or private) where the VMs should be deployed.
-. *Security Group ID* (required): This is the security group that will be attached to the VMs.
+. *Security Group ID* (required): This is the security group that will be attached to the VMs. It must be created manually.
 
-The recommended security group configuration can be found in the xref:server-3-install-hardening-your-cluster.adoc#external-vms[Hardening Your Cluster] section.
+The recommended security group configuration can be found in the xref:server-3-install-hardening-your-cluster.adoc#external-vms[Hardening Your Cluster] section. Additionally, the below commands can be run to create the necessary security groups in AWS or GCP.
+
+AWS
+```bash
+$ aws ec2 create-security-group \
+    --description "CircleCI's VM Service security group" \
+    --group-name "circleci-vm-service-sg"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
+    --port 22 \
+    --cidr "<<CIDR of Nomad clients>>"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
+    --port 22 \
+    --cidr "<<CIDR of Kubernetes nodes>>"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
+    --port 2376 \
+    --cidr "<<CIDR of Nomad clients>>"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
+    --port 2376 \
+    --cidr "<<CIDR of Kubernetes nodes>>"
+$ aws ec2 authorize-security-group-ingress \
+    --group-name "circleci-vm-service-sg" \
+    --protocol tcp \
+    --port 54782
+```
+
+GCP
+```bash
+$ gcloud compute firewall-rules create "circleci-vm-service-internal-nomad-fw" \
+    --network "<<network for CircleCI; optional if default>>" \
+    --action allow \
+    --source-ranges "<<CIDR of Nomad clients>>" \
+    --rules "TCP:22,TCP:2376"
+$ gcloud compute firewall-rules create "circleci-vm-service-internal-k8s-fw" \
+    --network "<<network for CircleCI; optional if default>>" \
+    --action allow \
+    --source-ranges "<<CIDR of Kubernetes nodes>>" \
+    --rules "TCP:22,TCP:2376"
+$ gcloud compute firewall-rules create "circleci-vm-service-external-fw" \
+    --network "<<network for CircleCI; optional if default>>" \
+    --action allow \
+    --rules "TCP:54782"
+```
 
 [start=5]
 . *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
@@ -539,7 +588,7 @@ region = "us-west-1"
 }
 
 module "nomad_clients" {
-source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.0.0"
+source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.1.0"
 
   # Number of nomad clients to run
   nodes = 4
@@ -601,7 +650,7 @@ provider "google-beta" {
 
 module "nomad_clients" {
   # Note the use of ref=<<tag>> to pin the version to a fixed release
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.0.0"
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.1.0"
 
   zone    = "us-west1-a"
   region  = "us-west1"

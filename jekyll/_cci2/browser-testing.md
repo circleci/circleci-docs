@@ -211,7 +211,7 @@ Saving screenshots is straightforward: it's a built-in feature in WebKit and Sel
 
 If you are running a test that runs an HTTP server on CircleCI, it is sometimes helpful to use a browser running on your local machine to debug a failing test. Setting this up is easy with an SSH-enabled run.
 
-1. Run an SSH build using the Rerun Job with SSH button on the **Job page** of the CircleCI app. The command to log into the container over SSH apears, as follows:
+1. Run an SSH build using the Rerun Job with SSH button on the **Job page** of the CircleCI app. The command to log into the container over SSH is as follows:
 ```
 ssh -p 64625 ubuntu@54.221.135.43
 ```

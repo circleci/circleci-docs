@@ -3,6 +3,7 @@ layout: classic-docs
 title: "CircleCI ドキュメントへようこそ"
 description: "CircleCI ドキュメントへようこそ"
 permalink: /ja/2.0/
+toc: false
 ---
 
 CircleCI について理解を深めていただけるよう、チュートリアルやサンプル、ハウツーといった参考情報をまとめました。
