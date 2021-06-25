@@ -1829,8 +1829,8 @@ argument specifications, and to a maximum depth of 100 levels.
 
 `matches` uses [Java regular
 expressions](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html)
-for its `pattern`. It is recommended to enclose a pattern in `^` and
-`$` to avoid accidental partial matches. However, by default we will not prefix match, a full pattern needs to be provided.
+for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and
+`$` to avoid accidental partial matches.
 
 **Note:**
 When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
