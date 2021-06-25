@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: Server launch-agent compatibility
-short-title: Server launch-agent compatbilitiy
+title: Runner in Server Compatibility
+short-title: Runner in Server Compatibility
 categories: [platforms]
 description: Launch-agent compatibility table for server
 order: 31
