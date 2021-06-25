@@ -90,7 +90,7 @@ export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-laun
 export agent_version=$(curl "${base_url}/release.txt")
 ```
 
-For server, run the following:
+For server v3.1.0 and up, run the following:
 ```bash
 export agent_version="1.0.11147-881b608"
 ```
