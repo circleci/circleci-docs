@@ -413,7 +413,7 @@ NOTE: In the following snippet `<YOUR_MINIO_ACCESS_KEY_ID>` and `<YOUR_MINIO_SEC
 [source, bash]
 ----
 # Create user
-mc admin user add $ALIAS <YOUR_VELERO_ACCESS_KEY_ID> <YOUR_VELERO_SECRET_ACCESS_KEY>
+mc admin user add $ALIAS <YOUR_MINIO_ACCESS_KEY_ID> <YOUR_MINIO_SECRET_ACCESS_KEY>
 
 # Create policy
 cat > velero-policy.json << EOF
