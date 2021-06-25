@@ -45,7 +45,7 @@ Use the following command:
 circleci namespace create <name> <vcs-type> <org-name>
 ```
 +
-For example, if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`).
+For example, if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
 . Create a resource class for your runner for your namespace using the following command:
 + 
 ```
@@ -61,7 +61,7 @@ NOTE: To create resource classes and tokens you need to be an organization admin
 circleci runner token create <resource-class> <nickname>
 ``` 
 +
-For example, `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated runner configuration including the authentication token.
+For example, `circleci runner token create my-namespace/my-resource-class my-token`. This will print a generated runner configuration including the authentication token.
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
 
@@ -468,7 +468,7 @@ docker stop <container-name>
 
 NOTE: CircleCI Runner is not yet available on the current version of Server
 3.x; however, it will be available for preview before the next release. Please
-[contact us](https://circleci.com/contact/) for more information.
+https://circleci.com/contact/[contact us] for more information.
 
 Each minor version of server is compatible with a specific version of
 `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,
