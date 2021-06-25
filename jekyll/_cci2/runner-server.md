@@ -9,7 +9,7 @@ version:
 - Server v3.x
 ---
 
-NOTE: CircleCI Runner is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. Please [contact us](https://circleci.com/contact/) for more information.
+_Runner is available for server v3.1.0 and up._
 
 ## Authentication
 {: #authentication }
