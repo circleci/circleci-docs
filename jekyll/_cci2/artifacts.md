@@ -9,7 +9,7 @@ version:
 - Server v2.x
 ---
 
-This document describes how to work with Artifacts in the following sections:
+This document describes how to work with Artifacts on CircleCI.
 
 * TOC
 {:toc}

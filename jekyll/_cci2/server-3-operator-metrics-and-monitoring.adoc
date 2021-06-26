@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Metrics such as CPU or memory usage, number of executed builds and internal metrics are useful in:
+Metrics such as CPU or memory usage and internal metrics are useful in:
 
 * Quickly detecting incidents and abnormal behavior
 * Dynamically scaling compute resources
@@ -22,112 +22,31 @@ toc::[]
 
 === Scope
 Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring
-the health of your system and debug issues with your installation. However, requirements differ vastly between use
-cases. Hence, features around local observability are provided on an as-is basis, and we kindly ask to make use of the
-flexibility and extensibility of the system, should you feel that the functionality provided is not sufficient for your
-needs.
+the health of your system and debug issues with your installation.
 
-Most importantly, take note of the following:
-
-NOTE: You cannot modify dashboards that are provided by CircleCI. However, you can make copies of them that are editable.
 
 NOTE: Data is retained for a maximum of 15 days.
 
-=== Grafana
-Server ships with https://grafana.com/[Grafana] which has become the world's most popular technology used to compose
-observability dashboards. We have integrated with https://prometheus.io/[Prometheus] & https://grafana.com/oss/loki/[Loki] logging,
-so you can create dashboards, set up alerts, search for errors, and more.
+NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI server install. It will scrape metrics
+from your entire cluster by default. You may disable Prometheus from within the kots admin console config if needed.
 
-=== Loki
-https://grafana.com/oss/loki/[Loki] is a horizontally-scalable, highly-available, log aggregation system inspired by https://prometheus.io/[Prometheus].
-It is designed to be very cost effective and easy to operate. It does not index the contents of the logs, but rather a set of labels for each
-log stream.
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
-implementation of monitoring common performance metrics.
+implementation of monitoring common performance metrics. 
+
+=== Kots Admin - Metrics Graphs
+By default, an instance of Prometheus is deployed with your CircleCI server install. Once deployed, you may provide the 
+address for your Prometheus instance to the kots admin dashboard. Kots will use this address to generate graph data for 
+the cpu and memory usage of containers in your cluster.
+
+The default Prometheus address is `http://prometheus-server`
+
+From the kots dashboard, select "configure graphs". Then enter `http://prometheus-server` and kots will generate resource
+usage graphs.
 
 === Telegraf
 Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
 The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
 by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a
-metrics endpoint for Prometheus to scrape so that the metrics can be viewed in Grafana.
-
-== Accessing the metrics dashboards on Grafana
-To access Grafana, you will need to port-forward the Grafana service to your local machine:
-[source,bash]
-----
-kubectl port-forward svc/grafana 8080:80
-----
-This will make Grafana available in your browser on your local machine at `http://localhost:8080`.
-
-You can find the dashboards by going directly to `http://localhost:8080/dashboards` or by navigating there
-using the menu on the left side.
-
-.Location of the dashboards in the Grafana menu
-image::server-grafana-dashboard-overview.png[Grafana menu]
-
-==== General usage tips
-If you are new to Grafana, it is a good idea to familiarize yourself with Grafana's dashboard UI
-by studying the https://grafana.com/docs/grafana/latest/dashboards/[Grafana documentation]. You should also read the
-section on https://grafana.com/docs/grafana/latest/variables/[templates and variables], as most of the dashboards
-we provide make use of that feature.
-
-==== The Overview dashboard
-The Overview gives you the most important metrics and logs for each container in your installation. Per container, it allows
-you to view the following metrics:
-
-* CPU Saturation
-* Memory Saturation
-* Number of running pods
-* Most recent logs
-* File I/O (in B/s)
-* Network I/O (in B/s)
-* Number of service restarts
-
-It is best suited for quick health checks on individual services.
-
-==== The Pod Metrics dashboard
-The Pod Metrics dashboard will give you more detailed resource usage for the entire cluster in total as well as broken
-down by pod. You can also inspect resource usage individually by pod as well as resource requests and limits.
-
-==== The Nomad dashboard
-For jobs that are not run on external VMs or via runner, this dashboard gives an overview on the number of jobs
-that are currently running, pending, or are dead (i.e. have been processed). You can also view the number of
-healthy Nomad server pods, their memory saturation, their CPU saturation and their most recent logs.
-
-==== The Cluster Monitoring for Kubernetes dashboard
-This dashboard gives a more high-level view on the most important health metrics of either your entire cluster
-or individually by cluster node. Metrics included are memory and CPU usage as well as Network and file I/O.
-
-== Tips and Troubleshooting
-
-=== How to set up alerts
-You can set up alerts via Grafana. Please check the https://grafana.com/docs/grafana/latest/alerting/[Grafana documentation]
-for detailed instructions.
-
-=== A dashboard is not showing any data
-If you don't see any data in a dashboard, this could have several reasons:
-
-* Check if the dashboard is using variables and, if it does, that you have selected the right namespace
-and at least one service or pod to show metrics for.
-* You might have selected an initialization container that will stop running once it has fulfilled its
-purpose. Try another container.
-* Check if the selected time range is not more than 14 days in the past.
-
-=== Observing pod logs
-You can check that services/pods are reporting metrics correctly by checking if they are being reported to stdout. To do
-this, examine the logs of the `circleci-telegraf` pod using `kubectl logs` or a tool like https://github.com/wercker/stern[stern].
-
-To view logs for Telegraf, run the following:
-
-* `kubectl get pods` to get a list of services
-* `kubectl logs -f circleci-telegraf-<hash>`, substituting the hash for your installation.
-
-While monitoring the current log stream, perform some actions with your server installation (e.g. logging in/out or
-running a workflow). These activities should be logged, showing that metrics are being reported. Most metrics you see logged
-will be from the frontend pod. However, when you run workflows, you should also see metrics reported by the dispatcher,
-`legacy-dispatcher`, `output-processor` and `workflows-conductor`, as well as metrics concerning cpu, memory and disk stats.
-
-You may also check the logs by running `kubectl logs circleci-telegraf-<hash> -n <namespace> -f` to confirm that your
-output provider (e.g. influx) is listed in the configured outputs.
+metrics endpoint for Prometheus to scrape.

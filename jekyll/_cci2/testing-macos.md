@@ -40,6 +40,8 @@ Testing macOS apps is only supported on Xcode 11.7 images and newer as it requir
 
 For more information, please see the [Supported Xcode Versions]({{ site.baseurl }}/2.0/testing-ios/#supported-xcode-versions) list.
 
+If you are interested in Xcode Cross Compilation, view this [document]({{site.baseurl}}/2.0/hello-world-macos/?section=executors-and-images#xcode-cross-compilation).
+
 ## Setting up a macOS UI Test Project
 {: #setting-up-a-macos-ui-test-project }
 
@@ -80,9 +82,18 @@ workflows:
 ### Configuring Fastlane
 {: #configuring-fastlane }
 
-Fastlane allows you to avoid calling lengthy Xcode commands manually and instead write a simple configuration file to initiate the macOS app tests. With Fastlane you can build, sign (for testing) and test a macOS app.
+Fastlane allows you to avoid calling lengthy Xcode commands manually and instead
+write a simple configuration file to initiate the macOS app tests. With Fastlane
+you can build, sign (for testing) and test a macOS app. Please note that when
+using Fastlane, depending on the actions in your configuration, you may need to
+setup a 2-factor Authentication (2FA). 
+See the [Fastlane Docs for more information](https://docs.fastlane.tools/best-practices/continuous-integration/#method-2-two-step-or-two-factor-authentication).
 
-A simple config can be found below. Note that this config relies on the project being configured as "Sign to Run Locally" and therefore you do not need to set up Fastlane Match. If your app requires signing to test, follow the [code signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/) (the code signing documentation talks about iOS but it is also applicable to macOS).
+A simple config can be found below. Note that this config relies on the project
+being configured as "Sign to Run Locally" and therefore you do not need to set
+up Fastlane Match. If your app requires signing to test, follow the [code
+signing documentation]({{ site.baseurl }}/2.0/ios-codesigning/) (the code
+signing documentation talks about iOS but it is also applicable to macOS).
 
 ```ruby
 # fastlane/Fastfile

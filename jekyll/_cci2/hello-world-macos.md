@@ -9,9 +9,12 @@ version:
 - Cloud
 ---
 
-This document describes how to get started with continuous integration on **macOS build environments** on CircleCI. If you still need to get acquainted with CircleCI, it is recommended to checkout the [getting started guide]({{ site.baseurl }}/2.0/getting-started).
-
-Also, there is documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
+This document describes how to get started with continuous integration on
+**macOS build environments** on CircleCI. If you still need to get acquainted
+with CircleCI, it is recommended to checkout the [getting started
+guide]({{site.baseurl }}/2.0/getting-started). You may also wish to visit the
+documentation for [testing iOS]({{ site.baseurl}}/2.0/testing-ios/) and [an
+example iOS project]({{ site.baseurl }}/2.0/ios-tutorial/).
 
 ## Prerequisites
 {: #prerequisites }
@@ -56,16 +59,22 @@ to indicate what is happening at each step.
 
 ```yaml
 version: 2.1
+
 jobs: # a basic unit of work in a run
-  build: # runs not using `Workflows` must have a `build` job as entry point
-    macos:  # indicate that we are using the macOS executor
+  test: # your job name
+    macos:
       xcode: 11.3.0 # indicate our selected version of Xcode
     steps: # a series of commands to run
       - checkout  # pull down code from your version control system.
       - run:
-          # run our tests using xcode's cli tool `xcodebuild`
           name: Run Unit Tests
           command: xcodebuild test -scheme circleci-demo-macos
+
+  build: 
+    macos:
+      xcode: 11.3.0 # indicate our selected version of Xcode
+    steps: 
+      - checkout
       - run:
           # build our application
           name: Build Application
@@ -77,6 +86,15 @@ jobs: # a basic unit of work in a run
       - store_artifacts: # store this build output. Read more: https://circleci.com/docs/2.0/artifacts/
           path: app.zip
           destination: app
+          
+workflows:
+  version: 2
+  test_build:
+    jobs:
+      - test
+      - build:
+        requires:
+          test
 ```
 
 If this is your first exposure to a CircleCI `config.yml`, some of the above
@@ -98,32 +116,51 @@ You can learn more about the `config.yml` file in the [configuration reference g
 {: #xcode-cross-compilation }
 
 ### Universal Binaries
-{: #universal-binaries }
-Xcode currently supports the creation of universal binaries which can be run on both x86_64 and ARM64 CPU architectures without needing to ship separate executables. This is supported only under Xcode 12.2+ although older Xcode versions can still be used to compile separate x86_64 and ARM64 executables.
+{: #universal-binaries } Xcode currently supports the creation of universal
+binaries which can be run on both `x86_64` and `ARM64` CPU architectures without
+needing to ship separate executables. This is supported only under Xcode 12.2+
+although older Xcode versions can still be used to compile separate `x86_64` and
+`ARM64` executables.
 
 ### Extracting Unwanted Architectures
 {: #extracting-unwanted-architectures }
-Xcode 12.2+ will by default create universal binaries, compiling to a single executable that supports both x86_64 and ARM64 based CPUs. If you need to remove an instruction set, you can do so by using the `lipo` utility.
 
-Assuming that we are interested in creating a standalone x86_64 binary from a universal binary called `circleci-demo-macos`, we can do so by running the command
+Xcode 12.2+ will by default create universal binaries, compiling to a single
+executable that supports both `x86_64` and `ARM64` based CPUs. If you need to remove
+an instruction set, you can do so by using the `lipo` utility.
 
-```lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64```
+Assuming that we are interested in creating a standalone x86_64 binary from a
+universal binary called `circleci-demo-macos`, we can do so by running the
+command:
 
-We can then confirm the supported architecture of the extracted binary with `lipo -info circleci-demo-macos-x86_64` which will output the following
+```sh
+lipo -extract x86_64 circleci-demo-macos.app/Contents/MacOS/circleci-demo-macos -output circleci-demo-macos-x86_64
+```
 
-```Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64```
+We can then confirm the supported architecture of the extracted binary with
+`lipo -info circleci-demo-macos-x86_64` which will output the following
+
+```sh
+Architectures in the fat file: circleci-demo-macos-x86_64 are: x86_64
+```
 
 
 ### Cross Compiled Binaries
 {: #cross-compiled-binaries }
 
-While universal binaries are only supported under Xcode 12.2+, you can still cross compile binaries for architectures other than the architecture of the machine being used to build the binary. For xcodebuild the process is relatively straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with `ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO ...`. For the x86_64 architecture simply change `ARCHS` to `x86_64`.
+While universal binaries are only supported under Xcode 12.2+, you can still
+cross compile binaries for architectures other than the architecture of the
+machine being used to build the binary. For xcodebuild the process is relatively
+straightforward. To build ARM64 binaries, prepend the `xcodebuild` command with
+`ARCHS=ARM64 ONLY_ACTIVE_ARCH=NO` such that it reads `xcodebuild ARCHS=ARM64
+ONLY_ACTIVE_ARCH=NO ...`. For the `x86_64` architecture simply change `ARCHS` to
+`x86_64`.
 
 ## Next steps
 {: #next-steps }
 
 The macOS executor is commonly used for testing and building iOS applications,
-which can be more complex in their continuous integrations configuration. If you
+which can be more complex in their continuous integration configuration. If you
 are interested in building and/or testing iOS applications, consider checking
 out our following docs that further explore this topic:
 
@@ -134,7 +171,5 @@ out our following docs that further explore this topic:
 Also, consider reading documentation on some of CircleCI's features:
 
 - See the [Concepts]({{ site.baseurl }}/2.0/concepts/) document for a summary of 2.0 configuration and the hierarchy of top-level keys in a `.circleci/config.yml` file.
-
 - Refer to the [Workflows]({{ site.baseurl }}/2.0/workflows) document for examples of orchestrating job runs with concurrent, sequential, scheduled, and manual approval workflows.
-
 - Find complete reference information for all keys and pre-built Docker images in the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/) and [CircleCI Images]({{ site.baseurl }}/2.0/circleci-images/) documentation, respectively.

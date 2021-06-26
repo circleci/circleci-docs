@@ -89,7 +89,7 @@ The table below describes the new endpoints that have been added to the CircleCI
 Endpoint       | Description
 -----------|-------------------------------------------------------
 `GET /workflow/:id ` | This endpoint enables users to return an individual Workflow based on the `id` parameter being passed in the request
-`GET /workflow/:id/job` | This endoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.
+`GET /workflow/:id/job` | This endpoint enables users to retrieve all Jobs associated with a specific workflow, based on its unique `id`.
 `GET /project/:project_slug`  | This endpoint enables users to retrieve a specific Project by its unique slug.
 `POST /project/:project_slug/pipeline` | This endpoint enables users to retrieve an individual project by its unique slug.
 `GET /pipeline/:id` | This endpoint enables users to retrieve an individual pipeline, based on the `id` passed in the request.

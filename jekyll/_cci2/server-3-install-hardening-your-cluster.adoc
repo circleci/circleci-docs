@@ -21,8 +21,8 @@ It is highly recommended that you deploy these into separate subnets with distin
 to control traffic between the different components of the system and isolate them from each other.
 
 As always, the rule is to make as many of the resources private as possible, applies. If your users will access your
-CircleCI Server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a
-working NAT gateway setup. Otherwise, you will need at least one public subnet for the frontend load balancer.
+CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a
+working NAT gateway setup. Otherwise, you will need at least one public subnet for the CircleCI server Traefik load balancer.
 
 However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to
 SSH into jobs and scope access via networking rules.
@@ -55,25 +55,15 @@ If the traffic rules for your load balancers have not been created automatically
 | Source
 | Purpose
 
-| frontend-external
-| 80
-| External
-| Frontend API
-
-| frontend-external
-| 443
-| External
-| Frontend API
-
 | *-server-traefik
 | 80
 | External
-| User Interface
+| User Interface & Frontend API
 
 | *-server-traefik
 | 443
 | External
-| User Interface
+| User Interface & Frontend API
 
 | vm-service
 | 3000
@@ -203,7 +193,7 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | Purpose
 
 | 22
-| K8s nodes
+| Kubernetes nodes
 | Internal communication
 
 | 22
@@ -211,14 +201,14 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | Internal communication
 
 | 2376
-| K8s nodes
+| Kubernetes nodes
 | Internal communication
 
 | 2376
 | Nomad clients
 | Internal communication
 
-| 64535-65535
+| 54782
 | External
 | Rerun jobs with SSH functionality
 |===
