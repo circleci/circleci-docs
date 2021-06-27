@@ -202,7 +202,7 @@ jobs:
 
 #### `parameters`
 {: #parameters }
-The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-1).
+The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-in-workflow).
 
 Reserved parameter-names:
 
@@ -1464,7 +1464,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 {: class="table table-striped"}
 
 #### **`jobs`**
-{: #jobs }
+{: #jobs-in-workflow }
 A job can have the keys `requires`, `context`, `type`, and `filters`.
 
 Key | Required | Type | Description
