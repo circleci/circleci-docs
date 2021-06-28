@@ -52,7 +52,7 @@ metrics endpoint for Prometheus to scrape.
 === Use Telegraf to forward metrics to Datadog
 The following example shows how to configure Telegraf to output metrics to Datadog:
 
-Open up the management console dashboard and select Config from the menu bar. Locate the *Custom Telegraf config* section under *Observability and monitoring*. Here there is an editable text window where you can configure plugins for forwarding Telegraf metrics for your server installation. To forward to Datadog, add the following, substituting `my-secret-key` with your Datadog API key:
+Open up the management console dashboard and select **Config** from the menu bar. Locate the **Custom Telegraf config** section under **Observability and monitoring**. Here there is an editable text window where you can configure plugins for forwarding Telegraf metrics for your server installation. To forward to Datadog, add the following, substituting `my-secret-key` with your Datadog API key:
 
 ```
 [[outputs.datadog]]
@@ -61,5 +61,4 @@ Open up the management console dashboard and select Config from the menu bar. Lo
 ```
 
 For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata docs].
-
 
