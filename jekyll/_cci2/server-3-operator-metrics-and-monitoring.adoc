@@ -24,12 +24,10 @@ toc::[]
 Your CircleCI server installation collects a number of metrics and logs by default, which can be useful in monitoring
 the health of your system and debug issues with your installation.
 
-
 NOTE: Data is retained for a maximum of 15 days.
 
 NOTE: Prometheus Server is not limited to only scrape metrics from your CircleCI server install. It will scrape metrics
 from your entire cluster by default. You may disable Prometheus from within the kots admin console config if needed.
-
 
 === Prometheus
 https://prometheus.io/[Prometheus] is a leading monitoring and alerting system for Kubernetes. Server 3.x ships with basic
@@ -50,3 +48,18 @@ Most services running on server will report StatsD metrics to the https://www.in
 The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
 by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. By default, it will provide a
 metrics endpoint for Prometheus to scrape.
+
+=== Use Telegraf to forward metrics to Datadog
+The following example shows how to configure Telegraf to output metrics to Datadog:
+
+Open up the management console dashboard and select Config from the menu bar. Locate the *Custom Telegraf config* section under *Observability and monitoring*. Here there is an editable text window where you can configure plugins for forwarding Telegraf metrics for your server installation. To forward to Datadog, add the following, substituting `my-secret-key` with your Datadog API key:
+
+```
+[[outputs.datadog]]
+  ## Replace "my-secret-key" with Datadog API key
+  apikey = "my-secret-key"
+```
+
+For more options, see the https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[Influxdata docs].
+
+
