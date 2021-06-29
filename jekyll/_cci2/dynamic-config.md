@@ -33,6 +33,9 @@ To use our dynamic configuration feature, you can add the key `setup` with a val
 parent configuration file (in the `.circleci/` directory). This will designate that `config.yaml` as a `setup workflow` 
 configuration, enabling you and your team to get up and running with dynamic configuration.
 
+**Note**: *At this time, Dynamic Configuration does not work with Scheduled Workflows. We are working on
+Scheduled Pipelines, which will alleviate this. They are expected to launch in the near future. A possible work around can be found on our Discuss page: https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344 *
+
 See the [Getting started](#getting-started-with-dynamic-config-in-circleci) section below for more 
 information.
 
