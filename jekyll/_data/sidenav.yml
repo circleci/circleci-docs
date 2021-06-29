@@ -334,6 +334,8 @@ en:
           link: 2.0/server-3-operator-orbs
         - name: VM Service
           link: 2.0/server-3-operator-vm-service
+        - name: Load Balancers
+          link: 2.0/server-3-operator-load-balancers
         - name: Authentication
           link: 2.0/server-3-operator-authentication
         - name: Docker Authenticated Pulls
