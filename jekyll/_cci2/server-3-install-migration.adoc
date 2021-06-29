@@ -52,15 +52,15 @@ The migration script will:
 
 In a terminal:
 
-. Run `git clone git@github.com:CircleCI-Public/server-scripts.git`
-. Change into the `migrate` directory: `cd server-scripts/migrate`
-. Run the migration script, i.e.: `./migrate.sh`
+. Run `git clone https://github.com/CircleCI-Public/server-scripts`.
+. Change into the `migrate` directory: `cd server-scripts/migrate`.
+. Run the migration script: `./migrate.sh`.
 . You will be prompted for the following information:
   * Username of your Server 2.19 installation
   * Hostname of your Server 2.19 installation
   * The path to your SSH key file for your Server 2.19 installation
   * Kubernetes namespace of your Server 3.0 installation
-. After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 3.0 instance via the KOTS Admin Console. The keys will be located in `migrate/circleci_export/circle-data`
+. After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 3.0 instance via the KOTS Admin Console. The keys will be located in `circleci_export/circle-data`.
 . The 3.0 instance will either need to be updated to point at the same storage bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
 
 NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
