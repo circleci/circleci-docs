@@ -18,7 +18,7 @@ toc::[]
 
 == Make the frontend load balancer private
 
-WARNING: If you select to make the frontend load balancer private, webhooks will only work if you use using GitHub Enterprise. Webhooks will fail when using GitHub.com.
+WARNING: If you select to make the frontend load balancer private, webhooks will only work if you are using GitHub Enterprise. Webhooks will fail when using GitHub.com.
 
 NOTE: The Private load balancers option only works with installations on CircleCI server on GKE or EKS.
 
