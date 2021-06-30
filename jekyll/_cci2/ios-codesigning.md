@@ -43,10 +43,14 @@ the necessary certificates and profiles when required.
 
 In this example configuration, we will set up and use a git repository for storage.
 
-On your local machine, in the root of your repository, run `bundle exec fastlane match init`
-and follow the instructions to configure the Match repository. After configuration is complete, run `bundle exec fastlane match development` to generate and
-install the Development certificates and profiles, and then run `bundle exec
-fastlane match adhoc` to generate and install the Ad-hoc distribution
+To set up Fastlane Match:
+
+* On your local machine, open Terminal and navigate to the root directory of your repository
+* Run `bundle exec fastlane match init`
+* Follow the instructions to configure the Match repository
+* After the above is complete, run `bundle exec fastlane match development` to generate and
+install the Development certificates and profiles
+* Then, run `bundle exec fastlane match adhoc` to generate and install the Ad-hoc distribution
 certificates and profiles.
 
 ### Preparing your Xcode project for use with Fastlane Match
