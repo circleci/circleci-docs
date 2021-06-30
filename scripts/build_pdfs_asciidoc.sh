@@ -4,7 +4,7 @@ OUT_DIR="release/tmp"
 
 DATE=$(date +"%m/%d/%Y")
 
-VERSION="3.0.1"
+VERSION="3.1.0"
 
 COMMENT="FINAL"
 
