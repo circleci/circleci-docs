@@ -8,18 +8,22 @@ version:
 ---
 
 ## 概要
+{: #overview }
 
-Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
+Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 ## Android マシン イメージの使用
+{: #using-the-android-machine-image }
 
-設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
+設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#examples)」セクションを参照してください。
 
 ## プリインストールされたソフトウェア
+{: #pre-installed-software }
 
 Android マシン イメージには以下がプリインストールされています。
 
 ### Android SDK
+{: #android-sdk }
 - sdkmanager
 - Android プラットフォーム 23、24、25、26、27、28、29、30、S
 - ビルド ツール 30.0.3
@@ -29,6 +33,7 @@ Android マシン イメージには以下がプリインストールされて�
 - extras;android;m2repository、extras;google;m2repository、extras;google;google_play_service
 
 ### その他
+{: #others }
 - gcloud
 - OpenJDK 8、OpenJDK 11 (デフォルト)
 - maven 3.6.3、gradle 6.8.3、ant
@@ -39,19 +44,23 @@ Android マシン イメージには以下がプリインストールされて�
 - jq 1.6
 
 ## 制限事項
+{: #limitations }
 
 * ジョブが実行を開始するまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Android イメージを利用するユーザーが増えるに連れ短縮されます。
 
 ## 料金プラン
+{: #pricing }
 
 料金情報に関しては、[料金ページ](https://circleci.com/ja/pricing/)の「Linux VM」セクションで Linux Machine Executor を参照してください。
 
 
 ## 例
+{: #examples }
 
 以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
 
 ### Orb を使用するシンプルな例
+{: #simple-orb-usage }
 
 以下の例では、Android Orb を使用して 1 つのジョブを実行します。
 
@@ -59,7 +68,7 @@ Android マシン イメージには以下がプリインストールされて�
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@1.0
+  android: circleci/android@1.0.3
 workflows:
   test:
     jobs:
@@ -72,6 +81,7 @@ workflows:
 
 
 ### Orb を使用する複雑な例
+{: #more-complex-orb-usage }
 
 この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 
@@ -115,6 +125,7 @@ workflows:
 
 
 ### Orb を使用しない例
+{: #no-orb-example }
 
 以下の例では、__circleci/android [Orb](https://circleci.com/developer/ja/orbs/orb/circleci/android) なしで Android マシン イメージを使用しています。 以下のステップは、Orb の [run-ui-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#jobs-run-ui-tests) ジョブを使用して実行する処理に類似しています。
 
@@ -150,22 +161,22 @@ jobs:
       - restore_cache:
           key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
       - run:
-          # ビルド時間を最適化するために、エミュレーターの起動と並列で実行します
-          name: assembleDebugAndroidTest タスクの実行
+          # run in parallel with the emulator starting up, to optimize build time
+          name: Run assembleDebugAndroidTest task
           command: |
             ./gradlew assembleDebugAndroidTest
       - run:
-          name: エミュレーターの起動の待機
+          name: Wait for emulator to start
           command: |
             circle-android wait-for-boot
       - run:
-          name: エミュレーター アニメーションの無効化
+          name: Disable emulator animations
           command: |
             adb shell settings put global window_animation_scale 0.0
             adb shell settings put global transition_animation_scale 0.0
             adb shell settings put global animator_duration_scale 0.0
       - run:
-          name: UI テストの実行 (リトライあり)
+          name: Run UI tests (with retry)
           command: |
             MAX_TRIES=2
             run_with_retry() {
@@ -182,7 +193,7 @@ jobs:
                  exit 1
                fi
             }
-            run_with_retry 
+            run_with_retry
       - save_cache:
           key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
           paths:
