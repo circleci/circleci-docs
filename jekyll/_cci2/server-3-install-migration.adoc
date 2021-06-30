@@ -46,7 +46,7 @@ The migration script will:
 * Scale v3.x application deployments down to zero, and then to one
 * Import the data from the previously exported tarball to your new v3.x instance
 
-NOTE: If your services are externalized then you may run `./migrate.sh --skip-databases` to skip Postgres and Mongo. In the event Postgres, Mongo, and Vault are all externalized, you simply need to scp your keys from `/data/circle/circleci-encryption-keys` on the services box. You may `cat` these files and upload their contents to the 3.x configuration page.
+NOTE: If your services are externalized then you can run `./migrate.sh --skip-databases` to skip Postgres and Mongo. In the event Postgres, Mongo, and Vault are all externalized, you need to `scp` (secured copy) your keys from `/data/circle/circleci-encryption-keys` on the v2.19.x services machine and then `cat` these files and upload their contents to the 3.x configuration page.
 
 In a terminal:
 
