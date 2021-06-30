@@ -13,17 +13,17 @@ version:
 Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 ## Android マシン イメージの使用
-{: #using-the-android-machine-image }
-
-設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#examples)」セクションを参照してください。
-
-## プリインストールされたソフトウェア
-{: #pre-installed-software }
-
 Android マシン イメージには以下がプリインストールされています。
 
+設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
+
+## プリインストールされたソフトウェア
+以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
+
+以下の例では、Android Orb を使用して 1 つのジョブを実行します。
+
 ### Android SDK
-{: #android-sdk }
+この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
 - sdkmanager
 - Android プラットフォーム 23、24、25、26、27、28、29、30、S
 - ビルド ツール 30.0.3
@@ -68,7 +68,7 @@ Android マシン イメージには以下がプリインストールされて�
 # .circleci/config.yaml
 version: 2.1
 orbs:
-  android: circleci/android@1.0.3
+  android: circleci/android@1.0
 workflows:
   test:
     jobs:
@@ -161,22 +161,22 @@ jobs:
       - restore_cache:
           key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
       - run:
-          # run in parallel with the emulator starting up, to optimize build time
-          name: Run assembleDebugAndroidTest task
+          # ビルド時間を最適化するために、エミュレーターの起動と並列で実行します
+          name: assembleDebugAndroidTest タスクの実行
           command: |
             ./gradlew assembleDebugAndroidTest
       - run:
-          name: Wait for emulator to start
+          name: エミュレーターの起動の待機
           command: |
             circle-android wait-for-boot
       - run:
-          name: Disable emulator animations
+          name: エミュレーター アニメーションの無効化
           command: |
             adb shell settings put global window_animation_scale 0.0
             adb shell settings put global transition_animation_scale 0.0
             adb shell settings put global animator_duration_scale 0.0
       - run:
-          name: Run UI tests (with retry)
+          name: UI テストの実行 (リトライあり)
           command: |
             MAX_TRIES=2
             run_with_retry() {
@@ -193,7 +193,7 @@ jobs:
                  exit 1
                fi
             }
-            run_with_retry
+            run_with_retry 
       - save_cache:
           key: gradle-v1-{{ arch }}-{{ checksum "/tmp/gradle_cache_seed" }}
           paths:
