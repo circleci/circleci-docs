@@ -8,11 +8,11 @@ categories:
 order: 1
 ---
 
-CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行するための正式なプロセスやツールセットはありません。 そのため、AWS と Terraform を使用して CircleCI 2.0 を新規にインストールします。 詳細については、[こちらのインストール手順]({{ site.baseurl }}/2.0/aws)を参照してください。
+CircleCI Cloud (SaaS) から CircleCI Server セットアップに移行するための正式なプロセスやツールセットはありません。 そのため、AWS と Terraform を使用して CircleCI 2.0 を新規にインストールします。 詳細については、[こちらのインストール手順]({{ site.baseurl }}/ja/2.0/aws)を参照してください。
 
 インストールが完了したら、コンテキスト、環境変数、API トークンなどのすべてのプロジェクト設定を手動でコピーする必要があります。
 
-**Note:** It is not possible to bring your projects' build histories from SaaS; you will have to re-add all of your projects to your Server installation.
+**メモ:** プロジェクトのビルド履歴を SaaS から取り出すことはできません。 Server にすべてのプロジェクトを再度追加する必要があります。
 
 SaaS で動作している 2.0 `config.yml` ファイルであれば、Server でもそのまま問題なく動作します。 ただし、1.0 のビルド環境にはわずかな違いがあるため、一部の 1.0 設定ファイルは SaaS から Server に 100% 変換できない可能性があります。
 
