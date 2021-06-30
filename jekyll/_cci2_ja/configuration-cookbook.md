@@ -10,31 +10,31 @@ version:
   - Cloud
 ---
 
-The *CircleCI Configuration Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to perform various configuration tasks using CircleCI resources including orbs. This guide, and its associated sections, will enable you to quickly perform repeatable tasks on the CircleCI platform.
+*CircleCI 構成クックブック*は、CircleCI のリソース (CircleCI やパートナーの承認済み Orbs など) を使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
 
 * 目次
 {:toc}
 
 ## はじめに
-{: #introduction }
+#header4
 
-This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. Each recipe in this cookbook relates to a single task that you can perform on the CircleCI platform using your own resources in addition to CircleCI resources such as CircleCI orbs.
+This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. この「クックブック」の「レシピ」はそれぞれ 1 つのタスクに対応します。 これらのタスクは、CircleCI Orb などの CircleCI リソースに加えて、ユーザー独自のリソースを使用して CircleCI プラットフォームで実行できます。
 
-### What are CircleCI orbs?
-{: #what-are-circleci-orbs }
+### CircleCI Orb とは
+現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にて確認してください。
 {:.no_toc}
 
-CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orbs enable you to share, standardize, and simplify configurations across your projects. You may also want to use orbs as a reference for configuration best practices.
+CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orb を使用すると、複数のプロジェクトで構成を共有、標準化、簡略化することができます。 構成のベスト プラクティスの参考として Orb を使用することも可能です。
 
-Refer to the [CircleCI Orbs Registry](https://circleci.com/developer/orbs) for the complete list of available orbs.
+この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
 
-To use an existing orb in your 2.1 [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/#orbs-requires-version-21) file, invoke it with the `orbs` key. The following example invokes the [`hello-build` orb](https://circleci.com/developer/orbs/orb/circleci/hello-build) in the `circleci` namespace.
+既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 以下の例では、`circleci` 名前空間で [`hello-build` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/hello-build) を呼び出します。
 
 ```yaml
 version: 2.1
 
 orbs:
-  hello: circleci/hello-build@x.y.z
+  hello: circleci/hello-build@0.0.5
 
 workflows:
   "Hello Workflow":
@@ -44,25 +44,25 @@ workflows:
 
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
-## Configure your environment for CircleCi pipelines and orbs
-{: #configure-your-environment-for-circleci-pipelines-and-orbs }
+## CircleCI プラットフォームおよび Orb を使用するための環境構成
+3) 既存のワークフローやジョブで Orb エレメントを呼び出します (`aws-ecs elements` など)。
 {:.no_toc}
 
 Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
 
-* In order to use pipelines features and orbs you must use `version 2.1` config.
+* `GCLOUD_SERVICE_KEY` (必須)
 * We have indicated where you need to specify a [docker image for your job]({{ site.baseurl }}/2.0/optimizations/#docker-image-choice) with `<docker-image-name-tag>`.
 * If you wish to remain using `version 2.0` config, or are using a self-hosted installation of CircleCI Server, these recipes are still relevant because you can view the expanded orb source within the [Orbs Registry](https://circleci.com/developer/orbs) to see how the individual jobs and commands are built.
 * In the examples on this page that use orbs, you will notice that the orbs are versioned with tags, for example, `aws-s3: circleci/aws-s3@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 * Any items that appear within `< >` should be replaced with your own parameters.
 
-## Deploy changes to Amazon ECS
+## ソフトウェアの変更を Amazon ECS にデプロイする
 {: #deploy-changes-to-amazon-ecs }
 
-Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することで、独自のコンテナ オーケストレーション ソフトウェアをインストール・構成せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 This recipe shows you how to quickly deploy software changes to Amazon ECS using CircleCI orbs, but if you would like more detailed information about the how Amazon ECS service works, and its underlying components and architecture, please refer to the [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) documentation.
+Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することで、独自のコンテナ オーケストレーション ソフトウェアをインストール・構成せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このセクションでは、CircleCI Orb を使用してソフトウェアの変更を Amazon ECS サービスにすばやく簡単にデプロイする方法を取り上げますが、Amazon ECS サービスの機能や基本的なコンポーネントとアーキテクチャについての詳細情報を確認したい場合は、[Amazon ECS のドキュメント](https://https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)を参照してください。
 
-### Setting environment variables
-{: #setting-environment-variables }
+### 構成レシピ
+環境変数を設定する
 以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 * `AWS_ECR_ACCOUNT_URL`
@@ -70,66 +70,114 @@ Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ �
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
+上の例では、2 つの Orb (`aws-cli: circleci/aws-cli@0.1.4` と `aws-ecs: circleci/aws-ecs@0.0.3`) をインスタンス化し、いくつかの連続したステップを実行して、Amazon CLI をインストール・構成してから、Amazon ECS サービスを更新しています。
 
-**Note:** the `CIRCLE_SHA1` variable used in this example is built-in, so it is always available.
+**メモ:** {% include snippets/enable-pipelines.md %}
 
-### Build, push and deploy a service update
+### 前提条件
 {: #build-push-and-deploy-a-service-update }
 
-To configure an [AWS service update](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/update-service.html) to deploy a newly built image from AWS ECR, you can use orbs to keep your configuration as simple as possible: the `aws-ecr` orb to build and push an updated image to ECR, and the `aws-ecs` orb to deploy you service update.
+CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)を参照してください。
 
-The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
+CircleCI Orb を使用して、AWS CLI を更新せずに Amazon ECS サービスを更新するには、ECS サービスの更新方法を示す以下の例を参照してください。
 
 ```yml
-version: 2.1 # 2.1 config required to use orbs
+aws-ecs: circleci/aws-ecs@0.0.10
+```
 
+Google Kubernetes Engine (GKE) にソフトウェアの変更をデプロイする前に以下の要件を満たしている必要があります。
+
+### Amazon ECS サービスを更新する
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
+
+Amazon ECS サービスの更新を検証する To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
+
+```yaml
+version: 2.1
 orbs:
-  aws-ecr: circleci/aws-ecr@x.y.z # invoke the AWS ECR orb
-  aws-ecs: circleci/aws-ecs@x.y.z # invoke the AWS ECS orb
-
+  aws-ecr: circleci/aws-ecr@0.0.4
+  aws-ecs: circleci/aws-ecs@0.0.3
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image: # orb built-in job
+      - aws-ecr/build_and_push_image:
+          account-url: '${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com'
           repo: '${MY_APP_PREFIX}'
+          region: '${AWS_REGION}'
           tag: '${CIRCLE_SHA1}'
-      - aws-ecs/deploy-service-update: # orb built-in job
+      - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-and-push-image
+            - aws-ecr/build_and_push_image
           family: '${MY_APP_PREFIX}-service'
           cluster-name: '${MY_APP_PREFIX}-cluster'
           container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=${CIRCLE_SHA1}'
 ```
 
-For a full list of usage options and orb elements see the [AWS-ECS orb page](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) in the CircleCI Orbs Registry.
+この例は、Orb を使用して AWS CLI をインストール・構成し、タスク定義を取得してから、このリビジョンがデプロイされたかどうかを検証する方法を示しています。 イメージを構成して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws-ecr-と-aws-ecs-の-orb-のサンプル)を参照してください。
 
-### Verify the AWS ECS service update
-{: #verify-the-aws-ecs-service-update }
+Docker イメージを GKE クラスタにロールアウトしながら、これらのアクションを実行するコードの例を以下に示します。
 
-Once you have updated the Amazon ECS service, you can verify the update was correctly applied. To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
+## ソフトウェアの変更を Google Kubernetes Engine (GKE) にデプロイする
+`gcloud` のインストール (必要な場合) および初期化と、Docker イメージの更新を完了したら、この更新したイメージを後から使用できるように GKE クラスタにパブリッシュおよびロールアウトできます。
+
+Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化して、コードやアプリケーションの更新を顧客にすばやく簡単にデプロイできます。 更新の配信に長い時間はかかりません。 CircleCI は、GKE 固有の CircleCI Orb を開発すると共に、GKE のテクノロジーを活用して、特定のジョブで GKE を操作できるようにしました。 GKE を使用する前に、[Google Kubernetes Engine のドキュメント](https://cloud.google.com/kubernetes-engine/docs/)をご一読ください。
+
+### 前提条件
+CircleCI が開発した Kubernetes Orb は、Amazon Elastic Container Service (ECS) と組み合わせて以下のタスクに使用できます。
+以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
+
+- EKS クラスタの作成
+- `GOOGLE_PROJECT_ID`
+- `GOOGLE_COMPUTE_ZONE`
+
+Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
+
+### GKE アクションを管理する
+以下のステップを実行して、CircleCI と Orb を使用できるように環境を構成します。
+Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
 ```yaml
 version: 2.1
-
 orbs:
-  aws-cli: circleci/aws-cli@x.y.z
-  aws-ecs: circleci/aws-ecs@x.y.z
+  aws-cli: circleci/aws-cli@0.1.4
+  aws-ecs: circleci/aws-ecs@0.0.3
+jobs:
+  update-tag:
+    docker:
+      - image: 'circleci/python:3.7.1'
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: $AWS_ACCESS_KEY_ID
+          aws-region: $AWS_REGION
+      - aws-ecs/update-service:
+          family: '${MY_APP_PREFIX}-service'
+          cluster-name: '${MY_APP_PREFIX}-cluster'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}-service,tag=stable'
+workflows:
+  deploy:
+    jobs:
+      - update-tag
+```
 
+To delete a cluster, all you need is:
+
+```yaml
+version: 2.1
+orbs:
+  aws-cli: circleci/aws-cli@0.1.4
+  aws-ecs: circleci/aws-ecs@0.0.3
 jobs:
   verify-deployment:
     docker:
-      - image: <docker-image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: 'circleci/python:3.7.1'
     steps:
       - aws-cli/install
       - aws-cli/configure:
           aws-access-key-id: $AWS_ACCESS_KEY_ID
           aws-region: $AWS_REGION
       - run:
-          name: Get last task definition
+          name: 最後のタスク定義の取得
           command: >
             TASK_DEFINITION_ARN=$(aws ecs describe-task-definition \
                 --task-definition ${MY_APP_PREFIX}-service \
@@ -147,109 +195,208 @@ workflows:
       - verify-deployment
 ```
 
-This example illustrates how you can use the orb to install and configure the AWS CLI, retrieve the [task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html) that was previously deployed, and then _verify_ the revision has been deployed using the `verify-revision-is-deployed` command from the `AWS-ECS` orb. Refer to the [AWS ECR](https://circleci.com/docs/2.0/deployment-integrations/#aws-ecr--aws-ecs-orb-examples) example orb for more information on how to configure and push an image to Amazon ECS.
+### GKE クラスタにイメージをパブリッシュおよびロールアウトする
+2) {% include snippets/enable-pipelines.md %}
 
-Find more detailed information in the CircleCI Orb Registry for the CircleCI [AWS ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs) and [AWS ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr) orbs.
-
-## Interact with Google Kubernetes Engine (GKE)
-{: #interact-with-google-kubernetes-engine-gke }
-
-The Google Kubernetes Engine (GKE) enables you to automate CI/CD strategies to quickly deploy code and application updates to your customers without requiring significant time to deliver these updates. Using GKE, CircleCI has leveraged this technology, along with development of a GKE-specific CircleCI orb, to enable you to interact with GKE within a specific job. Before working with GKE, you may wish to read Google's technical documentation, which can be found on the [GKE](https://cloud.google.com/kubernetes-engine/docs/) documentation page.
-
-### Set environment variables
-{: #set-environment-variables }
-以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
-
-- `GCLOUD_SERVICE_KEY` (required)
-- `GOOGLE_PROJECT_ID`
-- `GOOGLE_COMPUTE_ZONE`
-
-If you need more information on how to set these environment variables, refer to the [Using Environment Variables](https://circleci.com/docs/2.0/env-vars/) page in the CircleCI documentation.
-
-### Creating and deleting clusters
-{: #creating-and-deleting-clusters }
-Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
+CircleCI GKE Orb を使用して Google Cloud Platform (GCP) にログインし、Docker イメージをビルドおよびパブリッシュして、そのイメージを GKE クラスタにロールアウトする例を示します。 All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/developer/orbs/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
 
 ```yaml
 version: 2.1
-
-orbs:
-  gke: circleci/gcp-gke@x.y.z
-
-workflows:
-  main:
-    jobs:
-      - gke/create-cluster:
-          cluster: gcp-testing
-```
-
-To delete a cluster, all you need is:
-
-```yaml
-version: 2.1
-
-orbs:
-  gke: circleci/gcp-gke@x.y.z
-
-workflows:
-  main:
-    jobs:
-      - gke/delete-cluster:
-          cluster: gcp-testing
-```
-
-### Publishing and rolling out the image to the GKE cluster
-{: #publishing-and-rolling-out-the-image-to-the-gke-cluster }
-
-Using the CircleCI GKE orb makes publishing and rolling out a docker image to your GKE cluster very simple, as shown in the example below. All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/developer/orbs/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
-
-```yaml
-version: 2.1
-
-orbs:
-  gke: circleci/gcp-gke@x.y.z
-
-workflows:
-  my-workflow:
-    jobs:
-      - gke/publish-and-rollout-image:
-          cluster: <my-cluster-name>
-          container: <my-kubernetes-container-name>
-          deployment: <my-kubernetes-deployment-name>
-          image: <my-docker-image-name>
+commands:
+  install:
+    description: "`gcloud` と `kubectl` がまだインストールされていない場合はインストールします"
+    steps:
+      - gcloud/install
+      - k8s/install
+  init:
+    description: "`gcloud` CLI を初期化します"
+    steps:
+      - gcloud/initialize
+  rollout-image:
+    description: "デプロイの Docker イメージを更新します"
+    parameters:
+      deployment:
+        description: "Kubernetes デプロイ名"
+        type: string
+      container:
+        description: "Kubernetes コンテナ名"
+        type: string
+      image:
+        description: Docker イメージの名前
+        type: string
+    steps:
+      - run: |
+          gcloud container clusters get-credentials <<parameters.deployment>>
+          kubectl set image deployment <<parameters.deployment>> <<parameters.container>>=<<parameters.image>>
 ```
 
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
-{: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
+Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 
-CircleCI has developed a Kubernetes orb you can use in coordination with the Amazon Elastic Kubernetes Service (EKS) to perform the following tasks:
+3) 既存のワークフローやジョブで `aws-eks` エレメントを使用します。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-Before working with the CircleCI AWS-EKS orb, you may wish to review the specifics of the [AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start) orb in the CircleCI Orb Registry page.
+まだ Amazon `eksctl` ツールがインストールされていない場合は、`eksctl` をインストールし、これらのツールを使用して EKS (Amazon EC2 用マネージド Kubernetes サービス) でクラスタを管理できるようにします。
 
 ### EKS クラスタを作成する
-{: #create-an-eks-cluster }
+CircleCI Orb を使用して環境に 'eksctl' ツールをインストールするコードの例を以下に示します。
 
 Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
 
 ```yaml
+orbs: aws-eks: circleci/aws-eks@0.2.1
+```
+
+In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
+
+### Kubernetes デプロイの作成
+**メモ:** curl が有効で、amd64 アーキテクチャが使用されていることを確認してください。
+
+CircleCI AWS-EKS Orb を使用するための要件を満たしていることが確認できたら、以下のコード例を使用して EKS クラスタを作成できます。
+
+* クラスタ内のリソースの更新
+* Authenticator を使用した Kubernetes 構成の更新
+* コンテナ イメージの更新
+
+Kubernetes デプロイを作成するコードの例を示します。
+
+```yaml
 version: 2.1
+description: |
+  EKS 上のリソースのコンテナ イメージを更新します
+executor: << parameters.executor >>
+parameters:
+  aws-profile:
+    default: ''
+    description: |
+      使用する AWS プロファイル。 指定されない場合は、AWS CLI インストールに
+      構成されているデフォルトのプロファイルが使用されます。
+    type: string
+  aws-region:
+    default: ''
+    description: |
+      この EKS クラスタが属する AWS リージョン
+    type: string
+  cluster-name:
+    description: |
+      EKS クラスタの名前
+    type: string
+  container-image-updates:
+    description: |
+      `kubectl set image` によってリソースに適用する
+      コンテナ イメージの更新をリストします。
+      形式は、CONTAINER_NAME_1=CONTAINER_IMAGE_1 ... CONTAINER_NAME_N=CONTAINER_IMAGE_N
+      のようなスペース区切りの名前・値ペアです。
+      例: "busybox=busybox nginx=nginx:1.9.1"
+    type: string
+  executor:
+    default: python3
+    description: |
+      このジョブに使用する Executor
+    type: executor
+  get-rollout-status:
+    default: false
+    description: |
+      ロールアウトのステータスを取得します。
+      これは、`kubectl rollout` サブコマンドの使用が有効な
+      リソース タイプにのみ使用できます。
+    type: boolean
+  namespace:
+    default: ''
+    description: |
+      使用する Kubernetes の名前空間
+    type: string
+  pinned-revision-to-watch:
+    default: ''
+    description: |
+      監視するリビジョンを固定します。
+```
 
+### EKS クラスタを作成する
+クラスタに Helm Chart をインストールする
+
+Helm は、Kubernetes クラスタ上で実行される強力なアプリケーション パッケージ マネージャーです。Helm Chart を使用することで、アプリケーション構造を記述し、シンプルなコマンドによってその構造を管理できます。 Helm では、関連する Kubernetes リソース一式を記述するファイルが、チャートと呼ばれるパッケージ形式に集約されます。 1 つのチャートを使用して、memcached ポッドのような単純なアプリケーションから、HTTP サーバー、データベース、キャッシュなどから成る完全な Web アプリ スタックのような複雑なアプリケーションまで、幅広くデプロイできます。
+
+Kubernetes クラスタに Helm をインストールしたら、以下のコード例を使用して Helm Chart をインストールできます。 Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
+
+```yaml
+version: 2.1
+description:
+要件: curl、amd64 アーキテクチャ
+steps:
+  - run:
+      command: >
+        if which eksctl > /dev/null; then
+          echo "eksctl is already installed"
+          exit 0
+        fi
+
+        mkdir -p eksctl_download
+
+        curl --silent --location --retry 5
+        "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname
+        -s)_amd64.tar.gz" \
+          | tar xz -C eksctl_download
+        chmod +x eksctl_download/eksctl
+
+        SUDO=""
+
+        if [ $(id -u) -ne 0 ] && which sudo > /dev/null ; then
+          SUDO="sudo"
+        fi
+
+        $SUDO mv eksctl_download/eksctl /usr/local/bin/
+
+        rmdir eksctl_download
+      name: eksctl ツールのインストール
+```
+
+## CircleCI ジョブでカスタム Slack 通知を利用する
+CircleCI ジョブでカスタム Slack 通知を利用する
+
+Slack は、リアルタイム コラボレーション アプリケーションです。チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
+
+### Kubernetes デプロイを作成する
+Slack チャンネルに承認待ちを通知する
+
+CircleCI Slack Orb を使用すると、さまざまな通知やメッセージを作成して必要な受信者に配信できます。 その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
+
+```yaml
+version: 2.1
 orbs:
-  aws-eks: circleci/aws-eks@x.y.z
-  kubernetes: circleci/kubernetes@x.y.z
+  slack: circleci/slack@1.0.0
+version: 2.1
+workflows:
+  your-workflow:
+    jobs:
+      - slack/approval-notification:
+          message: Pending approval
+          webhook: webhook
+```
+上記のステップを実行してから、CircleCI Slack Orb (`circleci/slack@1.0.0`) を呼び出すと、ワークフローが開始されて通知が配信されます。
 
+There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
+
+### クラスタに Helm をインストールする
+カスタム メッセージを付けて Slack チャンネルに通知する
+
+CircleCI Slack Orb では、カスタム メッセージを含む通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
+
+カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
+
+```yaml
+version: 2.1
 jobs:
   test-cluster:
     executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
-          Name of the EKS cluster
+          EKS クラスタの名前
         type: string
     steps:
       - kubernetes/install
@@ -258,11 +405,13 @@ jobs:
       - run:
           command: |
             kubectl get services
-          name: Test cluster
-
-
+          name: クラスタのテスト
+orbs:
+aws-eks: circleci/aws-eks@0.1.0
+kubernetes: circleci/kubernetes@0.3.0
+version: 2.1
 workflows:
-  deployment:
+deployment:
     jobs:
       - aws-eks/create-cluster:
           cluster-name: my-eks-demo
@@ -276,33 +425,29 @@ workflows:
             - test-cluster
 ```
 
-In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
+CircleCI Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/heroku)を参照してください。
 
-### Kubernetes デプロイの作成
-{: #create-a-kubernetes-deployment }
+1. メッセージ テキストの `color` を指定します。
+2. メッセージの受信者 (`mentions`) を指定します。
+3. 配信したいテキストを `message` に入力します。
+4. メッセージの `webhook` を指定します。Slack Web フックの作成方法については、[こちらのガイド](https://api.slack.com/incoming-webhooks)を参照してください。
 
-You may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
+### コンテナ イメージを更新する
+ジョブの終了時に成功または失敗のステータス アラートを送信する
 
-* クラスタ内のリソースの更新
-* Authenticator を使用した Kubernetes 構成の更新
-* コンテナ イメージの更新
+ジョブの終了時に受信者にステータス アラートを送信することも可能です。 このステータス アラートの送信は、ジョブの最後のステップにする必要があります。
 
-Kubernetes デプロイを作成するコードの例を示します。
+ジョブの終了時にステータス アラートを送信する例を以下に示します。
 
 ```yaml
 version: 2.1
-
-orbs:
-  aws-eks: circleci/aws-eks@x.y.z
-  kubernetes: circleci/kubernetes@x.y.z
-
 jobs:
   create-deployment:
     executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
-          Name of the EKS cluster
+          EKS クラスタの名前
         type: string
     steps:
       - checkout
@@ -313,7 +458,10 @@ jobs:
           get-rollout-status: true
           resource-file-path: tests/nginx-deployment/deployment.yaml
           resource-name: deployment/nginx-deployment
-
+orbs:
+  aws-eks: circleci/aws-eks@0.1.0
+  kubernetes: circleci/kubernetes@0.3.0
+version: 2.1
 workflows:
   deployment:
     jobs:
@@ -341,152 +489,16 @@ workflows:
             - aws-eks/update-container-image
 ```
 
-### Install a Helm chart in your cluster
-{: #install-a-helm-chart-in-your-cluster }
-
-Helm は、Kubernetes クラスタ上で実行される強力なアプリケーション パッケージ マネージャーです。Helm Chart を使用することで、アプリケーション構造を記述し、シンプルなコマンドによってその構造を管理できます。 Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. 1 つのチャートを使用して、memcached ポッドのような単純なアプリケーションから、HTTP サーバー、データベース、キャッシュなどから成る完全な Web アプリ スタックのような複雑なアプリケーションまで、幅広くデプロイできます。
-
-Using the `aws-eks` orb you can install Helm on your Kubernetes cluster, then install a Helm chart just using the orb's built-in jobs. Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
-
-```yaml
-version: 2.1
-
-orbs:
-  aws-eks: circleci/aws-eks@x.y.z
-
-workflows:
-  deployment:
-    jobs:
-      - aws-eks/create-cluster:
-          cluster-name: my-eks-helm-demo
-      - aws-eks/install-helm-on-cluster:
-          cluster-name: my-eks-helm-demo
-          enable-cluster-wide-admin-access: true
-          requires:
-            - aws-eks/create-cluster
-      - aws-eks/install-helm-chart:
-          chart: stable/grafana
-          cluster-name: my-eks-helm-demo
-          release-name: grafana-release
-          requires:
-            - aws-eks/install-helm-on-cluster
-      - aws-eks/delete-helm-release:
-          cluster-name: my-eks-helm-demo
-          release-name: grafana-release
-          requires:
-            - aws-eks/install-helm-chart
-      - aws-eks/delete-cluster:
-          cluster-name: my-eks-helm-demo
-          requires:
-            - aws-eks/delete-helm-release
-```
-
-## Enabling custom Slack notifications in CircleCI jobs
-{: #enabling-custom-slack-notifications-in-circleci-jobs }
-
-Slack は、リアルタイム コラボレーション アプリケーションです。チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
-
-### Notifying a Slack channel of pending approval
-{: #notifying-a-slack-channel-of-pending-approval }
-
-The [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack) enables you to create different notifications and messages that can be delivered to your desired recipients. その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
-
-```yaml
-version: 2.1
-
-orbs:
-  slack: circleci/slack@x.y.z
-
-workflows:
-  your-workflow:
-    jobs:
-      - slack/approval-notification:
-          message: Pending approval
-          webhook: webhook
-```
-In the above example, note that you first need to invoke the `circleci/slack@x.y.z` orb before running your workflow, which then enables you to send your notification with its associated `message` and `webhook`.
-
-There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
-
-### Notifying a Slack channel with custom messages
-{: #notifying-a-slack-channel-with-custom-messages }
-
-CircleCI Slack Orb では、カスタム メッセージを含む通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
-
-カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
-
-```yaml
-version: 2.1
-
-orbs:
-  slack: circleci/slack@x.y.z
-
-jobs:
-  build:
-    docker:
-      - image: <docker-image-name-tag>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - slack/notify:
-          color: '#42e2f4'
-          mentions: 'USERID1,USERID2,'
-          message: This is a custom message notification
-          webhook: webhook
-
-workflows:
-  your-workflow:
-    jobs:
-      - build
-```
-
-In this example, the Slack orb command `notify` is used, along with the following parameters to create a custom notification:
-
-1. メッセージ テキストの `color` を指定します。
-2. メッセージの受信者 (`mentions`) を指定します。
-3. 配信したいテキストを `message` に入力します。
-4. メッセージの `webhook` を指定します。Slack Web フックの作成方法については、[こちらのガイド](https://api.slack.com/incoming-webhooks)を参照してください。
-
-### Sending a status alert at the end of a job based on success or failure
-{: #sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure }
-
-ジョブの終了時に受信者にステータス アラートを送信することも可能です。 このステータス アラートの送信は、ジョブの最後のステップにする必要があります。
-
-ジョブの終了時にステータス アラートを送信する例を以下に示します。
-
-```yaml
-version: 2.1
-
-orbs:
-  slack: circleci/slack@x.y.z
-
-jobs:
-  build:
-    docker:
-      - image: <docker image>
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - run: exit 0
-      - slack/status:
-          fail_only: 'true'
-          mentions: 'USERID1,USERID2'
-          only_for_branch: your-branch-name
-          webhook: webhook
-```
-
 上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
 
-For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
+この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
 
 ## Selecting a workflow to run using pipeline parameters
 {: #selecting-a-workflow-to-run-using-pipeline-parameters }
 
 You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run.
 
-The following example defaults to running the `build` workflow, but allows control of which other workflow to run using the API:
+Docker イメージをビルドしたら、以下のステップを実行してカスタム通知を作成します。
 
 ```yaml
 version: 2.1
@@ -537,34 +549,52 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
 
 ## Branch-filtering for job steps
-{: #branch-filtering-for-job-steps }
+ジョブの終了時にステータス アラートを送信する例を以下に示します。
 
-Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
+上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
 
 The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
 
 ```yaml
 version: 2.1
-
 jobs:
-  my-job:
-    docker:
-      - image: cimg/base:stable
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - when:
-          condition:
-            equal: [ master, << pipeline.git.branch >> ]
-          steps:
-            - run: echo "I am on master"
-
-workflows:
-  my-workflow:
-    jobs:
-      - my-job
+  publish-and-rollout-image:
+    description: "新しい Docker イメージでクラスタを更新します"
+    machine: true
+    parameters:
+      deployment:
+        description: "Kubernetes デプロイ名"
+        type: string
+      container:
+        description: "Kubernetes コンテナ名"
+        type: string
+      gcloud-service-key:
+        description: gcloud サービス キー
+        type: env_var_name
+        default: GCLOUD_SERVICE_KEY
+      google-project-id:
+        description: gcloud CLI から接続する Google プロジェクト ID
+        type: env_var_name
+        default: GOOGLE_PROJECT_ID
+      google-compute-zone:
+        description: gcloud CLI から接続する Google コンピュート ゾーン
+        type: env_var_name
+        default: GOOGLE_COMPUTE_ZONE
+      registry-url:
+        description: ['', us, eu, asia].gcr.io からの GCR レジストリ URL
+        type: string
+        default: gcr.io
+      image:
+        description: Docker イメージの名前
+        type: string
+      tag:
+        description: Docker イメージ タグ
+        type: string
+        default: "latest"
+      path-to-dockerfile:
+        description: イメージのビルド時に使用する Dockerfile の相対パス
+        type: string
+        default: "."
 ```
 
 ## ダイナミック コンフィグ
@@ -749,57 +779,43 @@ In the following example the `test` job is run across Linux, Windows and macOS e
 
 ```yaml
 version: 2.1
-
-orbs:
-  node: circleci/node@4.0.0
-  win: circleci/windows@2.2.0
-
-executors:
-  linux: # linux executor using the node base image
-    docker:
-      - image: cimg/node
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  windows: win/default # windows executor - uses the default executor from the windows orb
-  macos: # macos executor using xcode 11.6
-    macos:
-      xcode: 11.6
-
 jobs:
-  test:
-    parameters:
-      os:
-        type: executor
-      node-version:
-        type: string
-    executor: << parameters.os >>
+  build:
+    docker:
+      - image: <docker image>
     steps:
-      - checkout
-      - node/install:
-          node-version: << parameters.node-version >>
-          install-yarn: true
-      - run: yarn test
-
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'USERID1,USERID2,'
+          message: This is a custom message notification
+          webhook: webhook
+orbs:
+  slack: circleci/slack@1.0.0
+version: 2.1
 workflows:
-  all-tests:
+  your-workflow:
     jobs:
-      - test:
-          matrix:
-            parameters:
-              os: [linux, windows, macos]
-              node-version: ["13.13.0", "14.0.0"]
+      - build
 ```
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
 ```
-    - test-13.13.0-linux
-    - test-14.0.0-linux
-    - test-13.13.0-windows
-    - test-14.0.0-windows
-    - test-13.13.0-macos
-    - test-14.0.0-macos
+    version: 2.1
+jobs:
+  build:
+    docker:
+      - image: <docker image>
+    steps:
+      - run: exit 0
+      - slack/status:
+          fail_only: 'true'
+          mentions: 'USERID1,USERID2'
+          only_for_branch: only_for_branch
+          webhook: webhook
+orbs:
+  slack: circleci/slack@1.0.0
+version: 2.1
 ```
 
 For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).
