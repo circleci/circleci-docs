@@ -9,30 +9,30 @@ version:
 
 ここでは、CircleCI を使用して、Amazon Elastic Container Registry (ECR) から Amazon Elastic Container Service (ECS) にデプロイする方法を説明します。
 
-* TOC
+* 目次
 {:toc}
 
 ## 概要
-{: #overview }
+このガイドは、次の 2 段階に分かれています。
 
-This guide has two phases:
+また、アプリケーションの [CircleCI でのビルド](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}についても取り上げます。
 
 - Docker イメージをビルドして AWS ECR にプッシュする
 - 新しい Docker イメージを既存の AWS ECS サービスにデプロイする
 
-You can also find the application [building on CircleCI](https://circleci.com/gh/CircleCI-Public/circleci-demo-aws-ecs-ecr){:rel="nofollow"}.
+**メモ:** このプロジェクトには、簡単な [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile) が含まれています。
 
-**Note:** This project includes a simple [Dockerfile](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/blob/master/Dockerfile).
+詳細については、「[カスタム イメージの手動作成]({{ site.baseurl }}/ja/2.0/custom-images/#カスタム-イメージの手動作成)」を参照してください。
 
 See [Creating a Custom Image Manually]({{ site.baseurl }}/2.0/custom-images/#creating-a-custom-image-manually) for more information.
 
 ## 前提条件
 {: #prerequisites }
 
-### Use Terraform to create AWS resources
-{: #use-terraform-to-create-aws-resources }
+### Terraform を使用して AWS リソースを作成する
+CircleCI アプリケーションで、以下の[プロジェクト環境変数]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)を設定します。
 
-Several AWS resources are required to build and deploy the application in this guide. CircleCI provides [several Terraform scripts](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup) to create these resources. To use these scripts, follow the steps below.
+このガイドに沿ってアプリケーションをビルドしてデプロイするには、いくつかの AWS リソースが必要です。 CircleCI では、これらのリソースを作成するために[いくつかの Terraform スクリプト](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/master/terraform_setup)を提供しています。 これらのスクリプトを使用するには、以下の手順を行います。
 
 1. [AWS アカウントを作成します](https://aws.amazon.com/jp/premiumsupport/knowledge-center/create-and-activate-aws-account/)。
 2. [Terraform をインストールします](https://www.terraform.io/)。
@@ -47,76 +47,80 @@ terraform plan  # プランをレビューします
 terraform apply  # プランを適用して AWS リソースを作成します
 ```
 
-**Note:** You can destroy most AWS resources by running `terraform destroy`. If any resources remain, check the [AWS Management Console](https://console.aws.amazon.com/), particularly the **ECS**, **CloudFormation** and **VPC** pages. If `apply` fails, check that the user has permissions for EC2, Elastic Load Balancing, and IAM services.
+**メモ:** ほとんどの AWS リソースは、`terraform destroy` を実行することで破棄できます。 リソースが残っている場合は、[AWS マネジメント コンソール](https://console.aws.amazon.com/)、特に **ECS**、**CloudFormation**、**VPC** のページを確認してください。 `apply` が失敗した場合は、ユーザーが EC2、Elastic Load Balancing、IAM のサービスの権限を持っているかどうかを確認してください。
 
-### Configure CircleCI environment variables
+### CircleCI 環境変数を設定する
 {: #configure-circleci-environment-variables }
 
-In the CircleCI application, set the following [project environment variables]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+**メモ:** このセクションで説明するサンプル プロジェクトは、以下で提供されている CircleCI の AWS-ECR Orb と AWS-ECS Orb を使用します。
 
-| Variable                   | Description                                                                                                                                        |
-| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| AWS_ACCESS_KEY_ID        | Security credentials for AWS.                                                                                                                      |
-| AWS_SECRET_ACCESS_KEY    | Security credentials for AWS.                                                                                                                      |
-| AWS_DEFAULT_REGION       | Used by the AWS CLI.                                                                                                                               |
-| AWS_ACCOUNT_ID           | Required for deployment. [Find your AWS Account ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId). |
-| AWS_RESOURCE_NAME_PREFIX | Prefix for some required AWS resources. Should correspond to the value of `aws_resource_prefix` in `terraform_setup/terraform.tfvars`.             |
-| AWS_ECR_ACCOUNT_URL      | Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com                                           |
+| 変数                         | 説明                                                                                                                                           |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| AWS_ACCESS_KEY_ID        | AWS のセキュリティ認証情報です。                                                                                                                           |
+| AWS_SECRET_ACCESS_KEY    | AWS のセキュリティ認証情報です。                                                                                                                           |
+| AWS_DEFAULT_REGION       | AWS CLI によって使用されます。                                                                                                                          |
+| AWS_ACCOUNT_ID           | デプロイに必要です。 [AWS アカウント ID はこちらで確認してください](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/console_account-alias.html#FindingYourAWSId)。 |
+| AWS_RESOURCE_NAME_PREFIX | 必須の AWS リソースのプレフィックスです。 `terraform_setup/terraform.tfvars` の `aws_resource_prefix` の値に対応する必要があります。                                           |
+| AWS_ECR_ACCOUNT_URL      | Amazon ECR account URL that maps to an AWS account, e.g. {awsAccountNum}.dkr.ecr.us-west-2.amazonaws.com                                     |
 {:class="table table-striped"}
 
-## Configuration walkthrough
-{: #configuration-walkthrough }
+## 設定の詳細説明
+**メモ:** `deploy-service-update` ジョブは、`requires` キーがあるため、`build_and_push_image` に依存します。
 
-Every CircleCI project requires a configuration file called [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/). Follow the steps below to create a complete `config.yml` file.
+すべての CircleCI プロジェクトには、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) という設定ファイルが必要です。 以下の手順に従って、完全な `config.yml` ファイルを作成してください。
 
-**Note**: The sample project described in this section makes use of the CircleCI AWS-ECR and AWS-ECS orbs, which can be found here:
+詳細については、[ワークフローを使用したジョブのスケジュール]({{ site.baseurl }}/ja/2.0/workflows/)について参照してください。
  - [AWS-ECR](https://circleci.com/developer/orbs/orb/circleci/aws-ecr)
  - [AWS-ECS](https://circleci.com/developer/orbs/orb/circleci/aws-ecs)
 
 Notice the orbs are versioned with tags, for example, `aws-ecr: circleci/aws-ecr@x.y.z`. If you copy paste any examples you will need to edit `x.y.z` to specify a version. You can find the available versions listed on the individual orb pages in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
 
-### Build and push the Docker image to AWS ECR
-{: #build-and-push-the-docker-image-to-aws-ecr }
+### Docker イメージをビルドして AWS ECR にプッシュする
+`build_and_push_image` ジョブは、デフォルトの場所 (チェック アウト ディレクトリのルート) に Dockerfile から Docker イメージをビルドし、それを指定された ECR リポジトリにプッシュします。
 
 The `build-and-push-image` job builds a Docker image from a Dockerfile in the default location (i.e. root of the checkout directory) and pushes it to the specified ECR repository.
 
 ```yaml
 version: 2.1
-
 orbs:
-  aws-ecr: circleci/aws-ecr@x.y.z
-  aws-ecs: circleci/aws-ecs@0x.y.z
-
+  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecs: circleci/aws-ecs@0.0.10
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
+      - aws-ecr/build_and_push_image:
+          account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}
+          .amazonaws.com"
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          region: ${AWS_DEFAULT_REGION}
           tag: "${CIRCLE_SHA1}"
+      - ...
 ```
 
 ### 新しい Docker イメージを既存の AWS ECS サービスにデプロイする
 {: #deploy-the-new-docker-image-to-an-existing-aws-ecs-service }
-The `deploy-service-update` job of the aws-ecs orb creates a new task definition that is based on the current task definition, but with the new Docker image specified in the task definition's container definitions, and deploys the new task definition to the specified ECS service. If you would like more information about the CircleCI AWS-ECS orb, go to: https://circleci.com/developer/orbs/orb/circleci/aws-ecs
+aws-ecs Orb の `deploy-service-update` ジョブは、現在のタスク定義に基づきつつ、タスク定義のコンテナ定義で指定された新しい Docker イメージを使用して新しいタスク定義を作成し、この新しいタスク定義を指定された ECS サービスにデプロイします。 CircleCI AWS-ECS Orb の詳細については、https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs を参照してください。
 
-**Note** The `deploy-service-update` job depends on `build-and-push-image` because of the `requires` key.
+ワークフローを使用して、`build_and_push_image` ジョブと `deploy-service-update` ジョブをリンクします。
 
 ```yaml
 version: 2.1
-
 orbs:
-  aws-ecr: circleci/aws-ecr@x.y.z
-  aws-ecs: circleci/aws-ecs@0x.y.z
-
+  aws-ecr: circleci/aws-ecr@0.0.2
+  aws-ecs: circleci/aws-ecs@0.0.8
 workflows:
   build-and-deploy:
     jobs:
-      - aws-ecr/build-and-push-image:
+      - aws-ecr/build_and_push_image:
+          account-url: "${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}
+          .amazonaws.com"
           repo: "${AWS_RESOURCE_NAME_PREFIX}"
+          region: ${AWS_DEFAULT_REGION}
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-            - aws-ecr/build-and-push-image # only run this job once aws-ecr/build-and-push-image has completed
+            - aws-ecr/build_and_push_image
+          aws-region: ${AWS_DEFAULT_REGION}
           family: "${AWS_RESOURCE_NAME_PREFIX}-service"
           cluster-name: "${AWS_RESOURCE_NAME_PREFIX}-cluster"
           container-image-name-updates: "container=${AWS_RESOURCE_NAME_PREFIX}-service,tag=${CIRCLE_SHA1}"
@@ -124,7 +128,7 @@ workflows:
 
 Note the use of Workflows to define job run order/concurrency. See the [Using Workflows to Schedule Jobs]({{ site.baseurl }}/2.0/workflows/) for more information.
 
-## See also
+## 完全な設定ファイル
 {: #see-also }
 - Docker イメージをビルドおよびテストして ECR にプッシュした後で、`aws-ecs` Orb を使用して更新をデプロイする例を参照するには、[AWS-ECS-ECR Orbs](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/orbs) のデモ ページにアクセスしてください。
 - CircleCI Orbs を使用しない例を参照するには、[Non-Orbs AWS ECR-ECS](https://github.com/CircleCI-Public/circleci-demo-aws-ecs-ecr/tree/without_orbs) のデモ ページにアクセスしてください。
