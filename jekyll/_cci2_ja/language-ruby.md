@@ -13,32 +13,32 @@ version:
 
 このガイドでは、CircleCI で Ruby on Rails アプリケーションをビルドする方法について説明します。
 
-* TOC
+* 目次
 {:toc}
 
 ## 概要
 {: #overview }
 {:.no_toc}
 
-If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
 
-CircleCI maintains a sample Ruby on Rails project on [GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) which you can see building on [CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)
+このアプリケーションでは、最新の安定した Rails バージョン 5.1 (`rspec-rails`)、[RspecJunitFormatter](https://github.com/sj26/rspec_junit_formatter)、および PostgreSQL データベースを使用しています。
 
-The application uses Rails version 6.1, `rspec-rails`, and [RspecJunitFormatter][rspec-junit-formatter] with PostgreSQL as the database.
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{ site.baseurl}}/ja/2.0/circleci-images/)の 1 つを使用しています。
 
 
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
-This application build also uses one of the pre-built [CircleCI Docker Images]({{site.baseurl}}/2.0/circleci-images/).
+セカンダリ「サービス」コンテナとして使用するデータベース イメージも Docker Hub の `circleci` ディレクトリで提供されています。
 
-Consider using a CircleCI pre-built image that comes pre-installed with tools that are useful in a CI environment. You can select the Ruby version you need from [Docker Hub](https://hub.docker.com/r/cimg/ruby).
+CircleCI のビルド済みイメージを使用することを検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
-Database images for use as a secondary 'service' container are also available on Docker Hub in the `circleci` directory.
+`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
 
 ---
 
-## Sample configuration
+## 設定ファイルの例
 {: #sample-configuration }
 
 The following code block is commented to describe each part of the configuration for the sample application.
@@ -77,7 +77,19 @@ jobs:
     parallelism: 3
     # here we set TWO docker images.
     docker:
-      - image: cimg/ruby:2.7-node # this is our primary docker image, where step commands run.
+      - image: circleci/ruby:2.4.2-jessie-node  # 言語イメージ
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: circleci-demo-ruby
+          RAILS_ENV: test
+      - image: circleci/postgres:9.5-alpine  # サービス イメージ
+        environment:
+          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_DB: rails_blog
+          POSTGRES_PASSWORD: ""
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -106,16 +118,15 @@ jobs:
           cache-key: "yarn.lock"
       # Here we make sure that the secondary container boots
       # up before we run operations on the database.
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
-      # Run rspec in parallel
-      - ruby/rspec-test
+      # データベースをセットアップします
 
-# We use workflows to orchestrate the jobs that we declared above.
+  - run:
+      name: DB の待機
+      command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+  - run:
+      name: データベースのセットアップ
+      command: bin/rails db:schema:load --trace
 workflows:
   version: 2
   build_and_test:     # The name of our workflow is "build_and_test"
@@ -129,25 +140,22 @@ workflows:
 {% endraw %}
 
 
-## Build the demo Ruby on Rails project yourself
-{: #build-the-demo-ruby-on-rails-project-yourself }
+## Ruby on Rails のデモ プロジェクトのビルド
+他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
 
-A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
-1. [Fork the project][fork-demo-project] on GitHub to your own account.
+1. お使いのアカウントに、GitHub 上の[プロジェクトをフォーク](https://github.com/CircleCI-Public/circleci-demo-ruby-rails/fork)します。
 2. CircleCI で ［[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-## See also
-{: #see-also }
+## 設定ファイルの詳細
+この例では、以下の 2 つの [CircleCI コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#イメージのタイプ)が使用されています。
 {:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+CircleCI がコードベースで動作するように、最初に `checkout` を置きます。
 
-This app illustrates the simplest possible setup for a Ruby on Rails web app. Real-world projects tend to be more complex, so you may find these more detailed examples of real-world apps useful as you configure your own projects:
+このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな構成例であり、実際のプロジェクトはこれよりも複雑です。 このため、独自のプロジェクトを構成する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 
-* [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml), an open-source discussion platform.
-* [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
-
-[fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/tree/2.1-orbs-config
-[rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
+* [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml): オープンソースのディスカッション プラットフォーム
+* [CircleCI でビルドされた Ruby on Rails デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"}
