@@ -11,72 +11,97 @@ version:
   - Server v2.x
 ---
 
-ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
+ここでは、Node.js サンプル アプリケーションの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルを作成する方法を詳細に説明します。
 
-* TOC
+* 目次
 {:toc}
 
-## Quickstart: demo JavaScript Node.js reference project
-{: #quickstart-demo-javascript-nodejs-reference-project }
+## クイックスタート: デモ用の JavaScript Node.js リファレンス プロジェクト
+CircleCI 2.1 で Express.js アプリケーションをビルドする方法を示すために、JavaScript Node.js リファレンス プロジェクトが用意されています。
 
 We maintain a reference JavaScript project to show how to build a React.js app on CircleCI with `version: 2.1` configuration:
 
 - [GitHub 上の JavaScript Node デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app)
-- [Demo JavaScript Node Project building on CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-javascript-react-app){:rel="nofollow"}
+- [CircleCI でビルドされた JavaScript Node デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}
 
-In the project you will find a CircleCI configuration file [`.circleci/config.yml`](https://github.com/CircleCI-Public/circleci-demo-javascript-react-app/blob/master/.circleci/config.yml). This file shows best practice for using version 2.1 config with Node projects.
+このプロジェクトには、CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。 このファイルは、Node プロジェクトで CircleCI 2.1 を使用するためのベスト プラクティスを示しています。
 
-## Build the demo JavaScript Node project yourself
-{: #build-the-demo-javascript-node-project-yourself }
+## CircleCI のビルド済み Docker イメージ
+セカンダリ「サービス」コンテナとして使用するデータベース イメージも提供されています。
 
-A good way to start using CircleCI is to build a project yourself. Here's how to build the demo project with your own account:
+CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
-1. Fork the project on GitHub to your own account.
-2. Go to the Add Projects page in the CircleCI application and click the Set Up Project button next to the project you just forked.
+1. GitHub 上のプロジェクトをお使いのアカウントにフォークします。
+2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
 
-## Sample configuration
-{: #sample-configuration }
+## JavaScript Node のデモ プロジェクトのビルド
+以下に、デモ プロジェクトのコメント付き `.circleci/config.yml` ファイルを示します。
 
 Below is the `.circleci/config.yml` file in the demo project.
 
 {% raw %}
 
 ```yaml
-orbs: # declare what orbs we are going to use
-  node: circleci/node@2.0.2 # the node orb provides common node-related configuration
+version: 2.1 # CircleCI 2.1 を使用します
+jobs: # 一連のステップ
+  build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
+    working_directory: ~/mern-starter # ステップが実行されるディレクトリ
+    docker: # Docker でステップを実行します
 
-version: 2.1 # using 2.1 provides access to orbs and other features
-
-workflows:
-  matrix-tests:
-    jobs:
-      - node/test:
-          version: 13.11.0
-      - node/test:
-          version: 12.16.0
-      - node/test:
-          version: 10.19.0
+      - image: circleci/node:10.16.3 # このイメージをすべての `steps` が実行されるプライマリ コンテナとして使用します
+      - image: mongo:4.2.0 # このイメージをセカンダリ サービス コンテナとして使用します
+    steps: # 実行可能コマンドの集合
+      - checkout # ソース コードを作業ディレクトリにチェックアウトする特別なステップ
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@latest'
+      - restore_cache: # 依存関係キャッシュを復元する特別なステップ
+          # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - save_cache: # 依存関係キャッシュを保存する特別なステップ
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run: # テストを実行します
+          name: test
+          command: npm test
+      - run: # カバレッジ レポートを実行します
+          name: code-coverage
+          command: './node_modules/.bin/nyc report --reporter=text-lcov'
+      - store_artifacts: # テスト結果をアーティファクトとして保存する特別なステップ
+          # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト サマリーをアップロードします 
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するため
+          path: coverage
+          prefix: coverage
+      - store_test_results: # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するため
+          path: test-results.xml
+      # デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
 ```
 {% endraw %}
 
 
-## Config walkthrough
+## 設定ファイルの例
 {: #config-walkthrough }
 
 Using the [2.1 Node orb](https://circleci.com/developer/orbs/orb/circleci/node#jobs-test) sets an executor from CircleCI's highly cached convenience images built for CI and allows you to set the version of NodeJS to use. Any available tag in the [docker image list](https://hub.docker.com/r/cimg/node/tags) can be used.
 
-The Node Orb `test` command will test your code with a one-line command, with optional parameters.
+ジョブの各ステップは [Executor]({{ site.baseurl }}/ja/2.0/executor-types/) という仮想環境で実行されます。
 
 Matrix jobs are a simple way to test your Node app on various node environments. For a more in depth example of how the Node orb utilizes matrix jobs, see our blog on [matrix jobs](https://circleci.com/blog/circleci-matrix-jobs/). See [documentation on pipeline parameters](https://circleci.com/docs/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to learn how to set a node version via Pipeline parameters.
 
-Success! You just set up a Node.js app to build on CircleCI with version: 2.1 configuration. Check out [our project’s pipeline page](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-javascript-react-app) to see how this looks when building on CircleCI.
+完了です。 これで Node.js アプリケーション用に CircleCI 2.1 をセットアップできました。 CircleCI でビルドを行うとどのように表示されるかについては、プロジェクトの[ジョブ ページ](https://circleci.com/gh/CircleCI-Public/circleci-demo-javascript-express){:rel="nofollow"}を参照してください。
 
 ## See also
 {: #see-also }
 {:.no_toc}
 
-- デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/2.0/deployment-integrations/)」を参照してください。
-- その他のパブリック JavaScript プロジェクトの構成例については、「[CircleCI 設定ファイルのサンプル]({{ site.baseurl }}/2.0/examples/)」を参照してください。
-- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した構成を例に詳しく解説しています。
+- デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+- その他のパブリック JavaScript プロジェクトの構成例については、「[CircleCI 設定ファイルのサンプル]({{ site.baseurl }}/ja/2.0/examples/)」を参照してください。
+- CircleCI 2.0 を初めて使用する場合は、[プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)に目を通すことをお勧めします。 ここでは、Python と Flask を使用した構成を例に詳しく解説しています。
