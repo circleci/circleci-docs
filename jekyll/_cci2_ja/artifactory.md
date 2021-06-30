@@ -11,37 +11,35 @@ version:
 
 CircleCI では Artifactory への直接アップロードがサポートされています。
 
-* TOC
+* 目次
 {:toc}
 
 ## デプロイ
-{: #deploy }
+Artifactory の [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API) を活用する方法については、Artifactory からわかりやすいドキュメントが提供されています。
 
-Artifactory has great documentation explaining how to leverage their [REST API](https://www.jfrog.com/confluence/display/RTF/Artifactory+REST+API).
+ここでは、いくつかのサンプル プロジェクトを取り上げながら、CircleCI と Artifactory を組み合わせて最大限に活用する方法について説明します。
 
 We will use this space to highlight some sample projects showing how to best use CircleCI and Artifactory together.
 
-Ensure that you have created your repository before starting this example, otherwise CircleCI won't have a place to store your dependencies.
+Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
 
-## Artifactory plugins
-{: #artifactory-plugins }
+## Artifactory プラグイン
+JFrog CLI を使用する場合は、`.circleci/config.yml` に以下のコードを追加して JFrog CLI をインストールできます。
 Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
 
 - [Maven でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
 - [Gradle でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin)
 
 ## JFrog CLI
-{: #jfrog-cli }
-If you want to use the [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI), you can install it by adding the following to your `.circleci/config.yml` :
+JAR ファイルをアップロードする場合には、以下の例を使用します。
+WAR ファイルをアップロードする場合には、以下の例を使用します。
 
 ```
-- run:
-    name: jFrog CLI のインストール
-    command: curl -fL https://getcli.jfrog.io | sh
+- run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
 
 ```
 
-Now we need to configure JFrog to use our credentials securely. We configure the client to use our `$ARTIFACTORY_URL`, along with our `$ARTIFACTORY_USER` and `$ARTIFACTORY_APIKEY`. These can be entered under `Project Settings->Environment Variables`. Configure the CLI to use these settings:
+次に、自分の資格情報を安全に使用するために JFrog を設定する必要があります。 自分の `$ARTIFACTORY_URL` を自分の `$ARTIFACTORY_USER` および `$ARTIFACTORY_APIKEY` と共に使用するようにクライアントを設定します。 これらは、`Project Settings->Environment Variables` に入力できます。 Configure the CLI to use these settings:
 
 ```
 - run: ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
@@ -59,7 +57,7 @@ If you would like to upload WAR files use the following example:
 - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
-The full `.circleci/config.yml` file would look something like the following:
+.circleci/config.yml ファイル全体は、以下のようになります。
 
 ```yaml
 version: 2
@@ -75,25 +73,25 @@ jobs:
       - checkout
       - run: mvn dependency:go-offline
       - run:
-          name: maven build
+          name: maven ビルド
           command: |
             mvn clean install
       - run:
-          name: Install JFrog CLI
+          name: jFrog CLI のインストール
           command: curl -fL https://getcli.jfrog.io | sh
       - run:
-          name: Push to Artifactory
+          name: Artifactory へのプッシュ
           command: |
-            ./jfrog config add <named_server_config> --artifactory-url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
+            ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
             ./jfrog rt u <path/to/artifact> <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM
-            ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # collects all environment variables on the agent
-            ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # attaches ^^ to the build in artifactory
+            ./jfrog rt bce <name_you_give_to_build> $CIRCLE_BUILD_NUM  # エージェント上のすべての環境変数を収集します
+            ./jfrog rt bp <name_you_give_to_build> $CIRCLE_BUILD_NUM  # Artifactory 内のビルドに ^^ を付加します
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 
 {:.no_toc}
 
-[Storing and Accessing Artifacts]({{ site.baseurl }}/2.0/artifacts/)
+[アーティファクトの保存とアクセス]({{ site.baseurl }}/2.0/artifacts/)
 
