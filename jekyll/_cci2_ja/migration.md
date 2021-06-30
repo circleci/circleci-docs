@@ -7,15 +7,15 @@ version:
 ---
 
 
-Take a look through some of the tips and best practices listed below, for migrating from CircleCI 1.0 to 2.0.
+CircleCI v1.0 のサポート期限の終了が近付いています。 まだ 2.0 への移行作業を開始していない場合は、以下にまとめられたヒントとベスト プラクティスを確認してください。
 
-* TOC
+* 目次
 {:toc}
 
-## You can build the same project on both CircleCI 1.0 and 2.0!
+## CircleCI 1.0 と 2.0 で同じプロジェクトをビルド可能
 {: #you-can-build-the-same-project-on-both-circleci-10-and-20 }
 
-When starting to migrate to CircleCI 2.0 you don't have to migrate everything right away. Keep your project building on 1.0 and try 2.0 by doing the following:
+CircleCI 2.0 への移行を開始するにあたり、直ちにすべてを移行する必要はありません。 1.0 でプロジェクトのビルドを継続しながら、以下の方法で 2.0 を試用してください。
 
 - 2.0 のテストのための新しいブランチを作成します。
 - そのブランチから `circle.yml` を削除し、`.circleci/config.yml` ファイルを追加します。
@@ -23,13 +23,13 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - 動作具合を細かく確認できるように、少しずつ構成を追加します。 最初はコードをチェックアウトするだけにし、次に依存関係をインストールし、さらにテストを実行します。 その後、依存関係をキャッシュしたり、ワークフローなどの高度な機能を使用したりします。 設定ファイルを徐々に作り上げていってください。
 - すべてが正常に機能するようになったら、新しい設定ファイルを含むブランチを主プロジェクトにマージします。
 
-## Tips for setting up CircleCI 2.0
+## CircleCI 2.0 のセットアップに関するヒント
 {: #tips-for-setting-up-circleci-20 }
 
 - `steps` にリストされたコマンドは、`docker` セクションで最初にリストされたコンテナ内でのみ実行されます。
 - こまめにビルドを実行して構成をテストします。 そうすれば、何かが壊れても、最後のビルドから何を変更していたかがわかります。
 - 最初はワークフローを追加せずに、正常に機能するビルドを先に完成させます。 ワークフローを追加したら、CircleCI アプリケーションの [Workflows (ワークフロー)] タブで、ジョブが実行されているかを確認します。 ワークフローの構成が誤っていると、ジョブが実行されなくなり、エラーと共に問題の詳細がアプリケーションの [Workflows (ワークフロー)] ページに表示されます。
-- 設定ファイルはゼロから手動で作成しますが、[`config-translation` エンドポイント]({{ site.baseurl }}/2.0/config-translation/)を参考として利用できます。
+- 設定ファイルはゼロから手動で作成しますが、[`config-translation` エンドポイント]({{ site.baseurl }}/ja/2.0/config-translation/)を参考として利用できます。
 - 設定ファイルの `environment` セクションで環境変数を定義することはできません。
     - 回避策として、変数を `$BASH_ENV` にエコーします。
         - `$BASH_ENV` への変数のエコーは、`bash` でのみ機能し、`sh` では機能しません (Alpine イメージには `sh` のみ)。
@@ -57,7 +57,7 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 
 
 
-## Tips for migrating from 1.0 to 2.0
+## 1.0 から 2.0 への移行のヒント
 {: #tips-for-migrating-from-10-to-20 }
 
 - `$CIRCLE_ARTIFACTS` と `$CIRCLE_TEST_REPORTS` は 2.0 で定義されていないことに注意してください。
@@ -86,73 +86,67 @@ When starting to migrate to CircleCI 2.0 you don't have to migrate everything ri
 - Scala プロジェクトのファイル名は長すぎる場合があるため、`-Xmax-classfile-name` フラグを追加してください。
 
     ```
-                scalacOptions ++= Seq(
-                  `-encoding`, `utf-8`,
-                  `-target:jvm-1.8`,
-                  `-deprecation`,
-                  `-unchecked`,
-                  `-Xlint`,
-                  `-feature`,
-                  `-Xmax-classfile-name`, `242` <= add here
-                ),
+                ``` scalacOptions ++= Seq( <code>-encoding</code>, <code>utf-8</code>, <code>-target:jvm-1.8</code>, <code>-deprecation</code>, <code>-unchecked</code>, <code>-Xlint</code>, <code>-feature</code>, <code>-Xmax-classfile-name</code>, <code>242</code> &#060;= add here ),
 ```
+, utf-8, -target:jvm-1.8, -deprecation, -unchecked, -Xlint, -feature, -Xmax-classfile-name, 242 &#060;= add here ),
+  </code>
 
 
-## Tips for browser testing
-- Tests can sometimes be flaky and may appear to fail for no reason. 失敗したブラウザー テストは自動的に再実行できます。 ただし、タイミング データは破損します。
-- Take screenshots of failed tests to make debugging easier.
-- VNC can be installed & used. The browser can be dragged around in VNC after installing `metacity`. ブラウザー イメージの 1 つから以下を実行してください。
+## ## ブラウザー テストに関するヒント
+- テストに再現性がなく、理由なく失敗するように見える場合があります。 失敗したブラウザー テストは自動的に再実行できます。 ただし、タイミング データは破損します。
+- 失敗したテストのスクリーンショットを撮ると、デバッグが容易になります。
+- VNC をインストールして使用できます。 `metacity` をインストールしたら、VNC 内でブラウザーをドラッグできます。 ブラウザー イメージの 1 つから以下を実行してください。
 
 ```
-ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # To connect via SSH
-sudo apt install vnc4server metacity
-vnc4server -geometry 1280x1024 -depth 24
-export DISPLAY=:1.0
-metacity &
-firefox &
+ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901 # SSH で接続します
+  sudo apt install vnc4server metacity
+  vnc4server -geometry 1280x1024 -depth 24
+  export DISPLAY=:1.0
+  metacity &
+  firefox &
 ```
 
-## Tips for docker
+## ## Docker に関するヒント
 
-- Building a Docker image on a cron job has these benefits:
-    - Build weekly, daily, or whenever you need
-        - Make it possible to trigger a new Docker image build via the API easily
-    - Including dependencies like `node_modules` in the image has these benefits:
-        - Helps mitigate issues from a DNS outage
-        - Keeps the dependencies version controlled
-        - Even if a module disappears from the node repositories, the necessary dependencies to run the application are safe.
-    - A private image can include private gems and private source cache
+- cron ジョブで Docker イメージをビルドすると、以下のメリットがあります。
+    - 毎週、毎日、または必要に応じてビルドできます。
+        - API から容易に新しい Docker イメージのビルドをトリガーできるようになります。
+    - `node_modules` のような依存関係をイメージに含めると、以下のメリットがあります。
+        - DNS 障害による問題を緩和できます。
+        - 依存関係のバージョン管理を行うことができます。
+        - ノード リポジトリから消失したモジュールがあっても、アプリケーションの実行に必要な依存関係は安全です。
+    - プライベート イメージには、プライベート gems およびプライベート ソース キャッシュを含めることができます。
 
-- There is no socket file for databases so the host variables need to be defined (`$PGHOST`, `$MYSQL_HOST`) to specify 127.0.0.1, forcing TCP
-- Using CircleCI convenience or official Docker Hub images increases the chance of having your image cached on the host
-    - Building off these images will reduce the number of image layers that need to be downloaded
-- Using the `-ram` variation of a container will run the given daemon in `/dev/shm`
-- Building custom images with everything pre-installed speeds up the build and adds reliability
-    - This prevents a situation wherein Heroku (for example) pushes a bad update to their installer that breaks your builds
-- The `dockerize` utility can be used to wait for service containers to be available before running tests
+- データベース用のソケット ファイルはないため、ホスト変数 (`$PGHOST`、`$MYSQL_HOST`) を定義して 127.0.0.1 を指定し、TCP を使用する必要があります。
+- CircleCI コンビニエンス イメージまたは公式 Docker Hub イメージを使用すると、イメージがホスト上でキャッシュされる可能性が高くなります。
+    - これらのイメージからビルドすると、ダウンロードが必要なイメージ レイヤーの数が減ります。
+- コンテナの `-ram` バージョンを使用すると、指定されたデーモンが `/dev/shm` で実行されます。
+- すべてがプリインストールされたカスタム イメージをビルドすると、ビルドが高速化され、信頼性が向上します。
+    - これにより、一例として、ビルドを破壊するような不良な更新を Heroku がインストーラーにプッシュする状況を防止できます。
+- `dockerize` ユーティリティを使用して、サービス コンテナが使用可能になるまでテストの実行を待つことができます。
     - https://github.com/jwilder/dockerize
-- ElasticSearch has their own Docker registry from which to pull
+- ElasticSearch には独自の Docker レジストリがあり、そこからプルできます。
     - https://www.docker.elastic.co/
-- Containers can have names. そのため、特定のサービスの複数のコンテナを、異なるホスト名を持つ同じポートで実行できます。
-- Privileged containers can be run in the remote environment and the `machine` executor.
-- Volumes can't be mounted from the base Docker executor into the remote environment
-    - `docker cp` can transfer files
-    - Volumes referenced will be mounted from the within the remote environment into the container
+- コンテナに名前を付けることができます。 そのため、特定のサービスの複数のコンテナを、異なるホスト名を持つ同じポートで実行できます。
+- 特権コンテナをリモート環境および `machine` Executor で実行できます。
+- ベース Docker Executor からリモート環境にボリュームをマウントすることはできません。
+    - `docker cp` でファイルを転送できます。
+    - 参照されるボリュームは、リモート環境内からコンテナにマウントされます。
 
 
 
 
 ## Fun facts
 
-- You are limited by your imagination in CircleCI 2.0
-- The shell can be set to Python to just execute arbitrary Python in the YAML
+- CircleCI 2.0 では、ユーザーの想像力を無限に活かすことができます。
+- シェルを Python に設定すれば、YAML で任意の Python を実行できます。
 
 ```yml
             - run:
-                shell: /usr/bin/python3
-                command:
-                    import sys
-                    print(sys.version)
+      shell: /usr/bin/python3
+      command:
+          import sys
+          print(sys.version)
 ```
 
-- You can be clever with bash to achieve whatever you need `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
+- ``` - bash を上手に活用することで、何でも実行可能です。 `for i in {1..5}; do curl -v $ENDPOINT_URL && break || sleep 10; done`
