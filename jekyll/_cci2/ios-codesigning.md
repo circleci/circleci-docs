@@ -63,7 +63,7 @@ settings in your Xcode project are configured as follows:
 {: #adding-match-to-the-fastlane-lane }
 {:.no_toc}
 
-On CircleCI, Fastlane Match will need to be run every time you build and sign your app. The easiest way to simply add the `match` action to the lane which builds your app.
+On CircleCI, Fastlane Match will need to be run every time you build and sign your app. The easiest way to do this is to add the `match` action to the lane which builds your app.
 
 **Note:** For the `match` action to work correctly, you *must* add `setup_circle_ci` to `before_all` in your `Fastfile`. This ensures that a temporary Fastlane keychain with full permissions is used. Without using this you may see build failures or inconsistent results.
 
