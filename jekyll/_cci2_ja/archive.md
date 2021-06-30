@@ -9,7 +9,7 @@ order: 1
 sitemap: false
 ---
 
-## Getting started
+## はじめよう
 {: #getting-started }
 - [CircleCI とは]({{ site.baseurl }}/archive/introduction/){:rel="nofollow"}
 - [CircleCI 1.0 入門]({{ site.baseurl }}/archive/getting-started/){:rel="nofollow"}
@@ -21,7 +21,7 @@ sitemap: false
 - [GitHub インテグレーション (5)]({{ site.baseurl }}/archive/github-privacy/){:rel="nofollow"}
 - [Jenkins から CircleCI への移行]({{ site.baseurl }}/archive/migrating-from-jenkins/){:rel="nofollow"}
 
-## Build environments
+## ビルド環境
 {: #build-environments }
 - [Android]({{ site.baseurl }}/archive/android/){:rel="nofollow"}
 - [macOS ビルド イメージ]({{ site.baseurl }}/archive/build-image-macos/){:rel="nofollow"}
@@ -30,7 +30,7 @@ sitemap: false
 - [Ubuntu 14.04 と 12.04 の違い]({{ site.baseurl }}/archive/differences-between-trusty-and-precise/){:rel="nofollow"}
 - [ビルド環境のカスタマイズ]({{ site.baseurl }}/archive/installing-custom-software/){:rel="nofollow"}
 
-## Language guides
+## 言語ガイド
 {: #language-guides }
 - [Go (Golang)]({{ site.baseurl }}/archive/language-go/){:rel="nofollow"}
 - [Haskell]({{ site.baseurl }}/archive/language-haskell/){:rel="nofollow"}
@@ -118,7 +118,7 @@ sitemap: false
 - [Python (1)]({{ site.baseurl }}/archive/troubleshooting-python/){:rel="nofollow"}
 - [Ruby (10)]({{ site.baseurl }}/archive/troubleshooting-ruby/){:rel="nofollow"}
 
-## Enterprise administration
+## エンタープライズ管理
 {: #enterprise-administration }
 
 - [インストール]({{ site.baseurl }}/enterprise/aws/){:rel="nofollow"}
