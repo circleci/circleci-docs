@@ -8,143 +8,131 @@ description: "Travis CI からの移行"
 
 Travis CI から CircleCI に移行する方法を概説します。
 
-The example build configurations referenced throughout this article are based on this [example JavaScript repository](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml).
+このドキュメントで使用しているビルド構成の例は、[JavaScript のサンプル リポジトリ](https://github.com/CircleCI-Public/circleci-demo-javascript-express/blob/master/.circleci/config.yml)を基にしています。
 
 ## 前提条件
 {: #prerequisites }
 
 This document assumes that:
-1. You have an account with CircleCI that is linked to a repository. If you do not have an account, consider reading our [Getting Started Guide]({{ site.baseurl }}/2.0/getting-started/).
-1. You understand the [Basic Concepts]({{ site.baseurl }}/2.0/concepts/) in CircleCI.
+1. リポジトリがリンクされた CircleCI アカウントをお持ちになっていることを前提としています。 まだアカウントをお持ちでない場合は、CircleCI の[入門ガイド]({{ site.baseurl }}/ja/2.0/getting-started/)を参照してください。
+1. CircleCI では、チェックアウトされたコードを実行 (ビルド、テストなど) する環境を [Executor]({{ site.baseurl }}/ja/2.0/executor-intro/) と呼びます。
 
-## Why migrate to CircleCI?
+## 設定ファイル
 {: #why-migrate-to-circleci }
 
 - **Scaling Concurrency**: You can run up to 80 concurrent jobs on our monthly Performance Plan or even more on a [custom plan](https://circleci.com/pricing/). Travis CI has capped concurrencies of 1, 2, 5, and 10 on each of their plans.
-- **Resource Classes**: [vCPU & RAM]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) are configurable within CircleCI jobs to strategically speed up builds and spend credits, whereas these values are fixed on Travis CI.
+- 初回のビルド後にすべての依存関係をキャッシュして、ビルド時間の短縮を図る
 - **Parallelization by Timing**: On top of running many jobs concurrently, CircleCI offers built-in [test splitting]({{ site.baseurl }}/2.0/parallelism-faster-jobs/) across multiple environments by timing. This dramatically reduces wall clock time for large test suites to finish. You must implement this manually in Travis CI.
 - **Orbs**: Rather than proprietary integrations, CircleCI offers [orbs]({{ site.baseurl }}/2.0/orb-intro/), which are reusable, templated configuration. On top of connecting to services and tools, orbs can be used to standardize and templatize configuration for your team and organization as well. [Visit the registry](https://circleci.com/developer/orbs).
 
-## Configuration files
+## コードのプッシュ時のビルド
 {: #configuration-files }
 
-Both Travis CI and CircleCI make use of a _configuration file_ to define your workflows and jobs. The only difference is that your CircleCI configuration will live in `.circleci/config.yml` at the root of your repository.
+Both Travis CI and CircleCI make use of a _configuration file_ to define your workflows and jobs. CircleCI の場合は、リポジトリのルートにある `.circleci/config.yml` ファイルに保存します。
 
 Below, you'll find a side-by-side comparison of different configuration declarations.
 
-| Travis CI               | Circle CI                                                                                                                                                     | Description                                                                                                                                                                                                                                             |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| language:,<br>os: | [docker, machine, macos, windows]({{ site.baseurl }}/2.0/executor-types/)                                                                                     | CircleCI doesn't assume dependencies or commands based on a language; instead, choose an executor and use `run:` steps as shown below to execute commands you require (e.g., install, build, test).                                                     |
-| dist:                   | [machine]({{ site.baseurl }}/2.0/configuration-reference/#machine)                                                                                            | Our Linux VM executor is a Ubuntu VM. You can specify [versions]({{ site.baseurl }}/2.0/configuration-reference/#available-machine-images) in the config                                                                                                |
-| cache:                  | [restore_cache:]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache), [save_cache:]({{ site.baseurl }}/2.0/configuration-reference/#restore_cache) | Use the restore and save cache features to control caching in the builds                                                                                                                                                                                |
-| before_cache            | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | If you want to run any commands before you cache, simply place a run: step before your cache step(s) in CircleCI                                                                                                                                        |
-| before_install:         | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | CircleCI doesn't separate commands into stages or types. Use `run:` steps to specify any commands and order them per your needs. See [documentation]({{ site.baseurl }}/2.0/configuration-reference/#the-when-attribute) for usage of conditional steps |
-| install:                | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | " (see above)                                                                                                                                                                                                                                           |
-| before_script           | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | " (see above)                                                                                                                                                                                                                                           |
-| script:                 | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | " (see above)                                                                                                                                                                                                                                           |
-| after_script:           | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | " (see above)                                                                                                                                                                                                                                           |
-| deploy:                 | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                   | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/2.0/deployment-integrations) for examples.                                                                                                       |
-| env:                    | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment)                                                                            | Use the environment: element to specify environment variables                                                                                                                                                                                           |
-| matrix:                 | [matrix:](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21)                                                                  | CircleCI also offers matrix syntax under our workflows configuration.                                                                                                                                                                                   |
-| stage:                  | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)                                                                                  | Use the requires: element to define job dependencies and control concurrent jobs in workflows                                                                                                                                                           |
+| Travis CI         | CircleCI                                                                                                                                                                      | 説明                                                                                                                                                                                                  |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| language:         | [docker、machine、macos]({{ site.baseurl }}/2.0/executor-types/)                                                                                                                | CircleCI doesn't assume dependencies or commands based on a language; instead, choose an executor and use `run:` steps as shown below to execute commands you require (e.g., install, build, test). |
+| dist:             | [machine]({{ site.baseurl }}/2.0/configuration-reference/#machine)                                                                                                            | CircleCI の Linux VM Executor は Ubuntu VM です。 設定ファイルで [バージョン](https://circleci.com/ja/docs/2.0/configuration-reference/#使用可能な-machine-イメージ)を指定できます。                                                  |
+| cache components: | [restore_cache:](https://circleci.com/ja/docs/2.0/configuration-reference/#restore_cache)、[save_cache:](https://circleci.com/ja/docs/2.0/configuration-reference/#save_cache) | キャッシュの復元機能と保存機能を使用して、ビルド内のキャッシュを制御します。                                                                                                                                                              |
+| before_cache      | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | キャッシュする前にコマンドを実行する場合は、単にキャッシュ ステップの前に run: ステップを記述します。                                                                                                                                              |
+| before_install:   | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | CircleCI では、コマンドをステージまたはタイプに分割しません。 run: ステップを使用して任意のコマンドを指定し、必要に応じて順序付けします。 条件付きステップの使用方法については、[設定ファイルに関するドキュメント](https://circleci.com/ja/docs/2.0/configuration-reference/#when-属性)を参照してください。     |
+| install:          | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | 上記を参照。                                                                                                                                                                                              |
+| before_script     | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | 上記を参照。                                                                                                                                                                                              |
+| script:           | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | 上記を参照。                                                                                                                                                                                              |
+| after_script:     | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | 上記を参照。                                                                                                                                                                                              |
+| deploy:           | [run:]({{ site.baseurl }}/2.0/configuration-reference/#run)                                                                                                                   | Use a `run:` step to run needed commands for deployment. See our [Deployment Guide]({{ site.baseurl }}/2.0/deployment-integrations) for examples.                                                   |
+| env:              | [environment:](https://circleci.com/docs/2.0/configuration-reference/#environment)                                                                                            | environment: 要素を使用して、環境変数を指定します。                                                                                                                                                                    |
+| matrix:           | [matrix:](https://circleci.com/docs/2.0/configuration-reference/#matrix-requires-version-21)                                                                                  | CircleCI ではワークフローを使用して複数のジョブをオーケストレーションできます。                                                                                                                                                        |
+| stage:            | [requires:](https://circleci.com/docs/2.0/configuration-reference/#requires)                                                                                                  | requires: 要素を使用して、ジョブの依存関係を定義し、ワークフローでの並列ビルドを制御します。                                                                                                                                                 |
 {: class="table table-striped"}
 
-## Building on pushing code
+## 環境変数
 {: #building-on-pushing-code }
 
-The example repository linked above is a basic application for creating, reading, updating, and deleting articles. The app is built with the `MERN` stack and there are tests present on the client as well as the REST API that should run whenever code is pushed.
+ドキュメント冒頭のリンク先にあるサンプル リポジトリは、記事の作成、読み取り、更新、削除を行う基本的なアプリケーションです。 アプリケーションは `MERN` スタックを使用してビルドし、クライアント上でテストを実行し、コードのプッシュ時に毎回 REST API を実行します。
 
-To get tests running for this example repository, the beginnings of a simple Travis Configuration might look like the following example:
+CircleCI で同じ結果を得るために必要な構成をサンプル リポジトリから以下に抜粋します。
 
 ```yaml
 language: node_js
 services: mongodb
-before_install:
+before_install: 
   - npm i -g npm@5
 node_js:
   - "5"
 cache: npm
 ```
 
-For basic builds, a Travis CI configuration will leverage a language's best known dependency and build tools and will abstract them away as default commands (which can be overridden) in [a job lifecycle](https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle). In this case, when the build runs, Travis CI will automatically run `npm install` for the `install` step, and run `npm start` for the `script` step.
+基本的なビルドの場合、Travis CI の構成では、言語に関する最もよく知られた依存関係とビルド ツールを使用し、[1 つのジョブ ライフサイクル](https://docs.travis-ci.com/user/job-lifecycle/#the-job-lifecycle)においてオーバーライド可能なデフォルトのコマンドとしてそれらを抽象化します。 このビルドを実行すると、Travis CI は自動的に `install` ステップとして `npm install` を実行し、`script` ステップとして `npm start` を実行します。
 
-If a user needs more control with their CI environment, Travis CI uses _hooks_ to run commands before/after the `install` and `script` steps. In the example above, a "before hook" is used to specify that the npm version be pinned to `5`. Hooks can execute shell scripts as well, which users will sometimes store in a `.travis` folder at the root of their repository.
+CI 環境をさらに制御する必要があるときには、*フック*を使用して `install` ステップと `script` ステップの前後でコマンドを実行できます。 上記の例では、「before フック」を使用して npm バージョンを `5` に固定するように指定しています。 実行するシェル スクリプトは、通常、リポジトリのルートの `.travis` フォルダーに格納します。
 
 The following CircleCI configuration to achieve the same results is excerpted from the example repository:
 
 {% raw %}
 ```yaml
-version: 2.1
-
-workflows:
-  version: 2
-  build:
-    jobs:
-      - build
-
+version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/node:4.8.2 # Primary execution image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-      - image: mongo:3.4.4         # Service/dependency image
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+      - image: circleci/node:4.8.2
+      - image: mongo:3.4.4
     steps:
       - checkout
       - run:
-          name: update-npm
+          name: npm の更新
           command: 'sudo npm install -g npm@5'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: install-npm-wee
+          name: npm wee のインストール
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
       - run:
-          name: test
+          name: テスト
           command: npm test
 ```
 {% endraw %}
 
-In the config above, no _language_ is specifically required, and the user is able to specify any number of `steps` that can be run, with no restrictions on step order. By leveraging Docker, specific Node.js and MongoDB versions are made available in each `command` that gets run.
+上記の構成では、特に*言語*を必要としていません。 また、ユーザーは任意の数の `steps` を指定して実行でき、ステップの順序にも制約はありません。 Docker を利用することで、特定のバージョンの Node.js と MongoDB が各 `command` で使用可能になります。
 
-### Caching dependencies
+### コンテナの使用
 {: #caching-dependencies }
 
-With CircleCI you have control over when and how your config caches and restore dependencies. In the above example, the CircleCI `.circleci/config.yml` checks for a dependency cache based specifically on a checksum of the `package-lock.json` file. You can set your cache based on any key (not just `package-lock.json`) as well as set a group of cache paths to defer to in the declared order. Refer to the [caching dependencies document]({{ site.baseurl }}/2.0/caching/) to learn about customizing how your build creates and restores caches.
+CircleCI では、依存関係をキャッシュおよび復元するタイミングとその方法を設定ファイルで制御できます。 上記の CircleCI の `.circleci/config.yml` では、特に `package-lock.json` ファイルのチェックサムに基づいて依存関係のキャッシュをチェックしています。 `package-lock.json` に限らず、任意のキーに基づいてキャッシュを設定したり、一連のキャッシュ パスに対して宣言した順序でキャッシュを保留するよう設定したりすることができます。 ビルド時にキャッシュを作成および復元する方法のカスタマイズについては「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
 
-In a Travis Configuration, [dependency caching](https://docs.travis-ci.com/user/caching/) occurs in your build after the `script` phase and is tied to the language you are using. In our case, by using the `cache: npm` key in `.travis.yml`, dependencies will default to caching `node_modules`.
+Travis の構成の場合、[依存関係のキャッシュ](https://docs.travis-ci.com/user/caching/)は、ビルド時の `script` フェーズの後に発生し、使用している言語に関連付けられます。 `.travis.yml` の例では、`cache: npm` キーを使用することで、依存関係はデフォルトで `node_modules` をキャッシュするようになっています。
 
-## Environment variables
-{: #environment-variables }
+## アーティファクトのアップロード
+**メモ:** CircleCI には、[定義済み環境変数](https://circleci.com/ja/docs/2.0/env-vars/#定義済み環境変数)が複数用意されています。
 
-Both Travis and CircleCI enable the use of environment variables in your builds.
+Travis CI では、AWS S3 を使用して手動で、または GitHub リリースのアタッチメントとしてビルド アーティファクトをアップロードできます。
 
-In your CircleCI `.circleci/config.yml` you can put environment variables directly in your build config in a step, a job, or a container. These variables are public and unencrypted. With Travis CI, it is possible to include [encrypted environment](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml) variables directly in your config (if you install the `travis` gem).
+CircleCI の `.circleci/config.yml` では、ビルド構成のステップ、ジョブ、またはコンテナ内に環境変数を直接含めることができます。 これらはパブリック変数であり、暗号化されていません。 Travis CI では、[暗号化された環境変数](https://docs.travis-ci.com/user/environment-variables#defining-encrypted-variables-in-travisyml)を構成に直接含めることができます (`travis` gem をインストールしている場合に限ります)。
 
-### Setting environment variables in the web application
-{: #setting-environment-variables-in-the-web-application }
+### 依存関係のキャッシュ
+Web アプリケーションでの環境変数の設定
 
-If you've used Travis CI's [repository settings](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings), you'll be comfortable setting your environment variables in CircleCI's project settings page. Read the docs for setting environment variable in a [single project]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+Travis CI の[リポジトリ設定](https://docs.travis-ci.com/user/environment-variables#defining-variables-in-repository-settings)を使用している場合は、CircleCI のプロジェクト設定のページで簡単に環境変数を設定できます。 詳細については、「[プロジェクトでの環境変数の設定]({{ site.baseurl }}/ja/2.0/env-vars/#プロジェクトでの環境変数の設定)」を参照してください。
 
-With CircleCI, it is also possible to securely set environment variables across _all_ projects using [contexts]({{site.baseurl}}/2.0/contexts/).
+CircleCI では、[コンテキスト]({{site.baseurl}}/ja/2.0/contexts/)を使用することで、*すべて*のプロジェクト間で安全に環境変数を共有できます。
 
-**Note:** CircleCI has several [built-in environment variables](https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables).
+Travis と CircleCI はいずれも、ビルド時に環境変数を使用できます。
 
-## Artifacts uploading
+## 高度なツール
 {: #artifacts-uploading }
 
 With Travis CI you can upload build artifacts either manually using AWS S3 or as an attachment to a GitHub Release.
 
-On CircleCI, artifact uploading occurs in a step in your config:
+CircleCI では、アーティファクトのアップロードは設定ファイル内の 1 ステップとして実行します。
 
 ```yaml
       - run:
@@ -164,11 +152,11 @@ On CircleCI, artifact uploading occurs in a step in your config:
           path: test-results.xml
 ```
 
-After an artifact is successfully uploaded, you can view it in the Artifacts tab of the Job page in your browser, or access them through the CircleCI API. Read the documentation on [artifact uploading]({{site.baseurl}}/2.0/artifacts/) to learn more.
+アーティファクトのアップロードが完了すると、ブラウザー上でジョブ ページの [Artifacts (アーティファクト)] タブでアーティファクトを確認したり、CircleCI API からアクセスしたりすることができます。 詳細については、「[ビルド アーティファクトの保存]({{site.baseurl}}/ja/2.0/artifacts/)」を参照してください。
 
 ## Advanced tooling
 {: #advanced-tooling }
 
-More advanced configuration on Travis might make use of a *Build Matrix* (a configuration that specifies running multiple concurrent jobs) or *Build Stages* (grouping jobs into stages that can run concurrently as well as having sequential jobs rely on the success of previous jobs.)
+Travis でさらに高度な構成を行いたい場合は、*ビルド マトリックス* (複数の並列ジョブの実行を指定する構成) や*ビルド ステージ* (ジョブをステージにグループ化して並列実行したり、順次前のジョブの成功に基づいてジョブを順次実行したりする機能) が利用できます。
 
-With CircleCI you can use [workflows]({{site.baseurl}}/2.0/workflows/) in your `.circleci/config.yml` to define a collection of jobs and their run order, whether leveraging concurrency, fan-in or fan-out builds, or sequentially-dependant builds. Workflows allow complex and fine-grained control over your build configuration.
+CircleCI では、`.circleci/config.yml` で [ワークフロー]({{site.baseurl}}/ja/2.0/workflows/) を使用することで、ジョブのグループ化と実行順序、並列処理の利用、ビルドのファンインまたはファンアウト、順次実行ビルドを定義できます。 ワークフローを使用すると、ビルド構成に対して複雑できめ細かな制御を行えるようになります。
