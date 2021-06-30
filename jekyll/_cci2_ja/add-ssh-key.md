@@ -9,69 +9,69 @@ version:
   - Server v2.x
 ---
 
-If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
+サーバーへのデプロイに SSH アクセスが必要な場合は、CircleCI に SSH 鍵を登録する必要があります。
 
 ## 概要
-{: #overview }
+CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
 
 There are two reasons to add SSH keys to CircleCI:
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-If you are adding an SSH key for the first reason, refer to the [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/#enable-your-project-to-check-out-additional-private-repositories) document.
+**メモ:** SSH 鍵を作成する際は必ず空のパスワードを設定してください。 CircleCI ではパスワードを使った SSH 鍵の復号はできません。
 
 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
-**Note:** You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
+複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
 ## 手順
-{: #steps }
+**メモ:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録された鍵と一致している必要があります。
 
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
-### CircleCI Cloud
+### Cloud 版 CircleCI の場合
 {: #circleci-cloud }
 
-1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
+1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. In the CircleCI application, go to your project's settings by clicking the the **Project Settings** button (top-right on the **Pipelines** page of the project).
+2. CircleCI アプリケーションで、 **Project Settings** ボタン (作業対象のプロジェクトの **Pipelines** ページの右上にあります) をクリックして、プロジェクトの設定に移動します。
 
-3. On the **Project Settings** page, click on **SSH Keys** (vertical menu on the left).
+3. **Project Settings** ページにて、 **SSH Keys** をクリックします (画面左側のメニューにあります)。
 
-4. Scroll down to the **Additional SSH Keys** section.
+4. スクロールし、 **Additional SSH Keys** のセクションに移動します。
 
-5. Click the **Add SSH Key** button.
+5. **Add SSH Key** ボタンをクリックします。
 
-6. In the **Hostname** field, enter the key's associated host (for example, `git.heroku.com`). If you do not specify a hostname, the key will be used for all hosts.
+6. **Hostname** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
 
-7. In the **Private Key** field, paste the SSH key you are adding.
+7. **Private Key** フィールドに登録する SSH 鍵を貼り付けます。
 
-8. Click the **Add SSH Key** button.
+8. **Add SSH Key** ボタンをクリックします。
 
-### CircleCI Server
+### CircleCI Server の場合
 {: #circleci-server }
 
-1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
+1. ターミナルで、`ssh-keygen -t ed25519 -C "your_email@example.com"` コマンドを実行して鍵を生成します。 詳細については、[Secure Shell (SSH) のドキュメント](https://www.ssh.com/ssh/keygen/)を参照してください。
 
-2. In the CircleCI application, go to your project's settings by clicking the gear icon next to your project.
+2. CircleCI アプリケーションで、プロジェクトの横にある歯車のアイコンをクリックして、プロジェクトの設定に移動します。
 
-2. In the **Permissions** section, click on **SSH Permissions**.
+2. **Permissions** セクションで、**SSH Permissions** をクリックします。
 
-3. Click the **Add SSH Key** button.
+3. **Add SSH Key** ボタンをクリックします。
 
-4. In the **Hostname** field, enter the key's associated host (for example, "git.heroku.com"). If you do not specify a hostname, the key will be used for all hosts.
+4. **Hostname** フィールドに鍵に関連付けるホスト名を入力します (例: git.heroku.com)。 ホスト名を指定しない場合は、どのホストに対しても同じ鍵が使われます。
 
-5. In the **Private Key** field, paste the SSH key you are adding.
+5. **Private Key** フィールドに登録する SSH 鍵を貼り付けます。
 
-6. Click the **Add SSH Key** button.
+6. **Add SSH Key** ボタンをクリックします。
 
 ## ジョブに SSH 鍵を登録する
 {: #adding-ssh-keys-to-a-job }
 
-Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
+すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH 鍵に自動的に署名します。 ただし、コンテナに実際に鍵を登録するには、`add_ssh_keys` キーを使用する**必要があります**。
 
-To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/) in your configuration file.
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。 2 つ目が目的のときは、以下の手順でプロジェクトに SSH 鍵を登録します。
 
 ```yaml
 version: 2
@@ -88,9 +88,9 @@ jobs:
 ## ホスト名を指定せずに複数の鍵を登録する
 {: #adding-multiple-keys-with-blank-hostnames }
 
-If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
+ホスト名を指定せずに複数の SSH 鍵をプロジェクトに登録するには、CircleCI のデフォルトの SSH 設定に変更を加える必要があります。 たとえば、同じホストに別々の目的でアクセスする複数の SSH 鍵がある場合、デフォルトの `IdentitiesOnly no` が設定され、接続では ssh-agent が使用されます。 このとき、その鍵が正しい鍵がどうかにかかわらず、常に最初の鍵が使用されます。 コンテナに SSH 鍵を登録している場合は、適切なブロックに `IdentitiesOnly no` を設定するか、`ssh-add -D` コマンドを実行し、`ssh-add /path/to/key` コマンドで登録された鍵を読み取って、このジョブで使用する ssh-agent からすべての鍵を削除します。
 
 ## 関連項目
 {: #see-also }
 
-[GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)
+[GitHub と Bitbucket のインテグレーション]({{ site.baseurl }}/2.0/gh-bb-integration/)
