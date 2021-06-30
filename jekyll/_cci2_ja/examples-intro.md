@@ -12,7 +12,7 @@ version:
 ---
 
 
-It is possible to build, test, and deploy applications that run on Linux, Android, iOS and Windows with CircleCI. See the following snippets for a peek into how you can customize the configuration of a job for any platform. 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
+CircleCI を使用して、Linux、Android、iOS 上で動作するアプリケーションをビルド、テスト、およびデプロイすることができます。 以下のスニペットでは、各プラットフォーム用にジョブの構成をカスタマイズする方法に重点を置いて解説しています。 1 つの [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルで、複数のプラットフォーム上で動作するジョブを構成することも可能です。
 
 ## Linux と Docker
 {: #linux-with-docker }
@@ -28,23 +28,18 @@ jobs:
     ジョブのコマンドは、このコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
+    # セカンダリ コンテナは、2 番目にリストしたイメージのインスタンスです。
+      プライマリ コンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
       - image: mongo:3.4.4-jessie
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: Update npm
+          name: npm の更新
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: Install npm wee
+          name: npm wee のインストール
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -54,10 +49,10 @@ jobs:
 
 {% endraw %}
 
-## Linux with machine
-{: #linux-with-machine }
+## Linux と Machine
+デフォルトのマシン イメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
 
-**Note**: Use of machine may require additional fees in a future pricing update.
+**メモ:** 今後の料金改定により、Machine の使用に追加料金が必要になる可能性があります。
 
 To use the machine executor with the default machine image, set the machine key to true in `.circleci/config.yml`:
 
@@ -69,7 +64,7 @@ jobs:
 ```
 
 ## Android
-{: #android }
+上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
 
 {% raw %}
 
@@ -80,9 +75,6 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -90,7 +82,11 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
+#         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
+#         command: sudo chmod +x ./gradlew
+      - run:
+          name: 依存関係のダウンロード
+          command: ./gradlew androidDependencies
 #         command: sudo chmod +x ./gradlew
       - run:
           name: 依存関係のダウンロード
@@ -99,7 +95,7 @@ jobs:
 
 {% endraw %}
 
-## macOS
+## iOS
 {: #macos }
 _The macOS executor is not currently available on self-hosted installations of CircleCI Server_
 
@@ -119,7 +115,7 @@ jobs:
 
 ```
 
-## Windows
+## 関連項目
 {: #windows }
 
 {:.tab.windowsblock.Cloud}
