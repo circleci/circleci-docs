@@ -11,38 +11,38 @@ version:
   - Server v2.x
 ---
 
-When starting a container, you may see this error message:
+コンテナの起動時に、以下のエラー メッセージが表示されることがあります。
 
 ```
 failed to register layer: Error processing tar file (exit status 1): container id 1000000 cannot be mapped to a host id
 ```
 
-This document explains the problem and how to fix it.
+このドキュメントでは、このエラーの原因と対策について説明していきます。
 
 ## 背景
 {: #background }
 
-The user namespace (`userns`) is a feature of the Linux kernel that adds another security layer to Linux containers. The `userns` allows a host machine to run containers outside its UID/GID namespace. This means all containers can have a root account (UID 0) in their own namespace and run processes without receiving root privileges from the host machine.
+ユーザー名前空間 (`userns`) は、Linux コンテナにセキュリティ レイヤーを追加する Linux カーネルの機能です。 `userns` により、ホスト マシンはその UID または GID の名前空間の外部でコンテナを実行できます。 そのため、すべてのコンテナは一意の名前空間に root アカウント (UID 0) を持つことができ、ホスト マシンから root 権限を付与されていなくてもプロセスを実行できます。
 
-When a `userns` is created, the Linux kernel provides a mapping between the container and the host machine. For example, if you start a container and run a process with UID 0 inside of it, the Linux kernel maps the container's UID 0 to a non-privileged UID on the host machine. This allows the container to run a process as if it were the root user, while **actually** being run by the non-root user on the host machine.
+`userns` が作成されると、Linux カーネルによってコンテナとホスト マシンの間のマッピングが行われます。 たとえば、コンテナを起動し、その内部で UID 0 としてプロセスを実行すると、Linux カーネルはコンテナの UID 0 をホスト マシン上の権限のない UID にマップします。 これにより、コンテナは root ユーザーと同様にプロセスを実行できますが、**実際には**ホスト マシン上の非 root ユーザーによって実行されています。
 
 ## 問題
 {: #problem }
 
-The error is caused by a `userns` remapping failure. CircleCI runs Docker containers with `userns` enabled in order to securely run customers' containers. The host machine is configured with a valid UID/GID for remapping. This UID/GID **must be** in the range of 0 - 65535.
+このエラーは `userns` の再マッピングが失敗することで発生します。 ユーザーのコンテナを安全に実行するために、CircleCI は `userns` を有効にして Docker コンテナを実行します。 このホスト マシンには、再マッピングに有効な UID または GID が構成されています。 この UID および GID は 0 ～ 65535 の範囲内である**必要があります**。
 
-When Docker starts a container, Docker pulls an image and extracts layers from that image. If a layer contains files with UID/GID outside of the accepted range, Docker cannot successfully remap and fails to start the container.
+Docker はコンテナを起動するとイメージをプルし、そのイメージからレイヤーを抽出します。 許可された範囲外の UID または GID のファイルがレイヤーに存在すると、Docker は正常に再マッピングを行えず、コンテナを起動できません。
 
 ## 解決策
 {: #solution }
 
-To fix this error, you must update the files' UID/GID and re-create the image.
+以下の例では、[circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid) 内で `find` コマンドを使用して無効なファイルを探します。
 
-If you are not the image maintainer, congratulations: it's not your responsibility. Contact the image maintainer and report the error.
+If you are not the image maintainer, congratulations: it's not your responsibility. イメージの保守担当者に連絡して、エラーを報告してください。
 
-If you are the image maintainer, identify the file with the high UID/GID and correct it. First, grab the high UID/GID from the error message. In the example presented at the top of this document, this value is `1000000`. Next, start the container and look for the files which receive that invalid value.
+イメージの保守担当者は、上位の UID または GID でファイルを特定し、修正してください。 まず、エラー メッセージから上位の UID または GID を確認します。 ドキュメントの冒頭で示した例では、`1000000` が上位の UID または GID の値です。 次にコンテナを起動し、無効な値が返されるファイルを特定します。
 
-Below is an example of finding an invalid file inside [circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid) using the `find` command:
+上記の手順を行った後もさらにエラーが発生する場合には、[Microsoft フォーラムの投稿](https://social.msdn.microsoft.com/Forums/vstudio/en-US/f034bd0a-00e1-4a11-a716-8cf1112a5db4/container-id-xxxxxxx-cannot-be-mapped-to-a-host-id?forum=windowsazurewebsitespreview)を参照してください。
 
 ```bash
 # コンテナ内でシェルを開始します
@@ -57,9 +57,9 @@ $ ls -ln file-with-high-id
 -rw-r--r-- 1 1000000 1000000 0 Jul  9 03:05 file-with-high-id
 ```
 
-After locating the offending file, change its ownership and re-create the image.
+問題のファイルが見つかったら、ファイルの所有権を変更し、イメージを再作成します。
 
-**Note:** It is possible for an invalid file to be generated and removed while a container is building. In this case, you may have to modify the `RUN` step in the Dockerfile itself. Adding `&& chown -R root:root /root` to the problem step should fix the problem without creating a bad interim.
+**メモ:** コンテナのビルド中に、無効なファイルが生成され、削除されることがあります。 その場合、Dockerfile 内の `RUN` ステップの修正が必要になる可能性があります。 このとき、対象のステップに `&& chown -R root:root /root` を追加すると、不要な中間物を作成することなく問題に対処できます。
 
 ## 関連項目
 {: #see-also }
