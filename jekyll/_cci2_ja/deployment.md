@@ -7,17 +7,19 @@ version:
   - Server v2.x
 ---
 
-CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integrations/) to virtually any service.
+CircleCI は、ほぼすべてのサービスに[デプロイ]({{ site.baseurl }}/ja/2.0/deployment-integrations/)するように構成できます。
 
 
 ## Amazon Web Services
-{: #amazon-web-services }
+ここにご紹介した例を参考に、ターゲット環境に対する成功ビルドのデプロイを自動化してみましょう。
 
 ```
     steps:
+
       - run:
           name: awscli のインストール
           command: sudo pip install awscli
+
       - run:
           name: S3 へのデプロイ
           command: aws s3 sync jekyll/_site/docs s3://circle-production-static-site/docs/ --delete
@@ -28,6 +30,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - run:
           name: CF CLI のセットアップ
           command: |
@@ -37,6 +40,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
             cf api https://api.run.pivotal.io  # または、プライベート Cloud Foundry デプロイをターゲットにします
             cf auth "$CF_USER" "$CF_PASSWORD"
             cf target -o "$CF_ORG" -s "$CF_SPACE"
+
       - run:
           name: 最新の live ドメインへの再ルーティング
           command: |
@@ -58,6 +62,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - run:
           name: Firebase への master のデプロイ
           command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_DEPLOY_TOKEN
@@ -69,6 +74,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - checkout
       - run:
           name: Heroku への master のデプロイ
@@ -81,10 +87,11 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - checkout
-      - run:
-          name: Publish to NPM
-          command: |
+      - run: 
+          name: NPM へのパブリッシュ
+          command: | 
             npm set //registry.npmjs.org/:_authToken=$NPM_TOKEN
             npm publish
 ```
@@ -94,6 +101,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - run:
           name: SSH 経由のデプロイ
           command: |
@@ -105,6 +113,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - run:
           name: "ストアへのパブリッシュ"
           command: |
@@ -118,6 +127,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - run:
           name: Artifactory へのプッシュ
           command: |
@@ -132,6 +142,7 @@ CircleCI can be configured to [deploy]({{ site.baseurl }}/2.0/deployment-integra
 
 ```
     steps:
+
       - run:
           name: NuGet へのプッシュ
           command: |
