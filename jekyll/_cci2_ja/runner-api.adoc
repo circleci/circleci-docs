@@ -2,98 +2,98 @@
 version:
 - Cloud
 ---
-= CircleCI ランナー API
+= CircleCI Runner API
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
+NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
 
-CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
+This document contains all the external facing endpoints for the CircleCI runner API.
 
 toc::[]
 
-== 認証方法
+== Authentication Methods
 
-CircleCI ランナー APIには、エンドポイントや用途によって異なる認証方法を利用しています。1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+The CircleCI runner API contains different authentication methods. Each authentication method may be used in different endpoints for different purposes. Also one endpoint may accept multiple authentication methods.
 
-=== Circle-Token (個人認証)
+=== Circle-Token (personal authentication)
 
-この認証方法はパーソナル トークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
-
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| 名前
-| 説明
-
-| circle-token ヘッダー
-| ユーザー認証に使用される `circle-token` が含まれたヘッダー
-
-| ユーザー名による HTTP Basic 認証
-| トークンを使用して Basic 認証できます。ユーザー名には `circle-token` を設定し、パスワードは空白のまま残します。
-|===
-
-=== ブラウザー セッション認証
-
-リクエストのCookieに含まれるセッションを使用してそのまま認証することができます。この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
-
-=== ローンチ トークン
-
-このトークンは、launch-agent のセットアップに使用するものと同じです。
-
-==== サポートされている方法
+This authentication method is based on personal tokens and follows the same rules for CircleCI v2 API.
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| 名前
-| 説明
+| Name
+| Description
 
-| HTTP Bearer 認証
-| Bearer スキームを使用してトークンを送信します。
+| circle-token header
+| Header that contains the `circle-token` used to authenticate the user.
+
+| http basic auth username
+| The token can be provided using the Basic scheme, where username should be set as the `circle-token` and the password should be left blank.
 |===
 
-== エンドポイント
+=== Browser Session Authentication
+
+Ring-session sent through a cookie on the request. This authentication allows users that are already logged into circleci.com to access certain endpoints seamlessly.
+
+=== Launch Token
+
+This token is the same one used in the launch-agent setup.
+
+==== Supported methods
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Name
+| Description
+
+| http bearer auth
+| The token that should be provided using the Bearer scheme.
+|===
+
+== Endpoints
 
 === GET /api/v2/runner
 
-指定したパラメーターに基づいた利用可能なランナーの一覧を取得できます。フィルター用パラメーターを 1つ以上使用することが必須です。
+Lists the available runners based on the specified parameters. It is mandatory to use one parameter to filter results.
 
-==== 認証方法
+==== Authentication Methods
 
-* Circle-Token (個人認証)
-* ブラウザー セッション認証
-+ この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできます。
-* ローンチ トークン
+* Circle-Token (personal authentication)
+* Browser Session Authentication
++ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+* Launch Token
 
-===== リクエスト
+===== Request
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| 名前
-| 型
-| 入力
-| 必須?
-| 説明
+| Name
+| Type
+| Input
+| Required
+| Description
 
 | resource-class
 | string
-| クエリ
-| 省略可
-| 指定したリソース クラスでランナーの一覧を絞り込みます。
+| query
+| false
+| filters the list of runners by specific resource class.
 
 | namespace
 | string
-| クエリ
-| 省略可
-| 指定したネームスペースでランナーの一覧を絞り込みます。
+| query
+| false
+| filters the list of runners by namespace.
 |===
 
-== 例
+== Examples
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
@@ -105,72 +105,72 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
 
-=== レスポンス
+=== Response
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| ステータス
-| 説明
-| 形式
+| Status
+| Description
+| Format
 
 |200
-|ランナーの一覧
+|List of agents
 |JSON
 |===
 
-=== レスポンススキーム
+=== Response Schema
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| 名前
-| 型
-| 必須?
-| 説明
+| Name
+| Type
+| Required
+| Description
 
 |items
 |[object]
-|必須
-|ランナーの配列
+|true
+|array containing the runners
 
 |resource_class
 |string
-|必須
-|ランナーのリソース クラス
+|true
+|runner resource class
 
 |hostname
 |string
-|必須
-|ランナーのホスト名
+|true
+|runner hostname
 
 |name
 |string
-|必須
-|ランナー名
+|true
+|runner name
 
 |first_connected
 |string (date-time)
-|必須
-|ランナーが最初に接続した日時
+|true
+|first time the runner was connected
 
 |last_connected
 |string (date-time)
-|必須
-|ランナーが最後に接続した日時
+|true
+|last time the runner was connected
 
 |last_used
 |string (date-time)
-|必須
-|ジョブの実行にランナーを最後に使用した日時
+|true
+|last time the runner was used to run a job
 
 |version
 |string
-|必須
-|ローンチ エージェントのバージョン
+|true
+|version of the launch-agent running
 |===
 
-== 例
+== Example
 
 ```sh
 {
