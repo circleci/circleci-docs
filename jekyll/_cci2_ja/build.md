@@ -9,42 +9,45 @@ description: "CircleCI 2.0 のビルド環境の構成"
 
 | ドキュメント                                                                                                   | 説明                                                                  |
 | -------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/executor-types/">Executor タイプの選び方</a>                                                                                | `docker`、`windows`、`machine`、`macos` の各 Executor の違い、メリットとデメリット、使用例 |
-| <a href="{{ site.baseurl }}/ja/2.0/caching/">依存関係のキャッシュ</a>                                                                                | 高コストなフェッチ操作が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法           |
-| [CircleCI のローカル CLI の使用]({{ site.baseurl }}/ja/2.0/local-jobs/)                                             | ローカル環境でジョブを実行する手順                                                   |
-| [CircleCI での Yarn の使用]({{ site.baseurl }}/ja/2.0/yarn/)                                                     | Yarn のインストール方法と Yarn パッケージのキャッシュ方法                                  |
-| [CircleCI 上で Snapcraft を使用した Snap パッケージのビルドとパブリッシュ]({{ site.baseurl }}/ja/2.0/build-publish-snap-packages/) | Snapcraft のセットアップと、Snap パッケージのビルドからパブリッシュまでを解説した完全ガイド               |
+| <a href="{{ site.baseurl }}/2.0/executor-types/">Executor タイプの選び方</a>                                                                                | `docker`、`windows`、`machine`、`macos` の各 Executor の違い、メリットとデメリット、使用例 |
+| <a href="{{ site.baseurl }}/2.0/caching/">依存関係のキャッシュ</a>                                                                                | 高コストなフェッチ操作が必要なデータを前回のジョブから再利用することで、CircleCI のジョブを高速化する方法           |
+| [CircleCI のローカル CLI の使用]({{ site.baseurl }}/2.0/local-jobs/)                                             | ローカル環境でジョブを実行する手順                                                   |
+| [CircleCI での Yarn の使用]({{ site.baseurl }}/2.0/yarn/)                                                     | Yarn のインストール方法と Yarn パッケージのキャッシュ方法                                  |
+| [CircleCI 上で Snapcraft を使用した Snap パッケージのビルドとパブリッシュ]({{ site.baseurl }}/2.0/build-publish-snap-packages/) | Snapcraft のセットアップと、Snap パッケージのビルドからパブリッシュまでを解説した完全ガイド               |
 {: class="table table-striped"}
 
 ## Docker
+{: #docker }
 
-| ドキュメント                    | 説明                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------ |
-| <a href="{{ site.baseurl }}/ja/2.0/circleci-images/">CircleCI のビルド済み Docker イメージ</a> | CircleCI が提供しているビルド済み Docker イメージの一覧                                           |
-| <a href="{{ site.baseurl }}/ja/2.0/custom-images/">カスタム ビルドの Docker イメージの使用</a> | CircleCI におけるカスタム Docker イメージの作成方法と使用方法                                        |
-| <a href="{{ site.baseurl }}/ja/2.0/private-images/">プライベート イメージの使用</a> | プライベート リポジトリや Amazon ECR 上にあるイメージの使用方法                                         |
-| <a href="{{ site.baseurl }}/ja/2.0/building-docker-images/">Docker コマンドの実行手順</a> | 他の場所にデプロイしたり、高度なテストを行ったりするための Docker イメージのビルド方法や、リモート Docker コンテナ内のサービスを開始する方法 |
-| <a href="{{ site.baseurl }}/ja/2.0/docker-compose/">docker-compose のインストールと使用</a> | docker-compose をジョブ実行時にプライマリ コンテナにインストールして使用する方法                               |
-| <a href="{{ site.baseurl }}/ja/2.0/docker-layer-caching/">Docker レイヤーキャッシュの有効化</a> | Docker レイヤーキャッシュ (DLC) 機能を有効化して、設定ファイルに追加する方法                                  |
+| Document                  | Description                                                                                                                      |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a> | Complete list of prebuilt CircleCI Docker images.                                                                                |
+| <a href="{{ site.baseurl }}/2.0/custom-images/">Using Custom Images</a> | How to create and use custom Docker images with CircleCI.                                                                        |
+| <a href="{{ site.baseurl }}/2.0/private-images/">Using Docker Authenticated Pulls</a> | Use Docker authenticated pulls to access private images and avoid rate limits.                                                   |
+| <a href="{{ site.baseurl }}/2.0/building-docker-images/">Running Docker Commands</a> | How to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers. |
+| <a href="{{ site.baseurl }}/2.0/docker-compose/">Using Docker Compose</a> | How to use docker-compose by installing it in your primary container during the job execution.                                   |
+| <a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Docker Layer Caching (DLC)</a> | How to request the DLC feature and add it to your configuration file.                                                            |
 {: class="table table-striped"}
 
 ## iOS と Mac
+{: #ios-and-mac }
 
-| ドキュメント                     | 説明                                                            |
-| -------------------------- | ------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/hello-world-macos/">macOS での Hello World</a>  | macOS Executor と CircleCI を利用する方法                             |
-| <a href="{{ site.baseurl }}/ja/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>  | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
-| <a href="{{ site.baseurl }}/ja/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a> | CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドライン |
+| ドキュメント                     | 説明                                                                                                |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/hello-world-macos/">Hello World on MacOS</a>  | Getting started with the macOS executor and CircleCI                                              |
+| <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a>  | How to set up and customize testing for an iOS application with CircleCI.                         |
+| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0. |
 {: class="table table-striped"}
 
 
 ## Windows
+{: #windows }
 
-| ドキュメント                     | 説明                                  |
-| -------------------------- | ----------------------------------- |
-| <a href="{{ site.baseurl }}/ja/2.0/hello-world-windows/">Windows 上での Hello World</a> | Windows Executor と CircleCI を利用する方法 |
+| Document                   | Description                                            |
+| -------------------------- | ------------------------------------------------------ |
+| <a href="{{ site.baseurl }}/2.0/hello-world-windows/">Hello World on Windows</a> | Getting started with the Windows executor and CircleCI |
 {: class="table table-striped"}
 
-このページをご参照くださり、ありがとうございます。 ビルドのお役に立てば幸いです。
+We’re thrilled to have you here. Happy building!
 
-*CircleCI チーム*
+_The CircleCI Team_
