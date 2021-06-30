@@ -3,6 +3,7 @@ layout: classic-docs
 title: "Welcome to CircleCI Documentation"
 description: "Welcome to CircleCI Documentation"
 permalink: /2.0/
+toc: false
 ---
 
 Use the tutorials, samples, how-to, and reference documentation to learn CircleCI.

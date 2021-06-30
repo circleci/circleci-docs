@@ -1,4 +1,4 @@
-* Use the new API endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#trigger-a-new-pipeline)
+* Use the new API endpoint to [trigger a pipeline](https://circleci.com/docs/api/v2/#operation/triggerPipeline)
 * Use pipeline parameters to trigger [conditional workflows]({{ site.baseurl }}/2.0/pipeline-variables/#conditional-workflows).
 * Access to `version 2.1` config, which provides:
     * [Reusable config]({{ site.baseurl }}/2.0/reusing-config/) elements, including executors, commands and jobs.

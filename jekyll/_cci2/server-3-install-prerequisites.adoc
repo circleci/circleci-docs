@@ -15,12 +15,12 @@ It is assumed you have already read the Server 3.x https://circleci.com/docs/2.0
 In order to configure the CircleCI Server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
 
 * An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
-** Creating an Amazon EKS cluster - https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html[Amazon EKS]
-*** Using `eksctl` is our recommended option, as it creates a VPC and selects the proper security group for you.
+** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
+*** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
 ** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
 *** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 +
-Note that your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
+* Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
 CircleCI Server users: +
 +
 --
@@ -35,7 +35,7 @@ CircleCI Server users: +
 
 | < 500
 | 3
-| 8 cores
+| 12 cores
 | 32 GB
 | 1 Gbps
 
@@ -47,7 +47,7 @@ CircleCI Server users: +
 |===
 --
 
-*** Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
+* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * You must have appropriate permissions to list, create, edit and delete pods in your cluster. You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
 * A CircleCI License file. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] for a license.
 * The <<Required Tools>> tools installed

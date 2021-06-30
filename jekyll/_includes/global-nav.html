@@ -1,161 +1,63 @@
-<nav class="nav-toggle two">
+<div class="global-nav--component">
   <div class="container-semi-fluid">
-        <a href="#main" class="nav-skip-button">
-          Skip to content
+    <a href="#main" class="nav-skip-button">
+      Skip to content
+    </a>
+    <div class="global-nav--row-desktop">
+      <div class="global-nav--row-mobile">
+        <a
+          href="{{ '/' | language_relative_url }}"
+          class="flex flex-row items-center global-nav--lockup-link"
+          data-analytics-action="click-outer-cta"
+        >
+          {% include utility-icons/circleci-wordmark.svg %}
+          <span class="global-nav--lockup-title">
+            Docs
+          </span>
         </a>
-
-        <div class="widescreen">
-          <a href="{{ '/' | outer_url }}" class="logo"><img src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" class="logo" alt="CircleCI Home"></a>
-
-
-          <ul class="left-links main-nav">
-            <li class="nav-item"><a href="{{ '/product/' | outer_url }}">Product</a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="{{ '/product/' | outer_url }}">Overview</a></li>
-                  <li class="subnav-item"><a href="{{ '/product/#how-it-works' | outer_url }}">How It Works</a></li>
-                  <li class="subnav-item"><a href="{{ '/product/#features' | outer_url }}">Features</a></li>
-                  <li class="subnav-item"><a href="{{ '/build-environments/' | outer_url }}">Build Environments</a></li>
-                  <li class="subnav-item"><a href="{{ '/product/#hosting-options' | outer_url }}">Hosting Options</a></li>
-                  <li class="subnav-item"><a href="{{ '/integrations/' | outer_url }}">Integrations</a></li>
-                </ul>
-              </div>
-            </li>
-
-            <li class="nav-item"><a href="{{ '/pricing/' | outer_url }}">Pricing</a></li>
-            <li class="nav-item"><a href="{{ '/enterprise/' | outer_url }}">Enterprise</a></li>
-            <li class="nav-item">
-              <a href="{{ '' | devhub_url }}">
-                Developer
-              </a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="{{ '/2.0/hello-world/' | language_relative_url }}">Hello World</a></li>
-                  <li class="subnav-item"><a href="{{ '/' | language_relative_url }}">Documentation</a></li>
-                  <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">Community Forum</a></li>
-                  <li class="subnav-item" ><a href="https://circleci.com/orbs/">Orbs</a></li>
-                  <li class="subnav-item"><a href="https://circleci.com/docs/api/v2/">API</a></li>
-                  <li class="subnav-item"><a href="{{ '/open-source/' | outer_url }}">Open Source</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="default-item nav-item"><a href="{{ '/about/' | outer_url }}">Company</a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="{{ '/about/' | outer_url }}">About Us</a></li>
-                  <li class="subnav-item"><a href="{{ '/customers/' | outer_url }}">Case Studies</a></li>
-                  <li class="subnav-item"><a href="{{ '/blog/' | outer_url }}">Blog</a></li>
-                  <li class="subnav-item"><a href="{{ '/careers/' | outer_url }}">Careers</a></li>
-                  <li class="subnav-item"><a href="{{ '/contact/' | outer_url }}">Contact Us</a></li>
-                  <li class="subnav-item"><a href="{{ '/partners/' | outer_url }}">Partner With Us</a></li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-
-          <ul class="right-links main-nav">
-            <li class="default-item nav-item">
-              <a href="{{ '/contact/' | outer_url }}" data-analytics="top-nav-contact-us">
-                Contact Us
-              </a>
-            </li>
-            <li class="default-item nav-item">
-              <a href="#">
-                Support
-              </a>
-              <div class="submenu">
-                <ul class="subnav">
-                  <li class="subnav-item"><a href="https://academy.circleci.com/?access_code=public-2020" target="_blank">Training</a></li>
-                  <li class="subnav-item"><a href="https://support.circleci.com/hc/en-us" target="_blank">Get Support</a></li>
-                  <li class="subnav-item"><a href="https://status.circleci.com/" target="_blank">System Status</a></li>
-                  <li class="subnav-item"><a href="https://ideas.circleci.com/" target="_blank">Feature Requests</a></li>
-                  <li class="subnav-item"><a href="{{ '/support/premium-support/' | outer_url }}">Premium Support</a></li>
-                </ul>
-              </div>
-            </li>
-            <li class="divider-left nav-item visitor-item"><a href="{{ '/vcs-authorize/' | outer_url }}" data-hj-masked>Log In</a></li>
-            <li class="nav-item visitor-item"><a class="btn-primary small" href="{{ '/signup/' | outer_url }}" data-analytics-action="signup-clicked" data-analytics-location="nav" data-optimizely="signup_button_clicked">Sign Up</a></li>
-            <li class="dashboard-link desktop-nav divider-left"><a href="https://circleci.com/dashboard">Go to app</a></li>
-          </ul>
-
-        </div>
-
-        <div class="narrowscreen">
-
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mobile-navigation" aria-expanded="false" aria-controls="#mobile-navigation">
+        <div>
+          <a href="#" class="global-nav--search-button">
+            {% include utility-icons/search.svg %}
+          </a>
+          <button type="button" class="global-nav--toggle collapsed" data-toggle="collapse" data-target="#global-nav" aria-expanded="false" aria-controls="blog-subnav">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar top-bar"></span>
             <span class="icon-bar middle-bar"></span>
             <span class="icon-bar bottom-bar"></span>
           </button>
-
-          <a href="https://circleci.com"><img class="logo" src="{{ '/assets/img/logos/logo-wordmark.svg' | prepend: site.baseurl }}" alt="CircleCI Home"></a>
-
-
-          <span class="login">
-            <a href="{{ '/vcs-authorize/' | outer_url }}" data-hj-masked class="mobile-nav signup visitor-item" data-analytics-location="nav" >Log In</a>
-            <a href="https://circleci.com/dashboard" class="dashboard-link mobile-nav">Go to app</a>
-          </span>
-
-          <ul class="dropdown-menu2" id="mobile-navigation">
-            <li><a href="{{ '/signup/' | outer_url }}" data-analytics-action="signup-clicked" data-optimizely="signup_button_clicked" class="btn-primary">Sign Up for Free</a></li>
-            <li class="arrow collapsed border-bottom">
-              <span class="heading">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                Product
-              </span>
-              <ul class="subnav">
-                <li class="subnav-item"><a href="{{ '/product/' | outer_url }}">Overview</a></li>
-                <li class="subnav-item"><a href="{{ '/product/#how-it-works' | outer_url }}">How It Works</a></li>
-                <li class="subnav-item"><a href="{{ '/product/#features' | outer_url }}">Features</a></li>
-                <li class="subnav-item"><a href="{{ '/build-environments/' | outer_url }}">Build Environments</a></li>
-                <li class="subnav-item"><a href="{{ '/product/#hosting-options' | outer_url }}">Hosting Options</a></li>
-                <li class="subnav-item"><a href="{{ '/integrations/' | outer_url }}">Integrations</a></li>
-              </ul>
-            </li>
-            <li class="border-bottom"><a href="{{ '/pricing/' | outer_url }}">Pricing</a></li>
-            <li class="border-bottom"><a href="{{ '/enterprise/' | outer_url }}">Enterprise</a></li>
-            <li class="arrow collapsed border-bottom">
-              <span class="heading">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                Developer
-              </span>
-              <ul class="subnav">
-                <li class="subnav-item"><a href="{{ '' | devhub_url }}">Developer Hub</a></li>
-                <li class="subnav-item"><a href="{{ '/2.0/hello-world/' | language_relative_url }}">Getting Started</a></li>
-                <li class="subnav-item"><a href="{{ '/' | language_relative_url }}">Documentation</a></li>
-                <li class="subnav-item"><a href="https://discuss.circleci.com/" target="_blank">Community Forum</a></li>
-                <li class="subnav-item"><a href="https://circleci.com/orbs/">Orbs</a></li>
-                <li class="subnav-item"><a href="https://circleci.com/docs/api/v2/">API</a></li>
-                <li class="subnav-item"><a href="{{ '/open-source/' | outer_url }}">Open Source</a></li>
-              </ul>
-            </li>
-            <li class="arrow collapsed border-bottom">
-              <span class="heading">
-                <i class="fa fa-angle-right" aria-hidden="true"></i>
-                Company
-              </span>
-              <ul class="subnav">
-                <li class="subnav-item"><a href="{{ '/about/' | outer_url }}">About Us</a></li>
-                <li class="subnav-item"><a href="{{ '/customers/' | outer_url }}">Case Studies</a></li>
-                <li class="subnav-item"><a href="{{ '/blog/' | outer_url }}">Blog</a></li>
-                <li class="subnav-item"><a href="{{ '/careers/' | outer_url }}">Careers</a></li>
-                <li class="subnav-item"><a href="{{ '/contact/' | outer_url }}">Contact Us</a></li>
-                <li class="subnav-item"><a href="{{ '/partners/' | outer_url }}">Partner With Us</a></li>
-              </ul>
-            </li>
-            <li class="arrow collapsed border-bottom">
-              <i class="fa fa-angle-right" aria-hidden="true"></i>
-              Support
-              <ul class="subnav">
-                <li class="subnav-item"><a href="https://academy.circleci.com/?access_code=public-2020" target="_blank">Training</a></li>
-                <li class="subnav-item"><a href="https://support.circleci.com/hc/en-us" target="_blank">Get Support</a></li>
-                <li class="subnav-item"><a href="https://status.circleci.com/" target="_blank">System Status</a></li>
-                <li class="subnav-item"><a href="https://ideas.circleci.com/" target="_blank">Feature Requests</a></li>
-                <li class="subnav-item"><a href="{{ '/support/premium-support/' | outer_url }}">Premium Support</a></li>
-              </ul>
-            </li>
-          </ul>
+          <div class="global-nav--search-bar">
+            {% include main-searchbar.html %}
+          </div>
         </div>
+      </div>
+      <nav class="collapse global-nav--nav" id="global-nav">
+        <div class="divider"></div>
+        {% include_cached mobile-sidebar.html site=site page=page %}
+        <div class="global-nav--list global-nav--external-links">
+          <a
+            href="{{ '/' | outer_url }}"
+            class="global-nav--external-link global-nav--list-item"
+            data-analytics-action="click-outer-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            circleci.com&nbsp;&nbsp;{% include utility-icons/external.svg %}
+          </a>
+        </div>
+        <div class="global-nav--footer">
+          <a
+            href="{{ '/signup/' | outer_url }}"
+            class="btn-primary visitor-item"
+            target="_blank"
+            data-analytics-action="click-outer-cta"
+          >
+            Sign Up
+          </a>
+          <a href="https://app.circleci.com/dashboard" class="btn-primary dashboard-link">
+            Go to app
+          </a>
+        </div>
+      </nav>
+    </div>
   </div>
-</nav>
+</div>

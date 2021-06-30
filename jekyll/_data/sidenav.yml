@@ -4,6 +4,8 @@ en:
   children:
     - name: Overview
       children:
+        - name: Welcome
+          link: 2.0/
         - name: About CircleCI
           link: 2.0/about-circleci/
         - name: Concepts
@@ -132,8 +134,6 @@ en:
           link: 2.0/runner-installation/
         - name: Runner API
           link: 2.0/runner-api/
-        - name: Runner in Server
-          link: 2.0/runner-server/
         - name: Runner FAQs
           link: 2.0/runner-faqs/
 
@@ -348,15 +348,17 @@ en:
           link: 2.0/server-3-operator-application-lifecycle
         - name: Troubleshooting and Support
           link: 2.0/server-3-operator-troubleshooting-and-support
+        - name: Backup and Restore
+          link: 2.0/server-3-operator-backup-and-restore
     - name: Server v3.x PDFs
       link: 2.0/server-3-overview
       children:
         - name: v3.0 Overview
-          link: 2.0/CircleCI-Server-3.0.0-Overview.pdf
+          link: 2.0/CircleCI-Server-3.0.1-Overview.pdf
         - name: v3.0 Installation Guide
-          link: 2.0/CircleCI-Server-3.0.0-Installation-Guide.pdf
+          link: 2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
         - name: v3.0 Operations Guide
-          link: 2.0/CircleCI-Server-3.0.0-Operations-Guide.pdf
+          link: 2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
     - name: Server v2.19.x Install
       link: 2.0/install-overview/
       children:
@@ -474,6 +476,9 @@ ja:
     - name: Overview
       i18n_name: 概要
       children:
+        - name: Welcome
+          i18n_name: ようこそ
+          link: ja/2.0/
         - name: About CircleCI
           link: ja/2.0/about-circleci/
           i18n_name: CircleCIの概要

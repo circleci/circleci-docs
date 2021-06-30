@@ -17,7 +17,6 @@ var languages = {
 var els = {
   sidebarLangSelect: getElById("sidebarLangSelect"),
   footerLangSelect: getElById("footerLangSelect"),
-  footerLangCurrentSelect: getElById("footerLangCurrentSelect"),
   footerLangOptions: getElById("footerLangOptions")
 };
 
@@ -46,9 +45,6 @@ function handleSetLanguageOnLoad() {
     }
   }
 
-  // set value for footer picker.
-  footerLangCurrentSelect.textContent = languages[window.currentLang].name;
-
 }
 
 /**
@@ -70,15 +66,8 @@ function handleChangeLanguageSidebar() {
   })
 }
 
-function handleChangeLanguageFooter() {
-  els.footerLangSelect.addEventListener("click", function(_) {
-    els.footerLangOptions.classList.toggle("hidden");
-  })
-}
-
 
 export function init() {
   handleChangeLanguageSidebar();
-  handleChangeLanguageFooter();
   handleSetLanguageOnLoad();
 }

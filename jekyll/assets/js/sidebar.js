@@ -6,7 +6,6 @@
     var sidebar = document.querySelector('.sidebar');
     var defaultSectionName = 'getting-started';
     var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
-    var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
     var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
     var urlParams = new URLSearchParams(window.location.search)
@@ -40,15 +39,6 @@
       }
     }
 
-    // Show/hide mobile sidebar
-    mobileSidebarCurrent.addEventListener('click', function () {
-      if(mobileSidebarDisplay.classList.contains('hidden')) {
-        mobileSidebarDisplay.classList.remove('hidden');
-      } else {
-        mobileSidebarDisplay.classList.add('hidden');
-      }
-    });
-
     function setSidebar () {
       // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
       if ((footer.getBoundingClientRect().top - window.innerHeight) <= 0 && footer.getBoundingClientRect().top >= window.innerHeight) {
@@ -77,9 +67,7 @@
       $("nav.sidebar").scrollTop(elementRelativeTop);
     }
 
-    window.addEventListener('scroll', setSidebar);
     window.addEventListener('load', setSidebar);
-    window.addEventListener('resize', setSidebar);
 
     // allowing opening/closing of subnav elements
     var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));

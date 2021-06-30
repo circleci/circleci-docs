@@ -425,7 +425,7 @@ CircleCI no longer offers discounts for open source customers on the Performance
 
 Docker layer caching (DLC) reduces build times on pipelines where Docker images are
 built by only rebuilding Docker layers that have changed (read more about DLC
-[here]({{site.baseurl}})/2.0/docker-layer-caching). DLC costs 200 credits per
+[here]({{site.baseurl}}/2.0/docker-layer-caching). DLC costs 200 credits per
 job run.
 
 There are a few things that CircleCI does to ensure DLC is available to

@@ -109,7 +109,7 @@ You can view more examples of workflows in the  [CircleCI demo workflows repo](h
 
 Workspaces are used to pass along data that is _unique to a run_ and is needed for _downstream jobs_. So, if you are using workflows, a job run earlier in your build might fetch data and then make it _available later_ for jobs that run later in a build.
 
-To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/2.0/configuration-reference#attach_workspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persist_to_workspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
+To persist data from a job and make it available to downstream jobs via the [`attach_workspace`]({{ site.baseurl}}/2.0/configuration-reference#attachworkspace) key, configure the job to use the [`persist_to_workspace`]({{ site.baseurl}}/2.0/configuration-reference#persisttoworkspace) key. Files and directories named in the paths: property of `persist_to_workspace` will be uploaded to the workflow’s temporary workspace relative to the directory specified with the root key. The files and directories are then uploaded and made available for subsequent jobs (and re-runs of the workflow) to use.
 
 Read more about how to use workspaces in the [workflows document]({{site.baseurl}}/2.0/workflows/#using-workspaces-to-share-data-among-jobs).
 
@@ -141,9 +141,9 @@ Read more in-depth about splitting tests in our [document on parallelism]({{site
 ## Resource class
 {: #resource-class }
 
-**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resource_class) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
+**Note:** An eligible plan is required to use the [`resource_class`]({{site.baseurl}}/2.0/configuration-reference#resourceclass) feature on Cloud. If you are on a container-based plan you will need to [open a support ticket](https://support.circleci.com/hc/en-us/requests/new) to enable this feature on your account. Resource class options for self hosted installations are set by system administrators.
 
-Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resource_class) for a list of available classes, and for self hosted installations contact your system administrator for a list. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
+Using `resource_class`, it is possible to configure CPU and RAM resources for each job. For Cloud, see [this table](https://circleci.com/docs/2.0/configuration-reference/#resourceclass) for a list of available classes, and for self hosted installations contact your system administrator for a list. If `resource_class` is not specified or an invalid class is specified, the default `resource_class: medium` will be used.
 
 Below is an example use case of the `resource_class` feature.
 
@@ -167,7 +167,7 @@ jobs:
 ## Docker layer caching
 {: #docker-layer-caching }
 
-**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrate to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
+**Note**: [The Performance Plan](https://circleci.com/pricing/) is required to use Docker Layer Caching. If you are on the container-based plan you will need to upgrade to [the Performance Plan](https://circleci.com/pricing/) to enable DLC for your organization.
 
 DLC is a feature that can help to reduce the _build time_ of a Docker image in your build. Docker Layer Caching is useful if you find yourself frequently building Docker images as a regular part of your CI/CD process.
 

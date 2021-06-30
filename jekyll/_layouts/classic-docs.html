@@ -7,53 +7,66 @@
 {% endif %}
 
 <div class="outer">
-  {% include_cached global-nav.html %}
-  {% include_cached main-searchbar.html %}
-  {% include_cached mobile-sidebar.html site=site page=page %}
+  {% include_cached global-nav.html site=site page=page %}
   {% include_cached hits-target.html %}
-
   <div class="main-body">
     {% assign lang = page.lang %}
     {% assign sidenav = site.data.sidenav[lang] %}
     {% assign current_url = page.url | slice: 1, page.url.size %}
     {% include_cached sidebar.html lang=lang sidenav=sidenav current_url=current_url%}
-    <div class="article-container docs" id="main">
-      {% if page.collection == "ccie" %}{% include_cached v2-banner.html %}{% endif %}
-      {% if page.collection == "cci1" %}{% include_cached v2-dev-banner.html %}{% endif %}
-      {% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 
+    <div class="article-toc-footer">
+      <div class="article-toc">
+        <div class="article-container docs" id="main">
+          {% if page.collection == "ccie" %}{% include_cached v2-banner.html %}{% endif %}
+          {% if page.collection == "cci1" %}{% include_cached v2-dev-banner.html %}{% endif %}
+          {% if page.page-type == "index" %}<h2>{{ page.title }}</h2>{% endif %}
 
-      <article>
-        <!-- Title and version badges: -->
-        <div>
-          {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
-        </div>
-        {% if page.version %}
-        <div class="server-version-wrapper">
-          <div id="tooltip" role="tooltip" class="server-version-popover">
-            This document is applicable to the following:
-            <div id="arrow" data-popper-arrow></div>
+          <article>
+            <!-- Title and version badges: -->
+            <div>
+              {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
+            </div>
+            {% if page.version %}
+            <div class="server-version-wrapper">
+              <div id="tooltip" role="tooltip" class="server-version-popover">
+                This document is applicable to the following:
+                <div id="arrow" data-popper-arrow></div>
+              </div>
+              {% for version in page.version %}
+              <span class="badge badge-primary">
+                <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
+                <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
+              </span>
+              {% endfor %}
+            </div>
+            {% endif %}
+            {% if page.untranslated %}
+            {% include_cached translation_in_progress.html site=site page=page %}
+            {% endif %}
+            {{ content }}
+            {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
+            {% include_cached doc-footer.html page=page site=site %}
+            {% endif %}
+          </article>
+        </div><!-- .article-container -->
+
+        {% if page.toc != false %}
+        <aside class="table-of-contents">
+          <h5 class="toc-heading">On this page </h5>
+          <div class="toc-indent">
+            {{ content | toc_only }}
           </div>
-          {% for version in page.version %}
-          <span class="badge badge-primary">
-            <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
-            <!-- <img src="{{ site.baseurl }}/assets/img/docs/{{ version }}-badge.png" height="24">  -->
-          </span>
-          {% endfor %}
-        </div>
+        </aside>
         {% endif %}
-        {% if page.untranslated %}
-          {% include_cached translation_in_progress.html site=site page=page %}
-        {% endif %}
-        {{ content }}
-        {% if page.collection != 'cci1' and page.page-type != "index" and page.layout == "classic-docs" or page.layout == "enterprise" %}
-          {% include_cached doc-footer.html page=page site=site %}
-        {% endif %}
-      </article>
-    </div><!-- .article-container -->
+      </div> <!-- .article-toc -->
+
+      {% include_localized global-footer.html %}
+    </div> <!-- .article-toc-footer -->
+
+
   </div><!-- .main-body -->
 
-  {% include_localized global-footer.html %}
   {% include_cached js-config.html site=site page=page %}
   {% include_cached js-assets.html %}
 </div><!-- .outter -->

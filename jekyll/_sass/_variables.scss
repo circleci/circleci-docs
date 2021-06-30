@@ -39,6 +39,11 @@ $screen-xs-max:              ($screen-sm-min - 1);
 $screen-sm-max:              ($screen-md-min - 1);
 $screen-md-max:              ($screen-lg-min - 1);
 
+// Sidebars
+$toc-breakpoint: 1300px; // where the toc-right-sidebar disappears.
+$leftbar-width: 280px;
+$rightbar-width: 350px;
+
 // General Sizing
 $spacing-small-horizontal: 12px;
 $spacing-medium-horizontal: 24px;
@@ -67,3 +72,11 @@ $font-size-h5: 18px;
 $font-weight-base: 400; 
 $font-weight-thin: 100;
 $font-weight-bold: 600;
+
+// Header and subnav
+$nav-height: 68px;
+$nav-height-mobile: 62px;
+$subnav-height: 64px;
+$nav-offset: $nav-height;
+$subnav-offset: $subnav-height;
+$nav-offset-subnav: $nav-offset + $subnav-offset;

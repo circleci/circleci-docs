@@ -2,6 +2,8 @@
 ---
 @import 'variables';
 @import 'sidebar';
+@import 'footer';
+@import 'global-nav';
 @import 'subnav';
 @import 'instantsearch';
 @import 'tooltip';
@@ -11,7 +13,7 @@ body{
 	color: $body-text-color;
 	display: block;
 	width: 100%;
-	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 50%, #fff 50%, #fff 100%);
+	background: linear-gradient(to right, #F7F7F7 0%, #F7F7F7 30%, #fff 30%, #fff 100%);
 	font-family: 'Roboto', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -41,12 +43,12 @@ a {
 .container-semi-fluid,
 div.main-body{
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1920px;
+  flex-direction: row;
 }
 
 
 div.main-body {
-  overflow: auto;
 	display: flex;
 	background: #fff;
 }
@@ -104,20 +106,6 @@ footer {
 	}
 }
 
-// Main Nav Additions
-nav.nav-toggle.two {
-	.btn, .btn-primary, .btn-primary-enterprise {
-		display: inline-block;
-		text-align: center;
-		vertical-align: middle;
-		font-size: 16px;
-	}
-
-	a:hover {
-		text-decoration: none;
-	}
-}
-
 // Navigation Sidebar
 #nav-button{
 	display: none;
@@ -143,17 +131,59 @@ nav.nav-toggle.two {
 	}
 }
 
+div.sidebar-offset {
+  margin-left: $leftbar-width;
+  display: flex;
+  height: 100vh;
+  overflow: scroll;
+
+  @media screen and (max-width: $screen-sm) {
+		margin-left: 0px;
+		width: 100%;
+	}
+}
+
+// Logged In/Out State
+body.loggedin {
+	.visitor-item {
+		display: none !important;
+	}
+	.dashboard-link {
+		display: block !important;
+	}
+}
+
+.dashboard-link {
+	display: none !important;
+}
+
 
 // Article
 div.article-container{
-	float: left;
-	@media screen and (max-width: $screen-xs-max) {
-		padding: 0 16px 0 16px;
-		width: 100%;
-	}
-	padding: 60px 48px 0 48px;
-	width: calc(100% - 260px);
+  flex: 1;
+  @media screen and (max-width: $screen-xs-max) {
+      padding: 0 16px 0 16px;
+      width: 100%;
+  }
+  padding: 0 48px;
+  width: calc(100% - #{$rightbar-width});
+  max-width: 60em; // increase readability on large screens.
 }
+
+.article-toc {
+    display: flex;
+    width: 100%;
+}
+
+.article-toc-footer {
+    flex-direction: column;
+    width: calc(100% - #{$leftbar-width});
+    @media (max-width: $screen-sm) {
+      width: 100%;
+    }
+}
+
+
 	article{
 		h2,
 		h3,
@@ -251,10 +281,8 @@ body.homepage{
   .article-container{
     @media screen and (max-width: $screen-xs-max) {
   	  padding: 0 16px 0 16px;
-      width: 100%;
+      width: calc(100% - $leftbar-width;
     }
-	  padding: 60px 48px 0 48px;
-    width: calc(100% - 260px);
   }
 
 	article{
@@ -283,6 +311,8 @@ body.homepage{
 
 code {
   padding: 2px;
+  white-space: pre-wrap !important;
+  word-wrap: anywhere;
 }
 
 /***** Widgets ****************************************************************/

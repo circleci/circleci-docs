@@ -345,7 +345,7 @@ workflows:
 
 Helm is a powerful application package manager that runs on top of a Kubernetes cluster and allows you to describe the application structure by using helm-charts and manage the structure using simple commands. Helm uses a packaging format called charts, which are collections of files that describe a related set of Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
 
-Using the `aws-eks` orb you can install Helm on your Kubernetes cluster, then install a Helm chart just using the orb's built-in jobs. Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
+Using the `aws-eks` orb you can install Helm on your Kubernetes cluster, then install a Helm chart just using the orb's built-in jobs. Below is a code example for this, which also cleans up by deleting the release and cluster at the end of the process:
 
 ```yaml
 version: 2.1
@@ -642,13 +642,14 @@ For example, consider a monorepo structure like the example shown below:
 
 ```shell
 .
+├── .circleci
+│   └── config.yml
 ├── service1
 │   ├── Service1.java
 ├── service2
 │   ├── Service2.java
 ├── tests
 │   ├── IntegrationTests.java
-└── config.yml
 ```
 
 An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:

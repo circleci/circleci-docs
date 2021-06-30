@@ -1,10 +1,26 @@
+// Modal search on mobile
+$(document).ready(function () {
+  $('.global-nav--search-button').on('click', function (e) {
+    e.preventDefault();
+    $('body').addClass('search-open');
+    $('.global-nav--search-bar .instantsearch-search').focus();
+  });
+}());
+
+// Show/hide search button on menu collapse
+$(document).ready(function () {
+  $('#global-nav').on('show.bs.collapse', function () {
+    $('body').addClass('global-nav-open');
+  });
+  $('#global-nav').on('hide.bs.collapse', function () {
+    $('body').removeClass('global-nav-open');
+  });
+});
+
 // Collapsing submenus on mobile nav
 (function () {
   // grabbing all expandable submenus
   var expandableSubMenus = Array.from(document.querySelectorAll('nav li.arrow'));
-  var mobileMenuBtn = document.querySelectorAll('button.navbar-toggle')[0];
-  var htmlBody = document.getElementsByTagName('body')[0];
-  var mobileNav = document.getElementById('mobile-navigation');
 
   expandableSubMenus.forEach(function (submenu) {
     submenu.addEventListener('click', function () {
@@ -14,30 +30,6 @@
         this.classList.add('collapsed');
       }
     });
-  });
-
-  var preventDefaultTouch = function (e) {
-    e.preventDefault();
-  };
-
-  // on click of nav, on mobile, hide body scroll, to make only nav scrollable
-  mobileMenuBtn.addEventListener('click', function (btnEvt) {
-    if (btnEvt.target.classList.contains('collapsed')) {
-      htmlBody.style.overflow = "hidden";
-      document.addEventListener('touchmove', preventDefaultTouch, { passive: false });
-
-      var offset, navEvt;
-      mobileNav.addEventListener('touchstart', function (evt) {
-        offset = this.scrollTop; 
-        navEvt = evt;
-      });
-      mobileNav.addEventListener('touchmove', function (navEvt2) {
-        this.scrollTop = (navEvt.touches[0].clientY - navEvt2.touches[0].clientY) + offset;
-      });
-    } else {
-      htmlBody.style.overflow = "initial";
-      document.removeEventListener('touchmove', preventDefaultTouch, { passive: false });
-    }
   });
 
   // Open dropdowns on keyboard focus

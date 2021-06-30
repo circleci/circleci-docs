@@ -1,4 +1,4 @@
-= INSTALLATION GUIDE: A guide for installing or migrating to CircleCI Server v{servervarsion} on AWS or GCP
+= INSTALLATION GUIDE: A guide for installing or migrating to CircleCI Server v{serverversion} on AWS or GCP
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
@@ -21,7 +21,7 @@ include::server-3-install-prerequisites.adoc[]
 
 include::server-3-install-creating-your-first-cluster.adoc[]
 
-include::server-3-install.adoc
+include::server-3-install.adoc[]
 
 include::server-3-install-migration.adoc[]
 
