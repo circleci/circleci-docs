@@ -1,84 +1,61 @@
 ---
 layout: classic-docs
-title: "パイプラインの有効化"
+title: "Working with Pipelines"
 short-title: "パイプラインの有効化"
-description: "パイプラインを有効にする方法"
+description: "How to work effectively with CircleCI pipelines"
 categories:
   - settings
 order: 1
+version:
+  - Cloud
 ---
 
 CircleCI API または自動キャンセルのワークフローからワークフローをトリガーする必要がある場合に、パイプライン エンジンを有効化する方法を説明します。 パイプラインは、現在オンプレミス版の CircleCI Server ではサポートされていません。
 
-- 目次
+* TOC
 {:toc}
 
-## はじめに
-{:.no_toc}
+## What are pipelines?
+{: #what-are-pipelines }
 
-ほとんどのプロジェクトでは、デフォルトでパイプラインが有効化されています。 プロジェクトのパイプライン設定は、CircleCI アプリケーションのプロジェクトの [Settings (設定)] ページの [Advanced (詳細)] セクションで確認できます。 **メモ:** パイプラインは、CircleCI の v2 および v2.1 の構成と互換性があります。
+CircleCI Pipelines encompass the full set of workflows you run when triggering work on your projects in CircleCI. Workflows coordinate the jobs defined within your project configuration.
 
-## パイプラインのメリット
+## Benefits of using pipelines
+{: #benefits-of-using-pipelines }
 
-パイプライン機能を使用すると、[ワークフローを含むビルドをトリガーする新しい API エンドポイント](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview)を使用して、以下のユース ケースに対応できるようになります。
+Pipelines offer the following benefits:
 
 {% include snippets/pipelines-benefits.adoc %}
 
-## トラブルシューティング
+## Implications of pipelines
+{: #implications-of-pipelines }
 
-パイプライン エラーは、[Workflows (ワークフロー)] ページまたは [Jobs (ジョブ)] ページに表示されます。
+When using pipelines, please note the following:
 
-従量課金制のプランで、いったんプロジェクトに対してパイプラインを有効化すると、CircleCI サポートにチケットを送信しない限り、オフにすることができません。 以下の`制限事項`を参照してください。
+- If no builds or workflows are defined, you will receive an error.
 
-## 制限事項
+## Transitioning to pipelines
+{: #transitioning-to-pipelines }
 
-CircleCI では、ほとんどの場合に下位互換性が維持されており、パイプラインを有効化したプロジェクトの大部分で既存のビルドに影響はありません。 以前は機能していたビルドが、パイプラインを有効化したことで機能しなくなる場合は、CircleCI にご連絡ください。
+The following sections outline the process of transitioning to pipelines.
 
-- アンカーは、アプリケーションの設定ファイルに表示されることなく、処理されて解決されます。
-- シェル コマンドで `<<` を使用する場合 (ヒアドキュメントを使用する場合など)、バージョン 2.1 以上の構成を使用するには、`\<<` のようにバックスラッシュ `` でエスケープする必要があります。 2.0 の構成に影響はありません。
-- パイプラインは、任意のジョブをトリガーする 1.1 API エンドポイントと完全には**下位互換性がありません**。パイプラインをオンにした後にこのエンドポイントを使用すると、予期しない結果または不整合な結果となる可能性があります。 代わりに、2018 年 9 月に 1.1 API で導入された、[ビルドをトリガーするエンドポイント](https://circleci.com/docs/api/#trigger-a-new-build-by-project-preview)を使用できます。 このビルドをトリガーする API エンドポイントは、パラメーター、ワークフロー、ジョブ フィルターを**受け付けない**ので、ご注意ください。 パイプラインと併せてこれらの API 機能を多用したいとお考えでしたら、CircleCI のアカウント チームにお問い合わせください。
-- バージョン 2.0 の構成では、下位互換性を確保するために、`CIRCLE_COMPARE_URL` 環境変数がすべてのジョブに挿入されます。
-
-## パイプラインへの移行
-
-このセクションでは、パイプラインへの移行プロセスについて概説します。
-
-### 2.0 構成でのパイプライン
+### Pipelines with 2.0 configuration
+{: #pipelines-with-20-configuration }
 {:.no_toc}
 
-2.0 構成でパイプラインを使用する場合、CircleCI では `CIRCLE_COMPARE_URL` 環境変数がすべてのジョブに挿入され、下位互換性が確保されます。 この環境変数は、従来のジョブで使用可能な環境変数とは異なる方法で生成され、いつでも使用できるわけではありません。たとえば、空のリポジトリへのコミットを初めてプッシュした場合や、追加のコミットなしに新しいブランチが作成/プッシュされた場合など、以前のリビジョンが存在しない場合は挿入されません。
+When using 2.0 configuration in combination with pipelines, CircleCI will inject the `CIRCLE_COMPARE_URL` environment variable into all jobs for backwards compatibility. This environment variable is generated in a different way to the version that is available in legacy jobs, and is not always available – it is not injected when there is no meaningful previous revision, for example, on the first push of commits to an empty repository, or when a new branch is created/pushed without any additional commits.
 
-## ブランチでのパイプラインのオプトイン
-
-プロジェクト全体の設定変更をコミットせずにブランチでパイプラインを試してみるには、主に 2 つの方法があります。
-
-1. バージョン 2.1 構成を使用する
-2. バージョン 2.0 構成を使用し、[`experimental` スタンザ](#experimental-スタンザの使用) を追加する
-
-**メモ:** これらの方法は現在 Web フックとバージョン 2 の「パイプライン トリガー」API に適用されますが、バージョン 1.1 の「ジョブ トリガー」API には適用されません。 パイプラインでのバージョン 1.1 API の使用についてのサポートは、間もなく発表する予定です。
-
-### バージョン 2.1 構成の使用
+## Giving feedback
+{: #giving-feedback }
 {:.no_toc}
 
-バージョン `2.1` 構成を使用すると、パイプラインが自動的に有効になり、[パイプライン値](https://circleci.com/ja/docs/2.0/pipeline-variables/#パイプライン値)など、`2.1` 専用の機能を利用できるようになります。
-
-### `experimental` スタンザの使用
-{:.no_toc}
-
-バージョン 2.0 構成でパイプラインを有効にする構成スタンザは次のとおりです。
-
-```yaml
-experimental:
-  pipelines: true
-```
-
-## フィードバック方法
-{:.no_toc}
+If you have feedback, suggestions, or comments:
 
 - CircleCI の Twitter アカウント (@CircleCIJapan) 宛てにツイートする
 - [アイデア ボード](https://ideas.circleci.com/)で既存の投稿に投票する、または投稿を追加する
 
-## 関連項目
+## See also
+{: #see-also }
 {:.no_toc}
 
-詳細については、「[ビルドのスキップとキャンセル]({{ site.baseurl }}/ja/2.0/skip-build/#冗長ビルドの自動キャンセル)」を参照してください。
+Refer to the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/#auto-cancelling-a-redundant-build) document for more details.
