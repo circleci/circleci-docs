@@ -17,37 +17,37 @@ description: "CircleCI 2.0 のビルド環境の構成"
 {: class="table table-striped"}
 
 ## Docker
-{: #docker }
+{{ site.baseurl }}/ja/2.0/docker-compose/
 
-| Document                  | Description                                                                                                                      |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a> | Complete list of prebuilt CircleCI Docker images.                                                                                |
-| <a href="{{ site.baseurl }}/2.0/custom-images/">Using Custom Images</a> | How to create and use custom Docker images with CircleCI.                                                                        |
-| <a href="{{ site.baseurl }}/2.0/private-images/">Using Docker Authenticated Pulls</a> | Use Docker authenticated pulls to access private images and avoid rate limits.                                                   |
-| <a href="{{ site.baseurl }}/2.0/building-docker-images/">Running Docker Commands</a> | How to build Docker images for deploying elsewhere or for further testing and how to start services in remote docker containers. |
-| <a href="{{ site.baseurl }}/2.0/docker-compose/">Using Docker Compose</a> | How to use docker-compose by installing it in your primary container during the job execution.                                   |
-| <a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Docker Layer Caching (DLC)</a> | How to request the DLC feature and add it to your configuration file.                                                            |
+| ドキュメント                    | 説明                                                                             |
+| ------------------------- | ------------------------------------------------------------------------------ |
+| <a href="{{ site.baseurl }}/2.0/circleci-images/">Prebuilt Images</a> | CircleCI が提供しているビルド済み Docker イメージの一覧                                           |
+| <a href="{{ site.baseurl }}/2.0/custom-images/">プライベート イメージの使用</a> | CircleCI におけるカスタム Docker イメージの作成方法と使用方法                                        |
+| <a href="{{ site.baseurl }}/2.0/private-images/">カスタム ビルドの Docker イメージの使用</a> | Use Docker authenticated pulls to access private images and avoid rate limits. |
+| <a href="{{ site.baseurl }}/2.0/building-docker-images/">Docker コマンドの実行手順</a> | 他の場所にデプロイしたり、高度なテストを行ったりするための Docker イメージのビルド方法や、リモート Docker コンテナ内のサービスを開始する方法 |
+| <a href="{{ site.baseurl }}/2.0/docker-compose/">docker-compose のインストールと使用</a> | docker-compose をジョブ実行時にプライマリ コンテナにインストールして使用する方法                               |
+| <a href="{{ site.baseurl }}/2.0/docker-layer-caching/">Docker レイヤーキャッシュ (DLC) 機能を有効化して、設定ファイルに追加する方法</a> | How to request the DLC feature and add it to your configuration file.          |
 {: class="table table-striped"}
 
 ## iOS と Mac
-{: #ios-and-mac }
+{{ site.baseurl }}/ja/2.0/ios-codesigning/
 
-| ドキュメント                     | 説明                                                                                                |
-| -------------------------- | ------------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/hello-world-macos/">Hello World on MacOS</a>  | Getting started with the macOS executor and CircleCI                                              |
-| <a href="{{ site.baseurl }}/2.0/testing-ios/">Testing iOS Applications on macOS</a>  | How to set up and customize testing for an iOS application with CircleCI.                         |
-| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">Setting Up Code Signing for iOS Projects</a> | Describes the guidelines for setting up code signing for your iOS or Mac project on CircleCI 2.0. |
+| ドキュメント                     | 説明                                                            |
+| -------------------------- | ------------------------------------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/hello-world-macos/">Windows 上での Hello World</a>  | Windows Executor と CircleCI を利用する方法                           |
+| <a href="{{ site.baseurl }}/2.0/testing-ios/">macOS 上の iOS アプリケーションのテスト</a>  | CircleCI で iOS アプリケーションのテストをセットアップおよびカスタマイズする方法               |
+| <a href="{{ site.baseurl }}/2.0/ios-codesigning/">iOS プロジェクトのコード署名のセットアップ</a> | CircleCI 2.0 上の iOS プロジェクトまたは Mac プロジェクトのコード署名をセットアップするガイドライン |
 {: class="table table-striped"}
 
 
 ## Windows
 {: #windows }
 
-| Document                   | Description                                            |
-| -------------------------- | ------------------------------------------------------ |
-| <a href="{{ site.baseurl }}/2.0/hello-world-windows/">Hello World on Windows</a> | Getting started with the Windows executor and CircleCI |
+| ドキュメント                     | 説明                                |
+| -------------------------- | --------------------------------- |
+| <a href="{{ site.baseurl }}/2.0/hello-world-windows/">macOS での Hello World</a> | macOS Executor と CircleCI を利用する方法 |
 {: class="table table-striped"}
 
 We’re thrilled to have you here. Happy building!
 
-_The CircleCI Team_
+_CircleCI チーム_
