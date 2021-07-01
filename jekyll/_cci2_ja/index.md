@@ -25,12 +25,12 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <h2>サンプル</h2>
     <p>人気のサンプルをチェックしましょう。</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/using-orbs/">Orbs の使用</a></li>
-    </ul>
+        <li><a href="{{ site.baseurl }}/ja/2.0/example-configs/">CircleCI を使用したオープンソース プロジェクト</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/postgres-config/">データベースの構成例</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/sample-config/">config.yml のサンプル ファイル</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/tutorials/">チュートリアルとサンプル アプリ</a></li>
+        <li><a href="{{ site.baseurl }}/ja/2.0/using-orbs/">Orbs の使用</a></li>
+      </ul>
   </div>
   <div class="col-xs-12">
     <hr />
@@ -43,7 +43,6 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="{{ site.baseurl }}/ja/2.0/writing-yaml/">YAML の記述</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/env-vars/">環境変数の使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/ssh-access-jobs/">SSH を使用したデバッグ</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/reusing-config/">設定ファイルの再利用</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
@@ -55,6 +54,17 @@ CircleCI について理解を深めていただけるよう、チュートリ�
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#ワークフローのスケジュール実行">ワークフローのスケジュール実行</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用">ワークフローにおけるコンテキストとフィルターの使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/creating-orbs/">Orbs の作成</a></li>
+    </ul>
+  </div>
+   <div class="col-xs-12">
+    <hr />
+  </div>
+   <div class="col-xs-12 col-sm-6">
+    <h2>Cookbooks</h2>
+    <p>Recipes to assist and inspire your pipeline config.</p>
+    <ul>
+      <li><a href="{{ site.baseurl }}/ja/2.0/reusing-config/">Discover ways to optimize your pipelines</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">Explore best practices for a range of use cases</a></li>
     </ul>
   </div>
 </div>
