@@ -6,6 +6,9 @@ description: "CircleCI 2.0 での Crystal を使用したビルドとテスト"
 categories:
   - language-guides
 order: 9
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 *[チュートリアル & 2.0 サンプル アプリケーション]({{ site.baseurl }}/ja/2.0/tutorials/) > 言語ガイド: Crystal*
@@ -13,22 +16,23 @@ order: 9
 このガイドでは、CircleCI で最小限の Crystal アプリケーションをビルドする方法について説明します。
 
 ## 概要
-
 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある `.circleci/config.yml` に貼り付け、ビルドを開始してください。
 
 Crystal プロジェクトのサンプルは以下のリンクで確認できます。
 
+このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
+
 - <a href="https://github.com/CircleCI-Public/circleci-demo-crystal"
 target="_blank">GitHub 上の Crystal デモ プロジェクト</a>
 
-このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
+In the project you will find a commented CircleCI configuration file <a href="https://github.com/CircleCI-Public/circleci-demo-crystal/blob/master/.circleci/config.yml" target="_blank">`.circleci/config.yml`</a>.
 
 このアプリケーションでは Crystal 0.27 と Kemal 0.25 を使用しています。 Crystal と Kemal は速いペースで開発が進められています。 Docker イメージを `:latest` バージョンに変更すると、互換性を損なう変更が発生する可能性があります。
 
 ## 設定ファイルの例
+{: #sample-configuration }
 
 {% raw %}
-
 ```yaml
 version: 2 # CircleCI 2.0 を使用します
 jobs: # 一連のジョブ
@@ -52,12 +56,31 @@ jobs: # 一連のジョブ
       - run:
           name: テスト
           command: crystal spec
-# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください    
+# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps: # a collection of executable steps
+      - checkout # checks out source code to working directory
+      - restore_cache: # Restore dependency cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+          key: dependency-cache-{{ checksum "shard.lock" }}
+      - run:
+          name: Install dependencies.
+          command: shards install
+      - save_cache: # 依存関係キャッシュを保存するステップ
+          key: dependency-cache-{{ checksum "shard.lock" }}
+          paths:
+            - ./lib
+      - run:
+          name: テスト
+          command: crystal spec
+# デプロイ例については https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
 ```
-
 {% endraw %}
 
 ## 設定ファイルの詳細
+{: #config-walkthrough }
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -90,7 +113,6 @@ jobs:
 [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) ステップを使用して、キャッシュされたファイルまたはディレクトリを復元します。 この例では、`shard.lock` ファイルのチェックサムを使用して、依存関係キャッシュが変更されているかどうかを判断します。
 
 {% raw %}
-
 ```yaml
     steps: #
 
@@ -104,8 +126,12 @@ jobs:
           key: dependency-cache-{{ checksum "shard.lock" }}
           paths:
             - ./lib
+          command: shards install
+      - save_cache:
+          key: dependency-cache-{{ checksum "shard.lock" }}
+          paths:
+            - ./lib
 ```
-
 {% endraw %}
 
 最後に `crystal spec` を実行して、プロジェクトのテスト スイートを実行します。
@@ -119,5 +145,6 @@ jobs:
 完了です。 これで基本的な Crystal アプリケーション用に CircleCI 2.0 をセットアップできました。
 
 ## デプロイ
+{: #deploy }
 
 デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
