@@ -1,0 +1,34 @@
+= INSTALLATION GUIDE: A guide for installing and upgrading CircleCI Server on AWS.
+docs@circleci.com
+:title-page-background-image: image:pdf-header.png[]
+:imagesdir: ../assets/img/docs/
+:doctype: book
+:toc:
+:toc-title: Contents
+:icons: font
+:source-highlighter: rouge
+:pagenums:
+:idprefix:
+:idseparator: -
+:sectanchors:
+:autofit-option:
+
+:leveloffset: +1
+
+include::install-overview.adoc[]
+
+include::v.2.19-overview.adoc[]
+
+include::update-nomad-clients.adoc[]
+
+include::server-ports.adoc[]
+
+include::aws-prereq.adoc[]
+
+include::aws.adoc[]
+
+include::aws-teardown.adoc[]
+
+include::updating-server.adoc[]
+
+:leveloffset: -1
