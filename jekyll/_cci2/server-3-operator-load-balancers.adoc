@@ -26,4 +26,4 @@ NOTE: The Private load balancers option only works with installations on CircleC
 
 . Check the box next to **Private load balancers**.
 
-If you are changing this setting after the initial deployment of CircleCI server, you may need to re-deploy the Traefik and frontend-external services for the change to take effect. To do this, delete the old, public load balancer and kubernetes will request a new load balancer with the new configuration.
+If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old, public load balancer so that kubernetes will request a new load balancer with the new configuration.
