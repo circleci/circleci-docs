@@ -437,6 +437,10 @@ The installation will be output into your PowerShell interface.
 
 After setup completes, the Launch Agent starts automatically and begins looking for jobs to process.
 
+== Kubernetes Installation
+
+See: xref:runner-on-kubernetes.adoc[Runner on Kubernetes]
+
 == Configuration file reference
 
 A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
