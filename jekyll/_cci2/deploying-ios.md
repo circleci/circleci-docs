@@ -51,7 +51,7 @@ increment_build_number(
 ### Setting up
 {: #setting-up }
 
-To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account. 
+To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account.
 
 The recommended way to set this up is to generate and use an App Store Connect API key. This prevents issues occurring with 2FA, which is now mandatory for Apple IDs, and is the most reliable way of interacting with the service.
 
