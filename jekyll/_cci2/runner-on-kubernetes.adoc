@@ -84,7 +84,7 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 | Y
 | You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
 
-| `+replicaCount+`  | 1         | Y         | The number of replicas of this runner you want in your cluster. Must currently be set and updated manually. See <<Pending Work>>.
+| `+replicaCount+`  | 1         | Y         | The number of replicas of this runner you want in your cluster. Must currently be set and updated manually. See <<limitationspending-work,Pending Work>>.
 
 | `+resourceClass+` | -         | Y         | The resource class you created for your runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
