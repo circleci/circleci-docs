@@ -27,6 +27,8 @@ This is an example application showcasing how to run a Java app on CircleCI 2.1.
 ### A basic build with an orb:
 {: #a-basic-build-with-an-orb }
 
+
+{% raw %}
 ```yaml
 version: 2 # CircleCI 2.0 を使用します
 jobs: # 一連のステップ
@@ -64,6 +66,7 @@ jobs: # 一連のステップ
       # デプロイの構成例は https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
 ```
 
+{% endraw %}
 
 This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
 

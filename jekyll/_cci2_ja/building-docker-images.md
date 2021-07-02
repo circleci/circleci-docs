@@ -44,7 +44,6 @@ The Remote Docker Environment has the following technical specifications (for Ci
 {: class="table table-striped"}
 
 ### 例
-{% highlight yaml linenos %} version: 2.1 jobs: build: docker:
 {:.no_toc}
 
 ビルド中に何が行われているのか詳しく見てみましょう。
@@ -73,15 +72,25 @@ jobs:
 
 ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
 
-<!-- markdownlint-disable MD046 -->
+
 {% highlight yaml linenos %}
-以下に、リモート Docker で Docker Executor を使用して [Docker デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker)用の Docker イメージをビルドし、デプロイする例を示します。
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      # ... アプリのビルド・テストに関する記述 ...
 
       - setup_remote_docker:
+          version: 19.03.13
           docker_layer_caching: true
-    
+
       # Docker イメージをビルドしプッシュします
-    
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
