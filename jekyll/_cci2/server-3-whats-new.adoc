@@ -29,6 +29,8 @@ to the `frontend-external` load balancer and have it point to the `circleci-serv
 you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik`
 in a terminal that has access to the cluster.
 
+To update your DNS record and upgrade your server installation follow these steps:
+
 . Retrieve the external IP or DNS name for the traefik load balancer as described or by looking the DNS A record for `app.<your domain name>`` - this should already point to your traefik load balancer.
 . Locate the DNS A record that points to the domain name of your server installation (not the one pointing to the `app.` subdomain)
 . Edit the A record so that it points to the traefik load balancer, just like the record for the `app. subdomain does. Your changes might need a couple of minutes to take effect, depending on you DNS service.
