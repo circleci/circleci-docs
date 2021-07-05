@@ -1,43 +1,42 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x - Creating Your First Cluster (Optional)
+= CircleCI Server v3.x - はじめてのクラスターの作成 (必須ではありません)
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-If you have never previously set up a Kubernetes cluster, we have provided some tips in this section.
+ここでは、Kubernetes クラスタをセットアップしたことがない方のために、簡単なヒントをご紹介します。
 
 toc::[]
 
-## Step 1 - Create
+## ステップ 1 - 作成
 
 ### Amazon EKS
 
-CircleCI recommends using `eksctl` to set up your first cluster on AWS. `eksctl` will take care of VPC creation, in addition
-to security group selection.
+CircleCI では、AWS で初めてクラスタをセットアップする場合、`eksctl` の使用をお勧めしています。 `eksctl` を使用すると、セキュリティ グループの選択だけでなく VPC の作成も自動で行われます。
 
-Before creating the cluster, make sure you have the following:
+クラスタを作成する前に、次の手順を完了してください。
 
-. The latest AWS CLI https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[installed] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configured] to your AWS account
-. `eksctl` https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[installed]
-. `kubectl` https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html[installed]
+. 最新の AWS CLI をhttps://docs.aws.amazon.com/ja_jp/cli/latest/userguide/install-cliv2.html[インストール]してお使いの AWS アカウント用にhttps://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-chap-configure.html[構成する]
+. `eksctl` https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[をインストールする]
+. `kubectl` https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html[をインストールする]
 
-#### Create a cluster using flags
+#### フラグを使用してクラスタを作成する
 
-To create a simple cluster, you can run the command:
+シンプルなクラスタを作成するには、次のコマンドを実行します。
 
 `eksctl create cluster`
 
-Additional flags are available on the command line. See the `eksctl` https://eksctl.io/introduction/[introduction] for more information.
+コマンドラインでは、他のフラグも使用できます。 詳細については、`eksctl` のhttps://eksctl.io/introduction/[ドキュメント]を参照してください。
 
-#### Create cluster using a configuration file
+#### 設定ファイルを使用してクラスタを作成する
 
-You can also create a config file for your cluster, for example:
+次のようなクラスタ設定ファイルを作成することもできます。
 
 [source,yaml]
 ----
@@ -55,40 +54,37 @@ managedNodeGroups:
     maxSize: 6 # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-maxsize for more information
 ----
 
-For more examples on cluster configuration files, see https://eksctl.io[eksctl.io].
+他のクラスタ設定ファイルのサンプルについては、https://eksctl.io[eksctl.io] をご覧ください。
 
-When you are finished with your configuration, save it and run:
+クラスタ設定ファイルが完成したら、保存して次のコマンドを実行します。
 
 `eksctl create cluster -f <your-cluster-config.yaml>`
 
 [TIP]
 ====
-When using the `eksctl` tool to create your cluster, you may receive an AWS STS access error: `AWS STS access – cannot get role ARN for current session: InvalidClientTokenId.`
+`eksctl` ツールを使ってクラスタを作成する場合、次のような AWS STS アクセス エラーが発生することがあります: `AWS STS access – cannot get role ARN for current session: InvalidClientTokenId.`
 
-This may mean your https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html[AWS credentials] are invalid,
-or your IAM user does not have permission to create an EKS cluster. Note that the proper IAM permissions are necessary in
-order to use `eksctl`. See the AWS https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#eksctl-prereqs[documentation]
-regarding prerequisite IAM permissions.
+この原因は、https://docs.aws.amazon.com/ja_jp/cli/latest/userguide/cli-configure-files.html[AWS 認証情報]が無効であるか、利用中の IAM ユーザーに EKS クラスタの作成権限が付与されていないことです。 `eksctl` を使用するには適切な IAM 権限が必要です。 必要な IAM 権限については、https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html#eksctl-prereqs[AWS のドキュメント]を参照してください。
 ====
 
-## Step 2 - Verify
+## ステップ 2 - 検証
 
-Once your cluster is finished being created, you should be able to run various `kubectl` commands to view your cluster resources.
+クラスタの作成が完了したら、`kubectl` の各種コマンドを実行して、クラスタ リソースを確認できるか試してください。
 
-For instance, to view your cluster's https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#discovering-builtin-services[built-in services], you can run:
+たとえば、'のクラスタhttps://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#discovering-builtin-services[ビルトイン サービス]を表示するには、次のコマンドを実行します。
 
 `kubectl cluster-info`
 
-Or, to verify that your cluster has worker nodes attached, run:
+また、クラスタにワーカー ノードがアタッチされているかどうかを確認するには、次のコマンドを実行します。
 
 `kubectl get nodes -o wide`
 
-For more information on exploring your new cluster, see the following:
+作成したクラスタの情報を確認する方法の詳細については、次のドキュメントを参照してください。
 
-- https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html#gs-eksctl-view-resources[Step 2: View resources] - AWS docs
-- https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/[Accessing clusters] - Kubernetes docs
-- https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management] - `kubectl` docs
+- https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/getting-started-eksctl.html#gs-eksctl-view-resources[ステップ 2: リソースを表示する] (AWS ドキュメント)
+- https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/[Accessing clusters (クラスタへのアクセス)] (英語) (Kubernetes ドキュメント)
+- https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management (クラスタの管理)] (英語) (`kubectl` ドキュメント)
 
-## What to read next
+## 次に読む
 * https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
 * https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
