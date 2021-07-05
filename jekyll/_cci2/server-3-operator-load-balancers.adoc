@@ -19,9 +19,8 @@ toc::[]
 == Make the frontend load balancer private
 
 [WARNING]
-.Webhooks
 ==== 
-If you choose to make the frontend load balancer private, the following conditions must be met, dependent on VCS, for webhooks to work: 
+**Webhooks:** If you choose to make the frontend load balancer private, the following conditions must be met, dependent on VCS, for webhooks to work: 
 
 * **GitHub Enterprise** – your CircleCI server installation must be in the same internal network as GHE. 
 * **github.com** – set up a proxy for incoming webhooks. This setting can be found under **Admin Settings** > **System Settings** > **Override webhook host URL** from the CircleCI app.
