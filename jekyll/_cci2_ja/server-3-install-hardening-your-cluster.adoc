@@ -1,9 +1,9 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Hardening Your Cluster
+= CircleCI Server v3.x クラスターの管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
