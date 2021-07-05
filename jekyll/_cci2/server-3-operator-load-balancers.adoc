@@ -1,0 +1,31 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Load Balancers
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI server uses load balancers to manage network traffic coming into and out of the Kubernetes services cluster. The three load balancers managing traffic to the Nomad cluster are internal to the VPC and they manage the distribution of jobs to the various compute resources. 
+
+The frontend load balancer manages traffic coming from developers and your VCS, including, via the API, CLI and CircleCI app. The frontend load balancer is public by default, but can be made private if your requirements dictate that you need to separate your installation from the public internet.
+
+toc::[]
+
+== Make the frontend load balancer private
+
+WARNING: If you select to make the frontend load balancer private, webhooks will only work if you are using a GitHub Enterprise installation that is in the same internal network as your server installation. Webhooks will fail when using GitHub.com.
+
+NOTE: The Private load balancers option only works with installations on CircleCI server on GKE or EKS.
+
+. From the management console, select **Config** from the menu bar and locate the **Private load balancers** option under **General Settings**.
+
+. Check the box next to **Private load balancers**.
++
+NOTE: If you are using Let's Encrypt TLS certificates, this box will not be visible as Let's Encrypt doesn't work with private installations. Uncheck the box for Let's Encrypt to make the Private load balancer option appear.
+
+If you are changing this setting after the initial deployment of CircleCI server, you may need to delete the old, public load balancer so that kubernetes will request a new load balancer with the new configuration.

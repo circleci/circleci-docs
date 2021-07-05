@@ -229,7 +229,8 @@ vault token create -policy=circleci -period=30m
 
 Server 3.x hosts build artifacts, test results, and other state in object storage. We support
 
-. Any https://docs.aws.amazon.com/s3/index.html?nc2=h_ql_doc_s3[S3]-compatible storage
+. https://aws.amazon.com/s3/[AWS S3]
+. https://min.io[Minio]
 . https://cloud.google.com/storage/[Google Cloud Storage]
 
 While any S3-compatible object storage may work, we test and support https://aws.amazon.com/s3/[AWS S3] and https://min.io[Minio]. For object storage

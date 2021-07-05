@@ -336,6 +336,8 @@ en:
           link: 2.0/server-3-operator-vm-service
         - name: Externalizing Services
           link: 2.0/server-3-operator-externalizing-services
+        - name: Load Balancers
+          link: 2.0/server-3-operator-load-balancers
         - name: Authentication
           link: 2.0/server-3-operator-authentication
         - name: Docker Authenticated Pulls
