@@ -6,15 +6,20 @@ description: "コマンド ラインから CircleCI を操作する方法の基�
 categories:
   - getting-started
 order: 50
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 # 概要
+{: #overview }
 
-開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。
+開発作業の大部分をターミナルで行いたい場合は、[CircleCI CLI](https://github.com/CircleCI-Public/circleci-cli) をインストールして CircleCI 上のプロジェクトを操作するとよいでしょう。 このドキュメントでは、CircleCI プロジェクトの初期化や操作を主にターミナルから行うための手順を説明します。 Please note that our server offering only supports a legacy version of the CLI. You can find more information on how to install that here: https://circleci.com/docs/2.0/local-cli/#using-the-cli-on-circleci-server.
 
 # 前提条件
+{: #prerequisites }
 
-- Unix マシン (Mac または Linux) を使用している。Windows にも CircleCI CLI ツールのインストールは_可能_ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
+- Unix マシン (Mac または Linux) を使用している。 Windows にも CircleCI CLI ツールのインストールは_可能_ですが、現在はベータ版であり、Unix 版ほどの機能は完備されていません。
 - CI/CD、CircleCI サービスの機能とコンセプトについての基礎知識がある。
 - GitHub アカウントを持っている。
 - CircleCI アカウントを持っている。
@@ -24,12 +29,17 @@ order: 50
 上記の前提条件に不明点がある方や CircleCI プラットフォームの初心者は、先に[入門ガイド]({{site.baseurl}}/ja/2.0/getting-started/)または[コンセプトに関するドキュメント](https://circleci.com/ja/docs/2.0/concepts/#section=getting-started)をお読みになることをお勧めします。
 
 # 手順
+Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
 
 ## Git リポジトリを初期化する
+次に、ログインと Hub CLI の承認に関するプロンプトに従います。
 
-基本中の基本から始めましょう。プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
+基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
 
 ```sh
+cd ~ # ホーム ディレクトリに移動します
+mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
+cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
 cd ~ # ホーム ディレクトリに移動します
 mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
 cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
@@ -41,16 +51,17 @@ git commit -m "Initial commit" # 最初のコミットを実行します
 ```
 
 ## Git リポジトリを VCS に接続する
+これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
 
-前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 ローカルの Git リポジトリは、バージョン管理システム (GitHub または BitBucket) に接続する必要があります。 やってみましょう。
+Great! 前述の手順で Git リポジトリがセットアップされ、「Hello World!」と記述された 1 つのファイルが格納されました。 ローカルの Git リポジトリは、バージョン管理システム (GitHub または BitBucket) に接続する必要があります。 Let's do that now.
 
-Hub CLI のインストールとセットアップが完了している場合は、以下のコマンドを実行するだけです。
+If you have installed and setup the Hub CLI, you can simply run:
 
 ```sh
 hub create
 ```
 
-次に、ログインと Hub CLI の承認に関するプロンプトに従います。
+次に、インストール後のセットアップ手順を実行します。
 
 Hub CLI を使用していない場合は、GitHub にアクセスしてログインし、[新しいリポジトリを作成](https://github.com/new)します。 指示に従ってコミットし、リモートにプッシュします。 この操作は通常、以下のようなコマンドになります。
 
@@ -59,9 +70,10 @@ git remote add origin git@github.com:<YOUR_USERNAME>/foo_ci.git
 git push --set-upstream origin master
 ```
 
-これで、Git リポジトリが VCS に接続され、 VCS 上のリモート ("origin") がローカルでの作業内容と一致するようになります。
+You now have a git repo that is connected to a VCS. The remote on your VCS ("origin") now matches your local work.
 
 ## CircleCI CLI をダウンロードして準備する
+ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
 
 次に、CircleCI CLI をインストールし、いくつかの機能を試してみます。 CLI を Unix マシンにインストールするには、ターミナルで以下のコマンドを実行します。
 
@@ -69,9 +81,9 @@ git push --set-upstream origin master
 curl -fLSs https://circle.ci/cli | bash
 ```
 
-CLI のインストール方法はいくつかあります。別の方法を使用する必要がある場合は、[こちら]({{site.baseurl}}/ja/2.0/local-cli)を参照してください。
+新しく作成した `config.yml` ファイルを開き、以下の内容を貼り付けます。
 
-次に、インストール後のセットアップ手順を実行します。
+Now run the setup step after the installation:
 
 ```sh
 circleci setup
@@ -82,8 +94,9 @@ circleci setup
 CLI に戻って API トークンを貼り付ければセットアップは完了です。
 
 ## 最初の設定ファイルを準備してバリデーションする
+"build" ジョブをローカルで実行してみます。
 
-ここからは、プロジェクト ディレクトリに設定ファイルを作成します。
+Now it's time to create a configuration file in our project directory.
 
 ```sh
 cd ~/foo_ci # カレント ディレクトリが foo_ci フォルダーであることを確認します
@@ -94,7 +107,7 @@ touch config.yml # "config.yml" という名前の YAML ファイルを作成し
 
 上記のコマンドにより、`.circleci` フォルダーが作成され、そこに設定ファイルが格納されます。
 
-新しく作成した `config.yml` ファイルを開き、以下の内容を貼り付けます。
+Open the newly created `config.yml` file and paste the following contents into it.
 
 ```yaml
 version: 2.0
@@ -113,17 +126,18 @@ jobs:
 circleci config validate
 ```
 
-**メモ:** 使用しているコマンドの詳細を知りたい場合は、`--help` を追加すると、いつでもコマンドに関する補足情報がターミナルに表示されます。
+ブラウザーで CircleCI に戻ると、[Start building (ビルドの開始)] をクリックしてビルドを実行できます。
 
 ```sh
 circleci config validate --help
 ```
 
 ## VCS にプッシュする前にジョブをテストする
+{: #testing-a-job-before-pushing-to-a-vcs }
 
-CircleCI CLI では、コマンド ラインからジョブをローカルでテストできます。VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
+CircleCI CLI では、コマンド ラインからジョブをローカルでテストできます。 VCS にプッシュする必要はありません。 設定ファイル内のジョブに問題があることがわかっている場合は、プラットフォームでクレジットや時間を消費するよりも、ローカルでテストやデバッグを行う方が賢明です。
 
-"build" ジョブをローカルで実行してみます。
+Try running the "build" job locally:
 
 ```sh
 circleci local execute
@@ -145,6 +159,7 @@ Success!
 ```
 
 ## リポジトリを CircleCI に接続する
+{: #connect-your-repo-to-circleci }
 
 このステップでは、ターミナルを離れる必要があります。 [[Add Projects (プロジェクトの追加)] ページ](https://circleci.com/add-projects)にアクセスします。 コードをプッシュするたびに CI が実行されるようにプロジェクトをセットアップします。
 
@@ -156,9 +171,10 @@ git commit -m "add config.yml file"
 git push
 ```
 
-ブラウザーで CircleCI に戻ると、[Start building (ビルドの開始)] をクリックしてビルドを実行できます。
+Returning to CircleCI in your browser, you can now click "start building" to run your build.
 
 # 次のステップ
+{: #next-steps }
 
 このドキュメントでは、CircleCI CLI ツールの使用を開始するための手順を簡単に説明してきました。 CircleCI CLI は、さらに複雑な機能も提供しています。
 

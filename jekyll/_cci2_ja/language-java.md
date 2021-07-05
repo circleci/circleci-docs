@@ -6,26 +6,32 @@ description: "CircleCI 2.0 での Java を使用したビルドとテスト"
 categories:
   - language-guides
 order: 4
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 このガイドでは、CircleCI で Gradle を使用して Java アプリケーションをビルドする方法について説明します。
 
-- 目次
+* 目次
 {:toc}
 
 ## 概要
+{: #overview }
 {:.no_toc}
 
 お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
 ここでは、以下を前提としています。
 
-- [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
-- Java 11 を使用している 
-- Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています) 
-- アプリケーションをオールインワン uberjar として配布できる
+* You are using [Gradle](https://gradle.org/). [Gradle](https://gradle.org/) を使用している ([Maven](https://maven.apache.org/) 版のガイドは[こちら](https://circleci.com/ja/docs/2.0/language-java-maven/))
+* Java 11 を使用している
+* You are using the Spring Framework. Spring Framework を使用している (このプロジェクトは [Spring Initializr](https://start.spring.io/) を使用して生成されています)
+* アプリケーションをオールインワン uberjar として配布できる
+
 
 ## 設定ファイルの例
+{: #sample-configuration }
 
 {% raw %}
 ```yaml
@@ -96,21 +102,31 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build 
+    - build
+      - store_artifacts:
+          path: build/libs
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
 ```
 {% endraw %}
 
 ## コードの取得
+常にバージョンの指定から始めます。
 
-上記は Java デモ アプリケーションの設定ファイルの抜粋です。このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-java-spring> からアクセスできます。
+このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-java-spring> からアクセスできます。
 
 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
-これで `config.yml` を最初からビルドする準備ができました。
+また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。
 
 ## 設定ファイルの詳細
+バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK コンビニエンス イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
 
-常にバージョンの指定から始めます。
+この `build` ジョブ内にいくつかの `steps` を追加します。
 
 ```yaml
 version: 2
@@ -132,7 +148,7 @@ jobs:
 
 テストを[並列に実行](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/)してジョブを高速化するために、オプションの `parallelism` 値を 2 に指定しています。
 
-また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。
+We also use the `environment` key to configure the JVM and Gradle to [avoid OOM errors](https://circleci.com/blog/how-to-handle-java-oom-errors/). We disable the Gradle daemon to let the Gradle process terminate after it is done. This helps to conserve memory and reduce the chance of OOM errors.
 
 ```yaml
 version: 2
@@ -145,9 +161,9 @@ version: 2
           POSTGRES_DB: circle_test
 ```
 
-バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK コンビニエンス イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
+We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circleci/openjdk/) tagged to version `11.0.3-jdk-stretch`.
 
-この `build` ジョブ内にいくつかの `steps` を追加します。
+最後に、ワークフロー内の唯一のジョブとして `build` ジョブによって実行される `workflow` というワークフローを定義します。
 
 コードベースで作業できるように、最初に `checkout` を置きます。
 
@@ -170,7 +186,7 @@ version: 2
 ```
 {% endraw %}
 
- 追加の引数を使用して `./gradlew test` を実行します。これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
+ 追加の引数を使用して `./gradlew test` を実行します。 これにより、キャッシュが空だった場合、Gradle やプロジェクトの依存関係がプル ダウンされ、テストのサブセットが各ビルド コンテナで実行されます。 各並列ビルド コンテナで実行されるテストのサブセットは、組み込みの [`circleci tests split`](https://circleci.com/ja/docs/2.0/parallelism-faster-jobs/#circleci-cli-を使用したテストの分割) コマンドを使用して決定されます。
 
  {% raw %}
 ```yaml
@@ -200,7 +216,6 @@ version: 2
 {% raw %}
 ```yaml
 ...
-
       - save_cache:
           paths:
             - ~/.gradle/wrapper
@@ -219,7 +234,6 @@ version: 2
 {% raw %}
 ```yaml
 ...
-
       - store_test_results:
           path: build/test-results/test
       - store_artifacts:
@@ -228,14 +242,13 @@ version: 2
 ```
 {% endraw %}
 
-`./gradlew assemble` コマンドを使用して、"uberjar" ファイルを作成します。このファイルには、コンパイルされたアプリケーションと共にそのアプリケーションのすべての依存関係が含まれます。 uberjar のコピーは 1 つだけあればよいので、これは、並列に実行しているすべてのビルド コンテナではなく最初のビルド コンテナでだけ実行されます。
+`./gradlew assemble` コマンドを使用して、"uberjar" ファイルを作成します。 このファイルには、コンパイルされたアプリケーションと共にそのアプリケーションのすべての依存関係が含まれます。 uberjar のコピーは 1 つだけあればよいので、これは、並列に実行しているすべてのビルド コンテナではなく最初のビルド コンテナでだけ実行されます。
 
 その後、`store_artifacts` ステップを使用して、uberjar を[アーティファクト](https://circleci.com/docs/ja/2.0/artifacts/)として保存します。 そこから、これを目的の継続的デプロイ スキームに結び付けることができます。
 
 {% raw %}
 ```yaml
 ...
-
       - run:
           name: Assemble JAR
           command: |
@@ -246,10 +259,12 @@ version: 2
       # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
       - store_artifacts:
           path: build/libs
+      - store_artifacts:
+          path: build/libs
 ```
 {% endraw %}
 
-最後に、ワークフロー内の唯一のジョブとして `build` ジョブによって実行される `workflow` というワークフローを定義します。
+Lastly, we define a workflow named `workflow` which the `build` job will execute as the only job in the workflow.
 
 {% raw %}
 ```yaml
@@ -266,6 +281,7 @@ workflows:
 完了です。 これで Gradle と Spring を使用する Java アプリケーション用に CircleCI をセットアップできました。
 
 ## 関連項目
+{: #see-also }
 {:.no_toc}
 
 - デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。

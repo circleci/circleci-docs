@@ -6,32 +6,28 @@ description: "パイプラインの概要"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
-CircleCI アプリケーションの [Pipelines (パイプライン)] ページについて概説すると共に、CircleCI ユーザー インターフェイスの変更について説明します。
+This document provides a summary of the Pipelines page in the CircleCI app and documents some of the changes to the CircleCI user interface.
 
 ## 概要
+{: #overview }
 
-最近 CircleCI の Web インターフェイスの一部が変更されたことにお気付きかと思います。 ビルドをグループ化する方法と、その情報を表示するユーザー インターフェイスに関して、いくつかの変更を行いました。
+You may have noticed some changes to CircleCI's web interface lately. We have some exciting changes that are rolling out regarding how your builds are being grouped and the user interface that presents that information. Let's begin by stating what a **Pipeline** is.
 
-まず、**パイプライン**についてご説明しましょう。
+**Pipelines** represent the entire configuration that is run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline.
 
-パイプラインとは、CircleCI を使用するプロジェクトで作業をトリガーするときに実行される構成全体を指す言葉です。 `.circleci/config.yml` ファイルの全体が 1 つのパイプラインによって実行されます。
+When visiting your CircleCI dashboard you will be presented with the recent pipelines that have run in your organization/account.
 
-これまでサイドバーの [`JOBS` (ジョブ)] が表示されていた場所に、[`Pipelines (パイプライン)`] が表示されるようになりました。
+## Jobs, tests, artifacts
+{: #jobs-tests-artifacts }
 
-![]({{ site.baseurl }}/assets/img/docs/pipelines-jobs-to-pipelines.png)
-
-**メモ:** 新しい UI には当面継続的に改善を加えていくため、その間は一時的に新しい UI の使用をオプトアウトして、引き続き従来の UI を使用することが可能です。
-
-![]({{ site.baseurl }}/assets/img/docs/pipelines-opt-out-1.png)
-
-## ジョブ、テスト、アーティファクト
-
-パイプラインはワークフローで構成され、ワークフローはジョブで構成されます。 パイプライン中のいずれかのジョブに移動すると、ジョブ出力、テスト結果、アーティファクトに各タブからアクセスできます。
+A pipeline is composed of workflows, which are composed of jobs. By navigating from a pipeline to a specific job, you can access your job output, test results and artifacts through several tabs.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-step-test-artifact.png)
 
-さらに、それぞれのジョブからの出力は、一意のリンクを持つ新しいタブ (未加工またはフォーマット済みの形式) で開くことができ、チーム メンバー間で共有できます。
+Further, the output of each job can be openened in a new tab (in either raw or formatted styling) with a unique link, making it share-able between team members.
 
 ![]({{ site.baseurl }}/assets/img/docs/pipelines-job-output.png)
