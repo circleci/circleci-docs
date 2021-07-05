@@ -23,7 +23,8 @@ installation to the data stores you were using for your 2.19 instance.
 toc::[]
 
 ## Prerequisites
-. Your current CircleCI Server installation is 2.19
+. Your current CircleCI Server installation is 2.19.
+. You have taken a backup of the 2.19 instance.  If you are using external datastores, they will need to be backup up separately.
 . You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
 . The migration script must be run from a machine with
