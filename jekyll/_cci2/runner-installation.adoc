@@ -27,6 +27,8 @@ The installation process assumes you have installed the following utilities on y
 * curl (installed by default on macOS)
 * sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
 * systemd version 235+ (Linux only)
+* sepolicy (RHEL 8 only)
+* rpmbuild (RHEL 8 only)
 * permissions to create a user, and create directories under /opt.
 
 == Authentication
@@ -194,6 +196,30 @@ id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
+```
+
+=== Configure SELinux policy (RHEL 8)
+
+An SELinux policy is required for runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this runner install.
+
+Create directory `/opt/circleci/policy` and generate the initial policy module:
+
+```bash
+sudo mkdir -p /opt/circleci/policy
+
+# Install sepolicy and rpmbuild if you haven't already
+sudo yum install -y policycoreutils-devel
+sudo yum install -y rpm-build
+
+sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci-launch-agent
+```
+
+Download the following type enforcing file https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] and install the policy:
+
+```bash
+sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
+
+sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 === Enable the `systemd` unit
