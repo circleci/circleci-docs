@@ -11,7 +11,7 @@ version:
 
 `config.yml` ファイルで使用される CircleCI 2.x 構成キーのリファレンス ガイドです。 CircleCI によって承認されたリポジトリ ブランチに `.circleci/config.yml` ファイルが存在するということは、2.x インフラストラクチャを使用することを意味しています。
 
-`config.yml` の全体は「[サンプル コード](#example-full-configuration)」で確認できます。
+`config.yml` の全体は「<a href="#example-full-configuration>[サンプル コード](#example-full-configuration)」で確認できます。
 
 **メモ:** 既に CircleCI 1.0 バージョンの設定ファイルが存在する場合は、`config.yml` ファイルを使用することで、独立した別のブランチで 2.x ビルドをテストできます。 このとき、古い `circle.yml` スタイルの既存の構成は変更する必要がなく、CircleCI 1.0 インフラストラクチャの `.circleci/config.yml` を含まないブランチで実行できます。
 
