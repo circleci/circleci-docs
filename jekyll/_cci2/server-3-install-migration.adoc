@@ -10,37 +10,41 @@ version:
 :toc: macro
 :toc-title:
 
-Migrating from 2.19.x to 3.0 requires that you backup your 2.19 installation and then restore the data to the new Server 3.0 installation.
-It does require an already operating Server 3.0 installation. Depending on the size of your data stores, the migration
+Migrating from 2.19.x to 3.x requires that you backup your 2.19.x installation and then restore the data to the new server 3.x installation.
+It does require an already operating server 3.0 installation. Depending on the size of your data stores, the migration
 can take anywhere from a few minutes to a few hours. We recommend using a staging environment before completing this
 process in a production environment. This will not only allow you to gain a better understanding of the migration process,
 but will also give you a feel for how long the migration will take to complete.
 
+NOTE: If you have externalized your data stores (Mongo, Postgres, and Vault), then you need to wait until the server 3.1
+release for migration. Server 3.1 will support externalized data stores, and you will be able to point your 3.1
+installation to the data stores you were using for your 2.19 instance.
+
 toc::[]
 
 ## Prerequisites
-. Your current CircleCI Server installation is 2.19
-. You have a running CircleCI Server 3.0 xref:server-3-install.adoc[installation].
+. Your current CircleCI server installation is 2.19
+. You have a running CircleCI server 3.x xref:server-3-install.adoc[installation].
 . You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] with contexts prior to starting.
 . The migration script must be run from a machine with
-- `kubectl` configured for the Server 3.0 instance
+- `kubectl` configured for the server 3.x instance
 - `ssh` access to the 2.19 services box
 
 ## Migration
 
-WARNING: Migrating to Server v3.x will shut down your v2.19.x application. Your v2.19.x application will not be started back up,
+WARNING: Migrating to server v3.x will shut down your v2.19 application. Your v2.19 application will not be started back up,
 although you may manually start it back up using the administrative console.
 
 WARNING: Starting the migration process will cause downtime. It is recommended you schedule a maintenance window.
 
-WARNING: Running Server 2.19 and Server 3.0 at the same time can cause issues to your 2.19 build data. Server 2.19 should NOT be restarted if Server 3.0 is running.
+WARNING: Running server 2.19 and server 3.x at the same time can cause issues to your 2.19 build data. Server 2.19 should NOT be restarted if server 3.x is running.
 
 ### Step 1 - Clone the repository and run the migration script
-The instructions below will clone the repository containing the Server v2.19.x to Server v3.x migration script.
+The instructions below will clone the repository containing the server v2.19.x to server v3.x migration script.
 The migration script will:
 
 * Stop your v2.19.x application
-* Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases
+* Create a tarball of your v2.19 application's PostgreSQL and Mongo databases
 * Archive existing application data for Vault and CircleCI encryption/signing keys
 * Export the tarball to your v3.x installation (exported data stores are stored in `circleci_export`, which may be useful for debugging purposes).
 * Scale v3.x application deployments down to zero, and then to one
@@ -54,18 +58,18 @@ In a terminal:
 . Change into the `migrate` directory: `cd server-scripts/migrate`.
 . Run the migration script: `./migrate.sh`.
 . You will be prompted for the following information:
-  * Username of your Server 2.19 installation
-  * Hostname of your Server 2.19 installation
-  * The path to your SSH key file for your Server 2.19 installation
-  * Kubernetes namespace of your Server 3.0 installation
+  * Username of your server 2.19 installation
+  * Hostname of your server 2.19 installation
+  * The path to your SSH key file for your server 2.19.x installation
+  * Kubernetes namespace of your server 3.x installation
 . After the script has completed, the Signing and Encryption keys from the 2.19 instance will need to be added to the new 3.0 instance via the KOTS Admin Console. The keys will be located in `circleci_export/circle-data`.
-. The 3.0 instance will either need to be updated to point at the same storage bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
+. The 3.x instance will either need to be updated to point at the same storage bucket that the 2.19 instance used, or the data needs to be copied over to a new bucket.  The latter will ensure the 2.19 instance continues to work as expected, and so is the recommended approach if this migration is part of a test.
 
-NOTE: If a different hostname is being used in the 3.0 environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
+NOTE: If a different hostname is being used in the 3.x environment, the GitHub webhooks will still be pointing to the hostname used in the 2.19 environment.  The easiest way to update this is to click *Stop Building* and then *Set Up Project*. After doing this, the contexts and environment variables associated with the project will still be present.
 
 ### Step 2 - Validate your migration to Server 3.0
 Re-run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check]
-with contexts on your new Server 3.0 environment by pushing a fresh commit.
+with contexts on your new server 3.x environment by pushing a fresh commit.
 
 ### Step 3 - Update your team
 Once you have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check],
