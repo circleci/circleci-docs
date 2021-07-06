@@ -526,10 +526,7 @@ Draining can end in one of two ways:
 * An additional TERM signal is received by the Launch Agent during "draining".
 
 == Runner for Server Compatibility
-
-NOTE: CircleCI Runner is not yet available on the current version of Server
-3.x; however, it will be available for preview before the next release. Please
-https://circleci.com/contact/[contact us] for more information.
+_CircleCI Runner is available from server v3.1.0_
 
 Each minor version of server is compatible with a specific version of
 `circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,

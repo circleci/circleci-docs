@@ -10,9 +10,9 @@ version:
 :toc: macro
 :toc-title:
 
-It is assumed you have already read the Server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
+It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
-In order to configure the CircleCI Server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
+In order to configure the CircleCI server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
 
 * An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
 ** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
@@ -21,7 +21,7 @@ In order to configure the CircleCI Server application, you will need to ensure t
 *** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 +
 * Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
-CircleCI Server users: +
+CircleCI server users: +
 +
 --
 [.table.table-striped]

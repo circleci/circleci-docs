@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Prior to Server 3.0, scaling Server required increasing JVM Heap Size, RAM and other resources. Server 3.0 relies on
+Prior to CircleCI server 3.x, scaling server required increasing JVM Heap Size, RAM and other resources. Server 3.0 relies on
 replica sets to scale out services. If you want to scale up frontend or output processor, simply increase the number
 of replicas available for those services.
 

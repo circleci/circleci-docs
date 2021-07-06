@@ -58,7 +58,7 @@ To show only pods with a status besides `Running`, you can use --field-selector 
 ----
 kubectl get pods --field-selector status.phase!=Running -n <namespace>
 NAME READY STATUS RESTARTS AGE
-local-observability-stack-loki-stack-test 0/1 Error 0 5d22h
+nomad-server 0/1 Error 0 5d22h
 ----
 
 ### Verify Pod Settings and Status

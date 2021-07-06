@@ -14,11 +14,11 @@ toc::[]
 
 == Introduction
 
-CircleCI Server v{serverversion} is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
+CircleCI server v{serverversion} is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 
-The core of the CircleCI Server application runs inside Kubernetes.
+The core of the CircleCI server application runs inside Kubernetes.
 
-The application exposes five services using load balancers, three of these load balancers are VPC-internal.
+The application exposes four services using load balancers, three of these load balancers are VPC-internal for connecting to the Nomad cluster and VMs. The frontend load balancer can be made private, separating it from the public internet if required. For further information see the <<server-3-operator-load-balancers#,Load Balancers>> doc.
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
@@ -28,12 +28,7 @@ The application exposes five services using load balancers, three of these load 
 | Ports
 | Description
 
-| Front-end GUI Proxy
-| External
-| 80 and 443
-| Exposes the web application.
-
-| Front-end API
+| Frontend GUI Proxy & API
 | External
 | 80 and 443
 | Exposes the web application.
@@ -54,18 +49,18 @@ The application exposes five services using load balancers, three of these load 
 | Provisions virtual machines.
 |===
 
-CircleCI Server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
+CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
 Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
-Server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
+server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
 Job artifacts and output are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
 Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
 Nomad clients need access to object storage.
 
-https://kots.io/[KOTs] is used to configure and deploy CircleCI Server 3.0.
+https://kots.io/[KOTS] is used to configure and deploy CircleCI server 3.x.
 
 == Architecture
-Below is a diagram describing the architecture of Server 3.x. The available services
+Below is a diagram describing the architecture of server 3.x. The available services
 are described in greater detail in the <<Services>> section.
 
 .CircleCI Server v3.x Architecture
@@ -74,7 +69,7 @@ image::server-3-architecture-diagram.png[Services Architecture]
 
 == Services
 
-CircleCI Server 3.0 consists of the following services. Find their descriptions and failure implications below:
+CircleCI server 3.0 consists of the following services. Find their descriptions and failure implications below:
 
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
@@ -136,7 +131,7 @@ CircleCI Server 3.0 consists of the following services. Find their descriptions 
 | circleci-telegraf
 |
 | Telegraf collects statsd metrics. All white-boxed metrics in our services publish statsd metrics that are sent to telegraf,
-but can also be configured to be exported to other places (i.e. Datadog or local-observability-stack-prometheus)
+but can also be configured to be exported to other places (i.e. Datadog or Prometheus)
 |
 |
 
@@ -203,7 +198,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | kotsadm-kots
 | Licensing
 | The main Kots application. Runs the Kots admin console where upgrades and configuration of server take place	No admin console available.
-| No upgrades or configuration possible for Server
+| No upgrades or configuration possible for server
 |
 
 | kotsadm-migrations
@@ -236,7 +231,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 |
 |
 
-| local-observability-stack-prometheus
+| prometheus
 | Server
 | Used for metrics
 |
@@ -273,7 +268,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | May not be available in GA.
 
 | slanger
-| Server
+| server
 | Provides real-time events to the CircleCI app.
 | Live UI updates will stop but hard refreshes will still work.
 |
@@ -317,7 +312,7 @@ but can also be configured to be exported to other places (i.e. Datadog or local
 | web-ui-*
 | Frontend
 | Micro Front End (MFE) services used to render the frontend web application GUI.
-| The respective services page will fail to load. Example: A web-ui-server-admin failure means the Server Admin page will fail to load.
+| The respective services page will fail to load. Example: A web-ui-server-admin failure means the server Admin page will fail to load.
 | The MFE's are used to render the web application located at app.<my domain here>
 
 |===

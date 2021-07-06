@@ -10,15 +10,15 @@ version:
 :toc: macro
 :toc-title:
 
-The following guide contains information useful for CircleCI Server Operators, or those responsible for ensuring CircleCI Server 3.x is running properly, via maintenance and monitoring.
+The following guide contains information useful for CircleCI server Operators, or those responsible for ensuring CircleCI server 3.x is running properly, via maintenance and monitoring.
 
 It is assumed that you have already read the https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview].
 
-CircleCI Server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
+CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
 Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
 and VM service.
 
-CircleCI Server can run Docker jobs on the Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are
+CircleCI server can run Docker jobs on the Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are
 controlled by the Nomad clients, therefore the Nomad clients must be able to access the VM machines on port 22 for SSH
 and port 2376 for remote Docker jobs.
 
@@ -30,7 +30,7 @@ toc::[]
 
 ## Build Environment
 
-CircleCI Server 3.x uses Nomad as the primary job scheduler. Refer to our https://circleci.com/docs/2.0/nomad/[Introduction to Nomad Cluster Operation]
+CircleCI server 3.x uses Nomad as the primary job scheduler. Refer to our https://circleci.com/docs/2.0/nomad/[Introduction to Nomad Cluster Operation]
 to learn more about the job scheduler and how to perform basic client and cluster operations.
 
 By default, CircleCI Nomad clients automatically provision compute resources according to the executors configured for
