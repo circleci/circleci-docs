@@ -19,21 +19,18 @@ This section covers how to suspend new, active, or inactive accounts.
 
 ### New Accounts
 
-Any user associated with your GitHub organization can create a user account for your CircleCI Server installation. In
-order to control who has access, you can choose to automatically suspend all new users, requiring an administrator to
-activate them before they can log in. To access this feature:
+GitHub の組織に関連付けられているユーザーならだれでも、自社の CircleCI のユーザー アカウントを作成できます。 アクセス可能なユーザーを制御するため、*全て*の新規ユーザーを自動的に停止状態にし、管理者によるアクティブ化を必須化することができます。 この機能を使用するには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings
-. Select System Settings from the Admin Settings menu
-. Set Suspend New Users to True
+. CircleCI の [Admin Settings (管理者設定)] に移動します。
+. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+. [Suspend New Users (新規ユーザーの停止)] を [true (有効)] に設定します。
 
 ### Active Accounts
-When an account is no longer required, you can suspend the account so it will no longer be active and will not count
-against your license quota. To suspend an account:
+不要になったアカウントは、ライセンス割り当ての数にカウントされないよう、停止してアクティブ状態を解除できます。 アカウントを停止するには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings
-. Select Users from the Admin Settings menu
-. Scroll to locate the account in either the Active or Inactive window
+. CircleCI の [Admin Settings (管理者設定)] に移動します。
+. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+. 停止中のユーザー アカウントの再アクティブ化
 . Click Suspend next to the account name and the account will appear in the Suspended window
 
 ### Inactive Accounts
@@ -44,38 +41,35 @@ into the system successfully. These accounts do not count against your server se
 This section covers how to reactivate new or previously active accounts.
 
 ### New Accounts
-To activate a new account that was automatically suspended and allow the associated user access to your installation of
-CircleCI Server:
+自動的に停止された*新規*アカウントをアクティブ化し、CircleCI Serverへのアクセスを許可するには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings
-. Select Users from the Admin Settings menu
+. CircleCI の [Admin Settings (管理者設定)] に移動します。
+. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
 . View the Suspended New Users window
-. Click on Activate next to the User you wish to grant access and the account will appear in the Active
-Window
+. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
 ### Previously Active Accounts
-To reactivate an account that has been suspended:
+停止したアカウントを再びアクティブ状態にするには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings
-. Select Users from the Admin Settings menu
+. CircleCI の [Admin Settings (管理者設定)] に移動します。
+. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
 . View the Suspended window
-. Click on Activate next to the User you wish to grant access and the account will appear in the Active window.
+. そのアカウントが [Active (アクティブ)] ウィンドウに表示されるようになります。
 
-## Limiting Registration by GitHub Organization
-When using github.com, you can limit who can register with your CircleCI install to people with some connection to your
-approved organizations list. To access this feature:
+## GitHub 組織ごとのユーザー登録の制限
+GitHub.com を使用している場合は、承認済みの組織リストで指定した組織に*所属しているもしくは権限を持っている*ユーザーのみ CircleCI への登録を制限できます。 この機能を使用するには、以下の手順を行います。
 
-. Navigate to your CircleCI Admin Settings page
-. Select System Settings from the Admin Setting menu
-. Scroll down to Required Org Membership List
-. Enter the organization(s) you wish to approve. If entering more than one organization, use a comma delimited string.
+. CircleCI の [Admin Settings (管理者設定)] に移動します。
+. [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
+. [Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
+. 承認する組織を入力します。 複数の組織を入力する場合は、カンマで区切って入力します。
 
-## Using the CircleCI CLI
+## CircleCI のローカル CLI の使用
 
 This section covers how to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to list or delete users.
 
 ### List Users
-To view a full list of users for your CircleCI Server installation, first SSH into your Services machine, and run:
+CircleCI Server の全ユーザー一覧を表示するには、Services マシンに SSH 接続してから、以下のコマンドを実行します。
 
 [source,bash]
 ----
@@ -84,8 +78,7 @@ circleci dev-console
 ----
 
 ### Delete User
-If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine
-first and then delete using the following command, substituting the user’s GitHub username:
+CircleCI Server からユーザーを削除するには、Services マシンに SSH 接続してから、以下のコマンドを実行して削除します。 コマンドには、対象ユーザーの GitHub ユーザー名を代入します。
 
 [source,bash]
 ----
