@@ -38,7 +38,7 @@ toc::[]
 
 ### Internal Datastore Only
 . You have taken a backup of the 2.19 instance.
-. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] on the new server 3.x instance with contexts prior to starting
+. You have successfully run https://support.circleci.com/hc/en-us/articles/360011235534-Using-realitycheck-to-validate-your-CircleCI-installation[reality check] on the new server 3.x instance with contexts prior to starting.
 
 ## Migration
 
