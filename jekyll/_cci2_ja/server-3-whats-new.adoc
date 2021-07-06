@@ -1,7 +1,7 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
 = CircleCI Server v3.x What's New
 :page-layout: classic-docs
@@ -10,37 +10,31 @@ version:
 :toc: macro
 :toc-title:
 
-Server 3.x is now generally available. The newest version of server offers the ability to scale under heavy workloads,
-all within your own Kubernetes cluster and private network, while still enjoying the full CircleCI cloud experience.
+Server 3.x の一般公開を開始しました。 最新バージョンのサーバーでは、ワークロードの増大に合わせてお客様自身でスケーリングが可能です。あらゆるコードやデータをお客様専用の Kubernetes クラスタと社内ネットワーク内に保持しながら、クラウド版 CircleCI と同等の機能を利用できます。
 
-Server 3.x includes the latest CircleCI features, such as orbs, scheduled workflows, matrix jobs, and more. For existing
+CircleCI Orbs、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能を使用できます。 For existing
 customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.x will receive monthly
 patch releases and quarterly feature releases.
 
 toc::[]
 
-== New Features
+== 新機能
 
-* New UI
+* 新UI
 * Orbs for Server
-* Pipelines
-* Config 2.1
+* パイプライン
+* コンフィグ 2.1
 * API 2.0
-* Scheduled Workflows
-* Matrix Jobs
+*  Workflows のスケジューリング
+* マトリックスジョブ
 * And much more...
 
-== Known Issues
+== 既知の問題
 
-* No support for external data stores (Postgres, Mongo, Vault). This feature will be implemented in a future release.
-* It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
-identical names. This should be avoided as doing so could lead to errors and unexpected behavior. This will be fixed in
-a future patch release.
-* CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
-application to indicate the cause of the issue. If a build is run on your installation and does not show up in the
-CircleCI application, users should be directed to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to validate the project configuration
-and get details of the possible cause of the issue.
-* https://docs.influxdata.com/telegraf/v1.18/[Telegraf] metrics collection customization is not yet available.
+* 外部データストア（Postgres、Mongo、Vault）のサポートはありません。 この機能は将来のリリースで実装される予定です。
+* 同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。 今後のパッチ リリースで修正される予定です。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 もし、ビルドが表示されない問題が生じた場合は、CircleCI 1.0 のコンフィグを用いている可能性があるため、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用して、CircleCI 1.0 ビルドであるなど原因を特定することをおすすめします。
+* https://docs.influxdata.com/telegraf/v1.18/[Telegraf] メトリクス収集のカスタマイズはまだ利用できません。
 
 == Release 3.1.0
 
