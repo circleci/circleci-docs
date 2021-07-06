@@ -33,8 +33,8 @@ toc::[]
 - `ssh` access to the 2.19 services box
 
 ### External Datastores Only
-. Backups have been taken of all external data stores
-. Postgres has been updated to version 12
+. Backups have been taken of all external data stores.
+. Postgres has been updated to version 12.
 
 ### Internal Datastore Only
 . You have taken a backup of the 2.19 instance.
