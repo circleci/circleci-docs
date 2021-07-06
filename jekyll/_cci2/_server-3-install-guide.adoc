@@ -21,7 +21,7 @@ include::server-3-install-prerequisites.adoc[]
 
 include::server-3-install-creating-your-first-cluster.adoc[]
 
-include::server-3-install.adoc
+include::server-3-install.adoc[]
 
 include::server-3-install-migration.adoc[]
 
