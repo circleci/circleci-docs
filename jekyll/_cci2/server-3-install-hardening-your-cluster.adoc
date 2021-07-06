@@ -20,7 +20,7 @@ A server installation basically runs three different type of compute instances: 
 It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you
 to control traffic between the different components of the system and isolate them from each other.
 
-As always, the rule is to make as many of the resources private as possible, applies. If your users will access your
+As always, the rule is to make as many of the resources as private as possible, applies. If your users will access your
 CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a
 working NAT gateway setup. Otherwise, you will need at least one public subnet for the CircleCI server Traefik load balancer.
 
