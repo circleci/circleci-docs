@@ -1,0 +1,687 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Installation
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Before you begin with the CircleCI server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+
+toc::[]
+
+## Step 1 - Install KOTs
+
+CircleCI server v3.x uses https://kots.io[KOTs] from https://www.replicated.com/[Replicated] to manage and
+distribute server v3.x. KOTs is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
+To install the latest version, you can run `curl  https://kots.io/install | bash`.
+
+Ensure you are running the minimum KOTs (KOTs {kotsversion}) by running `kubectl kots version`.
+
+NOTE: The KOTs command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not
+available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
+https://github.com/microsoft/WSL/issues/4199.
+
+Next, run:
+
+[source,bash]
+----
+kubectl kots install circleci-server
+----
+
+You will be prompted for a:
+
+* namespace for the deployment
+* password for the KOTs admin console
+
+When complete, you should be provided with a URL to access the admin console. Usually this is http://localhost:8800.
+
+If you need to get back to the management console at a later date you can run:
+
+[source,bash]
+----
+kubectl kots admin-console -n <namespace kots was installed in>
+----
+
+## Step 2 - Configure Server (Part 1)
+
+Once you have accessed the URL to the administrative console and uploaded your license file, you will see similar to the following,
+where you will need to configure CircleCI server.
+
+.Server v{serverversion} Configuration
+image::server-config.png[Server v{serverversion} Configuration]
+
+### Global Settings
+Global configuration settings are a collection of cross-cutting configuration settings that affect the function of the entire
+application as a whole. Component-specific settings can be found below under the *Component Settings* section.
+
+. *Domain Name* (required): The domain name for your server installation. For example, circleci.yourcompany.com. You will
+need to configure this domain and point it to the Circleci server Traefik Load Balancer once it is configured in a later step.
+. *Frontend TLS Private Key*: A PEM encoded TLS private key for the web application. A default, self-signed TLS key is provided.
+. *Frontend TLS Certificate*: A PEM encoded TLS certificate for the web application. A default, self-signed TLS certificate is provided.
+
+TIP: If you don’t already have a TLS certificate for your installation, you can generate one using a tool of your choice. See the <<Optional: Generate a TLS Certificate>> section.
+
+[start=4]
+. *VM Service Load Balancer Hostname* (required): The hostname or IP of your VM Service Load Balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
+. *Output Processor Load Balancer Hostname* (required): The hostname or IP of your Output Processor load balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
+. *Nomad Load Balancer Hostname* (required): The hostname or IP of your Nomad load balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
+
+
+#### Optional: Generate a TLS Certificate
+
+By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a
+certificate from a trusted certificate authority. The https://letsencrypt.org/[LetsEncrypt] certificate authority, for example,
+can issue a certificate for free using their https://certbot.eff.org/[certbot] tool.
+
+For example, if you host your DNS on Google Cloud, the following commands will provision a certification for your installation:
+
+[source,bash]
+----
+DOMAIN=example.com  # replace with the domain of your installation of server
+GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json  # Path to GCP credentials
+sudo certbot certonly --dns-google \
+  --dns-google-credentials ${GOOGLE_APPLICATION_CREDENTIALS} \
+  -d "${DOMAIN}" \
+  -d "app.${DOMAIN}"
+----
+
+If instead you're using AWS Route53 for DNS, execute this example:
+
+[source,bash]
+----
+DOMAIN=example.com # replace with the domain of your installation of server
+sudo certbot certonly --dns-route53 \
+  -d "${DOMAIN}" \
+  -d "app.${DOMAIN}"
+----
+
+This will create a private key and certificate (including intermediate certificates) in `/etc/letsencrypt/live/${DOMAIN}/`.
+
+NOTE: It is important that your certificate contain both your domain and the `app.*` subdomain as subjects. For example,
+if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
+
+### Encryption
+These keysets are used to encrypt and sign artifacts generated by CircleCI.
+
+. *Artifact Signing Key* (required): To generate, run: +
+[source,bash]
+----
+docker run circleci/server-keysets:latest generate signing -a stdout
+----
+Copy and paste the entirety of the output into the Artifact Signing Key field.
+
+[start=2]
+. *Encryption Signing Key* (required) : To generate, run:
+[source,bash]
+----
+docker run circleci/server-keysets:latest generate encryption -a stdout
+----
+Copy and paste the entirety of the output into the Encryption Signing Key field.
+
+WARNING: It is recommended to store these securely; if they are lost, job history and artifacts will not be recoverable.
+
+### GitHub
+These settings control authorization to server using Github OAuth and allow for updates to Github using build status information.
+
+NOTE: If this instance is being set up in preparation for a migration from 2.19, it is recommended to use a new OAuth application, not the same one used in 2.19.
+
+. *Github Type*: Select Cloud or Enterprise.
+. *OAuth Client ID* (required): In GitHub, navigate to *Settings* > *Developer Settings* > *OAuth Apps* and select the *Register a new application* button.
+
+.Register a new OAuth application
+image::github-oauth.png[GitHub OAuth ]
+
+The domain you selected for your CircleCI installation is the Homepage URL and *<your-circle-ci-domain>/auth/github* is the Authorization callback URL.
+
+[start=3]
+. *OAuth Client Secret* (required): On your Oauth application, you can create one by selecting the *Generate a new client secret* button in GitHub.
+
+NOTE: If using GitHub Enterprise, you will also need a personal access token and the domain name of your GitHub Enterprise instance. You must also enable HTTP API Rate Limiting from the management console.
+
+### MongoDB
+*Internal* will deploy a completely configured MongoDB instance along with your server installation.
+*External* allows you to use your own MongoDB instance. CircleCI server is tested to work with MongoDB 3.6. You can customize the setup for your external MongoDB instance with the following settings:
+
+. MongoDB connection host(s) or IP(s): The hostname or IP of your MongoDB instance. Specifying a port using a colon and multiple hosts for sharded instances are both supported.
+. Use SSL for connection to MongoDB: Whether to use SSL when connecting to your external MongoDB instance
+. Allow insecure TLS connections: If you use a self-signed certificate or one signed by a custom CA, you will need to enable this setting. However, this is an insecure setting and you should use a TLS certificate signed by a valid CA if you can.
+. MongoDB user: The user name for the account to use. This account should have the dbAdmin role.
+. MongoDB password: The password for the account to use.
+. MongoDB authentication source database: The database that holds the account information, usually `admin`.
+. MongoDB authentication mechanism: The authentication mechanism to use, usually `SCRAM-SHA-1`.
+. Additional connection options: Any other connection options you would like to use. This needs to be formatted as a query string (key=value pairs, separated by &, special characters need to be URL encoded). See the https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
+
+### Vault
+*Internal* will deploy the default Vault instance inside the CircleCI K8s namespace.  The application will be automatically configured.
+*External* will not install the default Vault instance with the CircleCI application.  Select this option if using an existing Vault instance.  You need to configure the following settings:
+
+. URL: ex. `http://vault:8200`
+. Transit Path: The path of the transit secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
+. Token: The Vault token to be used by CircleCI.  The following example shows how to create a token with the recommended policy
+
+Create the policy:
+[source,sh]
+----
+vault policy write circleci -<<EOF
+path "mytransit/export/*" {
+  capabilities = ["deny"]
+}
+path "mytransit/encrypt/*" {
+  capabilities = ["update"]
+}
+path "mytransit/decrypt/*" {
+  capabilities = ["update"]
+}
+path "/auth/token/lookup-self" {
+    capabilities = ["read", "list"]
+}
+EOF
+
+vault token create -policy=circleci
+----
+
+Create a token using the policy:
+[source,sh]
+----
+vault token create -policy=circleci -period=30m
+----
+
+### Object Storage
+
+Server 3.x hosts build artifacts, test results, and other state in object storage. We support
+
+. Any https://docs.aws.amazon.com/s3/index.html?nc2=h_ql_doc_s3[S3]-compatible storage
+. https://cloud.google.com/storage/[Google Cloud Storage]
+
+While any S3-compatible object storage may work, we test and support https://aws.amazon.com/s3/[AWS S3] and https://min.io[Minio]. For object storage
+providers that do not support the https://docs.aws.amazon.com/AmazonS3/latest/API/Type_API_Reference.html[S3 API], such as
+https://docs.microsoft.com/en-ca/azure/storage/blobs/[Azure blob storage], we recommend using https://docs.min.io/minio/baremetal/reference/minio-server/minio-gateway.html[Minio Gateway].
+
+Please choose the one that best suits your needs.  A *Storage Bucket Name* is required, in addition to the following fields,
+depending on if you are using AWS or GCP. Ensure that the bucket name you provide exists in your chosen object storage provider
+before proceeding.
+
+#### S3-compatible Object Storage
+
+To configure S3-compatible storage, set the following details in the object storage section of the configuration page:
+
+. *Storage Bucket Name* (required): The bucket used for server.
+. *Storage Object Expiry* (optional): Number of days to retain your test results and artifacts. Set to 0 to disable and
+retain objects indefinitely.
+. *AWS S3 Region* (optional): AWS region of bucket if your provider is AWS. S3 Endpoint is ignored if this option is set.
+. *S3 Endpoint* (optional): API endpoint of S3 storage provider. Required if your provider is not AWS. AWS S3 Region is ignored
+if this option is set.
+. *Access Key ID* (required): Access Key ID for S3 bucket access.
+. *Secret Key* (required): Secret Key for S3 bucket access.
+
+It is recommended to create a new user with programmatic access for this purpose. If your provider support IAM policies,
+you should fill in `<BUCKET_NAME>` and attach the following policy to the user:
+
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::<BUCKET_NAME>",
+        "arn:aws:s3:::<BUCKET_NAME>/*"
+      ]
+    }
+  ]
+}
+----
+
+#### Google Cloud Storage
+
+To configure Google Cloud Storage (GCS), set the following details in the object storage section of the configuration page:
+
+. *Storage Bucket Name* (required): The bucket used for server.
+. *Storage Object Expiry* (optional): Number of days to retain your test
+results and artifacts. Set to 0 to disable and retain objects indefinitely.
+. *Service Account JSON* (required): A JSON format key of the Service Account to use for
+bucket access.
+
+A dedicated service account is recommended.  Add to it the `Storage Object Admin` role, with a condition on the resource
+name limiting access to only the bucket specified above.  For example, enter the following into the Google's Condition Editor of the IAM console:
+
+[source,text]
+----
+resource.name.startsWith("projects/_/buckets/<bucket-name>")
+----
+
+NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
+
+### Email Notifications
+Build notifications are sent via email.
+
+. *Email Submission server hostname*: Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
+. *Username*: Username to authenticate to submission server. This is commonly the same as the user’s e-mail address.
+. *Password*: Password to authenticate to submission server.
+. *Port*: Port of the submission server. This is usually either 25 or 587. While port 465 is also commonly used for email submission,
+it is often used with implicit TLS instead of StartTLS. Server only supports StartTLS for encrypted submission. +
+
+WARNING: Outbound connections on port 25 are blocked on most cloud providers. Should you select this port, be aware that
+your notifications may fail to send.
+
+[start=5]
+. *Enable StartTLS*: Enabling this will encrypt mail submission. +
+
+WARNING: You should only disable this if you can otherwise guarantee the confidentiality of traffic.
+
+### VM Service
+VM Service configures VM and remote docker jobs. You can configure a number of options for VM service, such as scaling rules.
+
+NOTE: We recommend that you leave these options at their defaults until you have successfully configured and verified your server installation.
+
+#### Authentication and Permissions
+##### AWS EC2
+You will need the following fields to configure your VM Service to work with AWS EC2. Note that the Access Key and Secret
+Key used by VM Service differs from the policy used by Object Storage in the previous section. VM Service and Object Storage are kept distinct to allow organizations to utilize different cloud and on-premise providers within the same installation. 
+
+. *AWS Region* (required): This is the region the application is in.
+. *AWS Windows AMI ID* (optional): If you require Windows builders, you can supply an AMI ID for them here.
+. *Subnet ID* (required): Choose a subnet (public or private) where the VMs should be deployed.
+. *Security Group ID* (required): This is the security group that will be attached to the VMs.
+
+The recommended security group configuration can be found in the xref:server-3-install-hardening-your-cluster.adoc#external-vms[Hardening Your Cluster] section.
+
+[start=5]
+. *AWS IAM Access Key ID* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[AWS Access Key ID] for EC2 access.
+. *AWS IAM Secret Key* (required): https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html[IAM Secret Key] for EC2 access.
+
+It is recommended to create a new user with programmatic access for this purpose. You should fill in <<Security Group ID>> and <<VPC ARN>> and attach the following IAM policy to the user:
+
+[source,json]
+----
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*::image/*",
+        "arn:aws:ec2:*::snapshot/*",
+        "arn:aws:ec2:*:*:key-pair/*",
+        "arn:aws:ec2:*:*:launch-template/*",
+        "arn:aws:ec2:*:*:network-interface/*",
+        "arn:aws:ec2:*:*:placement-group/*",
+        "arn:aws:ec2:*:*:volume/*",
+        "arn:aws:ec2:*:*:subnet/*",
+        "arn:aws:ec2:*:*:security-group/<<Security Group ID>>"
+      ]
+    },
+    {
+      "Action": "ec2:RunInstances",
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:CreateVolume"
+      ],
+      "Effect": "Allow",
+      "Resource": [
+        "arn:aws:ec2:*:*:volume/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:Describe*"
+      ],
+      "Effect": "Allow",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction" : "CreateVolume"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:CreateTags"
+      ],
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:CreateAction" : "RunInstances"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:CreateTags",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances",
+        "ec2:AttachVolume",
+        "ec2:DetachVolume",
+        "ec2:DeleteVolume"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:*/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:ResourceTag/ManagedBy": "circleci-vm-service"
+        }
+      }
+    },
+    {
+      "Action": [
+        "ec2:RunInstances",
+        "ec2:StartInstances",
+        "ec2:StopInstances",
+        "ec2:TerminateInstances"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:ec2:*:*:subnet/*",
+      "Condition": {
+        "StringEquals": {
+          "ec2:Vpc": "<<VPC ARN>>"
+        }
+      }
+    }
+  ]
+}
+----
+
+##### Google Cloud Platform
+You will need the following fields to configure your VM Service to work with Google Cloud Platform (GCP).
+
+. *GCP project ID* (required): Name of the GCP project the cluster resides.
+. *GCP Zone* (required): GCP zone the virtual machines instances should be created in IE `us-east1-b`.
+. *GCP Windows Image* (optional): Name of the image used for Windows builds. Leave this field blank if you do not require them.
+. *GCP VPC Network* (required): Name of the VPC Network.
+. *GCP VPC Subnet* (optional): Name of the VPC Subnet. If using auto-subnetting, leave this field blank.
+. *GCP Service Account JSON file* (required): Copy and paste the contents of your
+https://cloud.google.com/iam/docs/service-accounts[service account JSON file].
+
+WARNING: We recommend you create a unique service account used exclusively by VM Service. The Compute Instance Admin (Beta)
+role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
+https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
+
+#### Configuring VM Service
+
+. *Number of <VM type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
+of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
+instances lowers the start time allowing for faster machine and `remote_docker` builds. Note, that preallocated instances
+are always running and could potentially increase costs. Decreasing this number may also take up to 24 hours for changes
+to take effect. You have the option of terminating those instances manually, if required.
+. *VM Service Custom Configuration*: Custom configuration can fine tune many aspects of your VM service. This is an advanced
+option and we recommend you reach out to your account manager to learn more.
+
+### Nomad
+You will configure aspects of your Nomad control plane in <<Step 3 - Obtain Load Balancer IPs, Step 3>> after completing the Nomad setup in <<Step 2 - Configure Server (Part 1), Step 2>>.
+This section can be left with its default values until <<Step 3 - Obtain Load Balancer IPs, Step 3>>, with the exception of mTLS, which should be only be enabled after completing <<Step 4 - Install Nomad Clients, Step 4>>.
+
+#### Enable Mutual TLS (mTLS)
+mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
+
+When all required information has been provided, click the *Continue* button and your CircleCI installation will be put
+through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. When completed successfully,
+you should see something like the following and you can continue to the next step:
+
+.Sever v{serverversion} Preflight Checks
+image::preflight-checks.png[Preflight Checks]
+
+## Step 3 - Obtain Load Balancer IPs
+Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
+installation. If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
+
+* Circleci server Traefik Proxy
+* VM Service Load Balancer URI
+* Output Processor Load Balancer URI
+* Nomad server Load Balancer URI
+
+Depending on your cloud environment and configuration, your output can contain either an external IP address or a hostname
+for your load balancers. Either will work.
+
+The values for VM Service, Output Processor and Nomad server should be added into the config as described in
+<<Step 2 - Configure Server (Part 1)>>. The value from Circleci server Traefik should be used in <<Step 5 - Create DNS Entries for the Frontend>>
+to create the DNS entry for your applications domain name and sub-domain.
+
+If you had to leave the default value in place for the Nomad `server_endpoint` in the previous step, you can now go back
+to the terraform repository, fill in the correct value in `terraform.tfvars` and run `terraform apply` again.
+
+NOTE: At this time you can choose to create DNS entries for each of the load balancers. It is not required, but some users
+prefer to do so. For example, VM service might be called `vmservice.circleci.yourdomain.com`.
+
+## Step 4 - Install Nomad Clients
+As mentioned in the https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to
+schedule (via Nomad server) and run (via Nomad Clients) CircleCI jobs.
+
+Nomad client machines are provisioned outside the cluster and need access to the Nomad Control Plane, Output Processor,
+and VM Service.
+
+CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules
+in our https://github.com/CircleCI-Public/server-terraform[public repository].
+
+### AWS
+If you would like to install Nomad clients in AWS, create a file `main.tf` file with the following contents:
+
+[source,text]
+----
+# main.tf
+terraform {
+  required_version = ">= 0.15.4"
+  required_providers {
+    aws = {
+      source = "hashicorp/aws"
+      version = ">=3.0.0"
+    }
+  }
+}
+provider "aws" {
+# Your region of choice here
+region = "us-west-1"
+}
+
+module "nomad_clients" {
+source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.0.0"
+
+  # Number of nomad clients to run
+  nodes = 4
+  subnet = "<< ID of subnet you want to run nomad clients in >>"
+  vpc_id = "<< ID of VPC you want to run nomad client in >>"
+
+  server_endpoint = "<< hostname:port of nomad server >>"
+
+  dns_server = "<< ip address of your VPC DNS server >>"
+  blocked_cidrs = [
+    "<< cidr blocks you’d like to block access to e.g 10.0.1.0/24 >>"
+  ]
+}
+
+output "nomad_server_cert" {
+value = module.nomad_clients.nomad_server_cert
+}
+
+output "nomad_server_key" {
+value = module.nomad_clients.nomad_server_key
+}
+
+output "nomad_ca" {
+value = module.nomad_clients.nomad_tls_ca
+}
+----
+
+To deploy your Nomad clients simply run:
+
+[source,bash]
+----
+terraform init
+terraform plan
+terraform apply
+----
+
+After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for Nomad mTLS
+encryption mentioned in the xref:server-3-install.adoc#enable-mutual-tls-mtls[Nomad configuration section]. Make sure to
+copy them somewhere safe.
+
+Once terraform apply is complete, click on the *Application* tab in the admin console and wait for the deployment Status
+to show "Ready," then move on to the next step.
+
+### Google Cloud Platform
+
+If you’d like to to install Nomad clients in Google Cloud Platform, create a file `main.tf`. An example is provided below
+to document common settings. For documentation on all available variables please see https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[the
+module README].
+
+[source,text]
+----
+# main.tf
+provider "google-beta" {
+  # Your specific credentials here
+  project = "your-project"
+  region  = "us-west1"
+  zone    = "us-west1-a"
+}
+
+module "nomad_clients" {
+  # Note the use of ref=<<tag>> to pin the version to a fixed release
+  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.0.0"
+
+  zone    = "us-west1-a"
+  region  = "us-west1"
+  network = "my-network"
+  # Only specify a subnet if you use custom subnetworks in your VPC. Otherwise delete the next line.
+  subnet  = "my-nomad-subnet"
+
+  # hostname:port of Nomad load balancer, leave port as 4647 unless you know what you are doing
+  server_endpoint = "nomad.example.com:4647"
+
+  # Number of nomad clients to run
+  min_replicas     = 3
+  max_replicas     = 10
+
+  # Example autoscaling policy: scale up if we ever reach 70% cpu utilization
+  autoscaling_mode = "ONLY_UP"
+  target_cpu_utilization = 0.70
+
+  # Network policy example: block access to 1.1.1.1 from jobs and allow retry
+  # with SSH from only 2.2.2.2
+  blocked_cidrs = [
+    "1.1.1.1/32"
+  ]
+  retry_with_ssh_allowed_cidr_blocks = [
+    "2.2.2.2/32"
+  ]
+}
+
+output "nomad_server_cert" {
+  value = module.nomad_clients.nomad_server_cert
+}
+
+output "nomad_server_key" {
+  value = module.nomad_clients.nomad_server_key
+}
+
+output "nomad_ca" {
+  value = module.nomad_clients.nomad_tls_ca
+}
+----
+
+To deploy your Nomad clients simply run:
+
+[source,bash]
+----
+terraform init
+terraform plan
+terraform apply
+----
+
+After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for Nomad mTLS
+encryption mentioned in the xref:server-3-install.adoc#enable-mutual-tls-mtls[Nomad configuration section]. Make sure to
+copy them somewhere safe.
+
+Once Terraform `apply` is complete, click on the *Application* tab in the admin console and wait for the deployment Status
+to show "Ready," then move on to the next step.
+
+### Optional: Running Jobs Outside the Nomad Client
+CircleCI server can run Docker jobs on Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are controlled by Nomad clients,
+therefore the Nomad clients must be able to access the VM machines on port 22 for SSH and port 2376 for remote Docker jobs.
+
+TIP: The machines for VM jobs are addressed via their external IPs in GCP at the moment. You need to create appropriate
+ingress rules for TCP port 2376 with the IP addresses of the Nomad clients and Kubernetes nodes as allowed sources.
+
+## Step 5 - Create DNS Entries for the Frontend
+Next, create a DNS entry for your Traefik load balancer, i.e. `circleci.your.domain.com` and `app.circleci.your.domain.com`.
+You will recall that in <<Step 2 - Configure Server (Part 1)>> we detailed how to create TLS certs for your server install.
+Although TLS is optional, if it be used, it is important to ensure your TLS certificate covers both the server domain and
+sub-domain as in the examples provided. Once the user is logged in, all client requests are routed through your Traefik
+sub-domain, i.e, `app.{your_domain}.com`.
+
+For more information on adding a new DNS record, see the following documentation:
+
+- https://cloud.google.com/dns/docs/records#adding_a_record[Managing Records] (GCP)
+- https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html[Creating records by using the Amazon Route 53 Console] (AWS)
+
+## Step 6 - Configure Server (Part 2) and Deploy
+Go back to the *Config* tab in the admin console.
+
+TIP: Run `kubectl kots admin-console -n <namespace kots was installed in>` if you need to get back to the admin console.
+
+### Global Settings
+Enter the values obtained from <<Step 3 - Obtain Load Balancer IPs>> into VM Service Load Balancer Hostname, Output Processor
+Load Balancer Hostname, and Nomad Load Balancer Hostname under Global Settings.
+
+### Nomad
+
+mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. If you have already deployed the Nomad clients via terraform in <<Step 4 - Install Nomad Clients>> you can and should enable mutual TLS (mTLS).
+
+WARNING: This should only be disabled if you can guarantee the authenticity of the nodes joining your cluster and confidentiality
+of traffic from them to the control plane in some other way.
+
+. *Nomad Server Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. 
+. *Nomad Server Private Key* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>. 
+. *Nomad Server Certificate Authority (CA) Certificate* (required if mTLS is enabled): Obtained in <<Step 4 - Install Nomad Clients>>.
+
+
+### Deploy
+Click the *Save config* button to update your installation and re-deploy server.
+
+## Step 7 - Validate Installation
+
+. Launch your CircleCI installation in your browser, for example https://hostname.com.
+  * . If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
+. Sign up/Log in into your CircleCI installation. As the first user to log in, you will become the administrator at this point.
+. Take a look at our https://circleci.com/docs/2.0/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
+. Use the https://github.com/circleci/realitycheck[CircleCI realitycheck] repository and follow the
+https://github.com/circleci/realitycheck/blob/master/README.md[README] to check basic CircleCI functionality.
+
+If you are unable to run your first builds successfully, start with the https://circleci.com/docs/2.0/troubleshooting[Troubleshooting]
+guide for general troubleshooting topics, and the https://circleci.com/docs/2.0/nomad[Introduction to Nomad Cluster Operation]
+for information about how to check the status of Nomad Clients within your installation.
+
+## What to read next
+
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
