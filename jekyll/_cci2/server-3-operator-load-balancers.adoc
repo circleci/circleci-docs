@@ -12,7 +12,7 @@ version:
 
 CircleCI server uses load balancers to manage network traffic coming into and out of the Kubernetes services cluster. The three load balancers managing traffic to the Nomad cluster are internal to the VPC and they manage the distribution of jobs to the various compute resources. 
 
-The frontend load balancer manages traffic coming from developers and your VCS, including, via the API, CLI and CircleCI app. The frontend load balancer is public by default, but can be made private if your requirements dictate that you need to separate your installation from the public internet.
+The frontend load balancer manages traffic coming from developers and your VCS, including, via the API, CLI and CircleCI app. The frontend load balancer is public by default, but can be made private.
 
 toc::[]
 
