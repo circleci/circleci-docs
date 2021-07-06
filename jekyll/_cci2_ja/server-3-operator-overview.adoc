@@ -1,76 +1,65 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Operations Overview
+= CircleCI Server v3.x 運用方法
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-The following guide contains information useful for CircleCI Server Operators, or those responsible for ensuring CircleCI Server 3.x is running properly, via maintenance and monitoring.
+以下のガイドは、CircleCI Server 3.xの保守・監視を行うCircleCI Server Operator（責任者）に役立つ情報が含まれます。
 
-It is assumed that you have already read the https://circleci.com/docs/2.0/server-3-overview[Server 3.x Overview].
 
-CircleCI Server schedules CI jobs using the https://www.nomadproject.io/[Nomad] scheduler. The Nomad control plane runs inside of Kubernetes, while the
-Nomad clients are provisioned outside the cluster. The Nomad clients need access to the Nomad control plane, output processor,
-and VM service.
+Server 3.xのhttps://circleci.com/docs/2.0/server-3-overview[概要]を事前に読まれることを前提としております。
 
-CircleCI Server can run Docker jobs on the Nomad clients, but it can also run jobs in a dedicated VM. These VM jobs are
-controlled by the Nomad clients, therefore the Nomad clients must be able to access the VM machines on port 22 for SSH
-and port 2376 for remote Docker jobs.
 
-Job artifacts and output are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
-Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
-Nomad clients will need access to object storage.
+CircleCI Serverは、https://www.nomadproject.io/[Nomad]というスケジューラを使ってCIジョブをスケジュールします。 Nomadのコントロール​プレーンはKubernetesの中で動作し、Nomadのクライアントはクラスタの外でプロビジョニングされます。 Nomadのクライアントは、Nomadのコントロールプレーン と output processor、VM service にアクセスする必要があります。
+
+CircleCI Serverは、Nomadクライアント上でDockerジョブを実行することができますが、専用のVMでジョブを実行することもできます。 これらのVMジョブは Nomadクライアントが制御するため、NomadクライアントはVMマシンにSSHでポート22、リモートDockerジョブ用にポート2376でアクセスできる必要があります。
+
+ジョブの成果物と出力は、Nomadのジョブからオブジェクトストレージ（S3、GCS、またはその他のサポートされるオプション）に直接送信されます。
+アプリケーションの監査ログなどもオブジェクトストレージに保存されるため、KubernetesクラスタとNomadクライアントはオブジェクトストレージにアクセスする必要があります。
+
 
 toc::[]
 
-## Build Environment
+## ビルド環境
 
-CircleCI Server 3.x uses Nomad as the primary job scheduler. Refer to our https://circleci.com/docs/2.0/nomad/[Introduction to Nomad Cluster Operation]
-to learn more about the job scheduler and how to perform basic client and cluster operations.
+CircleCI Server 3.x では、プライマリ ジョブ スケジューラとして Nomad を使用します。 ジョブ スケジューラ、およびクライアントとクラスタの基本的な操作方法については、「https://circleci.com/docs/2.0/nomad/[Nomad クラスタの操作ガイド]」を参照してください。
 
-By default, CircleCI Nomad clients automatically provision compute resources according to the executors configured for
-each job in a project’s `.circleci/config.yml` file.
+デフォルトでは、CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに構成されている Executor に従って、コンピューティング リソースを自動的にプロビジョニングします。
 
 ### Nomad Clients
-Nomad Clients run without storing state, enabling you to increase or decrease the number of containers as needed.
+Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
 
-To ensure enough Nomad clients are running to handle all builds, track the queued builds and increase the number of
-Nomad Client machines as needed to balance the load. For more on tracking metrics see the
-xref:server-3-operator-metrics-and-monitoring.adoc[Metrics and Monitoring] section.
+すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューイングされているビルドを追跡し、必要に応じて Nomad クライアント マシンの数を増やして負荷を分散させます。 メトリクス追跡の詳細については
+xref:server-3-operator-metrics-and-monitoring.adoc[メトリクスとモニタリング]のセクションをご覧ください。
 
-Each machine reserves two vCPUs and 4GB of memory for coordinating builds. The remaining processors and memory create the
-containers for running jobs. Larger machines are able to run more containers and are limited by the number of available
-cores after two are reserved for coordination.
+各マシンには、ビルドを調整するために、それぞれ 2つの vCPU と 4GB のメモリが予約されています。 そのうえで、ジョブ実行用のコンテナが残りのプロセッサーとメモリで作成されます。 マシンの規模が大きくなれば、その分多くのコンテナを実行することができますが、調整用に予約してある 2 基以外に使用できるコアの数によって制限されます。
 
-NOTE: The maximum machine size for a Nomad client is 128GB RAM/64 CPUs. Contact your CircleCI account representative to
-request use of larger machines for Nomad Clients.
+NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアント マシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者に問い合わせてください。
 
-For more information on Nomad port requirements, see the
-https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[Hardening Your Cluster]
-section.
+Nomadのポート要件の詳細については、https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[Hardening Your Cluster]をご覧ください。
+
 
 ### GitHub
-CircleCI uses GitHub or GitHub Enterprise as an identity provider. GitHub Enterprise can, in turn, use
-https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML or SCIM]
-to manage users from an external identity provider.
+CircleCIでは、GitHubまたはGitHub Enterpriseをアイデンティティ・プロバイダーとして使用しています。 GitHub Enterpriseでは、次のようなことが可能です。
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAMLまたはSCIM]を使って、外部のIDプロバイダーでユーザーを管理することができます。
 
-NOTE: CircleCI does not support changing the URL or back-end GitHub instance after it has been set up.
+NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。
 
-The following table describes the ports used on machines running GitHub to communicate with the services and Nomad Client
-instances.
+以下の表に、GitHub を実行するマシンで Services および Nomad クライアント インスタンスと通信する際に使用されるポートを示します。
 
 --
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Source
-| Ports
-| Use
+| ソース
+| ポート
+| 用途
 
 | Services
 | 22
