@@ -359,11 +359,11 @@ en:
     - name: Server v3.1.x PDFs
       link: 2.0/server-3-overview
       children:
-        - name: v3.0 Overview
+        - name: v3.1 Overview
           link: 2.0/CircleCI-Server-3.1.0-Overview.pdf
-        - name: v3.0 Installation Guide
+        - name: v3.1 Installation Guide
           link: 2.0/CircleCI-Server-3.1.0-Installation-Guide.pdf
-        - name: v3.0 Operations Guide
+        - name: v3.1 Operations Guide
           link: 2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
     - name: Server v3.0.x PDFs
       link: 2.0/server-3-overview
