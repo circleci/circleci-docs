@@ -47,9 +47,11 @@ The migration script will:
 * Stop your v2.19.x application
 * Create a tarball of your v2.19 application's PostgreSQL and Mongo databases
 * Archive existing application data for Vault and CircleCI encryption/signing keys
-* Export the tarball to your v3.x installation (exported data stores are stored in `migrate/circleci_export`, which may be useful for debugging purposes).
+* Export the tarball to your v3.x installation (exported data stores are stored in `circleci_export`, which may be useful for debugging purposes).
 * Scale v3.x application deployments down to zero, and then to one
 * Import the data from the previously exported tarball to your new v3.x instance
+
+NOTE: If you have externalized services then you can run `bash migrate.sh -v -p -m`. These `-v -p -m` flags will skip the migration of Vault, Postgres, and Mongo, respectively. Skipping all three will copy your keys from `/data/circle/circleci-encryption-keys` on the v2.19.x services machine, allowing you to `cat` these files and upload their contents to the 3.x configuration page.
 
 In a terminal:
 
