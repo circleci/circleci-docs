@@ -202,18 +202,31 @@ Create the policy:
 [source,sh]
 ----
 vault policy write circleci -<<EOF
+path "mytransit/keys" {
+  capabilities = ["list"]
+}
+path "mytransit/keys/*" {
+  capabilities = ["read", "create", "update", "delete"]
+  denied_parameters = {
+    "exportable" = [true]
+  }
+}
 path "mytransit/export/*" {
   capabilities = ["deny"]
 }
 path "mytransit/encrypt/*" {
-  capabilities = ["update"]
+  capabilities = ["create", "update"]
 }
 path "mytransit/decrypt/*" {
+  capabilities = ["update"]
+}
+path "mytransit/rewrap/*" {
   capabilities = ["update"]
 }
 path "/auth/token/lookup-self" {
     capabilities = ["read", "list"]
 }
+
 EOF
 
 vault token create -policy=circleci
