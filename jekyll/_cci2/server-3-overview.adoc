@@ -57,7 +57,7 @@ Job artifacts and output are sent directly from jobs in Nomad to object storage 
 Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
 Nomad clients need access to object storage.
 
-https://kots.io/[KOTs] is used to configure and deploy CircleCI server 3.x.
+https://kots.io/[KOTS] is used to configure and deploy CircleCI server 3.x.
 
 == Architecture
 Below is a diagram describing the architecture of server 3.x. The available services
