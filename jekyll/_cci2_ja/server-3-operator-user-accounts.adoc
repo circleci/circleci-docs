@@ -1,21 +1,20 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x User Accounts
+= CircleCI Server v3.x ユーザー管理
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This section provides information to help operators manage user accounts. For an overview of user accounts, view the
-Admin settings overview from the CircleCI app by clicking on your profile in the top right corner and selecting Admin.
+This section provides information to help operators manage user accounts. ユーザー アカウントの概要を確認するには、CircleCI アプリケーションの右上隅にあるプロファイルをクリックし、[Admin (管理者)] を選択して、[Admin Settings (管理者設定)] の [Overview (概要)] を表示します。
 
 toc::[]
 
-## Suspending Accounts
+## アカウントの停止
 This section covers how to suspend new, active, or inactive accounts.
 
 ### New Accounts
