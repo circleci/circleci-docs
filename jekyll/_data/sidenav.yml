@@ -132,6 +132,8 @@ en:
           link: 2.0/runner-overview/
         - name: Runner Installation
           link: 2.0/runner-installation/
+        - name: Runner on Kubernetes 
+          link: 2.0/runner-on-kubernetes/
         - name: Runner API
           link: 2.0/runner-api/
         - name: Runner FAQs

@@ -70,26 +70,3 @@ approved organizations list. To access this feature:
 . Select System Settings from the Admin Setting menu
 . Scroll down to Required Org Membership List
 . Enter the organization(s) you wish to approve. If entering more than one organization, use a comma delimited string.
-
-## Using the CircleCI CLI
-
-This section covers how to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to list or delete users.
-
-### List Users
-To view a full list of users for your CircleCI Server installation, first SSH into your Services machine, and run:
-
-[source,bash]
-----
-circleci dev-console
-(circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
-----
-
-### Delete User
-If you need to remove a user from your installation of CircleCI Server, you will need to SSH into the services machine
-first and then delete using the following command, substituting the user’s GitHub username:
-
-[source,bash]
-----
-circleci dev-console
-(circle.http.api.admin-commands.user/delete-by-login-vcs-type! "github-username-of-user" :github)
-----

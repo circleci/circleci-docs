@@ -70,11 +70,18 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  `11.1.0` | Xcode 11.1 (11A1027)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)
  `11.0.0` | Xcode 11.0 (11A420a)      | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)
  `10.3.0` | Xcode 10.3 (10G8)         | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)
- `10.2.1` | Xcode 10.2.1 (10E1001)    | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)
- `10.1.0` | Xcode 10.1 (10B61)        | 10.13.6 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)
- `10.0.0` | Xcode 10.0 (10A255)       | 10.13.6 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)
- `9.4.1`  | Xcode 9.4.1 (9F2000)      | 10.13.3 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
+ `10.2.1` | * Xcode 10.2.1 (10E1001)    | 10.14.4 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)
+ `10.1.0` | * Xcode 10.1 (10B61)        | 10.13.6 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)
+ `10.0.0` | * Xcode 10.0 (10A255)       | 10.13.6 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)
+ `9.4.1`  | * Xcode 9.4.1 (9F2000)      | 10.13.3 | No | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html)
 {: class="table table-striped"}
+
+**Note:** The following images are deprecated and scheduled for removal on 14 September 2021. Please migrate away from these images as soon as possible. For more information, please see the [announcement thread on our forum](https://discuss.circleci.com/t/xcode-deprecation-notice-9-4-1-10-0-0-10-1-0-and-10-2-1/40515).
+
+* Xcode 9.4.1
+* Xcode 10.0.0
+* Xcode 10.1.0
+* Xcode 10.2.1
 
 ## Getting started
 {: #getting-started }
