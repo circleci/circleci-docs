@@ -47,7 +47,7 @@ The migration script will:
 * Perform pre-flight checks to confirm namespace and datastores for 2.19.x. 
 * Create a tarball of your v2.19.x application's PostgreSQL and Mongo databases.
 * Archive existing application data for Vault and CircleCI encryption/signing keys.
-* Export the 2.19.x tarball to your v3.x installation (exported data stores are stored in `migrate/circleci_export`, which may be useful for debugging purposes).
+* Export the 2.19.x tarball to your v3.x installation. Exported data stores are stored in a directory named `circleci_export`, located relative to wherever the migration script is run from. This can be useful for debugging purposes.
 * Perform pre-flight checks to confirm namespace and datastores for 3.x instance. 
 * Scale v3.x application deployments down to zero.
 * Import the data from the previously exported tarball to your new v3.x instance.
