@@ -154,231 +154,231 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | TCP
 | Inbound
 | End users
-| Artifacts access
+| Artifacts アクセス
 |
 
 | 22
 | TCP
-| Inbound
-| Administrators
+| インバウンド
+| 管理者
 | SSH
 |
 
 | 8800
 | TCP
-| Inbound
-| Administrators
-| Admin console
+| インバウンド
+| 管理者
+| 管理者コンソール
 |
 
 | 8125
 | UDP
-| Inbound
-| Nomad Clients
-| Metrics
+| インバウンド
+| Nomad クライアント
+| メトリクス
 |
 
 | 8125
 | UDP
-| Inbound
-| Nomad Servers
-| Metrics
+| インバウンド
+| Nomad サーバー
+| メトリクス
 | Only if using externalized Nomad Servers
 
 | 8125
 | UDP
-| Inbound
-| All Database Servers
-| Metrics
-| Only if using externalised databases
+| インバウンド
+| すべてのデータベースサーバー
+| メトリクス
+| 外部処理用データベースを使用する場合のみ
 
 | 4647
 | TCP
-| Bi-directional
-| Nomad Clients
-| Internal communication
+| 双方向
+| Nomad クライアント
+| 内部通信
 |
 
 | 8585
 | TCP
-| Bi-directional
-| Nomad Clients
-| Internal communication
+| 双方向
+| Nomad クライアント
+| 内部通信
 |
 
 | 7171
 | TCP
-| Bi-directional
-| Nomad Clients
-| Internal communication
+| 双方向
+| Nomad クライアント
+| 内部通信
 |
 
 | 3001
 | TCP
-| Bi-directional
-| Nomad Clients
-| Internal communication
+| 双方向
+| Nomad クライアント
+| 内部通信
 |
 
 | 80
 | TCP
-| Bi-directional
-| GitHub Enterprise / GitHub.com (whichever applies)
-| Webhooks / API access
+| 双方向
+| GitHub Enterprise / GitHub.com (該当する方)
+| Web フック / API アクセス
 |
 
 | 443
 | TCP
-| Bi-directional
-| GitHub Enterprise / GitHub.com (whichever applies)
-| Webhooks / API access
+| 双方向
+| GitHub Enterprise / GitHub.com (該当する方)
+| Web フック / API アクセス
 |
 
 | 80
 | TCP
-| Outbound
-| AWS API endpoints
-| API access
-| Only if running on AWS
+| アウトバウンド
+| AWS API エンドポイント
+| API アクセス
+| AWS 上で実行される場合のみ
 
 | 443
 | TCP
-| Outbound
-| AWS API endpoints
-| API access
-| Only if running on AWS
+| アウトバウンド
+| AWS API エンドポイント
+| API アクセス
+| AWS 上で実行される場合のみ
 
 | 5432
 | TCP
-| Outbound
-| PostgreSQL Servers
-| PostgreSQL database connection
-| Only if using externalised databases. Port is user-defined, assuming the default PostgreSQL port.
+| アウトバウンド
+| PostgreSQL サーバー
+| PostgreSQL データベース接続
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
 
 | 27017
 | TCP
-| Outbound
-| MongoDB Servers
-| MongoDB database connection
-| Only if using externalized databases. Port is user-defined, assuming the default MongoDB port.
+| アウトバウンド
+| MongoDB サーバー
+| MongoDB データベース接続
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
 
 | 5672
 | TCP
-| Outbound
-| RabbitMQ Servers
-| RabbitMQ connection
+| アウトバウンド
+| RabbitMQ サーバー
+| RabbitMQ 接続
 | Only if using externalized RabbitMQ
 
 | 6379
 | TCP
-| Outbound
-| Redis Servers
-| Redis connection
+| アウトバウンド
+| Redis サーバー
+| Redis 接続
 | Only if using externalized Redis
 
 | 4647
 | TCP
-| Outbound
-| Nomad Servers
-| Nomad Server connection
+| アウトバウンド
+| Nomad サーバー
+| Nomad サーバー接続
 | Only if using externalized Nomad Servers
 
 | 443
 | TCP
-| Outbound
-| CloudWatch Endpoints
-| Metrics
-| Only if using AWS CloudWatch
+| アウトバウンド
+| CloudWatch エンドポイント
+| メトリクス
+| AWS CloudWatch を使用する場合のみ
 |===
 <<<
-=== Nomad Clients
+=== Nomad クライアント
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 64535-65535
 | TCP
-| Inbound
-| End users
-| SSH into builds feature
+| インバウンド
+| エンドユーザー
+| ビルド機能への SSH 接続
 |
 
 | 80
 | TCP
-| Inbound
-| Administrators
-| CircleCI Admin API access
+| インバウンド
+| 管理者
+| CircleCI 管理者 API アクセス
 |
 
 | 443
 | TCP
-| Inbound
-| Administrators
-| CircleCI Admin API access
+| インバウンド
+| 管理者
+| CircleCI 管理者 API アクセス
 |
 
 | 22
 | TCP
-| Inbound
-| Administrators
+| インバウンド
+| 管理者
 | SSH
 |
 
 | 22
 | TCP
-| Outbound
-| GitHub Enterprise / GitHub.com (whichever applies)
-| Download Code From GitHub.
+| アウトバウンド
+| GitHub Enterprise / GitHub.com (該当する方)
+| GitHub からのコードのダウンロード
 |
 
 | 4647
 | TCP
-| Bi-directional
-| Services Machine
-| Internal communication
+| 双方向
+| Services マシン
+| 内部通信
 |
 
 | 8585
 | TCP
-| Bi-directional
-| Services Machine
-| Internal communication
+| 双方向
+| Services マシン
+| 内部通信
 |
 
 | 7171
 | TCP
-| Bi-directional
-| Services Machine
-| Internal communication
+| 双方向
+| Services マシン
+| 内部通信
 |
 
 | 3001
 | TCP
-| Bi-directional
-| Services Machine
-| Internal communication
+| 双方向
+| Services マシン
+| 内部通信
 |
 
 | 443
 | TCP
-| Outbound
-| Cloud Storage Provider
-| Artifacts storage
-| Only if using external artifacts storage
+| アウトバウンド
+| クラウドストレージプロバイダー
+| アーティファクトストレージ
+| 外部アーティファクトストレージを使用する場合のみ
 
 | 53
 | UDP
-| Outbound
-| Internal DNS Server
-| DNS resolution
-| This is to make sure that your jobs can resolve all DNS names that are needed for their correct operation.
+| アウトバウンド
+| 内部 DNS サーバー
+| DNS 解決
+| 正しい操作に必要なすべての DNS 名をジョブが解決できることを保証する.
 |===
 <<<
 === GitHub Enterprise / GitHub.com
@@ -386,179 +386,179 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 22
 | TCP
-| Inbound
-| Services Machine
-| Git access
+| インバウンド
+| Services マシン
+| Git アクセス
 |
 
 | 22
 | TCP
-| Inbound
-| Nomad Clients
-| Git access
+| インバウンド
+| Nomad クライアント
+| Git アクセス
 |
 
 | 80
 | TCP
-| Inbound
-| Nomad Clients
-| API access
+| インバウンド
+| Nomad クライアント
+| API アクセス
 |
 
 | 443
 | TCP
-| Inbound
-| Nomad Clients
-| API access
+| インバウンド
+| Nomad クライアント
+| API アクセス
 |
 
 | 80
 | TCP
-| Bi-directional
-| Services Machine
-| Webhooks / API access
+| 双方向
+| Services マシン
+| Web フック / API アクセス
 |
 
 | 443
 | TCP
-| Bi-directional
-| Services Machine
+| 双方向
+| Services マシン
 | Webhooks / API access
 |===
 
-=== PostgreSQL Servers
+=== PostgreSQL サーバー
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 5432
 | TCP
-| Bi-directional
-| PostgreSQL Servers
-| PostgreSQL replication
-| Only if using externalized databases. Port is user-defined, assuming the default PostgreSQL port.
+| 双方向
+| PostgreSQL サーバー
+| PostgreSQL 複製
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
 |===
 
-=== MongoDB Servers
+=== MongoDB サーバー
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 27017
 | TCP
-| Bi-directional
-| MongoDB Servers
-| MongoDB replication
-| Only if using externalized databases. Port is user-defined, assuming the default MongoDB port.
+| 双方向
+| MongoDB サーバー
+| MongoDB 複製
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
 |===
 <<<
-=== RabbitMQ Servers
+=== RabbitMQ サーバー
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 5672
 | TCP
-| Inbound
-| Services Machine
-| RabbitMQ connection
+| インバウンド
+| Services マシン
+| RabbitMQ 接続
 | Only if using externalized RabbitMQ
 
 | 5672
 | TCP
-| Bi-directional
-| RabbitMQ Servers
-| RabbitMQ mirroring
+| 双方向
+| RabbitMQ サーバー
+| RabbitMQ ミラーリング
 | Only if using externalized RabbitMQ
 |===
 
-=== Redis Servers
+=== Redis サーバー
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 6379
 | TCP
-| Inbound
-| Services Machine
-| Redis connection
+| インバウンド
+| Services マシン
+| Redis 接続
 | Only if using externalized Redis
 
 | 6379
 | TCP
-| Bi-directional
-| Redis Servers
-| Redis replication
+| 双方向
+| Redis サーバー
+| Redis 複製
 | Only if using externalized Redis, and using Redis replication (optional)
 |===
 
-=== Nomad Servers
+=== Nomad サーバー
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-| **Port number**
-| **Protocol**
-| **Direction**
-| **Source / destination**
-| **Use**
-| **Notes**
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
 
 | 4646
 | TCP
-| Inbound
-| Services Machine
-| Nomad Server connection
+| インバウンド
+| Services マシン
+| Nomad サーバー接続
 | Only if using externalized Nomad Servers
 
 | 4647
 | TCP
-| Inbound
+| インバウンド
 | Services Machine
-| Nomad Server connection
+| Nomad サーバー接続
 | Only if using externalized Nomad Servers
 
 | 4648
 | TCP
 | Bi-directional
-| Nomad Servers
-| Nomad Servers internal communication
+| Nomad サーバー
+| Nomad サーバー内部通信
 | Only if using externalized Nomad Servers
 |===
