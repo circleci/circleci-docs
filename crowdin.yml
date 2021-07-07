@@ -1,7 +1,11 @@
 files: [
   {
     source: "/jekyll/_cci2/*.md",
-    translation: "/jekyll/_cci2/%two_letters_code%/%original_file_name%"
+    translation: "/jekyll/_cci2_%two_letters_code%/%original_file_name%"
+  },
+  {
+    source: "/jekyll/_cci2/*.adoc",
+    translation: "/jekyll/_cci2_%two_letters_code%/%original_file_name%"
   },
   {
     source: "/jekyll/_data/sidenav.yml",
