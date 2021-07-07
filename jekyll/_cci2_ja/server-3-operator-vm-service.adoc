@@ -162,7 +162,7 @@ WARNING: We recommend you create a unique service account used exclusively by VM
 role is broad enough to allow VM Service to operate. If you wish to make permissions more granular, you can use the
 https://cloud.google.com/compute/docs/access/iam#compute.instanceAdmin[Compute Instance Admin (beta) role] documentation as reference.
 
-== Configuring VM Service
+== VM サービスの設定
 
 . *Number of <VM type> VMs to keep prescaled*: By default, this field is set to 0 which will create and provision instances
 of a resource type on demand. You have the option of preallocating up to 5 instances per resource type. Preallocating
