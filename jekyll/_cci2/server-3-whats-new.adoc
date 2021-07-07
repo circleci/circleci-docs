@@ -72,7 +72,6 @@ Next, from the management console dashboard, select Version History from the men
 
 === Known Issues
 
-* Retry with SSH for jobs using the machine executor advertises a private IP address. For this reason, retry with SSH for jobs using the machine executor works as standard for private installations, but for public installs you would need to ensure that you can access the private IP advertised, for example, by using a VPN into your VPC.
 * It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
 identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
 * CircleCI 1.0 builds are not supported. If an attempt is made to run a 1.0 build, no feedback will be available in the
