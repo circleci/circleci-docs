@@ -13,7 +13,7 @@ NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Pla
 
 toc::[]
 
-== Introduction
+== はじめに
 
 CircleCI runner enables you to use your own infrastructure for running jobs. This means you will be able to build and test on a wider variety of architectures, as well as providing you with additional control over the environment. The diagram below illustrates how CircleCI runner extends our existing systems.
 
@@ -27,8 +27,8 @@ There are two key use cases CircleCI aims to meet with the runner:
 * Privileged access & controls - CircleCI understands that some customers require running jobs on on-premises or limited-access infrastructure due to stricter isolation requirements. Some things that the runner enables are:
 ** IP restrictions - Runners can have static IP addresses that you can control.
 ** Identity Access Management (IAM) permissions - If you set up runners in AWS, they can be assigned IAM permissions.
-** Monitor the operating system.
-** Connect to private networks.
+** オペレーティングシステムの監視.
+** プライベートネットワークへの接続.
 
 * Unique compute requirements - Customers who need to run jobs on an environment or architecture that CircleCI does not offer as a resource class can use the runner to fill that need.
 
@@ -77,7 +77,7 @@ have questions around support for your environment and use-case(s). We also invi
 and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
 prioritize development efforts from our team!
 
-== Getting Started
+== はじめよう
 
 To get started with CircleCI runner:
 
@@ -129,12 +129,12 @@ jobs:
 ```
 The job will then execute using your runner when you push the config to your VCS provider.
 
-NOTE: A namespace is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+NOTE: A namespace is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. デフォルトでは、組織は名前空間を 1つだけ要求できるように制限されています。 これは、名前空間の占拠や紛らわしさを制限するためのポリシーです。 If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
 
-== Limitations
+== 制限について
 
 Almost all standard CircleCI features are available for use with runner jobs, but at present a few features are not yet supported. If these features are important for you to make use of runner jobs, please let us know via the relevant canny page.
 
 - https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[Rerun with SSH]
-- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
+- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
