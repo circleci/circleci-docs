@@ -14,31 +14,31 @@ This section includes information on metrics for monitoring your CircleCI Server
 
 toc::[]
 
-== Metrics Overview
+== メトリクスの概要
 
-Metrics are technical statistical data collected for monitoring and analytics purposes. The data includes basic information, such as CPU or memory usage, as well as more advanced counters, such as number of executed builds and internal errors. Using metrics you can:
+メトリクスとは、監視と分析を目的として収集される技術的な統計データのことです。 このデータには、CPU やメモリの使用率などの基本情報のほか、実行済みビルド数や内部エラー数といった高度なデータも含まれます。 メトリクスを活用すると、以下のことが可能になります。
 
-* Quickly detect incidents and abnormal behavior
-* Dynamically scale compute resources
-* Retroactively understand infrastructure-wide issues
+* インシデントや異常な動作をすばやく検出する
+* コンピューティング リソースを動的にスケールする
+* インフラ全体の問題をさかのぼって把握する
 
 === How Metrics Work in CircleCI Server
 
 Telegraf is the main component used for metrics collection in CircleCI Server. Telegraf is server software that brokers metrics data emitted by CircleCI services to data monitoring platforms such as Datadog or AWS CloudWatch.
 
-.Metrics
-image::metrics.png[Metrics]
+.メトリクス
+image::metrics.png[メトリクス名s]
 
-Metrics collection in CircleCI Server works as follows:
+CircleCI Server では、以下のようにしてメトリクスが収集されます。
 
 * Each component of a Server installation sends metrics data to the telegraf container running on the Services machine.
-* Telegraf listens on port 8125/UDP and receives data from all components (inputs) and applies configured filters to determine whether data should be kept or dropped.
+* Telegraf がポート 8125/UDP をリッスンし、全コンポーネントからのデータを受信 (入力) した後、事前に構成されたフィルターを適用してデータを保持するか破棄するかを判断する。
 * For some metric-types, Telegraf keeps metrics data inside and calculates statistical data (such as max, min, mean, stdev, sum) periodically.
 * Finally, Telegraf sends out data to configured sinks (outputs), such as stdout (on the Services machine), Datadog and/or AWS CloudWatch.
 
 It is worth noting that Telegraf can accept multiple input and output types at the same time allowing administrators to configure a single Telegraf instance to collect and forward multiple metrics data sets to both Datadog and CloudWatch.
 
-== Standard Metrics Configuration
+== 標準のメトリクス構成
 
 Review your metrics configuration file using the following command:
 
@@ -61,52 +61,52 @@ CAUTION: Do not attempt to directly modify the file. Any changes made in this wa
 
 In a standard configuration with no metrics customization the main config discussed above is all that is required. If you have configured metrics customization by placing files under `/etc/circleconfig/telegraf`, those configurations are appended to the main config – imagine `cat`ing the main config and all of those customization files. For more on customizing metrics see the <<custom-metrics>> section.
 
-== System Monitoring Metrics
+== システム監視のメトリクス
 
-To enable metrics forwarding to either AWS Cloudwatch or Datadog, follow the steps for the service you wish to use in the <<supported-platforms>> section. The following sections give an overview of available metrics for your installation.
+To enable metrics forwarding to either AWS Cloudwatch or Datadog, follow the steps for the service you wish to use in the <<supported-platforms>> section. 以下のセクションでは、CircleCI Server 環境で利用可能なメトリクスの概要を説明します。
 
-=== VM Service and Docker Metrics
+=== VM サービスと Docker のメトリクス
 
-VM Service and Docker services metrics are forwarded via https://github.com/influxdata/telegraf[Telegraf], a plugin-driven server agent for collecting and reporting metrics.
+VM サービスと Docker サービスのメトリクスは、メトリクスの収集とレポート用プラグイン駆動型サーバー エージェントである https://github.com/influxdata/telegraf[Telegraf] によって転送されます。
 
-The following metrics are enabled:
+以下のメトリクスが有効化されています。
 
 * https://github.com/influxdata/telegraf/blob/master/plugins/inputs/cpu/README.md#cpu-time-measurements[CPU]
-* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics[Disk]
-* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics[Memory]
-* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md[Networking]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/disk/README.md#metrics[ディスク]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/mem/README.md#metrics[メモリ]
+* https://github.com/influxdata/telegraf/blob/master/plugins/inputs/net/NET_README.md[ネットワーク通信]
 * https://github.com/influxdata/telegraf/tree/master/plugins/inputs/docker#metrics[Docker]
 
-=== Nomad Job Metrics
+=== Nomad ジョブのメトリクス
 
-https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad job metrics] are enabled and emitted by the Nomad Server agent. Five types of metrics are reported:
+https://www.nomadproject.io/docs/telemetry/metrics.html#job-metrics[Nomad ジョブのメトリクス]は、Nomad サーバー エージェントによって有効化され、送信されます。 以下の 5種類のメトリクスが報告されます。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 [cols="6,5"]
 |===
 |Metric
-|Description
+|お問い合わせ内容
 
 |`circle.nomad.server_agent.poll_failure`
-|Returns 1 if the last poll of the Nomad agent failed, otherwise it returns 0.
+|Nomad エージェントの最後のポーリングが失敗した場合は 1、成功した場合は 0 を返します。
 
 |`circle.nomad.server_agent.jobs.pending`
-|Returns the total number of pending jobs across the cluster.
+|クラスター全体の保留中ジョブの総数を返します。
 
 |`circle.nomad.server_agent.jobs.running`
-|Returns the total number of running jobs across the cluster.
+|クラスター全体の実行中ジョブの総数を返します。
 
 |`circle.nomad.server_agent.jobs.complete`
-|Returns the total number of complete jobs across the cluster.
+|クラスター全体の完了済みジョブの総数を返します。
 
 |`circle.nomad.server_agent.jobs.dead`
-|Returns the total number of dead jobs across the cluster.
+|クラスター全体の停止中ジョブの総数を返します。
 |===
 
-When the Nomad metrics container is running normally, no output will be written to standard output or standard error. Failures will elicit a message to standard error.
+Nomad メトリクスのコンテナが正常に動作している場合、標準出力や標準エラーには何も出力されません。 障害が発生すると、標準エラーにメッセージが出力されます。
 
-=== CircleCI Metrics
+=== CircleCI のメトリクス
 _Introduced in CircleCI Server v2.18_
 
 [.table.table-striped]
@@ -114,43 +114,43 @@ _Introduced in CircleCI Server v2.18_
 [cols="5,6"]
 |===
 | `circle.backend.action.upload-artifact-error`
-| Tracks how many times an artifact has failed to upload.
+| アーティファクトのアップロードに失敗した回数
 
 | `circle.build-queue.runnable.builds`
-| Tracks how many builds flowing through the system are considered runnable.
+| システムを経由するビルドのうち実行可能と見なされているビルドの数
 
 | `circle.dispatcher.find-containers-failed`
-| Tracks how many 1.0 builds
+| 1.0 ビルドの数
 
 | `circle.github.api_call`
-| Tracks how many api calls CircleCI is making to github
+| CircleCI が GitHub に対して実行している API 呼び出しの回数
 
 | `circle.http.request`
-| Tracks the response codes to CircleCi requests
+| CircleCi のリクエストへの応答コード
 
 | `circle.nomad.client_agent.*``
-| Tracks nomad client metrics
+| Nomad クライアントのメトリクス
 
 | `circle.nomad.server_agent.*`
-| Tracks how many nomad servers there are.
+| 存在する Nomad サーバーの数
 
 | `circle.run-queue.latency`
-| Tracks how long it takes for a runnable build to be accepted.
+| 実行可能なビルドが待機している時間
 
 | `circle.state.container-builder-ratio`
-| Keeps track of how many containers exist per builder ( 1.0 only ).
+| Builder ごとのコンテナの数 (1.0 のみ)
 
 | `circle.state.lxc-available`
-| Tracks how many containers are available ( 1.0 only )
+| 利用可能なコンテナの数 (1.0 のみ)
 
 | `circle.state.lxc-reserved`
-| Tracks how many containers are reserved/in use ( 1.0 only ).
+| 予約/使用中のコンテナの数 (1.0 のみ)
 
 | `circleci.cron-service.messaging.handle-message`
-| Provides timing and counts for RabbitMQ messages processed by the `cron-service`
+| `cron-service` によって処理される RabbitMQ メッセージのタイミングと数
 
 | `circleci.grpc-response`
-| Tracks latency over the system grpc system calls.
+| grpc システムが呼び出すシステムの待機時間
 |===
 
 // There are a couple of nomad metrics in this table... they should maybe be moved to the section above? ^^
@@ -169,7 +169,7 @@ _Introduced in CircleCI Server v2.18_
 // | TBD
 <<<
 
-== Supported Platforms
+== サポート対象プラットフォーム
 
 We have two built-in platforms for metrics and monitoring: AWS CloudWatch and DataDog. The sections below detail enabling and configuring each in turn.
 
@@ -186,21 +186,21 @@ image::metrics_aws_cloudwatch1.png[AWS CloudWatch]
 
 ==== AWS CloudWatch Configuration
 
-There are two options for configuration:
+設定には、2つのオプションがあります。
 
-* Use the IAM Instance Profile of the services box and configure your custom region and namespace.
+* Services box の [IAM Instance Profile (IAM インスタンスプロファイル)] を使用し、カスタムの領域と名前空間を設定する方法
 +
 .CloudWatch Region and Namespace
 image::metrics_aws_cloudwatch2a.png[Configuration IAM]
 
-* Alternatively, you may use your AWS Access Key and Secret Key along with your custom region and namespace.
+* カスタムの領域と名前空間と共に、AWS のアクセスキーとシークレットキーを使用する方法
 +
 .Access Key and Secret Key
 image::metrics_aws_cloudwatch2b.png[Configuration Alt]
 
 After saving you can *verify* that metrics are forwarding by going to your AWS CloudWatch console.
 
-=== DataDog
+=== Datadog
 
 To enable Datadog complete the following:
 
@@ -212,12 +212,12 @@ To enable Datadog complete the following:
 .Enable Datadog Metrics
 image::metrics_datadog1.png[Enable DataDog]
 
-. Enter your DataDog API Key. You can verify that metrics are forwarding by going to your DataDog metrics summary.
+. Datadog API キーを入力します。 You can verify that metrics are forwarding by going to your DataDog metrics summary.
 +
 .Enter Datadog API key
 image::metrics_datadog2.png[DataDog API Key]
 
-== Custom Metrics
+== カスタムメトリクス
 
 Custom Metrics using a Telegraf configuration file allows for more fine grained control than allowing Replicated to forward standard metrics to Datadog or AWS Cloudwatch.
 
@@ -234,7 +234,7 @@ Disable Replicated's interpolation of the Telegraf configuration to fully custom
 . Open the Management Console.
 . On the **Settings** page, go to **Custom Metrics** section and enable the "Use custom telegraf metrics" option.
 +
-.Custom Metrics
+.カスタムメトリクス
 image::custom_metrics.png[Custom Metrics]
 . Scroll down to save the change and restart services.
 
@@ -244,7 +244,7 @@ NOTE: There will be a downtime along with a service restart. After disabling it 
 
 Now you are ready to do anything Telegraf supports! All you need to provide is a valid Telegraf config file.
 
-. SSH into the Services machine
+. Services マシンに SSH で接続します。
 . Add the following to `/etc/circleconfig/telegraf/statsd.conf`
 +
 ```
@@ -380,7 +380,7 @@ AWS charges fees for CloudWatch per series of scalar (i.e. at the level of "mean
 
 == Additional Tips
 
-You may check the logs by running `docker logs -f telegraf` to confirm your output provider (e.g. influx) is listed in the configured outputs. Additionally, if you would like to ensure that all metrics in an installation are tagged against an environment you could place the following code in your config:
+`docker logs -f telegraf` を実行してログをチェックすることで、設定した出力に出力プロバイダー (influx など) がリストされているかどうかを確認できます。 また、インストール内のすべてのメトリクスが環境に対してタグ付けされるようにするには、コンフィグ内に以下のコードを記述します。
 
 ```yaml
 [global_tags]
