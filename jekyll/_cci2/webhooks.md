@@ -21,6 +21,8 @@ API or manually checking the CircleCI web application for desired information.
 The rest of this document will detail how to set up a webhook as well as the
 shape of events that will be sent to your webhook destination.
 
+**Note:** The Webhooks feature on CircleCI is currently in preview; documentation and features may change or be added to.
+
 ## Setting up a hook
 {: #setting-up-a-hook}
 Webhooks are set up on a per-project basis. To get started:
