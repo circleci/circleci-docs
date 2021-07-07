@@ -12,7 +12,7 @@ version:
 
 toc::[]
 
-== Introduction
+== はじめに
 
 CircleCI server v{serverversion} is a continuous integration and continuous delivery (CI/CD) platform that you can install on your GCP or AWS Kubernetes cluster.
 
@@ -24,9 +24,9 @@ The application exposes 4 services using load balancers, three of these load bal
 [cols=4*, options="header", stripes=even]
 |===
 | Load Balancer
-| Type
-| Ports
-| Description
+| タイプ
+| ポート
+| お問い合わせ内容
 
 | Frontend GUI Proxy & API
 | External
@@ -53,13 +53,13 @@ CircleCI server schedules CI jobs using the https://www.nomadproject.io/[Nomad] 
 Nomad clients, which are responsible for running scheduled CircleCI jobs, are provisioned outside the cluster. CircleCI
 server can run Docker jobs on the Nomad clients themselves or in a dedicated virtual machine (VM).
 
-Job artifacts and output are sent directly from jobs in Nomad to object storage (S3, GCS, or other supported options).
+ジョブの成果物と出力は、Nomadのジョブからオブジェクトストレージ（S3、GCS、またはその他のサポートされるオプション）に直接送信されます。
 Audit logs and other items from the application are also stored in object storage so both the Kubernetes cluster and the
 Nomad clients need access to object storage.
 
 https://kots.io/[KOTs] is used to configure and deploy CircleCI server 3.x.
 
-== Architecture
+== 稼働環境
 Below is a diagram describing the architecture of server 3.x. The available services
 are described in greater detail in the <<Services>> section.
 
@@ -76,20 +76,20 @@ CircleCI server 3.0 consists of the following services. Find their descriptions 
 |===
 | Service
 | Component
-| Description
-| What happens if it fails?
-| Notes
+| お問い合わせ内容
+| 障害発生時の影響
+| メモ
 
 | api-service
 | App Core
-| Provides a GraphQL API that provides much of the data to render the web frontend.
-| Many parts of the UI (e.g. Contexts) will fail completely.
+| GraphQL API を提供します。 この API は、Web フロントエンドのレンダリング データを多く提供します。
+| 多くの UI 要素 (例: コンテキスト) が完全に機能しなくなります。
 |
 
 | audit-log-service
 | App Core
-| Persists audit log events to blob storage for long term storage.
-| Some events may not be recorded.
+| 監査ログ イベントを blob ストレージに長期保存します。
+| 一部のイベントが記録されなくなります。
 |
 
 | builds-service
@@ -141,7 +141,7 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 |
 |
 
-| config
+| 設定ファイル
 |
 |
 |
@@ -149,44 +149,44 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 
 | contexts-service
 | App Core
-| Stores and provides encrypted contexts.
-| All builds using Contexts will fail.
+| 暗号化されたコンテキストを保存、提供します。
+| コンテキストを使用するすべてのビルドが失敗するようになります。
 |
 
 | cron-service
-| Pipelines
-| Triggers scheduled workflows.
-| Scheduled workflows will not run.
+| パイプライン
+| スケジュールされたワークフローをトリガーします。
+| スケジュールされたワークフローが実行されなくなります。
 |
 
 | dispatcher
 | Execution
 | Split jobs into tasks and send them to scheduler to run.
-| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
+| Nomad にジョブが送信されなくなります。 run キューのサイズは増加しますが、著しいデータ損失が起こることはありません。
 |
 
 | domain-service
 | App Core
-| Stores and provides information about our domain model. Works with permissions and API
-| Workflows will fail to start and some REST API calls may fail causing 500 errors in the CircleCI UI. 	If LDAP authentication is in use, all logins will fail.
+| CircleCI ドメイン モデルに関する情報を保存、提供します。 Works with permissions and API
+| Workflows will fail to start and some REST API calls may fail causing 500 errors in the CircleCI UI. 	LDAP 認証を使用している場合、すべてのログインが失敗するようになります。
 |
 
 | exim
 |
 | Will be removed in GA, but users can provide mail submission credentials to an existing MTA
-| No email notifications will be sent.
+| メール通知が送信されなくなります。
 |
 
 | federations-service
 | App Core
-| Stores user identities (LDAP). API and permissions-service
-| If LDAP authentication is in use, all logins will fail and some REST API calls might fail.
+| ユーザー ID を保存します (LDAP)。 API and permissions-service
+| LDAP 認証を使用している場合、すべてのログインが失敗するようになります。 また、一部の REST API 呼び出しが失敗する可能性があります。
 | LDAP integration not available
 
 | frontend
 | Frontend
-| CircleCI web app and www-api proxy.
-| The UI and REST API will be unavailable and no jobs will be triggered by GitHub/Enterprise. Running builds will be OK but no updates will be seen.
+| CircleCI Web アプリと www-api プロキシ
+| UI と REST API が利用できなくなります。 GitHub/GitHub Enterprise からジョブがトリガーされなくなります。 ビルドの実行はできますが、情報は更新されません。
 | Rate limit of 150 requests per second with a single user instantaneous limit of 300 requests. 
 
 | inject-bottoken
@@ -238,27 +238,27 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 |
 
 | orb-service
-| Pipelines
+| パイプライン
 | Handles communication between orb registry and config.
 |
 |
 
 | output-processor
 | Execution
-| Receives job output & status updates and writes them to MongoDB. Also provides an API to running jobs to access caches, workspaces, store caches, workspaces, artifacts, & test results.
+| ジョブの出力とステータスの更新を受け取り、MongoDB に書き込みます。 また、キャッシュとワークスペースにアクセスし、キャッシュ、ワークスペース、アーティファクト、テスト結果を保存するための API を実行中のジョブに提供します。
 |
 |
 
 | permissions-service
 | App Core
-| Provides the CircleCI permissions interface.
-| Workflows will fail to start and some REST API calls may fail, causing 500 errors in the UI.
+| CircleCI のアクセス権インターフェイスを提供します。
+| ワークフローを開始できなくなります。 一部の REST API 呼び出しが失敗し、CircleCI UI で 500 エラーが発生する可能性があります。
 |
 
 | scheduler
 | Execution
 | Runs tasks sent to it. Works with Nomad server.
-| No jobs will be sent to Nomad, the run queue will increase in size but there should be no meaningful loss of data.
+| Nomad にジョブが送信されなくなります。 run キューのサイズは増加しますが、著しいデータ損失が起こることはありません。
 |
 
 | server-troubleshooter
@@ -269,20 +269,20 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 
 | slanger
 | server
-| Provides real-time events to the CircleCI app.
-| Live UI updates will stop but hard refreshes will still work.
+| CircleCI アプリにリアルタイム イベントを提供します。
+| UI のリアルタイム更新が停止しますが、ハード リフレッシュは引き続き機能します。
 |
 
 | test-results
 | Execution
-| Parses test result files and stores data.
-| There will be no test failure or timing data for jobs, but this will be back-filled once the service is restarted.
+| テスト結果ファイルを解析してデータを保存します。
+| ジョブについてテスト失敗やタイミングのデータが生成されなくなります。 サービスが再起動するとバックフィルが行われます。
 |
 
 | vm-gc
 | Compute Management
 | Periodically check for stale machine and remote Docker instances and request that vm-service remove them.
-| Old vm-service instances might not be destroyed until this service is restarted.
+| このサービスを再起動するまで、古い vm-service インスタンスが破棄されなくなる可能性があります。
 |
 
 | vm-scaler
@@ -298,13 +298,13 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 |
 
 | workflows-conductor-event-consumer
-| Pipelines
+| パイプライン
 | Takes in information from VCS to kick off pipelines.
 | New Pipelines will not be kicked off when there are changes in the VCS.
 |
 
 | workflows-conductor-grpc-handler
-| Pipelines
+| パイプライン
 | Helps translate the information through gRPC.
 |
 |
@@ -317,7 +317,7 @@ but can also be configured to be exported to other places (i.e. Datadog or Prome
 
 |===
 
-== What to read next
+== 次に読む
 
 * https://circleci.com/docs/2.0/server-3-whats-new[What's new in 3.x]
 * https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
