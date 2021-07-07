@@ -13,7 +13,7 @@ version:
 
 toc::[]
 
-== Overview
+== 会社概要
 
 NOTE: Backup and Restore is not yet available on the current version of Server 3.x; however, it will be available for preview before the next release. 
 
@@ -32,7 +32,7 @@ Backups of CircleCI server can be created quite easily through https://kots.io/[
 To enable backup support however, you will need to install and configure https://velero.io/[Velero] on your cluster.
 Below, we will outline the steps needed to install Velero on your cluster.
 
-=== Prerequisites
+=== 前提条件
 
 - Download and install the https://velero.io/docs/v1.6/basic-install/[Velero CLI] for your environment.
 
