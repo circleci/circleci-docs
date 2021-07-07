@@ -10,19 +10,18 @@ version:
 :toc-title:
 
 本ドキュメントでは、CircleCI ServerのインストールされるServicesマシン上で実行されるコンテナ化されたサービスの概要を説明します。
- このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 以下の表に、補足と凡例を合わせて示しています。
+ このドキュメントは、サービス運用の概要を理解し、サービス停止時のトラブルシューティングに役立てていただくことを目的としています。 This is provided both to give an overview of service operation, and to help with troubleshooting in the event of service outages. Supplementary notes and a key are provided below the following table.
 
 toc::[]
 
 [discrete]
-=== 備考
+=== Notes
 
 * ここに記載したデータベース移行サービスは、起動時のみに実行されるため、障害時の重大度は低くなっています。
 +
 WARNING: 移行サービスが起動時にダウンしている場合、接続先のサービスが動作しません。
 
 * Platinum Supportを利用している場合、一部のサービスは外部化でき (ここでは * を付けて示しています)、要件に合わせて管理できます。 外部化することで、データの安全性が高まり、システムに冗長性を持たせることができます。
-
 
 [discrete]
 === key
@@ -46,7 +45,6 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 <<<
 
 == コンテナ、ロール、故障モード、スタートアップ時の依存関係
-
 
 [.table.table-striped]
 [cols=5*,^,*, options="header", stripes=even]
@@ -78,8 +76,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `contexts-service-migrator`
 | `contexts-service`のためにpostgresqlのマイグレーションを実行します。
-
-| 起動時にのみ実行されます。
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -91,7 +88,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `cron-service-migrator`
 | cron-serviceのためにpostgresqlのマイグレーションを実行します。
-| 起動時にのみ実行されます。
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -103,8 +100,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `domain-service-migrator`
 | `domain-service`のためにpostgresqlのマイグレーションを実行します。
-
-| 起動時にのみ実行されます。
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
