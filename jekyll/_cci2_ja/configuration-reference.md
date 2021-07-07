@@ -338,7 +338,7 @@ jobs:
 {: class="table table-striped"}
 
 
-**すべての**ブランチで確実にジョブを実行するには、`branches` キーを使用しないか、`only` キーに正規表現 `/.*/` を指定してすべてのブランチを対象にします。
+例
 
 ```yaml
 version: 2.1
@@ -361,7 +361,7 @@ CircleCI ではいくつかの machine イメージをサポートしており�
 * `ubuntu-2004:202101-01` - Ubuntu 20.04、Docker v20.10.2、Docker Compose v1.28.2
 * `ubuntu-2004:202010-01` - Ubuntu 20.04、Docker v19.03.13、Docker Compose v1.27.4 (`ubuntu-2004:202008-01` はエイリアス)
 
-* `circleci/classic:201710-01` – docker 17.09.0-ce、docker-compose 1.14.0
+* `ubuntu-1604:202104-01` - Ubuntu 16.04、Docker v19.03.15、Docker Compose v1.29.1、CircleCIによる最終リリース。
 * `ubuntu-1604:202101-01` - Ubuntu 16.04、Docker v19.03.14、Docker Compose v1.28.2 (最新版の 1 つ前のリリース)
 * `ubuntu-1604:202010-01` - Ubuntu 16.04、Docker v19.03.13、Docker Compose v1.27.4
 * `ubuntu-1604:202007-01` - Ubuntu 16.04、Docker v19.03.12、Docker Compose v1.26.1
@@ -450,7 +450,7 @@ jobs:
 #### **`branches` – 非推奨**
 {: #branches-deprecated }
 
-**このキーは非推奨になりました。 Use [workflows filtering](#jobfilters) to control which jobs run for which branches.**
+**このキーは非推奨になりました。 「[workflowのフィルタリング](#jobfilters)」を使用して、どのジョブがどのブランチに対して実行されるかを制御することができます。**
 
 ワークフローを**構成せず**、バージョン 2.1 ではなく 2.0 の設定ファイルを使用している場合は、一部のブランチの実行を許可またはブロックするルールを定義できます。 [ワークフロー]({{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows)を使用している場合、ジョブ レベルのブランチは無視されるため、`config.yml` ファイルの workflows セクションで構成する必要があります。 2.1 の設定ファイルを使用している場合にフィルターを使用するには、ワークフローを追加する必要があります。 詳細については、「[workflows](#workflows)」セクションを参照してください。 ジョブ レベルの `branch` キーは、以下のマップで構成します。
 
@@ -1421,7 +1421,7 @@ The `cron` key is defined using POSIX `crontab` syntax.
 
 ###### **`filters`**
 {: #filters }
-ジョブでは、`requires`、`context`、`type`、`filters` の各キーを使用できます。
+フィルターでは、`branches` キーを使用できます。
 
 | キー      | 必須 | 型   | 説明                |
 | ------- | -- | --- | ----------------- |
