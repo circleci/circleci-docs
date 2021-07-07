@@ -10,15 +10,16 @@ version:
 :toc: macro
 :toc-title:
 
-This section describes Orbs and how to manage them. Server installations include their own local orb registry. This registry
+This section describes Orbs and how to manage them. CircleCI Server システムには、固有のローカル Orb レジストリが含まれています。
+このレジストリは、CircleCI Server からのみアクセスできます。 This registry
 is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You
 are responsible for maintaining orbs; this includes copying orbs from the public registry, updating orbs that may have
 been copied prior, and registering your companies private orbs if they exist.
 
 toc::[]
 
-## Managing Orbs
-Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be
+## Orb の管理
+Orb には、https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]からアクセスします。 Orbs require your CircleCI user to be
 an admin. They also require a personal api token https://circleci.com/docs/2.0/managing-api-tokens/. Providing a local
 repository location using the `--host` option allows you to access your local server orbs vs the public cloud orbs. For
 example, if your server installation is located at `http://circleci.somehostname.com`, then you can run orb commands
@@ -39,7 +40,7 @@ circleci orb list --host <your server install domain> --token <your api token>
 ----
 
 ## Import a public orb
-To import a public orb to your local server orb repository:
+パブリック Orb をローカルの CircleCI Server Orb リポジトリにインポートするには、次のコマンドを実行します。
 
 [source,bash]
 ----
