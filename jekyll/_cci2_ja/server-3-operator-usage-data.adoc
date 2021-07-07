@@ -1,0 +1,19 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Usage Data
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+CircleCI typically collects usage data such as logs and other aggregated data for the purpose of improving our product
+and services. We will never collect personally identifiable information or information that is specific to your projects
+or accounts.
+
+## Current Data Collected
+At this time, Server 3.0 does not include the data collection service. The service will be included in a future release.
+With any release, we will communicate what additional data will be collected.
