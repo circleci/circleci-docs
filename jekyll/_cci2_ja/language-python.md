@@ -96,13 +96,13 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{% raw %} {{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
       - run:
@@ -146,6 +146,7 @@ jobs:
 
 実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
+{% raw %}
 
 ```yaml
 version: 2
@@ -157,19 +158,20 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:  # このステップは依存関係をインストールする*前*に実行します
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache:
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - ".venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
 ```
 
+{% endraw %}
 
 **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
@@ -219,6 +221,7 @@ jobs:
 ## 設定ファイルの全文
 {: #full-configuration-file }
 
+{% raw %}
 
 ```yaml
 version: 2 # CircleCI 2.0 を使用します
@@ -243,13 +246,13 @@ jobs: # 1 回の実行の基本作業単位
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
       # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache: # Pipfile のチェックサムをキャッシュ キーとして使用して、Python の依存関係をキャッシュします
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - ".venv"
             - "/usr/local/bin"
@@ -270,13 +273,13 @@ jobs: # 1 回の実行の基本作業単位
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
       - run:
@@ -289,6 +292,7 @@ jobs: # 1 回の実行の基本作業単位
           destination: tr1
 ```
 
+{% endraw %}
 
 ## 関連項目
 {: #see-also }
