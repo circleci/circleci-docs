@@ -2,82 +2,142 @@
 version:
 - Cloud
 ---
-= Installing the CircleCI Runner
+= CircleCI ランナーのインストール
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
 
-This page describes how to install CircleCI runner on Linux and macOS platforms. For other platorms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
+Linux プラットフォームおよび macOS プラットフォームへの CircleCI ランナーのインストール方法について説明します。
 
 toc::[]
 
-== Prerequisites
+== 前提条件
 
-The installation process assumes you have installed the following utilities on your system:
+=== サポート レベル
 
-* <<local-cli#installation,CircleCI CLI>>
-* curl (installed by default on macOS)
-* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
-* systemd version 235+ (Linux only)
-* permissions to create a user, and create directories under /opt.
+現在、CircleCI ランナーの対応プラットフォームは以下の 3 つのレベルに分けられています。
 
-== Authentication
+* サポート対象
+* 未検証
+* サポート対象外
 
-NOTE: These commands can only be run by an owner/admin of your organization.
+==== サポート対象
 
-In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
-
-. Create a namespace for your organization's runner resources.
+* CircleCI でランナーをビルドおよび検証済みのプラットフォームです。
+* サポート内容:
 +
-NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
-. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+** カスタマー エンジニアによるサポートを受けられます。
+** CircleCI 作成のドキュメントとベスト プラクティスが提供されます。
+** 問題発生時には、ゴールド サポートで規定されている通常のサービス レベル アグリーメント (SLA) の範囲内で CircleCI が問題解決を支援します。
+
+==== 未検証
+
+* CircleCI によるランナーの検証が行われていないプラットフォームです。ただし、当該プラットフォームには 1 つ以上のサポート対象プラットフォームと類似性があるため、ランナーは適切に動作すると考えられます。
+* サポート内容:
 +
-NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
-. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
+** CircleCI からドキュメントは提供されません。
+** 未検証プラットフォームで CircleCI ランナーを実行することは可能ですが、当該プラットフォームでのランナーの実行方法についてはお客様自身でお調べいただく必要があります。
+** 未検証プラットフォームでの問題発生時には、CircleCI アカウント チームが支援を行いますが、場合によってサポートできないことがあります。
+** カスタマー エンジニアから、CircleCI ランナーのベスト プラクティスに基づく (当該プラットフォームに限定されない) 一般的なガイダンスを受けられます。
+** お客様が未検証なプラットフォームでのランナーのセットアップに成功した場合、アカウント チームはその設定情報を収集し、他のお客様向けの情報として再利用します。
 
-CAUTION: The token cannot be retrieved again, so be sure to store it safely.
+==== サポート対象外
 
-== Job running requirements
+* CircleCI から CircleCI ランナーの実行用バイナリが提供されていないプラットフォームです。
+* サポート内容:
++
+** 当該プラットフォームでは、CircleCI ランナーは動作しません。
+** このプラットフォームで CircleCI ランナーを実行できるかどうかを試すのはお客様の自由ですが、成功する確率は低いと考えられます。
+** CircleCI 作成のドキュメントは提供されません。また、カスタマー エンジニアによるサポートも受けられません。
 
-Running jobs requires you have the following tools available on your machine:
+== サポート対象プラットフォーム
+
+次のプラットフォームは、CircleCI ランナーが動作することを検証済みです。
+
+* Intel + Ubuntu
+* Arm64 + Ubuntu
+* Intel + macOS
+
+== 未検証プラットフォーム
+
+次のプラットフォームは未検証ですが、CircleCI ランナーが動作すると考えられます。
+
+* Intel + Ubuntu 以外の Linux (Debian、Red Hat、SUSE など)
+* Arm64 + Ubuntu 以外の Linux (Debian、Red Hat、SUSE など)
+* Docker
+
+NOTE: CircleCI では上記プラットフォーム用のドキュメントを提供していません。
+
+== サポート対象外プラットフォーム
+
+次のプラットフォームは、現在 CircleCI ランナーの動作が保証されていません。
+
+* Intel + Windows
+* Arm + Windows
+* Apple Silicon + macOS
+* Arm32 + Linux
+* Kubernetes、Rancher、その他コンテナ オーケストレーション ソリューションでのネイティブ実行
+
+== 認証
+
+認証のために、下記手順を実行して名前空間と認証トークンを作成する必要があります。
+
+1.  <<local-cli#installation,CircleCI コマンドライン ツールをインストールします>>。
+2.  組織のランナー リソース用の名前空間を作成します。
++
+NOTE: 作成できる名前空間は、組織ごとに 1 つだけです。Orbs をすでに使用中の場合、この名前空間は Orbs で使用しているのと同じものになります。次のコマンドを実行します。`circleci namespace create <name> <vcs-type> <org-name>` (例: 組織の GitHub URL が `https://github.com/circleci` の場合、`circleci namespace create my-namespace github circleci`)。
+3.  次のコマンドを実行して、名前空間内にランナー用のリソース クラスを作成します。`circleci runner resource-class create <resource-class> <description>` (例: `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+4.  次のコマンドを実行して、上記リソース クラスのための認証用トークンを作成します。`circleci runner token create <resource-class> <nickname>` (例: `circleci runner token create my-namespace/my-resource-class my-token`)。このコマンドを実行すると、認証トークンを含むランナー設定ファイルが生成され、表示されます。
+
+CAUTION: トークンを再取得することはできませんので、必ず安全な場所に保管してください。
+
+== インストールに必要なツール
+
+インストール プロセスでは、システムに以下のユーティリティをインストール済みであることを前提としています。
+
+* curl (macOS ではデフォルトでインストール済み)
+* sha256sum (Linux では apt または yum により coreutils の一部としてインストール、macOS では brew によりインストール)
+* バージョン 235 以降の systemd (Linux のみ)
+* ユーザーの作成権限および /opt 以下のディレクトリの作成権限
+
+== ジョブ実行の要件
+
+ジョブを実行するには、マシンに次のツールを用意する必要があります。
 
 * tar
 * gzip
-* coreutils (Linux only)
-* git (recommended, but not required)
+* coreutils (Linux のみ)
+* git (推奨。ただし任意)
 
-== Installation
+== インストール
 
-=== Download the Launch Agent Binary and Verify the Checksum
+=== ローンチ エージェント バイナリのダウンロードとチェックサムの検証
 
-The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
+ローンチ エージェントは次のスクリプトでインストールできます。このスクリプトでは、ベースのインストール場所に `opt/circleci` を指定しています。
 
-First, set one of these variables as appropriate for for your installation target.
+まず、インストール対象のプラットフォームに応じて、次のいずれかの変数を設定します。
 
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Installation Target
-| Variable
+| インストール対象
+| 変数
 
-| For Linux x86_64
+| Linux x86_64
 | `platform=linux/amd64`
 
-| For Linux ARM64
+| Linux ARM64
 | `platform=linux/arm64`
 
-| For macOS x86_64
+| macOS x86_64
 | `platform=darwin/amd64`
-
-| For macOS M1
-| `platform=darwin/arm64`
 |===
 
-Run the following steps to download, verify and install the binary.
+次のスクリプトを実行して、バイナリをダウンロードして検証し、インストールします。
 
 ```sh
 prefix=/opt/circleci
@@ -88,53 +148,50 @@ agent_version=$(curl "$base_url/release.txt")
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
 curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
+file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2)"
+file="${file:1}"
 mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
 echo "Verifying CircleCI Launch Agent download"
-grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
-=== Platform-specific instructions
+=== プラットフォームごとのインストール方法
 
-Please refer to the platform-specific installation instructions:
+次のセクションでは、プラットフォーム固有のインストール方法を説明します。
 
-* <<CircleCI Runner Installation (Linux), Linux>>
-* <<CircleCI Runner Installation (macOS), macOS>>
+* linux
+* macOS
 
-== CircleCI Runner Installation (Linux)
+== Linux への CircleCI ランナーのインストール方法
 
-=== Create the CircleCI runner configuration
+=== CircleCI ランナー設定ファイルを作成する
 
-The recommended CircleCI runner configuration for Linux is:
+Linux 用の推奨される CircleCI ランナー設定ファイルを次に示します。
 
 ```yaml
 api:
   auth_token: AUTH_TOKEN
 runner:
   name: RUNNER_NAME
-  command_prefix: ["sudo", "-niHu", "circleci", "--"]
+  command_prefix: ["/opt/circleci/launch-task"]
   working_directory: /opt/circleci/workdir/%s
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like.
+=== CircleCI ランナー設定ファイルをインストールする
 
-=== Install the CircleCI runner configuration
-
-Once created, save the configuration file to `/opt/circleci/launch-agent-config.yaml` owned by `root` with permissions `600`.
+作成した設定ファイルを `/opt/circleci/launch-agent-config.yaml` として保存し、所有者を `root` に、パーミッションを `600` に設定します。
 
 ```bash
 sudo chown root: /opt/circleci/launch-agent-config.yaml
 sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 ```
 
-=== Create the circleci user & working directory
+=== CircleCI ユーザーと作業ディレクトリを作成する
 
-These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
-
-==== Ubuntu/Debian
+`build-agent` の実行時に使用するユーザーとディレクトリを作成します。
 
 ```bash
 id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
@@ -143,22 +200,47 @@ mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
 ```
 
-==== CentOS/RHEL
+=== タスク起動用スクリプトを作成する
+
+次のラッパー スクリプトを作成します。これは、ローンチ エージェントで適切なサンドボックス処理とクリーン シャットダウンを確保しながら、タスク エージェントを実行するために使用します。
+
+次のスクリプトを `/opt/circleci/launch-task` として作成し、所有者を `root` に、権限を `755` に設定します。
 
 ```bash
-id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
+#!/bin/bash
 
-mkdir -p /opt/circleci/workdir
-chown -R circleci /opt/circleci/workdir
+set -euo pipefail
+
+## このスクリプトでは、終了時に子プロセスすべてを適切にクリーンアップするため、
+## systemd-run を使用して build-agent を起動し、これらの子プロセスがすべて所属する cgroup を
+## 作成します。
+
+# build-agent の実行ユーザーは数値で指定する必要があります
+USER_ID=$(id -u circleci)
+
+# 一時的な systemd ユニットにわかりやすい名前をつけます
+unit="circleci-$CIRCLECI_LAUNCH_ID"
+
+# プロセスの終了時に systemd ユニットをシャットダウンします
+abort() {
+  if systemctl is-active --quiet "$unit"; then
+    systemctl stop "$unit"
+  fi
+}
+trap abort EXIT
+
+systemd-run \
+    --pipe --collect --quiet --wait \
+    --uid "$USER_ID" --unit "$unit" -- "$@"
 ```
 
-=== Enable the `systemd` unit
+=== `systemd` ユニットを有効にする
 
-Create `/opt/circleci/circleci.service` owned by `root` with permissions `755`.
+次のスクリプトを `/opt/circleci/circleci.service` として作成し、所有者を `root` に、パーミションを `755` に設定します。
 
-You must ensure that `TimeoutStopSec` is greater than the total amount of time a task will run for - which defaults to 5 hours.
+`TimeoutStopSec` のデフォルト値は 5 時間ですが、タスクの総実行時間よりも大きい値を指定する必要があります。
 
-If you want to configure the CircleCI runner installation to start on boot, it is important to note that the launch agent will attempt to consume and start jobs as soon as it starts, so it should be configured appropriately before starting. The launch agent may be configured as a service and be managed by systemd with the following scripts:
+CircleCI ランナーがマシン起動時に実行されるよう設定する場合、ローンチ エージェントは起動されるとジョブを開始しようとすることに注意が必要です。つまり、ジョブの実行に必要な他のサービスがローンチ エージェントより先に起動するよう構成する必要があります。ローンチ エージェントはサービスとして設定可能であり、次のスクリプトで systemd により管理できます。
 
 ```
 [Unit]
@@ -174,31 +256,32 @@ TimeoutStopSec=18300
 WantedBy = multi-user.target
 ```
 
-You can now enable the service:
+次に、下記コマンドによりサービスを有効化します。
 
 ```bash
-systemctl enable /opt/circleci/circleci.service
+prefix=/opt/circleci
+systemctl enable $prefix/circleci.service
 ```
 
-=== Start the service
+=== サービスを起動する
 
-When the CircleCI runner service starts, it will immediately attempt to start running jobs, so it should be fully configured before the first start of the service.
+CircleCI ランナー サービスは起動するとすぐにジョブを実行しようとするため、サービスの初回起動前に設定を適切に行なっておく必要があります。
 
 ```bash
 systemctl start circleci.service
 ```
 
-=== Verify the service is running
+=== サービスの実行状態を確認する
 
-The system reports a very basic health status through the `Status` field in `systemctl`. This will report **Healthy** or **Unhealthy** based on connectivity to the CircleCI APIs.
+`systemctl` コマンドで表示されるシステム レポートの `Status` フィールドで、簡単な実行状態を確認できます。このフィールドには、CircleCI API との接続状態に応じて、**Healthy (正常)** または **Unhealthy (異常)** と表示されます。
 
-You can see the status of the agent by running:
+エージェントの状態は、次のコマンドを実行して確認できます。
 
 ```bash
 systemctl status circleci.service --no-pager
 ```
 
-Which should produce output similar to:
+このコマンドの出力は次のようになります。
 
 ```
 circleci.service - CircleCI Runner
@@ -211,49 +294,49 @@ circleci.service - CircleCI Runner
            └─5592 /opt/circleci/circleci-launch-agent --config /opt/circleci/launch-agent-config.yaml
 ```
 
-You can also see the logs for the system by running:
+また、次のコマンドを実行してシステムのログを確認することもできます。
 
 ```bash
 journalctl -u circleci
 ```
 
-== CircleCI Runner Installation (macOS)
+== macOS への CircleCI ランナーのインストール方法
 
-=== Create a CircleCI runner configuration
+=== CircleCI ランナー設定ファイルを作成する
 
-Choose a user to run the CircleCI agent. These instructions refer to the selected user as `USERNAME`.
+CircleCI ランナーを実行するユーザーを選択します。以下の手順では、選択するユーザーを `USERNAME` としています。
 
-Complete the template shown below, with the various capitalized parameters filled in. When complete, save the template as `launch-agent-config.yaml`.
+下記のテンプレートを、大文字で記載されたパラメーターを適切な値で置き換えて完成させます。完成したら、`launch-agent-config.yaml` として保存します。
 
 ```yaml
 api:
     auth_token: AUTH_TOKEN
 runner:
     name: RUNNER_NAME
-    command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
+    command_prefix: ["sudo", "-niHu", "USERNAME", "--"]
     working_directory: /tmp/%s
     cleanup_working_directory: true
 logging:
     file: /Library/Logs/com.circleci.runner.log
 ```
 
-=== Install the CircleCI Runner configuration
+=== CircleCI ランナー設定ファイルをインストールする
 
-Create a directory as `root` to hold the CircleCI runner configuration:
+`root` ユーザーとして、CircleCI ランナー設定ファイルの保存ディレクトリを作成します。
 
 ```bash
 sudo mkdir -p '/Library/Preferences/com.circleci.runner'
 ```
 
-Copy the previously created `launch-agent-config.yaml` into the directory:
+このディレクトリに、先ほど作成した `launch-agent-config.yaml` をコピーします。
 
 ```bash
 sudo cp 'launch-agent-config.yaml' '/Library/Preferences/com.circleci.runner/launch-agent-config.yaml'
 ```
 
-=== Install the `launchd .plist`
+=== `launchd .plist` をインストールする
 
-Copy the following to `/Library/LaunchDaemons/com.circleci.runner.plist`, owned by `root`, with permissions `644`:
+次の内容を `/Library/LaunchDaemons/com.circleci.runner.plist` にコピーし、所有者を `root` に、パーミッションを `644` に設定します。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -276,23 +359,23 @@ Copy the following to `/Library/LaunchDaemons/com.circleci.runner.plist`, owned 
         <key>RunAtLoad</key>
         <true/>
 
-        <!-- The agent needs to run at all times -->
+        <!-- ランナーは実行状態を維持する必要があります -->
         <key>KeepAlive</key>
         <true/>
 
-        <!-- This prevents macOS from limiting the resource usage of the agent -->
+        <!-- ランナーによるリソースの使用が macOS で制限されないようにする設定です-->
         <key>ProcessType</key>
         <string>Interactive</string>
 
-        <!-- Increase the frequency of restarting the agent on failure, or post-update -->
+        <!-- 失敗時または更新後にランナーを再起動する頻度を増やします -->
         <key>ThrottleInterval</key>
         <integer>3</integer>
 
-        <!-- Wait for 10 minutes for the agent to shut down (the agent itself waits for tasks to complete) -->
+        <!-- ランナーがシャットダウンするまで 10 分間待機します (ランナー自体はタスクが完了するまで待機します) -->
         <key>ExitTimeOut</key>
         <integer>600</integer>
 
-        <!-- The agent uses its own logging and rotation to file -->
+        <!-- ログの出力とローテーションの設定はランナー固有のものを使用します -->
         <key>StandardOutPath</key>
         <string>/dev/null</string>
         <key>StandardErrorPath</key>
@@ -301,91 +384,79 @@ Copy the following to `/Library/LaunchDaemons/com.circleci.runner.plist`, owned 
 </plist>
 ```
 
-=== Enable the `launchd` service
+=== `launchd` サービスを有効にする
 
-If you are following these instructions for a second time, you should unload the following existing service:
+2 回目以降に有効化の手順を実行する場合、次の手順で既存サービスをアンロードする必要があります。
 
 ```bash
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-Now you can load the service:
+これで、サービスをロードできます。
 
 ```bash
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-=== Verify the service is running
+=== サービスの実行状態を確認する
 
-The macOS application console can be used to view the logs for the CircleCI agent. Look under "Log Reports" for the logs called `com.circleci.runner.log`.
+macOS のコンソールを使用して、CircleCI ランナーのログを確認できます。`com.circleci.runner.log` という名前のログに含まれる "Log Reports" の部分を確認してください。
 
-== Configuration file reference
+=== 設定ファイルのリファレンス
 
-A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
+ローンチ エージェント本体、およびサーバーとエージェントの通信方法やタスク エージェントの起動方法の設定は、YAML ファイルを使用して行います。
 
-The configuration file uses the following format with the various parameters explained in more detail below:
+設定ファイルの書式は次のとおりであり、以下で説明する各種パラメーターを使用可能です。
 
 ```sh
 api:
   auth_token: AUTH_TOKEN
 runner:
   name: RUNNER_NAME
+runner.name
 ```
 
-==== runner.name
-
-`RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
+`RUNNER_NAME` には、このローンチ エージェントに割り当てる一意の名前を設定します。CircleCI UI でのステータスやジョブ結果の確認時にランナーを特定できるよう、名前にはマシンのホスト名を使用することをお勧めします。
 
 ==== api.auth_token
 
-This is a token used to identify the launch agent to CircleCI and can be generated by circleci command-line tool. An existing token may be shared among many installations, but this token only allows a particular `resource_class` to be specified.
+ここには、CircleCI でのローンチ エージェントの認証に使用するトークンを設定します。このトークンは、カスタマー サクセス マネージャーから提供されます。既存のトークンは複数のインストール環境で共用できますが、このトークンでは特定の `resource_class` しか指定できません。
 
 ==== runner.command_prefix
 
-This prefix enables you to customize how the task agent process is launched. Using a custom script here can allow you to execute arbitrary commands before and after the task runner. You should take care to ensure the supplied arguments are executed, and the correct exit code is returned from the script upon completion.
+このプレフィックスを設定することで、タスク エージェント プロセスの起動方法をカスタマイズできます。このページの例では、前述の launch-task スクリプトを設定しています。
 
 ==== runner.working_directory
 
-This directory allows you to control the default working directory used by each job. If the directory already exists, task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not be automatically removed.
+ここでディレクトリを設定することで、ジョブごとに使用するデフォルトの作業ディレクトリを指定できます。設定したディレクトリがすでに存在する場合は、タスク エージェントがそのディレクトリに書き込みを行えるようパーミッションが設定されている必要があります。設定したディレクトリが存在しない場合は、タスク エージェントにそのディレクトリの作成権限を付与する必要があります。設定値に `%s` を含めた場合、この変数はジョブごとに異なる値で置き換えられます。設定した作業ディレクトリは自動的には削除されないことに注意してください。
 
 ==== runner.cleanup_working_directory
 
-This directory enables you to control the working directory cleanup after each job. The default value is `false`.
+この値を設定すると、各ジョブの完了後に作業ディレクトリを削除するかどうかを指定できます。デフォルト値は `false` です。
 
 ==== runner.max_run_time
 
-This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
+この値を設定することで、タスク エージェントの各ジョブについてデフォルトの最大実行時間を上書きできます。値は、単位識別子付きの文字列で指定します。識別子は、時間単位の場合は `h`、分単位の場合は `m`、秒単位の場合は `s` を使用します。
 
-Here are few valid examples:
+以下に有効な例を示します。
 
-* `72h` - 3 days
-* `1h30m` - 1 hour 30 minutes
-* `30s` - 30 seconds
-* `50m` - 50 minutes
-* `1h30m20s` - An overly specific (yet still valid) duration.
+* `72h` - 3 日間
+* `1h30m` - 1 時間 30 分
+* `30s` - 30 秒
+* `50m` - 50 分
+* `1h30m20s` - 非常に厳密ですが、こうした時間指定も可能です
 
-NOTE: The default value is 5 hours.
+NOTE: デフォルト値は 5 時間です。
 
-===== Customizing job timeouts and drain timeouts
+== Docker のインストール
 
-If you would like to customize the job timeout setting, you can "drain" the job by sending the Launch Agent a termination (TERM) signal, which then causes the Launch Agent to attempt to gracefully shutdown. When this TERM signal is received, the launch agent enters 'draining' mode, preventing the Launch Agent from accepting any new jobs, but still allowing any current active job to be completed. At the end of "draining," the Launch Agent then signals the Task Agent to cancel any active job (by sending it a TERM signal).
+ホストには、Docker をインストールしておく必要があります。`runner` コンテナは、起動するとすぐにジョブの実行を試みます。コンテナは停止されるまで、他のジョブの実行用に再利用され続けます。
 
-NOTE: If the Task Agent does not exit a brief period after the TERM, the Launch Agent will manually kill it by sending it a KILL signal.
+ホスト上で並列実行できるコンテナの数は、ホストで利用可能なリソースおよびジョブのパフォーマンス要件によって異なります。
 
-Draining can end in one of two ways:
+=== CircleCI ランナーのイメージを展開する Dockerfile を作成する
 
-* The task has been in the draining state for longer than the configured `max_run_time`.
-* An additional TERM signal is received by the Launch Agent during "draining".
-
-== Docker Installation
-
-The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
-
-The number of containers running in parallel on the host is constrained by the host's available resources and your jobs' performance requirements.
-
-=== Create a Dockerfile that extends the CircleCI Runner image
-
-In this example, python3 is installed on top of the base image.
+次の例では、ベース イメージ上に python3 をインストールします。
 
 `Dockerfile.runner.extended`
 
@@ -396,31 +467,31 @@ RUN apt-get update; \
         python3
 ```
 
-=== Build the Docker image
+=== Docker イメージをビルドする
 
 ```bash
 docker build --file ./Dockerfile.runner.extended .
 ```
 
-=== Start the Docker container
+=== Docker コンテナを起動する
 
-NOTE: The environment variable values are not to the `docker` command, so these environment variables are not visible in `ps` output.
+NOTE: 環境変数の値は `docker` コマンドに紐付けられないので、`ps` 出力ではこれらの環境変数は表示されません。
 
 ```bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
 ```
 
-When the container starts, it will immediately attempt to start running jobs.
+コンテナは、起動するとすぐにジョブの実行を試みます。
 
-=== Stopping the Docker container
+=== Docker コンテナを停止する
 
 ``` bash
 docker stop <container-name>
 ```
 
-=== Additional Resources
+=== 関連リソース
 
-- https://github.com/CircleCI-Public/runner-preview-docs/[CircleCI Runner Image on Docker Hub]
-- https://github.com/CircleCI-Public/circleci-runner-docker[CircleCI Runner Image on Github]
-- https://circleci.com/docs/[CircleCI Docs - The official CircleCI Documentation website]
+- https://github.com/CircleCI-Public/runner-preview-docs/[Docker Hub 上の CircleCI ランナー イメージ]]
+- https://github.com/CircleCI-Public/circleci-runner-docker[GitHub 上の CircleCI ランナー イメージ]
+- https://circleci.com/ja/docs/[CircleCI ドキュメント (CircleCI 公式ドキュメントをまとめた Web サイト)]
 - https://docs.docker.com/[Docker Docs]

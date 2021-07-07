@@ -2,59 +2,59 @@
 version:
 - Cloud
 ---
-= CircleCI Runner FAQs
+= CircleCI ランナーに関するよくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。Scale プランのお申し込み方法については、営業担当者へお問い合わせください。
 
-This page answers frequently asked questions for the CircleCI runner product.
+このページでは、CircleCI ランナーに関してよく寄せられるご質問への回答を解説します。
 
 toc::[]
 
-=== What is the security model for the CircleCI runner?
+=== CircleCI ランナーのセキュリティモデルは、どのようになっていますか。
 
-When installing CircleCI runner you will be able to choose the user that executes jobs. It is up to you to ensure this user only has permissions you are comfortable letting jobs use. 
+CircleCI ランナーをインストールする際に、ジョブを実行するユーザーを選択できます。このユーザーにはジョブの実行に必要な権限だけを付与するようにご注意ください。
 
-NOTE: Allowing jobs to access a docker daemon is equivalent to providing root access to the machine.
+NOTE: ジョブに Docker デーモンへのアクセスを許可することは、ユーザーにマシンへの root アクセスを許可することと同等です。
 
-=== How do I install dependencies needed for my jobs?
+=== ジョブに必要な依存関係をインストールする方法を教えてください。
 
-There are two main approaches available for installing dependencies:
+依存関係をインストールする方法は、主に 2 つあります。
 
-* Allow the jobs to install their own dependencies
+* 必要な依存関係をインストールすることをジョブに許可する
 
-This approach is the most flexible, but will require providing the jobs sufficient privileges to install tools or install the tools in a non-overlapping manner (eg. into the working directory).
+柔軟性は高くなりますが、ツールを全体にインストール、または重複しない方法で (作業ディレクトリなどに) ツールをインストールできる権限をジョブに付与する必要があります。
 
-* Pre-install dependencies on the runner machine
+* ランナーをインストールするマシンに手動でプリインストールする
 
-This approach is the most secure; however, this means that if the job’s dependencies change, the runner machine must be reconfigured.
+安全性は確保されますが、ジョブの依存関係が変わったときには、ランナー マシンの再構成が必要になります。
 
-=== What connectivity is required?
+=== どのような接続が必要ですか。
 
-In order to connect back to CircleCI to receive and execute jobs, outbound HTTPS connections to `runner.circleci.com`, `circleci-binary-releases.s3.amazonaws.com` are required.
+ジョブの取得と実行の際に CircleCI に接続するために、`runner.circleci.com` と `circleci-binary-releases.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要です。
 
-NOTE: No inbound connectivity is required by runner. Any other required connectivity is dependent on the content of the jobs themselves.
+NOTE: ランナーにインバウンド接続は必要ありません。それ以外では、ジョブの内容に応じた接続が必要になります。
 
-CAUTION: Using the checkout step will require access to your VCS provider. Using the cache, workspace or artifact features will require outbound HTTPS connections to `circle-production-customer-artifacts.s3.amazonaws.com`.
+CAUTION: チェックアウト ステップでは、VCS プロバイダーへのアクセスが必要です。キャッシュ、ワークスペース、アーティファクトを使用する場合は、`circle-production-customer-artifacts.s3.amazonaws.com` へのアウトバウンド HTTPS 接続が必要になります。
 
-=== How do caching and workspaces and artifacts work with CircleCI runner?
+=== CircleCI ランナーを使用する場合、キャッシュ、ワークスペース、アーティファクトはどのように処理されますか。
 
-Caches and workspaces and artifacts will be stored in the us-east-1 region of S3. If your runners are not in this region then you may see reduced performance. Although CircleCI is not currently charging for runner usage, you may be charged for data transfer and storage in the future.
+キャッシュ、ワークスペース、アーティファクトは、S3 の us-east-1 リージョンに保存されます。ランナーが別のリージョンでセットアップされている場合、パフォーマンスが低下する可能性があります。また、現時点では料金は課されていませんが、今後、データ転送や保存に対して料金が設定される可能性があります。
 
-If you would prefer to take complete control of artifact storage, CircleCI recommends you avoid the built-in steps and uploading the artifacts directly to your chosen storage backend.
+アーティファクト ストレージを自社で完全に管理したい場合は、ビルトイン ステップを使用せず、ご希望のストレージ バックエンドに直接アーティファクトをアップロードすることをお勧めします。
 
-=== What are the best practices for managing state between jobs?
+=== ジョブ間の状態管理に関するベスト プラクティスを教えてください。
 
-The runner itself is unopinionated about this. Runner can be configured to give each job a unique working directory and clean it up afterwards - but this is optional. And by default, nothing restricts the job from placing files outside of it's working directory.
+ランナー自体には、この点に関する厳格な決まりはありません。ジョブごとに専用の作業ディレクトリを作成し、後で削除するようランナーを構成できますが、必須ではありません。デフォルトでは、作業ディレクトリの外にファイルを配置することも制限されていません。
 
-In general CircleCI recommends jobs rely on as little state as possible to improve their reproducibility. An effective way to accomplish this is to put cleanup steps at the start of a job so they are guaranteed to run regardless of what happened to a previous job.
+一般的には、再現性が高まるよう、ジョブが状態に依存することは最小限に抑えることをお勧めします。そのためには、前のジョブの内容に依存せずに確実にジョブが実行されるように、ジョブの最初にクリーンにするステップを配置するのが効果的です。
 
-It may be possible to reduce build times by making use of caches that persist on the host between jobs, however this is a trade-off against reproducibility - and may also lead to disks filling up over time.
+ホスト上に保持されるキャッシュをジョブ間で利用すると、ビルド時間の短縮を期待できますが、一方で、再現性は低下します。また、長期的には、ディスク容量を使い果たす可能性もあります。
 
-=== Can I run multiple agents on a single host?
+=== 1 つのホスト上で複数のランナーを実行することはできますか。
 
-Yes, by running multiple replicas of the `launch-agent` with unique names, it is possible to run as many agents (and therefore jobs) on a single host as you want. However, care must be taken to ensure that these jobs are sufficiently isolated from each other that they do not conflict if run at the same time.
+はい。`launch-agent` の複数のレプリカを、それぞれに一意の名前を設定して実行すれば、1 つのホスト上で必要な数のランナー (言い換えると、必要な数のジョブ) を実行できます。ただし、同時に実行したときに競合が発生しないように、ジョブが相互に十分に分離されるよう特に注意してください。
