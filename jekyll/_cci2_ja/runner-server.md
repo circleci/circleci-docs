@@ -13,22 +13,25 @@ version:
 注: 執筆時点のバージョンの CircleCI Server 3.x では、CircleCI ランナーは使用できません。CircleCI Server に対応した CircleCI ランナーは、次回リリース前にプレビュー版として提供される予定です。 詳細については、[こちらからお問い合わせください](https://circleci.com/ja/contact/)。
 
 ## 認証
+{: #authentication }
 
-名前空間、リソース クラス、トークンを作成するには、CLI が CircleCI Server 環境に接続できるよう構成する必要があります。この構成は、`--host HOSTNAME` フラグと `--token TOKEN` フラグを付けるか、または CircleCI CLI の設定ファイルを使用して行います。
+When creating namespaces, resource classes and tokens, the CLI needs to be configured to connect to the Server deployment either via `--host HOSTNAME` and `--token TOKEN` flags, or the CircleCI CLI's configuration file.
 
 #### リソース クラスの作成例
+{: #resource-class-example }
 ```plaintext
 circleci runner resource-class create <resource-class> <description> --host HOSTNAME --token TOKEN
 ```
 
 ## 設定ファイル
+{: #configuration-file }
 
-ランナーのセットアップ時には、設定ファイルで `host` プロパティを指定する必要があります。
+When setting up a Runner, the configuration file should include `url` property.
 
 ```yaml
 api:
     auth_token: AUTH_TOKEN
-    host: HOSTNAME
+    url: https://HOSTNAME
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "circleci", "--"]
@@ -37,16 +40,17 @@ runner:
 ```
 
 ## バージョン
+{: #version }
 
-CircleCI Server のバージョンによって、対応しているランナーのバージョンは異なります。 下表に、それぞれのバージョンの対応関係を示します。
+A specific server version works with a specific runner version. The table below presents the mapping.
 
-| CircleCI Server のバージョン | ランナーのバージョン |
-| ---------------------- | ---------- |
-| 3.0                    | 未定         |
+| Server Version | Runner            |
+| -------------- | ----------------- |
+| 3.1            | 1.0.11147-881b608 |
 {: class="table table-striped"}
 
 
-次のスクリプトの `VERSION` を適切なバージョンに置き換えて実行し、指定したバージョンのランナーのバイナリをダウンロードおよび検証して、インストールします。
+Replace `VERSION` and run the following steps to download, verify and install the binary of a specific version of runner.
 
 ```sh
 agent_version=VERSION
