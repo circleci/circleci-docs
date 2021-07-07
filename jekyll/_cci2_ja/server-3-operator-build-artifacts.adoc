@@ -29,25 +29,25 @@ By default, only pre-defined artifact types are allowed. This protects users fro
 | Application
 | json
 
-| Image
+| イメージ
 | png
 
-| Image
+| イメージ
 | jpg
 
-| Image
+| イメージ
 | gif
 
-| Image
+| イメージ
 | bmp
 
-| Video
+| ビデオ
 | webm
 
-| Video
+| ビデオ
 | ogg
 
-| Video
+| ビデオ
 | mp4
 
 | Audio
@@ -76,7 +76,7 @@ Also, by default, the following types will be rendered as plain text:
 [cols=2*, options="header", stripes=even]
 |===
 | Category
-| Type
+| タイプ
 
 | Text
 | html
