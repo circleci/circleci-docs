@@ -50,10 +50,10 @@ If the traffic rules for your load balancers have not been created automatically
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
+| 名前
 | Port
-| Source
-| Purpose
+| ソース
+| 目的
 
 | *-server-traefik
 | 80
@@ -121,7 +121,7 @@ ingress. If you are using transparent load balancers, you will need to apply the
 |===
 | Port
 | Destination
-| Purpose
+| 目的
 
 | 2376
 | VMs
@@ -136,7 +136,7 @@ ingress. If you are using transparent load balancers, you will need to apply the
 | Allow intra-cluster traffic
 |===
 
-## Nomad Clients
+## Nomad クライアント
 Nomad clients do not need to communicate with each other; you can block traffic between Nomad client instances completely.
 
 ### Ingress
@@ -144,8 +144,8 @@ Nomad clients do not need to communicate with each other; you can block traffic 
 [cols=3*, options="header", stripes=even]
 |===
 | Port
-| Source
-| Purpose
+| ソース
+| 目的
 
 | 4647
 | K8s nodes
@@ -162,7 +162,7 @@ Nomad clients do not need to communicate with each other; you can block traffic 
 |===
 | Port
 | Destination
-| Purpose
+| 目的
 
 | 2376
 | VMs
@@ -170,18 +170,18 @@ Nomad clients do not need to communicate with each other; you can block traffic 
 
 | 3000
 | VM Service load balancers
-| Internal communication
+| 内部通信
 
 | 4647
 | Nomad Load Balancer
-| Internal communication
+| 内部通信
 
 | 8585
 | Output Processor Load Balancer
-| Internal communication
+| 内部通信
 |===
 
-## External VMs
+## 外部ポート
 Similar to Nomad clients, there is no need for external VMs to communicate with each other.
 
 ### Ingress
@@ -189,24 +189,24 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 [cols=3*, options="header", stripes=even]
 |===
 | Port
-| Source
-| Purpose
+| ソース
+| 目的
 
 | 22
 | K8s nodes
-| Internal communication
+| 内部通信
 
 | 22
 | Nomad clients
-| Internal communication
+| 内部通信
 
 | 2376
 | K8s nodes
-| Internal communication
+| 内部通信
 
 | 2376
 | Nomad clients
-| Internal communication
+| 内部通信
 
 | 64535-65535
 | External
@@ -216,6 +216,6 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 ### Egress
 You will only need the egress rules for internet access and SSH for your VCS.
 
-## What to read next
+## 次に読む
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
 * https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
