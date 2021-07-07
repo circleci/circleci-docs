@@ -15,7 +15,7 @@ This page describes how to install CircleCI runner on Linux and macOS platforms.
 
 toc::[]
 
-== Prerequisites
+== 前提条件
 
 The installation process assumes you have installed the following utilities on your system:
 
@@ -25,7 +25,7 @@ The installation process assumes you have installed the following utilities on y
 * systemd version 235+ (Linux only)
 * permissions to create a user, and create directories under /opt.
 
-== Authentication
+== 認証
 
 NOTE: These commands can only be run by an owner/admin of your organization.
 
@@ -50,7 +50,7 @@ Running jobs requires you have the following tools available on your machine:
 * coreutils (Linux only)
 * git (recommended, but not required)
 
-== Installation
+== インストール
 
 === Download the Launch Agent Binary and Verify the Checksum
 
@@ -62,7 +62,7 @@ First, set one of these variables as appropriate for for your installation targe
 [cols=2*, options="header", stripes=even]
 |===
 | Installation Target
-| Variable
+| 変数
 
 | For Linux x86_64
 | `platform=linux/amd64`
@@ -396,7 +396,7 @@ RUN apt-get update; \
         python3
 ```
 
-=== Build the Docker image
+=== Docker イメージをビルドします。
 
 ```bash
 docker build --file ./Dockerfile.runner.extended .
