@@ -56,7 +56,7 @@ in a terminal that has access to the cluster.
 - Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
 - Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
 
-== What to read next
+== 次に読む
 To learn more about Server v3.x, see the following:
 
 * https://circleci.com/docs/2.0/server-3-whats-new[Server 3.x Overview]
