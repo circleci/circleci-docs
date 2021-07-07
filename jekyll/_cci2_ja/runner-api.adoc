@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
 
 This document contains all the external facing endpoints for the CircleCI runner API.
 
@@ -26,8 +26,8 @@ This authentication method is based on personal tokens and follows the same rule
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Name
-| Description
+| 名前
+| お問い合わせ内容
 
 | circle-token header
 | Header that contains the `circle-token` used to authenticate the user.
@@ -49,8 +49,8 @@ This token is the same one used in the launch-agent setup.
 [.table.table-striped]
 [cols=2*, options="header", stripes=even]
 |===
-| Name
-| Description
+| 名前
+| お問い合わせ内容
 
 | http bearer auth
 | The token that should be provided using the Bearer scheme.
@@ -74,26 +74,26 @@ Lists the available runners based on the specified parameters. It is mandatory t
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
-| Name
-| Type
+| 名前
+| タイプ
 | Input
-| Required
-| Description
+| 必須
+| お問い合わせ内容
 
 | resource-class
-| string
+| 文字列
 | query
 | false
 | filters the list of runners by specific resource class.
 
 | namespace
-| string
+| 文字列
 | query
 | false
 | filters the list of runners by namespace.
 |===
 
-== Examples
+== サンプル
 
 ```sh
 curl -X GET https://runner.circleci.com/api/v2/runner?resource-class=test-namespace/test-resource \
@@ -110,8 +110,8 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Status
-| Description
+| ステータス
+| お問い合わせ内容
 | Format
 
 |200
@@ -124,10 +124,10 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
-| Name
-| Type
-| Required
-| Description
+| 名前
+| タイプ
+| 必須
+| お問い合わせ内容
 
 |items
 |[object]
@@ -135,17 +135,17 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |array containing the runners
 
 |resource_class
-|string
+|文字列
 |true
 |runner resource class
 
 |hostname
-|string
+|文字列
 |true
 |runner hostname
 
 |name
-|string
+|文字列
 |true
 |runner name
 
@@ -165,12 +165,12 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |last time the runner was used to run a job
 
 |version
-|string
+|文字列
 |true
 |version of the launch-agent running
 |===
 
-== Example
+== 例
 
 ```sh
 {
