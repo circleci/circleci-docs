@@ -10,7 +10,7 @@ version:
   - Server v2.x
 ---
 
-[Yarn](https://yarnpkg.com/ja/) は、JavaScript 用のオープンソース パッケージ マネージャーです。 The packages it installs can be cached. This can potentially speed up builds but, more importantly, can reduce errors related to network connectivity.
+[Yarn](https://yarnpkg.com/ja/) は、JavaScript 用のオープンソース パッケージ マネージャーです。 Yarn によってインストールされるパッケージはキャッシュできるため、 ビルドを高速化できるだけでなく、さらに重要なメリットとして、ネットワーク接続に関するエラーも低減できます。
 
 ## CircleCI での Yarn の使用方法
 {: #using-yarn-in-circleci }

@@ -18,7 +18,7 @@ CircleCI Server v2.17 の機能強化や不具合修正についてまとめま�
 * 名称が変更された組織のフローを変更しました。 これにより、名称が変更された組織は今後エラーが発生しないようになります。 このユース ケースで回避策を適用していたユーザーは、今後その回避策は不要となります。
 * ワークフローが占有する DB スペースが減り、管理が容易になります。
 * GraphQL API の直前のキャッシュ改善し、全体的なパフォーマンスを改善しました。
-* Added backpressure to avoid overwhelming nomad with requests, this will result in increased performance from existing nomad clusters.
+* リクエスト時に Nomad クライアントの容量飽和を避けるために、バックプレッシャー制御を追加しました。これにより、既存の Nomad クラスターのパフォーマンスが向上します。
 
 ## Fixed in release 2.17
 {: #fixed-in-release-217 }
