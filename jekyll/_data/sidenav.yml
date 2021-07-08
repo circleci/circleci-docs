@@ -734,19 +734,24 @@ ja:
           link: ja/2.0/creating-orbs/
           i18n_name: Orbsパブリッシュ
 
-# TODO - i18n names for insights.
 - name: Insights
   icon: icons/sidebar/insights.svg
+  i18n_name: インサイト
   children:
     - name: Overview
+      i18n_name: 概要
       link: 2.0/insights/
     - name: Metrics glossary
+      i18n_name: メトリクスの用語集
       link: 2.0/insights-glossary/
     - name: Test Insights
+      i18n_name: テスト結果
       link: 2.0/insights-tests/
     - name: Data Partnerships
+      i18n_name: パートナーシップ
       link: 2.0/insights-partnerships/
     - name: Insights API
+      i18n_name: Insights API
       link: api/v2/
       hash: tag/Insights
 
