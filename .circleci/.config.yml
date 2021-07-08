@@ -1,0 +1,118 @@
+ -BigGuy573.circleci.config.yml
+
+
+
+  
+  
+image:
+  name: atlassian/default-image:2
+
+
+setup: &setup
+  step:
+    name: Setup testing resources
+    script:
+      - STACK_NAME="bbci-pipes-test-infra-ebs-${BITBUCKET_BUILD_NUMBER}"
+      - EBS_APP_NAME="bbci-pipes-test-infra-${BITBUCKET_BUILD_NUMBER}"
+      - EBS_ENV_NAME="master-${BITBUCKET_BUILD_NUMBER}"
+      - S3_BUCKET="aws-ebs-deploy-ci-${BITBUCKET_BUILD_NUMBER}"
+      - pipe: atlassian/aws-cloudformation-deploy:0.5.0
+        variables:
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+          AWS_DEFAULT_REGION: "us-east-1"
+          STACK_NAME: ${STACK_NAME}
+          TEMPLATE: "./test/CloudFormationStackTemplate_nodejs.yml"
+          CAPABILITIES: ['CAPABILITY_IAM', 'CAPABILITY_NAMED_IAM']
+          WAIT: 'true'
+          STACK_PARAMETERS: >
+              [{
+                "ParameterKey": "ApplicationName",
+                "ParameterValue": "${EBS_APP_NAME}"
+              },
+              {
+                "ParameterKey": "EnvironmentName",
+                "ParameterValue": "${EBS_ENV_NAME}"
+              },
+              {
+                "ParameterKey": "BucketName",
+                "ParameterValue": "${S3_BUCKET}"
+              }]
+
+
+release-dev: &release-dev
+  step:
+    name: Release development version
+    trigger: manual
+    image: python:3.7
+    script:
+      - pip install semversioner
+      - VERSION=$(semversioner current-version).${BITBUCKET_BUILD_NUMBER}-dev
+      - pipe: atlassian/bitbucket-pipe-release:4.0.1
+        variables:
+          DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
+          DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+          IMAGE: bitbucketpipelines/$BITBUCKET_REPO_SLUG
+          GIT_PUSH: 'false'
+          VERSION: ${VERSION}
+    services:
+      - docker
+
+
+test: &test
+  parallel:
+    - step:
+        name: Test
+        image: python:3.7
+        oidc: true
+        script:
+          - export DOCKERHUB_IMAGE="bitbucketpipelines/${BITBUCKET_REPO_SLUG}"
+          - export DOCKERHUB_TAG=${BITBUCKET_BUILD_NUMBER}
+          - apt-get update && apt-get install zip openjdk-11-jdk -y
+          - pip install -r requirements.txt
+          - pip install -r test/requirements.txt
+          - pytest test/test.py --verbose --capture=no
+          - flake8 --ignore E501,E125
+          - pytest -p no:cacheprovider test/test_unit.py --capture=no --verbose
+        after-script:
+          - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.2.9.zip" -o "awscliv2.zip" && unzip awscliv2.zip
+          - echo 'c778f4cc55877833679fdd4ae9c94c07d0ac3794d0193da3f18cb14713af615f awscliv2.zip' | sha256sum -c - && ./aws/install
+          - STACK_NAME="bbci-pipes-test-infra-ebs-${BITBUCKET_BUILD_NUMBER}"
+          - S3_BUCKET="aws-ebs-deploy-ci-${BITBUCKET_BUILD_NUMBER}"
+          - aws --region "us-east-1" s3 rb s3://${S3_BUCKET} --force
+          - aws --region "us-east-1" cloudformation delete-stack --stack-name ${STACK_NAME}
+        caches:
+          - pip
+        services:
+          - docker
+    - step:
+        name: Lint the Dockerfile
+        image: hadolint/hadolint:latest-debian
+        script:
+          - hadolint Dockerfile
+
+
+push: &push
+  step:
+    name: Push and Tag
+    image: python:3.7
+    script:
+      - pipe: atlassian/bitbucket-pipe-release:4.0.1
+        variables:
+          DOCKERHUB_USERNAME: $DOCKERHUB_USERNAME
+          DOCKERHUB_PASSWORD: $DOCKERHUB_PASSWORD
+          IMAGE: bitbucketpipelines/$BITBUCKET_REPO_SLUG
+    services:
+      - docker
+
+
+pipelines:
+    default:
+    - <<: *setup
+    - <<: *test
+    - <<: *release-dev
+    branches:
+        master:
+        - <<: *setup
+        - <<: *test
+        - <<: *push
