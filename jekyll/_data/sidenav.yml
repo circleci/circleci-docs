@@ -635,7 +635,7 @@ ja:
           i18n_name: インストール済ソフト
           hash: pre-installed-software
         - name: Arm Resources
-        - i18n_name: Arm Resources # TODO: needs translation
+          i18n_name: Arm リソース
           link: ja/2.0/arm-resources/
     - name: Mac
       children:
