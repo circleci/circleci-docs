@@ -17,27 +17,21 @@ version:
 
 ---
 
-## 目次
-{: #table-of-contents }
-{:.no_toc}
-
 * 目次
 {:toc}
-
----
 
 ## **`setup`**
 {: #setup }
 
 | キー    | 必須 | 型    | 説明                                                                                  |
-| ----- | -- | ---- | ----------------------------------------------------------------------------------- |
+| ----- | ---- | ---- | ----------------------------------------------------------------------------------- |
 | setup | ×  | ブール値 | config.yaml で[ダイナミック コンフィグ]({{ site.baseurl }}/2.0/dynamic-config/)機能を使用することを指定します。 |
 {: class="table table-striped"}
 
 `setup` フィールドを指定すると、プライマリ .circleci 親ディレクトリ外部にある設定ファイルのトリガー、パイプライン パラメーターの更新、およびカスタマイズされた設定ファイルの生成を、条件に従って実行できます。
 
 ## **`version`**
-○
+{: #version }
 
 | キー      | 必須 | 型      | 説明                                                                                                                                                                            |
 | ------- | -- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -47,6 +41,8 @@ version:
 `version` フィールドは、非推奨または互換性を損なう変更について注意を促すために使用します。
 
 ## **`orbs`** (version: 2.1 が必須)
+{: #orbs-requires-version-21 }
+
 例
 
 | キー        | 必須 | 型   | 説明                                                                                                                                                                                 |
@@ -58,7 +54,7 @@ version:
 
 以下の例では、承認済みの `circleci` 名前空間に格納された `hello-build` という名前の Orb を呼び出します。
 
-```
+```yaml
 version: 2.1
 orbs:
     hello: circleci/hello-build@0.0.5
@@ -1267,7 +1263,7 @@ term:
         '?'         区切り文字を除く任意の 1 文字に一致します
         '[' [ '^' ] { character-range } ']'
                     文字クラス (空白は不可)
-        c           文字 c に一致します ('*'、'?'、'\\'、'[' 以外) 
+        c           文字 c に一致します ('*'、'?'、'\\'、'[' 以外)
         '\\' c      文字 c に一致します
 character-range:
         c           文字 c に一致します ('\\'、'-'、']' 以外)
@@ -1751,13 +1747,25 @@ workflows:
 
 CircleCI 設定ファイル v2.1 では、ワークフロー宣言内で真偽値を取る `when` 句を使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
 
-The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
+以下の構成例では、パイプライン パラメーター <code>run_integration_tests</code> を使用して <code>integration_tests</code> ワークフローの実行を制御しています。
 
 ```yaml
-以下の構成例では、パイプライン パラメーター <code>run_integration_tests</code> を使用して <code>integration_tests</code> ワークフローの実行を制御しています。
+version: 2.1
+
+parameters:
+  run_integration_tests:
+    type: boolean
+    default: false
+
+workflows:
+  integration_tests:
+    when: << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - mytestjob
+
+jobs:
+...
 ```
- を使用して integration_tests ワークフローの実行を制御しています。
-</code>
 
 This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
@@ -1771,12 +1779,22 @@ This example prevents the workflow `integration_tests` from running unless the t
 
 Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
 
-## 関連項目
+## Logic statements
 {: #logic-statements }
 
 Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
+|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
+| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
+| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
+| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
+| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
+| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
+| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
+| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
+| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
+| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 The following logic values are considered falsy:
@@ -1794,13 +1812,18 @@ Logic statements always evaluate to a boolean value at the top level, and coerce
 
 `matches` uses [Java regular expressions](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) for its `pattern`. It is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
 
-ワークフローを**使用しない**場合は、`jobs` マップに `build` という名前のジョブを含める必要があります。
+Note: When using logic statements at the workflow level, do not include the condition: key (the condition key is only needed for job level logic statements).
 
-### 例
+### Logic statement examples
 {: #logic-statement-examples }
 
 ```yaml
-詳細については、ワークフローに関するドキュメントの「<a href="{{ site.baseurl }}/ja/2.0/workflows/#git-タグに対応するワークフローを実行する">Git タグに対応するワークフローを実行する</a>」を参照してください。
+workflows:
+  my-workflow:
+      when:
+        or:
+          - equal: [ master, << pipeline.git.branch >> ]
+          - equal: [ staging, << pipeline.git.branch >> ]
 ```
 
 ```yaml
@@ -1861,77 +1884,137 @@ workflows:
 
 {% raw %}
 ```yaml
-- image: ubuntu:14.04
+version: 2
+jobs:
+  build:
+    docker:
+      - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
-  - image: mongo:2.6.8
-    command: [mongod, --smallfiles]
+      - image: mongo:2.6.8
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        command: [mongod, --smallfiles]
 
-  - image: postgres:9.4.1
-    # 一部のコンテナでは環境変数の設定が必要です
+      - image: postgres:9.4.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        # some containers require setting environment variables
+        environment:
+          POSTGRES_USER: root
+
+      - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
+      - image: rabbitmq:3.5.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+
     environment:
-      POSTGRES_USER: root
+      TEST_REPORTS: /tmp/test-reports
 
-  - image: redis@sha256:54057dd7e125ca41afe526a877e8bd35ec2cdd33b9217e022ed37bdcf7d09673
+    working_directory: ~/my-project
 
-  - image: rabbitmq:3.5.4
+    steps:
+      - checkout
 
-environment:
-  TEST_REPORTS: /tmp/test-reports
+      - run:
+          command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
 
-working_directory: ~/my-project
+      # Create Postgres users and database
+      # Note the YAML heredoc '|' for nicer formatting
+      - run: |
+          sudo -u root createuser -h localhost --superuser ubuntu &&
+          sudo createdb -h localhost test_db
 
-steps:
+      - restore_cache:
+          keys:
+            - v1-my-project-{{ checksum "project.clj" }}
+            - v1-my-project-
 
-  - checkout
+      - run:
+          environment:
+            SSH_TARGET: "localhost"
+            TEST_ENV: "linux"
+          command: |
+            set -xu
+            mkdir -p ${TEST_REPORTS}
+            run-tests.sh
+            cp out/tests/*.xml ${TEST_REPORTS}
 
-  - run:
-      command: echo 127.0.0.1 devhost | sudo tee -a /etc/hosts
+      - run: |
+          set -xu
+          mkdir -p /tmp/artifacts
+          create_jars.sh ${CIRCLE_BUILD_NUM}
+          cp *.jar /tmp/artifacts
 
-  # Postgres のユーザーとデータベースの作成
-  # YAML ヒアドキュメント '|' を使用して体裁を整えています
+      - save_cache:
+          key: v1-my-project-{{ checksum "project.clj" }}
+          paths:
+            - ~/.m2
 
-  - run: |
-      sudo -u root createuser -h localhost --superuser ubuntu &&
-      sudo createdb -h localhost test_db
+      # Save artifacts
+      - store_artifacts:
+          path: /tmp/artifacts
+          destination: build
 
-  - restore_cache:
-      keys:
+      # Upload test results
+      - store_test_results:
+          path: /tmp/test-reports
 
-        - v1-my-project-{{ checksum "project.clj" }}
-        - v1-my-project-
+  deploy-stage:
+    docker:
+      - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Deploy if tests pass and branch is Staging
+          command: ansible-playbook site.yml -i staging
 
-  - run:
-      environment:
-        SSH_TARGET: "localhost"
-        TEST_ENV: "linux"
-      command: |
-        set -xu
-        mkdir -p ${TEST_REPORTS}
-        run-tests.sh
-        cp out/tests/*.xml ${TEST_REPORTS}
+  deploy-prod:
+    docker:
+      - image: ubuntu:14.04
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    working_directory: /tmp/my-project
+    steps:
+      - run:
+          name: Deploy if tests pass and branch is Master
+          command: ansible-playbook site.yml -i production
 
-  - run: |
-      set -xu
-      mkdir -p /tmp/artifacts
-      create_jars.sh ${CIRCLE_BUILD_NUM}
-      cp *.jar /tmp/artifacts
-
-  - save_cache:
-      key: v1-my-project-{{ checksum "project.clj" }}
-      paths:
-
-        - ~/.m2
-
-  # アーティファクトの保存
-
-  - store_artifacts:
-      path: /tmp/artifacts
-      destination: build
-
-  # テスト結果のアップロード
-
-  - store_test_results:
-      path: /tmp/test-reports
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - /feature-.*/
+      - deploy-stage:
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging
+      - deploy-prod:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
 ```
 {% endraw %}
 
