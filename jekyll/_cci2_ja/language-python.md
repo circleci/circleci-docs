@@ -80,39 +80,20 @@ jobs:
   build:
     working_directory: ~/circleci-demo-python-django
     docker:
-      - image: circleci/python:3.6.4 # 各ジョブで Docker Executor のイメージを定義する必要があり、後続のジョブでは別のイメージを定義できます
+      - image: circleci/python:3.6.4 # every job must define an image for the docker executor and subsequent jobs may define a different image.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      - image: circleci/postgres:9.6.2 # サービス コンテナの指定方法を示す例
+      - image: circleci/postgres:9.6.2 # an example of how to specify a service container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
-        POSTGRES_USER: root
-          POSTGRES_DB: circle_test
-    steps: # steps that comprise the `build` job
-      - checkout # check out source code to working directory
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
-      - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{% raw %} {{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
-          paths:
-            - "venv"
-      - run:
-          command: |
-            pipenv run python manage.py test
-      - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: test-results
-      - store_artifacts: # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: test-results
-          destination: tr1
 ```
 
 ### 依存関係のインストール
@@ -146,6 +127,7 @@ jobs:
 
 実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
+**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
 ```yaml
 version: 2
@@ -170,11 +152,12 @@ jobs:
             - "/usr/local/lib/python3.6/site-packages"
 ```
 
+`run` ステップを使用して、テスト スイートを実行します。
 
-**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
+Use the `run` step to run your test suite.
 
 ### テストの実行
-`run` ステップを使用して、テスト スイートを実行します。
+{: #run-tests }
 
 Use the `run` step to run your test suite.
 
@@ -219,50 +202,43 @@ jobs:
 ## 設定ファイルの全文
 {: #full-configuration-file }
 
+{% raw %}
 
 ```yaml
-version: 2 # CircleCI 2.0 を使用します
-jobs: # 1 回の実行の基本作業単位
-  build: # ワークフローを使用しない実行では、エントリポイントとして `build` ジョブが必要です
-    # ステップが実行されるディレクトリ
+version: 2 # use CircleCI 2.0
+jobs: # A basic unit of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    # directory where steps are run
     working_directory: ~/circleci-demo-python-django
-    docker: # Docker でステップを実行します
-      # CircleCI Python イメージは https://hub.docker.com/r/circleci/python/ で入手できます
+    docker: # run the steps with Docker
+      # CircleCI Python images available at: https://hub.docker.com/r/circleci/python/
       - image: circleci/python:3.6.4
-        environment: # プライマリ コンテナの環境変数
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment: # environment variables for primary container
           PIPENV_VENV_IN_PROJECT: true
           DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
-      # CircleCI PostgreSQL イメージは https://hub.docker.com/r/circleci/postgres/ で入手できます
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6.2
-        environment: # Postgres コンテナのための環境変数
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment: # environment variables for the Postgres container.
+          version: 2
+jobs:
+  build:
+    working_directory: ~/circleci-demo-python-django
+    docker:
+      - image: circleci/python:3.6.4 # 各ジョブで Docker Executor のイメージを定義する必要があり、後続のジョブでは別のイメージを定義できます
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
+          DATABASE_URL: postgresql://root@localhost/circle_test?sslmode=disable
+      - image: circleci/postgres:9.6.2 # サービス コンテナの指定方法を示す例
+        environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle_test
-    steps: # `build` ジョブを構成するステップ
-      - checkout # ソース コードを作業ディレクトリにチェック アウトします
-      - run: sudo chown -R circleci:circleci /usr/local/bin
-      - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
-      - restore_cache:
-      # 依存関係キャッシュについては https://circleci.com/ja/docs/2.0/caching/ をお読みください
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
-      - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install
-      - save_cache: # Pipfile のチェックサムをキャッシュ キーとして使用して、Python の依存関係をキャッシュします
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
-          paths:
-            - ".venv"
-            - "/usr/local/bin"
-            - "/usr/local/lib/python3.6/site-packages"
-      - run:
-          command: |
-            pipenv run python manage.py test
-      - store_test_results: # テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示するテスト結果をアップロードします
-          path: test-results
-      - store_artifacts: # アーティファクト (https://circleci.com/ja/docs/2.0/artifacts/) に表示するテスト サマリーをアップロードします
-          path: test-results
-          destination: tr1
-          POSTGRES_USER: root
+        POSTGRES_USER: root
           POSTGRES_DB: circle_test
     steps: # steps that comprise the `build` job
       - checkout # check out source code to working directory
@@ -276,7 +252,7 @@ jobs: # 1 回の実行の基本作業単位
             sudo pip install pipenv
             pipenv install
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{% raw %} {{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
           paths:
             - "venv"
       - run:
@@ -289,6 +265,7 @@ jobs: # 1 回の実行の基本作業単位
           destination: tr1
 ```
 
+{% endraw %}
 
 ## 関連項目
 {: #see-also }
