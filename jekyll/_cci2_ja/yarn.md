@@ -30,8 +30,6 @@ Yarn packages can be cached to improve CI build times.
 
 An example for Yarn 2:
 
-If you're using Yarn 2.x without Zero Installs, you can do something like this:
-
 {% raw %}
 ```yaml
 #...
