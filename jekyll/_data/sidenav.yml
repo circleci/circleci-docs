@@ -892,21 +892,28 @@ ja:
       children:
         - name: Overview
           link: ja/2.0/server-3-overview
+          i18n_name: 概要
         - name: What's New in v3.x
           link: ja/2.0/server-3-whats-new
+          i18n_name: v.3.xの新機能
         - name: FAQ
           link: ja/2.0/server-3-faq
+          i18n_name: Server 3.x FAQ
     - name: Server v3.x Install
       link: ja/2.0/server-3-install-prerequisites
+      i18n_name: Server 3.xのインストール
       children:
         - name: Prerequisites
           link: ja/2.0/server-3-install-prerequisites
+          i18n_name: 必須要件
         - name: Your First Cluster
           link: ja/2.0/server-3-install-creating-your-first-cluster
         - name: Installation
           link: ja/2.0/server-3-install
+          i18n_name: インストール
         - name: Migration
           link: ja/2.0/server-3-install-migration
+          i18n_name: 移行
         - name: Hardening Your Cluster
           link: ja/2.0/server-3-install-hardening-your-cluster
     - name: Server v3.x Operations
@@ -914,6 +921,7 @@ ja:
       children:
         - name: Overview
           link: ja/2.0/server-3-operator-overview
+          i18n_name: 概要
         - name: Metrics and Monitoring
           link: ja/2.0/server-3-operator-metrics-and-monitoring
         - name: User Accounts
