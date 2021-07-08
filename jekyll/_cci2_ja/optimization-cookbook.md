@@ -6,205 +6,249 @@ description: "最適化クックブック入門編"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-*CircleCI 最適化クックブック*は、CircleCI のリソースを使用してさまざまな最適化タスクを行うための詳しい手順をユース ケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、繰り返し実行可能な最適化タスクをすばやく簡単に CircleCI プラットフォームで実行できるようになります。
+The *CircleCI Optimizations Cookbook* is a collection of individual use cases (referred to as "recipes") that provide you with detailed, step-by-step instructions on how to optimize your **pipelines** (the mechanism for taking code changes to your customers). Pipeline optimizations that increase build speed and security have a positive impact an organization's overall development and operations KPIs.
+
+The recipes in this guide will enable you to quickly and easily perform repeatable optimization tasks on the CircleCI platform.
 
 * 目次
 {:toc}
 
 ## はじめに
+{: #introduction }
 
-CircleCI プラットフォームを使用しているときに、パイプライン パフォーマンスに予期せぬ遅れが発生し、構造化されている重要な動作の実行性能に悪影響を及ぼす場合があります。 こうしたパフォーマンスのボトルネックは、パフォーマンス全体に影響するだけでなく、ワークフローやビルドの失敗の原因にもなります。 一見、軽微なトラブルのように思えますが、それぞれのボトルネックを解消するためにクレジットやリソース、時間などを費やすことになり、コストがかさんでしまいます。
+Sometimes when you are using the CircleCI platform, you may encounter unexpected lags in pipeline performance, which can negatively affect your ability to perform critical organizational functions. These performance bottlenecks can not only impact overall performance, but also cause workflow and build failures. These "hiccups" can cost you money in terms of credit usage, resources, and individual time spent reducing bottlenecks.
 
-### 最適化レシピ
+## Using caching to optimize builds and workflows
+{: #using-caching-to-optimize-builds-and-workflows }
 
-このガイドでは、以下のような最適化戦略を紹介します。これを実践すれば、パフォーマンスの潜在的なボトルネックを最小限に抑え、CircleCI を使用する際に最善のパフォーマンスを得ることができます。
+One of the quickest and easiest ways to optimize your builds and workflows is to implement specific caching strategies so you can use existing data from previous builds and workflows. Whether you choose to use a package management application (e.g. Yarn, Bundler, etc), or manually configure your caching, utilizing the best and most effective caching strategy may improve overall performance. In this section, several different use cases are described that may assist you in determining which caching method is best for your implementation.
 
-- [ジョブを順次実行して同時処理を回避する](#ジョブを順次実行して同時処理を回避する)
-- [キャッシュを効果的に利用してビルドとワークフローを最適化する](#キャッシュを効果的に利用してビルドとワークフローを最適化する)
-- [テスト パフォーマンスを改善する](#テスト-パフォーマンスを改善する)
-
-**メモ:** このガイドは、常に最新の最適化戦略を紹介できるよう、継続的に改訂されます。随時このページを参照して、最新の内容をチェックしてください。
-
-## ジョブを順次実行して同時処理を回避する
-
-CircleCI プラットフォームを使用するとき、多くのケースで検討しなくてはならないのが、システム タイムアウトが原因でワークフローが失敗しないよう、複数のジョブをいかにうまく同時に処理するかという点です。 これは、同じ環境で複数のコントリビューターとコミッターが作業している場合に特に重要になります。 CircleCI プラットフォームは、パフォーマンスの低下や待機時間を発生させることなく複数のタスクを同時に処理するように設計されています。そのため、多数のジョブがキューイングされ、前のジョブが完了するのを待ってから新しいジョブが開始されている場合に、システム タイムアウトの設定が短すぎると、同時処理が問題となることがあります。 そうした場合には、1 つのジョブは完了しますが、他のジョブはこのタイムアウト設定によって失敗します。
-
-ワークフローとジョブを効果的に最適化し、同時処理とタイムアウトによる後続ジョブの失敗を回避するために、CircleCI では、この種のパフォーマンスの問題に特化したシングル スレッド (キューイング) Orb を開発しました。 この Orb を呼び出すことにより、ジョブとビルドの全体のパフォーマンスを大幅に改善し、同時処理を回避できます。
-
-**メモ:** CircleCI のキューイング Orb の詳細については、以下のページを参照してください。
-
-- [キューイングとシングル スレッドの概要](https://github.com/eddiewebb/circleci-queue)
-- [CircleCI キューイング Orb](https://circleci.com/developer/ja/orbs/orb/eddiewebb/queue#quick-start)
-
-### CircleCI プラットフォームと CircleCI Orbs を使用するための環境のセットアップと構成
-
-CircleCI プラットフォームと CircleCI Orbs を構成するには、以下の手順を行います。
-
-1) `.circleci/config.yml` の先頭で CircleCI のバージョンを `version 2.1` と設定します。
-
-```
-version: 2.1
-```
-
-2) パイプラインを有効化していない場合は、**[Project Settings (プロジェクト設定)] -> [Advanced Settings (詳細設定)]** に移動し、パイプラインを有効化する必要があります。
-
-3) バージョンの下に `orbs` スタンザを追加し、Orb を呼び出します。 以下に例を示します。
-
-```
-version: 2.1
-
-orbs:
-  queue: eddiewebb/queue@1.1.2
-```
-
-4) 既存のワークフローやジョブで [`queue` 要素](https://circleci.com/developer/ja/orbs/orb/eddiewebb/queue#usage-examples)を使用します。
-
-5) サードパーティ製 Orb を使用する場合は、組織の [**Security Settings (セキュリティ設定)**] ページでオプトインします。
-
-### ワークフローのブロック
-
-ワークフローの同時処理により、ワークフローの 1 つが「ブロック」される問題が発生することがあります。 これは、あるワークフローが既に実行中で、別のワークフローがキュー内で待機状態となっている場合に発生します。 CircleCI はすべてのワークフローにとって最適なパフォーマンスを提供することを目指しているため、キュー内のワークフローが長時間にわたって待機状態となっている場合、CircleCI プラットフォームは他のワークフローが完了するまで、ワークフローの実行を「ブロック」します。 キューイング Orb でワークフローの同時処理を回避する簡単な方法は、先行するタイムスタンプを持つワークフローが存在する場合の「ブロック」を有効にすることです。 パラメーター `block-workflow` の値を `true` に設定すると、すべてのワークフローが強制的に、同時ではなく順次実行されるようになります。 これにより、キューイングされるワークフローの数が減り、 ワークフローが破棄されなくなると同時に、全体のパフォーマンスも向上します。
-
-{% raw %}
-
-```yaml
-Version: 2.1
-docker:
-  - image: 'circleci/node:10'
-parameters:
-  block-workflow:
-    default: true
-    description: >-
-      true の場合、先行するタイムスタンプを持つ他のワークフローの実行が完了するまで、
-      このジョブはブロックされます。 通常、最初のジョブに使用します。
-    type: boolean
-  consider-branch:
-    default: true
-    description: 同じブランチで実行されているジョブのみを考慮する必要があるかどうか
-    type: boolean
-  consider-job:
-    default: false
-    description: 非推奨。 block-workflow を参照してください。
-    type: boolean
-  dont-quit:
-    default: false
-    description: >-
-      中止は失敗に相当します。 ジョブを強制的に、失敗ではなく
-      いったん期限切れにします
-    type: boolean
-  only-on-branch:
-    default: '*'
-    description: 特定のブランチのキューのみを対象にします
-    type: string
-  time:
-    default: '10'
-    description: 断念するまでの待ち時間
-    type: string
-  vcs-type:
-    default: github
-    description: 必要に応じて、VCS として 'bitbucket' を指定します
-    type: string
-steps:
-  - until_front_of_line:
-      consider-branch: <<parameters.consider-branch>>
-      consider-job: <<parameters.consider-job>>
-      dont-quit: <<parameters.dont-quit>>
-      only-on-branch: <<parameters.only-on-branch>>
-      time: <<parameters.time>>
-      vcs-type: <<parameters.vcs-type>>
-```
-{% endraw %}
-
-## キャッシュを効果的に利用してビルドとワークフローを最適化する
-
-ビルドとワークフローを最適化する一番の早道は、具体的なキャッシュ戦略を実践して、以前のビルドとワークフローで生成された既存のデータを利用できるようにすることです。 パッケージ管理アプリケーション (Yarn、Bundler など) を使用する場合でも、キャッシュ処理を手動で構成する場合でも、最も適正で効果的なキャッシュ戦略を用いることにより、パフォーマンス全体の向上を図ることができます。 このセクションでは、実際の環境に合った最適なキャッシュ方法を判断するうえで参考になるユース ケースを紹介します。
-
-ジョブで任意の時点のデータを取得しているなら、キャッシュを活用できる可能性があります。 よく用いられているのが、パッケージ/依存関係マネージャーです。 たとえば、プロジェクトで Yarn、Bundler、Pip を利用すると、ジョブ中にダウンロードする依存関係は、ビルドごとに再ダウンロードされるのではなく、後で使用するためにキャッシュされます。 以下は、パッケージ マネージャーのキャッシュ機能を活用した例です。
+If a job fetches data at any point, it is likely that you can make use of caching. A common example is the use of a package/dependency manager. If your project uses Yarn, Bundler, or Pip, for example, the dependencies downloaded during a job can be cached for later use rather than being re-downloaded on every build. The example below shows how you can use caching for a package manager.
 
 {% raw %}
 ```yaml
 version: 2
 jobs:
   build:
-    steps: # 'build' ジョブを構成する一連の実行可能コマンド
-      - checkout # 作業ディレクトリにソース コードをプルします
-      - restore_cache: # ** キー テンプレート Branch または requirements.txt ファイルが前回の実行時から変更されていない場合、保存されている依存関係のキャッシュを復元します **
+    steps: # a collection of executable commands making up the 'build' job
+      - checkout # pulls source code to the working directory
+      - restore_cache: # **restores saved dependency cache if the Branch key template or requirements.txt files have not changed since the previous run**
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-      - run: # pip を使用して、仮想環境をインストールしてアクティブ化します
+      - run: # install and activate virtual environment with pip
           command: |
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements.txt
-      - save_cache: # ** 依存関係のキャッシュを保存する特別なステップ **
+      - save_cache: # ** special step to save dependency cache **
           key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
           paths:
             - "venv"
 ```
 {% endraw %}
 
-上記の例では、キャッシュ キーで `checksum` を使用しています。 これを使用すると、特定の依存関係管理ファイル (`package.json`、上記の `requirements.txt` など) に変更があるかどうかを判断でき、キャッシュはそれに応じて更新されます。 また上記の例では、`restore_cache` で補間によって動的な値をキャッシュ キーに挿入することで、キャッシュを更新する必要性を正確に捉えて細かい制御を行っています。
+Notice in the above example that you can use a `checksum` in the cache key. This is used to calculate when a specific dependency-management file (such as a `package.json` or `requirements.txt` in this case) changes so the cache will be updated accordingly. Also note that the `restore_cache` example uses interpolation to put dynamic values into the cache-key, allowing more control in what exactly constitutes the need to update a cache.
 
-**メモ:** キャッシュのステップをワークフローに追加する前に、依存関係のインストールが成功していることを確認してください。 依存関係のステップで失敗したままキャッシュする場合は、キャッシュ キーを変更して、不良キャッシュによるビルドの失敗を回避する必要があります。
+**Note:** Before adding any caching steps to your workflow, verify the dependencies installation step succeeds. Caching a failed dependency step will require you to change the cache key in order to avoid failed builds due to a bad cache.
 
-キャッシュはビルドとワークフローを最適化するための非常に重要な側面であるため、まずは次のページの説明をよく理解することをお勧めします。このページでは、キャッシングについて説明すると共に、設定ファイルを最適化するためのさまざまな戦略を紹介しています。
+Because caching is a such a critical aspect of optimizing builds and workflows, you should first familiarize yourself with the following page that describes caching and how various strategies can be used to optimize your config:
 
-- [依存関係のキャッシュ](https://circleci.com/ja/docs/2.0/caching/)
+- [Caching](https://circleci.com/docs/2.0/caching/)
 
-## テスト パフォーマンスを改善する
+## Improving test performance
+{: #improving-test-performance }
 
-CircleCI プラットフォームでテストを実行するには、テスト プロセスを最適化して、いかにクレジットの使用量を最小限に抑えながらテスト パフォーマンス全体と結果を改善するかを検討する必要があります。 テストによっては、非常に時間がかかったり、高いパフォーマンスが必要になったりします。そのため、テスト時間を短縮できれば、組織の目標達成に向けて大きな後押しとなります。
+When running tests on the CircleCI platform, one of the primary considerations you will want to make is how you can optimize the testing process to minimize credit usage and improve overall testing performance and results. Testing can sometimes be a time and performance-intensive process, therefore, the ability to reduce testing time can be a significant boost to your organizational goals.
 
-CircleCI プラットフォームでテストを行う際には、多様なテスト スイートやアプローチを採用できます。 CircleCI はテスト スイートに依存しませんが、以下の例 ([こちらのブログ記事](https://www.brautaset.org/articles/2019/speed-up-circleci.html)でこのテスト最適化ユース ケースについて説明している開発者から許可を得て改変) では、Django と CircleCI プラットフォームでテストを最適化する方法を説明します。
+There are many different test suites and approaches you can use when testing on the CircleCI platform. Although CircleCI is test suite agnostic, the example below (adapted with permission from the developer who wrote about this test optimization use case in his [blog post](https://www.brautaset.org/articles/2019/speed-up-circleci.html)) describes how you can optimize testing using Django and the CircleCI platform.
 
-### CircleCI プラットフォームでの Python Django プロジェクトのテストの最適化
+### Testing optimization on the CircleCI platform for a Python Django project
+{: #testing-optimization-on-the-circleci-platform-for-a-python-django-project }
+{:.no_toc}
 
-一部の組織では、CircleCI を使用して、各変更をメイン ブランチにマージする前にテストを実行しています。 テストを高速化すると、フィードバック サイクルが速く回るようになり、自信を持ってコードを頻繁に配信できるようになります。 Python Django アプリケーションのワークフローの例を見てみましょう。CircleCI プラットフォームでテストを完了するのに 13 分以上かかっています。
+Some organizations use CircleCI to run tests for each change before merging to the main branch. Faster tests means faster feedback cycles, which in turn means you can confidently ship code more often. Let's take a look at a case study for a Python Django application's workflow, that took more than 13 minutes to complete testing on the CircleCI platform.
 
-テスト プロセスは以下のように表示されます。
+An example of what the testing process might look like is shown below.
 
-![最適化する前のテスト最適化プロセス]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_1.png)
+![Test Optimization Process Before Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_1.png)
 
-それでは、上図のテスト プロセスを細かく見て、テストの完了までにかかった時間を確認してみましょう。
+Let's take a closer look at the testing process in the figure above to better understand the time it took to complete the tests.
 
-テスト中には以下のステップが実行されました。
+The following steps were performed during testing:
 
-1) ビルド ジョブで、ランタイムの依存関係のみを含む Docker イメージを作成しました。 2) ビルド ジョブで、そのイメージを `docker save` でファイルにダンプし、ワークスペースに保存しました。 3) 2 つのテスト ジョブを実行し、ベース イメージをワークスペースから復元しました。 4) 各テスト ジョブで、このベース イメージを基にして、テストの実行に必要なすべての追加モジュールを含むイメージを作成しました。 5) 各テスト ジョブで、依存関係に従ってサービスをインストールし、最終的にテストを実行しました。
+1. The build job created a Docker image, which contained only runtime dependencies.
+2. The build job dumped the image to a file with `docker save`, and then persisted it in the workspace.
+3. Two test jobs were run to restore the base image from the workspace.
+4. The test jobs built on this base image to create an image with all the extra modules required to run the tests.
+5. The test jobs started dependencies, and the tests were finally initiated.
 
-通常、セットアップを 1 回実行してからファンアウト ステップを実行することは、リソース使用量を削減する方法として従来から用いられています。ただしこの例では、次のようにファンアウト ステップで非常にコストがかかっていることが判明しました。
+Typically, performing setup once, and then performing `fan out` steps, is a traditional way to reduce resource usage; however, in this example, the `fan out` steps proved to be very expensive in the following ways:
 
-- ビルド済みイメージをファイルにダンプする `docker save` の発行に、約 **30** 秒かかっている。
-- ワークスペースへのイメージの保存に、さらに **60** 秒かかっている。
-- 次に、テスト ジョブでワークスペースをアタッチしてベース イメージを読み込む処理に、さらに **30** 秒かかっている。
-- テスト ジョブで `docker-compose` を実行して依存関係に従ってサービス (Redis、Cassandra、PostgreSQL) を開始するときに Machine Executor を使用しており、 Docker Executor と比較して起動時間に **30 ～ 60** 秒が余計にかかっている。
-- ビルド ジョブのベース イメージにはランタイムの依存関係のみが含まれていたため、これを拡張してテスト用の依存関係を追加して Docker イメージをビルドする必要があり、 この処理にさらに **70** 秒かかっている。
+- Issuing `docker save` to dump the built image to a file took around **30** seconds.
+- Persisting the image to the workspace added another **60** seconds.
+- The test jobs then had to attach the workspace and load the base image, adding another **30** seconds to the testing.
+- The test jobs started dependencies (Redis, Cassandra, and PostgreSQL) with `docker-compose`, which required the use of the machine executor. This added an additional **30-60** second startup time compared to the docker executors.
+- Because the base image from the build job contained only runtime dependencies, a docker image had to be built, extending the base to add dependencies for testing. This added  about **70** seconds.
 
-このように、実質的にテストを実行していないセットアップの段階でかなりの時間がかかっています。 このプロセスでは、実際のテストが実行されるまでに 6.5 分を必要とし、さらにもう 1 つのテスト ジョブの実行までに 6.5 分を要していました。
+As you can see, there is a a significant amount of time being spent setting up the tests, without any actual tests being performed. In fact, this approach required 6.5 minutes before the actual tests were run, which took another 6.5 minutes.
 
-### テストの準備の最適化
+### Test preparation optimization
+{: #test-preparation-optimization }
+{:.no_toc}
 
-このワークフローのステップの実行に 13 分は長すぎるため、以下のアプローチが採用されました。
+Knowing that ~13 minutes was too long to perform the steps in this workflow, the following approaches were taken to optimize and reduce this time.
 
-#### CI テスト ワークフローの変更
+#### Changing the CI test workflow
+{: #changing-the-ci-test-workflow }
+{:.no_toc}
 
-ベース イメージのビルドを行わないように、CI テスト ワークフローを変更しました。 テスト ジョブも変更し、`docker-compose` を使用するのではなく、CircleCI の Docker Executor に備わっているサービス コンテナ サポートを使用して補助サービスを起動するようにしました。 さらに、メイン コンテナから `tox` を実行して、依存関係のインストールとテストの実行を行うようにすることで、イメージを保存してワークスペースから復元するのに要していた時間を削減しました。 これにより、Machine Executor の起動にかかる余分なコストも削減されました。
+The CI test workflow was changed to no longer depend on building the base image. The test jobs were also changed to launch auxiliary services using CircleCI's docker executor native service container support instead of using `docker-compose`. Finally,`tox` was run from the main container to install dependencies and run tests, which eliminates minutes used to save and then restore the image from the workspace. This also eliminated the extra start-up costs of the machine executor.
 
-#### 依存関係の変更
+#### Dependency changes
+{: #dependency-changes }
+{:.no_toc}
 
-Dockerfile を使用するのではなく、CircleCI のプライマリ コンテナに依存関係をインストールすると、CircleCI のキャッシュ機能によって `virtualenv` の作成を高速化できる場合があります。
+Installing dependencies in the primary container on CircleCI, rather than relying on a Dockerfile, may enable you to use CircleCI's caching to speed up `virtualenv` creation.
 
-### テスト実行の最適化
+### Test execution optimization
+{: #test-execution-optimization }
+{:.no_toc}
 
-これでテストの準備時間が短縮されました。次は、実際のテストの実行を高速化することも可能です。 たとえば、テストの実行後にデータベースを保持する必要がない場合もあります。 テストに使用するデータベース イメージを、ディスクに保存しないメモリ内 Postgres イメージに置き換えることも、テストを高速化する 1 つの方法です。 別の方法として、テストを 1 つずつ実行するのではなく、並列に実行することも検討できます。
+Now that the test preparation time has been reduced, you may also wish to speed up the running of the actual tests. For example, you may not need to keep the database after test runs. One way you could speed up testing is to replace the database image used for tests with an [in-memory Postgres image]({{site.baseurl}}/2.0/databases/#postgresql-database-testing-example) that does not save to disk. Another method you may wish to take is to [run your tests in parallel]({{site.baseurl}}/2.0/parallelism-faster-jobs/)/ instead of one-test-at-a-time.
 
-これらの変更によってワークフロー全体の時間がどれだけ短縮されたかは下図のとおりです。
+The figure below illustrates how overall these changes can reduce the total workflow time.
 
-![最適化した後のテスト最適化プロセス]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
+![Test Optimization Process After Optimization]({{site.baseurl}}/assets/img/docs/optimization_cookbook_workflow_optimization_2.png)
 
-ここまで見てきたように、1 つの変更だけでワークフロー全体の時間を短縮したわけではありません。 たとえば、時間の大部分がテストの準備に費やされていたら、テストを並列実行してもそれほどメリットはなかったでしょう。 ローカルの環境ではなく CircleCI プラットフォームでテストを実行することの違いを認識し、テストの準備と実行にいくつかの変更を加えることでテストの実行時間を改善できます。
+As you can see, there was no single step performed to reduce overall workflow time. For example, running tests in parallel would not have seen much benefit when most of the time was being used to prepare to run the tests. By recognizing the differences between running tests on the CircleCI platform instead of a local context, and making a few changes to test preparation and execution, you may be able to see improved test run time.
 
-## 関連項目
+## Test splitting to speed up pipelines
+{: #test-splitting-to-speed-up-pipelines }
 
-- [最適化]({{site.baseurl}}/ja/2.0/optimizations): キャッシュ、ワークフロー、ビルドに対して実践できるその他の最適化戦略
-- [依存関係のキャッシュ]({{site.baseurl}}/ja/2.0/caching/#はじめに): キャッシュの概要
+Pipelines are often configured so that each time code is committed a set of tests are run. Test splitting is a great way to speed up the testing portion of your CICD pipeline. Tests don't always need to happen sequentially; a suite of tests can be split over a range of test environments running in parallel.
+
+Test splitting lets you intelligently define where these splits happen across a test suite: by name, by size etc. Using **timing-based** test splitting takes the timing data from the previous test run to split a test suite as evenly as possible over a specified number of test environments running in parallel, to give the lowest possible test time for the compute power in use.
+
+![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
+
+### Parallelism and test splitting
+{: #parallelism-and-test-splitting }
+{:.no_toc}
+
+To illustrate this with CI config, take a sequentially running test suite – all tests run in a single test environment (docker container):
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      FOO: bar
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test
+```
+
+To split these tests, using timing data, we first intoduce parallelism to spin up a number (10 in this case) of identical test environments. Then use the `circleci tests split` command, with the `--split-by=timings` flag to split the tests as equally as possible across all environments, so the full suite runs in the shortest possible time.
+
+```yaml
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      FOO: bar
+    parallelism: 10
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: go test -v $(go list ./... | circleci tests split --split-by=timings)
+```
+
+**Note:** The first time the tests are run there will be no timing data for the command to use, but on subsequent runs the test time will be optimized.
+
+### Is it worth it?
+{: #is-it-worth-it }
+{:.no_toc}
+
+To give a quantitative illustration of the power of the split-by-timings feature, adding `parallelism: 10` on a test suite run across the CircleCI application project actually decreased the test time **from 26:11 down to 3:55**.
+
+Test suites can also be split by name or size, but using timings-based test splitting gives the most accurate split, and is guaranteed to optimize with each test suite run; the most recent timings data is always used to define where splits happen. For more on this subject, take a look at our [using parallelism to speed up test jobs]({{site.baseurl}}/2.0/parallelism-faster-jobs/).
+
+## Workflows increase deployment frequency
+{: #workflows-increase-deployment-frequency }
+
+Providing value to your customers is the top goal for any organization, and one can measure the performance of an organization by how often (frequency) value is delivered (deployment). High-performing teams deploy value to customers multiple times per day according to the DevOps Research and Assessment Report, 2019.
+
+While many organizations deploy value to customer once per quarter or once per month, the basics of raising this frequency to once per week or once per day is represented by the same type of orchestration added to an organization's value *pipeline*.
+
+To deploy multiple times per day, developers need an automated workflow that enables them to test their changes on a branch of code that matches exactly the environment of master, without being on the master branch. This is possible with the use of workflow orchestration in your continuous integration suite.
+
+{%comment %}![Workflow without Deploy]({{ site.baseurl }}/assets/img/docs/workflows-no-deploy.png){%
+endcomment %}
+
+When you provide developers with a workflow that runs all of their tests in the master environment, but doesn't run a deploy, they can safely test and debug their code on a branch until all tests are passing.
+
+{%comment %}![Workflow with Deploy]({{ site.baseurl }}/assets/img/docs/workflows-yes-deploy.png){%
+endcomment %}
+
+A workflow that runs all tests *as if they were on master* gives developers the confidence they need to merge to master knowing their code will not break or cause an outage or interruption to service for customers. The small investment in configuring such a workflow is well-worth the increase in deployment frequency of valuable changes to your customers.
+
+A simple example would configure deployment to run *only* if a change is merged to master and the test jobs have already passed.
+
+For an organization deploying multiple times per day, that configuration may be as simple as the following snippet of YAML:
+
+```yaml
+workflows:
+  build-test-deploy:
+    jobs:
+      - build
+      - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+```
+
+
+The time difference in your organization's frequency *without* a workflow to enable developers in the way described above will include the time it takes for them to ensure their environment is the same as production, plus the time to run all of the same tests to ensure their code is good. All environment updates and tests must also be completed by every developer before any other changes are made to master. If changes happen *on master* while they are updating their environment or running their own tests, they will have to rerun everything to have confidence that their code won't break.
+
+For an organization deploying on a slower cadence, a nightly build workflow can ensure that on any day an update is needed by customers, there is a tested and deployable build available:
+
+```yaml
+workflows:
+  nightly-build:
+    triggers:
+      - schedule:
+          cron: '0 8 ***'
+          filters:
+            branches:
+              only: master
+    jobs:
+      - build
+      - test
+      - deploy
+```
+
+The time difference includes the lag described above plus the duration of the pipeline run and elapsed time between when a developer finished a change and when the scheduled build runs. All of this time adds up and the more confidence developers have in the quality of their code the higher their deployment frequency.
+
+
+## See also
+{: #see-also }
+{:.no_toc}
+
+- Refer to [Optimizations]({{site.baseurl}}/2.0/optimizations) for more information on other optimization strategies you can use for caching, workflows and builds.
+- Refer to [Caching]({{site.baseurl}}/2.0/caching/#introduction) for high-level information about caching.
