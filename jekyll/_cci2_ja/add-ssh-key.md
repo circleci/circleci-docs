@@ -19,7 +19,7 @@ There are two reasons to add SSH keys to CircleCI:
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-**メモ:** SSH 鍵を作成する際は必ず空のパスワードを設定してください。 CircleCI ではパスワードを使った SSH 鍵の復号はできません。
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
@@ -71,7 +71,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 
 すべての CircleCI ジョブは、`ssh-agent` を使用して登録済みのすべての SSH 鍵に自動的に署名します。 ただし、コンテナに実際に鍵を登録するには、`add_ssh_keys` キーを使用する**必要があります**。
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。 2 つ目が目的のときは、以下の手順でプロジェクトに SSH 鍵を登録します。
+To add a set of SSH keys to a container, use the `add_ssh_keys` [special step]({{ site.baseurl }}/2.0/configuration-reference/#add_ssh_keys) within the appropriate [job]({{ site.baseurl }}/2.0/jobs-steps/) in your configuration file.
 
 ```yaml
 version: 2

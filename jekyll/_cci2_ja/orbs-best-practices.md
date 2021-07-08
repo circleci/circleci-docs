@@ -41,7 +41,7 @@ Categorizing your orb allows it to be searchable on the [Orb Registry](https://c
 Commands, Jobs, Executors, Examples, and Parameters can all accepts descriptions. Ensure each and every component of your orb has a helpful description and provides any additional documentation that may be needed.
 
 ```yaml
-description: "このコマンドは UI のステップで Hello と出力するために使用します。"
+description: "このコマンドは UI のステップで Hello と出力するために使用します。 "
 steps:
   - run:
       name: "echo コマンドの実行"
@@ -100,7 +100,21 @@ When writing a [Reusable Command]({{site.baseurl}}/2.0/reusing-config/#authoring
 {:.tab.minsteps.Deploy_Command_GOOD}
 ```yaml
 
-description: "CLI のインストール、アプリケーションの認証とデプロイを行うデモ用コマンド。"
+"
+parameters:
+  api-token:
+    type: env_var_name
+    default: MY_SECRET_TOKEN
+steps:
+  - run: pip install example
+  - run: example login $<<parameters.api-token>>
+  - run: example deploy my-app
+```
+
+{:.tab.minsteps.Deploy_Command_BAD}
+```yaml
+
+description: "CLI のインストール、アプリケーションの認証とデプロイを行うデモ用コマンド。 "
 parameters:
   api-token:
     type: env_var_name
@@ -112,20 +126,6 @@ steps:
         pip install example
         example login $<<parameters.api-token>>
         example deploy my-app
-```
-
-{:.tab.minsteps.Deploy_Command_BAD}
-```yaml
-
-description: "不適切なデプロイ コマンドの例。 可能であればステップには名前を付け、まとめるようにしてください。"
-parameters:
-  api-token:
-    type: env_var_name
-    default: MY_SECRET_TOKEN
-steps:
-  - run: pip install example
-  - run: example login $<<parameters.api-token>>
-  - run: example deploy my-app
 ```
 
 #### Check for root
@@ -161,7 +161,8 @@ parameters:
   version:
     default: 13.11.0
     description: >
-      完全なバージョン タグを指定してください。 例: "13.11.0"。リリースの全一覧は
+      完全なバージョン タグを指定してください。
+例: "13.11.0"。 リリースの全一覧は
       次を参照してください: https://nodejs.org/en/download/releases
     type: string
 executor:
@@ -172,7 +173,10 @@ executor:
 {:.tab.nodeParam.Default_Executor}
 ```yaml
 description: >
-  使用する Node.js のバージョンを選択します。 CI 向けにキャッシュを活用して開発された
+  使用する Node.js のバージョンを選択します。 Uses CircleCI's highly cached convenience
+  images built for CI.
+
+  CI 向けにキャッシュを活用して開発された
   CircleCI 製コンビニエンス イメージを使用します。
 
   次のリストにあるすべてのタグを使用できます。

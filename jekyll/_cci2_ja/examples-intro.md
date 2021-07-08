@@ -24,22 +24,26 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 ジョブのコマンドは、このコンテナ内で実行されます。
-    ジョブのコマンドは、このコンテナ内で実行されます。
+    # プライマリ コンテナは、最初にリストしたイメージのインスタンスです。 The job's commands run in this container.
     docker:
       - image: circleci/node:4.8.2-jessie
-    # セカンダリ コンテナは、2 番目にリストしたイメージのインスタンスです。
-      プライマリ コンテナ上に公開されているポートをローカルホストで利用できる共通ネットワーク内で実行されます。
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: npm の更新
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: npm wee のインストール
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -90,6 +94,10 @@ jobs:
 #         command: sudo chmod +x ./gradlew
       - run:
           name: 依存関係のダウンロード
+          command: ./gradlew androidDependencies
+#         command: sudo chmod +x ./gradlew
+      - run:
+          name: Download Dependencies
           command: ./gradlew androidDependencies
 ```
 

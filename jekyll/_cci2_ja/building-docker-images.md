@@ -44,9 +44,10 @@ The Remote Docker Environment has the following technical specifications (for Ci
 {: class="table table-striped"}
 
 ### 例
+ビルド中に何が行われているのか詳しく見てみましょう。
 {:.no_toc}
 
-ビルド中に何が行われているのか詳しく見てみましょう。
+ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
 
 ```yaml
 version: 2
@@ -70,27 +71,18 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
+以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
 
-
+<!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-version: 2.1
-jobs:
-  build:
-    docker:
-      - image: circleci/golang:1.15
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      # ... アプリのビルド・テストに関する記述 ...
+同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
 
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
-
+    
       # Docker イメージをビルドしプッシュします
+    
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -109,7 +101,7 @@ jobs:
           command: apk add docker-cli
 ```
 
-同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
+Let’s break down what’s happening during this build’s execution:
 
 1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker Engine で行われます。 (10 行目)
@@ -133,6 +125,7 @@ CircleCI は複数の Docker バージョンをサポートしており、デフ
 - `17.06.0-ce`
 - `17.06.1-ce`
 - `17.07.0-ce`
+- `19.03.8`
 - `18.09.3`
 - `17.09.0-ce` (default)
 
@@ -201,11 +194,8 @@ run: |
   # <code>--rm</code> オプションは使用しません (使用すると、終了時にコンテナが強制終了されます)
   docker run --name app app-image:1.2.3
 ```
- オプションは使用しません (使用すると、終了時にコンテナが強制終了されます)
-  docker run --name app app-image:1.2.3
-</code>
 
-以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
+次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
 
 ```
 version: '2'
@@ -221,7 +211,7 @@ services:
      - bundler-data:/source/bundler-data
 ```
 
-次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
+Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
 
 {% raw %}
 ``` yaml

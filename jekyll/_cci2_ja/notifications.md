@@ -39,6 +39,8 @@ workflows:
       - test
       - build
       - test
+      - build
+      - test
 ```
 
 続いて、各通知タイプ (チャット、メール、Web) の設定方法について説明していきます。
@@ -132,6 +134,7 @@ jobs:
           channel: 'the irc server to post in' # required parameter
           nick: 'Your IRC nick name' # default: `circleci-bot`
           message: webhook # default: "Your CircleCI Job has completed."
+          port: '6667' # default: 6667 if left blank.
           」
 orbs:
   slack: circleci/irc@x.y.z
