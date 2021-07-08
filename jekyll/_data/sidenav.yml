@@ -887,6 +887,79 @@ ja:
   i18n_name: Server管理
   icon: icons/sidebar/admin.svg
   children:
+    - name: Server v3.x Overview
+      link: ja/2.0/server-3-overview
+      children:
+        - name: Overview
+          link: ja/2.0/server-3-overview
+        - name: What's New in v3.x
+          link: ja/2.0/server-3-whats-new
+        - name: FAQ
+          link: ja/2.0/server-3-faq
+    - name: Server v3.x Install
+      link: ja/2.0/server-3-install-prerequisites
+      children:
+        - name: Prerequisites
+          link: ja/2.0/server-3-install-prerequisites
+        - name: Your First Cluster
+          link: ja/2.0/server-3-install-creating-your-first-cluster
+        - name: Installation
+          link: ja/2.0/server-3-install
+        - name: Migration
+          link: ja/2.0/server-3-install-migration
+        - name: Hardening Your Cluster
+          link: ja/2.0/server-3-install-hardening-your-cluster
+    - name: Server v3.x Operations
+      link: ja/2.0/server-3-operator-overview
+      children:
+        - name: Overview
+          link: ja/2.0/server-3-operator-overview
+        - name: Metrics and Monitoring
+          link: ja/2.0/server-3-operator-metrics-and-monitoring
+        - name: User Accounts
+          link: ja/2.0/server-3-operator-user-accounts
+        - name: Orbs
+          link: ja/2.0/server-3-operator-orbs
+        - name: VM Service
+          link: ja/2.0/server-3-operator-vm-service
+        - name: Externalizing Services
+          link: ja/2.0/server-3-operator-externalizing-services
+        - name: Load Balancers
+          link: ja/2.0/server-3-operator-load-balancers
+        - name: Authentication
+          link: ja/2.0/server-3-operator-authentication
+        - name: Docker Authenticated Pulls
+          link: ja/2.0/private-images
+        - name: Build Artifacts
+          link: ja/2.0/server-3-operator-build-artifacts
+        - name: Usage Data
+          link: ja/2.0/server-3-operator-usage-data
+        - name: Security
+          link: ja/2.0/security-server
+        - name: Application Lifecycle
+          link: ja/2.0/server-3-operator-application-lifecycle
+        - name: Troubleshooting and Support
+          link: ja/2.0/server-3-operator-troubleshooting-and-support
+        - name: Backup and Restore
+          link: ja/2.0/server-3-operator-backup-and-restore
+    - name: Server v3.1.x PDFs
+      link: ja/2.0/server-3-overview
+      children:
+        - name: v3.1 Overview
+          link: ja/2.0/CircleCI-Server-3.1.0-Overview.pdf
+        - name: v3.1 Installation Guide
+          link: ja/2.0/CircleCI-Server-3.1.0-Installation-Guide.pdf
+        - name: v3.1 Operations Guide
+          link: ja/2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
+    - name: Server v3.0.x PDFs
+      link: ja/2.0/server-3-overview
+      children:
+        - name: v3.0 Overview
+          link: ja/2.0/CircleCI-Server-3.0.1-Overview.pdf
+        - name: v3.0 Installation Guide
+          link: ja/2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
+        - name: v3.0 Operations Guide
+          link: ja/2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
     - name: Server v2.19.x Install
       link: ja/2.0/install-overview/
       i18n_name: v2.19.xインストール
