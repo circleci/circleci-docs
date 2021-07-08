@@ -193,7 +193,7 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | 目的
 
 | 22
-| K8s nodes
+| Kubernetes nodes
 | 内部通信
 
 | 22
@@ -201,14 +201,14 @@ Similar to Nomad clients, there is no need for external VMs to communicate with 
 | 内部通信
 
 | 2376
-| K8s nodes
+| Kubernetes nodes
 | 内部通信
 
 | 2376
 | Nomad clients
 | 内部通信
 
-| 64535-65535
+| 54782
 | External
 | Rerun jobs with SSH functionality
 |===
