@@ -23,7 +23,7 @@ version:
 
 * CircleCI 設定ファイルの要素を再利用するには、**`version: 2.1`** の `.circleci/config.yml` ファイルを使用する必要があります。
 
-* コマンド、ジョブ、Executor、パラメーターの名前はアルファベットで始める必要があります。名前に含めることができるのは小文字 (`a` ～ `z`)、数字 (`0` ～ `9`)、アンダースコア (`_`)、ハイフン (`-`) だけです。
+* コマンド、ジョブ、Executor、パラメーターの名前はアルファベットで始める必要があります。 名前に含めることができるのは小文字 (`a` ～ `z`)、数字 (`0` ～ `9`)、アンダースコア (`_`)、ハイフン (`-`) だけです。
 
 ## `parameters` 宣言の使用
 {: #using-the-parameters-declaration }
@@ -93,7 +93,7 @@ Orb では以下のパラメーター型がサポートされます。
 * `integer`
 * `enum`
 
-#### 文字列
+#### String
 {: #string }
 {:.no_toc}
 
@@ -112,7 +112,7 @@ commands:
       - run: cp *.md << parameters.destination >>
 ```
 
-引用符で囲まれていないと他の型 (ブール値、数値など) を表してしまう文字列、および YAML で特別な意味を持つ文字 (特にコロン) を含む文字列は、引用符で囲む必要があります。 その他の文字列インスタンスでは、引用符の使用は任意です。 `when` 節の評価時に、空文字列は false 値として扱われます。その他の文字列はすべて true 値として扱われます。 なお、YAML でブール値として解釈される文字列値を引用符なしで使用すると、型エラーが発生します。
+引用符で囲まれていないと他の型 (ブール値、数値など) を表してしまう文字列、および YAML で特別な意味を持つ文字 (特にコロン) を含む文字列は、引用符で囲む必要があります。 In all other instances, quotes are optional. `when` 節の評価時に、空文字列は false 値として扱われます。 その他の文字列はすべて true 値として扱われます。 なお、YAML でブール値として解釈される文字列値を引用符なしで使用すると、型エラーが発生します。
 
 #### ブール値
 {: #boolean }
@@ -185,7 +185,8 @@ commands:
     parameters:
       os:
         default: "linux"
-        description: heroku バイナリのターゲット オペレーティング システム。 "linux"、"darwin"、"win32" のいずれかを指定可能。
+        description: heroku バイナリのターゲット オペレーティング システム。 Must be one of "linux", "darwin", "win32".
+        "linux"、"darwin"、"win32" のいずれかを指定可能。
         type: enum
         enum: ["linux", "darwin", "win32"]
 ```
@@ -429,7 +430,7 @@ A command defines a sequence of steps as a map to be executed in a job, enabling
 
 再利用可能なコマンドは、ジョブ内のステップとして、特定のパラメーターを使用して呼び出します。 コマンドを使用すると、そのコマンドのステップが、コマンドが呼び出される場所に挿入されます。 コマンドは、ジョブ内の `steps` の下に置かれたシーケンスの一部としてのみ使用できます。
 
-次の例では、上述の `sayhello` コマンドを使用しています。`myjob` ジョブ内でこのコマンドを呼び出し、`to` パラメーターの値を渡します。
+次の例では、上述の `sayhello` コマンドを使用しています。 `myjob` ジョブ内でこのコマンドを呼び出し、`to` パラメーターの値を渡します。
 
 ```yaml
 version: 2.1
@@ -464,7 +465,7 @@ jobs:
 ### 特別なキー
 {: #special-keys }
 
-CircleCI では、すべての [circleci.com](https://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されています。これらは、CircleCI Server でもデフォルトで使用できます。 その一部をご紹介します。
+CircleCI では、すべての [circleci.com](https://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されています。 これらは、CircleCI Server でもデフォルトで使用できます。 Examples of these keys are:
 
   * `checkout`
   * `setup_remote_docker`
@@ -552,9 +553,9 @@ jobs:
 ## 再利用可能な Executor のオーサリング
 {: #authoring-reusable-executors }
 
-Executors はジョブ内の steps を実行するための環境を定義します。 CircleCI の設定で `job` を宣言するとき、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義すると共に、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターを定義します。
+Executors はジョブ内の steps を実行するための環境を定義します。 CircleCI の設定で `job` を宣言するとき、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義すると共に、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターを定義します。 etc.) to run in, as well as any other parameters for that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
 
-`jobs` の外側で宣言された Executor は、その宣言のスコープ内のすべてのジョブで使用できます。そのため、1 つの Executor 定義を複数のジョブで再利用できます。
+`jobs` の外側で宣言された Executor は、その宣言のスコープ内のすべてのジョブで使用できます。 そのため、1 つの Executor 定義を複数のジョブで再利用できます。
 
 Executor 定義では、以下のキーを 1 つ以上指定します。
 
@@ -585,7 +586,7 @@ jobs:
 ### `executors` キー
 {: #the-executors-key }
 
-executors キーでは、ジョブのステップを実行する環境を定義します。これにより、複数のジョブで 1 つの Executor 定義を再利用できます。
+Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
 
 | キー                | 必須               | 種類     | 説明                                                                                                                                                                                                          |
 | ----------------- | ---------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -621,7 +622,7 @@ jobs:
 {: #invoking-reusable-executors }
 {:.no_toc}
 
-以下の例では、`executor` の下で `name` キーの値として `my-executor` を渡しています。この方法は主に、Executor の呼び出しにパラメーターを渡す場合に使用されます。
+以下の例では、`executor` の下で `name` キーの値として `my-executor` を渡しています。 この方法は主に、Executor の呼び出しにパラメーターを渡す場合に使用されます。
 
 ```yaml
 version: 2.1
@@ -648,9 +649,9 @@ Orb では、Orb 内のすべてのコマンドが使用する Executor を定�
 {: #example-of-using-an-executor-declared-in-configyml-with-matrix-jobs }
 {:.no_toc}
 
-次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executorに渡すことができます。
+次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executorに渡すことができます。
 
-`matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ](https://circleci.com/ja/docs/2.0/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
+`matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ](https://circleci.com/ja/docs/2.0/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
 
 ```yaml
@@ -773,6 +774,9 @@ jobs:
     # 以下のテスト Executor は、より明示的な "docker" Executor があれば上書きされ、 任意の環境変数が追加されます。
     executor: node
     steps:
+      - run: echo "Node will not be installed." Any env vars will be added.
+    executor: node
+    steps:
       - run: echo "Node will not be installed."
 ```
 
@@ -791,6 +795,8 @@ jobs:
      ENV: ci       # executors で設定された値
     steps:
       - run: echo "Node will not be installed."
+    steps:
+      - run: echo "Node will not be installed."
 ```
 
 ## パラメーター化されたジョブのオーサリング
@@ -803,6 +809,14 @@ jobs:
 {% raw %}
 ```yaml
 version: 2.1
+
+jobs:
+  sayhello: # defines a parameterized job
+    description: A job that does very little other than demonstrate what a parameterized job looks like
+    parameters:
+      saywhat:
+        description: "To whom shall we say hello?"
+        version: 2.1
 
 jobs:
   sayhello: # パラメーター化されたジョブを定義します
@@ -824,7 +838,7 @@ workflows:
 ```
 {% endraw %}
 
-**メモ:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変化します (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 このキーに割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
+**メモ:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変化します (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
 
 ```yaml
 workflows:
@@ -855,6 +869,19 @@ jobs:
     parameters:
       saywhat:
         description: "だれにあいさつするか"
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - say:
+          saywhat: "<< parameters.saywhat >>"
+commands:
+  saywhat:
+    parameters:
+      saywhat:
+        type: string
+    steps:
+      - run: echo "<< parameters.saywhat >>"
         default: "World"
         type: string
     machine: true
@@ -949,6 +976,12 @@ jobs:
   sayhello:
     parameters:
       saywhat:
+        description: "To whom shall we say hello?"
+        version: 2.1
+jobs:
+  sayhello:
+    parameters:
+      saywhat:
         description: "だれにあいさつするか"
         default: "World"
         type: string
@@ -977,7 +1010,7 @@ workflows:
 {: #invoking-the-same-job-multiple-times }
 {:.no_toc}
 
-1 つの設定ファイルで、同じジョブを複数回呼び出すことができます。 ビルドのインジェストにおける設定ファイルの処理時に、ジョブに名前が付けられていなければ、CircleCI で自動的に名前が生成されます。`name` キーを使用して、重複するジョブに明示的に名前を付けることもできます。
+1 つの設定ファイルで、同じジョブを複数回呼び出すことができます。 ビルドのインジェストにおける設定ファイルの処理時に、ジョブに名前が付けられていなければ、CircleCI で自動的に名前が生成されます。 `name` キーを使用して、重複するジョブに明示的に名前を付けることもできます。
 
 **メモ:** 繰り返しジョブがワークフロー内の別のジョブのアップストリームになければならない場合は、その繰り返しジョブに明示的に名前を付ける必要があります。 たとえば、ワークフロー内でジョブ呼び出しの `requires` キーの下で使用するジョブには、明示的に名前を付ける必要があります。
 
@@ -1045,7 +1078,7 @@ workflows:
 ## 条件付きステップの定義
 {: #defining-conditional-steps }
 
-条件付きステップは、設定ファイルのコンパイル時に条件が満たされた場合にのみ、ワークフロー実行前に実行されます。 そのため、たとえば条件を使用して環境変数をチェックすることはできません。環境変数は、実行環境のシェルでステップが実行されるまで挿入されないからです。
+条件付きステップは、設定ファイルのコンパイル時に条件が満たされた場合にのみ、ワークフロー実行前に実行されます。 そのため、たとえば条件を使用して環境変数をチェックすることはできません。 環境変数は、実行環境のシェルでステップが実行されるまで挿入されないからです。
 
 条件付きステップは、通常のステップがパラメーター値を入力として使用できる箇所ならどこにでも配置することができます。
 
@@ -1112,7 +1145,7 @@ workflows:
 
 再利用可能な設定ファイル要素を設定ファイル内で直接定義する場合、それらの要素をインライン Orb 内にラップすることもできます。 インライン Orb は、開発に役立つほか、ローカル設定ファイル内で名前を共有する要素の名前空間を作成するときにも便利です。
 
-インライン Orb を記述するには、設定ファイル内の orbs 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
+インライン Orb を記述するには、設定ファイル内の orbs 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。 ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
 
 ```yaml
 version: 2.1
