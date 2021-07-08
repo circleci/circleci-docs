@@ -168,5 +168,5 @@ For all `stack` invocations, `--no-terminal` is used to avoid the "sticky output
 
 See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.
 
-このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。 通常、実際のプロジェクトはこれよりも複雑です。 場合によっては、この例で示されている構成をカスタマイズまたは微調整する必要があります (Docker イメージ、使用する[設定](https://docs.haskellstack.org/en/v1.0.2/docker_integration/)、使用する Haskell ビルド ツールなど)。 Have fun!
+このガイドでは、Haskell Web アプリの最も単純な構成例を示しました。 Real-world projects will be more complex and you may find you need to customize and tweak settings from those illustrated here (such as the docker image or [configuration](https://docs.haskellstack.org/en/v1.0.2/docker_integration/) you use, or which Haskell build tools you use). Have fun!
 

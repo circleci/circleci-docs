@@ -50,14 +50,14 @@ CircleCI では Docker がサポートされています。 Docker を使用す�
 カスタム イメージを作成するには、[`Dockerfile` を作成](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile)する必要があります。 これは、Docker がイメージの収集に使用するコマンドが格納されたテキスト ドキュメントです。 [この Docker デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary)に示されているように、`Dockerfile` はできるだけ `.circleci/images` フォルダーに保存してください。
 
 ### 基本イメージの選択と設定
-CircleCI でカスタム Docker イメージをプライマリ コンテナとして使用するには、以下のツールをインストールする必要があります。
+{: #choosing-and-setting-a-base-image }
 {:.no_toc}
 
 カスタム イメージを作成する前に、カスタム イメージの拡張元となる別のイメージを選択する必要があります。 [Docker Hub](https://hub.docker.com/explore/) には、ほぼすべての一般的な言語とフレームワーク向けに、正式なビルド済みイメージが用意されています。 特定の言語やフレームワークごとに、多くのイメージ バリアントから選択できます。 これらのバリアントは、[Docker タグ](https://docs.docker.com/engine/reference/commandline/tag/)で指定されます。
 
-パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` 命令](https://docs.docker.com/engine/reference/builder/#add)を使用します。
-
 たとえば、[正式な Alpine イメージ](https://hub.docker.com/_/alpine/)のバージョン 3.5 を使用する場合、イメージ名は `alpine:3.5` です。
+
+`Dockerfile` に、基本イメージを拡張します。
 
 ```Dockerfile
 FROM golang:1.8.0
@@ -67,7 +67,7 @@ FROM golang:1.8.0
 {: #installing-additional-tools }
 {:.no_toc}
 
-`Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
+追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` 命令](https://docs.docker.com/engine/reference/builder/#run)を使用します。
 
 ```Dockerfile
 RUN apt-get update && apt-get install -y netcat
@@ -78,7 +78,7 @@ RUN go get github.com/jstemmer/go-junit-report
 {: #required-tools-for-primary-containers }
 {:.no_toc}
 
-以下のように指定して、イメージを Docker Hub にプッシュします。
+**メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
 - bash (most likely already installed or available via your package manager)
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -89,13 +89,13 @@ RUN go get github.com/jstemmer/go-junit-report
 
 これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
 
-**メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
+パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` 命令](https://docs.docker.com/engine/reference/builder/#add)を使用します。
 
 ### 他のファイルとディレクトリの追加
 {: #adding-other-files-and-directories }
 {:.no_toc}
 
-次に、アカウントとリポジトリ名を使用してイメージをリビルドします。
+To add files and directories that are not present in package managers, use the [`ADD` instruction](https://docs.docker.com/engine/reference/builder/#add).
 
 ``` Dockerfile
 ADD ./workdir/contacts /usr/bin/contacts
@@ -103,7 +103,7 @@ ADD ./db/migrations /migrations
 ```
 
 ### エントリポイントの追加
-`-t` は、新しいイメージの名前とタグを指定するキーです。
+{: #adding-an-entrypoint }
 {:.no_toc}
 
 コンテナを実行可能ファイルとして実行するには、[`ENTRYPOINT` 命令](https://docs.docker.com/engine/reference/builder/#entrypoint)を使用します。 By default, CircleCI will ignore the entrypoint for a job's primary container. To preserve the entrypoint even when the image is used for a primary container, use the [`LABEL` instruction](https://docs.docker.com/engine/reference/builder/#label) as shown below.
@@ -117,10 +117,10 @@ ENTRYPOINT contacts
 **メモ:** ENTRYPOINT コマンドは、失敗せずに最後まで実行される必要があります。 失敗した場合、またはビルドの途中で停止した場合は、ビルドも停止します。 ログまたはビルド ステータスにアクセスする必要がある場合は、ENTRYPOINT の代わりにバックグラウンド ステップを使用します。
 
 ### イメージのビルド
-イメージが正常にプッシュされたら、以下のように指定することで、イメージを `.circleci/config.yml` で使用できます。
+{: #building-the-image }
 {:.no_toc}
 
-`Dockerfile` に、基本イメージを拡張します。
+`Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
 
 ```bash
 $ docker build <path-to-dockerfile>
@@ -133,7 +133,7 @@ $ docker build <path-to-dockerfile>
 Successfully built e32703162dd4
 ```
 
-追加ツールをインストールする、または他のコマンドを実行するには、[`RUN` 命令](https://docs.docker.com/engine/reference/builder/#run)を使用します。
+Read more about [`docker build` command](https://docs.docker.com/engine/reference/commandline/build/).
 
 これで、最初のイメージがビルドされました。 次に、CircleCI で使用できるように、このイメージを保存する必要があります。
 
@@ -432,7 +432,7 @@ RUN mkdir -p "$GEM_HOME" "$BUNDLE_BIN" \
 CMD [ "irb" ]
 ```
 
-これをビルドするには、以下のコマンドを実行します。
+次に、以下のように指定してそのホスト名をコミットし、ruby-node を Docker Hub でのユーザー名に置き換えます。
 
 `docker build -t ruby-node:0.1 .`
 
@@ -450,7 +450,7 @@ $ docker run -it 52b773cf50e2 /bin/bash
 root@6cd398c7b61d:/# exit
 ```
 
-次に、以下のように指定してそのホスト名をコミットし、ruby-node を Docker Hub でのユーザー名に置き換えます。
+Then, commit that hostname replacing ruby-node with your Docker Hub username as follows:
 
 ```
 docker commit 6cd398c7b61d username/ruby-node:0.1

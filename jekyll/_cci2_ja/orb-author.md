@@ -30,8 +30,6 @@ The orb development kit refers to a suite of tools that work together to simplif
 * [Orb Init](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html)
 * [Orb ツールの Orb](https://circleci.com/developer/orbs/orb/circleci/orb-tools)
 
-<script id="asciicast-362192" src="https://asciinema.org/a/362192.js" async></script>
-
 ### 作業を開始する
 {: #getting-started }
 
@@ -41,7 +39,7 @@ Ensure the organization on GitHub is the owner for the [namespace]({{site.baseur
 
 1. **Create a new [GitHub repository](https://github.com/new).**<br/> The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。手順 2 で必要になります。 URL は SSH か HTTPS を選択できます。どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 Note down the git URL, you will need it in step 4. URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
 1. **ターミナルを開き、`orb init` CLI コマンドを使用して新しい　Orb　プロジェクトを初期化します。**
 
@@ -95,7 +93,7 @@ If you have run the `circleci orb init` command, you will automatically be in th
 
 **_Example: Orb Project Structure_**
 
-| 種類                        | 名前                                                                                               |
+| type                      | name                                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------------------------ |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci)       |
 | <i class="fa fa-folder" aria-hidden="true"></i> | [.github](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.github)           |
@@ -155,6 +153,9 @@ Below is the _[greet.yml](https://github.com/CircleCI-Public/Orb-Project-Templat
 
 ```yaml
 description: >
+  # What will this command do?
+  # Descriptions should be short, simple, and clear.
+description: >
   # ここには、このコマンドの目的を記述します。
   # 短くわかりやすい説明を心がけます。
 parameters:
@@ -201,6 +202,10 @@ Jobs can include orb commands and other steps to fully automate tasks with minim
 View the _[hello.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/jobs/hello.yml)_ job example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs).
 
 ```yaml
+description: >
+  # What will this job do?
+  # Descriptions should be short, simple, and clear.
+
 description: >
   # ここには、このジョブの目的を記述します。
   # 短くわかりやすい説明を心がけます。

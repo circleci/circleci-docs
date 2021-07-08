@@ -77,16 +77,21 @@ When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public
 
 ```yaml
 
-# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml
+# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
-description: >
-  このコマンドはファイル インクルードを使用して "Hello World" を出力します。
-steps:
-  - run:
-      environment:
-        PARAM_TO: <<parameters.to>>
-      name: Hello Greeting
-      command: <<include(scripts/greet.sh)>>
+# 各テストの前に実行
+setup() {
+    # Load our script file.
+source ./src/scripts/greet.sh
+}
+
+@test '1: Greet the world' {
+    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
+    export PARAM_TO="World"
+    # "Greet" 関数の出力を取得する
+    result=$(Greet)
+    [ "$result" == "Hello World" ]
+}
 
 ```
 
@@ -105,23 +110,28 @@ ORB_TEST_ENV="bats-core"
 if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
     Greet
 fi
+# View src/tests for more information.
+ORB_TEST_ENV="bats-core"
+if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
+    Greet
+fi
 
 ```
 
 {:.tab.unitTest.greet-bats}
 ```bash
-# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
-# 各テストの前に実行
+# Runs prior to every test
 setup() {
     # Load our script file.
     source ./src/scripts/greet.sh
 }
 
 @test '1: Greet the world' {
-    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
+    # Mock environment variables or functions by exporting them (after the script has been sourced)
     export PARAM_TO="World"
-    # "Greet" 関数の出力を取得する
+    # Capture the output of our "Greet" function
     result=$(Greet)
     [ "$result" == "Hello World" ]
 }
@@ -148,25 +158,25 @@ Remember, including bats tests are optional and can be removed from your configu
 Here is a simplified snippet from the Shellcheck orb's BATS test suite.
 
 ```bash
-# BATS テストの例
+# example BATS test
 setup() {
-    # bash スクリプトを読み込み、その中で定義されている関数にアクセスできるようにします。
+    # Sourcing our bash script allows us to acces to functions defined within.
     source ./src/scripts/check.sh
-    # このスクリプトでは、特定の環境変数をパラメーターとして設定する必要があります。
-    # これらの入力は "モック" できます。
+    # Our script expects certain envrionment variables which would be set as parameters.
+    # We can "mock" those inputs here.
     export SC_PARAM_OUTPUT="/tmp/shellcheck.log"
     export SC_PARAM_SHELL="bash"
 }
 
 teardown() {
-    # 関数ごとにログを記録します。
-    # ログは、エラー発生時には出力しますが、それ以外の場合は問題がないことを示すために削除します。
+    # Logs are recorded in each function.
+    # We will echo it out on error, but otherwise remove it to indicate no issue.
     rm -rf /tmp/shellcheck.log
 }
 
-# 以下に BATS フレームワークのテスト ケースを示します。
-# これは本質的には、名前の付いた関数に過ぎません。
-# テスト ケースごとに setup() で -> test -> teardown() -> repeat を実行します。
+# This is a test case in the BATS framework.
+# This is essentially just a function with a name.
+# For each test case, setup() will run -> test -> teardown() -> repeat.
 
 # Ensure Shellcheck is able to find the two included shell scripts
 @test "1: Shellcheck test - Find both scripts" {
@@ -180,6 +190,7 @@ teardown() {
     [ $(wc -l tmp | awk '{print $1}') == 2 ]
     # If an error is thrown anywhere in this test case, it will be considered a failure.
     # 標準的な POSIX テスト コマンドを使用して "Run_ShellCheck" 関数の機能をテストします。
+}
 }
 ```
 

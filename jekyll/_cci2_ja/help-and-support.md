@@ -8,7 +8,7 @@ categories:
 order: 3
 ---
 
-ドキュメントの内容に不備・不足があり、 誠に申し訳ありません。
+If you're here, it's because you couldn't find what you were looking for in the docs. Our apologies!
 
 CircleCI のドキュメント サイトでは、以下の 2 つの方法で、新規ドキュメントの作成依頼や編集内容のご提案を受け付けています。
 

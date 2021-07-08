@@ -56,6 +56,8 @@ jobs:
       - run: echo $CIRCLE_COMPARE_URL
 ```
 
+Note: When using the above method to set the variables in the `environment` key if the pipeline variable is empty it will set the variable to `<nil>`. If you need an empty string instead, [set the variable in a shell command]({{ site.baseurl }}/2.0/env-vars/#setting-an-environment-variable-in-a-shell-command).
+
 ## Pipeline parameters in configuration
 {: #pipeline-parameters-in-configuration }
 

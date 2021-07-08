@@ -150,6 +150,13 @@ CircleCI では、アーティファクトのアップロードは設定ファ�
           prefix: coverage
       - store_test_results:
           path: test-results.xml
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: test-results.xml
 ```
 
 アーティファクトのアップロードが完了すると、ブラウザー上でジョブ ページの [Artifacts (アーティファクト)] タブでアーティファクトを確認したり、CircleCI API からアクセスしたりすることができます。 詳細については、「[ビルド アーティファクトの保存]({{site.baseurl}}/ja/2.0/artifacts/)」を参照してください。

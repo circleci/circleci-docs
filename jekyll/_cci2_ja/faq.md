@@ -70,7 +70,7 @@ Here’s a [list of languages and tools]({{site.baseurl}}/1.0/build-image-ubuntu
 {: #hosting }
 
 ### CircleCI 2.0 はオンプレミスでも利用できますか?
-つまり、**usage キュー**が発生したときは[コンテナを追加購入する](#コンテナ数を増やしビルドの待機時間を解消するにはどのようにコンテナ-プランをアップグレードしたらよいですか)ことで処理時間を短縮できますが、**run キュー**による待機時間は避けようがありません (とはいえ、CircleCI では少しでも待機時間を解消できるように努めています)。
+{: #is-circleci-20-available-to-enterprise-clients }
 {:.no_toc}
 CircleCI のインストール手順などについては「[管理者向けの概要]({{ site.baseurl }}/ja/2.0/overview)」を参照してください。
 
@@ -86,7 +86,7 @@ CircleCI のインストール手順などについては「[管理者向けの�
 {:.no_toc}
 The term Enterprise was used to refer to the behind-the-firewall option. However, this nomenclature was confusing for customers and for CircleCI employees.
 
-Docker Hub のパブリック イメージについては、以下のようにアカウント名やユーザー名を付け加えてプルすることも可能です。
+CircleCI is one product that can be accessed through our cloud service, installed behind your firewall, or in a hybrid approach, depending on your needs.
 
 ## トラブルシューティング
 {: #troubleshooting }
@@ -96,9 +96,9 @@ Docker Hub のパブリック イメージについては、以下のように�
 {:.no_toc}
 CircleCI アプリケーションの Workflows タブで、エラー メッセージが出力されていないかどうかを確認してください。 多くの場合、`config.yml` ファイルのフォーマットの誤りが原因となってエラーが発生しています。
 
-この例では、プライマリ イメージと mySQL イメージの両方にタイムゾーンを設定しています。
+詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
 
-設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
+After checking your `config.yml` for formatting errors, search for your issue in the [CircleCI support center](https://support.circleci.com/hc/en-us).
 
 ### 「usage キュー」と「run キュー」の違いは何ですか?
 {: #what-is-the-difference-between-a-usage-queue-and-a-run-queue }
@@ -141,7 +141,7 @@ my-user/couchdb:1.6.1
 ```
 
 ### Docker イメージの命名 規則について教えてください。
-UTC 協定世界時のタイムゾーンに基づいてスケジュールを指定できます。
+{: #what-is-the-best-practice-for-specifying-image-versions }
 {:.no_toc}
 `latest` タグを**付けず**に Docker イメージを指定することをお勧めします。 特定のバージョンとタグを使用するのもよいでしょう。 たとえば、`circleci/ruby:2.4-jessie-node` のように限定的にイメージを指定すると、ベースとなるイメージのディストリビューションが変更されたときも、アップストリームの影響がコンテナに及ぶのを防ぐことができます。 一方、`circleci/ruby:2.4` とだけ指定していると、`jessie` から `stretch` への予期しない変更による影響を受けるおそれがあります。 その他の応用例は、「Executor タイプを選択する」の「[Docker イメージのベスト プラクティス]({{ site.baseurl }}/ja/2.0/executor-types/#docker-イメージのベスト-プラクティス)」や、「CircleCI のビルド済み Docker イメージ」の「[ベスト プラクティス]({{ site.baseurl }}/ja/2.0/circleci-images/#ベスト-プラクティス)」でご覧いただけます。
 
@@ -150,7 +150,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 {:.no_toc}
 Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 たとえば、以下のように `.circleci/config.yml` を編集します。
 
-`.circleci/config.yml` で環境変数 `TZ` を定義する例
+[使用可能な依存関係の一覧]({{site.baseurl}}/ja/2.0/hello-world-windows/#windows-イメージにプリインストールされているソフトウェア)が「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows/)」に掲載されています。
 
 ```yaml
 version: 2
@@ -168,20 +168,20 @@ jobs:
 
 In this example, the timezone is set for both the primary image and an additional mySQL image.
 
-Windows Server 2019 Datacenter エディションの Server Core オプションを使用しています。
+設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
 
 ## ワークフロー
 {: #workflows }
 
 ### Docker イメージのタイムゾーンを設定する方法を教えてください。
-[使用可能な依存関係の一覧]({{site.baseurl}}/ja/2.0/hello-world-windows/#windows-イメージにプリインストールされているソフトウェア)が「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows/)」に掲載されています。
+{: #can-i-use-the-api-with-workflows }
 {:.no_toc}
 はい、ご利用いただけます。 API エンドポイントの利用方法や関連ドキュメントについては「[パイプライン]({{ site.baseurl }}/ja/2.0/build-processing/)」をご覧ください。
 
 ### ワークフローに API は使用できますか?
-残念ながら、現時点ではサーバー インストール版の CircleCI で Windows をご利用いただくことはできません。
+{: #can-i-use-the-auto-cancel-feature-with-workflows }
 {:.no_toc}
-詳細については「[YAML の記述]({{ site.baseurl }}/ja/2.0/writing-yaml/)」をご覧ください。
+Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/) document for instructions.
 
 ### ワークフローでビルドの自動キャンセルは使用できますか?
 {: #can-i-use-storetestresults-with-workflows }
@@ -209,17 +209,17 @@ Windows Server 2019 Datacenter エディションの Server Core オプション
 既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/ja/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
 
 ### 単一のワークフロー内で Linux 環境と Mac 環境の両方のジョブを実行できるような機能をサポートする予定はありますか?
-現時点では、`config.yml` を複数のファイルに分割する機能は提供しておりません。
+いいえ、できません。
 {:.no_toc}
 Splitting `config.yml` into multiple files is not yet supported.
 
 ### `config.yml` を複数のファイルに分割することは可能ですか?
 {: #can-i-build-only-the-jobs-that-changed }
 {:.no_toc}
-いいえ、できません。
+No.
 
 ### 変更したジョブのみをビルドすることは可能ですか?
-**Free プラン**を利用するオープンソースの組織には、Linux オープンソース プロジェクトに使用できる 400,000 の無料クレジットが毎月付与され、最大 4 件のジョブを同時実行できます。
+{: #can-i-build-fork-prs-using-workflows }
 {:.no_toc}
 Yes!
 
@@ -231,10 +231,10 @@ Yes!
 ### ワークフローの実行スケジュールを指定することは可能ですか?
 {: #what-time-zone-is-used-for-schedules }
 {:.no_toc}
-上限に近づいたときと上限を超えたときには、アプリ内に通知が表示されます。
+UTC 協定世界時のタイムゾーンに基づいてスケジュールを指定できます。
 
 ### スケジュールの指定にはどのタイムゾーンが使用できますか?
-他にもご不明な点がございましたら、billing@circleci.com までお気軽にお問い合わせください。
+{: #why-didnt-my-scheduled-build-run }
 {:.no_toc}
 スケジュールを設定したワークフローを実行するブランチを正確に指定したうえで、ビルドしたいブランチに対して config.yml ファイルをプッシュしてください。 `master` ブランチへのプッシュでは、`master` ブランチのワークフローしかスケジュールが設定されません。
 
@@ -249,7 +249,7 @@ Yes!
 スケジュールの正確性については保証できません。 スケジュールを設定したワークフローは、指定した時間にコミットがプッシュされたように実行されます。
 
 ## Windows
-Machine Executor で実行しているホストは、`eth0` や `lo` といったネットワーク インターフェイスに対して IPv6 アドレスを割り当てられます。
+{: #windows }
 
 ### スケジュールを設定したワークフローは、指定した時間どおりに正確に実行されますか?
 {: #what-do-i-need-to-get-started-building-on-windows }
@@ -257,7 +257,7 @@ Machine Executor で実行しているホストは、`eth0` や `lo` といっ�
 [Performance プラン](https://circleci.com/ja/pricing/usage/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
 
 ### Windows でのビルドを開始するには何が必要ですか?
-サポートしている CPU アーキテクチャは、`amd64` のみとなります。
+{: #what-exact-version-of-windows-are-you-using }
 {:.no_toc}
 
 We use Windows Server 2019 Datacenter Edition, the Server Core option.
@@ -301,7 +301,7 @@ For the vast majority of customers, you can keep your current plan for now and t
 #### 組織内でプランを共有し、請求をまとめることは可能ですか?
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-アクティブ ユーザーの一覧は、CircleCI の Web アプリケーションにログインし、[`Settings` (設定)] > [`Plan Usage` (プランの使用状況)] の順に移動して、[`Users` (ユーザー)] タブで確認できます。
+選択したクレジット パッケージの料金が、毎月初めに請求されます。
 
 On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. 子組織のすべてのクレジットとその他の利用料金は親組織に請求されます。
 
@@ -315,7 +315,7 @@ You pay to the next nearest credit. First we round up to the nearest second, and
 #### クレジットの購入方法を教えてください。 必要な分だけ購入することは可能ですか?
 {: #how-do-i-buy-credits-can-i-buy-in-any-increments }
 {:.no_toc}
-選択したクレジット パッケージの料金が、毎月初めに請求されます。
+Every month, you are charged for your selected credit package at the beginning of the month.
 
 #### 支払う料金の内訳はどのようになっていますか?
 {: #what-do-i-pay-for }
@@ -370,7 +370,7 @@ On the **free plan**, jobs will fail to run once you have run out of credits.
 #### 支払い方法について教えてください。
 {: #how-do-i-pay }
 {:.no_toc}
-毎月の料金は、CircleCI アプリケーション内からお支払いいただけます。
+CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
 
 #### 支払いのスケジュールについて教えてください。
 {: #when-do-i-pay }
@@ -387,7 +387,7 @@ On the **free plan**, jobs will fail to run once you have run out of credits.
 {: #what-are-the-other-renewal-dates }
 {:.no_toc}
 
-CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
+The first credit card charge on the day you upgrade to a paid plan or change paid plans, in addition to the following charges from CircleCI:
 
 - 月間プランでは、毎月の月額料金の請求日が更新日になります。
 - 年間プランでは、年に一度の年額料金の請求日が更新日になります。

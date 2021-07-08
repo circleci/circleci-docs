@@ -188,8 +188,11 @@ workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - build  # 設定ファイルに含まれるカスタム ジョブ。 コードをビルドします。
-      - test1: # カスタム ジョブ。 テスト スイート 1 を実行します。
+      - build  # 設定ファイルに含まれるカスタム ジョブ。
+            コードをビルドします。
+      - test1: # カスタム ジョブ。
+          テスト スイート 1 を実行します。
+
           requires: # "build" ジョブが完了するまで test1 は実行されません。
             - build
       - test2: # 別のカスタム ジョブ。
@@ -564,9 +567,12 @@ jobs:
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+
+          # Must be an absolute path, or relative path from working_directory.
+      #  絶対パス、または working_directory からの相対パスで指定する必要があります。 This is a directory on the container which is
           # taken to be the root directory of the workspace.
-           #  絶対パス、または working_directory からの相対パスで指定する必要があります。これは、コンテナ上のディレクトリで、ワークスペースのルートディレクトリと見なされます。
+          これは、コンテナ上のディレクトリで、ワークスペースのルートディレクトリと見なされます。
+
           root: workspace
           # ルートからの相対パスを指定する必要があります
           paths:
@@ -650,9 +656,11 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 ## ビデオ: ワークフローに複数のジョブを構成する
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
 {:.no_toc}
-{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>

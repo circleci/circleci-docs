@@ -37,6 +37,7 @@ Hub CLI のインストールとセットアップが完了している場合は
 基本中の基本から始めましょう。 プロジェクトを作成し、Git リポジトリを初期化します。 各ステップについては、以下のコード ブロックを参照してください。
 
 ```sh
+cd ~ # navigate to your home directory.
 cd ~ # ホーム ディレクトリに移動します
 mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクトを作成します
 cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
@@ -45,6 +46,9 @@ mkdir foo_ci # "foo_ci" という名前のフォルダーにプロジェクト�
 cd foo_ci # 新しい foo_ci フォルダーにディレクトリを変更します
 git init # git リポジトリを作成します
 touch README.md # リポジトリに配置するファイルを作成します
+echo 'Hello World!'
+git init # create a git repository
+touch README.md # Create a file to put in your repository
 echo 'Hello World!' >> README.md
 git add . # コミットするすべてのファイルをステージングします
 git commit -m "Initial commit" # 最初のコミットを実行します

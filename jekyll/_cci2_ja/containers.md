@@ -8,7 +8,7 @@ version:
   - Cloud
 ---
 
-また、お使いのプランで提供されるコンテナを活用してジョブやワークフローの実行を高速化する方法についても解説します。 なお、CircleCI には新たに[従量課金制プラン](https://circleci.com/ja/pricing/)が導入されており、コンテナベースのプランはまもなく廃止となりますのでご注意ください。 現在、コンテナベースのプランを利用してビルドの待機時間が発生している場合は、CircleCI の従量課金制プランへの移行を検討してください。待機時間を短縮できる以外にも、さまざまなメリットが期待できます。
+また、お使いのプランで提供されるコンテナを活用してジョブやワークフローの実行を高速化する方法についても解説します。 なお、CircleCI には新たに[従量課金制プラン](https://circleci.com/ja/pricing/)が導入されており、コンテナベースのプランはまもなく廃止となりますのでご注意ください。 If your builds are queuing with a Container-based plan, consider signing up for a CircleCI usage-based plan to mitigate queuing and to enjoy other benefits.
 
 新しい従量課金制プランの詳細については、[こちらのドキュメント]({{ site.baseurl }}/ja/2.0/credits/)を参照してください。
 
