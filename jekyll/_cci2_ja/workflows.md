@@ -188,8 +188,10 @@ workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - build  # 設定ファイルに含まれるカスタム ジョブ。 コードをビルドします。
-      - test1: # カスタム ジョブ。 テスト スイート 1 を実行します。
+      - build  # 設定ファイルに含まれるカスタム ジョブ。
+            コードをビルドします。
+      - test1: # カスタム ジョブ。
+          テスト スイート 1 を実行します。
           requires: # "build" ジョブが完了するまで test1 は実行されません。
             - build
       - test2: # 別のカスタム ジョブ。
@@ -235,7 +237,7 @@ workflows:
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
-By clicking on the pending job's name (`build`, in the screenshot above), an approval dialog box appears requesting that you approve or cancel the holding job.
+保留中のジョブの名前（上記のスクリーンショットでは`build`）をクリックすると、保留中のジョブの承認またはキャンセルを求める承認ダイアログボックスが表示されます。
 
 承認後、設定ファイルでの指示に従って残りのワークフローが実行されます。
 
@@ -542,6 +544,10 @@ Workflow には必ず Workspace というものが割り当てられています
 # This allows defining a docker image to reuse across jobs.
 # visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
 
+# 以下のスタンザは、CircleCI 2.1 を使用して再利用可能な Executor を使用していることに注意してください。
+# これにより、ジョブ間で再利用される Docker イメージを定義できます。
+# 詳細については、https://circleci.com/ja/docs/2.0/reusing-config/#authoring-reusable-executors を参照してください。
+
 version: 2.1
 
 executors:
@@ -564,10 +570,10 @@ jobs:
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # Must be an absolute path, or relative path from working_directory.
+      #  絶対パス、または working_directory からの相対パスで指定する必要があります。 This is a directory on the container which is
           # taken to be the root directory of the workspace.
-          これは、workspace の
-           # ルート ディレクトリとなる、コンテナ上のディレクトリです。
+          これは、コンテナ上のディレクトリで、ワークスペースのルートディレクトリと見なされます。
           root: workspace
           # ルートからの相対パスを指定する必要があります
           paths:
@@ -598,7 +604,7 @@ workflows:
             - flow
 ```
 
-For a live example of using workspaces to pass data between build and deploy jobs, see the [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) that is configured to build the CircleCI documentation.
+ワークスペースを使用してビルド ジョブとデプロイ ジョブの間でデータを受け渡す実際の例については、CircleCI ドキュメントをビルドするように構成された [`config.yml`](https://github.com/circleci/circleci-docs/blob/master/.circleci/config.yml) を参照してください。
 
 ワークスペース、キャッシュ、およびアーティファクトの使用に関する概念的な情報については、ブログ記事「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
 
@@ -651,9 +657,11 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 ## ビデオ: ワークフローに複数のジョブを構成する
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
+{:.no_toc}
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
+{:.no_toc}
 {:.no_toc}
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
