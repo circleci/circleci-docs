@@ -1,6 +1,226 @@
 # Local Development Instructions
 
+##README.md
+Bitbucket Pipelines Pipe: AWS Elastic Beanstalk
+Deploy your code using AWS Elastic Beanstalk.
 
+YAML Definition
+Add the following snippet to the script section of your bitbucket-pipelines.yml file:
+
+- pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+  variables:
+    AWS_ACCESS_KEY_ID: '<string>' # Optional if already defined in the context.
+    AWS_SECRET_ACCESS_KEY: '<string>' # Optional if already defined in the context.
+    AWS_DEFAULT_REGION: '<string>' # Optional if already defined in the context.
+    AWS_OIDC_ROLE_ARN: "<string>" # Optional by default. Required for OpenID Connect (OIDC) authentication.
+    APPLICATION_NAME: '<string>'
+    ENVIRONMENT_NAME: '<string>'
+    ZIP_FILE: '<string>'
+    # S3_BUCKET: '<string>' # Optional.
+    # S3_KEY: '<string>' # Optional.
+    # VERSION_LABEL: '<string>' # Optional.
+    # DESCRIPTION: '<string>' # Optional.
+    # WAIT: '<boolean>' # Optional.
+    # WAIT_INTERVAL: '<integer>' # Optional.
+    # WARMUP_INTERVAL: '<integer>' # Optional.
+    # COMMAND: '<string>' # Optional.
+    # DEBUG: '<boolean>' # Optional.
+Variables
+Basic usage
+Variable	Usage
+AWS_ACCESS_KEY_ID (**)	AWS access key.
+AWS_SECRET_ACCESS_KEY (**)	AWS secret key.
+AWS_DEFAULT_REGION (**)	The AWS region code (us-east-1, us-west-2, etc.) of the region containing the AWS resource(s). For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+AWS_OIDC_ROLE_ARN	The ARN of the role you want to assume. Required for OpenID Connect (OIDC) authentication. See Authentication.
+APPLICATION_NAME (*)	The name of the Elastic Beanstalk application.
+ENVIRONMENT_NAME (*)	Environment name.
+ZIP_FILE (*)	The application source bundle to deploy (zip, jar, war).
+S3_BUCKET	Bucket name used by Elastic Beanstalk to store artifacts. Default: ${APPLICATION_NAME}-elasticbeanstalk-deployment.
+S3_KEY	Bucket location used by Elastic Beanstalk to store artifacts. Default: ${APPLICATION_NAME}/${VERSION_LABEL}.
+VERSION_LABEL	Version label for the new application revision. Default: ${APPLICATION_NAME}-${BITBUCKET_BUILD_NUMBER}-${BITBUCKET_COMMIT:0:8}.
+DESCRIPTION	Description for the new application revision. Default: a URL pointing to the pipeline result page.
+WAIT	Wait for deployment to complete. Default: false.
+WAIT_INTERVAL	Time to wait between polling for deployment to complete (in seconds). Default: 10.
+WARMUP_INTERVAL	Time to wait for 'Green' or 'Yellow' environment's health (in seconds). Default: 0.
+COMMAND	Command to be executed during the deployment. Valid options are all, upload-only, deploy-only. Default: all.
+DEBUG	Turn on extra debug information. Default: false.
+(*) = required variable. This variable needs to be specified always when using the pipe.	
+(**) = required variable. If this variable is configured as a repository, account or environment variable, it doesn’t need to be declared in the pipe as it will be taken from the context. It can still be overridden when using the pipe.	
+Advanced usage
+If COMMAND is set to upload-only
+
+Variable	Usage
+AWS_ACCESS_KEY_ID (**)	AWS access key.
+AWS_SECRET_ACCESS_KEY (**)	AWS secret key.
+AWS_DEFAULT_REGION (**)	The AWS region code (us-east-1, us-west-2, etc.) of the region containing the AWS resource(s). For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+AWS_OIDC_ROLE_ARN	The ARN of the role you want to assume. Required for OpenID Connect (OIDC) authentication. See Authentication.
+APPLICATION_NAME (*)	The name of the Elastic Beanstalk application.
+COMMAND (*)	Command to be used. Use upload-only here.
+ZIP_FILE (*)	The application source bundle to deploy (zip, jar, war).
+S3_BUCKET	Bucket name used by Elastic Beanstalk to store artifacts. Default: ${APPLICATION_NAME}-elasticbeanstalk-deployment}.
+VERSION_LABEL	Version label for the new application revision. Default: ${ENVIRONMENT_NAME}_${BITBUCKET_COMMIT:0:8}_YYYY-mm-dd_HHMMSS).
+DESCRIPTION	Description for the new application revision. Default: "".
+DEBUG	Turn on extra debug information. Default: false.
+(*) = required variable. This variable needs to be specified always when using the pipe.	
+(**) = required variable. If this variable is configured as a repository, account or environment variable, it doesn’t need to be declared in the pipe as it will be taken from the context. It can still be overridden when using the pipe.	
+If COMMAND is set to deploy-only
+
+Variable	Usage
+AWS_ACCESS_KEY_ID (**)	AWS access key.
+AWS_SECRET_ACCESS_KEY (**)	AWS secret key.
+AWS_DEFAULT_REGION (**)	The AWS region code (us-east-1, us-west-2, etc.) of the region containing the AWS resource(s). For more information, see Regions and Endpoints in the Amazon Web Services General Reference.
+AWS_OIDC_ROLE_ARN	The ARN of the role you want to assume. Required for OpenID Connect (OIDC) authentication. See Authentication.
+APPLICATION_NAME (*)	The name of the Elastic Beanstalk application.
+COMMAND (*)	Command to be used. Use deploy-only here.
+ENVIRONMENT_NAME (*)	Environment name.
+VERSION_LABEL	Version label for the new application revision. Default: ${ENVIRONMENT_NAME}_${BITBUCKET_COMMIT:0:8}_YYYY-mm-dd_HHMMSS).
+WAIT	Wait for deployment to complete. Default: false.
+WAIT_INTERVAL	Time to wait between polling for deployment to complete (in seconds). Default: 10.
+WARMUP_INTERVAL	Time to wait for 'Green' or 'Yellow' environment's health (in seconds). Default: 0.
+DEBUG	Turn on extra debug information. Default: false.
+(*) = required variable. This variable needs to be specified always when using the pipe.	
+(**) = required variable. If this variable is configured as a repository, account or environment variable, it doesn’t need to be declared in the pipe as it will be taken from the context. It can still be overridden when using the pipe.	
+Details
+This pipe deploys a new version of an application to an Elastic Beanstalk environment associated with the application.
+
+With Elastic Beanstalk, you can quickly deploy and manage applications in the AWS Cloud without worrying about the infrastructure that runs those applications. Elastic Beanstalk reduces management complexity without restricting choice or control. You simply upload your application, and Elastic Beanstalk automatically handles the details of capacity provisioning, load balancing, scaling, and application health monitoring.
+
+For advanced use cases and best practices, we recommend build once and deploy many approach. So, if you have multiple environments we recommend using the COMMAND variable to separate your CI/CD workflow into different operations / pipes:
+
+COMMAND: 'upload-only': It will upload the artifact and release a version in Elastic Beanstalk.
+COMMAND: 'deploy-only': It will deploy the specified version to the desired environment(s).
+Prerequisites
+An IAM user is configured with sufficient permissions to perform a deployment to your application and upload artifacts to the S3 bucket.
+You have configured the Elastic Beanstalk application and environment.
+An S3 bucket has been set up to which deployment artifacts will be copied. Use name ${APPLICATION_NAME}-elasticbeanstalk-deployment to automatically use it.
+Authentication
+Supported options:
+
+Environment variables: AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY. Used by default.
+
+Assume role provider with OpenID Connect (OIDC). More details in the Bitbucket Pipelines Using OpenID Connect guide Integrating aws bitbucket pipeline with oidc. Make sure that you setup OIDC before:
+
+configure Bitbucket Pipelines as a Web Identity Provider in AWS
+attach to provider your AWS role with required policies in AWS
+setup a build step with oidc: true in your Bitbucket Pipelines
+pass AWS_OIDC_ROLE_ARN (*) variable that represents role having appropriate permissions to execute actions on AWS Elastic Beanstalk resources
+Examples
+Basic example:
+Upload the artifact application.zip and deploy your environment.
+
+script:
+  - pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+    variables:
+      AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      AWS_DEFAULT_REGION: 'us-east-1'
+      APPLICATION_NAME: 'my-app-name'
+      ENVIRONMENT_NAME: 'production'
+      ZIP_FILE: 'application.zip'
+Upload the artifact application.zip and deploy your environment. AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION are configured as repository variables, so there is no need to declare them in the pipe.
+
+script:
+  - pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+    variables:
+      APPLICATION_NAME: 'my-app-name'
+      ENVIRONMENT_NAME: 'production'
+      ZIP_FILE: 'application.zip'
+Advanced example:
+Deploy a new version of your CloudFormation stack with OpenID Connect (OIDC) alternative authentication without required AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY. Parameter oidc: true in the step configuration and variable AWS_OIDC_ROLE_ARN are required:
+
+- step:
+    oidc: true
+    script:
+      - pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+        variables:
+          AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+          AWS_OIDC_ROLE_ARN: 'arn:aws:iam::123456789012:role/role_name'
+          APPLICATION_NAME: 'my-app-name'
+          ENVIRONMENT_NAME: 'production'
+          ZIP_FILE: 'application.zip'
+Upload the artifact application.zip and create a version deploy-$BITBUCKET_BUILD_NUMBER-multiple in Elastic Beanstalk.
+
+- pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+  variables:
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+    APPLICATION_NAME: 'application-test'
+    COMMAND: 'upload-only'
+    ZIP_FILE: 'application.zip'
+    S3_BUCKET: 'application-test-bucket'
+    VERSION_LABEL: 'deploy-$BITBUCKET_BUILD_NUMBER-multiple'
+Upload the artifact application.zip to the custom S3 bucket location:
+
+- pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+  variables:
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+    APPLICATION_NAME: 'application-test'
+    COMMAND: 'upload-only'
+    ZIP_FILE: 'application.zip'
+    S3_BUCKET: 'application-test-bucket'
+    S3_KEY: 'environment_prod'
+    VERSION_LABEL: 'deploy-$BITBUCKET_BUILD_NUMBER-multiple'
+Deploy your version deploy-$BITBUCKET_BUILD_NUMBER-multiple into the environment production and wait until the deployment is completed to see the status.
+
+- pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+  variables:
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+    APPLICATION_NAME: 'application-test'
+    COMMAND: 'deploy-only'
+    VERSION_LABEL: 'deploy-$BITBUCKET_BUILD_NUMBER-multiple'
+    ENVIRONMENT_NAME: 'production'
+    WAIT: 'true'
+Deploy multicontainer Docker environment as an AWS Elastic Beanstalk application to AWS Cloud and wait until the deployment is completed to see the status. You can find the complete source code for the sample multicontainer app by following this link example-aws-elasticbeanstalk-deploy-docker-multicontainer repository.
+
+- step:
+    name: Build docker-multicontainer-v2 App
+    script:
+    - zip -r docker-multicontainer-v2.zip cron.yaml Dockerrun.aws.json .ebextensions php-app proxy
+    artifacts:
+    - docker-multicontainer-v2.zip
+- step:
+    name: Deploy to AWS EBS
+    caches:
+      - pip
+    script:
+    - pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+      variables:
+        AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+        AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+        AWS_DEFAULT_REGION: 'us-east-1'
+        APPLICATION_NAME: 'test-ebs-multi-docker'
+        ENVIRONMENT_NAME: 'TestEbsMultiDocker-env'
+        ZIP_FILE: 'docker-multicontainer-v2.zip'
+        WAIT: 'true'
+Deploy your version deploy-$BITBUCKET_BUILD_NUMBER-multiple into the environment production and wait 60 sec. until the deployment is completed to see operational status of the environment; then extra wait 30 sec. for environment's health status Green or Yellow to make sure that your app instances are available and processing requests.
+
+- pipe: atlassian/aws-elasticbeanstalk-deploy:1.0.0
+  variables:
+    AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+    AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+    APPLICATION_NAME: 'application-test'
+    COMMAND: 'deploy-only'
+    VERSION_LABEL: 'deploy-$BITBUCKET_BUILD_NUMBER-multiple'
+    ENVIRONMENT_NAME: 'production'
+    WAIT_INTERVAL: 60
+    WARMUP_INTERVAL: 30
+    WAIT: 'true'
+Support
+If you'd like help with this pipe, or you have an issue or feature request, let us know on Community.
+
+If you're reporting an issue, please include:
+
+the version of the pipe
+relevant logs and error messages
+steps to reproduce
+License
+Copyright (c) 2018 Atlassian and others. Apache 2.0 licensed, see LICENSE.txt file.
 There are two ways to work on CircleCI docs locally: with Docker and with [Ruby](https://www.ruby-lang.org/en/)/[Bundler](https://bundler.io/).
 
 ## 1. Local Development with Docker (recommended)
