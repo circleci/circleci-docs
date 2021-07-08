@@ -27,13 +27,13 @@ The following sections provide information about the usage statistics CircleCI w
 ### Weekly account usage
 {: #weekly-account-usage }
 
-| **名前**                | **タイプ** | **目的**                                                        |
-| --------------------- | ------- | ------------------------------------------------------------- |
-| account_id            | UUID    | _Uniquely identifies each vcs account_                        |
-| usage_current_macos | 分       | _For each account, track weekly builds performed in minutes._ |
-| usage_legacy_macos  | 分       |                                                               |
-| usage_current_linux | 分       |                                                               |
-| usage_legacy_linux  | 分       |                                                               |
+| **Name**              | **Type** | **Purpose**                                                   |
+| --------------------- | -------- | ------------------------------------------------------------- |
+| account_id            | UUID     | _Uniquely identifies each vcs account_                        |
+| usage_current_macos | minutes  | _For each account, track weekly builds performed in minutes._ |
+| usage_legacy_macos  | minutes  |                                                               |
+| usage_current_linux | minutes  |                                                               |
+| usage_legacy_linux  | minutes  |                                                               |
 {: class="table table-striped"}
 
 ### Weekly job activity

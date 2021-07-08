@@ -26,13 +26,13 @@ We aim to retain 4 major versions of Xcode, with more recent versions having a l
 
 Example with Xcode 12 being the latest major version being released:
 
-| Xcode のバージョン | 対応                                                                                                         |
-| ------------ | ---------------------------------------------------------------------------------------------------------- |
-| Xcode 12     | We will keep all major.minor versions at the latest patch version                                          |
-| Xcode 11     | We will keep all major.minor versions at the latest patch version                                          |
-| Xcode 10     | As further Xcode 12 releases are announced, we will begin deprecating older versions of Xcode 10 in stages |
-| Xcode 9      | We retain a single image which will be the last stable release of Xcode 9                                  |
-| Xcode 8      | Removed entirely                                                                                           |
+| Xcode Version | Action                                                                                                     |
+| ------------- | ---------------------------------------------------------------------------------------------------------- |
+| Xcode 12      | We will keep all major.minor versions at the latest patch version                                          |
+| Xcode 11      | We will keep all major.minor versions at the latest patch version                                          |
+| Xcode 10      | As further Xcode 12 releases are announced, we will begin deprecating older versions of Xcode 10 in stages |
+| Xcode 9       | We retain a single image which will be the last stable release of Xcode 9                                  |
+| Xcode 8       | Removed entirely                                                                                           |
 {: class="table table-striped"}
 
 Future example when Xcode 13 enters Beta:
