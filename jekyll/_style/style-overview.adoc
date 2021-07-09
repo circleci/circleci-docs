@@ -1,7 +1,3 @@
----
-version:
-- Everyone
----
 = CircleCI docs style guide
 :page-layout: classic-docs
 :page-liquid:
@@ -9,4 +5,20 @@ version:
 :toc: macro
 :toc-title:
 
-This guide is a reference for contributors to CircleCI docs.
+This guide is a reference for contributors to CircleCI docs. Our style guide is constantly evolving so you will probably find older documentation does not meet the requirements set out here. Use this guide to help you write new docs, and when working on existing documentation it would be great if you can make edits to help us get older documents to conform too!
+
+== Headings
+All heading are in sentence case.
+
+**Good:** CircleCI docs style guide
+**Bad:** CircleCI Docs Style Guide
+
+Where possible, headings should begin with a verb.
+
+**Good:** "Grooming cats"
+**Bad:** "Cats"
+
+When referencing heading in prose, use the full heading with no quotes.
+
+**Good:** <<headings>>
+**Bad:** "<<headings>>"
