@@ -37,7 +37,7 @@ The following Arm resource class is available to all CircleCI customers:
 | Resource class name | Specs             | Requisite Plan                   |
 |---------------------|-------------------|----------------------------------|
 | `arm.medium`        | 2 vCPUs, 8GB RAM  | Free, Performance, Scale, Custom |
-| `arm.large`         | 4 vCPUs, 16GB RAM | Performance, Scale               |
+| `arm.large`         | 4 vCPUs, 16GB RAM | Performance, Scale, Custom       |
 {: class="table table-striped"}
 
 For pricing and availability check out our [Pricing](https://circleci.com/pricing/) page.
