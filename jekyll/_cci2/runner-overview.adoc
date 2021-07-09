@@ -141,6 +141,6 @@ Almost all standard CircleCI features are available for use with runner jobs, bu
 
 == Learn more
 
-Head to the CircleCI academy and take the https://academy.circleci.com/runner-course[runner course] to learn more about running jobs on your infrastructure.
+Take the https://academy.circleci.com/runner-course[runner course] with CircleCI academy to learn more about running jobs on your infrastructure.
 
 
