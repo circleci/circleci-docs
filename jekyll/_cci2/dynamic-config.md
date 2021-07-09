@@ -90,4 +90,5 @@ documentation for more information.
 - The [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) API call
 
 ## Learn More
+{: #learn-more }
 Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config) to learn more.
