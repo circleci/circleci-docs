@@ -1,0 +1,12 @@
+---
+version:
+- Everyone
+---
+= CircleCI docs style guide
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+This guide is a reference for contributors to CircleCI docs.

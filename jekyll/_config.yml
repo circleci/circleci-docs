@@ -130,7 +130,14 @@ collections:
     permalink: /ja/2.0/:path/
     prefix: "/ja/2.0"
     selectorName: "2.0"
-
+  style:
+    name: "Style Guide"
+    site_section: true
+    output: true
+    permalink: /style/
+    prefix: "/style"
+    selectorName: "style"
+    
 twitter_username: circleci
 github_username: circleci
 
