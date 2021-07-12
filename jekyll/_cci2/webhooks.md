@@ -27,13 +27,12 @@ shape of events that will be sent to your webhook destination.
 
 Webhooks can be leveraged for various purposes. Some possible examples might include:
 
-- Building custom a dashboard to visualize/analyze workflow/job events.
+- Building a custom dashboard to visualize or analyze workflow/job events.
 - Sending data to incident management tools (such as Pagerduty).
 - Send events to communication apps, such as Slack.
-- Use webhooks to be alerted when a workflow is cancelled then use the API to rerun the workflow.
+- Use webhooks to be alerted when a workflow is cancelled, then use the API to rerun the workflow.
 - Trigger internal notification systems to alert people when workflows/jobs complete.
 - Build your own automation plugins and tools.
-- Connect CircleCI with tools such as airtable, to aggregate data on completed workflows or jobs (see example).
 
 ## Setting up a hook
 {: #setting-up-a-hook}
