@@ -12,7 +12,7 @@ version:
 
 A webhook, sometimes referred to as a _reverse API_, allows you to connect a
 platform you manage (either an API you create yourself, or a third party
-service) to a stream of _future events_ (or, _real-time information_).
+service) to a stream of future _events_.
 
 Setting up a Webhook on CircleCI enables you to receive information (referred to
 as _events_) from CircleCI, as they happen. This can help you avoid polling the
@@ -33,14 +33,16 @@ Webhooks are set up on a per-project basis. To get started:
 1. Click **Add Webhook**.
 1. Fill out the Webhook form (the table below describes the fields and their intent):
 
-| Field                  | Required? | Intent                                                               |
-|------------------------|-----------|----------------------------------------------------------------------|
-| Webhook name           | Y         | The name of your webhook                                             |
-| URL                    | Y         | The URL the webhook will make POST requests to.                      |
-| Certificate Validation | Y         |                                                                      |
-| Secret token           | Y         | Used by your API/platform to validate incoming data is from CircleCI |
-| Select an event        | Y         | You must select at least one event that will trigger a webhook       |
+| Field                  | Required? | Intent                                                                                      |
+|------------------------|-----------|---------------------------------------------------------------------------------------------|
+| Webhook name           | Y         | The name of your webhook                                                                    |
+| URL                    | Y         | The URL the webhook will make POST requests to.                                             |
+| Certificate Validation | Y         | Ensure the receiving host has a valid SSL certificate before sending an event <sup>1</sup>. |
+| Secret token           | Y         | Used by your API/platform to validate incoming data is from CircleCI.                       |
+| Select an event        | Y         | You must select at least one event that will trigger a webhook.                             |
 {: class="table table-striped"}
+
+<sup>1</sup>Only leave this unchecked for testing purposes.
 
 ## Event Specifications
 {: #event-specifications}
@@ -49,7 +51,6 @@ CircleCI currently offers webhooks for the following events:
 
 | Event type         | Description                                              | Potential statuses                                       | Included sub-entities                          |
 |--------------------|----------------------------------------------------------|----------------------------------------------------------|------------------------------------------------|
-| ping               | Test ping event when the webhook is initially configured |                                                          | project, organization                          |
 | workflow-completed | A workflow has reached a terminal state                  | "success", "failed", "error", "canceled", "unauthorized" | project, organization, workflow, pipeline      |
 | job-completed      | A job has reached a terminal state                       | "success", "failed", "canceled", "unauthorized"          | project, organization, workflow, pipeline, job |
 {: class="table table-striped"}
@@ -77,8 +78,8 @@ The next sections describe the payloads of different events offered with
 CircleCI webhooks. The schema of these webhook events will share often share
 data with other webhooks - we refer to these as common maps of data as
 "sub-entities". For example, when you receive an event payload for the
-`job-completed` webhook, it will contains maps of data for your a *project,
-organization, workflow and pipeline*.
+`job-completed` webhook, it will contains maps of data for your *project,
+organization, job, workflow and pipeline*.
 
 Let's look at some of the common sub-entities that will appear across various webhooks:
 
@@ -104,7 +105,7 @@ Data about the organization associated with the webhook event.
 | id    | yes             | Unique ID of the organization              |
 | name  | yes             | Name of the organization (e.g. "circleci") |
 {: class="table table-striped"}
-    
+ 
 ### Job
 {: #job}
 
@@ -143,15 +144,6 @@ the CircleCI configuration (but typically one will be triggered).
 Pipelines are the most high-level unit of work, and contain zero or
 more workflows. A single git-push always triggers up to one pipeline. Pipelines
 can also be triggered manually through the API.
-
-A pipeline's overall status doesn't change after it is created, so there are no
-exclusively-pipeline-related events.
-
-Re-running a workflow (either via "Re-run from failed" or "Re-run from
-beginning") creates a new, distinct workflow in the same pipeline.
-
-A pipeline may have parameters supplied during a manual invocation, that affect
-the behavior of its workflows and jobs.
 
 | Field       | Always present? | Description                                                                       |
 |-------------|-----------------|-----------------------------------------------------------------------------------|
@@ -196,3 +188,7 @@ Note: The "vcs" map or its contents may not always be provided in cases where th
 {: class="table table-striped"}
 
 
+### Test your webhook
+{: #test-your-webhook}
+
+You can use a "ping" event to test out the webhook.
