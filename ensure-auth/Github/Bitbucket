@@ -1,0 +1,22 @@
+Ensure authentication with GitHub/Bitbucket
+A single command can be used to test that your
+
+keys are set up as expected. 
+For GitHub run:
+
+ssh git@github.com
+or f
+
+
+or Bitbucket run:
+
+ssh -Tv git@bitbucket.org
+and you should see:
+
+$ Hi :username! You've successfully authenticated...
+for GitHub or for Bitbucket:
+
+$ logged in as :username.
+If you don’t see output like that, 
+you need to start by troubleshooting your SSH keys with GitHub
+/ troubleshooting your SSH keys with Bitbucket
