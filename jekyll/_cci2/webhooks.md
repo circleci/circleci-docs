@@ -10,9 +10,8 @@ version:
 ## Overview
 {: #overview}
 
-A webhook, sometimes referred to as a _reverse API_, allows you to connect a
-platform you manage (either an API you create yourself, or a third party
-service) to a stream of future _events_.
+A webhook allows you to connect a platform you manage (either an API you create
+yourself, or a third party service) to a stream of future _events_.
 
 Setting up a Webhook on CircleCI enables you to receive information (referred to
 as _events_) from CircleCI, as they happen. This can help you avoid polling the
