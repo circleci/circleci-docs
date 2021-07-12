@@ -37,6 +37,7 @@ Webhooks can be leveraged for various purposes. Some possible examples might inc
 
 ## Setting up a hook
 {: #setting-up-a-hook}
+
 Webhooks are set up on a per-project basis. To get started:
 
 1. Visit a specific project you have setup on CircleCI.
@@ -44,6 +45,7 @@ Webhooks are set up on a per-project basis. To get started:
 1. In the sidebar of your Project Settings, click on **Webhooks**.
 1. Click **Add Webhook**.
 1. Fill out the Webhook form (the table below describes the fields and their intent):
+1. Provided your receiving API or third party service is set up, click **Test Ping Event** to dispatch a test event.
 
 | Field                  | Required? | Intent                                                                                      |
 |------------------------|-----------|---------------------------------------------------------------------------------------------|
@@ -198,9 +200,3 @@ Note: The "vcs" map or its contents may not always be provided in cases where th
 | branch                 | no              | Branch being built                                                                                                 |
 | tag                    | no              | Tag being built (mutually exclusive with "branch")                                                                 |
 {: class="table table-striped"}
-
-
-### Test your webhook
-{: #test-your-webhook}
-
-You can use a "ping" event to test out the webhook.
