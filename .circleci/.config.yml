@@ -1,13 +1,6 @@
- -BigGuy573.circleci.config.yml
-
-
-
-  
-  
+ '-BigGuy573.circleci.config.yml
 image:
   name: atlassian/default-image:2
-
-
 setup: &setup
   step:
     name: Setup testing resources
@@ -38,8 +31,6 @@ setup: &setup
                 "ParameterKey": "BucketName",
                 "ParameterValue": "${S3_BUCKET}"
               }]
-
-
 release-dev: &release-dev
   step:
     name: Release development version
@@ -57,14 +48,12 @@ release-dev: &release-dev
           VERSION: ${VERSION}
     services:
       - docker
-
-
 test: &test
   parallel:
     - step:
         name: Test
         image: python:3.7
-        oidc: true
+        oidc: "true"
         script:
           - export DOCKERHUB_IMAGE="bitbucketpipelines/${BITBUCKET_REPO_SLUG}"
           - export DOCKERHUB_TAG=${BITBUCKET_BUILD_NUMBER}
@@ -90,8 +79,6 @@ test: &test
         image: hadolint/hadolint:latest-debian
         script:
           - hadolint Dockerfile
-
-
 push: &push
   step:
     name: Push and Tag
@@ -104,8 +91,6 @@ push: &push
           IMAGE: bitbucketpipelines/$BITBUCKET_REPO_SLUG
     services:
       - docker
-
-
 pipelines:
     default:
     - <<: *setup
@@ -116,3 +101,5 @@ pipelines:
         - <<: *setup
         - <<: *test
         - <<: *push
+'Webhook URL'
+'(https://twist.com/api/v3/integration_incoming/post_data?install_id=182991&install_token=182991_6f4a0ae55121a02652e9df77aa97a440
