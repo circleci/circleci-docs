@@ -187,3 +187,79 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     ]
 }
 ```
+
+
+=== GET /api/v2/runner/tasks
+
+Get the number of unclaimed tasks for a given resource class.
+
+==== Authentication Methods
+
+* Circle-Token (personal authentication)
+* Browser Session Authentication
++ This allows the endpoint to be accessible on circleci.com/api/v2/runner for users that have already logged into circleci.com.
+* Launch Token
+
+===== Request
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Input
+| Required
+| Description
+
+| resource-class
+| string
+| query
+| true
+| filters tasks by specific resource class.
+|===
+
+== Examples
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-namespace/test-resource \
+    -H 'Circle-Token: secret-token'
+```
+
+=== Response
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Status
+| Description
+| Format
+
+|200
+|Number of unclaimed tasks
+|JSON
+|===
+
+=== Response Schema
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| Name
+| Type
+| Required
+| Description
+
+|unclaimed_task_count
+|int
+|true
+|number of unclaimed tasks
+|===
+
+== Example
+
+```json
+{
+    "unclaimed_task_count": 42
+}
+```
+
