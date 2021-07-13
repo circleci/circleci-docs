@@ -92,10 +92,14 @@ jobs:
 ## Sauce Labs
 {: #sauce-labs }
 
-Sauce Labs operates browsers on a network that is separate from CircleCI build containers. To allow the browsers access
-the web application you want to test, run Selenium WebDriver tests with Sauce Labs on CircleCI using Sauce Labs' secure tunnel [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy).
+Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl` - their test orchestrator CLI that can execute tests directly from a variety of JavaScript frameworks.
 
-Sauce Connect allows you to run a test server within the CircleCI build container and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If you run your browser tests after deploying to a publicly accessible staging environment, you can use Sauce Labs in the usual way without worrying about Sauce Connect.
+### Sauce Labs Secure Connectivity
+{: #sauce-labs-secure-connectivity }
+
+Since Sauce Labs operates browsers on a network that is separate from CircleCI build containers, you may need to use the Sauce Labs secure tunnel [Sauce Connect](https://docs.saucelabs.com/secure-connections/sauce-connect) to provide connectivity between your web application and the target test browsers in order to run tests on CircleCI.
+
+Sauce Connect allows you to run a test server within the CircleCI build container and expose it (using a URL like `localhost:8080`) to Sauce Labs' browsers. If your web application is publicly accessible (such as in a staging environment), you you do not need to use Sauce Connect.
 
 This example `config.yml` file shows how to run browser tests through Sauce Labs against a test server running within a CircleCI build container.
 
@@ -130,10 +134,10 @@ jobs:
 ```
 {% endraw %}
 
-### Sauce Labs browser testing orb example
-{: #sauce-labs-browser-testing-orb-example }
+#### Sauce Connect orb example
+{: #sauce-connect-orb-example }
 
-Sauce Labs provide a browser testing orb for use with CircleCI that enables you to open a Sauce Labs tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
+Sauce Labs provides a browser testing orb for use with CircleCI that enables you to launch a Sauce Connect tunnel before performing any browser testing. An example of running parallel tests using this orb is shown below:
 
 {% raw %}
 ```yaml
@@ -158,7 +162,39 @@ workflows:
 ```
 {% endraw %}
 
-For more detailed information about the Sauce Labs orb and how you can use the orb in your workflows, refer to the [Sauce Labs Orb](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
+For more detailed information about using the Sauce Connect orb in your workflows, refer to the [Sauce Connect Orb](https://circleci.com/developer/orbs/orb/saucelabs/sauce-connect) page in the [CircleCI Orbs Registry](https://circleci.com/developer/orbs).
+
+### saucectl
+{: #saucectl }
+
+If you're using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run Orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
+
+1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as Environment variables in your Circle CI project.
+2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
+
+{% raw %}
+```yaml
+version: 2.1
+orbs:
+  saucectl: saucelabs/saucectl-run@1.0.0
+
+jobs:
+  test-cypress:
+    docker:
+      - image: circleci/node:12.21
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.2
+      - saucectl/saucectl-run
+
+workflows:
+  version: 2
+  default_workflow:
+    jobs:
+      - test-cypress
+```
+{% endraw %}
 
 ## BrowserStack and Appium
 {: #browserstack-and-appium }
