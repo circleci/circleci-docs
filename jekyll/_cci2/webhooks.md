@@ -180,8 +180,9 @@ can also be triggered manually through the API.
 ### VCS
 {: #vcs}
 
-VCS map
-Note: The "vcs" map or its contents may not always be provided in cases where the information doesn't apply, such as future scenarios in which a pipeline isn't associated with a git commit.
+Note: The vcs map or its contents may not always be provided in cases where
+the information doesn't apply, such as future scenarios in which a pipeline
+isn't associated with a git commit.
 
 | Field                  | Always present? | Description                                                                                                        |
 |------------------------|-----------------|--------------------------------------------------------------------------------------------------------------------|
