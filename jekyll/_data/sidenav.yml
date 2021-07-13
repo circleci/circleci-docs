@@ -223,9 +223,9 @@ en:
       link: 2.0/security/
       children:
         - name: Security Overview
-          link: 2.0/Security/
+          link: 2.0/security/
         - name: Security Overview
-          link: 2.0/Security-recommendations/
+          link: 2.0/security-recommendations/
 
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
