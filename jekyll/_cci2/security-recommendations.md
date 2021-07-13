@@ -6,7 +6,7 @@ order: 5
 description: "CircleCI security recommendations."
 ---
 
-This document outlines security features built into CircleCI and related integrations.
+This document outlines recommended best practices to ensure the security of your data and secrets when using CircleCI.
 
 * TOC
 {:toc}
