@@ -222,9 +222,9 @@ en:
     - name: security
       link: 2.0/security/
       children:
-        - name: Security Overview
+        - name: Security Features
           link: 2.0/security/
-        - name: Security Overview
+        - name: Security Recommendations
           link: 2.0/security-recommendations/
 
 - name: Examples and Guides
