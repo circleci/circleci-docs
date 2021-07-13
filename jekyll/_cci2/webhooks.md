@@ -29,10 +29,13 @@ Webhooks can be leveraged for various purposes. Some possible examples might inc
 
 - Building a custom dashboard to visualize or analyze workflow/job events.
 - Sending data to incident management tools (such as Pagerduty).
+- Use tools like [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) to capture data and visualize it.
 - Send events to communication apps, such as Slack.
 - Use webhooks to be alerted when a workflow is cancelled, then use the API to rerun the workflow.
 - Trigger internal notification systems to alert people when workflows/jobs complete.
 - Build your own automation plugins and tools.
+
+[Airtable]: 
 
 ## Setting up a hook
 {: #setting-up-a-hook}
