@@ -35,8 +35,6 @@ Webhooks can be leveraged for various purposes. Some possible examples might inc
 - Trigger internal notification systems to alert people when workflows/jobs complete.
 - Build your own automation plugins and tools.
 
-[Airtable]: 
-
 ## Setting up a hook
 {: #setting-up-a-hook}
 

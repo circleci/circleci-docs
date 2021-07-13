@@ -14,19 +14,22 @@ demonstrate how one could capture and visualize the output of your pipelines.
 **Prerequisites**
 
 - An account with CircleCI, with webhooks enabled (webhooks are currently in preview and may not yet be available.)
-- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks). 
+- A familiarity with [webhooks on CircleCI]({{site.baseurl}}/2.0/webhooks).
 - An Airtable account, if you wish to follow along.
 
 
 ## Get setup in Airtable
+{: #get-setup-in-airtable }
 
 ### 1. Create a new "Base" on Airtable
+{: #create-a-new-base-on-airtable }
 
 Log into Airtable and create a new "Base"
 
 ![Creating a new base in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_1_new.png)
- 
+
 ### 2. Set table and column data types
+{: #set-table-and-column-data-types }
 
 By default, your new "Grid view" will be named "Table 1" and will show several
 pre-defined columns, each with a different data type. We will replace these
@@ -47,6 +50,7 @@ Finally, add one last column, but this time use the "date" data type:
 ![Changing the column types]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_2_datatypes.png)
 
 ### 3. Prepare the Webhook Automation
+{: #prepare-the-webhook-automation }
 
 In the top-right of Airtable, select the "Automations" button to open the
 right-side Automations panel, and select "Create a custom automation".
@@ -63,6 +67,7 @@ Copy the webhook URL here to your clipboard.
 ![Get webhook link]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_4.png)
 
 ### 4. Connect to CircleCI
+{: #connect-to-circleci }
 
 With our Webhook URL from Airtable in hand, we can now setup our Webhooks for
 CircleCI. Begin by opening up the project settings for the repository you
@@ -77,6 +82,7 @@ Webhook" again.
 ![]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
 
 ### 5. Trigger a test Webhook
+{: #trigger-a-test-webhook }
 
 Now that our webhooks are configured, we want to trigger a CircleCI pipeline
 before going back to Airtable so that Airtable can see what kind of data we will
@@ -95,6 +101,7 @@ When you have received the data successfully, you may click Done and move on to
 creating an Action for the Trigger.
 
 ### 6. Setup the Action for our Webhook Trigger
+{: #setup-the-action-for-our-webhook-trigger }
 
 For the Action Type, select from the drop-down "Create record", and select your
 Table.
@@ -116,6 +123,7 @@ views of your data. Your data can be cross-referenced with other tables, used in
 calculations, and more.
 
 ### Tracking Deployments With Airtable
+{: #tracking-deployments-with-airtable }
 
 While the above covers some basics with Airtable, let's take things a step
 further and look at how we might leverage the power of webhooks. Once you have
