@@ -7,7 +7,7 @@ categories:
   - troubleshooting
 order: 10
 version:
-  - クラウド
+  - Cloud
   - Server v2.x
   - Server v3.x
 ---
@@ -145,7 +145,7 @@ circleci orb validate /tmp/my_orb.yml
 ## Orb 開発キット
 {: #orb-development-kit }
 
-[Orb 開発キット]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit)とは、CircleCI上での自動テストとデプロイを行い、orbの開発プロセスを簡素化するための一連のツールをセットにしたものです。 Orb 開発キットには、[`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) および [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html) という 2 つの CLI コマンドが含まれています。 Orb のパッケージ化の詳細については、[Orb のコンセプトに関するページ]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)を参照してください。
+[Orb 開発キット]({{ site.baseurl }}/2.0/orb-author/#orb-development-kit)は、相互に連携する複数のツールをセットにしたものです。 キットを使うと CircleCI でのテストとデプロイが自動化されるため、Orb の開発プロセスが容易になります。 Orb 開発キットには、[`circleci orb init`](https://circleci-public.github.io/circleci-cli/circleci_orb_init.html) および [`circleci orb pack`](https://circleci-public.github.io/circleci-cli/circleci_orb_pack.html) という 2 つの CLI コマンドが含まれています。 Orb のパッケージ化の詳細については、[Orb のコンセプトに関するページ]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)を参照してください。
 
 ## 設定ファイルのパッケージ化
 {: #packing-a-config }
