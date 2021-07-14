@@ -28,7 +28,7 @@ place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-pro
 NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
 Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
 
-NOTE: Contexts are the more flexible option.  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。**
+NOTE: Contexts are the more flexible option.  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。
 
 この例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与します。
 
@@ -195,6 +195,6 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
-## 関連項目
+## See also
 
 * https://circleci.com/docs/2.0/configuration-reference[リファレンス]
