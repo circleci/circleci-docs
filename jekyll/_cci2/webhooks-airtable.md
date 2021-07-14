@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "CircleCI Webhooks with Airtable"
-short-title: "Example Webhooks use-case with webhooks"
-description: "Example Webhooks use-case with webhooks"
+title: "CircleCI webhooks with Airtable"
+short-title: "Example webhooks use-case with webhooks"
+description: "Example webhooks use-case with webhooks"
 version:
 - Cloud
 ---
@@ -24,7 +24,7 @@ demonstrate how one could capture and visualize the output of your pipelines.
 ### 1. Create a new "Base" on Airtable
 {: #create-a-new-base-on-airtable }
 
-Log into Airtable and create a new "Base"
+Log into Airtable and create a new "Base".
 
 ![Creating a new base in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_1_new.png)
 
@@ -49,7 +49,7 @@ Finally, add one last column, but this time use the "date" data type:
 
 ![Changing the column types]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_2_datatypes.png)
 
-### 3. Prepare the Webhook Automation
+### 3. Prepare the webhook Automation
 {: #prepare-the-webhook-automation }
 
 In the top-right of Airtable, select the "Automations" button to open the
@@ -60,7 +60,7 @@ right-side Automations panel, and select "Create a custom automation".
 
 The next screen will ask you to select a "trigger" to the automation. Select the
 option "When webhook received", and you will see the following screen which
-contains our Airtable Webhook URL.
+contains our Airtable webhook URL.
 
 Copy the webhook URL here to your clipboard.
 
@@ -69,7 +69,7 @@ Copy the webhook URL here to your clipboard.
 ### 4. Connect to CircleCI
 {: #connect-to-circleci }
 
-With our Webhook URL from Airtable in hand, we can now setup our Webhooks for
+With our webhook URL from Airtable in hand, we can now setup our webhooks for
 CircleCI. Begin by opening up the project settings for the repository you
 want to monitor on CircleCI, and select "Webhooks" from the side panel.
 
@@ -81,7 +81,7 @@ Webhook" again.
 
 ![]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_6.png)
 
-### 5. Trigger a test Webhook
+### 5. Trigger a test webhook
 {: #trigger-a-test-webhook }
 
 Now that our webhooks are configured, we want to trigger a CircleCI pipeline
@@ -92,15 +92,15 @@ for testing and click the "Run Pipeline" button:
 ![Trigger a test webhook]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_7_run_pipeline.png)
 
 Once the pipeline has completed the first test webhook should have been sent and
-we can validate this in Airtable. At the bottom of the Webhook trigger config
-screen, press the "test" button and await for the Webhook data to populate.
+we can validate this in Airtable. At the bottom of the webhook trigger config
+screen, press the "test" button and await for the webhook data to populate.
 
 ![Validate results in airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_8_test.png)
 
-When you have received the data successfully, you may click Done and move on to
+When you have received the data successfully, you may click "Done" and move on to
 creating an Action for the Trigger.
 
-### 6. Setup the Action for our Webhook Trigger
+### 6. Setup the Action for our webhook Trigger
 {: #setup-the-action-for-our-webhook-trigger }
 
 For the Action Type, select from the drop-down "Create record", and select your
@@ -126,20 +126,26 @@ calculations, and more.
 {: #tracking-deployments-with-airtable }
 
 While the above covers some basics with Airtable, let's take things a step
-further and look at how we might leverage the power of webhooks. Once you have
-collected a sufficient amount of data, we can start to create helpful views of
-our data. How about a calendar view of our deployments to help us visualize how
+further and look at how we might further leverage the collected data. Once you
+have a sufficient amount of data, we can start to create helpful views of our
+data. How about a calendar view of our deployments to help us visualize how
 often we are deploying!
 
-On the bottom left of the "views" side panel, click the "plus" icon on "Calendar"
+In Airtable, go to the bottom left of the "views" side panel and click the "plus" icon on "Calendar".
 
 ![Add calendar in Airtable]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_12_calendar.png)
 
-The next screen will ask you to confirm which "Date" column we want to base our calendar on, and since we only have one "Happened at", we’ll select that.
+The next screen will ask you to confirm which "Date" column we want to base our
+calendar on, and since we only have one "Happened at", we will select that.
 
-You’ll be presented with a calendar view of all of your jobs. Because we want to track just our deployments, let’s rename this view "Deployments" and set a filter at the top to only show jobs with the name of our deployment job on CircleCI, which in our case is "deploy".
+You will be presented with a calendar view of all of your jobs. Because we want to
+track just our deployments, let’s rename this view "Deployments" and set a
+filter at the top to only show jobs with the name of our deployment job on
+CircleCI, which in our case is "deploy".
 
 ![Airtable calendar filter]({{site.baseurl}}/assets/img/docs/webhooks/webhook_airtable_12_calendar2.png)
 
-And we’ve done it! We now have a grid view which contains a spreadsheet of all of our data, and a calendar-based view named "Deployments" which shows us only our deploy jobs.
+And that's it! We now have a grid view which contains a spreadsheet of all of
+our data, and a calendar-based view named "Deployments" which shows us only our
+deploy jobs.
 
