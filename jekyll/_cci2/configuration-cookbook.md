@@ -681,22 +681,6 @@ parameters:
 
 # our defined jobs
 jobs:
-  # the check-updated-files job uses the path-filtering orb to
-  # determine which pipeline parameters to update.
-  check-updated-files:
-    - path-filtering/filter:
-        # 3-column, whitespace-delimited mapping. One mapping per
-        # line:
-        # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
-        mapping: |
-          service1/.* run-build-service-1-job true
-          service2/.* run-build-service-2-job true
-        base-revision: master
-        # this is the path of the configuration we should trigger once
-        # path filtering and pipeline parameter value updates are
-        # complete. In this case, we are using the parent dynamic
-        # configuration itself.
-        config-path: .circleci/config.yml
   # the build-service-1 job uses the maven orb to build and install
   # service1 artifacts into the maven repository (it does not run
   # tests).
@@ -748,7 +732,21 @@ workflows:
   # pipeline parameters.
   always-run:
     jobs:
-      - check-updated-files
+      # the path-filtering/filter job determines which pipeline
+      # parameters to update.
+      - path-filtering/filter:
+          # 3-column, whitespace-delimited mapping. One mapping per
+          # line:
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+          mapping: |
+            service1/.* run-build-service-1-job true
+            service2/.* run-build-service-2-job true
+          base-revision: master
+          # this is the path of the configuration we should trigger once
+          # path filtering and pipeline parameter value updates are
+          # complete. In this case, we are using the parent dynamic
+          # configuration itself.
+          config-path: .circleci/config.yml
 ```
 
 In the above configuration, we:
