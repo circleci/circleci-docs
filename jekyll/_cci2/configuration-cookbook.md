@@ -679,29 +679,6 @@ parameters:
     type: boolean
     default: false
 
-# our defined jobs
-jobs:
-  # the build-service-1 job uses the maven orb to build and install
-  # service1 artifacts into the maven repository (it does not run
-  # tests).
-  build-service-1:
-    - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service1'
-  # the build-service-2 job uses the maven orb to build and install
-  # service2 artifacts into the maven repository (it does not run
-  # tests).
-  build-service-2:
-    - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service2'
-  # the run-integration-tests job will run any tests defined in the
-  # tests directory.
-  run-integration-tests:
-    - maven/test:
-        command: '-X verify'
-        app_src_directory: 'tests'
-
 # here we specify our workflows, most of which are conditionally
 # executed based upon pipeline parameter values. Each workflow calls a
 # specific job defined above, in the jobs section.
@@ -711,13 +688,21 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-service-1-job >>
     jobs:
-      - build-service-1
+    # Use the maven orb to build and install service1 artifacts into
+    # the maven repository (it does not run tests).
+    - maven/test:
+        command: 'install -DskipTests'
+        app_src_directory: 'service1'
   # when pipeline parameter, run-build-service-2-job is true, the
   # build-service-2 job is triggered.
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
-      - build-service-2
+    # Use the maven orb to build and install service2 artifacts into
+    # the maven repository (it does not run tests).
+    - maven/test:
+        command: 'install -DskipTests'
+        app_src_directory: 'service2'
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
@@ -727,7 +712,11 @@ workflows:
     when:
       or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
     jobs:
-      - run-integration-tests
+      # the run-integration-tests job will run any tests defined in the
+      # tests directory.
+      - maven/test:
+          command: '-X verify'
+          app_src_directory: 'tests'
   # the check-updated-files job is always triggered, regardless of
   # pipeline parameters.
   always-run:
