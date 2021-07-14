@@ -589,7 +589,7 @@ else you might do from inside a [`job`]({{ site.baseurl }}/2.0/configuration-ref
 version: 2.1
 
 # this allows you to use CircleCI's dynamic configuration feature
-setup: true 
+setup: true
 
 # the continuation orb is required in order to use dynamic configuration
 orbs:
@@ -604,7 +604,7 @@ jobs:
       - run: # run a command
           name: Generate config
           command: |
-            ./generate-config > generated_config.yml 
+            ./generate-config > generated_config.yml
       - continuation/continue:
           configuration_path: generated_config.yml # use newly generated config to continue
 
