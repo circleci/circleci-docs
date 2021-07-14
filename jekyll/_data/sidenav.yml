@@ -217,6 +217,8 @@ en:
           link: 2.0/jira-plugin/
         - name: Managing API tokens
           link: 2.0/managing-api-tokens/
+        - name: Webhooks
+          link: 2.0/webhooks/
         - name: Using Credits
           link: 2.0/credits/
 
