@@ -87,7 +87,7 @@ NOTE: The above is not handled by by our enterprise-setup script and will need t
 // https://github.com/circleci/enterprise-setup/blob/master/templates/services_user_data.tpl
 
 <<<
-=== コーポレートプロキシ
+=== Corporate Proxies
 
 WARNING: When our instructions ask if you use a proxy, you will also be prompted to input the address. It is **very important** that you input the proxy in the following format: `<protocol>://<ip>:<port>`. If you miss any part, then `apt-get` won't work correctly and the packages won't download.
 
