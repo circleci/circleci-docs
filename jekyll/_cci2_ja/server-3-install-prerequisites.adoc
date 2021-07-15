@@ -13,13 +13,14 @@ version:
 Server 3.xのhttps://circleci.com/docs/2.0/server-3-overview[概要]を事前に読まれることを前提としております。
 
 CircleCI Serverアプリケーションを設定するためには、以下の一般的な要件およびインフラ固有の要件が満たされていることを確認する必要があります。
- 以下が必要になります。 You will need:
+ 以下が必要になります。 以下が必要になります。
 
 * 既存のKubernetesクラスタの例: (クラスターの作成にヘルプが必要な場合xref:server-3-install-creating-your-first-cluster.adoc[こちら]を参照ください)
 ** Amazon EKS クラスターの作成 - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
 *** <a data-type="default" href="https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html">`eksctl`の使用を推奨しています。 このツールはVPCを作成し、適切なセキュリティグループを選択することができます。
 ** クラスタの作成 - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
-*** Do NOT use an Autopilot cluster. Autopilotクラスターは使用しないでください。
+*** Autopilotクラスターは使用しないでください。
+ Autopilotクラスターは使用しないでください。
 CircleCIはGKE Autopilotではサポートされていない機能を必要とします。
 +
 * CircleCI Serverアプリケーションを構成するためには、以下の一般的な要件とインフラストラクチャ固有の要件が満たされていることを確認してください: +
@@ -49,7 +50,8 @@ CircleCIはGKE Autopilotではサポートされていない機能を必要と�
 --
 
 * クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを広く許可することが出来ない場合は、https://help.replicated.com/community/t/customer-firewalls/55[list of ports] をご参照ください。
-* You must have appropriate permissions to list, create, edit and delete pods in your cluster. You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
+* クラスター内のpodsを一覧、作成、編集、削除するには、適切なパーミッションが必要です。
+ You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
 * CircleCIのライセンスファイル. ライセンスについては https://support.circleci.com/hc/en-us/requests/new[CircleCI support] にお問い合わせください。
 * The <<Required ツールs>> tools installed
 ** なお、`kubectl`ツールもクラスタにアクセスできるように設定されている必要があります。
@@ -64,7 +66,7 @@ CircleCIはGKE Autopilotではサポートされていない機能を必要と�
 
 NOTE: VPCの設定や、クラスターのディスクサイズに関する要件はありません。 ただし、既存のVPCではなく、新しいVPCを設定することをお勧めします。
 
-## Required Tools
+## Required ツールs
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
