@@ -108,7 +108,6 @@ None
 
 **Note:** _jobs can use any of the address ranges above.  It’s also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature._
 {: class="alert alert-warning"}
-{: class="alert alert-warning"}
 
 Machine-consumable lists can be found below:
 
