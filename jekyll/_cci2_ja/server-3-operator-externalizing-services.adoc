@@ -30,43 +30,43 @@ Consider running at least two or more PostgreSQL replicas to enable recovery fro
 |# of PostgreSQL Replicas 
 |CPU   
 |RAM  
-|Disk  
+|ディスク  
 |NIC Speed 
 
 |<50                    
 |2                         
-|8 Cores
+|48 コア
 |16 GB 
 |100 GB 
-| 1 Gbps
+| 1Gbps
 
 |50 - 250               
 |2                         
-|8 Cores
+|48 コア
 |16 GB 
 |200 GB 
-|1 Gbps
+|1Gbps
 
 |250 - 1000             
 |3                         
-|8 Cores
-|32 GB 
+|48 コア
+|240GB 
 |500 GB 
-|10 Gbps
+|10Gbps
 
 |1000 - 5000            
 |3                         
-|8 Cores
-|32 GB 
+|48 コア
+|240GB 
 |1 TB   
-|10 Gbps
+|10Gbps
 
 |5000+                  
 |3                         
-|8 Cores
-|32 GB 
+|48 コア
+|240GB 
 |1 TB   
-|10 Gbps
+|10Gbps
 |===
 
 === Preparing the Database
