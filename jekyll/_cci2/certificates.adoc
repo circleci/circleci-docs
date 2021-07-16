@@ -193,8 +193,6 @@ Once you have a valid certificate and key file in `.pem` format, you must upload
 
 . Click "Save" at the bottom of the settings page and restart when prompted
 
-More information is available https://letsencrypt.readthedocs.io/en/latest/using.html#manual[here].
-
 Ensure the hostname is properly configured from the Management Console (`<circleci-hostname>.com:8800`) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
 Make sure the Auth Callback URL in GitHub/GHE matches the domain name pointing to the Services machine, including the protocol used, for example `**https**://info-tech.io/`.
