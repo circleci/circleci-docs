@@ -116,6 +116,62 @@ A machine-consumable list of the IP address ranges *for core services* can be fo
 
 A machine-consumable list of both *jobs and core services IP address ranges* can be found on a separate [DNS A record](https://all.knownips.circleci.com).
 
+To use the machine-consumable lists, use a command like ```dig```:
+
+```$ dig all.knownips.circleci.com
+
+; <<>> DiG 9.16.1-Ubuntu <<>> all.knownips.circleci.com
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 44769
+;; flags: qr rd ad; QUERY: 1, ANSWER: 35, AUTHORITY: 0, ADDITIONAL: 0
+;; WARNING: recursion requested but not available
+
+;; QUESTION SECTION:
+;all.knownips.circleci.com.     IN      A
+
+;; ANSWER SECTION:
+all.knownips.circleci.com. 0    IN      A       107.22.40.20
+all.knownips.circleci.com. 0    IN      A       54.226.126.177
+all.knownips.circleci.com. 0    IN      A       3.228.208.40
+all.knownips.circleci.com. 0    IN      A       52.72.73.201
+all.knownips.circleci.com. 0    IN      A       54.167.72.230
+all.knownips.circleci.com. 0    IN      A       54.236.156.101
+all.knownips.circleci.com. 0    IN      A       18.215.226.36
+all.knownips.circleci.com. 0    IN      A       52.4.195.249
+all.knownips.circleci.com. 0    IN      A       54.144.204.41
+all.knownips.circleci.com. 0    IN      A       3.91.130.126
+all.knownips.circleci.com. 0    IN      A       54.81.162.133
+all.knownips.circleci.com. 0    IN      A       52.5.58.121
+all.knownips.circleci.com. 0    IN      A       3.210.128.175
+all.knownips.circleci.com. 0    IN      A       18.214.156.84
+all.knownips.circleci.com. 0    IN      A       54.92.235.88
+all.knownips.circleci.com. 0    IN      A       54.162.196.253
+all.knownips.circleci.com. 0    IN      A       52.20.166.242
+all.knownips.circleci.com. 0    IN      A       52.22.187.0
+all.knownips.circleci.com. 0    IN      A       3.228.39.90
+all.knownips.circleci.com. 0    IN      A       35.169.17.173
+all.knownips.circleci.com. 0    IN      A       18.214.70.5
+all.knownips.circleci.com. 0    IN      A       54.83.41.200
+all.knownips.circleci.com. 0    IN      A       35.174.249.131
+all.knownips.circleci.com. 0    IN      A       52.21.153.129
+all.knownips.circleci.com. 0    IN      A       54.164.161.41
+all.knownips.circleci.com. 0    IN      A       54.209.115.53
+all.knownips.circleci.com. 0    IN      A       35.174.253.146
+all.knownips.circleci.com. 0    IN      A       54.211.118.70
+all.knownips.circleci.com. 0    IN      A       34.194.94.201
+all.knownips.circleci.com. 0    IN      A       52.72.72.233
+all.knownips.circleci.com. 0    IN      A       52.3.128.216
+all.knownips.circleci.com. 0    IN      A       52.20.179.68
+all.knownips.circleci.com. 0    IN      A       54.161.182.76
+all.knownips.circleci.com. 0    IN      A       34.194.144.202
+all.knownips.circleci.com. 0    IN      A       54.205.138.102
+
+;; Query time: 120 msec
+;; SERVER: 172.25.160.1#53(172.25.160.1)
+;; WHEN: Fri Jul 16 11:51:42 JST 2021
+;; MSG SIZE  rcvd: 628```
+
 During the preview phase, this list may change. You should check regularly for updates, at least once a week.  
  
 Notifications of a change to this list will be sent out via email to all customers who have at least one job opted into the IP Ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
