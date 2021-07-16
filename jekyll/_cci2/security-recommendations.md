@@ -14,13 +14,13 @@ This document outlines recommended best practices to ensure the security of your
 ## Checklist for using CircleCI securely as a customer
 {: #checklist-for-using-circleci-securely-as-a-customer }
 
-If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as _users_ of CircleCI:
+If you are getting started with CircleCI, there are some security best practices you can ask your team to consider as _users_ of CircleCI:
 
 - Minimise the number of secrets (private keys / environment variables) your
   build needs and rotate secrets regularly.
   - It is important to rotate secrets regularly in your organization, especially as team members come and go.
   - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
-  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Consider carefully adjudicating the role and permission systems of other platforms you use outside of CircleCI; for example, when using something such as IAM permissions on AWS, or Github's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature.
+  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Understand the role and permission systems of other platforms you use outside of CircleCI; for example, IAM permissions on AWS, or GitHub's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature.
 - Sometimes user misuse of certain tools might accidentally print secrets to stdout which will land in your logs. Please be aware of:
   - running `env` or `printenv` which will print all your environment variables to stdout.
   - literally printing secrets in your codebase or in your shell with `echo`.
