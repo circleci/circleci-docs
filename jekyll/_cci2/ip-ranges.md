@@ -1,7 +1,7 @@
 ---
 layout: classic-docs
-title: "IP Ranges"
-short-title: "IP Ranges"
+title: "IP ranges"
+short-title: "IP ranges"
 description: "Enable CircleCI jobs to go through a set of well-defined IP address ranges"
 categories: []
 order: 70
@@ -19,14 +19,14 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges
 ## Overview
 {: #overview }
 
-	IP Ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments.  As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges.
+	IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments.  As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges.
 
 The feature is currently available in preview to customers on any [paid pricing plan](https://circleci.com/pricing/).
 
-## IP Ranges: use cases
+## IP ranges: use cases
 {: #usecases }
 
-	IP Ranges empowers customers to limit inbound connections to their infrastructure to IP address ranges that are verifiably associated with CircleCI.  
+	IP ranges empowers customers to limit inbound connections to their infrastructure to IP address ranges that are verifiably associated with CircleCI.  
 
 Some example customer use cases where IP-based restricted access might be desired include:
 - Accessing private artifact repositories 
@@ -36,16 +36,16 @@ Some example customer use cases where IP-based restricted access might be desire
 - Deploying an internal app with sensitive data
 - Granting access to a production network 
 
-Previous to offering IP Ranges, the only solution CircleCI offered customers in need of static IP addresses which could be configured and controlled was [CircleCI’s Runner](https://circleci.com/docs/2.0/runner-overview/). IP Ranges now enables customers to meet their IP-based security and compliance requirements using their existing workflows and platform. 
+Previous to offering IP ranges, the only solution CircleCI offered customers in need of static IP addresses which could be configured and controlled was [CircleCI’s Runner](https://circleci.com/docs/2.0/runner-overview/). IP ranges now enables customers to meet their IP-based security and compliance requirements using their existing workflows and platform. 
 
-## Example configuration file that uses IP Ranges
+## Example configuration file that uses IP ranges
 {: #exampleconfiguration }
 
 ```
 version: 2.1
 jobs:
   build:
-    circleci_ip_ranges: true # opts the job into the IP Ranges feature
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
     steps:
@@ -56,12 +56,12 @@ workflows:
       - build
 ```
 
-## List of IP address ranges associated with the IP Ranges feature
+## List of IP address ranges associated with the IP ranges feature
 {: #listofipaddressranges }
 
 *Last updated*: 07/21/2021
 
-Jobs that have opted into the IP Ranges feature will have one of the following IP address ranges associated with them:
+Jobs that have opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
 - 107.22.40.20
 - 18.215.226.36
@@ -103,43 +103,44 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 - 3.210.128.175
 
 **Upcoming Changes to List of IP Address Ranges:
-
 *Last Updated*: 07/21/2021
-
 None
 
 Note that jobs can use any of the address ranges above.  It’s also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature. **can we make this a note like we do in the runner overview pag?**
+{: class="alert alert-warning"}
 
-A machine-consumable list of the IP address ranges *for jobs* can be found on a [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
+Machine-consumable lists can be found below:
 
-A machine-consumable list of the IP address ranges *for core services* can be found on a separate [DNS A record](https://dnsjson.com/core.knownips.circleci.com/A.json).
+- IP address ranges *for jobs*: [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
 
-A machine-consumable list of both *jobs and core services IP address ranges* can be found on a separate [DNS A record](https://dnsjson.com/all.knownips.circleci.com/A.json).
+- IP address ranges *for core services*: [DNS A record](https://dnsjson.com/core.knownips.circleci.com/A.json).
+
+- *All IP address ranges*:  [DNS A record](https://dnsjson.com/all.knownips.circleci.com/A.json).
 
 During the preview phase, this list may change. You should check regularly for updates, at least once a week.  
  
-Notifications of a change to this list will be sent out via email to all customers who have at least one job opted into the IP Ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
+Notifications of a change to this list will be sent out via email to all customers who have at least one job opted into the IP ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
 
 ## Pricing
 {: pricing }
 
-Pricing will be calculated based on network data usage of jobs opted into the IP Ranges feature; however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP Ranges feature within the same workflow or pipeline.
+Pricing will be calculated based on network data usage of jobs opted into the IP ranges feature; however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.
 
 Specific rates and details are being finalized and will be published when the feature is generally available. 
 
 ## AWS and GCP IP Addresses
 {: awsandgcpipaddresses }
 
-The machines that execute *all jobs* on CircleCI’s platform, not just jobs opted into IP Ranges, are hosted on Amazon Web Services (AWS) and Google Cloud Platform (GCP).  An exhaustive list of IP addresses that CircleCI’s traffic may come from on these cloud providers’ platforms can be found by looking up each cloud providers’ IP address ranges. Each cloud provider offers endpoints to find this information.
+The machines that execute *all jobs* on CircleCI’s platform, not just jobs opted into IP ranges, are hosted on Amazon Web Services (AWS) and Google Cloud Platform (GCP).  An exhaustive list of IP addresses that CircleCI’s traffic may come from on these cloud providers’ platforms can be found by looking up each cloud providers’ IP address ranges. Each cloud provider offers endpoints to find this information.
  
 - [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI uses the *us-east-1* and *us-east-2* regions
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
  
 CircleCI *does not recommend* configuring an IP-based firewall based on the above IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the endpoints above persist from day-to-day, as these addresses are reassigned continuously.  
  
-**IP Ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
+**IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
 
 ## Known limitations
 {: known limiations}
 
-IP Ranges is only available in the Docker executor.  It is not available for the ```remote_docker`` VMs.
+IP ranges is only available in the Docker executor.  It is not available for the ```remote_docker`` VMs.
