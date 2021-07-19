@@ -728,7 +728,7 @@ Click the *Save config* button to update your installation and re-deploy server.
 ## Step 7 - Validate Installation
 
 . Launch your CircleCI installation in your browser, for example https://hostname.com.
-  * . If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
+  * If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
 . Sign up/Log in into your CircleCI installation. As the first user to log in, you will become the administrator at this point.
 . Take a look at our https://circleci.com/docs/2.0/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
 . Use the https://github.com/circleci/realitycheck[CircleCI realitycheck] repository and follow the
