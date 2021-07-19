@@ -119,7 +119,7 @@ Machine-consumable lists can be found below:
 
 During the preview phase, this list may change. You should check regularly for updates, at least once a week.  
  
-Notifications of a change to this list will be sent out via email to all customers who have at least one job opted into the IP ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
+Notifications of a change to this list will be sent out by email to all customers who have at least one job opted into the IP ranges feature. When the feature is generally available, **30 days notice** will be given before changes are made to the existing set of IP address ranges. This page and the machine-consumable list will also be updated when there are upcoming changes.
 
 ## Pricing
 {: pricing }
