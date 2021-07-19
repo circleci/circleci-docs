@@ -124,7 +124,7 @@ Notifications of a change to this list will be sent out by email to all customer
 ## Pricing
 {: pricing }
 
-Pricing will be calculated based on network data usage of jobs opted into the IP ranges feature; however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.
+Pricing will be calculated based on network data usage of jobs opted into the IP ranges feature, however, only the traffic of the opted-in jobs will be counted. It is possible to mix jobs with and without the IP ranges feature within the same workflow or pipeline.
 
 Specific rates and details are being finalized and will be published when the feature is generally available. 
 
