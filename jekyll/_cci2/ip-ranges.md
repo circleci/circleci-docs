@@ -28,7 +28,7 @@ The feature is currently available in preview to customers on any [paid pricing 
 
 IP ranges lets you limit inbound connections to your infrastructure to only IP address ranges that are verifiably associated with CircleCI.  
 
-Some example customer use cases where IP-based restricted access might be desired include:
+Some example use cases where IP-based restricted access might be desired include:
 - Accessing private artifact repositories 
 - Pulling dependencies from a CocoaPods proxy hosted behind a firewall
 - Running test cases on an internal environment 
