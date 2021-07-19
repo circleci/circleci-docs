@@ -10,7 +10,7 @@ version:
 ---
 
 
-Enable CircleCI jobs to go through a set of well-defined IP address ranges
+Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 
 
 * TOC
