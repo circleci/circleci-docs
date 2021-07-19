@@ -143,4 +143,4 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the abov
 ## Known limitations
 {: known limiations}
 
-IP ranges is only available in the Docker executor.  It is not available for the ```remote_docker`` VMs.
+IP ranges is only available in the Docker executor.  It is not available for the `remote_docker` VMs.
