@@ -22,7 +22,7 @@ This document describes how to get started with continuous integration on **Wind
 To follow along with this document you will need:
 
 * An [account](https://circleci.com/signup/) on CircleCI.
-* Either the Free, Performance, or Scale [plan](https://circleci.com/pricing/usage/). If you are running CircleCI Server there are alternative code examples below.
+* Either the Free, Performance, or Scale [plan](https://circleci.com/pricing/usage/). If you are running CircleCI server there are alternative code examples below.
 * For the Cloud version, pipelines must be [enabled]({{site.baseurl}}/2.0/build-processing/) for your project to use Windows.
 
 # Overview of the Windows executor
