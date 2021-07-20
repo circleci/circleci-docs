@@ -1406,7 +1406,7 @@ workflows:
 **Notes**:
 
 - A paid account on a [Performance, Custom, or Scale](https://circleci.com/pricing/) is required to access IP Ranges.
-- IP ranges is currently in open preview for paid accounts, specific rates and details are being finalized and will be published when the feature is generally available.
+- IP ranges is currently in open preview for paid accounts. Specific rates and details are being finalized and will be published when the feature is generally available.
 
 ## **`workflows`**
 {: #workflows }
