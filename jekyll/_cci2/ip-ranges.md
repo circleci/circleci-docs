@@ -41,7 +41,7 @@ Previous to offering IP ranges, the only solution CircleCI offered to configure 
 ## Example configuration file that uses IP ranges
 {: #exampleconfiguration }
 
-```
+```yaml
 version: 2.1
 jobs:
   build:
