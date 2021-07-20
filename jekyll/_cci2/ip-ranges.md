@@ -36,7 +36,7 @@ Some example use cases where IP-based restricted access might be desired include
 - Deploying an internal app with sensitive data
 - Granting access to a production network 
 
-Previous to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner](https://circleci.com/docs/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using their existing workflows and platform. 
+Previous to offering IP ranges, the only solution CircleCI offered to configure and control static IP addresses was [CircleCI’s Runner](https://circleci.com/docs/2.0/runner-overview/). IP ranges now enables you to meet your IP-based security and compliance requirements using your existing workflows and platform. 
 
 ## Example configuration file that uses IP ranges
 {: #exampleconfiguration }
