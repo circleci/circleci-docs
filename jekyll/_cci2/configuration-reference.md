@@ -1392,7 +1392,7 @@ version: 2.1
 
 jobs:
   build:
-    circleci_ip_ranges: true # opts the job into the IP Ranges feature
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
     docker:
       - image: curlimages/curl
     steps:
