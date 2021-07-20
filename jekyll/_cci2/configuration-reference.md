@@ -985,35 +985,6 @@ This command will automatically add the required authenticity keys for interacti
 
 **Note:** The `checkout` step will configure Git to skip automatic garbage collection. If you are caching your `.git` directory with [restore_cache](#restore_cache) and would like to use garbage collection to reduce its size, you may wish to use a [run](#run) step with command `git gc` before doing so.
 
-##### **`circleci_ip_ranges`**
-{: #circleciipranges }
-
-Enables jobs to go through a set of well-defined IP address ranges.  See [IP Ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
-
-###### _Example_
-{: #example }
-
-```
-version: 2.1
-
-jobs:
-  build:
-    circleci_ip_ranges: true # opts the job into the IP Ranges feature
-    docker:
-      - image: curlimages/curl
-    steps:
-      - run: echo “Hello World”
-workflows:
-  build-workflow:
-    jobs:
-      - build
-```
-
-**Notes**:
-
-- A paid account on a [Performance, Custom, or Scale](https://circleci.com/pricing/) is required to access IP Ranges.
-- IP Ranges is currently in open preview for paid accounts, specific rates and details are being finalized and will be published when the feature is generally available.
-
 ##### **`setup_remote_docker`**
 {: #setupremotedocker }
 
@@ -1407,6 +1378,35 @@ jobs:
     steps:
       - run: echo "This is pipeline ID << pipeline.id >>"
 ```
+
+#### **`circleci_ip_ranges`**
+{: #circleciipranges }
+
+Enables jobs to go through a set of well-defined IP address ranges.  See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
+
+###### _Example_
+{: #example }
+
+```
+version: 2.1
+
+jobs:
+  build:
+    circleci_ip_ranges: true # opts the job into the IP Ranges feature
+    docker:
+      - image: curlimages/curl
+    steps:
+      - run: echo “Hello World”
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+**Notes**:
+
+- A paid account on a [Performance, Custom, or Scale](https://circleci.com/pricing/) is required to access IP Ranges.
+- IP ranges is currently in open preview for paid accounts, specific rates and details are being finalized and will be published when the feature is generally available.
 
 ## **`workflows`**
 {: #workflows }
