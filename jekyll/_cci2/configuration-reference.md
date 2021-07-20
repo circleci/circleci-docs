@@ -1387,7 +1387,7 @@ Enables jobs to go through a set of well-defined IP address ranges.  See [IP ran
 ###### _Example_
 {: #example }
 
-```
+```yaml
 version: 2.1
 
 jobs:
