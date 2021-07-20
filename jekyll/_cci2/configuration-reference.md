@@ -1382,7 +1382,7 @@ jobs:
 #### **`circleci_ip_ranges`**
 {: #circleciipranges }
 
-Enables jobs to go through a set of well-defined IP address ranges.  See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
+Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
 
 ###### _Example_
 {: #example }
