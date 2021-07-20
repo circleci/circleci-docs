@@ -102,7 +102,7 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 - 54.236.156.101
 - 3.210.128.175
 
-**Upcoming Changes to List of IP Address Ranges:
+**Upcoming Changes to List of IP Address Ranges:**
 *Last Updated*: 07/21/2021
 None
 
