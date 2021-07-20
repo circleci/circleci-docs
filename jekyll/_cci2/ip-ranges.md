@@ -61,7 +61,7 @@ workflows:
 
 *Last updated*: 07/21/2021
 
-Jobs that have opted into the IP ranges feature will have one of the following IP address ranges associated with them:
+Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
 - 107.22.40.20
 - 18.215.226.36
