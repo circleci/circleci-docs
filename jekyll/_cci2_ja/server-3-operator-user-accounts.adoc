@@ -63,25 +63,3 @@ GitHub.com を使用している場合は、承認済みの組織リストで指
 . [Admin Settings (管理者設定)] メニューから [System Settings (システム設定)] を選択します。
 . [Required Org Membership List (必要な組織メンバーシップのリスト)] が表示されるまで下へスクロールします。
 . 承認する組織を入力します。 複数の組織を入力する場合は、カンマで区切って入力します。
-
-## CircleCI のローカル CLI の使用
-
-This section covers how to use the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI] to list or delete users.
-
-### List Users
-CircleCI Server の全ユーザー一覧を表示するには、Services マシンに SSH 接続してから、以下のコマンドを実行します。
-
-[source,bash]
-----
-circleci dev-console
-(circle.model.user/where { :$and [{:sign_in_count {:$gte 0}}, {:login {:$ne nil}}]} :only [:login])
-----
-
-### Delete User
-CircleCI Server からユーザーを削除するには、Services マシンに SSH 接続してから、以下のコマンドを実行して削除します。 コマンドには、対象ユーザーの GitHub ユーザー名を代入します。
-
-[source,bash]
-----
-circleci dev-console
-(circle.http.api.admin-commands.user/delete-by-login-vcs-type! "github-username-of-user" :github)
-----
