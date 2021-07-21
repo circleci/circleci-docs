@@ -16,7 +16,7 @@ This document outlines recommended best practices to ensure the security of your
 
 If you are getting started with CircleCI, there are some security best practices you can ask your team to consider as _users_ of CircleCI:
 
-- Minimise the number of secrets (private keys / environment variables) your
+- Minimize the number of secrets (private keys / environment variables) your
   build needs and rotate secrets regularly.
   - It is important to rotate secrets regularly in your organization, especially as team members come and go.
   - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
