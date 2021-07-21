@@ -4,42 +4,45 @@ title: "Title"
 description: "Description"
 ---
 
+A short description of the feature or topic.
+
 ## Overview
+
 {: #overview}
 
+## Use Cases
+
+{: #Use Cases}
+
+Short description of who this feature or article is for, to help readers scan and know whether the following content is relevant to them. Use bullet list to show various intended user groups:
+
+- Use case one.
+- Use case two.
+
 ## Section one
-{: #section }
+
+{: #section one }
 
 As both a downstream user or publisher of software, you can protect yourself and
 your users using a few tricks.
 
-Heading 1 | Heading 2
----|---
-row text | row text
-row text | row text
+| Heading 1 | Heading 2 |
+| --------- | --------- |
+| row text  | row text  |
+| row text  | row text  |
+
 {: class="table table-striped"}
 
-### Using contexts
-{: #using-contexts }
+### Sub section
 
-When using CircleCI, you can split credentials and secrets into multiple
-[contexts]({{site.baseurl}}/2.0/contexts) that can be used individually or
-combined in a build step. Avoid putting everything into the org-global context.
-This means that if there is a security error in one build step, only a small
-subset of your credentials are exposed. This effort is known as the [principle
-of least](https://en.wikipedia.org/wiki/Principle_of_least_privilege). As an
-example, the step where you download dependencies and execute their build
-scripts should not have access to your deploy keys simply because nothing in
-that step needs them.
+{: #sub-section }
 
-Additionally, you can put sensitive contexts used for deploying and signing
-software into [restricted contexts]({{site.baseurl}}/2.0/contexts/#restricting-a-context)
-that are governed by your GitHub groups. These secrets are only then accessible
-to authorized users. Combining this with GitHub branch protection requiring
-review before merging can help reduce the likelihood of exposing credentials to
-malicious code.
+Links to other docs pages should be in the following form:
+[contexts]({{site.baseurl}}/2.0/contexts). And to insert an image place the image in `jekyll/assets/img/docs` and then use the following syntax: 
+![Env Vars Interpolation Example]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
 
 ### Minimizing risk as a developer
+
 {: #minimizing-risk-as-a-developer }
 
 If you are a developer using software, a significant portion of your
@@ -47,6 +50,7 @@ dependencies and even tool chain are likely automatically published via
 continuous delivery.
 
 ## Pinning Dependencies
+
 {: #pinning-dependencies }
 
 Most tools such as yarn, cargo, and pip support the ability to create and use
@@ -93,6 +97,7 @@ narrow range of attacks where the upstream repository is compromised. This can
 protect your workstation and CI builds.
 
 ## Conclusion
+
 {: #conclusion }
 
 CI/CD build systems can be trusted with deploy keys and other secrets, but using
