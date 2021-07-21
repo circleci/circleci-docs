@@ -21,7 +21,7 @@ If you are getting started with CircleCI, there are some security best practices
   - It is important to rotate secrets regularly in your organization, especially as team members come and go.
   - Rotating secrets regularly means your secrets are only active for a certain amount of time, helping to reduce possible risks if keys are compromised.
   - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. Understand the role and permission systems of other platforms you use outside of CircleCI; for example, IAM permissions on AWS, or GitHub's [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) feature.
-- Sometimes user misuse of certain tools might accidentally print secrets to stdout which will land in your logs. Please be aware of:
+- Sometimes user misuse of certain tools might accidentally print secrets to `stdout` which will land in your logs. Please be aware of:
   - running `env` or `printenv` which will print all your environment variables to stdout.
   - literally printing secrets in your codebase or in your shell with `echo`.
   - programs or debugging tools that print secrets on error.
