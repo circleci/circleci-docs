@@ -219,7 +219,15 @@ en:
           link: 2.0/managing-api-tokens/
         - name: Using Credits
           link: 2.0/credits/
-
+    - name: security
+      link: 2.0/security/
+      children:
+        - name: Security Features
+          link: 2.0/security/
+        - name: Security Recommendations
+          link: 2.0/security-recommendations/
+        - name: Protecting Against Supply Chain Attacks
+          link: 2.0/security-supply-chain/
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:
