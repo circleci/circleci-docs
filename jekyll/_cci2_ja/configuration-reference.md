@@ -13,7 +13,7 @@ version:
 
 `config.yml` の全体は「[サンプル コード](#サンプル-コード)」で確認できます。
 
-**注:** `run` ステップでは `run: my command` のようなショートカットを使用できますが、`deploy` ステップで同様に `deploy: my command` のようにショートカットを使用すると、CircleCI から以下のエラー メッセージが出力されます。
+**メモ:** 既に CircleCI 1.0 バージョンの設定ファイルが存在する場合は、`config.yml` ファイルを使用することで、独立した別のブランチで 2.x ビルドをテストできます。このとき、古い `circle.yml` スタイルの既存の構成は変更する必要がなく、CircleCI 1.0 インフラストラクチャの `.circleci/config.yml` を含まないブランチで実行できます。
 
 ---
 
@@ -62,7 +62,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-上の例で、`hello` は Orb の参照名と見なされます。 You can learn more about orbs [here](https://circleci.com/orbs/)
+上の例で、`hello` は Orb の参照名と見なされます。 Orbs の詳細については[こちら](https://circleci.com/ja/orbs/)を参照してください。
 
 ## **`commands`** (version: 2.1 が必須)
 {: #commands-requires-version-21 }
@@ -188,7 +188,7 @@ jobs:
 
 #### `parameters`
 {: #parameters }
-例
+`parameters` は、[この`ジョブ`を`ワークフロー`で呼び出す](#jobs-in-workflow)ときに使用できます。
 
 予約されているパラメーター名は以下のとおりです。
 
@@ -215,19 +215,19 @@ Executor とは、簡単に言うと "ステップの実行環境" です。 Cir
 
 `docker` キーは、以下のマップのリストで構成します。
 
-| キー          | 必須 | 型         | 説明                                                              |
-| ----------- | -- | --------- | --------------------------------------------------------------- |
-| image       | ○  | 文字列       | 使用するカスタム Docker イメージの名前。                                        |
-| name        | ○  | 文字列       | 他から参照するためのコンテナの名前。  デフォルトでは、`localhost` を通してコンテナ サービスにアクセスできます。 |
-| entrypoint  | ○  | 文字列またはリスト | コンテナのローンチ時に実行するコマンド。                                            |
-| command     | ○  | 文字列またはリスト | コンテナのローンチ時にルート プロセスとなる PID 1 として使用するコマンド (または entrypoint の引数)。  |
-| user        | ○  | 文字列       | Docker コンテナ内でコマンドを実行するユーザー。                                     |
-| environment | ×  | マップ       | 環境変数の名前と値のマップ。                                                  |
-| auth        | ×  | マップ       | 標準の `docker login` 認証情報を用いたレジストリの認証情報。                          |
-| aws_auth    | ×  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                     |
+| キー           | 必須 | 型         | 説明                                                              |
+| ------------ | -- | --------- | --------------------------------------------------------------- |
+| image        | ○  | 文字列       | 使用するカスタム Docker イメージの名前。                                        |
+| name         | ○  | 文字列       | 他から参照するためのコンテナの名前。  デフォルトでは、`localhost` を通してコンテナ サービスにアクセスできます。 |
+| entrypoint   | ○  | 文字列またはリスト | コンテナのローンチ時に実行するコマンド。                                            |
+| command      | ○  | 文字列またはリスト | コンテナのローンチ時にルート プロセスとなる PID 1 として使用するコマンド (または entrypoint の引数)。  |
+| user         | ○  | 文字列       | Docker コンテナ内でコマンドを実行するユーザー。                                     |
+| environment: | ×  | マップ       | 環境変数の名前と値のマップ。                                                  |
+| auth         | ×  | マップ       | 標準の `docker login` 認証情報を用いたレジストリの認証情報。                          |
+| aws_auth     | ×  | マップ       | AWS Elastic Container Registry (ECR) の認証情報。                     |
 {: class="table table-striped"}
 
-The first `image` listed in the file defines the primary container image where all steps will run.
+ファイル内で最初に記述する `image` が、すべてのステップを実行するプライマリ コンテナ イメージとなります。
 
 `entrypoint` は、イメージの `ENTRYPOINT` をオーバーライドします。
 
@@ -237,7 +237,7 @@ The first `image` listed in the file defines the primary container image where a
 
 `name` では、セカンダリ サービス コンテナにアクセスするための名前を定義します。  デフォルトでは、すべてのサービスが `localhost` で直接アクセスできる状態になっています。  たとえば、同じサービスのバージョン違いを複数立ち上げるときなど、ローカル ホスト以外のホスト名を使用したい場合に、このフィールドは適しています。
 
-`attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチする。
+`entrypoint` は、イメージの `ENTRYPOINT` をオーバーライドします。
 
 タグまたはダイジェストを使用して、イメージのバージョンを指定できます。 任意の公式 Docker レジストリ (デフォルトは Docker Hub) にある任意のパブリック イメージを使用できます。 詳細については、[イメージの指定に関するドキュメント]({{ site.baseurl }}/2.0/executor-types)を参照してください。
 
@@ -394,7 +394,7 @@ CircleCI は [macOS](https://developer.apple.com/jp/macos/) 上でのジョブ�
 
 | キー    | 必須 | 型   | 説明                                                                                                                                                |
 | ----- | -- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| xcode | Y  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。 iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
+| xcode | ○  | 文字列 | 仮想マシンにインストールする Xcode のバージョン。 iOS でのテストに関するドキュメントの「[サポートされている Xcode のバージョン]({{ site.baseurl }}/2.0/testing-ios/#サポートされている-xcode-のバージョン)」を参照してください。 |
 {: class="table table-striped"}
 
 **例:** macOS 仮想マシンを Xcode バージョン 11.3 で使用する場合
@@ -453,7 +453,7 @@ jobs:
         - /rc-.*/
 ```
 
-In this case, only "master" branch and branches matching regex "rc-.*" will be executed.
+この場合は、"master" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
 
 ``` YAML
 jobs:
@@ -464,13 +464,13 @@ jobs:
         - /feature-.*/
 ```
 
-In this example, all the branches will be executed except "develop" and branches matching regex "feature-.*".
-
-この場合は、"master" ブランチと、正規表現 "rc-.*" に一致するブランチのみが実行されます。
-
 こちらの例では、"develop" ブランチと正規表現 "feature-.*" に一致するブランチを除くすべてのブランチが実行されます。
 
 設定ファイルに `ignore` と `only` の両方を記述している場合は、`ignore` のみが考慮されます。
+
+構成されたルールによって実行されなかったジョブは、UI のジョブ一覧にスキップのマーク付きで表示されます。
+
+**すべての**ブランチで確実にジョブを実行するには、`branches` キーを使用しないか、`only` キーに正規表現 `/.*/` を指定してすべてのブランチを対象にします。
 
 #### **`resource_class`**
 {: #resourceclass }
@@ -491,7 +491,7 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 | small                  | 1    | 2GB  |
 | medium (デフォルト)         | 2    | 4GB  |
 | medium+                | 3    | 6GB  |
-| large                  | 4    | 8 GB |
+| large                  | 4    | 8GB  |
 | xlarge                 | 8    | 16GB |
 | 2xlarge<sup>(2)</sup>  | 16   | 32GB |
 | 2xlarge+<sup>(2)</sup> | 20   | 40GB |
@@ -557,7 +557,7 @@ jobs:
 
 | クラス                 | vCPU | RAM  |
 | ------------------- | ---- | ---- |
-| medium (デフォルト)      | 4    | 8 GB |
+| medium (デフォルト)      | 4    | 8GB  |
 | large<sup>(3)</sup> | 8    | 16GB |
 {: class="table table-striped"}
 
@@ -682,7 +682,7 @@ jobs:
 
 ここでは、`run` がステップの種類です。 `name` 属性は、UI に表示するために使用します。 `command` 属性は `run` ステップに固有の属性で、実行するコマンドを定義します。
 
-Some steps may implement a shorthand semantic. For example, `run` may be also be called like this:
+一部のステップは省略構文を実装しており、 たとえば `run` を以下のように呼び出すことが可能です。
 
 ```
 jobs:
@@ -693,7 +693,7 @@ jobs:
 
 省略形式の `run` ステップでは、どの `command` を実行するかを文字列値で直接指定できます。 この場合、他の属性に対しては、自動的に適切なデフォルト値が設定されます (たとえば、`name` は `command` と同じ値になります)。
 
-一部のステップは省略構文を実装しており、 たとえば `run` を以下のように呼び出すことが可能です。
+さらに一部のステップには別の省略表記があり、キーと値のペアの代わりに単なる文字列のステップ名を使用できます。
 
 ```
 jobs:
@@ -704,14 +704,14 @@ jobs:
 
 この例の `checkout` ステップは、プロジェクトのソース コードをジョブの [`working_directory`](#jobs) にチェックアウトします。
 
-さらに一部のステップには別の省略表記があり、キーと値のペアの代わりに単なる文字列のステップ名を使用できます。
+通常、ステップは以下のように記述します。
 
 | キー                   | 必須 | 型         | 説明                              |
 | -------------------- | -- | --------- | ------------------------------- |
 | &lt;step_type> | ○  | マップまたは文字列 | ステップの構成マップ、またはステップによって規定された文字列。 |
 {: class="table table-striped"}
 
-Each built-in step is described in detail below.
+定義済みステップについて、以下に詳しく説明します。
 
 ##### **`run`**
 {: #run }
@@ -723,9 +723,9 @@ Each built-in step is described in detail below.
 | command             | ○  | 文字列  | シェルから実行するコマンド。                                                                                                                                                                             |
 | name                | ×  | 文字列  | CircleCI の UI に表示されるステップのタイトル (デフォルトは `command` 文字列全体)。                                                                                                                                    |
 | shell               | ×  | 文字列  | コマンド実行に使用するシェル (デフォルトについては「[デフォルトのシェル オプション](#default-shell-options)」を参照)。                                                                                                                 |
-| environment         | ×  | マップ  | コマンドに対するローカル スコープとなる追加の環境変数。                                                                                                                                                               |
+| environment:        | ×  | マップ  | コマンドに対するローカル スコープとなる追加の環境変数。                                                                                                                                                               |
 | background          | ×  | ブール値 | このステップをバックグラウンドで実行するかどうかの設定 (デフォルトは false)。                                                                                                                                                |
-| working_directory   | ×  | 文字列  | このステップを実行するディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます  (デフォルトは `.`)。 (default: `.`)                                                                                        |
+| working_directory   | ×  | 文字列  | このステップを実行するディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます  (デフォルトは `.`)。                                                                                                       |
 | no_output_timeout | ×  | 文字列  | 出力のないままコマンドを実行できる経過時間。 「20m」「1.25h」「5s」のように、数字の後に単位を付けた文字列で記述します (デフォルトは 10 分) The default is 10 minutes and the maximum is governed by the [maximum time a job is allowed to run](#jobs). |
 | when                | ×  | 文字列  | [このステップを有効または無効にする条件](#the-when-attribute)。 値は `always`、`on_success`、または `on_fail` です (デフォルトは `on_success`)。                                                                               |
 {: class="table table-striped"}
@@ -745,7 +745,7 @@ Each built-in step is described in detail below.
 ###### _デフォルトのシェル オプション_
 {: #default-shell-options }
 
-**Linux** で実行するジョブの場合、`shell` オプションのデフォルト値は、`/bin/bash<code> がビルド コンテナに存在すれば`/bin/bash -eo pipefail</code>、 存在しなければ `/bin/sh -eo pipefail` になります。 Otherwise it is `/bin/sh -eo pipefail`. デフォルトのシェルはログイン シェルではありません (`--login` や `-l` は指定されません)。 そのため、このシェルは `~/.bash_profile`、`~/.bash_login`、`~/.profile` といったファイルを**読み込みません**。
+**Linux** で実行するジョブの場合、`shell` オプションのデフォルト値は、`/bin/bash<code> がビルド コンテナに存在すれば `/bin/bash -eo pipefail</code>、 存在しなければ `/bin/sh -eo pipefail` になります。 デフォルトのシェルはログイン シェルではありません (`--login` や `-l` は指定されません)。 そのため、このシェルは `~/.bash_profile`、`~/.bash_login`、`~/.profile` といったファイルを**読み込みません**。
 
 **macOS** で実行するジョブの場合、デフォルトのシェルは `/bin/bash --login -eo pipefail` になります。 このシェルは、非対話型のログイン シェルです。 シェルは、`/etc/profile/` を読み込み、続いて `~/.bash_profile` を読み込んでから、各ステップを実行します。
 
@@ -778,20 +778,20 @@ bash を呼び出したときに実行されるファイルの詳細について
 
 > pipefail を有効にすると、パイプラインの戻り値は、0 以外のステータスで終了した最後 (右端) のコマンドのステータス値か、すべてのコマンドが正しく終了した場合に 0 となります。 シェルは、パイプライン内のすべてのコマンドの終了を待って値を返します。
 
-For example:
+たとえば、以下のようになります。
 ``` YAML
 - run: make test | tee test-output.log
 ```
 
 この例では、`make test` が失敗した場合、`-o pipefail` オプションによってステップ全体が失敗します。 `-o pipefail` オプションを指定していなければ、パイプライン全体の結果は最後のコマンド (`tee test-output.log`) によって決まり、これは常に 0 のステータスを返すため、ステップの実行は常に成功となります。
 
-たとえば、以下のようになります。
+`make` test が失敗しても、パイプラインの残りの部分は実行されることに注意してください。
 
-If you want to avoid this behaviour, you can specify `set +o pipefail` in the command or override the whole `shell` (see example above).
+この動作を回避するには、コマンドで `set +o pipefail` を指定するか、`shell` 全体をオーバーライドします (前述の例を参照)。
 
 デフォルト オプション (`-eo pipefail`) を使用すると、途中のコマンドのエラーが表示され、失敗したジョブのデバッグが容易になるため、通常はこちらをお勧めします。 UI には、使用されているシェルと各 `run` ステップのすべての有効なオプションが表示されるため便利です。
 
-この動作を回避するには、コマンドで `set +o pipefail` を指定するか、`shell` 全体をオーバーライドします (前述の例を参照)。
+詳細については、「[シェル スクリプトの使用]({{ site.baseurl }}/2.0/using-shell-scripts/)」を参照してください。
 
 ###### _バックグラウンド コマンド_
 {: #background-commands }
@@ -891,10 +891,10 @@ steps:
 
 条件付きステップは、`when` キーまたは `unless` キーを含むステップで構成されます。 `when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `when` ステップの目的は、コマンドやジョブ構成が、ワークフローの実行前にチェックされるカスタム条件 (設定ファイルのコンパイル時に決定) に基づいて実行されるようにカスタマイズすることです。 詳細については、「[条件付きステップの定義]({{ site.baseurl }}/2.0/reusing-config/#defining-conditional-steps)」を参照してください。
 
-| キー        | 必須 | Type  | 説明                                                                                      |
+| キー        | 必須 | 型     | 説明                                                                                      |
 | --------- | -- | ----- | --------------------------------------------------------------------------------------- |
-| condition | Y  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
-| steps     | Y  | シーケンス | 条件が true のときに実行するステップのリスト。                                                              |
+| condition | ○  | ロジック  | [ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) |
+| steps     | ○  | シーケンス | 条件が true のときに実行するステップのリスト。                                                              |
 {: class="table table-striped"}
 
 ###### *例*
@@ -931,16 +931,16 @@ workflows:
 
 設定済みの `path` (デフォルトは `working_directory`) にソース コードをチェックアウトするために使用する特別なステップです。 これが特別なステップである理由は、単なるヘルパー関数ではなく、コードを自動的に簡単にチェックアウトできるように設計されているからです。 このステップは SSH でチェックアウトするように git を設定するため、HTTPS で git を実行する必要がある場合は、このステップを使用しないでください。
 
-| キー   | 必須 | Type   | 説明                                                                                               |
-| ---- | -- | ------ | ------------------------------------------------------------------------------------------------ |
-| path | N  | String | チェックアウト ディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます  (デフォルトは `.`)。 (default: `.`) |
+| キー   | 必須 | 型   | 説明                                                                                |
+| ---- | -- | --- | --------------------------------------------------------------------------------- |
+| path | ×  | 文字列 | チェックアウト ディレクトリ。 ジョブの [`working_directory`](#jobs) からの相対パスとして解釈されます  (デフォルトは `.`)。 |
 {: class="table table-striped"}
 
 `path` が既に存在する場合、次のように動作します。
  * Git リポジトリ - ステップはリポジトリ全体をクローンするのではなく、オリジナルをフェッチします。
  * Git リポジトリ以外 - ステップは失敗します。
 
-In the case of `checkout`, the step type is just a string with no additional attributes:
+`checkout` は、属性のない単なる文字列としてステップを記述します。
 
 ``` YAML
 - checkout
@@ -954,7 +954,7 @@ In the case of `checkout`, the step type is just a string with no additional att
 - run: git submodule update --init
 ```
 
-`checkout` は、属性のない単なる文字列としてステップを記述します。
+このコマンドは、SSH 経由で GitHub や Bitbucket を操作するために必要な認証鍵を自動的に挿入します。 この詳細は、カスタム チェックアウト コマンドを実装する際に役に立つ[インテグレーション ガイド]({{ site.baseurl }}/2.0/gh-bb-integration/#establishing-the-authenticity-of-an-ssh-host)で解説しています。
 
 **注:** `checkout` ステップは、自動ガベージ コレクションをスキップするように Git を構成します。 [restore_cache](#restore_cache) で `.git` ディレクトリをキャッシュし、そのキャッシュ サイズをガベージ コレクションで縮小したい場合は、その前に `git gc` コマンドを指定した [run](#run) ステップを実行してください。
 
@@ -963,13 +963,13 @@ In the case of `checkout`, the step type is just a string with no additional att
 
 Docker コマンドを実行するように構成されたリモート Docker 環境を作成します。 詳細については、「[Docker コマンドの実行手順]({{ site.baseurl }}/2.0/building-docker-images/)」を参照してください。
 
-| キー                     | 必須 | Type    | 説明                                                                                                                                                    |
-| ---------------------- | -- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker_layer_caching | N  | boolean | `true` に設定すると、リモート Docker 環境で [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) が有効になります (デフォルトは `false`)。                            |
-| version                | N  | String  | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/2.0/building-docker-images/#docker-version)を参照してください。 |
+| キー                     | 必須 | 型    | 説明                                                                                                                                                    |
+| ---------------------- | -- | ---- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker_layer_caching | ×  | ブール値 | `true` に設定すると、リモート Docker 環境で [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/) が有効になります (デフォルトは `false`)。                            |
+| version                | ×  | 文字列  | 使用する Docker のバージョン文字列 (デフォルトは `17.09.0-ce`)。 サポートされている Docker バージョンについては、[こちら]({{site.baseurl}}/2.0/building-docker-images/#docker-version)を参照してください。 |
 {: class="table table-striped"}
 
-**すべての**ブランチで確実にジョブを実行するには、`branches` キーを使用しないか、`only` キーに正規表現 `/.*/` を指定してすべてのブランチを対象にします。
+**注意:**
 
 - Docker レイヤー キャッシュを利用するには、[Performance プランまたは Custom プラン](https://circleci.com/ja/pricing/)に登録済みの有料アカウントが必要です。
 - `setup_remote_docker` は、`machine` Executor とは一緒に使えません。 `machine` Executor で Docker レイヤー キャッシュを有効化する方法については、[こちら]({{ site.baseurl }}/2.0/docker-layer-caching/#machine-executor)を参照してください。
@@ -980,19 +980,19 @@ Docker コマンドを実行するように構成されたリモート Docker �
 
 依存関係やソース コードなどのファイルのキャッシュ、または複数のファイルが入ったディレクトリのキャッシュを生成して、オブジェクト ストレージに格納します。 後続のジョブで、[キャッシュを復元](#restore_cache)できます。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/2.0/caching/)を参照してください。
 
-| キー    | 必須 | Type   | 説明                                                                                                           |
-| ----- | -- | ------ | ------------------------------------------------------------------------------------------------------------ |
-| paths | Y  | リスト    | キャッシュに追加するディレクトリのリスト。                                                                                        |
-| key   | Y  | String | このキャッシュの一意の識別子。                                                                                              |
-| name  | N  | String | CircleCI の UI に表示されるステップのタイトル (デフォルトは「Saving Cache」)。                                                        |
-| when  | N  | String | [このステップを有効または無効にする条件](#the-when-attribute)。 値は `always`、`on_success`、または `on_fail` です (デフォルトは `on_success`)。 |
+| キー    | 必須 | 型   | 説明                                                                                                           |
+| ----- | -- | --- | ------------------------------------------------------------------------------------------------------------ |
+| paths | ○  | リスト | キャッシュに追加するディレクトリのリスト。                                                                                        |
+| key   | ○  | 文字列 | このキャッシュの一意の識別子。                                                                                              |
+| name  | ×  | 文字列 | CircleCI の UI に表示されるステップのタイトル (デフォルトは「Saving Cache」)。                                                        |
+| when  | ×  | 文字列 | [このステップを有効または無効にする条件](#the-when-attribute)。 値は `always`、`on_success`、または `on_fail` です (デフォルトは `on_success`)。 |
 {: class="table table-striped"}
 
 新しいキャッシュを格納する際に、`key` に特別なテンプレートの値を含めることも可能です。
 
 **メモ:** `key` に指定した値が既存のキャッシュの識別子と重複する場合、そのキャッシュは変更されないまま、ジョブの実行が次のステップに進みます。
 
-When storing a new cache, the `key` value may contain special templated values for your convenience:
+新しいキャッシュを格納する際に、`key` に特別なテンプレートの値を含めることも可能です。
 
 | テンプレート                                                 | 説明                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -1008,8 +1008,8 @@ When storing a new cache, the `key` value may contain special templated values f
 
 ステップの実行中に、上記のテンプレートが実行時の値に置き換えられ、その置換後の文字列が `key` として使用されます。
 
-Template examples:
- * 上記の例では、最初のキー (`v1-myapp-cache`) が正確に一致していますが、`v1-myapp-cache` との前方一致となる最新のキャッシュ `v1-myapp-cache-new` が復元されます。
+テンプレートの例
+ * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変わるたびにキャッシュが再生成されます。このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
  * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - 上の例と同じように、ファイルの内容が変わるたびにキャッシュが再生成されますが、各ブランチで個別のキャッシュが生成されます。
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - ジョブを実行するごとに個別のキャッシュが生成されます。
 
@@ -1036,20 +1036,20 @@ Template examples:
 
 以前に保存したキャッシュを `key` に基づいて復元します。 あらかじめ [`save_cache` ステップ](#save_cache)を使用して、そのキーでキャッシュを保存しておく必要があります。 詳細については、[キャッシュに関するドキュメント]({{ site.baseurl }}/2.0/caching/)を参照してください。
 
-| キー   | 必須               | Type   | 説明                                                        |
-| ---- | ---------------- | ------ | --------------------------------------------------------- |
-| key  | ○ <sup>(1)</sup> | String | 復元するキャッシュ キーを 1 つだけ指定します。                                 |
-| keys | ○ <sup>(1)</sup> | リスト    | 復元するキャッシュを検索するためのキャッシュ キーのリスト。 最初に一致したキーのみが復元されます。        |
-| name | N                | String | CircleCI の UI に表示されるステップのタイトル (デフォルトは "Restoring Cache")。 |
+| キー   | 必須               | 型   | 説明                                                        |
+| ---- | ---------------- | --- | --------------------------------------------------------- |
+| key  | ○ <sup>(1)</sup> | 文字列 | 復元するキャッシュ キーを 1 つだけ指定します。                                 |
+| keys | ○ <sup>(1)</sup> | リスト | 復元するキャッシュを検索するためのキャッシュ キーのリスト。 最初に一致したキーのみが復元されます。        |
+| name | ×                | 文字列 | CircleCI の UI に表示されるステップのタイトル (デフォルトは "Restoring Cache")。 |
 {: class="table table-striped"}
 
 <sup>(1)</sup> 少なくとも 1 つの属性を指定する必要があります。 `key` と `keys` の両方を指定すると、最初に `key` がチェックされ、次に `keys` がチェックされます。
 
-A key is searched against existing keys as a prefix.
-
-**Note**: When there are multiple matches, the **most recent match** will be used, even if there is a more precise match.
-
 既存のキーを対象に前方一致で検索が行われます。
+
+**メモ:** 複数が一致する場合は、一致度の高さに関係なく、**一致する最新のもの**が復元されます。
+
+たとえば、以下のようになります。
 
 ``` YAML
 steps:
@@ -1069,13 +1069,13 @@ steps:
       key: v1-myapp-cache
 ```
 
-**メモ:** 複数が一致する場合は、一致度の高さに関係なく、**一致する最新のもの**が復元されます。
+上記の例では、最初のキー (`v1-myapp-cache`) が正確に一致していますが、`v1-myapp-cache` との前方一致となる最新のキャッシュ `v1-myapp-cache-new` が復元されます。
 
-たとえば、以下のようになります。
+キーの書式の詳細については、[`save_cache` ステップ](#save_cache)の `key` に関する説明を参照してください。
 
 `keys` リストが検出されると、既存のキャッシュに最初に一致するキャッシュが復元されます。 通常は、より特定度の高いキー (たとえば、`package-lock.json` ファイルの正確なバージョンに対応するキー) を最初に記述し、より汎用的なキー (たとえば、プロジェクトの任意のキャッシュが対象となるキー) をその後に記述します。 キーに該当するキャッシュが存在しない場合は、警告が表示され、ステップがスキップされます。
 
-キーの書式の詳細については、[`save_cache` ステップ](#save_cache)の `key` に関する説明を参照してください。
+キャッシュは元々保存されていた場所に復元されるため、ここでパスは必要ありません。
 
 ###### 例
 {: #example }
@@ -1103,11 +1103,11 @@ steps:
 
 **このキーは非推奨になりました。 デプロイの制御性を高めるため、[workflows](#workflows) と filters キーおよび schedule キーを適切に組み合わせて使用してください。**
 
-Special step for deploying artifacts.
+アーティファクトをデプロイするための特別なステップです。
 
 `deploy` は、[`run`](#run) ステップと同じ構成マップおよび構文を用います。 ジョブに 2 つ以上の `deploy` ステップを記述できます。
 
-アーティファクトをデプロイするための特別なステップです。
+通常、以下の 2 つの例外を除いて、`deploy` ステップは `run` と同じように動作します。
 
 - `parallelism` を指定したジョブにおいて、`deploy` ステップは、すべてのノードが成功した場合にノード #0 でのみ実行されます。 #0 以外のノードは、このステップをスキップします。
 - SSH を使用して実行するジョブでは、`deploy` ステップは実行されず、代わりに以下のアクションが表示されます。 > **skipping deploy** > Running in SSH mode.  Avoid deploying.
@@ -1130,7 +1130,7 @@ Special step for deploying artifacts.
 
 **注:** CircleCI は追加されたすべての SSH 鍵に `ssh-agent` を使用して署名しますが、ユーザーは `add_ssh_keys` キーを使用して実際にコンテナに鍵を追加する**必要があります**。
 
-`In step 3 definition: This type of step does not support compressed syntax`
+`ステップ 3 の定義について、このタイプのステップでは省略構文は使用できません`
 
 ##### **`store_artifacts`**
 {: #storeartifacts }
