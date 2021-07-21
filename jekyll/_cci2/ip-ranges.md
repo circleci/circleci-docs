@@ -108,7 +108,7 @@ None
 **Note:** _jobs can use any of the address ranges above. It is also important to note that the address ranges are shared by all CircleCI customers who have opted into using the feature._
 {: class="alert alert-warning"}
 
-Machine-consumable lists can be found below:
+**Machine-consumable lists can be found below:**
 
 - IP address ranges *for jobs*: [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
 
@@ -142,4 +142,4 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the abov
 ## Known limitations
 {: #knownlimiations}
 
-IP ranges is only available in the Docker executor.  It is not available for the `remote_docker` VMs.
+IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
