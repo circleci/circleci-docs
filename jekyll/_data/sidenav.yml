@@ -228,6 +228,8 @@ en:
           link: 2.0/security-recommendations/
         - name: Protecting Against Supply Chain Attacks
           link: 2.0/security-supply-chain/
+        - name: IP Ranges
+          link: 2.0/ip-ranges/
 - name: Examples and Guides
   icon: icons/sidebar/examples.svg
   children:

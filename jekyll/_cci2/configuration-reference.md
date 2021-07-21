@@ -1378,6 +1378,35 @@ jobs:
       - run: echo "This is pipeline ID << pipeline.id >>"
 ```
 
+#### **`circleci_ip_ranges`**
+{: #circleciipranges }
+
+Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
+
+###### _Example_
+{: #example }
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
+    docker:
+      - image: curlimages/curl
+    steps:
+      - run: echo “Hello World”
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+**Notes**:
+
+- A paid account on a [Performance, Custom, or Scale plan](https://circleci.com/pricing/) is required to access IP ranges.
+- IP ranges is currently in open preview for paid accounts. Specific rates and details are being finalized and will be published when the feature is generally available.
+
 ## **`workflows`**
 {: #workflows }
 Used for orchestrating all jobs. Each workflow consists of the workflow name as a key and a map as a value. A name should be unique within the current `config.yml`. The top-level keys for the Workflows configuration are `version` and `jobs`.
