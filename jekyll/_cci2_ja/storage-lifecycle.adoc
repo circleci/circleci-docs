@@ -1,0 +1,85 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
+= CircleCI Server AWS S3 Storage Lifecycle Guide
+:page-layout: classic-docs
+:page-liquid:
+:source-highlighter: rouge
+:rouge-linenums-mode: inline
+:icons: font
+:toc: macro
+:toc-title:
+
+This guide is intended to help system administrators of CircleCI Server installations on AWS better understand how S3 storage is used. This can help to cut compute resource costs and avoid issues for service users when removing resources. 
+
+In CircleCI Server, S3 Lifecycle policies are not configured automatically. The figures provided in this guide are examples to help you create a lifecycle policy for your installation. For more information on the steps required to add policy rules, see the https://docs.aws.amazon.com/AmazonS3/latest/user-guide/create-lifecycle.html[AWS Lifecycle Policy Guide].
+
+== Example Lifecycle Policy Configuration for S3 Buckets
+
+ifndef::pdf[NOTE: Scroll table to the right to view all content.]
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| **Prefix**
+| **Tag**
+| **Suggested Number of Days**
+| **Description of files**
+| **Side effects of deletion**
+
+| `アーティファクト` 
+| (null) 
+| 30 
+| General artifacts (deliverables from `store_artifacts` and `store_test_results`) 
+| Artifacts will disappear from the list of artifacts in job results. URLs will return 404. 
+
+| `アーティファクト` 
+| `"circleci.object_type" === "project.cache"` 
+| 15 
+| Dependency caches 
+| The first build after deletion will be slow due to cache miss.
+
+| `アーティファクト` 
+| `"circleci.object_type" === "workflow.workspace"` 
+| 15 
+| ワークスペース 
+| If a job depending on workspaces is rerun (e.g. SSH rerun), `attach_workspace` will restore no files, and subsequent steps will fail. 
+
+| `artifacts/picard-task-configs` 
+| (null) 
+| 1 
+| Task config 
+| なし
+
+| `action-logs` 
+| (null) 
+| 365 
+| Outputs from each step 
+| Outputs will not be shown any longer. Loading indicator will remain even after opening a pull-down for each step.
+
+| `キャッシュ` 
+| (null) 
+| 15 
+| Legacy cache 
+| This folder is not actively used. If a job depends on these files, the first build after deletion will be slow due to cache miss.
+|===
+
+[discrete]
+== Additional Locations Not Listed Above
+
+[discrete]
+=== `audit-logs`
+
+This is where audit logs are saved. Deleting this folder and files under this fodler has no impact on future operation of CircleCI, but deleted logs will be definitely lost and cannot be recovered.
+
+[discrete]
+=== `code-signing-keys`
+
+This is where signing keys for macOS/iOS apps are stored. This folder is no longer used actively.
+
+[discrete]
+=== `test-results`
+
+This is where statistic data collected with `store_test_results` resides. The data is used for future test splitting with `circleci tests split --split-by=timings`. **Deleting test results will cause CIRCLE BUG errors in future jobs using `parallelism`**.

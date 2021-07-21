@@ -14,15 +14,15 @@ Before you begin with the CircleCI server v3.x installation process, ensure all 
 
 toc::[]
 
-## Step 1 - Install KOTs
+## Step 1 - Install KOTS
 
-CircleCI server v3.x uses https://kots.io[KOTs] from https://www.replicated.com/[Replicated] to manage and
-distribute server v3.x. KOTs is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
+CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] to manage and
+distribute server v3.x. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 To install the latest version, you can run `curl  https://kots.io/install | bash`.
 
-Ensure you are running the minimum KOTs (KOTs {kotsversion}) by running `kubectl kots version`.
+Ensure you are running the minimum KOTS (KOTS {kotsversion}) by running `kubectl kots version`.
 
-NOTE: The KOTs command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not
+NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not
 available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
@@ -36,7 +36,7 @@ kubectl kots install circleci-server
 You will be prompted for a:
 
 * namespace for the deployment
-* password for the KOTs admin console
+* password for the KOTS admin console
 
 When complete, you should be provided with a URL to access the admin console. Usually this is http://localhost:8800.
 
@@ -768,7 +768,7 @@ Click the *Save config* button to update your installation and re-deploy server.
 ## Step 7 - Validate Installation
 
 . Launch your CircleCI installation in your browser, for example https://hostname.com.
-  * . If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
+  * If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
 . Sign up/Log in into your CircleCI installation. As the first user to log in, you will become the administrator at this point.
 . Take a look at our https://circleci.com/docs/2.0/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
 . Use the https://github.com/circleci/realitycheck[CircleCI realitycheck] repository and follow the

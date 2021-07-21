@@ -1,0 +1,80 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= CircleCI Server v3.x 運用方法
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+以下のガイドは、CircleCI Server 3.xの保守・監視を行うCircleCI Server Operator（責任者）に役立つ情報が含まれます。
+
+
+Server 3.xのhttps://circleci.com/docs/2.0/server-3-overview[概要]を事前に読まれることを前提としております。
+
+
+CircleCI Serverは、https://www.nomadproject.io/[Nomad]というスケジューラを使ってCIジョブをスケジュールします。 Nomadのコントロール​プレーンはKubernetesの中で動作し、Nomadのクライアントはクラスタの外でプロビジョニングされます。 Nomadのクライアントは、Nomadのコントロールプレーン と output processor、VM service にアクセスする必要があります。
+
+CircleCI Serverは、Nomadクライアント上でDockerジョブを実行することができますが、専用のVMでジョブを実行することもできます。 これらのVMジョブは Nomadクライアントが制御するため、NomadクライアントはVMマシンにSSHでポート22、リモートDockerジョブ用にポート2376でアクセスできる必要があります。
+
+ジョブの成果物と出力は、Nomadのジョブからオブジェクトストレージ（S3、GCS、またはその他のサポートされるオプション）に直接送信されます。
+アプリケーションの監査ログなどもオブジェクトストレージに保存されるため、KubernetesクラスタとNomadクライアントはオブジェクトストレージにアクセスする必要があります。
+
+
+toc::[]
+
+## ビルド環境
+
+CircleCI Server 3.x では、プライマリ ジョブ スケジューラとして Nomad を使用します。 ジョブ スケジューラ、およびクライアントとクラスタの基本的な操作方法については、「https://circleci.com/docs/2.0/nomad/[Nomad クラスタの操作ガイド]」を参照してください。
+
+デフォルトでは、CircleCI の Nomad クライアントは、プロジェクトの `.circleci/config.yml` ファイルでジョブごとに構成されている Executor に従って、コンピューティング リソースを自動的にプロビジョニングします。
+
+### Nomad Clients
+Nomadクライアントは実行後に状態を保持しないため、必要に応じてコンテナ数を増減することができます。
+
+すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューイングされているビルドを追跡し、必要に応じて Nomad クライアント マシンの数を増やして負荷を分散させます。 メトリクス追跡の詳細については
+xref:server-3-operator-metrics-and-monitoring.adoc[メトリクスとモニタリング]のセクションをご覧ください。
+
+各マシンには、ビルドを調整するために、それぞれ 2つの vCPU と 4GB のメモリが予約されています。 そのうえで、ジョブ実行用のコンテナが残りのプロセッサーとメモリで作成されます。 マシンの規模が大きくなれば、その分多くのコンテナを実行することができますが、調整用に予約してある 2 基以外に使用できるコアの数によって制限されます。
+
+NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/64 CPUです。 使用する Nomad クライアント マシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者に問い合わせてください。
+
+Nomadのポート要件の詳細については、https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[Hardening Your Cluster]をご覧ください。
+
+
+### GitHub
+CircleCIでは、GitHubまたはGitHub Enterpriseをアイデンティティ・プロバイダーとして使用しています。 GitHub Enterpriseでは、次のようなことが可能です。
+https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAMLまたはSCIM]を使って、外部のIDプロバイダーでユーザーを管理することができます。
+
+NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。
+
+以下の表に、GitHub を実行するマシンで Services および Nomad クライアント インスタンスと通信する際に使用されるポートを示します。
+
+--
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| ソース
+| ポート
+| 用途
+
+| Services
+| 22
+| Git access
+
+| Services
+| 80 or 443
+| API access
+
+| Nomad Client
+| 22
+| Git access
+
+| Nomad Client
+| 80 or 443
+| API access
+|===
+--

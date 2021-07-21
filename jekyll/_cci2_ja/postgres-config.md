@@ -4,16 +4,20 @@ title: "データベースの構成例"
 short-title: "データベースの構成例"
 description: "PostgreSQL の構成例"
 order: 35
+version:
+  - Cloud
+  - Server v2.x
 ---
 
-PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/ja/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
+PostgreSQL/Rails および MySQL/Ruby を使用したデータベース [config.yml]({{ site.baseurl }}/2.0/databases/) ファイルの例について、以下のセクションに沿って説明します。
 
 * TOC
 {:toc}
 
-## structure.sql を使用した Rails アプリケーション用の CircleCI 構成例
+## Example CircleCI configuration for a rails app with structure.sql
+{: #example-circleci-configuration-for-a-rails-app-with-structuresql }
 
-`structure.sql` ファイルを使用して構成した Rails アプリケーションを移行する場合は、`psql` が PATH の場所にインストールされ、適切な権限が設定されていることを確認してください。これは、circleci/ruby:2.4.1-node イメージには psql がデフォルトでインストールされておらず、`pg` gem を使用してデータベースにアクセスするためです。
+If you are migrating a Rails app configured with a `structure.sql` file make sure that `psql` is installed in your PATH and has the proper permissions, as follows, because the circleci/ruby:2.4.1-node image does not have psql installed by default and uses `pg` gem for database access.
 
 {% raw %}
 
@@ -23,78 +27,79 @@ jobs:
   build:
     working_directory: ~/circleci-demo-ruby-rails
 
-    # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
+    # Primary container image where all commands run
 
     docker:
-
       - image: circleci/ruby:2.4.1-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           RAILS_ENV: test
           PGHOST: 127.0.0.1
           PGUSER: root
 
-    # `host: localhost` でアクセスできるサービス コンテナ イメージ
+    # Service container image available at `host: localhost`
 
       - image: circleci/postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: circle-test_test
 
     steps:
-
       - checkout
 
-      # バンドル キャッシュを復元します
-
+      # Restore bundle cache
       - restore_cache:
           keys:
             - rails-demo-{{ checksum "Gemfile.lock" }}
             - rails-demo-
 
-      # 依存関係をバンドル インストールします
-
+      # Bundle install dependencies
       - run:
-          name: 依存関係のインストール
+          name: Install dependencies
           command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs 4 --retry 3
 
       - run: sudo apt install -y postgresql-client || true
 
-      # バンドル キャッシュを保存します
-
+      # Store bundle cache
       - save_cache:
           key: rails-demo-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
       - run:
-          name: データベースのセットアップ
+          name: Database Setup
           command: |
             bundle exec rake db:create
             bundle exec rake db:structure:load
 
       - run:
-          name: RSpec の並列実行
+          name: Parallel RSpec
           command: bin/rails test
 
-      # アーティファクトを保存します
-
+      # Save artifacts
       - store_test_results:
           path: /tmp/test-results
 ```
 
 {% endraw %}
 
-**メモ:** 現在のイメージを拡張して独自のイメージをビルドする方法もあります。その場合には必要なパッケージをインストールし、コミットしてから、Docker Hub などのレジストリにプッシュしてください。
+**Note:** An alternative is to build your own image by extending the current image, installing the needed packages, committing, and pushing it to Docker Hub or the registry of your choosing.
 
-### 環境のセットアップ例
+### Example environment setup
+{: #example-environment-setup }
 {:.no_toc}
 
-CircleCI 2.0 では、複数のビルド済みイメージやカスタム イメージが使用されることがあるため、データベース構成は明示的に宣言する必要があります。 たとえば、Rails は以下の順序でデータベース URL の使用を試みます。
+In CircleCI 2.0 you must declare your database configuration explicitly because multiple pre-built or custom images may be in use. For example, Rails will try to use a database URL in the following order:
 
-1. DATABASE_URL 環境変数 (設定されている場合)
-2. `config.yml` ファイル内の該当する環境の test セクションの構成 (通常、テスト スイートでは `test`)。
+1.  DATABASE_URL 環境変数 (設定されている場合)
+2.  `config.yml` ファイル内の該当する環境の test セクションの構成 (通常、テスト スイートでは `test`)。
 
-この順序の具体例を以下に示します。ここでは、イメージの `environment` 設定を組み合わせると共に、シェル コマンドに `environment` 設定を追加してデータベース接続を有効にしています。
+The following example demonstrates this order by combining the `environment` setting with the image and by also including the `environment` configuration in the shell command to enable the database connection:
 
 ```yaml
 version: 2
@@ -103,24 +108,31 @@ jobs:
     working_directory: ~/appName
     docker:
       - image: ruby:2.3.1-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           PG_HOST: localhost
           PG_USER: ubuntu
           RAILS_ENV: test
           RACK_ENV: test
-      # この例では PostgresSQL 9.6 公式イメージを使用しています。
-      # circleci/postgres:9.6 も使用可能で、いくつかの機能強化とカスタマイズが加えられています。 いずれかのイメージを使用できます。
+      # The following example uses the official postgres 9.6 image, you may also use circleci/postgres:9.6
+      # which includes a few enhancements and modifications. いずれかのイメージを使用できます。
+      いずれかのイメージを使用できます。
       - image: postgres:9.6-jessie
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: ubuntu
           POSTGRES_DB: db_name
     steps:
       - checkout
       - run:
-          name: Ruby の依存関係のインストール
+          name: Install Ruby Dependencies
           command: bundle install
-      - run: 
-          name: データベースのセットアップ
+      - run:
+          name: Set up DB
           command: |
             bundle exec rake db:create db:schema:load --trace
             bundle exec rake db:migrate
@@ -128,21 +140,28 @@ jobs:
           DATABASE_URL: "postgres://ubuntu@localhost:5432/db_name"
 ```
 
-この例では、PostgreSQL 9.6 のデフォルトのユーザーとポートとして `$DATABASE_URL` が指定されています。バージョン 9.5 の場合、デフォルトのポートは 5432 ではなく 5433 になります。 他のポートを指定するには、`$DATABASE_URL` と `psql` の呼び出し箇所をすべて変更します。
+This example specifies the `$DATABASE_URL` as the default user and port for PostgreSQL 9.6. For version 9.5, the default port is 5433 instead of 5432. To specify a different port, change the `$DATABASE_URL` and all invocations of `psql`.
 
-## Go アプリケーションと PostgreSQL の構成例
+## Example go app with postgresql
+{: #example-go-app-with-postgresql }
 
-以下の構成例に関する詳しい説明や、アプリケーションのパブリック コード リポジトリについては、[Go 言語ガイド]({{ site.baseurl }}/ja/2.0/language-go/)を参照してください。
+Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      # CircleCI Go イメージは https://hub.docker.com/r/circleci/golang/ で入手できます
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
       - image: circleci/golang:1.8-jessie
-      # CircleCI PostgreSQL イメージは https://hub.docker.com/r/circleci/postgres/ で入手できます
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
       - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: circle_test
@@ -153,7 +172,6 @@ jobs:
       TEST_RESULTS: /tmp/test-results
 
     steps:
-
       - checkout
       - run: mkdir -p $TEST_RESULTS
 
@@ -161,9 +179,8 @@ jobs:
           keys:
             - v1-pkg-cache
 
-      # 通常、このステップはカスタム プライマリ イメージに記述されています
-      # この例では、説明のためにここにステップを追加しました
-
+      # Normally, this step would be in a custom primary image;
+      # we've added it here for the sake of explanation.
       run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
@@ -214,17 +231,24 @@ jobs:
           path: /tmp/test-results
 ```
 
-## MYSQL プロジェクトの例
+## Example mysql project.
+{: #example-mysql-project }
 
-以下の例では、PHP コンテナと共に、MYSQL をセカンダリ コンテナとしてセットアップしています。
+The following example sets up MYSQL as a secondary container alongside a PHP container.
 
 ```yaml
 version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-apache-node-browsers # ステップが実行される場所となるプライマリ コンテナ
+      - image: circleci/php:7.1-apache-node-browsers # The primary container where steps are run
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: circleci/mysql:8.0.4
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           MYSQL_ROOT_PASSWORD: rootpw
           MYSQL_DATABASE: test_db
@@ -232,10 +256,9 @@ jobs:
           MYSQL_PASSWORD: passw0rd
 
     steps:
-
       - checkout
       - run:
-      # プライマリ コンテナは MySQL ではないため、準備が完了するまで sleep コマンドを実行します。
+      # Our primary container isn't MYSQL so run a sleep command until it's ready.
           name: MySQL が準備できるまで待機
           command: |
             for i in `seq 1 10`;
@@ -258,9 +281,9 @@ workflows:
       - build
 ```
 
-MySQL をプライマリかつ唯一のコンテナにすることもできますが、この例ではそのようにしていません。 より実践的なユース ケースとして、この例では PHP Docker イメージをプライマリ コンテナとして使用し、MySQL が起動してから、データベースに関連する `run` コマンドを実行しています。
+While it is possible to make MySQL as your primary and only container, this example does not. As a more practical use case, the example uses a PHP docker image as its primary container, and will wait until MySQL is up and running before performing any `run` commands involving the DB.
 
-データベースが起動したら、`mysql` クライアントをプライマリ コンテナにインストールします。これで、プロジェクトのルートにあるとしたダミー データ `sql-data/dummy.sql` に接続してインポートするコマンドを実行できます。 このダミー データには、例として一連の SQL コマンドが格納されています。
+Once the DB is up, we install the `mysql` client into the primary container so that we can run a command to connect and import the dummy data, presumably found at, `sql-data/dummy.sql` at the root of your project. In this case, that dummy data contains an example set of SQL commands:
 
 ```sql
 DROP TABLE IF EXISTS `Persons`;
@@ -283,6 +306,9 @@ VALUES (
 );
 ```
 
-## 関連項目
 
-サービス イメージの使用とデータベースのテスト手順に関する概念的な情報については、「[データベースの構成]({{ site.baseurl }}/ja/2.0/databases/)」を参照してください。
+## See also
+{: #see-also }
+
+
+Refer to the [Configuring Databases]({{ site.baseurl }}/2.0/databases/) document for a walkthrough of conceptual information about using service images and database testing steps.

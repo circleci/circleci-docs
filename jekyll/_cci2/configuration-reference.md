@@ -160,7 +160,7 @@ macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 shell | N | String | Shell to use for execution command in all steps. Can be overridden by `shell` in each step (default: See [Default Shell Options](#default-shell-options))
 parameters | N | Map | [Parameters](#parameters) for making a `job` explicitly configurable in a `workflow`.
 steps | Y | List | A list of [steps](#steps) to be performed
-working_directory | N | String | In which directory to run the steps. Will be interpreted as an absolute path. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all.
+working_directory | N | String | In which directory to run the steps. Will be interpreted as an absolute path. Default: `~/project` (where `project` is a literal string, not the name of your specific project). Processes run during the job can use the `$CIRCLE_WORKING_DIRECTORY` environment variable to refer to this directory. **Note:** Paths written in your YAML configuration file will _not_ be expanded; if your `store_test_results.path` is `$CIRCLE_WORKING_DIRECTORY/tests`, then CircleCI will attempt to store the `test` subdirectory of the directory literally named `$CIRCLE_WORKING_DIRECTORY`, dollar sign `$` and all. `working_directory` will be created automatically if it doesn't exist.
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
@@ -178,8 +178,6 @@ A map of environment variable names and values. These will override any environm
 {: #parallelism }
 
 If `parallelism` is set to N > 1, then N independent executors will be set up and each will run the steps of that job in parallel. This can help optimize your test steps; you can split your test suite, using the CircleCI CLI, across parallel containers so the job will complete in a shorter time. Certain parallelism-aware steps can opt out of the parallelism and only run on a single executor (for example [`deploy` step](#deploy--deprecated)). Learn more about [parallel jobs]({{ site.baseurl }}/2.0/parallelism-faster-jobs/).
-
-`working_directory` will be created automatically if it doesn't exist.
 
 Example:
 
@@ -202,7 +200,7 @@ jobs:
 
 #### `parameters`
 {: #parameters }
-The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-1).
+The `parameters` can be used when [calling that `job` in a `workflow`](#jobs-in-workflow).
 
 Reserved parameter-names:
 
@@ -383,6 +381,7 @@ The machine executor supports [Docker Layer Caching]({{ site.baseurl }}/2.0/dock
 
 When using the [Linux GPU executor](#gpu-executor-linux), the available images are:
 
+* `ubuntu-2004-cuda-11.2:202103-01` - CUDA v11.2.1, Docker v20.10.5, nvidia-container-toolkit v1.4.2-1
 * `ubuntu-1604-cuda-11.1:202012-01` - CUDA v11.1, Docker v19.03.13, nvidia-container-toolkit v1.4.0-1
 * `ubuntu-1604-cuda-10.2:202012-01` - CUDA v10.2, Docker v19.03.13, nvidia-container-toolkit v1.3.0-1
 * `ubuntu-1604-cuda-10.1:201909-23` - CUDA v10.1, Docker v19.03.0-ce, nvidia-docker v2.2.2
@@ -1464,7 +1463,7 @@ ignore | N | String, or List of Strings | Either a single branch specifier, or a
 {: class="table table-striped"}
 
 #### **`jobs`**
-{: #jobs }
+{: #jobs-in-workflow }
 A job can have the keys `requires`, `context`, `type`, and `filters`.
 
 Key | Required | Type | Description

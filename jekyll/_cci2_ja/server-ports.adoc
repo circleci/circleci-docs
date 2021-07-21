@@ -1,0 +1,564 @@
+---
+version:
+- Server v2.x
+- Server Admin
+---
+= System Requirements
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+ここでは、CircleCI v2. をインストールするためのシステム要件を説明します。
+
+toc::[]
+
+== Services マシン
+Services マシンは、ユーザー対面 Web サイト、API エンジン、データストア、Nomad ジョブスケジューラなどの Server プロダクトのコアコンポーネントをホスティングします。 独立のマシンを使用することをお勧めします。
+
+NOTE: Currently, CircleCI Server only supports x86_64 architecture.
+
+下表に、Services マシンの CPU、RAM、およびディスク容量の要件を示します。
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| 1 日の CircleCI アクティブ ユーザー数
+| CPU
+| RAM
+| Disk space
+| NIC 速度
+
+| <50
+| 8 cores
+| 32 GB
+| 100GB
+| 1Gbps
+
+| 50-250
+| 12 cores
+| 64GB
+| 200GB
+| 1Gbps
+
+| 251-1000
+| 16 cores
+| 128GB
+| 500GB
+| 10Gbps
+
+| 1001-5000
+| 20 cores
+| 256GB
+| 1TB
+| 10Gbps
+
+| 5000+
+| 24 cores
+| 512GB
+| 2TB
+| 10Gbps
+|===
+
+== Nomad クライアント
+
+Nomad クライアントマシンは、Services マシンによってスケジュールされた CircleCI ジョブを実行します。 The Minimum CPU, RAM, and disk space requirements per client are as follows:
+
+- CPU: 4 cores
+- RAM: 32GB
+- Disk space: 100GB
+- NIC speed: 1Gbps
+
+For an AWS install of CircleCI Server, the recommended instance type for Nomad clients is `m5.2xlarge` (8 vCPUs @ 2.4GHz, 32GB RAM). 
+
+NOTE: Currently, Nomad Clients only support x86_64 architecture. 
+
+You can choose a larger instance type to fit more jobs per Client. To help in this choice, consider that when Nomad decides if a job will fit on a Client, the Job is allocated 1024MHz per CPU, and capacity is `number of cores` * `clock speed`. Using this method, the maximum capacity of a `m5.2xlarge` would be `19200MHz`, which would mean 9.6 jobs could run on that client (if there were no limiting factors). In practice, Nomad will researve some CPU for itself, and because of the CPU:RAM ratio, the available RAM is the limiting factor governing how many jobs can run. 
+
+=== Recommendations for Heavy Usage
+
+EBS will throttle IOPS after certain IO operations, therefore heavy-load usage with the default Server configuration (m5.2xlarge with 200-GiB gp2 root volume) can see performance-related issues, such as slow jobs, slow spin-up, and job timeouts in worst cases.
+
+To give an idea of what is meant by heavy usage:
+
+* If `BurstBalance` metrics for storage attached to Nomad clients are decreasing sharply, this is a sign that the workload is heavy enough to be affected. See the https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html#ebs-volume-metrics[AWS EBS metrics document] for further details.
+* We have had a report from a customer that continuous disk I/O at 500 MB/s used up the burst credits for our default storage configuration within 37.5 minutes.
+
+Suggested workarounds for this issue are as follows:
+
+* Use EBS volumes larger than 1 TiB. Large EBS volumes never consume IO credits.
+* Use the *5d instance type and use an attached instance store for Docker-related files (i.e. /var/lib/docker).
+
+== Choosing Nomad Client Quantity
+
+下表には、使用可能にする Nomad クライアント数のベスト プラクティスを示します。 システムの需要に合わせて増減させてください。
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| 1 日の CircleCI アクティブ ユーザー数
+| Number of Nomad client machines
+
+| <50
+| 1-5
+
+| 50-250
+| 5-10
+
+| 250-1000
+| 10-15
+
+| 5000+
+| 15+
+|===
+
+== サーバーポート
+
+Below all ports required by a CircleCI 2.0 installation are listed for each machine type.
+
+=== Services マシン
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 80
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 443
+| TCP
+| Inbound
+| End users
+| HTTPS web app traffic
+|
+
+| 7171
+| TCP
+| Inbound
+| End users
+| Artifacts access
+|
+
+| 8081
+| TCP
+| Inbound
+| End users
+| Artifacts アクセス
+|
+
+| 22
+| TCP
+| インバウンド
+| 管理者
+| SSH
+|
+
+| 8800
+| TCP
+| インバウンド
+| 管理者
+| 管理者コンソール
+|
+
+| 8125
+| UDP
+| インバウンド
+| Nomad クライアント
+| メトリクス
+|
+
+| 8125
+| UDP
+| インバウンド
+| Nomad サーバー
+| メトリクス
+| Only if using externalized Nomad Servers
+
+| 8125
+| UDP
+| インバウンド
+| すべてのデータベースサーバー
+| メトリクス
+| 外部処理用データベースを使用する場合のみ
+
+| 4647
+| TCP
+| 双方向
+| Nomad クライアント
+| 内部通信
+|
+
+| 8585
+| TCP
+| 双方向
+| Nomad クライアント
+| 内部通信
+|
+
+| 7171
+| TCP
+| 双方向
+| Nomad クライアント
+| 内部通信
+|
+
+| 3001
+| TCP
+| 双方向
+| Nomad クライアント
+| 内部通信
+|
+
+| 80
+| TCP
+| 双方向
+| GitHub Enterprise / GitHub.com (該当する方)
+| Web フック / API アクセス
+|
+
+| 443
+| TCP
+| 双方向
+| GitHub Enterprise / GitHub.com (該当する方)
+| Web フック / API アクセス
+|
+
+| 80
+| TCP
+| アウトバウンド
+| AWS API エンドポイント
+| API アクセス
+| AWS 上で実行される場合のみ
+
+| 443
+| TCP
+| アウトバウンド
+| AWS API エンドポイント
+| API アクセス
+| AWS 上で実行される場合のみ
+
+| 5432
+| TCP
+| アウトバウンド
+| PostgreSQL サーバー
+| PostgreSQL データベース接続
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
+
+| 27017
+| TCP
+| アウトバウンド
+| MongoDB サーバー
+| MongoDB データベース接続
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
+
+| 5672
+| TCP
+| アウトバウンド
+| RabbitMQ サーバー
+| RabbitMQ 接続
+| Only if using externalized RabbitMQ
+
+| 6379
+| TCP
+| アウトバウンド
+| Redis サーバー
+| Redis 接続
+| Only if using externalized Redis
+
+| 4647
+| TCP
+| アウトバウンド
+| Nomad サーバー
+| Nomad サーバー接続
+| Only if using externalized Nomad Servers
+
+| 443
+| TCP
+| アウトバウンド
+| CloudWatch エンドポイント
+| メトリクス
+| AWS CloudWatch を使用する場合のみ
+|===
+<<<
+=== Nomad クライアント
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 64535-65535
+| TCP
+| インバウンド
+| エンドユーザー
+| ビルド機能への SSH 接続
+|
+
+| 80
+| TCP
+| インバウンド
+| 管理者
+| CircleCI 管理者 API アクセス
+|
+
+| 443
+| TCP
+| インバウンド
+| 管理者
+| CircleCI 管理者 API アクセス
+|
+
+| 22
+| TCP
+| インバウンド
+| 管理者
+| SSH
+|
+
+| 22
+| TCP
+| アウトバウンド
+| GitHub Enterprise / GitHub.com (該当する方)
+| GitHub からのコードのダウンロード
+|
+
+| 4647
+| TCP
+| 双方向
+| Services マシン
+| 内部通信
+|
+
+| 8585
+| TCP
+| 双方向
+| Services マシン
+| 内部通信
+|
+
+| 7171
+| TCP
+| 双方向
+| Services マシン
+| 内部通信
+|
+
+| 3001
+| TCP
+| 双方向
+| Services マシン
+| 内部通信
+|
+
+| 443
+| TCP
+| アウトバウンド
+| クラウドストレージプロバイダー
+| アーティファクトストレージ
+| 外部アーティファクトストレージを使用する場合のみ
+
+| 53
+| UDP
+| アウトバウンド
+| 内部 DNS サーバー
+| DNS 解決
+| 正しい操作に必要なすべての DNS 名をジョブが解決できることを保証する.
+|===
+<<<
+=== GitHub Enterprise / GitHub.com
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 22
+| TCP
+| インバウンド
+| Services マシン
+| Git アクセス
+|
+
+| 22
+| TCP
+| インバウンド
+| Nomad クライアント
+| Git アクセス
+|
+
+| 80
+| TCP
+| インバウンド
+| Nomad クライアント
+| API アクセス
+|
+
+| 443
+| TCP
+| インバウンド
+| Nomad クライアント
+| API アクセス
+|
+
+| 80
+| TCP
+| 双方向
+| Services マシン
+| Web フック / API アクセス
+|
+
+| 443
+| TCP
+| 双方向
+| Services マシン
+| Webhooks / API access
+|===
+
+=== PostgreSQL サーバー
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 5432
+| TCP
+| 双方向
+| PostgreSQL サーバー
+| PostgreSQL 複製
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
+|===
+
+=== MongoDB サーバー
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 27017
+| TCP
+| 双方向
+| MongoDB サーバー
+| MongoDB 複製
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
+|===
+<<<
+=== RabbitMQ サーバー
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 5672
+| TCP
+| インバウンド
+| Services マシン
+| RabbitMQ 接続
+| Only if using externalized RabbitMQ
+
+| 5672
+| TCP
+| 双方向
+| RabbitMQ サーバー
+| RabbitMQ ミラーリング
+| Only if using externalized RabbitMQ
+|===
+
+=== Redis サーバー
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 6379
+| TCP
+| インバウンド
+| Services マシン
+| Redis 接続
+| Only if using externalized Redis
+
+| 6379
+| TCP
+| 双方向
+| Redis サーバー
+| Redis 複製
+| Only if using externalized Redis, and using Redis replication (optional)
+|===
+
+=== Nomad サーバー
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| **ポート番号**
+| **プロトコル**
+| **方向**
+| **送信元・送信先**
+| **用途**
+| **メモ**
+
+| 4646
+| TCP
+| インバウンド
+| Services マシン
+| Nomad サーバー接続
+| Only if using externalized Nomad Servers
+
+| 4647
+| TCP
+| インバウンド
+| Services Machine
+| Nomad サーバー接続
+| Only if using externalized Nomad Servers
+
+| 4648
+| TCP
+| Bi-directional
+| Nomad サーバー
+| Nomad サーバー内部通信
+| Only if using externalized Nomad Servers
+|===

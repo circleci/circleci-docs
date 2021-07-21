@@ -1,0 +1,149 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= CircleCI Server v3.x 前提条件
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Server 3.xのhttps://circleci.com/docs/2.0/server-3-overview[概要]を事前に読まれることを前提としております。
+
+
+CircleCI Serverアプリケーションを設定するためには、以下の一般的な要件およびインフラ固有の要件が満たされていることを確認する必要があります。
+ 以下が必要になります。
+
+* 既存のKubernetesクラスタの例: (クラスターの作成にヘルプが必要な場合xref:server-3-install-creating-your-first-cluster.adoc[こちら]を参照ください)
+** Amazon EKS クラスターの作成 - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
+*** <a data-type="default" href="https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html">`eksctl`の使用を推奨しています。このツールはVPCを作成し、適切なセキュリティグループを選択することができます。
+
+** クラスタの作成 - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
+*** Autopilotクラスターは使用しないでください。
+ CircleCIはGKE Autopilotではサポートされていない機能を必要とします。
++
+* CircleCI Serverアプリケーションを構成するためには、以下の一般的な要件とインフラストラクチャ固有の要件が満たされていることを確認してください: +
++
+--
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| 1 日の CircleCI アクティブ ユーザー数
+| 最小ノード数
+| 合計 CPU
+| 合計 RAM
+| NIC 速度
+
+| 500 未満
+| 3
+| 8 コア
+| 32 GB
+| 1 Gbps
+
+| 500 以上
+| 3
+| 48 cores
+| 240 GB
+| 10 Gbps
+|===
+--
+
+* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを広く許可することが出来ない場合は、https://help.replicated.com/community/t/customer-firewalls/55[list of ports] をご参照ください。
+* クラスター内のpodsを一覧、作成、編集、削除するには、適切なパーミッションが必要です。
+ You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
+* CircleCIのライセンスファイル. ライセンスについては https://support.circleci.com/hc/en-us/requests/new[CircleCI support] にお問い合わせください。
+* The <<必要なツール>> tools installed
+** なお、`kubectl`ツールもクラスタにアクセスできるように設定されている必要があります。
+
+
+*** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Amazon EKSクラスターへの接続] - Amazon EKS
+
+*** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[kubectlのクラスタアクセスを設定] - Google GKE
+
+* ポートアクセスの要件はこちらに記載されています。
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes Load Balancers]
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes Nodes]
+** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad Clients]
+** xref:server-3-install-hardening-your-cluster.adoc#external-vms[External VMs]
+
+NOTE: VPCの設定や、クラスターのディスクサイズに関する要件はありません。 ただし、既存のVPCではなく、新しいVPCを設定することをお勧めします。
+
+## Required ツールs
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| Tool
+| バージョン
+| 用途
+
+| https://www.terraform.io/downloads.html[Terraform]
+| {terraformversion} or greater
+| インフラストラクチャの管理
+
+| https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
+| {kubectlversion} or greater
+| Kubernetes CLI
+
+| https://helm.sh/[Helm]
+| {helmversion} or greater
+| Kubernetes パッケージ管理
+
+| https://kots.io/[Kots]
+| {kotsversion} or greater
+| Replicated Kubernetes アプリケーション管理
+|===
+
+
+## 外部ポート
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| ポート番号
+| プロトコル
+| 方向
+| 送信元・送信先
+| 用途
+| メモ
+
+| 80
+| TCP
+| Inbound
+| エンド ユーザー
+| HTTP web app traffic
+|
+
+| 443
+| TCP
+| Inbound
+| エンド ユーザー
+| HTTP web app traffic
+|
+
+| 8800
+| TCP
+| Inbound
+| Administrators
+| Admin console
+|
+
+| 22
+| TCP
+| Inbound
+| Administrators
+| SSH
+| 踏み台ホストでのみ必要
+
+| 64535-65535
+| TCP
+| Inbound
+|
+| SSH into builds
+| Nomad クライアントでのみ必要
+|===
+
+## 次に読む
+* https://circleci.com/docs/2.0/server-3-install-creating-your-first-cluster[Creating your first cluster]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]

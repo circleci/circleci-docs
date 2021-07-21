@@ -1,0 +1,65 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= CircleCI Server v3.x What's New
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Server 3.x の一般公開を開始しました。 最新バージョンのサーバーでは、ワークロードの増大に合わせてお客様自身でスケーリングが可能です。あらゆるコードやデータをお客様専用の Kubernetes クラスタと社内ネットワーク内に保持しながら、クラウド版 CircleCI と同等の機能を利用できます。
+
+CircleCI Orbs、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能を使用できます。 For existing
+customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.x will receive monthly
+patch releases and quarterly feature releases.
+
+toc::[]
+
+== 新機能
+
+* 新UI
+* Orbs for Server
+* パイプライン
+* コンフィグ 2.1
+* API 2.0
+*  Workflows のスケジューリング
+* マトリックスジョブ
+* And much more...
+
+== 既知の問題
+
+* 外部データストア（Postgres、Mongo、Vault）のサポートはありません。 この機能は将来のリリースで実装される予定です。
+* 同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。 今後のパッチ リリースで修正される予定です。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 もし、ビルドが表示されない問題が生じた場合は、CircleCI 1.0 のコンフィグを用いている可能性があるため、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用して、CircleCI 1.0 ビルドであるなど原因を特定することをおすすめします。
+* https://docs.influxdata.com/telegraf/v1.18/[Telegraf] メトリクス収集のカスタマイズはまだ利用できません。
+
+== Release 3.1.0
+
+IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles
+all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing
+to the `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember,
+you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik`
+in a terminal that has access to the cluster.
+
+== Release 3.0.2
+
+- Resolved a bug relating to artifacts disappearing after 30 days. The default settings for the artifact retention period have been updated to unlimited, and can be adjusted from the KOTS Admin Console.
+- Resolved a bug that made Traefik "unaware" of TLS certificate updates without requiring a manual restart of the Traefik pod. The Traefik pod will now restart automatically after any TLS certificate updates go into effect after the initial post KOTS deployment.
+- Resolved a bug in `builds-service` that was causing pods to crash as a result of running out of memory.
+
+== Release 3.0.1
+
+- `build_agent` `version` value updated, as the previous version was relying on a vulnerable version of PsExec.
+- Due to an issue that was causing duplicated checks in GitHub, environment variables for `output-processor` were reconfigured.
+- Adjusted deployment configuration for `vm-service` to handle out-of-order database migrations managed by Flyway.
+
+== 次に読む
+To learn more about Server v3.x, see the following:
+
+* https://circleci.com/docs/2.0/server-3-whats-new[Server 3.x Overview]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
