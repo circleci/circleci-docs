@@ -1352,11 +1352,11 @@ jobs:
 
 ### **`version`**
 {: #version }
-The Workflows `version` field is used to issue warnings for deprecation or breaking changes during Beta.
+ワークフローの `version` フィールドは、非推奨またはベータ版での互換性を損なう変更について注意を促すために記述します。
 
-| キー      | 必須 | Type   | 説明                      |
+| キー      | 必須 | 型      | 説明                      |
 | ------- | -- | ------ | ----------------------- |
-| version | Y  | String | Should currently be `2` |
+| version | ○  | String | Should currently be `2` |
 {: class="table table-striped"}
 
 ### **<`workflow_name`>**
