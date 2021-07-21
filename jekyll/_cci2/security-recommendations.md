@@ -25,7 +25,7 @@ If you are getting started with CircleCI, there are some security best practices
   - running `env` or `printenv` which will print all your environment variables to `stdout`.
   - literally printing secrets in your codebase or in your shell with `echo`.
   - programs or debugging tools that print secrets on error.
-- Consult your VCS provider's permissions for your organization (if you are in an organizations) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
+- Consult your VCS provider's permissions for your organization (if you are in an organization) and try to follow the [Principle of Least Privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege).
 - Use Restricted Contexts with teams to share environment variables with a select security group. Read through the [contexts]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) document to learn more.
 - Ensure you audit who has access to SSH keys in your organization.
 - Ensure that your team is using Two-Factor Authentication (2FA) with your VCS ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa), [Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html)). If a user's GitHub or Bitbucket account is compromised a nefarious actor could push code or potentially steal secrets.
