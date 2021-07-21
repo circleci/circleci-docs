@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-Server 3.x の一般公開を開始しました。 最新バージョンのサーバーでは、ワークロードの増大に合わせてお客様自身でスケーリングが可能です。あらゆるコードやデータをお客様専用の Kubernetes クラスタと社内ネットワーク内に保持しながら、クラウド版 CircleCI と同等の機能を利用できます。
+Server 3.x の一般公開を開始しました。 最新バージョンのサーバーでは、ワークロードの増大に合わせてお客様自身でスケーリングが可能です。 あらゆるコードやデータをお客様専用の Kubernetes クラスタと社内ネットワーク内に保持しながら、クラウド版 CircleCI と同等の機能を利用できます。
 
 CircleCI Orbs、ワークフローのスケジュール実行、マトリックス ジョブをはじめ、CircleCI の最新機能を使用できます。 For existing
 customers interested in migrating from 2.19 to 3.x, contact your customer success manager. Server 3.x will receive monthly
@@ -18,31 +18,61 @@ patch releases and quarterly feature releases.
 
 toc::[]
 
-== 新機能
-
-* 新UI
-* Orbs for Server
-* パイプライン
-* コンフィグ 2.1
-* API 2.0
-*  Workflows のスケジューリング
-* マトリックスジョブ
-* And much more...
-
-== 既知の問題
-
-* 外部データストア（Postgres、Mongo、Vault）のサポートはありません。 この機能は将来のリリースで実装される予定です。
-* 同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。 今後のパッチ リリースで修正される予定です。
-* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 もし、ビルドが表示されない問題が生じた場合は、CircleCI 1.0 のコンフィグを用いている可能性があるため、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用して、CircleCI 1.0 ビルドであるなど原因を特定することをおすすめします。
-* https://docs.influxdata.com/telegraf/v1.18/[Telegraf] メトリクス収集のカスタマイズはまだ利用できません。
-
 == Release 3.1.0
+
+== Upgrade notes
 
 IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles
 all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing
 to the `frontend-external` load balancer and have it point to the `circleci-server-traefik` load balancer instead. Remember,
 you can retrieve the external IP address or DNS name of your traefik load balancer by typing `kubectl get svc/circleci-server-traefik`
 in a terminal that has access to the cluster.
+
+To update your DNS record and upgrade your server installation follow these steps:
+
+. Retrieve the external IP or DNS name for the traefik load balancer as described or by looking the DNS A record for `app.<your domain name>`` - this should already point to your traefik load balancer.
+. Locate the DNS A record that points to the domain name of your server installation (not the one pointing to the `app.` subdomain)
+. Edit the A record so that it points to the traefik load balancer, just like the record for the `app. subdomain does. Your changes might need a couple of minutes to take effect, depending on you DNS service.
+
+Next, from the management console dashboard, select Version History from the menu bar and click **Deploy** for server v3.1.0.
+
+=== 新機能
+
+* Telegraf plugins can now be added to server and customized to use third party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] guide.
+* Server 3.x hosts build artifacts, test results, and other state in object storage. We support any S3-compatible storage and Google Cloud Storage. For more information, see the https://circleci.com/docs/2.0/server-3-install/[Installation guide] for further information.
+* Dynamic config via setup workflows is now available on server installations. For more information see our https://circleci.com/blog/introducing-dynamic-config-via-setup-workflows/[blog post] and the https://circleci.com/docs/2.0/dynamic-config/[Dynamic Configuration docs page].
+* Runner is now available on server. For further information, including installation steps, see the https://circleci.com/docs/2.0/runner-overview/?section=executors-and-images[Runner docs]. Runner allows the use of the macOS executor in server installations and VM service functionality for customers with server installed in a private data centre.
+* The frontend load balancer from v3.0 has been removed and replaced with an Ingress resource and the Traefik Ingress controller. This is a breaking change requiring you to reconfigure your DNS. See the https://circleci.com/docs/2.0/server-3-whats-new/#release-3-1-0[What's New in server docs] for further information and guidance.
+* The following services can now be externalized. For setup information, see the https://circleci.com/docs/2.0/server-3-install/[server v3.x installation guide]:
+** Postgres
+** MongoDB
+** Vault
+* Backup and restore functionality is now available. For more information see the https://circleci.com/docs/2.0/server-3-operator-backup-and-restore/[Backup and Restore] guide.
+* Prometheus is now deployed by default with server to monitor your cluster health and usage. Prometheus can be managed and configured from the KOTS admin UI. For further information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
+* Server now supports the 2XL resource class. The Nomad cluster needs to be made large enough to account for larger resource classes.
+* The lifecycle of build artifacts and test results can now be configured from the KOTS admin console under Storage Object Expiry, including the option to disable the expiration and retain artifacts and test results indefinitely.
+
+=== Fixes
+
+* Resolved a collection of bugs that were causing sensitive information to be leaked into CircleCI support bundles:
+  * Instances of faulty and partial redactions of secrets were detected, in part due to 3rd party bugs.
+  * PostgresDB leaking sensitive information to STDOUT.
+  * Several CircleCI services were logging secrets.
+* Tightened network security in the Nomad terraform module.
+* Terraform v0.15.0 and up are now supported.
+* Updated installation scripts to use functions supported by most recent versions of Terraform.
+* Resolved a bug that was leading to machine large builds being run on the wrong machine type. Machine large builds now correctly use 4 vCPUs and 16GB of RAM.
+* Resolved a bug that caused contexts-service to fail on expiration of Vault client tokens.
+* Resolved a bug that was causing `legacy-notifier` to report readiness prematurely.
+* The JVM heap size parameter has been removed for all services. The heap size is set to be half of the memory limit.
+* Changes to networking config and certs are now picked up automatically by Traefik. Previously, a restart would have been required.
+* Minimum requirements for CPU and memory have changed. For the new values, see the https://circleci.com/docs/2.0/server-3-install-prerequisites/[Installation Prerequisites] doc.
+
+=== 既知の問題
+
+* 同一の CircleCI サーバ アカウントで複数の組織が同じ名前のコンテキストを作ることが可能です。 これは、エラーや予期せぬ動作を引き起こす可能性があるため、お控えください。
+* CircleCI 1.0 のビルドはサポートされていません。 CircleCI 1.0 のビルドを実行した場合、ビルドが実行されない上、アプリ画面上でエラーなどが表示されません。 もし、ビルドが表示されない問題が生じた場合は、CircleCI 1.0 のコンフィグを用いている可能性があるため、https://circleci.com/docs/ja/2.0/local-cli/[CircleCI CLI] を使用して、CircleCI 1.0 ビルドであるなど原因を特定することをおすすめします。
 
 == Release 3.0.2
 
