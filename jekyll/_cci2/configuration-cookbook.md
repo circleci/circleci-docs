@@ -645,7 +645,8 @@ For example, consider a monorepo structure like the example shown below:
 ```shell
 .
 ├── .circleci
-│   └── config.yml
+│   ├── config.yml
+│   └── continue_config.yml
 ├── service1
 │   ├── Service1.java
 ├── service2
@@ -654,7 +655,9 @@ For example, consider a monorepo structure like the example shown below:
 │   ├── IntegrationTests.java
 ```
 
-An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
+
+#### config.yml
 
 ```yaml
 version: 2.1
@@ -663,10 +666,40 @@ version: 2.1
 setup: true
 
 # the path-filtering orb is required to continue a pipeline based on
-# the path of an updated fileset the maven orb is also used, as an
-# example on using dynamic configuration to build a Java project.
+# the path of an updated fileset
 orbs:
   path-filtering: circleci/path-filtering@0.0.2
+
+workflows:
+  # the always-run workflow is always triggered, regardless of the pipeline parameters.
+  always-run:
+    jobs:
+      # the path-filtering/filter job determines which pipeline
+      # parameters to update.
+      - path-filtering/filter:
+          name: check-updated-files
+          # 3-column, whitespace-delimited mapping. One mapping per
+          # line:
+          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+          mapping: |
+            service1/.* run-build-service-1-job true
+            service2/.* run-build-service-2-job true
+          base-revision: master
+          # this is the path of the configuration we should trigger once
+          # path filtering and pipeline parameter value updates are
+          # complete. In this case, we are using the parent dynamic
+          # configuration itself.
+          config-path: .circleci/continue_config.yml
+```
+
+#### continue_config.yml
+
+```yaml
+version: 2.1
+
+# the path-filtering orb is required to continue a pipeline based on
+# the path of an updated fileset
+orbs:
   maven: circleci/maven@1.2.0
 
 # the default pipeline parameters, which will be updated according to
@@ -679,29 +712,6 @@ parameters:
     type: boolean
     default: false
 
-# our defined jobs
-jobs:
-  # the build-service-1 job uses the maven orb to build and install
-  # service1 artifacts into the maven repository (it does not run
-  # tests).
-  build-service-1:
-    - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service1'
-  # the build-service-2 job uses the maven orb to build and install
-  # service2 artifacts into the maven repository (it does not run
-  # tests).
-  build-service-2:
-    - maven/test:
-        command: 'install -DskipTests'
-        app_src_directory: 'service2'
-  # the run-integration-tests job will run any tests defined in the
-  # tests directory.
-  run-integration-tests:
-    - maven/test:
-        command: '-X verify'
-        app_src_directory: 'tests'
-
 # here we specify our workflows, most of which are conditionally
 # executed based upon pipeline parameter values. Each workflow calls a
 # specific job defined above, in the jobs section.
@@ -711,13 +721,19 @@ workflows:
   service-1:
     when: << pipeline.parameters.run-build-service-1-job >>
     jobs:
-      - build-service-1
+      - maven/test:
+          name: build-service-1
+          command: 'install -DskipTests'
+          app_src_directory: 'service1'
   # when pipeline parameter, run-build-service-2-job is true, the
   # build-service-2 job is triggered.
   service-2:
     when: << pipeline.parameters.run-build-service-2-job >>
     jobs:
-      - build-service-2
+      - maven/test:
+          name: build-service-2
+          command: 'install -DskipTests'
+          app_src_directory: 'service2'
   # when pipeline parameter, run-build-service-1-job OR
   # run-build-service-2-job is true, run-integration-tests job is
   # triggered. see:
@@ -727,26 +743,10 @@ workflows:
     when:
       or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
     jobs:
-      - run-integration-tests
-  # the check-updated-files job is always triggered, regardless of
-  # pipeline parameters.
-  always-run:
-    jobs:
-      # the path-filtering/filter job determines which pipeline
-      # parameters to update.
-      - path-filtering/filter:
-          # 3-column, whitespace-delimited mapping. One mapping per
-          # line:
-          # <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
-          mapping: |
-            service1/.* run-build-service-1-job true
-            service2/.* run-build-service-2-job true
-          base-revision: master
-          # this is the path of the configuration we should trigger once
-          # path filtering and pipeline parameter value updates are
-          # complete. In this case, we are using the parent dynamic
-          # configuration itself.
-          config-path: .circleci/config.yml
+      - maven/test:
+          name: run-integration-tests
+          command: '-X verify'
+          app_src_directory: 'tests'
 ```
 
 In the above configuration, we:
