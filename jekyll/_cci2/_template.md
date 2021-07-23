@@ -14,7 +14,9 @@ A short description of the feature or topic.
 
 {: #Use Cases}
 
-Short description of who this feature or article is for, to help readers scan and know whether the following content is relevant to them. Use bullet list to show various intended user groups:
+Short description of who this feature or article is for, to help readers scan
+and know whether the following content is relevant to them. Use bullet list to
+show various intended user groups:
 
 - Use case one.
 - Use case two.
@@ -38,7 +40,8 @@ your users using a few tricks.
 {: #sub-section }
 
 Links to other docs pages should be in the following form:
-[contexts]({{site.baseurl}}/2.0/contexts). And to insert an image place the image in `jekyll/assets/img/docs` and then use the following syntax: 
+[contexts]({{site.baseurl}}/2.0/contexts). And to insert an image place the
+image in `jekyll/assets/img/docs` and then use the following syntax:
 ![Env Vars Interpolation Example]({{site.baseurl}}/assets/img/docs/env-vars-example-ui.png)
 
 ### Minimizing risk as a developer
@@ -60,7 +63,8 @@ baseline defense against bad actors publishing malicious packages with a higher
 SemVer number, adding malicious distribution types to an existing package
 version, or overwriting the contents at a given version number.
 
-Consider the following simple method for installing a Python project using pip and pip-tools.
+Consider the following simple method for installing a Python project using pip
+and pip-tools.
 
 ```sh
 $ echo ‘flask’ > requirements.in
@@ -88,8 +92,8 @@ $ yarn install  --frozen-lockfile
 Many tools for scanning dependency files exist, and many are first party for a
 given language or tool chain. On CircleCI, there are orbs available that offer
 [dependency scanning](https://circleci.com/developer/orbs?query=&category=Security),
-and cron jobs for periodic scanning to ensure your
-applications are scanning more often than your pushes.
+and cron jobs for periodic scanning to ensure your applications are scanning
+more often than your pushes.
 
 Using dependency pinning with hashes like this prevents malicious binaries or
 packages from silently replacing known good versions. It protects against a
