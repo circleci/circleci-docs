@@ -99,7 +99,7 @@ If your project is open source/available to be forked and receive PRs from contr
 
 CircleCI では、`restore_cache` ステップにリストされているキーの順番でキャッシュが復元されます。 各キャッシュ キーはプロジェクトの名前空間にあり、プレフィックスが一致すると取得されます。 最初に一致したキーのキャッシュが復元されます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
-{% raw %}```yaml
+次の例では、2 つのキーが指定されています:
 
 {% raw %}
 ```yaml
