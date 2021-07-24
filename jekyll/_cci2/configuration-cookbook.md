@@ -626,7 +626,7 @@ In the above configuration, we:
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
 Note: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
-Note: You can't call CircleCI's dynamic configuration feature several times in the same pipeline. It means you can't make the another workflow with `setup: true` by the CircleCI's dynamic configuration feature.
+You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
 
 For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the
 [CircleCI Developer Hub](https://circleci.com/developer/orbs/orb/circleci/continuation?version=0.1.2) or review the
