@@ -318,7 +318,7 @@ It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-confi
 jobs:
   myjob:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: circleci/node:14.17.3
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
