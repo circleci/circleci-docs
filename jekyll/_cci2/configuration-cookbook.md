@@ -625,7 +625,7 @@ In the above configuration, we:
     - Continues running the pipeline based on what configuration is provided to the required `configuration_path`.
 - Lastly, we call the `setup` job defined above as a part of our `workflow`
 
-Note: You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
+**Note:** You can only use one workflow per `config.yml` when using CircleCI's dynamic configuration feature
 You can only run a single workflow as part of the pipeline's setup stage. This setup-workflow has access to a one-time-use token to create more workflows. The setup process does not cascade, so subsequent workflows in the pipeline cannot launch their own continuations.
 
 For a more in-depth explanation of what the `continuation` orb does, review the orb's source code in the
@@ -659,6 +659,7 @@ For example, consider a monorepo structure like the example shown below:
 An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml` and `continue_config.yml`:
 
 #### config.yml
+{: #configyml }
 
 ```yaml
 version: 2.1
@@ -694,6 +695,7 @@ workflows:
 ```
 
 #### continue_config.yml
+{: #continueconfigyml }
 
 ```yaml
 version: 2.1
