@@ -46,7 +46,7 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 Audit logs are separate from system logs that track performance and network metrics.
 
-完全な監査ログは、アプリケーションの管理者セクション内にある [Audit Log (監査ログ)] ページから CSV ファイル形式でダウンロードできます。  ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。Please note the audit log download can take a very long time to complete; we recommend clicking the Download button once and walking away.
+完全な監査ログは、アプリケーションの管理者セクション内にある [Audit Log (監査ログ)] ページから CSV ファイル形式でダウンロードできます。  ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。終了まで時間かかるですが、ダウンロードボタンを押してからしばらく休んで頂ければ幸いです。
 
 *メモ：*内部挙動により、重複するイベントが監査ログに生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
