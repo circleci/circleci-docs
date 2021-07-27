@@ -282,7 +282,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.0-browsers
+      - image: circleci/node:14.17-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
