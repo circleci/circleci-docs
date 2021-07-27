@@ -15,7 +15,7 @@ version:
 ## Introduction
 {: #introduction }
 
-This orb authoring guide assumes you have read the [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-intro) document and claimed your namespace. At this point you are ready to develop an orb.
+This orb authoring guide assumes you have read the [Introduction to an orb]({{site.baseurl}}/2.0/orb-intro) document, [Introduction to authoring an orb]({{site.baseurl}}/2.0/orb-author-intro) document and claimed your namespace. At this point you are ready to develop an orb.
 
 Whether you are writing your first orb or getting ready for production level, we recommend using our [orb development kit](#orb-development-kit) to get started. Alternatively, as orbs are packages of [reusable configuration]({{site.baseurl}}/2.0/reusing-config), they can be written [manually]({{site.baseurl}}/2.0/orb-author-validate-publish), as singular `yaml` files, and published using our [circleci orb cli]({{site.baseurl}}/2.0/local-cli/#installation).
 
