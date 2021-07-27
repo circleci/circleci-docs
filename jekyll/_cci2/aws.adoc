@@ -37,7 +37,6 @@ NOTE: The `builder_instance_type` is only used for CircleCI 1.0 and is disabled 
 
 . In section 3 you can:
 .. choose to use 1.0 Builders if your project requires it (by changing the count to `1`)
-.. enter proxy details, and enter a prefix if there will be multiple installations within your AWS region – the Services and Nomad client instances will be displayed with this prefix in the AWS console.
 
 .Example tfvars
 
@@ -69,10 +68,6 @@ nomad_client_instance_type = "m4.2xlarge"
 # Set this to `1` or higher to enable CircleCI 1.0 builders
 desired_builders_count = "0"
 
-# Provide proxy address if your network configuration requires it
-http_proxy = ""
-https_proxy = ""
-no_proxy = ""
 
 # Use this var if you have multiple installation within one AWS region
 prefix = "..."

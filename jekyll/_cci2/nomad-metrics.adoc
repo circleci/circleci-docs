@@ -66,9 +66,6 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 
 set -exu
 
-export http_proxy=""
-export https_proxy=""
-export no_proxy=""
 export aws_instance_metadata_url="http://169.254.169.254"
 export PUBLIC_IP="$(curl $aws_instance_metadata_url/latest/meta-data/public-ipv4)"
 export PRIVATE_IP="$(curl $aws_instance_metadata_url/latest/meta-data/local-ipv4)"
@@ -125,9 +122,6 @@ tmp=$(mktemp)
 cp /etc/docker/daemon.json /etc/docker/daemon.json.orig
 jq '.["userns-remap"]="default"' /etc/docker/daemon.json > "$tmp" && mv "$tmp" /etc/docker/daemon.json
 
-sudo echo 'export http_proxy="${http_proxy}"' >> /etc/default/docker
-sudo echo 'export https_proxy="${https_proxy}"' >> /etc/default/docker
-sudo echo 'export no_proxy="${no_proxy}"' >> /etc/default/docker
 sudo service docker restart
 sleep 5
 

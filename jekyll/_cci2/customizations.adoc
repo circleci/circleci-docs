@@ -68,19 +68,7 @@ NOTE: Every property should be in the format `export ENV_VAR="value"`
 | Use container specific settings when possible (see files above)
 |===
 
-=== Other Properties and Env Vars
 
-[.table.table-striped]
-[cols=3*, options="header", stripes=even]
-|===
-| Property
-| Impact
-| More info
-
-| HTTP_PROXY, NO_PROXY
-| Proxy for replicated and other services outside CircleCI containers to use
-|
-|===
 
 <<<
 
