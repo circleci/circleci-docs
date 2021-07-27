@@ -192,7 +192,6 @@ workflows:
             コードをビルドします。
       - test1: # カスタム ジョブ。
           テスト スイート 1 を実行します。
-
           requires: # "build" ジョブが完了するまで test1 は実行されません。
             - build
       - test2: # 別のカスタム ジョブ。
@@ -541,6 +540,10 @@ Workflow には必ず Workspace というものが割り当てられています
 `attach_workspace` キーをセットして、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 Workflow はシーケンシャルのため、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
 
 ```yaml
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
+
 # 以下のスタンザは、CircleCI 2.1 を使用して再利用可能な Executor を使用していることに注意してください。
 # これにより、ジョブ間で再利用される Docker イメージを定義できます。
 # 詳細については、https://circleci.com/ja/docs/2.0/reusing-config/#authoring-reusable-executors を参照してください。
@@ -567,12 +570,10 @@ jobs:
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。
       - persist_to_workspace:
-
           # Must be an absolute path, or relative path from working_directory.
       #  絶対パス、または working_directory からの相対パスで指定する必要があります。 This is a directory on the container which is
           # taken to be the root directory of the workspace.
           これは、コンテナ上のディレクトリで、ワークスペースのルートディレクトリと見なされます。
-
           root: workspace
           # ルートからの相対パスを指定する必要があります
           paths:
@@ -610,7 +611,7 @@ workflows:
 ## ワークフロー内の失敗したジョブの再実行
 {: #rerunning-a-workflows-failed-jobs }
 
-Workflow を利用すると、ビルドの失敗に迅速に対応できるようになります。その際、ワークフローのなかで**失敗した**ジョブのみを再実行できます。 CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
+When you use workflows, you increase your ability to rapidly respond to failures. その際、ワークフローのなかで**失敗した**ジョブのみを再実行できます。 CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
 
 ![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
@@ -656,11 +657,11 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 ## ビデオ: ワークフローに複数のジョブを構成する
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc}
+{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
 {:.no_toc}
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
+{:.no_toc}
+{:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
