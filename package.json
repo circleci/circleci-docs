@@ -14,7 +14,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "js-cookie": "^2.2.0",
+    "js-cookie": "^2.2.1",
     "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2"
   },
