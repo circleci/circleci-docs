@@ -39,8 +39,6 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 
 - *アーティファクト:* アーティファクトには、S3 などのホスティングされたストレージを使用するのが一般的です。 これらのリソースが、標準的なポリシーに従ってセキュリティ保護されているなら、共に保存されている他のデータと同様、アーティファクトも外部からの侵入に対して安全と言えます。
 
-- **Support Bundles** We use https://www.honeycomb.io/[Honeycomb] to process and analyze distributed tracing data from Support Bundles that are sent to us. The traces contain metadata about activity in your instance but no secrets, source code, or build output are included. Data is retained for a maximum of 60 days.
-
 == 監査ログ
 監査ログ機能は、独自のサーバーまたはプライベートクラウド上にインストールした CircleCI でのみ使用できます。
 
