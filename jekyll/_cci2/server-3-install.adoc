@@ -346,6 +346,7 @@ The recommended security group configuration can be found in the xref:server-3-i
 AWS
 ```bash
 $ aws ec2 create-security-group \
+    --vpc-id "<<VPC ID>>" \
     --description "CircleCI's VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
