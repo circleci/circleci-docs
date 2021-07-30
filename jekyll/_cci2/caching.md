@@ -558,7 +558,7 @@ We recommend using `yarn --frozen-lockfile --cache-folder ~/.cache/yarn` for two
 
 1) `--frozen-lockfile` ensures that a whole new lockfile is created and it also ensures your lockfile isn't altered. This allows for the checksum to stay relevant and your dependencies should identically match what you use in development.
 
-2) The default cache location depends on OS. `--cache-folder ~.cache/yarn` ensures we're explitly matching our cache save location.
+2) The default cache location depends on OS. `--cache-folder ~/.cache/yarn` ensures we're explitly matching our cache save location.
 
 {% endraw %}
 
