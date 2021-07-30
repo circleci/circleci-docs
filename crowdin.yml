@@ -10,5 +10,13 @@ files: [
   {
     source: "/jekyll/_data/sidenav.yml",
     translation: "/jekyll/_data/%two_letters_code%/sidenav.yml"
+  },
+  {
+    source: "/jekyll/_includes/edit-on-github.html",
+    translation: "/jekyll/_includes/%two_letters_code%/sidenav.yml"
+  },
+  {
+    source: "/jekyll/_includes/license-notice.html",
+    translation: "/jekyll/_includes/%two_letters_code%/license-notice.html"
   }
 ]
