@@ -81,7 +81,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
 * Create a new temporary keychain for use with Fastlane Match (see the code signing section for more details).
 * Switch Fastlane Match to `readonly` mode to make sure CI does not create new code signing certificates or provisioning profiles.
-* Xcode 10.1.0
+* https://discuss.circleci.com/t/xcode-12-1-gm-released/37809
 * Xcode 10.2.1
 
 ## Getting started
