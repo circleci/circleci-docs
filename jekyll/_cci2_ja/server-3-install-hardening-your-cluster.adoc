@@ -3,219 +3,207 @@ version:
 - Server v3.x
 - サーバー管理
 ---
-= CircleCI Server v3.x クラスターの管理
+= CircleCI Server v3.x クラスタのハードニング
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This section provides supplemental information on hardening your Kubernetes cluster.
+このセクションでは、Kubernetes クラスタのハードニングに関する補足情報を紹介します。
 
 toc::[]
 
-## Network Topology
-A server installation basically runs three different type of compute instances: The Kubernetes nodes, Nomad clients and external VMs.
+## ネットワーク トポロジ
+ほとんどの CircleCI Server システムでは、Kubernetes ノード、Nomad クライアント、外部 VM という 3 種類のコンピューティング インスタンスを実行します。
 
-It is highly recommended that you deploy these into separate subnets with distinct CIDR blocks. This will make it easier for you
-to control traffic between the different components of the system and isolate them from each other.
+これらのインスタンスは、CIDR ブロックの異なるサブネットに分けてデプロイすることを強くお勧めします。 こうすることで、システムのコンポーネント間を流れるトラフィックを制御し、それぞれを分離しやすくなります。
 
-As always, the rule is to make as many of the resources private as possible, applies. If your users will access your
-CircleCI server installation via VPN, there is no need to assign any public IP addresses at all, as long as you have a
-working NAT gateway setup. Otherwise, you will need at least one public subnet for the CircleCI server Traefik load balancer.
+通例どおり、リソースはできる限り非公開にすることが原則です。 CircleCI Server システムへのユーザー アクセスが VPN 経由に限られ、かつ NAT ゲートウェイを適切に設定しているのであれば、パブリック IP アドレスの割り当ては必要ありません。 それ以外の場合は、少なくとも CircleCI Server Traefik ロード バランサー用にパブリック サブネットを 1 つ用意する必要があります。
 
-However, in this case, it is also recommended to place Nomad clients and VMs in a public subnet to enable your users to
-SSH into jobs and scope access via networking rules.
+ただし、この場合には、パブリック サブネットに Nomad クライアントと VM を配置して、ジョブにユーザーが SSH 接続できるようにするとともに、ネットワーク ルールでアクセス スコープを設定することもお勧めします。
 
-Currently, custom subnetting is not supported for GCP. Custom subnetting support will be available in a future update/release.
+現時点では、GCP はカスタムのサブネット化には対応していません。 カスタムのサブネット化は、今後の更新/リリースで使用可能になる予定です。
 
-## Network Traffic
-This section spells out the minimum requirements that are needed for a server installation to work. Depending on your workloads,
-you might need to add additional rules to egress for Nomad clients and VMs. Nomenclature between cloud providers differs, therefore,
-you will probably need to implement these rules using firewall rules and/or security groups.
+## ネットワーク トラフィック
+このセクションでは、CircleCI Server システムの稼働に必要な最小要件について説明します。 ワークロードによっては、Nomad クライアントと VM の送信にルールを追加する必要があります。 クラウド プロバイダーごとに名称は異なります。そのため、ファイアウォール ルールやセキュリティ グループなどを使用した実装が必要になる可能性があります。
 
-Where you see "external," this usually means all external IPv4 addresses. Depending on your particular setup, you might
-be able to be more specific (e.g., if you are using a proxy for all external traffic).
+表中の "外部" は、特に断りがない限り、すべての外部 IPv4 アドレスを意味します。 ただし、外部トラフィックすべてにプロキシを使用している場合など、お使いの環境によっては、より具体的に指定することができます。
 
-It is assumed that you have configured the load balancers for Nomad, vm-service and output processor to be internal load balancers - this is the default.
+なお、ここでは、Nomad、VM サービス、出力プロセッサそれぞれのロード バランサーは、すべて内部ロード バランサー (デフォルト) にすることを前提としています。
 
-The rules spelled out here are assumed to be stateful and for TCP connections only, unless stated otherwise. If you are working with stateless rules, you will need to create matching ingress or egress rules to the ones listed here.
+また、下記のルールは、特別な記載のない限り、TCP 接続に対してステートフルで設定するものとします。 ステートレス ルールを使用する場合には、下表の各項目に該当する送受信ルールをそれぞれ作成してください。
 
-## Kubernetes Load Balancers
-Depending on your setup, your load balancers might be transparent (i.e. they are not treated as a distinct layer in your networking topology). In this case, you can apply the rules from this section directly to the underlying destination or source of the network traffic. Refer to the documentation of your cloud provider to make sure you understand how to correctly apply networking security rules given the type of load balancing you are using with your installation.
+## Kubernetes ロード バランサー
+お使いの環境によっては、ロード バランサーが透過的である (ネットワーク トポロジの個別のレイヤーとしては扱われない) ことがあります。 この場合には、ロード バランサーの背後にあるネットワーク トラフィックの送信先またはソースに対して、本セクションのルールを直接適用してください。 CircleCI Server システムで使用している負荷分散の種類に応じたネットワーク セキュリティ ルールの適切な適用方法については、ご利用のクラウド プロバイダーのドキュメントをご覧ください。
 
-### Ingress
-If the traffic rules for your load balancers have not been created automatically, here are their respective ports:
+### 受信
+ロード バランサーのトラフィック ルールが自動的に作成されていない場合は、次の各ポートを設定してください。
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
 | 名前
-| Port
+| ポート
 | ソース
-| 目的
+| 用途
 
 | *-server-traefik
 | 80
-| External
-| User Interface & Frontend API
+| 外部
+| ユーザー インターフェイスとフロントエンド API
 
 | *-server-traefik
 | 443
-| External
-| User Interface & Frontend API
+| 外部
+| ユーザー インターフェイスとフロントエンド API
 
 | vm-service
 | 3000
-| Nomad clients
-| Communication with Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 
 | nomad
 | 4647
-| Nomad clients
-| Communication with Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 
 | output-processor
 | 8585
-| Nomad clients
-| Communication with Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 |===
 
-### Egress
-The only type of egress needed is TCP traffic to the K8s nodes on the K8s load balancer ports (30000-32767). This is not needed if your load balancers are transparent.
+### 送信
+必要な送信は、Kubernetes (K8s) ロード バランサーのポート (30000 ～ 32767) 上にある K8s ノードへの TCP トラフィックのみです。 ただし、ロード バランサーが透過的であればこの送信は必要ありません。
 
-## Common Rules for Compute Instances
-These rules apply to all compute instances, but not to the load balancers.
+## コンピューティング インスタンスの共通ルール
+以下のルールは、ロード バランサーを除くすべてのコンピューティング インスタンスに適用されます。
 
-### Ingress
-If you want to access your instances via SSH, you will need to open port 22 for TCP connections for the instances in question.
-It is recommended to scope the rule as closely as possible to allowed source IPs and/or only add such a rule ad hoc when needed.
+### 受信
+インスタンスに SSH でアクセスする必要がある場合は、該当するインスタンスへの TCP 接続用にポート 22 を開放してください。
+ルールの範囲では、許可するソース IP をできるだけ絞り込むことをお勧めします。または、必要に応じて限定的なルールを随時追加することも有効です。
 
-### Egress
-You most likely want all of your instances to access internet resources. This will require you to allow egress for UDP
-and TCP on port 53 to the DNS server within your VPC, as well as TCP ports 80 and 443 for HTTP and HTTPS traffic, respectively.
-Instances building jobs (i.e. the Nomad clients and external VMs) also will likely need to pull code from your VCS via
-SSH (TCP port 22). SSH is also used to communicate with external VMs, so it should be allowed for all instances with
-the destination of the VM subnet and your VCS at the very least.
+### 送信
+ほとんどの環境では、インスタンスすべてに対してインターネット リソースへのアクセスを許可することになります。 これを行うには、VPC 内にある DNS サーバーへのポート 53 からの UDP と TCP の送信を許可する必要があります。また、HTTP と HTTPS それぞれのトラフィックについて、ポート 80 と 443 からの TCP の送信を許可する必要もあります。
+ジョブのビルドを行うインスタンス (Nomad クライアントや外部 VM) では、多くの場合、SSH 経由でご利用中の VCS からコードをプルする必要があります (TCP ポート 22)。 SSH は、外部 VM との通信にも使用されます。そのため、少なくとも送信先が VM サブネットおよび VCS であるインスタンスすべてについて、SSH を許可する必要があります。
 
-## Kubernetes Nodes
+## Kubernetes ノード
 
-### Intra-node traffic
-The traffic within your K8s cluster is regulated by networking policies by default. For most purposes, this should be sufficient to regulate the traffic between pods and there is no additional requirement to pare down traffic between K8s nodes any further (i.e. it is fine to allow all traffic between K8s nodes).
+### ノード間のトラフィック
+デフォルトでは、K8s クラスタ内のトラフィックはネットワーク ポリシーにより制限されています。 ほとんどの用途では、Pod 間のトラフィックを制限するだけで十分です。つまり、K8s ノード間のトラフィックを特別に制限する必要はなく、これらノード間のトラフィックはすべて許可してかまいません。
 
-To make use of networking policies within your cluster, you may need to take additional steps, depending on your cloud provider and setup. Here are some resources to get you started:
+クラスタ内でネットワーク ポリシーを使用するには、クラウド プロバイダーや環境設定にもよりますが、追加の手順を実行する必要があります。 以下の資料を参考にしてください。
 
-* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes Network Policy Overview]
-* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Creating a Cluster Network Policy on Google Cloud]
-* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Installing Calico on Amazon EKS]
+* https://kubernetes.io/docs/concepts/services-networking/network-policies/[Kuberenetes のネットワーク ポリシーの概要 (英語)]
+* https://cloud.google.com/kubernetes-engine/docs/how-to/network-policy[Google Cloud でのクラスタ ネットワーク ポリシーの作成]
+* https://docs.aws.amazon.com/eks/latest/userguide/calico.html[Amazon EKS への Calico のインストール方法]
 
-### Ingress
-If you are using a managed service, you can check the rules created for the traffic coming from the load balancers and the
-allowed port range. The standard port range for K8s load balancers (30000-32767) should be all that is needed here for
-ingress. If you are using transparent load balancers, you will need to apply the ingress rules listed for load balancers above.
+### 受信
+マネージド サービスを使用している場合は、ロード バランサーおよび許可済みのポート範囲からの送信トラフィックに対して作成されているルールを確認できます。 受信側の設定では、K8s ロード バランサーの標準のポート範囲 (30000 ～ 32767) を許可するだけで十分です。 ただし、透過的なロード バランサーを使用している場合は、上記のロード バランサー用受信ルールを適用する必要があります。
 
-### Egress
+### 送信
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Destination
-| 目的
+| ポート
+| 送信先
+| 用途
 
 | 2376
-| VMs
-| Communication with VMs
+| VM
+| VM との通信
 
 | 4647
-| Nomad clients
-| Communication with the Nomad clients
+| Nomad クライアント
+| Nomad クライアントとの通信
 
-| all traffic
-| other nodes
-| Allow intra-cluster traffic
+| すべてのトラフィック
+| その他のノード
+| クラスタ内トラフィックの許可
 |===
 
 ## Nomad クライアント
-Nomad clients do not need to communicate with each other; you can block traffic between Nomad client instances completely.
+Nomad クライアントどうしが通信する必要はないため、Nomad クライアント インスタンス間のトラフィックはすべてブロックしてください。
 
-### Ingress
+### 受信
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
+| ポート
 | ソース
-| 目的
+| 用途
 
 | 4647
-| K8s nodes
-| Communication with Nomad server
+| K8s ノード
+| Nomad サーバーとの通信
 
-| 64535-65535
-| External
-| Rerun jobs with SSH functionality
+| 64535 ～ 65535
+| 外部
+| SSH でのジョブ再実行機能
 |===
 
-### Egress
+### 送信
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
-| Destination
-| 目的
+| ポート
+| 送信先
+| 用途
 
 | 2376
-| VMs
-| Communication with VMs
+| VM
+| VM との通信
 
 | 3000
-| VM Service load balancers
+| VM サービスのロード バランサー
 | 内部通信
 
 | 4647
-| Nomad Load Balancer
+| Nomad のロード バランサー
 | 内部通信
 
 | 8585
-| Output Processor Load Balancer
+| 出力プロセッサのロード バランサー
 | 内部通信
 |===
 
-## 外部ポート
-Similar to Nomad clients, there is no need for external VMs to communicate with each other.
+## 外部 VM
+Nomad クライアントと同じく、外部 VM どうしも通信する必要はありません。
 
-### Ingress
+### 受信
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
 |===
-| Port
+| ポート
 | ソース
-| 目的
+| 用途
 
 | 22
-| Kubernetes nodes
+| Kubernetes ノード
 | 内部通信
 
 | 22
-| Nomad clients
+| Nomad クライアント
 | 内部通信
 
 | 2376
-| Kubernetes nodes
+| Kubernetes ノード
 | 内部通信
 
 | 2376
-| Nomad clients
+| Nomad クライアント
 | 内部通信
 
 | 54782
-| External
-| Rerun jobs with SSH functionality
+| 外部
+| SSH でのジョブ再実行機能
 |===
 
-### Egress
-You will only need the egress rules for internet access and SSH for your VCS.
+### 送信
+設定が必要な送信ルールは、VCS へのインターネット アクセスと SSH 接続のみです。
 
 ## 次に読む
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
-* https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
+* https://circleci.com/docs/2.0/server-3-install-migration[CircleCI Server 3.x への移行]
+* https://circleci.com/docs/2.0/server-3-operator-overview[CircleCI Server 3.x の運用]
