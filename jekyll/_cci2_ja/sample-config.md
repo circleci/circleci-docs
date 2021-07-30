@@ -324,7 +324,7 @@ jobs:
 
   test:
     docker:
-      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 The job's commands run in this container.
+      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。
       このインスタンスは、ローカルホスト上のプライマリ コンテナのポートを通じて共通ネットワークで動作します。
       - image: mongo:4.2
         auth:
@@ -382,7 +382,7 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 The job's commands run in this container.
+      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。
     ジョブのコマンドはこのコンテナ内で実行されます。
     docker:
       - image: circleci/node:4.8.2-jessie
@@ -448,7 +448,7 @@ workflows:
 ```
 {% endraw %}
 
-This example shows a sequential workflow with the `test` job configured to run only on the master branch. ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 ## ファンイン・ファンアウト ワークフローの設定例
 {: #sample-configuration-with-fan-infan-out-workflow }
