@@ -13,10 +13,10 @@ files: [
   },
   {
     source: "/jekyll/_includes/edit-on-github.html",
-    translation: "/jekyll/_includes/%two_letters_code%/edit-on-github.html"
+    translation: "/jekyll/_includes/%two_letters_code%_edit-on-github.html"
   },
   {
     source: "/jekyll/_includes/license-notice.html",
-    translation: "/jekyll/_includes/%two_letters_code%/license-notice.html"
+    translation: "/jekyll/_includes/%two_letters_code%_license-notice.html"
   }
 ]
