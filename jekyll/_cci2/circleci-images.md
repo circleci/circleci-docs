@@ -360,7 +360,7 @@ images!
 
 **Resources:**
 
-- [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
+- [Docker Hub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
 
 **Usage:** Add the following under `docker:` in your config.yml:
 
