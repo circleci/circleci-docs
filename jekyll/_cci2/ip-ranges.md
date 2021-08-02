@@ -21,7 +21,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 
 IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges.
 
-The feature is currently available in preview to customers on a [Performance, Custom, or Scale plan](https://circleci.com/pricing/).
+The feature is currently available in preview to customers on a [Performance, Custom, or Scale plan](https://circleci.com/pricing/). Pricing will be calculated based on network data usage of jobs that have opted in to using the IP ranges feature.  There is no charge while the feature is in preview and pricing details will be shared once the feature is generally available.  
 
 ## IP ranges: use cases
 {: #usecases }
@@ -59,7 +59,7 @@ workflows:
 ## List of IP address ranges associated with the IP ranges feature
 {: #listofipaddressranges }
 
-*Last updated*: 07/26/2021
+*Last updated*: 08/02/2021
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
@@ -105,7 +105,7 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 - 54.236.156.101
 - 3.210.128.175
 
-**Upcoming Changes to list of IP address ranges** (Last Updated: 07/26/2021):
+**Upcoming Changes to list of IP address ranges** (Last Updated: 08/02/2021):
 None
 
 **Machine-consumable lists can be found below:**
