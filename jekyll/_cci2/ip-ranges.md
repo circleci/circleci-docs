@@ -127,6 +127,8 @@ Pricing will be calculated based on network data usage of jobs opted into the IP
 
 Specific rates and details are being finalized and will be published when the feature is generally available.
 
+While IP ranges is in preview, CircleCI may contact you if the amount of traffic sent through this feature reaches an excessive threshold. 
+
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
 

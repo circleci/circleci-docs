@@ -346,6 +346,7 @@ The recommended security group configuration can be found in the xref:server-3-i
 AWS
 ```bash
 $ aws ec2 create-security-group \
+    --vpc-id "<<VPC ID>>" \
     --description "CircleCI's VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
@@ -580,6 +581,10 @@ and VM Service.
 
 CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules
 in our https://github.com/CircleCI-Public/server-terraform[public repository].
+
+NOTE: We use `blocked_cidrs` to block network access to the specified CIDRs from within jobs. This is a security feature to prevent Nomad Clients
+from communicating with services that should not be accessed by arbitrary code (such as spinning up VMs using the vm-service). Do
+not block access to/from Nomad clients or `setup_remote_docker` will fail.
 
 ### AWS
 If you would like to install Nomad clients in AWS, create a file `main.tf` file with the following contents:
