@@ -1,16 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
-<g>
-	<g>
-		
-			<circle fill="none" stroke="#259A47" stroke-width="0.9833" stroke-miterlimit="10" stroke-dasharray="3.9851,1.9925" cx="30" cy="30" r="29.5"/>
-	</g>
-	<g>
-		<rect x="15" y="16.9" fill="#DEDEDD" width="30" height="4.6"/>
-		<path fill="#DEDEDD" d="M16.7,23.1v17.7c0,1.3,1.1,2.3,2.3,2.3h22c1.3,0,2.3-1.1,2.3-2.3V23.1H16.7z M33.8,29.9h-7.7v-3.1h7.7
-			L33.8,29.9L33.8,29.9z"/>
-	</g>
-</g>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="Layer_1" x="0" y="0" enable-background="new 0 0 60 60" version="1.1" viewBox="0 0 60 60" xml:space="preserve"><g><g><circle cx="30" cy="30" r="29.5" fill="none" stroke="#259A47" stroke-dasharray="3.985 1.992" stroke-miterlimit="10" stroke-width=".983"/></g><g><rect width="30" height="4.6" x="15" y="16.9" fill="#DEDEDD"/><path fill="#DEDEDD" d="M16.7,23.1v17.7c0,1.3,1.1,2.3,2.3,2.3h22c1.3,0,2.3-1.1,2.3-2.3V23.1H16.7z M33.8,29.9h-7.7v-3.1h7.7 L33.8,29.9L33.8,29.9z"/></g></g></svg>
