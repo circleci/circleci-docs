@@ -79,7 +79,7 @@ Running jobs requires you have the following tools available on your machine:
 == Installation
 
 === Download the launch agent binary and verify the checksum
-
+[[download]]
 The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
 First, set one of these variables as appropriate for for your installation target.
@@ -544,6 +544,75 @@ depending on your version of server:
 | 3.1            
 | 1.0.11147-881b608
 |===
+
+=== Upgrading Runner On Server
+
+Unlike with the CircleCI cloud offering, server does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
+ 
+The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps
+
+. Replace existing `circleci-launch-agent` binary with the new version
+. Stop currently running `circleci-launch-agent` processes
+. Start the new version of the `circleci-launch-agent` binary
+
+==== Upgrading Runners for Kubernetes and Docker
+
+When updating the `circleci-launch-agent` in a containerized environment that uses the CirlceCI Runner docker image, the container only needs to be restarted to update the `circleci-launch-agent`
+
+==== Installing New `circleci-launch-agent-binary`
+
+Following the same process to [[download]] the `circleci-launch-agent` binary, update the `agent_version` variable to the new version of the `circleci-launch-agent` to be installed
+
+```bash
+export agent_version="<launch-agent-version>"
+```
+
+Then following the installation instructions replace the old binary with the newly updated version.
+
+==== Stopping Currently Running Launch Agent
+
+The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary
+
+===== Stopping on Linux
+
+```
+sudo systemctl stop circleci.service
+sudo systemctl disable circleci.service
+```
+
+===== Stopping on Mac
+
+```
+sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+===== Stopping on Windows
+
+```
+Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
+
+==== Start the New Runner Launch Agent
+
+===== Starting on Linux
+
+```
+sudo systemctl reload circleci.service 
+sudo systemctl enable circleci.service
+sudo systemctl start circleci.service`
+```
+
+===== Starting on Mac
+
+```
+sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
+```
+
+===== Starting on Windows
+
+```
+Start-ScheduledTask -TaskName "CircleCI Launch Agent"
+```
 
 === Additional Resources
 
