@@ -3,27 +3,24 @@ version:
 - Server v3.x
 - サーバー管理
 ---
-= CircleCI Server v3.x 前提条件
+= CircleCI Server v3.x の前提条件
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-Server 3.xのhttps://circleci.com/docs/2.0/server-3-overview[概要]を事前に読まれることを前提としております。
+本ページの内容は、「https://circleci.com/docs/ja/2.0/server-3-overview[CircleCI Server 3.x の概要]」を先に読んでいることを前提としています。
 
-CircleCI Serverアプリケーションを設定するためには、以下の一般的な要件およびインフラ固有の要件が満たされていることを確認する必要があります。
- 以下が必要になります。 以下が必要になります。
+CircleCI Server アプリケーションを設定するには、以下の一般的な要件およびインフラ固有の要件を満たしている必要があります。 具体的には次のとおりです。
 
-* 既存のKubernetesクラスタの例: (クラスターの作成にヘルプが必要な場合xref:server-3-install-creating-your-first-cluster.adoc[こちら]を参照ください)
-** Amazon EKS クラスターの作成 - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
-*** <a data-type="default" href="https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html">`eksctl`の使用を推奨しています。 このツールはVPCを作成し、適切なセキュリティグループを選択することができます。
-** クラスタの作成 - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
-*** Autopilotクラスターは使用しないでください。
- Autopilotクラスターは使用しないでください。
-CircleCIはGKE Autopilotではサポートされていない機能を必要とします。
+* 以下のような既存の Kubernetes クラスタ (クラスタの作成方法についてはxref:server-3-install-creating-your-first-cluster.adoc[こちらのガイド]を参照してください)。
+** Amazon EKS クラスタ (https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS ドキュメントを参照])
+*** https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。このツールでは、VPC の作成と適切なセキュリティ グループの選択が自動で行われます。
+** Google GKE クラスタ (https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE ドキュメント]を参照) +
+*** Autopilot クラスターは使用しないでください。 CircleCI Server には、GKE Autopilot ではサポートされていない機能が必要です。
 +
-* CircleCI Serverアプリケーションを構成するためには、以下の一般的な要件とインフラストラクチャ固有の要件が満たされていることを確認してください: +
+* Kubernetes クラスタは、CircleCI Server のアクティブ ユーザー数に応じて、次に示すクラスタ全体の最小要件を満たしている必要があります。 +
 +
 --
 [.table.table-striped]
@@ -37,34 +34,33 @@ CircleCIはGKE Autopilotではサポートされていない機能を必要と�
 
 | 500 未満
 | 3
-| 8 コア
-| 32 GB
-| 1 Gbps
+| 12 コア
+| 32GB
+| 1Gbps
 
 | 500 以上
 | 3
-| 48 cores
-| 240 GB
-| 10 Gbps
+| 48 コア
+| 240GB
+| 10Gbps
 |===
 --
 
-* クラスタはDockerコンテナをプルするための外部アクセスが許可されていること、およびライセンスファイルが必要です。 外部アクセスを広く許可することが出来ない場合は、https://help.replicated.com/community/t/customer-firewalls/55[list of ports] をご参照ください。
-* クラスター内のpodsを一覧、作成、編集、削除するには、適切なパーミッションが必要です。
- You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
-* CircleCIのライセンスファイル. ライセンスについては https://support.circleci.com/hc/en-us/requests/new[CircleCI support] にお問い合わせください。
-* The <<Required ツールs>> tools installed
-** なお、`kubectl`ツールもクラスタにアクセスできるように設定されている必要があります。
+* クラスタには、Docker コンテナのプルおよびライセンス確認のために、外部アクセスが許可されている必要があります。 外部アクセスを制限する必要がある場合は、https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
+* クラスタ内の Pod を一覧表示、作成、編集、削除する権限が必要です。 You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
+* CircleCI のライセンス ファイル。 ライセンス ファイルが必要な場合は https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート]にお問い合わせください。
+* The <<必須ツール>> tools installed
+** `kubectl` についても、クラスタにアクセスできるよう設定する必要があります。
 
-*** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Amazon EKSクラスターへの接続] - Amazon EKS
-*** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[kubectlのクラスタアクセスを設定] - Google GKE
-* ポートアクセスの要件はこちらに記載されています。
-** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes Load Balancers]
-** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes Nodes]
-** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad Clients]
-** xref:server-3-install-hardening-your-cluster.adoc#external-vms[External VMs]
+*** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Amazon EKS クラスタへの接続] (Amazon EKS クラスタを使用する場合)
+*** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[kubectl 用のクラスタ アクセスの構成] (Google GKE クラスタを使用する場合)
+* 以下に示す各ポート アクセス要件が満たされていること:
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes ロード バランサー]
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes ノード]
+** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad クライアント]
+** xref:server-3-install-hardening-your-cluster.adoc#external-vms[外部 VM]
 
-NOTE: VPCの設定や、クラスターのディスクサイズに関する要件はありません。 ただし、既存のVPCではなく、新しいVPCを設定することをお勧めします。
+NOTE: クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
 
 ## Required ツールs
 
@@ -76,20 +72,20 @@ NOTE: VPCの設定や、クラスターのディスクサイズに関する要�
 | 用途
 
 | https://www.terraform.io/downloads.html[Terraform]
-| {terraformversion} or greater
+| {terraformversion} 以上
 | インフラストラクチャの管理
 
 | https://kubernetes.io/docs/tasks/tools/install-kubectl/[kubectl]
-| {kubectlversion} or greater
+| {kubectlversion} 以上
 | Kubernetes CLI
 
 | https://helm.sh/[Helm]
-| {helmversion} or greater
-| Kubernetes パッケージ管理
+| {helmversion} 以上
+| Kubernetes パッケージの管理
 
-| https://kots.io/[Kots]
-| {kotsversion} or greater
-| Replicated Kubernetes アプリケーション管理
+| https://kots.io/[KOTS]
+| {kotsversion} 以上
+| Replicated 社の Kubernetes アプリケーション管理ツール
 |===
 
 
@@ -100,46 +96,46 @@ NOTE: VPCの設定や、クラスターのディスクサイズに関する要�
 | ポート番号
 | プロトコル
 | 方向
-| 送信元・送信先
+| 送信元/送信先
 | 用途
-| メモ
+| 備考
 
 | 80
 | TCP
-| Inbound
-| エンド ユーザー
-| HTTP web app traffic
+| インバウンド
+| エンドユーザー
+| HTTP Web アプリ トラフィック
 |
 
 | 443
 | TCP
-| Inbound
-| エンド ユーザー
-| HTTP web app traffic
+| インバウンド
+| エンドユーザー
+| HTTP Web アプリ トラフィック
 |
 
 | 8800
 | TCP
-| Inbound
-| Administrators
-| Admin console
+| インバウンド
+| 管理者
+| 管理者コンソール
 |
 
 | 22
 | TCP
-| Inbound
-| Administrators
+| インバウンド
+| 管理者
 | SSH
 | 踏み台ホストでのみ必要
 
-| 64535-65535
+| 64535 ～ 65535
 | TCP
-| Inbound
+| インバウンド
 |
-| SSH into builds
+| ビルドへの SSH 接続
 | Nomad クライアントでのみ必要
 |===
 
 ## 次に読む
-* https://circleci.com/docs/2.0/server-3-install-creating-your-first-cluster[Creating your first cluster]
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-creating-your-first-cluster[初めての Kubernetes クラスタの作成]
+* https://circleci.com/docs/2.0/server-3-install[CircleCI Server 3.x のインストール]
