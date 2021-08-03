@@ -350,27 +350,27 @@ $ aws ec2 create-security-group \
     --description "CircleCI's VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
     --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
     --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
     --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
     --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 54782
 ```
