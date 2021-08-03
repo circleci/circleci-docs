@@ -1,9 +1,9 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Configuring External Services
+= CircleCI Server v3.x 外部サービスの構成
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,65 +12,65 @@ version:
 
 toc::[]
 
-== External Database and Vault Setup for CircleCI Installations
-This document describes how to configure the following external services for use with a CircleCI server 3.0 Installation:
+== CircleCI Server の外部データベースと Vault のセットアップ
+このドキュメントでは、CircleCI Server 3.0 で使用する以下の外部サービスの構成方法について説明します。
 
 * PostgreSQL v12.6
 
 == PostgreSQL
 
-=== Best Practices for your PostgreSQL
+=== PostgreSQL のベスト プラクティス
 
-Consider running at least two or more PostgreSQL replicas to enable recovery from primary failure and for backups. Following are the recommended specifications of the PostgreSQL machines:
+プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
 
 [.table.table-striped]
 [cols=6*, options="header", stripes=even]
 |===
-|# of Daily Active Users
-|# of PostgreSQL Replicas 
+|1 日のアクティブ ユーザー数
+|PostgreSQL レプリカ数 
 |CPU   
 |RAM  
 |ディスク  
-|NIC Speed 
+|NIC 速度 
 
-|<50                    
+|50 名未満                    
 |2                         
-|48 コア
-|16 GB 
-|100 GB 
+|8 コア
+|16GB 
+|100GB 
 | 1Gbps
 
-|50 - 250               
+|50 ～ 250 名               
 |2                         
-|48 コア
-|16 GB 
-|200 GB 
+|8 コア
+|16GB 
+|200GB 
 |1Gbps
 
-|250 - 1000             
+|250 ～ 1000 名             
 |3                         
-|48 コア
-|240GB 
-|500 GB 
+|8 コア
+|32GB 
+|500GB 
 |10Gbps
 
-|1000 - 5000            
+|1000 ～ 5000 名            
 |3                         
-|48 コア
-|240GB 
-|1 TB   
+|8 コア
+|32GB 
+|1TB   
 |10Gbps
 
-|5000+                  
+|5000 名超                  
 |3                         
-|48 コア
-|240GB 
-|1 TB   
+|8 コア
+|32GB 
+|1TB   
 |10Gbps
 |===
 
-=== Preparing the Database
-If you are configuring an externalized PostgreSQL instance as part of a new CircleCI server 3.x install, it is recommended that you log in to your PostgreSQL instance and run the following commands. If you plan on using a different method, you must ensure that the databases and extensions outlined below are configured prior to running CircleCI server 3.x for the first time.
+=== データベースの準備
+外部化済みの PostgreSQL インスタンスを新しい CircleCI Server 3.x システムの一部として構成する場合、PostgreSQL インスタンスにログインして以下のコマンドを実行することをお勧めします。 別の方法を使用する場合は、CircleCI Server 3.x の初回実行前に、データベースと拡張機能を必ず以下のように構成してください。
 
 ```sql
     CREATE DATABASE circle;
@@ -110,12 +110,12 @@ If you are configuring an externalized PostgreSQL instance as part of a new Circ
     CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
 
-=== Backing Up PostgreSQL
-PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install which can be found https://www.postgresql.org/docs/12/backup.html[here].
+=== PostgreSQL のバックアップ
+PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメントがhttps://www.postgresql.org/docs/12/backup.html[こちら]で提供されています。
 
-We strongly recommend the following:
+CircleCI では、以下を行うことを強くお勧めしています。
 
-* Taking daily backups
-* Keeping at least 30 days of backup
-* Using encrypted storage for backups as databases might contain sensitive information
-* Performing a backup before each upgrade of CircleCI Server.
+* 毎日バックアップを行う
+* バックアップを少なくとも 30 日間保持する
+* データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
+* CircleCI Server のアップグレードを行う前には毎回バックアップを行う
