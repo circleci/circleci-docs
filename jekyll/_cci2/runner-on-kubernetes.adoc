@@ -38,6 +38,21 @@ If you want to have different runners specialized for different workloads, it is
 
 When installing the Helm chart for use with a CircleCI Server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
 
+==== Upgrading Runner Deployment for Server
+
+. Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
+. Deploy the changes to the cluster 
++
+....
+$ helm upgrade -f values.yaml "circleci-runner" ./ \
+  --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
+  --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
+  --namespace your-namespace
+....
++
+
+Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
+
 == Getting Started
 
 . Clone the repository at https://github.com/CircleCI-Public/circleci-runner-k8s.

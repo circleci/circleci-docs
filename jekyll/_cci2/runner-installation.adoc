@@ -165,7 +165,7 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like.
+Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like though should be unique among all other runners used by the same resource class.
 
 === Install the CircleCI runner configuration
 
@@ -432,12 +432,22 @@ When the container starts, it will immediately attempt to start running jobs.
 
 When starting the docker container on server the `agent_version` environment variable will need to be passed in using the `--env` flag as well.
 
+``` bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
 
 === Stopping the Docker container
 
 ``` bash
 docker stop <container-name>
+```
+
+=== Remove the Docker container
+
+In some cases it may be required to fully remove a stopped Runner container from the system, such as when recreating the container using the same name.
+
+``` bash
+docker stop <container-name>; docker rm <container-name>;
 ```
 
 == Windows Installation
@@ -551,10 +561,25 @@ depending on your version of server:
 | 1.0.11147-881b608
 |===
 
-=== Upgrading Runner On Server
+== Upgrading Runner On Server
 
-Unlike with the CircleCI cloud offering, server does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
+Unlike with the CircleCI cloud offering, the server product does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
  
+=== Upgrading Runners in Containerized Environments
+
+==== Upgrading Runners for Kubernetes 
+
+Please refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions]
+
+==== Upgrading Runners for Docker
+
+. Stop any currently running Runner containers following the <<Stopping the Docker container>> instructions
+. Remove the runner containers following the <<Stopping the Docker container>> instructions
+. Start a new Runner Docker container following the <<Start the Docker container on Server>> instructions
+
+
+=== Upgrading Runners in Non-Containerized Environments
+
 The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps for non containerized environments.
 
 . Replace existing `circleci-launch-agent` binary with the new version
@@ -563,13 +588,13 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 
 ==== Installing the New `circleci-launch-agent-binary`
 
-Following the same process to [[download]] the `circleci-launch-agent` binary, update the `agent_version` variable to the new version of the `circleci-launch-agent` to be installed
+Following the same process in the <<Download the launch agent binary and verify the checksum>> instructions, update the `agent_version` environment variable to the correct version from the <<Runner for Server Compatibility, Runner Server Compatibility Table>>
 
-```bash
+``` bash
 export agent_version="<launch-agent-version>"
 ```
 
-Then following the installation instructions replace the old binary with the newly updated version.
+Then following the platform specific installation instructions replace the old binary with the newly updated version that was just downloaded.
 
 ==== Stopping Currently Running Launch Agent
 
@@ -577,20 +602,20 @@ The currently running `circleci-launch-agent` process will need to be halted bef
 
 ===== Stopping on Linux
 
-```
+``` bash
 sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
 
 ===== Stopping on Mac
 
-```
+``` bash
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 ===== Stopping on Windows
 
-```
+``` powershell
 Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
@@ -598,7 +623,7 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 ===== Starting on Linux
 
-```
+``` bash
 sudo systemctl reload circleci.service 
 sudo systemctl enable circleci.service
 sudo systemctl start circleci.service`
@@ -606,23 +631,15 @@ sudo systemctl start circleci.service`
 
 ===== Starting on Mac
 
-```
+``` bash
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
 ===== Starting on Windows
 
-```
+``` powershell
 Start-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
-==== Upgrading Runners for Kubernetes 
-
-Please refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions]
-
-==== Upgrading Runners for Docker
-
-To upgrade Runner in a Docker environment, stop any currently running Runner containers and restart them following the <<Docker Installation, Docker>> instructions, using the `--env` flag to specify the new `circleci-launch-agent` version to pin.
-
 
 === Additional Resources
 
