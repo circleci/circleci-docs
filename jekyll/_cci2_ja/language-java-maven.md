@@ -27,6 +27,7 @@ This is an example application showcasing how to run a Java app on CircleCI 2.1.
 ### A basic build with an orb:
 {: #a-basic-build-with-an-orb }
 
+{% raw %}
 ```yaml
 version: 2 # CircleCI 2.0 を使用します
 jobs: # 一連のステップ
@@ -54,7 +55,7 @@ jobs: # 一連のステップ
 
       - run: mvn package # 実際のテストを実行します
 
-      - store_test_results: # テスト メタデータを `target/surefire-reports` ディレクトリからアップロードし、CircleCI ダッシュボードに表示されるようにします 
+      - store_test_results: # テスト メタデータを `target/surefire-reports` ディレクトリからアップロードし、CircleCI ダッシュボードに表示されるようにします
       # アップロードしたテスト結果は、テスト サマリー (https://circleci.com/ja/docs/2.0/collect-test-data/) に表示されます
           path: target/surefire-reports
 
@@ -63,7 +64,7 @@ jobs: # 一連のステップ
           path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
       # デプロイの構成例は https://circleci.com/ja/docs/2.0/deployment-integrations/ を参照してください
 ```
-
+{% endraw %}
 
 This config uses the language-specific orb to replace any executors, build tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven), which simplifies building and testing Java projects using Maven. The maven/test command checks out the code, builds, tests, and uploads the test result. The parameters of this command can be customized. See the maven orb docs for more information.
 
@@ -121,9 +122,9 @@ This `persist_to_workspace` step allows you to persist files or directories to b
 
 
 {% raw %}
+
 ```yaml
 version: 2.0
-
 jobs:
   test:
     parallelism: 2 # parallel containers to split the tests among

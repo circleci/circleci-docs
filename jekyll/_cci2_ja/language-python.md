@@ -246,13 +246,13 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:
       # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache: # cache Python dependencies using checksum of Pipfile as the cache-key
-          key: deps9-{% raw %} {{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - "venv"
       - run:
