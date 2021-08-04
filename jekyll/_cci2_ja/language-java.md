@@ -111,6 +111,14 @@ workflows:
   workflow:
     jobs:
     - build
+      - store_artifacts:
+          path: build/libs
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
 ```
 {% endraw %}
 
@@ -252,13 +260,11 @@ We use the [CircleCI OpenJDK Convenience images](https://hub.docker.com/r/circle
       - run:
           name: Assemble JAR
           command: |
-            # 他のノードでは以下をスキップします
+            # Skip this for other nodes
             if [ "$CIRCLE_NODE_INDEX" == 0 ]; then
               ./gradlew assemble
             fi
-      # JAR は最初のビルド コンテナでのみ収集されるため、他のすべてのビルド コンテナでは build/libs が空になります
-      - store_artifacts:
-          path: build/libs
+      # As the JAR was only assembled in the first build container, build/libs will be empty in all the other build containers.
       - store_artifacts:
           path: build/libs
 ```

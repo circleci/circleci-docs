@@ -99,7 +99,7 @@ If your project is open source/available to be forked and receive PRs from contr
 
 CircleCI では、`restore_cache` ステップにリストされているキーの順番でキャッシュが復元されます。 各キャッシュ キーはプロジェクトの名前空間にあり、プレフィックスが一致すると取得されます。 最初に一致したキーのキャッシュが復元されます。 複数の一致がある場合は、最も新しく生成されたキャッシュが使用されます。
 
-{% raw %}```yaml
+In the example below, two keys are provided:
 
 {% raw %}
 ```yaml
@@ -116,11 +116,11 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 
 2 つ目のキーは最初のキーよりも特定度が低いため、現在の状態と最も新しく生成されたキャッシュとの間に差がある可能性が高くなります。 依存関係ツールを実行すると、古い依存関係が検出されて更新されます。 これを**部分キャッシュ リストア**と言います。
 
-`save_cache` ステップで作成されたキャッシュは、最長 15 日間保存されます。
+Let's walk through how the above cache keys are used in more detail:
 
 `keys:` リストのすべての行は *1 つのキャッシュ*を管理します (各行が固有のキャッシュに**対応しているわけではありません**)。 この例でリストされているキー {% raw %}(`v1-npm-deps-{{ checksum "package-lock.json" }}`{% endraw %} および `v1-npm-deps-`) は、**単一**のキャッシュを表しています。 キャッシュの復元が必要になると、まず (最も特定度の高い) 最初のキーに基づいてキャッシュがバリデーションされ、次に他のキーを順に調べて、他のキャッシュ キーに変更があるかどうかが確認されます。
 
-言語または依存関係管理ツールのバージョンが変更され、キャッシュをクリアする必要がある場合は、上の例のような命名戦略を使用し、`config.yml` ファイルのキャッシュ キー名を変更して、変更をコミットします。
+`package-lock` ファイルの内容が変更された場合、`checksum` 関数は別の一意の文字列を返し、キャッシュを無効化する必要があることが示されます。
 
 次のキーには動的コンポーネントが連結されていません。 これは静的な文字列 `v1-npm-deps-` です。 キャッシュを手動で無効にするには、`config.yml` ファイルで `v1` を `v2` にバンプします。 これで、キャッシュ キーが新しい `v2-npm-deps` になり、新しいキャッシュの保存がトリガーされます。
 
@@ -132,7 +132,7 @@ CircleCI では、`restore_cache` ステップにリストされているキー�
 #### 連結 `package-lock` ファイルの作成と構築
 {: #creating-and-building-a-concatenated-package-lock-file }
 
-ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルでジョブに `save_cache` ステップを追加します。
+1) Add custom command to config:
 
 {% raw %}
 ```yaml
@@ -173,7 +173,7 @@ commands:
 {% endraw %}
 
 ## キャッシュの管理
-`package-lock` ファイルの内容が変更された場合、`checksum` 関数は別の一意の文字列を返し、キャッシュを無効化する必要があることが示されます。
+`save_cache` ステップで作成されたキャッシュは、最長 15 日間保存されます。
 
 ### キャッシュの有効期限
 {: #cache-expiration }
@@ -190,7 +190,7 @@ If you need to get clean caches when your language or dependency management tool
 <b>ヒント:</b> キャッシュは変更不可なので、すべてのキャッシュ キーの先頭にプレフィックスとしてバージョン名 (<code class="highlighter-rouge">v1-...</code>など) を付加すると便利です。 こうすれば、プレフィックスのバージョン番号を増やすだけで、キャッシュ全体を再生成できます。
 </div>
 
-以下に、`.circleci/config.yml` ファイルで `restore_cache` と `save_cache` をテンプレートとキーと共に使用する例を示します。
+For example, you may want to clear the cache in the following scenarios by incrementing the cache key name:
 
 * npm のバージョンが 4 から 5 に変更されるなど、依存関係管理ツールのバージョンが変更された場合
 * Ruby のバージョンが 2.3 から 2.4 に変更されるなど、言語のバージョンが変更された場合
@@ -210,7 +210,7 @@ If you need to get clean caches when your language or dependency management tool
 
 CircleCI 2.0 の手動で構成可能な依存関係キャッシュを最大限に活用するには、キャッシュの対象と方法を明確にする必要があります。 その他の例については、「CircleCI を設定する」の「[save_cache]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache)」セクションを参照してください。
 
-上の例では、2 番目または 3 番目のキャッシュ キーによって依存関係ツリーが部分的に復元された場合に、依存関係管理ツールによっては古い依存関係ツリーの上に誤ってインストールを行ってしまいます。
+ファイルやディレクトリのキャッシュを保存するには、`.circleci/config.yml` ファイルでジョブに `save_cache` ステップを追加します。
 
 ```yaml
     steps:
@@ -250,8 +250,8 @@ If the contents of the `package-lock` file were to change, the `checksum` functi
 
 以下に、さまざまな目的を持つキャッシュ戦略の例を示します。
 
- * {% raw %}`myapp-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。このプロジェクトのさまざまなブランチで同じキャッシュ キーが生成されます。
- * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。このプロジェクトのブランチでそれぞれ異なるキャッシュ キーが生成されます。
+ * 言語の依存関係管理ツールが扱うロック ファイル (`Gemfile.lock` や `yarn.lock` など) のチェックサムは、キャッシュ キーとして便利に使用できます。
+ * {% raw %}`myapp-{{ .Branch }}-{{ checksum "package-lock.json" }}`{% endraw %} - `package-lock.json` ファイルの内容が変更されるたびにキャッシュが再生成されます。 このプロジェクトのブランチでそれぞれ異なるキャッシュ キーが生成されます。
  * {% raw %}`myapp-{{ epoch }}`{% endraw %} - ビルドのたびに異なるキャッシュ キーが生成されます。
 
 ステップの実行中に、上のテンプレートが実行時値に置き換えられ、その置換後の文字列が `key` として使用されます。 以下の表に、使用可能なキャッシュの `key` テンプレートを示します。
@@ -272,14 +272,14 @@ If the contents of the `package-lock` file were to change, the `checksum` functi
 {:.no_toc}
 
 - キャッシュに一意の識別子を定義するときは、{% raw %}`{{ epoch }}`{% endraw %} などの特定度の高いテンプレート キーを過度に使用しないように注意してください。 {% raw %}`{{ .Branch }}`{% endraw %} や {% raw %}`{{ checksum "filename" }}`{% endraw %} などの特定度の低いテンプレート キーを使用すると、キャッシュが使用される可能性が高くなります。
-- キャッシュ変数には、ビルドで使用している[パラメーター]({{site.baseurl}}/2.0/reusing-config/#executor-でのパラメーターの使用)も使用できます。たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} のように指定します。
+- キャッシュ変数には、ビルドで使用している[パラメーター]({{site.baseurl}}/2.0/reusing-config/#executor-でのパラメーターの使用)も使用できます。 たとえば、{% raw %}`v1-deps-<< parameters.varname >>`{% endraw %} のように指定します。
 - キャッシュ キーに動的なテンプレートを使用する必要はありません。 静的な文字列を使用し、その名前を「バンプ」(変更) することで、キャッシュを強制的に無効化できます。
 
 ### キャッシュの保存および復元の例
 {: #full-example-of-saving-and-restoring-cache }
 {:.no_toc}
 
-Leiningen も内部で Maven を利用しているため、キャッシュの一部を復元できます。
+以下に、`.circleci/config.yml` ファイルで `restore_cache` と `save_cache` をテンプレートとキーと共に使用する例を示します。
 
 {% raw %}
 
@@ -388,14 +388,14 @@ steps:
 部分的な依存関係キャッシュの信頼性は、依存関係管理ツールに依存します。 以下に、一般的な依存関係管理ツールについて、推奨される部分キャッシュの使用方法をその理由と共に示します。
 
 #### Bundler (Ruby)
-Yarn では、部分キャッシュ リストアを実行するために、既にロック ファイルが使用されています。
+{: #bundler-ruby }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ ** はい。
+この問題を解決するには、キャッシュから依存関係を復元する前に Bundler をクリーンアップするステップを追加します。
 
 Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
 
-この問題を解決するには、キャッシュから依存関係を復元する前に Bundler をクリーンアップするステップを追加します。
+To prevent this behavior, add a step that cleans Bundler before restoring dependencies from cache.
 
 {% raw %}
 
@@ -419,7 +419,7 @@ steps:
 {: #gradle-java }
 {:.no_toc}
 
-言語の依存関係管理ツールが扱うロック ファイル (`Gemfile.lock` や `yarn.lock` など) のチェックサムは、キャッシュ キーとして便利に使用できます。
+**Safe to Use Partial Cache Restoration?** Yes.
 
 Gradle リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、キャッシュの一部を復元できます。
 
@@ -445,7 +445,7 @@ steps:
 {: #maven-java-and-leiningen-clojure }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ ** はい。
+**Safe to Use Partial Cache Restoration?** Yes.
 
 Maven リポジトリは、規模が大きく、一元化や共有が行われることが想定されています。 生成されたアーティファクトのクラスパスに実際に追加されるライブラリに影響を与えることなく、キャッシュの一部を復元できます。
 
@@ -499,7 +499,7 @@ steps:
 {: #pip-python }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ ** はい。 ただし、Pipenv を使用する必要があります。
+**Safe to Use Partial Cache Restoration?** Yes (with Pipenv).
 
 Pip では、`requirements.txt` で明示的に指定されていないファイルを使用できます。 [Pipenv](https://docs.pipenv.org/) を使用するには、ロック ファイルでバージョンを明示的に指定する必要があります。
 
@@ -525,7 +525,7 @@ steps:
 {: #yarn-node }
 {:.no_toc}
 
-**部分キャッシュ リストアを使用しても安全でしょうか？ ** はい。
+**Safe to Use Partial Cache Restoration?** Yes.
 
 Yarn has always used a lock file for exactly these reasons.
 

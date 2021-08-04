@@ -98,6 +98,14 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment: # add POSTGRES environment variables.
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.5-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment: # add POSTGRES environment variables.
           POSTGRES_USER: circleci-demo-ruby
           POSTGRES_DB: rails_blog_test
           POSTGRES_PASSWORD: ""
@@ -131,6 +139,10 @@ workflows:
   version: 2
   build_and_test:     # The name of our workflow is "build_and_test"
     jobs:             # The list of jobs we run as part of this workflow.
+workflows:
+  version: 2
+  build_and_test:     # The name of our workflow is "build_and_test"
+    jobs:             # The list of jobs we run as part of this workflow.
       - build         # Run build first.
       - test:         # Then run test,
           requires:   # Test requires that build passes for it to run.
@@ -153,7 +165,7 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 この例では、以下の 2 つの [CircleCI コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#イメージのタイプ)が使用されています。
 {:.no_toc}
 
-CircleCI がコードベースで動作するように、最初に `checkout` を置きます。
+See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
 
 このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな構成例であり、実際のプロジェクトはこれよりも複雑です。 このため、独自のプロジェクトを構成する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 
