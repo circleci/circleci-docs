@@ -44,7 +44,7 @@ version:
 CircleCI と連携済みの Organization やリポジトリの名称を変更する必要が生じた場合、下記のステップに従うことが推奨されます:
 
 1. VCS 上で Organization 及びリポジトリの名称を変更します。
-2. 必要に応じて、環境変数のローテーションを実行しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
+2. Head to the CircleCI application, using the new org/repo name, for example,  `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
 3. CircleCI のプラン、プロジェクト一覧、各種設定が正しく引き継がれていることを確認します。
 4. 必要な場合、上記 3 の確認後、古い Org 名/リポジトリ名を再利用し新しい Org/リポジトリを作成します。
 
@@ -266,7 +266,7 @@ _CircleCI の CLI をはじめて使用する場合、最初に [CircleCI CLI �
 
 CircleCI CLI を使用して環境変数を作成するには、下記ステップを実行します:
 
-1. 必要に応じて、新しい環境変数を設定するコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
+1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 2. 新しい環境変数を対象コンテキスト配下に保存します。 下記コマンドを実行します: `circleci context store-secret <vcs タイプ> <org 名> <コンテキスト名> <環境変数名>`
 
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
@@ -275,7 +275,7 @@ Note that the CLI will prompt you to input the secret value, rather than accepti
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数を作成する場合は、 [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンド ポイントを適切なリクエスト ボディとともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と新しい環境変数の名前に置き換えます。 リクエスト ボディには、シークレットである環境変数の値をプレーンテキストの文字列としてセットした `value` キーを含める必要があります。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plaintext secret as a string.
+API を使用して環境変数を作成する場合は、 [Add Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンド ポイントを適切なリクエスト ボディとともに呼び出します。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the new environment variable name. The request body should include a `value` key containing the plaintext secret as a string.
 
 #### 環境変数の削除
 {: #deleting-environment-variables }
@@ -286,7 +286,7 @@ API を使用して環境変数を作成する場合は、 [Add Environment Vari
 
 CircleCI CLI を使用して環境変数を削除するには、下記ステップを実行します:
 
-1. If you have not already done so, find the context name that contains the environment variable you wish to delete. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
+1. 必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 2. 当該コンテキスト内のローテーションの対象である環境変数を確認します。 下記コマンドを実行します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
 
@@ -320,9 +320,9 @@ CircleCI CLI を使用して環境変数のローテーションを実行する�
 
 1. If you have not already done so, find the context name that contains the variable you would like to rotate. Execute this command in the CLI: `circleci context list <vcs-type> <org-name>`
 
-2. Find the environment variable to rotate within that context. 当該コンテキスト内に削除しようとする環境変数が存在することを確認します。 下記コマンドを実行し、当該コンテキストに設定されている環境変数の一覧を確認します: `circleci context show <vcs タイプ> <org 名> <コンテキスト名>`
+2. 必要に応じて、環境変数のローテーションを実行しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
-3. Update the existing environment variable under that context. 当該コンテキスト内に実在する環境変数の値を実際に更新します。 `環境変数名` を上記ステップ 2 で確認した環境変数名に置き換えたうえで、 下記コマンドを実行します: `circleci context store-secret <vcs タイプ> <org 名> <コンテキスト名> <環境変数名>`
+3. 必要に応じて、新しい環境変数を設定するコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`
 
 Note that the CLI will prompt you to input the secret value, rather than accepting it as an argument. This approach is designed to avoid unintentional secret exposure.
 
@@ -330,7 +330,7 @@ Note that the CLI will prompt you to input the secret value, rather than accepti
 {: #using-circlecis-api }
 {:.no_toc}
 
-API を使用して環境変数のローテーションを実行する場合は、 [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを適切なリクエスト ボディとともに呼び出します。 このリクエストにおいては `context-id` と `env-var-name` をそれぞれコンテキストの ID と値を更新する環境変数の名前に置き換えます。 リクエスト ボディには、シークレットである環境変数の値をプレーンテキストの文字列としてセットした `value` キーを含める必要があります。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
+API を使用して環境変数のローテーションを実行する場合は、 [Update Environment Variable](https://circleci.com/docs/api/v2/#operation/addEnvironmentVariableToContext) エンドポイントを適切なリクエスト ボディとともに呼び出します。 For this request, replace the `context-id` and the `env-var-name` with the ID for the context and the environment variable name that should be updated. The request body should include a `value` key containing the plaintext secret as a string.
 
 
 ## シークレットのマスキング
@@ -350,5 +350,5 @@ Contexts hold potentially sensitive secrets that are not intended to be exposed.
 {: #see-also }
 {:.no_toc}
 
-* [必要に応じて、環境変数を削除しようとするコンテキストの名称を確認します。 下記コマンドを実行します: `circleci context list <vcs タイプ> <org 名>`]({{ site.baseurl }}/2.0/env-vars/)
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/)
 * [Workflows]({{ site.baseurl }}/2.0/workflows/)

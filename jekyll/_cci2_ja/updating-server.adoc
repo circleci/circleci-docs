@@ -32,34 +32,34 @@ WARNING: If upgrading directly from v2.17 (or below) and you have **ever had iss
 
 Follow these steps to upgrade your CircleCI Server version.
 
-=== 1. ロールバックのスナップショット
+=== 1. Snapshot for Rollback
 
 NOTE: This step is optional but recommended
 
-お使いの環境のスナップショットを取得するには、以下のとおり実行します。
+To take a snapshot of your installation:
 
 . Go to the Management Console (e.g. `your-circleci-hostname.com:8800`) and click Stop Now to stop the CircleCI service.
 +
 .Stop CircleCI
 image::stop_replicated_update_available.png[Stop CircleCI]
 . Ensure no jobs are running on the nomad clients – you can check this by running `nomad status`
-. AWS EC2 管理コンソールにアクセスし、Services マシンのインスタンスを選択します。
-. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. ここでのイメージ作成では、お使いの環境を復元するための新しい EC2 インスタンスとして簡単に起動できる AMI を作成します。
+. Navigate to the AWS EC2 management console and select your Services machine instance
+. Select Actions > Image > Create Image – Select the No Reboot option if you want to avoid downtime at this point. This image creation step creates an AMI that can be readily launched as a new EC2 instance to restore your installation.
 +
 .Snapshot Image Creation
 image::create_snapshot.png[Snapshot Image Creation]
 
-NOTE: また、AWS APIを使用して、このプロセスを自動化することもできます。 Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
-スナップショットを取得したら、Services マシンに自由に変更を加えることができます。
+NOTE: It is also possible to automate this process with the AWS API. Subsequent AMIs/snapshots are only as large as the difference (changed blocks) since the last snapshot, such that storage costs are not necessarily larger for more frequent snapshots, see Amazon's EBS snapshot billing document for details.
+Once you have the snapshot you are free to make changes on the Services machine.
 
 If you do need to rollback at any point, see our https://circleci.com/docs/2.0/backup/#restoring-from-backup[guide to restoring from a backup].
 
 === 2. Updating Replicated
 
-==== a. 前提条件
+==== a. Prerequisites
 
-* Ubuntu 14.04 または 16.04 ベースの環境を使用していること
-* お使いの環境が孤立して*おらず*、インターネットにアクセスできること.
+* Your installation is Ubuntu 14.04 or 16.04 based.
+* Your installation is **not** airgapped and you can access the internet from it.
 * We will be updating to Replicated v2.38.6, but first we need to check you are running at least v2.10.3 on your Services machine. To check this, SSH into the Services machine and run the following:
 +
 ```shell
@@ -69,11 +69,11 @@ replicated --version
 If you are running a version of Replicated pre v2.10.3 please reach out to support@circleci.com.
 If you are already on v2.38.6 or above you can skip the next step and move to <<3-upgrade-circleci-server,upgrade the CircleCI application>>
 
-==== b. 準備
+==== b. Preparations
 
 CAUTION: Remember to take a snapshot (described above) before starting the Replicated update process
 
-. Stop the CircleCI application by clicking the Stop Now button on the Dashboard. アプリケーションのシャットダウンには数分かかります。 Wait for the status to become “Stopped” before continuing.
+. Stop the CircleCI application by clicking the Stop Now button on the Dashboard. Application shutdown takes a few minutes. Wait for the status to become “Stopped” before continuing.
 +
 .Stop the CircleCI Application
 image::stop_replicated_update_available.png[Stop the CircleCI Application]
@@ -90,7 +90,7 @@ You can check the status using the followng:
 replicatedctl app status inspect
 ```
 +
-以下のように出力されます。
+Example Output:
 +
 ```shell
 [
@@ -113,7 +113,7 @@ replicatedctl app status inspect
 sudo apt-get install docker-ce=17.12.1~ce-0~ubuntu
 ```
 
-. 以下のコマンドを使用して Docker のバージョンを固定します。
+. Pin the Docker version using the following command:
 +
 ```shell
 sudo apt-mark hold docker-ce
@@ -121,32 +121,32 @@ sudo apt-mark hold docker-ce
 
 ==== c. Perform Update
 
-. 以下のように更新スクリプトを実行して、Replicated の更新を実行します。
+. Perform the Replicated update by executing the update script as follows:
 +
 ```shell
 curl -sSL "https://get.replicated.com/docker?replicated_tag=2.38.6" | sudo bash
 ```
 +
-Replicated と Docker の両方のバージョンをチェックしてください。
+Double-check your replicated and docker versions:
 +
 ```shell
 replicatedctl version    # 2.38.6
 docker -v                # 17.12.1
 ```
 
-. 以下のコマンドでアプリケーションを再起動します。
+. Restart the app with
 +
 ```shell
 replicatedctl app start
 ```
 +
-アプリケーションのスピンアップには数分かかります。 以下のコマンドを実行するか、管理ダッシュボードにアクセスして進行状況を確認できます。
+The application will take a few minutes to spin up. You can check the progress in the administration dashboard or by executing;
 +
 ```shell
 replicatedctl app status inspect
 ```
 +
-以下のように出力されます。
+Example output:
 +
 ```shell
 [

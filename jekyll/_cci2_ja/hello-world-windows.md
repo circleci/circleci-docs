@@ -210,7 +210,7 @@ jobs:
 
 ```
 
-以下のオプションが利用できます。
+{:.tab.windowsblockfour.Cloud}
 ```YAML
 version: 2.0
 

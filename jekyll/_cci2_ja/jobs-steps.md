@@ -60,7 +60,8 @@ workflows:
       - deploy2s3: # ワークフローで定義するサンプル ジョブ
           steps:
             - aws-s3/sync: # s3 Orb で宣言されている sync コマンドを呼び出します
-                from: . to: "s3://mybucket_uri"
+                from: .
+          to: "s3://mybucket_uri"
                 overwrite: true
           to: "s3://mybucket_uri"
           overwrite: true

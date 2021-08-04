@@ -16,17 +16,17 @@ version:
 {:toc}
 
 ## はじめに
-#header4
+{: #introduction }
 
 This page, and its associated recipes, describes how you can perform specific configuration tasks. Recipes include code snippets and examples for you to customize to fit your projects. この「クックブック」の「レシピ」はそれぞれ 1 つのタスクに対応します。 これらのタスクは、CircleCI Orb などの CircleCI リソースに加えて、ユーザー独自のリソースを使用して CircleCI プラットフォームで実行できます。
 
 ### CircleCI Orb とは
-現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にて確認してください。
+{: #what-are-circleci-orbs }
 {:.no_toc}
 
 CircleCI Orb は、CircleCI プラットフォームを効率的に使用するための構成パッケージです。 Orb を使用すると、複数のプロジェクトで構成を共有、標準化、簡略化することができます。 構成のベスト プラクティスの参考として Orb を使用することも可能です。
 
-この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
+現在提供されている Orb の一覧は、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)にて確認してください。
 
 既存の Orb を 2.1 の [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/#orbs-version-21-が必須) ファイルで使用するには、`orbs` キーを使用して呼び出します。 以下の例では、`circleci` 名前空間で [`hello-build` Orb](https://circleci.com/developer/ja/orbs/orb/circleci/hello-build) を呼び出します。
 
@@ -45,7 +45,7 @@ workflows:
 For more detailed information about CircleCI orbs, refer to the [Orbs Introduction]({{ site.baseurl }}/2.0/orb-intro/) page.
 
 ## CircleCI プラットフォームおよび Orb を使用するための環境構成
-3) 既存のワークフローやジョブで Orb エレメントを呼び出します (`aws-ecs elements` など)。
+{: #configure-your-environment-for-circleci-pipelines-and-orbs }
 {:.no_toc}
 
 Most recipes in this cookbook call for version 2.1 configuration, pipelines and often, orbs. Before using the examples provided, you should check that you are set up for these features. The following notes and steps will get you where you need to be.
@@ -59,38 +59,38 @@ Most recipes in this cookbook call for version 2.1 configuration, pipelines and 
 ## ソフトウェアの変更を Amazon ECS にデプロイする
 {: #deploy-changes-to-amazon-ecs }
 
-Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することで、独自のコンテナ オーケストレーション ソフトウェアをインストール・構成せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このセクションでは、CircleCI Orb を使用してソフトウェアの変更を Amazon ECS サービスにすばやく簡単にデプロイする方法を取り上げますが、Amazon ECS サービスの機能や基本的なコンポーネントとアーキテクチャについての詳細情報を確認したい場合は、[Amazon ECS のドキュメント](https://https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)を参照してください。
+Amazon Elastic Container Service (ECS) は、スケーラブルなコンテナ オーケストレーション サービスです。 Docker コンテナをサポートし、コンテナ化されたアプリケーションを AWS で実行およびスケールできます。 Amazon ECS を使用することで、独自のコンテナ オーケストレーション ソフトウェアをインストール・構成せずに済むため、デプロイの複雑性を軽減し、CircleCI プラットフォームでコンテナをシンプルかつ最適にデプロイすることができます。 このセクションでは、CircleCI Orb を使用してソフトウェアの変更を Amazon ECS サービスにすばやく簡単にデプロイする方法を取り上げますが、Amazon ECS サービスの機能や基本的なコンポーネントとアーキテクチャについての詳細情報を確認したい場合は、[Amazon ECS のドキュメント](https://https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)を参照してください。
 
 ### 構成レシピ
-環境変数を設定する
-以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
+{: #setting-environment-variables }
+CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)を参照してください。
 
 * `AWS_ECR_ACCOUNT_URL`
 * `MY_APP_PREFIX`
 * `AWS_REGION`
 * `AWS_ACCESS_KEY_ID`
 
-上の例では、2 つの Orb (`aws-cli: circleci/aws-cli@0.1.4` と `aws-ecs: circleci/aws-ecs@0.0.3`) をインスタンス化し、いくつかの連続したステップを実行して、Amazon CLI をインストール・構成してから、Amazon ECS サービスを更新しています。
+CircleCI Orb を使用して、AWS CLI を更新せずに Amazon ECS サービスを更新するには、ECS サービスの更新方法を示す以下の例を参照してください。
 
-**メモ:** {% include snippets/enable-pipelines.md %}
+Google Kubernetes Engine (GKE) にソフトウェアの変更をデプロイする前に以下の要件を満たしている必要があります。
 
 ### 前提条件
 {: #build-push-and-deploy-a-service-update }
 
-CircleCI Amazon ECS/ECR Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/aws-ecs)を参照してください。
+上の例では、2 つの Orb (`aws-cli: circleci/aws-cli@0.1.4` と `aws-ecs: circleci/aws-ecs@0.0.3`) をインスタンス化し、いくつかの連続したステップを実行して、Amazon CLI をインストール・構成してから、Amazon ECS サービスを更新しています。
 
-CircleCI Orb を使用して、AWS CLI を更新せずに Amazon ECS サービスを更新するには、ECS サービスの更新方法を示す以下の例を参照してください。
+The following example shows building and pushing an image to AWS ECR and pushing that image as a service update to AWS ECS:
 
 ```yml
 aws-ecs: circleci/aws-ecs@0.0.10
 ```
 
-Google Kubernetes Engine (GKE) にソフトウェアの変更をデプロイする前に以下の要件を満たしている必要があります。
+Docker イメージを GKE クラスタにロールアウトしながら、これらのアクションを実行するコードの例を以下に示します。
 
 ### Amazon ECS サービスを更新する
-以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
+`gcloud` のインストール (必要な場合) および初期化と、Docker イメージの更新を完了したら、この更新したイメージを後から使用できるように GKE クラスタにパブリッシュおよびロールアウトできます。
 
-Amazon ECS サービスの更新を検証する To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
+Once you have updated the Amazon ECS service, you can verify the update was correctly applied. Amazon ECS サービスの更新を検証する To keep your config as simple as possible, use the AWS CLI and ECS orbs. This time, rather than using an orb's built-in job to perform the required process, commands from the orbs are used as steps in the definition of the job named `verify-deployment`.
 
 ```yaml
 version: 2.1
@@ -115,26 +115,26 @@ workflows:
 
 この例は、Orb を使用して AWS CLI をインストール・構成し、タスク定義を取得してから、このリビジョンがデプロイされたかどうかを検証する方法を示しています。 イメージを構成して Amazon ECS にプッシュする方法の詳細については、[AWS ECR Orb のサンプル](https://circleci.com/ja/docs/2.0/deployment-integrations/#aws-ecr-と-aws-ecs-の-orb-のサンプル)を参照してください。
 
-Docker イメージを GKE クラスタにロールアウトしながら、これらのアクションを実行するコードの例を以下に示します。
+Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
 
 ## ソフトウェアの変更を Google Kubernetes Engine (GKE) にデプロイする
-`gcloud` のインストール (必要な場合) および初期化と、Docker イメージの更新を完了したら、この更新したイメージを後から使用できるように GKE クラスタにパブリッシュおよびロールアウトできます。
+{: #interact-with-google-kubernetes-engine-gke }
 
 Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化して、コードやアプリケーションの更新を顧客にすばやく簡単にデプロイできます。 更新の配信に長い時間はかかりません。 CircleCI は、GKE 固有の CircleCI Orb を開発すると共に、GKE のテクノロジーを活用して、特定のジョブで GKE を操作できるようにしました。 GKE を使用する前に、[Google Kubernetes Engine のドキュメント](https://cloud.google.com/kubernetes-engine/docs/)をご一読ください。
 
 ### 前提条件
-CircleCI が開発した Kubernetes Orb は、Amazon Elastic Container Service (ECS) と組み合わせて以下のタスクに使用できます。
+2) {% include snippets/enable-pipelines.md %}
 以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。
 
 - EKS クラスタの作成
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
-Amazon EKS サービスを使用する前に、以下の要件を満たしていることを確認してください。
+Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
 
 ### GKE アクションを管理する
-以下のステップを実行して、CircleCI と Orb を使用できるように環境を構成します。
-Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
+3) 既存のワークフローやジョブで `aws-eks` エレメントを使用します。
+以下のステップを実行して、CircleCI と Orb を使用できるように環境を構成します。 Using the CircleCI GKE orb, you can perform complex actions with minimal configuration required. For example, once you have set the environment variable mentioned in the previous section, you can create a new GKE cluster using the following snippet:
 
 ```yaml
 version: 2.1
@@ -196,7 +196,7 @@ workflows:
 ```
 
 ### GKE クラスタにイメージをパブリッシュおよびロールアウトする
-2) {% include snippets/enable-pipelines.md %}
+{: #publishing-and-rolling-out-the-image-to-the-gke-cluster }
 
 CircleCI GKE Orb を使用して Google Cloud Platform (GCP) にログインし、Docker イメージをビルドおよびパブリッシュして、そのイメージを GKE クラスタにロールアウトする例を示します。 All you need is the orbs built-in command `publish-and-rollout-image`, along with definitions for a few required parameters. For a full list of of parameters available for this job, check the [GKE page](https://circleci.com/developer/orbs/orb/circleci/gcp-gke?version=1.0.4#jobs-publish-and-rollout-image) in the CircleCI Orbs Registry.
 
@@ -231,19 +231,19 @@ commands:
 ```
 
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
-Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
+**メモ:** curl が有効で、amd64 アーキテクチャが使用されていることを確認してください。
 
-3) 既存のワークフローやジョブで `aws-eks` エレメントを使用します。
+CircleCI AWS-EKS Orb を使用するための要件を満たしていることが確認できたら、以下のコード例を使用して EKS クラスタを作成できます。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-まだ Amazon `eksctl` ツールがインストールされていない場合は、`eksctl` をインストールし、これらのツールを使用して EKS (Amazon EC2 用マネージド Kubernetes サービス) でクラスタを管理できるようにします。
+Kubernetes デプロイを作成するコードの例を示します。
 
 ### EKS クラスタを作成する
-CircleCI Orb を使用して環境に 'eksctl' ツールをインストールするコードの例を以下に示します。
+クラスタに Helm Chart をインストールする
 
 Using the CircleCI `aws-eks` orb, you can create, test and teardown an EKS cluster using the code sample shown below.
 
@@ -254,15 +254,15 @@ orbs: aws-eks: circleci/aws-eks@0.2.1
 In this example two orbs are used: built-in jobs and commands from the `aws-eks` orb are used to create, test and then teardown a cluster. The built-in `install` command from the `kubernetes` orb is used to install `kubectl`.
 
 ### Kubernetes デプロイの作成
-**メモ:** curl が有効で、amd64 アーキテクチャが使用されていることを確認してください。
+CircleCI ジョブでカスタム Slack 通知を利用する
 
-CircleCI AWS-EKS Orb を使用するための要件を満たしていることが確認できたら、以下のコード例を使用して EKS クラスタを作成できます。
+You may wish to create a Kubernetes deployment, which enables you to manage the cluster and perform different actions within the cluster, including the ability to:
 
 * クラスタ内のリソースの更新
 * Authenticator を使用した Kubernetes 構成の更新
 * コンテナ イメージの更新
 
-Kubernetes デプロイを作成するコードの例を示します。
+Slack チャンネルに承認待ちを通知する
 
 ```yaml
 version: 2.1
@@ -317,9 +317,9 @@ parameters:
 ```
 
 ### EKS クラスタを作成する
-クラスタに Helm Chart をインストールする
+{: #install-a-helm-chart-in-your-cluster }
 
-Helm は、Kubernetes クラスタ上で実行される強力なアプリケーション パッケージ マネージャーです。Helm Chart を使用することで、アプリケーション構造を記述し、シンプルなコマンドによってその構造を管理できます。 Helm では、関連する Kubernetes リソース一式を記述するファイルが、チャートと呼ばれるパッケージ形式に集約されます。 1 つのチャートを使用して、memcached ポッドのような単純なアプリケーションから、HTTP サーバー、データベース、キャッシュなどから成る完全な Web アプリ スタックのような複雑なアプリケーションまで、幅広くデプロイできます。
+Helm は、Kubernetes クラスタ上で実行される強力なアプリケーション パッケージ マネージャーです。 Helm Chart を使用することで、アプリケーション構造を記述し、シンプルなコマンドによってその構造を管理できます。 Helm では、関連する Kubernetes リソース一式を記述するファイルが、チャートと呼ばれるパッケージ形式に集約されます。 1 つのチャートを使用して、memcached ポッドのような単純なアプリケーションから、HTTP サーバー、データベース、キャッシュなどから成る完全な Web アプリ スタックのような複雑なアプリケーションまで、幅広くデプロイできます。
 
 Kubernetes クラスタに Helm をインストールしたら、以下のコード例を使用して Helm Chart をインストールできます。 Below is a code example for this, wchich also cleans up by deleting the release and cluster at the end of the process:
 
@@ -356,12 +356,12 @@ steps:
 ```
 
 ## CircleCI ジョブでカスタム Slack 通知を利用する
-CircleCI ジョブでカスタム Slack 通知を利用する
+カスタム メッセージを付けて Slack チャンネルに通知する
 
-Slack は、リアルタイム コラボレーション アプリケーションです。チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
+Slack は、リアルタイム コラボレーション アプリケーションです。 チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
 
 ### Kubernetes デプロイを作成する
-Slack チャンネルに承認待ちを通知する
+カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
 
 CircleCI Slack Orb を使用すると、さまざまな通知やメッセージを作成して必要な受信者に配信できます。 その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
 
@@ -377,16 +377,16 @@ workflows:
           message: Pending approval
           webhook: webhook
 ```
-上記のステップを実行してから、CircleCI Slack Orb (`circleci/slack@1.0.0`) を呼び出すと、ワークフローが開始されて通知が配信されます。
+ジョブの終了時に成功または失敗のステータス アラートを送信する
 
 There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
 
 ### クラスタに Helm をインストールする
-カスタム メッセージを付けて Slack チャンネルに通知する
+ジョブの終了時にステータス アラートを送信する例を以下に示します。
 
 CircleCI Slack Orb では、カスタム メッセージを含む通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
 
-カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
+この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
 
 ```yaml
 version: 2.1
@@ -425,19 +425,19 @@ deployment:
             - test-cluster
 ```
 
-CircleCI Heroku Orb の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/heroku)を参照してください。
+In this example, the Slack orb command `notify` is used, along with the following parameters to create a custom notification:
 
 1. メッセージ テキストの `color` を指定します。
 2. メッセージの受信者 (`mentions`) を指定します。
 3. 配信したいテキストを `message` に入力します。
-4. メッセージの `webhook` を指定します。Slack Web フックの作成方法については、[こちらのガイド](https://api.slack.com/incoming-webhooks)を参照してください。
+4. メッセージの `webhook` を指定します。 Slack Web フックの作成方法については、[こちらのガイド](https://api.slack.com/incoming-webhooks)を参照してください。
 
 ### コンテナ イメージを更新する
-ジョブの終了時に成功または失敗のステータス アラートを送信する
+{: #sending-a-status-alert-at-the-end-of-a-job-based-on-success-or-failure }
 
 ジョブの終了時に受信者にステータス アラートを送信することも可能です。 このステータス アラートの送信は、ジョブの最後のステップにする必要があります。
 
-ジョブの終了時にステータス アラートを送信する例を以下に示します。
+The example below shows how you can send a status alert at the end of a job.
 
 ```yaml
 version: 2.1
@@ -491,14 +491,14 @@ workflows:
 
 上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
 
-この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
+ジョブの終了時にステータス アラートを送信する例を以下に示します。
 
 ## Selecting a workflow to run using pipeline parameters
 {: #selecting-a-workflow-to-run-using-pipeline-parameters }
 
 You might find that you want to be able to trigger a specific workflow to run, manually, using the API, but still run a workflow on every push to your project. To achieve this, use [pipeline parameters]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) to decide which workflow(s) to run.
 
-Docker イメージをビルドしたら、以下のステップを実行してカスタム通知を作成します。
+The following example defaults to running the `build` workflow, but allows control of which other workflow to run using the API:
 
 ```yaml
 version: 2.1
@@ -549,9 +549,9 @@ curl -X POST https://circleci.com/api/v2/project/{project-slug}/pipeline \
 For more information on using API v2 endpoints, see the [API Reference Documentation]({{ site.baseurl }}/api/v2/) and the [API Developers Guide Worked Example]({{ site.baseurl }}/2.0/api-developers-guide/#example-end-to-end-api-request).
 
 ## Branch-filtering for job steps
-ジョブの終了時にステータス アラートを送信する例を以下に示します。
+{: #branch-filtering-for-job-steps }
 
-上の例では、ジョブが実行されて失敗した場合に、Slack ステータス アラートが受信者 (USERID1、USERID2) に送信されます。
+Branch filtering has previously only been available for workflows, but with compile-time logic statements, you can also implement branch filtering for job steps.
 
 The following example shows using the [pipeline value]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-values) `pipeline.git.branch` to control `when` a step should run. In this case the step `run: echo "I am on master"` only runs when the commit is on the master branch:
 
@@ -642,24 +642,26 @@ workflows:
       - setup
 ```
 
-上記の設定ファイルは、以下のように構成されています。
+上記を前提に CircleCI のダイナミック コンフィグを実装すると、`config.yml` は次のようになります。
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - ダイナミック コンフィグ機能を使用するために `continuation` Orb を呼び出します。
 - `continuation` Orb を [`executor`]({{ site.baseurl }}/2.0/executor-intro/) として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
     - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
-    - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#run) ステップを呼び出して、`generate-config` スクリプトを実行します。これで、`continuation` Orb の `continue` ジョブに出力を渡すことができます。
+    - `continuation` Orb の処理について詳しくは、[CircleCI デベロッパー ハブ](https://circleci.com/developer/ja/orbs/orb/circleci/continuation?version=0.1.2)で Orb のソース コードを参照するか、「[ダイナミック コンフィグに関するよくあるご質問]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs)」を参照してください。
     - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
-`continuation` Orb の処理について詳しくは、[CircleCI デベロッパー ハブ](https://circleci.com/developer/ja/orbs/orb/circleci/continuation?version=0.1.2)で Orb のソース コードを参照するか、「[ダイナミック コンフィグに関するよくあるご質問]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs)」を参照してください。
+上記の設定ファイルは、以下のように構成されています。
+
+利用可能な要素と必須パラメーターの詳細については、[`path-filtering` Orb のドキュメント](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering)を参照してください。
 
 ### 変更されたファイルに基づいて特定の`ワークフロー`または`ステップ`を実行する
 {: #execute-specific-workflows-or-steps-based-on-which-files-are-modified }
 
 場合によっては、ある`ワークフロー`や`ステップ`を実行するかどうかを、特定のファイルセットに対して行われた変更に応じて決定したいことがあります。 条件に応じた実行は、コードやマイクロサービスがモノレポ (単一のリポジトリ) に格納されている場合に役立ちます。
 
-これを可能にするために、CircleCI には [`path-filtering`](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering) Orb が用意されています。この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
+これを可能にするために、CircleCI には [`path-filtering`](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering) Orb が用意されています。 この Orb により、更新対象ファイルの具体的なパスに基づいて、パイプラインの実行を続行できます。
 
 たとえば、以下のようなモノレポ構造を考えてみましょう。
 
@@ -675,7 +677,7 @@ workflows:
 │   ├── IntegrationTests.java
 ```
 
-上記を前提に CircleCI のダイナミック コンフィグを実装すると、`config.yml` は次のようになります。
+An example implementation of CircleCI's dynamic configuration for the above use case can be found in the following `config.yml`:
 
 ```yaml
 version: 2.1
@@ -689,7 +691,8 @@ orbs:
   path-filtering: circleci/path-filtering@0.0.2
   maven: circleci/maven@1.2.0
 
-# デフォルトのパイプライン パラメーター。path-filtering Orb の結果に応じて更新される
+# デフォルトのパイプライン パラメーター。
+path-filtering Orb の結果に応じて更新される
 parameters:
   run-build-service-1-job:
     type: boolean
@@ -703,31 +706,38 @@ jobs:
   # check-updated-files ジョブでは path-filtering Orb を使用して、更新するパイプライン パラメーターを判断する。
   check-updated-files:
     - path-filtering/filter:
-        # 空白文字で区切った 3 列のマッピング。 1 行につき 1 つのマッピング: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
+        # 空白文字で区切った 3 列のマッピング。
+  check-updated-files:
+    - path-filtering/filter:
+        # 3-column, whitespace-delimited mapping. One mapping per line: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>.
+        1 行につき 1 つのマッピング: <regex path-to-test> <parameter-to-set> <value-of-pipeline-parameter>
         mapping: |
           service1/.* run-build-service-1-job true
           service2/.* run-build-service-2-job true
         base-revision: master
-        # パス フィルタリングとパイプライン パラメーターの値の更新が完了したらトリガーする構成ファイルのパス。 今回は、親ダイナミック コンフィグ自体を使用する。
+        # パス フィルタリングとパイプライン パラメーターの値の更新が完了したらトリガーする構成ファイルのパス。 In this case, we are using the parent dynamic configuration itself.
         config-path: .circleci/config.yml
-  # build-service-1 ジョブでは maven Orb を使用して service1 のアーティファクトを maven リポジトリにビルドしてインストールする (テストは実行しない)。
+  # the build-service-1 job uses the maven orb to build and install service1 artifacts into the maven repository (it does not run tests).
   build-service-1:
     - maven/test:
-        command: ‘install -DskipTests’
-        app_src_directory: ‘service1’
-  # build-service-2 ジョブでは maven Orb を使用して service2 のアーティファクトを maven リポジトリにビルドしてインストールする (テストは実行しない)。
+        command: 'install -DskipTests'
+        app_src_directory: 'service1'
+  # the build-service-2 job uses the maven orb to build and install service2 artifacts into the maven repository (it does not run tests).
   build-service-2:
     - maven/test:
-        command: ‘install -DskipTests’
-        app_src_directory: ‘service2’
-  # run-integration-tests ジョブでは tests ディレクトリで定義されたジョブを実行する。
+        command: 'install -DskipTests'
+        app_src_directory: 'service2'
+  # the run-integration-tests job will run any tests defined in the tests directory.
   run-integration-tests:
     - maven/test:
-        command: ‘-X verify’
-        app_src_directory: ‘tests’
+        command: '-X verify'
+        app_src_directory: 'tests'
 
-# 以下でワークフローを指定する。ワークフローの大半はパイプライン パラメーターの値に応じた条件に従って実行される。 
-# 各ワークフローでは、上記の jobs セクションで定義された特定のジョブを呼び出す。
+# here we specify our workflows, most of which are conditionally executed based upon pipeline parameter values. 
+# Each workflow calls a specific job defined above, in the jobs section.
+workflows:
+  # when pipeline parameter, run-build-service-1-job is true, the build-service-1 job is triggered.
+  # 各ワークフローでは、上記の jobs セクションで定義された特定のジョブを呼び出す。
 workflows:
   # パイプライン パラメーター run-build-service-1-job が true の場合、build-service-1 ジョブがトリガーされる。
   service-1:
@@ -750,6 +760,21 @@ workflows:
   always-run:
     jobs:
       - check-updated-files
+  service-2:
+    when: << pipeline.parameters.run-build-service-2-job >>
+    jobs:
+      - build-service-2
+  # when pipeline parameter, run-build-service-1-job OR run-build-service-2-job is true, run-integration-tests job is triggered.
+  # see: https://circleci.com/docs/2.0/configuration-reference/#logic-statements for more information.
+  run-integration-tests:
+    when: 
+      or: [<< pipeline.parameters.run-build-service-1-job >>, << pipeline.parameters.run-build-service-2-job >>]
+    jobs:
+      - run-integration-tests
+  # the check-updated-files job is always triggered, regardless of pipeline parameters.
+  always-run:
+    jobs:
+      - check-updated-files
 ```
 
 上記の設定ファイルは、以下のように構成されています。
@@ -758,17 +783,17 @@ workflows:
 - `path-filtering` Orb と `maven` Orb を呼び出して、使用できるようにします。
 - `run-build-service-1-job` と `run-build-service-2-job` という 2 つのブール値パイプライン パラメーターを定義します。
 - `check-updated-files`、`build-service-1`、`build-service-2`、`run-integration-tests` という 4 つのジョブを定義します。
-  - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプライン パラメーターに所定の値を設定します。今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
-  - `build-service-1` ジョブ: `maven` Orb を使用して service1 コードのコンパイルとインストールを行います。テストはスキップします。
-  - `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。テストはスキップします。
+  - `check-updated-files` ジョブ: `path-filtering` Orb を使用して、指定されたファイルパスのどのファイルに変更が加えられたのかを判断します。 また、指定されたパイプライン パラメーターに所定の値を設定します。 今回は、変更されたファイルに応じて各種 maven コマンドがトリガーされるようにしています。
+  - `build-service-1` ジョブ: `maven` Orb を使用して service1 コードのコンパイルとインストールを行います。 テストはスキップします。
+  - `build-service-2` ジョブ: `maven` Orb を使用して service2 コードのコンパイルとインストールを行います。 テストはスキップします。
   - `run-integration-tests` ジョブ: `maven` Orb を使用して結合テストを行います。
-- 以下の 4 つのワークフローを定義します。そのうち、3 つのワークフローは条件に従って実行されます。
+- 以下の 4 つのワークフローを定義します。 そのうち、3 つのワークフローは条件に従って実行されます。
   - `service-1` ワークフロー: run-build-service-1-job にマッピングされたパイプライン パラメーターの値が `true` の場合に `build-service-1` ジョブをトリガーします。
   - `service-2` ワークフロー: run-build-service-2-job にマッピングされたパイプライン パラメーターの値が `true` の場合に `build-service-2` ジョブをトリガーします。
   - `run-integration-tests` ワークフロー: `path-filtering` Orb の結果に基づいて `run-build-service-1-job` または `run-build-service-2-job` パイプライン パラメーターの値が `true` に更新された場合に実行されます。
   - `check-updated-files` ワークフロー: このパイプラインがトリガーされた場合に必ず実行されます。
 
-利用可能な要素と必須パラメーターの詳細については、[`path-filtering` Orb のドキュメント](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering)を参照してください。
+See the `path-filtering` [orb documentation](https://circleci.com/developer/orbs/orb/circleci/path-filtering) for more information on available elements and required parameters.
 
 ## Use matrix jobs to run multiple OS tests
 {: #use-matrix-jobs-to-run-multiple-os-tests }

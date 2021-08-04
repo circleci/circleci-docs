@@ -192,11 +192,11 @@ en:
             name: Runner Installation
             link: 2.0/runner-installation/
           - 
+            name: Runner on Kubernetes
+            link: 2.0/runner-on-kubernetes/
+          - 
             name: Runner API
             link: 2.0/runner-api/
-          - 
-            name: Runner in Server
-            link: 2.0/runner-server/
           - 
             name: Runner FAQs
             link: 2.0/runner-faqs/
@@ -262,20 +262,20 @@ en:
             name: Orb Publishing Process
             link: 2.0/creating-orbs/
   - 
-    name: インサイト
+    name: Insights
     icon: icons/sidebar/insights.svg
     children:
       - 
-        name: 概要
+        name: Overview
         link: 2.0/insights/
       - 
-        name: メトリクス用語集
+        name: Metrics glossary
         link: 2.0/insights-glossary/
       - 
-        name: テスト インサイト
+        name: Test Insights
         link: 2.0/insights-tests/
       - 
-        name: データの連携
+        name: Data Partnerships
         link: 2.0/insights-partnerships/
       - 
         name: Insights API
@@ -473,6 +473,12 @@ en:
             name: VM Service
             link: 2.0/server-3-operator-vm-service
           - 
+            name: Externalizing Services
+            link: 2.0/server-3-operator-externalizing-services
+          - 
+            name: Load Balancers
+            link: 2.0/server-3-operator-load-balancers
+          - 
             name: Authentication
             link: 2.0/server-3-operator-authentication
           - 
@@ -497,7 +503,20 @@ en:
             name: Backup and Restore
             link: 2.0/server-3-operator-backup-and-restore
       - 
-        name: Server v3.x PDFs
+        name: Server v3.1.x PDFs
+        link: 2.0/server-3-overview
+        children:
+          - 
+            name: v3.1 Overview
+            link: 2.0/CircleCI-Server-3.1.0-Overview.pdf
+          - 
+            name: v3.1 Installation Guide
+            link: 2.0/CircleCI-Server-3.1.0-Installation-Guide.pdf
+          - 
+            name: v3.1 Operations Guide
+            link: 2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
+      - 
+        name: Server v3.0.x PDFs
         link: 2.0/server-3-overview
         children:
           - 
@@ -864,8 +883,7 @@ ja:
             hash: pre-installed-software
           - 
             name: Arm Resources
-          - 
-            i18n_name: Arm Resources #TODO: needs translation
+            i18n_name: Arm リソース
             link: ja/2.0/arm-resources/
       - 
         name: Mac
@@ -994,24 +1012,29 @@ ja:
             link: ja/2.0/creating-orbs/
             i18n_name: Orbsパブリッシュ
   - 
-    #TODO - i18n names for insights.
     name: Insights
     icon: icons/sidebar/insights.svg
+    i18n_name: インサイト
     children:
       - 
         name: Overview
+        i18n_name: 概要
         link: 2.0/insights/
       - 
         name: Metrics glossary
+        i18n_name: メトリクスの用語集
         link: 2.0/insights-glossary/
       - 
         name: Test Insights
+        i18n_name: テスト結果
         link: 2.0/insights-tests/
       - 
         name: Data Partnerships
+        i18n_name: パートナーシップ
         link: 2.0/insights-partnerships/
       - 
         name: Insights API
+        i18n_name: Insights API
         link: api/v2/
         hash: tag/Insights
   - 
@@ -1188,6 +1211,146 @@ ja:
     i18n_name: Server管理
     icon: icons/sidebar/admin.svg
     children:
+      - 
+        name: Server v3.x Overview
+        i18n_name: v3.xの概要
+        link: ja/2.0/server-3-overview
+        children:
+          - 
+            name: Overview
+            link: ja/2.0/server-3-overview
+            i18n_name: 概要
+          - 
+            name: What's New in v3.x
+            link: ja/2.0/server-3-whats-new
+            i18n_name: v.3.xの新機能
+          - 
+            name: FAQ
+            link: ja/2.0/server-3-faq
+            i18n_name: Server 3.x FAQ
+      - 
+        name: Server v3.x Install
+        link: ja/2.0/server-3-install-prerequisites
+        i18n_name: Server 3.xのインストール
+        children:
+          - 
+            name: Prerequisites
+            link: ja/2.0/server-3-install-prerequisites
+            i18n_name: 必須要件
+          - 
+            name: Your First Cluster
+            i18n_name: クラスター作成
+            link: ja/2.0/server-3-install-creating-your-first-cluster
+          - 
+            name: Installation
+            link: ja/2.0/server-3-install
+            i18n_name: インストール
+          - 
+            name: Migration
+            link: ja/2.0/server-3-install-migration
+            i18n_name: 移行
+          - 
+            name: Hardening Your Cluster
+            link: ja/2.0/server-3-install-hardening-your-cluster
+      - 
+        name: Server v3.x Operations
+        i18n_name: v3.x 管理者ガイド
+        link: ja/2.0/server-3-operator-overview
+        children:
+          - 
+            name: Overview
+            link: ja/2.0/server-3-operator-overview
+            i18n_name: 概要
+          - 
+            name: Metrics and Monitoring
+            i18n_name: メトリクスとモニタリング
+            link: ja/2.0/server-3-operator-metrics-and-monitoring
+          - 
+            name: User Accounts
+            i18n_name: ユーザー管理
+            link: ja/2.0/server-3-operator-user-accounts
+          - 
+            name: Orbs
+            i18n_name: Orbs
+            link: ja/2.0/server-3-operator-orbs
+          - 
+            name: VM Service
+            i18n_name: VMサービスの設定
+            link: ja/2.0/server-3-operator-vm-service
+          - 
+            name: Externalizing Services
+            i18n_name: サービスの外部化
+            link: ja/2.0/server-3-operator-externalizing-services
+          - 
+            name: Load Balancers
+            i18n_name: ロードバランサー
+            link: ja/2.0/server-3-operator-load-balancers
+          - 
+            name: Authentication
+            i18n_name: 認証
+            link: ja/2.0/server-3-operator-authentication
+          - 
+            name: Docker Authenticated Pulls
+            i18n_name: DockerHubミラー
+            link: ja/2.0/private-images
+          - 
+            name: Build Artifacts
+            i18n_name: アーティファクト
+            link: ja/2.0/server-3-operator-build-artifacts
+          - 
+            name: Usage Data
+            i18n_name: 利用状況データ
+            link: ja/2.0/server-3-operator-usage-data
+          - 
+            name: Security
+            i18n_name: セキュリティ
+            link: ja/2.0/security-server
+          - 
+            name: Application Lifecycle
+            i18n_name: アプリケーションライフサイクル
+            link: ja/2.0/server-3-operator-application-lifecycle
+          - 
+            name: Troubleshooting and Support
+            i18n_name: トラブルシューティング
+            link: ja/2.0/server-3-operator-troubleshooting-and-support
+          - 
+            name: Backup and Restore
+            i18n_name: バックアップ・リストア
+            link: ja/2.0/server-3-operator-backup-and-restore
+      - 
+        name: Server v3.1.x PDFs
+        i18n_name: Server v3.1.x PDFs
+        link: ja/2.0/server-3-overview
+        children:
+          - 
+            name: v3.1 Overview
+            i18n_name: v3.1の新機能
+            link: ja/2.0/CircleCI-Server-3.1.0-Overview.pdf
+          - 
+            name: v3.1 Installation Guide
+            i18n_name: v3.1 インストールガイド
+            link: ja/2.0/CircleCI-Server-3.1.0-Installation-Guide.pdf
+          - 
+            name: v3.1 Operations Guide
+            i18n_name: v3.1 管理者ガイド
+            link: ja/2.0/CircleCI-Server-3.1.0-Operations-Guide.pdf
+      - 
+        name: Server v3.0.x PDFs
+        i18n_name: Server v3.0.x PDFs
+        link: ja/2.0/server-3-overview
+        children:
+          - 
+            name: v3.0 Overview
+            i18n_name: v3.0の新機能
+            link: ja/2.0/CircleCI-Server-3.0.1-Overview.pdf
+          - 
+            name: v3.0 Installation Guide
+            i18n_name: v3.0 インストールガイド
+            link: ja/2.0/CircleCI-Server-3.0.1-Installation-Guide.pdf
+          - 
+            name: v3.0 Operations Guide
+            i18n_name: v3.0 管理者ガイド
+            link: ja/2.0/CircleCI-Server-3.0.1-Operations-Guide.pdf
       - 
         name: Server v2.19.x Install
         link: ja/2.0/install-overview/

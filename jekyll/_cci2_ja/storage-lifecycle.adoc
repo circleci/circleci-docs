@@ -29,29 +29,29 @@ ifndef::pdf[NOTE: Scroll table to the right to view all content.]
 | **Description of files**
 | **Side effects of deletion**
 
-| `アーティファクト` 
+| `artifacts` 
 | (null) 
 | 30 
 | General artifacts (deliverables from `store_artifacts` and `store_test_results`) 
 | Artifacts will disappear from the list of artifacts in job results. URLs will return 404. 
 
-| `アーティファクト` 
+| `artifacts` 
 | `"circleci.object_type" === "project.cache"` 
 | 15 
 | Dependency caches 
 | The first build after deletion will be slow due to cache miss.
 
-| `アーティファクト` 
+| `artifacts` 
 | `"circleci.object_type" === "workflow.workspace"` 
 | 15 
-| ワークスペース 
+| Workspaces 
 | If a job depending on workspaces is rerun (e.g. SSH rerun), `attach_workspace` will restore no files, and subsequent steps will fail. 
 
 | `artifacts/picard-task-configs` 
 | (null) 
 | 1 
 | Task config 
-| なし
+| None
 
 | `action-logs` 
 | (null) 
@@ -59,7 +59,7 @@ ifndef::pdf[NOTE: Scroll table to the right to view all content.]
 | Outputs from each step 
 | Outputs will not be shown any longer. Loading indicator will remain even after opening a pull-down for each step.
 
-| `キャッシュ` 
+| `cache` 
 | (null) 
 | 15 
 | Legacy cache 

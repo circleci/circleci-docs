@@ -83,25 +83,25 @@ steps:
 このセクションでは、以下のテスト ランナーの例を示します。
 {:.no_toc}
 
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
+`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 * [Cucumber]({{ site.baseurl }}/2.0/collect-test-data/#cucumber)
-* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン)
-* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-のテスト結果)
-* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-mocha)
-* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#nodejs-用の-ava)
+* [Maven Surefire]({{ site.baseurl }}/2.0/collect-test-data/#maven-surefire-plugin-for-java-junit-results)
+* [Gradle]({{ site.baseurl }}/2.0/collect-test-data/#gradle-junit-results)
+* [Mocha]({{ site.baseurl }}/2.0/collect-test-data/#mochajs)
+* [AVA]({{ site.baseurl }}/2.0/collect-test-data/#ava)
 * [ESLint]({{ site.baseurl }}/2.0/collect-test-data/#eslint)
 * [PHPUnit]({{ site.baseurl }}/2.0/collect-test-data/#phpunit)
 * [pytest]({{ site.baseurl }}/2.0/collect-test-data/#pytest)
 * [RSpec]({{ site.baseurl }}/2.0/collect-test-data/#rspec)
-* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#clojure-テスト用の-test2junit)
-* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#visual-studionet-core-テスト用の-trx2junit)
+* [test2junit]({{ site.baseurl }}/2.0/collect-test-data/#test2junit-for-clojure-tests)
+* [trx2junit]({{ site.baseurl }}/2.0/collect-test-data/#trx2junit-for-visual-studio--net-core-tests)
 * [Karma]({{ site.baseurl }}/2.0/collect-test-data/#karma)
 * [Jest]({{ site.baseurl }}/2.0/collect-test-data/#jest)
 
 
 #### Cucumber
-`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
+{: #cucumber }
 {:.no_toc}
 
 カスタム Cucumber ステップの場合は、JUnit フォーマッタを使用してファイルを生成し、それを `cucumber` ディレクトリに書き込む必要があります。  `.circleci/config.yml` ファイルに追加するコードの例は以下のとおりです。
@@ -139,7 +139,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 ```
 
 #### Java JUnit の結果に使用する Maven Surefire プラグイン
-[AVA](https://github.com/avajs/ava) テスト ランナーで JUnit テストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit) を指定して TAP レポーターを使用します。
+{{ site.baseurl }}/ja/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン
 {:.no_toc}
 
 [Maven](http://maven.apache.org/) ベースのプロジェクトをビルドする場合は、[Maven Surefire プラグイン](http://maven.apache.org/surefire/maven-surefire-plugin/)を使用して XML 形式のテスト レポートを生成することがほとんどです。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
@@ -159,7 +159,7 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 ```
 
 #### <a name="gradle-junit-results"></a>Gradle JUnit のテスト結果
-`.circleci/config.yml` の作業テスト セクションは、以下のようになります。
+`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
 {:.no_toc}
 
 [Gradle](https://gradle.org/) で Java または Groovy ベースのプロジェクトをビルドする場合は、テスト レポートが XML 形式で自動的に生成されます。 CircleCI では、これらのレポートを簡単に収集できます。 以下のコードをプロジェクトの `.circleci/config.yml` ファイルに追加します。
@@ -179,12 +179,12 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 ```
 
 #### <a name="mochajs"></a>Node.js 用の Mocha
-`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
+カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
 {:.no_toc}
 
-さらに、テスト コマンドを以下のように変更します。
+Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 
-`.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
+`.circleci/config.yml` の作業テスト セクションは、以下のようになります。
 
 ```yaml
     steps:
@@ -203,9 +203,9 @@ Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Re
 ```
 
 #### Mocha と nyc の組み合わせ
-カスタム `minitest` ビルド ステップを使用するプロジェクトにテスト メタデータ コレクションを追加するには、Gemfile に以下の gem を追加します。
+{: #mocha-with-nyc }
 
-さらに、テスト コマンドを以下のように変更します。
+Following is a complete example for Mocha with nyc, contributed by [marcospgp](https://github.com/marcospgp).
 
 {% raw %}
 ```
@@ -229,9 +229,9 @@ steps:
 {: #lessa-nameavagreaterlessagreaterava-for-nodejs }
 {:.no_toc}
 
-`.circleci/config.yml` の作業セクションは、以下のようになります。
+`.circleci/config.yml` に、以下の `run` ステップを追加します。
 
-`.circleci/config.yml` の作業セクションは、以下のようになります。
+全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。
 
 ```
     steps:
@@ -251,12 +251,12 @@ steps:
 
 
 #### ESLint
-Karma テスト ランナーで JUnit テストを出力するには、[karma-junit-reporter](https://www.npmjs.com/package/karma-junit-reporter) を使用します。
+{: #eslint }
 {:.no_toc}
 
-Jest データを収集するには、まず `jest.config.js` という名前の Jest 設定ファイルを以下のように作成します。
+To output JUnit results from [ESLint](http://eslint.org/), you can use the [JUnit formatter](http://eslint.org/docs/user-guide/formatters/#junit).
 
-`.circleci/config.yml` に、以下の `run` ステップを追加します。
+`.circleci/config.yml` のテスト用作業セクションは、以下の例のようになります。
 
 ```
     steps:
@@ -277,7 +277,7 @@ Jest データを収集するには、まず `jest.config.js` という名前の
 
 
 #### PHPUnit
-全体の手順については、Viget の記事「[Using JUnit on CircleCI 2.0 with Jest and ESLint (Jest および ESLint と共に CircleCI 2.0 で JUnit を使用する)](https://www.viget.com/articles/using-junit-on-circleci-2-0-with-jest-and-eslint)」を参照してください。
+{: #phpunit }
 {:.no_toc}
 
 PHPUnit テストの場合は、`--log-junit` コマンド ライン オプションを使用してファイルを生成し、それを `/phpunit` ディレクトリに書き込む必要があります。 `.circleci/config.yml` は以下のようになります。
@@ -334,7 +334,7 @@ And modify your test command to this:
 ```
 
 ### Minitest
-詳細については、[minitest-ci README](https://github.com/circleci/minitest-ci#readme) を参照してください。
+{{ site.baseurl }}/ja/2.0/collect-test-data/#visual-studionet-core-テスト用の-trx2junit
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
@@ -368,7 +368,7 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 Clojure のテスト出力を XML 形式に変換するには、[test2junit](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、[サンプル プロジェクト](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
 
 #### Visual Studio/.NET Core テスト用の trx2junit
-{{ site.baseurl }}/ja/2.0/collect-test-data/#visual-studionet-core-テスト用の-trx2junit
+{: #trx2junit-for-visual-studio-net-core-tests }
 {:.no_toc}
 Visual Studio または .NET Core で出力される trx ファイルを XML 形式に変換するには、[trx2junit](https://github.com/gfoidl/trx2junit) を使用します。
 
@@ -437,7 +437,9 @@ A working `.circleci/config.yml` section might look like this:
 {: #jest }
 {:.no_toc}
 
-{{ site.baseurl }}/ja/2.0/collect-test-data/#java-junit-の結果に使用する-maven-surefire-プラグイン
+{: #video-troubleshooting-test-runners }
+{:.no_toc}
+{:.no_toc}
 
 A working `.circleci/config.yml` section might look like this:
 
@@ -472,5 +474,4 @@ For a full walkthrough, refer to this article by Viget: [Using JUnit on CircleCI
 
 ## ビデオ: テスト ランナーのトラブルシューティング
 {: #video-troubleshooting-test-runners }
-{:.no_toc}
 {:.no_toc} <iframe width="360" height="270" src="https://www.youtube.com/embed/CKDVkqIMpHM" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>

@@ -9,22 +9,22 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
+NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。 Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
 
 toc::[]
 
 == はじめに
 
-CircleCI ランナーを利用することで、自社インフラストラクチャでジョブを実行できるようになります。これにより、ビルドとテストが可能なアーキテクチャの幅が広がるだけでなく、環境をより細かく制御することもできます。下図は、CircleCI ランナーが既存のシステムをどのように拡張するのかを示しています。
+CircleCI ランナーを利用することで、自社インフラストラクチャでジョブを実行できるようになります。 これにより、ビルドとテストが可能なアーキテクチャの幅が広がるだけでなく、環境をより細かく制御することもできます。 下図は、CircleCI ランナーが既存のシステムをどのように拡張するのかを示しています。
 
 .ランナーのアーキテクチャ
-image::runner-overview-diagram.png[CircleCI ランナーのアーキテクチャ]
+image::runner-overview-diagram.png[CircleCI Runner Architecture]
 
-== ランナーのユース ケース
+== CircleCI ランナーの制限事項
 
 CircleCI では、ランナーのユース ケースとして主に 2 つのシナリオを想定しています。
 
-* 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。ランナーを使用することで、次のようなことが可能になります。
+* 特権アクセスと制御 - 環境の分離に関する要件が厳しい企業では、オンプレミス環境やアクセス制限されたインフラストラクチャでジョブを実行するよう義務付けられている場合があります。 ランナーを使用することで、次のようなことが可能になります。
 ** IP 制限 - 自社で制御可能な静的 IP アドレスを使用できます。
 ** ID とアクセス管理 (IAM) 権限 - AWS にセットアップしたランナーに、IAM の権限を割り当てることができます。
 ** オペレーティング システムの監視
@@ -32,59 +32,85 @@ CircleCI では、ランナーのユース ケースとして主に 2 つのシ�
 
 * 企業独自のコンピューティング要件 - CircleCI のリソース クラスとして提供されていない環境やアーキテクチャでジョブを実行する必要のあるお客様は、ランナーを使用してニーズを満たすことができます。
 
+== CircleCI ランナーを使用するには、次の条件が満たされている必要があります。
+
+CircleCI runner is available on multiple platforms. Support levels fall into two categories:
+
+* <<Supported>>
+* <<Preview>>
+
+=== Supported
+
+*Supported* Level platforms ensure that CircleCI runners are both built and tested on their respective systems.
+
+With a *Supported* platform, users receive the following:
+
+* Documentation and best practices
+* Support: CircleCI Customer Engineers will assist customers to resolve issues within their usual Gold Service Level Agreements (SLAs)
+
+*Supported* CircleCI runners are available on the following platforms:
+
+* Arm64 + Ubuntu
+* Intel + macOS
+* macOS 11.2+ (Apple M1)
+
+=== Preview
+
+On *Preview* Level platforms, CircleCI runners are currently in development, thus testing is not complete.
+
+With a *Preview* platform, users receive the following:
+
+* A full integration that is a work-in-progress -- thus, some manual configuration may be required to install, configure, and deploy
+* Work-in-progress documentation and best practices
+* Support: CircleCI Customer Engineers will provide assistance and guidance on best practices for installing, configuring, and operating CircleCI runners
+** Users are encouraged to provide feedback in order to rapidly improve the CircleCI runner user experience and meet its necessary criteria as a *Supported* platform
+
+*Preview* CircleCI runners are available on the following platforms:
+
+* Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
+* Docker
+* Kubernetes
+* Windows
+
+NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
+have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
+and contribute to our https://discuss.circleci.com/t/self-hosted-runners-are-here/38159[runner discuss page] to help
+prioritize development efforts from our team!
+
+== Getting Started
+
+CircleCI ランナーを使用する際には、注意の必要な点がいくつかあります。
+
+* https://circleci.com/contact/[Contact us] to sign up for a free trial of the Scale plan, if you are not already enrolled
+* Provide your own platform to deploy your CircleCI runners (See the <<Available CircleCI runner platforms>> section)
+* xref:runner-installation.adoc[Install] CircleCI runner!
+
 == ランナーの操作
 
-CircleCI ランナーのインストール後、ランナーは circleci.com をポーリングし動作します、ジョブを実行し、ステータス、ログ、アーティファクトを CircleCI に報告します。新しいバージョンがリリースされると、ランナーはジョブを実行していないときに自動で更新します。
+CircleCI ランナーのインストール後、ランナーは circleci.com をポーリングし動作します、ジョブを実行し、ステータス、ログ、アーティファクトを CircleCI に報告します。 新しいバージョンがリリースされると、ランナーはジョブを実行していないときに自動で更新します。
 
 ランナーは、ローンチ エージェントとタスク エージェントという 2 つの要素で構成されます。
 
 * ローンチ エージェント (launch-agent) - タスクの実行 (1 つのジョブを分解して行う並列実行) に必要な情報の収集と、タスク エージェント プロセスのダウンロードおよび起動を行います。
 * タスク エージェント (task-agent) - ローンチ エージェントによって取得、設定されたタスクの実行を行います。
 
-この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるよう構成できます。ジョブの実行を許可したすべてのユーザーには、task-agent と同等の権限が付与されます。以降で説明するデプロイメントの推奨事項は、このアプローチに基づいています (ローンチ エージェントは root ユーザー、タスク エージェントは circleci ユーザーとして実行されます)。
-
-== CircleCI ランナーの制限事項
-
-CircleCI ランナーを使用する際には、注意の必要な点がいくつかあります。
-
-現在、ランナーが公式にサポートしているプラットフォームは以下のとおりです。
-
-* Intel + Ubuntu
-* Arm64 + Ubuntu
-* Intel + macOS
-
-上記以外のプラットフォームについてもテスト済みですが、公式にはまだサポートされていません。テスト済みでサポートされていないプラットフォームとテストされていないプラットフォームの詳細については、「<<runner-installation#,CircleCI ランナーのインストール>>」を参照してください。
-
-以下の機能は、CircleCI ランナーにはまだ実装されていませんが、今後提供される予定です。
-
-* SSH での再実行
-* テストの分割
-* `add_ssh_keys`
+この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるよう構成できます。 ジョブの実行を許可したすべてのユーザーには、task-agent と同等の権限が付与されます。 以降で説明するデプロイメントの推奨事項は、このアプローチに基づいています (ローンチ エージェントは root ユーザー、タスク エージェントは circleci ユーザーとして実行されます)。
 
 == パブリック リポジトリ
 
-CircleCI ランナーは、「Build Forked Pull Requests (フォークされたプル リクエストをビルド)」 設定が有効になっているパブリック プロジェクトでの使用は推奨されません。このようなパブリック プロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプル リクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。CircleCI ランナーで未信頼のジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティ リスクが生じます。このようなリスクには、次のものがあります。
-
-* 悪意のあるプログラムがマシンで実行される。
-* マシンのランナー サンドボックスの外部で操作が行われる。
-* マシンのネットワーク環境に外部からアクセスされる。
-* 不要なデータや危険なデータがマシンに保持される。
-
-== 前提条件
-
-CircleCI ランナーを使用するには、次の条件が満たされている必要があります。
+CircleCI ランナーは、「Build Forked Pull Requests (フォークされたプル リクエストをビルド)」 設定が有効になっているパブリック プロジェクトでの使用は推奨されません。 このようなパブリック プロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプル リクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 CircleCI ランナーで未信頼のジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティ リスクが生じます。 このようなリスクには、次のものがあります。
 
 * Scale プランを利用している。
 * クラウド版 CircleCI を使用している。
 * インフラストラクチャの管理経験がある。
-* <<runner-installation#,CircleCI ランナーがインストールされている>>。
+* xref:runner-installation.adoc[CircleCI ランナーがインストールされている]。
 
 == ジョブでランナーを参照する
 
-ランナーのセットアップが完了したら、ジョブでランナーを参照する必要があります。これを行うには、`.circleci/config.yml` ファイル内の特定のフィールドにそのための値を指定します。ランナーを使って実行するジョブについて、以下のフィールドを指定します。
+ランナーのセットアップが完了したら、ジョブでランナーを参照する必要があります。 これを行うには、`.circleci/config.yml` ファイル内の特定のフィールドにそのための値を指定します。 ランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
 * `machine: true`
-* `resource_class: your-namespace/your-resource` 
+* `resource_class: your-namespace/your-resource`
 
 以下に、ジョブのセットアップ方法の簡単な例を示します。
 
@@ -103,4 +129,12 @@ jobs:
 ```
 この設定ファイルを VCS プロバイダーにプッシュすると、ランナーを使ってジョブが実行されます。
 
-NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する一意の識別子です。各ユーザまたは組織は、1つのユニークで不変のネームスペースを持つことができます。デフォルトでは、組織も名前空間を 1 つしか要求できないように制限されています。これは、名前空間の占拠や取り違えを防ぐためです。名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja-jp[サポート] にお問い合わせください。
+NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する一意の識別子です。 各ユーザまたは組織は、1つのユニークで不変のネームスペースを持つことができます。 デフォルトでは、組織も名前空間を 1 つしか要求できないように制限されています。 これは、名前空間の占拠や取り違えを防ぐためです。 名前空間を変更する必要がある場合は、 https://support.circleci.com/hc/ja-jp[サポート] にお問い合わせください。
+
+== Limitations
+
+Almost all standard CircleCI features are available for use with runner jobs, but at present a few features are not yet supported. If these features are important for you to make use of runner jobs, please let us know via the relevant canny page.
+
+- https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[SSH での再実行]
+- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割]
+- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]

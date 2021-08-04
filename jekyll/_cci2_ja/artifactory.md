@@ -24,15 +24,15 @@ We will use this space to highlight some sample projects showing how to best use
 Maven や Gradle といった人気の高いツールでは Artifactory プラグインが提供されており、それぞれのデプロイ コマンドを使用して Artifactory にデプロイできます。
 
 ## Artifactory プラグイン
-JFrog CLI を使用する場合は、`.circleci/config.yml` に以下のコードを追加して JFrog CLI をインストールできます。
-Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
+JFrog CLI を使用する場合は、`.circleci/config.yml` に以下のコードを追加して JFrog CLI をインストールできます。 Popular tools like Maven and Gradle have Artifactory plugins, and can deploy to Artifactory using their respective deploy commands.
+JAR ファイルをアップロードする場合には、以下の例を使用します。 WAR ファイルをアップロードする場合には、以下の例を使用します。
 
 - [Maven でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Maven+Artifactory+Plugin)
 - [Gradle でのデプロイ](https://www.jfrog.com/confluence/display/RTF/Gradle+Artifactory+Plugin)
 
 ## JFrog CLI
-JAR ファイルをアップロードする場合には、以下の例を使用します。
-WAR ファイルをアップロードする場合には、以下の例を使用します。
+{: #jfrog-cli }
+.circleci/config.yml ファイル全体は、以下のようになります。
 
 ```
 - run: ./jfrog rt config --url $ARTIFACTORY_URL --user $ARTIFACTORY_USER --apikey $ARTIFACTORY_APIKEY --interactive=false
@@ -57,7 +57,7 @@ If you would like to upload WAR files use the following example:
 - run: ./jfrog rt u "multi*/*.war" <artifactory_repo_name> --build-name=<name_you_give_to_build> --build-number=$CIRCLE_BUILD_NUM --flat=false
 ```
 
-.circleci/config.yml ファイル全体は、以下のようになります。
+The full `.circleci/config.yml` file would look something like the following:
 
 ```yaml
 version: 2
