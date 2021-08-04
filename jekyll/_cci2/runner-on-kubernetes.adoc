@@ -34,6 +34,10 @@ If you want to have different runners specialized for different workloads, it is
 * The Helm chart currently doesn't support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
 * The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you'll need to set up separate charts for each one.
 
+=== CircleCI Server Installation
+
+When installing the Helm chart for use with a CircleCI Server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
+
 == Getting Started
 
 . Clone the repository at https://github.com/CircleCI-Public/circleci-runner-k8s.
@@ -89,6 +93,8 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 | `+resourceClass+` | -         | Y         | The resource class you created for your runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
 | `+runnerToken+`   | -         | Y         | The token you created for your runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
+
+| `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI Server installations.
 
 | all other values  | -         | N         | Modify at your own discretion and risk.
 
