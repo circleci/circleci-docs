@@ -129,6 +129,7 @@ jobs:
 
 **メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -139,18 +140,19 @@ jobs:
       - run: sudo chown -R circleci:circleci /usr/local/bin
       - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
       - restore_cache:  # このステップは依存関係をインストールする*前*に実行します
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - run:
           command: |
             sudo pip install pipenv
             pipenv install
       - save_cache:
-          key: deps9-{% raw %}{{ .Branch }}-{{ checksum "Pipfile.lock" }}{% endraw %}
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
           paths:
             - ".venv"
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
 ```
+{% endraw %}
 
 `run` ステップを使用して、テスト スイートを実行します。
 
