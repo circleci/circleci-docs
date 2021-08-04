@@ -29,13 +29,13 @@ version:
 ## Selenium
 {: #selenium }
 
-ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザー テスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する[ディスカッション スレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
+Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
 
 Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザー テストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアル ページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
 WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 テストをリモートで実行する場合は、Selenium Server と通信し、サーバーからブラウザーを操作します。
 
-ネットワーク ログ、コマンド ログ、Selenium ログ、各コマンドのステップバイステップ スクリーンショット、テスト実行全体のビデオ、メタデータなど、自動化スクリプトの詳細なテスト レポートを分析できます。
+If Selenium is not included in your primary docker image, install and run Selenium as shown below::
 
 ```yml
 version: 2
@@ -57,7 +57,7 @@ jobs:
 
 サンプル アプリケーションについては、「[2.0 プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/project-walkthrough/)」の「Selenium のインストール・実行によるブラウザー テストの自動化」セクションを参照してください。 Ruby on Rails 用の Capybara/Selenium/Chrome ヘッドレス CircleCI 2.0 設定ファイルの例については、[Knapsack Pro のドキュメント](http://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless)を参照してください。
 
-以下に、CircleCI と LambdaTest を統合するための設定ファイルの例を示します。
+ヘッドレス Chrome の使用方法については、CircleCI のブログ記事「[Headless Chrome for More Reliable, Efficient Browser Testing (ヘッドレス Chrome を使用した高効率かつ高信頼性のブラウザー テスト)](https://circleci.com/blog/headless-chrome-more-reliable-efficient-browser-testing/)」や、関連する[ディスカッション スレッド](https://discuss.circleci.com/t/headless-chrome-on-circleci/20112)を参照してください。
 
 Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、BrowserStack などのクラウドベースのプラットフォームに移行することも可能です。 クロスブラウザー テストを実行するこれらのクラウドは、クラウド上に既製のインフラストラクチャを提供しているため、開発者が Selenium 環境の構成に時間をかける必要はありません。
 
@@ -68,7 +68,7 @@ Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、Bro
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
-LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。 これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 Use the orb to quickly set up a Lambda tunnel and the define your test steps
+CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 An example of running parallel tests using this orb is shown below:
 
 {% raw %}
 ```yaml
@@ -191,7 +191,7 @@ jobs:
 ### ローカルまたはプライベートにホスティングされたプロジェクトのテスト
 {: #sauce-labs-browser-testing-orb-example }
 
-CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 An example of running parallel tests using this orb is shown below:
+LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。 これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 An example of running parallel tests using this orb is shown below:
 
 {% raw %}
 ```yaml
@@ -263,12 +263,12 @@ jobs:
 インテグレーション テストのデバッグは一筋縄では行きません。 特に、リモート マシンで実行されている場合はなおさらです。 このセクションでは、CircleCI 上でブラウザー テストをデバッグする方法の例をいくつか示します。
 
 ### LambdaTest ブラウザー テスト Orb の例
-この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
+{: #using-screenshots-and-artifacts }
 {:.no_toc}
 
 [ビルド アーティファクト]({{ site.baseurl }}/ja/2.0/artifacts/)を収集してビルドから使用できるように CircleCI を構成できます。 たとえば、アーティファクトを使用し、ジョブの一部としてスクリーンショットを保存して、ジョブの終了時に表示することができます。 `store_artifacts` ステップでそれらのファイルを明示的に収集し、`path` と `destination` を指定する必要があります。 例については、「CircleCI を設定する」の [store_artifacts]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) セクションを参照してください。
 
-スクリーンショットの保存は簡単です。 WebKit と Selenium では組み込み機能として提供されており、大半のテスト スイートでサポートされています。
+この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
 
 *   [直接 Selenium を使用して手動で保存する](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#remotewebdriver)
 *   [Cucumber を使用して障害時に自動的に保存する](https://github.com/mattheworiordan/capybara-screenshot)
@@ -342,7 +342,7 @@ ubuntu@box159:~$ firefox &
 これで、コマンド ラインからインテグレーション テストを実行し、ブラウザーで予期しない動作がないかどうかを監視できます。 ローカル マシンでテストを実行しているかのように、ブラウザーを操作することができます。
 
 ### ローカル ブラウザーを使用して CircleCI 上の HTTP サーバーにアクセス
-CircleCI の X サーバーの共有
+これで SSH セッションが開始し、X11 転送が有効化されます。
 {:.no_toc}
 
 VNC サーバーを頻繁にセットアップしているなら、そのプロセスを自動化した方が効率的でしょう。 `x11vnc` を使用して、VNC サーバーを X にアタッチできます。
@@ -363,7 +363,7 @@ $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
 
 ## SSH からの X11 転送
-これで SSH セッションが開始し、X11 転送が有効化されます。
+{: #x11-forwarding-over-ssh }
 
 CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 

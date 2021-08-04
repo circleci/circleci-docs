@@ -29,7 +29,9 @@ There are two different types of orbs you can use in your configuration, dependi
 ### プライベート Orbs
 {: #private-orbs }
 
-**メモ:** プライベート Orbs 機能は、いずれかの有料[プラン](https://circleci.com/ja/pricing/)で利用いただけます。パフォーマンスプランのお客様は最大3つのプライベート Orbs まで作成でき、スケールプランのお客様はプライベート Orbs の作成上限数に制限はありません。詳細については、営業担当者へお問い合わせください。
+
+**メモ:** プライベート Orbs 機能は、いずれかの有料[プラン](https://circleci.com/ja/pricing/)で利用いただけます。 パフォーマンスプランのお客様は最大3つのプライベート Orbs まで作成でき、スケールプランのお客様はプライベート Orbs の作成上限数に制限はありません。 詳細については、営業担当者へお問い合わせください。
+{: class="alert alert-warning"}
 
 Using a private orb enables you to author an orb while ensuring the following:
 
