@@ -582,9 +582,9 @@ Please refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instr
 
 The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps for non containerized environments.
 
-. Replace existing `circleci-launch-agent` binary with the new version
-. Stop currently running `circleci-launch-agent` processes
-. Start the new version of the `circleci-launch-agent` binary
+. Replace existing `circleci-launch-agent` binary with the new version.
+. Stop currently running `circleci-launch-agent` processes.
+. Start the new version of the `circleci-launch-agent` binary.
 
 ==== Installing the New `circleci-launch-agent-binary`
 
