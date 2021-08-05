@@ -430,7 +430,7 @@ When the container starts, it will immediately attempt to start running jobs.
 
 ==== Start the Docker container on server
 
-When starting the docker container on server the `agent_version` environment variable will need to be passed in using the `--env` flag as well.
+When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
 
 ``` bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
