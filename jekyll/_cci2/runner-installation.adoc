@@ -444,7 +444,7 @@ docker stop <container-name>
 
 === Remove the Docker container
 
-In some cases it may be required to fully remove a stopped Runner container from the system, such as when recreating the container using the same name.
+In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
 
 ``` bash
 docker stop <container-name>; docker rm <container-name>;
