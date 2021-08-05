@@ -573,9 +573,9 @@ Please refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instr
 
 ==== Upgrading Runners for Docker
 
-. Stop any currently running Runner containers following the <<Stopping the Docker container>> instructions
-. Remove the runner containers following the <<Stopping the Docker container>> instructions
-. Start a new Runner Docker container following the <<Start the Docker container on Server>> instructions
+. Stop any currently running Runner containers following the <<Stopping the Docker container>> instructions.
+. Remove the runner containers following the <<Stopping the Docker container>> instructions.
+. Start a new Runner Docker container following the <<Start the Docker container on Server>> instructions.
 
 
 === Upgrading Runners in Non-Containerized Environments
