@@ -428,7 +428,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 When the container starts, it will immediately attempt to start running jobs.
 
-==== Start the Docker container on Server
+==== Start the Docker container on server
 
 When starting the docker container on server the `agent_version` environment variable will need to be passed in using the `--env` flag as well.
 
