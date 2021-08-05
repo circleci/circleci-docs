@@ -561,7 +561,7 @@ depending on your version of server:
 | 1.0.11147-881b608
 |===
 
-== Upgrading Runner On Server
+== Upgrading runner on server
 
 Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
  
