@@ -192,7 +192,8 @@ velero install \
     --wait
 ----
 
-* Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, e.g.:
+* Once Velero is installed on your cluster, check the new `velero` namespace. You
+should have a Velero deployment and a restic daemonset, e.g.:
 
 [source,bash]
 ----
@@ -470,8 +471,7 @@ velero install --provider aws \
   --wait
 ----
 
-Once Velero is installed on your cluster, check the new `velero` namespace. You
-should have a Velero deployment and a restic daemonset, e.g.:
+Once Velero is installed on your cluster, check the new `velero` namespace. You should have a Velero deployment and a restic daemonset, e.g.:
 
 [source,bash]
 ----
