@@ -40,7 +40,7 @@ Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-in
 Orbs can however be "Unlisted" from the [Orb Registry](https://circleci.com/developer/orbs). Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
 
 ```
-circleci orb unlist myOrb/myNamespace
+circleci orb unlist myNamespace/myOrb
 ```
 
 ## Secure API tokens

@@ -26,11 +26,11 @@ Google Cloud SDK は、Google Cloud Platform (GCP) サービスへのアクセ�
 - GCP プロジェクト
 
 ### Google Cloud SDK のインストール
-Identity and Access Management (IAM) の権限については、Cloud Storage の[権限に関するドキュメント](https://cloud.google.com/storage/docs/access-control/iam-permissions)を参照してください。
+`gcloud` を使用して Google Cloud SDK を承認し、いくつかのデフォルト設定を設定します。
 
 プライマリ コンテナでオペレーティング システムとして Debian を受け入れ可能な場合は、Google の基本 Docker イメージの使用を検討してください。 このイメージは、Docker Hub で [`google/cloud-sdk`](https://hub.docker.com/r/google/cloud-sdk/) として提供されています。
 
-Google のパブリック イメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
+Otherwise, follow the [Google Cloud SDK installation instructions](https://cloud.google.com/sdk/) for your base image's operating system.
 
 ### サービス アカウントの作成と格納
 {: #creating-and-storing-a-service-account }
@@ -46,7 +46,7 @@ Google Cloud SDK のツールを使用する前に、`gcloud` を承認する必
     - `GOOGLE_COMPUTE_ZONE`: デフォルトの [Compute Engine のゾーン](https://cloud.google.com/compute/docs/regions-zones/)
 
 #### きめ細かい権限の追加
-**メモ:** カスタムの基本イメージを使用している場合は、確実に最新のコンポーネントが使用されるように、SDK を承認する前に以下のコマンドを追加してください。
+{: #adding-granular-permissions }
 
 GCR へのコンテナ イメージのプッシュに問題が発生している場合は、デフォルトの `service account` によって提供されるものよりもきめ細かい権限が必要とされている可能性があります。 権限の変更は、Cloud Storage の [IAM コンソール](https://console.cloud.google.com/iam-admin/iam/project)で許可することができます。
 
@@ -55,7 +55,7 @@ Refer to the Cloud Storage [permission documentation](https://cloud.google.com/s
 ### Google Container Registry への認証
 {: #authenticating-to-google-container-registry }
 
-`gcloud` を使用して Google Cloud SDK を承認し、いくつかのデフォルト設定を設定します。
+Google のパブリック イメージ (`google/cloud-sdk`) を使用している場合、認証は不要です。
 
 ```yaml
 version: 2

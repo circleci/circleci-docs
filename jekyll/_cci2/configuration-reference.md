@@ -318,7 +318,7 @@ It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-confi
 jobs:
   myjob:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: circleci/node:14.17.3
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -359,6 +359,7 @@ jobs:
 {: #available-machine-images }
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
@@ -1377,6 +1378,35 @@ jobs:
     steps:
       - run: echo "This is pipeline ID << pipeline.id >>"
 ```
+
+#### **`circleci_ip_ranges`**
+{: #circleciipranges }
+
+Enables jobs to go through a set of well-defined IP address ranges. See [IP ranges]({{ site.baseurl }}/2.0/ip-ranges/) for details.
+
+###### _Example_
+{: #example }
+
+```yaml
+version: 2.1
+
+jobs:
+  build:
+    circleci_ip_ranges: true # opts the job into the IP ranges feature
+    docker:
+      - image: curlimages/curl
+    steps:
+      - run: echo “Hello World”
+workflows:
+  build-workflow:
+    jobs:
+      - build
+```
+
+**Notes**:
+
+- A paid account on a [Performance, Custom, or Scale plan](https://circleci.com/pricing/) is required to access IP ranges.
+- IP ranges is currently in open preview for paid accounts. Specific rates and details are being finalized and will be published when the feature is generally available.
 
 ## **`workflows`**
 {: #workflows }

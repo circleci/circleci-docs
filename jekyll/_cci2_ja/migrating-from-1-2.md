@@ -50,12 +50,12 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 5. `docker:` キーと `- image:` キーを記述するか、`machine: true` を設定するか、`macos` を指定して、プライマリ コンテナを実行するときの言語とバージョンを追加します。 以下の `ruby:` の例のように、構成に言語とバージョンが含まれている場合は、修正が必要です。
      ```
        ruby:
-         version: 2.3
+         version: 2.7
      ```
      上記を以下の 2 行に置き換えます。
      ```
          docker:
-           - image: circleci/ruby:2.3-jessie
+           - image: circleci/ruby:2.7
      ```
      最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。 ジョブごとにコマンドを宣言します。 Docker コンテナを初めて使用する場合は、「[Docker 入門](https://docs.docker.com/get-started/#docker-concepts)」を参照してください。
      ```yaml

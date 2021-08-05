@@ -1,0 +1,96 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= CircleCI Runner on Kubernetes
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== Introduction
+
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+
+NOTE: CircleCI runner on K8s is currently *in preview*. For information on our support levels, see <<runner-overview#preview,available platforms>>.
+
+This installation guide is to help setup CircleCI's runner(s) on your Kubernetes cluster. We provide a Helm chart which makes installing the pods easy.
+
+The Helm chart will spin up one or more pods of *the same runner resource class*. This is useful for when you want all of these runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
+
+If you want to have different runners specialized for different workloads, it is recommended to create different runner resource classes and rerun these instructions/have separate charts for each runner class you create.
+
+=== Prerequisites
+* Be on Scale plan or trialing Scale plan. See above.
+* Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
+* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
+
+=== Limitations/Pending Work
+* The Helm chart currently doesn't configure permissions, so the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
+* The Helm chart currently doesn't support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you'll need to set up separate charts for each one.
+
+== Getting Started
+
+. Clone the repository at https://github.com/CircleCI-Public/circleci-runner-k8s.
+. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
+. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
++
+....
+$ helm install "circleci-runner" ./ \
+  --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
+  --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
+  --namespace your-namespace
+....
++
+. Verify your pods are up and running by checking their status and following the logs. You should see output like the following:
++
+....
+$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                                             READY   STATUS    RESTARTS   AGE
+default       circleci-runner-test-7d6b8fc6f-4z5wl                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-h97jz                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-pksc6                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-q74p4                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-wh6m2                             1/1     Running   0          28h
+
+$ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
+
+... (output truncated)
+
+time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
+time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
+time="2021-03-25T20:55:40Z" level=info msg="no task found"
+....
+
+== Chart Values
+
+Customizable parameters are left inside the `+values.yaml+` file. See the following chart for information about each of the values:
+
+[.table]
+[cols=4*, options="header"]
+[cols="2,1,1,4"]
+|===
+| Value             | Default   | Required? | Description
+
+| `+image.repository+`
+`+image.tag+`
+| `+circleci/runner+`
+`+launch-agent+`
+| Y
+| You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
+
+| `+replicaCount+`  | 1         | Y         | The number of replicas of this runner you want in your cluster. Must currently be set and updated manually. See <<limitationspending-work,Pending Work>>.
+
+| `+resourceClass+` | -         | Y         | The resource class you created for your runner. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
+
+| `+runnerToken+`   | -         | Y         | The token you created for your runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
+
+| all other values  | -         | N         | Modify at your own discretion and risk.
+
+|===
+

@@ -1,44 +1,39 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x Troubleshooting and Support
+= CircleCI Server v3.x のトラブルシューティングとサポート
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI
-Server v3.x installation. If your issue is not addressed below, you can generate a support bundle or contact your
-CircleCI account team.
+ここでは、CircleCI Server v3.x で問題が発生した場合の初期トラブルシューティング手順について説明します。 以下の説明で問題を解決できなかった場合は、サポート バンドルを生成するか、CircleCI アカウント チームにお問い合わせください。
 
 toc::[]
 
-## Start Admin Console
+## 管理者コンソールの起動
 
-To restart the Admin Console, run:
+管理者コンソールを再起動するには、以下のコマンドを実行します。
 
 [source,bash]
 ----
 kubectl kots admin-console --namespace <namespace>
 ----
 
-Open your browser and access http://localhost:8800 to see the Admin console.
+ブラウザーを開いて、http://localhost:8800 にアクセスし、管理者コンソールを表示します。
 
-## Generate Support Bundle
-A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically
-requested when you open a ticket.
+## サポート バンドルの生成
+サポート バンドルは、発生している問題を CircleCI エンジニアが診断、修正するためのものです。 通常、サポート チケットを作成する場合、サポート バンドルを提出するように求められます。
 
-To download a support bundle to provide to CircleCI for support, select the *Troubleshoot* tab from the Admin console
-menu bar, and then click *Analyze CircleCI Server*.
+CircleCI へのサポート依頼時に提出するサポート バンドルをダウンロードするには、管理者コンソールのメニュー バーの *[Troubleshoot (トラブルシューティング)]* タブを選択して、*[Analyze CircleCI Server (CircleCI Server の分析)]* をクリックします。
 
-## Managing Pods
+## Pod の管理
 
-### Verify Pod Readiness and Status
-Note: please check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to
-serve user requests. Some pods may take some time to become ready.
+### Pod の準備状況とステータスの確認
+メモ: `READY` 列と `STATUS` 列を確認してください。 `STATUS` が `Running` でも、Pod ではユーザーのリクエストを処理する準備はできていません。 一部の Pod は、準備ができるまである程度の時間がかかる可能性があります。
 
 [source,bash]
 ----
@@ -52,7 +47,7 @@ circleci-nomad-0 1/1 Running 6 6d20h
 …
 ----
 
-To show only pods with a status besides `Running`, you can use --field-selector option.
+ステータスが `Running` 以外の Pod だけを表示するには、--field-selector オプションを使用します。
 
 [source,bash]
 ----
@@ -61,30 +56,29 @@ NAME READY STATUS RESTARTS AGE
 nomad-server 0/1 Error 0 5d22h
 ----
 
-### Verify Pod Settings and Status
-To show detail settings and status of pods:
+### Pod の設定とステータスの確認
+Pod の詳細設定とステータスを表示するには、以下のコマンドを実行します。
 
 [source,bash]
 ----
 kubectl describe pods <pod-name> -n <namespace>
 ----
 
-### Get Pod Logs
-To show logs of pods:
+### Pod のログの取得
+Pod のログを表示するには、以下のコマンドを実行します。
 
 [source,bash]
 ----
 kubectl logs <pod-name> -n <namespace>
 ----
 
-### Restart Pods
-To restart specific pods, the easiest way is remove the pod. Kubernetes will automatically recreate the pod.
+### Pod の再起動
+特定の Pod を再起動する最も簡単な方法は、その Pod を削除することです。 削除した Pod は、Kubernetes によって自動的に再作成されます。
 
 [source,bash]
 ----
 kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
-## Debug Queuing Builds
-For troubleshooting information on debugging queued builds, see the Server 2.x
-https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
+## ビルドのキューイングのデバッグ
+キューイングされているビルドをトラブルシューティングとしてデバッグする場合、CircleCI Server 2.x のhttps://circleci.com/docs/ja/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング] ガイドを参照してください。

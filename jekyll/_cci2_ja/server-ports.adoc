@@ -253,14 +253,14 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | アウトバウンド
 | PostgreSQL サーバー
 | PostgreSQL データベース接続
-| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
+| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
 
 | 27017
 | TCP
 | アウトバウンド
 | MongoDB サーバー
 | MongoDB データベース接続
-| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
 
 | 5672
 | TCP
@@ -452,7 +452,7 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | 双方向
 | PostgreSQL サーバー
 | PostgreSQL 複製
-| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの PostgreSQL ポートを想定。
 |===
 
 === MongoDB サーバー
@@ -472,7 +472,7 @@ Below all ports required by a CircleCI 2.0 installation are listed for each mach
 | 双方向
 | MongoDB サーバー
 | MongoDB 複製
-| Only if using externalized databases. ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
+| 外部処理用データベースを使用する場合のみ。 ポートはユーザー定義だが、デフォルトの MongoDB ポートを想定。
 |===
 <<<
 === RabbitMQ サーバー

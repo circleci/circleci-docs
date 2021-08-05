@@ -20,7 +20,7 @@ CircleCI 2.0 への移行を開始するにあたり、直ちにすべてを移�
 - 2.0 のテストのための新しいブランチを作成します。
 - そのブランチから `circle.yml` を削除し、`.circleci/config.yml` ファイルを追加します。
 - 2.0 設定ファイルにそのブランチに対する最小限の処理を記述して、ビルドが成功するまでプッシュします。
-- 動作具合を細かく確認できるように、少しずつ構成を追加します。 最初はコードをチェックアウトするだけにし、次に依存関係をインストールし、さらにテストを実行します。 その後、依存関係をキャッシュしたり、ワークフローなどの高度な機能を使用したりします。 設定ファイルを徐々に作り上げていってください。
+- 動作具合を細かく確認できるように、少しずつ構成を追加します。 最初はコードをチェックアウトするだけにし、次に依存関係をインストールし、さらにテストを実行します。 その後、依存関係をキャッシュしたり、ワークフローなどの高度な機能を使用したりします。 Build up your config bit by bit.
 - すべてが正常に機能するようになったら、新しい設定ファイルを含むブランチを主プロジェクトにマージします。
 
 ## CircleCI 2.0 のセットアップに関するヒント
@@ -88,8 +88,6 @@ CircleCI 2.0 への移行を開始するにあたり、直ちにすべてを移�
     ```
                 ``` scalacOptions ++= Seq( <code>-encoding</code>, <code>utf-8</code>, <code>-target:jvm-1.8</code>, <code>-deprecation</code>, <code>-unchecked</code>, <code>-Xlint</code>, <code>-feature</code>, <code>-Xmax-classfile-name</code>, <code>242</code> &#060;= add here ),
 ```
-, utf-8, -target:jvm-1.8, -deprecation, -unchecked, -Xlint, -feature, -Xmax-classfile-name, 242 &#060;= add here ),
-  </code>
 
 
 ## ## ブラウザー テストに関するヒント

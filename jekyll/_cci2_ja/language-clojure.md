@@ -63,7 +63,7 @@ jobs: # 1 回の実行の基本作業単位
 {% endraw %}
 
 ## コードの取得
-常にバージョンの指定から始めます。
+{: #get-the-code }
 
 上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
 
@@ -72,6 +72,8 @@ jobs: # 1 回の実行の基本作業単位
 他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
 
 ## 設定ファイルの詳細
+{: #config-walkthrough }
+
 `working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
 
 `lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。

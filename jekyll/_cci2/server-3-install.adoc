@@ -196,7 +196,47 @@ NOTE: If using GitHub Enterprise, you will also need a personal access token and
 
 . URL: ex. `http://vault:8200`
 . Transit Path: The path of the transit secrets engine.  The default is `transit`. See the https://www.vaultproject.io/docs/secrets/transit#setup[Vault documentation] for more details.
-. Token: The Vault token to be used by CircleCI. 
+. Token: The Vault token to be used by CircleCI.  The following example shows how to create a token with the recommended policy
+
+Create the policy:
+[source,sh]
+----
+vault policy write circleci -<<EOF
+path "mytransit/keys" {
+  capabilities = ["list"]
+}
+path "mytransit/keys/*" {
+  capabilities = ["read", "create", "update", "delete"]
+  denied_parameters = {
+    "exportable" = [true]
+  }
+}
+path "mytransit/export/*" {
+  capabilities = ["deny"]
+}
+path "mytransit/encrypt/*" {
+  capabilities = ["create", "update"]
+}
+path "mytransit/decrypt/*" {
+  capabilities = ["update"]
+}
+path "mytransit/rewrap/*" {
+  capabilities = ["update"]
+}
+path "/auth/token/lookup-self" {
+    capabilities = ["read", "list"]
+}
+
+EOF
+
+vault token create -policy=circleci
+----
+
+Create a token using the policy:
+[source,sh]
+----
+vault token create -policy=circleci -period=30m
+----
 
 ### Object Storage
 
@@ -306,30 +346,31 @@ The recommended security group configuration can be found in the xref:server-3-i
 AWS
 ```bash
 $ aws ec2 create-security-group \
+    --vpc-id "<<VPC ID>>" \
     --description "CircleCI's VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
     --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
     --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
     --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
     --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 54782
 ```
@@ -541,6 +582,10 @@ and VM Service.
 CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules
 in our https://github.com/CircleCI-Public/server-terraform[public repository].
 
+NOTE: We use `blocked_cidrs` to block network access to the specified CIDRs from within jobs. This is a security feature to prevent Nomad Clients
+from communicating with services that should not be accessed by arbitrary code (such as spinning up VMs using the vm-service). Do
+not block access to/from Nomad clients or `setup_remote_docker` will fail.
+
 ### AWS
 If you would like to install Nomad clients in AWS, create a file `main.tf` file with the following contents:
 
@@ -728,7 +773,7 @@ Click the *Save config* button to update your installation and re-deploy server.
 ## Step 7 - Validate Installation
 
 . Launch your CircleCI installation in your browser, for example https://hostname.com.
-  * . If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
+  * If you are using a self-signed TLS cert, you will see a security warning at this stage. You will need to use proper TLS certs if you want to avoid this.
 . Sign up/Log in into your CircleCI installation. As the first user to log in, you will become the administrator at this point.
 . Take a look at our https://circleci.com/docs/2.0/getting-started/#section=getting-started[Getting Started] guide to start adding projects.
 . Use the https://github.com/circleci/realitycheck[CircleCI realitycheck] repository and follow the

@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - サーバー管理
 ---
-= CircleCI Server v3.x - はじめてのクラスターの作成 (必須ではありません)
+= CircleCI Server v3.x - 初めてのクラスタの作成 (任意)
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -49,9 +49,9 @@ metadata:
 
 managedNodeGroups:
   - name: <nodegroup-name-1>
-    instanceType: <instance-type> # i.e., m5.large. see https://aws.amazon.com/ec2/instance-types/ for available instance types
-    minSize: 4 # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-minsize for more information
-    maxSize: 6 # see https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-maxsize for more information
+    instanceType: <instance-type> # m5.large など。 利用可能なインスタンス タイプは https://aws.amazon.com/ec2/instance-types/ を参照
+    minSize: 4 # 詳細は https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-minsize を参照
+    maxSize: 6 # 詳細は https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-as-group.html#cfn-as-group-maxsize を参照
 ----
 
 他のクラスタ設定ファイルのサンプルについては、https://eksctl.io[eksctl.io] をご覧ください。
@@ -71,7 +71,7 @@ managedNodeGroups:
 
 クラスタの作成が完了したら、`kubectl` の各種コマンドを実行して、クラスタ リソースを確認できるか試してください。
 
-たとえば、'のクラスタhttps://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#discovering-builtin-services[ビルトイン サービス]を表示するには、次のコマンドを実行します。
+たとえば、クラスタのhttps://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#discovering-builtin-services[ビルトイン サービス]を表示するには、次のコマンドを実行します。
 
 `kubectl cluster-info`
 
@@ -86,5 +86,5 @@ managedNodeGroups:
 - https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-strong-cluster-management-strong-[Cluster Management (クラスタの管理)] (英語) (`kubectl` ドキュメント)
 
 ## 次に読む
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server-3-install[CircleCI Server 3.x のインストール]
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[クラスタのハードニング]

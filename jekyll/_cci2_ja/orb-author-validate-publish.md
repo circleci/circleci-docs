@@ -6,9 +6,9 @@ version:
   - Cloud
 ---
 
-ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。詳細は「[Orb のオーサリング プロセス]({{site.baseurl}}/2.0/orb-author)」を参照してください。
+ここでは、Orb 開発キットを使わずにシンプルな Orb を手動で作成する手順について説明します。 ただし、ほとんどの Orb プロジェクトでは、Orb 開発キットのご利用をおすすめします。 詳細は「[Orb のオーサリング プロセス]({{site.baseurl}}/2.0/orb-author)」を参照してください。
 
-1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。希望する名前空間と GitHub 組織名を代入して実行してください。
+1. まだ名前空間を作成していない場合は、次のコマンドでユーザー/組織の名前空間を作成します。 希望する名前空間と GitHub 組織名を代入して実行してください。
 ```sh
 circleci namespace create <my-namespace> github <my-gh-org>
 ```
@@ -33,6 +33,12 @@ description: あいさつコマンド Orb
 commands:
     greet:
         description: 相手に "Hello" とあいさつします。
+        parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, << parameters.to >>"
         parameters:
             to:
                 type: string
