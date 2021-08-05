@@ -565,20 +565,20 @@ depending on your version of server:
 
 Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
  
-=== Upgrading Runners in Containerized Environments
+=== Upgrading runners in containerized environments
 
-==== Upgrading Runners for Kubernetes 
+==== Upgrading runners for kubernetes 
 
 Please refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions]
 
-==== Upgrading Runners for Docker
+==== Upgrading runners for docker
 
 . Stop any currently running Runner containers following the <<Stopping the Docker container>> instructions.
 . Remove the runner containers following the <<Stopping the Docker container>> instructions.
 . Start a new Runner Docker container following the <<Start the Docker container on Server>> instructions.
 
 
-=== Upgrading Runners in Non-Containerized Environments
+=== Upgrading runners in non-containerized environments
 
 The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps for non containerized environments.
 
@@ -586,7 +586,7 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 . Stop currently running `circleci-launch-agent` processes.
 . Start the new version of the `circleci-launch-agent` binary.
 
-==== Installing the New `circleci-launch-agent-binary`
+==== Installing the new `circleci-launch-agent-binary`
 
 Following the same process in the <<Download the launch agent binary and verify the checksum>> instructions, update the `agent_version` environment variable to the correct version from the <<Runner for Server Compatibility, Runner Server Compatibility Table>>
 
@@ -596,7 +596,7 @@ export agent_version="<launch-agent-version>"
 
 Then following the platform specific installation instructions replace the old binary with the newly updated version that was just downloaded.
 
-==== Stopping Currently Running Launch Agent
+==== Stopping currently running launch agent
 
 The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary
 
@@ -619,7 +619,7 @@ sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 ```
 
-==== Start the New Runner Launch Agent
+==== Start the new runner launch agent
 
 ===== Starting on Linux
 
