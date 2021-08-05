@@ -52,7 +52,10 @@ With a *Supported* platform, users receive the following:
 
 * Arm64 + Ubuntu
 * Intel + macOS
+* Mac OS X 10.15+ (Intel)
 * macOS 11.2+ (Apple M1)
+* Docker (x86_64)
+* Kubernetes (x86_64)
 
 === Preview
 
