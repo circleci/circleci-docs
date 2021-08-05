@@ -161,12 +161,12 @@ systemd-run \
 
 次のセクションでは、プラットフォーム固有のインストール方法を説明します。
 
-* <<CircleCI Runner Installation (linux), Linux>>
-* <<macOS への CircleCI ランナーのインストール方法, macOS>>
-* <<Docker のインストール, Docker>>
-* <<Intel + Windows Installation, Windows>>
+* <<Linux への CircleCI ランナーのインストール方法, Linux>>
+* <<CircleCI Runner Installation (macOS), macOS>>
+* <<Docker Installation, Docker>>
+* <<Windows Installation, Windows>>
 
-== Linux への CircleCI ランナーのインストール方法
+== CircleCI Runner Installation (Linux)
 
 === CircleCI ランナー設定ファイルを作成する
 
@@ -478,7 +478,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 +
 The installation will be output into your PowerShell interface.
 
-. As part of the installation, the configuration file for the Runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see <<Configuration file reference, 設定ファイルのリファレンス>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+. As part of the installation, the configuration file for the Runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see <<Configuration file reference, Configuration file reference>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
 
 After setup completes, the Launch Agent starts automatically and begins looking for jobs to process.
 
