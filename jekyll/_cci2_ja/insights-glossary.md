@@ -70,7 +70,7 @@ General metrics appear across the Insights experience and can refer to different
 ### 傾向の近似
 {: #approximate-trends }
 
-実行時間などのパーセンタイル メトリクスでは、以前の期間のベンチマークは近似手法によりベンチマークを求められます。
+実行時間などのパーセンタイル メトリクスでは、以前の期間のベンチマークは近似手法により求められます。
 
 #### 実行時間
 {: #duration }
