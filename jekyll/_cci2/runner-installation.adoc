@@ -563,7 +563,7 @@ depending on your version of server:
 
 == Upgrading Runner On Server
 
-Unlike with the CircleCI cloud offering, the server product does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
+Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
  
 === Upgrading Runners in Containerized Environments
 
