@@ -29,10 +29,12 @@ If you are getting started with CircleCI, there are some security best practices
 - If your project is open source and public, please make note of whether or not you want to share your environment variables. On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. You can read more about these settings and open source security in our [Open Source Projects document]({{site.baseurl}}/2.0/oss/#security).
 
 ## Handling secrets securely
+{: #handling-secrets-securely }
 
 Many builds must reference secret values. When these secrets are entrusted to CircleCI, we make sure they stay safe; we understand that security is critical to every organization’s success. However, there are some things that you can do to help protect secrets at the boundary between CircleCI’s systems and yours.
 
 ### Risks of using secrets on the command-line
+{: #risks-of-using-secrets-on-the-command-line }
 
 There are several ways that Unix and Linux shells can expose sensitive data. It is important to consider all of them when working with CircleCI on the command-line.
 
@@ -43,10 +45,12 @@ There are several ways that Unix and Linux shells can expose sensitive data. It 
 * **Persistent, unencrypted secrets on disk**: Although it is common practice for command-line tools to store and use secrets stored in files in your home directory, their availability to all processes you run and persistence over time also presents a clear risk which every organization should evaluate. Some of the techniques below can help avoid the need to leave secrets on disk.
 
 ### Mitigation techniques
+{: #mitigation-techniques }
 
 There are many techniques to help mitigate these risks. Here, we’ll focus on methods for using `curl` and [the CircleCI CLI]({{site.baseurl}}/2.0/local-cli) securely with the Bash shell.
 
 #### General precautions
+{: #general-precautions }
 
 Avoid running `env` or `printenv`, which will print the values of all environment variables, including secrets.
 
@@ -80,14 +84,17 @@ export MY_VAR
 ```
 
 #### Using the CircleCI CLI
+{: #using-the-circleci-cli }
 
 Prefer using the [the CircleCI local CLI]({{site.baseurl}}/2.0/local-cli) instead of `curl` when possible. The CLI takes extra precautions to avoid leaking secrets when performing sensitive operations. For example, when [adding a secret to a context]({{site.baseurl}}/2.0/local-cli), the CLI will prompt you to enter the secret rather than accepting it as a command line argument.
 
 If writing a shell script that uses the CircleCI CLI, remember that in Bash you can avoid exposing secrets stored in environment variables or text by using the `<<<` construct, which does not spawn a new process while piping a value: `circleci context store-secret <vcs-type> <org-name> <context-name> <secret name> <<< "$MY_SECRET"`. This is more reliable than using `echo` or `printf`, which may or may not be shell builtins and therefore could spawn a process.
 
 #### Using curl safely with the CircleCI API
+{: #using-curl-safely-with-the-circleci-api }
 
 ##### Protecting the API token
+{: #protecting-the-api-token }
 
 When calling the CircleCI API with `curl`, you need to provide an API token. There are several ways you can mitigate risk while doing so:
 
@@ -104,6 +111,7 @@ When calling the CircleCI API with `curl`, you need to provide an API token. The
   - If you are sure that `printf` is a builtin in your shell, it should also be safe to write `curl --header @<(printf '%s\n' "$MYVAR")`, allowing you to use environment variables without exposing them through ps.
 
 ##### Protecting your secrets
+{: #protecting-your-secrets }
 
 Some API endpoints, such as [addEnvironmentVariableToContext]({{site.baseurl}}/api/v2/#operation/addEnvironmentVariableToContext), may require secrets to be sent in the body of `PUT` or `POST` requests. There are several options to help conceal these secrets.
 
