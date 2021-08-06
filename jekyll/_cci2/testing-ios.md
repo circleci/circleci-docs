@@ -52,7 +52,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
- `13.0.0` | Xcode 13.0 Beta 2 (13A5155e) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5801/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-2-released/40583)
+ `13.0.0` | Xcode 13.0 Beta 4 (13A5201i) | 11.5.1 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-4-released/40876)
  `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)
  `12.4.0` | Xcode 12.4 (12D4e) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)
  `12.3.0` | Xcode 12.3 (12C33) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)
@@ -333,10 +333,12 @@ steps:
 ```
 
 ## Using NodeJS
+{: #using-nodejs }
 
 The Xcode images are supplied with at least one version of NodeJS ready to use.
 
 ### Images using Xcode 13 and later
+{: #images-using-xcode-13-and-later }
 
 These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
 
@@ -369,8 +371,9 @@ steps:
 These images are also compatiable with the official [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation along with caching packages.
 
 ### Images using Xcode 12.5 and earlier
+{: #images-using-xcode-125-and-earlier }
 
-These images come with at least one version of NodeJS installed directly via `brew`. 
+These images come with at least one version of NodeJS installed directly via `brew`.
 
 Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)]
 
