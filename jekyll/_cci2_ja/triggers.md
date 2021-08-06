@@ -84,6 +84,11 @@ workflows:
       - deploy:
           requires:
             - hold
+          requires:
+           - test2
+      - deploy:
+          requires:
+            - hold
 ```
 
 ## Trigger Docker builds in Dockerhub
@@ -91,6 +96,11 @@ workflows:
 
 ```yaml
 version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14.17-browsers # < an arbitrarily chosen docker image.
+        version: 2
 jobs:
   build:
     docker:
