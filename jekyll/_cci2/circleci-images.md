@@ -305,8 +305,6 @@ directory for the Linux distribution/version installed in that variant's base
 image. The legacy CircleCI convenience images are [Debian Jessie](https://packages.debian.org/jessie/)-
 or [Stretch](https://packages.debian.org/stretch/)-based images,
 however the next-gen images, `cimg`, extend the official [Ubuntu](https://packages.ubuntu.com) image.
-For details on individual variants of legacy CircleCI images, see the
-[circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) repository.
 For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
 
 The following packages are installed via `curl` or other means.
@@ -338,9 +336,6 @@ The following packages are installed via `curl` or other means.
 {: #latest-image-tags-by-language }
 
 Below is a list of the latest **legacy** convenience images, sorted by language.
-For details about the contents of each image,
-refer to the [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles).
-
 
 <div class="alert alert-warning" role="alert">
 It is recommended to use next-generation images when possible.
@@ -366,7 +361,6 @@ images!
 **Resources:**
 
 - [DockerHub](https://hub.docker.com/r/circleci/{{ image[0] }}) - where this image is hosted as well as some useful instructions.
-- [Dockerfiles](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/{{ image[0] }}/images) - the Dockerfiles this image was built from.
 
 **Usage:** Add the following under `docker:` in your config.yml:
 
