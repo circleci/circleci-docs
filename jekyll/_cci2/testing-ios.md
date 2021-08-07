@@ -368,7 +368,7 @@ steps:
   - run: nvm install 12.22.3 && nvm alias default 12.22.3
 ```
 
-These images are also compatiable with the official [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation along with caching packages.
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
 
 ### Images using Xcode 12.5 and earlier
 {: #images-using-xcode-125-and-earlier }
