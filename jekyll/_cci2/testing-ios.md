@@ -375,7 +375,7 @@ These images are also compatiable with the official [CircleCI Node orb](https://
 
 These images come with at least one version of NodeJS installed directly using `brew`.
 
-Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)]
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
 
 These images are also compatiable with the official [CircleCI Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
 
