@@ -373,7 +373,7 @@ These images are also compatiable with the official [CircleCI Node orb](https://
 ### Images using Xcode 12.5 and earlier
 {: #images-using-xcode-125-and-earlier }
 
-These images come with at least one version of NodeJS installed directly via `brew`.
+These images come with at least one version of NodeJS installed directly using `brew`.
 
 Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)]
 
