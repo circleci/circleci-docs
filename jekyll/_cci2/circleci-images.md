@@ -163,7 +163,6 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 CircleCI's convenience images fall into two categories: **language** images and
 **service** images. All images add a `circleci` user as a system user. The sections below will walk through the available next-generation and legacy images.
 
-
 ### Next-gen language images
 {: #next-gen-language-images }
 {:.no_toc}
@@ -201,7 +200,6 @@ next-gen images be sure to check each image listing for information on each
 variant. The `-browsers` variant for next-gen images is still in progress. See
 each image listing on the [Developer Hub](https://circleci.com/developer/images/)
 for details on which variants it supports.
-
 
 ### Legacy language images
 {: #legacy-language-images }
@@ -331,7 +329,6 @@ The following packages are installed via `curl` or other means.
    language, we suggest installing it via [an orb](https://circleci.com/orbs/)
    or a custom Docker image instead.
 
-
 ## Latest image tags by language
 {: #latest-image-tags-by-language }
 
@@ -343,7 +340,6 @@ For a list of the latest next-gen convenience images and
 details about the content of each image, visit
 the <a href="https://circleci.com/developer/">Developer Hub.</a>
 </div>
-
 
 **Note:** Excluding [language image variants](#language-image-variants) and [the
 service image variant](#service-image-variant), **for legacy images** CircleCI
