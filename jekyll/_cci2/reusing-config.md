@@ -127,7 +127,7 @@ commands:
       all:
         description: include all files
         type: boolean
-        default: false
+        default: true
       short:
         description: Keep list of files short
         type: boolean
