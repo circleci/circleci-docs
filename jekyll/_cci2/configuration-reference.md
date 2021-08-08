@@ -1611,7 +1611,9 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 {: #matrix-requires-version-21 }
 The `matrix` stanza allows you to run a parameterized job multiple times with different arguments.
 
-**Note:** In order to use the `matrix` stanza, you must use parameterized jobs.
+**Note**
+
+In order to use the `matrix` stanza, you must use parameterized jobs.
 
 Key | Required | Type | Description
 ----|----------|------|------------
