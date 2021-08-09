@@ -3,6 +3,12 @@ version:
 - Server v3.x
 ---
 = Upgrading the CircleCI Runner on Server
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
 
 This page describes how to update the CircleCI runner on Server.
 
