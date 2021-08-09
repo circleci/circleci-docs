@@ -1622,7 +1622,7 @@ exclude | N | List | A list of argument maps that should be excluded from the ma
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 {: class="table table-striped"}
 
-**Note:** 
+**Note:**
 
 The following is a basic example of using matrix jobs.
 
