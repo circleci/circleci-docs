@@ -158,7 +158,7 @@ You may use various solutions to generate valid SSL certificate and key file. Tw
 
 This section describes setting up TLS/HTTPS on your Server install using Certbot by manually adding a DNS record set to the Services machine. Certbot generally relies on verifying the DNS record via either port 80 or 443, however this is not supported on CircleCI Server installations as of 2.2.0 because of port conflicts.
 
-. Stop the Service CircleCI Server Management Console (`<circleci-hostname>.com:8800`).
+. Stop the Service CircleCI Server Management Console (`<circleci-hostname>:8800`).
 
 . SSH into the Services machine.
 
@@ -193,13 +193,13 @@ Once you have a valid certificate and key file in `.pem` format, you must upload
 
 . Click "Save" at the bottom of the settings page and restart when prompted
 
-Ensure the hostname is properly configured from the Management Console (`<circleci-hostname>.com:8800`) **and** that the hostname used matches the DNS records associated with the TLS certificates.
+Ensure the hostname is properly configured from the Management Console (`<circleci-hostname>:8800`) **and** that the hostname used matches the DNS records associated with the TLS certificates.
 
 Make sure the Auth Callback URL in GitHub/GHE matches the domain name pointing to the Services machine, including the protocol used, for example `**https**://info-tech.io/`.
 
 === Adding the certificate to Replicated
 
-The Replicated Management Console(`<circleci-hostname>.com:8800`) runs on a different web server, so you also need to apply the certificate used above for Replicated. To do so, follow these steps:
+The Replicated Management Console(`<circleci-hostname>:8800`) runs on a different web server, so you also need to apply the certificate used above for Replicated. To do so, follow these steps:
 
 . Navigate to `https://hostname:8800/console/settings#tls-key-cert`
 
@@ -207,12 +207,12 @@ The Replicated Management Console(`<circleci-hostname>.com:8800`) runs on a diff
 
 . Click **Save** at the bottom of the page and restart the Replicated UI when prompted.
 
-Even if you can't access the Replicated Page with the hostname, you still can access by IP address.
+When the TLS certificate has expired and you can't access the Replicated UI by the domain name, you still be able to access the Replicated UI by the IP address. Then, you can update the TLS certificate and key on that UI.
 
 Alternatively, you can upload the certificate and key by running the following command on the Services machine, substituting your hostname, path to key and path to certificate:
 
 ```
-$ sudo replicated console cert set <domain> /path/to/key /path/to/cert
+$ sudo replicated console cert set <circleci-hostname> /path/to/key /path/to/cert
 $ replicatedctl app stop
 $ replicatedctl app start
 ```
