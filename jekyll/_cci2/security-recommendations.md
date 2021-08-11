@@ -100,12 +100,12 @@ When calling the CircleCI API with `curl`, you need to provide an API token. The
 
 * Use a `.netrc` file: The [netrc file format](https://everything.curl.dev/usingcurl/netrc), which is supported by several different tools, allows you to provide HTTP basic auth credentials in a file, rather than at the command-line.
   - Create a file at a location of your choosing. The default used by some tools is `~/.netrc`. Be sure to `chmod 0600` this file before adding the secret, to prevent other users from viewing its contents.
-  - Add a line in the following format: `machine circleci.com login <your token> password`.
-  - When invoking `curl`, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`.
+  - Add a line in the following format: `machine circleci.com login <your token> password`
+  - When invoking `curl`, tell it to look in your `.netrc` file for credentials: `curl --netrc-file ~/.netrc`
 * Write the `Circle-Token` header into a file. This requires curl 7.55 or later, but is a more reliable solution than `.netrc`, because some tools that use `.netrc` files do not understand an empty password field:
   - Create a file at a location of your choosing. Be sure to `chmod 0600` the file to prevent other users from viewing its contents.
-  - Add a line in the following format: `Circle-Token: <your token>`.
-  - When invoking `curl`, tell it to read the header from a file: `curl --header @your_filename`.
+  - Add a line in the following format: `Circle-Token: <your token>`
+  - When invoking `curl`, tell it to read the header from a file: `curl --header @your_filename`
 * Pull the token directly from a tool designed to store secrets, such as 1Password. In this case, you can use [process substitution](https://en.wikipedia.org/wiki/Process_substitution) to retrieve the header without exposing it:
   - `curl --header @<(command_to_retrieve_password)`
   - If you are sure that `printf` is a built-in in your shell, it should also be safe to write `curl --header @<(printf '%s\n' "$MYVAR")`, allowing you to use environment variables without exposing them through `ps`.
@@ -116,7 +116,7 @@ When calling the CircleCI API with `curl`, you need to provide an API token. The
 Some API endpoints, such as [addEnvironmentVariableToContext]({{site.baseurl}}/api/v2/#operation/addEnvironmentVariableToContext), may require secrets to be sent in the body of `PUT` or `POST` requests. There are several options to help conceal these secrets:
 
 * Use a file to compose and store the request body. Be sure to `chmod 0600` this file before adding the secret value to prevent other users from viewing its contents.
-  - Point `curl` to this file by using the `@` directive: `curl --data @myfile`.
+  - Point `curl` to this file by using the `@` directive: `curl --data @myfile`
 * Use a heredoc to compose the request body, and pass it to curl on stdin:
 ```
 curl --data @- <<EOF
