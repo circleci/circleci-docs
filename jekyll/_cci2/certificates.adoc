@@ -199,17 +199,17 @@ Make sure the Auth Callback URL in GitHub/GHE matches the domain name pointing t
 
 === Adding the certificate to Replicated
 
- Replicated Management Console(`<circleci-hostname>.com:8800`) runs on different web server, so you need to apply the above certificate for Replicated as well.
+The Replicated Management Console(`<circleci-hostname>.com:8800`) runs on a different web server, so you also need to apply the certificate used above for Replicated. To do so, follow these steps:
 
-. To do so, navigate to `https://hostname:8800/console/settings#tls-key-cert`
+. Navigate to `https://hostname:8800/console/settings#tls-key-cert`
 
-. Upload your newly generated certificate and key
+. Upload your newly generated certificate and key.
 
-. Click "Save" at the bottom of the page and restart the Replicated UI when prompted
+. Click **Save** at the bottom of the page and restart the Replicated UI when prompted.
 
 Even if you can't access the Replicated Page with the hostname, you still can access by IP address.
 
-Also, as alternative option, you can upload the certificate and key by following command on the ServiceBox.
+Alternatively, you can upload the certificate and key by running the following command on the Services machine, substituting your hostname, path to key and path to certificate:
 
 ```
 $ sudo replicated console cert set <domain> /path/to/key /path/to/cert
