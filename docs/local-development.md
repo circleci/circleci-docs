@@ -6,12 +6,16 @@ There are two ways to work on CircleCI docs locally: with Docker and with [Ruby]
 ## 1. Local Development with Docker (recommended)
 
 1. Install Docker for your platform: <https://docs.docker.com/engine/install/>
-1. Clone the CircleCI docs repo: `git clone --recurse-submodules https://github.com/circleci/circleci-docs.git`
+2. Clone the CircleCI docs repo: `git clone --recurse-submodules https://github.com/circleci/circleci-docs.git`
 _(If you already cloned the project and forgot `--recurse-submodules`, run `git submodule update --init`)_
-1. Run `npm install` to fetch dependencies
-1. Run `npm run webpack-dev` to create needed js assets
-1. Run `docker-compose up`
-1. The docs site will now be running on <http://localhost:4000/docs/>
+3. Run `npm install` to fetch dependencies
+4. Run `npm run webpack-dev` to create needed js assets
+5. Add the following line to your `/etc/hosts` file:
+   ```bash
+   127.0.0.1 ui.circleci.com
+   ```
+6. Run `docker-compose up` (Warning: This may take up to 10 minutes to build)
+7. The docs site will now be running on <https://ui.circleci.com/docs/>. If the browser presents to you an HSTS Security Warning, you can safely bypass it as it is an expected outcome of running the Caddy Reverse Proxy in Docker.
 
 **Note:** If you want to submit a pull request to update the docs, you'll need to [make a fork](https://github.com/circleci/circleci-docs#fork-destination-box) of this repo and clone your version in step 2 above. Then when you push your changes to your fork you can submit a pull request to us.
 
