@@ -16,18 +16,7 @@ toc::[]
 
 == Runner for server compatibility
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
-|===
-| Server version  
-| Launch Agent Version
-
-| 3.0             
-| Runner not supported
-
-| 3.1            
-| 1.0.11147-881b608
-|===
+Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[Runner for server compatibility chart] in the runner installation documentation.
 
 == Upgrading runner on server
 
