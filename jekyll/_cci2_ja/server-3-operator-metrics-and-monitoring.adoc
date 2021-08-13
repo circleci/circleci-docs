@@ -37,16 +37,17 @@ the cpu and memory usage of containers in your cluster.
 
 デフォルトの Prometheus アドレスは、`http://prometheus-server` です。
 
-KOTS ダッシュボードの [Configure graphs (グラフの構成)] で、 「`http://prometheus-server`」と入力すると、KOTS でリソース使用率グラフの生成が開始されます。
+From the kots dashboard, select "configure graphs". KOTS ダッシュボードの [Configure graphs (グラフの構成)] で、 「`http://prometheus-server`」と入力すると、KOTS でリソース使用率グラフの生成が開始されます。
 
 === Telegraf
-CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
-この構成は詳細にカスタマイズ可能なので、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
+Most services running on server will report StatsD metrics to the https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] pod running in server.
+The configuration is fully customizable, so you can forward your metrics from Telegraf to any output that is supported
+by Telegraf via https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[output plugins]. デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
 
 === Telegraf から Datadog へのメトリクスの転送
 以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
 
-管理コンソール ダッシュボードを開いて、メニュー バーの *[Config (構成)]* を選択します。 *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム構成)]* セクションを見付けます。 編集可能なテキスト ウィンドウがあり、CircleCI Server の Telegraf メトリクスの転送に利用するプラグインを構成できます。 Datadog に転送する場合は、以下のコードを追加します。ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
+管理コンソール ダッシュボードを開いて、メニュー バーの *[Config (構成)]* を選択します。 *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム構成)]* セクションを見付けます。 編集可能なテキスト ウィンドウがあり、CircleCI Server の Telegraf メトリクスの転送に利用するプラグインを構成できます。 Datadog に転送する場合は、以下のコードを追加します。 ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
 
 ```
 [[outputs.datadog]]
