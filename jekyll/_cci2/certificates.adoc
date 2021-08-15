@@ -209,7 +209,7 @@ The Replicated Management Console(`<circleci-hostname>:8800`) runs on a differen
 
 When the TLS certificate has expired and you can't access the Replicated UI by the domain name, you still be able to access the Replicated UI by the IP address. Then, you can update the TLS certificate and key on that UI.
 
-Alternatively, you can upload the certificate and key by running the following command on the Services machine, substituting your hostname, path to key and path to certificate:
+Alternatively, you can upload the certificate and key by running the following command on the Services machine, substituting your hostname, path-to-key and path-to-certificate:
 
 ```
 $ sudo replicated console cert set <circleci-hostname> /path/to/key /path/to/cert
