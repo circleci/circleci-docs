@@ -10,29 +10,45 @@ version:
 :toc-title:
 
 
-This page describes how to update the CircleCI runner on server.
+This page describes how to update the CircleCI runner on CircleCI server installations.
 
 toc::[]
 
 == Runner for server compatibility
 
-Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[runner for server compatibility chart] in the runner installation documentation to find runner version compatibility for each server version.
+Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[runner for server compatibility chart] in the runner installation documentation to find runner version compatibility for the version of server you are running.
 
 == Upgrading runner on server
 
-Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent` and requires manual intervention to update.
+Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention to update. The following sections detail how to update runners in your server installation across all environments.
  
 === Upgrading runners in containerized environments
 
-==== Upgrading runners for kubernetes 
+This section details how to update runner on containerized enviroments: Kubernetes and Docker.
+
+==== Upgrading runners for Kubernetes 
 
 Refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions].
 
-==== Upgrading runners for docker
+==== Upgrading runners for Docker
 
-. Stop any currently running runner containers following the xref:runner-installation.adoc#stopping-the-docker-container[Stopping the Docker container] instructions.
-. Remove the runner containers following the xref:runner-installation.adoc#stopping-the-docker-container[Stopping the Docker container] instructions.
-. Start a new Runner Docker container following the xref:runner-installation.adoc#start-the-docker-container-on-server[start the Docker container on Server] instructions.
+. Stop any currently running runner containers:
++
+``` bash
+docker stop <container-name>
+```
+. Remove the runner containers:
++
+``` bash
+docker stop <container-name>; docker rm <container-name>;
+```
+. Start a new Runner Docker container:
++
+``` bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
++
+NOTE: When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
 
 === Upgrading runners in non-containerized environments
 
@@ -44,17 +60,17 @@ The process for manually updating the `circleci-launch-agent` binary can be brok
 
 ==== 1. Replace the `circleci-launch-agent-binary` with the new version
 
-Following the same process in the xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation.adoc#runner-for-server-compatibility[Runner for server compatibility chart].
+Following the same process as in the xref:runner-installation.adoc#download-the-launch-agent-binary-and-verify-the-checksum[Download the launch agent binary] instructions, update the `agent_version` environment variable to the correct version from the xref:runner-installation.adoc#runner-for-server-compatibility[Runner for server compatibility chart].
 
 ``` bash
 export agent_version="<launch-agent-version>"
 ```
 
-Then following the platform specific installation instructions replace the old binary with the newly updated version that was just downloaded.
+Then, following the xref:runner-installation.adoc#platform-specific-instructions[platform specific installation instructions] replace the old binary with the newly updated version that was just downloaded.
 
 ==== 2. Stop the currently running launch agent
 
-The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary.
+The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary. Platform-specific instructions for this are given below.
 
 ===== Stopping on Linux
 
@@ -83,6 +99,8 @@ Stop-ScheduledTask -TaskName "CircleCI Launch Agent"
 
 ==== 3. Start the new runner launch agent
 
+Platform-specific instructions are given below.
+
 ===== Starting on Linux
 
 Run the following commands:
@@ -95,7 +113,7 @@ sudo systemctl start circleci.service
 
 ===== Starting on Mac
 
-Run the following commands:
+Run the following command:
 
 ``` bash
 sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
