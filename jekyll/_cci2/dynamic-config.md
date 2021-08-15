@@ -91,4 +91,4 @@ documentation for more information.
 
 ## Learn More
 {: #learn-more }
-Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config) to learn more.
+Take the [dynamic configuration course](https://academy.circleci.com/dynamic-config) with CircleCI academy to learn more.
