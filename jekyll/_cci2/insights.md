@@ -113,3 +113,7 @@ The per-project insights page gives you access to the build status and build per
 {: #see-also }
 
 Refer to the [Collecting Test Metadata]({{ site.baseurl }}/2.0/collect-test-data/) document for instructions to configure insights into your most failed tests.
+
+## Learn More
+{: #learn-more }
+Take the [insights course](https://academy.circleci.com/insights-course) with CircleCI academy to learn more.
