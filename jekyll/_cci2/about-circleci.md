@@ -75,3 +75,7 @@ Any app that runs on Linux, Android, or macOS is supported. Refer to the
 - [Supported Languages]({{site.baseurl}}/2.0/demo-apps/) document for examples and guides.
 - [Core Features]({{site.baseurl}}/2.0/features/) for detailed descriptions and links to procedural documentation.
 
+## Learn More
+{: #learn-more }
+Enroll on the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics) with CircleCI academy to learn more.
+
