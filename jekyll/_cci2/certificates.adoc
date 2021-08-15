@@ -199,7 +199,7 @@ Make sure the Auth Callback URL in GitHub/GHE matches the domain name pointing t
 
 === Adding the certificate to Replicated
 
-The Replicated Management Console(`<circleci-hostname>:8800`) runs on a different web server, so you also need to apply the certificate used above for Replicated. To do so, follow these steps:
+The Replicated Management Console (`<circleci-hostname>:8800`) runs on a different web server, so you also need to apply the certificate used above for Replicated. To do so, follow these steps:
 
 . Navigate to `https://hostname:8800/console/settings#tls-key-cert`
 
