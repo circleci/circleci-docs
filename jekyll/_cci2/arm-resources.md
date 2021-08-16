@@ -96,3 +96,7 @@ configuration (and even the same workflow).
 * If there is software you require that is not available in the image, please
   [open an issue](https://github.com/CircleCI-Public/arm-preview-docs/issues) to
   let us know.
+
+## Learn More
+{: #learn-more }
+Take the [Arm course](https://academy.circleci.com/arm-course) with CircleCI academy to learn more about using Arm resources and associated use cases.
