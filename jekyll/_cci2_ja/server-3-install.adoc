@@ -17,10 +17,9 @@ toc::[]
 ## ステップ 1 - KOTS のインストール
 
 CircleCI Server v3.x は、https://www.replicated.com/[Replicated] が提供する https://kots.io[KOTS] を使用して CircleCI Server v3.x の管理と配布を行います。 KOTS は `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[のプラグイン]です。
-To install the latest version, you can run `curl  https://kots.io/install {vbar} bash`.
 To install the latest version, you can run `curl  https://kots.io/install | bash`.
 
-`kubectl kots version` を実行して、バージョン {kotsversion} 以上の KOTS を実行していることを確認してください。
+`kubectl kots version` を実行して、最小のバージョン {kotsversion} の KOTS を実行していることを確認してください。
 
 NOTE: KOTS コマンドは管理者コンソールへのトンネルを開きます。 WSL2 をインストールした Windows 上でコマンドを実行する場合、ホスト マシンのポートを利用できません。 この問題を解決するには、いったん WSL を無効化してから有効化してください。 詳細については、https://github.com/microsoft/WSL/issues/4199 を参照してください。
 
@@ -36,9 +35,9 @@ kubectl kots install circleci-server
 * デプロイ先の名前空間
 * KOTS 管理者コンソールのパスワード
 
-When complete, you should be provided with a URL to access the admin console. 入力後、管理者コンソールにアクセスするための URL  (通常は http://localhost:8800) が提供されます。
+入力後、管理者コンソールにアクセスするための URL   (通常は http://localhost:8800) が提供されます。
 
-今後、管理者コンソールにアクセスするには、以下のコマンドを実行します。
+その後再び管理者コンソールにアクセスするには、以下のコマンドを実行します。
 
 [source,bash]
 ----
