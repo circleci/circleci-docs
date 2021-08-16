@@ -14,13 +14,13 @@ version:
 
 CircleCI Server アプリケーションを設定するには、以下の一般的な要件およびインフラ固有の要件を満たしている必要があります。 具体的には次のとおりです。
 
-* 以下のような既存の Kubernetes クラスタ (クラスタの作成方法についてはxref:server-3-install-creating-your-first-cluster.adoc[こちらのガイド]を参照してください)。
+* 以下のようなKubernetes クラスタが作成されていること (クラスタの作成方法についてはxref:server-3-install-creating-your-first-cluster.adoc[こちらのガイド]を参照してください)。
 ** Amazon EKS クラスタ (https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS ドキュメントを参照])
 *** https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] の使用を推奨しています。 このツールでは、VPC の作成と適切なセキュリティ グループの選択が自動で行われます。
 ** Google GKE クラスタ (https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE ドキュメント]を参照) +
 *** Autopilot クラスターは使用しないでください。 CircleCI Server には、GKE Autopilot ではサポートされていない機能が必要です。
 +
-* Kubernetes クラスタは、CircleCI Server のアクティブ ユーザー数に応じて、次に示すクラスタ全体の最小要件を満たしている必要があります。 +
+* Kubernetes クラスタが、CircleCI Server のアクティブ ユーザー数に応じて、以下に示すクラスタ全体の最小要件を満たしていること +
 +
 --
 [.table.table-striped]
@@ -46,15 +46,15 @@ CircleCI Server アプリケーションを設定するには、以下の一般�
 |===
 --
 
-* クラスタには、Docker コンテナのプルおよびライセンス確認のために、外部アクセスが許可されている必要があります。 外部アクセスを制限する必要がある場合は、https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
-* クラスタ内の Pod を一覧表示、作成、編集、削除する権限が必要です。 You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
-* CircleCI のライセンス ファイル。 ライセンス ファイルが必要な場合は https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート]にお問い合わせください。
-* The <<Required ツールs>> tools installed
+* Docker コンテナのプルおよびライセンス確認のためのクラスタへの外部アクセスの許可。 外部アクセスを制限したい場合は、https://help.replicated.com/community/t/customer-firewalls/55[アクセスが必要なポート一覧]を参照してください。
+* クラスタ内の Pod を一覧表示、作成、編集、削除するためのアクセス許可。 You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
+* CircleCI のライセンス ファイル。 ライセンスが必要な場合は https://support.circleci.com/hc/en-us/requests/new[CircleCI サポート]にお問い合わせください。
+* The <<必須ツール>> tools installed
 ** `kubectl` についても、クラスタにアクセスできるよう設定する必要があります。
 
 *** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Amazon EKS クラスタへの接続] (Amazon EKS クラスタを使用する場合)
 *** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[kubectl 用のクラスタ アクセスの構成] (Google GKE クラスタを使用する場合)
-* 以下に示す各ポート アクセス要件が満たされていること:
+* 以下に示す各ポート アクセス要件が満たされていること。
 ** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes ロード バランサー]
 ** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes ノード]
 ** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad クライアント]
@@ -62,7 +62,7 @@ CircleCI Server アプリケーションを設定するには、以下の一般�
 
 NOTE: クラスタの VPC 設定やディスク サイズに関する要件はありません。 ただし、既存の VPC ではなく、新しい VPC を設定することをお勧めします。
 
-## Required Tools
+## Required ツールs
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -85,7 +85,7 @@ NOTE: クラスタの VPC 設定やディスク サイズに関する要件は�
 
 | https://kots.io/[KOTS]
 | {kotsversion} 以上
-| Replicated 社の Kubernetes アプリケーション管理ツール
+| Replicated 社の Kubernetes アプリケーションの管理
 |===
 
 
