@@ -56,6 +56,7 @@ With a *Supported* platform, users receive the following:
 * macOS 11.2+ (Apple M1)
 * Docker (x86_64)
 * Kubernetes (x86_64)
+* Windows Server 2019, 2016 (x86_64)
 
 === Preview
 
@@ -73,7 +74,6 @@ With a *Preview* platform, users receive the following:
 * Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
 * Docker (ARM64)
 * Kubernetes (ARM64)
-* Windows
 
 NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
 have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
