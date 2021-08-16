@@ -21,3 +21,7 @@ In the following sections we provide helpful guides and tips for migrating your 
 
 If you're here to learn about migrating from CircleCI 1.0 to 2.0, head to [this page](https://circleci.com/docs/2.0/upgrading/#section=server-administration).
 
+## Learn More
+{: #learn-more }
+Enroll on the [migrations course](https://academy.circleci.com/arm-course) with CircleCI academy to learn more about migrating to CircleCI.
+
