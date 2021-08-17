@@ -10,7 +10,7 @@ version:
 - Server v2.x
 ---
 
-An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
+CircleCI offers several build environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
 
 ![Executor Overview]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -118,6 +118,11 @@ Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/e
 ## See also
 {: #see-also }
 
-* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/).
-* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos).
-* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows).
+* [Choosing and executor type]({{ site.baseurl }}/2.0/executor-types/)
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
+* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
+* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
+
+## Learn More
+{: #learn-more }
+Take the [build environments course](https://academy.circleci.com/build-environments-1) with CircleCI academy to learn more about choosing and using an executor.

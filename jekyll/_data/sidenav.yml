@@ -76,7 +76,7 @@ en:
     - name: Overview
       children:
         - name: Introduction
-          link: 2.0/executor-types/
+          link: 2.0/executor-intro/
     - name: Docker
       children:
         - name: Overview
