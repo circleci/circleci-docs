@@ -52,7 +52,7 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
- `13.0.0` | Xcode 13.0 Beta 4 (13A5201i) | 11.5.1 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-4-released/40876)
+ `13.0.0` | Xcode 13.0 Beta 5 (13A5212g) | 11.5.2 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5947/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-5-released/40988)
  `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)
  `12.4.0` | Xcode 12.4 (12D4e) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)
  `12.3.0` | Xcode 12.3 (12C33) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)
