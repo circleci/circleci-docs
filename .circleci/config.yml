@@ -206,7 +206,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.4-node-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
