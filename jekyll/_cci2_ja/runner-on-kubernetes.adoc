@@ -16,8 +16,6 @@ toc::[]
 
 NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]で提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/ja/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
 
-NOTE: K8s 版 CircleCI ランナーは現在、*プレビュー版*です。 For information on our support levels, see <<runner-overview#preview,available platforms>>.
-
 ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
 
 この Helm チャートでは、*同じランナー リソース クラス*の Pod を 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
