@@ -27,11 +27,6 @@ If you want to have different runners specialized for different workloads, it is
 * Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
 * Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
 
-=== Limitations/Pending Work
-* The Helm chart currently doesn't configure permissions, so the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
-* The Helm chart currently doesn't support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
-* The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you'll need to set up separate charts for each one.
-
 === CircleCI Server Installation
 
 When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
@@ -112,4 +107,9 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 | all other values  | -         | N         | Modify at your own discretion and risk.
 
 |===
+
+== Limitations/Pending Work
+* The Helm chart currently does not configure permissions, therefore, the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
+* The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you will need to set up separate charts for each one.
 
