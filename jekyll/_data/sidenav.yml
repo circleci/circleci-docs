@@ -134,6 +134,8 @@ en:
           link: 2.0/runner-installation/
         - name: Runner on Kubernetes
           link: 2.0/runner-on-kubernetes/
+        - name: Upgrading Runner on Server
+          link: 2.0/runner-upgrading-on-server/
         - name: Runner API
           link: 2.0/runner-api/
         - name: Runner FAQs

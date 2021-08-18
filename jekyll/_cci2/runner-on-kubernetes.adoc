@@ -14,11 +14,11 @@ toc::[]
 
 == Introduction
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
 
 NOTE: CircleCI runner on K8s is currently *in preview*. For information on our support levels, see <<runner-overview#preview,available platforms>>.
 
-This installation guide is to help setup CircleCI's runner(s) on your Kubernetes cluster. We provide a Helm chart which makes installing the pods easy.
+This installation guide is to help set up CircleCI runner on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 
 The Helm chart will spin up one or more pods of *the same runner resource class*. This is useful for when you want all of these runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
@@ -36,7 +36,7 @@ If you want to have different runners specialized for different workloads, it is
 
 === CircleCI Server Installation
 
-When installing the Helm chart for use with a CircleCI Server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
+When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
 
 ==== Upgrading Runner Deployment for Server
 
