@@ -3,7 +3,7 @@ version: 2.1 # Set the CI version.
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
-  ruby: circleci/ruby@0.1.2
+  ruby: circleci/ruby@1.1.4
   node: circleci/node@1.1.6
   md-proofer: hubci/md-proofer@0.1
 
@@ -169,7 +169,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.2-browsers'
     steps:
       - checkout
       - install-shared-assets
@@ -206,7 +206,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.2-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -291,7 +291,7 @@ jobs:
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.2-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production
