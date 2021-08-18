@@ -224,7 +224,7 @@ jobs:
       - run:
           name: Install dependecies for pronto gem
           command: |
-            sudo apt-get update
+            sudo apt-get update  --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
       - ruby-deps
       - node/with-cache: # An orb command for steps to run in-between restoring and saving a cache.
