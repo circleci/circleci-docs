@@ -16,21 +16,21 @@ toc::[]
 
 == Runner for server compatibility
 
-Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[runner for server compatibility chart] in the runner installation documentation to find runner version compatibility for the version of server you are running.
+Refer to the xref:runner-installation.adoc#runner-for-server-compatibility[server compatibility chart] to find the runner version you need for your installation.
 
 == Upgrading runner on server
 
-Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention to update. The following sections detail how to update runners in your server installation across all environments.
+Unlike CircleCI cloud, server does not automatically update the `circleci-launch-agent`, and requires manual intervention. The following sections detail how to upgrade runners in your server installation across all environments.
  
-=== Upgrading runners in containerized environments
+=== Upgrading runner in a containerized environment
 
-This section details how to update runner on containerized enviroments: Kubernetes and Docker.
+This section details how to upgrade runner in containerized environments: Kubernetes and Docker.
 
-==== Upgrading runners for Kubernetes 
+==== Upgrading runner for Kubernetes 
 
 Refer to the xref:runner-on-kubernetes.adoc[Kubernetes Installation Instructions].
 
-==== Upgrading runners for Docker
+==== Upgrading runner for Docker
 
 . Stop any currently running runner containers:
 +
@@ -42,7 +42,7 @@ docker stop <container-name>
 ``` bash
 docker stop <container-name>; docker rm <container-name>;
 ```
-. Start a new Runner Docker container:
+. Start a new runner Docker container:
 +
 ``` bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
@@ -50,7 +50,7 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent
 +
 NOTE: When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
 
-=== Upgrading runners in non-containerized environments
+=== Upgrading runner in a non-containerized environment
 
 The process for manually updating the `circleci-launch-agent` binary can be broken down into three steps for non containerized environments. These steps are expanded upon in the sections below.
 
@@ -72,7 +72,7 @@ Then, following the xref:runner-installation.adoc#platform-specific-instructions
 
 The currently running `circleci-launch-agent` process will need to be halted before starting the newly updated binary. Platform-specific instructions for this are given below.
 
-===== Stopping on Linux
+===== Stopping the launch agent on Linux
 
 Run the following commands:
 
@@ -81,7 +81,7 @@ sudo systemctl stop circleci.service
 sudo systemctl disable circleci.service
 ```
 
-===== Stopping on Mac
+===== Stopping the launch agent on Mac
 
 Run the following commands:
 
@@ -89,7 +89,7 @@ Run the following commands:
 sudo launchctl unload '/Library/LaunchDaemons/com.circleci.runner.plist'
 ```
 
-===== Stopping on Windows
+===== Stopping the launch agent on Windows
 
 Run the following command:
 
