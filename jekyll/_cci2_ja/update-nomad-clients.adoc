@@ -180,8 +180,7 @@ echo "--------------------------------------"
 if ! (echo $PUBLIC_IP | grep -qP "^[\d.]+$")
 then
   echo "Setting the IPv4 address below in /etc/circleci/public-ipv4."
-  echo "This address will be used in builds with \"Rebuild with SSH\"."
-  mkdir -p /etc/circleci
+  echo "This address will be used in builds with \"Rebuild with SSH\"." mkdir -p /etc/circleci
   echo $PRIVATE_IP | tee /etc/circleci/public-ipv4
 fi
 
