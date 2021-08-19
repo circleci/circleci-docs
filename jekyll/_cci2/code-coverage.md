@@ -345,7 +345,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.11
+      - image: circleci/golang:1.16
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
