@@ -77,7 +77,7 @@ Customizable parameters are left inside the `+values.yaml+` file. 各値の詳�
 | 必須
 | You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
 
-| `+replicaCount+`  | 1         | 必須         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<limitationspending-work,Pending Work>>.
+| `+replicaCount+`  | 1         | 必須         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<制限事項今後解決予定の問題,Pending Work>>.
 
 | `+resourceClass+` | -         | 必須         | ランナー用に作成したリソース クラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
 
