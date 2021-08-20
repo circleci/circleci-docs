@@ -53,7 +53,7 @@ Header Name | Value
 --- | ---
 Content-Type | `application/json`
 User-Agent | A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`). The value is subject to change during the preview period.
-Circleci-Event-Type | The type of event, (`workflow-completed`, `job-completed`, etc.) 
+Circleci-Event-Type | The type of event, (`workflow-completed`, `job-completed`, etc.)
 Circleci-Signature | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.
 {: class="table table-striped"}
 
