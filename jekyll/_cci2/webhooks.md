@@ -61,7 +61,7 @@ Webhooks are set up on a per-project basis. To get started:
 ## Payload signature
 {: #payload-signature}
 
-Users can provide an optional signing secret when setting up a webhook. If that
+You can provide an optional signing secret when setting up a webhook. If that
 secret is set, each outgoing HTTP request will contain a `circleci-signature`
 header, containing a comma-separated list of versioned signatures:
 
