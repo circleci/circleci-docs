@@ -115,12 +115,14 @@ Data about the organization associated with the webhook event.
 
 A job typically represents one phase in a CircleCI workload (e.g. "build", "test", or "deploy") and contains a series of steps.
 
-| Field  | Always present? | Description                                                                                                  |
-| ------ | --------------- | ------------------------------------------------------------------------------------------------------------ |
-| id     | yes             | Unique ID of the job                                                                                         |
-| number | yes             | An auto-incrementing number for the job, sometimes used in CircleCI's APIs to identify jobs within a project |
-| name   | yes             | Name of the job as defined in .circleci/config.yml                                                           |
-| status | yes             | Current status of the job                                                                                    |
+| Field         | Always present? | Description                                                                                                  |
+| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------ |
+| id            | yes             | Unique ID of the job                                                                                         |
+| number        | yes             | An auto-incrementing number for the job, sometimes used in CircleCI's APIs to identify jobs within a project |
+| name          | yes             | Name of the job as defined in .circleci/config.yml                                                           |
+| status        | yes             | Current status of the job                                                                                    |
+| started\_at | yes             | When the job started running                                                                                 |
+| stopped\_at | no              | When the job reached a terminal state (if applicable)                                                        |
 {: class="table table-striped"}
 
 
