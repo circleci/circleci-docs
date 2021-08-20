@@ -136,7 +136,6 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 
 CircleCI のコンビニエンス イメージは、**言語**イメージと**サービス** イメージのいずれかのカテゴリに分類されます。 すべてのイメージは、`circleci` ユーザーをシステムユーザーとして追加します。 The sections below will walk through the available next-generation and legacy images.
 
-
 ### 特定のバージョンを指定する Docker イメージ ID の使用方法
 {: #next-gen-language-images }
 {:.no_toc}
@@ -163,7 +162,6 @@ If we see an idea on the board take off, we'll consider building it officially.
 {:.no_toc}
 
 CircleCI は、次世代言語イメージに対していくつかのバリアントを用意しています。 次世代イメージについては、それぞれのバリアントをイメージごとに確認するようにしてください。 次世代イメージの `-browsers` バリアントは現在作成中です。 サポートされているバリアントの詳細については、[Developer Hub](https://circleci.com/developer/ja/images)でイメージの一覧を参照してください。
-
 
 ### 従来の言語イメージ
 {: #legacy-language-images }
@@ -251,7 +249,7 @@ CircleCI では、次世代サービス コンビニエンス イメージの拡
 - `xvfb` (従来のイメージのみ)
 - `zip`
 
-ある CircleCI イメージ バリアントにインストールされる特定パッケージの具体的なバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 従来の CircleCI コンビニエンス イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 従来の CircleCI イメージの各バリアントの詳細については、[circleci-dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) リポジトリを参照してください。 次世代イメージの詳細については、[Developer Hub](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
+ある CircleCI イメージ バリアントにインストールされる特定パッケージの具体的なバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 従来の CircleCI コンビニエンス イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 For details on the next-gen images, see the [Developer Hub](https://circleci.com/developer/images/). Each image is tracked in its own repository.
 
 参考までに、`circleci/postgres:9.5-postgis` イメージで RAM ディスクを使うには、`circleci/postgres:9.5-postgis-ram` とします。
 
@@ -268,12 +266,10 @@ CircleCI では、次世代サービス コンビニエンス イメージの拡
 1. 旧バージョンのソフトウェアは再作成されません。 アップストリーム イメージの特定のリリース (Node.js v8.1.0 など) 用のタグが作成されなくなったら、CircleCI でもイメージの作成を終了します。 つまり、そのイメージ (`npm` など) に含まれる他のツールも更新されなくなります。
 1. プレビュー、ベータ版、リリース候補を指定するイメージ タグには対応していません。 利用できることもありますが、これらのタグが原因となってコンビニエンス イメージのビルド システムに問題が発生しやすくなります。 特定の言語の非安定版リリースが必要な場合は、[Orbs](https://circleci.com/ja/orbs/) またはカスタム Docker イメージからインストールすることをお勧めします。
 
-
 ## 対象外のイメージ
 {: #latest-image-tags-by-language }
 
-**従来の**コンビニエンス イメージについて、最新のものを言語別に紹介します。 それぞれの詳細については [corresponding Dockerfiles](https://github.com/circleci-public/circleci-dockerfiles) でご確認ください。
-
+Below is a list of the latest **legacy** convenience images, sorted by language.
 
 <div class="alert alert-warning" role="alert">
 It is recommended to use next-generation images when possible.
@@ -294,7 +290,6 @@ the <a href="https://circleci.com/developer/">Developer Hub.</a>
 **Resources:**
 
 - [イメージタグ](https://docs.docker.com/engine/reference/commandline/tag/#extended-description)を利用することで Docker イメージの役割を決めることができます。
-- [Dockerfiles](https://github.com/CircleCI-Public/circleci-dockerfiles/tree/master/{{ image[0] }}/images) - このイメージのビルド元の Dockerfile です。
 
 **使用方法:** config.yml の `docker:` に以下の行を追加します。
 
