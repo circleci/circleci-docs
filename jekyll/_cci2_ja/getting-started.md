@@ -230,11 +230,12 @@ ls -al               # 現在のディレクトリに含まれるファイルと
 cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します
 cat <file_name>      # ファイル <file_name> の内容を表示します
 ```
+**Note** To enable `rerun job with ssh`, you will need to follow the steps to [add ssh keys to your job](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job).
 
 ## チームメイトと協力する
 {: #collaborating-with-teammates }
 
-チームメイトやコラボレーターは、簡単にプロジェクトを閲覧したりフォローしたりできます。 チームメイトは、コードをまったくコミットしていないとしても、いつでも無料の CircleCI アカウントを作成してパイプラインを閲覧できます。
+It is easy for teammates and collaborators to view and follow your projects. Teammates can make a free CircleCI account at any time to view your pipelines, even if they are not committing any code.
 
 ## 関連項目
 {: #see-also }
