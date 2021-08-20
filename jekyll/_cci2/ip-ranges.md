@@ -21,7 +21,7 @@ Enable CircleCI jobs to go through a set of well-defined IP address ranges.
 
 IP ranges is a feature for CircleCI customers who need to configure IP-based access to their restricted environments. As part of this feature, CircleCI provides a list of well-defined IP address ranges associated with the CircleCI service. CircleCI jobs that have this feature enabled will have their traffic routed through one of the defined IP address ranges.
 
-The feature is currently available in preview to customers on a [Performance, Custom, or Scale plan](https://circleci.com/pricing/).
+The feature is currently available in preview to customers on a [Performance or Scale plan](https://circleci.com/pricing/). Pricing will be calculated based on network data usage of jobs that have opted in to using the IP ranges feature. There is no charge while the feature is in preview and pricing details will be shared once the feature is generally available.  
 
 ## IP ranges: use cases
 {: #usecases }
@@ -59,7 +59,7 @@ workflows:
 ## List of IP address ranges associated with the IP ranges feature
 {: #listofipaddressranges }
 
-*Last updated*: 07/26/2021
+*Last updated*: 08/02/2021
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
@@ -105,7 +105,7 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 - 54.236.156.101
 - 3.210.128.175
 
-**Upcoming Changes to list of IP address ranges** (Last Updated: 07/26/2021):
+**Upcoming Changes to list of IP address ranges** (Last Updated: 08/02/2021):
 None
 
 **Machine-consumable lists can be found below:**
@@ -132,12 +132,25 @@ While IP ranges is in preview, CircleCI may contact you if the amount of traffic
 ## AWS and GCP IP Addresses
 {: #awsandgcpipaddresses }
 
-The machines that execute *all jobs* (except for MacOS) on CircleCI’s platform, not just jobs opted into IP ranges, are hosted on Amazon Web Services (AWS) and Google Cloud Platform (GCP). An exhaustive list of IP addresses that CircleCI’s traffic may come from on these cloud providers’ platforms can be found by looking up each cloud providers’ IP address ranges. Each cloud provider offers endpoints to find this information.
+The machines that execute *all jobs* on CircleCI’s platform, not just jobs opted into IP ranges, are hosted on Amazon Web Services (AWS), Google Cloud Platform (GCP), and CircleCI's macOS Cloud. An exhaustive list of IP addresses that CircleCI’s traffic may come from on these cloud providers’ platforms can be found by looking up each cloud provider's IP address ranges. AWS & GCP offer endpoints to find this information.
 
 - [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI uses the *us-east-1* and *us-east-2* regions
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
+- CircleCI macOS Cloud:
+ - 162.252.208.0/24
+ - 162.252.209.0/24
+ - 192.206.63.0/24
+ - 162.221.90.0/24
+ - 38.39.177.0/24
+ - 38.39.178.0/24
+ - 38.39.188.0/24
+ - 38.39.189.0/24 
+ - 38.39.186.0/24
+ - 38.39.187.0/24
+ - 38.39.184.0/24 
+ - 138.39.185.0/24
 
-CircleCI *does not recommend* configuring an IP-based firewall based on the above IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the endpoints above persist from day-to-day, as these addresses are reassigned continuously.
+CircleCI *does not recommend* configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
  
 **IP ranges** is the recommended method for configuring an IP-based firewall to allow traffic from CircleCI’s platform.
 

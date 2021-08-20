@@ -1609,8 +1609,11 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different
-arguments.
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments.
+
+**Note**
+
+In order to use the `matrix` stanza, you must use parameterized jobs.
 
 Key | Required | Type | Description
 ----|----------|------|------------
@@ -1618,6 +1621,8 @@ parameters | Y | Map  | A map of parameter names to every value the job should b
 exclude | N | List | A list of argument maps that should be excluded from the matrix
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 {: class="table table-striped"}
+
+**Note:**
 
 The following is a basic example of using matrix jobs.
 
