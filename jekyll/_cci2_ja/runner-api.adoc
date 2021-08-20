@@ -9,7 +9,7 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI ランナーは、現在、 https://circleci.com/ja/pricing[Scale プラン] でのみ提供されます。 Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]をご利用のお客様と、CircleCI Server v3.1.0 以上をご利用のお客様に提供されています。 Scale プランへのお申し込み方法については、営業担当者へお問い合わせください。
 
 CircleCI ランナー API の外部向けエンドポイント一覧を紹介します。
 
@@ -17,9 +17,9 @@ toc::[]
 
 == 認証方法
 
-CircleCI ランナー APIには、エンドポイントや用途によって異なる認証方法を利用しています。 Each authentication method may be used in different endpoints for different purposes. 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
+CircleCI ランナー API は、さまざまな認証方法に対応しています。 使用できる認証方法は、エンドポイントや用途によって異なります。 1 つのエンドポイントで複数の認証方法を使用できる場合もあります。
 
-=== Circle-Token (個人認証)
+=== circle-token (個人認証)
 
 この認証方法はパーソナル トークンをベースにしており、CircleCI v2 API と同じルールが適用されます。
 
@@ -33,12 +33,12 @@ CircleCI ランナー APIには、エンドポイントや用途によって異�
 | ユーザー認証に使用される `circle-token` が含まれたヘッダー
 
 | ユーザー名による HTTP Basic 認証
-| ユーザー名には `circle-token` を設定し、パスワードは空白のまま残します。
+| トークンは、Basic 認証のスキームを使用して提供できます。ユーザー名には `circle-token` を設定し、パスワードは空白のまま残します。
 |===
 
 === ブラウザー セッション認証
 
-リクエストのCookieに含まれるセッションを使用してそのまま認証することができます。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
+リクエストに含まれる Cookie を使用して開始する Ring セッションです。 この認証方法では、ユーザーが既に circleci.com にログインしている場合に、特定のエンドポイントにシームレスにアクセスできます。
 
 === ローンチ トークン
 
@@ -60,11 +60,11 @@ CircleCI ランナー APIには、エンドポイントや用途によって異�
 
 === GET /api/v2/runner
 
-指定したパラメーターに基づいた利用可能なランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
+指定したパラメーターに基づいて利用可能なランナーの一覧を取得できます。 フィルター用パラメーターを 1つ以上使用することが必須です。
 
 ==== 認証方法
 
-* Circle-Token (個人認証)
+* circle-token (個人認証)
 * ブラウザー セッション認証
 + この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできます。
 * ローンチ トークン
@@ -77,20 +77,20 @@ CircleCI ランナー APIには、エンドポイントや用途によって異�
 | 名前
 | 型
 | 入力
-| 必須?
+| 必須？
 | 説明
 
 | resource-class
-| string
+| 文字列
 | クエリ
 | 省略可
 | 指定したリソース クラスでランナーの一覧を絞り込みます。
 
 | namespace
-| string
+| 文字列
 | クエリ
 | 省略可
-| 指定したネームスペースでランナーの一覧を絞り込みます。
+| 指定した名前空間でランナーの一覧を絞り込みます。
 |===
 
 == 例
@@ -105,7 +105,7 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     -H 'Circle-Token: secret-token'
 ```
 
-=== レスポンス
+=== 応答
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -119,55 +119,55 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
 |JSON
 |===
 
-=== レスポンススキーム
+=== 応答スキーム
 
 [.table.table-striped]
 [cols=4*, options="header", stripes=even]
 |===
 | 名前
 | 型
-| 必須?
+| 必須？
 | 説明
 
 |items
-|[object]
+|オブジェクト配列
 |必須
 |ランナーの配列
 
 |resource_class
-|string
+|文字列
 |必須
 |ランナーのリソース クラス
 
 |hostname
-|string
+|文字列
 |必須
 |ランナーのホスト名
 
 |name
-|string
+|文字列
 |必須
 |ランナー名
 
 |first_connected
-|string (date-time)
+|文字列 (日付と時刻)
 |必須
 |ランナーが最初に接続した日時
 
 |last_connected
-|string (date-time)
+|文字列 (日付と時刻)
 |必須
 |ランナーが最後に接続した日時
 
 |last_used
-|string (date-time)
+|文字列 (日付と時刻)
 |必須
 |ジョブの実行にランナーを最後に使用した日時
 
 |version
-|string
+|文字列
 |必須
-|ローンチ エージェントのバージョン
+|実行中のローンチ エージェントのバージョン
 |===
 
 == 例
@@ -187,3 +187,79 @@ curl -X GET https://runner.circleci.com/api/v2/runner?namespace=test-namespace \
     ]
 }
 ```
+
+
+=== GET /api/v2/runner/tasks
+
+指定したリソース クラスで未処理のタスクの数を取得します。
+
+==== 認証方法
+
+* circle-token (個人認証)
+* ブラウザー セッション認証
++ この認証方法では、circleci.com に既にログインしているユーザーが circleci.com/api/v2/runner でエンドポイントにアクセスできます。
+* ローンチ トークン
+
+===== リクエスト
+
+[.table.table-striped]
+[cols=5*, options="header", stripes=even]
+|===
+| 名前
+| 型
+| 入力
+| 必須？
+| 説明
+
+| resource-class
+| 文字列
+| クエリ
+| 必須
+| 指定したリソース クラスでタスクを絞り込みます。
+|===
+
+== 例
+
+```sh
+curl -X GET https://runner.circleci.com/api/v2/runner/tasks?resource-class=test-namespace/test-resource \
+    -H 'Circle-Token: secret-token'
+```
+
+=== 応答
+
+[.table.table-striped]
+[cols=3*, options="header", stripes=even]
+|===
+| ステータス
+| 説明
+| 形式
+
+|200
+|未処理のタスクの数
+|JSON
+|===
+
+=== 応答スキーム
+
+[.table.table-striped]
+[cols=4*, options="header", stripes=even]
+|===
+| 名前
+| 型
+| 必須？
+| 説明
+
+|unclaimed_task_count
+|整数
+|必須
+|未処理のタスクの数
+|===
+
+== 例
+
+```json
+{
+    "unclaimed_task_count": 42
+}
+```
+

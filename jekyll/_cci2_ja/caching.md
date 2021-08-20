@@ -391,9 +391,9 @@ steps:
 {: #bundler-ruby }
 {:.no_toc}
 
-この問題を解決するには、キャッシュから依存関係を復元する前に Bundler をクリーンアップするステップを追加します。
-
 Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
+
+Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 
 To prevent this behavior, add a step that cleans Bundler before restoring dependencies from cache.
 
@@ -473,7 +473,7 @@ steps:
 {: #npm-node }
 {:.no_toc}
 
-NPM5 以降でロック ファイルを使用すると、部分キャッシュ リストアを安全に行うことができます。
+**Safe to Use Partial Cache Restoration?** Yes.
 
 With NPM5+ and a lock file, you can safely use partial cache restoration.
 

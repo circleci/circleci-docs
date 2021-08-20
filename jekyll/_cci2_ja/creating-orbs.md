@@ -35,8 +35,7 @@ version:
 1. **デフォルト ブランチに対して新しいプル リクエストを作成します。 **   
    新しいリリースは、デフォルト ブランチへのマージ時にのみパブリッシュされます。 Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュは、サンプルに含まれる [`.circleci/config.yml` 設定ファイル](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/.circleci/config.yml)により自動的に行われます。 この CI パイプラインでは、デフォルトで[結合テスト]({{site.baseurl}}/2.0/testing-orbs/#integration-testing)と[単体テスト]({{site.baseurl}}/2.0/testing-orbs/#unit-testing)が有効になっています。 It is highly recommended that you add integration tests at a minimum to ensure the functionality of your orb. Orb でスクリプトを使用しない場合や、現時点では単体テストを有効にしたくない場合は、[bats/run](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L49) ジョブをコメントアウトしてください。
 
-1. **   
-   テスト結果は、GitHub 上においてプル リクエスト内で直接確認できます。 また、CircleCI.com ではパイプライン全体に対する詳細な結果を確認できます。 ![プル リクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
+1. テスト結果は、GitHub 上においてプル リクエスト内で直接確認できます。 また、CircleCI.com ではパイプライン全体に対する詳細な結果を確認できます。 ![プル リクエストに対して GitHub Checks API から返された Orb のテスト結果レポート]({{site.baseurl}}/assets/img/docs/orb-dev-kit-gh-checks.png)
 
 1. デフォルトでは、`fail-if-semver-not-indicated` パラメーターは true に設定されており、タイトルに適切な[セマンティック バージョン タグ](#%E6%96%B0%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%81%AE%E5%85%AC%E9%96%8B)が含まれないコミットのビルドはすべて失敗します。
 
@@ -52,8 +51,7 @@ version:
 
 1. [スカッシュ](https://docs.github.com/ja/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) マージを行うと、デフォルト ブランチへのマージ時にブランチが 1 つのコミットにまとめられるだけでなく、プル リクエストのタイトルがコミット メッセージとして維持されます。 ![プル リクエストをスカッシュ マージして semver タイトルを保持する]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
-1. **   
-   [CircleCI アプリケーション](https://app.circleci.com/)にアクセスすると、Orb のパブリッシュ パイプラインの進捗状況を確認できます。 このパイプラインが完了したら、[Orb レジストリ](https://circleci.com/developer/ja/orbs) に Orb が公開されます。
+1. [CircleCI アプリケーション](https://app.circleci.com/)にアクセスすると、Orb のパブリッシュ パイプラインの進捗状況を確認できます。 このパイプラインが完了したら、[Orb レジストリ](https://circleci.com/developer/ja/orbs) に Orb が公開されます。
 
 ### Orb のパブリッシュ プロセス
 Orb パイプラインには次の 2 つのワークフローがあります。

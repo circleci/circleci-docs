@@ -148,6 +148,8 @@ This example specifies the `$DATABASE_URL` as the default user and port for Post
 
 Refer to the [Go Language Guide]({{ site.baseurl }}/2.0/language-go/) for a walkthrough of this example configuration and a link to the public code repository for the app.
 
+{% raw %}
+
 ```yaml
 version: 2
 jobs:
@@ -181,8 +183,7 @@ jobs:
             - v1-pkg-cache
 
       # Normally, this step would be in a custom primary image;
-      # we've added it here for the sake of explanation.
-      run: go get github.com/lib/pq
+      # we've added it here for the sake of explanation. run: go get github.com/lib/pq
       - run: go get github.com/mattes/migrate
       - run: go get github.com/jstemmer/go-junit-report
 
@@ -192,8 +193,7 @@ jobs:
             for i in `seq 1 10`;
             do
               nc -z localhost 5432 && echo Success && exit 0
-              echo -n .
-              sleep 1
+              echo -n . sleep 1
             done
             echo Failed waiting for Postgres && exit 1
       - run:
@@ -231,6 +231,8 @@ jobs:
       - store_test_results:
           path: /tmp/test-results
 ```
+
+{% endraw %}
 
 ## Example mysql project.
 {: #example-mysql-project }
