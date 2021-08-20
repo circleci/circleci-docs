@@ -112,7 +112,7 @@ commands:
       - run: cp *.md << parameters.destination >>
 ```
 
-引用符で囲まれていないと他の型 (ブール値、数値など) を表してしまう文字列、および YAML で特別な意味を持つ文字 (特にコロン) を含む文字列は、引用符で囲む必要があります。 In all other instances, quotes are optional. `when` 節の評価時に、空文字列は false 値として扱われます。 その他の文字列はすべて true 値として扱われます。 なお、YAML でブール値として解釈される文字列値を引用符なしで使用すると、型エラーが発生します。
+Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. `when` 節の評価時に、空文字列は false 値として扱われます。 その他の文字列はすべて true 値として扱われます。 なお、YAML でブール値として解釈される文字列値を引用符なしで使用すると、型エラーが発生します。
 
 #### ブール値
 {: #boolean }
@@ -863,7 +863,12 @@ Orb 内で宣言されているジョブは、その Orb 内のコマンドお�
 
 ```yaml
 version: 2.1
-# hello-orb の yml (一部)
+jobs:
+  sayhello:
+    parameters:
+      saywhat:
+        description: "To whom shall we say hello?"
+        version: 2.1
 jobs:
   sayhello:
     parameters:
@@ -874,27 +879,22 @@ jobs:
     machine: true
     steps:
       - say:
-          saywhat: "<< parameters.saywhat >>"
+          # コマンド "say" の "saywhat" パラメーターには
+          # デフォルト値が定義されていないため
+          # 手動で渡す必要があります
+          saywhat: << parameters.saywhat >>
 commands:
-  saywhat:
+  say:
     parameters:
       saywhat:
         type: string
     steps:
       - run: echo "<< parameters.saywhat >>"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          saywhat: "<< parameters.saywhat >>"
-commands:
-  saywhat:
-    parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
+workflows:
+  build:
+    jobs:
+      - sayhello:
+          saywhat: Everyone
 ```
 
 **hello-orb を利用する設定ファイル**
@@ -978,6 +978,7 @@ jobs:
       saywhat:
         description: "To whom shall we say hello?"
         version: 2.1
+# hello-orb の yml (一部)
 jobs:
   sayhello:
     parameters:
@@ -988,22 +989,27 @@ jobs:
     machine: true
     steps:
       - say:
-          # コマンド "say" の "saywhat" パラメーターには
-          # デフォルト値が定義されていないため
-          # 手動で渡す必要があります
-          saywhat: << parameters.saywhat >>
+          saywhat: "<< parameters.saywhat >>"
 commands:
-  say:
+  saywhat:
     parameters:
       saywhat:
         type: string
     steps:
       - run: echo "<< parameters.saywhat >>"
-workflows:
-  build:
-    jobs:
-      - sayhello:
-          saywhat: Everyone
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - say:
+          saywhat: "<< parameters.saywhat >>"
+commands:
+  saywhat:
+    parameters:
+      saywhat:
+        type: string
+    steps:
+      - run: echo "<< parameters.saywhat >>"
 ```
 
 ### 同じジョブの複数回の呼び出し

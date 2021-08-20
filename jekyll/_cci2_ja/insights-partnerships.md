@@ -84,6 +84,13 @@ workflows:
       - deploy:
           requires:
             - test
+      - build
+      - test:
+          requires:
+            - build
+      - deploy:
+          requires:
+            - test
 ```
 
 ##### 3. ソース コレクターを 2 つ作成する

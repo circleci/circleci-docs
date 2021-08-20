@@ -7,7 +7,7 @@ description: "CircleCI でのサプライチェーン攻撃への対策"
 ## 概要
 {: #overview}
 
-モダンなソフトウェア アプリケーションでは、コア機能を提供するうえでは依存関係が欠かせません。 また、ソフトウェア エコシステムでは、ソース コードとバイナリをパブリック リポジトリにパブリッシュするために、CI/CD が不可欠です。 これらが合わさると、悪意あるアクターが標準的なセキュリティ対策を回避しサプライチェーンを直接攻撃できるチャンスになります。その結果、多数のアプリケーションや Web サイトが同時にウイルスに感染するということが起こり得ます。
+モダンなソフトウェア アプリケーションでは、コア機能を提供するうえでは依存関係が欠かせません。 また、ソフトウェア エコシステムでは、ソース コードとバイナリをパブリック リポジトリにパブリッシュするために、CI/CD が不可欠です。 Together, this gives the opportunity for malicious actors to circumvent standard security measures and attack supply chains directly, allowing them to infect many applications and websites simultaneously.
 
 CircleCI をはじめ、継続的デリバリー プロバイダーは、こうしたリスクについて理解しています。 CircleCI では多数のキーを所有しているという自覚のもと、お客様がソフトウェアのパブリッシュとデプロイに使用する認証情報の保護のために、あらゆる手を尽くしています。 それでも CircleCI に限らず、サービスとしての CI/CD プロバイダーが安全性を 100% 保証することは不可能であり、CI/CD プラットフォームはセキュアでない方法で使用される可能性があります。
 
