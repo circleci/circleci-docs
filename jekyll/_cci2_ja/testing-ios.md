@@ -44,37 +44,35 @@ To read about our customer support policy regarding beta images, please check ou
 ### Apple silicon support
 {: #apple-silicon-support }
 
-**Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
+It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
-
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner](https://circleci.com/docs/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
- | Config   | Xcode Version              | macOS Version | macOS UI Testing Supported | Software Manifest                                                                                | Release Notes                                                                                       |
- | -------- | -------------------------- | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
- | `12.1.0` | Xcode 12.1 (12A7403)       | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5801/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-2-released/40583)                      |
- | `12.5.1` | Xcode 10.2.1 (10E1001)     | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
- | `12.4.0` | Xcode 12.4 (12D4e)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
- | `12.3.0` | Xcode 12.3 (12C33)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
- | `12.2.0` | Xcode 12.2 (12B45b)        | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
- | `12.1.1` | Xcode 12.1.1 RC (12A7605b) | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4054/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-1-1-rc-released/38023)                      |
- | `12.0.1` | Xcode 12.0.1 (12A7300)     | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3933/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-0-1-released-xcode-12-0-0-deprecated/37630) |
- | `11.7.0` | Xcode 11.7 (11E801a)       | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-7-released/37312)                           |
- | `11.6.0` | Xcode 11.6 (11E708)        | 10.15.5       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)                         |
- | `11.5.0` | Xcode 11.5 (11E608c)       | 10.15.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)                      |
- | `11.4.1` | Xcode 11.4.1 (11E503a)     | 10.15.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)                       |
- | `11.3.1` | Xcode 11.3.1 (11C505)      | 10.15.1       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)                       |
- | `11.2.1` | Xcode 11.2.1 (11B500)      | 10.15.0       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)            |
- | `11.1.0` | Xcode 11.1 (11A1027)       | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)                  |
- | `11.0.0` | Xcode 11.0 (11A420a)       | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)                |
- | `10.3.0` | Xcode 10.3 (10G8)          | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
- | `10.2.1` | Xcode 10.1 (10B61)         | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)                   |
- | `10.1.0` | Xcode 10.0 (10A255)        | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)                     |
- | `10.0.0` | Xcode 9.4.1 (9F2000)       | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)                  |
- | `9.4.1`  | * Xcode 9.4.1 (9F2000)     | 10.13.3       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html) |                                                                                                     |
+ | Config   | Xcode Version                | macOS Version | macOS UI Testing Supported | Software Manifest                                                                                | Release Notes                                                                                       |
+ | -------- | ---------------------------- | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+ | `13.0.0` | Xcode 13.0 Beta 4 (13A5201i) | 11.5.1        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-4-released/40876)                      |
+ | `12.5.1` | Xcode 12.5.1 (12E507)        | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
+ | `12.4.0` | Xcode 12.4 (12D4e)           | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
+ | `12.3.0` | Xcode 12.3 (12C33)           | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
+ | `12.2.0` | Xcode 12.2 (12B45b)          | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
+ | `12.1.1` | Xcode 12.1.1 RC (12A7605b)   | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4054/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-1-1-rc-released/38023)                      |
+ | `12.0.1` | Xcode 12.0.1 (12A7300)       | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3933/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-0-1-released-xcode-12-0-0-deprecated/37630) |
+ | `11.7.0` | Xcode 11.7 (11E801a)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3587/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-7-released/37312)                           |
+ | `11.6.0` | Xcode 11.6 (11E708)          | 10.15.5       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v3299/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-6-released/36777/2)                         |
+ | `11.5.0` | Xcode 11.5 (11E608c)         | 10.15.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2960/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-5-gm-released/36029/4)                      |
+ | `11.4.1` | Xcode 11.4.1 (11E503a)       | 10.15.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2750/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-4-1-released/35559/2)                       |
+ | `11.3.1` | Xcode 11.3.1 (11C505)        | 10.15.1       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2244/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-3-1-released/34137/6)                       |
+ | `11.2.1` | Xcode 11.2.1 (11B500)        | 10.15.0       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v2118/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-2-1-gm-seed-1-released/33345/14)            |
+ | `11.1.0` | Xcode 11.1 (11A1027)         | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)                  |
+ | `11.0.0` | Xcode 11.0 (11A420a)         | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)                |
+ | `10.3.0` | Xcode 10.3 (10G8)            | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
+ | `10.2.1` | * Xcode 10.2.1 (10E1001)     | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)                   |
+ | `10.1.0` | * Xcode 10.1 (10B61)         | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)                     |
+ | `10.0.0` | * Xcode 10.0 (10A255)        | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)                  |
+ | `9.4.1`  | * Xcode 9.4.1 (9F2000)       | 10.13.3       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html) |                                                                                                     |
 {: class="table table-striped"}
 
 **Note:** The following images are deprecated and scheduled for removal on 14 September 2021. Please migrate away from these images as soon as possible. For more information, please see the [announcement thread on our forum](https://discuss.circleci.com/t/xcode-deprecation-notice-9-4-1-10-0-0-10-1-0-and-10-2-1/40515).
@@ -329,6 +327,53 @@ steps:
   - run: bundle exec pod install
 ```
 
+## Using NodeJS
+{: #using-nodejs }
+
+The Xcode images are supplied with at least one version of NodeJS ready to use.
+
+### Images using Xcode 13 and later
+{: #images-using-xcode-13-and-later }
+
+These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)], or by running `nvm ls` during a job.
+
+To set the `current` version as the default:
+
+```yaml
+# ...
+steps:
+  - run: nvm alias default node
+```
+
+To revert to the `lts` release:
+
+```yaml
+# ...
+steps:
+  - run: nvm alias default --lts
+```
+
+To install a specific version of NodeJS and use it:
+
+```yaml
+# ...
+steps:
+  - run: nvm install 12.22.3 && nvm alias default 12.22.3
+```
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+
+### Images using Xcode 12.5 and earlier
+{: #images-using-xcode-125-and-earlier }
+
+These images come with at least one version of NodeJS installed directly using `brew`.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
+
 ## Using Homebrew
 {: #using-homebrew }
 
@@ -361,7 +406,7 @@ After the app has been tested and signed, you are ready to configure deployment 
 
 Pre-start the iOS simulator before building your application to make sure that the simulator is booted in time. Doing so generally reduces the number of simulator timeouts observed in builds.
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+To pre-start the simulator, add the following to your `config.yml` file, assuming that you are running your tests on an iPhone 11 Pro simulator with iOS 13.2:
 
 ```yaml
 # ...
