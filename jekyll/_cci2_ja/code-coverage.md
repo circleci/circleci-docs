@@ -303,13 +303,15 @@ version: 2.1
 jobs:
   build:
     docker:
-
-      - image: circleci/golang:1.11
+      - image: circleci/golang:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: go build
       - run:
-          name: "アーティファクト用の一時ディレクトリの作成"
+          name: "Create a temp directory for artifacts"
           command: |
             mkdir -p /tmp/artifacts
       - run:
