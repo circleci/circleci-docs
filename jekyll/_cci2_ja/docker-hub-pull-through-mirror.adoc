@@ -44,7 +44,7 @@ NOTE: 有料アカウントを使用すると、回数制限をさらに緩め�
 +
 例として、このサーバーの IP アドレスを `192.0.2.1` とします。 This URL will be needed later to arm Nomad clients and the VM Service.
 
-. 以下のコマンドを実行して、*キャッシュ サーバーを起動* します。
+. Run the command below to *start the registry*.
 +
 NOTE: `DOCKER_HUB_USERNAME` は Docker Hub アカウントのユーザー名に、`DOCKER_HUB_ACCESS_TOKEN` は https://hub.docker.com/settings/security で取得したアクセス トークンに置き換えてください。
 +
@@ -118,7 +118,7 @@ https://docs.docker.com/registry/recipes/mirror/ (レジストリのミラー
 
 == Configure VM Service to let Machine/Remote Docker VMs use the Pull Through Cache Registry
 
-Nomad クライアント「ごと」に以下の手順を実行します。
+Follow the steps below on your services machine.
 
 . Run the command below to *create a directory for your customization files*.
 +

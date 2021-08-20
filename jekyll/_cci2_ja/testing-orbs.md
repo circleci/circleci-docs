@@ -77,18 +77,18 @@ When you initialize your orb, the [greet.yml](https://github.com/CircleCI-Public
 
 ```yaml
 
-# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
-# 各テストの前に実行
+# Runs prior to every test
 setup() {
     # Load our script file.
 source ./src/scripts/greet.sh
 }
 
 @test '1: Greet the world' {
-    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
+    # Mock environment variables or functions by exporting them (after the script has been sourced)
     export PARAM_TO="World"
-    # "Greet" 関数の出力を取得する
+    # Capture the output of our "Greet" function
     result=$(Greet)
     [ "$result" == "Hello World" ]
 }
@@ -111,6 +111,7 @@ if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
     Greet
 fi
 # View src/tests for more information.
+# View src/tests for more information.
 ORB_TEST_ENV="bats-core"
 if [ "${0#*$ORB_TEST_ENV}" == "$0" ]; then
     Greet
@@ -120,18 +121,18 @@ fi
 
 {:.tab.unitTest.greet-bats}
 ```bash
-# Source: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
+# ソース: https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/tests/greet.bats
 
-# Runs prior to every test
+# 各テストの前に実行
 setup() {
     # Load our script file.
     source ./src/scripts/greet.sh
 }
 
 @test '1: Greet the world' {
-    # Mock environment variables or functions by exporting them (after the script has been sourced)
+    # 環境変数または機能をエクスポートによりモックする (スクリプトの読み込み後)
     export PARAM_TO="World"
-    # Capture the output of our "Greet" function
+    # "Greet" 関数の出力を取得する
     result=$(Greet)
     [ "$result" == "Hello World" ]
 }
@@ -190,6 +191,7 @@ teardown() {
     [ $(wc -l tmp | awk '{print $1}') == 2 ]
     # If an error is thrown anywhere in this test case, it will be considered a failure.
     # 標準的な POSIX テスト コマンドを使用して "Run_ShellCheck" 関数の機能をテストします。
+}
 }
 }
 ```

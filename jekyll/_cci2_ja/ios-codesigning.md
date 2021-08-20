@@ -45,7 +45,7 @@ To set up Fastlane Match:
 アドホック ビルドに関する項目は以下のように設定します。
 {:.no_toc}
 
-In the target that you will be using for ad-hoc builds:
+iOS プロジェクトおよび Mac プロジェクトに対してコード署名をセットアップする設定ファイルのベスト プラクティスは以下のとおりです。
 
 * **[Build Settings (ビルド設定)] -> [Provisioning Profile (Deprecated) (プロビジョニング プロファイル (非推奨))]** を *[Match AdHoc (Match アドホック)]* プロファイルに設定
 * **[Build Settings (ビルド設定)] -> [Code Signing Identity (コード署名 ID)]** を以下のように設定
@@ -85,15 +85,15 @@ end
 {: #adding-a-user-key-to-the-circleci-project }
 {:.no_toc}
 
-GitHub リポジトリに格納してあるキーとプロファイルを fastlane match で復号化できるようにするには、match のセットアップ手順で設定した暗号化パスフレーズを CircleCI プロジェクトの暗号化された環境変数に追加する必要があります。
-
 **メモ:** この手順により、[Authorize with GitHub (GitHub で承認)] ボタンをクリックするユーザーと同じ GitHub 権限が CircleCI プロジェクトに付与されます。
+
+プロジェクト設定で **[Permissions (権限)] -> [Checkout SSH Keys (SSH 鍵のチェック アウト)] -> [Add user key (ユーザー キーの追加)]** に移動して、[Authorize with GitHub (GitHub で承認)] ボタンをクリックします。
 
 * In the CircleCI application, go to your project’s settings by clicking the the Project Settings button (top-right on the Pipelines page of the project).
 * On the Project Settings page, click on SSH Keys (vertical menu on the left).
 * Click the *Add User Key* button and follow the steps to authorize CircleCI
 
-プロジェクト設定で **[Permissions (権限)] -> [Checkout SSH Keys (SSH 鍵のチェック アウト)] -> [Add user key (ユーザー キーの追加)]** に移動して、[Authorize with GitHub (GitHub で承認)] ボタンをクリックします。
+**Note:** This action will give the CircleCI project the same GitHub permissions as the user who will be clicking the *Authorize with GitHub* button.
 
 `Matchfile` では、`git_url` は **HTTPS** URL ではなく、**SSH** URL (`git@github.com:...` 形式) にする必要があります。 SSH URL 形式にせずに match を使用すると、認証エラーが発生する可能性があります。 たとえば、以下のようになります。
 
@@ -103,15 +103,15 @@ app_identifier("tools.fastlane.app")
 username("user@fastlane.tools")
 ```
 
-fastlane match を使用して iOS アプリのコード署名を構成する方法の例として、[`circleci-demo-ios` GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios)を参照してください。
-
 {: #adding-the-match-passphrase-to-the-encrypted-environment-variables }
+
+GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。
 
 ### 暗号化された環境変数に match パスフレーズを追加する
 {: #adding-the-match-passphrase-to-the-project }
 {:.no_toc}
 
-GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。
+GitHub リポジトリに格納してあるキーとプロファイルを fastlane match で復号化できるようにするには、match のセットアップ手順で設定した暗号化パスフレーズを CircleCI プロジェクトの暗号化された環境変数に追加する必要があります。
 
 CircleCI のプロジェクト設定で **[Build Settings (ビルド設定)] -> [Environment Variables (環境変数)]** に移動して `MATCH_PASSWORD` 変数を追加し、その値に暗号化パスフレーズを設定します。 Set its value to your encryption passphrase. 設定したパスフレーズは、暗号化されたまま格納されます。
 
@@ -155,7 +155,7 @@ workflows:
 ## サンプルの設定ファイル
 {: #sample-configuration-files }
 
-iOS プロジェクトおよび Mac プロジェクトに対してコード署名をセットアップする設定ファイルのベスト プラクティスは以下のとおりです。
+The best practice configuration for setting up code signing for iOS projects is as follows:
 
 ```
 # fastlane/Fastfile
@@ -239,4 +239,4 @@ By setting the `FL_OUTPUT_DIR:` env, that will tell Fastlane to output the XCode
 ## GitHub 上のサンプル アプリケーション
 {: #example-application-on-github }
 
-**メモ:**: fastlane match を使用せずに進める場合は、その方法を紹介している[こちらのブログ記事](https://medium.com/@m4rr/circleci-2-0-and-the-ios-code-signing-df434d0086e2)を参照してください。
+fastlane match を使用して iOS アプリのコード署名を構成する方法の例として、[`circleci-demo-ios` GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios)を参照してください。

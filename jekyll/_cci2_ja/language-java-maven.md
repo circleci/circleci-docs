@@ -26,7 +26,6 @@ This is an example application showcasing how to run a Java app on CircleCI 2.1.
 
 ### A basic build with an orb:
 {: #a-basic-build-with-an-orb }
-
 {% raw %}
 ```yaml
 version: 2 # CircleCI 2.0 を使用します
@@ -118,11 +117,10 @@ version: 2
 This `persist_to_workspace` step allows you to persist files or directories to be used by downstream jobs in the workflow. In this case, the target directory produced by the build step is persisted for use by the test step.
 
 ### Splitting tests across parallel containers
-コードベースで作業できるように、最初に `checkout` を記述します。
+{: #splitting-tests-across-parallel-containers }
 
 
 {% raw %}
-
 ```yaml
 version: 2.0
 jobs:

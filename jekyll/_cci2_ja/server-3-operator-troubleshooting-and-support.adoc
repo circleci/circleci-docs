@@ -21,6 +21,7 @@ toc::[]
 [source,bash]
 ----
 kubectl kots admin-console --namespace <namespace>
+
 ----
 
 ブラウザーを開いて、http://localhost:8800 にアクセスし、管理者コンソールを表示します。
@@ -33,7 +34,7 @@ CircleCI へのサポート依頼時に提出するサポート バンドルを�
 ## Pod の管理
 
 ### Pod の準備状況とステータスの確認
-メモ: `READY` 列と `STATUS` 列を確認してください。 `STATUS` が `Running` でも、Pod ではユーザーのリクエストを処理する準備はできていません。 一部の Pod は、準備ができるまである程度の時間がかかる可能性があります。
+注: `READY` 列と `STATUS` 列を確認してください。 `STATUS` が `Running` でも、Pod ではユーザーのリクエストを処理する準備はできていません。 一部の Pod は、準備ができるまで多少の時間を要する場合があります。
 
 [source,bash]
 ----
@@ -81,4 +82,4 @@ kubectl delete pod <pod-name> -n <name-space> --now
 ----
 
 ## ビルドのキューイングのデバッグ
-キューイングされているビルドをトラブルシューティングとしてデバッグする場合、CircleCI Server 2.x のhttps://circleci.com/docs/ja/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[トラブルシューティング] ガイドを参照してください。
+ビルドのキューイングのデバッグに関する問題を解決するには、CircleCI Server 2.x のhttps://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[[トラブルシューティング]]ガイドを参照してください。
