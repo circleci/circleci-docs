@@ -1623,16 +1623,22 @@ CircleCI では、明示的にタグ フィルターを設定しない限り、�
 
 ###### マトリックスから一部のパラメーターを除外する
 {: #matrix-requires-version-21 }
-`matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments.
 
-| キー         | 必須 | 型   | 説明                                                                                                       |
-| ---------- | -- | --- | -------------------------------------------------------------------------------------------------------- |
-| parameters | Y  | マップ | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ                                                                           |
-| exclude    | N  | リスト | マトリックスから除外する引数マップのリスト                                                                                    |
-| alias      | N  | 文字列 | マトリックス全体 (マトリックス内のすべてのジョブ) に `requires` キーを適用するには、マトリックスの `alias` を指定します。 `alias` のデフォルト値は、呼び出すジョブの名前です。 |
+**Note**
+
+In order to use the `matrix` stanza, you must use parameterized jobs.
+
+| Key        | Required | Type   | Description                                                                                                          |
+| ---------- | -------- | ------ | -------------------------------------------------------------------------------------------------------------------- |
+| parameters | Y        | Map    | A map of parameter names to every value the job should be called with                                                |
+| exclude    | N        | List   | A list of argument maps that should be excluded from the matrix                                                      |
+| alias      | N        | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed |
 {: class="table table-striped"}
 
-以下に、マトリックス ジョブの基本的な使用例を示します。
+**Note:**
+
+The following is a basic example of using matrix jobs.
 
 ```yaml
 workflows:
@@ -1645,7 +1651,7 @@ workflows:
               platform: ["macos", "windows", "linux"]
 ```
 
-上記コードは 9 つの `build` ジョブに展開されます。
+This expands to 9 different `build` jobs, and could be equivalently written as:
 
 ```yaml
 workflows:
@@ -1673,7 +1679,7 @@ workflows:
 ###### 依存関係とマトリックス ジョブ
 {: #excluding-sets-of-parameters-from-a-matrix }
 {:.no_toc}
-一部の値を_除き_、あらゆる引数の組み合わせについてジョブを実行したいことがあります。 これを行うには、`exclude` スタンザを使用します。
+Sometimes you may wish to run a job with every combination of arguments _except_ some value or values. You can use an `exclude` stanza to achieve this:
 
 ```yaml
 workflows:
@@ -1689,13 +1695,13 @@ workflows:
                 b: 5
 ```
 
-上記のマトリックスは、パラメーター `a` と `b` の組み合わせのうち、`{a: 3, b: 5}` の組み合わせを除いた 8 個のジョブに展開されます。
+The matrix above would expand into 8 jobs: every combination of the parameters `a` and `b`, excluding `{a: 3, b: 5}`
 
 ###### **`pre-steps`** と **`post-steps`** (version: 2.1 が必須)
 {: #dependencies-and-matrix-jobs }
 {:.no_toc}
 
-To `require` an entire matrix (every job within the matrix), use its `alias`. 別のジョブの `requires` スタンザで使用できます。 デフォルト値は実行するジョブの名前です。
+To `require` an entire matrix (every job within the matrix), use its `alias`. The `alias` defaults to the name of the job being invoked.
 
 ```yaml
 workflows:
@@ -1710,9 +1716,9 @@ workflows:
             - deploy
 ```
 
-ワークフローでは、すべてのジョブ呼び出しは、オプションで 2つの特別な引数 `pre-steps` と `post-steps` を受け取ることができます。
+This means that `another-job` will require both deploy jobs in the matrix to finish before it runs.
 
-また、マトリックス ジョブのパラメーター値を `<< matrix.* >>` で公開し、より複雑なワークフローを作成することもできます。 たとえば、次のコードでは、`deploy` ジョブをマトリックス化したうえで、それぞれのジョブが、`build` マトリックス内の対応するジョブが完了してから実行されるようにしています。
+Additionally, matrix jobs expose their parameter values via `<< matrix.* >>` which can be used to generate more complex workflows. For example, here is a `deploy` matrix where each job waits for its respective `build` job in another matrix.
 
 ```yaml
 workflows:
@@ -1732,7 +1738,7 @@ workflows:
             - build-v<< matrix.version >>
 ```
 
-上記ワークフローは次のように展開されます。
+This workflow will expand to:
 
 ```yaml
 workflows:
@@ -1758,11 +1764,11 @@ workflows:
 
 ###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
 {: #pre-steps-and-post-steps-requires-version-21 }
-CircleCI v2.1 設定ファイルでは、ワークフロー宣言内で真偽値を取る `when` 句を[ロジック ステートメント](https://circleci.com/docs/2.0/configuration-reference/#logic-statements)と共に使用して (逆の条件となる `unless` 句も使用可)、そのワークフローを実行するかどうかを決めることができます。
+Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
-`pre-steps` の下のステップは、ジョブ内の他のすべてのステップよりも前に実行されます。 `post-steps` の下のステップは、他のすべてのステップよりも後に実行されます。
+Steps under `pre-steps` are executed before any of the other steps in the job. The steps under `post-steps` are executed after all of the other steps.
 
-事前ステップと事後ステップを使用すると、特定のジョブ内で、そのジョブを変更せずにいくつかのステップを実行できます。 これは、たとえば、ジョブの実行前にカスタムのセットアップ ステップを実行したいときに便利です。
+Pre and post steps allow you to execute steps in a given job without modifying the job. This is useful, for example, to run custom setup steps before job execution.
 
 ```yaml
 version: 2.1
@@ -1794,7 +1800,7 @@ workflows:
 
 With CircleCI v2.1 configuration, you may use a `when` clause (the inverse clause `unless` is also supported) under a workflow declaration with a [logic statement](https://circleci.com/docs/2.0/configuration-reference/#logic-statements) to determine whether or not to run that workflow.
 
-以下の構成例では、パイプライン パラメーター `run_integration_tests` を使用して `integration_tests` ワークフローの実行を制御しています。
+The example configuration below uses a pipeline parameter, `run_integration_tests` to drive the `integration_tests` workflow.
 
 ```yaml
 version: 2.1
@@ -1814,7 +1820,7 @@ jobs:
 ...
 ```
 
-この例では、`POST` 本体に以下が含まれた状態でパイプラインがトリガーされたときに、テストが明示的に呼び出されない限りは `integration_tests` ワークフローは実行されないようにしています。
+This example prevents the workflow `integration_tests` from running unless the tests are invoked explicitly when the pipeline is triggered with the following in the `POST` body:
 
 ```sh
 {
@@ -1824,17 +1830,17 @@ jobs:
 }
 ```
 
-いくつかの例と概念的な情報については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows)を参照してください。
+Refer to the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document for more examples and conceptual information.
 
 ## ロジック ステートメント
 {: #logic-statements }
 
-一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
+Certain dynamic configuration features accept logic statements as arguments. Logic statements are evaluated to boolean values at configuration compilation time, that is - before the workflow is run. The group of logic statements includes:
 
 | Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
-**メモ:** ワークフロー レベルでロジック ステートメントを使用する場合、`condition:` キーは含めないようにしてください (`condition` キーは`ジョブ` レベルのロジック ステートメント以外では必要ありません)。
+The following logic values are considered falsy:
 
 - false
 - null
@@ -1843,11 +1849,11 @@ jobs:
 - 空の文字列 ("")
 - 引数を持たないステートメント
 
-上記以外の値はすべて真とみなされます。 ただし、空のリストを引数とするロジック ステートメントはバリデーション エラーとなるので注意してください。
+All other values are truthy. Further, Please also note that using logic with an empty list will cause a validation error.
 
-ロジック ステートメントの真偽の評価は常に最上位レベルで行われ、必要に応じて強制することもできます。 また、最大 100 レベルの深さまで、引数の仕様に応じた任意の方法でネストできます。
+Logic statements always evaluate to a boolean value at the top level, and coerce as necessary. They can be nested in an arbitrary fashion, according to their argument specifications, and to a maximum depth of 100 levels.
 
-`matches` の `pattern` には、[Java 正規表現](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html)を使用します。 パターンは完全一致で指定する必要があります。 前方一致は使用できません。 意図せぬ部分一致を防ぐため、パターンは `^` と `$` で囲むことをお勧めします。
+`matches` uses [Java regular expressions](https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html) for its `pattern`. A full match pattern must be provided, prefix matching is not an option. Though, it is recommended to enclose a pattern in `^` and `$` to avoid accidental partial matches.
 
 **Note:** When using logic statements at the workflow level, do not include the `condition:` key (the `condition` key is only needed for `job` level logic statements).
 
@@ -1877,7 +1883,6 @@ workflows:
             - << pipeline.parameters.deploy-canary >>
 ```
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -2011,7 +2016,6 @@ workflows:
             branches:
               only: master
 ```
-{% endraw %}
 
 ## 完全版設定ファイル サンプル
 {: #example-full-configuration }
@@ -2156,4 +2160,4 @@ workflows:
 {: #see-also }
 {:.no_toc}
 
-[設定ファイルの概要]({{site.baseurl}}/2.0/config-intro/)
+[Config Introduction]({{site.baseurl}}/2.0/config-intro/)
