@@ -1877,6 +1877,7 @@ workflows:
             - << pipeline.parameters.deploy-canary >>
 ```
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -2010,6 +2011,7 @@ workflows:
             branches:
               only: master
 ```
+{% endraw %}
 
 ## 完全版設定ファイル サンプル
 {: #example-full-configuration }
