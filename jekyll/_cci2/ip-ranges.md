@@ -137,18 +137,18 @@ The machines that execute *all jobs* on CircleCI’s platform, not just jobs opt
 - [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI uses the *us-east-1* and *us-east-2* regions
 - [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
 - CircleCI macOS Cloud:
- - 162.252.208.0/24
- - 162.252.209.0/24
- - 192.206.63.0/24
- - 162.221.90.0/24
- - 38.39.177.0/24
- - 38.39.178.0/24
- - 38.39.188.0/24
- - 38.39.189.0/24 
- - 38.39.186.0/24
- - 38.39.187.0/24
- - 38.39.184.0/24 
- - 138.39.185.0/24
+  - 162.252.208.0/24
+  - 162.252.209.0/24
+  - 192.206.63.0/24
+  - 162.221.90.0/24
+  - 38.39.177.0/24
+  - 38.39.178.0/24
+  - 38.39.188.0/24
+  - 38.39.189.0/24 
+  - 38.39.186.0/24
+  - 38.39.187.0/24
+  - 38.39.184.0/24 
+  - 138.39.185.0/24
 
 CircleCI *does not recommend* configuring an IP-based firewall based on the AWS or GCP IP addresses, as the vast majority are not CircleCI’s machines. Additionally, there is *no guarantee* that the addresses in the AWS or GCP endpoints persist from day-to-day, as these addresses are reassigned continuously.
  
