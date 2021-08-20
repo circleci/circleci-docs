@@ -49,12 +49,13 @@ CircleCI expects that the server that responds to a webhook will return a 2xx re
 
 A number of HTTP headers are set on webhooks, as detailed in the table below.
 
-|Header Name|Value|
-|-|-|
-|Content-Type|`application/json`|
-|User-Agent|A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`). The value is subject to change during the preview period.|
-|Circleci-Event-Type|The type of event, (`workflow-completed`, `job-completed`, etc.)|
-|Circleci-Signature|When present, this signature can be used to verify that the sender of the webhook has access to the secret token.|
+Header Name | Value
+--- | ---
+Content-Type | `application/json`
+User-Agent | A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`). The value is subject to change during the preview period.
+Circleci-Event-Type | The type of event, (`workflow-completed`, `job-completed`, etc.) 
+Circleci-Signature | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.
+{: class="table table-striped"}
 
 ## Setting up a hook
 {: #setting-up-a-hook}
