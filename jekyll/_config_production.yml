@@ -1,3 +1,4 @@
 url: "https://circleci.com"
-segment: 'AbgkrgN4cbRhAVEwlzMkHbwvrXnxHh35'
+segment: "AbgkrgN4cbRhAVEwlzMkHbwvrXnxHh35"
 rollbar_env: production
+optimizely: "2DuqgdSgVTZ1n4upLM2Her"
