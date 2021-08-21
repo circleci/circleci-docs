@@ -15,7 +15,6 @@ exclude:
 
 plugins:
   - jekyll-include-cache
-  - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
