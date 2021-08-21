@@ -43,18 +43,16 @@ To read about our customer support policy regarding beta images, please check ou
 ### Apple silicon support
 {: #apple-silicon-support }
 
-**Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
+It is possible to build Apple Silicon/Universal binaries using Xcode `12.0.0` and higher as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
-
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner](https://circleci.com/docs/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
 
  Config   | Xcode Version                   | macOS Version | macOS UI Testing Supported | Software Manifest | Release Notes
 ----------|---------------------------------|---------------|----------------------------|-------------------|--------------
- `13.0.0` | Xcode 13.0 Beta 1 (13A5154h ) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5734/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-1-released/40461)
+ `13.0.0` | Xcode 13.0 Beta 5 (13A5212g) | 11.5.2 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5947/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-5-released/40988)
  `12.5.1` | Xcode 12.5.1 (12E507) | 11.4.0 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)
  `12.4.0` | Xcode 12.4 (12D4e) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)
  `12.3.0` | Xcode 12.3 (12C33) | 10.15.5 | Yes | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)
@@ -333,6 +331,53 @@ You can then ensure you are using those, by prefixing commands with `bundle exec
 steps:
   - run: bundle exec pod install
 ```
+
+## Using NodeJS
+{: #using-nodejs }
+
+The Xcode images are supplied with at least one version of NodeJS ready to use.
+
+### Images using Xcode 13 and later
+{: #images-using-xcode-13-and-later }
+
+These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)], or by running `nvm ls` during a job.
+
+To set the `current` version as the default:
+
+```yaml
+# ...
+steps:
+  - run: nvm alias default node
+```
+
+To revert to the `lts` release:
+
+```yaml
+# ...
+steps:
+  - run: nvm alias default --lts
+```
+
+To install a specific version of NodeJS and use it:
+
+```yaml
+# ...
+steps:
+  - run: nvm install 12.22.3 && nvm alias default 12.22.3
+```
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+
+### Images using Xcode 12.5 and earlier
+{: #images-using-xcode-125-and-earlier }
+
+These images come with at least one version of NodeJS installed directly using `brew`.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)].
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node) which helps to manage your NodeJS installation, by installing `nvm`, along with caching packages.
 
 ## Using Homebrew
 {: #using-homebrew }

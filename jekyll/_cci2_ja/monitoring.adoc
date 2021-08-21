@@ -251,8 +251,7 @@ Now you are ready to do anything Telegraf supports! All you need to provide is a
 [[inputs.statsd]]
         service_address = ":8125"
         parse_data_dog_tags = true
-        metric_separator = "."
-        namepass = []
+        metric_separator = "." namepass = []
 ```
 . Under `namepass` add any metrics you wish to receive, the example below shows choosing to configure just the first 4 from the list above. (See below for some additional example configs):
 +
@@ -260,8 +259,7 @@ Now you are ready to do anything Telegraf supports! All you need to provide is a
 [[inputs.statsd]]
         service_address = ":8125"
         parse_data_dog_tags = true
-        metric_separator = "."
-        namepass = [
+        metric_separator = "." namepass = [
             "circle.backend.action.upload-artifact-error",
             "circle.build-queue.runnable.builds",
             "circle.dispatcher.find-containers-failed",
@@ -284,8 +282,7 @@ The example below records default metrics to two InfluxDB instances: One is your
 [[inputs.statsd]]
   service_address = ":8125"
   parse_data_dog_tags = true
-  metric_separator = "."
-  namepass = [
+  metric_separator = "." namepass = [
     "circle.backend.action.upload-artifact-error",
     "circle.build-queue.runnable.builds",
     "circle.dispatcher.find-containers-failed",
@@ -327,9 +324,7 @@ CAUTION: This scenario leads to very large amounts of data.
 [[inputs.statsd]]
   service_address = ":8125"
   parse_data_dog_tags = true
-  metric_separator = "."
-
-[[outputs.datadog]]
+  metric_separator = "." [[outputs.datadog]]
   apikey = 'YOUR_API_KEY_HERE'
 ```
 
@@ -343,9 +338,7 @@ AWS charges fees for CloudWatch per series of scalar (i.e. at the level of "mean
   # Accept all metrics at input level to 1) enable output configurations without thinking of inputs, and to 2) dump discarded metrics to stdout just in case.
   service_address = ":8125"
   parse_data_dog_tags = true
-  metric_separator = "."
-
-[[outputs.cloudwatch]]
+  metric_separator = "." [[outputs.cloudwatch]]
     # Fill in these two variables if you need to access CloudWatch with an IAM User, not an IAM Role attached to your Services box
     # access_key = 'ACCESS'
     # secret_key = 'SECRET'

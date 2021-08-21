@@ -19,19 +19,19 @@ toc::[]
 CircleCI では、セキュリティを最優先事項と考え、セキュリティ問題発生の防止に努めると共に、問題発生時にはすばやい対応を心掛けています。 Report security issues to security@circleci.com with an encrypted message using our security team's GPG key (ID: 0x4013DDA7, fingerprint: 3CD2 A48F 2071 61C0 B9B7 1AE2 6170 15B8 4013 DDA7).
 
 == 暗号化
-CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 構成を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
+CircleCI では、CircleCI サービス内外へのすべてのネットワーク通信で HTTPS または SSH を使用します。 これには、ブラウザーから Services アプリケーションへの通信、Services アプリケーションから Builder フリートへの通信、Builder フリートからソース管理システムへの通信など、あらゆる通信ポイントが含まれます。 したがって、ユーザーのコードやデータが暗号化されずに CircleCI から送受信されることはありません。 ただし、自身の判断で暗号化しないコードをビルドに含めることも可能です。 オペレーターは、CircleCI の SSL 構成を回避することも、基盤システムの通信に TLS を使用しないように選択することもできます。
 
-CircleCI のソフトウェアは性質上、ユーザーのコードやそのコードが操作するあらゆるデータにアクセスできます。 CircleCI 上のすべてのジョブは、他のあらゆるビルドから独立し、インターネットやユーザー自身のネットワークからアクセスできないサンドボックス (具体的には、Docker コンテナまたはエフェメラル VM) 内で実行されます。 ビルド エージェントは、SSH によって Git からコードをプルします。 特定のテスト スイートまたはジョブ構成は、外部サービスまたはネットワーク内のインテグレーション ポイントに対して呼び出しを行うことができます。そうした呼び出しからの応答は、ジョブにプルされ、ユーザー自身の判断でコードに使用されます。 1 つのジョブが完了すると、ジョブを実行したコンテナは廃棄され、リビルドされます。 すべての環境変数は、https://www.vaultproject.io/[HashiCorp の Vault] を使用して暗号化されます。 環境変数は、AES256-GCM96 を使用して暗号化され、CircleCI の従業員には使用できません。
+CircleCI のソフトウェアは性質上、ユーザーのコードやそのコードが操作するあらゆるデータにアクセスできます。 CircleCI 上のすべてのジョブは、他のあらゆるビルドから独立し、インターネットやユーザー自身のネットワークからアクセスできないサンドボックス (具体的には、Docker コンテナまたはエフェメラル VM) 内で実行されます。 ビルド エージェントは、SSH によって Git からコードをプルします。 特定のテスト スイートまたはジョブ構成は、外部サービスまたはネットワーク内のインテグレーション ポイントに対して呼び出しを行うことができます。 そうした呼び出しからの応答は、ジョブにプルされ、ユーザー自身の判断でコードに使用されます。 1 つのジョブが完了すると、ジョブを実行したコンテナは廃棄され、リビルドされます。 すべての環境変数は、https://www.vaultproject.io/[HashiCorp の Vault] を使用して暗号化されます。 環境変数は、AES256-GCM96 を使用して暗号化され、CircleCI の従業員には使用できません。
 
 == サンドボックス化
-CircleCI では、コードのビルドを実行するために割り当てられるリソースをユーザーが制御できます。 これは、ビルドが実行されるコンテナをセットアップする Builder boxes のインスタンスを介して行われます。 ビルド コンテナは性質上、ソース コードをプル ダウンし、コード ベースまたは構成に含まれるあらゆるテスト スクリプトとデプロイ スクリプトを実行します。 これらのコンテナはサンドボックス化されます。つまり、ビルド (または並列ビルドの一部分) ごとに専用のコンテナが 1 つずつ作成され、破棄されます。これらのコンテナは外部から使用することはできません。 CircleCI のサービスでは、特定のビルド コンテナに直接 SSH 接続できる機能が提供されています。 これにより、そのビルド コンテナ内のすべてのファイルまたは実行中のプロセスに完全にアクセスできると共に、ソース コードを任せられるユーザーだけに CircleCI へのアクセスを許可できます。
+CircleCI では、コードのビルドを実行するために割り当てられるリソースをユーザーが制御できます。 これは、ビルドが実行されるコンテナをセットアップする Builder boxes のインスタンスを介して行われます。 ビルド コンテナは性質上、ソース コードをプル ダウンし、コード ベースまたは構成に含まれるあらゆるテスト スクリプトとデプロイ スクリプトを実行します。 つまり、ビルド (または並列ビルドの一部分) ごとに専用のコンテナが 1 つずつ作成され、破棄されます。 これらのコンテナは外部から使用することはできません。 CircleCI のサービスでは、特定のビルド コンテナに直接 SSH 接続できる機能が提供されています。 これにより、そのビルド コンテナ内のすべてのファイルまたは実行中のプロセスに完全にアクセスできると共に、ソース コードを任せられるユーザーだけに CircleCI へのアクセスを許可できます。
 
 == インテグレーション
 CircleCI には、関連する外部のサービスやテクノロジーとのインテグレーション ポイントがいくつかあります。 以下の一覧では、これらのインテグレーション ポイントについて説明します。
 
-- *WebSocket:* CircleCI は、サーバーとブラウザー間の WebSocket 通信に https://pusher.com/[Pusher] クライアント ライブラリを使用していますが、インストールには slanger という内部サーバーを使用しています。そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうしたしくみによって、たとえば、ビルド リストが動的に更新されたり、ビルドの出力が発生と同時に 1 行ずつ表示されたりします。 ビルド ステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を構成しない限り、SSL 上で同じ証明書を使用して行われます)。 したがって、転送時には暗号化されます。
+- *WebSocket:* CircleCI は、サーバーとブラウザー間の WebSocket 通信に https://pusher.com/[Pusher] クライアント ライブラリを使用していますが、インストールには slanger という内部サーバーを使用しています。 そのため、Pusher サーバーが CircleCI インスタンスやソース管理システムにアクセスすることはありません。 こうしたしくみによって、たとえば、ビルド リストが動的に更新されたり、ビルドの出力が発生と同時に 1 行ずつ表示されたりします。 ビルド ステータスとビルド出力の行は、WebSocket サーバーを経由して送信されます (SSL なしで実行するように CircleCI を構成しない限り、SSL 上で同じ証明書を使用して行われます)。 したがって、転送時には暗号化されます。
 
-- *Replicated：*CircleCI は、http://www.replicated.com/[Replicated] を使用して、インストールウィザード、ライセンスキー、システム監査ログ、ソフトウェアの更新など、CircleCI のメンテナンスやシステムに関する作業を管理します。 CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。また、CircleCI がユーザーのデータを Replicated に送信することもありません。
+- **Replicated** We use http://www.replicated.com/[Replicated] to manage the installation wizard, licensing keys, system audit logs, software updates, and other maintenance and systems tasks for CircleCI. CircleCI インスタンスは、更新の有無を確認するために、Replicated サーバーと通信してライセンスキー情報やバージョン情報を送信します。 Replicated がユーザーのデータや他のシステムにアクセスすることはありません。
 
 - **Source Control Systems** To use CircleCI you will set up a direct connection with your instance of GitHub Enterprise or GitHub.com. CircleCI のセットアップ時に、プライベート リポジトリのチェックアウトをシステムに許可します。 You may revoke this permission at any time through your GitHub application settings page and by removing Circle's Deploy Keys and Service Hooks from your repositories' Admin pages. While CircleCI allows you to selectively build your projects, GitHub's permissions model is "all or nothing" — CircleCI gets permission to access all of a user's repositories or none of them. CircleCI インスタンスは、Git リポジトリでホスティングされているすべての項目にアクセスでき、コードのプッシュやユーザーの追加など、さまざまなイベントの Web フックを作成します。 これが CircleCI にコール バックして、1 つ以上の Git コマンドをトリガーすることで、コードが Builder フリートにプル ダウンされます。
 
@@ -39,14 +39,12 @@ CircleCI には、関連する外部のサービスやテクノロジーとの�
 
 - *アーティファクト:* アーティファクトには、S3 などのホスティングされたストレージを使用するのが一般的です。 これらのリソースが、標準的なポリシーに従ってセキュリティ保護されているなら、共に保存されている他のデータと同様、アーティファクトも外部からの侵入に対して安全と言えます。
 
-- **Support Bundles** We use https://www.honeycomb.io/[Honeycomb] to process and analyze distributed tracing data from Support Bundles that are sent to us. The traces contain metadata about activity in your instance but no secrets, source code, or build output are included. Data is retained for a maximum of 60 days.
-
 == 監査ログ
 監査ログ機能は、独自のサーバーまたはプライベートクラウド上にインストールした CircleCI でのみ使用できます。
 
 CircleCI では、監査およびフォレンジック分析の目的で、重要なイベントをログとしてシステムに記録します。 Audit logs are separate from system logs that track performance and network metrics.
 
-完全な監査ログは、アプリケーションの管理者セクション内にある [Audit Log (監査ログ)] ページから CSV ファイル形式でダウンロードできます。  ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。
+完全な監査ログは、アプリケーションの管理者セクション内にある [Audit Log (監査ログ)] ページから CSV ファイル形式でダウンロードできます。  ネストされたデータを含む監査ログフィールドには JSON BLOB が含まれます。 監査ログのダウンロードには非常に時間がかかることがありますので、「ダウンロード」ボタンをクリックしてしばらくお待ちください。
 
 *メモ：*内部挙動により、重複するイベントが監査ログに生成される場合があります。 ダウンロードしたログの `id` フィールドはイベントに固有であるため、このフィールドを使用して重複するエントリを特定できます。
 
@@ -77,13 +75,13 @@ CircleCI では、監査およびフォレンジック分析の目的で、重�
 - *actor:* 対象のイベントを実行したアクター。 ほとんどの場合は CircleCI ユーザーです。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - *target:* 対象のイベントで影響を受けたエンティティ インスタンス (プロジェクト、組織、アカウント、ビルドなど)。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - *payload:* アクション固有の情報の JSON BLOB。 payload のスキーマは、同じ `action` と `version` を持つすべてのイベントで一貫していると想定されます。
-- *occurred_at:* イベントが発生した UTC 日時。時刻は、最大 9 桁の小数精度の ISO-8601 形式で表されます (例：'2017-12-21T13:50:54.474Z')。
+- *occurred_at:* イベントが発生した UTC 日時。 時刻は、最大 9 桁の小数精度の ISO-8601 形式で表されます (例：'2017-12-21T13:50:54.474Z')。
 - *metadata:* 任意のイベントに付加できるキー・値のペアのセット。 キーと値はすべて文字列です。 これを使用すると、特定の種類のイベントに情報を追加できます。
 - *id:* 対象のイベントを一意に識別する UUID。 イベントのコンシューマーが、重複するデリバリーを識別できるようにします。
 - *version:* イベント スキーマのバージョン。 現在、値は必ず「1」になります。 今後のバージョンでは、スキーマの変更に合わせてこの値も変更になる可能性があります。
 - *scope:* ターゲットが CircleCI ドメイン モデル内のアカウントによって所有されている場合、アカウント フィールドにはアカウント名と ID が挿入されます。 このデータは JSON BLOB で、`id` と `type` が必ず含まれ、多くの場合 `name` も含まれます。
 - *success:* アクションが成功したかどうかを示すフラグ。
-- *request:* 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
+- *request:* 対象のイベントが外部リクエストによってトリガーされた場合に挿入されるデータ。 同じ外部リクエストから発生したイベントどうしを関連付けるために使用できます。 The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
 == CircleCI を安全に使用していただくためのチェックリスト
 

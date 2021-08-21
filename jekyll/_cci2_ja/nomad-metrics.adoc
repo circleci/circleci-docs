@@ -58,7 +58,7 @@ NOTE: Before proceeding, you should be logged into the EC2 Service section of th
 . [`Name (名前)`] フィールドを `nomad-builder-with-metrics-lc-DATE` などのわかりやすい名前で更新します。
 . [`Advanced Details (詳細情報)`] ドロップダウンを選択します。
 . 下のテキストフィールドから [`User data (ユーザーデータ)`] に起動設定スクリプトをコピー＆ペーストします。
-. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。
+. *重要：*10行目に Services Box のプライベート IP アドレスを入力してください （例：`export SERVICES_PRIVATE_IP="192.168.1.2"`)。 For example, `export SERVICES_PRIVATE_IP="192.168.1.2"`.
 . Select the `Skip to review` button and then the `Create launch configuration` button.
 
 ```bash
@@ -137,8 +137,7 @@ echo "--------------------------------------"
 if ! (echo $PUBLIC_IP | grep -qP "^[\d.]+$")
 then
   echo "Setting the IPv4 address below in /etc/circleci/public-ipv4."
-  echo "This address will be used in builds with \"Rebuild with SSH\"."
-  mkdir -p /etc/circleci
+  echo "This address will be used in builds with \"Rebuild with SSH\"." mkdir -p /etc/circleci
   echo $PRIVATE_IP | tee /etc/circleci/public-ipv4
 fi
 
@@ -225,7 +224,7 @@ docker run -d --name $CONTAINER_NAME \
 . In the description box at the bottom, select the `Edit` button.
 . ドロップダウンから、新たに作成した起動設定を選択します。
 . [`Save (保存する)`] ボタンを押します。
-. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。
+. この時点で、古い Nomad クライアントインスタンスはシャットダウンを開始し、  Nomad メトリクスを実行する新しい Nomad クライアントに置き換えられます。  They will be replaced with newer Nomad clients running Nomad Metrics.
 
 == StatsD メトリクス
 

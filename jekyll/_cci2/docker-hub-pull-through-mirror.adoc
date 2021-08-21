@@ -73,7 +73,7 @@ Under certain circumstances (especially when you are enabling https://docs.docke
 +
 We set up this registry as an independent server (i.e. outside of CircleCI boxes) to avoid load on this cache registry affecting other CircleCI Server services.
 +
-NOTE: *The server needs to be accessible by its hostname*. Namely, you must configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. In this guide we assume that the URL for the registry we are setting up is `https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). The URL will be needed later to arm Nomad clients and the VM Service.
+NOTE: *The server needs to be accessible by its hostname*. Namely, you must configure DNS accordingly so that the hostname (assume `your-mirror.example.com`) resolves to the IP address of the server correctly. In this guide we assume that the URL for the registry we are setting up is `\https://your-mirror.example.com` (be aware that the URL scheme is `http**_s_**`, not `http`). The URL will be needed later to arm Nomad clients and the VM Service.
 
 . *Obtain a TLS certificate for `your-mirror.example.com`* and *put the certificate and the private key into `/root/tls`* of the server.
 +
@@ -122,7 +122,7 @@ Technically, this can be automated. For example, if you are using Let's Encrypt 
 
 . Run the command below to *configure the `registry-mirrors` option for the Docker daemon*.
 +
-NOTE: Replace `http://192.0.2.1.or.https.your-mirror.example.com` with the URL of your pull through cache registry accordingly.
+NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` with the URL of your pull through cache registry accordingly.
 +
 [source,bash]
 ----
@@ -143,7 +143,7 @@ Follow the steps below on your services machine.
 
 . *Populate a customization script* to be loaded by vm-service. *Add the script below to `/etc/circleconfig/vm-service/customizations`*.
 +
-NOTE: Replace `http://192.0.2.1.or.https.your-mirror.example.com` in `DOCKER_MIRROR_HOSTNAME` variable with the URL of your pull through cache registry accordingly.
+NOTE: Replace `\http://192.0.2.1.or.https.your-mirror.example.com` in `DOCKER_MIRROR_HOSTNAME` variable with the URL of your pull through cache registry accordingly.
 +
 WARNING: This customization is only available in 2.19.0 version and later.
 

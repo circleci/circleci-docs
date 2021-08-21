@@ -1,0 +1,121 @@
+---
+version:
+- Server v3.x
+- サーバー管理
+---
+= CircleCI Server v3.x 外部サービスの構成
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== CircleCI Server の外部データベースと Vault のセットアップ
+このドキュメントでは、CircleCI Server 3.0 で使用する以下の外部サービスの構成方法について説明します。
+
+* PostgreSQL v12.6
+
+== PostgreSQL
+
+=== PostgreSQL のベスト プラクティス
+
+プライマリで障害が発生した場合の復旧や、バックアップのために、PostgreSQL レプリカは 2 つ以上実行することをお勧めします。 推奨される PostgreSQL マシンの仕様は以下のとおりです。
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+|1 日のアクティブ ユーザー数
+|PostgreSQL レプリカ数 
+|CPU   
+|RAM  
+|ディスク  
+|NIC 速度 
+
+|50 名未満                    
+|2                         
+|8 コア
+|16 GB 
+|100 GB 
+| 1 Gbps
+
+|50 ～ 250 名               
+|2                         
+|8 コア
+|16 GB 
+|200 GB 
+|1 Gbps
+
+|250 ～ 1000 名             
+|3                         
+|8 コア
+|32 GB 
+|500 GB 
+|10 Gbps
+
+|1000 ～ 5000 名            
+|3                         
+|8 コア
+|32 GB 
+|1 TB   
+|10 Gbps
+
+|5000 名超                  
+|3                         
+|8 コア
+|32 GB 
+|1 TB   
+|10 Gbps
+|===
+
+=== データベースの準備
+外部化済みの PostgreSQL インスタンスを新しい CircleCI Server 3.x システムの一部として構成する場合、PostgreSQL インスタンスにログインして以下のコマンドを実行することをお勧めします。 別の方法を使用する場合は、CircleCI Server 3.x の初回実行前に、データベースと拡張機能を必ず以下のように構成してください。
+
+```sql
+    CREATE DATABASE circle;
+    \connect circle
+    CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE contexts;
+    \connect contexts
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE conductor_production;
+    \connect conductor_production
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE contexts_service_production;
+    \connect contexts_service_production
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE cron_service_production;
+    \connect cron_service_production
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE domain;
+    CREATE DATABASE permissions;
+    \connect permissions
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE vms;
+    \connect vms
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE orbs;
+    \connect orbs
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE orb_analytics;
+    \connect orb_analytics
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE builds_service;
+    \connect builds_service
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    CREATE DATABASE distributor;
+    \connect distributor
+    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+```
+
+=== PostgreSQL のバックアップ
+PostgreSQL から、PostgreSQL 12 システムのバックアップと復元に関する公式ドキュメントがhttps://www.postgresql.org/docs/12/backup.html[こちら]で提供されています。
+
+CircleCI では、以下を行うことを強くお勧めしています。
+
+* 毎日バックアップを行う
+* バックアップを少なくとも 30 日間保持する
+* データベースには機密情報が含まれている場合があるので、バックアップには暗号化ストレージを使用する
+* CircleCI Server のアップグレードを行う前には毎回バックアップを行う

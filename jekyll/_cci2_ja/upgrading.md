@@ -5,14 +5,18 @@ category:
   - administration
 order: 11
 description: "CircleCI 1.0 Server から CircleCI 2.0 にアップグレードする方法"
+verison:
+  - Server v2.x
+  - Server Admin
 ---
 
-CircleCI Server のプライベート環境を 2.0 にアップグレードすると、ワークフロー、高機能の Docker Executor など、CircleCI 2.0 に搭載されたすべての追加機能を活用し、さらなる安定性を実現することができます。お客様のデータセンターまたはプライベート クラウドにおける 2.0 環境のセットアップについては、CircleCI ソリューション エンジニアがサポートします (Platinum サポート契約が必要です)。 まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
+Upgrading your private CircleCI Server installation to 2.0 gives you the ability to use Workflows, Docker as a first-class executor, and all of the additional features and stability built into CircleCI 2.0. Work with a CircleCI Solutions Engineer to set up a 2.0 installation in your datacenter or private cloud (requires Platinum Support). まずは[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)してください。
 
-## 2.0 設定ファイルの移行
+## Migrating config to 2.0
+{: #migrating-config-to-20 }
 
-1.0 から 2.0 への移行プロセスに関して各種のドキュメントをご用意しています。以下のリンクからご参照ください。
+Following are links to various documents we provide to assist in the 1.0 to 2.0 migration process:
 
-* [2.0 への移行のヒント](https://circleci.com/ja/docs/2.0/migration/)
-* [Linux プロジェクトの移行](https://circleci.com/ja/docs/2.0/migrating-from-1-2/)
-* [設定ファイル変換ツールの使用](https://circleci.com/ja/docs/2.0/config-translation/)
+* [2.0 への移行のヒント](https://circleci.com/docs/2.0/migration/)
+* [Linux プロジェクトの移行](https://circleci.com/docs/2.0/migrating-from-1-2/)
+* [Using the config-translator](https://circleci.com/docs/2.0/config-translation/)
