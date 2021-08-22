@@ -18,7 +18,7 @@ build_api_v1() {
 
 # We build our API v2 documentation from an openAPI spec. After fetching the spec we:
 # a) augment the spec using "snippet-enricher-cli" to add code-samples to the spec.
-# b) TODO: merge in any custom code samples we need to alter, using jq.
+# b) merge in any custom code samples we need to alter, using jq/sed
 # b) run the spec through redoc-cli, outputting a single html file.
 # c) move the file into our temporary workspace, created in .circleci/config.yml
 build_api_v2() {
@@ -30,6 +30,8 @@ build_api_v2() {
     ./node_modules/.bin/snippet-enricher-cli --targets="node_request,python_python3,go_native,shell_curl,ruby_native" --input=openapi.json  > openapi-with-examples.json
     echo "Merging in JSON patches to correct and augment the OpenAPI spec."
     jq -s '.[0] * .[1]' openapi-with-examples.json openapi-patch.json > openapi-final.json
+    echo "Swapping code samples to use the circle token header."
+    sed -i"" -e "s/authorization/Circle-Token/g" openapi-final.json; sed -i"" -e "s/Basic REPLACE_BASIC_AUTH/:CIRCLECI_TOKEN/g" openapi-final.json
     echo "Bundling with redoc cli."
     ./node_modules/.bin/redoc-cli bundle openapi-final.json
     echo "Moving build redoc file to api/v2"
