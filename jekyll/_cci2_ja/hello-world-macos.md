@@ -101,6 +101,17 @@ workflows:
       - test
       - build:
         requires:
+          test Read more: https://circleci.com/docs/2.0/artifacts/
+          path: app.zip
+          destination: app
+
+workflows:
+  version: 2
+  test_build:
+    jobs:
+      - test
+      - build:
+        requires:
           test
 ```
 

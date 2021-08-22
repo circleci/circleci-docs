@@ -58,6 +58,23 @@ Webhooks are set up on a per-project basis. To get started:
 
 <sup>1</sup>Only leave this unchecked for testing purposes.
 
+## Payload signature
+{: #payload-signature}
+
+You can provide an optional signing secret when setting up a webhook. If that
+secret is set, each outgoing HTTP request will contain a `circleci-signature`
+header, containing a comma-separated list of versioned signatures:
+
+```
+POST /uri HTTP/1.1
+Host: webhook-host
+circleci-signature: v1=signature1,v2=signature2,...
+```
+
+Currently only the "v1" signature will be provided, and it is computed by
+running `HMAC-SHA256` on the request body, using the configured signing secret as
+the secret key.
+
 ## Event Specifications
 {: #event-specifications}
 

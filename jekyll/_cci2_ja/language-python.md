@@ -127,9 +127,8 @@ jobs:
 
 実行の間隔を短縮するには、[依存関係またはソース コードのキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)を検討してください。
 
-**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
-
 {% raw %}
+
 ```yaml
 version: 2
 jobs:
@@ -152,11 +151,10 @@ jobs:
             - "/usr/local/bin"
             - "/usr/local/lib/python3.6/site-packages"
 ```
+
 {% endraw %}
 
-`run` ステップを使用して、テスト スイートを実行します。
-
-Use the `run` step to run your test suite.
+**メモ:** `chown` コマンドを使用して、依存関係の場所へのアクセスを CircleCI に許可します。
 
 ### テストの実行
 {: #run-tests }

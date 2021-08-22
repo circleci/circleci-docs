@@ -124,6 +124,9 @@ workflows:
       # Specify the "post-emulator-launch-assemble-command" command to override
       # the gradle command run, or set "wait-for-emulator" to false to disable
       # waiting for the emulator altogether.
+      # Specify the "post-emulator-launch-assemble-command" command to override
+      # the gradle command run, or set "wait-for-emulator" to false to disable
+      # waiting for the emulator altogether.
       - android/start-emulator:
           avd-name: myavd
           no-window: true

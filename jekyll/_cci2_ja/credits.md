@@ -70,7 +70,7 @@ Free プランの組織には、毎月 400,000 クレジットが無料で付与
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
-## Docker レイヤー キャッシュ
+## Docker layer caching
 {: #docker-layer-caching }
 
 Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC は Performance プランでのみ提供されます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)をご覧ください。

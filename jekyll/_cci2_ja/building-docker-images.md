@@ -44,7 +44,7 @@ The Remote Docker Environment has the following technical specifications (for Ci
 {: class="table table-striped"}
 
 ### 例
-ビルド中に何が行われているのか詳しく見てみましょう。
+{: #example }
 {:.no_toc}
 
 ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
@@ -75,7 +75,7 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
+version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference steps: - checkout # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
@@ -268,10 +268,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[プライマリ コンテナ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
-[ジョブ空間]({{ site.baseurl }}/2.0/glossary/#job-space)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#job-space)
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)
+[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
 
 [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)

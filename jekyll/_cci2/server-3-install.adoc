@@ -347,7 +347,7 @@ AWS
 ```bash
 $ aws ec2 create-security-group \
     --vpc-id "<<VPC ID>>" \
-    --description "CircleCI's VM Service security group" \
+    --description "CircleCI VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
     --group-id "<< SG ID from create-security-group >>" \

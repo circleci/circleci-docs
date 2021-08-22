@@ -169,7 +169,7 @@ CircleCI は、次世代言語イメージに対していくつかのバリア�
 {: #legacy-language-images }
 {:.no_toc}
 
-従来の言語イメージは、一般的なプログラミング言語に対応するコンビニエンス イメージです。 よく使われる言語と[インストール済みツール](#pre-installed-tools)の両方を組み合わせたイメージとなっています。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。 したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+The legacy language images are convenience images for common programming languages. These images include both the relevant language and [commonly-used tools](#pre-installed-tools). 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。 したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
 
 CircleCI は、以下の言語に対応する従来のイメージを提供しています。
 

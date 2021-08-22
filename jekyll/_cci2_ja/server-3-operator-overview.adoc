@@ -16,7 +16,7 @@ version:
 
 CircleCI Server では、https://www.nomadproject.io/[Nomad スケジューラ]を使用して CI ジョブのスケジュールを設定します。 Nomad コントロール プレーンは Kubernetes 内で動作するのに対し、Nomad クライアントはクラスタ外部にプロビジョニングされます。 Nomad のクライアントは、Nomad のコントロール プレーンと出力プロセッサ、VM サービスにアクセスする必要があります。
 
-CircleCI Server は Nomad クライアント上で Docker ジョブを実行しますが、専用の VM でジョブを実行することもできます。 これらの VM ジョブは Nomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、リモート Docker ジョブ用にポート 2376 で VM にアクセスできる必要があります。
+CircleCI Server は Nomad クライアント上で Docker ジョブを実行しますが、専用の VM でジョブを実行することもできます。 これらのVMジョブはNomad クライアントによって制御されます。そのため Nomad クライアントは、SSH 接続用にポート 22、リモート Docker ジョブ用にポート 2376 で VM にアクセスできる必要があります。
 
 ジョブのアーティファクトと出力は、Nomad ジョブからオブジェクト ストレージ (S3、GCS、またはその他のサポートされているオプション) に直接送信されます。
 オブジェクト ストレージには、監査ログやアプリケーションのその他のアイテムも保存されます。そのため、Kubernetes クラスタと Nomad クライアントの両方がオブジェクト ストレージにアクセスできる必要があります。
@@ -34,16 +34,16 @@ Nomad クライアントは実行後に状態を保持しないため、必要�
 
 すべてのビルドを処理できる十分な数の Nomad クライアントが確実に実行されるようにするには、キューイングされているビルドを追跡し、必要に応じて Nomad クライアント マシンの数を増やして負荷を分散させます。 メトリクス追跡の詳細についてはxref:server-3-operator-metrics-and-monitoring.adoc[メトリクスと監視に関するページ]をご覧ください。
 
-Nomad クライアントのインスタンス タイプで利用可能なリソースがジョブのリソース クラスで必要な量に足りない場合、ジョブは保留状態のままになります。  Nomad クライアントのインスタンス タイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソース クラスが制限されます。  https://circleci.com/docs/ja/2.0/executor-types/#available-docker-resource-classes[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。  デフォルトのインスタンス タイプでは、最大で `xlarge` リソース クラスを実行できます。
+ジョブのリソース クラスで必要なリソースがNomad クライアントのインスタンス タイプで利用可能な量を超える場合、ジョブは保留状態のままになります。  Nomad クライアントのインスタンス タイプを小さいものにすればコストを削減できますが、CircleCI で使用できる Docker リソース クラスが制限されます。  https://circleci.com/docs/ja/2.0/executor-types/#available-docker-resource-classes[利用可能な Docker リソース クラス]を参照して、最適なものを判断してください。  デフォルトのインスタンス タイプでは、最大で `xlarge` リソース クラスを実行できます。
 
 Nomad クライアントのリソースを最適に使用するためのオプションについては、https://www.nomadproject.io/docs/install/production/requirements#resources-ram-cpu-etc[Nomad ドキュメント]を参照してください。
 
-NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/64 CPU です。 使用する Nomad クライアント マシンのサイズを大きくしたい場合は、CircleCI のアカウント担当者に問い合わせてください。
+NOTE: Nomad クライアント マシンの最大サイズは RAM 128GB/64 CPU です。 これよりも大きなNomad クライアント マシンを使用したい場合は、CircleCI のアカウント担当者にお問い合わせください。
 
 Nomad のポート要件の詳細については、「https://circleci.com/docs/ja/2.0/server-3-install-hardening-your-cluster/?section=server-administration#nomad-clients[Nomad クライアント]」セクションをご覧ください。
 
 ### GitHub
-CircleCI では、GitHub または GitHub Enterprise を ID プロバイダーとして使用しています。 GitHub Enterprise では、https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML または SCIM] を使って、外部の ID プロバイダーでユーザーを管理することができます。
+CircleCI では、GitHub または GitHub Enterprise を ID プロバイダーとして使用しています。 また GitHub Enterprise では、https://docs.github.com/en/github-ae@latest/admin/authentication/about-identity-and-access-management-for-your-enterprise[SAML または SCIM] を使って、外部の ID プロバイダーでユーザーを管理することができます。
 
 NOTE: CircleCI では、セットアップ後の URL やバックエンドの GitHub インスタンスの変更には対応していません。
 

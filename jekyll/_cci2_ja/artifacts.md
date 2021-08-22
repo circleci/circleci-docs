@@ -68,7 +68,7 @@ jobs:
           path: /tmp/artifacts
 ```
 
-この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。    
+この `store_artifacts` ステップによって、ファイル (`/tmp/artifact-1`) とディレクトリ (`/tmp/artifacts`) の 2 つのビルド アーティファクトがアップロードされます。 アップロードが正常に完了すると、ブラウザー内の**[Job (ジョブ)] ページ**の **[Artifacts (アーティファクト)]** タブにアーティファクトが表示されます。 大量のアーティファクトをまとめてアップロードする場合は、[単一の圧縮ファイルとしてアップロード](https://support.circleci.com/hc/en-us/articles/360024275534?input_string=store_artifacts+step)することで高速化できます。     
 単一のジョブで実行可能な `store_artifacts` ステップの数に制限はありません。
 
 
@@ -159,10 +159,9 @@ export CIRCLE_TOKEN=':your_token'
 curl -H "Circle-Token: $CIRCLE_TOKEN" https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/$build_number/artifacts \
    | grep -o 'https://[^"]*' \
    | wget --verbose --header "Circle-Token: $CIRCLE_TOKEN" --input-file -
-
 ```
 
-コマンドでビルドのすべてのアーティファクト詳細をフェッチし、それを grep にパイプして URL を抽出します。 最後に、wget を使用してアーティファクトをターミナル内のカレント ディレクトリにダウンロードします。
+Similarly, if you want to download the _latest_ artifacts of a build, replace the curl call with a URL that follows this scheme:
 
 ```bash
 curl https://circleci.com/api/v1.1/project/:vcs-type/:username/:project/latest/artifacts?circle-token=:your_token
