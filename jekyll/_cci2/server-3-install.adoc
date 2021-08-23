@@ -543,12 +543,22 @@ This section can be left with its default values until <<Step 3 - Obtain Load Ba
 #### Enable Mutual TLS (mTLS)
 mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
 
+#### Preflight Checks
 When all required information has been provided, click the *Continue* button and your CircleCI installation will be put
-through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. When completed successfully,
-you should see something like the following and you can continue to the next step:
+through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. Currently we check for
+the following:
+
+* Kubernetes Version is 1.16.0 or greater
+* The cluster has 30Gi of total memory or greater
+* Total vCPUs in the cluster is 8 or greater
+* The cluster has a default storage class
+
+When completed successfully, you should see something like the following and you can continue to the next step:
 
 .Sever v{serverversion} Preflight Checks
 image::preflight-checks.png[Preflight Checks]
+
+However, should any of these checks fail the issue will be highlighted, giving you an opportunity to address these issues before deployment.
 
 ## Step 3 - Obtain Load Balancer IPs
 Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
