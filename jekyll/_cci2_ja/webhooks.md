@@ -54,6 +54,73 @@ Webhooks are set up on a per-project basis. To get started:
 
 <sup>1</sup>Only leave this unchecked for testing purposes.
 
+## Webhook Validation
+
+You should validate incoming webhooks to verify that they are coming from
+CircleCI. To support this, when creating a webhook, you can optionally provide a
+secret token. Each outgoing HTTP request to your service will contain a
+`circleci-signature` header. This header will consist of a comma-separated list
+of versioned signatures.
+
+```
+POST /uri HTTP/1.1
+Host: your-webhook-host
+circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
+```
+
+Currently, the latest (and only) signature version is v1. You should *only*
+check the latest signature type to prevent downgrade attacks.
+
+The v1 signature is the HMAC-SHA256 digest of the request body, using the
+configured signing secret as the secret key.
+
+Here are some example signatures for given request bodies:
+
+| Body                           | Secret Key       | Signature                                                          |
+| ------------------------------ | ---------------- | ------------------------------------------------------------------ |
+| `hello world`                  | `secret`         | `734cc62f32841568f45715aeb9f4d7891324e6d948e4c6c60c0621cdac48623a` |
+| `lalala`                       | `another-secret` | `daa220016c8f29a8b214fbfc3671aeec2145cfb1e6790184ffb38b6d0425fa00` |
+| `an-important-request-payload` | `hunter123`      | `9be2242094a9a8c00c64306f382a7f9d691de910b4a266f67bd314ef18ac49fa` |
+{: class="table table-striped"}
+
+The following is an example of how you might validate signatures in Python:
+
+```
+import hmac
+
+def verify_signature(secret, headers, body):
+    # get the v1 signature from the `circleci-signature` header
+    signature_from_header = {
+        k: v for k, v in [
+            pair.split('=') for pair in headers['circleci-signature'].split(',')
+        ]
+    }['v1']
+
+    # Run HMAC-SHA256 on the request body using the configured signing secret
+    valid_signature = hmac.new(bytes(secret, 'utf-8'), bytes(body, 'utf-8'), 'sha256').hexdigest()
+
+    # use constant time string comparison to prevent timing attacks
+    return hmac.compare_digest(valid_signature, signature_from_header)
+
+# the following will return `True`
+verify_signature(
+    'secret',
+    {
+        'circleci-signature': 'v1=773ba44693c7553d6ee20f61ea5d2757a9a4f4a44d2841ae4e95b52e4cd62db4'
+    },
+    'foo',
+)
+
+# the following will return `False`
+verify_signature(
+    'secret',
+    {
+        'circleci-signature': 'v1=not-a-valid-signature'
+    },
+    'foo',
+)
+```
+
 ## Event Specifications
 {: #event-specifications}
 
