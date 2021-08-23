@@ -33,24 +33,85 @@ We maintain a reference Go project to show how to build on CircleCI 2.0:
 {% raw %}
 
 ```yaml
-- run: make
+version: 2 # use CircleCI 2.0
+jobs: # basic units of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      - image: circleci/golang:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment: # environment variables for primary container
+          POSTGRES_USER: circleci-demo-go
+          POSTGRES_DB: circle_test
+
+    parallelism: 2
+
+    environment: # environment variables for the build itself
+      TEST_RESULTS: /tmp/test-results # path to where test results will be saved
+
+    steps: # steps that comprise the `build` job
+      - checkout # check out source code to working directory
+      - run: mkdir -p $TEST_RESULTS # create the test results directory
+
+      - restore_cache: # restores saved cache if no changes are detected since last run
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
+
+      #  Wait for Postgres to be ready before proceeding
+      - run:
+          name: Waiting for Postgres to be ready
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Run unit tests
+          environment: # environment variables for the database url and path to migration files
+            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
+
+          # store the results of our tests in the $TEST_RESULTS directory
+          command: |
+            PACKAGE_NAMES=$(go list ./... | circleci tests split --split-by=timings --timings-type=classname)
+            gotestsum --junitfile ${TEST_RESULTS}/gotestsum-report.xml -- $PACKAGE_NAMES
+
+      - run: make # pull and build dependencies for the project
 
       - save_cache:
-          key: v1-pkg-cache
+          key: go-mod-v4-{{ checksum "go.sum" }}
           paths:
-            - ~/.cache/go-build
+            - "/go/pkg/mod"
 
       - run:
-          name: サービスの開始
+          name: Start service
           environment:
-            CONTACTS_DB_URL: "postgres://root@localhost:5432/circle_test?sslmode=disable"
-            CONTACTS_DB_MIGRATIONS: /go/src/github.com/CircleCI-Public/circleci-demo-go/db/migrations
+            CONTACTS_DB_URL: "postgres://circleci-demo-go@localhost:5432/circle_test?sslmode=disable"
+            CONTACTS_DB_MIGRATIONS: /home/circleci/project/db/migrations
           command: ./workdir/contacts
-          background: true
+          background: true # keep service running and proceed to next step
 
       - run:
-          name: サービスが稼働していることのバリデーション
-          command: curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
+          name: Validate service is working
+          command: |
+            sleep 5
+            curl --retry 10 --retry-delay 1 -X POST --header "Content-Type: application/json" -d '{"email":"test@example.com","name":"Test User"}' http://localhost:8080/contacts
+
+      - store_artifacts: # upload test summary for display in Artifacts
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results: # upload test results for display in Test Summary
+          path: /tmp/test-results
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+      - build
 ```
 
 {% endraw %}
@@ -90,10 +151,22 @@ version: 2
 
 
 ```yaml
-version: 2
-jobs:
-  build:
-    working_directory: /go/src/github.com/CircleCI-Public/circleci-demo-go
+jobs: # basic units of work in a run
+  build: # runs not using Workflows must have a `build` job as entry point
+    docker: # run the steps with Docker
+      # CircleCI Go images available at: https://hub.docker.com/r/circleci/golang/
+      - image: circleci/golang:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # CircleCI PostgreSQL images available at: https://hub.docker.com/r/circleci/postgres/
+      - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+        environment: # environment variables for primary container
+          POSTGRES_USER: circleci-demo-go
+          POSTGRES_DB: circle_test
 ```
 
 Docker をセットアップしたら、テスト結果のパスを格納しておく環境変数を設定します。 Note, this environment variable is set for the entirety of the _job_ whereas the environment variables set for `POSTGRES_USER` and `POSTGRES_DB` are specifically for the Postgres container.
