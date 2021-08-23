@@ -260,8 +260,8 @@ isn't associated with a git commit.
 | target_repository_url  | no              | URL to the repository building the commit                                                                          |
 | origin_repository_url  | no              | URL to the repository where the commit was made (this will only be different in the case of a forked pull request) |
 | revision               | no              | Git commit being built                                                                                             |
-| commit.subject         | no              | Commit subject (first line of the commit message)                                                                  |
-| commit.body            | no              | Commit body (subsequent lines of the commit message)                                                               |
+| commit.subject         | no              | Commit subject (first line of the commit message). Note that long commit subjects may be truncated.                |
+| commit.body            | no              | Commit body (subsequent lines of the commit message). Note that long commit bodies may be truncated.               |
 | commit.author.name     | no              | Name of the author of this commit                                                                                  |
 | commit.author.email    | no              | Email address of the author of this commit                                                                         |
 | commit.authored\_at    | no              | Timestamp of when the commit was authored                                                                          |
