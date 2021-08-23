@@ -43,60 +43,60 @@ Webhook はプロジェクトごとにセットアップされます。 以下�
 1. Webhook フォームに入力します（フィールドとその目的は以下の表をご覧ください）。
 1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event (Ping イベントをテストする) ** をクリックしてテストイベントをディスパッチします。
 
-| フィールド           | 必須？ | 説明                                                                                          |
-| --------------- | --- | ------------------------------------------------------------------------------------------- |
-| Webhook 名       | 必須  | Webhook の名前                                                                                 |
-| URL             | 必須  | Webhook が Post リクエストを送信する URL                                                               |
-| 証明書の検証          | 必須  | Ensure the receiving host has a valid SSL certificate before sending an event <sup>1</sup>. |
-| Secret token    | Y   | Used by your API/platform to validate incoming data is from CircleCI.                       |
-| Select an event | Y   | You must select at least one event that will trigger a webhook.                             |
+| フィールド       | 要否 | 説明                                                           |
+| ----------- | -- | ------------------------------------------------------------ |
+| Webhook 名   | 必須 | Webhook の名前                                                  |
+| URL         | 必須 | Webhook が Post リクエストを送信する URL                                |
+| 証明書の検証      | 必須 | イベント<sup>1</sup>を送信する前に受信ホストが有効な SSL 証明書を保持していることを確認する。      |
+| シークレット トークン | 必須 | 受信データが CircleCI からのデータかどうかを検証するために、ご自身の API または プラットフォームで使用。 |
+| イベントの選択     | 必須 | Webhook をトリガーするイベントを少なくとも１つ選択しなければなりません。                     |
 {: class="table table-striped"}
 
-<sup>1</sup>Only leave this unchecked for testing purposes.
+<sup>1</sup> こちらはテストの場合のみチェックボックスをオフのままにします。
 
-## Event Specifications
+## イベントの仕様
 {: #event-specifications}
 
-CircleCI currently offers webhooks for the following events:
+CircleCI では現在以下のイベントの Webhook が利用できます。
 
-| Event type         | Description                             | Potential statuses                                       | Included sub-entities                          |
-| ------------------ | --------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
-| workflow-completed | A workflow has reached a terminal state | "success", "failed", "error", "canceled", "unauthorized" | project, organization, workflow, pipeline      |
-| job-completed      | A job has reached a terminal state      | "success", "failed", "canceled", "unauthorized"          | project, organization, workflow, pipeline, job |
+| イベントタイプ            | 説明                 | 状態の例                          | 含まれる構成要素                    |
+| ------------------ | ------------------ | ----------------------------- | --------------------------- |
+| workflow-completed | ワークフローが終了状態になっている。 | "成功"、"失敗"、"エラー"、"キャンセル"、"未承認" | プロジェクト、組織、ワークフロー、パイプライン     |
+| job-completed      | ジョブが終了状態になっている。    | "成功"、"失敗"、"エラー"、"キャンセル"、"未承認" | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
 {: class="table table-striped"}
 
-## Common top level keys
+## 共通のトップ レベル キー
 {: #common-top-level-keys}
 
-Each Webhook will have some common data as part of the event:
+イベントの一部として、各Webhook に共通するデータがあります。
 
-| Field       | Description                                                                                        | Type   |
-| ----------- | -------------------------------------------------------------------------------------------------- | ------ |
-| id          | ID used to uniquely identify each event from the system (the client can use this to dedupe events) | String |
-| happened_at | ISO 8601 timestamp representing when the event happened                                            | String |
-| webhook     | A map of metadata representing the webhook that was triggered                                      | Map    |
+| フィールド       | 説明                                                         | タイプ |
+| ----------- | ---------------------------------------------------------- | --- |
+| id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。） | 文字列 |
+| happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                         | 文字列 |
+| webhook     | トリガーされた Webhook を表すメタデータのマップ                               | マップ |
 {: class="table table-striped"}
 
-**Note:** The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
+**注: ** イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずにWebhook のペイロードのマップに追加される可能性があります。
 
 
-## Common sub-entities
+## 共通のサブエンティティ
 {: #common-sub-entities}
 
-The next sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will share often share data with other webhooks - we refer to these as common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contains maps of data for your *project, organization, job, workflow and pipeline*.
+ここでは CicrcleCI の Webhook が提供するさまざまなイベントのペイロードについて説明します。 これらの Webhook イベントのスキーマは、多くの場合共有データを他の Webhook と共有します。Circle CI では、このことをデータの共通マップとして「サブエンティティー」と呼びます。 例えば、`job-completed` 状態の Webhook のイベント ペイロードを受信した場合、それにはご自身の*プロジェクト、組織、ジョブ、ワークフロー、およびパイプライン* のデータマップが含まれます。
 
-Let's look at some of the common sub-entities that will appear across various webhooks:
+以下は、さまざまな Webhook で表示される共通のサブエンティティの例です。
 
-### Project
+### プロジェクト
 {: #project}
 
-Data about the project associated with the webhook event.
+Webhook のイベントに関連するプロジェクトに関するデータ
 
-| Field | Always present? | Description                                                                                                   |
-| ----- | --------------- | ------------------------------------------------------------------------------------------------------------- |
-| id    | yes             | Unique ID of the project                                                                                      |
-| slug  | yes             | String that can be used to refer to a specific project in many of CircleCI's APIs (e.g. "gh/circleci/web-ui") |
-| name  | yes             | Name of the project (e.g. "web-ui")                                                                           |
+| フィールド | 表示   | 説明                                                                                                            |
+| ----- | ---- | ------------------------------------------------------------------------------------------------------------- |
+| id    | 常に表示 | プロジェクトの一意の ID                                                                                                 |
+| slug  | 常に表示 | String that can be used to refer to a specific project in many of CircleCI's APIs (e.g. "gh/circleci/web-ui") |
+| name  | yes  | Name of the project (e.g. "web-ui")                                                                           |
 {: class="table table-striped"}
 
 ### Organization
