@@ -159,6 +159,17 @@ CircleCI currently offers webhooks for the following events:
 | job-completed      | A job has reached a terminal state                       | "success", "failed", "canceled", "unauthorized"          | project, organization, workflow, pipeline, job |
 {: class="table table-striped"}
 
+## Headers
+{: #headers}
+
+Every webhook event HTTP request will contain the following headers:
+
+| Header              | Description                                                            |
+| ------------------- | ---------------------------------------------------------------------- |
+| user-agent          | Currently, always `CircleCI-Webhook/1.0`.                              |
+| circleci-event-type | The `type` of the event (e.g. `workflow-completed`) |
+{: class="table table-striped"}
+
 ## Common top level keys
 {: #common-top-level-keys}
 
