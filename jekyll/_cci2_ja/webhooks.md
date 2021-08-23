@@ -1,55 +1,55 @@
 ---
 layout: classic-docs
-title: "Webhooks"
-short-title: "Using Webhooks to subscribe to CircleCI events"
-description: "Using Webhooks to subscribe to CircleCI events"
+title: "Webhook"
+short-title: "Webhook を使って CircleCI のイベントの最新情報を受け取る"
+description: "Webhook を使って CircleCI のイベントの最新情報を受け取る"
 version:
   - Cloud
 ---
 
-## Overview
+## 概要
 {: #overview}
 
-A webhook allows you to connect a platform you manage (either an API you create yourself, or a third party service) to a stream of future _events_.
+Webhookにより、お客様が管理しているプラットフォーム（ご自身で作成した API またはサードパーティのサービス）と今後の一連の_イベント_を連携することができます。
 
-Setting up a Webhook on CircleCI enables you to receive information (referred to as _events_) from CircleCI, as they happen. This can help you avoid polling the API or manually checking the CircleCI web application for desired information.
+CircleCI 上で Webhook を設定することにより、CircleCI から情報 (_イベント_ と呼ばれます) をリアルタイムで受け取ることができます。 これにより、必要な情報を得るために API をポーリングしたり、 CircleCI の Web アプリケーションを手動でチェックする必要がなくなります。
 
-The rest of this document will detail how to set up a webhook as well as the shape of events that will be sent to your webhook destination.
+ここでは、Webhook の設定方法および Webhook の送信先にどのような形でイベントが送信されるかも詳しく説明します。
 
-**Note:** The Webhooks feature on CircleCI is currently in preview; documentation and features may change or be added to.
+**注: ** CircleCI の Webhook 機能は、現在プレビュー版であり、ドキュメントや機能が変更または追加される場合があります。
 
-## Use cases
+## ユースケース
 {: #use-cases}
 
-Webhooks can be leveraged for various purposes. Some possible examples might include:
+Webhook は多くの目的にご活用いただけます。 具体的な例は以下のとおりです。
 
-- Building a custom dashboard to visualize or analyze workflow/job events.
-- Sending data to incident management tools (such as Pagerduty).
-- Use tools like [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) to capture data and visualize it.
-- Send events to communication apps, such as Slack.
-- Use webhooks to be alerted when a workflow is cancelled, then use the API to rerun the workflow.
-- Trigger internal notification systems to alert people when workflows/jobs complete.
-- Build your own automation plugins and tools.
+- カスタム ダッシュボードをビルドしてワークフローやジョブのイベントの可視化または分析を行う。
+- インシデント管理ツール（例：Pagerduty）にデータを送信する。
+- [Airtable]({{site.baseurl}}/2.0/webhooks-airtable) などのツールを使ってデータをキャプチャし可視化する。
+- Slack などのコミュニケーション アプリにイベントを送信する。
+- ワークフローがキャンセルされた場合に Webhook を使ってアラートを送信し、API を使ってそのワークフローを再実行する。
+- ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
+- 独自の自動化ブラグインやツールをビルドする。
 
-## Setting up a hook
+## フックのセットアップ
 {: #setting-up-a-hook}
 
-Webhooks are set up on a per-project basis. To get started:
+Webhook はプロジェクトごとにセットアップされます。 以下の方法で開始します。
 
-1. Visit a specific project you have setup on CircleCI.
-1. Click on **Project Settings**.
-1. In the sidebar of your Project Settings, click on **Webhooks**.
-1. Click **Add Webhook**.
-1. Fill out the Webhook form (the table below describes the fields and their intent):
-1. Provided your receiving API or third party service is set up, click **Test Ping Event** to dispatch a test event.
+1. CircleCI 上にセットアップしたプロジェクトにアクセスします。
+1. **Project Settings (プロジェクトの設定) ** をクリックします。
+1. Project Settings のサイドバーで、**Webhook** をクリックします。
+1. **Add Webhook (Webhook の追加）** をクリックします。
+1. Webhook フォームに入力します（フィールドとその目的は以下の表をご覧ください）。
+1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event (Ping イベントをテストする) ** をクリックしてテストイベントをディスパッチします。
 
-| Field                  | Required? | Intent                                                                                      |
-| ---------------------- | --------- | ------------------------------------------------------------------------------------------- |
-| Webhook name           | Y         | The name of your webhook                                                                    |
-| URL                    | Y         | The URL the webhook will make POST requests to.                                             |
-| Certificate Validation | Y         | Ensure the receiving host has a valid SSL certificate before sending an event <sup>1</sup>. |
-| Secret token           | Y         | Used by your API/platform to validate incoming data is from CircleCI.                       |
-| Select an event        | Y         | You must select at least one event that will trigger a webhook.                             |
+| フィールド           | 必須？ | 説明                                                                                          |
+| --------------- | --- | ------------------------------------------------------------------------------------------- |
+| Webhook 名       | 必須  | Webhook の名前                                                                                 |
+| URL             | 必須  | Webhook が Post リクエストを送信する URL                                                               |
+| 証明書の検証          | 必須  | Ensure the receiving host has a valid SSL certificate before sending an event <sup>1</sup>. |
+| Secret token    | Y   | Used by your API/platform to validate incoming data is from CircleCI.                       |
+| Select an event | Y   | You must select at least one event that will trigger a webhook.                             |
 {: class="table table-striped"}
 
 <sup>1</sup>Only leave this unchecked for testing purposes.
