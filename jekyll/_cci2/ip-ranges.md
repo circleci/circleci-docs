@@ -100,14 +100,14 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 
 - 18.214.70.5
 - 52.20.166.242
-- 35.174.249.131
 - 18.214.156.84
 - 54.236.156.101
-- 3.210.128.175
 - 52.22.215.219
 - 52.206.105.184
 - 52.6.77.249 
 - 34.197.216.176
+- 35.174.249.131
+- 3.210.128.175
 
 **Upcoming Changes to list of IP address ranges** (Last Updated: 08/23/2021):
 Four new IP address ranges added to list of IP address ranges for core services on 08/23.
