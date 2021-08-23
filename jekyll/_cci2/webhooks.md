@@ -35,6 +35,28 @@ Webhooks can be leveraged for various purposes. Some possible examples might inc
 - Trigger internal notification systems to alert people when workflows/jobs complete.
 - Build your own automation plugins and tools.
 
+## Communication Protocol
+{: #communication-protocol }
+
+A webhook is sent whenever an event occurs on the CircleCI platform.
+
+A webhook is sent using an HTTP POST, to the URL that was registered when the webhook was created, with a body encoded using JSON.
+
+CircleCI expects that the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, we will assume that delivery has failed, and we will retry at a later time. The timeout period is currently 5 seconds, but is subject to change during the preview period. The exact details of the retry policy are not currently documented, and are subject to change during the preview period. Please [get in touch with our team if you have feedback about timeouts and retries](https://circleci.canny.io/webhooks).
+
+### Headers
+{: #headers }
+
+A number of HTTP headers are set on webhooks, as detailed in the table below.
+
+Header Name | Value
+--- | ---
+Content-Type | `application/json`
+User-Agent | A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`). The value is subject to change during the preview period.
+Circleci-Event-Type | The type of event, (`workflow-completed`, `job-completed`, etc.)
+Circleci-Signature | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.
+{: class="table table-striped"}
+
 ## Setting up a hook
 {: #setting-up-a-hook}
 
