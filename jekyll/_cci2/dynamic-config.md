@@ -50,6 +50,8 @@ To get started with Dynamic Config in CircleCI:
 
 Now, your project has the ability to dynamically generate and update configuration.
 
+Note: While the above will make the feature available, your static `config.yml` will continue to work as normal. This feature won't start to be utilized until you add the key `setup` with a value of `true` to that `config.yml`.
+
 When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation)
 [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute
 workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
