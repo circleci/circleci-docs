@@ -92,98 +92,98 @@ CircleCI では現在以下のイベントの Webhook が利用できます。
 
 Webhook のイベントに関連するプロジェクトに関するデータ
 
-| フィールド | 表示   | 説明                                                                                                            |
-| ----- | ---- | ------------------------------------------------------------------------------------------------------------- |
-| id    | 常に表示 | プロジェクトの一意の ID                                                                                                 |
-| slug  | 常に表示 | String that can be used to refer to a specific project in many of CircleCI's APIs (e.g. "gh/circleci/web-ui") |
-| name  | yes  | Name of the project (e.g. "web-ui")                                                                           |
+| フィールド | 表示   | 説明                                                                     |
+| ----- | ---- | ---------------------------------------------------------------------- |
+| id    | 常に表示 | プロジェクトの一意の ID                                                          |
+| slug  | 常に表示 | 多くの CircleCI の API の中で特定のプロジェクト（例えば、gh/circleci/web-ui）を参照するために使用する文字列 |
+| name  | 常に表示 | プロジェクト名（例：web-ui）                                                      |
 {: class="table table-striped"}
 
-### Organization
+### 組織
 {: #organization}
 
-Data about the organization associated with the webhook event.
+Webhook イベントに関連する組織に関するデータ
 
-| Field | Always present? | Description                                |
-| ----- | --------------- | ------------------------------------------ |
-| id    | yes             | Unique ID of the organization              |
-| name  | yes             | Name of the organization (e.g. "circleci") |
+| フィールド | 表示   | 説明               |
+| ----- | ---- | ---------------- |
+| id    | 常に表示 | 組織の一意の ID        |
+| name  | 常に表示 | 組織名 (例：CircleCI) |
 {: class="table table-striped"}
 
-### Job
+### ジョブ
 {: #job}
 
-A job typically represents one phase in a CircleCI workload (e.g. "build", "test", or "deploy") and contains a series of steps.
+通常、CircleCI のワークロードにおけるある期間を表し（例：「ビルド」、「テスト」、または「デプロイ」）、一連のステップを含むジョブ。
 
-| Field         | Always present? | Description                                                                                                  |
-| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------ |
-| id            | yes             | Unique ID of the job                                                                                         |
-| number        | yes             | An auto-incrementing number for the job, sometimes used in CircleCI's APIs to identify jobs within a project |
-| name          | yes             | Name of the job as defined in .circleci/config.yml                                                           |
-| status        | yes             | Current status of the job                                                                                    |
-| started\_at | yes             | When the job started running                                                                                 |
-| stopped\_at | no              | When the job reached a terminal state (if applicable)                                                        |
+| フィールド         | 表示   | 説明                                                              |
+| ------------- | ---- | --------------------------------------------------------------- |
+| id            | 常に表示 | ジョブの一意の ID                                                      |
+| number        | 常に表示 | ジョブの自動インクリメント番号。CircleCI の API でプロジェクト内のジョブを識別するために使用する場合があります。 |
+| name          | 常に表示 | .circleci/config.yml で定義されているジョブ名                               |
+| status        | 常に表示 | ジョブの現在の状態                                                       |
+| started\_at | 常に表示 | ジョブの実行が開始された時間                                                  |
+| stopped\_at | 適宜   | ジョブが終了状態になった時（該当する場合）                                           |
 {: class="table table-striped"}
 
 
-### Workflow
+### ワークフロー
 {: #workflow}
 
-Workflows contain many jobs, which can run in parallel and/or have dependencies between them. A single git-push can trigger zero or more workflows, depending on the CircleCI configuration (but typically one will be triggered).
+ワークフローには多くのジョブが含まれ、それらは並列で実行される、およびまたは依存関係を持っています。 １回のgit-push で、CircleCI の構成に応じて、ゼロ以上のワークフローをトリガーすることができます（通常は１つのワークフローがトリガーされます）。
 
 
-| Field         | Always present? | Description                                                        |
-| ------------- | --------------- | ------------------------------------------------------------------ |
-| id            | Yes             | Unique ID of the workflow                                          |
-| name          | Yes             | Name of the workflow as defined in .circleci/config.yml            |
-| status        | No              | Current status of the workflow. Not included in job-level webhooks |
-| created\_at | Yes             | When the workflow was created                                      |
-| stopped_at    | No              | When the workflow reached a terminal state (if applicable)         |
-| url           | Yes             | URL to the workflow in CircleCI's UI                               |
+| フィールド         | 常に表示 | 説明                                      |
+| ------------- | ---- | --------------------------------------- |
+| id            | ○    | ワークフローの一意の ID                           |
+| name          | ○    | .circleci/config.yml で定義されているワークフロー名    |
+| status        | ×    | ワークフローの現在の状態. ジョブレベルの Webhook には含まれません。 |
+| created\_at | ○    | ワークフローが作成された時                           |
+| stopped_at    | ×    | ワークフローが終了状態になった時間（該当する場合）               |
+| url           | ○    | CircleCI の UI にあるワークフローへの URL           |
 {: class="table table-striped"}
 
-### Pipeline
+### パイプライン
 {: #pipeline}
 
-Pipelines are the most high-level unit of work, and contain zero or more workflows. A single git-push always triggers up to one pipeline. Pipelines can also be triggered manually through the API.
+パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
 
-| Field         | Always present? | Description                                                                       |
-| ------------- | --------------- | --------------------------------------------------------------------------------- |
-| id            | Yes             | Globally unique ID of the pipeline                                                |
-| number        | Yes             | Number of the pipeline, which is auto-incrementing / unique per project           |
-| created\_at | Yes             | When the pipeline was created                                                     |
-| trigger       | Yes             | A map of metadata about what caused this pipeline to be created -- see below      |
-| vcs           | No              | A map of metadata about the git commit associated with this pipeline -- see below |
+| フィールド         | 常に表示 | 説明                                         |
+| ------------- | ---- | ------------------------------------------ |
+| id            | ○    | グローバルに一意なパイプラインの ID                        |
+| number        | ○    | バイプラインの番号（自動インクリメントまたはプロジェクトごとに一意）         |
+| created\_at | ○    | パイプラインが作成された時間                             |
+| trigger       | ○    | このパイプラインが作成された原因に関するメタデータ マップ（以下を参照）       |
+| vcs           | ×    | このパイプラインに関連する Git コミットに関するメタデータ マップ（以下を参照） |
 {: class="table table-striped"}
 
-### Trigger
+### トリガー
 {: #trigger}
 
-| Field    | Always present? | Description                                                         |
-| -------- | --------------- | ------------------------------------------------------------------- |
-| type     | yes             | How this pipeline was triggered (e.g. "webhook", "api", "schedule") |
-| actor.id | No              | The user who triggered the pipeline, if there is one                |
+| フィールド    | 常に表示 | 説明                                                 |
+| -------- | ---- | -------------------------------------------------- |
+| type     | ○    | このパイプラインがどのようにトリガーされたか（例：「Webhook」、「API」、「スケジュール」） |
+| actor.id | ×    | パイプラインをトリガーしたユーザー（存在する場合）                          |
 {: class="table table-striped"}
 
 
 ### VCS
 {: #vcs}
 
-Note: The vcs map or its contents may not always be provided in cases where the information doesn't apply, such as future scenarios in which a pipeline isn't associated with a git commit.
+注：将来、パイプラインが Git コミットと関連していないなど情報が当てはまらない場合、VCS マップまたはそのコンテンツが提供されない場合があります。
 
-| Field                   | Always present? | Description                                                                                                        |
-| ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------ |
-| target_repository_url | no              | URL to the repository building the commit                                                                          |
-| origin_repository_url | no              | URL to the repository where the commit was made (this will only be different in the case of a forked pull request) |
-| revision                | no              | Git commit being built                                                                                             |
-| commit.subject          | no              | Commit subject (first line of the commit message)                                                                  |
-| commit.body             | no              | Commit body (subsequent lines of the commit message)                                                               |
-| commit.author.name      | no              | Name of the author of this commit                                                                                  |
-| commit.author.email     | no              | Email address of the author of this commit                                                                         |
-| commit.authored\_at   | no              | Timestamp of when the commit was authored                                                                          |
-| commit.committer.name   | no              | Name of the committer of this commit                                                                               |
-| commit.committer.email  | no              | Email address of the committer of this commit                                                                      |
-| commit.committed_at     | no              | Timestamp of when the commit was committed                                                                         |
-| branch                  | no              | Branch being built                                                                                                 |
-| tag                     | no              | Tag being built (mutually exclusive with "branch")                                                                 |
+| フィールド                   | 常に表示 | 説明                                                   |
+| ----------------------- | ---- | ---------------------------------------------------- |
+| target_repository_url | ×    | コミットをビルドするレポジトリへの URL                                |
+| origin_repository_url | ×    | コミットが作成されたレポジトリへの URL （フォークされたプルリクエストの場合のみ異なります）     |
+| revision                | ×    | ビルドする Git コミット                                       |
+| commit.subject          | ×    | サブジェクトのコミット（コミットメッセージの先頭行）                           |
+| commit.body             | ×    | Commit body (subsequent lines of the commit message) |
+| commit.author.name      | no   | Name of the author of this commit                    |
+| commit.author.email     | no   | Email address of the author of this commit           |
+| commit.authored\_at   | no   | Timestamp of when the commit was authored            |
+| commit.committer.name   | no   | Name of the committer of this commit                 |
+| commit.committer.email  | no   | Email address of the committer of this commit        |
+| commit.committed_at     | no   | Timestamp of when the commit was committed           |
+| branch                  | no   | Branch being built                                   |
+| tag                     | no   | Tag being built (mutually exclusive with "branch")   |
 {: class="table table-striped"}
