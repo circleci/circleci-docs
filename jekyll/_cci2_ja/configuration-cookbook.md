@@ -1,8 +1,8 @@
 ---
 layout: classic-docs
-title: "CircleCI 構成クックブック"
-short-title: "構成クックブック"
-description: "構成クックブック入門編"
+title: "CircleCI config クックブック"
+short-title: "Config クックブック"
+description: "Config クックブック入門編"
 categories:
   - getting-started
 order: 1
@@ -10,7 +10,7 @@ version:
   - Cloud
 ---
 
-*CircleCI 構成クックブック*は、CircleCI のリソース (CircleCI やパートナーの承認済み Orbs など) を使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
+*CircleCI config クックブック*は、 Orbs のような CircleCI のリソースを使用してさまざまな構成タスクを行うための詳しい手順について、ユースケースごとにまとめた「レシピ集」です。 このクックブックと関連セクションを参照することで、CircleCI プラットフォームで繰り返し行われるタスクをすばやく簡単に実行できるようになります。
 
 * 目次
 {:toc}
@@ -610,7 +610,7 @@ jobs:
 ### 基本的な例
 {: #a-basic-example }
 
-以下に、CircleCI のダイナミック コンフィグ機能の基本的な使用例を示します。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`job`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの検査を行うことができます。
+以下に、CircleCI のダイナミック コンフィグ機能の基本的な使用例を示します。 この例では、`generate-config` スクリプトが既に存在することを前提としています。 このスクリプトは、行う処理の種類に基づいて新しい YAML 設定ファイルを出力します。 この過程で、`git` 履歴、パイプラインに渡される値、[`ジョブ`]({{ site.baseurl }}/2.0/configuration-reference/#jobs) 内で行われる処理などの確認を行うことができます。
 
 ```yaml
 version: 2.1
@@ -642,7 +642,7 @@ workflows:
       - setup
 ```
 
-利用可能な要素と必須パラメーターの詳細については、[`path-filtering` Orb のドキュメント](https://circleci.com/developer/ja/orbs/orb/circleci/path-filtering)を参照してください。
+上記の例では、以下のような要素が実装されています:
 
 - 設定ファイルの最上部に `setup: true` という行を追加して、CircleCI のダイナミック コンフィグ機能を使用することを指定します。
 - ダイナミック コンフィグ機能を使用するために `continuation` Orb を呼び出します。
