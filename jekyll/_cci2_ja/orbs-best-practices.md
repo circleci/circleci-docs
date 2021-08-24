@@ -162,7 +162,12 @@ parameters:
     default: 13.11.0
     description: >
       完全なバージョン タグを指定してください。
-例: "13.11.0"。 リリースの全一覧は
+例: "13.11.0"。
+parameters:
+  version:
+    default: 13.11.0
+    description: >
+      A full version tag must be specified. リリースの全一覧は
       次を参照してください: https://nodejs.org/en/download/releases
     type: string
 executor:

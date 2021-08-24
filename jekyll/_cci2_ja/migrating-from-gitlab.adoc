@@ -5,7 +5,7 @@
 :toc: macro
 :toc-title:
 
-This document provides an overview of how to migrate from GitLab to CircleCI.
+This document provides an overview of how to migrate from GitLab to CircleCI. 
 
 NOTE: **Tips provided by ImagineX Consulting**
 

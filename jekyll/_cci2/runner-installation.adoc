@@ -79,7 +79,7 @@ Running jobs requires you have the following tools available on your machine:
 == Installation
 
 === Download the launch agent binary and verify the checksum
-
+[[download]]
 The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
 First, set one of these variables as appropriate for for your installation target.
@@ -165,7 +165,7 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like.
+Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
 
 === Install the CircleCI runner configuration
 
@@ -428,10 +428,26 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 When the container starts, it will immediately attempt to start running jobs.
 
+==== Start the Docker container on server
+
+When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+
+``` bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
 === Stopping the Docker container
 
 ``` bash
 docker stop <container-name>
+```
+
+=== Remove the Docker container
+
+In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+
+``` bash
+docker stop <container-name>; docker rm <container-name>;
 ```
 
 == Windows Installation
@@ -544,6 +560,7 @@ depending on your version of server:
 | 3.1            
 | 1.0.11147-881b608
 |===
+
 
 === Additional Resources
 

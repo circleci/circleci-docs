@@ -76,7 +76,7 @@ en:
     - name: Overview
       children:
         - name: Introduction
-          link: 2.0/executor-types/
+          link: 2.0/executor-intro/
     - name: Docker
       children:
         - name: Overview
@@ -134,6 +134,8 @@ en:
           link: 2.0/runner-installation/
         - name: Runner on Kubernetes
           link: 2.0/runner-on-kubernetes/
+        - name: Upgrading Runner on Server
+          link: 2.0/runner-upgrading-on-server/
         - name: Runner API
           link: 2.0/runner-api/
         - name: Runner FAQs

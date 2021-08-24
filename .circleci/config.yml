@@ -3,8 +3,8 @@ version: 2.1 # Set the CI version.
 # We use orbs to provide some common ruby and node tasks and shorten our config.
 # Learn more about orbs: https://circleci.com/orbs/
 orbs:
-  ruby: circleci/ruby@0.1.2
-  node: circleci/node@1.1.6
+  ruby: circleci/ruby@1.1.4
+  node: circleci/node@4.7.0
   md-proofer: hubci/md-proofer@0.1
 
 
@@ -50,6 +50,8 @@ commands:
             if [[ "<< parameters.dir >>" != "" ]]; then
               cd << parameters.dir >>
             fi
+            #cmake is needed fo rugged, a gem dependency
+            sudo apt-get update && sudo apt-get install -y cmake
             bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
       - save_cache:
           key: circleci-docs-v1-{{ .Branch }}-<< parameters.dir >>-{{ checksum "Gemfile.lock" }}
@@ -128,16 +130,13 @@ jobs:
   js_build: # this job is responsible for building Javascript assets and making them available for the "build" job
     executor: # we specify our executor to use the node orb.
       name: node/default
-      tag: '8.11.1'
+      tag: '14.1'
     steps:
       - *attach_workspace
       - checkout # get the code from GitHub
       - install-shared-assets
-      - node/with-cache: # An orb command for steps to run in-between restoring and saving a cache.
-          cache-key: "package-lock.json"
-          cache-version: &npm-cache-version v9 # Gets cache version from project environment variable (E.g v1)
-          steps:
-            - run: npm install
+      - node/install-packages:
+          cache-version: &npm-cache-version v1 # Gets cache version from project environment variable (E.g v1)
       - run:
           name: "Prepare JS assets" # Compile our final, production-ready JavaScript.
           command: npm run webpack-prod
@@ -169,7 +168,7 @@ jobs:
   build_api_docs: # a job to manage building our api documentation and persisting it to the workspace
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.2-browsers'
     steps:
       - checkout
       - install-shared-assets
@@ -206,7 +205,7 @@ jobs:
   build:
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.2-browsers'
     resource_class: medium+
     working_directory: ~/circleci-docs
     environment:
@@ -224,14 +223,11 @@ jobs:
       - run:
           name: Install dependecies for pronto gem
           command: |
-            sudo apt-get update
+            sudo apt-get update --allow-releaseinfo-change
             sudo apt-get install cmake pkg-config
       - ruby-deps
-      - node/with-cache: # An orb command for steps to run in-between restoring and saving a cache.
-          cache-key: "package-lock.json"
+      - node/install-packages:
           cache-version: *npm-cache-version # Gets cache version from project environment variable (E.g v1)
-          steps:
-            - run: npm install
       - run:
           name: Run markdownlint with pronto
           command: bundle exec pronto run -f github_pr -c origin/master
@@ -291,7 +287,7 @@ jobs:
   reindex-search:
     executor:
       name: ruby/default
-      tag: '2.7.2-node-browsers'
+      tag: '2.7.2-browsers'
     working_directory: ~/circleci-docs
     environment:
       JEKYLL_ENV: production

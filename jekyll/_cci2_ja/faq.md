@@ -150,7 +150,7 @@ my-user/couchdb:1.6.1
 {:.no_toc}
 Docker イメージのタイムゾーンを設定するには、環境変数 `TZ` を使用します。 たとえば、以下のように `.circleci/config.yml` を編集します。
 
-[使用可能な依存関係の一覧]({{site.baseurl}}/ja/2.0/hello-world-windows/#windows-イメージにプリインストールされているソフトウェア)が「[Windows での Hello World]({{site.baseurl}}/ja/2.0/hello-world-windows/)」に掲載されています。
+設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
 
 ```yaml
 version: 2
@@ -168,7 +168,7 @@ jobs:
 
 In this example, the timezone is set for both the primary image and an additional mySQL image.
 
-設定できるタイムゾーンの一覧は、[Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) でご確認ください。
+A full list of available timezone options is [available on Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 
 ## ワークフロー
 {: #workflows }
@@ -209,7 +209,7 @@ Yes, see the [Skipping and Cancelling Builds]({{ site.baseurl }}/2.0/skip-build/
 既にサポートしています。 「2.0 `config.yml` のサンプル ファイル」の「[複数の Executor タイプを含む構成例 (macOS と Docker)]({{ site.baseurl }}/ja/2.0/sample-config/#複数の-executor-タイプを含む構成例-macos-と-docker)」を参照してください。
 
 ### 単一のワークフロー内で Linux 環境と Mac 環境の両方のジョブを実行できるような機能をサポートする予定はありますか?
-いいえ、できません。
+{: #is-it-possible-to-split-the-configyml-into-different-files }
 {:.no_toc}
 Splitting `config.yml` into multiple files is not yet supported.
 
@@ -301,7 +301,7 @@ For the vast majority of customers, you can keep your current plan for now and t
 #### 組織内でプランを共有し、請求をまとめることは可能ですか?
 {: #is-there-a-way-to-share-plans-across-organizations-and-have-them-billed-centrally }
 {:.no_toc}
-選択したクレジット パッケージの料金が、毎月初めに請求されます。
+Yes, log in to the CircleCI web app > select `Plan` in the sidebar > click `Share & Transfer`.
 
 On non-free plans, you can share your plan with free organizations for which you have admin access using the `Add Shared Organization` option. 子組織のすべてのクレジットとその他の利用料金は親組織に請求されます。
 
@@ -370,13 +370,13 @@ On the **free plan**, jobs will fail to run once you have run out of credits.
 #### 支払い方法について教えてください。
 {: #how-do-i-pay }
 {:.no_toc}
-CircleCI からの請求が発生する以下の日付に加え、有料プランにアップグレード、または別の有料プランへ変更して初めてクレジット カードで決済した日付が、更新日として設定されます。
+You can pay from inside the CircleCI app for monthly pricing.
 
 #### 支払いのスケジュールについて教えてください。
 {: #when-do-i-pay }
 {:.no_toc}
 
-従量課金制のプランでは、請求サイクルの初日に、ユーザー シートの料金、プレミアム サポートの料金、毎月のクレジット パッケージの料金が請求されます。 *当月中*に追加したクレジット (クレジットが残り 10% になった時点で自動チャージされる 25% 相当分など) の料金は、*追加のタイミング*で請求されます。
+**従量課金制のプラン**では、請求サイクルの初日に、ユーザー シートの料金、プレミアム サポートの料金、毎月のクレジット パッケージの料金が請求されます。 自動チャージは、保有クレジット数の残りが、月額購入数に対して 2% になった時、 25% 相当分（最小25,000クレジット）を自動追加するというものです。
 
 #### 有料プランの更新日はいつですか?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
@@ -403,13 +403,13 @@ Open source organizations **on our free plan** receive 400,000 free credits per 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。 macOS オープンソースのビルド向けの無料クレジットは、組織あたり最大 2 件のジョブの同時実行に使用できます。
 
 #### 現在、コンテナベース プランのオープンソース プロジェクトで無料クレジットを受け取っています。 Performance プランのオープンソース プロジェクトで割引を受けるにはどうすればよいですか?
-有料の従量課金制プランのオープンソース プロジェクトに対しても割引を提供します。
+Docker レイヤー キャッシュの利用に料金が発生するのはなぜですか?
 {:.no_toc}
 
 CircleCI no longer offers discounts for open source customers on the Performance plan.
 
 #### コンテナベースの macOS プランに割り当てられたビルド時間を超えるとどうなりますか?
-Docker レイヤー キャッシュの利用に料金が発生するのはなぜですか?
+{: #why-does-circleci-charge-for-docker-layer-caching }
 {:.no_toc}
 
 Docker レイヤー キャッシュ (DLC) は、変更のあった Docker レイヤーのみを再ビルドすることで、Docker イメージをビルドするパイプラインでのビルド時間を削減する機能です (DLC の詳細は[こちら]({{site.baseurl}}/ja/2.0/docker-layer-caching))。 DLC は 1 回のジョブ実行につき 200 クレジットを消費します。

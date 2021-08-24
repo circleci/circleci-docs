@@ -111,36 +111,12 @@ CircleCI を使用する際には、必ずしも Orb を使用する必要はあ
    version: 2
    jobs: # we now have TWO jobs, so that a workflow can coordinate them!
      one: # This is our first job.
-       version: 2
-   jobs: # 今回は 2 つのジョブを用意し、ワークフロー機能でジョブの調整を行います
-     one: # 1 つ目のジョブ
-       docker: # Docker Executor を使用します
-         - image: circleci/ruby:2.4.1 # Ruby 2.4.1 を含む Docker イメージを指定します
+       docker: # it uses the docker executor
+         - image: circleci/ruby:2.4.1 # specifically, a docker image with ruby 2.4.1
            auth:
              username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-       # ステップは、上記の Docker コンテナ内で実行するコマンドのリストです
-       steps:
-         - checkout # GitHub からコードをプルします
-         - run: echo "A first hello" # "A first hello" を stdout に出力します
-         - run: sleep 25 # 25 秒間スリープするようにジョブに指示するコマンド
-     two: # 2 つ目のジョブ
-       docker: # 前述と同様に Docker イメージ内で実行します
-         - image: circleci/ruby:2.4.1
-           auth:
-             username: mydockerhub-user
-             password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-       steps:
-         - checkout
-         - run: echo "A more familiar hi" # 前述のコマンドに類似した echo コマンドを実行します
-         - run: sleep 15 # 15 秒間スリープします
-   # workflows 以下でマッピングを行い、上記で定義した 2 つのジョブを調整します
-   workflows:
-     version: 2
-     one_and_two: # ワークフローの名前
-       jobs: # 実行するジョブをここにリストします
-         - one
-         - two
+             password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+       # Steps are a list of commands to run inside the docker container above.
        steps:
          - checkout # this pulls code down from GitHub
          - run: echo "A first hello" # This prints "A first hello" to stdout.
@@ -226,7 +202,7 @@ workflows:
             - one
 ```
 
-Git フックを使用してコミットごとに CircleCI `config.yml` をバリデーションする方法については、[こちらのブログ記事](https://circleci.com/ja/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)を参照してください。
+If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 
 ### {% comment %} todo: job {% endcomment %}ビルドに SSH 接続する
 If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.

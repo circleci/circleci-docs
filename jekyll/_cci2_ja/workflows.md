@@ -211,6 +211,15 @@ workflows:
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
       # On approval of the `hold` job, any successive job that requires the `hold` job will run.
+            - build
+      - test2: # another custom job; runs test suite 2,
+          requires: # test2 is dependent on the success of job `test1`
+            - test1
+      - hold: # <<< A job that will require manual approval in the CircleCI web application.
+          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
+          requires: # We only run the "hold" job when test2 has succeeded
+           - test2
+      # On approval of the `hold` job, any successive job that requires the `hold` job will run.
       # In this case, a user is manually triggering the deploy job.
       - deploy:
           requires:
@@ -658,10 +667,12 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
 {:.no_toc}
+{:.no_toc}
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
+{:.no_toc}
 {:.no_toc}
 {:.no_toc}
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>

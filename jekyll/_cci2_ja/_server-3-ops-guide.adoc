@@ -1,11 +1,11 @@
-= OPERATIONS GUIDE: A guide for administrators of CircleCI Server v{serverversion} on AWS or GCP
+= 運用ガイド: AWS または GCP の CircleCI Server v{serverversion} 管理ガイド
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/
 :doctype: book
 :toc:
-:toc-title: Contents
+:toc-title: 目次
 :icons: font
 :page-liquid:
 :source-highlighter: rouge
