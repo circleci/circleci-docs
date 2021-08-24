@@ -36,8 +36,6 @@ jobs:
 リモート Docker 環境の技術仕様は以下のとおりです (CircleCI Server をお使いの場合は、システム管理者にお問い合わせください)。
 {:.no_toc}
 
-The Remote Docker Environment has the following technical specifications (for CircleCI Server installations, contact the systems administrator for specifications):
-
 | CPU 数 | プロセッサー                    | RAM  | HD    |
 | ----- | ------------------------- | ---- | ----- |
 | 2     | Intel(R) Xeon(R) @ 2.3GHz | 8 GB | 100GB |
@@ -47,7 +45,7 @@ The Remote Docker Environment has the following technical specifications (for Ci
 {: #example }
 {:.no_toc}
 
-ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
+以下の例では、デフォルトのイメージを持つ `machine` Executor を使用して Docker イメージを構築する方法を示しています。これにはリモート Docker を使用する必要はありません。
 
 ```yaml
 version: 2
@@ -75,14 +73,23 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference steps: - checkout # ... steps for building/testing app ...
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
-    
+
       # Docker イメージをビルドしプッシュします
-    
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -91,11 +98,10 @@ version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: 
 {% endhighlight %}
 <!-- markdownlint-enable MD046 -->
 
-**メモ:** `version` キーは、現在 CircleCI Server 環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**メモ:** CircleCI が提供する[コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/) には Docker CLI がプリインストールされています。プライマリコンテナに Docker CLI がインストールされていないサードパーティ製のイメージを使用している場合は、 `docker` コマンドを呼び出す前にジョブの一部として[インストールする必要があります](https://docs.docker.com/install/#supported-platforms)。
 
 ```
       # Alpine ベースのイメージに APK でインストールします
-
       - run:
           name: Docker クライアントのインストール
           command: apk add docker-cli
@@ -111,20 +117,20 @@ Let’s break down what’s happening during this build’s execution:
 ## Docker のバージョン
 {: #docker-version }
 
-To specify the Docker version, you can set it as a `version` attribute:
+ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
 
 ```
       - setup_remote_docker:
-          version: 18.06.0-ce
+          version: 19.03.13
 ```
 
 CircleCI は複数の Docker バージョンをサポートしており、デフォルトでは `17.09.0-ce` が使用されます。 以下に、サポートされている安定版とエッジ版を示します。
 
-- `17.03.0-ce`
-- `17.05.0-ce`
-- `17.06.0-ce`
-- `17.06.1-ce`
-- `17.07.0-ce`
+- `20.10.6`
+- `20.10.2`
+- `19.03.14`
+- `19.03.13`
+- `19.03.12`
 - `19.03.8`
 - `18.09.3`
 - `17.09.0-ce` (default)
@@ -133,7 +139,7 @@ CircleCI は複数の Docker バージョンをサポートしており、デフ
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**メモ:** `version` キーは、現在 CircleCI Server 環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ## 環境の分離
 {: #separation-of-environments }
