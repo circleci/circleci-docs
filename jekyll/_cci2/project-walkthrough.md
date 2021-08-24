@@ -134,6 +134,7 @@ An environment variable defined in a `run:` key will override image-level variab
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -169,6 +170,7 @@ jobs:
           paths:
             - "venv"
 ```
+{% endraw %}
 
 The following describes the detail of the added key values:
 
@@ -230,6 +232,7 @@ for its ability to save test results as XML files.
 In this example,
 reports and results are stored in the `store_artifacts` and `store_test_results` steps.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -284,6 +287,7 @@ jobs:
       - store_test_results:
           path: test-reports/
 ```
+{% endraw %}
 
 Notes on the added keys:
 
@@ -322,6 +326,7 @@ rename the Heroku project,
 so you can deploy to Heroku
 without clashing with the namespace used in this tutorial.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -373,6 +378,7 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
+{% endraw %}
 
 Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
@@ -408,6 +414,7 @@ To deploy `master` to Heroku automatically after a successful `master` build,
 add a `workflows` section
 that links the `build` job and the `deploy` job.
 
+{% raw %}
 ```yaml
 workflows:
   version: 2
@@ -471,6 +478,7 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
+{% endraw %}
 
 ## See also
 {: #see-also }
