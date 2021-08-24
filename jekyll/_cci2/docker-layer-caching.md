@@ -243,4 +243,4 @@ So, if you change something in the Dockerfile, all of those later steps are inva
 
 ## Learn More
 {: #learn-more }
-Take the [DLC course](https://academy.circleci.com/docker-layer-caching) with CircleCI academy to learn more.
+Take the [DLC course](https://academy.circleci.com/docker-layer-caching) with CircleCI Academy to learn more.
