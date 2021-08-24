@@ -99,4 +99,4 @@ configuration (and even the same workflow).
 
 ## Learn More
 {: #learn-more }
-Take the [Arm course](https://academy.circleci.com/arm-course) with CircleCI academy to learn more about using Arm resources and associated use cases.
+Take the [Arm course](https://academy.circleci.com/arm-course) with CircleCI Academy to learn more about using Arm resources and associated use cases.
