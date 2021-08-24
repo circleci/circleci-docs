@@ -125,4 +125,4 @@ Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/e
 
 ## Learn More
 {: #learn-more }
-Take the [build environments course](https://academy.circleci.com/build-environments-1) with CircleCI academy to learn more about choosing and using an executor.
+Take the [build environments course](https://academy.circleci.com/build-environments-1) with CircleCI Academy to learn more about choosing and using an executor.
