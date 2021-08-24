@@ -141,3 +141,9 @@ Almost all standard CircleCI features are available for use with runner jobs, bu
 - https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[Rerun with SSH]
 - https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
+
+== Learn more
+
+Take the https://academy.circleci.com/runner-course[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
+
+
