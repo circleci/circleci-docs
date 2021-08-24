@@ -514,7 +514,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
 small                 | 1     | 2GB
-medium (default)      | 2     | 4GB
+medium                | 2     | 4GB
 medium+               | 3     | 6GB
 large                 | 4     | 8GB
 xlarge                | 8     | 16GB
