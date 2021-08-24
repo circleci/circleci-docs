@@ -158,7 +158,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
       - run:
           name: Install Python deps in a venv
           command: |
@@ -166,7 +166,7 @@ jobs:
             . venv/bin/activate
             pip install -r requirements/dev.txt
       - save_cache:
-          key: deps1-{% raw %}{{{% endraw %} .Branch {% raw %}}}{% endraw %}-{% raw %}{{{% endraw %} checksum "requirements/dev.txt" {% raw %}}}{% endraw %}
+          key: deps1-{{ .Branch }}-{{ checksum "requirements/dev.txt" }}
           paths:
             - "venv"
 ```
@@ -232,7 +232,6 @@ for its ability to save test results as XML files.
 In this example,
 reports and results are stored in the `store_artifacts` and `store_test_results` steps.
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -287,7 +286,6 @@ jobs:
       - store_test_results:
           path: test-reports/
 ```
-{% endraw %}
 
 Notes on the added keys:
 
@@ -326,7 +324,6 @@ rename the Heroku project,
 so you can deploy to Heroku
 without clashing with the namespace used in this tutorial.
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -378,7 +375,6 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
-{% endraw %}
 
 Here's a passing build with deployment for the demo app: <[https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23](https://circleci.com/gh/CircleCI-Public/circleci-demo-python-flask/23){:rel="nofollow"}>
 
@@ -414,7 +410,6 @@ To deploy `master` to Heroku automatically after a successful `master` build,
 add a `workflows` section
 that links the `build` job and the `deploy` job.
 
-{% raw %}
 ```yaml
 workflows:
   version: 2
@@ -478,7 +473,6 @@ jobs:
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
-{% endraw %}
 
 ## See also
 {: #see-also }
