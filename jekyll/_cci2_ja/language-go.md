@@ -71,14 +71,14 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-`working_directory` のすぐ下の `docker` で、このジョブの[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)のイメージを指定します。
+さらに、PostgreSQL のイメージを使用し、データベース初期化用の 2 つの環境変数を指定します。
 
 ---
 
 ## 設定ファイルの詳細
-このデモで使用するカスタム イメージは `golang:1.12.0` に基づいており、`netcat` も含まれます (後で使用します)。
+{: #config-walkthrough }
 
-さらに、PostgreSQL のイメージを使用し、データベース初期化用の 2 つの環境変数を指定します。
+This section explains the commands in `.circleci/config.yml`
 
 `config.yml` は必ず [`version`]({{ site.baseurl }}/ja/2.0/configuration-reference/#version) キーから始めます。 このキーは、互換性を損なう変更に関する警告を表示するために使用します。
 
@@ -105,14 +105,14 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
 
 `build` ジョブ内にいくつかの `steps` を追加します。 Steps make up the bulk of a job.
 
-キャッシュの活用方法については、「[依存関係のキャッシュ]({{ site.baseurl }}/ja/2.0/caching/)」を参照してください。
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code.
 
 ```yaml
     steps:
       - checkout
 ```
 
-次に、テスト結果を収集するためのディレクトリを作成します。
+Next we create a directory for collecting test results
 
 ```yaml
       - run: mkdir -p $TEST_RESULTS
@@ -165,7 +165,7 @@ Next we run our actual build command using `make` - the Go sample project uses m
 ```
 
 
-デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+Now we will start the Postgres dependent service, using `curl` to ping it to validate that the service is up and running.
 
 {% raw %}
 ```yaml

@@ -109,6 +109,8 @@ jobs:
 
 ```
      steps:
+    # Add the Postgres 9.6 binaries to the path.
+       steps:
     # Postgres 9.6 バイナリをパスに追加します。
        steps:
     # Postgres 9.6 バイナリをパスに追加します。

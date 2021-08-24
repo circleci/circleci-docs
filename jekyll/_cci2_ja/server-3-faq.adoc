@@ -1,9 +1,9 @@
 ---
 version:
 - Server v3.x
-- Server Admin
+- サーバー管理
 ---
-= CircleCI Server v3.x FAQ
+= CircleCI Server v3.x に関するよくあるご質問
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -12,14 +12,14 @@ version:
 
 toc::[]
 
-## Does Server 3.0 have a data retention policy?
-We do not currently support a defined data retention policy. Data is stored indefinitely on server.
+## CircleCI Server 3.0 に、データ保持ポリシーは定められていますか？
+現在、CircleCI ではデータ保持ポリシーは定めていません。 データは CircleCI Server 上に無期限に保存されます。
 
-## What control is granted over Nomad certificates?
-Full control of the certificates, all the way down to mTLS for Nomad.
+## Nomad の証明書にはどのような権限がありますか?
+Nomad の mTLS を含めた、 Nomad 関連のすべての証明書に関するすべての操作を可能にする権限があります。
 
-## Is the polling time which checks for health status able to be changed or disabled?
-No, this is not customizable.
+## ヘルスチェックを行うポーリングについて、時間を変更したり、無効にしたりすることはできますか？
+いいえ。 ポーリングのカスタマイズはできません。
 
-## What do the Application Status options in KOTS mean?
-Please see the https://kots.io/vendor/config/application-status/#resource-statuses[KOTS documentation].
+## KOTS のアプリケーション状態のオプションとはどのようなものですか？
+https://kots.io/vendor/config/application-status/#resource-statuses[KOTS のドキュメント]を参照してください。

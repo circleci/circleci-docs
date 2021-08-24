@@ -9,3 +9,9 @@ services:
     ports:
       - 127.0.0.1:4000:4000
       - 127.0.0.1:35729:35729
+  https:
+    image: "caddy:2"
+    ports:
+      - '127.0.0.1:443:443'
+    volumes:
+      - "./Caddyfile:/etc/caddy/Caddyfile"

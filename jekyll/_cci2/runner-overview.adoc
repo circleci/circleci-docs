@@ -51,8 +51,11 @@ With a *Supported* platform, users receive the following:
 *Supported* CircleCI runners are available on the following platforms:
 
 * Ubuntu 18.04 or later (x86_64 or ARM64)
+* RHEL8 (x86_64 or ARM64)
 * Mac OS X 10.15+ (Intel)
 * macOS 11.2+ (Apple M1)
+* Docker (x86_64)
+* Kubernetes (x86_64)
 
 === Preview
 
@@ -68,8 +71,8 @@ With a *Preview* platform, users receive the following:
 *Preview* CircleCI runners are available on the following platforms:
 
 * Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
-* Docker
-* Kubernetes
+* Docker (ARM64)
+* Kubernetes (ARM64)
 * Windows
 
 NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
@@ -138,3 +141,9 @@ Almost all standard CircleCI features are available for use with runner jobs, bu
 - https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[Rerun with SSH]
 - https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
+
+== Learn more
+
+Take the https://academy.circleci.com/runner-course[runner course] with CircleCI Academy to learn more about running jobs on your infrastructure.
+
+

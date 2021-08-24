@@ -346,30 +346,31 @@ The recommended security group configuration can be found in the xref:server-3-i
 AWS
 ```bash
 $ aws ec2 create-security-group \
-    --description "CircleCI's VM Service security group" \
+    --vpc-id "<<VPC ID>>" \
+    --description "CircleCI VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
     --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
     --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
     --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
     --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 54782
 ```
@@ -542,12 +543,22 @@ This section can be left with its default values until <<Step 3 - Obtain Load Ba
 #### Enable Mutual TLS (mTLS)
 mTLS encrypts and authenticates traffic between your Nomad control plane and Nomad clients. You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
 
+#### Preflight Checks
 When all required information has been provided, click the *Continue* button and your CircleCI installation will be put
-through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. When completed successfully,
-you should see something like the following and you can continue to the next step:
+through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. Currently we check for
+the following:
+
+* Kubernetes Version is 1.16.0 or greater
+* The cluster has 30Gi of total memory or greater
+* Total vCPUs in the cluster is 8 or greater
+* The cluster has a default storage class
+
+When completed successfully, you should see something like the following and you can continue to the next step:
 
 .Sever v{serverversion} Preflight Checks
 image::preflight-checks.png[Preflight Checks]
+
+However, should any of these checks fail the issue will be highlighted, giving you an opportunity to address these issues before deployment.
 
 ## Step 3 - Obtain Load Balancer IPs
 Run `kubectl get services` and note the following load balancer addresses. You will need these to finish configuring your
@@ -580,6 +591,10 @@ and VM Service.
 
 CircleCI curates Terraform modules to help install Nomad clients in your cloud provider of choice. You can browse the modules
 in our https://github.com/CircleCI-Public/server-terraform[public repository].
+
+NOTE: We use `blocked_cidrs` to block network access to the specified CIDRs from within jobs. This is a security feature to prevent Nomad Clients
+from communicating with services that should not be accessed by arbitrary code (such as spinning up VMs using the vm-service). Do
+not block access to/from Nomad clients or `setup_remote_docker` will fail.
 
 ### AWS
 If you would like to install Nomad clients in AWS, create a file `main.tf` file with the following contents:

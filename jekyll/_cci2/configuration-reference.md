@@ -318,7 +318,7 @@ It is possible to reuse [declared commands]({{ site.baseurl }}/2.0/reusing-confi
 jobs:
   myjob:
     docker:
-      - image: "circleci/node:9.6.1"
+      - image: circleci/node:14.17.3
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -359,6 +359,7 @@ jobs:
 {: #available-machine-images }
 CircleCI supports multiple machine images that can be specified in the `image` field:
 
+* `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
 * `ubuntu-2004:202101-01` - Ubuntu 20.04, Docker v20.10.2, Docker Compose v1.28.2,
 * `ubuntu-2004:202010-01` - Ubuntu 20.04, Docker v19.03.13, Docker Compose v1.27.4, `ubuntu-2004:202008-01` is an alias
@@ -1608,8 +1609,11 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different
-arguments.
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments.
+
+**Note**
+
+In order to use the `matrix` stanza, you must use parameterized jobs.
 
 Key | Required | Type | Description
 ----|----------|------|------------
@@ -1617,6 +1621,8 @@ parameters | Y | Map  | A map of parameter names to every value the job should b
 exclude | N | List | A list of argument maps that should be excluded from the matrix
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 {: class="table table-striped"}
+
+**Note:**
 
 The following is a basic example of using matrix jobs.
 

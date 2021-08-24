@@ -114,26 +114,6 @@ Following are the system events that are logged. See `action` in the Field secti
 - **success:** A flag to indicate if the action was successful.
 - **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
-## Checklist to using CircleCI securely as a customer
-{: #checklist-to-using-circleci-securely-as-a-customer }
-
-If you are getting started with CircleCI there are some things you can ask your team to consider for security best practices as _users_ of CircleCI:
-
-- ビルドが必要とするシークレット (プライベート キー、環境変数) の数を最小限に抑え、定期的にシークレットを入れ替えます。
-  - 組織のシークレットを定期的に (チーム メンバーが変わるときは特に) 入れ替えることが重要です。
-  - シークレットを定期的に入れ替えることで、シークレットの有効期限が設けられ、キーが漏洩した場合の潜在的なリスクを軽減できます。
-  - Ensure the secrets you _do_ use are of limited scope - with only enough permissions for the purposes of your build. AWS 上での IAM 権限や GitHub の [Machine User](https://developer.github.com/v3/guides/managing-deploy-keys/#machine-users) 機能など、CircleCI の外部で使用する他のプラットフォームのロールおよび権限システムについては、慎重に判断していただくようお願いします。
-- ユーザーが何らかのツールを誤用することで、シークレットが偶然に stdout に出力され、ログに記録されてしまう可能性があります。 以下の場合には注意してください。
-  - すべての環境変数を stdout に出力する `env` または `printenv` を実行する場合
-  - `echo` を使用し、コード ベースまたはシェル内のシークレットを出力する場合
-  - プログラムやデバッグ ツールがエラー時にシークレットを出力する場合
-- VCS プロバイダーから付与された組織の権限を確認したうえで、[最小権限の原則](https://ja.wikipedia.org/wiki/最小権限の原則)に従うよう努めます (組織に属している場合)。
-- チーム間では制約付きコンテキストを使用し、環境変数は一部のセキュリティ グループでのみ共有します。 詳細については、[コンテキストに関するドキュメント]({{ site.baseurl }}/2.0/contexts/#コンテキストの制限)をお読みください。
-- SSH キーへのアクセス権を持つ人間は、必ず組織による監査の対象とします。
-- VCS で 2 要素認証 (2FA) を必ず使用します ([Github 2FA](https://help.github.com/en/articles/securing-your-account-with-two-factor-authentication-2fa)、[Bitbucket](https://confluence.atlassian.com/bitbucket/two-step-verification-777023203.html))。 ユーザーの GitHub または Bitbucket アカウントが漏れると、悪意のあるアクターによってコードがプッシュされたり、秘密が盗まれたりする危険性があります。
-- パブリックのオープンソース プロジェクトでは、環境変数を共有するかどうかを明記します。 On CircleCI, you can change a project's settings to control whether your environment variables can pass on to _forked versions of your repo_. This is **not enabled** by default. この設定とオープンソースのセキュリティの詳細については、[オープンソース プロジェクトのドキュメント]({{site.baseurl}}/2.0/oss/#セキュリティ)を参照してください。
-
-
 ## See also
 {: #see-also }
 {:.no_toc}

@@ -100,7 +100,7 @@ jobs:
   build:
     working_directory: ~/mern-starter
     docker:
-      - image: circleci/node:4.8.2 # Primary execution image
+      - image: circleci/node:14.17.3 # Primary execution image
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

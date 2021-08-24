@@ -11,7 +11,7 @@ version:
 ---
 
 Docker Layer Caching (DLC) can reduce Docker image build times on CircleCI. DLC is available on
-the [Performance and Custom](https://circleci.com/pricing/) usage plans (at 200 credits per job run) and on installations of [CircleCI Server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
+the [Performance and Scale](https://circleci.com/pricing/) usage plans (at 200 credits per job run) and on installations of [CircleCI server](https://circleci.com/enterprise/). This document provides an overview of DLC in the following sections:
 
 * TOC
 {:toc}
@@ -46,7 +46,7 @@ jobs:
   build:
     docker:
       # DLC does nothing here, its caching depends on commonality of the image layers.
-      - image: circleci/node:9.8.0-stretch-browsers
+      - image: circleci/node:14.17.3-buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -219,7 +219,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers
+      - image: circleci/node:14.17.3-buster-browsers
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -240,3 +240,7 @@ So, if you change something in the Dockerfile, all of those later steps are inva
 <div class="video-wrapper">
   <iframe width="560" height="315" src="https://www.youtube.com/embed/AL7aBN7Olng" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 </div>
+
+## Learn More
+{: #learn-more }
+Take the [DLC course](https://academy.circleci.com/docker-layer-caching) with CircleCI Academy to learn more.

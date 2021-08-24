@@ -105,9 +105,7 @@ a|
 [source, yaml]
 ----
 # Choosing an Operating System
-runs-on: ubuntu-latest # or windows, etc.
-
-# If running steps on a container
+runs-on: ubuntu-latest # or windows, etc. # If running steps on a container
 container:
   image: openjdk:11.0-jdk
 ----

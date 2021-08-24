@@ -36,6 +36,15 @@ Jira Orb を使用したシンプルな `config.yml` の例を以下に示しま
 
 
 ```yaml
+version: 2.1
+orbs: # adds orbs to your configuration
+  jira: circleci/jira@1.0.5 # invokes the Jira orb, making its commands accessible
+workflows:
+  build:
+    jobs:
+      - build:
+          post-steps:
+            - jira/notify # Runs the Jira's "notify" commands after a build has finished its steps.
 jobs:
   build:
     docker:

@@ -4,7 +4,7 @@ version:
 - Server v2.x
 - Server v3.x
 ---
-= Using Docker Authenticated Pulls
+= Docker の認証付きプルの使用
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -15,22 +15,21 @@ version:
 
 プルを認証することで、プライベートの Docker イメージにアクセスできるようになります。  お使いのレジストリ プロバイダーによっては、レート制限が引き上げられる可能性もあります。
 
-CircleCI has partnered with Docker to ensure that our users can continue to access Docker Hub without rate limits. As of November 1st 2020, with few exceptions, you should not be impacted by any rate limits when pulling images from Docker Hub through CircleCI. However, these rate limits may go into effect for CircleCI users in the future. That’s why we’re encouraging you and your team to add Docker Hub authentication to your CircleCI configuration and consider upgrading your Docker Hub plan, as appropriate, to prevent any impact from rate limits in the future.
+CircleCI は Docker と連携して、ユーザーの皆さまが今後もレート制限なしで Docker Hub にアクセスできるようにしています。 2020 年 11 月 1 日時点では、いくつかの例外を除き、CircleCI を通じて Docker Hub からイメージをプルする際に、レート制限の影響を受けることはありません。 ただし、今後 CircleCI ユーザーにもレート制限が適用される可能性があります。 そのため、将来的にレート制限の影響を受けることのないよう、お使いの CircleCI 設定ファイルに Docker Hub 認証を追加すると共に、必要に応じてご利用中の Docker Hub プランのアップグレードを検討することをお勧めします。
 
 toc::[]
 
 ## Docker Executor
 
-For the https://circleci.com/docs/2.0/executor-types/#using-docker[Docker executor], specify a username and password in
-the `auth` field of your https://circleci.com/docs/2.0/configuration-reference[config.yml] file. To protect the password,
-place it in a https://circleci.com/docs/2.0/contexts/[context], or use a per-project Environment Variable.
+https://circleci.com/docs/ja/2.0/executor-types/#using-docker[Docker Executor] を使用する場合は、https://circleci.com/docs/ja/2.0/configuration-reference[config.yml] ファイルの `auth` フィールドにユーザー名とパスワードを指定します。 パスワードを保護したい場合は、https://circleci.com/docs/ja/2.0/contexts/[コンテキスト]を作成するか、プロジェクトごとの環境変数を使用します。
 
-NOTE: Server 2.x customers may instead set up a Docker Hub pull through a xref:docker-hub-pull-through-mirror.adoc[registry mirror].
+NOTE: CircleCI Server 2.x をご利用であれば、代わりに、xref:docker-hub-pull-through-mirror.adoc[レジストリ ミラー]経由の Docker Hub プルをセットアップすることができます。
+Docker Hub レジストリ ミラー経由のプルは、CircleCI Server 3.x ではまだ使用できません。
 Pulls through Docker Hub registry mirrors are not yet available on Server 3.x.
 
-NOTE: Contexts are the more flexible option.  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが必要なものだけにアクセスできるようにしたりするのにとても便利です。**
+NOTE: コンテキストを作成するほうがより柔軟性の高い方法です。  CircleCI は複数のコンテキストをサポートしており、シークレットをモジュール化したり、ジョブが*必要*なものだけにアクセスできるようにしたりするのにとても便利です。
 
-この例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与します。
+次の例では、既存の `build-env-vars` コンテキストを肥大化させずに、build ジョブに Docker 認証情報の `docker-hub-creds` コンテキストへのアクセスを付与しています。
 
 [source,yaml]
 ----
@@ -51,9 +50,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # または、プロジェクトの環境変数を参照するように指定します
 ----
 
-You can also use images from a private repository like https://cloud.google.com/container-registry[gcr.io] or
-https://quay.io[quay.io]. Make sure to supply the full registry/image URL for the `image` key, and use the appropriate
-username/password for the `auth` key. 例えば下記のようにします。
+また、https://cloud.google.com/container-registry[gcr.io] や https://quay.io[quay.io] などのプライベート リポジトリにあるイメージも使用できます。 `image` キーに対してリポジトリ/イメージのフル URL を指定し、`auth` キーに対して適切なユーザー名とパスワードを使用してください。 たとえば下記のようにします。
 
 [source,yaml]
 ----
@@ -64,9 +61,9 @@ username/password for the `auth` key. 例えば下記のようにします。
 ----
 
 
-## Machine executor (with Docker orb)
+## machine Executor (Docker Orb を使用)
 
-または、以下のように `machine` Executor を使用する方法もあります。
+または、以下のように `machine` Executor と Docker Orb を使用する場合にも同じ結果が得られます。
 
 [source,yaml]
 ----
@@ -87,16 +84,17 @@ jobs:
     machine: true
     steps:
       - docker/check:
-          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
-          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD is the default value
+          docker-username: DOCKERHUB_LOGIN  # DOCKER_LOGIN がデフォルト値です。
+          存在する場合、自動的に使用されます。
+          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD がデフォルト値です。
       - docker/pull:
           images: 'circleci/node:latest'
 ----
 
 
-## Machine executor (with Docker CLI)
+## machine Executor (Docker CLI を使用)
 
-or with the CLI:
+または、CLI を使用します。
 
 [source,yaml]
 ----
@@ -117,14 +115,13 @@ jobs:
 
 ## AWS ECR
 
-CircleCI now supports pulling private images from Amazon's ECR service.
+現在 CircleCI では、Amazon の ECR サービスからのプライベート イメージのプルをサポートしています。
 
-TIP: You can pull your private images from ECR repositories in any regions. However, for the best experience, we strongly
-recommend you make a copy of your image in `us-east-1` region, and specify that `us-east-1` image for the Docker executor.
-Our job execution infrastructure is in the `us-east-1` region so using `us-east-1` images speeds up the process of spinning
-up your environment.
+TIP: 任意のリージョンの ECR リポジトリから、プライベート イメージをプルできます。 ただし、最高のエクスペリエンスを得るために、`us-east-1` リージョンにイメージのコピーを作成し、その `us-east-1` のイメージを Docker Executor に指定することを強くお勧めします。
+CircleCI のジョブ実行インフラストラクチャは `us-east-1` リージョンにあります。
+そのため、`us-east-1` のイメージを使用すると、環境のスピンアップ プロセスにかかる時間が短縮されます。
 
-以下のいずれかの方法で、ECR のプライベート イメージを使用できるようになります。
+以下の 2 つの方法のいずれかで、ECR のプライベート イメージを使用できるようになります。
 
 1. CircleCI 標準のプライベート環境変数を使用して、AWS 認証情報を設定する
 2. `aws_auth` を使用して、`.circleci/config.yml` に AWS 認証情報を指定する
@@ -141,10 +138,7 @@ jobs:
           aws_secret_access_key: $ECR_AWS_SECRET_ACCESS_KEY  # または、プロジェクトの UI 環境変数を参照するように指定します
 ----
 
-Both options are virtually the same, however, the second option enables you to specify the variable name you want for the
-credentials. これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 For example,
-let's say your SaaS app runs the speedier tests and deploys to staging infrastructure on every commit while for Git tag
-pushes, we run the full-blown test suite before deploying to production:
+いずれの方法もほぼ同じですが、2 番目の方法では認証情報に対して任意の変数名を指定できます。 これは、インフラストラクチャごとに異なる AWS 認証情報を持っている場合に便利です。 たとえば、SaaS アプリケーションに対して短時間のテストを実行し、コミットのたびに Git タグを付けながらステージング インフラストラクチャにデプロイして、本番へのデプロイ前に本格的なテスト スイートを実行する場合は、次のように記述します。
 
 [source,yaml]
 ----
@@ -158,11 +152,9 @@ jobs:
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_STAGING
     steps:
       - run:
-          name: "Every Day Tests"
-          command: "testing...."
-      - run:
-          name: "Deploy to Staging Infrastructure"
-          command: "something something darkside.... cli"
+          name: "毎日のテスト"
+          command: "....
+      cli"
   deploy:
     docker:
       - image: account-id.dkr.ecr.us-east-1.amazonaws.com/org/repo:0.1
@@ -171,11 +163,12 @@ jobs:
           aws_secret_access_key: $AWS_SECRET_ACCESS_KEY_PRODUCTION
     steps:
       - run:
-          name: "Full Test Suite"
-          command: "testing...."
+          name: "フル テスト スイート"
+          command: ".... のテスト"
       - run:
-          name: "Deploy to Production Infrastructure"
-          command: "something something darkside.... cli"
+          name: "本番インフラストラクチャへのデプロイ"
+          command: "なんらかのコマンド....
+      cli"
 
 workflows:
   version: 2
@@ -195,6 +188,6 @@ workflows:
               only: /^\d{4}\.\d+$/
 ----
 
-## 関連項目
+## See also
 
-* https://circleci.com/docs/2.0/configuration-reference[リファレンス]
+* https://circleci.com/docs/2.0/configuration-reference[設定ファイル リファレンス]

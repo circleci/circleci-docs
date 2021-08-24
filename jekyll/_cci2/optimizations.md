@@ -178,7 +178,7 @@ version: 2
 jobs:
  build:
     docker:
-      - image: circleci/node:9.8.0-stretch-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
+      - image: circleci/node:14.17.3-buster-browsers # DLC does nothing here, its caching depends on commonality of the image layers.
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference

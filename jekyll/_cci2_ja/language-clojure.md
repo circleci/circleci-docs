@@ -63,18 +63,18 @@ jobs: # 1 回の実行の基本作業単位
 {% endraw %}
 
 ## コードの取得
-常にバージョンの指定から始めます。
+{: #get-the-code }
 
-上記は Clojure デモ アプリケーションの設定ファイルの抜粋です。 このデモ アプリケーションには、<https://github.com/CircleCI-Public/circleci-demo-clojure-luminus> からアクセスできます。
+`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
 
 ご自身でコード全体を確認する場合は、GitHub でプロジェクトをフォークし、ローカル マシンにダウンロードします。 CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、プロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。 最後に `.circleci/config.yml` の内容をすべて削除します。
 
 他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
 
 ## 設定ファイルの詳細
-`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
+{: #config-walkthrough }
 
-`lein-2.7.1` タグを指定して [CircleCI 提供の Clojure イメージ](https://circleci.com/ja/docs/2.0/circleci-images/#clojure)を使用します。
+`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
 
 ```yaml
 version: 2
@@ -91,9 +91,9 @@ jobs:
     working_directory: ~/cci-demo-clojure
 ```
 
-この `build` ジョブ内にいくつかの `steps` を追加します。
+This path will be used as the default working directory for the rest of the `job` unless otherwise specified.
 
-コードベースで作業できるように、最初に `checkout` を置きます。
+この `build` ジョブ内にいくつかの `steps` を追加します。
 
 ```yaml
 version: 2

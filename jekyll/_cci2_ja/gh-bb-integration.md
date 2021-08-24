@@ -31,7 +31,7 @@ CircleCI のデフォルトでは、プッシュ フックでビルドが行わ�
 - CircleCI は PR フック (プル リクエスト フック) を処理して、CircleCI アプリケーションの PR 情報を保存します。 [Only Build Pull Requests (プル リクエストのみビルド)] が設定されていると、CircleCI は PR がオープンされたとき、または既存の PR が存在するブランチへのプッシュがあったときだけ、ビルドをトリガーします。 これが設定されている場合でも、プロジェクトのデフォルト ブランチへのプッシュはすべて、常にビルドされます。
 - [Build Forked Pull Requests (フォークされたプル リクエストをビルド)] が設定されている場合、CircleCI はフォークされたリポジトリから作成された PR に応答してビルドをトリガーします。
 
-GitHub または Bitbucket Cloud で Web フックを編集して、ビルドをトリガーするイベントを制限できます。 Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI は常にプッシュ フックでビルドを行い、設定によっては PR フックでもビルドを行います。 ただし、Web フックの設定からプッシュ フックを削除すると、ビルドを行いません。 詳細については、[GitHub の「Edit a Hook (フックを編集する)」](https://developer.github.com/v3/repos/hooks/#edit-a-hook)または [Atlassian の「Manage Webhooks (Web フックを管理する)」](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html)を参照してください。
+GitHub または Bitbucket Cloud で Web フックを編集して、ビルドをトリガーするイベントを制限できます。 Editing the webhook settings lets you change which hooks get sent to CircleCI, but doesn't change the types of hooks that trigger builds. CircleCI will always build push hooks and will build on PR hooks (depending on settings), but if you remove push hooks from the webhook settings CircleCI won't build. 詳細については、[GitHub の「Edit a Hook (フックを編集する)」](https://developer.github.com/v3/repos/hooks/#edit-a-hook)または [Atlassian の「Manage Webhooks (Web フックを管理する)」](https://confluence.atlassian.com/bitbucket/manage-webhooks-735643732.html)を参照してください。
 
 タグ プッシュでのビルド方法については、「[ワークフローにおけるコンテキストとフィルターの使用]({{ site.baseurl }}/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用)」を参照してください。
 
@@ -85,9 +85,9 @@ CircleCI が SSH 鍵を公開することはありません。
 ユーザー キーを追加する必要があることを示す一般的なエラーとしては、以下のものが挙げられます。
 
 1. Rename org/repo in VCS.
-2. GitHub にマシン ユーザーとしてログインします。
+2. Head to the CircleCI application, using the new org/repo name, for example, `app.circleci.com/pipelines/<VCS>/<new-org-name>/<project-name>`.
 3. Confirm that your plan, projects and settings have been transferred successfully.
-4. [Add Projects (プロジェクトの追加)] ページで、マシン ユーザーにアクセスを許可するすべてのプロジェクトをフォローします。
+4. You are then free to create a new org/repo with the previously-used name in your VCS, if desired.
 
 **Python**: `pip install` ステップ実行中
 

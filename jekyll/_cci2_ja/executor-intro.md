@@ -76,20 +76,10 @@ version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化し�
 
 {:.tab.windowsblock.Cloud}
 ```
-version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
+version: 2.1 # Use version 2.1 to enable orb usage.
 
 orbs:
-  win: circleci/windows@2.2.0 # Windows Orb には Windows Executor の使用に必要なすべてが揃っています
-
-jobs:
-  build: # ジョブの名前
-    executor: win/default # Executor タイプ
-
-    steps:
-      # Windows 仮想マシン環境で実行するコマンド
-
-      - checkout
-      - run: Write-Host 'Hello, Windows'
+  win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
 
 jobs:
   build: # name of your job

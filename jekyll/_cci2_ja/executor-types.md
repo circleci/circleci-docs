@@ -67,11 +67,11 @@ jobs:
 
 - In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with docker images being used.
 
-`machine` Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)を `true` に設定します。
+To use the machine executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
 
 ### Docker Hub でパブリック コンビニエンス イメージを使用する
-Docker Executor の詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。
-ジョブには、複数のイメージを指定できます。 たとえば、テストやその他の必要なサービスでデータベースを使用する必要がある場合は、複数のイメージを指定します。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。</p>
+{: #using-multiple-docker-images }
+ジョブには、複数のイメージを指定できます。 たとえば、テストやその他の必要なサービスでデータベースを使用する必要がある場合は、複数のイメージを指定します。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
 
 ```yaml
 jobs:
@@ -100,7 +100,7 @@ jobs:
 Docker Images may be specified in three ways, by the image name and version tag on Docker Hub or by using the URL to an image in a registry:
 
 #### Docker イメージのビルド
-<sup>(1)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
+{: #public-convenience-images-on-docker-hub }
 {:.no_toc}
   - `name:tag`
     - `circleci/node:7.10-jessie-browsers`
@@ -108,7 +108,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
     - `redis@sha256:34057dd7e135ca41...`
 
 #### Public images on Docker Hub
-メモ: Docker コンテナを実行するためには docker Executor を使用できますが、現在 CircleCI で新しい Docker イメージをビルドするには `machine` Executor の使用のみがサポートされています。
+<sup>(1)</sup> See \[Using Custom Docker Images\]\[custom-images\].
 {:.no_toc}
   - `name:tag`
     - `alpine:3.4`
@@ -126,7 +126,7 @@ Docker Images may be specified in three ways, by the image name and version tag 
 `config.yml` ファイルで `docker:` キーを指定すると、デフォルトで Docker Hub と Docker Registry 上のほぼすべてのパブリック イメージがサポートされます。 プライベートのイメージまたはレジストリを操作する場合は、[プライベート イメージの使用に関するドキュメント]({{ site.baseurl }}/ja/2.0/private-images)を参照してください。
 
 ### Docker Hub でパブリック イメージを使用する
-**メモ:** オンプレミス版の CircleCI Server では `image` キーは必須ではありませんが (上の例を参照)、使用する場合は `image: default` に設定する必要があります。
+{: #ram-disks }
 
 A RAM disk is available at `/mnt/ramdisk` that offers a [temporary file storage paradigm](https://en.wikipedia.org/wiki/Tmpfs), similar to using `/dev/shm`. Using the RAM disk can help speed up your build, provided that the `resource_class` you are using has enough memory to fit the entire contents   of your project (all files checked out from git, dependencies, assets generated etc).
 
@@ -159,7 +159,7 @@ Docker には、イメージ キャッシュ機能が組み込まれており、
 
 Docker を選択すると、実行できるのは Docker コンテナ内から利用可能な機能 (\[リモート Docker\]\[building-docker-images\] の機能を含む) に制限されます。 たとえば、ネットワークへの低レベル アクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
-Linux 上でのソフトウェアのビルドに、コンテナの環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合にはどのような違いが現れるのでしょうか。
+<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
 
 | Capability                                                                            | `docker`           | `machine` |
 | ------------------------------------------------------------------------------------- | ------------------ | --------- |
@@ -177,9 +177,11 @@ Linux 上でのソフトウェアのビルドに、コンテナの環境とし�
 | [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes                | Yes       |
 {: class="table table-striped"}
 
-<sup>(1)</sup> See \[Using Custom Docker Images\]\[custom-images\].
+{{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class
 
-Docker イメージは、Docker Hub でイメージ名とバージョン タグを使用するか、レジストリ内のイメージへの URL を使用して、以下の 3 つの方法で指定できます。
+<sup>(1)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
+{:.no_toc}
+Docker Executor の詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。
 
 <sup>(2)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 このときのパフォーマンスは、ご契約のコンテナ プランで利用できるコンピューティング能力に左右されます。
 
@@ -187,18 +189,18 @@ For more information on `machine`, see the next section below.
 
 
 ### Available Docker resource classes
-{{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class
+<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each job. In Docker, the following resources classes are available:
 
 | クラス                    | vCPU | RAM    |
 | ---------------------- | ---- | ------ |
 | small                  | 2 基  | 2GB    |
-| medium (デフォルト)         | 4 基  | 4GB    |
+| medium (デフォルト)         | 15   | 4GB    |
 | medium+                | 3    | 6GB    |
 | large                  | 4    | 7.5 GB |
 | ×                      | 8    | 16GB   |
-| 2xlarge<sup>(2)</sup>  | 15   | 32GB   |
+| 2xlarge<sup>(2)</sup>  | 16   | 32GB   |
 | 2xlarge+<sup>(2)</sup> | 20   | 40GB   |
 {: class="table table-striped"}
 
@@ -218,7 +220,7 @@ jobs:
 ## Machine の使用
 ○
 
-`machine` オプションは、以下のような仕様を持つ専用のエフェメラル VM でジョブを実行します。
+**メモ:** オンプレミス版の CircleCI Server では `image` キーは必須ではありませんが (上の例を参照)、使用する場合は `image: default` に設定する必要があります。
 
 {% include snippets/machine-resource-table.md %}
 
@@ -228,7 +230,7 @@ jobs:
 
 **メモ:** 将来の料金改定で `machine` の使用に追加料金が必要になる可能性があります。
 
-{{ site.baseurl }}/ja/2.0/configuration-reference/
+`machine` Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)を `true` に設定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -357,6 +359,6 @@ jobs:
 Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See \[Running GPU Executors in Server\]\[server-gpu\].
 
 ## Docker のメリットと制限事項
-○
+{: #see-also }
 
 [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)

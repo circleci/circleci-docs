@@ -21,8 +21,8 @@ toc::[]
 Orbs are accessed via the https://circleci.com/docs/2.0/local-cli/[CircleCI CLI]. Orbs require your CircleCI user to be
 an admin. They also require a personal api token https://circleci.com/docs/2.0/managing-api-tokens/. Providing a local
 repository location using the `--host` option allows you to access your local server orbs vs the public cloud orbs. For
-example, if your server installation is located at `http://circleci.somehostname.com`, then you can run orb commands
-local to that orb repository by passing `--host http://cirlceci.somehostname.com`.
+example, if your server installation is located at `\http://circleci.somehostname.com`, then you can run orb commands
+local to that orb repository by passing `--host \http://cirlceci.somehostname.com`.
 
 ## List available orbs
 To list available public orbs, visit the orb directory or run:
@@ -54,4 +54,4 @@ To update a public orb in your local server orb repository with a new version, r
 circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
 ----
 
-For more Orb information, please refer to the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs] for the cloud product.
+For more orb information, please refer to the https://circleci.com/docs/2.0/orb-intro/#quick-start[Orb docs] for the cloud product.

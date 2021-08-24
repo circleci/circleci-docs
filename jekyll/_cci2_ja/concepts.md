@@ -66,7 +66,7 @@ It is worth taking a minute to define the various user types that relate to Circ
 
 
 ## ジョブ
-キャッシュは、依存関係やソース コードなどを 1 つのファイルとして、または複数のファイルが入ったディレクトリとして、オブジェクト ストレージに格納します。 特別なステップを各ジョブに追加することで、以前のジョブから依存関係をキャッシュし、ビルドを高速化できます。
+{: #pipelines }
 
 A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
 
@@ -137,23 +137,22 @@ jobs:
 
 アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
 ```yaml
-version: 2
- jobs:
-   build1: # ジョブ名
-     docker: # プライマリ コンテナ イメージを指定します。
-     # dockerhub にあるビルド済みの CircleCI イメージの一覧は、
-     # circleci.com/ja/docs/2.0/circleci-images/ にて参照してください。
-       - image: buildpack-deps:trusty
+version: 2.0
 
-       - image: postgres:9.4.1 # 1 つの共通ネットワーク内で実行される
-        # セカンダリ サービス コンテナのデータベース イメージを指定します。
-        # 共通ネットワークでは、プライマリ コンテナ上に公開されている
-        # ポートをローカルホストで利用できます。
-         environment: # POSTGRES_USER 認証環境変数を指定します。
-          # 環境変数の使用方法については、
-          # circleci.com/ja/docs/2.0/env-vars/ を参照してください。
-           POSTGRES_USER: root
-#...
+jobs:
+ build1: # job name
+   docker: # Specifies the primary container image,
+     - image: buildpack-deps:trusty
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+     - image: postgres:9.4.1 # Specifies the database image
+       auth:
+         username: mydockerhub-user
+         password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # for the secondary or service container run in a common
+      # network where ports exposed on the primary container are
+      # available on localhost.
        environment: # Specifies the POSTGRES_USER authentication
         # environment variable, see circleci.com/docs/2.0/env-vars/
         # for instructions about using environment variables.
@@ -251,7 +250,7 @@ jobs:
 ワークフローは、ジョブのリストとその実行順序を定義します。 ジョブは、並列実行、順次実行、スケジュールに基づいて実行、あるいは承認ジョブを使用して手動ゲートで実行することができます。
 
 {:.tab.workflows.Cloud}
-![ワークフローの期間]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
+![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail_newui.png)
 
 {:.tab.workflows.Server}
 ![workflows illustration]( {{ site.baseurl }}/assets/img/docs/workflow_detail.png)
@@ -376,6 +375,22 @@ jobs:
       - restore_cache: # Restores the cached dependency.
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
       - run:
+          name: Running tests
+          command: make test
+  build3:
+    docker:
+      - image: circleci/ruby:2.4-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      - image: circleci/postgres:9.4.12-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - restore_cache: # Restores the cached dependency.
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}
+      - run:
           name: Precompile assets
           command: bundle exec rake assets:precompile
 #...
@@ -392,6 +407,10 @@ workflows:
           requires:
            - build1 # build1 ジョブが正常に完了するのを待ってから、
            # 時間を節約するために build2 と build 3 の並列実行を開始します。
+      - build3:
+          requires:
+           - build1 # wait for build1 job to complete successfully before starting
+           # run build2 and build3 concurrently to save time.
       - build3:
           requires:
            - build1 # wait for build1 job to complete successfully before starting

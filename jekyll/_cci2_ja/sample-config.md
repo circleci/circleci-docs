@@ -22,7 +22,7 @@ version:
 ### 同時実行ワークフロー
 {: #concurrent-workflow }
 
-以下に、同時実行ワークフローの設定ファイル サンプルを示します。ここでは、`build` ジョブと `test` ジョブを一度に実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 ![同時実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/concurrent-workflow-map.png)
 
@@ -96,7 +96,7 @@ workflows:
 ### 順次実行ワークフロー
 {: #sequential-workflow }
 
-以下に、ジョブの順次実行ワークフローの設定ファイル サンプルを示します。ここでは、まず `build` ジョブを実行し、`build` ジョブの完了後 `test` ジョブを実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 次の図に、ジョブを 1 つずつ順番に実行する以下の設定ファイル サンプルのワークフロー ビューを示します。![順次実行ワークフローのグラフ]({{ site.baseurl }}/assets/img/docs/sequential-workflow-map.png)
 
@@ -173,7 +173,7 @@ workflows:
 ### 承認ジョブ
 {: #approval-job }
 
-以下に、承認ステップを使用するジョブの順次実行ワークフローの例を示します。 まず `build` ジョブ、次に `test` ジョブが実行されます。その後、`type: approval` が設定された `hold` ジョブでワークフローは待機状態になり、手動で承認が行われると `deploy` ジョブが実行されます。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+以下に、ジョブの順次実行ワークフローの設定ファイル サンプルを示します。 ここでは、まず `build` ジョブを実行し、`build` ジョブの完了後 `test` ジョブを実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 次の図に、以下の設定ファイル サンプルのワークフロー ビューを示します。 この図は 3 部構成であり、アプリで hold ステップをクリックすると表示される承認ポップアップと、`hold` ジョブが承認され `deploy` ジョブが実行された後のワークフロー ビューも示されています。
 
@@ -290,7 +290,7 @@ workflows:
 以下に、次の CircleCI 設定機能を使用した `.circleci/config.yml` ファイル サンプルを示します。
 
 * 順次実行ワークフロー
-* Orb (Cloud の `version: 2.1` 設定ファイルのみ): node Orb でキャッシュを自動処理しています。キャッシュの保存と復元の方法については Server の `version: 2.0` サンプルを参照してください。
+* Orb (Cloud の `version: 2.1` 設定ファイルのみ): node Orb でキャッシュを自動処理しています。 キャッシュの保存と復元の方法については Server の `version: 2.0` サンプルを参照してください。
 * セカンダリ サービス コンテナ
 * ワークスペース
 * アーティファクトの保存
@@ -324,18 +324,18 @@ jobs:
 
   test:
     docker:
-      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。
+      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 The job's commands run in this container.
       - image: cimg/node:current
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-      # 2 番目に記述されたイメージのインスタンスがセカンダリ コンテナになります。このインスタンスは、ローカルホスト上のプライマリ コンテナのポートを通じて共通ネットワークで動作します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:4.2
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      # build ジョブのワークスペースを再利用
+      # Reuse the workspace from the build job
       - attach_workspace:
           at: .
       - run:
@@ -378,26 +378,26 @@ version: 2
 jobs:
   build:
     working_directory: ~/mern-starter
-      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。
+      # 最初に記述したイメージのインスタンスがプライマリ コンテナになります。 The job's commands run in this container.
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: circleci/node:14.17.3-buster
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    # 2 番目に記述されたイメージのインスタンスがセカンダリ コンテナになります。このインスタンスは、ローカルホスト上のプライマリ コンテナのポートを通じて共通ネットワークで動作します。
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    # The secondary container is an instance of the second listed image which is run in a common network where ports exposed on the primary container are available on localhost.
       - image: mongo:3.4.4-jessie
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: npm の更新
+          name: Update npm
           command: 'sudo npm install -g npm@latest'
       - restore_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
       - run:
-          name: npm wee のインストール
+          name: Install npm wee
           command: npm install
       - save_cache:
           key: dependency-cache-{{ checksum "package-lock.json" }}
@@ -405,21 +405,21 @@ jobs:
             - node_modules
   test:
     docker:
-      - image: circleci/node:4.8.2-jessie
+      - image: circleci/node:14.17.3-buster
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: mongo:3.4.4-jessie
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
-          name: テスト
+          name: Test
           command: npm test
       - run:
-          name: コード カバレッジの生成
+          name: Generate code coverage
           command: './node_modules/.bin/nyc report --reporter=text-lcov'
       - store_artifacts:
           path: test-results.xml
@@ -442,7 +442,7 @@ workflows:
 ```
 {% endraw %}
 
-上記の例では、順次実行ワークフローを使用し、かつ `test` ジョブをマスター ブランチでのみ実行するよう設定しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
+以下に、同時実行ワークフローの設定ファイル サンプルを示します。 ここでは、`build` ジョブと `test` ジョブを一度に実行しています。 ジョブ制御の同時実行化、シーケンシャル化、もしくは承認して処理を続行するワークフローについて、詳しくは[ワークフローに関するページ]({{ site.baseurl }}/2.0/workflows)を参照してください。
 
 ## ファンイン・ファンアウト ワークフローの設定例
 {: #sample-configuration-with-fan-infan-out-workflow }
