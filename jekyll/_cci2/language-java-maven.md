@@ -29,6 +29,7 @@ dependency caching, and parallelism.
 ### A basic build with an orb:
 {: #a-basic-build-with-an-orb }
 
+{% raw %}
 ```yaml
 version: 2.1
 
@@ -40,7 +41,7 @@ workflows:
     jobs:
       - maven/test # checkout, build, test, and upload test results
 ```
-
+{% endraw %}
 
 This config uses the language-specific orb to replace any executors, build
 tools, and commands available. Here we are using the [maven orb](https://circleci.com/developer/orbs/orb/circleci/maven),
