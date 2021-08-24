@@ -77,5 +77,5 @@ Any app that runs on Linux, Android, or macOS is supported. Refer to the
 
 ## Learn More
 {: #learn-more }
-Enroll on the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics) with CircleCI academy to learn more.
+Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics) with CircleCI academy to learn more.
 
