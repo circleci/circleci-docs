@@ -118,7 +118,7 @@ Find out more about using the `windows` executor [here]({{ site.baseurl }}/2.0/e
 ## See also
 {: #see-also }
 
-* [Choosing and executor type]({{ site.baseurl }}/2.0/executor-types/)
+* [Choosing an executor type]({{ site.baseurl }}/2.0/executor-types/)
 * [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
 * [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
 * [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
