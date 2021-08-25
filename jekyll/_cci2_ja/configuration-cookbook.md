@@ -648,7 +648,7 @@ workflows:
 - ダイナミック コンフィグ機能を使用するために `continuation` Orb を呼び出します。
 - `continuation` Orb を [`executor`]({{ site.baseurl }}/2.0/executor-intro/) として使用する `setup` というジョブを定義します。 このジョブでは、下記の処理を行います。
     - [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップを呼び出して、設定されたリポジトリからコードをチェックアウトします。
-    - `continuation` Orb の処理について詳しくは、[CircleCI デベロッパー ハブ](https://circleci.com/developer/ja/orbs/orb/circleci/continuation?version=0.1.2)で Orb のソース コードを参照するか、「[ダイナミック コンフィグに関するよくあるご質問]({{ site.baseurl }}/2.0/dynamic-config#dynamic-config-faqs)」を参照してください。
+    - [`run`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) ステップにより `generate-config` スクリプトを呼び出し、 `continuation` Orb の `continue` ジョブに受け渡すデータを生成します。
     - 必須の `configuration_path` に指定された設定ファイルに基づいて、パイプラインの実行が続行されます。
 - 最後に、`workflows` において、上記で定義された `setup` ジョブを呼び出します。
 
