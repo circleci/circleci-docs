@@ -45,6 +45,12 @@ commands:
                 default: World
         steps:
             - run: echo "Hello, << parameters.to >>"
+        parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, << parameters.to >>"
 ```
 
 1. CLI を使用して、Orb コードをバリデーションします。

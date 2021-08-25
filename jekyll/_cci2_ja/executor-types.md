@@ -67,12 +67,11 @@ jobs:
 
 - In the event that your pipelines are failing despite there being little to no changes in your project, you may need to investigate upstream issues with docker images being used.
 
-`machine` Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)を `true` に設定します。
+To use the machine executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
 
 ### Docker Hub でパブリック コンビニエンス イメージを使用する
-<sup>(1)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
-{:.no_toc}
-Docker Executor の詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。 ジョブには、複数のイメージを指定できます。 たとえば、テストやその他の必要なサービスでデータベースを使用する必要がある場合は、複数のイメージを指定します。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
+{: #using-multiple-docker-images }
+ジョブには、複数のイメージを指定できます。 たとえば、テストやその他の必要なサービスでデータベースを使用する必要がある場合は、複数のイメージを指定します。 **複数のイメージを指定して構成されたジョブでは、最初にリストしたイメージによって作成されるコンテナで、すべてのステップが実行されます。 また、公開されるポートはすべて、[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)から `localhost` で利用できます。
 
 ```yaml
 jobs:
@@ -160,7 +159,7 @@ Docker には、イメージ キャッシュ機能が組み込まれており、
 
 Docker を選択すると、実行できるのは Docker コンテナ内から利用可能な機能 (\[リモート Docker\]\[building-docker-images\] の機能を含む) に制限されます。 たとえば、ネットワークへの低レベル アクセスが必要な場合や、外部ボリュームをマウントする必要がある場合は、`machine` の使用を検討してください。
 
-Linux 上でのソフトウェアのビルドに、コンテナの環境として `docker` イメージを使用する場合と、Ubuntu ベースの `machine` イメージを使用する場合にはどのような違いが現れるのでしょうか。
+<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
 
 | Capability                                                                            | `docker`           | `machine` |
 | ------------------------------------------------------------------------------------- | ------------------ | --------- |
@@ -178,9 +177,11 @@ Linux 上でのソフトウェアのビルドに、コンテナの環境とし�
 | [構成可能なリソース (CPU/RAM)]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) | Yes                | Yes       |
 {: class="table table-striped"}
 
-<sup>(1)</sup> See \[Using Custom Docker Images\]\[custom-images\].
+{{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class
 
-<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
+<sup>(1)</sup> \[リモート Docker\]\[building-docker-images\] を使用する必要があります。
+{:.no_toc}
+Docker Executor の詳細については、「[CircleCI を設定する]({{ site.baseurl }}/ja/2.0/configuration-reference/)」を参照してください。
 
 <sup>(2)</sup> Docker で複数のデータベースを実行することもできますが、その場合、すべてのイメージ (プライマリおよびセカンダリ) の間で、基になるリソース制限が共有されます。 このときのパフォーマンスは、ご契約のコンテナ プランで利用できるコンピューティング能力に左右されます。
 
@@ -188,7 +189,7 @@ For more information on `machine`, see the next section below.
 
 
 ### Available Docker resource classes
-{{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class
+<sup>(2)</sup> Requires using \[Remote Docker\]\[building-docker-images\].
 
 The [`resource_class`]({{ site.baseurl }}/2.0/configuration-reference/#resource_class) key allows you to configure CPU and RAM resources for each job. In Docker, the following resources classes are available:
 
@@ -217,9 +218,9 @@ jobs:
 ```
 
 ## Machine の使用
-**メモ:** 将来の料金改定で `machine` の使用に追加料金が必要になる可能性があります。
+○
 
-{{ site.baseurl }}/ja/2.0/configuration-reference/
+**メモ:** オンプレミス版の CircleCI Server では `image` キーは必須ではありませんが (上の例を参照)、使用する場合は `image: default` に設定する必要があります。
 
 {% include snippets/machine-resource-table.md %}
 
@@ -227,9 +228,9 @@ jobs:
 
 `machine` Executor を使用すると、Docker プロセスにもフル アクセスできます。 これにより、特権 Docker コンテナを実行し、新しい Docker イメージをビルドできます。
 
-**メモ:** オンプレミス版の CircleCI Server では `image` キーは必須ではありませんが (上の例を参照)、使用する場合は `image: default` に設定する必要があります。
+**メモ:** 将来の料金改定で `machine` の使用に追加料金が必要になる可能性があります。
 
-To use the machine executor, set the [`machine` key]({{ site.baseurl }}/2.0/configuration-reference/#machine) in `.circleci/config.yml`:
+`machine` Executor を使用するには、`.circleci/config.yml` で [`machine` キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#machine)を `true` に設定します。
 
 {:.tab.machineblock.Cloud}
 ```yaml
@@ -358,6 +359,6 @@ jobs:
 Customers using CircleCI server can configure their VM service to use GPU-enabled machine executors. See \[Running GPU Executors in Server\]\[server-gpu\].
 
 ## Docker のメリットと制限事項
-○
+{: #see-also }
 
 [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/)

@@ -71,12 +71,12 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI で [[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-このデモで使用するカスタム イメージは `golang:1.12.0` に基づいており、`netcat` も含まれます (後で使用します)。
+さらに、PostgreSQL のイメージを使用し、データベース初期化用の 2 つの環境変数を指定します。
 
 ---
 
 ## 設定ファイルの詳細
-さらに、PostgreSQL のイメージを使用し、データベース初期化用の 2 つの環境変数を指定します。
+{: #config-walkthrough }
 
 This section explains the commands in `.circleci/config.yml`
 
@@ -105,7 +105,7 @@ Docker をセットアップしたら、テスト結果のパスを格納して�
 
 `build` ジョブ内にいくつかの `steps` を追加します。 Steps make up the bulk of a job.
 
-次に、テスト結果を収集するためのディレクトリを作成します。
+Use the [`checkout`]({{ site.baseurl }}/2.0/configuration-reference/#checkout) step to check out source code.
 
 ```yaml
     steps:

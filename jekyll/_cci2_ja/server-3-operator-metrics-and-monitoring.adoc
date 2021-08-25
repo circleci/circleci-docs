@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-CPU やメモリの使用率などのメトリクス、および内部メトリクスを活用すると、次のことに役立ちます。
+CPU やメモリの使用率などのメトリクス、および内部メトリクスを活用すると、以下のことに役立ちます。
 
 * インシデントや異常な動作をすばやく検出する
 * コンピューティング リソースを動的にスケールする
@@ -21,14 +21,14 @@ toc::[]
 == メトリクスの収集
 
 === スコープ
-CircleCI Server では、システムの正常性の監視や、システムの問題のデバッグに役立つ各種メトリクスとログをデフォルトで収集します。
+CircleCI Server では、システムのヘルス状態の監視や、システムの問題のデバッグに役立つ各種メトリクスとログをデフォルトで収集します。
 
 NOTE: データは最大 15 日間保持されます。
 
-NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server だけに限りません。 デフォルトでは、クラスタ全体からメトリクスを収集します。 必要に応じて、KOTS 管理者コンソールの [Config (構成)] から Prometheus を無効にできます。
+NOTE: Prometheus のメトリクスの収集範囲は、CircleCI Server のみに限定されていません。 デフォルトでは、クラスタ全体からメトリクスを収集します。 必要に応じて、KOTS 管理者コンソールの [Config (構成)] から Prometheus を無効にできます。
 
 === Prometheus
-https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視とアラート システムです。 CircleCI Server 3.x には、一般的なパフォーマンス メトリクスを監視する基本的な実装が付属しています。 
+https://prometheus.io/[Prometheus] は、Kubernetes 用の優れた監視およびアラート システムです。 CircleCI Server 3.x には、一般的なパフォーマンス メトリクスの監視が実装されています。 
 
 === KOTS 管理者 - メトリクス グラフ
 デフォルトでは、Prometheus インスタンスは CircleCI Server と一緒にデプロイされます。 Once deployed, you may provide the 
@@ -37,20 +37,20 @@ the cpu and memory usage of containers in your cluster.
 
 デフォルトの Prometheus アドレスは、`http://prometheus-server` です。
 
-KOTS ダッシュボードの [Configure graphs (グラフの構成)] で、 「`http://prometheus-server`」と入力すると、KOTS でリソース使用率グラフの生成が開始されます。
+KOTS ダッシュボードの [Configure graphs (グラフの構成)] を選択し、 `http://prometheus-server` と入力すると、KOTS でリソース使用率グラフが生成されます。
 
 === Telegraf
 CircleCI Server 上で実行されるほとんどのサービスは、サーバーで実行されている https://www.influxdata.com/time-series-platform/telegraf/[Telegraf] ポッドに StatsD メトリクスを報告します。
-この構成は詳細にカスタマイズ可能なので、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
+この構成は完全にカスタマイズ可能で、https://docs.influxdata.com/telegraf/v1.17/plugins/#output-plugins[出力プラグイン]を介して、Telegraf でサポートされている任意の出力先に Telegraf のメトリクスを転送できます。 デフォルトでは、Prometheus で収集するためのメトリクス エンドポイントが提供されます。
 
 === Telegraf から Datadog へのメトリクスの転送
 以下に、Telegraf から Datadog にメトリクスを出力する構成方法の例を示します。
 
-管理コンソール ダッシュボードを開いて、メニュー バーの *[Config (構成)]* を選択します。 *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム構成)]* セクションを見付けます。 編集可能なテキスト ウィンドウがあり、CircleCI Server の Telegraf メトリクスの転送に利用するプラグインを構成できます。 Datadog に転送する場合は、以下のコードを追加します。ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
+管理コンソール ダッシュボードを開いて、メニュー バーの *[Config (構成)]* を選択します。 *[Observability and monitoring (オブザーバビリティと監視)]* の下にある *[Custom Telegraf config (Telegraf カスタム構成)]* を見付けます。 編集可能なテキスト ウィンドウがあり、CircleCI Server の Telegraf メトリクスの転送するためのプラグインを構成できます。 Datadog に転送する場合は、以下のコードを追加します。 ただし、`my-secret-key` は自身の Datadog API キーに置き換えてください。
 
 ```
 [[outputs.datadog]]
-  ## "my-secret-key" は Datadog API キーに置き換える
+  ## "my-secret-key" を Datadog API キーに置き換える
   apikey = "my-secret-key"
 ```
 

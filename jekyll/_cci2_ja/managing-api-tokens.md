@@ -19,8 +19,8 @@ There are two types of API tokens you can create within CircleCI.
   1. **パーソナル:** このトークンは CircleCI API とのやり取りに使用され、完全な読み取りアクセス権と書き込みアクセス権を付与します。
   2. **プロジェクト**: このトークンは、特定のプロジェクトに関する情報を提供し、読み取りアクセス権のみを付与します。 プロジェクト トークンには、*Status*、*Build Artifacts*、*All* の 3 つのスコープ オプションがあります。
     - *Status* トークン: プロジェクトのビルド ステータスへの読み取りアクセス権を付与します。 [ステータス バッジを埋め込む]({{ site.baseurl }}/ja/2.0/status-badges/)際に便利です。
-    - {{ site.baseurl }}/ja/2.0/api-job-trigger/
-    - {{ site.baseurl }}/ja/2.0/artifacts/#circleci-で行うビルドのすべてのアーティファクトのダウンロード
+    - _Read Only_ tokens grant read only access to the project's API.
+    - _Admin_ tokens grant read and write access for the project's API.
 
 **メモ:** API トークンは、一度作成すると修正できません。 既存のトークンを変更するには、いったん削除してから再作成する必要があります。
 
