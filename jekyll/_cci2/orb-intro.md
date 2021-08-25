@@ -43,7 +43,9 @@ Using a private orb enables you to author an orb while ensuring the following:
 
 By choosing to use a private orb instead of a public orb, you also need to understand certain limitations inherent in using private orbs, which include:
 
-* You will be unable to use the `circleci config validate` command to validate your configuration. You may, however, either paste the content of the orb into the "orbs" stanza of your configuration inline or use the `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` command to validate your configuration.
+* The `circleci config validate` command will error, as it will not be able to locate your orb. To make your private orb available during validation, you may:
+   * modify the validate command like so: `circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` where `--org-slug` is the combination of your `<vcs-type>/<org-name>` (specified when you created your organization's namespace, e.g., github/CircleCI-Public) and the path (which now must be specified) is that to the local CircleCI config file, e.g. `.circleci/config.yml`; or
+   * paste the content of the orb into the "orbs" stanza of your configuration inline
 
 * You cannot use private orbs from one organization in another organization's pipelines, regardless of the relationship between organizations. This means that even if you commit code and start a pipeline, and have the necessary membership in both organizations, you can use a private orb from your configuration file, but not from another orb.
 
