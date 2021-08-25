@@ -92,7 +92,7 @@ jobs:
 ## Sauce Labs
 {: #sauce-labs }
 
-Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl` - their test orchestrator CLI that can execute tests directly from a variety of JavaScript frameworks.
+Sauce Labs has an extensive network of operating system and browser combinations you can test your web application against. Sauce Labs supports automated web app testing using Selenium WebDriver scripts as well as through `saucectl`, their test orchestrator CLI, which can be used to execute tests directly from a variety of JavaScript frameworks.
 
 ### saucectl
 {: #saucectl }
