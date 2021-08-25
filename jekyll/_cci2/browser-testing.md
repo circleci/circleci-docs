@@ -97,7 +97,7 @@ Sauce Labs has an extensive network of operating system and browser combinations
 ### saucectl
 {: #saucectl }
 
-If you're using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run Orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
+If you are using JavaScript to test your web application, you can still take advantage of the Sauce Labs platform by using [`saucectl`](https://docs.saucelabs.com/testrunner-toolkit) with the JS framework of your choice, and then integrating the [saucectl-run orb](https://circleci.com/developer/orbs/orb/saucelabs/saucectl-run) in your CircleCI workflow.
 
 1. Add your `SAUCE_USERNAME` and `SAUCE_ACCESS_KEY` as Environment variables in your Circle CI project.
 2. Modify your CircleCI project `config.yml` to include the saucectl-run orb and then call the orb as a job in your workflow.
