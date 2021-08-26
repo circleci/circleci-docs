@@ -173,6 +173,7 @@ analytics:
     go_button_clicked: go-button-clicked
 rollbar_env: development
 
+# Optimizely SDK key for dev env
 optimizely: "GfYszBpMkefBSwiiEkH3b3"
 
 # server_version: "2.18.4"
