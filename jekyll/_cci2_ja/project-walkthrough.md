@@ -81,7 +81,7 @@ The environment variables for the *primary container* set some config specific t
 
 The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `root` with an empty password, and a database called `circle_test`.
 
-## Installing dependencies
+## 依存関係のインストール
 {: #installing-dependencies }
 
 Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
@@ -131,6 +131,7 @@ An environment variable defined in a `run:` key will override image-level variab
 
 To speed up the jobs, the demo configuration places the Python virtualenv into the CircleCI cache and restores that cache before running `pip install`. If the virtualenv was cached the `pip install` command will not need to download any dependencies into the virtualenv because they are already present. Saving the virtualenv into the cache is done using the `save_cache` step which runs after the `pip install` command.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -166,6 +167,7 @@ jobs:
           paths:
             - "venv"
 ```
+{% endraw %}
 
 The following describes the detail of the added key values:
 
