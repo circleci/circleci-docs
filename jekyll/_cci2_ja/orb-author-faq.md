@@ -35,54 +35,54 @@ Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have m
 
 * 作成した Orb を削除できますか？
 
-* 回答: 削除できません。 Orb はデフォルトで公開されており、あるバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において当然同じ動作をするであろうと想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
+* 回答: 削除できません。 Orb はデフォルトで公開されており、１つのバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において当然同じ動作をすると想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
 
-ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI から見つけることができますが、Orb レジストリの検索結果には表示されません。 This may be desired if for instance, an orb is no longer maintained.
+ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI から見つけられますが、Orb レジストリの検索結果には表示されません。 これは、例えば、現在はメンテナンスを行っていない Orb などに適しています。
 
 ```
 circleci orb unlist myOrb/myNamespace
 ```
 
-## Secure API tokens
+## API トークンの保護
 {: #secure-api-tokens }
 
-* Question: How do I protect a user's API tokens and other sensitive information?
+* 質問: ユーザーの API トークンなどの機密情報を保護するにはどうしたらよいですか。
 
-* Answer: Use the `env_var_name` parameter type for the API key parameter. This parameter type will only accept valid POSIX environment variable name strings as input. In the parameter description, it is best practice to mention to the user to add this environment variable.
+* 回答: API キーのパラメーターとして `env_var_name` パラメーター型を使用してください。 このパラメーター型は、有効な POSIX 環境変数名の文字列のみを入力値として受け入れます。 パラメーターの説明で、この環境変数を追加するようにユーザーに指示してください。
 
-Read more:
-* [Environment Variable Name]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
+詳細はこちら:
+* [環境変数名]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## Environment variables
+## 環境変数
 {: #environment-variables }
 
-* Question: How can I require a user to add an environment variable?
+* 質問: ユーザーに環境変数の追加を求めるにはどうしたらよいですか。
 
-* Answer: Create a parameter for the environment variable name, even if it is a statically named environment variable the user _should not_ change. Then, assign it the correct default value. In the parameter description let the user know if this value should not be changed. Either way, consider instructing the user on how they can obtain their API key.
+* 回答: 環境変数名のパラメーターを作成してください。_変更できない_静的な名前を持つ環境変数でも同じように対応します。 そして、そのパラメーターに正しいデフォルト値を割り当てます。 変更できない環境変数の場合は、その旨をパラメーターの説明に記載します。 また、変更できる環境変数かどうかを問わず、API キーの取得方法をユーザーに示してください。
 
-Consider validating required environment variables. See more in the [Orb Author Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/#commands) guide.
+必須の環境変数はバリデーションすることをお勧めします。 詳細については、[Orb のオーサリングのベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/#commands)」を参照してください。
 
-Read more:
-* [Environment Variable Name parameter type]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
-* [Best Practices]({{site.baseurl}}/2.0/orbs-best-practices/)
+詳細はこちら:
+* [環境変数名パラメーター型]({{site.baseurl}}/2.0/reusing-config/#environment-variable-name)
+* [ベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices/)
 
-## Supported programming languages
+## サポートされているプログラミング言語
 {: #supported-programming-languages }
 
-* Question: What language do I use to write an orb?
+* 質問: Orb の記述にはどの言語を使用できますか。
 
-* Answer: Orbs are packages of [CircleCI YAML configuration]({{site.baseurl}}/2.0/configuration-reference/).
+* 回答: Orb は [CircleCI YAML 設定ファイル]({{site.baseurl}}/2.0/configuration-reference/)をパッケージ化したものです。
 
-CircleCI orbs package [CircleCI reusable config]({{site.baseurl}}/2.0/reusing-config/), such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), which can execute within a given [executor]({{site.baseurl}}/2.0/executor-intro/) defined by either, the user if using a _command_ within a custom job, or by the orb author if using a [reusable job]({{site.baseurl}}/2.0/orb-concepts/#jobs). The environment within which your logic is running may influence your language decisions.
+CircleCI Orbs では、再利用可能な CircleCI 設定ファイル</a>をパッケージ化しています。例えば、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)は特定の [Executor]({{site.baseurl}}/2.0/executor-intro/) 内で実行できますが、その Executor は、カスタムジョブで_コマンド_を使用する場合はユーザー、[再利用可能なジョブ]({{site.baseurl}}/2.0/orb-concepts/#%E3%82%B8%E3%83%A7%E3%83%96)を使用する場合は Orb オーサーによって定義されます。 ロジックが実行される環境に応じて、使用する言語を決定してください。
 
-* Question: What programming languages can I write my Command logic in?
+* 質問: コマンド ロジックの記述にはどのプログラミング言語を使用できますか。
 
-* Answer: POSIX compliant bash is the most portable and universal language. This is the recommended option when you intend to share your orb. Orbs do, however, come with the flexibility and freedom to run other programming languages or tools.
+* 回答: 移植性と汎用性に最も優れているのは、POSIX 準拠の bash です。 Orb を共有する予定であれば、この言語を使用することをお勧めします。 ただし、Orb は高い柔軟性を誇り、他のプログラミング言語やツールも自由に実行できます。
 
 **Bash**
 
-Bash is the preferred language as it is most commonly available among all available executors. Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
+bash は、すべての Executor において最もよく使用されているため、お勧めの言語です。 Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
 
 **Interactive Interpreter (or example, Python)**
 
