@@ -196,8 +196,11 @@ Below is an explanation of the preceding example:
 - [`checkout`]({{ site.baseurl }}/ja/2.0/configuration-reference/#checkout): 基本的に、git は GitHub から取得したプロジェクト リポジトリをコンテナにクローンします。
 - [`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) キー: 復元するキャッシュ ファイルの名前を指定します。 キー名は、このスキーマの後方にある save_cache キーで指定されます。 指定されたキーが見つからない場合は、何も復元されず、処理が続行されます。
 - [`run`]({{ site.baseurl }}/ja/2.0/configuration-reference/#run) コマンドの `cat /dev/null | sbt clean update dist`: パッケージの .zip ファイルを生成する sbt コンパイル コマンドを実行します。
-- [`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) パス: イメージの ARTIFACT ゾーンにコピーするソース ファイルのパスを指定します。
-- [`save_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#save_cache) パス: 将来のビルドで使用するために、指定されたディレクトリを保存します ([`restore_cache`]({{ site.baseurl }}/ja/2.0/configuration-reference/#restore_cache) キーで指定された場合)。
+
+**Note:** `cat /dev/null` is normally used to prevent a command from hanging if it prompts for interactive input and does not detect whether it is running with an interactive TTY. `sbt` will prompt on failures by default.
+
+- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
+- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 2.0 スキーマの最後の部分は deploy コマンド キーです。 これは、コンパイルされた samplescala.zip を $CIRCLE_ARTIFACTS/ ディレクトリに移動し、その名前を変更します。  その後、指定された AWS S3 バケットにファイルがアップロードされます。
 
@@ -215,6 +218,6 @@ The deploy command is another multi-line execution.
 {: #see-also }
 {:.no_toc}
 
-- 引用元のブログ記事「[Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0 (Scala/sbt スキーマを CircleCI 1.0 から CircleCI 2.0 に移行する)](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/)」を参照してください。
-- デプロイ ターゲットのその他の構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
+- Refer to the [Migrating Your Scala/sbt Schema from CircleCI 1.0 to CircleCI 2.0](https://circleci.com/blog/migrating-your-scala-sbt-schema-from-circleci-1-0-to-circleci-2-0/) for the original blog post.
+- See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for more example deploy target configurations.
 - [CircleCI で SBT のテストを並列化する](https://tanin.nanakorn.com/technical/2018/09/10/parallelise-tests-in-sbt-on-circle-ci.html)方法もご確認ください。
