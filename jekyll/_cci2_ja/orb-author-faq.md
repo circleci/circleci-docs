@@ -13,31 +13,31 @@ version:
 * 目次
 {:toc}
 
-## Errors claiming namespace or publishing orbs
+## 名前空間を要求または Otb をパブリッシュしようとするとエラー
 {: #errors-claiming-namespace-or-publishing-orbs }
 
 * 質問: 名前空間を要求または安定版 Orb をパブリッシュしようとするとエラーが発生します。
 
-* 回答: 組織オーナーまたは管理者でない可能性があります。
+* 回答: お客様は組織オーナーまたは管理者でない可能性があります。
 
-Organizations can only claim a single namespace. In order to claim a namespace for an organization the authenticating user must have owner/admin privileges within the organization.
+組織が要求できる名前空間は 1 つだけです。 組織の名前空間を要求するには、認証中のユーザーがその組織内でオーナーまたは管理者の権限を持っている必要があります。
 
-If you do not have the required permission level you might see an error similar to below:
+必要な権限レベルがない場合、下記のようなエラーが表示されることがあります。
 
 ```
 Error: Unable to find organization YOUR_ORG_NAME of vcs-type GITHUB: Must have member permission.: the organization 'YOUR_ORG_NAME' under 'GITHUB' VCS-type does not exist. Did you misspell the organization or VCS?
 ```
 
-Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix).
+詳細については、[Orb CLI の権限の一覧表]({{site.baseurl}}/2.0/orb-author-intro/#permissions-matrix)を参照してください。
 
-## Deleting Orbs
+## Orb の削除
 {: #deleting-orbs }
 
-* Question: Is it possible to delete an orb I've created?
+* 作成した Orb を削除できますか？
 
-* Answer: No. Orbs are public by default and immutable, once a version of an orb is published it can not be changed. This is done so users can reasonably expect a known version of an orb will behave the same on every run. Deleting an orb could potentially lead to a failing pipeline in any of its user's projects.
+* 回答: 削除できません。 Orb はデフォルトで公開されており、あるバージョンの Orb をパブリッシュした後、変更することはできません。 これにより、ユーザーは既知のバージョンの Orb がすべての実行において当然同じ動作をするであろうと想定することができます。 Orb を削除すると、ユーザーのプロジェクトにおけるパイプラインの失敗につながる恐れがあります。
 
-Orbs can however be "Unlisted" from the [Orb Registry](https://circleci.com/developer/orbs). Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
+ただし、Orb を[ Orb レジストリ](https://circleci.com/developer/orbs)から除外することは可能です。 リストから除外した Orb は、 API または CLI から見つけることができますが、Orb レジストリの検索結果には表示されません。 This may be desired if for instance, an orb is no longer maintained.
 
 ```
 circleci orb unlist myOrb/myNamespace
