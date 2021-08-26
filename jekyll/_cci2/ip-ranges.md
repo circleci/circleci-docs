@@ -110,7 +110,7 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 - 3.210.128.175
 
 **Upcoming Changes to list of IP address ranges** (Last Updated: 08/23/2021):
-Added new IP address ranges to list of IP address ranges for core services on 08/23.  Removed 35.174.249.131 from list of IP address ranges for core services on 08/23. Machine-consumable lists have been updated to reflect new IP address ranges.
+Added new IP address ranges to list of IP address ranges for core services on 08/23. Removed 35.174.249.131 from list of IP address ranges for core services on 08/23. Machine-consumable lists have been updated to reflect new IP address ranges.
 
 **Machine-consumable lists can be found below:**
 
