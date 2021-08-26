@@ -82,11 +82,11 @@ CircleCI Orbs では、再利用可能な CircleCI 設定ファイル</a>をパ�
 
 **Bash**
 
-Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
+Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash は、ネイティブの [run]({{site.baseurl}}/2.0/configuration-reference/#run) コマンドを使用して直接、簡単に記述できます。 MacOS と Linux のデフォルトのシェルは Bash になります。
 
-**Interactive Interpreter (or example, Python)**
+**対話型インタープリター (Python など)**
 
-For some use-cases an orb might only exist in a particular environment. For instance, if your orb is for a popular Python utility it may be reasonable to require Python as a dependency of your orb. Consider utilizing the [run]({{site.baseurl}}/2.0/configuration-reference/#run) command with a modified shell parameter.
+ユースケースによっては、Orb が特定の環境にしか存在しないことがあります。 たとえば、Orb が一般的な Python ユーティリティとして使用される場合は、Python を Orb の依存関係として要求した方が合理的です。 [run]({{site.baseurl}}/2.0/configuration-reference/#run) コマンドの shell パラメーターを、次のように変更して使用してください。
 
 ```yaml
 steps:
@@ -97,9 +97,9 @@ steps:
       print("Hello " + place + "!")
 ```
 
-**Binary**
+**バイナリ**
 
-This option is strongly discouraged wherever possible. Sometimes it may be necessary to fetch a remote binary file such as a CLI tool. These binaries should be fetched from a package manager or hosted by a VCS such as GitHub releases wherever possible. For example, installing Homebrew as a part of the [AWS Serverless orb](https://circleci.com/developer/orbs/orb/circleci/aws-serverless#commands-install)
+このオプションは、可能な限り使用しないことを強くお勧めします。 時に、CLI ツールなどのリモート バイナリ ファイルをフェッチしなければならない場合があります。 これらのバイナリは、パッケージ マネージャーからフェッチするか、可能な場合は GitHub リリースなどの VCS でホスティングする必要があります。 Homebrew を [AWS Serverless Orb](https://circleci.com/developer/ja/orbs/orb/circleci/aws-serverless#commands-install) の一部としてインストールする例を以下に示します。
 
 ```yaml
 steps:
@@ -108,29 +108,29 @@ steps:
       curl -fsSL
       "https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh" | bash
       /home/linuxbrew/.linuxbrew/bin/brew shellenv >> $BASH_ENV
-    name: Install Homebrew (for Linux)
+    name: Homebrew のインストール (Linux 向け)
 ```
 
-## Command vs Job
+## コマンド/ジョブ
 {: #command-vs-job }
 
-* Question: Should I create a command or a job?
+* 質問: コマンドとジョブのどちらを作成するべきですか。
 
-* Answer: The answer might be both, but it will heavily depend on the task you want to accomplish.
+* 回答: どちらでもかまいませんが、実行したいタスクによリます。
 
-An orb [command]({{site.baseurl}}/2.0/orb-concepts/#commands) can be utilized by the user, or even the orb developer, to perform some action within a job. The command itself has no knowledge of the job it is within as the user could utilize it however they wish. A command may be useful, for example, to automatically install a CLI application or go a step further and install and authenticate.
+Orb の[コマンド]({{site.baseurl}}/2.0/orb-concepts/#commands)は、ユーザーか Orb 開発者がジョブ内で何らかのアクションを実行するために使用します。 コマンド自体は、自身が含まれているジョブを認識しませんが、ユーザーは自由自在にコマンドを使用できます。 コマンドは、CLI アプリケーションを自動的にインストールしたり、インストールと認証を実行したりする場合などに便利です。
 
-A [job]({{site.baseurl}}/2.0/orb-concepts/#jobs) defines a collection of steps and commands within a specific execution environment. A job is highly opinionated as it generally chooses the execution platform to run on and what steps to run. Jobs may offer a useful way to automate tasks such as deployments. A deployment job may select a certain execution platform that is known, such as _python_, and automatically checkout the users code, install a CLI, and run a deployment command, all with little to no additional configuration required from the user.
+[ジョブ]({{site.baseurl}}/2.0/orb-concepts/#%E3%82%B8%E3%83%A7%E3%83%96)は、特定の実行環境内のステップやジョブの集まりを定義したものです。 ジョブでは通常、実行環境と実行対象のステップを指定するので、自由度はあまりありません。 ジョブは、デプロイなどのタスクを自動化する場合に便利です。 デプロイ ジョブでは、_Python_ などの一般的な実行プラットフォームを選択するだけで、ユーザー コードのチェックアウト、CLI のインストール、デプロイ コマンドの実行を自動的に完了できます。ユーザーが追加の構成を行う必要はほとんど、あるいは一切ありません。
 
-Read more:
-* [Introduction To CircleCI Config Language]({{site.baseurl}}/2.0/config-intro/)
-* [Reusable Config Reference]({{site.baseurl}}/2.0/reusing-config/)
+詳細はこちら:
+* [CircleCI 設定ファイル言語の概要]({{site.baseurl}}/2.0/config-intro/)
+* [再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/)
 
 
-## See also
+## 関連項目
 {: #see-also }
-- Refer to [Orbs Best Practices]({{site.baseurl}}/2.0/orbs-best-practices) for suggestions on creating a production-ready orb.
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/orb-concepts/) for high-level information about CircleCI orbs.
+- [Orb のベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices): 安定版 Orb の作成に関する推奨事項
+- [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
 - Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
 - Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
 - Refer to [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) for information on how to test orbs you have created.
