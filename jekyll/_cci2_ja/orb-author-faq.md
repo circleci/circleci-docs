@@ -82,7 +82,7 @@ CircleCI Orbs では、再利用可能な CircleCI 設定ファイル</a>をパ�
 
 **Bash**
 
-bash は、すべての Executor において最もよく使用されているため、お勧めの言語です。 Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
+Bash は、すべての Executor において最もよく使用されており、お勧めの言語です。 Bash can (and should) be easily written directly using the native [run]({{site.baseurl}}/2.0/configuration-reference/#run) command. The default shell on MacOS and Linux will be bash.
 
 **Interactive Interpreter (or example, Python)**
 
