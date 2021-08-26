@@ -15,12 +15,10 @@ circleci namespace create <my-namespace> github <my-gh-org>
 **Note:** When creating a namespace via the CircleCI CLI, be sure to specify the VCS provider.
 
 1. Create your orb inside your namespace. At this stage no orb content is being generated, but the naming is reserved for when the orb is published.
-
 To create a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```sh
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-
 To create a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
 ```sh
 circleci orb create <my-namespace>/<my-orb-name> --private
