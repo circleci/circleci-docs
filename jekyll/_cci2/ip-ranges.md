@@ -59,7 +59,7 @@ workflows:
 ## List of IP address ranges associated with the IP ranges feature
 {: #listofipaddressranges }
 
-*Last updated*: 08/23/2021
+*Last updated*: 2021-08-23
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
