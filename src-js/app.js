@@ -13,5 +13,6 @@ var optimizelyClient = optimizely.createInstance({
 });
 
 optimizelyClient.onReady().then(() => {
-  console.log("Optimizely Ready:):)", window.userData);
+  alert("Optimizely Ready!")
+  //console.log(window.userData);
 });
