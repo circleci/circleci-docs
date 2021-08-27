@@ -60,6 +60,8 @@ The `circleci orb init` command is called, followed by a path that will be creat
   ▸ Yes, walk me through the process.
     No, I'll handle everything myself.
 ```
+When choosing the manual option, see [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
+
 When choosing the fully automated option, the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) will be downloaded and automatically modified with your customized settings. The project will be followed on CircleCI with an automated CI/CD pipeline included. <br/><br/>
 For more information on the included CI/CD pipeline, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) documentation.
 Alternatively, if you would simply like a convenient way of downloading the [Orb-Project-Template](https://github.com/CircleCI-Public/Orb-Project-Template) you can opt to handle everything yourself.
