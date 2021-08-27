@@ -42,7 +42,7 @@ class OptimizelyClient {
         });
 
         if (isInGrowthExperimentGroup === "treatment") {
-          // the check if the user is in the experiment or not
+          // then check if the user is in the experiment or not
           const variationName = this.client.getVariation(options.featureName, userId, {
             id: userId,
             $opt_bucketing_id: orgId,
