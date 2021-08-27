@@ -44,12 +44,10 @@ The name of your repository is not critical, but we recommend something similar 
     When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
-
 To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-
 To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb --private
