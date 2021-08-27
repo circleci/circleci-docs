@@ -47,12 +47,11 @@ class OptimizelyClient {
             id: userId,
             $opt_bucketing_id: orgId,
           });
-          return resolve(variationName);
+          resolve(variationName);
         } else {
-          return resolve(null);
+          resolve(null);
         }
       });
-
     });
   }
 }
