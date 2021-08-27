@@ -89,6 +89,11 @@ workflows:
       - deploy:
           requires:
             - hold
+          requires:
+           - test2
+      - deploy:
+          requires:
+            - hold
 ```
 
 ## Trigger Docker builds in Dockerhub
