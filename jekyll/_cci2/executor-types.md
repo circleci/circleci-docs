@@ -188,7 +188,7 @@ job. In Docker, the following resources classes are available:
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
 small                 | 1     | 2GB
-medium (default)      | 2     | 4GB
+medium                | 2     | 4GB
 medium+               | 3     | 6GB
 large                 | 4     | 8GB
 xlarge                | 8     | 16GB
