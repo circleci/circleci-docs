@@ -1,17 +1,5 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
-
 const COOKIE_KEY = 'cci-org-analytics-id';
-const LOCAL_STORAGE_KEY = 'ajs_user_id';
-
-const getUserId = () => {
-  // if possible I would not want to rely on this but window.userData is not always available
-  let userId = localStorage.getItem(LOCAL_STORAGE_KEY);
-  return userId ? userId.replaceAll('"', '') : null;
-};
-
-const getOrgId = () => {
-  return Cookies.get(COOKIE_KEY) || null;
-};
 
 class OptimizelyClient {
   constructor() {
@@ -23,34 +11,36 @@ class OptimizelyClient {
   // This is consistent to what getVariation from the optimizely-sdk does
   getVariationName(options) {
     return new Promise((resolve, reject) => {
-      const userId = getUserId();
-      const orgId = getOrgId();
+      window.addEventListener("userDataReady", () => {
+        const userId = (window.userData && window.userData.analytics_id) ? window.userData.analytics_id : null;
+        const orgId = Cookies.get(COOKIE_KEY) ?? null;
 
-      if (!userId || !orgId) {
-        return resolve(null);
-      }
+        if (!userId || !orgId) {
+          return resolve(null);
+        }
 
-      if (!options || !options.featureName || !options.groupExperimentName) {
-        return reject({error: "Missing required options"});
-      }
+        if (!options || !options.experimentKey || !options.groupExperimentName) {
+          return reject({error: "Missing required options"});
+        }
 
-      this.client.onReady().then(() => {
-        // first check if user is not in the provided exclusion group
-        const isInGrowthExperimentGroup = this.client.getVariation(options.groupExperimentName, userId, {
-          id: userId,
-          $opt_bucketing_id: orgId,
-        });
-
-        if (isInGrowthExperimentGroup === "treatment") {
-          // then check if the user is in the experiment or not
-          const variationName = this.client.getVariation(options.featureName, userId, {
+        this.client.onReady().then(() => {
+          // first check if user is not in the provided exclusion group
+          const isInGrowthExperimentGroup = this.client.getVariation(options.groupExperimentName, userId, {
             id: userId,
             $opt_bucketing_id: orgId,
           });
-          resolve(variationName);
-        } else {
-          resolve(null);
-        }
+
+          if (isInGrowthExperimentGroup === "treatment") {
+            // then check if the user is in the experiment or not
+            const variationName = this.client.getVariation(options.experimentKey, userId, {
+              id: userId,
+              $opt_bucketing_id: orgId,
+            });
+            resolve(variationName);
+          } else {
+            resolve(null);
+          }
+        });
       });
     });
   }
