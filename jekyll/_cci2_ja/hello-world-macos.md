@@ -101,6 +101,53 @@ workflows:
       - test
       - build:
         requires:
+          test version: 2.1
+jobs: # 1 回の実行の基本作業単位
+  build: # 「ワークフロー」を使用しない実行では、エントリポイントとして `build` ジョブが必要です
+    macos:  # macOS Executor を使用していることを示します
+      xcode: 11.3.0 # 選択された Xcode のバージョン
+    steps: # 実行する一連のコマンド
+      - checkout  # ユーザーのバージョン管理システムからコードをプル ダウンします
+      - run:
+          # Xcode の CLI ツール「xcodebuild」を使用してテストを実行します
+          name: 単体テストの実行
+          command: xcodebuild test -scheme circleci-demo-macos
+      - run:
+          # アプリケーションをビルドします
+          name: アプリケーションのビルド
+          command: xcodebuild
+      - run:
+          # Xcode のビルド出力を圧縮し、アーティファクトとして格納できるようにします
+          name: 保存のためのアプリ圧縮
+          command: zip -r app.zip build/Release/circleci-demo-macos.app
+      - store_artifacts: # このビルド出力を保存します  (詳細については https://circleci.com/ja/docs/2.0/artifacts/ を参照)
+          path: app.zip
+          destination: app
+      - run:
+          # Xcode の CLI ツール「xcodebuild」を使用してテストを実行します
+          name: 単体テストの実行
+          command: xcodebuild test -scheme circleci-demo-macos
+      - run:
+          # アプリケーションをビルドします
+          name: アプリケーションのビルド
+          command: xcodebuild
+      - run:
+          # Xcode のビルド出力を圧縮し、アーティファクトとして格納できるようにします
+          name: 保存のためのアプリ圧縮
+          command: zip -r app.zip build/Release/circleci-demo-macos.app
+      - store_artifacts: # このビルド出力を保存します  (詳細については https://circleci.com/ja/docs/2.0/artifacts/ を参照)
+          path: app.zip
+          destination: app Read more: https://circleci.com/docs/2.0/artifacts/
+          path: app.zip
+          destination: app
+
+workflows:
+  version: 2
+  test_build:
+    jobs:
+      - test
+      - build:
+        requires:
           test Read more: https://circleci.com/docs/2.0/artifacts/
           path: app.zip
           destination: app
