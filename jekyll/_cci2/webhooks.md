@@ -80,6 +80,8 @@ Webhooks are set up on a per-project basis. To get started:
 
 <sup>1</sup>Only leave this unchecked for testing purposes.
 
+**Note: There is a limit of 5 Webhooks per project.**
+
 ## Payload signature
 {: #payload-signature}
 
