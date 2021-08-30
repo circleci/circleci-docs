@@ -13,7 +13,7 @@ version:
 * 目次
 {:toc}
 
-## 名前空間を要求または Otb をパブリッシュしようとするとエラー
+## 名前空間を要求または Orb をパブリッシュする際にエラー
 {: #errors-claiming-namespace-or-publishing-orbs }
 
 * 質問: 名前空間を要求または安定版 Orb をパブリッシュしようとするとエラーが発生します。
@@ -132,6 +132,6 @@ Orb の[コマンド]({{site.baseurl}}/2.0/orb-concepts/#commands)は、ユー�
 - [Orb のベスト プラクティス]({{site.baseurl}}/2.0/orbs-best-practices): 安定版 Orb の作成に関する推奨事項
 - [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orb に関するハイレベルな情報
 - [Orb のパブリッシュ プロセス]({{site.baseurl}}/2.0/creating-orbs/): ワークフローやジョブで使用する Orb に関する情報
-- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orbs、コマンド、パラメーター、および Executors の例
+- [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 自分で作成した Orb をテストする方法
-- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orbs のレシピを構成に使用する詳しい方法
+- [CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): CircleCI Orb のレシピを構成に使用する詳しい方法
