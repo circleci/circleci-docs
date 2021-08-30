@@ -65,7 +65,7 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
-[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)</strong> Orb を一覧表示する場合:
+**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace>
 ```
