@@ -17,7 +17,7 @@ version:
 {: #quick-start }
 {:.no_toc}
 
-CircleCI Orbs とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、パラメーター化および[再利用が可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)をまとめた共有可能なオープン ソース パッケージです。 Orbs を使用すると、構成がシンプルになり、多くのプロジェクト間におけるソフトウェアやサービス スタックとの連携が素早く、容易に行えるようになります。
+CircleCI Orb とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、パラメーター化および[再利用が可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)をまとめた共有可能なオープン ソース パッケージです。 CircleCI Orb を使用すると、構成がシンプルになり、多くのプロジェクト間におけるソフトウェアやサービス スタックとの連携が素早く、容易に行えるようになります。
 
 パブリッシュされている Orb を [CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs)から入手できるほか、[独自の Orb をオーサリングする]({{site.baseurl}}/2.0/orb-author-intro/)こともできます。
 
@@ -43,7 +43,7 @@ CircleCI Orbs とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authorin
 
 パブリック Orb ではなくプライベート Orb を選択する場合、プライベート Orb 固有の制限事項を理解する必要があります。具体的には次のとおりです。
 
-* 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 その代わり、Orb のコンテンツを設定ファイルの "orbs" スタンザにインラインで貼り付けるか、`circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` コマンドを使用することで、設定ファイルをバリデーションできます。
+* 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 その代わり、Orb のコンテンツを設定ファイルの "orb" スタンザにインラインで貼り付けるか、`circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` コマンドを使用することで、設定ファイルをバリデーションできます。
 
 * 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
@@ -62,7 +62,7 @@ Orb をオーサリングして [CircleCI Orb レジストリ](https://circleci.
 ## Orb を使用するメリット
 {: #benefits-of-using-orbs }
 
-Orb により設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするための一般的な設定ファイルであり、ジョブの定義には、アプリケーションのテストに必要な複数のステップを実行する、または[circleci/node</code>](https://circleci.com/developer/orbs/orb/circleci/node) Orb が提供する `test` ジョブを使用します。 Orb を使用すれば、パラメーター化された構成を 1 回記述するだけで、それをいくつもの類似したプロジェクトで利用できるようになります。
+Orb により設定ファイルの要素をパラメーター化できるため、構成を大幅に簡素化できます。 例を使って説明しましょう。以下は、Node.js アプリケーションをテストするための一般的な設定ファイルであり、ジョブの定義には、アプリケーションのテストに必要な複数のステップを実行する、または[circleci/node</code>](https://circleci.com/developer/orbs/orb/circleci/node) Orb が提供する `test` ジョブを使用します。 Orb を使用した場合、パラメーター化された構成を 1 回記述するだけで、それをいくつもの類似したプロジェクトで利用できるようになります。
 
 {:.tab.nodeTest.Orbs}
 ```yaml
@@ -117,34 +117,34 @@ workflows:
 ## Orb レジストリ
 {: #the-orb-registry }
 
-The [Orb Registry](https://circleci.com/developer/orbs) is an open repository of all published orbs. Find the orb for your stack or consider developing and [publishing your own orb]({{site.baseurl}}/2.0/orb-author-intro/).
+[Orb レジストリ](https://circleci.com/developer/ja/orbs)は、パブリッシュされたすべての Orb を掲載したオープン リポジトリです。 自分のスタックに適した Orb を検索できるだけでなく、[独自の Orb を開発してパブリッシュ]({{site.baseurl}}/2.0/orb-author-intro/)することもできます。
 
-![Orb Registry]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
+![Orb レジストリ]({{site.baseurl}}/assets/img/docs/orbs-registry.png)
 
-Orbs in the registry will appear with one of three different namespace designations:
+レジストリの Orb には、次の 3 つのラベルのいずれかが表示されます。
 
 | Certified | Written and tested by the CircleCI team | | Partner | Written by our technology partners | | Community | Written by the community |
 {: class="table table-striped"}
 
-**Note:** _In order to use uncertified orbs, your organization’s administrator must opt-in to allow 3rd-party uncertified orb usage on the **Organization Settings > Security** page for your org._
+**注:** _未承認の Orb を使用するには、組織の管理者が組織の **[Organization Settings (組織設定)] > [Security (セキュリティ)]** ページでサードパーティ製の未承認 Orb の使用をオプトインする必要があります。_
 {: class="alert alert-warning"}
 
-Each orb contains its own description and documentation listed in the orb registry. Often, orbs will have a set of usage examples to get you started.
+それぞれのOrb には、Orb レジストリにリストされている説明とドキュメントが含まれています。 多くの場合、Orb には参考になる使用例が記載されています。
 
-If you would like to contribute to an existing orb or file an issue on the orb's repository, many orb authors will include the git repository link.
+既存の Orb に貢献したり、Orb リポジトリに関する問題を報告するために、多くの Orb オーサーが Git リポジトリのリンクを掲載しています。
 
-## Orbs の指定
+## Orb の指定
 {: #identifying-orbs }
-An orb is identified by its _slug_ which contains the _namespace_ and _orb name_. A namespace is a unique identifier referring to the organization authoring a set of orbs. The orb name will be followed be an `@` symbol and a [semantic version]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning) string, identifying which version of the orb is being used.
+Orb は、_名前空間_と _Orb 名_から成る_スラッグ_で指定します。 名前空間は、Orb をオーサリングした組織を指す一意の識別子です。 Orb 名の後には、`@` 記号と、使用する Orb バージョンを指定する[セマンティック バージョン]({{site.baseurl}}/2.0/orb-concepts/#semantic-versioning)文字列が続きます。
 
-Example orb slug: `<namespace>/<orb-name>@1.2.3`
+Orb スラッグの例: `<namespace>/<orb-name>@1.2.3`
 
-## Orbs の使用
+## Orb の使用
 {: #using-orbs }
 
-Each orb within the registry provides a sample code snippet for importing that specific orb with its most recent version.
+レジストリで公開されている Orb には、その Orb の最新バージョンをインポートするためのサンプルコード スニペットが用意されています。
 
-The example below shows how to import an orb into your `version: 2.1` config file. Create an `orbs` key followed by the orb-name key to reference which orb you want to import. The value for the orb-name key should then be the orb slug and version.
+以下の例に、`version: 2.1` の設定ファイルに Orb をインポートする方法を示します。 `orbs` キーの後に、インポートする Orb を表す orb-name キーを入力します。 orb-name キーの値には、Orb スラッグとバージョンを指定します。
 
 ```yaml
 version: 2.1
@@ -153,19 +153,19 @@ orbs:
   orb-name: <namespace>/<orb-name>@1.2.3
 ```
 
-After the orb has been imported into the configuration file, the elements provided by the orb are available as `<orb-name>/<element>`. Orb elements can be used in the same way as [reusable configuration]({{site.baseurl}}/2.0/reusing-config/) elements. The Node example below shows how to use an orb command.
+設定ファイルに Orb をインポートしたら、その Orb が提供するエレメントを `<orb-name>/<element>` の形式で使用できます。 Orb エレメントは、[再利用可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)と同じ方法で使用できます。 Orb のコマンドの使用方法について詳しくは、下記の Node の例をご覧ください。
 
 ### Node の例
 {: #node-example }
 {:.no_toc}
 
-The Node orb provides a command, [`install-packages`](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages), to install your node packages, automatically enable caching, and provide additional options through the use of parameters. To use the `install-packages` command, reference it in a job's [steps](https://circleci.com/docs/2.0/configuration-reference/#steps).
+Node Orb には、[install-packages</code>](https://circleci.com/developer/orbs/orb/circleci/node#commands-install-packages) という Node パッケージをインストールしてキャッシュを自動的に有効にするコマンドがあります。このコマンドには、パラメーターを使用して追加のオプションを指定できます。 `install-packages` コマンドを使用するには、ジョブの [steps](https://circleci.com/ja/docs/2.0/configuration-reference/#steps) にこのコマンドを記述します。
 
 ```yaml
 version: 2.1
 
 orbs:
-  node: circleci/node@x.y #orb version
+  node: circleci/node@x.y #orb バージョン
 
 jobs:
   test:
@@ -173,10 +173,10 @@ jobs:
       - image: cimg/node:<node-version>
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+          password: $DOCKERHUB_PASSWORD  # コンテキスト / プロジェクト UI 環境変数の参照
     steps:
       - checkout
-      - node/install-packages # Utilize commands in steps
+      - node/install-packages # steps でコマンドを使用する
 ```
 
 
@@ -184,8 +184,8 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-- [Orbs のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orbs の基本的な概念
-- [Orbs に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
-- [Orbs リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executors の例
+- [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orbs のハイレベルな情報
+- [Orb に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
+- [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 独自に作成した Orb のテスト方法
 - [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orbs を使用するためのレシピ
