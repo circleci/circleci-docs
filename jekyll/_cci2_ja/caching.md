@@ -391,7 +391,7 @@ steps:
 {: #bundler-ruby }
 {:.no_toc}
 
-Bundler では、明示的に指定されないシステム gem が使用されるため、確定的でなく、部分キャッシュ リストアの信頼性が低下することがあります。
+**Safe to Use Partial Cache Restoration?** Yes.
 
 Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 
