@@ -47,7 +47,7 @@ The Remote Docker Environment has the following technical specifications (for Ci
 {: #example }
 {:.no_toc}
 
-ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
+以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
 
 ```yaml
 version: 2
@@ -75,7 +75,7 @@ jobs:
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-version: 2.1 jobs: build: docker: - image: circleci/golang:1.15 auth: username: mydockerhub-user password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference steps: - checkout # ... steps for building/testing app ...
+ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
 
       - setup_remote_docker:
           version: 19.03.13
@@ -186,7 +186,7 @@ services:
      - bundler-data:/source/bundler-data
 ```
 
-同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
+次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
 
 ```
 run: |
@@ -268,7 +268,7 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
 [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#job-space)
 
