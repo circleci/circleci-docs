@@ -37,13 +37,13 @@ Orb 開発キットは、相互に連携する複数のツールをセットに�
 
 Orb 開発キットで新しい Orb の作成を始めるには、以下の手順を実行します。 最初に行うのは、[GitHub.com](https://github.com) でのリポジトリの新規作成です。
 
-GitHub 上の組織が、Orb の作成先となる[名前空間]({{site.baseurl}}/2.0/orb-concepts/#namespaces)のオーナーになるのでご確認ください。 組織が自分個人のもので、名前空間のオーナーが自分自身であれば、問題ありません。
+GitHub 上の組織 (Organization) が、Orb の作成先となる[名前空間]({{site.baseurl}}/2.0/orb-concepts/#%E5%90%8D%E5%89%8D%E7%A9%BA%E9%96%93)のオーナーになります。 組織が自分個人のもので、名前空間のオーナーが自分自身であれば、問題ありません。
 
-1. **新しい [GitHub リポジトリ](https://github.com/new)を作成します。**<br/> リポジトリの名前は、特に重要な役割はありませんが、"myProject-orb" のようなわかりやすい名前を付けることをお勧めします。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
+1. **新しい [GitHub リポジトリ](https://github.com/new)を作成します。**<br/> リポジトリの名前は、特に重要な役割はありませんが、"myProject-orb" のような分かりやすい名前を付けることをお勧めします。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
     必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
-1. **ターミナルを開き、`orb init` CLI コマンドを使用して新しい　Orb　プロジェクトを初期化します。**
+1. **ターミナルを開き、`orb init` CLI コマンドを使用して、新しい Orb プロジェクトを初期化します。**
 
 **[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
 ```bash
@@ -60,7 +60,7 @@ circleci orb init /path/to/myProject-orb --private
 ```
 ? Would you like to perform an automated setup of this orb?:（ Orb の自動セットアップを実行しますか？）
   ▸ Yes, walk me through the process. （はい、手順を教えてください。)
-    No, I'll handle everything myself.（いいえ、すべて自動で行います。）
+    No, I'll handle everything myself.（いいえ、すべて手動で行います。）
 ```
 完全自動オプションを選択すると、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含まれます。 <br/><br/> 含まれる CI/CD パイプラインの詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。 または、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)を便利な方法でダウンロードするだけに留める場合は、「No, I'll handle everything myself (すべて手動で行う)」を選択します。
 
@@ -68,7 +68,7 @@ circleci orb init /path/to/myProject-orb --private
 
     **注: コンテキストの制限**
     <br/>
-    _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。 <br/><br/> Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。 <br/><br/> 詳細については、[コンテキストの使用]({{site.baseurl}}/2.0/contexts/#restricting-a-context)を参照してください。
+    _[Organization Settings (組織設定)] > [Contexts (コンテキスト)]_ に移動して、コンテキストを制限してください。 <br/><br/> Orb のセットアップが完了したら、`orb-publishing` という新しいコンテキストが表示されます。 この `orb-publishing` をクリックして、_セキュリティ グループ_を追加します。 セキュリティ グループを使うと、ジョブのトリガーを許可されたユーザーだけにアクセスを制限することができます。 プライベートの[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)にアクセスできるのも、これらのユーザーだけです。 詳細については、「[コンテキストの使用]({{site.baseurl}}/2.0/contexts/#%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%81%AE%E5%88%B6%E9%99%90)」を参照してください。
     {: class="alert alert-warning"}
 
 1. **変更を GitHub にプッシュします。**<br/> セットアップ プロセス中に、`orb init` コマンドによって、自動化された Orb 開発パイプラインの準備が進められます。 CLI が処理を続行し、circleci.com でプロジェクトを自動的にフォローするには、その前に、CLI によって生成された修正済みのテンプレート コードがリポジトリにプッシュされている必要があります。 これを実行するよう要求されたら、別のターミナルから以下のコマンドを、「default-branch」を実際のデフォルト ブランチの名前に置き換えて実行します。
@@ -168,7 +168,7 @@ steps:
       command: echo << parameters.greeting >> world
 ```
 
-##### 例
+##### 使用例
 {: #examples }
 {:.no_toc}
 
@@ -264,44 +264,44 @@ Orb 開発キットと `<<include(file)>>` 構文を使用すると、既存の�
 {: #using-parameters-with-scripts }
 {:.no_toc}
 
-スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 The `greet.sh` file, which was included with the special `<<include(file)>>` syntax above in our `greet.yml` command file, looks like this:
+スクリプトの移植性やローカルでの実行可能性を維持するために、スクリプト内で使用する環境変数を事前に検討し、設定ファイル レベルで設定することをお勧めします。 前述の `greet.yml` コマンド ファイルに特別な `<<include(file)>>` 構文でインクルードされた `greet.sh` ファイルは、次のようなものです。
 
 ```bash
 echo Hello "${PARAM_TO}"
 ```
 
-This way, you can both mock and test your scripts locally.
+これで、スクリプトをローカルでモックしてテストできます。
 
 ### Orb のテスト
 {: #testing-orbs }
 
-Much like any other software, there are multiple ways to test your code and it is entirely up to you as the developer to implement as many tests as desired. Within your config file right now there will be a job named [integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) that will need to be updated to test your orb components. This is a type of _integration testing_. Unit testing with orbs is possible as well.
+他のソフトウェアと同様、コードをテストする方法は複数あります。どれだけのテストを実装するかは、開発者が決めることができます。 この時点で、設定ファイル内には　[integration-test-1](https://github.com/CircleCI-Public/Orb-Project-Template/blob/96c5d2798114fffe7903e2f5c9f021023993f338/.circleci/config.yml#L27) という名前のジョブがあります。作成した Orb コンポーネントをテストするには、このジョブを更新する必要があります。 これは一種の_インテグレーション テスト_で、 Orb の単体テストも可能です。
 
-Read our full [Orb Testing Methodologies]({{site.baseurl}}/2.0/testing-orbs/) documentation.
+詳しくは、「[Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/)」をお読みください。
 
 ### 更新履歴の記録
 {: #keeping-a-changelog }
 
-Deciphering the difference between two versions of an orb can prove tricky. Along with semantic versioning, we recommend leveraging a changelog to more clearly describe changes between versions. The orb template comes with the `CHANGELOG.md` file, which should be updated with each new version of your orb. The file uses the [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format.
+Orb のバージョン間の違いは、ときに判別しにくいものです。 そのため、セマンティック バージョニングと合わせて、バージョン間の変更内容をわかりやすく示した更新履歴の活用もお勧めします。 Orb プロジェクト テンプレートに `CHANGELOG.md` ファイルが含まれています。Orb のバージョン更新のたびに、このファイルも更新してください。 ファイルは、[更新履歴の記録](https://keepachangelog.com/ja/1.0.0/) の形式を基にしています。
 
 ### Orb のパブリッシュ
 {: #publishing-your-orb }
 
-With the orb development kit, a fully automated CI and CD pipeline is automatically configured within `.circleci/config.yml`. This configuration makes it simple to automatically deploy semantically versioned releases of your orbs.
+Orb 開発キットを使用すると、完全に自動化された CI/CD パイプラインが `.circleci/config.yml` 内に自動的に構成されます。 この構成により、Orb のセマンティック バージョニングによるリリースを簡単に自動デプロイできます。
 
-For more information, see the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide.
+詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
 
 ### Orb のカテゴリ設定
 {: #categorizing-your-orb }
 
-You can categorize your orb for better discoverability in the [Orb Registry](https://circleci.com/developer/orbs). Categorized orbs are searchable by category in the [Orb Registry](https://circleci.com/developer/orbs). CircleCI may, from time to time, create or edit orb categorizations to improve orb discoverability.
+作成した Orb を [Orb レジストリ](https://circleci.com/developer/ja/orbs)で見つけやすくするために、カテゴリを設定できます。 カテゴリを設定した Orb は、[Orb レジストリ](https://circleci.com/developer/ja/orbs)でカテゴリを指定して検索できるようになります。 Orb を見つけやすくするために、CircleCI が Orb のカテゴリ項目を作成、編集する場合もあります。
 
 #### カテゴリの一覧表示
 {: #listing-categories }
 
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-list-categories.png)
 
-You can select up to two categories for your orb. These are the available categories:
+Orb には最大 2 つのカテゴリを選択できます。 使用できるカテゴリは以下のとおりです。
 
 - Artifacts/Registry (アーティファクト/レジストリ)
 - Build (ビルド)
@@ -319,42 +319,42 @@ You can select up to two categories for your orb. These are the available catego
 - Security (セキュリティ)
 - Testing (テスト)
 
-The list of categories can also be obtained by running the `circleci orb list-categories` CLI command. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html).
+カテゴリの一覧は、CLI コマンド `circleci orb list-categories` を実行して表示することもできます。 このコマンドの詳細については、[こちら](https://circleci-public.github.io/circleci-cli/circleci_orb_list-categories.html)を参照してください。
 
 #### カテゴリへの Orb の追加
 {: #add-an-orb-to-a-category }
 
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-add-to-category.png)
 
-Add your orb to your chosen category by running `circleci orb add-to-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html).
+選んだカテゴリに Orb を追加するには、`circleci orb add-to-category <namespace>/<orb> "<category-name>"` を実行します。 このコマンドの詳細については、[こちら](https://circleci-public.github.io/circleci-cli/circleci_orb_add-to-category.html)を参照してください。
 
 #### カテゴリからの Orb の削除
 {: #remove-an-orb-from-a-category }
 
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-remove-from-category.png)
 
-Remove an orb from a category by running `circleci orb remove-from-category <namespace>/<orb> "<category-name>"`. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html).
+カテゴリから Orb を削除するには、`circleci orb remove-from-category <namespace>/<orb> "<category-name>"` を実行します。 このコマンドの詳細については、[こちら](https://circleci-public.github.io/circleci-cli/circleci_orb_remove-from-category.html)を参照してください。
 
 #### Orb のカテゴリ項目の表示
 {: #viewing-an-orbs-categorizations }
 
 ![](  {{ site.baseurl }}/assets/img/docs/orb-categories-orb-info.png)
 
-To see which categorizations have been applied an orb, check the output of `circleci orb info <namespace>/<orb>` for a list. You can view the detailed docs for this command [here](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html).
+Orb に適用したカテゴリ項目を表示するには、`circleci orb info <namespace>/<orb>` を実行して表示される一覧を確認します。 このコマンドの詳細については、[こちら](https://circleci-public.github.io/circleci-cli/circleci_orb_info.html)を参照してください。
 
 ### Orb の一覧表示
 {: #listing-your-orbs }
 
-List your available orbs using the CLI:
+CLI を使用して、公開されている Orb を一覧表示できます。
 
-To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace>
 ```
 
-To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace> --private
 ```
 
-For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+`circleci orb` コマンドの使用方法の詳細については、[CLI に関するドキュメント](https://circleci-public.github.io/circleci-cli/circleci_orb.html)を参照してください。
