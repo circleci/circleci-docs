@@ -184,6 +184,8 @@ You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 
+
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -217,12 +219,14 @@ jobs:
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
+{% endraw %}
 
 ## Running tests
 {: #running-tests }
 
 In the demo application, a virtual Python environment is set up, and the tests are run using unittest. This project uses `unittest-xml-reporting` for its ability to save test results as XML files. In this example, reports and results are stored in the `store_artifacts` and `store_test_results` steps.
 
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -277,6 +281,7 @@ jobs:
       - store_test_results:
           path: test-reports/
 ```
+{% endraw %}
 
 Notes on the added keys:
 
