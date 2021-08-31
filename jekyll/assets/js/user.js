@@ -40,7 +40,7 @@ $(function() {
 });
 
 /*
-* The following functions are comming directly from the site.min.js
+* The following functions are coming directly from the site.min.js
 */
 
 function getSessionId() {
