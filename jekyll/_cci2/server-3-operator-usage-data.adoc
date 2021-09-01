@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Usage Data
+= CircleCI Server v3.x Usage Data 
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
@@ -16,4 +16,4 @@ or accounts.
 
 ## Current Data Collected
 At this time, Server 3.0 does not include the data collection service. The service will be included in a future release.
-With any release, we will communicate what additional data will be collected.
+With any release, we will communicate what additional data will be collected. 
