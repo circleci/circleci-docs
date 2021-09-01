@@ -331,8 +331,8 @@ isn't associated with a git commit.
       "target_repository_url": "https://github.com/circleci/webhook-service",
       "revision": "1dc6aa69429bff4806ad6afe58d3d8f57e25973e",
       "commit": {
-        "subject": "Trigger CI",
-        "body": "",
+        "subject": "Description of change",
+        "body": "More details about the change",
         "author": {
           "name": "Author Name",
           "email": "author.email@example.com"
@@ -392,8 +392,8 @@ isn't associated with a git commit.
       "target_repository_url": "https://github.com/circleci/webhook-service",
       "revision": "1dc6aa69429bff4806ad6afe58d3d8f57e25973e",
       "commit": {
-        "subject": "Trigger CI",
-        "body": "",
+        "subject": "Description of change",
+        "body": "More details about the change",
         "author": {
           "name": "Author Name",
           "email": "author.email@example.com"
