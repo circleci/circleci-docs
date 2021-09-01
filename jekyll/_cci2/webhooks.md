@@ -310,6 +310,15 @@ isn't associated with a git commit.
     "id": "cf8c4fdd-0587-4da1-b4ca-4846e9640af9",
     "name": "Sample Webhook"
   },
+  "project": {
+    "id": "84996744-a854-4f5e-aea3-04e2851dc1d2",
+    "name": "webhook-service",
+    "slug": "github/circleci/webhook-service"
+  },
+  "organization": {
+    "id": "f22b6566-597d-46d5-ba74-99ef5bb3d85c",
+    "name": "circleci"
+  }
   "workflow": {
     "id": "fda08377-fe7e-46b1-8992-3a7aaecac9c3",
     "name": "build-test-deploy",
@@ -347,15 +356,6 @@ isn't associated with a git commit.
       "branch": "main"
     }
   },
-  "project": {
-    "id": "84996744-a854-4f5e-aea3-04e2851dc1d2",
-    "name": "webhook-service",
-    "slug": "github/circleci/webhook-service"
-  },
-  "organization": {
-    "id": "f22b6566-597d-46d5-ba74-99ef5bb3d85c",
-    "name": "circleci"
-  }
 }
 ```
 
