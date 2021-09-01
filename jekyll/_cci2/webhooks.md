@@ -268,7 +268,6 @@ can also be triggered manually through the API.
 | Field    | Always present? | Description                                                         |
 |----------|-----------------|---------------------------------------------------------------------|
 | type     | yes             | How this pipeline was triggered (e.g. "webhook", "api", "schedule") |
-| actor.id | No              | The user who triggered the pipeline, if there is one                |
 {: class="table table-striped"}
 
 
