@@ -29,7 +29,8 @@ $(function() {
     xhrFields: {
       withCredentials: true
     },
-    dataType: "json"
+    dataType: "json",
+    timeout: 10000 // 10 seconds
   }).done(function (userData) {
     setLoggedIn(userData);
     setAmplitudeId(); // set Amplitude required data
