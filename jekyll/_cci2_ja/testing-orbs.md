@@ -194,6 +194,7 @@ teardown() {
 }
 }
 }
+}
 ```
 
 ## Integration testing

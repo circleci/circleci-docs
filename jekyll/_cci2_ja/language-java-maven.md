@@ -26,6 +26,7 @@ This is an example application showcasing how to run a Java app on CircleCI 2.1.
 
 ### A basic build with an orb:
 {: #a-basic-build-with-an-orb }
+
 {% raw %}
 ```yaml
 version: 2 # CircleCI 2.0 を使用します

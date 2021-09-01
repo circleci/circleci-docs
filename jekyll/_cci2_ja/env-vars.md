@@ -216,7 +216,7 @@ steps:
 {: #alpine-linux }
 {:.no_toc}
 
-CircleCI API v2 を使用すると、パイプライン パラメーターから変数を渡すことができます。
+下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
 
 1 つのジョブで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#job_name)を使用します。
 
@@ -232,7 +232,7 @@ jobs:
 ```
 
 ## シェル コマンドでの環境変数の設定
-下の例では、上記の設定ファイルの例で説明したパラメーターを使用して、パイプラインをトリガーしています (注: API からパイプラインをトリガーするときにパラメーターを渡すには、設定ファイルでパラメーターを宣言している必要があります)。
+1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
 
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%A8-bash-%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%BF%E7%94%A8)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
@@ -258,7 +258,7 @@ jobs:
 
 1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
 
-ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
+[Contexts]({{ site.baseurl }}/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
 
 ## ステップでの環境変数の設定
 {: #setting-an-environment-variable-in-a-step }
@@ -488,7 +488,7 @@ Read more in the [Pipeline Variables]({{site.baseurl}}/2.0/pipeline-variables/) 
 ## API v1 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v1 }
 
-このビルドは、以下の環境変数を受け取ります。
+ビルド パラメーターは環境変数であるため、以下の条件に従って名前を付けます。
 
 - 使用できるのは ASCII 文字、数字、アンダースコア文字のみです
 - 先頭に数字を使用することはできません
@@ -511,7 +511,7 @@ For example, when you pass the parameters:
 }
 ```
 
-たとえば、以下のように `curl` を使用します。
+In the above example, `$CIRCLE_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
 
 ```sh
 export foo="bar"
@@ -533,7 +533,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 }
 ```
 
-In the above example, `$CIRCLE_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
+たとえば、以下のように `curl` を使用します。
 
 ```sh
 curl \

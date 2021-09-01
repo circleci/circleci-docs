@@ -28,15 +28,15 @@ version:
 ```
 
 The above code example assumes that you will also have `curl` available in your executor. If you are constructing your own docker images, consider reading the [custom docker images document]({{site.baseurl}}/2.0/custom-images/).
-以下のステップにより、`docker-compose` コマンドをビルド イメージに追加できます。
-
 または、以下のステップで、システム全体を実行できます。
+
+以下の例では、システム全体を起動した後、システムが実行されており、リクエストに応答していることを検証します。
 
 ```
 setup_remote_docker
 ```
 
-以下の例では、システム全体を起動した後、システムが実行されており、リクエストに応答していることを検証します。
+デプロイ用の Docker イメージをビルドする場合は、この組み合わせが必要です。
 
 ```
 docker-compose build
@@ -74,7 +74,7 @@ Docker Compose を使用して docker-compose ファイルを含むマルチコ�
 
 
 ## Docker Compose を Docker Executor と組み合わせて使用
-デプロイ用の Docker イメージをビルドする場合は、この組み合わせが必要です。
+以下のステップにより、`docker-compose` コマンドをビルド イメージに追加できます。
 
 `docker` を `setup_remote_docker` と組み合わせて使用すると、docker-machine を使用して作成した場合と同様のリモート エンジンを提供できます。 ただし、このセットアップでは、ボリュームのマウントとポート転送は同じようには**機能しません**。 リモート Docker デーモンは、Docker CLI や Docker Compose とは異なるシステム上で動作するため、これを機能させるにはデータの移動が必要です。 マウントは通常、Docker ボリュームでコンテンツを利用可能にすることで解決できます。 `docker cp` を使用して、CLI ホストから Docker リモート ホスト上で実行しているコンテナにデータを取得することで、Docker ボリュームにデータをロードできます。
 
