@@ -189,3 +189,7 @@ jobs:
 - [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 独自に作成した Orb のテスト方法
 - [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orb を使用するためのレシピ
+
+## Learn More
+{: #learn-more }
+Take the [orbs course](https://academy.circleci.com/orbs-course) with CircleCI academy to learn more.
