@@ -62,7 +62,7 @@ workflows:
         jobs:
           - hello/hello-build
 ```
-上の例で、`hello` は Orb の参照名と見なされます。 Orbs の詳細については[こちら](https://circleci.com/ja/orbs/)を参照してください。
+上の例で、`hello` は Orb の参照名と見なされます。 Orb の詳細については[こちら](https://circleci.com/ja/orbs/)を参照してください。
 
 ## **`commands`** (version: 2.1 が必須)
 {: #commands-requires-version-21 }
@@ -149,7 +149,7 @@ jobs:
 ### **<`job_name`>**
 {: #lessjobnamegreater }
 
-各ジョブは、キーとなるジョブ名と、値となるマップで構成されます。 名前は、その `jobs` リスト内で一意である必要があります。 値となるマップでは以下の属性を使用できます。
+各ジョブは、キーとなるジョブ名と、値となるマップで構成されます。 名前は、その `job` リスト内で一意である必要があります。 値となるマップでは以下の属性を使用できます。
 
 | キー                | 必須               | 型   | 説明                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -524,7 +524,7 @@ CircleCI では、すべてのお客様がシステムを安定した状態で�
 | クラス                    | vCPU | RAM  |
 | ---------------------- | ---- | ---- |
 | small                  | 1    | 2GB  |
-| medium (デフォルト)         | 2    | 4GB  |
+| medium                 | 2    | 4GB  |
 | medium+                | 3    | 6GB  |
 | large                  | 4    | 8GB  |
 | xlarge                 | 8    | 16GB |
@@ -845,7 +845,7 @@ bash を呼び出したときに実行されるファイルの詳細について
 ###### _省略構文_
 {: #shorthand-syntax }
 
-`run` では、たいへん便利な省略構文を使用できます。
+`run` では、大変便利な省略構文を使用できます。
 
 ``` YAML
 - run: make test
@@ -1840,17 +1840,7 @@ jobs:
 
 一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
-|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
-| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
-| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
-| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
-| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
-| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
-| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
-| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
-| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
-| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
 The following logic values are considered falsy:
@@ -1896,7 +1886,6 @@ workflows:
             - << pipeline.parameters.deploy-canary >>
 ```
 
-{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -2030,7 +2019,6 @@ workflows:
             branches:
               only: master
 ```
-{% endraw %}
 
 ## 完全版設定ファイル サンプル
 {: #example-full-configuration }
