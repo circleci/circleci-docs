@@ -27,9 +27,9 @@ CircleCI の[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config/)機�
 ### コマンド
 {: #commands }
 
-コマンドには、 [パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする](https://circleci.com/docs/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bashやCLIツールを実行するなどです。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
+コマンドには、 [パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする](https://circleci.com/docs/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bash や CLI ツールを実行します。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
 
-例として、AWS S3 Orb には、ファイルやオブジェクトを新しい場所にコピーする _コマンド_ があります。 `aws-s3/copy`. AWS認証の詳細が環境変数として保存されている場合、このコマンドを設定で使用するための構文は単純です。
+例えば、AWS S3 Orb には、ファイルやオブジェクトを新しい場所にコピーする _コマンド_: `aws-s3/copy`があります。 AWS認証の詳細が環境変数として保存されている場合、このコマンドを設定で使用するための構文は単純です。
 
 ```yaml
 version: 2.1
@@ -56,19 +56,19 @@ jobs:
 
 ```
 
-詳細は、レジストリの[AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands)ページをご覧ください。
+詳細は、レジストリの[AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands)をご覧ください。
 
 ### Executor
 {: #executors }
 
-Executor は、 [ジョブ]({{site.baseurl}}/2.0/orb-concepts/#jobs) を実行できるパラメータ化された実行環境です。 CircleCIでは複数の [Executor オプション]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor)を提供しています。
+Executor は、 [ジョブ]({{site.baseurl}}/2.0/orb-concepts/#jobs) を実行することができるパラメータ化された実行環境です。 CircleCIでは複数の [Executor オプション]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor)を提供しています。
 
 - Docker
 - macOS
 - Windows
 - Linux VM
 
-Orb 内 で定義された Executor は、お客様のプロジェクト設定内のジョブや Orb で定義されたジョブの実行に使用できます。
+Orb 内 で定義された Executor は、お客様のプロジェクト設定のジョブや Orb で定義されたジョブの実行に使用できます。
 
 #### Executor の定義例
 {: #executor-definition-example }
@@ -140,13 +140,13 @@ workflows:
 ### 使用例
 {: #usage-examples }
 
-Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
+[Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)を使用して、新しい使用例を追加するには、Orb プロジェクトの [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) ディレクトリ内に `nam-of-example.yml` という新しいファイルを作成するだけです。 使用例は、プロジェクトの設定に直接使用するものではありませんが、ユーザーが自分の設定における Orb の最適な使用方法を共有するための一種の Orb メタデータであり、[Orbレジストリ](https://circleci.com/developer/orbs)に参照用に表示されています。 以下は使用例のサンプルです。
 
 ```yaml
-# Source https://github.com/circleci-public/orb-project-template/blob/master/src/examples/example.yml
+# ソース https://github.com/circleci-public/orb-project-template/blob/master/src/examples/example.yml
 
 description: >
-  Sample example description.
+  使用例サンプルの説明
 usage:
   version: 2.1
   orbs:
@@ -158,175 +158,176 @@ usage:
 
 ```
 
-## Namespaces
+## 名前空間
 {: #namespaces }
 
-A _namespace_ is a unique identifier claimed by a user or organization to group a set of orbs by author. Each user or organization can claim _one_ unique and immutable namespace. Each namespace can contain many uniquely named orbs.
+_名前空間_ は、一連の Orb をオーサー別にグループ化するために、ユーザーや組織が要求する一意の識別子です。 各ユーザーまたは組織が要求できる一意の名前空間は 1 つのみで、後から変更することはできません。 各名前空間には、一意の名前の Orb が多数含まれる場合があります。
 
-For example, the `circleci/rails` orb may coexist in the registry with an orb called `<other-namespace>/rails` because they are in separate namespaces.
+例えば、`circleci/rails` という Orb と `<other-namespace>/rails`という Orb は、別々の名前空間にあるため、レジストリ内で共存できます。
 
-Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please contact support.
+デフォルトでは、各組織が要求できる名前空間は 1つに制限されています。 これは、名前の占有や名前空間のノイズを制限するためのポリシーです。 名前空間の変更が必要な場合は、サポートにお問い合わせください。
 
-By default, created namespaces appear as "community" namespaces in the [Orb Registry](https://circleci.com/developer/orbs).
+デフォルトでは、作成された名前空間は、 [Orb レジストリ](https://circleci.com/developer/orbs)の「コミュニティ」の名前空間として表示されます。
 
 
-## Semantic versioning
+## セマンティック バージョニング
 {: #semantic-versioning }
 
-Orbs utilize the [semver](https://semver.org/) release process, in which each orb update follows a standardized versioning pattern that orb authors and users should take advantage of.
+Orbは [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。各Orbのアップデートは標準化されたバージョニング パターンに従っており、Orb のオーサーやユーザーはそれを活用してください。
 
-In Semantic versioning, release versions are represented by three integers separated by a `.`, where each integer represents a different type of change being added.
+セマンティック バージョニングでは、リリース バージョンは `.`で区切られた 3 つの整数で表されます。それぞれの整数は、追加される変更の種類を表します。
 
 ```
 [Major].[Minor].[Patch]
 ```
 
-| Semver | Description                               |
-| ------ | ----------------------------------------- |
-| Major  | Breaking changes.                         |
-| Minor  | Backwards compatible additional features. |
-| Patch  | Bug fixes.                                |
+| バージョン | 説明           |
+| ----- | ------------ |
+| メジャー  | 大きな変更        |
+| マイナー  | 後方互換性のある追加機能 |
+| パッチ   | バグの修正        |
 {: class="table table-striped"}
 
-When you import an orb, you can pin it to a particular semver component.
+Orb をインポートすると、その Orb を特定のセマンティック バージョニングのコンポーネントに固定することができます。
 
-| Imported Version | Description                                                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| 1.2.3            | Will match full semver version. No changes will be introduced.                                                                  |
-| 1.2              | Locked to major version `1`, minor version `2`, will receive all patch updates.                                                 |
-| 1                | Locked to major version `1`. Will receive all minor and patch updates. Major version will not change automatically.             |
-| volatile         | **Not Recommended** Will pull the last published version of the orb, may be useful in testing. Not a part of semver versioning. |
+| インポートバージョン | 説明                                                                              |
+| ---------- | ------------------------------------------------------------------------------- |
+| 1.2.3      | フルバージョンと一致。 変更は取り込まれません。                                                        |
+| 1.2        | メジャーバージョン `1`、マイナーバージョン `2`にロックされており、すべてのパッチアップデートを受け取ります。                      |
+| 1          | メジャーバージョン`1`にロックされており、 すべてのマイナーアップデートとパッチアップデートを受け取ります。 メジャーバージョンは自動的には変更されません。 |
+| 揮発性        | **推奨しません。** 最後にパブリッシュされたバージョンの Orb をプルするためテスト時には便利です。 セマンティック バージョニングは適用されません。  |
 {: class="table table-striped"}
 
-To avoid negatively impacting a user's CI process, orb authors should strictly adhere to semver versioning to ensure no breaking changes are introduced at the `minor` or `patch` update levels.
+ユーザーの CI プロセスに悪影響を与えないように、Orb オーサーはセマンティック バージョン管理を厳密に行い、 `マイナー` または `パッチ` レベルの更新時に大きな変更が取り込まれないようにする必要があります。
 
-**Note:** CircleCI does not currently support non-numeric semantic versioning elements. We suggest that you use either semver-style version strings in x.y.z format, or a development-style version string in dev:* format.
+**注:** CircleCI は現在、数字以外のセマンティック バージョニング要素をサポートしていません。 x.y.z 形式のセマンティック バージョニング スタイルのバージョン文字列、またはdev:*形式の開発スタイルのバージョン文字列を使用することをお勧めします。
 {: class="alert alert-warning"}
 
-## Orb versions (development vs production vs inline)
+## Orb のバージョン（開発版、安定版、インライン版）
 {: #orb-versions-development-vs-production-vs-inline }
 
-### Production orbs
+### 安定版 Orb
 {: #production-orbs }
 {:.no_toc}
 
-Production orbs are immutable and can be found on the [Orb Registry](https://circleci.com/developer/orbs).
+安定版の Orb は変更不可であり、[Orb レジストリ](https://circleci.com/developer/orbs)で見つけることができます。
 
-- Production orbs are immutable, they cannot be deleted or edited, and updates must be provided in a new semver release
-- Version string must be in semver format, for example, `<namespace>/<orb>@1.2.3`
-- Production orbs can only be published by an owner of the namespace organization
-- Published to the Orb Registry
-- Open source, released under [MIT license](https://circleci.com/developer/orbs/licensing)
-- Available via CircleCI CLI
+- 安定版 Orbは、変更不可であり、削除や編集ができず、更新は新しいセマンティック バージョンのリリースで提供される必要があります。
+- バージョンの文字列は セマンティック バージョニング形式でなければなりません。例えば、 `<namespace>/<orb>@1.2.3`のようになります。
+- 安定版 Orb は、名前空間の組織のオーナーのみがパブリッシュできます。
+- Orb レジストリへのパブリッシュ
+- オープンソースは [MIT ライセンス](https://circleci.com/developer/orbs/licensing)でリリースされます。
+- CircleCI CLI から利用可能です。
 
-### Development orbs
+### 開発版 Orb
 {: #development-orbs }
 {:.no_toc}
 
-Development orbs are temporary overwrite-able orb tag versions, useful for rapid development and testing prior to deploying a semver deployed production change.
+開発版 Orb は一時的に上書きが可能な Orb タグのバージョンで、安定版用の変更をデプロイしたセマンティック バージョンをデプロイする前の迅速な開発およびテストに役立ちます。
 
-- Development orbs are mutable, can be overwritten, and automatically expire 90 days after they are published
-- Version string must begin with `dev:` followed by any string, for example, `<namespace>/<orb>@dev:my-feature-branch`
-- Development orbs may be published by any member of the namespace organization
-- Will not appear on the Orb Registry
-- Open source, released under [MIT license](https://circleci.com/developer/orbs/licensing).
-- Available via CircleCI CLI (if the development tag name is known)
+- 開発版 Orb は変更可能で、上書きすることができ、パブリッシュ後90日で自動的に失効します。
+- バージョンの文字列は、`dev:`で始まり、`<namespace>/<orb>@dev:my-feature-branch` のような任意の文字列が続きます。
+- 開発版 Orb は、名前空間の組織のメンバーであれば誰でもパブリッシュすることができます。
+- Orb レジストリには表示されません。
+- オープンソースは [MIT ライセンス](https://circleci.com/developer/orbs/licensing)でリリースされます。
+- CircleCI CLI から利用可能です（開発タグ名が分かる場合）。
 
-### Inline orbs
+### インライン Orb
 {: #inline-orbs }
 {:.no_toc}
 
-Inline orbs are defined directly within the user's config, are completely local and scoped to the individual project.
+インライン Orb は、ユーザーの設定内で直接定義され、完全にローカルで、個々のプロジェクトにスコープされています。
 
-_[See: Writing Inline Orbs]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) for more information on inline orbs._
+_[参照: インライン Orb の記述方法]({{site.baseurl}}/2.0/reusing-config/#writing-inline-orbs) を参照してください。_
 
-- Not published to the orb service
-- No versioning
-- Exist only locally within the user's config
-- Not accessible outside of the repository
-- Not public
-- Not accessible via CircleCI CLI
+- Orb サービスにはパブリッシュされません。
+- バージョニングされません。
+- ユーザーの設定内でローカルにのみ存在します。
+- リポジトリの外からはアクセスできません。
+- 非公開です。
+- CircleCI CLI からはアクセスできません。
 
-## Orb packing
+## Orb のパッケージ化
 {: #orb-packing }
 
-All CircleCI orbs are singular YAML files, typically named `orb.yml`. However, for development, it is often easier to break the code up into more manageable chunks. The `circleci orb pack` command, a component of the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), is used to "pack" or condense the separate YAML files together.
+すべてのCircleCI Orb は単体のYAMLファイルで、通常は `orb.yml`という名前です。 しかし、開発においては、コードをより管理しやすい塊に分割した方がやり易い場合が多々あります。 `circleci orb pack` コマンドは、 [Orb 開発キット]({{site.baseurl}}/2.0/orb-author/#orb-development-kit)の一部であり、別々のYAMLファイルを「パッケージ化」したり、凝縮したりするために使用されます。
 
-If you are using the orb development kit, orb packing is handled automatically, by the included CI/CD pipeline, with the [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) job.
+Orb 開発キットを使用している場合、オーブのパッケージ化は、付属のCI/CDパイプラインによって、 [orb-tools/pack](https://circleci.com/developer/orbs/orb/circleci/orb-tools#jobs-pack) ジョブで自動的に処理されます。
 {: class="alert alert-warning"}
 
-**_Example: Orb Project Structure_**
+**_例: Orb プロジェクトの構造_**
 
-| type                      | name                                                                                           |
+| 種類                        | 名前                                                                                             |
 | ------------------------- | ---------------------------------------------------------------------------------------------- |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [commands](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands)   |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples)   |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [executors](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors) |
-| <i class="fa fa-folder" aria-hidden="true"></i> | [jobs](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs)           |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [コマンド](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/commands)       |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [例](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples)          |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [Executor](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/executors)  |
+| <i class="fa fa-folder" aria-hidden="true"></i> | [ジョブ](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/jobs)            |
 | <i class="fa fa-file-text-o" aria-hidden="true"></i> | [@orb.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/%40orb.yml) |
 {: class="table table-striped"}
 
-In order to _pack_ an orb, an [@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml) file must be present. The `@` signifies the _root_ of our orb project. Within the same directory, you can include additional directories for each orb component's type, such as [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors), and [examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples). Any additional files or folders will be safely ignored.
+Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-author/#orbyml)ファイルが必要です。 `@` は、Orb プロジェクトの _ルート_ を示しています。 同じディレクトリ内に、 [コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、 [ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs)、 [Executor]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors)、および [サンプル]({{site.baseurl}}/2.0/orb-concepts/#usage-examples)など、Orb コンポーネントの種類ごとに追加のディレクトリを含めることができます。 追加のファイルやフォルダは安全に無視されます。
 
-Additionally, the _pack_ command provides a special pre-processor for orb developers that allows you to import code from external files using the [file include syntax]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) (`<<include(file)>>`).
+さらに、 _pack_ コマンドは、Orb 開発者のための特別なプリプロセッサを提供し、 [ファイル インクルード構文]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) （`<<include(file)>>`）を使って、外部ファイルからコードをインポートすることができます。
 
-**CLI command**
+**CLI コマンド**
 
 `circleci orb pack <dir> > orb.yml`
 
-For orb development kit users, this step is handled automatically.
+Orb 開発 kitをお使いの場合、このステップは自動的に処理されます。
 
-## File include syntax
+## ファイル インクルード構文
 {: #file-include-syntax }
 
-The `file include` syntax (`<<include(dir/file)>>`) is a special config enhancement that allows you to import the contents of a file in place as the value for any key within a CircleCI orb configuration file. The `<<include(dir/file)>>` syntax is a special key for use with the [`circleci orb pack` command](#orb-packing) and _will not_ work more widely on CircleCI.
+`ファイル インクルード` 構文(`<<include(dir/file)>>`)は、CircleCI Orb の設定ファイル内の任意のキーの値として、ファイルの内容をその場で取り込むことができる特別な設定強化機能です。 この`<<include(dir/file)>>` 構文は、 [`circleci orb pack` コマンド](#orb-packing) と一緒に使う特別なキーであり、CircleCI上でより広く動作することは_ありません_。
 
-When `circleci orb pack <dir> > orb.yml` is run against a directory containing an `@orb.yml` file, the pack command begins to combine the contents of the files into a single `orb.yml` file. During the packing process, each instance of the `<<include(dir/file)>>` value will be replaced by the contents of the file referenced within.
+`@orb.yml`ファイルを含むディレクトリに対して、`circleci orb pack <dir> > orb.yml` を実行すると、パッケージ化コマンドが各ファイルの内容を一つの `orb.yml` ファイルに集め始めます。 パッケージ化の過程で、 `<<include(dir/file)>>` 値の各インスタンスは、その中で参照されるファイルの内容に置き換えられます。
 
-Included files are always referenced from the relative location of the `@orb.yml` file.
+含まれるファイルは常に `@orb.yml` ファイルの相対的な位置から参照されます。
 {: class="alert alert-warning"}
 
 {:.tab.fileInclude.Command-yaml}
 ```yaml
-description: A simple command that imports from a file when packed.
+description: パッケージ化時にファイルからインポートする簡単なコマンド
 steps:
   - run:
       name: Hello Greeting
       command: <<include(scripts/file.sh)>>
+
 ```
 
 {:.tab.fileInclude.file-sh}
 ```bash
-# This is a bash file, but could really be any text-based file
+# これは bash ファイルですが、テキストベースのファイルであれば何でも構いません
 echo "Hello World"
 
 ```
 
 {:.tab.fileInclude.Packed_Command-yaml}
 ```yaml
-description: A simple command that imports from a file when packed.
+description: パッケージ化時にファイルからインポートする簡単なコマンド
 steps:
   - run:
       name: Hello Greeting
       command: |
-        # This is a bash file, but could really be any text-based file
+        # これは bash ファイルですが、テキストベースのファイルであれば何でも構いません。
         echo "Hello World"
 ```
 
-File inclusion is especially useful for separating your configuration's bash logic from your yaml. Including bash scripts will allow you to develop and test your bash outside of your orb.
+ファイルインクルード機能は、設定の bash ロジックをyamlから分離するのに特に有効です。 bashスクリプトを含めることで、bashの開発やテストを Orb の外で行うことができます。
 
-View more about including bash scripts in the [Orb Author]({{site.baseurl}}/2.0/orb-author/#scripts) guide.
+bashスクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/2.0/orb-author/#scripts) ガイドをご覧ください。
 
-## Using orbs within your orb and register-time resolution
+## Orb 内での Orb の使用と登録時の解決
 {: #using-orbs-within-your-orb-and-register-time-resolution }
 
-An orbs stanza can be used inside an orb. Because production orb releases are immutable, the system will resolve all orb dependencies at the time you register your orb rather than at the time you run your build.
+Orb のスタンザは、Orb の中で使うことができます。 安定版 Orb リリースは変更不可なので、すべての Orb 依存関係は、ビルドの実行時ではなく Orb の登録時にすべて解決されます。
 
-For example, orb `foo/bar` is published at version 1.2.3 with an orbs stanza that imports `biz/baz@volatile`. At the time you register `foo/bar@1.2.3` the system will resolve `biz/baz@volatile` as the latest version and include its elements directly into the packaged version of `foo/bar@1.2.3`.
+例えば、`biz/baz@volatile` をインポートする orbs スタンザを含んだ Orb `foo/bar` が、バージョン 1.2.3 でパブリッシュされるとします。 `foo/bar@1.2.3` を登録する時点で、`biz/baz@volatile` が最新バージョンとして解決され、その要素がパッケージ バージョンの `foo/bar@1.2.3` に直接含められます。
 
-If `biz/baz` is updated to `3.0.0`, anyone using `foo/bar@1.2.3` will not see the change from `biz/baz@3.0.0` until `foo/bar` is published at a higher version than `1.2.3`.
+`biz/baz` が `3.0.0` に更新されても、`foo/bar` が `1.2.3` よりも上のバージョンでパブリッシュされるまで、`foo/bar@1.2.3` を使用しているユーザーには `biz/baz@3.0.0` の変更が反映されません。
 
-Orb elements may be composed directly with elements of other orbs. For example, you may have an orb that looks like the example below.
+メモ: Orb の要素は、他の Orb の要素を使用して直接構成できます。 例えば、以下の例のような Orb があるとします。
 
 
 ```yaml
@@ -346,10 +347,10 @@ jobs:
           param1: "hello"
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 {:.no_toc}
 
-- Refer to [Orb Introduction]({{site.baseurl}}/2.0/orb-intro/) for a high-level overview of CircleCI orbs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for detailed reference information about Orbs, including descriptions of commands, jobs and executors.
-- Refer to [Orbs FAQs]({{site.baseurl}}/2.0/orbs-faq/) for information on frequent issues encountered when using orbs.
+- [Orb の概要]({{site.baseurl}}/2.0/orb-intro/):  CircleCI Orb のより詳細な概要
+- [Orbリファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): コマンド、ジョブ、Executor の説明など、Orb に関する詳細な参考情報
+- [Orb に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): Orb 使用の際によく発生する問題についての情報
