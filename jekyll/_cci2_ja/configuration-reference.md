@@ -372,6 +372,7 @@ jobs:
 {: #available-machine-images }
 CircleCI ではいくつかの machine イメージをサポートしており、`image` フィールドで指定できます。
 
+* `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04、Docker v20.10.6、Docker Compose v1.29.1
 * `ubuntu-2004:202101-01` - Ubuntu 20.04、Docker v20.10.2、Docker Compose v1.28.2
 * `ubuntu-1604:202101-01` - Ubuntu 16.04、Docker v19.03.14、Docker Compose v1.28.2 (最新版の 1 つ前のリリース)
@@ -1573,9 +1574,6 @@ workflows:
           filters:
             branches:
               only: /server\/.*/
-          filters:
-            branches:
-              only: /server\/.*/
 ```
 
 上記のスニペットでは、`build_server_pdfs` ジョブは、ビルド対象のブランチのパスが "server/" から始まる場合にのみ実行されます。
@@ -1625,12 +1623,14 @@ CircleCI では、明示的にタグ フィルターを設定しない限り、�
 {: #matrix-requires-version-21 }
 `matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。
 
-| キー         | 必須 | 型   | 説明                                                                                                       |
-| ---------- | -- | --- | -------------------------------------------------------------------------------------------------------- |
-| parameters | Y  | マップ | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ                                                                           |
-| exclude    | N  | リスト | マトリックスから除外する引数マップのリスト                                                                                    |
-| alias      | N  | 文字列 | マトリックス全体 (マトリックス内のすべてのジョブ) に `requires` キーを適用するには、マトリックスの `alias` を指定します。 `alias` のデフォルト値は、呼び出すジョブの名前です。 |
+キー | 必須     | 型    | 説明
+----|----------|------|------------
+parameters | Y  | マップ | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ
+exclude    | N  | リスト | マトリックスから除外する引数マップのリスト
+alias      | N  | 文字列 | マトリックス全体 (マトリックス内のすべてのジョブ) に `requires` キーを適用するには、マトリックスの `alias` を指定します。 `alias` のデフォルト値は、呼び出すジョブの名前です。
 {: class="table table-striped"}
+
+**Note:**
 
 以下に、マトリックス ジョブの基本的な使用例を示します。
 
@@ -1689,13 +1689,14 @@ workflows:
                 b: 5
 ```
 
-上記のマトリックスは、パラメーター `a` と `b` の組み合わせのうち、`{a: 3, b: 5}` の組み合わせを除いた 8 個のジョブに展開されます。
+The matrix above would expand into 8 jobs: every combination of the parameters `a` and `b`, excluding `{a: 3, b: 5}`
 
-###### **`pre-steps`** と **`post-steps`** (version: 2.1 が必須)
+###### 依存関係とマトリックスジョブ
 {: #dependencies-and-matrix-jobs }
 {:.no_toc}
 
-To `require` an entire matrix (every job within the matrix), use its `alias`. 別のジョブの `requires` スタンザで使用できます。 デフォルト値は実行するジョブの名前です。
+マトリックス全体（マトリックス内のすべてのジョブ）を `require` とするには、その `alias` を使用します。
+`alias`のデフォルトは、起動されるジョブの名前です。
 
 ```yaml
 workflows:
@@ -1710,7 +1711,7 @@ workflows:
             - deploy
 ```
 
-ワークフローでは、すべてのジョブ呼び出しは、オプションで 2つの特別な引数 `pre-steps` と `post-steps` を受け取ることができます。
+これは、`another-job`が実行される前に、マトリックス内の両方のdeployジョブが終了している必要があることを意味します。
 
 また、マトリックス ジョブのパラメーター値を `<< matrix.* >>` で公開し、より複雑なワークフローを作成することもできます。 たとえば、次のコードでは、`deploy` ジョブをマトリックス化したうえで、それぞれのジョブが、`build` マトリックス内の対応するジョブが完了してから実行されるようにしています。
 
@@ -1824,17 +1825,27 @@ jobs:
 }
 ```
 
-いくつかの例と概念的な情報については、[ワークフローに関するドキュメント]({{ site.baseurl }}/2.0/workflows)を参照してください。
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 
 ## ロジック ステートメント
 {: #logic-statements }
 
 一部のダイナミック コンフィグ機能では、ロジック ステートメントを引数として使用できます。 ロジック ステートメントとは、設定ファイルのコンパイル時 (ワークフローの実行前) に真偽の評価が行われるステートメントです。 ロジック ステートメントには次のものがあります。
 
-| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  | |-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------| | YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 | | YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                | | [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              | | [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 | | and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             | | or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             | | not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              | | equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    | | matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
+| Type                                                                                                | Arguments             | `true` if                              | Example                                                                  |
+|-----------------------------------------------------------------------------------------------------+-----------------------+----------------------------------------+--------------------------------------------------------------------------|
+| YAML literal                                                                                        | None                  | is truthy                              | `true`/`42`/`"a string"`                                                 |
+| YAML alias                                                                                          | None                  | resolves to a truthy value             | *my-alias                                                                |
+| [Pipeline Value]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-values)                          | None                  | resolves to a truthy value             | `<< pipeline.git.branch >>`                                              |
+| [Pipeline Parameter]({{site.baseurl}}/2.0/pipeline-variables/#pipeline-parameters-in-configuration) | None                  | resolves to a truthy value             | `<< pipeline.parameters.my-parameter >>`                                 |
+| and                                                                                                 | N logic statements    | all arguments are truthy               | `and: [ true, true, false ]`                                             |
+| or                                                                                                  | N logic statements    | any argument is truthy                 | `or: [ false, true, false ]`                                             |
+| not                                                                                                 | 1 logic statement     | the argument is not truthy             | `not: true`                                                              |
+| equal                                                                                               | N values              | all arguments evaluate to equal values | `equal: [ 42, << pipeline.number >>]`                                    |
+| matches                                                                                             | `pattern` and `value` | `value` matches the `pattern`          | `matches: { pattern: "^feature-.+$", value: << pipeline.git.branch >> }` |
 {: class="table table-striped"}
 
-**メモ:** ワークフロー レベルでロジック ステートメントを使用する場合、`condition:` キーは含めないようにしてください (`condition` キーは`ジョブ` レベルのロジック ステートメント以外では必要ありません)。
+以下のような論理値が偽値とみなされます。
 
 - false
 - null

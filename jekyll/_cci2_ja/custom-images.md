@@ -55,9 +55,9 @@ CircleCI では Docker がサポートされています。 Docker を使用す�
 
 カスタム イメージを作成する前に、カスタム イメージの拡張元となる別のイメージを選択する必要があります。 [Docker Hub](https://hub.docker.com/explore/) には、ほぼすべての一般的な言語とフレームワーク向けに、正式なビルド済みイメージが用意されています。 特定の言語やフレームワークごとに、多くのイメージ バリアントから選択できます。 これらのバリアントは、[Docker タグ](https://docs.docker.com/engine/reference/commandline/tag/)で指定されます。
 
-`Dockerfile` に、基本イメージを拡張します。
+例えば、[公式Alpineイメージ](https://hub.docker.com/_/alpine/)のバージョン3.5を使用したい場合、フルイメージ名は`alpine:3.5`となります。
 
-`Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
+あなたのDockerfileで、[`FROM`命令](https://docs.docker.com/engine/reference/builder/#from)を使ってベースイメージを拡張します。
 
 ```Dockerfile
 FROM golang:1.8.0
@@ -86,8 +86,6 @@ RUN go get github.com/jstemmer/go-junit-report
 - [tar](https://www.howtoforge.com/tutorial/linux-tar-command/#installing-tar)
 - [gzip](http://www.gzip.org/)
 - [ca-certificates](https://packages.debian.org/sid/ca-certificates)
-
-パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` 命令](https://docs.docker.com/engine/reference/builder/#add)を使用します。
 
 **メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 

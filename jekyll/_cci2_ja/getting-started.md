@@ -230,6 +230,7 @@ ls -al               # 現在のディレクトリに含まれるファイルと
 cd <directory_name>  # 現在のディレクトリを <directory_name> ディレクトリに変更します
 cat <file_name>      # ファイル <file_name> の内容を表示します
 ```
+**Note** To enable `rerun job with ssh`, you will need to follow the steps to [add ssh keys to your job](https://circleci.com/docs/2.0/add-ssh-key/#adding-ssh-keys-to-a-job).
 
 ## チームメイトと協力する
 {: #collaborating-with-teammates }

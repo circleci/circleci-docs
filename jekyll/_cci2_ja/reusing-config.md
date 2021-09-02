@@ -867,12 +867,6 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "To whom shall we say hello?"
-        version: 2.1
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
         description: "だれにあいさつするか"
         default: "World"
         type: string

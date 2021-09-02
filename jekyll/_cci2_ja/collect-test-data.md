@@ -179,7 +179,6 @@ steps:
 ```
 
 #### <a name="mochajs"></a>Node.js 用の Mocha
-`.circleci/config.yml` の作業テスト セクションは、以下のようになります。
 {:.no_toc}
 
 Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
@@ -229,9 +228,9 @@ steps:
 {: #lessa-nameavagreaterlessagreaterava-for-nodejs }
 {:.no_toc}
 
-`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
+[Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
 
-`.circleci/config.yml` に、以下の `run` ステップを追加します。
+`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 ```
     steps:
@@ -334,7 +333,7 @@ And modify your test command to this:
 ```
 
 ### Minitest
-{{ site.baseurl }}/ja/2.0/collect-test-data/#clojure-テスト用の-test2junit
+{: #minitest }
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:

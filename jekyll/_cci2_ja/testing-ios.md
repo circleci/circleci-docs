@@ -44,11 +44,9 @@ To read about our customer support policy regarding beta images, please check ou
 ### Apple silicon support
 {: #apple-silicon-support }
 
-**Please Note:** Apple has indicated that Apple Silicon developers should continue to use Xcode 12 beta 6, rather than the GM. We have retained this image and you can access it by requesting the `12.0.0-beta` image.
-
 It is possible to build Apple Silicon/Universal binaries using the Xcode `12.0.0-beta` image as Apple provides both the Intel (`x86_64`) and Apple Silicon (`arm64`) toolchains in this release. Cross-compiling Apple Silicon binaries on Intel hosts has an additional overhead and as a result compilation times will be longer than native compilation for Intel.
 
-Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally.
+Running or testing Apple Silicon apps natively is currently not possible as CircleCI build hosts are Intel-based Macs. Binaries will need to be exported as [artifacts](https://circleci.com/docs/2.0/artifacts/) for testing apps locally. Alternatively, [CircleCI runner](https://circleci.com/docs/2.0/runner-overview/#supported) can also be used to run jobs natively on Apple Silicon.
 
 ## Supported Xcode versions
 {: #supported-xcode-versions }
@@ -71,8 +69,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
  | `11.1.0` | Xcode 11.1 (11A1027)       | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1989/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-1-image-released/32668/19)                  |
  | `11.0.0` | Xcode 11.0 (11A420a)       | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1969/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-11-gm-seed-2-released/32505/29)                |
  | `10.3.0` | Xcode 10.3 (10G8)          | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1925/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-3-image-released/31561)                     |
- | `10.2.1` | Xcode 10.1 (10B61)         | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)                   |
- | `10.1.0` | Xcode 10.0 (10A255)        | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)                     |
+ | `10.2.1` | Xcode 10.2.1 (10E1001)     | 10.14.4       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1911/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-2-1-image-released/30198)                   |
+ | `10.1.0` | Xcode 10.1 (10B61)         | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-1-image-released/26350)                     |
  | `10.0.0` | Xcode 9.4.1 (9F2000)       | 10.13.6       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1893/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-10-0-gm-image-released/25202)                  |
  | `9.4.1`  | * Xcode 9.4.1 (9F2000)     | 10.13.3       | No                         | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v1881/index.html) |                                                                                                     |
 {: class="table table-striped"}
@@ -329,6 +327,60 @@ steps:
   - run: bundle exec pod install
 ```
 
+## Using NodeJS
+{: #using-nodejs }
+
+The Xcode images are supplied with at least one version of NodeJS ready to use.
+
+### Images using Xcode 13 and later
+{: #images-using-xcode-13-and-later }
+
+These images have NodeJS installations managed by `nvm` and will always be supplied with the latest `current` and `lts` release as of the time the image was built. Additionally, `lts` is set as the default NodeJS version.
+
+Version information for the installed NodeJS versions can be found in [the software manifests for the image](#supported-xcode-versions)], or by running `nvm ls` during a job.
+
+To set the `current` version as the default:
+
+```yaml
+# ...
+steps:
+  - run:
+      name: pre-start simulator
+      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+```
+
+To revert to the `lts` release:
+
+```yaml
+# ...
+steps:
+  - run:
+      name: Install cowsay
+      command: brew install cowsay
+  - run:
+      name: cowsay hi
+      command: cowsay Hi!
+```
+
+To install a specific version of NodeJS and use it:
+
+```yaml
+# ...
+steps:
+  - run: nvm install 12.22.3 && nvm alias default 12.22.3
+```
+
+These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
+
+### Images using Xcode 12.5 and earlier
+{: #images-using-xcode-125-and-earlier }
+
+These images come with at least one version of NodeJS installed directly using `brew`.
+
+**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+
+**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+
 ## Using Homebrew
 {: #using-homebrew }
 
@@ -361,7 +413,7 @@ After the app has been tested and signed, you are ready to configure deployment 
 
 Pre-start the iOS simulator before building your application to make sure that the simulator is booted in time. Doing so generally reduces the number of simulator timeouts observed in builds.
 
-**Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
+To pre-start the simulator, add the following to your `config.yml` file, assuming that you are running your tests on an iPhone 11 Pro simulator with iOS 13.2:
 
 ```yaml
 # ...

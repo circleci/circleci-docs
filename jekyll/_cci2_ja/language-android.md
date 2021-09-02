@@ -151,9 +151,9 @@ jobs:
 React Native プロジェクトは、Linux、Android、および macOS の機能を使用して CircleCI 2.0 上でビルドできます。 React Native プロジェクトの例については、GitHub で公開されている [React Native アプリケーションのサンプル](https://github.com/CircleCI-Public/circleci-demo-react-native)を参照してください。
 
 ## Firebase Test Lab を使用したテスト
-**メモ:** `google/cloud-sdk` の代わりに、[Android コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/#android)の使用を検討してください。
+{: #testing-with-firebase-test-lab }
 
-**Note:**: While this portion of the document walks through using a third party tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
+**メモ:** `google/cloud-sdk` の代わりに、[Android コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/#android)の使用を検討してください。
 
 To use Firebase Test Lab with CircleCI, first complete the following steps.
 

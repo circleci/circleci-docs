@@ -81,7 +81,7 @@ The environment variables for the *primary container* set some config specific t
 
 The `circleci/postgres:9.6.5-alpine-ram` service container is configured with a user called `root` with an empty password, and a database called `circle_test`.
 
-## Installing dependencies
+## 依存関係のインストール
 {: #installing-dependencies }
 
 Next the job installs Python dependencies into the *primary container* by running `pip install`. Dependencies are installed into the *primary container* by running regular Steps executing shell commands:
@@ -184,6 +184,8 @@ You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
 
 The demo application contains a file `tests/test_selenium.py` that uses Chrome, Selenium and webdriver to automate testing the application in a web browser. The primary image has the current stable version of Chrome pre-installed (this is designated by the `-browsers` suffix). Selenium needs to be installed and run since this is not included in the primary image:
 
+
+{% raw %}
 ```yaml
 version: 2
 jobs:
@@ -217,6 +219,7 @@ jobs:
             java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
           background: true
 ```
+{% endraw %}
 
 ## Running tests
 {: #running-tests }
@@ -462,4 +465,4 @@ jobs:
 {: #see-also }
 {:.no_toc}
 
-For more information about Workflows, see the [Orchestrating Workflows]({{ site.baseurl }}/2.0/workflows) document.
+To deploy `master` to Heroku automatically after a successful `master` build, add a `workflows` section that links the `build` job and the `deploy` job.

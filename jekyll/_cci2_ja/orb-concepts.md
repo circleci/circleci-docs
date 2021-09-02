@@ -4,20 +4,20 @@ title: "Orb のコンセプト"
 short-title: "Orb のコンセプト"
 description: "Orb のコンセプトの概要"
 categories:
-  - getting-started
+  - はじめよう
 order: 1
 verison:
   - Cloud
 ---
 
-* TOC
+* 目次
 {:toc}
 
-## Quick start
+## クイックスタート
 {: #quick-start }
 {:.no_toc}
 
-[CircleCI orbs](https://circleci.com/orbs/) are shareable packages of configuration elements, including [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs), [commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands), and [executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors). Orbs make writing and customizing CircleCI config simple. The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
 
 ## Orb configuration elements
 {: #orb-configuration-elements }
