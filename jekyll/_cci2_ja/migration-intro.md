@@ -22,3 +22,7 @@ toc: false
 
 CircleCI 1.0 から 2.0 への移行に関する情報は、[こちら](https://circleci.com/docs/2.0/upgrading/#section=server-administration)を参照してください。
 
+## Learn More
+{: #learn-more }
+Enroll in the [migrations course](https://academy.circleci.com/arm-course) with CircleCI Academy to learn more about migrating to CircleCI.
+
