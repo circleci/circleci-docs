@@ -326,30 +326,31 @@ AWS EC2 を使う場合は、以下のフィールドを設定して VM サー�
 AWS
 ```bash
 $ aws ec2 create-security-group \
-    --description "CircleCI の VM サービスのセキュリティ グループ" \
+    --vpc-id "<<VPC ID>>" \
+    --description "CircleCI VM Service security group" \
     --group-name "circleci-vm-service-sg"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
-    --cidr "<<Nomad クライアントの CIDR>>"
+    --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 22 \
-    --cidr "<<Kubernetes ノードの CIDR>>"
+    --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
-    --cidr "<<Nomad クライアントの CIDR>>"
+    --cidr "<<CIDR of Nomad clients>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 2376 \
-    --cidr "<<Kubernetes ノードの CIDR>>"
+    --cidr "<<CIDR of Kubernetes nodes>>"
 $ aws ec2 authorize-security-group-ingress \
-    --group-name "circleci-vm-service-sg" \
+    --group-id "<< SG ID from create-security-group >>" \
     --protocol tcp \
     --port 54782
 ```
@@ -512,10 +513,22 @@ This section can be left with its default values until <<Step 3 - Obtain Load Ba
 #### 相互 TLS (mTLS) の有効化
 mTLS は、Nomad コントロール プレーンと Nomad クライアント間のトラフィックを暗号化および認証します。 You should disable mTLS until you have completed <<Step 4 - Install Nomad Clients>> and can obtain the certificate, private key and certificate authority output after completing Step 4. 
 
-必要な情報をすべて入力し *[Continue (続行)]* ボタンをクリックすると、CircleCI Server に対して一連の事前チェックが実施されてクラスタが最小要件を満たしているかどうか検証され、デプロイが試みられます。 検証に合格すると、以下のような画面が表示され、次のステップに進むことができます。
+#### Preflight Checks
+When all required information has been provided, click the *Continue* button and your CircleCI installation will be put
+through a set of preflight checks to verify your cluster meets the minimum requirements and attempt to deploy. Currently we check for
+the following:
 
-.CircleCI Sever v{serverversion} の事前チェック
+* Kubernetes Version is 1.16.0 or greater
+* The cluster has 30Gi of total memory or greater
+* Total vCPUs in the cluster is 8 or greater
+* The cluster has a default storage class
+
+When completed successfully, you should see something like the following and you can continue to the next step:
+
+.Sever v{serverversion} Preflight Checks
 image::preflight-checks.png[Preflight Checks]
+
+However, should any of these checks fail the issue will be highlighted, giving you an opportunity to address these issues before deployment.
 
 ## Step 3 - Obtain Load Balancer IPs
 `kubectl get services` を実行し、以下のロード バランサーのアドレスを控えておきます。 これらは CircleCI Server の構成を完了するために必要になります。 If necessary, specify the namespace, `kubectl get services -n <the-namespace-you-installed-circleci>` to get the list of services. 
