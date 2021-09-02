@@ -391,7 +391,10 @@ steps:
 {: #bundler-ruby }
 {:.no_toc}
 
-**Safe to Use Partial Cache Restoration?** Yes.
+**Safe to Use Partial Cache Restoration?** 
+Yes (with caution).
+
+Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 
 Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 

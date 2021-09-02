@@ -43,8 +43,6 @@ workflows:
       - test
       - build
       - test
-      - build
-      - test
 ```
 
 続いて、各通知タイプ (チャット、メール、Web) の設定方法について説明していきます。

@@ -232,7 +232,6 @@ jobs:
 ```
 
 ## シェル コマンドでの環境変数の設定
-1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
 
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%A8-bash-%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%BF%E7%94%A8)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
@@ -256,14 +255,10 @@ jobs:
             source $BASH_ENV
 ```
 
-1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
-
-[Contexts]({{ site.baseurl }}/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
-
 ## ステップでの環境変数の設定
 {: #setting-an-environment-variable-in-a-step }
 
-[Contexts]({{ site.baseurl }}/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
+1 つのステップで環境変数を設定するには、[`environment` キー]({{ site.baseurl }}/2.0/configuration-reference/#run)を使用します。
 
 ```yaml
 version: 2.1
@@ -511,7 +506,7 @@ For example, when you pass the parameters:
 }
 ```
 
-In the above example, `$CIRCLE_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
+Your build will see the environment variables:
 
 ```sh
 export foo="bar"
@@ -533,7 +528,7 @@ export list="[\"a\", \"list\", \"of\", \"strings\"]"
 }
 ```
 
-たとえば、以下のように `curl` を使用します。
+In the above example, `$CIRCLE_TOKEN` is a [personal API token]({{ site.baseurl }}/2.0/managing-api-tokens/#creating-a-personal-api-token).
 
 ```sh
 curl \

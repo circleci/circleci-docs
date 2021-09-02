@@ -867,40 +867,28 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "To whom shall we say hello?"
-        version: 2.1
-# hello-orb の yml (一部)
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
         description: "だれにあいさつするか"
         default: "World"
         type: string
     machine: true
     steps:
       - say:
-          saywhat: "<< parameters.saywhat >>"
+          # コマンド "say" の "saywhat" パラメーターには
+          # デフォルト値が定義されていないため
+          # 手動で渡す必要があります
+          saywhat: << parameters.saywhat >>
 commands:
-  saywhat:
+  say:
     parameters:
       saywhat:
         type: string
     steps:
       - run: echo "<< parameters.saywhat >>"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          saywhat: "<< parameters.saywhat >>"
-commands:
-  saywhat:
-    parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
+workflows:
+  build:
+    jobs:
+      - sayhello:
+          saywhat: Everyone
 ```
 
 **hello-orb を利用する設定ファイル**
@@ -984,6 +972,7 @@ jobs:
       saywhat:
         description: "To whom shall we say hello?"
         version: 2.1
+# hello-orb の yml (一部)
 jobs:
   sayhello:
     parameters:
@@ -994,22 +983,27 @@ jobs:
     machine: true
     steps:
       - say:
-          # コマンド "say" の "saywhat" パラメーターには
-          # デフォルト値が定義されていないため
-          # 手動で渡す必要があります
-          saywhat: << parameters.saywhat >>
+          saywhat: "<< parameters.saywhat >>"
 commands:
-  say:
+  saywhat:
     parameters:
       saywhat:
         type: string
     steps:
       - run: echo "<< parameters.saywhat >>"
-workflows:
-  build:
-    jobs:
-      - sayhello:
-          saywhat: Everyone
+        default: "World"
+        type: string
+    machine: true
+    steps:
+      - say:
+          saywhat: "<< parameters.saywhat >>"
+commands:
+  saywhat:
+    parameters:
+      saywhat:
+        type: string
+    steps:
+      - run: echo "<< parameters.saywhat >>"
 ```
 
 ### 同じジョブの複数回の呼び出し

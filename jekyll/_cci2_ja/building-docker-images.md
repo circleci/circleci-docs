@@ -47,7 +47,7 @@ The Remote Docker Environment has the following technical specifications (for Ci
 {: #example }
 {:.no_toc}
 
-以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
+以下の例では、`machine`を使って、デフォルトのイメージでDockerイメージを構築する方法を示しています - この場合、リモートDockerを使用する必要はありません。
 
 ```yaml
 version: 2
@@ -71,18 +71,27 @@ jobs:
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
-以下の `circle-dockup.yml` 設定ファイルの例に示すように、https://github.com/outstand/docker-dockup などのバックアップ・復元用イメージを使用してコンテナをスピンアップすることもできます。
+以下の例では、Docker executorを使用して、リモートDockerで、[demo docker project](https://github.com/CircleCI-Public/circleci-demo-docker)のDockerイメージを構築してデプロイしています。
 
 <!-- markdownlint-disable MD046 -->
 {% highlight yaml linenos %}
-ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.15
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      # ... steps for building/testing app ...
 
       - setup_remote_docker:
           version: 19.03.13
           docker_layer_caching: true
-    
-      # Docker イメージをビルドしプッシュします
-    
+
+      # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           docker build -t CircleCI-Public/circleci-demo-docker:$TAG .
@@ -268,7 +277,7 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[プライマリ コンテナ]({{ site.baseurl }}/2.0/docker-layer-caching/)
 
 [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#job-space)
 

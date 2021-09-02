@@ -122,11 +122,10 @@ Amazon EKS サービスを使用する前に、以下の要件を満たしてい
 
 Google Kubernetes Engine (GKE) を利用すると、CI/CD 戦略を自動化して、コードやアプリケーションの更新を顧客にすばやく簡単にデプロイできます。 更新の配信に長い時間はかかりません。 CircleCI は、GKE 固有の CircleCI Orb を開発すると共に、GKE のテクノロジーを活用して、特定のジョブで GKE を操作できるようにしました。 GKE を使用する前に、[Google Kubernetes Engine のドキュメント](https://cloud.google.com/kubernetes-engine/docs/)をご一読ください。
 
-### 前提条件
-2) {% include snippets/enable-pipelines.md %} 以下の環境変数を CircleCI に直接またはコンテキスト経由で設定する必要があります。 Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
-Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
+### 環境変数の設定
+{: #set-environment-variables }
 
-- EKS クラスタの作成
+- `GCLOUD_SERVICE_KEY` (必須)
 - `GOOGLE_PROJECT_ID`
 - `GOOGLE_COMPUTE_ZONE`
 
@@ -231,16 +230,16 @@ commands:
 ```
 
 ## Amazon Elastic Container Service for Kubernetes (Amazon EKS) を使用する
-クラスタに Helm Chart をインストールする
+{: #using-amazon-elastic-container-service-for-kubernetes-amazon-eks }
 
-CircleCI AWS-EKS Orb を使用するための要件を満たしていることが確認できたら、以下のコード例を使用して EKS クラスタを作成できます。
+CircleCIでは、Amazon Elastic Kubernetes Service（EKS）と連携して使用できるKubernetes orbを提供しています。このorbでは以下の作業を行うことができます。
 
 * EKS クラスタの作成
 * Kubernetes デプロイの作成
 * Helm Chart のインストール
 * コンテナ イメージの更新
 
-この Orb とその機能の詳細については、[CircleCI Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/slack)の Slack Orb を参照してください。
+CircleCI AWS-EKSオーブを使用する場合は、事前にCircleCI Orb Registryページで[AWS-EKS](https://circleci.com/developer/orbs/orb/circleci/aws-eks#quick-start)orbの仕様を確認しておくとよいでしょう。
 
 ### EKS クラスタを作成する
 {: #create-an-eks-cluster }
@@ -356,12 +355,13 @@ steps:
 ```
 
 ## CircleCI ジョブでカスタム Slack 通知を利用する
+{: #enabling-custom-slack-notifications-in-circleci-jobs }
 カスタム メッセージを作成して特定の Slack チャンネルでユーザーに配信する例を以下に示します。
 
 Slack は、リアルタイム コラボレーション アプリケーションです。 チーム メンバーは、カスタムのチャンネルやワークスペースを通じて、定型業務やプロジェクトに協力して取り組むことができます。 CircleCI プラットフォームを使用するときには、チームのニーズと要件に基づいて Slack アプリのカスタム通知を有効にしておくと便利です。
 
-### Kubernetes デプロイを作成する
-Slack チャンネルに承認待ちを通知する
+### 承認待ちの状態をSlackチャンネルに通知する
+{: #notifying-a-slack-channel-of-pending-approval }
 
 CircleCI Slack Orb を使用すると、さまざまな通知やメッセージを作成して必要な受信者に配信できます。 その 1 つである「承認」通知を作成すると、承認が保留中であることを受信者に通知できるようになります。 CircleCI ジョブでこの承認通知を作成する例を以下に示します。
 
@@ -381,8 +381,7 @@ workflows:
 
 There are several parameters for you to customize your Slack notifications that aren't shown here. For more detailed information about this orb and its functionality, refer to the Slack orb in the [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/circleci/slack).
 
-### クラスタに Helm をインストールする
-カスタム メッセージを付けて Slack チャンネルに通知する
+### カスタムメッセージをSlackチャンネルに通知する
 
 CircleCI Slack Orb では、カスタム メッセージを含む通知も作成できます。 この種類の通知は、ワークフロー、ジョブ、またはプロジェクトに固有の詳細なメッセージを受信者に配信したいときに便利です。
 
@@ -390,39 +389,28 @@ CircleCI Slack Orb では、カスタム メッセージを含む通知も作成
 
 ```yaml
 version: 2.1
-jobs:
-  test-cluster:
-    executor: aws-eks/python3
-    parameters:
-      cluster-name:
-        description: |
-          EKS クラスタの名前
-        type: string
-    steps:
-      - kubernetes/install
-      - aws-eks/update-kubeconfig-with-authenticator:
-          cluster-name: << parameters.cluster-name >>
-      - run:
-          command: |
-            kubectl get services
-          name: クラスタのテスト
+
 orbs:
-aws-eks: circleci/aws-eks@0.1.0
-kubernetes: circleci/kubernetes@0.3.0
-version: 2.1
+  slack: circleci/slack@x.y.z
+
+jobs:
+  build:
+    docker:
+      - image: <docker-image-name-tag>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - slack/notify:
+          color: '#42e2f4'
+          mentions: 'USERID1,USERID2,'
+          message: This is a custom message notification
+          webhook: webhook
+
 workflows:
-deployment:
+  your-workflow:
     jobs:
-      - aws-eks/create-cluster:
-          cluster-name: my-eks-demo
-      - test-cluster:
-          cluster-name: my-eks-demo
-          requires:
-            - aws-eks/create-cluster
-      - aws-eks/delete-cluster:
-          cluster-name: my-eks-demo
-          requires:
-            - test-cluster
+      - build
 ```
 
 In this example, the Slack orb command `notify` is used, along with the following parameters to create a custom notification:

@@ -179,12 +179,11 @@ steps:
 ```
 
 #### <a name="mochajs"></a>Node.js 用の Mocha
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 {:.no_toc}
 
 Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
 
-`.circleci/config.yml` の作業テスト セクションは、以下のようになります。
+`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 ```yaml
     steps:
@@ -229,7 +228,7 @@ steps:
 {: #lessa-nameavagreaterlessagreaterava-for-nodejs }
 {:.no_toc}
 
-`pytest` を使用するプロジェクトにテスト メタデータを追加するには、JUnit XML を出力するように指定したうえで、テスト メタデータを保存します。
+[Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
 
 `.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
@@ -334,8 +333,7 @@ And modify your test command to this:
 ```
 
 ### Minitest
-{: #video-troubleshooting-test-runners }
-{:.no_toc}
+{: #minitest }
 {:.no_toc}
 
 To add test metadata collection to a project that uses a custom `minitest` build step, add the following gem to your Gemfile:
@@ -363,7 +361,7 @@ And modify your test command to this:
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
 #### Clojure テスト用の test2junit
-{{ site.baseurl }}/ja/2.0/collect-test-data/#clojure-テスト用の-test2junit
+Visual Studio または .NET Core で出力される trx ファイルを XML 形式に変換するには、[trx2junit](https://github.com/gfoidl/trx2junit) を使用します。
 {:.no_toc}
 
 Clojure のテスト出力を XML 形式に変換するには、[test2junit](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、[サンプル プロジェクト](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。

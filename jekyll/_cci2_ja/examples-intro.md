@@ -103,10 +103,6 @@ jobs:
       - run:
           name: Download Dependencies
           command: ./gradlew androidDependencies
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
 ```
 
 {% endraw %}

@@ -127,14 +127,6 @@ workflows:
   workflow:
     jobs:
     - build
-      - store_artifacts:
-          path: build/libs
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
-workflows:
-  version: 2
-  workflow:
-    jobs:
-    - build
 ```
 {% endraw %}
 

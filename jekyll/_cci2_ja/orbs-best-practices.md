@@ -167,11 +167,6 @@ parameters:
   version:
     default: 13.11.0
     description: >
-      A full version tag must be specified.
-parameters:
-  version:
-    default: 13.11.0
-    description: >
       A full version tag must be specified. リリースの全一覧は
       次を参照してください: https://nodejs.org/en/download/releases
     type: string

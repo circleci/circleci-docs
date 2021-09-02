@@ -38,7 +38,7 @@ iOS プロジェクトでは、fastlane Scan を使用して以下のように�
 ## テストの実行
 {: #running-tests }
 
-iOS プロジェクトの高度な構成の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/ja/docs/2.0/testing-ios/)を参照してください。
+iOSプロジェクトでは、以下のようにFastlane Scanでテストを実行することができます。
 
 ```
 jobs:
@@ -56,10 +56,10 @@ jobs:
 
 ```
 
-CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、および署名する例については、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
+iOS プロジェクトの高度な構成の詳細については、[macOS 上の iOS アプリケーションのテストに関するドキュメント](https://circleci.com/ja/docs/2.0/testing-ios/)を参照してください。
 
 ## コード署名と証明書
-To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) document for customizations.
+CircleCI 2.0 で fastlane を使用して iOS プロジェクトをビルド、テスト、および署名する例については、[`circleci-demo-ios` の GitHub リポジトリ](https://github.com/CircleCI-Public/circleci-demo-ios) を参照してください。
 
 To further customize your build process to use custom tools or run your own scripts, use the `config.yml` file, see the [Sample 2.0 config.yml]({{ site.baseurl }}/2.0/sample-config/) document for customizations.
 

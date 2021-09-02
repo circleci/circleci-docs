@@ -461,7 +461,6 @@ jobs:
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 ```
 {% endraw %}
-
 ## See also
 {: #see-also }
 {:.no_toc}

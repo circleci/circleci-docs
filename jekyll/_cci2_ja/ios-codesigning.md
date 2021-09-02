@@ -89,6 +89,8 @@ end
 
 **Note:** This action will give the CircleCI project the same GitHub permissions as the user who will be clicking the *Authorize with GitHub* button.
 
+プロジェクト設定で **[Permissions (権限)] -> [Checkout SSH Keys (SSH 鍵のチェック アウト)] -> [Add user key (ユーザー キーの追加)]** に移動して、[Authorize with GitHub (GitHub で承認)] ボタンをクリックします。
+
 * In the CircleCI application, go to your project’s settings by clicking the the Project Settings button (top-right on the Pipelines page of the project).
 * On the Project Settings page, click on SSH Keys (vertical menu on the left).
 * Click the *Add User Key* button and follow the steps to authorize CircleCI
@@ -106,6 +108,8 @@ username("user@fastlane.tools")
 GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。
 
 GitHub リポジトリに格納してあるキーとプロファイルを fastlane match で復号化できるようにするには、match のセットアップ手順で設定した暗号化パスフレーズを CircleCI プロジェクトの暗号化された環境変数に追加する必要があります。
+
+GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。
 
 ### 暗号化された環境変数に match パスフレーズを追加する
 {: #adding-the-match-passphrase-to-the-project }
