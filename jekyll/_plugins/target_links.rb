@@ -10,7 +10,7 @@ module Jekyll
     class << self
       def external?(link)
         if link&.match?(URI.regexp(%w(http https)))
-          URI.parse(URI.escape(link)).host != URI.parse(URI.escape(@site_url)).host
+          URI.parse(URI.encode_www_form_component(link)).host != URI.parse(URI.encode_www_form_component(@site_url)).host
         end
       end
     end

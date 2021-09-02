@@ -12,6 +12,7 @@ version:
 If deploying to your servers requires SSH access, you will need to add SSH keys to CircleCI.
 
 ## Overview
+{: #overview }
 
 There are two reasons to add SSH keys to CircleCI:
 
@@ -22,13 +23,15 @@ If you are adding an SSH key for the first reason, refer to the [GitHub and Bitb
 
 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
-**Note:** You may need to add the public key to `~/.ssh/ authorized_keys`in order to add SSH keys.
+**Note:** You may need to add the public key to `~/.ssh/authorized_keys` in order to add SSH keys.
 
 ## Steps
+{: #steps }
 
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
 ### CircleCI Cloud
+{: #circleci-cloud }
 
 1. In a terminal, generate the key with `ssh-keygen -t ed25519 -C "your_email@example.com"`. See [Secure Shell documentation](https://www.ssh.com/ssh/keygen/) for additional details.
 
@@ -47,6 +50,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 8. Click the **Add SSH Key** button.
 
 ### CircleCI Server
+{: #circleci-server }
 
 1. In a terminal, generate the key with `ssh-keygen -m PEM -t rsa -C "your_email@example.com"`. See the [(SSH) Secure Shell documentation](https://www.ssh.com/ssh/keygen/) web site for additional details.
 
@@ -63,6 +67,7 @@ Otherwise, follow the steps below for the version of CircleCI you are using (Clo
 6. Click the **Add SSH Key** button.
 
 ## Adding SSH Keys to a Job
+{: #adding-ssh-keys-to-a-job }
 
 Even though all CircleCI jobs use `ssh-agent` to automatically sign all added SSH keys, you **must** use the `add_ssh_keys` key to actually add keys to a container.
 
@@ -81,9 +86,11 @@ jobs:
 **Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application.
 
 ## Adding multiple keys with blank hostnames
+{: #adding-multiple-keys-with-blank-hostnames }
 
 If you need to add multiple SSH keys with blank hostnames to your project, you will need to make some changes to the default SSH configuration provided by CircleCI. In the scenario where you have multiple SSH keys that have access to the same hosts, but are for different purposes the default `IdentitiesOnly no` is set causing connections to use ssh-agent. This will always cause the first key to be used, even if that is the incorrect key. If you have added the SSH key to a container, you will need to either set `IdentitiesOnly no` in the appropriate block, or you can remove all keys from the ssh-agent for this job using `ssh-add -D`, and reading the key added with `ssh-add /path/to/key`.
 
 ## See Also
+{: #see-also }
 
 [GitHub and Bitbucket Integration]({{ site.baseurl }}/2.0/gh-bb-integration/)

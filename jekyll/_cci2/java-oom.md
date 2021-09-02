@@ -10,6 +10,7 @@ version:
 How to avoid and debug Java memory errors on CircleCI.
 
 ## Overview
+{: #overview }
 
 The [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine) (JVM) provides a portable execution environment for Java-based applications.
 Without any memory limits, the JVM pre-allocates a fraction of
@@ -39,6 +40,7 @@ You can see how much memory your container is allocated, and how much it has use
 
 
 ## UseContainerSupport
+{: #usecontainersupport }
 
 Recent versions of Java (JDK 8u191, and JDK 10 and up) include
 a flag `UseContainerSupport` which defaults on. This flag enables
@@ -50,6 +52,7 @@ You can use the `MaxRAMPercentage` flag to customise the fraction of available R
 e.g. `-XX:MaxRAMPercentage=90.0`.
 
 ## Manual memory limits
+{: #manual-memory-limits }
 
 Even with cgroup support, the JVM can still use too much memory, e.g. if it executes a worker process pool.
 To prevent the JVM from pre-allocating too much memory, declare memory limits
@@ -58,6 +61,7 @@ To debug OOM errors,
 look for the [appropriate exit code](#debugging-java-oom-errors).
 
 ## Using Java environment variables to set memory limits
+{: #using-java-environment-variables-to-set-memory-limits }
 
 You can set several Java environment variables
 to manage JVM memory usage.
@@ -87,6 +91,7 @@ The above environment variables are listed below,
 along with details on why to choose one over another.
 
 ### `_JAVA_OPTIONS`
+{: #javaoptions }
 
 This environment variable takes precedence over all others.
 It is read directly by the JVM
@@ -104,6 +109,7 @@ if you are using the IBM Java runtime,
 then you would use `IBM_JAVA_OPTIONS`.
 
 ### `JAVA_TOOL_OPTIONS`
+{: #javatooloptions }
 
 This environment variable is [a safe choice](https://docs.oracle.com/javase/8/docs/platform/jvmti/jvmti.html#tooloptions)
 for setting Java memory limits.
@@ -113,12 +119,14 @@ with command-line arguments
 or more specific environment variables.
 
 ### `JAVA_OPTS`
+{: #javaopts }
 
 This environment variable is not read by the JVM.
 Instead, several Java-based tools and languages use it
 to pass memory limits to the JVM.
 
 ### `JVM_OPTS`
+{: #jvmopts }
 
 This environment variable is exclusive to Clojure.
 `lein` uses `JVM_OPTS`
@@ -133,10 +141,12 @@ To directly pass memory limits to Java,
 use [`_JAVA_OPTIONS`](#_java_options) or [`JAVA_TOOL_OPTIONS`](#java_tool_options).
 
 ### `LEIN_JVM_OPTS`
+{: #leinjvmopts }
 
 This environment variable is exclusive to `lein`.
 
 ### `GRADLE_OPTS`
+{: #gradleopts }
 
 See the Gradle documentation for [memory settings](https://docs.gradle.org/current/userguide/build_environment.html#sec:configuring_jvm_memory).
 
@@ -145,6 +155,7 @@ Use it
 to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
 ### `MAVEN_OPTS`
+{: #mavenopts }
 
 See the Maven documentation for [memory settings](http://maven.apache.org/configure.html).
 
@@ -153,6 +164,7 @@ Use it
 to overwrite memory limits set in `JAVA_TOOL_OPTIONS`.
 
 ## Debugging Java OOM errors
+{: #debugging-java-oom-errors }
 
 Unfortunately, debugging Java OOM errors often comes down to finding an `exit
 code 137` in your error output.
@@ -167,6 +179,7 @@ If you are still consistently hitting memory limits,
 consider [increasing your jobs's RAM allocation](https://circleci.com/docs/2.0/configuration-reference/#resource_class).
 
 ## See also
+{: #see-also }
 
 [Java Language Guide]({{ site.baseurl }}/2.0/language-java/)
 [Android Tutorial]({{ site.baseurl }}/2.0/language-android/)

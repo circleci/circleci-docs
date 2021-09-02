@@ -48,6 +48,7 @@ workflows:
 Continue reading to learn how each notification type (chat, email, and web) is configurable.
 
 ## Set or change email notifications
+{: #set-or-change-email-notifications }
 
 Use the [Notifications](https://app.circleci.com/settings/user/notifications){:rel="nofollow"} page of the CircleCI application to set or change your default email address for notifications, to turn off email notifications, or get a notification email for every build.
 
@@ -58,6 +59,7 @@ Email notifications will look like the following:
 ![]({{ site.baseurl }}/assets/img/docs/notification-email-failure.png)
 
 ## Enable web notifications
+{: #enable-web-notifications }
 
 Perform the following steps to enable web notifications:
 
@@ -75,17 +77,20 @@ While the process is similar for other browsers, please refer to their individua
 documentation for handling web notifications.
 
 ## Notifications with Orbs
+{: #notifications-with-orbs }
 
 You can use Orbs to integrate various kinds of notifications into your configuration; currently, CircleCI offers a Slack orb and an IRC orb, but several third-party orbs also exist. Consider searching the [orb registry](https://circleci.com/developer/orbs?query=notification&filterBy=all) for _notifications_ to see what is available.
 
 ### Prerequisites
+{: #prerequisites }
 
-Before integrating an orb into your configuration, you will need to perform two steps: 
+Before integrating an orb into your configuration, you will need to perform two steps:
 
-1. Increment the `version` key in your config to `2.1` and; 
+1. Increment the `version` key in your config to `2.1` and;
 2. {% include snippets/enable-pipelines.md %}
 
 ### Using the Slack Orb
+{: #using-the-slack-orb }
 
 Using the [CircleCI Slack orb](https://circleci.com/developer/orbs/orb/circleci/slack), you can integrate and customize Slack notifications directly from your configuration file. The following config is an example of notifying a Slack channel with a custom message:
 
@@ -119,12 +124,13 @@ workflows:
   send-notification:
     jobs:
       - notify:
-          context: slack-secrets      
+          context: slack-secrets
 ```
 
 CircleCI's Slack orb can be used to provide other types of notifications, including notifying a slack channel of a pending approval or sending a status alert at the end of a job based on success or failure. For more information and to view usage examples, see the [CircleCI Slack orb page](https://circleci.com/developer/orbs/orb/circleci/slack).
 
 ### Using the IRC Orb
+{: #using-the-irc-orb }
 
 The [IRC orb](https://circleci.com/developer/orbs/orb/circleci/irc) is similar to the Slack orb, but only has one main feature: sending custom IRC notifications from CircleCI. Consider this example configuration:
 
@@ -145,7 +151,7 @@ jobs:
           nick: 'Your IRC nick name' # default: `circleci-bot`
           message: webhook # default: "Your CircleCI Job has completed."
 orbs:
-  slack: circleci/irc@x.y.z
+  irc: circleci/irc@x.y.z
 version: 2.1
 workflows:
   your-workflow:
@@ -154,7 +160,9 @@ workflows:
 ```
 
 ## Third party tools
+{: #third-party-tools }
 
 ### Chroma feedback
+{: #chroma-feedback }
 
 [Chroma Feedback](https://github.com/redaxmedia/chroma-feedback) is a command line tool in Python to turn your RGB powered hardware into an build indicator. The idea of such extreme visibility is to encourage developers to instantly repair their builds.

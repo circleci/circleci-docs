@@ -11,7 +11,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes the process for upgrading your CircleCI Server installation to v{serverversion}. 
+This document describes the process for upgrading your CircleCI Server installation to v2.19.
 
 toc::[]
 

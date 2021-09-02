@@ -1,41 +1,64 @@
 ---
 layout: classic-docs
-title: "プロジェクトとビルド"
-short-title: "プロジェクトとビルド"
+title: "Projects and Pipelines"
+short-title: "Projects and Pipelines"
 description: "CircleCI 2.0 プロジェクトの入門ガイド"
 categories:
   - getting-started
 order: 1
+version:
+  - Cloud
 ---
 
-ここでは、CircleCI でプロジェクトのビルドを自動化する方法について説明します。
+This document describes how CircleCI automates your pipelines.
 
 ## 概要
+{: #overview }
 
-GitHub または Bitbucket 上のソフトウェア リポジトリが承認され、[プロジェクト]({{ site.baseurl }}/2.0/glossary/#project)として circleci.com に追加された後は、コードを変更するたびに、クリーン コンテナ、またはユーザーの要件に合わせて構成された VM で[ビルド]({{ site.baseurl }}/ja/2.0/build)と自動化されたテストがトリガーされます。
+After a software repository on GitHub or Bitbucket is authorized and added as a [project]({{ site.baseurl }}/2.0/glossary/#project) to circleci.com, every code change triggers your project's [pipeline]({{ site.baseurl }}/2.0/concepts/#pipelines). A pipeline represents the entire configuration, including all workflows that are run when you trigger work on your projects that use CircleCI. The entirety of a `.circleci/config.yml` file is executed by a pipeline. Jobs run in clean containers or VMs configured to the requirements set out in your configuration file.
 
-## プロジェクトの追加
+## Adding projects
+{: #adding-projects }
 
-CircleCI プロジェクトは、関連付けられているコード リポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
+A CircleCI project shares the name of the associated code repository in your VCS (GitHub or Bitbucket). Select **Projects** from the CircleCI application sidebar to enter the Projects dashboard, where you can set up and follow any projects you have access to.
 
-## プロジェクトの追加ページ
+On the Projects Dashboard, you can either:
+* _Set Up_ any project that you are the owner of in your VCS
+* _Follow_ any project in your organization to gain access to its pipelines and to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project's status.
 
-![ヘッダー]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
+## Projects dashboard
+{: #projects-dashboard }
 
-ユーザーは、プロジェクトを*フォロー*することで、プロジェクトの[ビルド ステータス]({{ site.baseurl }}/ja/2.0/status/)に関する[メール通知]({{ site.baseurl }}/ja/2.0/notifications/)を受け取り、プロジェクトを自分の CircleCI ダッシュボードに追加できます。
+{:.tab.addprojectpage.Cloud}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-*プロジェクト管理者*とは、GitHub または Bitbucket リポジトリをプロジェクトとして CircleCI に追加するユーザーです。 *ユーザー*とは、組織内の個々のユーザーです。 CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示したりフォローするには、ユーザーが [GitHub または Bitbucket 組織]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
+{:.tab.addprojectpage.Server}
+![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101.png)
 
-プロジェクトが表示されない場合は、CircleCI 上でビルド中でないときに CircleCI アプリケーションの左上隅で組織を確認してください。 たとえば、左上にユーザー `my-user` が表示されているなら、`my-user` に所属する GitHub プロジェクトのみが `Add Projects` の下で使用できます。 GitHub プロジェクト `your-org/project` をビルドする場合は、アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
+*Following* a project enables a user to subscribe to [email notifications]({{ site.baseurl }}/2.0/notifications/) for the project [build status]({{ site.baseurl }}/2.0/status/) and adds the project to their CircleCI dashboard.
 
-![SWITCH ORGANIZATION メニュー]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
+The *Project Administrator* is the user who adds a GitHub or Bitbucket repository to CircleCI as a Project. A *User* is an individual user within an org. A CircleCI user is anyone who can log in to the CircleCI platform with a username and password. Users must be added to a [GitHub or Bitbucket org]({{ site.baseurl }}/2.0/gh-bb-integration/) to view or follow associated CircleCI projects.  Users may not view project data that is stored in environment variables.
 
-## ビルドの表示
+### Org switching
+{: #org-switching }
+If you do not see your project and it is not currently building on CircleCI, check your Organization in the top left corner of the CircleCI application.  For example, if the top left shows your user `my-user`, only GitHub projects belonging to `my-user` will be available under `Add Projects`.  If you want to build the GitHub project `your-org/project`, you must select `your-org` on the application Switch Organization menu.
 
-新しいコミットがリポジトリにプッシュされると、CircleCI アプリケーションの [Jobs (ジョブ)] ページにビルドが表示されます。 設定ファイルの変更をプッシュしたときに、ビルド中のジョブが [Jpbs (ジョブ)] ページに表示されない場合は、ビルドを有効にするには設定ファイルをどう更新したらよいか、CircleCI アプリケーションの [Workflows (ワークフロー)] タブで確認してください。
+{:.tab.switcher.Cloud}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-![ワークフロー]({{ site.baseurl }}/assets/img/docs/approval_job.png)
+{:.tab.switcher.Server}
+![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
-## 関連項目
+## Viewing and navigating pipelines
+{: #viewing-and-navigating-pipelines }
 
-[設定]({{ site.baseurl }}/ja/2.0/settings)
+Your pipeline appears on the Dashboard of the CircleCI app when a new commit is pushed to your repository. You can view workflows or single jobs by expanding the pipeline and clicking in on any workflow or job descriptors.
+
+When viewing a single job in a pipeline, you can use the breadcrumbs at the top of the page to navigate back to a job's respective workflow or pipeline.
+
+![Pipelines Breadcrumbs]({{ site.baseurl }}/assets/img/docs/pipeline-breadcrumbs.png)
+
+## See also
+{: #see-also }
+
+[Settings]({{ site.baseurl }}/2.0/settings)

@@ -6,21 +6,28 @@ description: "CircleCI 上で Snapcraft を使用して Snap パッケージの�
 categories:
   - containerization
 order: 20
+version:
+  - Cloud
+  - Server v2.x
 ---
 
 Snap とは、複数の Linux ディストリビューション (distros) 上でソフトウェアを迅速にパブリッシュできるパッケージ形式です。 CircleCI を使用して Snap パッケージをビルドし、Snap Store にパブリッシュする方法について説明します。
 
 ## 概要
+{: #overview }
 
 .snap ファイルを一度作成すれば、`snapd` をサポートする Ubuntu、Debian、Fedora、Arch などの任意の Linux ディストリビューション上にインストールできます。 Snapcraft 自体の詳細については、[Snapcraft の Web サイト](https://snapcraft.io/)を参照してください。
 
-CircleCI 上で行う Snap のビルドは、ローカル マシンの場合とほぼ同じで、[CircleCI 2.0 構文](https://circleci.com/ja/docs/2.0/configuration-reference/)でラップされています。 ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
+CircleCI 上で行う Snap のビルドは、ローカル マシンの場合とほぼ同じで、[CircleCI 2.0 構文](https://circleci.com/ja/docs/2.0/configuration-reference/)でラップされています。 ここでは、CircleCI を使用して Snap パッケージをビルドし、[Snap Store](https://snapcraft.io/store) にパブリッシュする方法について説明します。 各セクションでは `.circleci/config.yml` のサンプル ファイルのスニペットを使用しています。 サンプル ファイルの全体は[最後のセクション](#サンプル設定ファイルの全文)で確認してください。
 
 ## 前提条件
+{: #prerequisites }
 
 任意の環境 (ローカル、企業サーバー CI など) で Snap をビルドするには、Snapcraft 設定ファイルが必要です。 通常、`snap/snapcraft.yml` に格納されています。 ここでは、このファイルが既に存在し、ローカル マシンで Snap を正しくビルドできると想定します。 そうでない場合は、[Snapcraft のドキュメント](https://docs.snapcraft.io/build-snaps/your-first-snap)を参照して、ローカル マシンで Snap をビルドしてください。
 
+
 ## ビルド環境
+{: #build-environment }
 
 ```yaml
 #...
@@ -35,6 +42,7 @@ jobs:
 [`cibuilds/snapcraft`](https://github.com/cibuilds/snapcraft) Docker イメージと共に `docker` Executor が使用されています。 このイメージは、Canonical による公式の [`snapcore/snapcraft`](https://github.com/snapcore/snapcraft/tree/master/docker) Docker イメージをベースとしており、CI 環境へのインストールが推奨されるすべてのコマンドライン ツールを備えています。 また、実際の Snap のビルドに使用される `snapcraft` コマンドが含まれています。
 
 ## Snapcraft の実行
+{: #running-snapcraft }
 
 ```yaml
 ...
@@ -49,12 +57,14 @@ jobs:
 CircleCI で実際に Snap をビルドするために必要なコマンドはこれだけです。 これによって Snapcraft が実行され、すべてのビルド ステップが実行されて、`.snap` ファイルが生成されます。 通常、このファイルの形式は `<snap-name>-<snap-version>-<system-arch>.snap` です。
 
 ## テスト
+{: #testing }
 
 コードの単体テストについては、CircleCI のブログやドキュメントで詳しく説明されているため、ここでは取り上げません。 Snap をビルドする前に、プロジェクト依存関係、何らかの事前チェック、テスト、コンパイルをプルする `job` の作成が必要になる場合もあるでしょう。
 
-CircleCI で Snap をビルドすると、`.snap` ファイルが作成され、このファイルを作成したコードに加えて、このファイルをテストできます。 Snap 自体のテスト方法はユーザーに任されており、 一部のユーザーは、さまざまなディストリビューションに Snap をインストールした後、コマンドを実行してインストール プロセスが機能することを確認しています。 Snapcraft は、広範なテストを実行できる Builder フリートを提供しています。これを使用して、コード自体をテストした後に、さまざまなディストリビューションで Snap をテストできます。 詳細については、[こちら](https://build.snapcraft.io/)を参照してください。
+CircleCI で Snap をビルドすると、`.snap` ファイルが作成され、このファイルを作成したコードに加えて、このファイルをテストできます。 Snap 自体のテスト方法はユーザーに任されており、 一部のユーザーは、さまざまなディストリビューションに Snap をインストールした後、コマンドを実行してインストール プロセスが機能することを確認しています。 Snapcraft は、広範なテストを実行できる Builder フリートを提供しています。 これを使用して、コード自体をテストした後に、さまざまなディストリビューションで Snap をテストできます。 詳細については、[こちら](https://build.snapcraft.io/)を参照してください。
 
 ## パブリッシュ
+[ワークフロー](https://circleci.com/ja/docs/2.0/workflows/)を使用して、次の 2 つの方法で Snap をビルドできます。
 
 Snap のパブリッシュは、ほぼ 2 ステップで完了します。 以下に Linux マシン上の例を示します。
 
@@ -85,24 +95,27 @@ base64 snapcraft.login | xsel --clipboard
 この例では、Snapcraft が自動的に `.snapcraft/snapcraft.cfg` 内のログイン認証情報を検索し、前に作成した環境変数がその場所にデコードされます。 次に、`snapcraft push` コマンドを使用して .snap ファイルを Snap Store にアップロードします。
 
 ### アップロードとリリース
+{: #uploading-vs-releasing }
 
-デフォルトの `snapcraft push *.snap` は、Snap を Snap Store にアップロードし、サーバー側でストア チェックを実行してから停止します。 この Snap は「リリース」されません。すなわち、このアップデートは自動的にはユーザーに表示されません。 Snap をローカルにパブリッシュするには、`snap release <release-id>` コマンドを使用するか、Snap Store にログインしてリリース ボタンをクリックします。
+デフォルトの `snapcraft push *.snap` は、Snap を Snap Store にアップロードし、サーバー側でストア チェックを実行してから停止します。 この Snap は「リリース」されません。 すなわち、このアップデートは自動的にはユーザーに表示されません。 Snap をローカルにパブリッシュするには、`snap release <release-id>` コマンドを使用するか、Snap Store にログインしてリリース ボタンをクリックします。
 
 通常の CircleCI の方式では、`--release <channel>` フラグを使用することで、(上の例のように) 完全に自動化できます。 これによって Snap がアップロードされ、ストア側の検証が行われてから、指定したチャンネルに Snap が自動的にリリースされます。
 
+
 ## ワークフロー
+{: #workflows }
 
 複数のジョブを使用して、Snap ビルドをさらにうまく構成することができます。 実際のプロジェクトをビルド・コンパイルするジョブ、Snap 自体をビルドするジョブ、および Snap (および他のパッケージ) を `master` 上にのみパブリッシュするジョブはどれも有用です。
 
-[ワークフロー](https://circleci.com/ja/docs/2.0/workflows/)を使用して、次の 2 つの方法で Snap をビルドできます。
+[Workflows](https://circleci.com/docs/2.0/workflows/) can help with building snaps in two ways:
 
 1. **Snap Store チャンネル** - 前のセクションで説明したように、ストアにアップロードするときに、オプションで同時にリリースすることが可能です。 これにより、CircleCI 上の特定のジョブで特定の Snap チャンネルにデプロイするように指定できます。 たとえば、`master` ブランチを使用して `edge` チャンネルにデプロイし、タグ付きリリースを使用して `stable` チャンネルにデプロイできます。
-2. **並列パッケージ化** - Snap 以外に flatpak、.deb、.apk などとしてもパッケージ化されるソフトウェアの場合は、各パッケージ タイプをそれぞれのジョブに置き、すべてを並列に実行することができます。 これにより、Snap が完了するまで .deb パッケージを開始できないなどのケースに比べ、はるかに高速にビルドを完了できます。
+1. **並列パッケージ化** - Snap 以外に flatpak、.deb、.apk などとしてもパッケージ化されるソフトウェアの場合は、各パッケージ タイプをそれぞれのジョブに置き、すべてを並列に実行することができます。 これにより、Snap が完了するまで .deb パッケージを開始できないなどのケースに比べ、はるかに高速にビルドを完了できます。
 
 生成された Snap ファイルをジョブ間で利用するには、必要に応じて CircleCI の `workspaces` を使用します。 次は、「送信元」ジョブのスニペットと「送信先」ジョブのスニペットを示します。
 
 ```yaml
-... # 既に Snap が存在するジョブから
+# 既に Snap が存在するジョブから
       - persist_to_workspace:
           root: .
           paths:
@@ -115,7 +128,9 @@ base64 snapcraft.login | xsel --clipboard
 
 以下に、CircleCI 上で Snap パッケージをビルドするサンプル ファイルの全体を示します。 これと同じプロセスが \[CircleCI ローカル CLI\]\[local-cli-repo\] 用の Snap パッケージのビルドに使用されています。
 
+
 ## サンプル設定ファイルの全文
+{: #full-example-config }
 
 ```yaml
 version: 2

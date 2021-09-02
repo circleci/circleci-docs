@@ -1,6 +1,7 @@
 ---
 version:
 - Server v2.x
+- Server v3.x
 - Server Admin
 ---
 = Security
@@ -38,14 +39,12 @@ A few different external services and technology integration points touch Circle
 
 - **Artifacts** It is common to use S3 or similar hosted storage for artifacts. Assuming these resources are secured per your normal policies they are as safe from any outside intrusion as any other data you store there.
 
-- **Support Bundles** We use https://www.honeycomb.io/[Honeycomb] to process and analyze distributed tracing data from Support Bundles that are sent to us. The traces contain metadata about activity in your instance but no secrets, source code, or build output are included. Data is retained for a maximum of 60 days.
-
 == Audit Logs
 The Audit Log feature is only available for CircleCI installed on your servers or private cloud.
 
 CircleCI logs important events in the system for audit and forensic analysis purposes. Audit logs are separate from system logs that track performance and network metrics.
 
-Complete Audit logs may be downloaded from the Audit Log page within the Admin section of the application as a CSV file.  Audit log fields with nested data contain JSON blobs.
+Complete Audit logs may be downloaded from the Audit Log page within the Admin section of the application as a CSV file.  Audit log fields with nested data contain JSON blobs. Please note the audit log download can take a very long time to start; we recommend clicking the Download button once and walking away.
 
 **Note:** In some situations, the internal machinery may generate duplicate events in the audit logs. The `id` field of the downloaded logs is unique per event and can be used to identify duplicate entries.
 
@@ -82,7 +81,7 @@ Following are the system events that are logged. See `action` in the Field secti
 - **version:** Version of the event schema. Currently the value will always be 1. Later versions may have different values to accommodate schema changes.
 - **scope:** If the target is owned by an Account in the CircleCI domain model, the account field should be filled in with the Account name and ID. This data is a JSON blob that will always contain `id` and `type` and will likely contain `name`.
 - **success:** A flag to indicate if the action was successful.
-- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the request ID assigned to this request by CircleCI), `ip_address` (the original IP address in IPV4 dotted notation from which the request was made, eg. 127.0.0.1), and `client_trace_id` (the client trace ID header, if present, from the 'X-Client-Trace-Id' HTTP header of the original request).
+- **request:** If this event was triggered by an external request this data will be populated and may be used to connect events that originate from the same external request. The format is a JSON blob containing `id` (the unique ID assigned to this request by CircleCI).
 
 == Checklist To Using CircleCI Securely as a Customer
 

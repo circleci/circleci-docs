@@ -1,5 +1,6 @@
 .DS_Store
 .bundle/
+.byebug_history
 .jekyll-metadata
 .jekyll-cache/
 .sass-cache/
@@ -14,8 +15,16 @@ node_modules/
 release/tmp/CircleCI-Server-AWS-Installation-Guide.pdf
 release/tmp/CircleCI-Server-Operations-Guide.pdf
 
+# Vim open files
+*.swp
+
 src-api/build/
 
 # jekyll/_algolia_api_key can be used to store an algolia API key for
 # indexing the content. Useful for local development.
 *_algolia_api_key
+
+# local test
+vendor
+jekyll/_config_override.yml
+markdownlint-results.json

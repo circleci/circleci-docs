@@ -8,9 +8,26 @@ categories:
 order: 2
 ---
 
-CircleCI は、高度な構成のためのオプションと機能を数多くサポートしています。何ができるかについては、以下のスニペットを参照してください。高度な構成を最適化するヒントも紹介します。
+CircleCI は、高度な構成のためのオプションと機能を数多くサポートしています。 何ができるかについては、以下のスニペットを参照してください。 高度な構成を最適化するヒントも紹介します。
 
 ## スクリプトのチェック
+設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
+
+Use the shellcheck orb to check all scripts in a project. Check the [shellcheck page in the orb registry](https://circleci.com/developer/orbs/orb/circleci/shellcheck) for versioning and further usage examples (remember to replace x.y.z with a valid version):
+
+```yaml
+version: 2.1
+
+orbs:
+  shellcheck: circleci/shellcheck@x.y.z
+
+workflows:
+  shellcheck:
+    jobs:
+      - shellcheck/check
+```
+
+You can also use shellcheck with version 2 config, without using the orb, as follows:
 
 ```yaml
 version: 2
@@ -30,30 +47,12 @@ jobs:
             find . -type f -name '*.sh' | xargs shellcheck --external-sources
 ```
 
+For more information on using shell scripts in your config, see the [Using Shell Scripts]({{site.baseurl}}/2.0/using-shell-scripts/) guide.
+
 ## ブラウザーでのテスト
+{: #browser-testing }
 
-```yaml
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node-jessie-browsers
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run: mkdir test-reports
-      - run:
-          name: Selenium のダウンロード
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Selenium の起動
-          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
-          background: true
-```
-
-## データベースのテスト
+Use Selenium to manage in-browser tesing:
 
 ```yaml
 version: 2
@@ -98,13 +97,43 @@ jobs:
           -c "SELECT * from test"
 ```
 
-## Docker コマンドによる Docker イメージのビルド
+For more information on browser testing, see the [Browser Testing]({{site.baseurl}}/2.0/browser-testing/) guide.
 
-```yaml
+## データベースのテスト
+{: #database-testing }
+
+Use a service container to run database testing:
+
+``` yaml
+version: 2
 jobs:
   build:
+    docker:
+      - image: circleci/node-jessie-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      # ... アプリのビルド・テストに関する記述 ...
+      - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Selenium のダウンロード
+          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: Selenium の起動
+          command: java -jar selenium-server-standalone-3.5.3.jar -log test-reports/selenium.log
+          background: true
+```
+
+For more information on configuring databases, see the [Configuring Databases]({{site.baseurl}}/2.0/databases/) guide.
+
+## Docker コマンドによる Docker イメージのビルド
+{: #run-docker-commands-to-build-your-docker-images }
+
+Run Docker commands to build Docker images. Set up a remote Docker environment when your primary executor is Docker:
+
+``` yaml
+Run Docker commands to build Docker images.
 
       - setup_remote_docker
 
@@ -118,15 +147,20 @@ jobs:
 
 ```
 
+For more information on building Docker images, see the [Building Docker Images]({{site.baseurl}}/2.0/building-docker-images/) guide.
+
 ## 高度な構成のヒント
+{: #tips-for-advanced-configuration }
 
-設定ファイルを最適化し、クリアに保つためのヒントを紹介します。
+Here are a few tips for optimization and maintaining a clear configuration file.
 
-- 長いインライン bash スクリプトを使用するのはやめましょう。特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、クリアで読みやすい設定ファイルにします。
+- 長いインライン bash スクリプトを使用するのはやめましょう。 特に多数のジョブで使用する場合は注意してください。 長い bash スクリプトはリポジトリに移動し、クリアで読みやすい設定ファイルにします。
 - フル チェック アウトを行わない場合は、[ワークスペース]({{site.baseurl}}/ja/2.0/workflows/#ワークスペースによるジョブ間のデータ共有)を使用してジョブに外部スクリプトをコピーすることができます。
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前に実行する必要があります。
 - ワークフローの*最初*に setup ジョブを実行すると、何らかの事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備に役立ちます。
 
-## 関連項目
 
-[最適化]({{ site.baseurl }}/ja/2.0/optimizations/)
+## 関連項目
+{: #see-also }
+
+{{ site.baseurl }}/ja/2.0/optimizations/

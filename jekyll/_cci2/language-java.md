@@ -10,12 +10,13 @@ version:
 - Server v2.x
 ---
 
-This guide will help you get started with a Java application building with Gradle on CircleCI. 
+This guide will help you get started with a Java application building with Gradle on CircleCI.
 
 * TOC
 {:toc}
 
 ## Overview
+{: #overview }
 {:.no_toc}
 
 If you’re in a rush, just copy the sample configuration below into a [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) in your project’s root directory and start building.
@@ -23,12 +24,13 @@ If you’re in a rush, just copy the sample configuration below into a [`.circle
 We are going to make a few assumptions here:
 
 * You are using [Gradle](https://gradle.org/). A [Maven](https://maven.apache.org/) version of this guide is available [here](https://circleci.com/docs/2.0/language-java-maven/).
-* You are using Java 11. 
-* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/). 
+* You are using Java 11.
+* You are using the Spring Framework. This project was generated using the [Spring Initializer](https://start.spring.io/).
 * Your application can be distributed as an all-in-one uberjar.
 
 
 ## Sample configuration
+{: #sample-configuration }
 
 {% raw %}
 ```yaml
@@ -104,11 +106,12 @@ workflows:
   version: 2
   workflow:
     jobs:
-    - build 
+    - build
 ```
 {% endraw %}
 
 ## Get the code
+{: #get-the-code }
 
 The configuration above is from a demo Java app, which you can access at [https://github.com/CircleCI-Public/circleci-demo-java-spring](https://github.com/CircleCI-Public/circleci-demo-java-spring).
 
@@ -117,6 +120,7 @@ If you want to step through it yourself, you can fork the project on GitHub and 
 Now we are ready to build a `config.yml` from scratch.
 
 ## Config walkthrough
+{: #config-walkthrough }
 
 We always start with the version.
 
@@ -274,6 +278,7 @@ workflows:
 Nice! You just set up CircleCI for a Java app using Gradle and Spring.
 
 ## See also
+{: #see-also }
 {:.no_toc}
 
 - See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for example deploy target configurations.

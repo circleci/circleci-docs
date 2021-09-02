@@ -1,6 +1,7 @@
 ---
 version:
 - Cloud
+- Server v3.x
 ---
 = Installing the CircleCI Runner
 :page-layout: classic-docs
@@ -9,78 +10,26 @@ version:
 :toc: macro
 :toc-title:
 
-NOTE: CircleCI runner is currently only available if you are on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale
+plan] and with https://circleci.com/pricing/server/[server]. Please reach out
+to your sales representative (or https://circleci.com/contact-us/?cloud[contact
+us]) for information on how to sign up for the Scale plan or server.
 
-This page describes how to install CircleCI runner on Linux and macOS platforms.
+This page describes how to install CircleCI runner on Linux, macOS, Docker, and Windows platforms. For other platforms, see xref:runner-overview.adoc#available-circleci-runner-platforms[Available CircleCI runner platforms] for more information.
 
 toc::[]
 
 == Prerequisites
 
-=== Support Levels
+The installation process assumes you have installed the following utilities on your system:
 
-There are currently three support levels for CircleCI runner:
-
-* Supported
-* Untested
-* Unsupported
-
-==== Supported
-
-* CircleCI has built and tested runner on a given platform.
-* Support expectation:
-+
-** Customer Engineers can provide support.
-** CircleCI documentation and best practices available.
-** If issues arise, CircleCI will assist the customer to resolve the issue within the usual Gold support Service Level Agreements (SLAs).
-
-==== Untested
-
-* CircleCI has not tested runner on a given platform but it should work based on the similarities of the platform to one or more supported platforms.
-* Support expectation:
-+
-** There is no CircleCI documentation available.
-** Customers can run CircleCI runner on an untested platform, but the customer is responsible for determining how to run runner on this platform.
-** If issues arise on the untested platform, the CircleCI account team may or may not be able to help.
-** Customer Engineers will provide general guidance (not specific to this platform) on best practices for CircleCI runner.
-** If a customer is able to get an untested platform up and running, the account team will collect information about their setup in order to reuse information with other customers.
-
-==== Unsupported
-
-* CircleCI will not provide a runner binary capable of running CircleCI runner on the platform.
-* Support expectation:
-+
-** CircleCI runner will not work on the platform.
-** A customer can try running CircleCI runner on the platform, but are unlikely to succeed.
-** No CircleCI documentation or Customer Engineering support.
-
-== Supported Platforms
-
-The following platforms have been validated to work with CircleCI runner:
-
-* x86_64 + Ubuntu 18.04+
-* Arm64 + Ubuntu 18.04+
-* Intel + macOS
-
-== Untested platforms
-
-The following platforms have not been tested, but are believed to work with CircleCI runner:
-
-* x86_64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-* Arm64 + non-Ubuntu Linux (Debian, Red Hat, SUSE, etc)
-* Docker
-
-NOTE: CircleCI provides no documentation for these platforms.
-
-== Unsupported platforms
-
-The following platforms are not currently supported to work with CircleCI runner:
-
-* x86_64 + Windows
-* Arm + Windows
-* Apple Silicon + macOS
-* Arm32 + Linux
-* Run natively in Kubernetes/Rancher/other container orchestration solutions
+* <<local-cli#installation,CircleCI CLI>>
+* curl (installed by default on macOS)
+* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
+* systemd version 235+ (Linux only)
+* sepolicy (RHEL 8 only)
+* rpmbuild (RHEL 8 only)
+* permissions to create a user, and create directories under /opt.
 
 == Authentication
 
@@ -88,25 +37,35 @@ NOTE: These commands can only be run by an owner/admin of your organization.
 
 In order to complete this process you will need to create a namespace and authentication token by performing the steps listed below:
 
-1. <<local-cli#installation,Install the circleci command-line tool>>.
-2. Create a namespace for your organization's runner resources.
+. Create a namespace for your organization's runner resources.
 +
-NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. Use the following command: `circleci namespace create <name> <vcs-type> <org-name>` (e.g. if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
-3. Create a resource class for your runner for your namespace using the following command: `circleci runner resource-class create <resource-class> <description>` (e.g. `circleci runner resource-class create my-namespace/my-resource-class my-description`)
+NOTE: Each organization can only create a single namespace. If you already use orbs, this namespace will be the same namespace as the orbs use. 
++ 
+Use the following command: 
++
+```
+circleci namespace create <name> <vcs-type> <org-name>
+```
++
+For example, if your GitHub URL is `https://github.com/circleci`, then use: `circleci namespace create my-namespace github circleci`.
+. Create a resource class for your runner for your namespace using the following command:
++ 
+```
+circleci runner resource-class create <resource-class> <description>
+``` 
++
+For example, `circleci runner resource-class create my-namespace/my-resource-class my-description`.
 +
 NOTE: To create resource classes and tokens you need to be an organization administrator in the VCS provider.
-4. Create a token for authenticating the above resource-class by using the following command: `circleci runner token create <resource-class> <nickname>` (e.g. `circleci runner token create my-namespace/my-resource-class my-token`). This will print a generated Runner configuration including the authentication token.
+. Create a token for authenticating the above resource-class using the following command: 
++
+```
+circleci runner token create <resource-class> <nickname>
+``` 
++
+For example, `circleci runner token create my-namespace/my-resource-class my-token`. This will print a generated runner configuration including the authentication token.
 
 CAUTION: The token cannot be retrieved again, so be sure to store it safely.
-
-== Installation tooling
-
-The installation process assumes you have installed the following utilities on your system:
-
-* curl (installed by default on macOS)
-* sha256sum (installed as part of coreutils on Linux apt/yum, macOS via brew)
-* systemd version 235+ (Linux only)
-* permissions to create a user, and create directories under /opt.
 
 == Job running requirements
 
@@ -119,8 +78,8 @@ Running jobs requires you have the following tools available on your machine:
 
 == Installation
 
-=== Download the Launch Agent Binary and Verify the Checksum
-
+=== Download the launch agent binary and verify the checksum
+[[download]]
 The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
 First, set one of these variables as appropriate for for your installation target.
@@ -139,36 +98,55 @@ First, set one of these variables as appropriate for for your installation targe
 
 | For macOS x86_64
 | `platform=darwin/amd64`
+
+| For macOS M1
+| `platform=darwin/arm64`
 |===
 
-Run the following steps to download, verify and install the binary.
+Next, set the `circleci-launch-agent` version. Runners on cloud auto-update to the latest supported versions. For server, specific runner versions are validated for interoperability and runners do not auto-update. A table of server `circleci-launch-agent` versions can be found <<runner-for-server-compatibility,here>>.
 
-```sh
+For cloud, you can run the following:
+```bash
+export base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
+export agent_version=$(curl "${base_url}/release.txt")
+```
+
+For server v3.1.0 and up, run the following, substituting `<launch-agent-version>` with the correct launch agent version for the version of server you are running (see <<runner-for-server-compatibility>> to find the correct version):
+```bash
+export agent_version="<launch-agent-version>"
+```
+
+Finally, run the following script to download, verify and install the binary.
+```bash
+# Set up runner directory
 prefix=/opt/circleci
 sudo mkdir -p "$prefix/workdir"
-base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
-echo "Determining latest version of CircleCI Launch Agent"
-agent_version=$(curl "$base_url/release.txt")
+
+# Downloading launch agent
 echo "Using CircleCI Launch Agent version $agent_version"
 echo "Downloading and verifying CircleCI Launch Agent Binary"
+base_url="https://circleci-binary-releases.s3.amazonaws.com/circleci-launch-agent"
 curl -sSL "$base_url/$agent_version/checksums.txt" -o checksums.txt
-file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2)"
-file="${file:1}"
+file="$(grep -F "$platform" checksums.txt | cut -d ' ' -f 2 | sed 's/^.//')"
 mkdir -p "$platform"
 echo "Downloading CircleCI Launch Agent: $file"
 curl --compressed -L "$base_url/$agent_version/$file" -o "$file"
+
+# Verifying download
 echo "Verifying CircleCI Launch Agent download"
-sha256sum --check --ignore-missing checksums.txt && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
+grep "$file" checksums.txt | sha256sum --check && chmod +x "$file"; sudo cp "$file" "$prefix/circleci-launch-agent" || echo "Invalid checksum for CircleCI Launch Agent, please try download again"
 ```
 
 === Platform-specific instructions
 
 Please refer to the platform-specific installation instructions:
 
-* linux
-* macOS
+* <<CircleCI Runner Installation (Linux), Linux>>
+* <<CircleCI Runner Installation (macOS), macOS>>
+* <<Docker Installation, Docker>>
+* <<Windows Installation, Windows>>
 
-== Installing the CircleCI runner on Linux
+== CircleCI Runner Installation (Linux)
 
 === Create the CircleCI runner configuration
 
@@ -177,12 +155,17 @@ The recommended CircleCI runner configuration for Linux is:
 ```yaml
 api:
   auth_token: AUTH_TOKEN
+  # On server, set url to the hostname of your server installation. For example,
+  # url: https://circleci.example.com
+
 runner:
   name: RUNNER_NAME
   command_prefix: ["sudo", "-niHu", "circleci", "--"]
   working_directory: /opt/circleci/workdir/%s
   cleanup_working_directory: true
 ```
+
+Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
 
 === Install the CircleCI runner configuration
 
@@ -195,13 +178,48 @@ sudo chmod 600 /opt/circleci/launch-agent-config.yaml
 
 === Create the circleci user & working directory
 
-These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`).
+These will be used when executing the task agent. These commands must be run as a user with permissions to create other users (e.g. `root`). For information about GECOS, see the https://en.wikipedia.org/wiki/Gecos_field[wiki page].
+
+==== Ubuntu/Debian
 
 ```bash
 id -u circleci &>/dev/null || adduser --uid 1500 --disabled-password --gecos GECOS circleci
 
 mkdir -p /opt/circleci/workdir
 chown -R circleci /opt/circleci/workdir
+```
+
+==== CentOS/RHEL
+
+```bash
+id -u circleci &>/dev/null || adduser --uid 1500 -c GECOS circleci
+
+mkdir -p /opt/circleci/workdir
+chown -R circleci /opt/circleci/workdir
+```
+
+=== Configure SELinux policy (RHEL 8)
+
+An SELinux policy is required for runner to accept and launch jobs on RHEL 8 systems (earlier versions of RHEL are unsupported). Note that this policy does not add any permissions to the ones that may be required by individual jobs on this runner install.
+
+Create directory `/opt/circleci/policy` and generate the initial policy module:
+
+```bash
+sudo mkdir -p /opt/circleci/policy
+
+# Install sepolicy and rpmbuild if you haven't already
+sudo yum install -y policycoreutils-devel
+sudo yum install -y rpm-build
+
+sudo sepolicy generate --path /opt/circleci/policy --init /opt/circleci/circleci-launch-agent
+```
+
+Download the following type enforcing file https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te[`circleci_launch_agent.te`] and install the policy:
+
+```bash
+sudo curl https://raw.githubusercontent.com/CircleCI-Public/runner-installation-files/main/rhel8-install/circleci_launch_agent.te --output /opt/circleci/policy/circleci_launch_agent.te
+
+sudo /opt/circleci/policy/circleci_launch_agent.sh
 ```
 
 === Enable the `systemd` unit
@@ -229,8 +247,7 @@ WantedBy = multi-user.target
 You can now enable the service:
 
 ```bash
-prefix=/opt/circleci
-systemctl enable $prefix/circleci.service
+systemctl enable /opt/circleci/circleci.service
 ```
 
 === Start the service
@@ -270,7 +287,7 @@ You can also see the logs for the system by running:
 journalctl -u circleci
 ```
 
-== CircleCI Runner Installation macOS
+== CircleCI Runner Installation (macOS)
 
 === Create a CircleCI runner configuration
 
@@ -280,14 +297,18 @@ Complete the template shown below, with the various capitalized parameters fille
 
 ```yaml
 api:
-    auth_token: AUTH_TOKEN
+  auth_token: AUTH_TOKEN
+  # On server, set url to the hostname of your server installation. For example,
+  # url: https://circleci.example.com
+
 runner:
-    name: RUNNER_NAME
-    command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
-    working_directory: /tmp/%s
-    cleanup_working_directory: true
+  name: RUNNER_NAME
+  command_prefix : ["sudo", "-niHu", "USERNAME", "--"]
+  working_directory: /tmp/%s
+  cleanup_working_directory: true
+
 logging:
-    file: /Library/Logs/com.circleci.runner.log
+  file: /Library/Logs/com.circleci.runner.log
 ```
 
 === Install the CircleCI Runner configuration
@@ -372,52 +393,6 @@ sudo launchctl load '/Library/LaunchDaemons/com.circleci.runner.plist'
 
 The macOS application console can be used to view the logs for the CircleCI agent. Look under "Log Reports" for the logs called `com.circleci.runner.log`.
 
-=== Configuration file reference
-
-A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
-
-The configuration file uses the following format with the various parameters explained in more detail below:
-
-```sh
-api:
-  auth_token: AUTH_TOKEN
-runner:
-  name: RUNNER_NAME
-runner.name
-```
-
-`RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
-
-==== api.auth_token
-
-This is a token used to identify the launch agent to CircleCI and can be generated by circleci command-line tool. An existing token may be shared among many installations, but this token only allows a particular `resource_class` to be specified.
-
-==== runner.command_prefix
-
-This prefix enables you to customize how the task agent process is launched; The CircleCI example uses the launch-task script provided below.
-
-==== runner.working_directory
-
-This directory allows you to control the default working directory used by each job. If the directory already exists, task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not be automatically removed.
-
-==== runner.cleanup_working_directory
-
-This directory enables you to control the working directory cleanup after each job. The default value is `false`.
-
-==== runner.max_run_time
-
-This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
-
-Here are few valid examples:
-
-* `72h` - 3 days
-* `1h30m` - 1 hour 30 minutes
-* `30s` - 30 seconds
-* `50m` - 50 minutes
-* `1h30m20s` - An overly specific (yet still valid) duration.
-
-NOTE: The default value is 5 hours.
-
 == Docker Installation
 
 The host needs to have Docker installed. Once the `runner` container is started, the container will immediately attempt to start running jobs. The container will be reused to run more jobs indefinitely until it is stopped.
@@ -445,7 +420,7 @@ docker build --file ./Dockerfile.runner.extended .
 
 === Start the Docker container
 
-NOTE: The environment variable values are not to the `docker` command, so these environment variables are not visible in `ps` output.
+NOTE: The environment variable values are not available to the `docker` command, so these environment variables are not visible in `ps` output.
 
 ```bash
 CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docker run --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
@@ -453,11 +428,156 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 When the container starts, it will immediately attempt to start running jobs.
 
+==== Start the Docker container on server
+
+When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+
+``` bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
 === Stopping the Docker container
 
 ``` bash
 docker stop <container-name>
 ```
+
+=== Remove the Docker container
+
+In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+
+``` bash
+docker stop <container-name>; docker rm <container-name>;
+```
+
+== Windows Installation
+
+NOTE: This has been tested for Windows Server 2019 and Windows Server 2016, both in Datacenter Edition with Desktop Experience.
+
+With this procedure, you install CircleCI Launch Agent and its dependencies, i.e., Chocolatey, Git and Gzip, on your Windows Server.
+
+Since this setup creates a new local administrator user that runs CircleCI jobs, your Windows Server needs to be capable of creating local users and accepting remote logons for them.
+
+* The Windows Server needs to be a domain member when you set this up in domain environments. The runner instance cannot run on a Windows Server operating as a domain controller.
+
+=== Installation Steps
+
+. Download the https://github.com/CircleCI-Public/runner-installation-files/tree/main/windows-install[`Install-CircleCIRunner.ps1` script] from Github to an easily accessible location. 
+
+. Open PowerShell as an administrator and navigate to the directory where you placed the script file.
+
+. Run the following in your PowerShell:
++
+```
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; 
+./Install-CircleCIRunner.ps1
+```
++
+The installation will be output into your PowerShell interface.
+
+. As part of the installation, the configuration file for the Runner (`launch-agent-config.yaml`) will open in Notepad. Please fill the file out with the requested information (see <<Configuration file reference, Configuration file reference>>). The configuration file is located in the installation directory - `C:\Program Files\CircleCI`, by default.
+
+After setup completes, the Launch Agent starts automatically and begins looking for jobs to process.
+
+== Kubernetes Installation
+
+See: xref:runner-on-kubernetes.adoc[Runner on Kubernetes]
+
+== Configuration file reference
+
+A YAML file is used to configure the launch agent, how it communicates with our servers and how it will launch the task agent.
+
+The configuration file uses the following format with the various parameters explained in more detail below:
+
+```sh
+api:
+  auth_token: AUTH_TOKEN
+runner:
+  name: RUNNER_NAME
+```
+
+==== runner.name
+
+`RUNNER_NAME` is a unique name assigned to this particular running launch agent. CircleCI recommends using the hostname of the machine so that it can be used to identify the agent when viewing statuses and job results in the CircleCI UI.
+
+==== api.auth_token
+
+This is a token used to identify the launch agent to CircleCI and can be generated by the CircleCI CLI. An existing token may be shared among many installations, but this token only allows a particular `resource_class` to be specified.
+
+==== runner.command_prefix
+
+This prefix enables you to customize how the task agent process is launched. Using a custom script here can allow you to execute arbitrary commands before and after the task runner. You should take care to ensure the supplied arguments are executed, and the correct exit code is returned from the script upon completion.
+
+==== runner.working_directory
+
+This directory allows you to control the default working directory used by each job. If the directory already exists, task agent will need permissions to write to the directory. If the directory does not exist, then the task agent will need permissions to create the directory. If `%s` is present in the value, this value will be replaced with a different value for each job. Note that these directories will not be automatically removed.
+
+==== runner.cleanup_working_directory
+
+This directory enables you to control the working directory cleanup after each job. The default value is `false`.
+
+==== runner.max_run_time
+
+This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
+
+Here are few valid examples:
+
+* `72h` - 3 days
+* `1h30m` - 1 hour 30 minutes
+* `30s` - 30 seconds
+* `50m` - 50 minutes
+* `1h30m20s` - An overly specific (yet still valid) duration.
+
+NOTE: The default value is 5 hours.
+
+===== Customizing job timeouts and drain timeouts
+
+If you would like to customize the job timeout setting, you can "drain" the job by sending the Launch Agent a termination (TERM) signal, which then causes the Launch Agent to attempt to gracefully shutdown. When this TERM signal is received, the launch agent enters 'draining' mode, preventing the Launch Agent from accepting any new jobs, but still allowing any current active job to be completed. At the end of "draining," the Launch Agent then signals the Task Agent to cancel any active job (by sending it a TERM signal).
+
+NOTE: If the Task Agent does not exit a brief period after the TERM, the Launch Agent will manually kill it by sending it a KILL signal.
+
+Draining can end in one of two ways:
+
+* The task has been in the draining state for longer than the configured `max_run_time`.
+* An additional TERM signal is received by the Launch Agent during "draining".
+
+==== runner.ssh.advertise_addr
+
+This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
+
+The address is of the form `*host:port*` and is displayed in the 'Enable SSH' and 'Wait for SSH' sections for a job that is rerun.
+
+NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the 'Rerun job with SSH' feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
+
+===== Considerations before enabling SSH debugging
+
+Task agent runs an embedded SSH server and agent on a dedicated port when the 'Rerun job with SSH' option is activated. This feature will not affect any other SSH servers or agents on the system that the runner is installed on.
+
+* The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple launch agents are installed on the same host.
+* The SSH server will inherit the same user privileges and associated access authorizations as task agent as defined by the xref:runner-installation.adoc#runner-command_prefix[runner.command_prefix parameter].
+* The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH, but only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
+* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization’s concurrency limit, and the task agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
+
+== Runner for Server Compatibility
+_CircleCI Runner is available from server v3.1.0_
+
+Each minor version of server is compatible with a specific version of
+`circleci-launch-agent`. The table below lists which version of `circleci-launch-agent` to use when installing runner,
+depending on your version of server:
+
+[.table.table-striped]
+[cols=2*, options="header", stripes=even]
+|===
+| Server version  
+| Launch Agent Version
+
+| 3.0             
+| Runner not supported
+
+| 3.1            
+| 1.0.11147-881b608
+|===
+
 
 === Additional Resources
 

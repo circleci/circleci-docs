@@ -17,6 +17,7 @@ Document | Description
 {: class="table table-striped"}
 
 ## Docker
+{: #docker }
 
 Document | Description
 ----|----------
@@ -29,6 +30,7 @@ Document | Description
 {: class="table table-striped"}
 
 ## iOS and Mac
+{: #ios-and-mac }
 
 Document | Description
 ----|----------
@@ -39,6 +41,7 @@ Document | Description
 
 
 ## Windows
+{: #windows }
 
 Document | Description
 ----|----------

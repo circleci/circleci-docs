@@ -13,17 +13,20 @@ version:
 Snap packages provide a quick way to publish your software on multiple Linux distributions (distros). This document shows you how to build a snap package and publish it to the Snap Store using CircleCI.
 
 ## Overview
+{: #overview }
 
 A `.snap` file can be created once and installed on any Linux distro that supports `snapd`, such as Ubuntu, Debian, Fedora, Arch, and more. More information on Snapcraft itself can be found on [Snapcraft's website](https://snapcraft.io/).
 
 Building a snap on CircleCI is mostly the same as on your local machine, wrapped with [CircleCI 2.0 syntax](https://circleci.com/docs/2.0/configuration-reference/). This document describes how to build a snap package and publish it to the [Snap Store](https://snapcraft.io/store) via CircleCI. The following sections use snippets of a sample `.circleci/config.yml` file with the full version at the [end of this doc](#full-example-config).
 
 ## Prerequisites
+{: #prerequisites }
 
 To build a snap in any environment (local, company servers CI, etc) there needs to be a Snapcraft config file. Typically this will be located at `snap/snapcraft.yml`. This doc assumes you already have this file and can build snaps successfully on your local machine. If not, you can read through the [Build Your First Snap](https://docs.snapcraft.io/build-snaps/your-first-snap) doc by Snapcraft to get your snap building on your local machine.
 
 
 ## Build environment
+{: #build-environment }
 
 ```yaml
 # ...
@@ -41,6 +44,7 @@ jobs:
 The `docker` executor is used here with the [`cibuilds/snapcraft`](https://github.com/cibuilds/snapcraft) Docker image. This image is based on the official [`snapcore/snapcraft`](https://github.com/snapcore/snapcraft/tree/master/docker) Docker image by Canonical with all of the command-line tools you'd want to be installed in a CI environment. This image includes the `snapcraft` command which will be used to build the actual snap.
 
 ## Running Snapcraft
+{: #running-snapcraft }
 
 ```yaml
 ...
@@ -55,12 +59,14 @@ The `docker` executor is used here with the [`cibuilds/snapcraft`](https://githu
 On CircleCI, this single command is needed to actually build your snap. This will run Snapcraft, which will then go through all of its build steps and generate a `.snap` file for you. This file will typically be in the format of `<snap-name>-<snap-version>-<system-arch>.snap`.
 
 ## Testing
+{: #testing }
 
 Unit testing your code has been covered extensively in our blog and our docs and is out of the scope of this document. You'll likely want to create a `job` before building the snap that pulls project dependencies, any pre-checks you'd want to do, testing, and compiling.
 
 Building snaps on CircleCI results in a `.snap` file which is testable in addition to the code that created it. How you test the snap itself is up to you. Some users will attempt to install the snap in various distros and then run a command to make sure that installation process works. Snapcraft offers a build fleet for spreadtesting that allows you to test snaps on different distros, after you've already tested the code itself. This can be found [here](https://build.snapcraft.io/).
 
 ## Publishing
+{: #publishing }
 
 Publishing a snap is more or less a two-step process. Here's on this might look on a Linux machine:
 
@@ -91,13 +97,15 @@ base64 snapcraft.login | xsel --clipboard
 In this example, Snapcraft automatically looks for login credentials in `.snapcraft/snapcraft.cfg` and the environment variable made previously is decoded into that location. The `snapcraft push` command is then used to upload the .snap file into the Snap Store.
 
 ### Uploading vs releasing
+{: #uploading-vs-releasing }
 
 `snapcraft push *.snap` by default will upload the snap to the Snap Store, run any store checks on the server side, and then stop. The snap won't be "released" meaning users won't automatically see the update. The snap can be published locally with the `snap release <release-id>` command or by logging into the Snap Store and clicking the release button.
 
-In typical CircleCI fashion, we can go fully automated (as in the above example) but using the `--release <channel>` flag. This uploads the snap, does Store side verification, and then will automatically release the snap in the specified channels. 
+In typical CircleCI fashion, we can go fully automated (as in the above example) but using the `--release <channel>` flag. This uploads the snap, does Store side verification, and then will automatically release the snap in the specified channels.
 
 
 ## Workflows
+{: #workflows }
 
 We can utilize multiple jobs to better organize our snap build. A job to build/compile the actual project, a job to build the snap itself, and a job that published the snap (and other packages) only on `master` would all be useful.
 
@@ -124,6 +132,7 @@ Below is a complete example of how a snap package could be built on CircleCI. Th
 
 
 ## Full example config
+{: #full-example-config }
 
 ```yaml
 version: 2

@@ -4,16 +4,15 @@
   window.addEventListener('load', function () {
     var footer = document.querySelector('.footer');
     var sidebar = document.querySelector('.sidebar');
-    var defaultSectionName = 'welcome';
+    var defaultSectionName = 'getting-started';
     var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
-    var mobileSidebarCurrent = mobileSidebar.querySelector('.current-item');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
     var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
+    var urlParams = new URLSearchParams(window.location.search)
+    var currentSection = urlParams.get("section");
 
-    // get hash, if it exists
-    if (window.location.hash && window.location.hash.indexOf('section') > -1) {
-      var section = getUrlVars(window.location.hash);
-      localStorage.sidenavActive = section['section']
+    if (currentSection) {
+      localStorage.sidenavActive = currentSection;
     }
 
     // activate default section, if nothing else is selected
@@ -39,15 +38,6 @@
         mobileSidebarDefault.classList.add('hidden');
       }
     }
-
-    // Show/hide mobile sidebar
-    mobileSidebarCurrent.addEventListener('click', function () {
-      if(mobileSidebarDisplay.classList.contains('hidden')) {
-        mobileSidebarDisplay.classList.remove('hidden');
-      } else {
-        mobileSidebarDisplay.classList.add('hidden');
-      }
-    });
 
     function setSidebar () {
       // if footer is in frame, removed fixed style (otherwise add it, if it doesn't exist)
@@ -77,9 +67,7 @@
       $("nav.sidebar").scrollTop(elementRelativeTop);
     }
 
-    window.addEventListener('scroll', setSidebar);
     window.addEventListener('load', setSidebar);
-    window.addEventListener('resize', setSidebar);
 
     // allowing opening/closing of subnav elements
     var mainNavItems = Array.from(document.querySelectorAll('nav.sidebar .main-nav-item'));

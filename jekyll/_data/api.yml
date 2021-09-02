@@ -492,15 +492,6 @@ project_branch:
       "timedout": false
     }
 
-project_build_cache:
-  url: "/api/v1.1/project/:vcs-type/:username/:project/build-cache"
-  description: "Clears the cache for a project"
-  method: "DELETE"
-  response: |
-    {
-      "status" : "build caches deleted"
-    }
-
 user_ssh-key:
   url: "/api/v1.1/user/ssh-key"
   method: "POST"

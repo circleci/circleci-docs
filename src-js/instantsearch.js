@@ -191,22 +191,42 @@ export function init () {
 
   // insert search results
   var searchResetButton = document.querySelector("#search-box .ais-SearchBox-reset");
+  var searchCancelButton = document.querySelector(".main-searchbar--cancel-button");
   var searchBox = document.querySelector("input.instantsearch-search");
-  var pageBody = document.querySelector('.main-body');
+  var documentBody = document.querySelector('body');
   var resultDisplay = document.querySelector('#hits-target');
   var form = document.querySelector('.main-searchbar form');
+
+  function clearResults() {
+    // Clear hit counts
+    Array.from(resultDisplay.querySelectorAll('.hits-count-counter')).forEach(function (el) {
+      el.innerText = el.dataset.initialValue;
+    });
+
+    // Clear results
+    Array.from(resultDisplay.querySelectorAll('.instant-hits')).forEach(function (el) {
+      el.innerHTML = '';
+    });
+  };
 
   function renderResults (e) {
     if (searchBox.value.length > 0) {
       window.scrollTo(0, 0);
-      pageBody.style.display = "none";
-      resultDisplay.style.display = "block";
+      searchResetButton.removeAttribute('hidden'); // This is how instantsearch.js shows/hides its reset button
+      documentBody.classList.add('search-open');
       window.dispatchEvent(new Event('shown.subnav'));
     } else {
-      pageBody.style.display = "flex";
-      resultDisplay.style.display = "none";
+      searchResetButton.setAttribute('hidden', '');
+      clearResults();
     }
   };
+
+  function resetSearch() {
+    // Reset by triggering Instantsearch's own reset button, which also removes
+    // the search query from the URL query string
+    searchResetButton.click();
+    renderResults();
+  }
 
   searchBox.addEventListener('keyup', renderResults);
 
@@ -216,8 +236,18 @@ export function init () {
   });
 
   window.addEventListener('load', renderResults);
-  searchResetButton.addEventListener('click', function () {
-    searchBox.value = ''
-    renderResults();
+
+  searchResetButton.addEventListener('click', resetSearch);
+
+  searchCancelButton.addEventListener('click', function (e) {
+    e.preventDefault();
+    resetSearch();
+    searchBox.blur();
+    documentBody.classList.remove('search-open');
+  });
+
+  // Scroll results back to top upon tab change
+  $(resultDisplay).find('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $("html, body").animate({ scrollTop: 0 });
   });
 };

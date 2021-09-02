@@ -2,7 +2,6 @@
   font-weight: 700;
   line-height: 1.5;
   padding: 11px 0;
-  letter-spacing: 1px;
   border-radius: 3px;
   -webkit-transition: all 400ms ease;
           transition: all 400ms ease;
@@ -14,7 +13,8 @@
     min-width: 100px;
     min-height: 45px; }
   .btn.small, .small.btn-primary, .small.btn-secondary, .small.btn-primary-enterprise, .small.btn-secondary-enterprise, .small.btn-secondary-enterprise-ico {
-    width: 100px; }
+    width: 100px;
+    height: auto; }
   .btn.full-width, .full-width.btn-primary, .full-width.btn-secondary, .full-width.btn-primary-enterprise, .full-width.btn-secondary-enterprise, .full-width.btn-secondary-enterprise-ico {
     width: 100%; }
   .btn button, .btn-primary button, .btn-secondary button, .btn-primary-enterprise button, .btn-secondary-enterprise button, .btn-secondary-enterprise-ico button {
@@ -53,8 +53,8 @@
     background: #04AA51;
     border-color: #04AA51; }
     .btn.primary.green:hover, .btn-primary:hover, .primary.btn-secondary:hover, .btn-secondary.btn-primary-enterprise:hover, .green.btn-primary-enterprise:hover, .primary.green.btn-secondary-enterprise:hover, .primary.green.btn-secondary-enterprise-ico:hover {
-      background: #1CBF43;
-      border-color: #1CBF43; }
+      background: #049B4A;
+      border-color: #049B4A; }
   .btn.primary.blue, .blue.btn-primary, .btn-primary.btn-secondary-enterprise, .btn-primary.btn-secondary-enterprise-ico, .primary.blue.btn-secondary, .btn-primary-enterprise, .primary.btn-secondary-enterprise, .primary.btn-secondary-enterprise-ico {
     color: #FFFFFF;
     background: #27A0B6;

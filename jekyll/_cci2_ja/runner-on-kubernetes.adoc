@@ -1,0 +1,93 @@
+---
+version:
+- Cloud
+- Server v3.x
+---
+= Kubernetes での CircleCI ランナーの使用
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+toc::[]
+
+== はじめに
+
+NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]で提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/ja/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
+
+ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
+
+この Helm チャートでは、*同じランナー リソース クラス*の Pod を 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
+
+ワークロードごとに専用のランナーが必要な場合は、ランナー リソース クラスを複数作成して下記手順を繰り返し実行するか、作成したい各ランナー クラス用に個別の Helm チャートを作成することをお勧めします。
+
+=== 前提条件
+* Scale プランを利用しているか、試用している。 上記を参照してください。
+* ランナーのデプロイ先で Kubernetes クラスタを稼動させている。
+* Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
+
+== 使用方法
+
+. https://github.com/CircleCI-Public/circleci-runner-k8s にあるリポジトリをクローンします。
+. Modify the chart's values in `+values.yaml+` per your needs. See documentation on the <<chart-values,list of values>>.
+. Apply your chart to your cluster, setting the required parameters you should have obtained from the <<runner-installation#authentication,authentication step>>:
++
+....
+$ helm install "circleci-runner" ./ \
+  --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
+  --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
+  --namespace your-namespace
+....
++
+. ステータスとログを調べ、Pod が起動し稼働していることを確認します。 以下のような出力が得られれば成功です。
++
+....
+$ kubectl get pods --all-namespaces
+省略可AMESPACE     NAME                                                             READY   STATUS    RESTARTS   AGE
+default       circleci-runner-test-7d6b8fc6f-4z5wl                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-h97jz                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-pksc6                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-q74p4                             1/1     Running   0          28h
+default       circleci-runner-test-7d6b8fc6f-wh6m2                             1/1     Running   0          28h
+
+$ kubectl logs -f circleci-runner-test-7d6b8fc6f-4z5wl
+
+... (中略)
+
+time="2021-03-25T20:55:40Z" level=info msg="CircleCI launcher starting" config=/opt/circleci/launch-agent-config.yaml
+time="2021-03-25T20:55:40Z" level=info msg="loaded config" name=circleci-runner-test-7d6b8fc6f-4z5wl url="https://runner.circleci.com"
+time="2021-03-25T20:55:40Z" level=info msg="no task found"
+....
+
+== チャートの値
+
+Customizable parameters are left inside the `+values.yaml+` file. 各値の詳細を以下の表に示します。
+
+[.table]
+[cols=4*, options="header"]
+[cols="2,1,1,4"]
+|===
+| 値             | デフォルト値   | 必須？ | 説明
+
+| `+image.repository+`
+`+image.tag+`
+| `+circleci/runner+`
+`+launch-agent+`
+| 必須
+| You can <<runner-installation#docker-installation,extend a custom Docker image>> from the CircleCI default runner and use that instead.
+
+| `+replicaCount+`  | 1         | 必須         | クラスタ内で使用するランナーのレプリカ数。 現時点では、手動で設定、更新する必要があります。 See <<制限事項今後解決予定の問題,Pending Work>>.
+
+| `+resourceClass+` | -         | 必須         | ランナー用に作成したリソース クラス。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+
+| `+runnerToken+`   | -         | 必須         | ランナー リソース クラス用に作成したトークン。 ここで入力してチャートに指定することも、上記で示したようにチャートの適用時に直接渡すこともできます。
+
+| その他すべての値  | -         | N         | 変更はお客様自身の判断と責任で行ってください。
+
+|===
+
+== 制限事項/今後解決予定の問題
+* 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
+* The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* 現時点の CircleCI 製 Helm チャートでは、ランナーのリソース クラス タイプとトークンを 1 つのみ使用することを想定しています。 クラスタに複数のランナー リソース クラスを構成する必要がある場合は、リソース クラスごとに個別のチャートを作成してください。

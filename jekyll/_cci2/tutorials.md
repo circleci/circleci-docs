@@ -18,12 +18,14 @@ Platform Guide | Description
 {: class="table table-striped"}
 
 ## Sample projects with companion guides
+{: #sample-projects-with-companion-guides }
 
 Refer to the Sample Projects to get help with building the language and framework in which your application is written.
 
 {% include snippets/language-guides.md %}
 
 ## Sample workflows
+{: #sample-workflows }
 
 Workflow Example | GitHub Repo
 ------|-----------
@@ -34,6 +36,7 @@ Workspace Forwarding | [workspace-forwarding](https://github.com/CircleCI-Public
 {: class="table table-striped"}
 
 ## CircleCI public repos
+{: #circleci-public-repos }
 
 GitHub Repo | Description | config.yml link
 ------|-----------|------------
@@ -44,6 +47,7 @@ circleci image-builder | Uses Docker for building container images. | [.circleci
 {: class="table table-striped"}
 
 ## See also
+{: #see-also }
 
 Use the Hello World document and sample `config.yml` files to start configuring your build.
 

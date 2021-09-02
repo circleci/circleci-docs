@@ -1,10 +1,10 @@
 $sidebar-spacing-base: 5px;
 
 .sidebar-wrapper {
-  width: 260px;
+  min-width: $leftbar-width;
   position: relative;
 
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: none;
   }
 }
@@ -12,11 +12,10 @@ $sidebar-spacing-base: 5px;
 .sidebar {
   background: #F7F7F7;
   font-family: "roboto";
-  height: 92vh;
-  padding: 30px 24px 60px 16px;
+  height: calc(100vh - #{$nav-height});
+  padding: 30px 24px 60px 15px;
   position: absolute;
-  bottom: 0;
-  width: 260px;
+  width: $leftbar-width;
   border-right: 1px solid $gray-200;
   overflow-y: scroll;
 
@@ -50,7 +49,6 @@ $sidebar-spacing-base: 5px;
 
   &.fixed {
     position: fixed;
-    top: 118px;
     display: flex;
     flex-direction: column;
   }
@@ -72,6 +70,7 @@ $sidebar-spacing-base: 5px;
     .icon {
       position: absolute;
       top: -1px;
+      width: 24px;
     }
     .arrow {
       position: absolute;
@@ -82,9 +81,7 @@ $sidebar-spacing-base: 5px;
     }
     .subnav {
       overflow: hidden;
-      ul{
-        margin-bottom: 20px;
-      }
+      margin-bottom: 20px;
     }
 
     &.closed {
@@ -101,8 +98,12 @@ $sidebar-spacing-base: 5px;
     text-transform: uppercase;
     font-size: $font-size-micro;
     font-weight: $font-weight-bold;
-    margin: 0 0 10px 0;
+    margin: 12px 0;
     letter-spacing: .5px;
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
   .subnav-item {
     font-weight: 400;
@@ -121,6 +122,12 @@ $sidebar-spacing-base: 5px;
         display: inline-block;
       }
     }
+
+    .subheading {
+      color: $body-text-color;
+      margin-left: 30px;
+      display: inline-block;
+    }
   }
 
   .lang-picker {
@@ -133,49 +140,84 @@ $sidebar-spacing-base: 5px;
 }
 
 .sidebar-mobile-wrapper {
-  border-top: 1px solid $gray-200;
-  border-bottom: 1px solid $gray-200;
-  padding: 50px 0 0 0;
-  width: 100%;
-  background: $gray-100;
   display: none;
-  cursor: pointer;
-
-  .mobile-sidebar-item {
-    display: block;
-    width: 100%;
-    padding: $spacing-small-vertical 16px;
-
-    &.hidden {
-      display: none;
-    }
-
-    span {
-      display: inline-block;
-      margin-left: $spacing-small-horizontal;
-    }
-
-    .arrow {
-      float: right;
-      margin-top: 5px;
-      transform: rotate(90deg);
-    }
-  }
+  width: 100%;
 
   .mobile-sidebar {
     @extend .sidebar;
-    padding-right: 16px;
+    padding-right: 5px;
     width: 100%;
-    left: 0;
-    top: 182px;
-    z-index: 2;
+
+    // Reset various parts of .sidebar
+    position: initial;
+    height: initial;
+    background: initial;
+    border: initial;
 
     .main-nav-item {
       width: 100%;
     }
   }
 
-  @media screen and (max-width: $screen-sm) {
+  @media screen and (max-width: $screen-xs-max) {
     display: block;
+  }
+}
+
+
+// Table of Contents Sidebar ----------------------------------
+
+// Many docs originally have a toc generated from the *toc directive in the markdown/asciidoc.
+// we are keeping this functionality in order to have a table of contents at the top of a page
+// on smaller screen sizes.
+
+// target markdown AND asciidoc toc's.
+.article-container {
+  #markdown-toc, #toc {
+    @media(min-width: $toc-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.table-of-contents {
+  position: sticky;
+  right: 0;
+  padding: 32px 32px 112px 12px;
+  background: #ffffff;
+  height: 90vh;
+  width: $rightbar-width;
+  overflow-y: auto;
+  top: 64px;
+  font-size: 16px;
+  transition: all 0.5s ease-in-out;
+
+  @media(max-width: $toc-breakpoint) {
+    display: none;
+  }
+
+
+  .toc-heading {
+    margin-left: -2px;
+  }
+
+  .toc-indent {
+    border-left: 2px solid #EEEEEE;
+
+    a {
+      color: $body-text-color;
+      &:hover {
+        color: $link-text-color;
+      }
+    }
+  }
+
+  ul, li {
+    list-style-type: none;
+    padding-left: 8px;
+    margin: 4px 0;
+    &:first {
+      padding-left: 0px;
+    }
   }
 }

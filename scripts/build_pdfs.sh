@@ -11,7 +11,7 @@ COMMENT="TESTING"
 echo "Building Ops Guide"
 
 ### -- Build the Ops Guide --
-bundle exec asciidoctor-pdf -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=Draft -a serverversion=${VERSION} -D ${OUT_DIR} -o CircleCI-Server-Operations-Guide.pdf jekyll/_cci2/_ops-guide.adoc
+asciidoctor-pdf -a pdf-style=jekyll/_cci2/_release-pdf/circle-theme.yml -a pdf-fontsdir=jekyll/_cci2/_release-pdf/fonts -a revdate=${DATE} -a revnumber=${VERSION} -a revremark=Draft -a serverversion=${VERSION} -D ${OUT_DIR} -o CircleCI-Server-Operations-Guide.pdf jekyll/_cci2/_ops-guide.adoc
 
 echo "Done!"
 

@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This section defines the system and port access requirements for installing CircleCI v{serverversion}.
+This section defines the system and port access requirements for installing CircleCI v2.x.
 
 toc::[]
 
