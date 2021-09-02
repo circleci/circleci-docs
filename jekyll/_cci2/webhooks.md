@@ -368,7 +368,7 @@ isn't associated with a git commit.
   "happened_at": "2021-09-01T22:49:34.279Z",
   "webhook": {
     "id": "cf8c4fdd-0587-4da1-b4ca-4846e9640af9",
-    "name": "alex testing jobs"
+    "name": "Sample Webhook"
   },
   "project": {
     "id": "84996744-a854-4f5e-aea3-04e2851dc1d2",
