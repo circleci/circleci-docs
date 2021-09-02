@@ -10,8 +10,11 @@ class OptimizelyClient {
   getUserId() {
     return new Promise((resolve) => {
       if (window.userData) {
+        // if we already have userData
         resolve((window.userData.analytics_id) ? window.userData.analytics_id : null);
       } else {
+        // If we are here it means we are still waiting on getting notified
+        // that the call to /api/v1/me has resolved and the new userData is available
         window.addEventListener("userDataReady", () => {
           resolve((window.userData.analytics_id) ? window.userData.analytics_id : null);
         });
