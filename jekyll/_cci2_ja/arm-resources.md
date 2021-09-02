@@ -81,3 +81,7 @@ workflows:
 * 現時点では、32 ビット版の Arm アーキテクチャはサポートされていません。 サポート対象は 64 ビット版の `arm64` アーキテクチャのみです。
 * ジョブの実行が始まるまでに、最大 2 分のスピンアップ時間がかかることがあります。 この時間は、Arm リソースを利用するユーザーが増えるに連れ短縮されます。
 * イメージに含まれていないソフトウェアが必要な場合は、[こちらからお知らせください](https://github.com/CircleCI-Public/arm-preview-docs/issues)。
+
+## Learn More
+{: #learn-more }
+Take the [Arm course](https://academy.circleci.com/arm-course) with CircleCI Academy to learn more about using Arm resources and associated use cases.
