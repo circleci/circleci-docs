@@ -11,7 +11,7 @@ version:
   - Server v2.x
 ---
 
-**Executor** では、ジョブを実行する基盤テクノロジーまたは環境を定義します。 `docker`、`machine`、`macos`、または `windows` の Executor で実行するジョブをセットアップし、必要なツールとパッケージを含むイメージを指定します。
+CircleCI offers several build environments. We call these **executors**. An **executor** defines the underlying technology or environment in which to run a job. Set up your jobs to run in the `docker`, `machine`, `macos` or  `windows` executor and specify an image with the tools and packages you need.
 
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
@@ -110,6 +110,11 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-* {{ site.baseurl }}/ja/2.0/circleci-images/
-* {{site.baseurl}}/ja/2.0/hello-world-macos
-* {{site.baseurl}}/ja/2.0/hello-world-macos
+* [Choosing an executor type]({{ site.baseurl }}/2.0/executor-types/)
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/2.0/circleci-images/)
+* [Building on MacOS]({{site.baseurl}}/2.0/hello-world-macos)
+* [Building on Windows]({{site.baseurl}}/2.0/hello-world-windows)
+
+## Learn More
+{: #learn-more }
+Take the [build environments course](https://academy.circleci.com/build-environments-1) with CircleCI Academy to learn more about choosing and using an executor.
