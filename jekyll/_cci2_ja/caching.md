@@ -396,8 +396,6 @@ Yes (with caution).
 
 Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
 
-Since Bundler uses system gems that are not explicitly specified, it is non-deterministic, and partial cache restoration can be unreliable.
-
 To prevent this behavior, add a step that cleans Bundler before restoring dependencies from cache.
 
 {% raw %}
