@@ -36,7 +36,7 @@ Use either the CircleCI CLI to split test files or use environment variables to 
 ### リソース クラス
 CircleCI の [ワークフロー]({{ site.baseurl }}/ja/2.0/workflows/)は、迅速なフィードバック、再実行時間の短縮、リソースの効率的な使用などによって、ソフトウェア開発をスピードアップさせる便利な機能です。
 
-ジョブごとに CPU および RAM リソースを構成して、リソースを効率的に使用することができます。 [リソース クラス]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class)は、`.circleci/config.yml` ファイルで指定する必要があります。  `resource_class` が指定されていない場合や、無効なクラスが指定されている場合は、デフォルトの `resource_class: medium` が使用されます。
+ジョブごとに CPU および RAM リソースを構成して、リソースを効率的に使用することができます。 [リソース クラス]({{ site.baseurl }}/ja/2.0/configuration-reference/#resource_class)は、`.circleci/config.yml` ファイルで指定する必要があります。
 
 ### キャッシュ
 システム管理者は、インストールされている Nomad クライアントや Docker のメトリクスなど、さまざまな環境変数を通じて CircleCI を[モニタリングするためのメトリクス]({{ site.baseurl }}/ja/2.0/monitoring/)を収集することができます。
