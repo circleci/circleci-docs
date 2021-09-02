@@ -75,3 +75,7 @@ Linux、Android、macOS 上で動作するすべてのアプリがサポート�
 - [サポートされている言語]({{site.baseurl}}/2.0/demo-apps/): サンプルとガイド
 - [コア機能]({{site.baseurl}}/2.0/features/): 詳細な説明と手順書へのリンク
 
+## Learn More
+{: #learn-more }
+Enroll in the [CI/CD 101 Workshop](https://academy.circleci.com/cicd-basics) with CircleCI academy to learn more.
+
