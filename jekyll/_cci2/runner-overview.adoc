@@ -99,6 +99,12 @@ The runner consists of two components: the launch agent and the task agent.
 
 The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
 
+== Debugging with SSH
+
+CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+
+NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
+
 == Public repositories
 
 CircleCI runner is not recommended for use with public projects that have the "Build forked pull requests" setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
@@ -138,6 +144,5 @@ NOTE: A namespace is a unique identifier claimed by a user or organization. Each
 
 Almost all standard CircleCI features are available for use with runner jobs, but at present a few features are not yet supported. If these features are important for you to make use of runner jobs, please let us know via the relevant canny page.
 
-- https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[Rerun with SSH]
 - https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
