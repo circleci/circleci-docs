@@ -17,28 +17,28 @@ verison:
 {: #quick-start }
 {:.no_toc}
 
-[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 The reusable configuration elements used in orbs are explained fully in the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+[CircleCI Orb](https://circleci.com/orbs/)とは、[ジョブ]({}/2.0/reusing-config/#authoring-parameterized-jobs)、[コマンド]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands)、[Executor]({{site.baseurl}}/2.0/reusing-config/#executor) などの、共有可能な構成要素をパッケージ化したものです。 Orb により CircleCI の設定の記述やカスタマイズが簡単に行えます。 Orb で使用されている再利用可能な設定要素については、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)で詳しく説明されています。
 
-## Orb configuration elements
+## Orb の設定要素
 {: #orb-configuration-elements }
 
-CircleCI's [Reusable Configuration]({{site.baseurl}}/2.0/reusing-config/) features allow you to define parameterizable configuration elements and re-use those elements throughout a project config file. It is recommended you become familiar with the full [Configuration Reference]({{site.baseurl}}/2.0/configuration-reference/) features before moving on to the [Reusable Configuration Reference]({{site.baseurl}}/2.0/reusing-config/).
+CircleCI の[再利用可能な設定]({{site.baseurl}}/2.0/reusing-config/)機能により、パラメーター化できる設定要素の定義や、その要素をプロジェクトの設定ファイル全体で再利用することが可能です。 [設定リファレンス]({{site.baseurl}}/2.0/configuration-reference/)機能をすべて理解してから、 [再利用可能な設定リファレンス]({{site.baseurl}}/2.0/reusing-config/)に移ることをお勧めします。
 
-### Commands
+### コマンド
 {: #commands }
 
-Commands contain one or more steps in which [parameters]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) can be used to modify behavior. Commands are the logic of orbs and are responsible for executing steps such as [checking out code](https://circleci.com/docs/2.0/configuration-reference/#checkout), or running shell code, for example, running bash or CLI tools. For more information see the [Authoring Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) guide.
+コマンドには、 [パラメーター]({{site.baseurl}}/2.0/reusing-config/#using-the-parameters-declaration) を使って動作を変更できる1つまたは複数のステップが含まれています。 コマンドは Orb のロジックであり、 [コードをチェックアウトする](https://circleci.com/docs/2.0/configuration-reference/#checkout)、シェルコードを実行する</a>などのステップを実行する役割を担っており、例えば、bashやCLIツールを実行するなどです。 詳細については、 [再利用可能なコマンドのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) ガイドを参照してください。
 
-As an example, the AWS S3 orb includes a _command_ to copy a file or object to a new location: `aws-s3/copy`. If your AWS authentication details are stored as environment variables, the syntax to use this command in your config is simply:
+例として、AWS S3 Orb には、ファイルやオブジェクトを新しい場所にコピーする _コマンド_ があります。 `aws-s3/copy`. AWS認証の詳細が環境変数として保存されている場合、このコマンドを設定で使用するための構文は単純です。
 
 ```yaml
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@x.y.z
+ aws-s3: circleci/aws-s3@x.y.z
 
 jobs:
-  build:
+   build:
     docker:
       - image: 'cimg/python:3.6'
         auth:
@@ -47,15 +47,16 @@ jobs:
     steps:
       - checkout
       - run: mkdir bucket && echo "lorem ipsum" > bucket/build_asset.txt
-      # using the aws-s3 orb's "copy" command.
+ # aws-s3 Orb の "copy" コマンドを使用
       - aws-s3/copy:
           from: bucket/build_asset.txt
           to: 's3://my-s3-bucket-name'
 
-  #... workflows , other jobs etc.
+  #...ワークフロー、その他のジョブなど
+
 ```
 
-See the [AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands) page in the registry for more information.
+詳細は、レジストリの[AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands)ページをご覧ください。
 
 ### Executors
 {: #executors }
