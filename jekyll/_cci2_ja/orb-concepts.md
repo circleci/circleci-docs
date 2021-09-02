@@ -58,27 +58,26 @@ jobs:
 
 詳細は、レジストリの[AWS-S3 Orb](https://circleci.com/developer/orbs/orb/circleci/aws-s3#commands)ページをご覧ください。
 
-### Executors
+### Executor
 {: #executors }
 
-Executors are parameterized execution environments in which [jobs]({{site.baseurl}}/2.0/orb-concepts/#jobs) can be run. CircleCI provides multiple [executor options]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor):
+Executor は、 [ジョブ]({{site.baseurl}}/2.0/orb-concepts/#jobs) を実行できるパラメータ化された実行環境です。 CircleCIでは複数の [Executor オプション]({{site.baseurl}}/2.0/configuration-reference/#docker--machine--macos--windows-executor)を提供しています。
 
 - Docker
 - macOS
 - Windows
-- Machine (Linux VM)
+- Linux VM
 
-Executors defined within orbs can be used to run jobs within your project configuration, or within the jobs defined in the orb.
+Orb 内 で定義された Executor は、お客様のプロジェクト設定内のジョブや Orb で定義されたジョブの実行に使用できます。
 
-#### Executor definition example
+#### Executor の定義例
 {: #executor-definition-example }
 {:.no_toc}
 
 {:.tab.executor.Node-Docker}
 ```yaml
 description: >
-  Select the version of NodeJS to use. Uses CircleCI's highly cached convenience
-  images built for CI. docker:
+  使用する Node.js のバージョンを選択。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
   - image: 'cimg/node:<<parameters.tag>>'
     auth:
       username: mydockerhub-user
@@ -96,40 +95,39 @@ parameters:
 {% raw %}
 ```yaml
 description: >
-  Select the version of Ruby to use. Uses CircleCI's highly cached convenience
-  images built for CI.
+  使用する Ruby のバージョンを選択。 CI 用にビルドされ高度にキャッシュされた Circle CI の便利なイメージを使用:
 
-  Any available tag from this list can be used:
+  このリストの中から利用可能なタグを使用することができます。
   https://hub.docker.com/r/cimg/ruby/tags
 docker:
-  - image: 'cimg/ruby:<< parameters.tag >>'
+  - image:'cimg/ruby:<< parameters.tag >>'
     auth:
       username: mydockerhub-user
       password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 parameters:
   tag:
     default: '2.7'
-    description: The `circleci/ruby` Docker image version tag.
+    description:`circleci/ruby` の Docker イメージのバージョンを示すタグ
     type: string
 ```
 {% endraw %}
 
-In the [Node orb](https://circleci.com/developer/orbs/orb/circleci/node), for example, a parameterized Docker-based executor is provided, through which you can set the Docker tag. This provides a simple way to test applications against any version of Node.js when used with the Node orb's [test job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing).
+例えば、 [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) では、パラメータ化された Docker ベースの Executor が提供されており、これを介して Docker タグを設定することができます。 これは、Node Orbの [テストジョブ](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing)と一緒に使用することで、すべてのバージョンの Node.js に対してアプリケーションをテストする簡単な方法です。
 
-For more information, see the guide to [Authoring Reusable Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) and the registry page for the [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node#executors-default).
+詳しくは、 [再利用可能な Executor のオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) や、[Node Orb のレジストリ](https://circleci.com/developer/orbs/orb/circleci/node#executors-default)を参照してください。
 
-### Jobs
+### ジョブ
 {: #jobs }
 
-[Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) define a collection of [steps](https://circleci.com/docs/2.0/configuration-reference/#steps) to be run within a given [executor]({{site.baseurl}}/2.0/orb-concepts/#executors), and are orchestrated using [Workflows]({{site.baseurl}}/2.0/workflows/). Jobs will also individually return their status via [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/).
+[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) は、与えられた [Executor]({{site.baseurl}}/2.0/orb-concepts/#executors) 内で実行される一連の[ステップ](https://circleci.com/docs/2.0/configuration-reference/#steps) を定義し、 [ワークフロー]({{site.baseurl}}/2.0/workflows/)を使ってオーケストレーションされます。 また、ジョブは個別に [GitHub Checks](https://circleci.com/docs/2.0/enable-checks/) を介してステータスを返します。
 
-When importing an orb which has jobs, you can reference them directly from your workflows.
+ジョブがある Orb をインポートする際に、ワークフローから直接ジョブを参照することができます。
 
 ```
 version: 2.1
 
 orbs:
-  <orb>: <namespace>/<orb>@x.y #orb version
+  <orb>: <namespace>/<orb>@x.y # Orb のバージョン
 
 workflows:
   use-orb-job:
@@ -137,9 +135,9 @@ workflows:
       - <orb>/<job-name>
 ```
 
-See the [Authoring Reusable Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) guide for more information, and the [Using Node Test Job](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) example in the orb registry.
+詳細については、 [再利用可能なジョブのオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) 、および Orb レジストリにある [Node テストジョブの使用例](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing) を参照してください。
 
-### Usage examples
+### 使用例
 {: #usage-examples }
 
 Using the [Orb Development Kit]({{site.baseurl}}/2.0/orb-author/#orb-development-kit), adding a new usage example is as simple as creating a new file `name-of-example.yml` within the orb project's [src/examples](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src/examples) directory. Usage examples are not for use in project configuration directly, but are a type of orb metadata to share how a user could best make use of the orb in their configuration and are displayed, for reference, in the [Orb Registry](https://circleci.com/developer/orbs). Below is a sample usage example:
