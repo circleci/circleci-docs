@@ -112,7 +112,7 @@ parameters:
 ```
 {% endraw %}
 
-例えば、 [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) では、パラメータ化された Docker ベースの Executor が提供されており、これを介して Docker タグを設定することができます。 これは、Node Orbの [テストジョブ](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing)と一緒に使用することで、すべてのバージョンの Node.js に対してアプリケーションをテストする簡単な方法です。
+例えば、 [Node Orb](https://circleci.com/developer/orbs/orb/circleci/node) では、パラメータ化された Docker ベースの Executor が提供されており、これを介して Docker タグを設定することができます。 これは、Node Orb の [テストジョブ](https://circleci.com/developer/orbs/orb/circleci/node#usage-run_matrix_testing)と一緒に使用することで、すべてのバージョンの Node.js に対してアプリケーションをテストする簡単な方法です。
 
 詳しくは、 [再利用可能な Executor のオーサリング]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) や、[Node Orb のレジストリ](https://circleci.com/developer/orbs/orb/circleci/node#executors-default)を参照してください。
 
@@ -173,7 +173,7 @@ _名前空間_ は、一連の Orb をオーサー別にグループ化するた
 ## セマンティック バージョニング
 {: #semantic-versioning }
 
-Orbは [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。各Orbのアップデートは標準化されたバージョニング パターンに従っており、Orb のオーサーやユーザーはそれを活用してください。
+Orb は [セマンティック バージョニング](https://semver.org/) のリリースプロセスを採用しています。各Orbのアップデートは標準化されたバージョニング パターンに従っており、Orb のオーサーやユーザーはそれを活用してください。
 
 セマンティック バージョニングでは、リリース バージョンは `.`で区切られた 3 つの整数で表されます。それぞれの整数は、追加される変更の種類を表します。
 
@@ -274,12 +274,12 @@ Orb を_パッケージ化_するには、[@orb.yml]({{site.baseurl}}/2.0/orb-au
 
 `circleci orb pack <dir> > orb.yml`
 
-Orb 開発 kitをお使いの場合、このステップは自動的に処理されます。
+Orb 開発キットをお使いの場合、このステップは自動的に処理されます。
 
 ## ファイル インクルード構文
 {: #file-include-syntax }
 
-`ファイル インクルード` 構文(`<<include(dir/file)>>`)は、CircleCI Orb の設定ファイル内の任意のキーの値として、ファイルの内容をその場で取り込むことができる特別な設定強化機能です。 この`<<include(dir/file)>>` 構文は、 [`circleci orb pack` コマンド](#orb-packing) と一緒に使う特別なキーであり、CircleCI上でより広く動作することは_ありません_。
+`ファイル インクルード` 構文(`<<include(dir/file)>>`)は、CircleCI Orb の設定ファイル内の任意のキーの値として、ファイルの内容をその場で取り込むことができる特別な設定強化機能です。 この`<<include(dir/file)>>` 構文は、 [`circleci orb pack` コマンド](#orb-packing) と一緒に使う特別なキーであり、CircleCI 上でより広く動作することは_ありません_。
 
 `@orb.yml`ファイルを含むディレクトリに対して、`circleci orb pack <dir> > orb.yml` を実行すると、パッケージ化コマンドが各ファイルの内容を一つの `orb.yml` ファイルに集め始めます。 パッケージ化の過程で、 `<<include(dir/file)>>` 値の各インスタンスは、その中で参照されるファイルの内容に置き換えられます。
 
@@ -310,13 +310,13 @@ steps:
   - run:
       name: Hello Greeting
       command: |
-        # これは bash ファイルですが、テキストベースのファイルであれば何でも構いません。
+        # これは Bash ファイルですが、テキストベースのファイルであれば何でも構いません。
         echo "Hello World"
 ```
 
-ファイルインクルード機能は、設定の bash ロジックをyamlから分離するのに特に有効です。 bashスクリプトを含めることで、bashの開発やテストを Orb の外で行うことができます。
+ファイルインクルード機能は、設定の Bash ロジックをyamlから分離するのに特に有効です。 Bash スクリプトを含めることで、Bash の開発やテストを Orb の外で行うことができます。
 
-bashスクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/2.0/orb-author/#scripts) ガイドをご覧ください。
+Bash スクリプトを含めることに関する詳細は、[Orb オーサー]({{site.baseurl}}/2.0/orb-author/#scripts) ガイドをご覧ください。
 
 ## Orb 内での Orb の使用と登録時の解決
 {: #using-orbs-within-your-orb-and-register-time-resolution }
