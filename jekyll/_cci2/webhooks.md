@@ -298,8 +298,10 @@ isn't associated with a git commit.
 
 
 ## Sample webhook payloads
+{: #sample-webhook-payloads }
 
 ### workflow-completed
+{: #workflow-completed }
 
 ```json
 {
@@ -360,6 +362,7 @@ isn't associated with a git commit.
 ```
 
 ### job-completed
+{: #job-completed }
 
 ```json
 {
