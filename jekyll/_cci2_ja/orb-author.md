@@ -43,18 +43,15 @@ GitHub 上の組織 (Organization) が、Orb の作成先となる[名前空間]
 
     必要な項目の設定が終わると、新しいリポジトリの内容を確認するページが開き、生成された Git の URL が表示されます。 この URL をメモしておいてください。手順 4 で必要になります。 URL は SSH か HTTPS を選択できます。 どちらを選択しても認証を行えます。 ![Orb レジストリ]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
 
-1. **ターミナルを開き、`orb init` CLI コマンドを使用して、新しい Orb プロジェクトを初期化します。**
-
-**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を初期化する場合:
+1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.** To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb
 ```
-
-**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を初期化する場合:
+To initialize a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
 ```bash
 circleci orb init /path/to/myProject-orb --private
 ```
-`circleci orb init` コマンドを、Orb プロジェクト用に作成して初期化するディレクトリを付けて呼び出します。 このディレクトリと Git のプロジェクト リポジトリには、同じ名前を使用することをお勧めします。
+The `circleci orb init` command is called, followed by a path that will be created and initialized for our orb project. It is best practice to use the same name for this directory and the git project repo.
 
 1. **Orb の完全自動セットアップ オプションを選択します。**
 ```
@@ -62,6 +59,8 @@ circleci orb init /path/to/myProject-orb --private
   ▸ Yes, walk me through the process. （はい、手順を教えてください。)
     No, I'll handle everything myself.（いいえ、すべて手動で行います。）
 ```
+When choosing the manual option, see [Manual Orb Authoring Process](https://circleci.com/docs/2.0/orb-author-validate-publish/) for instructions on how to publish your orb.
+
 完全自動オプションを選択すると、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template) がダウンロードされ、カスタマイズした設定内容が自動的に反映されます。 プロジェクトは CircleCI でフォローされ、自動化された CI/CD パイプラインが含まれます。 <br/><br/> 含まれる CI/CD パイプラインの詳細については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。 または、[Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)を便利な方法でダウンロードするだけに留める場合は、「No, I'll handle everything myself (すべて手動で行う)」を選択します。
 
 1. **質問に答えて Orb の構成とセットアップを進めます。**<br/> バックグラウンドでは、回答に基づいて`orb init` コマンドが [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)をコピーし、カスタマイズを実行します。 各ディレクトリにある詳細な `README.md` ファイルには、それぞれのディレクトリのコンテンツに関する有益な情報が記載されています。 手順 1 でメモしておいたリモート Git リポジトリの URL も、ここで入力を求められます。<br/><br/> [Orb プロジェクト テンプレート](https://github.com/CircleCI-Public/Orb-Project-Template)には、完全な CI/CD パイプライン (詳細は「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照) が含まれており、Orb の[パッケージ化]({{site.baseurl}}/2.0/orb-concepts/#orb-packing)、[テスト]({{site.baseurl}}/2.0/testing-orbs/)、パブリッシュが自動的に実行されます。 <br/><br/> セットアップ プロセスでは、[パーソナル API トークン]({{site.baseurl}}/2.0/managing-api-tokens/)を `orb-publishing` [コンテキスト]({{site.baseurl}}/2.0/contexts/)に保存するかどうかを尋ねられます。 Orb の開発版と安定版をパブリッシュするためには、このトークンを保存しておくことが必要です。
