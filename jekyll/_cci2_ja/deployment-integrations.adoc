@@ -18,27 +18,27 @@ toc::[]
 [discrete]
 == 概要
 
-ソフトウェア・アプリケーションの開発、テストが完了したら、対象ユーザーが利用できるようにデプロイする必要があります。 CircleCI can deploy to virtualy any target, and can be easily configured to integrate with other services for QA/testing, feature management, and deployment strategies such as blue-green or canary deployment. 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
+ソフトウェア・アプリケーションの開発およびテストが完了したら、デプロイし、対象ユーザーが利用できるようにする必要があります。 CircleCIは、ほぼすべてのターゲットにデプロイすることができ、QA/テスト、機能管理、およびブルーグリーンデプロイやカナリアデプロイなどのデプロイ戦略を行うための他のサービスとの統合を容易に設定することができます。 完全に自動化されたプロセスが必要な場合も、手動での承認要素が必要な場合も、お客様の要件に合わせて迅速かつ簡単に設定をカスタマイズすることができます。
  
 //.Deployment
 // image::pipeline-to-deployment.png[Deployment]
 
 
-== デプロイメント: 基礎編
+== デプロイ: 基礎編
 
 * **Deployment Job**: To deploy your application, add a <<jobs-steps#jobs-overview,job>> to your `.circleci/config.yml` file and configure the job to run the steps you require. The <<deployment-examples#,deployment examples>> document covers example config for many common deployment targets.
 
-* **Deployment Parameters**: You may need to add environment variables and SSH keys to fulfill your deployment steps. Environment variables can be added to the project itself via the CircleCI UI (follow links below for detailed instructions), or defined within your configuration. An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
+* *デプロイ パラメーター*: デプロイするための手順を実行するために、環境変数やSSHキーを追加しなければならない場合があります。 環境変数は、CircleCI UIを使ってプロジェクト自体に追加したり（詳しい手順は以下のリンクを参照）、設定で定義することができます。 An example of defining environment variables _within_ your configuration can be seen further down this page within the deploy job config for the non-orb Heroku example.
 ** Add project-level <<env-vars#setting-an-environment-variable-in-a-project,environment variables>>
 ** Add project-level <<add-ssh-key#,SSH keys>> 
 
-* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. A manual approval button will then be available from the workflows map in the CircleCI UI.
+* **Manual Approval**: If your deployment strategy requires a manual approval step, you can include a <<workflows#holding-a-workflow-for-a-manual-approval,hold/approve>> job within your workflow. それにより、CircleCI UIのワークフローマップから手動承認ボタンが利用できるようになります。
 
-== Using Orbs to Simplify Deployment
+== Orb を使用したデプロイメントの簡素化
 
-At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orbs are available for many common deployment targets, which can help you to simplify and streamline your config. Check out the full range of available orbs in the https://circleci.com/developer/orbs[Orbs Registry]. For simple deployment pipelines, using orbs will get you the results you need with minimal configuration. 
+At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,orbs>>. Orb は多くの一般的なデプロイ ターゲットに対応しており、設定の簡素化と効率化に役立ちます。 https://circleci.com/developer/orbs[Orb レジストリ]で利用可能なすべての Orb をご覧いただけます。 シンプルなデプロイ パイプラインであれば、Orbを使うことで最小限の設定のみで必要な結果を得ることができます。 
 
-As an example, consider the https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy orb]. This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
+例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 This orb has a pre-configured `deploy` job, which you can include in your configuration with a single line `aws-code-deploy/deploy` once the orb has been invoked by adding the orbs stanza. For this example deployment can be as simple as:
 
 ```yaml
 version: 2.1
