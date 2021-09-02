@@ -8,7 +8,7 @@
           <!-- "main items" (Getting Started, Configuration etc.) -->
           <div class="list-wrap">
             {% if main-item.icon %}
-              {% asset '{{ main-item.icon }}' class=icon %}
+              <img class="icon" src="{{ site.baseurl }}/{% ministamp { source_path: 'assets/img/{{ main-item.icon }}', destination_path: 'assets/{{ main-item.icon }}' } %}">
             {% endif %}
 
             {% if main-item.i18n_name %}
@@ -26,7 +26,7 @@
             {% endif %}
 
             {% if main-item.children %}
-              {% asset docs/arrow-right.svg class=arrow %}
+              <img class="arrow" crossorigin="anonymous" src="{{ site.baseurl }}/{% ministamp assets/img/docs/arrow-right.svg assets/docs/arrow-right.svg %}">
             {% endif %}
           </div>
 

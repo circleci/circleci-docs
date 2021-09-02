@@ -35,6 +35,28 @@ Webhooks can be leveraged for various purposes. Some possible examples might inc
 - Trigger internal notification systems to alert people when workflows/jobs complete.
 - Build your own automation plugins and tools.
 
+## Communication Protocol
+{: #communication-protocol }
+
+A webhook is sent whenever an event occurs on the CircleCI platform.
+
+A webhook is sent using an HTTP POST, to the URL that was registered when the webhook was created, with a body encoded using JSON.
+
+CircleCI expects that the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, we will assume that delivery has failed, and we will retry at a later time. The timeout period is currently 5 seconds, but is subject to change during the preview period. The exact details of the retry policy are not currently documented, and are subject to change during the preview period. Please [get in touch with our team if you have feedback about timeouts and retries](https://circleci.canny.io/webhooks).
+
+### Headers
+{: #headers }
+
+A number of HTTP headers are set on webhooks, as detailed in the table below.
+
+Header Name | Value
+--- | ---
+Content-Type | `application/json`
+User-Agent | A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`). The value is subject to change during the preview period.
+Circleci-Event-Type | The type of event, (`workflow-completed`, `job-completed`, etc.)
+Circleci-Signature | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.
+{: class="table table-striped"}
+
 ## Setting up a hook
 {: #setting-up-a-hook}
 
@@ -57,6 +79,76 @@ Webhooks are set up on a per-project basis. To get started:
 {: class="table table-striped"}
 
 <sup>1</sup>Only leave this unchecked for testing purposes.
+
+**Note: There is a limit of 5 Webhooks per project.**
+
+## Payload signature
+{: #payload-signature}
+
+You should validate incoming webhooks to verify that they are coming from
+CircleCI. To support this, when creating a webhook, you can optionally provide a
+secret token. Each outgoing HTTP request to your service will contain a
+`circleci-signature` header. This header will consist of a comma-separated list
+of versioned signatures.
+
+```
+POST /uri HTTP/1.1
+Host: your-webhook-host
+circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
+```
+
+Currently, the latest (and only) signature version is v1. You should *only*
+check the latest signature type to prevent downgrade attacks.
+
+The v1 signature is the HMAC-SHA256 digest of the request body, using the
+configured signing secret as the secret key.
+
+Here are some example signatures for given request bodies:
+
+| Body                           | Secret Key       | Signature                                                          |
+| ------------------------------ | ---------------- | ------------------------------------------------------------------ |
+| `hello world`                  | `secret`         | `734cc62f32841568f45715aeb9f4d7891324e6d948e4c6c60c0621cdac48623a` |
+| `lalala`                       | `another-secret` | `daa220016c8f29a8b214fbfc3671aeec2145cfb1e6790184ffb38b6d0425fa00` |
+| `an-important-request-payload` | `hunter123`      | `9be2242094a9a8c00c64306f382a7f9d691de910b4a266f67bd314ef18ac49fa` |
+{: class="table table-striped"}
+
+The following is an example of how you might validate signatures in Python:
+
+```
+import hmac
+
+def verify_signature(secret, headers, body):
+    # get the v1 signature from the `circleci-signature` header
+    signature_from_header = {
+        k: v for k, v in [
+            pair.split('=') for pair in headers['circleci-signature'].split(',')
+        ]
+    }['v1']
+
+    # Run HMAC-SHA256 on the request body using the configured signing secret
+    valid_signature = hmac.new(bytes(secret, 'utf-8'), bytes(body, 'utf-8'), 'sha256').hexdigest()
+
+    # use constant time string comparison to prevent timing attacks
+    return hmac.compare_digest(valid_signature, signature_from_header)
+
+# the following will return `True`
+verify_signature(
+    'secret',
+    {
+        'circleci-signature': 'v1=773ba44693c7553d6ee20f61ea5d2757a9a4f4a44d2841ae4e95b52e4cd62db4'
+    },
+    'foo',
+)
+
+# the following will return `False`
+verify_signature(
+    'secret',
+    {
+        'circleci-signature': 'v1=not-a-valid-signature'
+    },
+    'foo',
+)
+```
 
 ## Event Specifications
 {: #event-specifications}
@@ -192,8 +284,8 @@ isn't associated with a git commit.
 | target_repository_url  | no              | URL to the repository building the commit                                                                          |
 | origin_repository_url  | no              | URL to the repository where the commit was made (this will only be different in the case of a forked pull request) |
 | revision               | no              | Git commit being built                                                                                             |
-| commit.subject         | no              | Commit subject (first line of the commit message)                                                                  |
-| commit.body            | no              | Commit body (subsequent lines of the commit message)                                                               |
+| commit.subject         | no              | Commit subject (first line of the commit message). Note that long commit subjects may be truncated.                |
+| commit.body            | no              | Commit body (subsequent lines of the commit message). Note that long commit bodies may be truncated.               |
 | commit.author.name     | no              | Name of the author of this commit                                                                                  |
 | commit.author.email    | no              | Email address of the author of this commit                                                                         |
 | commit.authored\_at    | no              | Timestamp of when the commit was authored                                                                          |

@@ -331,8 +331,7 @@ and the CircleCI project is `https://circleci.com/gh/you/test-repo`.
 1. Create an SSH key pair by following the
    [GitHub instructions](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/).
    When prompted to enter a passphrase, do **not** enter one:
-
-```
+```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
 
