@@ -65,9 +65,9 @@ Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定�
 
 === Heroku Orb の使用
 
-以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定には、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるように、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用しています。
+以下は、設定を簡素化にするために https://circleci.com/developer/orbs/orb/circleci/heroku[Heroku Orb] を使用したHeroku デプロイの例です。 この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。
 
- https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}.
+ https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
 
 ```yaml
 バージョン: 2.1
@@ -112,7 +112,7 @@ jobs:
 
 このバージョンでは、同じパイプラインを Orb を使わずに表示します。 アプリケーション全体は、https://github.com/CircleCI-Public/circleci-demo-workflows/tree/sequential-branch-filter[CircleCI デモ ワークフロー リポジトリの連続ジョブのブランチ]で確認できます。
 
-この設定には、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるように、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用しています。 デプロイ ジョブで過去のジョブからの出力を使用する場合は、https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用]することでそのデータを共有できます。 条件付きデプロイについては、「https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用]」を参照してください。
+この設定では、https://circleci.com/docs/2.0/workflows/[ワークフロー]を使用して、`sequential-branch-filter` ブランチがチェック アウトされ `build` ジョブが実行された場合にのみデプロイされるようにしています。 デプロイ ジョブで過去のジョブからの出力を使用する場合は、https://circleci.com/docs/2.0/workflows/#using-workspaces-to-share-data-among-jobs[ワークスペースを使用]することでそのデータを共有できます。 条件付きデプロイについては、「https://circleci.com/docs/2.0/workflows/#using-contexts-and-filtering-in-your-workflows[ワークフローにおけるコンテキストとフィルターの使用]」を参照してください。
 
 ```yaml
 version: 2.0
@@ -176,4 +176,4 @@ workflows:
 //== Deployment Security Considerations
 
 == 次のステップ
-Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. ご自身のデプロイ ターゲットの設定を簡素化するためのOrbがあるかどうかをhttps://circleci.com/developer/orbs[Orb レジストリ]でご確認ください。 If not consider <<orb-author-intro#,authoring one>>!
+Look through the <<deployment-examples#,deployment examples>> document, which provides config examples for some popular deployment targets. お客様のデプロイ ターゲットの設定を簡素化するための Orb があるかどうかを https://circleci.com/developer/orbs[Orb レジストリ] でご確認ください。 If not consider <<orb-author-intro#,authoring one>>!
