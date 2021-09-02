@@ -59,7 +59,7 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*最終更新*: 2021 年 8 月 2 日
+*Last updated*: 2021-08-23
 
 IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
@@ -100,20 +100,29 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 
 - 18.214.70.5
 - 52.20.166.242
-- 35.174.249.131
 - 18.214.156.84
 - 54.236.156.101
+- 52.22.215.219
+- 52.206.105.184
+- 52.6.77.249
+- 34.197.216.176
+- 35.174.249.131
 - 3.210.128.175
 
-**IP アドレス リストの変更予定** (最終更新: 2021 年 8 月 2 日): なし
+### Upcoming changes to the list of IP address ranges
+
+#### 2021-08-23
+* Added new items to the list of IP address ranges for core services.
+
+The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
 **マシン用の IP アドレス リスト:**
 
-- *ジョブ用* IP アドレス範囲: [DNS A レコード](https://dnsjson.com/jobs.knownips.circleci.com/A.json)
+- IP address ranges *for jobs*: [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
 
-- *コア サービス用* IP アドレスの範囲: [DNS A レコード](https://dnsjson.com/core.knownips.circleci.com/A.json)
+- IP address ranges *for core services*: [DNS A record](https://dnsjson.com/core.knownips.circleci.com/A.json).
 
-- *全 IP アドレス範囲*: [DNS A レコード](https://dnsjson.com/all.knownips.circleci.com/A.json)
+- *All IP address ranges*:  [DNS A record](https://dnsjson.com/all.knownips.circleci.com/A.json).
 
 このリストは、プレビュー期間中に変更される可能性があります。 少なくとも週に一度は、更新がないか確認することをお勧めします。
 
@@ -133,21 +142,21 @@ IP アドレスの範囲機能を有効にしたジョブのネットワーク�
 
 IP アドレスの範囲機能が有効なジョブも含め、*すべてのジョブ* を CircleCI のプラットフォームで実行するマシンは、Amazon Web Services (AWS)、Google Cloud Platform (GCP)、CircleCI の macOS 用クラウドでホストされます。 CircleCI のトラフィックの送信元となるこれらのクラウド プロバイダーの IP アドレスを網羅したリストについては、各プロバイダーの IP アドレスの範囲を参照してください。 AWS と GCP では、この情報を公開するエンドポイントが提供されています。
 
-- [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI は *us-east-1* および *us-east-2* リージョンを使用
-- [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI は *us-east1* および *us-central1* リージョンを使用
-- CircleCI macOS 用クラウド:
- - 162.252.208.0/24
- - 162.252.209.0/24
- - 192.206.63.0/24
- - 162.221.90.0/24
- - 38.39.177.0/24
- - 38.39.178.0/24
- - 38.39.188.0/24
- - 38.39.189.0/24
- - 38.39.186.0/24
- - 38.39.187.0/24
- - 38.39.184.0/24
- - 138.39.185.0/24
+- [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI uses the *us-east-1* and *us-east-2* regions
+- [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
+- CircleCI macOS Cloud:
+  - 162.252.208.0/24
+  - 162.252.209.0/24
+  - 192.206.63.0/24
+  - 162.221.90.0/24
+  - 38.39.177.0/24
+  - 38.39.178.0/24
+  - 38.39.188.0/24
+  - 38.39.189.0/24
+  - 38.39.186.0/24
+  - 38.39.187.0/24
+  - 38.39.184.0/24
+  - 138.39.185.0/24
 
 大半が CircleCI のマシンではないため、AWS または GCP の IP アドレスに基づいて IP ベースのファイアウォールを構成することは*推奨されません*。 また、AWS および GCP のエンドポイントのアドレス割り当ては継続的に変更されるので、常に同じであるという*保証はありません*。
 
