@@ -81,7 +81,7 @@ class OptimizelyClient {
           resolve(null);
         });
       });
-    })
+    });
   }
 }
 
