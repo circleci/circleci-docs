@@ -7,6 +7,17 @@ class OptimizelyClient {
       datafile: window.optimizelyDatafile,
     });
   }
+  getUserId() {
+    return new Promise((resolve) => {
+      if (window.userData) {
+        resolve((window.userData.analytics_id) ? window.userData.analytics_id : null);
+      } else {
+        window.addEventListener("userDataReady", () => {
+          resolve((window.userData.analytics_id) ? window.userData.analytics_id : null);
+        });
+      }
+    })
+  }
   // getVariationName is always guaranteed to resolve with either "null" or a variation name.
   // This is consistent to what getVariation from the optimizely-sdk does.
   //
@@ -31,14 +42,8 @@ class OptimizelyClient {
         return resolve(null);
       }
 
-      // When we get notified that the call to /api/v1/me has resolved
-      // and the new userData is available
-      window.addEventListener("userDataReady", () => {
-
-        // We check if we have userData. If we don't have the analytics_id
-        // it means the current user is a guest user and so
-        // getVariationName() will resolve to "null"
-        const userId = (window.userData && window.userData.analytics_id) ? window.userData.analytics_id : null;
+      // once we have the userId
+      this.getUserId().then((userId) => {
         if (!userId) {
           return resolve(null);
         }
@@ -76,7 +81,7 @@ class OptimizelyClient {
           resolve(null);
         });
       });
-    });
+    })
   }
 }
 
