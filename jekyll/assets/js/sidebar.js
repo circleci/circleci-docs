@@ -4,39 +4,37 @@
   window.addEventListener('load', function () {
     var footer = document.querySelector('.footer');
     var sidebar = document.querySelector('.sidebar');
-    var defaultSectionName = 'getting-started';
+    const defaultSectionName = 'getting-started'
     var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
     var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
-    var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
-    var urlParams = new URLSearchParams(window.location.search)
-    var currentSection = urlParams.get("section");
-
-    if (currentSection) {
-      localStorage.sidenavActive = currentSection;
-    }
+    //var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
+    //var urlParams = new URLSearchParams(window.location.search)
+    //var currentSection = urlParams.get("section");
 
     // activate default section, if nothing else is selected
-    localStorage.sidenavActive = localStorage.sidenavActive || defaultSectionName;
+    let activeSection = defaultSectionName;
+    const activePage = sidebar.querySelector('.active');
+    if (activePage) { // find section for active page
+      activeSection = activePage.getAttribute('data-section');
+    }
 
-    if (localStorage.sidenavActive) {
-      // fullscreen sidenav expansion
-      function sidenavAutoExpand (parent) {
-        var element = parent.querySelector('[data-section=' + localStorage.sidenavActive + ']');
-        if (element && element.classList.contains('closed')) {
-          element.classList.remove('closed');
-        }
-      };
-
-      sidenavAutoExpand(sidebar);
-      sidenavAutoExpand(mobileSidebar);
-      scrollToActiveSidebarItem();
-
-      // for mobile sidebar, if sidebar is set, display proper item
-      var mobileCurrentElement = mobileSidebar.querySelector('[data-id=' + localStorage.sidenavActive + ']');
-      if (mobileCurrentElement && mobileCurrentElement.classList.contains('hidden')) {
-        mobileCurrentElement.classList.remove('hidden');
-        mobileSidebarDefault.classList.add('hidden');
+    // fullscreen sidenav expansion
+    function sidenavAutoExpand (parent) {
+      var element = parent.querySelector('[data-section=' + activeSection + ']');
+      if (element && element.classList.contains('closed')) {
+        element.classList.remove('closed');
       }
+    };
+
+    sidenavAutoExpand(sidebar);
+    sidenavAutoExpand(mobileSidebar);
+    scrollToActiveSidebarItem();
+
+    // for mobile sidebar, if sidebar is set, display proper item
+    var mobileCurrentElement = mobileSidebar.querySelector('[data-id=' + activeSection + ']');
+    if (mobileCurrentElement && mobileCurrentElement.classList.contains('hidden')) {
+      mobileCurrentElement.classList.remove('hidden');
+      mobileSidebarDefault.classList.add('hidden');
     }
 
     function setSidebar () {

@@ -19,7 +19,8 @@
 
             {% if main-item.link %}
               <a class="{% if current_url == main-item.link %} active {% endif %}"
-                href="{{ site.baseurl }}/{{ main-item.link }}?section={{ main-item.name | slugify }}"
+                href="{{ site.baseurl }}/{{ main-item.link }}"
+                data-section="{{ main-item.name | slugify }}"
                 data-proofer-ignore>{{ display_name}}</a>
             {% else %}
               <span class="nav-span">{{ display_name }}</span>
@@ -46,8 +47,9 @@
                   <li class="nav-item">
                     {% if item.link %}
                       <a class="{% if current_url == item.link %} active {% endif %}"
-                        href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}"
-                        data-proofer-ignore>
+                        href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}"
+                        data-proofer-ignore
+                        data-section="{{ main-item.name | slugify }}">
                         {{ display_name }}
                       </a>
                     {% else %}
@@ -65,7 +67,8 @@
                     {% endif %}
                   <li class="subnav-item">
                     <a class="{% if current_url == sub-item.link %} active {% endif %}"
-                       href="{{ site.baseurl }}/{{ sub-item.link }}?section={{ main-item.name | slugify }}{% if sub-item.hash %}#{{sub-item.hash}}{% endif %}"
+                       href="{{ site.baseurl }}/{{ sub-item.link }}{% if sub-item.hash %}#{{sub-item.hash}}{% endif %}"
+                       data-section="{{ main-item.name | slugify }}"
                        data-proofer-ignore >
                       {{ display_name }}
                     </a>
@@ -82,7 +85,7 @@
                 {% endif %}
                 <li class="subnav-item">
                   <a class="{% if current_url == item.link %} active {% endif %}"
-                    href="{{ site.baseurl }}/{{ item.link }}?section={{ main-item.name | slugify }}{% if item.hash %}#{{item.hash}}{% endif %}">
+                    href="{{ site.baseurl }}/{{ item.link }}{% if item.hash %}#{{item.hash}}{% endif %}" data-section="{{ main-item.name | slugify }}">
                     {{display_name}}
                   </a>
                 </li>
