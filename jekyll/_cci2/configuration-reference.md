@@ -335,7 +335,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
+image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
 docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 {: class="table table-striped"}
 
@@ -357,7 +357,8 @@ jobs:
 
 ##### Available `machine` images
 {: #available-machine-images }
-CircleCI supports multiple machine images that can be specified in the `image` field:
+
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
 
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
@@ -935,7 +936,8 @@ jobs: # conditional steps may also be defined in `commands:`
       custom_checkout:
         type: string
         default: ""
-    machine: true
+    machine:
+      image: ubuntu-2004:202107-02 
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -1768,7 +1770,8 @@ version: 2.1
 
 jobs:
   bar:
-    machine: true
+    machine:
+      image: ubuntu-2004:202107-02 
     steps:
       - checkout
       - run:
