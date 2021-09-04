@@ -2,14 +2,11 @@
 // this improves the visual experience while interacting with the docs site
 (function () {
   window.addEventListener('load', function () {
-    var footer = document.querySelector('.footer');
-    var sidebar = document.querySelector('.sidebar');
-    const defaultSectionName = 'getting-started'
-    var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
-    var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
-    //var mobileSidebarDisplay = mobileSidebar.querySelector('.mobile-sidebar');
-    //var urlParams = new URLSearchParams(window.location.search)
-    //var currentSection = urlParams.get("section");
+    const footer = document.querySelector('.footer');
+    const sidebar = document.querySelector('.sidebar');
+    const defaultSectionName = 'getting-started';
+    const mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
+    const mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
 
     // activate default section, if nothing else is selected
     let activeSection = defaultSectionName;
