@@ -23,9 +23,10 @@ version:
 jobs:
   build:
     steps:
-      # ... アプリのビルド・テストに関する記述 ...
+      # ... steps for building/testing app ...
 
-      - setup_remote_docker
+      - setup_remote_docker:
+        version: 19.03.13
 ```
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
@@ -33,10 +34,10 @@ jobs:
 **メモ:** `setup_remote_docker` キーは、プライマリ Executor を *Docker コンテナ*とするよう指定した設定ファイルで使用することが想定されています。 Executor が `machine` または `macos` の場合 (および設定ファイルで Docker コマンドを使用する場合)、`setup_remote_docker` キーを使用する必要は**ありません**。
 
 ### 仕様
-リモート Docker 環境の技術仕様は以下のとおりです (CircleCI Server をお使いの場合は、システム管理者にお問い合わせください)。
+{: #specifications }
 {:.no_toc}
 
-The Remote Docker Environment has the following technical specifications (for CircleCI Server installations, contact the systems administrator for specifications):
+リモート Docker 環境の技術仕様は以下のとおりです (CircleCI Server をお使いの場合は、システム管理者にお問い合わせください)。
 
 | CPU 数 | プロセッサー                    | RAM  | HD    |
 | ----- | ------------------------- | ---- | ----- |
@@ -63,11 +64,9 @@ jobs:
          docker run -d --name db company/proprietary-db:1.2.3
 
      # アプリケーション イメージをビルドします
-
      - run: docker build -t company/app:$CIRCLE_BRANCH .
 
      # イメージをデプロイします
-
      - run: docker push company/app:$CIRCLE_BRANCH
 ```
 
@@ -100,17 +99,16 @@ jobs:
 {% endhighlight %}
 <!-- markdownlint-enable MD046 -->
 
-**メモ:** `version` キーは、現在 CircleCI Server 環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
+**Note:** The [CircleCI convenience images](https://circleci.com/docs/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
 
 ```
       # Alpine ベースのイメージに APK でインストールします
-
       - run:
           name: Docker クライアントのインストール
           command: apk add docker-cli
 ```
 
-Let’s break down what’s happening during this build’s execution:
+ビルド中に何が行われているのか詳しく見てみましょう。
 
 1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
 2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker Engine で行われます。 (10 行目)
@@ -120,20 +118,21 @@ Let’s break down what’s happening during this build’s execution:
 ## Docker のバージョン
 {: #docker-version }
 
-To specify the Docker version, you can set it as a `version` attribute:
+ジョブで特定の Docker バージョンが必要な場合は、`version` 属性でバージョンを設定できます。
 
 ```
       - setup_remote_docker:
-          version: 18.06.0-ce
+          version: 19.03.13
 ```
 
-CircleCI は複数の Docker バージョンをサポートしており、デフォルトでは `17.09.0-ce` が使用されます。 以下に、サポートされている安定版とエッジ版を示します。
+CircleCI は複数の Docker バージョンをサポートしています。サポートされているバージョンは以下のとおりです。
 
-- `17.03.0-ce`
-- `17.05.0-ce`
-- `17.06.0-ce`
-- `17.06.1-ce`
-- `17.07.0-ce`
+- `20.10.7`
+- `20.10.6`
+- `20.10.2`
+- `19.03.14`
+- `19.03.13`
+- `19.03.12`
 - `19.03.8`
 - `18.09.3`
 - `17.09.0-ce` (default)
@@ -142,7 +141,7 @@ CircleCI は複数の Docker バージョンをサポートしており、デフ
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
 --->
 
-**Note:** The `version` key is not currently supported on CircleCI Server installations. Contact your system administrator for information about the Docker version installed in your remote Docker environment.
+**メモ:** `version` キーは、現在 CircleCI Server 環境ではサポートされていません。 お使いのリモート Docker 環境にインストールされている Docker バージョンについては、システム管理者にお問い合わせください。
 
 ## 環境の分離
 {: #separation-of-environments }
@@ -164,7 +163,7 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 #...
 ```
 
-A different way to do this is to use another container running in the same network as the target container:
+同じネットワーク内で動作する別のコンテナをターゲット コンテナとして使用する方法もあります
 
 ```
 #...
@@ -180,31 +179,31 @@ A different way to do this is to use another container running in the same netwo
 
 ジョブ空間からリモート Docker 内のコンテナにボリュームをマウントすること (およびその逆) は**できません**。 `docker cp` コマンドを使用して、この 2 つの環境間でファイルを転送することは可能です。 たとえば以下のように、ソース コードから設定ファイルを使用してリモート Docker でコンテナを開始します。
 
-```
-version: '2'
-services:
- bundler-cache:
-   image: outstand/dockup:latest
-   command: restore
-   container_name: bundler-cache
-   tty: true
-   environment:
-     COMPRESS: 'false'
-   volumes:
-
-     - bundler-data:/source/bundler-data
-```
-
-次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
 
 ```
-run: |
-  # アプリケーションとコンテナを開始します
-  # <code>--rm</code> オプションは使用しません (使用すると、終了時にコンテナが強制終了されます)
-  docker run --name app app-image:1.2.3
+- run: |
+    # create a dummy container which will hold a volume with config
+    docker create -v /cfg --name configs alpine:3.4 /bin/true
+    # copy a config file into this volume
+    docker cp path/in/your/source/code/app_config.yml configs:/cfg
+    # start an application container using this volume
+    docker run --volumes-from configs app-image:1.2.3
 ```
 
-次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
+同様に、保存する必要があるアーティファクトをアプリケーションが生成する場合は、以下のようにリモート Docker からコピーできます。
+
+```
+- run: |
+    # start container with the application
+    # make sure you're not using `--rm` option otherwise the container will be killed after finish
+    docker run --name app app-image:1.2.3
+
+- run: |
+    # after application container finishes, copy artifacts directly from it
+    docker cp app:/output /path/in/your/job/space
+```
+
+It is also possible to use https://github.com/outstand/docker-dockup or a similar image for backup and restore to spin up a container as shown in the following example `circle-dockup.yml` config:
 
 ```
 version: '2'
@@ -244,7 +243,6 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       docker rm -f $NAME
 
 # 同じボリュームを CircleCI キャッシュにバックアップします
-
 - run:
     name: Docker ボリュームからの Bundler キャッシュのバックアップ
     command: |
@@ -277,10 +275,10 @@ ssh remote-docker
 ## 関連項目
 {: #see-also }
 
-[プライマリ コンテナ]({{ site.baseurl }}/2.0/docker-layer-caching/)
+[プライマリ コンテナ]({{ site.baseurl }}/ja/2.0/docker-layer-caching/)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#job-space)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#job-space)
 
-[primary-container]({{ site.baseurl }}/2.0/glossary/#primary-container)
+[primary-container]({{ site.baseurl }}/ja/2.0/glossary/#primary-container)
 
-[Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching)
+[Docker レイヤー キャッシュ]({{ site.baseurl }}/ja/2.0/glossary/#docker-layer-caching)
