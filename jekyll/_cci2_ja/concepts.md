@@ -21,14 +21,14 @@ This guide introduces some basic concepts to help you understand how CircleCI ma
 
 CircleCI プロジェクトは、関連付けられているコード リポジトリの名前を共有し、CircleCI アプリケーションの [Projects (プロジェクト)] ページに表示されます。 プロジェクトは、[Add Project (プロジェクトの追加)] ボタンを使用して追加します。
 
-{:.tab.addprojectpage.Cloud}
+On the Projects Dashboard, you can either:
 * [Add Project (プロジェクトの追加)] ページでは、VCS で所有者になっているプロジェクトを*セットアップ*するか、組織内のプロジェクトを*フォロー*することで、パイプラインにアクセスし、プロジェクトのステータスに関する\[メール通知\]({{site.baseurl }}/2.0/notifications/)を受け取ることができます。
 * _Follow_ any project in your organization to gain access to its pipelines and to subscribe to \[email notifications\]({{ site.baseurl }}/2.0/notifications/) for the project's status.
 
 ![header]({{ site.baseurl }}/assets/img/docs/CircleCI-2.0-setup-project-circle101_cloud.png)
 
-## ステップ
-{:.tab.addprojectpage.Server}
+## 設定
+{: #configuration }
 
 CircleCI believes in *configuration as code*. Your entire continuous integration and deployment process is orchestrated through a single file called `config.yml`.  The `config.yml` file is located in a folder called `.circleci` at the root of your project. CircleCI uses the YAML syntax for config, see the [Writing YAML]({{ site.baseurl }}/2.0/writing-yaml/) document for basics.
 
@@ -44,7 +44,7 @@ CircleCI believes in *configuration as code*. Your entire continuous integration
 Your CircleCI configuration can be adapted to fit many different needs of your project. The following terms, sorted in order of granularity and dependence, describe the components of most common CircleCI projects:
 
 - **[Pipeline](#pipelines)**: Represents the entirety of your configuration. Available in CircleCI Cloud only.
-- **[Job (ジョブ)] ページ**の [Artifacts (アーティファクト)] タブで、`tmp/circle-artifacts.<hash>/container` などのディレクトリの下に表示されます。
+- **[Workflows](#workflows)**: Responsible for orchestrating multiple _jobs_.
 - **[Jobs](#jobs)**: Responsible for running a series of _steps_ that perform commands.
 - **[Steps](#steps)**: Run commands (such as installing dependencies or running tests) and shell scripts to do the work required for your project.
 
@@ -52,7 +52,7 @@ The following image uses an [example Java application](https://github.com/Circle
 
 ![configuration elements]({{ site.baseurl }}/assets/img/docs/config-elements.png)
 
-## イメージ
+## ユーザー種別
 {: #user-types }
 
 It is worth taking a minute to define the various user types that relate to CircleCI projects, most of which have permissions inherited from VCS accounts.
@@ -65,7 +65,7 @@ It is worth taking a minute to define the various user types that relate to Circ
 * CircleCI ユーザーとは、ユーザー名とパスワードを使用して CircleCI プラットフォームにログインできる人を指します。 関係する CircleCI プロジェクトを表示またはフォローするには、ユーザーが \[GitHub または Bitbucket 組織\]({{ site.baseurl }}/ja/2.0/gh-bb-integration/)に追加されている必要があります。 ユーザーは、環境変数に保存されているプロジェクト データを表示することはできません。
 
 
-## ジョブ
+## パイプライン
 {: #pipelines }
 
 A CircleCI pipeline is the full set of processes you run when you trigger work on your projects. Pipelines encompass your workflows, which in turn coordinate your jobs. This is all defined in your project [configuration file](#configuration). Pipelines are not currently available for CircleCI Server.
@@ -74,7 +74,7 @@ Pipelines represent methods for interacting with your configuration:
 
 {% include snippets/pipelines-benefits.adoc %}
 
-## ワークフロー
+## Orbs
 {: #orbs }
 
 Orbs are reusable snippets of code that help automate repeated processes, speed up project setup, and make it easy to integrate with third-party tools. See [Using Orbs]({{ site.baseurl }}/2.0/using-orbs/) for details about how to use orbs in your config and an introduction to orb design. Visit the [Orbs Registry](https://circleci.com/developer/orbs) to search for orbs to help simplify your config.
@@ -83,7 +83,7 @@ The graphic above illustrating an example Java configuration could be simplified
 
 ![ワークフローの図]({{ site.baseurl }}/assets/img/docs/config-elements-orbs.png)
 
-## 関連項目
+## ジョブ
 {: #jobs }
 
 Jobs are the building blocks of your config. Jobs are collections of [steps](#steps), which run commands/scripts as required. 各ジョブでは、`docker`、`machine`、`windows`、`macos` のいずれかの Executor を宣言する必要があります。 指定しなかった場合、`machine` には [デフォルト イメージ](https://circleci.com/ja/docs/2.0/executor-intro/#machine) が含まれます。 `docker` には、プライマリ コンテナで使用する [イメージを指定](https://circleci.com/ja/docs/2.0/executor-intro/#docker) する必要があります。 `macos` には [Xcode バージョン](https://circleci.com/ja/docs/2.0/executor-intro/#macos) を指定する必要があります。 `windows` では、[Windows Orb](https://circleci.com/ja/docs/2.0/executor-intro/#windows) を使用する必要があります。
@@ -135,7 +135,7 @@ jobs:
 # ...
 ```
 
-アーティファクト、ワークスペース、キャッシュの各機能には下記のような違いがあります。
+{:.tab.executors.Server}
 ```yaml
 version: 2.0
 
@@ -177,8 +177,8 @@ The Primary Container is defined by the first image listed in [`.circleci/config
 
 When using the docker executor and running docker commands, the `setup_remote_docker` key can be used to spin up another docker container in which to run these commands, for added security. For more information see the [Running Docker Commands]({{ site.baseurl }}/2.0/building-docker-images/#accessing-the-remote-docker-environment) guide.
 
-## Steps
-ワークスペース、キャッシュ、アーティファクトに関する詳細は、「[Persisting Data in Workflows: When to Use Caching, Artifacts, and Workspaces (ワークフローでデータを保持するには: キャッシュ、アーティファクト、ワークスペース活用のヒント)](https://circleci.com/blog/persisting-data-in-workflows-when-to-use-caching-artifacts-and-workspaces/)」を参照してください。
+## ステップ
+{: #steps }
 
 ステップとは、ジョブを実行するために行う必要があるアクションのことです。 ステップは通常、実行可能なコマンドの集まりです。 たとえば以下の例では、`checkout` ステップが SSH コマンドでジョブのソース コードをチェックアウトします。 次に、`run` ステップが、デフォルトで非ログイン シェルを使用して、`make test` コマンドを実行します。 Commands can also be defined [outside the job declaration]({{ site.baseurl }}/2.0/configuration-reference/#commands-requires-version-21), making them reusable across your config.
 
@@ -202,8 +202,8 @@ jobs:
 #...
 ```
 
-## 例
-`jobs` と `steps` のキーとオプションの使用方法については、「[Orb、ジョブ、ステップ、ワークフロー]({{ site.baseurl }}/ja/2.0/jobs-steps/)」を参照してください。
+## イメージ
+{: #image }
 
 イメージは、実行コンテナを作成するための指示を含むパッケージ化されたシステムです。 プライマリ コンテナは、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイルに最初にリストされているイメージとして定義されます。 ここで、Docker または Machine Executor を使用してジョブのコマンドが実行されます。 Docker Executor は、Docker イメージを使用してコンテナを起動します。 Machine Executor は完全な Ubuntu 仮想マシン イメージを起動します。 比較表と考慮事項については、「[Executor タイプを選択する]({{ site.baseurl }}/ja/2.0/executor-types/)」を参照してください。
 
@@ -418,8 +418,8 @@ workflows:
 ```
 {% endraw %}
 
-## ワークスペースとアーティファクト
-`attach_workspace:` ステップを使用して、ダウンストリーム コンテナにワークスペースをアタッチします。
+## キャッシュ、ワークスペース、アーティファクト
+{: #caches-workspaces-and-artifacts }
 
 ![workflow illustration]( {{ site.baseurl }}/assets/img/docs/workspaces.png)
 
@@ -615,4 +615,4 @@ Refer to the [Persisting Data in Workflows: When to Use Caching, Artifacts, and 
 {: #see-also }
 {:.no_toc}
 
-Refer to the [Jobs and Steps]({{ site.baseurl }}/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
+Refer to the [Jobs and Steps]({{ site.baseurl }}/ja/2.0/jobs-steps/) document for a summary of how to use the `jobs` and `steps` keys and options.
