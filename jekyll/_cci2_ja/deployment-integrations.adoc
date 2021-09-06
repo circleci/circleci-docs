@@ -41,7 +41,7 @@ At CircleCI we offer packages of reusable configuration, known as <<orb-intro#,o
 例として、 https://circleci.com/developer/orbs/orb/circleci/aws-code-deploy[AWS CodeDeploy Orb] を考えてみましょう。 この Orb にはあらかじめ `デプロイ` ジョブが設定されており、Orb スタンザを追加してオーブが起動したら、 `aws-code-deploy/deploy` の一行で設定に含めることができます。 以下の例ように、簡単にデプロイすることができます。
 
 ```yaml
-バージョン: 2.1
+version: 2.1
 
 orbs:
   aws-code-deploy: circleci/aws-code-deploy@0.0.11
@@ -70,7 +70,7 @@ Orb は内部で、 `aws-code-deploy/deploy` ジョブの宣言により設定�
  https://circleci.com/developer/orbs/orb/circleci/heroku[Orb レジストリ] の `deploy-via-git` コマンドのソースを見ると、この簡潔な設定には以下の環境変数: `$HEROKU_APP_NAME` と `$HEROKU_API_KEY` の設定が必要であることが分かります。 {% include snippets/env-var-or-context.adoc %}
 
 ```yaml
-バージョン: 2.1
+version: 2.1
 
 orbs:
   heroku: circleci/heroku@0.0.10. # Heroku orbを起動する
