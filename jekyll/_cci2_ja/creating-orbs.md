@@ -16,9 +16,9 @@ version:
 {:toc}
 
 ## はじめに
-オーサリングした Orb は、[セマンティック バージョン]({{site.baseurl}}/ja/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/developer/ja/orbs)に公開できます。
+{: #introduction }
 
-利用可能なコマンド、ジョブ、パラメーターの一覧については、[Orb レジストリ](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) の[orb-tools orb](https://circleci.com/developer/ja/orbs/orb/circleci/orb-tools) を参照してください。
+オーサリングした Orb は、[セマンティック バージョン]({{site.baseurl}}/ja/2.0/orb-concepts/#orbs-%E3%81%A7%E3%81%AE%E3%82%BB%E3%83%9E%E3%83%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF-%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0) タグを付けてパブリッシュすることで、[Orb レジストリ](https://circleci.com/developer/ja/orbs)に公開できます。
 
 ![Orb のパブリッシュ プロセス]({{ site.baseurl }}/assets/img/docs/orb-publishing-process.png)
 
@@ -28,7 +28,7 @@ version:
 [手動]({{site.baseurl}}/ja/2.0/orb-author-validate-publish)ではなく、[Orb 開発キット]({{site.baseurl}}/ja/2.0/orb-author/#orb-%E9%96%8B%E7%99%BA%E3%82%AD%E3%83%83%E3%83%88)を使用して Orb をパブリッシュすると、次のセクションで説明する手順に従ってセマンティック リリースを簡単に行えます。 パブリッシュ プロセスの簡単な概要については、オーサリング プロセスの開始時に `circleci orb init` コマンドで生成される [README.md](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/README.md) ファイルを参照してください。
 
 ### 新リリースの公開
-[circleci orb init]({{site.baseurl}}/ja/2.0/orb-author/#%E4%BD%9C%E6%A5%AD%E3%82%92%E9%96%8B%E5%A7%8B%E3%81%99%E3%82%8B) コマンドは、Orb 開発パイプラインに最適な CircleCI 製設定ファイルなどを含む [Orb テンプレート リポジトリ](https://github.com/CircleCI-Public/Orb-Project-Template)を、Orb 用にクローンします。
+{: #issue-a-new-release }
 
 以下では、Orb の新しいセマンティック リリースを公開する方法について説明します。 `circleci orb init` コマンドでサンプルの Orb プロジェクトを生成すると、自動的に `alpha` ブランチに移行されます。 このブランチは、リポジトリの非デフォルトのブランチに新機能やバグ修正、パッチなどを作成するためのものであり、名前に深い意味はありません。 コードの追加や更新を行いリリースを公開する準備が整ったら、以下の手順を行います。
 
@@ -54,20 +54,20 @@ version:
 1. [CircleCI アプリケーション](https://app.circleci.com/)にアクセスすると、Orb のパブリッシュ パイプラインの進捗状況を確認できます。 このパイプラインが完了したら、[Orb レジストリ](https://circleci.com/developer/ja/orbs) に Orb が公開されます。
 
 ### Orb のパブリッシュ プロセス
-Orb パイプラインには次の 2 つのワークフローがあります。
+{: #orb-publishing-process }
 
 ここでは、Orb 開発キットについて掘り下げ、Orb のパブリッシュに関係するコンポーネントについて説明します。
 
-この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
+The [circleci orb init]({{site.baseurl}}/2.0/orb-author/#getting-started) command is responsible for cloning an [orb template repository](https://github.com/CircleCI-Public/Orb-Project-Template) for your orb, including a pre-defined CircleCI configuration file designed with our optimal orb development pipeline.
 
-Included in the [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) directory is a README with a breakdown of the included workflows.
+この中の [/.circleci](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/.circleci) ディレクトリに、サンプル ワークフローの詳細を示した README が含まれています。
 
 このワークフローの実行内容は以下のとおりです。
 * [test-pack](#test-pack)
 * [integration-test_deploy](#integration-test_deploy)
 
 #### test-pack
-テスト ジョブの詳細については、「[Orb のテスト手法]({{site.baseurl}}/ja/2.0/testing-orbs)」を参照してください。
+{: #test-pack }
 
 2 つのワークフローのうち、実行順が先であるのは [`test-pack`](https://github.com/CircleCI-Public/Orb-Project-Template/blob/0354adde8405564ee7fc77e21335090a080daebf/.circleci/config.yml#L40) です。 このワークフローは、**いずれかの**ブランチのリポジトリにコードがコミットされるたびに実行されます。
 

@@ -88,10 +88,10 @@ jobs:
           path: coverage
 ```
 
-この[例](https://github.com/pallets/flask/tree/1.0.2/examples/tutorial)では、以下のコマンドを使用してカバレッジ レポートを生成できます。
+The [simplecov README](https://github.com/colszowka/simplecov/#getting-started) has more details.
 
 ## Python
-生成されたファイルは `htmlcov/` 下にあり、設定ファイルの `store_artifacts` ステップでアップロードできます。
+{: #python }
 
 [Coverage.py](https://coverage.readthedocs.io/en/v4.5.x/) is a popular library for generating Code Coverage Reports in python. To get started, install Coverage.py:
 
@@ -115,7 +115,8 @@ coverage report
 coverage html  # ブラウザーで htmlcov/index.html を開きます
 ```
 
-上記の例に対応する最小の CI 構成は以下のとおりです。
+The generated files will be found under `htmlcov/`, which can be uploaded in a
+`store_artifacts` step in your config:
 
 ```yaml
 version: 2
@@ -235,6 +236,9 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:11.0-stretch-node-browsers-legacy
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run : mvn test
@@ -253,6 +257,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:10.0-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: npm install
@@ -264,11 +271,12 @@ jobs:
 ```
 
 ## PHP
-Codecov の Orb の詳細については、[CircleCI ブログへの寄稿記事](https://circleci.com/blog/making-code-coverage-easy-to-see-with-the-codecov-orb/)を参照してください。
+{: #php }
 
 PHPUnit is a popular testing framework for PHP. To generate code-coverage reports you may need to install [PHP Xdebug](https://xdebug.org/) if you are using an earlier version than PHP 5.6. Versions of PHP after 5.6 have access to a tool called phpdbg; you can generate a report using the command `phpdbg -qrr vendor/bin/phpunit --coverage-html build/coverage-report`
 
-Coveralls は、並列ビルドのカバレッジ統計を自動的にマージします。
+In the following basic `.circleci/config.yml` we upload the coverage reports in
+the `store_artifacts` step at the end of the config.
 
 
 ```yaml
@@ -277,6 +285,9 @@ jobs:
   build:
     docker:
       - image: circleci/php:7-fpm-browsers-legacy
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run:
@@ -296,15 +307,17 @@ go test -cover -coverprofile=c.out
 go tool cover -html=c.out -o coverage.html
 ```
 
-以下に示した基本の `.circleci/config.yml` では、設定ファイルの末尾にある `store_artifacts` ステップでカバレッジ レポートをアップロードしています。
+An example `.circleci/config.yml`:
 ```yaml
 version: 2.1
 
 jobs:
   build:
     docker:
-
-      - image: circleci/golang:1.11
+      - image: circleci/golang:1.16
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
       - run: go build
