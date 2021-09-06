@@ -952,7 +952,7 @@ ja:
             i18n_name: ランナーのインストール
           - 
             name: Runner on Kubernetes
-            link: 2.0/runner-on-kubernetes/
+            link: ja/2.0/runner-on-kubernetes/
             i18n_name: Kubernetes ランナー
           - 
             name: Runner API
@@ -986,7 +986,7 @@ ja:
             i18n_name: 設定ファイル再利用(Orbs)
           - 
             name: Dynamic Configuration
-            link: 2.0/dynamic-config
+            link: ja/2.0/dynamic-config
             i18n_name: ダイナミック コンフィグ
           - 
             name: Using the CircleCI CLI
@@ -994,7 +994,7 @@ ja:
             i18n_name: CircleCI CLIの使用
           - 
             name: Using the CircleCI Configuration Editor
-            link: 2.0/config-editor/
+            link: ja/2.0/config-editor/
             i18n_name: 設定ファイル エディター
       - 
         name: Orbs
@@ -1050,23 +1050,23 @@ ja:
       - 
         name: Overview
         i18n_name: 概要
-        link: 2.0/insights/
+        link: ja/2.0/insights/
       - 
         name: Metrics glossary
         i18n_name: メトリクスの用語集
-        link: 2.0/insights-glossary/
+        link: ja/2.0/insights-glossary/
       - 
         name: Test Insights
         i18n_name: テスト結果
-        link: 2.0/insights-tests/
+        link: ja/2.0/insights-tests/
       - 
         name: Data Partnerships
         i18n_name: パートナーシップ
-        link: 2.0/insights-partnerships/
+        link: ja/2.0/insights-partnerships/
       - 
         name: Insights API
         i18n_name: Insights API
-        link: api/v2/
+        link: ja/api/v2/
         hash: tag/Insights
   - 
     name: Projects
@@ -1106,30 +1106,32 @@ ja:
             name: Managing API tokens
             link: ja/2.0/managing-api-tokens/
             i18n_name: APIトークン
+          - name: Webhooks
+            link: ja/2.0/webhooks/
           - 
             name: Using Credits
             link: ja/2.0/credits/
             i18n_name: クレジット使用
       - 
         name: security
-        link: 2.0/security/
+        link: ja/2.0/security/
         i18n_name: セキュリティ
         children:
           - 
             name: Security Features
-            link: 2.0/security/
+            link: ja/2.0/security/
             i18n_name: セキュリティ機能
           - 
             name: Security Recommendations
-            link: 2.0/security-recommendations/
+            link: ja/2.0/security-recommendations/
             i18n_name: 推奨設定
           - 
             name: Protecting Against Supply Chain Attacks
-            link: 2.0/security-supply-chain/
+            link: ja/2.0/security-supply-chain/
             i18n_name: サプライチェーン攻撃への対策
           - 
             name: IP Ranges
-            link: 2.0/ip-ranges/
+            link: ja/2.0/ip-ranges/
             i18n_name: IPアドレスの範囲
   - 
     name: Examples and Guides
@@ -1160,7 +1162,7 @@ ja:
             link: ja/2.0/language-ruby/
           - 
             name: Other supported languages
-            link: 2.0/tutorials
+            link: ja/2.0/tutorials
             i18n_name: その他の言語
       - 
         name: Databases
