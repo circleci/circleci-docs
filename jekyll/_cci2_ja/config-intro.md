@@ -13,7 +13,7 @@ version:
 {:toc}
 
 ## CircleCI 設定ファイル入門
-CircleCI を設定する
+{: #getting-started-with-circleci-config }
 {:.no_toc}
 
 このガイドでは、初めに CircleCI が `config.yml` をどのように見つけて実行するか、さまざまな作業にシェル コマンドをどのように使用できるかを説明します。 次に、`config.yml` がどのようにコードとやり取りしてビルドを開始するかを概説します。 さらに、Docker コンテナを使用して、必要とする環境で正確に実行する方法についても説明します。 最後に、ワークフローについて簡単に説明し、ビルド、テスト、セキュリティ スキャン、承認ステップ、デプロイをオーケストレーションする方法について学びます。
@@ -32,7 +32,7 @@ CircleCI は *Configuration as Code* を貫いています。  そのため、�
 5. 以下の内容を `config.yml` ファイルに追加します。
 
 {% highlight yaml linenos %}
-version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
 {% endhighlight %}
 
 設定ファイルをチェックインし、実行を確認します。  ジョブの出力は、CircleCI アプリケーションで確認できます。
@@ -61,7 +61,7 @@ That was nice but let’s get real.  Delivery graphs start with code.  In this e
 
 
 {% highlight yaml linenos %}
-image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: docker: - image: alpine:3.7 steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
 
       - run:
           name: Code Has Arrived
@@ -88,12 +88,18 @@ Although we’ve only made two small changes to the config, these represent sign
 
 
 {% highlight yaml linenos %}
-image: alpine:3.7 steps: - run: name: 最初のステップ command: | echo 'Hello World!' echo 'This is the delivery pipeline'
+version: 2.1 jobs: build: # pre-built images: https://circleci.com/docs/2.0/circleci-images/ docker: - image: circleci/node:14-browsers steps: - checkout - run: name: The First Step command: | echo 'Hello World!' echo 'This is the delivery pipeline'
 
-      run:
-      name: 独自コンテナでの実行
-      command: |
-        node -v
+      - run:
+          name: Code Has Arrived
+          command: |
+            ls -al
+            echo '^^^That should look familiar^^^'
+    
+      - run:
+          name: Running in a Unique Container
+          command: |
+            node -v
 {% endhighlight %}
 
 We also added a small `run` block that demonstrates we are running in a node container.
@@ -118,7 +124,7 @@ We also added a small `run` block that demonstrates we are running in a node con
 
 
 {% highlight yaml linenos %}
-image: alpine:3.7 steps: - checkout - run: name: 最初のステップ command: | echo 'Hello World!' echo 'This is the delivery pipeline' - run: name: コードの取得 command: | ls -al echo '^^^That should look familiar^^^'
+version: 2.1 jobs: Hello-World: docker: - image: alpine:3.7 steps: - run: name: Hello World command: | echo 'Hello World!' echo 'This is the delivery pipeline' I-Have-Code: docker: - image: alpine:3.7 steps: - checkout - run: name: Code Has Arrived command: | ls -al echo '^^^That should look familiar^^^' Run-With-Node: docker: - image: circleci/node:14-browsers steps: - run: name: Running In A Container With Node command: | node -v Now-Complete: docker: - image: alpine:3.7 steps: - run: name: Approval Complete command: | echo 'Do work once the approval has completed'
 
 workflows: version: 2 Example_Workflow: jobs:
 
