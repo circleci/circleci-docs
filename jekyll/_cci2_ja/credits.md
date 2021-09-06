@@ -40,7 +40,7 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
 
 ## Free プラン
-Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
+{: #free-plan }
 
 従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
 
@@ -54,7 +54,7 @@ Performance プランにアップグレードすると、Free プランの内容
 ## Performance プラン
 {: #performance-plan }
 
-Upgrading to a performance plan offers several improvements over the free plan:
+Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
 - すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
 - Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
@@ -75,7 +75,7 @@ CircleCI の Free プランを使用して macOS でビルドを行っている�
 
 Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC は Performance プランでのみ提供されます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)をご覧ください。
 
-## ご意見・ご質問
+## トラブルシューティング
 {: #troubleshooting }
 
 ### Am i charged if my build is "queued" or "preparing"?
