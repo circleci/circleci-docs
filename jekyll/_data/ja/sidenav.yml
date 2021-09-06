@@ -200,6 +200,9 @@ en:
           - 
             name: Runner FAQs
             link: 2.0/runner-faqs/
+          - 
+            name: Runner FAQs
+            link: 2.0/runner-faqs/
   - 
     name: Configuration
     icon: icons/sidebar/configure.svg
@@ -803,10 +806,6 @@ ja:
             link: ja/2.0/artifacts/
             i18n_name: アーティファクト
           - 
-            name: Insights
-            link: ja/2.0/insights/
-            i18n_name: インサイト
-          - 
             name: Collecting test data
             i18n_name: テストメタデータの収集
             link: ja/2.0/collect-test-data/
@@ -901,9 +900,9 @@ ja:
             i18n_name: インストール済ソフト
             hash: pre-installed-software
           - 
-            name: Arm Resources
-            i18n_name: Arm リソース
-            link: ja/2.0/arm-resources/
+            name: Android Machine Image
+            i18n_name: Androidマシンイメージ
+            link: 2.0/android-machine-image
       - 
         name: Mac
         children:
@@ -951,9 +950,17 @@ ja:
             link: ja/2.0/runner-installation/
             i18n_name: ランナーのインストール
           - 
+            name: Runner on Kubernetes
+            link: ja/2.0/runner-on-kubernetes/
+            i18n_name: Kubernetes ランナー
+          - 
             name: Runner API
             link: ja/2.0/runner-api/
             i18n_name: ランナーAPI
+          - 
+            name: Runner FAQs
+            link: ja/2.0/runner-faqs/
+            i18n_name: ランナーFAQ
           - 
             name: Runner FAQs
             link: ja/2.0/runner-faqs/
@@ -981,9 +988,17 @@ ja:
             link: ja/2.0/reusing-config/
             i18n_name: 設定ファイル再利用(Orbs)
           - 
+            name: Dynamic Configuration
+            link: ja/2.0/dynamic-config
+            i18n_name: ダイナミック コンフィグ
+          - 
             name: Using the CircleCI CLI
             i18n_name: CircleCI CLIの使用
             link: ja/2.0/local-cli/
+          - 
+            name: Using the CircleCI Configuration Editor
+            link: ja/2.0/config-editor/
+            i18n_name: 設定ファイル エディター
       - 
         name: Orbs
         link: ja/2.0/orb-intro/
@@ -1019,7 +1034,7 @@ ja:
             link: ja/2.0/orb-author-faq/
             i18n_name: OrbsオーサリングFAQ
           - 
-            name: Orbs Best Practices
+            name: Orb Authoring Best Practices
             link: ja/2.0/orbs-best-practices/
             i18n_name: Orbsベストプラクティス
           - 
@@ -1038,23 +1053,23 @@ ja:
       - 
         name: Overview
         i18n_name: 概要
-        link: 2.0/insights/
+        link: ja/2.0/insights/
       - 
         name: Metrics glossary
         i18n_name: メトリクスの用語集
-        link: 2.0/insights-glossary/
+        link: ja/2.0/insights-glossary/
       - 
         name: Test Insights
         i18n_name: テスト結果
-        link: 2.0/insights-tests/
+        link: ja/2.0/insights-tests/
       - 
         name: Data Partnerships
         i18n_name: パートナーシップ
-        link: 2.0/insights-partnerships/
+        link: ja/2.0/insights-partnerships/
       - 
         name: Insights API
         i18n_name: Insights API
-        link: api/v2/
+        link: ja/api/v2/
         hash: tag/Insights
   - 
     name: Projects
@@ -1095,9 +1110,32 @@ ja:
             link: ja/2.0/managing-api-tokens/
             i18n_name: APIトークン
           - 
+            name: Webhooks
+            link: ja/2.0/webhooks/
+          - 
             name: Using Credits
             link: ja/2.0/credits/
             i18n_name: クレジット使用
+      - 
+        name: security
+        link: ja/2.0/security/
+        children:
+          - 
+            name: Security Features
+            link: ja/2.0/security/
+            i18n_name: セキュリティ機能
+          - 
+            name: Security Recommendations
+            link: ja/2.0/security-recommendations/
+            i18n_name: 推奨設定
+          - 
+            name: Protecting Against Supply Chain Attacks
+            link: ja/2.0/security-supply-chain/
+            i18n_name: サプライチェーン攻撃への対策
+          - 
+            name: IP Ranges
+            link: ja/2.0/ip-ranges/
+            i18n_name: IPアドレスの範囲
   - 
     name: Examples and Guides
     i18n_name: サンプル
@@ -1125,6 +1163,10 @@ ja:
           - 
             name: Ruby
             link: ja/2.0/language-ruby/
+          - 
+            name: Other supported languages
+            link: ja/2.0/tutorials
+            i18n_name: その他の言語
       - 
         name: Databases
         i18n_name: データベース
