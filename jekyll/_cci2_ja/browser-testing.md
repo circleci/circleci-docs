@@ -15,13 +15,13 @@ version:
 {:toc}
 
 ## 前提条件
-{: #prerequisites }
+{: #prerequisites } {:.no_toc}
 {:.no_toc}
 
 「[CircleCI のビルド済み Docker イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)」を参照し、Java 8、geckodriver、Firefox、Chrome などのバリアントのイメージ名に `-browsers:` を付加してください。 PhantomJS などの バリアントのイメージ名には `-browsers-legacy` を付加してください。
 
 ## 概要
-ブラウザー テストに使用される多くの自動化ツールには、広く採用されているブラウザー ドライバー標準である Selenium WebDriver が使用されています。
+{: #overview } {:.no_toc}
 {:.no_toc}
 
 コードをコミットしてプッシュするたびに、選択したブラウザーに対するすべてのテストが、CircleCI によって自動的に実行されます。 ブラウザー ベースのテストは、変更が行われるたび、各デプロイの前、または特定のブランチで実行されるように構成できます。
@@ -29,13 +29,13 @@ version:
 ## Selenium
 {: #selenium }
 
-Many automation tools used for browser tests use Selenium WebDriver, a widely-adopted browser driving standard.
+ブラウザー テストに使用される多くの自動化ツールには、広く採用されているブラウザー ドライバー標準である Selenium WebDriver が使用されています。
 
 Selenium WebDriver には、Java、Python、Ruby などの一般的な言語で実装されたブラウザーをプログラムによって操作するための共通 API が用意されています。 Selenium WebDriver からこれらのブラウザー用の統合インターフェイスが提供されるため、開発者が何度もブラウザー テストを作成する必要はありません。 これらのテストは、すべてのブラウザーとプラットフォームで機能します。 セットアップの詳細については、[Selenium のドキュメント](https://www.seleniumhq.org/docs/03_webdriver.jsp#setting-up-a-selenium-webdriver-project)を参照してください。 仮想フレームバッファ X サーバーのドキュメントについては、[Xvfb のマニュアル ページ](http://www.xfree86.org/4.0.1/Xvfb.1.html)を参照してください。
 
 WebDriver には、ローカルとリモートの 2 種類の動作モードがあります。 テストをローカルで実行する場合は、Selenium WebDriver ライブラリを使用して、同じマシン上のブラウザーを直接操作します。 テストをリモートで実行する場合は、Selenium Server と通信し、サーバーからブラウザーを操作します。
 
-If Selenium is not included in your primary docker image, install and run Selenium as shown below::
+プライマリ Docker イメージに Selenium が含まれていない場合は、以下のように Selenium をインストールして実行します。
 
 ```yml
 version: 2
@@ -68,52 +68,20 @@ Selenium 用の環境を設定する代わりに、LambdaTest、Sauce Labs、Bro
 
 LambdaTest は、ローカルに保存された Web ページのクロスブラウザー テストを実行できるように、Lambda Tunnel という名前の SSH (Secure Shell) トンネル接続を提供しています。 Lambda Tunnel を使用して、CircleCI ビルド コンテナ内でテスト サーバーを実行し、LambdaTest の Selenium Grid から提供されるブラウザー上で、自動化されたクロスブラウザー テストを実行することができます。 このように、Web サイトを公開する前に、訪問者に対してどのように表示されるのか確認することができます。
 
-CircleCI は、ブラウザー テストを実行する前に Sauce Labs トンネルを開くことができる Sauce Labs ブラウザー テスト Orb を開発しました。 An example of running parallel tests using this orb is shown below:
+LambdaTest has developed a [CircleCI orb](https://circleci.com/developer/orbs/orb/lambdatest/lambda-tunnel) for browser compatibility testing that enables you to open a Lambda Tunnel before performing any browser testing, easing the process of integrating LambdaTest with CircleCI. Use the orb to quickly set up a Lambda tunnel and the define your test steps
 
 {% raw %}
 ```yaml
-# 詳細は https://circleci.com/ja/docs/2.0/language-javascript/ を参照
-version: 2
+version: 2.1
+
+orbs:
+  lambda-tunnel: lambdatest/lambda-tunnel@0.0.1
+
 jobs:
-  build:
-    docker:
-      # ここで必要なバージョンを指定します
-
-      - image: circleci/node:7.10
-      # 必要に応じて、ここでサービスの依存関係を指定します
-      # CircleCI は https://circleci.com/ja/docs/2.0/circleci-images/ に
-      # 記載されたビルド済みイメージのライブラリを提供しています
-      # オーナーになるためにフォークする必要がある github リポジトリが作業ディレクトリとなります
-    working_directory: ~/nightwatch-sample-for-circleci
+  lambdatest/with_tunnel:
+    tunnel_name: <your-tunnel-name>
     steps:
-
-      - checkout
-
-      - run:
-          name: "カスタム環境変数のセットアップ // ワークフロー ステップ"
-          command: |
-            echo 'export LT_USERNAME="{your_lambdatest_username}"' >> $BASH_ENV
-
-      - run:
-          name: "カスタム環境変数のセットアップ"
-          command: |
-            echo 'export LT_ACCESS_KEY="{your_lambda_access_key}"' >> $BASH_ENV
-
-      - run: # 上記の環境変数のバリデーションを行います
-          name: "LT_Username: "
-          command: echo ${LT_USERNAME}      
-      # 依存関係をダウンロードしてキャッシュします
-
-      - restore_cache:
-          keys:
-
-            - v1-dependencies-{{ checksum "package-lock.json" }}
-        #正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
-
-      - run: npm をインストール
-      # テストを実行します！
-
-      - run: node_modules/.bin/nightwatch -e chrome // bash でテストを実行
+      - <your-test-steps>
 ```
 {% endraw %}
 
@@ -128,70 +96,39 @@ Sauce Connect を使用すると、CircleCI ビルド コンテナ内でテス�
 
 {% raw %}
 ```yaml
-# JavaScript Node CircleCI 2.0 設定ファイル
-
-詳細は https://circleci.com/ja/docs/2.0/language-javascript/ を参照
-
 version: 2
+
 jobs:
-  build: docker: # ここで必要なバージョンを指定します
-    - image: circleci/node:7.10
-    # 必要に応じて、ここでサービスの依存関係を指定します
-    working_directory: ~/Nightwatch-circleci-selenium
-
+  build:
+    docker:
+      - image: circleci/python:jessie-node-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-
       - checkout
       - run:
-        name: "トンネル バイナリのダウンロード"
-          command: |
-          wget http://downloads.lambdatest.com/tunnel/linux/64bit/LT_Linux.zip
-      - run:
-        name: "トンネル バイナリの抽出"
-          command: |
-          sudo apt-get install unzip
-          unzip LT_Linux.zip
-      - run:
-        name: "トンネル バイナリの実行"
+          name: Install Sauce Labs and Set Up Tunnel
           background: true
           command: |
-            ./LT -user ${LAMBDATEST_EMAIL} -key ${LAMBDATEST_KEY}
-            sleep 40
+            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
+            tar -xzf saucelabs.tar.gz
+            cd sc-*
+            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
+            wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # wait for app to be ready
+      - run: # base image is python, so we run `nosetests`, an extension of `unittest`
+          command: nosetests
       - run:
-        name: "カスタム環境変数のセットアップ"
+          name: Shut Down Sauce Connect Tunnel
           command: |
-            echo 'export LT_USERNAME="${LAMBDATEST_USERNAME}"' >> $BASH_ENV
-      - run:
-          name: "カスタム環境変数のセットアップ"
-          command: |
-            echo 'export LT_ACCESS_KEY="${LAMBDATEST_ACCESS_KEY}"' >> $BASH_ENV
-      - run: # 現在のブランチをテストします
-          name: "LT_Username: "
-          command: echo ${LT_USERNAME}      
-
-      # 依存関係をダウンロードしてキャッシュします
-      - restore_cache:
-        keys:
-          - v1-dependencies-{{ checksum "package-lock.json" }}
-      # 正確な一致が見つからない場合は、最新のキャッシュの使用にフォールバックします
-
-      - run: npm をインストール
-
-      - save_cache:
-          paths:
-            - node_modules
-                key: v1-dependencies-{{ checksum "package-lock.json" }}
-
-        # テストを実行します！
-
-      - run: node_modules/.bin/nightwatch -e chrome
+            kill -9 `cat /tmp/sc_client.pid`
 ```
 {% endraw %}
 
-### ローカルまたはプライベートにホスティングされたプロジェクトのテスト
+### LambdaTest ブラウザー テスト Orb の例
 {: #sauce-labs-browser-testing-orb-example }
 
-LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。 これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 An example of running parallel tests using this orb is shown below:
+LambdaTest は、ブラウザー互換性テストのために CircleCI Orb を開発しました。 これを使用して、ブラウザー テストを実行する前に Lambda Tunnel を開くことができます。 この Orb を使った並列テストの例は以下のとおりです。
 
 {% raw %}
 ```yaml
@@ -230,28 +167,15 @@ JavaScript エンドツーエンド テストに使用できるブラウザー �
 
 {% raw %}
 ```yaml
-version: 2
-jobs:
+version: 2.1
+
+orbs:
+  cypress: cypress-io/cypress@1.1.0
+
+workflows:
   build:
-    docker:
-      - image: circleci/python:jessie-node-browsers
-    steps:
-      - checkout
-      - run:
-          name: Sauce Labs のインストールとトンネルのセットアップ
-          background: true
-          command: |
-            curl https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz -o saucelabs.tar.gz
-            tar -xzf saucelabs.tar.gz
-            cd sc-*
-            bin/sc -u ${SAUCELABS_USER} -k ${SAUCELABS_KEY}
-        wget --retry-connrefused --no-check-certificate -T 60 localhost:4445  # アプリが準備できるまで待機します
-      - run: # 基本イメージは python のため、`unittest` の拡張版である `nosetests` を実行します
-          command: nosetests
-      - run:
-          name: Sauce Connect のトンネルのシャットダウン
-          command: |
-            kill -9 `cat /tmp/sc_client.pid`
+    jobs:
+      - cypress/run
 ```
 {% endraw %}
 
@@ -262,7 +186,7 @@ jobs:
 
 インテグレーション テストのデバッグは一筋縄では行きません。 特に、リモート マシンで実行されている場合はなおさらです。 このセクションでは、CircleCI 上でブラウザー テストをデバッグする方法の例をいくつか示します。
 
-### LambdaTest ブラウザー テスト Orb の例
+### スクリーンショットとアーティファクトの使用
 {: #using-screenshots-and-artifacts }
 {:.no_toc}
 
@@ -274,7 +198,7 @@ jobs:
 *   [Cucumber を使用して障害時に自動的に保存する](https://github.com/mattheworiordan/capybara-screenshot)
 *   [Behat と Mink を使用して障害時に自動的に保存する](https://gist.github.com/michalochman/3175175)
 
-### Sauce Labs ブラウザー テスト Orb の例
+### ローカル ブラウザーを使用して CircleCI 上の HTTP サーバーにアクセス
 {: #using-a-local-browser-to-access-http-server-on-circleci }
 {:.no_toc}
 
@@ -292,10 +216,10 @@ ssh -p 64625 ubuntu@54.221.135.43 -L 3000:localhost:8080
 ```
 3. 次に、ローカル マシンでブラウザーを開き、`http://localhost:8080` に移動すると、CircleCI コンテナ上のポート `3000` で実行されているサーバーに直接リクエストが送信されます。 CircleCI コンテナでテスト サーバーを手動で起動し (まだ実行されていない場合)、開発マシン上のブラウザーから実行中のテスト サーバーにアクセスすることもできます。
 
-This is a very easy way to debug things when setting up Selenium tests, for example.
+この方法では、たとえば Selenium テストをセットアップするとき、非常に簡単にデバッグを行えます。
 
-### スクリーンショットとアーティファクトの使用
-VNC からのブラウザー操作
+### VNC からのブラウザー操作
+{: #interacting-with-the-browser-over-vnc }
 {:.no_toc}
 
 VNC を使用して、テストを実行しているブラウザーを表示し、操作することができます。 これは、実ブラウザーを実行するドライバーを使用している場合にのみ機能します。 Selenium が制御するブラウザーを操作できますが、PhantomJS はヘッドレスなので、操作する対象がありません。
@@ -312,7 +236,7 @@ ssh -p PORT ubuntu@IP_ADDRESS -L 5902:localhost:5901
 ```bash
 sudo apt install vnc4server metacity
 ```
-4. `metacity` をバックグラウンドで起動します。
+4. CircleCI コンテナに接続したら、VNC サーバーを起動します。
 
 ```bash
 ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
@@ -328,7 +252,7 @@ ubuntu@box159:~$ vncserver -geometry 1280x1024 -depth 24
 ```bash
 ubuntu@box159:~$ export DISPLAY=:1.0
 ```
-9. `firefox` をバックグラウンドで起動します。
+9. `metacity` をバックグラウンドで起動します。
 
 ```bash
 ubuntu@box159:~$ metacity &
@@ -341,7 +265,7 @@ ubuntu@box159:~$ firefox &
 
 これで、コマンド ラインからインテグレーション テストを実行し、ブラウザーで予期しない動作がないかどうかを監視できます。 ローカル マシンでテストを実行しているかのように、ブラウザーを操作することができます。
 
-### ローカル ブラウザーを使用して CircleCI 上の HTTP サーバーにアクセス
+### CircleCI の X サーバーの共有
 {: #sharing-circlecis-x-server }
 {:.no_toc}
 
@@ -362,10 +286,10 @@ run:
 $ ssh -p PORT ubuntu@IP_ADDRESS -L 5900:localhost:5900
 ```
 
-## SSH からの X11 転送
+## over SSH によるX11 転送
 {: #x11-forwarding-over-ssh }
 
-CircleCI は、SSH からの X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
+CircleCI は、over SSH による X11 転送もサポートしています。 X11 転送は VNC と同様、CircleCI 上で動作するブラウザーとローカル マシンからやり取りすることができます。
 
 1. コンピューターに X Window System をインストールします。 macOS を使用している場合は、\[XQuartz\] (http://xquartz.macosforge.org/landing/) の使用を検討してください。
 
@@ -374,7 +298,7 @@ CircleCI は、SSH からの X11 転送もサポートしています。 X11 転
 ```
 daniel@mymac$ ssh -X -p PORT ubuntu@IP_ADDRESS
 ```
-This will start an SSH session with X11 forwarding enabled.
+これで SSH セッションが開始し、X11 転送が有効化されます。
 
 3. お使いのマシンに VM のディスプレイを接続するには、ディスプレイ環境変数を `localhost:10.0` に設定します。
 
