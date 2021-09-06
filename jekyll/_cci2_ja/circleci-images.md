@@ -20,13 +20,13 @@ CircleCI が提供しているビルド済みイメージの概要と、言語�
 {: #overview }
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 一般に、これらのイメージは正式な Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれます。 This document will provide an overview of best practices when using a convenience image. **メモ:** 以下のイメージは、それぞれの言語に対してビルドされた最新のアップストリーム イメージに基づいています。 これらの最新イメージはアップデートが頻繁にあるため、タグを追加指定して利用することを[おすすめ](#best-practices)します。
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 一般に、これらのイメージは正式な Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれます。 This document will provide an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** images convenience images rather than **legacy images** (as explained below).
 
-汎用的なイメージを CircleCI で実行したり、Orbs で使用したり、独自のカスタム Docker イメージのベースとして利用したりする必要がある場合に、このイメージをお使いください。
+If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
 
-- タグを使用してイメージのバージョンやバリアントを指定する
-- Docker イメージ ID を使用してバージョンを指定する
-- ビルド済み CircleCI Docker イメージのデモ アプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)を参照してください。
+- Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
+- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
+- All CircleCI pre-built images are available for browsing on [Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
 
 _**メモ:** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
 
@@ -34,7 +34,7 @@ _**メモ:** CircleCI は、バグの修正または機能の強化のために�
 {: #examples }
 {:.no_toc}
 
-このイメージの設定ファイルのサンプルは[Developer Hub](https://circleci.com/developer/ja/images/image/cimg/base)、ソース コードとドキュメントは [GitHub](https://github.com/CircleCI-Public/cimg-base) で入手できます。
+Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
 
 ## 次世代コンビニエンス イメージ
 {: #next-generation-convenience-images }
@@ -50,7 +50,9 @@ _**メモ:** CircleCI は、バグの修正または機能の強化のために�
 Using the `base` image in your config looks like the example shown below:
 
 ```yaml
-  image: cimg/base:2021.04
+  myjob:
+    docker:
+      - image: cimg/base:2021.04
 ```
 
 これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 今後数週間でリリースする予定の次世代コンビニエンス イメージはすべてこれがベースとなります。
@@ -61,31 +63,33 @@ If you need a generic image to run on CircleCI, to use with orbs, or to use as a
 
 **リソース:**
 
-最新の次世代コンビニエンス イメージの一覧と各イメージの内容の詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/)を参照してください。
+You can find more config examples for this image on the [Developer Hub](https://circleci.com/developer/images/image/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
 
 The example below demonstrates how to use the next-gen Go image, which is based off the `base` image above.
 
 ```yaml
-  image: cimg/go:1.16
+  myjob:
+    docker:
+      - image:  cimg/go:1.16
 ```
 
-これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間は `cimg` であることに留意してください。 以降に掲載した[言語別の最新イメージ タグ](#%E8%A8%80%E8%Aa%9E%E5%88%A5%E3%81%Ae%E6%9C%80%E6%96%B0%E3%82%A4%E3%83%A1%E3%83%Bc%E3%82%B8-%E3%82%Bf%E3%82%B0)の一覧を参照してください。
+これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間は `cimg` であることに留意してください。 You can view other next generation images for other languages [below](#next-gen-language-images).
 
 
-## 次世代 CircleCI イメージ
+## ベストプラクティス
 {: #best-practices }
 
 以降のセクションで扱う次世代コンビニエンス イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。 したがって、可能な限り最も当てはまるイメージを使用することをお勧めします。 これで、いずれかのアップストリーム イメージによってイメージに意図しない変更が組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
 
-使用するイメージを細かく指定するには、以下の 2つの方法があります。
+That is, to prevent unintended changes that come from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
 
 たとえば、`cimg/ruby:2.4.10-node` のように、使用するイメージのバージョンを限定的に指定してください。 バージョンは CircleCI のすべての Docker イメージで指定できます。
 
 また、使用するイメージを特定の SHA に至るまで指定することができます。 具体的には、`cimg/ruby:2.4.10-node` ではなく、`cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390` のように指定します。 これにより、変更が加えられるまでの間、特定のイメージをテストすることができます。
 
 
-### バージョンを指定するイメージ タグの使用方法
-{: #next-gen-circleci-images }
+### Notes on pinning images
+{: #notes-on-pinning-images }
 
 <div class="alert alert-warning" role="alert">
 SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティ パッチ用の更新を取得できない可能性があります。
@@ -120,10 +124,10 @@ jobs:
 {: #finding-an-image-id }
 {:.no_toc}
 
-{: #using-a-docker-image-id-to-pin-an-image-to-a-fixed-version }
+Follow these steps to find your docker image id:
 
 1. CircleCI にアクセスし、そのイメージを使用した過去のビルドを表示します。
-2. **[Steps (ステップ)]** タブの **[Spin up Environment (環境のスピンアップ)]** ステップをクリックします。
+2. **[Spin up Environment (環境のスピンアップ)]** ステップをクリックします。
 3. ログ内でそのイメージの **Digest** を確認します。
 4. そこに記載されたイメージ ID を以下のようにイメージ名の末尾に付加します。
 
@@ -131,12 +135,12 @@ jobs:
 cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b0182cf
 ```
 
-## ベスト プラクティス
+## イメージのタイプ
 {: #image-types }
 
 CircleCI のコンビニエンス イメージは、**言語**イメージと**サービス** イメージのいずれかのカテゴリに分類されます。 すべてのイメージは、`circleci` ユーザーをシステムユーザーとして追加します。 The sections below will walk through the available next-generation and legacy images.
 
-### 特定のバージョンを指定する Docker イメージ ID の使用方法
+### 次世代の言語イメージ
 {: #next-gen-language-images }
 {:.no_toc}
 
@@ -219,13 +223,13 @@ CircleCI は、サービスイメージに対してバリアント 1つのみ用
 
 For example, if you want the `circleci/postgres:9.5-postgis` image to use RAM volume, use the `circleci/postgres:9.5-postgis-ram` image.
 
-### サービス イメージ
+### 次世代サービス イメージ
 {: #next-gen-service-images }
 {:.no_toc}
 
 CircleCI では、次世代サービス コンビニエンス イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[Developer Hub](https://circleci.com/developer/ja/images/)を参照してください。
 
-## イメージのタイプ
+## プリインストール ツール
 {: #pre-installed-tools }
 
 すべてのコンビニエンス イメージは、`apt-get` と共にインストールされた追加ツールで拡張されています。
@@ -259,14 +263,14 @@ CircleCI では、次世代サービス コンビニエンス イメージの拡
 - [jq](https://stedolan.github.io/jq/)
 
 
-## プリインストール ツール
+## 対象外のイメージ
 {: #out-of-scope }
 
 1. 上記一覧に記載のないイメージは利用できません。 コンビニエンス イメージの提供プログラムが刷新されたため、現在のところ新しいイメージについての提案は受け付けていません。
 1. 旧バージョンのソフトウェアは再作成されません。 アップストリーム イメージの特定のリリース (Node.js v8.1.0 など) 用のタグが作成されなくなったら、CircleCI でもイメージの作成を終了します。 つまり、そのイメージ (`npm` など) に含まれる他のツールも更新されなくなります。
 1. プレビュー、ベータ版、リリース候補を指定するイメージ タグには対応していません。 利用できることもありますが、これらのタグが原因となってコンビニエンス イメージのビルド システムに問題が発生しやすくなります。 特定の言語の非安定版リリースが必要な場合は、[Orbs](https://circleci.com/ja/orbs/) またはカスタム Docker イメージからインストールすることをお勧めします。
 
-## 対象外のイメージ
+## 言語別の最新イメージ タグ
 {: #latest-image-tags-by-language }
 
 **従来の**コンビニエンス イメージについて、最新のものを言語別に紹介します。
@@ -318,10 +322,10 @@ the <a href="https://circleci.com/developer/">Developer Hub.</a>
 
 {% endfor %}
 
-## 言語別の最新イメージ タグ
+## See also
 {: #see-also }
 {:.no_toc}
 
 - プライベート リポジトリまたは Amazon ECR にあるイメージの使用をビルドに承認する方法については、「[Docker の認証付きプルの使用]({{ site.baseurl }}/2.0/private-images/)」を参照してください。
-- iOS 用の macOS イメージの詳細については、({{ site.baseurl }}/2.0/testing-ios/) を参照してください。
-- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/2.0/building-docker-images/)」を参照してください。
+- iOS 用の macOS イメージの詳細については、({{ site.baseurl }}/ja/2.0/testing-ios/) を参照してください。
+- Docker イメージをビルドする方法については、「[Docker コマンドの実行手順]({{ site.baseurl }}/ja/2.0/building-docker-images/)」を参照してください。
