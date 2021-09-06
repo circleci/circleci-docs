@@ -79,8 +79,8 @@ CAUTION: トークンを再取得することはできませんので、必ず�
 == インストール
 
 === ローンチ エージェント バイナリのダウンロードとチェックサムの検証
-
-ローンチ エージェントは次のスクリプトでインストールできます。このスクリプトでは、ベースのインストール場所に `opt/circleci` を指定しています。
+[[download]]
+このスクリプトでは、ベースのインストール場所に `opt/circleci` を指定しています。
 
 まず、インストール対象のプラットフォームに応じて、次のいずれかの変数を設定します。
 
@@ -429,10 +429,26 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 コンテナは、起動するとすぐにジョブの実行を試みます。
 
+==== Start the Docker container on server
+
+When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+
+``` bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
 === Docker コンテナを停止する
 
 ``` bash
 docker stop <container-name>
+```
+
+=== Remove the Docker container
+
+In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+
+``` bash
+docker stop <container-name>; docker rm <container-name>;
 ```
 
 == Windows Installation
@@ -526,6 +542,23 @@ NOTE: TERM シグナルの送信後、しばらく経ってもタスク エー�
 * タスクがドレイン状態になった後、`max_run_time` の設定値以上の時間が経過する。
 * "ドレイン" 中に、ローンチ エージェントが追加の TERM シグナルを受け取る。
 
+==== runner.ssh.advertise_addr
+
+This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
+
+The address is of the form `*host:port*` and is displayed in the 'Enable SSH' and 'Wait for SSH' sections for a job that is rerun.
+
+NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the 'Rerun job with SSH' feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
+
+===== Considerations before enabling SSH debugging
+
+Task agent runs an embedded SSH server and agent on a dedicated port when the 'Rerun job with SSH' option is activated. This feature will not affect any other SSH servers or agents on the system that the runner is installed on.
+
+* The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple launch agents are installed on the same host.
+* The SSH server will inherit the same user privileges and associated access authorizations as task agent as defined by the xref:runner-installation.adoc#runner-command_prefix[runner.command_prefix parameter].
+* The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH, but only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
+* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization’s concurrency limit, and the task agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
+
 == CircleCI Server とランナーの互換性
 _CircleCI ランナーは CircleCI Server v3.1.0 以上で使用できます。_
 
@@ -543,6 +576,7 @@ CircleCI Server のマイナー バージョンはそれぞれ、特定バージ
 | 3.1            
 | 1.0.11147-881b608
 |===
+
 
 === 関連リソース
 
