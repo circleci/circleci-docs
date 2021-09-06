@@ -18,7 +18,7 @@ circleci namespace create <my-namespace> github <my-gh-org>
 ```sh
 circleci orb create <my-namespace>/<my-orb-name>
 ```
-To create a **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orb:
+**[パブリック](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** Orb を作成する場合:
 ```sh
 circleci orb create <my-namespace>/<my-orb-name> --private
 ```
@@ -30,6 +30,12 @@ description: あいさつコマンド Orb
 commands:
     greet:
         description: 相手に "Hello" とあいさつします。
+        parameters:
+            to:
+                type: string
+                default: World
+        steps:
+            - run: echo "Hello, << parameters.to >>"
         parameters:
             to:
                 type: string
@@ -62,15 +68,15 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
-To list **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orbs:
+**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
 ```sh
 circleci orb list <my-namespace>
 ```
 
-To list **[private](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** orbs:
+**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace> --private
 
 ```
 
-For more information on how to use the `circleci orb` command, see the CLI [documentation](https://circleci-public.github.io/circleci-cli/circleci_orb.html).
+**プライベート</a>** Orb を一覧表示する場合:
