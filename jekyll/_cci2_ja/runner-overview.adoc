@@ -96,29 +96,29 @@ CircleCI ランナーのインストール後、ランナーは `circleci.com` �
 
 この仕組みにより、管理者は、task-agent が launch-agent よりも低い権限レベルで実行されるよう構成できます。 ジョブの実行を許可したすべてのユーザーには、task-agent と同等の権限が付与されます。 以降で説明するデプロイメントの推奨事項は、このアプローチに基づいています (ローンチ エージェントは root ユーザー、タスク エージェントは circleci ユーザーとして実行されます)。
 
-== Debugging with SSH
+== SSH での再実行 (英語)
 
 CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
 
 NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
 
-== Public repositories
+== パブリック リポジトリ
 
-CircleCI runner is not recommended for use with public projects that have the "Build forked pull requests" setting enabled. In this case, a malicious actor may alter your machine or execute code on it by forking your repository, committing code, and opening a pull request. Untrusted jobs running on your CircleCI runner pose significant security risks for your machine and network environment, especially if your machine persists its environment between jobs. Some of the risks include:
+CircleCI ランナーは、[Build Forked Pull Requests (フォークされたプル リクエストをビルド)] 設定が有効になっているパブリック プロジェクトでの使用は推奨されません。 このようなパブリック プロジェクトでは、他のユーザーがリポジトリをフォークし、コードをコミットしてプル リクエストを作成できるため、悪意のあるアクターによってマシンに変更が加えられたり、マシンでコードが実行されたりする可能性があります。 CircleCI ランナーで未信頼のジョブが実行されると、ジョブ間で環境が永続化されている場合には特に、マシンやネットワーク環境に重大なセキュリティ リスクが生じます。 このようなリスクには、次のものがあります。
 
-* Malicious programs running on the machine.
-* Escaping the machine's runner sandbox.
-* Exposing access to the machine's network environment.
-* Persisting unwanted or dangerous data on the machine.
+* 悪意のあるプログラムがマシンで実行される。
+* マシンのランナー サンドボックスの外部で操作が行われる。
+* マシンのネットワーク環境に外部からアクセスされる。
+* 不要なデータや危険なデータがマシンに保持される。
 
-== Referencing your runner on a job
+== ジョブでランナーを参照する
 
-After setting up the runner, you will need to reference it on a job by setting some fields in a special way in your `.circleci/config.yml` file. The fields you must set for a specific job to run using your runner are:
+ランナーのセットアップが完了したら、ジョブでランナーを参照する必要があります。 これを行うには、`.circleci/config.yml` ファイル内の特定のフィールドにそのための値を指定します。 ランナーを使って実行するジョブについて、以下のフィールドを指定します。
 
 * `machine: true`
 * `resource_class: your-namespace/your-resource`
 
-Here is a simple example of how you could set up a job.
+以下に、ジョブのセットアップ方法の簡単な例を示します。
 
 ```yaml
 version: 2.1
@@ -133,16 +133,16 @@ jobs:
     steps:
       - run: echo "Hi I'm on Runners!"
 ```
-The job will then execute using your runner when you push the config to your VCS provider.
+この設定ファイルを VCS プロバイダーにプッシュすると、ランナーを使ってジョブが実行されます。
 
-NOTE: A namespace is a unique identifier claimed by a user or organization. Each user or organization can claim one unique and immutable namespace. Organizations are, by default, limited to claiming only one namespace. This policy is designed to limit name-squatting and namespace noise. If you need to change your namespace, please https://support.circleci.com/hc/en-us[contact support].
+NOTE: 名前空間 (namespace) は、ユーザーまたは組織が要求する一意の識別子です。 各ユーザーまたは組織が要求できる一意の名前空間は 1 つだけで、後から変更することはできません。 デフォルトでは、組織も名前空間を 1 つしか要求できないように制限されています。 これは、名前空間の占拠や取り違えを防ぐためです。 名前空間を変更する必要がある場合は、https://support.circleci.com/hc/ja-jp[サポート]にお問い合わせください。
 
-== Limitations
+== 制限事項
 
-Almost all standard CircleCI features are available for use with runner jobs, but at present a few features are not yet supported. If these features are important for you to make use of runner jobs, please let us know via the relevant canny page.
+標準的な CircleCI 機能のほとんどすべてをランナー ジョブで使用できますが、現時点では、まだいくつかサポートされていない機能があります。 ランナー ジョブを使用するうえでそれらの機能が重要な場合は、以下の canny ページのうち該当するものからお知らせください。
 
-- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
-- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
+- https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[テストの分割 (英語)]
+- https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys (英語)`]
 
 == Learn more
 
