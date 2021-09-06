@@ -16,7 +16,7 @@ version:
 ## クイックスタート
 {: #quick-start }
 
-Orb とは、[再利用可能な構成]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化してみましょう。
+Orb とは、[再利用可能な構成]({{site.baseurl}}/2.0/orb-concepts/#orb-configuration-elements)をパッケージとしてまとめたものです。 Orb は [Orb レジストリ](https://circleci.com/developer/orbs)にパブリッシュしたり、複数の設定ファイルにインポートしたりすることができます。 類似した複数のプロジェクトを管理する場合に、Orb を使って構成を抽象化してみましょう。
 
 Orb のオーサリングを始める前に、まず [CircleCI の設定ファイル]({{site.baseurl}}/2.0/config-intro/)に関するページと、[パラメーター化された再利用可能な構成要素]({{site.baseurl}}/2.0/reusing-config/)のオーサリングに関するページの説明をよく理解することをお勧めします。
 
