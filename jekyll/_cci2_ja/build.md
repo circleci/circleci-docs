@@ -17,7 +17,7 @@ description: "CircleCI 2.0 のビルド環境の構成"
 {: class="table table-striped"}
 
 ## Docker
-{{ site.baseurl }}/ja/2.0/docker-compose/
+{: #docker }
 
 | ドキュメント                    | 説明                                                                             |
 | ------------------------- | ------------------------------------------------------------------------------ |
@@ -30,7 +30,7 @@ description: "CircleCI 2.0 のビルド環境の構成"
 {: class="table table-striped"}
 
 ## iOS と Mac
-{{ site.baseurl }}/ja/2.0/ios-codesigning/
+{: #ios-and-mac }
 
 | ドキュメント                     | 説明                                                            |
 | -------------------------- | ------------------------------------------------------------- |
