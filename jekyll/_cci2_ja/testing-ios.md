@@ -53,8 +53,8 @@ Running or testing Apple Silicon apps natively is currently not possible as Circ
 
  | Config   | Xcode Version              | macOS Version | macOS UI Testing Supported | Software Manifest                                                                                | Release Notes                                                                                       |
  | -------- | -------------------------- | ------------- | -------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
- | `12.1.0` | Xcode 12.1 (12A7403)       | 11.5.1        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5901/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-4-released/40876)                      |
- | `12.5.1` | Xcode 10.0 (10A255)        | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
+ | `12.1.0` | Xcode 12.1 (12A7403)       | 11.5.2        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5947/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-13-beta-5-released/40988)                      |
+ | `12.5.1` | Xcode 10.2.1 (10E1001)     | 11.4.0        | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v5775/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-5-1-released/40490)                         |
  | `12.4.0` | Xcode 12.4 (12D4e)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4519/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-4-release/38993)                            |
  | `12.3.0` | Xcode 12.3 (12C33)         | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4250/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-3-release/38570)                            |
  | `12.2.0` | Xcode 12.2 (12B45b)        | 10.15.5       | Yes                        | [Installed software](https://circle-macos-docs.s3.amazonaws.com/image-manifest/v4136/index.html) | [Release Notes](https://discuss.circleci.com/t/xcode-12-2-released/38156)                           |
@@ -344,9 +344,7 @@ To set the `current` version as the default:
 ```yaml
 # ...
 steps:
-  - run:
-      name: pre-start simulator
-      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+  - run: nvm install 12.22.3 && nvm alias default 12.22.3
 ```
 
 To revert to the `lts` release:
@@ -355,11 +353,8 @@ To revert to the `lts` release:
 # ...
 steps:
   - run:
-      name: Install cowsay
-      command: brew install cowsay
-  - run:
-      name: cowsay hi
-      command: cowsay Hi!
+      name: pre-start simulator
+      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 To install a specific version of NodeJS and use it:
@@ -367,7 +362,9 @@ To install a specific version of NodeJS and use it:
 ```yaml
 # ...
 steps:
-  - run: nvm install 12.22.3 && nvm alias default 12.22.3
+  - run:
+      name: pre-start simulator
+      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
 ```
 
 These images are also compatiable with the official [CircleCI Node orb](https://circleci.com/developer/orbs/orb/circleci/node), which helps to manage your NodeJS installation along with caching packages.
@@ -419,8 +416,11 @@ To pre-start the simulator, add the following to your `config.yml` file, assumin
 # ...
 steps:
   - run:
-      name: pre-start simulator
-      command: xcrun instruments -w "iPhone 11 Pro (13.3) [" || true
+      name: Install cowsay
+      command: brew install cowsay
+  - run:
+      name: cowsay hi
+      command: cowsay Hi!
 ```
 
 **Note:** the `[` character is necessary to uniquely identify the iPhone 7 simulator, as the phone + watch simulator is also present in the build image:
