@@ -40,11 +40,11 @@ CircleCI でダイナミック コンフィグの使用を開始するには、�
 
 Note: While the steps above will make the feature available, your static `config.yml` will continue to work as normal. This feature will not be used until you add the key `setup` with a value of `true` to that `config.yml`.
 
-When using dynamic configuration, at the end of the `setup workflow`, a `continue` job from the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) [`orb`]({{ site.baseurl }}/2.0/orb-intro/) must be called (**NOTE:** this does not apply if you desire to conditionally execute workflows or steps based on updates to specified files, as described in the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified) example).
+ダイナミック コンフィグを使用する場合には、`セットアップ` ワークフローの終わりに、[`continuation`](https://circleci.com/developer/ja/orbs/orb/circleci/continuation) [`Orb`]({{ site.baseurl }}/2.0/orb-intro/) の `continue` ジョブを呼び出す必要があります (**注:** 特定のファイルに対する更新に応じてワークフローやステップを実行する場合には当てはまりません。 詳しくは、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#execute-specific-workflows-or-steps-based-on-which-files-are-modified)」の例を参照)。
 
-For a basic example on how to use `setup workflows` for dynamic configuration generation, see the [Configuration Cookbook]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration). Included in the cookbook are other more in-depth examples, which will be updated as this feature matures.
+`セットアップ` ワークフローを使用してダイナミック コンフィグを利用する方法の基本的な例は、「[構成クックブック]({{ site.baseurl }}/2.0/configuration-cookbook/?section=examples-and-guides#dynamic-configuration)」を参照してください。 クックブックにはより詳細な例が掲載されており、この機能の成熟に合わせて更新される予定です。
 
-For a more in-depth explanation on the behind-the-scenes pipeline creation/continuation process when using CircleCI's dynamic configuration, see our [public GitHub repository](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts).
+CircleCI のダイナミック コンフィグを使用する際のパイプライン作成/続行プロセスのバックグラウンド処理に関する詳細は、[GitHub の公開リポジトリ](https://github.com/CircleCI-Public/api-preview-docs/blob/master/docs/setup-workflows.md#concepts)を参照してください。
 
 ## ダイナミック コンフィグに関するよくあるご質問
 {: #dynamic-config-faqs }
@@ -52,16 +52,16 @@ For a more in-depth explanation on the behind-the-scenes pipeline creation/conti
 ### パイプライン パラメーター
 {: #pipeline-parameters }
 
-**Q:** I thought pipeline parameters could only be used with the API?
+**Q:** パイプライン パラメーターは API でしか使用できないのではありませんか？
 
-**A:** Previously, this was true. But using our dynamic configuration feature, you can set pipeline parameters dynamically, before the pipeline is executed, triggered from both the API, or a webhook (A push event to your VCS).
+**A:** 以前はそうでした。 しかし、ダイナミック コンフィグ機能を使用すると、パイプライン パラメーターを動的に設定してから、パイプラインを実行したり、API または Web フック (VCS へのプッシュ イベント) からパイプラインをトリガーしたりすることができます。
 
 ### continuation Orb
 {: #the-continuation-orb }
 
-**Q:** What is the `continuation` orb?
+**Q:** `continuation` Orb とは何ですか？
 
-**A:** The `continuation` orb assists CircleCI users in managing the pipeline continuation process easily. The `continuation` orb wraps an API call to [`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) in an easy-to-use fashion. See the [`continuation`](https://circleci.com/developer/orbs/orb/circleci/continuation) orb documentation for more information.
+**A:** `continuation` Orb は、パイプラインの続行プロセスを簡単に管理できるように CircleCI ユーザーを支援する Orb です。 `continuation` Orb は、[`continuePipeline`](https://circleci.com/docs/api/v2/#operation/continuePipeline) に対する API 呼び出しを使いやすくラップします。 詳細については、[`continuation` Orb のドキュメント](https://circleci.com/developer/ja/orbs/orb/circleci/continuation)を参照してください。
 
 ## 次に読む
 {: #what-to-read-next }
