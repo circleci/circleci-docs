@@ -803,10 +803,6 @@ ja:
             link: ja/2.0/artifacts/
             i18n_name: アーティファクト
           - 
-            name: Insights
-            link: ja/2.0/insights/
-            i18n_name: インサイト
-          - 
             name: Collecting test data
             i18n_name: テストメタデータの収集
             link: ja/2.0/collect-test-data/
@@ -901,6 +897,10 @@ ja:
             i18n_name: インストール済ソフト
             hash: pre-installed-software
           - 
+            name: Android Machine Image
+            i18n_name: Androidマシンイメージ
+            link: 2.0/android-machine-image
+          - 
             name: Arm Resources
             i18n_name: Arm リソース
             link: ja/2.0/arm-resources/
@@ -951,6 +951,10 @@ ja:
             link: ja/2.0/runner-installation/
             i18n_name: ランナーのインストール
           - 
+            name: Runner on Kubernetes
+            link: 2.0/runner-on-kubernetes/
+            i18n_name: Kubernetes ランナー
+          - 
             name: Runner API
             link: ja/2.0/runner-api/
             i18n_name: ランナーAPI
@@ -981,9 +985,17 @@ ja:
             link: ja/2.0/reusing-config/
             i18n_name: 設定ファイル再利用(Orbs)
           - 
+            name: Dynamic Configuration
+            link: 2.0/dynamic-config
+            i18n_name: ダイナミック コンフィグ
+          - 
             name: Using the CircleCI CLI
-            i18n_name: CircleCI CLIの使用
             link: ja/2.0/local-cli/
+            i18n_name: CircleCI CLIの使用
+          - 
+            name: Using the CircleCI Configuration Editor
+            link: 2.0/config-editor/
+            i18n_name: 設定ファイル エディター
       - 
         name: Orbs
         link: ja/2.0/orb-intro/
@@ -1019,7 +1031,7 @@ ja:
             link: ja/2.0/orb-author-faq/
             i18n_name: OrbsオーサリングFAQ
           - 
-            name: Orbs Best Practices
+            name: Orb Authoring Best Practices
             link: ja/2.0/orbs-best-practices/
             i18n_name: Orbsベストプラクティス
           - 
@@ -1098,6 +1110,27 @@ ja:
             name: Using Credits
             link: ja/2.0/credits/
             i18n_name: クレジット使用
+      - 
+        name: security
+        link: 2.0/security/
+        i18n_name: セキュリティ
+        children:
+          - 
+            name: Security Features
+            link: 2.0/security/
+            i18n_name: セキュリティ機能
+          - 
+            name: Security Recommendations
+            link: 2.0/security-recommendations/
+            i18n_name: 推奨設定
+          - 
+            name: Protecting Against Supply Chain Attacks
+            link: 2.0/security-supply-chain/
+            i18n_name: サプライチェーン攻撃への対策
+          - 
+            name: IP Ranges
+            link: 2.0/ip-ranges/
+            i18n_name: IPアドレスの範囲
   - 
     name: Examples and Guides
     i18n_name: サンプル
@@ -1125,6 +1158,10 @@ ja:
           - 
             name: Ruby
             link: ja/2.0/language-ruby/
+          - 
+            name: Other supported languages
+            link: 2.0/tutorials
+            i18n_name: その他の言語
       - 
         name: Databases
         i18n_name: データベース
