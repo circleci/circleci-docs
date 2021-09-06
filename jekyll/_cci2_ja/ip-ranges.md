@@ -59,7 +59,7 @@ workflows:
 ## IP アドレスの範囲機能で割り当てられる IP アドレスのリスト
 {: #listofipaddressranges }
 
-*Last updated*: 2021-08-23
+*最終更新*: 2021 年 8 月 2 日
 
 IP アドレスの範囲機能を有効にしたジョブには、以下の IP アドレスのいずれかが関連付けられます。
 
@@ -114,15 +114,15 @@ IP アドレスの範囲機能を有効にしたジョブには、以下の IP �
 #### 2021-08-23
 * Added new items to the list of IP address ranges for core services.
 
-The machine-consumable lists have also been updated to reflect the new IP address ranges.
+**IP アドレス リストの変更予定** (最終更新: 2021 年 8 月 2 日): なし
 
 **マシン用の IP アドレス リスト:**
 
-- IP address ranges *for jobs*: [DNS A record](https://dnsjson.com/jobs.knownips.circleci.com/A.json).
+- *ジョブ用* IP アドレス範囲: [DNS A レコード](https://dnsjson.com/jobs.knownips.circleci.com/A.json)
 
-- IP address ranges *for core services*: [DNS A record](https://dnsjson.com/core.knownips.circleci.com/A.json).
+- *コア サービス用* IP アドレスの範囲: [DNS A レコード](https://dnsjson.com/core.knownips.circleci.com/A.json)
 
-- *All IP address ranges*:  [DNS A record](https://dnsjson.com/all.knownips.circleci.com/A.json).
+- *全 IP アドレス範囲*: [DNS A レコード](https://dnsjson.com/all.knownips.circleci.com/A.json)
 
 このリストは、プレビュー期間中に変更される可能性があります。 少なくとも週に一度は、更新がないか確認することをお勧めします。
 
@@ -142,9 +142,9 @@ IP アドレスの範囲機能を有効にしたジョブのネットワーク�
 
 IP アドレスの範囲機能が有効なジョブも含め、*すべてのジョブ* を CircleCI のプラットフォームで実行するマシンは、Amazon Web Services (AWS)、Google Cloud Platform (GCP)、CircleCI の macOS 用クラウドでホストされます。 CircleCI のトラフィックの送信元となるこれらのクラウド プロバイダーの IP アドレスを網羅したリストについては、各プロバイダーの IP アドレスの範囲を参照してください。 AWS と GCP では、この情報を公開するエンドポイントが提供されています。
 
-- [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI uses the *us-east-1* and *us-east-2* regions
-- [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI uses the *us-east1* and *us-central1* regions
-- CircleCI macOS Cloud:
+- [AWS](https://ip-ranges.amazonaws.com/ip-ranges.json): CircleCI は *us-east-1* および *us-east-2* リージョンを使用
+- [GCP](https://www.gstatic.com/ipranges/cloud.json): CircleCI は *us-east1* および *us-central1* リージョンを使用
+- CircleCI macOS 用クラウド:
   - 162.252.208.0/24
   - 162.252.209.0/24
   - 192.206.63.0/24
