@@ -14,19 +14,19 @@ version:
 ## 概要
 CircleCI に SSH 鍵を登録する必要があるケースは、以下の 2 パターンです。
 
-There are two reasons to add SSH keys to CircleCI:
+1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
 
 1. バージョン管理システムからコードをチェックアウトする
 2. 実行中のプロセスが他のサービスにアクセスできるようにする
 
-1 つ目の目的で SSH 鍵を登録する場合は、[GitHub と Bitbucket のインテグレーションに関するドキュメント]({{ site.baseurl }}/ja/2.0/gh-bb-integration/#プロジェクトで追加のプライベート-リポジトリのチェックアウトの有効化)を参照してください。
+それ以外の場合は、お使いのCircleCIのバージョン（クラウド／サーバー）に応じた以下の手順で、プロジェクトにSSHキーを追加してください。
 
 Otherwise, follow the steps below for the version of CircleCI you are using (Cloud/Server) to add an SSH key to your project.
 
 複数の SSH 鍵をまとめてコンテナに登録するには、設定ファイル内の適切な[ジョブ]({{ site.baseurl }}/ja/2.0/jobs-steps/)を選択して、[`add_ssh_keys`]({{ site.baseurl }}/ja/2.0/configuration-reference/#add_ssh_keys) という特別なステップを実行します。
 
 ## 手順
-**メモ:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録された鍵と一致している必要があります。
+{: #steps }
 
 **Note:** Since CircleCI cannot decrypt SSH keys, every new key must have an empty passphrase.
 
@@ -83,7 +83,7 @@ jobs:
             - "SO:ME:FIN:G:ER:PR:IN:T"
 ```
 
-**Note:** All fingerprints in the `fingerprints` list must correspond to keys that have been added through the CircleCI application.
+**メモ:** `fingerprints` リスト内のすべてのフィンガープリントが、CircleCI アプリケーションを通じて登録された鍵と一致している必要があります。
 
 ## ホスト名を指定せずに複数の鍵を登録する
 {: #adding-multiple-keys-with-blank-hostnames }
