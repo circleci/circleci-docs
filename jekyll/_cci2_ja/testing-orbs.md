@@ -39,7 +39,7 @@ test-pack:
 
 When you first make a commit to your orb repository, the [test-pack](https://github.com/CircleCI-Public/Orb-Project-Template/blob/43712ad367f2f3b06b2ae46e43ddf70bd3d83222/.circleci/config.yml#L40) workflow is triggered, which contains several jobs related to validating and testing your orb.
 
-Learn more about what is included in orb project config files in the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs) guide.
+Learn more about what is included in orb project config files in the [Orb Publishing Process]({{site.baseurl}}/ja/2.0/creating-orbs) guide.
 
 ### YAML lint
 {: #yaml-lint }
@@ -65,7 +65,7 @@ In the `test-pack` workflow, you will find the [shellcheck orb](https://circleci
 ## Unit testing
 {: #unit-testing }
 
-If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/2.0/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
+If you are taking advantage of the orb development kit's [`<<include(file)>>` file inclusion]({{site.baseurl}}/ja/2.0/orb-concepts/#file-include-syntax) feature and `src/scripts` directory to store and source your bash files, you can write true integration tests for your scripts.
 
 ![Unit testing BASH with BATS-Core]({{site.baseurl}}/assets/img/docs/bats_tests_example.png)
 
@@ -192,8 +192,6 @@ teardown() {
     # If an error is thrown anywhere in this test case, it will be considered a failure.
     # 標準的な POSIX テスト コマンドを使用して "Run_ShellCheck" 関数の機能をテストします。
 }
-}
-}
 ```
 
 ## Integration testing
@@ -223,7 +221,7 @@ You can see the definition of the [`integration-test-1` job](https://github.com/
 
 In your local version, `<orb-name>` will be replaced by the orb name you provided. This job offers a way for us to test our orb's jobs in a real CircleCI environment.
 
-Replace  the steps of this job with commands from your orb. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
+Replace the steps of this job with commands from your orb. You could include a sample project if needed or otherwise just run your orb's commands to ensure they do not result in a failure.
 
 ### Testing orb jobs
 {: #testing-orb-jobs }
@@ -245,12 +243,12 @@ integration-test_deploy:
 ## What's next?
 {: #whats-next }
 
-Once you have added new orb features, and created passing tests, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) guide for information on automatically publishing semantically versioned orbs.
+Once you have added new orb features, and created passing tests, it is time to publish your orb to the Orb Registry. View the [Orb Publishing Process]({{site.baseurl}}/ja/2.0/creating-orbs/) guide for information on automatically publishing semantically versioned orbs.
 
 ## See also
 {: #see-also }
 
-- CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)」を参照してください。
-- ワークフローやジョブで使用する Orb については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
-- 再利用可能な Orb、コマンド、パラメーター、Executor の例については、「[再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/)」を参照してください。
-- 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」を参照してください。
+- CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/ja/2.0/orb-concepts/)」を参照してください。
+- ワークフローやジョブで使用する Orb については、「[Orb のパブリッシュ]({{site.baseurl}}/ja/2.0/creating-orbs/)」を参照してください。
+- 再利用可能な Orb、コマンド、パラメーター、Executor の例については、「[再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/ja/2.0/reusing-config/)」を参照してください。
+- 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[CircleCI 構成クックブック]({{site.baseurl}}/ja/2.0/configuration-cookbook/)」を参照してください。
