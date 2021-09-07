@@ -19,7 +19,7 @@ version:
 ## Specifying a job's parallelism level
 {: #specifying-a-jobs-parallelism-level }
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/ja/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
 
@@ -38,14 +38,14 @@ jobs:
 
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
+For more information, see the [Configuring CircleCI]({{ site.baseurl }}/ja/2.0/configuration-reference/#parallelism) document.
 
 ## Using the CircleCI CLI to split tests
 {: #using-the-circleci-cli-to-split-tests }
 
 CircleCI supports automatic test allocation across your containers. The allocation is filename or classname based, depending on the requirements of the test-runner you are using. It requires the CircleCI CLI, which is automatically injected into your build at run-time.
 
-To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
+To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/ja/2.0/local-cli/) document.
 
 Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
 
@@ -100,7 +100,7 @@ The best way to optimize your test suite across a set of parallel executors is t
 
 ![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname, depending on the language you are using.
+On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname, depending on the language you are using.
 
 Note: If you do not use `store_test_results`, there will be no timing data available for splitting your tests.
 
@@ -116,7 +116,7 @@ The CLI expects both filenames and classnames to be present in the timing data p
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
+If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) step.
 
 Note: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 
@@ -289,7 +289,7 @@ Note: To follow along with the commands in the video below you will need to be [
 ## See also
 {: #see-also }
 
-[Using Containers]({{ site.baseurl }}/2.0/containers/)
+[Using Containers]({{ site.baseurl }}/ja/2.0/containers/)
 
 ## Other ways to split tests
 {: #other-ways-to-split-tests }
