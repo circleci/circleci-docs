@@ -47,7 +47,7 @@ This document describes various questions and technical issues that you may find
 
 * **Answer:** To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
 
-**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. So any other orbs, including partner orbs, and not certified._
+**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, and not certified._
 
 ## How to use the latest version of an orb
 {: #how-to-use-the-latest-version-of-an-orb }
