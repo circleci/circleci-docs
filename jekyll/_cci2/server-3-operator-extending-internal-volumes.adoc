@@ -154,4 +154,4 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme1n1    9.8G  441M  9.3G   5% /bitnami/mongodb
 ----
 
-As we can see, the size of our directories has been increased.
+As we can see, the size of our mounted directories has been increased.
