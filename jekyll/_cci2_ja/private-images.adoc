@@ -94,6 +94,10 @@ jobs:
           docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD がデフォルト値です。
       - docker/pull:
           images: 'circleci/node:latest'
+          存在する場合、自動的に使用されます。
+          docker-password: DOCKERHUB_PASSWORD  # DOCKER_PASSWORD がデフォルト値です。
+      - docker/pull:
+          images: 'circleci/node:latest'
 ----
 
 
