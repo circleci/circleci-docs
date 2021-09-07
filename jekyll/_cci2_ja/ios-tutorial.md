@@ -38,7 +38,7 @@ iOS プロジェクトでは、fastlane Scan を使用して以下のように�
 ## テストの実行
 {: #running-tests }
 
-[fastlane](https://fastlane.tools) の [gym](https://github.com/fastlane/fastlane/tree/master/gym) と [deliver](https://github.com/fastlane/fastlane/tree/master/deliver) を使用して CircleCI でアプリケーションをデプロイするには、識別子、リリースを実行するブランチまたはパターン、および複数のコマンドを指定してリリースを実行します。
+iOSプロジェクトでは、以下のようにFastlane Scanでテストを実行することができます。
 
 ```
 jobs:

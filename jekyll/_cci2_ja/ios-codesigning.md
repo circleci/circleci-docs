@@ -85,7 +85,9 @@ end
 {: #adding-a-user-key-to-the-circleci-project }
 {:.no_toc}
 
-**メモ:** この手順により、[Authorize with GitHub (GitHub で承認)] ボタンをクリックするユーザーと同じ GitHub 権限が CircleCI プロジェクトに付与されます。
+プロジェクト設定で **[Permissions (権限)] -> [Checkout SSH Keys (SSH 鍵のチェック アウト)] -> [Add user key (ユーザー キーの追加)]** に移動して、[Authorize with GitHub (GitHub で承認)] ボタンをクリックします。
+
+**Note:** This action will give the CircleCI project the same GitHub permissions as the user who will be clicking the *Authorize with GitHub* button.
 
 プロジェクト設定で **[Permissions (権限)] -> [Checkout SSH Keys (SSH 鍵のチェック アウト)] -> [Add user key (ユーザー キーの追加)]** に移動して、[Authorize with GitHub (GitHub で承認)] ボタンをクリックします。
 
@@ -93,7 +95,7 @@ end
 * On the Project Settings page, click on SSH Keys (vertical menu on the left).
 * Click the *Add User Key* button and follow the steps to authorize CircleCI
 
-**Note:** This action will give the CircleCI project the same GitHub permissions as the user who will be clicking the *Authorize with GitHub* button.
+**メモ:** この手順により、[Authorize with GitHub (GitHub で承認)] ボタンをクリックするユーザーと同じ GitHub 権限が CircleCI プロジェクトに付与されます。
 
 `Matchfile` では、`git_url` は **HTTPS** URL ではなく、**SSH** URL (`git@github.com:...` 形式) にする必要があります。 SSH URL 形式にせずに match を使用すると、認証エラーが発生する可能性があります。 たとえば、以下のようになります。
 
@@ -103,7 +105,9 @@ app_identifier("tools.fastlane.app")
 username("user@fastlane.tools")
 ```
 
-{: #adding-the-match-passphrase-to-the-encrypted-environment-variables }
+GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。
+
+GitHub リポジトリに格納してあるキーとプロファイルを fastlane match で復号化できるようにするには、match のセットアップ手順で設定した暗号化パスフレーズを CircleCI プロジェクトの暗号化された環境変数に追加する必要があります。
 
 GitHub から証明書とキーを fastlane match にダウンロードするには、プロジェクト リポジトリと証明書リポジトリ (またはキー リポジトリ) の両方にアクセス権を持つユーザー キーを CircleCI プロジェクトに追加する必要があります。
 

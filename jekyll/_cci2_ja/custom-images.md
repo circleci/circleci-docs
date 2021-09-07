@@ -28,9 +28,9 @@ CircleCI では Docker がサポートされています。 Docker を使用す�
 **メモ:** デフォルトでは、Docker イメージのビルド時にエントリポイントは維持されません。 詳細については、「[エントリポイントの追加](#エントリポイントの追加)」を参照してください。
 
 ## CircleCI Dockerfile Wizard
-その方法については、[CircleCI Public の GitHub リポジトリ `dockerfile-wizard`](https://github.com/circleci-public/dockerfile-wizard) を参照してください。
+{: #circleci-dockerfile-wizard }
 
-`docker build` コマンドの詳細については、[こちら](https://docs.docker.com/engine/reference/commandline/build/)を参照してください。
+Refer to the [`dockerfile-wizard` GitHub repository of CircleCI Public](https://github.com/circleci-public/dockerfile-wizard) for instructions to clone and use the wizard to create a Dockerfile to generate your custom image without installing Docker.
 
 ## カスタム イメージの手動作成
 {: #creating-a-custom-image-manually }
@@ -44,7 +44,7 @@ CircleCI では Docker がサポートされています。 Docker を使用す�
 - [Docker のインストール](https://docs.docker.com/install/)が完了し、動作していること。 詳細については、Docker の[入門ドキュメント](https://docs.docker.com/get-started/)を参照してください。
 
 ### `Dockerfile` の作成
-コンパイルが終了したら、Docker 出力から sha を取り出し、以下のように実行します。
+{: #creating-a-dockerfile }
 {:.no_toc}
 
 カスタム イメージを作成するには、[`Dockerfile` を作成](https://docs.docker.com/get-started/part2/#define-a-container-with-dockerfile)する必要があります。 これは、Docker がイメージの収集に使用するコマンドが格納されたテキスト ドキュメントです。 [この Docker デモ プロジェクト](https://github.com/CircleCI-Public/circleci-demo-docker/tree/master/.circleci/images/primary)に示されているように、`Dockerfile` はできるだけ `.circleci/images` フォルダーに保存してください。
@@ -55,9 +55,9 @@ CircleCI では Docker がサポートされています。 Docker を使用す�
 
 カスタム イメージを作成する前に、カスタム イメージの拡張元となる別のイメージを選択する必要があります。 [Docker Hub](https://hub.docker.com/explore/) には、ほぼすべての一般的な言語とフレームワーク向けに、正式なビルド済みイメージが用意されています。 特定の言語やフレームワークごとに、多くのイメージ バリアントから選択できます。 これらのバリアントは、[Docker タグ](https://docs.docker.com/engine/reference/commandline/tag/)で指定されます。
 
-`Dockerfile` に、基本イメージを拡張します。
+例えば、[公式Alpineイメージ](https://hub.docker.com/_/alpine/)のバージョン3.5を使用したい場合、フルイメージ名は`alpine:3.5`となります。
 
-`Dockerfile` で必要なツールをすべて指定したら、イメージをビルドできます。
+あなたのDockerfileで、[`FROM`命令](https://docs.docker.com/engine/reference/builder/#from)を使ってベースイメージを拡張します。
 
 ```Dockerfile
 FROM golang:1.8.0
@@ -78,7 +78,8 @@ RUN go get github.com/jstemmer/go-junit-report
 {: #required-tools-for-primary-containers }
 {:.no_toc}
 
-これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
+In order to be used as a primary container on CircleCI,
+a custom Docker image must have the following tools installed:
 
 - bash (most likely already installed or available via your package manager)
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
@@ -87,7 +88,7 @@ RUN go get github.com/jstemmer/go-junit-report
 - [gzip](http://www.gzip.org/)
 - [ca-certificates](https://packages.debian.org/sid/ca-certificates)
 
-パッケージ マネージャーに存在しないファイルとディレクトリを追加するには、[`ADD` 命令](https://docs.docker.com/engine/reference/builder/#add)を使用します。
+これらのツールがインストールされていないと、一部の CircleCI サービスが動作しません。
 
 **メモ:** パッケージ マネージャーと共にこれらのツールをインストールしない場合は、`RUN` 命令の代わりに `ADD` 命令を使用する必要があります (以下を参照)。
 
@@ -190,6 +191,9 @@ jobs:
   build:
     docker:
       - image: circleci/cci-demo-docker-primary:0.0.1
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 ```
 
 If you have any questions, head over to our [community forum](https://discuss.circleci.com/) for support from us and other users.

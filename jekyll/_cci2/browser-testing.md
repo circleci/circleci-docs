@@ -111,7 +111,7 @@ orbs:
 jobs:
   test-cypress:
     docker:
-      - image: circleci/node:12.21
+      - image: cimg/node:lts
     steps:
       - checkout
       - setup_remote_docker:

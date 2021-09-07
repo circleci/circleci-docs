@@ -59,7 +59,7 @@ workflows:
 ## List of IP address ranges associated with the IP ranges feature
 {: #listofipaddressranges }
 
-*Last updated*: 08/02/2021
+*Last updated*: 2021-08-23
 
 Jobs that have been opted into the IP ranges feature will have one of the following IP address ranges associated with them:
 
@@ -100,13 +100,21 @@ IP address ranges for core services (used to trigger jobs, exchange information 
 
 - 18.214.70.5
 - 52.20.166.242
-- 35.174.249.131
 - 18.214.156.84
 - 54.236.156.101
+- 52.22.215.219
+- 52.206.105.184
+- 52.6.77.249 
+- 34.197.216.176
+- 35.174.249.131
 - 3.210.128.175
 
-**Upcoming Changes to list of IP address ranges** (Last Updated: 08/02/2021):
-None
+### Upcoming changes to the list of IP address ranges
+
+#### 2021-08-23
+* Added new items to the list of IP address ranges for core services.
+
+The machine-consumable lists have also been updated to reflect the new IP address ranges.
 
 **Machine-consumable lists can be found below:**
 

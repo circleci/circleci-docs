@@ -104,7 +104,8 @@ Docker レイヤーキャッシュは、[`machine` Executor]({{ site.baseurl }}/
 
 ``` YAML
 machine:
-  docker_layer_caching: true    # デフォルトは false
+  image: ubuntu-2004:202104-01  # any available image
+  docker_layer_caching: true    # default - false
 ```
 
 ## 例
@@ -182,6 +183,7 @@ version: 2
 jobs:
   build_elixir:
     machine:
+      image: ubuntu-2004:202104-01
       docker_layer_caching: true
     steps:
       - checkout

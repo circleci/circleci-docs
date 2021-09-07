@@ -56,6 +56,7 @@ With a *Supported* platform, users receive the following:
 * macOS 11.2+ (Apple M1)
 * Docker (x86_64)
 * Kubernetes (x86_64)
+* Windows Server 2019, 2016 (x86_64)
 
 === Preview
 
@@ -73,7 +74,6 @@ With a *Preview* platform, users receive the following:
 * Additional Linux distributions - RHEL, SUSE, Debian, etc. (x86_64 or ARM64)
 * Docker (ARM64)
 * Kubernetes (ARM64)
-* Windows
 
 NOTE: Given the active development of Preview CircleCI runners, please https://circleci.com/contact/[contact us] if you
 have questions around support for your environment and use-case(s). We also invite you to https://circleci.canny.io/cloud-feature-requests[share feedback]
@@ -98,6 +98,12 @@ The runner consists of two components: the launch agent and the task agent.
 * task agent (task-agent) - handles running a task retrieved and configured by the launch agent.
 
 The system has been designed to allow administrators to configure the task-agent to run with a lower level of privileges than the launch-agent. Any user who is able to execute a job will be able to gain the same privileges as task-agent. The instructions below are the recommended deployment which follows this approach (launch agent will run as root, but task agent will run as circleci).
+
+== Debugging with SSH
+
+CircleCI runner supports rerunning a job with SSH for debugging purposes. Instructions on using this feature can be found at <<ssh-access-jobs#,Debugging with SSH>>.
+
+NOTE: The 'Rerun job with SSH' feature is disabled by default. To enable this feature, see xref:runner-installation.adoc#runner-ssh-advertise_addr[Installing the CircleCI Runner].
 
 == Public repositories
 
@@ -138,7 +144,6 @@ NOTE: A namespace is a unique identifier claimed by a user or organization. Each
 
 Almost all standard CircleCI features are available for use with runner jobs, but at present a few features are not yet supported. If these features are important for you to make use of runner jobs, please let us know via the relevant canny page.
 
-- https://circleci.canny.io/runner-feature-requests/p/support-rerun-with-ssh-on-runner[Rerun with SSH]
 - https://circleci.canny.io/runner-feature-requests/p/support-test-splitting-on-self-hosted-runners[Test Splitting]
 - https://circleci.canny.io/runner-feature-requests/p/support-addsshkey-on-self-hosted-runners[`add_ssh_keys`]
 

@@ -80,6 +80,8 @@ Webhooks are set up on a per-project basis. To get started:
 
 <sup>1</sup>Only leave this unchecked for testing purposes.
 
+**Note: There is a limit of 5 Webhooks per project.**
+
 ## Payload signature
 {: #payload-signature}
 
@@ -266,7 +268,6 @@ can also be triggered manually through the API.
 | Field    | Always present? | Description                                                         |
 |----------|-----------------|---------------------------------------------------------------------|
 | type     | yes             | How this pipeline was triggered (e.g. "webhook", "api", "schedule") |
-| actor.id | No              | The user who triggered the pipeline, if there is one                |
 {: class="table table-striped"}
 
 
@@ -293,3 +294,136 @@ isn't associated with a git commit.
 | branch                 | no              | Branch being built                                                                                                 |
 | tag                    | no              | Tag being built (mutually exclusive with "branch")                                                                 |
 {: class="table table-striped"}
+
+
+## Sample webhook payloads
+{: #sample-webhook-payloads }
+
+### workflow-completed
+{: #workflow-completed }
+
+```json
+{
+  "id": "3888f21b-eaa7-38e3-8f3d-75a63bba8895",
+  "type": "workflow-completed",
+  "happened_at": "2021-09-01T22:49:34.317Z",
+  "webhook": {
+    "id": "cf8c4fdd-0587-4da1-b4ca-4846e9640af9",
+    "name": "Sample Webhook"
+  },
+  "project": {
+    "id": "84996744-a854-4f5e-aea3-04e2851dc1d2",
+    "name": "webhook-service",
+    "slug": "github/circleci/webhook-service"
+  },
+  "organization": {
+    "id": "f22b6566-597d-46d5-ba74-99ef5bb3d85c",
+    "name": "circleci"
+  }
+  "workflow": {
+    "id": "fda08377-fe7e-46b1-8992-3a7aaecac9c3",
+    "name": "build-test-deploy",
+    "created_at": "2021-09-01T22:49:03.616Z",
+    "stopped_at": "2021-09-01T22:49:34.170Z",
+    "url": "https://app.circleci.com/pipelines/github/circleci/webhook-service/130/workflows/fda08377-fe7e-46b1-8992-3a7aaecac9c3",
+    "status": "success"
+  },
+  "pipeline": {
+    "id": "1285fe1d-d3a6-44fc-8886-8979558254c4",
+    "number": 130,
+    "created_at": "2021-09-01T22:49:03.544Z",
+    "trigger": {
+      "type": "webhook"
+    },
+    "vcs": {
+      "provider_name": "github",
+      "origin_repository_url": "https://github.com/circleci/webhook-service",
+      "target_repository_url": "https://github.com/circleci/webhook-service",
+      "revision": "1dc6aa69429bff4806ad6afe58d3d8f57e25973e",
+      "commit": {
+        "subject": "Description of change",
+        "body": "More details about the change",
+        "author": {
+          "name": "Author Name",
+          "email": "author.email@example.com"
+        },
+        "authored_at": "2021-09-01T22:48:53Z",
+        "committer": {
+          "name": "Committer Name",
+          "email": "committer.email@example.com"
+        },
+        "committed_at": "2021-09-01T22:48:53Z"
+      },
+      "branch": "main"
+    }
+  },
+}
+```
+
+### job-completed
+{: #job-completed }
+
+```json
+{
+  "id": "8bd71c28-4969-3677-8940-3e3a61c46660",
+  "type": "job-completed",
+  "happened_at": "2021-09-01T22:49:34.279Z",
+  "webhook": {
+    "id": "cf8c4fdd-0587-4da1-b4ca-4846e9640af9",
+    "name": "Sample Webhook"
+  },
+  "project": {
+    "id": "84996744-a854-4f5e-aea3-04e2851dc1d2",
+    "name": "webhook-service",
+    "slug": "github/circleci/webhook-service"
+  },
+  "organization": {
+    "id": "f22b6566-597d-46d5-ba74-99ef5bb3d85c",
+    "name": "circleci"
+  },
+  "pipeline": {
+    "id": "1285fe1d-d3a6-44fc-8886-8979558254c4",
+    "number": 130,
+    "created_at": "2021-09-01T22:49:03.544Z",
+    "trigger": {
+      "type": "webhook"
+    },
+    "vcs": {
+      "provider_name": "github",
+      "origin_repository_url": "https://github.com/circleci/webhook-service",
+      "target_repository_url": "https://github.com/circleci/webhook-service",
+      "revision": "1dc6aa69429bff4806ad6afe58d3d8f57e25973e",
+      "commit": {
+        "subject": "Description of change",
+        "body": "More details about the change",
+        "author": {
+          "name": "Author Name",
+          "email": "author.email@example.com"
+        },
+        "authored_at": "2021-09-01T22:48:53Z",
+        "committer": {
+          "name": "Committer Name",
+          "email": "committer.email@example.com"
+        },
+        "committed_at": "2021-09-01T22:48:53Z"
+      },
+      "branch": "main"
+    }
+  },
+  "workflow": {
+    "id": "fda08377-fe7e-46b1-8992-3a7aaecac9c3",
+    "name": "welcome",
+    "created_at": "2021-09-01T22:49:03.616Z",
+    "stopped_at": "2021-09-01T22:49:34.170Z",
+    "url": "https://app.circleci.com/pipelines/github/circleci/webhook-service/130/workflows/fda08377-fe7e-46b1-8992-3a7aaecac9c3"
+  },
+  "job": {
+    "id": "8b91f9a8-7975-4e60-916c-f0152ccbc937",
+    "name": "test",
+    "started_at": "2021-09-01T22:49:28.841Z",
+    "stopped_at": "2021-09-01T22:49:34.170Z",
+    "status": "success",
+    "number": 136
+  }
+}
+```
