@@ -520,7 +520,7 @@ The most flexible way to customize your build is to modify the CircleCI configur
 ## Using Multiple Executor Types (macOS + Docker)
 {: #using-multiple-executor-types-macos-docker }
 
-It is possible to use multiple [executor types]({{ site.baseurl }}/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
+It is possible to use multiple [executor types](https://circleci.com/docs/2.0/executor-types/) in the same workflow. In the following example each push of an iOS project will be built on macOS, and additional iOS tools ([SwiftLint](https://github.com/realm/SwiftLint) and [Danger](https://github.com/danger/danger)) will be run in Docker.
 
 ```yaml
 version: 2.1
