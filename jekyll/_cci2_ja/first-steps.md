@@ -23,6 +23,6 @@ version:
 5. CircleCI アプリケーションの [Project Setup (プロジェクト セットアップ)] ページから、プロジェクト コードのビルドを開始します。
 
 ## 次のステップ
-「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照し、プロジェクトの基礎、Org の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
+{: #next-steps }
 
-Go to [Hello World]({{ site.baseurl }}/2.0/hello-world/) to learn about the basics of Projects, switching Orgs, and the [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file that determines your build environment and automates your tests.
+「[Hello World]({{ site.baseurl }}/ja/2.0/hello-world/)」を参照し、プロジェクトの基礎、Org の切り替え、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル (ビルド環境を決定付け、テストを自動化するための設定ファイル) について学習します。
