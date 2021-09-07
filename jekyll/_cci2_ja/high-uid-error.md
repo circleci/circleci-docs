@@ -36,13 +36,13 @@ Docker はコンテナを起動するとイメージをプルし、そのイメ�
 ## 解決策
 {: #solution }
 
-以下の例では、[circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid) 内で `find` コマンドを使用して無効なファイルを探します。
+このエラーを修正するには、ファイルの UID または GID を更新してからイメージを再作成する必要があります。
 
-If you are not the image maintainer, congratulations: it's not your responsibility. イメージの保守担当者に連絡して、エラーを報告してください。
+イメージの保守担当者でないと、この作業には対応できません。 イメージの保守担当者に連絡して、エラーを報告してください。
 
 イメージの保守担当者は、上位の UID または GID でファイルを特定し、修正してください。 まず、エラー メッセージから上位の UID または GID を確認します。 ドキュメントの冒頭で示した例では、`1000000` が上位の UID または GID の値です。 次にコンテナを起動し、無効な値が返されるファイルを特定します。
 
-上記の手順を行った後もさらにエラーが発生する場合には、[Microsoft フォーラムの投稿](https://social.msdn.microsoft.com/Forums/vstudio/en-US/f034bd0a-00e1-4a11-a716-8cf1112a5db4/container-id-xxxxxxx-cannot-be-mapped-to-a-host-id?forum=windowsazurewebsitespreview)を参照してください。
+以下の例では、[circleci/doc-highid](https://hub.docker.com/r/circleci/doc-highid) 内で `find` コマンドを使用して無効なファイルを探します。
 
 ```bash
 # コンテナ内でシェルを開始します
@@ -64,4 +64,4 @@ $ ls -ln file-with-high-id
 ## 関連項目
 {: #see-also }
 
-Refer to the following [Microsoft forum post](https://social.msdn.microsoft.com/Forums/vstudio/en-US/f034bd0a-00e1-4a11-a716-8cf1112a5db4/container-id-xxxxxxx-cannot-be-mapped-to-a-host-id?forum=windowsazurewebsitespreview) for additional links if you get more errors after performing this procedure.
+上記の手順を行った後もさらにエラーが発生する場合には、[Microsoft フォーラムの投稿](https://social.msdn.microsoft.com/Forums/vstudio/en-US/f034bd0a-00e1-4a11-a716-8cf1112a5db4/container-id-xxxxxxx-cannot-be-mapped-to-a-host-id?forum=windowsazurewebsitespreview)を参照してください。
