@@ -18,7 +18,7 @@ _Persistent Volume Expansion of MongoDB and Postgres is available for server v3.
 
 If you have choosen to deploy either of the CircleCI databases (MongoDB or Postgres) within the cluster, as opposed externally provisoning these databases, then there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims or PVCs. These PVCs request storage space based on what has been made available to the nodes in your cluster. 
 
-In this document, we will run through the steps to increate the sizes of the persistent volumes used by your internally deployed databases, by increasing the size of our persistent volume claims. This operation should not require any downtime.
+In this document, we will run through the steps to increase the sizes of the persistent volumes used by your internally deployed databases, by increasing the size of our persistent volume claims. This operation should not require any downtime.
 
 NOTE: Expanding persistent volumes does not affect the size of the attached storage of your nodes. Expanding node storage will remain within the limitations of your cloud provider. Please refer to the docs of your chosen cloud provider for details on how to expand the storage attached to your cluster's nodes.
 
