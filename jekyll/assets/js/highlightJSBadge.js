@@ -33,7 +33,7 @@ window.onload = () => {
             // the text that goes onto the clipboard. Passes text and code root element (hljs).
             // Example:  function(text, codeElement) { return text + " $$$"; }
             onBeforeCodeCopied: function(text) {
-              window.AnalyticsClient.trackAction('copy-code-clicked', {
+              window.AnalyticsClient.trackAction('docs-copy-code-clicked', {
                 page: location.pathname
               });
               return text;
