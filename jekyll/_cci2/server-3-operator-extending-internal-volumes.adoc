@@ -155,3 +155,18 @@ Filesystem      Size  Used Avail Use% Mounted on
 ----
 
 As we can see, the size of our directories has been increased.
+
+
+NOTE: If you find that after following these procedures, the disk size allocated to your data directories have not increased, then you may need to restart your database pods. This however will cause some downtime of 1-5mins as the databases restart. You may try the commands below to restart your databases
+
+For postgres
+[source,bash]
+----
+circleci-user ~ $ kubectl rollout restart sts postgresql
+----
+
+For mongodb
+[source,bash]
+----
+circleci-user ~ $ kubectl rollout restart sts mongodb
+----
