@@ -2,15 +2,15 @@
 // this improves the visual experience while interacting with the docs site
 (function () {
   window.addEventListener('load', function () {
-    const footer = document.querySelector('.footer');
-    const sidebar = document.querySelector('.sidebar');
-    const defaultSectionName = 'getting-started';
-    const mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
-    const mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
+    var footer = document.querySelector('.footer');
+    var sidebar = document.querySelector('.sidebar');
+    var defaultSectionName = 'getting-started';
+    var mobileSidebar = document.querySelector('.sidebar-mobile-wrapper');
+    var mobileSidebarDefault = mobileSidebar.querySelector('[data-id="' + defaultSectionName + '"]');
 
     // activate default section, if nothing else is selected
-    let activeSection = defaultSectionName;
-    const activePage = sidebar.querySelector('.active');
+    var activeSection = defaultSectionName;
+    var activePage = sidebar.querySelector('.active');
     if (activePage) { // find section for active page
       activeSection = activePage.getAttribute('data-section');
     }
