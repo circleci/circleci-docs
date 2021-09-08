@@ -22,7 +22,7 @@ Orb のオーサリングを始める前に、まず [CircleCI の設定ファ�
 
 Orb は、以下の 3 つの要素で構成されます。
 
-* [コマンド]({{site.baseurl}/ja}/2.0/orb-concepts/#commands)
+* [コマンド]({{site.baseurl}}/ja/2.0/orb-concepts/#commands)
 * [ジョブ]({{site.baseurl}}/ja/2.0/orb-concepts/#executors)
 * [Executor]({{site.baseurl}}/ja/2.0/orb-concepts/#jobs)
 
