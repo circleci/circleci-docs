@@ -20,26 +20,26 @@ CircleCI が提供しているビルド済みイメージの概要と、言語�
 {: #overview }
 {:.no_toc}
 
-CircleCI ではすぐに使える Docker イメージを多数提供しています。 一般に、これらのイメージは正式な Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれます。 This document will provide an overview of best practices when using a convenience image. Please note that we advise using the **next-generation** images convenience images rather than **legacy images** (as explained below).
+CircleCI ではすぐに使える Docker イメージを多数提供しています。 一般に、これらのイメージは正式な Docker イメージの拡張版で、特に CI/CD に便利なツールが含まれます。 ここでは、ビルド済み Docker イメージを使用する際のベストプラクティスを紹介します。 **従来のイメージ**ではなく、**次世代のビルド済み Docker イメージ**を使用することをお勧めします（以下の説明をご覧ください）。
 
-If you would like to directly search for an image, you can browse CircleCI Docker images in the following locations:
+イメージを直接検索したい場合は、以下の場所から CircleCI の Docker イメージを閲覧することができます。
 
-- Visit the [Developer Hub](https://circleci.com/developer/images/) for links to all the repositories for each next-gen image.
-- Visit the `circleci-images` GitHub repo for the [source code for the legacy CircleCI Docker images](https://github.com/circleci/circleci-images).
-- All CircleCI pre-built images are available for browsing on [Docker Hub](https://hub.docker.com/search?q=circleci&type=image).
+- 各次世代イメージのリポジトリへのリンクについては、[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
+- GitHub の `circleci-images` リポジトリには、[従来の Docker イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。
+- CircleCI のすべてのビルド済みイメージは、[Docker ハブ](https://hub.docker.com/search?q=circleci&type=image) から入手できます。
 
-_**メモ:** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
+_**注: ** CircleCI は、バグの修正または機能の強化のために、スケジュールに沿ってイメージに変更を加えることがあります。 こうした変更によって、CircleCI ジョブ内でのイメージの動作に影響が生じる可能性があります。 メンテナンスのスケジュールは、[Discuss ページで **convenience-images** タグを付けて事前に通知](https://discuss.circleci.com/tags/convenience-images)されますので、定期的にご確認ください。_
 
 ### 例
 {: #examples }
 {:.no_toc}
 
-Refer to the [Tutorials]({{ site.baseurl }}/2.0/tutorials/) for examples of using pre-built CircleCI Docker Images in a demo application.
+ビルド済み CircleCI Docker イメージのデモ アプリケーションでの使用例については、[チュートリアル]({{ site.baseurl }}/2.0/tutorials/)を参照してください。
 
-## 次世代コンビニエンス イメージ
+## 次世代ビルド済み Docker イメージ
 {: #next-generation-convenience-images }
 
-このセクションで紹介する次世代のコンビニエンス イメージは、CI、効率性、確定的動作を念頭に置いてゼロから設計されました。 注目ポイントは次のとおりです。
+このセクションで紹介する次世代のビルド済み Docker イメージは、継続的インテグレーション(CI)、効率性、確定的動作を念頭に置いてゼロから設計されました。 以下のような利点があります。
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代イメージは概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
