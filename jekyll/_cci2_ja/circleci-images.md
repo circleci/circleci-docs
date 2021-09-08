@@ -24,7 +24,7 @@ CircleCI では、すぐに使える Docker イメージを多数提供してい
 
 イメージを直接検索したい場合は、以下の場所から CircleCI の Docker イメージを閲覧することができます。
 
-- 各次世代イメージのリポジトリへのリンクについては、[Developer ハブ](https://circleci.com/developer/ja/images/)を参照してください。
+- 各次世代イメージのリポジトリへのリンクについては、[ディベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
 - GitHub の `circleci-images` リポジトリには、[従来の Docker イメージそれぞれのソース コード](https://github.com/circleci/circleci-images)も用意しています。
 - CircleCI のすべてのビルド済みイメージは、[Docker ハブ](https://hub.docker.com/search?q=circleci&type=image) から入手できます。
 
@@ -64,9 +64,9 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 **関連資料**
 
-このイメージの設定ファイルのサンプルは、[デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base)を、ソースコードとドキュメント[GitHub](https://github.com/CircleCI-Public/cimg-base)を参照してください。　
+このイメージの設定ファイルのサンプルは[デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base)を、ソースコードとドキュメントは[GitHub](https://github.com/CircleCI-Public/cimg-base)を参照してください。　
 
-以下の例では、上記の `ベースの` イメージをベースにした、次世代のGoイメージを使用する方法を示しています。
+以下の例では、上記の `ベースのイメージ`をベースにした、次世代のGoイメージを使用する方法を示しています。
 
 ```yaml
   myjob:
@@ -75,13 +75,13 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 ```
 
-これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間が `cimg` であることにご注意ください。 他の言語の次世代イメージは、[以下](#next-gen-language-images)をご覧ください。
+これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker ハブ の名前空間が `cimg` であることにご注意ください。 他の言語の次世代のイメージは、[以下](#next-gen-language-images)をご覧ください。
 
 
 ## ベストプラクティス
 {: #best-practices }
 
-以降のセクションで扱う次世代コンビニエンス イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。そのため、可能な限り最も当てはまるイメージを使用することをお勧めします。 それにより、いずれかのアップストリーム イメージによって意図しない変更がイメージに組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
+以降のセクションで扱う次世代のビルド済み Docker イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。そのため、可能な限り最も当てはまるイメージを使用することをお勧めします。 そうすることで、いずれかのアップストリーム イメージによって意図しない変更がイメージに組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
 
 つまり、アップストリームからの想定外の変更を防止するには、タグを変更するまではアップストリーム版の変更に伴ってそのイメージが変更されてしまわないよう、`cimg/ruby:2.4-node` と記述するのではなく、そのコンテナのさらに細かいバージョンを指定します。
 
@@ -97,7 +97,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティ パッチ用の更新を取得できない可能性があります。
 </div>
 
-**注:** 従来のイメージを使用していてタグが指定されていない場合、Docker は `最新のタグ`を適用します。 `最新のタグ/code> が参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。</p>
+**注:** 従来のイメージを使用していてタグが指定されていない場合、Docker は `最新のタグ`を適用します。 `最新のタグ/code> が参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確なイメージタグを挿入するのがおすすめです。</p>
 
 <p spaces-before="0"><strong x-id="1">注:</strong> Node.js バリアントの Docker イメージ (<code>-node` で終わるタグ) に対しては、Node.js の LTS リリースがプリインストールされています。 独自に特定のバージョンの Node.js/NPM を使用する場合は、`.circleci/config.yml` 内の `実行` ステップで設定できます。 Ruby イメージと共に特定のバージョンの Node.js をインストールする例については、以下を参照してください。
 
@@ -147,7 +147,7 @@ CircleCI のビルド済み Docker イメージは、**言語**イメージと**
 
 次世代の言語イメージは、従来のものと同様、一般的なプログラミング言語に対応するビルド済み Docker イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `Docker` キー配下の最初の行に挿入します。 そうすることで、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)になります。
 
-CircleCI は、以下の言語に対応する次世代イメージを開発しています。
+CircleCI は、以下の言語に対応する次世代のイメージを開発しています。
 
 - [Elixir](https://circleci.com/developer/images/image/cimg/elixir)
 - [Go (Golang)](https://circleci.com/developer/images/image/cimg/go)
@@ -158,15 +158,15 @@ CircleCI は、以下の言語に対応する次世代イメージを開発し�
 - [Ruby](https://circleci.com/developer/images/image/cimg/ruby)
 - [Rust](https://circleci.com/developer/images/image/cimg/rust)
 
-上記以外の言語のイメージが必要な場合は、CircleCI の[アイデア ボード](https://ideas.circleci.com/)にリクエストしてください。 まず、リクエストの前にアイデア ボード内を検索し、 同じアイデアがすでに投稿されている場合は、そのアイデアに投票してください。 まだ投稿されていなければ、カテゴリを 「イメージ」に設定してアイデアを投稿してください。 その後、そのアイデアを友人や同僚、フォーラム、その他のコミュニティに通知して、票を集めることをお勧めします。
+上記以外の言語のイメージが必要な場合は、CircleCI の[アイデア ボード](https://ideas.circleci.com/)にリクエストしてください。 まず、リクエストの前にアイデア ボード内を検索し、 同じアイデアがすでに投稿されている場合は、そのアイデアに投票してください。 まだ投稿されていなければ、カテゴリを 「イメージ」に設定してアイデアを投稿してください。 その後、そのアイデアを友人や同僚、フォーラム、その他のコミュニティに紹介して、票を集めることをお勧めします。
 
 CircleCI では、獲得票数の多いアイデアほど、正式な開発を優先的に検討しています。
 
-#### 次世代言語イメージのバリアント
+#### 次世代の言語イメージのバリアント
 {: #next-gen-language-image-variants }
 {:.no_toc}
 
-CircleCI は、次世代言語イメージに対していくつかのバリアントを用意しています。 次世代イメージについては、それぞれのバリアントをイメージごとに確認するようにしてください。 次世代イメージの `-browsers` バリアントは現在作成中です。 サポートされているバリアントの詳細については、[Developer Hub](https://circleci.com/developer/ja/images)でイメージの一覧を参照してください。
+CircleCI は、次世代の言語イメージに対していくつかのバリアントを用意しています。 次世代のイメージについては、イメージごとにそれぞれのバリアントを確認するようにしてください。 次世代のイメージの `-browsers` バリアントは現在作成中です。 サポートされているバリアントの詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/images)でイメージの一覧を参照してください。
 
 ### 従来の言語イメージ
 {: #legacy-language-images }
@@ -228,7 +228,7 @@ CircleCI は、サービスイメージに対してバリアントを1つのみ�
 {: #next-gen-service-images }
 {:.no_toc}
 
-CircleCI では、次世代のサービスのビルド済み Docker イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[Developer ハブ](https://circleci.com/developer/ja/images/)を参照してください。
+CircleCI では、次世代のサービスのビルド済み Docker イメージの拡充に取り組んでいます。 使用可能な最新のサービス イメージについては、CircleCI の[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。
 
 ## プリインストール ツール
 {: #pre-installed-tools }
@@ -254,7 +254,7 @@ CircleCI では、次世代のサービスのビルド済み Docker イメージ
 - `xvfb` (従来のイメージのみ)
 - `zip`
 
-ある CircleCI イメージ バリアントにインストールされる特定パッケージの具体的なバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 従来の CircleCI ビルド済み Docker イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代イメージの詳細については、[Developer ハブ](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
+ある CircleCI イメージのバリアントにインストールされる特定パッケージの具体的なバージョンは、そのバリアントのベース イメージにインストールされている Linux ディストリビューション/バージョンのパッケージ ディレクトリに含まれるデフォルト バージョンに依存します。 従来の CircleCI ビルド済み Docker イメージは [Debian Jessie](https://packages.debian.org/jessie/) または [Stretch](https://packages.debian.org/stretch/) をベースにしていますが、次世代イメージ (`cimg`) は公式の [Ubuntu](https://packages.ubuntu.com) イメージを拡張したものです。 次世代のイメージの詳細については、[デベロッパー ハブ](https://circleci.com/developer/ja/images/)を参照してください。 各イメージの変更履歴は、それぞれのリポジトリに掲載されています。
 
 以下のパッケージは、`curl` などの方法でインストールされます。
 
@@ -277,8 +277,8 @@ CircleCI では、次世代のサービスのビルド済み Docker イメージ
 **従来の**ビルド済み Docker イメージについて、最新のものを言語別に紹介します。
 
 <div class="alert alert-warning" role="alert">
-可能な限り次世代イメージを使用することをお勧めします。
-最新の次世代ビルド済み Docker イメージの一覧と各イメージの内容の詳細については、<a href="https://circleci.com/developer/ja/">Developer ハブ</a>を参照してください。
+可能な限り次世代のイメージを使用することをお勧めします。
+最新の次世代のビルド済み Docker イメージの一覧と各イメージの内容の詳細については、<a href="https://circleci.com/developer/ja/">デベロッパー ハブ</a>を参照してください。
 </div>
 
 **注:** CircleCI は、[言語イメージのバリアント](#language-image-variants)および[サービス イメージのバリアント](#service-image-variant)以外の**従来のイメージ**に対して使用されるタグについて**関知しません**。 これらのタグは開発元が手がけるプロジェクトとして作成、メンテナンスされています。 似た名前のタグでも同じような内容のイメージとは限らないことにご注意ください。
