@@ -5,6 +5,7 @@ short-title: "Using Arm resources on CircleCI"
 description: "Using Arm resources on CircleCI"
 version:
 - Cloud
+- Server v3.x
 ---
 
 # Overview
