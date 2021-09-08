@@ -9,8 +9,8 @@ sitemap: false
 ---
 
 CircleCI offers support for building and testing iOS and macOS projects.
-You can select a macOS project you would like to build on the [Add
-Projects page](https://circleci.com/add-projects){:rel="nofollow"}.
+You can select a macOS project you would like to build on the Add
+Projects page.
 
 If you're unable to find your project in the "OS X" tab, it may be listed as a
 "Linux" project. After adding your project as a "Linux" build, you can change
