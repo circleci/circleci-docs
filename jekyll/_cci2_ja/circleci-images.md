@@ -39,7 +39,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 ## 次世代ビルド済み Docker イメージ
 {: #next-generation-convenience-images }
 
-このセクションで紹介する次世代のビルド済み Docker イメージは、継続的インテグレーション(CI)、効率性、確定的動作を念頭に置いてゼロから設計されました。 以下のような利点があります。
+このセクションで紹介する次世代のビルド済み Docker イメージは、継続的インテグレーション(CI)、効率性、確定的動作を念頭に置いてゼロから設計されました。 これには以下のような利点があります。
 
 **スピンアップ時間の短縮** – Docker 的な言い方をすれば、次世代イメージは概してレイヤーがより少なく、より小さくなっています。 これらの新しいイメージを使用すると、ビルド開始時にイメージがすばやくダウンロードされると共に、イメージが既にホストにキャッシュされている可能性が高くなります。
 
@@ -47,7 +47,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 ### CircleCI のベースイメージ
 {: #circleci-base-image }
-Using the `base` image in your config looks like the example shown below:
+`ベースイメージ` を使って設定すると、以下の例のようになります。
 
 ```yaml
   myjob:
@@ -60,45 +60,46 @@ Using the `base` image in your config looks like the example shown below:
 
 **最適な用途**
 
-If you need a generic image to run on CircleCI, to use with orbs, or to use as a base for your own custom Docker image, this image is for you.
+汎用的なイメージを CircleCI で実行したり、Orb で使用したり、独自のカスタム Docker イメージのベースとして利用する必要がある場合に、このイメージをお使いください。
 
-**リソース:**
+**関連資料**
 
-You can find more config examples for this image on the [Developer Hub](https://circleci.com/developer/images/image/cimg/base), and the source code and documentation on [GitHub](https://github.com/CircleCI-Public/cimg-base).
+このイメージの設定ファイルのサンプルは、[デベロッパー ハブ](https://circleci.com/developer/images/image/cimg/base)を、ソースコードとドキュメント[GitHub](https://github.com/CircleCI-Public/cimg-base)を参照してください。　
 
-The example below demonstrates how to use the next-gen Go image, which is based off the `base` image above.
+以下の例では、上記の `ベースの` イメージをベースにした、次世代のGoイメージを使用する方法を示しています。
 
 ```yaml
   myjob:
     docker:
       - image:  cimg/go:1.16
+
 ```
 
-これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間は `cimg` であることに留意してください。 You can view other next generation images for other languages [below](#next-gen-language-images).
+これは従来の CircleCI Go イメージ (`circleci/golang`) の後継となるものです。 Docker Hub の名前空間が `cimg` であることにご注意ください。 他の言語の次世代イメージは、[以下](#next-gen-language-images)をご覧ください。
 
 
 ## ベストプラクティス
 {: #best-practices }
 
-以降のセクションで扱う次世代コンビニエンス イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。 したがって、可能な限り最も当てはまるイメージを使用することをお勧めします。 これで、いずれかのアップストリーム イメージによってイメージに意図しない変更が組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
+以降のセクションで扱う次世代コンビニエンス イメージは、最新の Ubuntu LTS Docker イメージをベースにしており、言語またはサービスのベース ライブラリがインストールされています。そのため、可能な限り最も当てはまるイメージを使用することをお勧めします。 それにより、いずれかのアップストリーム イメージによって意図しない変更がイメージに組み込まれることを防ぎ、より決定論的にビルドを行うことができます。
 
-That is, to prevent unintended changes that come from upstream, instead of using `cimg/ruby:2.4-node` use a more specific version of these containers to ensure the image does not change with upstream changes until you change the tag.
+つまり、アップストリームからの想定外の変更を防止するには、タグを変更するまではアップストリーム版の変更に伴ってそのイメージが変更されてしまわないよう、`cimg/ruby:2.4-node` と記述するのではなく、そのコンテナのさらに細かいバージョンを指定します。
 
-たとえば、`cimg/ruby:2.4.10-node` のように、使用するイメージのバージョンを限定的に指定してください。 バージョンは CircleCI のすべての Docker イメージで指定できます。
+例えば、`cimg/ruby:2.4.10-node` のように、使用するイメージのバージョンを限定的に指定してください。 バージョンの指定は CircleCI のすべてのイメージで可能です。
 
-また、使用するイメージを特定の SHA に至るまで指定することができます。 具体的には、`cimg/ruby:2.4.10-node` ではなく、`cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390` のように指定します。 これにより、変更が加えられるまでの間、特定のイメージをテストすることができます。
+また、使用するイメージを特定の SHA に至るまで指定することができます。 具体的には、`cimg/ruby:2.4.10-node` ではなく、`cimg/ruby@sha256:e4aa60a0a47363eca3bbbb066620f0a5967370f6469f6831ad52231c87ca9390` のように指定します。 これにより、変更を加える前に特定のイメージを好きなだけテストすることができます。
 
 
-### Notes on pinning images
+### イメージの指定に関する注意点
 {: #notes-on-pinning-images }
 
 <div class="alert alert-warning" role="alert">
 SHA を長期的に使用することは推奨されません。 イメージの再ビルドを要する重大なバグやセキュリティ上の問題が見つかった場合、イメージにおけるパイプラインの依存関係が原因で、バグ修正やセキュリティ パッチ用の更新を取得できない可能性があります。
 </div>
 
-**メモ:** タグが指定されていない場合、Docker は `latest` タグを適用します。 `latest` タグが参照するのは安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。
+**注:** 従来のイメージを使用していてタグが指定されていない場合、Docker は `最新のタグ`を適用します。 `最新のタグ/code> が参照するのは、安定版の最新リリースのイメージです。 ただし、このタグは突然変わることもあるので、バージョンなどが明確になるイメージタグを挿入するのがおすすめです。</p>
 
-**メモ:** Node.js バリアントの Docker イメージ (`-node` で終わるタグ) に対しては、Node.js の LTS リリースがプリインストールされています。 独自に特定のバージョンの Node.js/NPM を使用する場合は、`.circleci/config.yml` 内の `run` ステップで設定できます。 Ruby イメージと共に特定のバージョンの Node.js をインストールする例については、以下を参照してください。
+<p spaces-before="0"><strong x-id="1">注:</strong> Node.js バリアントの Docker イメージ (<code>-node` で終わるタグ) に対しては、Node.js の LTS リリースがプリインストールされています。 独自に特定のバージョンの Node.js/NPM を使用する場合は、`.circleci/config.yml` 内の `実行` ステップで設定できます。 Ruby イメージと共に特定のバージョンの Node.js をインストールする例については、以下を参照してください。
 
 ```yaml
 version: 2.0
@@ -108,8 +109,7 @@ jobs:
       - image: cimg/ruby:2.7.1-node
         auth:
           username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
+          password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数を参照します:
       - checkout
       - run:
           name: "Node.js と npm の更新"
@@ -125,11 +125,11 @@ jobs:
 {: #finding-an-image-id }
 {:.no_toc}
 
-Follow these steps to find your docker image id:
+以下の手順で、Docker イメージの ID を確認してください。
 
 1. CircleCI にアクセスし、そのイメージを使用した過去のビルドを表示します。
 2. **[Spin up Environment (環境のスピンアップ)]** ステップをクリックします。
-3. ログ内でそのイメージの **Digest** を確認します。
+3. ログ内でそのイメージの **ダイジェスト** を確認します。
 4. そこに記載されたイメージ ID を以下のようにイメージ名の末尾に付加します。
 
 ```
@@ -139,13 +139,13 @@ cimg/python@sha256:bdabda041f88d40d194c65f6a9e2a2e69ac5632db8ece657b15269700b018
 ## イメージのタイプ
 {: #image-types }
 
-CircleCI のコンビニエンス イメージは、**言語**イメージと**サービス** イメージのいずれかのカテゴリに分類されます。 すべてのイメージは、`circleci` ユーザーをシステムユーザーとして追加します。 The sections below will walk through the available next-generation and legacy images.
+CircleCI のビルド済み Docker イメージは、**言語**イメージと**サービス** イメージのいずれかのカテゴリに分類されます。 すべてのイメージは、`CircleCI` ユーザーをシステムユーザーとして追加します。 以下のセクションでは、利用可能な次世代および従来のイメージについて説明します。
 
 ### 次世代の言語イメージ
 {: #next-gen-language-images }
 {:.no_toc}
 
-Like the legacy images, the next-gen language images are convenience images for common programming languages. These images include both the same relevant language and [commonly-used tools](#pre-installed-tools). 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。 したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
+次世代の言語イメージは、従来のものと同様、一般的なプログラミング言語に対応するビルド済み Docker イメージであり、 関連する言語と[共通して使用されるツール](#pre-installed-tools)の両方が含まれます。 言語イメージを指定するときは、設定ファイル内の `docker` キー配下の最初の行に挿入します。 したがって、ビルドの実行中はこれが[プライマリコンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container){:target="_blank"}になります。
 
 CircleCI は、以下の言語に対応する次世代イメージを開発しています。
 
