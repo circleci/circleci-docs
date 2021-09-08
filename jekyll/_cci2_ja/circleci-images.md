@@ -45,7 +45,7 @@ _**注: ** CircleCI は、バグの修正または機能の強化のために、
 
 **信頼性と安定性の向上** – 従来のイメージは、アップストリームからの変更によってほぼ毎日再ビルドされるため、テストが十分に行われていない場合があります。 そのため、互換性の損なわれる変更が頻発してしまい、安定した確定的なビルドに最適な環境とは言えなくなっています。 次世代イメージは、セキュリティと致命的なバグについてのみ再ビルドされるため、より安定した確定的なイメージとなります。
 
-### CircleCI ベース イメージ
+### CircleCI のベースイメージ
 {: #circleci-base-image }
 Using the `base` image in your config looks like the example shown below:
 
@@ -53,11 +53,12 @@ Using the `base` image in your config looks like the example shown below:
   myjob:
     docker:
       - image: cimg/base:2021.04
+
 ```
 
-これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 今後数週間でリリースする予定の次世代コンビニエンス イメージはすべてこれがベースとなります。
+これは必要最低限のものをインストールするように設計された、まったく新しい Ubuntu ベースのイメージです。 次世代ビルド済み Docker イメージはすべてこのイメージがベースとなります。
 
-**When to use it?**
+**最適な用途**
 
 If you need a generic image to run on CircleCI, to use with orbs, or to use as a base for your own custom Docker image, this image is for you.
 
