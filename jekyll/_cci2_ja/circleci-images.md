@@ -4,7 +4,7 @@ title: "CircleCI のビルド済み Docker イメージ"
 short-title: "CircleCI のビルド済み Docker イメージ"
 description: "CircleCI が提供する Docker イメージの一覧"
 categories:
-  - containerization
+  - コンテナ化
 order: 20
 version:
   - Cloud
