@@ -93,7 +93,7 @@ gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   t
 
 Now we may proceed to expand our volumes.
 
-=== Step 2 - Delete the Database's Stateful Set
+=== Step 2 - Delete the database's stateful set
 In this step we will delete the stateful set, which controls our database pod. The command below will delete the referenced database's stateful set without deleting the pod. We do not want to delete the pod itself as this would cause downtime. In the following steps we will be redeploying our stateful set. You might chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=false` flag is most important here.
 
 For postgres:
