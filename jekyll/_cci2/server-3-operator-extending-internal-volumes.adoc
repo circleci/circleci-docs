@@ -80,7 +80,7 @@ NAME            PROVISIONER             RECLAIMPOLICY   VOLUMEBINDINGMODE      A
 gp2 (default)   kubernetes.io/aws-ebs   Delete          WaitForFirstConsumer   false                  1d
 ----
 
-As we can see, our default storage class does not allow volume expansion. However, changing this is quite easy with the `kubectl patch` command.
+As we can see, our default storage class does not allow volume expansion. However, we can change this with the `kubectl patch` command.
 
 [source,bash]
 ----
