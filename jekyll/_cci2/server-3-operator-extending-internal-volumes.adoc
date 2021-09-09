@@ -68,7 +68,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/nvme1n1    7.8G  441M  7.4G   3% /bitnami/mongodb
 ----
 
-From the examples above, the capacities are still 8Gi. Step 1 shows how to increase this to 10Gi.
+From the examples above, the capacities are still 8Gi. The following steps show how to increase this to 10Gi.
 
 === Step 1 - Confirm volume expansion is allowed
 First, confirm that volume expansion is allowed in your cluster.
