@@ -132,7 +132,7 @@ if you host your installation at `server.example.com`, your certificate must cov
 *External* allows you to use your own MongoDB instance. CircleCI server is tested to work with MongoDB 3.6. You can customize the setup for your external MongoDB instance with the following settings:
 
 * MongoDB connection host(s) or IP(s): The hostname or IP of your MongoDB instance. Specifying a port using a colon and multiple hosts for sharded instances are both supported.
-* Use SSL for connection to MongoDB: Whether to use SSL when connecting to your external MongoDB instance
+* Use SSL for connection to MongoDB: Whether to use SSL when connecting to your external MongoDB instance.
 * Allow insecure TLS connections: If you use a self-signed certificate or one signed by a custom CA, you will need to enable this setting. However, this is an insecure setting and you should use a TLS certificate signed by a valid CA if you can.
 * MongoDB user: The user name for the account to use. This account should have the dbAdmin role.
 * MongoDB password: The password for the account to use.
