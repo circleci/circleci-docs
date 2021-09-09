@@ -70,7 +70,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 
 From the examples above, the capacities are still 8Gi. Step 1 shows how to increase this to 10Gi.
 
-=== Step 1 - Confirm Volume Expansion is Allowed
+=== Step 1 - Confirm volume expansion is allowed
 First let's confirm that volume expansion is allowed in our cluster.
 
 [source,bash]
