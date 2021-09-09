@@ -700,8 +700,6 @@ workflows:
 ```yaml
 version: 2.1
 
-# the path-filtering orb is required to continue a pipeline based on
-# the path of an updated fileset
 orbs:
   maven: circleci/maven@1.2.0
 
