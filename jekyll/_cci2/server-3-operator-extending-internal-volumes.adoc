@@ -96,7 +96,7 @@ Now we may proceed to expand our volumes.
 === Step 2 - Delete the Database's Stateful Set
 In this step we wish to delete the stateful set which controls our database pod, however we do not want to delete the pod itself as this would cause downtime. The command below will delete the referenced database's stateful set without deleting the pod. Not to worry, in the steps below we will be redeploying our statefulset. You may chose to delete one or both stateful sets, depending on which database volumes you wish to expand. The `--cascade=false` flag is most important here.
 
-For postgres
+For postgres:
 [source,bash]
 ----
 circleci-user ~ $ kubectl delete sts postgresql --cascade=false
