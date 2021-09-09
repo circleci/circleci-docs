@@ -321,6 +321,12 @@ code {
   word-wrap: anywhere;
 }
 
+code.env_var {
+  white-space: nowrap !important;
+}
+
+
+
 /***** Widgets ****************************************************************/
 //
 //*****************************************************************************/
@@ -428,7 +434,7 @@ pre {
 }
 
 .serveronly {
-	color: #4e9eb3; 
+	color: #4e9eb3;
 }
 
 .server-version-badge {
