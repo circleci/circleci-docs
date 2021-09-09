@@ -123,7 +123,7 @@ For mongodb
 circleci-user ~ $ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
-=== Step 4 - Update Kots Admin with the new PVC size
+=== Step 4 - Update KOTS admin with the new PVC size
 Now we need to head over to kots admin console to persist our changes. In the config section, we will update the values for our PVC size to 10Gi as shown below.
 
 .Postgres
