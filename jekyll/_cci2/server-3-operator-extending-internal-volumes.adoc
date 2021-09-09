@@ -51,7 +51,7 @@ datadir-mongodb-0   Bound    pvc-58a2274c-31c0-487a-b329-0062426b5535   8Gi     
 
 We can also confirm this capacity is made available to a database by checking the size of its data directory.
 
-For postgres the directory is `/bitnami/postgresql`. We can confirm it's size using the command below.
+For postgres the directory is `/bitnami/postgresql`. We can confirm its size using the command below.
 
 [source,bash]
 ----
