@@ -108,7 +108,7 @@ For mongodb
 circleci-user ~ $ kubectl delete sts mongodb --cascade=false
 ----
 
-=== Step 3 - Update the size of the Database's PVC
+=== Step 3 - Update the size of the database's PVC
 Now that the stateful set has been removed, we can increase the size of our persistent volume claim to 10Gi. This is also quite easy to do with `kubectl patch`.
 
 For postgres
