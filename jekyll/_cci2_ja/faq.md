@@ -254,7 +254,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### スケジュールを設定したワークフローは、指定した時間どおりに正確に実行されますか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-[Performance プラン](https://circleci.com/ja/pricing/usage/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+[Performance プラン](https://circleci.com/ja/pricing/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
 
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-exact-version-of-windows-are-you-using }
