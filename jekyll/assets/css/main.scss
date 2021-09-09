@@ -32,6 +32,12 @@ a {
 		color: $link-hover-color;
 		text-decoration: none;
 	}
+
+	& > * {
+		// to prevent the child elements inside a tag from registering
+		// as the target in event listeners (for analytics tracking)
+		pointer-events: none;
+	}
 }
 
 .container-semi-fluid {
@@ -491,4 +497,13 @@ pre {
 
 h6{
 	font-size: 16px;
+}
+
+
+/*
+*  Experiment Key: dd_add_copy_code_button_to_docs
+*  https://app.optimizely.com/v2/projects/16812830475/experiments/20580130094/variations
+*/
+.code-badge-language {
+	display: none
 }

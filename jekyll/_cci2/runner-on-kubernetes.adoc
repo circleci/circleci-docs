@@ -14,11 +14,9 @@ toc::[]
 
 == Introduction
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan]. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
 
-NOTE: CircleCI runner on K8s is currently *in preview*. For information on our support levels, see <<runner-overview#preview,available platforms>>.
-
-This installation guide is to help setup CircleCI's runner(s) on your Kubernetes cluster. We provide a Helm chart which makes installing the pods easy.
+This installation guide is to help set up CircleCI runner on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 
 The Helm chart will spin up one or more pods of *the same runner resource class*. This is useful for when you want all of these runners to execute jobs requesting the same execution environment. Each runner will pull jobs off the queue on an as-available basis.
 
@@ -29,10 +27,24 @@ If you want to have different runners specialized for different workloads, it is
 * Have a Kubernetes cluster up and running where you'd like to deploy your runner(s).
 * Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
 
-=== Limitations/Pending Work
-* The Helm chart currently doesn't configure permissions, so the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
-* The Helm chart currently doesn't support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
-* The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you'll need to set up separate charts for each one.
+=== CircleCI Server Installation
+
+When installing the Helm chart for use with a CircleCI server installation the `agentVersion` will need to be set to the pinned version specified in the  xref:runner-installation.adoc[Runner Installation] instructions.
+
+==== Upgrading Runner Deployment for Server
+
+. Modify the `+values.yaml+` file to specify the new `agentVersion` to update to. Refer to the <<Chart Values>> section of this document for more details about the `+values.yaml+` file.
+. Deploy the changes to the cluster 
++
+....
+$ helm upgrade -f values.yaml "circleci-runner" ./ \
+  --set runnerToken=$CIRCLECI_RUNNER_TOKEN \
+  --set resourceClass=$CIRCLECI_RUNNER_RESOURCE_CLASS \
+  --namespace your-namespace
+....
++
+
+Further information about the `$ helm upgrade` command and its usage can be found in the https://helm.sh/docs/helm/helm_upgrade/[helm documentation]
 
 == Getting Started
 
@@ -90,7 +102,14 @@ Customizable parameters are left inside the `+values.yaml+` file. See the follow
 
 | `+runnerToken+`   | -         | Y         | The token you created for your runner resource class. You can choose to fill it in the chart here or to pass it directly when applying the chart, as shown above.
 
+| `+agentVersion+`  | -         | N         | The `circleci-task-agent` version to pin. This is only used for CircleCI Server installations.
+
 | all other values  | -         | N         | Modify at your own discretion and risk.
 
 |===
+
+== Limitations/Pending Work
+* The Helm chart currently does not configure permissions, therefore, the containers will not have elevated privileges. If you need elevated permissions (e.g., for Docker in Docker work, etc.), you will need to modify the chart yourself.
+* The Helm chart currently does not support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* The Helm chart currently expects only one runner resource class type and one token. If you want to configure clusters for multiple runner resource classes, you will need to set up separate charts for each one.
 

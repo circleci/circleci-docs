@@ -51,9 +51,9 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <p>CircleCI のワークフロー機能によってジョブのスケジュール実行と順次実行が構成できます。</p>
     <ul>
       <li><a href="{{ site.baseurl }}/ja/2.0/workflows/">ワークフローを使用したジョブのスケジュール</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#ワークフローの構成例">ワークフローの構成例</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#ワークフローのスケジュール実行">ワークフローのスケジュール実行</a></li>
-      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#ワークフローにおけるコンテキストとフィルターの使用">ワークフローにおけるコンテキストとフィルターの使用</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#workflows-configuration-examples">ワークフローの構成例</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#scheduling-a-workflow">ワークフローのスケジュール実行</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">ワークフローにおけるコンテキストとフィルターの使用</a></li>
       <li><a href="{{ site.baseurl }}/ja/2.0/creating-orbs/">Orbs の作成</a></li>
     </ul>
   </div>
@@ -61,11 +61,11 @@ CircleCI について理解を深めていただけるよう、チュートリ�
     <hr />
   </div>
    <div class="col-xs-12 col-sm-6">
-    <h2>Cookbooks</h2>
-    <p>Recipes to assist and inspire your pipeline config.</p>
+    <h2>クックブック</h2>
+    <p>パイプラインの設定を支援し、インスピレーションを与えるレシピ。</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/ja/2.0/reusing-config/">Discover ways to optimize your pipelines</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">Explore best practices for a range of use cases</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/optimization-cookbook/">パイプラインを最適化する方法</a></li>
+      <li><a href="{{ site.baseurl }}/ja/2.0/configuration-cookbook">様々なユースケースに対応したベスト・プラクティス</a></li>
     </ul>
   </div>
 </div>

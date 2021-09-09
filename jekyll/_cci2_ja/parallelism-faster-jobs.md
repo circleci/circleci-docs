@@ -19,7 +19,7 @@ version:
 ## Specifying a job's parallelism level
 {: #specifying-a-jobs-parallelism-level }
 
-Test suites are conventionally defined at the [job]({{ site.baseurl }}/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
+Test suites are conventionally defined at the [job]({{ site.baseurl }}/ja/2.0/jobs-steps/#sample-configuration-with-concurrent-jobs) level in your `.circleci/config.yml` file. The `parallelism` key specifies how many independent executors will be set up to run the steps of a job.
 
 To run a job's steps in parallel, set the `parallelism` key to a value greater than 1.
 
@@ -38,14 +38,14 @@ jobs:
 
 ![Parallelism]({{ site.baseurl }}/assets/img/docs/executor_types_plus_parallelism.png)
 
-For more information, see the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#parallelism) document.
+For more information, see the [Configuring CircleCI]({{ site.baseurl }}/ja/2.0/configuration-reference/#parallelism) document.
 
 ## Using the CircleCI CLI to split tests
 {: #using-the-circleci-cli-to-split-tests }
 
 CircleCI supports automatic test allocation across your containers. The allocation is filename or classname based, depending on the requirements of the test-runner you are using. It requires the CircleCI CLI, which is automatically injected into your build at run-time.
 
-To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/2.0/local-cli/) document.
+To install the CLI locally, see the [Using the CircleCI Local CLI]({{ site.baseurl }}/ja/2.0/local-cli/) document.
 
 Note: The `circleci tests` commands (`glob` and `split`) cannot be run locally via the CLI as they require information that only exists within a CircleCI container.
 
@@ -100,7 +100,7 @@ The best way to optimize your test suite across a set of parallel executors is t
 
 ![Test Splitting]({{ site.baseurl }}/assets/img/docs/test_splitting.png)
 
-On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname, depending on the language you are using.
+On each successful run of a test suite, CircleCI saves timings data from the directory specified by the path in the [`store_test_results`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_test_results) step. This timings data consists of how long each test took to complete per filename or classname, depending on the language you are using.
 
 Note: If you do not use `store_test_results`, there will be no timing data available for splitting your tests.
 
@@ -116,7 +116,7 @@ The CLI expects both filenames and classnames to be present in the timing data p
 cat my_java_test_classnames | circleci tests split --split-by=timings --timings-type=classname
 ```
 
-If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/2.0/configuration-reference/#store_artifacts) step.
+If you need to manually store and retrieve timing data, use the [`store_artifacts`]({{ site.baseurl }}/ja/2.0/configuration-reference/#store_artifacts) step.
 
 Note: If no timing data is found, you will receive a message: `Error autodetecting timing type, falling back to weighting by name.`. The tests will then be split alphabetically by test name.
 
@@ -185,6 +185,101 @@ bundle exec rspec $(cat /tmp/tests-to-run)
 
 The contents of the file `/tmp/tests-to-run` will be different in each container, based on `$CIRCLE_NODE_INDEX` and `$CIRCLE_NODE_TOTAL`.
 
+## Using test splitting with Python Django tests
+{: #using-test-splitting-with-python-django-tests }
+
+To utilize test splitting with CircleCI, you must pass in a list of tests to run. However, with how you execute tests with Django, you are unable to simply glob the tests and pass them in.
+
+Sometimes, users run into specific issues when performing test splitting for their own unique use cases. One example of a user resolving an issue when test splitting in Python Django did not perform correctly can be found in the following Discuss post, which can be found [here](https://discuss.circleci.com/t/python-django-tests-not-being-split-correctly/36624)
+
+Using this example, here is a quick example of how you can accomplish test splitting:
+```
+- run:
+    command: |
+      # get test files while ignoring __init__ files
+      TESTFILES=$(circleci tests glob "catalog/tests/*.py" | sed 's/\S\+__init__.py//g')
+      echo $TESTFILES | tr ' ' '\n' | sort | uniq > circleci_test_files.txt
+      cat circleci_test_files.txt
+      TESTFILES=$(circleci tests split --split-by=timings circleci_test_files.txt)
+      # massage filepaths into format manage.py test accepts
+      TESTFILES=$(echo $TESTFILES | tr "/" "." | sed 's/.py//g')
+      echo $TESTFILES
+      pipenv run python manage.py test --verbosity=2 $TESTFILES  
+```
+
+## その他のテスト分割方法
+{: #using-test-splitting-with-pytest }
+
+If you try to split your tests across containers with pytest, you may encounter any of the following errors:
+
+```
+No timing found for "tests/commands/__init__.py"
+No timing found for "tests/commands/test_1.py"
+No timing found for "tests/commands/test_2.py"
+```
+
+If any of these errors are returned, you may need to make a few adjustments, which are listed below.
+
+### Are you setting a custom working_directory?
+{: #are-you-setting-a-custom-working-directory? }
+
+If so, you may need to adjust the file paths that are saving to your test metadata XML file. Alternatively, if you are able to, try working out of the standard working directory we set for a container to see if that helps (you can do this by removing any instances of `working_directory` in your test run job).
+
+### Where does your `pytest.ini` live?
+{: #where-does-your-pytest-ini-live }
+
+To ensure test splitting performs correctly, make sure you are running your tests in the root directory. If your tests are not being run in the root directory, you may need to run the following command before you test the `run` command:
+
+```
+cp -f .circleci/resources/pytest_build_config.ini pytest.ini
+```
+
+The `.circleci/resources/pytest_build_config.ini` path may need to be replaced to point to where it's located in your project.
+
+### Are you setting the junit_family in your pytest.ini?
+{: #are-you-setting-the-junit-family-in-your-pytest-ini }
+
+Check to see if you have something like `junit_family=legacy` set in your pytest.ini file. For more information on how to set `junit_family`, refer to the following page, which can be found [here](https://docs.pytest.org/en/stable/_modules/_pytest/junitxml.html)
+
+Search for "families" to see the relevant information.
+
+### Example project that correctly splits by timings
+{: #example-project-that-correctly-splits-by-timing }
+
+The example below is a fork of our `sample-python-cfd` project(https://github.com/CircleCI-Public/sample-python-cfd) that shows how you can implement test splitting:
+
+```
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+jobs:
+  build-and-test:
+    parallelism: 2
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: |
+            set -e
+            TEST_FILES=$(circleci tests glob "openapi_server/**/test_*.py" | circleci tests split --split-by=timings)
+            mkdir -p test-results
+            pytest --verbose --junitxml=test-results/junit.xml $TEST_FILES
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+workflows:
+  sample:
+    jobs:
+      - build-and-test
+```
+
+You may find an example build of proper test splitting [here](https://app.circleci.com/pipelines/github/nbialostosky/sample-python-cfd/18/workflows/8b37bd45-ed19-42e1-8cc4-44401697f3fc/jobs/20)
+
 ### Video: troubleshooting globbing
 {: #video-troubleshooting-globbing }
 {:.no_toc}
@@ -194,9 +289,9 @@ Note: To follow along with the commands in the video below you will need to be [
 ## See also
 {: #see-also }
 
-[Using Containers]({{ site.baseurl }}/2.0/containers/)
+[Using Containers]({{ site.baseurl }}/ja/2.0/containers/)
 
-## その他のテスト分割方法
+## Other ways to split tests
 {: #other-ways-to-split-tests }
 
 Some third party applications and libraries might help you to split your test suite. These applications are not developed or supported by CircleCI. Please check with the owner if you have issues using it with CircleCI. If you're unable to resolve the issue you can search and ask on our forum, [Discuss](https://discuss.circleci.com/).

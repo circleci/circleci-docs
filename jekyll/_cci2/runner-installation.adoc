@@ -79,7 +79,7 @@ Running jobs requires you have the following tools available on your machine:
 == Installation
 
 === Download the launch agent binary and verify the checksum
-
+[[download]]
 The launch agent can be installed using the following script, which will use `opt/circleci` as the base install location.
 
 First, set one of these variables as appropriate for for your installation target.
@@ -165,7 +165,7 @@ runner:
   cleanup_working_directory: true
 ```
 
-Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you'd like.
+Replace `AUTH_TOKEN` with the token created in the <<#authentication,Authentication step>>. `RUNNER_NAME` can be anything you would like although should be unique among all other runners used by the same resource class.
 
 === Install the CircleCI runner configuration
 
@@ -428,10 +428,26 @@ CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> docke
 
 When the container starts, it will immediately attempt to start running jobs.
 
+==== Start the Docker container on server
+
+When starting the docker container on server, the `agent_version` environment variable will need to be passed in using the `--env` flag.
+
+``` bash
+CIRCLECI_RESOURCE_CLASS=<resource-class> CIRCLECI_API_TOKEN=<runner-token> agent_version=<agent_version_for_server> docker run --env agent_version --env CIRCLECI_API_TOKEN --env CIRCLECI_RESOURCE_CLASS --name <container-name> <image-id-from-previous-step>
+```
+
 === Stopping the Docker container
 
 ``` bash
 docker stop <container-name>
+```
+
+=== Remove the Docker container
+
+In some cases you might need to fully remove a stopped runner container from the system, such as when recreating a container using the same name.
+
+``` bash
+docker stop <container-name>; docker rm <container-name>;
 ```
 
 == Windows Installation
@@ -525,6 +541,23 @@ Draining can end in one of two ways:
 * The task has been in the draining state for longer than the configured `max_run_time`.
 * An additional TERM signal is received by the Launch Agent during "draining".
 
+==== runner.ssh.advertise_addr
+
+This parameter enables the 'Rerun job with SSH' feature. Before enabling this feature, there are xref:runner-installation.adoc#considerations-before-enabling-ssh-debugging[*important considerations that should be made*].
+
+The address is of the form `*host:port*` and is displayed in the 'Enable SSH' and 'Wait for SSH' sections for a job that is rerun.
+
+NOTE: While the presence of the `runner.ssh.advertise_addr` variable enables the 'Rerun job with SSH' feature, the value it holds is for publishing purposes only in the web UI. The address does not need to match the actual host and port of the machine that the runner is installed on and can be a proxy configuration.
+
+===== Considerations before enabling SSH debugging
+
+Task agent runs an embedded SSH server and agent on a dedicated port when the 'Rerun job with SSH' option is activated. This feature will not affect any other SSH servers or agents on the system that the runner is installed on.
+
+* The host port used by the SSH server is currently fixed to `*54782*`. Ensure this port is unblocked and available for SSH connections. A port conflict can occur if multiple launch agents are installed on the same host.
+* The SSH server will inherit the same user privileges and associated access authorizations as task agent as defined by the xref:runner-installation.adoc#runner-command_prefix[runner.command_prefix parameter].
+* The SSH server is configured for public key authentication. Anyone with permission to initiate a job can rerun it with SSH, but only the user who initiated the rerun will have their SSH public keys added to the server for the duration of the SSH session.
+* Rerunning a job with SSH will hold the job open for *two hours* if a connection is made to the SSH server, or *ten minutes* if no connection is made, unless cancelled. While in this state, the job is counted against an organization’s concurrency limit, and the task agent will be unavailable to handle other jobs. Therefore, it is recommended to cancel an SSH rerun job explicitly (through the web UI or CLI) when finished debugging.
+
 == Runner for Server Compatibility
 _CircleCI Runner is available from server v3.1.0_
 
@@ -544,6 +577,7 @@ depending on your version of server:
 | 3.1            
 | 1.0.11147-881b608
 |===
+
 
 === Additional Resources
 

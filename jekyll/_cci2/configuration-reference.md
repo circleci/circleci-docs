@@ -335,7 +335,7 @@ The [machine executor]({{ site.baseurl }}/2.0/executor-types) is configured by u
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]({{ site.baseurl }}/2.0/vm-service).
+image | Y | String | The VM image to use. View [available images](#available-machine-images). **Note:** This key is **not** supported on the installable CircleCI. For information about customizing `machine` executor images on CircleCI installed on your servers, see our [VM Service documentation]. ({{ site.baseurl }}/2.0/vm-service).
 docker_layer_caching | N | Boolean | Set to `true` to enable [Docker Layer Caching]({{ site.baseurl }}/2.0/docker-layer-caching). **Note:** You must open a support ticket to have a CircleCI Sales representative contact you about enabling this feature on your account for an additional fee.
 {: class="table table-striped"}
 
@@ -357,7 +357,8 @@ jobs:
 
 ##### Available `machine` images
 {: #available-machine-images }
-CircleCI supports multiple machine images that can be specified in the `image` field:
+
+**Specifying an image in your config file is strongly recommended.** CircleCI supports multiple machine images that can be specified in the `image` field:
 
 * `ubuntu-2004:202107-02` - Ubuntu 20.04, Docker v20.10.7, Docker Compose v1.29.2,
 * `ubuntu-2004:202104-01` - Ubuntu 20.04, Docker v20.10.6, Docker Compose v1.29.1,
@@ -514,7 +515,7 @@ We implement soft concurrency limits for each resource class to ensure our syste
 Class                 | vCPUs | RAM
 ----------------------|-------|-----
 small                 | 1     | 2GB
-medium (default)      | 2     | 4GB
+medium                | 2     | 4GB
 medium+               | 3     | 6GB
 large                 | 4     | 8GB
 xlarge                | 8     | 16GB
@@ -935,7 +936,8 @@ jobs: # conditional steps may also be defined in `commands:`
       custom_checkout:
         type: string
         default: ""
-    machine: true
+    machine:
+      image: ubuntu-2004:202107-02 
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -1609,8 +1611,11 @@ For more information, see the [Executing Workflows For a Git Tag]({{ site.baseur
 
 ###### **`matrix`** (requires version: 2.1)
 {: #matrix-requires-version-21 }
-The `matrix` stanza allows you to run a parameterized job multiple times with different
-arguments.
+The `matrix` stanza allows you to run a parameterized job multiple times with different arguments.
+
+**Note**
+
+In order to use the `matrix` stanza, you must use parameterized jobs.
 
 Key | Required | Type | Description
 ----|----------|------|------------
@@ -1618,6 +1623,8 @@ parameters | Y | Map  | A map of parameter names to every value the job should b
 exclude | N | List | A list of argument maps that should be excluded from the matrix
 alias | N | String | An alias for the matrix, usable from another job's `requires` stanza. Defaults to the name of the job being executed
 {: class="table table-striped"}
+
+**Note:**
 
 The following is a basic example of using matrix jobs.
 
@@ -1763,7 +1770,8 @@ version: 2.1
 
 jobs:
   bar:
-    machine: true
+    machine:
+      image: ubuntu-2004:202107-02 
     steps:
       - checkout
       - run:

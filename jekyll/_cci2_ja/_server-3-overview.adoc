@@ -1,11 +1,11 @@
-= Overview: An overview of the architecture, services, and new features of CircleCI Server v{serverversion}
+= 概要: CircleCI Server v{serverversion} のアーキテクチャ、サービス、および新機能の概要
 docs@circleci.com
 :media: screen
 :title-page-background-image: image:pdf-header.png[]
 :imagesdir: ../assets/img/docs/
 :doctype: book
 :toc:
-:toc-title: Contents
+:toc-title: 目次
 :icons: font
 :page-liquid:
 :source-highlighter: rouge
