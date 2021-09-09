@@ -16,7 +16,7 @@ version:
 ![Executor の概要]({{ site.baseurl }}/assets/img/docs/executor_types.png)
 
 ## Docker
-`docker` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#docker-の使用)をご覧ください。
+{: #docker }
 
 ```
 jobs:
@@ -29,21 +29,30 @@ jobs:
         # プライマリ コンテナで実行するコマンド
 ```
 
-`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#macos-の使用)をご覧ください。
+`docker` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#docker-の使用)をご覧ください。
 
 ## Machine
-jobs: build: # ジョブの名前 machine: # Executor タイプ image: ubuntu-1604:201903-01 # 推奨 Linux イメージ - Ubuntu 16.04、docker 18.09.3、docker-compose 1.23.1 が含まれます
+{: #machine }
 
 {:.tab.machine.Cloud}
 ```
-steps:
-        # Linux 仮想マシン環境で実行するコマンド
+jobs:
+  build: # name of your job
+    machine: # executor type
+      image: ubuntu-2004:202010-01 # # recommended linux image - includes Ubuntu 20.04, docker 19.03.13, docker-compose 1.27.4
+
+      steps:
+        # Commands run in a Linux virtual machine environment
 ```
 
-jobs: build: # ジョブの名前 machine: true # Executor タイプ
+{:.tab.machine.Server}
 ```
-steps:
-        # Linux 仮想マシン環境で実行するコマンド
+jobs:
+  build:
+    machine:
+      image: ubuntu-1604:202007-01 # VM will run Ubuntu 16.04 for this release date
+    steps:
+      # Commands run in a Linux virtual machine environment
 ```
 
 `machine` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#machine-の使用)をご覧ください。
@@ -64,19 +73,19 @@ jobs:
       # macOS 仮想マシン環境で実行するコマンド
 ```
 
-Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
+`macos` Executor の使用については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/#macos-の使用)をご覧ください。
 
 ## Windows
 {: #windows }
 
-version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
+Windows Executor を使用するための設定ファイルの構文は、以下のどちらを使用するのかによって異なります。
 
 * クラウド版の CircleCI でバージョン 2.1 の設定ファイルと Windows Orb を使用する場合。
 * オンプレミス版の CircleCI Server でバージョン 2.0 の設定ファイルを使用する場合。 これは、*CircleCI Server v2.18.3* からサポートされた、Windows イメージと `machine` Executor を使用するシナリオが考えられます。
 
 {:.tab.windowsblock.Cloud}
 ```
-version: 2.1 # Use version 2.1 to enable orb usage.
+version: 2.1 # バージョン 2.1 を指定して Orb の使用を有効化します
 
 orbs:
   win: circleci/windows@2.2.0 # The Windows orb give you everything you need to start using the Windows executor.
@@ -100,7 +109,6 @@ jobs:
     resource_class: windows.medium
     steps:
       # Windows 仮想マシン環境で実行するコマンド
-
       - checkout
       - run: Write-Host 'Hello, Windows'
 ```
@@ -110,6 +118,7 @@ jobs:
 ## 関連項目
 {: #see-also }
 
-* {{ site.baseurl }}/ja/2.0/circleci-images/
-* {{site.baseurl}}/ja/2.0/hello-world-macos
-* {{site.baseurl}}/ja/2.0/hello-world-macos
+* [Choosing an executor type]({{ site.baseurl }}/ja/2.0/executor-types/)
+* [Pre-built CircleCI convenience images]({{ site.baseurl }}/ja/2.0/circleci-images/)
+* [Building on MacOS]({{site.baseurl}}/ja/2.0/hello-world-macos)
+* [Building on Windows]({{site.baseurl}}/ja/2.0/hello-world-windows)

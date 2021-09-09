@@ -20,21 +20,25 @@ version:
 {: #overview }
 {:.no_toc}
 
-このプロジェクトには、コメント付きの CircleCI 設定ファイル <a href="https://github.com/CircleCI-Public/circleci-demo-ruby-rails/blob/master/.circleci/config.yml" target="_blank"><code>.circleci/config.yml</code></a> が含まれます。
+お急ぎの場合は、後述の設定ファイルの例をプロジェクトのルート ディレクトリにある [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) に貼り付け、ビルドを開始してください。
 
-このアプリケーションでは、最新の安定した Rails バージョン 5.1 (`rspec-rails`)、[RspecJunitFormatter](https://github.com/sj26/rspec_junit_formatter)、および PostgreSQL データベースを使用しています。
+CircleCI maintains a sample Ruby on Rails project on
+[GitHub](https://github.com/CircleCI-Public/circleci-demo-ruby-rails) which you
+can see building on
+[CircleCI](https://app.circleci.com/pipelines/github/CircleCI-Public/circleci-demo-ruby-rails)
 
-このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{ site.baseurl}}/ja/2.0/circleci-images/)の 1 つを使用しています。
+The application uses Rails version 6.1, `rspec-rails`, and
+[RspecJunitFormatter][rspec-junit-formatter] with PostgreSQL as the database.
 
 
 ## CircleCI のビルド済み Docker イメージ
 {: #pre-built-circleci-docker-images }
 
-セカンダリ「サービス」コンテナとして使用するデータベース イメージも Docker Hub の `circleci` ディレクトリで提供されています。
+このアプリケーションのビルドには、ビルド済み [CircleCI Docker イメージ]({{ site.baseurl}}/ja/2.0/circleci-images/)の 1 つを使用しています。
 
 CircleCI のビルド済みイメージを使用することを検討してください。 このイメージには、CI 環境で役立つツールがプリインストールされています。 Docker Hub (<https://hub.docker.com/r/circleci/ruby/>) から必要な Ruby バージョンを選択できます。
 
-`working_directory` の直下の `docker` キーで、コンテナ イメージを指定できます。
+セカンダリ「サービス」コンテナとして使用するデータベース イメージも Docker Hub の `circleci` ディレクトリで提供されています。
 
 ---
 
@@ -153,7 +157,7 @@ workflows:
 
 
 ## Ruby on Rails のデモ プロジェクトのビルド
-他のディレクトリを指定しない限り、以降の `job` ではこのパスがデフォルトの作業ディレクトリとなります。
+{: #build-the-demo-ruby-on-rails-project-yourself }
 
 CircleCI を初めて使用する際は、プロジェクトをご自身でビルドしてみることをお勧めします。 以下に、ユーザー自身のアカウントを使用してデモ プロジェクトをビルドする方法を示します。
 
@@ -161,13 +165,16 @@ CircleCI を初めて使用する際は、プロジェクトをご自身でビ�
 2. CircleCI で ［[Add Projects (プロジェクトの追加)](https://circleci.com/add-projects){:rel="nofollow"}] ページにアクセスし、フォークしたプロジェクトの横にある [Build Project (プロジェクトのビルド)] ボタンをクリックします。
 3. 変更を加えるには、`.circleci/config.yml` ファイルを編集してコミットします。 コミットを GitHub にプッシュすると、CircleCI がそのプロジェクトをビルドしてテストします。
 
-## 設定ファイルの詳細
-この例では、以下の 2 つの [CircleCI コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/#イメージのタイプ)が使用されています。
+## 関連項目
+{: #see-also }
 {:.no_toc}
 
-See the [Deploy]({{ site.baseurl }}/2.0/deployment-integrations/) document for examples of deploy target configurations.
+デプロイ ターゲットの構成例については、「[デプロイの構成]({{ site.baseurl }}/ja/2.0/deployment-integrations/)」を参照してください。
 
 このアプリケーションは Ruby on Rails Web アプリケーションの最もシンプルな構成例であり、実際のプロジェクトはこれよりも複雑です。 このため、独自のプロジェクトを構成する際は、以下のサイトのさらに詳細な実際のアプリの例が参考になります。
 
 * [Discourse](https://github.com/CircleCI-Public/discourse/blob/master/.circleci/config.yml): オープンソースのディスカッション プラットフォーム
-* [CircleCI でビルドされた Ruby on Rails デモ プロジェクト](https://circleci.com/gh/CircleCI-Public/circleci-demo-ruby-rails){:rel="nofollow"}
+* [Sinatra](https://github.com/CircleCI-Public/circleci-demo-ruby-sinatra), a demo app for the [simple DSL for quickly creating web applications](http://www.sinatrarb.com/).
+
+[fork-demo-project]: https://github.com/CircleCI-Public/circleci-demo-ruby-rails/tree/2.1-orbs-config
+[rspec-junit-formatter]: https://github.com/sj26/rspec_junit_formatter
