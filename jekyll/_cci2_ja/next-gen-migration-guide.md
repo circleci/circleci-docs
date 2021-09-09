@@ -16,7 +16,7 @@ version:
 ## 概要
 {: #overview }
 
-2020 年より、CircleCI ではコンビニエンス イメージの次世代版の展開を開始しました。 これらのイメージは、[CircleCI 2.0 のローンチ](https://circleci.com/ja/blog/say-hello-to-circleci-2-0/)に合わせリリースされた従来のコンビニエンス イメージに代わるものです。 The next-gen CircleCI convenience images are designed from the ground up for a CI/CD environment. They are designed to be faster, more efficient, and most importantly, more reliable. You can learn more about all of the features [on our blog post](https://circleci.com/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/). As we begin to deprecate the legacy images, this document provides information on the migration process.
+2020 年より、CircleCI ではコンビニエンス イメージの次世代版の展開を開始しました。 これらのイメージは、[CircleCI 2.0 のローンチ](https://circleci.com/ja/blog/say-hello-to-circleci-2-0/)に合わせリリースされた従来のコンビニエンス イメージに代わるものです。 CI/CD 環境に合わせてゼロから設計されており、 従来よりもスピードと効率、そしてなによりも信頼性が大きく向上しています。 次世代コンビニエンス イメージの特徴について詳しくは、[こちらのブログ記事](https://circleci.com/ja/blog/announcing-our-next-generation-convenience-images-smaller-faster-more-deterministic/)をご覧ください。 ここでは、従来イメージが今後廃止されることに伴い、新しいイメージへの移行プロセスについて説明します。
 
 従来のイメージから次世代版に移行するには、名前空間を変更する必要があります。 イメージの Docker 名前空間について、従来のものはすべて `circleci` でしたが、次世代イメージでは `cimg` になるためです。 たとえば、従来の Ruby および Python のイメージを次世代版に移行するには、それぞれ次のように変更します。
 
@@ -56,7 +56,7 @@ circleci/ruby:2.3.0 -> cimg/ruby:2.3.0 circleci/python:3.8.4 -> cimg/python:3.8.
 ### ブラウザー テスト
 {: #browser-testing }
 
-従来のイメージでは、ブラウザー テストを行う場合、利用可能なバリアント タグが 4 種類存在していました。 たとえば、Python v3.7.0 イメージでブラウザー テストを行う場合、circleci/python:3.7.0-browsers という Docker イメージを使用していました。 今後、これら 4 つのタグは、[CircleCI Browser Tools Orb](https://circleci.com/developer/orbs/orb/circleci/browser-tools) との併用を前提とした単一のタグに統合されます。
+従来のイメージでは、ブラウザー テストを行う場合、利用可能なバリアント タグが 4 種類存在していました。 たとえば、Python v3.7.0 イメージでブラウザー テストを行う場合、circleci/python:3.7.0-browsers という Docker イメージを使用していました。 今後、これら 4 つのタグは、[CircleCI Browser Tools Orb](https://circleci.com/developer/ja/orbs/orb/circleci/browser-tools) との併用を前提とした単一のタグに統合されます。
 
 <table>
 <tr><th>従来のバリアント タグ</th><th>次世代のバリアント タグ</th></tr>
@@ -70,7 +70,7 @@ circleci/ruby:2.3.0 -> cimg/ruby:2.3.0 circleci/python:3.8.4 -> cimg/python:3.8.
 
 ベース OS の Ubuntu への統一
 
-従来のイメージでは、バリアント タグによってベース オペレーティング システム (OS) が異なっていました。 たとえば、Debian と Ubuntu のバージョンのイメージがある一方、別のイメージでは異なるベース OS が提供されていました。 This is no longer the case. こうした状態を解消するため、次世代の CircleCI イメージはすべて、Ubuntu の最新 LTS リリースがベース OS となります。
+従来のイメージでは、バリアント タグによってベース オペレーティング システム (OS) が異なっていました。 たとえば、Debian と Ubuntu のバージョンのイメージがある一方、別のイメージでは異なるベース OS が提供されていました。 こうした状態を解消するため、 次世代の CircleCI イメージはすべて、Ubuntu の最新 LTS リリースがベース OS となります。
 
 ベース イメージでは、少なくとも 2 つ以上の LTS リリースと、EOL 前の標準リリースがサポートされます。
 
