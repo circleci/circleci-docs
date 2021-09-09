@@ -33,7 +33,7 @@ NOTE: As a precaution, it's always good to https://circleci.com/docs/2.0/server-
 === Step 0 - Confirm current volume size
 By default, the persistent volume claims used by our internal databases have a capacity of 8Gi. However, this initial value can be set at the time of first deployment from the Kots admin console. We can confirm the size of our persistent volume claim capacity using `kubectl get pvc <pvc-name>`.
 
-For postgres
+For postgres:
 [source,bash]
 ----
 circleci-user ~ $ kubectl get pvc data-postgresql-0
