@@ -102,7 +102,7 @@ For postgres
 circleci-user ~ $ kubectl delete sts postgresql --cascade=false
 ----
 
-For mongodb
+For mongodb:
 [source,bash]
 ----
 circleci-user ~ $ kubectl delete sts mongodb --cascade=false
