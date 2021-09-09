@@ -19,7 +19,7 @@ CircleCI Server is a modern continuous integration and continuous delivery (CI/C
 toc::[]
 
 .CircleCI Services Architecture
-image::arch_server.png[Services 稼働環境]
+image::arch_server.png[Services Architecture]
 <<<
 == ビルド環境
 

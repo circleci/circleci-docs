@@ -76,7 +76,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `contexts-service-migrator`
 | `contexts-service`のためにpostgresqlのマイグレーションを実行します。
-| 起動時にのみ実行されます。
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -88,7 +88,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `cron-service-migrator`
 | cron-serviceのためにpostgresqlのマイグレーションを実行します。
-| 起動時にのみ実行されます。
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 
@@ -100,7 +100,7 @@ WARNING: 移行サービスが起動時にダウンしている場合、接続�
 
 | `domain-service-migrator`
 | `domain-service`のためにpostgresqlのマイグレーションを実行します。
-| 起動時にのみ実行されます。
+| Only runs at startup.
 | icon:check-circle[]
 | `postgres`, `frontend`
 

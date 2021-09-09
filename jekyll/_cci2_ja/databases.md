@@ -31,6 +31,9 @@ CircleCI の [CircleCI Docker Hub](https://hub.docker.com/search?q=circleci&type
 
 ```yml
       - image: circleci/postgres:9.6-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: postgres
 ```
@@ -47,17 +50,21 @@ jobs:
     # すべてのコマンドを実行する場所となるプライマリ コンテナ イメージ
 
     docker:
-
       - image: circleci/python:3.6.2-stretch-browsers
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           TEST_DATABASE_URL: postgresql://root@localhost/circle_test
 
     # サービス コンテナ イメージ
 
       - image: circleci/postgres:9.6.5-alpine-ram
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 
     steps:
-
       - checkout
       - run: sudo apt-get update
       - run: sudo apt-get install postgresql-client-9.6
@@ -109,10 +116,7 @@ jobs:
 
 ```
      steps:
-    # Postgres 9.6 バイナリをパスに追加します。
-       steps:
-    # Postgres 9.6 バイナリをパスに追加します。
-
+    # Add the Postgres 9.6 binaries to the path.
        - run: echo 'export PATH=/usr/lib/postgresql/9.6/bin/:$PATH' >> $BASH_ENV
 ```
 
@@ -129,7 +133,13 @@ jobs:
     working_directory: /your/workdir
     docker:
       - image: your/image_for_primary_container
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
       - image: postgres:9.6.2-alpine
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         environment:
           POSTGRES_USER: your_postgres_user
           POSTGRES_DB: your_postgres_test

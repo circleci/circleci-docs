@@ -43,7 +43,7 @@ version:
 | FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                         |
 | SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                         |
 | ON HOLD     | ワークフロー内のジョブが承認待ちになっている                                                                                          |
-| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
+| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
 
@@ -54,7 +54,7 @@ version:
 * CircleCI API を使用してワークフローをトリガーできるのは、パイプラインが有効化されているプロジェクトのみです。
 * 設定ファイルにワークフローを含めない場合は、`build` という名前のジョブを含める必要があります。
 
-`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows)」セクション_を参照してください。
+`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)」セクション_を参照してください。
 
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
@@ -102,7 +102,7 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前よりも先に実行することをお勧めします。
 - ワークフローの_先頭_に setup ジョブを実行すると、事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備にも役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/2.0/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/2.0/adv-config)」を参照してください。
 
 ### 順次ジョブ実行の例
 {: #sequential-job-execution-example }
@@ -188,8 +188,10 @@ workflows:
   version: 2
   build-test-and-approval-deploy:
     jobs:
-      - build  # 設定ファイルに含まれるカスタム ジョブ。 コードをビルドします。
-      - test1: # カスタム ジョブ。 テスト スイート 1 を実行します。
+      - build  # 設定ファイルに含まれるカスタム ジョブ。
+            コードをビルドします。
+      - test1: # カスタム ジョブ。
+          テスト スイート 1 を実行します。
           requires: # "build" ジョブが完了するまで test1 は実行されません。
             - build
       - test2: # 別のカスタム ジョブ。
@@ -205,6 +207,15 @@ workflows:
       - deploy:
           requires:
             - hold
+          type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
+          requires: # We only run the "hold" job when test2 has succeeded
+           - test2
+      # On approval of the `hold` job, any successive job that requires the `hold` job will run.
+            - build
+      - test2: # another custom job; runs test suite 2,
+          requires: # test2 is dependent on the success of job `test1`
+            - test1
+      - hold: # <<< A job that will require manual approval in the CircleCI web application.
           type: approval # <<< This key-value pair will set your workflow to a status of "On Hold"
           requires: # We only run the "hold" job when test2 has succeeded
            - test2
@@ -288,12 +299,11 @@ workflows:
 
 有効な `schedule` には、`cron` キーと `filters` キーが必要です。
 
-**無効**な cron の範囲構文の例:
+The value of the cron key must be a [valid crontab entry](https://crontab.guru/).
 
 **注:** cron のステップ構文 (`*/1` や `*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内では、範囲エレメントは**サポートされません**。 曜日の範囲エレメント (例: `Tue-Sat`) も**サポートされません**。 代わりに、カンマ区切りの数字を使用してください。
 
-
-`filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
+**無効**な cron の範囲構文の例:
 
 ```yaml
     triggers:
@@ -301,7 +311,7 @@ workflows:
           cron: "5 4 * * 1,3-5,6" # < "-" は無効な範囲区切り文字です
 ```
 
-詳細については、「CircleCI を設定する」の「[`branches`]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)」セクションを参照してください。
+**有効**な cron の範囲構文の例:
 
 ```yaml
     triggers:
@@ -309,22 +319,22 @@ workflows:
           cron: "5 4 * * 1,3,4,5,6"
 ```
 
+`filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
+
+詳細については、「CircleCI を設定する」の「[`branches`]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)」セクションを参照してください。
+
 このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
-
-For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
-
-次のセクションではジョブの実行を管理するコンテキストとフィルターの使い方を解説しています。
 
 ## ワークフローにおけるコンテキストとフィルターの使用
 {: #using-contexts-and-filtering-in-your-workflows }
 
-The following sections provide example for using Contexts and filters to manage job execution.
+次のセクションではジョブの実行を管理するコンテキストとフィルターの使い方を解説しています。
 
 ### ジョブ コンテキストを使用して環境変数を共有する
 {: #using-job-contexts-to-share-environment-variables }
 {:.no_toc}
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)で確認できます。
 
 下記で示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う設定を施した、シーケンシャルジョブ Workflow の例です。
 
@@ -357,7 +367,7 @@ workflows:
 
 ![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
-ワークフロー構成例の全文は、ブランチを含む順次ワークフロー サンプル プロジェクトの[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
+下記で示した `config.yml` ファイルのコードは、ブランチレベルのジョブ実行の設定を施した Workflow の例です。
 
 ```yaml
 workflows:
@@ -382,7 +392,7 @@ workflows:
 
 正規表現の詳細については、この後の「[正規表現を使用してタグとブランチをフィルタリングする](#using-regular-expressions-to-filter-tags-and-branches)」を参照してください。
 
-下記で示した `config.yml` ファイルのコードは、ブランチレベルのジョブ実行の設定を施した Workflow の例です。
+ワークフロー構成例の全文は、ブランチを含む順次ワークフロー サンプル プロジェクトの[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
 
 ### Git タグに対応するワークフローを実行する
 {: #executing-workflows-for-a-git-tag }
@@ -538,6 +548,10 @@ Workflow には必ず Workspace というものが割り当てられています
 `attach_workspace` キーをセットして、保存されたデータを取得できるようにします。 下記の `config.yml` ファイルでは 2 つのジョブ、`flow` ジョブで作られたリソースを使う `downstream` ジョブ、を定義しています。 Workflow はシーケンシャルのため、`downstream` ジョブの処理がスタートする前に `flow` ジョブが終了していなければなりません。
 
 ```yaml
+# Note that the following stanza uses CircleCI 2.1 to make use of a Reusable Executor
+# This allows defining a docker image to reuse across jobs.
+# visit https://circleci.com/docs/2.0/reusing-config/#authoring-reusable-executors to learn more.
+
 # 以下のスタンザは、CircleCI 2.1 を使用して再利用可能な Executor を使用していることに注意してください。
 # これにより、ジョブ間で再利用される Docker イメージを定義できます。
 # 詳細については、https://circleci.com/ja/docs/2.0/reusing-config/#authoring-reusable-executors を参照してください。
@@ -564,9 +578,10 @@ jobs:
       - persist_to_workspace:
           # 絶対パスまたは working_directory からの相対パスでなければなりません。
       - persist_to_workspace:
-          # Must be an absolute path, or relative path from working_directory. This is a directory on the container which is
+          # Must be an absolute path, or relative path from working_directory.
+      #  絶対パス、または working_directory からの相対パスで指定する必要があります。 This is a directory on the container which is
           # taken to be the root directory of the workspace.
-           #  絶対パス、または working_directory からの相対パスで指定する必要があります。これは、コンテナ上のディレクトリで、ワークスペースのルートディレクトリと見なされます。
+          これは、コンテナ上のディレクトリで、ワークスペースのルートディレクトリと見なされます。
           root: workspace
           # ルートからの相対パスを指定する必要があります
           paths:
@@ -604,7 +619,7 @@ workflows:
 ## ワークフロー内の失敗したジョブの再実行
 {: #rerunning-a-workflows-failed-jobs }
 
-Workflow を利用すると、ビルドの失敗に迅速に対応できるようになります。その際、ワークフローのなかで**失敗した**ジョブのみを再実行できます。 CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
+When you use workflows, you increase your ability to rapidly respond to failures. その際、ワークフローのなかで**失敗した**ジョブのみを再実行できます。 CircleCI で **[Workflows (ワークフロー)]** アイコンをクリックし、目的のワークフローを選んでジョブごとのステータスを表示してから、**[Rerun (再実行)]** ボタンをクリックして **[Rerun from failed (失敗からの再実行)]** を選びます。
 
 ![CircleCI の Workflow ページ]({{ site.baseurl }}/assets/img/docs/rerun-from-failed.png)
 
@@ -650,9 +665,13 @@ GitHub で [Settings (設定)] > [Branches (ブランチ)] に移動し、保護
 ## ビデオ: ワークフローに複数のジョブを構成する
 {: #video-configure-multiple-jobs-with-workflows }
 {:.no_toc}
+{:.no_toc}
+{:.no_toc}
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/3V84yEz6HwA" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>
 
 ### ビデオ: 自動的にテストおよびデプロイを行うようビルドのスケジュールを設定する
 {: #video-how-to-schedule-your-builds-to-test-and-deploy-automatically }
+{:.no_toc}
+{:.no_toc}
 {:.no_toc}
 {:.no_toc} <iframe width="560" height="315" src="https://www.youtube.com/embed/FCiMD6Gq34M" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen mark="crwd-mark"></iframe>

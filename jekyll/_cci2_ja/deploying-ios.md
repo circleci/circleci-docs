@@ -52,16 +52,21 @@ increment_build_number(
 ### Setting up
 {: #setting-up }
 
-To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account. For ease of use and security, it is advisable to create a new user, with limited privileges, in App Store Connect that will only be used for your CI jobs.
+To set up Fastlane to automatically upload iOS binaries to App Store Connect and/or TestFlight, a few steps need to be followed to allow Fastlane access to your App Store Connect account.
 
-1. Head over to the [Users and Access](https://appstoreconnect.apple.com/access/users) section of App Store Connect
-2. Click on the `+` to add a new user
-3. Fill out the form, giving the user a unique email (such as `ci@yourcompany.com`) and select the "App Manager" role along with selecting the app to provide access to.
-4. Check the email inbox for the user you just created and click on the confirmation link
+The recommended way to set this up is to generate and use an App Store Connect API key. This prevents issues occurring with 2FA, which is now mandatory for Apple IDs, and is the most reliable way of interacting with the service.
 
-**Note:** If this is a new Apple ID, you may need to log in to [Apple ID](https://appleid.apple.com/) and App Store Connect/Developer Portal at least once to agree to any privacy policies before being able to use the account for Fastlane
+To create an API Key, follow the steps outlined in the [Apple Developer Documentation](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api). Once you have the resulting `.p8` file, make a note of the *Issuer ID* and *Key ID* which can be found on the [App Store Connect API Keys page](https://appstoreconnect.apple.com/access/api).
 
-Next, the password for the App Store Connect user needs to be added to the CircleCI project as an environment variable. In the project settings on CircleCI, navigate to **Build Settings -> Environment Variables** and add the `FASTLANE_PASSWORD` variable, and set its value to the password for the App Store Connect account. The password will be stored encrypted at rest.
+**Note:** Ensure you download the `.p8` file and store it somewhere safe. The file cannot be downloaded again once you navigate away from the App Store Connect portal.
+
+Next, a few environment variables need to be set. In the project settings on CircleCI, navigate to **Build Settings -> Environment Variables** and add the `FASTLANE_PASSWORD` variable, and set its value to the password for the App Store Connect account.
+
+* `APP_STORE_CONNECT_API_KEY_ISSUER_ID` to the Issuer ID. Example: `6053b7fe-68a8-4acb-89be-165aa6465141`
+* `APP_STORE_CONNECT_API_KEY_KEY_ID` to your Key ID. Example: `D383SF739`
+* `APP_STORE_CONNECT_API_KEY_KEY` to the contents of your `.p8` file. Example: `-----BEGIN PRIVATE KEY-----\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHknlhdlYdLu\n-----END PRIVATE KEY-----`
+
+**Note:** To find the contents of the `.p8` file, open it in a text editor. You will need to replace each new line with `\n` so that it forms one long string.
 
 Finally, Fastlane requires some information from us in order to know which Apple ID to use and which app identifier we are targeting. These can be set in the `fastlane/Appfile` as follows:
 
@@ -70,6 +75,8 @@ Finally, Fastlane requires some information from us in order to know which Apple
 apple_id "ci@yourcompany.com"
 app_identifier "com.example.HelloWorld"
 ```
+
+Once this is configured, you just need to call `app_store_connect_api_key` in your lane before calling any actions that interact with App Store Connect (such as `pilot` and `deliver`).
 
 ### Deploying to the App Store
 {: #deploying-to-the-app-store }

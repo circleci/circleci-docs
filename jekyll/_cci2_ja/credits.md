@@ -28,6 +28,7 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 - 無制限のユーザー シート数 (最初の 3 ユーザーは 15 ドル、それ以降は 1 ユーザーごとに 15 ドル)
 - Docker/Linux の各種マシン タイプ (Small、Medium、Medium+、Large、X-Large)
 - macOS のマシン タイプ
+- Docker layer caching
 
 この例では、チームが複数のグループに分かれ、それぞれ異なるプロジェクトを進めています。 大規模なプロジェクトもあれば、CI の構成で割り当てるリソースが少なくて済む小規模なプロジェクトもあります。 クレジットを使用すると、リソースを最大化する必要があるマシンと利用時間をピンポイントで指定できます。 たとえば、大規模なプロジェクトのビルドを高速化するためには `large` `resource_class` (vCPU 4 基、RAM 8 GB、20 クレジット/分) を使用できます。 一方、小規模なプロジェクトでコードのリリース頻度が低い場合や、ビルド時間を重視しない場合は `small` `resource_class` (vCPU 1 基、RAM 2 GB、5 クレジット/分) を使用できます。
 
@@ -39,7 +40,7 @@ CircleCI のクレジットベースの従量課金制プランでは、チー�
 To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI web application. From there, select the plan that best fits your needs.
 
 ## Free プラン
-Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
+{: #free-plan }
 
 従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
 
@@ -53,7 +54,7 @@ Performance プランにアップグレードすると、Free プランの内容
 ## Performance プラン
 {: #performance-plan }
 
-Upgrading to a performance plan offers several improvements over the free plan:
+Performance プランにアップグレードすると、Free プランの内容に加えて複数のメリットが提供されます。
 
 - すべてのマシン サイズの Docker/Linux ベース マシンへのアクセス
 - Medium サイズの macOS マシン (vCPU 4 基、RAM 8 GB、50 クレジット/分) へのアクセス
@@ -69,12 +70,12 @@ Free プランの組織には、毎月 400,000 クレジットが無料で付与
 
 CircleCI の Free プランを使用して macOS でビルドを行っている組織にも、毎月 25,000 クレジットが無料で付与され、macOS オープンソース プロジェクトのビルドに利用できます。 ご希望の方は、billing@circleci.com までお問い合わせください。
 
-## Docker レイヤー キャッシュ
+## Docker layer caching
 {: #docker-layer-caching }
 
 Docker レイヤー キャッシュ (DLC) は 1 回のジョブ実行につき 200 クレジットでご利用いただけます。 DLC は Performance プランでのみ提供されます。 DLC の詳細については、[こちらのドキュメント]({{site.baseurl}}/ja/2.0/docker-layer-caching)をご覧ください。
 
-## ご意見・ご質問
+## トラブルシューティング
 {: #troubleshooting }
 
 ### Am i charged if my build is "queued" or "preparing"?
