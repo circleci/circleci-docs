@@ -597,129 +597,13 @@ from communicating with services that should not be accessed by arbitrary code (
 not block access to/from Nomad clients or `setup_remote_docker` will fail.
 
 ### AWS
-If you would like to install Nomad clients in AWS, create a file `main.tf` file with the following contents:
-
-[source,text]
-----
-# main.tf
-terraform {
-  required_version = ">= 0.15.4"
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = ">=3.0.0"
-    }
-  }
-}
-provider "aws" {
-# Your region of choice here
-region = "us-west-1"
-}
-
-module "nomad_clients" {
-source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-aws?ref=3.1.0"
-
-  # Number of nomad clients to run
-  nodes = 4
-  subnet = "<< ID of subnet you want to run nomad clients in >>"
-  vpc_id = "<< ID of VPC you want to run nomad client in >>"
-
-  server_endpoint = "<< hostname:port of nomad server >>"
-
-  dns_server = "<< ip address of your VPC DNS server >>"
-  blocked_cidrs = [
-    "<< cidr blocks you’d like to block access to e.g 10.0.1.0/24 >>"
-  ]
-}
-
-output "nomad_server_cert" {
-value = module.nomad_clients.nomad_server_cert
-}
-
-output "nomad_server_key" {
-value = module.nomad_clients.nomad_server_key
-}
-
-output "nomad_ca" {
-value = module.nomad_clients.nomad_tls_ca
-}
-----
-
-To deploy your Nomad clients simply run:
-
-[source,bash]
-----
-terraform init
-terraform plan
-terraform apply
-----
-
-After Terraform is done spinning up the Nomad client(s), it will output the certificates and key needed for Nomad mTLS
-encryption mentioned in the xref:server-3-install.adoc#enable-mutual-tls-mtls[Nomad configuration section]. Make sure to
-copy them somewhere safe.
-
-Once terraform apply is complete, click on the *Application* tab in the admin console and wait for the deployment Status
-to show "Ready," then move on to the next step.
+If you would like to install Nomad clients in AWS, create a `main.tf` file referring to this https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[README] for a full example and list of required fields.
 
 ### Google Cloud Platform
 
-If you’d like to to install Nomad clients in Google Cloud Platform, create a file `main.tf`. An example is provided below
-to document common settings. For documentation on all available variables please see https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[the
-module README].
+If you’d like to to install Nomad clients in Google Cloud Platform, create a `main.tf` file referring to this https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[README] for a full example and list of required fields.
 
-[source,text]
-----
-# main.tf
-provider "google-beta" {
-  # Your specific credentials here
-  project = "your-project"
-  region  = "us-west1"
-  zone    = "us-west1-a"
-}
-
-module "nomad_clients" {
-  # Note the use of ref=<<tag>> to pin the version to a fixed release
-  source = "git::https://github.com/CircleCI-Public/server-terraform.git//nomad-gcp?ref=3.1.0"
-
-  zone    = "us-west1-a"
-  region  = "us-west1"
-  network = "my-network"
-  # Only specify a subnet if you use custom subnetworks in your VPC. Otherwise delete the next line.
-  subnet  = "my-nomad-subnet"
-
-  # hostname:port of Nomad load balancer, leave port as 4647 unless you know what you are doing
-  server_endpoint = "nomad.example.com:4647"
-
-  # Number of nomad clients to run
-  min_replicas     = 3
-  max_replicas     = 10
-
-  # Example autoscaling policy: scale up if we ever reach 70% cpu utilization
-  autoscaling_mode = "ONLY_UP"
-  target_cpu_utilization = 0.70
-
-  # Network policy example: block access to 1.1.1.1 from jobs and allow retry
-  # with SSH from only 2.2.2.2
-  blocked_cidrs = [
-    "1.1.1.1/32"
-  ]
-  retry_with_ssh_allowed_cidr_blocks = [
-    "2.2.2.2/32"
-  ]
-}
-
-output "nomad_server_cert" {
-  value = module.nomad_clients.nomad_server_cert
-}
-
-output "nomad_server_key" {
-  value = module.nomad_clients.nomad_server_key
-}
-
-output "nomad_ca" {
-  value = module.nomad_clients.nomad_tls_ca
-}
-----
+### Deploy your Nomad clients
 
 To deploy your Nomad clients simply run:
 
