@@ -31,32 +31,33 @@ Webhook は多くの目的にご活用いただけます。 具体的な例は�
 - ワークフローやジョブが完了したら内部通知システムをトリガーし、アラートを送信する。
 - 独自の自動化ブラグインやツールを作成する。
 
-## Communication Protocol
+## フックのセットアップ
 {: #communication-protocol }
 
-A webhook is sent whenever an event occurs on the CircleCI platform.
+CircleCI では、現在以下のイベントの Webhook を利用できます。
 
-A webhook is sent using an HTTP POST, to the URL that was registered when the webhook was created, with a body encoded using JSON.
+Webhook は、HTTP POST により、Webhook 作成時に登録した URL に JSON でエンコードされた本文と共に送信されます。
 
-CircleCI expects that the server that responds to a webhook will return a 2xx response code. If a non-2xx response is received, CircleCI will retry at a later time. If CircleCI does not receive a response to the webhook within a short period of time, we will assume that delivery has failed, and we will retry at a later time. The timeout period is currently 5 seconds, but is subject to change during the preview period. The exact details of the retry policy are not currently documented, and are subject to change during the preview period. Please [get in touch with our team if you have feedback about timeouts and retries](https://circleci.canny.io/webhooks).
+CircleCI は、Webhook に応答したサーバーが 2xx のレスポンス コードを返すことを想定しています。 2xx 以外のレスポンスを受信した場合、CircleCI は、後ほど再試行します。 短時間のうちに Webhook への応答がない場合も、配信に失敗したと判断して後ほど再試行します。 タイムアウト時間は現在5秒ですが、プレビュー期間中に変更される場合があります。 再試行ポリシーの正確な詳細は現在文書化されておらず、プレビュー期間中に変更される場合があります。 タイムアウトや再試行についてフィードバックがあれば、 [サポートチームにご連絡ください](https://circleci.canny.io/webhooks)。
 
-### Headers
-{: #headers }
+### プロジェクト
+<sup>1</sup> こちらはテストの場合のみチェックボックスをオフのままにします。
 
-A number of HTTP headers are set on webhooks, as detailed in the table below.
+Webhook には、以下のような多くの HTTP ヘッダーが設定されています。
 
-| Header Name         | Value                                                                                                                                |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| Content-Type        | `application/json`                                                                                                                   |
-| User-Agent          | A string indicating that the sender was CircleCI (`CircleCI-Webhook/1.0`). The value is subject to change during the preview period. |
-| Circleci-Event-Type | The type of event, (`workflow-completed`, `job-completed`, etc.)                                                                     |
-| Circleci-Signature  | When present, this signature can be used to verify that the sender of the webhook has access to the secret token.                    |
+| コミットのオーサー名         | 値                                                                             |
+| ------------------ | ----------------------------------------------------------------------------- |
+| 型                  | `application/json
+`                                                           |
+| User-Agent         | 送信者が CircleCI であることを示す文字列（`CircleCI-Webhook/1.0`）。 この値はプレビュー期間中に変更される場合があります。 |
+| イベントタイプ            | イベントのタイプ （`workflow-completed`、`job-completed`など）                             |
+| Circleci-Signature | この署名により Webhook の送信者にシークレット トークンへのアクセス権が付与されているかどうかを検証することができます。              |
 {: class="table table-striped"}
 
-## Setting up a hook
+## イベントの仕様
 {: #setting-up-a-hook}
 
-Webhooks are set up on a per-project basis. To get started:
+Webhook はプロジェクトごとにセットアップされます。 方法は以下のとおりです。
 
 1. CircleCI 上にセットアップしたプロジェクトにアクセスします。
 1. **Project Settings** をクリックします。
@@ -65,63 +66,64 @@ Webhooks are set up on a per-project basis. To get started:
 1. Webhook フォームに入力します（フィールドとその説明については下の表をご覧ください）。
 1. 受信用 API またはサードパーティのサービスがセットアップされている場合、**Test Ping Event** をクリックしてテストイベントをディスパッチします。
 
-| Field                  | Required? | Intent                                                                                      |
-| ---------------------- | --------- | ------------------------------------------------------------------------------------------- |
-| Webhook name           | Y         | The name of your webhook                                                                    |
-| URL                    | Y         | The URL the webhook will make POST requests to.                                             |
-| Certificate Validation | Y         | Ensure the receiving host has a valid SSL certificate before sending an event <sup>1</sup>. |
-| Secret token           | Y         | Used by your API/platform to validate incoming data is from CircleCI.                       |
-| Select an event        | Y         | You must select at least one event that will trigger a webhook.                             |
+| フィールド                  | 必須？ | 説明                                                              |
+| ---------------------- | --- | --------------------------------------------------------------- |
+| Webhook name           | ○   | Webhook 名                                                       |
+| URL                    | ○   | Webhook が Post リクエストを送信する URL                                   |
+| Certificate Validation | ○   | イベント<sup>1</sup>を送信する前に受信ホストが有効な SSL 証明書を保持していることを確認します。        |
+| Secret token           | ○   | 受信データが CircleCI からのデータかどうかを検証するために、ご自身の API または プラットフォームで使用します。 |
+| Select an event        | ○   | Webhook をトリガーするイベントを少なくとも１つ選択しなければなりません。                        |
 {: class="table table-striped"}
 
-<sup>1</sup>Only leave this unchecked for testing purposes.
+<sup>1</sup> こちらはテストの場合のみチェックボックスをオフのままにします。
 
-**Note: There is a limit of 5 Webhooks per project.**
+**注: 1つのプロジェクトにつき Webhook は５つまでです。**
 
-## Payload signature
+## 共通のトップ レベル キー
 {: #payload-signature}
 
-You should validate incoming webhooks to verify that they are coming from CircleCI. To support this, when creating a webhook, you can optionally provide a secret token. Each outgoing HTTP request to your service will contain a `circleci-signature` header. This header will consist of a comma-separated list of versioned signatures.
+受信する Webhook を検証して、 送信元が CircleCI であることを確認する必要があります。 これを行うために、Webhook を作成する際に、シークレット トークンをオプションで提供することができます。 お客様のサービスへの送信HTTPリクエストごとに、 `circleci-signature` ヘッダーが含まれます。 このヘッダーは、バージョン管理された署名のリストで構成され、カンマで区切られています。
 
 ```
 POST /uri HTTP/1.1
 Host: your-webhook-host
 circleci-signature: v1=4fcc06915b43d8a49aff193441e9e18654e6a27c2c428b02e8fcc41ccc2299f9,v2=...,v3=...
+
 ```
 
-Currently, the latest (and only) signature version is v1. You should *only* check the latest signature type to prevent downgrade attacks.
+現在、最新の（そして唯一の）署名バージョンは v1 です。 ダウングレード攻撃を防ぐために、最新の署名タイプを*必ず*確認する必要があります。
 
-The v1 signature is the HMAC-SHA256 digest of the request body, using the configured signing secret as the secret key.
+この v1 署名は、リクエストボディのHMAC-SHA256ダイジェストであり、 設定された署名シークレットをシークレット キーとして使用しています。
 
-Here are some example signatures for given request bodies:
+プロジェクトに関するデータ
 
-| Body                           | Secret Key       | Signature                                                          |
+| フィールド                          | 常に表示             | 説明                                                                 |
 | ------------------------------ | ---------------- | ------------------------------------------------------------------ |
-| `hello world`                  | `secret`         | `734cc62f32841568f45715aeb9f4d7891324e6d948e4c6c60c0621cdac48623a` |
+| `hello World`                  | `secret`         | `734cc62f32841568f45715aeb9f4d7891324e6d948e4c6c60c0621cdac48623a` |
 | `lalala`                       | `another-secret` | `daa220016c8f29a8b214fbfc3671aeec2145cfb1e6790184ffb38b6d0425fa00` |
 | `an-important-request-payload` | `hunter123`      | `9be2242094a9a8c00c64306f382a7f9d691de910b4a266f67bd314ef18ac49fa` |
 {: class="table table-striped"}
 
-The following is an example of how you might validate signatures in Python:
+以下は、Pythonで署名を検証する場合の例です。
 
 ```
 import hmac
 
 def verify_signature(secret, headers, body):
-    # get the v1 signature from the `circleci-signature` header
+    # ヘッダー`circleci-signature` から v1 署名を取得します。
     signature_from_header = {
         k: v for k, v in [
             pair.split('=') for pair in headers['circleci-signature'].split(',')
         ]
     }['v1']
 
-    # Run HMAC-SHA256 on the request body using the configured signing secret
+    # 設定した署名シークレットを使って リクエスト ボディーで HMAC-SHA256 を実行します。
     valid_signature = hmac.new(bytes(secret, 'utf-8'), bytes(body, 'utf-8'), 'sha256').hexdigest()
 
-    # use constant time string comparison to prevent timing attacks
+    # 一定時間文字列比較を使ってタイミング攻撃を防ぎます。
     return hmac.compare_digest(valid_signature, signature_from_header)
 
-# the following will return `True`
+# 以下の場合 `True` を返します。
 verify_signature(
     'secret',
     {
@@ -130,7 +132,7 @@ verify_signature(
     'foo',
 )
 
-# the following will return `False`
+# 以下の場合 `False` を返します。
 verify_signature(
     'secret',
     {
@@ -138,138 +140,139 @@ verify_signature(
     },
     'foo',
 )
+
 ```
 
-## Event Specifications
+## 共通のサブエンティティ
 {: #event-specifications}
 
-CircleCI currently offers webhooks for the following events:
+CircleCI では、現在以下のイベントの Webhook を利用できます。
 
-| Event type         | Description                             | Potential statuses                                       | Included sub-entities                          |
-| ------------------ | --------------------------------------- | -------------------------------------------------------- | ---------------------------------------------- |
-| workflow-completed | A workflow has reached a terminal state | "success", "failed", "error", "canceled", "unauthorized" | project, organization, workflow, pipeline      |
-| job-completed      | A job has reached a terminal state      | "success", "failed", "canceled", "unauthorized"          | project, organization, workflow, pipeline, job |
+| イベントタイプ            | 説明                  | 状態の例                                                     | 含まれるサブエンティティ                |
+| ------------------ | ------------------- | -------------------------------------------------------- | --------------------------- |
+| workflow-completed | ワークフローが終了状態になっています。 | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン     |
+| job-completed      | ジョブが終了状態になっています。    | "success", "failed", "error", "canceled", "unauthorized" | プロジェクト、組織、ワークフロー、パイプライン、ジョブ |
 {: class="table table-striped"}
 
-## Common top level keys
+## 共通のトップレベル キー
 {: #common-top-level-keys}
 
-Each Webhook will have some common data as part of the event:
+イベントの一部として、各Webhook に共通するデータがあります。
 
-| Field       | Description                                                                                        | Type   |
-| ----------- | -------------------------------------------------------------------------------------------------- | ------ |
-| id          | ID used to uniquely identify each event from the system (the client can use this to dedupe events) | String |
-| happened_at | ISO 8601 timestamp representing when the event happened                                            | String |
-| webhook     | A map of metadata representing the webhook that was triggered                                      | Map    |
+| フィールド       | 説明                                                          | タイプ |
+| ----------- | ----------------------------------------------------------- | --- |
+| id          | システムからの各イベントを一意に識別するための ID (クライアントはこれを使って重複するイベントを削除できます。 ） | 文字列 |
+| happened_at | イベントが発生した日時を表す ISO 8601 形式のタイムスタンプ                          | 文字列 |
+| webhook     | トリガーされた Webhook を表すメタデータのマップ                                | マップ |
 {: class="table table-striped"}
 
-**Note:** The event payloads are open maps, meaning new fields may be added to maps in the webhook payload without considering it a breaking change.
+**注: ** イベントのペイロードはオープンなマップであり、新しいフィールドが互換性を損なう変更とみなされずにWebhook のペイロードのマップに追加される可能性があります。
 
 
-## Common sub-entities
+## 共通のサブエンティティ
 {: #common-sub-entities}
 
-The next sections describe the payloads of different events offered with CircleCI webhooks. The schema of these webhook events will share often share data with other webhooks - we refer to these as common maps of data as "sub-entities". For example, when you receive an event payload for the `job-completed` webhook, it will contains maps of data for your *project, organization, job, workflow and pipeline*.
+ここでは CicrcleCI の Webhook が提供する様々なイベントのペイロードについて説明します。 これらの Webhook イベントのスキーマは、多くの場合共有データを他の Webhook と共有します。 Circle CI では、このことをデータの共通マップとして「サブエンティティー」と呼びます。 例えば、`job-completed` 状態の Webhook のイベント ペイロードを受信した場合、それにはご自身の*プロジェクト、組織、ジョブ、ワークフロー、およびパイプライン* のデータマップが含まれます。
 
-Let's look at some of the common sub-entities that will appear across various webhooks:
+以下は、さまざまな Webhook で表示される共通のサブエンティティの例です。
 
-### Project
+### 組織
 {: #project}
 
-Data about the project associated with the webhook event.
+Webhook イベントに関連するプロジェクトに関するデータ
 
-| Field | Always present? | Description                                                                                                   |
-| ----- | --------------- | ------------------------------------------------------------------------------------------------------------- |
-| id    | yes             | Unique ID of the project                                                                                      |
-| slug  | yes             | String that can be used to refer to a specific project in many of CircleCI's APIs (e.g. "gh/circleci/web-ui") |
-| name  | yes             | Name of the project (e.g. "web-ui")                                                                           |
+| フィールド | 常に表示 | 説明                                                                     |
+| ----- | ---- | ---------------------------------------------------------------------- |
+| id    | ○    | プロジェクトの一意の ID                                                          |
+| slug  | ○    | 多くの CircleCI の API の中で特定のプロジェクト（例えば、gh/circleci/web-ui）を参照するために使用する文字列 |
+| name  | ○    | プロジェクト名（例：web-ui）                                                      |
 {: class="table table-striped"}
 
-### Organization
+### ジョブ
 {: #organization}
 
-Data about the organization associated with the webhook event.
+組織に関するデータ
 
-| Field | Always present? | Description                                |
-| ----- | --------------- | ------------------------------------------ |
-| id    | yes             | Unique ID of the organization              |
-| name  | yes             | Name of the organization (e.g. "circleci") |
+| フィールド | 常に表示 | 説明               |
+| ----- | ---- | ---------------- |
+| id    | ○    | 組織の一意の ID        |
+| name  | ○    | 組織名 (例：CircleCI) |
 {: class="table table-striped"}
 
-### Job
+### ワークフロー
 {: #job}
 
-A job typically represents one phase in a CircleCI workload (e.g. "build", "test", or "deploy") and contains a series of steps.
+通常、CircleCI のワークロードにおけるある期間を表し（例：「ビルド」、「テスト」、または「デプロイ」）、一連のステップを含むジョブ。
 
-| Field         | Always present? | Description                                                                                                  |
-| ------------- | --------------- | ------------------------------------------------------------------------------------------------------------ |
-| id            | yes             | Unique ID of the job                                                                                         |
-| number        | yes             | An auto-incrementing number for the job, sometimes used in CircleCI's APIs to identify jobs within a project |
-| name          | yes             | Name of the job as defined in .circleci/config.yml                                                           |
-| status        | yes             | Current status of the job                                                                                    |
-| started\_at | yes             | When the job started running                                                                                 |
-| stopped\_at | no              | When the job reached a terminal state (if applicable)                                                        |
+| フィールド         | 常に表示 | 説明                                                                |
+| ------------- | ---- | ----------------------------------------------------------------- |
+| id            | ○    | ジョブの一意の ID                                                        |
+| number        | ○    | ジョブの自動インクリメント番号。 CircleCI の API でプロジェクト内のジョブを識別するために使用される場合があります。 |
+| name          | ○    | .circleci/config.yml で定義されているジョブ名                                 |
+| status        | ○    | ジョブの現在の状態                                                         |
+| started\_at | ○    | ジョブの実行が開始された時間                                                    |
+| stopped\_at | ×    | ワークフローが終了状態になった時間（該当する場合）                                         |
 {: class="table table-striped"}
 
 
-### Workflow
+### パイプライン
 {: #workflow}
 
-Workflows contain many jobs, which can run in parallel and/or have dependencies between them. A single git-push can trigger zero or more workflows, depending on the CircleCI configuration (but typically one will be triggered).
+ワークフローには多くのジョブが含まれ、それらは並列で実行される、およびまたは依存関係を持っています。 １回のgit-push で、CircleCI の構成に応じて、ゼロ以上のワークフローをトリガーすることができます（通常は１つのワークフローがトリガーされます）。
 
 
-| Field         | Always present? | Description                                                        |
-| ------------- | --------------- | ------------------------------------------------------------------ |
-| id            | Yes             | Unique ID of the workflow                                          |
-| name          | Yes             | Name of the workflow as defined in .circleci/config.yml            |
-| status        | No              | Current status of the workflow. Not included in job-level webhooks |
-| created\_at | Yes             | When the workflow was created                                      |
-| stopped_at    | No              | When the workflow reached a terminal state (if applicable)         |
-| url           | Yes             | URL to the workflow in CircleCI's UI                               |
+| フィールド         | 常に表示 | 説明                                      |
+| ------------- | ---- | --------------------------------------- |
+| id            | ○    | ワークフローの一意の ID                           |
+| name          | ○    | .circleci/config.yml で定義されているワークフロー名    |
+| status        | ×    | ワークフローの現在の状態。 ジョブレベルの Webhook には含まれません。 |
+| created\_at | ○    | ワークフローが作成された時間                          |
+| stopped_at    | ×    | ワークフローが終了状態になった時間（該当する場合）               |
+| url           | ○    | CircleCI の UI にあるワークフローへの URL           |
 {: class="table table-striped"}
 
-### Pipeline
+### トリガー
 {: #pipeline}
 
-Pipelines are the most high-level unit of work, and contain zero or more workflows. A single git-push always triggers up to one pipeline. Pipelines can also be triggered manually through the API.
+パイプラインは最もハイレベルな作業単位で、ゼロ以上のワークフローが含まれます。 １回の git-push で、常に最大で１つのパイプラインをトリガーします。 パイプラインは API から手動でトリガーすることもできます。
 
-| Field         | Always present? | Description                                                                       |
-| ------------- | --------------- | --------------------------------------------------------------------------------- |
-| id            | Yes             | Globally unique ID of the pipeline                                                |
-| number        | Yes             | Number of the pipeline, which is auto-incrementing / unique per project           |
-| created\_at | Yes             | When the pipeline was created                                                     |
-| trigger       | Yes             | A map of metadata about what caused this pipeline to be created -- see below      |
-| vcs           | No              | A map of metadata about the git commit associated with this pipeline -- see below |
+| フィールド         | 常に表示 | 説明                                         |
+| ------------- | ---- | ------------------------------------------ |
+| id            | ○    | グローバルに一意なパイプラインの ID                        |
+| number        | ○    | バイプラインの番号（自動インクリメントまたはプロジェクトごとに一意）         |
+| created\_at | ○    | パイプラインが作成された時間                             |
+| trigger       | ○    | このパイプラインが作成された原因に関するメタデータ マップ（以下を参照）       |
+| vcs           | ×    | このパイプラインに関連する Git コミットに関するメタデータ マップ（以下を参照） |
 {: class="table table-striped"}
 
-### Trigger
+### トリガー
 {: #trigger}
 
-| Field    | Always present? | Description                                                         |
-| -------- | --------------- | ------------------------------------------------------------------- |
-| type     | yes             | How this pipeline was triggered (e.g. "webhook", "api", "schedule") |
-| actor.id | No              | The user who triggered the pipeline, if there is one                |
+| フィールド    | 常に表示 | 説明                                                 |
+| -------- | ---- | -------------------------------------------------- |
+| type     | ○    | このパイプラインがどのようにトリガーされたか（例：「Webhook」、「API」、「スケジュール」） |
+| actor.id | ×    | パイプラインをトリガーしたユーザー（存在する場合）                          |
 {: class="table table-striped"}
 
 
 ### VCS
 {: #vcs}
 
-Note: The vcs map or its contents may not always be provided in cases where the information doesn't apply, such as future scenarios in which a pipeline isn't associated with a git commit.
+注：将来、パイプラインが Git コミットと関連していない場合など情報が当てはまらない場合、VCS マップまたはそのコンテンツが提供されないことがあります。
 
-| Field                   | Always present? | Description                                                                                                        |
-| ----------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------ |
-| target_repository_url | no              | URL to the repository building the commit                                                                          |
-| origin_repository_url | no              | URL to the repository where the commit was made (this will only be different in the case of a forked pull request) |
-| revision                | no              | Git commit being built                                                                                             |
-| commit.subject          | no              | Commit subject (first line of the commit message). Note that long commit subjects may be truncated.                |
-| commit.body             | no              | Commit body (subsequent lines of the commit message). Note that long commit bodies may be truncated.               |
-| commit.author.name      | no              | Name of the author of this commit                                                                                  |
-| commit.author.email     | no              | Email address of the author of this commit                                                                         |
-| commit.authored\_at   | no              | Timestamp of when the commit was authored                                                                          |
-| commit.committer.name   | no              | Name of the committer of this commit                                                                               |
-| commit.committer.email  | no              | Email address of the committer of this commit                                                                      |
-| commit.committed_at     | no              | Timestamp of when the commit was committed                                                                         |
-| branch                  | no              | Branch being built                                                                                                 |
-| tag                     | no              | Tag being built (mutually exclusive with "branch")                                                                 |
+| フィールド                   | 常に表示 | 説明                                                      |
+| ----------------------- | ---- | ------------------------------------------------------- |
+| target_repository_url | ×    | コミットをビルドするレポジトリへの URL                                   |
+| origin_repository_url | ×    | コミットが作成されたレポジトリへの URL （フォークされたプルリクエストの場合のみ異なります）        |
+| revision                | ×    | ビルドする Git コミット                                          |
+| commit.subject          | ×    | コミットのサブジェクト（コミットメッセージの先頭行） 長いコミットサブジェクトは切り捨てられる場合があります。 |
+| commit.body             | ×    | コミットの本文（コミットメッセージの後続の行） 長いコミット本文は切り捨てられる場合があります。        |
+| commit.author.name      | ×    | コミットのオーサー名                                              |
+| commit.author.email     | ×    | コミットのオーサーのメールアドレス                                       |
+| commit.authored\_at   | ×    | コミットがオーサリングされた時のタイムスタンプ                                 |
+| commit.committer.name   | ×    | コミットのコミッター名                                             |
+| commit.committer.email  | ×    | コミットのコミッターのメールアドレス                                      |
+| commit.committed_at     | ×    | コミットがコミットされた時のタイムスタンプ                                   |
+| branch                  | ×    | ビルドされたブランチ                                              |
+| tag                     | ×    | ビルドされたタグ（「ブランチ」と相互排他的）                                  |
 {: class="table table-striped"}
