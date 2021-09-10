@@ -164,7 +164,7 @@ display:
 {: #commands }
 {:.no_toc}
 
-Author and add [Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) to the `src/commands` directory. Each _YAML_ file within this directory will be treated as an orb command, with a name which matches its filename.
+Author can add [Reusable Commands]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-commands) to the `src/commands` directory. Each _YAML_ file within this directory will be treated as an orb command, with a name which matches its filename.
 
 Below is the _[greet.yml](https://github.com/CircleCI-Public/Orb-Project-Template/blob/master/src/commands/greet.yml)_ command example from the [Orb Project Template](https://github.com/CircleCI-Public/Orb-Project-Template/tree/master/src).
 
@@ -187,7 +187,7 @@ steps:
 {: #examples }
 {:.no_toc}
 
-Author and add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/developer/orbs) for users to reference.
+Author can add [Usage Examples]({{site.baseurl}}/2.0/orb-concepts/#usage-examples) to the `src/examples` directory. Usage Examples are not for use directly by end users in their project configs, but they provide a way for you, the orb developer, to share use-case specific examples on the [Orb Registry](https://circleci.com/developer/orbs) for users to reference.
 
 Each _YAML_ file within this directory will be treated as an orb usage example, with a name which matches its filename.
 
@@ -197,7 +197,7 @@ View a full example from the [Orb Project Template](https://github.com/CircleCI-
 {: #executors }
 {:.no_toc}
 
-Author and add [Parameterized Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) to the `src/executors` directory.
+Author can add [Parameterized Executors]({{site.baseurl}}/2.0/reusing-config/#authoring-reusable-executors) to the `src/executors` directory.
 
 Each _YAML_ file within this directory will be treated as an orb executor, with a name that matches its filename.
 
@@ -207,7 +207,7 @@ View a full example from the [Orb Project Template](https://github.com/CircleCI-
 {: #jobs }
 {:.no_toc}
 
-Author and add [Parameterized Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) to the `src/jobs` directory.
+Author can add [Parameterized Jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) to the `src/jobs` directory.
 
 Each _YAML_ file within this directory will be treated as an orb job, with a name that matches its filename.
 
