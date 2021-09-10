@@ -18,7 +18,7 @@ _Persistent volume expansion of MongoDB and Postgres is available for server v3.
 
 If you have chosen to deploy either of the CircleCI databases (MongoDB or Postgres) within the cluster, as opposed to externally provisioning these databases, then there may come a point at which the storage space initially made available to these databases is no longer sufficient. Internal databases in your Kubernetes cluster make use of https://kubernetes.io/docs/concepts/storage/persistent-volumes/[persistent volumes] for persistent storage. The size of these volumes is determined by persistence volume claims (PVCs). These PVCs request storage space based on what has been made available to the nodes in your cluster. 
 
-This document runs through the required steps to increase the sizes of the persistent volumes used by your internally deployed databases, by increasing the persistent volume claim size. This operation should not require any downtime.
+This document runs through the steps required to increase PVCs in order to expand the space available to your internally deployed databases. This operation should not require any downtime unless you need to restart your database pods.
 
 NOTE: Expanding persistent volumes does not affect the size of the storage attached to your nodes. Expanding node storage remains within the limitations of your cloud provider. Please refer to the docs for your chosen cloud provider for details on how to expand the storage attached to your cluster's nodes.
 
@@ -41,7 +41,7 @@ NAME                STATUS   VOLUME                                     CAPACITY
 data-postgresql-0   Bound    pvc-c2a2d97b-2b7d-47d3-ac77-d07c76c995a3   8Gi        RWO            gp2            1d
 ----
 
-For mongodb
+For mongodb:
 [source,bash]
 ----
 circleci-user ~ $ kubectl get pvc datadir-mongodb-0
@@ -111,13 +111,13 @@ circleci-user ~ $ kubectl delete sts mongodb --cascade=false
 === Step 3 - Update the size of the database's PVC
 Now that the stateful set has been removed, we can increase the size of our persistent volume claim to 10Gi.
 
-For postgres
+For postgres:
 [source,bash]
 ----
 circleci-user ~ $ kubectl patch pvc data-postgresql-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
 ----
 
-For mongodb
+For mongodb:
 [source,bash]
 ----
 circleci-user ~ $ kubectl patch pvc datadir-mongodb-0 -p '{"spec": {"resources": {"requests": {"storage": "10Gi"}}}}'
