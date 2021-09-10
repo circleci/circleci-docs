@@ -29,6 +29,8 @@ include::server-3-operator-vm-service.adoc[]
 
 include::server-3-operator-externalizing-services.adoc[]
 
+include::server-3-operator-extending-internal-volumes.adoc[]
+
 include::server-3-operator-load-balancers.adoc[]
 
 include::server-3-operator-authentication.adoc[]
