@@ -115,7 +115,7 @@ if you host your installation at `server.example.com`, your certificate must cov
 ### PotsgreSQL
 *Internal*: Deploys a pre-configured PostgreSQL 12 instance that runs inside of the CircleCI namespace.
 
-* Postgres Disk Size: The initial storage capacity made available to Postgres. The default size is 8Gi. This value can only be set once, after which you will need to refer to our documentation on resizing peristent volume claims to extend your storage.
+* Postgres Disk Size: The initial storage capacity made available to Postgres. The default size is 8Gi. This value can only be set once, after which you will need to refer to our <<server-3-operator-extending-internal-volumes#,CircleCI Server v3.x Internal Database Volume Expansion guide>> for information on extending your storage.
 
 *External* : Selecting the external option allows operators to connect to a PostgreSQL install running outside of the cluster.  CirceCI is tested against PostgreSQL 12.6.  We highly suggest that you configure your external PostgreSQL instance prior to deploying the CircleCI application.  You can find more information about configuration https://circleci.com/docs/2.0/server-3-operator-externalizing-services[here]. Once you have completed configuring your instance, fill out the following section:
 
@@ -127,7 +127,7 @@ if you host your installation at `server.example.com`, your certificate must cov
 ### MongoDB
 *Internal* will deploy a completely configured MongoDB instance along with your server installation.
 
-* MongoDB Disk Size: The initial storage capacity made available to MongoDB. The default size is 8Gi. This value can only be set once, after which you will need to refer to our documentation on resizing peristent volume claims to extend your storage.
+* MongoDB Disk Size: The initial storage capacity made available to MongoDB. The default size is 8Gi. This value can only be set once, after which you will need to refer to our <<server-3-operator-extending-internal-volumes#,CircleCI Server v3.x Internal Database Volume Expansion guide>> for information on extending your storage.
 
 *External* allows you to use your own MongoDB instance. CircleCI server is tested to work with MongoDB 3.6. You can customize the setup for your external MongoDB instance with the following settings:
 
