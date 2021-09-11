@@ -16,6 +16,8 @@ toc::[]
 
 NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン]で提供されています。 Scale プランへのお申し込み方法については、営業担当者 (またはhttps://circleci.com/ja/contact-us/?cloud[お問い合わせ窓口]) へお問い合わせください。
 
+NOTE: K8s 版 CircleCI ランナーは現在、*プレビュー版*です。 For information on our support levels, see <<runner-overview#preview,available platforms>>.
+
 ここでは、Kubernetes クラスタに CircleCI ランナーをインストールおよびセットアップする方法について説明します。 また、Pod を簡単にインストールできる Helm チャートを用意しています。
 
 この Helm チャートでは、*同じランナー リソース クラス*の Pod を 1 つまたは複数スピンアップできます。 これは、同じ実行環境が必要なジョブを複数のランナーすべてで実行する場合に便利です。 各ランナーは、ジョブが利用可能になり次第キューからジョブをプルします。
@@ -26,6 +28,11 @@ NOTE: CircleCI ランナーは、https://circleci.com/ja/pricing[Scale プラン
 * Scale プランを利用しているか、試用している。 上記を参照してください。
 * ランナーのデプロイ先で Kubernetes クラスタを稼動させている。
 * Go through the steps to <<runner-installation#authentication,create and authenticate a CircleCI runner resource class>>.
+
+=== 制限事項/今後解決予定の問題
+* 現時点の CircleCI 製 Helm チャートでは、権限を構成できません。そのため、コンテナの権限昇格は行なえません。 Docker in Docker (Docker コンテナ内から別の Docker コンテナを操作すること) など、権限昇格が必要な場合はお客様自身でチャートを編集いただく必要があります。
+* The Helm chart currently doesn't support auto-scaling - you will need to modify the `+replicaCount+` parameter inside `+values.yaml+` yourself and re-apply the chart to your cluster.
+* 現時点の CircleCI 製 Helm チャートでは、ランナーのリソース クラス タイプとトークンを 1 つのみ使用することを想定しています。 クラスタに複数のランナー リソース クラスを構成する必要がある場合は、リソース クラスごとに個別のチャートを作成してください。
 
 == 使用方法
 

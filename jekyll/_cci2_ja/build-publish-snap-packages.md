@@ -36,6 +36,9 @@ jobs:
   build:
     docker:
       - image: cibuilds/snapcraft:stable
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
 #...
 ```
 
@@ -64,7 +67,7 @@ CircleCI で実際に Snap をビルドするために必要なコマンドは�
 CircleCI で Snap をビルドすると、`.snap` ファイルが作成され、このファイルを作成したコードに加えて、このファイルをテストできます。 Snap 自体のテスト方法はユーザーに任されており、 一部のユーザーは、さまざまなディストリビューションに Snap をインストールした後、コマンドを実行してインストール プロセスが機能することを確認しています。 Snapcraft は、広範なテストを実行できる Builder フリートを提供しています。 これを使用して、コード自体をテストした後に、さまざまなディストリビューションで Snap をテストできます。 詳細については、[こちら](https://build.snapcraft.io/)を参照してください。
 
 ## パブリッシュ
-[ワークフロー](https://circleci.com/ja/docs/2.0/workflows/)を使用して、次の 2 つの方法で Snap をビルドできます。
+{: #publishing }
 
 Snap のパブリッシュは、ほぼ 2 ステップで完了します。 以下に Linux マシン上の例を示します。
 

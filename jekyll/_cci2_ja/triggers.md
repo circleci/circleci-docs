@@ -74,21 +74,6 @@ workflows:
       - deploy:
           requires:
             - hold
-          requires:
-           - test2
-      - deploy:
-          requires:
-            - hold
-          requires:
-           - test2
-      - deploy:
-          requires:
-            - hold
-          requires:
-           - test2
-      - deploy:
-          requires:
-            - hold
 ```
 
 ## Trigger Docker builds in Dockerhub
@@ -99,26 +84,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:14.17-browsers # < an arbitrarily chosen docker image.
-        version: 2
-jobs:
-  build:
-    docker:
       - image: circleci/node:10.0-browsers # < 選択された任意の Docker イメージ
-        version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:10.0-browsers # < 選択された任意の Docker イメージ
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-    steps:
-      - checkout
-      - run:
-          # example curl request from dockerhub documentation
-          name: Trigger docker remotely
-          command: curl --data build=true -X POST https://registry.hub.docker.com/u/svendowideit/testhook/trigger/be579c82-7c0e-11e4-81c4-0242ac110020/
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
@@ -133,4 +99,4 @@ jobs:
 ## See also
 {: #see-also }
 
-[Workflows]({{ site.baseurl }}/2.0/workflows/)
+[Workflows]({{ site.baseurl }}/ja/2.0/workflows/)

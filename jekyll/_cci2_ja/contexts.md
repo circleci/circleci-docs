@@ -350,5 +350,5 @@ Contexts hold potentially sensitive secrets that are not intended to be exposed.
 {: #see-also }
 {:.no_toc}
 
-* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/2.0/env-vars/)
-* [Workflows]({{ site.baseurl }}/2.0/workflows/)
+* [CircleCI Environment Variable Descriptions]({{ site.baseurl }}/ja/2.0/env-vars/)
+* [Workflows]({{ site.baseurl }}/ja/2.0/workflows/)

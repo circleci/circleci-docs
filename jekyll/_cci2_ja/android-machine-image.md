@@ -13,14 +13,13 @@ version:
 Android マシン イメージには、CircleCI で Linux マシン イメージにアクセスする場合と同様に、[Linux `machine` executor]({{site.baseurl}}/ja/2.0/configuration-reference/#machine-executor-linux) を通じてアクセスできます。 Android マシン イメージは、ネストされた仮想化と x86 Android エミュレーターをサポートしています。 そのため、Android UI テストに利用できます。 また、イメージには Android SDK がプリインストールされています。
 
 ## Android マシン イメージの使用
-Android マシン イメージには以下がプリインストールされています。
+{: #using-the-android-machine-image }
 
 設定ファイルに Android イメージを使用するには、[Orbs]({{site.baseurl}}/2.0/orb-intro) を使用して、または、手動で設定することができます。 Android Orb を使用すると設定がシンプルになりますが、複雑なカスタムな設定は手動で行った方が効果的です。 このドキュメントでは、どちらの設定方法についても説明します。 詳細は、後述の「[例](#%E4%BE%8B)」セクションを参照してください。
 
 ## プリインストールされたソフトウェア
-以下で、Android マシン イメージの使用方法について、Orb あり、Orb なしのいくつかの設定例で説明します。
 
-以下の例では、Android Orb を使用して 1 つのジョブを実行します。
+Android マシン イメージには以下がプリインストールされています。
 
 ### Android SDK
 この例では、より細かな Orb コマンドを使用して、[start-emulator-and-run-tests](https://circleci.com/developer/ja/orbs/orb/circleci/android#commands-start-emulator-and-run-tests) コマンドの処理を実現する方法を示しています。
