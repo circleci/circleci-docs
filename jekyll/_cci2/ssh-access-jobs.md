@@ -130,7 +130,7 @@ debug1: Authentication succeeded (publickey).
 This sequence indicates that the key /Users/me/.ssh/id_rsa_github is the one which
 GitHub accepted.
 
-Next, run the SSH command for your CircleCI build, but add the -v flag.
+Next, run the SSH command for your CircleCI build, but add the `-v` flag.
 In the output, look for one or more lines like this:
 
 ```
@@ -144,8 +144,18 @@ If it was not offered, you can specify it via the `-i` command-line
 argument to SSH. For example:
 
 ```
-$ ssh -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
+$ ssh -v -i /Users/me/.ssh/id_rsa_github -p 64784 ubuntu@54.224.97.243
 ```
+
+If it was offered but rejected with
+
+```
+debug1: send_pubkey_test: no mutual signature algorithm
+```
+
+it is possible that your ssh client configuration is hardened while CircleCI
+requires weaker algorithms. Try to add `-o 'PubkeyAcceptedKeyTypes ssh-rsa'`
+option to select the algorithms supported by CircleCI.
 
 ## See also
 {: #see-also }
