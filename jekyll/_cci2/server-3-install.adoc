@@ -599,9 +599,9 @@ not block access to/from Nomad clients or `setup_remote_docker` will fail.
 ### AWS
 If you would like to install Nomad clients in AWS, create a `main.tf` file referring to this https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-aws[README] for a full example and list of required fields.
 
-### Google Cloud Platform
+### GCP
 
-If you’d like to to install Nomad clients in Google Cloud Platform, create a `main.tf` file referring to this https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[README] for a full example and list of required fields.
+If you would like to to install Nomad clients in Google Cloud Platform, create a `main.tf` file referring to this https://github.com/CircleCI-Public/server-terraform/tree/main/nomad-gcp[README] for a full example and list of required fields.
 
 ### Deploy your Nomad clients
 
