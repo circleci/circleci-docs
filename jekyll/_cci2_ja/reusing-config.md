@@ -4,13 +4,13 @@ title: "再利用可能な設定ファイル リファレンス ガイド"
 short-title: "再利用可能な設定ファイル リファレンス ガイド"
 description: "CircleCI 2.1 設定ファイルのリファレンス ガイド"
 categories:
-  - configuration
+  - 設定ファイル
 order: 1
 version:
   - Cloud
 ---
 
-このガイドでは、再利用可能なコマンド、ジョブ、Executor、Orb を利用する方法について説明します。 また、パラメーター化された再利用可能な要素を作成するためのパラメーターの使用方法についても取り上げます。
+ここでは、再利用可能なコマンド、ジョブ、Executor、Orb を利用する方法について説明します。 また、パラメーター化された再利用可能な要素を作成するためのパラメーターの使用方法についても取り上げます。
 
 * 目次
 {:toc}
@@ -25,10 +25,10 @@ version:
 
 * コマンド、ジョブ、Executor、パラメーターの名前はアルファベットで始める必要があります。 名前に含めることができるのは小文字 (`a` ～ `z`)、数字 (`0` ～ `9`)、アンダースコア (`_`)、ハイフン (`-`) だけです。
 
-## `parameters` 宣言の使用
+## `パラメーター` 宣言の使用
 {: #using-the-parameters-declaration }
 
-パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下の子には、マップ形式でキーと値を指定します。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 パイプライン パラメーターの詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/ja/2.0/pipeline-variables/#%E8%A8%AD%E5%AE%9A%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E3%83%91%E3%82%A4%E3%83%97%E3%83%A9%E3%82%A4%E3%83%B3-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC)を参照してください。
+パラメーターは、ジョブ、コマンド、または Executor の下で名前で宣言します。 `parameters` キーの直下に置かれた子キーは、マップ内のキー セットです。 パイプライン パラメーターは、プロジェクト設定ファイルの最上部で定義します。 パイプライン パラメーターの詳細については、[パイプライン変数に関するドキュメント]({{ site.baseurl }}/2.0/pipeline-variables/#pipeline-parameters-in-configuration)を参照してください。
 
 次の例では、`greeting` という名前のコマンドを宣言し、`to` という名前のパラメーターを使用しています。 `to` パラメーターは、"_Hello_" とユーザーにエコーバックするステップで使用しています。
 
@@ -64,7 +64,7 @@ workflows:
 {: #parameter-syntax }
 {:.no_toc}
 
-パラメーターは、以下のキーを直下の子として持つことができます。
+パラメーターは、以下のキーを直下の子キーとして持つことができます。
 
 | キー名         | 説明                                              | デフォルト値 |
 | ----------- | ----------------------------------------------- | ------ |
@@ -79,21 +79,21 @@ workflows:
 このセクションでは、パラメーターの型と使用方法について説明します。
 
 Orb では以下のパラメーター型がサポートされます。
-* `string`
-* `boolean`
-* `integer`
-* `enum`
-* `executor`
-* `steps`
-* 環境変数名
+* `文字列型`
+* `ブール値型`
+* `整数型`
+* `列挙型`
+* `Executor 型`
+* `ステップ型`
+* 環境変数名型
 
 パイプライン パラメーターでは以下のパラメーター型がサポートされます。
-* `string`
-* `boolean`
-* `integer`
-* `enum`
+* `文字列型`
+* `ブール値型`
+* `整数型`
+* `列挙型`
 
-#### String
+#### 文字列型
 {: #string }
 {:.no_toc}
 
@@ -112,9 +112,9 @@ commands:
       - run: cp *.md << parameters.destination >>
 ```
 
-Strings must be enclosed in quotes if they would otherwise represent another type (such as boolean or number) or if they contain characters that have special meaning in YAML, particularly for the colon character. In all other instances, quotes are optional. `when` 節の評価時に、空文字列は false 値として扱われます。 その他の文字列はすべて true 値として扱われます。 なお、YAML でブール値として解釈される文字列値を引用符なしで使用すると、型エラーが発生します。
+引用符で囲まれていないと他の型 (ブール値、数値など) を表してしまう文字列、および YAML で特別な意味を持つ文字 (特にコロン) を含む文字列は、引用符で囲む必要があります。 それ以外の場合は、引用符は任意です。 `when` 節の評価時に、空文字列は false 値として扱われます。 その他の文字列はすべて true 値として扱われます。 なお、YAML でブール値として解釈される文字列値を引用符なしで使用すると、型エラーが発生します。
 
-#### ブール値
+#### ブール値型
 {: #boolean }
 {:.no_toc}
 
@@ -142,11 +142,11 @@ commands:
 * true と評価されるもの: `y`、`yes`、`true`、`on`
 * false と評価されるもの: `n`、`no`、`false`、`off`
 
-***備考*** ブール値は正のときに'1'を、偽のときに'0'を返却する場合があります。
+***注:*** ブール値は true のときに'1'を、false のときに'0'を返す場合があります。
 
 上記の値は、語頭のみ大文字、またはすべて大文字で表記しても有効です。
 
-#### 整数
+#### 整数型
 {: #integer }
 {:.no_toc}
 
@@ -171,7 +171,7 @@ workflows:
           p: 2
 ```
 
-#### 列挙
+#### 列挙型
 {: #enum }
 {:.no_toc}
 
@@ -207,7 +207,7 @@ commands:
 ```
  {% endraw %}
 
-#### Executor
+#### Executor 型
 {: #executor }
 {:.no_toc}
 
@@ -258,7 +258,7 @@ workflows:
 ```
 {% endraw %}
 
-#### ステップ
+#### ステップ型
 {: #steps }
 {:.no_toc}
 
@@ -324,7 +324,7 @@ steps:
 ```
 {% endraw %}
 
-#### 環境変数名
+#### 環境変数名型
 {: #environment-variable-name }
 {:.no_toc}
 
