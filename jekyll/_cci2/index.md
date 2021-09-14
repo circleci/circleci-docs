@@ -19,7 +19,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       <li><a href="{{ site.baseurl }}/2.0/getting-started/">Your First Green Build</a></li>
       <li><a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a></li>
       <li><a href="{{ site.baseurl }}/2.0/faq/">FAQ</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/orb-intro/">Orbs</a></li>
+      <li class="orb-bullet"><a href="{{ site.baseurl }}/2.0/orb-intro/">Orbs</a></li>
     </ul>
   </div>
   <div class="col-xs-12 col-sm-6">
@@ -30,7 +30,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
         <li><a href="{{ site.baseurl }}/2.0/postgres-config/">Database Config Examples</a></li>
         <li><a href="{{ site.baseurl }}/2.0/sample-config/">Sample config.yml Files</a></li>
         <li><a href="{{ site.baseurl }}/2.0/tutorials/">Tutorials and Sample Apps</a></li>
-        <li><a href="{{ site.baseurl }}/2.0/using-orbs/">Using Orbs</a></li>
+        <li class="orb-bullet"><a href="{{ site.baseurl }}/2.0/using-orbs/">Using Orbs</a></li>
       </ul>
   </div>
   <div class="col-xs-12">
@@ -54,7 +54,7 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       <li><a href="{{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples">Example Configs</a></li>
       <li><a href="{{ site.baseurl }}/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
       <li><a href="{{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/creating-orbs/">Creating Orbs</a></li>
+      <li class="orb-bullet"><a href="{{ site.baseurl }}/2.0/creating-orbs/">Creating Orbs</a></li>
     </ul>
   </div>
    <div class="col-xs-12">
@@ -66,6 +66,17 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
     <ul>
       <li><a href="{{ site.baseurl }}/2.0/optimization-cookbook/">Discover ways to optimize your pipelines</a></li>
       <li><a href="{{ site.baseurl }}/2.0/configuration-cookbook">Explore best practices for a range of use cases</a></li>
+    </ul>
+  </div>
+    <div id="orb-section" class="col-xs-12 col-sm-6">
+    <h2>Orbs</h2>
+    <p>Simplify your builds with reuseable configurations.</p>
+    <ul>
+      <li><a href="{{ site.baseurl }}/2.0/orb-intro/">Getting started with orbs</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/using-orbs/">Core concepts</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/creating-orbs/">Publishing your orb</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/orbs-faq/">Orbs FAQ</a>
+      </li>
     </ul>
   </div>
 </div>
