@@ -398,7 +398,7 @@ Please try using any of the versions of simulator that are present on the machin
 
 ### Can't Add Project as macOS Build
 
-If you are trying to add an macOS project from the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard, but you don't see your project under the "OS X" tab, you can first add your project as a "Linux" build — and then switch it to an "OS X" build by going to the "Project Settings" page, then on the "Build Environment" page you will see the "Build OS X project" option.
+If you are trying to add a macOS project from the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard, but you don't see your project under the "OS X" tab, you can first add your project as a "Linux" build — and then switch it to an "OS X" build by going to the "Project Settings" page. Then, on the "Build Environment" page ,you will see the "Build OS X project" option.
 
 ### Ruby Segfaults
 
