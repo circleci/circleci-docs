@@ -12,7 +12,7 @@ Coming from Ship.io? You've come to the right place, we'll help you get started.
 
 For iOS projects, please [contact support](https://support.circleci.com/hc/en-us) with the name of your GitHub user or organization for access to the iOS build system. Once you've been enabled,
 
-1. Add your project on the [Add Projects page](https://circleci.com/add-projects){:rel="nofollow"}.
+1. Add your project on the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard.
 2. Turn on the "Build iOS project" setting through the **Project Settings > Build Settings > Build Environment** page of your your project.
 3. Push a new commit to start a build on the iOS build system.
 
@@ -20,7 +20,7 @@ For iOS projects, please [contact support](https://support.circleci.com/hc/en-us
 
 You can easily migrate your Android projects from Ship.io to CircleCI in a few simple steps.
 
-1. Add your project on the [Add Projects page](https://circleci.com/add-projects){:rel="nofollow"}.
+1. Add your project on the [**Projects**](https://app.circleci.com/projects/){:rel="nofollow"} dashboard.
 2. After adding your project, CircleCI will usually infer your build settings. Sometimes the magic doesn't always work. Please take a look at our [getting started]( {{ site.baseurl }}/1.0/getting-started/) documentation.
 3. Check out the [Testing Android on CircleCI]( {{ site.baseurl }}/1.0/android/) documentation.
 

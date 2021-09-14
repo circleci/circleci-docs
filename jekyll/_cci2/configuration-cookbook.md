@@ -700,8 +700,6 @@ workflows:
 ```yaml
 version: 2.1
 
-# the path-filtering orb is required to continue a pipeline based on
-# the path of an updated fileset
 orbs:
   maven: circleci/maven@1.2.0
 
@@ -777,26 +775,27 @@ information on available elements and required parameters.
 
 Using matrix jobs is a good way to run a job multiple times with different arguments, using parameters. There are many uses for this, including testing on multiple operating systems and against different language/library versions.
 
-In the following example the `test` job is run across Linux, Windows and macOS environments, using two different versions of node. On each run of the `test` job different parameters are passed to set both the OS and the node version:
+In the following example the `test` job is run across a Linux container, Linux VM, and macOS environments, using two different versions of Node.js. On each run of the `test` job different parameters are passed to set both the OS and the Node.js version:
 
 ```yaml
 version: 2.1
 
 orbs:
-  node: circleci/node@4.0.0
-  win: circleci/windows@2.2.0
+  node: circleci/node@4.7
 
 executors:
-  linux: # linux executor using the node base image
+  docker: # Docker using the Base Convenience Image
     docker:
-      - image: cimg/node
+      - image: cimg/base:stable
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
-  windows: win/default # windows executor - uses the default executor from the windows orb
-  macos: # macos executor using xcode 11.6
+  linux: # a Linux VM running Ubuntu 20.04
+    machine:
+      image: ubuntu-2004:202107-02
+  macos: # macos executor running Xcode
     macos:
-      xcode: 11.6
+      xcode: 12.5
 
 jobs:
   test:
@@ -811,7 +810,6 @@ jobs:
       - node/install:
           node-version: << parameters.node-version >>
           install-yarn: true
-      - run: yarn test
 
 workflows:
   all-tests:
@@ -819,19 +817,19 @@ workflows:
       - test:
           matrix:
             parameters:
-              os: [linux, windows, macos]
-              node-version: ["13.13.0", "14.0.0"]
+              os: [docker, linux, macos]
+              node-version: ["14.17.6", "16.9.0"]
 ```
 
 The expanded version of this matrix runs the following list of jobs under the `all-tests` workflow:
 
 ```
-    - test-13.13.0-linux
-    - test-14.0.0-linux
-    - test-13.13.0-windows
-    - test-14.0.0-windows
-    - test-13.13.0-macos
-    - test-14.0.0-macos
+    - test-14.17.6-docker
+    - test-16.9.0-docker
+    - test-14.17.6-linux
+    - test-16.9.0-linux
+    - test-14.17.6-macos
+    - test-16.9.0-macos
 ```
 
 For full details of the matrix jobs specification, see the [Configuration Reference]({{ site.baseurl }}/2.0/configuration-reference/#matrix-requires-version-21).
