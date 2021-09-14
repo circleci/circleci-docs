@@ -50,20 +50,25 @@ Install the CircleCI dashboard by using the App Catalog from the dashboard home 
 This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
 ## Setup SumoLogic Metrics using CircleCI Webhooks
+{: #setup-sumologic-metrics-using-circleci-webhooks }
 
 To begin collecting and visualizing data with SumoLogic, first configure CircleCI webhooks to send metrics data to SumoLogic.
 ### Configure Webhooks
+{: #configure-webhooks }
 #### **Step 1. Configure Hosted Collector**
+{: #step-1-configure-hosted-collector }
 
 Follow the Sumo Logic documentation for [Configuring a Hosted Collector](https://help.sumologic.com/03Send-Data/Hosted-Collectors/Configure-a-Hosted-Collector).
 
 #### **Step 2. Add an HTTP Source**
+{: #step-2-add-an-http-source }
 
 To get the URL where the CircleCI Webhooks will be sent to, and then record to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
 
 When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future.
 
 #### **Step 3. Configure Project Webhooks**
+{: #step-3-configure-project-webhooks }
 
 For each project on CircleCI you wish to track, configure a webhook directed at the HTTP Source Address.
 Follow the [CircleCI docs for configuring webhooks](https://circleci.com/docs/2.0/webhooks/?section=projects#setting-up-a-hook).
@@ -71,6 +76,7 @@ Follow the [CircleCI docs for configuring webhooks](https://circleci.com/docs/2.
 When configuring the webooks, ensure to include both the “workflow-completed”, and “job-completed” events.
 
 ## Install the CircleCI App for Sumo Logic
+{: #install-the-circleci-app-for-sumo-logic }
 
 Now that you have set up collection, install the Sumo Logic App for CircleCI to use the preconfigured searches and Dashboards that provide insight into your CI Pipeline.
 To install the app:
