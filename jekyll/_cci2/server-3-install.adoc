@@ -3,7 +3,7 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Installation
+= CircleCI Server v3.x Installation Phase 2: Core Services Installation
 :page-layout: classic-docs
 :page-liquid:
 :icons: font

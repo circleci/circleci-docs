@@ -67,6 +67,54 @@ are described in greater detail in the <<Services>> section.
 image::server-3-architecture-diagram.png[Services Architecture]
 <<<
 
+The application exposes a number of external ports. These ports are used for various functions as defined in the table below. 
+
+[.table.table-striped]
+[cols=6*, options="header", stripes=even]
+|===
+| Port number
+| Protocol
+| Direction
+| Source / Destination
+| Use
+| Notes
+
+| 80
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 443
+| TCP
+| Inbound
+| End users
+| HTTP web app traffic
+|
+
+| 8800
+| TCP
+| Inbound
+| Administrators
+| Admin console
+|
+
+| 22
+| TCP
+| Inbound
+| Administrators
+| SSH
+| Only required for the bastion host
+
+| 64535-65535
+| TCP
+| Inbound
+|
+| SSH into builds
+| Only required for the nomad clients.
+|===
+
 == Services
 
 CircleCI server 3.0 consists of the following services. Find their descriptions and failure implications below:

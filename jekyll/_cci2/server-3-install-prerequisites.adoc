@@ -3,49 +3,21 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Prerequisites
+= CircleCI Server v3.x Installation Phase 1: Prerequisites
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
+== Overview
+INSERT NEW CONTENT HERE
+
 It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
-In order to configure the CircleCI server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
+== Phase 1: Prerequisites
+=== Install required software
 
-* An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
-** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
-*** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
-** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
-*** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
-+
-* Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
-CircleCI server users: +
-+
---
-[.table.table-striped]
-[cols=5*, options="header", stripes=even]
-|===
-| Number of daily active CircleCI users
-| Minimum Nodes
-| Total CPU
-| Total RAM
-| NIC speed
-
-| < 500
-| 3
-| 12 cores
-| 32 GB
-| 1 Gbps
-
-| 500+
-| 3
-| 48 cores
-| 240 GB
-| 10 Gbps
-|===
---
 
 * Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * You must have appropriate permissions to list, create, edit and delete pods in your cluster. You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
@@ -90,53 +62,71 @@ set up a new VPC rather than use an existing one.
 | Replicated Kubernetes Application Management
 |===
 
+=== Create a Kubernetes cluster
 
-## External Ports
+In order to configure the CircleCI server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
+
+* An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
+** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
+*** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
+** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
+*** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
++
+* Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
+CircleCI server users: +
++
+--
 [.table.table-striped]
-[cols=6*, options="header", stripes=even]
+[cols=5*, options="header", stripes=even]
 |===
-| Port number
-| Protocol
-| Direction
-| Source / Destination
-| Use
-| Notes
+| Number of daily active CircleCI users
+| Minimum Nodes
+| Total CPU
+| Total RAM
+| NIC speed
 
-| 80
-| TCP
-| Inbound
-| End users
-| HTTP web app traffic
-|
+| < 500
+| 3
+| 12 cores
+| 32 GB
+| 1 Gbps
 
-| 443
-| TCP
-| Inbound
-| End users
-| HTTP web app traffic
-|
-
-| 8800
-| TCP
-| Inbound
-| Administrators
-| Admin console
-|
-
-| 22
-| TCP
-| Inbound
-| Administrators
-| SSH
-| Only required for the bastion host
-
-| 64535-65535
-| TCP
-| Inbound
-|
-| SSH into builds
-| Only required for the nomad clients.
+| 500+
+| 3
+| 48 cores
+| 240 GB
+| 10 Gbps
 |===
+--
+
+==== EKS
+==== GKE
+
+=== GitHub OAuth app creation
+
+=== Frontend TLS certificates
+==== Google Cloud DNS
+==== AWS Route53
+
+=== Encryption/signing keys
+==== Artifact signing key
+==== Encryption signing key
+
+=== Object storage and permissions
+==== Create an S3 storage bucket
+===== Step 1
+===== Step 2
+===== Step 3
+===== Step 4
+
+==== Create a Google Cloud storage bucket
+===== Step 1
+===== Step 2
+===== Step 3
+===== Step 4
+
+
+
 
 ## What to read next
 * https://circleci.com/docs/2.0/server-3-install-creating-your-first-cluster[Creating your first cluster]
