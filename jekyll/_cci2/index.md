@@ -53,7 +53,8 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
       <li><a href="{{ site.baseurl }}/2.0/workflows/">Using Workflows to Schedule Jobs</a></li>
       <li><a href="{{ site.baseurl }}/2.0/workflows/#workflows-configuration-examples">Example Configs</a></li>
       <li><a href="{{ site.baseurl }}/2.0/workflows/#scheduling-a-workflow">Scheduling a Workflow</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-workflows">Using Contexts and Filtering in Your Workflows</a></li>
+      <li><a href="{{ site.baseurl }}/2.0/workflows/#using-contexts-and-filtering-in-your-
+      workflows">Using Contexts and Filtering in Your Workflows</a></li>
       <li class="orb-bullet"><a href="{{ site.baseurl }}/2.0/creating-orbs/">Creating Orbs</a></li>
     </ul>
   </div>
@@ -72,11 +73,10 @@ Use the tutorials, samples, how-to, and reference documentation to learn CircleC
     <h2>Orbs</h2>
     <p>Simplify your builds with reuseable configurations.</p>
     <ul>
-      <li><a href="{{ site.baseurl }}/2.0/orb-intro/">Getting started with orbs</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/using-orbs/">Core concepts</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/creating-orbs/">Publishing your orb</a></li>
-      <li><a href="{{ site.baseurl }}/2.0/orbs-faq/">Orbs FAQ</a>
-      </li>
+      <li id="orb-intro"><a href="{{ site.baseurl }}/2.0/orb-intro/">Getting Started with Orbs</a></li>
+      <li id="orb-concepts"><a href="{{ site.baseurl }}/2.0/using-orbs/">Core Concepts</a></li>
+      <li id="orb-publish"><a href="{{ site.baseurl }}/2.0/creating-orbs/">Publishing Your Orb</a></li>
+      <li id="orb-faq"><a href="{{ site.baseurl }}/2.0/orbs-faq/">Orbs FAQ</a></li>
     </ul>
   </div>
 </div>
