@@ -352,6 +352,8 @@ en:
           link: 2.0/server-3-operator-vm-service
         - name: Externalizing Services
           link: 2.0/server-3-operator-externalizing-services
+        - name: Expanding Internal Database Volumes
+          link: 2.0/server-3-operator-extending-internal-volumes
         - name: Load Balancers
           link: 2.0/server-3-operator-load-balancers
         - name: Authentication
