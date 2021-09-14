@@ -116,7 +116,7 @@ CircleCI アプリケーションの Workflows タブで、エラー メッセ�
 CircleCI のすべてのお客様がシステムを安定した状態で利用できるよう、[リソース クラス](https://circleci.com/ja/docs/2.0/configuration-reference/#resource_class)ごとに同時処理数のソフト制限が設けられています。 ビルドの待機時間が発生する場合は、この制限に達している可能性が考えられます。 [CircleCI サポート](https://support.circleci.com/hc/ja/requests/new)に制限値の引き上げを依頼してください。
 
 ### [Add Projects (プロジェクトの追加)] ページにプロジェクトが見当たりません。
-{: #why-cant-i-find-my-project-on-the-add-project-page }
+{: #why-cant-i-find-my-project-on-the-projects-dashboard }
 {:.no_toc}
 ビルドしようとしているプロジェクトが表示されておらず、現在 CircleCI 上でビルドしているものではない場合は、CircleCI アプリケーションの左上隅で組織を確認してください。  たとえば、左上に `my-user` と表示されているなら、`my-user` に属する GitHub プロジェクトのみが `Add Projects` の下に表示されます。  `your-org/project` の GitHub プロジェクトをビルドするには、CircleCI アプリケーションの [Switch Organization (組織の切り替え)] メニューで `your-org` を選択する必要があります。
 
@@ -255,7 +255,7 @@ UTC 協定世界時のタイムゾーンに基づいてスケジュールを指�
 ### Windows でのビルドを開始するには何が必要ですか?
 {: #what-do-i-need-to-get-started-building-on-windows }
 {:.no_toc}
-[Performance プラン](https://circleci.com/ja/pricing/usage/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
+[Performance プラン](https://circleci.com/ja/pricing/)を購入し、プロジェクトの[パイプラインを有効化]({{site.baseurl}}/ja/2.0/build-processing/)する必要があります。 Windows ジョブでは、1 分あたり 40 クレジットが消費されます。
 
 ### 使用している Windows のバージョンを教えてください。
 {: #what-exact-version-of-windows-are-you-using }
