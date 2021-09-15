@@ -47,7 +47,7 @@ If you need to get back to the management console at a later date you can run:
 kubectl kots admin-console -n <namespace kots was installed in>
 ----
 
-## Step 2 - Configure Server (Part 1)
+## Configure and deploy server
 
 Once you have accessed the URL to the administrative console and uploaded your license file, you will see similar to the following,
 where you will need to configure CircleCI server.
@@ -55,7 +55,7 @@ where you will need to configure CircleCI server.
 .Server v{serverversion} Configuration
 image::server-config.png[Server v{serverversion} Configuration]
 
-### Global Settings
+### Frontend Settings
 Global configuration settings are a collection of cross-cutting configuration settings that affect the function of the entire
 application as a whole. Component-specific settings can be found below under the *Component Settings* section.
 
@@ -63,56 +63,17 @@ application as a whole. Component-specific settings can be found below under the
 need to configure this domain and point it to the Circleci server Traefik Load Balancer once it is configured in a later step.
 . *Frontend TLS Private Key*: A PEM encoded TLS private key for the web application. A default, self-signed TLS key is provided.
 . *Frontend TLS Certificate*: A PEM encoded TLS certificate for the web application. A default, self-signed TLS certificate is provided.
-
++
 TIP: If you don’t already have a TLS certificate for your installation, you can generate one using a tool of your choice. See the <<Optional: Generate a TLS Certificate>> section.
-
-[start=4]
-
 . *Private Load Balancers*:  By default, frontend load balancers will be assigned a public IP address. Ticking this box will make the load balancers for the frontend private, resulting in no public IPs being assigned to them. If you change this setting after the initial deployment, you might need to re-deploy the traefik service for it to take effect. 
 +
 NOTE: this only works for GKE and EKS installations.
-
 . *Manually Set Service Ports*: Select to edit the default ports configured for Nomad, Output-Processor or VM Service. Ticking this box will reveal a ports field for each service.
-
 . *VM Service Load Balancer Hostname* (required): The hostname or IP of your VM Service Load Balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
 . *Output Processor Load Balancer Hostname* (required): The hostname or IP of your Output Processor load balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
 . *Nomad Load Balancer Hostname* (required): The hostname or IP of your Nomad load balancer. If you do not yet have this value, you can deploy the application with any value and then retrieve and update it in <<Step 3 - Obtain Load Balancer IPs>>.
 
-
-#### Optional: Generate a TLS Certificate
-
-By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a
-certificate from a trusted certificate authority. The https://letsencrypt.org/[LetsEncrypt] certificate authority, for example,
-can issue a certificate for free using their https://certbot.eff.org/[certbot] tool.
-
-For example, if you host your DNS on Google Cloud, the following commands will provision a certification for your installation:
-
-[source,bash]
-----
-DOMAIN=example.com  # replace with the domain of your installation of server
-GOOGLE_APPLICATION_CREDENTIALS=/path/to/credentials.json  # Path to GCP credentials
-sudo certbot certonly --dns-google \
-  --dns-google-credentials ${GOOGLE_APPLICATION_CREDENTIALS} \
-  -d "${DOMAIN}" \
-  -d "app.${DOMAIN}"
-----
-
-If instead you're using AWS Route53 for DNS, execute this example:
-
-[source,bash]
-----
-DOMAIN=example.com # replace with the domain of your installation of server
-sudo certbot certonly --dns-route53 \
-  -d "${DOMAIN}" \
-  -d "app.${DOMAIN}"
-----
-
-This will create a private key and certificate (including intermediate certificates) in `/etc/letsencrypt/live/${DOMAIN}/`.
-
-NOTE: It is important that your certificate contain both your domain and the `app.*` subdomain as subjects. For example,
-if you host your installation at `server.example.com`, your certificate must cover `app.server.example.com` and `server.example.com`.
-
-### PotsgreSQL
+### PotsgreSQL // move to externalisation doc
 *Internal*: Deploys a pre-configured PostgreSQL 12 instance that runs inside of the CircleCI namespace.
 
 * Postgres Disk Size: The initial storage capacity made available to Postgres. The default size is 8Gi. This value can only be set once, after which you will need to refer to our <<server-3-operator-extending-internal-volumes#,CircleCI Server v3.x Internal Database Volume Expansion guide>> for information on extending your storage.
@@ -124,7 +85,7 @@ if you host your installation at `server.example.com`, your certificate must cov
 * PostgreSQL Service User: A user with the appropriate privileges to access your PostgreSQL instance.
 * PostgreSQL Service Password: The password of the user used to access your PostgreSQL instance.
 
-### MongoDB
+### MongoDB // move to externalisation doc
 *Internal* will deploy a completely configured MongoDB instance along with your server installation.
 
 * MongoDB Disk Size: The initial storage capacity made available to MongoDB. The default size is 8Gi. This value can only be set once, after which you will need to refer to our <<server-3-operator-extending-internal-volumes#,CircleCI Server v3.x Internal Database Volume Expansion guide>> for information on extending your storage.
