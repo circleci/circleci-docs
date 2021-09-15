@@ -9,18 +9,9 @@ $(() => {
       $(".orb-bullet").hide();
       $("#orb-section").show();
 
-      $("#orb-intro").click(function () {
-        window.AnalyticsClient.trackAction('docs-orb-bullet', { link: "Getting Started with Orbs" });
-      })
-      $("#orb-concepts").click(function () {
-        window.AnalyticsClient.trackAction('docs-orb-bullet', { link: "Core Concepts" });
-      })
-      $("#orb-publish").click(function () {
-        window.AnalyticsClient.trackAction('docs-orb-bullet', { link: "Publishing Your Orb" });
-      })
-      $("#orb-faq").click(function () {
-        window.AnalyticsClient.trackAction('docs-orb-bullet', { link: "Orbs FAQ" });
-      })
+      $("#orb-intro, #orb-concepts, #orb-publish, #orb-faq").click(function () {
+        window.AnalyticsClient.trackAction('docs-orb-bullet', { link: this.id });
+      });
     }
   })
 })
