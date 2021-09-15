@@ -32,7 +32,7 @@ The orb development kit refers to a suite of tools that work together to simplif
 ### Getting started
 {: #getting-started }
 
-Note: While the outlined process below only mentions GitHub, the development kit also works with Bitbucket repositories.
+**Note:** While the outlined process below only mentions GitHub, the development kit also works with Bitbucket repositories.
 
 To begin creating your new orb with the orb development kit, follow these steps. The starting point is creating a new repository on [GitHub.com](https://github.com).
 
@@ -41,7 +41,10 @@ Ensure the organization on GitHub is the owner for the [namespace]({{site.baseur
 1. **Create a new [GitHub repository](https://github.com/new).**<br/>
 The name of your repository is not critical, but we recommend something similar to "myProject-orb". ![Orb Registry]({{site.baseurl}}/assets/img/docs/new_orb_repo_gh.png)
 
-    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Note down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+    When complete, you will be brought to a page confirming your new repository and you should see the generated git URL. Write down the git URL, you will need it in step 4. You can select SSH or HTTPS, which ever you can authenticate with. ![Orb Registry]({{site.baseurl}}/assets/img/docs/github_new_quick_setup.png)
+
+    **Note:** While you must create a local directory for your orb before initializing, it is not necessary to pull down the orb repository. This process will be completed in the `orb init` process and pulling the repository beforehand will cause issues.
+    {: class="alert alert-warning"}
 
 1. **Open a terminal and initialize your new orb project using the `orb init` CLI command.**
 To initialize a **[public](https://circleci.com/docs/2.0/orb-intro/#public-orbs)** orb:
