@@ -43,7 +43,7 @@ CircleCI Orb とは、[ジョブ]({{site.baseurl}}/2.0/reusing-config/#authoring
 
 パブリック Orb ではなくプライベート Orb を選択する場合、プライベート Orb 固有の制限事項を理解する必要があります。 具体的には次のとおりです。
 
-* 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 その代わり、Orb のコンテンツを設定ファイルの "orb" スタンザにインラインで貼り付けるか、`circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` コマンドを使用することで、設定ファイルをバリデーションできます。
+* 設定ファイルのバリデーションに `circleci config validate` コマンドを使用できなくなります。 その代わり、Orb のコンテンツを設定ファイルの "Orb" スタンザにインラインで貼り付けるか、`circleci config validate --org-slug <your-org-slug> <path/to/config.yml>` コマンドを使用することで、設定ファイルをバリデーションできます。
 
 * 組織の関係性にかかわらず、ある組織で作成されたプライベート Orb を、別の組織のパイプラインで使用することはできません。 それぞれの組織でコードのコミットとパイプラインの実行に必要なアクセス権を付与されている場合も例外ではなく、プライベート Orb をご自分の設定ファイル内で使うことはできますが、別の Orb からは参照できません。
 
@@ -185,7 +185,7 @@ jobs:
 {:.no_toc}
 
 - [Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/): CircleCI Orbs のハイレベルな情報
-- [Orb に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): CircleCI Orbs の使用に際して発生している既知の問題や不明点
+- [Orb に関するよくあるご質問]({{site.baseurl}}/2.0/orbs-faq/): CircleCI Orb の使用に際して発生している既知の問題や不明点
 - [Orb リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/): 再利用可能な Orb、コマンド、パラメーター、および Executor の例
 - [Orb のテスト手法]({{site.baseurl}}/2.0/testing-orbs/): 独自に作成した Orb のテスト方法
 - [構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/): 設定ファイル内で CircleCI Orb を使用するためのレシピ
