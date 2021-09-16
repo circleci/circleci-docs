@@ -67,7 +67,7 @@ jobs:
       - image: circleci/python:3.6.4  # ビルド ジョブのプライマリ コンテナ
 ```
 
-**メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[コンビニエンス イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
+**メモ:** `circleci/python:3.6.4` は、CircleCI が提供する[ CircleCI イメージ]({{ site.baseurl }}/ja/2.0/circleci-images/)です。 これらのイメージは正式な Docker イメージの拡張版で、CI/CD 環境にとって便利なツールが含まれます。
 
 ### 他サービスの追加と環境変数の設定
 {: #add-other-services-and-set-environment-variables }
