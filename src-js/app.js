@@ -12,5 +12,5 @@ lang.init();
 
 // adding "Clients" to the window object so they can be accessed by other js inside Jekyll
 window.Cookie = Cookie;
-window.OptimizelyClient = new OptimizelyClient();
 window.AnalyticsClient = AnalyticsClient; // because it only has static methods, AnalyticsClient is not instantiated
+window.OptimizelyClient = new OptimizelyClient();
