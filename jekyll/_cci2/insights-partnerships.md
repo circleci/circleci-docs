@@ -90,7 +90,7 @@ Locate and install the app you need from the App Catalog. If you want to see a p
     - Choose **Source Category**, and select a source category from the list.
     - Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
   3. Advanced. Select the Location in Library (the default is the Personal folder in the library), or click New Folder to add a new folder.
-4. Click Add to Library.
+4. Click **Add to Library**.
 
 Once an app is installed, it will appear in your Personal folder, or other folder that you specified. From here, you can share it with your organization.
 Panels will start to fill automatically. It's important to note that each panel slowly fills with data matching the time range query and received since the panel was created. Results won't immediately be available, but with a bit of time, you'll see full graphs and maps.
