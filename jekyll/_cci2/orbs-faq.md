@@ -77,7 +77,6 @@ You attempted to run a local build with version 2.1 of configuration.
 
 * **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
 
-
 ## See also
 {: #see-also }
 - Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
