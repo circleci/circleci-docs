@@ -63,9 +63,9 @@ Follow the Sumo Logic documentation for [Configuring a Hosted Collector](https:/
 #### **Step 2. Add an HTTP Source**
 {: #step-2-add-an-http-source }
 
-To get the URL where the CircleCI Webhooks will be sent to, and then record to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
+To get the URL where the CircleCI Webhooks will be sent to, and then recorded to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
 
-When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future.
+When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the CircleCI Webhooks UI in the next step.
 
 #### **Step 3. Configure Project Webhooks**
 {: #step-3-configure-project-webhooks }
@@ -81,8 +81,8 @@ When configuring the webooks, ensure to include both the “workflow-completed�
 Now that you have set up collection, install the Sumo Logic App for CircleCI to use the preconfigured searches and Dashboards that provide insight into your CI Pipeline.
 To install the app:
 
-Locate and install the app you need from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
-1. From the App Catalog, search for and select the app.
+Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
+1. From the App Catalog, search for and select the CircleCI app.
 2. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
 3. To install the app, complete the following fields.
   - App Name. You can retain the existing name, or enter a name of your choice for the app.
