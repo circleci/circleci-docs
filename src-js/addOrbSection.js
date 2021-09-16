@@ -6,7 +6,9 @@ $(() => {
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test'
   }).then(variation => {
     if (variation === "treatment") {
-      $(".orb-bullet").hide();
+      $(".orb-bullet").css('visibility', 'hidden');
+      // $(".orb-bullet").hide();
+
       $("#orb-section").show();
 
       $("#orb-intro, #orb-concepts, #orb-publish, #orb-faq").click(function () {
