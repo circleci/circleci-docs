@@ -46,7 +46,7 @@ If you do not see your project and it is not currently building on CircleCI, che
 {:.tab.switcher.Cloud}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui_newui.png)
 
-{:.tab.switcher.Server v2.19.x}
+{:.tab.switcher.Server-v2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/org-centric-ui.png)
 
 ## Viewing and navigating pipelines
