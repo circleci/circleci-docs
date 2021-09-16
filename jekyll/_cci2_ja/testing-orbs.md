@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Orb のテスト手法"
 short-title: "テスト手法"
-description: "CircleCI Orbs のテストに関する入門ガイド"
+description: "CircleCI Orb のテストに関する入門ガイド"
 categories:
   - getting-started
 order: 1
@@ -254,4 +254,4 @@ Once you have added new orb features, and created passing tests, it is time to p
 - CircleCI の Orb の基本的な概念については、「[Orb のコンセプト]({{site.baseurl}}/2.0/orb-concepts/)」を参照してください。
 - ワークフローやジョブで使用する Orb については、「[Orb のパブリッシュ]({{site.baseurl}}/2.0/creating-orbs/)」を参照してください。
 - 再利用可能な Orb、コマンド、パラメーター、Executor の例については、「[再利用可能な設定ファイル リファレンス ガイド]({{site.baseurl}}/2.0/reusing-config/)」を参照してください。
-- 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[CircleCI 構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」を参照してください。
+- 設定ファイル内で CircleCI Orb を使用するための詳しいレシピは、「[CircleCI 設定クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」を参照してください。
