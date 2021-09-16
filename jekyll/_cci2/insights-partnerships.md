@@ -93,4 +93,4 @@ Locate and install the app you need from the App Catalog. If you want to see a p
 4. Click **Add to Library**.
 
 Once an app is installed, it will appear in your Personal folder, or other folder that you specified. From here, you can share it with your organization.
-Panels will start to fill automatically. It's important to note that each panel slowly fills with data matching the time range query and received since the panel was created. Results won't immediately be available, but with a bit of time, you'll see full graphs and maps.
+Panels will start to fill automatically. It is important to note that each panel slowly fills with data matching the time range query and received since the panel was created. Results won't immediately be available, but with a bit of time, you will see full graphs and maps.
