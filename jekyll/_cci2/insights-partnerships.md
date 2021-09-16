@@ -29,7 +29,7 @@ Use this dashboard to:
 
 ![header]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
 
-Gain insights into your pipelines with the included dashboard panels. Filter each panel per specific projects or job, over any period of time. Available dashboard panels:
+Gain insights into your pipelines with the included dashboard panels. Filter each panel for specific projects or jobs, over any period of time. Available dashboard panels include:
 
   - Total Jobs Ran
   - Job Health (% success)
