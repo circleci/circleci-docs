@@ -142,7 +142,7 @@ commands:
 * true と評価されるもの: `y`、`yes`、`true`、`on`
 * false と評価されるもの: `n`、`no`、`false`、`off`
 
-***注:*** ブール値は true のときに'1'を、false のときに'0'を返す場合があります。
+***注:*** ブール値は true のときに '1' を、false のときに '0' を返す場合があります。
 
 上記の値は、語頭のみ大文字、またはすべて大文字で表記しても有効です。
 
@@ -185,9 +185,8 @@ commands:
     parameters:
       os:
         default: "linux"
-        description: heroku バイナリのターゲット オペレーティング システム。 Must be one of "linux", "darwin", "win32".
-        "linux"、"darwin"、"win32" のいずれかを指定可能。
-        type: enum
+        description: heroku バイナリのターゲット オペレーティング システム。 "linux"、"darwin"、"win32" のいずれかを指定。
+                type: enum
         enum: ["linux", "darwin", "win32"]
 ```
 
