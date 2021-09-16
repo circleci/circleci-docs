@@ -211,7 +211,7 @@ commands:
 {: #executor }
 {:.no_toc}
 
-`executor` パラメーター型を使用すると、ジョブの呼び出し元が、実行する Executor を決定できるようになります。
+`executor` パラメーター型を使用すると、ジョブの呼び出し元が実行する Executor を決定できるようになります。
 
 {% raw %}
 ```yaml
@@ -272,7 +272,7 @@ commands:
   run-tests:
     parameters:
       after-deps:
-        description: "依存関係のインストール後、テストの実行前に実行されるステップ"
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
         type: steps
         default: []
     steps:
@@ -292,7 +292,7 @@ commands:
   run-tests:
     parameters:
       after-deps:
-        description: "依存関係のインストール後、テストの実行前に実行されるステップ"
+        description: "Steps that will be executed after dependencies are installed, but before tests are run"
         type: steps
         default: []
     steps:
@@ -318,8 +318,8 @@ jobs:
 version: 2.1
 steps:
   - run: make deps
-  - run: echo "依存関係はインストールされています"
-  - run: echo "今からテストを実行します"
+  - run: echo "The dependencies are installed"
+  - run: echo "And now I'm going to run the tests"
   - run: make test
 ```
 {% endraw %}
@@ -403,7 +403,7 @@ version: 2.1
 
 commands:
   sayhello:
-    description: "デモ用のごく簡単なコマンド"
+    description: "A very simple command for demonstration purposes"
     parameters:
       to:
         type: string
@@ -437,7 +437,7 @@ version: 2.1
 
 commands:
   sayhello:
-    description: "デモ用のごく簡単なコマンド"
+    description: "A very simple command for demonstration purposes"
     parameters:
       to:
         type: string
@@ -453,7 +453,7 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     steps:
-      - sayhello: # invoke command "sayhello"
+      - sayhello: # "sayhello" コマンドを呼び出します。
           to: "Lev"
 ```
 
@@ -480,10 +480,10 @@ CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザ�
 
 ```yaml
 version: 2.1
-# aws-s3 Orb
+# Aws-s3 orb
 commands:
   sync:
-    description: "s3 sync の簡単なカプセル化"
+    description: "A simple encapsulation of doing an s3 sync"
     parameters:
       from:
         type: string
@@ -494,7 +494,7 @@ commands:
         type: boolean
     steps:
       - run:
-          name: S3 へのデプロイ
+          name: Deploy to S3
           command: aws s3 sync << parameters.from >> << parameters.to >><<# parameters.overwrite >> --delete<</ parameters.overwrite >>"
 ```
 
@@ -661,7 +661,7 @@ executors:
   node-docker: # 再利用可能な Executor を宣言します。
     parameters:
       version:
-        description: "バージョン タグ"
+        description: "version tag"
         default: "lts"
         type: string
     docker:
@@ -674,7 +674,7 @@ jobs:
   test:
     parameters:
       version:
-        description: "バージョン タグ"
+        description: "version tag"
         default: "lts"
         type: string
     executor:
@@ -700,7 +700,7 @@ workflows:
 {: #using-executors-defined-in-an-orb }
 {:.no_toc}
 
-他の Orb の Executor も参照もできます。 Orb のユーザーは、その Orb の Executor を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義します。
+他の Orb の Executor を参照することもできます。 Orb のユーザーは、その Orb の Executor を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義します。
 
 ```yaml
 version: 2.1
@@ -771,13 +771,10 @@ jobs:
         auth:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
-    # 以下のテスト Executor は、より明示的な "docker" Executor があれば上書きされ、 任意の環境変数が追加されます。
+    # 以下のテスト Executor は、より明示的な "docker" Executor があれば上書きされます。 任意の環境変数が追加されます。
     executor: node
     steps:
-      - run: echo "Node will not be installed." 任意の環境変数が追加されます。
-    executor: node
-    steps:
-      - run: echo "Node はインストールされません"
+      - run: echo "Node will not be installed."
 ```
 
 上記の設定は以下のとおり解決されます。
@@ -795,13 +792,13 @@ jobs:
      ENV: ci       # Executor で設定された値
  
      steps:
-      - run: echo "Node はインストールされません"
+      - run: echo "Node will not be installed."
 ```
 
 ## パラメーター化されたジョブのオーサリング
 {: #authoring-parameterized-jobs }
 
-必要なパラメーターをサブキーとしてジョブに渡すことで、`config.yml` の workflows 定義内で、同じジョブを複数回呼び出すことができます。 使用されている構文の詳細については、上記のパラメーターに関するセクションを参照してください。
+必要なパラメーターをサブキーとしてジョブに渡すことで、`config.yml` の ワークフロー定義内で、同じジョブを複数回呼び出すことができます。 使用されている構文の詳細については、上記のパラメーターに関するセクションを参照してください。
 
 `config.yml` でパラメーター化されたジョブを定義して呼び出す例を次に示します。
 
@@ -811,10 +808,10 @@ version: 2.1
 
 jobs:
   sayhello: # パラメーター化されたジョブを定義します。
-    description: パラメーター化されたジョブを例示する以外はほとんど何もしないジョブ
+    description: A job that does very little other than demonstrate what a parameterized job looks like
     parameters:
       saywhat:
-        description: "挨拶をする相手は？"
+        description: "To whom shall we say hello?"
         default: "World"
         type: string
     machine: true
@@ -824,7 +821,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - sayhello:# パラメーター化されたジョブを起動します。
+      - sayhello:# パラメーター化されたジョブを呼び出します。
           saywhat: Everyone
 ```
 {% endraw %}
@@ -858,7 +855,7 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "挨拶をする相手は？"
+        description: "To whom shall we say hello?"
         default: "World"
         type: string
     machine: true
@@ -953,7 +950,7 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "挨拶をする相手は？"
+        description: "To whom shall we say hello?"
         default: "World"
         type: string
     machine: true
