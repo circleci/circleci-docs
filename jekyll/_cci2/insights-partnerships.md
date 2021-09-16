@@ -52,7 +52,7 @@ This dashboard receives data through the CircleCI Sumo Logic orb which must be i
 ## Setup SumoLogic Metrics using CircleCI Webhooks
 {: #setup-sumologic-metrics-using-circleci-webhooks }
 
-To begin collecting and visualizing data with SumoLogic, first configure CircleCI webhooks to send metrics data to SumoLogic.
+To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
 ### Configure Webhooks
 {: #configure-webhooks }
 #### **Step 1. Configure Hosted Collector**
