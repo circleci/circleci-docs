@@ -26,12 +26,25 @@ NOTE: The KOTS command will open up a tunnel to the admin console. If running on
 available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
-Next, run:
+Next, run one of:
+
 
 [source,bash]
 ----
+# standard install
 kubectl kots install circleci-server
 ----
+
+[source,bash]
+----
+# install behind a proxy
+kubectl kots install circleci-server \
+  http-proxy http://proxy.example \
+  --https-proxy http://proxy.example \
+  --no-proxy http://no-proxy.example
+----
+
+
 
 You will be prompted for a:
 
