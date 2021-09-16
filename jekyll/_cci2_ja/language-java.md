@@ -148,7 +148,7 @@ workflows:
 また、`environment` キーを使用して、[OOM エラーを回避](https://circleci.com/blog/how-to-handle-java-oom-errors/)するように JVM と Gradle を構成しています。
 
 ## 設定ファイルの詳細
-バージョン `11.0.3-jdk-stretch` のタグが付いた [CircleCI OpenJDK コンビニエンス イメージ](https://hub.docker.com/r/circleci/openjdk/)を使用します。
+{: #config-walkthrough }
 
 この `build` ジョブ内にいくつかの `steps` を追加します。
 
