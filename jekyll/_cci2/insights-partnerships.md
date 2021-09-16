@@ -24,7 +24,7 @@ The CircleCI app for Sumo Logic provides advanced views to track the performance
 {: #the-circleci-dashboard-for-sumo-logic }
 
 Use this dashboard to:
-  - Monitor real-time CI performance, activity, and health or track over time.
+  - Monitor real-time CI performance, activity, and health, or track over time.
   - Identify opportunities of optimization.
 
 ![header]({{ site.baseurl }}/assets/img/docs/Sumologic_Demo.png)
