@@ -7,8 +7,6 @@ $(() => {
   }).then(variation => {
     if (variation === "treatment") {
       $(".orb-bullet").css('visibility', 'hidden');
-      // $(".orb-bullet").hide();
-
       $("#orb-section").show();
 
       $("#orb-intro, #orb-concepts, #orb-publish, #orb-faq").click(function () {
