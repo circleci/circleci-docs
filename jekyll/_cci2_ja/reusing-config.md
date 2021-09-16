@@ -725,7 +725,7 @@ executors:
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
 ```
 
-設定ファイルでは、以下のように両方の Executor を使用できます。
+どちらの Executor も設定ファイルでは、以下のように使用できます。
 
 ```yaml
 version: 2.1
@@ -740,15 +740,15 @@ jobs:
     executor: baz-orb/bar  # プレフィックス付き Executor
 ```
 
-**メモ:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orb に相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orb で定義されています。
+**注:** `foo-orb/bar` と `baz-orb/bar` は、異なる Executor です。 どちらも、それぞれの Orb に相対的なローカル名 `bar` を持ちますが、独立した Executor であり、異なる Orb で定義されています。
 
 ### Executor 呼び出し時のキーのオーバーライド
 {: #overriding-keys-when-invoking-an-executor }
 {:.no_toc}
 
-`job` での Executor の呼び出し時には、ジョブ自体に含まれるキーは、呼び出された executors のキーをオーバーライドします。 たとえば、ジョブで `docker` の定義が宣言されている場合は、executors で指定した Docker ではなく、その Docker がジョブ全体で使用されます。
+`job` での Executor の呼び出し時には、ジョブ自体に含まれるキーは、呼び出された Executor のキーをオーバーライドします。 たとえば、ジョブで `docker` スタンザが宣言されている場合は、 Executor で指定した Docker ではなく、その Docker がジョブ全体で使用されます。
 
-**メモ:** `environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数の使用に関するページ]({{ site.baseurl }}/ja/2.0/env-vars/#%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D)を参照してください。
+**注:** `environment` 変数のマップは付加的です。 `executors` と `job` で同じ `environment` 変数を定義している場合は、ジョブの値が使用されます。 詳細については、[環境変数の使用に関するページ]({{ site.baseurl }}/ja/2.0/env-vars/#%E5%84%AA%E5%85%88%E9%A0%86%E4%BD%8D)を参照してください。
 
 ```yaml
 version: 2.1
@@ -773,13 +773,13 @@ jobs:
     # 以下のテスト Executor は、より明示的な "docker" Executor があれば上書きされ、 任意の環境変数が追加されます。
     executor: node
     steps:
-      - run: echo "Node will not be installed." Any env vars will be added.
+      - run: echo "Node will not be installed." 任意の環境変数が追加されます。
     executor: node
     steps:
-      - run: echo "Node will not be installed."
+      - run: echo "Node はインストールされません"
 ```
 
-上記のコンフィグは以下のとおり解決されます。
+上記の設定は以下のとおり解決されます。
 
 ```yaml
 version: 2.1
@@ -791,11 +791,10 @@ jobs:
           username: mydockerhub-user
           password: $DOCKERHUB_PASSWORD  # コンテキスト/プロジェクト UI 環境変数の参照
     environment:
-     ENV: ci       # executors で設定された値
-    steps:
-      - run: echo "Node will not be installed."
-    steps:
-      - run: echo "Node will not be installed."
+     ENV: ci       # Executor で設定された値
+ 
+     steps:
+      - run: echo "Node はインストールされません"
 ```
 
 ## パラメーター化されたジョブのオーサリング
@@ -810,19 +809,11 @@ jobs:
 version: 2.1
 
 jobs:
-  sayhello: # defines a parameterized job
-    description: A job that does very little other than demonstrate what a parameterized job looks like
-    parameters:
-      saywhat:
-        description: "To whom shall we say hello?"
-        version: 2.1
-
-jobs:
-  sayhello: # パラメーター化されたジョブを定義します
+  sayhello: # パラメーター化されたジョブを定義します。
     description: パラメーター化されたジョブを例示する以外はほとんど何もしないジョブ
     parameters:
       saywhat:
-        description: "だれにあいさつするか"
+        description: "挨拶をする相手は？"
         default: "World"
         type: string
     machine: true
@@ -832,12 +823,12 @@ jobs:
 workflows:
   build:
     jobs:
-      - sayhello: # パラメーター化されたジョブを呼び出します
+      - sayhello:# パラメーター化されたジョブを起動します。
           saywhat: Everyone
 ```
 {% endraw %}
 
-**メモ:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変化します (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
+**注:** 複数のワークフローでパラメーターを使用して同じジョブを複数回呼び出すと、ビルド名が変更されます (例: `sayhello-1`、`sayhello-2` など)。 ビルド名に数字が追加されないようにするには、`name` キーを利用します。 このキーに割り当てる名前は一意である必要があります。重複する場合は、ジョブ名に数字が追加されます。 以下に例を示します。
 
 ```yaml
 workflows:
@@ -856,7 +847,7 @@ workflows:
 ### Orb 内で定義されているジョブ
 {: #jobs-defined-in-an-orb }
 
-Orb 内で宣言されているジョブは、その Orb 内のコマンドおよびグローバルコマンドを使用できます。 ただし、ジョブ宣言のスコープ外のコマンドを呼び出すことはできません。
+Orb 内で宣言されているジョブは、その Orb 内のコマンドまたはグローバルコマンドを使用できます。 ただし、ジョブ宣言のスコープ外のコマンドを呼び出すことはできません。
 
 **hello-orb**
 
@@ -866,27 +857,7 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "To whom shall we say hello?"
-        version: 2.1
-# hello-orb の yml (一部)
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
-        description: "だれにあいさつするか"
-        default: "World"
-        type: string
-    machine: true
-    steps:
-      - say:
-          saywhat: "<< parameters.saywhat >>"
-commands:
-  saywhat:
-    parameters:
-      saywhat:
-        type: string
-    steps:
-      - run: echo "<< parameters.saywhat >>"
+        description: "挨拶をする相手は？"
         default: "World"
         type: string
     machine: true
@@ -916,7 +887,7 @@ workflows:
           saywhat: Everyone
 ```
 
-### executor でのパラメーターの使用
+### Executor でのパラメーターの使用
 {: #using-parameters-in-executors }
 {:.no_toc}
 
@@ -981,21 +952,15 @@ jobs:
   sayhello:
     parameters:
       saywhat:
-        description: "To whom shall we say hello?"
-        version: 2.1
-jobs:
-  sayhello:
-    parameters:
-      saywhat:
-        description: "だれにあいさつするか"
+        description: "挨拶をする相手は？"
         default: "World"
         type: string
     machine: true
     steps:
       - say:
-          # コマンド "say" の "saywhat" パラメーターには
+          # コマンド "say" の "saywhat" パラメーターには 
           # デフォルト値が定義されていないため
-          # 手動で渡す必要があります
+          # 手動で渡す必要があります。
           saywhat: << parameters.saywhat >>
 commands:
   say:
@@ -1009,6 +974,7 @@ workflows:
     jobs:
       - sayhello:
           saywhat: Everyone
+
 ```
 
 ### 同じジョブの複数回の呼び出し
@@ -1017,7 +983,7 @@ workflows:
 
 1 つの設定ファイルで、同じジョブを複数回呼び出すことができます。 ビルドのインジェストにおける設定ファイルの処理時に、ジョブに名前が付けられていなければ、CircleCI で自動的に名前が生成されます。 `name` キーを使用して、重複するジョブに明示的に名前を付けることもできます。
 
-**メモ:** 繰り返しジョブがワークフロー内の別のジョブのアップストリームになければならない場合は、その繰り返しジョブに明示的に名前を付ける必要があります。 たとえば、ワークフロー内でジョブ呼び出しの `requires` キーの下で使用するジョブには、明示的に名前を付ける必要があります。
+**注:** 繰り返しジョブがワークフロー内の別のジョブのアップストリームになければならない場合は、その繰り返しジョブに明示的に名前を付ける必要があります。 たとえば、ワークフロー内でジョブ呼び出しの `requires` キーの下で使用するジョブには、明示的に名前を付ける必要があります。
 
 ```yaml
 version: 2.1
@@ -1025,16 +991,16 @@ workflows:
   build:
     jobs:
       - loadsay
-      # このジョブには、ダウンストリームの依存関係がないため、明示的な名前は必要ありません
+      # このジョブには、ダウンストリームの依存関係がないため、明示的な名前は必要ありません。
       - sayhello:
           saywhat: Everyone
           requires:
             - loadsay
-      # saygoodbye がジョブ依存関係としてこのジョブを要求しているため、このジョブには明示的な名前が必要です
+      # saygoodbye がジョブ依存関係としてこのジョブを要求しているため、このジョブには明示的な名前が必要です。
       - sayhello:
           name: SayHelloChad
           saywhat: Chad
-      # 明示的に定義した "sayhello" を使用します
+      # 明示的に定義した "sayhello" を使用します。
       - saygoodbye:
           requires:
             - SayHelloChad
