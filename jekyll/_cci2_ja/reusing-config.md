@@ -317,8 +317,8 @@ jobs:
 version: 2.1
 steps:
   - run: make deps
-  - run: echo "The dependencies are installed"
-  - run: echo "And now I'm going to run the tests"
+  - run: echo "依存関係はインストールされています"
+  - run: echo "今からテストを実行します"
   - run: make test
 ```
 {% endraw %}
@@ -356,7 +356,7 @@ workflows:
     - build
 ```
 
-パラメーターを使って書き換えた `config.yml` ファイルを次に示します。
+次に、パラメーターを使って書き換えた `config.yml` ファイルを示します。
 
 ```yaml
 version: 2.1
@@ -415,13 +415,13 @@ commands:
 {: #the-commands-key }
 
 
-A command defines a sequence of steps as a map to be executed in a job, enabling you to reuse a single command definition across multiple jobs.
+コマンドは、ジョブ内で実行される一連のステップのシーケンスをマップとして定義します。これにより、1 つのコマンド定義を複数のジョブで再利用することができます。
 
-| キー          | 必須 | 種類     | 説明                                                                                                                                                                              |
-| ----------- | -- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| steps       | ○  | シーケンス  | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                                                                                    |
-| parameters  | ×  | マップ    | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%A7%8B%E6%96%87)」セクションを参照してください。 |
-| description | ×  | String | コマンドの目的を記述する文字列。 ドキュメントの生成に使用します。                                                                                                                                               |
+| キー          | 必須 | 種類    | 説明                                                                                                                                                                              |
+| ----------- | -- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| steps       | ○  | シーケンス | コマンドの呼び出し元のジョブ内で実行する一連のステップ。                                                                                                                                                    |
+| parameters  | ×  | マップ   | パラメーター キーのマップ。 詳細については「[パラメーターの構文]({{ site.baseurl }}/ja/2.0/reusing-config/#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%AE%E6%A7%8B%E6%96%87)」セクションを参照してください。 |
+| description | ×  | 文字列   | コマンドの目的を記述する文字列。 ドキュメントの生成に使用します。                                                                                                                                               |
 {: class="table table-striped"}
 
 ### 再利用可能なコマンドの呼び出し
@@ -459,23 +459,23 @@ jobs:
 ### コマンド内での他のコマンドの呼び出し
 {: #invoking-other-commands-in-a-command }
 
-コマンドでは、実行のスコープ内にある他のコマンドを使用できます。 たとえば、Orb 内で宣言されているコマンドでは、その Orb 内に含まれる他のコマンドを使用可能です。 また、インポートした他の Orbs で定義されているコマンド (`some-orb/some-command` など) も使用できます。
+コマンドは、実行のスコープ内で他のコマンドを使用することができます。 たとえば、Orb 内で宣言されているコマンドは、その Orb 内で他のコマンドを使用可能です。 また、インポートした他の Orb で定義されているコマンド (`some-orb/some-command` など) も使用できます。
 
 ### 特別なキー
 {: #special-keys }
 
-CircleCI では、すべての [circleci.com](https://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されています。 これらは、CircleCI Server でもデフォルトで使用できます。 Examples of these keys are:
+CircleCI では、すべての [circleci.com](http://circleci.com/ja) ユーザーが利用できる特別なキーが複数提供されており、CircleCI Server でデフォルトで使用できます。 その一部をご紹介します。
 
   * `checkout`
   * `setup_remote_docker`
   * `persist_to_workspace`
 
-**メモ:** 特別なキーはカスタム コマンドでオーバーライドできます。
+**注:** 特別なキーはカスタム コマンドでオーバーライドできます。
 
 ### コマンドの使用例
 {: #commands-usage-examples }
 
-以下に、`aws-s3` Orb のうち、`sync` というコマンドを定義する部分を例として示します。
+以下に、`aws-s3` Orb の、`sync` というコマンドを定義する部分を例として示します。
 
 ```yaml
 version: 2.1
@@ -552,7 +552,7 @@ jobs:
 ## 再利用可能な Executor のオーサリング
 {: #authoring-reusable-executors }
 
-Executors はジョブ内の steps を実行するための環境を定義します。 CircleCI の設定で `job` を宣言するとき、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義すると共に、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターを定義します。 etc.) to run in, as well as any other parameters for that environment, including: environment variables to populate, which shell to use, what size `resource_class` to use, etc.
+Executor はジョブ内のステップを実行するための環境を定義します。 CircleCI の設定で `job` を宣言する際に、実行環境のタイプ (`docker`、`machine`、`macos` など) を定義します。 また、 挿入する環境変数、使用するシェル、使用する `resource_class` のサイズなどの環境パラメーターも定義します。
 
 `jobs` の外側で宣言された Executor は、その宣言のスコープ内のすべてのジョブで使用できます。 そのため、1 つの Executor 定義を複数のジョブで再利用できます。
 
@@ -585,17 +585,17 @@ jobs:
 ### `executors` キー
 {: #the-executors-key }
 
-Executors define the environment in which the steps of a job will be run, allowing you to reuse a single executor definition across multiple jobs.
+Executor は、ジョブのステップが実行される環境を定義します。1 つの Executor 定義を複数のジョブで 再利用することができます。
 
-| キー                | 必須               | 種類     | 説明                                                                                                                                                                                                          |
-| ----------------- | ---------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| docker            | ○ <sup>(1)</sup> | リスト    | `docker` Executor を指定するオプション                                                                                                                                                                                |
-| resource_class    | ×                | String | ジョブ内の各コンテナに割り当てる CPU と RAM の量  (`docker` Executor でのみ使用可能)。 **メモ:** この機能にアクセスするには有償アカウントが必要です。 有料のコンテナベース プランをお使いの場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)して機能の利用をリクエストしてください。 |
-| machine           | ○ <sup>(1)</sup> | マップ    | `machine` Executor を指定するオプション                                                                                                                                                                               |
-| macos             | ○ <sup>(1)</sup> | マップ    | `macOS` Executor を指定するオプション                                                                                                                                                                                 |
-| shell             | ×                | String | すべてのステップで実行コマンドに使用するシェル。 各ステップで `shell` を使用してオーバーライドできます。                                                                                                                                                   |
-| working_directory | ×                | String | ステップを実行するディレクトリ                                                                                                                                                                                             |
-| environment       | ×                | マップ    | 環境変数の名前と値のマップです。                                                                                                                                                                                            |
+| キー                | 必須               | 種類  | 説明                                                                                                                                                                                                         |
+| ----------------- | ---------------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| docker            | ○ <sup>(1)</sup> | リスト | `docker` Executor を指定するオプション                                                                                                                                                                               |
+| resource_class    | ×                | 文字列 | ジョブ内の各コンテナに割り当てる CPU と RAM の量  (`docker` Executor でのみ使用可能)。 **注:** この機能にアクセスするには有償アカウントが必要です。 有料のコンテナベース プランをお使いの場合は、[サポート チケットをオープン](https://support.circleci.com/hc/ja/requests/new)して機能の利用をリクエストしてください。 |
+| machine           | ○ <sup>(1)</sup> | マップ | `machine` Executor を指定するオプション                                                                                                                                                                              |
+| macos             | ○ <sup>(1)</sup> | マップ | `macOS` Executor を指定するオプション                                                                                                                                                                                |
+| shell             | ×                | 文字列 | すべてのステップで実行コマンドに使用するシェル。 各ステップで `shell` を使用してオーバーライドできます。                                                                                                                                                  |
+| working_directory | ×                | 文字列 | ステップを実行するディレクトリ                                                                                                                                                                                            |
+| environment       | ×                | マップ | 環境変数の名前と値のマップです。                                                                                                                                                                                           |
 {: class="table table-striped"}
 
 例
@@ -648,7 +648,7 @@ Orb では、Orb 内のすべてのコマンドが使用する Executor を定�
 {: #example-of-using-an-executor-declared-in-configyml-with-matrix-jobs }
 {:.no_toc}
 
-次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executorに渡すことができます。
+次の例では、Node イメージを指定した Docker Executor を、`node-docker` として宣言しています。 image 文字列のタグ部分は、`version` パラメーターを使用してパラメーター化しています。 `version` パラメーターは、`test` ジョブにも設定しています。 こうすることで、ワークフローでこのジョブが呼び出されるときに、ジョブを通じてこのパラメーターを Executor に渡すことができます。
 
 `matrix-tests` ワークフローで `test` ジョブが呼び出されると、このジョブは[マトリックス ジョブ](https://circleci.com/ja/docs/2.0/configuration-reference/#matrix-requires-version-21)により複数回同時実行されます。 その際、実行ごとに異なるパラメーターのセットが使用されます。 これにより、Node アプリケーションを多数のバージョンの Node.js でテストしています。
 
@@ -657,7 +657,7 @@ Orb では、Orb 内のすべてのコマンドが使用する Executor を定�
 version: 2.1
 
 executors:
-  node-docker: # 再利用可能な Executor の宣言
+  node-docker: # 再利用可能な Executor を宣言します。
     parameters:
       version:
         description: "バージョン タグ"
@@ -699,7 +699,7 @@ workflows:
 {: #using-executors-defined-in-an-orb }
 {:.no_toc}
 
-他の Orbs の Executors も参照できます。 Orb のユーザーは、その Orb の Executors を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義します。
+他の Orb の Executor も参照もできます。 Orb のユーザーは、その Orb の Executor を呼び出すことができます。 たとえば、`foo-orb` で `bar` Executor を定義します。
 
 ```yaml
 version: 2.1
@@ -711,7 +711,7 @@ executors:
       RUN_TESTS: foobar
 ```
 
-`baz-orb` でも `bar` Executor を定義します。
+`baz-orb` でも `bar` Executor を定義できます。
 
 ```yaml
 version: 2.1
