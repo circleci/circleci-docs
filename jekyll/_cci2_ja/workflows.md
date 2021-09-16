@@ -242,7 +242,7 @@ workflows:
 {:.tab.switcher.Cloud}
 ![[Switch Organization (組織の切り替え)] メニュー]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server v2.19.x}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 

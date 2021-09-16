@@ -216,7 +216,7 @@ SSH 公開鍵を GitHub アカウントに登録する必要があることに�
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server v2.19.x}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
