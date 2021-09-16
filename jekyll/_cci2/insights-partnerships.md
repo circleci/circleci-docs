@@ -89,7 +89,7 @@ Locate and install the app you need from the App Catalog. If you want to see a p
   - Data Source. Select either of these options for the data source:
     - Choose **Source Category**, and select a source category from the list.
     - Choose **Enter a Custom Data Filter**, and enter a custom source category beginning with an underscore. Example: `(_sourceCategory=MyCategory)`.
-  3. Advanced. Select the Location in Library (the default is the Personal folder in the library), or click New Folder to add a new folder.
+  - Advanced. Select the Location in Library (the default is the Personal folder in the Library), or click **New Folder** to add a new folder.
 4. Click **Add to Library**.
 
 Once an app is installed, it will appear in your Personal folder, or wherever you set to be the default in your library. From here, you can share it with your organization.
