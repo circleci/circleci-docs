@@ -105,7 +105,7 @@ commands:
   copy-markdown:
     parameters:
       destination:
-        description: 対象ディレクトリ
+        description: destination directory
         type: string
         default: docs
     steps:
@@ -185,7 +185,8 @@ commands:
     parameters:
       os:
         default: "linux"
-        description: heroku バイナリのターゲット オペレーティング システム。 "linux"、"darwin"、"win32" のいずれかを指定。
+        description: The target Operating System for the heroku binary.
+ Must be one of "linux", "darwin", "win32".
                 type: enum
         enum: ["linux", "darwin", "win32"]
 ```
@@ -201,7 +202,7 @@ commands:
     parameters:
       os:
         type: enum
-        default: "windows" # カンマ区切り列挙リストに含まれていないデフォルト値の宣言は無効
+        default: "windows" # カンマ区切り列挙リストに含まれていないデフォルト値の宣言は無効です。
         enum: ["darwin", "linux"]
 ```
  {% endraw %}
@@ -1018,7 +1019,7 @@ workflows:
 {: #defining-pre-and-post-steps }
 {:.no_toc}
 
-以下の例では、`build` ワークフローの `bar` ジョブ内で、pre-steps と post-steps を定義しています。
+以下の例では、`build` ワークフローの `bar` ジョブ内で、事前ステップと事後ステップを定義しています。
 
 ```yaml
 # config.yml
@@ -1044,7 +1045,7 @@ workflows:
                 command: echo "upload artifact to s3"
 ```
 
-**メモ:** ジョブ内の `pre-steps` キーと `post-steps` キーは、バージョン 2.1 以上の設定ファイルで使用可能です。
+**注:** ジョブ内の `pre-steps` キーと `post-steps` キーは、バージョン 2.1 以上の設定ファイルで使用可能です。
 
 ## 条件付きステップの定義
 {: #defining-conditional-steps }
@@ -1053,7 +1054,7 @@ workflows:
 
 条件付きステップは、通常のステップがパラメーター値を入力として使用できる箇所ならどこにでも配置することができます。
 
-For example, an orb could define a command that runs a set of steps *if* invoked with `myorb/foo: { dostuff: true }`, but not `myorb/foo: { dostuff: false }`.
+たとえば、`myorb/foo: { dostuff: true }` として呼び出された場合*には*一連のステップを実行するが、`myorb/foo: { dostuff: false }` として呼び出された場合は実行しないといったコマンドを Orb で定義できます。
 
 さらに、Orb のオーサーであれば、ジョブまたはコマンドの `steps` キーで条件付きステップを定義することもできます。
 
@@ -1087,12 +1088,12 @@ workflows:
       - myjob # 空の文字列は false
 ```
 
-**メモ:** 条件付きステップは、バージョン 2.1 以上の設定ファイルで使用可能です。
+**注:** 条件付きステップは、バージョン 2.1 以上の設定ファイルで使用可能です。
 
 ### **`when` ステップ**
 {: #the-when-step }
 
-`when` キー配下ではサブキーとして `condition` と `steps` が使えます。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
+`when` キーの下に、`condition` サブキーと `steps` サブキーを記述します。 `steps` サブキーは、条件が true 値であると評価された場合にのみ実行されます。
 
 | キー        | 必須 | 種類    | 説明                                                                                      |
 | --------- | -- | ----- | --------------------------------------------------------------------------------------- |
@@ -1116,7 +1117,7 @@ workflows:
 
 再利用可能な設定ファイル要素を設定ファイル内で直接定義する場合、それらの要素をインライン Orb 内にラップすることもできます。 インライン Orb は、開発に役立つほか、ローカル設定ファイル内で名前を共有する要素の名前空間を作成するときにも便利です。
 
-インライン Orb を記述するには、設定ファイル内の orbs 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。 ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
+インライン Orb を記述するには、設定ファイル内の Orb 宣言セクションにその Orb のキーを置き、その下に Orb エレメントを置きます。 たとえば、ある Orb を別の Orb 内にインポートして使用する (インライン Orb) 場合の設定ファイルは以下のようになります。 ここでは、インライン Orb `my-orb` に `node` Orb をインポートしています。
 
 ```yaml
 version: 2.1
@@ -1148,6 +1149,6 @@ workflows:
 ## 関連項目
 {: #see-also }
 
-- CircleCI で使用できる構成例は、「[2.0 config.yml のサンプル ファイル]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
+- CircleCI で使用できる設定例は、「[サンプルの設定例]({{site.baseurl}}/2.0/sample-config/)」でご覧いただけます。
 - 設定ファイル内で CircleCI Orbs を使用するための詳しいレシピは、「[構成クックブック]({{site.baseurl}}/2.0/configuration-cookbook/)」で紹介しています。
-- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの構成例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。
+- CircleCI 設定ファイルで使用できるデータベースの構成例については、「[データベースの設定例]({{site.baseurl}}/2.0/postgres-config/)」を参照してください。
