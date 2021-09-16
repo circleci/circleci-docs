@@ -2,7 +2,7 @@
 layout: classic-docs
 title: "Orb のオーサリング プロセス"
 short-title: "Orb のオーサリング"
-description: "CircleCI Orbs のオーサリングに関する入門ガイド"
+description: "CircleCI Orb のオーサリングに関する入門ガイド"
 categories:
   - はじめよう
 order: 1
