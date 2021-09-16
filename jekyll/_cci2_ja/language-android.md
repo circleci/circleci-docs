@@ -204,7 +204,7 @@ React Native プロジェクトは、Linux、Android、および macOS の機能
 ## Firebase Test Lab を使用したテスト
 **Note:**: While this portion of the document walks through using a third party tool for testing, CircleCI recommends using the [Android machine image]({{site.baseurl}}/2.0/android-machine-image) for running emulator tests.
 
-**メモ:** `google/cloud-sdk` の代わりに、[Android コンビニエンス イメージ]({{ site.baseurl }}/2.0/circleci-images/#android)の使用を検討してください。
+**メモ:** `google/cloud-sdk` の代わりに、[Android 用 CircleCI イメージ]({{ site.baseurl }}/2.0/circleci-images/#android)の使用を検討してください。
 
 To use Firebase Test Lab with CircleCI, first complete the following steps.
 
