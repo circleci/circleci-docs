@@ -74,8 +74,11 @@ class OptimizelyClient {
               $opt_bucketing_id: orgId,
             });
 
+            // send back variationName to caller
             resolve(variationName);
 
+            // grab experimentId and variationId so we can send it
+            // with the `Experiment Viewed` event
             const optimizelyConfig = this.client.getOptimizelyConfig();
             const experimentId = optimizelyConfig.experimentsMap[options.experimentKey].id ?? '';
             const variationId = optimizelyConfig.experimentsMap[options.experimentKey].variationsMap[variationName].id ?? '';
@@ -97,6 +100,9 @@ class OptimizelyClient {
   }
 }
 
+// trackExperimentViewed checks if we alredy have sent the Experiment Viewed
+// event to segment/amplitude by looking into the localstorage.
+// If not, it builds the properties needed and call trackAction with it
 const trackExperimentViewed = (orgId, experimentKey, experimentId, variationName, variationId, userId) => {
   if (!isExperimentAlreadyViewed(orgId, experimentKey)) {
     const properties = {
@@ -111,11 +117,17 @@ const trackExperimentViewed = (orgId, experimentKey, experimentId, variationName
       variationId,
       variationName,
     };
+
+    // send event with the properly formatted properties
     window.AnalyticsClient.trackAction('Experiment Viewed', properties);
+
+    // store experiment participation in localstorage
     storeExperimentParticipation(orgId, experimentKey, variationName);
   }
 }
 
+// isExperimentAlreadyViewed checks in the localstorage if we already
+// marked the experiment as viewed
 const isExperimentAlreadyViewed = (orgId, experimentKey) => {
   try {
     const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
@@ -125,11 +137,14 @@ const isExperimentAlreadyViewed = (orgId, experimentKey) => {
   }
 }
 
+// storeExperimentParticipation stores the experiment variationName in the
+// localstorage
 const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
   if (!orgId || !experimentKey || !variationName) {
     return;
   }
 
+  // get exepriments out of localstorage
   let experiments;
   try {
     experiments = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
@@ -137,12 +152,15 @@ const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
     experiments = {};
   }
 
+  // if we have nothing we start de build the `experiments` object
   if (!experiments[orgId]) {
     experiments[orgId] = {};
   }
   if (!experiments[orgId][experimentKey]) {
     experiments[orgId][experimentKey] = {};
   }
+
+  // assign the current experiment and its values
   experiments[orgId][experimentKey] = { variationName, createdAt: new Date().getTime() };
 
   try {
