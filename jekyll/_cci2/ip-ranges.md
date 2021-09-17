@@ -165,4 +165,5 @@ CircleCI *does not recommend* configuring an IP-based firewall based on the AWS 
 ## Known limitations
 {: #knownlimiations}
 
-IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
+- IP ranges is currently available exclusively for the [Docker executor](https://circleci.com/docs/2.0/executor-types/#using-docker), not including `remote_docker`.
+- When downloading files larger than ~10 MB during execution of jobs with IP ranges enabled, intermittently, the job may receive TCP reset (RST) packets and drop the connection.  This could cause the job to fail if there is no retry logic in place while downloading the file.  CircleCI recommends including robust retry mechanisms in your config when attempting to download large files during execution of jobs with IP ranges enabled.  For example, if using [curl](http://www.ipgp.fr/~arnaudl/NanoCD/software/win32/curl/docs/curl.html), include the ```"--retry <num>"``` flag and set ```<num>``` to a large number such as 1,000.
