@@ -1,5 +1,8 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
+import { v4 as uuidv4 } from 'uuid';
+
 const COOKIE_KEY = 'cci-org-analytics-id';
+const STORAGE_KEY = 'growth-experiments-participated';
 
 class OptimizelyClient {
   constructor() {
@@ -55,7 +58,6 @@ class OptimizelyClient {
         this.client.onReady({
           timeout: 10000 // Optimizely default is 30s so we are reducing it to 10s
         }).then(() => {
-
           // We check if user whether the user is in the provided
           // exclusion group or not
           const isInGrowthExperimentGroup = this.client.getVariation(options.groupExperimentName, userId, {
@@ -71,7 +73,14 @@ class OptimizelyClient {
               id: userId,
               $opt_bucketing_id: orgId,
             });
+
             resolve(variationName);
+
+            const optimizelyConfig = this.client.getOptimizelyConfig();
+            const experimentId = optimizelyConfig.experimentsMap[options.experimentKey].id ?? '';
+            const variationId = optimizelyConfig.experimentsMap[options.experimentKey].variationsMap[variationName].id ?? '';
+
+            trackExperimentViewed(orgId, options.experimentKey, experimentId, variationName, variationId, userId);
           } else {
             // If the user is in the exclusion group it means the current user
             // should not the the exepriment so getVariationName() will resolve to "null"
@@ -85,6 +94,63 @@ class OptimizelyClient {
         });
       });
     });
+  }
+}
+
+const trackExperimentViewed = (orgId, experimentKey, experimentId, variationName, variationId, userId) => {
+  if (!isExperimentAlreadyViewed(orgId, experimentKey)) {
+    const properties = {
+      id: uuidv4(),
+      timestamp: new Date().toISOString(),
+      experimentId,
+      experimentName: experimentKey,
+      allocationType: 'organization_id',
+      orgId,
+      projectId: null, // This experiment is measured at the org level
+      userId,
+      variationId,
+      variationName,
+    };
+    window.AnalyticsClient.trackAction('Experiment Viewed', properties);
+    storeExperimentParticipation(orgId, experimentKey, variationName);
+  }
+}
+
+const isExperimentAlreadyViewed = (orgId, experimentKey) => {
+  try {
+    const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return (experiments && experiments.hasOwnProperty(orgId) && experiments[orgId] && experiments[orgId].hasOwnProperty(experimentKey));
+  } catch {
+    return false
+  }
+}
+
+const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
+  if (!orgId || !experimentKey || !variationName) {
+    return;
+  }
+
+  let experiments;
+  try {
+    experiments = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
+  } catch {
+    experiments = {};
+  }
+
+  if (!experiments[orgId]) {
+    experiments[orgId] = {};
+  }
+  if (!experiments[orgId][experimentKey]) {
+    experiments[orgId][experimentKey] = {};
+  }
+  experiments[orgId][experimentKey] = { variationName, createdAt: new Date().getTime() };
+
+  try {
+    // setItem will sometimes fail with a "Quota Exceeded" exception if users have custom configurations
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(experiments));
+  } catch {
+    // We're deliberately ignoring it so that it doesn't break the app. It'll mean a few extra
+    // events are emitted, but I think that's the lesser issue.
   }
 }
 
