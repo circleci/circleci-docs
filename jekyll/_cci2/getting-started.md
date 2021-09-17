@@ -274,7 +274,7 @@ comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
 {:.tab.switcher.Cloud}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server-v2.19.x}
+{:.tab.switcher.Server-v2}
 ![Rebuild With SSH]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
