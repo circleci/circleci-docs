@@ -8,8 +8,9 @@ $(() => {
     if (variation === "treatment") {
       $(".orb-bullet").css('visibility', 'hidden');
       $("#orb-section").show();
+      $("#orb-content-swap").replaceWith("<a id=orb-kit href=https://circleci.com/docs/2.0/creating-orbs/#orb-development-kit>" + "Orb Development Kit" + "</a>")
 
-      $("#orb-intro, #orb-concepts, #orb-publish, #orb-faq").click(function () {
+      $("#orb-intro, #orb-concepts, #orb-publish, #orb-faq, #orb-kit").click(function () {
         window.AnalyticsClient.trackAction('docs-orb-bullet', { link: this.id });
       });
     }
