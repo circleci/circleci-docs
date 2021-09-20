@@ -18,7 +18,7 @@ toc::[]
 
 == Known limitations
 
-* The JVM only accepts proxies that run over HTTP not HTTPS and therefore proxy URIs must be of the form http://user:password@host:port rather than https://user:password@host:port.
+* The JVM only accepts proxies that run over HTTP not HTTPS and therefore proxy URIs must be of the form `http://user:password@host:port` rather than `https://user:password@host:port`.
 * When using GitHub.com we cannot run in an environment were the only network egress is through the HTTP proxy. This is because SSH connections to GitHub.com will break and therefore we can't do code checkout or init the known-hosts in dispatcher [WAITING FOR MORE INFO ON THIS ONE]
 * The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
 * The KOTS admin console cannot be upgraded if proxy setting were set. The proxy settings will be deleted and cause the Kots admin console to break.
