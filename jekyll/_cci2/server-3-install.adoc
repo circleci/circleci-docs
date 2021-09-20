@@ -85,6 +85,8 @@ By default, CircleCI server will create self-signed certificates to get you star
 certificate from a trusted certificate authority. The https://letsencrypt.org/[LetsEncrypt] certificate authority, for example,
 can issue a certificate for free using their https://certbot.eff.org/[certbot] tool.
 
+NOTE: LetsEncrypt support is only compatible with one (1) Traefik replica.
+
 For example, if you host your DNS on Google Cloud, the following commands will provision a certification for your installation:
 
 [source,bash]
