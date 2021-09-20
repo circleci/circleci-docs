@@ -196,16 +196,12 @@ $sidebar-spacing-base: 5px;
     display: none;
   }
 
-  #related-resources {
-    /* hidden by default since it is still an experiment */
-    display: none;
-  }
 
-  .toc-heading, .related-heading {
+  .toc-heading {
     margin-left: -2px;
   }
 
-  .toc-indent, .related-indent {
+  .toc-indent {
     border-left: 2px solid #EEEEEE;
 
     a {
@@ -214,11 +210,6 @@ $sidebar-spacing-base: 5px;
         color: $link-text-color;
       }
     }
-  }
-
-  /* if both sections are one after another */
-  .toc-indent + #related-resources {
-    margin-top: 40px;
   }
 
   ul, li {
