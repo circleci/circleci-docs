@@ -7,7 +7,6 @@ order: 20
 version:
 - Cloud
 - Server v2.x
-suggester: true
 suggested:
   - title: Intro to Dynamic Configuration
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
