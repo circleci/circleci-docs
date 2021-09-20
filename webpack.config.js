@@ -4,7 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src-js/app.js',
+    app: './src-js/app.js'
   },
   output: {
     path: path.join(__dirname, 'jekyll/assets/js'),
