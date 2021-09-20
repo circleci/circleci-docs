@@ -7,6 +7,13 @@ order: 20
 version:
 - Cloud
 - Server v2.x
+suggester: true
+suggested:
+  - title: Intro to Dynamic Configuration
+    link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
+  - title: Technique for unified CCI configuration
+    link: https://discuss.circleci.com/t/technique-for-unified-circleci-config/39572
+
 ---
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
@@ -937,7 +944,7 @@ jobs: # conditional steps may also be defined in `commands:`
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:202107-02 
+      image: ubuntu-2004:202107-02
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -1771,7 +1778,7 @@ version: 2.1
 jobs:
   bar:
     machine:
-      image: ubuntu-2004:202107-02 
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
       - run:
