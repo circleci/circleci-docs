@@ -251,7 +251,8 @@ $padding-large-vertical: 11px;
 .global-nav--search-bar {
   position: absolute;
   left: $leftbar-width;
-  top: 50%;
+  // top: 50%;
+  top: 33px;
   margin-top: -21px;
 
   .main-searchbar {
@@ -438,5 +439,25 @@ a.nav-skip-button {
     width: auto;
     height: auto;
     overflow: visible;
+  }
+}
+
+// -- Docs Disco Experiments
+
+.dd-global-nav--links {
+  display: flex;
+
+  .link {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    color: $black;
+    margin-right: 60px;
+    padding: 10px 0;
+  }
+
+  .home {
+    border-bottom: 4px solid $black;
   }
 }
