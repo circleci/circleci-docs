@@ -7,6 +7,11 @@ order: 30
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: What is a Workflow?
+    link: https://www.youtube.com/watch?v=EoQXoF8mJwA
+  - title: Using Scheduled Workflows with Dynamic Config
+    link: https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344
 ---
 
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:

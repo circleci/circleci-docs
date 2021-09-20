@@ -8,6 +8,11 @@ order: 2
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: What’s in a Config?
+    link: https://www.youtube.com/watch?v=5Gq5nc7_2Qc
+  - title: Parameterized Configuration
+    link: https://www.youtube.com/watch?v=WJ4AaI20YJE
 ---
 
 This document provides sample [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) files, as follows:

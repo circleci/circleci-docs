@@ -7,6 +7,11 @@ order: 40
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: Env vars setting in organization context
+    link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
+  - title: Reference dynamic environment variables
+    link: https://discuss.circleci.com/t/reference-dynamic-environment-variable-in-run-environment-section/28622
 ---
 
 This document describes using environment variables in CircleCI in the following sections:
