@@ -3,8 +3,10 @@ import * as search from './instantsearch.js';
 import * as lang from './lang.js'
 import OptimizelyClient from './optimizely.js';
 import AnalyticsClient from "./analytics.js";
-// importing for add orbs section experiment: https://app.optimizely.com/v2/projects/16812830475/experiments/20598037463/variations
-import addOrbSection from "./addOrbSection.js";
+
+// imports all experiments
+import * as Experiments from './experiments';
+
 // imported but not used just so webpack picks it up and add it to the `app.bundle.js`
 import * as highlightJSBadge from 'highlightjs-badge';
 
