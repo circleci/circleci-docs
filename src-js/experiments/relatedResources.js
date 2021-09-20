@@ -8,7 +8,7 @@ $(() => {
       $('#related-resources').show();
       // track clicks on each items
       $("#related-resources li a").click(function () {
-        window.AnalyticsClient.trackAction('related-rerouces-clicked', {
+        window.AnalyticsClient.trackAction('doc-related-resources-clicked', {
           page: location.pathname,
           link: $(this).attr('href'),
           name: $(this).text()
