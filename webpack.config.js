@@ -1,11 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
-const glob = require('glob');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: './src-js/app.js',
+    app: './src-js/app.js'
   },
   output: {
     path: path.join(__dirname, 'jekyll/assets/js'),
