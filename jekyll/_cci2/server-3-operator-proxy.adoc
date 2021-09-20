@@ -3,88 +3,42 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Troubleshooting and Support
+= CircleCI Server v3.x Configuring a Proxy
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-This document describes an initial set of troubleshooting steps to take if you are having problems with your CircleCI
-Server v3.x installation. If your issue is not addressed below, you can generate a support bundle or contact your
-CircleCI account team.
+WHY USE A PROXY?
 
 toc::[]
 
-## Start Admin Console
+== Configuring your proxy
 
-To restart the Admin Console, run:
+== Known limitations
 
-[source,bash]
-----
-kubectl kots admin-console --namespace <namespace>
-----
-
-Open your browser and access http://localhost:8800 to see the Admin console.
-
-## Generate Support Bundle
-A support bundle is used by CircleCI engineers to diagnose and fix any issues you are experiencing. They are typically
-requested when you open a ticket.
-
-To download a support bundle to provide to CircleCI for support, select the *Troubleshoot* tab from the Admin console
-menu bar, and then click *Analyze CircleCI Server*.
-
-## Managing Pods
-
-### Verify Pod Readiness and Status
-Note: please check the `READY` column as well as `STATUS`. Even if the `STATUS` is `Running`, pods are not ready to
-serve user requests. Some pods may take some time to become ready.
-
-[source,bash]
-----
-kubectl get pods -n <namespace>
-NAME READY STATUS RESTARTS AGE
-api-service-5c8f557548-zjbsj 1/1 Running 0 6d20h
-audit-log-service-77c478f9d5-5dfzv 1/1 Running 0 6d20h
-builds-service-v1-5f8568c7f5-62h8n 1/1 Running 0 6d20h
-circleci-mongodb-0 1/1 Running 0 6d20h
-circleci-nomad-0 1/1 Running 6 6d20h
-…
-----
-
-To show only pods with a status besides `Running`, you can use --field-selector option.
-
-[source,bash]
-----
-kubectl get pods --field-selector status.phase!=Running -n <namespace>
-NAME READY STATUS RESTARTS AGE
-nomad-server 0/1 Error 0 5d22h
-----
-
-### Verify Pod Settings and Status
-To show detail settings and status of pods:
-
-[source,bash]
-----
-kubectl describe pods <pod-name> -n <namespace>
-----
-
-### Get Pod Logs
-To show logs of pods:
-
-[source,bash]
-----
-kubectl logs <pod-name> -n <namespace>
-----
-
-### Restart Pods
-To restart specific pods, the easiest way is remove the pod. Kubernetes will automatically recreate the pod.
-
-[source,bash]
-----
-kubectl delete pod <pod-name> -n <name-space> --now
-----
-
-## Debug Queuing Builds
-For troubleshooting information on debugging queued builds, see the Server 2.x
-https://circleci.com/docs/2.0/troubleshooting/?section=server-administration#debug-queuing-builds[troubleshooting] Guide.
+* The JVM only accepts proxies that run over HTTP not HTTPS and therefore proxy URIs must be of the form http://user:password@host:port rather than https://user:password@host:port.
+* When using GitHub.com we cannot run in an environment were the only network egress is through the HTTP proxy. This is because SSH connections to GitHub.com will break and therefore we can't do code checkout or init the known-hosts in dispatcher [WAITING FOR MORE INFO ON THIS ONE]
+* The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them.
+* The KOTS admin console cannot be upgraded if proxy setting were set. The proxy settings will be deleted and cause the Kots admin console to break.
+* Often, a custom image is needed for VM service that has proxy configured! (Check with Makoto Mizukami   about this and how customers have set this up before)
+* If object storage is outside the proxy no job features that use object storage will work. This includes:
+** Artifacts
+** Test-results
+** Cache save and restore
+** Workspaces
++
+This is because all of these involve build-agent inner uploading to object storage, but the environment variables from schedulerer are only passed to build-agent outer (and hence it can pull task configs etc, but inner can't do anything). Users need to get around this by setting environment variables on their job like so:
++
+```yml
+jobname:
+  docker:
+  - image: ubuntu:latest
+    environment:
+      HTTP_PROXY: http://proxy.example.com:3128
+      HTTPS_PROXY: http://proxy.example.com:3128
+      NO_PROXY: whatever.internal,10.0.1.2
+```
++
+It is extremely important that these environment variables are set in this particular location because its the only location that propagates to build-agent inner.
