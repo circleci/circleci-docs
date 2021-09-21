@@ -3,6 +3,14 @@ import * as search from './instantsearch.js';
 import * as lang from './lang.js'
 import OptimizelyClient from './optimizely.js';
 import AnalyticsClient from "./analytics.js";
+import * as highlightjsBadge from 'highlightjs-badge';
+
+// site files
+import './user.js';
+import './sidebar.js';
+import './nav.js';
+import './main.js';
+import './hljs-config.js'
 
 // imports all experiments
 import * as Experiments from './experiments';
