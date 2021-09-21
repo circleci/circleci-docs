@@ -63,7 +63,7 @@ Follow the Sumo Logic documentation for [Configuring a Hosted Collector](https:/
 #### **Step 2. Add an HTTP Source**
 {: #step-2-add-an-http-source }
 
-To get the URL where the CircleCI Webhooks will be sent to, and then recorded to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
+To get the URL where the CircleCI Webhooks will be sent, and then recorded to the collector, we must [add an HTTP Source](https://help.sumologic.com/03Send-Data/Sources/02Sources-for-Hosted-Collectors/HTTP-Source).
 
 When complete, copy the generated “HTTP Source Address”. You can always get this link from Sumo Logic again in the future. This is the URL that will need to be entered in the CircleCI Webhooks UI in the next step.
 
