@@ -11,32 +11,15 @@ version:
 :toc-title:
 
 == Overview
-INSERT NEW CONTENT HERE
+Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. 
 
-It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
+[INSERT INSTALLATION PHASE DIAGRAM]
+
+NOTE: It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
 == Phase 1: Prerequisites
 === Install required software
-
-
-* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
-* You must have appropriate permissions to list, create, edit and delete pods in your cluster. You can verify that you can list these resources by running: `kubectl auth can-i <list|create|edit|delete> pods`.
-* A CircleCI License file. Contact https://support.circleci.com/hc/en-us/requests/new[CircleCI support] for a license.
-* The <<Required Tools>> tools installed
-** Note that the `kubectl` tool must also be configured to have access to your cluster.
-
-*** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Connect to Amazon EKS clusters] - Amazon EKS
-*** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[Configuring cluster access for kubectl] - Google GKE
-* Port access requirements are listed here:
-** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes Load Balancers]
-** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes Nodes]
-** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad Clients]
-** xref:server-3-install-hardening-your-cluster.adoc#external-vms[External VMs]
-
-NOTE: There are no requirements regarding VPC setup or disk size for your cluster. It is, however, recommended that you
-set up a new VPC rather than use an existing one.
-
-## Required Tools
+Download and install the following software before continuing: 
 
 [.table.table-striped]
 [cols=3*, options="header", stripes=even]
@@ -63,19 +46,8 @@ set up a new VPC rather than use an existing one.
 |===
 
 === Create a Kubernetes cluster
+CircleCI server installs into an existing Kubernetes cluster. The application uses a large number of resources. Depending on your usage, your Kubernetes cluster should meet the following requirements: 
 
-In order to configure the CircleCI server application, you will need to ensure the following general and infrastructure-specific requirements are met. You will need:
-
-* An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
-** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
-*** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
-** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
-*** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
-+
-* Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
-CircleCI server users: +
-+
---
 [.table.table-striped]
 [cols=5*, options="header", stripes=even]
 |===
@@ -97,7 +69,13 @@ CircleCI server users: +
 | 240 GB
 | 10 Gbps
 |===
---
+
+Creating a Kubernetes cluster is your responsibility. Please note:
+
+* Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
+* You must have appropriate permissions to list, create, edit and delete pods in your cluster. Run this to verify your permissions: `kubectl auth can-i <list|create|edit|delete> pods`.
+* There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you
+set up a new VPC rather than use an existing one.
 
 ==== EKS
 ==== GKE
@@ -125,7 +103,23 @@ CircleCI server users: +
 ===== Step 3
 ===== Step 4
 
+*** https://aws.amazon.com/premiumsupport/knowledge-center/eks-cluster-connection/[Connect to Amazon EKS clusters] - Amazon EKS
+*** https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl[Configuring cluster access for kubectl] - Google GKE
+* Port access requirements are listed here:
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-load-balancers[Kubernetes Load Balancers]
+** xref:server-3-install-hardening-your-cluster.adoc#kubernetes-nodes[Kubernetes Nodes]
+** xref:server-3-install-hardening-your-cluster.adoc#nomad-clients[Nomad Clients]
+** xref:server-3-install-hardening-your-cluster.adoc#external-vms[External VMs]
 
+
+* An existing Kubernetes cluster (see xref:server-3-install-creating-your-first-cluster.adoc[our guide] if you need help creating one), for example:
+** Creating an Amazon EKS cluster - https://aws.amazon.com/quickstart/architecture/amazon-eks/[Amazon EKS]
+*** Using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] is our recommended option, as it creates a VPC and selects the proper security group for you.
+** Creating clusters - https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[Google GKE] +
+*** Do NOT use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
++
+* Note your Kubernetes cluster must meet the following minimum overall cluster requirements relative to the number of active
+CircleCI server users: 
 
 
 ## What to read next
