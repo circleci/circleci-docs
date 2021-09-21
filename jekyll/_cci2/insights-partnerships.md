@@ -81,6 +81,8 @@ When configuring the webooks, ensure to include both the â€œworkflow-completedâ€
 Now that you have set up collection, install the Sumo Logic App for CircleCI to use the preconfigured searches and Dashboards that provide insight into your CI Pipeline.
 
 ##### To install the CircleCI app for Sumo Logic:
+{: #to-install-the-circleci-app-for-sumo-logic }
+
 1. Locate and install the CircleCI app from the App Catalog. If you want to see a preview of the dashboards included with the app before installing, click **Preview Dashboards**.
 2. Select the version of the service you are using and click **Add to Library**. Version selection is applicable only to a few apps currently. For more information, see the [Install the Apps from the Library](https://help.sumologic.com/05Search/Library/Apps-in-Sumo-Logic/Install-Apps-from-the-Library) document.
 3. To install the app, complete the following fields.
