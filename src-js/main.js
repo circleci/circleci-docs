@@ -1,3 +1,5 @@
+import { createPopper } from '@popperjs/core';
+
 // compiles an object of parameters relevant for analytics event tracking.
 // takes an optional DOM element and uses additional information if present.
 window.analyticsTrackProps = function (el) {
@@ -94,7 +96,7 @@ function renderVersionBlockPopover() {
     let popperInstance = null;
 
     function create() {
-      popperInstance = Popper.createPopper(badge, tooltip, {
+      popperInstance = createPopper(badge, tooltip, {
         modifiers: [
           {name: 'offset',
            options: {
