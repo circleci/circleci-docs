@@ -49,7 +49,7 @@ This document describes various questions and technical issues that you may find
 
 * **Answer:** To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
 
-**Note:** _Uncertified orbs are not tested or verified by CircleCI._
+**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, and not certified._
 
 ## How to use the latest version of an orb
 {: #how-to-use-the-latest-version-of-an-orb }
@@ -76,7 +76,6 @@ You attempted to run a local build with version 2.1 of configuration.
 ```
 
 * **Answer:** To resolve this error, run `circleci config process` on your configuration and then save that configuration to disk. You then should run `circleci local execute` against the processed configuration.
-
 
 ## See also
 {: #see-also }

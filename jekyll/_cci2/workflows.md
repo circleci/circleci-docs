@@ -212,8 +212,9 @@ workflows:
 The outcome of the above example is that the `deploy:` job will not run until
 you click the `hold` job in the Workflows page of the CircleCI app and then
 click Approve. In this example the purpose of the `hold` job is to wait for
-approval to begin deployment. A job can be approved for up to 15 days after
-being issued.
+approval to begin deployment. A job can be approved for up to 90 days after
+being issued. However, workspaces expire after 15 days, so if the jobs after
+the hold job utilize workspaces, the effective approval time-limit is 15 days.
 
 Some things to keep in mind when using manual approval in a workflow:
 

@@ -40,8 +40,13 @@ Read more in the [Orb CLI Permissions Matrix]({{site.baseurl}}/2.0/orb-author-in
 Orbs can however be "Unlisted" from the [Orb Registry](https://circleci.com/developer/orbs). Unlisted orbs still exist and are discoverable via the API or CLI, but will not appear in the Orb Registry results. This may be desired if for instance, an orb is no longer maintained.
 
 ```
-circleci orb unlist myNamespace/myOrb
+circleci orb unlist <namespace>/<orb> <true|false> [flags]
 ```
+
+**Use caution when unlisting Private Orbs.**
+<br/>
+Currently the `orb source` and `orb info` CircleCI CLI commands do not work for _any_ Private Orbs, regardless if they are listed or unlisted. So unless the Private Orb name is documented before it is unlisted, you will not be able to find the orb through the Orb Registry or the CircleCI CLI. If you believe this happened to you, please create a [Support Ticket](https://support.circleci.com/hc/en-us).
+{: class="alert alert-warning"}
 
 ## Secure API tokens
 {: #secure-api-tokens }

@@ -151,6 +151,8 @@ en:
           link: 2.0/config-intro/
         - name: Configuration Reference
           link: 2.0/configuration-reference/
+        - name: Sample Configuration
+          link: 2.0/sample-config/
         - name: Reusing Configuration
           link: 2.0/reusing-config/
         - name: Dynamic Configuration
