@@ -50,7 +50,7 @@ Install the CircleCI dashboard by using the App Catalog from the dashboard home 
 This dashboard receives data through the CircleCI Sumo Logic orb which must be included in your projects to be tracked.
 
 ## Set up Sumo Logic metrics using CircleCI webhooks
-{: #setup-sumologic-metrics-using-circleci-webhooks }
+{: #set-up-sumo-logic-metrics-using-circleci-webhooks }
 
 To begin collecting and visualizing data with Sumo Logic, first configure CircleCI webhooks to send metrics data to Sumo Logic.
 ### Configure Webhooks
