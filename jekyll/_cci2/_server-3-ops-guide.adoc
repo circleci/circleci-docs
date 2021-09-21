@@ -21,6 +21,8 @@ include::server-3-operator-overview.adoc[]
 
 include::server-3-operator-metrics-and-monitoring.adoc[]
 
+include::server-3-operator-proxy.adoc[]
+
 include::server-3-operator-user-accounts.adoc[]
 
 include::server-3-operator-orbs.adoc[]
