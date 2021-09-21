@@ -1,11 +1,13 @@
 import * as Cookie from 'js-cookie';
-import * as search from './instantsearch.js';
-import * as lang from './lang.js'
-import OptimizelyClient from './optimizely.js';
-import AnalyticsClient from "./analytics.js";
 import * as highlightjsBadge from 'highlightjs-badge';
 
+
 // site files
+import OptimizelyClient from './optimizely.js';
+import AnalyticsClient from "./analytics.js";
+import * as search from './instantsearch.js';
+import * as lang from './lang.js'
+import "./site.min.js"; // TODO - if this fails, make it part of a vendor bundle to load before other stuff?
 import './user.js';
 import './sidebar.js';
 import './nav.js';
