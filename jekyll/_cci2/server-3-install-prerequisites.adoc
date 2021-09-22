@@ -73,14 +73,72 @@ CircleCI server installs into an existing Kubernetes cluster. The application us
 Creating a Kubernetes cluster is your responsibility. Please note:
 
 * Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
-* You must have appropriate permissions to list, create, edit and delete pods in your cluster. Run this to verify your permissions: `kubectl auth can-i <list|create|edit|delete> pods`.
+* You must have appropriate permissions to list, create, edit and delete pods in your cluster. Run this to verify your permissions: 
++
+`kubectl auth can-i <list|create|edit|delete> pods`
 * There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you
 set up a new VPC rather than use an existing one.
 
 ==== EKS
-==== GKE
+You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/quickstart/architecture/amazon-eks/[here]. We recommend using https://docs.aws.amazon.com/eks/latest/userguide/getting-started-eksctl.html[`eksctl`] to create your cluster, which will create a VPC and select the proper security groups for you. 
 
-=== GitHub OAuth app creation
+. https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html[Install] and https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html[configure] the AWS CLI for your AWS account. 
+. Install https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html[`eksctrl`].
+. Create your cluster by running the following (Cloud formation with `eksctl` and EKS can take upwards of 20 minutes to complete): 
++
+```bash
+eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
+```
+
+Once the cluster has been created, you can use the following command to configure `kubectl` access: 
+```bash
+eksctl utils write-kubeconfig --name circleci-server
+```
+
+NOTE: You may see the following error `AWS STS Access - cannot get role ARN for current session: InvalidClientTokenID`. This means your AWS credentials are invalid, or your IAM user does not have permission to create an EKS cluster. Proper IAM permissions are necessary in order to use `eksctl`. See the AWS documentation regarding https://aws.amazon.com/iam/features/manage-permissions/[IAM permissions]. 
+
+==== GKE
+You can learn more about creating a GKE cluster https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[here]. 
+
+CAUTION: Do not use an Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot. 
+
+NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
+
+. https://cloud.google.com/sdk/gcloud[Install] and https://cloud.google.com/kubernetes-engine/docs/quickstart#defaults[configure] the GCP CLI for your GCP account. This includes creating a Google Project, which will be required to create a cluster within your project. When you create your project make sure you also enabled API access. If you do not enable API access, the command we will run next, to create your cluster, will fail. 
+. Create your cluster by entering running the following: 
++
+```sh
+gcloud container clusters create circleci-server --project <YOUR_GOOGLE_CLOUD_PROJECT_ID> --region europe-west1 --num-nodes 3 --machine-type n1-standard-4
+``` 
+. Configure` kubectl` with your your credentials gcloud credentials: 
++
+```sh
+gcloud container clusters get-credentials circleci-server --region europe-west1
+```
+. Verify your cluster: 
++
+```sh
+kubectl cluster-info
+```
+. Create a service account for this cluster: 
++
+```sh
+gcloud iam service-accounts create <YOUR_SERVICE_ACCOUNT_ID> --description="<YOUR_SERVICE_ACCOUNT_DISPLAY_NAME>"  --display-name="<YOUR_SERVICE_ACCOUNT_DISPLAY_NAME>"
+```
+. Get the credentials for the service account: 
++
+```sh
+gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-account <SERVICE_ACCOUNT_ID>@<YOUR_GOOGLE_CLOUD_PROJECT_ID>.iam.gserviceaccount.com
+```
+
+=== Create a new GitHub OAuth app
+Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
+
+. In your browser navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button. 
+
+. Complete the following fields based on your planned installation: 
+** Homepage URL: The URL of your planned CircleCI installation.
+** Authorization callback URL: The authorization callback URL will be the URL of your planned CircleCI installation followed by /auth/github 
 
 === Frontend TLS certificates
 ==== Google Cloud DNS
