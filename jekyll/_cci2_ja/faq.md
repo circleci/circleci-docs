@@ -362,7 +362,7 @@ On the **Performance plan**, when you reach 2% of your remaining credits, you wi
 
 If you notice that your account is receiving repeated refills, review your credit usage by logging in to the CircleCI web app > click `Plan` > click `Plan Usage`. In most cases, increasing your credit package should minimize repeat refills. You can manage your plan by clicking `Plan Overview`.
 
-On the **free plan**, jobs will fail to run once you have run out of credits.
+On the **Free plan**, jobs will fail to run once you have run out of credits.
 
 #### クレジットに有効期限はありますか?
 {: #do-credits-expire }
