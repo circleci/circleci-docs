@@ -61,7 +61,7 @@ The Azure DevOps Pipelines and CircleCI configurations will be different. It may
 
 == Configuration Comparison
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===

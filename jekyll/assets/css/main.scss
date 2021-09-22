@@ -518,3 +518,22 @@ h6{
 	display: none
 }
 
+/*
+Fixing styling for the code example tables in the "Migrating From..." pages
+*/
+.table-migrating-page tr > td:not(:only-child):first-child {
+	padding-left: 0px;
+	padding-right: 4px
+}
+.table-migrating-page tr > td + td {
+	padding-right: 0px;
+	padding-left: 4px;
+}
+
+.table-migrating-page td p {
+	margin: 0px;
+}
+
+.table-background > tbody > tr:first-child {
+	background-color: transparent
+}
