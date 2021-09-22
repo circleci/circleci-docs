@@ -7,10 +7,8 @@ $(() => {
   }).then(variation => {
     if (variation === "treatment") {
       $(".dd-global-nav--links").show();
-      $(".dd-devhub-docs-nav-link").click(function(event) {
-        event.preventDefault();
+      $(".dd-global-nav--links a").click(function(_) {
         window.AnalyticsClient.trackAction('docs-devhub-nav-merge-link-clicked', {link: this.href})
-        window.location = this.href
       })
     }
   })
