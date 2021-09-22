@@ -27,12 +27,12 @@
             <div>
               {% if page.page-type != "index" and page.page-type != "homepage" %}<h1 id="{{ page.title | downcase | split: " " | join: "-" }}">{{ page.title }}</h1>{% endif %}
             </div>
+            <div id="tooltip" role="tooltip" class="tooltip-popover">
+              This document is applicable to the following:
+              <div id="arrow" data-popper-arrow></div>
+            </div>
             {% if page.version %}
             <div class="server-version-wrapper">
-              <div id="tooltip" role="tooltip" class="server-version-popover">
-                This document is applicable to the following:
-                <div id="arrow" data-popper-arrow></div>
-              </div>
               {% for version in page.version %}
               <span class="badge badge-primary">
                 <button class="server-version-badge" aria-describedby="tooltip">{{ version }}</button>
