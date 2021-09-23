@@ -42,7 +42,9 @@ You will be prompted for a:
 
 When complete, you should be provided with a URL to access the KOTS admin console, usually: http://localhost:8800.
 
-NOTE: If you need to get back to the management console at a later date you can run: `kubectl kots admin-console -n <namespace kots was installed in>`
+NOTE: If you need to get back to the management console at a later date you can run:
+
+`kubectl kots admin-console -n <namespace kots was installed in>`
 
 NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
