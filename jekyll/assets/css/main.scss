@@ -284,7 +284,7 @@ body.homepage{
   .article-container{
     @media screen and (max-width: $screen-xs-max) {
   	  padding: 0 16px 0 16px;
-      width: calc(100% - $leftbar-width;
+      width: calc(100% - $leftbar-width)
     }
   }
 
@@ -514,4 +514,26 @@ h6{
 #orb-section {
 	display: none
 }
+
+/*
+Fixing styling for the code example tables in the "Migrating From..." pages
+*/
+.table-no-background > tbody > tr:first-child {
+	background: none;
+}
+.table-migrating-page {
+	tr > td:not(:only-child):first-child {
+		padding-left: 0px;
+		padding-right: 4px
+	}
+
+	tr > td + td {
+		padding-right: 0px;
+		padding-left: 4px;
+	}
+
+	td p {
+		margin: 0px;
+	}
+} 
 
