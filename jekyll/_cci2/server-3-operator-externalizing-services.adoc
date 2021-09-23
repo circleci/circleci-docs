@@ -69,47 +69,6 @@ Consider running at least two or more PostgreSQL replicas to enable recovery fro
 |10 Gbps
 |===
 
-=== Preparing the Database
-If you are configuring an externalized PostgreSQL instance as part of a new CircleCI server 3.x install, it is recommended that you log in to your PostgreSQL instance and run the following commands. If you plan on using a different method, you must ensure that the databases and extensions outlined below are configured prior to running CircleCI server 3.x for the first time.
-
-```sql
-    CREATE DATABASE circle;
-    \connect circle
-    CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE contexts;
-    \connect contexts
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE conductor_production;
-    \connect conductor_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE contexts_service_production;
-    \connect contexts_service_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE cron_service_production;
-    \connect cron_service_production
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE domain;
-    CREATE DATABASE permissions;
-    \connect permissions
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE vms;
-    \connect vms
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE orbs;
-    \connect orbs
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE orb_analytics;
-    \connect orb_analytics
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE builds_service;
-    \connect builds_service
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-    CREATE DATABASE distributor;
-    \connect distributor
-    CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-```
-
 === Backing Up PostgreSQL
 PostgreSQL provides official documentation for backing up and restoring your PostgreSQL 12 install which can be found https://www.postgresql.org/docs/12/backup.html[here].
 
