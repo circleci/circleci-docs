@@ -17,7 +17,6 @@ Install CircleCI server in 4 phases. There is a validation step at the end of ea
 
 NOTE: It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
-== Phase 1: Prerequisites
 === Install required software
 Download and install the following software before continuing: 
 
@@ -100,6 +99,7 @@ NOTE: You may see the following error `AWS STS Access - cannot get role ARN for 
 ==== GKE
 You can learn more about creating a GKE cluster https://cloud.google.com/kubernetes-engine/docs/how-to#creating-clusters[here]. 
 
+CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot.
 
 NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
 
@@ -130,8 +130,6 @@ gcloud iam service-accounts create <YOUR_SERVICE_ACCOUNT_ID> --description="<YOU
 gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-account <SERVICE_ACCOUNT_ID>@<YOUR_GOOGLE_CLOUD_PROJECT_ID>.iam.gserviceaccount.com
 ```
 
-CAUTION: Do not use Autopilot cluster. CircleCI requires functionality that is not supported by GKE Autopilot. 
-
 === Create a new GitHub OAuth app
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
@@ -142,37 +140,53 @@ Registering and setting up a new GitHub OAuth app for CircleCI server allows for
 ** Authorization callback URL: The authorization callback URL will be the URL of your planned CircleCI installation followed by /auth/github 
 
 === Frontend TLS certificates
-By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[LetsEncrypt] certificate authority, for example, can issue a certificate for free using their link:https://certbot.eff.org/[certbot] tool.
+By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[LetsEncrypt] certificate authority, for example, can issue a certificate for free using their link:https://certbot.eff.org/[certbot] tool. In the sections below we cover using Google Cloud DNS and AWS Route53.
 
 ==== Google Cloud DNS
-For example, if you host your DNS on Google Cloud you will need *certbot-dns-google* plugin installed. You can install the plugin with the following command `pip3 install certbot-dns-google`. The following commands will provision a certification for your installation:
 
-----
-certbot certonly --dns-google --dns-google-credentials <<PATH_TO_CREDENTIALS>> -d "<<CIRCLECI_SERVER_DOMAIN>>" -d "app.<<CIRCLECI_SERVER_DOMAIN>>"
-----
+NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
+
+If you host your DNS on Google Cloud you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command: 
+
+```sh
+pip3 install certbot-dns-google 
+```
+
+Then, the following commands will provision a certification for your installation:
+
+```sh
+certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
+```
 
 ==== AWS Route53
-If, instead, you are using AWS Route53 for DNS you will need *certbot-route53* plugin installed. You can install the plugin with the following command `pip3 install certbot-dns-route53` and then execute this example:
 
-----
+NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
+
+If you are using AWS Route53 for DNS you will need the *certbot-route53* plugin installed. You can install the plugin with the following command: 
+
+```sh
+pip3 install certbot-dns-route53
+``` 
+
+Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
+
+```sh
 certbot certonly --dns-route53 -d "<<CIRCLECI_SERVER_DOMAIN>>" -d "app.<<CIRCLECI_SERVER_DOMAIN>>"
-----
+```
 
-This will create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>`.
+You will need these certificates later, and they can be retrieved locally with the following commands:
 
-You will need these later, they can be retrieved locally with the following commands:
+```sh
+ls -l /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>
+```
 
-----
-ls -l /etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>
-----
+```sh
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
+```
 
-----
-cat /etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>/fullchain.pem
-----
-
-----
-cat /etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>/privkey.pem 
-----
+```sh
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem 
+```
 
 NOTE: It is important that your certificate contains both your domain and the app.* subdomain as subjects. For example, if you host your installation at server.example.com, your certificate must cover app.server.example.com and server.example.com
 
@@ -182,10 +196,18 @@ These keysets are used to encrypt and sign artifacts generated by CircleCI. You 
 CAUTION: Store these values securely. If they are lost, job history and artifacts will not be recoverable.
 
 ==== Artifact signing key
-To generate, run the following in terminal: `docker run circleci/server-keysets:latest generate signing -a stdout`
+To generate, run the following: 
+
+```sh 
+docker run circleci/server-keysets:latest generate signing -a stdout
+```
 
 ==== Encryption signing key
-To generate, run the following in terminal: `docker run circleci/server-keysets:latest generate encryption -a stdout`
+To generate, run the following: 
+
+```sh 
+docker run circleci/server-keysets:latest generate encryption -a stdout
+```
 
 === Object storage and permissions
 Server 3.x hosts build artifacts, test results, and other state object storage. We support the following: 
@@ -198,39 +220,46 @@ link:https://cloud.google.com/storage/[Google Cloud Storage]
 
 While any S3 compatible object storage may work, we test and support AWS S3 and Minio. For object storage providers that do not support S3 API, such as Azure blob storage, we recommend using Minio Gateway. 
 
-Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Ensure the buicket name you provide exists in your chosen object storage provider before proceeding. 
+Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Ensure the bucket name you provide exists in your chosen object storage provider before proceeding. 
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also, otherwise proxy details will need to be supplied at the job level within every project .circleci/config.tml to allow artifacts, test results, cache save and restore, and workspaces too work.  For more information see the <<server-3-operator-proxy#,Configuring a Proxy>> guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also, otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.tml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
 
 ==== Create an S3 storage bucket
 You will need the following details when you configure CircleCI server. 
 
-*Storage Bucket Name* - The bucket name to be used for server.
+* *Storage Bucket Name* - The bucket name to be used for server.
 
-*Access Key ID* - Access Key ID for S3 bucket access.
+* *Access Key ID* - Access Key ID for S3 bucket access.
 
-*Secret Key* - Secret Key for S3 bucket access.
+* *Secret Key* - Secret Key for S3 bucket access.
 
-*AWS S3 Region* - AWS region of bucket if your provider is AWS. You will either have an AWS region or S3 Endpoint depending on your specific setup.
+* *AWS S3 Region* - AWS region of bucket if your provider is AWS. You will either have an AWS region or S3 Endpoint depending on your specific setup.
 
-*S3 Endpoint* - API endpoint of S3 storage provider, when your storage provider is not Amazon S3. 
+* *S3 Endpoint* - API endpoint of S3 storage provider, when your storage provider is not Amazon S3. 
+
+NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
 
 ===== Step 1: Create AWS S3 Bucket
 
-`aws s3api create-bucket \
-    --bucket <<BUCKET_NAME>> \
-    --region <<REGION>> \
-    --create-bucket-configuration LocationConstraint=<<REGION>>`
+```sh
+aws s3api create-bucket \
+    --bucket <YOUR_BUCKET_NAME> \
+    --region <YOUR_REGION> \
+    --create-bucket-configuration LocationConstraint=<YOUR_REGION>
+```
 
-NOTE: us-east-1 does not support a LocationConstraint. If your region is us-east-1, omit the bucket configuration
+NOTE: `us-east-1` does not support a LocationConstraint. If your region is `us-east-1`, omit the bucket configuration
 
-===== Step 2: Create an IAM User for CircleCI server
+===== Step 2: Create an IAM user for CircleCI server
 
-`aws iam create-user --user-name circleci-server`
+```
+aws iam create-user --user-name circleci-server
+```
 
 ===== Step 3: create a policy document "policy.json" with the following content
 
 [source, json]
+----
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -246,21 +275,28 @@ NOTE: us-east-1 does not support a LocationConstraint. If your region is us-east
     }
   ]
 }
+----
 
-===== Step 4: Attach Policy to User
-`aws iam put-user-policy \
+===== Step 4: Attach policy to user
+
+```sh
+aws iam put-user-policy \
   --user-name circleci-server \
   --policy-name circleci-server \
-  --policy-document file://policy.json`
+  --policy-document file://policy.json
+```
 
 ===== Step 5: Create Access Key for user circleci-server
-You will need this when you configure your server installation later. 
+NOTE: You will need this when you configure your server installation later. 
 
-`aws iam create-access-key --user-name circleci-server`
+```sh
+aws iam create-access-key --user-name circleci-server
+```
 
-The result should look like this. 
+The result should look like this:
 
 [source, json]
+----
 {
   "AccessKey": {
         "UserName": "circleci-server",
@@ -270,52 +306,72 @@ The result should look like this.
         "AccessKeyId": <AWS_ACCESS_KEY_ID>
   }
 }
+----
 
 ==== Create a Google Cloud storage bucket
 You will need the following details when you configure CircleCI server. 
 
-*Storage Bucket Name* - The bucket used for server.
+* *Storage Bucket Name* - The bucket used for server.
 
-*Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
+* *Service Account JSON* - A JSON format key of the Service Account to use for bucket access.
 
 A dedicated service account is recommended. Add to it the Storage Object Admin role, with a condition on the resource name limiting access to only the bucket specified above. For example, enter the following into the Google’s Condition Editor of the IAM console:
 
-`resource.name.startsWith("projects/_/buckets/<bucket-name>")`
-
 NOTE: Use `startsWith` and prefix the bucket name with `projects/_/buckets/`.
 
-===== Step 1: Create a GCP Bucket 
-If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC objects need to be created. More information can be found in the GKE documentation.
+```sh
+resource.name.startsWith("projects/_/buckets/<bucket-name>")
+```
 
-`gsutil mb gs://circleci-server-bucket`
+NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
+
+===== Step 1: Create a GCP bucket 
+If your server installation runs within a GKE cluster, ensure that your current IAM user is a cluster admin for this cluster, as RBAC (role-based access control) objects need to be created. More information can be found in the https://cloud.google.com/kubernetes-engine/docs/how-to/role-based-access-control#iam-rolebinding-bootstrap[GKE documentation].
+
+```sh
+gsutil mb gs://circleci-server-bucket
+```
 
 ===== Step 2: Create a Service Account
-`gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"`
 
-You will need the email for the service account in the next step 
+```sh
+gcloud iam service-accounts create circleci-server --display-name "circleci-server service account"
+```
 
-`gcloud iam service-accounts list \
+You will need the email for the service account in the next step, fun the following to find it:
+
+```sh 
+gcloud iam service-accounts list \
   --filter="displayName:circleci-server account" \
-  --format 'value(email)'`
+  --format 'value(email)'
+```
 
 ===== Step 3: Grant Permissions to Service Account
-`gcloud iam roles create circleci_server \
-    --project <<PROJECT_ID>> \
+
+```sh
+gcloud iam roles create circleci_server \
+    --project <PROJECT_ID> \
     --title "CircleCI Server" \
-    --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get`
+    --permissions \ compute.disks.get,compute.disks.create,compute.disks.createSnapshot,compute.snapshots.get,compute.snapshots.create,compute.snapshots.useReadOnly,compute.snapshots.delete,compute.zones.get
+```
 
-`gcloud projects add-iam-policy-binding <<PROJECT_ID>> \
-    --member serviceAccount:<<SERVICE_ACCOUNT_EMAIL>> \
-    --role projects/<<PROJECT_ID>>/roles/circleci_server`
+```sh
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+    --member serviceAccount:<SERVICE_ACCOUNT_EMAIL> \
+    --role projects/<PROJECT_ID>/roles/circleci_server
+```
 
-`gsutil iam ch serviceAccount:<<SERVICE_ACCOUNT_EMAIL>>:objectAdmin gs://circleci-server-bucket`
+```sh
+gsutil iam ch serviceAccount:<SERVICE_ACCOUNT_EMAIL>:objectAdmin gs://circleci-server-bucket
+```
 
 ===== Step 4: JSON Key File 
-After running the following, you should have a file named circleci-server-keyfile in your local working directory. You will need this when you configure your server installation. 
+After running the following, you should have a file named `circleci-server-keyfile` in your local working directory. You will need this when you configure your server installation. 
 
-`gcloud iam service-accounts keys create circleci-server-keyfile \
-    --iam-account <<SERVICE_ACCOUNT_EMAIL>>`
+```sh
+gcloud iam service-accounts keys create circleci-server-keyfile \
+    --iam-account <SERVICE_ACCOUNT_EMAIL>
+```
 
 ## What to read next
-* https://circleci.com/docs/2.0/server-3-install-creating-your-first-cluster[Creating your first cluster]
 * https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
