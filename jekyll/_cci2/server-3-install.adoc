@@ -46,24 +46,13 @@ NOTE: If you need to get back to the management console at a later date you can 
 
 NOTE: Once you have created your namespace we recommend setting your `kubectl` context too with the following command: `kubectl config set-context --current --namespace <namespace>`
 
-<<<<<<< HEAD
 ===== Installing behind HTTP Proxy
-=======
-=== Installing behind an HTTP proxy
->>>>>>> 310a04ebe611fc3337e27a72d80bd05a3e925ec8
 
 If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]): `kubectl kots install circleci-server --http-proxy <<http-proxy-uri>> --https-proxy <<https-proxy> --no-proxy <<no proxy list>>`
 
 The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them. 
 
-<<<<<<< HEAD
 For further information see the <<server-3-operator-proxy#,Configuring a Proxy>> guide.
-=======
-NOTE: For further information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
-
-== Configure and deploy server 
-Once you have accessed the the KOTS admin console and uploaded your license file, you will see something similar to the following, where you will configure CircleCI server and deploy the CircleCI core services. The goal of this stage is to get the service up and running so you can log in to the application.
->>>>>>> 310a04ebe611fc3337e27a72d80bd05a3e925ec8
 
 #INSERT SCREENSHOT#
 
@@ -72,7 +61,6 @@ Frontend settings control the web application specific aspects of the CircleCI s
 
 Complete the following fields: 
 
-<<<<<<< HEAD
 *Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate. 
 
 *Frontend TLS Private Key (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: `$ cat /etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>/privkey.pem`.
@@ -240,28 +228,6 @@ The following command will provide the IP address of the service `kubectl get se
 ==== Nomad Clients 
 ===== Overview  
 As mentioned in the link:https://circleci.com/docs/2.0/server-3-overview[Overview], Nomad is a workload orchestration tool that CircleCI uses to schedule (via Nomad server) and run (via Nomad Clients) CircleCI jobs.
-=======
-* *CircleCI Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate. 
-
-* *Frontend TLS Private Key (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: 
-+
-```sh
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
-```
-
-* *Frontend TLS Certificate (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command" 
-+
-```sh 
-cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
-```
-
-* *Private Load Balancer (optional)* - Load balancer doesn't generate external IP addresses. 
-
-* *Replicaset (optional)* - Used to increase the amount of traffic that can be handled by the frontend. 
-
-=== PotsgreSQL // move to externalisation doc
-*Internal*: Deploys a pre-configured PostgreSQL 12 instance that runs inside of the CircleCI namespace.
->>>>>>> 310a04ebe611fc3337e27a72d80bd05a3e925ec8
 
 Nomad clients are installed outside of the Kubernetes cluster, while their control plane (Nomad server) is installed within the cluster. The communication between your Nomad clients and the nomad control plane are secured with mTLS. The mTLS certificate, private key, and certificate authority will be output after you complete the Nomad clients installation. 
 
