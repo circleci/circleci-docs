@@ -516,6 +516,17 @@ This directory allows you to control the default working directory used by each 
 
 This directory enables you to control the working directory cleanup after each job. The default value is `false`.
 
+==== runner.mode
+
+This parameter allows you to specify whether you want to terminate this runner instance upon completion of a job (single-task) or to continuously poll for new available jobs.
+
+The possible values are:
+
+* continuous
+* single-task
+
+NOTE: The default value is continuous.
+
 ==== runner.max_run_time
 
 This value can be used to override the default maximum duration the task agent will run each job. Note that the value is a string with the following unit identifiers `h`, `m` or `s` for hour minute and seconds respectively:
