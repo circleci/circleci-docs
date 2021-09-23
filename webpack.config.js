@@ -15,6 +15,10 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       CIRCLECI_ENVIRONMENT: `"${process.env.NODE_ENV}"`
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
     })
   ],
   module: {

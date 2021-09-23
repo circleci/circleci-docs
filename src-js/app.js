@@ -7,18 +7,18 @@ import OptimizelyClient from './optimizely.js';
 import AnalyticsClient from "./analytics.js";
 import * as search from './instantsearch.js';
 import * as lang from './lang.js'
-import "./site.min.js"; // TODO - if this fails, make it part of a vendor bundle to load before other stuff?
 import './user.js';
 import './sidebar.js';
 import './nav.js';
 import './main.js';
-import './hljs-config.js'
+
+// imported but not used just so webpack picks it up and add it to the `app.bundle.js`
+import * as hljsBadge from 'highlightjs-badge';
+import './highlightJSBadge.js'
 
 // imports all experiments
 import * as Experiments from './experiments';
 
-// imported but not used just so webpack picks it up and add it to the `app.bundle.js`
-import * as highlightJSBadge from 'highlightjs-badge';
 
 search.init();
 lang.init();
