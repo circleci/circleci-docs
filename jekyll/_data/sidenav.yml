@@ -331,8 +331,6 @@ en:
       children:
         - name: Prerequisites
           link: 2.0/server-3-install-prerequisites
-        - name: Your First Cluster
-          link: 2.0/server-3-install-creating-your-first-cluster
         - name: Installation
           link: 2.0/server-3-install
         - name: Migration
