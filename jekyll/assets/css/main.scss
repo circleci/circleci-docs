@@ -287,7 +287,7 @@ body.homepage{
   .article-container{
     @media screen and (max-width: $screen-xs-max) {
   	  padding: 0 16px 0 16px;
-      width: calc(100% - $leftbar-width;
+      width: calc(100% - $leftbar-width)
     }
   }
 
@@ -521,19 +521,22 @@ h6{
 /*
 Fixing styling for the code example tables in the "Migrating From..." pages
 */
-.table-migrating-page tr > td:not(:only-child):first-child {
-	padding-left: 0px;
-	padding-right: 4px
+.table-no-background > tbody > tr:first-child {
+	background: none;
 }
-.table-migrating-page tr > td + td {
-	padding-right: 0px;
-	padding-left: 4px;
-}
+.table-migrating-page {
+	tr > td:not(:only-child):first-child {
+		padding-left: 0px;
+		padding-right: 4px
+	}
 
-.table-migrating-page td p {
-	margin: 0px;
-}
+	tr > td + td {
+		padding-right: 0px;
+		padding-left: 4px;
+	}
 
-.table-background > tbody > tr:first-child {
-	background-color: transparent
-}
+	td p {
+		margin: 0px;
+	}
+} 
+
