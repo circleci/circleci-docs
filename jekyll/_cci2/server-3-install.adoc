@@ -15,25 +15,12 @@ Before you begin with the CircleCI server v3.x installation process, ensure all 
 toc::[]
 
 ## Phase 2 - Core Services Installation
+
 CircleCI server v3.x uses link:https://kots.io/[KOTS] from link:https://www.replicated.com/[Replicated] to manage and distribute server v3.x. KOTS is a kubectl plugin. To install the latest version, you can run 'curl https://kots.io/install | bash'
 
 Ensure you are running at least the minimum version (KOTS 1.47.3) by running `kubectl kots version`.  
 
 NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not available on the host machine. Turning WSL2 off and back on should resolve the issue. For more information, please see link:https://github.com/microsoft/WSL/issues/4199[https://github.com/microsoft/WSL/issues/4199]
-
-
-
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] to manage and
-distribute server v3.x. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
-To install the latest version, you can run `curl  https://kots.io/install | bash`.
-
-Ensure you are running the minimum KOTS (KOTS {kotsversion}) by running `kubectl kots version`.
-
-NOTE: The KOTS command will open up a tunnel to the admin console. If running on Windows inside WSL2, the port is not
-available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
-https://github.com/microsoft/WSL/issues/4199.
 
 From the terminal run `kubectl kots install circleci-server`
 
@@ -45,6 +32,7 @@ You will be prompted for a:
 When complete, you should be provided with a URL to access the KOTS admin console. Usually this is http://localhost:8800.
 
 NOTE: If you need to get back to the management console at a later date you can run:
+
 `kubectl kots admin-console -n <namespace kots was installed in>`
 
 NOTE: Once you have created your namespace we recommend setting your Kubectl context too with the following command `kubectl config set-context --current --namespace <namespace>`
