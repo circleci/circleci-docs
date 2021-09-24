@@ -13,8 +13,6 @@ import './nav.js';
 import './main.js';
 
 // imported but not used just so webpack picks it up and add it to the `app.bundle.js`
-import * as hljsBadge from 'highlightjs-badge';
-import './highlightJSBadge.js'
 
 // imports all experiments
 import * as Experiments from './experiments';

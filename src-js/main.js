@@ -89,8 +89,8 @@ function detectScrollbar( element ){
 }
 
 function renderVersionBlockPopover() {
-  var badges = document.querySelectorAll(".server-version-badge")
-  var tooltip = document.querySelector(".server-version-popover")
+  var badges = document.querySelectorAll(".server-version-badge");
+
   badges.forEach(function(badge) {
 
     let popperInstance = null;
@@ -128,8 +128,8 @@ function renderVersionBlockPopover() {
       destroy();
     }
 
-    const showEvents = ['mouseenter', 'focus'];
-    const hideEvents = ['mouseleave', 'blur'];
+    var showEvents = ['mouseenter', 'focus'];
+    var hideEvents = ['mouseleave', 'blur'];
 
     showEvents.forEach(event => {
       badge.addEventListener(event, show);
@@ -138,10 +138,7 @@ function renderVersionBlockPopover() {
     hideEvents.forEach(event => {
       badge.addEventListener(event, hide);
     });
-
-
   })
-
 }
 
 /**
@@ -263,11 +260,106 @@ $( document ).ready(function() {
     $("nav.sidebar").toggleClass("open");
   });
 
+  var tooltip = document.querySelector(".tooltip-popover");
+
   // Give article headings direct links to anchors
-  $("article h2, article h3, article h4, article h5, article h6").filter("[id]").each(function () {
-    $(this).append('<a href="#' + $(this).attr("id") + '"><i class="fa fa-link"></i></a>');
+  $("article h1, article h2, article h3, article h4, article h5, article h6").filter("[id]").each(function () {
+    var isMainTitle = $(this).prop('nodeName') === 'H1';
+    $(this).append((isMainTitle
+      ? ' <a href="#'
+      : '<a href="#' + $(this).attr("id"))
+      + '"><i class="fa fa-link"></i></a>');
+    if (isMainTitle) {
+      $(this).find("i").toggle();
+    }
   });
-  $("article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
+
+  var showEvents = ['mouseover', 'hover', 'mouseenter', 'focus'];
+  var hideEvents = ['mouseout', 'mouseleave', 'blur'];
+  var clickEvents = ['click'];
+
+  var makePopper = (icon) => Object.assign(icon, {
+    show() {
+      tooltip.setAttribute('data-show', '');
+      // change tooltip text based on current button popover.
+      tooltip.innerHTML = "Copy link<div id='arrow' data-popper-arrow></div>"
+      icon.instance = createPopper(icon, tooltip, {
+        modifiers: [{
+          name: 'offset',
+          options: {
+            offset: [0, 8],
+          },
+        }],
+      });
+      window.AnalyticsClient.trackAction('docs-share-button-hover', {
+        page: location.pathname,
+        success: true,
+      });
+    },
+    copy(event) {
+      event.preventDefault();
+      navigator?.clipboard
+        .writeText(event.target.href)
+        .then(() => {
+          icon.hide();
+          tooltip.setAttribute('data-show', '');
+          // change tooltip text based on current button popover.
+          tooltip.innerHTML = "Copied!<div id='arrow' data-popper-arrow></div>";
+          icon.instance = createPopper(icon, tooltip, {
+            modifiers: [{
+              name: 'offset',
+              options: {
+                offset: [0, 8],
+              },
+            }],
+          });
+          window.history.pushState({}, document.title, event.target.href);
+          window.AnalyticsClient.trackAction('docs-share-button-click', {
+            page: location.pathname,
+            success: true,
+          });
+        })
+        .catch(error =>
+          window.AnalyticsClient.trackAction('docs-share-button-click', {
+            page: location.pathname,
+            success: false,
+            error,
+          }));
+    },
+    hide() {
+      tooltip.removeAttribute('data-show');
+      if (icon.instance) {
+        icon.instance.destroy();
+        icon.instance = null;
+      }
+    }
+  });
+
+  // https://app.optimizely.com/v2/projects/16812830475/experiments/20631440733/variations
+  window.OptimizelyClient.getVariationName({
+    experimentKey: 'dd_share_section_icon_test',
+    groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test'
+  }).then(variation => {
+    if (variation === 'treatment') {
+      document.querySelectorAll('.fa-link').forEach(icon => {
+        makePopper(icon);
+
+        showEvents.forEach(event => {
+          icon.parentElement.addEventListener(event, icon.show);
+        });
+
+        hideEvents.forEach(event => {
+          icon.parentElement.addEventListener(event, icon.hide);
+        });
+
+        clickEvents.forEach(event => {
+          icon.parentElement.addEventListener(event, icon.copy);
+        });
+      });
+    }
+  });
+
+  $("article h1, article h2, article h3, article h4, article h5, article h6").filter("[id]").hover(function () {
     $(this).find("i").toggle();
   });
 
