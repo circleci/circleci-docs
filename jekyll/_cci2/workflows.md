@@ -8,10 +8,14 @@ version:
 - Cloud
 - Server v2.x
 suggested:
-  - title: What is a Workflow?
-    link: https://www.youtube.com/watch?v=EoQXoF8mJwA
-  - title: Using Scheduled Workflows with Dynamic Config
-    link: https://discuss.circleci.com/t/workaround-using-scheduled-workflows-with-dynamic-config/40344
+  - title: Manual job approval and scheduled workflow runs
+    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
+  - title: Filter workflows by branch
+    link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - title: How to trigger a workflow
+    link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - title: Conditional workflows
+    link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:

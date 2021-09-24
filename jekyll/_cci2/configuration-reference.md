@@ -8,10 +8,16 @@ version:
 - Cloud
 - Server v2.x
 suggested:
+  - title: 6 config optimization tips
+    link: https://circleci.com/blog/six-optimization-tips-for-your-config/
   - title: Intro to Dynamic Configuration
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
-  - title: Technique for unified CCI configuration
-    link: https://discuss.circleci.com/t/technique-for-unified-circleci-config/39572
+  - title: Using dynamic config
+    link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
+  - title: Validate your config using local CLI
+    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
+  - title: How to trigger a single job
+    link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
