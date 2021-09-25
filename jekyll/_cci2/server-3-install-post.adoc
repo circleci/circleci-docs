@@ -1,0 +1,80 @@
+---
+version:
+- Server v3.x
+- Server Admin
+---
+= CircleCI Server v3.x Installation Phase 4
+:page-layout: classic-docs
+:page-liquid:
+:icons: font
+:toc: macro
+:toc-title:
+
+Before you begin with the CircleCI server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+
+toc::[]
+
+## Phase 4: Post installation
+
+==== Orbs 
+
+Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You are responsible for maintaining orbs; this includes copying orbs from the public registry, updating orbs that may have been copied prior, and registering your companies private orbs if they exist.
+
+===== Managing Orbs 
+
+Orbs are accessed via the CircleCI CLI. Orbs require your CircleCI user to be an admin. They also require a personal link:https://circleci.com/docs/2.0/managing-api-tokens/[api token]. Providing a local repository location using the --host option allows you to access your local server orbs vs the public cloud orbs. For example, if your server installation is located at http://circleci.somehostname.com, then you can run orb commands local to that orb repository by passing '--host http://cirlceci.somehostname.com'.
+
+===== List Available Orbs 
+
+To list available public orbs, visit the orb directory or run:
+----
+circleci orb list
+----
+
+To list available private orbs (registered in your local server orb repository) run:
+----
+circleci orb list --host <your server install domain> --token <your api token>
+----
+
+===== Import Public Orb
+
+To import a public orb to your local server orb repository:
+----
+circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
+----
+
+===== Fetch Public Orb Update 
+
+To update a public orb in your local server orb repository with a new version, run:
+----
+circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
+----
+
+For more Orb information, please refer to the Orb docs for the cloud product.
+
+
+==== Email Notifications 
+
+Build notifications are sent via email.
+
+*Email from address (required)* - The from address for the email.  
+
+*Email Submission server hostname (required)* - Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
+
+*Username (required)* - Username to authenticate to submission server. This is commonly the same as the user’s e-mail address.
+
+*Password (required)* - Password to authenticate to submission server.
+
+*Port (optional)* - Port of the submission server. This is usually either 25 or 587. While port 465 is also commonly used for email submission, it is often used with implicit TLS instead of StartTLS. Server only supports StartTLS for encrypted submission. 
+
+NOTE: Outbound connections on port 25 are blocked on most cloud providers. Should you select this port, be aware that your notifications may fail to send
+Enable StartTLS: Enabling this will encrypt mail submission. 
+
+NOTE: You should only disable this if you can otherwise guarantee the confidentiality of traffic
+
+Click the *Save config* button to update your installation and re-deploy server.
+
+## What to read next
+
+* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
+* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]

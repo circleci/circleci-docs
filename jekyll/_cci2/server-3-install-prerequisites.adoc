@@ -3,17 +3,17 @@ version:
 - Server v3.x
 - Server Admin
 ---
-= CircleCI Server v3.x Installation Phase 1: Prerequisites
+= CircleCI Server v3.x Installation Phase 1
 :page-layout: classic-docs
 :page-liquid:
 :icons: font
 :toc: macro
 :toc-title:
 
-== Overview
+== Phase 1: Prerequisites
 Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. 
 
-[INSERT INSTALLATION PHASE DIAGRAM]
+#INSERT INSTALLATION PHASE DIAGRAM#
 
 NOTE: It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
