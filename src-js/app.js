@@ -12,7 +12,7 @@ import './sidebar.js';
 import './nav.js';
 import './main.js';
 
-// imported but not used just so webpack picks it up and add it to the `app.bundle.js`
+hljs.initHighlightingOnLoad();
 
 // imports all experiments
 import * as Experiments from './experiments';
