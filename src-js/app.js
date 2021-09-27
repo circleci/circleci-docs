@@ -1,7 +1,5 @@
 import * as Cookie from 'js-cookie';
 import * as highlightjsBadge from 'highlightjs-badge';
-
-
 // site files
 import OptimizelyClient from './optimizely.js';
 import AnalyticsClient from "./analytics.js";
@@ -12,7 +10,6 @@ import './sidebar.js';
 import './nav.js';
 import './main.js';
 
-hljs.initHighlightingOnLoad();
 
 // imports all experiments
 import * as Experiments from './experiments';
