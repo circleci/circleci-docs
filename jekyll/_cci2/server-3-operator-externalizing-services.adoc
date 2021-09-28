@@ -10,7 +10,7 @@ version:
 :toc: macro
 :toc-title:
 
-This document describes how to configure the following external services for use with a CircleCI server 3.x installation.
+This document describes how to configure the following external services for use with a CircleCI server 3.x installation. The settings described in this guide can be found in the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>`
 
 * PostgreSQL
 * MongoDB
@@ -21,6 +21,9 @@ toc::[]
 == PostgreSQL
 
 NOTE: If using your own PostgresSQL instance it needs to be version 12.1 or greater. 
+
+.External PostgreSQL
+image::server-3-external-postgres.png[Screenshot of KOTS admin console config showing settings for using an external PostgreSQL instance]
 
 If you choose to use an external PostgreSQL instance, complete the following fields: 
 
@@ -96,6 +99,9 @@ We strongly recommend the following:
 
 NOTE: If using your own MongoDB instance it needs to be version 3.6 or greater. 
 
+.External MongoDB
+image::server-3-external-mongo.png[Screenshot of KOTS admin console config showing settings for using an external MongoDB instance]
+
 If you choose to use an external MongoDB instance, complete the following fields: 
 
 * *MongoDB connection host(s) or IP(s) (required)* - 
@@ -123,5 +129,8 @@ The authentication mechanism to use, usually SCRAM-SHA-1.
 Any other connection options you would like to use. This needs to be formatted as a query string (`key=value` pairs, separated by `&``, special characters need to be URL encoded). See the link:https://docs.mongodb.com/v3.6/reference/connection-string/[MongoDB docs] for available options.
 
 == Vault
+
+.External Vault
+image::server-3-external-Vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
 
 Complete the following Vault fields: 
