@@ -22,20 +22,20 @@ Following are the steps required for using the git command line tool to import y
 . Create an empty repository on your GitHub Enterprise instance.
 . Create a bare clone of your external repository on your local machine, fetching all remote tags (refs/tags/\*) and copying all remote branch heads (refs/heads/\*) directly to their corresponding local branch heads.
 +
-----
+```
 git clone https://external-host.com/extuser/repo.git --bare
-----
+```
 . Add your GitHub Enterprise repository as a remote reference in your local clone.
 +
-----
+```
 cd [repo-name]
 git remote add enterprise git@[hostname]:[owner]/[repo-name].git
-----
+```
 . Push all local references (refs/*) up to your remote GitHub Enterprise repository.
 +
-----
+```
 git push enterprise --mirror
-----
+```
 
 Once you have imported your code into GitHub or BitBucket, you can start creating a project in CircleCI using the https://circleci.com/docs/2.0/getting-started/[Getting Started guide].
 
@@ -53,23 +53,25 @@ The Buildkite and CircleCI configurations will be different. It may be helpful t
 * https://circleci.com/docs/2.0/configuration-reference/[CircleCI YML Reference]
 
 
-Some differences that are worth calling out:
+== Configuration Comparison
 
-[.table.table-striped]
-[cols=2*, options="header", stripes=even]
+[.table.table-striped.table-migrating-page]
+[cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
 | Buildkite | CircleCI
 
-2+h| Define a job that executes a single build step. 
+2+| Define a job that executes a single build step. 
 
 a|
+[source, yaml]
 ----
 steps:
   - command: 'execute-script-for-job1.sh'
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -78,9 +80,10 @@ jobs:
       - run: "execute-script-for-job1"
 ----
 
-2+h| Specify a docker image to use for a job.
+2+| Specify a docker image to use for a job.
 
 a|
+[source, yaml]
 ----
 steps:
   - label: 'job1'
@@ -91,6 +94,7 @@ steps:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   job1:
@@ -102,9 +106,10 @@ jobs:
 
 ----
 
-2+h| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
+2+| Define a multi-stage build pipeline. Job1 and Job2 run concurrently. Once they’re done, Job3 runs. Once Job3 is done, Job4 runs.
 
 a|
+[source, yaml]
 ----
 steps:
   - label: 'job1'
@@ -125,6 +130,7 @@ steps:
 ----
 
 a|
+[source, yaml]
 ----
 version: 2
 jobs:
@@ -156,9 +162,10 @@ workflows:
           - job3
 ----
 
-2+h| Execute jobs on multiple platforms. Buildkite uses tags to identify build agents. CircleCI provides executors for docker, Linux and MacOS.
+2+| Execute jobs on multiple platforms. Buildkite uses tags to identify build agents. CircleCI provides executors for docker, Linux and MacOS.
 
 a|
+[source, yaml]
 ----
 steps:
   - label: 'ubuntuJob'
@@ -174,6 +181,7 @@ steps:
 ----
 
 a|
+[source, yaml]
 ----
 jobs:
   ubuntuJob:

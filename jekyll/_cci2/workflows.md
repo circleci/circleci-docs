@@ -7,6 +7,15 @@ order: 30
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: Manual job approval and scheduled workflow runs
+    link: https://circleci.com/blog/manual-job-approval-and-scheduled-workflow-runs/
+  - title: Filter workflows by branch
+    link: https://support.circleci.com/hc/en-us/articles/115015953868?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - title: How to trigger a workflow
+    link: https://support.circleci.com/hc/en-us/articles/360050351292?input_string=how+can+i+share+the+data+between+all+the+jobs+in+a+workflow
+  - title: Conditional workflows
+    link: https://support.circleci.com/hc/en-us/articles/360043638052-Conditional-steps-in-jobs-and-conditional-workflows
 ---
 
 Workflows help you increase the speed of your software development through faster feedback, shorter reruns, and more efficient use of resources. This document describes the Workflows feature and provides example configurations in the following sections:
@@ -230,7 +239,7 @@ The following screenshot demonstrates a workflow on hold.
 {:.tab.switcher.Cloud}
 ![Approved Jobs in On Hold Workflow]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server-v2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 

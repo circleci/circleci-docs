@@ -18,7 +18,7 @@ toc::[]
 == Basic Terminology and Architecture
 
 .Nomad Cluster Management
-image::nomad_cluster_mgmnt.png[Nomad Cluster]
+image::nomad-diagram-v2.png[Diagram of the Nomad cluster]
 <<<
 - **Nomad Server:** Nomad servers are the brains of the cluster; they receive and allocate jobs to Nomad clients. In CircleCI, a Nomad server runs on your Services machine as a Docker Container.
 
