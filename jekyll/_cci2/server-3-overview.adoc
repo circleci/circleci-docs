@@ -401,5 +401,5 @@ We do our best to support a wide range of platforms for installation. We use env
 == What to read next
 
 * https://circleci.com/docs/2.0/server-3-whats-new[What's new in 3.x]
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation Prerequisites]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]

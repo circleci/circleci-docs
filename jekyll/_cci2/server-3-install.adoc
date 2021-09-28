@@ -10,16 +10,16 @@ version:
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+Before you begin with the CircleCI server v3.x core services installation phase, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
 
 toc::[]
 
 == Phase 2: Core services installation
 CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/[Replicated] to manage and
 distribute server v3.x. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
-To install the latest version, you can run `curl https://kots.io/install | bash`.
+To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
-Ensure you are running the minimum KOTS (KOTS {kotsversion}) by running: 
+Ensure you are running the minimum KOTS version – {kotsversion} – by running: 
 
 ```
 kubectl kots version
@@ -29,7 +29,7 @@ NOTE: The KOTS command will open up a tunnel to the admin console. If running on
 available on the host machine. Turning WSL off and back on should resolve the issue. For more information, please see
 https://github.com/microsoft/WSL/issues/4199.
 
-From the terminal run (if you are installing behind a proxy see <<Install behind HTTP proxy>> first):
+From the terminal run (if you are installing behind a proxy see <<Installing behind HTTP Proxy>>):
 
 ```sh
 kubectl kots install circleci-server
@@ -40,7 +40,7 @@ You will be prompted for a:
 * namespace for the deployment
 * password for the KOTS admin console
 
-When complete, you should be provided with a URL to access the KOTS admin console, usually: http://localhost:8800.
+When complete, you should be provided with a URL to access the KOTS admin console, usually, `\http://localhost:8800`.
 
 NOTE: If you need to get back to the KOTS admin console at a later date you can run: `kubectl kots admin-console -n <namespace kots was installed in>`
 
@@ -48,7 +48,11 @@ NOTE: Once you have created your namespace we recommend setting your `kubectl` c
 
 === Installing behind HTTP Proxy
 
-If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]): `kubectl kots install circleci-server --http-proxy <<http-proxy-uri>> --https-proxy <<https-proxy> --no-proxy <<no proxy list>>`
+If you wish to install CircleCI server behind a proxy, the following command structure should be used (for more information see the KOTS docs https://kots.io/kotsadm/installing/online-install/#proxies[here]):
+
+```bash
+kubectl kots install circleci-server --http-proxy <http-proxy-uri> --https-proxy <https-proxy> --no-proxy <no proxy list>
+```
 
 The load balancer endpoints must be added to the no-proxy list for the following services: `output processor` and `vm-service`. This is because the no-proxy list is shared between the application and build-agent. The application and build-agent are assumed to be behind the same firewall and therefore cannot have a proxy between them. 
 
@@ -63,13 +67,21 @@ Complete the following fields:
 
 * *Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate. 
 
-* *Frontend TLS Private Key (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: `$ cat /etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>/privkey.pem`.
+* *Frontend TLS Private Key (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: `
++
+```bash
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/privkey.pem
+```
 
-* *Frontend TLS Certificate (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: `$ cat /etc/letsencrypt/live/<<CIRCLECI_SERVER_DOMAIN>>/fullchain.pem`.
+* *Frontend TLS Certificate (recommended)* - You created this during your pre-requisite steps. You can retrieve this value with the following command: 
++
+```bash
+cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
+```
 
 * *Private Load Balancer (optional)* - Load balancer doesn't generate external IP addresses. 
 
-* S*Frontend Replicas (optional)* - Used to increase the amount of traffic that can be handled by the frontend. 
+* *Frontend Replicas (optional)* - Used to increase the amount of traffic that can be handled by the frontend. 
 
 
 ==== Postgres Settings
@@ -172,5 +184,4 @@ kubectl get pods -n <<circleci installation namespace>>
 
 ## What to read next
 
-* https://circleci.com/docs/2.0/server-3-install-hardening-your-cluster[Hardening Your Cluster]
-* https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
+* https://circleci.com/docs/2.0/server-3-install-build-services/[Server 3.x Phase 3: Build services installation]

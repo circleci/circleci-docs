@@ -74,7 +74,9 @@ Creating a Kubernetes cluster is your responsibility. Please note:
 * Your cluster must have outbound access to pull Docker containers and verify your license. If you do not want to provide open outbound access, see our https://help.replicated.com/community/t/customer-firewalls/55[list of ports] that will need access.
 * You must have appropriate permissions to list, create, edit and delete pods in your cluster. Run this to verify your permissions: 
 +
-`kubectl auth can-i <list|create|edit|delete> pods`
+```bash
+kubectl auth can-i <list|create|edit|delete> pods
+```
 * There are no requirements regarding VPC setup or disk size for your cluster. It is recommended that you
 set up a new VPC rather than use an existing one.
 
@@ -88,8 +90,8 @@ You can learn more about creating an Amazon EKS cluster https://aws.amazon.com/q
 ```bash
 eksctl create cluster --name=circleci-server --nodes 4 --node-type m5.xlarge
 ```
-
-Once the cluster has been created, you can use the following command to configure `kubectl` access: 
+. Once the cluster has been created, you can use the following command to configure `kubectl` access: 
++
 ```bash
 eksctl utils write-kubeconfig --name circleci-server
 ```
@@ -133,11 +135,17 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 === Create a new GitHub OAuth app
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
+#INSERT SCREENSHOTS FOR THESE STEPS#
+
 . In your browser navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button. 
 
 . Complete the following fields based on your planned installation: 
-** Homepage URL: The URL of your planned CircleCI installation.
-** Authorization callback URL: The authorization callback URL will be the URL of your planned CircleCI installation followed by /auth/github 
+** *Homepage URL*: The URL of your planned CircleCI installation.
+** *Authorization callback URL*: The authorization callback URL will be the URL of your planned CircleCI installation followed by `/auth/github`
+
+. Once completed you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server. 
+
+NOTE: If using GitHub Enterprise, you will also need a personal access token and the domain name of your GitHub Enterprise instance.
 
 === Frontend TLS certificates
 By default, CircleCI server will create self-signed certificates to get you started. In production, you should supply a certificate from a trusted certificate authority. The link:https://letsencrypt.org/[LetsEncrypt] certificate authority, for example, can issue a certificate for free using their link:https://certbot.eff.org/[certbot] tool. In the sections below we cover using Google Cloud DNS and AWS Route53.
@@ -146,15 +154,15 @@ By default, CircleCI server will create self-signed certificates to get you star
 
 NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
 
-If you host your DNS on Google Cloud you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command: 
-
-```sh
+. If you host your DNS on Google Cloud you will need the *certbot-dns-google* plugin installed. You can install the plugin with the following command: 
++
+```bash
 pip3 install certbot-dns-google 
 ```
 
-Then, the following commands will provision a certification for your installation:
-
-```sh
+. Then, the following commands will provision a certification for your installation:
++
+```bash
 certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
@@ -162,15 +170,15 @@ certbot certonly --dns-google --dns-google-credentials <PATH_TO_CREDENTIALS> -d 
 
 NOTE: In the following steps replace any items credentials displayed between `< >` with your details.
 
-If you are using AWS Route53 for DNS you will need the *certbot-route53* plugin installed. You can install the plugin with the following command: 
-
-```sh
+. If you are using AWS Route53 for DNS you will need the *certbot-route53* plugin installed. You can install the plugin with the following command: 
++
+```bash
 pip3 install certbot-dns-route53
 ``` 
 
-Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
-
-```sh
+. Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
++
+```bash
 certbot certonly --dns-route53 -d "<<CIRCLECI_SERVER_DOMAIN>>" -d "app.<<CIRCLECI_SERVER_DOMAIN>>"
 ```
 
@@ -212,11 +220,11 @@ docker run circleci/server-keysets:latest generate encryption -a stdout
 === Object storage and permissions
 Server 3.x hosts build artifacts, test results, and other state object storage. We support the following: 
 
-link:https://aws.amazon.com/s3/[AWS S3]
+* link:https://aws.amazon.com/s3/[AWS S3]
 
-link:https://min.io/[Minio]
+* link:https://min.io/[Minio]
 
-link:https://cloud.google.com/storage/[Google Cloud Storage]
+* link:https://cloud.google.com/storage/[Google Cloud Storage]
 
 While any S3 compatible object storage may work, we test and support AWS S3 and Minio. For object storage providers that do not support S3 API, such as Azure blob storage, we recommend using Minio Gateway. 
 
@@ -374,4 +382,4 @@ gcloud iam service-accounts keys create circleci-server-keyfile \
 ```
 
 ## What to read next
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-install[Server 3.x Phase 2: Core services installation]
