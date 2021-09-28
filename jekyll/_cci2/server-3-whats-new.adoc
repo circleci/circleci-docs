@@ -19,9 +19,23 @@ patch releases and quarterly feature releases.
 
 toc::[]
 
+== Release 3.2.0
+
+=== Upgrade notes
+
+From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
+
+When upgrading from server 3.1.x to 3.2 there will be some downtime due to a change to the PostgreSQL pod.
+
+=== New features
+
+=== Fixes
+
+=== Known issues
+
 == Release 3.1.0
 
-== Upgrade notes
+=== Upgrade notes
 
 IMPORTANT: With this release, the `frontend-external` load balancer has been removed. The `traefik` load balancer now handles
 all incoming traffic. When updating from a previous server 3.x version, you will need to update the DNS record that was pointing
@@ -35,9 +49,9 @@ To update your DNS record and upgrade your server installation follow these step
 . Locate the DNS A record that points to the domain name of your server installation (not the one pointing to the `app.` subdomain)
 . Edit the A record so that it points to the traefik load balancer, just like the record for the `app. subdomain does. Your changes might need a couple of minutes to take effect, depending on you DNS service.
 
-Next, from the management console dashboard, select Version History from the menu bar and click **Deploy** for server v3.1.0.
+Next, from the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.1.0.
 
-=== New Features
+=== New features
 
 * Telegraf plugins can now be added to server and customized to use third party monitoring solutions, for example, Datadog. For more information, see the https://circleci.com/docs/2.0/server-3-operator-metrics-and-monitoring/[Metrics and Monitoring] doc.
 * The option to use only private load balancers has been introduced for customers who want a fully private installation. For more information see the https://circleci.com/docs/2.0/server-3-operator-load-balancers/[Load Balancers] guide.
@@ -70,7 +84,7 @@ Next, from the management console dashboard, select Version History from the men
 * Changes to networking config and certs are now picked up automatically by Traefik. Previously, a restart would have been required.
 * Minimum requirements for CPU and memory have changed. For the new values, see the https://circleci.com/docs/2.0/server-3-install-prerequisites/[Installation Prerequisites] doc.
 
-=== Known Issues
+=== Known issues
 
 * It is currently possible for multiple organizations under the same CircleCI server account to have contexts with
 identical names. This should be avoided as doing so could lead to errors and unexpected behavior.
@@ -94,7 +108,7 @@ and get details of the possible cause of the issue.
 == What to read next
 To learn more about Server v3.x, see the following:
 
-* https://circleci.com/docs/2.0/server-3-whats-new[Server 3.x Overview]
-* https://circleci.com/docs/2.0/server-3-install[Server 3.x Installation]
+* https://circleci.com/docs/2.0/server-3-overviewServer 3.x Overview]
+* https://circleci.com/docs/2.0/server-3-install-prerequisites[Server 3.x Installation]
 * https://circleci.com/docs/2.0/server-3-install-migration[Server 3.x Migration]
 * https://circleci.com/docs/2.0/server-3-operator-overview[Server 3.x Operations]
