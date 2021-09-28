@@ -4,6 +4,7 @@ $(() => {
     experimentKey: 'dd_docs_related_resources_mvp_test',
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test',
     attributes: {
+      // https://app.optimizely.com/v2/projects/16812830475/audiences/20680670160
       windowWidth: window.innerWidth ?? 0
     }
   }).then(variation => {
