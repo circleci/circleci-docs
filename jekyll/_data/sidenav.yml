@@ -551,8 +551,6 @@ ja:
         - name: Migrating from Travis CI
           link: ja/2.0/migrating-from-travis/
           i18n_name: TravisCIからの移行
-        - name: Jenkins Converter
-          link: ja/2.0/jenkins-converter/
 
 - name: Pipelines
   i18n_name: パイプライン
