@@ -10,7 +10,7 @@ version:
 suggested:
   - title: 6 config optimization tips
     link: https://circleci.com/blog/six-optimization-tips-for-your-config/
-  - title: Intro to Dynamic Configuration
+  - title: Intro to dynamic config
     link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
   - title: Using dynamic config
     link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
