@@ -131,6 +131,6 @@ Any other connection options you would like to use. This needs to be formatted a
 == Vault
 
 .External Vault
-image::server-3-external-Vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
+image::server-3-external-vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
 
 Complete the following Vault fields: 
