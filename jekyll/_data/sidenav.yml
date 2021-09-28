@@ -35,8 +35,6 @@ en:
           link: 2.0/migrating-from-teamcity/
         - name: Migrating from Travis CI
           link: 2.0/migrating-from-travis/
-        - name: Jenkins Converter
-          link: 2.0/jenkins-converter/
 
 - name: Pipelines
   icon: icons/sidebar/pipelines.svg
