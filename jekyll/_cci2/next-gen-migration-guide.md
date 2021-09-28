@@ -20,9 +20,15 @@ In 2020 CircleCI introduced the next generation (next-gen) of convenience images
 
 Moving from a legacy to next-gen image requires a change to the namespace. All legacy images have a Docker namespace of `circleci`, while next-gen images have a Docker namespace of `cimg`. For example, migrating from the legacy Ruby or Python image to the respective next-gen image can be done as follows:
 
-circleci/ruby:2.3.0 -> cimg/ruby:2.3.0
-circleci/python:3.8.4 -> cimg/python:3.8.4
+```diff
+- circleci/ruby:2.7.4
++ cimg/ruby:2.7.4
+```
 
+```diff
+- circleci/python:3.8.4
++ cimg/python:3.8.4
+```
 
 ## Changes
 {: #changes }
