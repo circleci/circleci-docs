@@ -13,7 +13,8 @@ version:
 == Phase 1: Prerequisites
 Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. 
 
-#INSERT INSTALLATION PHASE DIAGRAM#
+.Installation Experience Flow Chart
+image::server-install-flow-chart.png[Flow chart showing the installation flow for server 3.x]
 
 NOTE: It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
@@ -135,15 +136,19 @@ gcloud iam service-accounts keys create <PATH_TO_STORE_CREDENTIALS> --iam-accoun
 === Create a new GitHub OAuth app
 Registering and setting up a new GitHub OAuth app for CircleCI server allows for authorization control to your server installation using GitHub OAuth and for updates to GitHub projects/repos using build status information.
 
-#INSERT SCREENSHOTS FOR THESE STEPS#
-
 . In your browser navigate to **your GitHub instance** > **Settings** > **Developer Settings** > **OAuth Apps** and click the **New OAuth App** button. 
++
+.New GitHub OAuth App
+image::github-oauth-new.png[Screenshot showing setting up a new OAuth app]
 
 . Complete the following fields based on your planned installation: 
 ** *Homepage URL*: The URL of your planned CircleCI installation.
 ** *Authorization callback URL*: The authorization callback URL will be the URL of your planned CircleCI installation followed by `/auth/github`
 
 . Once completed you will be shown the *Client ID*. Select *Generate a new Client Secret* to generate a Client Secret for your new OAuth App. You will need these values when you configure CircleCI server. 
++
+.Client ID and Secret
+image::github-clientid.png[Screenshot showing GitHub Client ID]
 
 NOTE: If using GitHub Enterprise, you will also need a personal access token and the domain name of your GitHub Enterprise instance.
 

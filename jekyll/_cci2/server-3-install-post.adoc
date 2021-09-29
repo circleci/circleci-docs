@@ -10,17 +10,17 @@ version:
 :toc: macro
 :toc-title:
 
-Before you begin with the CircleCI server v3.x installation process, ensure all xref:server-3-install-prerequisites.adoc[prerequisites] are met.
+Before you begin with the CircleCI server v3.x post installation phase, ensure you have run through xref:server-3-install-prerequisites.adoc[Phase 1 – Prerequisites], xref:server-3-install.adoc[Phase 2 - Core services installation] and xref:server-3-install-build-services.adoc[Phase 3 - Build services installation].
 
 toc::[]
 
-## Phase 4: Post installation
+== Phase 4: Post installation
 
-==== Orbs 
+=== Orbs 
 
-Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in configs reference the orbs in the server orb registry. You are responsible for maintaining orbs; this includes copying orbs from the public registry, updating orbs that may have been copied prior, and registering your companies private orbs if they exist.
+Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been copied prior, and registering your companies private orbs if they exist.
 
-===== Managing Orbs 
+==== Managing Orbs 
 
 Orbs are accessed via the CircleCI CLI. Orbs require your CircleCI user to be an admin. They also require a personal link:https://circleci.com/docs/2.0/managing-api-tokens/[api token]. Providing a local repository location using the --host option allows you to access your local server orbs vs the public cloud orbs. For example, if your server installation is located at http://circleci.somehostname.com, then you can run orb commands local to that orb repository by passing '--host http://cirlceci.somehostname.com'.
 
