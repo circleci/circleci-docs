@@ -194,4 +194,4 @@ jobs:
 
 ## Learn More
 {: #learn-more }
-Take the [orbs course](https://academy.circleci.com/orbs-course) with CircleCI academy to learn more.
+Take the [orbs course](https://academy.circleci.com/orbs-course?access_code=public-2021) with CircleCI academy to learn more.

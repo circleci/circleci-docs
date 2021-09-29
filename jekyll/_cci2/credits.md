@@ -71,7 +71,7 @@ You are able to use credits per run job for Docker Layer Caching (DLC). DLC is o
 ## Troubleshooting
 {: #troubleshooting }
 
-### Am i charged if my build is "queued" or "preparing"?
+### Am I charged if my build is "queued" or "preparing"?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
 No. If you are notified that a job is "queued", it indicates that your job is

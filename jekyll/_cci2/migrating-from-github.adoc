@@ -26,7 +26,7 @@ Both Github Actions and CircleCI share similar concepts around "jobs" and "workf
 
 CircleCI differs primarily in configuration syntax, setting up workflow and job dependencies in a separate section as opposed to inline in the job.
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page.table-no-background]
 [cols=2*, options="header", stripes=even]
 [cols="50%,50%"]
 |===
@@ -92,7 +92,7 @@ See the table in the next section to compare configuration.
 
 == Configuration Comparison
 
-[.table.table-striped]
+[.table.table-striped.table-migrating-page]
 [cols=2*, options="header,unbreakable,autowidth", stripes=even]
 [cols="5,5"]
 |===
