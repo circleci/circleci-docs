@@ -25,7 +25,35 @@ toc::[]
 
 From the KOTS admin console dashboard, select Version History from the menu bar and click **Deploy** for server v3.2.0.
 
-When upgrading from server 3.1.x to 3.2 there will be some downtime due to a change to the PostgreSQL pod.
+When upgrading from server 3.1.x to 3.2 there will be some downtime due to a change to the PostgreSQL pod. There are two issues you could run into with this update, which are covered in the following sections.
+
+==== PostgreSQL pod stuck in `pending`
+If you find that the PostgreSQL pod is stuck in a `pending` state after upgrading, scale down the pods to 0 with the following command – this will scale and terminate the application pods without any data loss:
+
+```bash
+kubectl scale deployment -l layer=application --replicas 0
+```
+
+Once all the application-layer pods have finished terminating, either redeploy the update from the KOTS admin console or run the following to redeploy the pods and return server to a functional state:
+
+```bash
+kubectl scale deployment -l layer=application --replicas 1
+```
+
+Then scale `output-processor` up with the following command: 
+
+```bash
+kubectl scale deployment output-processor --replicas 2
+```
+
+==== Traefik pod fails to schedule
+If you find tha there are two Traefik pods after upgrading, you will need to locate the older pod and remove it to allow the new pod to schedule correctly.
+
+Remove the older Traefik pod with the following command:
+
+```bash
+kubectl delete pod circleci-server-traefik-<older pod hash>
+```
 
 === New features
 
