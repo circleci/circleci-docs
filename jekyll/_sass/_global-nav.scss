@@ -23,8 +23,7 @@ $padding-large-vertical: 11px;
   top: 0;
 
   background-color: $white;
-  box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.15);
-  $shadow-space: 20px;
+  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
 
   @media (max-width: $screen-xs-max) {
     position: sticky;
@@ -252,7 +251,7 @@ $padding-large-vertical: 11px;
   position: absolute;
   left: $leftbar-width;
   top: 33px;
-  margin-top: -21px;
+  margin-top: -20px;
 
   .main-searchbar {
     // Turn off default input field border
@@ -443,20 +442,64 @@ a.nav-skip-button {
 
 // -- Docs Disco Experiments
 
-.dd-global-nav--links {
-  display: flex;
 
-  .link {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    color: $black;
-    margin-right: 60px;
-    padding: 10px 0;
+.dd-global-nav--component {
+  .dd-global-nav--links {
+    display: flex;
+
+    .link {
+      background-color: inherit;
+      border-bottom-color: transparent;
+      border-bottom: solid 5px;
+      border: none;
+      color: $black;
+      cursor: pointer;
+      display: inline;
+      font-family: 'Roboto','Helvetica Neue',Helvetica,Arial,sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 19px;
+      margin-right: 40px;
+      padding-bottom: 5px;
+      padding-top: 5px;
+      // padding: 3px 0px 19px 0;
+      // padding-top: 0px;
+
+      // match dynamic widths from devhub
+      @media(min-width: 992px)  { margin-right: 48px; }
+      @media(min-width: 1200px) { margin-right: 68px; }
+    }
+
+    .home {
+      border-bottom: 4px solid $black;
+    }
   }
 
-  .home {
-    border-bottom: 4px solid $black;
+
+  .global-nav--row {
+    &-mobile {
+      @media (max-width: $screen-sm-max) {
+      }
+    }
+
+    &-desktop {
+      @media (min-width: $screen-md) {
+        padding: 11px 0 16px 0;
+      }
+    }
   }
+
+  .global-nav--lockup-title {
+    font-size: 25.2px;
+    margin-top: 2px;
+    margin-left: 8px;
+  }
+
+
+  .dd-word-mark-width {
+    // width: 125px;
+  }
+
+
 }

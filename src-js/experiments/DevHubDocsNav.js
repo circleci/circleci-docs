@@ -6,10 +6,22 @@ $(() => {
     groupExperimentName: 'q3_fy22_docs_disco_experiment_group_test'
   }).then(variation => {
     if (variation === "treatment") {
-      $(".dd-global-nav--links").show();
-      $(".dd-global-nav--links a").click(function(_) {
-        window.AnalyticsClient.trackAction('docs-devhub-nav-merge-link-clicked', {link: this.href})
-      })
+      // TODO: Fig1 - PR not done until the below section replaces this:
+      // $(".dd-global-nav--links").show();
+      // $(".dd-global-nav--links a").click(function(_) {
+      //   window.AnalyticsClient.trackAction('docs-devhub-nav-merge-link-clicked', {link: this.href})
+      // })
     }
   })
+})
+
+// this code below is a shim because i'm not in docker:
+// TODO: PR not done until the below repalces --Fig1 above
+
+// Add a global experiment class, so that the nested scss auto applies styles.
+$(".global-nav--component").addClass("dd-global-nav--component")
+
+$(".dd-global-nav--links").show();
+$(".dd-global-nav--links a").click(function(_) {
+  window.AnalyticsClient.trackAction('docs-devhub-nav-merge-link-clicked', {link: this.href})
 })
