@@ -24,7 +24,7 @@ The source for the demo application is available on GitHub: <https://github.com/
 {: #basic-setup }
 {:.no_toc}
 
-The [`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) file may be comprised of several [`Jobs`]({{ site.baseurl }}/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
+The [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) file may be comprised of several [`Jobs`]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs). In this example we have one Job called `build`. In turn, a job is comprised of several [`Steps`]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps), which are commands that execute in the container that is defined in the first [`image:`](https://circleci.com/docs/ja/2.0/configuration-reference/#image) key in the file. This first image is also referred to as the *primary container*.
 
 Following is a minimal example for our demo project with all configuration nested in the `build` job:
 
@@ -177,7 +177,7 @@ The following describes the detail of the added key values:
 
 - `save_cache:` ステップは、指定されたパス (この例では `venv`) からキャッシュを作成します。 キャッシュキーは、`key:` で指定したテンプレートから作成されます。 このとき、CircleCI で保存されたキャッシュが `restore_cache:` ステップで検出できるように、必ず `restore_cache:` ステップと同じテンプレートを使用してください。 キャッシュを保存する前に、CircleCI はテンプレートからキャッシュ キーを生成します。 生成されたキーに一致するキャッシュが既に存在する場合、CircleCI は新しいキャッシュを保存しません。 テンプレートにはブランチ名と `requirements/dev.txt` のチェックサムが含まれるため、ジョブが別のブランチで実行されるか、`requirements/dev.txt` のチェックサムが変化すると、CircleCI は新しいキャッシュを作成します。
 
-You can read more about caching [here]({{ site.baseurl }}/2.0/caching).
+You can read more about caching [here]({{ site.baseurl }}/ja/2.0/caching).
 
 ## Installing and running Selenium to automate browser testing
 {: #installing-and-running-selenium-to-automate-browser-testing }
@@ -295,7 +295,7 @@ Notes on the added keys:
 
 ![Test Result Summary]({{ site.baseurl }}/assets/img/docs/walkthrough8.png)
 
-Read more about [artifact storage]({{ site.baseurl }}/2.0/artifacts) and [test results]({{ site.baseurl }}/2.0/collect-test-data/).
+Read more about [artifact storage]({{ site.baseurl }}/ja/2.0/artifacts) and [test results]({{ site.baseurl }}/ja/2.0/collect-test-data/).
 
 ## Heroku へのデプロイ
 {: #deploying-to-heroku }

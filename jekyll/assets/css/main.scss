@@ -199,10 +199,7 @@ div.article-container{
 			a{
 				padding-left: 5px;
 				color: #27A0B6;
-
-				&:hover{
-					text-decoration: none;
-				}
+				text-decoration: none!important;
 			}
 
 			i.fa-link{
@@ -287,7 +284,7 @@ body.homepage{
   .article-container{
     @media screen and (max-width: $screen-xs-max) {
   	  padding: 0 16px 0 16px;
-      width: calc(100% - $leftbar-width;
+      width: calc(100% - $leftbar-width)
     }
   }
 
@@ -320,6 +317,12 @@ code {
   white-space: pre-wrap !important;
   word-wrap: anywhere;
 }
+
+code.env_var {
+  white-space: nowrap !important;
+}
+
+
 
 /***** Widgets ****************************************************************/
 //
@@ -428,7 +431,7 @@ pre {
 }
 
 .serveronly {
-	color: #4e9eb3; 
+	color: #4e9eb3;
 }
 
 .server-version-badge {
@@ -447,7 +450,7 @@ pre {
     }
 }
 
-.server-version-popover {
+.tooltip-popover {
     background-color: #333;
     color: white;
     padding: 5px 10px;
@@ -507,3 +510,30 @@ h6{
 .code-badge-language {
 	display: none
 }
+
+#orb-section {
+	display: none
+}
+
+/*
+Fixing styling for the code example tables in the "Migrating From..." pages
+*/
+.table-no-background > tbody > tr:first-child {
+	background: none;
+}
+.table-migrating-page {
+	tr > td:not(:only-child):first-child {
+		padding-left: 0px;
+		padding-right: 4px
+	}
+
+	tr > td + td {
+		padding-right: 0px;
+		padding-left: 4px;
+	}
+
+	td p {
+		margin: 0px;
+	}
+} 
+

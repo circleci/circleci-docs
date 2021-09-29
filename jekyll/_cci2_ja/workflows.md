@@ -43,7 +43,7 @@ version:
 | FAILED      | ワークフロー内の 1 つ以上のジョブが失敗した                                                                                         |
 | SUCCESS     | ワークフロー内のすべてのジョブが正常に完了した                                                                                         |
 | ON HOLD     | ワークフロー内のジョブが承認待ちになっている                                                                                          |
-| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
+| NEEDS SETUP | このプロジェクトの [config.yml]({{ site.baseurl }}/ja/2.0/configuration-reference/) ファイル内に workflows スタンザが含まれていないか、または正しくない |
 {: class="table table-striped"}
 
 
@@ -54,7 +54,7 @@ version:
 * CircleCI API を使用してワークフローをトリガーできるのは、パイプラインが有効化されているプロジェクトのみです。
 * 設定ファイルにワークフローを含めない場合は、`build` という名前のジョブを含める必要があります。
 
-`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/2.0/configuration-reference/#workflows)」セクション_を参照してください。
+`workflows` _キーの完全な仕様については、__「CircleCI を設定する」の「[workflows]({{ site.baseurl }}/ja/2.0/configuration-reference/#workflows)」セクション_を参照してください。
 
 ## ワークフローの構成例
 {: #workflows-configuration-examples }
@@ -102,7 +102,7 @@ workflows:
 - 早く終わるジョブをワークフローの先頭に移動させます。 たとえば、lint や構文チェックは、実行時間が長く計算コストが高いジョブの前よりも先に実行することをお勧めします。
 - ワークフローの_先頭_に setup ジョブを実行すると、事前チェックだけでなく、後続のすべてのジョブのワークスペースの準備にも役立ちます。
 
-設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/2.0/adv-config)」を参照してください。
+設定ファイルを改善するためのヒントについては、「[最適化]({{ site.baseurl }}/ja/2.0/optimizations)」と「[高度な設定ファイル]({{ site.baseurl }}/ja/2.0/adv-config)」を参照してください。
 
 ### 順次ジョブ実行の例
 {: #sequential-job-execution-example }
@@ -242,7 +242,7 @@ workflows:
 {:.tab.switcher.Cloud}
 ![[Switch Organization (組織の切り替え)] メニュー]({{ site.baseurl }}/assets/img/docs/approval_job_cloud.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server-v2}
 ![Switch Organization Menu]({{ site.baseurl }}/assets/img/docs/approval_job.png)
 
 
@@ -299,12 +299,11 @@ workflows:
 
 有効な `schedule` には、`cron` キーと `filters` キーが必要です。
 
-**無効**な cron の範囲構文の例:
+The value of the cron key must be a [valid crontab entry](https://crontab.guru/).
 
 **注:** cron のステップ構文 (`*/1` や `*/20`) は**サポートされません**。 エレメントのカンマ区切りリスト内では、範囲エレメントは**サポートされません**。 曜日の範囲エレメント (例: `Tue-Sat`) も**サポートされません**。 代わりに、カンマ区切りの数字を使用してください。
 
-
-`filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
+**無効**な cron の範囲構文の例:
 
 ```yaml
     triggers:
@@ -312,7 +311,7 @@ workflows:
           cron: "5 4 * * 1,3-5,6" # < "-" は無効な範囲区切り文字です
 ```
 
-詳細については、「CircleCI を設定する」の「[`branches`]({{ site.baseurl }}/2.0/configuration-reference/#branches-1)」セクションを参照してください。
+**有効**な cron の範囲構文の例:
 
 ```yaml
     triggers:
@@ -320,22 +319,22 @@ workflows:
           cron: "5 4 * * 1,3,4,5,6"
 ```
 
+`filters` キーの値には、特定ブランチ上の実行ルールを定義するマップを指定します。
+
+詳細については、「CircleCI を設定する」の「[`branches`]({{ site.baseurl }}/ja/2.0/configuration-reference/#branches-1)」セクションを参照してください。
+
 このサンプルの全文は、[ワークフローのスケジュールを設定する構成例](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/try-schedule-workflow/.circleci/config.yml)でご覧いただけます。
-
-For more details, see the `branches` section of the [Configuring CircleCI]({{ site.baseurl }}/2.0/configuration-reference/#branches-1) document.
-
-次のセクションではジョブの実行を管理するコンテキストとフィルターの使い方を解説しています。
 
 ## ワークフローにおけるコンテキストとフィルターの使用
 {: #using-contexts-and-filtering-in-your-workflows }
 
-The following sections provide example for using Contexts and filters to manage job execution.
+次のセクションではジョブの実行を管理するコンテキストとフィルターの使い方を解説しています。
 
 ### ジョブ コンテキストを使用して環境変数を共有する
 {: #using-job-contexts-to-share-environment-variables }
 {:.no_toc}
 
-下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/2.0/contexts)で確認できます。
+下記は、環境変数の共有を可能にするコンテキストを使った 4 つのシーケンシャルジョブを含む Workflow の例です。 詳しい設定手順は[コンテキスト]({{ site.baseurl }}/ja/2.0/contexts)で確認できます。
 
 下記で示した `config.yml` のコードは、`org-global` コンテキストで定義したリソースを使う設定を施した、シーケンシャルジョブ Workflow の例です。
 
@@ -368,7 +367,7 @@ workflows:
 
 ![ブランチレベルでジョブを実行する]({{ site.baseurl }}/assets/img/docs/branch_level.png)
 
-ワークフロー構成例の全文は、ブランチを含む順次ワークフロー サンプル プロジェクトの[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
+下記で示した `config.yml` ファイルのコードは、ブランチレベルのジョブ実行の設定を施した Workflow の例です。
 
 ```yaml
 workflows:
@@ -393,7 +392,7 @@ workflows:
 
 正規表現の詳細については、この後の「[正規表現を使用してタグとブランチをフィルタリングする](#using-regular-expressions-to-filter-tags-and-branches)」を参照してください。
 
-下記で示した `config.yml` ファイルのコードは、ブランチレベルのジョブ実行の設定を施した Workflow の例です。
+ワークフロー構成例の全文は、ブランチを含む順次ワークフロー サンプル プロジェクトの[設定ファイル](https://github.com/CircleCI-Public/circleci-demo-workflows/blob/sequential-branch-filter/.circleci/config.yml)でご覧いただけます。
 
 ### Git タグに対応するワークフローを実行する
 {: #executing-workflows-for-a-git-tag }

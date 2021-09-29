@@ -15,14 +15,14 @@ version:
 
 * **Question:** Can orbs be made private?
 
-* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale Plan](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for information on how to sign up for the Scale Plan.
+* **Answer:** [Private orbs](https://circleci.com/docs/2.0/orb-intro/#private-orbs) are currently only available if you are on the [Scale plan](https://circleci.com/pricing). Performance plan customers can create up to three private orbs, whereas our Scale plan customers can create an unlimited number of private orbs. Please reach out to your sales representative for information on how to sign up for the Scale plan.
 
 ## Difference between commands and jobs
 {: #difference-between-commands-and-jobs }
 
 * **Question:** What is the difference between commands and jobs?
 
-* **Answer:** Both [commands]({{site.baseurl}}/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}/2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/2.0/workflows/#workflows-configuration-examples)_.
+* **Answer:** Both [commands]({{site.baseurl}}/ja/2.0/reusing-config/#the-commands-key) and [jobs]({{site.baseurl}}/ja/2.0/reusing-config/#authoring-parameterized-jobs) are elements that can be used within orbs. _Commands_ contain one or many [steps]({{site.baseurl}}ja//2.0/configuration-reference/#steps), which contain the logic of the orb. Commands generally execute some shell code (bash). _Jobs_ are a definition of what steps/commands to run _and_ the [executor]({{site.baseurl}}/ja/2.0/reusing-config/#the-executors-key) to run them in. _Commands_ are invoked within jobs. _Jobs_ are orchestrated using _[Workflows]({{site.baseurl}}/ja/2.0/workflows/#workflows-configuration-examples)_.
 
 ## Using orbs on CircleCI server
 {: #using-orbs-on-circleci-server }
@@ -47,7 +47,7 @@ version:
 
 * **Answer:** To enable usage of _uncertified_ orbs, go to your organization's settings page, and click the _Security_ tab. Then, click yes to enable _Allow Uncertified Orbs_.
 
-**Note:** _Uncertified orbs are not tested or verified by CircleCI._
+**Note:** _Uncertified orbs are not tested or verified by CircleCI. Currently, only orbs created by CircleCI are considered certified. Any other orbs, including partner orbs, and not certified._
 
 ## How to use the latest version of an orb
 {: #how-to-use-the-latest-version-of-an-orb }
@@ -78,7 +78,7 @@ You attempted to run a local build with version 2.1 of configuration.
 
 ## See also
 {: #see-also }
-- Refer to [Orbs Concepts]({{site.baseurl}}/2.0/using-orbs/) for high-level information about CircleCI orbs.
-- Refer to [Orb Publishing Process]({{site.baseurl}}/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
-- Refer to [Orbs Reference]({{site.baseurl}}/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
-- Refer to [Configuration Cookbook]({{site.baseurl}}/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.
+- Refer to [Orbs Concepts]({{site.baseurl}}/ja/2.0/using-orbs/) for high-level information about CircleCI orbs.
+- Refer to [Orb Publishing Process]({{site.baseurl}}/ja/2.0/creating-orbs/) for information about orbs that you may use in your workflows and jobs.
+- Refer to [Orbs Reference]({{site.baseurl}}/ja/2.0/reusing-config/) for examples of reusable orbs, commands, parameters, and executors.
+- Refer to [Configuration Cookbook]({{site.baseurl}}/ja/2.0/configuration-cookbook/) for more detailed information about how you can use CircleCI orb recipes in your configurations.

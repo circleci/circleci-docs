@@ -26,7 +26,7 @@ jobs:
       # ... steps for building/testing app ...
 
       - setup_remote_docker:
-        version: 19.03.13
+          version: 19.03.13
 ```
 
 When `setup_remote_docker` executes, a remote environment will be created, and your current [primary container]({{ site.baseurl }}/2.0/glossary/#primary-container) will be configured to use it. Then, any docker-related commands you use will be safely executed in this new environment.

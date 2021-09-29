@@ -102,3 +102,7 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 {: #see-also }
 
 失敗が多いテストのインサイトを得る方法については、「[テスト メタデータの収集]({{ site.baseurl }}/2.0/collect-test-data/)」を参照してください。
+
+## Learn More
+{: #learn-more }
+Take the [insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.

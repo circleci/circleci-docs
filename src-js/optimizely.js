@@ -1,5 +1,8 @@
 import * as optimizelySDK from '@optimizely/optimizely-sdk';
+import { v4 as uuidv4 } from 'uuid';
+
 const COOKIE_KEY = 'cci-org-analytics-id';
+const STORAGE_KEY = 'growth-experiments-participated';
 
 class OptimizelyClient {
   constructor() {
@@ -37,6 +40,9 @@ class OptimizelyClient {
         return reject({error: "Missing required options"});
       }
 
+      // defines additional attributes we will want to send to optimizely to qualify/disqualify a user
+      const attributes = options.attributes ?? {};
+
       // Then, we check if we have the cookie. If the cookie is not present
       // it means the current user is not ready to see an experiment and so
       // getVariationName() will resolve to "null"
@@ -55,10 +61,10 @@ class OptimizelyClient {
         this.client.onReady({
           timeout: 10000 // Optimizely default is 30s so we are reducing it to 10s
         }).then(() => {
-
           // We check if user whether the user is in the provided
           // exclusion group or not
           const isInGrowthExperimentGroup = this.client.getVariation(options.groupExperimentName, userId, {
+            ...attributes,
             id: userId,
             $opt_bucketing_id: orgId,
           });
@@ -68,10 +74,21 @@ class OptimizelyClient {
             // We ask optimizely which variation is assigned to this user
             // In most cases it will return either "null", "control" or "treatment"
             const variationName = this.client.getVariation(options.experimentKey, userId, {
+              ...attributes,
               id: userId,
               $opt_bucketing_id: orgId,
             });
+
+            // send back variationName to caller
             resolve(variationName);
+
+            // grab experimentId and variationId so we can send it
+            // with the `Experiment Viewed` event
+            const optimizelyConfig = this.client.getOptimizelyConfig();
+            const experimentId = optimizelyConfig.experimentsMap[options.experimentKey].id ?? '';
+            const variationId = optimizelyConfig.experimentsMap[options.experimentKey].variationsMap[variationName].id ?? '';
+
+            trackExperimentViewed(orgId, options.experimentKey, experimentId, variationName, variationId, userId);
           } else {
             // If the user is in the exclusion group it means the current user
             // should not the the exepriment so getVariationName() will resolve to "null"
@@ -85,6 +102,78 @@ class OptimizelyClient {
         });
       });
     });
+  }
+}
+
+// trackExperimentViewed checks if we alredy have sent the Experiment Viewed
+// event to segment/amplitude by looking into the localstorage.
+// If not, it builds the properties needed and call trackAction with it
+const trackExperimentViewed = (orgId, experimentKey, experimentId, variationName, variationId, userId) => {
+  if (!isExperimentAlreadyViewed(orgId, experimentKey)) {
+    const properties = {
+      id: uuidv4(),
+      timestamp: new Date().toISOString(),
+      experimentId,
+      experimentName: experimentKey,
+      allocationType: 'organization_id',
+      orgId,
+      projectId: null, // This experiment is measured at the org level
+      userId,
+      variationId,
+      variationName,
+    };
+
+    // send event with the properly formatted properties
+    window.AnalyticsClient.trackAction('Experiment Viewed', properties);
+
+    // store experiment participation in localstorage
+    storeExperimentParticipation(orgId, experimentKey, variationName);
+  }
+}
+
+// isExperimentAlreadyViewed checks in the localstorage if we already
+// marked the experiment as viewed
+const isExperimentAlreadyViewed = (orgId, experimentKey) => {
+  try {
+    const experiments = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return (experiments && experiments.hasOwnProperty(orgId) && experiments[orgId] && experiments[orgId].hasOwnProperty(experimentKey));
+  } catch {
+    return false
+  }
+}
+
+// storeExperimentParticipation stores the experiment variationName in the
+// localstorage
+const storeExperimentParticipation = (orgId, experimentKey, variationName) => {
+  if (!orgId || !experimentKey || !variationName) {
+    return;
+  }
+
+  // get exepriments out of localstorage
+  let experiments;
+  try {
+    experiments = JSON.parse(localStorage.getItem(STORAGE_KEY)) ?? {};
+  } catch {
+    experiments = {};
+  }
+
+  // if we have nothing we start de build the `experiments` object
+  if (!experiments[orgId]) {
+    experiments[orgId] = {};
+  }
+  if (!experiments[orgId][experimentKey]) {
+    experiments[orgId][experimentKey] = {};
+  }
+
+  // assign the current experiment and its values
+  experiments[orgId][experimentKey] = { variationName, createdAt: new Date().getTime() };
+
+  try {
+    // setItem will sometimes fail with a "Quota Exceeded" exception if users have custom configurations
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(experiments));
+  } catch {
+    // We're deliberately ignoring it so that it doesn't break the app. It'll mean a few extra
+    // events are emitted, but I think that's the lesser issue.
   }
 }
 

@@ -23,7 +23,7 @@ CircleCI ではじめてビルドを成功（グリーンビルド）させる�
 * ターミナルまたは `bash` に関する基本知識と、コマンド ラインの使用経験があると役立ちます。
 
 ## リポジトリを作成する
-CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
+{: #creating-a-repository }
 
 最初に、GitHub でリポジトリを新規作成します。 既存のリポジトリを使用する場合は、このセクションをスキップしても問題ありません。
 
@@ -35,7 +35,7 @@ CircleCI アカウントをまだお持ちでない場合は、[ユーザー登�
 ## CircleCI をセットアップする
 {: #setting-up-circleci }
 
-If you have not yet, create an account on CircleCI by navigating to [the signup page](https://circleci.com/signup/) and clicking on **Sign Up with GitHub**.
+CircleCI アカウントをまだお持ちでない場合は、[ユーザー登録ページ](https://circleci.com/ja/signup/)に移動し、**[GitHub でログイン]** をクリックしてアカウントを作成します。
 
 1. CircleCI の[プロジェクト ページ](https://app.circleci.com/projects/)に移動します。
 1. 組織の下に新しいリポジトリを作成した場合は、CircleCI へのログイン時にその組織名を選択する必要があります。
@@ -50,11 +50,11 @@ If you have not yet, create an account on CircleCI by navigating to [the signup 
 1. **[Commit and Run (コミットして実行)]** をクリックします。 リポジトリのルートで、`circleci-project-setup` という名前の新規ブランチに `.circleci/config.yml` ファイルが作成されます。 この設定で問題がなければ、後にメインブランチにマージする、もしくは引き続き変更を行うことができます。
 
 ## 最初のパイプラインを掘り下げる
-最初のパイプライン実行の成功
+{: #digging-into-your-first-pipeline }
 
 ここまでの手順を終えると、自動的にパイプラインの実行が開始され、成功するのを確認できます。 実行結果を確認します。 パイプラインの緑色の **[Success (成功)]** ボタンをクリックして、実行について以下の部分を確認しましょう。
 
-![First Successful Pipeline]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
+![最初のパイプライン実行の成功]( {{ site.baseurl }}/assets/img/docs/getting-started--first-success.png)
 
 1. **実行されたワークフローを確認する**: **[Success (成功)]** をクリックすると、実行されたジョブの一覧ページに移動します。 初めてのビルドであれば、(**1 つのワークフロー**内で自動的に実行される) **1 つのジョブ** だけが実行されています。  この例では、`welcome/run` という名前のジョブだけが実行されました。 [`welcome/run`] をクリックして、ジョブのステップを調査してみましょう。
 
@@ -100,7 +100,7 @@ jobs:
 Node Orb は、一般的な Node タスクを実行します。 今回は空のリポジトリで Node スクリプト `npm run test` を実行したので、構成が失敗したのです。  修正するには、 リポジトリで Node プロジェクトをセットアップする必要があります。 その方法は、別のチュートリアルで説明します。 参考として、[デモ アプリケーション]({{site.baseurl}}/2.0/demo-apps/)で、さまざまな言語とフレームワークで CircleCI をセットアップする方法をご覧ください。
 
 ## ワークフロー機能を使用する
-ターミナルの操作に慣れている場合は、CircleCI に直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
+{: #using-the-workflows-functionality }
 {:.no_toc}
 
 CircleCI を使用する際には、必ずしも Orb を使用する必要はありません。 次の例では、カスタム設定ファイルの作成方法を説明します。 この例でも、CircleCI の[ワークフロー機能]({{site.baseurl}}/2.0/workflows)を使用します。
@@ -202,13 +202,13 @@ workflows:
             - one
 ```
 
-If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
+ワークスペースの詳細については、[こちら](https://circleci.com/ja/docs/2.0/workflows/#%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B8%E3%83%A7%E3%83%96%E9%96%93%E3%81%AE%E3%83%87%E3%83%BC%E3%82%BF%E5%85%B1%E6%9C%89)を参照してください。
 
 ### {% comment %} todo: job {% endcomment %}ビルドに SSH 接続する
-If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
+{: #ssh-into-your-percent-comment-percent-todo-job-percent-endcomment-percentbuild }
 {:.no_toc}
 
-If you are comfortable with the terminal, you can SSH directly into your CircleCI jobs to troubleshoot issues with your builds by rerunning your {% comment %} TODO: Job {% endcomment %}build with the SSH enabled option.
+ターミナルの操作に慣れている場合は、CircleCI に直接 SSH 接続し、SSH 対応のオプション付きで{% comment %} TODO: Job {% endcomment %}ビルドを実行して、ビルドに関する問題のトラブルシューティングを行うことができます。
 
 SSH 公開鍵を GitHub アカウントに登録する必要があることにご注意ください。 詳細は[こちら](https://help.github.com/articles/connecting-to-github-with-ssh/)。
 
@@ -216,7 +216,7 @@ SSH 公開鍵を GitHub アカウントに登録する必要があることに�
 {:.tab.switcher.Cloud}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH_newui.png)
 
-{:.tab.switcher.Server}
+{:.tab.switcher.Server-v2}
 ![SSH でのリビルド]( {{ site.baseurl }}/assets/img/docs/rebuild-with-SSH.png)
 
 
@@ -241,7 +241,7 @@ cat <file_name>      # ファイル <file_name> の内容を表示します
 {: #see-also }
 {:.no_toc}
 
-[Blog post](https://circleci.com/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/) on how to validate the CircleCI `config.yml` on every commit with a git hook.
+Git フックを使用してコミットごとに CircleCI `config.yml` をバリデーションする方法については、[こちらのブログ記事](https://circleci.com/ja/blog/circleci-hacks-validate-circleci-config-on-every-commit-with-a-git-hook/)を参照してください。
 
 ### CircleCI
 {: #circleci }

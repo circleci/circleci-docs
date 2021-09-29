@@ -7,14 +7,14 @@ version:
   - Server v2.x
 ---
 
-お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
+お使いのプラットフォームに関連するチュートリアルを使用して、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) でどのようなカスタマイズが可能かをご確認ください。
 
 | プラットフォーム ガイド                                                          | Description                                                             |
 | --------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                             | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
-| <a href="{{ site.baseurl }}/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
-| <a href="{{ site.baseurl }}/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
-| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
+| <a href="{{ site.baseurl }}/ja/2.0/project-walkthrough/">Linux プロジェクトのチュートリアル</a>                                             | Flask を使用した Python プロジェクトを CircleCI 2.0 でビルドするためのセットアップについて、詳しく説明しています。 |
+| <a href="{{ site.baseurl }}/ja/2.0/ios-tutorial/">iOS プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で iOS プロジェクトをセットアップする例をご紹介しています。                           |
+| <a href="{{ site.baseurl }}/ja/2.0/language-android/">Android プロジェクトのチュートリアル</a>                                             | CircleCI 2.0 で Android プロジェクトをセットアップする例をご紹介しています。                       |
+| [Windows プロジェクトのチュートリアル]({{ site.baseurl }}/ja/2.0/hello-world-windows/) | CircleCI 2.0 で .NET プロジェクトをセットアップする例をご紹介しています。                          |
 {: class="table table-striped"}
 
 ## Sample projects with companion guides
@@ -53,6 +53,6 @@ Use the Hello World document and sample `config.yml` files to start configuring 
 
 | Document                  | Description                                                                                                                                                      |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <a href="{{ site.baseurl }}/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.                                                                |
-| <a href="{{ site.baseurl }}/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
+| <a href="{{ site.baseurl }}/ja/2.0/hello-world/">Hello World</a> | Simple steps to get started with a `config.yml` file template for an app that prints Hello World.                                                                |
+| <a href="{{ site.baseurl }}/ja/2.0/sample-config/">Sample `config.yml` Files</a> | Four sample `config.yml` files using concurrent Workflows, sequential Workflows, fan-in/fan-out Workflows, and building Linux and iOS in one configuration file. |
 {: class="table table-striped"}

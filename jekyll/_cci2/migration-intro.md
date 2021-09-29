@@ -23,5 +23,5 @@ If you're here to learn about migrating from CircleCI 1.0 to 2.0, head to [this 
 
 ## Learn More
 {: #learn-more }
-Enroll in the [migrations course](https://academy.circleci.com/arm-course) with CircleCI Academy to learn more about migrating to CircleCI.
+Enroll in the [migrations course](https://academy.circleci.com/arm-course?access_code=public-2021) with CircleCI Academy to learn more about migrating to CircleCI.
 
