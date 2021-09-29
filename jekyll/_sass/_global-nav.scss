@@ -331,11 +331,14 @@ body.global-nav-open .global-nav--search-button {
 
   .btn-primary {
     display: block;
-    padding: $padding-large-vertical 30px;
-    width: auto;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+    text-align: center;
+    height: 50px;
+    width: 180px;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 26px;
+    border-radius: 4px;
+    border: none;
 
     @media (max-width: $screen-xs-max) {
       width: 100%;
@@ -358,13 +361,13 @@ body.global-nav-open .global-nav--search-button {
     }
 
     @media (min-width: $screen-md) {
-      border-left: solid 1px $black;
-      margin-left: 30px;
-      margin-right: 30px;
+      border-left: solid 1px #aaaaaa;
+      margin-left: 24px;
+      margin-right: 24px;
       align-self: stretch;
       display: flex;
       align-items: center;
-      max-height: 48px;
+      max-height: 50px;
     }
   }
 }
@@ -461,8 +464,8 @@ a.nav-skip-button {
       font-weight: 500;
       line-height: 19px;
       margin-right: 40px;
-      padding-bottom: 5px;
-      padding-top: 5px;
+      padding-bottom: 7px;
+      padding-top: 4px;
       // padding: 3px 0px 19px 0;
       // padding-top: 0px;
 
@@ -485,7 +488,7 @@ a.nav-skip-button {
 
     &-desktop {
       @media (min-width: $screen-md) {
-        padding: 11px 0 16px 0;
+        padding: 10px 0 16px 0;
       }
     }
   }
