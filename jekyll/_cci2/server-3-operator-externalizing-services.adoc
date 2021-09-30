@@ -133,4 +133,12 @@ Any other connection options you would like to use. This needs to be formatted a
 .External Vault
 image::server-3-external-vault.png[Screenshot of KOTS admin console config showing settings for using an external Vault instance]
 
-Complete the following Vault fields: 
+If you choose to use an external Vault instance, complete the following fields:  
+
+* *URL* - The URL to your Vault service.
+
+* *Transit Path* - Your Vault secrets transit path.
+
+* *Token* - The access token for vault.
+
+
