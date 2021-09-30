@@ -325,4 +325,4 @@ jobs:
           command: aws s3 sync generated-site/_site/${JEKYLL_BASENAME} s3://circleci-doc-preview/${JEKYLL_BASENAME}/ --delete
       - run:
           name: Preview deployment URL
-          command: echo "Preview is deployed at http://circleci-doc-preview.s3-website-us-east-1.amazonaws.com/${JEKYLL_BASENAME}"
+          command: echo "Preview is deployed at http://circleci-doc-preview.s3-website-us-east-1.amazonaws.com/${JEKYLL_BASENAME}?force-all"

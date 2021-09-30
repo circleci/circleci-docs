@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
+const FORCE_STORAGE_KEY = 'growth-experiments-force-all';
 
 class OptimizelyClient {
   constructor() {
@@ -35,6 +36,10 @@ class OptimizelyClient {
   // - User is in the exclusion group
   getVariationName(options) {
     return new Promise((resolve, reject) => {
+      if (localStorage.getItem(FORCE_STORAGE_KEY)) {
+        return resolve("treatment");
+      }
+
       // First we check that the required options are provided
       if (!options || !options.experimentKey || !options.groupExperimentName) {
         return reject({error: "Missing required options"});
