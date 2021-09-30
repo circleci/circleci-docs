@@ -329,12 +329,14 @@ en:
     - name: Server v3.x Install
       link: 2.0/server-3-install-prerequisites
       children:
-        - name: Prerequisites
+        - name: Phase 1 - Prerequisites
           link: 2.0/server-3-install-prerequisites
-        - name: Your First Cluster
-          link: 2.0/server-3-install-creating-your-first-cluster
-        - name: Installation
+        - name: Phase 2 - Install Core Services
           link: 2.0/server-3-install
+        - name: Phase 3 - Install Build Services
+          link: 2.0/server-3-install-build-services
+        - name: Phase 4 - Post Installation
+          link: 2.0/server-3-install-post
         - name: Migration
           link: 2.0/server-3-install-migration
         - name: Hardening Your Cluster
