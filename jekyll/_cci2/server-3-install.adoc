@@ -88,15 +88,15 @@ cat /etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>/fullchain.pem
 
 ==== Postgres Settings
 
-You can skip this section unless you plan on using an existing Postgres instance. By default CirecleCI server will create its own Postgres instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
+You can skip this section unless you plan on using an existing Postgres instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Postgres instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
 
 ==== MongoDB Settings
 
-You can skip this section unless you plan on using an existing MongoDB instance. By default CirecleCI server will create its own MongoDB instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
+You can skip this section unless you plan on using an existing MongoDB instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own MongoDB instance within the CircleCI namespace. The instance inside the CircleCI namespace will be included in the CircleCI backup and restore process. 
 
 ==== Vault Settings
 
-You can skip this section unless you plan on using an existing Vault instance. By default CirecleCI server will create its own Vault  instance within the cluster. The default will be included in the CircleCI backup and restore process. 
+You can skip this section unless you plan on using an existing Vault instance, in which case see the https://circleci.com/docs/2.0/server-3-operator-externalizing-services/[Externalizing Services doc]. By default CirecleCI server will create its own Vault  instance within the cluster. The default will be included in the CircleCI backup and restore process. 
 
 ==== Artifact and Encryption Signing Settings
 Encryption and artifact signing keys were created during prerequisites. You can enter them here now. 
