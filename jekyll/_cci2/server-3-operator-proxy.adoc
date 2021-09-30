@@ -15,7 +15,7 @@ Depending on your security requirements, you might want to install CircleCI serv
 toc::[]
 
 == Installation and configuration
-There are two stages to installing CircleCI server behind a proxy. First at the point of installation the proxy addresses need to be specified, along with any addresses that should not be behind the proxy.
+There are two stages to installing CircleCI server behind a proxy. First, at the point of installation, the proxy addresses need to be specified, along with any addresses that should not be behind the proxy.
 
 === Installing behind a proxy
 The installation process is described in detail in the https://circleci.com/docs/2.0/server-3-install/[CircleCI Server v3.x Installation guide]. Both proxy and non-proxy addresses should be supplied using the arguments described https://kots.io/kotsadm/installing/online-install/#proxies[here]. The installation command should be in the form:
@@ -26,10 +26,10 @@ kubectl kots install circleci-server --http-proxy <my-http-proxy-uri> --https-pr
 ----
 
 === Configuring your proxy 
-Once you have installed server and gained access to the management console, there are some fields that need to be completed in the configuration section, as shown in the screenshot below. These fields will not be automatically populated and so the same proxy and no-proxy addresses you supplied during installation will need to be supplied here. If your proxy requires authentication in the form of a username and password check the "HTTP Proxy authenticated" option to add the credentials at this point. [ADD LINK TO THE RELEVANT SECTION IN THE INSTALL GUIDE WHEN WE HAVE IT]
+Once you have installed server and gained access to the management console, there are some fields that need to be completed in the configuration section, as shown in the screenshot below. These fields will not be automatically populated and so the same proxy and no-proxy addresses you supplied during installation will need to be supplied here. If your proxy requires authentication in the form of a username and password check the "HTTP Proxy authenticated" option to add the credentials at this point.
 
-[INSERT SCREENSHOT]
-
+.CircleCI Server v3.x Configuring a Proxy
+image::proxy-settings.png[Screenshot showing settings available to configure a proxy]
 
 == Known limitations
 
