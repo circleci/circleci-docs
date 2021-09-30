@@ -5,6 +5,7 @@ short-title: "Insights metrics glossary"
 short-title: "Metric definitions for CircleCI insights"
 version:
 - Cloud
+- Server v3.x
 ---
 
 ## Overview
