@@ -3,7 +3,7 @@
 
 $zindex-navbar-fixed:      1030;
 $green: #04AA51;
-$blue-darker: #19639A;
+$blue-darker: #337ab7;
 $white: #FFFFFF;
 $gray: #D8D8D8;
 $black: #161616;
@@ -215,8 +215,8 @@ $padding-large-vertical: 11px;
     color: $blue-darker;
   }
   .external-icon {
-    margin-left: 24px;
-    width: 24px;
+    margin-left: 4px;
+    width: 16px;
   }
 
 
@@ -358,7 +358,11 @@ body.global-nav-open .global-nav--search-button {
       // width: 100%;
     }
   }
-
+  
+  .btn-primary:hover {
+    background-color: #048c43;
+  }
+  
   // Replacement for .molecule-search
   .divider {
     position: relative;
@@ -478,7 +482,7 @@ a.nav-skip-button {
       font-weight: 500;
       line-height: 19px;
       margin-right: 40px;
-      padding-bottom: 7px;
+      padding-bottom: 10px;
       padding-top: 4px;
       // padding: 3px 0px 19px 0;
       // padding-top: 0px;
@@ -513,8 +517,8 @@ a.nav-skip-button {
   }
 
   .external-icon {
-    margin-left: 12px;
-    width: 24px;
+    margin-left: 4px;
+    width: 16px;
     display: flex;
   }
 
