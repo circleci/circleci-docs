@@ -11,12 +11,10 @@ version:
 :toc-title:
 
 == Phase 1: Prerequisites
-Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. 
+Install CircleCI server in 4 phases. There is a validation step at the end of each phase, allowing you to confirm success before moving to the next phase. Depending on your requirements, phases 3 and 4 may have multiple steps. This installation guide assumes you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
 .Installation Experience Flow Chart
 image::server-install-flow-chart.png[Flow chart showing the installation flow for server 3.x]
-
-NOTE: It is assumed you have already read the server 3.x https://circleci.com/docs/2.0/server-3-overview[overview].
 
 === Install required software
 Download and install the following software before continuing: 
