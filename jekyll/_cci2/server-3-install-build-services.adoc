@@ -423,7 +423,7 @@ aws iam create-access-key --user-name circleci-server-vm-service
 Configure VM Service through the KOTs admin console. The following fields need to be completed for VM service to operate correctly. 
 +
 ** *AWS Region (required)* - This is the region the application is in.
-** *Subnet ID (required)* - Choose a subnet (public or private) where the VMs should be deployed. If you haven’t created a unique subnet you can use the subnet of the cluster. 
+** *Subnets (required)* - Choose a subnet (public or private) where the VMs should be deployed. If you haven’t created a unique subnet you can use the subnet of the cluster. Note that all subnets must be in the same availability zone. 
 ** *Security Group ID (required)* - This is the security group that will be attached to the VMs. It was created previously. 
 ** *AWS IAM Access Key ID (required)* - AWS Access Key ID for EC2 access.
 ** *AWS IAM Secret Key (required)* - IAM Secret Key for EC2 access.
