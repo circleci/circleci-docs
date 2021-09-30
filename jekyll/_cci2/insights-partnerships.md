@@ -4,6 +4,7 @@ title: "Insights Partnerships"
 short-title: "Insights Partnerships"
 version:
 - Cloud
+- Server v3.x
 ---
 
 ## Overview
