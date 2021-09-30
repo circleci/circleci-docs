@@ -52,7 +52,10 @@ The tag template looks like this: `[semver:<increment>]`, where `<increment>` is
     For example, to release the first major public version of your orb from the `alpha` branch, your pull request may be titled `[semver:major] first orb release.` ![First major release of an orb - Pull Request]({{site.baseurl}}/assets/img/docs/orb_semver_release_pr.png)
 
 1. **"Squash" Merge.** <br/>
-Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message. ![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
+Performing a [squash](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-request-merges#squash-and-merge-your-pull-request-commits) merge not only condenses the branch into a single commit when merging into the default branch, but it also keeps the title of the Pull Request as the commit message.
+
+    Confirm the `[semver:<increment>]` is in the subject/first line of the commit message before merging (as shown below). Bitbucket may preserve the Pull Request title in the body of the commit message instead of the subject/first line.
+![Squash merge PR, preserving the semver title]({{site.baseurl}}/assets/img/docs/orb_semver_squash_merge.png)
 
 1. **Complete!** <br/>
 If you head over to the [CircleCI app](https://app.circleci.com/) you can view the progress of your orb publishing pipeline. When the pipeline is complete you can search for your orb on the [Orb Registry](https://circleci.com/developer/orbs).
