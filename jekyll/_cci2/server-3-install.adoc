@@ -19,7 +19,7 @@ CircleCI server v3.x uses https://kots.io[KOTS] from https://www.replicated.com/
 distribute server v3.x. KOTS is a `kubectl` https://kubernetes.io/docs/tasks/extend-kubectl/kubectl-plugins/[plugin].
 To install the latest version, you can run `curl \https://kots.io/install | bash`.
 
-Ensure you are running the minimum KOTS version – {kotsversion} – by running: 
+Ensure you are running the minimum KOTS version ({kotsversion}) by running: 
 
 ```
 kubectl kots version
@@ -61,7 +61,12 @@ For further information see the https://circleci.com//docs/2.0/server-3-operator
 === Frontend Settings 
 Frontend settings control the web application specific aspects of the CircleCI system. 
 
-Complete the following fields: 
+.Frontend Settings
+image::server-3-frontend-settings.png[Screenshot showing frontend settings]
+
+Complete the fields described below. You can either supply a private key and certificate or check the box to allow Let's Encrypt to automatically request and manage certificates for you. You can also disable TLS termination at this point, but the system will still need to be accessed over HTTPS.
+
+NOTE: If you are selecting the option to use private load balancers, the Let's Encrypt option will no longer work and become unavailable.
 
 * *Domain Name (required)* - Enter the domain name you specified when creating your Frontend TLS key and certificate. 
 

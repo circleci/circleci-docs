@@ -182,7 +182,7 @@ pip3 install certbot-dns-route53
 . Then execute this example to create a private key and certificate (including intermediate certificates) locally in `/etc/letsencrypt/live/<CIRCLECI_SERVER_DOMAIN>`:
 +
 ```bash
-certbot certonly --dns-route53 -d "<<CIRCLECI_SERVER_DOMAIN>>" -d "app.<<CIRCLECI_SERVER_DOMAIN>>"
+certbot certonly --dns-route53 -d "<CIRCLECI_SERVER_DOMAIN>" -d "app.<CIRCLECI_SERVER_DOMAIN>"
 ```
 
 You will need these certificates later, and they can be retrieved locally with the following commands:
@@ -233,7 +233,7 @@ While any S3 compatible object storage may work, we test and support AWS S3 and 
 
 Please choose the option that best suits your needs. A Storage Bucket Name is required, in addition to the fields listed below, depending on whether you are using AWS or GCP. Ensure the bucket name you provide exists in your chosen object storage provider before proceeding. 
 
-NOTE: If you are installing behind a proxy, object storage should be behind this proxy also, otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.tml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
+NOTE: If you are installing behind a proxy, object storage should be behind this proxy also, otherwise proxy details will need to be supplied at the job level within every project `.circleci/config.yml` to allow artifacts, test results, cache save and restore, and workspaces to work. For more information see the https://circleci.com/docs/2.0/server-3-operator-proxy/[Configuring a Proxy] guide.
 
 ==== Create an S3 storage bucket
 You will need the following details when you configure CircleCI server. 
