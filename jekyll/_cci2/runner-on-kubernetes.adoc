@@ -14,7 +14,7 @@ toc::[]
 
 == Introduction
 
-NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale Plan.
+NOTE: CircleCI runner is available on the https://circleci.com/pricing[Scale Plan] and for server customers running server v3.1.0 and up. Please reach out to your sales representative (or https://circleci.com/contact-us/?cloud[contact us]) for information on how to sign up for the Scale plan.
 
 This installation guide is to help set up CircleCI runner on your Kubernetes cluster. We provide a Helm chart to simplify the installation process.
 

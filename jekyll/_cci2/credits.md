@@ -53,7 +53,7 @@ The free usage-based plan offers 2,500 build credits across medium-type machines
 ## Performance plan
 {: #performance-plan }
 
-Upgrading to a performance plan offers several improvements over the free plan:
+Upgrading to a Performance plan offers several improvements over the Free plan:
 
 - Access to all machine sizes for Docker/Linux based machines
 - Access to medium sized MacOS machines (4 CPUs, 8gb Ram at 50 credits/minute)
@@ -65,19 +65,19 @@ Upgrading to a performance plan offers several improvements over the free plan:
 ## Open source credit usage
 {: #open-source-credit-usage }
 
-Organizations on our free plan get 400,000 free credits per month for Linux open source builds. Using our free plan and keeping your repository public will enable this for you.
+Organizations on our Free plan get 400,000 free credits per month for Linux open source builds. Using our Free plan and keeping your repository public will enable this for you.
 
-If you build on macOS, we also offer organizations on our free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
+If you build on macOS, we also offer organizations on our Free plan 25,000 free credits per month to use on macOS open source builds. For access to this, contact our team at billing@circleci.com.
 
 ## Docker layer caching
 {: #docker-layer-caching }
 
-Docker Layer Caching (DLC) is available for 200 credits per job run. DLC is only available on the Performance Plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
+Docker Layer Caching (DLC) is available for 200 credits per job run. DLC is only available on the Performance plan. Read more about DLC in this [document]({{site.baseurl}}/2.0/docker-layer-caching).
 
 ## Troubleshooting
 {: #troubleshooting }
 
-### Am i charged if my build is "queued" or "preparing"?
+### Am I charged if my build is "queued" or "preparing"?
 {: #am-i-charged-if-my-build-is-queued-or-preparing }
 
 No. If you are notified that a job is "queued", it indicates that your job is

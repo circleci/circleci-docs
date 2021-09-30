@@ -7,6 +7,13 @@ order: 40
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: Keep environment variables private
+    link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
+  - title: Troubleshoot env vars settings
+    link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
+  - title: Insert files as environment variables
+    link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
 ---
 
 This document describes using environment variables in CircleCI in the following sections:

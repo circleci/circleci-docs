@@ -162,6 +162,12 @@ defaults:
     values:
       toc: true
 
+  # Disable suggested by default
+  - scope:
+      path: ""
+    values:
+      suggested: false
+
 t:
     translation_in_progress:
         ja: "このページはただいま翻訳中です"
