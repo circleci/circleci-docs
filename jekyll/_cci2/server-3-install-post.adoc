@@ -18,59 +18,32 @@ toc::[]
 
 === Orbs 
 
-Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes copying orbs from the public registry, updating orbs that may have been copied prior, and registering your companies private orbs if they exist.
+Server installations include their own local orb registry. This registry is private to the server installation. All orbs referenced in project configs reference the orbs in the _server_ orb registry. You are responsible for maintaining orbs. This includes: 
 
-==== Managing Orbs 
+* Copying orbs from the public registry 
+* Updating orbs that may have been copied prior 
+* Registering your company's private orbs if they exist
 
-Orbs are accessed via the CircleCI CLI. Orbs require your CircleCI user to be an admin. They also require a personal link:https://circleci.com/docs/2.0/managing-api-tokens/[api token]. Providing a local repository location using the --host option allows you to access your local server orbs vs the public cloud orbs. For example, if your server installation is located at http://circleci.somehostname.com, then you can run orb commands local to that orb repository by passing '--host http://cirlceci.somehostname.com'.
+For more information, and steps to complete these tasks see the https://circleci.com/docs/2.0/server-3-operator-orbs/[Orbs on Server guide].
 
-===== List Available Orbs 
+=== Email Notifications 
 
-To list available public orbs, visit the orb directory or run:
-----
-circleci orb list
-----
+Build notifications are sent via email. Access the KOTS admin console. Get to the KOTS admin console by running the following, substituting your namespace: `kubectl kots admin-console -n <namespace>` and locate the *Email Notifications* section in *Settings* and fill in the following details to configure email notifications for your installation.
 
-To list available private orbs (registered in your local server orb repository) run:
-----
-circleci orb list --host <your server install domain> --token <your api token>
-----
+* *Email Submission server hostname (required)* - Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
 
-===== Import Public Orb
+* *Username (required)* - Username to authenticate to submission server. This is commonly the same as the user’s e-mail address.
 
-To import a public orb to your local server orb repository:
-----
-circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
-----
+* *Password (required)* - Password to authenticate to submission server.
 
-===== Fetch Public Orb Update 
-
-To update a public orb in your local server orb repository with a new version, run:
-----
-circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
-----
-
-For more Orb information, please refer to the Orb docs for the cloud product.
-
-
-==== Email Notifications 
-
-Build notifications are sent via email.
-
-*Email from address (required)* - The from address for the email.  
-
-*Email Submission server hostname (required)* - Host name of the submission server (e.g., for Sendgrid use smtp.sendgrid.net).
-
-*Username (required)* - Username to authenticate to submission server. This is commonly the same as the user’s e-mail address.
-
-*Password (required)* - Password to authenticate to submission server.
-
-*Port (optional)* - Port of the submission server. This is usually either 25 or 587. While port 465 is also commonly used for email submission, it is often used with implicit TLS instead of StartTLS. Server only supports StartTLS for encrypted submission. 
-
+* *Port (optional)* - Port of the submission server. This is usually either 25 or 587. While port 465 is also commonly used for email submission, it is often used with implicit TLS instead of StartTLS. Server only supports StartTLS for encrypted submission. 
++
 NOTE: Outbound connections on port 25 are blocked on most cloud providers. Should you select this port, be aware that your notifications may fail to send
 Enable StartTLS: Enabling this will encrypt mail submission. 
 
-NOTE: You should only disable this if you can otherwise guarantee the confidentiality of traffic
+* *Email from address (required)* - The from address for the email.  
+
+NOTE: StartTLS is used to encrypt mail by default, and you should only disable this if you can otherwise guarantee the confidentiality of traffic.
 
 Click the *Save config* button to update your installation and re-deploy server.
 
