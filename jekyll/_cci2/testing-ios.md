@@ -244,9 +244,7 @@ To switch to another Ruby version, add the following to the beginning of your jo
 # ...
 run:
   name: Set Ruby Version
-  command: |
-    sed -i '' '/^chruby/d' ~/.bash_profile
-    echo 'chruby ruby-3.0' >> ~/.bash_profile
+  command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
 ```
 
 Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
@@ -257,9 +255,7 @@ To revert back to the system Ruby, add the following to the beginning of your jo
 # ...
 run:
   name: Set Ruby Version
-  command: |
-    sed -i '' '/^chruby/d' ~/.bash_profile
-    echo 'chruby system' >> ~/.bash_profile
+  command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
