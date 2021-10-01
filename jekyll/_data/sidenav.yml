@@ -327,12 +327,14 @@ en:
     - name: Server v3.x Install
       link: 2.0/server-3-install-prerequisites
       children:
-        - name: Prerequisites
+        - name: Phase 1 - Prerequisites
           link: 2.0/server-3-install-prerequisites
-        - name: Your First Cluster
-          link: 2.0/server-3-install-creating-your-first-cluster
-        - name: Installation
+        - name: Phase 2 - Install Core Services
           link: 2.0/server-3-install
+        - name: Phase 3 - Install Build Services
+          link: 2.0/server-3-install-build-services
+        - name: Phase 4 - Post Installation
+          link: 2.0/server-3-install-post
         - name: Migration
           link: 2.0/server-3-install-migration
         - name: Hardening Your Cluster
@@ -344,6 +346,8 @@ en:
           link: 2.0/server-3-operator-overview
         - name: Metrics and Monitoring
           link: 2.0/server-3-operator-metrics-and-monitoring
+        - name: Configuring a Proxy
+          link: 2.0/server-3-operator-proxy
         - name: User Accounts
           link: 2.0/server-3-operator-user-accounts
         - name: Orbs
@@ -352,6 +356,8 @@ en:
           link: 2.0/server-3-operator-vm-service
         - name: Externalizing Services
           link: 2.0/server-3-operator-externalizing-services
+        - name: Expanding Internal Database Volumes
+          link: 2.0/server-3-operator-extending-internal-volumes
         - name: Load Balancers
           link: 2.0/server-3-operator-load-balancers
         - name: Authentication

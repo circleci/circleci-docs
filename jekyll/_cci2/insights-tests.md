@@ -5,6 +5,7 @@ short-title: "Using Test Insights"
 description: "Using Test Insights"
 version:
 - Cloud
+- Server v3.x
 ---
 
 ## Overview
