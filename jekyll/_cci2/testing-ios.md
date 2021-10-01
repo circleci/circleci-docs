@@ -238,7 +238,7 @@ As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible 
 
 Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
-To switch to another Ruby version, add the following to the beginning of your job. 
+To switch to another Ruby version, add the following to the beginning of your job.
 
 ```yaml
 # ...
