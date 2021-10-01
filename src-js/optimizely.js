@@ -36,7 +36,7 @@ class OptimizelyClient {
   // - User is in the exclusion group
   getVariationName(options) {
     return new Promise((resolve, reject) => {
-      if (localStorage.getItem(FORCE_STORAGE_KEY)) {
+      if (forceAll()) {
         return resolve("treatment");
       }
 
