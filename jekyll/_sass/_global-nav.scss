@@ -335,7 +335,6 @@ body.global-nav-open .global-nav--search-button {
   }
 
   .btn-primary {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -352,17 +351,17 @@ body.global-nav-open .global-nav--search-button {
     flex: auto 0 0;
     color: #ffffff;
     background-color: #049b4a;
-
+    width: 7rem;
 
     @media (max-width: $screen-xs-max) {
       // width: 100%;
     }
   }
-  
+
   .btn-primary:hover {
     background-color: #048c43;
   }
-  
+
   // Replacement for .molecule-search
   .divider {
     position: relative;
