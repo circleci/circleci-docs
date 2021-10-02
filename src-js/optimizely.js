@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const COOKIE_KEY = 'cci-org-analytics-id';
 const STORAGE_KEY = 'growth-experiments-participated';
+const FORCE_STORAGE_KEY = 'growth-experiments-force-all';
 
 class OptimizelyClient {
   constructor() {
@@ -35,10 +36,17 @@ class OptimizelyClient {
   // - User is in the exclusion group
   getVariationName(options) {
     return new Promise((resolve, reject) => {
+      if (forceAll()) {
+        return resolve("treatment");
+      }
+
       // First we check that the required options are provided
       if (!options || !options.experimentKey || !options.groupExperimentName) {
         return reject({error: "Missing required options"});
       }
+
+      // defines additional attributes we will want to send to optimizely to qualify/disqualify a user
+      const attributes = options.attributes ?? {};
 
       // Then, we check if we have the cookie. If the cookie is not present
       // it means the current user is not ready to see an experiment and so
@@ -61,6 +69,7 @@ class OptimizelyClient {
           // We check if user whether the user is in the provided
           // exclusion group or not
           const isInGrowthExperimentGroup = this.client.getVariation(options.groupExperimentName, userId, {
+            ...attributes,
             id: userId,
             $opt_bucketing_id: orgId,
           });
@@ -70,6 +79,7 @@ class OptimizelyClient {
             // We ask optimizely which variation is assigned to this user
             // In most cases it will return either "null", "control" or "treatment"
             const variationName = this.client.getVariation(options.experimentKey, userId, {
+              ...attributes,
               id: userId,
               $opt_bucketing_id: orgId,
             });

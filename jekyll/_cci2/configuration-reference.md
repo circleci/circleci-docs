@@ -7,6 +7,17 @@ order: 20
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: 6 config optimization tips
+    link: https://circleci.com/blog/six-optimization-tips-for-your-config/
+  - title: Intro to dynamic config
+    link: https://discuss.circleci.com/t/intro-to-dynamic-config-via-setup-workflows/39868
+  - title: Using dynamic config
+    link: https://circleci.com/blog/building-cicd-pipelines-using-dynamic-config/
+  - title: Validate your config using local CLI
+    link: https://support.circleci.com/hc/en-us/articles/360006735753?input_string=configuration+error
+  - title: How to trigger a single job
+    link: https://support.circleci.com/hc/en-us/articles/360041503393?input_string=changes+in+v2+api
 ---
 
 This document is a reference for the CircleCI 2.x configuration keys that are used in the `config.yml` file. The presence of a `.circleci/config.yml` file in your CircleCI-authorized repository branch indicates that you want to use the 2.x infrastructure.
@@ -107,7 +118,7 @@ Executors define the environment in which the steps of a job will be run, allowi
 Key | Required | Type | Description
 ----|-----------|------|------------
 docker | Y <sup>(1)</sup> | List | Options for [docker executor](#docker)
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
 machine | Y <sup>(1)</sup> | Map | Options for [machine executor](#machine)
 macos | Y <sup>(1)</sup> | Map | Options for [macOS executor](#macos)
 windows | Y <sup>(1)</sup> | Map | [Windows executor](#windows) currently working with orbs. Check out [the orb](https://circleci.com/developer/orbs/orb/circleci/windows).
@@ -164,7 +175,7 @@ working_directory | N | String | In which directory to run the steps. Will be in
 parallelism | N | Integer | Number of parallel instances of this job to run (default: 1)
 environment | N | Map | A map of environment variable names and values.
 branches | N | Map | A map defining rules to allow/block execution of specific branches for a single job that is **not** in a workflow or a 2.1 config (default: all allowed). See [Workflows](#workflows) for configuring branch execution for jobs in a workflow or 2.1 config.
-resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A performance plan is required to access this feature.
+resource_class | N | String | Amount of CPU and RAM allocated to each container in a job. **Note:** A Performance plan is required to access this feature.
 {: class="table table-striped"}
 
 <sup>(1)</sup> One executor type should be specified per job. If more than one is set you will receive an error.
@@ -505,7 +516,7 @@ The `resource_class` feature allows configuring CPU and RAM resources for each j
 
 We implement soft concurrency limits for each resource class to ensure our system remains stable for all customers. If you are on a Performance or custom plan and experience queuing for certain resource classes, it's possible you are hitting these limits. [Contact CircleCI support](https://support.circleci.com/hc/en-us/requests/new) to request a raise on these limits for your account.
 
-**Note:** This feature is automatically enabled on free and Performance plans. Available resources classes are restricted for customers on the free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the free plan.
+**Note:** This feature is automatically enabled on Free and Performance plans. Available resources classes are restricted for customers on the Free plan to small/medium for linux, and medium for Windows. MacOS is not yet available on the Free plan.
 
 **For self-hosted installations of CircleCI Server contact your system administrator for a list of available resource classes**. See Server Administration documents for further information: [Nomad Client System Requirements]({{ site.baseurl }}/2.0/server-ports/#nomad-clients) and [Server Resource Classes]({{ site.baseurl }}/2.0/customizations/#resource-classes).
 
@@ -937,7 +948,7 @@ jobs: # conditional steps may also be defined in `commands:`
         type: string
         default: ""
     machine:
-      image: ubuntu-2004:202107-02 
+      image: ubuntu-2004:202107-02
     steps:
       - when:
           condition: <<parameters.custom_checkout>>
@@ -1197,10 +1208,8 @@ It is also possible to store test results as a build artifact; to do so, please 
 
 Key | Required | Type | Description
 ----|-----------|------|------------
-path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing subdirectories of JUnit XML or Cucumber JSON test metadata files
+path | Y | String | Path (absolute, or relative to your `working_directory`) to directory containing JUnit XML or Cucumber JSON test metadata files, or to a single test file.
 {: class="table table-striped"}
-
-**Note:** Please write your tests to **subdirectories** of your `store_test_results` path, ideally named to match the names of your particular test suites, in order for CircleCI to correctly infer the names of your reports. If you do not write your reports to subdirectories, you will see reports in your "Test Summary" section such as `Your build ran 71 tests in unknown`, instead of, for example, `Your build ran 71 tests in rspec`.
 
 ###### _Example_
 {: #example }
@@ -1771,7 +1780,7 @@ version: 2.1
 jobs:
   bar:
     machine:
-      image: ubuntu-2004:202107-02 
+      image: ubuntu-2004:202107-02
     steps:
       - checkout
       - run:

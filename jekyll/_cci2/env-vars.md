@@ -7,6 +7,13 @@ order: 40
 version:
 - Cloud
 - Server v2.x
+suggested:
+  - title: Keep environment variables private
+    link: https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/
+  - title: Troubleshoot env vars settings
+    link: https://discuss.circleci.com/t/somehow-i-just-cannot-get-the-enviroment-variable-from-enviroment-variable-setting-an-context-in-organization-menu/40342
+  - title: Insert files as environment variables
+    link: https://support.circleci.com/hc/en-us/articles/360003540393?input_string=how+to+i+inject+an+environment+variable+using+the+api%3F
 ---
 
 This document describes using environment variables in CircleCI in the following sections:
@@ -38,7 +45,7 @@ The value of the environment variable will not be masked in the build output if:
 * the value of the environment variable is less than 4 characaters
 * the value of the environment variable is equal to one of `true`, `True`, `false` or `False`
 
-**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. The value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
+**Note:** Secrets Masking will only prevent the value of the environment variable from appearing in your build output. If your secrets appear elsewhere, such as test results or artifacts, they will not be masked. In addition, the value of the environment variable is still accessible to users [debugging builds with SSH]({{ site.baseurl }}/2.0/ssh-access-jobs).
 
 ## Renaming orgs and repositories
 {: #renaming-orgs-and-repositories }

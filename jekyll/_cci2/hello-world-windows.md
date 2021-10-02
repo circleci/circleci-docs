@@ -220,7 +220,7 @@ jobs:
 
 ```
 
-{:.tab.windowsblockfour.Cloud}
+{:.tab.windowsblockfour.Server}
 ```YAML
 version: 2.0
 

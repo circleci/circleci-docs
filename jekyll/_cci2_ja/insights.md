@@ -105,4 +105,4 @@ CircleCI アプリケーションで [Insights (インサイト)] メニュー�
 
 ## Learn More
 {: #learn-more }
-Take the [insights course](https://academy.circleci.com/insights-course) with CircleCI Academy to learn more.
+Take the [insights course](https://academy.circleci.com/insights-course?access_code=public-2021) with CircleCI Academy to learn more.
