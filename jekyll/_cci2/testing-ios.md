@@ -238,13 +238,24 @@ As a result of the macOS system Ruby (2.6.3) becoming increasingly incompatible 
 
 Defaulting to Ruby 2.7 allows for greater compatibility and reliability with gems moving forward. Common gems, such as Fastlane, run without any issues in Ruby 2.7.
 
-To switch to another Ruby version, see [our chruby documentation](#images-using-xcode-112-and-later). To revert back to the system Ruby, add the following to the beginning of your job:
+To switch to another Ruby version, add the following to the beginning of your job.
 
 ```yaml
 # ...
 run:
   name: Set Ruby Version
-  command: echo 'chruby system' >> ~/.bash_profile
+  command: sed -i '' 's/^chruby.*/chruby ruby-3.0/g' ~/.bash_profile
+```
+
+Replace `3.0` with the version of Ruby required - you do not need to specify the full Ruby version, `3.0.2` for example, just the major version. This will ensure your config does not break when switching to newer images that might have newer patch versions of Ruby.
+
+To revert back to the system Ruby, add the following to the beginning of your job:
+
+```yaml
+# ...
+run:
+  name: Set Ruby Version
+  command: sed -i '' 's/^chruby.*/chruby system/g' ~/.bash_profile
 ```
 
 ### Images using Xcode 11.2 and later
