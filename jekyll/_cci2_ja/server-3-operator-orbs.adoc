@@ -49,4 +49,4 @@ circleci admin import-orb ns[/orb[@version]] --host <your server installation do
 circleci admin import-orb ns[/orb[@version]] --host <your server installation domain> --token <your api token>
 ----
 
-Orb に関する詳細情報については、クラウド版 CircleCI のhttps://circleci.com/docs/2.0/orb-intro/#quick-start[Orb ドキュメント]を参照してください。
+Orb に関する詳細情報については、クラウド版 CircleCI のhttps://circleci.com/docs/ja/2.0/orb-intro/#quick-start[Orb ドキュメント]を参照してください。

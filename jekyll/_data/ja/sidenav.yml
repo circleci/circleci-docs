@@ -903,6 +903,10 @@ ja:
             name: Android Machine Image
             i18n_name: Androidマシンイメージ
             link: 2.0/android-machine-image
+          - 
+            name: Arm Resources
+            i18n_name: Arm リソース
+            link: ja/2.0/arm-resources/
       - 
         name: Mac
         children:
@@ -993,8 +997,8 @@ ja:
             i18n_name: ダイナミック コンフィグ
           - 
             name: Using the CircleCI CLI
-            i18n_name: CircleCI CLIの使用
             link: ja/2.0/local-cli/
+            i18n_name: CircleCI CLIの使用
           - 
             name: Using the CircleCI Configuration Editor
             link: ja/2.0/config-editor/
@@ -1109,6 +1113,8 @@ ja:
             name: Managing API tokens
             link: ja/2.0/managing-api-tokens/
             i18n_name: APIトークン
+          - name: Webhooks
+            link: ja/2.0/webhooks/
           - 
             name: Webhooks
             link: ja/2.0/webhooks/
@@ -1119,6 +1125,7 @@ ja:
       - 
         name: security
         link: ja/2.0/security/
+        i18n_name: セキュリティ
         children:
           - 
             name: Security Features

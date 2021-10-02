@@ -64,6 +64,7 @@ gem 'minitest-ci'
 {: #metadata-collection-in-custom-test-steps }
 
 Write the XML files to a subdirectory if you have a custom test step that produces JUnit XML output as is supported by most test runners in some form, for example:
+
 ```
 - store_test_results:
     path: /tmp/test-results
@@ -174,7 +175,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 
 To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
+`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 ```yaml
     steps:
@@ -301,8 +302,6 @@ jobs:
 {: #lessa-nameavagreaterlessagreaterava-for-nodejs }
 {:.no_toc}
 
-To output JUnit tests with the [Ava](https://github.com/avajs/ava) test runner you can use the TAP reporter with [tap-xunit](https://github.com/aghassemi/tap-xunit).
-
 [Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
 
 ```
@@ -427,16 +426,12 @@ And modify your test command to this:
           command: bundle exec rake test
           when: always
       - store_test_results:
-
-
-See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
-```
+         
 
 See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for more info.
 
-#### test2junit for Clojure Tests
-{: #video-troubleshooting-test-runners }
-{:.no_toc}
+#### Clojure テスト用の test2junit
+{: #test2junit-for-clojure-tests }
 {:.no_toc}
 
 #### Clojure テスト用の test2junit

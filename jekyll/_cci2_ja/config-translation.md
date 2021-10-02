@@ -55,5 +55,5 @@ version:
 ## 関連項目
 {: #see-also }
 
- [1.0 から 2.0 への移行のヒント]({{site.baseurl}}/2.0/migration/)
+ [1.0 から 2.0 への移行のヒント]({{site.baseurl}}/ja/2.0/migration/)
 

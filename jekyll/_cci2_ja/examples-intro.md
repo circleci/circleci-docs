@@ -54,11 +54,11 @@ jobs:
 {% endraw %}
 
 ## Linux と Machine
-デフォルトのマシン イメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
+{: #linux-with-machine }
 
 **メモ:** 今後の料金改定により、Machine の使用に追加料金が必要になる可能性があります。
 
-To use the machine executor with the default machine image, set the machine key to true in `.circleci/config.yml`:
+デフォルトのマシン イメージを使用して Machine Executor を使用するには、`.circleci/config.yml` で machine キーを true に設定します。
 
 ```yaml
 version: 2
@@ -68,7 +68,7 @@ jobs:
 ```
 
 ## Android
-上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。
+{: #android }
 
 {% raw %}
 
@@ -79,6 +79,9 @@ jobs:
     working_directory: ~/code
     docker:
       - image: circleci/android:api-25-alpha
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -86,23 +89,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
 #      - run:
-#         name: Chmod パーミッション # Gradlew Dependencies のパーミッションが失敗する場合は、これを使用します
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: 依存関係のダウンロード
-          command: ./gradlew androidDependencies
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: 依存関係のダウンロード
-          command: ./gradlew androidDependencies
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
-#         command: sudo chmod +x ./gradlew
-      - run:
-          name: Download Dependencies
-          command: ./gradlew androidDependencies
+#         name: Chmod permissions #if permission for Gradlew Dependencies fail, use this.
 #         command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
@@ -131,7 +118,7 @@ jobs:
 
 ```
 
-## 関連項目
+## Windows
 {: #windows }
 
 {:.tab.windowsblock.Cloud}
@@ -168,7 +155,7 @@ jobs:
         - run: Write-Host 'Hello, Windows'
 ```
 
-## See also
+## 関連項目
 {: #see-also }
 
-Learn more about the [executor types]({{ site.baseurl }}/2.0/executor-types/) used in the examples above.
+上記のサンプルで使用されている Executor タイプの詳細については、[こちら]({{ site.baseurl }}/ja/2.0/executor-types/)を参照してください。

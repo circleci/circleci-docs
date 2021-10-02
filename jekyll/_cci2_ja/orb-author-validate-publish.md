@@ -36,13 +36,6 @@ commands:
                 default: World
         steps:
             - run: echo "Hello, << parameters.to >>"
-        parameters:
-            to:
-                type: string
-                default: World
-        steps:
-            - run: echo "Hello, << parameters.to >>"
-
 ```
 
 1. CLI を使用して、Orb コードをバリデーションします。
@@ -68,15 +61,13 @@ circleci orb source <my-namespace>/<my-orb-name>@0.0.1
 
 1. CLI を使用して、公開中の Orb を一覧表示します。
 
-**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
+**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
 ```sh
 circleci orb list <my-namespace>
 ```
 
-**[パブリック](https://circleci.com/docs/ja/2.0/orb-intro/#public-orbs)** Orb を一覧表示する場合:
+**[プライベート](https://circleci.com/docs/2.0/orb-intro/#private-orbs)** Orb を作成する場合:
 ```sh
 circleci orb list <my-namespace> --private
 
 ```
-
-**プライベート</a>** Orb を一覧表示する場合:

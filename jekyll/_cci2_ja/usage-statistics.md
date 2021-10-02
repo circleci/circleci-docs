@@ -17,7 +17,7 @@ hide: true
 
 Opt-In to this feature by going to Settings > Usage Statistics on the management console in Replicated. 次に、以下のスクリーンショットに示すように、[Automatically send some usage statistics to CircleCI (使用状況統計を自動的に CircleCI に送信)] チェックボックスをオンにします。
 
-![](  {{ site.baseurl }}/assets/img/docs/usage-statistics-setting.png)
+![]({{ site.baseurl }}/assets/img/docs/usage-statistics-setting.png)
 
 ## Detailed usage statistics
 {: #detailed-usage-statistics }

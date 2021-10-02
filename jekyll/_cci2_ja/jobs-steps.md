@@ -8,7 +8,7 @@ categories:
 order: 2
 ---
 
-ジョブ、ステップ、ワークフローに加え、Orb に使用する新しい [`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configuration-reference/) キーについて概説します。
+Orbs、ジョブ、ステップ、ワークフローの概要を説明します。
 
 * 目次
 {:toc}
@@ -22,16 +22,16 @@ Orb は、名前に基づいてインポートするかインラインで構成�
 ## ジョブの概要
 {: #jobs-overview }
 
-ジョブはステップの集まりです。 ジョブ内のステップはすべて 1 単位として実行され、その際にプランから CircleCI コンテナが 1 つ消費されます。
+ジョブはステップの集まりです。 ジョブのすべてのステップは、コンテナやVMの中で、1つのユニットとして実行されます。
 
 下図はジョブ間のデータ フローを表したものです。
 * ワークスペースは、同じワークフロー内のジョブ間でデータを維持します。
 * キャッシュは、異なるワークフロー ビルドにある同じジョブ間でデータを維持します。
-* Artifacts persist data after a workflow has finished.
+* アーティファクトは、ワークフローの終了後にデータを維持します。
 
 ![Jobs Overview]( {{ site.baseurl }}/assets/img/docs/jobs-overview.png)
 
-2.0 のジョブは、最近使用した `machine` Executor の実行を再利用できる `machine` Executor、テストや必要なサービス (データベースなど) を実行するように Docker コンテナを構成できる `docker` Executor、または `macos` Executor を使用して実行できます。
+ジョブの実行には、`machine`（linux）、macOSまたはWindows Executor、あるいは`docker` Executorを使用することができます。`docker` Executorは、ジョブとデータベースなどの必要なサービスを実行するためにDockerコンテナを構成することができます。
 
 `docker` Executor を使用する場合、起動するコンテナのイメージを `docker:` キーの下に指定します。 `docker` Executor には任意のパブリック Docker イメージを使用できます。
 
@@ -51,18 +51,18 @@ Find full details of the AWS S3 orb in the [CircleCI Orbs Registry](https://circ
 version: 2.1
 
 orbs:
-  aws-s3: circleci/aws-s3@1.0.0 # circleci 名前空間に s3 Orb をインポートします
-
-workflows:
-  build-test-deploy:
-    jobs:
-
-      - deploy2s3: # ワークフローで定義するサンプル ジョブ
-          steps:
-            - aws-s3/sync: # s3 Orb で宣言されている sync コマンドを呼び出します
-                from: .
-          to: "s3://mybucket_uri"
-                overwrite: true
+  aws-s3: circleci/aws-s3@x.y.z # circleci 名前空間に s3 Orb をインポートします
+  # x.y.z should be replaced with the orb version you wish to use
+jobs:
+  deploy2s3:
+    docker:
+      - image: cimg/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - aws-s3/sync: #invokes the sync command declared in the s3 orb
+          from: .
           to: "s3://mybucket_uri"
           overwrite: true
 
@@ -73,7 +73,7 @@ workflows:
 ```
 
 ## 並列ジョブを使用した設定ファイルの例
-{{ site.baseurl }}/ja/2.0/configuration-reference/#jobs
+{: #sample-configuration-with-concurrent-jobs }
 
 2.0 `.circleci/config.yml` ファイルの例を以下に示します。
 
@@ -83,14 +83,18 @@ version: 2
     jobs:
       build:
         docker:
-
           - image: circleci/<language>:<version TAG>
-        steps:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+      steps:
           - checkout
           - run: <command>
       test:
         docker:
           - image: circleci/<language>:<version TAG>
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
         steps:
           - checkout
           - run: <command>
@@ -109,5 +113,5 @@ version: 2
 ## 関連項目
 {: #see-also }
 
-- [構成リファレンス: jobs キー]({{ site.baseurl }}/2.0/configuration-reference/#jobs)
-- [構成リファレンス: steps キー]({{ site.baseurl }}/2.0/configuration-reference/#steps)
+- [構成リファレンス: jobs キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#jobs)
+- [構成リファレンス: steps キー]({{ site.baseurl }}/ja/2.0/configuration-reference/#steps)

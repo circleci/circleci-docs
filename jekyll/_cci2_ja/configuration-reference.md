@@ -384,7 +384,7 @@ CircleCI ではいくつかの machine イメージをサポートしており�
 * `ubuntu-1604:202004-01` - Ubuntu 16.04、Docker v19.03.8、Docker Compose v1.25.5
 * `ubuntu-1604:201903-01` - Ubuntu 16.04, Docker v18.09.3, Docker Compose v1.23.1
 
-***Note:*** *Ubuntu 16.04 has reached the end of its LTS window as of April 2021 and will no longer be supported by Canonical. その結果、`ubuntu-1604:202104-01`がCircleCIにリリースされる最終的なUbuntu 16.04のイメージとなります。 2021年4月以降のリリースやサポートを受けるためには、最新のUbuntu 20.04イメージにアップグレードすることをお勧めします。 *</p>
+*メモ：****Ubuntu 16.04は、2021年4月時点でCanonical社によるLTS（長期サポート）が終了します。 その結果、`ubuntu-1604:202104-01`がCircleCIにリリースされる最終的なUbuntu 16.04のイメージとなります。 2021年4月以降のリリースやサポートを受けるためには、最新のUbuntu 20.04イメージにアップグレードすることをお勧めします。 *
 
 machine Executor は、ジョブや Workflows で Docker イメージをビルドする際に効果的な [Docker レイヤーキャッシュ]({{ site.baseurl }}/2.0/docker-layer-caching)をサポートしています。
 
@@ -1566,9 +1566,6 @@ workflows:
           filters:
             branches:
               only: /server\/.*/
-          filters:
-            branches:
-              only: /server\/.*/
 ```
 
 上記のスニペットでは、`build_server_pdfs` ジョブは、ビルド対象のブランチのパスが "server/" から始まる場合にのみ実行されます。
@@ -1618,15 +1615,11 @@ CircleCI では、明示的にタグ フィルターを設定しない限り、�
 {: #matrix-requires-version-21 }
 `matrix` スタンザを使用すると、パラメーター化したジョブを、引数を変えながら複数回実行できます。
 
-**説明**
-
-マトリックス全体（マトリックス内のすべてのジョブ）を `require` とするには、その `alias` を使用します。 `alias`のデフォルトは、起動されるジョブの名前です。
-
-| キー         | 必須 | 型   | Description                                                                                              |
-| ---------- | -- | --- | -------------------------------------------------------------------------------------------------------- |
-| parameters | Y  | マップ | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ                                                                           |
-| exclude    | N  | リスト | マトリックスから除外する引数マップのリスト                                                                                    |
-| alias      | N  | 文字列 | マトリックス全体 (マトリックス内のすべてのジョブ) に `requires` キーを適用するには、マトリックスの `alias` を指定します。 `alias` のデフォルト値は、呼び出すジョブの名前です。 |
+キー | 必須     | 型    | 説明
+----|----------|------|------------
+parameters | Y  | マップ | ジョブの呼び出しで使用するすべてのパラメーター名と値のマップ
+exclude    | N  | リスト | マトリックスから除外する引数マップのリスト
+alias      | N  | 文字列 | マトリックス全体 (マトリックス内のすべてのジョブ) に `requires` キーを適用するには、マトリックスの `alias` を指定します。 `alias` のデフォルト値は、呼び出すジョブの名前です。
 {: class="table table-striped"}
 
 **Note:**
@@ -1694,7 +1687,8 @@ The matrix above would expand into 8 jobs: every combination of the parameters `
 {: #dependencies-and-matrix-jobs }
 {:.no_toc}
 
-To `require` an entire matrix (every job within the matrix), use its `alias`. The `alias` defaults to the name of the job being invoked.
+マトリックス全体（マトリックス内のすべてのジョブ）を `require` とするには、その `alias` を使用します。
+`alias`のデフォルトは、起動されるジョブの名前です。
 
 ```yaml
 workflows:
@@ -1709,7 +1703,7 @@ workflows:
             - deploy
 ```
 
-上記ワークフローは次のように展開されます。
+これは、`another-job`が実行される前に、マトリックス内の両方のdeployジョブが終了している必要があることを意味します。
 
 また、マトリックス ジョブのパラメーター値を `<< matrix.* >>` で公開し、より複雑なワークフローを作成することもできます。 たとえば、次のコードでは、`deploy` ジョブをマトリックス化したうえで、それぞれのジョブが、`build` マトリックス内の対応するジョブが完了してから実行されるようにしています。
 
@@ -1757,7 +1751,6 @@ workflows:
 
 ###### **`pre-steps`** and **`post-steps`** (requires version: 2.1)
 {: #pre-steps-and-post-steps-requires-version-21 }
-Every job invocation in a workflow may optionally accept two special arguments: `pre-steps` and `post-steps`.
 
 `pre-steps` の下のステップは、ジョブ内の他のすべてのステップよりも前に実行されます。 `post-steps` の下のステップは、他のすべてのステップよりも後に実行されます。
 

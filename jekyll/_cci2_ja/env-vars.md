@@ -27,7 +27,7 @@ CircleCI では、スコープや認証レベルに幅を持たせるために�
 Use Contexts to [further restrict access to environment variables](#setting-an-environment-variable-in-a-context). CircleCI アプリケーションの [Organization Settings (組織設定)] で設定します。 For more information about controlling access to env vars with Contexts, refer to the [Restricting a Context]({{ site.baseurl }}/2.0/contexts/#restricting-a-context) documentation.
 
 ## シークレットのマスキング
-以下の場合、環境変数の値はビルドの出力でマスキングされません。
+{: #secrets-masking }
 
 _シークレットのマスキングは、オンプレミス版である CircleCI Server では現在サポートされていません。_
 
@@ -53,7 +53,7 @@ _シークレットのマスキングは、オンプレミス版である Circle
 **注:** この手順を実行しないと、**環境変数**や**コンテキスト**など、組織またはリポジトリの設定にアクセスできなくなる可能性があります。
 
 ## 環境変数の使用オプション
-環境変数の挿入例
+{: #environment-variable-usage-options }
 
 CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従った環境変数が使用されます。 有効な文字は、アルファベット (大文字と小文字)、数字、およびアンダースコアです。 環境変数の最初の文字はアルファベットにする必要があります。
 
@@ -83,7 +83,7 @@ CircleCI は Bash を使用しますが、ここでは POSIX 命名規則に従�
 構成内でスクリプトを実行すると、シークレット環境変数が公開される場合があります。 安全なスクリプトのベスト プラクティスについては、「[シェル スクリプトの使用]({{ site.baseurl }}/ja/2.0/using-shell-scripts/#%E3%82%B7%E3%82%A7%E3%83%AB-%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88-%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9)」を参照してください。
 
 ### 環境変数の構成例
-以下の例では、`$ORGNAME` と `$REPONAME` に挿入は行われません。
+{: #example-configuration-of-environment-variables }
 {:.no_toc}
 
 以下のような `config.yml` を例に考えてみましょう。
@@ -145,7 +145,7 @@ workflows: # a single workflow with a single job called build
 上の設定ファイルと出力には、「今いるブランチを表示」という 2 つの類似するステップが含まれています。 これらのステップは、環境変数を読み取るための 2 つの方法を示しています。 なお、`${VAR}` 構文と `$VAR` 構文のどちらもサポートされています。 シェル パラメーターの展開については、[Bash のドキュメント](https://www.gnu.org/software/bash/manual/bashref.html#Shell-Parameter-Expansion)を参照してください。
 
 ### パラメーターと Bash 環境の使用
-以下の 2 つのパラメーターをジョブに追加するだけで、`bash` で環境変数を使用できます。
+{: #using-parameters-and-bash-environment }
 {:.no_toc}
 
 原則として、CircleCI はビルド構成への環境変数の挿入をサポートしていません。 使用する値はリテラルとして扱われます。 そのため、`working_directory` を定義するときや、`PATH` を変更するとき、複数の `run` ステップで変数を共有するときに、問題が発生する可能性があります。
@@ -232,7 +232,6 @@ jobs:
 ```
 
 ## シェル コマンドでの環境変数の設定
-詳細については、シェルのドキュメントで環境変数の設定方法を参照してください。
 
 CircleCI は環境変数の設定時の挿入をサポートしませんが、[`BASH_ENV` を使用](#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%83%BC%E3%81%A8-bash-%E7%92%B0%E5%A2%83%E3%81%AE%E4%BD%BF%E7%94%A8)して、現在のシェルに変数を設定することは可能です。 これは、`PATH` を変更するときや、他の変数を参照する環境変数を設定するときに便利です。
 
@@ -256,9 +255,9 @@ jobs:
             source $BASH_ENV
 ```
 
-詳細については、シェルのドキュメントで環境変数の設定方法を参照してください。
+**注:** シェルによっては、`~/.tcshrc` や `~/.zshrc` などのシェル スタートアップ ファイルに新しい変数を付加しなければならない場合があります。
 
-[Contexts]({{ site.baseurl }}/2.0/contexts/) [Keep environment variables private with secret masking](https://circleci.com/blog/keep-environment-variables-private-with-secret-masking/)
+詳細については、シェルのドキュメントで環境変数の設定方法を参照してください。
 
 ## ステップでの環境変数の設定
 {: #setting-an-environment-variable-in-a-step }
@@ -437,10 +436,10 @@ jobs:
 ```
 
 ### 複数行にわたる環境変数のエンコード
-複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
+{: #encoding-multi-line-environment-variables }
 {:.no_toc}
 
-結果の値を CircleCI 環境変数に格納します。
+複数行の環境変数を追加する際に問題が発生した場合は、`base64` を使用してエンコードします。
 
 ```bash
 $ echo "foobar" | base64 --wrap=0
@@ -454,14 +453,14 @@ $ echo $MYVAR
 Zm9vYmFyCg==
 ```
 
-**注:** すべてのコマンド ライン プログラムが `docker` と同じ方法で認証情報を受け取るわけではありません。
+その変数を使用するコマンド内で変数をデコードします。
 
 ```bash
 $ echo $MYVAR | base64 --decode | docker login -u my_docker_user --password-stdin
 Login Succeeded
 ```
 
-**Note:** Not all command-line programs take credentials in the same way that `docker` does.
+**注:** すべてのコマンド ライン プログラムが `docker` と同じ方法で認証情報を受け取るわけではありません。
 
 ## API v2 を使用した環境変数の挿入
 {: #injecting-environment-variables-with-api-v2 }
@@ -498,7 +497,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 
 **重要:** ビルド パラメーターは機密データとして扱われないため、機密の値 (シークレット) には使用しないでください。 シークレットは、[プロジェクト設定ページ]({{site.baseurl}}/2.0/settings/)と[コンテキスト ページ]({{site.baseurl}}/2.0/ja/lossary/#context)で確認できます。
 
-このビルドは、以下の環境変数を受け取ります。
+たとえば、以下のパラメーターを渡すとします。
 
 ```sh
 {
@@ -511,7 +510,7 @@ curl -u ${CIRCLECI_TOKEN}: -X POST --header "Content-Type: application/json" -d 
 }
 ```
 
-以下の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイに使用できます。
+このビルドは、以下の環境変数を受け取ります。
 
 ```sh
 export foo="bar"
@@ -558,7 +557,7 @@ POST API 呼び出しを使用して実行を開始します。 詳細につい�
 ## 定義済み環境変数
 {: #built-in-environment-variables }
 
-The following environment variables are exported in each build and can be used for more complex testing or deployment.
+以下の環境変数はビルドごとにエクスポートされ、より複雑なテストやデプロイに使用できます。
 
 **注:** 定義済み環境変数を使用して別の環境変数を定義することはできません。 代わりに、`run` ステップを使用して、新しい環境変数を `BASH_ENV` でエクスポートする必要があります。
 

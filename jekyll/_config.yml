@@ -15,11 +15,11 @@ exclude:
 
 plugins:
   - jekyll-include-cache
-  - jekyll-assets
   - jekyll-sitemap
   - jekyll-asciidoc
   - jekyll-target-blank
   - jekyll-toc
+  - jekyll/minibundle
 
 algolia:
   application_id: U0RXNGRK45
@@ -172,5 +172,8 @@ analytics:
   events:
     go_button_clicked: go-button-clicked
 rollbar_env: development
+
+# Optimizely SDK key for dev env
+optimizely: "GfYszBpMkefBSwiiEkH3b3"
 
 # server_version: "2.18.4"
