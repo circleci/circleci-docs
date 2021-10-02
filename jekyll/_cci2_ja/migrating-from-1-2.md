@@ -34,7 +34,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 `config-translation` エンドポイントを使用すると、1.0 の設定ファイルから 2.0 の設定ファイルへの変換をすぐに始めることができます。 詳細については、「[1.0 から 2.0 への config-translation エンドポイントを使用する]({{ site.baseurl }}/ja/2.0/config-translation)」を参照してください。
 
 ## 必須キーを構成する手順
-次のように `run` ステップに置き換えます。
+{: #steps-to-configure-required-keys }
 
 1. 既存の `circle.yml` ファイルをコピーして、プロジェクト リポジトリのルートにある新しい `.circleci` ディレクトリに置きます。
 
@@ -56,6 +56,9 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      ```
          docker:
            - image: circleci/ruby:2.7
+             auth:
+               username: mydockerhub-user
+               password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
      ```
      最初に記述したイメージのインスタンスがプライマリ コンテナになります。 ジョブのコマンドはこのコンテナ内で実行されます。 ジョブごとにコマンドを宣言します。 Docker コンテナを初めて使用する場合は、「[Docker 入門](https://docs.docker.com/get-started/#docker-concepts)」を参照してください。
      ```yaml
@@ -64,7 +67,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
      使用可能な VM イメージの詳細については、「Executor タイプを選択する」の「[Machine の使用](https://circleci.com/ja/docs/2.0/executor-types/#machine-の使用)」を参照してください。
      ```yaml
          macos:
-           xcode: "9.0"
+           xcode: 11.3.0
      ```
 
 6. ソース ファイルに対してジョブを実行するには、`checkout:` ステップが必要です。 `steps:` の下に `checkout:` をネストして各ジョブを記述します。 それには、以下のコードを検索します。
@@ -101,7 +104,7 @@ CircleCI では、[`.circleci/config.yml`]({{ site.baseurl }}/ja/2.0/configurati
 8. <http://codebeautify.org/yaml-validator> で YAML をバリデーションして、変更をチェックします。
 
 ## 環境変数
-次のように置き換えます。
+{: #environment-variables }
 
 CircleCI 2.0 では、定義されたすべての環境変数はリテラルとして処理されます。 コマンド内で変数を挿入するには、現在のシェルで変数を設定します。
 
@@ -199,7 +202,7 @@ dependencies:
     - <インストール済み依存関係>
 ```
 
-Is replaced with:
+次のように `run` ステップに置き換えます。
 
 ```yaml
       - run:
@@ -214,7 +217,7 @@ Is replaced with:
     - "vendor/bundle"
 ```
 
-With the following, nested under `steps:` and customizing for your application as appropriate:
+以下のように、`steps:`の下にネストにして、必要に応じてアプリケーションに合わせてカスタマイズします。
 
 ```yaml
      - save_cache:
