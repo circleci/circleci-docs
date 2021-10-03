@@ -14,18 +14,13 @@ CircleCI は、XML ファイルからテスト メタデータを収集し、そ
 * 目次
 {:toc}
 
-Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to
-not only upload and store test results, but also provides an easy-to-read UI of your passing/failing tests in the CircleCI
-application.
+Using the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) step allows you to not only upload and store test results, but also provides an easy-to-read UI of your passing/failing tests in the CircleCI application.
 
-You can access the test results interface from the *Tests* tab when viewing any particular [job]({{ site.baseurl}}/2.0/concepts/#jobs),
-as seen below.
+You can access the test results interface from the *Tests* tab when viewing any particular [job]({{ site.baseurl}}/2.0/concepts/#jobs), as seen below.
 
 ![store-test-results-view]( {{ site.baseurl }}/assets/img/docs/test-summary.png)
 
 To see test results as build artifacts, upload them using the [`store_artifacts`]({{ site.baseurl}}/2.0/configuration-reference/#store_artifacts) step.
-
-テスト メタデータを収集するように CircleCI を構成すると、最も頻繁に失敗するテストの一覧がアプリケーション内の [[Insights (インサイト)]](https://circleci.com/build-insights){:rel="nofollow"} の詳細ページに表示されるので、不安定なテストを特定して、繰り返し発生している問題を分離できます。
 
 The usage of the [`store_test_results`]({{ site.baseurl}}/2.0/configuration-reference/#store_test_results) key in your config looks like the following:
 
@@ -178,7 +173,7 @@ Write the XML files to a subdirectory if you have a custom test step that produc
 {: #lessa-namemochajsgreaterlessagreatermocha-for-nodejs }
 {:.no_toc}
 
-Mocha テスト ランナーで JUnit テストを出力するには、[JUnit Reporter for Mocha](https://www.npmjs.com/package/mocha-junit-reporter) を使用します。
+To output junit tests with the Mocha test runner you can use [mocha-junit-reporter](https://www.npmjs.com/package/mocha-junit-reporter).
 
 `.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
@@ -308,8 +303,6 @@ jobs:
 {:.no_toc}
 
 [Ava](https://github.com/avajs/ava)のテストランナーでJUnitテストを出力するには、[tap-xunit](https://github.com/aghassemi/tap-xunit)でTAPレポーターを使用します。
-
-`.circleci/config.yml` のテスト用作業セクションは、以下のようになります。
 
 ```
     steps:
@@ -441,14 +434,23 @@ See the [minitest-ci README](https://github.com/circleci/minitest-ci#readme) for
 {: #test2junit-for-clojure-tests }
 {:.no_toc}
 
-Clojure のテスト出力を XML 形式に変換するには、[test2junit](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、[サンプル プロジェクト](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。
+#### Clojure テスト用の test2junit
+{: #test2junit-for-clojure-tests }
+{:.no_toc}
+ Clojure のテスト出力を XML 形式に変換するには、\[test2junit\](https://github.com/ruedigergad/test2junit) を使用します。 詳細については、\[サンプル プロジェクト\](https://github.com/kimh/circleci-build-recipies/tree/clojure-test-metadata-with-test2junit)を参照してください。 #### Visual Studio/.NET Core テスト用の trx2junit
+{: #trx2junit-for-visual-studio-net-core-tests }
+{:.no_toc}
+Use \[trx2junit\](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
-#### Visual Studio/.NET Core テスト用の trx2junit
+#### trx2junit for Visual Studio / .NET Core Tests
 {: #trx2junit-for-visual-studio-net-core-tests }
 {:.no_toc}
 Use [trx2junit](https://github.com/gfoidl/trx2junit) to convert Visual Studio / .NET Core trx output to XML format.
 
 A working `.circleci/config.yml` section might look like this:
+
+```yaml
+    A working `.circleci/config.yml` section might look like this:
 
 ```yaml
     steps:

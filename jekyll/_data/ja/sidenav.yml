@@ -200,6 +200,9 @@ en:
           - 
             name: Runner FAQs
             link: 2.0/runner-faqs/
+          - 
+            name: Runner FAQs
+            link: 2.0/runner-faqs/
   - 
     name: Configuration
     icon: icons/sidebar/configure.svg
@@ -962,6 +965,10 @@ ja:
             name: Runner FAQs
             link: ja/2.0/runner-faqs/
             i18n_name: ランナーFAQ
+          - 
+            name: Runner FAQs
+            link: ja/2.0/runner-faqs/
+            i18n_name: ランナーFAQ
   - 
     name: Configuration
     icon: icons/sidebar/configure.svg
@@ -1107,6 +1114,9 @@ ja:
             link: ja/2.0/managing-api-tokens/
             i18n_name: APIトークン
           - name: Webhooks
+            link: ja/2.0/webhooks/
+          - 
+            name: Webhooks
             link: ja/2.0/webhooks/
           - 
             name: Using Credits

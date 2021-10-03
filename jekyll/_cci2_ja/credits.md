@@ -44,7 +44,7 @@ To set up your desired plan, go to `Settings > Plan Overview` in the CircleCI we
 
 従来の CircleCI のコンテナベース プランと同様に、従量課金制でも無料のプランをご用意しています。 Free プランでも CircleCI の主要機能の多くをご利用いただけます。
 
-- Orbs の使用
+- Orb の使用
 - ワークスペース
 - 依存関係のキャッシュ
 - Windows/Linux でのビルド

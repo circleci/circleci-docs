@@ -31,7 +31,7 @@ jobs:
 
 `setup_remote_docker` が実行されるとリモート環境が作成され、現在の[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)は、それを使用するように構成されます。 これで、使用するすべての Docker 関連コマンドが、この新しい環境で安全に実行されます。
 
-**メモ:** `setup_remote_docker` キーは、プライマリ Executor を *Docker コンテナ*とするよう指定した設定ファイルで使用することが想定されています。 Executor が `machine` または `macos` の場合 (および設定ファイルで Docker コマンドを使用する場合)、`setup_remote_docker` キーを使用する必要は**ありません**。
+**注:** `setup_remote_docker` キーは、プライマリ Executor を *Docker コンテナ*とするよう指定した設定ファイルで使用することが想定されています。 Executor が `machine` または `macos` の場合 (および設定ファイルで Docker コマンドを使用する場合)、`setup_remote_docker` キーを使用する必要は**ありません**。
 
 ### 仕様
 {: #specifications }
@@ -58,7 +58,7 @@ jobs:
    steps:
      - checkout
      # UI に格納された認証情報とプライベート Docker イメージを
-     # 使用して、固有 DB を開始します
+     # 使用して、固有 DB を開始します。
      - run: |
          echo "$DOCKER_PASS" | docker login --username $DOCKER_USER --password-stdin
          docker run -d --name db company/proprietary-db:1.2.3
@@ -99,10 +99,10 @@ jobs:
 {% endhighlight %}
 <!-- markdownlint-enable MD046 -->
 
-**Note:** The [CircleCI convenience images](https://circleci.com/docs/2.0/circleci-images/) for the Docker executor come with the Docker CLI pre-installed. If you are using a third-party image for your primary container that doesn't already have the Docker CLI installed, then [you will need to install it](https://docs.docker.com/install/#supported-platforms) as part of your job before calling any `docker` commands.
+**注:** Docker Executor 用の [CircleCI ビルド済み Docker イメージ](https://circleci.com/docs/2.0/circleci-images/) には、Docker CLI がプリインストールされています。 Docker CLI がインストールされていないサードパーティーのイメージをプライマリコンテナで使用する場合は、`docker` コマンドを実行する前に、ジョブの一部として [Docker CLI をインストールする必要があります。](https://docs.docker.com/install/#supported-platforms)
 
 ```
-      # Alpine ベースのイメージに APK でインストールします
+      # Alpine ベースのイメージに APK でインストールします。
       - run:
           name: Docker クライアントのインストール
           command: apk add docker-cli
@@ -111,9 +111,9 @@ jobs:
 ビルド中に何が行われているのか詳しく見てみましょう。
 
 1. すべてのコマンドが[プライマリ コンテナ]({{ site.baseurl }}/2.0/glossary/#primary-container)で実行されます。 (5 行目)
-2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker Engine で行われます。 (10 行目)
-3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) を有効化して、イメージのビルドを高速化します (**メモ:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 また、DLC は CircleCI Server で利用できます)。 (11 行目)
-4. プロジェクト環境変数を使用して、Docker Hub の認証情報を格納します。 (17 行目)
+2. `setup_remote_docker` が呼び出されると、新しいリモート環境が作成され、それを使用するようにプライマリ コンテナが構成されます。 Docker 関連のコマンドもすべてプライマリ コンテナで実行されますが、イメージのビルドおよびプッシュとコンテナの実行はリモート Docker エンジン内で行われます。 (10 行目)
+3. ここで [Docker レイヤー キャッシュ]({{ site.baseurl }}/2.0/glossary/#docker-layer-caching) (DLC) を有効化して、イメージのビルドを高速化します (**注:** `docker_layer_caching: true` オプションは、[Performance プランと Custom プラン](https://circleci.com/ja/pricing/)で提供され、Free プランでは提供されません。 また、DLC は CircleCI サーバー で利用できます)。 (11 行目)
+4. プロジェクト環境変数を使用して、Docker ハブ の認証情報を格納します。 (17 行目)
 
 ## Docker のバージョン
 {: #docker-version }
@@ -122,10 +122,10 @@ jobs:
 
 ```
       - setup_remote_docker:
-          version: 19.03.13
+        version: 19.03.13
 ```
 
-CircleCI は複数の Docker バージョンをサポートしています。サポートされているバージョンは以下のとおりです。
+CircleCI は複数の Docker バージョンをサポートしています。 サポートされているバージョンは以下のとおりです。
 
 - `20.10.7`
 - `20.10.6`
@@ -135,7 +135,7 @@ CircleCI は複数の Docker バージョンをサポートしています。サ
 - `19.03.12`
 - `19.03.8`
 - `18.09.3`
-- `17.09.0-ce` (default)
+- `17.09.0-ce` (デフォルト)
 
 <!---
 Consult the [Stable releases](https://download.docker.com/linux/static/stable/x86_64/) or [Edge releases](https://download.docker.com/linux/static/edge/x86_64/) for the full list of supported versions.
@@ -179,14 +179,13 @@ Consult the [Stable releases](https://download.docker.com/linux/static/stable/x8
 
 ジョブ空間からリモート Docker 内のコンテナにボリュームをマウントすること (およびその逆) は**できません**。 `docker cp` コマンドを使用して、この 2 つの環境間でファイルを転送することは可能です。 たとえば以下のように、ソース コードから設定ファイルを使用してリモート Docker でコンテナを開始します。
 
-
 ```
 - run: |
-    # create a dummy container which will hold a volume with config
+    # 設定ファイルとボリュームを保持するダミー コンテナを作成します。
     docker create -v /cfg --name configs alpine:3.4 /bin/true
-    # copy a config file into this volume
+    # このボリュームに設定ファイルをコピーします。
     docker cp path/in/your/source/code/app_config.yml configs:/cfg
-    # start an application container using this volume
+    # このボリュームを使用してアプリケーション コンテナを開始します。
     docker run --volumes-from configs app-image:1.2.3
 ```
 
@@ -217,13 +216,14 @@ services:
      COMPRESS: 'false'
    volumes:
      - bundler-data:/source/bundler-data
+
 ```
 
-Then, the sample CircleCI `.circleci/config.yml` snippets below populate and back up the `bundler-cache` container.
+次に、以下の CircleCI `.circleci/config.yml` スニペットで `bundler-cache` コンテナにデータを挿入し、バックアップを行います。
 
 {% raw %}
 ``` yaml
-# CircleCI キャッシュから bundler-data コンテナにデータを挿入します
+# CircleCI キャッシュから bundler-data コンテナにデータを挿入します。
 
 - restore_cache:
     keys:
@@ -242,7 +242,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
       docker-compose -f docker-compose.yml -f docker/circle-dockup.yml up --no-recreate $NAME
       docker rm -f $NAME
 
-# 同じボリュームを CircleCI キャッシュにバックアップします
+# 同じボリュームを CircleCI キャッシュにバックアップします。
 - run:
     name: Docker ボリュームからの Bundler キャッシュのバックアップ
     command: |
@@ -256,6 +256,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
     key: v4-bundler-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
     paths:
       - ~/bundler-cache
+
 ```
 {% endraw %}
 
@@ -268,7 +269,7 @@ Then, the sample CircleCI `.circleci/config.yml` snippets below populate and bac
 ssh remote-docker
 ```
 
-**メモ:** 上記の例は、`docker` Executor で動作しないボリューム マウントを使用する方法を示しています。 この他に、ボリューム マウントが動作する `machine` Executor を使用する方法もあります。
+**注:** 上記の例は、`docker` Executor で動作しないボリューム マウントを使用する方法を示しています。 この他に、ボリューム マウントが動作する `machine` Executor を使用する方法もあります。
 
 この例は、ryansch のご協力によって作成されました。
 

@@ -1,14 +1,14 @@
 ---
 layout: classic-docs
-title: "Orbs に関するよくあるご質問"
-short-title: "Orbs に関するよくあるご質問"
-description: "Orbs に関するよくあるご質問"
+title: "Orb に関するよくあるご質問"
+short-title: "Orb に関するよくあるご質問"
+description: "Orb に関するよくあるご質問"
 order: 20
 version:
   - Cloud
 ---
 
-よく寄せられるご質問や技術的な問題など、Orbs の使用時に役立つ情報をまとめました。
+よく寄せられるご質問や技術的な問題など、Orb の使用時に役立つ情報をまとめました。
 
 ## Private orbs
 {: #private-orbs }

@@ -211,7 +211,7 @@ bar:
 {: #an-example-packed-configyml }
 {:.no_toc}
 
-複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orbs トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードのパブリッシュの準備時に、プロジェクトの CI/CD ワークフローの一部として実行します。
+複数の YAML ソース ファイルを使用して記述した Orb の例については、[GitHub の CircleCI Orb トピック タグ](https://github.com/search?q=topic%3Acircleci-orbs+org%3ACircleCI-Public&type=Repositories)を参照してください。 `circleci config pack` は通常、Orb ソース コードのパブリッシュの準備時に、プロジェクトの CI/CD ワークフローの一部として実行します。
 
 ## 設定ファイルの処理
 {: #processing-a-config }

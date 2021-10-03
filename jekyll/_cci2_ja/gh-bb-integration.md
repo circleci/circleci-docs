@@ -217,7 +217,6 @@ CircleCI が使用しているアカウントと権限のシステムは、ま�
 この例では、GitHub リポジトリは `https://github.com/you/test-repo`、CircleCI のプロジェクトは `https://circleci.com/gh/you/test-repo` とします。
 
 1. [GitHub の説明](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)に従い、下記コマンドを実行しSSH 鍵ペアを作成します。 パスフレーズの入力を求められても、**入力しない**でください。
-
 ```bash
 ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
